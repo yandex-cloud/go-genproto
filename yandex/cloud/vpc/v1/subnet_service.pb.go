@@ -41,7 +41,7 @@ func (m *GetSubnetRequest) Reset()         { *m = GetSubnetRequest{} }
 func (m *GetSubnetRequest) String() string { return proto.CompactTextString(m) }
 func (*GetSubnetRequest) ProtoMessage()    {}
 func (*GetSubnetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{0}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{0}
 }
 func (m *GetSubnetRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetSubnetRequest.Unmarshal(m, b)
@@ -95,7 +95,7 @@ func (m *ListSubnetsRequest) Reset()         { *m = ListSubnetsRequest{} }
 func (m *ListSubnetsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListSubnetsRequest) ProtoMessage()    {}
 func (*ListSubnetsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{1}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{1}
 }
 func (m *ListSubnetsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListSubnetsRequest.Unmarshal(m, b)
@@ -162,7 +162,7 @@ func (m *ListSubnetsResponse) Reset()         { *m = ListSubnetsResponse{} }
 func (m *ListSubnetsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListSubnetsResponse) ProtoMessage()    {}
 func (*ListSubnetsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{2}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{2}
 }
 func (m *ListSubnetsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListSubnetsResponse.Unmarshal(m, b)
@@ -229,7 +229,7 @@ func (m *CreateSubnetRequest) Reset()         { *m = CreateSubnetRequest{} }
 func (m *CreateSubnetRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateSubnetRequest) ProtoMessage()    {}
 func (*CreateSubnetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{3}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{3}
 }
 func (m *CreateSubnetRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateSubnetRequest.Unmarshal(m, b)
@@ -317,7 +317,7 @@ func (m *CreateSubnetMetadata) Reset()         { *m = CreateSubnetMetadata{} }
 func (m *CreateSubnetMetadata) String() string { return proto.CompactTextString(m) }
 func (*CreateSubnetMetadata) ProtoMessage()    {}
 func (*CreateSubnetMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{4}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{4}
 }
 func (m *CreateSubnetMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateSubnetMetadata.Unmarshal(m, b)
@@ -365,7 +365,7 @@ func (m *UpdateSubnetRequest) Reset()         { *m = UpdateSubnetRequest{} }
 func (m *UpdateSubnetRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateSubnetRequest) ProtoMessage()    {}
 func (*UpdateSubnetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{5}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{5}
 }
 func (m *UpdateSubnetRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateSubnetRequest.Unmarshal(m, b)
@@ -432,7 +432,7 @@ func (m *UpdateSubnetMetadata) Reset()         { *m = UpdateSubnetMetadata{} }
 func (m *UpdateSubnetMetadata) String() string { return proto.CompactTextString(m) }
 func (*UpdateSubnetMetadata) ProtoMessage()    {}
 func (*UpdateSubnetMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{6}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{6}
 }
 func (m *UpdateSubnetMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateSubnetMetadata.Unmarshal(m, b)
@@ -472,7 +472,7 @@ func (m *DeleteSubnetRequest) Reset()         { *m = DeleteSubnetRequest{} }
 func (m *DeleteSubnetRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteSubnetRequest) ProtoMessage()    {}
 func (*DeleteSubnetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{7}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{7}
 }
 func (m *DeleteSubnetRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteSubnetRequest.Unmarshal(m, b)
@@ -511,7 +511,7 @@ func (m *DeleteSubnetMetadata) Reset()         { *m = DeleteSubnetMetadata{} }
 func (m *DeleteSubnetMetadata) String() string { return proto.CompactTextString(m) }
 func (*DeleteSubnetMetadata) ProtoMessage()    {}
 func (*DeleteSubnetMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{8}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{8}
 }
 func (m *DeleteSubnetMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteSubnetMetadata.Unmarshal(m, b)
@@ -557,7 +557,7 @@ func (m *ListSubnetOperationsRequest) Reset()         { *m = ListSubnetOperation
 func (m *ListSubnetOperationsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListSubnetOperationsRequest) ProtoMessage()    {}
 func (*ListSubnetOperationsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{9}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{9}
 }
 func (m *ListSubnetOperationsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListSubnetOperationsRequest.Unmarshal(m, b)
@@ -615,7 +615,7 @@ func (m *ListSubnetOperationsResponse) Reset()         { *m = ListSubnetOperatio
 func (m *ListSubnetOperationsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListSubnetOperationsResponse) ProtoMessage()    {}
 func (*ListSubnetOperationsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_service_d1a826e939b08db6, []int{10}
+	return fileDescriptor_subnet_service_e085956d95c18e31, []int{10}
 }
 func (m *ListSubnetOperationsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListSubnetOperationsResponse.Unmarshal(m, b)
@@ -684,8 +684,10 @@ type SubnetServiceClient interface {
 	// Retrieves the list of Subnet resources in the specified folder.
 	List(ctx context.Context, in *ListSubnetsRequest, opts ...grpc.CallOption) (*ListSubnetsResponse, error)
 	// Creates a subnet in the specified folder and network.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(ctx context.Context, in *CreateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified subnet.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Update(ctx context.Context, in *UpdateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified subnet.
 	Delete(ctx context.Context, in *DeleteSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -764,8 +766,10 @@ type SubnetServiceServer interface {
 	// Retrieves the list of Subnet resources in the specified folder.
 	List(context.Context, *ListSubnetsRequest) (*ListSubnetsResponse, error)
 	// Creates a subnet in the specified folder and network.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(context.Context, *CreateSubnetRequest) (*operation.Operation, error)
 	// Updates the specified subnet.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Update(context.Context, *UpdateSubnetRequest) (*operation.Operation, error)
 	// Deletes the specified subnet.
 	Delete(context.Context, *DeleteSubnetRequest) (*operation.Operation, error)
@@ -919,10 +923,10 @@ var _SubnetService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/vpc/v1/subnet_service.proto", fileDescriptor_subnet_service_d1a826e939b08db6)
+	proto.RegisterFile("yandex/cloud/vpc/v1/subnet_service.proto", fileDescriptor_subnet_service_e085956d95c18e31)
 }
 
-var fileDescriptor_subnet_service_d1a826e939b08db6 = []byte{
+var fileDescriptor_subnet_service_e085956d95c18e31 = []byte{
 	// 1034 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x56, 0x4f, 0x73, 0xdb, 0x44,
 	0x14, 0x1f, 0xc5, 0x8e, 0x12, 0x3f, 0xf7, 0x4f, 0x58, 0x87, 0xc1, 0xa3, 0x34, 0x8c, 0x23, 0x20,

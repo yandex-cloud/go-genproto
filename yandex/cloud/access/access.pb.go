@@ -45,15 +45,13 @@ func (x AccessBindingAction) String() string {
 	return proto.EnumName(AccessBindingAction_name, int32(x))
 }
 func (AccessBindingAction) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{0}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{0}
 }
 
 type Subject struct {
 	// ID of the subject.
 	//
 	// It can contain one of the following values:
-	// * `allUsers`: A special system identifier that represents anyone. It can be used only if the [type] is `system`.
-	//
 	// * `allAuthenticatedUsers`: A special system identifier that represents anyone
 	//    who is authenticated. It can be used only if the [type] is `system`.
 	//
@@ -66,10 +64,10 @@ type Subject struct {
 	// * `system`: System type. It represents several accounts with a common system identifier.
 	//
 	// * `userAccount`: A user account.
-	//    For more information, see [Users](/iam/concepts/users/users).
+	//    For more information, see [Users](/docs/iam/concepts/users/users).
 	//
 	// * `serviceAccount`: A service account.
-	//    For more information, see [Service accounts](/iam/concepts/users/service-accounts).
+	//    For more information, see [Service accounts](/docs/iam/concepts/users/service-accounts).
 	Type                 string   `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -80,7 +78,7 @@ func (m *Subject) Reset()         { *m = Subject{} }
 func (m *Subject) String() string { return proto.CompactTextString(m) }
 func (*Subject) ProtoMessage()    {}
 func (*Subject) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{0}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{0}
 }
 func (m *Subject) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subject.Unmarshal(m, b)
@@ -121,10 +119,9 @@ type AccessBinding struct {
 	// It can represent an account with a unique ID or several accounts with a system identifier.
 	//
 	// It can contain one of the following sets of parameters:
-	// * `type = system, id = allUsers`.
-	// * `type = system, id = allAuthenticatedUsers`.
-	// * `type = userAccount, id = <cloud generated id>`.
-	// * `type = serviceAccount, id = <cloud generated id>`.
+	// * `type = system`, `id = allAuthenticatedUsers`.
+	// * `type = userAccount`, `id = <cloud generated id>`.
+	// * `type = serviceAccount`, `id = <cloud generated id>`.
 	Subject              *Subject `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -135,7 +132,7 @@ func (m *AccessBinding) Reset()         { *m = AccessBinding{} }
 func (m *AccessBinding) String() string { return proto.CompactTextString(m) }
 func (*AccessBinding) ProtoMessage()    {}
 func (*AccessBinding) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{1}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{1}
 }
 func (m *AccessBinding) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AccessBinding.Unmarshal(m, b)
@@ -179,7 +176,7 @@ type ListAccessBindingsRequest struct {
 	// results is larger than [page_size],
 	// the service returns a [ListAccessBindingsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. Set [page_token]
 	// to the [ListAccessBindingsResponse.next_page_token]
@@ -194,7 +191,7 @@ func (m *ListAccessBindingsRequest) Reset()         { *m = ListAccessBindingsReq
 func (m *ListAccessBindingsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListAccessBindingsRequest) ProtoMessage()    {}
 func (*ListAccessBindingsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{2}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{2}
 }
 func (m *ListAccessBindingsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListAccessBindingsRequest.Unmarshal(m, b)
@@ -254,7 +251,7 @@ func (m *ListAccessBindingsResponse) Reset()         { *m = ListAccessBindingsRe
 func (m *ListAccessBindingsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListAccessBindingsResponse) ProtoMessage()    {}
 func (*ListAccessBindingsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{3}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{3}
 }
 func (m *ListAccessBindingsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListAccessBindingsResponse.Unmarshal(m, b)
@@ -304,7 +301,7 @@ func (m *SetAccessBindingsRequest) Reset()         { *m = SetAccessBindingsReque
 func (m *SetAccessBindingsRequest) String() string { return proto.CompactTextString(m) }
 func (*SetAccessBindingsRequest) ProtoMessage()    {}
 func (*SetAccessBindingsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{4}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{4}
 }
 func (m *SetAccessBindingsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SetAccessBindingsRequest.Unmarshal(m, b)
@@ -350,7 +347,7 @@ func (m *SetAccessBindingsMetadata) Reset()         { *m = SetAccessBindingsMeta
 func (m *SetAccessBindingsMetadata) String() string { return proto.CompactTextString(m) }
 func (*SetAccessBindingsMetadata) ProtoMessage()    {}
 func (*SetAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{5}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{5}
 }
 func (m *SetAccessBindingsMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SetAccessBindingsMetadata.Unmarshal(m, b)
@@ -391,7 +388,7 @@ func (m *UpdateAccessBindingsRequest) Reset()         { *m = UpdateAccessBinding
 func (m *UpdateAccessBindingsRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateAccessBindingsRequest) ProtoMessage()    {}
 func (*UpdateAccessBindingsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{6}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{6}
 }
 func (m *UpdateAccessBindingsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateAccessBindingsRequest.Unmarshal(m, b)
@@ -437,7 +434,7 @@ func (m *UpdateAccessBindingsMetadata) Reset()         { *m = UpdateAccessBindin
 func (m *UpdateAccessBindingsMetadata) String() string { return proto.CompactTextString(m) }
 func (*UpdateAccessBindingsMetadata) ProtoMessage()    {}
 func (*UpdateAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{7}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{7}
 }
 func (m *UpdateAccessBindingsMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateAccessBindingsMetadata.Unmarshal(m, b)
@@ -467,7 +464,7 @@ func (m *UpdateAccessBindingsMetadata) GetResourceId() string {
 type AccessBindingDelta struct {
 	// The action that is being performed on an access binding.
 	Action AccessBindingAction `protobuf:"varint,1,opt,name=action,proto3,enum=yandex.cloud.access.AccessBindingAction" json:"action,omitempty"`
-	// Access binding. For more information, see [Access Bindings](/resource-manager/concepts/resources-hierarchy).
+	// Access binding. For more information, see [Access Bindings](/docs/resource-manager/concepts/resources-hierarchy).
 	AccessBinding        *AccessBinding `protobuf:"bytes,2,opt,name=access_binding,json=accessBinding,proto3" json:"access_binding,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
@@ -478,7 +475,7 @@ func (m *AccessBindingDelta) Reset()         { *m = AccessBindingDelta{} }
 func (m *AccessBindingDelta) String() string { return proto.CompactTextString(m) }
 func (*AccessBindingDelta) ProtoMessage()    {}
 func (*AccessBindingDelta) Descriptor() ([]byte, []int) {
-	return fileDescriptor_access_ee0b7a410561a0fc, []int{8}
+	return fileDescriptor_access_c2dc49db300c3d45, []int{8}
 }
 func (m *AccessBindingDelta) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AccessBindingDelta.Unmarshal(m, b)
@@ -526,10 +523,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/access/access.proto", fileDescriptor_access_ee0b7a410561a0fc)
+	proto.RegisterFile("yandex/cloud/access/access.proto", fileDescriptor_access_c2dc49db300c3d45)
 }
 
-var fileDescriptor_access_ee0b7a410561a0fc = []byte{
+var fileDescriptor_access_c2dc49db300c3d45 = []byte{
 	// 579 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0xcf, 0x6e, 0xd3, 0x4c,
 	0x14, 0xc5, 0x3f, 0x27, 0xfd, 0x92, 0xe6, 0x86, 0xa4, 0xd1, 0x44, 0x48, 0x6e, 0x29, 0x22, 0xb5,

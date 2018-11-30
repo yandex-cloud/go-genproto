@@ -20,7 +20,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 // A ClickHouse Database resource. For more information, see the
-// [Developer's Guide](/mdb/concepts).
+// [Developer's Guide](/docs/mdb/concepts).
 type Database struct {
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -35,7 +35,7 @@ func (m *Database) Reset()         { *m = Database{} }
 func (m *Database) String() string { return proto.CompactTextString(m) }
 func (*Database) ProtoMessage()    {}
 func (*Database) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_40863f4fc60a13a1, []int{0}
+	return fileDescriptor_database_519f78afdb1bada6, []int{0}
 }
 func (m *Database) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Database.Unmarshal(m, b)
@@ -81,7 +81,7 @@ func (m *DatabaseSpec) Reset()         { *m = DatabaseSpec{} }
 func (m *DatabaseSpec) String() string { return proto.CompactTextString(m) }
 func (*DatabaseSpec) ProtoMessage()    {}
 func (*DatabaseSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_40863f4fc60a13a1, []int{1}
+	return fileDescriptor_database_519f78afdb1bada6, []int{1}
 }
 func (m *DatabaseSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DatabaseSpec.Unmarshal(m, b)
@@ -114,10 +114,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/database.proto", fileDescriptor_database_40863f4fc60a13a1)
+	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/database.proto", fileDescriptor_database_519f78afdb1bada6)
 }
 
-var fileDescriptor_database_40863f4fc60a13a1 = []byte{
+var fileDescriptor_database_519f78afdb1bada6 = []byte{
 	// 239 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0xad, 0x4c, 0xcc, 0x4b,
 	0x49, 0xad, 0xd0, 0x4f, 0xce, 0xc9, 0x2f, 0x4d, 0xd1, 0xcf, 0x4d, 0x49, 0xd2, 0x4f, 0xce, 0xc9,

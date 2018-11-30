@@ -21,7 +21,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 // A PostgreSQL User resource. For more information, see
-// the [Developer's Guide](/mdb/concepts).
+// the [Developer's Guide](/docs/mdb/concepts).
 type User struct {
 	// Name of the PostgreSQL user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -40,7 +40,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_eae29ed87d477886, []int{0}
+	return fileDescriptor_user_c9fba0f5815d3032, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -100,7 +100,7 @@ func (m *Permission) Reset()         { *m = Permission{} }
 func (m *Permission) String() string { return proto.CompactTextString(m) }
 func (*Permission) ProtoMessage()    {}
 func (*Permission) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_eae29ed87d477886, []int{1}
+	return fileDescriptor_user_c9fba0f5815d3032, []int{1}
 }
 func (m *Permission) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Permission.Unmarshal(m, b)
@@ -145,7 +145,7 @@ func (m *UserSpec) Reset()         { *m = UserSpec{} }
 func (m *UserSpec) String() string { return proto.CompactTextString(m) }
 func (*UserSpec) ProtoMessage()    {}
 func (*UserSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_eae29ed87d477886, []int{2}
+	return fileDescriptor_user_c9fba0f5815d3032, []int{2}
 }
 func (m *UserSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserSpec.Unmarshal(m, b)
@@ -200,10 +200,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/postgresql/v1/user.proto", fileDescriptor_user_eae29ed87d477886)
+	proto.RegisterFile("yandex/cloud/mdb/postgresql/v1/user.proto", fileDescriptor_user_c9fba0f5815d3032)
 }
 
-var fileDescriptor_user_eae29ed87d477886 = []byte{
+var fileDescriptor_user_c9fba0f5815d3032 = []byte{
 	// 407 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x52, 0x4d, 0xab, 0xd3, 0x40,
 	0x14, 0x25, 0x36, 0x4a, 0x3b, 0xb5, 0x9b, 0xac, 0xc2, 0x93, 0x3e, 0x4a, 0xdd, 0xf4, 0x29, 0x99,

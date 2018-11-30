@@ -20,7 +20,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 // A PostgreSQL Database resource. For more information, see
-// the [Developer's Guide](/mdb/concepts).
+// the [Developer's Guide](/docs/mdb/concepts).
 type Database struct {
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -45,7 +45,7 @@ func (m *Database) Reset()         { *m = Database{} }
 func (m *Database) String() string { return proto.CompactTextString(m) }
 func (*Database) ProtoMessage()    {}
 func (*Database) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_5dd27e87b47d9b36, []int{0}
+	return fileDescriptor_database_6c9f6ad55a0abb60, []int{0}
 }
 func (m *Database) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Database.Unmarshal(m, b)
@@ -109,7 +109,7 @@ func (m *Database) GetExtensions() []*Extension {
 
 type Extension struct {
 	// Name of the extension, e.g. `pg_trgm` or `pg_btree`.
-	// Extensions supported by MDB are [listed in the Developer's Guide](/mdb/concepts).
+	// Extensions supported by MDB are [listed in the Developer's Guide](/docs/mdb/concepts).
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Version of the extension.
 	Version              string   `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
@@ -122,7 +122,7 @@ func (m *Extension) Reset()         { *m = Extension{} }
 func (m *Extension) String() string { return proto.CompactTextString(m) }
 func (*Extension) ProtoMessage()    {}
 func (*Extension) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_5dd27e87b47d9b36, []int{1}
+	return fileDescriptor_database_6c9f6ad55a0abb60, []int{1}
 }
 func (m *Extension) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Extension.Unmarshal(m, b)
@@ -179,7 +179,7 @@ func (m *DatabaseSpec) Reset()         { *m = DatabaseSpec{} }
 func (m *DatabaseSpec) String() string { return proto.CompactTextString(m) }
 func (*DatabaseSpec) ProtoMessage()    {}
 func (*DatabaseSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_5dd27e87b47d9b36, []int{2}
+	return fileDescriptor_database_6c9f6ad55a0abb60, []int{2}
 }
 func (m *DatabaseSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DatabaseSpec.Unmarshal(m, b)
@@ -241,10 +241,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/postgresql/v1/database.proto", fileDescriptor_database_5dd27e87b47d9b36)
+	proto.RegisterFile("yandex/cloud/mdb/postgresql/v1/database.proto", fileDescriptor_database_6c9f6ad55a0abb60)
 }
 
-var fileDescriptor_database_5dd27e87b47d9b36 = []byte{
+var fileDescriptor_database_6c9f6ad55a0abb60 = []byte{
 	// 394 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x92, 0xdf, 0xea, 0xd3, 0x30,
 	0x14, 0xc7, 0xe9, 0x7e, 0xdd, 0xbf, 0xa8, 0x37, 0x41, 0xa4, 0x0a, 0x93, 0xb1, 0xab, 0xc9, 0x48,

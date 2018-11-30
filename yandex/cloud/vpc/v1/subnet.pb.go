@@ -19,7 +19,7 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// A Subnet resource. For more information, see [Subnets](/vpc/concepts/subnets).
+// A Subnet resource. For more information, see [Subnets](/docs/vpc/concepts/subnets).
 type Subnet struct {
 	// ID of the subnet.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -54,7 +54,7 @@ func (m *Subnet) Reset()         { *m = Subnet{} }
 func (m *Subnet) String() string { return proto.CompactTextString(m) }
 func (*Subnet) ProtoMessage()    {}
 func (*Subnet) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subnet_7b86f15e2576337a, []int{0}
+	return fileDescriptor_subnet_898273ab5374dd13, []int{0}
 }
 func (m *Subnet) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subnet.Unmarshal(m, b)
@@ -150,10 +150,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/vpc/v1/subnet.proto", fileDescriptor_subnet_7b86f15e2576337a)
+	proto.RegisterFile("yandex/cloud/vpc/v1/subnet.proto", fileDescriptor_subnet_898273ab5374dd13)
 }
 
-var fileDescriptor_subnet_7b86f15e2576337a = []byte{
+var fileDescriptor_subnet_898273ab5374dd13 = []byte{
 	// 385 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0x51, 0x6b, 0xd5, 0x30,
 	0x1c, 0xc5, 0x69, 0xbb, 0x75, 0xeb, 0xbf, 0x32, 0x24, 0x0a, 0x96, 0x2b, 0x62, 0x11, 0xc1, 0xbe,

@@ -19,7 +19,7 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// A ClickHouse Backup resource. See the [Developer's Guide](/mdb/concepts)
+// A ClickHouse Backup resource. See the [Developer's Guide](/docs/mdb/concepts)
 // for more information.
 type Backup struct {
 	// ID of the backup.
@@ -42,7 +42,7 @@ func (m *Backup) Reset()         { *m = Backup{} }
 func (m *Backup) String() string { return proto.CompactTextString(m) }
 func (*Backup) ProtoMessage()    {}
 func (*Backup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_backup_48b9fec1aee50150, []int{0}
+	return fileDescriptor_backup_b07f37989edbc4e9, []int{0}
 }
 func (m *Backup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Backup.Unmarshal(m, b)
@@ -102,10 +102,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/backup.proto", fileDescriptor_backup_48b9fec1aee50150)
+	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/backup.proto", fileDescriptor_backup_b07f37989edbc4e9)
 }
 
-var fileDescriptor_backup_48b9fec1aee50150 = []byte{
+var fileDescriptor_backup_b07f37989edbc4e9 = []byte{
 	// 266 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x90, 0x41, 0x4b, 0x03, 0x31,
 	0x10, 0x85, 0xd9, 0x55, 0x8b, 0x1b, 0x41, 0x71, 0x4f, 0x4b, 0x05, 0x2d, 0x9e, 0x8a, 0xd2, 0x84,

@@ -48,7 +48,7 @@ func (x Cluster_Environment) String() string {
 	return proto.EnumName(Cluster_Environment_name, int32(x))
 }
 func (Cluster_Environment) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{0, 0}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{0, 0}
 }
 
 type Cluster_Health int32
@@ -81,7 +81,7 @@ func (x Cluster_Health) String() string {
 	return proto.EnumName(Cluster_Health_name, int32(x))
 }
 func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{0, 1}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{0, 1}
 }
 
 type Cluster_Status int32
@@ -114,7 +114,7 @@ func (x Cluster_Status) String() string {
 	return proto.EnumName(Cluster_Status_name, int32(x))
 }
 func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{0, 2}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{0, 2}
 }
 
 type ConnectionPoolerConfig_PoolingMode int32
@@ -146,12 +146,13 @@ func (x ConnectionPoolerConfig_PoolingMode) String() string {
 	return proto.EnumName(ConnectionPoolerConfig_PoolingMode_name, int32(x))
 }
 func (ConnectionPoolerConfig_PoolingMode) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{3, 0}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{3, 0}
 }
 
 type Host_Role int32
 
 const (
+	// Role of the host in the cluster is unknown.
 	Host_ROLE_UNKNOWN Host_Role = 0
 	// Host is the master PostgreSQL server in the cluster.
 	Host_MASTER Host_Role = 1
@@ -174,12 +175,13 @@ func (x Host_Role) String() string {
 	return proto.EnumName(Host_Role_name, int32(x))
 }
 func (Host_Role) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{4, 0}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{4, 0}
 }
 
 type Host_Health int32
 
 const (
+	// Health of the host is unknown.
 	Host_HEALTH_UNKNOWN Host_Health = 0
 	// The host is performing all its functions normally.
 	Host_ALIVE Host_Health = 1
@@ -206,7 +208,7 @@ func (x Host_Health) String() string {
 	return proto.EnumName(Host_Health_name, int32(x))
 }
 func (Host_Health) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{4, 1}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{4, 1}
 }
 
 type Service_Type int32
@@ -234,12 +236,13 @@ func (x Service_Type) String() string {
 	return proto.EnumName(Service_Type_name, int32(x))
 }
 func (Service_Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{6, 0}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{6, 0}
 }
 
 type Service_Health int32
 
 const (
+	// Health of the server is unknown.
 	Service_HEALTH_UNKNOWN Service_Health = 0
 	// The server is working normally.
 	Service_ALIVE Service_Health = 1
@@ -262,10 +265,10 @@ func (x Service_Health) String() string {
 	return proto.EnumName(Service_Health_name, int32(x))
 }
 func (Service_Health) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{6, 1}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{6, 1}
 }
 
-// A PostgreSQL Cluster resource. For more information, see the [Cluster](/mdb/concepts) section
+// A PostgreSQL Cluster resource. For more information, see the [Cluster](/docs/mdb/concepts) section
 // in the Developer's Guide.
 type Cluster struct {
 	// ID of the PostgreSQL cluster.
@@ -303,7 +306,7 @@ func (m *Cluster) Reset()         { *m = Cluster{} }
 func (m *Cluster) String() string { return proto.CompactTextString(m) }
 func (*Cluster) ProtoMessage()    {}
 func (*Cluster) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{0}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{0}
 }
 func (m *Cluster) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Cluster.Unmarshal(m, b)
@@ -424,7 +427,7 @@ func (m *Monitoring) Reset()         { *m = Monitoring{} }
 func (m *Monitoring) String() string { return proto.CompactTextString(m) }
 func (*Monitoring) ProtoMessage()    {}
 func (*Monitoring) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{1}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{1}
 }
 func (m *Monitoring) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Monitoring.Unmarshal(m, b)
@@ -489,7 +492,7 @@ func (m *ClusterConfig) Reset()         { *m = ClusterConfig{} }
 func (m *ClusterConfig) String() string { return proto.CompactTextString(m) }
 func (*ClusterConfig) ProtoMessage()    {}
 func (*ClusterConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{2}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{2}
 }
 func (m *ClusterConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClusterConfig.Unmarshal(m, b)
@@ -661,7 +664,7 @@ func (m *ConnectionPoolerConfig) Reset()         { *m = ConnectionPoolerConfig{}
 func (m *ConnectionPoolerConfig) String() string { return proto.CompactTextString(m) }
 func (*ConnectionPoolerConfig) ProtoMessage()    {}
 func (*ConnectionPoolerConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{3}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{3}
 }
 func (m *ConnectionPoolerConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConnectionPoolerConfig.Unmarshal(m, b)
@@ -708,7 +711,7 @@ type Host struct {
 	Services []*Service `protobuf:"bytes,7,rep,name=services,proto3" json:"services,omitempty"`
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// [name] of the host to be used as the replication source for cascading replication.
+	// Name of the host to be used as the replication source for cascading replication.
 	ReplicationSource string `protobuf:"bytes,9,opt,name=replication_source,json=replicationSource,proto3" json:"replication_source,omitempty"`
 	// Priority of the host as a replica. Higher value means higher priority.
 	//
@@ -728,7 +731,7 @@ func (m *Host) Reset()         { *m = Host{} }
 func (m *Host) String() string { return proto.CompactTextString(m) }
 func (*Host) ProtoMessage()    {}
 func (*Host) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{4}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{4}
 }
 func (m *Host) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Host.Unmarshal(m, b)
@@ -841,7 +844,7 @@ func (m *HostConfig) Reset()         { *m = HostConfig{} }
 func (m *HostConfig) String() string { return proto.CompactTextString(m) }
 func (*HostConfig) ProtoMessage()    {}
 func (*HostConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{5}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{5}
 }
 func (m *HostConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_HostConfig.Unmarshal(m, b)
@@ -986,7 +989,7 @@ func (m *Service) Reset()         { *m = Service{} }
 func (m *Service) String() string { return proto.CompactTextString(m) }
 func (*Service) ProtoMessage()    {}
 func (*Service) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{6}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{6}
 }
 func (m *Service) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Service.Unmarshal(m, b)
@@ -1022,13 +1025,14 @@ func (m *Service) GetHealth() Service_Health {
 
 type Resources struct {
 	// ID of the preset for computational resources available to a host (CPU, memory etc.).
-	// All available presets are listed in the [documentation](/mdb/concepts/instance-types).
+	// All available presets are listed in the [documentation](/docs/mdb/concepts/instance-types).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Volume of the storage available to a host, in bytes.
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
 	// Type of the storage environment for the host.
 	// Possible values:
-	// * local-ssd — SSD storage.
+	// * network-nvme — network SSD drive,
+	// * local-nvme — local SSD storage.
 	DiskTypeId           string   `protobuf:"bytes,3,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1039,7 +1043,7 @@ func (m *Resources) Reset()         { *m = Resources{} }
 func (m *Resources) String() string { return proto.CompactTextString(m) }
 func (*Resources) ProtoMessage()    {}
 func (*Resources) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_7b2d67ed1b49d1e2, []int{7}
+	return fileDescriptor_cluster_816f74515b75cf60, []int{7}
 }
 func (m *Resources) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Resources.Unmarshal(m, b)
@@ -1101,10 +1105,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/postgresql/v1/cluster.proto", fileDescriptor_cluster_7b2d67ed1b49d1e2)
+	proto.RegisterFile("yandex/cloud/mdb/postgresql/v1/cluster.proto", fileDescriptor_cluster_816f74515b75cf60)
 }
 
-var fileDescriptor_cluster_7b2d67ed1b49d1e2 = []byte{
+var fileDescriptor_cluster_816f74515b75cf60 = []byte{
 	// 1304 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x57, 0x5b, 0x77, 0xdb, 0x44,
 	0x10, 0xae, 0x1d, 0xc7, 0x97, 0x91, 0x1b, 0xd4, 0xa5, 0x50, 0x9d, 0x94, 0x96, 0x1c, 0xbf, 0x10,

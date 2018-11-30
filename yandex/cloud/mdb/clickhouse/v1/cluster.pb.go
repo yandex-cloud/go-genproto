@@ -48,7 +48,7 @@ func (x Cluster_Environment) String() string {
 	return proto.EnumName(Cluster_Environment_name, int32(x))
 }
 func (Cluster_Environment) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{0, 0}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{0, 0}
 }
 
 type Cluster_Health int32
@@ -81,7 +81,7 @@ func (x Cluster_Health) String() string {
 	return proto.EnumName(Cluster_Health_name, int32(x))
 }
 func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{0, 1}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{0, 1}
 }
 
 type Cluster_Status int32
@@ -114,7 +114,7 @@ func (x Cluster_Status) String() string {
 	return proto.EnumName(Cluster_Status_name, int32(x))
 }
 func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{0, 2}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{0, 2}
 }
 
 type Host_Type int32
@@ -142,12 +142,13 @@ func (x Host_Type) String() string {
 	return proto.EnumName(Host_Type_name, int32(x))
 }
 func (Host_Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{3, 0}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{3, 0}
 }
 
 type Host_Health int32
 
 const (
+	// Health of the host is unknown.
 	Host_UNKNOWN Host_Health = 0
 	// The host is performing all its functions normally.
 	Host_ALIVE Host_Health = 1
@@ -174,7 +175,7 @@ func (x Host_Health) String() string {
 	return proto.EnumName(Host_Health_name, int32(x))
 }
 func (Host_Health) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{3, 1}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{3, 1}
 }
 
 type Service_Type int32
@@ -202,12 +203,13 @@ func (x Service_Type) String() string {
 	return proto.EnumName(Service_Type_name, int32(x))
 }
 func (Service_Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{4, 0}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{4, 0}
 }
 
 type Service_Health int32
 
 const (
+	// Health of the server is unknown.
 	Service_UNKNOWN Service_Health = 0
 	// The server is working normally.
 	Service_ALIVE Service_Health = 1
@@ -230,11 +232,11 @@ func (x Service_Health) String() string {
 	return proto.EnumName(Service_Health_name, int32(x))
 }
 func (Service_Health) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{4, 1}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{4, 1}
 }
 
 // A ClickHouse Cluster resource. For more information, see the
-// [Cluster](/mdb/concepts) section in the Developer's Guide.
+// [Cluster](/docs/mdb/concepts) section in the Developer's Guide.
 type Cluster struct {
 	// ID of the ClickHouse cluster.
 	// This ID is assigned by MDB at creation time.
@@ -271,7 +273,7 @@ func (m *Cluster) Reset()         { *m = Cluster{} }
 func (m *Cluster) String() string { return proto.CompactTextString(m) }
 func (*Cluster) ProtoMessage()    {}
 func (*Cluster) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{0}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{0}
 }
 func (m *Cluster) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Cluster.Unmarshal(m, b)
@@ -392,7 +394,7 @@ func (m *Monitoring) Reset()         { *m = Monitoring{} }
 func (m *Monitoring) String() string { return proto.CompactTextString(m) }
 func (*Monitoring) ProtoMessage()    {}
 func (*Monitoring) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{1}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{1}
 }
 func (m *Monitoring) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Monitoring.Unmarshal(m, b)
@@ -449,7 +451,7 @@ func (m *ClusterConfig) Reset()         { *m = ClusterConfig{} }
 func (m *ClusterConfig) String() string { return proto.CompactTextString(m) }
 func (*ClusterConfig) ProtoMessage()    {}
 func (*ClusterConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{2}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{2}
 }
 func (m *ClusterConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClusterConfig.Unmarshal(m, b)
@@ -504,7 +506,7 @@ func (m *ClusterConfig_Clickhouse) Reset()         { *m = ClusterConfig_Clickhou
 func (m *ClusterConfig_Clickhouse) String() string { return proto.CompactTextString(m) }
 func (*ClusterConfig_Clickhouse) ProtoMessage()    {}
 func (*ClusterConfig_Clickhouse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{2, 0}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{2, 0}
 }
 func (m *ClusterConfig_Clickhouse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClusterConfig_Clickhouse.Unmarshal(m, b)
@@ -550,7 +552,7 @@ func (m *ClusterConfig_Zookeeper) Reset()         { *m = ClusterConfig_Zookeeper
 func (m *ClusterConfig_Zookeeper) String() string { return proto.CompactTextString(m) }
 func (*ClusterConfig_Zookeeper) ProtoMessage()    {}
 func (*ClusterConfig_Zookeeper) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{2, 1}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{2, 1}
 }
 func (m *ClusterConfig_Zookeeper) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClusterConfig_Zookeeper.Unmarshal(m, b)
@@ -606,7 +608,7 @@ func (m *Host) Reset()         { *m = Host{} }
 func (m *Host) String() string { return proto.CompactTextString(m) }
 func (*Host) ProtoMessage()    {}
 func (*Host) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{3}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{3}
 }
 func (m *Host) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Host.Unmarshal(m, b)
@@ -696,7 +698,7 @@ func (m *Service) Reset()         { *m = Service{} }
 func (m *Service) String() string { return proto.CompactTextString(m) }
 func (*Service) ProtoMessage()    {}
 func (*Service) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{4}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{4}
 }
 func (m *Service) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Service.Unmarshal(m, b)
@@ -732,13 +734,14 @@ func (m *Service) GetHealth() Service_Health {
 
 type Resources struct {
 	// ID of the preset for computational resources available to a host (CPU, memory etc.).
-	// All available presets are listed in the [documentation](/mdb/concepts/instance-types)
+	// All available presets are listed in the [documentation](/docs/mdb/concepts/instance-types)
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Volume of the storage available to a host, in bytes.
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
 	// Type of the storage environment for the host.
 	// Possible values:
-	// * local-ssd — SSD storage.
+	// * network-nvme — network SSD drive,
+	// * local-nvme — local SSD storage.
 	DiskTypeId           string   `protobuf:"bytes,3,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -749,7 +752,7 @@ func (m *Resources) Reset()         { *m = Resources{} }
 func (m *Resources) String() string { return proto.CompactTextString(m) }
 func (*Resources) ProtoMessage()    {}
 func (*Resources) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_d14bd1b10791ce46, []int{5}
+	return fileDescriptor_cluster_ff678526966df3b6, []int{5}
 }
 func (m *Resources) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Resources.Unmarshal(m, b)
@@ -810,10 +813,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/cluster.proto", fileDescriptor_cluster_d14bd1b10791ce46)
+	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/cluster.proto", fileDescriptor_cluster_ff678526966df3b6)
 }
 
-var fileDescriptor_cluster_d14bd1b10791ce46 = []byte{
+var fileDescriptor_cluster_ff678526966df3b6 = []byte{
 	// 1015 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0xdd, 0x6e, 0xdb, 0x36,
 	0x14, 0xae, 0x6c, 0xc7, 0xb6, 0x8e, 0xd3, 0x40, 0x20, 0x0a, 0x54, 0x70, 0xd1, 0x2d, 0xf0, 0xcd,

@@ -44,7 +44,7 @@ func (x IpVersion) String() string {
 	return proto.EnumName(IpVersion_name, int32(x))
 }
 func (IpVersion) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{0}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{0}
 }
 
 type Instance_Status int32
@@ -104,7 +104,7 @@ func (x Instance_Status) String() string {
 	return proto.EnumName(Instance_Status_name, int32(x))
 }
 func (Instance_Status) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{0, 0}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{0, 0}
 }
 
 type AttachedDisk_Mode int32
@@ -132,10 +132,10 @@ func (x AttachedDisk_Mode) String() string {
 	return proto.EnumName(AttachedDisk_Mode_name, int32(x))
 }
 func (AttachedDisk_Mode) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{2, 0}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{2, 0}
 }
 
-// An Instance resource. For more information, see [Instances](/compute/concepts/vm).
+// An Instance resource. For more information, see [Instances](/docs/compute/concepts/vm).
 type Instance struct {
 	// ID of the instance.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -160,7 +160,7 @@ type Instance struct {
 	// The metadata key/value pairs assigned to this instance. This includes custom metadata and predefined keys.
 	//
 	// For example, you may use the metadata in order to provide your public SSH key to the instance.
-	// For more information, see [Metadata](/compute/concepts/vm-metadata).
+	// For more information, see [Metadata](/docs/compute/concepts/vm-metadata).
 	Metadata map[string]string `protobuf:"bytes,11,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Boot disk that is attached to the instance.
 	BootDisk *AttachedDisk `protobuf:"bytes,12,opt,name=boot_disk,json=bootDisk,proto3" json:"boot_disk,omitempty"`
@@ -168,8 +168,9 @@ type Instance struct {
 	SecondaryDisks []*AttachedDisk `protobuf:"bytes,13,rep,name=secondary_disks,json=secondaryDisks,proto3" json:"secondary_disks,omitempty"`
 	// Array of network interfaces that are attached to the instance.
 	NetworkInterfaces []*NetworkInterface `protobuf:"bytes,14,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
-	// Domain name of the instance. This domain name is defined by the server when the instance is created.
-	// Domain name generated in the format: `hostname.zone_id.internal`
+	// A domain name of the instance. FQDN is defined by the server
+	// in the format `<hostname>.<region_id>.internal` when the instance is created.
+	// If the hostname were not specified when the instance was created, FQDN would be `<id>.auto.internal`.
 	Fqdn                 string   `protobuf:"bytes,16,opt,name=fqdn,proto3" json:"fqdn,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -180,7 +181,7 @@ func (m *Instance) Reset()         { *m = Instance{} }
 func (m *Instance) String() string { return proto.CompactTextString(m) }
 func (*Instance) ProtoMessage()    {}
 func (*Instance) Descriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{0}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{0}
 }
 func (m *Instance) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Instance.Unmarshal(m, b)
@@ -322,7 +323,7 @@ func (m *Resources) Reset()         { *m = Resources{} }
 func (m *Resources) String() string { return proto.CompactTextString(m) }
 func (*Resources) ProtoMessage()    {}
 func (*Resources) Descriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{1}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{1}
 }
 func (m *Resources) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Resources.Unmarshal(m, b)
@@ -384,7 +385,7 @@ func (m *AttachedDisk) Reset()         { *m = AttachedDisk{} }
 func (m *AttachedDisk) String() string { return proto.CompactTextString(m) }
 func (*AttachedDisk) ProtoMessage()    {}
 func (*AttachedDisk) Descriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{2}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{2}
 }
 func (m *AttachedDisk) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AttachedDisk.Unmarshal(m, b)
@@ -453,7 +454,7 @@ func (m *NetworkInterface) Reset()         { *m = NetworkInterface{} }
 func (m *NetworkInterface) String() string { return proto.CompactTextString(m) }
 func (*NetworkInterface) ProtoMessage()    {}
 func (*NetworkInterface) Descriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{3}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{3}
 }
 func (m *NetworkInterface) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NetworkInterface.Unmarshal(m, b)
@@ -522,7 +523,7 @@ func (m *PrimaryAddress) Reset()         { *m = PrimaryAddress{} }
 func (m *PrimaryAddress) String() string { return proto.CompactTextString(m) }
 func (*PrimaryAddress) ProtoMessage()    {}
 func (*PrimaryAddress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{4}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{4}
 }
 func (m *PrimaryAddress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PrimaryAddress.Unmarshal(m, b)
@@ -570,7 +571,7 @@ func (m *OneToOneNat) Reset()         { *m = OneToOneNat{} }
 func (m *OneToOneNat) String() string { return proto.CompactTextString(m) }
 func (*OneToOneNat) ProtoMessage()    {}
 func (*OneToOneNat) Descriptor() ([]byte, []int) {
-	return fileDescriptor_instance_10ffbd42a28e10d1, []int{5}
+	return fileDescriptor_instance_7218a503fdcdbd29, []int{5}
 }
 func (m *OneToOneNat) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneToOneNat.Unmarshal(m, b)
@@ -619,10 +620,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/compute/v1/instance.proto", fileDescriptor_instance_10ffbd42a28e10d1)
+	proto.RegisterFile("yandex/cloud/compute/v1/instance.proto", fileDescriptor_instance_7218a503fdcdbd29)
 }
 
-var fileDescriptor_instance_10ffbd42a28e10d1 = []byte{
+var fileDescriptor_instance_7218a503fdcdbd29 = []byte{
 	// 1006 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0xdb, 0x6e, 0xdb, 0x46,
 	0x13, 0xfe, 0x75, 0xb0, 0x4c, 0x0e, 0x6d, 0xfd, 0xec, 0x22, 0x70, 0x08, 0xf7, 0xc2, 0x86, 0x7a,
