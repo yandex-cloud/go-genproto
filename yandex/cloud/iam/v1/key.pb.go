@@ -44,10 +44,10 @@ func (x Key_Algorithm) String() string {
 	return proto.EnumName(Key_Algorithm_name, int32(x))
 }
 func (Key_Algorithm) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_key_bfc983fbf4605cc2, []int{0, 0}
+	return fileDescriptor_key_8778cd8d03fc7198, []int{0, 0}
 }
 
-// A Key resource. For more information, see [Keys](/docs/iam/concepts/users/service-accounts#keys).
+// A Key resource. For more information, see [Authorized keys](/docs/iam/concepts/authorization/key).
 type Key struct {
 	// ID of the Key resource.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -72,7 +72,7 @@ func (m *Key) Reset()         { *m = Key{} }
 func (m *Key) String() string { return proto.CompactTextString(m) }
 func (*Key) ProtoMessage()    {}
 func (*Key) Descriptor() ([]byte, []int) {
-	return fileDescriptor_key_bfc983fbf4605cc2, []int{0}
+	return fileDescriptor_key_8778cd8d03fc7198, []int{0}
 }
 func (m *Key) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Key.Unmarshal(m, b)
@@ -235,9 +235,9 @@ func init() {
 	proto.RegisterEnum("yandex.cloud.iam.v1.Key_Algorithm", Key_Algorithm_name, Key_Algorithm_value)
 }
 
-func init() { proto.RegisterFile("yandex/cloud/iam/v1/key.proto", fileDescriptor_key_bfc983fbf4605cc2) }
+func init() { proto.RegisterFile("yandex/cloud/iam/v1/key.proto", fileDescriptor_key_8778cd8d03fc7198) }
 
-var fileDescriptor_key_bfc983fbf4605cc2 = []byte{
+var fileDescriptor_key_8778cd8d03fc7198 = []byte{
 	// 384 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0x4b, 0x6f, 0xd4, 0x30,
 	0x14, 0x85, 0x9b, 0x0c, 0xb4, 0xc4, 0x7d, 0x10, 0x19, 0x21, 0x85, 0x4a, 0x15, 0xd1, 0xac, 0xb2,

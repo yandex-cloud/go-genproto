@@ -42,7 +42,7 @@ func (m *GetFolderRequest) Reset()         { *m = GetFolderRequest{} }
 func (m *GetFolderRequest) String() string { return proto.CompactTextString(m) }
 func (*GetFolderRequest) ProtoMessage()    {}
 func (*GetFolderRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{0}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{0}
 }
 func (m *GetFolderRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetFolderRequest.Unmarshal(m, b)
@@ -98,7 +98,7 @@ func (m *ListFoldersRequest) Reset()         { *m = ListFoldersRequest{} }
 func (m *ListFoldersRequest) String() string { return proto.CompactTextString(m) }
 func (*ListFoldersRequest) ProtoMessage()    {}
 func (*ListFoldersRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{1}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{1}
 }
 func (m *ListFoldersRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListFoldersRequest.Unmarshal(m, b)
@@ -165,7 +165,7 @@ func (m *ListFoldersResponse) Reset()         { *m = ListFoldersResponse{} }
 func (m *ListFoldersResponse) String() string { return proto.CompactTextString(m) }
 func (*ListFoldersResponse) ProtoMessage()    {}
 func (*ListFoldersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{2}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{2}
 }
 func (m *ListFoldersResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListFoldersResponse.Unmarshal(m, b)
@@ -219,7 +219,7 @@ func (m *CreateFolderRequest) Reset()         { *m = CreateFolderRequest{} }
 func (m *CreateFolderRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateFolderRequest) ProtoMessage()    {}
 func (*CreateFolderRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{3}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{3}
 }
 func (m *CreateFolderRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateFolderRequest.Unmarshal(m, b)
@@ -279,7 +279,7 @@ func (m *CreateFolderMetadata) Reset()         { *m = CreateFolderMetadata{} }
 func (m *CreateFolderMetadata) String() string { return proto.CompactTextString(m) }
 func (*CreateFolderMetadata) ProtoMessage()    {}
 func (*CreateFolderMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{4}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{4}
 }
 func (m *CreateFolderMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateFolderMetadata.Unmarshal(m, b)
@@ -328,7 +328,7 @@ func (m *UpdateFolderRequest) Reset()         { *m = UpdateFolderRequest{} }
 func (m *UpdateFolderRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateFolderRequest) ProtoMessage()    {}
 func (*UpdateFolderRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{5}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{5}
 }
 func (m *UpdateFolderRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateFolderRequest.Unmarshal(m, b)
@@ -395,7 +395,7 @@ func (m *UpdateFolderMetadata) Reset()         { *m = UpdateFolderMetadata{} }
 func (m *UpdateFolderMetadata) String() string { return proto.CompactTextString(m) }
 func (*UpdateFolderMetadata) ProtoMessage()    {}
 func (*UpdateFolderMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{6}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{6}
 }
 func (m *UpdateFolderMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateFolderMetadata.Unmarshal(m, b)
@@ -435,7 +435,7 @@ func (m *DeleteFolderRequest) Reset()         { *m = DeleteFolderRequest{} }
 func (m *DeleteFolderRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteFolderRequest) ProtoMessage()    {}
 func (*DeleteFolderRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{7}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{7}
 }
 func (m *DeleteFolderRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteFolderRequest.Unmarshal(m, b)
@@ -474,7 +474,7 @@ func (m *DeleteFolderMetadata) Reset()         { *m = DeleteFolderMetadata{} }
 func (m *DeleteFolderMetadata) String() string { return proto.CompactTextString(m) }
 func (*DeleteFolderMetadata) ProtoMessage()    {}
 func (*DeleteFolderMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{8}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{8}
 }
 func (m *DeleteFolderMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteFolderMetadata.Unmarshal(m, b)
@@ -522,7 +522,7 @@ func (m *ListFolderOperationsRequest) Reset()         { *m = ListFolderOperation
 func (m *ListFolderOperationsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListFolderOperationsRequest) ProtoMessage()    {}
 func (*ListFolderOperationsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{9}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{9}
 }
 func (m *ListFolderOperationsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListFolderOperationsRequest.Unmarshal(m, b)
@@ -580,7 +580,7 @@ func (m *ListFolderOperationsResponse) Reset()         { *m = ListFolderOperatio
 func (m *ListFolderOperationsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListFolderOperationsResponse) ProtoMessage()    {}
 func (*ListFolderOperationsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_folder_service_8e008b73f2879203, []int{10}
+	return fileDescriptor_folder_service_1b69e2b4ea1a512d, []int{10}
 }
 func (m *ListFolderOperationsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListFolderOperationsResponse.Unmarshal(m, b)
@@ -653,6 +653,8 @@ type FolderServiceClient interface {
 	// Updates the specified folder.
 	Update(ctx context.Context, in *UpdateFolderRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified folder.
+	//
+	// The method is temporarily unavailable.
 	Delete(ctx context.Context, in *DeleteFolderRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified folder.
 	ListOperations(ctx context.Context, in *ListFolderOperationsRequest, opts ...grpc.CallOption) (*ListFolderOperationsResponse, error)
@@ -766,6 +768,8 @@ type FolderServiceServer interface {
 	// Updates the specified folder.
 	Update(context.Context, *UpdateFolderRequest) (*operation.Operation, error)
 	// Deletes the specified folder.
+	//
+	// The method is temporarily unavailable.
 	Delete(context.Context, *DeleteFolderRequest) (*operation.Operation, error)
 	// Lists operations for the specified folder.
 	ListOperations(context.Context, *ListFolderOperationsRequest) (*ListFolderOperationsResponse, error)
@@ -989,10 +993,10 @@ var _FolderService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/resourcemanager/v1/folder_service.proto", fileDescriptor_folder_service_8e008b73f2879203)
+	proto.RegisterFile("yandex/cloud/resourcemanager/v1/folder_service.proto", fileDescriptor_folder_service_1b69e2b4ea1a512d)
 }
 
-var fileDescriptor_folder_service_8e008b73f2879203 = []byte{
+var fileDescriptor_folder_service_1b69e2b4ea1a512d = []byte{
 	// 1110 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x57, 0xcf, 0x6f, 0xdb, 0x54,
 	0x1c, 0xd7, 0x6b, 0xd2, 0xac, 0x79, 0xa1, 0x50, 0x5e, 0x87, 0x14, 0x79, 0xdd, 0xe8, 0x0c, 0xac,
