@@ -52,7 +52,7 @@ func (x ClickhouseConfig_LogLevel) String() string {
 	return proto.EnumName(ClickhouseConfig_LogLevel_name, int32(x))
 }
 func (ClickhouseConfig_LogLevel) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 0}
 }
 
 type ClickhouseConfig_Compression_Method int32
@@ -80,7 +80,7 @@ func (x ClickhouseConfig_Compression_Method) String() string {
 	return proto.EnumName(ClickhouseConfig_Compression_Method_name, int32(x))
 }
 func (ClickhouseConfig_Compression_Method) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 1, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 1, 0}
 }
 
 type ClickhouseConfig_ExternalDictionary_Layout_Type int32
@@ -131,7 +131,7 @@ func (x ClickhouseConfig_ExternalDictionary_Layout_Type) String() string {
 	return proto.EnumName(ClickhouseConfig_ExternalDictionary_Layout_Type_name, int32(x))
 }
 func (ClickhouseConfig_ExternalDictionary_Layout_Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 5, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 5, 0}
 }
 
 // ClickHouse configuration options. Detailed description for each set of options
@@ -180,7 +180,7 @@ func (m *ClickhouseConfig) Reset()         { *m = ClickhouseConfig{} }
 func (m *ClickhouseConfig) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig) ProtoMessage()    {}
 func (*ClickhouseConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0}
 }
 func (m *ClickhouseConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig.Unmarshal(m, b)
@@ -301,7 +301,7 @@ func (m *ClickhouseConfig_MergeTree) Reset()         { *m = ClickhouseConfig_Mer
 func (m *ClickhouseConfig_MergeTree) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig_MergeTree) ProtoMessage()    {}
 func (*ClickhouseConfig_MergeTree) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 0}
 }
 func (m *ClickhouseConfig_MergeTree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_MergeTree.Unmarshal(m, b)
@@ -351,7 +351,7 @@ func (m *ClickhouseConfig_Compression) Reset()         { *m = ClickhouseConfig_C
 func (m *ClickhouseConfig_Compression) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig_Compression) ProtoMessage()    {}
 func (*ClickhouseConfig_Compression) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 1}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 1}
 }
 func (m *ClickhouseConfig_Compression) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_Compression.Unmarshal(m, b)
@@ -425,7 +425,7 @@ func (m *ClickhouseConfig_ExternalDictionary) Reset()         { *m = ClickhouseC
 func (m *ClickhouseConfig_ExternalDictionary) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig_ExternalDictionary) ProtoMessage()    {}
 func (*ClickhouseConfig_ExternalDictionary) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2}
 }
 func (m *ClickhouseConfig_ExternalDictionary) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary.Unmarshal(m, b)
@@ -747,7 +747,7 @@ func (m *ClickhouseConfig_ExternalDictionary_HttpSource) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_HttpSource) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_HttpSource) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 0}
 }
 func (m *ClickhouseConfig_ExternalDictionary_HttpSource) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_HttpSource.Unmarshal(m, b)
@@ -812,7 +812,7 @@ func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_MysqlSource) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 1}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 1}
 }
 func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_MysqlSource.Unmarshal(m, b)
@@ -914,7 +914,7 @@ func (m *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) String() strin
 }
 func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 1, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 1, 0}
 }
 func (m *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_MysqlSource_Replica.Unmarshal(m, b)
@@ -997,7 +997,7 @@ func (m *ClickhouseConfig_ExternalDictionary_ClickhouseSource) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 2}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 2}
 }
 func (m *ClickhouseConfig_ExternalDictionary_ClickhouseSource) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_ClickhouseSource.Unmarshal(m, b)
@@ -1092,7 +1092,7 @@ func (m *ClickhouseConfig_ExternalDictionary_MongodbSource) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_MongodbSource) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 3}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 3}
 }
 func (m *ClickhouseConfig_ExternalDictionary_MongodbSource) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_MongodbSource.Unmarshal(m, b)
@@ -1174,7 +1174,7 @@ func (m *ClickhouseConfig_ExternalDictionary_Structure) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_Structure) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_Structure) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 4}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 4}
 }
 func (m *ClickhouseConfig_ExternalDictionary_Structure) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_Structure.Unmarshal(m, b)
@@ -1222,7 +1222,7 @@ type ClickhouseConfig_ExternalDictionary_Structure_Attribute struct {
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// Default value for an element without data (for example, an empty string).
 	NullValue string `protobuf:"bytes,3,opt,name=null_value,json=nullValue,proto3" json:"null_value,omitempty"`
-	// Expression, describing the attribute, if appicable.
+	// Expression, describing the attribute, if applicable.
 	Expression string `protobuf:"bytes,4,opt,name=expression,proto3" json:"expression,omitempty"`
 	// Indication of hierarchy support.
 	// Default value: "false".
@@ -1243,7 +1243,7 @@ func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) String() strin
 }
 func (*ClickhouseConfig_ExternalDictionary_Structure_Attribute) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_Structure_Attribute) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 4, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 4, 0}
 }
 func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_Structure_Attribute.Unmarshal(m, b)
@@ -1322,7 +1322,7 @@ func (m *ClickhouseConfig_ExternalDictionary_Structure_Id) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_Structure_Id) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 4, 1}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 4, 1}
 }
 func (m *ClickhouseConfig_ExternalDictionary_Structure_Id) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_Structure_Id.Unmarshal(m, b)
@@ -1366,7 +1366,7 @@ func (m *ClickhouseConfig_ExternalDictionary_Structure_Key) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_Structure_Key) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 4, 2}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 4, 2}
 }
 func (m *ClickhouseConfig_ExternalDictionary_Structure_Key) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_Structure_Key.Unmarshal(m, b)
@@ -1413,7 +1413,7 @@ func (m *ClickhouseConfig_ExternalDictionary_Layout) String() string {
 }
 func (*ClickhouseConfig_ExternalDictionary_Layout) ProtoMessage() {}
 func (*ClickhouseConfig_ExternalDictionary_Layout) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 5}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 5}
 }
 func (m *ClickhouseConfig_ExternalDictionary_Layout) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_Layout.Unmarshal(m, b)
@@ -1463,7 +1463,7 @@ func (m *ClickhouseConfig_ExternalDictionary_Range) Reset() {
 func (m *ClickhouseConfig_ExternalDictionary_Range) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig_ExternalDictionary_Range) ProtoMessage()    {}
 func (*ClickhouseConfig_ExternalDictionary_Range) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 2, 6}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 2, 6}
 }
 func (m *ClickhouseConfig_ExternalDictionary_Range) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_ExternalDictionary_Range.Unmarshal(m, b)
@@ -1512,7 +1512,7 @@ func (m *ClickhouseConfig_GraphiteRollup) Reset()         { *m = ClickhouseConfi
 func (m *ClickhouseConfig_GraphiteRollup) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig_GraphiteRollup) ProtoMessage()    {}
 func (*ClickhouseConfig_GraphiteRollup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 3}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 3}
 }
 func (m *ClickhouseConfig_GraphiteRollup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_GraphiteRollup.Unmarshal(m, b)
@@ -1564,7 +1564,7 @@ func (m *ClickhouseConfig_GraphiteRollup_Pattern) Reset() {
 func (m *ClickhouseConfig_GraphiteRollup_Pattern) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfig_GraphiteRollup_Pattern) ProtoMessage()    {}
 func (*ClickhouseConfig_GraphiteRollup_Pattern) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 3, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 3, 0}
 }
 func (m *ClickhouseConfig_GraphiteRollup_Pattern) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_GraphiteRollup_Pattern.Unmarshal(m, b)
@@ -1623,7 +1623,7 @@ func (m *ClickhouseConfig_GraphiteRollup_Pattern_Retention) String() string {
 }
 func (*ClickhouseConfig_GraphiteRollup_Pattern_Retention) ProtoMessage() {}
 func (*ClickhouseConfig_GraphiteRollup_Pattern_Retention) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{0, 3, 0, 0}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{0, 3, 0, 0}
 }
 func (m *ClickhouseConfig_GraphiteRollup_Pattern_Retention) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfig_GraphiteRollup_Pattern_Retention.Unmarshal(m, b)
@@ -1674,7 +1674,7 @@ func (m *ClickhouseConfigSet) Reset()         { *m = ClickhouseConfigSet{} }
 func (m *ClickhouseConfigSet) String() string { return proto.CompactTextString(m) }
 func (*ClickhouseConfigSet) ProtoMessage()    {}
 func (*ClickhouseConfigSet) Descriptor() ([]byte, []int) {
-	return fileDescriptor_clickhouse_8c73f865e87f9166, []int{1}
+	return fileDescriptor_clickhouse_cf71ea45ca19ec95, []int{1}
 }
 func (m *ClickhouseConfigSet) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClickhouseConfigSet.Unmarshal(m, b)
@@ -1741,10 +1741,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto", fileDescriptor_clickhouse_8c73f865e87f9166)
+	proto.RegisterFile("yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto", fileDescriptor_clickhouse_cf71ea45ca19ec95)
 }
 
-var fileDescriptor_clickhouse_8c73f865e87f9166 = []byte{
+var fileDescriptor_clickhouse_cf71ea45ca19ec95 = []byte{
 	// 1882 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x58, 0x4f, 0x73, 0xdb, 0xc6,
 	0x15, 0x0f, 0x08, 0x92, 0x22, 0x1e, 0x2d, 0x09, 0xd9, 0xd8, 0x0e, 0x8b, 0xc6, 0x8e, 0xa3, 0x71,

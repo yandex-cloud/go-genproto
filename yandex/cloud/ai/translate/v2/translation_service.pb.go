@@ -50,7 +50,7 @@ func (x TranslateRequest_Format) String() string {
 	return proto.EnumName(TranslateRequest_Format_name, int32(x))
 }
 func (TranslateRequest_Format) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{0, 0}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{0, 0}
 }
 
 type TranslateRequest struct {
@@ -66,7 +66,8 @@ type TranslateRequest struct {
 	// The maximum total length of all strings is 10000 characters.
 	Texts []string `protobuf:"bytes,4,rep,name=texts,proto3" json:"texts,omitempty"`
 	// ID of the folder to which you have access.
-	// This field is used for authorization in the service.
+	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
+	// Don't specify this field if you make the request on behalf of a service account.
 	FolderId             string   `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -77,7 +78,7 @@ func (m *TranslateRequest) Reset()         { *m = TranslateRequest{} }
 func (m *TranslateRequest) String() string { return proto.CompactTextString(m) }
 func (*TranslateRequest) ProtoMessage()    {}
 func (*TranslateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{0}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{0}
 }
 func (m *TranslateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TranslateRequest.Unmarshal(m, b)
@@ -144,7 +145,7 @@ func (m *TranslateResponse) Reset()         { *m = TranslateResponse{} }
 func (m *TranslateResponse) String() string { return proto.CompactTextString(m) }
 func (*TranslateResponse) ProtoMessage()    {}
 func (*TranslateResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{1}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{1}
 }
 func (m *TranslateResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TranslateResponse.Unmarshal(m, b)
@@ -180,7 +181,8 @@ type DetectLanguageRequest struct {
 	// To get the list of supported languages, use a [TranslationService.ListLanguages] request.
 	LanguageCodeHints []string `protobuf:"bytes,2,rep,name=language_code_hints,json=languageCodeHints,proto3" json:"language_code_hints,omitempty"`
 	// ID of the folder to which you have access.
-	// This field is used for authorization in the service.
+	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
+	// Don't specify this field if you make the request on behalf of a service account.
 	FolderId             string   `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -191,7 +193,7 @@ func (m *DetectLanguageRequest) Reset()         { *m = DetectLanguageRequest{} }
 func (m *DetectLanguageRequest) String() string { return proto.CompactTextString(m) }
 func (*DetectLanguageRequest) ProtoMessage()    {}
 func (*DetectLanguageRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{2}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{2}
 }
 func (m *DetectLanguageRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DetectLanguageRequest.Unmarshal(m, b)
@@ -246,7 +248,7 @@ func (m *DetectLanguageResponse) Reset()         { *m = DetectLanguageResponse{}
 func (m *DetectLanguageResponse) String() string { return proto.CompactTextString(m) }
 func (*DetectLanguageResponse) ProtoMessage()    {}
 func (*DetectLanguageResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{3}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{3}
 }
 func (m *DetectLanguageResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DetectLanguageResponse.Unmarshal(m, b)
@@ -275,7 +277,8 @@ func (m *DetectLanguageResponse) GetLanguageCode() string {
 
 type ListLanguagesRequest struct {
 	// ID of the folder to which you have access.
-	// This field is used for authorization in the service.
+	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
+	// Don't specify this field if you make the request on behalf of a service account.
 	FolderId             string   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -286,7 +289,7 @@ func (m *ListLanguagesRequest) Reset()         { *m = ListLanguagesRequest{} }
 func (m *ListLanguagesRequest) String() string { return proto.CompactTextString(m) }
 func (*ListLanguagesRequest) ProtoMessage()    {}
 func (*ListLanguagesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{4}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{4}
 }
 func (m *ListLanguagesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListLanguagesRequest.Unmarshal(m, b)
@@ -325,7 +328,7 @@ func (m *ListLanguagesResponse) Reset()         { *m = ListLanguagesResponse{} }
 func (m *ListLanguagesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListLanguagesResponse) ProtoMessage()    {}
 func (*ListLanguagesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_translation_service_a28988e28a7ddfcc, []int{5}
+	return fileDescriptor_translation_service_0e265b15134d76aa, []int{5}
 }
 func (m *ListLanguagesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListLanguagesResponse.Unmarshal(m, b)
@@ -507,10 +510,10 @@ var _TranslationService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/ai/translate/v2/translation_service.proto", fileDescriptor_translation_service_a28988e28a7ddfcc)
+	proto.RegisterFile("yandex/cloud/ai/translate/v2/translation_service.proto", fileDescriptor_translation_service_0e265b15134d76aa)
 }
 
-var fileDescriptor_translation_service_a28988e28a7ddfcc = []byte{
+var fileDescriptor_translation_service_0e265b15134d76aa = []byte{
 	// 656 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4f, 0x4f, 0x13, 0x41,
 	0x1c, 0x75, 0xdb, 0x52, 0xe9, 0x0f, 0xa8, 0x65, 0x2c, 0x58, 0x9b, 0x1a, 0x9b, 0x35, 0x9a, 0x86,
