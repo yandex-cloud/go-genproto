@@ -27,6 +27,7 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type GetResourcePresetRequest struct {
 	// Required. ID of the resource preset to return.
+	// To get the resource preset ID, use a [ResourcePresetService.List] request.
 	ResourcePresetId     string   `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -37,7 +38,7 @@ func (m *GetResourcePresetRequest) Reset()         { *m = GetResourcePresetReque
 func (m *GetResourcePresetRequest) String() string { return proto.CompactTextString(m) }
 func (*GetResourcePresetRequest) ProtoMessage()    {}
 func (*GetResourcePresetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_resource_preset_service_fef892c9e6aff1f4, []int{0}
+	return fileDescriptor_resource_preset_service_1f07805d70cc35f7, []int{0}
 }
 func (m *GetResourcePresetRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetResourcePresetRequest.Unmarshal(m, b)
@@ -65,13 +66,12 @@ func (m *GetResourcePresetRequest) GetResourcePresetId() string {
 }
 
 type ListResourcePresetsRequest struct {
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListResourcePresets requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListResourcePresetsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListResourcePresets
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set [page_token] to the [ListResourcePresetsResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -82,7 +82,7 @@ func (m *ListResourcePresetsRequest) Reset()         { *m = ListResourcePresetsR
 func (m *ListResourcePresetsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListResourcePresetsRequest) ProtoMessage()    {}
 func (*ListResourcePresetsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_resource_preset_service_fef892c9e6aff1f4, []int{1}
+	return fileDescriptor_resource_preset_service_1f07805d70cc35f7, []int{1}
 }
 func (m *ListResourcePresetsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListResourcePresetsRequest.Unmarshal(m, b)
@@ -117,13 +117,12 @@ func (m *ListResourcePresetsRequest) GetPageToken() string {
 }
 
 type ListResourcePresetsResponse struct {
-	// Requested list of resource presets.
+	// List of resource presets.
 	ResourcePresets []*ResourcePreset `protobuf:"bytes,1,rep,name=resource_presets,json=resourcePresets,proto3" json:"resource_presets,omitempty"`
-	// This token allows you to get the next page of results for ListResourcePresets requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListResourcePresets request. Subsequent ListResourcePresets
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListResourcePresetsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListResourcePresetsRequest.page_token] parameter in the next list request. Each subsequent
+	// list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -134,7 +133,7 @@ func (m *ListResourcePresetsResponse) Reset()         { *m = ListResourcePresets
 func (m *ListResourcePresetsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListResourcePresetsResponse) ProtoMessage()    {}
 func (*ListResourcePresetsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_resource_preset_service_fef892c9e6aff1f4, []int{2}
+	return fileDescriptor_resource_preset_service_1f07805d70cc35f7, []int{2}
 }
 func (m *ListResourcePresetsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListResourcePresetsResponse.Unmarshal(m, b)
@@ -187,8 +186,10 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ResourcePresetServiceClient interface {
 	// Returns the specified resource preset.
+	//
+	// To get the list of available resource presets, make a [List] request.
 	Get(ctx context.Context, in *GetResourcePresetRequest, opts ...grpc.CallOption) (*ResourcePreset, error)
-	// Returns the list of available resource presets.
+	// Retrieves the list of available resource presets.
 	List(ctx context.Context, in *ListResourcePresetsRequest, opts ...grpc.CallOption) (*ListResourcePresetsResponse, error)
 }
 
@@ -221,8 +222,10 @@ func (c *resourcePresetServiceClient) List(ctx context.Context, in *ListResource
 // ResourcePresetServiceServer is the server API for ResourcePresetService service.
 type ResourcePresetServiceServer interface {
 	// Returns the specified resource preset.
+	//
+	// To get the list of available resource presets, make a [List] request.
 	Get(context.Context, *GetResourcePresetRequest) (*ResourcePreset, error)
-	// Returns the list of available resource presets.
+	// Retrieves the list of available resource presets.
 	List(context.Context, *ListResourcePresetsRequest) (*ListResourcePresetsResponse, error)
 }
 
@@ -284,10 +287,10 @@ var _ResourcePresetService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/resource_preset_service.proto", fileDescriptor_resource_preset_service_fef892c9e6aff1f4)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/resource_preset_service.proto", fileDescriptor_resource_preset_service_1f07805d70cc35f7)
 }
 
-var fileDescriptor_resource_preset_service_fef892c9e6aff1f4 = []byte{
+var fileDescriptor_resource_preset_service_1f07805d70cc35f7 = []byte{
 	// 462 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0xbd, 0x6e, 0xd4, 0x40,
 	0x10, 0xc7, 0xb5, 0xe7, 0x10, 0x71, 0x8b, 0x50, 0xa2, 0x95, 0x90, 0x2c, 0xf3, 0xa1, 0x93, 0x0b,

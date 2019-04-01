@@ -6,6 +6,10 @@ package stt // import "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/stt/v
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
+import duration "github.com/golang/protobuf/ptypes/duration"
+import _ "github.com/yandex-cloud/go-genproto/yandex/api"
+import operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+import _ "google.golang.org/genproto/googleapis/api/annotations"
 
 import (
 	context "golang.org/x/net/context"
@@ -47,7 +51,91 @@ func (x RecognitionSpec_AudioEncoding) String() string {
 	return proto.EnumName(RecognitionSpec_AudioEncoding_name, int32(x))
 }
 func (RecognitionSpec_AudioEncoding) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{2, 0}
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{6, 0}
+}
+
+type LongRunningRecognitionRequest struct {
+	Config               *RecognitionConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	Audio                *RecognitionAudio  `protobuf:"bytes,2,opt,name=audio,proto3" json:"audio,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *LongRunningRecognitionRequest) Reset()         { *m = LongRunningRecognitionRequest{} }
+func (m *LongRunningRecognitionRequest) String() string { return proto.CompactTextString(m) }
+func (*LongRunningRecognitionRequest) ProtoMessage()    {}
+func (*LongRunningRecognitionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{0}
+}
+func (m *LongRunningRecognitionRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LongRunningRecognitionRequest.Unmarshal(m, b)
+}
+func (m *LongRunningRecognitionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LongRunningRecognitionRequest.Marshal(b, m, deterministic)
+}
+func (dst *LongRunningRecognitionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LongRunningRecognitionRequest.Merge(dst, src)
+}
+func (m *LongRunningRecognitionRequest) XXX_Size() int {
+	return xxx_messageInfo_LongRunningRecognitionRequest.Size(m)
+}
+func (m *LongRunningRecognitionRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_LongRunningRecognitionRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_LongRunningRecognitionRequest proto.InternalMessageInfo
+
+func (m *LongRunningRecognitionRequest) GetConfig() *RecognitionConfig {
+	if m != nil {
+		return m.Config
+	}
+	return nil
+}
+
+func (m *LongRunningRecognitionRequest) GetAudio() *RecognitionAudio {
+	if m != nil {
+		return m.Audio
+	}
+	return nil
+}
+
+type LongRunningRecognitionResponse struct {
+	Chunks               []*SpeechRecognitionResult `protobuf:"bytes,1,rep,name=chunks,proto3" json:"chunks,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
+}
+
+func (m *LongRunningRecognitionResponse) Reset()         { *m = LongRunningRecognitionResponse{} }
+func (m *LongRunningRecognitionResponse) String() string { return proto.CompactTextString(m) }
+func (*LongRunningRecognitionResponse) ProtoMessage()    {}
+func (*LongRunningRecognitionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{1}
+}
+func (m *LongRunningRecognitionResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_LongRunningRecognitionResponse.Unmarshal(m, b)
+}
+func (m *LongRunningRecognitionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_LongRunningRecognitionResponse.Marshal(b, m, deterministic)
+}
+func (dst *LongRunningRecognitionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_LongRunningRecognitionResponse.Merge(dst, src)
+}
+func (m *LongRunningRecognitionResponse) XXX_Size() int {
+	return xxx_messageInfo_LongRunningRecognitionResponse.Size(m)
+}
+func (m *LongRunningRecognitionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_LongRunningRecognitionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_LongRunningRecognitionResponse proto.InternalMessageInfo
+
+func (m *LongRunningRecognitionResponse) GetChunks() []*SpeechRecognitionResult {
+	if m != nil {
+		return m.Chunks
+	}
+	return nil
 }
 
 type StreamingRecognitionRequest struct {
@@ -64,7 +152,7 @@ func (m *StreamingRecognitionRequest) Reset()         { *m = StreamingRecognitio
 func (m *StreamingRecognitionRequest) String() string { return proto.CompactTextString(m) }
 func (*StreamingRecognitionRequest) ProtoMessage()    {}
 func (*StreamingRecognitionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{0}
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{2}
 }
 func (m *StreamingRecognitionRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StreamingRecognitionRequest.Unmarshal(m, b)
@@ -191,6 +279,189 @@ func _StreamingRecognitionRequest_OneofSizer(msg proto.Message) (n int) {
 	return n
 }
 
+type StreamingRecognitionResponse struct {
+	Chunks               []*SpeechRecognitionChunk `protobuf:"bytes,1,rep,name=chunks,proto3" json:"chunks,omitempty"`
+	EndOfSingleUtterance bool                      `protobuf:"varint,2,opt,name=end_of_single_utterance,json=endOfSingleUtterance,proto3" json:"end_of_single_utterance,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
+}
+
+func (m *StreamingRecognitionResponse) Reset()         { *m = StreamingRecognitionResponse{} }
+func (m *StreamingRecognitionResponse) String() string { return proto.CompactTextString(m) }
+func (*StreamingRecognitionResponse) ProtoMessage()    {}
+func (*StreamingRecognitionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{3}
+}
+func (m *StreamingRecognitionResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_StreamingRecognitionResponse.Unmarshal(m, b)
+}
+func (m *StreamingRecognitionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StreamingRecognitionResponse.Marshal(b, m, deterministic)
+}
+func (dst *StreamingRecognitionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StreamingRecognitionResponse.Merge(dst, src)
+}
+func (m *StreamingRecognitionResponse) XXX_Size() int {
+	return xxx_messageInfo_StreamingRecognitionResponse.Size(m)
+}
+func (m *StreamingRecognitionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_StreamingRecognitionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_StreamingRecognitionResponse proto.InternalMessageInfo
+
+func (m *StreamingRecognitionResponse) GetChunks() []*SpeechRecognitionChunk {
+	if m != nil {
+		return m.Chunks
+	}
+	return nil
+}
+
+func (m *StreamingRecognitionResponse) GetEndOfSingleUtterance() bool {
+	if m != nil {
+		return m.EndOfSingleUtterance
+	}
+	return false
+}
+
+type RecognitionAudio struct {
+	// Types that are valid to be assigned to AudioSource:
+	//	*RecognitionAudio_Content
+	//	*RecognitionAudio_Uri
+	AudioSource          isRecognitionAudio_AudioSource `protobuf_oneof:"audio_source"`
+	XXX_NoUnkeyedLiteral struct{}                       `json:"-"`
+	XXX_unrecognized     []byte                         `json:"-"`
+	XXX_sizecache        int32                          `json:"-"`
+}
+
+func (m *RecognitionAudio) Reset()         { *m = RecognitionAudio{} }
+func (m *RecognitionAudio) String() string { return proto.CompactTextString(m) }
+func (*RecognitionAudio) ProtoMessage()    {}
+func (*RecognitionAudio) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{4}
+}
+func (m *RecognitionAudio) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RecognitionAudio.Unmarshal(m, b)
+}
+func (m *RecognitionAudio) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RecognitionAudio.Marshal(b, m, deterministic)
+}
+func (dst *RecognitionAudio) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RecognitionAudio.Merge(dst, src)
+}
+func (m *RecognitionAudio) XXX_Size() int {
+	return xxx_messageInfo_RecognitionAudio.Size(m)
+}
+func (m *RecognitionAudio) XXX_DiscardUnknown() {
+	xxx_messageInfo_RecognitionAudio.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RecognitionAudio proto.InternalMessageInfo
+
+type isRecognitionAudio_AudioSource interface {
+	isRecognitionAudio_AudioSource()
+}
+
+type RecognitionAudio_Content struct {
+	Content []byte `protobuf:"bytes,1,opt,name=content,proto3,oneof"`
+}
+
+type RecognitionAudio_Uri struct {
+	Uri string `protobuf:"bytes,2,opt,name=uri,proto3,oneof"`
+}
+
+func (*RecognitionAudio_Content) isRecognitionAudio_AudioSource() {}
+
+func (*RecognitionAudio_Uri) isRecognitionAudio_AudioSource() {}
+
+func (m *RecognitionAudio) GetAudioSource() isRecognitionAudio_AudioSource {
+	if m != nil {
+		return m.AudioSource
+	}
+	return nil
+}
+
+func (m *RecognitionAudio) GetContent() []byte {
+	if x, ok := m.GetAudioSource().(*RecognitionAudio_Content); ok {
+		return x.Content
+	}
+	return nil
+}
+
+func (m *RecognitionAudio) GetUri() string {
+	if x, ok := m.GetAudioSource().(*RecognitionAudio_Uri); ok {
+		return x.Uri
+	}
+	return ""
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*RecognitionAudio) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _RecognitionAudio_OneofMarshaler, _RecognitionAudio_OneofUnmarshaler, _RecognitionAudio_OneofSizer, []interface{}{
+		(*RecognitionAudio_Content)(nil),
+		(*RecognitionAudio_Uri)(nil),
+	}
+}
+
+func _RecognitionAudio_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*RecognitionAudio)
+	// audio_source
+	switch x := m.AudioSource.(type) {
+	case *RecognitionAudio_Content:
+		b.EncodeVarint(1<<3 | proto.WireBytes)
+		b.EncodeRawBytes(x.Content)
+	case *RecognitionAudio_Uri:
+		b.EncodeVarint(2<<3 | proto.WireBytes)
+		b.EncodeStringBytes(x.Uri)
+	case nil:
+	default:
+		return fmt.Errorf("RecognitionAudio.AudioSource has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _RecognitionAudio_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*RecognitionAudio)
+	switch tag {
+	case 1: // audio_source.content
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeRawBytes(true)
+		m.AudioSource = &RecognitionAudio_Content{x}
+		return true, err
+	case 2: // audio_source.uri
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeStringBytes()
+		m.AudioSource = &RecognitionAudio_Uri{x}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+func _RecognitionAudio_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*RecognitionAudio)
+	// audio_source
+	switch x := m.AudioSource.(type) {
+	case *RecognitionAudio_Content:
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(len(x.Content)))
+		n += len(x.Content)
+	case *RecognitionAudio_Uri:
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(len(x.Uri)))
+		n += len(x.Uri)
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
+}
+
 type RecognitionConfig struct {
 	Specification        *RecognitionSpec `protobuf:"bytes,1,opt,name=specification,proto3" json:"specification,omitempty"`
 	FolderId             string           `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -203,7 +474,7 @@ func (m *RecognitionConfig) Reset()         { *m = RecognitionConfig{} }
 func (m *RecognitionConfig) String() string { return proto.CompactTextString(m) }
 func (*RecognitionConfig) ProtoMessage()    {}
 func (*RecognitionConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{1}
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{5}
 }
 func (m *RecognitionConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RecognitionConfig.Unmarshal(m, b)
@@ -247,8 +518,11 @@ type RecognitionSpec struct {
 	Model           string `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`
 	// If set true, tentative hypotheses may be returned as they become available (final=false flag)
 	// If false or omitted, only final=true result(s) are returned.
-	PartialResults       bool     `protobuf:"varint,7,opt,name=partial_results,json=partialResults,proto3" json:"partial_results,omitempty"`
-	SingleUtterance      bool     `protobuf:"varint,8,opt,name=single_utterance,json=singleUtterance,proto3" json:"single_utterance,omitempty"`
+	// Makes sense only for StreamingRecognize requests.
+	PartialResults  bool `protobuf:"varint,7,opt,name=partial_results,json=partialResults,proto3" json:"partial_results,omitempty"`
+	SingleUtterance bool `protobuf:"varint,8,opt,name=single_utterance,json=singleUtterance,proto3" json:"single_utterance,omitempty"`
+	// Used only for long running recognize.
+	AudioChannelCount    int64    `protobuf:"varint,9,opt,name=audio_channel_count,json=audioChannelCount,proto3" json:"audio_channel_count,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -258,7 +532,7 @@ func (m *RecognitionSpec) Reset()         { *m = RecognitionSpec{} }
 func (m *RecognitionSpec) String() string { return proto.CompactTextString(m) }
 func (*RecognitionSpec) ProtoMessage()    {}
 func (*RecognitionSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{2}
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{6}
 }
 func (m *RecognitionSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RecognitionSpec.Unmarshal(m, b)
@@ -327,50 +601,11 @@ func (m *RecognitionSpec) GetSingleUtterance() bool {
 	return false
 }
 
-type StreamingRecognitionResponse struct {
-	Chunks               []*SpeechRecognitionChunk `protobuf:"bytes,1,rep,name=chunks,proto3" json:"chunks,omitempty"`
-	EndOfSingleUtterance bool                      `protobuf:"varint,2,opt,name=end_of_single_utterance,json=endOfSingleUtterance,proto3" json:"end_of_single_utterance,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
-	XXX_unrecognized     []byte                    `json:"-"`
-	XXX_sizecache        int32                     `json:"-"`
-}
-
-func (m *StreamingRecognitionResponse) Reset()         { *m = StreamingRecognitionResponse{} }
-func (m *StreamingRecognitionResponse) String() string { return proto.CompactTextString(m) }
-func (*StreamingRecognitionResponse) ProtoMessage()    {}
-func (*StreamingRecognitionResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{3}
-}
-func (m *StreamingRecognitionResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StreamingRecognitionResponse.Unmarshal(m, b)
-}
-func (m *StreamingRecognitionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StreamingRecognitionResponse.Marshal(b, m, deterministic)
-}
-func (dst *StreamingRecognitionResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StreamingRecognitionResponse.Merge(dst, src)
-}
-func (m *StreamingRecognitionResponse) XXX_Size() int {
-	return xxx_messageInfo_StreamingRecognitionResponse.Size(m)
-}
-func (m *StreamingRecognitionResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_StreamingRecognitionResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_StreamingRecognitionResponse proto.InternalMessageInfo
-
-func (m *StreamingRecognitionResponse) GetChunks() []*SpeechRecognitionChunk {
+func (m *RecognitionSpec) GetAudioChannelCount() int64 {
 	if m != nil {
-		return m.Chunks
+		return m.AudioChannelCount
 	}
-	return nil
-}
-
-func (m *StreamingRecognitionResponse) GetEndOfSingleUtterance() bool {
-	if m != nil {
-		return m.EndOfSingleUtterance
-	}
-	return false
+	return 0
 }
 
 type SpeechRecognitionChunk struct {
@@ -385,7 +620,7 @@ func (m *SpeechRecognitionChunk) Reset()         { *m = SpeechRecognitionChunk{}
 func (m *SpeechRecognitionChunk) String() string { return proto.CompactTextString(m) }
 func (*SpeechRecognitionChunk) ProtoMessage()    {}
 func (*SpeechRecognitionChunk) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{4}
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{7}
 }
 func (m *SpeechRecognitionChunk) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SpeechRecognitionChunk.Unmarshal(m, b)
@@ -419,19 +654,66 @@ func (m *SpeechRecognitionChunk) GetFinal() bool {
 	return false
 }
 
+type SpeechRecognitionResult struct {
+	Alternatives         []*SpeechRecognitionAlternative `protobuf:"bytes,1,rep,name=alternatives,proto3" json:"alternatives,omitempty"`
+	ChannelTag           int64                           `protobuf:"varint,2,opt,name=channel_tag,json=channelTag,proto3" json:"channel_tag,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                        `json:"-"`
+	XXX_unrecognized     []byte                          `json:"-"`
+	XXX_sizecache        int32                           `json:"-"`
+}
+
+func (m *SpeechRecognitionResult) Reset()         { *m = SpeechRecognitionResult{} }
+func (m *SpeechRecognitionResult) String() string { return proto.CompactTextString(m) }
+func (*SpeechRecognitionResult) ProtoMessage()    {}
+func (*SpeechRecognitionResult) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{8}
+}
+func (m *SpeechRecognitionResult) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SpeechRecognitionResult.Unmarshal(m, b)
+}
+func (m *SpeechRecognitionResult) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SpeechRecognitionResult.Marshal(b, m, deterministic)
+}
+func (dst *SpeechRecognitionResult) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SpeechRecognitionResult.Merge(dst, src)
+}
+func (m *SpeechRecognitionResult) XXX_Size() int {
+	return xxx_messageInfo_SpeechRecognitionResult.Size(m)
+}
+func (m *SpeechRecognitionResult) XXX_DiscardUnknown() {
+	xxx_messageInfo_SpeechRecognitionResult.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SpeechRecognitionResult proto.InternalMessageInfo
+
+func (m *SpeechRecognitionResult) GetAlternatives() []*SpeechRecognitionAlternative {
+	if m != nil {
+		return m.Alternatives
+	}
+	return nil
+}
+
+func (m *SpeechRecognitionResult) GetChannelTag() int64 {
+	if m != nil {
+		return m.ChannelTag
+	}
+	return 0
+}
+
 type SpeechRecognitionAlternative struct {
-	Text                 string   `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	Confidence           float32  `protobuf:"fixed32,2,opt,name=confidence,proto3" json:"confidence,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Text                 string      `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Confidence           float32     `protobuf:"fixed32,2,opt,name=confidence,proto3" json:"confidence,omitempty"`
+	Words                []*WordInfo `protobuf:"bytes,3,rep,name=words,proto3" json:"words,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
 func (m *SpeechRecognitionAlternative) Reset()         { *m = SpeechRecognitionAlternative{} }
 func (m *SpeechRecognitionAlternative) String() string { return proto.CompactTextString(m) }
 func (*SpeechRecognitionAlternative) ProtoMessage()    {}
 func (*SpeechRecognitionAlternative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stt_service_2e0ece0966edb486, []int{5}
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{9}
 }
 func (m *SpeechRecognitionAlternative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SpeechRecognitionAlternative.Unmarshal(m, b)
@@ -465,13 +747,87 @@ func (m *SpeechRecognitionAlternative) GetConfidence() float32 {
 	return 0
 }
 
+func (m *SpeechRecognitionAlternative) GetWords() []*WordInfo {
+	if m != nil {
+		return m.Words
+	}
+	return nil
+}
+
+type WordInfo struct {
+	StartTime            *duration.Duration `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime              *duration.Duration `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	Word                 string             `protobuf:"bytes,3,opt,name=word,proto3" json:"word,omitempty"`
+	Confidence           float32            `protobuf:"fixed32,4,opt,name=confidence,proto3" json:"confidence,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *WordInfo) Reset()         { *m = WordInfo{} }
+func (m *WordInfo) String() string { return proto.CompactTextString(m) }
+func (*WordInfo) ProtoMessage()    {}
+func (*WordInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stt_service_0e91db4644c00736, []int{10}
+}
+func (m *WordInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_WordInfo.Unmarshal(m, b)
+}
+func (m *WordInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_WordInfo.Marshal(b, m, deterministic)
+}
+func (dst *WordInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WordInfo.Merge(dst, src)
+}
+func (m *WordInfo) XXX_Size() int {
+	return xxx_messageInfo_WordInfo.Size(m)
+}
+func (m *WordInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_WordInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_WordInfo proto.InternalMessageInfo
+
+func (m *WordInfo) GetStartTime() *duration.Duration {
+	if m != nil {
+		return m.StartTime
+	}
+	return nil
+}
+
+func (m *WordInfo) GetEndTime() *duration.Duration {
+	if m != nil {
+		return m.EndTime
+	}
+	return nil
+}
+
+func (m *WordInfo) GetWord() string {
+	if m != nil {
+		return m.Word
+	}
+	return ""
+}
+
+func (m *WordInfo) GetConfidence() float32 {
+	if m != nil {
+		return m.Confidence
+	}
+	return 0
+}
+
 func init() {
+	proto.RegisterType((*LongRunningRecognitionRequest)(nil), "yandex.cloud.ai.stt.v2.LongRunningRecognitionRequest")
+	proto.RegisterType((*LongRunningRecognitionResponse)(nil), "yandex.cloud.ai.stt.v2.LongRunningRecognitionResponse")
 	proto.RegisterType((*StreamingRecognitionRequest)(nil), "yandex.cloud.ai.stt.v2.StreamingRecognitionRequest")
+	proto.RegisterType((*StreamingRecognitionResponse)(nil), "yandex.cloud.ai.stt.v2.StreamingRecognitionResponse")
+	proto.RegisterType((*RecognitionAudio)(nil), "yandex.cloud.ai.stt.v2.RecognitionAudio")
 	proto.RegisterType((*RecognitionConfig)(nil), "yandex.cloud.ai.stt.v2.RecognitionConfig")
 	proto.RegisterType((*RecognitionSpec)(nil), "yandex.cloud.ai.stt.v2.RecognitionSpec")
-	proto.RegisterType((*StreamingRecognitionResponse)(nil), "yandex.cloud.ai.stt.v2.StreamingRecognitionResponse")
 	proto.RegisterType((*SpeechRecognitionChunk)(nil), "yandex.cloud.ai.stt.v2.SpeechRecognitionChunk")
+	proto.RegisterType((*SpeechRecognitionResult)(nil), "yandex.cloud.ai.stt.v2.SpeechRecognitionResult")
 	proto.RegisterType((*SpeechRecognitionAlternative)(nil), "yandex.cloud.ai.stt.v2.SpeechRecognitionAlternative")
+	proto.RegisterType((*WordInfo)(nil), "yandex.cloud.ai.stt.v2.WordInfo")
 	proto.RegisterEnum("yandex.cloud.ai.stt.v2.RecognitionSpec_AudioEncoding", RecognitionSpec_AudioEncoding_name, RecognitionSpec_AudioEncoding_value)
 }
 
@@ -487,6 +843,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SttServiceClient interface {
+	LongRunningRecognize(ctx context.Context, in *LongRunningRecognitionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	StreamingRecognize(ctx context.Context, opts ...grpc.CallOption) (SttService_StreamingRecognizeClient, error)
 }
 
@@ -496,6 +853,15 @@ type sttServiceClient struct {
 
 func NewSttServiceClient(cc *grpc.ClientConn) SttServiceClient {
 	return &sttServiceClient{cc}
+}
+
+func (c *sttServiceClient) LongRunningRecognize(ctx context.Context, in *LongRunningRecognitionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.ai.stt.v2.SttService/LongRunningRecognize", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *sttServiceClient) StreamingRecognize(ctx context.Context, opts ...grpc.CallOption) (SttService_StreamingRecognizeClient, error) {
@@ -531,11 +897,30 @@ func (x *sttServiceStreamingRecognizeClient) Recv() (*StreamingRecognitionRespon
 
 // SttServiceServer is the server API for SttService service.
 type SttServiceServer interface {
+	LongRunningRecognize(context.Context, *LongRunningRecognitionRequest) (*operation.Operation, error)
 	StreamingRecognize(SttService_StreamingRecognizeServer) error
 }
 
 func RegisterSttServiceServer(s *grpc.Server, srv SttServiceServer) {
 	s.RegisterService(&_SttService_serviceDesc, srv)
+}
+
+func _SttService_LongRunningRecognize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LongRunningRecognitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SttServiceServer).LongRunningRecognize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.ai.stt.v2.SttService/LongRunningRecognize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SttServiceServer).LongRunningRecognize(ctx, req.(*LongRunningRecognitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _SttService_StreamingRecognize_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -567,7 +952,12 @@ func (x *sttServiceStreamingRecognizeServer) Recv() (*StreamingRecognitionReques
 var _SttService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "yandex.cloud.ai.stt.v2.SttService",
 	HandlerType: (*SttServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "LongRunningRecognize",
+			Handler:    _SttService_LongRunningRecognize_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "StreamingRecognize",
@@ -580,53 +970,74 @@ var _SttService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/ai/stt/v2/stt_service.proto", fileDescriptor_stt_service_2e0ece0966edb486)
+	proto.RegisterFile("yandex/cloud/ai/stt/v2/stt_service.proto", fileDescriptor_stt_service_0e91db4644c00736)
 }
 
-var fileDescriptor_stt_service_2e0ece0966edb486 = []byte{
-	// 689 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x94, 0xcf, 0x4f, 0xdb, 0x48,
-	0x14, 0xc7, 0xe3, 0x04, 0xd8, 0x30, 0x24, 0x24, 0xcc, 0x22, 0xd6, 0x02, 0x84, 0xa2, 0xac, 0x56,
-	0x84, 0x95, 0x70, 0x76, 0x03, 0xec, 0x65, 0xa5, 0xd5, 0x86, 0x10, 0x20, 0x52, 0x49, 0xd0, 0x58,
-	0x91, 0xaa, 0xaa, 0xd2, 0x68, 0xb0, 0x9f, 0x9d, 0x51, 0x9d, 0x19, 0xd7, 0x1e, 0x47, 0xc0, 0xa5,
-	0xa7, 0x4a, 0xfd, 0x03, 0x7a, 0x6d, 0x8f, 0xfd, 0x3b, 0x2b, 0x7b, 0x92, 0x96, 0x1f, 0xa1, 0xa2,
-	0x27, 0x7b, 0x3e, 0x9e, 0xef, 0x9b, 0xef, 0x7b, 0x6f, 0xfc, 0x50, 0xe3, 0x86, 0x09, 0x17, 0xae,
-	0x9b, 0x4e, 0x20, 0x13, 0xb7, 0xc9, 0x78, 0x33, 0x56, 0xaa, 0x39, 0x69, 0xa5, 0x0f, 0x1a, 0x43,
-	0x34, 0xe1, 0x0e, 0x58, 0x61, 0x24, 0x95, 0xc4, 0x1b, 0x7a, 0xa7, 0x95, 0xed, 0xb4, 0x18, 0xb7,
-	0x62, 0xa5, 0xac, 0x49, 0xab, 0xfe, 0xd9, 0x40, 0x5b, 0xb6, 0x8a, 0x80, 0x8d, 0xb9, 0xf0, 0x09,
-	0x38, 0xd2, 0x17, 0x5c, 0x71, 0x29, 0x08, 0xbc, 0x4d, 0x20, 0x56, 0xb8, 0x83, 0x96, 0x1c, 0x29,
-	0x3c, 0xee, 0x9b, 0x46, 0xcd, 0x68, 0xac, 0xb4, 0xf6, 0xac, 0xf9, 0x81, 0xac, 0x3b, 0xda, 0x4e,
-	0x26, 0x38, 0xcf, 0x91, 0xa9, 0x14, 0xff, 0x81, 0xca, 0x2c, 0x71, 0xb9, 0xa4, 0x8e, 0x14, 0x0a,
-	0x84, 0x32, 0xf3, 0x35, 0xa3, 0x51, 0x3a, 0xcf, 0x91, 0x52, 0x86, 0x3b, 0x9a, 0x1e, 0xff, 0x8a,
-	0xd6, 0xe2, 0x99, 0x15, 0x1a, 0x69, 0x03, 0xf5, 0x77, 0x68, 0xed, 0x51, 0x68, 0x7c, 0x81, 0xca,
-	0x71, 0x08, 0x0e, 0xf7, 0xb8, 0xc3, 0x52, 0x3c, 0x35, 0xb7, 0xfb, 0x0c, 0x73, 0x76, 0x08, 0x0e,
-	0xb9, 0xaf, 0xc6, 0x5b, 0x68, 0xd9, 0x93, 0x81, 0x0b, 0x11, 0xe5, 0x6e, 0xe6, 0x6d, 0x99, 0x14,
-	0x35, 0xe8, 0xb9, 0xf5, 0x2f, 0x05, 0x54, 0x79, 0xa0, 0xc7, 0xaf, 0xd1, 0xaa, 0x4e, 0x08, 0x84,
-	0x23, 0x5d, 0x2e, 0x74, 0x75, 0x56, 0x5b, 0x47, 0xcf, 0x34, 0x60, 0xb5, 0x53, 0x75, 0x77, 0x2a,
-	0x26, 0xba, 0x3a, 0xb3, 0x25, 0xfe, 0x13, 0xad, 0xc5, 0x6c, 0x1c, 0x06, 0x40, 0x23, 0xa6, 0x80,
-	0x8e, 0x20, 0x52, 0xb7, 0x99, 0xad, 0x02, 0xa9, 0xe8, 0x0f, 0x84, 0x29, 0x38, 0x4f, 0x31, 0xfe,
-	0x1d, 0x95, 0x03, 0x26, 0xfc, 0x84, 0xf9, 0x40, 0x1d, 0xe9, 0x82, 0x59, 0xc8, 0xec, 0x97, 0x66,
-	0xb0, 0x23, 0x5d, 0xc0, 0x7b, 0xa8, 0x1a, 0x46, 0xd2, 0x63, 0x82, 0xab, 0x1b, 0xea, 0xf1, 0x40,
-	0x41, 0x64, 0x2e, 0xd4, 0x8c, 0x46, 0x91, 0x54, 0xbe, 0xf1, 0xd3, 0x0c, 0xe3, 0x75, 0xb4, 0x38,
-	0x96, 0x2e, 0x04, 0xe6, 0x62, 0x16, 0x47, 0x2f, 0xf0, 0x2e, 0xaa, 0x84, 0x2c, 0x52, 0x9c, 0x05,
-	0x34, 0x82, 0x38, 0x09, 0x54, 0x6c, 0xfe, 0x92, 0xe9, 0x57, 0xa7, 0x98, 0x68, 0x9a, 0x9e, 0x14,
-	0x73, 0xe1, 0x07, 0x40, 0x13, 0xa5, 0x20, 0x62, 0xc2, 0x01, 0xb3, 0xa8, 0x4f, 0xd2, 0x7c, 0x38,
-	0xc3, 0xf5, 0x01, 0x2a, 0xdf, 0xab, 0x02, 0xde, 0x41, 0x9b, 0xed, 0xe1, 0x49, 0x6f, 0x40, 0xbb,
-	0xfd, 0xce, 0xe0, 0xa4, 0xd7, 0x3f, 0xa3, 0xc3, 0xbe, 0x7d, 0xd9, 0xed, 0xf4, 0x4e, 0x7b, 0xdd,
-	0x93, 0x6a, 0x0e, 0x57, 0x51, 0xe9, 0x45, 0xaf, 0xdf, 0x6d, 0x93, 0xbf, 0xff, 0xa1, 0x97, 0x9d,
-	0x8b, 0xaa, 0x81, 0x4b, 0xa8, 0x38, 0x38, 0x3b, 0xa3, 0x83, 0xcb, 0xa1, 0x5d, 0xcd, 0xd7, 0x3f,
-	0x19, 0x68, 0x7b, 0xfe, 0x55, 0x8e, 0x43, 0x29, 0x62, 0xc0, 0xa7, 0x68, 0xc9, 0x19, 0x25, 0xe2,
-	0x4d, 0x6c, 0x1a, 0xb5, 0x42, 0x63, 0xa5, 0x65, 0x3d, 0xd5, 0x2d, 0x3b, 0x04, 0x70, 0x46, 0x77,
-	0xaf, 0x5d, 0x2a, 0x23, 0x53, 0x35, 0x3e, 0x42, 0xbf, 0x81, 0x70, 0xa9, 0xf4, 0xe8, 0xa3, 0x5c,
-	0xf3, 0x59, 0xae, 0xeb, 0x20, 0xdc, 0x81, 0x67, 0x3f, 0x48, 0xf8, 0x83, 0x81, 0x36, 0xe6, 0x47,
-	0xc6, 0x2f, 0x51, 0x89, 0xa5, 0xe5, 0x17, 0x4c, 0xf1, 0x09, 0xcc, 0xfc, 0x1d, 0x3e, 0xdb, 0x5f,
-	0xfb, 0xbb, 0x98, 0xdc, 0x8b, 0x94, 0xf6, 0xd3, 0xe3, 0x82, 0x05, 0x53, 0x67, 0x7a, 0x51, 0x27,
-	0x68, 0xfb, 0x47, 0x31, 0x30, 0x46, 0x0b, 0x0a, 0xae, 0x55, 0x76, 0xab, 0x97, 0x49, 0xf6, 0x8e,
-	0x77, 0x10, 0xca, 0x7e, 0x67, 0x17, 0x66, 0x89, 0xe6, 0xc9, 0x1d, 0xd2, 0xfa, 0x68, 0x20, 0x64,
-	0x2b, 0x65, 0xeb, 0xb1, 0x83, 0xdf, 0x1b, 0x08, 0x3f, 0xec, 0xc6, 0x2d, 0xe0, 0x83, 0x27, 0x73,
-	0x7a, 0x7a, 0x08, 0x6d, 0x1e, 0xfe, 0x9c, 0x48, 0xb7, 0xbb, 0x9e, 0x6b, 0x18, 0x7f, 0x19, 0xc7,
-	0xff, 0xbf, 0xfa, 0xcf, 0xe7, 0x6a, 0x94, 0x5c, 0x59, 0x8e, 0x1c, 0x37, 0x75, 0x9c, 0x7d, 0x3d,
-	0x2f, 0x7d, 0xb9, 0xef, 0x83, 0xc8, 0xe6, 0x63, 0x73, 0xfe, 0x20, 0xfd, 0x37, 0x56, 0xea, 0x6a,
-	0x29, 0xdb, 0x71, 0xf0, 0x35, 0x00, 0x00, 0xff, 0xff, 0x76, 0x4b, 0xe2, 0xc8, 0x6d, 0x05, 0x00,
-	0x00,
+var fileDescriptor_stt_service_0e91db4644c00736 = []byte{
+	// 1039 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x56, 0xdf, 0x6e, 0x1b, 0xc5,
+	0x17, 0xce, 0xda, 0xf9, 0xe3, 0x9c, 0x38, 0x89, 0x33, 0x8d, 0x5a, 0xff, 0xdc, 0xfe, 0x42, 0xd8,
+	0x0a, 0xea, 0x46, 0xea, 0x1a, 0xdc, 0xb4, 0x42, 0x20, 0x55, 0x24, 0xce, 0x3f, 0x4b, 0x6d, 0x1c,
+	0x8d, 0x1b, 0x81, 0x10, 0xd2, 0x6a, 0xb2, 0x7b, 0xbc, 0x19, 0xb1, 0x9e, 0x31, 0xbb, 0xb3, 0xa1,
+	0xcd, 0x0d, 0x12, 0x12, 0x12, 0xe2, 0x16, 0x6e, 0xe1, 0x82, 0x07, 0xe0, 0x82, 0x67, 0xe0, 0x09,
+	0x40, 0xe2, 0x86, 0x5b, 0x1e, 0x04, 0xed, 0xcc, 0x6e, 0x5a, 0x3b, 0x76, 0x1b, 0x90, 0xb8, 0xb2,
+	0xe7, 0x9c, 0xf3, 0x9d, 0xfd, 0xce, 0x37, 0x73, 0xe6, 0x0c, 0xd4, 0x9f, 0x33, 0xe1, 0xe3, 0xb3,
+	0x86, 0x17, 0xca, 0xc4, 0x6f, 0x30, 0xde, 0x88, 0x95, 0x6a, 0x9c, 0x35, 0xd3, 0x1f, 0x37, 0xc6,
+	0xe8, 0x8c, 0x7b, 0xe8, 0x0c, 0x22, 0xa9, 0x24, 0xb9, 0x6e, 0x22, 0x1d, 0x1d, 0xe9, 0x30, 0xee,
+	0xc4, 0x4a, 0x39, 0x67, 0xcd, 0xda, 0xad, 0x40, 0xca, 0x20, 0xc4, 0x06, 0x1b, 0xf0, 0x06, 0x13,
+	0x42, 0x2a, 0xa6, 0xb8, 0x14, 0xb1, 0x41, 0xd5, 0xd6, 0x32, 0xaf, 0x5e, 0x9d, 0x24, 0xbd, 0x86,
+	0x9f, 0x44, 0x3a, 0x20, 0xf3, 0xd7, 0xb2, 0xef, 0xa7, 0x68, 0x39, 0xc0, 0x21, 0xdf, 0xdb, 0x43,
+	0xdc, 0x2e, 0xbc, 0xa3, 0x71, 0xf6, 0x4f, 0x16, 0xfc, 0xff, 0xb1, 0x14, 0x01, 0x4d, 0x84, 0xe0,
+	0x22, 0xa0, 0xe8, 0xc9, 0x40, 0xf0, 0x34, 0x80, 0xe2, 0xe7, 0x09, 0xc6, 0x8a, 0x6c, 0xc1, 0xac,
+	0x27, 0x45, 0x8f, 0x07, 0x55, 0x6b, 0xdd, 0xaa, 0x2f, 0x34, 0xef, 0x3a, 0xe3, 0x8b, 0x71, 0x5e,
+	0xc2, 0xb6, 0x34, 0x80, 0x66, 0x40, 0xf2, 0x08, 0x66, 0x58, 0xe2, 0x73, 0x59, 0x2d, 0xe8, 0x0c,
+	0xf5, 0x2b, 0x64, 0xd8, 0x4a, 0xe3, 0xa9, 0x81, 0xd9, 0x1c, 0xd6, 0x26, 0x71, 0x8c, 0x07, 0x52,
+	0xc4, 0x48, 0xf6, 0x61, 0xd6, 0x3b, 0x4d, 0xc4, 0x67, 0x71, 0xd5, 0x5a, 0x2f, 0xd6, 0x17, 0x9a,
+	0x8d, 0x49, 0x9f, 0xe8, 0x0e, 0x10, 0xbd, 0xd3, 0xe1, 0x14, 0x49, 0xa8, 0x68, 0x06, 0xb7, 0x7f,
+	0xb4, 0xe0, 0x66, 0x57, 0x45, 0xc8, 0xfa, 0xe3, 0xd5, 0x68, 0xfd, 0x6b, 0x35, 0x0e, 0xa6, 0x2e,
+	0xf4, 0x78, 0x0b, 0x16, 0x75, 0x61, 0xae, 0x27, 0x85, 0x42, 0xa1, 0xb4, 0x2e, 0xe5, 0x83, 0x29,
+	0x5a, 0xd6, 0xe6, 0x96, 0xb1, 0x6e, 0x5f, 0x83, 0x95, 0x38, 0xa7, 0xe2, 0x46, 0x86, 0x80, 0xfd,
+	0x83, 0x05, 0xb7, 0xc6, 0x13, 0xcc, 0xa4, 0xd8, 0x1b, 0x91, 0xc2, 0xb9, 0xb2, 0x14, 0xad, 0x14,
+	0x96, 0x2b, 0x41, 0x1e, 0xc0, 0x0d, 0x14, 0xbe, 0x2b, 0x7b, 0x6e, 0xcc, 0x45, 0x10, 0xa2, 0x9b,
+	0x28, 0x85, 0x11, 0x13, 0x1e, 0x6a, 0xba, 0x25, 0xba, 0x8a, 0xc2, 0xef, 0xf4, 0xba, 0xda, 0x79,
+	0x9c, 0xfb, 0x6c, 0x0a, 0x95, 0xd1, 0x6d, 0x24, 0x35, 0x98, 0xcb, 0x2b, 0xb5, 0xb2, 0x4a, 0x73,
+	0x03, 0x21, 0x50, 0x4c, 0x22, 0xae, 0x53, 0xce, 0x1f, 0x4c, 0xd1, 0x74, 0xb1, 0xbd, 0x04, 0x46,
+	0x08, 0x37, 0x96, 0x49, 0xe4, 0xa1, 0xfd, 0x25, 0xac, 0x5c, 0x92, 0x93, 0x3c, 0x81, 0xc5, 0x78,
+	0x80, 0x1e, 0xef, 0x71, 0x4f, 0x1f, 0xe8, 0x6c, 0x43, 0xee, 0x5c, 0x61, 0x43, 0xba, 0x03, 0xf4,
+	0xe8, 0x30, 0x9a, 0xdc, 0x84, 0xf9, 0x9e, 0x0c, 0x7d, 0x8c, 0x5c, 0xee, 0x1b, 0x36, 0xb4, 0x64,
+	0x0c, 0x6d, 0xdf, 0xfe, 0xa3, 0x08, 0xcb, 0x23, 0x78, 0xf2, 0x29, 0x2c, 0x19, 0x92, 0x28, 0x3c,
+	0xe9, 0x73, 0x61, 0x4e, 0xc4, 0x52, 0xf3, 0xc1, 0x15, 0x09, 0x38, 0x5a, 0x9b, 0xdd, 0x0c, 0x4c,
+	0xcd, 0x89, 0xc8, 0x97, 0x64, 0x03, 0x56, 0x62, 0xd6, 0x1f, 0x84, 0xe8, 0x46, 0x4c, 0xa1, 0x7b,
+	0x8a, 0x91, 0x3a, 0xd7, 0xb4, 0x8a, 0x74, 0xd9, 0x38, 0x28, 0x53, 0x78, 0x90, 0x9a, 0xc9, 0x6d,
+	0x58, 0x0c, 0x99, 0x08, 0x12, 0x16, 0xa0, 0xeb, 0x49, 0x1f, 0xab, 0x45, 0x4d, 0xbf, 0x9c, 0x1b,
+	0x5b, 0xd2, 0x47, 0x72, 0x17, 0x2a, 0x83, 0x48, 0xf6, 0x98, 0xe0, 0xea, 0xb9, 0xdb, 0xe3, 0xa1,
+	0xc2, 0xa8, 0x3a, 0xad, 0xf7, 0x71, 0xf9, 0xc2, 0xbe, 0xa7, 0xcd, 0x64, 0x15, 0x66, 0xfa, 0xd2,
+	0xc7, 0xb0, 0x3a, 0xa3, 0xf3, 0x98, 0x05, 0xb9, 0x03, 0xcb, 0x03, 0x16, 0x29, 0xce, 0x42, 0x37,
+	0xd2, 0x3d, 0x13, 0x57, 0xe7, 0x34, 0x7e, 0x29, 0x33, 0x9b, 0x4e, 0x8a, 0xd3, 0x2f, 0x5d, 0x3a,
+	0x31, 0x25, 0xf3, 0xa5, 0x78, 0xf8, 0xb0, 0x10, 0x07, 0xae, 0x65, 0x8d, 0x70, 0xca, 0x84, 0xc0,
+	0xd0, 0xf5, 0x64, 0x22, 0x54, 0x75, 0x5e, 0xd7, 0xb9, 0x62, 0x9a, 0xc1, 0x78, 0x5a, 0xa9, 0xc3,
+	0xee, 0xc0, 0xe2, 0x90, 0x6a, 0x64, 0x0d, 0x6a, 0x5b, 0xc7, 0x3b, 0xed, 0x8e, 0xbb, 0x7b, 0xd8,
+	0xea, 0xec, 0xb4, 0x0f, 0xf7, 0xdd, 0xe3, 0xc3, 0xee, 0xd1, 0x6e, 0xab, 0xbd, 0xd7, 0xde, 0xdd,
+	0xa9, 0x4c, 0x91, 0x0a, 0x94, 0x1f, 0xb7, 0x0f, 0x77, 0xb7, 0xe8, 0xbb, 0x0f, 0xdd, 0xa3, 0xd6,
+	0x93, 0x8a, 0x45, 0xca, 0x50, 0xea, 0xec, 0xef, 0xbb, 0x9d, 0xa3, 0xe3, 0x6e, 0xa5, 0x60, 0x7f,
+	0x63, 0xc1, 0xf5, 0xf1, 0x7d, 0x40, 0x3e, 0x86, 0x32, 0x4b, 0xe5, 0x10, 0x4c, 0xf1, 0x33, 0xcc,
+	0xbb, 0x69, 0xf3, 0xca, 0xdd, 0xb4, 0xf5, 0x02, 0x4c, 0x87, 0x32, 0xa5, 0xfa, 0xf6, 0xb8, 0x60,
+	0x61, 0xd6, 0x47, 0x66, 0x61, 0x7f, 0x6f, 0xc1, 0x8d, 0x09, 0xb7, 0xd3, 0x7f, 0xc8, 0xe5, 0x0d,
+	0x58, 0xc8, 0xb5, 0x57, 0x2c, 0xc8, 0x4e, 0x18, 0x64, 0xa6, 0xa7, 0x2c, 0xb0, 0xbf, 0x4d, 0xef,
+	0x9b, 0x57, 0xe4, 0x23, 0x04, 0xa6, 0x15, 0x3e, 0x33, 0x9d, 0x3d, 0x4f, 0xf5, 0x7f, 0xb2, 0x06,
+	0xa0, 0xaf, 0x3a, 0x1f, 0xf3, 0xeb, 0xa2, 0x40, 0x5f, 0xb2, 0x90, 0x87, 0x30, 0xf3, 0x85, 0x8c,
+	0xfc, 0xb8, 0x5a, 0xd4, 0x85, 0xac, 0x4f, 0x2a, 0xe4, 0x23, 0x19, 0xf9, 0x6d, 0xd1, 0x93, 0xd4,
+	0x84, 0xdb, 0x3f, 0x5b, 0x50, 0xca, 0x6d, 0xe4, 0x3d, 0x80, 0x58, 0xb1, 0x48, 0xb9, 0x8a, 0xf7,
+	0x31, 0xeb, 0xfe, 0xff, 0x39, 0x66, 0x66, 0x3a, 0xf9, 0xcc, 0x74, 0x76, 0xb2, 0x99, 0x49, 0xe7,
+	0x75, 0xf0, 0x53, 0xde, 0x47, 0xb2, 0x09, 0xa5, 0xf4, 0x6a, 0xd3, 0xb8, 0xc2, 0xeb, 0x70, 0x73,
+	0x28, 0x7c, 0x8d, 0x22, 0x30, 0x9d, 0xb2, 0xc8, 0xba, 0x4b, 0xff, 0x1f, 0x29, 0x74, 0x7a, 0xb4,
+	0xd0, 0xe6, 0x9f, 0x05, 0x80, 0xae, 0x52, 0x5d, 0xf3, 0x1a, 0x20, 0xbf, 0x5a, 0xb0, 0x7a, 0x79,
+	0x92, 0x9d, 0x23, 0x99, 0x78, 0x69, 0xbc, 0x72, 0x36, 0xd7, 0xde, 0x1c, 0x86, 0xbd, 0x18, 0xee,
+	0x9d, 0xfc, 0x9f, 0x4d, 0x7f, 0xf9, 0x6d, 0x63, 0x9d, 0xbc, 0x66, 0x7e, 0x7e, 0xf5, 0xfb, 0x5f,
+	0xdf, 0x15, 0xea, 0xf6, 0xed, 0x46, 0xac, 0x77, 0x3a, 0x7f, 0xc8, 0x84, 0x63, 0xa8, 0xbe, 0x6f,
+	0x6d, 0x90, 0xaf, 0x2d, 0x20, 0xa3, 0x33, 0xe8, 0x1c, 0xc9, 0xfd, 0x89, 0xe7, 0x71, 0xf2, 0x40,
+	0xad, 0x6d, 0xfe, 0x33, 0x90, 0xe1, 0x6b, 0x4f, 0xd5, 0xad, 0x77, 0xac, 0xed, 0x0f, 0x3f, 0x79,
+	0x14, 0x70, 0x75, 0x9a, 0x9c, 0x38, 0x9e, 0xec, 0x37, 0x4c, 0x9e, 0x7b, 0xe6, 0xc5, 0x13, 0xc8,
+	0x7b, 0x01, 0x0a, 0xbd, 0x9b, 0x8d, 0xf1, 0xcf, 0xb4, 0x0f, 0x62, 0xa5, 0x4e, 0x66, 0x75, 0xc4,
+	0xfd, 0xbf, 0x03, 0x00, 0x00, 0xff, 0xff, 0x1a, 0xf4, 0xf9, 0x65, 0xcb, 0x09, 0x00, 0x00,
 }

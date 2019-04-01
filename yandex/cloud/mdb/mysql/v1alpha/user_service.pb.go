@@ -42,7 +42,7 @@ func (m *GetUserRequest) Reset()         { *m = GetUserRequest{} }
 func (m *GetUserRequest) String() string { return proto.CompactTextString(m) }
 func (*GetUserRequest) ProtoMessage()    {}
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{0}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{0}
 }
 func (m *GetUserRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetUserRequest.Unmarshal(m, b)
@@ -77,15 +77,15 @@ func (m *GetUserRequest) GetUserName() string {
 }
 
 type ListUsersRequest struct {
-	// Required. ID of the MySQL cluster.
+	// Required. ID of the cluster to list MySQL users in.
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListUsers requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListUsersResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListUsers
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -96,7 +96,7 @@ func (m *ListUsersRequest) Reset()         { *m = ListUsersRequest{} }
 func (m *ListUsersRequest) String() string { return proto.CompactTextString(m) }
 func (*ListUsersRequest) ProtoMessage()    {}
 func (*ListUsersRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{1}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{1}
 }
 func (m *ListUsersRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListUsersRequest.Unmarshal(m, b)
@@ -138,13 +138,12 @@ func (m *ListUsersRequest) GetPageToken() string {
 }
 
 type ListUsersResponse struct {
-	// Requested list of MySQL clusters.
+	// Requested list of MySQL users.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	// This token allows you to get the next page of results for ListUsers requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListUsers request. Subsequent ListUsers
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value
+	// for the [ListUsersRequest.page_token] parameter in the next list request. Each subsequent
+	// list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -155,7 +154,7 @@ func (m *ListUsersResponse) Reset()         { *m = ListUsersResponse{} }
 func (m *ListUsersResponse) String() string { return proto.CompactTextString(m) }
 func (*ListUsersResponse) ProtoMessage()    {}
 func (*ListUsersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{2}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{2}
 }
 func (m *ListUsersResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListUsersResponse.Unmarshal(m, b)
@@ -190,9 +189,10 @@ func (m *ListUsersResponse) GetNextPageToken() string {
 }
 
 type CreateUserRequest struct {
-	// Required. ID of the MySQL cluster.
+	// Required. ID of the MySQL cluster to create a user for.
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// User properties.
+	// Properties of the user to be created.
 	UserSpec             *UserSpec `protobuf:"bytes,2,opt,name=user_spec,json=userSpec,proto3" json:"user_spec,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -203,7 +203,7 @@ func (m *CreateUserRequest) Reset()         { *m = CreateUserRequest{} }
 func (m *CreateUserRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateUserRequest) ProtoMessage()    {}
 func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{3}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{3}
 }
 func (m *CreateUserRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateUserRequest.Unmarshal(m, b)
@@ -238,9 +238,9 @@ func (m *CreateUserRequest) GetUserSpec() *UserSpec {
 }
 
 type CreateUserMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster the user is being created for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required.
+	// Name of the user that is being created.
 	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -251,7 +251,7 @@ func (m *CreateUserMetadata) Reset()         { *m = CreateUserMetadata{} }
 func (m *CreateUserMetadata) String() string { return proto.CompactTextString(m) }
 func (*CreateUserMetadata) ProtoMessage()    {}
 func (*CreateUserMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{4}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{4}
 }
 func (m *CreateUserMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateUserMetadata.Unmarshal(m, b)
@@ -286,23 +286,28 @@ func (m *CreateUserMetadata) GetUserName() string {
 }
 
 type UpdateUserRequest struct {
-	// Required. ID of the MySQL cluster.
+	// Required. ID of the MySQL cluster the user belongs to.
+	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Required. Name of the user to be updated.
-	UserName             string                `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UpdateMask           *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Password             string                `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	Permissions          []*Permission         `protobuf:"bytes,5,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	// To get the name of the user use a [UserService.List] request.
+	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// Field mask that specifies which fields of the MySQL user should be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New password for the user.
+	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
+	// New set of permissions for the user.
+	Permissions          []*Permission `protobuf:"bytes,5,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *UpdateUserRequest) Reset()         { *m = UpdateUserRequest{} }
 func (m *UpdateUserRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateUserRequest) ProtoMessage()    {}
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{5}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{5}
 }
 func (m *UpdateUserRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateUserRequest.Unmarshal(m, b)
@@ -358,9 +363,9 @@ func (m *UpdateUserRequest) GetPermissions() []*Permission {
 }
 
 type UpdateUserMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required.
+	// Name of the user that is being updated.
 	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -371,7 +376,7 @@ func (m *UpdateUserMetadata) Reset()         { *m = UpdateUserMetadata{} }
 func (m *UpdateUserMetadata) String() string { return proto.CompactTextString(m) }
 func (*UpdateUserMetadata) ProtoMessage()    {}
 func (*UpdateUserMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{6}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{6}
 }
 func (m *UpdateUserMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateUserMetadata.Unmarshal(m, b)
@@ -406,9 +411,11 @@ func (m *UpdateUserMetadata) GetUserName() string {
 }
 
 type DeleteUserRequest struct {
-	// Required. ID of the MySQL cluster.
+	// Required. ID of the MySQL cluster the user belongs to.
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Required. Name of the user to delete.
+	// To get the name of the user, use a [UserService.List] request.
 	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -419,7 +426,7 @@ func (m *DeleteUserRequest) Reset()         { *m = DeleteUserRequest{} }
 func (m *DeleteUserRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteUserRequest) ProtoMessage()    {}
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{7}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{7}
 }
 func (m *DeleteUserRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteUserRequest.Unmarshal(m, b)
@@ -454,9 +461,9 @@ func (m *DeleteUserRequest) GetUserName() string {
 }
 
 type DeleteUserMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the deleting user.
+	// Name of the user that is being deleted.
 	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -467,7 +474,7 @@ func (m *DeleteUserMetadata) Reset()         { *m = DeleteUserMetadata{} }
 func (m *DeleteUserMetadata) String() string { return proto.CompactTextString(m) }
 func (*DeleteUserMetadata) ProtoMessage()    {}
 func (*DeleteUserMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{8}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{8}
 }
 func (m *DeleteUserMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteUserMetadata.Unmarshal(m, b)
@@ -502,10 +509,13 @@ func (m *DeleteUserMetadata) GetUserName() string {
 }
 
 type GrantUserPermissionRequest struct {
-	// Required. ID of the MySQL cluster.
+	// Required. ID of the MySQL cluster the user belongs to.
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the user.
-	UserName             string      `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// Required. Name of the user to grant the permission to.
+	// To get the name of the user, use a [UserService.List] request.
+	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// Permission that should be granted to the specified user.
 	Permission           *Permission `protobuf:"bytes,3,opt,name=permission,proto3" json:"permission,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
@@ -516,7 +526,7 @@ func (m *GrantUserPermissionRequest) Reset()         { *m = GrantUserPermissionR
 func (m *GrantUserPermissionRequest) String() string { return proto.CompactTextString(m) }
 func (*GrantUserPermissionRequest) ProtoMessage()    {}
 func (*GrantUserPermissionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{9}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{9}
 }
 func (m *GrantUserPermissionRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GrantUserPermissionRequest.Unmarshal(m, b)
@@ -558,9 +568,10 @@ func (m *GrantUserPermissionRequest) GetPermission() *Permission {
 }
 
 type GrantUserPermissionMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster the user belongs to.
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the user.
+	// Name of the user that is being granted a permission.
 	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -571,7 +582,7 @@ func (m *GrantUserPermissionMetadata) Reset()         { *m = GrantUserPermission
 func (m *GrantUserPermissionMetadata) String() string { return proto.CompactTextString(m) }
 func (*GrantUserPermissionMetadata) ProtoMessage()    {}
 func (*GrantUserPermissionMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{10}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{10}
 }
 func (m *GrantUserPermissionMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GrantUserPermissionMetadata.Unmarshal(m, b)
@@ -606,10 +617,13 @@ func (m *GrantUserPermissionMetadata) GetUserName() string {
 }
 
 type RevokeUserPermissionRequest struct {
-	// Required. ID of the MySQL cluster.
+	// Required. ID of the MySQL cluster the user belongs to.
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the user.
-	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// Required. Name of the user to revoke a permission from.
+	// To get the name of the user, use a [UserService.List] request.
+	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// Name of the database that the user should lose access to.
 	DatabaseName         string   `protobuf:"bytes,3,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -620,7 +634,7 @@ func (m *RevokeUserPermissionRequest) Reset()         { *m = RevokeUserPermissio
 func (m *RevokeUserPermissionRequest) String() string { return proto.CompactTextString(m) }
 func (*RevokeUserPermissionRequest) ProtoMessage()    {}
 func (*RevokeUserPermissionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{11}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{11}
 }
 func (m *RevokeUserPermissionRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RevokeUserPermissionRequest.Unmarshal(m, b)
@@ -662,9 +676,9 @@ func (m *RevokeUserPermissionRequest) GetDatabaseName() string {
 }
 
 type RevokeUserPermissionMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the user.
+	// Name of the user whose permission is being revoked.
 	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -675,7 +689,7 @@ func (m *RevokeUserPermissionMetadata) Reset()         { *m = RevokeUserPermissi
 func (m *RevokeUserPermissionMetadata) String() string { return proto.CompactTextString(m) }
 func (*RevokeUserPermissionMetadata) ProtoMessage()    {}
 func (*RevokeUserPermissionMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_service_676232a31b626f60, []int{12}
+	return fileDescriptor_user_service_0b914c91522d3a7d, []int{12}
 }
 func (m *RevokeUserPermissionMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RevokeUserPermissionMetadata.Unmarshal(m, b)
@@ -738,18 +752,20 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type UserServiceClient interface {
 	// Returns the specified MySQL user.
+	//
+	// To get the list of available MySQL users, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
-	// Retrieves a list of MySQL users.
+	// Retrieves a list of MySQL users in the specified cluster.
 	List(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Creates a new MySQL user.
+	// Creates a MySQL user in the specified cluster.
 	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Modifies the specified MySQL user.
 	Update(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified MySQL user.
 	Delete(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Grants permission to the specified MySQL user.
+	// Grants a permission to the specified MySQL user.
 	GrantPermission(ctx context.Context, in *GrantUserPermissionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Revokes permission to the specified MySQL user.
+	// Revokes a permission from the specified MySQL user.
 	RevokePermission(ctx context.Context, in *RevokeUserPermissionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -827,18 +843,20 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // UserServiceServer is the server API for UserService service.
 type UserServiceServer interface {
 	// Returns the specified MySQL user.
+	//
+	// To get the list of available MySQL users, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
-	// Retrieves a list of MySQL users.
+	// Retrieves a list of MySQL users in the specified cluster.
 	List(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Creates a new MySQL user.
+	// Creates a MySQL user in the specified cluster.
 	Create(context.Context, *CreateUserRequest) (*operation.Operation, error)
 	// Modifies the specified MySQL user.
 	Update(context.Context, *UpdateUserRequest) (*operation.Operation, error)
 	// Deletes the specified MySQL user.
 	Delete(context.Context, *DeleteUserRequest) (*operation.Operation, error)
-	// Grants permission to the specified MySQL user.
+	// Grants a permission to the specified MySQL user.
 	GrantPermission(context.Context, *GrantUserPermissionRequest) (*operation.Operation, error)
-	// Revokes permission to the specified MySQL user.
+	// Revokes a permission from the specified MySQL user.
 	RevokePermission(context.Context, *RevokeUserPermissionRequest) (*operation.Operation, error)
 }
 
@@ -1010,10 +1028,10 @@ var _UserService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/user_service.proto", fileDescriptor_user_service_676232a31b626f60)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/user_service.proto", fileDescriptor_user_service_0b914c91522d3a7d)
 }
 
-var fileDescriptor_user_service_676232a31b626f60 = []byte{
+var fileDescriptor_user_service_0b914c91522d3a7d = []byte{
 	// 994 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x57, 0xcb, 0x6f, 0x1b, 0x45,
 	0x18, 0xd7, 0x24, 0x8e, 0x15, 0x7f, 0x6e, 0xda, 0x66, 0x24, 0x24, 0xcb, 0x69, 0xaa, 0xb0, 0x94,

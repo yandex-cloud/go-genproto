@@ -19,11 +19,12 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// MySQL database.
+// A MySQL database. For more information, see
+// the [documentation](/docs/managed-mysql/concepts).
 type Database struct {
-	// Required. Name of the database. 1-63 characters long.
+	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster that the database belongs to.
 	ClusterId            string   `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -34,7 +35,7 @@ func (m *Database) Reset()         { *m = Database{} }
 func (m *Database) String() string { return proto.CompactTextString(m) }
 func (*Database) ProtoMessage()    {}
 func (*Database) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_736a63598b34ab9e, []int{0}
+	return fileDescriptor_database_9e467405af457988, []int{0}
 }
 func (m *Database) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Database.Unmarshal(m, b)
@@ -69,7 +70,7 @@ func (m *Database) GetClusterId() string {
 }
 
 type DatabaseSpec struct {
-	// Required. Name of the MySQL database.
+	// Name of the MySQL database.
 	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -80,7 +81,7 @@ func (m *DatabaseSpec) Reset()         { *m = DatabaseSpec{} }
 func (m *DatabaseSpec) String() string { return proto.CompactTextString(m) }
 func (*DatabaseSpec) ProtoMessage()    {}
 func (*DatabaseSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_database_736a63598b34ab9e, []int{1}
+	return fileDescriptor_database_9e467405af457988, []int{1}
 }
 func (m *DatabaseSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DatabaseSpec.Unmarshal(m, b)
@@ -113,10 +114,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/database.proto", fileDescriptor_database_736a63598b34ab9e)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/database.proto", fileDescriptor_database_9e467405af457988)
 }
 
-var fileDescriptor_database_736a63598b34ab9e = []byte{
+var fileDescriptor_database_9e467405af457988 = []byte{
 	// 240 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0xad, 0x4c, 0xcc, 0x4b,
 	0x49, 0xad, 0xd0, 0x4f, 0xce, 0xc9, 0x2f, 0x4d, 0xd1, 0xcf, 0x4d, 0x49, 0xd2, 0xcf, 0xad, 0x2c,

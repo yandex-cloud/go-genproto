@@ -26,7 +26,8 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type GetBackupRequest struct {
-	// Required. ID of the backup to return.
+	// ID of the backup to return information about.
+	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId             string   `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -37,7 +38,7 @@ func (m *GetBackupRequest) Reset()         { *m = GetBackupRequest{} }
 func (m *GetBackupRequest) String() string { return proto.CompactTextString(m) }
 func (*GetBackupRequest) ProtoMessage()    {}
 func (*GetBackupRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_backup_service_7c25d4e72c38f796, []int{0}
+	return fileDescriptor_backup_service_95efb65c3d14f230, []int{0}
 }
 func (m *GetBackupRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetBackupRequest.Unmarshal(m, b)
@@ -65,15 +66,15 @@ func (m *GetBackupRequest) GetBackupId() string {
 }
 
 type ListBackupsRequest struct {
-	// Required. ID of the folder to list backups in.
+	// ID of the folder to list backups in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListBackups requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListBackupsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListBackups
-	// request to get the next page of results.
+	// Page token.  To get the next page of results, Set [page_token] to the [ListBackupsResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -84,7 +85,7 @@ func (m *ListBackupsRequest) Reset()         { *m = ListBackupsRequest{} }
 func (m *ListBackupsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListBackupsRequest) ProtoMessage()    {}
 func (*ListBackupsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_backup_service_7c25d4e72c38f796, []int{1}
+	return fileDescriptor_backup_service_95efb65c3d14f230, []int{1}
 }
 func (m *ListBackupsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListBackupsRequest.Unmarshal(m, b)
@@ -126,13 +127,12 @@ func (m *ListBackupsRequest) GetPageToken() string {
 }
 
 type ListBackupsResponse struct {
-	// Requested list of backups.
+	// List of MySQL backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
-	// This token allows you to get the next page of results for ListBackups requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListBackups request. Subsequent ListBackups
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListBackupsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListBackupsRequest.page_token] parameter in the next list request. Each subsequent
+	// list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -143,7 +143,7 @@ func (m *ListBackupsResponse) Reset()         { *m = ListBackupsResponse{} }
 func (m *ListBackupsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListBackupsResponse) ProtoMessage()    {}
 func (*ListBackupsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_backup_service_7c25d4e72c38f796, []int{2}
+	return fileDescriptor_backup_service_95efb65c3d14f230, []int{2}
 }
 func (m *ListBackupsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListBackupsResponse.Unmarshal(m, b)
@@ -195,9 +195,11 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BackupServiceClient interface {
-	// Returns the specified backup of MySQL cluster.
+	// Returns the specified MySQL backup.
+	//
+	// To get the list of available MySQL backups, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
-	// Returns the list of available backups for the specified MySQL cluster.
+	// Retrieves the list of MySQL backups available for the specified folder.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
 }
 
@@ -229,9 +231,11 @@ func (c *backupServiceClient) List(ctx context.Context, in *ListBackupsRequest, 
 
 // BackupServiceServer is the server API for BackupService service.
 type BackupServiceServer interface {
-	// Returns the specified backup of MySQL cluster.
+	// Returns the specified MySQL backup.
+	//
+	// To get the list of available MySQL backups, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
-	// Returns the list of available backups for the specified MySQL cluster.
+	// Retrieves the list of MySQL backups available for the specified folder.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
 }
 
@@ -293,10 +297,10 @@ var _BackupService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/backup_service.proto", fileDescriptor_backup_service_7c25d4e72c38f796)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/backup_service.proto", fileDescriptor_backup_service_95efb65c3d14f230)
 }
 
-var fileDescriptor_backup_service_7c25d4e72c38f796 = []byte{
+var fileDescriptor_backup_service_95efb65c3d14f230 = []byte{
 	// 466 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0xbf, 0x6f, 0x13, 0x31,
 	0x14, 0xc7, 0xe5, 0x24, 0x94, 0x9c, 0xa1, 0x02, 0x99, 0x25, 0x8a, 0xa0, 0x0a, 0x37, 0x94, 0xf0,

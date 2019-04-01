@@ -23,25 +23,47 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 type Permission_Privilege int32
 
 const (
-	Permission_PRIVILEGE_UNSPECIFIED   Permission_Privilege = 0
-	Permission_ALL_PRIVILEGES          Permission_Privilege = 1
-	Permission_ALTER                   Permission_Privilege = 2
-	Permission_ALTER_ROUTINE           Permission_Privilege = 3
-	Permission_CREATE                  Permission_Privilege = 4
-	Permission_CREATE_ROUTINE          Permission_Privilege = 5
+	Permission_PRIVILEGE_UNSPECIFIED Permission_Privilege = 0
+	// All privileges that can be made available to the user.
+	Permission_ALL_PRIVILEGES Permission_Privilege = 1
+	// Altering tables.
+	Permission_ALTER Permission_Privilege = 2
+	// Altering stored routines (stored procedures and functions).
+	Permission_ALTER_ROUTINE Permission_Privilege = 3
+	// Creating tables or indexes.
+	Permission_CREATE Permission_Privilege = 4
+	// Creating stored routines.
+	Permission_CREATE_ROUTINE Permission_Privilege = 5
+	// Creating temporary tables.
 	Permission_CREATE_TEMPORARY_TABLES Permission_Privilege = 6
-	Permission_CREATE_VIEW             Permission_Privilege = 7
-	Permission_DELETE                  Permission_Privilege = 8
-	Permission_DROP                    Permission_Privilege = 9
-	Permission_EVENT                   Permission_Privilege = 10
-	Permission_EXECUTE                 Permission_Privilege = 11
-	Permission_INDEX                   Permission_Privilege = 12
-	Permission_INSERT                  Permission_Privilege = 13
-	Permission_LOCK_TABLES             Permission_Privilege = 14
-	Permission_SELECT                  Permission_Privilege = 15
-	Permission_SHOW_VIEW               Permission_Privilege = 16
-	Permission_TRIGGER                 Permission_Privilege = 17
-	Permission_UPDATE                  Permission_Privilege = 18
+	// Creating views.
+	Permission_CREATE_VIEW Permission_Privilege = 7
+	// Deleting tables.
+	Permission_DELETE Permission_Privilege = 8
+	// Removing tables or views.
+	Permission_DROP Permission_Privilege = 9
+	// Creating, altering, dropping, or displaying events for the Event Scheduler.
+	Permission_EVENT Permission_Privilege = 10
+	// Executing stored routines.
+	Permission_EXECUTE Permission_Privilege = 11
+	// Creating and removing indexes.
+	Permission_INDEX Permission_Privilege = 12
+	// Inserting rows into the database.
+	Permission_INSERT Permission_Privilege = 13
+	// Using LOCK TABLES statement for tables available with SELECT privilege.
+	Permission_LOCK_TABLES Permission_Privilege = 14
+	// Selecting rows from tables.
+	//
+	// Some SELECT statements can be allowed without the SELECT privilege. All
+	// statements that read column values require the SELECT privilege. See
+	// details in [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_select).
+	Permission_SELECT Permission_Privilege = 15
+	// Using the SHOW CREATE VIEW statement. Also needed for views used with EXPLAIN.
+	Permission_SHOW_VIEW Permission_Privilege = 16
+	// Creating, removing, executing, or displaying triggers for a table.
+	Permission_TRIGGER Permission_Privilege = 17
+	// Updating rows in the database.
+	Permission_UPDATE Permission_Privilege = 18
 )
 
 var Permission_Privilege_name = map[int32]string{
@@ -91,16 +113,17 @@ func (x Permission_Privilege) String() string {
 	return proto.EnumName(Permission_Privilege_name, int32(x))
 }
 func (Permission_Privilege) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_user_91d8264a26ed7f53, []int{1, 0}
+	return fileDescriptor_user_1ad1ddff3701cfc4, []int{1, 0}
 }
 
-// MySQL user.
+// A MySQL user. For more information, see
+// the [documentation](/docs/managed-mysql/concepts).
 type User struct {
-	// Required. Name of the MySQL user. 1-63 characters long.
+	// Name of the MySQL user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// List of permissions granted to the user.
+	// Set of permissions granted to the user.
 	Permissions          []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
@@ -111,7 +134,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_91d8264a26ed7f53, []int{0}
+	return fileDescriptor_user_1ad1ddff3701cfc4, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -153,7 +176,9 @@ func (m *User) GetPermissions() []*Permission {
 }
 
 type Permission struct {
-	DatabaseName         string                 `protobuf:"bytes,1,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
+	// Name of the database that the permission grants access to.
+	DatabaseName string `protobuf:"bytes,1,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
+	// Roles granted to the user within the database.
 	Roles                []Permission_Privilege `protobuf:"varint,2,rep,packed,name=roles,proto3,enum=yandex.cloud.mdb.mysql.v1alpha.Permission_Privilege" json:"roles,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
 	XXX_unrecognized     []byte                 `json:"-"`
@@ -164,7 +189,7 @@ func (m *Permission) Reset()         { *m = Permission{} }
 func (m *Permission) String() string { return proto.CompactTextString(m) }
 func (*Permission) ProtoMessage()    {}
 func (*Permission) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_91d8264a26ed7f53, []int{1}
+	return fileDescriptor_user_1ad1ddff3701cfc4, []int{1}
 }
 func (m *Permission) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Permission.Unmarshal(m, b)
@@ -199,10 +224,11 @@ func (m *Permission) GetRoles() []Permission_Privilege {
 }
 
 type UserSpec struct {
-	// Required. Name of the MySQL user.
+	// Name of the MySQL user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Required.
-	Password             string        `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	// Password of the MySQL user.
+	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	// Set of permissions to grant to the user.
 	Permissions          []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
@@ -213,7 +239,7 @@ func (m *UserSpec) Reset()         { *m = UserSpec{} }
 func (m *UserSpec) String() string { return proto.CompactTextString(m) }
 func (*UserSpec) ProtoMessage()    {}
 func (*UserSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_91d8264a26ed7f53, []int{2}
+	return fileDescriptor_user_1ad1ddff3701cfc4, []int{2}
 }
 func (m *UserSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserSpec.Unmarshal(m, b)
@@ -262,10 +288,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/user.proto", fileDescriptor_user_91d8264a26ed7f53)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/user.proto", fileDescriptor_user_1ad1ddff3701cfc4)
 }
 
-var fileDescriptor_user_91d8264a26ed7f53 = []byte{
+var fileDescriptor_user_1ad1ddff3701cfc4 = []byte{
 	// 602 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x53, 0xcd, 0x6e, 0xd3, 0x4e,
 	0x10, 0xff, 0xe7, 0xab, 0x4d, 0x26, 0x4d, 0xbb, 0x5d, 0xe9, 0x2f, 0x42, 0x51, 0xab, 0x2a, 0x5c,

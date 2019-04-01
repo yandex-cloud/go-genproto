@@ -20,10 +20,19 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// Options and structure of `MysqlConfig` reflects MySQL configuration file
+// Options and structure of `MysqlConfig5_7` reflects MySQL 5.7 configuration file
 type MysqlConfig5_7 struct {
-	InnodbBufferPoolSize *wrappers.Int64Value  `protobuf:"bytes,1,opt,name=innodb_buffer_pool_size,json=innodbBufferPoolSize,proto3" json:"innodb_buffer_pool_size,omitempty"`
-	MaxConnections       *wrappers.Int64Value  `protobuf:"bytes,2,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
+	// Size of the InnoDB buffer pool used for caching table and index data.
+	//
+	// For details, see [MySQL documentation for the parameter](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size).
+	InnodbBufferPoolSize *wrappers.Int64Value `protobuf:"bytes,1,opt,name=innodb_buffer_pool_size,json=innodbBufferPoolSize,proto3" json:"innodb_buffer_pool_size,omitempty"`
+	// The maximum permitted number of simultaneous client connections.
+	//
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
+	MaxConnections *wrappers.Int64Value `protobuf:"bytes,2,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
+	// Time that it takes to process a query before it is considered slow.
+	//
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_long_query_time).
 	LongQueryTime        *wrappers.DoubleValue `protobuf:"bytes,3,opt,name=long_query_time,json=longQueryTime,proto3" json:"long_query_time,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
@@ -34,7 +43,7 @@ func (m *MysqlConfig5_7) Reset()         { *m = MysqlConfig5_7{} }
 func (m *MysqlConfig5_7) String() string { return proto.CompactTextString(m) }
 func (*MysqlConfig5_7) ProtoMessage()    {}
 func (*MysqlConfig5_7) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mysql5_7_1c1a129a0c24ff6e, []int{0}
+	return fileDescriptor_mysql5_7_1f2771aee9a9a4ee, []int{0}
 }
 func (m *MysqlConfig5_7) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MysqlConfig5_7.Unmarshal(m, b)
@@ -76,8 +85,12 @@ func (m *MysqlConfig5_7) GetLongQueryTime() *wrappers.DoubleValue {
 }
 
 type MysqlConfigSet5_7 struct {
-	EffectiveConfig      *MysqlConfig5_7 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	UserConfig           *MysqlConfig5_7 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
+	// Effective settings for a MySQL 5.7 cluster (a combination of settings defined
+	// in [user_config] and [default_config]).
+	EffectiveConfig *MysqlConfig5_7 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
+	// User-defined settings for a MySQL 5.7 cluster.
+	UserConfig *MysqlConfig5_7 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
+	// Default configuration for a MySQL 5.7 cluster.
 	DefaultConfig        *MysqlConfig5_7 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
@@ -88,7 +101,7 @@ func (m *MysqlConfigSet5_7) Reset()         { *m = MysqlConfigSet5_7{} }
 func (m *MysqlConfigSet5_7) String() string { return proto.CompactTextString(m) }
 func (*MysqlConfigSet5_7) ProtoMessage()    {}
 func (*MysqlConfigSet5_7) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mysql5_7_1c1a129a0c24ff6e, []int{1}
+	return fileDescriptor_mysql5_7_1f2771aee9a9a4ee, []int{1}
 }
 func (m *MysqlConfigSet5_7) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MysqlConfigSet5_7.Unmarshal(m, b)
@@ -135,10 +148,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/config/mysql5_7.proto", fileDescriptor_mysql5_7_1c1a129a0c24ff6e)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/config/mysql5_7.proto", fileDescriptor_mysql5_7_1f2771aee9a9a4ee)
 }
 
-var fileDescriptor_mysql5_7_1c1a129a0c24ff6e = []byte{
+var fileDescriptor_mysql5_7_1f2771aee9a9a4ee = []byte{
 	// 422 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0xd2, 0xdf, 0x6a, 0xd4, 0x40,
 	0x14, 0x06, 0x70, 0xba, 0x05, 0xd1, 0xa9, 0xbb, 0xab, 0x41, 0x70, 0xa9, 0x7f, 0x90, 0x82, 0xe0,

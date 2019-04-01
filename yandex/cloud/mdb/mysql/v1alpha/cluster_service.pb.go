@@ -12,6 +12,7 @@ import config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alph
 import operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 import _ "github.com/yandex-cloud/go-genproto/yandex/cloud/validation"
 import _ "google.golang.org/genproto/googleapis/api/annotations"
+import timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 import field_mask "google.golang.org/genproto/protobuf/field_mask"
 
 import (
@@ -34,7 +35,8 @@ type ListClusterLogsRequest_ServiceType int32
 
 const (
 	ListClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED ListClusterLogsRequest_ServiceType = 0
-	ListClusterLogsRequest_MYSQL                    ListClusterLogsRequest_ServiceType = 1
+	// Logs of MySQL activity.
+	ListClusterLogsRequest_MYSQL ListClusterLogsRequest_ServiceType = 1
 )
 
 var ListClusterLogsRequest_ServiceType_name = map[int32]string{
@@ -50,11 +52,12 @@ func (x ListClusterLogsRequest_ServiceType) String() string {
 	return proto.EnumName(ListClusterLogsRequest_ServiceType_name, int32(x))
 }
 func (ListClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{14, 0}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{16, 0}
 }
 
 type GetClusterRequest struct {
-	// Required. ID of the MySQL cluster to return.
+	// ID of the MySQL cluster to return.
+	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -65,7 +68,7 @@ func (m *GetClusterRequest) Reset()         { *m = GetClusterRequest{} }
 func (m *GetClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*GetClusterRequest) ProtoMessage()    {}
 func (*GetClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{0}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{0}
 }
 func (m *GetClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetClusterRequest.Unmarshal(m, b)
@@ -93,17 +96,21 @@ func (m *GetClusterRequest) GetClusterId() string {
 }
 
 type ListClustersRequest struct {
-	// Required. ID of the folder to list MySQL clusters in.
+	// ID of the folder to list MySQL clusters in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListClusters requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListClusters
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// String that describes a display filter.
+	// A filter expression that filters resources listed in the response.
+	// The expression must specify:
+	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Мust be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
 	Filter               string   `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -114,7 +121,7 @@ func (m *ListClustersRequest) Reset()         { *m = ListClustersRequest{} }
 func (m *ListClustersRequest) String() string { return proto.CompactTextString(m) }
 func (*ListClustersRequest) ProtoMessage()    {}
 func (*ListClustersRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{1}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{1}
 }
 func (m *ListClustersRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClustersRequest.Unmarshal(m, b)
@@ -163,13 +170,12 @@ func (m *ListClustersRequest) GetFilter() string {
 }
 
 type ListClustersResponse struct {
-	// Requested list of MySQL clusters.
+	// List of MySQL clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
-	// This token allows you to get the next page of results for ListClusters requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListClusters request. Subsequent ListClusters
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
+	// for the [ListClustersRequest.page_token] parameter in the next list request. Each subsequent
+	// list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -180,7 +186,7 @@ func (m *ListClustersResponse) Reset()         { *m = ListClustersResponse{} }
 func (m *ListClustersResponse) String() string { return proto.CompactTextString(m) }
 func (*ListClustersResponse) ProtoMessage()    {}
 func (*ListClustersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{2}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{2}
 }
 func (m *ListClustersResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClustersResponse.Unmarshal(m, b)
@@ -215,34 +221,37 @@ func (m *ListClustersResponse) GetNextPageToken() string {
 }
 
 type CreateClusterRequest struct {
-	// Required. ID of the folder to create MySQL cluster in.
+	// ID of the folder to create the MySQL cluster in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Required. Name of the MySQL cluster. The value must be unique within the folder,
-	// 1-63 characters long, and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// Name of the MySQL cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the MySQL cluster. 0-256 characters long.
-	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Required. Deployment environment.
+	// Description of the MySQL cluster.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
+	// For example, "project": "mvp" or "source": "dictionary".
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Deployment environment of the MySQL cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1alpha.Cluster_Environment" json:"environment,omitempty"`
-	// Required.
+	// Configuration and resources for hosts that should be created for the MySQL cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Required.
+	// Descriptions of databases to be created in the MySQL cluster.
 	DatabaseSpecs []*DatabaseSpec `protobuf:"bytes,7,rep,name=database_specs,json=databaseSpecs,proto3" json:"database_specs,omitempty"`
-	// Required.
-	UserSpecs            []*UserSpec `protobuf:"bytes,8,rep,name=user_specs,json=userSpecs,proto3" json:"user_specs,omitempty"`
-	HostSpecs            []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	NetworkId            string      `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	// Descriptions of database users to be created in the MySQL cluster.
+	UserSpecs []*UserSpec `protobuf:"bytes,8,rep,name=user_specs,json=userSpecs,proto3" json:"user_specs,omitempty"`
+	// Individual configurations for hosts that should be created for the MySQL cluster.
+	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
+	// ID of the network to create the cluster in.
+	NetworkId            string   `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CreateClusterRequest) Reset()         { *m = CreateClusterRequest{} }
 func (m *CreateClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateClusterRequest) ProtoMessage()    {}
 func (*CreateClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{3}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{3}
 }
 func (m *CreateClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateClusterRequest.Unmarshal(m, b)
@@ -333,7 +342,7 @@ func (m *CreateClusterRequest) GetNetworkId() string {
 }
 
 type CreateClusterMetadata struct {
-	// Required. ID of the creating MySQL cluster.
+	// ID of the MySQL cluster that is being created.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -344,7 +353,7 @@ func (m *CreateClusterMetadata) Reset()         { *m = CreateClusterMetadata{} }
 func (m *CreateClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*CreateClusterMetadata) ProtoMessage()    {}
 func (*CreateClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{4}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{4}
 }
 func (m *CreateClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateClusterMetadata.Unmarshal(m, b)
@@ -372,24 +381,33 @@ func (m *CreateClusterMetadata) GetClusterId() string {
 }
 
 type UpdateClusterRequest struct {
-	// Required. ID of the MySQL cluster to modify.
-	ClusterId  string                `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the MySQL cluster to update.
+	// To get the MySQL cluster ID, use a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Field mask that specifies which fields of the MySQL cluster should be updated.
 	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Description of the MySQL cluster. 0-256 characters long.
-	Description          string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels               map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	ConfigSpec           *ConfigSpec       `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	Name                 string            `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
-	XXX_unrecognized     []byte            `json:"-"`
-	XXX_sizecache        int32             `json:"-"`
+	// New description of the MySQL cluster.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
+	// For example, "project": "mvp" or "source": "dictionary".
+	//
+	// The new set of labels will completely replace the old ones. To add a label, request the current
+	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// New configuration and resources for hosts in the cluster.
+	ConfigSpec *ConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	// New name for the cluster.
+	Name                 string   `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *UpdateClusterRequest) Reset()         { *m = UpdateClusterRequest{} }
 func (m *UpdateClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateClusterRequest) ProtoMessage()    {}
 func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{5}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{5}
 }
 func (m *UpdateClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateClusterRequest.Unmarshal(m, b)
@@ -452,7 +470,7 @@ func (m *UpdateClusterRequest) GetName() string {
 }
 
 type UpdateClusterMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster that is being modified.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -463,7 +481,7 @@ func (m *UpdateClusterMetadata) Reset()         { *m = UpdateClusterMetadata{} }
 func (m *UpdateClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*UpdateClusterMetadata) ProtoMessage()    {}
 func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{6}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{6}
 }
 func (m *UpdateClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateClusterMetadata.Unmarshal(m, b)
@@ -491,7 +509,8 @@ func (m *UpdateClusterMetadata) GetClusterId() string {
 }
 
 type DeleteClusterRequest struct {
-	// Required. ID of the MySQL cluster to delete.
+	// ID of the MySQL cluster to delete.
+	// To get the MySQL cluster ID, use a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -502,7 +521,7 @@ func (m *DeleteClusterRequest) Reset()         { *m = DeleteClusterRequest{} }
 func (m *DeleteClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteClusterRequest) ProtoMessage()    {}
 func (*DeleteClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{7}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{7}
 }
 func (m *DeleteClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteClusterRequest.Unmarshal(m, b)
@@ -530,7 +549,7 @@ func (m *DeleteClusterRequest) GetClusterId() string {
 }
 
 type DeleteClusterMetadata struct {
-	// Required. ID of the deleting MySQL cluster.
+	// ID of the MySQL cluster that is being deleted.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -541,7 +560,7 @@ func (m *DeleteClusterMetadata) Reset()         { *m = DeleteClusterMetadata{} }
 func (m *DeleteClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*DeleteClusterMetadata) ProtoMessage()    {}
 func (*DeleteClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{8}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{8}
 }
 func (m *DeleteClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteClusterMetadata.Unmarshal(m, b)
@@ -569,7 +588,8 @@ func (m *DeleteClusterMetadata) GetClusterId() string {
 }
 
 type BackupClusterRequest struct {
-	// Required. ID of the MySQL cluster to back up.
+	// ID of the MySQL cluster to back up.
+	// To get the MySQL cluster ID, use a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -580,7 +600,7 @@ func (m *BackupClusterRequest) Reset()         { *m = BackupClusterRequest{} }
 func (m *BackupClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*BackupClusterRequest) ProtoMessage()    {}
 func (*BackupClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{9}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{9}
 }
 func (m *BackupClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BackupClusterRequest.Unmarshal(m, b)
@@ -608,7 +628,7 @@ func (m *BackupClusterRequest) GetClusterId() string {
 }
 
 type BackupClusterMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster that is being backed up.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -619,7 +639,7 @@ func (m *BackupClusterMetadata) Reset()         { *m = BackupClusterMetadata{} }
 func (m *BackupClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*BackupClusterMetadata) ProtoMessage()    {}
 func (*BackupClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{10}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{10}
 }
 func (m *BackupClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BackupClusterMetadata.Unmarshal(m, b)
@@ -647,31 +667,37 @@ func (m *BackupClusterMetadata) GetClusterId() string {
 }
 
 type RestoreClusterRequest struct {
-	// Required. ID of the backup to restore from.
+	// ID of the backup to create a cluster from.
+	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	// Required. Timestamp of the moment the MySQL cluster should be restored.
+	// Timestamp of the moment to which the MySQL cluster should be restored.
 	Time *timestamp.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
-	// Required. Name of the new MySQL cluster. The name must be unique within the folder.
-	// The name can’t be changed after the MySQL cluster is created.
+	// Name of the new MySQL cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the new MySQL cluster. 0-256 characters long.
-	Description string            `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Description of the new MySQL cluster.
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
+	// For example, "project": "mvp" or "source": "dictionary".
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Deployment environment of the new MySQL cluster.
-	Environment          Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1alpha.Cluster_Environment" json:"environment,omitempty"`
-	ConfigSpec           *ConfigSpec         `protobuf:"bytes,8,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	HostSpecs            []*HostSpec         `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	NetworkId            string              `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
+	Environment Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1alpha.Cluster_Environment" json:"environment,omitempty"`
+	// Configuration for the MySQL cluster to be created.
+	ConfigSpec *ConfigSpec `protobuf:"bytes,8,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	// Configurations for MySQL hosts that should be added
+	// to the cluster that is being created from the backup.
+	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
+	// ID of the network to create the MySQL cluster in.
+	NetworkId            string   `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *RestoreClusterRequest) Reset()         { *m = RestoreClusterRequest{} }
 func (m *RestoreClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*RestoreClusterRequest) ProtoMessage()    {}
 func (*RestoreClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{11}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{11}
 }
 func (m *RestoreClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RestoreClusterRequest.Unmarshal(m, b)
@@ -755,9 +781,9 @@ func (m *RestoreClusterRequest) GetNetworkId() string {
 }
 
 type RestoreClusterMetadata struct {
-	// Required. ID of the new MySQL cluster.
+	// ID of the new MySQL cluster that is being created from a backup.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. ID of the backup used for recovery.
+	// ID of the backup that is being used for creating a cluster.
 	BackupId             string   `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -768,7 +794,7 @@ func (m *RestoreClusterMetadata) Reset()         { *m = RestoreClusterMetadata{}
 func (m *RestoreClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*RestoreClusterMetadata) ProtoMessage()    {}
 func (*RestoreClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{12}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{12}
 }
 func (m *RestoreClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RestoreClusterMetadata.Unmarshal(m, b)
@@ -802,19 +828,108 @@ func (m *RestoreClusterMetadata) GetBackupId() string {
 	return ""
 }
 
+type SwitchoverClusterRequest struct {
+	// ID of MySQL cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// New master host. Switch to recent replica if not provided.
+	HostName             string   `protobuf:"bytes,2,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SwitchoverClusterRequest) Reset()         { *m = SwitchoverClusterRequest{} }
+func (m *SwitchoverClusterRequest) String() string { return proto.CompactTextString(m) }
+func (*SwitchoverClusterRequest) ProtoMessage()    {}
+func (*SwitchoverClusterRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{13}
+}
+func (m *SwitchoverClusterRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SwitchoverClusterRequest.Unmarshal(m, b)
+}
+func (m *SwitchoverClusterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SwitchoverClusterRequest.Marshal(b, m, deterministic)
+}
+func (dst *SwitchoverClusterRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SwitchoverClusterRequest.Merge(dst, src)
+}
+func (m *SwitchoverClusterRequest) XXX_Size() int {
+	return xxx_messageInfo_SwitchoverClusterRequest.Size(m)
+}
+func (m *SwitchoverClusterRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_SwitchoverClusterRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SwitchoverClusterRequest proto.InternalMessageInfo
+
+func (m *SwitchoverClusterRequest) GetClusterId() string {
+	if m != nil {
+		return m.ClusterId
+	}
+	return ""
+}
+
+func (m *SwitchoverClusterRequest) GetHostName() string {
+	if m != nil {
+		return m.HostName
+	}
+	return ""
+}
+
+type SwitchoverClusterMetadata struct {
+	// ID of the MySQL cluster being switchovered.
+	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SwitchoverClusterMetadata) Reset()         { *m = SwitchoverClusterMetadata{} }
+func (m *SwitchoverClusterMetadata) String() string { return proto.CompactTextString(m) }
+func (*SwitchoverClusterMetadata) ProtoMessage()    {}
+func (*SwitchoverClusterMetadata) Descriptor() ([]byte, []int) {
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{14}
+}
+func (m *SwitchoverClusterMetadata) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SwitchoverClusterMetadata.Unmarshal(m, b)
+}
+func (m *SwitchoverClusterMetadata) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SwitchoverClusterMetadata.Marshal(b, m, deterministic)
+}
+func (dst *SwitchoverClusterMetadata) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SwitchoverClusterMetadata.Merge(dst, src)
+}
+func (m *SwitchoverClusterMetadata) XXX_Size() int {
+	return xxx_messageInfo_SwitchoverClusterMetadata.Size(m)
+}
+func (m *SwitchoverClusterMetadata) XXX_DiscardUnknown() {
+	xxx_messageInfo_SwitchoverClusterMetadata.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SwitchoverClusterMetadata proto.InternalMessageInfo
+
+func (m *SwitchoverClusterMetadata) GetClusterId() string {
+	if m != nil {
+		return m.ClusterId
+	}
+	return ""
+}
+
 type LogRecord struct {
-	Timestamp            *timestamp.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Message              map[string]string    `protobuf:"bytes,2,rep,name=message,proto3" json:"message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
+	// Log record timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	Timestamp *timestamp.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	// Contents of the log record.
+	Message              map[string]string `protobuf:"bytes,2,rep,name=message,proto3" json:"message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *LogRecord) Reset()         { *m = LogRecord{} }
 func (m *LogRecord) String() string { return proto.CompactTextString(m) }
 func (*LogRecord) ProtoMessage()    {}
 func (*LogRecord) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{13}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{15}
 }
 func (m *LogRecord) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LogRecord.Unmarshal(m, b)
@@ -849,22 +964,24 @@ func (m *LogRecord) GetMessage() map[string]string {
 }
 
 type ListClusterLogsRequest struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to request logs for.
+	// To get the MySQL cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Columns from logs table to get in the response.
-	ColumnFilter []string                           `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
-	ServiceType  ListClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	// Columns from the logs table to request.
+	// If no columns are specified, entire log records are returned.
+	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
+	// Type of the service to request logs about.
+	ServiceType ListClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
 	// Start timestamp for the logs request.
 	FromTime *timestamp.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
 	ToTime *timestamp.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListLogs requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterLogsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListLogs
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set [page_token] to the
+	// [ListClusterLogsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Always return `next_page_token`, even if current page is empty.
 	AlwaysNextPageToken  bool     `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
@@ -877,7 +994,7 @@ func (m *ListClusterLogsRequest) Reset()         { *m = ListClusterLogsRequest{}
 func (m *ListClusterLogsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListClusterLogsRequest) ProtoMessage()    {}
 func (*ListClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{14}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{16}
 }
 func (m *ListClusterLogsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterLogsRequest.Unmarshal(m, b)
@@ -956,11 +1073,10 @@ func (m *ListClusterLogsRequest) GetAlwaysNextPageToken() bool {
 type ListClusterLogsResponse struct {
 	// Requested log records.
 	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
-	// This token allows you to get the next page of results for ListLogs requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListLogs request. Subsequent ListLogs
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -971,7 +1087,7 @@ func (m *ListClusterLogsResponse) Reset()         { *m = ListClusterLogsResponse
 func (m *ListClusterLogsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListClusterLogsResponse) ProtoMessage()    {}
 func (*ListClusterLogsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{15}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{17}
 }
 func (m *ListClusterLogsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterLogsResponse.Unmarshal(m, b)
@@ -1006,15 +1122,14 @@ func (m *ListClusterLogsResponse) GetNextPageToken() string {
 }
 
 type ListClusterOperationsRequest struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListOperations requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListOperations
-	// request to get the next page of results.
+	// Page token.  To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1025,7 +1140,7 @@ func (m *ListClusterOperationsRequest) Reset()         { *m = ListClusterOperati
 func (m *ListClusterOperationsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListClusterOperationsRequest) ProtoMessage()    {}
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{16}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{18}
 }
 func (m *ListClusterOperationsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterOperationsRequest.Unmarshal(m, b)
@@ -1067,12 +1182,12 @@ func (m *ListClusterOperationsRequest) GetPageToken() string {
 }
 
 type ListClusterOperationsResponse struct {
+	// List of operations for the specified MySQL cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for ListOperations requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListOperations request. Subsequent ListOperations
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1083,7 +1198,7 @@ func (m *ListClusterOperationsResponse) Reset()         { *m = ListClusterOperat
 func (m *ListClusterOperationsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListClusterOperationsResponse) ProtoMessage()    {}
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{17}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{19}
 }
 func (m *ListClusterOperationsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterOperationsResponse.Unmarshal(m, b)
@@ -1118,15 +1233,15 @@ func (m *ListClusterOperationsResponse) GetNextPageToken() string {
 }
 
 type ListClusterBackupsRequest struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster.
+	// To get the MySQL cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListClusterBackups requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListClusterBackups
-	// request to get the next page of results.
+	// Page token.  To get the next page of results, set [page_token] to the [ListClusterBackupsResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1137,7 +1252,7 @@ func (m *ListClusterBackupsRequest) Reset()         { *m = ListClusterBackupsReq
 func (m *ListClusterBackupsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListClusterBackupsRequest) ProtoMessage()    {}
 func (*ListClusterBackupsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{18}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{20}
 }
 func (m *ListClusterBackupsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterBackupsRequest.Unmarshal(m, b)
@@ -1179,13 +1294,12 @@ func (m *ListClusterBackupsRequest) GetPageToken() string {
 }
 
 type ListClusterBackupsResponse struct {
-	// Requested list of backups.
+	// List of MySQL backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
-	// This token allows you to get the next page of results for ListClusterBackups requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListClusterBackups request. Subsequent ListClusterBackups
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListClusterBackupsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1196,7 +1310,7 @@ func (m *ListClusterBackupsResponse) Reset()         { *m = ListClusterBackupsRe
 func (m *ListClusterBackupsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListClusterBackupsResponse) ProtoMessage()    {}
 func (*ListClusterBackupsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{19}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{21}
 }
 func (m *ListClusterBackupsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterBackupsResponse.Unmarshal(m, b)
@@ -1231,15 +1345,15 @@ func (m *ListClusterBackupsResponse) GetNextPageToken() string {
 }
 
 type ListClusterHostsRequest struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster.
+	// To get the MySQL cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListClusterHosts requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListClusterHosts
-	// request to get the next page of results.
+	// Page token.  To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token]
+	// returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1250,7 +1364,7 @@ func (m *ListClusterHostsRequest) Reset()         { *m = ListClusterHostsRequest
 func (m *ListClusterHostsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListClusterHostsRequest) ProtoMessage()    {}
 func (*ListClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{20}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{22}
 }
 func (m *ListClusterHostsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterHostsRequest.Unmarshal(m, b)
@@ -1292,13 +1406,12 @@ func (m *ListClusterHostsRequest) GetPageToken() string {
 }
 
 type ListClusterHostsResponse struct {
-	// Requested list of hosts.
+	// List of MySQL hosts.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	// This token allows you to get the next page of results for ListClusterHosts requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListClusterHosts request. Subsequent ListClusterHosts
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1309,7 +1422,7 @@ func (m *ListClusterHostsResponse) Reset()         { *m = ListClusterHostsRespon
 func (m *ListClusterHostsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListClusterHostsResponse) ProtoMessage()    {}
 func (*ListClusterHostsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{21}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{23}
 }
 func (m *ListClusterHostsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListClusterHostsResponse.Unmarshal(m, b)
@@ -1344,9 +1457,10 @@ func (m *ListClusterHostsResponse) GetNextPageToken() string {
 }
 
 type AddClusterHostsRequest struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to add hosts to.
+	// To get the MySQL cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required.
+	// Configurations for MySQL hosts that should be added to the cluster.
 	HostSpecs            []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
@@ -1357,7 +1471,7 @@ func (m *AddClusterHostsRequest) Reset()         { *m = AddClusterHostsRequest{}
 func (m *AddClusterHostsRequest) String() string { return proto.CompactTextString(m) }
 func (*AddClusterHostsRequest) ProtoMessage()    {}
 func (*AddClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{22}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{24}
 }
 func (m *AddClusterHostsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AddClusterHostsRequest.Unmarshal(m, b)
@@ -1392,9 +1506,9 @@ func (m *AddClusterHostsRequest) GetHostSpecs() []*HostSpec {
 }
 
 type AddClusterHostsMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to which the hosts are being added.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The name of adding host.
+	// Names of hosts that are being added to the cluster.
 	HostNames            []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1405,7 +1519,7 @@ func (m *AddClusterHostsMetadata) Reset()         { *m = AddClusterHostsMetadata
 func (m *AddClusterHostsMetadata) String() string { return proto.CompactTextString(m) }
 func (*AddClusterHostsMetadata) ProtoMessage()    {}
 func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{23}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{25}
 }
 func (m *AddClusterHostsMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AddClusterHostsMetadata.Unmarshal(m, b)
@@ -1440,9 +1554,10 @@ func (m *AddClusterHostsMetadata) GetHostNames() []string {
 }
 
 type DeleteClusterHostsRequest struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to remove hosts from.
+	// To get the MySQL cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the host to delete.
+	// Names of hosts to delete.
 	HostNames            []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1453,7 +1568,7 @@ func (m *DeleteClusterHostsRequest) Reset()         { *m = DeleteClusterHostsReq
 func (m *DeleteClusterHostsRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteClusterHostsRequest) ProtoMessage()    {}
 func (*DeleteClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{24}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{26}
 }
 func (m *DeleteClusterHostsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteClusterHostsRequest.Unmarshal(m, b)
@@ -1488,9 +1603,9 @@ func (m *DeleteClusterHostsRequest) GetHostNames() []string {
 }
 
 type DeleteClusterHostsMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to remove hosts from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The name of deleting host.
+	// Names of hosts that are being deleted.
 	HostNames            []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1501,7 +1616,7 @@ func (m *DeleteClusterHostsMetadata) Reset()         { *m = DeleteClusterHostsMe
 func (m *DeleteClusterHostsMetadata) String() string { return proto.CompactTextString(m) }
 func (*DeleteClusterHostsMetadata) ProtoMessage()    {}
 func (*DeleteClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{25}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{27}
 }
 func (m *DeleteClusterHostsMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeleteClusterHostsMetadata.Unmarshal(m, b)
@@ -1536,7 +1651,7 @@ func (m *DeleteClusterHostsMetadata) GetHostNames() []string {
 }
 
 type StartClusterRequest struct {
-	// Required. ID of the MySQL cluster to start.
+	// ID of the MySQL cluster to start.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1547,7 +1662,7 @@ func (m *StartClusterRequest) Reset()         { *m = StartClusterRequest{} }
 func (m *StartClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*StartClusterRequest) ProtoMessage()    {}
 func (*StartClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{26}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{28}
 }
 func (m *StartClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StartClusterRequest.Unmarshal(m, b)
@@ -1575,7 +1690,7 @@ func (m *StartClusterRequest) GetClusterId() string {
 }
 
 type StartClusterMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster being started.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1586,7 +1701,7 @@ func (m *StartClusterMetadata) Reset()         { *m = StartClusterMetadata{} }
 func (m *StartClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*StartClusterMetadata) ProtoMessage()    {}
 func (*StartClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{27}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{29}
 }
 func (m *StartClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StartClusterMetadata.Unmarshal(m, b)
@@ -1614,7 +1729,7 @@ func (m *StartClusterMetadata) GetClusterId() string {
 }
 
 type StopClusterRequest struct {
-	// Required. ID of the MySQL cluster to stop.
+	// ID of the MySQL cluster to stop.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1625,7 +1740,7 @@ func (m *StopClusterRequest) Reset()         { *m = StopClusterRequest{} }
 func (m *StopClusterRequest) String() string { return proto.CompactTextString(m) }
 func (*StopClusterRequest) ProtoMessage()    {}
 func (*StopClusterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{28}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{30}
 }
 func (m *StopClusterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StopClusterRequest.Unmarshal(m, b)
@@ -1653,7 +1768,7 @@ func (m *StopClusterRequest) GetClusterId() string {
 }
 
 type StopClusterMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster being stopped.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1664,7 +1779,7 @@ func (m *StopClusterMetadata) Reset()         { *m = StopClusterMetadata{} }
 func (m *StopClusterMetadata) String() string { return proto.CompactTextString(m) }
 func (*StopClusterMetadata) ProtoMessage()    {}
 func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{29}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{31}
 }
 func (m *StopClusterMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StopClusterMetadata.Unmarshal(m, b)
@@ -1692,9 +1807,9 @@ func (m *StopClusterMetadata) GetClusterId() string {
 }
 
 type UpdateClusterHostsMetadata struct {
-	// Required. ID of the MySQL cluster.
+	// ID of the MySQL cluster to modify hosts in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The name of updating host.
+	// Names of hosts that are being modified.
 	HostNames            []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1705,7 +1820,7 @@ func (m *UpdateClusterHostsMetadata) Reset()         { *m = UpdateClusterHostsMe
 func (m *UpdateClusterHostsMetadata) String() string { return proto.CompactTextString(m) }
 func (*UpdateClusterHostsMetadata) ProtoMessage()    {}
 func (*UpdateClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{30}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{32}
 }
 func (m *UpdateClusterHostsMetadata) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateClusterHostsMetadata.Unmarshal(m, b)
@@ -1740,9 +1855,21 @@ func (m *UpdateClusterHostsMetadata) GetHostNames() []string {
 }
 
 type HostSpec struct {
-	// ID of the availability zone.
-	ZoneId               string   `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	SubnetId             string   `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// ID of the availability zone where the host resides.
+	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// ID of the subnet that the host should belong to. This subnet should be a part
+	// of the network that the cluster belongs to.
+	// The ID of the network is set in the field [Cluster.network_id].
+	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Whether the host should get a public IP address on creation.
+	//
+	// After a host has been created, this setting cannot be changed. To remove an assigned public IP, or to assign
+	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
+	//
+	// Possible values:
+	// * false — don't assign a public IP to the host.
+	// * true — the host should have a public IP address.
 	AssignPublicIp       bool     `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1753,7 +1880,7 @@ func (m *HostSpec) Reset()         { *m = HostSpec{} }
 func (m *HostSpec) String() string { return proto.CompactTextString(m) }
 func (*HostSpec) ProtoMessage()    {}
 func (*HostSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{31}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{33}
 }
 func (m *HostSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_HostSpec.Unmarshal(m, b)
@@ -1795,25 +1922,29 @@ func (m *HostSpec) GetAssignPublicIp() bool {
 }
 
 type ConfigSpec struct {
-	// Vetsion of MySQL RDBMS.
+	// Version of MySQL used in the cluster.
+	// Possible values:
+	// * 5.7
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// Configuration settings of MySQL DBMS.
+	// Configuration of a MySQL cluster.
 	//
 	// Types that are valid to be assigned to MysqlConfig:
 	//	*ConfigSpec_MysqlConfig_5_7
 	MysqlConfig isConfigSpec_MysqlConfig `protobuf_oneof:"mysql_config"`
 	// Resources allocated to MySQL hosts.
-	Resources            *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Start time for the daily backup in UTC timezone
+	BackupWindowStart    *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ConfigSpec) Reset()         { *m = ConfigSpec{} }
 func (m *ConfigSpec) String() string { return proto.CompactTextString(m) }
 func (*ConfigSpec) ProtoMessage()    {}
 func (*ConfigSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cluster_service_253fa5408cf7630c, []int{32}
+	return fileDescriptor_cluster_service_301e700735671c3e, []int{34}
 }
 func (m *ConfigSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConfigSpec.Unmarshal(m, b)
@@ -1867,6 +1998,13 @@ func (m *ConfigSpec) GetMysqlConfig_5_7() *config.MysqlConfig5_7 {
 func (m *ConfigSpec) GetResources() *Resources {
 	if m != nil {
 		return m.Resources
+	}
+	return nil
+}
+
+func (m *ConfigSpec) GetBackupWindowStart() *timeofday.TimeOfDay {
+	if m != nil {
+		return m.BackupWindowStart
 	}
 	return nil
 }
@@ -1943,6 +2081,8 @@ func init() {
 	proto.RegisterType((*RestoreClusterRequest)(nil), "yandex.cloud.mdb.mysql.v1alpha.RestoreClusterRequest")
 	proto.RegisterMapType((map[string]string)(nil), "yandex.cloud.mdb.mysql.v1alpha.RestoreClusterRequest.LabelsEntry")
 	proto.RegisterType((*RestoreClusterMetadata)(nil), "yandex.cloud.mdb.mysql.v1alpha.RestoreClusterMetadata")
+	proto.RegisterType((*SwitchoverClusterRequest)(nil), "yandex.cloud.mdb.mysql.v1alpha.SwitchoverClusterRequest")
+	proto.RegisterType((*SwitchoverClusterMetadata)(nil), "yandex.cloud.mdb.mysql.v1alpha.SwitchoverClusterMetadata")
 	proto.RegisterType((*LogRecord)(nil), "yandex.cloud.mdb.mysql.v1alpha.LogRecord")
 	proto.RegisterMapType((map[string]string)(nil), "yandex.cloud.mdb.mysql.v1alpha.LogRecord.MessageEntry")
 	proto.RegisterType((*ListClusterLogsRequest)(nil), "yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsRequest")
@@ -1980,34 +2120,39 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ClusterServiceClient interface {
 	// Returns the specified MySQL cluster.
+	//
+	// To get the list of available MySQL clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves a list of MySQL clusters.
+	// Retrieves the list of MySQL clusters that belong to the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Creates a MySQL cluster.
+	// Creates a MySQL cluster in the specified folder.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Modifies the specified MySQL cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified MySQL cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start the specified MySQL cluster.
+	// Starts the specified MySQL cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stop the specified MySQL cluster.
+	// Stops the specified MySQL cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Create a backup for the specified MySQL cluster.
+	// Creates a backup for the specified MySQL cluster.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a new MySQL cluster from the specified backup.
+	// Creates a new MySQL cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns logs for the specified MySQL cluster.
-	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
+	// Switch master to recent replica or custom fqdn.
+	Switchover(ctx context.Context, in *SwitchoverClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves logs for the specified MySQL cluster.
+	// For more information about logs, see the [Logs](/docs/managed-mysql/concepts/logs) section in the documentation.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
+	// Retrieves the list of operations for the specified MySQL cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
-	// Returns the list of available backups for the specified MySQL cluster.
+	// Retrieves the list of available backups for the specified MySQL cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
-	// Retrieves a list of hosts.
+	// Retrieves a list of hosts for the specified MySQL cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
-	// Creates a new hosts.
+	// Creates new hosts for a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified host.
+	// Deletes the specified hosts for a cluster.
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -2100,6 +2245,15 @@ func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRe
 	return out, nil
 }
 
+func (c *clusterServiceClient) Switchover(ctx context.Context, in *SwitchoverClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.mysql.v1alpha.ClusterService/Switchover", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error) {
 	out := new(ListClusterLogsResponse)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.mysql.v1alpha.ClusterService/ListLogs", in, out, opts...)
@@ -2157,34 +2311,39 @@ func (c *clusterServiceClient) DeleteHosts(ctx context.Context, in *DeleteCluste
 // ClusterServiceServer is the server API for ClusterService service.
 type ClusterServiceServer interface {
 	// Returns the specified MySQL cluster.
+	//
+	// To get the list of available MySQL clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves a list of MySQL clusters.
+	// Retrieves the list of MySQL clusters that belong to the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Creates a MySQL cluster.
+	// Creates a MySQL cluster in the specified folder.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
 	// Modifies the specified MySQL cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified MySQL cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Start the specified MySQL cluster.
+	// Starts the specified MySQL cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stop the specified MySQL cluster.
+	// Stops the specified MySQL cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Create a backup for the specified MySQL cluster.
+	// Creates a backup for the specified MySQL cluster.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
-	// Creates a new MySQL cluster from the specified backup.
+	// Creates a new MySQL cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
-	// Returns logs for the specified MySQL cluster.
-	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
+	// Switch master to recent replica or custom fqdn.
+	Switchover(context.Context, *SwitchoverClusterRequest) (*operation.Operation, error)
+	// Retrieves logs for the specified MySQL cluster.
+	// For more information about logs, see the [Logs](/docs/managed-mysql/concepts/logs) section in the documentation.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
+	// Retrieves the list of operations for the specified MySQL cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
-	// Returns the list of available backups for the specified MySQL cluster.
+	// Retrieves the list of available backups for the specified MySQL cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
-	// Retrieves a list of hosts.
+	// Retrieves a list of hosts for the specified MySQL cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
-	// Creates a new hosts.
+	// Creates new hosts for a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
-	// Deletes the specified host.
+	// Deletes the specified hosts for a cluster.
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 }
 
@@ -2354,6 +2513,24 @@ func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_Switchover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SwitchoverClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Switchover(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.mysql.v1alpha.ClusterService/Switchover",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Switchover(ctx, req.(*SwitchoverClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterLogsRequest)
 	if err := dec(in); err != nil {
@@ -2503,6 +2680,10 @@ var _ClusterService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_Restore_Handler,
 		},
 		{
+			MethodName: "Switchover",
+			Handler:    _ClusterService_Switchover_Handler,
+		},
+		{
 			MethodName: "ListLogs",
 			Handler:    _ClusterService_ListLogs_Handler,
 		},
@@ -2532,147 +2713,155 @@ var _ClusterService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/cluster_service.proto", fileDescriptor_cluster_service_253fa5408cf7630c)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/cluster_service.proto", fileDescriptor_cluster_service_301e700735671c3e)
 }
 
-var fileDescriptor_cluster_service_253fa5408cf7630c = []byte{
-	// 2203 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x5a, 0xcd, 0x6f, 0x1b, 0xc7,
-	0x15, 0xcf, 0x5a, 0xfc, 0x7c, 0xb4, 0x15, 0x75, 0x2c, 0x2b, 0x0c, 0xeb, 0x0f, 0x79, 0x9b, 0xda,
-	0x32, 0x6d, 0x2e, 0xbf, 0xf4, 0x61, 0x29, 0x76, 0x62, 0x51, 0x96, 0x6d, 0xb6, 0xb6, 0xe3, 0xae,
-	0xec, 0x06, 0xb1, 0x61, 0x6c, 0x97, 0xdc, 0x11, 0x4d, 0x88, 0xdc, 0x65, 0x38, 0x4b, 0xc5, 0x72,
-	0x91, 0x20, 0x75, 0x81, 0x1e, 0x7c, 0x2d, 0xd0, 0x22, 0x2d, 0xd0, 0xff, 0xa0, 0x87, 0xea, 0xd0,
-	0x00, 0x41, 0x91, 0x43, 0x2e, 0x76, 0x2f, 0x3d, 0x28, 0x7f, 0x41, 0x81, 0x1c, 0x7a, 0xca, 0x21,
-	0xc7, 0x5e, 0x5a, 0xcc, 0xc7, 0x92, 0xbb, 0x12, 0xa5, 0xdd, 0x95, 0xec, 0xa2, 0xb9, 0x71, 0x67,
-	0xde, 0x7b, 0xf3, 0x7b, 0x6f, 0xde, 0x9b, 0xf7, 0x01, 0xc2, 0xf4, 0x86, 0x6e, 0x1a, 0xf8, 0x71,
-	0xbe, 0xde, 0xb2, 0x7a, 0x46, 0xbe, 0x6d, 0xd4, 0xf2, 0xed, 0x0d, 0xf2, 0x61, 0x2b, 0xbf, 0x5e,
-	0xd4, 0x5b, 0x9d, 0x47, 0x7a, 0xbe, 0xde, 0xea, 0x11, 0x1b, 0x77, 0x35, 0x82, 0xbb, 0xeb, 0xcd,
-	0x3a, 0x56, 0x3a, 0x5d, 0xcb, 0xb6, 0xd0, 0x49, 0xce, 0xa5, 0x30, 0x2e, 0xa5, 0x6d, 0xd4, 0x14,
-	0xc6, 0xa5, 0x08, 0xae, 0xcc, 0xf1, 0x86, 0x65, 0x35, 0x5a, 0x38, 0xaf, 0x77, 0x9a, 0x79, 0xdd,
-	0x34, 0x2d, 0x5b, 0xb7, 0x9b, 0x96, 0x49, 0x38, 0x77, 0x66, 0x52, 0xec, 0xb2, 0xaf, 0x5a, 0x6f,
-	0x35, 0xbf, 0xda, 0xc4, 0x2d, 0x43, 0x6b, 0xeb, 0x64, 0x4d, 0x50, 0x9c, 0xda, 0x4e, 0x61, 0x37,
-	0xdb, 0x98, 0xd8, 0x7a, 0xbb, 0x23, 0x08, 0x32, 0x02, 0x36, 0x3d, 0xc0, 0xea, 0xe0, 0x2e, 0x93,
-	0x2f, 0xf6, 0xce, 0x78, 0x54, 0xea, 0xef, 0xee, 0xa0, 0x3b, 0xe1, 0xa1, 0x5b, 0xd7, 0x5b, 0x4d,
-	0xc3, 0xbd, 0x7d, 0xde, 0xc7, 0x32, 0x35, 0xbd, 0xbe, 0xd6, 0x73, 0xf0, 0x5c, 0x08, 0x66, 0x46,
-	0x41, 0x9d, 0xf3, 0xa1, 0x36, 0x74, 0x5b, 0xaf, 0xe9, 0x44, 0x58, 0x3b, 0x73, 0xce, 0x87, 0xbc,
-	0x47, 0xfa, 0x92, 0x7d, 0xaf, 0xd3, 0x32, 0x57, 0x9b, 0x0d, 0xbe, 0x38, 0xa3, 0xcd, 0x71, 0x2e,
-	0xf9, 0x0a, 0xfc, 0xe0, 0x3a, 0xb6, 0x97, 0x38, 0x46, 0x15, 0x7f, 0xd8, 0xc3, 0xc4, 0x46, 0xe7,
-	0x01, 0x9c, 0xcb, 0x6f, 0x1a, 0x69, 0x69, 0x52, 0x9a, 0x4a, 0x56, 0x0e, 0xff, 0xeb, 0x79, 0x51,
-	0x7a, 0xf6, 0xa2, 0x18, 0xb9, 0x74, 0x79, 0xa6, 0xa0, 0x26, 0xc5, 0x7e, 0xd5, 0x90, 0x3f, 0x97,
-	0xe0, 0xe8, 0xcd, 0x26, 0x71, 0x64, 0x10, 0x47, 0xc8, 0x39, 0x48, 0xae, 0x5a, 0x2d, 0x63, 0x77,
-	0x19, 0x09, 0xbe, 0x5d, 0x35, 0xd0, 0x59, 0x48, 0x76, 0xf4, 0x06, 0xd6, 0x48, 0xf3, 0x09, 0x4e,
-	0x1f, 0x9a, 0x94, 0xa6, 0x46, 0x2a, 0xf0, 0xef, 0xe7, 0xc5, 0x58, 0x21, 0x57, 0x2c, 0x14, 0x0a,
-	0x6a, 0x82, 0x6e, 0xae, 0x34, 0x9f, 0x60, 0x34, 0x05, 0xc0, 0x08, 0x6d, 0x6b, 0x0d, 0x9b, 0xe9,
-	0x11, 0x26, 0x34, 0xf9, 0xec, 0x45, 0x31, 0x7a, 0xe9, 0x72, 0xb1, 0x50, 0x50, 0x99, 0x94, 0xbb,
-	0x74, 0x0f, 0xc9, 0x10, 0x5b, 0x6d, 0xb6, 0x6c, 0xdc, 0x4d, 0x47, 0x18, 0x15, 0x3c, 0x7b, 0x51,
-	0x8c, 0x31, 0xaa, 0x82, 0x2a, 0x76, 0xe4, 0x5f, 0x4b, 0x30, 0xee, 0x45, 0x4e, 0x3a, 0x96, 0x49,
-	0x30, 0x5a, 0x82, 0x84, 0xd0, 0x8f, 0xa4, 0xa5, 0xc9, 0x91, 0xa9, 0x54, 0xe9, 0xac, 0xb2, 0xb7,
-	0xdb, 0x2b, 0x8e, 0x05, 0xfb, 0x8c, 0xe8, 0x0c, 0xbc, 0x6e, 0xe2, 0xc7, 0xb6, 0xe6, 0x02, 0x4c,
-	0x55, 0x4b, 0xaa, 0x47, 0xe8, 0xf2, 0x1d, 0x07, 0xa9, 0xfc, 0xe7, 0x18, 0x8c, 0x2f, 0x75, 0xb1,
-	0x6e, 0xe3, 0x6d, 0xb7, 0x10, 0xc2, 0x80, 0x25, 0x88, 0x98, 0x7a, 0x9b, 0xdb, 0x2e, 0x59, 0x39,
-	0x49, 0xa9, 0xbe, 0x7b, 0x5e, 0x1c, 0x7d, 0xa0, 0xe7, 0x9e, 0x2c, 0xe6, 0xee, 0x17, 0x72, 0xf3,
-	0x5a, 0xee, 0x61, 0x96, 0xf3, 0xcd, 0x96, 0x55, 0x46, 0x8b, 0xce, 0x43, 0xca, 0xc0, 0xa4, 0xde,
-	0x6d, 0x76, 0xa8, 0xe7, 0x7b, 0x8d, 0x59, 0x9a, 0x99, 0x55, 0xdd, 0xbb, 0xe8, 0x33, 0x09, 0x62,
-	0x2d, 0xbd, 0x86, 0x5b, 0x24, 0x1d, 0x61, 0x06, 0xb9, 0xe2, 0x6b, 0x90, 0x21, 0x2a, 0x29, 0x37,
-	0x99, 0x88, 0x65, 0xd3, 0xee, 0x6e, 0x54, 0xde, 0xfd, 0xee, 0x79, 0x31, 0xf5, 0x20, 0xa7, 0x15,
-	0x72, 0xf3, 0x7a, 0xee, 0xc9, 0xc3, 0xec, 0x53, 0x0e, 0x6f, 0xda, 0x81, 0xb9, 0xf9, 0xa2, 0x18,
-	0xcb, 0x44, 0x8a, 0x39, 0xf6, 0x0b, 0xa1, 0x31, 0xaa, 0xcc, 0x43, 0x17, 0xbd, 0x2a, 0x00, 0xa1,
-	0x7b, 0x90, 0xc2, 0xe6, 0x7a, 0xb3, 0x6b, 0x99, 0x6d, 0x6c, 0xda, 0xe9, 0xe8, 0xa4, 0x34, 0x35,
-	0x5a, 0x2a, 0x07, 0xbc, 0x30, 0x65, 0x79, 0xc0, 0xaa, 0xba, 0xe5, 0xa0, 0x9f, 0x42, 0x8a, 0x87,
-	0x8c, 0x46, 0x3a, 0xb8, 0x9e, 0x8e, 0x4d, 0x4a, 0x53, 0xa9, 0x52, 0xd6, 0x57, 0x2c, 0x63, 0x59,
-	0xe9, 0xe0, 0xba, 0x0a, 0xf5, 0xfe, 0x6f, 0xb4, 0x02, 0xa3, 0x4e, 0x64, 0x33, 0x71, 0x24, 0x1d,
-	0x67, 0x66, 0xbc, 0xe0, 0x27, 0xef, 0xaa, 0xe0, 0x62, 0x12, 0x8f, 0x18, 0xae, 0x2f, 0x82, 0xae,
-	0x03, 0xd0, 0xf8, 0x17, 0x02, 0x13, 0x4c, 0xe0, 0x94, 0x9f, 0xc0, 0x7b, 0x04, 0x77, 0x99, 0xb0,
-	0x64, 0x4f, 0xfc, 0x62, 0x82, 0x1e, 0x59, 0xc4, 0x16, 0x82, 0x92, 0xc1, 0x04, 0xdd, 0xb0, 0x88,
-	0xcd, 0x05, 0x3d, 0x12, 0xbf, 0x08, 0x3a, 0x0b, 0x60, 0x62, 0xfb, 0x23, 0xab, 0xbb, 0x46, 0x7d,
-	0x16, 0x98, 0x4b, 0x25, 0x06, 0x8f, 0x86, 0xd8, 0xab, 0x1a, 0x99, 0x79, 0x48, 0xb9, 0x7c, 0x01,
-	0x8d, 0xc1, 0xc8, 0x1a, 0xde, 0xe0, 0x4e, 0xae, 0xd2, 0x9f, 0x68, 0x1c, 0xa2, 0xeb, 0x7a, 0xab,
-	0x27, 0x5c, 0x5a, 0xe5, 0x1f, 0x0b, 0x87, 0x2e, 0x4a, 0xf2, 0x2c, 0x1c, 0xf3, 0xf8, 0xd6, 0x2d,
-	0x6c, 0xeb, 0xd4, 0x2e, 0xe8, 0xc4, 0xce, 0x57, 0xcb, 0xfd, 0x4e, 0xfd, 0x2a, 0x02, 0xe3, 0xf7,
-	0x3a, 0xc6, 0xce, 0x38, 0x0b, 0xf3, 0xda, 0xa1, 0xb7, 0x21, 0xd5, 0x63, 0x42, 0x58, 0xce, 0x62,
-	0xe8, 0x52, 0xa5, 0x8c, 0xc2, 0x93, 0x96, 0xe2, 0x24, 0x2d, 0xe5, 0x1a, 0x4d, 0x6b, 0xb7, 0x74,
-	0xb2, 0xa6, 0x02, 0x27, 0xa7, 0xbf, 0x5f, 0x75, 0xc8, 0x0d, 0xd3, 0xee, 0xd5, 0x84, 0xdc, 0xb6,
-	0xd8, 0x88, 0x1e, 0x28, 0x36, 0x14, 0xf1, 0x78, 0xc5, 0x98, 0x39, 0x32, 0x7e, 0x0f, 0xd7, 0x01,
-	0x7d, 0xc7, 0x63, 0xa4, 0xa0, 0xbe, 0xb3, 0x04, 0xe3, 0x57, 0x71, 0x0b, 0x1f, 0xc8, 0x75, 0xe8,
-	0xe1, 0x1e, 0x21, 0x21, 0x0e, 0xaf, 0xb0, 0x82, 0xe3, 0x80, 0x87, 0x7b, 0x84, 0x04, 0x3d, 0xfc,
-	0xf3, 0x28, 0x1c, 0x53, 0x31, 0xb1, 0xad, 0xee, 0x76, 0xdd, 0x4f, 0x43, 0x92, 0xd7, 0x41, 0x83,
-	0xd3, 0x23, 0xf4, 0x74, 0x35, 0xc1, 0x97, 0xab, 0x06, 0x9a, 0x86, 0x08, 0xad, 0xde, 0x76, 0x8d,
-	0x92, 0xbb, 0x4e, 0x69, 0x27, 0x38, 0x19, 0x35, 0xca, 0x0a, 0x7f, 0xe0, 0x89, 0x7b, 0x62, 0x78,
-	0x32, 0x1b, 0x9e, 0xc4, 0xa2, 0x7b, 0x46, 0xd4, 0x1f, 0x06, 0x11, 0x15, 0x63, 0x11, 0xb5, 0xe8,
-	0xe7, 0xb1, 0x43, 0x35, 0xff, 0x9f, 0x64, 0xb1, 0xf8, 0xab, 0xc9, 0x62, 0x89, 0x03, 0x45, 0xea,
-	0xf7, 0x2a, 0x4f, 0xdc, 0x85, 0x09, 0xef, 0xf5, 0x05, 0x74, 0x79, 0xf4, 0x43, 0xb7, 0x63, 0x73,
-	0xb1, 0x7d, 0x97, 0x96, 0xbf, 0x96, 0x20, 0x79, 0xd3, 0x6a, 0xa8, 0xb8, 0x6e, 0x75, 0x0d, 0x74,
-	0x11, 0x92, 0xfd, 0xf6, 0x84, 0x09, 0xda, 0xd3, 0xcb, 0xd5, 0x01, 0x31, 0xba, 0x03, 0xf1, 0x36,
-	0x26, 0x44, 0x6f, 0x50, 0xe4, 0xd4, 0x8e, 0xb3, 0x7e, 0x76, 0xec, 0x9f, 0xaa, 0xdc, 0xe2, 0x8c,
-	0xcc, 0x24, 0xaa, 0x23, 0x26, 0xb3, 0x00, 0x87, 0xdd, 0x1b, 0xa1, 0x6c, 0xf5, 0x9f, 0x11, 0x98,
-	0x70, 0x55, 0xc2, 0x37, 0xad, 0x06, 0xd9, 0x57, 0x76, 0xfc, 0x11, 0x1c, 0xa9, 0x5b, 0xad, 0x5e,
-	0xdb, 0xd4, 0x44, 0xf1, 0x4d, 0x75, 0x4b, 0xaa, 0x87, 0xf9, 0xe2, 0x35, 0xb6, 0x86, 0x30, 0x1c,
-	0x16, 0x2d, 0xa5, 0x66, 0x6f, 0x74, 0x30, 0x4b, 0x83, 0xa3, 0xa5, 0x8a, 0xaf, 0xfe, 0x43, 0xf1,
-	0x29, 0x2b, 0x5c, 0xd4, 0xdd, 0x8d, 0x0e, 0x56, 0x53, 0x64, 0xf0, 0x81, 0xe6, 0x20, 0xb9, 0xda,
-	0xb5, 0xda, 0x1a, 0x7b, 0x81, 0x22, 0xbe, 0x77, 0x93, 0xa0, 0xc4, 0xf4, 0x13, 0x95, 0x21, 0x6e,
-	0x5b, 0x9c, 0x2d, 0xea, 0xcb, 0x16, 0xb3, 0x2d, 0xc6, 0xe4, 0x69, 0x61, 0x62, 0x81, 0x5b, 0x98,
-	0xf8, 0x1e, 0x2d, 0x4c, 0x19, 0x26, 0xf4, 0xd6, 0x47, 0xfa, 0x06, 0xd1, 0xb6, 0xf7, 0x11, 0x34,
-	0x8a, 0x13, 0xea, 0x51, 0xbe, 0x7b, 0xdb, 0xd3, 0x4d, 0xcc, 0x42, 0xca, 0x65, 0x11, 0x74, 0x1c,
-	0xd2, 0x2b, 0xcb, 0xea, 0xcf, 0xab, 0x4b, 0xcb, 0xda, 0xdd, 0x0f, 0xee, 0x2c, 0x6b, 0xf7, 0x6e,
-	0xaf, 0xdc, 0x59, 0x5e, 0xaa, 0x5e, 0xab, 0x2e, 0x5f, 0x1d, 0x7b, 0x0d, 0x25, 0x21, 0x7a, 0xeb,
-	0x83, 0x95, 0x9f, 0xdd, 0x1c, 0x93, 0xe4, 0x4f, 0x25, 0x78, 0x63, 0x87, 0x85, 0x45, 0x3b, 0x74,
-	0x19, 0x22, 0x2d, 0xab, 0xe1, 0xb4, 0x42, 0xe7, 0x02, 0x3b, 0xaa, 0xca, 0xd8, 0x02, 0x37, 0x42,
-	0x7f, 0x92, 0xe0, 0xb8, 0x0b, 0xc2, 0x7b, 0x4e, 0xcf, 0xbe, 0x3f, 0x57, 0x7c, 0xf9, 0x3d, 0xa5,
-	0xfc, 0x4c, 0x82, 0x13, 0xbb, 0x00, 0x14, 0x96, 0x5a, 0x04, 0xe8, 0x8f, 0x1a, 0x1c, 0x7b, 0x9d,
-	0xf6, 0xda, 0x6b, 0x30, 0x8a, 0xe8, 0xf3, 0xab, 0x2e, 0xa6, 0xc0, 0xd6, 0xfa, 0xa3, 0x04, 0x6f,
-	0xba, 0xc0, 0xf0, 0xe4, 0xfe, 0x72, 0x4d, 0x25, 0xda, 0xe5, 0xfd, 0x98, 0xea, 0x37, 0x12, 0x64,
-	0x86, 0xa1, 0x13, 0x76, 0xba, 0x02, 0x71, 0xfe, 0xa2, 0x3a, 0x46, 0x3a, 0xe3, 0xe7, 0x54, 0x5c,
-	0x82, 0xea, 0xb0, 0x05, 0x36, 0xd3, 0x67, 0x5e, 0xbf, 0xa6, 0xc9, 0xe8, 0xff, 0xc6, 0x9f, 0x3e,
-	0x81, 0xf4, 0x4e, 0x68, 0xc2, 0x42, 0x0b, 0x10, 0xa5, 0xe9, 0xd2, 0xb1, 0xcf, 0x5b, 0x41, 0xb2,
-	0xac, 0xca, 0x59, 0x02, 0xdb, 0xe6, 0x77, 0x12, 0x4c, 0x2c, 0x1a, 0xc6, 0x81, 0x4d, 0xf3, 0x9e,
-	0xa7, 0x2c, 0x38, 0x14, 0xae, 0x2c, 0xa8, 0xc4, 0x9e, 0xbe, 0x28, 0x1e, 0x7a, 0xa7, 0xe0, 0x2a,
-	0x0f, 0xe4, 0xf7, 0xe1, 0x8d, 0x6d, 0xb8, 0x82, 0xe6, 0xee, 0x13, 0x02, 0x0a, 0x2d, 0x0e, 0x89,
-	0xc8, 0x3e, 0x4c, 0xf0, 0x6d, 0xba, 0x20, 0x3f, 0x86, 0x37, 0x3d, 0x25, 0xf8, 0xfe, 0x75, 0x56,
-	0x76, 0x1e, 0x54, 0x79, 0x9d, 0x6b, 0xe2, 0x54, 0x9f, 0x65, 0xf7, 0xc9, 0xf7, 0x21, 0xb3, 0xf3,
-	0xe4, 0x97, 0xa4, 0x55, 0x05, 0x8e, 0xae, 0xd8, 0x7a, 0xf7, 0x40, 0x53, 0xbc, 0x19, 0x18, 0x77,
-	0xcb, 0x08, 0xda, 0x1e, 0x2c, 0x02, 0x5a, 0xb1, 0xad, 0x03, 0x75, 0x26, 0xd3, 0x14, 0xbd, 0x15,
-	0xb6, 0x2f, 0xb9, 0x0f, 0x19, 0x4f, 0x27, 0xf7, 0x32, 0xed, 0xf9, 0x09, 0x24, 0x1c, 0xef, 0x44,
-	0xa7, 0x21, 0xfe, 0xc4, 0x32, 0xf1, 0x40, 0x8f, 0x41, 0x99, 0x1a, 0xa3, 0x1b, 0x55, 0x03, 0xfd,
-	0x18, 0x92, 0xa4, 0x57, 0x33, 0xb1, 0xdd, 0xaf, 0x17, 0x5d, 0x44, 0x09, 0xbe, 0x55, 0x35, 0xd0,
-	0x14, 0x8c, 0xe9, 0x84, 0x34, 0x1b, 0xa6, 0xd6, 0xe9, 0xd5, 0x5a, 0xcd, 0xba, 0xd6, 0xec, 0xb0,
-	0xd7, 0x21, 0xa1, 0x8e, 0xf2, 0xf5, 0x3b, 0x6c, 0xb9, 0xda, 0x91, 0xff, 0x29, 0x01, 0x0c, 0x2a,
-	0x70, 0x94, 0x86, 0xf8, 0x3a, 0xee, 0x12, 0xda, 0xdf, 0x70, 0x4d, 0x9c, 0x4f, 0xf4, 0x0b, 0x18,
-	0x63, 0x41, 0xa5, 0x89, 0x12, 0x7f, 0x46, 0x9b, 0x13, 0xbd, 0xd6, 0x8c, 0x5f, 0xf8, 0x71, 0x0e,
-	0xe5, 0x16, 0x5d, 0xe4, 0x67, 0xcd, 0x68, 0x73, 0x37, 0x5e, 0x53, 0x8f, 0xb4, 0x5d, 0x2b, 0x73,
-	0xe8, 0x3a, 0x24, 0xbb, 0x98, 0x58, 0xbd, 0x6e, 0x1d, 0x13, 0x86, 0x36, 0x40, 0xfe, 0x57, 0x1d,
-	0x06, 0x75, 0xc0, 0x5b, 0x19, 0x85, 0xc3, 0x6e, 0xa8, 0xa5, 0x6f, 0x27, 0x60, 0x54, 0x5c, 0x9d,
-	0xa8, 0x57, 0xd0, 0xef, 0x25, 0x18, 0xb9, 0x8e, 0x6d, 0x54, 0xf4, 0x3b, 0x60, 0xc7, 0xc0, 0x3a,
-	0x13, 0x74, 0x3c, 0x2b, 0x4f, 0x3f, 0xfd, 0xfa, 0x9b, 0xdf, 0x1e, 0x52, 0xd0, 0x85, 0x7c, 0x5b,
-	0x37, 0xf5, 0x06, 0x36, 0x72, 0x43, 0x87, 0xf5, 0x24, 0xff, 0xcb, 0x81, 0xff, 0x7c, 0x4c, 0x1b,
-	0xc7, 0x08, 0x7d, 0xa9, 0x51, 0x39, 0x44, 0x91, 0xea, 0xbc, 0x2b, 0x99, 0xe9, 0x70, 0x4c, 0x3c,
-	0x01, 0xc8, 0x67, 0x19, 0xd2, 0xd3, 0xe8, 0x94, 0x0f, 0x52, 0xf4, 0x17, 0x09, 0x62, 0x7c, 0x20,
-	0x86, 0xa6, 0xf7, 0x33, 0x94, 0xcd, 0xf8, 0x17, 0x28, 0xf2, 0xed, 0xcd, 0xad, 0xec, 0xe4, 0x6e,
-	0x73, 0xb7, 0xb8, 0x58, 0x60, 0x80, 0xdf, 0x92, 0xfd, 0x00, 0x2f, 0x48, 0x59, 0xf4, 0xa5, 0x04,
-	0x31, 0x1e, 0xbe, 0xfe, 0x98, 0x87, 0x4d, 0xb5, 0x82, 0x60, 0x7e, 0xc0, 0x31, 0x0f, 0x9f, 0xf7,
-	0x78, 0x30, 0x17, 0x4b, 0xa1, 0xdc, 0x81, 0x2a, 0xf0, 0x77, 0x09, 0x62, 0xfc, 0x3d, 0xf7, 0x57,
-	0x60, 0xd8, 0xe4, 0x28, 0x88, 0x02, 0xab, 0x9b, 0x5b, 0x59, 0x65, 0xb7, 0x99, 0xd1, 0xb1, 0xed,
-	0x2d, 0xc9, 0x72, 0xbb, 0x63, 0x6f, 0x70, 0xef, 0xce, 0x86, 0xf3, 0xee, 0x2f, 0x25, 0x88, 0xb2,
-	0xb7, 0xdf, 0xdf, 0xbd, 0x87, 0xa4, 0x99, 0x20, 0x9a, 0x3c, 0xdc, 0xdc, 0xca, 0x9e, 0xda, 0x25,
-	0xc1, 0x78, 0x6e, 0x62, 0x5a, 0x2e, 0x85, 0xba, 0x09, 0xc2, 0x60, 0x7f, 0x21, 0x41, 0x84, 0xa6,
-	0x10, 0x54, 0xf2, 0xc7, 0xbf, 0x3d, 0x57, 0x05, 0xf5, 0xa4, 0x93, 0xc3, 0xb3, 0x94, 0x07, 0x7d,
-	0x59, 0x2e, 0x86, 0x44, 0x6f, 0x75, 0xd0, 0x57, 0x12, 0xc4, 0x78, 0x71, 0xeb, 0xef, 0x49, 0xc3,
-	0xc6, 0x80, 0x41, 0x14, 0xd0, 0x78, 0x28, 0x0c, 0x1f, 0x00, 0x7a, 0x54, 0x98, 0x91, 0xcb, 0xa1,
-	0x54, 0xe0, 0xe5, 0x38, 0xfa, 0x9b, 0x04, 0x71, 0x31, 0x6c, 0x41, 0x33, 0xfb, 0x1a, 0xaa, 0x05,
-	0x51, 0xe3, 0xfd, 0xcd, 0xad, 0xec, 0xe9, 0x5d, 0xa7, 0x3a, 0x1e, 0x3d, 0x2e, 0xc8, 0x67, 0xfd,
-	0x9e, 0xa1, 0x2e, 0x17, 0x43, 0xa3, 0xf9, 0xaf, 0x12, 0x24, 0xe8, 0x23, 0x4c, 0xbb, 0x5e, 0x34,
-	0xbb, 0xbf, 0x41, 0x44, 0x66, 0x2e, 0x34, 0x9f, 0x78, 0xe9, 0xe7, 0xb9, 0xf3, 0xa0, 0x70, 0xce,
-	0xc3, 0x5a, 0xeb, 0x7f, 0x48, 0x30, 0x4a, 0xc5, 0x0e, 0x5a, 0x51, 0x74, 0x29, 0x04, 0x8c, 0x1d,
-	0x2d, 0x76, 0xe6, 0xf2, 0x3e, 0xb9, 0x85, 0x2a, 0xef, 0x32, 0x55, 0xe6, 0xd1, 0x5c, 0x18, 0x55,
-	0xf2, 0xae, 0xee, 0xf7, 0x2b, 0x09, 0x52, 0xf4, 0x08, 0xd1, 0x30, 0xa2, 0xf9, 0x10, 0x78, 0xbc,
-	0x2d, 0x70, 0x66, 0x61, 0x3f, 0xac, 0x42, 0x8f, 0x4b, 0x4c, 0x8f, 0x59, 0x34, 0x1d, 0x4a, 0x0f,
-	0xa7, 0x37, 0xfd, 0x42, 0x82, 0x24, 0x15, 0xce, 0x6a, 0x52, 0x14, 0xc6, 0x2f, 0xdc, 0xfd, 0x48,
-	0xe6, 0x62, 0x78, 0x46, 0x01, 0x7f, 0x81, 0x3f, 0xa6, 0x28, 0xd4, 0x63, 0x9a, 0xe7, 0xcd, 0xe3,
-	0x37, 0x12, 0x24, 0x16, 0x0d, 0x83, 0x63, 0xf7, 0x8d, 0x85, 0xe1, 0xed, 0x63, 0x90, 0x60, 0xfe,
-	0x78, 0x73, 0x2b, 0x5b, 0xd8, 0xbd, 0xcf, 0xdb, 0x23, 0xbf, 0x2d, 0xc9, 0xef, 0x84, 0xd7, 0x6b,
-	0xa1, 0xa6, 0xdb, 0xf5, 0x47, 0xbc, 0x80, 0xa1, 0x21, 0xff, 0xad, 0x04, 0x29, 0x9e, 0x59, 0xb9,
-	0xa6, 0xf3, 0xa1, 0xb2, 0x78, 0x58, 0x65, 0x3f, 0x95, 0x36, 0xb7, 0xb2, 0xe5, 0x3d, 0x5b, 0xc0,
-	0x57, 0xa3, 0x30, 0x3f, 0x70, 0x41, 0xca, 0x56, 0x7e, 0x72, 0xff, 0x46, 0xa3, 0x69, 0x3f, 0xea,
-	0xd5, 0x94, 0xba, 0xd5, 0xce, 0x73, 0xc4, 0x39, 0xfe, 0x5f, 0x91, 0x86, 0x95, 0x6b, 0x60, 0x93,
-	0x1d, 0x9c, 0xdf, 0xfb, 0x4f, 0x24, 0x6f, 0xb3, 0xaf, 0x5a, 0x8c, 0xd1, 0x96, 0xff, 0x1b, 0x00,
-	0x00, 0xff, 0xff, 0x39, 0x46, 0x4b, 0x9b, 0x42, 0x24, 0x00, 0x00,
+var fileDescriptor_cluster_service_301e700735671c3e = []byte{
+	// 2333 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x5a, 0xcb, 0x6f, 0x1b, 0xd7,
+	0xd5, 0xcf, 0x48, 0x14, 0x45, 0x1e, 0xda, 0x8a, 0x72, 0x2d, 0x2b, 0x34, 0xe3, 0x87, 0x3c, 0x9f,
+	0x3f, 0x5b, 0xa6, 0xcd, 0xa7, 0x5e, 0x96, 0x62, 0x27, 0x16, 0x65, 0xd9, 0x56, 0x2b, 0x3f, 0x3a,
+	0xb2, 0x6b, 0xc4, 0x86, 0x31, 0x1d, 0x72, 0xae, 0x28, 0x56, 0xe4, 0x0c, 0x33, 0x77, 0x28, 0x5b,
+	0x2e, 0x12, 0xa4, 0x2e, 0xd0, 0x85, 0xb7, 0x05, 0x5a, 0xa4, 0x05, 0xba, 0xef, 0xa2, 0x8b, 0x6a,
+	0xd1, 0x00, 0x41, 0x91, 0x45, 0x16, 0xb5, 0xbb, 0xe9, 0x42, 0x41, 0xff, 0x83, 0x2c, 0xba, 0xea,
+	0x22, 0xcb, 0x6e, 0x5a, 0xdc, 0xc7, 0x90, 0x33, 0x22, 0xa5, 0x99, 0x91, 0xec, 0xa2, 0xdd, 0x71,
+	0xee, 0x3d, 0xe7, 0xdc, 0xf3, 0x3b, 0xf7, 0x9c, 0x7b, 0x1e, 0x12, 0x4c, 0x6e, 0x6a, 0x86, 0x8e,
+	0x9f, 0xe6, 0x2a, 0x75, 0xb3, 0xa5, 0xe7, 0x1a, 0x7a, 0x39, 0xd7, 0xd8, 0x24, 0x1f, 0xd7, 0x73,
+	0x1b, 0x05, 0xad, 0xde, 0x5c, 0xd3, 0x72, 0x95, 0x7a, 0x8b, 0xd8, 0xd8, 0x52, 0x09, 0xb6, 0x36,
+	0x6a, 0x15, 0x9c, 0x6d, 0x5a, 0xa6, 0x6d, 0xa2, 0x93, 0x9c, 0x2b, 0xcb, 0xb8, 0xb2, 0x0d, 0xbd,
+	0x9c, 0x65, 0x5c, 0x59, 0xc1, 0x95, 0x3a, 0x5e, 0x35, 0xcd, 0x6a, 0x1d, 0xe7, 0xb4, 0x66, 0x2d,
+	0xa7, 0x19, 0x86, 0x69, 0x6b, 0x76, 0xcd, 0x34, 0x08, 0xe7, 0x4e, 0x8d, 0x89, 0x5d, 0xf6, 0x55,
+	0x6e, 0xad, 0xe6, 0x56, 0x6b, 0xb8, 0xae, 0xab, 0x0d, 0x8d, 0xac, 0x0b, 0x8a, 0x53, 0x3b, 0x29,
+	0xec, 0x5a, 0x03, 0x13, 0x5b, 0x6b, 0x34, 0x05, 0xc1, 0x7b, 0x82, 0xc0, 0xde, 0x6c, 0x62, 0xb6,
+	0x69, 0xae, 0xea, 0xda, 0xa6, 0xd8, 0x4c, 0x09, 0x4c, 0xf4, 0x74, 0xb3, 0x89, 0x2d, 0x76, 0xb8,
+	0xd8, 0x3b, 0xeb, 0xc1, 0xdb, 0xde, 0xed, 0xa2, 0x3b, 0xe1, 0xa1, 0xdb, 0xd0, 0xea, 0x35, 0xdd,
+	0xbd, 0x7d, 0xc1, 0xc7, 0x6c, 0x65, 0xad, 0xb2, 0xde, 0x72, 0x94, 0xbd, 0x18, 0xcc, 0xc6, 0x82,
+	0x3a, 0xe3, 0x43, 0xad, 0x6b, 0xb6, 0x56, 0xd6, 0x88, 0xb8, 0x8a, 0xd4, 0x79, 0x1f, 0xf2, 0x16,
+	0x69, 0x4b, 0xf6, 0xbd, 0x6b, 0xd3, 0x58, 0xad, 0x55, 0xf9, 0xe2, 0x94, 0x3a, 0xc3, 0xb9, 0xe4,
+	0xab, 0xf0, 0xce, 0x0d, 0x6c, 0x2f, 0x70, 0x1d, 0x15, 0xfc, 0x71, 0x0b, 0x13, 0x1b, 0x5d, 0x00,
+	0x70, 0x3c, 0xa3, 0xa6, 0x27, 0xa5, 0x31, 0x69, 0x3c, 0x5e, 0x3a, 0xf4, 0xf7, 0x97, 0x05, 0xe9,
+	0xc5, 0xab, 0x42, 0xe4, 0xf2, 0x95, 0xa9, 0xbc, 0x12, 0x17, 0xfb, 0x4b, 0xba, 0xfc, 0x85, 0x04,
+	0x47, 0x96, 0x6b, 0xc4, 0x91, 0x41, 0x1c, 0x21, 0xe7, 0x21, 0xbe, 0x6a, 0xd6, 0xf5, 0xdd, 0x65,
+	0xc4, 0xf8, 0xf6, 0x92, 0x8e, 0xce, 0x41, 0xbc, 0xa9, 0x55, 0xb1, 0x4a, 0x6a, 0xcf, 0x70, 0xb2,
+	0x6f, 0x4c, 0x1a, 0xef, 0x2f, 0xc1, 0x3f, 0x5f, 0x16, 0xa2, 0xf9, 0x4c, 0x21, 0x9f, 0xcf, 0x2b,
+	0x31, 0xba, 0xb9, 0x52, 0x7b, 0x86, 0xd1, 0x38, 0x00, 0x23, 0xb4, 0xcd, 0x75, 0x6c, 0x24, 0xfb,
+	0x99, 0xd0, 0xf8, 0x8b, 0x57, 0x85, 0x81, 0xcb, 0x57, 0x0a, 0xf9, 0xbc, 0xc2, 0xa4, 0xdc, 0xa3,
+	0x7b, 0x48, 0x86, 0xe8, 0x6a, 0xad, 0x6e, 0x63, 0x2b, 0x19, 0x61, 0x54, 0xf0, 0xe2, 0x55, 0x21,
+	0xca, 0xa8, 0xf2, 0x8a, 0xd8, 0x91, 0x7f, 0x26, 0xc1, 0x88, 0x57, 0x73, 0xd2, 0x34, 0x0d, 0x82,
+	0xd1, 0x02, 0xc4, 0x04, 0x3e, 0x92, 0x94, 0xc6, 0xfa, 0xc7, 0x13, 0xc5, 0x73, 0xd9, 0xbd, 0x63,
+	0x22, 0xeb, 0x58, 0xb0, 0xcd, 0x88, 0xce, 0xc2, 0xdb, 0x06, 0x7e, 0x6a, 0xab, 0x2e, 0x85, 0x29,
+	0xb4, 0xb8, 0x72, 0x98, 0x2e, 0xdf, 0x75, 0x34, 0x95, 0x7f, 0x1f, 0x85, 0x91, 0x05, 0x0b, 0x6b,
+	0x36, 0xde, 0x71, 0x0b, 0x21, 0x0c, 0x58, 0x84, 0x88, 0xa1, 0x35, 0xb8, 0xed, 0xe2, 0xa5, 0x93,
+	0x94, 0xea, 0xbb, 0x97, 0x85, 0xa1, 0x47, 0x5a, 0xe6, 0xd9, 0x7c, 0xe6, 0x61, 0x3e, 0x33, 0xab,
+	0x66, 0x1e, 0xa7, 0x39, 0xdf, 0xf4, 0x84, 0xc2, 0x68, 0xd1, 0x05, 0x48, 0xe8, 0x98, 0x54, 0xac,
+	0x5a, 0x93, 0x7a, 0xbe, 0xd7, 0x98, 0xc5, 0xa9, 0x69, 0xc5, 0xbd, 0x8b, 0x3e, 0x97, 0x20, 0x5a,
+	0xd7, 0xca, 0xb8, 0x4e, 0x92, 0x11, 0x66, 0x90, 0xab, 0xbe, 0x06, 0xe9, 0x01, 0x29, 0xbb, 0xcc,
+	0x44, 0x2c, 0x1a, 0xb6, 0xb5, 0x59, 0xfa, 0xf0, 0xbb, 0x97, 0x85, 0xc4, 0xa3, 0x8c, 0x9a, 0xcf,
+	0xcc, 0x6a, 0x99, 0x67, 0x8f, 0xd3, 0xcf, 0xb9, 0x7a, 0x93, 0x8e, 0x9a, 0x5b, 0xaf, 0x0a, 0xd1,
+	0x54, 0xa4, 0x90, 0x61, 0xbf, 0x10, 0x1a, 0xa6, 0x60, 0x1e, 0xbb, 0xe8, 0x15, 0xa1, 0x10, 0xba,
+	0x0f, 0x09, 0x6c, 0x6c, 0xd4, 0x2c, 0xd3, 0x68, 0x60, 0xc3, 0x4e, 0x0e, 0x8c, 0x49, 0xe3, 0x43,
+	0xc5, 0x89, 0x80, 0x17, 0x96, 0x5d, 0xec, 0xb0, 0x2a, 0x6e, 0x39, 0xe8, 0xfb, 0x90, 0xe0, 0x21,
+	0xa3, 0x92, 0x26, 0xae, 0x24, 0xa3, 0x63, 0xd2, 0x78, 0xa2, 0x98, 0xf6, 0x15, 0xcb, 0x58, 0x56,
+	0x9a, 0xb8, 0xa2, 0x40, 0xa5, 0xfd, 0x1b, 0xad, 0xc0, 0x90, 0x13, 0xd9, 0x4c, 0x1c, 0x49, 0x0e,
+	0x32, 0x33, 0x5e, 0xf4, 0x93, 0x77, 0x4d, 0x70, 0x31, 0x89, 0x87, 0x75, 0xd7, 0x17, 0x41, 0x37,
+	0x00, 0x68, 0xfc, 0x0b, 0x81, 0x31, 0x26, 0x70, 0xdc, 0x4f, 0xe0, 0x7d, 0x82, 0x2d, 0x26, 0x2c,
+	0xde, 0x12, 0xbf, 0x98, 0xa0, 0x35, 0x93, 0xd8, 0x42, 0x50, 0x3c, 0x98, 0xa0, 0x9b, 0x26, 0xb1,
+	0xb9, 0xa0, 0x35, 0xf1, 0x8b, 0xa0, 0x73, 0x00, 0x06, 0xb6, 0x9f, 0x98, 0xd6, 0x3a, 0xf5, 0x59,
+	0x60, 0x2e, 0x15, 0xeb, 0x3c, 0x1a, 0x62, 0x6f, 0x49, 0x4f, 0xcd, 0x42, 0xc2, 0xe5, 0x0b, 0x68,
+	0x18, 0xfa, 0xd7, 0xf1, 0x26, 0x77, 0x72, 0x85, 0xfe, 0x44, 0x23, 0x30, 0xb0, 0xa1, 0xd5, 0x5b,
+	0xc2, 0xa5, 0x15, 0xfe, 0x31, 0xd7, 0x77, 0x49, 0x92, 0xa7, 0xe1, 0xa8, 0xc7, 0xb7, 0x6e, 0x61,
+	0x5b, 0xa3, 0x76, 0x41, 0x27, 0xba, 0x5f, 0x2d, 0xf7, 0x3b, 0xf5, 0xd3, 0x08, 0x8c, 0xdc, 0x6f,
+	0xea, 0xdd, 0x71, 0x16, 0xe6, 0xb5, 0x43, 0xef, 0x43, 0xa2, 0xc5, 0x84, 0xb0, 0x84, 0xc6, 0xb4,
+	0x4b, 0x14, 0x53, 0x59, 0x9e, 0xb0, 0xb2, 0x4e, 0x46, 0xcb, 0x5e, 0xa7, 0x39, 0xef, 0x96, 0x46,
+	0xd6, 0x15, 0xe0, 0xe4, 0xf4, 0xf7, 0x9b, 0x0e, 0xb9, 0x5e, 0xe8, 0xde, 0x4c, 0xc8, 0xed, 0x88,
+	0x8d, 0x81, 0x03, 0xc5, 0x46, 0x56, 0x3c, 0x5e, 0x51, 0x66, 0x8e, 0x94, 0xdf, 0xc3, 0x75, 0x40,
+	0xdf, 0xf1, 0x18, 0x29, 0xa8, 0xef, 0x2c, 0xc0, 0xc8, 0x35, 0x5c, 0xc7, 0x07, 0x72, 0x1d, 0x7a,
+	0xb8, 0x47, 0x48, 0x88, 0xc3, 0x4b, 0xac, 0xe0, 0x38, 0xe0, 0xe1, 0x1e, 0x21, 0x41, 0x0f, 0xff,
+	0x62, 0x00, 0x8e, 0x2a, 0x98, 0xd8, 0xa6, 0xb5, 0x13, 0xfb, 0x69, 0x88, 0xf3, 0x3a, 0xa8, 0x73,
+	0x7a, 0x84, 0x9e, 0xae, 0xc4, 0xf8, 0xf2, 0x92, 0x8e, 0x26, 0x21, 0x42, 0xab, 0xb7, 0x5d, 0xa3,
+	0xe4, 0x9e, 0x53, 0xf7, 0x09, 0x4e, 0x46, 0x8d, 0xd2, 0xc2, 0x1f, 0x78, 0xe2, 0x1e, 0xed, 0x9d,
+	0xcc, 0x7a, 0x27, 0xb1, 0x81, 0x3d, 0x23, 0xea, 0xd7, 0x9d, 0x88, 0x8a, 0xb2, 0x88, 0x9a, 0xf7,
+	0xf3, 0xd8, 0x9e, 0xc8, 0xff, 0x23, 0x59, 0x6c, 0xf0, 0xcd, 0x64, 0xb1, 0xd8, 0x81, 0x22, 0xf5,
+	0x7f, 0x2a, 0x4f, 0xdc, 0x83, 0x51, 0xef, 0xf5, 0x05, 0x74, 0x79, 0xf4, 0x9e, 0xdb, 0xb1, 0xb9,
+	0xd8, 0xb6, 0x4b, 0xcb, 0x26, 0x24, 0x57, 0x9e, 0xd4, 0xec, 0xca, 0x9a, 0xb9, 0x81, 0xad, 0x83,
+	0x24, 0x92, 0xb3, 0xc0, 0xec, 0xa1, 0xba, 0xea, 0xb6, 0xb6, 0xdf, 0x4e, 0x28, 0x31, 0xba, 0x77,
+	0x5b, 0x6b, 0x60, 0x79, 0x0e, 0x8e, 0x75, 0x1d, 0x18, 0x34, 0x78, 0xbf, 0x91, 0x20, 0xbe, 0x6c,
+	0x56, 0x15, 0x5c, 0x31, 0x2d, 0x1d, 0x5d, 0x82, 0x78, 0xbb, 0xd1, 0x62, 0xb4, 0x7b, 0x86, 0xa4,
+	0xd2, 0x21, 0x46, 0x77, 0x61, 0xb0, 0x81, 0x09, 0xd1, 0xaa, 0x54, 0x53, 0x7a, 0xe9, 0xd3, 0x7e,
+	0x97, 0xde, 0x3e, 0x35, 0x7b, 0x8b, 0x33, 0xb2, 0xfb, 0x53, 0x1c, 0x31, 0xa9, 0x39, 0x38, 0xe4,
+	0xde, 0x08, 0x75, 0xb1, 0xff, 0xea, 0x87, 0x51, 0x57, 0xd9, 0xbe, 0x6c, 0x56, 0xc9, 0xbe, 0x6e,
+	0xe0, 0xff, 0xe0, 0x70, 0xc5, 0xac, 0xb7, 0x1a, 0x86, 0x2a, 0x3a, 0x05, 0x8a, 0x2d, 0xae, 0x1c,
+	0xe2, 0x8b, 0xd7, 0xd9, 0x1a, 0xc2, 0x70, 0x48, 0x34, 0xc7, 0x2a, 0xed, 0x46, 0x59, 0xce, 0x1e,
+	0x2a, 0x96, 0x7c, 0xf1, 0xf7, 0xd4, 0x2f, 0xbb, 0xc2, 0x45, 0xdd, 0xdb, 0x6c, 0x62, 0x25, 0x41,
+	0x3a, 0x1f, 0x68, 0x06, 0xe2, 0xab, 0x96, 0xd9, 0x50, 0xd9, 0x73, 0x19, 0xf1, 0xbd, 0x9b, 0x18,
+	0x25, 0xa6, 0x9f, 0x68, 0x02, 0x06, 0x6d, 0x93, 0xb3, 0x0d, 0xf8, 0xb2, 0x45, 0x6d, 0x93, 0x31,
+	0x79, 0xfa, 0xad, 0x68, 0xe0, 0x7e, 0x6b, 0x70, 0x8f, 0x7e, 0x6b, 0x02, 0x46, 0xb5, 0xfa, 0x13,
+	0x6d, 0x93, 0xa8, 0x3b, 0x9b, 0x1e, 0xfa, 0xe4, 0xc4, 0x94, 0x23, 0x7c, 0xf7, 0xb6, 0xa7, 0xf5,
+	0x99, 0x86, 0x84, 0xcb, 0x22, 0xe8, 0x38, 0x24, 0x57, 0x16, 0x95, 0x1f, 0x2e, 0x2d, 0x2c, 0xaa,
+	0xf7, 0x3e, 0xba, 0xbb, 0xa8, 0xde, 0xbf, 0xbd, 0x72, 0x77, 0x71, 0x61, 0xe9, 0xfa, 0xd2, 0xe2,
+	0xb5, 0xe1, 0xb7, 0x50, 0x1c, 0x06, 0x6e, 0x7d, 0xb4, 0xf2, 0x83, 0xe5, 0x61, 0x49, 0xfe, 0x4c,
+	0x82, 0x77, 0xbb, 0x2c, 0x2c, 0x7a, 0xb7, 0x2b, 0x10, 0xa9, 0x9b, 0x55, 0xa7, 0x6f, 0x3b, 0x1f,
+	0xd8, 0x51, 0x15, 0xc6, 0x16, 0xb8, 0x6b, 0xfb, 0xad, 0x04, 0xc7, 0x5d, 0x2a, 0xdc, 0x71, 0x06,
+	0x0c, 0xfb, 0x73, 0xc5, 0xd7, 0xdf, 0x00, 0xcb, 0x2f, 0x24, 0x38, 0xb1, 0x8b, 0x82, 0xc2, 0x52,
+	0xf3, 0x00, 0xed, 0xb9, 0x88, 0x63, 0xaf, 0xd3, 0x5e, 0x7b, 0x75, 0xe6, 0x26, 0x6d, 0x7e, 0xc5,
+	0xc5, 0x14, 0xd8, 0x5a, 0xbf, 0x91, 0xe0, 0x98, 0x4b, 0x19, 0x5e, 0x89, 0xbc, 0x5e, 0x53, 0x89,
+	0xde, 0x7e, 0x3f, 0xa6, 0xfa, 0xb9, 0x04, 0xa9, 0x5e, 0xda, 0x09, 0x3b, 0x5d, 0x85, 0x41, 0xfe,
+	0xfc, 0x3b, 0x46, 0x3a, 0xeb, 0xe7, 0x54, 0x5c, 0x82, 0xe2, 0xb0, 0x05, 0x36, 0xd3, 0xe7, 0x5e,
+	0xbf, 0xa6, 0x99, 0xf3, 0xbf, 0xc6, 0x9f, 0x3e, 0x85, 0x64, 0xb7, 0x6a, 0xc2, 0x42, 0x73, 0x30,
+	0x40, 0xf3, 0x95, 0x63, 0x9f, 0x33, 0x41, 0x4a, 0x02, 0x85, 0xb3, 0x04, 0xb6, 0xcd, 0x2f, 0x25,
+	0x18, 0x9d, 0xd7, 0xf5, 0x03, 0x9b, 0xe6, 0x8e, 0xa7, 0x86, 0xe9, 0x0b, 0x57, 0xc3, 0x94, 0xa2,
+	0xcf, 0x5f, 0x15, 0xfa, 0x3e, 0xc8, 0xbb, 0x6a, 0x19, 0xf9, 0x01, 0xbc, 0xbb, 0x43, 0xaf, 0xa0,
+	0x85, 0xc6, 0x09, 0xa1, 0x0a, 0x2d, 0x01, 0x88, 0xc8, 0x3e, 0x71, 0x27, 0xf1, 0x13, 0xf9, 0x29,
+	0x1c, 0xf3, 0xf4, 0x0b, 0xfb, 0xc7, 0x9c, 0xed, 0x3e, 0xa8, 0xf4, 0x36, 0x47, 0xd2, 0x29, 0x39,
+	0x5c, 0x27, 0x3f, 0x84, 0x54, 0xf7, 0xc9, 0xaf, 0x09, 0x55, 0x09, 0x8e, 0xac, 0xd8, 0x9a, 0x75,
+	0xa0, 0x91, 0xe3, 0x14, 0x8c, 0xb8, 0x65, 0x04, 0x2d, 0x87, 0xe6, 0x01, 0xad, 0xd8, 0xe6, 0x81,
+	0xda, 0xa8, 0x49, 0xaa, 0xbd, 0x19, 0xb6, 0x89, 0x7a, 0x08, 0x29, 0x4f, 0xdb, 0xf9, 0x3a, 0xed,
+	0xf9, 0x29, 0xc4, 0x1c, 0xef, 0x44, 0xa7, 0x61, 0xf0, 0x99, 0x69, 0xe0, 0x0e, 0x8e, 0x4e, 0x4d,
+	0x1d, 0xa5, 0x1b, 0x4b, 0x3a, 0xfa, 0x7f, 0x88, 0x93, 0x56, 0xd9, 0xc0, 0x76, 0xbb, 0xb8, 0x75,
+	0x11, 0xc5, 0xf8, 0xd6, 0x92, 0x8e, 0xc6, 0x61, 0x58, 0x23, 0xa4, 0x56, 0x35, 0xd4, 0x66, 0xab,
+	0x5c, 0xaf, 0x55, 0xd4, 0x5a, 0x93, 0xbd, 0x0e, 0x31, 0x65, 0x88, 0xaf, 0xdf, 0x65, 0xcb, 0x4b,
+	0x4d, 0xf9, 0x77, 0x7d, 0x00, 0x9d, 0x76, 0x01, 0x25, 0x61, 0x70, 0x03, 0x5b, 0x84, 0x36, 0x63,
+	0x1c, 0x89, 0xf3, 0x89, 0x7e, 0x04, 0xc3, 0x2c, 0xa8, 0x54, 0xd1, 0x8f, 0x4c, 0xa9, 0x33, 0xa2,
+	0x31, 0x9c, 0xf2, 0x0b, 0x3f, 0xce, 0x91, 0xbd, 0x45, 0x17, 0xf9, 0x59, 0x53, 0xea, 0xcc, 0xcd,
+	0xb7, 0x94, 0xc3, 0x0d, 0xd7, 0xca, 0x0c, 0xba, 0x01, 0x71, 0x0b, 0x13, 0xb3, 0x65, 0x55, 0x30,
+	0x61, 0xda, 0x06, 0xc8, 0xff, 0x8a, 0xc3, 0xa0, 0x74, 0x78, 0xd1, 0x75, 0x38, 0x22, 0x3a, 0x80,
+	0x27, 0x35, 0x43, 0x37, 0x9f, 0xa8, 0x84, 0x7a, 0x9b, 0xa8, 0xcb, 0x46, 0x9d, 0x02, 0x8b, 0xd6,
+	0x83, 0xac, 0xb8, 0xba, 0xb3, 0x7a, 0x4d, 0xdb, 0x54, 0xde, 0xe1, 0x2c, 0x0f, 0x18, 0x07, 0x73,
+	0xcf, 0xd2, 0x10, 0x1c, 0x72, 0x43, 0x2e, 0xfe, 0x39, 0x09, 0x43, 0xc2, 0x05, 0x44, 0xdd, 0x83,
+	0x7e, 0x25, 0x41, 0xff, 0x0d, 0x6c, 0xa3, 0x82, 0x9f, 0xa2, 0x5d, 0x53, 0xfa, 0x54, 0xd0, 0x99,
+	0xb4, 0x3c, 0xf9, 0xfc, 0x9b, 0x6f, 0x7f, 0xd1, 0x97, 0x45, 0x17, 0x73, 0x0d, 0xcd, 0xd0, 0xaa,
+	0x58, 0xcf, 0xf4, 0xfc, 0x0b, 0x05, 0xc9, 0xfd, 0xa4, 0xe3, 0x87, 0x9f, 0xd0, 0x6e, 0x39, 0x42,
+	0x5f, 0x7c, 0x34, 0x11, 0xa2, 0xd8, 0x75, 0xde, 0xa7, 0xd4, 0x64, 0x38, 0x26, 0x9e, 0x48, 0xe4,
+	0x73, 0x4c, 0xd3, 0xd3, 0xe8, 0x94, 0x8f, 0xa6, 0xe8, 0x0f, 0x12, 0x44, 0xf9, 0x14, 0x10, 0x4d,
+	0xee, 0x67, 0x12, 0x9d, 0xf2, 0x2f, 0x74, 0xe4, 0xdb, 0x5b, 0xdb, 0xe9, 0xb1, 0xdd, 0x86, 0x8d,
+	0x83, 0x62, 0x81, 0x29, 0x7c, 0x46, 0xf6, 0x53, 0x78, 0x4e, 0x4a, 0xa3, 0xaf, 0x24, 0x88, 0xf2,
+	0x67, 0xc0, 0x5f, 0xe7, 0x5e, 0xa3, 0xbc, 0x20, 0x3a, 0x3f, 0xe2, 0x3a, 0xf7, 0x1e, 0x72, 0x79,
+	0x74, 0x2e, 0x14, 0x43, 0xb9, 0x03, 0x05, 0xf0, 0x17, 0x09, 0xa2, 0x3c, 0x2f, 0xf8, 0x03, 0xe8,
+	0x35, 0x2e, 0x0b, 0x02, 0x60, 0x75, 0x6b, 0x3b, 0x9d, 0xdd, 0x6d, 0x50, 0x76, 0x74, 0x67, 0x6b,
+	0xb3, 0xd8, 0x68, 0xda, 0x9b, 0xdc, 0xbb, 0xd3, 0xe1, 0xbc, 0xfb, 0x2b, 0x09, 0x06, 0x58, 0x90,
+	0xfa, 0xbb, 0x77, 0x8f, 0x74, 0x15, 0x04, 0xc9, 0xe3, 0xad, 0xed, 0xf4, 0xa9, 0x5d, 0x12, 0x95,
+	0xe7, 0x26, 0x26, 0xe5, 0x62, 0xa8, 0x9b, 0x60, 0x8f, 0x11, 0xfa, 0x52, 0x82, 0x08, 0x4d, 0x45,
+	0xa8, 0xe8, 0xaf, 0xff, 0xce, 0x9c, 0x17, 0xd4, 0x93, 0x4e, 0xf6, 0xce, 0x76, 0x1e, 0xed, 0x27,
+	0xe4, 0x42, 0x48, 0xed, 0xcd, 0x26, 0xfa, 0x5a, 0x82, 0x28, 0x2f, 0x92, 0xfd, 0x3d, 0xa9, 0xd7,
+	0xec, 0x33, 0x08, 0x00, 0x95, 0x87, 0x42, 0xef, 0xa9, 0xa7, 0x07, 0xc2, 0x94, 0x3c, 0x11, 0x0a,
+	0x02, 0x7f, 0xe8, 0xd1, 0x9f, 0x24, 0x18, 0x14, 0x13, 0x26, 0x34, 0xb5, 0xaf, 0x49, 0x62, 0x10,
+	0x18, 0x0f, 0xb6, 0xb6, 0xd3, 0xa7, 0x77, 0x1d, 0x65, 0x79, 0x70, 0x5c, 0x94, 0xcf, 0xf9, 0x3d,
+	0x43, 0x16, 0x17, 0x43, 0xa3, 0xf9, 0x6f, 0x12, 0x40, 0x67, 0xb2, 0x84, 0x2e, 0xf9, 0xba, 0xd1,
+	0x2e, 0x63, 0xaf, 0x20, 0x20, 0x7e, 0xbc, 0xb5, 0x9d, 0x3e, 0xb3, 0xd7, 0x20, 0xcb, 0x83, 0xe3,
+	0xb2, 0x3c, 0x13, 0xce, 0xa5, 0xda, 0x62, 0x29, 0xae, 0x3f, 0x4a, 0x10, 0xa3, 0xc9, 0x65, 0x99,
+	0xb6, 0xf3, 0xd3, 0xfb, 0x1b, 0xd4, 0xa4, 0x66, 0x42, 0xf3, 0x89, 0x0c, 0x36, 0xcb, 0x83, 0x02,
+	0x85, 0x0b, 0x0a, 0x36, 0x7a, 0xf8, 0xab, 0x04, 0x43, 0x54, 0x6c, 0xa7, 0x55, 0x47, 0x97, 0x43,
+	0xa8, 0xd1, 0x35, 0x82, 0x48, 0x5d, 0xd9, 0x27, 0xb7, 0x80, 0xf2, 0x21, 0x83, 0x32, 0x8b, 0x42,
+	0x5d, 0x46, 0xce, 0x35, 0x1d, 0xf8, 0x5a, 0x82, 0x04, 0x3d, 0x42, 0x34, 0xd4, 0x68, 0x36, 0x84,
+	0x3e, 0xde, 0x11, 0x41, 0x6a, 0x6e, 0x3f, 0xac, 0x02, 0xc7, 0x65, 0x86, 0x63, 0x1a, 0x4d, 0x86,
+	0xc2, 0xe1, 0xf4, 0xee, 0x5f, 0x4a, 0x10, 0xa7, 0xc2, 0x59, 0xcd, 0x8e, 0xc2, 0xf8, 0x85, 0xbb,
+	0x5f, 0x4b, 0x5d, 0x0a, 0xcf, 0x28, 0xd4, 0x9f, 0xe3, 0x49, 0x02, 0x85, 0x4a, 0x12, 0x39, 0xde,
+	0x5c, 0x7f, 0x2b, 0x41, 0x6c, 0x5e, 0xd7, 0xb9, 0xee, 0xbe, 0xb1, 0xd0, 0xbb, 0xbd, 0x0e, 0x12,
+	0xdf, 0x9f, 0x6c, 0x6d, 0xa7, 0xf3, 0xbb, 0xf7, 0xc1, 0x7b, 0xe4, 0xed, 0x05, 0xf9, 0x83, 0xf0,
+	0xb8, 0xe6, 0xca, 0x9a, 0x5d, 0x59, 0xe3, 0x85, 0x19, 0x0d, 0xf9, 0x7f, 0x48, 0x90, 0xe0, 0x15,
+	0x03, 0x47, 0x3a, 0x1b, 0xaa, 0x3a, 0x09, 0x0b, 0xf6, 0x33, 0x69, 0x6b, 0x3b, 0x3d, 0xb1, 0x67,
+	0x8b, 0xfc, 0x66, 0x00, 0xf3, 0x03, 0xe7, 0xa4, 0x74, 0xe9, 0x7b, 0x0f, 0x6f, 0x56, 0x6b, 0xf6,
+	0x5a, 0xab, 0x9c, 0xad, 0x98, 0x8d, 0x1c, 0xd7, 0x38, 0xc3, 0xff, 0xf1, 0xa7, 0x6a, 0x66, 0xaa,
+	0xd8, 0x60, 0x07, 0xe7, 0xf6, 0xfe, 0x8f, 0xa0, 0xf7, 0xd9, 0x57, 0x39, 0xca, 0x68, 0x27, 0xfe,
+	0x1d, 0x00, 0x00, 0xff, 0xff, 0x9b, 0xc1, 0xb5, 0x67, 0x2c, 0x26, 0x00, 0x00,
 }

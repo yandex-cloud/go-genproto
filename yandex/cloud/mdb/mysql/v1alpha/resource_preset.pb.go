@@ -18,10 +18,15 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+// A preset of resources for hardware configuration of MySQL hosts.
 type ResourcePreset struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ZoneIds              []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
-	Cores                int64    `protobuf:"varint,3,opt,name=cores,proto3" json:"cores,omitempty"`
+	// ID of the resource preset.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// IDs of availability zones where the resource preset is available.
+	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	// Number of CPU cores for a MySQL host created with the preset.
+	Cores int64 `protobuf:"varint,3,opt,name=cores,proto3" json:"cores,omitempty"`
+	// RAM volume for a MySQL host created with the preset, in bytes.
 	Memory               int64    `protobuf:"varint,4,opt,name=memory,proto3" json:"memory,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -32,7 +37,7 @@ func (m *ResourcePreset) Reset()         { *m = ResourcePreset{} }
 func (m *ResourcePreset) String() string { return proto.CompactTextString(m) }
 func (*ResourcePreset) ProtoMessage()    {}
 func (*ResourcePreset) Descriptor() ([]byte, []int) {
-	return fileDescriptor_resource_preset_5b75027c628a5dbe, []int{0}
+	return fileDescriptor_resource_preset_5892b46c76e77bf2, []int{0}
 }
 func (m *ResourcePreset) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ResourcePreset.Unmarshal(m, b)
@@ -85,10 +90,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/resource_preset.proto", fileDescriptor_resource_preset_5b75027c628a5dbe)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/resource_preset.proto", fileDescriptor_resource_preset_5892b46c76e77bf2)
 }
 
-var fileDescriptor_resource_preset_5b75027c628a5dbe = []byte{
+var fileDescriptor_resource_preset_5892b46c76e77bf2 = []byte{
 	// 213 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0xcf, 0xb1, 0x4b, 0xc4, 0x30,
 	0x14, 0xc7, 0x71, 0xda, 0xea, 0xe9, 0x65, 0xb8, 0x21, 0x88, 0xc4, 0x45, 0x8a, 0x53, 0x97, 0x4b,

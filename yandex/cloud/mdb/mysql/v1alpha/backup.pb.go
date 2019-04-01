@@ -20,16 +20,17 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+// A MySQL backup. For more information, see
+// the [documentation](/docs/managed-mysql/concepts/backup).
 type Backup struct {
-	// Required. ID of the backup.
+	// ID of the backup.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the backup belongs to.
-	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The time when the backup was created (i.e. when the backup operation completed).
+	FolderId  string               `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// ID of the associated MySQL cluster.
+	// ID of the MySQL cluster that the backup was created for.
 	SourceClusterId string `protobuf:"bytes,4,opt,name=source_cluster_id,json=sourceClusterId,proto3" json:"source_cluster_id,omitempty"`
-	// The time when the backup operation was started.
+	// Time when the backup operation was started.
 	StartedAt            *timestamp.Timestamp `protobuf:"bytes,5,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
 	XXX_unrecognized     []byte               `json:"-"`
@@ -40,7 +41,7 @@ func (m *Backup) Reset()         { *m = Backup{} }
 func (m *Backup) String() string { return proto.CompactTextString(m) }
 func (*Backup) ProtoMessage()    {}
 func (*Backup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_backup_2bbbebdf1f417c1f, []int{0}
+	return fileDescriptor_backup_cc5632d3ff36548f, []int{0}
 }
 func (m *Backup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Backup.Unmarshal(m, b)
@@ -100,10 +101,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/backup.proto", fileDescriptor_backup_2bbbebdf1f417c1f)
+	proto.RegisterFile("yandex/cloud/mdb/mysql/v1alpha/backup.proto", fileDescriptor_backup_cc5632d3ff36548f)
 }
 
-var fileDescriptor_backup_2bbbebdf1f417c1f = []byte{
+var fileDescriptor_backup_cc5632d3ff36548f = []byte{
 	// 288 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0xbf, 0x4e, 0xc3, 0x30,
 	0x10, 0x87, 0x95, 0x50, 0x2a, 0x62, 0x06, 0x44, 0xc4, 0x10, 0x05, 0x01, 0x15, 0x53, 0x05, 0xaa,
