@@ -76,7 +76,7 @@ type TranslateRequest struct {
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Do not specify this field, custom models are not supported yet.
 	Model string `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"`
-	// Glossary to be applied. For more information, see [Glossaries](/docs/translate/concepts/glossary).
+	// Glossary to be applied for the translation. For more information, see [Glossaries](/docs/translate/concepts/glossary).
 	GlossaryConfig       *TranslateGlossaryConfig `protobuf:"bytes,7,opt,name=glossary_config,json=glossaryConfig,proto3" json:"glossary_config,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
@@ -225,7 +225,8 @@ func (*TranslateGlossaryConfig) XXX_OneofWrappers() []interface{} {
 type GlossaryData struct {
 	// Array of text pairs.
 	//
-	// The maximum total length of all source texts is 10000 characters. Same for translated texts.
+	// The maximum total length of all source texts is 10000 characters.
+	// The maximum total length of all translated texts is 10000 characters.
 	GlossaryPairs        []*GlossaryPair `protobuf:"bytes,1,rep,name=glossary_pairs,json=glossaryPairs,proto3" json:"glossary_pairs,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
