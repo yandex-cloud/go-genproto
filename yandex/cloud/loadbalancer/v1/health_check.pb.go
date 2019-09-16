@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	duration "github.com/golang/protobuf/ptypes/duration"
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/validation"
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	math "math"
 )
 
