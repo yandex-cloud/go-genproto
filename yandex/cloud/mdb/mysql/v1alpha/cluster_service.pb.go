@@ -2189,7 +2189,6 @@ type ClusterServiceClient interface {
 	// Creates a new MySQL cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified MySQL cluster.
-	// For more information about logs, see the [Logs](/docs/managed-mysql/concepts/logs) section in the documentation.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Retrieves the list of operations for the specified MySQL cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -2369,7 +2368,6 @@ type ClusterServiceServer interface {
 	// Creates a new MySQL cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified MySQL cluster.
-	// For more information about logs, see the [Logs](/docs/managed-mysql/concepts/logs) section in the documentation.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Retrieves the list of operations for the specified MySQL cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)

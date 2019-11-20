@@ -58,7 +58,7 @@ func (InstanceGroupView) EnumDescriptor() ([]byte, []int) {
 
 type GetInstanceGroupRequest struct {
 	// ID of the InstanceGroup resource to return.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// Defines which information about the Instance template should be returned in the server response.
 	View                 InstanceGroupView `protobuf:"varint,2,opt,name=view,proto3,enum=yandex.cloud.compute.v1.instancegroup.InstanceGroupView" json:"view,omitempty"`
@@ -118,7 +118,7 @@ type CreateInstanceGroupRequest struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Instance template that the instance group belongs to.
 	InstanceTemplate *InstanceTemplate `protobuf:"bytes,6,opt,name=instance_template,json=instanceTemplate,proto3" json:"instance_template,omitempty"`
-	// Scaling policy of the instance group.
+	// [Scaling policy](/docs/compute/concepts/instance-groups/scale) of the instance group.
 	ScalePolicy *ScalePolicy `protobuf:"bytes,7,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	// Deployment policy of the instance group.
 	DeployPolicy *DeployPolicy `protobuf:"bytes,8,opt,name=deploy_policy,json=deployPolicy,proto3" json:"deploy_policy,omitempty"`
@@ -243,7 +243,7 @@ type CreateInstanceGroupFromYamlRequest struct {
 	// ID of the folder to create an instance group in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// CreateInstanceGroupRequest in YAML format.
+	// [InstanceGroupService.Create] request in YAML format.
 	InstanceGroupYaml    string   `protobuf:"bytes,2,opt,name=instance_group_yaml,json=instanceGroupYaml,proto3" json:"instance_group_yaml,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -331,7 +331,7 @@ func (m *CreateInstanceGroupMetadata) GetInstanceGroupId() string {
 
 type UpdateInstanceGroupRequest struct {
 	// ID of the instance group to update.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// Field mask that specifies which fields of the InstanceGroup resource are going to be updated.
 	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
@@ -345,7 +345,7 @@ type UpdateInstanceGroupRequest struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Instance template that the instance group belongs to.
 	InstanceTemplate *InstanceTemplate `protobuf:"bytes,6,opt,name=instance_template,json=instanceTemplate,proto3" json:"instance_template,omitempty"`
-	// Scaling policy of the instance group.
+	// [Scaling policy](/docs/compute/concepts/instance-groups/scale) of the instance group.
 	ScalePolicy *ScalePolicy `protobuf:"bytes,7,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	// Deployment policy of the instance group.
 	DeployPolicy *DeployPolicy `protobuf:"bytes,8,opt,name=deploy_policy,json=deployPolicy,proto3" json:"deploy_policy,omitempty"`
@@ -475,9 +475,9 @@ func (m *UpdateInstanceGroupRequest) GetLoadBalancerSpec() *LoadBalancerSpec {
 
 type UpdateInstanceGroupFromYamlRequest struct {
 	// ID of the instance group to update.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	// UpdateInstanceGroupRequest in YAML format.
+	// [InstanceGroupService.Update] request in YAML format.
 	InstanceGroupYaml    string   `protobuf:"bytes,2,opt,name=instance_group_yaml,json=instanceGroupYaml,proto3" json:"instance_group_yaml,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -525,7 +525,7 @@ func (m *UpdateInstanceGroupFromYamlRequest) GetInstanceGroupYaml() string {
 
 type UpdateInstanceGroupMetadata struct {
 	// ID of the InstanceGroup resource that is being updated.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -564,10 +564,9 @@ func (m *UpdateInstanceGroupMetadata) GetInstanceGroupId() string {
 	return ""
 }
 
-// TODO DOC-REVIEW:
 type StartInstanceGroupRequest struct {
 	// ID of the instance group to start.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -606,7 +605,6 @@ func (m *StartInstanceGroupRequest) GetInstanceGroupId() string {
 	return ""
 }
 
-// TODO DOC-REVIEW:
 type StartInstanceGroupMetadata struct {
 	// ID of the InstanceGroup resource that is being started.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
@@ -647,10 +645,9 @@ func (m *StartInstanceGroupMetadata) GetInstanceGroupId() string {
 	return ""
 }
 
-// TODO DOC-REVIEW:
 type StopInstanceGroupRequest struct {
 	// ID of the instance group to stop.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -689,7 +686,6 @@ func (m *StopInstanceGroupRequest) GetInstanceGroupId() string {
 	return ""
 }
 
-// TODO DOC-REVIEW:
 type StopInstanceGroupMetadata struct {
 	// ID of the InstanceGroup resource that is being stopped.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
@@ -732,7 +728,7 @@ func (m *StopInstanceGroupMetadata) GetInstanceGroupId() string {
 
 type DeleteInstanceGroupRequest struct {
 	// ID of the instance group to delete.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -773,7 +769,7 @@ func (m *DeleteInstanceGroupRequest) GetInstanceGroupId() string {
 
 type DeleteInstanceGroupMetadata struct {
 	// ID of the instance group that is being deleted.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId      string   `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -991,7 +987,7 @@ func (m *ListInstanceGroupsResponse) GetNextPageToken() string {
 
 type ListInstanceGroupInstancesRequest struct {
 	// ID of the InstanceGroup resource to list instances for.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
@@ -1243,7 +1239,7 @@ func (m *ListInstanceGroupOperationsResponse) GetNextPageToken() string {
 
 type ListInstanceGroupLogRecordsRequest struct {
 	// ID of the InstanceGroup resource to list logs for.
-	// To get the instance group ID, use an [InstanceGroupService.List] request.
+	// To get the instance group ID, use a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
@@ -1540,10 +1536,8 @@ type InstanceGroupServiceClient interface {
 	// Updates the specified instance group from a YAML file.
 	// This method starts an operation that can be cancelled by another operation.
 	UpdateFromYaml(ctx context.Context, in *UpdateInstanceGroupFromYamlRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// TODO DOC-REVIEW:
 	// Stops the specified instance group.
 	Stop(ctx context.Context, in *StopInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// TODO DOC-REVIEW:
 	// Starts the specified instance group.
 	Start(ctx context.Context, in *StartInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified instance group.
@@ -1692,10 +1686,8 @@ type InstanceGroupServiceServer interface {
 	// Updates the specified instance group from a YAML file.
 	// This method starts an operation that can be cancelled by another operation.
 	UpdateFromYaml(context.Context, *UpdateInstanceGroupFromYamlRequest) (*operation.Operation, error)
-	// TODO DOC-REVIEW:
 	// Stops the specified instance group.
 	Stop(context.Context, *StopInstanceGroupRequest) (*operation.Operation, error)
-	// TODO DOC-REVIEW:
 	// Starts the specified instance group.
 	Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error)
 	// Deletes the specified instance group.

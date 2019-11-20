@@ -2150,7 +2150,6 @@ type ClusterServiceClient interface {
 	// Start a manual failover on the specified Redis cluster.
 	StartFailover(ctx context.Context, in *StartClusterFailoverRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified Redis cluster.
-	// For more information about logs, see the [Logs](/docs/managed-redis/concepts/logs) section in the documentation.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Retrieves the list of operations for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -2342,7 +2341,6 @@ type ClusterServiceServer interface {
 	// Start a manual failover on the specified Redis cluster.
 	StartFailover(context.Context, *StartClusterFailoverRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified Redis cluster.
-	// For more information about logs, see the [Logs](/docs/managed-redis/concepts/logs) section in the documentation.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Retrieves the list of operations for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
