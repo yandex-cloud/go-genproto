@@ -26,7 +26,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ListJobsRequest struct {
-	// Required. ID of the cluster to list Dataproc jobs of.
+	// Required. ID of the cluster to list Data Proc jobs of.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
@@ -97,7 +97,7 @@ func (m *ListJobsRequest) GetFilter() string {
 }
 
 type ListJobsResponse struct {
-	// Requested list of Dataproc jobs.
+	// Requested list of Data Proc jobs.
 	Jobs []*Job `protobuf:"bytes,1,rep,name=jobs,proto3" json:"jobs,omitempty"`
 	// This token allows you to get the next page of results for ListJobs requests,
 	// if the number of results is larger than `page_size` specified in the request.
@@ -150,9 +150,9 @@ func (m *ListJobsResponse) GetNextPageToken() string {
 }
 
 type UpdateJobStatusRequest struct {
-	// Required. ID of the Dataproc cluster.
+	// Required. ID of the Data Proc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. ID of the Dataproc job to update.
+	// Required. ID of the Data Proc job to update.
 	JobId string `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	// Required. New status of the job.
 	Status               Job_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.dataproc.manager.v1.Job_Status" json:"status,omitempty"`
@@ -295,7 +295,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type JobServiceClient interface {
-	// Retrieves a list of jobs for Dataproc cluster.
+	// Retrieves a list of jobs for Data Proc cluster.
 	ListActive(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListJobsResponse, error)
 	// Currently used to update Job status.
 	UpdateStatus(ctx context.Context, in *UpdateJobStatusRequest, opts ...grpc.CallOption) (*UpdateJobStatusResponse, error)
@@ -329,7 +329,7 @@ func (c *jobServiceClient) UpdateStatus(ctx context.Context, in *UpdateJobStatus
 
 // JobServiceServer is the server API for JobService service.
 type JobServiceServer interface {
-	// Retrieves a list of jobs for Dataproc cluster.
+	// Retrieves a list of jobs for Data Proc cluster.
 	ListActive(context.Context, *ListJobsRequest) (*ListJobsResponse, error)
 	// Currently used to update Job status.
 	UpdateStatus(context.Context, *UpdateJobStatusRequest) (*UpdateJobStatusResponse, error)

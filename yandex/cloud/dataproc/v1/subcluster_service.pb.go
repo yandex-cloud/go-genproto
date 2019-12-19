@@ -30,10 +30,11 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type GetSubclusterRequest struct {
-	// ID of the Dataproc cluster to get subcluster from.
+	// ID of the Data Proc cluster that the subcluster belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the Dataproc subcluster resource to return.
-	// To get the subcluster ID use a [SubclusterService.List] request.
+	// ID of the subcluster to return.
+	//
+	// To get a subcluster ID make a [SubclusterService.List] request.
 	SubclusterId         string   `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -80,21 +81,23 @@ func (m *GetSubclusterRequest) GetSubclusterId() string {
 }
 
 type ListSubclustersRequest struct {
-	// ID of the Dataproc cluster to get subclusters from.
+	// ID of the Data Proc cluster to list subclusters in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListSubclusters requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListSubclustersResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListSubclusters
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListSubclustersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// A filter expression that filters resources listed in the response.
+	// A filter expression that filters subclusters listed in the response.
+	//
 	// The expression must specify:
-	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
+	// 1. The field name. Currently you can use filtering only on [Subcluster.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Мust be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9].
+	// Example of a filter: `name=dataproc123_subcluster456`.
 	Filter               string   `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -155,13 +158,13 @@ func (m *ListSubclustersRequest) GetFilter() string {
 }
 
 type ListSubclustersResponse struct {
-	// List of Dataproc subclusters.
+	// List of subclusters in the specified cluster.
 	Subclusters []*Subcluster `protobuf:"bytes,1,rep,name=subclusters,proto3" json:"subclusters,omitempty"`
-	// This token allows you to get the next page of results for ListSubclusters requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListClusters request. Subsequent ListClusters
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListSubclustersRequest.page_size], use `next_page_token` as the value
+	// for the [ListSubclustersRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -208,20 +211,20 @@ func (m *ListSubclustersResponse) GetNextPageToken() string {
 }
 
 type CreateSubclusterRequest struct {
-	// ID of the Dataproc cluster to create create subcluster to.
-	// To get the Dataproc cluster ID, use a [ClusterService.List] request.
+	// ID of the Data Proc cluster to create a subcluster in.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Dataproc subcluster. The name must be unique within the folder.
-	// The name must be 1-63 characters long and match the regular expression `^[a-z]([-a-z0-9]{,61}[a-z0-9])?$`.
-	// The name can’t be changed after the Dataproc subcluster is created.
+	// Name of the subcluster. The name must be unique within the cluster. The name can’t be
+	// changed when the subcluster is created.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Role of hosts in subcluster.
+	// Role that is fulfilled by hosts of the subcluster.
 	Role Role `protobuf:"varint,3,opt,name=role,proto3,enum=yandex.cloud.dataproc.v1.Role" json:"role,omitempty"`
-	// Resources allocated to hosts in subcluster.
+	// Resources allocated for each host in the subcluster.
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
-	// ID of using compute subnet for hosts in subcluster.
+	// ID of the VPC subnet used for hosts in the subcluster.
 	SubnetId string `protobuf:"bytes,5,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Number of hosts in subcluster.
+	// Number of hosts in the subcluster.
 	HostsCount           int64    `protobuf:"varint,6,opt,name=hosts_count,json=hostsCount,proto3" json:"hosts_count,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -296,9 +299,9 @@ func (m *CreateSubclusterRequest) GetHostsCount() int64 {
 }
 
 type CreateSubclusterMetadata struct {
-	// ID of the Dataproc cluster resource to return.
+	// ID of the cluster that the subcluster is being added to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the Dataproc subcluster resource.
+	// ID of the subcluster that is being created.
 	SubclusterId         string   `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -345,18 +348,21 @@ func (m *CreateSubclusterMetadata) GetSubclusterId() string {
 }
 
 type UpdateSubclusterRequest struct {
-	// ID of the Dataproc cluster to update subcluster to.
-	// To get the Dataproc cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to update a subcluster in.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the Dataproc subcluster resource.
-	// To get the subcluster ID use a [SubclusterService.List] request.
-	SubclusterId string                `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
-	UpdateMask   *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Resources allocated to hosts in subcluster.
+	// ID of the subcluster to update.
+	//
+	// To get a subcluster ID, make a [SubclusterService.List] request.
+	SubclusterId string `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
+	// Field mask that specifies which attributes of the subcluster should be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New configuration of resources that should be allocated for each host in the subcluster.
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
-	// Name of the Dataproc subcluster. The name must be unique within the folder.
+	// New name for the subcluster. The name must be unique within the cluster.
 	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	// Number of hosts in subcluster.
+	// New number of hosts in the subcluster.
 	HostsCount           int64    `protobuf:"varint,6,opt,name=hosts_count,json=hostsCount,proto3" json:"hosts_count,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -431,9 +437,9 @@ func (m *UpdateSubclusterRequest) GetHostsCount() int64 {
 }
 
 type UpdateSubclusterMetadata struct {
-	// ID of the Dataproc cluster resource to return.
+	// ID of the cluster whose subcluster is being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the Dataproc subcluster resource to update.
+	// ID of the subcluster that is being updated.
 	SubclusterId         string   `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -480,10 +486,11 @@ func (m *UpdateSubclusterMetadata) GetSubclusterId() string {
 }
 
 type DeleteSubclusterRequest struct {
-	// ID of the Dataproc cluster to delete subcluster from.
-	// To get the Dataproc cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to remove a subcluster from.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the Dataproc subcluster resource to delete.
+	// ID of the subcluster to delete.
 	SubclusterId         string   `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -530,9 +537,9 @@ func (m *DeleteSubclusterRequest) GetSubclusterId() string {
 }
 
 type DeleteSubclusterMetadata struct {
-	// ID of the Dataproc cluster resource to return.
+	// ID of the cluster whose subcluster is being deleted.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the Dataproc subcluster resource to delete.
+	// ID of the ubcluster resource that is being to deleted.
 	SubclusterId         string   `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -667,17 +674,17 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SubclusterServiceClient interface {
-	// Returns the specified Dataproc subcluster resource.
+	// Returns the specified subcluster.
 	//
-	// To get the list of available Dataproc subcluster resources, make a [List] request.
+	// To get the list of all available subclusters, make a [SubclusterService.List] request.
 	Get(ctx context.Context, in *GetSubclusterRequest, opts ...grpc.CallOption) (*Subcluster, error)
-	// Retrieves a list of Dataproc subcluster.
+	// Retrieves a list of subclusters in the specified cluster.
 	List(ctx context.Context, in *ListSubclustersRequest, opts ...grpc.CallOption) (*ListSubclustersResponse, error)
-	// Creates a Dataproc subcluster in the specified cluster.
+	// Creates a subcluster in the specified cluster.
 	Create(ctx context.Context, in *CreateSubclusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates configuration of the specified Dataproc subcluster.
+	// Updates the specified subcluster.
 	Update(ctx context.Context, in *UpdateSubclusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Dataproc subcluster.
+	// Deletes the specified subcluster.
 	Delete(ctx context.Context, in *DeleteSubclusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -736,17 +743,17 @@ func (c *subclusterServiceClient) Delete(ctx context.Context, in *DeleteSubclust
 
 // SubclusterServiceServer is the server API for SubclusterService service.
 type SubclusterServiceServer interface {
-	// Returns the specified Dataproc subcluster resource.
+	// Returns the specified subcluster.
 	//
-	// To get the list of available Dataproc subcluster resources, make a [List] request.
+	// To get the list of all available subclusters, make a [SubclusterService.List] request.
 	Get(context.Context, *GetSubclusterRequest) (*Subcluster, error)
-	// Retrieves a list of Dataproc subcluster.
+	// Retrieves a list of subclusters in the specified cluster.
 	List(context.Context, *ListSubclustersRequest) (*ListSubclustersResponse, error)
-	// Creates a Dataproc subcluster in the specified cluster.
+	// Creates a subcluster in the specified cluster.
 	Create(context.Context, *CreateSubclusterRequest) (*operation.Operation, error)
-	// Updates configuration of the specified Dataproc subcluster.
+	// Updates the specified subcluster.
 	Update(context.Context, *UpdateSubclusterRequest) (*operation.Operation, error)
-	// Deletes the specified Dataproc subcluster.
+	// Deletes the specified subcluster.
 	Delete(context.Context, *DeleteSubclusterRequest) (*operation.Operation, error)
 }
 

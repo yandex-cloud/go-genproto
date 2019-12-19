@@ -30,8 +30,9 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type GetClusterRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the Data Proc cluster.
+	//
+	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -71,17 +72,25 @@ func (m *GetClusterRequest) GetClusterId() string {
 }
 
 type ListClustersRequest struct {
-	// ID of the folder that the Dataproc cluster belongs to.
+	// ID of the folder to list clusters in.
+	//
+	// To get the folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListClusters requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListClusters
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListClustersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// String that describes a display filter.
+	// A filter expression that filters clusters listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [Cluster.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9].
+	// Example of a filter: `name=my-cluster`.
 	Filter               string   `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -142,13 +151,13 @@ func (m *ListClustersRequest) GetFilter() string {
 }
 
 type ListClustersResponse struct {
-	// Requested list of Dataproc clusters.
+	// List of clusters in the specified folder.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
-	// This token allows you to get the next page of results for ListClusters requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListClusters request. Subsequent ListClusters
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListClustersRequest.page_size], use `next_page_token` as the value
+	// for the [ListClustersRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -195,15 +204,15 @@ func (m *ListClustersResponse) GetNextPageToken() string {
 }
 
 type CreateSubclusterConfigSpec struct {
-	// Name of Dataproc subcluster.
+	// Name of the subcluster.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Role of hosts in subcluster.
+	// Role of the subcluster in the Data Proc cluster.
 	Role Role `protobuf:"varint,2,opt,name=role,proto3,enum=yandex.cloud.dataproc.v1.Role" json:"role,omitempty"`
-	// Resource configuration for hosts in subcluster.
+	// Resource configuration for hosts in the subcluster.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
-	// ID of using compute subnet for hosts in subcluster.
+	// ID of the VPC subnet used for hosts in the subcluster.
 	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Number of hosts in subcluster
+	// Number of hosts in the subcluster.
 	HostsCount           int64    `protobuf:"varint,5,opt,name=hosts_count,json=hostsCount,proto3" json:"hosts_count,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -271,14 +280,15 @@ func (m *CreateSubclusterConfigSpec) GetHostsCount() int64 {
 }
 
 type UpdateSubclusterConfigSpec struct {
-	// ID of the Dataproc subcluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the subcluster to update.
+	//
+	// To get the subcluster ID make a [SubclusterService.List] request.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Name of Dataproc subcluster.
+	// Name of the subcluster.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Resource configuration for hosts in subcluster.
+	// Resource configuration for each host in the subcluster.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
-	// Number of hosts in subcluster
+	// Number of hosts in the subcluster.
 	HostsCount           int64    `protobuf:"varint,4,opt,name=hosts_count,json=hostsCount,proto3" json:"hosts_count,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -339,12 +349,13 @@ func (m *UpdateSubclusterConfigSpec) GetHostsCount() int64 {
 }
 
 type CreateClusterConfigSpec struct {
-	// Vesion of image for cluster provisioning.
+	// Version of the image for cluster provisioning.
+	//
 	// All available versions are listed in the [documentation](/docs/data-proc/concepts/image-versions).
 	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	// Dataproc specific options.
+	// Data Proc specific options.
 	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
-	// Subclusters configuration.
+	// Specification for creating subclusters.
 	SubclustersSpec      []*CreateSubclusterConfigSpec `protobuf:"bytes,3,rep,name=subclusters_spec,json=subclustersSpec,proto3" json:"subclusters_spec,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
 	XXX_unrecognized     []byte                        `json:"-"`
@@ -398,7 +409,7 @@ func (m *CreateClusterConfigSpec) GetSubclustersSpec() []*CreateSubclusterConfig
 }
 
 type UpdateClusterConfigSpec struct {
-	// Subclusters configuration.
+	// New configuration for subclusters in a cluster.
 	SubclustersSpec      []*UpdateSubclusterConfigSpec `protobuf:"bytes,1,rep,name=subclusters_spec,json=subclustersSpec,proto3" json:"subclusters_spec,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
 	XXX_unrecognized     []byte                        `json:"-"`
@@ -438,24 +449,26 @@ func (m *UpdateClusterConfigSpec) GetSubclustersSpec() []*UpdateSubclusterConfig
 }
 
 type CreateClusterRequest struct {
-	// ID of the folder that the Dataproc cluster belongs to.
+	// ID of the folder to create a cluster in.
+	//
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the Dataproc cluster. The name must be unique within the folder.
-	// The name must be 1-63 characters long and match the regular expression `^[a-z]([-a-z0-9]{,61}[a-z0-9])?$`.
-	// The name can’t be changed after the Dataproc cluster is created.
+	// Name of the cluster. The name must be unique within the folder.
+	// The name can’t be changed after the Data Proc cluster is created.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the Dataproc cluster. 0-256 characters long.
+	// Description of the cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Dataproc cluster as `` key:value `` pairs.
-	// Maximum 64 per resource.
+	// Cluster labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Configuration and resources for hosts that should be created for the Dataproc cluster.
+	// Configuration and resources for hosts that should be created with the cluster.
 	ConfigSpec *CreateClusterConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// ID of the availability zone.
+	// ID of the availability zone where the cluster should be placed.
+	//
+	// To get the list of available zones make a [yandex.cloud.compute.v1.ZoneService.List] request.
 	ZoneId string `protobuf:"bytes,7,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of the service account for Dataproc manager agent
+	// ID of the service account to be used by the Data Proc manager agent.
 	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Name of object storage bucket for Dataproc jobs.
+	// Name of the Object Storage bucket to use for Data Proc jobs.
 	Bucket               string   `protobuf:"bytes,9,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -544,8 +557,7 @@ func (m *CreateClusterRequest) GetBucket() string {
 }
 
 type CreateClusterMetadata struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster that is being created.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -585,25 +597,23 @@ func (m *CreateClusterMetadata) GetClusterId() string {
 }
 
 type UpdateClusterRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster to update.
+	//
+	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Field mask that specifies which fields of the Dataproc Cluster resource should be updated.
+	// Field mask that specifies which attributes of the cluster should be updated.
 	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Description of the Dataproc cluster. 0-256 characters long.
+	// New description for the cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Dataproc cluster as `` key:value `` pairs.
-	// Maximum 64 per resource.
+	// A new set of cluster labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Configuration and resources for hosts that should be created for the Dataproc cluster.
+	// Configuration and resources for hosts that should be created with the Data Proc cluster.
 	ConfigSpec *UpdateClusterConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Name of the Dataproc cluster. The name must be unique within the folder.
-	// The name must be 1-63 characters long and match the regular expression `^[a-z]([-a-z0-9]{,61}[a-z0-9])?$`.
-	// The name can’t be changed after the Dataproc cluster is created.
+	// New name for the Data Proc cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// Identifier of the new service account for the cluster.
+	// ID of the new service account to be used by the Data Proc manager agent.
 	ServiceAccountId string `protobuf:"bytes,7,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Name of the new object storage bucket for Dataproc jobs.
+	// Name of the new Object Storage bucket to use for Data Proc jobs.
 	Bucket               string   `protobuf:"bytes,8,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -692,8 +702,7 @@ func (m *UpdateClusterRequest) GetBucket() string {
 }
 
 type UpdateClusterMetadata struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster that is being updated.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -733,8 +742,9 @@ func (m *UpdateClusterMetadata) GetClusterId() string {
 }
 
 type DeleteClusterRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster to delete.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -774,8 +784,7 @@ func (m *DeleteClusterRequest) GetClusterId() string {
 }
 
 type DeleteClusterMetadata struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the Data Proc cluster that is being deleted.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -815,8 +824,9 @@ func (m *DeleteClusterMetadata) GetClusterId() string {
 }
 
 type StartClusterRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster to start.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -856,8 +866,7 @@ func (m *StartClusterRequest) GetClusterId() string {
 }
 
 type StartClusterMetadata struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the Data Proc cluster that is being started.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -897,8 +906,9 @@ func (m *StartClusterMetadata) GetClusterId() string {
 }
 
 type StopClusterRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster to stop.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -938,8 +948,7 @@ func (m *StopClusterRequest) GetClusterId() string {
 }
 
 type StopClusterMetadata struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the Data Proc cluster that is being stopped.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -979,16 +988,15 @@ func (m *StopClusterMetadata) GetClusterId() string {
 }
 
 type ListClusterOperationsRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListOperations requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListOperations
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set [page_token] to the
+	// [ListClusterOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken            string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1042,12 +1050,13 @@ func (m *ListClusterOperationsRequest) GetPageToken() string {
 }
 
 type ListClusterOperationsResponse struct {
+	// List of operations for the specified cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for ListOperations requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListOperations request. Subsequent ListOperations
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListClusterOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListClusterOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1094,18 +1103,25 @@ func (m *ListClusterOperationsResponse) GetNextPageToken() string {
 }
 
 type ListClusterHostsRequest struct {
-	// ID of the Dataproc cluster.
-	// This ID is assigned by Dataproc at creation time.
+	// ID of the cluster to list hosts for.
+	//
+	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
-	// to get the next page of results in subsequent ListClusterHosts requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListClusterHosts
-	// request to get the next page of results.
+	// Page token. To get the next page of results, set [page_token] to the
+	// [ListClusterHostsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// String that describes a display filter.
+	// A filter expression that filters hosts listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [Cluster.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9].
+	// Example of a filter: `name=my-host`
 	Filter               string   `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1168,11 +1184,11 @@ func (m *ListClusterHostsRequest) GetFilter() string {
 type ListClusterHostsResponse struct {
 	// Requested list of hosts.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	// This token allows you to get the next page of results for ListClusterHosts requests,
-	// if the number of results is larger than `page_size` specified in the request.
-	// To get the next page, specify the value of `next_page_token` as a value for
-	// the `page_token` parameter in the next ListSubclusterHosts request. Subsequent ListClusterHosts
-	// requests will have their own `next_page_token` to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListClusterHostsRequest.page_size], use `next_page_token` as the value
+	// for the [ListClusterHostsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1358,22 +1374,25 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ClusterServiceClient interface {
-	// Returns the specified Dataproc cluster.
+	// Returns the specified cluster.
+	//
+	// To get the list of all available clusters, make a [ClusterService.List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves a list of Dataproc clusters.
+	// Retrieves the list of clusters in the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Creates a Dataproc cluster.
+	// Creates a cluster in the specified folder.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates configuration of the specified Dataproc cluster.
+	// Updates the configuration of the specified cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Dataproc cluster.
+	// Deletes the specified cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start the specified Dataproc cluster.
+	// Starts the specified cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stop the specified Dataproc cluster.
+	// Stops the specified cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
-	// Retrieves a list of hosts.
+	// Retrieves the list of hosts in the specified cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 }
 
@@ -1468,22 +1487,25 @@ func (c *clusterServiceClient) ListHosts(ctx context.Context, in *ListClusterHos
 
 // ClusterServiceServer is the server API for ClusterService service.
 type ClusterServiceServer interface {
-	// Returns the specified Dataproc cluster.
+	// Returns the specified cluster.
+	//
+	// To get the list of all available clusters, make a [ClusterService.List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves a list of Dataproc clusters.
+	// Retrieves the list of clusters in the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Creates a Dataproc cluster.
+	// Creates a cluster in the specified folder.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
-	// Updates configuration of the specified Dataproc cluster.
+	// Updates the configuration of the specified cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
-	// Deletes the specified Dataproc cluster.
+	// Deletes the specified cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Start the specified Dataproc cluster.
+	// Starts the specified cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stop the specified Dataproc cluster.
+	// Stops the specified cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Lists operations for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
-	// Retrieves a list of hosts.
+	// Retrieves the list of hosts in the specified cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 }
 

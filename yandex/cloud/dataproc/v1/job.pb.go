@@ -25,11 +25,16 @@ type Job_Status int32
 
 const (
 	Job_STATUS_UNSPECIFIED Job_Status = 0
-	Job_PROVISIONING       Job_Status = 1
-	Job_PENDING            Job_Status = 2
-	Job_RUNNING            Job_Status = 3
-	Job_ERROR              Job_Status = 4
-	Job_DONE               Job_Status = 5
+	// Job is logged in the database and is waiting for the agent to run it.
+	Job_PROVISIONING Job_Status = 1
+	// Job is acquired by the agent and is in the queue for execution.
+	Job_PENDING Job_Status = 2
+	// Job is being run in the cluster.
+	Job_RUNNING Job_Status = 3
+	// Job failed to finish the run properly.
+	Job_ERROR Job_Status = 4
+	// Job is finished
+	Job_DONE Job_Status = 5
 )
 
 var Job_Status_name = map[int32]string{
@@ -58,24 +63,23 @@ func (Job_Status) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_2e94b92233e6cd71, []int{0, 0}
 }
 
-// Dataproc job.
+// A Data Proc job. For details about the concept, see [documentation](/docs/dataproc/concepts/jobs).
 type Job struct {
-	// Required. Unique ID of the Dataproc job.
-	// This ID is assigned by MDB in the process of creating Dataproc job.
+	// ID of the job. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Required. Unique ID of the Dataproc cluster.
+	// Unique ID of the Data Proc cluster.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The time when the Dataproc job was created.
+	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// The time when the Dataproc job was started.
+	// The time when the job was started.
 	StartedAt *timestamp.Timestamp `protobuf:"bytes,4,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
-	// The time when the Dataproc job was finished.
+	// The time when the job was finished.
 	FinishedAt *timestamp.Timestamp `protobuf:"bytes,5,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
-	// Name of the Dataproc job.
+	// Name of the job, specified in the [JobService.Create] request.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// Status.
+	// Job status.
 	Status Job_Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.dataproc.v1.Job_Status" json:"status,omitempty"`
-	// Job specification.
+	// Specification for the job.
 	//
 	// Types that are valid to be assigned to JobSpec:
 	//	*Job_MapreduceJob
@@ -236,15 +240,16 @@ func (*Job) XXX_OneofWrappers() []interface{} {
 }
 
 type MapreduceJob struct {
-	// Optional arguments to the driver.
+	// Optional arguments to pass to the driver.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
-	// URIs of file to run.
+	// JAR file URIs to add to CLASSPATH of the Data Proc driver and each task.
 	JarFileUris []string `protobuf:"bytes,2,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
-	// URIs of files to be copied to the working directory of Dataproc drivers and distributed tasks.
+	// URIs of resource files to be copied to the working directory of Data Proc drivers
+	// and distributed Hadoop tasks.
 	FileUris []string `protobuf:"bytes,3,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
-	// URIs of archives to be extracted in the working directory of Dataproc drivers and tasks.
+	// URIs of archives to be extracted to the working directory of Data Proc drivers and tasks.
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
-	// A mapping of property names to values, used to configure Dataproc.
+	// Property names and values, used to configure Data Proc and MapReduce.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Types that are valid to be assigned to Driver:
 	//	*MapreduceJob_MainJarFileUri
@@ -361,19 +366,20 @@ func (*MapreduceJob) XXX_OneofWrappers() []interface{} {
 }
 
 type SparkJob struct {
-	// Optional arguments to the driver.
+	// Optional arguments to pass to the driver.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
-	// Jar file URIs to add to the CLASSPATHs of the Dataproc driver and tasks.
+	// JAR file URIs to add to CLASSPATH of the Data Proc driver and each task.
 	JarFileUris []string `protobuf:"bytes,2,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
-	// URIs of files to be copied to the working directory of Dataproc drivers and distributed tasks.
+	// URIs of resource files to be copied to the working directory of Data Proc drivers
+	// and distributed Hadoop tasks.
 	FileUris []string `protobuf:"bytes,3,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
-	// URIs of archives to be extracted in the working directory of Dataproc drivers and tasks.
+	// URIs of archives to be extracted to the working directory of Data Proc drivers and tasks.
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
-	// A mapping of property names to values, used to configure Dataproc.
+	// Property names and values, used to configure Data Proc and Spark.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// The HCFS URI of the jar file containing the main class.
+	// The HCFS URI of the jar file containing the `main` class for the job.
 	MainJarFileUri string `protobuf:"bytes,6,opt,name=main_jar_file_uri,json=mainJarFileUri,proto3" json:"main_jar_file_uri,omitempty"`
-	// The name of the driver's main class.
+	// The name of the driver class.
 	MainClass            string   `protobuf:"bytes,7,opt,name=main_class,json=mainClass,proto3" json:"main_class,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -455,17 +461,18 @@ func (m *SparkJob) GetMainClass() string {
 }
 
 type PysparkJob struct {
-	// Optional arguments to the driver.
+	// Optional arguments to pass to the driver.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
-	// Jar file URIs to add to the CLASSPATHs of the Dataproc driver and tasks.
+	// JAR file URIs to add to CLASSPATH of the Data Proc driver and each task.
 	JarFileUris []string `protobuf:"bytes,2,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
-	// URIs of files to be copied to the working directory of Dataproc drivers and distributed tasks.
+	// URIs of resource files to be copied to the working directory of Data Proc drivers
+	// and distributed Hadoop tasks.
 	FileUris []string `protobuf:"bytes,3,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
-	// URIs of archives to be extracted in the working directory of Dataproc drivers and tasks.
+	// URIs of archives to be extracted to the working directory of Data Proc drivers and tasks.
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
-	// A mapping of property names to values, used to configure Dataproc.
+	// Property names and values, used to configure Data Proc and PySpark.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// URI of the main Python file to use as the driver. Must be a .py file.
+	// URI of the file with the driver code. Must be a .py file.
 	MainPythonFileUri string `protobuf:"bytes,6,opt,name=main_python_file_uri,json=mainPythonFileUri,proto3" json:"main_python_file_uri,omitempty"`
 	// URIs of Python files to pass to the PySpark framework.
 	PythonFileUris       []string `protobuf:"bytes,7,rep,name=python_file_uris,json=pythonFileUris,proto3" json:"python_file_uris,omitempty"`
@@ -549,6 +556,7 @@ func (m *PysparkJob) GetPythonFileUris() []string {
 }
 
 type QueryList struct {
+	// List of Hive queries.
 	Queries              []string `protobuf:"bytes,1,rep,name=queries,proto3" json:"queries,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -588,13 +596,13 @@ func (m *QueryList) GetQueries() []string {
 }
 
 type HiveJob struct {
-	// A mapping of property names to values, used to configure Hive.
+	// Property names and values, used to configure Data Proc and Hive.
 	Properties map[string]string `protobuf:"bytes,1,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Whether to continue executing queries if a query fails.
+	// Flag indicating whether a job should continue to run if a query fails.
 	ContinueOnFailure bool `protobuf:"varint,2,opt,name=continue_on_failure,json=continueOnFailure,proto3" json:"continue_on_failure,omitempty"`
-	// Mapping of query variable names to values.
+	// Query variables and their values.
 	ScriptVariables map[string]string `protobuf:"bytes,3,rep,name=script_variables,json=scriptVariables,proto3" json:"script_variables,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Jar file URIs to add to the CLASSPATHs of the Hive driver and tasks.
+	// JAR file URIs to add to CLASSPATH of the Hive driver and each task.
 	JarFileUris []string `protobuf:"bytes,4,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
 	// Types that are valid to be assigned to QueryType:
 	//	*HiveJob_QueryFileUri
