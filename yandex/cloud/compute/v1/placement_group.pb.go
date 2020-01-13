@@ -145,9 +145,6 @@ func (*PlacementGroup) XXX_OneofWrappers() []interface{} {
 	}
 }
 
-// Anti-affinity placement strategy (`spread`). Instances are distributed
-// over distinct failure domains.
-//
 // This is an empty structure that must be passed to explicitly
 // specify the required placement strategy.
 type SpreadPlacementStrategy struct {

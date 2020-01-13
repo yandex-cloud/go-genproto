@@ -60,10 +60,10 @@ func (Job_Status) EnumDescriptor() ([]byte, []int) {
 
 // Data Proc job.
 type Job struct {
-	// Required. Unique ID of the Data Proc job.
+	// Unique ID of the Data Proc job.
 	// This ID is assigned by MDB in the process of creating Data Proc job.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Required. Unique ID of the Data Proc cluster.
+	// ID of the Data Proc cluster.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The time when the Data Proc job was created.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
