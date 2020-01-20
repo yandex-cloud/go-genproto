@@ -277,6 +277,10 @@ func (m *InstanceTemplate) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
+func (m *InstanceTemplate) SetNetworkSettings(v *NetworkSettings) {
+	m.NetworkSettings = v
+}
+
 func (m *ResourcesSpec) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -361,6 +365,10 @@ func (m *OneToOneNatSpec) SetIpVersion(v IpVersion) {
 
 func (m *SchedulingPolicy) SetPreemptible(v bool) {
 	m.Preemptible = v
+}
+
+func (m *NetworkSettings) SetType(v NetworkSettings_Type) {
+	m.Type = v
 }
 
 func (m *LoadBalancerSpec) SetTargetGroupSpec(v *TargetGroupSpec) {
