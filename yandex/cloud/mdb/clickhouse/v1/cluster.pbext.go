@@ -196,3 +196,7 @@ func (m *Access) SetDataLens(v bool) {
 func (m *Access) SetWebSql(v bool) {
 	m.WebSql = v
 }
+
+func (m *Access) SetMetrika(v bool) {
+	m.Metrika = v
+}

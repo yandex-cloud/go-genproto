@@ -71,6 +71,18 @@ func (m *InstanceGroup) SetStatus(v InstanceGroup_Status) {
 	m.Status = v
 }
 
+func (m *InstanceGroup) SetVariables(v []*Variable) {
+	m.Variables = v
+}
+
+func (m *Variable) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *Variable) SetValue(v string) {
+	m.Value = v
+}
+
 func (m *LoadBalancerState) SetTargetGroupId(v string) {
 	m.TargetGroupId = v
 }
@@ -279,6 +291,14 @@ func (m *InstanceTemplate) SetServiceAccountId(v string) {
 
 func (m *InstanceTemplate) SetNetworkSettings(v *NetworkSettings) {
 	m.NetworkSettings = v
+}
+
+func (m *InstanceTemplate) SetName(v string) {
+	m.Name = v
+}
+
+func (m *InstanceTemplate) SetHostname(v string) {
+	m.Hostname = v
 }
 
 func (m *ResourcesSpec) SetMemory(v int64) {
