@@ -57,6 +57,10 @@ func (m *Cluster) SetStatus(v Cluster_Status) {
 	m.Status = v
 }
 
+func (m *Cluster) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

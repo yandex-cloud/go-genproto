@@ -213,6 +213,10 @@ func (m *ScalePolicy_CustomRule) SetMetricName(v string) {
 	m.MetricName = v
 }
 
+func (m *ScalePolicy_CustomRule) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *ScalePolicy_CustomRule) SetTarget(v float64) {
 	m.Target = v
 }
