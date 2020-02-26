@@ -26,9 +26,13 @@ type ReleaseChannel int32
 
 const (
 	ReleaseChannel_RELEASE_CHANNEL_UNSPECIFIED ReleaseChannel = 0
-	ReleaseChannel_RAPID                       ReleaseChannel = 1
-	ReleaseChannel_REGULAR                     ReleaseChannel = 2
-	ReleaseChannel_STABLE                      ReleaseChannel = 3
+	// Minor updates with new functions and improvements are often added.
+	// You can't disable automatic updates in this channel, but you can specify a time period for automatic updates.
+	ReleaseChannel_RAPID ReleaseChannel = 1
+	// New functions and improvements are added in chunks shortly after they appear on `RAPID`.
+	ReleaseChannel_REGULAR ReleaseChannel = 2
+	// Only updates related to bug fixes or security improvements are added.
+	ReleaseChannel_STABLE ReleaseChannel = 3
 )
 
 var ReleaseChannel_name = map[int32]string{
@@ -188,7 +192,11 @@ type Cluster struct {
 	// Service account to be used for provisioning Compute Cloud and VPC resources for Kubernetes cluster.
 	ServiceAccountId string `protobuf:"bytes,13,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Service account to be used by the worker nodes of the Kubernetes cluster to access Container Registry or to push node logs and metrics.
-	NodeServiceAccountId string         `protobuf:"bytes,14,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
+	NodeServiceAccountId string `protobuf:"bytes,14,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
+	// When creating a Kubernetes cluster, you should specify one of three release channels. The release channel contains several Kubernetes versions.
+	// Channels differ in the set of available versions, the management of auto-updates, and the updates received.
+	// You can't change the channel once the Kubernetes cluster is created, you can only recreate the Kubernetes cluster and specify a new release channel.
+	// For more details see [documentation](https://cloud.yandex.com/docs/managed-kubernetes/concepts/release-channels-and-updates).
 	ReleaseChannel       ReleaseChannel `protobuf:"varint,15,opt,name=release_channel,json=releaseChannel,proto3,enum=yandex.cloud.k8s.v1.ReleaseChannel" json:"release_channel,omitempty"`
 	NetworkPolicy        *NetworkPolicy `protobuf:"bytes,16,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
@@ -368,8 +376,10 @@ type Master struct {
 	//and can be used by the clients to communicate with the Kubernetes API of the Kubernetes cluster.
 	Endpoints *MasterEndpoints `protobuf:"bytes,3,opt,name=endpoints,proto3" json:"endpoints,omitempty"`
 	// Master authentication parameters are used to establish trust between the master and a client.
-	MasterAuth           *MasterAuth              `protobuf:"bytes,4,opt,name=master_auth,json=masterAuth,proto3" json:"master_auth,omitempty"`
-	VersionInfo          *VersionInfo             `protobuf:"bytes,5,opt,name=version_info,json=versionInfo,proto3" json:"version_info,omitempty"`
+	MasterAuth *MasterAuth `protobuf:"bytes,4,opt,name=master_auth,json=masterAuth,proto3" json:"master_auth,omitempty"`
+	// Detailed information about the Kubernetes version that is running on the master.
+	VersionInfo *VersionInfo `protobuf:"bytes,5,opt,name=version_info,json=versionInfo,proto3" json:"version_info,omitempty"`
+	// Maintenance policy of the master.
 	MaintenancePolicy    *MasterMaintenancePolicy `protobuf:"bytes,6,opt,name=maintenance_policy,json=maintenancePolicy,proto3" json:"maintenance_policy,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
@@ -524,9 +534,9 @@ func (m *MasterAuth) GetClusterCaCertificate() string {
 type ZonalMaster struct {
 	// ID of the availability zone where the master resides.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// An IPv4 internal network address that is assigned to the master.
+	// IPv4 internal network address that is assigned to the master.
 	InternalV4Address string `protobuf:"bytes,2,opt,name=internal_v4_address,json=internalV4Address,proto3" json:"internal_v4_address,omitempty"`
-	// An IPv4 external network address that is assigned to the master.
+	// IPv4 external network address that is assigned to the master.
 	ExternalV4Address    string   `protobuf:"bytes,3,opt,name=external_v4_address,json=externalV4Address,proto3" json:"external_v4_address,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -582,9 +592,9 @@ func (m *ZonalMaster) GetExternalV4Address() string {
 type RegionalMaster struct {
 	// ID of the region where the master resides.
 	RegionId string `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// An IPv4 internal network address that is assigned to the master.
+	// IPv4 internal network address that is assigned to the master.
 	InternalV4Address string `protobuf:"bytes,2,opt,name=internal_v4_address,json=internalV4Address,proto3" json:"internal_v4_address,omitempty"`
-	// An IPv4 external network address that is assigned to the master.
+	// IPv4 external network address that is assigned to the master.
 	ExternalV4Address    string   `protobuf:"bytes,3,opt,name=external_v4_address,json=externalV4Address,proto3" json:"external_v4_address,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -741,7 +751,11 @@ func (m *IPAllocationPolicy) GetServiceIpv4CidrBlock() string {
 }
 
 type MasterMaintenancePolicy struct {
-	AutoUpgrade          bool               `protobuf:"varint,1,opt,name=auto_upgrade,json=autoUpgrade,proto3" json:"auto_upgrade,omitempty"`
+	// If set to true, automatic updates are installed in the specified period of time with no interaction from the user.
+	// If set to false, automatic upgrades are disabled.
+	AutoUpgrade bool `protobuf:"varint,1,opt,name=auto_upgrade,json=autoUpgrade,proto3" json:"auto_upgrade,omitempty"`
+	// Maintenance window settings. Update will start at the specified time and last no more than the specified duration.
+	// The time is set in UTC.
 	MaintenanceWindow    *MaintenanceWindow `protobuf:"bytes,2,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`

@@ -79,7 +79,7 @@ type ListClustersRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListClustersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
@@ -151,10 +151,10 @@ type ListClustersResponse struct {
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClustersRequest.page_size], use
-	// the [next_page_token] as the value
+	// the `next_page_token` as the value
 	// for the [ListClustersRequest.page_token] query parameter
 	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
+	// `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -282,7 +282,10 @@ func (m *DeleteClusterMetadata) GetClusterId() string {
 }
 
 type StopClusterRequest struct {
-	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the Kubernetes cluster to stop.
+	// To get Kubernetes cluster ID use a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the service account which has permission to stop the Kubernetes cluster.
 	ServiceAccountId     string   `protobuf:"bytes,2,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -329,6 +332,7 @@ func (m *StopClusterRequest) GetServiceAccountId() string {
 }
 
 type StopClusterMetadata struct {
+	// ID of the Kubernetes cluster that is being stopped.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -368,6 +372,8 @@ func (m *StopClusterMetadata) GetClusterId() string {
 }
 
 type StartClusterRequest struct {
+	// ID of the Kubernetes cluster to start.
+	// To get Kubernetes cluster ID use a [ClusterService.List] request.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -407,6 +413,7 @@ func (m *StartClusterRequest) GetClusterId() string {
 }
 
 type StartClusterMetadata struct {
+	// ID of the Kubernetes cluster that is being started.
 	ClusterId            string   `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -462,7 +469,8 @@ type UpdateClusterRequest struct {
 	// Types that are valid to be assigned to InternetGateway:
 	//	*UpdateClusterRequest_GatewayIpv4Address
 	InternetGateway isUpdateClusterRequest_InternetGateway `protobuf_oneof:"internet_gateway"`
-	MasterSpec      *MasterUpdateSpec                      `protobuf:"bytes,7,opt,name=master_spec,json=masterSpec,proto3" json:"master_spec,omitempty"`
+	// Specification of the master update.
+	MasterSpec *MasterUpdateSpec `protobuf:"bytes,7,opt,name=master_spec,json=masterSpec,proto3" json:"master_spec,omitempty"`
 	// Service account to be used for provisioning Compute Cloud and VPC resources for Kubernetes cluster.
 	// Selected service account should have `edit` role on the folder where the Kubernetes cluster will be
 	// located and on the folder where selected network resides.
@@ -596,7 +604,9 @@ func (*UpdateClusterRequest) XXX_OneofWrappers() []interface{} {
 }
 
 type MasterUpdateSpec struct {
-	Version              *UpdateVersionSpec       `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	// Specification of the master update.
+	Version *UpdateVersionSpec `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	// Maintenance policy of the master.
 	MaintenancePolicy    *MasterMaintenancePolicy `protobuf:"bytes,2,opt,name=maintenance_policy,json=maintenancePolicy,proto3" json:"maintenance_policy,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
@@ -707,7 +717,8 @@ type CreateClusterRequest struct {
 	// located and on the folder where selected network resides.
 	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Service account to be used by the worker nodes of the Kubernetes cluster to access Container Registry or to push node logs and metrics.
-	NodeServiceAccountId string         `protobuf:"bytes,10,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
+	NodeServiceAccountId string `protobuf:"bytes,10,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
+	// Release channel for the master.
 	ReleaseChannel       ReleaseChannel `protobuf:"varint,11,opt,name=release_channel,json=releaseChannel,proto3,enum=yandex.cloud.k8s.v1.ReleaseChannel" json:"release_channel,omitempty"`
 	NetworkPolicy        *NetworkPolicy `protobuf:"bytes,12,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
@@ -936,7 +947,7 @@ type ListClusterOperationsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListClusterOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
@@ -1004,9 +1015,9 @@ type ListClusterOperationsResponse struct {
 	// List of operations for the specified Kubernetes cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value
+	// is larger than [ListClusterOperationsRequest.page_size], use the `next_page_token` as the value
 	// for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// Each subsequent list request will have its own `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1062,7 +1073,7 @@ type ListClusterNodeGroupsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListClusterNodeGroupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
@@ -1131,10 +1142,10 @@ type ListClusterNodeGroupsResponse struct {
 	NodeGroups []*NodeGroup `protobuf:"bytes,1,rep,name=node_groups,json=nodeGroups,proto3" json:"node_groups,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterNodeGroupsRequest.page_size], use
-	// the [next_page_token] as the value
+	// the `next_page_token` as the value
 	// for the [ListClusterNodeGroupsRequest.page_token] query parameter
 	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
+	// `next_page_token` to continue paging through the results.
 	NextPageToken        string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -1184,8 +1195,10 @@ type MasterSpec struct {
 	// Types that are valid to be assigned to MasterType:
 	//	*MasterSpec_ZonalMasterSpec
 	//	*MasterSpec_RegionalMasterSpec
-	MasterType           isMasterSpec_MasterType  `protobuf_oneof:"master_type"`
-	Version              string                   `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
+	MasterType isMasterSpec_MasterType `protobuf_oneof:"master_type"`
+	// Version of Kubernetes components that runs on the master.
+	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
+	// Maintenance policy of the master.
 	MaintenancePolicy    *MasterMaintenancePolicy `protobuf:"bytes,4,opt,name=maintenance_policy,json=maintenancePolicy,proto3" json:"maintenance_policy,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
@@ -1335,7 +1348,9 @@ func (m *ZonalMasterSpec) GetExternalV4AddressSpec() *ExternalAddressSpec {
 }
 
 type RegionalMasterSpec struct {
-	RegionId  string            `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	// ID of the availability zone where the master resides.
+	RegionId string `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	// List of locations where the master will be allocated.
 	Locations []*MasterLocation `protobuf:"bytes,2,rep,name=locations,proto3" json:"locations,omitempty"`
 	// Specify to allocate a static public IP for the master.
 	ExternalV4AddressSpec *ExternalAddressSpec `protobuf:"bytes,3,opt,name=external_v4_address_spec,json=externalV4AddressSpec,proto3" json:"external_v4_address_spec,omitempty"`
@@ -1462,6 +1477,7 @@ func (m *ExternalAddressSpec) XXX_DiscardUnknown() {
 var xxx_messageInfo_ExternalAddressSpec proto.InternalMessageInfo
 
 type MasterLocation struct {
+	// ID of the availability zone.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// If not specified and there is a single subnet in specified zone, address
 	// in this subnet will be allocated.
@@ -1681,7 +1697,9 @@ type ClusterServiceClient interface {
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Kubernetes cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Stops the specified Kubernetes cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Starts the specified Kubernetes cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists nodegroup for the specified Kubernetes cluster.
 	ListNodeGroups(ctx context.Context, in *ListClusterNodeGroupsRequest, opts ...grpc.CallOption) (*ListClusterNodeGroupsResponse, error)
@@ -1792,7 +1810,9 @@ type ClusterServiceServer interface {
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified Kubernetes cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
+	// Stops the specified Kubernetes cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Starts the specified Kubernetes cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
 	// Lists nodegroup for the specified Kubernetes cluster.
 	ListNodeGroups(context.Context, *ListClusterNodeGroupsRequest) (*ListClusterNodeGroupsResponse, error)
