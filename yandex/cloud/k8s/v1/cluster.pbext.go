@@ -156,6 +156,10 @@ func (m *IPAllocationPolicy) SetClusterIpv4CidrBlock(v string) {
 	m.ClusterIpv4CidrBlock = v
 }
 
+func (m *IPAllocationPolicy) SetNodeIpv4CidrMaskSize(v int64) {
+	m.NodeIpv4CidrMaskSize = v
+}
+
 func (m *IPAllocationPolicy) SetServiceIpv4CidrBlock(v string) {
 	m.ServiceIpv4CidrBlock = v
 }
