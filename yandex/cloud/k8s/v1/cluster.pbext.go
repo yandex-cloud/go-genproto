@@ -78,6 +78,10 @@ func (m *Cluster) SetNetworkPolicy(v *NetworkPolicy) {
 	m.NetworkPolicy = v
 }
 
+func (m *Cluster) SetKmsProvider(v *KMSProvider) {
+	m.KmsProvider = v
+}
+
 type Master_MasterType = isMaster_MasterType
 
 func (m *Master) SetMasterType(v Master_MasterType) {
@@ -174,4 +178,8 @@ func (m *MasterMaintenancePolicy) SetMaintenanceWindow(v *MaintenanceWindow) {
 
 func (m *NetworkPolicy) SetProvider(v NetworkPolicy_Provider) {
 	m.Provider = v
+}
+
+func (m *KMSProvider) SetKeyId(v string) {
+	m.KeyId = v
 }

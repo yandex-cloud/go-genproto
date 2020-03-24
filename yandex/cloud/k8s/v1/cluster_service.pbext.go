@@ -179,6 +179,10 @@ func (m *CreateClusterRequest) SetNetworkPolicy(v *NetworkPolicy) {
 	m.NetworkPolicy = v
 }
 
+func (m *CreateClusterRequest) SetKmsProvider(v *KMSProvider) {
+	m.KmsProvider = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
