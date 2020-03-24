@@ -1109,11 +1109,11 @@ var fileDescriptor_99dd27616c2536a3 = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // SecurityGroupServiceClient is the client API for SecurityGroupService service.
 //
@@ -1132,10 +1132,10 @@ type SecurityGroupServiceClient interface {
 }
 
 type securityGroupServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewSecurityGroupServiceClient(cc *grpc.ClientConn) SecurityGroupServiceClient {
+func NewSecurityGroupServiceClient(cc grpc.ClientConnInterface) SecurityGroupServiceClient {
 	return &securityGroupServiceClient{cc}
 }
 

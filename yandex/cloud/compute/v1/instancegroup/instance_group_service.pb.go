@@ -1525,11 +1525,11 @@ var fileDescriptor_fc51cd26b96eed88 = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // InstanceGroupServiceClient is the client API for InstanceGroupService service.
 //
@@ -1568,10 +1568,10 @@ type InstanceGroupServiceClient interface {
 }
 
 type instanceGroupServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewInstanceGroupServiceClient(cc *grpc.ClientConn) InstanceGroupServiceClient {
+func NewInstanceGroupServiceClient(cc grpc.ClientConnInterface) InstanceGroupServiceClient {
 	return &instanceGroupServiceClient{cc}
 }
 

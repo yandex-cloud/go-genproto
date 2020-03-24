@@ -884,11 +884,11 @@ var fileDescriptor_5c143361743b1395 = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // DataprocManagerServiceClient is the client API for DataprocManagerService service.
 //
@@ -899,10 +899,10 @@ type DataprocManagerServiceClient interface {
 }
 
 type dataprocManagerServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewDataprocManagerServiceClient(cc *grpc.ClientConn) DataprocManagerServiceClient {
+func NewDataprocManagerServiceClient(cc grpc.ClientConnInterface) DataprocManagerServiceClient {
 	return &dataprocManagerServiceClient{cc}
 }
 

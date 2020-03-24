@@ -729,11 +729,11 @@ var fileDescriptor_b3c8b118c8b9bc9c = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // SnapshotServiceClient is the client API for SnapshotService service.
 //
@@ -760,10 +760,10 @@ type SnapshotServiceClient interface {
 }
 
 type snapshotServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewSnapshotServiceClient(cc *grpc.ClientConn) SnapshotServiceClient {
+func NewSnapshotServiceClient(cc grpc.ClientConnInterface) SnapshotServiceClient {
 	return &snapshotServiceClient{cc}
 }
 

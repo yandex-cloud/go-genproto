@@ -1058,11 +1058,11 @@ var fileDescriptor_b7cf1411620c03ca = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // NodeGroupServiceClient is the client API for NodeGroupService service.
 //
@@ -1087,10 +1087,10 @@ type NodeGroupServiceClient interface {
 }
 
 type nodeGroupServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewNodeGroupServiceClient(cc *grpc.ClientConn) NodeGroupServiceClient {
+func NewNodeGroupServiceClient(cc grpc.ClientConnInterface) NodeGroupServiceClient {
 	return &nodeGroupServiceClient{cc}
 }
 

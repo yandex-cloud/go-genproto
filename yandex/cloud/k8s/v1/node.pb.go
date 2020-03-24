@@ -905,7 +905,9 @@ func init() {
 	proto.RegisterType((*SchedulingPolicy)(nil), "yandex.cloud.k8s.v1.SchedulingPolicy")
 }
 
-func init() { proto.RegisterFile("yandex/cloud/k8s/v1/node.proto", fileDescriptor_0caaa97cecfcad1b) }
+func init() {
+	proto.RegisterFile("yandex/cloud/k8s/v1/node.proto", fileDescriptor_0caaa97cecfcad1b)
+}
 
 var fileDescriptor_0caaa97cecfcad1b = []byte{
 	// 1327 bytes of a gzipped FileDescriptorProto
