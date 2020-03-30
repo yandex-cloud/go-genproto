@@ -189,6 +189,10 @@ func (m *ListDryRunLifecyclePolicyResultAffectedImagesRequest) SetOrderBy(v stri
 	m.OrderBy = v
 }
 
+func (m *ListDryRunLifecyclePolicyResultAffectedImagesResponse) SetAffectedImages(v []*Image) {
+	m.AffectedImages = v
+}
+
 func (m *ListDryRunLifecyclePolicyResultAffectedImagesResponse) SetDryRunLifecyclePolicyResultId(v string) {
 	m.DryRunLifecyclePolicyResultId = v
 }
@@ -203,10 +207,6 @@ func (m *ListDryRunLifecyclePolicyResultAffectedImagesResponse) SetRunAt(v *time
 
 func (m *ListDryRunLifecyclePolicyResultAffectedImagesResponse) SetAffectedImagesCount(v int64) {
 	m.AffectedImagesCount = v
-}
-
-func (m *ListDryRunLifecyclePolicyResultAffectedImagesResponse) SetAffectedImages(v []*Image) {
-	m.AffectedImages = v
 }
 
 func (m *ListDryRunLifecyclePolicyResultAffectedImagesResponse) SetNextPageToken(v string) {
