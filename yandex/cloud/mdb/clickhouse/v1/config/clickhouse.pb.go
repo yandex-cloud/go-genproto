@@ -189,8 +189,7 @@ func (ClickhouseConfig_ExternalDictionary_Layout_Type) EnumDescriptor() ([]byte,
 //
 // Any options not listed here are not supported.
 type ClickhouseConfig struct {
-	// Logging level for the ClickHouse cluster.
-	// Possible values: TRACE, DEBUG, INFORMATION, WARNING and ERROR.
+	// Logging level for the ClickHouse cluster. Possible values: TRACE, DEBUG, INFORMATION, WARNING, ERROR.
 	LogLevel ClickhouseConfig_LogLevel `protobuf:"varint,1,opt,name=log_level,json=logLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"log_level,omitempty"`
 	// Settings for the MergeTree engine.
 	// See description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/server_settings/settings/#merge_tree).
@@ -372,10 +371,11 @@ type ClickhouseConfig_MergeTree struct {
 	PartsToThrowInsert *wrappers.Int64Value `protobuf:"bytes,4,opt,name=parts_to_throw_insert,json=partsToThrowInsert,proto3" json:"parts_to_throw_insert,omitempty"`
 	// How many tasks of merging and mutating parts are allowed simultaneously in ReplicatedMergeTree queue.
 	MaxReplicatedMergesInQueue *wrappers.Int64Value `protobuf:"bytes,5,opt,name=max_replicated_merges_in_queue,json=maxReplicatedMergesInQueue,proto3" json:"max_replicated_merges_in_queue,omitempty"`
-	// When there is less than specified number of free entries in pool (or replicated queue), start to lower maximum size of merge to process (or to put in queue).
-	// This is to allow small merges to process - not filling the pool with long running merges.
+	// If there is less than specified number of free entries in background pool (or replicated queue), start to lower
+	// maximum size of merge to process.
 	NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge *wrappers.Int64Value `protobuf:"bytes,6,opt,name=number_of_free_entries_in_pool_to_lower_max_size_of_merge,json=numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge,proto3" json:"number_of_free_entries_in_pool_to_lower_max_size_of_merge,omitempty"`
-	// Maximum in total size of parts to merge, when there are minimum free threads in background pool (or entries in replication queue).
+	// Maximum in total size of parts to merge, when there are minimum free threads in background pool (or entries
+	// in replication queue).
 	MaxBytesToMergeAtMinSpaceInPool *wrappers.Int64Value `protobuf:"bytes,7,opt,name=max_bytes_to_merge_at_min_space_in_pool,json=maxBytesToMergeAtMinSpaceInPool,proto3" json:"max_bytes_to_merge_at_min_space_in_pool,omitempty"`
 	XXX_NoUnkeyedLiteral            struct{}             `json:"-"`
 	XXX_unrecognized                []byte               `json:"-"`

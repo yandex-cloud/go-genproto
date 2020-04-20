@@ -165,6 +165,10 @@ func (m *ScalePolicy) SetAutoScale(v *ScalePolicy_AutoScale) {
 	}
 }
 
+func (m *ScalePolicy) SetTestAutoScale(v *ScalePolicy_AutoScale) {
+	m.TestAutoScale = v
+}
+
 func (m *ScalePolicy_AutoScale) SetMinZoneSize(v int64) {
 	m.MinZoneSize = v
 }

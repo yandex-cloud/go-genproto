@@ -314,78 +314,70 @@ func (m *UserSpec) GetQuotas() []*UserQuota {
 // ClickHouse user settings. Supported settings are a limited subset of all settings
 // described in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/).
 type UserSettings struct {
-	// Restricts permissions for non-DDL queries.
-	// Possible values:
-	// * 0 (default) —  no restrictions.
-	// * 1 — only read data queries are allowed.
-	// * 2 — read data and change settings queries are allowed.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/permissions_for_queries/#settings_readonly).
+	// Restricts permissions for non-DDL queries. Possible values: 0 (default) — no restrictions,
+	// 1 — only read data queries are allowed, 2 — read data and change settings queries are allowed.
 	Readonly *wrappers.Int64Value `protobuf:"bytes,1,opt,name=readonly,proto3" json:"readonly,omitempty"`
-	// Whether DDL queries are allowed. Default value: `false`.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/permissions_for_queries/#settings_allow_ddl).
+	// Whether DDL queries are allowed. Default value: false.
 	AllowDdl *wrappers.BoolValue `protobuf:"bytes,2,opt,name=allow_ddl,json=allowDdl,proto3" json:"allow_ddl,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-insert_quorum).
+	// For INSERT queries in the replicated table, wait writing for the specified number of replicas and linearize
+	// the addition of the data.
 	InsertQuorum *wrappers.Int64Value `protobuf:"bytes,3,opt,name=insert_quorum,json=insertQuorum,proto3" json:"insert_quorum,omitempty"`
 	// Connection timeout in milliseconds.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#connect-timeout-receive-timeout-send-timeout).
 	ConnectTimeout *wrappers.Int64Value `protobuf:"bytes,39,opt,name=connect_timeout,json=connectTimeout,proto3" json:"connect_timeout,omitempty"`
 	// Receive timeout in milliseconds.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#connect-timeout-receive-timeout-send-timeout).
 	ReceiveTimeout *wrappers.Int64Value `protobuf:"bytes,40,opt,name=receive_timeout,json=receiveTimeout,proto3" json:"receive_timeout,omitempty"`
 	// Send timeout in milliseconds.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#connect-timeout-receive-timeout-send-timeout).
 	SendTimeout *wrappers.Int64Value `protobuf:"bytes,41,opt,name=send_timeout,json=sendTimeout,proto3" json:"send_timeout,omitempty"`
 	// Quorum write timeout in milliseconds. Default value: 60000.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-insert_quorum_timeout).
 	InsertQuorumTimeout *wrappers.Int64Value `protobuf:"bytes,4,opt,name=insert_quorum_timeout,json=insertQuorumTimeout,proto3" json:"insert_quorum_timeout,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-select_sequential_consistency).
+	// For SELECT queries from the replicated table, throw an exception if the replica does not have a chunk written
+	// with the quorum; do not read the parts that have not yet been written with the quorum.
 	SelectSequentialConsistency *wrappers.BoolValue `protobuf:"bytes,5,opt,name=select_sequential_consistency,json=selectSequentialConsistency,proto3" json:"select_sequential_consistency,omitempty"`
-	// Max replica delay in milliseconds. If a replica lags more than the set value, this replica is not used. Default value: 300000.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-max_replica_delay_for_distributed_queries).
+	// Max replica delay in milliseconds. If a replica lags more than the set value, this replica is not used.
+	// Default value: 300000.
 	MaxReplicaDelayForDistributedQueries *wrappers.Int64Value `protobuf:"bytes,6,opt,name=max_replica_delay_for_distributed_queries,json=maxReplicaDelayForDistributedQueries,proto3" json:"max_replica_delay_for_distributed_queries,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-fallback_to_stale_replicas_for_distributed_queries).
+	// Determine the behavior when all replicas for the queried table are stale. If enabled, the query will be
+	// performed anyway. Otherwise, the error will be thrown.
 	FallbackToStaleReplicasForDistributedQueries *wrappers.BoolValue `protobuf:"bytes,7,opt,name=fallback_to_stale_replicas_for_distributed_queries,json=fallbackToStaleReplicasForDistributedQueries,proto3" json:"fallback_to_stale_replicas_for_distributed_queries,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/query_language/alter/#synchronicity-of-alter-queries).
+	// Wait mode for ALTER queries on replicated tables.
+	// Possible values: 0 - do not wait, 1 - wait for execution only of itself, 2 - wait for everyone.
 	ReplicationAlterPartitionsSync *wrappers.Int64Value `protobuf:"bytes,42,opt,name=replication_alter_partitions_sync,json=replicationAlterPartitionsSync,proto3" json:"replication_alter_partitions_sync,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#distributed-product-mode).
+	// Determine the behavior of distributed subqueries. Possible values: DISTRIBUTED_PRODUCT_MODE_DENY,
+	// DISTRIBUTED_PRODUCT_MODE_LOCAL, DISTRIBUTED_PRODUCT_MODE_GLOBAL, DISTRIBUTED_PRODUCT_MODE_ALLOW.
 	DistributedProductMode UserSettings_DistributedProductMode `protobuf:"varint,43,opt,name=distributed_product_mode,json=distributedProductMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_DistributedProductMode" json:"distributed_product_mode,omitempty"`
 	// Whether the memory-saving mode of distributed aggregation is enabled.
 	DistributedAggregationMemoryEfficient *wrappers.BoolValue `protobuf:"bytes,72,opt,name=distributed_aggregation_memory_efficient,json=distributedAggregationMemoryEfficient,proto3" json:"distributed_aggregation_memory_efficient,omitempty"`
 	// Timeout for DDL queries, in milliseconds.
 	DistributedDdlTaskTimeout *wrappers.Int64Value `protobuf:"bytes,73,opt,name=distributed_ddl_task_timeout,json=distributedDdlTaskTimeout,proto3" json:"distributed_ddl_task_timeout,omitempty"`
 	// Whether query compilation is enabled.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#compile).
 	Compile *wrappers.BoolValue `protobuf:"bytes,44,opt,name=compile,proto3" json:"compile,omitempty"`
 	// The number of structurally identical queries before they are compiled.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#min-count-to-compile).
 	MinCountToCompile *wrappers.Int64Value `protobuf:"bytes,45,opt,name=min_count_to_compile,json=minCountToCompile,proto3" json:"min_count_to_compile,omitempty"`
 	// Whether expression compilation is enabled.
 	CompileExpressions *wrappers.BoolValue `protobuf:"bytes,46,opt,name=compile_expressions,json=compileExpressions,proto3" json:"compile_expressions,omitempty"`
 	// The number of identical expressions before they are compiled.
 	MinCountToCompileExpression *wrappers.Int64Value `protobuf:"bytes,47,opt,name=min_count_to_compile_expression,json=minCountToCompileExpression,proto3" json:"min_count_to_compile_expression,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#max-block-size).
+	// The maximum block size for reading.
 	MaxBlockSize *wrappers.Int64Value `protobuf:"bytes,9,opt,name=max_block_size,json=maxBlockSize,proto3" json:"max_block_size,omitempty"`
-	// Squash blocks passed to INSERT query to specified size in rows, if blocks are not big enough. If set to `0`,
+	// Squash blocks passed to INSERT query to specified size in rows, if blocks are not big enough. If set to 0,
 	// blocks will never be squashed.
 	MinInsertBlockSizeRows *wrappers.Int64Value `protobuf:"bytes,48,opt,name=min_insert_block_size_rows,json=minInsertBlockSizeRows,proto3" json:"min_insert_block_size_rows,omitempty"`
-	// Squash blocks passed to INSERT query to specified size in bytes, if blocks are not big enough.  If set to `0`,
+	// Squash blocks passed to INSERT query to specified size in bytes, if blocks are not big enough. If set to 0,
 	// blocks will never be squashed.
 	MinInsertBlockSizeBytes *wrappers.Int64Value `protobuf:"bytes,49,opt,name=min_insert_block_size_bytes,json=minInsertBlockSizeBytes,proto3" json:"min_insert_block_size_bytes,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-max_insert_block_size).
+	// The maximum block size for insertion.
 	MaxInsertBlockSize *wrappers.Int64Value `protobuf:"bytes,10,opt,name=max_insert_block_size,json=maxInsertBlockSize,proto3" json:"max_insert_block_size,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-min_bytes_to_use_direct_io).
+	// The minimum number of bytes for reading the data with O_DIRECT option during SELECT queries execution.
 	MinBytesToUseDirectIo *wrappers.Int64Value `protobuf:"bytes,50,opt,name=min_bytes_to_use_direct_io,json=minBytesToUseDirectIo,proto3" json:"min_bytes_to_use_direct_io,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#setting-use_uncompressed_cache).
+	// Whether to use the cache of uncompressed blocks.
 	UseUncompressedCache *wrappers.BoolValue `protobuf:"bytes,51,opt,name=use_uncompressed_cache,json=useUncompressedCache,proto3" json:"use_uncompressed_cache,omitempty"`
 	// The maximum request size in rows to use the cache of uncompressed data. The cache is not used for requests larger
 	// than the specified value.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#setting-merge_tree_max_rows_to_use_cache).
 	MergeTreeMaxRowsToUseCache *wrappers.Int64Value `protobuf:"bytes,52,opt,name=merge_tree_max_rows_to_use_cache,json=mergeTreeMaxRowsToUseCache,proto3" json:"merge_tree_max_rows_to_use_cache,omitempty"`
 	// The maximum request size in bytes to use the cache of uncompressed data. The cache is not used for requests larger
 	// than the specified value.
 	MergeTreeMaxBytesToUseCache *wrappers.Int64Value `protobuf:"bytes,53,opt,name=merge_tree_max_bytes_to_use_cache,json=mergeTreeMaxBytesToUseCache,proto3" json:"merge_tree_max_bytes_to_use_cache,omitempty"`
 	// The minimum number of rows to be read from a file to enable concurrent read.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#setting-merge_tree_min_rows_for_concurrent_read).
 	MergeTreeMinRowsForConcurrentRead *wrappers.Int64Value `protobuf:"bytes,54,opt,name=merge_tree_min_rows_for_concurrent_read,json=mergeTreeMinRowsForConcurrentRead,proto3" json:"merge_tree_min_rows_for_concurrent_read,omitempty"`
 	// The minimum number of bytes to be read from a file to enable concurrent read.
 	MergeTreeMinBytesForConcurrentRead *wrappers.Int64Value `protobuf:"bytes,55,opt,name=merge_tree_min_bytes_for_concurrent_read,json=mergeTreeMinBytesForConcurrentRead,proto3" json:"merge_tree_min_bytes_for_concurrent_read,omitempty"`
@@ -395,89 +387,91 @@ type UserSettings struct {
 	GroupByTwoLevelThresholdBytes      *wrappers.Int64Value `protobuf:"bytes,77,opt,name=group_by_two_level_threshold_bytes,json=groupByTwoLevelThresholdBytes,proto3" json:"group_by_two_level_threshold_bytes,omitempty"`
 	// Priority of the query.
 	Priority *wrappers.Int64Value `protobuf:"bytes,56,opt,name=priority,proto3" json:"priority,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-max_threads).
+	// The maximum number of threads to execute the request.
 	MaxThreads *wrappers.Int64Value `protobuf:"bytes,8,opt,name=max_threads,json=maxThreads,proto3" json:"max_threads,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#settings_max_memory_usage).
+	// The maximum memory usage for processing of a single query.
 	MaxMemoryUsage *wrappers.Int64Value `protobuf:"bytes,11,opt,name=max_memory_usage,json=maxMemoryUsage,proto3" json:"max_memory_usage,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-memory-usage-for-user).
+	// The maximum memory usage for processing all concurrently running queries for the user.
 	MaxMemoryUsageForUser *wrappers.Int64Value `protobuf:"bytes,12,opt,name=max_memory_usage_for_user,json=maxMemoryUsageForUser,proto3" json:"max_memory_usage_for_user,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-max_network_bandwidth).
+	// The maximum speed of data exchange over the network in bytes per second for a query.
 	MaxNetworkBandwidth *wrappers.Int64Value `protobuf:"bytes,57,opt,name=max_network_bandwidth,json=maxNetworkBandwidth,proto3" json:"max_network_bandwidth,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-max_network_bandwidth_for_user).
+	// The maximum speed of data exchange over the network in bytes per second for all concurrently running user queries.
 	MaxNetworkBandwidthForUser *wrappers.Int64Value `protobuf:"bytes,58,opt,name=max_network_bandwidth_for_user,json=maxNetworkBandwidthForUser,proto3" json:"max_network_bandwidth_for_user,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-force_index_by_date).
+	// Disables query execution if the index can’t be used by date.
 	ForceIndexByDate *wrappers.BoolValue `protobuf:"bytes,59,opt,name=force_index_by_date,json=forceIndexByDate,proto3" json:"force_index_by_date,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#force-primary-key).
+	// Disables query execution if indexing by the primary key is not possible.
 	ForcePrimaryKey *wrappers.BoolValue `protobuf:"bytes,60,opt,name=force_primary_key,json=forcePrimaryKey,proto3" json:"force_primary_key,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-rows-to-read).
+	// The maximum number of rows that can be read from a table when running a query.
 	MaxRowsToRead *wrappers.Int64Value `protobuf:"bytes,13,opt,name=max_rows_to_read,json=maxRowsToRead,proto3" json:"max_rows_to_read,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-bytes-to-read).
+	// The maximum number of bytes (uncompressed data) that can be read from a table when running a query.
 	MaxBytesToRead *wrappers.Int64Value `protobuf:"bytes,14,opt,name=max_bytes_to_read,json=maxBytesToRead,proto3" json:"max_bytes_to_read,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#read-overflow-mode).
+	// Determine the behavior on exceeding max_rows_to_read or max_bytes_to_read limit.
+	// Possible values: OVERFLOW_MODE_THROW, OVERFLOW_MODE_BREAK.
 	ReadOverflowMode UserSettings_OverflowMode `protobuf:"varint,15,opt,name=read_overflow_mode,json=readOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"read_overflow_mode,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-rows-to-group-by).
+	// The maximum number of unique keys received from aggregation.
 	MaxRowsToGroupBy *wrappers.Int64Value `protobuf:"bytes,16,opt,name=max_rows_to_group_by,json=maxRowsToGroupBy,proto3" json:"max_rows_to_group_by,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#group-by-overflow-mode).
+	// Determine the behavior on exceeding max_rows_to_group_by limit. Possible values: GROUP_BY_OVERFLOW_MODE_THROW,
+	// GROUP_BY_OVERFLOW_MODE_BREAK, GROUP_BY_OVERFLOW_MODE_ANY.
 	GroupByOverflowMode UserSettings_GroupByOverflowMode `protobuf:"varint,17,opt,name=group_by_overflow_mode,json=groupByOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_GroupByOverflowMode" json:"group_by_overflow_mode,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-rows-to-sort).
+	// The maximum number of rows before sorting.
 	MaxRowsToSort *wrappers.Int64Value `protobuf:"bytes,18,opt,name=max_rows_to_sort,json=maxRowsToSort,proto3" json:"max_rows_to_sort,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-bytes-to-sort).
+	// The maximum number of bytes before sorting.
 	MaxBytesToSort *wrappers.Int64Value `protobuf:"bytes,19,opt,name=max_bytes_to_sort,json=maxBytesToSort,proto3" json:"max_bytes_to_sort,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#sort-overflow-mode).
+	// Determine the behavior on exceeding max_rows_to_sort or max_bytes_to_sort limit.
+	// Possible values: OVERFLOW_MODE_THROW, OVERFLOW_MODE_BREAK.
 	SortOverflowMode UserSettings_OverflowMode `protobuf:"varint,20,opt,name=sort_overflow_mode,json=sortOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"sort_overflow_mode,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-result-rows).
+	// Limit on the number of rows in the result.
 	MaxResultRows *wrappers.Int64Value `protobuf:"bytes,21,opt,name=max_result_rows,json=maxResultRows,proto3" json:"max_result_rows,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-result-bytes).
+	// Limit on the number of bytes in the result.
 	MaxResultBytes *wrappers.Int64Value `protobuf:"bytes,22,opt,name=max_result_bytes,json=maxResultBytes,proto3" json:"max_result_bytes,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#result-overflow-mode).
+	// Determine the behavior on exceeding max_result_rows or max_result_bytes limit.
+	// Possible values: OVERFLOW_MODE_THROW, OVERFLOW_MODE_BREAK.
 	ResultOverflowMode UserSettings_OverflowMode `protobuf:"varint,23,opt,name=result_overflow_mode,json=resultOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"result_overflow_mode,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-rows-in-distinct).
+	// The maximum number of different rows when using DISTINCT.
 	MaxRowsInDistinct *wrappers.Int64Value `protobuf:"bytes,24,opt,name=max_rows_in_distinct,json=maxRowsInDistinct,proto3" json:"max_rows_in_distinct,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-bytes-in-distinct).
+	// The maximum number of bytes used by a hash table when using DISTINCT.
 	MaxBytesInDistinct *wrappers.Int64Value `protobuf:"bytes,25,opt,name=max_bytes_in_distinct,json=maxBytesInDistinct,proto3" json:"max_bytes_in_distinct,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#distinct-overflow-mode).
+	// Determine the behavior on exceeding max_rows_in_distinct or max_bytes_in_distinct limit.
+	// Possible values: OVERFLOW_MODE_THROW, OVERFLOW_MODE_BREAK.
 	DistinctOverflowMode UserSettings_OverflowMode `protobuf:"varint,26,opt,name=distinct_overflow_mode,json=distinctOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"distinct_overflow_mode,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-rows-to-transfer).
+	// The maximum number of rows that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
 	MaxRowsToTransfer *wrappers.Int64Value `protobuf:"bytes,27,opt,name=max_rows_to_transfer,json=maxRowsToTransfer,proto3" json:"max_rows_to_transfer,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-bytes-to-transfer).
+	// The maximum number of bytes (uncompressed data) that can be passed to a remote server or saved in a temporary
+	// table when using GLOBAL IN.
 	MaxBytesToTransfer *wrappers.Int64Value `protobuf:"bytes,28,opt,name=max_bytes_to_transfer,json=maxBytesToTransfer,proto3" json:"max_bytes_to_transfer,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#transfer-overflow-mode).
+	// Determine the behavior on exceeding max_rows_to_transfer or max_bytes_to_transfer limit.
+	// Possible values: OVERFLOW_MODE_THROW, OVERFLOW_MODE_BREAK.
 	TransferOverflowMode UserSettings_OverflowMode `protobuf:"varint,29,opt,name=transfer_overflow_mode,json=transferOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"transfer_overflow_mode,omitempty"`
-	// Maximum query execution time in milliseconds.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-execution-time).
+	// The maximum query execution time in milliseconds.
 	MaxExecutionTime *wrappers.Int64Value `protobuf:"bytes,30,opt,name=max_execution_time,json=maxExecutionTime,proto3" json:"max_execution_time,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#timeout-overflow-mode).
+	// Determine the behavior on exceeding max_execution_time limit.
+	// Possible values: OVERFLOW_MODE_THROW, OVERFLOW_MODE_BREAK.
 	TimeoutOverflowMode UserSettings_OverflowMode `protobuf:"varint,31,opt,name=timeout_overflow_mode,json=timeoutOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"timeout_overflow_mode,omitempty"`
-	// Maximum number of columns that can be read from a table in a single query.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-columns-to-read).
+	// The maximum number of columns that can be read from a table in a single query.
 	MaxColumnsToRead *wrappers.Int64Value `protobuf:"bytes,32,opt,name=max_columns_to_read,json=maxColumnsToRead,proto3" json:"max_columns_to_read,omitempty"`
-	// Maximum number of temporary columns that must be kept in RAM at the same time when running a query, including constant columns.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-temporary-columns).
+	// The maximum number of temporary columns that must be kept in RAM at the same time when running a query, including constant columns.
 	MaxTemporaryColumns *wrappers.Int64Value `protobuf:"bytes,33,opt,name=max_temporary_columns,json=maxTemporaryColumns,proto3" json:"max_temporary_columns,omitempty"`
-	// Maximum number of temporary columns that must be kept in RAM at the same time when running a query, excluding constant columns.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-temporary-non-const-columns).
+	// The maximum number of temporary columns that must be kept in RAM at the same time when running a query, excluding constant columns.
 	MaxTemporaryNonConstColumns *wrappers.Int64Value `protobuf:"bytes,34,opt,name=max_temporary_non_const_columns,json=maxTemporaryNonConstColumns,proto3" json:"max_temporary_non_const_columns,omitempty"`
 	// The maximum part of a query that can be taken to RAM for parsing with the SQL parser, in bytes. Default value: 262144.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-max_query_size).
 	MaxQuerySize *wrappers.Int64Value `protobuf:"bytes,35,opt,name=max_query_size,json=maxQuerySize,proto3" json:"max_query_size,omitempty"`
-	// Maximum depth of query syntax tree. Default value: 1000.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-ast-depth).
+	// The maximum depth of query syntax tree. Default value: 1000.
 	MaxAstDepth *wrappers.Int64Value `protobuf:"bytes,36,opt,name=max_ast_depth,json=maxAstDepth,proto3" json:"max_ast_depth,omitempty"`
-	// Maximum size of query syntax tree in number of nodes. Default value: 50000.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/query_complexity/#max-ast-elements).
+	// The maximum size of query syntax tree in number of nodes. Default value: 50000.
 	MaxAstElements *wrappers.Int64Value `protobuf:"bytes,37,opt,name=max_ast_elements,json=maxAstElements,proto3" json:"max_ast_elements,omitempty"`
-	// Maximum size of query syntax tree in number of nodes after expansion of aliases and the asterisk. Default value: 500000.
+	// The maximum size of query syntax tree in number of nodes after expansion of aliases and the asterisk. Default value: 500000.
 	MaxExpandedAstElements *wrappers.Int64Value `protobuf:"bytes,38,opt,name=max_expanded_ast_elements,json=maxExpandedAstElements,proto3" json:"max_expanded_ast_elements,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-input_format_values_interpret_expressions).
+	// Enables or disables the full SQL parser if the fast stream parser cannot parse the data.
 	InputFormatValuesInterpretExpressions *wrappers.BoolValue `protobuf:"bytes,61,opt,name=input_format_values_interpret_expressions,json=inputFormatValuesInterpretExpressions,proto3" json:"input_format_values_interpret_expressions,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#session_settings-input_format_defaults_for_omitted_fields).
+	// When performing INSERT queries, replace omitted input column values with default values of the respective columns.
 	InputFormatDefaultsForOmittedFields *wrappers.BoolValue `protobuf:"bytes,62,opt,name=input_format_defaults_for_omitted_fields,json=inputFormatDefaultsForOmittedFields,proto3" json:"input_format_defaults_for_omitted_fields,omitempty"`
 	// Whether quoting of 64-bit integers is enabled in JSON output format.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#session_settings-output_format_json_quote_64bit_integers).
 	OutputFormatJsonQuote_64BitIntegers *wrappers.BoolValue `protobuf:"bytes,63,opt,name=output_format_json_quote_64bit_integers,json=outputFormatJsonQuote64bitIntegers,proto3" json:"output_format_json_quote_64bit_integers,omitempty"`
-	// Whether output of special floating-point values (`+nan`, `-nan`, `+inf` and `-inf`) is enabled in JSON output format.
-	OutputFormatJsonQuoteDenormals      *wrappers.BoolValue `protobuf:"bytes,64,opt,name=output_format_json_quote_denormals,json=outputFormatJsonQuoteDenormals,proto3" json:"output_format_json_quote_denormals,omitempty"`
-	LowCardinalityAllowInNativeFormat   *wrappers.BoolValue `protobuf:"bytes,78,opt,name=low_cardinality_allow_in_native_format,json=lowCardinalityAllowInNativeFormat,proto3" json:"low_cardinality_allow_in_native_format,omitempty"`
+	// Whether output of special floating-point values (+nan, -nan, +inf and -inf) is enabled in JSON output format.
+	OutputFormatJsonQuoteDenormals *wrappers.BoolValue `protobuf:"bytes,64,opt,name=output_format_json_quote_denormals,json=outputFormatJsonQuoteDenormals,proto3" json:"output_format_json_quote_denormals,omitempty"`
+	// Whether LowCardinality type is enabled in Native format.
+	LowCardinalityAllowInNativeFormat *wrappers.BoolValue `protobuf:"bytes,78,opt,name=low_cardinality_allow_in_native_format,json=lowCardinalityAllowInNativeFormat,proto3" json:"low_cardinality_allow_in_native_format,omitempty"`
+	// Return empty result when aggregating without keys on empty set.
 	EmptyResultForAggregationByEmptySet *wrappers.BoolValue `protobuf:"bytes,79,opt,name=empty_result_for_aggregation_by_empty_set,json=emptyResultForAggregationByEmptySet,proto3" json:"empty_result_for_aggregation_by_empty_set,omitempty"`
 	// HTTP connection timeout, in milliseconds.
 	HttpConnectionTimeout *wrappers.Int64Value `protobuf:"bytes,65,opt,name=http_connection_timeout,json=httpConnectionTimeout,proto3" json:"http_connection_timeout,omitempty"`
@@ -485,14 +479,13 @@ type UserSettings struct {
 	HttpReceiveTimeout *wrappers.Int64Value `protobuf:"bytes,66,opt,name=http_receive_timeout,json=httpReceiveTimeout,proto3" json:"http_receive_timeout,omitempty"`
 	// HTTP send timeout, in milliseconds.
 	HttpSendTimeout *wrappers.Int64Value `protobuf:"bytes,67,opt,name=http_send_timeout,json=httpSendTimeout,proto3" json:"http_send_timeout,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-enable_http_compression).
+	// Whether data compression is enabled in HTTP responses.
 	EnableHttpCompression *wrappers.BoolValue `protobuf:"bytes,68,opt,name=enable_http_compression,json=enableHttpCompression,proto3" json:"enable_http_compression,omitempty"`
-	// Whether progress notifications using X-ClickHouse-Progress headers are enabled. Default value: `false`.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.yandex/docs/en/operations/settings/settings/#settings-send_progress_in_http_headers).
+	// Whether progress notifications using X-ClickHouse-Progress headers are enabled. Default value: false.
 	SendProgressInHttpHeaders *wrappers.BoolValue `protobuf:"bytes,69,opt,name=send_progress_in_http_headers,json=sendProgressInHttpHeaders,proto3" json:"send_progress_in_http_headers,omitempty"`
 	// Minimum interval between progress notifications, in milliseconds. Default value: 100.
 	HttpHeadersProgressInterval *wrappers.Int64Value `protobuf:"bytes,70,opt,name=http_headers_progress_interval,json=httpHeadersProgressInterval,proto3" json:"http_headers_progress_interval,omitempty"`
-	// Whether CORS header in HTTP responses is enabled. Default value: `false`.
+	// Whether CORS header in HTTP responses is enabled. Default value: false.
 	AddHttpCorsHeader    *wrappers.BoolValue `protobuf:"bytes,71,opt,name=add_http_cors_header,json=addHttpCorsHeader,proto3" json:"add_http_cors_header,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
 	XXX_unrecognized     []byte              `json:"-"`
