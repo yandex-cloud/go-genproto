@@ -18,6 +18,18 @@ func (m *User) SetPermissions(v []*Permission) {
 	m.Permissions = v
 }
 
+func (m *User) SetGlobalPermissions(v []GlobalPermission) {
+	m.GlobalPermissions = v
+}
+
+func (m *User) SetConnectionLimits(v *ConnectionLimits) {
+	m.ConnectionLimits = v
+}
+
+func (m *User) SetAuthenticationPlugin(v AuthPlugin) {
+	m.AuthenticationPlugin = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }

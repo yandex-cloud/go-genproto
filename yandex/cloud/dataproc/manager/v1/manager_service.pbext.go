@@ -102,8 +102,16 @@ func (m *HDFSInfo) SetDeadNodes(v []*HDFSNodeInfo) {
 	m.DeadNodes = v
 }
 
-func (m *HDFSInfo) SetDecomNodes(v []*HDFSNodeInfo) {
-	m.DecomNodes = v
+func (m *HDFSInfo) SetSafemode(v string) {
+	m.Safemode = v
+}
+
+func (m *HDFSInfo) SetDecommissioningNodes(v []*HDFSNodeInfo) {
+	m.DecommissioningNodes = v
+}
+
+func (m *HDFSInfo) SetDecommissionedNodes(v []*HDFSNodeInfo) {
+	m.DecommissionedNodes = v
 }
 
 func (m *HiveInfo) SetAvailable(v bool) {
@@ -200,4 +208,16 @@ func (m *ReportRequest) SetTopologyRevision(v int64) {
 
 func (m *ReportRequest) SetInfo(v *Info) {
 	m.Info = v
+}
+
+func (m *ReportReply) SetDecommissionTimeout(v int64) {
+	m.DecommissionTimeout = v
+}
+
+func (m *ReportReply) SetYarnHostsToDecommission(v []string) {
+	m.YarnHostsToDecommission = v
+}
+
+func (m *ReportReply) SetHdfsHostsToDecommission(v []string) {
+	m.HdfsHostsToDecommission = v
 }
