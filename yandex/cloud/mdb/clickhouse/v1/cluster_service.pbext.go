@@ -227,6 +227,10 @@ func (m *RestoreClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *RestoreClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
