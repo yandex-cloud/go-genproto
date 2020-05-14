@@ -105,6 +105,12 @@ func (m *SecurityGroupRuleSpec) SetCidrBlocks(v *CidrBlocks) {
 	}
 }
 
+func (m *SecurityGroupRuleSpec) SetSecurityGroupId(v string) {
+	m.Target = &SecurityGroupRuleSpec_SecurityGroupId{
+		SecurityGroupId: v,
+	}
+}
+
 func (m *CreateSecurityGroupMetadata) SetSecurityGroupId(v string) {
 	m.SecurityGroupId = v
 }

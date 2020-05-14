@@ -82,6 +82,12 @@ func (m *SecurityGroupRule) SetCidrBlocks(v *CidrBlocks) {
 	}
 }
 
+func (m *SecurityGroupRule) SetSecurityGroupId(v string) {
+	m.Target = &SecurityGroupRule_SecurityGroupId{
+		SecurityGroupId: v,
+	}
+}
+
 func (m *PortRange) SetFromPort(v int64) {
 	m.FromPort = v
 }
