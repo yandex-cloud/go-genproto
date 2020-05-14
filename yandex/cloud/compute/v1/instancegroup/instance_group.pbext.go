@@ -75,6 +75,10 @@ func (m *InstanceGroup) SetVariables(v []*Variable) {
 	m.Variables = v
 }
 
+func (m *InstanceGroup) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *Variable) SetKey(v string) {
 	m.Key = v
 }
