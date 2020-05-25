@@ -42,6 +42,10 @@ func (m *SecurityGroup) SetRules(v []*SecurityGroupRule) {
 	m.Rules = v
 }
 
+func (m *SecurityGroup) SetDefaultForNetwork(v bool) {
+	m.DefaultForNetwork = v
+}
+
 type SecurityGroupRule_Target = isSecurityGroupRule_Target
 
 func (m *SecurityGroupRule) SetTarget(v SecurityGroupRule_Target) {

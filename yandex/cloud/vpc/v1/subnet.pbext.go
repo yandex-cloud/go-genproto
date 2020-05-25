@@ -61,3 +61,7 @@ func (m *DhcpOptions) SetDomainNameServers(v []string) {
 func (m *DhcpOptions) SetDomainName(v string) {
 	m.DomainName = v
 }
+
+func (m *DhcpOptions) SetNtpServers(v []string) {
+	m.NtpServers = v
+}
