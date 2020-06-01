@@ -198,6 +198,14 @@ func (m *RestoreClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *RestoreClusterRequest) SetRecoveryTargetSpec(v *RestoreClusterRequest_RecoveryTargetSpec) {
+	m.RecoveryTargetSpec = v
+}
+
+func (m *RestoreClusterRequest_RecoveryTargetSpec) SetTimestamp(v int64) {
+	m.Timestamp = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

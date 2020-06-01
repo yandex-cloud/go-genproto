@@ -111,6 +111,12 @@ func (m *SecurityGroupRuleSpec) SetSecurityGroupId(v string) {
 	}
 }
 
+func (m *SecurityGroupRuleSpec) SetPredefinedTarget(v string) {
+	m.Target = &SecurityGroupRuleSpec_PredefinedTarget{
+		PredefinedTarget: v,
+	}
+}
+
 func (m *CreateSecurityGroupMetadata) SetSecurityGroupId(v string) {
 	m.SecurityGroupId = v
 }

@@ -92,6 +92,12 @@ func (m *SecurityGroupRule) SetSecurityGroupId(v string) {
 	}
 }
 
+func (m *SecurityGroupRule) SetPredefinedTarget(v string) {
+	m.Target = &SecurityGroupRule_PredefinedTarget{
+		PredefinedTarget: v,
+	}
+}
+
 func (m *PortRange) SetFromPort(v int64) {
 	m.FromPort = v
 }

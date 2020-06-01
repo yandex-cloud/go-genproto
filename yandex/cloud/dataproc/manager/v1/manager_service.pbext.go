@@ -114,6 +114,10 @@ func (m *HDFSInfo) SetDecommissionedNodes(v []*HDFSNodeInfo) {
 	m.DecommissionedNodes = v
 }
 
+func (m *HDFSInfo) SetRequestedDecommissionHosts(v []string) {
+	m.RequestedDecommissionHosts = v
+}
+
 func (m *HiveInfo) SetAvailable(v bool) {
 	m.Available = v
 }
@@ -158,12 +162,20 @@ func (m *YarnNodeInfo) SetAvailableMemoryMb(v int64) {
 	m.AvailableMemoryMb = v
 }
 
+func (m *YarnNodeInfo) SetUpdateTime(v int64) {
+	m.UpdateTime = v
+}
+
 func (m *YarnInfo) SetAvailable(v bool) {
 	m.Available = v
 }
 
 func (m *YarnInfo) SetLiveNodes(v []*YarnNodeInfo) {
 	m.LiveNodes = v
+}
+
+func (m *YarnInfo) SetRequestedDecommissionHosts(v []string) {
+	m.RequestedDecommissionHosts = v
 }
 
 func (m *ZookeeperInfo) SetAlive(v bool) {
@@ -196,6 +208,10 @@ func (m *Info) SetHbase(v *HbaseInfo) {
 
 func (m *Info) SetOozie(v *OozieInfo) {
 	m.Oozie = v
+}
+
+func (m *Info) SetReportCount(v int64) {
+	m.ReportCount = v
 }
 
 func (m *ReportRequest) SetCid(v string) {
