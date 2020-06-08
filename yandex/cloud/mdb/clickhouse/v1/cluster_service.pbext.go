@@ -487,6 +487,102 @@ func (m *DeleteClusterShardMetadata) SetShardName(v string) {
 	m.ShardName = v
 }
 
+func (m *GetClusterShardGroupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *GetClusterShardGroupRequest) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
+func (m *ListClusterShardGroupsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ListClusterShardGroupsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListClusterShardGroupsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListClusterShardGroupsResponse) SetShardGroups(v []*ShardGroup) {
+	m.ShardGroups = v
+}
+
+func (m *ListClusterShardGroupsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *CreateClusterShardGroupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *CreateClusterShardGroupRequest) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
+func (m *CreateClusterShardGroupRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CreateClusterShardGroupRequest) SetShardNames(v []string) {
+	m.ShardNames = v
+}
+
+func (m *CreateClusterShardGroupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *CreateClusterShardGroupMetadata) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
+func (m *UpdateClusterShardGroupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterShardGroupRequest) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
+func (m *UpdateClusterShardGroupRequest) SetUpdateMask(v *field_mask.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateClusterShardGroupRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateClusterShardGroupRequest) SetShardNames(v []string) {
+	m.ShardNames = v
+}
+
+func (m *UpdateClusterShardGroupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterShardGroupMetadata) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
+func (m *DeleteClusterShardGroupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterShardGroupRequest) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
+func (m *DeleteClusterShardGroupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterShardGroupMetadata) SetShardGroupName(v string) {
+	m.ShardGroupName = v
+}
+
 func (m *CreateClusterExternalDictionaryRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
