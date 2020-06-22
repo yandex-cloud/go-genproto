@@ -234,6 +234,14 @@ func (m *ListClusterLogsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *StreamLogRecord) SetRecord(v *LogRecord) {
+	m.Record = v
+}
+
+func (m *StreamLogRecord) SetNextRecordToken(v string) {
+	m.NextRecordToken = v
+}
+
 func (m *StreamClusterLogsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -252,6 +260,10 @@ func (m *StreamClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
 
 func (m *StreamClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
 	m.ToTime = v
+}
+
+func (m *StreamClusterLogsRequest) SetRecordToken(v string) {
+	m.RecordToken = v
 }
 
 func (m *ListClusterOperationsRequest) SetClusterId(v string) {
