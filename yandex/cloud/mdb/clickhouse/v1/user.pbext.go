@@ -370,6 +370,10 @@ func (m *UserSettings) SetAddHttpCorsHeader(v *wrappers.BoolValue) {
 	m.AddHttpCorsHeader = v
 }
 
+func (m *UserSettings) SetQuotaMode(v UserSettings_QuotaMode) {
+	m.QuotaMode = v
+}
+
 func (m *UserQuota) SetIntervalDuration(v *wrappers.Int64Value) {
 	m.IntervalDuration = v
 }
