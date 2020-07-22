@@ -106,6 +106,10 @@ func (m *UpdateClusterRequest) SetName(v string) {
 	m.Name = v
 }
 
+func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -184,6 +188,26 @@ func (m *StartClusterFailoverRequest) SetHostName(v string) {
 
 func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenanceRequest_RescheduleType) {
+	m.RescheduleType = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamp.Timestamp) {
+	m.DelayedUntil = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamp.Timestamp) {
+	m.DelayedUntil = v
 }
 
 func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {

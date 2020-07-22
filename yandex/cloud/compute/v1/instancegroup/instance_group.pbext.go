@@ -375,6 +375,10 @@ func (m *AttachedDiskSpec_DiskSpec) SetSnapshotId(v string) {
 	}
 }
 
+func (m *AttachedDiskSpec_DiskSpec) SetPreserveAfterInstanceDelete(v bool) {
+	m.PreserveAfterInstanceDelete = v
+}
+
 func (m *NetworkInterfaceSpec) SetNetworkId(v string) {
 	m.NetworkId = v
 }
