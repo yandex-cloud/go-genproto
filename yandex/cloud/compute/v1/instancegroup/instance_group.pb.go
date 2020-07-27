@@ -1153,8 +1153,12 @@ type DeployPolicy struct {
 	// If [max_expansion] is not specified or set to zero, [max_unavailable] must be set to a non-zero value.
 	MaxUnavailable int64 `protobuf:"varint,1,opt,name=max_unavailable,json=maxUnavailable,proto3" json:"max_unavailable,omitempty"`
 	// The maximum number of instances that can be deleted at the same time.
+	//
+	//The value 0 is any number of virtual machines within the allowed values.
 	MaxDeleting int64 `protobuf:"varint,2,opt,name=max_deleting,json=maxDeleting,proto3" json:"max_deleting,omitempty"`
 	// The maximum number of instances that can be created at the same time.
+	//
+	//The value 0 is any number of virtual machines within the allowed values.
 	MaxCreating int64 `protobuf:"varint,3,opt,name=max_creating,json=maxCreating,proto3" json:"max_creating,omitempty"`
 	// The maximum number of instances that can be temporarily allocated above the group's target size
 	// during the update process.
