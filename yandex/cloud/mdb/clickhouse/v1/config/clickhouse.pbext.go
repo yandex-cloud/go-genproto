@@ -134,6 +134,14 @@ func (m *ClickhouseConfig) SetTextLogLevel(v ClickhouseConfig_LogLevel) {
 	m.TextLogLevel = v
 }
 
+func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrappers.Int64Value) {
+	m.BackgroundPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrappers.Int64Value) {
+	m.BackgroundSchedulePoolSize = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrappers.Int64Value) {
 	m.ReplicatedDeduplicationWindow = v
 }

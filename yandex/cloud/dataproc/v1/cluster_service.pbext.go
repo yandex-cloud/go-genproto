@@ -55,6 +55,10 @@ func (m *CreateSubclusterConfigSpec) SetHostsCount(v int64) {
 	m.HostsCount = v
 }
 
+func (m *CreateSubclusterConfigSpec) SetAutoscalingConfig(v *AutoscalingConfig) {
+	m.AutoscalingConfig = v
+}
+
 func (m *UpdateSubclusterConfigSpec) SetId(v string) {
 	m.Id = v
 }
@@ -69,6 +73,10 @@ func (m *UpdateSubclusterConfigSpec) SetResources(v *Resources) {
 
 func (m *UpdateSubclusterConfigSpec) SetHostsCount(v int64) {
 	m.HostsCount = v
+}
+
+func (m *UpdateSubclusterConfigSpec) SetAutoscalingConfig(v *AutoscalingConfig) {
+	m.AutoscalingConfig = v
 }
 
 func (m *CreateClusterConfigSpec) SetVersionId(v string) {

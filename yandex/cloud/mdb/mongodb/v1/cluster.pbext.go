@@ -132,6 +132,10 @@ func (m *Mongodb3_6) SetMongos(v *Mongodb3_6_Mongos) {
 	m.Mongos = v
 }
 
+func (m *Mongodb3_6) SetMongoinfra(v *Mongodb3_6_MongoInfra) {
+	m.Mongoinfra = v
+}
+
 func (m *Mongodb3_6_Mongod) SetConfig(v *config.MongodConfigSet3_6) {
 	m.Config = v
 }
@@ -156,6 +160,18 @@ func (m *Mongodb3_6_Mongos) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *Mongodb3_6_MongoInfra) SetConfigMongos(v *config.MongosConfigSet3_6) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb3_6_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet3_6) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb3_6_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
 func (m *Mongodb4_0) SetMongod(v *Mongodb4_0_Mongod) {
 	m.Mongod = v
 }
@@ -166,6 +182,10 @@ func (m *Mongodb4_0) SetMongocfg(v *Mongodb4_0_MongoCfg) {
 
 func (m *Mongodb4_0) SetMongos(v *Mongodb4_0_Mongos) {
 	m.Mongos = v
+}
+
+func (m *Mongodb4_0) SetMongoinfra(v *Mongodb4_0_MongoInfra) {
+	m.Mongoinfra = v
 }
 
 func (m *Mongodb4_0_Mongod) SetConfig(v *config.MongodConfigSet4_0) {
@@ -192,6 +212,18 @@ func (m *Mongodb4_0_Mongos) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *Mongodb4_0_MongoInfra) SetConfigMongos(v *config.MongosConfigSet4_0) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb4_0_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet4_0) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb4_0_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
 func (m *Mongodb4_2) SetMongod(v *Mongodb4_2_Mongod) {
 	m.Mongod = v
 }
@@ -202,6 +234,10 @@ func (m *Mongodb4_2) SetMongocfg(v *Mongodb4_2_MongoCfg) {
 
 func (m *Mongodb4_2) SetMongos(v *Mongodb4_2_Mongos) {
 	m.Mongos = v
+}
+
+func (m *Mongodb4_2) SetMongoinfra(v *Mongodb4_2_MongoInfra) {
+	m.Mongoinfra = v
 }
 
 func (m *Mongodb4_2_Mongod) SetConfig(v *config.MongodConfigSet4_2) {
@@ -225,6 +261,18 @@ func (m *Mongodb4_2_Mongos) SetConfig(v *config.MongosConfigSet4_2) {
 }
 
 func (m *Mongodb4_2_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb4_2_MongoInfra) SetConfigMongos(v *config.MongosConfigSet4_2) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb4_2_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet4_2) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb4_2_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 
