@@ -253,6 +253,10 @@ func (m *DeployPolicy) SetStartupDuration(v *duration.Duration) {
 	m.StartupDuration = v
 }
 
+func (m *DeployPolicy) SetStrategy(v DeployPolicy_Strategy) {
+	m.Strategy = v
+}
+
 func (m *AllocationPolicy) SetZones(v []*AllocationPolicy_Zone) {
 	m.Zones = v
 }

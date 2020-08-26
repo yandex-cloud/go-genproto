@@ -683,6 +683,10 @@ func (m *ConfigSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ConfigSpec) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
+}
+
 func (m *ConfigSpec_Clickhouse) SetConfig(v *config.ClickhouseConfig) {
 	m.Config = v
 }

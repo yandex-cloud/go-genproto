@@ -186,6 +186,10 @@ func (m *OozieInfo) SetAlive(v bool) {
 	m.Alive = v
 }
 
+func (m *LivyInfo) SetAlive(v bool) {
+	m.Alive = v
+}
+
 func (m *Info) SetHdfs(v *HDFSInfo) {
 	m.Hdfs = v
 }
@@ -212,6 +216,10 @@ func (m *Info) SetOozie(v *OozieInfo) {
 
 func (m *Info) SetReportCount(v int64) {
 	m.ReportCount = v
+}
+
+func (m *Info) SetLivy(v *LivyInfo) {
+	m.Livy = v
 }
 
 func (m *ReportRequest) SetCid(v string) {

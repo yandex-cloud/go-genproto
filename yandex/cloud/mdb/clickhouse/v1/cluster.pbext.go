@@ -101,6 +101,10 @@ func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ClusterConfig) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
+}
+
 func (m *ClusterConfig_Clickhouse) SetConfig(v *config.ClickhouseConfigSet) {
 	m.Config = v
 }
@@ -231,4 +235,8 @@ func (m *Access) SetMetrika(v bool) {
 
 func (m *Access) SetServerless(v bool) {
 	m.Serverless = v
+}
+
+func (m *CloudStorage) SetEnabled(v bool) {
+	m.Enabled = v
 }
