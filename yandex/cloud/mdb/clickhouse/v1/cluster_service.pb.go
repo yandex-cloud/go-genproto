@@ -387,7 +387,7 @@ type CreateClusterRequest struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the ClickHouse cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the ClickHouse cluster as `` key:value `` pairs. Maximum 64 per resource.
+	// Custom labels for the ClickHouse cluster as `key:value` pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Deployment environment of the ClickHouse cluster.
@@ -584,7 +584,7 @@ type UpdateClusterRequest struct {
 	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New description of the ClickHouse cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the ClickHouse cluster as `` key:value `` pairs. Maximum 64 per resource.
+	// Custom labels for the ClickHouse cluster as `key:value` pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	//
 	// The new set of labels will completely replace the old ones. To add a label, request the current
@@ -1371,7 +1371,7 @@ type RestoreClusterRequest struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the new ClickHouse cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the ClickHouse cluster as `` key:value `` pairs. Maximum 64 per resource.
+	// Custom labels for the ClickHouse cluster as `key:value` pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Deployment environment of the new ClickHouse cluster.
@@ -1846,7 +1846,7 @@ type ListClusterLogsResponse struct {
 	// is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value
 	// for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
-	// This value is interchangeable with `next_record_token` from StreamLogs method.
+	// This value is interchangeable with the [StreamLogRecord.next_record_token] from StreamLogs method.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1904,9 +1904,9 @@ type StreamLogRecord struct {
 	// One of the requested log records.
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
 	// This token allows you to continue streaming logs starting from the exact
-	// same record. To continue streaming, specify value of `next_record_token`
-	// as value for `record_token` parameter in the next StreamLogs request.
-	// This value is interchangeable with `next_page_token` from ListLogs method.
+	// same record. To continue streaming, specify value of [next_record_token[
+	// as value for the [StreamClusterLogsRequest.record_token] parameter in the next StreamLogs request.
+	// This value is interchangeable with the [ListClusterLogsResponse.next_page_token] from ListLogs method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 }
 
@@ -1970,9 +1970,9 @@ type StreamClusterLogsRequest struct {
 	FromTime *timestamp.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
 	// If this field is not set, all existing logs will be sent and then the new ones as
-	// they appear. In essence it has 'tail -f' semantics.
+	// they appear. In essence it has `tail -f` semantics.
 	ToTime *timestamp.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	// Record token. Set `record_token` to the `next_record_token` returned by a previous StreamLogs
+	// Record token. Set [record_token] to the [StreamLogRecord.next_record_token] returned by a previous StreamLogs
 	// request to start streaming from next log record.
 	RecordToken string `protobuf:"bytes,6,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
 }
@@ -6745,7 +6745,7 @@ type ClusterServiceClient interface {
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified ClickHouse cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
-	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// Same as ListLogs but using server-side streaming. Also allows for `tail -f` semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -7124,7 +7124,7 @@ type ClusterServiceServer interface {
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified ClickHouse cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
-	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// Same as ListLogs but using server-side streaming. Also allows for `tail -f` semantics.
 	StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)

@@ -103,10 +103,10 @@ type ListUsersRequest struct {
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListUsersResponse.next_page_token]
+	// results is larger than `page_size`, the service returns a [ListUsersResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token]
+	// Page token. To get the next page of results, set `page_token` to the [ListUsersResponse.next_page_token]
 	// returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
@@ -172,9 +172,9 @@ type ListUsersResponse struct {
 	// List of PostgreSQL User resources.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value
+	// is larger than [ListUsersRequest.page_size], use the `next_page_token` as the value
 	// for the [ListUsersRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// list request will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -354,15 +354,24 @@ type UpdateUserRequest struct {
 	UpdateMask *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New password for the user.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// New set of permissions for the user.
+	// Set of permissions granted to the user to access specific databases.
 	Permissions []*Permission `protobuf:"bytes,5,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	// Number of connections that should be available to the user.
-	ConnLimit int64 `protobuf:"varint,6,opt,name=conn_limit,json=connLimit,proto3" json:"conn_limit,omitempty"`
-	// Postgresql settings for this user
-	Settings *UserSettings `protobuf:"bytes,7,opt,name=settings,proto3" json:"settings,omitempty"`
-	// User can login (default True)
+	// Maximum number of database connections available to the user.
+	//
+	// When used in session pooling, this setting limits the number of connections to every single host in PostgreSQL cluster. In this case, the setting's value must be greater than the total number of connections that backend services can open to access the PostgreSQL cluster. The setting's value should not exceed the value of the [Cluster.config.postgresql_config.max_connections] setting.
+	//
+	// When used in transaction pooling, this setting limits the number of user's active transactions; therefore, in this mode user can open thousands of connections, but only `N` concurrent connections will be opened, where `N` is the value of the setting.
+	//
+	// Minimum value: `10` (default: `50`), when used in session pooling.
+	ConnLimit int64         `protobuf:"varint,6,opt,name=conn_limit,json=connLimit,proto3" json:"conn_limit,omitempty"`
+	Settings  *UserSettings `protobuf:"bytes,7,opt,name=settings,proto3" json:"settings,omitempty"`
+	// This flag defines whether the user can login to a PostgreSQL database.
+	//
+	// Default value: `true` (login is allowed).
 	Login *wrappers.BoolValue `protobuf:"bytes,8,opt,name=login,proto3" json:"login,omitempty"`
-	// User grants (GRANT <role> TO <user>), role must be other user
+	// Roles and privileges that are granted to the user (`GRANT <role> TO <user>`).
+	//
+	// For more information, see [the documentation](/docs/managed-postgresql/operations/grant).
 	Grants []string `protobuf:"bytes,9,rep,name=grants,proto3" json:"grants,omitempty"`
 }
 
