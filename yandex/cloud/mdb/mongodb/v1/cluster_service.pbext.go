@@ -4,6 +4,7 @@ package mongodb
 
 import (
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
@@ -714,6 +715,58 @@ func (m *MongodbSpec4_2_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *MongodbSpec4_4) SetMongod(v *MongodbSpec4_4_Mongod) {
+	m.Mongod = v
+}
+
+func (m *MongodbSpec4_4) SetMongocfg(v *MongodbSpec4_4_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *MongodbSpec4_4) SetMongos(v *MongodbSpec4_4_Mongos) {
+	m.Mongos = v
+}
+
+func (m *MongodbSpec4_4) SetMongoinfra(v *MongodbSpec4_4_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *MongodbSpec4_4_Mongod) SetConfig(v *config.MongodConfig4_4) {
+	m.Config = v
+}
+
+func (m *MongodbSpec4_4_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec4_4_MongoCfg) SetConfig(v *config.MongoCfgConfig4_4) {
+	m.Config = v
+}
+
+func (m *MongodbSpec4_4_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec4_4_Mongos) SetConfig(v *config.MongosConfig4_4) {
+	m.Config = v
+}
+
+func (m *MongodbSpec4_4_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec4_4_MongoInfra) SetConfigMongos(v *config.MongosConfig4_4) {
+	m.ConfigMongos = v
+}
+
+func (m *MongodbSpec4_4_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfig4_4) {
+	m.ConfigMongocfg = v
+}
+
+func (m *MongodbSpec4_4_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
 type ConfigSpec_MongodbSpec = isConfigSpec_MongodbSpec
 
 func (m *ConfigSpec) SetMongodbSpec(v ConfigSpec_MongodbSpec) {
@@ -746,8 +799,18 @@ func (m *ConfigSpec) SetMongodbSpec_4_2(v *MongodbSpec4_2) {
 	}
 }
 
+func (m *ConfigSpec) SetMongodbSpec_4_4(v *MongodbSpec4_4) {
+	m.MongodbSpec = &ConfigSpec_MongodbSpec_4_4{
+		MongodbSpec_4_4: v,
+	}
+}
+
 func (m *ConfigSpec) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
+}
+
+func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrappers.Int64Value) {
+	m.BackupRetainPeriodDays = v
 }
 
 func (m *ConfigSpec) SetAccess(v *Access) {

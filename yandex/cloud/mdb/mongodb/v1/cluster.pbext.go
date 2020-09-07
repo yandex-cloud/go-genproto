@@ -4,6 +4,7 @@ package mongodb
 
 import (
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 )
@@ -112,8 +113,18 @@ func (m *ClusterConfig) SetMongodb_4_2(v *Mongodb4_2) {
 	}
 }
 
+func (m *ClusterConfig) SetMongodb_4_4(v *Mongodb4_4) {
+	m.Mongodb = &ClusterConfig_Mongodb_4_4{
+		Mongodb_4_4: v,
+	}
+}
+
 func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
+}
+
+func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrappers.Int64Value) {
+	m.BackupRetainPeriodDays = v
 }
 
 func (m *ClusterConfig) SetAccess(v *Access) {
@@ -273,6 +284,58 @@ func (m *Mongodb4_2_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet4_2
 }
 
 func (m *Mongodb4_2_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb4_4) SetMongod(v *Mongodb4_4_Mongod) {
+	m.Mongod = v
+}
+
+func (m *Mongodb4_4) SetMongocfg(v *Mongodb4_4_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *Mongodb4_4) SetMongos(v *Mongodb4_4_Mongos) {
+	m.Mongos = v
+}
+
+func (m *Mongodb4_4) SetMongoinfra(v *Mongodb4_4_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *Mongodb4_4_Mongod) SetConfig(v *config.MongodConfigSet4_4) {
+	m.Config = v
+}
+
+func (m *Mongodb4_4_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb4_4_MongoCfg) SetConfig(v *config.MongoCfgConfigSet4_4) {
+	m.Config = v
+}
+
+func (m *Mongodb4_4_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb4_4_Mongos) SetConfig(v *config.MongosConfigSet4_4) {
+	m.Config = v
+}
+
+func (m *Mongodb4_4_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb4_4_MongoInfra) SetConfigMongos(v *config.MongosConfigSet4_4) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb4_4_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet4_4) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb4_4_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 

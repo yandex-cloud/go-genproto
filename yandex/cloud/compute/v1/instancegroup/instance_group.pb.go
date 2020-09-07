@@ -266,10 +266,10 @@ type DeployPolicy_Strategy int32
 
 const (
 	DeployPolicy_STRATEGY_UNSPECIFIED DeployPolicy_Strategy = 0
-	// Instance group may force running instance to stop. This is the default.
+	// Instance Groups can forcefully stop a running instance. This is the default.
 	DeployPolicy_PROACTIVE DeployPolicy_Strategy = 1
-	// Instance group doesn't force running instance to stop.
-	// Instead, it will wait until instance stops itself or becomes unhealthy.
+	// Instance Groups does not stop a running instance.
+	// Instead, it will wait until the instance stops itself or becomes unhealthy.
 	DeployPolicy_OPPORTUNISTIC DeployPolicy_Strategy = 2
 )
 
@@ -1025,7 +1025,7 @@ type DeployPolicy struct {
 	// has elapsed and all health checks are passed.
 	// See [yandex.cloud.compute.v1.instancegroup.ManagedInstance.Status] for more information.
 	StartupDuration *duration.Duration `protobuf:"bytes,7,opt,name=startup_duration,json=startupDuration,proto3" json:"startup_duration,omitempty"`
-	// Affects instance lifecycle during deploy.
+	// Affects the lifecycle of the instance during deployment.
 	Strategy DeployPolicy_Strategy `protobuf:"varint,8,opt,name=strategy,proto3,enum=yandex.cloud.compute.v1.instancegroup.DeployPolicy_Strategy" json:"strategy,omitempty"`
 }
 

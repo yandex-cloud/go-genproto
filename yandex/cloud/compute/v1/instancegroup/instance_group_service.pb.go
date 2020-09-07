@@ -1371,15 +1371,15 @@ type DeleteInstancesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the InstanceGroup resource to delete instances from.
-	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// ID of the instance group that the instances are being deleted from.
+	// To get the ID of the instance group, use the [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	// IDs of instances to delete. Instances will be deleted along with any dependent resources.
-	// Only allowed ids from ManagedInstance.id field, not ManagedInstance.instance_id.
+	// IDs of the instances to delete. Instances will be deleted along with all dependent resources.
+	// Only IDs from the ManagedInstance.id field are allowed, not ManagedInstance.instance_id.
 	ManagedInstanceIds []string `protobuf:"bytes,2,rep,name=managed_instance_ids,json=managedInstanceIds,proto3" json:"managed_instance_ids,omitempty"`
-	// When set to true instance group target size will not be decreased and
-	// new instance will be created in place of deleted. By default the group target size
-	// will be decreased by specified instance ids count.
+	// If set to true, the target size of instance group will not be reduced and
+	// a new instance will be created instead of the deleted one. By default, the target size of instance group
+	// will be reduced by the specified number of instance IDs.
 	CreateAnother bool `protobuf:"varint,3,opt,name=create_another,json=createAnother,proto3" json:"create_another,omitempty"`
 }
 
@@ -1441,12 +1441,12 @@ type StopInstancesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the InstanceGroup resource to stop instances from.
-	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// ID of the instance group that the instances are being stopped from.
+	// To get the ID of the instance group, use the [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	// IDs of instances to stop. After stop instance could be updated, started or deleted
+	// IDs of the instances to stop. After stopping, the instance can be updated, started, or deleted
 	// according to scale and deploy policies.
-	// Only allowed ids from ManagedInstance.id field, not ManagedInstance.instance_id.
+	// Only IDs from the ManagedInstance.id field are allowed, not ManagedInstance.instance_id.
 	ManagedInstanceIds []string `protobuf:"bytes,2,rep,name=managed_instance_ids,json=managedInstanceIds,proto3" json:"managed_instance_ids,omitempty"`
 }
 
@@ -2889,9 +2889,9 @@ type InstanceGroupServiceClient interface {
 	Delete(ctx context.Context, in *DeleteInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists instances for the specified instance group.
 	ListInstances(ctx context.Context, in *ListInstanceGroupInstancesRequest, opts ...grpc.CallOption) (*ListInstanceGroupInstancesResponse, error)
-	// Delete instances from instance group
+	// Delete instances from the instance group.
 	DeleteInstances(ctx context.Context, in *DeleteInstancesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stop instances from instance group
+	// Stop instances from the instance group.
 	StopInstances(ctx context.Context, in *StopInstancesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified instance group.
 	ListOperations(ctx context.Context, in *ListInstanceGroupOperationsRequest, opts ...grpc.CallOption) (*ListInstanceGroupOperationsResponse, error)
@@ -3094,9 +3094,9 @@ type InstanceGroupServiceServer interface {
 	Delete(context.Context, *DeleteInstanceGroupRequest) (*operation.Operation, error)
 	// Lists instances for the specified instance group.
 	ListInstances(context.Context, *ListInstanceGroupInstancesRequest) (*ListInstanceGroupInstancesResponse, error)
-	// Delete instances from instance group
+	// Delete instances from the instance group.
 	DeleteInstances(context.Context, *DeleteInstancesRequest) (*operation.Operation, error)
-	// Stop instances from instance group
+	// Stop instances from the instance group.
 	StopInstances(context.Context, *StopInstancesRequest) (*operation.Operation, error)
 	// Lists operations for the specified instance group.
 	ListOperations(context.Context, *ListInstanceGroupOperationsRequest) (*ListInstanceGroupOperationsResponse, error)
