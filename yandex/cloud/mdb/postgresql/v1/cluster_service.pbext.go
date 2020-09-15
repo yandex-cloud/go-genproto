@@ -539,6 +539,10 @@ func (m *ConfigSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
+	m.PerformanceDiagnostics = v
+}
+
 type ConfigHostSpec_PostgresqlConfig = isConfigHostSpec_PostgresqlConfig
 
 func (m *ConfigHostSpec) SetPostgresqlConfig(v ConfigHostSpec_PostgresqlConfig) {

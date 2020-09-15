@@ -137,6 +137,10 @@ func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ClusterConfig) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
+	m.PerformanceDiagnostics = v
+}
+
 func (m *ConnectionPoolerConfig) SetPoolingMode(v ConnectionPoolerConfig_PoolingMode) {
 	m.PoolingMode = v
 }
@@ -255,4 +259,16 @@ func (m *Resources) SetDiskTypeId(v string) {
 
 func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
+}
+
+func (m *PerformanceDiagnostics) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *PerformanceDiagnostics) SetSessionsSamplingInterval(v int64) {
+	m.SessionsSamplingInterval = v
+}
+
+func (m *PerformanceDiagnostics) SetStatementsSamplingInterval(v int64) {
+	m.StatementsSamplingInterval = v
 }
