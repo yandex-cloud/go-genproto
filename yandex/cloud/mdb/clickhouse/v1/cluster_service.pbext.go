@@ -691,6 +691,18 @@ func (m *ConfigSpec) SetCloudStorage(v *CloudStorage) {
 	m.CloudStorage = v
 }
 
+func (m *ConfigSpec) SetSqlDatabaseManagement(v *wrappers.BoolValue) {
+	m.SqlDatabaseManagement = v
+}
+
+func (m *ConfigSpec) SetSqlUserManagement(v *wrappers.BoolValue) {
+	m.SqlUserManagement = v
+}
+
+func (m *ConfigSpec) SetAdminPassword(v string) {
+	m.AdminPassword = v
+}
+
 func (m *ConfigSpec_Clickhouse) SetConfig(v *config.ClickhouseConfig) {
 	m.Config = v
 }
