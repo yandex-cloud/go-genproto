@@ -536,7 +536,7 @@ type InstanceGroup struct {
 	// Resource labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Instance template for creating the instance group.
-	// For more information, see [Instance Templates](/docs/compute/concepts/ig-instance-templates).
+	// For more information, see [Instance Templates](/docs/compute/concepts/instance-groups/instance-template).
 	InstanceTemplate *InstanceTemplate `protobuf:"bytes,7,opt,name=instance_template,json=instanceTemplate,proto3" json:"instance_template,omitempty"`
 	// [Scaling policy](/docs/compute/concepts/instance-groups/scale) of the instance group.
 	ScalePolicy *ScalePolicy `protobuf:"bytes,8,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
@@ -1784,7 +1784,7 @@ type LoadBalancerSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Specification of the target group that the instance group will be added to. For more information, see [Target groups and resources](/docs/load-balancer/target-resources).
+	// Specification of the target group that the instance group will be added to. For more information, see [Target groups and resources](/docs/load-balancer/concepts/target-resources).
 	TargetGroupSpec *TargetGroupSpec `protobuf:"bytes,1,opt,name=target_group_spec,json=targetGroupSpec,proto3" json:"target_group_spec,omitempty"`
 }
 
