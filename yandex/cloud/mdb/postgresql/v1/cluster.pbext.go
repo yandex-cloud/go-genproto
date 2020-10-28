@@ -285,6 +285,10 @@ func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
 }
 
+func (m *Access) SetWebSql(v bool) {
+	m.WebSql = v
+}
+
 func (m *PerformanceDiagnostics) SetEnabled(v bool) {
 	m.Enabled = v
 }
