@@ -328,7 +328,7 @@ type Cluster struct {
 	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Name of the Apache Kafka® cluster.
-	// The name must be unique within the folder. 1-63 characters long.
+	// The name must be unique within the folder. 1-63 characters long. Value must match the regular expression `[a-zA-Z0-9_-]*`.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the Apache Kafka® cluster. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
@@ -537,7 +537,7 @@ type ConfigSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Version of Apache Kafka® used in the cluster.
+	// Version of Apache Kafka® used in the cluster. Possible values: `2.1`, `2.6`.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	// Configuration and resource allocation for Kafka brokers.
 	Kafka *ConfigSpec_Kafka `protobuf:"bytes,2,opt,name=kafka,proto3" json:"kafka,omitempty"`
@@ -626,7 +626,6 @@ func (x *ConfigSpec) GetAssignPublicIp() bool {
 	return false
 }
 
-// Computational resources.
 type Resources struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -694,7 +693,7 @@ func (x *Resources) GetDiskTypeId() string {
 	return ""
 }
 
-// Kafka broker configuration.
+// Kafka version 2.1 broker configuration.
 type KafkaConfig2_1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -821,7 +820,7 @@ func (x *KafkaConfig2_1) GetLogRetentionMs() *wrappers.Int64Value {
 	return nil
 }
 
-// Kafka 2.6 broker configuration.
+// Kafka version 2.6 broker configuration.
 type KafkaConfig2_6 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -962,7 +961,7 @@ type Host struct {
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Host role.
 	Role Host_Role `protobuf:"varint,4,opt,name=role,proto3,enum=yandex.cloud.mdb.kafka.v1.Host_Role" json:"role,omitempty"`
-	// Resources allocated to the host.
+	// Computational resources allocated to the host.
 	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Aggregated host health data.
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.kafka.v1.Host_Health" json:"health,omitempty"`
