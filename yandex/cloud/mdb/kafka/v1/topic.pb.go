@@ -514,22 +514,22 @@ type TopicConfig2_6 struct {
 	FileDeleteDelayMs *wrappers.Int64Value `protobuf:"bytes,4,opt,name=file_delete_delay_ms,json=fileDeleteDelayMs,proto3" json:"file_delete_delay_ms,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
 	//
-	// This setting overrides the cluster-level [KafkaConfig2_1.log_flush_interval_messages] setting on the topic level.
+	// This setting overrides the cluster-level [KafkaConfig2_6.log_flush_interval_messages] setting on the topic level.
 	FlushMessages *wrappers.Int64Value `protobuf:"bytes,5,opt,name=flush_messages,json=flushMessages,proto3" json:"flush_messages,omitempty"`
 	// The maximum time in milliseconds that a message in the topic is kept in memory before flushed to disk.
 	//
-	// This setting overrides the cluster-level [KafkaConfig2_1.log_flush_interval_ms] setting on the topic level.
+	// This setting overrides the cluster-level [KafkaConfig2_6.log_flush_interval_ms] setting on the topic level.
 	FlushMs *wrappers.Int64Value `protobuf:"bytes,6,opt,name=flush_ms,json=flushMs,proto3" json:"flush_ms,omitempty"`
 	// The minimum time in milliseconds a message will remain uncompacted in the log.
 	MinCompactionLagMs *wrappers.Int64Value `protobuf:"bytes,7,opt,name=min_compaction_lag_ms,json=minCompactionLagMs,proto3" json:"min_compaction_lag_ms,omitempty"`
 	// The maximum size a partition can grow to before Kafka will discard old log segments to free up space if the `delete` [cleanup_policy] is in effect.
 	// It is helpful if you need to control the size of log due to limited disk space.
 	//
-	// This setting overrides the cluster-level [KafkaConfig2_1.log_retention_bytes] setting on the topic level.
+	// This setting overrides the cluster-level [KafkaConfig2_6.log_retention_bytes] setting on the topic level.
 	RetentionBytes *wrappers.Int64Value `protobuf:"bytes,8,opt,name=retention_bytes,json=retentionBytes,proto3" json:"retention_bytes,omitempty"`
 	// The number of milliseconds to keep a log segment's file before deleting it.
 	//
-	// This setting overrides the cluster-level [KafkaConfig2_1.log_retention_ms] setting on the topic level.
+	// This setting overrides the cluster-level [KafkaConfig2_6.log_retention_ms] setting on the topic level.
 	RetentionMs *wrappers.Int64Value `protobuf:"bytes,9,opt,name=retention_ms,json=retentionMs,proto3" json:"retention_ms,omitempty"`
 }
 
