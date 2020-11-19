@@ -202,6 +202,10 @@ func (m *MysqlConfig8_0) SetSlaveParallelWorkers(v *wrappers.Int64Value) {
 	m.SlaveParallelWorkers = v
 }
 
+func (m *MysqlConfig8_0) SetRegexpTimeLimit(v *wrappers.Int64Value) {
+	m.RegexpTimeLimit = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

@@ -411,6 +411,10 @@ func (m *AddClusterHostsRequest) SetHostSpecs(v []*HostSpec) {
 	m.HostSpecs = v
 }
 
+func (m *AddClusterHostsRequest) SetCopySchema(v *wrappers.BoolValue) {
+	m.CopySchema = v
+}
+
 func (m *AddClusterHostsMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -477,6 +481,10 @@ func (m *AddClusterShardRequest) SetConfigSpec(v *ShardConfigSpec) {
 
 func (m *AddClusterShardRequest) SetHostSpecs(v []*HostSpec) {
 	m.HostSpecs = v
+}
+
+func (m *AddClusterShardRequest) SetCopySchema(v *wrappers.BoolValue) {
+	m.CopySchema = v
 }
 
 func (m *AddClusterShardMetadata) SetClusterId(v string) {

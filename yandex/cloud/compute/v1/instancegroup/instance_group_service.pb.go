@@ -172,7 +172,11 @@ type CreateInstanceGroupRequest struct {
 	// To get the service account ID, use a [yandex.cloud.iam.v1.ServiceAccountService.List] request.
 	ServiceAccountId string      `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	Variables        []*Variable `protobuf:"bytes,13,rep,name=variables,proto3" json:"variables,omitempty"`
-	// Flag that inhibits deletion of the instance group
+	// Flag prohibiting deletion of the instance group.
+	//
+	// Allowed values:</br>- `false`: The instance group can be deleted.</br>- `true`: The instance group cannot be deleted.
+	//
+	// The default is `false`.
 	DeletionProtection bool `protobuf:"varint,14,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 }
 
