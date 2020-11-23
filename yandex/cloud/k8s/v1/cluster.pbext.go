@@ -82,6 +82,10 @@ func (m *Cluster) SetKmsProvider(v *KMSProvider) {
 	m.KmsProvider = v
 }
 
+func (m *Cluster) SetLogGroupId(v string) {
+	m.LogGroupId = v
+}
+
 type Master_MasterType = isMaster_MasterType
 
 func (m *Master) SetMasterType(v Master_MasterType) {

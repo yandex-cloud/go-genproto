@@ -161,6 +161,14 @@ func (m *KafkaConfig2_1) SetLogRetentionMs(v *wrappers.Int64Value) {
 	m.LogRetentionMs = v
 }
 
+func (m *KafkaConfig2_1) SetLogSegmentBytes(v *wrappers.Int64Value) {
+	m.LogSegmentBytes = v
+}
+
+func (m *KafkaConfig2_1) SetLogPreallocate(v *wrappers.BoolValue) {
+	m.LogPreallocate = v
+}
+
 func (m *KafkaConfig2_6) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -191,6 +199,14 @@ func (m *KafkaConfig2_6) SetLogRetentionMinutes(v *wrappers.Int64Value) {
 
 func (m *KafkaConfig2_6) SetLogRetentionMs(v *wrappers.Int64Value) {
 	m.LogRetentionMs = v
+}
+
+func (m *KafkaConfig2_6) SetLogSegmentBytes(v *wrappers.Int64Value) {
+	m.LogSegmentBytes = v
+}
+
+func (m *KafkaConfig2_6) SetLogPreallocate(v *wrappers.BoolValue) {
+	m.LogPreallocate = v
 }
 
 func (m *Host) SetName(v string) {

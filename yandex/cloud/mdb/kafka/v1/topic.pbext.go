@@ -106,6 +106,22 @@ func (m *TopicConfig2_1) SetRetentionMs(v *wrappers.Int64Value) {
 	m.RetentionMs = v
 }
 
+func (m *TopicConfig2_1) SetMaxMessageBytes(v *wrappers.Int64Value) {
+	m.MaxMessageBytes = v
+}
+
+func (m *TopicConfig2_1) SetMinInsyncReplicas(v *wrappers.Int64Value) {
+	m.MinInsyncReplicas = v
+}
+
+func (m *TopicConfig2_1) SetSegmentBytes(v *wrappers.Int64Value) {
+	m.SegmentBytes = v
+}
+
+func (m *TopicConfig2_1) SetPreallocate(v *wrappers.BoolValue) {
+	m.Preallocate = v
+}
+
 func (m *TopicConfig2_6) SetCleanupPolicy(v TopicConfig2_6_CleanupPolicy) {
 	m.CleanupPolicy = v
 }
@@ -140,4 +156,20 @@ func (m *TopicConfig2_6) SetRetentionBytes(v *wrappers.Int64Value) {
 
 func (m *TopicConfig2_6) SetRetentionMs(v *wrappers.Int64Value) {
 	m.RetentionMs = v
+}
+
+func (m *TopicConfig2_6) SetMaxMessageBytes(v *wrappers.Int64Value) {
+	m.MaxMessageBytes = v
+}
+
+func (m *TopicConfig2_6) SetMinInsyncReplicas(v *wrappers.Int64Value) {
+	m.MinInsyncReplicas = v
+}
+
+func (m *TopicConfig2_6) SetSegmentBytes(v *wrappers.Int64Value) {
+	m.SegmentBytes = v
+}
+
+func (m *TopicConfig2_6) SetPreallocate(v *wrappers.BoolValue) {
+	m.Preallocate = v
 }
