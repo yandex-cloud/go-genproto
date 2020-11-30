@@ -229,6 +229,14 @@ func (m *ScalePolicy_CustomRule) SetTarget(v float64) {
 	m.Target = v
 }
 
+func (m *ScalePolicy_CustomRule) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ScalePolicy_CustomRule) SetService(v string) {
+	m.Service = v
+}
+
 func (m *ScalePolicy_FixedScale) SetSize(v int64) {
 	m.Size = v
 }
@@ -315,6 +323,14 @@ func (m *InstanceTemplate) SetName(v string) {
 
 func (m *InstanceTemplate) SetHostname(v string) {
 	m.Hostname = v
+}
+
+func (m *InstanceTemplate) SetPlacementPolicy(v *PlacementPolicy) {
+	m.PlacementPolicy = v
+}
+
+func (m *PlacementPolicy) SetPlacementGroupId(v string) {
+	m.PlacementGroupId = v
 }
 
 func (m *ResourcesSpec) SetMemory(v int64) {
@@ -409,6 +425,10 @@ func (m *PrimaryAddressSpec) SetOneToOneNatSpec(v *OneToOneNatSpec) {
 
 func (m *OneToOneNatSpec) SetIpVersion(v IpVersion) {
 	m.IpVersion = v
+}
+
+func (m *OneToOneNatSpec) SetAddress(v string) {
+	m.Address = v
 }
 
 func (m *SchedulingPolicy) SetPreemptible(v bool) {

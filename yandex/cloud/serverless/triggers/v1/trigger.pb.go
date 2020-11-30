@@ -271,7 +271,7 @@ type Trigger struct {
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Rule for trigger activation (always consistent with the trigger type).
 	Rule *Trigger_Rule `protobuf:"bytes,8,opt,name=rule,proto3" json:"rule,omitempty"`
-	// Trigger status
+	// Trigger status.
 	Status Trigger_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.serverless.triggers.v1.Trigger_Status" json:"status,omitempty"`
 }
 
@@ -371,7 +371,7 @@ type InvokeFunctionOnce struct {
 
 	// ID of the function to invoke.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
-	// Tag of the function version to execute.
+	// Version tag of the function to execute.
 	FunctionTag string `protobuf:"bytes,2,opt,name=function_tag,json=functionTag,proto3" json:"function_tag,omitempty"`
 	// ID of the service account that should be used to invoke the function.
 	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
@@ -438,13 +438,13 @@ type InvokeFunctionWithRetry struct {
 
 	// ID of the function to invoke.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
-	// Tag of the function version to execute.
+	// Version tag of the function to execute.
 	FunctionTag string `protobuf:"bytes,2,opt,name=function_tag,json=functionTag,proto3" json:"function_tag,omitempty"`
 	// ID of the service account which has permission to invoke the function.
 	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Retry policy. If the field is not specified, or the value is empty, no retries will be attempted.
 	RetrySettings *RetrySettings `protobuf:"bytes,4,opt,name=retry_settings,json=retrySettings,proto3" json:"retry_settings,omitempty"`
-	// DLQ policy (no value means discarding a message)
+	// DLQ policy (no value means discarding a message).
 	DeadLetterQueue *PutQueueMessage `protobuf:"bytes,5,opt,name=dead_letter_queue,json=deadLetterQueue,proto3" json:"dead_letter_queue,omitempty"`
 }
 
@@ -522,7 +522,7 @@ type PutQueueMessage struct {
 
 	// ID of the queue.
 	QueueId string `protobuf:"bytes,11,opt,name=queue_id,json=queueId,proto3" json:"queue_id,omitempty"`
-	// SA which has write permission on the queue.
+	// Service account which has write permission on the queue.
 	ServiceAccountId string `protobuf:"bytes,2,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 }
 
@@ -578,11 +578,11 @@ type BatchSettings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Batch size. Trigger will send the batch of messages to the associated function
-	// when the number of messages in the queue reaches this value, or the [cutoff] time has passed.
+	// Batch size. Trigger will send the batch of messages to the function
+	// when the number of messages in the queue reaches [size], or the [cutoff] time has passed.
 	Size int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
-	// Maximum wait time. Trigger will send the batch of messages the time since the last batch
-	// exceeds the `cutoff` value, regardless of the amount of messages in the queue.
+	// Maximum wait time. Trigger will send the batch of messages to the function when
+	// the number of messages in the queue reaches [size], or the [cutoff] time has passed.
 	Cutoff *duration.Duration `protobuf:"bytes,2,opt,name=cutoff,proto3" json:"cutoff,omitempty"`
 }
 
@@ -637,11 +637,11 @@ type CloudLogsBatchSettings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Batch size. Trigger will send the batch of messages to the associated function
-	// when the number of log events reaches this value, or the [cutoff] time has passed.
+	// Batch size. Trigger will send the batch of messages to the function
+	// when the number of messages in the log group reaches [size], or the [cutoff] time has passed.
 	Size int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
-	// Maximum wait time. Trigger will send the batch of messages the time since the last batch
-	// exceeds the `cutoff` value, regardless of the amount of log events.
+	// Maximum wait time. Trigger will send the batch of messages to the function when
+	// the number of messages in the log group reaches [size], or the [cutoff] time has passed.
 	Cutoff *duration.Duration `protobuf:"bytes,2,opt,name=cutoff,proto3" json:"cutoff,omitempty"`
 }
 
@@ -1192,9 +1192,11 @@ type Trigger_ObjectStorage struct {
 
 	// Type (name) of events, at least one value is required.
 	EventType []Trigger_ObjectStorageEventType `protobuf:"varint,3,rep,packed,name=event_type,json=eventType,proto3,enum=yandex.cloud.serverless.triggers.v1.Trigger_ObjectStorageEventType" json:"event_type,omitempty"`
-	BucketId  string                           `protobuf:"bytes,4,opt,name=bucket_id,json=bucketId,proto3" json:"bucket_id,omitempty"`
-	// Filter, optional.
+	// ID of the bucket.
+	BucketId string `protobuf:"bytes,4,opt,name=bucket_id,json=bucketId,proto3" json:"bucket_id,omitempty"`
+	// Prefix of the object key. Filter, optional.
 	Prefix string `protobuf:"bytes,6,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	// Suffix of the object key. Filter, optional.
 	Suffix string `protobuf:"bytes,7,opt,name=suffix,proto3" json:"suffix,omitempty"`
 	// Types that are assignable to Action:
 	//	*Trigger_ObjectStorage_InvokeFunction
@@ -1291,11 +1293,13 @@ type Trigger_ContainerRegistry struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Type (name) of events, at least one value is required.
-	EventType  []Trigger_ContainerRegistryEventType `protobuf:"varint,3,rep,packed,name=event_type,json=eventType,proto3,enum=yandex.cloud.serverless.triggers.v1.Trigger_ContainerRegistryEventType" json:"event_type,omitempty"`
-	RegistryId string                               `protobuf:"bytes,4,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
-	// Filter, optional.
+	EventType []Trigger_ContainerRegistryEventType `protobuf:"varint,3,rep,packed,name=event_type,json=eventType,proto3,enum=yandex.cloud.serverless.triggers.v1.Trigger_ContainerRegistryEventType" json:"event_type,omitempty"`
+	// ID of the registry.
+	RegistryId string `protobuf:"bytes,4,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// Docker-image name. Filter, optional.
 	ImageName string `protobuf:"bytes,5,opt,name=image_name,json=imageName,proto3" json:"image_name,omitempty"`
-	Tag       string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
+	// Docker-image tag. Filter, optional.
+	Tag string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
 	// Types that are assignable to Action:
 	//	*Trigger_ContainerRegistry_InvokeFunction
 	Action isTrigger_ContainerRegistry_Action `protobuf_oneof:"action"`
