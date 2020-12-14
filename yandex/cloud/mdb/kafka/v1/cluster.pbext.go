@@ -55,6 +55,10 @@ func (m *Cluster) SetStatus(v Cluster_Status) {
 	m.Status = v
 }
 
+func (m *Cluster) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

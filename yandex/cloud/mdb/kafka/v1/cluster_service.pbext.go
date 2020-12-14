@@ -76,6 +76,10 @@ func (m *CreateClusterRequest) SetSubnetId(v []string) {
 	m.SubnetId = v
 }
 
+func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -102,6 +106,10 @@ func (m *UpdateClusterRequest) SetConfigSpec(v *ConfigSpec) {
 
 func (m *UpdateClusterRequest) SetName(v string) {
 	m.Name = v
+}
+
+func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {

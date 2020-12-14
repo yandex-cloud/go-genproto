@@ -27,22 +27,34 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+// An Address resource. For more information, see [Address](/docs/vpc/concepts/address).
 type Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          string               `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId    string               `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	CreatedAt   *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Name        string               `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description string               `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string    `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the address. Generated at creation time.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the address belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Name of the address.
+	// The name is unique within the folder.
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the address.
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// Resource labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// External ipv4 address specification.
+	//
 	// Types that are assignable to Address:
 	//	*Address_ExternalIpv4Address
-	Address  isAddress_Address `protobuf_oneof:"address"`
-	Reserved bool              `protobuf:"varint,15,opt,name=reserved,proto3" json:"reserved,omitempty"`
-	Used     bool              `protobuf:"varint,16,opt,name=used,proto3" json:"used,omitempty"`
+	Address isAddress_Address `protobuf_oneof:"address"`
+	// Specifies if address is reserved or not.
+	Reserved bool `protobuf:"varint,15,opt,name=reserved,proto3" json:"reserved,omitempty"`
+	// Specifies if address is used or not.
+	Used bool `protobuf:"varint,16,opt,name=used,proto3" json:"used,omitempty"`
 }
 
 func (x *Address) Reset() {
@@ -162,8 +174,11 @@ type ExternalIpv4Address struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Address      string               `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
-	ZoneId       string               `protobuf:"bytes,2,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// Value of address.
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// Availability zone from which the address will be allocated.
+	ZoneId string `protobuf:"bytes,2,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// Parameters of the allocated address, for example DDoS Protection.
 	Requirements *AddressRequirements `protobuf:"bytes,3,opt,name=requirements,proto3" json:"requirements,omitempty"`
 }
 
@@ -225,7 +240,9 @@ type AddressRequirements struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// DDoS protection provider ID.
 	DdosProtectionProvider string `protobuf:"bytes,1,opt,name=ddos_protection_provider,json=ddosProtectionProvider,proto3" json:"ddos_protection_provider,omitempty"`
+	// Capability to send SMTP traffic.
 	OutgoingSmtpCapability string `protobuf:"bytes,2,opt,name=outgoing_smtp_capability,json=outgoingSmtpCapability,proto3" json:"outgoing_smtp_capability,omitempty"`
 }
 
