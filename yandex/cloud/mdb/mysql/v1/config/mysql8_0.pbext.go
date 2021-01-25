@@ -206,6 +206,10 @@ func (m *MysqlConfig8_0) SetRegexpTimeLimit(v *wrappers.Int64Value) {
 	m.RegexpTimeLimit = v
 }
 
+func (m *MysqlConfig8_0) SetMdbPreserveBinlogBytes(v *wrappers.Int64Value) {
+	m.MdbPreserveBinlogBytes = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

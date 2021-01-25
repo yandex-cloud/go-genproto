@@ -202,6 +202,10 @@ func (m *MysqlConfig5_7) SetSlaveParallelWorkers(v *wrappers.Int64Value) {
 	m.SlaveParallelWorkers = v
 }
 
+func (m *MysqlConfig5_7) SetMdbPreserveBinlogBytes(v *wrappers.Int64Value) {
+	m.MdbPreserveBinlogBytes = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

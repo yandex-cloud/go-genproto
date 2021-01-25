@@ -126,6 +126,10 @@ func (m *NodeTemplate) SetNetworkInterfaceSpecs(v []*NetworkInterfaceSpec) {
 	m.NetworkInterfaceSpecs = v
 }
 
+func (m *NodeTemplate) SetPlacementPolicy(v *PlacementPolicy) {
+	m.PlacementPolicy = v
+}
+
 func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
@@ -176,4 +180,8 @@ func (m *DiskSpec) SetDiskSize(v int64) {
 
 func (m *SchedulingPolicy) SetPreemptible(v bool) {
 	m.Preemptible = v
+}
+
+func (m *PlacementPolicy) SetPlacementGroupId(v string) {
+	m.PlacementGroupId = v
 }
