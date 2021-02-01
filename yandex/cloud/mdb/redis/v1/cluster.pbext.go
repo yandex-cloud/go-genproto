@@ -72,6 +72,10 @@ func (m *Cluster) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *Cluster) SetTlsEnabled(v bool) {
+	m.TlsEnabled = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
@@ -176,6 +180,10 @@ func (m *Resources) SetResourcePresetId(v string) {
 
 func (m *Resources) SetDiskSize(v int64) {
 	m.DiskSize = v
+}
+
+func (m *Resources) SetDiskTypeId(v string) {
+	m.DiskTypeId = v
 }
 
 func (m *Access) SetDataLens(v bool) {

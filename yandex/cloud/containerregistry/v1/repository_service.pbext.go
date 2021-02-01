@@ -41,3 +41,19 @@ func (m *ListRepositoriesResponse) SetRepositories(v []*Repository) {
 func (m *ListRepositoriesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *CreateRepositoryRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CreateRepositoryMetadata) SetRepositoryId(v string) {
+	m.RepositoryId = v
+}
+
+func (m *DeleteRepositoryRequest) SetRepositoryId(v string) {
+	m.RepositoryId = v
+}
+
+func (m *DeleteRepositoryMetadata) SetRepositoryId(v string) {
+	m.RepositoryId = v
+}

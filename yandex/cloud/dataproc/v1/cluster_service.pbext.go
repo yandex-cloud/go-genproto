@@ -131,6 +131,10 @@ func (m *CreateClusterRequest) SetUiProxy(v bool) {
 	m.UiProxy = v
 }
 
+func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -173,6 +177,10 @@ func (m *UpdateClusterRequest) SetDecommissionTimeout(v int64) {
 
 func (m *UpdateClusterRequest) SetUiProxy(v bool) {
 	m.UiProxy = v
+}
+
+func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {

@@ -4,6 +4,7 @@ package redis
 
 import (
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
@@ -76,6 +77,10 @@ func (m *CreateClusterRequest) SetSharded(v bool) {
 
 func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
+}
+
+func (m *CreateClusterRequest) SetTlsEnabled(v *wrappers.BoolValue) {
+	m.TlsEnabled = v
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {

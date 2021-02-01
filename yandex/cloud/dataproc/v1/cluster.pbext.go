@@ -62,6 +62,10 @@ func (m *Cluster) SetUiProxy(v bool) {
 	m.UiProxy = v
 }
 
+func (m *Cluster) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
