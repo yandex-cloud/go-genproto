@@ -67,6 +67,10 @@ func (m *CreateInstanceGroupRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateInstanceGroupRequest) SetApplicationLoadBalancerSpec(v *ApplicationLoadBalancerSpec) {
+	m.ApplicationLoadBalancerSpec = v
+}
+
 func (m *CreateInstanceGroupFromYamlRequest) SetFolderId(v string) {
 	m.FolderId = v
 }

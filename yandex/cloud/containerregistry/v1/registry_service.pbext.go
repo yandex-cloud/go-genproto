@@ -77,3 +77,43 @@ func (m *DeleteRegistryRequest) SetRegistryId(v string) {
 func (m *DeleteRegistryMetadata) SetRegistryId(v string) {
 	m.RegistryId = v
 }
+
+func (m *IpPermissionDelta) SetAction(v IpPermissionAction) {
+	m.Action = v
+}
+
+func (m *IpPermissionDelta) SetIpPermission(v *IpPermission) {
+	m.IpPermission = v
+}
+
+func (m *SetIpPermissionRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *SetIpPermissionRequest) SetIpPermission(v []*IpPermission) {
+	m.IpPermission = v
+}
+
+func (m *UpdateIpPermissionRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *UpdateIpPermissionRequest) SetIpPermissionDeltas(v []*IpPermissionDelta) {
+	m.IpPermissionDeltas = v
+}
+
+func (m *ListIpPermissionRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *ListIpPermissionsResponse) SetPermissions(v []*IpPermission) {
+	m.Permissions = v
+}
+
+func (m *SetIpPermissionMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *UpdateIpPermissionMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}

@@ -215,6 +215,10 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *RestoreClusterRequest) SetTlsEnabled(v *wrappers.BoolValue) {
+	m.TlsEnabled = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

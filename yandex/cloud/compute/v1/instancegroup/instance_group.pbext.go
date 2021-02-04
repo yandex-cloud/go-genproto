@@ -423,12 +423,36 @@ func (m *PrimaryAddressSpec) SetOneToOneNatSpec(v *OneToOneNatSpec) {
 	m.OneToOneNatSpec = v
 }
 
+func (m *PrimaryAddressSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
+	m.DnsRecordSpecs = v
+}
+
 func (m *OneToOneNatSpec) SetIpVersion(v IpVersion) {
 	m.IpVersion = v
 }
 
 func (m *OneToOneNatSpec) SetAddress(v string) {
 	m.Address = v
+}
+
+func (m *OneToOneNatSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
+	m.DnsRecordSpecs = v
+}
+
+func (m *DnsRecordSpec) SetFqdn(v string) {
+	m.Fqdn = v
+}
+
+func (m *DnsRecordSpec) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecordSpec) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecordSpec) SetPtr(v bool) {
+	m.Ptr = v
 }
 
 func (m *SchedulingPolicy) SetPreemptible(v bool) {
@@ -452,6 +476,22 @@ func (m *TargetGroupSpec) SetDescription(v string) {
 }
 
 func (m *TargetGroupSpec) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *ApplicationLoadBalancerSpec) SetTargetGroupSpec(v *ApplicationTargetGroupSpec) {
+	m.TargetGroupSpec = v
+}
+
+func (m *ApplicationTargetGroupSpec) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ApplicationTargetGroupSpec) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *ApplicationTargetGroupSpec) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 

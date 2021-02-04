@@ -146,12 +146,24 @@ func (m *PrimaryAddress) SetOneToOneNat(v *OneToOneNat) {
 	m.OneToOneNat = v
 }
 
+func (m *PrimaryAddress) SetDnsRecords(v []*DnsRecord) {
+	m.DnsRecords = v
+}
+
 func (m *OneToOneNat) SetAddress(v string) {
 	m.Address = v
 }
 
 func (m *OneToOneNat) SetIpVersion(v IpVersion) {
 	m.IpVersion = v
+}
+
+func (m *OneToOneNat) SetDnsRecords(v []*DnsRecord) {
+	m.DnsRecords = v
+}
+
+func (m *DnsRecord) SetFqdn(v string) {
+	m.Fqdn = v
 }
 
 func (m *SchedulingPolicy) SetPreemptible(v bool) {

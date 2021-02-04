@@ -18,6 +18,22 @@ func (m *RedisConfig6_0) SetPassword(v string) {
 	m.Password = v
 }
 
+func (m *RedisConfig6_0) SetDatabases(v *wrappers.Int64Value) {
+	m.Databases = v
+}
+
+func (m *RedisConfig6_0) SetSlowlogLogSlowerThan(v *wrappers.Int64Value) {
+	m.SlowlogLogSlowerThan = v
+}
+
+func (m *RedisConfig6_0) SetSlowlogMaxLen(v *wrappers.Int64Value) {
+	m.SlowlogMaxLen = v
+}
+
+func (m *RedisConfig6_0) SetNotifyKeyspaceEvents(v string) {
+	m.NotifyKeyspaceEvents = v
+}
+
 func (m *RedisConfigSet6_0) SetEffectiveConfig(v *RedisConfig6_0) {
 	m.EffectiveConfig = v
 }

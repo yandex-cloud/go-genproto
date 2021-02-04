@@ -173,6 +173,14 @@ func (m *KafkaConfig2_1) SetLogPreallocate(v *wrappers.BoolValue) {
 	m.LogPreallocate = v
 }
 
+func (m *KafkaConfig2_1) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
+	m.SocketSendBufferBytes = v
+}
+
+func (m *KafkaConfig2_1) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
+	m.SocketReceiveBufferBytes = v
+}
+
 func (m *KafkaConfig2_6) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -211,6 +219,14 @@ func (m *KafkaConfig2_6) SetLogSegmentBytes(v *wrappers.Int64Value) {
 
 func (m *KafkaConfig2_6) SetLogPreallocate(v *wrappers.BoolValue) {
 	m.LogPreallocate = v
+}
+
+func (m *KafkaConfig2_6) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
+	m.SocketSendBufferBytes = v
+}
+
+func (m *KafkaConfig2_6) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
+	m.SocketReceiveBufferBytes = v
 }
 
 func (m *Host) SetName(v string) {
