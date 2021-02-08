@@ -218,7 +218,7 @@ type CreateDnsZoneRequest struct {
 	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Zone        string            `protobuf:"bytes,5,opt,name=zone,proto3" json:"zone,omitempty"`
-	// должно быть проставлено ровно одно поле из следующих двух
+	// at least one of two visibility fields must be set
 	PrivateVisibility *PrivateVisibility `protobuf:"bytes,6,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
 	PublicVisibility  *PublicVisibility  `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
 }
@@ -361,7 +361,7 @@ type UpdateDnsZoneRequest struct {
 	Name        string                `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description string                `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Labels      map[string]string     `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// разрешается менять только список идентификаторов сетей внутри private_visibility
+	// only network_ids change inside private_visibility is allowed
 	PrivateVisibility *PrivateVisibility `protobuf:"bytes,6,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
 	PublicVisibility  *PublicVisibility  `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
 }
@@ -892,11 +892,11 @@ type UpsertRecordSetsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
-	// удаляет только конкретные рекорды внутри рекордсета
+	// delete only specified records from record set
 	Deletions []*RecordSet `protobuf:"bytes,2,rep,name=deletions,proto3" json:"deletions,omitempty"`
-	// заменяет указанные рекордсеты целиком
+	// replace specified record sets entirely
 	Replacements []*RecordSet `protobuf:"bytes,3,rep,name=replacements,proto3" json:"replacements,omitempty"`
-	// для каждого рекордсета заменяет рекорды или добавляет новые
+	// for each record set replace records or add new ones
 	Merges []*RecordSet `protobuf:"bytes,4,rep,name=merges,proto3" json:"merges,omitempty"`
 }
 
@@ -1857,13 +1857,13 @@ type DnsZoneServiceClient interface {
 	Delete(ctx context.Context, in *DeleteDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	GetRecordSet(ctx context.Context, in *GetDnsZoneRecordSetRequest, opts ...grpc.CallOption) (*RecordSet, error)
 	ListRecordSets(ctx context.Context, in *ListDnsZoneRecordSetsRequest, opts ...grpc.CallOption) (*ListDnsZoneRecordSetsResponse, error)
-	// Метод для строго консистентного изменения состояния зоны. Возвращает ошибку если удаляемая запись не найдена, если
-	// у записи с таким ключом не совпадают остальные поля, или добавляемая запись с заданным ключом уже существует. Если
-	// запись по одному и тому же ключу находится в обоих списках, то она заменяется на запись в списке добавленных.
+	// Method with strict control for changing zone state. Returns error when deleted record is not found, found record
+	// with matched type and name but different ttl or value, or on attempt to add record with existing name and type.
+	// Deletions come first so if record with same name and type is present in both lists then existing record will be
+	// deleted and new one added.
 	UpdateRecordSets(ctx context.Context, in *UpdateRecordSetsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Метод без строго контроля для изменения состояния зоны. При удалении не проверяет наличие удаляемой записи.
-	// Удаляет рекорды не по совпадению ключа, а по полному совпадению всех полей, что позволяет удалить часть рекордов из
-	// рекордсета.
+	// Method without strict control for changing zone state. Do not returns error when deleted record is not found.
+	// Delete records that match all specified fields which allows to delete only specified records from record set.
 	UpsertRecordSets(ctx context.Context, in *UpsertRecordSetsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	ListOperations(ctx context.Context, in *ListDnsZoneOperationsRequest, opts ...grpc.CallOption) (*ListDnsZoneOperationsResponse, error)
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -2005,13 +2005,13 @@ type DnsZoneServiceServer interface {
 	Delete(context.Context, *DeleteDnsZoneRequest) (*operation.Operation, error)
 	GetRecordSet(context.Context, *GetDnsZoneRecordSetRequest) (*RecordSet, error)
 	ListRecordSets(context.Context, *ListDnsZoneRecordSetsRequest) (*ListDnsZoneRecordSetsResponse, error)
-	// Метод для строго консистентного изменения состояния зоны. Возвращает ошибку если удаляемая запись не найдена, если
-	// у записи с таким ключом не совпадают остальные поля, или добавляемая запись с заданным ключом уже существует. Если
-	// запись по одному и тому же ключу находится в обоих списках, то она заменяется на запись в списке добавленных.
+	// Method with strict control for changing zone state. Returns error when deleted record is not found, found record
+	// with matched type and name but different ttl or value, or on attempt to add record with existing name and type.
+	// Deletions come first so if record with same name and type is present in both lists then existing record will be
+	// deleted and new one added.
 	UpdateRecordSets(context.Context, *UpdateRecordSetsRequest) (*operation.Operation, error)
-	// Метод без строго контроля для изменения состояния зоны. При удалении не проверяет наличие удаляемой записи.
-	// Удаляет рекорды не по совпадению ключа, а по полному совпадению всех полей, что позволяет удалить часть рекордов из
-	// рекордсета.
+	// Method without strict control for changing zone state. Do not returns error when deleted record is not found.
+	// Delete records that match all specified fields which allows to delete only specified records from record set.
 	UpsertRecordSets(context.Context, *UpsertRecordSetsRequest) (*operation.Operation, error)
 	ListOperations(context.Context, *ListDnsZoneOperationsRequest) (*ListDnsZoneOperationsResponse, error)
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)

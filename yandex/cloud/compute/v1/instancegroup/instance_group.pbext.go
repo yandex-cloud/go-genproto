@@ -79,6 +79,22 @@ func (m *InstanceGroup) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *InstanceGroup) SetApplicationLoadBalancerSpec(v *ApplicationLoadBalancerSpec) {
+	m.ApplicationLoadBalancerSpec = v
+}
+
+func (m *InstanceGroup) SetApplicationLoadBalancerState(v *ApplicationLoadBalancerState) {
+	m.ApplicationLoadBalancerState = v
+}
+
+func (m *ApplicationLoadBalancerState) SetTargetGroupId(v string) {
+	m.TargetGroupId = v
+}
+
+func (m *ApplicationLoadBalancerState) SetStatusMessage(v string) {
+	m.StatusMessage = v
+}
+
 func (m *Variable) SetKey(v string) {
 	m.Key = v
 }

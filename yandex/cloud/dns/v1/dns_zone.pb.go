@@ -138,7 +138,7 @@ func (x *DnsZone) GetPublicVisibility() *PublicVisibility {
 	return nil
 }
 
-// name + type являются уникальным идентификатором рекордсета
+// name + type is a unique record set identifier
 type RecordSet struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
