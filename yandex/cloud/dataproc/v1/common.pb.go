@@ -91,8 +91,8 @@ type Resources struct {
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Type of the storage environment for the host.
 	// Possible values:
-	// * network-hdd — network HDD drive,
-	// * network-ssd — network SSD drive.
+	// * network-hdd - network HDD drive,
+	// * network-ssd - network SSD drive.
 	DiskTypeId string `protobuf:"bytes,2,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 	// Volume of the storage available to a host, in bytes.
 	DiskSize int64 `protobuf:"varint,3,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`

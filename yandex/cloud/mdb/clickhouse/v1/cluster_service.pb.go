@@ -252,7 +252,7 @@ type ListClustersRequest struct {
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Мust be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -4111,8 +4111,8 @@ type HostSpec struct {
 	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
 	//
 	// Possible values:
-	// * false — don't assign a public IP to the host.
-	// * true — the host should have a public IP address.
+	// * false - don't assign a public IP to the host.
+	// * true - the host should have a public IP address.
 	AssignPublicIp bool `protobuf:"varint,4,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Name of the shard that the host is assigned to.
 	ShardName string `protobuf:"bytes,5,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`

@@ -708,7 +708,7 @@ type KafkaConfig2_1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Сluster topics compression type.
+	// Cluster topics compression type.
 	CompressionType CompressionType `protobuf:"varint,1,opt,name=compression_type,json=compressionType,proto3,enum=yandex.cloud.mdb.kafka.v1.CompressionType" json:"compression_type,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
 	//
@@ -875,7 +875,7 @@ type KafkaConfig2_6 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Сluster topics compression type.
+	// Cluster topics compression type.
 	CompressionType CompressionType `protobuf:"varint,1,opt,name=compression_type,json=compressionType,proto3,enum=yandex.cloud.mdb.kafka.v1.CompressionType" json:"compression_type,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
 	//

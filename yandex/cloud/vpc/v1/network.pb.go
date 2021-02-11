@@ -43,7 +43,7 @@ type Network struct {
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the network. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `` key:value `` pairs. Мaximum of 64 per resource.
+	// Resource labels as `` key:value `` pairs. Maximum of 64 per resource.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of default security group for network.
 	DefaultSecurityGroupId string `protobuf:"bytes,7,opt,name=default_security_group_id,json=defaultSecurityGroupId,proto3" json:"default_security_group_id,omitempty"`

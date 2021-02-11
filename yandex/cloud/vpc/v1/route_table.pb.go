@@ -42,7 +42,7 @@ type RouteTable struct {
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the route table. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `` key:value `` pairs. Мaximum of 64 per resource.
+	// Resource labels as `` key:value `` pairs. Maximum of 64 per resource.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of the network the route table belongs to.
 	NetworkId string `protobuf:"bytes,7,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -150,7 +150,7 @@ type StaticRoute struct {
 	// Types that are assignable to NextHop:
 	//	*StaticRoute_NextHopAddress
 	NextHop isStaticRoute_NextHop `protobuf_oneof:"next_hop"`
-	// Resource labels as `` key:value `` pairs. Мaximum of 64 per resource.
+	// Resource labels as `` key:value `` pairs. Maximum of 64 per resource.
 	Labels map[string]string `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 

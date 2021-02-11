@@ -261,7 +261,7 @@ type ListClustersRequest struct {
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Мust be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -3374,8 +3374,8 @@ type HostSpec struct {
 	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
 	//
 	// Possible values:
-	// * false — don't assign a public IP to the host.
-	// * true — the host should have a public IP address.
+	// * false - don't assign a public IP to the host.
+	// * true - the host should have a public IP address.
 	AssignPublicIp bool `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Type of the host to be deployed.
 	Type Host_Type `protobuf:"varint,4,opt,name=type,proto3,enum=yandex.cloud.mdb.mongodb.v1.Host_Type" json:"type,omitempty"`
@@ -3760,10 +3760,10 @@ type ConfigSpec struct {
 	// MongoDB feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
 	//
 	// Possible values:
-	// * `3.6` — persist data compatibility for version 3.6. After setting this option the data will not be compatible with 3.4 or older.
-	// * `4.0` — persist data compatibility for version 4.0. After setting this option the data will not be compatible with 3.6 or older.
-	// * `4.2` — persist data compatibility for version 4.2. After setting this option the data will not be compatible with 4.0 or older.
-	// * `4.4` — persist data compatibility for version 4.4. After setting this option the data will not be compatible with 4.2 or older.
+	// * `3.6` - persist data compatibility for version 3.6. After setting this option the data will not be compatible with 3.4 or older.
+	// * `4.0` - persist data compatibility for version 4.0. After setting this option the data will not be compatible with 3.6 or older.
+	// * `4.2` - persist data compatibility for version 4.2. After setting this option the data will not be compatible with 4.0 or older.
+	// * `4.4` - persist data compatibility for version 4.4. After setting this option the data will not be compatible with 4.2 or older.
 	FeatureCompatibilityVersion string `protobuf:"bytes,5,opt,name=feature_compatibility_version,json=featureCompatibilityVersion,proto3" json:"feature_compatibility_version,omitempty"`
 	// Types that are assignable to MongodbSpec:
 	//	*ConfigSpec_MongodbSpec_3_6

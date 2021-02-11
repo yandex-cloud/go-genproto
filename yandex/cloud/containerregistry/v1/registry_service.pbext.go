@@ -78,14 +78,6 @@ func (m *DeleteRegistryMetadata) SetRegistryId(v string) {
 	m.RegistryId = v
 }
 
-func (m *IpPermissionDelta) SetAction(v IpPermissionAction) {
-	m.Action = v
-}
-
-func (m *IpPermissionDelta) SetIpPermission(v *IpPermission) {
-	m.IpPermission = v
-}
-
 func (m *SetIpPermissionRequest) SetRegistryId(v string) {
 	m.RegistryId = v
 }

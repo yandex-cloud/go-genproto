@@ -303,7 +303,7 @@ func (x *ListRepositoriesResponse) GetNextPageToken() string {
 	return ""
 }
 
-type CreateRepositoryRequest struct {
+type UpsertRepositoryRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -314,8 +314,8 @@ type CreateRepositoryRequest struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 
-func (x *CreateRepositoryRequest) Reset() {
-	*x = CreateRepositoryRequest{}
+func (x *UpsertRepositoryRequest) Reset() {
+	*x = UpsertRepositoryRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_yandex_cloud_containerregistry_v1_repository_service_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -323,13 +323,13 @@ func (x *CreateRepositoryRequest) Reset() {
 	}
 }
 
-func (x *CreateRepositoryRequest) String() string {
+func (x *UpsertRepositoryRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateRepositoryRequest) ProtoMessage() {}
+func (*UpsertRepositoryRequest) ProtoMessage() {}
 
-func (x *CreateRepositoryRequest) ProtoReflect() protoreflect.Message {
+func (x *UpsertRepositoryRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_containerregistry_v1_repository_service_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -341,29 +341,29 @@ func (x *CreateRepositoryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateRepositoryRequest.ProtoReflect.Descriptor instead.
-func (*CreateRepositoryRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpsertRepositoryRequest.ProtoReflect.Descriptor instead.
+func (*UpsertRepositoryRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CreateRepositoryRequest) GetName() string {
+func (x *UpsertRepositoryRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-type CreateRepositoryMetadata struct {
+type UpsertRepositoryMetadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the repository that is being created.
+	// ID of the repository that is being upserted.
 	RepositoryId string `protobuf:"bytes,1,opt,name=repository_id,json=repositoryId,proto3" json:"repository_id,omitempty"`
 }
 
-func (x *CreateRepositoryMetadata) Reset() {
-	*x = CreateRepositoryMetadata{}
+func (x *UpsertRepositoryMetadata) Reset() {
+	*x = UpsertRepositoryMetadata{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_yandex_cloud_containerregistry_v1_repository_service_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -371,13 +371,13 @@ func (x *CreateRepositoryMetadata) Reset() {
 	}
 }
 
-func (x *CreateRepositoryMetadata) String() string {
+func (x *UpsertRepositoryMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateRepositoryMetadata) ProtoMessage() {}
+func (*UpsertRepositoryMetadata) ProtoMessage() {}
 
-func (x *CreateRepositoryMetadata) ProtoReflect() protoreflect.Message {
+func (x *UpsertRepositoryMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_containerregistry_v1_repository_service_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -389,12 +389,12 @@ func (x *CreateRepositoryMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateRepositoryMetadata.ProtoReflect.Descriptor instead.
-func (*CreateRepositoryMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpsertRepositoryMetadata.ProtoReflect.Descriptor instead.
+func (*UpsertRepositoryMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreateRepositoryMetadata) GetRepositoryId() string {
+func (x *UpsertRepositoryMetadata) GetRepositoryId() string {
 	if x != nil {
 		return x.RepositoryId
 	}
@@ -559,15 +559,15 @@ var file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDesc = []
 	0x74, 0x6f, 0x72, 0x79, 0x52, 0x0c, 0x72, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x69,
 	0x65, 0x73, 0x12, 0x26, 0x0a, 0x0f, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f,
 	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6e, 0x65, 0x78,
-	0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x75, 0x0a, 0x17, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x52, 0x65,
+	0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x75, 0x0a, 0x17, 0x55, 0x70,
+	0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x5a, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x09, 0x42, 0x46, 0xe8, 0xc7, 0x31, 0x01, 0xf2, 0xc7, 0x31, 0x3e, 0x5b, 0x61, 0x2d,
 	0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x2b, 0x28, 0x3f, 0x3a, 0x5b, 0x2e, 0x5f, 0x2d, 0x5d, 0x5b, 0x61,
 	0x2d, 0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x2b, 0x29, 0x2a, 0x28, 0x2f, 0x28, 0x5b, 0x61, 0x2d, 0x7a,
 	0x30, 0x2d, 0x39, 0x5d, 0x2b, 0x28, 0x3f, 0x3a, 0x5b, 0x2e, 0x5f, 0x2d, 0x5d, 0x5b, 0x61, 0x2d,
 	0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x2b, 0x29, 0x2a, 0x29, 0x29, 0x2a, 0x52, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x22, 0x3f, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6f, 0x73,
+	0x65, 0x22, 0x3f, 0x0a, 0x18, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6f, 0x73,
 	0x69, 0x74, 0x6f, 0x72, 0x79, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x23, 0x0a,
 	0x0d, 0x72, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79,
@@ -623,17 +623,17 @@ var file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDesc = []
 	0x74, 0x72, 0x79, 0x2f, 0x76, 0x31, 0x2f, 0x72, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72,
 	0x69, 0x65, 0x73, 0x2f, 0x7b, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x69, 0x64,
 	0x7d, 0x3a, 0x6c, 0x69, 0x73, 0x74, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x42, 0x69, 0x6e, 0x64,
-	0x69, 0x6e, 0x67, 0x73, 0x12, 0xc1, 0x01, 0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12,
+	0x69, 0x6e, 0x67, 0x73, 0x12, 0xc1, 0x01, 0x0a, 0x06, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74, 0x12,
 	0x3a, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63,
 	0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79,
-	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69,
+	0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69,
 	0x74, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x79, 0x61,
 	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x58,
 	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x28, 0x22, 0x23, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e,
 	0x65, 0x72, 0x2d, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x76, 0x31, 0x2f, 0x72,
 	0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x3a, 0x01, 0x2a, 0xb2, 0xd2,
-	0x2a, 0x26, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69,
+	0x2a, 0x26, 0x0a, 0x18, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69,
 	0x74, 0x6f, 0x72, 0x79, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x0a, 0x52, 0x65,
 	0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x12, 0xd9, 0x01, 0x0a, 0x06, 0x44, 0x65, 0x6c,
 	0x65, 0x74, 0x65, 0x12, 0x3a, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
@@ -710,8 +710,8 @@ var file_yandex_cloud_containerregistry_v1_repository_service_proto_goTypes = []
 	(*GetRepositoryByNameRequest)(nil),         // 1: yandex.cloud.containerregistry.v1.GetRepositoryByNameRequest
 	(*ListRepositoriesRequest)(nil),            // 2: yandex.cloud.containerregistry.v1.ListRepositoriesRequest
 	(*ListRepositoriesResponse)(nil),           // 3: yandex.cloud.containerregistry.v1.ListRepositoriesResponse
-	(*CreateRepositoryRequest)(nil),            // 4: yandex.cloud.containerregistry.v1.CreateRepositoryRequest
-	(*CreateRepositoryMetadata)(nil),           // 5: yandex.cloud.containerregistry.v1.CreateRepositoryMetadata
+	(*UpsertRepositoryRequest)(nil),            // 4: yandex.cloud.containerregistry.v1.UpsertRepositoryRequest
+	(*UpsertRepositoryMetadata)(nil),           // 5: yandex.cloud.containerregistry.v1.UpsertRepositoryMetadata
 	(*DeleteRepositoryRequest)(nil),            // 6: yandex.cloud.containerregistry.v1.DeleteRepositoryRequest
 	(*DeleteRepositoryMetadata)(nil),           // 7: yandex.cloud.containerregistry.v1.DeleteRepositoryMetadata
 	(*Repository)(nil),                         // 8: yandex.cloud.containerregistry.v1.Repository
@@ -727,7 +727,7 @@ var file_yandex_cloud_containerregistry_v1_repository_service_proto_depIdxs = []
 	1,  // 2: yandex.cloud.containerregistry.v1.RepositoryService.GetByName:input_type -> yandex.cloud.containerregistry.v1.GetRepositoryByNameRequest
 	2,  // 3: yandex.cloud.containerregistry.v1.RepositoryService.List:input_type -> yandex.cloud.containerregistry.v1.ListRepositoriesRequest
 	9,  // 4: yandex.cloud.containerregistry.v1.RepositoryService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	4,  // 5: yandex.cloud.containerregistry.v1.RepositoryService.Create:input_type -> yandex.cloud.containerregistry.v1.CreateRepositoryRequest
+	4,  // 5: yandex.cloud.containerregistry.v1.RepositoryService.Upsert:input_type -> yandex.cloud.containerregistry.v1.UpsertRepositoryRequest
 	6,  // 6: yandex.cloud.containerregistry.v1.RepositoryService.Delete:input_type -> yandex.cloud.containerregistry.v1.DeleteRepositoryRequest
 	10, // 7: yandex.cloud.containerregistry.v1.RepositoryService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	11, // 8: yandex.cloud.containerregistry.v1.RepositoryService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
@@ -735,7 +735,7 @@ var file_yandex_cloud_containerregistry_v1_repository_service_proto_depIdxs = []
 	8,  // 10: yandex.cloud.containerregistry.v1.RepositoryService.GetByName:output_type -> yandex.cloud.containerregistry.v1.Repository
 	3,  // 11: yandex.cloud.containerregistry.v1.RepositoryService.List:output_type -> yandex.cloud.containerregistry.v1.ListRepositoriesResponse
 	12, // 12: yandex.cloud.containerregistry.v1.RepositoryService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	13, // 13: yandex.cloud.containerregistry.v1.RepositoryService.Create:output_type -> yandex.cloud.operation.Operation
+	13, // 13: yandex.cloud.containerregistry.v1.RepositoryService.Upsert:output_type -> yandex.cloud.operation.Operation
 	13, // 14: yandex.cloud.containerregistry.v1.RepositoryService.Delete:output_type -> yandex.cloud.operation.Operation
 	13, // 15: yandex.cloud.containerregistry.v1.RepositoryService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
 	13, // 16: yandex.cloud.containerregistry.v1.RepositoryService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
@@ -802,7 +802,7 @@ func file_yandex_cloud_containerregistry_v1_repository_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_containerregistry_v1_repository_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateRepositoryRequest); i {
+			switch v := v.(*UpsertRepositoryRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -814,7 +814,7 @@ func file_yandex_cloud_containerregistry_v1_repository_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_containerregistry_v1_repository_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateRepositoryMetadata); i {
+			switch v := v.(*UpsertRepositoryMetadata); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -894,8 +894,8 @@ type RepositoryServiceClient interface {
 	List(ctx context.Context, in *ListRepositoriesRequest, opts ...grpc.CallOption) (*ListRepositoriesResponse, error)
 	// Lists access bindings for the specified repository.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	// Creates a repository in the specified registry.
-	Create(ctx context.Context, in *CreateRepositoryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Upserts a repository in the specified registry.
+	Upsert(ctx context.Context, in *UpsertRepositoryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified repository.
 	Delete(ctx context.Context, in *DeleteRepositoryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Sets access bindings for the specified repository.
@@ -948,9 +948,9 @@ func (c *repositoryServiceClient) ListAccessBindings(ctx context.Context, in *ac
 	return out, nil
 }
 
-func (c *repositoryServiceClient) Create(ctx context.Context, in *CreateRepositoryRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *repositoryServiceClient) Upsert(ctx context.Context, in *UpsertRepositoryRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, "/yandex.cloud.containerregistry.v1.RepositoryService/Create", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.containerregistry.v1.RepositoryService/Upsert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -998,8 +998,8 @@ type RepositoryServiceServer interface {
 	List(context.Context, *ListRepositoriesRequest) (*ListRepositoriesResponse, error)
 	// Lists access bindings for the specified repository.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	// Creates a repository in the specified registry.
-	Create(context.Context, *CreateRepositoryRequest) (*operation.Operation, error)
+	// Upserts a repository in the specified registry.
+	Upsert(context.Context, *UpsertRepositoryRequest) (*operation.Operation, error)
 	// Deletes the specified repository.
 	Delete(context.Context, *DeleteRepositoryRequest) (*operation.Operation, error)
 	// Sets access bindings for the specified repository.
@@ -1024,8 +1024,8 @@ func (*UnimplementedRepositoryServiceServer) List(context.Context, *ListReposito
 func (*UnimplementedRepositoryServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
 }
-func (*UnimplementedRepositoryServiceServer) Create(context.Context, *CreateRepositoryRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+func (*UnimplementedRepositoryServiceServer) Upsert(context.Context, *UpsertRepositoryRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
 }
 func (*UnimplementedRepositoryServiceServer) Delete(context.Context, *DeleteRepositoryRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -1113,20 +1113,20 @@ func _RepositoryService_ListAccessBindings_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RepositoryService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateRepositoryRequest)
+func _RepositoryService_Upsert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertRepositoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RepositoryServiceServer).Create(ctx, in)
+		return srv.(RepositoryServiceServer).Upsert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/yandex.cloud.containerregistry.v1.RepositoryService/Create",
+		FullMethod: "/yandex.cloud.containerregistry.v1.RepositoryService/Upsert",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RepositoryServiceServer).Create(ctx, req.(*CreateRepositoryRequest))
+		return srv.(RepositoryServiceServer).Upsert(ctx, req.(*UpsertRepositoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1206,8 +1206,8 @@ var _RepositoryService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _RepositoryService_ListAccessBindings_Handler,
 		},
 		{
-			MethodName: "Create",
-			Handler:    _RepositoryService_Create_Handler,
+			MethodName: "Upsert",
+			Handler:    _RepositoryService_Upsert_Handler,
 		},
 		{
 			MethodName: "Delete",

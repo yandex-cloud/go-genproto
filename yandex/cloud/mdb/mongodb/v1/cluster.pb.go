@@ -748,10 +748,10 @@ type ClusterConfig struct {
 	// MongoDB feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
 	//
 	// Possible values:
-	// * `3.6` — persist data compatibility for version 3.6. After setting this option the data will not be compatible with 3.4 or lower.
-	// * `4.0` — persist data compatibility for version 4.0. After setting this option the data will not be compatible with 3.6 or lower.
-	// * `4.2` — persist data compatibility for version 4.2. After setting this option the data will not be compatible with 4.0 or lower.
-	// * `4.4` — persist data compatibility for version 4.4. After setting this option the data will not be compatible with 4.2 or lower.
+	// * `3.6` - persist data compatibility for version 3.6. After setting this option the data will not be compatible with 3.4 or lower.
+	// * `4.0` - persist data compatibility for version 4.0. After setting this option the data will not be compatible with 3.6 or lower.
+	// * `4.2` - persist data compatibility for version 4.2. After setting this option the data will not be compatible with 4.0 or lower.
+	// * `4.4` - persist data compatibility for version 4.4. After setting this option the data will not be compatible with 4.2 or lower.
 	FeatureCompatibilityVersion string `protobuf:"bytes,5,opt,name=feature_compatibility_version,json=featureCompatibilityVersion,proto3" json:"feature_compatibility_version,omitempty"`
 	// Configuration for MongoDB servers in the cluster.
 	//
@@ -1470,9 +1470,9 @@ type Resources struct {
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
 	// Type of the storage environment for the host.
 	// Possible values:
-	// * network-hdd — network HDD drive,
-	// * network-ssd — network SSD drive,
-	// * local-ssd — local SSD storage.
+	// * network-hdd - network HDD drive,
+	// * network-ssd - network SSD drive,
+	// * local-ssd - local SSD storage.
 	DiskTypeId string `protobuf:"bytes,3,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 }
 

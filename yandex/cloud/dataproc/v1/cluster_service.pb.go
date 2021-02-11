@@ -537,7 +537,7 @@ type CreateClusterRequest struct {
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the cluster. The name must be unique within the folder.
-	// The name can’t be changed after the Data Proc cluster is created.
+	// The name can't be changed after the Data Proc cluster is created.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`

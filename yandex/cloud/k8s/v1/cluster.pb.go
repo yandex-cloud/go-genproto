@@ -267,7 +267,7 @@ type Cluster struct {
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the Kubernetes cluster. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `key:value` pairs. Мaximum of 64 per resource.
+	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Status of the Kubernetes cluster.
 	Status Cluster_Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.k8s.v1.Cluster_Status" json:"status,omitempty"`

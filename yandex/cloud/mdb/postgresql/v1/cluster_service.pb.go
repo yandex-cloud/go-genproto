@@ -260,7 +260,7 @@ type ListClustersRequest struct {
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Мust be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -1258,8 +1258,8 @@ type RestoreClusterRequest struct {
 	// available just after the timestamp specified in the [time] field instead of just before.
 	//
 	// Possible values:
-	// * false (default) — the restore point refers to the first backup moment before [time].
-	// * true — the restore point refers to the first backup point after [time].
+	// * false (default) - the restore point refers to the first backup moment before [time].
+	// * true - the restore point refers to the first backup point after [time].
 	TimeInclusive bool `protobuf:"varint,3,opt,name=time_inclusive,json=timeInclusive,proto3" json:"time_inclusive,omitempty"`
 	// Name of the new PostgreSQL cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
@@ -2922,8 +2922,8 @@ type HostSpec struct {
 	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
 	//
 	// Possible values:
-	// * false — don't assign a public IP to the host.
-	// * true — the host should have a public IP address.
+	// * false - don't assign a public IP to the host.
+	// * true - the host should have a public IP address.
 	AssignPublicIp bool `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// [Host.name] of the host to be used as the replication source (for cascading replication).
 	ReplicationSource string `protobuf:"bytes,4,opt,name=replication_source,json=replicationSource,proto3" json:"replication_source,omitempty"`

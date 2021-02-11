@@ -2069,8 +2069,8 @@ type HostSpec struct {
 	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
 	//
 	// Possible values:
-	// * false — don't assign a public IP to the host.
-	// * true — the host should have a public IP address.
+	// * false - don't assign a public IP to the host.
+	// * true - the host should have a public IP address.
 	AssignPublicIp bool `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 }
 

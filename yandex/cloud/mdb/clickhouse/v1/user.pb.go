@@ -521,9 +521,9 @@ type UserSettings struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Restricts permissions for non-DDL queries. To restrict permissions for DDL queries, use [allow_ddl] instead.
-	// * **0** (default)—no restrictions.
-	// * **1**—only read data queries are allowed.
-	// * **2**—read data and change settings queries are allowed.
+	// * **0** (default)-no restrictions.
+	// * **1**-only read data queries are allowed.
+	// * **2**-read data and change settings queries are allowed.
 	//
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.tech/docs/en/operations/settings/permissions-for-queries/#settings_readonly).
 	Readonly *wrappers.Int64Value `protobuf:"bytes,1,opt,name=readonly,proto3" json:"readonly,omitempty"`
@@ -583,9 +583,9 @@ type UserSettings struct {
 	FallbackToStaleReplicasForDistributedQueries *wrappers.BoolValue `protobuf:"bytes,7,opt,name=fallback_to_stale_replicas_for_distributed_queries,json=fallbackToStaleReplicasForDistributedQueries,proto3" json:"fallback_to_stale_replicas_for_distributed_queries,omitempty"`
 	// Wait mode for asynchronous actions in **ALTER** queries on replicated tables:
 	//
-	// * **0**—do not wait for replicas.
-	// * **1**—only wait for own execution (default).
-	// * **2**—wait for all replicas.
+	// * **0**-do not wait for replicas.
+	// * **1**-only wait for own execution (default).
+	// * **2**-wait for all replicas.
 	//
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.tech/docs/en/sql-reference/statements/alter/#synchronicity-of-alter-queries).
 	ReplicationAlterPartitionsSync *wrappers.Int64Value `protobuf:"bytes,42,opt,name=replication_alter_partitions_sync,json=replicationAlterPartitionsSync,proto3" json:"replication_alter_partitions_sync,omitempty"`
@@ -671,7 +671,7 @@ type UserSettings struct {
 	// Limits the minimum number of bytes in a block to be inserted in a table by **INSERT** query.
 	// Blocks that are smaller than the specified value, will be squashed together into the bigger blocks.
 	//
-	// Minimal value: **0**, block squashing is disabled (default: **‭268435456‬‬**, 256 MB).
+	// Minimal value: **0**, block squashing is disabled (default: **268435456**, 256 MB).
 	MinInsertBlockSizeBytes *wrappers.Int64Value `protobuf:"bytes,49,opt,name=min_insert_block_size_bytes,json=minInsertBlockSizeBytes,proto3" json:"min_insert_block_size_bytes,omitempty"`
 	// Allows to form blocks of the specified size (in bytes) when inserting data in a table.
 	// This setting has effect only if server is creating such blocks by itself.
@@ -746,16 +746,16 @@ type UserSettings struct {
 	MaxBytesBeforeExternalSort *wrappers.Int64Value `protobuf:"bytes,75,opt,name=max_bytes_before_external_sort,json=maxBytesBeforeExternalSort,proto3" json:"max_bytes_before_external_sort,omitempty"`
 	// Sets the threshold of the number of keys, after that the two-level aggregation should be used.
 	//
-	// Minimal value: **0**, threshold is not set (default: **10000‬‬**).
+	// Minimal value: **0**, threshold is not set (default: **10000**).
 	GroupByTwoLevelThreshold *wrappers.Int64Value `protobuf:"bytes,76,opt,name=group_by_two_level_threshold,json=groupByTwoLevelThreshold,proto3" json:"group_by_two_level_threshold,omitempty"`
 	// Sets the threshold of the number of bytes, after that the two-level aggregation should be used.
 	//
-	// Minimal value: **0**, threshold is not set (default: **100000000‬‬**).
+	// Minimal value: **0**, threshold is not set (default: **100000000**).
 	GroupByTwoLevelThresholdBytes *wrappers.Int64Value `protobuf:"bytes,77,opt,name=group_by_two_level_threshold_bytes,json=groupByTwoLevelThresholdBytes,proto3" json:"group_by_two_level_threshold_bytes,omitempty"`
 	// Sets the priority of a query.
 	//
-	// * **0**—priority is not used.
-	// * **1**—the highest priority.
+	// * **0**-priority is not used.
+	// * **1**-the highest priority.
 	// * and so on. The higher the number, the lower a query's priority.
 	//
 	// This setting should be set up for each query individually.
@@ -799,14 +799,14 @@ type UserSettings struct {
 	//
 	// Minimal value and default value: **0**, no limitation is set.
 	MaxNetworkBandwidthForUser *wrappers.Int64Value `protobuf:"bytes,58,opt,name=max_network_bandwidth_for_user,json=maxNetworkBandwidthForUser,proto3" json:"max_network_bandwidth_for_user,omitempty"`
-	// If enabled, query is not executed if the ClickHouse can’t use index by date.
+	// If enabled, query is not executed if the ClickHouse can't use index by date.
 	// This setting has effect only for tables of the MergeTree family.
 	//
 	// Default value: **false** (setting is disabled, query executes even if ClickHouse can't use index by date).
 	//
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.tech/docs/en/operations/settings/settings/#settings-force_index_by_date).
 	ForceIndexByDate *wrappers.BoolValue `protobuf:"bytes,59,opt,name=force_index_by_date,json=forceIndexByDate,proto3" json:"force_index_by_date,omitempty"`
-	// If enabled, query is not executed if the ClickHouse can’t use index by primary key.
+	// If enabled, query is not executed if the ClickHouse can't use index by primary key.
 	// This setting has effect only for tables of the MergeTree family.
 	//
 	// Default value: **false** (setting is disabled, query executes even if ClickHouse can't use index by primary key).
@@ -825,8 +825,8 @@ type UserSettings struct {
 	MaxBytesToRead *wrappers.Int64Value `protobuf:"bytes,14,opt,name=max_bytes_to_read,json=maxBytesToRead,proto3" json:"max_bytes_to_read,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) while reading the data.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
 	ReadOverflowMode UserSettings_OverflowMode `protobuf:"varint,15,opt,name=read_overflow_mode,json=readOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"read_overflow_mode,omitempty"`
 	// Limits the maximum number of unique keys received from aggregation function.
 	// This setting helps to reduce RAM consumption while doing aggregation.
@@ -835,9 +835,9 @@ type UserSettings struct {
 	MaxRowsToGroupBy *wrappers.Int64Value `protobuf:"bytes,16,opt,name=max_rows_to_group_by,json=maxRowsToGroupBy,proto3" json:"max_rows_to_group_by,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) while doing aggregation.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
-	// * **any**—perform approximate **GROUP BY** operation by continuing aggregation for the keys that got into the set, but don’t add new keys to the set.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
+	// * **any**-perform approximate **GROUP BY** operation by continuing aggregation for the keys that got into the set, but don't add new keys to the set.
 	GroupByOverflowMode UserSettings_GroupByOverflowMode `protobuf:"varint,17,opt,name=group_by_overflow_mode,json=groupByOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_GroupByOverflowMode" json:"group_by_overflow_mode,omitempty"`
 	// Limits the maximum number of rows that can be read from a table for sorting.
 	// This setting helps to reduce RAM consumption.
@@ -851,8 +851,8 @@ type UserSettings struct {
 	MaxBytesToSort *wrappers.Int64Value `protobuf:"bytes,19,opt,name=max_bytes_to_sort,json=maxBytesToSort,proto3" json:"max_bytes_to_sort,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) while sorting.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
 	SortOverflowMode UserSettings_OverflowMode `protobuf:"varint,20,opt,name=sort_overflow_mode,json=sortOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"sort_overflow_mode,omitempty"`
 	// Limits the number of rows in the result.
 	// This limitation is also checked for subqueries and parts of distributed queries that run on remote servers.
@@ -866,8 +866,8 @@ type UserSettings struct {
 	MaxResultBytes *wrappers.Int64Value `protobuf:"bytes,22,opt,name=max_result_bytes,json=maxResultBytes,proto3" json:"max_result_bytes,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) while forming result.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
 	ResultOverflowMode UserSettings_OverflowMode `protobuf:"varint,23,opt,name=result_overflow_mode,json=resultOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"result_overflow_mode,omitempty"`
 	// Limits the maximum number of different rows when using **DISTINCT**.
 	//
@@ -877,8 +877,8 @@ type UserSettings struct {
 	MaxBytesInDistinct *wrappers.Int64Value `protobuf:"bytes,25,opt,name=max_bytes_in_distinct,json=maxBytesInDistinct,proto3" json:"max_bytes_in_distinct,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) while doing **DISCTINCT**.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
 	DistinctOverflowMode UserSettings_OverflowMode `protobuf:"varint,26,opt,name=distinct_overflow_mode,json=distinctOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"distinct_overflow_mode,omitempty"`
 	// Limits the maximum number of rows that can be passed to a remote server or saved in a temporary table when using **GLOBAL IN**.
 	//
@@ -891,8 +891,8 @@ type UserSettings struct {
 	MaxBytesToTransfer *wrappers.Int64Value `protobuf:"bytes,28,opt,name=max_bytes_to_transfer,json=maxBytesToTransfer,proto3" json:"max_bytes_to_transfer,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) while doing transfers.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
 	TransferOverflowMode UserSettings_OverflowMode `protobuf:"varint,29,opt,name=transfer_overflow_mode,json=transferOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"transfer_overflow_mode,omitempty"`
 	// Limits the maximum query execution time in milliseconds.
 	// At this moment, this limitation is not checked when passing one of the sorting stages, as well as merging and finalizing aggregation funictions.
@@ -901,8 +901,8 @@ type UserSettings struct {
 	MaxExecutionTime *wrappers.Int64Value `protobuf:"bytes,30,opt,name=max_execution_time,json=maxExecutionTime,proto3" json:"max_execution_time,omitempty"`
 	// Determines the behavior on exceeding [limits](https://clickhouse.tech/docs/en/operations/settings/query-complexity/#restrictions-on-query-complexity) of execution time.
 	//
-	// * **throw**—abort query execution, return an error.
-	// * **break**—stop query execution, return partial result.
+	// * **throw**-abort query execution, return an error.
+	// * **break**-stop query execution, return partial result.
 	TimeoutOverflowMode UserSettings_OverflowMode `protobuf:"varint,31,opt,name=timeout_overflow_mode,json=timeoutOverflowMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_OverflowMode" json:"timeout_overflow_mode,omitempty"`
 	// Limit on the number of rows in the set resulting from the execution of the IN section.
 	MaxRowsInSet *wrappers.Int64Value `protobuf:"bytes,87,opt,name=max_rows_in_set,json=maxRowsInSet,proto3" json:"max_rows_in_set,omitempty"`
@@ -1004,8 +1004,8 @@ type UserSettings struct {
 	OutputFormatJsonQuoteDenormals *wrappers.BoolValue `protobuf:"bytes,64,opt,name=output_format_json_quote_denormals,json=outputFormatJsonQuoteDenormals,proto3" json:"output_format_json_quote_denormals,omitempty"`
 	// Determines whether to use LowCardinality type in Native format.
 	//
-	// * **true** (default)—yes, use.
-	// * **false**—convert LowCardinality columns to regular columns when doing **SELECT**, and convert regular columns to LowCardinality when doing **INSERT**.
+	// * **true** (default)-yes, use.
+	// * **false**-convert LowCardinality columns to regular columns when doing **SELECT**, and convert regular columns to LowCardinality when doing **INSERT**.
 	//
 	// LowCardinality columns (aka sparse columns) store data in more effective way, compared to regular columns, by using hash tables.
 	// If data to insert suits this storage format, ClickHouse will place them into LowCardinality column.
@@ -1019,8 +1019,8 @@ type UserSettings struct {
 	LowCardinalityAllowInNativeFormat *wrappers.BoolValue `protobuf:"bytes,78,opt,name=low_cardinality_allow_in_native_format,json=lowCardinalityAllowInNativeFormat,proto3" json:"low_cardinality_allow_in_native_format,omitempty"`
 	// Enables returning of empty result when aggregating without keys (with **GROUP BY** operation absent) on empty set (e.g., **SELECT count(*) FROM table WHERE 0**).
 	//
-	// * **true**—ClickHouse will return an empty result for such queries.
-	// * **false** (default)—ClickHouse will return a single-line result consisting of **NULL** values for aggregation functions, in accordance with SQL standard.
+	// * **true**-ClickHouse will return an empty result for such queries.
+	// * **false** (default)-ClickHouse will return a single-line result consisting of **NULL** values for aggregation functions, in accordance with SQL standard.
 	EmptyResultForAggregationByEmptySet *wrappers.BoolValue `protobuf:"bytes,79,opt,name=empty_result_for_aggregation_by_empty_set,json=emptyResultForAggregationByEmptySet,proto3" json:"empty_result_for_aggregation_by_empty_set,omitempty"`
 	JoinedSubqueryRequiresAlias         *wrappers.BoolValue `protobuf:"bytes,93,opt,name=joined_subquery_requires_alias,json=joinedSubqueryRequiresAlias,proto3" json:"joined_subquery_requires_alias,omitempty"`
 	JoinUseNulls                        *wrappers.BoolValue `protobuf:"bytes,94,opt,name=join_use_nulls,json=joinUseNulls,proto3" json:"join_use_nulls,omitempty"`

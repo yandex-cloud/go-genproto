@@ -97,7 +97,7 @@ type Registry struct {
 	Status Registry_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.Registry_Status" json:"status,omitempty"`
 	// Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Resource labels as `key:value` pairs. Мaximum of 64 per resource.
+	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 

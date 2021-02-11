@@ -9,3 +9,11 @@ func (m *IpPermission) SetAction(v IpPermission_Action) {
 func (m *IpPermission) SetIp(v string) {
 	m.Ip = v
 }
+
+func (m *IpPermissionDelta) SetAction(v IpPermissionAction) {
+	m.Action = v
+}
+
+func (m *IpPermissionDelta) SetIpPermission(v *IpPermission) {
+	m.IpPermission = v
+}

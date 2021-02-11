@@ -79,7 +79,7 @@ func (Permission_AccessRole) EnumDescriptor() ([]byte, []int) {
 }
 
 // A Kafka user.
-// For more information, see the [Operations → Accounts](/docs/managed-kafka/operations/cluster-accounts) section of the documentation.
+// For more information, see the [Operations -> Accounts](/docs/managed-kafka/operations/cluster-accounts) section of the documentation.
 type User struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

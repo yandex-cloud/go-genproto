@@ -138,7 +138,7 @@ func (TopicConfig2_6_CleanupPolicy) EnumDescriptor() ([]byte, []int) {
 }
 
 // An Kafka topic.
-// For more information, see the [Concepts → Topics and partitions](/docs/managed-kafka/concepts/topics) section of the documentation.
+// For more information, see the [Concepts -> Topics and partitions](/docs/managed-kafka/concepts/topics) section of the documentation.
 type Topic struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

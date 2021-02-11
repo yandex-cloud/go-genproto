@@ -805,8 +805,8 @@ type MongodConfig3_6_Storage_Journal struct {
 
 	// Whether the journal is enabled or disabled.
 	// Possible values:
-	// * true (default) — the journal is enabled.
-	// * false — the journal is disabled.
+	// * true (default) - the journal is enabled.
+	// * false - the journal is disabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Commit interval between journal operations, in milliseconds.
 	// Default: 100.

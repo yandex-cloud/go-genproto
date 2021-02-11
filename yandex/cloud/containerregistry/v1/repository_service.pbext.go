@@ -42,11 +42,11 @@ func (m *ListRepositoriesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-func (m *CreateRepositoryRequest) SetName(v string) {
+func (m *UpsertRepositoryRequest) SetName(v string) {
 	m.Name = v
 }
 
-func (m *CreateRepositoryMetadata) SetRepositoryId(v string) {
+func (m *UpsertRepositoryMetadata) SetRepositoryId(v string) {
 	m.RepositoryId = v
 }
 

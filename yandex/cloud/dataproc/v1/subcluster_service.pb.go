@@ -248,7 +248,7 @@ type CreateSubclusterRequest struct {
 	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the subcluster. The name must be unique within the cluster. The name can’t be
+	// Name of the subcluster. The name must be unique within the cluster. The name can't be
 	// changed when the subcluster is created.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Role that is fulfilled by hosts of the subcluster.
