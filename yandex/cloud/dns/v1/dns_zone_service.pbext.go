@@ -123,20 +123,16 @@ func (m *ListDnsZoneRecordSetsRequest) SetDnsZoneId(v string) {
 	m.DnsZoneId = v
 }
 
-func (m *ListDnsZoneRecordSetsRequest) SetSubDomain(v string) {
-	m.SubDomain = v
-}
-
-func (m *ListDnsZoneRecordSetsRequest) SetType(v string) {
-	m.Type = v
-}
-
 func (m *ListDnsZoneRecordSetsRequest) SetPageSize(v int64) {
 	m.PageSize = v
 }
 
 func (m *ListDnsZoneRecordSetsRequest) SetPageToken(v string) {
 	m.PageToken = v
+}
+
+func (m *ListDnsZoneRecordSetsRequest) SetFilter(v string) {
+	m.Filter = v
 }
 
 func (m *ListDnsZoneRecordSetsResponse) SetRecordSets(v []*RecordSet) {

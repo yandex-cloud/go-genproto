@@ -219,7 +219,7 @@ type Permission struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the topic that the permission grants access to.
+	// Name or prefix-pattern with wildcard for the topic that the permission grants access to.
 	//
 	// To get the topic name, make a [TopicService.List] request.
 	TopicName string `protobuf:"bytes,1,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
