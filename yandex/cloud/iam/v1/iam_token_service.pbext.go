@@ -31,3 +31,7 @@ func (m *CreateIamTokenResponse) SetIamToken(v string) {
 func (m *CreateIamTokenResponse) SetExpiresAt(v *timestamp.Timestamp) {
 	m.ExpiresAt = v
 }
+
+func (m *CreateIamTokenForServiceAccountRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}

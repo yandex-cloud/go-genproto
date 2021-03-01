@@ -79,6 +79,10 @@ func (m *ClusterConfig) SetElasticsearch(v *Elasticsearch) {
 	m.Elasticsearch = v
 }
 
+func (m *ClusterConfig) SetEdition(v string) {
+	m.Edition = v
+}
+
 func (m *Elasticsearch) SetDataNode(v *Elasticsearch_DataNode) {
 	m.DataNode = v
 }

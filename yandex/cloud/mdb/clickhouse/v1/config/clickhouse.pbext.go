@@ -182,6 +182,10 @@ func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMinSpaceInPool(v *wrapp
 	m.MaxBytesToMergeAtMinSpaceInPool = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMaxSpaceInPool(v *wrappers.Int64Value) {
+	m.MaxBytesToMergeAtMaxSpaceInPool = v
+}
+
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
 	m.SecurityProtocol = v
 }

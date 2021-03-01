@@ -177,3 +177,15 @@ func (m *Access) SetDataLens(v bool) {
 func (m *Access) SetWebSql(v bool) {
 	m.WebSql = v
 }
+
+func (m *PerformanceDiagnostics) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *PerformanceDiagnostics) SetSessionsSamplingInterval(v int64) {
+	m.SessionsSamplingInterval = v
+}
+
+func (m *PerformanceDiagnostics) SetStatementsSamplingInterval(v int64) {
+	m.StatementsSamplingInterval = v
+}
