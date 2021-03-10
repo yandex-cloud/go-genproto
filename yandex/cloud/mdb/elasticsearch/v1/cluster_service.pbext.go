@@ -349,6 +349,10 @@ func (m *ConfigSpec) SetEdition(v string) {
 	m.Edition = v
 }
 
+func (m *ConfigSpec) SetAdminPassword(v string) {
+	m.AdminPassword = v
+}
+
 func (m *AddClusterHostsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

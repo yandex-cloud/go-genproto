@@ -103,6 +103,10 @@ func (m *Version) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
 
+func (m *Version) SetNamedServiceAccounts(v map[string]string) {
+	m.NamedServiceAccounts = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

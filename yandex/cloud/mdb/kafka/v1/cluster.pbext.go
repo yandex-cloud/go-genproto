@@ -95,6 +95,10 @@ func (m *ConfigSpec) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
 }
 
+func (m *ConfigSpec) SetUnmanagedTopics(v bool) {
+	m.UnmanagedTopics = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {
@@ -181,6 +185,10 @@ func (m *KafkaConfig2_1) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
 	m.SocketReceiveBufferBytes = v
 }
 
+func (m *KafkaConfig2_1) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
+	m.AutoCreateTopicsEnable = v
+}
+
 func (m *KafkaConfig2_6) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -227,6 +235,10 @@ func (m *KafkaConfig2_6) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
 
 func (m *KafkaConfig2_6) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
 	m.SocketReceiveBufferBytes = v
+}
+
+func (m *KafkaConfig2_6) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
+	m.AutoCreateTopicsEnable = v
 }
 
 func (m *Host) SetName(v string) {

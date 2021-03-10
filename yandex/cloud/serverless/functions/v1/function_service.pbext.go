@@ -231,6 +231,10 @@ func (m *CreateFunctionVersionRequest) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
 
+func (m *CreateFunctionVersionRequest) SetNamedServiceAccounts(v map[string]string) {
+	m.NamedServiceAccounts = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }
