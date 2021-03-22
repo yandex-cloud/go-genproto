@@ -451,9 +451,9 @@ type Cluster struct {
 	Health Cluster_Health `protobuf:"varint,11,opt,name=health,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Health" json:"health,omitempty"`
 	// Current state of the cluster.
 	Status Cluster_Status `protobuf:"varint,12,opt,name=status,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Status" json:"status,omitempty"`
-	// Window of maintenance operations.
+	// Maintenance window for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,13,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// Maintenance operation planned at nearest maintenance_window.
+	// Planned maintenance operation to be started for the cluster within the nearest [maintenance_window].
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,14,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,15,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`

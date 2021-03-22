@@ -456,9 +456,9 @@ type Cluster struct {
 	Status Cluster_Status `protobuf:"varint,12,opt,name=status,proto3,enum=yandex.cloud.mdb.clickhouse.v1.Cluster_Status" json:"status,omitempty"`
 	// ID of the service account used for access to Yandex Object Storage.
 	ServiceAccountId string `protobuf:"bytes,13,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Window of maintenance operations.
+	// Maintenance window for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// Maintenance operation planned at nearest maintenance_window.
+	// Planned maintenance operation to be started for the cluster within the nearest [maintenance_window].
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,15,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,16,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -856,13 +856,13 @@ type ShardGroup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the shard group
+	// Name of the shard group.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the cluster that the shard belongs to.
+	// ID of the ClickHouse cluster that the shard group belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Description of the ClickHouse cluster shard group. 0-256 characters long.
+	// Description of the shard group. 0-256 characters long.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// List of shard names contained in shard group
+	// List of shard names contained in the shard group.
 	ShardNames []string `protobuf:"bytes,4,rep,name=shard_names,json=shardNames,proto3" json:"shard_names,omitempty"`
 }
 

@@ -42,9 +42,12 @@ type RescheduleMaintenanceRequest_RescheduleType int32
 
 const (
 	RescheduleMaintenanceRequest_RESCHEDULE_TYPE_UNSPECIFIED RescheduleMaintenanceRequest_RescheduleType = 0
-	RescheduleMaintenanceRequest_IMMEDIATE                   RescheduleMaintenanceRequest_RescheduleType = 1
-	RescheduleMaintenanceRequest_NEXT_AVAILABLE_WINDOW       RescheduleMaintenanceRequest_RescheduleType = 2
-	RescheduleMaintenanceRequest_SPECIFIC_TIME               RescheduleMaintenanceRequest_RescheduleType = 3
+	// Start the maintenance operation immediately.
+	RescheduleMaintenanceRequest_IMMEDIATE RescheduleMaintenanceRequest_RescheduleType = 1
+	// Start the maintenance operation within the next available maintenance window.
+	RescheduleMaintenanceRequest_NEXT_AVAILABLE_WINDOW RescheduleMaintenanceRequest_RescheduleType = 2
+	// Start the maintenance operation at the specific time.
+	RescheduleMaintenanceRequest_SPECIFIC_TIME RescheduleMaintenanceRequest_RescheduleType = 3
 )
 
 // Enum value maps for RescheduleMaintenanceRequest_RescheduleType.
@@ -605,7 +608,7 @@ type UpdateClusterRequest struct {
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the service account used for access to Yandex Object Storage.
 	ServiceAccountId string `protobuf:"bytes,7,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Window of maintenance operations.
+	// New maintenance window settings for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,8,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,9,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -1580,11 +1583,11 @@ type RescheduleMaintenanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the ClickHouse cluster to maintenance reschedule.
+	// ID of the ClickHouse cluster to reschedule the maintenance operation for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The type of reschedule request.
+	// The type of reschedule request.
 	RescheduleType RescheduleMaintenanceRequest_RescheduleType `protobuf:"varint,2,opt,name=reschedule_type,json=rescheduleType,proto3,enum=yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest_RescheduleType" json:"reschedule_type,omitempty"`
-	// The time for SPECIFIC_TIME reschedule. Limited by two weeks since first time scheduled.
+	// The time until which this maintenance operation should be delayed. The value should be ahead of the first time when the maintenance operation has been scheduled for no more than two weeks. The value can also point to the past moment of time if [reschedule_type.IMMEDIATE] reschedule type is chosen.
 	DelayedUntil *timestamp.Timestamp `protobuf:"bytes,3,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 
@@ -1641,6 +1644,7 @@ func (x *RescheduleMaintenanceRequest) GetDelayedUntil() *timestamp.Timestamp {
 	return nil
 }
 
+// Rescheduled maintenance operation metadata.
 type RescheduleMaintenanceMetadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1648,7 +1652,7 @@ type RescheduleMaintenanceMetadata struct {
 
 	// Required. ID of the ClickHouse cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. New time of the planned maintenance. Can be in the past for rescheduled to "IMMEDIATE".
+	// Required. The time until which this maintenance operation is to be delayed.
 	DelayedUntil *timestamp.Timestamp `protobuf:"bytes,4,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 
@@ -3310,9 +3314,12 @@ type GetClusterShardGroupRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the cluster that the shard group belongs to.
+	//
+	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard group to request information about.
-	// To get the name of a shard group , use a [ClusterService.ListShardGroups] request.
+	//
+	// To get the name of a shard group, make a [ClusterService.ListShardGroups] request.
 	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
 }
 
@@ -3368,13 +3375,16 @@ type ListClusterShardGroupsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the cluster that the shard group belongs to.
+	//
+	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterShardGroupsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the service returns a [ListClusterShardGroupsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListClusterShardGroupsResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token.
+	//
+	// To get the next page of results, set [page_token] to the [ListClusterShardGroupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -3436,12 +3446,12 @@ type ListClusterShardGroupsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of ClickHouse Cluster shard groups.
+	// List of ClickHouse cluster's shard groups.
 	ShardGroups []*ShardGroup `protobuf:"bytes,1,rep,name=shard_groups,json=shardGroups,proto3" json:"shard_groups,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClusterShardGroupsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListClusterShardGroupsRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// This token allows you to get the next page of results for list requests.
+	//
+	// If the number of results is larger than [ListClusterShardGroupsRequest.page_size], use the [next_page_token] as the value for the [ListClusterShardGroupsRequest.page_token] parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -3497,13 +3507,16 @@ type CreateClusterShardGroupRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the ClickHouse cluster to add a shard group to.
-	// To get the ClickHouse cluster ID, use a [ClusterService.List] request.
+	//
+	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name for the new shard group.
 	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
-	// Description of the ClickHouse cluster shard group. 0-256 characters long.
+	// Description of the new shard group. 0-256 characters long.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// List of shard names that belongs to the new group.
+	// List of shard names that should be put into the new group.
+	//
+	// To get the list, make a [ClusterService.ListShardGroups] request.
 	ShardNames []string `protobuf:"bytes,4,rep,name=shard_names,json=shardNames,proto3" json:"shard_names,omitempty"`
 }
 
@@ -3572,9 +3585,9 @@ type CreateClusterShardGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the ClickHouse cluster to add a shard group to.
+	// ID of the cluster to add a shard group to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name for the new shard group.
+	// Name of the shard group that is being added.
 	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
 }
 
@@ -3629,15 +3642,18 @@ type UpdateClusterShardGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the cluster that contains the shard group being updated.
+	// ID of the ClickHouse cluster that contains the shard group to update.
+	//
+	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard group that should be updated.
-	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
-	// Field mask that specifies which attributes of the ClickHouse shard group should be updated.
-	UpdateMask *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Description of the ClickHouse cluster shard group. 0-256 characters long.
+	//
+	// To get the name, make a [ClusterService.ListShardGroups] request.
+	ShardGroupName string                `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
+	UpdateMask     *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Updated description of the shard group. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// Updated list of shard names that belongs to the new group.
+	// Updated list of shard names that belongs to the shard group.
 	ShardNames []string `protobuf:"bytes,5,rep,name=shard_names,json=shardNames,proto3" json:"shard_names,omitempty"`
 }
 
@@ -3715,7 +3731,7 @@ type UpdateClusterShardGroupMetadata struct {
 
 	// ID of the cluster that contains the shard group being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the shard group that should be updated.
+	// Name of the shard group that is being updated.
 	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
 }
 
@@ -3770,9 +3786,13 @@ type DeleteClusterShardGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the ClickHouse cluster the shard group belongs to.
+	// ID of the ClickHouse cluster that contains the shard group to delete.
+	//
+	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard group that should be deleted.
+	//
+	// To get the name, make a [ClusterService.ListShardGroups] request.
 	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
 }
 
@@ -3827,9 +3847,9 @@ type DeleteClusterShardGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the ClickHouse cluster the shard group belongs to.
+	// ID of the cluster that contains the shard group being deleted.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the shard group that should be deleted.
+	// Name of the shard group that is being deleted.
 	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
 }
 
@@ -6865,7 +6885,7 @@ type ClusterServiceClient interface {
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new ClickHouse cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Reschedule planned maintenance operation.
+	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified ClickHouse cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
@@ -6897,7 +6917,7 @@ type ClusterServiceClient interface {
 	ListShardGroups(ctx context.Context, in *ListClusterShardGroupsRequest, opts ...grpc.CallOption) (*ListClusterShardGroupsResponse, error)
 	// Creates a new shard group in the specified cluster.
 	CreateShardGroup(ctx context.Context, in *CreateClusterShardGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Modifies the specified shard group.
+	// Updates the specified shard group.
 	UpdateShardGroup(ctx context.Context, in *UpdateClusterShardGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard group.
 	DeleteShardGroup(ctx context.Context, in *DeleteClusterShardGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -7244,7 +7264,7 @@ type ClusterServiceServer interface {
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
 	// Creates a new ClickHouse cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
-	// Reschedule planned maintenance operation.
+	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified ClickHouse cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
@@ -7276,7 +7296,7 @@ type ClusterServiceServer interface {
 	ListShardGroups(context.Context, *ListClusterShardGroupsRequest) (*ListClusterShardGroupsResponse, error)
 	// Creates a new shard group in the specified cluster.
 	CreateShardGroup(context.Context, *CreateClusterShardGroupRequest) (*operation.Operation, error)
-	// Modifies the specified shard group.
+	// Updates the specified shard group.
 	UpdateShardGroup(context.Context, *UpdateClusterShardGroupRequest) (*operation.Operation, error)
 	// Deletes the specified shard group.
 	DeleteShardGroup(context.Context, *DeleteClusterShardGroupRequest) (*operation.Operation, error)

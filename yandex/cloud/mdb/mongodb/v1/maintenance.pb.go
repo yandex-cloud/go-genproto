@@ -91,11 +91,14 @@ func (WeeklyMaintenanceWindow_WeekDay) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mongodb_v1_maintenance_proto_rawDescGZIP(), []int{2, 0}
 }
 
+// A maintenance window settings.
 type MaintenanceWindow struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The maintenance policy in effect.
+	//
 	// Types that are assignable to Policy:
 	//	*MaintenanceWindow_Anytime
 	//	*MaintenanceWindow_WeeklyMaintenanceWindow
@@ -160,10 +163,12 @@ type isMaintenanceWindow_Policy interface {
 }
 
 type MaintenanceWindow_Anytime struct {
+	// Maintenance operation can be scheduled anytime.
 	Anytime *AnytimeMaintenanceWindow `protobuf:"bytes,1,opt,name=anytime,proto3,oneof"`
 }
 
 type MaintenanceWindow_WeeklyMaintenanceWindow struct {
+	// Maintenance operation can be scheduled on a weekly basis.
 	WeeklyMaintenanceWindow *WeeklyMaintenanceWindow `protobuf:"bytes,2,opt,name=weekly_maintenance_window,json=weeklyMaintenanceWindow,proto3,oneof"`
 }
 
@@ -209,13 +214,15 @@ func (*AnytimeMaintenanceWindow) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mongodb_v1_maintenance_proto_rawDescGZIP(), []int{1}
 }
 
+// Weelky maintenance window settings.
 type WeeklyMaintenanceWindow struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Day of the week (in `DDD` format).
 	Day WeeklyMaintenanceWindow_WeekDay `protobuf:"varint,1,opt,name=day,proto3,enum=yandex.cloud.mdb.mongodb.v1.WeeklyMaintenanceWindow_WeekDay" json:"day,omitempty"`
-	// Hour of the day in UTC.
+	// Hour of the day in UTC (in `HH` format).
 	Hour int64 `protobuf:"varint,2,opt,name=hour,proto3" json:"hour,omitempty"`
 }
 
@@ -265,12 +272,15 @@ func (x *WeeklyMaintenanceWindow) GetHour() int64 {
 	return 0
 }
 
+// A planned maintenance operation.
 type MaintenanceOperation struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Info         string               `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
+	// Information about this maintenance operation.
+	Info string `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
+	// Time until which this maintenance operation is delayed.
 	DelayedUntil *timestamp.Timestamp `protobuf:"bytes,2,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 

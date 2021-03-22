@@ -66,6 +66,10 @@ func (m *Cluster) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *Cluster) SetHostGroupIds(v []string) {
+	m.HostGroupIds = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

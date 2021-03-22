@@ -42,9 +42,12 @@ type RescheduleMaintenanceRequest_RescheduleType int32
 
 const (
 	RescheduleMaintenanceRequest_RESCHEDULE_TYPE_UNSPECIFIED RescheduleMaintenanceRequest_RescheduleType = 0
-	RescheduleMaintenanceRequest_IMMEDIATE                   RescheduleMaintenanceRequest_RescheduleType = 1
-	RescheduleMaintenanceRequest_NEXT_AVAILABLE_WINDOW       RescheduleMaintenanceRequest_RescheduleType = 2
-	RescheduleMaintenanceRequest_SPECIFIC_TIME               RescheduleMaintenanceRequest_RescheduleType = 3
+	// Start the maintenance operation immediately.
+	RescheduleMaintenanceRequest_IMMEDIATE RescheduleMaintenanceRequest_RescheduleType = 1
+	// Start the maintenance operation within the next available maintenance window.
+	RescheduleMaintenanceRequest_NEXT_AVAILABLE_WINDOW RescheduleMaintenanceRequest_RescheduleType = 2
+	// Start the maintenance operation at the specific time.
+	RescheduleMaintenanceRequest_SPECIFIC_TIME RescheduleMaintenanceRequest_RescheduleType = 3
 )
 
 // Enum value maps for RescheduleMaintenanceRequest_RescheduleType.
@@ -594,7 +597,7 @@ type UpdateClusterRequest struct {
 	ConfigSpec *ConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
 	// New name for the cluster.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// Window of maintenance operations.
+	// New maintenance window settings for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,7,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,8,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -1448,11 +1451,11 @@ type RescheduleMaintenanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the MongoDB cluster to maintenance reschedule.
+	// ID of the MongoDB cluster to reschedule the maintenance operation for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The type of reschedule request.
+	// The type of reschedule request.
 	RescheduleType RescheduleMaintenanceRequest_RescheduleType `protobuf:"varint,2,opt,name=reschedule_type,json=rescheduleType,proto3,enum=yandex.cloud.mdb.mongodb.v1.RescheduleMaintenanceRequest_RescheduleType" json:"reschedule_type,omitempty"`
-	// The time for SPECIFIC_TIME reschedule. Limited by two weeks since first time scheduled.
+	// The time until which this maintenance operation should be delayed. The value should be ahead of the first time when the maintenance operation has been scheduled for no more than two weeks. The value can also point to the past moment of time if [reschedule_type.IMMEDIATE] reschedule type is chosen.
 	DelayedUntil *timestamp.Timestamp `protobuf:"bytes,3,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 
@@ -1509,6 +1512,7 @@ func (x *RescheduleMaintenanceRequest) GetDelayedUntil() *timestamp.Timestamp {
 	return nil
 }
 
+// Rescheduled maintenance operation metadata.
 type RescheduleMaintenanceMetadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1516,7 +1520,7 @@ type RescheduleMaintenanceMetadata struct {
 
 	// Required. ID of the MongoDB cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. New time of the planned maintenance. Can be in the past for rescheduled to "IMMEDIATE".
+	// Required. The time until which this maintenance operation is to be delayed.
 	DelayedUntil *timestamp.Timestamp `protobuf:"bytes,4,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 
@@ -7585,7 +7589,7 @@ type ClusterServiceClient interface {
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new MongoDB cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Reschedule planned maintenance operation.
+	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified MongoDB cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
@@ -7612,9 +7616,9 @@ type ClusterServiceClient interface {
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Resetup hosts.
+	// Resetups hosts.
 	ResetupHosts(ctx context.Context, in *ResetupHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Restart hosts.
+	// Restarts hosts.
 	RestartHosts(ctx context.Context, in *RestartHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -7899,7 +7903,7 @@ type ClusterServiceServer interface {
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
 	// Creates a new MongoDB cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
-	// Reschedule planned maintenance operation.
+	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified MongoDB cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
@@ -7926,9 +7930,9 @@ type ClusterServiceServer interface {
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)
-	// Resetup hosts.
+	// Resetups hosts.
 	ResetupHosts(context.Context, *ResetupHostsRequest) (*operation.Operation, error)
-	// Restart hosts.
+	// Restarts hosts.
 	RestartHosts(context.Context, *RestartHostsRequest) (*operation.Operation, error)
 }
 

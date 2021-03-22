@@ -459,9 +459,9 @@ type Cluster struct {
 	Status Cluster_Status `protobuf:"varint,12,opt,name=status,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Status" json:"status,omitempty"`
 	// Redis cluster mode on/off.
 	Sharded bool `protobuf:"varint,13,opt,name=sharded,proto3" json:"sharded,omitempty"`
-	// Window of maintenance operations.
+	// Maintenance window for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// Maintenance operation planned at nearest maintenance_window.
+	// Planned maintenance operation to be started for the cluster within the nearest [maintenance_window].
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,15,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,16,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
