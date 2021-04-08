@@ -305,6 +305,10 @@ func (m *Access) SetWebSql(v bool) {
 	m.WebSql = v
 }
 
+func (m *Access) SetServerless(v bool) {
+	m.Serverless = v
+}
+
 func (m *PerformanceDiagnostics) SetEnabled(v bool) {
 	m.Enabled = v
 }
