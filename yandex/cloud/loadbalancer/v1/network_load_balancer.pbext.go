@@ -86,6 +86,10 @@ func (m *Listener) SetSubnetId(v string) {
 	m.SubnetId = v
 }
 
+func (m *Listener) SetIpVersion(v IpVersion) {
+	m.IpVersion = v
+}
+
 func (m *TargetState) SetSubnetId(v string) {
 	m.SubnetId = v
 }

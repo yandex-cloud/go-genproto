@@ -102,6 +102,10 @@ func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
 
+func (m *ClusterConfig) SetAccess(v *Access) {
+	m.Access = v
+}
+
 func (m *Host) SetName(v string) {
 	m.Name = v
 }
@@ -156,4 +160,8 @@ func (m *Resources) SetDiskSize(v int64) {
 
 func (m *Resources) SetDiskTypeId(v string) {
 	m.DiskTypeId = v
+}
+
+func (m *Access) SetDataLens(v bool) {
+	m.DataLens = v
 }

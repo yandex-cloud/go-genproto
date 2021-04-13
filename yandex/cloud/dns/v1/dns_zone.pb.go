@@ -22,20 +22,33 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A DNS zone. For details about the concept, see [DNS zones](/docs/dns/concepts/dns-zone).
 type DnsZone struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                string               `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId          string               `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	CreatedAt         *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Name              string               `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description       string               `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels            map[string]string    `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Zone              string               `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
-	PrivateVisibility *PrivateVisibility   `protobuf:"bytes,8,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
-	PublicVisibility  *PublicVisibility    `protobuf:"bytes,9,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
+	// ID of the DNS zone. Generated at creation time.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the DNS zone belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Name of the DNS zone.
+	// The name is unique within the folder.
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the DNS zone.
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// DNS zone labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// DNS zone suffix.
+	Zone string `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
+	// Privately visible zone settings.
+	// Specifies whether records within the zone are visible from a VPC networks only.
+	PrivateVisibility *PrivateVisibility `protobuf:"bytes,8,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
+	// Publicly visible zone settings.
+	// Indicates whether records within the zone are publicly visible.
+	PublicVisibility *PublicVisibility `protobuf:"bytes,9,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
 }
 
 func (x *DnsZone) Reset() {
@@ -133,15 +146,19 @@ func (x *DnsZone) GetPublicVisibility() *PublicVisibility {
 	return nil
 }
 
-// name + type is a unique record set identifier
+// A record set. For details about the concept, see [Resource record](/docs/dns/concepts/resource-record).
 type RecordSet struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type string   `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Ttl  int64    `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	// Domain name.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Record type.
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// Time to live in seconds.
+	Ttl int64 `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	// Data of the record set.
 	Data []string `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`
 }
 
@@ -205,11 +222,13 @@ func (x *RecordSet) GetData() []string {
 	return nil
 }
 
+// Configuration for privately visible zones.
 type PrivateVisibility struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Network IDs.
 	NetworkIds []string `protobuf:"bytes,1,rep,name=network_ids,json=networkIds,proto3" json:"network_ids,omitempty"`
 }
 
@@ -252,6 +271,7 @@ func (x *PrivateVisibility) GetNetworkIds() []string {
 	return nil
 }
 
+// Configuration for publicly visible zones.
 type PublicVisibility struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

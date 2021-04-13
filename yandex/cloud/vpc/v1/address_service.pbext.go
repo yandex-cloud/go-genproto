@@ -146,3 +146,15 @@ func (m *ListAddressOperationsResponse) SetOperations(v []*operation.Operation) 
 func (m *ListAddressOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *MoveAddressRequest) SetAddressId(v string) {
+	m.AddressId = v
+}
+
+func (m *MoveAddressRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveAddressMetadata) SetAddressId(v string) {
+	m.AddressId = v
+}

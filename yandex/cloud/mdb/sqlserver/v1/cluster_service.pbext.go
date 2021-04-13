@@ -383,3 +383,7 @@ func (m *ConfigSpec) SetResources(v *Resources) {
 func (m *ConfigSpec) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
+
+func (m *ConfigSpec) SetAccess(v *Access) {
+	m.Access = v
+}

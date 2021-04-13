@@ -35,6 +35,9 @@ type GetDnsZoneRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone to return.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 }
 
@@ -82,10 +85,25 @@ type ListDnsZonesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// ID of the folder to list DNS zones in.
+	//
+	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListDnsZonesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListDnsZonesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// A filter expression that filters DNS zones listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on the [DnsZone.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value or lists of values. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name=my-dns-zone`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListDnsZonesRequest) Reset() {
@@ -153,8 +171,14 @@ type ListDnsZonesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DnsZones      []*DnsZone `protobuf:"bytes,1,rep,name=dns_zones,json=dnsZones,proto3" json:"dns_zones,omitempty"`
-	NextPageToken string     `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of DNS zones in the specified folder.
+	DnsZones []*DnsZone `protobuf:"bytes,1,rep,name=dns_zones,json=dnsZones,proto3" json:"dns_zones,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDnsZonesRequest.page_size], use `next_page_token` as the value
+	// for the [ListDnsZonesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListDnsZonesResponse) Reset() {
@@ -208,14 +232,25 @@ type CreateDnsZoneRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId    string            `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name        string            `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Zone        string            `protobuf:"bytes,5,opt,name=zone,proto3" json:"zone,omitempty"`
-	// at least one of two visibility fields must be set
+	// ID of the folder to create DNS zones in.
+	//
+	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the DNS zone.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the DNS zone.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// DNS zone labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// DNS zone suffix.
+	Zone string `protobuf:"bytes,5,opt,name=zone,proto3" json:"zone,omitempty"`
+	// Privately visible zone settings.
+	// At least one of two visibility fields must be set.
 	PrivateVisibility *PrivateVisibility `protobuf:"bytes,6,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
-	PublicVisibility  *PublicVisibility  `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
+	// Publicly visible zone settings.
+	// At least one of two visibility fields must be set.
+	PublicVisibility *PublicVisibility `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
 }
 
 func (x *CreateDnsZoneRequest) Reset() {
@@ -304,6 +339,7 @@ type CreateDnsZoneMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone that is being created.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 }
 
@@ -351,14 +387,29 @@ type UpdateDnsZoneRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DnsZoneId   string                `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
-	UpdateMask  *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name        string                `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description string                `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string     `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// only network_ids change inside private_visibility is allowed
+	// ID of the DNS zone to update.
+	//
+	// To get the DNS zone ID, make a [DnsZoneService.List] request.
+	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	// Field mask specifying which fields of the DNS zone resource are going to be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the DNS zone.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description of the DNS zone.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// DNS zone labels as `key:value` pairs.
+	//
+	// Existing set of labels is completely replaced by the provided set, so if you just want
+	// to add or remove a label:
+	// 1. Get the current set of labels with a [DnsZoneService.Get] request.
+	// 2. Add or remove a label in this set.
+	// 3. Send the new set in this field.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Change network IDs for private visibility.
 	PrivateVisibility *PrivateVisibility `protobuf:"bytes,6,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
-	PublicVisibility  *PublicVisibility  `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
+	// Public visibility configuration.
+	PublicVisibility *PublicVisibility `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
 }
 
 func (x *UpdateDnsZoneRequest) Reset() {
@@ -447,6 +498,7 @@ type UpdateDnsZoneMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone that is being updated.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 }
 
@@ -494,6 +546,9 @@ type DeleteDnsZoneRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone to delete.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 }
 
@@ -541,6 +596,7 @@ type DeleteDnsZoneMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone that is being deleted.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 }
 
@@ -588,9 +644,14 @@ type GetDnsZoneRecordSetRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone to get record set from.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Type      string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	// Name of the record set.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Type of the record set.
+	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (x *GetDnsZoneRecordSetRequest) Reset() {
@@ -651,10 +712,25 @@ type ListDnsZoneRecordSetsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone to list record sets in.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListDnsZoneRecordSetsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListDnsZoneRecordSetsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// A filter expression that filters record sets listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on the [RecordSet.name] and [RecordSet.type] fields.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value or lists of values. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name=my-record-set`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListDnsZoneRecordSetsRequest) Reset() {
@@ -722,8 +798,14 @@ type ListDnsZoneRecordSetsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RecordSets    []*RecordSet `protobuf:"bytes,1,rep,name=record_sets,json=recordSets,proto3" json:"record_sets,omitempty"`
-	NextPageToken string       `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of record sets in the specified DNS zone.
+	RecordSets []*RecordSet `protobuf:"bytes,1,rep,name=record_sets,json=recordSets,proto3" json:"record_sets,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDnsZoneRecordSetsRequest.page_size], use `next_page_token` as the value
+	// for the [ListDnsZoneRecordSetsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListDnsZoneRecordSetsResponse) Reset() {
@@ -777,8 +859,13 @@ type UpdateRecordSetsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DnsZoneId string       `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	// ID of the DNS zone to update record sets in.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
+	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	// List of record sets to delete.
 	Deletions []*RecordSet `protobuf:"bytes,2,rep,name=deletions,proto3" json:"deletions,omitempty"`
+	// List of record sets to add.
 	Additions []*RecordSet `protobuf:"bytes,3,rep,name=additions,proto3" json:"additions,omitempty"`
 }
 
@@ -878,12 +965,15 @@ type UpsertRecordSetsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone to upsert record sets to.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
-	// delete only specified records from record set
+	// Delete only specified records from corresponding record sets.
 	Deletions []*RecordSet `protobuf:"bytes,2,rep,name=deletions,proto3" json:"deletions,omitempty"`
-	// replace specified record sets entirely
+	// Entirely replace specified record sets.
 	Replacements []*RecordSet `protobuf:"bytes,3,rep,name=replacements,proto3" json:"replacements,omitempty"`
-	// for each record set replace records or add new ones
+	// Replace specified records or add new ones if no such record sets exists.
 	Merges []*RecordSet `protobuf:"bytes,4,rep,name=merges,proto3" json:"merges,omitempty"`
 }
 
@@ -990,10 +1080,25 @@ type ListDnsZoneOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the DNS zone to list operations for.
+	//
+	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListDnsZoneOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the
+	// [ListDnsZoneOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// A filter expression that filters DNS zones listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on the [DnsZone.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value or lists of values. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name=my-dns-zone`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListDnsZoneOperationsRequest) Reset() {
@@ -1061,8 +1166,14 @@ type ListDnsZoneOperationsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Operations    []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of operations for the specified DNS zone.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDnsZoneOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListDnsZoneOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListDnsZoneOperationsResponse) Reset() {
@@ -1834,24 +1945,39 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DnsZoneServiceClient interface {
+	// Returns the specified DNS zone.
+	//
+	// To get the list of all available DNS zones, make a [List] request.
 	Get(ctx context.Context, in *GetDnsZoneRequest, opts ...grpc.CallOption) (*DnsZone, error)
+	// Retrieves the list of DNS zones in the specified folder.
 	List(ctx context.Context, in *ListDnsZonesRequest, opts ...grpc.CallOption) (*ListDnsZonesResponse, error)
+	// Creates a DNS zone in the specified folder.
 	Create(ctx context.Context, in *CreateDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified DNS zone.
 	Update(ctx context.Context, in *UpdateDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified DNS zone.
 	Delete(ctx context.Context, in *DeleteDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the specified record set.
 	GetRecordSet(ctx context.Context, in *GetDnsZoneRecordSetRequest, opts ...grpc.CallOption) (*RecordSet, error)
+	// Retrieves the list of record sets in the specified folder.
 	ListRecordSets(ctx context.Context, in *ListDnsZoneRecordSetsRequest, opts ...grpc.CallOption) (*ListDnsZoneRecordSetsResponse, error)
-	// Method with strict control for changing zone state. Returns error when deleted record is not found, found record
-	// with matched type and name but different ttl or value, or on attempt to add record with existing name and type.
-	// Deletions come first so if record with same name and type is present in both lists then existing record will be
-	// deleted and new one added.
+	// Method with strict control for changing zone state. Returns error when:
+	// 1. Deleted record is not found.
+	// 2. Found record with matched type and name but different TTL or value.
+	// 3. Attempted to add record with existing name and type.
+	// Deletions happen first. If a record with the same name and type exists in both lists,
+	// then the existing record will be deleted, and a new one added.
 	UpdateRecordSets(ctx context.Context, in *UpdateRecordSetsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Method without strict control for changing zone state. Do not returns error when deleted record is not found.
-	// Delete records that match all specified fields which allows to delete only specified records from record set.
+	// Method without strict control for changing zone state. Nothing happens if deleted record doesn't exist.
+	// Deletes records that match all specified fields which allows to delete only specified records from a record set.
 	UpsertRecordSets(ctx context.Context, in *UpsertRecordSetsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified DNS zone.
 	ListOperations(ctx context.Context, in *ListDnsZoneOperationsRequest, opts ...grpc.CallOption) (*ListDnsZoneOperationsResponse, error)
+	// Lists existing access bindings for the specified DNS zone.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified DNS zone.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified DNS zone.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -1982,24 +2108,39 @@ func (c *dnsZoneServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 
 // DnsZoneServiceServer is the server API for DnsZoneService service.
 type DnsZoneServiceServer interface {
+	// Returns the specified DNS zone.
+	//
+	// To get the list of all available DNS zones, make a [List] request.
 	Get(context.Context, *GetDnsZoneRequest) (*DnsZone, error)
+	// Retrieves the list of DNS zones in the specified folder.
 	List(context.Context, *ListDnsZonesRequest) (*ListDnsZonesResponse, error)
+	// Creates a DNS zone in the specified folder.
 	Create(context.Context, *CreateDnsZoneRequest) (*operation.Operation, error)
+	// Updates the specified DNS zone.
 	Update(context.Context, *UpdateDnsZoneRequest) (*operation.Operation, error)
+	// Deletes the specified DNS zone.
 	Delete(context.Context, *DeleteDnsZoneRequest) (*operation.Operation, error)
+	// Returns the specified record set.
 	GetRecordSet(context.Context, *GetDnsZoneRecordSetRequest) (*RecordSet, error)
+	// Retrieves the list of record sets in the specified folder.
 	ListRecordSets(context.Context, *ListDnsZoneRecordSetsRequest) (*ListDnsZoneRecordSetsResponse, error)
-	// Method with strict control for changing zone state. Returns error when deleted record is not found, found record
-	// with matched type and name but different ttl or value, or on attempt to add record with existing name and type.
-	// Deletions come first so if record with same name and type is present in both lists then existing record will be
-	// deleted and new one added.
+	// Method with strict control for changing zone state. Returns error when:
+	// 1. Deleted record is not found.
+	// 2. Found record with matched type and name but different TTL or value.
+	// 3. Attempted to add record with existing name and type.
+	// Deletions happen first. If a record with the same name and type exists in both lists,
+	// then the existing record will be deleted, and a new one added.
 	UpdateRecordSets(context.Context, *UpdateRecordSetsRequest) (*operation.Operation, error)
-	// Method without strict control for changing zone state. Do not returns error when deleted record is not found.
-	// Delete records that match all specified fields which allows to delete only specified records from record set.
+	// Method without strict control for changing zone state. Nothing happens if deleted record doesn't exist.
+	// Deletes records that match all specified fields which allows to delete only specified records from a record set.
 	UpsertRecordSets(context.Context, *UpsertRecordSetsRequest) (*operation.Operation, error)
+	// Lists operations for the specified DNS zone.
 	ListOperations(context.Context, *ListDnsZoneOperationsRequest) (*ListDnsZoneOperationsResponse, error)
+	// Lists existing access bindings for the specified DNS zone.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified DNS zone.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified DNS zone.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
