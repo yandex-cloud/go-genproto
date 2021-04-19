@@ -210,6 +210,26 @@ func (m *MysqlConfig8_0) SetMdbPreserveBinlogBytes(v *wrappers.Int64Value) {
 	m.MdbPreserveBinlogBytes = v
 }
 
+func (m *MysqlConfig8_0) SetInteractiveTimeout(v *wrappers.Int64Value) {
+	m.InteractiveTimeout = v
+}
+
+func (m *MysqlConfig8_0) SetWaitTimeout(v *wrappers.Int64Value) {
+	m.WaitTimeout = v
+}
+
+func (m *MysqlConfig8_0) SetMdbOfflineModeEnableLag(v *wrappers.Int64Value) {
+	m.MdbOfflineModeEnableLag = v
+}
+
+func (m *MysqlConfig8_0) SetMdbOfflineModeDisableLag(v *wrappers.Int64Value) {
+	m.MdbOfflineModeDisableLag = v
+}
+
+func (m *MysqlConfig8_0) SetRangeOptimizerMaxMemSize(v *wrappers.Int64Value) {
+	m.RangeOptimizerMaxMemSize = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

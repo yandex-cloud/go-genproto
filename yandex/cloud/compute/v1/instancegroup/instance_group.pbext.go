@@ -483,6 +483,10 @@ func (m *LoadBalancerSpec) SetTargetGroupSpec(v *TargetGroupSpec) {
 	m.TargetGroupSpec = v
 }
 
+func (m *LoadBalancerSpec) SetMaxOpeningTrafficDuration(v *duration.Duration) {
+	m.MaxOpeningTrafficDuration = v
+}
+
 func (m *TargetGroupSpec) SetName(v string) {
 	m.Name = v
 }
@@ -499,6 +503,10 @@ func (m *ApplicationLoadBalancerSpec) SetTargetGroupSpec(v *ApplicationTargetGro
 	m.TargetGroupSpec = v
 }
 
+func (m *ApplicationLoadBalancerSpec) SetMaxOpeningTrafficDuration(v *duration.Duration) {
+	m.MaxOpeningTrafficDuration = v
+}
+
 func (m *ApplicationTargetGroupSpec) SetName(v string) {
 	m.Name = v
 }
@@ -513,6 +521,10 @@ func (m *ApplicationTargetGroupSpec) SetLabels(v map[string]string) {
 
 func (m *HealthChecksSpec) SetHealthCheckSpecs(v []*HealthCheckSpec) {
 	m.HealthCheckSpecs = v
+}
+
+func (m *HealthChecksSpec) SetMaxCheckingHealthDuration(v *duration.Duration) {
+	m.MaxCheckingHealthDuration = v
 }
 
 type HealthCheckSpec_HealthCheckOptions = isHealthCheckSpec_HealthCheckOptions

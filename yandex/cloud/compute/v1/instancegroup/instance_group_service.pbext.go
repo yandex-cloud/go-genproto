@@ -7,6 +7,22 @@ import (
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
+func (m *ResumeInstanceGroupProcessesRequest) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *ResumeInstanceGroupProcessMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *PauseInstanceGroupProcessesRequest) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *PauseInstanceGroupProcessMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
 func (m *GetInstanceGroupRequest) SetInstanceGroupId(v string) {
 	m.InstanceGroupId = v
 }
