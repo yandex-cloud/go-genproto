@@ -41,3 +41,23 @@ func (m *ApiGateway) SetDomain(v string) {
 func (m *ApiGateway) SetLogGroupId(v string) {
 	m.LogGroupId = v
 }
+
+func (m *ApiGateway) SetAttachedDomains(v []*AttachedDomain) {
+	m.AttachedDomains = v
+}
+
+func (m *AttachedDomain) SetDomainId(v string) {
+	m.DomainId = v
+}
+
+func (m *AttachedDomain) SetCertificateId(v string) {
+	m.CertificateId = v
+}
+
+func (m *AttachedDomain) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *AttachedDomain) SetDomain(v string) {
+	m.Domain = v
+}

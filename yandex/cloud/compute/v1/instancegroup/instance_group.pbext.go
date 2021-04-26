@@ -443,6 +443,10 @@ func (m *PrimaryAddressSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
 	m.DnsRecordSpecs = v
 }
 
+func (m *PrimaryAddressSpec) SetAddress(v string) {
+	m.Address = v
+}
+
 func (m *OneToOneNatSpec) SetIpVersion(v IpVersion) {
 	m.IpVersion = v
 }

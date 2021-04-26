@@ -3,6 +3,7 @@
 package resourcemanager
 
 import (
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
@@ -83,8 +84,16 @@ func (m *DeleteFolderRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *DeleteFolderRequest) SetDeleteAfter(v *timestamp.Timestamp) {
+	m.DeleteAfter = v
+}
+
 func (m *DeleteFolderMetadata) SetFolderId(v string) {
 	m.FolderId = v
+}
+
+func (m *DeleteFolderMetadata) SetDeleteAfter(v *timestamp.Timestamp) {
+	m.DeleteAfter = v
 }
 
 func (m *ListFolderOperationsRequest) SetFolderId(v string) {

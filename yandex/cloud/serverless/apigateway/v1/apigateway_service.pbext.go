@@ -99,6 +99,22 @@ func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
+func (m *AddDomainRequest) SetApiGatewayId(v string) {
+	m.ApiGatewayId = v
+}
+
+func (m *AddDomainRequest) SetDomainId(v string) {
+	m.DomainId = v
+}
+
+func (m *RemoveDomainRequest) SetApiGatewayId(v string) {
+	m.ApiGatewayId = v
+}
+
+func (m *RemoveDomainRequest) SetDomainId(v string) {
+	m.DomainId = v
+}
+
 func (m *CreateApiGatewayMetadata) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
@@ -109,6 +125,22 @@ func (m *UpdateApiGatewayMetadata) SetApiGatewayId(v string) {
 
 func (m *DeleteApiGatewayMetadata) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
+}
+
+func (m *AddDomainMetadata) SetApiGatewayId(v string) {
+	m.ApiGatewayId = v
+}
+
+func (m *AddDomainMetadata) SetDomainId(v string) {
+	m.DomainId = v
+}
+
+func (m *RemoveDomainMetadata) SetApiGatewayId(v string) {
+	m.ApiGatewayId = v
+}
+
+func (m *RemoveDomainMetadata) SetDomainId(v string) {
+	m.DomainId = v
 }
 
 func (m *ListOperationsRequest) SetApiGatewayId(v string) {
