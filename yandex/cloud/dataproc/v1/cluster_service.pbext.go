@@ -95,6 +95,10 @@ func (m *UpdateClusterConfigSpec) SetSubclustersSpec(v []*UpdateSubclusterConfig
 	m.SubclustersSpec = v
 }
 
+func (m *UpdateClusterConfigSpec) SetHadoop(v *HadoopConfig) {
+	m.Hadoop = v
+}
+
 func (m *CreateClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
 }

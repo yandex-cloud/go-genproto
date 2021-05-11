@@ -15,6 +15,18 @@ func (m *GetDeviceRequest) SetDeviceView(v DeviceView) {
 	m.DeviceView = v
 }
 
+func (m *GetByNameDeviceRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *GetByNameDeviceRequest) SetDeviceName(v string) {
+	m.DeviceName = v
+}
+
+func (m *GetByNameDeviceRequest) SetDeviceView(v DeviceView) {
+	m.DeviceView = v
+}
+
 type ListDevicesRequest_Id = isListDevicesRequest_Id
 
 func (m *ListDevicesRequest) SetId(v ListDevicesRequest_Id) {

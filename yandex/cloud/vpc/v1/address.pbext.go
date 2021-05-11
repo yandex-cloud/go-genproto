@@ -50,6 +50,14 @@ func (m *Address) SetUsed(v bool) {
 	m.Used = v
 }
 
+func (m *Address) SetType(v Address_Type) {
+	m.Type = v
+}
+
+func (m *Address) SetIpVersion(v Address_IpVersion) {
+	m.IpVersion = v
+}
+
 func (m *ExternalIpv4Address) SetAddress(v string) {
 	m.Address = v
 }

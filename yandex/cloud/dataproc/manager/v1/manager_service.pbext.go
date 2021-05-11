@@ -2,6 +2,10 @@
 
 package dataproc_manager
 
+import (
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+)
+
 func (m *HbaseNodeInfo) SetName(v string) {
 	m.Name = v
 }
@@ -232,6 +236,10 @@ func (m *ReportRequest) SetTopologyRevision(v int64) {
 
 func (m *ReportRequest) SetInfo(v *Info) {
 	m.Info = v
+}
+
+func (m *ReportRequest) SetCollectedAt(v *timestamp.Timestamp) {
+	m.CollectedAt = v
 }
 
 func (m *ReportReply) SetDecommissionTimeout(v int64) {

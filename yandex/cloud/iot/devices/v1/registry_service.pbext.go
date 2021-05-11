@@ -11,6 +11,14 @@ func (m *GetRegistryRequest) SetRegistryId(v string) {
 	m.RegistryId = v
 }
 
+func (m *GetByNameRegistryRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *GetByNameRegistryRequest) SetRegistryName(v string) {
+	m.RegistryName = v
+}
+
 func (m *ListRegistriesRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
