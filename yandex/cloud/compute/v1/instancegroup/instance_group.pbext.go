@@ -641,12 +641,36 @@ func (m *PrimaryAddress) SetOneToOneNat(v *OneToOneNat) {
 	m.OneToOneNat = v
 }
 
+func (m *PrimaryAddress) SetDnsRecords(v []*DnsRecord) {
+	m.DnsRecords = v
+}
+
 func (m *OneToOneNat) SetAddress(v string) {
 	m.Address = v
 }
 
 func (m *OneToOneNat) SetIpVersion(v IpVersion) {
 	m.IpVersion = v
+}
+
+func (m *OneToOneNat) SetDnsRecords(v []*DnsRecord) {
+	m.DnsRecords = v
+}
+
+func (m *DnsRecord) SetFqdn(v string) {
+	m.Fqdn = v
+}
+
+func (m *DnsRecord) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecord) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecord) SetPtr(v bool) {
+	m.Ptr = v
 }
 
 func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {

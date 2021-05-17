@@ -166,6 +166,18 @@ func (m *DnsRecord) SetFqdn(v string) {
 	m.Fqdn = v
 }
 
+func (m *DnsRecord) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecord) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecord) SetPtr(v bool) {
+	m.Ptr = v
+}
+
 func (m *SchedulingPolicy) SetPreemptible(v bool) {
 	m.Preemptible = v
 }

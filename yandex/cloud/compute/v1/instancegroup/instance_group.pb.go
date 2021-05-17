@@ -2663,6 +2663,8 @@ type PrimaryAddress struct {
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 	// One-to-one NAT configuration. If missing, NAT has not been set up.
 	OneToOneNat *OneToOneNat `protobuf:"bytes,2,opt,name=one_to_one_nat,json=oneToOneNat,proto3" json:"one_to_one_nat,omitempty"`
+	// Internal DNS configuration.
+	DnsRecords []*DnsRecord `protobuf:"bytes,3,rep,name=dns_records,json=dnsRecords,proto3" json:"dns_records,omitempty"`
 }
 
 func (x *PrimaryAddress) Reset() {
@@ -2711,6 +2713,13 @@ func (x *PrimaryAddress) GetOneToOneNat() *OneToOneNat {
 	return nil
 }
 
+func (x *PrimaryAddress) GetDnsRecords() []*DnsRecord {
+	if x != nil {
+		return x.DnsRecords
+	}
+	return nil
+}
+
 type OneToOneNat struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2720,6 +2729,8 @@ type OneToOneNat struct {
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 	// External IP address version.
 	IpVersion IpVersion `protobuf:"varint,2,opt,name=ip_version,json=ipVersion,proto3,enum=yandex.cloud.compute.v1.instancegroup.IpVersion" json:"ip_version,omitempty"`
+	// External DNS configuration.
+	DnsRecords []*DnsRecord `protobuf:"bytes,3,rep,name=dns_records,json=dnsRecords,proto3" json:"dns_records,omitempty"`
 }
 
 func (x *OneToOneNat) Reset() {
@@ -2768,6 +2779,89 @@ func (x *OneToOneNat) GetIpVersion() IpVersion {
 	return IpVersion_IP_VERSION_UNSPECIFIED
 }
 
+func (x *OneToOneNat) GetDnsRecords() []*DnsRecord {
+	if x != nil {
+		return x.DnsRecords
+	}
+	return nil
+}
+
+type DnsRecord struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name of the A/AAAA record as specified when creating the instance.
+	// Note that if `fqdn' has no trailing '.', it is specified relative to the zone (@see dns_zone_id).
+	Fqdn string `protobuf:"bytes,1,opt,name=fqdn,proto3" json:"fqdn,omitempty"`
+	// DNS zone id (optional, if not set, some private zone is used).
+	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	// DNS record ttl (optional, if 0, a reasonable default is used).
+	Ttl int64 `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	// When true, indicates there is a corresponding auto-created PTR DNS record.
+	Ptr bool `protobuf:"varint,4,opt,name=ptr,proto3" json:"ptr,omitempty"`
+}
+
+func (x *DnsRecord) Reset() {
+	*x = DnsRecord{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[28]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DnsRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DnsRecord) ProtoMessage() {}
+
+func (x *DnsRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[28]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DnsRecord.ProtoReflect.Descriptor instead.
+func (*DnsRecord) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *DnsRecord) GetFqdn() string {
+	if x != nil {
+		return x.Fqdn
+	}
+	return ""
+}
+
+func (x *DnsRecord) GetDnsZoneId() string {
+	if x != nil {
+		return x.DnsZoneId
+	}
+	return ""
+}
+
+func (x *DnsRecord) GetTtl() int64 {
+	if x != nil {
+		return x.Ttl
+	}
+	return 0
+}
+
+func (x *DnsRecord) GetPtr() bool {
+	if x != nil {
+		return x.Ptr
+	}
+	return false
+}
+
 type LogRecord struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2782,7 +2876,7 @@ type LogRecord struct {
 func (x *LogRecord) Reset() {
 	*x = LogRecord{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[28]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2795,7 +2889,7 @@ func (x *LogRecord) String() string {
 func (*LogRecord) ProtoMessage() {}
 
 func (x *LogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[28]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2808,7 +2902,7 @@ func (x *LogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogRecord.ProtoReflect.Descriptor instead.
 func (*LogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *LogRecord) GetTimestamp() *timestamp.Timestamp {
@@ -2855,7 +2949,7 @@ type ManagedInstancesState_Statuses struct {
 func (x *ManagedInstancesState_Statuses) Reset() {
 	*x = ManagedInstancesState_Statuses{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[30]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2868,7 +2962,7 @@ func (x *ManagedInstancesState_Statuses) String() string {
 func (*ManagedInstancesState_Statuses) ProtoMessage() {}
 
 func (x *ManagedInstancesState_Statuses) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[30]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2985,7 +3079,7 @@ type ScalePolicy_AutoScale struct {
 func (x *ScalePolicy_AutoScale) Reset() {
 	*x = ScalePolicy_AutoScale{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[31]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2998,7 +3092,7 @@ func (x *ScalePolicy_AutoScale) String() string {
 func (*ScalePolicy_AutoScale) ProtoMessage() {}
 
 func (x *ScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[31]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3082,7 +3176,7 @@ type ScalePolicy_CpuUtilizationRule struct {
 func (x *ScalePolicy_CpuUtilizationRule) Reset() {
 	*x = ScalePolicy_CpuUtilizationRule{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[32]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3095,7 +3189,7 @@ func (x *ScalePolicy_CpuUtilizationRule) String() string {
 func (*ScalePolicy_CpuUtilizationRule) ProtoMessage() {}
 
 func (x *ScalePolicy_CpuUtilizationRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[32]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3143,7 +3237,7 @@ type ScalePolicy_CustomRule struct {
 func (x *ScalePolicy_CustomRule) Reset() {
 	*x = ScalePolicy_CustomRule{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3156,7 +3250,7 @@ func (x *ScalePolicy_CustomRule) String() string {
 func (*ScalePolicy_CustomRule) ProtoMessage() {}
 
 func (x *ScalePolicy_CustomRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3233,7 +3327,7 @@ type ScalePolicy_FixedScale struct {
 func (x *ScalePolicy_FixedScale) Reset() {
 	*x = ScalePolicy_FixedScale{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3246,7 +3340,7 @@ func (x *ScalePolicy_FixedScale) String() string {
 func (*ScalePolicy_FixedScale) ProtoMessage() {}
 
 func (x *ScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3281,7 +3375,7 @@ type AllocationPolicy_Zone struct {
 func (x *AllocationPolicy_Zone) Reset() {
 	*x = AllocationPolicy_Zone{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3294,7 +3388,7 @@ func (x *AllocationPolicy_Zone) String() string {
 func (*AllocationPolicy_Zone) ProtoMessage() {}
 
 func (x *AllocationPolicy_Zone) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3340,7 +3434,7 @@ type AttachedDiskSpec_DiskSpec struct {
 func (x *AttachedDiskSpec_DiskSpec) Reset() {
 	*x = AttachedDiskSpec_DiskSpec{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[39]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3353,7 +3447,7 @@ func (x *AttachedDiskSpec_DiskSpec) String() string {
 func (*AttachedDiskSpec_DiskSpec) ProtoMessage() {}
 
 func (x *AttachedDiskSpec_DiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[39]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3448,7 +3542,7 @@ type HealthCheckSpec_TcpOptions struct {
 func (x *HealthCheckSpec_TcpOptions) Reset() {
 	*x = HealthCheckSpec_TcpOptions{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[42]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3461,7 +3555,7 @@ func (x *HealthCheckSpec_TcpOptions) String() string {
 func (*HealthCheckSpec_TcpOptions) ProtoMessage() {}
 
 func (x *HealthCheckSpec_TcpOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[42]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3498,7 +3592,7 @@ type HealthCheckSpec_HttpOptions struct {
 func (x *HealthCheckSpec_HttpOptions) Reset() {
 	*x = HealthCheckSpec_HttpOptions{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43]
+		mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3511,7 +3605,7 @@ func (x *HealthCheckSpec_HttpOptions) String() string {
 func (*HealthCheckSpec_HttpOptions) ProtoMessage() {}
 
 func (x *HealthCheckSpec_HttpOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4290,7 +4384,7 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = []
 	0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69, 0x6e, 0x73, 0x74, 0x61,
 	0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x50, 0x72, 0x69, 0x6d, 0x61, 0x72, 0x79,
 	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x10, 0x70, 0x72, 0x69, 0x6d, 0x61, 0x72, 0x79,
-	0x56, 0x36, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x83, 0x01, 0x0a, 0x0e, 0x50, 0x72,
+	0x56, 0x36, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0xd6, 0x01, 0x0a, 0x0e, 0x50, 0x72,
 	0x69, 0x6d, 0x61, 0x72, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x18, 0x0a, 0x07,
 	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61,
 	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x57, 0x0a, 0x0e, 0x6f, 0x6e, 0x65, 0x5f, 0x74, 0x6f,
@@ -4298,34 +4392,52 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = []
 	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
 	0x6d, 0x70, 0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63,
 	0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x4f, 0x6e, 0x65, 0x54, 0x6f, 0x4f, 0x6e, 0x65, 0x4e,
-	0x61, 0x74, 0x52, 0x0b, 0x6f, 0x6e, 0x65, 0x54, 0x6f, 0x4f, 0x6e, 0x65, 0x4e, 0x61, 0x74, 0x22,
-	0x78, 0x0a, 0x0b, 0x4f, 0x6e, 0x65, 0x54, 0x6f, 0x4f, 0x6e, 0x65, 0x4e, 0x61, 0x74, 0x12, 0x18,
-	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x4f, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x76,
-	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x30, 0x2e, 0x79,
-	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6d, 0x70,
+	0x61, 0x74, 0x52, 0x0b, 0x6f, 0x6e, 0x65, 0x54, 0x6f, 0x4f, 0x6e, 0x65, 0x4e, 0x61, 0x74, 0x12,
+	0x51, 0x0a, 0x0b, 0x64, 0x6e, 0x73, 0x5f, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x18, 0x03,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69,
+	0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x44, 0x6e, 0x73,
+	0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x0a, 0x64, 0x6e, 0x73, 0x52, 0x65, 0x63, 0x6f, 0x72,
+	0x64, 0x73, 0x22, 0xcb, 0x01, 0x0a, 0x0b, 0x4f, 0x6e, 0x65, 0x54, 0x6f, 0x4f, 0x6e, 0x65, 0x4e,
+	0x61, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x4f, 0x0a, 0x0a,
+	0x69, 0x70, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69, 0x6e, 0x73, 0x74, 0x61,
+	0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x49, 0x70, 0x56, 0x65, 0x72, 0x73, 0x69,
+	0x6f, 0x6e, 0x52, 0x09, 0x69, 0x70, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x51, 0x0a,
+	0x0b, 0x64, 0x6e, 0x73, 0x5f, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x18, 0x03, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69, 0x6e, 0x73,
+	0x74, 0x61, 0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x44, 0x6e, 0x73, 0x52, 0x65,
+	0x63, 0x6f, 0x72, 0x64, 0x52, 0x0a, 0x64, 0x6e, 0x73, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73,
+	0x22, 0x76, 0x0a, 0x09, 0x44, 0x6e, 0x73, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x18, 0x0a,
+	0x04, 0x66, 0x71, 0x64, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31,
+	0x01, 0x52, 0x04, 0x66, 0x71, 0x64, 0x6e, 0x12, 0x1e, 0x0a, 0x0b, 0x64, 0x6e, 0x73, 0x5f, 0x7a,
+	0x6f, 0x6e, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x64, 0x6e,
+	0x73, 0x5a, 0x6f, 0x6e, 0x65, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x03, 0x74, 0x74, 0x6c, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x03, 0x42, 0x0b, 0xfa, 0xc7, 0x31, 0x07, 0x30, 0x2d, 0x38, 0x36, 0x34, 0x30,
+	0x30, 0x52, 0x03, 0x74, 0x74, 0x6c, 0x12, 0x10, 0x0a, 0x03, 0x70, 0x74, 0x72, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x03, 0x70, 0x74, 0x72, 0x22, 0x5f, 0x0a, 0x09, 0x4c, 0x6f, 0x67, 0x52,
+	0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73,
+	0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x12,
+	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2a, 0x3b, 0x0a, 0x09, 0x49, 0x70, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x16, 0x49, 0x50, 0x5f, 0x56, 0x45, 0x52,
+	0x53, 0x49, 0x4f, 0x4e, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x49, 0x50, 0x56, 0x34, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04,
+	0x49, 0x50, 0x56, 0x36, 0x10, 0x02, 0x42, 0x84, 0x01, 0x0a, 0x29, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x6d, 0x70,
 	0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x67,
-	0x72, 0x6f, 0x75, 0x70, 0x2e, 0x49, 0x70, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x09,
-	0x69, 0x70, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x5f, 0x0a, 0x09, 0x4c, 0x6f, 0x67,
-	0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
-	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65,
-	0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
-	0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2a, 0x3b, 0x0a, 0x09, 0x49, 0x70,
-	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x16, 0x49, 0x50, 0x5f, 0x56, 0x45,
-	0x52, 0x53, 0x49, 0x4f, 0x4e, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45,
-	0x44, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x49, 0x50, 0x56, 0x34, 0x10, 0x01, 0x12, 0x08, 0x0a,
-	0x04, 0x49, 0x50, 0x56, 0x36, 0x10, 0x02, 0x42, 0x84, 0x01, 0x0a, 0x29, 0x79, 0x61, 0x6e, 0x64,
-	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x6d,
-	0x70, 0x75, 0x74, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65,
-	0x67, 0x72, 0x6f, 0x75, 0x70, 0x5a, 0x57, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67,
-	0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
-	0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x2f,
-	0x76, 0x31, 0x2f, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70,
-	0x3b, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x75, 0x70, 0x5a, 0x57, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f,
+	0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x2f, 0x76,
+	0x31, 0x2f, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x3b,
+	0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4341,7 +4453,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDescGZIP
 }
 
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_goTypes = []interface{}{
 	(IpVersion)(0),                         // 0: yandex.cloud.compute.v1.instancegroup.IpVersion
 	(InstanceGroup_Status)(0),              // 1: yandex.cloud.compute.v1.instancegroup.InstanceGroup.Status
@@ -4379,28 +4491,29 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_goTypes = []
 	(*NetworkInterface)(nil),               // 33: yandex.cloud.compute.v1.instancegroup.NetworkInterface
 	(*PrimaryAddress)(nil),                 // 34: yandex.cloud.compute.v1.instancegroup.PrimaryAddress
 	(*OneToOneNat)(nil),                    // 35: yandex.cloud.compute.v1.instancegroup.OneToOneNat
-	(*LogRecord)(nil),                      // 36: yandex.cloud.compute.v1.instancegroup.LogRecord
-	nil,                                    // 37: yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
-	(*ManagedInstancesState_Statuses)(nil), // 38: yandex.cloud.compute.v1.instancegroup.ManagedInstancesState.Statuses
-	(*ScalePolicy_AutoScale)(nil),          // 39: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
-	(*ScalePolicy_CpuUtilizationRule)(nil), // 40: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
-	(*ScalePolicy_CustomRule)(nil),         // 41: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
-	(*ScalePolicy_FixedScale)(nil),         // 42: yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
-	nil,                                    // 43: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
-	(*AllocationPolicy_Zone)(nil),          // 44: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
-	nil,                                    // 45: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
-	nil,                                    // 46: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
-	(*AttachedDiskSpec_DiskSpec)(nil),      // 47: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
-	nil,                                    // 48: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
-	nil,                                    // 49: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
-	(*HealthCheckSpec_TcpOptions)(nil),     // 50: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
-	(*HealthCheckSpec_HttpOptions)(nil),    // 51: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
-	(*timestamp.Timestamp)(nil),            // 52: google.protobuf.Timestamp
-	(*duration.Duration)(nil),              // 53: google.protobuf.Duration
+	(*DnsRecord)(nil),                      // 36: yandex.cloud.compute.v1.instancegroup.DnsRecord
+	(*LogRecord)(nil),                      // 37: yandex.cloud.compute.v1.instancegroup.LogRecord
+	nil,                                    // 38: yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
+	(*ManagedInstancesState_Statuses)(nil), // 39: yandex.cloud.compute.v1.instancegroup.ManagedInstancesState.Statuses
+	(*ScalePolicy_AutoScale)(nil),          // 40: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
+	(*ScalePolicy_CpuUtilizationRule)(nil), // 41: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
+	(*ScalePolicy_CustomRule)(nil),         // 42: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
+	(*ScalePolicy_FixedScale)(nil),         // 43: yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
+	nil,                                    // 44: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
+	(*AllocationPolicy_Zone)(nil),          // 45: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
+	nil,                                    // 46: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
+	nil,                                    // 47: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
+	(*AttachedDiskSpec_DiskSpec)(nil),      // 48: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
+	nil,                                    // 49: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
+	nil,                                    // 50: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
+	(*HealthCheckSpec_TcpOptions)(nil),     // 51: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
+	(*HealthCheckSpec_HttpOptions)(nil),    // 52: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
+	(*timestamp.Timestamp)(nil),            // 53: google.protobuf.Timestamp
+	(*duration.Duration)(nil),              // 54: google.protobuf.Duration
 }
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []int32{
-	52, // 0: yandex.cloud.compute.v1.instancegroup.InstanceGroup.created_at:type_name -> google.protobuf.Timestamp
-	37, // 1: yandex.cloud.compute.v1.instancegroup.InstanceGroup.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
+	53, // 0: yandex.cloud.compute.v1.instancegroup.InstanceGroup.created_at:type_name -> google.protobuf.Timestamp
+	38, // 1: yandex.cloud.compute.v1.instancegroup.InstanceGroup.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
 	16, // 2: yandex.cloud.compute.v1.instancegroup.InstanceGroup.instance_template:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate
 	13, // 3: yandex.cloud.compute.v1.instancegroup.InstanceGroup.scale_policy:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy
 	14, // 4: yandex.cloud.compute.v1.instancegroup.InstanceGroup.deploy_policy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy
@@ -4413,15 +4526,15 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []
 	10, // 11: yandex.cloud.compute.v1.instancegroup.InstanceGroup.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
 	28, // 12: yandex.cloud.compute.v1.instancegroup.InstanceGroup.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
 	9,  // 13: yandex.cloud.compute.v1.instancegroup.InstanceGroup.application_load_balancer_state:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerState
-	42, // 14: yandex.cloud.compute.v1.instancegroup.ScalePolicy.fixed_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
-	39, // 15: yandex.cloud.compute.v1.instancegroup.ScalePolicy.auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
-	39, // 16: yandex.cloud.compute.v1.instancegroup.ScalePolicy.test_auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
-	53, // 17: yandex.cloud.compute.v1.instancegroup.DeployPolicy.startup_duration:type_name -> google.protobuf.Duration
+	43, // 14: yandex.cloud.compute.v1.instancegroup.ScalePolicy.fixed_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
+	40, // 15: yandex.cloud.compute.v1.instancegroup.ScalePolicy.auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
+	40, // 16: yandex.cloud.compute.v1.instancegroup.ScalePolicy.test_auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
+	54, // 17: yandex.cloud.compute.v1.instancegroup.DeployPolicy.startup_duration:type_name -> google.protobuf.Duration
 	4,  // 18: yandex.cloud.compute.v1.instancegroup.DeployPolicy.strategy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy.Strategy
-	44, // 19: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.zones:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
-	45, // 20: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
+	45, // 19: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.zones:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
+	46, // 20: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
 	18, // 21: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.resources_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ResourcesSpec
-	46, // 22: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.metadata:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
+	47, // 22: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.metadata:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
 	19, // 23: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.boot_disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec
 	19, // 24: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.secondary_disk_specs:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec
 	20, // 25: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.network_interface_specs:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec
@@ -4429,7 +4542,7 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []
 	25, // 27: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.network_settings:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkSettings
 	17, // 28: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.placement_policy:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy
 	5,  // 29: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.mode:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.Mode
-	47, // 30: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
+	48, // 30: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
 	21, // 31: yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec
 	21, // 32: yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec
 	22, // 33: yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec
@@ -4438,38 +4551,40 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []
 	23, // 36: yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecordSpec
 	6,  // 37: yandex.cloud.compute.v1.instancegroup.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkSettings.Type
 	27, // 38: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.target_group_spec:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec
-	53, // 39: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
-	48, // 40: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
+	54, // 39: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
+	49, // 40: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
 	29, // 41: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.target_group_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec
-	53, // 42: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
-	49, // 43: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
+	54, // 42: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
+	50, // 43: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
 	31, // 44: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.health_check_specs:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec
-	53, // 45: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.max_checking_health_duration:type_name -> google.protobuf.Duration
-	53, // 46: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.interval:type_name -> google.protobuf.Duration
-	53, // 47: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.timeout:type_name -> google.protobuf.Duration
-	50, // 48: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.tcp_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
-	51, // 49: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.http_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
+	54, // 45: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.max_checking_health_duration:type_name -> google.protobuf.Duration
+	54, // 46: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.interval:type_name -> google.protobuf.Duration
+	54, // 47: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.timeout:type_name -> google.protobuf.Duration
+	51, // 48: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.tcp_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
+	52, // 49: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.http_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
 	7,  // 50: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance.Status
 	33, // 51: yandex.cloud.compute.v1.instancegroup.ManagedInstance.network_interfaces:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkInterface
-	52, // 52: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status_changed_at:type_name -> google.protobuf.Timestamp
+	53, // 52: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status_changed_at:type_name -> google.protobuf.Timestamp
 	34, // 53: yandex.cloud.compute.v1.instancegroup.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddress
 	34, // 54: yandex.cloud.compute.v1.instancegroup.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddress
 	35, // 55: yandex.cloud.compute.v1.instancegroup.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.instancegroup.OneToOneNat
-	0,  // 56: yandex.cloud.compute.v1.instancegroup.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.instancegroup.IpVersion
-	52, // 57: yandex.cloud.compute.v1.instancegroup.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	53, // 58: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.measurement_duration:type_name -> google.protobuf.Duration
-	53, // 59: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.warmup_duration:type_name -> google.protobuf.Duration
-	53, // 60: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.stabilization_duration:type_name -> google.protobuf.Duration
-	40, // 61: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.cpu_utilization_rule:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
-	41, // 62: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.custom_rules:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
-	2,  // 63: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.rule_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.RuleType
-	3,  // 64: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.metric_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.MetricType
-	43, // 65: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
-	66, // [66:66] is the sub-list for method output_type
-	66, // [66:66] is the sub-list for method input_type
-	66, // [66:66] is the sub-list for extension type_name
-	66, // [66:66] is the sub-list for extension extendee
-	0,  // [0:66] is the sub-list for field type_name
+	36, // 56: yandex.cloud.compute.v1.instancegroup.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecord
+	0,  // 57: yandex.cloud.compute.v1.instancegroup.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.instancegroup.IpVersion
+	36, // 58: yandex.cloud.compute.v1.instancegroup.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecord
+	53, // 59: yandex.cloud.compute.v1.instancegroup.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	54, // 60: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.measurement_duration:type_name -> google.protobuf.Duration
+	54, // 61: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.warmup_duration:type_name -> google.protobuf.Duration
+	54, // 62: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.stabilization_duration:type_name -> google.protobuf.Duration
+	41, // 63: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.cpu_utilization_rule:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
+	42, // 64: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.custom_rules:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
+	2,  // 65: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.rule_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.RuleType
+	3,  // 66: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.metric_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.MetricType
+	44, // 67: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
+	68, // [68:68] is the sub-list for method output_type
+	68, // [68:68] is the sub-list for method input_type
+	68, // [68:68] is the sub-list for extension type_name
+	68, // [68:68] is the sub-list for extension extendee
+	0,  // [0:68] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() }
@@ -4815,6 +4930,18 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 			}
 		}
 		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DnsRecord); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*LogRecord); i {
 			case 0:
 				return &v.state
@@ -4826,7 +4953,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ManagedInstancesState_Statuses); i {
 			case 0:
 				return &v.state
@@ -4838,7 +4965,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ScalePolicy_AutoScale); i {
 			case 0:
 				return &v.state
@@ -4850,7 +4977,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ScalePolicy_CpuUtilizationRule); i {
 			case 0:
 				return &v.state
@@ -4862,7 +4989,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ScalePolicy_CustomRule); i {
 			case 0:
 				return &v.state
@@ -4874,7 +5001,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ScalePolicy_FixedScale); i {
 			case 0:
 				return &v.state
@@ -4886,7 +5013,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AllocationPolicy_Zone); i {
 			case 0:
 				return &v.state
@@ -4898,7 +5025,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AttachedDiskSpec_DiskSpec); i {
 			case 0:
 				return &v.state
@@ -4910,7 +5037,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HealthCheckSpec_TcpOptions); i {
 			case 0:
 				return &v.state
@@ -4922,7 +5049,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HealthCheckSpec_HttpOptions); i {
 			case 0:
 				return &v.state
@@ -4943,7 +5070,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 		(*HealthCheckSpec_TcpOptions_)(nil),
 		(*HealthCheckSpec_HttpOptions_)(nil),
 	}
-	file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[39].OneofWrappers = []interface{}{
+	file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[40].OneofWrappers = []interface{}{
 		(*AttachedDiskSpec_DiskSpec_ImageId)(nil),
 		(*AttachedDiskSpec_DiskSpec_SnapshotId)(nil),
 	}
@@ -4953,7 +5080,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc,
 			NumEnums:      8,
-			NumMessages:   44,
+			NumMessages:   45,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

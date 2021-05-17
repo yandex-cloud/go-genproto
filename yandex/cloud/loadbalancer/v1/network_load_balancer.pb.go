@@ -201,7 +201,7 @@ func (NetworkLoadBalancer_Type) EnumDescriptor() ([]byte, []int) {
 }
 
 // Type of session affinity. Only 5-tuple affinity is currently available.
-// For more information, see [Load Balancer concepts](/load-balancer/concepts/).
+// For more information, see [Load Balancer concepts](/docs/network-load-balancer/concepts/).
 type NetworkLoadBalancer_SessionAffinity int32
 
 const (
@@ -363,7 +363,7 @@ func (TargetState_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDescGZIP(), []int{3, 0}
 }
 
-// A NetworkLoadBalancer resource. For more information, see [Network Load Balancer](/docs/load-balancer/concepts).
+// A NetworkLoadBalancer resource. For more information, see [Network Load Balancer](/docs/network-load-balancer/concepts).
 type NetworkLoadBalancer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -511,7 +511,7 @@ func (x *NetworkLoadBalancer) GetAttachedTargetGroups() []*AttachedTargetGroup {
 	return nil
 }
 
-// An AttachedTargetGroup resource. For more information, see [Targets and groups](/docs/load-balancer/concepts/target-resources).
+// An AttachedTargetGroup resource. For more information, see [Targets and groups](/docs/network-load-balancer/concepts/target-resources).
 type AttachedTargetGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -570,7 +570,7 @@ func (x *AttachedTargetGroup) GetHealthChecks() []*HealthCheck {
 	return nil
 }
 
-// A Listener resource. For more information, see [Listener](/docs/load-balancer/concepts/listener)
+// A Listener resource. For more information, see [Listener](/docs/network-load-balancer/concepts/listener)
 type Listener struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

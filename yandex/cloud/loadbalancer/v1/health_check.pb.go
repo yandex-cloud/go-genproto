@@ -22,7 +22,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A HealthCheck resource. For more information, see [Health check](/docs/load-balancer/concepts/health-check).
+// A HealthCheck resource. For more information, see [Health check](/docs/network-load-balancer/concepts/health-check).
 type HealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

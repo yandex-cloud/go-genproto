@@ -22,7 +22,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A TargetGroup resource. For more information, see [Target groups and resources](/docs/load-balancer/target-resources).
+// A TargetGroup resource. For more information, see [Target groups and resources](/docs/network-load-balancer/target-resources).
 type TargetGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -135,7 +135,7 @@ func (x *TargetGroup) GetTargets() []*Target {
 	return nil
 }
 
-// A Target resource. For more information, see [Target groups and resources](/docs/load-balancer/concepts/target-resources).
+// A Target resource. For more information, see [Target groups and resources](/docs/network-load-balancer/concepts/target-resources).
 type Target struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
