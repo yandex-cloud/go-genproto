@@ -310,3 +310,55 @@ func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetEffectiveFr
 func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetEffectiveTo(v *timestamp.Timestamp) {
 	m.EffectiveTo = v
 }
+
+func (m *ListScalingPoliciesRequest) SetFunctionId(v string) {
+	m.FunctionId = v
+}
+
+func (m *ListScalingPoliciesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListScalingPoliciesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListScalingPoliciesResponse) SetScalingPolicies(v []*ScalingPolicy) {
+	m.ScalingPolicies = v
+}
+
+func (m *ListScalingPoliciesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *SetScalingPolicyRequest) SetFunctionId(v string) {
+	m.FunctionId = v
+}
+
+func (m *SetScalingPolicyRequest) SetTag(v string) {
+	m.Tag = v
+}
+
+func (m *SetScalingPolicyRequest) SetZoneInstancesLimit(v int64) {
+	m.ZoneInstancesLimit = v
+}
+
+func (m *SetScalingPolicyRequest) SetZoneRequestsLimit(v int64) {
+	m.ZoneRequestsLimit = v
+}
+
+func (m *SetScalingPolicyMetadata) SetFunctionId(v string) {
+	m.FunctionId = v
+}
+
+func (m *RemoveScalingPolicyRequest) SetFunctionId(v string) {
+	m.FunctionId = v
+}
+
+func (m *RemoveScalingPolicyRequest) SetTag(v string) {
+	m.Tag = v
+}
+
+func (m *RemoveScalingPolicyMetadata) SetFunctionId(v string) {
+	m.FunctionId = v
+}

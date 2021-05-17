@@ -620,6 +620,101 @@ func (x *Connectivity) GetSubnetId() []string {
 	return nil
 }
 
+type ScalingPolicy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// ID of the function that the scaling policy belongs to.
+	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
+	// Tag of the version that the scaling policy belongs to. For details, see [Version tag](/docs/functions/concepts/function#tag).
+	Tag string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
+	// Creation timestamp for the scaling policy
+	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Modification timestamp for the scaling policy
+	ModifiedAt *timestamp.Timestamp `protobuf:"bytes,4,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
+	// Upper limit for instance count in each zone.
+	// 0 means no limit.
+	ZoneInstancesLimit int64 `protobuf:"varint,7,opt,name=zone_instances_limit,json=zoneInstancesLimit,proto3" json:"zone_instances_limit,omitempty"`
+	// Upper limit of requests count in each zone.
+	// 0 means no limit.
+	ZoneRequestsLimit int64 `protobuf:"varint,8,opt,name=zone_requests_limit,json=zoneRequestsLimit,proto3" json:"zone_requests_limit,omitempty"`
+}
+
+func (x *ScalingPolicy) Reset() {
+	*x = ScalingPolicy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_serverless_functions_v1_function_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ScalingPolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScalingPolicy) ProtoMessage() {}
+
+func (x *ScalingPolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_functions_v1_function_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScalingPolicy.ProtoReflect.Descriptor instead.
+func (*ScalingPolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_functions_v1_function_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ScalingPolicy) GetFunctionId() string {
+	if x != nil {
+		return x.FunctionId
+	}
+	return ""
+}
+
+func (x *ScalingPolicy) GetTag() string {
+	if x != nil {
+		return x.Tag
+	}
+	return ""
+}
+
+func (x *ScalingPolicy) GetCreatedAt() *timestamp.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ScalingPolicy) GetModifiedAt() *timestamp.Timestamp {
+	if x != nil {
+		return x.ModifiedAt
+	}
+	return nil
+}
+
+func (x *ScalingPolicy) GetZoneInstancesLimit() int64 {
+	if x != nil {
+		return x.ZoneInstancesLimit
+	}
+	return 0
+}
+
+func (x *ScalingPolicy) GetZoneRequestsLimit() int64 {
+	if x != nil {
+		return x.ZoneRequestsLimit
+	}
+	return 0
+}
+
 var File_yandex_cloud_serverless_functions_v1_function_proto protoreflect.FileDescriptor
 
 var file_yandex_cloud_serverless_functions_v1_function_proto_rawDesc = []byte{
@@ -755,15 +850,33 @@ var file_yandex_cloud_serverless_functions_v1_function_proto_rawDesc = []byte{
 	0x72, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6e, 0x65, 0x74,
 	0x77, 0x6f, 0x72, 0x6b, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x75, 0x62, 0x6e, 0x65, 0x74,
 	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x73, 0x75, 0x62, 0x6e, 0x65,
-	0x74, 0x49, 0x64, 0x42, 0x7e, 0x0a, 0x28, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65,
-	0x73, 0x73, 0x2e, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x76, 0x31, 0x5a,
-	0x52, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64,
-	0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2f, 0x66, 0x75, 0x6e,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x49, 0x64, 0x22, 0x9c, 0x02, 0x0a, 0x0d, 0x53, 0x63, 0x61, 0x6c, 0x69, 0x6e, 0x67, 0x50,
+	0x6f, 0x6c, 0x69, 0x63, 0x79, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x66, 0x75, 0x6e, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x10, 0x0a, 0x03, 0x74, 0x61, 0x67, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x74, 0x61, 0x67, 0x12, 0x39, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67,
+	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54,
+	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x41, 0x74, 0x12, 0x3b, 0x0a, 0x0b, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x64, 0x5f,
+	0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73,
+	0x74, 0x61, 0x6d, 0x70, 0x52, 0x0a, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x64, 0x41, 0x74,
+	0x12, 0x30, 0x0a, 0x14, 0x7a, 0x6f, 0x6e, 0x65, 0x5f, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63,
+	0x65, 0x73, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x12,
+	0x7a, 0x6f, 0x6e, 0x65, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x73, 0x4c, 0x69, 0x6d,
+	0x69, 0x74, 0x12, 0x2e, 0x0a, 0x13, 0x7a, 0x6f, 0x6e, 0x65, 0x5f, 0x72, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x73, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x11, 0x7a, 0x6f, 0x6e, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73, 0x4c, 0x69, 0x6d,
+	0x69, 0x74, 0x42, 0x7e, 0x0a, 0x28, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73,
+	0x73, 0x2e, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x52,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2f, 0x66, 0x75, 0x6e, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -779,7 +892,7 @@ func file_yandex_cloud_serverless_functions_v1_function_proto_rawDescGZIP() []by
 }
 
 var file_yandex_cloud_serverless_functions_v1_function_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_serverless_functions_v1_function_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_serverless_functions_v1_function_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_serverless_functions_v1_function_proto_goTypes = []interface{}{
 	(Function_Status)(0),        // 0: yandex.cloud.serverless.functions.v1.Function.Status
 	(Version_Status)(0),         // 1: yandex.cloud.serverless.functions.v1.Version.Status
@@ -788,28 +901,31 @@ var file_yandex_cloud_serverless_functions_v1_function_proto_goTypes = []interfa
 	(*Resources)(nil),           // 4: yandex.cloud.serverless.functions.v1.Resources
 	(*Package)(nil),             // 5: yandex.cloud.serverless.functions.v1.Package
 	(*Connectivity)(nil),        // 6: yandex.cloud.serverless.functions.v1.Connectivity
-	nil,                         // 7: yandex.cloud.serverless.functions.v1.Function.LabelsEntry
-	nil,                         // 8: yandex.cloud.serverless.functions.v1.Version.EnvironmentEntry
-	nil,                         // 9: yandex.cloud.serverless.functions.v1.Version.NamedServiceAccountsEntry
-	(*timestamp.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*duration.Duration)(nil),   // 11: google.protobuf.Duration
+	(*ScalingPolicy)(nil),       // 7: yandex.cloud.serverless.functions.v1.ScalingPolicy
+	nil,                         // 8: yandex.cloud.serverless.functions.v1.Function.LabelsEntry
+	nil,                         // 9: yandex.cloud.serverless.functions.v1.Version.EnvironmentEntry
+	nil,                         // 10: yandex.cloud.serverless.functions.v1.Version.NamedServiceAccountsEntry
+	(*timestamp.Timestamp)(nil), // 11: google.protobuf.Timestamp
+	(*duration.Duration)(nil),   // 12: google.protobuf.Duration
 }
 var file_yandex_cloud_serverless_functions_v1_function_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.serverless.functions.v1.Function.created_at:type_name -> google.protobuf.Timestamp
-	7,  // 1: yandex.cloud.serverless.functions.v1.Function.labels:type_name -> yandex.cloud.serverless.functions.v1.Function.LabelsEntry
+	11, // 0: yandex.cloud.serverless.functions.v1.Function.created_at:type_name -> google.protobuf.Timestamp
+	8,  // 1: yandex.cloud.serverless.functions.v1.Function.labels:type_name -> yandex.cloud.serverless.functions.v1.Function.LabelsEntry
 	0,  // 2: yandex.cloud.serverless.functions.v1.Function.status:type_name -> yandex.cloud.serverless.functions.v1.Function.Status
-	10, // 3: yandex.cloud.serverless.functions.v1.Version.created_at:type_name -> google.protobuf.Timestamp
+	11, // 3: yandex.cloud.serverless.functions.v1.Version.created_at:type_name -> google.protobuf.Timestamp
 	4,  // 4: yandex.cloud.serverless.functions.v1.Version.resources:type_name -> yandex.cloud.serverless.functions.v1.Resources
-	11, // 5: yandex.cloud.serverless.functions.v1.Version.execution_timeout:type_name -> google.protobuf.Duration
+	12, // 5: yandex.cloud.serverless.functions.v1.Version.execution_timeout:type_name -> google.protobuf.Duration
 	1,  // 6: yandex.cloud.serverless.functions.v1.Version.status:type_name -> yandex.cloud.serverless.functions.v1.Version.Status
-	8,  // 7: yandex.cloud.serverless.functions.v1.Version.environment:type_name -> yandex.cloud.serverless.functions.v1.Version.EnvironmentEntry
+	9,  // 7: yandex.cloud.serverless.functions.v1.Version.environment:type_name -> yandex.cloud.serverless.functions.v1.Version.EnvironmentEntry
 	6,  // 8: yandex.cloud.serverless.functions.v1.Version.connectivity:type_name -> yandex.cloud.serverless.functions.v1.Connectivity
-	9,  // 9: yandex.cloud.serverless.functions.v1.Version.named_service_accounts:type_name -> yandex.cloud.serverless.functions.v1.Version.NamedServiceAccountsEntry
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	10, // 9: yandex.cloud.serverless.functions.v1.Version.named_service_accounts:type_name -> yandex.cloud.serverless.functions.v1.Version.NamedServiceAccountsEntry
+	11, // 10: yandex.cloud.serverless.functions.v1.ScalingPolicy.created_at:type_name -> google.protobuf.Timestamp
+	11, // 11: yandex.cloud.serverless.functions.v1.ScalingPolicy.modified_at:type_name -> google.protobuf.Timestamp
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_functions_v1_function_proto_init() }
@@ -878,6 +994,18 @@ func file_yandex_cloud_serverless_functions_v1_function_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_serverless_functions_v1_function_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ScalingPolicy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -885,7 +1013,7 @@ func file_yandex_cloud_serverless_functions_v1_function_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_serverless_functions_v1_function_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

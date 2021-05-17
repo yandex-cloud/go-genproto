@@ -130,3 +130,27 @@ func (m *Connectivity) SetNetworkId(v string) {
 func (m *Connectivity) SetSubnetId(v []string) {
 	m.SubnetId = v
 }
+
+func (m *ScalingPolicy) SetFunctionId(v string) {
+	m.FunctionId = v
+}
+
+func (m *ScalingPolicy) SetTag(v string) {
+	m.Tag = v
+}
+
+func (m *ScalingPolicy) SetCreatedAt(v *timestamp.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *ScalingPolicy) SetModifiedAt(v *timestamp.Timestamp) {
+	m.ModifiedAt = v
+}
+
+func (m *ScalingPolicy) SetZoneInstancesLimit(v int64) {
+	m.ZoneInstancesLimit = v
+}
+
+func (m *ScalingPolicy) SetZoneRequestsLimit(v int64) {
+	m.ZoneRequestsLimit = v
+}
