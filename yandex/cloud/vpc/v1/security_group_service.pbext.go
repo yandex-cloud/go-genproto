@@ -149,6 +149,10 @@ func (m *UpdateSecurityGroupMetadata) SetSecurityGroupId(v string) {
 	m.SecurityGroupId = v
 }
 
+func (m *UpdateSecurityGroupMetadata) SetAddedRuleIds(v []string) {
+	m.AddedRuleIds = v
+}
+
 func (m *UpdateSecurityGroupRulesRequest) SetSecurityGroupId(v string) {
 	m.SecurityGroupId = v
 }
