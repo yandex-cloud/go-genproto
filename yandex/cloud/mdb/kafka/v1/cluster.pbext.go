@@ -193,6 +193,14 @@ func (m *KafkaConfig2_1) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
 	m.AutoCreateTopicsEnable = v
 }
 
+func (m *KafkaConfig2_1) SetNumPartitions(v *wrappers.Int64Value) {
+	m.NumPartitions = v
+}
+
+func (m *KafkaConfig2_1) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
+	m.DefaultReplicationFactor = v
+}
+
 func (m *KafkaConfig2_6) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -243,6 +251,14 @@ func (m *KafkaConfig2_6) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
 
 func (m *KafkaConfig2_6) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
 	m.AutoCreateTopicsEnable = v
+}
+
+func (m *KafkaConfig2_6) SetNumPartitions(v *wrappers.Int64Value) {
+	m.NumPartitions = v
+}
+
+func (m *KafkaConfig2_6) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
+	m.DefaultReplicationFactor = v
 }
 
 func (m *Host) SetName(v string) {

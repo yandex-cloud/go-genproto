@@ -129,6 +129,12 @@ func (m *CreateClusterRequest) SetInternetGateway(v CreateClusterRequest_Interne
 	m.InternetGateway = v
 }
 
+type CreateClusterRequest_NetworkImplementation = isCreateClusterRequest_NetworkImplementation
+
+func (m *CreateClusterRequest) SetNetworkImplementation(v CreateClusterRequest_NetworkImplementation) {
+	m.NetworkImplementation = v
+}
+
 func (m *CreateClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -181,6 +187,12 @@ func (m *CreateClusterRequest) SetNetworkPolicy(v *NetworkPolicy) {
 
 func (m *CreateClusterRequest) SetKmsProvider(v *KMSProvider) {
 	m.KmsProvider = v
+}
+
+func (m *CreateClusterRequest) SetCilium(v *Cilium) {
+	m.NetworkImplementation = &CreateClusterRequest_Cilium{
+		Cilium: v,
+	}
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {

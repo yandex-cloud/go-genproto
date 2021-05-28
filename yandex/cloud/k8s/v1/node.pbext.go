@@ -130,6 +130,14 @@ func (m *NodeTemplate) SetPlacementPolicy(v *PlacementPolicy) {
 	m.PlacementPolicy = v
 }
 
+func (m *NodeTemplate) SetNetworkSettings(v *NodeTemplate_NetworkSettings) {
+	m.NetworkSettings = v
+}
+
+func (m *NodeTemplate_NetworkSettings) SetType(v NodeTemplate_NetworkSettings_Type) {
+	m.Type = v
+}
+
 func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }

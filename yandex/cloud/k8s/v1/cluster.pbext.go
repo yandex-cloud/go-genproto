@@ -12,6 +12,12 @@ func (m *Cluster) SetInternetGateway(v Cluster_InternetGateway) {
 	m.InternetGateway = v
 }
 
+type Cluster_NetworkImplementation = isCluster_NetworkImplementation
+
+func (m *Cluster) SetNetworkImplementation(v Cluster_NetworkImplementation) {
+	m.NetworkImplementation = v
+}
+
 func (m *Cluster) SetId(v string) {
 	m.Id = v
 }
@@ -84,6 +90,12 @@ func (m *Cluster) SetKmsProvider(v *KMSProvider) {
 
 func (m *Cluster) SetLogGroupId(v string) {
 	m.LogGroupId = v
+}
+
+func (m *Cluster) SetCilium(v *Cilium) {
+	m.NetworkImplementation = &Cluster_Cilium{
+		Cilium: v,
+	}
 }
 
 type Master_MasterType = isMaster_MasterType
@@ -198,4 +210,8 @@ func (m *NetworkPolicy) SetProvider(v NetworkPolicy_Provider) {
 
 func (m *KMSProvider) SetKeyId(v string) {
 	m.KeyId = v
+}
+
+func (m *Cilium) SetRoutingMode(v Cilium_RoutingMode) {
+	m.RoutingMode = v
 }
