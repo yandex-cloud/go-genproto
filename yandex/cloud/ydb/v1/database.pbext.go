@@ -104,6 +104,10 @@ func (m *Database) SetDocumentApiEndpoint(v string) {
 	m.DocumentApiEndpoint = v
 }
 
+func (m *Database) SetKinesisApiEndpoint(v string) {
+	m.KinesisApiEndpoint = v
+}
+
 func (m *DedicatedDatabase) SetResourcePresetId(v string) {
 	m.ResourcePresetId = v
 }
