@@ -488,7 +488,7 @@ type OpenProjectResponse struct {
 	// URL of the project that is being opened.
 	// Make GET request to [project_url] with sessionToken query parameter equals to [session_token]
 	// or POST request to [project_url] with sessionToken body parameter equals to [session_token]
-	// to fetch Datasphere web interface
+	// to fetch Datasphere web interface.
 	ProjectUrl string `protobuf:"bytes,1,opt,name=project_url,json=projectUrl,proto3" json:"project_url,omitempty"`
 	// Session token of the project that is being opened.
 	SessionToken string `protobuf:"bytes,2,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`

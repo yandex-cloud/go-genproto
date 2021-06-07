@@ -31,11 +31,11 @@ type NodeExecutionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the folder that will be matched with Node ACL
+	// ID of the folder that will be matched with Node ACL.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the Node to perform request on
+	// ID of the Node to perform request on.
 	NodeId string `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	// Input data for the execution
+	// Input data for the execution.
 	Input *_struct.Struct `protobuf:"bytes,3,opt,name=input,proto3" json:"input,omitempty"`
 }
 
@@ -97,7 +97,7 @@ type NodeExecutionResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Result of the execution
+	// Result of the execution.
 	Output *_struct.Struct `protobuf:"bytes,1,opt,name=output,proto3" json:"output,omitempty"`
 }
 
@@ -278,7 +278,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type NodeServiceClient interface {
-	// Executes deployed Node
+	// Executes deployed Node.
 	Execute(ctx context.Context, in *NodeExecutionRequest, opts ...grpc.CallOption) (*NodeExecutionResponse, error)
 }
 
@@ -301,7 +301,7 @@ func (c *nodeServiceClient) Execute(ctx context.Context, in *NodeExecutionReques
 
 // NodeServiceServer is the server API for NodeService service.
 type NodeServiceServer interface {
-	// Executes deployed Node
+	// Executes deployed Node.
 	Execute(context.Context, *NodeExecutionRequest) (*NodeExecutionResponse, error)
 }
 

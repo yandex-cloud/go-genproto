@@ -533,6 +533,12 @@ func (m *ConfigSpec) SetRedisConfig_6_0(v *config.RedisConfig6_0) {
 	}
 }
 
+func (m *ConfigSpec) SetRedisConfig_6_2(v *config.RedisConfig6_2) {
+	m.RedisSpec = &ConfigSpec_RedisConfig_6_2{
+		RedisConfig_6_2: v,
+	}
+}
+
 func (m *ConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }
