@@ -1664,15 +1664,21 @@ func (x *DetachInstanceDiskMetadata) GetDiskId() string {
 	return ""
 }
 
+// Enables One-to-one NAT on the network interface.
 type AddInstanceOneToOneNatRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstanceId            string           `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	NetworkInterfaceIndex string           `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	InternalAddress       string           `protobuf:"bytes,3,opt,name=internal_address,json=internalAddress,proto3" json:"internal_address,omitempty"` // optional
-	OneToOneNatSpec       *OneToOneNatSpec `protobuf:"bytes,4,opt,name=one_to_one_nat_spec,json=oneToOneNatSpec,proto3" json:"one_to_one_nat_spec,omitempty"`
+	// ID of the instance to enable One-to-One NAT on.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface to enable One-to-One NAT on.
+	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
+	// The network address that is assigned to the instance for this network interface.
+	InternalAddress string `protobuf:"bytes,3,opt,name=internal_address,json=internalAddress,proto3" json:"internal_address,omitempty"` // optional
+	// An external IP address configuration.
+	// If not specified, then this instance will have no external internet access.
+	OneToOneNatSpec *OneToOneNatSpec `protobuf:"bytes,4,opt,name=one_to_one_nat_spec,json=oneToOneNatSpec,proto3" json:"one_to_one_nat_spec,omitempty"`
 }
 
 func (x *AddInstanceOneToOneNatRequest) Reset() {
@@ -1740,6 +1746,7 @@ type AddInstanceOneToOneNatMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the instance.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 }
 
@@ -1787,9 +1794,12 @@ type RemoveInstanceOneToOneNatRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstanceId            string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// ID of the instance to remove One-to-one NAT.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface to remove One-to-One NAT from.
 	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	InternalAddress       string `protobuf:"bytes,3,opt,name=internal_address,json=internalAddress,proto3" json:"internal_address,omitempty"` // optional
+	// The network address that is assigned to the instance for this network interface.
+	InternalAddress string `protobuf:"bytes,3,opt,name=internal_address,json=internalAddress,proto3" json:"internal_address,omitempty"` // optional
 }
 
 func (x *RemoveInstanceOneToOneNatRequest) Reset() {
@@ -1850,6 +1860,7 @@ type RemoveInstanceOneToOneNatMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the instance.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 }
 
@@ -1897,13 +1908,20 @@ type UpdateInstanceNetworkInterfaceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstanceId            string                `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	NetworkInterfaceIndex string                `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	UpdateMask            *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	SubnetId              string                `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	PrimaryV4AddressSpec  *PrimaryAddressSpec   `protobuf:"bytes,5,opt,name=primary_v4_address_spec,json=primaryV4AddressSpec,proto3" json:"primary_v4_address_spec,omitempty"`
-	PrimaryV6AddressSpec  *PrimaryAddressSpec   `protobuf:"bytes,6,opt,name=primary_v6_address_spec,json=primaryV6AddressSpec,proto3" json:"primary_v6_address_spec,omitempty"`
-	SecurityGroupIds      []string              `protobuf:"bytes,7,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
+	// ID of the network interface that is being updated.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface to be updated.
+	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
+	// Field mask that specifies which attributes of the instance should be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// ID of the subnet.
+	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Primary IPv4 address that will be assigned to the instance for this network interface.
+	PrimaryV4AddressSpec *PrimaryAddressSpec `protobuf:"bytes,5,opt,name=primary_v4_address_spec,json=primaryV4AddressSpec,proto3" json:"primary_v4_address_spec,omitempty"`
+	// Primary IPv6 address that will be assigned to the instance for this network interface. IPv6 not available yet.
+	PrimaryV6AddressSpec *PrimaryAddressSpec `protobuf:"bytes,6,opt,name=primary_v6_address_spec,json=primaryV6AddressSpec,proto3" json:"primary_v6_address_spec,omitempty"`
+	// ID's of security groups attached to the interface.
+	SecurityGroupIds []string `protobuf:"bytes,7,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 }
 
 func (x *UpdateInstanceNetworkInterfaceRequest) Reset() {
@@ -1992,7 +2010,9 @@ type UpdateInstanceNetworkInterfaceMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InstanceId            string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// ID of the instant network interface that is being updated.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface.
 	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
 }
 
@@ -4183,8 +4203,11 @@ type InstanceServiceClient interface {
 	AttachDisk(ctx context.Context, in *AttachInstanceDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Detaches the disk from the instance.
 	DetachDisk(ctx context.Context, in *DetachInstanceDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(ctx context.Context, in *AddInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes One-to-one NAT from the network interface.
 	RemoveOneToOneNat(ctx context.Context, in *RemoveInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified instance network interface.
 	UpdateNetworkInterface(ctx context.Context, in *UpdateInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(ctx context.Context, in *ListInstanceOperationsRequest, opts ...grpc.CallOption) (*ListInstanceOperationsResponse, error)
@@ -4373,8 +4396,11 @@ type InstanceServiceServer interface {
 	AttachDisk(context.Context, *AttachInstanceDiskRequest) (*operation.Operation, error)
 	// Detaches the disk from the instance.
 	DetachDisk(context.Context, *DetachInstanceDiskRequest) (*operation.Operation, error)
+	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(context.Context, *AddInstanceOneToOneNatRequest) (*operation.Operation, error)
+	// Removes One-to-one NAT from the network interface.
 	RemoveOneToOneNat(context.Context, *RemoveInstanceOneToOneNatRequest) (*operation.Operation, error)
+	// Updates the specified instance network interface.
 	UpdateNetworkInterface(context.Context, *UpdateInstanceNetworkInterfaceRequest) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(context.Context, *ListInstanceOperationsRequest) (*ListInstanceOperationsResponse, error)

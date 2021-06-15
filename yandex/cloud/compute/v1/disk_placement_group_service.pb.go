@@ -699,9 +699,9 @@ type ListDiskPlacementGroupDisksResponse struct {
 	// Lists disks for the specified placement group.
 	Disks []*Disk `protobuf:"bytes,1,rep,name=disks,proto3" json:"disks,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
-	// is more than [ListDiskPlacementGroupInstancesRequest.page_size], use
+	// is more than [ListDiskPlacementGroupDisksRequest.page_size], use
 	// [next_page_token] as the value
-	// for the [ListDiskPlacementGroupInstancesRequest.page_token] query parameter
+	// for the [ListDiskPlacementGroupDisksRequest.page_token] query parameter
 	// in the next list request. Each subsequent list request will have its own
 	// [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
