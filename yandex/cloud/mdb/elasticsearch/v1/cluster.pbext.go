@@ -63,6 +63,10 @@ func (m *Cluster) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
+func (m *Cluster) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

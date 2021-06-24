@@ -73,6 +73,10 @@ func (m *Cluster) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *Cluster) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

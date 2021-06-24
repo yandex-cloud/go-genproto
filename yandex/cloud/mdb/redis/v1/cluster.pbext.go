@@ -76,6 +76,10 @@ func (m *Cluster) SetTlsEnabled(v bool) {
 	m.TlsEnabled = v
 }
 
+func (m *Cluster) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
