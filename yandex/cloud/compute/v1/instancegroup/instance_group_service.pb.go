@@ -1436,7 +1436,7 @@ type ListInstanceGroupInstancesRequest struct {
 	// returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	// Currently you can use filtering only on the [InstanceGroup.name] field.
+	// Currently you can use filtering only on the [ManagedInstance.name] field.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
