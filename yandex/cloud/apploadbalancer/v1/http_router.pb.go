@@ -22,24 +22,30 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// An HTTP router resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router).
 type HttpRouter struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Output only. ID of the router.
+	// ID of the router. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The name is unique within the folder. 3-63 characters long.
+	// Name of the router. The name is unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the router. 0-256 characters long.
+	// Description of the router.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the router belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
+	// Router labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Virtual hosts that combine routes inside the router.
+	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#virtual-host).
+	//
 	// Only one virtual host with no authority (default match) can be specified.
 	VirtualHosts []*VirtualHost `protobuf:"bytes,6,rep,name=virtual_hosts,json=virtualHosts,proto3" json:"virtual_hosts,omitempty"`
-	// Creation timestamp for the http router.
+	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 

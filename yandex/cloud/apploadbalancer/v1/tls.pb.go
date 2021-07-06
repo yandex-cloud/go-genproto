@@ -21,11 +21,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A TLS validation context resource.
 type ValidationContext struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// TLS certificate issued by a trusted certificate authority (CA).
+	//
 	// Types that are assignable to TrustedCa:
 	//	*ValidationContext_TrustedCaId
 	//	*ValidationContext_TrustedCaBytes
@@ -90,12 +93,11 @@ type isValidationContext_TrustedCa interface {
 }
 
 type ValidationContext_TrustedCaId struct {
-	// Trusted CA certificate ID in the Certificate Manager.
 	TrustedCaId string `protobuf:"bytes,1,opt,name=trusted_ca_id,json=trustedCaId,proto3,oneof"`
 }
 
 type ValidationContext_TrustedCaBytes struct {
-	// Trusted CA blob.
+	// X.509 certificate contents in PEM format.
 	TrustedCaBytes string `protobuf:"bytes,2,opt,name=trusted_ca_bytes,json=trustedCaBytes,proto3,oneof"`
 }
 

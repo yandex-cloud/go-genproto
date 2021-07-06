@@ -24,26 +24,34 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A backend group resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/backend-group).
 type BackendGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Output only. ID of the backend group.
+	// ID of the backend group. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The name is unique within the folder. 3-63 characters long.
+	// Name of the backend group. The name is unique within the folder. The string length in characters is 3-63.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the backend group. 0-256 characters long.
+	// Description of the backend group. The string is 0-256 characters long.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the backend group belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
+	// Backend group labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
+	// The maximum number of labels is 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Backends that the backend group consists of.
+	//
+	// A backend group must consist of either HTTP backends or gRPC backends.
+	//
 	// Types that are assignable to Backend:
 	//	*BackendGroup_Http
 	//	*BackendGroup_Grpc
 	Backend isBackendGroup_Backend `protobuf_oneof:"backend"`
-	// Creation timestamp for the backend group.
+	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 
@@ -147,10 +155,12 @@ type isBackendGroup_Backend interface {
 }
 
 type BackendGroup_Http struct {
+	// List of HTTP backends that the backend group consists of.
 	Http *HttpBackendGroup `protobuf:"bytes,6,opt,name=http,proto3,oneof"`
 }
 
 type BackendGroup_Grpc struct {
+	// List of gRPC backends that the backend group consists of.
 	Grpc *GrpcBackendGroup `protobuf:"bytes,7,opt,name=grpc,proto3,oneof"`
 }
 
@@ -158,11 +168,13 @@ func (*BackendGroup_Http) isBackendGroup_Backend() {}
 
 func (*BackendGroup_Grpc) isBackendGroup_Backend() {}
 
+// An HTTP backend group resource.
 type HttpBackendGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of HTTP backends.
 	Backends []*HttpBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
 }
 
@@ -205,11 +217,13 @@ func (x *HttpBackendGroup) GetBackends() []*HttpBackend {
 	return nil
 }
 
+// A gRPC backend group resource.
 type GrpcBackendGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of gRPC backends.
 	Backends []*GrpcBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
 }
 
@@ -402,21 +416,43 @@ func (x *ConnectionSessionAffinity) GetSourceIp() bool {
 	return false
 }
 
+// A load balancing configuration resource.
 type LoadBalancingConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// If percentage of healthy hosts in the backend is lower than panic_threshold,
-	// traffic will be routed to all backends no matter what the health status is.
-	// This helps to avoid healthy backends overloading  when everything is bad.
-	// zero means no panic threshold.
+	// Threshold for panic mode.
+	//
+	// If percentage of healthy backends in the group drops below threshold,
+	// panic mode will be activated and traffic will be routed to all backends, regardless of their health check status.
+	// This helps to avoid overloading healthy backends.
+	// For details about panic mode, see [documentation](/docs/application-load-balancer/concepts/backend-group#panic-mode).
+	//
+	// If the value is `0`, panic mode will never be activated and traffic is routed only to healthy backends at all times.
+	//
+	// Default value: `0`.
 	PanicThreshold int64 `protobuf:"varint,1,opt,name=panic_threshold,json=panicThreshold,proto3" json:"panic_threshold,omitempty"`
-	// Percent of traffic to be sent to the same availability zone.
-	// The rest will be equally divided between other zones.
+	// Percentage of traffic that a load balancer node sends to healthy backends in its availability zone.
+	// The rest is divided equally between other zones. For details about zone-aware routing, see [documentation](/docs/application-load-balancer/concepts/backend-group#locality).
+	//
+	// If there are no healthy backends in an availability zone, all the traffic is divided between other zones.
+	//
+	// If [strict_locality] is `true`, the specified value is ignored.
+	// A load balancer node sends all the traffic within its availability zone, regardless of backends' health.
+	//
+	// Default value: `0`.
 	LocalityAwareRoutingPercent int64 `protobuf:"varint,2,opt,name=locality_aware_routing_percent,json=localityAwareRoutingPercent,proto3" json:"locality_aware_routing_percent,omitempty"`
-	// If set, will route requests only to the same availability zone.
-	// Balancer won't know about endpoints in other zones.
+	// Specifies whether a load balancer node should only send traffic to backends in its availability zone,
+	// regardless of their health, and ignore backends in other zones.
+	//
+	// If set to `true` and there are no healthy backends in the zone, the node in this zone will respond
+	// to incoming traffic with errors.
+	// For details about strict locality, see [documentation](/docs/application-load-balancer/concepts/backend-group#locality).
+	//
+	// If `strict_locality` is `true`, the value specified in [locality_aware_routing_percent] is ignored.
+	//
+	// Default value: `false`.
 	StrictLocality bool `protobuf:"varint,3,opt,name=strict_locality,json=strictLocality,proto3" json:"strict_locality,omitempty"`
 }
 
@@ -473,31 +509,44 @@ func (x *LoadBalancingConfig) GetStrictLocality() bool {
 	return false
 }
 
+// An HTTP backend resource.
 type HttpBackend struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name.
+	// Name of the backend.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Traffic will be split between backends of the same BackendGroup according to
-	// their weights.
-	// If set to zero, backend will be disabled.
-	// If not set in all backends, they all will have equal weights.
-	// Must either set or unset in all backeds of the group.
-	BackendWeight       *wrappers.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
+	//
+	// Weights must be set either for all backends in a group or for none of them.
+	// Setting no weights is the same as setting equal non-zero weights for all backends.
+	//
+	// If set to `0`, traffic is not sent to the backend.
+	BackendWeight *wrappers.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Load balancing configuration for the backend.
 	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
-	// Port for all targets from target group.
+	// Port used by all targets to receive traffic.
 	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Reference to targets that belong to the backend. For now, targets are referenced only via target groups.
+	//
 	// Types that are assignable to BackendType:
 	//	*HttpBackend_TargetGroups
 	BackendType isHttpBackend_BackendType `protobuf_oneof:"backend_type"`
-	// No health checks means no active health checking will be performed.
+	// Health checks to perform on targets from target groups.
+	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
+	//
+	// If no health checks are specified, active health checking is not performed.
 	Healthchecks []*HealthCheck `protobuf:"bytes,6,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
-	// TLS settings for the upstream.
+	// Settings for TLS connections between load balancer nodes and backend targets.
+	//
+	// If specified, the load balancer establishes HTTPS (HTTP over TLS) connections with targets
+	// and compares received certificates with the one specified in [BackendTls.validation_context].
+	// If not specified, the load balancer establishes unencrypted HTTP connections with targets.
 	Tls *BackendTls `protobuf:"bytes,7,opt,name=tls,proto3" json:"tls,omitempty"`
-	// Enables HTTP2 for upstream requests.
-	// If not set, HTTP 1.1 will be used by default.
+	// Enables HTTP/2 usage in connections between load balancer nodes and backend targets.
+	//
+	// Default value: `false`, HTTP/1.1 is used.
 	UseHttp2 bool `protobuf:"varint,8,opt,name=use_http2,json=useHttp2,proto3" json:"use_http2,omitempty"`
 }
 
@@ -601,34 +650,46 @@ type isHttpBackend_BackendType interface {
 }
 
 type HttpBackend_TargetGroups struct {
-	// References target groups for the backend.
+	// Target groups that belong to the backend.
 	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
 }
 
 func (*HttpBackend_TargetGroups) isHttpBackend_BackendType() {}
 
+// A gRPC backend resource.
 type GrpcBackend struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name.
+	// Name of the backend.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Traffic will be split between backends of the same BackendGroup according to
-	// their weights.
-	// If set to zero, backend will be disabled.
-	// If not set in all backends, they all will have equal weights.
-	// Must either set or unset in all backeds of the group.
-	BackendWeight       *wrappers.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
+	//
+	// Weights must be set either for all backends of a group or for none of them.
+	// Setting no weights is the same as setting equal non-zero weights for all backends.
+	//
+	// If set to `0`, traffic is not sent to the backend.
+	BackendWeight *wrappers.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Load balancing configuration for the backend.
 	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
-	// Port for all targets from target group.
+	// Port used by all targets to receive traffic.
 	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Reference to targets that belong to the backend. For now, targets are referenced via target groups.
+	//
 	// Types that are assignable to BackendType:
 	//	*GrpcBackend_TargetGroups
 	BackendType isGrpcBackend_BackendType `protobuf_oneof:"backend_type"`
-	// No health checks means no active health checking will be performed.
+	// Health checks to perform on targets from target groups.
+	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
+	//
+	// If no health checks are specified, active health checking is not performed.
 	Healthchecks []*HealthCheck `protobuf:"bytes,7,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
-	// TLS settings for the upstream.
+	// Settings for TLS connections between load balancer nodes and backend targets.
+	//
+	// If specified, the load balancer establishes HTTPS (HTTP over TLS) connections with targets
+	// and compares received certificates with the one specified in [BackendTls.validation_context].
+	// If not specified, the load balancer establishes unencrypted HTTP connections with targets.
 	Tls *BackendTls `protobuf:"bytes,8,opt,name=tls,proto3" json:"tls,omitempty"`
 }
 
@@ -725,17 +786,21 @@ type isGrpcBackend_BackendType interface {
 }
 
 type GrpcBackend_TargetGroups struct {
-	// References target groups for the backend.
+	// Target groups that belong to the backend.
 	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
 }
 
 func (*GrpcBackend_TargetGroups) isGrpcBackend_BackendType() {}
 
+// A resource for target groups that belong to the backend.
 type TargetGroupsBackend struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of ID's of target groups that belong to the backend.
+	//
+	// To get the ID's of all available target groups, make a [TargetGroupService.List] request.
 	TargetGroupIds []string `protobuf:"bytes,1,rep,name=target_group_ids,json=targetGroupIds,proto3" json:"target_group_ids,omitempty"`
 }
 
@@ -778,14 +843,15 @@ func (x *TargetGroupsBackend) GetTargetGroupIds() []string {
 	return nil
 }
 
+// A resource for backend TLS settings.
 type BackendTls struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// SNI string for TLS connections.
+	// Server Name Indication (SNI) string for TLS connections.
 	Sni string `protobuf:"bytes,1,opt,name=sni,proto3" json:"sni,omitempty"`
-	// Validation context for backend TLS connections.
+	// Validation context for TLS connections.
 	ValidationContext *ValidationContext `protobuf:"bytes,3,opt,name=validation_context,json=validationContext,proto3" json:"validation_context,omitempty"`
 }
 
@@ -835,30 +901,47 @@ func (x *BackendTls) GetValidationContext() *ValidationContext {
 	return nil
 }
 
-// Active health check.
+// A health check resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
 type HealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Time to wait for a health check response.
+	// Health check timeout.
+	//
+	// The timeout is the time allowed for the target to respond to a check.
+	// If the target doesn't respond in time, the check is considered failed.
 	Timeout *duration.Duration `protobuf:"bytes,1,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	// Interval between health checks.
-	Interval *duration.Duration `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	// An optional jitter amount as a percentage of interval.
-	// If specified, during every interval value of
-	// (interval_ms * interval_jitter_percent / 100) will be added to the wait time.
-	IntervalJitterPercent float64 `protobuf:"fixed64,3,opt,name=interval_jitter_percent,json=intervalJitterPercent,proto3" json:"interval_jitter_percent,omitempty"`
-	// Number of consecutive successful health checks required to promote endpoint
-	// into the healthy state. 0 means 1.
-	// Note that during startup, only a single successful health check is required to mark a host healthy.
+	// Base interval between consecutive health checks.
+	Interval              *duration.Duration `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	IntervalJitterPercent float64            `protobuf:"fixed64,3,opt,name=interval_jitter_percent,json=intervalJitterPercent,proto3" json:"interval_jitter_percent,omitempty"`
+	// Number of consecutive successful health checks required to mark an unhealthy target as healthy.
+	//
+	// Both `0` and `1` values amount to one successful check required.
+	//
+	// The value is ignored when a load balancer is initialized; a target is marked healthy after one successful check.
+	//
+	// Default value: `0`.
 	HealthyThreshold int64 `protobuf:"varint,4,opt,name=healthy_threshold,json=healthyThreshold,proto3" json:"healthy_threshold,omitempty"`
-	// Number of consecutive failed health checks required to demote endpoint
-	// into the unhealthy state. 0 means 1.
-	// Note that for HTTP health checks, a single 503 immediately makes endpoint unhealthy.
+	// Number of consecutive failed health checks required to mark a healthy target as unhealthy.
+	//
+	// Both `0` and `1` values amount to one unsuccessful check required.
+	//
+	// The value is ignored if a health check is failed due to an HTTP `503 Service Unavailable` response from the target
+	// (not applicable to TCP stream health checks). The target is immediately marked unhealthy.
+	//
+	// Default value: `0`.
 	UnhealthyThreshold int64 `protobuf:"varint,5,opt,name=unhealthy_threshold,json=unhealthyThreshold,proto3" json:"unhealthy_threshold,omitempty"`
-	// Optional alternative port for health checking.
+	// Port used for health checks.
+	//
+	// If not specified, the backend port ([HttpBackend.port] or [GrpcBackend.port]) is used for health checks.
 	HealthcheckPort int64 `protobuf:"varint,6,opt,name=healthcheck_port,json=healthcheckPort,proto3" json:"healthcheck_port,omitempty"`
+	// Protocol-specific health check settings.
+	//
+	// The protocols of the backend and of its health check may differ,
+	// e.g. a gRPC health check may be specified for an HTTP backend.
+	//
 	// Types that are assignable to Healthcheck:
 	//	*HealthCheck_Stream
 	//	*HealthCheck_Http
@@ -973,14 +1056,17 @@ type isHealthCheck_Healthcheck interface {
 }
 
 type HealthCheck_Stream struct {
+	// TCP stream health check settings.
 	Stream *HealthCheck_StreamHealthCheck `protobuf:"bytes,7,opt,name=stream,proto3,oneof"`
 }
 
 type HealthCheck_Http struct {
+	// HTTP health check settings.
 	Http *HealthCheck_HttpHealthCheck `protobuf:"bytes,8,opt,name=http,proto3,oneof"`
 }
 
 type HealthCheck_Grpc struct {
+	// gRPC health check settings.
 	Grpc *HealthCheck_GrpcHealthCheck `protobuf:"bytes,9,opt,name=grpc,proto3,oneof"`
 }
 
@@ -990,16 +1076,19 @@ func (*HealthCheck_Http) isHealthCheck_Healthcheck() {}
 
 func (*HealthCheck_Grpc) isHealthCheck_Healthcheck() {}
 
-// TCP (+TLS) health check ("Stream protocol HC").
+// A resource for TCP stream health check settings.
 type HealthCheck_StreamHealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional message to send.
-	// If empty, it's a connect-only health check.
+	// Message sent to targets during TCP data transfer.
+	//
+	// If not specified, no data is sent to the target.
 	Send *Payload `protobuf:"bytes,1,opt,name=send,proto3" json:"send,omitempty"`
-	// Optional text to search in reply.
+	// Data that must be contained in the messages received from targets for a successful health check.
+	//
+	// If not specified, no messages are expected from targets, and those that are received are not checked.
 	Receive *Payload `protobuf:"bytes,2,opt,name=receive,proto3" json:"receive,omitempty"`
 }
 
@@ -1049,16 +1138,20 @@ func (x *HealthCheck_StreamHealthCheck) GetReceive() *Payload {
 	return nil
 }
 
+// A resource for HTTP health check settings.
 type HealthCheck_HttpHealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional "Host" HTTP header value.
+	// Value for the HTTP/1.1 `Host` header or the HTTP/2 `:authority` pseudo-header used in requests to targets.
 	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	// HTTP path.
+	// HTTP path used in requests to targets: request URI for HTTP/1.1 request line
+	// or value for the HTTP/2 `:path` pseudo-header.
 	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// If set, health checks will use HTTP/2.
+	// Enables HTTP/2 usage in health checks.
+	//
+	// Default value: `false`, HTTP/1.1 is used.
 	UseHttp2 bool `protobuf:"varint,3,opt,name=use_http2,json=useHttp2,proto3" json:"use_http2,omitempty"`
 }
 
@@ -1115,12 +1208,17 @@ func (x *HealthCheck_HttpHealthCheck) GetUseHttp2() bool {
 	return false
 }
 
+// A resource for gRPC health check settings.
 type HealthCheck_GrpcHealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional service name for grpc.health.v1.HealthCheckRequest message.
+	// Name of the gRPC service to be checked.
+	//
+	// If not specified, overall health is checked.
+	//
+	// For details about the concept, see [GRPC Health Checking Protocol](https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
 	ServiceName string `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
 }
 
@@ -1253,9 +1351,11 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = []byte{
 	0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x12, 0x27, 0x0a, 0x0f, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74,
 	0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52,
 	0x0e, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x22,
-	0x97, 0x04, 0x0a, 0x0b, 0x48, 0x74, 0x74, 0x70, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x12,
-	0x18, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8,
-	0xc7, 0x31, 0x01, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x42, 0x0a, 0x0e, 0x62, 0x61, 0x63,
+	0xb7, 0x04, 0x0a, 0x0b, 0x48, 0x74, 0x74, 0x70, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x12,
+	0x38, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x24, 0xe8,
+	0xc7, 0x31, 0x01, 0xf2, 0xc7, 0x31, 0x1c, 0x5b, 0x61, 0x2d, 0x7a, 0x5d, 0x5b, 0x2d, 0x61, 0x2d,
+	0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x7b, 0x31, 0x2c, 0x36, 0x31, 0x7d, 0x5b, 0x61, 0x2d, 0x7a, 0x30,
+	0x2d, 0x39, 0x5d, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x42, 0x0a, 0x0e, 0x62, 0x61, 0x63,
 	0x6b, 0x65, 0x6e, 0x64, 0x5f, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0d,
@@ -1286,9 +1386,11 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = []byte{
 	0x73, 0x52, 0x03, 0x74, 0x6c, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x75, 0x73, 0x65, 0x5f, 0x68, 0x74,
 	0x74, 0x70, 0x32, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x75, 0x73, 0x65, 0x48, 0x74,
 	0x74, 0x70, 0x32, 0x42, 0x14, 0x0a, 0x0c, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x5f, 0x74,
-	0x79, 0x70, 0x65, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x22, 0xfa, 0x03, 0x0a, 0x0b, 0x47, 0x72,
-	0x70, 0x63, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x12, 0x18, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x04, 0x6e,
+	0x79, 0x70, 0x65, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x22, 0x9a, 0x04, 0x0a, 0x0b, 0x47, 0x72,
+	0x70, 0x63, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x12, 0x38, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x24, 0xe8, 0xc7, 0x31, 0x01, 0xf2, 0xc7, 0x31,
+	0x1c, 0x5b, 0x61, 0x2d, 0x7a, 0x5d, 0x5b, 0x2d, 0x61, 0x2d, 0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x7b,
+	0x31, 0x2c, 0x36, 0x31, 0x7d, 0x5b, 0x61, 0x2d, 0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x52, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x12, 0x42, 0x0a, 0x0e, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x5f, 0x77,
 	0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f,
 	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e,

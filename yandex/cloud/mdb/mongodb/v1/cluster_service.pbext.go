@@ -563,6 +563,22 @@ func (m *RestartHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
 }
 
+func (m *StepdownHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StepdownHostsRequest) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *StepdownHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StepdownHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
 func (m *HostSpec) SetZoneId(v string) {
 	m.ZoneId = v
 }

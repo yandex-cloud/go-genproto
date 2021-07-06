@@ -22,24 +22,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A target group resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/target-group).
 type TargetGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Output only. ID of the target group.
+	// ID of the target group. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The name is unique within the folder. 3-63 characters long.
+	// Name of the target group. The name is unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the target group. 0-256 characters long.
+	// Description of the target group.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the target group belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
+	// Target group labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// NOTE: all endpoints must use the same address_type - either ip or hostname.
+	// List of targets in the target group.
 	Targets []*Target `protobuf:"bytes,6,rep,name=targets,proto3" json:"targets,omitempty"`
-	// Creation timestamp for the target group.
+	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 
@@ -124,15 +127,19 @@ func (x *TargetGroup) GetCreatedAt() *timestamp.Timestamp {
 	return nil
 }
 
+// A target resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/target-group).
 type Target struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Reference to the target. As of now, targets must only be referred to by their IP addresses.
+	//
 	// Types that are assignable to AddressType:
 	//	*Target_IpAddress
 	AddressType isTarget_AddressType `protobuf_oneof:"address_type"`
-	// ID of the subnet that target connected to.
+	// ID of the subnet that the target is connected to.
 	SubnetId string `protobuf:"bytes,3,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 }
 
@@ -194,6 +201,7 @@ type isTarget_AddressType interface {
 }
 
 type Target_IpAddress struct {
+	// IP address of the target.
 	IpAddress string `protobuf:"bytes,1,opt,name=ip_address,json=ipAddress,proto3,oneof"`
 }
 

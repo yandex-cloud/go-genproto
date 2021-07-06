@@ -22,18 +22,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// HTTP status codes supported for use in redirect responses.
 type RedirectAction_RedirectResponseCode int32
 
 const (
-	// Moved Permanently HTTP Status Code - 301.
+	// `301 Moved Permanently` status code.
 	RedirectAction_MOVED_PERMANENTLY RedirectAction_RedirectResponseCode = 0
-	// Found HTTP Status Code - 302.
+	// `302 Found` status code.
 	RedirectAction_FOUND RedirectAction_RedirectResponseCode = 1
-	// See Other HTTP Status Code - 303.
+	// `303 See Other` status code.
 	RedirectAction_SEE_OTHER RedirectAction_RedirectResponseCode = 2
-	// Temporary Redirect HTTP Status Code - 307.
+	// `307 Temporary Redirect` status code.
 	RedirectAction_TEMPORARY_REDIRECT RedirectAction_RedirectResponseCode = 3
-	// Permanent Redirect HTTP Status Code - 308.
+	// `308 Permanent Redirect` status code.
 	RedirectAction_PERMANENT_REDIRECT RedirectAction_RedirectResponseCode = 4
 )
 
@@ -82,17 +83,26 @@ func (RedirectAction_RedirectResponseCode) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{8, 0}
 }
 
+// gRPC status code supported for use in responses.
 type GrpcStatusResponseAction_Status int32
 
 const (
-	GrpcStatusResponseAction_OK                GrpcStatusResponseAction_Status = 0
-	GrpcStatusResponseAction_INVALID_ARGUMENT  GrpcStatusResponseAction_Status = 1
-	GrpcStatusResponseAction_NOT_FOUND         GrpcStatusResponseAction_Status = 2
+	// `OK` (0) status code.
+	GrpcStatusResponseAction_OK GrpcStatusResponseAction_Status = 0
+	// `INVALID_ARGUMENT` (3) status code.
+	GrpcStatusResponseAction_INVALID_ARGUMENT GrpcStatusResponseAction_Status = 1
+	// `NOT_FOUND` (5) status code.
+	GrpcStatusResponseAction_NOT_FOUND GrpcStatusResponseAction_Status = 2
+	// `PERMISSION_DENIED` (7) status code.
 	GrpcStatusResponseAction_PERMISSION_DENIED GrpcStatusResponseAction_Status = 3
-	GrpcStatusResponseAction_UNAUTHENTICATED   GrpcStatusResponseAction_Status = 4
-	GrpcStatusResponseAction_UNIMPLEMENTED     GrpcStatusResponseAction_Status = 5
-	GrpcStatusResponseAction_INTERNAL          GrpcStatusResponseAction_Status = 6
-	GrpcStatusResponseAction_UNAVAILABLE       GrpcStatusResponseAction_Status = 7
+	// `UNAUTHENTICATED` (16) status code.
+	GrpcStatusResponseAction_UNAUTHENTICATED GrpcStatusResponseAction_Status = 4
+	// `UNIMPLEMENTED` (12) status code.
+	GrpcStatusResponseAction_UNIMPLEMENTED GrpcStatusResponseAction_Status = 5
+	// `INTERNAL` (13) status code.
+	GrpcStatusResponseAction_INTERNAL GrpcStatusResponseAction_Status = 6
+	// `UNAVAILABLE` (14) status code.
+	GrpcStatusResponseAction_UNAVAILABLE GrpcStatusResponseAction_Status = 7
 )
 
 // Enum value maps for GrpcStatusResponseAction_Status.
@@ -146,23 +156,41 @@ func (GrpcStatusResponseAction_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{10, 0}
 }
 
+// A virtual host resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#virtual-host).
 type VirtualHost struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Name of the virtual host. The name is unique within the HTTP router.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// A list of domains (host/authority header) that will be matched to this
-	// virtual host. Wildcard hosts are supported in the form of '*.foo.com' or
-	// '*-bar.foo.com'.
-	// If not specified, all domains will be matched.
+	// List of domains that are attributed to the virtual host.
+	//
+	// The host is selected to process the request received by the load balancer
+	// if the domain specified in the HTTP/1.1 `Host` header or the HTTP/2 `:authority` pseudo-header matches a domain
+	// specified in the host.
+	//
+	// A wildcard asterisk character (`*`) matches 0 or more characters.
+	//
+	// If not specified, all domains are attributed to the host, which is the same as specifying a `*` value.
+	// An HTTP router must not contain more than one virtual host to which all domains are attributed.
 	Authority []string `protobuf:"bytes,2,rep,name=authority,proto3" json:"authority,omitempty"`
-	// Routes are matched *in-order*. Be careful when adding them to the end.
-	// For instance, having http '/' match first makes all other routes unused.
+	// Routes of the virtual host.
+	//
+	// A route contains a set of conditions (predicates) that are used by the load balancer to select the route
+	// for the request and an action on the request.
+	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#routes).
+	//
+	// The order of routes matters: the first route whose predicate matches the request is selected.
+	// The most specific routes should be at the top of the list, so that they are not overridden.
+	// For example, if the first HTTP route is configured, via [HttpRoute.match], to match paths prefixed with just `/`,
+	// other routes are never matched.
 	Routes []*Route `protobuf:"bytes,3,rep,name=routes,proto3" json:"routes,omitempty"`
-	// Apply the following modifications to the request headers.
+	// Modifications that are made to the headers of incoming HTTP requests before they are forwarded to backends.
 	ModifyRequestHeaders []*HeaderModification `protobuf:"bytes,4,rep,name=modify_request_headers,json=modifyRequestHeaders,proto3" json:"modify_request_headers,omitempty"`
-	// Apply the following modifications to the response headers.
+	// Modifications that are made to the headers of HTTP responses received from backends
+	// before responses are forwarded to clients.
 	ModifyResponseHeaders []*HeaderModification `protobuf:"bytes,5,rep,name=modify_response_headers,json=modifyResponseHeaders,proto3" json:"modify_response_headers,omitempty"`
 }
 
@@ -233,6 +261,7 @@ func (x *VirtualHost) GetModifyResponseHeaders() []*HeaderModification {
 	return nil
 }
 
+// A header modification resource.
 type HeaderModification struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -240,8 +269,7 @@ type HeaderModification struct {
 
 	// Name of the header.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Header values support the following formatters:
-	// https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#custom-request-response-headers
+	// Operation to perform on the header.
 	//
 	// Types that are assignable to Operation:
 	//	*HeaderModification_Append
@@ -330,22 +358,28 @@ type isHeaderModification_Operation interface {
 }
 
 type HeaderModification_Append struct {
-	// Append string to the header value.
+	// Appends the specified string to the header value.
+	//
+	// Variables [defined for Envoy proxy](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#custom-request-response-headers)
+	// are supported.
 	Append string `protobuf:"bytes,2,opt,name=append,proto3,oneof"`
 }
 
 type HeaderModification_Replace struct {
-	// New value for a header.
+	// Replaces the value of the header with the specified string.
+	//
+	// Variables [defined for Envoy proxy](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#custom-request-response-headers)
+	// are supported.
 	Replace string `protobuf:"bytes,3,opt,name=replace,proto3,oneof"`
 }
 
 type HeaderModification_Remove struct {
-	// Remove the header.
+	// Removes the header.
 	Remove bool `protobuf:"varint,4,opt,name=remove,proto3,oneof"`
 }
 
 type HeaderModification_Rename struct {
-	// New name for a header.
+	// Replaces the name of the header with the specified string.
 	Rename string `protobuf:"bytes,5,opt,name=rename,proto3,oneof"`
 }
 
@@ -357,12 +391,17 @@ func (*HeaderModification_Remove) isHeaderModification_Operation() {}
 
 func (*HeaderModification_Rename) isHeaderModification_Operation() {}
 
+// A route resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#routes).
 type Route struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Name of the route.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Route configuration.
+	//
 	// Types that are assignable to Route:
 	//	*Route_Http
 	//	*Route_Grpc
@@ -434,10 +473,12 @@ type isRoute_Route interface {
 }
 
 type Route_Http struct {
+	// HTTP route configuration.
 	Http *HttpRoute `protobuf:"bytes,2,opt,name=http,proto3,oneof"`
 }
 
 type Route_Grpc struct {
+	// gRPC route configuration.
 	Grpc *GrpcRoute `protobuf:"bytes,3,opt,name=grpc,proto3,oneof"`
 }
 
@@ -445,13 +486,16 @@ func (*Route_Http) isRoute_Route() {}
 
 func (*Route_Grpc) isRoute_Route() {}
 
+// An HTTP route configuration resource.
 type HttpRoute struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Checks "/" prefix by default.
+	// Condition (predicate) used to select the route.
 	Match *HttpRouteMatch `protobuf:"bytes,1,opt,name=match,proto3" json:"match,omitempty"`
+	// Action performed on the request if the route is selected.
+	//
 	// Types that are assignable to Action:
 	//	*HttpRoute_Route
 	//	*HttpRoute_Redirect
@@ -531,14 +575,17 @@ type isHttpRoute_Action interface {
 }
 
 type HttpRoute_Route struct {
+	// Forwards the request to a backend group for processing as configured.
 	Route *HttpRouteAction `protobuf:"bytes,2,opt,name=route,proto3,oneof"`
 }
 
 type HttpRoute_Redirect struct {
+	// Redirects the request as configured.
 	Redirect *RedirectAction `protobuf:"bytes,3,opt,name=redirect,proto3,oneof"`
 }
 
 type HttpRoute_DirectResponse struct {
+	// Instructs the load balancer to respond directly as configured.
 	DirectResponse *DirectResponseAction `protobuf:"bytes,4,opt,name=direct_response,json=directResponse,proto3,oneof"`
 }
 
@@ -548,13 +595,16 @@ func (*HttpRoute_Redirect) isHttpRoute_Action() {}
 
 func (*HttpRoute_DirectResponse) isHttpRoute_Action() {}
 
+// A gRPC route configuration resource.
 type GrpcRoute struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Checks "/" prefix by default.
+	// Condition (predicate) used to select the route.
 	Match *GrpcRouteMatch `protobuf:"bytes,1,opt,name=match,proto3" json:"match,omitempty"`
+	// Action performed on the request if the route is selected.
+	//
 	// Types that are assignable to Action:
 	//	*GrpcRoute_Route
 	//	*GrpcRoute_StatusResponse
@@ -626,10 +676,12 @@ type isGrpcRoute_Action interface {
 }
 
 type GrpcRoute_Route struct {
+	// Forwards the request to a backend group for processing as configured.
 	Route *GrpcRouteAction `protobuf:"bytes,2,opt,name=route,proto3,oneof"`
 }
 
 type GrpcRoute_StatusResponse struct {
+	// Instructs the load balancer to respond directly with a specified status.
 	StatusResponse *GrpcStatusResponseAction `protobuf:"bytes,3,opt,name=status_response,json=statusResponse,proto3,oneof"`
 }
 
@@ -637,13 +689,17 @@ func (*GrpcRoute_Route) isGrpcRoute_Action() {}
 
 func (*GrpcRoute_StatusResponse) isGrpcRoute_Action() {}
 
+// An HTTP route condition (predicate) resource.
 type HttpRouteMatch struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// HTTP method specified in the request.
 	HttpMethod []string `protobuf:"bytes,1,rep,name=http_method,json=httpMethod,proto3" json:"http_method,omitempty"`
-	// If not set, '/' is assumed.
+	// Match settings for the path specified in the request.
+	//
+	// If not specified, the route matches all paths.
 	Path *StringMatch `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
 }
 
@@ -693,12 +749,17 @@ func (x *HttpRouteMatch) GetPath() *StringMatch {
 	return nil
 }
 
+// A gRPC route condition (predicate) resource.
 type GrpcRouteMatch struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// If not set, all services/methods are assumed.
+	// Match settings for gRPC service method called in the request.
+	//
+	// A match string must be a fully qualified method name, e.g. `foo.bar.v1.BazService/Get`, or a prefix of such.
+	//
+	// If not specified, the route matches all methods.
 	Fqmn *StringMatch `protobuf:"bytes,1,opt,name=fqmn,proto3" json:"fqmn,omitempty"`
 }
 
@@ -741,11 +802,14 @@ func (x *GrpcRouteMatch) GetFqmn() *StringMatch {
 	return nil
 }
 
+// A string matcher resource.
 type StringMatch struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Match string for either exact or prefix match.
+	//
 	// Types that are assignable to Match:
 	//	*StringMatch_ExactMatch
 	//	*StringMatch_PrefixMatch
@@ -810,10 +874,12 @@ type isStringMatch_Match interface {
 }
 
 type StringMatch_ExactMatch struct {
+	// Exact match string.
 	ExactMatch string `protobuf:"bytes,1,opt,name=exact_match,json=exactMatch,proto3,oneof"`
 }
 
 type StringMatch_PrefixMatch struct {
+	// Prefix match string.
 	PrefixMatch string `protobuf:"bytes,2,opt,name=prefix_match,json=prefixMatch,proto3,oneof"`
 }
 
@@ -821,26 +887,38 @@ func (*StringMatch_ExactMatch) isStringMatch_Match() {}
 
 func (*StringMatch_PrefixMatch) isStringMatch_Match() {}
 
+// A redirect action resource.
 type RedirectAction struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Replaces scheme.
-	// If the original scheme is `http` or `https`,
-	// will also remove the 80 or 443 port, if present.
+	// URI scheme replacement.
+	//
+	// If `http` or `https` scheme is to be replaced and `80` or `443` port is specified in the original URI,
+	// the port is also removed.
+	//
+	// If not specified, the original scheme and port are used.
 	ReplaceScheme string `protobuf:"bytes,1,opt,name=replace_scheme,json=replaceScheme,proto3" json:"replace_scheme,omitempty"`
-	// Replaces hostname.
+	// URI host replacement.
+	//
+	// If not specified, the original host is used.
 	ReplaceHost string `protobuf:"bytes,2,opt,name=replace_host,json=replaceHost,proto3" json:"replace_host,omitempty"`
-	// Replaces port.
+	// URI host replacement.
+	//
+	// If not specified, the original host is used.
 	ReplacePort int64 `protobuf:"varint,3,opt,name=replace_port,json=replacePort,proto3" json:"replace_port,omitempty"`
+	// URI path replacement.
+	//
+	// If not specified, the original path is used.
+	//
 	// Types that are assignable to Path:
 	//	*RedirectAction_ReplacePath
 	//	*RedirectAction_ReplacePrefix
 	Path isRedirectAction_Path `protobuf_oneof:"path"`
-	// Remove query part.
+	// Removes URI query.
 	RemoveQuery bool `protobuf:"varint,6,opt,name=remove_query,json=removeQuery,proto3" json:"remove_query,omitempty"`
-	// The HTTP status code to use in the redirect response.
+	// HTTP status code to use in redirect responses.
 	ResponseCode RedirectAction_RedirectResponseCode `protobuf:"varint,7,opt,name=response_code,json=responseCode,proto3,enum=yandex.cloud.apploadbalancer.v1.RedirectAction_RedirectResponseCode" json:"response_code,omitempty"`
 }
 
@@ -937,16 +1015,16 @@ type isRedirectAction_Path interface {
 }
 
 type RedirectAction_ReplacePath struct {
-	// Replace path.
+	// Replacement for the whole path.
 	ReplacePath string `protobuf:"bytes,4,opt,name=replace_path,json=replacePath,proto3,oneof"`
 }
 
 type RedirectAction_ReplacePrefix struct {
-	// Replace only matched prefix.
-	// Example:
-	//    match:    { prefix_match: "/some" }
-	//    redirect: { replace_prefix: "/other" }
-	// will redirect "/something" to "/otherthing"
+	// Replacement for the path prefix matched by [StringMatch.match].
+	//
+	// For instance, if [StringMatch.prefix_match] value is `/foo` and `replace_prefix` value is `/bar`,
+	// a request with `https://example.com/foobaz` URI is redirected to `https://example.com/barbaz`.
+	// For [StringMatch.exact_match], the whole path is replaced.
 	ReplacePrefix string `protobuf:"bytes,5,opt,name=replace_prefix,json=replacePrefix,proto3,oneof"`
 }
 
@@ -954,14 +1032,15 @@ func (*RedirectAction_ReplacePath) isRedirectAction_Path() {}
 
 func (*RedirectAction_ReplacePrefix) isRedirectAction_Path() {}
 
+// A direct response action resource.
 type DirectResponseAction struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// HTTP response status.
+	// HTTP status code to use in responses.
 	Status int64 `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	// Optional response body.
+	// Response body.
 	Body *Payload `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
 }
 
@@ -1011,11 +1090,13 @@ func (x *DirectResponseAction) GetBody() *Payload {
 	return nil
 }
 
+// A gRPC status response action resource.
 type GrpcStatusResponseAction struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// gRPC [status code](https://grpc.github.io/grpc/core/md_doc_statuscodes.html) to use in responses.
 	Status GrpcStatusResponseAction_Status `protobuf:"varint,1,opt,name=status,proto3,enum=yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction_Status" json:"status,omitempty"`
 }
 
@@ -1058,28 +1139,48 @@ func (x *GrpcStatusResponseAction) GetStatus() GrpcStatusResponseAction_Status {
 	return GrpcStatusResponseAction_OK
 }
 
+// An HTTP route action resource.
 type HttpRouteAction struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Backend group to route requests.
+	// Backend group to forward requests to.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
-	// Specifies the request timeout (overall time request processing is allowed to take) for the route.
-	// If not set, default is 60 seconds.
+	// Overall timeout for an HTTP connection between a load balancer node an a backend from the backend group:
+	// the maximum time the connection is kept alive for, regardless of whether data is transferred over it.
+	//
+	// If a connection times out, the load balancer responds to the client with a `504 Gateway Timeout` status code.
+	//
+	// Default value: `60`.
 	Timeout *duration.Duration `protobuf:"bytes,2,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	// Specifies the idle timeout (time without any data transfer for the active request) for the route.
-	// It is useful for streaming scenarios (i.e. long-polling, server-sent events) - one should set
-	// idle_timeout to something meaningful and timeout to the maximum time the stream is allowed to be alive.
-	// If not specified, there is no per-route idle timeout.
+	// Idle timeout for an HTTP connection between a load balancer node an a backend from the backend group:
+	// the maximum time the connection is allowed to be idle, i.e. without any data transferred over it.
+	//
+	// Specifying meaningful values for both [timeout] and `idle_timeout` is useful for implementing
+	// server-push mechanisms such as long polling, server-sent events (`EventSource` interface) etc.
+	//
+	// If a connection times out, the load balancer responds to the client with a `504 Gateway Timeout` status code.
+	//
+	// If not specified, no idle timeout is used, and an alive connection may be idle for any duration (see [timeout]).
 	IdleTimeout *duration.Duration `protobuf:"bytes,3,opt,name=idle_timeout,json=idleTimeout,proto3" json:"idle_timeout,omitempty"`
+	// Value rewrite settings for HTTP/1.1 `Host` headers and HTTP/2 `:authority` pseudo-headers.
+	//
+	// If not specified, the host is not changed.
+	//
 	// Types that are assignable to HostRewriteSpecifier:
 	//	*HttpRouteAction_HostRewrite
 	//	*HttpRouteAction_AutoHostRewrite
 	HostRewriteSpecifier isHttpRouteAction_HostRewriteSpecifier `protobuf_oneof:"host_rewrite_specifier"`
-	// If not empty, matched path prefix will be replaced by this value.
+	// Replacement for the path prefix matched by [StringMatch.match].
+	//
+	// For instance, if [StringMatch.prefix_match] value is `/foo` and `replace_prefix` value is `/bar`,
+	// a request with `/foobaz` path is forwarded with `/barbaz` path.
+	// For [StringMatch.exact_match], the whole path is replaced.
+	//
+	// If not specified, the path is not changed.
 	PrefixRewrite string `protobuf:"bytes,6,opt,name=prefix_rewrite,json=prefixRewrite,proto3" json:"prefix_rewrite,omitempty"`
-	// Only specified upgrade types will be allowed. For example, "websocket".
+	// Supported values for HTTP `Upgrade` header. E.g. `websocket`.
 	UpgradeTypes []string `protobuf:"bytes,7,rep,name=upgrade_types,json=upgradeTypes,proto3" json:"upgrade_types,omitempty"`
 }
 
@@ -1176,10 +1277,12 @@ type isHttpRouteAction_HostRewriteSpecifier interface {
 }
 
 type HttpRouteAction_HostRewrite struct {
+	// Host replacement.
 	HostRewrite string `protobuf:"bytes,4,opt,name=host_rewrite,json=hostRewrite,proto3,oneof"`
 }
 
 type HttpRouteAction_AutoHostRewrite struct {
+	// Automatically replaces the host with that of the target.
 	AutoHostRewrite bool `protobuf:"varint,5,opt,name=auto_host_rewrite,json=autoHostRewrite,proto3,oneof"`
 }
 
@@ -1187,21 +1290,38 @@ func (*HttpRouteAction_HostRewrite) isHttpRouteAction_HostRewriteSpecifier() {}
 
 func (*HttpRouteAction_AutoHostRewrite) isHttpRouteAction_HostRewriteSpecifier() {}
 
+// A gRPC route action resource.
 type GrpcRouteAction struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Backend group to route requests.
+	// Backend group to forward requests to.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
-	// Lower timeout may be specified by the client (using grpc-timeout header).
-	// If not set, default is 60 seconds.
+	// Overall timeout for an underlying HTTP connection between a load balancer node an a backend from the backend group:
+	// the maximum time the connection is kept alive for, regardless of whether data is transferred over it.
+	//
+	// If a client specifies a lower timeout in HTTP `grpc-timeout` header, the `max_timeout` value is ignored.
+	//
+	// If a connection times out, the load balancer responds to the client with an `UNAVAILABLE` status code.
+	//
+	// Default value: `60`.
 	MaxTimeout *duration.Duration `protobuf:"bytes,2,opt,name=max_timeout,json=maxTimeout,proto3" json:"max_timeout,omitempty"`
-	// Specifies the idle timeout (time without any data transfer for the active request) for the route.
-	// It is useful for streaming scenarios - one should set idle_timeout to something meaningful
-	// and max_timeout to the maximum time the stream is allowed to be alive.
-	// If not specified, there is no per-route idle timeout.
+	// Idle timeout for an underlying HTTP connection between a load balancer node an a backend from the backend group:
+	// the maximum time the connection is allowed to be idle, i.e. without any data transferred over it.
+	//
+	// Specifying meaningful values for both [max_timeout] and `idle_timeout` is useful for implementing
+	// server-push mechanisms such as long polling, server-sent events etc.
+	//
+	// If a connection times out, the load balancer responds to the client with an `UNAVAILABLE` status code.
+	//
+	// If not specified, no idle timeout is used, and an alive connection may be idle for any duration
+	// (see [max_timeout]).
 	IdleTimeout *duration.Duration `protobuf:"bytes,3,opt,name=idle_timeout,json=idleTimeout,proto3" json:"idle_timeout,omitempty"`
+	// Value rewrite settings for HTTP/1.1 `Host` headers and HTTP/2 `:authority` pseudo-headers.
+	//
+	// If not specified, the host is not changed.
+	//
 	// Types that are assignable to HostRewriteSpecifier:
 	//	*GrpcRouteAction_HostRewrite
 	//	*GrpcRouteAction_AutoHostRewrite
@@ -1287,10 +1407,12 @@ type isGrpcRouteAction_HostRewriteSpecifier interface {
 }
 
 type GrpcRouteAction_HostRewrite struct {
+	// Host replacement.
 	HostRewrite string `protobuf:"bytes,4,opt,name=host_rewrite,json=hostRewrite,proto3,oneof"`
 }
 
 type GrpcRouteAction_AutoHostRewrite struct {
+	// Automatically replaces the host with that of the target.
 	AutoHostRewrite bool `protobuf:"varint,5,opt,name=auto_host_rewrite,json=autoHostRewrite,proto3,oneof"`
 }
 

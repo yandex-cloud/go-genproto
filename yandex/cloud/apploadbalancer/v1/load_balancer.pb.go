@@ -26,17 +26,17 @@ type LoadBalancer_Status int32
 
 const (
 	LoadBalancer_STATUS_UNSPECIFIED LoadBalancer_Status = 0
-	// Application load balancer is being created.
+	// The application load balancer is being created.
 	LoadBalancer_CREATING LoadBalancer_Status = 1
-	// Application load balancer is being started.
+	// The application load balancer is being started.
 	LoadBalancer_STARTING LoadBalancer_Status = 2
-	// Application load balancer is active and sends traffic to the targets.
+	// The application load balancer is active and sends traffic to the targets.
 	LoadBalancer_ACTIVE LoadBalancer_Status = 3
-	// Application load balancer is being stopped.
+	// The application load balancer is being stopped.
 	LoadBalancer_STOPPING LoadBalancer_Status = 4
-	// Application load balancer is stopped and doesn't send traffic to the targets.
+	// The application load balancer is stopped and doesn't send traffic to the targets.
 	LoadBalancer_STOPPED LoadBalancer_Status = 5
-	// Application load balancer is being deleted.
+	// The application load balancer is being deleted.
 	LoadBalancer_DELETING LoadBalancer_Status = 6
 )
 
@@ -89,15 +89,25 @@ func (LoadBalancer_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Supported target statuses.
 type TargetState_Status int32
 
 const (
 	TargetState_STATUS_UNSPECIFIED TargetState_Status = 0
-	TargetState_HEALTHY            TargetState_Status = 1
-	TargetState_PARTIALLY_HEALTHY  TargetState_Status = 2
-	TargetState_UNHEALTHY          TargetState_Status = 3
-	TargetState_DRAINING           TargetState_Status = 4
-	TargetState_TIMEOUT            TargetState_Status = 5
+	// All of the health checks specified in [HttpBackend.healthchecks] or [GrpcBackend.healthchecks] are passed
+	// (the number depends on the [HealthCheck.healthy_threshold] setting) and the target is ready to receive traffic.
+	TargetState_HEALTHY TargetState_Status = 1
+	// Some of the health checks specified in [HttpBackend.healthchecks] or [GrpcBackend.healthchecks] failed
+	// (the number depends on the [HealthCheck.unhealthy_threshold] setting).
+	// The target is ready to receive traffic from the load balancer nodes which, based on their health checks,
+	// consider the target healthy.
+	TargetState_PARTIALLY_HEALTHY TargetState_Status = 2
+	// All of the health checks specified in [HttpBackend.healthchecks] or [GrpcBackend.healthchecks] failed
+	// (the number depends on the [HealthCheck.unhealthy_threshold] setting) and the target is not receiving traffic.
+	TargetState_UNHEALTHY TargetState_Status = 3
+	// Target is being deleted and the application load balancer is no longer sending traffic to this target.
+	TargetState_DRAINING TargetState_Status = 4
+	TargetState_TIMEOUT  TargetState_Status = 5
 )
 
 // Enum value maps for TargetState_Status.
@@ -147,37 +157,50 @@ func (TargetState_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_rawDescGZIP(), []int{16, 0}
 }
 
-// A LoadBalancer resource.
+// An application load balancer resource.
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/application-load-balancer).
 type LoadBalancer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Output only. ID of the load balancer.
+	// ID of the application load balancer. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The name is unique within the folder. 3-63 characters long.
+	// Name of the application load balancer. The name is unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the load balancer. 0-256 characters long.
+	// Description of the application load balancer.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the folder that the load balancer belongs to.
+	// ID of the folder that the application load balancer belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
+	// Application load balancer labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Status of the application load balancer.
 	Status LoadBalancer_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.apploadbalancer.v1.LoadBalancer_Status" json:"status,omitempty"`
-	// ID of the region that the load balancer located at.
+	// ID of the region that the application load balancer is located at.
+	//
+	// Currently Yandex Cloud supports only `ru-central1` region.
 	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// ID of the network that the load balancer located at.
+	// ID of the network that the application load balancer belongs to.
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// List of listeners for the application load balancer.
+	// Listeners that belong to the application load balancer.
+	//
+	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#listener).
 	Listeners []*Listener `protobuf:"bytes,9,rep,name=listeners,proto3" json:"listeners,omitempty"`
-	// Allocation sites for application load balancer instances.
+	// Locality settings of the application load balancer.
+	//
+	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lb-location).
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,10,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
-	// Cloud log group used by the load balancer to store access logs.
+	// ID of the log group that stores access logs of the application load balancer.
+	//
+	// The logs can be accessed using a Cloud Functions [trigger for Cloud Logs](/docs/functions/operations/trigger/cloudlogs-trigger-create).
 	LogGroupId string `protobuf:"bytes,11,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	// ID's of security groups attached to the load balancer.
+	// ID's of the security groups attributed to the application load balancer.
+	//
+	// For details about the concept,
+	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#security-groups).
 	SecurityGroupIds []string `protobuf:"bytes,12,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Creation timestamp for the load balancer.
+	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 
@@ -304,11 +327,14 @@ func (x *LoadBalancer) GetCreatedAt() *timestamp.Timestamp {
 	return nil
 }
 
+// An endpoint address resource.
 type Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Endpoint address of one of the types: public (external) IPv4 address, internal IPv4 address, public IPv6 address.
+	//
 	// Types that are assignable to Address:
 	//	*Address_ExternalIpv4Address
 	//	*Address_InternalIpv4Address
@@ -381,14 +407,19 @@ type isAddress_Address interface {
 }
 
 type Address_ExternalIpv4Address struct {
+	// Public IPv4 endpoint address.
 	ExternalIpv4Address *ExternalIpv4Address `protobuf:"bytes,1,opt,name=external_ipv4_address,json=externalIpv4Address,proto3,oneof"`
 }
 
 type Address_InternalIpv4Address struct {
+	// Internal IPv4 endpoint address.
+	//
+	// To enable the use of listeners with internal addresses, [contact support](https://console.cloud.yandex.ru/support).
 	InternalIpv4Address *InternalIpv4Address `protobuf:"bytes,2,opt,name=internal_ipv4_address,json=internalIpv4Address,proto3,oneof"`
 }
 
 type Address_ExternalIpv6Address struct {
+	// Public IPv6 endpoint address.
 	ExternalIpv6Address *ExternalIpv6Address `protobuf:"bytes,3,opt,name=external_ipv6_address,json=externalIpv6Address,proto3,oneof"`
 }
 
@@ -398,11 +429,13 @@ func (*Address_InternalIpv4Address) isAddress_Address() {}
 
 func (*Address_ExternalIpv6Address) isAddress_Address() {}
 
+// A public (external) IPv4 endpoint address resource.
 type ExternalIpv4Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// IPv4 address.
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 }
 
@@ -445,12 +478,15 @@ func (x *ExternalIpv4Address) GetAddress() string {
 	return ""
 }
 
+// An internal IPv4 endpoint address resource.
 type InternalIpv4Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Address  string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// IPv4 address.
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// ID of the subnet that the address belongs to.
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 }
 
@@ -500,11 +536,13 @@ func (x *InternalIpv4Address) GetSubnetId() string {
 	return ""
 }
 
+// A public (external) IPv4 endpoint address resource.
 type ExternalIpv6Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// IPv6 address.
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 }
 
@@ -547,14 +585,25 @@ func (x *ExternalIpv6Address) GetAddress() string {
 	return ""
 }
 
+// An application load balancer location resource.
+//
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lb-location).
 type Location struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ZoneId   string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// ID of the availability zone where the application load balancer resides.
+	//
+	// Each Yandex Cloud availability zone can only be specified once.
+	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// ID of the subnet that the application load balancer belongs to.
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// If set, will disable all L7 instances in the zone for request handling.
+	// Disables the load balancer node in the specified availability zone.
+	//
+	// Backends in the availability zone are not directly affected by this setting.
+	// They still may receive traffic from the load balancer nodes in other availability zones,
+	// subject to [LoadBalancingConfig.locality_aware_routing_percent] and [LoadBalancingConfig.strict_locality] settings.
 	DisableTraffic bool `protobuf:"varint,3,opt,name=disable_traffic,json=disableTraffic,proto3" json:"disable_traffic,omitempty"`
 }
 
@@ -611,11 +660,13 @@ func (x *Location) GetDisableTraffic() bool {
 	return false
 }
 
+// A locality settings (allocation policy) resource.
 type AllocationPolicy struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Availability zones and subnets that the application load balancer resides.
 	Locations []*Location `protobuf:"bytes,1,rep,name=locations,proto3" json:"locations,omitempty"`
 }
 
@@ -658,16 +709,23 @@ func (x *AllocationPolicy) GetLocations() []*Location {
 	return nil
 }
 
-// A Listener resource.
+// A listener resource.
+//
+// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#listener).
 type Listener struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the listener. The name must be unique for each listener on a single load balancer. 3-63 characters long.
+	// Name of the listener. The name is unique within the application load balancer.
+	// The string length in characters is 3-63.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Network endpoints (addresses and ports) of the listener.
+	// Endpoints of the listener.
+	//
+	// Endpoints are defined by their IP addresses and ports.
 	Endpoints []*Endpoint `protobuf:"bytes,2,rep,name=endpoints,proto3" json:"endpoints,omitempty"`
+	// HTTP or HTTPS (HTTP over TLS) listener settings.
+	//
 	// Types that are assignable to Listener:
 	//	*Listener_Http
 	//	*Listener_Tls
@@ -746,10 +804,12 @@ type isListener_Listener interface {
 }
 
 type Listener_Http struct {
+	// HTTP listener settings.
 	Http *HttpListener `protobuf:"bytes,3,opt,name=http,proto3,oneof"`
 }
 
 type Listener_Tls struct {
+	// HTTPS (HTTP over TLS) listener settings.
 	Tls *TlsListener `protobuf:"bytes,4,opt,name=tls,proto3,oneof"`
 }
 
@@ -757,13 +817,16 @@ func (*Listener_Http) isListener_Listener() {}
 
 func (*Listener_Tls) isListener_Listener() {}
 
+// An endpoint resource.
 type Endpoint struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Endpoint public (external) and internal addresses.
 	Addresses []*Address `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	Ports     []int64    `protobuf:"varint,2,rep,packed,name=ports,proto3" json:"ports,omitempty"`
+	// Endpoint ports.
+	Ports []int64 `protobuf:"varint,2,rep,packed,name=ports,proto3" json:"ports,omitempty"`
 }
 
 func (x *Endpoint) Reset() {
@@ -812,15 +875,19 @@ func (x *Endpoint) GetPorts() []int64 {
 	return nil
 }
 
+// An HTTP listener resource.
 type HttpListener struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Sets plaintext HTTP router, optional.
+	// Settings for handling HTTP requests.
+	//
+	// Only one of `handler` and [redirects] can be specified.
 	Handler *HttpHandler `protobuf:"bytes,1,opt,name=handler,proto3" json:"handler,omitempty"`
-	// Shortcut for adding http -> https redirects,
-	// can be used instead of the HttpHandler above.
+	// Redirects settings.
+	//
+	// Only one of `redirects` and [handler] can be specified.
 	Redirects *Redirects `protobuf:"bytes,2,opt,name=redirects,proto3" json:"redirects,omitempty"`
 }
 
@@ -870,13 +937,18 @@ func (x *HttpListener) GetRedirects() *Redirects {
 	return nil
 }
 
+// An HTTPS (HTTP over TLS) listener resource.
 type TlsListener struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Settings for handling HTTPS requests by default,
+	// with Server Name Indication (SNI) not matching any of the [sni_handlers].
 	DefaultHandler *TlsHandler `protobuf:"bytes,1,opt,name=default_handler,json=defaultHandler,proto3" json:"default_handler,omitempty"`
-	SniHandlers    []*SniMatch `protobuf:"bytes,2,rep,name=sni_handlers,json=sniHandlers,proto3" json:"sni_handlers,omitempty"`
+	// Settings for handling HTTPS requests with Server Name Indication (SNI)
+	// matching one of [SniMatch.server_names] values.
+	SniHandlers []*SniMatch `protobuf:"bytes,2,rep,name=sni_handlers,json=sniHandlers,proto3" json:"sni_handlers,omitempty"`
 }
 
 func (x *TlsListener) Reset() {
@@ -925,11 +997,13 @@ func (x *TlsListener) GetSniHandlers() []*SniMatch {
 	return nil
 }
 
+// An HTTP/2 options resource.
 type Http2Options struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Maximum number of concurrent HTTP/2 streams in a connection.
 	MaxConcurrentStreams int64 `protobuf:"varint,1,opt,name=max_concurrent_streams,json=maxConcurrentStreams,proto3" json:"max_concurrent_streams,omitempty"`
 }
 
@@ -972,12 +1046,21 @@ func (x *Http2Options) GetMaxConcurrentStreams() int64 {
 	return 0
 }
 
+// An HTTP handler resource.
 type HttpHandler struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the HTTP router processing requests.
+	//
+	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router).
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
+	// Protocol settings.
+	//
+	// For HTTPS (HTTP over TLS) connections, settings are applied to the protocol
+	// negotiated using TLS [ALPN](https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation) extension.
+	//
 	// Types that are assignable to ProtocolSettings:
 	//	*HttpHandler_Http2Options
 	//	*HttpHandler_AllowHttp10
@@ -1049,12 +1132,14 @@ type isHttpHandler_ProtocolSettings interface {
 }
 
 type HttpHandler_Http2Options struct {
-	// If set, will enable HTTP2 protocol for the handler.
+	// HTTP/2 settings.
+	//
+	// If specified, incoming HTTP/2 requests are supported by the listener.
 	Http2Options *Http2Options `protobuf:"bytes,2,opt,name=http2_options,json=http2Options,proto3,oneof"`
 }
 
 type HttpHandler_AllowHttp10 struct {
-	// If set, will enable only HTTP1 protocol with HTTP1.0 support.
+	// Enables support for incoming HTTP/1.0 and HTTP/1.1 requests and disables it for HTTP/2 requests.
 	AllowHttp10 bool `protobuf:"varint,3,opt,name=allow_http10,json=allowHttp10,proto3,oneof"`
 }
 
@@ -1062,12 +1147,16 @@ func (*HttpHandler_Http2Options) isHttpHandler_ProtocolSettings() {}
 
 func (*HttpHandler_AllowHttp10) isHttpHandler_ProtocolSettings() {}
 
+// A listener redirects resource.
 type Redirects struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Adds "*" VirtualHost with a http -> https redirect.
+	// Redirects all unencrypted HTTP requests to the same URI with scheme changed to `https`.
+	//
+	// The setting has the same effect as a single, catch-all [HttpRoute]
+	// with [RedirectAction.replace_scheme] set to `https`.
 	HttpToHttps bool `protobuf:"varint,1,opt,name=http_to_https,json=httpToHttps,proto3" json:"http_to_https,omitempty"`
 }
 
@@ -1110,14 +1199,18 @@ func (x *Redirects) GetHttpToHttps() bool {
 	return false
 }
 
+// A SNI handler resource.
 type SniMatch struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name        string      `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	ServerNames []string    `protobuf:"bytes,2,rep,name=server_names,json=serverNames,proto3" json:"server_names,omitempty"`
-	Handler     *TlsHandler `protobuf:"bytes,3,opt,name=handler,proto3" json:"handler,omitempty"`
+	// Name of the SNI handler.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Server names that are matched by the SNI handler.
+	ServerNames []string `protobuf:"bytes,2,rep,name=server_names,json=serverNames,proto3" json:"server_names,omitempty"`
+	// Settings for handling requests with Server Name Indication (SNI) matching one of [server_names] values.
+	Handler *TlsHandler `protobuf:"bytes,3,opt,name=handler,proto3" json:"handler,omitempty"`
 }
 
 func (x *SniMatch) Reset() {
@@ -1173,18 +1266,20 @@ func (x *SniMatch) GetHandler() *TlsHandler {
 	return nil
 }
 
+// An HTTPS (HTTP over TLS) handler resource.
 type TlsHandler struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Settings for handling requests.
+	//
 	// Types that are assignable to Handler:
 	//	*TlsHandler_HttpHandler
 	Handler isTlsHandler_Handler `protobuf_oneof:"handler"`
-	// Certificate IDs in the Certificate Manager.
-	// Multiple TLS certificates can be associated with the same context to allow
-	// both RSA and ECDSA certificates.
-	// Only the first certificate of each type will be used.
+	// ID's of the TLS server certificates from [Certificate Manager](/docs/certificate-manager/).
+	//
+	// RSA and ECDSA certificates are supported, and only the first certificate of each type is used.
 	CertificateIds []string `protobuf:"bytes,3,rep,name=certificate_ids,json=certificateIds,proto3" json:"certificate_ids,omitempty"`
 }
 
@@ -1246,19 +1341,22 @@ type isTlsHandler_Handler interface {
 }
 
 type TlsHandler_HttpHandler struct {
+	// HTTP handler.
 	HttpHandler *HttpHandler `protobuf:"bytes,2,opt,name=http_handler,json=httpHandler,proto3,oneof"`
 }
 
 func (*TlsHandler_HttpHandler) isTlsHandler_Handler() {}
 
+// A target state resource.
 type TargetState struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Statuses of the target for all known zones.
+	// Health of the target, i.e. its statuses in all availability zones.
 	Status *TargetState_HealthcheckStatus `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	Target *Target                        `protobuf:"bytes,2,opt,name=target,proto3" json:"target,omitempty"`
+	// Target.
+	Target *Target `protobuf:"bytes,2,opt,name=target,proto3" json:"target,omitempty"`
 }
 
 func (x *TargetState) Reset() {
@@ -1307,11 +1405,13 @@ func (x *TargetState) GetTarget() *Target {
 	return nil
 }
 
+// Health of the target.
 type TargetState_HealthcheckStatus struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Statuses of the target in its availability zones.
 	ZoneStatuses []*TargetState_ZoneHealthcheckStatus `protobuf:"bytes,1,rep,name=zone_statuses,json=zoneStatuses,proto3" json:"zone_statuses,omitempty"`
 }
 
@@ -1354,15 +1454,22 @@ func (x *TargetState_HealthcheckStatus) GetZoneStatuses() []*TargetState_ZoneHea
 	return nil
 }
 
+// Health of the target in the availability zone.
 type TargetState_ZoneHealthcheckStatus struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the availability zone.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// Healthcheck status of target for the specific zone.
+	// Status of the target in the availability zone.
 	Status TargetState_Status `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.apploadbalancer.v1.TargetState_Status" json:"status,omitempty"`
-	// Whether UNHEALTHY status was set due to failed active checks or not.
+	// Indicates whether the target has been marked `UNHEALTHY` due to failing active health checks,
+	// which determine target statuses as configured in [HttpBackend.healthchecks] or [GrpcBackend.healthchecks].
+	//
+	// Currently the only type of health checks is active, as described above.
+	// Passive health checks, which determine the health of a target based on its responses to production requests
+	// (HTTP 5xx status codes, connection errors etc.), are not implemented yet.
 	FailedActiveHc bool `protobuf:"varint,3,opt,name=failed_active_hc,json=failedActiveHc,proto3" json:"failed_active_hc,omitempty"`
 }
 

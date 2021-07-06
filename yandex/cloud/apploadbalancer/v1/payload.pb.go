@@ -21,11 +21,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A health check payload resource.
 type Payload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Payload.
+	//
 	// Types that are assignable to Payload:
 	//	*Payload_Text
 	Payload isPayload_Payload `protobuf_oneof:"payload"`
@@ -82,7 +85,7 @@ type isPayload_Payload interface {
 }
 
 type Payload_Text struct {
-	// Text message.
+	// Payload text.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3,oneof"`
 }
 
