@@ -442,12 +442,28 @@ func (m *MoveClusterMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
 }
 
+func (m *UpdateClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsRequest) SetUpdateHostSpecs(v []*UpdateHostSpec) {
+	m.UpdateHostSpecs = v
+}
+
 func (m *UpdateClusterHostsMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
 func (m *UpdateClusterHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
+}
+
+func (m *UpdateHostSpec) SetHostName(v string) {
+	m.HostName = v
+}
+
+func (m *UpdateHostSpec) SetReplicationSource(v string) {
+	m.ReplicationSource = v
 }
 
 func (m *HostSpec) SetZoneId(v string) {
@@ -460,6 +476,10 @@ func (m *HostSpec) SetSubnetId(v string) {
 
 func (m *HostSpec) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
+}
+
+func (m *HostSpec) SetReplicationSource(v string) {
+	m.ReplicationSource = v
 }
 
 type ConfigSpec_MysqlConfig = isConfigSpec_MysqlConfig
