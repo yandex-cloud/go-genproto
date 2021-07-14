@@ -82,3 +82,7 @@ func (m *SymmetricKeyVersion) SetPrimary(v bool) {
 func (m *SymmetricKeyVersion) SetDestroyAt(v *timestamp.Timestamp) {
 	m.DestroyAt = v
 }
+
+func (m *SymmetricKeyVersion) SetHostedByHsm(v bool) {
+	m.HostedByHsm = v
+}

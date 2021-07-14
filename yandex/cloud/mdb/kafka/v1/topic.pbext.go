@@ -40,6 +40,12 @@ func (m *Topic) SetTopicConfig_2_6(v *TopicConfig2_6) {
 	}
 }
 
+func (m *Topic) SetTopicConfig_2_8(v *TopicConfig2_8) {
+	m.TopicConfig = &Topic_TopicConfig_2_8{
+		TopicConfig_2_8: v,
+	}
+}
+
 type TopicSpec_TopicConfig = isTopicSpec_TopicConfig
 
 func (m *TopicSpec) SetTopicConfig(v TopicSpec_TopicConfig) {
@@ -67,6 +73,12 @@ func (m *TopicSpec) SetTopicConfig_2_1(v *TopicConfig2_1) {
 func (m *TopicSpec) SetTopicConfig_2_6(v *TopicConfig2_6) {
 	m.TopicConfig = &TopicSpec_TopicConfig_2_6{
 		TopicConfig_2_6: v,
+	}
+}
+
+func (m *TopicSpec) SetTopicConfig_2_8(v *TopicConfig2_8) {
+	m.TopicConfig = &TopicSpec_TopicConfig_2_8{
+		TopicConfig_2_8: v,
 	}
 }
 
@@ -171,5 +183,57 @@ func (m *TopicConfig2_6) SetSegmentBytes(v *wrappers.Int64Value) {
 }
 
 func (m *TopicConfig2_6) SetPreallocate(v *wrappers.BoolValue) {
+	m.Preallocate = v
+}
+
+func (m *TopicConfig2_8) SetCleanupPolicy(v TopicConfig2_8_CleanupPolicy) {
+	m.CleanupPolicy = v
+}
+
+func (m *TopicConfig2_8) SetCompressionType(v CompressionType) {
+	m.CompressionType = v
+}
+
+func (m *TopicConfig2_8) SetDeleteRetentionMs(v *wrappers.Int64Value) {
+	m.DeleteRetentionMs = v
+}
+
+func (m *TopicConfig2_8) SetFileDeleteDelayMs(v *wrappers.Int64Value) {
+	m.FileDeleteDelayMs = v
+}
+
+func (m *TopicConfig2_8) SetFlushMessages(v *wrappers.Int64Value) {
+	m.FlushMessages = v
+}
+
+func (m *TopicConfig2_8) SetFlushMs(v *wrappers.Int64Value) {
+	m.FlushMs = v
+}
+
+func (m *TopicConfig2_8) SetMinCompactionLagMs(v *wrappers.Int64Value) {
+	m.MinCompactionLagMs = v
+}
+
+func (m *TopicConfig2_8) SetRetentionBytes(v *wrappers.Int64Value) {
+	m.RetentionBytes = v
+}
+
+func (m *TopicConfig2_8) SetRetentionMs(v *wrappers.Int64Value) {
+	m.RetentionMs = v
+}
+
+func (m *TopicConfig2_8) SetMaxMessageBytes(v *wrappers.Int64Value) {
+	m.MaxMessageBytes = v
+}
+
+func (m *TopicConfig2_8) SetMinInsyncReplicas(v *wrappers.Int64Value) {
+	m.MinInsyncReplicas = v
+}
+
+func (m *TopicConfig2_8) SetSegmentBytes(v *wrappers.Int64Value) {
+	m.SegmentBytes = v
+}
+
+func (m *TopicConfig2_8) SetPreallocate(v *wrappers.BoolValue) {
 	m.Preallocate = v
 }

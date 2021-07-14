@@ -64,6 +64,10 @@ func (m *Cluster) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *Cluster) SetSqlcollation(v string) {
+	m.Sqlcollation = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

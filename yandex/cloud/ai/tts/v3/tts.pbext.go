@@ -114,6 +114,18 @@ func (m *Hints) SetAudioTemplate(v *AudioTemplate) {
 	}
 }
 
+func (m *Hints) SetSpeed(v float64) {
+	m.Hint = &Hints_Speed{
+		Speed: v,
+	}
+}
+
+func (m *Hints) SetVolume(v float64) {
+	m.Hint = &Hints_Volume{
+		Volume: v,
+	}
+}
+
 type UtteranceSynthesisRequest_Utterance = isUtteranceSynthesisRequest_Utterance
 
 func (m *UtteranceSynthesisRequest) SetUtterance(v UtteranceSynthesisRequest_Utterance) {

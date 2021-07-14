@@ -129,6 +129,12 @@ func (m *ConfigSpec_Kafka) SetKafkaConfig_2_6(v *KafkaConfig2_6) {
 	}
 }
 
+func (m *ConfigSpec_Kafka) SetKafkaConfig_2_8(v *KafkaConfig2_8) {
+	m.KafkaConfig = &ConfigSpec_Kafka_KafkaConfig_2_8{
+		KafkaConfig_2_8: v,
+	}
+}
+
 func (m *ConfigSpec_Zookeeper) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -262,6 +268,66 @@ func (m *KafkaConfig2_6) SetNumPartitions(v *wrappers.Int64Value) {
 }
 
 func (m *KafkaConfig2_6) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
+	m.DefaultReplicationFactor = v
+}
+
+func (m *KafkaConfig2_8) SetCompressionType(v CompressionType) {
+	m.CompressionType = v
+}
+
+func (m *KafkaConfig2_8) SetLogFlushIntervalMessages(v *wrappers.Int64Value) {
+	m.LogFlushIntervalMessages = v
+}
+
+func (m *KafkaConfig2_8) SetLogFlushIntervalMs(v *wrappers.Int64Value) {
+	m.LogFlushIntervalMs = v
+}
+
+func (m *KafkaConfig2_8) SetLogFlushSchedulerIntervalMs(v *wrappers.Int64Value) {
+	m.LogFlushSchedulerIntervalMs = v
+}
+
+func (m *KafkaConfig2_8) SetLogRetentionBytes(v *wrappers.Int64Value) {
+	m.LogRetentionBytes = v
+}
+
+func (m *KafkaConfig2_8) SetLogRetentionHours(v *wrappers.Int64Value) {
+	m.LogRetentionHours = v
+}
+
+func (m *KafkaConfig2_8) SetLogRetentionMinutes(v *wrappers.Int64Value) {
+	m.LogRetentionMinutes = v
+}
+
+func (m *KafkaConfig2_8) SetLogRetentionMs(v *wrappers.Int64Value) {
+	m.LogRetentionMs = v
+}
+
+func (m *KafkaConfig2_8) SetLogSegmentBytes(v *wrappers.Int64Value) {
+	m.LogSegmentBytes = v
+}
+
+func (m *KafkaConfig2_8) SetLogPreallocate(v *wrappers.BoolValue) {
+	m.LogPreallocate = v
+}
+
+func (m *KafkaConfig2_8) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
+	m.SocketSendBufferBytes = v
+}
+
+func (m *KafkaConfig2_8) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
+	m.SocketReceiveBufferBytes = v
+}
+
+func (m *KafkaConfig2_8) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
+	m.AutoCreateTopicsEnable = v
+}
+
+func (m *KafkaConfig2_8) SetNumPartitions(v *wrappers.Int64Value) {
+	m.NumPartitions = v
+}
+
+func (m *KafkaConfig2_8) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
 	m.DefaultReplicationFactor = v
 }
 

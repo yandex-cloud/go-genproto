@@ -86,6 +86,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetSqlcollation(v string) {
+	m.Sqlcollation = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

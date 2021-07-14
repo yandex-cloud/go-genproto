@@ -25,3 +25,7 @@ func (m *Backup) SetSourceClusterId(v string) {
 func (m *Backup) SetStartedAt(v *timestamp.Timestamp) {
 	m.StartedAt = v
 }
+
+func (m *Backup) SetDatabases(v []string) {
+	m.Databases = v
+}

@@ -2,6 +2,10 @@
 
 package sqlserver
 
+import (
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+)
+
 func (m *GetDatabaseRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -46,6 +50,22 @@ func (m *CreateDatabaseMetadata) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
 
+func (m *RestoreDatabaseMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestoreDatabaseMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *RestoreDatabaseMetadata) SetFromDatabase(v string) {
+	m.FromDatabase = v
+}
+
+func (m *RestoreDatabaseMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
 func (m *DeleteDatabaseRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -60,4 +80,24 @@ func (m *DeleteDatabaseMetadata) SetClusterId(v string) {
 
 func (m *DeleteDatabaseMetadata) SetDatabaseName(v string) {
 	m.DatabaseName = v
+}
+
+func (m *RestoreDatabaseRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestoreDatabaseRequest) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *RestoreDatabaseRequest) SetFromDatabase(v string) {
+	m.FromDatabase = v
+}
+
+func (m *RestoreDatabaseRequest) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *RestoreDatabaseRequest) SetTime(v *timestamp.Timestamp) {
+	m.Time = v
 }
