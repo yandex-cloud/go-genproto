@@ -23,13 +23,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Log entry resource specification.
+//
+// May be used either by services and by user.
 type LogEntryResource struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Resource type, i.e., `serverless.function`
 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Id   string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	// Resource ID, i.e., ID of the function producing logs.
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *LogEntryResource) Reset() {
@@ -78,13 +83,18 @@ func (x *LogEntryResource) GetId() string {
 	return ""
 }
 
+// Log group resource.
 type LogGroupResource struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type string   `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Ids  []string `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
+	// Resource type.
+	//
+	// Collected from log entries inside log group.
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	// List of resource IDs with the same resource type.
+	Ids []string `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
 }
 
 func (x *LogGroupResource) Reset() {

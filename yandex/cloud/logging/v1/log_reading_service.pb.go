@@ -32,6 +32,8 @@ type ReadRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Read selector.
+	//
 	// Types that are assignable to Selector:
 	//	*ReadRequest_PageToken
 	//	*ReadRequest_Criteria
@@ -96,10 +98,15 @@ type isReadRequest_Selector interface {
 }
 
 type ReadRequest_PageToken struct {
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ReadResponse.next_page_token] or [ReadResponse.previous_page_token] returned by a previous read request.
 	PageToken string `protobuf:"bytes,1,opt,name=page_token,json=pageToken,proto3,oneof"`
 }
 
 type ReadRequest_Criteria struct {
+	// Read criteria.
+	//
+	// See [Criteria] for details.
 	Criteria *Criteria `protobuf:"bytes,2,opt,name=criteria,proto3,oneof"`
 }
 
@@ -112,10 +119,24 @@ type ReadResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LogGroupId        string      `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	Entries           []*LogEntry `protobuf:"bytes,2,rep,name=entries,proto3" json:"entries,omitempty"`
-	NextPageToken     string      `protobuf:"bytes,3,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	PreviousPageToken string      `protobuf:"bytes,4,opt,name=previous_page_token,json=previousPageToken,proto3" json:"previous_page_token,omitempty"`
+	// Log group ID the read was performed from.
+	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// List of matching log entries.
+	Entries []*LogEntry `protobuf:"bytes,2,rep,name=entries,proto3" json:"entries,omitempty"`
+	// Token for getting the next page of the log entries.
+	//
+	// After getting log entries initially with [Criteria], you can use `next_page_token` as the value
+	// for the [ReadRequest.page_token] parameter in the next read request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,3,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// Token for getting the previous page of the log entries.
+	//
+	// After getting log entries initially with [Criteria], you can use `previous_page_token` as the value
+	// for the [ReadRequest.page_token] parameter in the next read request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	PreviousPageToken string `protobuf:"bytes,4,opt,name=previous_page_token,json=previousPageToken,proto3" json:"previous_page_token,omitempty"`
 }
 
 func (x *ReadResponse) Reset() {
@@ -178,19 +199,36 @@ func (x *ReadResponse) GetPreviousPageToken() string {
 	return ""
 }
 
+// Read criteria. Should be used in initial [ReadRequest].
 type Criteria struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LogGroupId    string               `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	ResourceTypes []string             `protobuf:"bytes,2,rep,name=resource_types,json=resourceTypes,proto3" json:"resource_types,omitempty"`
-	ResourceIds   []string             `protobuf:"bytes,3,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
-	Since         *timestamp.Timestamp `protobuf:"bytes,4,opt,name=since,proto3" json:"since,omitempty"`
-	Until         *timestamp.Timestamp `protobuf:"bytes,5,opt,name=until,proto3" json:"until,omitempty"`
-	Levels        []LogLevel_Level     `protobuf:"varint,6,rep,packed,name=levels,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"levels,omitempty"`
-	Filter        string               `protobuf:"bytes,7,opt,name=filter,proto3" json:"filter,omitempty"`
-	PageSize      int64                `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// ID of the log group to return.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
+	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// List of resource types to limit log entries to.
+	//
+	// Empty list disables filter.
+	ResourceTypes []string `protobuf:"bytes,2,rep,name=resource_types,json=resourceTypes,proto3" json:"resource_types,omitempty"`
+	// List of resource IDs to limit log entries to.
+	//
+	// Empty list disables filter.
+	ResourceIds []string `protobuf:"bytes,3,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
+	// Lower bound of log entries timestamps.
+	Since *timestamp.Timestamp `protobuf:"bytes,4,opt,name=since,proto3" json:"since,omitempty"`
+	// Upper bound of log entries timestamps.
+	Until *timestamp.Timestamp `protobuf:"bytes,5,opt,name=until,proto3" json:"until,omitempty"`
+	// List of log levels to limit log entries to.
+	//
+	// Empty list disables filter.
+	Levels []LogLevel_Level `protobuf:"varint,6,rep,packed,name=levels,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"levels,omitempty"`
+	// Filter expression. See documentation at https://cloud.yandex.ru/docs/logging/concepts/filter.
+	Filter string `protobuf:"bytes,7,opt,name=filter,proto3" json:"filter,omitempty"`
+	// The maximum number of results per page to return.
+	PageSize int64 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 }
 
 func (x *Criteria) Reset() {
@@ -481,6 +519,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LogReadingServiceClient interface {
+	// Read log entries from the specified log group.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*ReadResponse, error)
 }
 
@@ -503,6 +542,7 @@ func (c *logReadingServiceClient) Read(ctx context.Context, in *ReadRequest, opt
 
 // LogReadingServiceServer is the server API for LogReadingService service.
 type LogReadingServiceServer interface {
+	// Read log entries from the specified log group.
 	Read(context.Context, *ReadRequest) (*ReadResponse, error)
 }
 

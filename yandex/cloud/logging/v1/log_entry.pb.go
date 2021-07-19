@@ -23,16 +23,38 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Possible log levels for entries.
 type LogLevel_Level int32
 
 const (
+	// Default log level.
+	//
+	// Equivalent to not specifying log level at all.
 	LogLevel_LEVEL_UNSPECIFIED LogLevel_Level = 0
-	LogLevel_TRACE             LogLevel_Level = 1
-	LogLevel_DEBUG             LogLevel_Level = 2
-	LogLevel_INFO              LogLevel_Level = 3
-	LogLevel_WARN              LogLevel_Level = 4
-	LogLevel_ERROR             LogLevel_Level = 5
-	LogLevel_FATAL             LogLevel_Level = 6
+	// Trace log level.
+	//
+	// Possible use case: verbose logging of some business logic.
+	LogLevel_TRACE LogLevel_Level = 1
+	// Debug log level.
+	//
+	// Possible use case: debugging special cases in application logic.
+	LogLevel_DEBUG LogLevel_Level = 2
+	// Info log level.
+	//
+	// Mostly used for information messages.
+	LogLevel_INFO LogLevel_Level = 3
+	// Warn log level.
+	//
+	// May be used to alert about significant events.
+	LogLevel_WARN LogLevel_Level = 4
+	// Error log level.
+	//
+	// May be used to alert about errors in infrastructure, logic, etc.
+	LogLevel_ERROR LogLevel_Level = 5
+	// Fatal log level.
+	//
+	// May be used to alert about unrecoverable failures and events.
+	LogLevel_FATAL LogLevel_Level = 6
 )
 
 // Enum value maps for LogLevel_Level.
@@ -89,14 +111,31 @@ type LogEntry struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uid         string               `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
-	Resource    *LogEntryResource    `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	Timestamp   *timestamp.Timestamp `protobuf:"bytes,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	IngestedAt  *timestamp.Timestamp `protobuf:"bytes,4,opt,name=ingested_at,json=ingestedAt,proto3" json:"ingested_at,omitempty"`
-	SavedAt     *timestamp.Timestamp `protobuf:"bytes,5,opt,name=saved_at,json=savedAt,proto3" json:"saved_at,omitempty"`
-	Level       LogLevel_Level       `protobuf:"varint,6,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
-	Message     string               `protobuf:"bytes,7,opt,name=message,proto3" json:"message,omitempty"`
-	JsonPayload *_struct.Struct      `protobuf:"bytes,8,opt,name=json_payload,json=jsonPayload,proto3" json:"json_payload,omitempty"`
+	// Unique entry ID.
+	//
+	// Useful for logs deduplication.
+	Uid string `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
+	// Entry resource specification.
+	//
+	// May contain information about source service and resource ID.
+	// Also may be provided by the user.
+	Resource *LogEntryResource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	// Timestamp of the entry.
+	Timestamp *timestamp.Timestamp `protobuf:"bytes,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	// Entry ingestion time observed by [LogIngestionService].
+	IngestedAt *timestamp.Timestamp `protobuf:"bytes,4,opt,name=ingested_at,json=ingestedAt,proto3" json:"ingested_at,omitempty"`
+	// Entry save time.
+	//
+	// Entry is ready to be read since this moment.
+	SavedAt *timestamp.Timestamp `protobuf:"bytes,5,opt,name=saved_at,json=savedAt,proto3" json:"saved_at,omitempty"`
+	// Entry severity.
+	//
+	// See [LogLevel.Level] for details.
+	Level LogLevel_Level `protobuf:"varint,6,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
+	// Entry text message.
+	Message string `protobuf:"bytes,7,opt,name=message,proto3" json:"message,omitempty"`
+	// Entry annotation.
+	JsonPayload *_struct.Struct `protobuf:"bytes,8,opt,name=json_payload,json=jsonPayload,proto3" json:"json_payload,omitempty"`
 }
 
 func (x *LogEntry) Reset() {
@@ -192,10 +231,16 @@ type IncomingLogEntry struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Timestamp   *timestamp.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Level       LogLevel_Level       `protobuf:"varint,2,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
-	Message     string               `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	JsonPayload *_struct.Struct      `protobuf:"bytes,4,opt,name=json_payload,json=jsonPayload,proto3" json:"json_payload,omitempty"`
+	// Timestamp of the entry.
+	Timestamp *timestamp.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	// Entry severity.
+	//
+	// See [LogLevel.Level] for details.
+	Level LogLevel_Level `protobuf:"varint,2,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
+	// Entry text message.
+	Message string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	// Entry annotation.
+	JsonPayload *_struct.Struct `protobuf:"bytes,4,opt,name=json_payload,json=jsonPayload,proto3" json:"json_payload,omitempty"`
 }
 
 func (x *IncomingLogEntry) Reset() {
@@ -263,6 +308,8 @@ type Destination struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Entry destination.
+	//
 	// Types that are assignable to Destination:
 	//	*Destination_LogGroupId
 	//	*Destination_FolderId
@@ -327,10 +374,12 @@ type isDestination_Destination interface {
 }
 
 type Destination_LogGroupId struct {
+	// Entry should be written to log group resolved by ID.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
 }
 
 type Destination_FolderId struct {
+	// Entry should be written to default log group for the folder.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
@@ -343,6 +392,9 @@ type LogLevel struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Entry level.
+	//
+	// See [Level] for possible values.
 	Level LogLevel_Level `protobuf:"varint,1,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
 }
 

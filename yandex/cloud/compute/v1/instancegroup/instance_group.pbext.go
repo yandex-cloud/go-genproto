@@ -349,6 +349,22 @@ func (m *PlacementPolicy) SetPlacementGroupId(v string) {
 	m.PlacementGroupId = v
 }
 
+func (m *PlacementPolicy) SetHostAffinityRules(v []*PlacementPolicy_HostAffinityRule) {
+	m.HostAffinityRules = v
+}
+
+func (m *PlacementPolicy_HostAffinityRule) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *PlacementPolicy_HostAffinityRule) SetOp(v PlacementPolicy_HostAffinityRule_Operator) {
+	m.Op = v
+}
+
+func (m *PlacementPolicy_HostAffinityRule) SetValues(v []string) {
+	m.Values = v
+}
+
 func (m *ResourcesSpec) SetMemory(v int64) {
 	m.Memory = v
 }

@@ -22,14 +22,24 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Possible log group statuses.
 type LogGroup_Status int32
 
 const (
+	// Unknown status.
+	//
+	// Should never occur.
 	LogGroup_STATUS_UNSPECIFIED LogGroup_Status = 0
-	LogGroup_CREATING           LogGroup_Status = 1
-	LogGroup_ACTIVE             LogGroup_Status = 2
-	LogGroup_DELETING           LogGroup_Status = 3
-	LogGroup_ERROR              LogGroup_Status = 4
+	// Log group is creating.
+	LogGroup_CREATING LogGroup_Status = 1
+	// Log group is ready to accept messages,
+	LogGroup_ACTIVE LogGroup_Status = 2
+	// Log group is being deleted.
+	//
+	// No messages will be accepted.
+	LogGroup_DELETING LogGroup_Status = 3
+	// Log group is in failed state.
+	LogGroup_ERROR LogGroup_Status = 4
 )
 
 // Enum value maps for LogGroup_Status.
@@ -82,15 +92,28 @@ type LogGroup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              string               `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId        string               `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	CloudId         string               `protobuf:"bytes,3,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
-	CreatedAt       *timestamp.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Name            string               `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string               `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Labels          map[string]string    `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Status          LogGroup_Status      `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.logging.v1.LogGroup_Status" json:"status,omitempty"`
-	RetentionPeriod *duration.Duration   `protobuf:"bytes,9,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
+	// Log group ID.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Log group folder ID.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Log group cloud ID.
+	CloudId string `protobuf:"bytes,3,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// Log group creation time.
+	CreatedAt *timestamp.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Log group name.
+	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	// Log group description.
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	// Log group labels.
+	Labels map[string]string `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Log group status.
+	//
+	// See [Status] for possible values.
+	Status LogGroup_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.logging.v1.LogGroup_Status" json:"status,omitempty"`
+	// Log group entry retention period.
+	//
+	// Entries will be present in group during this period.
+	RetentionPeriod *duration.Duration `protobuf:"bytes,9,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
 }
 
 func (x *LogGroup) Reset() {

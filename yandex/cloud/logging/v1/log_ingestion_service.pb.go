@@ -32,9 +32,14 @@ type WriteRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Destination *Destination        `protobuf:"bytes,1,opt,name=destination,proto3" json:"destination,omitempty"`
-	Resource    *LogEntryResource   `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	Entries     []*IncomingLogEntry `protobuf:"bytes,3,rep,name=entries,proto3" json:"entries,omitempty"`
+	// Log entries destination.
+	//
+	// See [Destination] for details.
+	Destination *Destination `protobuf:"bytes,1,opt,name=destination,proto3" json:"destination,omitempty"`
+	// Common resource (type, ID) specification for log entries.
+	Resource *LogEntryResource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	// List of log entries.
+	Entries []*IncomingLogEntry `protobuf:"bytes,3,rep,name=entries,proto3" json:"entries,omitempty"`
 }
 
 func (x *WriteRequest) Reset() {
@@ -95,6 +100,9 @@ type WriteResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Map<idx, status> of ingest failures.
+	//
+	// If entry with idx N is absent, it was ingested successfully.
 	Errors map[int64]*status.Status `protobuf:"bytes,1,rep,name=errors,proto3" json:"errors,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
@@ -302,6 +310,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LogIngestionServiceClient interface {
+	// Write log entries to specified destination.
 	Write(ctx context.Context, in *WriteRequest, opts ...grpc.CallOption) (*WriteResponse, error)
 }
 
@@ -324,6 +333,7 @@ func (c *logIngestionServiceClient) Write(ctx context.Context, in *WriteRequest,
 
 // LogIngestionServiceServer is the server API for LogIngestionService service.
 type LogIngestionServiceServer interface {
+	// Write log entries to specified destination.
 	Write(context.Context, *WriteRequest) (*WriteResponse, error)
 }
 

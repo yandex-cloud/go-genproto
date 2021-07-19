@@ -36,6 +36,9 @@ type GetLogGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group to return.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 }
 
@@ -83,6 +86,9 @@ type GetLogGroupStatsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group to return stats for.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 }
 
@@ -130,6 +136,9 @@ type GetDefaultLogGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Folder ID of the default log group to return.
+	//
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
@@ -177,11 +186,27 @@ type ListLogGroupsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID of the log groups to return.
+	//
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListLogGroupsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListLogGroupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// supported fields for filter:
-	// name
+	// A filter expression that filters log groups listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently filtering can only be applied to the [LogGroup.name] field.
+	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN`
+	// for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]$`.
+	// Example of a filter: `name=my-log-group`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -250,8 +275,14 @@ type ListLogGroupsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Groups        []*LogGroup `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
-	NextPageToken string      `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of log groups in the specified folder.
+	Groups []*LogGroup `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListLogGroupsRequest.page_size], use `next_page_token` as the value
+	// for the [ListLogGroupsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListLogGroupsResponse) Reset() {
@@ -305,10 +336,21 @@ type CreateLogGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId        string             `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name            string             `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string             `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels          map[string]string  `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the folder to create a log group in.
+	//
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the log group.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the log group.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Log group labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Log group entry retention period.
+	//
+	// Entries will be present in group during this period.
+	// Must be at least `1h`.
 	RetentionPeriod *duration.Duration `protobuf:"bytes,5,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
 }
 
@@ -384,6 +426,7 @@ type CreateLogGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group being created.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 }
 
@@ -431,12 +474,24 @@ type UpdateLogGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LogGroupId      string                `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	UpdateMask      *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name            string                `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string                `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels          map[string]string     `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	RetentionPeriod *duration.Duration    `protobuf:"bytes,6,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
+	// ID of the log group to update.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
+	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// Field mask that specifies which attributes of the function should be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name of the log group.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New Description of the log group.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New log group labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// New log group entry retention period.
+	//
+	// Entries will be present in group during this period.
+	// Must be at least `1h`.
+	RetentionPeriod *duration.Duration `protobuf:"bytes,6,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
 }
 
 func (x *UpdateLogGroupRequest) Reset() {
@@ -518,6 +573,7 @@ type UpdateLogGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group being updated.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 }
 
@@ -565,6 +621,9 @@ type DeleteLogGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group to delete.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 }
 
@@ -612,6 +671,7 @@ type DeleteLogGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group being deleted.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 }
 
@@ -659,8 +719,14 @@ type ListResourcesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group to list resources for.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	Type       string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// Resource type to return resources for.
+	//
+	// If not specified, [ListResourcesResponse] will contain information about all resource types.
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (x *ListResourcesRequest) Reset() {
@@ -714,6 +780,7 @@ type ListResourcesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of resources present in log group.
 	Resources []*LogGroupResource `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
 }
 
@@ -761,15 +828,32 @@ type ListOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the log group to list operations for.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	PageSize   int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken  string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// supported attributes:
-	// description
-	// created_at
-	// modified_at
-	// created_by
-	// done
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently filtering can be applied to the following fields:
+	// * [operation.Operation.description]
+	// * [operation.Operation.created_at]
+	// * [operation.Operation.modified_at]
+	// * [operation.Operation.created_by]
+	// * [operation.Operation.done]
+	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN`
+	// for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]$`.
+	// Examples of a filter: `done=false`, `created_by='John.Doe'`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -838,8 +922,14 @@ type ListOperationsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Operations    []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of operations for the specified log group.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListOperationsResponse) Reset() {
@@ -893,9 +983,12 @@ type GetLogGroupStatsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Log group ID the stats are returned for.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	Bytes      int64  `protobuf:"varint,2,opt,name=bytes,proto3" json:"bytes,omitempty"`
-	Records    int64  `protobuf:"varint,3,opt,name=records,proto3" json:"records,omitempty"`
+	// Size of data in log group in bytes.
+	Bytes int64 `protobuf:"varint,2,opt,name=bytes,proto3" json:"bytes,omitempty"`
+	// Amount of records in log group.
+	Records int64 `protobuf:"varint,3,opt,name=records,proto3" json:"records,omitempty"`
 }
 
 func (x *GetLogGroupStatsResponse) Reset() {
@@ -1586,17 +1679,33 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LogGroupServiceClient interface {
+	// Returns the specified log group.
+	//
+	// To get the list of all available log groups, make a [List] request.
 	Get(ctx context.Context, in *GetLogGroupRequest, opts ...grpc.CallOption) (*LogGroup, error)
+	// Returns default log group for the folder.
+	//
+	// To get the list of all available log groups, make a [List] request.
 	GetDefault(ctx context.Context, in *GetDefaultLogGroupRequest, opts ...grpc.CallOption) (*LogGroup, error)
+	// Returns stats for the specified log group.
 	Stats(ctx context.Context, in *GetLogGroupStatsRequest, opts ...grpc.CallOption) (*GetLogGroupStatsResponse, error)
+	// Retrieves the list of log groups in the specified folder.
 	List(ctx context.Context, in *ListLogGroupsRequest, opts ...grpc.CallOption) (*ListLogGroupsResponse, error)
+	// Creates a log group in the specified folder.
 	Create(ctx context.Context, in *CreateLogGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified log group.
 	Update(ctx context.Context, in *UpdateLogGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified log group.
 	Delete(ctx context.Context, in *DeleteLogGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves the resources (type and IDs) in the specified log group.
 	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
+	// Lists operations for the specified log group.
 	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (*ListOperationsResponse, error)
+	// Lists existing access bindings for the specified log group.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified log group.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified log group.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -1718,17 +1827,33 @@ func (c *logGroupServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 
 // LogGroupServiceServer is the server API for LogGroupService service.
 type LogGroupServiceServer interface {
+	// Returns the specified log group.
+	//
+	// To get the list of all available log groups, make a [List] request.
 	Get(context.Context, *GetLogGroupRequest) (*LogGroup, error)
+	// Returns default log group for the folder.
+	//
+	// To get the list of all available log groups, make a [List] request.
 	GetDefault(context.Context, *GetDefaultLogGroupRequest) (*LogGroup, error)
+	// Returns stats for the specified log group.
 	Stats(context.Context, *GetLogGroupStatsRequest) (*GetLogGroupStatsResponse, error)
+	// Retrieves the list of log groups in the specified folder.
 	List(context.Context, *ListLogGroupsRequest) (*ListLogGroupsResponse, error)
+	// Creates a log group in the specified folder.
 	Create(context.Context, *CreateLogGroupRequest) (*operation.Operation, error)
+	// Updates the specified log group.
 	Update(context.Context, *UpdateLogGroupRequest) (*operation.Operation, error)
+	// Deletes the specified log group.
 	Delete(context.Context, *DeleteLogGroupRequest) (*operation.Operation, error)
+	// Retrieves the resources (type and IDs) in the specified log group.
 	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
+	// Lists operations for the specified log group.
 	ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error)
+	// Lists existing access bindings for the specified log group.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified log group.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified log group.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 

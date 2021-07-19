@@ -154,6 +154,10 @@ func (m *Host) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
 }
 
+func (m *Host) SetReplicationSource(v string) {
+	m.ReplicationSource = v
+}
+
 func (m *Service) SetType(v Service_Type) {
 	m.Type = v
 }
