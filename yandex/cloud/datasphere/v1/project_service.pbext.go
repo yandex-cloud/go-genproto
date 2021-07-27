@@ -3,6 +3,7 @@
 package datasphere
 
 import (
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
@@ -20,6 +21,10 @@ func (m *CreateProjectRequest) SetDescription(v string) {
 
 func (m *CreateProjectRequest) SetSettings(v *Project_Settings) {
 	m.Settings = v
+}
+
+func (m *CreateProjectRequest) SetLimits(v *Project_Limits) {
+	m.Limits = v
 }
 
 func (m *CreateProjectMetadata) SetProjectId(v string) {
@@ -44,6 +49,10 @@ func (m *UpdateProjectRequest) SetDescription(v string) {
 
 func (m *UpdateProjectRequest) SetSettings(v *Project_Settings) {
 	m.Settings = v
+}
+
+func (m *UpdateProjectRequest) SetLimits(v *Project_Limits) {
+	m.Limits = v
 }
 
 func (m *UpdateProjectMetadata) SetProjectId(v string) {
@@ -96,4 +105,20 @@ func (m *ListProjectsResponse) SetProjects(v []*Project) {
 
 func (m *ListProjectsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *GetUnitBalanceRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *GetUnitBalanceResponse) SetUnitBalance(v *wrappers.Int64Value) {
+	m.UnitBalance = v
+}
+
+func (m *SetUnitBalanceRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *SetUnitBalanceRequest) SetUnitBalance(v *wrappers.Int64Value) {
+	m.UnitBalance = v
 }

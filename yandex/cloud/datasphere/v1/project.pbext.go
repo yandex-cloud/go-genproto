@@ -4,6 +4,7 @@ package datasphere
 
 import (
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 )
 
 func (m *Project) SetId(v string) {
@@ -30,6 +31,10 @@ func (m *Project) SetSettings(v *Project_Settings) {
 	m.Settings = v
 }
 
+func (m *Project) SetLimits(v *Project_Limits) {
+	m.Limits = v
+}
+
 func (m *Project_Settings) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
@@ -44,4 +49,12 @@ func (m *Project_Settings) SetDataProcClusterId(v string) {
 
 func (m *Project_Settings) SetCommitMode(v Project_Settings_CommitMode) {
 	m.CommitMode = v
+}
+
+func (m *Project_Limits) SetMaxUnitsPerHour(v *wrappers.Int64Value) {
+	m.MaxUnitsPerHour = v
+}
+
+func (m *Project_Limits) SetMaxUnitsPerExecution(v *wrappers.Int64Value) {
+	m.MaxUnitsPerExecution = v
 }

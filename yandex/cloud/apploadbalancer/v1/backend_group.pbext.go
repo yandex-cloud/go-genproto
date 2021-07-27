@@ -114,6 +114,12 @@ func (m *HttpBackend) SetTargetGroups(v *TargetGroupsBackend) {
 	}
 }
 
+func (m *HttpBackend) SetStorageBucket(v *StorageBucketBackend) {
+	m.BackendType = &HttpBackend_StorageBucket{
+		StorageBucket: v,
+	}
+}
+
 func (m *HttpBackend) SetHealthchecks(v []*HealthCheck) {
 	m.Healthchecks = v
 }
@@ -172,6 +178,10 @@ func (m *BackendTls) SetSni(v string) {
 
 func (m *BackendTls) SetValidationContext(v *ValidationContext) {
 	m.ValidationContext = v
+}
+
+func (m *StorageBucketBackend) SetBucket(v string) {
+	m.Bucket = v
 }
 
 type HealthCheck_Healthcheck = isHealthCheck_Healthcheck

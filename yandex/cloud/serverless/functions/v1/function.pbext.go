@@ -147,6 +147,10 @@ func (m *ScalingPolicy) SetModifiedAt(v *timestamp.Timestamp) {
 	m.ModifiedAt = v
 }
 
+func (m *ScalingPolicy) SetZoneProvisionedInstancesCount(v int64) {
+	m.ZoneProvisionedInstancesCount = v
+}
+
 func (m *ScalingPolicy) SetZoneInstancesLimit(v int64) {
 	m.ZoneInstancesLimit = v
 }
