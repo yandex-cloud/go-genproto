@@ -225,7 +225,7 @@ type Criteria struct {
 	//
 	// Empty list disables filter.
 	Levels []LogLevel_Level `protobuf:"varint,6,rep,packed,name=levels,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"levels,omitempty"`
-	// Filter expression. See documentation at https://cloud.yandex.ru/docs/logging/concepts/filter.
+	// Filter expression. For details about filtering, see [documentation](/docs/logging/concepts/filter).
 	Filter string `protobuf:"bytes,7,opt,name=filter,proto3" json:"filter,omitempty"`
 	// The maximum number of results per page to return.
 	PageSize int64 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`

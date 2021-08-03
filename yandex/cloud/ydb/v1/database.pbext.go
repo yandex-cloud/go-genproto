@@ -132,6 +132,14 @@ func (m *DedicatedDatabase) SetAssignPublicIps(v bool) {
 	m.AssignPublicIps = v
 }
 
+func (m *ServerlessDatabase) SetRequestUnitsPerSecondLimit(v int64) {
+	m.RequestUnitsPerSecondLimit = v
+}
+
+func (m *ServerlessDatabase) SetStorageSizeLimit(v int64) {
+	m.StorageSizeLimit = v
+}
+
 func (m *ZonalDatabase) SetZoneId(v string) {
 	m.ZoneId = v
 }
@@ -158,6 +166,10 @@ func (m *ScalePolicy_FixedScale) SetSize(v int64) {
 
 func (m *StorageConfig) SetStorageOptions(v []*StorageOption) {
 	m.StorageOptions = v
+}
+
+func (m *StorageConfig) SetStorageSizeLimit(v int64) {
+	m.StorageSizeLimit = v
 }
 
 func (m *StorageOption) SetStorageTypeId(v string) {

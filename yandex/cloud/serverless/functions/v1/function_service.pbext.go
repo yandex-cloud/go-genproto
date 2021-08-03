@@ -339,8 +339,8 @@ func (m *SetScalingPolicyRequest) SetTag(v string) {
 	m.Tag = v
 }
 
-func (m *SetScalingPolicyRequest) SetZoneProvisionedInstancesCount(v int64) {
-	m.ZoneProvisionedInstancesCount = v
+func (m *SetScalingPolicyRequest) SetProvisionedInstancesCount(v int64) {
+	m.ProvisionedInstancesCount = v
 }
 
 func (m *SetScalingPolicyRequest) SetZoneInstancesLimit(v int64) {

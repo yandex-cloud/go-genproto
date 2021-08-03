@@ -106,9 +106,7 @@ type LogGroup struct {
 	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	// Log group labels.
 	Labels map[string]string `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Log group status.
-	//
-	// See [Status] for possible values.
+	// Status of the log group.
 	Status LogGroup_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.logging.v1.LogGroup_Status" json:"status,omitempty"`
 	// Log group entry retention period.
 	//

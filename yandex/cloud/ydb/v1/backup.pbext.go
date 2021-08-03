@@ -27,8 +27,22 @@ func (m *BackupSchedule) SetWeeklyBackupSchedule(v *WeeklyBackupSchedule) {
 	}
 }
 
+func (m *BackupSchedule) SetRecurringBackupSchedule(v *RecurringBackupSchedule) {
+	m.Policy = &BackupSchedule_RecurringBackupSchedule{
+		RecurringBackupSchedule: v,
+	}
+}
+
 func (m *BackupSchedule) SetNextExecuteTime(v *timestamp.Timestamp) {
 	m.NextExecuteTime = v
+}
+
+func (m *RecurringBackupSchedule) SetStartTime(v *timestamp.Timestamp) {
+	m.StartTime = v
+}
+
+func (m *RecurringBackupSchedule) SetRecurrence(v string) {
+	m.Recurrence = v
 }
 
 func (m *DaysOfWeekBackupSchedule) SetDays(v []dayofweek.DayOfWeek) {
@@ -73,6 +87,10 @@ func (m *BackupSettings) SetSourcePathsToExclude(v []string) {
 
 func (m *BackupSettings) SetType(v BackupSettings_Type) {
 	m.Type = v
+}
+
+func (m *BackupSettings) SetStorageClass(v BackupSettings_StorageClass) {
+	m.StorageClass = v
 }
 
 func (m *BackupConfig) SetBackupSettings(v []*BackupSettings) {

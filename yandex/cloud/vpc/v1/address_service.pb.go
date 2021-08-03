@@ -771,7 +771,7 @@ type ListAddressOperationsRequest struct {
 
 	// ID of the address to list operations for.
 	//
-	// To get a address ID make a [tAddressService.List] request.
+	// To get a address ID make a [AddressService.List] request.
 	AddressId string `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListAddressOperationsResponse.next_page_token]
