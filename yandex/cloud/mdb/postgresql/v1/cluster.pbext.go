@@ -159,6 +159,10 @@ func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
 
+func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrappers.Int64Value) {
+	m.BackupRetainPeriodDays = v
+}
+
 func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
 }

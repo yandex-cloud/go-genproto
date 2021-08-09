@@ -55,6 +55,14 @@ func (m *IncomingLogEntry) SetJsonPayload(v *_struct.Struct) {
 	m.JsonPayload = v
 }
 
+func (m *LogEntryDefaults) SetLevel(v LogLevel_Level) {
+	m.Level = v
+}
+
+func (m *LogEntryDefaults) SetJsonPayload(v *_struct.Struct) {
+	m.JsonPayload = v
+}
+
 type Destination_Destination = isDestination_Destination
 
 func (m *Destination) SetDestination(v Destination_Destination) {

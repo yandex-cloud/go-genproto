@@ -107,6 +107,46 @@ func (m *ListNetworkSubnetsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *ListNetworkSecurityGroupsRequest) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *ListNetworkSecurityGroupsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListNetworkSecurityGroupsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListNetworkSecurityGroupsResponse) SetSecurityGroups(v []*SecurityGroup) {
+	m.SecurityGroups = v
+}
+
+func (m *ListNetworkSecurityGroupsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *ListNetworkRouteTablesRequest) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *ListNetworkRouteTablesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListNetworkRouteTablesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListNetworkRouteTablesResponse) SetRouteTables(v []*RouteTable) {
+	m.RouteTables = v
+}
+
+func (m *ListNetworkRouteTablesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
 func (m *ListNetworkOperationsRequest) SetNetworkId(v string) {
 	m.NetworkId = v
 }

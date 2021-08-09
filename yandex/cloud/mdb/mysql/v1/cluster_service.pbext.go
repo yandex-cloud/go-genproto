@@ -466,6 +466,10 @@ func (m *UpdateHostSpec) SetReplicationSource(v string) {
 	m.ReplicationSource = v
 }
 
+func (m *UpdateHostSpec) SetUpdateMask(v *field_mask.FieldMask) {
+	m.UpdateMask = v
+}
+
 func (m *HostSpec) SetZoneId(v string) {
 	m.ZoneId = v
 }

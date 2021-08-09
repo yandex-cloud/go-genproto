@@ -83,7 +83,11 @@ const (
 	// Instance group is active.
 	// In this state the group manages its instances and monitors their health,
 	// creating, deleting, stopping, updating and starting instances as needed.
+	//
 	// To stop the instance group, call [yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop].
+	// To pause the processes in the instance group, i.e. scaling, checking instances' health,
+	// auto-healing and updating them, without stopping the instances,
+	// call [yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses].
 	InstanceGroup_ACTIVE InstanceGroup_Status = 2
 	// Instance group is being stopped.
 	// Group's instances stop receiving traffic from the load balancer (if any) and are then stopped.
@@ -95,6 +99,13 @@ const (
 	// Instance group is being deleted.
 	InstanceGroup_DELETING InstanceGroup_Status = 5
 	// Instance group is paused.
+	// In this state all the processes regarding the group management, i.e. scaling, checking instances' health,
+	// auto-healing and updating them, are paused. The instances that were running prior to pausing the group, however,
+	// may still be running.
+	//
+	// To resume the processes in the instance group,
+	// call [yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses].
+	// The group status will change to `ACTIVE`.
 	InstanceGroup_PAUSED InstanceGroup_Status = 6
 )
 

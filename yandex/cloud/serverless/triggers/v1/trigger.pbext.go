@@ -103,6 +103,12 @@ func (m *Trigger_Timer) SetInvokeFunctionWithRetry(v *InvokeFunctionWithRetry) {
 	}
 }
 
+func (m *Trigger_Timer) SetInvokeContainerWithRetry(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_Timer_InvokeContainerWithRetry{
+		InvokeContainerWithRetry: v,
+	}
+}
+
 type Trigger_MessageQueue_Action = isTrigger_MessageQueue_Action
 
 func (m *Trigger_MessageQueue) SetAction(v Trigger_MessageQueue_Action) {
@@ -131,6 +137,12 @@ func (m *Trigger_MessageQueue) SetInvokeFunction(v *InvokeFunctionOnce) {
 	}
 }
 
+func (m *Trigger_MessageQueue) SetInvokeContainer(v *InvokeContainerOnce) {
+	m.Action = &Trigger_MessageQueue_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
 type Trigger_IoTMessage_Action = isTrigger_IoTMessage_Action
 
 func (m *Trigger_IoTMessage) SetAction(v Trigger_IoTMessage_Action) {
@@ -152,6 +164,12 @@ func (m *Trigger_IoTMessage) SetMqttTopic(v string) {
 func (m *Trigger_IoTMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 	m.Action = &Trigger_IoTMessage_InvokeFunction{
 		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_IoTMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_IoTMessage_InvokeContainer{
+		InvokeContainer: v,
 	}
 }
 
@@ -183,6 +201,12 @@ func (m *Trigger_ObjectStorage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 	}
 }
 
+func (m *Trigger_ObjectStorage) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_ObjectStorage_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
 type Trigger_ContainerRegistry_Action = isTrigger_ContainerRegistry_Action
 
 func (m *Trigger_ContainerRegistry) SetAction(v Trigger_ContainerRegistry_Action) {
@@ -211,6 +235,12 @@ func (m *Trigger_ContainerRegistry) SetInvokeFunction(v *InvokeFunctionWithRetry
 	}
 }
 
+func (m *Trigger_ContainerRegistry) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_ContainerRegistry_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
 type Trigger_CloudLogs_Action = isTrigger_CloudLogs_Action
 
 func (m *Trigger_CloudLogs) SetAction(v Trigger_CloudLogs_Action) {
@@ -228,6 +258,12 @@ func (m *Trigger_CloudLogs) SetBatchSettings(v *CloudLogsBatchSettings) {
 func (m *Trigger_CloudLogs) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 	m.Action = &Trigger_CloudLogs_InvokeFunction{
 		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_CloudLogs) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_CloudLogs_InvokeContainer{
+		InvokeContainer: v,
 	}
 }
 
@@ -260,6 +296,38 @@ func (m *InvokeFunctionWithRetry) SetRetrySettings(v *RetrySettings) {
 }
 
 func (m *InvokeFunctionWithRetry) SetDeadLetterQueue(v *PutQueueMessage) {
+	m.DeadLetterQueue = v
+}
+
+func (m *InvokeContainerOnce) SetContainerId(v string) {
+	m.ContainerId = v
+}
+
+func (m *InvokeContainerOnce) SetPath(v string) {
+	m.Path = v
+}
+
+func (m *InvokeContainerOnce) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *InvokeContainerWithRetry) SetContainerId(v string) {
+	m.ContainerId = v
+}
+
+func (m *InvokeContainerWithRetry) SetPath(v string) {
+	m.Path = v
+}
+
+func (m *InvokeContainerWithRetry) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *InvokeContainerWithRetry) SetRetrySettings(v *RetrySettings) {
+	m.RetrySettings = v
+}
+
+func (m *InvokeContainerWithRetry) SetDeadLetterQueue(v *PutQueueMessage) {
 	m.DeadLetterQueue = v
 }
 

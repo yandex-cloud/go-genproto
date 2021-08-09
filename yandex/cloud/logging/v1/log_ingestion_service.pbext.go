@@ -18,6 +18,10 @@ func (m *WriteRequest) SetEntries(v []*IncomingLogEntry) {
 	m.Entries = v
 }
 
+func (m *WriteRequest) SetDefaults(v *LogEntryDefaults) {
+	m.Defaults = v
+}
+
 func (m *WriteResponse) SetErrors(v map[int64]*status.Status) {
 	m.Errors = v
 }

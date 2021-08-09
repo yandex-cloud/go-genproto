@@ -21,3 +21,7 @@ func (m *Cloud) SetName(v string) {
 func (m *Cloud) SetDescription(v string) {
 	m.Description = v
 }
+
+func (m *Cloud) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}

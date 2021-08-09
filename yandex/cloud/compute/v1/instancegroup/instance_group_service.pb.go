@@ -83,6 +83,11 @@ type ResumeInstanceGroupProcessesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the instance group to resume processes in.
+	//
+	// The instance group must have a `PAUSED` status ([InstanceGroup.status]).
+	//
+	// To get the instance group ID, make a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 }
 
@@ -130,6 +135,7 @@ type ResumeInstanceGroupProcessMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the instance group that processes are being resumed in.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 }
 
@@ -177,6 +183,11 @@ type PauseInstanceGroupProcessesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the instance group to pause processes in.
+	//
+	// The instance group must have an `ACTIVE` status ([InstanceGroup.status]).
+	//
+	// To get the instance group ID, make a [InstanceGroupService.List] request.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 }
 
@@ -224,6 +235,7 @@ type PauseInstanceGroupProcessMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the instance group that processes are being paused in.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 }
 
@@ -3220,9 +3232,11 @@ type InstanceGroupServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified instance group.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Resume all process in instance group.
+	// Resumes all processes regarding management of the specified instance group,
+	// i.e. scaling, checking instances' health, auto-healing and updating them.
 	ResumeProcesses(ctx context.Context, in *ResumeInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Pause all process in instance group.
+	// Pauses all processes regarding management of the specified instance group,
+	// i.e. scaling, checking instances' health, auto-healing and updating them. Running instances are not stopped.
 	PauseProcesses(ctx context.Context, in *PauseInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -3447,9 +3461,11 @@ type InstanceGroupServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified instance group.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
-	// Resume all process in instance group.
+	// Resumes all processes regarding management of the specified instance group,
+	// i.e. scaling, checking instances' health, auto-healing and updating them.
 	ResumeProcesses(context.Context, *ResumeInstanceGroupProcessesRequest) (*operation.Operation, error)
-	// Pause all process in instance group.
+	// Pauses all processes regarding management of the specified instance group,
+	// i.e. scaling, checking instances' health, auto-healing and updating them. Running instances are not stopped.
 	PauseProcesses(context.Context, *PauseInstanceGroupProcessesRequest) (*operation.Operation, error)
 }
 
