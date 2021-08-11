@@ -31,7 +31,8 @@ type Blob struct {
 	// Content-addressable identifier of the blob.
 	Digest string `protobuf:"bytes,2,opt,name=digest,proto3" json:"digest,omitempty"`
 	// Size of the blob, specified in bytes.
-	Size int64    `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	Size int64 `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	// List of blob urls.
 	Urls []string `protobuf:"bytes,4,rep,name=urls,proto3" json:"urls,omitempty"`
 }
 

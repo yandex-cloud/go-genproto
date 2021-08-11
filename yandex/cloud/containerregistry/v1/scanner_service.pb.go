@@ -245,14 +245,14 @@ type ListScanResultsRequest struct {
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
-	// 1. The field name. Currently you can use filtering only on [ScanResult.status] and [ScanResult.scanned_at] fields.
+	// 1. The field name. Currently you can use filtering only on [ScanResult.status] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
 	// 3. Value or a list of values to compare against the values of the field.
 	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 	// An order expression that orders resources listed in the response.
 	// The expression must specify:
-	// 1. The field name. Currently you can use filtering only on [ScanResult.status] and [ScanResult.scanned_at] fields.
-	// 2. Order selector. Can be either ASC or DESC.
+	// 1. The field name. Currently you can use filtering only on [ScanResult.status] field.
+	// 2. Order selector. Currently you can use ordering only on `ScanResult.status` field (critical first).
 	OrderBy string `protobuf:"bytes,6,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
@@ -433,14 +433,14 @@ type ListVulnerabilitiesRequest struct {
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
-	// 1. The field name. Currently you can use filtering only on [Vulnerability.severity] and [Vulnerability.type] fields.
+	// 1. The field name. Currently you can use filtering only on [Vulnerability.severity] and [PackageVulnerability.name] fields.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
 	// 3. Value or a list of values to compare against the values of the field.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// An order expression that orders resources listed in the response.
 	// The expression must specify:
-	// 1. The field name. Currently you can use filtering only on [Vulnerability.severity] and [Vulnerability.type] fields.
-	// 2. Order selector. Can be either ASC or DESC.
+	// 1. The field name. Currently you can use filtering only on [Vulnerability.severity] and [PackageVulnerability.name] fields.
+	// 2. Order selector. Currently you can use ordering only on `Vulnerability.severity` field (recent first).
 	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 

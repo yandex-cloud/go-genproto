@@ -340,7 +340,7 @@ type Vulnerability struct {
 
 	// Output only. Severity of the Vulnerability.
 	Severity Vulnerability_Severity `protobuf:"varint,1,opt,name=severity,proto3,enum=yandex.cloud.containerregistry.v1.Vulnerability_Severity" json:"severity,omitempty"`
-	// Details of vulnerability depending on type. Only 'package' vulnerability is supported at the moment.
+	// Details of vulnerability depending on type. Only `package` vulnerability is supported at the moment.
 	//
 	// Types that are assignable to Vulnerability:
 	//	*Vulnerability_Package

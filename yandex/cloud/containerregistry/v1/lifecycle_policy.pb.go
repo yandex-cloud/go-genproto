@@ -27,8 +27,11 @@ type LifecyclePolicy_Status int32
 
 const (
 	LifecyclePolicy_STATUS_UNSPECIFIED LifecyclePolicy_Status = 0
-	LifecyclePolicy_ACTIVE             LifecyclePolicy_Status = 1
-	LifecyclePolicy_DISABLED           LifecyclePolicy_Status = 2
+	// Policy is active and regularly deletes Docker images according to the established rules.
+	LifecyclePolicy_ACTIVE LifecyclePolicy_Status = 1
+	// Policy is disabled and does not delete Docker images in the repository.
+	// Policies in this status can be used for preparing and testing rules.
+	LifecyclePolicy_DISABLED LifecyclePolicy_Status = 2
 )
 
 // Enum value maps for LifecyclePolicy_Status.
@@ -77,13 +80,22 @@ type LifecyclePolicy struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name         string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	RepositoryId string                 `protobuf:"bytes,3,opt,name=repository_id,json=repositoryId,proto3" json:"repository_id,omitempty"`
-	Description  string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Status       LifecyclePolicy_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.LifecyclePolicy_Status" json:"status,omitempty"`
-	CreatedAt    *timestamp.Timestamp   `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Rules        []*LifecycleRule       `protobuf:"bytes,7,rep,name=rules,proto3" json:"rules,omitempty"`
+	// ID of the lifecycle policy.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Name of the lifecycle policy.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// ID of the repository that the lifecycle policy belongs to.
+	// Required. The maximum string length in characters is 50.
+	RepositoryId string `protobuf:"bytes,3,opt,name=repository_id,json=repositoryId,proto3" json:"repository_id,omitempty"`
+	// Description of the lifecycle policy.
+	// The maximum string length in characters is 256.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Status of lifecycle policy.
+	Status LifecyclePolicy_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.LifecyclePolicy_Status" json:"status,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamp.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// The rules of lifecycle policy.
+	Rules []*LifecycleRule `protobuf:"bytes,7,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
 func (x *LifecyclePolicy) Reset() {
@@ -172,11 +184,17 @@ type LifecycleRule struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Description  string             `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
+	// Description of the lifecycle policy rule.
+	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
+	// Period of time for automatic deletion.
+	// Period must be a multiple of 24 hours.
 	ExpirePeriod *duration.Duration `protobuf:"bytes,2,opt,name=expire_period,json=expirePeriod,proto3" json:"expire_period,omitempty"`
-	TagRegexp    string             `protobuf:"bytes,3,opt,name=tag_regexp,json=tagRegexp,proto3" json:"tag_regexp,omitempty"`
-	Untagged     bool               `protobuf:"varint,4,opt,name=untagged,proto3" json:"untagged,omitempty"`
-	RetainedTop  int64              `protobuf:"varint,5,opt,name=retained_top,json=retainedTop,proto3" json:"retained_top,omitempty"`
+	// Tag for specifying a filter in the form of a regular expression.
+	TagRegexp string `protobuf:"bytes,3,opt,name=tag_regexp,json=tagRegexp,proto3" json:"tag_regexp,omitempty"`
+	// Tag for applying the rule to Docker images without tags.
+	Untagged bool `protobuf:"varint,4,opt,name=untagged,proto3" json:"untagged,omitempty"`
+	// Number of Docker images (falling under the specified filter by tags) that must be left, even if the expire_period has already expired.
+	RetainedTop int64 `protobuf:"varint,5,opt,name=retained_top,json=retainedTop,proto3" json:"retained_top,omitempty"`
 }
 
 func (x *LifecycleRule) Reset() {

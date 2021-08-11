@@ -132,12 +132,20 @@ func (m *DedicatedDatabase) SetAssignPublicIps(v bool) {
 	m.AssignPublicIps = v
 }
 
-func (m *ServerlessDatabase) SetRequestUnitsPerSecondLimit(v int64) {
-	m.RequestUnitsPerSecondLimit = v
+func (m *ServerlessDatabase) SetThrottlingRcuLimit(v int64) {
+	m.ThrottlingRcuLimit = v
 }
 
 func (m *ServerlessDatabase) SetStorageSizeLimit(v int64) {
 	m.StorageSizeLimit = v
+}
+
+func (m *ServerlessDatabase) SetEnableThrottlingRcuLimit(v bool) {
+	m.EnableThrottlingRcuLimit = v
+}
+
+func (m *ServerlessDatabase) SetProvisionedRcuLimit(v int64) {
+	m.ProvisionedRcuLimit = v
 }
 
 func (m *ZonalDatabase) SetZoneId(v string) {

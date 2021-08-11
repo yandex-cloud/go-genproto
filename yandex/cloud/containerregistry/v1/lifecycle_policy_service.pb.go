@@ -35,6 +35,7 @@ type GetLifecyclePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
@@ -85,11 +86,25 @@ type ListLifecyclePoliciesRequest struct {
 	// Types that are assignable to Id:
 	//	*ListLifecyclePoliciesRequest_RegistryId
 	//	*ListLifecyclePoliciesRequest_RepositoryId
-	Id        isListLifecyclePoliciesRequest_Id `protobuf_oneof:"id"`
-	PageSize  int64                             `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken string                            `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string                            `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy   string                            `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	Id isListLifecyclePoliciesRequest_Id `protobuf_oneof:"id"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns
+	// a [ListLifecyclePoliciesResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListLifecyclePoliciesResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters lifecycle policy resources listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [LifecyclePolicy.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Sorting the list by [LifecyclePolicy.name], [LifecyclePolicy.created_at] and [LifecyclePolicy.status] fields.
+	// The default sorting order is ascending.
+	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
 func (x *ListLifecyclePoliciesRequest) Reset() {
@@ -178,10 +193,12 @@ type isListLifecyclePoliciesRequest_Id interface {
 }
 
 type ListLifecyclePoliciesRequest_RegistryId struct {
+	// ID of the lifecycle policy.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3,oneof"`
 }
 
 type ListLifecyclePoliciesRequest_RepositoryId struct {
+	// Repository of the lifecycle policy.
 	RepositoryId string `protobuf:"bytes,6,opt,name=repository_id,json=repositoryId,proto3,oneof"`
 }
 
@@ -194,8 +211,14 @@ type ListLifecyclePoliciesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of lifecycle policies.
 	LifecyclePolicies []*LifecyclePolicy `protobuf:"bytes,1,rep,name=lifecycle_policies,json=lifecyclePolicies,proto3" json:"lifecycle_policies,omitempty"`
-	NextPageToken     string             `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListLifecyclePoliciesRequest.page_size], use `next_page_token` as the value
+	// for the [ListLifecyclePoliciesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListLifecyclePoliciesResponse) Reset() {
@@ -249,11 +272,16 @@ type CreateLifecyclePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RepositoryId string                 `protobuf:"bytes,1,opt,name=repository_id,json=repositoryId,proto3" json:"repository_id,omitempty"`
-	Name         string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description  string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Status       LifecyclePolicy_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.LifecyclePolicy_Status" json:"status,omitempty"`
-	Rules        []*LifecycleRule       `protobuf:"bytes,5,rep,name=rules,proto3" json:"rules,omitempty"`
+	// ID of the lifecycle policy repository.
+	RepositoryId string `protobuf:"bytes,1,opt,name=repository_id,json=repositoryId,proto3" json:"repository_id,omitempty"`
+	// Name of lifecycle policy.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of lifecycle policy.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Status of the lifecycle policy.
+	Status LifecyclePolicy_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.LifecyclePolicy_Status" json:"status,omitempty"`
+	// The rules of the lifecycle policy.
+	Rules []*LifecycleRule `protobuf:"bytes,5,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
 func (x *CreateLifecyclePolicyRequest) Reset() {
@@ -328,12 +356,18 @@ type UpdateLifecyclePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LifecyclePolicyId string                 `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
-	UpdateMask        *field_mask.FieldMask  `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name              string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description       string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Status            LifecyclePolicy_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.LifecyclePolicy_Status" json:"status,omitempty"`
-	Rules             []*LifecycleRule       `protobuf:"bytes,6,rep,name=rules,proto3" json:"rules,omitempty"`
+	// ID of the lifecycle policy.
+	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
+	// Field mask that specifies which fields of the lifecycle policy resource are going to be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Name of lifecycle policy.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of lifecycle policy.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Status of the lifecycle policy.
+	Status LifecyclePolicy_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.containerregistry.v1.LifecyclePolicy_Status" json:"status,omitempty"`
+	// The rules of the lifecycle policy.
+	Rules []*LifecycleRule `protobuf:"bytes,6,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
 func (x *UpdateLifecyclePolicyRequest) Reset() {
@@ -415,6 +449,7 @@ type DeleteLifecyclePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
@@ -462,6 +497,7 @@ type CreateLifecyclePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy resource that is being created.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
@@ -509,6 +545,7 @@ type UpdateLifecyclePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy resource that is being updated.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
@@ -556,6 +593,7 @@ type DeleteLifecyclePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy resource that is being deleted.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
@@ -603,6 +641,7 @@ type DryRunLifecyclePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
@@ -650,8 +689,10 @@ type DryRunLifecyclePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the dry run result of the lifecycle policy.
 	DryRunLifecyclePolicyResultId string `protobuf:"bytes,1,opt,name=dry_run_lifecycle_policy_result_id,json=dryRunLifecyclePolicyResultId,proto3" json:"dry_run_lifecycle_policy_result_id,omitempty"`
-	LifecyclePolicyId             string `protobuf:"bytes,2,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
+	// ID of the lifecycle policy.
+	LifecyclePolicyId string `protobuf:"bytes,2,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
 }
 
 func (x *DryRunLifecyclePolicyMetadata) Reset() {
@@ -705,10 +746,14 @@ type DryRunLifecyclePolicyResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DryRunLifecyclePolicyResultId string               `protobuf:"bytes,1,opt,name=dry_run_lifecycle_policy_result_id,json=dryRunLifecyclePolicyResultId,proto3" json:"dry_run_lifecycle_policy_result_id,omitempty"`
-	LifecyclePolicyId             string               `protobuf:"bytes,2,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
-	RunAt                         *timestamp.Timestamp `protobuf:"bytes,3,opt,name=run_at,json=runAt,proto3" json:"run_at,omitempty"`
-	AffectedImagesCount           int64                `protobuf:"varint,4,opt,name=affected_images_count,json=affectedImagesCount,proto3" json:"affected_images_count,omitempty"`
+	// ID of the dry run result of the lifecycle policy.
+	DryRunLifecyclePolicyResultId string `protobuf:"bytes,1,opt,name=dry_run_lifecycle_policy_result_id,json=dryRunLifecyclePolicyResultId,proto3" json:"dry_run_lifecycle_policy_result_id,omitempty"`
+	// ID of the lifecycle policy.
+	LifecyclePolicyId string `protobuf:"bytes,2,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
+	// Time of the getting result.
+	RunAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=run_at,json=runAt,proto3" json:"run_at,omitempty"`
+	// Count of affected images.
+	AffectedImagesCount int64 `protobuf:"varint,4,opt,name=affected_images_count,json=affectedImagesCount,proto3" json:"affected_images_count,omitempty"`
 }
 
 func (x *DryRunLifecyclePolicyResult) Reset() {
@@ -776,6 +821,7 @@ type GetDryRunLifecyclePolicyResultRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the dry run result of the lifecycle policy.
 	DryRunLifecyclePolicyResultId string `protobuf:"bytes,1,opt,name=dry_run_lifecycle_policy_result_id,json=dryRunLifecyclePolicyResultId,proto3" json:"dry_run_lifecycle_policy_result_id,omitempty"`
 }
 
@@ -823,11 +869,26 @@ type ListDryRunLifecyclePolicyResultsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the lifecycle policy.
 	LifecyclePolicyId string `protobuf:"bytes,1,opt,name=lifecycle_policy_id,json=lifecyclePolicyId,proto3" json:"lifecycle_policy_id,omitempty"`
-	PageSize          int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken         string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter            string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy           string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns
+	// a [ListDryRunLifecyclePolicyResultsResponse.next_page_token] that can be used to get
+	// the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListDryRunLifecyclePolicyResultsResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters dry run results listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [LifecyclePolicy.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Sorting the list by [DryRunLifecyclePolicyResult.run_at] and [DryRunLifecyclePolicyResult.affected_images_count] fields.
+	// The default sorting order is ascending.
+	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
 func (x *ListDryRunLifecyclePolicyResultsRequest) Reset() {
@@ -902,8 +963,14 @@ type ListDryRunLifecyclePolicyResultsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of results of dry runs of a lifecycle policy.
 	DryRunLifecyclePolicyResults []*DryRunLifecyclePolicyResult `protobuf:"bytes,1,rep,name=dry_run_lifecycle_policy_results,json=dryRunLifecyclePolicyResults,proto3" json:"dry_run_lifecycle_policy_results,omitempty"`
-	NextPageToken                string                         `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDryRunLifecyclePolicyResultsRequest.page_size] use `next_page_token` as the value
+	// for the [ListDryRunLifecyclePolicyResultsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListDryRunLifecyclePolicyResultsResponse) Reset() {
@@ -957,11 +1024,25 @@ type ListDryRunLifecyclePolicyResultAffectedImagesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the dry run result of the lifecycle policy
 	DryRunLifecyclePolicyResultId string `protobuf:"bytes,1,opt,name=dry_run_lifecycle_policy_result_id,json=dryRunLifecyclePolicyResultId,proto3" json:"dry_run_lifecycle_policy_result_id,omitempty"`
-	PageSize                      int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken                     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter                        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy                       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListDryRunLifecyclePolicyResultAffectedImagesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListDryRunLifecyclePolicyResultAffectedImagesResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters affected images listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [LifecyclePolicy.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Sorting the list by [LifecyclePolicy.name] and [LifecyclePolicy.created_at] fields.
+	// The default sorting order is ascending.
+	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
 func (x *ListDryRunLifecyclePolicyResultAffectedImagesRequest) Reset() {
@@ -1036,8 +1117,14 @@ type ListDryRunLifecyclePolicyResultAffectedImagesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of affected images.
 	AffectedImages []*Image `protobuf:"bytes,1,rep,name=affected_images,json=affectedImages,proto3" json:"affected_images,omitempty"`
-	NextPageToken  string   `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDryRunLifecyclePolicyResultAffectedImagesRequest.page_size], use `next_page_token` as the value
+	// for the [ListDryRunLifecyclePolicyResultAffectedImagesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListDryRunLifecyclePolicyResultAffectedImagesResponse) Reset() {
@@ -1789,14 +1876,25 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LifecyclePolicyServiceClient interface {
+	// Returns the specified lifecycle policy.
+	//
+	// To get the list of all available lifecycle policies, make a [List] request.
 	Get(ctx context.Context, in *GetLifecyclePolicyRequest, opts ...grpc.CallOption) (*LifecyclePolicy, error)
+	// Retrieves the list of lifecycle policies in the specified repository.
 	List(ctx context.Context, in *ListLifecyclePoliciesRequest, opts ...grpc.CallOption) (*ListLifecyclePoliciesResponse, error)
+	// Creates a lifecycle policy in the specified repository.
 	Create(ctx context.Context, in *CreateLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified lifecycle policy.
 	Update(ctx context.Context, in *UpdateLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified lifecycle policy.
 	Delete(ctx context.Context, in *DeleteLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Creates a request of a dry run of the lifecycle policy.
 	DryRun(ctx context.Context, in *DryRunLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the dry run result of the specified lifecycle policy.
 	GetDryRunResult(ctx context.Context, in *GetDryRunLifecyclePolicyResultRequest, opts ...grpc.CallOption) (*DryRunLifecyclePolicyResult, error)
+	// Retrieves the list of the dry run results.
 	ListDryRunResults(ctx context.Context, in *ListDryRunLifecyclePolicyResultsRequest, opts ...grpc.CallOption) (*ListDryRunLifecyclePolicyResultsResponse, error)
+	// Retrieves the list of the affected images.
 	ListDryRunResultAffectedImages(ctx context.Context, in *ListDryRunLifecyclePolicyResultAffectedImagesRequest, opts ...grpc.CallOption) (*ListDryRunLifecyclePolicyResultAffectedImagesResponse, error)
 }
 
@@ -1891,14 +1989,25 @@ func (c *lifecyclePolicyServiceClient) ListDryRunResultAffectedImages(ctx contex
 
 // LifecyclePolicyServiceServer is the server API for LifecyclePolicyService service.
 type LifecyclePolicyServiceServer interface {
+	// Returns the specified lifecycle policy.
+	//
+	// To get the list of all available lifecycle policies, make a [List] request.
 	Get(context.Context, *GetLifecyclePolicyRequest) (*LifecyclePolicy, error)
+	// Retrieves the list of lifecycle policies in the specified repository.
 	List(context.Context, *ListLifecyclePoliciesRequest) (*ListLifecyclePoliciesResponse, error)
+	// Creates a lifecycle policy in the specified repository.
 	Create(context.Context, *CreateLifecyclePolicyRequest) (*operation.Operation, error)
+	// Updates the specified lifecycle policy.
 	Update(context.Context, *UpdateLifecyclePolicyRequest) (*operation.Operation, error)
+	// Deletes the specified lifecycle policy.
 	Delete(context.Context, *DeleteLifecyclePolicyRequest) (*operation.Operation, error)
+	// Creates a request of a dry run of the lifecycle policy.
 	DryRun(context.Context, *DryRunLifecyclePolicyRequest) (*operation.Operation, error)
+	// Returns the dry run result of the specified lifecycle policy.
 	GetDryRunResult(context.Context, *GetDryRunLifecyclePolicyResultRequest) (*DryRunLifecyclePolicyResult, error)
+	// Retrieves the list of the dry run results.
 	ListDryRunResults(context.Context, *ListDryRunLifecyclePolicyResultsRequest) (*ListDryRunLifecyclePolicyResultsResponse, error)
+	// Retrieves the list of the affected images.
 	ListDryRunResultAffectedImages(context.Context, *ListDryRunLifecyclePolicyResultAffectedImagesRequest) (*ListDryRunLifecyclePolicyResultAffectedImagesResponse, error)
 }
 
