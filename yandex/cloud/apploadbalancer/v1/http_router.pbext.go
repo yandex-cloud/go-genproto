@@ -33,3 +33,7 @@ func (m *HttpRouter) SetVirtualHosts(v []*VirtualHost) {
 func (m *HttpRouter) SetCreatedAt(v *timestamp.Timestamp) {
 	m.CreatedAt = v
 }
+
+func (m *HttpRouter) SetRouteOptions(v *RouteOptions) {
+	m.RouteOptions = v
+}

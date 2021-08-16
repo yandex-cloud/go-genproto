@@ -74,6 +74,10 @@ func (m *Cluster) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *Cluster) SetLogGroupId(v string) {
+	m.LogGroupId = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

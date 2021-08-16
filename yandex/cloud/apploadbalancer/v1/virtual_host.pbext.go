@@ -26,6 +26,18 @@ func (m *VirtualHost) SetModifyResponseHeaders(v []*HeaderModification) {
 	m.ModifyResponseHeaders = v
 }
 
+func (m *VirtualHost) SetRouteOptions(v *RouteOptions) {
+	m.RouteOptions = v
+}
+
+func (m *RouteOptions) SetModifyRequestHeaders(v []*HeaderModification) {
+	m.ModifyRequestHeaders = v
+}
+
+func (m *RouteOptions) SetModifyResponseHeaders(v []*HeaderModification) {
+	m.ModifyResponseHeaders = v
+}
+
 type HeaderModification_Operation = isHeaderModification_Operation
 
 func (m *HeaderModification) SetOperation(v HeaderModification_Operation) {
@@ -80,6 +92,10 @@ func (m *Route) SetGrpc(v *GrpcRoute) {
 	m.Route = &Route_Grpc{
 		Grpc: v,
 	}
+}
+
+func (m *Route) SetRouteOptions(v *RouteOptions) {
+	m.RouteOptions = v
 }
 
 type HttpRoute_Action = isHttpRoute_Action

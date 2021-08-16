@@ -5,6 +5,7 @@ package triggers
 import (
 	duration "github.com/golang/protobuf/ptypes/duration"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
 )
 
 func (m *Trigger) SetId(v string) {
@@ -78,6 +79,12 @@ func (m *Trigger_Rule) SetContainerRegistry(v *Trigger_ContainerRegistry) {
 func (m *Trigger_Rule) SetCloudLogs(v *Trigger_CloudLogs) {
 	m.Rule = &Trigger_Rule_CloudLogs{
 		CloudLogs: v,
+	}
+}
+
+func (m *Trigger_Rule) SetLogging(v *Trigger_Logging) {
+	m.Rule = &Trigger_Rule_Logging{
+		Logging: v,
 	}
 }
 
@@ -267,6 +274,44 @@ func (m *Trigger_CloudLogs) SetInvokeContainer(v *InvokeContainerWithRetry) {
 	}
 }
 
+type Trigger_Logging_Action = isTrigger_Logging_Action
+
+func (m *Trigger_Logging) SetAction(v Trigger_Logging_Action) {
+	m.Action = v
+}
+
+func (m *Trigger_Logging) SetLogGroupId(v string) {
+	m.LogGroupId = v
+}
+
+func (m *Trigger_Logging) SetResourceType(v []string) {
+	m.ResourceType = v
+}
+
+func (m *Trigger_Logging) SetResourceId(v []string) {
+	m.ResourceId = v
+}
+
+func (m *Trigger_Logging) SetLevels(v []v1.LogLevel_Level) {
+	m.Levels = v
+}
+
+func (m *Trigger_Logging) SetBatchSettings(v *LoggingBatchSettings) {
+	m.BatchSettings = v
+}
+
+func (m *Trigger_Logging) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &Trigger_Logging_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_Logging) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_Logging_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
 func (m *InvokeFunctionOnce) SetFunctionId(v string) {
 	m.FunctionId = v
 }
@@ -352,6 +397,14 @@ func (m *CloudLogsBatchSettings) SetSize(v int64) {
 }
 
 func (m *CloudLogsBatchSettings) SetCutoff(v *duration.Duration) {
+	m.Cutoff = v
+}
+
+func (m *LoggingBatchSettings) SetSize(v int64) {
+	m.Size = v
+}
+
+func (m *LoggingBatchSettings) SetCutoff(v *duration.Duration) {
 	m.Cutoff = v
 }
 

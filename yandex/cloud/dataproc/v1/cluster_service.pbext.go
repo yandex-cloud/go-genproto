@@ -147,6 +147,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetLogGroupId(v string) {
+	m.LogGroupId = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -197,6 +201,10 @@ func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterRequest) SetLogGroupId(v string) {
+	m.LogGroupId = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
