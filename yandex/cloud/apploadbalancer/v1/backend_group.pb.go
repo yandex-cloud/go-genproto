@@ -522,13 +522,16 @@ type HttpBackend struct {
 	// Weights must be set either for all backends in a group or for none of them.
 	// Setting no weights is the same as setting equal non-zero weights for all backends.
 	//
-	// If set to `0`, traffic is not sent to the backend.
+	// If the weight is non-positive, traffic is not sent to the backend.
 	BackendWeight *wrappers.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
 	// Load balancing configuration for the backend.
 	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
 	// Port used by all targets to receive traffic.
 	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// Reference to targets that belong to the backend. For now, targets are referenced only via target groups.
+	// Reference to targets that belong to the backend.
+	//
+	// A backend may be a set of target groups or an Object Storage bucket. For details about backend types, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#types).
 	//
 	// Types that are assignable to BackendType:
 	//	*HttpBackend_TargetGroups
@@ -658,12 +661,17 @@ type isHttpBackend_BackendType interface {
 }
 
 type HttpBackend_TargetGroups struct {
-	// Target groups that belong to the backend.
+	// Target groups that belong to the backend. For details about target groups, see
+	// [documentation](/docs/application-load-balancer/concepts/target-group).
 	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
 }
 
 type HttpBackend_StorageBucket struct {
-	// Storage bucket to use as a backend.
+	// Object Storage bucket to use as the backend. For details about buckets, see
+	// [documentation](/docs/storage/concepts/bucket).
+	//
+	// If a bucket is used as a backend, the list of bucket objects and the objects themselves must be publicly
+	// accessible. For instructions, see [documentation](/docs/storage/operations/buckets/bucket-availability).
 	StorageBucket *StorageBucketBackend `protobuf:"bytes,9,opt,name=storage_bucket,json=storageBucket,proto3,oneof"`
 }
 
@@ -684,7 +692,7 @@ type GrpcBackend struct {
 	// Weights must be set either for all backends of a group or for none of them.
 	// Setting no weights is the same as setting equal non-zero weights for all backends.
 	//
-	// If set to `0`, traffic is not sent to the backend.
+	// If the weight is non-positive, traffic is not sent to the backend.
 	BackendWeight *wrappers.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
 	// Load balancing configuration for the backend.
 	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
@@ -916,13 +924,14 @@ func (x *BackendTls) GetValidationContext() *ValidationContext {
 	return nil
 }
 
+// A resource for Object Storage bucket used as a backend. For details about the concept,
+// see [documentation](/docs/storage/concepts/bucket).
 type StorageBucketBackend struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Cloud S3 bucket name.
-	// Should have public access.
+	// Name of the bucket.
 	Bucket string `protobuf:"bytes,1,opt,name=bucket,proto3" json:"bucket,omitempty"`
 }
 
