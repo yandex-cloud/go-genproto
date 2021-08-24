@@ -1093,7 +1093,7 @@ type RedirectAction_ReplacePath struct {
 }
 
 type RedirectAction_ReplacePrefix struct {
-	// Replacement for the path prefix matched by [StringMatch.match].
+	// Replacement for the path prefix matched by [StringMatch].
 	//
 	// For instance, if [StringMatch.prefix_match] value is `/foo` and `replace_prefix` value is `/bar`,
 	// a request with `https://example.com/foobaz` URI is redirected to `https://example.com/barbaz`.
@@ -1245,7 +1245,7 @@ type HttpRouteAction struct {
 	//	*HttpRouteAction_HostRewrite
 	//	*HttpRouteAction_AutoHostRewrite
 	HostRewriteSpecifier isHttpRouteAction_HostRewriteSpecifier `protobuf_oneof:"host_rewrite_specifier"`
-	// Replacement for the path prefix matched by [StringMatch.match].
+	// Replacement for the path prefix matched by [StringMatch].
 	//
 	// For instance, if [StringMatch.prefix_match] value is `/foo` and `replace_prefix` value is `/bar`,
 	// a request with `/foobaz` path is forwarded with `/barbaz` path.

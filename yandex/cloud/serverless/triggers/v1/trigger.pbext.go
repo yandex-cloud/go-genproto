@@ -88,6 +88,12 @@ func (m *Trigger_Rule) SetLogging(v *Trigger_Logging) {
 	}
 }
 
+func (m *Trigger_Rule) SetBillingBudget(v *BillingBudget) {
+	m.Rule = &Trigger_Rule_BillingBudget{
+		BillingBudget: v,
+	}
+}
+
 type Trigger_Timer_Action = isTrigger_Timer_Action
 
 func (m *Trigger_Timer) SetAction(v Trigger_Timer_Action) {
@@ -414,4 +420,30 @@ func (m *RetrySettings) SetRetryAttempts(v int64) {
 
 func (m *RetrySettings) SetInterval(v *duration.Duration) {
 	m.Interval = v
+}
+
+type BillingBudget_Action = isBillingBudget_Action
+
+func (m *BillingBudget) SetAction(v BillingBudget_Action) {
+	m.Action = v
+}
+
+func (m *BillingBudget) SetBillingAccountId(v string) {
+	m.BillingAccountId = v
+}
+
+func (m *BillingBudget) SetBudgetId(v string) {
+	m.BudgetId = v
+}
+
+func (m *BillingBudget) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &BillingBudget_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *BillingBudget) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &BillingBudget_InvokeContainer{
+		InvokeContainer: v,
+	}
 }
