@@ -105,7 +105,7 @@ func (m *UpdateClusterRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *UpdateClusterRequest) SetConfigSpec(v *ConfigSpec) {
+func (m *UpdateClusterRequest) SetConfigSpec(v *ConfigSpecUpdate) {
 	m.ConfigSpec = v
 }
 
@@ -366,6 +366,22 @@ func (m *ConfigSpec) SetEdition(v string) {
 }
 
 func (m *ConfigSpec) SetAdminPassword(v string) {
+	m.AdminPassword = v
+}
+
+func (m *ConfigSpecUpdate) SetVersion(v string) {
+	m.Version = v
+}
+
+func (m *ConfigSpecUpdate) SetElasticsearchSpec(v *ElasticsearchSpec) {
+	m.ElasticsearchSpec = v
+}
+
+func (m *ConfigSpecUpdate) SetEdition(v string) {
+	m.Edition = v
+}
+
+func (m *ConfigSpecUpdate) SetAdminPassword(v string) {
 	m.AdminPassword = v
 }
 

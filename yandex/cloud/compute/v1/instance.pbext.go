@@ -58,6 +58,10 @@ func (m *Instance) SetSecondaryDisks(v []*AttachedDisk) {
 	m.SecondaryDisks = v
 }
 
+func (m *Instance) SetFilesystems(v []*AttachedFilesystem) {
+	m.Filesystems = v
+}
+
 func (m *Instance) SetNetworkInterfaces(v []*NetworkInterface) {
 	m.NetworkInterfaces = v
 }
@@ -112,6 +116,18 @@ func (m *AttachedDisk) SetAutoDelete(v bool) {
 
 func (m *AttachedDisk) SetDiskId(v string) {
 	m.DiskId = v
+}
+
+func (m *AttachedFilesystem) SetMode(v AttachedFilesystem_Mode) {
+	m.Mode = v
+}
+
+func (m *AttachedFilesystem) SetDeviceName(v string) {
+	m.DeviceName = v
+}
+
+func (m *AttachedFilesystem) SetFilesystemId(v string) {
+	m.FilesystemId = v
 }
 
 func (m *NetworkInterface) SetIndex(v string) {

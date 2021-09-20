@@ -155,3 +155,7 @@ func (m *UtteranceSynthesisRequest) SetHints(v []*Hints) {
 func (m *UtteranceSynthesisRequest) SetOutputAudioSpec(v *AudioFormatOptions) {
 	m.OutputAudioSpec = v
 }
+
+func (m *UtteranceSynthesisRequest) SetLoudnessNormalizationType(v UtteranceSynthesisRequest_LoudnessNormalizationType) {
+	m.LoudnessNormalizationType = v
+}

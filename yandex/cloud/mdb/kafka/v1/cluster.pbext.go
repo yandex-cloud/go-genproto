@@ -107,6 +107,10 @@ func (m *ConfigSpec) SetUnmanagedTopics(v bool) {
 	m.UnmanagedTopics = v
 }
 
+func (m *ConfigSpec) SetSchemaRegistry(v bool) {
+	m.SchemaRegistry = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {

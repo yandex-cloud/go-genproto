@@ -94,6 +94,12 @@ func (m *Trigger_Rule) SetBillingBudget(v *BillingBudget) {
 	}
 }
 
+func (m *Trigger_Rule) SetDataStream(v *DataStream) {
+	m.Rule = &Trigger_Rule_DataStream{
+		DataStream: v,
+	}
+}
+
 type Trigger_Timer_Action = isTrigger_Timer_Action
 
 func (m *Trigger_Timer) SetAction(v Trigger_Timer_Action) {
@@ -444,6 +450,52 @@ func (m *BillingBudget) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 
 func (m *BillingBudget) SetInvokeContainer(v *InvokeContainerWithRetry) {
 	m.Action = &BillingBudget_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
+func (m *DataStreamBatchSettings) SetSize(v int64) {
+	m.Size = v
+}
+
+func (m *DataStreamBatchSettings) SetCutoff(v *duration.Duration) {
+	m.Cutoff = v
+}
+
+type DataStream_Action = isDataStream_Action
+
+func (m *DataStream) SetAction(v DataStream_Action) {
+	m.Action = v
+}
+
+func (m *DataStream) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *DataStream) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *DataStream) SetStream(v string) {
+	m.Stream = v
+}
+
+func (m *DataStream) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *DataStream) SetBatchSettings(v *DataStreamBatchSettings) {
+	m.BatchSettings = v
+}
+
+func (m *DataStream) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &DataStream_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *DataStream) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &DataStream_InvokeContainer{
 		InvokeContainer: v,
 	}
 }

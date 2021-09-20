@@ -117,6 +117,56 @@ func (ContainerAudio_ContainerAudioType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{3, 0}
 }
 
+// Normalization type
+type UtteranceSynthesisRequest_LoudnessNormalizationType int32
+
+const (
+	UtteranceSynthesisRequest_LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED UtteranceSynthesisRequest_LoudnessNormalizationType = 0
+	UtteranceSynthesisRequest_MAX_PEAK                                UtteranceSynthesisRequest_LoudnessNormalizationType = 1
+	UtteranceSynthesisRequest_LUFS                                    UtteranceSynthesisRequest_LoudnessNormalizationType = 2
+)
+
+// Enum value maps for UtteranceSynthesisRequest_LoudnessNormalizationType.
+var (
+	UtteranceSynthesisRequest_LoudnessNormalizationType_name = map[int32]string{
+		0: "LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED",
+		1: "MAX_PEAK",
+		2: "LUFS",
+	}
+	UtteranceSynthesisRequest_LoudnessNormalizationType_value = map[string]int32{
+		"LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED": 0,
+		"MAX_PEAK": 1,
+		"LUFS":     2,
+	}
+)
+
+func (x UtteranceSynthesisRequest_LoudnessNormalizationType) Enum() *UtteranceSynthesisRequest_LoudnessNormalizationType {
+	p := new(UtteranceSynthesisRequest_LoudnessNormalizationType)
+	*p = x
+	return p
+}
+
+func (x UtteranceSynthesisRequest_LoudnessNormalizationType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UtteranceSynthesisRequest_LoudnessNormalizationType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[2].Descriptor()
+}
+
+func (UtteranceSynthesisRequest_LoudnessNormalizationType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[2]
+}
+
+func (x UtteranceSynthesisRequest_LoudnessNormalizationType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UtteranceSynthesisRequest_LoudnessNormalizationType.Descriptor instead.
+func (UtteranceSynthesisRequest_LoudnessNormalizationType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{11, 0}
+}
+
 type AudioContent struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -860,6 +910,8 @@ type UtteranceSynthesisRequest struct {
 	Hints []*Hints `protobuf:"bytes,4,rep,name=hints,proto3" json:"hints,omitempty"`
 	// Optional. Default: 22050 Hz, linear 16-bit signed little-endian PCM, with WAV header
 	OutputAudioSpec *AudioFormatOptions `protobuf:"bytes,5,opt,name=output_audio_spec,json=outputAudioSpec,proto3" json:"output_audio_spec,omitempty"`
+	// Optional. Default: MAX_PEAK, type of loudness normalization.
+	LoudnessNormalizationType UtteranceSynthesisRequest_LoudnessNormalizationType `protobuf:"varint,6,opt,name=loudness_normalization_type,json=loudnessNormalizationType,proto3,enum=speechkit.tts.v3.UtteranceSynthesisRequest_LoudnessNormalizationType" json:"loudness_normalization_type,omitempty"`
 }
 
 func (x *UtteranceSynthesisRequest) Reset() {
@@ -934,6 +986,13 @@ func (x *UtteranceSynthesisRequest) GetOutputAudioSpec() *AudioFormatOptions {
 		return x.OutputAudioSpec
 	}
 	return nil
+}
+
+func (x *UtteranceSynthesisRequest) GetLoudnessNormalizationType() UtteranceSynthesisRequest_LoudnessNormalizationType {
+	if x != nil {
+		return x.LoudnessNormalizationType
+	}
+	return UtteranceSynthesisRequest_LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED
 }
 
 type isUtteranceSynthesisRequest_Utterance interface {
@@ -1057,7 +1116,7 @@ var file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = []byte{
 	0x61, 0x74, 0x65, 0x12, 0x16, 0x0a, 0x05, 0x73, 0x70, 0x65, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x01, 0x48, 0x00, 0x52, 0x05, 0x73, 0x70, 0x65, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x06, 0x76,
 	0x6f, 0x6c, 0x75, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x06, 0x76,
-	0x6f, 0x6c, 0x75, 0x6d, 0x65, 0x42, 0x06, 0x0a, 0x04, 0x48, 0x69, 0x6e, 0x74, 0x22, 0x9c, 0x02,
+	0x6f, 0x6c, 0x75, 0x6d, 0x65, 0x42, 0x06, 0x0a, 0x04, 0x48, 0x69, 0x6e, 0x74, 0x22, 0x86, 0x04,
 	0x0a, 0x19, 0x55, 0x74, 0x74, 0x65, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x53, 0x79, 0x6e, 0x74, 0x68,
 	0x65, 0x73, 0x69, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x6d,
 	0x6f, 0x64, 0x65, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6d, 0x6f, 0x64, 0x65,
@@ -1074,15 +1133,29 @@ var file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = []byte{
 	0x65, 0x63, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x73, 0x70, 0x65, 0x65, 0x63,
 	0x68, 0x6b, 0x69, 0x74, 0x2e, 0x74, 0x74, 0x73, 0x2e, 0x76, 0x33, 0x2e, 0x41, 0x75, 0x64, 0x69,
 	0x6f, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x0f,
-	0x6f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x41, 0x75, 0x64, 0x69, 0x6f, 0x53, 0x70, 0x65, 0x63, 0x42,
-	0x0b, 0x0a, 0x09, 0x55, 0x74, 0x74, 0x65, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x42, 0x5c, 0x0a, 0x1a,
-	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69,
-	0x2e, 0x61, 0x69, 0x2e, 0x74, 0x74, 0x73, 0x2e, 0x76, 0x33, 0x5a, 0x3e, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f,
-	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f,
-	0x74, 0x74, 0x73, 0x2f, 0x76, 0x33, 0x3b, 0x74, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x41, 0x75, 0x64, 0x69, 0x6f, 0x53, 0x70, 0x65, 0x63, 0x12,
+	0x85, 0x01, 0x0a, 0x1b, 0x6c, 0x6f, 0x75, 0x64, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x6e, 0x6f, 0x72,
+	0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x45, 0x2e, 0x73, 0x70, 0x65, 0x65, 0x63, 0x68, 0x6b, 0x69,
+	0x74, 0x2e, 0x74, 0x74, 0x73, 0x2e, 0x76, 0x33, 0x2e, 0x55, 0x74, 0x74, 0x65, 0x72, 0x61, 0x6e,
+	0x63, 0x65, 0x53, 0x79, 0x6e, 0x74, 0x68, 0x65, 0x73, 0x69, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x2e, 0x4c, 0x6f, 0x75, 0x64, 0x6e, 0x65, 0x73, 0x73, 0x4e, 0x6f, 0x72, 0x6d, 0x61,
+	0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x19, 0x6c, 0x6f,
+	0x75, 0x64, 0x6e, 0x65, 0x73, 0x73, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x22, 0x60, 0x0a, 0x19, 0x4c, 0x6f, 0x75, 0x64, 0x6e,
+	0x65, 0x73, 0x73, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x2b, 0x0a, 0x27, 0x4c, 0x4f, 0x55, 0x44, 0x4e, 0x45, 0x53, 0x53,
+	0x5f, 0x4e, 0x4f, 0x52, 0x4d, 0x41, 0x4c, 0x49, 0x5a, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x54,
+	0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10,
+	0x00, 0x12, 0x0c, 0x0a, 0x08, 0x4d, 0x41, 0x58, 0x5f, 0x50, 0x45, 0x41, 0x4b, 0x10, 0x01, 0x12,
+	0x08, 0x0a, 0x04, 0x4c, 0x55, 0x46, 0x53, 0x10, 0x02, 0x42, 0x0b, 0x0a, 0x09, 0x55, 0x74, 0x74,
+	0x65, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x42, 0x5c, 0x0a, 0x1a, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x74,
+	0x73, 0x2e, 0x76, 0x33, 0x5a, 0x3e, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f,
+	0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x74, 0x74, 0x73, 0x2f, 0x76, 0x33,
+	0x3b, 0x74, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1097,44 +1170,46 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_ai_tts_v3_tts_proto_goTypes = []interface{}{
-	(RawAudio_AudioEncoding)(0),            // 0: speechkit.tts.v3.RawAudio.AudioEncoding
-	(ContainerAudio_ContainerAudioType)(0), // 1: speechkit.tts.v3.ContainerAudio.ContainerAudioType
-	(*AudioContent)(nil),                   // 2: speechkit.tts.v3.AudioContent
-	(*AudioFormatOptions)(nil),             // 3: speechkit.tts.v3.AudioFormatOptions
-	(*RawAudio)(nil),                       // 4: speechkit.tts.v3.RawAudio
-	(*ContainerAudio)(nil),                 // 5: speechkit.tts.v3.ContainerAudio
-	(*TextVariable)(nil),                   // 6: speechkit.tts.v3.TextVariable
-	(*AudioVariable)(nil),                  // 7: speechkit.tts.v3.AudioVariable
-	(*UtteranceSynthesisResponse)(nil),     // 8: speechkit.tts.v3.UtteranceSynthesisResponse
-	(*AudioTemplate)(nil),                  // 9: speechkit.tts.v3.AudioTemplate
-	(*AudioChunk)(nil),                     // 10: speechkit.tts.v3.AudioChunk
-	(*TextTemplate)(nil),                   // 11: speechkit.tts.v3.TextTemplate
-	(*Hints)(nil),                          // 12: speechkit.tts.v3.Hints
-	(*UtteranceSynthesisRequest)(nil),      // 13: speechkit.tts.v3.UtteranceSynthesisRequest
+	(RawAudio_AudioEncoding)(0),                              // 0: speechkit.tts.v3.RawAudio.AudioEncoding
+	(ContainerAudio_ContainerAudioType)(0),                   // 1: speechkit.tts.v3.ContainerAudio.ContainerAudioType
+	(UtteranceSynthesisRequest_LoudnessNormalizationType)(0), // 2: speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
+	(*AudioContent)(nil),                                     // 3: speechkit.tts.v3.AudioContent
+	(*AudioFormatOptions)(nil),                               // 4: speechkit.tts.v3.AudioFormatOptions
+	(*RawAudio)(nil),                                         // 5: speechkit.tts.v3.RawAudio
+	(*ContainerAudio)(nil),                                   // 6: speechkit.tts.v3.ContainerAudio
+	(*TextVariable)(nil),                                     // 7: speechkit.tts.v3.TextVariable
+	(*AudioVariable)(nil),                                    // 8: speechkit.tts.v3.AudioVariable
+	(*UtteranceSynthesisResponse)(nil),                       // 9: speechkit.tts.v3.UtteranceSynthesisResponse
+	(*AudioTemplate)(nil),                                    // 10: speechkit.tts.v3.AudioTemplate
+	(*AudioChunk)(nil),                                       // 11: speechkit.tts.v3.AudioChunk
+	(*TextTemplate)(nil),                                     // 12: speechkit.tts.v3.TextTemplate
+	(*Hints)(nil),                                            // 13: speechkit.tts.v3.Hints
+	(*UtteranceSynthesisRequest)(nil),                        // 14: speechkit.tts.v3.UtteranceSynthesisRequest
 }
 var file_yandex_cloud_ai_tts_v3_tts_proto_depIdxs = []int32{
-	3,  // 0: speechkit.tts.v3.AudioContent.audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	4,  // 1: speechkit.tts.v3.AudioFormatOptions.raw_audio:type_name -> speechkit.tts.v3.RawAudio
-	5,  // 2: speechkit.tts.v3.AudioFormatOptions.container_audio:type_name -> speechkit.tts.v3.ContainerAudio
+	4,  // 0: speechkit.tts.v3.AudioContent.audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	5,  // 1: speechkit.tts.v3.AudioFormatOptions.raw_audio:type_name -> speechkit.tts.v3.RawAudio
+	6,  // 2: speechkit.tts.v3.AudioFormatOptions.container_audio:type_name -> speechkit.tts.v3.ContainerAudio
 	0,  // 3: speechkit.tts.v3.RawAudio.audio_encoding:type_name -> speechkit.tts.v3.RawAudio.AudioEncoding
 	1,  // 4: speechkit.tts.v3.ContainerAudio.container_audio_type:type_name -> speechkit.tts.v3.ContainerAudio.ContainerAudioType
-	10, // 5: speechkit.tts.v3.UtteranceSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
-	2,  // 6: speechkit.tts.v3.AudioTemplate.audio:type_name -> speechkit.tts.v3.AudioContent
-	11, // 7: speechkit.tts.v3.AudioTemplate.text_template:type_name -> speechkit.tts.v3.TextTemplate
-	7,  // 8: speechkit.tts.v3.AudioTemplate.variables:type_name -> speechkit.tts.v3.AudioVariable
-	6,  // 9: speechkit.tts.v3.TextTemplate.variables:type_name -> speechkit.tts.v3.TextVariable
-	9,  // 10: speechkit.tts.v3.Hints.audio_template:type_name -> speechkit.tts.v3.AudioTemplate
-	11, // 11: speechkit.tts.v3.UtteranceSynthesisRequest.text_template:type_name -> speechkit.tts.v3.TextTemplate
-	12, // 12: speechkit.tts.v3.UtteranceSynthesisRequest.hints:type_name -> speechkit.tts.v3.Hints
-	3,  // 13: speechkit.tts.v3.UtteranceSynthesisRequest.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	11, // 5: speechkit.tts.v3.UtteranceSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
+	3,  // 6: speechkit.tts.v3.AudioTemplate.audio:type_name -> speechkit.tts.v3.AudioContent
+	12, // 7: speechkit.tts.v3.AudioTemplate.text_template:type_name -> speechkit.tts.v3.TextTemplate
+	8,  // 8: speechkit.tts.v3.AudioTemplate.variables:type_name -> speechkit.tts.v3.AudioVariable
+	7,  // 9: speechkit.tts.v3.TextTemplate.variables:type_name -> speechkit.tts.v3.TextVariable
+	10, // 10: speechkit.tts.v3.Hints.audio_template:type_name -> speechkit.tts.v3.AudioTemplate
+	12, // 11: speechkit.tts.v3.UtteranceSynthesisRequest.text_template:type_name -> speechkit.tts.v3.TextTemplate
+	13, // 12: speechkit.tts.v3.UtteranceSynthesisRequest.hints:type_name -> speechkit.tts.v3.Hints
+	4,  // 13: speechkit.tts.v3.UtteranceSynthesisRequest.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	2,  // 14: speechkit.tts.v3.UtteranceSynthesisRequest.loudness_normalization_type:type_name -> speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_tts_v3_tts_proto_init() }
@@ -1310,7 +1385,7 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc,
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -54,6 +54,10 @@ func (m *Image) SetOs(v *Os) {
 	m.Os = v
 }
 
+func (m *Image) SetPooled(v bool) {
+	m.Pooled = v
+}
+
 func (m *Os) SetType(v Os_Type) {
 	m.Type = v
 }

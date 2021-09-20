@@ -95,6 +95,10 @@ func (m *Cluster) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *Cluster) SetHostGroupIds(v []string) {
+	m.HostGroupIds = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

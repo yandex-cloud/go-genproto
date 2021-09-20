@@ -40,6 +40,12 @@ func (m *Target) SetMdb(v Target_Mdb) {
 	m.Mdb = v
 }
 
+func (m *Target) SetClickhouse(v *Target_ClickHouse) {
+	m.Mdb = &Target_Clickhouse{
+		Clickhouse: v,
+	}
+}
+
 func (m *Target) SetPostgresql(v *Target_PostgreSQL) {
 	m.Mdb = &Target_Postgresql{
 		Postgresql: v,
@@ -63,5 +69,25 @@ func (m *Target_PostgreSQL) SetDb(v string) {
 }
 
 func (m *Target_PostgreSQL) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *Target_ClickHouse) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *Target_ClickHouse) SetUser(v string) {
+	m.User = v
+}
+
+func (m *Target_ClickHouse) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *Target_ClickHouse) SetDb(v string) {
+	m.Db = v
+}
+
+func (m *Target_ClickHouse) SetEndpoint(v string) {
 	m.Endpoint = v
 }

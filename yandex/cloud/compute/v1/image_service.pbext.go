@@ -105,6 +105,10 @@ func (m *CreateImageRequest) SetOs(v *Os) {
 	m.Os = v
 }
 
+func (m *CreateImageRequest) SetPooled(v bool) {
+	m.Pooled = v
+}
+
 func (m *CreateImageMetadata) SetImageId(v string) {
 	m.ImageId = v
 }

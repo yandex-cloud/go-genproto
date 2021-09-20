@@ -16,10 +16,6 @@ func (m *GetLogGroupStatsRequest) SetLogGroupId(v string) {
 	m.LogGroupId = v
 }
 
-func (m *GetDefaultLogGroupRequest) SetFolderId(v string) {
-	m.FolderId = v
-}
-
 func (m *ListLogGroupsRequest) SetFolderId(v string) {
 	m.FolderId = v
 }

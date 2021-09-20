@@ -3,6 +3,8 @@
 package datasphere
 
 import (
+	_struct "github.com/golang/protobuf/ptypes/struct"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
@@ -121,4 +123,104 @@ func (m *SetUnitBalanceRequest) SetProjectId(v string) {
 
 func (m *SetUnitBalanceRequest) SetUnitBalance(v *wrappers.Int64Value) {
 	m.UnitBalance = v
+}
+
+type ProjectExecutionRequest_Target = isProjectExecutionRequest_Target
+
+func (m *ProjectExecutionRequest) SetTarget(v ProjectExecutionRequest_Target) {
+	m.Target = v
+}
+
+func (m *ProjectExecutionRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ProjectExecutionRequest) SetNotebookId(v string) {
+	m.Target = &ProjectExecutionRequest_NotebookId{
+		NotebookId: v,
+	}
+}
+
+func (m *ProjectExecutionRequest) SetCellId(v string) {
+	m.Target = &ProjectExecutionRequest_CellId{
+		CellId: v,
+	}
+}
+
+func (m *ProjectExecutionRequest) SetInputVariables(v *_struct.Struct) {
+	m.InputVariables = v
+}
+
+func (m *ProjectExecutionRequest) SetOutputVariableNames(v []string) {
+	m.OutputVariableNames = v
+}
+
+type ProjectExecutionMetadata_Target = isProjectExecutionMetadata_Target
+
+func (m *ProjectExecutionMetadata) SetTarget(v ProjectExecutionMetadata_Target) {
+	m.Target = v
+}
+
+func (m *ProjectExecutionMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ProjectExecutionMetadata) SetNotebookId(v string) {
+	m.Target = &ProjectExecutionMetadata_NotebookId{
+		NotebookId: v,
+	}
+}
+
+func (m *ProjectExecutionMetadata) SetCellId(v string) {
+	m.Target = &ProjectExecutionMetadata_CellId{
+		CellId: v,
+	}
+}
+
+func (m *ProjectExecutionResponse) SetCheckpointId(v string) {
+	m.CheckpointId = v
+}
+
+func (m *ProjectExecutionResponse) SetOutputVariables(v *_struct.Struct) {
+	m.OutputVariables = v
+}
+
+func (m *CellOutputsRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *CellOutputsRequest) SetCellId(v string) {
+	m.CellId = v
+}
+
+func (m *CellOutputsRequest) SetCheckpointId(v string) {
+	m.CheckpointId = v
+}
+
+func (m *CellOutputsRequest) SetStartAt(v *timestamp.Timestamp) {
+	m.StartAt = v
+}
+
+func (m *CellOutputsResponse) SetOutputs(v []string) {
+	m.Outputs = v
+}
+
+func (m *GetStateVariablesRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *GetStateVariablesRequest) SetNotebookId(v string) {
+	m.NotebookId = v
+}
+
+func (m *GetStateVariablesRequest) SetVariableNames(v []string) {
+	m.VariableNames = v
+}
+
+func (m *GetStateVariablesRequest) SetCheckpointId(v string) {
+	m.CheckpointId = v
+}
+
+func (m *GetStateVariablesResponse) SetVariables(v *_struct.Struct) {
+	m.Variables = v
 }

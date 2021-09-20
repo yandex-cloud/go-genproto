@@ -79,6 +79,10 @@ func (m *CreateInstanceRequest) SetSecondaryDiskSpecs(v []*AttachedDiskSpec) {
 	m.SecondaryDiskSpecs = v
 }
 
+func (m *CreateInstanceRequest) SetFilesystemSpecs(v []*AttachedFilesystemSpec) {
+	m.FilesystemSpecs = v
+}
+
 func (m *CreateInstanceRequest) SetNetworkInterfaceSpecs(v []*NetworkInterfaceSpec) {
 	m.NetworkInterfaceSpecs = v
 }
@@ -261,6 +265,52 @@ func (m *DetachInstanceDiskMetadata) SetDiskId(v string) {
 	m.DiskId = v
 }
 
+func (m *AttachInstanceFilesystemRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *AttachInstanceFilesystemRequest) SetAttachedFilesystemSpec(v *AttachedFilesystemSpec) {
+	m.AttachedFilesystemSpec = v
+}
+
+func (m *AttachInstanceFilesystemMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *AttachInstanceFilesystemMetadata) SetFilesystemId(v string) {
+	m.FilesystemId = v
+}
+
+type DetachInstanceFilesystemRequest_Filesystem = isDetachInstanceFilesystemRequest_Filesystem
+
+func (m *DetachInstanceFilesystemRequest) SetFilesystem(v DetachInstanceFilesystemRequest_Filesystem) {
+	m.Filesystem = v
+}
+
+func (m *DetachInstanceFilesystemRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DetachInstanceFilesystemRequest) SetFilesystemId(v string) {
+	m.Filesystem = &DetachInstanceFilesystemRequest_FilesystemId{
+		FilesystemId: v,
+	}
+}
+
+func (m *DetachInstanceFilesystemRequest) SetDeviceName(v string) {
+	m.Filesystem = &DetachInstanceFilesystemRequest_DeviceName{
+		DeviceName: v,
+	}
+}
+
+func (m *DetachInstanceFilesystemMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DetachInstanceFilesystemMetadata) SetFilesystemId(v string) {
+	m.FilesystemId = v
+}
+
 func (m *AddInstanceOneToOneNatRequest) SetInstanceId(v string) {
 	m.InstanceId = v
 }
@@ -439,6 +489,18 @@ func (m *AttachedDiskSpec_DiskSpec) SetSnapshotId(v string) {
 	m.Source = &AttachedDiskSpec_DiskSpec_SnapshotId{
 		SnapshotId: v,
 	}
+}
+
+func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {
+	m.Mode = v
+}
+
+func (m *AttachedFilesystemSpec) SetDeviceName(v string) {
+	m.DeviceName = v
+}
+
+func (m *AttachedFilesystemSpec) SetFilesystemId(v string) {
+	m.FilesystemId = v
 }
 
 func (m *NetworkInterfaceSpec) SetSubnetId(v string) {
