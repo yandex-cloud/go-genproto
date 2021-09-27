@@ -745,9 +745,12 @@ type AttachedFilesystem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Access mode to the Filesystem resource.
+	// Access mode to the filesystem.
 	Mode AttachedFilesystem_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.compute.v1.AttachedFilesystem_Mode" json:"mode,omitempty"`
-	// Tag of the filesystem that should be detached.
+	// Name of the device representing the filesystem on the instance.
+	//
+	// The name should be used for referencing the filesystem from within the instance
+	// when it's being mounted, resized etc.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// ID of the filesystem that is attached to the instance.
 	FilesystemId string `protobuf:"bytes,3,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`

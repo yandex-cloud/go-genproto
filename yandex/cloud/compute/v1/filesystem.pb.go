@@ -25,13 +25,13 @@ type Filesystem_Status int32
 
 const (
 	Filesystem_STATUS_UNSPECIFIED Filesystem_Status = 0
-	// Filesystem is being created.
+	// The filesystem is being created.
 	Filesystem_CREATING Filesystem_Status = 1
-	// Filesystem is ready to use.
+	// The filesystem is ready to use.
 	Filesystem_READY Filesystem_Status = 2
-	// Filesystem encountered a problem and cannot operate.
+	// The filesystem encountered a problem and cannot operate.
 	Filesystem_ERROR Filesystem_Status = 3
-	// Filesystem is being deleted.
+	// The filesystem is being deleted.
 	Filesystem_DELETING Filesystem_Status = 4
 )
 
@@ -80,30 +80,37 @@ func (Filesystem_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_compute_v1_filesystem_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// A Filesystem resource. For more information, see [Filesystems](/docs/compute/concepts/filesystem).
+// A filesystem resource.
+// For details about the concept, see [documentation](/docs/compute/concepts/filesystem).
 type Filesystem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the filesystem.
+	// ID of the filesystem. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the filesystem belongs to.
-	FolderId  string               `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp.
 	CreatedAt *timestamp.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the filesystem. 1-63 characters long.
+	// Name of the filesystem. The name is unique within the folder.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the filesystem. 0-256 characters long.
+	// Description of the filesystem.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
+	// Filesystem labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of the filesystem type.
+	//
+	// To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
 	TypeId string `protobuf:"bytes,7,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// ID of the availability zone where the filesystem resides.
+	//
+	// A filesystem can be attached only to instances residing in the same availability zone.
 	ZoneId string `protobuf:"bytes,8,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Size of the filesystem, specified in bytes.
 	Size int64 `protobuf:"varint,9,opt,name=size,proto3" json:"size,omitempty"`
-	// Block size of the filesystem, specifiedin bytes.
+	// Block size used for the filesystem, specified in bytes.
 	BlockSize int64 `protobuf:"varint,10,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	// Current status of the filesystem.
 	Status Filesystem_Status `protobuf:"varint,11,opt,name=status,proto3,enum=yandex.cloud.compute.v1.Filesystem_Status" json:"status,omitempty"`

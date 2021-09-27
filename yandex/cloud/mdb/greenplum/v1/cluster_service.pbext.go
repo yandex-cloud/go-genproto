@@ -4,6 +4,7 @@ package greenplum
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -103,6 +104,42 @@ func (m *CreateClusterRequest) SetHostGroupIds(v []string) {
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterRequest) SetUpdateMask(v *field_mask.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateClusterRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateClusterRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateClusterRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateClusterRequest) SetConfig(v *GreenplumConfig) {
+	m.Config = v
+}
+
+func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
+func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 

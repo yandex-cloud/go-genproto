@@ -34,8 +34,9 @@ type GetFilesystemRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Filesystem resource to return.
-	// To get the filesystem ID use a [FilesystemService.List] request.
+	// ID of the filesystem to return.
+	//
+	// To get the filesystem ID, make a [FilesystemService.List] request.
 	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 }
 
@@ -84,21 +85,24 @@ type ListFilesystemsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the folder to list filesystems in.
-	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	//
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size],
+	// results is larger than `page_size`,
 	// the service returns a [ListFilesystemsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListFilesystemsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// A filter expression that filters resources listed in the response.
+	// A filter expression that filters filesystems listed in the response.
+	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [Filesystem.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
 	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z]([-a-z0-9]{,61}[a-z0-9])?$`.
+	// Example of a filter: `name=my-filesystem`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -167,14 +171,13 @@ type ListFilesystemsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of Filesystem resources.
+	// List of filesystems in the specified folder.
 	Filesystems []*Filesystem `protobuf:"bytes,1,rep,name=filesystems,proto3" json:"filesystems,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListFilesystemsRequest.page_size], use
-	// the [next_page_token] as the value
-	// for the [ListFilesystemsRequest.page_token] query parameter
-	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListFilesystemsRequest.page_size], use `next_page_token` as the value
+	// for the [ListFilesystemsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -230,23 +233,38 @@ type CreateFilesystemRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the folder to create a filesystem in.
-	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	//
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the filesystem.
+	// Name of the filesystem. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the filesystem.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `key:value` pairs.
+	// Filesystem labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of the filesystem type.
-	// To get a list of available filesystem types use the [yandex.cloud.compute.v1.DiskTypeService.List] request.
+	//
+	// To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
+	//
+	// The filesystem type cannot be updated after the filesystem creation.
 	TypeId string `protobuf:"bytes,5,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// ID of the availability zone where the filesystem resides.
-	// To get a list of available zones use the [yandex.cloud.compute.v1.ZoneService.List] request.
+	//
+	// To get a list of available zones, make a [yandex.cloud.compute.v1.ZoneService.List] request.
+	//
+	// A filesystem can be attached only to virtual machines residing in the same availability zone.
+	// The filesystem availability zone cannot be updated after the filesystem creation.
 	ZoneId string `protobuf:"bytes,6,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Size of the filesystem, specified in bytes.
+	//
+	// The size of the filesystem cannot be updated after the filesystem creation.
 	Size int64 `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`
-	// Block size used for filesystem, specified in bytes. The default is 4096.
+	// Block size used for the filesystem, specified in bytes.
+	//
+	// The block size cannot be updated after the filesystem creation.
+	//
+	// Default value: 4096.
 	BlockSize int64 `protobuf:"varint,8,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 }
 
@@ -391,18 +409,24 @@ type UpdateFilesystemRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Filesystem resource to update.
-	// To get the filesystem ID use a [FilesystemService.List] request.
-	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
-	// Field mask that specifies which fields of the Filesystem resource are going to be updated.
-	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Name of the filesystem.
-	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the filesystem.
-	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `key:value` pairs.
+	// ID of the filesystem to update.
 	//
-	// Existing set of `labels` is completely replaced by the provided set.
+	// To get the filesystem ID, make a [FilesystemService.List] request.
+	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
+	// Field mask that specifies which attributes of the filesystem should be updated.
+	UpdateMask *field_mask.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name of the filesystem. The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description of the filesystem.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New filesystem labels as `key:value` pairs.
+	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
+	//
+	// Existing set of labels is completely replaced by the provided set, so if you just want
+	// to add or remove a label:
+	// 1. Get the current set of labels with a [FilesystemService.Get] request.
+	// 2. Add or remove a label in this set.
+	// 3. Send the new set in this field.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
@@ -478,7 +502,7 @@ type UpdateFilesystemMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Filesystem resource that is being updated.
+	// ID of the filesystem that is being updated.
 	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 }
 
@@ -527,7 +551,8 @@ type DeleteFilesystemRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the filesystem to delete.
-	// To get the filesystem ID use a [FilesystemService.List] request.
+	//
+	// To get the filesystem ID, make a [FilesystemService.List] request.
 	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 }
 
@@ -623,13 +648,15 @@ type ListFilesystemOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Filesystem resource to list operations for.
+	// ID of the filesystem to list operations for.
+	//
+	// To get the filesystem ID, make a [FilesystemService.List] request.
 	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListFilesystemOperationsResponse.next_page_token]
+	// results is larger than `page_size`, the service returns a [ListFilesystemOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListFilesystemOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
@@ -694,10 +721,11 @@ type ListFilesystemOperationsResponse struct {
 
 	// List of operations for the specified filesystem.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListFilesystemOperationsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListFilesystemOperationsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListFilesystemOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListFilesystemOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1194,16 +1222,13 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type FilesystemServiceClient interface {
-	// Returns the specified Filesystem resource.
+	// Returns the specified filesystem.
 	//
-	// To get the list of available Filesystem resources, make a [List] request.
+	// To get the list of available filesystems, make a [List] request.
 	Get(ctx context.Context, in *GetFilesystemRequest, opts ...grpc.CallOption) (*Filesystem, error)
-	// Retrieves the list of Filesystem resources in the specified folder.
+	// Lists filesystems in the specified folder.
 	List(ctx context.Context, in *ListFilesystemsRequest, opts ...grpc.CallOption) (*ListFilesystemsResponse, error)
 	// Creates a filesystem in the specified folder.
-	//
-	// You can create an empty filesystem or restore it from a snapshot or an image.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(ctx context.Context, in *CreateFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified filesystem.
 	Update(ctx context.Context, in *UpdateFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -1281,16 +1306,13 @@ func (c *filesystemServiceClient) ListOperations(ctx context.Context, in *ListFi
 
 // FilesystemServiceServer is the server API for FilesystemService service.
 type FilesystemServiceServer interface {
-	// Returns the specified Filesystem resource.
+	// Returns the specified filesystem.
 	//
-	// To get the list of available Filesystem resources, make a [List] request.
+	// To get the list of available filesystems, make a [List] request.
 	Get(context.Context, *GetFilesystemRequest) (*Filesystem, error)
-	// Retrieves the list of Filesystem resources in the specified folder.
+	// Lists filesystems in the specified folder.
 	List(context.Context, *ListFilesystemsRequest) (*ListFilesystemsResponse, error)
 	// Creates a filesystem in the specified folder.
-	//
-	// You can create an empty filesystem or restore it from a snapshot or an image.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(context.Context, *CreateFilesystemRequest) (*operation.Operation, error)
 	// Updates the specified filesystem.
 	Update(context.Context, *UpdateFilesystemRequest) (*operation.Operation, error)

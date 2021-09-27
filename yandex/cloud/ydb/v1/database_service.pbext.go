@@ -172,6 +172,10 @@ func (m *CreateDatabaseRequest) SetBackupConfig(v *BackupConfig) {
 	m.BackupConfig = v
 }
 
+func (m *CreateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
+	m.MonitoringConfig = v
+}
+
 func (m *CreateDatabaseMetadata) SetDatabaseId(v string) {
 	m.DatabaseId = v
 }
@@ -264,6 +268,10 @@ func (m *UpdateDatabaseRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateDatabaseRequest) SetBackupConfig(v *BackupConfig) {
 	m.BackupConfig = v
+}
+
+func (m *UpdateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
+	m.MonitoringConfig = v
 }
 
 func (m *UpdateDatabaseMetadata) SetDatabaseId(v string) {

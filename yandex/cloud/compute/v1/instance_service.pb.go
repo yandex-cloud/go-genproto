@@ -425,6 +425,11 @@ type CreateInstanceRequest struct {
 	// Array of secondary disks to attach to the instance.
 	SecondaryDiskSpecs []*AttachedDiskSpec `protobuf:"bytes,10,rep,name=secondary_disk_specs,json=secondaryDiskSpecs,proto3" json:"secondary_disk_specs,omitempty"`
 	// Array of filesystems to attach to the instance.
+	//
+	// The filesystems must reside in the same availability zone as the instance.
+	//
+	// To use the instance with an attached filesystem, the latter must be mounted.
+	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	FilesystemSpecs []*AttachedFilesystemSpec `protobuf:"bytes,17,rep,name=filesystem_specs,json=filesystemSpecs,proto3" json:"filesystem_specs,omitempty"`
 	// Network configuration for the instance. Specifies how the network interface is configured
 	// to interact with other services on the internal network and on the internet.
@@ -1730,9 +1735,10 @@ type AttachInstanceFilesystemRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the instance to attach the filesystem to.
-	// To get the instance ID, use a [InstanceService.List] request.
+	//
+	// To get the instance ID, make a [InstanceService.List] request.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// Filesystem that should be attached.
+	// Filesystem to attach to the instance.
 	AttachedFilesystemSpec *AttachedFilesystemSpec `protobuf:"bytes,2,opt,name=attached_filesystem_spec,json=attachedFilesystemSpec,proto3" json:"attached_filesystem_spec,omitempty"`
 }
 
@@ -1787,9 +1793,9 @@ type AttachInstanceFilesystemMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the instance.
+	// ID of the instance that the filesystem is being attached to.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// ID of the filesystem.
+	// ID of the filesystem that is being attached to the instance.
 	FilesystemId string `protobuf:"bytes,2,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 }
 
@@ -1845,7 +1851,8 @@ type DetachInstanceFilesystemRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the instance to detach the filesystem from.
-	// To get the instance ID, use a [InstanceService.List] request.
+	//
+	// To get the instance ID, make a [InstanceService.List] request.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// Types that are assignable to Filesystem:
 	//	*DetachInstanceFilesystemRequest_FilesystemId
@@ -1923,7 +1930,7 @@ type DetachInstanceFilesystemRequest_FilesystemId struct {
 }
 
 type DetachInstanceFilesystemRequest_DeviceName struct {
-	// Tag of the filesystem that should be detached.
+	// Name of the device used for mounting the filesystem that should be detached.
 	DeviceName string `protobuf:"bytes,3,opt,name=device_name,json=deviceName,proto3,oneof"`
 }
 
@@ -1936,9 +1943,9 @@ type DetachInstanceFilesystemMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the instance.
+	// ID of the instance that the filesystem is being detached from.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// ID of the filesystem.
+	// ID of the filesystem that is being detached from the instance.
 	FilesystemId string `protobuf:"bytes,2,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 }
 
@@ -2712,9 +2719,13 @@ type AttachedFilesystemSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The mode in which to attach this disk.
+	// Mode of access to the filesystem that should be attached.
 	Mode AttachedFilesystemSpec_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.compute.v1.AttachedFilesystemSpec_Mode" json:"mode,omitempty"`
-	// This value can be used to reference the device for mounting, resizing, and so on, from within the instance.
+	// Name of the device representing the filesystem on the instance.
+	//
+	// The name should be used for referencing the filesystem from within the instance
+	// when it's being mounted, resized etc.
+	//
 	// If not specified, a random value will be generated.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// ID of the filesystem that should be attached.
@@ -4760,9 +4771,22 @@ type InstanceServiceClient interface {
 	AttachDisk(ctx context.Context, in *AttachInstanceDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Detaches the disk from the instance.
 	DetachDisk(ctx context.Context, in *DetachInstanceDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Attaches the disk to the instance.
+	// Attaches the filesystem to the instance.
+	//
+	// The instance and the filesystem must reside in the same availability zone.
+	//
+	// To attach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	//
+	// To use the instance with an attached filesystem, the latter must be mounted.
+	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	AttachFilesystem(ctx context.Context, in *AttachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Detaches the disk from the instance.
+	// Detaches the filesystem from the instance.
+	//
+	// To detach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
 	DetachFilesystem(ctx context.Context, in *DetachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(ctx context.Context, in *AddInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -4975,9 +4999,22 @@ type InstanceServiceServer interface {
 	AttachDisk(context.Context, *AttachInstanceDiskRequest) (*operation.Operation, error)
 	// Detaches the disk from the instance.
 	DetachDisk(context.Context, *DetachInstanceDiskRequest) (*operation.Operation, error)
-	// Attaches the disk to the instance.
+	// Attaches the filesystem to the instance.
+	//
+	// The instance and the filesystem must reside in the same availability zone.
+	//
+	// To attach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	//
+	// To use the instance with an attached filesystem, the latter must be mounted.
+	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	AttachFilesystem(context.Context, *AttachInstanceFilesystemRequest) (*operation.Operation, error)
-	// Detaches the disk from the instance.
+	// Detaches the filesystem from the instance.
+	//
+	// To detach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
 	DetachFilesystem(context.Context, *DetachInstanceFilesystemRequest) (*operation.Operation, error)
 	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(context.Context, *AddInstanceOneToOneNatRequest) (*operation.Operation, error)

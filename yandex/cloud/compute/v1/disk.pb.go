@@ -103,7 +103,7 @@ type Disk struct {
 	ZoneId string `protobuf:"bytes,8,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Size of the disk, specified in bytes.
 	Size int64 `protobuf:"varint,9,opt,name=size,proto3" json:"size,omitempty"`
-	// Block size of the disk, specifiedin bytes.
+	// Block size of the disk, specified in bytes.
 	BlockSize int64 `protobuf:"varint,15,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	// License IDs that indicate which licenses are attached to this resource.
 	// License IDs are used to calculate additional charges for the use of the virtual machine.

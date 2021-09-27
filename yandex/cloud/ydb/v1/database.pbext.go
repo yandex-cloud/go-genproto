@@ -108,6 +108,130 @@ func (m *Database) SetKinesisApiEndpoint(v string) {
 	m.KinesisApiEndpoint = v
 }
 
+func (m *Database) SetMonitoringConfig(v *MonitoringConfig) {
+	m.MonitoringConfig = v
+}
+
+type AlertParameter_Parameter = isAlertParameter_Parameter
+
+func (m *AlertParameter) SetParameter(v AlertParameter_Parameter) {
+	m.Parameter = v
+}
+
+func (m *AlertParameter) SetDoubleParameterValue(v *AlertParameter_DoubleParameterValue) {
+	m.Parameter = &AlertParameter_DoubleParameterValue_{
+		DoubleParameterValue: v,
+	}
+}
+
+func (m *AlertParameter) SetIntegerParameterValue(v *AlertParameter_IntegerParameterValue) {
+	m.Parameter = &AlertParameter_IntegerParameterValue_{
+		IntegerParameterValue: v,
+	}
+}
+
+func (m *AlertParameter) SetTextParameterValue(v *AlertParameter_TextParameterValue) {
+	m.Parameter = &AlertParameter_TextParameterValue_{
+		TextParameterValue: v,
+	}
+}
+
+func (m *AlertParameter) SetTextListParameterValue(v *AlertParameter_TextListParameterValue) {
+	m.Parameter = &AlertParameter_TextListParameterValue_{
+		TextListParameterValue: v,
+	}
+}
+
+func (m *AlertParameter) SetLabelListParameterValue(v *AlertParameter_LabelListParameterValue) {
+	m.Parameter = &AlertParameter_LabelListParameterValue_{
+		LabelListParameterValue: v,
+	}
+}
+
+func (m *AlertParameter_DoubleParameterValue) SetName(v string) {
+	m.Name = v
+}
+
+func (m *AlertParameter_DoubleParameterValue) SetValue(v float64) {
+	m.Value = v
+}
+
+func (m *AlertParameter_IntegerParameterValue) SetName(v string) {
+	m.Name = v
+}
+
+func (m *AlertParameter_IntegerParameterValue) SetValue(v int64) {
+	m.Value = v
+}
+
+func (m *AlertParameter_TextParameterValue) SetName(v string) {
+	m.Name = v
+}
+
+func (m *AlertParameter_TextParameterValue) SetValue(v string) {
+	m.Value = v
+}
+
+func (m *AlertParameter_TextListParameterValue) SetName(v string) {
+	m.Name = v
+}
+
+func (m *AlertParameter_TextListParameterValue) SetValues(v []string) {
+	m.Values = v
+}
+
+func (m *AlertParameter_LabelListParameterValue) SetName(v string) {
+	m.Name = v
+}
+
+func (m *AlertParameter_LabelListParameterValue) SetValues(v []string) {
+	m.Values = v
+}
+
+func (m *NotificationChannel) SetNotificationChannelId(v string) {
+	m.NotificationChannelId = v
+}
+
+func (m *NotificationChannel) SetNotifyAboutStatuses(v []AlertEvaluationStatus) {
+	m.NotifyAboutStatuses = v
+}
+
+func (m *NotificationChannel) SetRepeateNotifyDelayMs(v int64) {
+	m.RepeateNotifyDelayMs = v
+}
+
+func (m *Alert) SetAlertId(v string) {
+	m.AlertId = v
+}
+
+func (m *Alert) SetAlertTemplateId(v string) {
+	m.AlertTemplateId = v
+}
+
+func (m *Alert) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Alert) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *Alert) SetNotificationChannels(v []*NotificationChannel) {
+	m.NotificationChannels = v
+}
+
+func (m *Alert) SetAlertParameters(v []*AlertParameter) {
+	m.AlertParameters = v
+}
+
+func (m *Alert) SetAlertThresholds(v []*AlertParameter) {
+	m.AlertThresholds = v
+}
+
+func (m *MonitoringConfig) SetAlerts(v []*Alert) {
+	m.Alerts = v
+}
+
 func (m *DedicatedDatabase) SetResourcePresetId(v string) {
 	m.ResourcePresetId = v
 }
