@@ -67,10 +67,6 @@ func (m *UpdateHttpRouterRequest) SetVirtualHosts(v []*VirtualHost) {
 	m.VirtualHosts = v
 }
 
-func (m *UpdateHttpRouterRequest) SetHttpsRedirect(v bool) {
-	m.HttpsRedirect = v
-}
-
 func (m *UpdateHttpRouterMetadata) SetHttpRouterId(v string) {
 	m.HttpRouterId = v
 }
@@ -93,10 +89,6 @@ func (m *CreateHttpRouterRequest) SetLabels(v map[string]string) {
 
 func (m *CreateHttpRouterRequest) SetVirtualHosts(v []*VirtualHost) {
 	m.VirtualHosts = v
-}
-
-func (m *CreateHttpRouterRequest) SetHttpsRedirect(v bool) {
-	m.HttpsRedirect = v
 }
 
 func (m *CreateHttpRouterMetadata) SetHttpRouterId(v string) {

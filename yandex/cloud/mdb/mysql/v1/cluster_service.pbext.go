@@ -470,6 +470,14 @@ func (m *UpdateHostSpec) SetUpdateMask(v *field_mask.FieldMask) {
 	m.UpdateMask = v
 }
 
+func (m *UpdateHostSpec) SetBackupPriority(v int64) {
+	m.BackupPriority = v
+}
+
+func (m *UpdateHostSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
 func (m *HostSpec) SetZoneId(v string) {
 	m.ZoneId = v
 }

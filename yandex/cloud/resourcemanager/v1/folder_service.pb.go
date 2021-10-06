@@ -1253,8 +1253,6 @@ type FolderServiceClient interface {
 	// Updates the specified folder.
 	Update(ctx context.Context, in *UpdateFolderRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified folder.
-	//
-	// The method is temporarily unavailable.
 	Delete(ctx context.Context, in *DeleteFolderRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified folder.
 	ListOperations(ctx context.Context, in *ListFolderOperationsRequest, opts ...grpc.CallOption) (*ListFolderOperationsResponse, error)
@@ -1368,8 +1366,6 @@ type FolderServiceServer interface {
 	// Updates the specified folder.
 	Update(context.Context, *UpdateFolderRequest) (*operation.Operation, error)
 	// Deletes the specified folder.
-	//
-	// The method is temporarily unavailable.
 	Delete(context.Context, *DeleteFolderRequest) (*operation.Operation, error)
 	// Lists operations for the specified folder.
 	ListOperations(context.Context, *ListFolderOperationsRequest) (*ListFolderOperationsResponse, error)

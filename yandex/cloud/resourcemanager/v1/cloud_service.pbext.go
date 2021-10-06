@@ -32,6 +32,26 @@ func (m *ListCloudsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *CreateCloudRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
+func (m *CreateCloudRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CreateCloudRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CreateCloudRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *CreateCloudMetadata) SetCloudId(v string) {
+	m.CloudId = v
+}
+
 func (m *ListCloudOperationsRequest) SetCloudId(v string) {
 	m.CloudId = v
 }
@@ -66,6 +86,10 @@ func (m *UpdateCloudRequest) SetName(v string) {
 
 func (m *UpdateCloudRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *UpdateCloudRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateCloudMetadata) SetCloudId(v string) {

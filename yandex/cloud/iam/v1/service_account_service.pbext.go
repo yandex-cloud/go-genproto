@@ -47,6 +47,10 @@ func (m *CreateServiceAccountRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *CreateServiceAccountRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateServiceAccountMetadata) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
@@ -65,6 +69,10 @@ func (m *UpdateServiceAccountRequest) SetName(v string) {
 
 func (m *UpdateServiceAccountRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *UpdateServiceAccountRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateServiceAccountMetadata) SetServiceAccountId(v string) {

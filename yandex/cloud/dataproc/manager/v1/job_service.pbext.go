@@ -37,3 +37,7 @@ func (m *UpdateJobStatusRequest) SetJobId(v string) {
 func (m *UpdateJobStatusRequest) SetStatus(v Job_Status) {
 	m.Status = v
 }
+
+func (m *UpdateJobStatusRequest) SetApplicationInfo(v *ApplicationInfo) {
+	m.ApplicationInfo = v
+}

@@ -25,3 +25,7 @@ func (m *Cloud) SetDescription(v string) {
 func (m *Cloud) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
+
+func (m *Cloud) SetLabels(v map[string]string) {
+	m.Labels = v
+}

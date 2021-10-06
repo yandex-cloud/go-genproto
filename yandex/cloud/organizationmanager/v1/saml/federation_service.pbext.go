@@ -77,6 +77,10 @@ func (m *CreateFederationRequest) SetCaseInsensitiveNameIds(v bool) {
 	m.CaseInsensitiveNameIds = v
 }
 
+func (m *CreateFederationRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateFederationMetadata) SetFederationId(v string) {
 	m.FederationId = v
 }
@@ -123,6 +127,10 @@ func (m *UpdateFederationRequest) SetSecuritySettings(v *FederationSecuritySetti
 
 func (m *UpdateFederationRequest) SetCaseInsensitiveNameIds(v bool) {
 	m.CaseInsensitiveNameIds = v
+}
+
+func (m *UpdateFederationRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateFederationMetadata) SetFederationId(v string) {

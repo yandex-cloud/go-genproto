@@ -51,6 +51,10 @@ func (m *UpdateOrganizationRequest) SetTitle(v string) {
 	m.Title = v
 }
 
+func (m *UpdateOrganizationRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *UpdateOrganizationMetadata) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }

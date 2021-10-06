@@ -55,6 +55,10 @@ func (m *Federation) SetCaseInsensitiveNameIds(v bool) {
 	m.CaseInsensitiveNameIds = v
 }
 
+func (m *Federation) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *FederationSecuritySettings) SetEncryptedAssertions(v bool) {
 	m.EncryptedAssertions = v
 }

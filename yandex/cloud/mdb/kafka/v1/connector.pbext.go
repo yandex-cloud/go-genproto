@@ -42,6 +42,10 @@ func (m *ConnectorConfigMirrorMakerSpec) SetTopics(v string) {
 	m.Topics = v
 }
 
+func (m *ConnectorConfigMirrorMakerSpec) SetReplicationFactor(v *wrappers.Int64Value) {
+	m.ReplicationFactor = v
+}
+
 type ClusterConnectionSpec_ClusterConnection = isClusterConnectionSpec_ClusterConnection
 
 func (m *ClusterConnectionSpec) SetClusterConnection(v ClusterConnectionSpec_ClusterConnection) {
@@ -130,6 +134,10 @@ func (m *ConnectorConfigMirrorMaker) SetTargetCluster(v *ClusterConnection) {
 
 func (m *ConnectorConfigMirrorMaker) SetTopics(v string) {
 	m.Topics = v
+}
+
+func (m *ConnectorConfigMirrorMaker) SetReplicationFactor(v *wrappers.Int64Value) {
+	m.ReplicationFactor = v
 }
 
 type ClusterConnection_ClusterConnection = isClusterConnection_ClusterConnection

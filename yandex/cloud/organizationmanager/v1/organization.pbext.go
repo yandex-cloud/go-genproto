@@ -25,3 +25,7 @@ func (m *Organization) SetDescription(v string) {
 func (m *Organization) SetTitle(v string) {
 	m.Title = v
 }
+
+func (m *Organization) SetLabels(v map[string]string) {
+	m.Labels = v
+}

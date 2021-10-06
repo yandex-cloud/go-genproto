@@ -25,3 +25,7 @@ func (m *ServiceAccount) SetName(v string) {
 func (m *ServiceAccount) SetDescription(v string) {
 	m.Description = v
 }
+
+func (m *ServiceAccount) SetLabels(v map[string]string) {
+	m.Labels = v
+}

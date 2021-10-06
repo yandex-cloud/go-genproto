@@ -24,14 +24,36 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A load balancing mode resource.
+// For details about the concept, see
+// [documentation](/docs/application-load-balancer/concepts/backend-group#balancing-mode).
 type LoadBalancingMode int32
 
 const (
+	// Round robin load balancing mode.
+	//
+	// All endpoints of the backend take their turns to receive requests attributed to the backend.
 	LoadBalancingMode_ROUND_ROBIN LoadBalancingMode = 0
-	LoadBalancingMode_RANDOM      LoadBalancingMode = 1
-	// Using power of two choices.
+	// Random load balancing mode. Default value.
+	//
+	// For a request attributed to the backend, an endpoint that receives it is picked at random.
+	LoadBalancingMode_RANDOM LoadBalancingMode = 1
+	// Least request load balancing mode.
+	//
+	// To pick an endpoint that receives a request attributed to the backend, the power of two choices algorithm is used;
+	// that is, two endpoints are picked at random, and the request is sent to the one which has the fewest active
+	// requests.
 	LoadBalancingMode_LEAST_REQUEST LoadBalancingMode = 2
-	// MAGLEV_HASH allows session affinity for that backend.
+	// Maglev hashing load balancing mode, used only if session affinity is working for the backend group.
+	//
+	// Each endpoint is hashed, and a hash table with 65537 rows is filled accordingly, so that every endpoint occupies
+	// the same amount of rows. An attribute of each request, specified in session affinity configuration of the backend
+	// group, is also hashed by the same function. The row with the same number as the resulting value is looked up in the
+	// table to determine the endpoint that receives the request.
+	//
+	// If session affinity is not working for the backend group (i.e. it is not configured or the group contains more
+	// than one backend with positive weight), endpoints for backends with `MAGLEV_HASH` load balancing mode are picked at
+	// `RANDOM` instead.
 	LoadBalancingMode_MAGLEV_HASH LoadBalancingMode = 3
 )
 
@@ -230,9 +252,15 @@ type HttpBackendGroup struct {
 
 	// List of HTTP backends.
 	Backends []*HttpBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
-	// session_affinity is applicable when   of the selected backend
-	// is MAGLEV_HASH.
-	// NOTE: session affinity does not work yet when multiple backends enabled in backend group.
+	// Session affinity configuration for the backend group.
+	//
+	// For details about the concept, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#session-affinity).
+	//
+	// If session affinity is configured, the backend group should contain exactly one active backend (i.e. with positive
+	// [HttpBackend.backend_weight]), its [HttpBackend.backend_type] should be [TargetGroupsBackend], and its
+	// [LoadBalancingConfig.load_balancing_mode] should be `MAGLEV_HASH`. If any of these conditions are not met, session
+	// affinity will not work.
 	//
 	// Types that are assignable to SessionAffinity:
 	//	*HttpBackendGroup_Connection
@@ -313,14 +341,19 @@ type isHttpBackendGroup_SessionAffinity interface {
 }
 
 type HttpBackendGroup_Connection struct {
+	// Connection-based session affinity configuration.
+	//
+	// For now, a connection is defined only by an IP address of the client.
 	Connection *ConnectionSessionAffinity `protobuf:"bytes,2,opt,name=connection,proto3,oneof"`
 }
 
 type HttpBackendGroup_Header struct {
+	// HTTP-header-field-based session affinity configuration.
 	Header *HeaderSessionAffinity `protobuf:"bytes,3,opt,name=header,proto3,oneof"`
 }
 
 type HttpBackendGroup_Cookie struct {
+	// Cookie-based session affinity configuration.
 	Cookie *CookieSessionAffinity `protobuf:"bytes,4,opt,name=cookie,proto3,oneof"`
 }
 
@@ -338,9 +371,14 @@ type GrpcBackendGroup struct {
 
 	// List of gRPC backends.
 	Backends []*GrpcBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
-	// session_affinity is applicable when load_balancing_mode of the selected backend
-	// is MAGLEV_HASH.
-	// NOTE: session affinity does not work yet when multiple backends enabled in backend group.
+	// Session affinity configuration for the backend group.
+	//
+	// For details about the concept, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#session-affinity).
+	//
+	// If session affinity is configured, the backend group should contain exactly one active backend (i.e. with positive
+	// [GrpcBackend.backend_weight]), and its [LoadBalancingConfig.load_balancing_mode] should be `MAGLEV_HASH`. If any of
+	// these conditions are not met, session affinity will not work.
 	//
 	// Types that are assignable to SessionAffinity:
 	//	*GrpcBackendGroup_Connection
@@ -421,14 +459,19 @@ type isGrpcBackendGroup_SessionAffinity interface {
 }
 
 type GrpcBackendGroup_Connection struct {
+	// Connection-based session affinity configuration.
+	//
+	// For now, a connection is defined only by an IP address of the client.
 	Connection *ConnectionSessionAffinity `protobuf:"bytes,2,opt,name=connection,proto3,oneof"`
 }
 
 type GrpcBackendGroup_Header struct {
+	// HTTP-header-field-based session affinity configuration.
 	Header *HeaderSessionAffinity `protobuf:"bytes,3,opt,name=header,proto3,oneof"`
 }
 
 type GrpcBackendGroup_Cookie struct {
+	// Cookie-based session affinity configuration.
 	Cookie *CookieSessionAffinity `protobuf:"bytes,4,opt,name=cookie,proto3,oneof"`
 }
 
@@ -438,11 +481,13 @@ func (*GrpcBackendGroup_Header) isGrpcBackendGroup_SessionAffinity() {}
 
 func (*GrpcBackendGroup_Cookie) isGrpcBackendGroup_SessionAffinity() {}
 
+// A resource for HTTP-header-field-based session affinity configuration.
 type HeaderSessionAffinity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Name of the HTTP header field that is used for session affinity.
 	HeaderName string `protobuf:"bytes,1,opt,name=header_name,json=headerName,proto3" json:"header_name,omitempty"`
 }
 
@@ -485,13 +530,18 @@ func (x *HeaderSessionAffinity) GetHeaderName() string {
 	return ""
 }
 
+// A resource for cookie-based session affinity configuration.
 type CookieSessionAffinity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Name of the cookie that is used for session affinity.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// If not set, session cookie will be used (not persisted between browser restarts).
+	// Maximum age of cookies that are generated for sessions (persistent cookies).
+	//
+	// If not set, session cookies are used, which are stored by clients in temporary memory and are deleted
+	// on client restarts.
 	Ttl *duration.Duration `protobuf:"bytes,2,opt,name=ttl,proto3" json:"ttl,omitempty"`
 }
 
@@ -541,11 +591,13 @@ func (x *CookieSessionAffinity) GetTtl() *duration.Duration {
 	return nil
 }
 
+// A resource for connection-based session affinity configuration.
 type ConnectionSessionAffinity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Specifies whether an IP address of the client is used to define a connection for session affinity.
 	SourceIp bool `protobuf:"varint,1,opt,name=source_ip,json=sourceIp,proto3" json:"source_ip,omitempty"`
 }
 
@@ -626,7 +678,10 @@ type LoadBalancingConfig struct {
 	//
 	// Default value: `false`.
 	StrictLocality bool `protobuf:"varint,3,opt,name=strict_locality,json=strictLocality,proto3" json:"strict_locality,omitempty"`
-	// Specifies algorithm the load balancer uses for target selection in particular backend.
+	// Load balancing mode for the backend.
+	//
+	// For detals about load balancing modes, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#balancing-mode).
 	Mode LoadBalancingMode `protobuf:"varint,4,opt,name=mode,proto3,enum=yandex.cloud.apploadbalancer.v1.LoadBalancingMode" json:"mode,omitempty"`
 }
 
