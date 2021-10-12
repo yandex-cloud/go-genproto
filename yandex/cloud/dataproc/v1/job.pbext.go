@@ -154,6 +154,18 @@ func (m *SparkJob) SetMainClass(v string) {
 	m.MainClass = v
 }
 
+func (m *SparkJob) SetPackages(v []string) {
+	m.Packages = v
+}
+
+func (m *SparkJob) SetRepositories(v []string) {
+	m.Repositories = v
+}
+
+func (m *SparkJob) SetExcludePackages(v []string) {
+	m.ExcludePackages = v
+}
+
 func (m *PysparkJob) SetArgs(v []string) {
 	m.Args = v
 }
@@ -180,6 +192,18 @@ func (m *PysparkJob) SetMainPythonFileUri(v string) {
 
 func (m *PysparkJob) SetPythonFileUris(v []string) {
 	m.PythonFileUris = v
+}
+
+func (m *PysparkJob) SetPackages(v []string) {
+	m.Packages = v
+}
+
+func (m *PysparkJob) SetRepositories(v []string) {
+	m.Repositories = v
+}
+
+func (m *PysparkJob) SetExcludePackages(v []string) {
+	m.ExcludePackages = v
 }
 
 func (m *QueryList) SetQueries(v []string) {

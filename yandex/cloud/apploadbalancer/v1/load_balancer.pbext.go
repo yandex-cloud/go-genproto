@@ -140,6 +140,12 @@ func (m *Listener) SetTls(v *TlsListener) {
 	}
 }
 
+func (m *Listener) SetTcp(v *TcpListener) {
+	m.Listener = &Listener_Tcp{
+		Tcp: v,
+	}
+}
+
 func (m *Endpoint) SetAddresses(v []*Address) {
 	m.Addresses = v
 }
@@ -164,8 +170,16 @@ func (m *TlsListener) SetSniHandlers(v []*SniMatch) {
 	m.SniHandlers = v
 }
 
+func (m *TcpListener) SetHandler(v *StreamHandler) {
+	m.Handler = v
+}
+
 func (m *Http2Options) SetMaxConcurrentStreams(v int64) {
 	m.MaxConcurrentStreams = v
+}
+
+func (m *StreamHandler) SetBackendGroupId(v string) {
+	m.BackendGroupId = v
 }
 
 type HttpHandler_ProtocolSettings = isHttpHandler_ProtocolSettings
@@ -215,6 +229,12 @@ func (m *TlsHandler) SetHandler(v TlsHandler_Handler) {
 func (m *TlsHandler) SetHttpHandler(v *HttpHandler) {
 	m.Handler = &TlsHandler_HttpHandler{
 		HttpHandler: v,
+	}
+}
+
+func (m *TlsHandler) SetStreamHandler(v *StreamHandler) {
+	m.Handler = &TlsHandler_StreamHandler{
+		StreamHandler: v,
 	}
 }
 

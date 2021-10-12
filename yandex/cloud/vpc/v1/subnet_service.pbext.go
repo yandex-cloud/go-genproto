@@ -108,6 +108,30 @@ func (m *UpdateSubnetMetadata) SetSubnetId(v string) {
 	m.SubnetId = v
 }
 
+func (m *AddSubnetCidrBlocksRequest) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *AddSubnetCidrBlocksRequest) SetV4CidrBlocks(v []string) {
+	m.V4CidrBlocks = v
+}
+
+func (m *AddSubnetCidrBlocksMetadata) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *RemoveSubnetCidrBlocksRequest) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *RemoveSubnetCidrBlocksRequest) SetV4CidrBlocks(v []string) {
+	m.V4CidrBlocks = v
+}
+
+func (m *RemoveSubnetCidrBlocksMetadata) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
 func (m *DeleteSubnetRequest) SetSubnetId(v string) {
 	m.SubnetId = v
 }

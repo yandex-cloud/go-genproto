@@ -127,6 +127,12 @@ func (m *ClusterConfig) SetMongodb_4_4(v *Mongodb4_4) {
 	}
 }
 
+func (m *ClusterConfig) SetMongodb_5_0(v *Mongodb5_0) {
+	m.Mongodb = &ClusterConfig_Mongodb_5_0{
+		Mongodb_5_0: v,
+	}
+}
+
 func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
@@ -344,6 +350,58 @@ func (m *Mongodb4_4_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet4_4
 }
 
 func (m *Mongodb4_4_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb5_0) SetMongod(v *Mongodb5_0_Mongod) {
+	m.Mongod = v
+}
+
+func (m *Mongodb5_0) SetMongocfg(v *Mongodb5_0_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *Mongodb5_0) SetMongos(v *Mongodb5_0_Mongos) {
+	m.Mongos = v
+}
+
+func (m *Mongodb5_0) SetMongoinfra(v *Mongodb5_0_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *Mongodb5_0_Mongod) SetConfig(v *config.MongodConfigSet5_0) {
+	m.Config = v
+}
+
+func (m *Mongodb5_0_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb5_0_MongoCfg) SetConfig(v *config.MongoCfgConfigSet5_0) {
+	m.Config = v
+}
+
+func (m *Mongodb5_0_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb5_0_Mongos) SetConfig(v *config.MongosConfigSet5_0) {
+	m.Config = v
+}
+
+func (m *Mongodb5_0_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb5_0_MongoInfra) SetConfigMongos(v *config.MongosConfigSet5_0) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb5_0_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet5_0) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb5_0_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 

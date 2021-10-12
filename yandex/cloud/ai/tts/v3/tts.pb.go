@@ -497,7 +497,7 @@ type AudioVariable struct {
 	VariableName string `protobuf:"bytes,1,opt,name=variable_name,json=variableName,proto3" json:"variable_name,omitempty"`
 	// Start time of the variable in milliseconds.
 	VariableStartMs int64 `protobuf:"varint,2,opt,name=variable_start_ms,json=variableStartMs,proto3" json:"variable_start_ms,omitempty"`
-	// Lenght of the variable in milliseconds.
+	// Length of the variable in milliseconds.
 	VariableLengthMs int64 `protobuf:"varint,3,opt,name=variable_length_ms,json=variableLengthMs,proto3" json:"variable_length_ms,omitempty"`
 }
 
@@ -879,7 +879,7 @@ type Hints_Speed struct {
 }
 
 type Hints_Volume struct {
-	// hint to regulate volume
+	// hint to regulate volume. For LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED normalization will use MAX_PEAK, if volume in (0, 1], LUFS if volume in [-145, 0).
 	Volume float64 `protobuf:"fixed64,4,opt,name=volume,proto3,oneof"`
 }
 
@@ -898,7 +898,7 @@ type UtteranceSynthesisRequest struct {
 
 	// The name of the model.
 	//
-	// Currently avalible only `general`.
+	// Specifies basic synthesis functionality. Currently should be empty.
 	Model string `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
 	// Text to synthesis, one of text synthesis markups.
 	//
@@ -910,7 +910,7 @@ type UtteranceSynthesisRequest struct {
 	Hints []*Hints `protobuf:"bytes,4,rep,name=hints,proto3" json:"hints,omitempty"`
 	// Optional. Default: 22050 Hz, linear 16-bit signed little-endian PCM, with WAV header
 	OutputAudioSpec *AudioFormatOptions `protobuf:"bytes,5,opt,name=output_audio_spec,json=outputAudioSpec,proto3" json:"output_audio_spec,omitempty"`
-	// Optional. Default: MAX_PEAK, type of loudness normalization.
+	// Optional. Default: LUFS, type of loudness normalization, default value -19.
 	LoudnessNormalizationType UtteranceSynthesisRequest_LoudnessNormalizationType `protobuf:"varint,6,opt,name=loudness_normalization_type,json=loudnessNormalizationType,proto3,enum=speechkit.tts.v3.UtteranceSynthesisRequest_LoudnessNormalizationType" json:"loudness_normalization_type,omitempty"`
 }
 
@@ -1005,7 +1005,7 @@ type UtteranceSynthesisRequest_Text struct {
 }
 
 type UtteranceSynthesisRequest_TextTemplate struct {
-	// Text template instalce, e.g. `{"Hello, {username}" with username="Alice"}`.
+	// Text template instance, e.g. `{"Hello, {username}" with username="Alice"}`.
 	TextTemplate *TextTemplate `protobuf:"bytes,3,opt,name=text_template,json=textTemplate,proto3,oneof"`
 }
 

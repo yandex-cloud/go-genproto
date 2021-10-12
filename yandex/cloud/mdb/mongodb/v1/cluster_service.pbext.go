@@ -807,6 +807,58 @@ func (m *MongodbSpec4_4_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *MongodbSpec5_0) SetMongod(v *MongodbSpec5_0_Mongod) {
+	m.Mongod = v
+}
+
+func (m *MongodbSpec5_0) SetMongocfg(v *MongodbSpec5_0_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *MongodbSpec5_0) SetMongos(v *MongodbSpec5_0_Mongos) {
+	m.Mongos = v
+}
+
+func (m *MongodbSpec5_0) SetMongoinfra(v *MongodbSpec5_0_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *MongodbSpec5_0_Mongod) SetConfig(v *config.MongodConfig5_0) {
+	m.Config = v
+}
+
+func (m *MongodbSpec5_0_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec5_0_MongoCfg) SetConfig(v *config.MongoCfgConfig5_0) {
+	m.Config = v
+}
+
+func (m *MongodbSpec5_0_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec5_0_Mongos) SetConfig(v *config.MongosConfig5_0) {
+	m.Config = v
+}
+
+func (m *MongodbSpec5_0_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec5_0_MongoInfra) SetConfigMongos(v *config.MongosConfig5_0) {
+	m.ConfigMongos = v
+}
+
+func (m *MongodbSpec5_0_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfig5_0) {
+	m.ConfigMongocfg = v
+}
+
+func (m *MongodbSpec5_0_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
 type ConfigSpec_MongodbSpec = isConfigSpec_MongodbSpec
 
 func (m *ConfigSpec) SetMongodbSpec(v ConfigSpec_MongodbSpec) {
@@ -842,6 +894,12 @@ func (m *ConfigSpec) SetMongodbSpec_4_2(v *MongodbSpec4_2) {
 func (m *ConfigSpec) SetMongodbSpec_4_4(v *MongodbSpec4_4) {
 	m.MongodbSpec = &ConfigSpec_MongodbSpec_4_4{
 		MongodbSpec_4_4: v,
+	}
+}
+
+func (m *ConfigSpec) SetMongodbSpec_5_0(v *MongodbSpec5_0) {
+	m.MongodbSpec = &ConfigSpec_MongodbSpec_5_0{
+		MongodbSpec_5_0: v,
 	}
 }
 
