@@ -3,7 +3,7 @@
 package clickhouse
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *ClickhouseConfig) SetLogLevel(v ClickhouseConfig_LogLevel) {
@@ -38,35 +38,35 @@ func (m *ClickhouseConfig) SetRabbitmq(v *ClickhouseConfig_Rabbitmq) {
 	m.Rabbitmq = v
 }
 
-func (m *ClickhouseConfig) SetMaxConnections(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
 
-func (m *ClickhouseConfig) SetMaxConcurrentQueries(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMaxConcurrentQueries(v *wrapperspb.Int64Value) {
 	m.MaxConcurrentQueries = v
 }
 
-func (m *ClickhouseConfig) SetKeepAliveTimeout(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetKeepAliveTimeout(v *wrapperspb.Int64Value) {
 	m.KeepAliveTimeout = v
 }
 
-func (m *ClickhouseConfig) SetUncompressedCacheSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetUncompressedCacheSize(v *wrapperspb.Int64Value) {
 	m.UncompressedCacheSize = v
 }
 
-func (m *ClickhouseConfig) SetMarkCacheSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMarkCacheSize(v *wrapperspb.Int64Value) {
 	m.MarkCacheSize = v
 }
 
-func (m *ClickhouseConfig) SetMaxTableSizeToDrop(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMaxTableSizeToDrop(v *wrapperspb.Int64Value) {
 	m.MaxTableSizeToDrop = v
 }
 
-func (m *ClickhouseConfig) SetMaxPartitionSizeToDrop(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMaxPartitionSizeToDrop(v *wrapperspb.Int64Value) {
 	m.MaxPartitionSizeToDrop = v
 }
 
-func (m *ClickhouseConfig) SetBuiltinDictionariesReloadInterval(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetBuiltinDictionariesReloadInterval(v *wrapperspb.Int64Value) {
 	m.BuiltinDictionariesReloadInterval = v
 }
 
@@ -78,67 +78,67 @@ func (m *ClickhouseConfig) SetGeobaseUri(v string) {
 	m.GeobaseUri = v
 }
 
-func (m *ClickhouseConfig) SetQueryLogRetentionSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetQueryLogRetentionSize(v *wrapperspb.Int64Value) {
 	m.QueryLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetQueryLogRetentionTime(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetQueryLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.QueryLogRetentionTime = v
 }
 
-func (m *ClickhouseConfig) SetQueryThreadLogEnabled(v *wrappers.BoolValue) {
+func (m *ClickhouseConfig) SetQueryThreadLogEnabled(v *wrapperspb.BoolValue) {
 	m.QueryThreadLogEnabled = v
 }
 
-func (m *ClickhouseConfig) SetQueryThreadLogRetentionSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetQueryThreadLogRetentionSize(v *wrapperspb.Int64Value) {
 	m.QueryThreadLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetQueryThreadLogRetentionTime(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetQueryThreadLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.QueryThreadLogRetentionTime = v
 }
 
-func (m *ClickhouseConfig) SetPartLogRetentionSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetPartLogRetentionSize(v *wrapperspb.Int64Value) {
 	m.PartLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetPartLogRetentionTime(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetPartLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.PartLogRetentionTime = v
 }
 
-func (m *ClickhouseConfig) SetMetricLogEnabled(v *wrappers.BoolValue) {
+func (m *ClickhouseConfig) SetMetricLogEnabled(v *wrapperspb.BoolValue) {
 	m.MetricLogEnabled = v
 }
 
-func (m *ClickhouseConfig) SetMetricLogRetentionSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMetricLogRetentionSize(v *wrapperspb.Int64Value) {
 	m.MetricLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetMetricLogRetentionTime(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetMetricLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.MetricLogRetentionTime = v
 }
 
-func (m *ClickhouseConfig) SetTraceLogEnabled(v *wrappers.BoolValue) {
+func (m *ClickhouseConfig) SetTraceLogEnabled(v *wrapperspb.BoolValue) {
 	m.TraceLogEnabled = v
 }
 
-func (m *ClickhouseConfig) SetTraceLogRetentionSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetTraceLogRetentionSize(v *wrapperspb.Int64Value) {
 	m.TraceLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetTraceLogRetentionTime(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetTraceLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.TraceLogRetentionTime = v
 }
 
-func (m *ClickhouseConfig) SetTextLogEnabled(v *wrappers.BoolValue) {
+func (m *ClickhouseConfig) SetTextLogEnabled(v *wrapperspb.BoolValue) {
 	m.TextLogEnabled = v
 }
 
-func (m *ClickhouseConfig) SetTextLogRetentionSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetTextLogRetentionSize(v *wrapperspb.Int64Value) {
 	m.TextLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetTextLogRetentionTime(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetTextLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.TextLogRetentionTime = v
 }
 
@@ -146,43 +146,43 @@ func (m *ClickhouseConfig) SetTextLogLevel(v ClickhouseConfig_LogLevel) {
 	m.TextLogLevel = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
 	m.BackgroundPoolSize = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrapperspb.Int64Value) {
 	m.BackgroundSchedulePoolSize = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
 	m.ReplicatedDeduplicationWindow = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowSeconds(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowSeconds(v *wrapperspb.Int64Value) {
 	m.ReplicatedDeduplicationWindowSeconds = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetPartsToDelayInsert(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetPartsToDelayInsert(v *wrapperspb.Int64Value) {
 	m.PartsToDelayInsert = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetPartsToThrowInsert(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetPartsToThrowInsert(v *wrapperspb.Int64Value) {
 	m.PartsToThrowInsert = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetMaxReplicatedMergesInQueue(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetMaxReplicatedMergesInQueue(v *wrapperspb.Int64Value) {
 	m.MaxReplicatedMergesInQueue = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge(v *wrapperspb.Int64Value) {
 	m.NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMinSpaceInPool(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMinSpaceInPool(v *wrapperspb.Int64Value) {
 	m.MaxBytesToMergeAtMinSpaceInPool = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMaxSpaceInPool(v *wrappers.Int64Value) {
+func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMaxSpaceInPool(v *wrapperspb.Int64Value) {
 	m.MaxBytesToMergeAtMaxSpaceInPool = v
 }
 

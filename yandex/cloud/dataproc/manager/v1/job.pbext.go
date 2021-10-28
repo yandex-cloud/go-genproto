@@ -3,7 +3,7 @@
 package dataproc_manager
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Job_JobSpec = isJob_JobSpec
@@ -20,15 +20,15 @@ func (m *Job) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *Job) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Job) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Job) SetStartedAt(v *timestamp.Timestamp) {
+func (m *Job) SetStartedAt(v *timestamppb.Timestamp) {
 	m.StartedAt = v
 }
 
-func (m *Job) SetFinishedAt(v *timestamp.Timestamp) {
+func (m *Job) SetFinishedAt(v *timestamppb.Timestamp) {
 	m.FinishedAt = v
 }
 

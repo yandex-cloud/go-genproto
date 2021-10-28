@@ -3,7 +3,7 @@
 package containerregistry
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Registry) SetId(v string) {
@@ -22,7 +22,7 @@ func (m *Registry) SetStatus(v Registry_Status) {
 	m.Status = v
 }
 
-func (m *Registry) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Registry) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

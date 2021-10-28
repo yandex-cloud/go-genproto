@@ -3,7 +3,7 @@
 package dns
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *DnsZone) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *DnsZone) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *DnsZone) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *DnsZone) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

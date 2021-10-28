@@ -3,8 +3,8 @@
 package greenplum
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -15,7 +15,7 @@ func (m *Cluster) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Cluster) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Cluster) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

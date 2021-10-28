@@ -3,10 +3,10 @@
 package functions
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetFunctionRequest) SetFunctionId(v string) {
@@ -73,7 +73,7 @@ func (m *UpdateFunctionRequest) SetFunctionId(v string) {
 	m.FunctionId = v
 }
 
-func (m *UpdateFunctionRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateFunctionRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -193,7 +193,7 @@ func (m *CreateFunctionVersionRequest) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *CreateFunctionVersionRequest) SetExecutionTimeout(v *duration.Duration) {
+func (m *CreateFunctionVersionRequest) SetExecutionTimeout(v *durationpb.Duration) {
 	m.ExecutionTimeout = v
 }
 
@@ -303,11 +303,11 @@ func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetTag(v strin
 	m.Tag = v
 }
 
-func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetEffectiveFrom(v *timestamp.Timestamp) {
+func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetEffectiveFrom(v *timestamppb.Timestamp) {
 	m.EffectiveFrom = v
 }
 
-func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetEffectiveTo(v *timestamp.Timestamp) {
+func (m *ListFunctionTagHistoryResponse_FunctionTagHistoryRecord) SetEffectiveTo(v *timestamppb.Timestamp) {
 	m.EffectiveTo = v
 }
 

@@ -3,9 +3,9 @@
 package triggers
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Trigger) SetId(v string) {
@@ -16,7 +16,7 @@ func (m *Trigger) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Trigger) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Trigger) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -146,7 +146,7 @@ func (m *Trigger_MessageQueue) SetBatchSettings(v *BatchSettings) {
 	m.BatchSettings = v
 }
 
-func (m *Trigger_MessageQueue) SetVisibilityTimeout(v *duration.Duration) {
+func (m *Trigger_MessageQueue) SetVisibilityTimeout(v *durationpb.Duration) {
 	m.VisibilityTimeout = v
 }
 
@@ -400,7 +400,7 @@ func (m *BatchSettings) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *BatchSettings) SetCutoff(v *duration.Duration) {
+func (m *BatchSettings) SetCutoff(v *durationpb.Duration) {
 	m.Cutoff = v
 }
 
@@ -408,7 +408,7 @@ func (m *CloudLogsBatchSettings) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *CloudLogsBatchSettings) SetCutoff(v *duration.Duration) {
+func (m *CloudLogsBatchSettings) SetCutoff(v *durationpb.Duration) {
 	m.Cutoff = v
 }
 
@@ -416,7 +416,7 @@ func (m *LoggingBatchSettings) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *LoggingBatchSettings) SetCutoff(v *duration.Duration) {
+func (m *LoggingBatchSettings) SetCutoff(v *durationpb.Duration) {
 	m.Cutoff = v
 }
 
@@ -424,7 +424,7 @@ func (m *RetrySettings) SetRetryAttempts(v int64) {
 	m.RetryAttempts = v
 }
 
-func (m *RetrySettings) SetInterval(v *duration.Duration) {
+func (m *RetrySettings) SetInterval(v *durationpb.Duration) {
 	m.Interval = v
 }
 
@@ -458,7 +458,7 @@ func (m *DataStreamBatchSettings) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *DataStreamBatchSettings) SetCutoff(v *duration.Duration) {
+func (m *DataStreamBatchSettings) SetCutoff(v *durationpb.Duration) {
 	m.Cutoff = v
 }
 

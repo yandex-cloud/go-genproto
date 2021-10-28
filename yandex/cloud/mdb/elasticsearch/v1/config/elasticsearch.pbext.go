@@ -3,10 +3,10 @@
 package elasticsearch
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-func (m *ElasticsearchConfig7) SetMaxClauseCount(v *wrappers.Int64Value) {
+func (m *ElasticsearchConfig7) SetMaxClauseCount(v *wrapperspb.Int64Value) {
 	m.MaxClauseCount = v
 }
 

@@ -3,18 +3,18 @@
 package mysql
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-func (m *MysqlConfig5_7) SetInnodbBufferPoolSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbBufferPoolSize(v *wrapperspb.Int64Value) {
 	m.InnodbBufferPoolSize = v
 }
 
-func (m *MysqlConfig5_7) SetMaxConnections(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
 
-func (m *MysqlConfig5_7) SetLongQueryTime(v *wrappers.DoubleValue) {
+func (m *MysqlConfig5_7) SetLongQueryTime(v *wrapperspb.DoubleValue) {
 	m.LongQueryTime = v
 }
 

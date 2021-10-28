@@ -3,7 +3,7 @@
 package iam
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *ServiceAccount) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *ServiceAccount) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *ServiceAccount) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *ServiceAccount) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

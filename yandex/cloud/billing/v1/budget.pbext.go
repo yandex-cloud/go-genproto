@@ -3,7 +3,7 @@
 package billing
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Budget_BudgetSpec = isBudget_BudgetSpec
@@ -20,7 +20,7 @@ func (m *Budget) SetName(v string) {
 	m.Name = v
 }
 
-func (m *Budget) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Budget) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

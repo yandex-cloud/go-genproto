@@ -5,7 +5,7 @@ package vpc
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	reference "github.com/yandex-cloud/go-genproto/yandex/cloud/reference"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetSubnetRequest) SetSubnetId(v string) {
@@ -80,7 +80,7 @@ func (m *UpdateSubnetRequest) SetSubnetId(v string) {
 	m.SubnetId = v
 }
 
-func (m *UpdateSubnetRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateSubnetRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

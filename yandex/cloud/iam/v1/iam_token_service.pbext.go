@@ -3,7 +3,7 @@
 package iam
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type CreateIamTokenRequest_Identity = isCreateIamTokenRequest_Identity
@@ -28,7 +28,7 @@ func (m *CreateIamTokenResponse) SetIamToken(v string) {
 	m.IamToken = v
 }
 
-func (m *CreateIamTokenResponse) SetExpiresAt(v *timestamp.Timestamp) {
+func (m *CreateIamTokenResponse) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
 }
 

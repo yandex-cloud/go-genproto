@@ -3,9 +3,9 @@
 package operation
 
 import (
-	any "github.com/golang/protobuf/ptypes/any"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	status "google.golang.org/genproto/googleapis/rpc/status"
+	anypb "google.golang.org/protobuf/types/known/anypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Operation_Result = isOperation_Result
@@ -22,7 +22,7 @@ func (m *Operation) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Operation) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Operation) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -30,7 +30,7 @@ func (m *Operation) SetCreatedBy(v string) {
 	m.CreatedBy = v
 }
 
-func (m *Operation) SetModifiedAt(v *timestamp.Timestamp) {
+func (m *Operation) SetModifiedAt(v *timestamppb.Timestamp) {
 	m.ModifiedAt = v
 }
 
@@ -38,7 +38,7 @@ func (m *Operation) SetDone(v bool) {
 	m.Done = v
 }
 
-func (m *Operation) SetMetadata(v *any.Any) {
+func (m *Operation) SetMetadata(v *anypb.Any) {
 	m.Metadata = v
 }
 
@@ -48,7 +48,7 @@ func (m *Operation) SetError(v *status.Status) {
 	}
 }
 
-func (m *Operation) SetResponse(v *any.Any) {
+func (m *Operation) SetResponse(v *anypb.Any) {
 	m.Result = &Operation_Response{
 		Response: v,
 	}

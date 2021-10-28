@@ -3,7 +3,7 @@
 package devices
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Registry) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Registry) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Registry) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Registry) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -50,7 +50,7 @@ func (m *RegistryCertificate) SetCertificateData(v string) {
 	m.CertificateData = v
 }
 
-func (m *RegistryCertificate) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *RegistryCertificate) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -74,6 +74,6 @@ func (m *RegistryPassword) SetId(v string) {
 	m.Id = v
 }
 
-func (m *RegistryPassword) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *RegistryPassword) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

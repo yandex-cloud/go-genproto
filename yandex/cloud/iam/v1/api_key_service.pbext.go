@@ -4,7 +4,7 @@ package iam
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetApiKeyRequest) SetApiKeyId(v string) {
@@ -51,7 +51,7 @@ func (m *UpdateApiKeyRequest) SetApiKeyId(v string) {
 	m.ApiKeyId = v
 }
 
-func (m *UpdateApiKeyRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateApiKeyRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

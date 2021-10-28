@@ -3,7 +3,7 @@
 package loadbalancer
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *TargetGroup) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *TargetGroup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *TargetGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *TargetGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

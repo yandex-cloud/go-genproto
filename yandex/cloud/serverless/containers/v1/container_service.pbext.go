@@ -3,9 +3,9 @@
 package containers
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetContainerRequest) SetContainerId(v string) {
@@ -60,7 +60,7 @@ func (m *UpdateContainerRequest) SetContainerId(v string) {
 	m.ContainerId = v
 }
 
-func (m *UpdateContainerRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateContainerRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -142,7 +142,7 @@ func (m *DeployContainerRevisionRequest) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *DeployContainerRevisionRequest) SetExecutionTimeout(v *duration.Duration) {
+func (m *DeployContainerRevisionRequest) SetExecutionTimeout(v *durationpb.Duration) {
 	m.ExecutionTimeout = v
 }
 

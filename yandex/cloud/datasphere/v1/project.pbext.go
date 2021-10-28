@@ -3,8 +3,8 @@
 package datasphere
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Project) SetId(v string) {
@@ -15,7 +15,7 @@ func (m *Project) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Project) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Project) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -51,10 +51,10 @@ func (m *Project_Settings) SetCommitMode(v Project_Settings_CommitMode) {
 	m.CommitMode = v
 }
 
-func (m *Project_Limits) SetMaxUnitsPerHour(v *wrappers.Int64Value) {
+func (m *Project_Limits) SetMaxUnitsPerHour(v *wrapperspb.Int64Value) {
 	m.MaxUnitsPerHour = v
 }
 
-func (m *Project_Limits) SetMaxUnitsPerExecution(v *wrappers.Int64Value) {
+func (m *Project_Limits) SetMaxUnitsPerExecution(v *wrapperspb.Int64Value) {
 	m.MaxUnitsPerExecution = v
 }

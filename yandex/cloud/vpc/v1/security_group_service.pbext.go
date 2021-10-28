@@ -4,7 +4,7 @@ package vpc
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetSecurityGroupRequest) SetSecurityGroupId(v string) {
@@ -125,7 +125,7 @@ func (m *UpdateSecurityGroupRequest) SetSecurityGroupId(v string) {
 	m.SecurityGroupId = v
 }
 
-func (m *UpdateSecurityGroupRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateSecurityGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -173,7 +173,7 @@ func (m *UpdateSecurityGroupRuleRequest) SetRuleId(v string) {
 	m.RuleId = v
 }
 
-func (m *UpdateSecurityGroupRuleRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateSecurityGroupRuleRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

@@ -4,7 +4,7 @@ package vpc
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetRouteTableRequest) SetRouteTableId(v string) {
@@ -67,7 +67,7 @@ func (m *UpdateRouteTableRequest) SetRouteTableId(v string) {
 	m.RouteTableId = v
 }
 
-func (m *UpdateRouteTableRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateRouteTableRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

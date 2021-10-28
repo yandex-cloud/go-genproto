@@ -4,7 +4,7 @@ package organizationmanager
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetOrganizationRequest) SetOrganizationId(v string) {
@@ -35,7 +35,7 @@ func (m *UpdateOrganizationRequest) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
 
-func (m *UpdateOrganizationRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateOrganizationRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

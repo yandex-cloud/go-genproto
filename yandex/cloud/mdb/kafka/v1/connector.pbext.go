@@ -3,7 +3,7 @@
 package kafka
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 type ConnectorSpec_ConnectorConfig = isConnectorSpec_ConnectorConfig
@@ -16,7 +16,7 @@ func (m *ConnectorSpec) SetName(v string) {
 	m.Name = v
 }
 
-func (m *ConnectorSpec) SetTasksMax(v *wrappers.Int64Value) {
+func (m *ConnectorSpec) SetTasksMax(v *wrapperspb.Int64Value) {
 	m.TasksMax = v
 }
 
@@ -42,7 +42,7 @@ func (m *ConnectorConfigMirrorMakerSpec) SetTopics(v string) {
 	m.Topics = v
 }
 
-func (m *ConnectorConfigMirrorMakerSpec) SetReplicationFactor(v *wrappers.Int64Value) {
+func (m *ConnectorConfigMirrorMakerSpec) SetReplicationFactor(v *wrapperspb.Int64Value) {
 	m.ReplicationFactor = v
 }
 
@@ -98,7 +98,7 @@ func (m *Connector) SetName(v string) {
 	m.Name = v
 }
 
-func (m *Connector) SetTasksMax(v *wrappers.Int64Value) {
+func (m *Connector) SetTasksMax(v *wrapperspb.Int64Value) {
 	m.TasksMax = v
 }
 
@@ -136,7 +136,7 @@ func (m *ConnectorConfigMirrorMaker) SetTopics(v string) {
 	m.Topics = v
 }
 
-func (m *ConnectorConfigMirrorMaker) SetReplicationFactor(v *wrappers.Int64Value) {
+func (m *ConnectorConfigMirrorMaker) SetReplicationFactor(v *wrapperspb.Int64Value) {
 	m.ReplicationFactor = v
 }
 

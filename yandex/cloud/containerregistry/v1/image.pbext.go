@@ -3,7 +3,7 @@
 package containerregistry
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Image) SetId(v string) {
@@ -34,6 +34,6 @@ func (m *Image) SetTags(v []string) {
 	m.Tags = v
 }
 
-func (m *Image) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Image) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

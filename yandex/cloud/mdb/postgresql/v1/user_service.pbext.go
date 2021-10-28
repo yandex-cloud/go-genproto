@@ -3,8 +3,8 @@
 package postgresql
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -59,7 +59,7 @@ func (m *UpdateUserRequest) SetUserName(v string) {
 	m.UserName = v
 }
 
-func (m *UpdateUserRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateUserRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -79,7 +79,7 @@ func (m *UpdateUserRequest) SetSettings(v *UserSettings) {
 	m.Settings = v
 }
 
-func (m *UpdateUserRequest) SetLogin(v *wrappers.BoolValue) {
+func (m *UpdateUserRequest) SetLogin(v *wrapperspb.BoolValue) {
 	m.Login = v
 }
 

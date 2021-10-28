@@ -4,7 +4,7 @@ package apigateway
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetApiGatewayRequest) SetApiGatewayId(v string) {
@@ -73,7 +73,7 @@ func (m *UpdateApiGatewayRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
-func (m *UpdateApiGatewayRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateApiGatewayRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

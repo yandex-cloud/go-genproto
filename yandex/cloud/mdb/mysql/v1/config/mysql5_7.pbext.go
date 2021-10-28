@@ -3,26 +3,26 @@
 package mysql
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-func (m *MysqlConfig5_7) SetInnodbBufferPoolSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbBufferPoolSize(v *wrapperspb.Int64Value) {
 	m.InnodbBufferPoolSize = v
 }
 
-func (m *MysqlConfig5_7) SetMaxConnections(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
 
-func (m *MysqlConfig5_7) SetLongQueryTime(v *wrappers.DoubleValue) {
+func (m *MysqlConfig5_7) SetLongQueryTime(v *wrapperspb.DoubleValue) {
 	m.LongQueryTime = v
 }
 
-func (m *MysqlConfig5_7) SetGeneralLog(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetGeneralLog(v *wrapperspb.BoolValue) {
 	m.GeneralLog = v
 }
 
-func (m *MysqlConfig5_7) SetAuditLog(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetAuditLog(v *wrapperspb.BoolValue) {
 	m.AuditLog = v
 }
 
@@ -30,7 +30,7 @@ func (m *MysqlConfig5_7) SetSqlMode(v []MysqlConfig5_7_SQLMode) {
 	m.SqlMode = v
 }
 
-func (m *MysqlConfig5_7) SetMaxAllowedPacket(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMaxAllowedPacket(v *wrapperspb.Int64Value) {
 	m.MaxAllowedPacket = v
 }
 
@@ -38,11 +38,11 @@ func (m *MysqlConfig5_7) SetDefaultAuthenticationPlugin(v MysqlConfig5_7_AuthPlu
 	m.DefaultAuthenticationPlugin = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbFlushLogAtTrxCommit(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbFlushLogAtTrxCommit(v *wrapperspb.Int64Value) {
 	m.InnodbFlushLogAtTrxCommit = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbLockWaitTimeout(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbLockWaitTimeout(v *wrapperspb.Int64Value) {
 	m.InnodbLockWaitTimeout = v
 }
 
@@ -50,27 +50,27 @@ func (m *MysqlConfig5_7) SetTransactionIsolation(v MysqlConfig5_7_TransactionIso
 	m.TransactionIsolation = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbPrintAllDeadlocks(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetInnodbPrintAllDeadlocks(v *wrapperspb.BoolValue) {
 	m.InnodbPrintAllDeadlocks = v
 }
 
-func (m *MysqlConfig5_7) SetNetReadTimeout(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetNetReadTimeout(v *wrapperspb.Int64Value) {
 	m.NetReadTimeout = v
 }
 
-func (m *MysqlConfig5_7) SetNetWriteTimeout(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetNetWriteTimeout(v *wrapperspb.Int64Value) {
 	m.NetWriteTimeout = v
 }
 
-func (m *MysqlConfig5_7) SetGroupConcatMaxLen(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetGroupConcatMaxLen(v *wrapperspb.Int64Value) {
 	m.GroupConcatMaxLen = v
 }
 
-func (m *MysqlConfig5_7) SetTmpTableSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetTmpTableSize(v *wrapperspb.Int64Value) {
 	m.TmpTableSize = v
 }
 
-func (m *MysqlConfig5_7) SetMaxHeapTableSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMaxHeapTableSize(v *wrapperspb.Int64Value) {
 	m.MaxHeapTableSize = v
 }
 
@@ -86,99 +86,99 @@ func (m *MysqlConfig5_7) SetCollationServer(v string) {
 	m.CollationServer = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbAdaptiveHashIndex(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetInnodbAdaptiveHashIndex(v *wrapperspb.BoolValue) {
 	m.InnodbAdaptiveHashIndex = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbNumaInterleave(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetInnodbNumaInterleave(v *wrapperspb.BoolValue) {
 	m.InnodbNumaInterleave = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbLogBufferSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbLogBufferSize(v *wrapperspb.Int64Value) {
 	m.InnodbLogBufferSize = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbLogFileSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbLogFileSize(v *wrapperspb.Int64Value) {
 	m.InnodbLogFileSize = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbIoCapacity(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbIoCapacity(v *wrapperspb.Int64Value) {
 	m.InnodbIoCapacity = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbIoCapacityMax(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbIoCapacityMax(v *wrapperspb.Int64Value) {
 	m.InnodbIoCapacityMax = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbReadIoThreads(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbReadIoThreads(v *wrapperspb.Int64Value) {
 	m.InnodbReadIoThreads = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbWriteIoThreads(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbWriteIoThreads(v *wrapperspb.Int64Value) {
 	m.InnodbWriteIoThreads = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbPurgeThreads(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbPurgeThreads(v *wrapperspb.Int64Value) {
 	m.InnodbPurgeThreads = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbThreadConcurrency(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbThreadConcurrency(v *wrapperspb.Int64Value) {
 	m.InnodbThreadConcurrency = v
 }
 
-func (m *MysqlConfig5_7) SetInnodbTempDataFileMaxSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInnodbTempDataFileMaxSize(v *wrapperspb.Int64Value) {
 	m.InnodbTempDataFileMaxSize = v
 }
 
-func (m *MysqlConfig5_7) SetThreadCacheSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetThreadCacheSize(v *wrapperspb.Int64Value) {
 	m.ThreadCacheSize = v
 }
 
-func (m *MysqlConfig5_7) SetThreadStack(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetThreadStack(v *wrapperspb.Int64Value) {
 	m.ThreadStack = v
 }
 
-func (m *MysqlConfig5_7) SetJoinBufferSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetJoinBufferSize(v *wrapperspb.Int64Value) {
 	m.JoinBufferSize = v
 }
 
-func (m *MysqlConfig5_7) SetSortBufferSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetSortBufferSize(v *wrapperspb.Int64Value) {
 	m.SortBufferSize = v
 }
 
-func (m *MysqlConfig5_7) SetTableDefinitionCache(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetTableDefinitionCache(v *wrapperspb.Int64Value) {
 	m.TableDefinitionCache = v
 }
 
-func (m *MysqlConfig5_7) SetTableOpenCache(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetTableOpenCache(v *wrapperspb.Int64Value) {
 	m.TableOpenCache = v
 }
 
-func (m *MysqlConfig5_7) SetTableOpenCacheInstances(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetTableOpenCacheInstances(v *wrapperspb.Int64Value) {
 	m.TableOpenCacheInstances = v
 }
 
-func (m *MysqlConfig5_7) SetExplicitDefaultsForTimestamp(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetExplicitDefaultsForTimestamp(v *wrapperspb.BoolValue) {
 	m.ExplicitDefaultsForTimestamp = v
 }
 
-func (m *MysqlConfig5_7) SetAutoIncrementIncrement(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetAutoIncrementIncrement(v *wrapperspb.Int64Value) {
 	m.AutoIncrementIncrement = v
 }
 
-func (m *MysqlConfig5_7) SetAutoIncrementOffset(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetAutoIncrementOffset(v *wrapperspb.Int64Value) {
 	m.AutoIncrementOffset = v
 }
 
-func (m *MysqlConfig5_7) SetSyncBinlog(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetSyncBinlog(v *wrapperspb.Int64Value) {
 	m.SyncBinlog = v
 }
 
-func (m *MysqlConfig5_7) SetBinlogCacheSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetBinlogCacheSize(v *wrapperspb.Int64Value) {
 	m.BinlogCacheSize = v
 }
 
-func (m *MysqlConfig5_7) SetBinlogGroupCommitSyncDelay(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetBinlogGroupCommitSyncDelay(v *wrapperspb.Int64Value) {
 	m.BinlogGroupCommitSyncDelay = v
 }
 
@@ -186,11 +186,11 @@ func (m *MysqlConfig5_7) SetBinlogRowImage(v MysqlConfig5_7_BinlogRowImage) {
 	m.BinlogRowImage = v
 }
 
-func (m *MysqlConfig5_7) SetBinlogRowsQueryLogEvents(v *wrappers.BoolValue) {
+func (m *MysqlConfig5_7) SetBinlogRowsQueryLogEvents(v *wrapperspb.BoolValue) {
 	m.BinlogRowsQueryLogEvents = v
 }
 
-func (m *MysqlConfig5_7) SetRplSemiSyncMasterWaitForSlaveCount(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetRplSemiSyncMasterWaitForSlaveCount(v *wrapperspb.Int64Value) {
 	m.RplSemiSyncMasterWaitForSlaveCount = v
 }
 
@@ -198,31 +198,31 @@ func (m *MysqlConfig5_7) SetSlaveParallelType(v MysqlConfig5_7_SlaveParallelType
 	m.SlaveParallelType = v
 }
 
-func (m *MysqlConfig5_7) SetSlaveParallelWorkers(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetSlaveParallelWorkers(v *wrapperspb.Int64Value) {
 	m.SlaveParallelWorkers = v
 }
 
-func (m *MysqlConfig5_7) SetMdbPreserveBinlogBytes(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMdbPreserveBinlogBytes(v *wrapperspb.Int64Value) {
 	m.MdbPreserveBinlogBytes = v
 }
 
-func (m *MysqlConfig5_7) SetInteractiveTimeout(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetInteractiveTimeout(v *wrapperspb.Int64Value) {
 	m.InteractiveTimeout = v
 }
 
-func (m *MysqlConfig5_7) SetWaitTimeout(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetWaitTimeout(v *wrapperspb.Int64Value) {
 	m.WaitTimeout = v
 }
 
-func (m *MysqlConfig5_7) SetMdbOfflineModeEnableLag(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMdbOfflineModeEnableLag(v *wrapperspb.Int64Value) {
 	m.MdbOfflineModeEnableLag = v
 }
 
-func (m *MysqlConfig5_7) SetMdbOfflineModeDisableLag(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetMdbOfflineModeDisableLag(v *wrapperspb.Int64Value) {
 	m.MdbOfflineModeDisableLag = v
 }
 
-func (m *MysqlConfig5_7) SetRangeOptimizerMaxMemSize(v *wrappers.Int64Value) {
+func (m *MysqlConfig5_7) SetRangeOptimizerMaxMemSize(v *wrapperspb.Int64Value) {
 	m.RangeOptimizerMaxMemSize = v
 }
 

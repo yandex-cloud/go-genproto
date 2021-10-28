@@ -3,7 +3,7 @@
 package logging
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type ReadRequest_Selector = isReadRequest_Selector
@@ -52,11 +52,11 @@ func (m *Criteria) SetResourceIds(v []string) {
 	m.ResourceIds = v
 }
 
-func (m *Criteria) SetSince(v *timestamp.Timestamp) {
+func (m *Criteria) SetSince(v *timestamppb.Timestamp) {
 	m.Since = v
 }
 
-func (m *Criteria) SetUntil(v *timestamp.Timestamp) {
+func (m *Criteria) SetUntil(v *timestamppb.Timestamp) {
 	m.Until = v
 }
 

@@ -3,8 +3,8 @@
 package logging
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *LogGroup) SetId(v string) {
@@ -19,7 +19,7 @@ func (m *LogGroup) SetCloudId(v string) {
 	m.CloudId = v
 }
 
-func (m *LogGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *LogGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -39,6 +39,6 @@ func (m *LogGroup) SetStatus(v LogGroup_Status) {
 	m.Status = v
 }
 
-func (m *LogGroup) SetRetentionPeriod(v *duration.Duration) {
+func (m *LogGroup) SetRetentionPeriod(v *durationpb.Duration) {
 	m.RetentionPeriod = v
 }

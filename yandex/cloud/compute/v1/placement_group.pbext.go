@@ -3,7 +3,7 @@
 package compute
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type PlacementGroup_PlacementStrategy = isPlacementGroup_PlacementStrategy
@@ -20,7 +20,7 @@ func (m *PlacementGroup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *PlacementGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *PlacementGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

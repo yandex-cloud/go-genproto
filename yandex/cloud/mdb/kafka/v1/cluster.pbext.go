@@ -3,8 +3,8 @@
 package kafka
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -15,7 +15,7 @@ func (m *Cluster) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Cluster) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Cluster) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -95,7 +95,7 @@ func (m *ConfigSpec) SetZoneId(v []string) {
 	m.ZoneId = v
 }
 
-func (m *ConfigSpec) SetBrokersCount(v *wrappers.Int64Value) {
+func (m *ConfigSpec) SetBrokersCount(v *wrapperspb.Int64Value) {
 	m.BrokersCount = v
 }
 
@@ -159,59 +159,59 @@ func (m *KafkaConfig2_1) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
 
-func (m *KafkaConfig2_1) SetLogFlushIntervalMessages(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogFlushIntervalMessages(v *wrapperspb.Int64Value) {
 	m.LogFlushIntervalMessages = v
 }
 
-func (m *KafkaConfig2_1) SetLogFlushIntervalMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogFlushIntervalMs(v *wrapperspb.Int64Value) {
 	m.LogFlushIntervalMs = v
 }
 
-func (m *KafkaConfig2_1) SetLogFlushSchedulerIntervalMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogFlushSchedulerIntervalMs(v *wrapperspb.Int64Value) {
 	m.LogFlushSchedulerIntervalMs = v
 }
 
-func (m *KafkaConfig2_1) SetLogRetentionBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogRetentionBytes(v *wrapperspb.Int64Value) {
 	m.LogRetentionBytes = v
 }
 
-func (m *KafkaConfig2_1) SetLogRetentionHours(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogRetentionHours(v *wrapperspb.Int64Value) {
 	m.LogRetentionHours = v
 }
 
-func (m *KafkaConfig2_1) SetLogRetentionMinutes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogRetentionMinutes(v *wrapperspb.Int64Value) {
 	m.LogRetentionMinutes = v
 }
 
-func (m *KafkaConfig2_1) SetLogRetentionMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogRetentionMs(v *wrapperspb.Int64Value) {
 	m.LogRetentionMs = v
 }
 
-func (m *KafkaConfig2_1) SetLogSegmentBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetLogSegmentBytes(v *wrapperspb.Int64Value) {
 	m.LogSegmentBytes = v
 }
 
-func (m *KafkaConfig2_1) SetLogPreallocate(v *wrappers.BoolValue) {
+func (m *KafkaConfig2_1) SetLogPreallocate(v *wrapperspb.BoolValue) {
 	m.LogPreallocate = v
 }
 
-func (m *KafkaConfig2_1) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetSocketSendBufferBytes(v *wrapperspb.Int64Value) {
 	m.SocketSendBufferBytes = v
 }
 
-func (m *KafkaConfig2_1) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetSocketReceiveBufferBytes(v *wrapperspb.Int64Value) {
 	m.SocketReceiveBufferBytes = v
 }
 
-func (m *KafkaConfig2_1) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
+func (m *KafkaConfig2_1) SetAutoCreateTopicsEnable(v *wrapperspb.BoolValue) {
 	m.AutoCreateTopicsEnable = v
 }
 
-func (m *KafkaConfig2_1) SetNumPartitions(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetNumPartitions(v *wrapperspb.Int64Value) {
 	m.NumPartitions = v
 }
 
-func (m *KafkaConfig2_1) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_1) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
 	m.DefaultReplicationFactor = v
 }
 
@@ -219,59 +219,59 @@ func (m *KafkaConfig2_6) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
 
-func (m *KafkaConfig2_6) SetLogFlushIntervalMessages(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogFlushIntervalMessages(v *wrapperspb.Int64Value) {
 	m.LogFlushIntervalMessages = v
 }
 
-func (m *KafkaConfig2_6) SetLogFlushIntervalMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogFlushIntervalMs(v *wrapperspb.Int64Value) {
 	m.LogFlushIntervalMs = v
 }
 
-func (m *KafkaConfig2_6) SetLogFlushSchedulerIntervalMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogFlushSchedulerIntervalMs(v *wrapperspb.Int64Value) {
 	m.LogFlushSchedulerIntervalMs = v
 }
 
-func (m *KafkaConfig2_6) SetLogRetentionBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogRetentionBytes(v *wrapperspb.Int64Value) {
 	m.LogRetentionBytes = v
 }
 
-func (m *KafkaConfig2_6) SetLogRetentionHours(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogRetentionHours(v *wrapperspb.Int64Value) {
 	m.LogRetentionHours = v
 }
 
-func (m *KafkaConfig2_6) SetLogRetentionMinutes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogRetentionMinutes(v *wrapperspb.Int64Value) {
 	m.LogRetentionMinutes = v
 }
 
-func (m *KafkaConfig2_6) SetLogRetentionMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogRetentionMs(v *wrapperspb.Int64Value) {
 	m.LogRetentionMs = v
 }
 
-func (m *KafkaConfig2_6) SetLogSegmentBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetLogSegmentBytes(v *wrapperspb.Int64Value) {
 	m.LogSegmentBytes = v
 }
 
-func (m *KafkaConfig2_6) SetLogPreallocate(v *wrappers.BoolValue) {
+func (m *KafkaConfig2_6) SetLogPreallocate(v *wrapperspb.BoolValue) {
 	m.LogPreallocate = v
 }
 
-func (m *KafkaConfig2_6) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetSocketSendBufferBytes(v *wrapperspb.Int64Value) {
 	m.SocketSendBufferBytes = v
 }
 
-func (m *KafkaConfig2_6) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetSocketReceiveBufferBytes(v *wrapperspb.Int64Value) {
 	m.SocketReceiveBufferBytes = v
 }
 
-func (m *KafkaConfig2_6) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
+func (m *KafkaConfig2_6) SetAutoCreateTopicsEnable(v *wrapperspb.BoolValue) {
 	m.AutoCreateTopicsEnable = v
 }
 
-func (m *KafkaConfig2_6) SetNumPartitions(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetNumPartitions(v *wrapperspb.Int64Value) {
 	m.NumPartitions = v
 }
 
-func (m *KafkaConfig2_6) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_6) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
 	m.DefaultReplicationFactor = v
 }
 
@@ -279,59 +279,59 @@ func (m *KafkaConfig2_8) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
 
-func (m *KafkaConfig2_8) SetLogFlushIntervalMessages(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogFlushIntervalMessages(v *wrapperspb.Int64Value) {
 	m.LogFlushIntervalMessages = v
 }
 
-func (m *KafkaConfig2_8) SetLogFlushIntervalMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogFlushIntervalMs(v *wrapperspb.Int64Value) {
 	m.LogFlushIntervalMs = v
 }
 
-func (m *KafkaConfig2_8) SetLogFlushSchedulerIntervalMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogFlushSchedulerIntervalMs(v *wrapperspb.Int64Value) {
 	m.LogFlushSchedulerIntervalMs = v
 }
 
-func (m *KafkaConfig2_8) SetLogRetentionBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogRetentionBytes(v *wrapperspb.Int64Value) {
 	m.LogRetentionBytes = v
 }
 
-func (m *KafkaConfig2_8) SetLogRetentionHours(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogRetentionHours(v *wrapperspb.Int64Value) {
 	m.LogRetentionHours = v
 }
 
-func (m *KafkaConfig2_8) SetLogRetentionMinutes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogRetentionMinutes(v *wrapperspb.Int64Value) {
 	m.LogRetentionMinutes = v
 }
 
-func (m *KafkaConfig2_8) SetLogRetentionMs(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogRetentionMs(v *wrapperspb.Int64Value) {
 	m.LogRetentionMs = v
 }
 
-func (m *KafkaConfig2_8) SetLogSegmentBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetLogSegmentBytes(v *wrapperspb.Int64Value) {
 	m.LogSegmentBytes = v
 }
 
-func (m *KafkaConfig2_8) SetLogPreallocate(v *wrappers.BoolValue) {
+func (m *KafkaConfig2_8) SetLogPreallocate(v *wrapperspb.BoolValue) {
 	m.LogPreallocate = v
 }
 
-func (m *KafkaConfig2_8) SetSocketSendBufferBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetSocketSendBufferBytes(v *wrapperspb.Int64Value) {
 	m.SocketSendBufferBytes = v
 }
 
-func (m *KafkaConfig2_8) SetSocketReceiveBufferBytes(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetSocketReceiveBufferBytes(v *wrapperspb.Int64Value) {
 	m.SocketReceiveBufferBytes = v
 }
 
-func (m *KafkaConfig2_8) SetAutoCreateTopicsEnable(v *wrappers.BoolValue) {
+func (m *KafkaConfig2_8) SetAutoCreateTopicsEnable(v *wrapperspb.BoolValue) {
 	m.AutoCreateTopicsEnable = v
 }
 
-func (m *KafkaConfig2_8) SetNumPartitions(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetNumPartitions(v *wrapperspb.Int64Value) {
 	m.NumPartitions = v
 }
 
-func (m *KafkaConfig2_8) SetDefaultReplicationFactor(v *wrappers.Int64Value) {
+func (m *KafkaConfig2_8) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
 	m.DefaultReplicationFactor = v
 }
 

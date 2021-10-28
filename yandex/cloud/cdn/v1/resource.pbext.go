@@ -3,7 +3,7 @@
 package cdn
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *SecondaryHostnames) SetValues(v []string) {
@@ -22,11 +22,11 @@ func (m *Resource) SetCname(v string) {
 	m.Cname = v
 }
 
-func (m *Resource) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Resource) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Resource) SetUpdatedAt(v *timestamp.Timestamp) {
+func (m *Resource) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 

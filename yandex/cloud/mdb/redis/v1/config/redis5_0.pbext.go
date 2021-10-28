@@ -3,14 +3,14 @@
 package redis
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *RedisConfig5_0) SetMaxmemoryPolicy(v RedisConfig5_0_MaxmemoryPolicy) {
 	m.MaxmemoryPolicy = v
 }
 
-func (m *RedisConfig5_0) SetTimeout(v *wrappers.Int64Value) {
+func (m *RedisConfig5_0) SetTimeout(v *wrapperspb.Int64Value) {
 	m.Timeout = v
 }
 
@@ -18,15 +18,15 @@ func (m *RedisConfig5_0) SetPassword(v string) {
 	m.Password = v
 }
 
-func (m *RedisConfig5_0) SetDatabases(v *wrappers.Int64Value) {
+func (m *RedisConfig5_0) SetDatabases(v *wrapperspb.Int64Value) {
 	m.Databases = v
 }
 
-func (m *RedisConfig5_0) SetSlowlogLogSlowerThan(v *wrappers.Int64Value) {
+func (m *RedisConfig5_0) SetSlowlogLogSlowerThan(v *wrapperspb.Int64Value) {
 	m.SlowlogLogSlowerThan = v
 }
 
-func (m *RedisConfig5_0) SetSlowlogMaxLen(v *wrappers.Int64Value) {
+func (m *RedisConfig5_0) SetSlowlogMaxLen(v *wrapperspb.Int64Value) {
 	m.SlowlogMaxLen = v
 }
 

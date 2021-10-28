@@ -3,10 +3,10 @@
 package lockbox
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type PayloadEntryChange_Value = isPayloadEntryChange_Value
@@ -99,7 +99,7 @@ func (m *UpdateSecretRequest) SetSecretId(v string) {
 	m.SecretId = v
 }
 
-func (m *UpdateSecretRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateSecretRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -199,7 +199,7 @@ func (m *ScheduleVersionDestructionRequest) SetVersionId(v string) {
 	m.VersionId = v
 }
 
-func (m *ScheduleVersionDestructionRequest) SetPendingPeriod(v *duration.Duration) {
+func (m *ScheduleVersionDestructionRequest) SetPendingPeriod(v *durationpb.Duration) {
 	m.PendingPeriod = v
 }
 
@@ -211,7 +211,7 @@ func (m *ScheduleVersionDestructionMetadata) SetVersionId(v string) {
 	m.VersionId = v
 }
 
-func (m *ScheduleVersionDestructionMetadata) SetDestroyAt(v *timestamp.Timestamp) {
+func (m *ScheduleVersionDestructionMetadata) SetDestroyAt(v *timestamppb.Timestamp) {
 	m.DestroyAt = v
 }
 

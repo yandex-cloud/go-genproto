@@ -3,7 +3,7 @@
 package metering
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *UsageRecord) SetUuid(v string) {
@@ -18,7 +18,7 @@ func (m *UsageRecord) SetQuantity(v int64) {
 	m.Quantity = v
 }
 
-func (m *UsageRecord) SetTimestamp(v *timestamp.Timestamp) {
+func (m *UsageRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 

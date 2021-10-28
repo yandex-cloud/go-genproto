@@ -3,7 +3,7 @@
 package mysql
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *User) SetName(v string) {
@@ -38,19 +38,19 @@ func (m *Permission) SetRoles(v []Permission_Privilege) {
 	m.Roles = v
 }
 
-func (m *ConnectionLimits) SetMaxQuestionsPerHour(v *wrappers.Int64Value) {
+func (m *ConnectionLimits) SetMaxQuestionsPerHour(v *wrapperspb.Int64Value) {
 	m.MaxQuestionsPerHour = v
 }
 
-func (m *ConnectionLimits) SetMaxUpdatesPerHour(v *wrappers.Int64Value) {
+func (m *ConnectionLimits) SetMaxUpdatesPerHour(v *wrapperspb.Int64Value) {
 	m.MaxUpdatesPerHour = v
 }
 
-func (m *ConnectionLimits) SetMaxConnectionsPerHour(v *wrappers.Int64Value) {
+func (m *ConnectionLimits) SetMaxConnectionsPerHour(v *wrapperspb.Int64Value) {
 	m.MaxConnectionsPerHour = v
 }
 
-func (m *ConnectionLimits) SetMaxUserConnections(v *wrappers.Int64Value) {
+func (m *ConnectionLimits) SetMaxUserConnections(v *wrapperspb.Int64Value) {
 	m.MaxUserConnections = v
 }
 

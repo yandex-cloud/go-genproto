@@ -3,9 +3,9 @@
 package kafka
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -96,7 +96,7 @@ func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *UpdateClusterRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateClusterRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -144,11 +144,11 @@ func (m *ListClusterLogsRequest) SetColumnFilter(v []string) {
 	m.ColumnFilter = v
 }
 
-func (m *ListClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *ListClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 
@@ -168,7 +168,7 @@ func (m *ListClusterLogsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
-func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
@@ -200,11 +200,11 @@ func (m *StreamClusterLogsRequest) SetColumnFilter(v []string) {
 	m.ColumnFilter = v
 }
 
-func (m *StreamClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *StreamClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *StreamClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *StreamClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 

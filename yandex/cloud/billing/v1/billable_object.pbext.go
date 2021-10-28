@@ -3,7 +3,7 @@
 package billing
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *BillableObject) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *BillableObject) SetType(v string) {
 	m.Type = v
 }
 
-func (m *BillableObjectBinding) SetEffectiveTime(v *timestamp.Timestamp) {
+func (m *BillableObjectBinding) SetEffectiveTime(v *timestamppb.Timestamp) {
 	m.EffectiveTime = v
 }
 

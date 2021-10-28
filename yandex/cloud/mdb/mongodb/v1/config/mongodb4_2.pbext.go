@@ -3,7 +3,7 @@
 package mongodb
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *MongodConfig4_2) SetStorage(v *MongodConfig4_2_Storage) {
@@ -34,7 +34,7 @@ func (m *MongodConfig4_2_Storage_WiredTiger) SetCollectionConfig(v *MongodConfig
 	m.CollectionConfig = v
 }
 
-func (m *MongodConfig4_2_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrappers.DoubleValue) {
+func (m *MongodConfig4_2_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrapperspb.DoubleValue) {
 	m.CacheSizeGb = v
 }
 
@@ -42,7 +42,7 @@ func (m *MongodConfig4_2_Storage_WiredTiger_CollectionConfig) SetBlockCompressor
 	m.BlockCompressor = v
 }
 
-func (m *MongodConfig4_2_Storage_Journal) SetCommitInterval(v *wrappers.Int64Value) {
+func (m *MongodConfig4_2_Storage_Journal) SetCommitInterval(v *wrapperspb.Int64Value) {
 	m.CommitInterval = v
 }
 
@@ -50,11 +50,11 @@ func (m *MongodConfig4_2_OperationProfiling) SetMode(v MongodConfig4_2_Operation
 	m.Mode = v
 }
 
-func (m *MongodConfig4_2_OperationProfiling) SetSlowOpThreshold(v *wrappers.Int64Value) {
+func (m *MongodConfig4_2_OperationProfiling) SetSlowOpThreshold(v *wrapperspb.Int64Value) {
 	m.SlowOpThreshold = v
 }
 
-func (m *MongodConfig4_2_Network) SetMaxIncomingConnections(v *wrappers.Int64Value) {
+func (m *MongodConfig4_2_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
 }
 
@@ -78,7 +78,7 @@ func (m *MongoCfgConfig4_2_Storage_WiredTiger) SetEngineConfig(v *MongoCfgConfig
 	m.EngineConfig = v
 }
 
-func (m *MongoCfgConfig4_2_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrappers.DoubleValue) {
+func (m *MongoCfgConfig4_2_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrapperspb.DoubleValue) {
 	m.CacheSizeGb = v
 }
 
@@ -86,11 +86,11 @@ func (m *MongoCfgConfig4_2_OperationProfiling) SetMode(v MongoCfgConfig4_2_Opera
 	m.Mode = v
 }
 
-func (m *MongoCfgConfig4_2_OperationProfiling) SetSlowOpThreshold(v *wrappers.Int64Value) {
+func (m *MongoCfgConfig4_2_OperationProfiling) SetSlowOpThreshold(v *wrapperspb.Int64Value) {
 	m.SlowOpThreshold = v
 }
 
-func (m *MongoCfgConfig4_2_Network) SetMaxIncomingConnections(v *wrappers.Int64Value) {
+func (m *MongoCfgConfig4_2_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
 }
 
@@ -98,7 +98,7 @@ func (m *MongosConfig4_2) SetNet(v *MongosConfig4_2_Network) {
 	m.Net = v
 }
 
-func (m *MongosConfig4_2_Network) SetMaxIncomingConnections(v *wrappers.Int64Value) {
+func (m *MongosConfig4_2_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
 }
 

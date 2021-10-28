@@ -3,14 +3,14 @@
 package organizationmanager
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Organization) SetId(v string) {
 	m.Id = v
 }
 
-func (m *Organization) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Organization) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

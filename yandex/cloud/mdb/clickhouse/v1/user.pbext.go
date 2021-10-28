@@ -3,7 +3,7 @@
 package clickhouse
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *User) SetName(v string) {
@@ -50,47 +50,47 @@ func (m *UserSpec) SetQuotas(v []*UserQuota) {
 	m.Quotas = v
 }
 
-func (m *UserSettings) SetReadonly(v *wrappers.Int64Value) {
+func (m *UserSettings) SetReadonly(v *wrapperspb.Int64Value) {
 	m.Readonly = v
 }
 
-func (m *UserSettings) SetAllowDdl(v *wrappers.BoolValue) {
+func (m *UserSettings) SetAllowDdl(v *wrapperspb.BoolValue) {
 	m.AllowDdl = v
 }
 
-func (m *UserSettings) SetInsertQuorum(v *wrappers.Int64Value) {
+func (m *UserSettings) SetInsertQuorum(v *wrapperspb.Int64Value) {
 	m.InsertQuorum = v
 }
 
-func (m *UserSettings) SetConnectTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetConnectTimeout(v *wrapperspb.Int64Value) {
 	m.ConnectTimeout = v
 }
 
-func (m *UserSettings) SetReceiveTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetReceiveTimeout(v *wrapperspb.Int64Value) {
 	m.ReceiveTimeout = v
 }
 
-func (m *UserSettings) SetSendTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetSendTimeout(v *wrapperspb.Int64Value) {
 	m.SendTimeout = v
 }
 
-func (m *UserSettings) SetInsertQuorumTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetInsertQuorumTimeout(v *wrapperspb.Int64Value) {
 	m.InsertQuorumTimeout = v
 }
 
-func (m *UserSettings) SetSelectSequentialConsistency(v *wrappers.BoolValue) {
+func (m *UserSettings) SetSelectSequentialConsistency(v *wrapperspb.BoolValue) {
 	m.SelectSequentialConsistency = v
 }
 
-func (m *UserSettings) SetMaxReplicaDelayForDistributedQueries(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxReplicaDelayForDistributedQueries(v *wrapperspb.Int64Value) {
 	m.MaxReplicaDelayForDistributedQueries = v
 }
 
-func (m *UserSettings) SetFallbackToStaleReplicasForDistributedQueries(v *wrappers.BoolValue) {
+func (m *UserSettings) SetFallbackToStaleReplicasForDistributedQueries(v *wrapperspb.BoolValue) {
 	m.FallbackToStaleReplicasForDistributedQueries = v
 }
 
-func (m *UserSettings) SetReplicationAlterPartitionsSync(v *wrappers.Int64Value) {
+func (m *UserSettings) SetReplicationAlterPartitionsSync(v *wrapperspb.Int64Value) {
 	m.ReplicationAlterPartitionsSync = v
 }
 
@@ -98,127 +98,127 @@ func (m *UserSettings) SetDistributedProductMode(v UserSettings_DistributedProdu
 	m.DistributedProductMode = v
 }
 
-func (m *UserSettings) SetDistributedAggregationMemoryEfficient(v *wrappers.BoolValue) {
+func (m *UserSettings) SetDistributedAggregationMemoryEfficient(v *wrapperspb.BoolValue) {
 	m.DistributedAggregationMemoryEfficient = v
 }
 
-func (m *UserSettings) SetDistributedDdlTaskTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetDistributedDdlTaskTimeout(v *wrapperspb.Int64Value) {
 	m.DistributedDdlTaskTimeout = v
 }
 
-func (m *UserSettings) SetSkipUnavailableShards(v *wrappers.BoolValue) {
+func (m *UserSettings) SetSkipUnavailableShards(v *wrapperspb.BoolValue) {
 	m.SkipUnavailableShards = v
 }
 
-func (m *UserSettings) SetCompile(v *wrappers.BoolValue) {
+func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }
 
-func (m *UserSettings) SetMinCountToCompile(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinCountToCompile(v *wrapperspb.Int64Value) {
 	m.MinCountToCompile = v
 }
 
-func (m *UserSettings) SetCompileExpressions(v *wrappers.BoolValue) {
+func (m *UserSettings) SetCompileExpressions(v *wrapperspb.BoolValue) {
 	m.CompileExpressions = v
 }
 
-func (m *UserSettings) SetMinCountToCompileExpression(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinCountToCompileExpression(v *wrapperspb.Int64Value) {
 	m.MinCountToCompileExpression = v
 }
 
-func (m *UserSettings) SetMaxBlockSize(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBlockSize(v *wrapperspb.Int64Value) {
 	m.MaxBlockSize = v
 }
 
-func (m *UserSettings) SetMinInsertBlockSizeRows(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinInsertBlockSizeRows(v *wrapperspb.Int64Value) {
 	m.MinInsertBlockSizeRows = v
 }
 
-func (m *UserSettings) SetMinInsertBlockSizeBytes(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinInsertBlockSizeBytes(v *wrapperspb.Int64Value) {
 	m.MinInsertBlockSizeBytes = v
 }
 
-func (m *UserSettings) SetMaxInsertBlockSize(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxInsertBlockSize(v *wrapperspb.Int64Value) {
 	m.MaxInsertBlockSize = v
 }
 
-func (m *UserSettings) SetMinBytesToUseDirectIo(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinBytesToUseDirectIo(v *wrapperspb.Int64Value) {
 	m.MinBytesToUseDirectIo = v
 }
 
-func (m *UserSettings) SetUseUncompressedCache(v *wrappers.BoolValue) {
+func (m *UserSettings) SetUseUncompressedCache(v *wrapperspb.BoolValue) {
 	m.UseUncompressedCache = v
 }
 
-func (m *UserSettings) SetMergeTreeMaxRowsToUseCache(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMergeTreeMaxRowsToUseCache(v *wrapperspb.Int64Value) {
 	m.MergeTreeMaxRowsToUseCache = v
 }
 
-func (m *UserSettings) SetMergeTreeMaxBytesToUseCache(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMergeTreeMaxBytesToUseCache(v *wrapperspb.Int64Value) {
 	m.MergeTreeMaxBytesToUseCache = v
 }
 
-func (m *UserSettings) SetMergeTreeMinRowsForConcurrentRead(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMergeTreeMinRowsForConcurrentRead(v *wrapperspb.Int64Value) {
 	m.MergeTreeMinRowsForConcurrentRead = v
 }
 
-func (m *UserSettings) SetMergeTreeMinBytesForConcurrentRead(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMergeTreeMinBytesForConcurrentRead(v *wrapperspb.Int64Value) {
 	m.MergeTreeMinBytesForConcurrentRead = v
 }
 
-func (m *UserSettings) SetMaxBytesBeforeExternalGroupBy(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesBeforeExternalGroupBy(v *wrapperspb.Int64Value) {
 	m.MaxBytesBeforeExternalGroupBy = v
 }
 
-func (m *UserSettings) SetMaxBytesBeforeExternalSort(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesBeforeExternalSort(v *wrapperspb.Int64Value) {
 	m.MaxBytesBeforeExternalSort = v
 }
 
-func (m *UserSettings) SetGroupByTwoLevelThreshold(v *wrappers.Int64Value) {
+func (m *UserSettings) SetGroupByTwoLevelThreshold(v *wrapperspb.Int64Value) {
 	m.GroupByTwoLevelThreshold = v
 }
 
-func (m *UserSettings) SetGroupByTwoLevelThresholdBytes(v *wrappers.Int64Value) {
+func (m *UserSettings) SetGroupByTwoLevelThresholdBytes(v *wrapperspb.Int64Value) {
 	m.GroupByTwoLevelThresholdBytes = v
 }
 
-func (m *UserSettings) SetPriority(v *wrappers.Int64Value) {
+func (m *UserSettings) SetPriority(v *wrapperspb.Int64Value) {
 	m.Priority = v
 }
 
-func (m *UserSettings) SetMaxThreads(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxThreads(v *wrapperspb.Int64Value) {
 	m.MaxThreads = v
 }
 
-func (m *UserSettings) SetMaxMemoryUsage(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxMemoryUsage(v *wrapperspb.Int64Value) {
 	m.MaxMemoryUsage = v
 }
 
-func (m *UserSettings) SetMaxMemoryUsageForUser(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxMemoryUsageForUser(v *wrapperspb.Int64Value) {
 	m.MaxMemoryUsageForUser = v
 }
 
-func (m *UserSettings) SetMaxNetworkBandwidth(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxNetworkBandwidth(v *wrapperspb.Int64Value) {
 	m.MaxNetworkBandwidth = v
 }
 
-func (m *UserSettings) SetMaxNetworkBandwidthForUser(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxNetworkBandwidthForUser(v *wrapperspb.Int64Value) {
 	m.MaxNetworkBandwidthForUser = v
 }
 
-func (m *UserSettings) SetForceIndexByDate(v *wrappers.BoolValue) {
+func (m *UserSettings) SetForceIndexByDate(v *wrapperspb.BoolValue) {
 	m.ForceIndexByDate = v
 }
 
-func (m *UserSettings) SetForcePrimaryKey(v *wrappers.BoolValue) {
+func (m *UserSettings) SetForcePrimaryKey(v *wrapperspb.BoolValue) {
 	m.ForcePrimaryKey = v
 }
 
-func (m *UserSettings) SetMaxRowsToRead(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsToRead(v *wrapperspb.Int64Value) {
 	m.MaxRowsToRead = v
 }
 
-func (m *UserSettings) SetMaxBytesToRead(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesToRead(v *wrapperspb.Int64Value) {
 	m.MaxBytesToRead = v
 }
 
@@ -226,7 +226,7 @@ func (m *UserSettings) SetReadOverflowMode(v UserSettings_OverflowMode) {
 	m.ReadOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxRowsToGroupBy(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsToGroupBy(v *wrapperspb.Int64Value) {
 	m.MaxRowsToGroupBy = v
 }
 
@@ -234,11 +234,11 @@ func (m *UserSettings) SetGroupByOverflowMode(v UserSettings_GroupByOverflowMode
 	m.GroupByOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxRowsToSort(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsToSort(v *wrapperspb.Int64Value) {
 	m.MaxRowsToSort = v
 }
 
-func (m *UserSettings) SetMaxBytesToSort(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesToSort(v *wrapperspb.Int64Value) {
 	m.MaxBytesToSort = v
 }
 
@@ -246,11 +246,11 @@ func (m *UserSettings) SetSortOverflowMode(v UserSettings_OverflowMode) {
 	m.SortOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxResultRows(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxResultRows(v *wrapperspb.Int64Value) {
 	m.MaxResultRows = v
 }
 
-func (m *UserSettings) SetMaxResultBytes(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxResultBytes(v *wrapperspb.Int64Value) {
 	m.MaxResultBytes = v
 }
 
@@ -258,11 +258,11 @@ func (m *UserSettings) SetResultOverflowMode(v UserSettings_OverflowMode) {
 	m.ResultOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxRowsInDistinct(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsInDistinct(v *wrapperspb.Int64Value) {
 	m.MaxRowsInDistinct = v
 }
 
-func (m *UserSettings) SetMaxBytesInDistinct(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesInDistinct(v *wrapperspb.Int64Value) {
 	m.MaxBytesInDistinct = v
 }
 
@@ -270,11 +270,11 @@ func (m *UserSettings) SetDistinctOverflowMode(v UserSettings_OverflowMode) {
 	m.DistinctOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxRowsToTransfer(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsToTransfer(v *wrapperspb.Int64Value) {
 	m.MaxRowsToTransfer = v
 }
 
-func (m *UserSettings) SetMaxBytesToTransfer(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesToTransfer(v *wrapperspb.Int64Value) {
 	m.MaxBytesToTransfer = v
 }
 
@@ -282,7 +282,7 @@ func (m *UserSettings) SetTransferOverflowMode(v UserSettings_OverflowMode) {
 	m.TransferOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxExecutionTime(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxExecutionTime(v *wrapperspb.Int64Value) {
 	m.MaxExecutionTime = v
 }
 
@@ -290,11 +290,11 @@ func (m *UserSettings) SetTimeoutOverflowMode(v UserSettings_OverflowMode) {
 	m.TimeoutOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxRowsInSet(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsInSet(v *wrapperspb.Int64Value) {
 	m.MaxRowsInSet = v
 }
 
-func (m *UserSettings) SetMaxBytesInSet(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesInSet(v *wrapperspb.Int64Value) {
 	m.MaxBytesInSet = v
 }
 
@@ -302,11 +302,11 @@ func (m *UserSettings) SetSetOverflowMode(v UserSettings_OverflowMode) {
 	m.SetOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxRowsInJoin(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxRowsInJoin(v *wrapperspb.Int64Value) {
 	m.MaxRowsInJoin = v
 }
 
-func (m *UserSettings) SetMaxBytesInJoin(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxBytesInJoin(v *wrapperspb.Int64Value) {
 	m.MaxBytesInJoin = v
 }
 
@@ -314,39 +314,39 @@ func (m *UserSettings) SetJoinOverflowMode(v UserSettings_OverflowMode) {
 	m.JoinOverflowMode = v
 }
 
-func (m *UserSettings) SetMaxColumnsToRead(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxColumnsToRead(v *wrapperspb.Int64Value) {
 	m.MaxColumnsToRead = v
 }
 
-func (m *UserSettings) SetMaxTemporaryColumns(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxTemporaryColumns(v *wrapperspb.Int64Value) {
 	m.MaxTemporaryColumns = v
 }
 
-func (m *UserSettings) SetMaxTemporaryNonConstColumns(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxTemporaryNonConstColumns(v *wrapperspb.Int64Value) {
 	m.MaxTemporaryNonConstColumns = v
 }
 
-func (m *UserSettings) SetMaxQuerySize(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxQuerySize(v *wrapperspb.Int64Value) {
 	m.MaxQuerySize = v
 }
 
-func (m *UserSettings) SetMaxAstDepth(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxAstDepth(v *wrapperspb.Int64Value) {
 	m.MaxAstDepth = v
 }
 
-func (m *UserSettings) SetMaxAstElements(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxAstElements(v *wrapperspb.Int64Value) {
 	m.MaxAstElements = v
 }
 
-func (m *UserSettings) SetMaxExpandedAstElements(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMaxExpandedAstElements(v *wrapperspb.Int64Value) {
 	m.MaxExpandedAstElements = v
 }
 
-func (m *UserSettings) SetMinExecutionSpeed(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinExecutionSpeed(v *wrapperspb.Int64Value) {
 	m.MinExecutionSpeed = v
 }
 
-func (m *UserSettings) SetMinExecutionSpeedBytes(v *wrappers.Int64Value) {
+func (m *UserSettings) SetMinExecutionSpeedBytes(v *wrapperspb.Int64Value) {
 	m.MinExecutionSpeedBytes = v
 }
 
@@ -354,67 +354,67 @@ func (m *UserSettings) SetCountDistinctImplementation(v UserSettings_CountDistin
 	m.CountDistinctImplementation = v
 }
 
-func (m *UserSettings) SetInputFormatValuesInterpretExpressions(v *wrappers.BoolValue) {
+func (m *UserSettings) SetInputFormatValuesInterpretExpressions(v *wrapperspb.BoolValue) {
 	m.InputFormatValuesInterpretExpressions = v
 }
 
-func (m *UserSettings) SetInputFormatDefaultsForOmittedFields(v *wrappers.BoolValue) {
+func (m *UserSettings) SetInputFormatDefaultsForOmittedFields(v *wrapperspb.BoolValue) {
 	m.InputFormatDefaultsForOmittedFields = v
 }
 
-func (m *UserSettings) SetOutputFormatJsonQuote_64BitIntegers(v *wrappers.BoolValue) {
+func (m *UserSettings) SetOutputFormatJsonQuote_64BitIntegers(v *wrapperspb.BoolValue) {
 	m.OutputFormatJsonQuote_64BitIntegers = v
 }
 
-func (m *UserSettings) SetOutputFormatJsonQuoteDenormals(v *wrappers.BoolValue) {
+func (m *UserSettings) SetOutputFormatJsonQuoteDenormals(v *wrapperspb.BoolValue) {
 	m.OutputFormatJsonQuoteDenormals = v
 }
 
-func (m *UserSettings) SetLowCardinalityAllowInNativeFormat(v *wrappers.BoolValue) {
+func (m *UserSettings) SetLowCardinalityAllowInNativeFormat(v *wrapperspb.BoolValue) {
 	m.LowCardinalityAllowInNativeFormat = v
 }
 
-func (m *UserSettings) SetEmptyResultForAggregationByEmptySet(v *wrappers.BoolValue) {
+func (m *UserSettings) SetEmptyResultForAggregationByEmptySet(v *wrapperspb.BoolValue) {
 	m.EmptyResultForAggregationByEmptySet = v
 }
 
-func (m *UserSettings) SetJoinedSubqueryRequiresAlias(v *wrappers.BoolValue) {
+func (m *UserSettings) SetJoinedSubqueryRequiresAlias(v *wrapperspb.BoolValue) {
 	m.JoinedSubqueryRequiresAlias = v
 }
 
-func (m *UserSettings) SetJoinUseNulls(v *wrappers.BoolValue) {
+func (m *UserSettings) SetJoinUseNulls(v *wrapperspb.BoolValue) {
 	m.JoinUseNulls = v
 }
 
-func (m *UserSettings) SetTransformNullIn(v *wrappers.BoolValue) {
+func (m *UserSettings) SetTransformNullIn(v *wrapperspb.BoolValue) {
 	m.TransformNullIn = v
 }
 
-func (m *UserSettings) SetHttpConnectionTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetHttpConnectionTimeout(v *wrapperspb.Int64Value) {
 	m.HttpConnectionTimeout = v
 }
 
-func (m *UserSettings) SetHttpReceiveTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetHttpReceiveTimeout(v *wrapperspb.Int64Value) {
 	m.HttpReceiveTimeout = v
 }
 
-func (m *UserSettings) SetHttpSendTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetHttpSendTimeout(v *wrapperspb.Int64Value) {
 	m.HttpSendTimeout = v
 }
 
-func (m *UserSettings) SetEnableHttpCompression(v *wrappers.BoolValue) {
+func (m *UserSettings) SetEnableHttpCompression(v *wrapperspb.BoolValue) {
 	m.EnableHttpCompression = v
 }
 
-func (m *UserSettings) SetSendProgressInHttpHeaders(v *wrappers.BoolValue) {
+func (m *UserSettings) SetSendProgressInHttpHeaders(v *wrapperspb.BoolValue) {
 	m.SendProgressInHttpHeaders = v
 }
 
-func (m *UserSettings) SetHttpHeadersProgressInterval(v *wrappers.Int64Value) {
+func (m *UserSettings) SetHttpHeadersProgressInterval(v *wrapperspb.Int64Value) {
 	m.HttpHeadersProgressInterval = v
 }
 
-func (m *UserSettings) SetAddHttpCorsHeader(v *wrappers.BoolValue) {
+func (m *UserSettings) SetAddHttpCorsHeader(v *wrapperspb.BoolValue) {
 	m.AddHttpCorsHeader = v
 }
 
@@ -422,26 +422,26 @@ func (m *UserSettings) SetQuotaMode(v UserSettings_QuotaMode) {
 	m.QuotaMode = v
 }
 
-func (m *UserQuota) SetIntervalDuration(v *wrappers.Int64Value) {
+func (m *UserQuota) SetIntervalDuration(v *wrapperspb.Int64Value) {
 	m.IntervalDuration = v
 }
 
-func (m *UserQuota) SetQueries(v *wrappers.Int64Value) {
+func (m *UserQuota) SetQueries(v *wrapperspb.Int64Value) {
 	m.Queries = v
 }
 
-func (m *UserQuota) SetErrors(v *wrappers.Int64Value) {
+func (m *UserQuota) SetErrors(v *wrapperspb.Int64Value) {
 	m.Errors = v
 }
 
-func (m *UserQuota) SetResultRows(v *wrappers.Int64Value) {
+func (m *UserQuota) SetResultRows(v *wrapperspb.Int64Value) {
 	m.ResultRows = v
 }
 
-func (m *UserQuota) SetReadRows(v *wrappers.Int64Value) {
+func (m *UserQuota) SetReadRows(v *wrapperspb.Int64Value) {
 	m.ReadRows = v
 }
 
-func (m *UserQuota) SetExecutionTime(v *wrappers.Int64Value) {
+func (m *UserQuota) SetExecutionTime(v *wrapperspb.Int64Value) {
 	m.ExecutionTime = v
 }

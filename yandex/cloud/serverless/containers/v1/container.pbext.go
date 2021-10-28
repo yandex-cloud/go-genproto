@@ -3,8 +3,8 @@
 package containers
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Container) SetId(v string) {
@@ -15,7 +15,7 @@ func (m *Container) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Container) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Container) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -51,7 +51,7 @@ func (m *Revision) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Revision) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Revision) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -63,7 +63,7 @@ func (m *Revision) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *Revision) SetExecutionTimeout(v *duration.Duration) {
+func (m *Revision) SetExecutionTimeout(v *durationpb.Duration) {
 	m.ExecutionTimeout = v
 }
 

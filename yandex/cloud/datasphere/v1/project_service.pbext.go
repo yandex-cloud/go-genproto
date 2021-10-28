@@ -3,10 +3,10 @@
 package datasphere
 
 import (
-	_struct "github.com/golang/protobuf/ptypes/struct"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *CreateProjectRequest) SetFolderId(v string) {
@@ -37,7 +37,7 @@ func (m *UpdateProjectRequest) SetProjectId(v string) {
 	m.ProjectId = v
 }
 
-func (m *UpdateProjectRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateProjectRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -113,7 +113,7 @@ func (m *GetUnitBalanceRequest) SetProjectId(v string) {
 	m.ProjectId = v
 }
 
-func (m *GetUnitBalanceResponse) SetUnitBalance(v *wrappers.Int64Value) {
+func (m *GetUnitBalanceResponse) SetUnitBalance(v *wrapperspb.Int64Value) {
 	m.UnitBalance = v
 }
 
@@ -121,7 +121,7 @@ func (m *SetUnitBalanceRequest) SetProjectId(v string) {
 	m.ProjectId = v
 }
 
-func (m *SetUnitBalanceRequest) SetUnitBalance(v *wrappers.Int64Value) {
+func (m *SetUnitBalanceRequest) SetUnitBalance(v *wrapperspb.Int64Value) {
 	m.UnitBalance = v
 }
 
@@ -147,7 +147,7 @@ func (m *ProjectExecutionRequest) SetCellId(v string) {
 	}
 }
 
-func (m *ProjectExecutionRequest) SetInputVariables(v *_struct.Struct) {
+func (m *ProjectExecutionRequest) SetInputVariables(v *structpb.Struct) {
 	m.InputVariables = v
 }
 
@@ -181,7 +181,7 @@ func (m *ProjectExecutionResponse) SetCheckpointId(v string) {
 	m.CheckpointId = v
 }
 
-func (m *ProjectExecutionResponse) SetOutputVariables(v *_struct.Struct) {
+func (m *ProjectExecutionResponse) SetOutputVariables(v *structpb.Struct) {
 	m.OutputVariables = v
 }
 
@@ -197,7 +197,7 @@ func (m *CellOutputsRequest) SetCheckpointId(v string) {
 	m.CheckpointId = v
 }
 
-func (m *CellOutputsRequest) SetStartAt(v *timestamp.Timestamp) {
+func (m *CellOutputsRequest) SetStartAt(v *timestamppb.Timestamp) {
 	m.StartAt = v
 }
 
@@ -221,7 +221,7 @@ func (m *GetStateVariablesRequest) SetCheckpointId(v string) {
 	m.CheckpointId = v
 }
 
-func (m *GetStateVariablesResponse) SetVariables(v *_struct.Struct) {
+func (m *GetStateVariablesResponse) SetVariables(v *structpb.Struct) {
 	m.Variables = v
 }
 
@@ -237,11 +237,11 @@ func (m *GetNotebookMetadataResponse) SetNotebookId(v string) {
 	m.NotebookId = v
 }
 
-func (m *GetNotebookMetadataResponse) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *GetNotebookMetadataResponse) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *GetNotebookMetadataResponse) SetModifiedAt(v *timestamp.Timestamp) {
+func (m *GetNotebookMetadataResponse) SetModifiedAt(v *timestamppb.Timestamp) {
 	m.ModifiedAt = v
 }
 

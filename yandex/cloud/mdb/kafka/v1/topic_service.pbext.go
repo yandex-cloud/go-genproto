@@ -3,7 +3,7 @@
 package kafka
 
 import (
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetTopicRequest) SetClusterId(v string) {
@@ -58,7 +58,7 @@ func (m *UpdateTopicRequest) SetTopicName(v string) {
 	m.TopicName = v
 }
 
-func (m *UpdateTopicRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateTopicRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

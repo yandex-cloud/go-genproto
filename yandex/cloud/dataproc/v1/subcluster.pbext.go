@@ -3,8 +3,8 @@
 package dataproc
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *AutoscalingConfig) SetMaxHostsCount(v int64) {
@@ -15,15 +15,15 @@ func (m *AutoscalingConfig) SetPreemptible(v bool) {
 	m.Preemptible = v
 }
 
-func (m *AutoscalingConfig) SetMeasurementDuration(v *duration.Duration) {
+func (m *AutoscalingConfig) SetMeasurementDuration(v *durationpb.Duration) {
 	m.MeasurementDuration = v
 }
 
-func (m *AutoscalingConfig) SetWarmupDuration(v *duration.Duration) {
+func (m *AutoscalingConfig) SetWarmupDuration(v *durationpb.Duration) {
 	m.WarmupDuration = v
 }
 
-func (m *AutoscalingConfig) SetStabilizationDuration(v *duration.Duration) {
+func (m *AutoscalingConfig) SetStabilizationDuration(v *durationpb.Duration) {
 	m.StabilizationDuration = v
 }
 
@@ -43,7 +43,7 @@ func (m *Subcluster) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *Subcluster) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Subcluster) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

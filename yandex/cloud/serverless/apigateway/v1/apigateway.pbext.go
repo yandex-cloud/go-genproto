@@ -3,7 +3,7 @@
 package apigateway
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *ApiGateway) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *ApiGateway) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *ApiGateway) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *ApiGateway) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

@@ -3,7 +3,7 @@
 package apploadbalancer
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *LoadBalancer) SetId(v string) {
@@ -54,7 +54,7 @@ func (m *LoadBalancer) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
-func (m *LoadBalancer) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *LoadBalancer) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

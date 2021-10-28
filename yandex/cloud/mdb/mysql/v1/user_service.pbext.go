@@ -3,7 +3,7 @@
 package mysql
 
 import (
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -58,7 +58,7 @@ func (m *UpdateUserRequest) SetUserName(v string) {
 	m.UserName = v
 }
 
-func (m *UpdateUserRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateUserRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

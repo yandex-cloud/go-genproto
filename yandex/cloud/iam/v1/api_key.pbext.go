@@ -3,7 +3,7 @@
 package iam
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *ApiKey) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *ApiKey) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
-func (m *ApiKey) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *ApiKey) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

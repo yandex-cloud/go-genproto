@@ -3,7 +3,7 @@
 package apploadbalancer
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 )
 
 func (m *VirtualHost) SetName(v string) {
@@ -238,11 +238,11 @@ func (m *HttpRouteAction) SetBackendGroupId(v string) {
 	m.BackendGroupId = v
 }
 
-func (m *HttpRouteAction) SetTimeout(v *duration.Duration) {
+func (m *HttpRouteAction) SetTimeout(v *durationpb.Duration) {
 	m.Timeout = v
 }
 
-func (m *HttpRouteAction) SetIdleTimeout(v *duration.Duration) {
+func (m *HttpRouteAction) SetIdleTimeout(v *durationpb.Duration) {
 	m.IdleTimeout = v
 }
 
@@ -276,11 +276,11 @@ func (m *GrpcRouteAction) SetBackendGroupId(v string) {
 	m.BackendGroupId = v
 }
 
-func (m *GrpcRouteAction) SetMaxTimeout(v *duration.Duration) {
+func (m *GrpcRouteAction) SetMaxTimeout(v *durationpb.Duration) {
 	m.MaxTimeout = v
 }
 
-func (m *GrpcRouteAction) SetIdleTimeout(v *duration.Duration) {
+func (m *GrpcRouteAction) SetIdleTimeout(v *durationpb.Duration) {
 	m.IdleTimeout = v
 }
 

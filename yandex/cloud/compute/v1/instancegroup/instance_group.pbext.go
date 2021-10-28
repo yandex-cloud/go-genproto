@@ -3,8 +3,8 @@
 package instancegroup
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *InstanceGroup) SetId(v string) {
@@ -15,7 +15,7 @@ func (m *InstanceGroup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *InstanceGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *InstanceGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -197,15 +197,15 @@ func (m *ScalePolicy_AutoScale) SetMaxSize(v int64) {
 	m.MaxSize = v
 }
 
-func (m *ScalePolicy_AutoScale) SetMeasurementDuration(v *duration.Duration) {
+func (m *ScalePolicy_AutoScale) SetMeasurementDuration(v *durationpb.Duration) {
 	m.MeasurementDuration = v
 }
 
-func (m *ScalePolicy_AutoScale) SetWarmupDuration(v *duration.Duration) {
+func (m *ScalePolicy_AutoScale) SetWarmupDuration(v *durationpb.Duration) {
 	m.WarmupDuration = v
 }
 
-func (m *ScalePolicy_AutoScale) SetStabilizationDuration(v *duration.Duration) {
+func (m *ScalePolicy_AutoScale) SetStabilizationDuration(v *durationpb.Duration) {
 	m.StabilizationDuration = v
 }
 
@@ -273,7 +273,7 @@ func (m *DeployPolicy) SetMaxExpansion(v int64) {
 	m.MaxExpansion = v
 }
 
-func (m *DeployPolicy) SetStartupDuration(v *duration.Duration) {
+func (m *DeployPolicy) SetStartupDuration(v *durationpb.Duration) {
 	m.StartupDuration = v
 }
 
@@ -503,7 +503,7 @@ func (m *LoadBalancerSpec) SetTargetGroupSpec(v *TargetGroupSpec) {
 	m.TargetGroupSpec = v
 }
 
-func (m *LoadBalancerSpec) SetMaxOpeningTrafficDuration(v *duration.Duration) {
+func (m *LoadBalancerSpec) SetMaxOpeningTrafficDuration(v *durationpb.Duration) {
 	m.MaxOpeningTrafficDuration = v
 }
 
@@ -523,7 +523,7 @@ func (m *ApplicationLoadBalancerSpec) SetTargetGroupSpec(v *ApplicationTargetGro
 	m.TargetGroupSpec = v
 }
 
-func (m *ApplicationLoadBalancerSpec) SetMaxOpeningTrafficDuration(v *duration.Duration) {
+func (m *ApplicationLoadBalancerSpec) SetMaxOpeningTrafficDuration(v *durationpb.Duration) {
 	m.MaxOpeningTrafficDuration = v
 }
 
@@ -543,7 +543,7 @@ func (m *HealthChecksSpec) SetHealthCheckSpecs(v []*HealthCheckSpec) {
 	m.HealthCheckSpecs = v
 }
 
-func (m *HealthChecksSpec) SetMaxCheckingHealthDuration(v *duration.Duration) {
+func (m *HealthChecksSpec) SetMaxCheckingHealthDuration(v *durationpb.Duration) {
 	m.MaxCheckingHealthDuration = v
 }
 
@@ -553,11 +553,11 @@ func (m *HealthCheckSpec) SetHealthCheckOptions(v HealthCheckSpec_HealthCheckOpt
 	m.HealthCheckOptions = v
 }
 
-func (m *HealthCheckSpec) SetInterval(v *duration.Duration) {
+func (m *HealthCheckSpec) SetInterval(v *durationpb.Duration) {
 	m.Interval = v
 }
 
-func (m *HealthCheckSpec) SetTimeout(v *duration.Duration) {
+func (m *HealthCheckSpec) SetTimeout(v *durationpb.Duration) {
 	m.Timeout = v
 }
 
@@ -625,7 +625,7 @@ func (m *ManagedInstance) SetNetworkInterfaces(v []*NetworkInterface) {
 	m.NetworkInterfaces = v
 }
 
-func (m *ManagedInstance) SetStatusChangedAt(v *timestamp.Timestamp) {
+func (m *ManagedInstance) SetStatusChangedAt(v *timestamppb.Timestamp) {
 	m.StatusChangedAt = v
 }
 
@@ -689,7 +689,7 @@ func (m *DnsRecord) SetPtr(v bool) {
 	m.Ptr = v
 }
 
-func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 

@@ -3,7 +3,7 @@
 package clickhouse
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Backup) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Backup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Backup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Backup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -26,6 +26,6 @@ func (m *Backup) SetSourceShardNames(v []string) {
 	m.SourceShardNames = v
 }
 
-func (m *Backup) SetStartedAt(v *timestamp.Timestamp) {
+func (m *Backup) SetStartedAt(v *timestamppb.Timestamp) {
 	m.StartedAt = v
 }

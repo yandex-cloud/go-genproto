@@ -3,7 +3,7 @@
 package proxy
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Proxy) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Proxy) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Proxy) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Proxy) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

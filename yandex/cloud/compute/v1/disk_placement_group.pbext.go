@@ -3,7 +3,7 @@
 package compute
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type DiskPlacementGroup_PlacementStrategy = isDiskPlacementGroup_PlacementStrategy
@@ -20,7 +20,7 @@ func (m *DiskPlacementGroup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *DiskPlacementGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *DiskPlacementGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

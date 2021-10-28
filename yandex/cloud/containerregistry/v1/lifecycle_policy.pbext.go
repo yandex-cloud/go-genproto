@@ -3,8 +3,8 @@
 package containerregistry
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *LifecyclePolicy) SetId(v string) {
@@ -27,7 +27,7 @@ func (m *LifecyclePolicy) SetStatus(v LifecyclePolicy_Status) {
 	m.Status = v
 }
 
-func (m *LifecyclePolicy) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *LifecyclePolicy) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -39,7 +39,7 @@ func (m *LifecycleRule) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *LifecycleRule) SetExpirePeriod(v *duration.Duration) {
+func (m *LifecycleRule) SetExpirePeriod(v *durationpb.Duration) {
 	m.ExpirePeriod = v
 }
 

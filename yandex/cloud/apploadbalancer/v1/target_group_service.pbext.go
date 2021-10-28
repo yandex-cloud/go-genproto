@@ -4,7 +4,7 @@ package apploadbalancer
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetTargetGroupRequest) SetTargetGroupId(v string) {
@@ -47,7 +47,7 @@ func (m *UpdateTargetGroupRequest) SetTargetGroupId(v string) {
 	m.TargetGroupId = v
 }
 
-func (m *UpdateTargetGroupRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateTargetGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

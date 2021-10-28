@@ -3,7 +3,7 @@
 package cdn
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetOriginRequest) SetFolderId(v string) {
@@ -38,11 +38,11 @@ func (m *CreateOriginRequest) SetSource(v string) {
 	m.Source = v
 }
 
-func (m *CreateOriginRequest) SetEnabled(v *wrappers.BoolValue) {
+func (m *CreateOriginRequest) SetEnabled(v *wrapperspb.BoolValue) {
 	m.Enabled = v
 }
 
-func (m *CreateOriginRequest) SetBackup(v *wrappers.BoolValue) {
+func (m *CreateOriginRequest) SetBackup(v *wrapperspb.BoolValue) {
 	m.Backup = v
 }
 

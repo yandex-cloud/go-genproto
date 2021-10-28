@@ -3,7 +3,7 @@
 package postgresql
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *User) SetName(v string) {
@@ -26,7 +26,7 @@ func (m *User) SetSettings(v *UserSettings) {
 	m.Settings = v
 }
 
-func (m *User) SetLogin(v *wrappers.BoolValue) {
+func (m *User) SetLogin(v *wrapperspb.BoolValue) {
 	m.Login = v
 }
 
@@ -50,7 +50,7 @@ func (m *UserSpec) SetPermissions(v []*Permission) {
 	m.Permissions = v
 }
 
-func (m *UserSpec) SetConnLimit(v *wrappers.Int64Value) {
+func (m *UserSpec) SetConnLimit(v *wrapperspb.Int64Value) {
 	m.ConnLimit = v
 }
 
@@ -58,7 +58,7 @@ func (m *UserSpec) SetSettings(v *UserSettings) {
 	m.Settings = v
 }
 
-func (m *UserSpec) SetLogin(v *wrappers.BoolValue) {
+func (m *UserSpec) SetLogin(v *wrapperspb.BoolValue) {
 	m.Login = v
 }
 
@@ -70,11 +70,11 @@ func (m *UserSettings) SetDefaultTransactionIsolation(v UserSettings_Transaction
 	m.DefaultTransactionIsolation = v
 }
 
-func (m *UserSettings) SetLockTimeout(v *wrappers.Int64Value) {
+func (m *UserSettings) SetLockTimeout(v *wrapperspb.Int64Value) {
 	m.LockTimeout = v
 }
 
-func (m *UserSettings) SetLogMinDurationStatement(v *wrappers.Int64Value) {
+func (m *UserSettings) SetLogMinDurationStatement(v *wrapperspb.Int64Value) {
 	m.LogMinDurationStatement = v
 }
 
@@ -82,7 +82,7 @@ func (m *UserSettings) SetSynchronousCommit(v UserSettings_SynchronousCommit) {
 	m.SynchronousCommit = v
 }
 
-func (m *UserSettings) SetTempFileLimit(v *wrappers.Int64Value) {
+func (m *UserSettings) SetTempFileLimit(v *wrapperspb.Int64Value) {
 	m.TempFileLimit = v
 }
 

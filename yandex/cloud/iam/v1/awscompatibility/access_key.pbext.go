@@ -3,7 +3,7 @@
 package awscompatibility
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *AccessKey) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *AccessKey) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
-func (m *AccessKey) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *AccessKey) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

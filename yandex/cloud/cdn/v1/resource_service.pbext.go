@@ -3,7 +3,7 @@
 package cdn
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetResourceRequest) SetResourceId(v string) {
@@ -50,7 +50,7 @@ func (m *CreateResourceRequest) SetOriginProtocol(v OriginProtocol) {
 	m.OriginProtocol = v
 }
 
-func (m *CreateResourceRequest) SetActive(v *wrappers.BoolValue) {
+func (m *CreateResourceRequest) SetActive(v *wrapperspb.BoolValue) {
 	m.Active = v
 }
 
@@ -102,7 +102,7 @@ func (m *UpdateResourceRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
 
-func (m *UpdateResourceRequest) SetOriginGroupId(v *wrappers.Int64Value) {
+func (m *UpdateResourceRequest) SetOriginGroupId(v *wrapperspb.Int64Value) {
 	m.OriginGroupId = v
 }
 
@@ -118,7 +118,7 @@ func (m *UpdateResourceRequest) SetOriginProtocol(v OriginProtocol) {
 	m.OriginProtocol = v
 }
 
-func (m *UpdateResourceRequest) SetActive(v *wrappers.BoolValue) {
+func (m *UpdateResourceRequest) SetActive(v *wrapperspb.BoolValue) {
 	m.Active = v
 }
 

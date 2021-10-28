@@ -3,7 +3,7 @@
 package certificatemanager
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Certificate) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Certificate) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Certificate) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Certificate) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -54,19 +54,19 @@ func (m *Certificate) SetSerial(v string) {
 	m.Serial = v
 }
 
-func (m *Certificate) SetUpdatedAt(v *timestamp.Timestamp) {
+func (m *Certificate) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 
-func (m *Certificate) SetIssuedAt(v *timestamp.Timestamp) {
+func (m *Certificate) SetIssuedAt(v *timestamppb.Timestamp) {
 	m.IssuedAt = v
 }
 
-func (m *Certificate) SetNotAfter(v *timestamp.Timestamp) {
+func (m *Certificate) SetNotAfter(v *timestamppb.Timestamp) {
 	m.NotAfter = v
 }
 
-func (m *Certificate) SetNotBefore(v *timestamp.Timestamp) {
+func (m *Certificate) SetNotBefore(v *timestamppb.Timestamp) {
 	m.NotBefore = v
 }
 
@@ -88,11 +88,11 @@ func (m *Challenge) SetType(v ChallengeType) {
 	m.Type = v
 }
 
-func (m *Challenge) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Challenge) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Challenge) SetUpdatedAt(v *timestamp.Timestamp) {
+func (m *Challenge) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 

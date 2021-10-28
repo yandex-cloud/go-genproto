@@ -4,7 +4,7 @@ package apploadbalancer
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetHttpRouterRequest) SetHttpRouterId(v string) {
@@ -47,7 +47,7 @@ func (m *UpdateHttpRouterRequest) SetHttpRouterId(v string) {
 	m.HttpRouterId = v
 }
 
-func (m *UpdateHttpRouterRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateHttpRouterRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

@@ -3,7 +3,7 @@
 package vpc
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Network) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Network) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Network) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Network) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

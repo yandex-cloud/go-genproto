@@ -3,10 +3,10 @@
 package saml
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetFederationRequest) SetFederationId(v string) {
@@ -49,7 +49,7 @@ func (m *CreateFederationRequest) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *CreateFederationRequest) SetCookieMaxAge(v *duration.Duration) {
+func (m *CreateFederationRequest) SetCookieMaxAge(v *durationpb.Duration) {
 	m.CookieMaxAge = v
 }
 
@@ -89,7 +89,7 @@ func (m *UpdateFederationRequest) SetFederationId(v string) {
 	m.FederationId = v
 }
 
-func (m *UpdateFederationRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateFederationRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -101,7 +101,7 @@ func (m *UpdateFederationRequest) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *UpdateFederationRequest) SetCookieMaxAge(v *duration.Duration) {
+func (m *UpdateFederationRequest) SetCookieMaxAge(v *durationpb.Duration) {
 	m.CookieMaxAge = v
 }
 

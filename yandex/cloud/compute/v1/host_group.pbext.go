@@ -3,7 +3,7 @@
 package compute
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *HostGroup) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *HostGroup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *HostGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *HostGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

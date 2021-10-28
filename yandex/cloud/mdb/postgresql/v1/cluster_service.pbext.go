@@ -3,12 +3,12 @@
 package postgresql
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/postgresql/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -95,7 +95,7 @@ func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *UpdateClusterRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateClusterRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -187,7 +187,7 @@ func (m *RestoreClusterRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
 
-func (m *RestoreClusterRequest) SetTime(v *timestamp.Timestamp) {
+func (m *RestoreClusterRequest) SetTime(v *timestamppb.Timestamp) {
 	m.Time = v
 }
 
@@ -259,7 +259,7 @@ func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenance
 	m.RescheduleType = v
 }
 
-func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamp.Timestamp) {
+func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
 }
 
@@ -267,11 +267,11 @@ func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamp.Timestamp) {
+func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
 }
 
-func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
@@ -291,11 +291,11 @@ func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_Service
 	m.ServiceType = v
 }
 
-func (m *ListClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *ListClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 
@@ -339,11 +339,11 @@ func (m *StreamClusterLogsRequest) SetServiceType(v StreamClusterLogsRequest_Ser
 	m.ServiceType = v
 }
 
-func (m *StreamClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *StreamClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *StreamClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *StreamClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 
@@ -471,7 +471,7 @@ func (m *UpdateHostSpec) SetReplicationSource(v string) {
 	m.ReplicationSource = v
 }
 
-func (m *UpdateHostSpec) SetPriority(v *wrappers.Int64Value) {
+func (m *UpdateHostSpec) SetPriority(v *wrapperspb.Int64Value) {
 	m.Priority = v
 }
 
@@ -479,7 +479,7 @@ func (m *UpdateHostSpec) SetConfigSpec(v *ConfigHostSpec) {
 	m.ConfigSpec = v
 }
 
-func (m *UpdateHostSpec) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateHostSpec) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -503,7 +503,7 @@ func (m *HostSpec) SetReplicationSource(v string) {
 	m.ReplicationSource = v
 }
 
-func (m *HostSpec) SetPriority(v *wrappers.Int64Value) {
+func (m *HostSpec) SetPriority(v *wrapperspb.Int64Value) {
 	m.Priority = v
 }
 
@@ -577,7 +577,7 @@ func (m *ConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *ConfigSpec) SetAutofailover(v *wrappers.BoolValue) {
+func (m *ConfigSpec) SetAutofailover(v *wrapperspb.BoolValue) {
 	m.Autofailover = v
 }
 
@@ -585,7 +585,7 @@ func (m *ConfigSpec) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
 
-func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrappers.Int64Value) {
+func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
 }
 

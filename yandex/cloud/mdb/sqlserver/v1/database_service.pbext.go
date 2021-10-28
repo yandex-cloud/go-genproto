@@ -3,7 +3,7 @@
 package sqlserver
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetDatabaseRequest) SetClusterId(v string) {
@@ -98,6 +98,6 @@ func (m *RestoreDatabaseRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
 
-func (m *RestoreDatabaseRequest) SetTime(v *timestamp.Timestamp) {
+func (m *RestoreDatabaseRequest) SetTime(v *timestamppb.Timestamp) {
 	m.Time = v
 }

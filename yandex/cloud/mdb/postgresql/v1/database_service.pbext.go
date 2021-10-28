@@ -3,7 +3,7 @@
 package postgresql
 
 import (
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetDatabaseRequest) SetClusterId(v string) {
@@ -58,7 +58,7 @@ func (m *UpdateDatabaseRequest) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
 
-func (m *UpdateDatabaseRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateDatabaseRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

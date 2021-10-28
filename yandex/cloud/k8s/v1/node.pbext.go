@@ -3,7 +3,7 @@
 package k8s
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Node) SetStatus(v Node_Status) {
@@ -70,11 +70,11 @@ func (m *Condition) SetMessage(v string) {
 	m.Message = v
 }
 
-func (m *Condition) SetLastHeartbeatTime(v *timestamp.Timestamp) {
+func (m *Condition) SetLastHeartbeatTime(v *timestamppb.Timestamp) {
 	m.LastHeartbeatTime = v
 }
 
-func (m *Condition) SetLastTransitionTime(v *timestamp.Timestamp) {
+func (m *Condition) SetLastTransitionTime(v *timestamppb.Timestamp) {
 	m.LastTransitionTime = v
 }
 

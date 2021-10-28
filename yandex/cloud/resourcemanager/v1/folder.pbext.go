@@ -3,7 +3,7 @@
 package resourcemanager
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Folder) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Folder) SetCloudId(v string) {
 	m.CloudId = v
 }
 
-func (m *Folder) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Folder) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

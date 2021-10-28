@@ -3,11 +3,11 @@
 package mysql
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alpha/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -86,7 +86,7 @@ func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *UpdateClusterRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateClusterRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -130,7 +130,7 @@ func (m *RestoreClusterRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
 
-func (m *RestoreClusterRequest) SetTime(v *timestamp.Timestamp) {
+func (m *RestoreClusterRequest) SetTime(v *timestamppb.Timestamp) {
 	m.Time = v
 }
 
@@ -170,7 +170,7 @@ func (m *RestoreClusterMetadata) SetBackupId(v string) {
 	m.BackupId = v
 }
 
-func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
@@ -190,11 +190,11 @@ func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_Service
 	m.ServiceType = v
 }
 
-func (m *ListClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *ListClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 

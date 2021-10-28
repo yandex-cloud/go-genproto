@@ -3,38 +3,38 @@
 package postgresql
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-func (m *PostgresqlHostConfig13) SetRecoveryMinApplyDelay(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetRecoveryMinApplyDelay(v *wrapperspb.Int64Value) {
 	m.RecoveryMinApplyDelay = v
 }
 
-func (m *PostgresqlHostConfig13) SetSharedBuffers(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetSharedBuffers(v *wrapperspb.Int64Value) {
 	m.SharedBuffers = v
 }
 
-func (m *PostgresqlHostConfig13) SetTempBuffers(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetTempBuffers(v *wrapperspb.Int64Value) {
 	m.TempBuffers = v
 }
 
-func (m *PostgresqlHostConfig13) SetWorkMem(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetWorkMem(v *wrapperspb.Int64Value) {
 	m.WorkMem = v
 }
 
-func (m *PostgresqlHostConfig13) SetTempFileLimit(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetTempFileLimit(v *wrapperspb.Int64Value) {
 	m.TempFileLimit = v
 }
 
-func (m *PostgresqlHostConfig13) SetBackendFlushAfter(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetBackendFlushAfter(v *wrapperspb.Int64Value) {
 	m.BackendFlushAfter = v
 }
 
-func (m *PostgresqlHostConfig13) SetOldSnapshotThreshold(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetOldSnapshotThreshold(v *wrapperspb.Int64Value) {
 	m.OldSnapshotThreshold = v
 }
 
-func (m *PostgresqlHostConfig13) SetMaxStandbyStreamingDelay(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetMaxStandbyStreamingDelay(v *wrapperspb.Int64Value) {
 	m.MaxStandbyStreamingDelay = v
 }
 
@@ -42,15 +42,15 @@ func (m *PostgresqlHostConfig13) SetConstraintExclusion(v PostgresqlHostConfig13
 	m.ConstraintExclusion = v
 }
 
-func (m *PostgresqlHostConfig13) SetCursorTupleFraction(v *wrappers.DoubleValue) {
+func (m *PostgresqlHostConfig13) SetCursorTupleFraction(v *wrapperspb.DoubleValue) {
 	m.CursorTupleFraction = v
 }
 
-func (m *PostgresqlHostConfig13) SetFromCollapseLimit(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetFromCollapseLimit(v *wrapperspb.Int64Value) {
 	m.FromCollapseLimit = v
 }
 
-func (m *PostgresqlHostConfig13) SetJoinCollapseLimit(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetJoinCollapseLimit(v *wrapperspb.Int64Value) {
 	m.JoinCollapseLimit = v
 }
 
@@ -70,23 +70,23 @@ func (m *PostgresqlHostConfig13) SetLogMinErrorStatement(v PostgresqlHostConfig1
 	m.LogMinErrorStatement = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogMinDurationStatement(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetLogMinDurationStatement(v *wrapperspb.Int64Value) {
 	m.LogMinDurationStatement = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogCheckpoints(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetLogCheckpoints(v *wrapperspb.BoolValue) {
 	m.LogCheckpoints = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogConnections(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetLogConnections(v *wrapperspb.BoolValue) {
 	m.LogConnections = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogDisconnections(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetLogDisconnections(v *wrapperspb.BoolValue) {
 	m.LogDisconnections = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogDuration(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetLogDuration(v *wrapperspb.BoolValue) {
 	m.LogDuration = v
 }
 
@@ -94,7 +94,7 @@ func (m *PostgresqlHostConfig13) SetLogErrorVerbosity(v PostgresqlHostConfig13_L
 	m.LogErrorVerbosity = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogLockWaits(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetLogLockWaits(v *wrapperspb.BoolValue) {
 	m.LogLockWaits = v
 }
 
@@ -102,7 +102,7 @@ func (m *PostgresqlHostConfig13) SetLogStatement(v PostgresqlHostConfig13_LogSta
 	m.LogStatement = v
 }
 
-func (m *PostgresqlHostConfig13) SetLogTempFiles(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetLogTempFiles(v *wrapperspb.Int64Value) {
 	m.LogTempFiles = v
 }
 
@@ -110,7 +110,7 @@ func (m *PostgresqlHostConfig13) SetSearchPath(v string) {
 	m.SearchPath = v
 }
 
-func (m *PostgresqlHostConfig13) SetRowSecurity(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetRowSecurity(v *wrapperspb.BoolValue) {
 	m.RowSecurity = v
 }
 
@@ -118,15 +118,15 @@ func (m *PostgresqlHostConfig13) SetDefaultTransactionIsolation(v PostgresqlHost
 	m.DefaultTransactionIsolation = v
 }
 
-func (m *PostgresqlHostConfig13) SetStatementTimeout(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetStatementTimeout(v *wrapperspb.Int64Value) {
 	m.StatementTimeout = v
 }
 
-func (m *PostgresqlHostConfig13) SetLockTimeout(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetLockTimeout(v *wrapperspb.Int64Value) {
 	m.LockTimeout = v
 }
 
-func (m *PostgresqlHostConfig13) SetIdleInTransactionSessionTimeout(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetIdleInTransactionSessionTimeout(v *wrapperspb.Int64Value) {
 	m.IdleInTransactionSessionTimeout = v
 }
 
@@ -142,23 +142,23 @@ func (m *PostgresqlHostConfig13) SetXmloption(v PostgresqlHostConfig13_XmlOption
 	m.Xmloption = v
 }
 
-func (m *PostgresqlHostConfig13) SetGinPendingListLimit(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetGinPendingListLimit(v *wrapperspb.Int64Value) {
 	m.GinPendingListLimit = v
 }
 
-func (m *PostgresqlHostConfig13) SetDeadlockTimeout(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetDeadlockTimeout(v *wrapperspb.Int64Value) {
 	m.DeadlockTimeout = v
 }
 
-func (m *PostgresqlHostConfig13) SetMaxLocksPerTransaction(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetMaxLocksPerTransaction(v *wrapperspb.Int64Value) {
 	m.MaxLocksPerTransaction = v
 }
 
-func (m *PostgresqlHostConfig13) SetMaxPredLocksPerTransaction(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetMaxPredLocksPerTransaction(v *wrapperspb.Int64Value) {
 	m.MaxPredLocksPerTransaction = v
 }
 
-func (m *PostgresqlHostConfig13) SetArrayNulls(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetArrayNulls(v *wrapperspb.BoolValue) {
 	m.ArrayNulls = v
 }
 
@@ -166,99 +166,99 @@ func (m *PostgresqlHostConfig13) SetBackslashQuote(v PostgresqlHostConfig13_Back
 	m.BackslashQuote = v
 }
 
-func (m *PostgresqlHostConfig13) SetDefaultWithOids(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetDefaultWithOids(v *wrapperspb.BoolValue) {
 	m.DefaultWithOids = v
 }
 
-func (m *PostgresqlHostConfig13) SetEscapeStringWarning(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEscapeStringWarning(v *wrapperspb.BoolValue) {
 	m.EscapeStringWarning = v
 }
 
-func (m *PostgresqlHostConfig13) SetLoCompatPrivileges(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetLoCompatPrivileges(v *wrapperspb.BoolValue) {
 	m.LoCompatPrivileges = v
 }
 
-func (m *PostgresqlHostConfig13) SetOperatorPrecedenceWarning(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetOperatorPrecedenceWarning(v *wrapperspb.BoolValue) {
 	m.OperatorPrecedenceWarning = v
 }
 
-func (m *PostgresqlHostConfig13) SetQuoteAllIdentifiers(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetQuoteAllIdentifiers(v *wrapperspb.BoolValue) {
 	m.QuoteAllIdentifiers = v
 }
 
-func (m *PostgresqlHostConfig13) SetStandardConformingStrings(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetStandardConformingStrings(v *wrapperspb.BoolValue) {
 	m.StandardConformingStrings = v
 }
 
-func (m *PostgresqlHostConfig13) SetSynchronizeSeqscans(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetSynchronizeSeqscans(v *wrapperspb.BoolValue) {
 	m.SynchronizeSeqscans = v
 }
 
-func (m *PostgresqlHostConfig13) SetTransformNullEquals(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetTransformNullEquals(v *wrapperspb.BoolValue) {
 	m.TransformNullEquals = v
 }
 
-func (m *PostgresqlHostConfig13) SetExitOnError(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetExitOnError(v *wrapperspb.BoolValue) {
 	m.ExitOnError = v
 }
 
-func (m *PostgresqlHostConfig13) SetSeqPageCost(v *wrappers.DoubleValue) {
+func (m *PostgresqlHostConfig13) SetSeqPageCost(v *wrapperspb.DoubleValue) {
 	m.SeqPageCost = v
 }
 
-func (m *PostgresqlHostConfig13) SetRandomPageCost(v *wrappers.DoubleValue) {
+func (m *PostgresqlHostConfig13) SetRandomPageCost(v *wrapperspb.DoubleValue) {
 	m.RandomPageCost = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableBitmapscan(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableBitmapscan(v *wrapperspb.BoolValue) {
 	m.EnableBitmapscan = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableHashagg(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableHashagg(v *wrapperspb.BoolValue) {
 	m.EnableHashagg = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableHashjoin(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableHashjoin(v *wrapperspb.BoolValue) {
 	m.EnableHashjoin = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableIndexscan(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableIndexscan(v *wrapperspb.BoolValue) {
 	m.EnableIndexscan = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableIndexonlyscan(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableIndexonlyscan(v *wrapperspb.BoolValue) {
 	m.EnableIndexonlyscan = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableMaterial(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableMaterial(v *wrapperspb.BoolValue) {
 	m.EnableMaterial = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableMergejoin(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableMergejoin(v *wrapperspb.BoolValue) {
 	m.EnableMergejoin = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableNestloop(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableNestloop(v *wrapperspb.BoolValue) {
 	m.EnableNestloop = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableSeqscan(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableSeqscan(v *wrapperspb.BoolValue) {
 	m.EnableSeqscan = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableSort(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableSort(v *wrapperspb.BoolValue) {
 	m.EnableSort = v
 }
 
-func (m *PostgresqlHostConfig13) SetEnableTidscan(v *wrappers.BoolValue) {
+func (m *PostgresqlHostConfig13) SetEnableTidscan(v *wrapperspb.BoolValue) {
 	m.EnableTidscan = v
 }
 
-func (m *PostgresqlHostConfig13) SetMaxParallelWorkers(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetMaxParallelWorkers(v *wrapperspb.Int64Value) {
 	m.MaxParallelWorkers = v
 }
 
-func (m *PostgresqlHostConfig13) SetMaxParallelWorkersPerGather(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetMaxParallelWorkersPerGather(v *wrapperspb.Int64Value) {
 	m.MaxParallelWorkersPerGather = v
 }
 
@@ -266,10 +266,10 @@ func (m *PostgresqlHostConfig13) SetTimezone(v string) {
 	m.Timezone = v
 }
 
-func (m *PostgresqlHostConfig13) SetEffectiveIoConcurrency(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetEffectiveIoConcurrency(v *wrapperspb.Int64Value) {
 	m.EffectiveIoConcurrency = v
 }
 
-func (m *PostgresqlHostConfig13) SetEffectiveCacheSize(v *wrappers.Int64Value) {
+func (m *PostgresqlHostConfig13) SetEffectiveCacheSize(v *wrapperspb.Int64Value) {
 	m.EffectiveCacheSize = v
 }

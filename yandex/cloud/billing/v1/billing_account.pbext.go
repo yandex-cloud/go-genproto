@@ -3,7 +3,7 @@
 package billing
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *BillingAccount) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *BillingAccount) SetName(v string) {
 	m.Name = v
 }
 
-func (m *BillingAccount) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *BillingAccount) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

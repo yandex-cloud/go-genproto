@@ -3,10 +3,10 @@
 package ydb
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	dayofweek "google.golang.org/genproto/googleapis/type/dayofweek"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type BackupSchedule_Policy = isBackupSchedule_Policy
@@ -33,11 +33,11 @@ func (m *BackupSchedule) SetRecurringBackupSchedule(v *RecurringBackupSchedule) 
 	}
 }
 
-func (m *BackupSchedule) SetNextExecuteTime(v *timestamp.Timestamp) {
+func (m *BackupSchedule) SetNextExecuteTime(v *timestamppb.Timestamp) {
 	m.NextExecuteTime = v
 }
 
-func (m *RecurringBackupSchedule) SetStartTime(v *timestamp.Timestamp) {
+func (m *RecurringBackupSchedule) SetStartTime(v *timestamppb.Timestamp) {
 	m.StartTime = v
 }
 
@@ -73,7 +73,7 @@ func (m *BackupSettings) SetBackupSchedule(v *BackupSchedule) {
 	m.BackupSchedule = v
 }
 
-func (m *BackupSettings) SetBackupTimeToLive(v *duration.Duration) {
+func (m *BackupSettings) SetBackupTimeToLive(v *durationpb.Duration) {
 	m.BackupTimeToLive = v
 }
 
@@ -117,15 +117,15 @@ func (m *Backup) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Backup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Backup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Backup) SetStartedAt(v *timestamp.Timestamp) {
+func (m *Backup) SetStartedAt(v *timestamppb.Timestamp) {
 	m.StartedAt = v
 }
 
-func (m *Backup) SetCompletedAt(v *timestamp.Timestamp) {
+func (m *Backup) SetCompletedAt(v *timestamppb.Timestamp) {
 	m.CompletedAt = v
 }
 

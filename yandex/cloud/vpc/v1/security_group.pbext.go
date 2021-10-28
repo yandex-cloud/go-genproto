@@ -3,7 +3,7 @@
 package vpc
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *SecurityGroup) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *SecurityGroup) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *SecurityGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *SecurityGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

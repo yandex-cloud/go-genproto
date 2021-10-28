@@ -3,8 +3,8 @@
 package logging
 
 import (
-	_struct "github.com/golang/protobuf/ptypes/struct"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	structpb "google.golang.org/protobuf/types/known/structpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *LogEntry) SetUid(v string) {
@@ -15,15 +15,15 @@ func (m *LogEntry) SetResource(v *LogEntryResource) {
 	m.Resource = v
 }
 
-func (m *LogEntry) SetTimestamp(v *timestamp.Timestamp) {
+func (m *LogEntry) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
-func (m *LogEntry) SetIngestedAt(v *timestamp.Timestamp) {
+func (m *LogEntry) SetIngestedAt(v *timestamppb.Timestamp) {
 	m.IngestedAt = v
 }
 
-func (m *LogEntry) SetSavedAt(v *timestamp.Timestamp) {
+func (m *LogEntry) SetSavedAt(v *timestamppb.Timestamp) {
 	m.SavedAt = v
 }
 
@@ -35,11 +35,11 @@ func (m *LogEntry) SetMessage(v string) {
 	m.Message = v
 }
 
-func (m *LogEntry) SetJsonPayload(v *_struct.Struct) {
+func (m *LogEntry) SetJsonPayload(v *structpb.Struct) {
 	m.JsonPayload = v
 }
 
-func (m *IncomingLogEntry) SetTimestamp(v *timestamp.Timestamp) {
+func (m *IncomingLogEntry) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
@@ -51,7 +51,7 @@ func (m *IncomingLogEntry) SetMessage(v string) {
 	m.Message = v
 }
 
-func (m *IncomingLogEntry) SetJsonPayload(v *_struct.Struct) {
+func (m *IncomingLogEntry) SetJsonPayload(v *structpb.Struct) {
 	m.JsonPayload = v
 }
 
@@ -59,7 +59,7 @@ func (m *LogEntryDefaults) SetLevel(v LogLevel_Level) {
 	m.Level = v
 }
 
-func (m *LogEntryDefaults) SetJsonPayload(v *_struct.Struct) {
+func (m *LogEntryDefaults) SetJsonPayload(v *structpb.Struct) {
 	m.JsonPayload = v
 }
 

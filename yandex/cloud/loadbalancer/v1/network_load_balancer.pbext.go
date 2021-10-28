@@ -3,7 +3,7 @@
 package loadbalancer
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *NetworkLoadBalancer) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *NetworkLoadBalancer) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *NetworkLoadBalancer) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *NetworkLoadBalancer) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

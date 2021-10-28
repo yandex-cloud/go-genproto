@@ -3,8 +3,8 @@
 package saml
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Federation) SetId(v string) {
@@ -23,11 +23,11 @@ func (m *Federation) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Federation) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Federation) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Federation) SetCookieMaxAge(v *duration.Duration) {
+func (m *Federation) SetCookieMaxAge(v *durationpb.Duration) {
 	m.CookieMaxAge = v
 }
 

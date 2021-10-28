@@ -3,26 +3,26 @@
 package sqlserver
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-func (m *SQLServerConfig2016Sp2Std) SetMaxDegreeOfParallelism(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Std) SetMaxDegreeOfParallelism(v *wrapperspb.Int64Value) {
 	m.MaxDegreeOfParallelism = v
 }
 
-func (m *SQLServerConfig2016Sp2Std) SetCostThresholdForParallelism(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Std) SetCostThresholdForParallelism(v *wrapperspb.Int64Value) {
 	m.CostThresholdForParallelism = v
 }
 
-func (m *SQLServerConfig2016Sp2Std) SetAuditLevel(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Std) SetAuditLevel(v *wrapperspb.Int64Value) {
 	m.AuditLevel = v
 }
 
-func (m *SQLServerConfig2016Sp2Std) SetFillFactorPercent(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Std) SetFillFactorPercent(v *wrapperspb.Int64Value) {
 	m.FillFactorPercent = v
 }
 
-func (m *SQLServerConfig2016Sp2Std) SetOptimizeForAdHocWorkloads(v *wrappers.BoolValue) {
+func (m *SQLServerConfig2016Sp2Std) SetOptimizeForAdHocWorkloads(v *wrapperspb.BoolValue) {
 	m.OptimizeForAdHocWorkloads = v
 }
 
@@ -38,23 +38,23 @@ func (m *SQLServerConfigSet2016Sp2Std) SetDefaultConfig(v *SQLServerConfig2016Sp
 	m.DefaultConfig = v
 }
 
-func (m *SQLServerConfig2016Sp2Ent) SetMaxDegreeOfParallelism(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Ent) SetMaxDegreeOfParallelism(v *wrapperspb.Int64Value) {
 	m.MaxDegreeOfParallelism = v
 }
 
-func (m *SQLServerConfig2016Sp2Ent) SetCostThresholdForParallelism(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Ent) SetCostThresholdForParallelism(v *wrapperspb.Int64Value) {
 	m.CostThresholdForParallelism = v
 }
 
-func (m *SQLServerConfig2016Sp2Ent) SetAuditLevel(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Ent) SetAuditLevel(v *wrapperspb.Int64Value) {
 	m.AuditLevel = v
 }
 
-func (m *SQLServerConfig2016Sp2Ent) SetFillFactorPercent(v *wrappers.Int64Value) {
+func (m *SQLServerConfig2016Sp2Ent) SetFillFactorPercent(v *wrapperspb.Int64Value) {
 	m.FillFactorPercent = v
 }
 
-func (m *SQLServerConfig2016Sp2Ent) SetOptimizeForAdHocWorkloads(v *wrappers.BoolValue) {
+func (m *SQLServerConfig2016Sp2Ent) SetOptimizeForAdHocWorkloads(v *wrapperspb.BoolValue) {
 	m.OptimizeForAdHocWorkloads = v
 }
 

@@ -3,9 +3,9 @@
 package apploadbalancer
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 type BackendGroup_Backend = isBackendGroup_Backend
@@ -52,7 +52,7 @@ func (m *BackendGroup) SetStream(v *StreamBackendGroup) {
 	}
 }
 
-func (m *BackendGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *BackendGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -136,7 +136,7 @@ func (m *CookieSessionAffinity) SetName(v string) {
 	m.Name = v
 }
 
-func (m *CookieSessionAffinity) SetTtl(v *duration.Duration) {
+func (m *CookieSessionAffinity) SetTtl(v *durationpb.Duration) {
 	m.Ttl = v
 }
 
@@ -170,7 +170,7 @@ func (m *StreamBackend) SetName(v string) {
 	m.Name = v
 }
 
-func (m *StreamBackend) SetBackendWeight(v *wrappers.Int64Value) {
+func (m *StreamBackend) SetBackendWeight(v *wrapperspb.Int64Value) {
 	m.BackendWeight = v
 }
 
@@ -206,7 +206,7 @@ func (m *HttpBackend) SetName(v string) {
 	m.Name = v
 }
 
-func (m *HttpBackend) SetBackendWeight(v *wrappers.Int64Value) {
+func (m *HttpBackend) SetBackendWeight(v *wrapperspb.Int64Value) {
 	m.BackendWeight = v
 }
 
@@ -252,7 +252,7 @@ func (m *GrpcBackend) SetName(v string) {
 	m.Name = v
 }
 
-func (m *GrpcBackend) SetBackendWeight(v *wrappers.Int64Value) {
+func (m *GrpcBackend) SetBackendWeight(v *wrapperspb.Int64Value) {
 	m.BackendWeight = v
 }
 
@@ -300,11 +300,11 @@ func (m *HealthCheck) SetHealthcheck(v HealthCheck_Healthcheck) {
 	m.Healthcheck = v
 }
 
-func (m *HealthCheck) SetTimeout(v *duration.Duration) {
+func (m *HealthCheck) SetTimeout(v *durationpb.Duration) {
 	m.Timeout = v
 }
 
-func (m *HealthCheck) SetInterval(v *duration.Duration) {
+func (m *HealthCheck) SetInterval(v *durationpb.Duration) {
 	m.Interval = v
 }
 

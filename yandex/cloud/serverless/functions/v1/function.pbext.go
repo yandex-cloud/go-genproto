@@ -3,8 +3,8 @@
 package functions
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Function) SetId(v string) {
@@ -15,7 +15,7 @@ func (m *Function) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Function) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Function) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -55,7 +55,7 @@ func (m *Version) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Version) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Version) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -71,7 +71,7 @@ func (m *Version) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *Version) SetExecutionTimeout(v *duration.Duration) {
+func (m *Version) SetExecutionTimeout(v *durationpb.Duration) {
 	m.ExecutionTimeout = v
 }
 
@@ -139,11 +139,11 @@ func (m *ScalingPolicy) SetTag(v string) {
 	m.Tag = v
 }
 
-func (m *ScalingPolicy) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *ScalingPolicy) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *ScalingPolicy) SetModifiedAt(v *timestamp.Timestamp) {
+func (m *ScalingPolicy) SetModifiedAt(v *timestamppb.Timestamp) {
 	m.ModifiedAt = v
 }
 

@@ -3,7 +3,7 @@
 package datasphere
 
 import (
-	_struct "github.com/golang/protobuf/ptypes/struct"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 )
 
 func (m *NodeExecutionRequest) SetFolderId(v string) {
@@ -14,10 +14,10 @@ func (m *NodeExecutionRequest) SetNodeId(v string) {
 	m.NodeId = v
 }
 
-func (m *NodeExecutionRequest) SetInput(v *_struct.Struct) {
+func (m *NodeExecutionRequest) SetInput(v *structpb.Struct) {
 	m.Input = v
 }
 
-func (m *NodeExecutionResponse) SetOutput(v *_struct.Struct) {
+func (m *NodeExecutionResponse) SetOutput(v *structpb.Struct) {
 	m.Output = v
 }

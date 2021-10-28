@@ -3,7 +3,7 @@
 package mysql
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type MaintenanceWindow_Policy = isMaintenanceWindow_Policy
@@ -36,6 +36,6 @@ func (m *MaintenanceOperation) SetInfo(v string) {
 	m.Info = v
 }
 
-func (m *MaintenanceOperation) SetDelayedUntil(v *timestamp.Timestamp) {
+func (m *MaintenanceOperation) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
 }

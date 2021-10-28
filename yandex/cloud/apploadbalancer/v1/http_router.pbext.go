@@ -3,7 +3,7 @@
 package apploadbalancer
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *HttpRouter) SetId(v string) {
@@ -30,7 +30,7 @@ func (m *HttpRouter) SetVirtualHosts(v []*VirtualHost) {
 	m.VirtualHosts = v
 }
 
-func (m *HttpRouter) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *HttpRouter) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

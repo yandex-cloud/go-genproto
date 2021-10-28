@@ -3,10 +3,10 @@
 package postgresql
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/postgresql/v1/config"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -17,7 +17,7 @@ func (m *Cluster) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Cluster) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Cluster) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -151,7 +151,7 @@ func (m *ClusterConfig) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *ClusterConfig) SetAutofailover(v *wrappers.BoolValue) {
+func (m *ClusterConfig) SetAutofailover(v *wrapperspb.BoolValue) {
 	m.Autofailover = v
 }
 
@@ -159,7 +159,7 @@ func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
 
-func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrappers.Int64Value) {
+func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
 }
 
@@ -175,7 +175,7 @@ func (m *ConnectionPoolerConfig) SetPoolingMode(v ConnectionPoolerConfig_Pooling
 	m.PoolingMode = v
 }
 
-func (m *ConnectionPoolerConfig) SetPoolDiscard(v *wrappers.BoolValue) {
+func (m *ConnectionPoolerConfig) SetPoolDiscard(v *wrapperspb.BoolValue) {
 	m.PoolDiscard = v
 }
 
@@ -215,7 +215,7 @@ func (m *Host) SetReplicationSource(v string) {
 	m.ReplicationSource = v
 }
 
-func (m *Host) SetPriority(v *wrappers.Int64Value) {
+func (m *Host) SetPriority(v *wrapperspb.Int64Value) {
 	m.Priority = v
 }
 

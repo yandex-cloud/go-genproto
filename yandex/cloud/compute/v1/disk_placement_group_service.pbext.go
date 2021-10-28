@@ -4,7 +4,7 @@ package compute
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetDiskPlacementGroupRequest) SetDiskPlacementGroupId(v string) {
@@ -75,7 +75,7 @@ func (m *UpdateDiskPlacementGroupRequest) SetDiskPlacementGroupId(v string) {
 	m.DiskPlacementGroupId = v
 }
 
-func (m *UpdateDiskPlacementGroupRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateDiskPlacementGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

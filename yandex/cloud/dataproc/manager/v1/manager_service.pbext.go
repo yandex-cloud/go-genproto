@@ -3,7 +3,7 @@
 package dataproc_manager
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *HbaseNodeInfo) SetName(v string) {
@@ -238,7 +238,7 @@ func (m *ReportRequest) SetInfo(v *Info) {
 	m.Info = v
 }
 
-func (m *ReportRequest) SetCollectedAt(v *timestamp.Timestamp) {
+func (m *ReportRequest) SetCollectedAt(v *timestamppb.Timestamp) {
 	m.CollectedAt = v
 }
 

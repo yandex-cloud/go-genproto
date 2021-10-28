@@ -3,9 +3,9 @@
 package logging
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetLogGroupRequest) SetLogGroupId(v string) {
@@ -56,7 +56,7 @@ func (m *CreateLogGroupRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreateLogGroupRequest) SetRetentionPeriod(v *duration.Duration) {
+func (m *CreateLogGroupRequest) SetRetentionPeriod(v *durationpb.Duration) {
 	m.RetentionPeriod = v
 }
 
@@ -68,7 +68,7 @@ func (m *UpdateLogGroupRequest) SetLogGroupId(v string) {
 	m.LogGroupId = v
 }
 
-func (m *UpdateLogGroupRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateLogGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -84,7 +84,7 @@ func (m *UpdateLogGroupRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *UpdateLogGroupRequest) SetRetentionPeriod(v *duration.Duration) {
+func (m *UpdateLogGroupRequest) SetRetentionPeriod(v *durationpb.Duration) {
 	m.RetentionPeriod = v
 }
 

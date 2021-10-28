@@ -3,7 +3,7 @@
 package devices
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Device) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Device) SetRegistryId(v string) {
 	m.RegistryId = v
 }
 
-func (m *Device) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Device) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -50,7 +50,7 @@ func (m *DeviceCertificate) SetCertificateData(v string) {
 	m.CertificateData = v
 }
 
-func (m *DeviceCertificate) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *DeviceCertificate) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -62,7 +62,7 @@ func (m *DevicePassword) SetId(v string) {
 	m.Id = v
 }
 
-func (m *DevicePassword) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *DevicePassword) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -70,18 +70,18 @@ func (m *DeviceMonitoringData) SetLastAuthIp(v string) {
 	m.LastAuthIp = v
 }
 
-func (m *DeviceMonitoringData) SetLastAuthTime(v *timestamp.Timestamp) {
+func (m *DeviceMonitoringData) SetLastAuthTime(v *timestamppb.Timestamp) {
 	m.LastAuthTime = v
 }
 
-func (m *DeviceMonitoringData) SetLastPubActivityTime(v *timestamp.Timestamp) {
+func (m *DeviceMonitoringData) SetLastPubActivityTime(v *timestamppb.Timestamp) {
 	m.LastPubActivityTime = v
 }
 
-func (m *DeviceMonitoringData) SetLastSubActivityTime(v *timestamp.Timestamp) {
+func (m *DeviceMonitoringData) SetLastSubActivityTime(v *timestamppb.Timestamp) {
 	m.LastSubActivityTime = v
 }
 
-func (m *DeviceMonitoringData) SetLastOnlineTime(v *timestamp.Timestamp) {
+func (m *DeviceMonitoringData) SetLastOnlineTime(v *timestamppb.Timestamp) {
 	m.LastOnlineTime = v
 }

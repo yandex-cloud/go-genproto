@@ -3,7 +3,7 @@
 package saml
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Certificate) SetId(v string) {
@@ -22,7 +22,7 @@ func (m *Certificate) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Certificate) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Certificate) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

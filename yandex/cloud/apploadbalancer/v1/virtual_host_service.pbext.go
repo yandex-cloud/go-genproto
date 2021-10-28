@@ -3,7 +3,7 @@
 package apploadbalancer
 
 import (
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetVirtualHostRequest) SetHttpRouterId(v string) {
@@ -74,7 +74,7 @@ func (m *UpdateVirtualHostRequest) SetVirtualHostName(v string) {
 	m.VirtualHostName = v
 }
 
-func (m *UpdateVirtualHostRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateVirtualHostRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -160,7 +160,7 @@ func (m *UpdateRouteRequest) SetRouteName(v string) {
 	m.RouteName = v
 }
 
-func (m *UpdateRouteRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateRouteRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

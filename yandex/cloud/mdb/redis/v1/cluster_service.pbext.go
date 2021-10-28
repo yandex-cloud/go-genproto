@@ -3,12 +3,12 @@
 package redis
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -79,7 +79,7 @@ func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
-func (m *CreateClusterRequest) SetTlsEnabled(v *wrappers.BoolValue) {
+func (m *CreateClusterRequest) SetTlsEnabled(v *wrapperspb.BoolValue) {
 	m.TlsEnabled = v
 }
 
@@ -95,7 +95,7 @@ func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *UpdateClusterRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateClusterRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -223,7 +223,7 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
-func (m *RestoreClusterRequest) SetTlsEnabled(v *wrappers.BoolValue) {
+func (m *RestoreClusterRequest) SetTlsEnabled(v *wrapperspb.BoolValue) {
 	m.TlsEnabled = v
 }
 
@@ -259,7 +259,7 @@ func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenance
 	m.RescheduleType = v
 }
 
-func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamp.Timestamp) {
+func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
 }
 
@@ -267,11 +267,11 @@ func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamp.Timestamp) {
+func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
 }
 
-func (m *LogRecord) SetTimestamp(v *timestamp.Timestamp) {
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
@@ -291,11 +291,11 @@ func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_Service
 	m.ServiceType = v
 }
 
-func (m *ListClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *ListClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 
@@ -335,11 +335,11 @@ func (m *StreamClusterLogsRequest) SetServiceType(v StreamClusterLogsRequest_Ser
 	m.ServiceType = v
 }
 
-func (m *StreamClusterLogsRequest) SetFromTime(v *timestamp.Timestamp) {
+func (m *StreamClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
 	m.FromTime = v
 }
 
-func (m *StreamClusterLogsRequest) SetToTime(v *timestamp.Timestamp) {
+func (m *StreamClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
 	m.ToTime = v
 }
 

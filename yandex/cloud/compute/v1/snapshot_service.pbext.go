@@ -4,7 +4,7 @@ package compute
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetSnapshotRequest) SetSnapshotId(v string) {
@@ -67,7 +67,7 @@ func (m *UpdateSnapshotRequest) SetSnapshotId(v string) {
 	m.SnapshotId = v
 }
 
-func (m *UpdateSnapshotRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateSnapshotRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

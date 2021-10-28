@@ -3,7 +3,7 @@
 package lockbox
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *Secret) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *Secret) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Secret) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Secret) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
@@ -54,11 +54,11 @@ func (m *Version) SetSecretId(v string) {
 	m.SecretId = v
 }
 
-func (m *Version) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Version) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Version) SetDestroyAt(v *timestamp.Timestamp) {
+func (m *Version) SetDestroyAt(v *timestamppb.Timestamp) {
 	m.DestroyAt = v
 }
 

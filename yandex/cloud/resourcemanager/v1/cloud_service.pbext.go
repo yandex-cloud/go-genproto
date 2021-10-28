@@ -3,9 +3,9 @@
 package resourcemanager
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetCloudRequest) SetCloudId(v string) {
@@ -76,7 +76,7 @@ func (m *UpdateCloudRequest) SetCloudId(v string) {
 	m.CloudId = v
 }
 
-func (m *UpdateCloudRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateCloudRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -100,7 +100,7 @@ func (m *DeleteCloudRequest) SetCloudId(v string) {
 	m.CloudId = v
 }
 
-func (m *DeleteCloudRequest) SetDeleteAfter(v *timestamp.Timestamp) {
+func (m *DeleteCloudRequest) SetDeleteAfter(v *timestamppb.Timestamp) {
 	m.DeleteAfter = v
 }
 
@@ -108,6 +108,6 @@ func (m *DeleteCloudMetadata) SetCloudId(v string) {
 	m.CloudId = v
 }
 
-func (m *DeleteCloudMetadata) SetDeleteAfter(v *timestamp.Timestamp) {
+func (m *DeleteCloudMetadata) SetDeleteAfter(v *timestamppb.Timestamp) {
 	m.DeleteAfter = v
 }

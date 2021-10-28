@@ -3,8 +3,8 @@
 package containerregistry
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetLifecyclePolicyRequest) SetLifecyclePolicyId(v string) {
@@ -77,7 +77,7 @@ func (m *UpdateLifecyclePolicyRequest) SetLifecyclePolicyId(v string) {
 	m.LifecyclePolicyId = v
 }
 
-func (m *UpdateLifecyclePolicyRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateLifecyclePolicyRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -133,7 +133,7 @@ func (m *DryRunLifecyclePolicyResult) SetLifecyclePolicyId(v string) {
 	m.LifecyclePolicyId = v
 }
 
-func (m *DryRunLifecyclePolicyResult) SetRunAt(v *timestamp.Timestamp) {
+func (m *DryRunLifecyclePolicyResult) SetRunAt(v *timestamppb.Timestamp) {
 	m.RunAt = v
 }
 

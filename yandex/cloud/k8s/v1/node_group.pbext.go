@@ -3,7 +3,7 @@
 package k8s
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *NodeGroup) SetId(v string) {
@@ -14,7 +14,7 @@ func (m *NodeGroup) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *NodeGroup) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *NodeGroup) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

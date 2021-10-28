@@ -3,7 +3,7 @@
 package loadbalancer
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 )
 
 type HealthCheck_Options = isHealthCheck_Options
@@ -16,11 +16,11 @@ func (m *HealthCheck) SetName(v string) {
 	m.Name = v
 }
 
-func (m *HealthCheck) SetInterval(v *duration.Duration) {
+func (m *HealthCheck) SetInterval(v *durationpb.Duration) {
 	m.Interval = v
 }
 
-func (m *HealthCheck) SetTimeout(v *duration.Duration) {
+func (m *HealthCheck) SetTimeout(v *durationpb.Duration) {
 	m.Timeout = v
 }
 

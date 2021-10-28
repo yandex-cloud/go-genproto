@@ -3,7 +3,7 @@
 package cdn
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetOriginGroupRequest) SetFolderId(v string) {
@@ -42,7 +42,7 @@ func (m *CreateOriginGroupRequest) SetName(v string) {
 	m.Name = v
 }
 
-func (m *CreateOriginGroupRequest) SetUseNext(v *wrappers.BoolValue) {
+func (m *CreateOriginGroupRequest) SetUseNext(v *wrapperspb.BoolValue) {
 	m.UseNext = v
 }
 
@@ -62,11 +62,11 @@ func (m *UpdateOriginGroupRequest) SetOriginGroupId(v int64) {
 	m.OriginGroupId = v
 }
 
-func (m *UpdateOriginGroupRequest) SetGroupName(v *wrappers.StringValue) {
+func (m *UpdateOriginGroupRequest) SetGroupName(v *wrapperspb.StringValue) {
 	m.GroupName = v
 }
 
-func (m *UpdateOriginGroupRequest) SetUseNext(v *wrappers.BoolValue) {
+func (m *UpdateOriginGroupRequest) SetUseNext(v *wrapperspb.BoolValue) {
 	m.UseNext = v
 }
 

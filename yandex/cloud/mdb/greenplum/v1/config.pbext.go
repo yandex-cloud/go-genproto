@@ -3,7 +3,7 @@
 package greenplum
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Resources) SetResourcePresetId(v string) {
@@ -38,11 +38,11 @@ func (m *GreenplumMasterConfig) SetLogLevel(v GreenplumMasterConfig_LogLevel) {
 	m.LogLevel = v
 }
 
-func (m *GreenplumMasterConfig) SetMaxConnections(v *wrappers.Int64Value) {
+func (m *GreenplumMasterConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
 
-func (m *GreenplumMasterConfig) SetTimezone(v *wrappers.StringValue) {
+func (m *GreenplumMasterConfig) SetTimezone(v *wrapperspb.StringValue) {
 	m.Timezone = v
 }
 
@@ -50,7 +50,7 @@ func (m *GreenplumSegmentConfig) SetLogLevel(v GreenplumSegmentConfig_LogLevel) 
 	m.LogLevel = v
 }
 
-func (m *GreenplumSegmentConfig) SetMaxConnections(v *wrappers.Int64Value) {
+func (m *GreenplumSegmentConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
 

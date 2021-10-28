@@ -3,7 +3,7 @@
 package ydb
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Database_DatabaseType = isDatabase_DatabaseType
@@ -20,7 +20,7 @@ func (m *Database) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Database) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Database) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

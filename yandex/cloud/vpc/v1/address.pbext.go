@@ -3,7 +3,7 @@
 package vpc
 
 import (
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Address_Address = isAddress_Address
@@ -20,7 +20,7 @@ func (m *Address) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *Address) SetCreatedAt(v *timestamp.Timestamp) {
+func (m *Address) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 

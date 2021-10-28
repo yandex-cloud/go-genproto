@@ -4,7 +4,7 @@ package triggers
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetTriggerRequest) SetTriggerId(v string) {
@@ -63,7 +63,7 @@ func (m *UpdateTriggerRequest) SetTriggerId(v string) {
 	m.TriggerId = v
 }
 
-func (m *UpdateTriggerRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateTriggerRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 

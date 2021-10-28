@@ -3,10 +3,10 @@
 package kms
 
 import (
-	duration "github.com/golang/protobuf/ptypes/duration"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	field_mask "google.golang.org/genproto/protobuf/field_mask"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *CreateSymmetricKeyRequest) SetFolderId(v string) {
@@ -29,7 +29,7 @@ func (m *CreateSymmetricKeyRequest) SetDefaultAlgorithm(v SymmetricAlgorithm) {
 	m.DefaultAlgorithm = v
 }
 
-func (m *CreateSymmetricKeyRequest) SetRotationPeriod(v *duration.Duration) {
+func (m *CreateSymmetricKeyRequest) SetRotationPeriod(v *durationpb.Duration) {
 	m.RotationPeriod = v
 }
 
@@ -93,7 +93,7 @@ func (m *UpdateSymmetricKeyRequest) SetKeyId(v string) {
 	m.KeyId = v
 }
 
-func (m *UpdateSymmetricKeyRequest) SetUpdateMask(v *field_mask.FieldMask) {
+func (m *UpdateSymmetricKeyRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
@@ -117,7 +117,7 @@ func (m *UpdateSymmetricKeyRequest) SetDefaultAlgorithm(v SymmetricAlgorithm) {
 	m.DefaultAlgorithm = v
 }
 
-func (m *UpdateSymmetricKeyRequest) SetRotationPeriod(v *duration.Duration) {
+func (m *UpdateSymmetricKeyRequest) SetRotationPeriod(v *durationpb.Duration) {
 	m.RotationPeriod = v
 }
 
@@ -173,7 +173,7 @@ func (m *ScheduleSymmetricKeyVersionDestructionRequest) SetVersionId(v string) {
 	m.VersionId = v
 }
 
-func (m *ScheduleSymmetricKeyVersionDestructionRequest) SetPendingPeriod(v *duration.Duration) {
+func (m *ScheduleSymmetricKeyVersionDestructionRequest) SetPendingPeriod(v *durationpb.Duration) {
 	m.PendingPeriod = v
 }
 
@@ -185,7 +185,7 @@ func (m *ScheduleSymmetricKeyVersionDestructionMetadata) SetVersionId(v string) 
 	m.VersionId = v
 }
 
-func (m *ScheduleSymmetricKeyVersionDestructionMetadata) SetDestroyAt(v *timestamp.Timestamp) {
+func (m *ScheduleSymmetricKeyVersionDestructionMetadata) SetDestroyAt(v *timestamppb.Timestamp) {
 	m.DestroyAt = v
 }
 
