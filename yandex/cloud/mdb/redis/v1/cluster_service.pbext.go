@@ -239,8 +239,16 @@ func (m *StartClusterFailoverRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *StartClusterFailoverRequest) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
 func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *StartClusterFailoverMetadata) SetHostNames(v []string) {
+	m.HostNames = v
 }
 
 func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {

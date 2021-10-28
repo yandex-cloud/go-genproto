@@ -224,3 +224,31 @@ func (m *GetStateVariablesRequest) SetCheckpointId(v string) {
 func (m *GetStateVariablesResponse) SetVariables(v *_struct.Struct) {
 	m.Variables = v
 }
+
+func (m *GetNotebookMetadataRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *GetNotebookMetadataRequest) SetNotebookPath(v string) {
+	m.NotebookPath = v
+}
+
+func (m *GetNotebookMetadataResponse) SetNotebookId(v string) {
+	m.NotebookId = v
+}
+
+func (m *GetNotebookMetadataResponse) SetCreatedAt(v *timestamp.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *GetNotebookMetadataResponse) SetModifiedAt(v *timestamp.Timestamp) {
+	m.ModifiedAt = v
+}
+
+func (m *GetNotebookMetadataResponse) SetContentLength(v int64) {
+	m.ContentLength = v
+}
+
+func (m *GetNotebookMetadataResponse) SetCellIds(v []string) {
+	m.CellIds = v
+}

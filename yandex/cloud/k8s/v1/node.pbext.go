@@ -134,7 +134,15 @@ func (m *NodeTemplate) SetNetworkSettings(v *NodeTemplate_NetworkSettings) {
 	m.NetworkSettings = v
 }
 
+func (m *NodeTemplate) SetContainerRuntimeSettings(v *NodeTemplate_ContainerRuntimeSettings) {
+	m.ContainerRuntimeSettings = v
+}
+
 func (m *NodeTemplate_NetworkSettings) SetType(v NodeTemplate_NetworkSettings_Type) {
+	m.Type = v
+}
+
+func (m *NodeTemplate_ContainerRuntimeSettings) SetType(v NodeTemplate_ContainerRuntimeSettings_Type) {
 	m.Type = v
 }
 
