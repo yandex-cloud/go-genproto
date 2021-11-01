@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// An ApiKey resource.
+// An ApiKey resource. For more information, see [Api-Key](/docs/iam/concepts/authorization/api-key).
 type ApiKey struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

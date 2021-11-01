@@ -494,6 +494,10 @@ func (m *HostSpec) SetReplicationSource(v string) {
 	m.ReplicationSource = v
 }
 
+func (m *HostSpec) SetBackupPriority(v int64) {
+	m.BackupPriority = v
+}
+
 type ConfigSpec_MysqlConfig = isConfigSpec_MysqlConfig
 
 func (m *ConfigSpec) SetMysqlConfig(v ConfigSpec_MysqlConfig) {

@@ -158,6 +158,10 @@ func (m *Host) SetReplicationSource(v string) {
 	m.ReplicationSource = v
 }
 
+func (m *Host) SetBackupPriority(v int64) {
+	m.BackupPriority = v
+}
+
 func (m *Service) SetType(v Service_Type) {
 	m.Type = v
 }
