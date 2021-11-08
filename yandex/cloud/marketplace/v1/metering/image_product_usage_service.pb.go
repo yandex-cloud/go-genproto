@@ -27,11 +27,11 @@ type WriteImageProductUsageRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Checks whether you have the access required for the emit usage
+	// Checks whether you have the access required for the emit usage.
 	ValidateOnly bool `protobuf:"varint,1,opt,name=validate_only,json=validateOnly,proto3" json:"validate_only,omitempty"`
-	// Marketplace Product's ID
+	// Marketplace Product's ID.
 	ProductId string `protobuf:"bytes,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	// List of product usage records (up to 25 pet request)
+	// List of product usage records (up to 25 pet request).
 	UsageRecords []*UsageRecord `protobuf:"bytes,3,rep,name=usage_records,json=usageRecords,proto3" json:"usage_records,omitempty"`
 }
 
@@ -93,9 +93,9 @@ type WriteImageProductUsageResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of accepted product usage records
+	// List of accepted product usage records.
 	Accepted []*AcceptedUsageRecord `protobuf:"bytes,1,rep,name=accepted,proto3" json:"accepted,omitempty"`
-	// List of rejected product usage records (with reason)
+	// List of rejected product usage records (with reason).
 	Rejected []*RejectedUsageRecord `protobuf:"bytes,2,rep,name=rejected,proto3" json:"rejected,omitempty"`
 }
 

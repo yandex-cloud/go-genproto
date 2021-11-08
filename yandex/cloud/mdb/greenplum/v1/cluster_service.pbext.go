@@ -131,6 +131,14 @@ func (m *UpdateClusterRequest) SetConfig(v *GreenplumConfig) {
 	m.Config = v
 }
 
+func (m *UpdateClusterRequest) SetMasterConfig(v *MasterSubclusterConfigSpec) {
+	m.MasterConfig = v
+}
+
+func (m *UpdateClusterRequest) SetSegmentConfig(v *SegmentSubclusterConfigSpec) {
+	m.SegmentConfig = v
+}
+
 func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }

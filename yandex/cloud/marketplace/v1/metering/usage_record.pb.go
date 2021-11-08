@@ -91,13 +91,13 @@ type UsageRecord struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Unique identitifier of the usage record (UUID format)
+	// Unique identifier of the usage record (UUID format).
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Consumed Marketplace SaaS Sku ID, linked to `UsageRecord.product_id`
+	// Consumed Marketplace SaaS Sku ID, linked to `UsageRecord.product_id`.
 	SkuId string `protobuf:"bytes,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	// Quantity of sku consumed, measured in `sku.usage_unit` units (e.g. bytes)
+	// Quantity of sku consumed, measured in `sku.usage_unit` units (e.g. bytes).
 	Quantity int64 `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	// Timestamp in UTC for which the usage is being reported
+	// Timestamp in UTC for which the usage is being reported.
 	Timestamp *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 }
 
@@ -166,7 +166,7 @@ type AcceptedUsageRecord struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Unique identitifier of the usage record (UUID format)
+	// Unique identifier of the usage record (UUID format).
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 }
 
@@ -214,9 +214,9 @@ type RejectedUsageRecord struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Unique identitifier of the usage record (UUID format)
+	// Unique identifier of the usage record (UUID format).
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// The reason of rejection
+	// The reason of rejection.
 	Reason RejectedUsageRecord_Reason `protobuf:"varint,2,opt,name=reason,proto3,enum=yandex.cloud.marketplace.v1.metering.RejectedUsageRecord_Reason" json:"reason,omitempty"`
 }
 

@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ImageProductUsageServiceClient interface {
-	// Writes image product's usage (authenticated by user's service account)
+	// Writes image product's usage. Authentication is by user's service account.
 	Write(ctx context.Context, in *WriteImageProductUsageRequest, opts ...grpc.CallOption) (*WriteImageProductUsageResponse, error)
 }
 
@@ -43,7 +43,7 @@ func (c *imageProductUsageServiceClient) Write(ctx context.Context, in *WriteIma
 // All implementations should embed UnimplementedImageProductUsageServiceServer
 // for forward compatibility
 type ImageProductUsageServiceServer interface {
-	// Writes image product's usage (authenticated by user's service account)
+	// Writes image product's usage. Authentication is by user's service account.
 	Write(context.Context, *WriteImageProductUsageRequest) (*WriteImageProductUsageResponse, error)
 }
 
