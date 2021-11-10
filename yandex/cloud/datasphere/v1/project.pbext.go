@@ -51,6 +51,10 @@ func (m *Project_Settings) SetCommitMode(v Project_Settings_CommitMode) {
 	m.CommitMode = v
 }
 
+func (m *Project_Settings) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *Project_Limits) SetMaxUnitsPerHour(v *wrapperspb.Int64Value) {
 	m.MaxUnitsPerHour = v
 }
