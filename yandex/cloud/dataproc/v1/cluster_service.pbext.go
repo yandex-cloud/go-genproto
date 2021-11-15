@@ -55,6 +55,10 @@ func (m *CreateSubclusterConfigSpec) SetHostsCount(v int64) {
 	m.HostsCount = v
 }
 
+func (m *CreateSubclusterConfigSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
 func (m *CreateSubclusterConfigSpec) SetAutoscalingConfig(v *AutoscalingConfig) {
 	m.AutoscalingConfig = v
 }
