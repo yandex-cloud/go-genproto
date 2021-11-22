@@ -723,8 +723,8 @@ type ListClusterLogsRequest struct {
 	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently filtering can be applied to the `hostname` field.
-	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-z0-9.-]{1,61}`.
 	//
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
 	Filter string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
@@ -1026,8 +1026,8 @@ type StreamClusterLogsRequest struct {
 	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently filtering can be applied to the `hostname` field.
-	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]$`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	//
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
 	Filter string `protobuf:"bytes,6,opt,name=filter,proto3" json:"filter,omitempty"`

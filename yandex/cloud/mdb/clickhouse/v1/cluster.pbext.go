@@ -121,6 +121,10 @@ func (m *ClusterConfig) SetSqlUserManagement(v *wrapperspb.BoolValue) {
 	m.SqlUserManagement = v
 }
 
+func (m *ClusterConfig) SetEmbeddedKeeper(v *wrapperspb.BoolValue) {
+	m.EmbeddedKeeper = v
+}
+
 func (m *ClusterConfig_Clickhouse) SetConfig(v *config.ClickhouseConfigSet) {
 	m.Config = v
 }

@@ -242,8 +242,8 @@ type ListScanResultsRequest struct {
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [ScanResult.status] field.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. Value or a list of values to compare against the values of the field.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`).
 	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 	// An order expression that orders resources listed in the response.
 	// The expression must specify:
@@ -430,8 +430,8 @@ type ListVulnerabilitiesRequest struct {
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Vulnerability.severity] and [PackageVulnerability.name] fields.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. Value or a list of values to compare against the values of the field.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`).
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// An order expression that orders resources listed in the response.
 	// The expression must specify:

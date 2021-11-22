@@ -80,6 +80,14 @@ func (m *CreateJobMetadata) SetJobId(v string) {
 	m.JobId = v
 }
 
+func (m *CancelJobRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *CancelJobRequest) SetJobId(v string) {
+	m.JobId = v
+}
+
 func (m *ListJobLogRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

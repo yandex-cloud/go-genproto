@@ -107,6 +107,10 @@ func (m *UpdateClusterRequest) SetNetworkPolicy(v *NetworkPolicy) {
 	m.NetworkPolicy = v
 }
 
+func (m *UpdateClusterRequest) SetIpAllocationPolicy(v *IPAllocationPolicy) {
+	m.IpAllocationPolicy = v
+}
+
 func (m *MasterUpdateSpec) SetVersion(v *UpdateVersionSpec) {
 	m.Version = v
 }

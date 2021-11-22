@@ -96,8 +96,8 @@ type ListDnsZonesRequest struct {
 	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [DnsZone.name] field.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value or lists of values. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	// Example of a filter: `name=my-dns-zone`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
@@ -723,8 +723,8 @@ type ListDnsZoneRecordSetsRequest struct {
 	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [RecordSet.name] and [RecordSet.type] fields.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value or lists of values. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	// Example of a filter: `name=my-record-set`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
@@ -1091,8 +1091,8 @@ type ListDnsZoneOperationsRequest struct {
 	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [DnsZone.name] field.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value or lists of values. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	// Example of a filter: `name=my-dns-zone`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }

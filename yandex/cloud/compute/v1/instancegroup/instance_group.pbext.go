@@ -221,6 +221,10 @@ func (m *ScalePolicy_AutoScale) SetCustomRules(v []*ScalePolicy_CustomRule) {
 	m.CustomRules = v
 }
 
+func (m *ScalePolicy_AutoScale) SetAutoScaleType(v ScalePolicy_AutoScale_AutoScaleType) {
+	m.AutoScaleType = v
+}
+
 func (m *ScalePolicy_CpuUtilizationRule) SetUtilizationTarget(v float64) {
 	m.UtilizationTarget = v
 }

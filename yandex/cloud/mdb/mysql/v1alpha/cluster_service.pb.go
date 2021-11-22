@@ -142,8 +142,8 @@ type ListClustersRequest struct {
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-zA-Z0-9_-]+`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 

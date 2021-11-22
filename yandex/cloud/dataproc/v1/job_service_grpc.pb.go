@@ -27,6 +27,8 @@ type JobServiceClient interface {
 	Get(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*Job, error)
 	// Returns a log for specified job.
 	ListLog(ctx context.Context, in *ListJobLogRequest, opts ...grpc.CallOption) (*ListJobLogResponse, error)
+	// Cancels the specified Dataproc job.
+	Cancel(ctx context.Context, in *CancelJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type jobServiceClient struct {
@@ -73,6 +75,15 @@ func (c *jobServiceClient) ListLog(ctx context.Context, in *ListJobLogRequest, o
 	return out, nil
 }
 
+func (c *jobServiceClient) Cancel(ctx context.Context, in *CancelJobRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.dataproc.v1.JobService/Cancel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // JobServiceServer is the server API for JobService service.
 // All implementations should embed UnimplementedJobServiceServer
 // for forward compatibility
@@ -85,6 +96,8 @@ type JobServiceServer interface {
 	Get(context.Context, *GetJobRequest) (*Job, error)
 	// Returns a log for specified job.
 	ListLog(context.Context, *ListJobLogRequest) (*ListJobLogResponse, error)
+	// Cancels the specified Dataproc job.
+	Cancel(context.Context, *CancelJobRequest) (*operation.Operation, error)
 }
 
 // UnimplementedJobServiceServer should be embedded to have forward compatible implementations.
@@ -102,6 +115,9 @@ func (UnimplementedJobServiceServer) Get(context.Context, *GetJobRequest) (*Job,
 }
 func (UnimplementedJobServiceServer) ListLog(context.Context, *ListJobLogRequest) (*ListJobLogResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLog not implemented")
+}
+func (UnimplementedJobServiceServer) Cancel(context.Context, *CancelJobRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Cancel not implemented")
 }
 
 // UnsafeJobServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -187,6 +203,24 @@ func _JobService_ListLog_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _JobService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServiceServer).Cancel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.dataproc.v1.JobService/Cancel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServiceServer).Cancel(ctx, req.(*CancelJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // JobService_ServiceDesc is the grpc.ServiceDesc for JobService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -209,6 +243,10 @@ var JobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListLog",
 			Handler:    _JobService_ListLog_Handler,
+		},
+		{
+			MethodName: "Cancel",
+			Handler:    _JobService_Cancel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

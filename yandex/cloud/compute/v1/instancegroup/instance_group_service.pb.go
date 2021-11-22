@@ -354,7 +354,11 @@ type CreateInstanceGroupRequest struct {
 	DeployPolicy *DeployPolicy `protobuf:"bytes,8,opt,name=deploy_policy,json=deployPolicy,proto3" json:"deploy_policy,omitempty"`
 	// Allocation policy of the instance group by zones and regions.
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,9,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
-	// Load balancing specification.
+	// Settings for balancing load between instances via [Network Load Balancer](/docs/network-load-balancer/concepts)
+	// (OSI model layer 3).
+	//
+	// If specified, a Network Load Balancer target group containing all instances from the instance group will be created
+	// and attributed to the instance group.
 	LoadBalancerSpec *LoadBalancerSpec `protobuf:"bytes,10,opt,name=load_balancer_spec,json=loadBalancerSpec,proto3" json:"load_balancer_spec,omitempty"`
 	// Health checking specification. For more information, see [Health check](/docs/load-balancer/concepts/health-check).
 	HealthChecksSpec *HealthChecksSpec `protobuf:"bytes,11,opt,name=health_checks_spec,json=healthChecksSpec,proto3" json:"health_checks_spec,omitempty"`
@@ -369,7 +373,11 @@ type CreateInstanceGroupRequest struct {
 	//
 	// The default is `false`.
 	DeletionProtection bool `protobuf:"varint,14,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Application Load balancing (L7) specification.
+	// Settings for balancing load between instances via [Application Load Balancer](/docs/application-load-balancer/concepts)
+	// (OSI model layer 7).
+	//
+	// If specified, an Application Load Balancer target group containing all instances from the instance group will be created
+	// and attributed to the instance group.
 	ApplicationLoadBalancerSpec *ApplicationLoadBalancerSpec `protobuf:"bytes,15,opt,name=application_load_balancer_spec,json=applicationLoadBalancerSpec,proto3" json:"application_load_balancer_spec,omitempty"`
 }
 
@@ -641,7 +649,8 @@ type UpdateInstanceGroupRequest struct {
 	// made by the Instance Groups component on behalf of the user (for example, creating instances, adding them to load balancer target group, etc.). For more information, see [Service accounts](/docs/iam/concepts/users/service-accounts).
 	// To get the service account ID, use a [yandex.cloud.iam.v1.ServiceAccountService.List] request.
 	ServiceAccountId string `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Load Balancer specification for load balancing support.
+	// Settings for balancing load between instances via [Network Load Balancer](/docs/network-load-balancer/concepts)
+	// (OSI model layer 3).
 	LoadBalancerSpec *LoadBalancerSpec `protobuf:"bytes,14,opt,name=load_balancer_spec,json=loadBalancerSpec,proto3" json:"load_balancer_spec,omitempty"`
 	Variables        []*Variable       `protobuf:"bytes,15,rep,name=variables,proto3" json:"variables,omitempty"`
 	// Flag that inhibits deletion of the instance group
