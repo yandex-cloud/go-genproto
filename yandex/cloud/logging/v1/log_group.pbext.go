@@ -42,3 +42,7 @@ func (m *LogGroup) SetStatus(v LogGroup_Status) {
 func (m *LogGroup) SetRetentionPeriod(v *durationpb.Duration) {
 	m.RetentionPeriod = v
 }
+
+func (m *LogGroup) SetDataStream(v string) {
+	m.DataStream = v
+}
