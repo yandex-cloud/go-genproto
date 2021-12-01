@@ -140,9 +140,9 @@ func (m *Listener) SetTls(v *TlsListener) {
 	}
 }
 
-func (m *Listener) SetTcp(v *TcpListener) {
-	m.Listener = &Listener_Tcp{
-		Tcp: v,
+func (m *Listener) SetStream(v *StreamListener) {
+	m.Listener = &Listener_Stream{
+		Stream: v,
 	}
 }
 
@@ -170,7 +170,7 @@ func (m *TlsListener) SetSniHandlers(v []*SniMatch) {
 	m.SniHandlers = v
 }
 
-func (m *TcpListener) SetHandler(v *StreamHandler) {
+func (m *StreamListener) SetHandler(v *StreamHandler) {
 	m.Handler = v
 }
 

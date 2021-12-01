@@ -27,6 +27,8 @@ type ConnectorServiceClient interface {
 	List(ctx context.Context, in *ListConnectorsRequest, opts ...grpc.CallOption) (*ListConnectorsResponse, error)
 	// Creates a new Apache Kafka connector in the specified cluster.
 	Create(ctx context.Context, in *CreateConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates an Apache Kafka connector in the specified cluster.
+	Update(ctx context.Context, in *UpdateConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Apache Kafka connector.
 	Delete(ctx context.Context, in *DeleteConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resume the specified Apache Kafka connector.
@@ -64,6 +66,15 @@ func (c *connectorServiceClient) List(ctx context.Context, in *ListConnectorsReq
 func (c *connectorServiceClient) Create(ctx context.Context, in *CreateConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.kafka.v1.ConnectorService/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectorServiceClient) Update(ctx context.Context, in *UpdateConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.kafka.v1.ConnectorService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,6 +120,8 @@ type ConnectorServiceServer interface {
 	List(context.Context, *ListConnectorsRequest) (*ListConnectorsResponse, error)
 	// Creates a new Apache Kafka connector in the specified cluster.
 	Create(context.Context, *CreateConnectorRequest) (*operation.Operation, error)
+	// Updates an Apache Kafka connector in the specified cluster.
+	Update(context.Context, *UpdateConnectorRequest) (*operation.Operation, error)
 	// Deletes the specified Apache Kafka connector.
 	Delete(context.Context, *DeleteConnectorRequest) (*operation.Operation, error)
 	// Resume the specified Apache Kafka connector.
@@ -129,6 +142,9 @@ func (UnimplementedConnectorServiceServer) List(context.Context, *ListConnectors
 }
 func (UnimplementedConnectorServiceServer) Create(context.Context, *CreateConnectorRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedConnectorServiceServer) Update(context.Context, *UpdateConnectorRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedConnectorServiceServer) Delete(context.Context, *DeleteConnectorRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -205,6 +221,24 @@ func _ConnectorService_Create_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConnectorService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateConnectorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectorServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.kafka.v1.ConnectorService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectorServiceServer).Update(ctx, req.(*UpdateConnectorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ConnectorService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteConnectorRequest)
 	if err := dec(in); err != nil {
@@ -277,6 +311,10 @@ var ConnectorService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _ConnectorService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _ConnectorService_Update_Handler,
 		},
 		{
 			MethodName: "Delete",

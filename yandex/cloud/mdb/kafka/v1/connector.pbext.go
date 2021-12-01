@@ -30,6 +30,26 @@ func (m *ConnectorSpec) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMa
 	}
 }
 
+type UpdateConnectorSpec_ConnectorConfig = isUpdateConnectorSpec_ConnectorConfig
+
+func (m *UpdateConnectorSpec) SetConnectorConfig(v UpdateConnectorSpec_ConnectorConfig) {
+	m.ConnectorConfig = v
+}
+
+func (m *UpdateConnectorSpec) SetTasksMax(v *wrapperspb.Int64Value) {
+	m.TasksMax = v
+}
+
+func (m *UpdateConnectorSpec) SetProperties(v map[string]string) {
+	m.Properties = v
+}
+
+func (m *UpdateConnectorSpec) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMakerSpec) {
+	m.ConnectorConfig = &UpdateConnectorSpec_ConnectorConfigMirrormaker{
+		ConnectorConfigMirrormaker: v,
+	}
+}
+
 func (m *ConnectorConfigMirrorMakerSpec) SetSourceCluster(v *ClusterConnectionSpec) {
 	m.SourceCluster = v
 }

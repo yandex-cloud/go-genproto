@@ -37,6 +37,8 @@ type ClusterServiceClient interface {
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified Apache Kafka® cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Reschedule planned maintenance operation.
+	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified Apache Kafka® cluster.
 	//
 	// For more information about logs, see the [Logs](/docs/managed-kafka/operations/cluster-logs) section in the documentation.
@@ -129,6 +131,15 @@ func (c *clusterServiceClient) Stop(ctx context.Context, in *StopClusterRequest,
 	return out, nil
 }
 
+func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.kafka.v1.ClusterService/RescheduleMaintenance", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error) {
 	out := new(ListClusterLogsResponse)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.kafka.v1.ClusterService/ListLogs", in, out, opts...)
@@ -210,6 +221,8 @@ type ClusterServiceServer interface {
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
 	// Stops the specified Apache Kafka® cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Reschedule planned maintenance operation.
+	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified Apache Kafka® cluster.
 	//
 	// For more information about logs, see the [Logs](/docs/managed-kafka/operations/cluster-logs) section in the documentation.
@@ -249,6 +262,9 @@ func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterReq
 }
 func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RescheduleMaintenance not implemented")
 }
 func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
@@ -418,6 +434,24 @@ func _ClusterService_Stop_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_RescheduleMaintenance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RescheduleMaintenanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.kafka.v1.ClusterService/RescheduleMaintenance",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, req.(*RescheduleMaintenanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterLogsRequest)
 	if err := dec(in); err != nil {
@@ -531,6 +565,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _ClusterService_Stop_Handler,
+		},
+		{
+			MethodName: "RescheduleMaintenance",
+			Handler:    _ClusterService_RescheduleMaintenance_Handler,
 		},
 		{
 			MethodName: "ListLogs",

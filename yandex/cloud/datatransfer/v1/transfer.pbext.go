@@ -18,6 +18,10 @@ func (m *Transfer) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *Transfer) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *Transfer) SetSource(v *Endpoint) {
 	m.Source = v
 }

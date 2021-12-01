@@ -2,6 +2,10 @@
 
 package datatransfer
 
+import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
 func (m *CreateTransferRequest) SetSourceId(v string) {
 	m.SourceId = v
 }
@@ -16,6 +20,10 @@ func (m *CreateTransferRequest) SetName(v string) {
 
 func (m *CreateTransferRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *CreateTransferRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *CreateTransferRequest) SetFolderId(v string) {
@@ -38,8 +46,16 @@ func (m *UpdateTransferRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *UpdateTransferRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *UpdateTransferRequest) SetName(v string) {
 	m.Name = v
+}
+
+func (m *UpdateTransferRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateTransferMetadata) SetTransferId(v string) {
@@ -52,6 +68,26 @@ func (m *DeleteTransferRequest) SetTransferId(v string) {
 
 func (m *DeleteTransferMetadata) SetTransferId(v string) {
 	m.TransferId = v
+}
+
+func (m *ListTransfersRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListTransfersRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListTransfersRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListTransfersResponse) SetTransfers(v []*Transfer) {
+	m.Transfers = v
+}
+
+func (m *ListTransfersResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *GetTransferRequest) SetTransferId(v string) {

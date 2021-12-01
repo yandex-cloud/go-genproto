@@ -261,6 +261,12 @@ func (m *ListenerSpec) SetTls(v *TlsListener) {
 	}
 }
 
+func (m *ListenerSpec) SetStream(v *StreamListener) {
+	m.Listener = &ListenerSpec_Stream{
+		Stream: v,
+	}
+}
+
 func (m *GetTargetStatesRequest) SetLoadBalancerId(v string) {
 	m.LoadBalancerId = v
 }

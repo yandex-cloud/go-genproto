@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EndpointServiceClient interface {
 	Get(ctx context.Context, in *GetEndpointRequest, opts ...grpc.CallOption) (*Endpoint, error)
+	List(ctx context.Context, in *ListEndpointsRequest, opts ...grpc.CallOption) (*ListEndpointsResponse, error)
 	Create(ctx context.Context, in *CreateEndpointRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Update(ctx context.Context, in *UpdateEndpointRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Delete(ctx context.Context, in *DeleteEndpointRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -36,6 +37,15 @@ func NewEndpointServiceClient(cc grpc.ClientConnInterface) EndpointServiceClient
 func (c *endpointServiceClient) Get(ctx context.Context, in *GetEndpointRequest, opts ...grpc.CallOption) (*Endpoint, error) {
 	out := new(Endpoint)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.datatransfer.v1.EndpointService/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *endpointServiceClient) List(ctx context.Context, in *ListEndpointsRequest, opts ...grpc.CallOption) (*ListEndpointsResponse, error) {
+	out := new(ListEndpointsResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.datatransfer.v1.EndpointService/List", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,6 +84,7 @@ func (c *endpointServiceClient) Delete(ctx context.Context, in *DeleteEndpointRe
 // for forward compatibility
 type EndpointServiceServer interface {
 	Get(context.Context, *GetEndpointRequest) (*Endpoint, error)
+	List(context.Context, *ListEndpointsRequest) (*ListEndpointsResponse, error)
 	Create(context.Context, *CreateEndpointRequest) (*operation.Operation, error)
 	Update(context.Context, *UpdateEndpointRequest) (*operation.Operation, error)
 	Delete(context.Context, *DeleteEndpointRequest) (*operation.Operation, error)
@@ -85,6 +96,9 @@ type UnimplementedEndpointServiceServer struct {
 
 func (UnimplementedEndpointServiceServer) Get(context.Context, *GetEndpointRequest) (*Endpoint, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedEndpointServiceServer) List(context.Context, *ListEndpointsRequest) (*ListEndpointsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedEndpointServiceServer) Create(context.Context, *CreateEndpointRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -121,6 +135,24 @@ func _EndpointService_Get_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EndpointServiceServer).Get(ctx, req.(*GetEndpointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EndpointService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEndpointsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EndpointServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.datatransfer.v1.EndpointService/List",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EndpointServiceServer).List(ctx, req.(*ListEndpointsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -189,6 +221,10 @@ var EndpointService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _EndpointService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _EndpointService_List_Handler,
 		},
 		{
 			MethodName: "Create",

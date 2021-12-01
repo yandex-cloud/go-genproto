@@ -22,6 +22,7 @@ type TransferServiceClient interface {
 	Create(ctx context.Context, in *CreateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Update(ctx context.Context, in *UpdateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Delete(ctx context.Context, in *DeleteTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	List(ctx context.Context, in *ListTransfersRequest, opts ...grpc.CallOption) (*ListTransfersResponse, error)
 	Get(ctx context.Context, in *GetTransferRequest, opts ...grpc.CallOption) (*Transfer, error)
 	Deactivate(ctx context.Context, in *DeactivateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Activate(ctx context.Context, in *ActivateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -62,6 +63,15 @@ func (c *transferServiceClient) Delete(ctx context.Context, in *DeleteTransferRe
 	return out, nil
 }
 
+func (c *transferServiceClient) List(ctx context.Context, in *ListTransfersRequest, opts ...grpc.CallOption) (*ListTransfersResponse, error) {
+	out := new(ListTransfersResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.datatransfer.v1.TransferService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *transferServiceClient) Get(ctx context.Context, in *GetTransferRequest, opts ...grpc.CallOption) (*Transfer, error) {
 	out := new(Transfer)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.datatransfer.v1.TransferService/Get", in, out, opts...)
@@ -96,6 +106,7 @@ type TransferServiceServer interface {
 	Create(context.Context, *CreateTransferRequest) (*operation.Operation, error)
 	Update(context.Context, *UpdateTransferRequest) (*operation.Operation, error)
 	Delete(context.Context, *DeleteTransferRequest) (*operation.Operation, error)
+	List(context.Context, *ListTransfersRequest) (*ListTransfersResponse, error)
 	Get(context.Context, *GetTransferRequest) (*Transfer, error)
 	Deactivate(context.Context, *DeactivateTransferRequest) (*operation.Operation, error)
 	Activate(context.Context, *ActivateTransferRequest) (*operation.Operation, error)
@@ -113,6 +124,9 @@ func (UnimplementedTransferServiceServer) Update(context.Context, *UpdateTransfe
 }
 func (UnimplementedTransferServiceServer) Delete(context.Context, *DeleteTransferRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedTransferServiceServer) List(context.Context, *ListTransfersRequest) (*ListTransfersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedTransferServiceServer) Get(context.Context, *GetTransferRequest) (*Transfer, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
@@ -189,6 +203,24 @@ func _TransferService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TransferService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTransfersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TransferServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.datatransfer.v1.TransferService/List",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TransferServiceServer).List(ctx, req.(*ListTransfersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TransferService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTransferRequest)
 	if err := dec(in); err != nil {
@@ -261,6 +293,10 @@ var TransferService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _TransferService_Delete_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _TransferService_List_Handler,
 		},
 		{
 			MethodName: "Get",

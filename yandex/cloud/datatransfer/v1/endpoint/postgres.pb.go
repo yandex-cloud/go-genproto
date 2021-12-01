@@ -384,7 +384,7 @@ type isPostgresConnection_Connection interface {
 }
 
 type PostgresConnection_MdbClusterId struct {
-	// MDB cluster
+	// Managed cluster
 	//
 	// Yandex.Cloud Managed PostgreSQL cluster ID
 	MdbClusterId string `protobuf:"bytes,1,opt,name=mdb_cluster_id,json=mdbClusterId,proto3,oneof"`
@@ -420,7 +420,7 @@ type PostgresSource struct {
 	//
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// List of tables
+	// Included tables
 	//
 	// If none or empty list is presented, all tables are replicated. Can contain
 	// regular expression.

@@ -22,6 +22,10 @@ func (m *Endpoint) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *Endpoint) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *Endpoint) SetSettings(v *EndpointSettings) {
 	m.Settings = v
 }

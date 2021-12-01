@@ -2,6 +2,10 @@
 
 package kafka
 
+import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
 func (m *GetConnectorRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -43,6 +47,30 @@ func (m *CreateConnectorMetadata) SetClusterId(v string) {
 }
 
 func (m *CreateConnectorMetadata) SetConnectorName(v string) {
+	m.ConnectorName = v
+}
+
+func (m *UpdateConnectorRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateConnectorRequest) SetConnectorName(v string) {
+	m.ConnectorName = v
+}
+
+func (m *UpdateConnectorRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateConnectorRequest) SetConnectorSpec(v *UpdateConnectorSpec) {
+	m.ConnectorSpec = v
+}
+
+func (m *UpdateConnectorMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateConnectorMetadata) SetConnectorName(v string) {
 	m.ConnectorName = v
 }
 

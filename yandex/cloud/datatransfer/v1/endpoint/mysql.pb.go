@@ -28,7 +28,7 @@ type OnPremiseMysql struct {
 	Hosts []string `protobuf:"bytes,5,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// Database port
 	//
-	// Will be used if the cluster ID is not specified. Default: 6432.
+	// Default: 3306.
 	Port int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
 	// TLS mode
 	//
@@ -169,7 +169,7 @@ type isMysqlConnection_Connection interface {
 }
 
 type MysqlConnection_MdbClusterId struct {
-	// MDB cluster
+	// Managed cluster
 	//
 	// Yandex.Cloud Managed MySQL cluster ID
 	MdbClusterId string `protobuf:"bytes,1,opt,name=mdb_cluster_id,json=mdbClusterId,proto3,oneof"`

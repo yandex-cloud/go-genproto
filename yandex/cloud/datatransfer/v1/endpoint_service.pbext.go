@@ -2,8 +2,32 @@
 
 package datatransfer
 
+import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
 func (m *GetEndpointRequest) SetEndpointId(v string) {
 	m.EndpointId = v
+}
+
+func (m *ListEndpointsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListEndpointsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListEndpointsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListEndpointsResponse) SetEndpoints(v []*Endpoint) {
+	m.Endpoints = v
+}
+
+func (m *ListEndpointsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *CreateEndpointRequest) SetFolderId(v string) {
@@ -16,6 +40,10 @@ func (m *CreateEndpointRequest) SetName(v string) {
 
 func (m *CreateEndpointRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *CreateEndpointRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *CreateEndpointRequest) SetSettings(v *EndpointSettings) {
@@ -38,8 +66,16 @@ func (m *UpdateEndpointRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *UpdateEndpointRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *UpdateEndpointRequest) SetSettings(v *EndpointSettings) {
 	m.Settings = v
+}
+
+func (m *UpdateEndpointRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateEndpointMetadata) SetEndpointId(v string) {
