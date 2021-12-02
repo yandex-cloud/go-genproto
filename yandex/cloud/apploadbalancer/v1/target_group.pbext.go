@@ -49,3 +49,7 @@ func (m *Target) SetIpAddress(v string) {
 func (m *Target) SetSubnetId(v string) {
 	m.SubnetId = v
 }
+
+func (m *Target) SetPrivateIpv4Address(v bool) {
+	m.PrivateIpv4Address = v
+}

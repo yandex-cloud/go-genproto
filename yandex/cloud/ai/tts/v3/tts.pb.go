@@ -24,7 +24,7 @@ type RawAudio_AudioEncoding int32
 
 const (
 	RawAudio_AUDIO_ENCODING_UNSPECIFIED RawAudio_AudioEncoding = 0
-	// 16-bit signed little-endian (Linear PCM).
+	// Audio bit depth 16-bit signed little-endian (Linear PCM).
 	RawAudio_LINEAR16_PCM RawAudio_AudioEncoding = 1
 )
 
@@ -71,7 +71,7 @@ type ContainerAudio_ContainerAudioType int32
 
 const (
 	ContainerAudio_CONTAINER_AUDIO_TYPE_UNSPECIFIED ContainerAudio_ContainerAudioType = 0
-	// RIFF linear pcm with header audio file format.
+	// Audio bit depth 16-bit signed little-endian (Linear PCM).
 	ContainerAudio_WAV      ContainerAudio_ContainerAudioType = 1
 	ContainerAudio_OGG_OPUS ContainerAudio_ContainerAudioType = 2
 )

@@ -434,7 +434,7 @@ type UserSpec struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Password of the ClickHouse user.
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	// Set of permissions to grant to the user.
+	// Set of permissions to grant to the user. If not set, it's granted permissions to access all databases.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	Settings    *UserSettings `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
 	// Set of quotas assigned to the user.
