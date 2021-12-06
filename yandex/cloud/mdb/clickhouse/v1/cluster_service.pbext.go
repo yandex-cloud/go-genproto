@@ -215,6 +215,10 @@ func (m *RestoreClusterRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
 
+func (m *RestoreClusterRequest) SetAdditionalBackupIds(v []string) {
+	m.AdditionalBackupIds = v
+}
+
 func (m *RestoreClusterRequest) SetName(v string) {
 	m.Name = v
 }

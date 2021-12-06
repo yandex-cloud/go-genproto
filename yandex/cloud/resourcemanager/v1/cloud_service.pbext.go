@@ -24,6 +24,10 @@ func (m *ListCloudsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListCloudsRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
 func (m *ListCloudsResponse) SetClouds(v []*Cloud) {
 	m.Clouds = v
 }
