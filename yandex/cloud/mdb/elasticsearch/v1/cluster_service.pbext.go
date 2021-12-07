@@ -85,6 +85,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -123,6 +127,10 @@ func (m *UpdateClusterRequest) SetServiceAccountId(v string) {
 
 func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
@@ -415,4 +423,24 @@ func (m *DeleteClusterHostsMetadata) SetClusterId(v string) {
 
 func (m *DeleteClusterHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenanceRequest_RescheduleType) {
+	m.RescheduleType = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
 }
