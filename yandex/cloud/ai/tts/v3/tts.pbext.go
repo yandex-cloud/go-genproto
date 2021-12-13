@@ -159,3 +159,7 @@ func (m *UtteranceSynthesisRequest) SetOutputAudioSpec(v *AudioFormatOptions) {
 func (m *UtteranceSynthesisRequest) SetLoudnessNormalizationType(v UtteranceSynthesisRequest_LoudnessNormalizationType) {
 	m.LoudnessNormalizationType = v
 }
+
+func (m *UtteranceSynthesisRequest) SetUnsafeMode(v bool) {
+	m.UnsafeMode = v
+}

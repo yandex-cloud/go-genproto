@@ -226,6 +226,30 @@ func (m *MysqlConfig5_7) SetRangeOptimizerMaxMemSize(v *wrapperspb.Int64Value) {
 	m.RangeOptimizerMaxMemSize = v
 }
 
+func (m *MysqlConfig5_7) SetSlowQueryLog(v *wrapperspb.BoolValue) {
+	m.SlowQueryLog = v
+}
+
+func (m *MysqlConfig5_7) SetSlowQueryLogAlwaysWriteTime(v *wrapperspb.DoubleValue) {
+	m.SlowQueryLogAlwaysWriteTime = v
+}
+
+func (m *MysqlConfig5_7) SetLogSlowRateType(v MysqlConfig5_7_LogSlowRateType) {
+	m.LogSlowRateType = v
+}
+
+func (m *MysqlConfig5_7) SetLogSlowRateLimit(v *wrapperspb.Int64Value) {
+	m.LogSlowRateLimit = v
+}
+
+func (m *MysqlConfig5_7) SetLogSlowSpStatements(v *wrapperspb.BoolValue) {
+	m.LogSlowSpStatements = v
+}
+
+func (m *MysqlConfig5_7) SetLogSlowFilter(v []MysqlConfig5_7_LogSlowFilterType) {
+	m.LogSlowFilter = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }
