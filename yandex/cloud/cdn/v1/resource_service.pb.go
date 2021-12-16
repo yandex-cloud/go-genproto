@@ -319,13 +319,13 @@ func (x *CreateResourceRequest) GetSslCertificate() *SSLTargetCertificate {
 	return nil
 }
 
-// A set of resourse origin parameters.
+// A set of resource origin parameters.
 type ResourceOriginParams struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Sourse of the content.
+	// Source of the content.
 	Source string `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
 	// Set up type of the origin.
 	Meta *OriginMeta `protobuf:"bytes,2,opt,name=meta,proto3" json:"meta,omitempty"`
@@ -866,7 +866,7 @@ type CreateResourceRequest_Origin_OriginSource struct {
 }
 
 type CreateResourceRequest_Origin_OriginSourceParams struct {
-	// Set up resourse origin parameters.
+	// Set up resource origin parameters.
 	OriginSourceParams *ResourceOriginParams `protobuf:"bytes,3,opt,name=origin_source_params,json=originSourceParams,proto3,oneof"`
 }
 

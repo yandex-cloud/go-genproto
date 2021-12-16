@@ -444,3 +444,87 @@ func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
 }
+
+func (m *RestoreClusterRequest) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *RestoreClusterRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *RestoreClusterRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *RestoreClusterRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *RestoreClusterRequest) SetEnvironment(v Cluster_Environment) {
+	m.Environment = v
+}
+
+func (m *RestoreClusterRequest) SetConfigSpec(v *ConfigSpec) {
+	m.ConfigSpec = v
+}
+
+func (m *RestoreClusterRequest) SetHostSpecs(v []*HostSpec) {
+	m.HostSpecs = v
+}
+
+func (m *RestoreClusterRequest) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
+func (m *RestoreClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *RestoreClusterRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *RestoreClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestoreClusterMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *BackupClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *BackupClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ListClusterBackupsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ListClusterBackupsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListClusterBackupsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListClusterBackupsResponse) SetBackups(v []*Backup) {
+	m.Backups = v
+}
+
+func (m *ListClusterBackupsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

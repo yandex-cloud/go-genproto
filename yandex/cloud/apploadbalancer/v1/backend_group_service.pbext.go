@@ -81,6 +81,12 @@ func (m *UpdateBackendGroupRequest) SetGrpc(v *GrpcBackendGroup) {
 	}
 }
 
+func (m *UpdateBackendGroupRequest) SetStream(v *StreamBackendGroup) {
+	m.Backend = &UpdateBackendGroupRequest_Stream{
+		Stream: v,
+	}
+}
+
 func (m *UpdateBackendGroupMetadata) SetBackendGroupId(v string) {
 	m.BackendGroupId = v
 }
@@ -116,6 +122,12 @@ func (m *CreateBackendGroupRequest) SetHttp(v *HttpBackendGroup) {
 func (m *CreateBackendGroupRequest) SetGrpc(v *GrpcBackendGroup) {
 	m.Backend = &CreateBackendGroupRequest_Grpc{
 		Grpc: v,
+	}
+}
+
+func (m *CreateBackendGroupRequest) SetStream(v *StreamBackendGroup) {
+	m.Backend = &CreateBackendGroupRequest_Stream{
+		Stream: v,
 	}
 }
 

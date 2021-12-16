@@ -692,7 +692,7 @@ type Resources struct {
 	// ID of the preset for computational resources available to a host (CPU, memory, etc.).
 	// All available presets are listed in the [documentation](/docs/managed-kafka/concepts/instance-types).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
-	// Volume of the storage available to a host, in bytes.
+	// Volume of the storage available to a host, in bytes. Must be greater than 2 * partition segment size in bytes * partitions count, so each partition can have one active segment file and one closed segment file that can be deleted.
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
 	// Type of the storage environment for the host.
 	DiskTypeId string `protobuf:"bytes,3,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`

@@ -37,6 +37,12 @@ type ClusterServiceClient interface {
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified Elasticsearch cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Create a backup for the specified ElasticSearch cluster.
+	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the list of available backups for the specified Elasticsearch cluster.
+	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
+	// Creates a new ElasticSearch cluster from the specified backup.
+	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified Elasticsearch cluster.
 	//
 	// For more information about logs, see the [Logs](/docs/managed-elasticsearch/operations/cluster-logs) section in the documentation.
@@ -129,6 +135,33 @@ func (c *clusterServiceClient) Start(ctx context.Context, in *StartClusterReques
 func (c *clusterServiceClient) Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Stop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Backup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error) {
+	out := new(ListClusterBackupsResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListBackups", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Restore", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -243,6 +276,12 @@ type ClusterServiceServer interface {
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
 	// Stops the specified Elasticsearch cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Create a backup for the specified ElasticSearch cluster.
+	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
+	// Returns the list of available backups for the specified Elasticsearch cluster.
+	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
+	// Creates a new ElasticSearch cluster from the specified backup.
+	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified Elasticsearch cluster.
 	//
 	// For more information about logs, see the [Logs](/docs/managed-elasticsearch/operations/cluster-logs) section in the documentation.
@@ -288,6 +327,15 @@ func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterReq
 }
 func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Backup not implemented")
+}
+func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBackups not implemented")
+}
+func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
 }
 func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
@@ -466,6 +514,60 @@ func _ClusterService_Stop_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_Backup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Backup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Backup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Backup(ctx, req.(*BackupClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterBackupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListBackups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListBackups",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListBackups(ctx, req.(*ListClusterBackupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Restore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Restore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Restore(ctx, req.(*RestoreClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterLogsRequest)
 	if err := dec(in); err != nil {
@@ -633,6 +735,18 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _ClusterService_Stop_Handler,
+		},
+		{
+			MethodName: "Backup",
+			Handler:    _ClusterService_Backup_Handler,
+		},
+		{
+			MethodName: "ListBackups",
+			Handler:    _ClusterService_ListBackups_Handler,
+		},
+		{
+			MethodName: "Restore",
+			Handler:    _ClusterService_Restore_Handler,
 		},
 		{
 			MethodName: "ListLogs",

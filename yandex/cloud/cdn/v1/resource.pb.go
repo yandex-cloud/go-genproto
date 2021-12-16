@@ -142,7 +142,7 @@ func (RewriteFlag) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_cdn_v1_resource_proto_rawDescGZIP(), []int{1}
 }
 
-// A certificate type patameters.
+// A certificate type parameters.
 type SSLCertificateType int32
 
 const (
@@ -199,7 +199,7 @@ func (SSLCertificateType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_cdn_v1_resource_proto_rawDescGZIP(), []int{2}
 }
 
-// A certificate status patameters.
+// A certificate status parameters.
 type SSLCertificateStatus int32
 
 const (
@@ -685,13 +685,13 @@ func (x *ResourceOptions) GetRewrite() *ResourceOptions_RewriteOption {
 	return nil
 }
 
-// A set of the personal SSL certificate patameters.
+// A set of the personal SSL certificate parameters.
 type SSLTargetCertificate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Type of the sertificate.
+	// Type of the certificate.
 	Type SSLCertificateType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.cdn.v1.SSLCertificateType" json:"type,omitempty"`
 	// Certificate data.
 	Data *SSLCertificateData `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
@@ -743,13 +743,13 @@ func (x *SSLTargetCertificate) GetData() *SSLCertificateData {
 	return nil
 }
 
-// A SSL sertificate patameters.
+// A SSL certificate parameters.
 type SSLCertificate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Type of the sertificate.
+	// Type of the certificate.
 	Type SSLCertificateType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.cdn.v1.SSLCertificateType" json:"type,omitempty"`
 	// Active status.
 	Status SSLCertificateStatus `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.cdn.v1.SSLCertificateStatus" json:"status,omitempty"`
@@ -810,7 +810,7 @@ func (x *SSLCertificate) GetData() *SSLCertificateData {
 	return nil
 }
 
-// A certificate data patameters.
+// A certificate data parameters.
 type SSLCertificateData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -879,13 +879,13 @@ type SSLCertificateData_Cm struct {
 
 func (*SSLCertificateData_Cm) isSSLCertificateData_SslCertificateDataVariant() {}
 
-// A certificate data custom patameters.
+// A certificate data custom parameters.
 type SSLCertificateCMData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the custom sertificate.
+	// ID of the custom certificate.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
