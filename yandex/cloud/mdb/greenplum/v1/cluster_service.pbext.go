@@ -5,6 +5,7 @@ package greenplum
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -237,4 +238,56 @@ func (m *SegmentSubclusterConfigSpec) SetResources(v *Resources) {
 
 func (m *SegmentSubclusterConfigSpec) SetConfig(v *GreenplumSegmentConfig) {
 	m.Config = v
+}
+
+func (m *ListClusterLogsResponse) SetLogs(v []*LogRecord) {
+	m.Logs = v
+}
+
+func (m *ListClusterLogsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
+	m.Timestamp = v
+}
+
+func (m *LogRecord) SetMessage(v map[string]string) {
+	m.Message = v
+}
+
+func (m *ListClusterLogsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ListClusterLogsRequest) SetColumnFilter(v []string) {
+	m.ColumnFilter = v
+}
+
+func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_ServiceType) {
+	m.ServiceType = v
+}
+
+func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
+	m.FromTime = v
+}
+
+func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
+	m.ToTime = v
+}
+
+func (m *ListClusterLogsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListClusterLogsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListClusterLogsRequest) SetAlwaysNextPageToken(v bool) {
+	m.AlwaysNextPageToken = v
+}
+
+func (m *ListClusterLogsRequest) SetFilter(v string) {
+	m.Filter = v
 }

@@ -42,6 +42,8 @@ type ClusterServiceClient interface {
 	ListMasterHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Retrieves a list of segment hosts for the specified cluster.
 	ListSegmentHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
+	// Retrieves logs for the specified Greenplum cluster.
+	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 }
 
 type clusterServiceClient struct {
@@ -142,6 +144,15 @@ func (c *clusterServiceClient) ListSegmentHosts(ctx context.Context, in *ListClu
 	return out, nil
 }
 
+func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error) {
+	out := new(ListClusterLogsResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility
@@ -169,6 +180,8 @@ type ClusterServiceServer interface {
 	ListMasterHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Retrieves a list of segment hosts for the specified cluster.
 	ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
+	// Retrieves logs for the specified Greenplum cluster.
+	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have forward compatible implementations.
@@ -204,6 +217,9 @@ func (UnimplementedClusterServiceServer) ListMasterHosts(context.Context, *ListC
 }
 func (UnimplementedClusterServiceServer) ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSegmentHosts not implemented")
+}
+func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
 }
 
 // UnsafeClusterServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -397,6 +413,24 @@ func _ClusterService_ListSegmentHosts_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListLogs(ctx, req.(*ListClusterLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -443,6 +477,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSegmentHosts",
 			Handler:    _ClusterService_ListSegmentHosts_Handler,
+		},
+		{
+			MethodName: "ListLogs",
+			Handler:    _ClusterService_ListLogs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
