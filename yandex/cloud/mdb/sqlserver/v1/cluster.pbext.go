@@ -68,6 +68,10 @@ func (m *Cluster) SetSqlcollation(v string) {
 	m.Sqlcollation = v
 }
 
+func (m *Cluster) SetHostGroupIds(v []string) {
+	m.HostGroupIds = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

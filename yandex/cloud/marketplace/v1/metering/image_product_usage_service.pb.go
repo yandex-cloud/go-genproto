@@ -31,7 +31,7 @@ type WriteImageProductUsageRequest struct {
 	ValidateOnly bool `protobuf:"varint,1,opt,name=validate_only,json=validateOnly,proto3" json:"validate_only,omitempty"`
 	// Marketplace Product's ID.
 	ProductId string `protobuf:"bytes,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	// List of product usage records (up to 25 pet request).
+	// List of product usage records (up to 25 per request).
 	UsageRecords []*UsageRecord `protobuf:"bytes,3,rep,name=usage_records,json=usageRecords,proto3" json:"usage_records,omitempty"`
 }
 
