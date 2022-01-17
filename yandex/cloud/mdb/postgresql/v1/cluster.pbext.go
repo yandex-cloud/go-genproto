@@ -143,6 +143,12 @@ func (m *ClusterConfig) SetPostgresqlConfig_13(v *config.PostgresqlConfigSet13) 
 	}
 }
 
+func (m *ClusterConfig) SetPostgresqlConfig_14(v *config.PostgresqlConfigSet14) {
+	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_14{
+		PostgresqlConfig_14: v,
+	}
+}
+
 func (m *ClusterConfig) SetPoolerConfig(v *ConnectionPoolerConfig) {
 	m.PoolerConfig = v
 }
@@ -282,6 +288,12 @@ func (m *HostConfig) SetPostgresqlConfig_12_1C(v *config.PostgresqlHostConfig12_
 func (m *HostConfig) SetPostgresqlConfig_13(v *config.PostgresqlHostConfig13) {
 	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_13{
 		PostgresqlConfig_13: v,
+	}
+}
+
+func (m *HostConfig) SetPostgresqlConfig_14(v *config.PostgresqlHostConfig14) {
+	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_14{
+		PostgresqlConfig_14: v,
 	}
 }
 

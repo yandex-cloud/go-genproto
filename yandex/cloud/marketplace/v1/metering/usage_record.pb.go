@@ -93,9 +93,9 @@ type UsageRecord struct {
 
 	// Unique identifier of the usage record (UUID format).
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	// Consumed Marketplace SaaS Sku ID, linked to `UsageRecord.product_id`.
+	// Consumed Marketplace SKU ID, linked to `UsageRecord.product_id`.
 	SkuId string `protobuf:"bytes,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	// Quantity of sku consumed, measured in `sku.usage_unit` units (e.g. bytes).
+	// Quantity of SKU consumed, measured in `sku.usage_unit` units (e.g. bytes).
 	Quantity int64 `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// Timestamp in UTC for which the usage is being reported.
 	Timestamp *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
