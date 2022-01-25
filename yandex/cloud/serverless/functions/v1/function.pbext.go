@@ -107,6 +107,10 @@ func (m *Version) SetNamedServiceAccounts(v map[string]string) {
 	m.NamedServiceAccounts = v
 }
 
+func (m *Version) SetSecrets(v []*Secret) {
+	m.Secrets = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -157,4 +161,28 @@ func (m *ScalingPolicy) SetZoneInstancesLimit(v int64) {
 
 func (m *ScalingPolicy) SetZoneRequestsLimit(v int64) {
 	m.ZoneRequestsLimit = v
+}
+
+type Secret_Reference = isSecret_Reference
+
+func (m *Secret) SetReference(v Secret_Reference) {
+	m.Reference = v
+}
+
+func (m *Secret) SetId(v string) {
+	m.Id = v
+}
+
+func (m *Secret) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *Secret) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *Secret) SetEnvironmentVariable(v string) {
+	m.Reference = &Secret_EnvironmentVariable{
+		EnvironmentVariable: v,
+	}
 }

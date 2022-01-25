@@ -63,6 +63,10 @@ func (m *CreateApiGatewayRequest) SetOpenapiSpec(v string) {
 	}
 }
 
+func (m *CreateApiGatewayRequest) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
+}
+
 type UpdateApiGatewayRequest_Spec = isUpdateApiGatewayRequest_Spec
 
 func (m *UpdateApiGatewayRequest) SetSpec(v UpdateApiGatewayRequest_Spec) {
@@ -93,6 +97,10 @@ func (m *UpdateApiGatewayRequest) SetOpenapiSpec(v string) {
 	m.Spec = &UpdateApiGatewayRequest_OpenapiSpec{
 		OpenapiSpec: v,
 	}
+}
+
+func (m *UpdateApiGatewayRequest) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
 }
 
 func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {

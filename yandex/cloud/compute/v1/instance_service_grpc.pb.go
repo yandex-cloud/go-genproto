@@ -73,6 +73,8 @@ type InstanceServiceClient interface {
 	UpdateNetworkInterface(ctx context.Context, in *UpdateInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(ctx context.Context, in *ListInstanceOperationsRequest, opts ...grpc.CallOption) (*ListInstanceOperationsResponse, error)
+	// Moves the specified instance between folders
+	Move(ctx context.Context, in *MoveInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type instanceServiceClient struct {
@@ -245,6 +247,15 @@ func (c *instanceServiceClient) ListOperations(ctx context.Context, in *ListInst
 	return out, nil
 }
 
+func (c *instanceServiceClient) Move(ctx context.Context, in *MoveInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.compute.v1.InstanceService/Move", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InstanceServiceServer is the server API for InstanceService service.
 // All implementations should embed UnimplementedInstanceServiceServer
 // for forward compatibility
@@ -303,6 +314,8 @@ type InstanceServiceServer interface {
 	UpdateNetworkInterface(context.Context, *UpdateInstanceNetworkInterfaceRequest) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(context.Context, *ListInstanceOperationsRequest) (*ListInstanceOperationsResponse, error)
+	// Moves the specified instance between folders
+	Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error)
 }
 
 // UnimplementedInstanceServiceServer should be embedded to have forward compatible implementations.
@@ -362,6 +375,9 @@ func (UnimplementedInstanceServiceServer) UpdateNetworkInterface(context.Context
 }
 func (UnimplementedInstanceServiceServer) ListOperations(context.Context, *ListInstanceOperationsRequest) (*ListInstanceOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedInstanceServiceServer) Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 
 // UnsafeInstanceServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -699,6 +715,24 @@ func _InstanceService_ListOperations_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.compute.v1.InstanceService/Move",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).Move(ctx, req.(*MoveInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InstanceService_ServiceDesc is the grpc.ServiceDesc for InstanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -777,6 +811,10 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _InstanceService_ListOperations_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _InstanceService_Move_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

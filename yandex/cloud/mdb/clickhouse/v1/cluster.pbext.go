@@ -257,6 +257,14 @@ func (m *Access) SetServerless(v bool) {
 	m.Serverless = v
 }
 
+func (m *Access) SetDataTransfer(v bool) {
+	m.DataTransfer = v
+}
+
+func (m *Access) SetYandexQuery(v bool) {
+	m.YandexQuery = v
+}
+
 func (m *CloudStorage) SetEnabled(v bool) {
 	m.Enabled = v
 }

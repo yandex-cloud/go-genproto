@@ -41,6 +41,8 @@ type DiskServiceClient interface {
 	Delete(ctx context.Context, in *DeleteDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified disk.
 	ListOperations(ctx context.Context, in *ListDiskOperationsRequest, opts ...grpc.CallOption) (*ListDiskOperationsResponse, error)
+	// Moves disk between folders.
+	Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type diskServiceClient struct {
@@ -105,6 +107,15 @@ func (c *diskServiceClient) ListOperations(ctx context.Context, in *ListDiskOper
 	return out, nil
 }
 
+func (c *diskServiceClient) Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.compute.v1.DiskService/Move", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DiskServiceServer is the server API for DiskService service.
 // All implementations should embed UnimplementedDiskServiceServer
 // for forward compatibility
@@ -131,6 +142,8 @@ type DiskServiceServer interface {
 	Delete(context.Context, *DeleteDiskRequest) (*operation.Operation, error)
 	// Lists operations for the specified disk.
 	ListOperations(context.Context, *ListDiskOperationsRequest) (*ListDiskOperationsResponse, error)
+	// Moves disk between folders.
+	Move(context.Context, *MoveDiskRequest) (*operation.Operation, error)
 }
 
 // UnimplementedDiskServiceServer should be embedded to have forward compatible implementations.
@@ -154,6 +167,9 @@ func (UnimplementedDiskServiceServer) Delete(context.Context, *DeleteDiskRequest
 }
 func (UnimplementedDiskServiceServer) ListOperations(context.Context, *ListDiskOperationsRequest) (*ListDiskOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedDiskServiceServer) Move(context.Context, *MoveDiskRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 
 // UnsafeDiskServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -275,6 +291,24 @@ func _DiskService_ListOperations_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DiskService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveDiskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.compute.v1.DiskService/Move",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskServiceServer).Move(ctx, req.(*MoveDiskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DiskService_ServiceDesc is the grpc.ServiceDesc for DiskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -305,6 +339,10 @@ var DiskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _DiskService_ListOperations_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _DiskService_Move_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

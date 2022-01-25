@@ -152,3 +152,23 @@ func (m *ListDiskOperationsResponse) SetOperations(v []*operation.Operation) {
 func (m *ListDiskOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *MoveDiskRequest) SetDiskId(v string) {
+	m.DiskId = v
+}
+
+func (m *MoveDiskRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveDiskMetadata) SetDiskId(v string) {
+	m.DiskId = v
+}
+
+func (m *MoveDiskMetadata) SetSourceFolderId(v string) {
+	m.SourceFolderId = v
+}
+
+func (m *MoveDiskMetadata) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}

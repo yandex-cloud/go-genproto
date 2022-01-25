@@ -235,6 +235,10 @@ func (m *CreateFunctionVersionRequest) SetNamedServiceAccounts(v map[string]stri
 	m.NamedServiceAccounts = v
 }
 
+func (m *CreateFunctionVersionRequest) SetSecrets(v []*Secret) {
+	m.Secrets = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }

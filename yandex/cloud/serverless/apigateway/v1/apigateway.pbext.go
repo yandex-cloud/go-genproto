@@ -46,6 +46,10 @@ func (m *ApiGateway) SetAttachedDomains(v []*AttachedDomain) {
 	m.AttachedDomains = v
 }
 
+func (m *ApiGateway) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
+}
+
 func (m *AttachedDomain) SetDomainId(v string) {
 	m.DomainId = v
 }
@@ -60,4 +64,12 @@ func (m *AttachedDomain) SetEnabled(v bool) {
 
 func (m *AttachedDomain) SetDomain(v string) {
 	m.Domain = v
+}
+
+func (m *Connectivity) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *Connectivity) SetSubnetId(v []string) {
+	m.SubnetId = v
 }

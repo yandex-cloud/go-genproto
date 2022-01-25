@@ -558,3 +558,23 @@ func (m *DnsRecordSpec) SetTtl(v int64) {
 func (m *DnsRecordSpec) SetPtr(v bool) {
 	m.Ptr = v
 }
+
+func (m *MoveInstanceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *MoveInstanceRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *MoveInstanceMetadata) SetSourceFolderId(v string) {
+	m.SourceFolderId = v
+}
+
+func (m *MoveInstanceMetadata) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
