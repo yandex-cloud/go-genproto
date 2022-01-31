@@ -478,6 +478,10 @@ func (m *UpdateHostSpec) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
 }
 
+func (m *UpdateHostSpec) SetPriority(v int64) {
+	m.Priority = v
+}
+
 func (m *HostSpec) SetZoneId(v string) {
 	m.ZoneId = v
 }
@@ -496,6 +500,10 @@ func (m *HostSpec) SetReplicationSource(v string) {
 
 func (m *HostSpec) SetBackupPriority(v int64) {
 	m.BackupPriority = v
+}
+
+func (m *HostSpec) SetPriority(v int64) {
+	m.Priority = v
 }
 
 type ConfigSpec_MysqlConfig = isConfigSpec_MysqlConfig

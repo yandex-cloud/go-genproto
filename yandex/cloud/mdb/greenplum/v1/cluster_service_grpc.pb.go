@@ -19,22 +19,21 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClusterServiceClient interface {
-	// Returns the specified Greenplum cluster.
+	// Returns the specified Greenplum® cluster.
 	//
-	// To get the list of available Greenplum clusters, make a [List] request.
+	// To get the list of available Greenplum® clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves a list of Greenplum clusters that belong
-	// to the specified folder.
+	// Retrieves a list of Greenplum® clusters that belong to the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Creates a Greenplum cluster in the specified folder.
+	// Creates a Greenplum® cluster in the specified folder.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified Greenplum cluster.
+	// Updates the specified Greenplum® cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Greenplum cluster.
+	// Deletes the specified Greenplum® cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Starts the specified Greenplum cluster.
+	// Starts the specified Greenplum® cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stops the specified Greenplum cluster.
+	// Stops the specified Greenplum® cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -42,7 +41,7 @@ type ClusterServiceClient interface {
 	ListMasterHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Retrieves a list of segment hosts for the specified cluster.
 	ListSegmentHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
-	// Retrieves logs for the specified Greenplum cluster.
+	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 }
 
@@ -157,22 +156,21 @@ func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogs
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility
 type ClusterServiceServer interface {
-	// Returns the specified Greenplum cluster.
+	// Returns the specified Greenplum® cluster.
 	//
-	// To get the list of available Greenplum clusters, make a [List] request.
+	// To get the list of available Greenplum® clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves a list of Greenplum clusters that belong
-	// to the specified folder.
+	// Retrieves a list of Greenplum® clusters that belong to the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Creates a Greenplum cluster in the specified folder.
+	// Creates a Greenplum® cluster in the specified folder.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
-	// Updates the specified Greenplum cluster.
+	// Updates the specified Greenplum® cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
-	// Deletes the specified Greenplum cluster.
+	// Deletes the specified Greenplum® cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Starts the specified Greenplum cluster.
+	// Starts the specified Greenplum® cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stops the specified Greenplum cluster.
+	// Stops the specified Greenplum® cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
@@ -180,7 +178,7 @@ type ClusterServiceServer interface {
 	ListMasterHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Retrieves a list of segment hosts for the specified cluster.
 	ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
-	// Retrieves logs for the specified Greenplum cluster.
+	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 }
 

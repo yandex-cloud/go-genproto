@@ -108,6 +108,32 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *CreateClusterRequest) SetConfigSpec(v *ConfigSpec) {
+	m.ConfigSpec = v
+}
+
+type ConfigSpec_GreenplumConfig = isConfigSpec_GreenplumConfig
+
+func (m *ConfigSpec) SetGreenplumConfig(v ConfigSpec_GreenplumConfig) {
+	m.GreenplumConfig = v
+}
+
+func (m *ConfigSpec) SetGreenplumConfig_6_17(v *GreenplumConfig6_17) {
+	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6_17{
+		GreenplumConfig_6_17: v,
+	}
+}
+
+func (m *ConfigSpec) SetGreenplumConfig_6_19(v *GreenplumConfig6_19) {
+	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6_19{
+		GreenplumConfig_6_19: v,
+	}
+}
+
+func (m *ConfigSpec) SetPool(v *ConnectionPoolerConfig) {
+	m.Pool = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -228,16 +254,8 @@ func (m *MasterSubclusterConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *MasterSubclusterConfigSpec) SetConfig(v *GreenplumMasterConfig) {
-	m.Config = v
-}
-
 func (m *SegmentSubclusterConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
-}
-
-func (m *SegmentSubclusterConfigSpec) SetConfig(v *GreenplumSegmentConfig) {
-	m.Config = v
 }
 
 func (m *ListClusterLogsResponse) SetLogs(v []*LogRecord) {

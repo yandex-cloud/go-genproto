@@ -162,6 +162,10 @@ func (m *Host) SetBackupPriority(v int64) {
 	m.BackupPriority = v
 }
 
+func (m *Host) SetPriority(v int64) {
+	m.Priority = v
+}
+
 func (m *Service) SetType(v Service_Type) {
 	m.Type = v
 }

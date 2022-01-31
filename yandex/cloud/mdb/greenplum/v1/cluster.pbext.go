@@ -99,6 +99,32 @@ func (m *Cluster) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *Cluster) SetClusterConfig(v *ClusterConfigSet) {
+	m.ClusterConfig = v
+}
+
+type ClusterConfigSet_GreenplumConfig = isClusterConfigSet_GreenplumConfig
+
+func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig) {
+	m.GreenplumConfig = v
+}
+
+func (m *ClusterConfigSet) SetGreenplumConfigSet_6_17(v *GreenplumConfigSet6_17) {
+	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_17{
+		GreenplumConfigSet_6_17: v,
+	}
+}
+
+func (m *ClusterConfigSet) SetGreenplumConfigSet_6_19(v *GreenplumConfigSet6_19) {
+	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_19{
+		GreenplumConfigSet_6_19: v,
+	}
+}
+
+func (m *ClusterConfigSet) SetPool(v *ConnectionPoolerConfigSet) {
+	m.Pool = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

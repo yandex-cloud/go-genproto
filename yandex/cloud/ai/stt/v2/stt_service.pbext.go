@@ -102,6 +102,10 @@ func (m *RecognitionSpec) SetRawResults(v bool) {
 	m.RawResults = v
 }
 
+func (m *RecognitionSpec) SetLiteratureText(v bool) {
+	m.LiteratureText = v
+}
+
 func (m *SpeechRecognitionChunk) SetAlternatives(v []*SpeechRecognitionAlternative) {
 	m.Alternatives = v
 }

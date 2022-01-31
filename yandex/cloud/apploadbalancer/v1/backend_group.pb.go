@@ -44,16 +44,16 @@ const (
 	// that is, two endpoints are picked at random, and the request is sent to the one which has the fewest active
 	// requests.
 	LoadBalancingMode_LEAST_REQUEST LoadBalancingMode = 2
-	// Maglev hashing load balancing mode, used only if session affinity is working for the backend group.
+	// Maglev hashing load balancing mode.
 	//
 	// Each endpoint is hashed, and a hash table with 65537 rows is filled accordingly, so that every endpoint occupies
-	// the same amount of rows. An attribute of each request, specified in session affinity configuration of the backend
-	// group, is also hashed by the same function. The row with the same number as the resulting value is looked up in the
-	// table to determine the endpoint that receives the request.
+	// the same amount of rows. An attribute of each request is also hashed by the same function (if session affinity is
+	// enabled for the backend group, the attribute to hash is specified in session affinity configuration). The row
+	// with the same number as the resulting value is looked up in the table to determine the endpoint that receives
+	// the request.
 	//
-	// If session affinity is not working for the backend group (i.e. it is not configured or the group contains more
-	// than one backend with positive weight), endpoints for backends with `MAGLEV_HASH` load balancing mode are picked at
-	// `RANDOM` instead.
+	// If the backend group with session affinity enabled contains more than one backend with positive weight, endpoints
+	// for backends with `MAGLEV_HASH` load balancing mode are picked at `RANDOM` instead.
 	LoadBalancingMode_MAGLEV_HASH LoadBalancingMode = 3
 )
 
@@ -631,10 +631,12 @@ type CookieSessionAffinity struct {
 
 	// Name of the cookie that is used for session affinity.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Maximum age of cookies that are generated for sessions (persistent cookies).
+	// Maximum age of cookies that are generated for sessions.
 	//
-	// If not set, session cookies are used, which are stored by clients in temporary memory and are deleted
+	// If set to `0`, session cookies are used, which are stored by clients in temporary memory and are deleted
 	// on client restarts.
+	//
+	// if not set, the balancer does not generate cookies and only uses incoming ones for establishing session affinity.
 	Ttl *durationpb.Duration `protobuf:"bytes,2,opt,name=ttl,proto3" json:"ttl,omitempty"`
 }
 
@@ -751,7 +753,8 @@ type LoadBalancingConfig struct {
 	// Default value: `0`.
 	PanicThreshold int64 `protobuf:"varint,1,opt,name=panic_threshold,json=panicThreshold,proto3" json:"panic_threshold,omitempty"`
 	// Percentage of traffic that a load balancer node sends to healthy backends in its availability zone.
-	// The rest is divided equally between other zones. For details about zone-aware routing, see [documentation](/docs/application-load-balancer/concepts/backend-group#locality).
+	// The rest is divided equally between other zones. For details about zone-aware routing, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#locality).
 	//
 	// If there are no healthy backends in an availability zone, all the traffic is divided between other zones.
 	//
@@ -773,7 +776,7 @@ type LoadBalancingConfig struct {
 	StrictLocality bool `protobuf:"varint,3,opt,name=strict_locality,json=strictLocality,proto3" json:"strict_locality,omitempty"`
 	// Load balancing mode for the backend.
 	//
-	// For detals about load balancing modes, see
+	// For details about load balancing modes, see
 	// [documentation](/docs/application-load-balancer/concepts/backend-group#balancing-mode).
 	Mode LoadBalancingMode `protobuf:"varint,4,opt,name=mode,proto3,enum=yandex.cloud.apploadbalancer.v1.LoadBalancingMode" json:"mode,omitempty"`
 }
