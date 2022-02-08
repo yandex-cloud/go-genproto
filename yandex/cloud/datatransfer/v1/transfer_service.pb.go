@@ -405,7 +405,7 @@ type ListTransfersRequest struct {
 	// folder contains more transfers than page_size, next_page_token will be included
 	// in the response message. Include it into the subsequent ListTransfersRequest to
 	// fetch the next page. Defaults to 100 if not specified. The maximum allowed value
-	// for this field is 100.
+	// for this field is 500.
 	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Opaque value identifying the transfers page to be fetched. Should be empty in
 	// the first ListTransfersRequest. Subsequent request should have this field filled

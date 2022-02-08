@@ -79,6 +79,10 @@ func (m *Revision) SetStatus(v Revision_Status) {
 	m.Status = v
 }
 
+func (m *Revision) SetSecrets(v []*Secret) {
+	m.Secrets = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -121,4 +125,28 @@ func (m *Resources) SetCores(v int64) {
 
 func (m *Resources) SetCoreFraction(v int64) {
 	m.CoreFraction = v
+}
+
+type Secret_Reference = isSecret_Reference
+
+func (m *Secret) SetReference(v Secret_Reference) {
+	m.Reference = v
+}
+
+func (m *Secret) SetId(v string) {
+	m.Id = v
+}
+
+func (m *Secret) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *Secret) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *Secret) SetEnvironmentVariable(v string) {
+	m.Reference = &Secret_EnvironmentVariable{
+		EnvironmentVariable: v,
+	}
 }

@@ -250,6 +250,14 @@ func (m *MysqlConfig5_7) SetLogSlowFilter(v []MysqlConfig5_7_LogSlowFilterType) 
 	m.LogSlowFilter = v
 }
 
+func (m *MysqlConfig5_7) SetMdbPriorityChoiceMaxLag(v *wrapperspb.Int64Value) {
+	m.MdbPriorityChoiceMaxLag = v
+}
+
+func (m *MysqlConfig5_7) SetInnodbPageSize(v *wrapperspb.Int64Value) {
+	m.InnodbPageSize = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

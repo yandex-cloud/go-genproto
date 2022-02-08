@@ -158,6 +158,10 @@ func (m *DeployContainerRevisionRequest) SetConcurrency(v int64) {
 	m.Concurrency = v
 }
 
+func (m *DeployContainerRevisionRequest) SetSecrets(v []*Secret) {
+	m.Secrets = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

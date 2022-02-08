@@ -151,3 +151,7 @@ func (m *PostgresTarget) SetUser(v string) {
 func (m *PostgresTarget) SetPassword(v *Secret) {
 	m.Password = v
 }
+
+func (m *PostgresTarget) SetCleanupPolicy(v CleanupPolicy) {
+	m.CleanupPolicy = v
+}

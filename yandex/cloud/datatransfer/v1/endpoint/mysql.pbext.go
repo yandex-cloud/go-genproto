@@ -107,3 +107,11 @@ func (m *MysqlTarget) SetSkipConstraintChecks(v bool) {
 func (m *MysqlTarget) SetTimezone(v string) {
 	m.Timezone = v
 }
+
+func (m *MysqlTarget) SetCleanupPolicy(v CleanupPolicy) {
+	m.CleanupPolicy = v
+}
+
+func (m *MysqlTarget) SetServiceDatabase(v string) {
+	m.ServiceDatabase = v
+}

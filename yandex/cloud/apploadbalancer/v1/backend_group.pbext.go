@@ -282,6 +282,14 @@ func (m *TargetGroupsBackend) SetTargetGroupIds(v []string) {
 	m.TargetGroupIds = v
 }
 
+func (m *SecureTransportSettings) SetSni(v string) {
+	m.Sni = v
+}
+
+func (m *SecureTransportSettings) SetValidationContext(v *ValidationContext) {
+	m.ValidationContext = v
+}
+
 func (m *BackendTls) SetSni(v string) {
 	m.Sni = v
 }
@@ -298,6 +306,12 @@ type HealthCheck_Healthcheck = isHealthCheck_Healthcheck
 
 func (m *HealthCheck) SetHealthcheck(v HealthCheck_Healthcheck) {
 	m.Healthcheck = v
+}
+
+type HealthCheck_TransportSettings = isHealthCheck_TransportSettings
+
+func (m *HealthCheck) SetTransportSettings(v HealthCheck_TransportSettings) {
+	m.TransportSettings = v
 }
 
 func (m *HealthCheck) SetTimeout(v *durationpb.Duration) {
@@ -339,6 +353,18 @@ func (m *HealthCheck) SetHttp(v *HealthCheck_HttpHealthCheck) {
 func (m *HealthCheck) SetGrpc(v *HealthCheck_GrpcHealthCheck) {
 	m.Healthcheck = &HealthCheck_Grpc{
 		Grpc: v,
+	}
+}
+
+func (m *HealthCheck) SetPlaintext(v *PlaintextTransportSettings) {
+	m.TransportSettings = &HealthCheck_Plaintext{
+		Plaintext: v,
+	}
+}
+
+func (m *HealthCheck) SetTls(v *SecureTransportSettings) {
+	m.TransportSettings = &HealthCheck_Tls{
+		Tls: v,
 	}
 }
 

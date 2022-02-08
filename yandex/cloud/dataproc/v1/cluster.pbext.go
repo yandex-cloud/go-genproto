@@ -102,10 +102,26 @@ func (m *HadoopConfig) SetSshPublicKeys(v []string) {
 	m.SshPublicKeys = v
 }
 
+func (m *HadoopConfig) SetInitializationActions(v []*InitializationAction) {
+	m.InitializationActions = v
+}
+
 func (m *ClusterConfig) SetVersionId(v string) {
 	m.VersionId = v
 }
 
 func (m *ClusterConfig) SetHadoop(v *HadoopConfig) {
 	m.Hadoop = v
+}
+
+func (m *InitializationAction) SetUri(v string) {
+	m.Uri = v
+}
+
+func (m *InitializationAction) SetArgs(v []string) {
+	m.Args = v
+}
+
+func (m *InitializationAction) SetTimeout(v int64) {
+	m.Timeout = v
 }
