@@ -636,7 +636,7 @@ type CookieSessionAffinity struct {
 	// If set to `0`, session cookies are used, which are stored by clients in temporary memory and are deleted
 	// on client restarts.
 	//
-	// if not set, the balancer does not generate cookies and only uses incoming ones for establishing session affinity.
+	// If not set, the balancer does not generate cookies and only uses incoming ones for establishing session affinity.
 	Ttl *durationpb.Duration `protobuf:"bytes,2,opt,name=ttl,proto3" json:"ttl,omitempty"`
 }
 

@@ -91,6 +91,10 @@ func (m *UpdateFilesystemRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *UpdateFilesystemRequest) SetSize(v int64) {
+	m.Size = v
+}
+
 func (m *UpdateFilesystemMetadata) SetFilesystemId(v string) {
 	m.FilesystemId = v
 }

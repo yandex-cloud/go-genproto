@@ -155,6 +155,10 @@ func (m *UpdateInstanceRequest) SetPlacementPolicy(v *PlacementPolicy) {
 	m.PlacementPolicy = v
 }
 
+func (m *UpdateInstanceRequest) SetSchedulingPolicy(v *SchedulingPolicy) {
+	m.SchedulingPolicy = v
+}
+
 func (m *UpdateInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }
