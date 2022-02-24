@@ -21,8 +21,9 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A MySQL database. For more information, see
-// the [documentation](/docs/managed-mysql/concepts).
+// An object that represents MySQL database.
+//
+// See [the documentation](/docs/managed-mysql/operations/databases) for details.
 type Database struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -30,7 +31,7 @@ type Database struct {
 
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the MySQL cluster that the database belongs to.
+	// ID of the cluster that the database belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -85,7 +86,7 @@ type DatabaseSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the MySQL database.
+	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 

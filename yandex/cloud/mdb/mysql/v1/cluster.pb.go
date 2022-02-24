@@ -28,11 +28,12 @@ type Cluster_Environment int32
 
 const (
 	Cluster_ENVIRONMENT_UNSPECIFIED Cluster_Environment = 0
-	// Stable environment with a conservative update policy:
-	// only hotfixes are applied during regular maintenance.
+	// Environment for stable versions of your apps.
+	// A conservative update policy is in effect: only bug fixes are applied during regular maintenance.
 	Cluster_PRODUCTION Cluster_Environment = 1
-	// Environment with more aggressive update policy: new versions
-	// are rolled out irrespective of backward compatibility.
+	// Environment for testing, including the Managed Service for MySQL itself.
+	// This environment gets new features, improvements, and bug fixes in the first place, compared to the production environment.
+	// However, not every update ensures backward compatibility.
 	Cluster_PRESTABLE Cluster_Environment = 2
 )
 
@@ -80,13 +81,13 @@ func (Cluster_Environment) EnumDescriptor() ([]byte, []int) {
 type Cluster_Health int32
 
 const (
-	// State of the cluster is unknown ([Host.health] for every host in the cluster is UNKNOWN).
+	// Health of the cluster is unknown ([Host.health] for every host in the cluster is `UNKNOWN`).
 	Cluster_HEALTH_UNKNOWN Cluster_Health = 0
-	// Cluster is alive and well ([Host.health] for every host in the cluster is ALIVE).
+	// Cluster is alive and well ([Host.health] for every host in the cluster is `ALIVE`).
 	Cluster_ALIVE Cluster_Health = 1
-	// Cluster is inoperable ([Host.health] for every host in the cluster is DEAD).
+	// Cluster is inoperable ([Host.health] for every host in the cluster is `DEAD`).
 	Cluster_DEAD Cluster_Health = 2
-	// Cluster is working below capacity ([Host.health] for at least one host in the cluster is not ALIVE).
+	// Cluster is degraded ([Host.health] for at least one host in the cluster is not `ALIVE`).
 	Cluster_DEGRADED Cluster_Health = 3
 )
 
@@ -148,7 +149,7 @@ const (
 	Cluster_UPDATING Cluster_Status = 4
 	// Cluster is stopping.
 	Cluster_STOPPING Cluster_Status = 5
-	// Cluster stopped.
+	// Cluster is stopped.
 	Cluster_STOPPED Cluster_Status = 6
 	// Cluster is starting.
 	Cluster_STARTING Cluster_Status = 7
@@ -208,11 +209,11 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Host_Role int32
 
 const (
-	// Role of the host in the cluster is unknown.
+	// Role of the host is unknown.
 	Host_ROLE_UNKNOWN Host_Role = 0
-	// Host is the master MySQL server in the cluster.
+	// Host is the master.
 	Host_MASTER Host_Role = 1
-	// Host is a replica MySQL server in the cluster.
+	// Host is a replica.
 	Host_REPLICA Host_Role = 2
 )
 
@@ -262,11 +263,11 @@ type Host_Health int32
 const (
 	// Health of the host is unknown.
 	Host_HEALTH_UNKNOWN Host_Health = 0
-	// The host is performing all its functions normally.
+	// Host is performing all its functions normally.
 	Host_ALIVE Host_Health = 1
-	// The host is inoperable, and cannot perform any of its essential functions.
+	// Host is inoperable, and cannot perform any of its essential functions.
 	Host_DEAD Host_Health = 2
-	// The host is degraded, and can perform only some of its essential functions.
+	// Host is degraded, and can perform only some of its essential functions.
 	Host_DEGRADED Host_Health = 3
 )
 
@@ -363,11 +364,11 @@ func (Service_Type) EnumDescriptor() ([]byte, []int) {
 type Service_Health int32
 
 const (
-	// Health of the server is unknown.
+	// Health of the service is unknown.
 	Service_HEALTH_UNKNOWN Service_Health = 0
-	// The server is working normally.
+	// The service is working normally.
 	Service_ALIVE Service_Health = 1
-	// The server is dead or unresponsive.
+	// The service is dead or unresponsive.
 	Service_DEAD Service_Health = 2
 )
 
@@ -412,47 +413,47 @@ func (Service_Health) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mysql_v1_cluster_proto_rawDescGZIP(), []int{4, 1}
 }
 
-// A MySQL cluster. For more information, see
-// the [documentation](/docs/managed-mysql/concepts).
+// An object that represents MySQL cluster.
+//
+// See [the documentation](/docs/managed-mysql/concepts) for details.
 type Cluster struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster.
-	// This ID is assigned by Managed Service for MySQL at creation time.
+	// ID of the cluster.
+	//
+	// This ID is assigned by Yandex.Cloud at the time of creation.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the folder that the MySQL cluster belongs to.
-	FolderId  string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the folder that the cluster belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp of the cluster.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the MySQL cluster.
-	// The name must be unique within the folder, comply with RFC 1035
-	// and be 1-63 characters long.
+	// Name of the cluster.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the MySQL cluster. 0-256 characters long.
+	// Description of the cluster.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MySQL cluster as `key:value` pairs.
-	// Maximum 64 per resource.
+	// Custom labels for the cluster as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Deployment environment of the MySQL cluster.
+	// Deployment environment of the cluster.
 	Environment Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Description of monitoring systems relevant to the MySQL cluster.
+	// Monitoring systems data that is relevant to the cluster.
 	Monitoring []*Monitoring `protobuf:"bytes,8,rep,name=monitoring,proto3" json:"monitoring,omitempty"`
-	// Configuration of the MySQL cluster.
+	// Configuration of the cluster.
 	Config *ClusterConfig `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`
 	// ID of the network that the cluster belongs to.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// Aggregated cluster health.
+	// Aggregated health of the cluster.
 	Health Cluster_Health `protobuf:"varint,11,opt,name=health,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Health" json:"health,omitempty"`
 	// Current state of the cluster.
 	Status Cluster_Status `protobuf:"varint,12,opt,name=status,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Status" json:"status,omitempty"`
-	// Maintenance window for the cluster.
+	// Maintenance window settings for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,13,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Planned maintenance operation to be started for the cluster within the nearest [maintenance_window].
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,14,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
-	// User security groups
+	// Effective list of security group IDs applied to the cluster.
 	SecurityGroupIds []string `protobuf:"bytes,15,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	// This option prevents unintended deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,16,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 }
 
@@ -600,6 +601,7 @@ func (x *Cluster) GetDeletionProtection() bool {
 	return false
 }
 
+// Cluster-related monitoring system data.
 type Monitoring struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -609,7 +611,7 @@ type Monitoring struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the monitoring system.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	// Link to the monitoring system charts for the MySQL cluster.
+	// Link to the monitoring system charts for the cluster.
 	Link string `protobuf:"bytes,3,opt,name=link,proto3" json:"link,omitempty"`
 }
 
@@ -671,19 +673,19 @@ type ClusterConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Version of MySQL server software.
+	// Version of MySQL used in the cluster.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// Configuration for MySQL servers in the cluster.
+	// Cluster-wide MySQL configuration.
 	//
 	// Types that are assignable to MysqlConfig:
 	//	*ClusterConfig_MysqlConfig_5_7
 	//	*ClusterConfig_MysqlConfig_8_0
 	MysqlConfig isClusterConfig_MysqlConfig `protobuf_oneof:"mysql_config"`
-	// Resources allocated to MySQL hosts.
+	// Resource preset for the cluster hosts.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
-	// Access policy to DB
+	// Access policy for external services.
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
 }
 
@@ -791,34 +793,32 @@ type Host struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the MySQL host. The host name is assigned by Managed Service for MySQL
-	// at creation time, and cannot be changed. 1-63 characters long.
+	// Name of the host.
 	//
-	// The name is unique across all existing database hosts in Yandex.Cloud,
-	// as it defines the FQDN of the host.
+	// This name is assigned by Yandex.Cloud at the time of creation.
+	// The name is unique across all existing MDB hosts in Yandex.Cloud, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the MySQL host. The ID is assigned by Managed Service for MySQL
-	// at creation time.
+	// ID of the cluster the host belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the availability zone where the MySQL host resides.
+	// ID of the availability zone where the host resides.
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Resources allocated to the host.
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Role of the host in the cluster.
 	Role Host_Role `protobuf:"varint,5,opt,name=role,proto3,enum=yandex.cloud.mdb.mysql.v1.Host_Role" json:"role,omitempty"`
-	// Status code of the aggregated health of the host.
+	// Aggregated health of the host.
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.mysql.v1.Host_Health" json:"health,omitempty"`
-	// Services provided by the host.
+	// List of services provided by the host.
 	Services []*Service `protobuf:"bytes,7,rep,name=services,proto3" json:"services,omitempty"`
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Flag showing public IP assignment status to this host.
+	// Flag that shows if public IP address is assigned to the host so that the host can be accessed from the internet.
 	AssignPublicIp bool `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Name of the host to be used as the replication source for cascading replication.
 	ReplicationSource string `protobuf:"bytes,10,opt,name=replication_source,json=replicationSource,proto3" json:"replication_source,omitempty"`
-	// Host backup priority
+	// Host backup priority.
 	BackupPriority int64 `protobuf:"varint,11,opt,name=backup_priority,json=backupPriority,proto3" json:"backup_priority,omitempty"`
-	// Host master promotion priority
+	// Host master promotion priority.
 	Priority int64 `protobuf:"varint,12,opt,name=priority,proto3" json:"priority,omitempty"`
 }
 
@@ -945,7 +945,7 @@ type Service struct {
 
 	// Type of the service provided by the host.
 	Type Service_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.mdb.mysql.v1.Service_Type" json:"type,omitempty"`
-	// Status code of server availability.
+	// Aggregated health of the service.
 	Health Service_Health `protobuf:"varint,2,opt,name=health,proto3,enum=yandex.cloud.mdb.mysql.v1.Service_Health" json:"health,omitempty"`
 }
 
@@ -995,20 +995,27 @@ func (x *Service) GetHealth() Service_Health {
 	return Service_HEALTH_UNKNOWN
 }
 
+// Cluster resource preset.
 type Resources struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the preset for computational resources available to a host (CPU, memory etc.).
-	// All available presets are listed in the [documentation](/docs/managed-mysql/concepts/instance-types).
+	// ID of the resource preset that defines available computational resources (vCPU, RAM, etc.) for a cluster host.
+	//
+	// All available presets are listed in [the documentation](/docs/managed-mysql/concepts/instance-types).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
-	// Volume of the storage available to a host.
+	// Volume of the storage (for each cluster host, in bytes).
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
-	// Type of the storage environment for the host.
+	// Type of the storage.
+	//
 	// Possible values:
-	// * network-ssd - network SSD drive,
-	// * local-ssd - local SSD storage.
+	// * `network-hdd` - standard network storage
+	// * `network-ssd` - fast network storage
+	// * `network-ssd-nonreplicated` - fast network nonreplicated storage
+	// * `local-ssd` - fast local storage.
+	//
+	// See [the documentation](/docs/managed-mysql/concepts/storage) for details.
 	DiskTypeId string `protobuf:"bytes,3,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 }
 
@@ -1070,11 +1077,13 @@ type Access struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Allow access for DataLens
-	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allow SQL queries to the cluster databases from the Yandex.Cloud management console.
+	// Allows access from DataLens.
 	//
-	// See [SQL queries in the management console](/docs/managed-mysql/operations/web-sql-query) for more details.
+	// See [the documentation](/docs/managed-mysql/operations/datalens-connect) for details.
+	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
+	// Allows SQL queries to the cluster databases from Yandex.Cloud management console.
+	//
+	// See [the documentation](/docs/managed-mysql/operations/web-sql-query) for details.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
 }
 
@@ -1129,11 +1138,11 @@ type PerformanceDiagnostics struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Configuration setting which enables/disables performance diagnostics service in cluster.
+	// Flag that shows if performance statistics gathering is enabled for the cluster.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Interval (in seconds) for my_session sampling
+	// Interval (in seconds) for `my_session` sampling.
 	SessionsSamplingInterval int64 `protobuf:"varint,2,opt,name=sessions_sampling_interval,json=sessionsSamplingInterval,proto3" json:"sessions_sampling_interval,omitempty"`
-	// Interval (in seconds) for my_statements sampling
+	// Interval (in seconds) for `my_statements` sampling.
 	StatementsSamplingInterval int64 `protobuf:"varint,3,opt,name=statements_sampling_interval,json=statementsSamplingInterval,proto3" json:"statements_sampling_interval,omitempty"`
 }
 

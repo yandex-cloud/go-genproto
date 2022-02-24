@@ -28,7 +28,8 @@ type GetBackupRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the backup to return information about.
-	// To get the backup ID, use a [ClusterService.ListBackups] request.
+	//
+	// To get this ID, make a [BackupService.List] request (lists all backups in a folder) or a [ClusterService.ListBackups] request (lists all backups for an existing cluster).
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 }
 
@@ -77,14 +78,16 @@ type ListBackupsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the folder to list backups in.
-	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	//
+	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListBackupsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListBackupsResponse.next_page_token] that can be used to get the next page of results in the subsequent [BackupService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token.  To get the next page of results, Set [page_token] to the [ListBackupsResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListBackupsResponse.next_page_token] returned by the previous [BackupService.List] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -146,12 +149,13 @@ type ListBackupsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of MySQL backups.
+	// List of backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListBackupsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListBackupsRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListBackupsRequest.page_size], use the [next_page_token] as the value for the [ListBackupsRequest.page_token] in the subsequent [BackupService.List] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [BackupService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 

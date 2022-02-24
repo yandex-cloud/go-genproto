@@ -22,8 +22,9 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A MySQL backup. For more information, see
-// the [documentation](/docs/managed-mysql/concepts/backup).
+// An object that represents MySQL backup.
+//
+// See [the documentation](/docs/managed-mysql/concepts/backup) for details.
 type Backup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -32,11 +33,12 @@ type Backup struct {
 	// ID of the backup.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the backup belongs to.
-	FolderId  string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"` // Comment for API reference generated automatically.
-	// ID of the MySQL cluster that the backup was created for.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp (the time when the backup operation was completed).
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// ID of the cluster that the backup was created for.
 	SourceClusterId string `protobuf:"bytes,4,opt,name=source_cluster_id,json=sourceClusterId,proto3" json:"source_cluster_id,omitempty"`
-	// Time when the backup operation was started.
+	// Start timestamp (the time when the backup operation was started).
 	StartedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 }
 

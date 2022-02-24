@@ -538,6 +538,26 @@ func (m *PostgresqlConfig13) SetLogParameterMaxLengthOnError(v *wrapperspb.Int64
 	m.LogParameterMaxLengthOnError = v
 }
 
+func (m *PostgresqlConfig13) SetPgQualstatsEnabled(v *wrapperspb.BoolValue) {
+	m.PgQualstatsEnabled = v
+}
+
+func (m *PostgresqlConfig13) SetPgQualstatsTrackConstants(v *wrapperspb.BoolValue) {
+	m.PgQualstatsTrackConstants = v
+}
+
+func (m *PostgresqlConfig13) SetPgQualstatsMax(v *wrapperspb.Int64Value) {
+	m.PgQualstatsMax = v
+}
+
+func (m *PostgresqlConfig13) SetPgQualstatsResolveOids(v *wrapperspb.BoolValue) {
+	m.PgQualstatsResolveOids = v
+}
+
+func (m *PostgresqlConfig13) SetPgQualstatsSampleRate(v *wrapperspb.DoubleValue) {
+	m.PgQualstatsSampleRate = v
+}
+
 func (m *PostgresqlConfigSet13) SetEffectiveConfig(v *PostgresqlConfig13) {
 	m.EffectiveConfig = v
 }

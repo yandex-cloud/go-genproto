@@ -558,6 +558,26 @@ func (m *PostgresqlConfig14) SetVacuumMultixactFailsafeAge(v *wrapperspb.Int64Va
 	m.VacuumMultixactFailsafeAge = v
 }
 
+func (m *PostgresqlConfig14) SetPgQualstatsEnabled(v *wrapperspb.BoolValue) {
+	m.PgQualstatsEnabled = v
+}
+
+func (m *PostgresqlConfig14) SetPgQualstatsTrackConstants(v *wrapperspb.BoolValue) {
+	m.PgQualstatsTrackConstants = v
+}
+
+func (m *PostgresqlConfig14) SetPgQualstatsMax(v *wrapperspb.Int64Value) {
+	m.PgQualstatsMax = v
+}
+
+func (m *PostgresqlConfig14) SetPgQualstatsResolveOids(v *wrapperspb.BoolValue) {
+	m.PgQualstatsResolveOids = v
+}
+
+func (m *PostgresqlConfig14) SetPgQualstatsSampleRate(v *wrapperspb.DoubleValue) {
+	m.PgQualstatsSampleRate = v
+}
+
 func (m *PostgresqlConfigSet14) SetEffectiveConfig(v *PostgresqlConfig14) {
 	m.EffectiveConfig = v
 }

@@ -19,21 +19,19 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	// Returns the specified MySQL user.
-	//
-	// To get the list of available MySQL users, make a [List] request.
+	// Retrieves information about the specified user.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
-	// Retrieves a list of MySQL users in the specified cluster.
+	// Retrieves the list of users in a cluster.
 	List(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Creates a MySQL user in the specified cluster.
+	// Creates a user in a cluster.
 	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Modifies the specified MySQL user.
+	// Updates a user in a cluster.
 	Update(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified MySQL user.
+	// Deletes a user in a cluster.
 	Delete(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Grants a permission to the specified MySQL user.
+	// Grants permission to access a database to a user in a cluster.
 	GrantPermission(ctx context.Context, in *GrantUserPermissionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Revokes a permission from the specified MySQL user.
+	// Revokes permission to access a database from a user in a cluster.
 	RevokePermission(ctx context.Context, in *RevokeUserPermissionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -112,21 +110,19 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
-	// Returns the specified MySQL user.
-	//
-	// To get the list of available MySQL users, make a [List] request.
+	// Retrieves information about the specified user.
 	Get(context.Context, *GetUserRequest) (*User, error)
-	// Retrieves a list of MySQL users in the specified cluster.
+	// Retrieves the list of users in a cluster.
 	List(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Creates a MySQL user in the specified cluster.
+	// Creates a user in a cluster.
 	Create(context.Context, *CreateUserRequest) (*operation.Operation, error)
-	// Modifies the specified MySQL user.
+	// Updates a user in a cluster.
 	Update(context.Context, *UpdateUserRequest) (*operation.Operation, error)
-	// Deletes the specified MySQL user.
+	// Deletes a user in a cluster.
 	Delete(context.Context, *DeleteUserRequest) (*operation.Operation, error)
-	// Grants a permission to the specified MySQL user.
+	// Grants permission to access a database to a user in a cluster.
 	GrantPermission(context.Context, *GrantUserPermissionRequest) (*operation.Operation, error)
-	// Revokes a permission from the specified MySQL user.
+	// Revokes permission to access a database from a user in a cluster.
 	RevokePermission(context.Context, *RevokeUserPermissionRequest) (*operation.Operation, error)
 }
 

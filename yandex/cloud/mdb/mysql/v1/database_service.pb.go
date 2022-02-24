@@ -29,11 +29,13 @@ type GetDatabaseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster that the database belongs to.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the cluster that the database belongs to.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MySQL database to return.
-	// To get the name of the database use a [DatabaseService.List] request.
+	// Name of the database to return information about.
+	//
+	// To get this name, make a [DatabaseService.List] request.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 }
 
@@ -88,15 +90,17 @@ type ListDatabasesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to list databases in.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to list databases in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListDatabasesResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListDatabasesResponse.next_page_token] that can be used to get the next page of results in the subsequent [DatabaseService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, Set [page_token] to the [ListDatabasesResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListDatabasesResponse.next_page_token] returned by the previous [DatabaseService.List] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -158,12 +162,13 @@ type ListDatabasesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of MySQL databases.
+	// List of databases.
 	Databases []*Database `protobuf:"bytes,1,rep,name=databases,proto3" json:"databases,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListDatabasesRequest.page_size], use the [next_page_token] as the value
-	// for the [ListDatabasesRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListDatabasesRequest.page_size], use the [next_page_token] as the value for the [ListDatabasesRequest.page_token] in the subsequent [DatabaseService.List] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [DatabaseService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -218,10 +223,11 @@ type CreateDatabaseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to create a database in.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to create the database in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Configuration of the database to create.
+	// Configuration of the database.
 	DatabaseSpec *DatabaseSpec `protobuf:"bytes,2,opt,name=database_spec,json=databaseSpec,proto3" json:"database_spec,omitempty"`
 }
 
@@ -276,9 +282,9 @@ type CreateDatabaseMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster where a database is being created.
+	// ID of the cluster the database is being created in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MySQL database that is being created.
+	// Name of the database that is being created.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 }
 
@@ -333,11 +339,13 @@ type DeleteDatabaseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to delete a database in.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to delete the database from.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the database to delete.
-	// To get the name of the database, use a [DatabaseService.List] request.
+	//
+	// To get this name, make a [DatabaseService.List] request.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 }
 
@@ -392,9 +400,9 @@ type DeleteDatabaseMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster where a database is being deleted.
+	// ID of the cluster the database is being deleted from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MySQL database that is being deleted.
+	// Name of the database that is being deleted.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 }
 

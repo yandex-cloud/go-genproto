@@ -89,6 +89,10 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *CreateClusterRequest) SetExtensionSpecs(v []*ExtensionSpec) {
+	m.ExtensionSpecs = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -491,6 +495,10 @@ func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 
 func (m *RestoreClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
+}
+
+func (m *RestoreClusterRequest) SetExtensionSpecs(v []*ExtensionSpec) {
+	m.ExtensionSpecs = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

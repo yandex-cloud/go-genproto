@@ -19,43 +19,51 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClusterServiceClient interface {
-	// Returns the specified MySQL cluster.
-	//
-	// To get the list of available MySQL clusters, make a [List] request.
+	// Retrieves information about a cluster.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves the list of MySQL clusters that belong to the specified folder.
+	// Retrieves the list of clusters in a folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Creates a MySQL cluster in the specified folder.
+	// Creates a cluster in a folder.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Modifies the specified MySQL cluster.
+	// Updates a cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified MySQL cluster.
+	// Deletes a cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Starts the specified MySQL cluster.
+	// Starts a cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stops the specified MySQL cluster.
+	// Stops a cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Moves the specified MySQL cluster to the specified folder.
+	// Moves a cluster to a folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a backup for the specified MySQL cluster.
+	// Creates a backup for a cluster.
+	//
+	// To get information about a backup, make a [BackupService.Get] request.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a new MySQL cluster using the specified backup.
+	// Restores a backup to a new cluster.
+	//
+	// See [the documentation](/docs/managed-mysql/concepts/backup) for details.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start a manual failover on the specified MySQL cluster.
+	// Starts a manual failover for a cluster.
 	StartFailover(ctx context.Context, in *StartClusterFailoverRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves logs for the specified MySQL cluster.
+	// Retrieves logs for a cluster.
+	//
+	// Alternatively, logs can be streamed using [StreamLogs].
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
-	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// Retrieves a log stream for a cluster.
+	//
+	// This method is similar to [ListLogs], but uses server-side streaming, which allows for the `tail -f` command semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error)
-	// Retrieves the list of operations for the specified MySQL cluster.
+	// Retrieves a list of operations for a cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
-	// Retrieves the list of available backups for the specified MySQL cluster.
+	// Retrieves a list of backups for a cluster.
+	//
+	// To list all backups in a folder, make a [BackupService.List] request.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
-	// Retrieves a list of hosts for the specified MySQL cluster.
+	// Retrieves a list of hosts for a cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
-	// Creates new hosts for a cluster.
+	// Adds new hosts in a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified hosts.
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -278,43 +286,51 @@ func (c *clusterServiceClient) DeleteHosts(ctx context.Context, in *DeleteCluste
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility
 type ClusterServiceServer interface {
-	// Returns the specified MySQL cluster.
-	//
-	// To get the list of available MySQL clusters, make a [List] request.
+	// Retrieves information about a cluster.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves the list of MySQL clusters that belong to the specified folder.
+	// Retrieves the list of clusters in a folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Creates a MySQL cluster in the specified folder.
+	// Creates a cluster in a folder.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
-	// Modifies the specified MySQL cluster.
+	// Updates a cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
-	// Deletes the specified MySQL cluster.
+	// Deletes a cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Starts the specified MySQL cluster.
+	// Starts a cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stops the specified MySQL cluster.
+	// Stops a cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Moves the specified MySQL cluster to the specified folder.
+	// Moves a cluster to a folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
-	// Creates a backup for the specified MySQL cluster.
+	// Creates a backup for a cluster.
+	//
+	// To get information about a backup, make a [BackupService.Get] request.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
-	// Creates a new MySQL cluster using the specified backup.
+	// Restores a backup to a new cluster.
+	//
+	// See [the documentation](/docs/managed-mysql/concepts/backup) for details.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
-	// Start a manual failover on the specified MySQL cluster.
+	// Starts a manual failover for a cluster.
 	StartFailover(context.Context, *StartClusterFailoverRequest) (*operation.Operation, error)
-	// Retrieves logs for the specified MySQL cluster.
+	// Retrieves logs for a cluster.
+	//
+	// Alternatively, logs can be streamed using [StreamLogs].
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
-	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// Retrieves a log stream for a cluster.
+	//
+	// This method is similar to [ListLogs], but uses server-side streaming, which allows for the `tail -f` command semantics.
 	StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error
-	// Retrieves the list of operations for the specified MySQL cluster.
+	// Retrieves a list of operations for a cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
-	// Retrieves the list of available backups for the specified MySQL cluster.
+	// Retrieves a list of backups for a cluster.
+	//
+	// To list all backups in a folder, make a [BackupService.List] request.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
-	// Retrieves a list of hosts for the specified MySQL cluster.
+	// Retrieves a list of hosts for a cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
-	// Creates new hosts for a cluster.
+	// Adds new hosts in a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified hosts.
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)

@@ -19,15 +19,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DatabaseServiceClient interface {
-	// Returns the specified MySQL database.
-	//
-	// To get the list of available MySQL databases, make a [List] request.
+	// Retrieves information about the specified database.
 	Get(ctx context.Context, in *GetDatabaseRequest, opts ...grpc.CallOption) (*Database, error)
-	// Retrieves the list of MySQL databases in the specified cluster.
+	// Retrieves the list of databases in a cluster.
 	List(ctx context.Context, in *ListDatabasesRequest, opts ...grpc.CallOption) (*ListDatabasesResponse, error)
-	// Creates a new MySQL database in the specified cluster.
+	// Creates a new database in a cluster.
 	Create(ctx context.Context, in *CreateDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified MySQL database.
+	// Deletes a database from a cluster.
 	Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -79,15 +77,13 @@ func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRe
 // All implementations should embed UnimplementedDatabaseServiceServer
 // for forward compatibility
 type DatabaseServiceServer interface {
-	// Returns the specified MySQL database.
-	//
-	// To get the list of available MySQL databases, make a [List] request.
+	// Retrieves information about the specified database.
 	Get(context.Context, *GetDatabaseRequest) (*Database, error)
-	// Retrieves the list of MySQL databases in the specified cluster.
+	// Retrieves the list of databases in a cluster.
 	List(context.Context, *ListDatabasesRequest) (*ListDatabasesResponse, error)
-	// Creates a new MySQL database in the specified cluster.
+	// Creates a new database in a cluster.
 	Create(context.Context, *CreateDatabaseRequest) (*operation.Operation, error)
-	// Deletes the specified MySQL database.
+	// Deletes a database from a cluster.
 	Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error)
 }
 

@@ -206,8 +206,9 @@ type GetClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to return.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to return information about.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -255,17 +256,20 @@ type ListClustersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the folder to list MySQL clusters in.
-	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// ID of the folder to list clusters in.
+	//
+	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListClustersResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token] returned by the previous [ClusterService.List] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// A filter expression that filters resources listed in the response.
+	// A filter expression that selects clusters listed in the response.
+	//
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
 	// 2. An `=` operator.
@@ -338,12 +342,13 @@ type ListClustersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of MySQL clusters.
+	// List of clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
-	// for the [ListClustersRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value for the [ListClustersRequest.page_token] in the subsequent [ClusterService.List] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [ClusterService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -398,30 +403,31 @@ type CreateClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the folder to create the MySQL cluster in.
+	// ID of the folder to create the cluster in.
+	//
+	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the MySQL cluster. The name must be unique within the folder.
+	// Name of the cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the MySQL cluster.
+	// Description of the cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
-	// For example, "project": "mvp" or "source": "dictionary".
+	// Custom labels for the cluster as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Deployment environment of the MySQL cluster.
+	// Deployment environment of the cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration and resources for hosts that should be created for the MySQL cluster.
+	// Configuration of the cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Descriptions of databases to be created in the MySQL cluster.
+	// Configuration of databases in the cluster.
 	DatabaseSpecs []*DatabaseSpec `protobuf:"bytes,7,rep,name=database_specs,json=databaseSpecs,proto3" json:"database_specs,omitempty"`
-	// Descriptions of database users to be created in the MySQL cluster.
+	// Configuration of database users in the cluster.
 	UserSpecs []*UserSpec `protobuf:"bytes,8,rep,name=user_specs,json=userSpecs,proto3" json:"user_specs,omitempty"`
-	// Individual configurations for hosts that should be created for the MySQL cluster.
+	// Configuration of hosts in the cluster.
 	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	// ID of the network to create the cluster in.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// User security groups
+	// List of security group IDs to apply to the cluster.
 	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	// This option prevents unintended deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,12,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 }
 
@@ -546,7 +552,7 @@ type CreateClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster that is being created.
+	// ID of the cluster that is being created.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -594,28 +600,28 @@ type UpdateClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to update.
-	// To get the MySQL cluster ID, use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Field mask that specifies which fields of the MySQL cluster should be updated.
-	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// New description of the MySQL cluster.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
-	// For example, "project": "mvp" or "source": "dictionary".
+	// ID of the cluster to update.
 	//
-	// The new set of labels will completely replace the old ones. To add a label, request the current
-	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
+	// To get this ID, make a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Field mask that specifies which settings of the cluster should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New description of the cluster.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// New set of custom labels for the cluster as `key:value` pairs.
+	//
+	// This set will completely replace the current one.
+	// To add a label, request the current label set with the [ClusterService.Get] request, then send an [ClusterService.Update] request with the new label added to the current set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// New configuration and resources for hosts in the cluster.
+	// New configuration of the cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// New name for the cluster.
+	// New name of the cluster.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// New maintenance window settings for the cluster.
+	// Configuration of a maintenance window in an MySQL cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,7,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// User security groups
+	// New list of security group IDs to apply to the cluster.
 	SecurityGroupIds []string `protobuf:"bytes,8,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	// This option prevents unintended deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,9,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 }
 
@@ -719,7 +725,7 @@ type UpdateClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster that is being modified.
+	// ID of the cluster that is being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -767,8 +773,9 @@ type DeleteClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to delete.
-	// To get the MySQL cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to delete.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -816,7 +823,7 @@ type DeleteClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster that is being deleted.
+	// ID of the cluster that is being deleted.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -864,8 +871,9 @@ type BackupClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to back up.
-	// To get the MySQL cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to back up.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -913,7 +921,7 @@ type BackupClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster that is being backed up.
+	// ID of the cluster that is being backed up.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -961,30 +969,29 @@ type RestoreClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the backup to create a cluster from.
-	// To get the backup ID, use a [ClusterService.ListBackups] request.
+	// ID of the backup to restore from.
+	//
+	// To get this ID, make a [BackupService.List] request (lists all backups in a folder) or a [ClusterService.ListBackups] request (lists all backups for an existing cluster).
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// Timestamp of the moment to which the MySQL cluster should be restored.
 	Time *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
-	// Name of the new MySQL cluster. The name must be unique within the folder.
+	// Name of the new MySQL cluster the backup will be restored to. The name must be unique within the folder.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the new MySQL cluster.
+	// Description of the new cluster.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
-	// For example, "project": "mvp" or "source": "dictionary".
+	// Custom labels for the new cluster as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Deployment environment of the new MySQL cluster.
+	// Deployment environment for the new cluster.
 	Environment Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration for the MySQL cluster to be created.
+	// Configuration of the new cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,8,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Configurations for MySQL hosts that should be added
-	// to the cluster that is being created from the backup.
+	// Configuration of hosts in the new cluster.
 	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	// ID of the network to create the MySQL cluster in.
+	// ID of the network to create the new cluster in.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// ID of the folder to create the MySQL cluster in.
+	// ID of the folder to create the new cluster in.
 	FolderId string `protobuf:"bytes,11,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// User security groups
+	// List of security group IDs to apply to the new cluster.
 	SecurityGroupIds []string `protobuf:"bytes,12,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 }
 
@@ -1102,7 +1109,7 @@ type RestoreClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the new MySQL cluster that is being created from a backup.
+	// ID of the new cluster that is being created from a backup.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the backup that is being used for creating a cluster.
 	BackupId string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
@@ -1159,9 +1166,14 @@ type StartClusterFailoverRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of MySQL cluster.
+	// ID of the cluster to start failover for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// New master host. Switch to the most up-to-date replica if not provided.
+	// Host name to switch master role to.
+	// If not provided, then the master role is switched to the most up-to-date replica host.
+	//
+	// To get this name, make a [ClusterService.ListHosts] request.
 	HostName string `protobuf:"bytes,2,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
 }
 
@@ -1216,7 +1228,7 @@ type StartClusterFailoverMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster being failovered.
+	// ID of the cluster that is being failovered.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -1264,11 +1276,15 @@ type RescheduleMaintenanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to reschedule the maintenance operation for.
+	// ID of the cluster to reschedule the maintenance operation for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The type of reschedule request.
 	RescheduleType RescheduleMaintenanceRequest_RescheduleType `protobuf:"varint,2,opt,name=reschedule_type,json=rescheduleType,proto3,enum=yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest_RescheduleType" json:"reschedule_type,omitempty"`
-	// The time until which this maintenance operation should be delayed. The value should be ahead of the first time when the maintenance operation has been scheduled for no more than two weeks. The value can also point to the past moment of time if [reschedule_type.IMMEDIATE] reschedule type is chosen.
+	// The time until which this maintenance operation should be delayed.
+	// The value should be ahead of the first time when the maintenance operation has been scheduled for no more than two weeks.
+	// The value can also point to the past moment of time if `IMMEDIATE` reschedule type is chosen.
 	DelayedUntil *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 
@@ -1325,15 +1341,14 @@ func (x *RescheduleMaintenanceRequest) GetDelayedUntil() *timestamppb.Timestamp 
 	return nil
 }
 
-// Rescheduled maintenance operation metadata.
 type RescheduleMaintenanceMetadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the MySQL cluster.
+	// ID of the cluster the maintenance operation is being rescheduled for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The time until which this maintenance operation is to be delayed.
+	// The time until which this maintenance operation is to be delayed.
 	DelayedUntil *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 }
 
@@ -1383,12 +1398,13 @@ func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp
 	return nil
 }
 
+// A single log record.
 type LogRecord struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Log record timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	// Timestamp of the log record.
 	Timestamp *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Contents of the log record.
 	Message map[string]string `protobuf:"bytes,2,rep,name=message,proto3" json:"message,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
@@ -1445,26 +1461,31 @@ type ListClusterLogsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to request logs for.
-	// To get the MySQL cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to request logs for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
-	// If no columns are specified, entire log records are returned.
+	// If no columns are specified, complete log records are returned.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
-	// Type of the service to request logs about.
+	// The log type.
 	ServiceType ListClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
 	// Start timestamp for the logs request.
+	// The logs in the response will be within [from_time] to [to_time] range.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
+	// The logs in the response will be within [from_time] to [to_time] range.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterLogsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListClusterLogsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListLogs] requests.
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListClusterLogsResponse.next_page_token] returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListClusterLogsResponse.next_page_token] returned by the previous [ClusterService.ListLogs] request.
 	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Always return `next_page_token`, even if current page is empty.
+	// Option that controls the behavior of result pagination.
+	// If it is set to `true`, then [ListClusterLogsResponse.next_page_token] will always be returned, even if the current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
 }
 
@@ -1563,11 +1584,13 @@ type ListClusterLogsResponse struct {
 
 	// Requested log records.
 	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
-	// This value is interchangeable with `next_record_token` from StreamLogs method.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value for the [ListClusterLogsRequest.page_token] in the subsequent [ClusterService.ListLogs] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [ClusterService.ListLogs] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
+	//
+	// This value is interchangeable with [StreamLogRecord.next_record_token] from [ClusterService.StreamLogs] method.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1617,6 +1640,7 @@ func (x *ListClusterLogsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// A single log record in the logs stream.
 type StreamLogRecord struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1624,10 +1648,10 @@ type StreamLogRecord struct {
 
 	// One of the requested log records.
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
-	// This token allows you to continue streaming logs starting from the exact
-	// same record. To continue streaming, specify value of `next_record_token`
-	// as value for `record_token` parameter in the next StreamLogs request.
-	// This value is interchangeable with `next_page_token` from ListLogs method.
+	// The token that can be used to continue streaming logs starting from the exact same record.
+	// To continue streaming, specify value of [next_record_token] as the [StreamClusterLogsRequest.record_token] value in the next [ClusterService.StreamLogs] request.
+	//
+	// This value is interchangeable with [ListClusterLogsResponse.next_page_token] from [ClusterService.ListLogs] method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 }
 
@@ -1682,21 +1706,28 @@ type StreamClusterLogsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the MySQL cluster.
+	// ID of the cluster to stream logs for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Columns from logs table to get in the response.
-	ColumnFilter []string                             `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
-	ServiceType  StreamClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	// Columns from the logs table to request.
+	// If no columns are specified, complete log records are returned.
+	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
+	// The log type.
+	ServiceType StreamClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
-	// If this field is not set, all existing logs will be sent and then the new ones as
-	// they appear. In essence it has 'tail -f' semantics.
+	// If this field is not set, all existing log records beginning from [from_time] will be returned first, and then the new records will be returned as they appear.
+	//
+	// In essence it has `tail -f` command semantics.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	// Record token. Set `record_token` to the `next_record_token` returned by a previous StreamLogs
-	// request to start streaming from next log record.
+	// Record token that can be used to control logs streaming.
+	//
+	// Set [record_token] to the [StreamLogRecord.next_record_token], returned by the previous [ClusterService.StreamLogs] request to start streaming from the next log record.
 	RecordToken string `protobuf:"bytes,6,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
-	// A filter expression that filters resources listed in the response.
+	// A filter expression that selects clusters logs listed in the response.
+	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [LogRecord.logs.hostname] field.
 	// 2. An `=` operator.
@@ -1791,14 +1822,17 @@ type ListClusterOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to list operations for.
+	// ID of the cluster to list operations for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListOperations] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token.  To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token] returned by the previous [ClusterService.ListOperations] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -1860,12 +1894,13 @@ type ListClusterOperationsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of operations for the specified MySQL cluster.
+	// List of operations in the cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value for the [ListClusterOperationsRequest.page_token] in the subsequent [ClusterService.ListOperations] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [ClusterService.ListOperations] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1920,15 +1955,17 @@ type ListClusterBackupsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster.
-	// To get the MySQL cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to list backups for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListClusterBackupsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListBackups] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token.  To get the next page of results, set [page_token] to the [ListClusterBackupsResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListClusterBackupsResponse.next_page_token] returned by the previous [ClusterService.ListBackups] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -1990,12 +2027,13 @@ type ListClusterBackupsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of MySQL backups.
+	// List of the cluster backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListClusterBackupsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value for the [ListClusterBackupsRequest.page_token] in the subsequent [ClusterService.ListBackups] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [ClusterService.ListBackups] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -2050,15 +2088,17 @@ type ListClusterHostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster.
-	// To get the MySQL cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to list hosts for.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListHosts] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token.  To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token] returned by the previous [ClusterService.ListHosts] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -2120,12 +2160,13 @@ type ListClusterHostsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of MySQL hosts.
+	// List of hosts in the cluster.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value for the [ListClusterHostsRequest.page_token] in the subsequent [ClusterService.ListHosts] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [ClusterService.ListHosts] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -2180,10 +2221,11 @@ type AddClusterHostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to add hosts to.
-	// To get the MySQL cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to add hosts to.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Configurations for MySQL hosts that should be added to the cluster.
+	// Configuration of the newly added hosts.
 	HostSpecs []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 }
 
@@ -2238,9 +2280,9 @@ type AddClusterHostsMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to which the hosts are being added.
+	// ID of the cluster to which the hosts are being added.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Names of hosts that are being added to the cluster.
+	// Names of hosts that are being added.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 }
 
@@ -2295,10 +2337,13 @@ type DeleteClusterHostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to remove hosts from.
-	// To get the MySQL cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to delete hosts from.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts to delete.
+	//
+	// To get these names, make a [ClusterService.ListHosts] request.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 }
 
@@ -2353,7 +2398,7 @@ type DeleteClusterHostsMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to remove hosts from.
+	// ID of the cluster from which the hosts are being deleted.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts that are being deleted.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2410,7 +2455,9 @@ type StartClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to start.
+	// ID of the cluster to start.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -2458,7 +2505,7 @@ type StartClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster being started.
+	// ID of the cluster that is being started.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -2506,7 +2553,9 @@ type StopClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to stop.
+	// ID of the cluster to stop.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -2554,7 +2603,7 @@ type StopClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster being stopped.
+	// ID of the cluster that is being stopped.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -2602,9 +2651,13 @@ type MoveClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to move.
+	// ID of the cluster to move.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the destination folder.
+	//
+	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 
@@ -2659,11 +2712,11 @@ type MoveClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster being moved.
+	// ID of the cluster that is being moved.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the source folder.
 	SourceFolderId string `protobuf:"bytes,2,opt,name=source_folder_id,json=sourceFolderId,proto3" json:"source_folder_id,omitempty"`
-	// ID of the destnation folder.
+	// ID of the destination folder.
 	DestinationFolderId string `protobuf:"bytes,3,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 
@@ -2783,9 +2836,9 @@ type UpdateClusterHostsMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to modify hosts in.
+	// ID of the cluster in which the hosts are being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Names of hosts that are being modified.
+	// Names of hosts that are being updated.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 }
 
@@ -2841,18 +2894,18 @@ type UpdateHostSpec struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Name of the host to update.
-	// To get the MySQL host name, use a [ClusterService.ListHosts] request.
+	// To get a MySQL host name, use a [ClusterService.ListHosts] request.
 	HostName string `protobuf:"bytes,1,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
 	// [Host.name] of the host to be used as the replication source (for cascading replication).
-	// To get the MySQL host name, use a [ClusterService.ListHosts] request.
+	// To get a MySQL host name, use a [ClusterService.ListHosts] request.
 	ReplicationSource string `protobuf:"bytes,2,opt,name=replication_source,json=replicationSource,proto3" json:"replication_source,omitempty"`
-	// Field mask that specifies which fields of the MySQL host should be updated.
+	// Field mask that specifies which settings of the MySQL host should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Host backup priority
+	// Host backup priority.
 	BackupPriority int64 `protobuf:"varint,4,opt,name=backup_priority,json=backupPriority,proto3" json:"backup_priority,omitempty"`
 	// Whether the host should get a public IP address on creation.
 	AssignPublicIp bool `protobuf:"varint,5,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	// Host master promotion priority
+	// Host master promotion priority.
 	Priority int64 `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
 }
 
@@ -2936,20 +2989,21 @@ type HostSpec struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the availability zone where the host resides.
-	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
-	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of the subnet that the host should belong to. This subnet should be a part
-	// of the network that the cluster belongs to.
-	// The ID of the network is set in the field [Cluster.network_id].
-	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Whether the host should get a public IP address on creation.
 	//
-	// After a host has been created, this setting cannot be changed. To remove an assigned public IP, or to assign
-	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
+	// To get a list of available zones, make the [yandex.cloud.compute.v1.ZoneService.List] request.
+	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// ID of the subnet to assign to the host.
+	//
+	// This subnet should be a part of the cluster network (the network ID is specified in the [ClusterService.CreateClusterRequest.network_id]).
+	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Option that enables public IP address for the host so that the host can be accessed from the internet.
+	//
+	// After a host has been created, this setting cannot be changed.
+	// To remove an assigned public IP address, or to assign a public IP address to a host without one, recreate the host with the appropriate [assign_public_ip] value set.
 	//
 	// Possible values:
-	// * false - don't assign a public IP to the host.
-	// * true - the host should have a public IP address.
+	// * `false` - don't assign a public IP address to the host.
+	// * `true` - assign a public IP address to the host.
 	AssignPublicIp bool `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// [Host.name] of the host to be used as the replication source (for cascading replication).
 	ReplicationSource string `protobuf:"bytes,4,opt,name=replication_source,json=replicationSource,proto3" json:"replication_source,omitempty"`
@@ -3039,21 +3093,22 @@ type ConfigSpec struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Version of MySQL used in the cluster.
-	// Possible values:
-	// * 5.7
-	// * 8.0
+	//
+	// Possible values: `5.7`, `8.0`.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"` // No formal validation, a list of supported versions should suffice.
-	// Configuration of a MySQL cluster.
+	// Cluster-wide MySQL configuration.
 	//
 	// Types that are assignable to MysqlConfig:
 	//	*ConfigSpec_MysqlConfig_5_7
 	//	*ConfigSpec_MysqlConfig_8_0
 	MysqlConfig isConfigSpec_MysqlConfig `protobuf_oneof:"mysql_config"`
-	// Resources allocated to MySQL hosts.
+	// Resource preset for the cluster hosts.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
-	// Access policy to DB
+	// Access policy for external services.
+	//
+	// If the specific services need to access the cluster, then set the necessary values in this policy.
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
 }
 

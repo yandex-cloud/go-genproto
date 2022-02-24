@@ -30,9 +30,13 @@ type GetUserRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster.
+	// ID of the cluster the user belongs to.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required.
+	// Name of the user to return information about.
+	//
+	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 }
 
@@ -87,15 +91,17 @@ type ListUsersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the cluster to list MySQL users in.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to list the users in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListUsersResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListUsersResponse.next_page_token] that can be used to get the next page of results in the subsequent [UserService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token] returned by the previous [UserService.List] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -157,12 +163,13 @@ type ListUsersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Requested list of MySQL users.
+	// List of users.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value
-	// for the [ListUsersRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value for the [ListUsersRequest.page_token] in the subsequent [UserService.List] request to iterate through multiple pages of results.
+	//
+	// Each of the subsequent [UserService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -217,10 +224,11 @@ type CreateUserRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster to create a user for.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to create the user in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Properties of the user to be created.
+	// Configuration of the user.
 	UserSpec *UserSpec `protobuf:"bytes,2,opt,name=user_spec,json=userSpec,proto3" json:"user_spec,omitempty"`
 }
 
@@ -275,7 +283,7 @@ type CreateUserMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user is being created for.
+	// ID of the cluster the user is being created in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being created.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -332,17 +340,19 @@ type UpdateUserRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the cluster to update the user in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the user to be updated.
-	// To get the name of the user use a [UserService.List] request.
+	// Name of the user to update.
+	//
+	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	// Field mask that specifies which fields of the MySQL user should be updated.
+	// Field mask that specifies which settings of the user should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New password for the user.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// New set of permissions for the user.
+	// A new set of permissions that should be granted to the user.
 	Permissions []*Permission `protobuf:"bytes,5,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	// New set of global permissions to grant to the user.
 	GlobalPermissions []GlobalPermission `protobuf:"varint,6,rep,packed,name=global_permissions,json=globalPermissions,proto3,enum=yandex.cloud.mdb.mysql.v1.GlobalPermission" json:"global_permissions,omitempty"`
@@ -445,7 +455,7 @@ type UpdateUserMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
+	// ID of the cluster the user is being updated in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being updated.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -502,11 +512,13 @@ type DeleteUserRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to delete the user from.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to delete.
-	// To get the name of the user, use a [UserService.List] request.
+	//
+	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 }
 
@@ -561,7 +573,7 @@ type DeleteUserMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
+	// ID of the cluster the user is being deleted from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being deleted.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -618,11 +630,13 @@ type GrantUserPermissionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to grant permission to the user in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the user to grant the permission to.
-	// To get the name of the user, use a [UserService.List] request.
+	// Name of the user to grant permission to.
+	//
+	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	// Permission that should be granted to the specified user.
 	Permission *Permission `protobuf:"bytes,3,opt,name=permission,proto3" json:"permission,omitempty"`
@@ -686,8 +700,7 @@ type GrantUserPermissionMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster the user is being granted a permission in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being granted a permission.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -744,13 +757,15 @@ type RevokeUserPermissionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the cluster to revoke permission from the user in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the user to revoke a permission from.
-	// To get the name of the user, use a [UserService.List] request.
+	// Name of the user to revoke permission from.
+	//
+	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	// Permission that should be revoked from the specified user.
+	// Permission that should be revoked from the user.
 	Permission *Permission `protobuf:"bytes,3,opt,name=permission,proto3" json:"permission,omitempty"`
 }
 
@@ -812,7 +827,7 @@ type RevokeUserPermissionMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the MySQL cluster the user belongs to.
+	// ID of the cluster the user is being revoked a permission in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user whose permission is being revoked.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`

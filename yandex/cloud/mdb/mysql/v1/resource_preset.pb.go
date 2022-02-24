@@ -20,13 +20,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A preset of resources for hardware configuration of MySQL hosts.
+// An object that represents MySQL resource preset.
+// A resource preset defines hardware configuration for cluster hosts.
+//
+// See [the documentation](/docs/managed-mysql/concepts/instance-types) for details.
 type ResourcePreset struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the resource preset.
+	// ID of the resource preset that defines available computational resources (vCPU, RAM, etc.) for a cluster host.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// IDs of availability zones where the resource preset is available.
 	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`

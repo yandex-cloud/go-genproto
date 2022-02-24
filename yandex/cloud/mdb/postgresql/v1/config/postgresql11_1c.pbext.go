@@ -482,6 +482,26 @@ func (m *PostgresqlConfig11_1C) SetPgHintPlanMessageLevel(v PostgresqlConfig11_1
 	m.PgHintPlanMessageLevel = v
 }
 
+func (m *PostgresqlConfig11_1C) SetPgQualstatsEnabled(v *wrapperspb.BoolValue) {
+	m.PgQualstatsEnabled = v
+}
+
+func (m *PostgresqlConfig11_1C) SetPgQualstatsTrackConstants(v *wrapperspb.BoolValue) {
+	m.PgQualstatsTrackConstants = v
+}
+
+func (m *PostgresqlConfig11_1C) SetPgQualstatsMax(v *wrapperspb.Int64Value) {
+	m.PgQualstatsMax = v
+}
+
+func (m *PostgresqlConfig11_1C) SetPgQualstatsResolveOids(v *wrapperspb.BoolValue) {
+	m.PgQualstatsResolveOids = v
+}
+
+func (m *PostgresqlConfig11_1C) SetPgQualstatsSampleRate(v *wrapperspb.DoubleValue) {
+	m.PgQualstatsSampleRate = v
+}
+
 func (m *PostgresqlConfigSet11_1C) SetEffectiveConfig(v *PostgresqlConfig11_1C) {
 	m.EffectiveConfig = v
 }

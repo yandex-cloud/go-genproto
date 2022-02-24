@@ -80,6 +80,10 @@ func (m *Cluster) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *Cluster) SetPersistenceMode(v Cluster_PersistenceMode) {
+	m.PersistenceMode = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

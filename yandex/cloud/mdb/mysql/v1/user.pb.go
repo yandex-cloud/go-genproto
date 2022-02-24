@@ -26,15 +26,15 @@ type GlobalPermission int32
 
 const (
 	GlobalPermission_GLOBAL_PERMISSION_UNSPECIFIED GlobalPermission = 0
-	// Enables use of the SHOW MASTER STATUS, SHOW SLAVE STATUS, and SHOW BINARY LOGS statements.
+	// Enables use of the `SHOW MASTER STATUS`, `SHOW SLAVE STATUS`, and `SHOW BINARY LOGS` statements.
 	GlobalPermission_REPLICATION_CLIENT GlobalPermission = 1
 	// Enables the account to request updates that have been made to databases on the master server,
-	// using the SHOW SLAVE HOSTS, SHOW RELAYLOG EVENTS, and SHOW BINLOG EVENTS statements.
+	// using the `SHOW SLAVE HOSTS`, `SHOW RELAYLOG EVENTS` and `SHOW BINLOG EVENTS` statements.
 	GlobalPermission_REPLICATION_SLAVE GlobalPermission = 2
-	// Enables display of information about the threads executing within the server
-	// (that is, information about the statements being executed by sessions).
-	// The privilege enables use of SHOW PROCESSLIST or mysqladmin processlist to see threads belonging
-	// to other accounts; you can always see your own threads. The PROCESS privilege also enables use of SHOW ENGINE.
+	// Enables display of information about the the statements currently being performed by sessions (the set of threads executing within the server).
+	//
+	// The privilege enables use of `SHOW PROCESSLIST` or `mysqladmin` processlist to see threads belonging to other users.
+	// You can always see your own threads. The `PROCESS` privilege also enables use of `SHOW ENGINE`.
 	GlobalPermission_PROCESS GlobalPermission = 3
 )
 
@@ -144,7 +144,7 @@ const (
 	Permission_ALL_PRIVILEGES Permission_Privilege = 1
 	// Altering tables.
 	Permission_ALTER Permission_Privilege = 2
-	// Altering stored routines (stored procedures and functions).
+	// Altering stored routines and functions.
 	Permission_ALTER_ROUTINE Permission_Privilege = 3
 	// Creating tables or indexes.
 	Permission_CREATE Permission_Privilege = 4
@@ -166,15 +166,15 @@ const (
 	Permission_INDEX Permission_Privilege = 12
 	// Inserting rows into the database.
 	Permission_INSERT Permission_Privilege = 13
-	// Using LOCK TABLES statement for tables available with SELECT privilege.
+	// Using `LOCK TABLES` statement for tables available with `SELECT` privilege.
 	Permission_LOCK_TABLES Permission_Privilege = 14
 	// Selecting rows from tables.
 	//
-	// Some SELECT statements can be allowed without the SELECT privilege. All
-	// statements that read column values require the SELECT privilege. See
-	// details in [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_select).
+	// Some `SELECT` statements can be allowed without the `SELECT` privilege. All statements that read column values require the `SELECT` privilege.
+	//
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_select) for details.
 	Permission_SELECT Permission_Privilege = 15
-	// Using the SHOW CREATE VIEW statement. Also needed for views used with EXPLAIN.
+	// Using the `SHOW CREATE VIEW` statement. Also needed for views used with `EXPLAIN`.
 	Permission_SHOW_VIEW Permission_Privilege = 16
 	// Creating, removing, executing, or displaying triggers for a table.
 	Permission_TRIGGER Permission_Privilege = 17
@@ -259,16 +259,17 @@ func (Permission_Privilege) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mysql_v1_user_proto_rawDescGZIP(), []int{1, 0}
 }
 
-// A MySQL user. For more information, see
-// the [documentation](/docs/managed-mysql/concepts).
+// An object that represents MySQL user.
+//
+// See [the documentation](/docs/managed-mysql/operations/cluster-users) for details.
 type User struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the MySQL user.
+	// Name of the user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the MySQL cluster the user belongs to.
+	// ID of the cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Set of permissions granted to the user.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
@@ -362,6 +363,8 @@ type Permission struct {
 	// Name of the database that the permission grants access to.
 	DatabaseName string `protobuf:"bytes,1,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	// Roles granted to the user within the database.
+	//
+	// See [the documentation](/docs/managed-mysql/operations/grant) for details.
 	Roles []Permission_Privilege `protobuf:"varint,2,rep,packed,name=roles,proto3,enum=yandex.cloud.mdb.mysql.v1.Permission_Privilege" json:"roles,omitempty"`
 }
 
@@ -491,11 +494,14 @@ type UserSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the MySQL user.
+	// Name of the user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Password of the MySQL user.
+	// Password of the user.
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	// Set of permissions to grant to the user.
+	// Set of permissions granted to the user to access specific databases.
+	// One permission per database.
+	//
+	// When a permission for a database is set, the user will have access to the database.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	// Set of global permissions to grant to the user.
 	GlobalPermissions []GlobalPermission `protobuf:"varint,4,rep,packed,name=global_permissions,json=globalPermissions,proto3,enum=yandex.cloud.mdb.mysql.v1.GlobalPermission" json:"global_permissions,omitempty"`

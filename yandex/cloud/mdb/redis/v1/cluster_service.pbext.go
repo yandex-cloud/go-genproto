@@ -87,6 +87,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
+	m.PersistenceMode = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -125,6 +129,10 @@ func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
+	m.PersistenceMode = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
@@ -225,6 +233,10 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *RestoreClusterRequest) SetTlsEnabled(v *wrapperspb.BoolValue) {
 	m.TlsEnabled = v
+}
+
+func (m *RestoreClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
+	m.PersistenceMode = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

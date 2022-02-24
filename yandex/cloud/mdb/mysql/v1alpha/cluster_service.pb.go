@@ -453,7 +453,7 @@ type UpdateClusterRequest struct {
 	// ID of the MySQL cluster to update.
 	// To get the MySQL cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Field mask that specifies which fields of the MySQL cluster should be updated.
+	// Field mask that specifies which settings of the MySQL cluster should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New description of the MySQL cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`

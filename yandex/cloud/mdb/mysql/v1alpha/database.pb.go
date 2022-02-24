@@ -21,8 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A MySQL database. For more information, see
-// the [documentation](/docs/managed-mysql/concepts).
+// A MySQL database. For more information, see the [documentation](/docs/managed-mysql/concepts).
 type Database struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

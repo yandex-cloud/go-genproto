@@ -86,13 +86,13 @@ func (WeeklyMaintenanceWindow_WeekDay) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mysql_v1_maintenance_proto_rawDescGZIP(), []int{2, 0}
 }
 
-// A maintenance window settings.
+// Configuration of a maintenance window in a MySQL cluster.
 type MaintenanceWindow struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//The maintenance policy in effect.
+	// The maintenance policy in effect.
 	//
 	// Types that are assignable to Policy:
 	//	*MaintenanceWindow_Anytime

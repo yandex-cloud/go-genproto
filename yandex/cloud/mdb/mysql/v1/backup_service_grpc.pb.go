@@ -18,11 +18,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackupServiceClient interface {
-	// Returns the specified MySQL backup.
-	//
-	// To get the list of available MySQL backups, make a [List] request.
+	// Retrieves information about the specified backup.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
-	// Retrieves the list of MySQL backups available for the specified folder.
+	// Retrieves the list of backups in a folder.
+	//
+	// To list backups for an existing cluster, make a [ClusterService.ListBackups] request.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
 }
 
@@ -56,11 +56,11 @@ func (c *backupServiceClient) List(ctx context.Context, in *ListBackupsRequest, 
 // All implementations should embed UnimplementedBackupServiceServer
 // for forward compatibility
 type BackupServiceServer interface {
-	// Returns the specified MySQL backup.
-	//
-	// To get the list of available MySQL backups, make a [List] request.
+	// Retrieves information about the specified backup.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
-	// Retrieves the list of MySQL backups available for the specified folder.
+	// Retrieves the list of backups in a folder.
+	//
+	// To list backups for an existing cluster, make a [ClusterService.ListBackups] request.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
 }
 

@@ -55,9 +55,7 @@ const (
 	Permission_LOCK_TABLES Permission_Privilege = 14
 	// Selecting rows from tables.
 	//
-	// Some SELECT statements can be allowed without the SELECT privilege. All
-	// statements that read column values require the SELECT privilege. See
-	// details in [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_select).
+	// Some SELECT statements can be allowed without the SELECT privilege. All statements that read column values require the SELECT privilege. See details in [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_select).
 	Permission_SELECT Permission_Privilege = 15
 	// Using the SHOW CREATE VIEW statement. Also needed for views used with EXPLAIN.
 	Permission_SHOW_VIEW Permission_Privilege = 16
@@ -140,8 +138,7 @@ func (Permission_Privilege) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mysql_v1alpha_user_proto_rawDescGZIP(), []int{1, 0}
 }
 
-// A MySQL user. For more information, see
-// the [documentation](/docs/managed-mysql/concepts).
+// A MySQL user. For more information, see the [documentation](/docs/managed-mysql/concepts).
 type User struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
