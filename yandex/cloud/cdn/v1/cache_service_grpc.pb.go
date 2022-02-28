@@ -20,6 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CacheServiceClient interface {
 	// Removes specified files from the cache of the specified resource. For details about purging, see [documentation](/docs/cdn/concepts/caching#purge).
+	//
+	// Purging may take up to 15 minutes.
 	Purge(ctx context.Context, in *PurgeCacheRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Uploads specified files from origins to cache of the specified resource. For defails about prefetching, see [documentation](/docs/cdn/concepts/caching#prefetch).
 	Prefetch(ctx context.Context, in *PrefetchCacheRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -56,6 +58,8 @@ func (c *cacheServiceClient) Prefetch(ctx context.Context, in *PrefetchCacheRequ
 // for forward compatibility
 type CacheServiceServer interface {
 	// Removes specified files from the cache of the specified resource. For details about purging, see [documentation](/docs/cdn/concepts/caching#purge).
+	//
+	// Purging may take up to 15 minutes.
 	Purge(context.Context, *PurgeCacheRequest) (*operation.Operation, error)
 	// Uploads specified files from origins to cache of the specified resource. For defails about prefetching, see [documentation](/docs/cdn/concepts/caching#prefetch).
 	Prefetch(context.Context, *PrefetchCacheRequest) (*operation.Operation, error)

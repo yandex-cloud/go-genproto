@@ -21,6 +21,8 @@ type OperationServiceClient interface {
 	// Returns the specified Operation resource.
 	Get(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*Operation, error)
 	// Cancels the specified operation.
+	//
+	// Note that currently Yandex Object Storage API does not support cancelling operations.
 	Cancel(ctx context.Context, in *CancelOperationRequest, opts ...grpc.CallOption) (*Operation, error)
 }
 
@@ -57,6 +59,8 @@ type OperationServiceServer interface {
 	// Returns the specified Operation resource.
 	Get(context.Context, *GetOperationRequest) (*Operation, error)
 	// Cancels the specified operation.
+	//
+	// Note that currently Yandex Object Storage API does not support cancelling operations.
 	Cancel(context.Context, *CancelOperationRequest) (*Operation, error)
 }
 

@@ -25,7 +25,10 @@ type OriginGroupServiceClient interface {
 	List(ctx context.Context, in *ListOriginGroupsRequest, opts ...grpc.CallOption) (*ListOriginGroupsResponse, error)
 	// Creates origin group.
 	Create(ctx context.Context, in *CreateOriginGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates origin group.
+	// Updates the specified origin group.
+	//
+	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge cache of the resources that
+	// use the origin group via a [CacheService.Purge] request.
 	Update(ctx context.Context, in *UpdateOriginGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes origin group with specified origin group id.
 	Delete(ctx context.Context, in *DeleteOriginGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -94,7 +97,10 @@ type OriginGroupServiceServer interface {
 	List(context.Context, *ListOriginGroupsRequest) (*ListOriginGroupsResponse, error)
 	// Creates origin group.
 	Create(context.Context, *CreateOriginGroupRequest) (*operation.Operation, error)
-	// Updates origin group.
+	// Updates the specified origin group.
+	//
+	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge cache of the resources that
+	// use the origin group via a [CacheService.Purge] request.
 	Update(context.Context, *UpdateOriginGroupRequest) (*operation.Operation, error)
 	// Deletes origin group with specified origin group id.
 	Delete(context.Context, *DeleteOriginGroupRequest) (*operation.Operation, error)

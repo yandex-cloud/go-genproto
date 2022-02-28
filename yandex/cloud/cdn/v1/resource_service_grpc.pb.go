@@ -23,9 +23,16 @@ type ResourceServiceClient interface {
 	Get(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*Resource, error)
 	// Lists CDN resources.
 	List(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
-	// Creates client's CDN resource.
+	// Creates a CDN resource in the specified folder.
+	//
+	// Creation may take up to 15 minutes.
 	Create(ctx context.Context, in *CreateResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates of client's CDN resource. (PATCH behavior)
+	// Updates the specified CDN resource.
+	//
+	// The method implements patch behaviour, i.e. only the fields specified in the request are updated in the resource.
+	//
+	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge the resource's cache via a
+	// [CacheService.Purge] request.
 	Update(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes client's CDN resource.
 	Delete(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -104,9 +111,16 @@ type ResourceServiceServer interface {
 	Get(context.Context, *GetResourceRequest) (*Resource, error)
 	// Lists CDN resources.
 	List(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
-	// Creates client's CDN resource.
+	// Creates a CDN resource in the specified folder.
+	//
+	// Creation may take up to 15 minutes.
 	Create(context.Context, *CreateResourceRequest) (*operation.Operation, error)
-	// Updates of client's CDN resource. (PATCH behavior)
+	// Updates the specified CDN resource.
+	//
+	// The method implements patch behaviour, i.e. only the fields specified in the request are updated in the resource.
+	//
+	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge the resource's cache via a
+	// [CacheService.Purge] request.
 	Update(context.Context, *UpdateResourceRequest) (*operation.Operation, error)
 	// Deletes client's CDN resource.
 	Delete(context.Context, *DeleteResourceRequest) (*operation.Operation, error)

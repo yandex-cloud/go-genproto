@@ -30,6 +30,10 @@ func (m *TranslateRequest) SetGlossaryConfig(v *TranslateGlossaryConfig) {
 	m.GlossaryConfig = v
 }
 
+func (m *TranslateRequest) SetSpeller(v bool) {
+	m.Speller = v
+}
+
 type TranslateGlossaryConfig_GlossarySource = isTranslateGlossaryConfig_GlossarySource
 
 func (m *TranslateGlossaryConfig) SetGlossarySource(v TranslateGlossaryConfig_GlossarySource) {

@@ -25,7 +25,10 @@ type OriginServiceClient interface {
 	List(ctx context.Context, in *ListOriginsRequest, opts ...grpc.CallOption) (*ListOriginsResponse, error)
 	// Creates origin inside origin group.
 	Create(ctx context.Context, in *CreateOriginRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates origin from origin group.
+	// Updates the specified origin from the origin group.
+	//
+	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge cache of the resources that
+	// use the origin via a [CacheService.Purge] request.
 	Update(ctx context.Context, in *UpdateOriginRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes origin from origin group.
 	Delete(ctx context.Context, in *DeleteOriginRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -94,7 +97,10 @@ type OriginServiceServer interface {
 	List(context.Context, *ListOriginsRequest) (*ListOriginsResponse, error)
 	// Creates origin inside origin group.
 	Create(context.Context, *CreateOriginRequest) (*operation.Operation, error)
-	// Updates origin from origin group.
+	// Updates the specified origin from the origin group.
+	//
+	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge cache of the resources that
+	// use the origin via a [CacheService.Purge] request.
 	Update(context.Context, *UpdateOriginRequest) (*operation.Operation, error)
 	// Deletes origin from origin group.
 	Delete(context.Context, *DeleteOriginRequest) (*operation.Operation, error)
