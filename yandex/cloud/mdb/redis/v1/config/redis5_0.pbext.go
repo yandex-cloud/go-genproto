@@ -34,6 +34,26 @@ func (m *RedisConfig5_0) SetNotifyKeyspaceEvents(v string) {
 	m.NotifyKeyspaceEvents = v
 }
 
+func (m *RedisConfig5_0) SetClientOutputBufferLimitPubsub(v *RedisConfig5_0_ClientOutputBufferLimit) {
+	m.ClientOutputBufferLimitPubsub = v
+}
+
+func (m *RedisConfig5_0) SetClientOutputBufferLimitNormal(v *RedisConfig5_0_ClientOutputBufferLimit) {
+	m.ClientOutputBufferLimitNormal = v
+}
+
+func (m *RedisConfig5_0_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
+	m.HardLimit = v
+}
+
+func (m *RedisConfig5_0_ClientOutputBufferLimit) SetSoftLimit(v *wrapperspb.Int64Value) {
+	m.SoftLimit = v
+}
+
+func (m *RedisConfig5_0_ClientOutputBufferLimit) SetSoftSeconds(v *wrapperspb.Int64Value) {
+	m.SoftSeconds = v
+}
+
 func (m *RedisConfigSet5_0) SetEffectiveConfig(v *RedisConfig5_0) {
 	m.EffectiveConfig = v
 }

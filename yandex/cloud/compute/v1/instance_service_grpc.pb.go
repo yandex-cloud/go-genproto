@@ -73,7 +73,12 @@ type InstanceServiceClient interface {
 	UpdateNetworkInterface(ctx context.Context, in *UpdateInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(ctx context.Context, in *ListInstanceOperationsRequest, opts ...grpc.CallOption) (*ListInstanceOperationsResponse, error)
-	// Moves the specified instance between folders
+	// Moves the specified instance to another folder of the same cloud.
+	//
+	// The instance must be stopped before moving. To stop the instance, make a [Stop] request.
+	//
+	// After moving, the instance will start recording its Yandex Monitoring default metrics to its new folder. Metrics
+	// that have been recorded to the source folder prior to moving will be retained.
 	Move(ctx context.Context, in *MoveInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -314,7 +319,12 @@ type InstanceServiceServer interface {
 	UpdateNetworkInterface(context.Context, *UpdateInstanceNetworkInterfaceRequest) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(context.Context, *ListInstanceOperationsRequest) (*ListInstanceOperationsResponse, error)
-	// Moves the specified instance between folders
+	// Moves the specified instance to another folder of the same cloud.
+	//
+	// The instance must be stopped before moving. To stop the instance, make a [Stop] request.
+	//
+	// After moving, the instance will start recording its Yandex Monitoring default metrics to its new folder. Metrics
+	// that have been recorded to the source folder prior to moving will be retained.
 	Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error)
 }
 

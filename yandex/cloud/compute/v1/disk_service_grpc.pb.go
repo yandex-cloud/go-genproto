@@ -41,7 +41,7 @@ type DiskServiceClient interface {
 	Delete(ctx context.Context, in *DeleteDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified disk.
 	ListOperations(ctx context.Context, in *ListDiskOperationsRequest, opts ...grpc.CallOption) (*ListDiskOperationsResponse, error)
-	// Moves disk between folders.
+	// Moves the specified disk to another folder of the same cloud.
 	Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -142,7 +142,7 @@ type DiskServiceServer interface {
 	Delete(context.Context, *DeleteDiskRequest) (*operation.Operation, error)
 	// Lists operations for the specified disk.
 	ListOperations(context.Context, *ListDiskOperationsRequest) (*ListDiskOperationsResponse, error)
-	// Moves disk between folders.
+	// Moves the specified disk to another folder of the same cloud.
 	Move(context.Context, *MoveDiskRequest) (*operation.Operation, error)
 }
 

@@ -3078,9 +3078,13 @@ type MoveInstanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the instance that is being moved.
+	// ID of the instance to move.
+	//
+	// To get the instance ID, make a [InstanceService.List] request.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// ID of the destination folder.
+	// ID of the folder to move the instance to.
+	//
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 
@@ -3137,9 +3141,9 @@ type MoveInstanceMetadata struct {
 
 	// ID of the instance that is being moved.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// ID of the source folder.
+	// ID of the folder that the instance is being moved from.
 	SourceFolderId string `protobuf:"bytes,2,opt,name=source_folder_id,json=sourceFolderId,proto3" json:"source_folder_id,omitempty"`
-	// ID of the destination folder.
+	// ID of the folder that the instance is being moved to.
 	DestinationFolderId string `protobuf:"bytes,3,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 

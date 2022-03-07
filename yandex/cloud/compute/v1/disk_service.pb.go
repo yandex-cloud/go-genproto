@@ -820,9 +820,13 @@ type MoveDiskRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the disk that is being moved.
+	// ID of the disk to move.
+	//
+	// To get the disk ID, make a [DiskService.List] request.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
-	// ID of the destination folder.
+	// ID of the folder to move the disk to.
+	//
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 
@@ -879,9 +883,9 @@ type MoveDiskMetadata struct {
 
 	// ID of the disk that is being moved.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
-	// ID of the source folder.
+	// ID of the folder that the disk is being moved from.
 	SourceFolderId string `protobuf:"bytes,2,opt,name=source_folder_id,json=sourceFolderId,proto3" json:"source_folder_id,omitempty"`
-	// ID of the destination folder.
+	// ID of the folder that the disk is being moved to.
 	DestinationFolderId string `protobuf:"bytes,3,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 
