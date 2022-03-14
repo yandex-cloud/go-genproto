@@ -218,7 +218,7 @@ type Cluster struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the Greenplum® cluster.
-	// This ID is assigned by Yandex.Cloud at the time of cluster creation.
+	// This ID is assigned by Yandex Cloud at the time of cluster creation.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the Greenplum® cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -731,7 +731,7 @@ type Access struct {
 
 	// Allows data export from the cluster to Yandex DataLens.
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allows SQL queries to the cluster databases from the Yandex.Cloud management console.
+	// Allows SQL queries to the cluster databases from the Yandex Cloud management console.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
 }
 
@@ -779,6 +779,157 @@ func (x *Access) GetWebSql() bool {
 		return x.WebSql
 	}
 	return false
+}
+
+type GreenplumRestoreConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Time to start the daily backup, in the UTC timezone.
+	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,1,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
+	// Access policy for external services.
+	Access *Access `protobuf:"bytes,2,opt,name=access,proto3" json:"access,omitempty"`
+	// ID of the availability zone where the host resides.
+	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// ID of the subnet that the host should belong to. This subnet should be a part
+	// of the network that the cluster belongs to.
+	// The ID of the network is set in the field [Cluster.network_id].
+	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Whether the host should get a public IP address on creation.
+	//
+	// After a host has been created, this setting cannot be changed. To remove an assigned public IP, or to assign
+	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
+	//
+	// Possible values:
+	// * false - don't assign a public IP to the master hosts.
+	// * true - the master hosts should have a public IP address.
+	AssignPublicIp bool `protobuf:"varint,5,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
+}
+
+func (x *GreenplumRestoreConfig) Reset() {
+	*x = GreenplumRestoreConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GreenplumRestoreConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GreenplumRestoreConfig) ProtoMessage() {}
+
+func (x *GreenplumRestoreConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GreenplumRestoreConfig.ProtoReflect.Descriptor instead.
+func (*GreenplumRestoreConfig) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GreenplumRestoreConfig) GetBackupWindowStart() *timeofday.TimeOfDay {
+	if x != nil {
+		return x.BackupWindowStart
+	}
+	return nil
+}
+
+func (x *GreenplumRestoreConfig) GetAccess() *Access {
+	if x != nil {
+		return x.Access
+	}
+	return nil
+}
+
+func (x *GreenplumRestoreConfig) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
+func (x *GreenplumRestoreConfig) GetSubnetId() string {
+	if x != nil {
+		return x.SubnetId
+	}
+	return ""
+}
+
+func (x *GreenplumRestoreConfig) GetAssignPublicIp() bool {
+	if x != nil {
+		return x.AssignPublicIp
+	}
+	return false
+}
+
+type RestoreResources struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// ID of the preset for computational resources available to a host (CPU, memory etc.).
+	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
+	// Volume of the storage available to a host.
+	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
+}
+
+func (x *RestoreResources) Reset() {
+	*x = RestoreResources{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RestoreResources) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestoreResources) ProtoMessage() {}
+
+func (x *RestoreResources) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestoreResources.ProtoReflect.Descriptor instead.
+func (*RestoreResources) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *RestoreResources) GetResourcePresetId() string {
+	if x != nil {
+		return x.ResourcePresetId
+	}
+	return ""
+}
+
+func (x *RestoreResources) GetDiskSize() int64 {
+	if x != nil {
+		return x.DiskSize
+	}
+	return 0
 }
 
 var File_yandex_cloud_mdb_greenplum_v1_cluster_proto protoreflect.FileDescriptor
@@ -960,15 +1111,38 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = []byte{
 	0x0a, 0x06, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61,
 	0x5f, 0x6c, 0x65, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x64, 0x61, 0x74,
 	0x61, 0x4c, 0x65, 0x6e, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x77, 0x65, 0x62, 0x5f, 0x73, 0x71, 0x6c,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x77, 0x65, 0x62, 0x53, 0x71, 0x6c, 0x42, 0x70,
-	0x0a, 0x21, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61,
-	0x70, 0x69, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x67, 0x72, 0x65, 0x65, 0x6e, 0x70, 0x6c, 0x75, 0x6d,
-	0x2e, 0x76, 0x31, 0x5a, 0x4b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d,
-	0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x64, 0x62, 0x2f, 0x67, 0x72, 0x65, 0x65, 0x6e, 0x70,
-	0x6c, 0x75, 0x6d, 0x2f, 0x76, 0x31, 0x3b, 0x67, 0x72, 0x65, 0x65, 0x6e, 0x70, 0x6c, 0x75, 0x6d,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x77, 0x65, 0x62, 0x53, 0x71, 0x6c, 0x22, 0x93,
+	0x02, 0x0a, 0x16, 0x47, 0x72, 0x65, 0x65, 0x6e, 0x70, 0x6c, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x74,
+	0x6f, 0x72, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x46, 0x0a, 0x13, 0x62, 0x61, 0x63,
+	0x6b, 0x75, 0x70, 0x5f, 0x77, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x5f, 0x73, 0x74, 0x61, 0x72, 0x74,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x74, 0x79, 0x70, 0x65, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x4f, 0x66, 0x44, 0x61, 0x79, 0x52, 0x11,
+	0x62, 0x61, 0x63, 0x6b, 0x75, 0x70, 0x57, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x72,
+	0x74, 0x12, 0x3d, 0x0a, 0x06, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x25, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x67, 0x72, 0x65, 0x65, 0x6e, 0x70, 0x6c, 0x75, 0x6d, 0x2e, 0x76,
+	0x31, 0x2e, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x06, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x12, 0x21, 0x0a, 0x07, 0x7a, 0x6f, 0x6e, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x42, 0x08, 0x8a, 0xc8, 0x31, 0x04, 0x3c, 0x3d, 0x35, 0x30, 0x52, 0x06, 0x7a, 0x6f, 0x6e,
+	0x65, 0x49, 0x64, 0x12, 0x25, 0x0a, 0x09, 0x73, 0x75, 0x62, 0x6e, 0x65, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0x8a, 0xc8, 0x31, 0x04, 0x3c, 0x3d, 0x35, 0x30,
+	0x52, 0x08, 0x73, 0x75, 0x62, 0x6e, 0x65, 0x74, 0x49, 0x64, 0x12, 0x28, 0x0a, 0x10, 0x61, 0x73,
+	0x73, 0x69, 0x67, 0x6e, 0x5f, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x5f, 0x69, 0x70, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x50, 0x75, 0x62, 0x6c,
+	0x69, 0x63, 0x49, 0x70, 0x22, 0x5d, 0x0a, 0x10, 0x52, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x52,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65, 0x73, 0x6f,
+	0x75, 0x72, 0x63, 0x65, 0x5f, 0x70, 0x72, 0x65, 0x73, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x50, 0x72,
+	0x65, 0x73, 0x65, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x69, 0x73, 0x6b, 0x5f, 0x73,
+	0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x64, 0x69, 0x73, 0x6b, 0x53,
+	0x69, 0x7a, 0x65, 0x42, 0x70, 0x0a, 0x21, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x67, 0x72, 0x65, 0x65,
+	0x6e, 0x70, 0x6c, 0x75, 0x6d, 0x2e, 0x76, 0x31, 0x5a, 0x4b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x64, 0x62, 0x2f, 0x67,
+	0x72, 0x65, 0x65, 0x6e, 0x70, 0x6c, 0x75, 0x6d, 0x2f, 0x76, 0x31, 0x3b, 0x67, 0x72, 0x65, 0x65,
+	0x6e, 0x70, 0x6c, 0x75, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -984,7 +1158,7 @@ func file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_goTypes = []interface{}{
 	(Cluster_Environment)(0),          // 0: yandex.cloud.mdb.greenplum.v1.Cluster.Environment
 	(Cluster_Health)(0),               // 1: yandex.cloud.mdb.greenplum.v1.Cluster.Health
@@ -994,40 +1168,44 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_goTypes = []interface{}{
 	(*Monitoring)(nil),                // 5: yandex.cloud.mdb.greenplum.v1.Monitoring
 	(*GreenplumConfig)(nil),           // 6: yandex.cloud.mdb.greenplum.v1.GreenplumConfig
 	(*Access)(nil),                    // 7: yandex.cloud.mdb.greenplum.v1.Access
-	nil,                               // 8: yandex.cloud.mdb.greenplum.v1.Cluster.LabelsEntry
-	(*timestamppb.Timestamp)(nil),     // 9: google.protobuf.Timestamp
-	(*MasterSubclusterConfig)(nil),    // 10: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig
-	(*SegmentSubclusterConfig)(nil),   // 11: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
-	(*MaintenanceWindow)(nil),         // 12: yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),      // 13: yandex.cloud.mdb.greenplum.v1.MaintenanceOperation
-	(*GreenplumConfigSet6_17)(nil),    // 14: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_17
-	(*GreenplumConfigSet6_19)(nil),    // 15: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_19
-	(*ConnectionPoolerConfigSet)(nil), // 16: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
-	(*timeofday.TimeOfDay)(nil),       // 17: google.type.TimeOfDay
+	(*GreenplumRestoreConfig)(nil),    // 8: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
+	(*RestoreResources)(nil),          // 9: yandex.cloud.mdb.greenplum.v1.RestoreResources
+	nil,                               // 10: yandex.cloud.mdb.greenplum.v1.Cluster.LabelsEntry
+	(*timestamppb.Timestamp)(nil),     // 11: google.protobuf.Timestamp
+	(*MasterSubclusterConfig)(nil),    // 12: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig
+	(*SegmentSubclusterConfig)(nil),   // 13: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
+	(*MaintenanceWindow)(nil),         // 14: yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),      // 15: yandex.cloud.mdb.greenplum.v1.MaintenanceOperation
+	(*GreenplumConfigSet6_17)(nil),    // 16: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_17
+	(*GreenplumConfigSet6_19)(nil),    // 17: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_19
+	(*ConnectionPoolerConfigSet)(nil), // 18: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
+	(*timeofday.TimeOfDay)(nil),       // 19: google.type.TimeOfDay
 }
 var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.mdb.greenplum.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	11, // 0: yandex.cloud.mdb.greenplum.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
 	6,  // 1: yandex.cloud.mdb.greenplum.v1.Cluster.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
-	8,  // 2: yandex.cloud.mdb.greenplum.v1.Cluster.labels:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.LabelsEntry
+	10, // 2: yandex.cloud.mdb.greenplum.v1.Cluster.labels:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.LabelsEntry
 	0,  // 3: yandex.cloud.mdb.greenplum.v1.Cluster.environment:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Environment
 	5,  // 4: yandex.cloud.mdb.greenplum.v1.Cluster.monitoring:type_name -> yandex.cloud.mdb.greenplum.v1.Monitoring
-	10, // 5: yandex.cloud.mdb.greenplum.v1.Cluster.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig
-	11, // 6: yandex.cloud.mdb.greenplum.v1.Cluster.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
+	12, // 5: yandex.cloud.mdb.greenplum.v1.Cluster.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig
+	13, // 6: yandex.cloud.mdb.greenplum.v1.Cluster.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
 	1,  // 7: yandex.cloud.mdb.greenplum.v1.Cluster.health:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Health
 	2,  // 8: yandex.cloud.mdb.greenplum.v1.Cluster.status:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Status
-	12, // 9: yandex.cloud.mdb.greenplum.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
-	13, // 10: yandex.cloud.mdb.greenplum.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceOperation
+	14, // 9: yandex.cloud.mdb.greenplum.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
+	15, // 10: yandex.cloud.mdb.greenplum.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceOperation
 	4,  // 11: yandex.cloud.mdb.greenplum.v1.Cluster.cluster_config:type_name -> yandex.cloud.mdb.greenplum.v1.ClusterConfigSet
-	14, // 12: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.greenplum_config_set_6_17:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_17
-	15, // 13: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.greenplum_config_set_6_19:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_19
-	16, // 14: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
-	17, // 15: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.backup_window_start:type_name -> google.type.TimeOfDay
+	16, // 12: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.greenplum_config_set_6_17:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_17
+	17, // 13: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.greenplum_config_set_6_19:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_19
+	18, // 14: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
+	19, // 15: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.backup_window_start:type_name -> google.type.TimeOfDay
 	7,  // 16: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.access:type_name -> yandex.cloud.mdb.greenplum.v1.Access
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	19, // 17: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig.backup_window_start:type_name -> google.type.TimeOfDay
+	7,  // 18: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig.access:type_name -> yandex.cloud.mdb.greenplum.v1.Access
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_cluster_proto_init() }
@@ -1098,6 +1276,30 @@ func file_yandex_cloud_mdb_greenplum_v1_cluster_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GreenplumRestoreConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RestoreResources); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[1].OneofWrappers = []interface{}{
 		(*ClusterConfigSet_GreenplumConfigSet_6_17)(nil),
@@ -1109,7 +1311,7 @@ func file_yandex_cloud_mdb_greenplum_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

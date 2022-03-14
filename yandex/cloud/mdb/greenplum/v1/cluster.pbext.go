@@ -168,3 +168,31 @@ func (m *Access) SetDataLens(v bool) {
 func (m *Access) SetWebSql(v bool) {
 	m.WebSql = v
 }
+
+func (m *GreenplumRestoreConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
+	m.BackupWindowStart = v
+}
+
+func (m *GreenplumRestoreConfig) SetAccess(v *Access) {
+	m.Access = v
+}
+
+func (m *GreenplumRestoreConfig) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
+func (m *GreenplumRestoreConfig) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *GreenplumRestoreConfig) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
+func (m *RestoreResources) SetResourcePresetId(v string) {
+	m.ResourcePresetId = v
+}
+
+func (m *RestoreResources) SetDiskSize(v int64) {
+	m.DiskSize = v
+}

@@ -145,12 +145,12 @@ type Host struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the Greenplum® host. The host name is assigned by Yandex.Cloud at creation time and cannot be changed.
+	// Name of the Greenplum® host. The host name is assigned by Yandex Cloud at creation time and cannot be changed.
 	// 1-63 characters long.
 	//
-	// The name is unique across all existing MDB hosts in Yandex.Cloud, as it defines the FQDN of the host.
+	// The name is unique across all existing MDB hosts in Yandex Cloud, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the Greenplum® cluster. The ID is assigned by Yandex.Cloud at creation time.
+	// ID of the Greenplum® cluster. The ID is assigned by Yandex Cloud at creation time.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the availability zone the Greenplum® host belongs to.
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`

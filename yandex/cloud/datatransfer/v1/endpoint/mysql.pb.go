@@ -171,7 +171,7 @@ type isMysqlConnection_Connection interface {
 type MysqlConnection_MdbClusterId struct {
 	// Managed cluster
 	//
-	// Yandex.Cloud Managed MySQL cluster ID
+	// Yandex Managed Service for MySQL cluster ID
 	MdbClusterId string `protobuf:"bytes,1,opt,name=mdb_cluster_id,json=mdbClusterId,proto3,oneof"`
 }
 

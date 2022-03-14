@@ -995,7 +995,7 @@ type Host struct {
 	// Name of the ClickHouse host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
 	//
-	// The name is unique across all existing MDB hosts in Yandex.Cloud, as it defines the FQDN of the host.
+	// The name is unique across all existing MDB hosts in Yandex Cloud, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the ClickHouse host. The ID is assigned by MDB at creation time.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -1253,13 +1253,13 @@ type Access struct {
 
 	// Allow to export data from the cluster to Yandex DataLens.
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allow SQL queries to the cluster databases from the Yandex.Cloud management console.
+	// Allow SQL queries to the cluster databases from the Yandex Cloud management console.
 	//
 	// See [SQL queries in the management console](/docs/managed-clickhouse/operations/web-sql-query) for more details.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
-	// Allow to import data from Yandex.Metrica and AppMetrica to the cluster.
+	// Allow to import data from Yandex Metrica and AppMetrica to the cluster.
 	//
-	// See [Export data to Yandex.Cloud](https://appmetrica.yandex.com/docs/cloud/index.html) for more details.
+	// See [Export data to Yandex Cloud](https://appmetrica.yandex.com/docs/cloud/index.html) for more details.
 	Metrika bool `protobuf:"varint,3,opt,name=metrika,proto3" json:"metrika,omitempty"`
 	// Allow access to cluster for Serverless.
 	Serverless bool `protobuf:"varint,4,opt,name=serverless,proto3" json:"serverless,omitempty"`

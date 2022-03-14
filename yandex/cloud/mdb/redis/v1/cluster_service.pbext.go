@@ -183,6 +183,22 @@ func (m *MoveClusterMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
 }
 
+func (m *UpdateClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsRequest) SetUpdateHostSpecs(v []*UpdateHostSpec) {
+	m.UpdateHostSpecs = v
+}
+
+func (m *UpdateClusterHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
 func (m *BackupClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -527,6 +543,22 @@ func (m *RebalanceClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *UpdateHostSpec) SetHostName(v string) {
+	m.HostName = v
+}
+
+func (m *UpdateHostSpec) SetReplicaPriority(v *wrapperspb.Int64Value) {
+	m.ReplicaPriority = v
+}
+
+func (m *UpdateHostSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
+func (m *UpdateHostSpec) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
 func (m *HostSpec) SetZoneId(v string) {
 	m.ZoneId = v
 }
@@ -537,6 +569,14 @@ func (m *HostSpec) SetSubnetId(v string) {
 
 func (m *HostSpec) SetShardName(v string) {
 	m.ShardName = v
+}
+
+func (m *HostSpec) SetReplicaPriority(v *wrapperspb.Int64Value) {
+	m.ReplicaPriority = v
+}
+
+func (m *HostSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
 }
 
 type ConfigSpec_RedisSpec = isConfigSpec_RedisSpec

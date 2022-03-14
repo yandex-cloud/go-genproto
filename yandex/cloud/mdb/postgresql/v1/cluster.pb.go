@@ -1106,7 +1106,7 @@ type Host struct {
 	// Name of the PostgreSQL host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
 	//
-	// The name is unique across all existing MDB hosts in Yandex.Cloud, as it defines the FQDN of the host.
+	// The name is unique across all existing MDB hosts in Yandex Cloud, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the PostgreSQL host. The ID is assigned by MDB at creation time.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -1585,7 +1585,7 @@ type Access struct {
 
 	// Allow access for DataLens
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allow SQL queries to the cluster databases from the Yandex.Cloud management console.
+	// Allow SQL queries to the cluster databases from the Yandex Cloud management console.
 	//
 	// See [SQL queries in the management console](/docs/managed-postgresql/operations/web-sql-query) for more details.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`

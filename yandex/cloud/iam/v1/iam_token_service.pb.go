@@ -92,7 +92,7 @@ type isCreateIamTokenRequest_Identity interface {
 }
 
 type CreateIamTokenRequest_YandexPassportOauthToken struct {
-	// OAuth token for a Yandex.Passport account.
+	// OAuth token for a Yandex account.
 	// For more information, see [OAuth token](/docs/iam/concepts/authorization/oauth-token).
 	YandexPassportOauthToken string `protobuf:"bytes,1,opt,name=yandex_passport_oauth_token,json=yandexPassportOauthToken,proto3,oneof"`
 }

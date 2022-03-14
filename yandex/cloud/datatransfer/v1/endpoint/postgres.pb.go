@@ -386,7 +386,7 @@ type isPostgresConnection_Connection interface {
 type PostgresConnection_MdbClusterId struct {
 	// Managed cluster
 	//
-	// Yandex.Cloud Managed PostgreSQL cluster ID
+	// Yandex Managed Service for PostgreSQL cluster ID
 	MdbClusterId string `protobuf:"bytes,1,opt,name=mdb_cluster_id,json=mdbClusterId,proto3,oneof"`
 }
 

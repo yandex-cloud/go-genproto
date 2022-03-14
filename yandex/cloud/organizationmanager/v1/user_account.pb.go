@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Currently represents only [Yandex.Passport account](/docs/iam/concepts/#passport).
+// Currently represents only [Yandex account](/docs/iam/concepts/#passport).
 type UserAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -114,15 +114,15 @@ func (*UserAccount_YandexPassportUserAccount) isUserAccount_UserAccount() {}
 func (*UserAccount_SamlUserAccount) isUserAccount_UserAccount() {}
 
 // A YandexPassportUserAccount resource.
-// For more information, see [Yandex.Passport account](/docs/iam/concepts/#passport).
+// For more information, see [Yandex account](/docs/iam/concepts/#passport).
 type YandexPassportUserAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Login of the Yandex.Passport user account.
+	// Login of the Yandex user account.
 	Login string `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
-	// Default email of the Yandex.Passport user account.
+	// Default email of the Yandex user account.
 	DefaultEmail string `protobuf:"bytes,2,opt,name=default_email,json=defaultEmail,proto3" json:"default_email,omitempty"`
 }
 

@@ -6,6 +6,7 @@ import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1/config"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -178,6 +179,14 @@ func (m *Host) SetServices(v []*Service) {
 
 func (m *Host) SetShardName(v string) {
 	m.ShardName = v
+}
+
+func (m *Host) SetReplicaPriority(v *wrapperspb.Int64Value) {
+	m.ReplicaPriority = v
+}
+
+func (m *Host) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
 }
 
 func (m *Service) SetType(v Service_Type) {

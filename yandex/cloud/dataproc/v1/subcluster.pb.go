@@ -352,7 +352,7 @@ type Host struct {
 
 	// Name of the Data Proc host. The host name is assigned by Data Proc at creation time
 	// and cannot be changed. The name is generated to be unique across all existing Data Proc
-	// hosts in Yandex.Cloud, as it defines the FQDN of the host.
+	// hosts in Yandex Cloud, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the Data Proc subcluster that the host belongs to.
 	SubclusterId string `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`

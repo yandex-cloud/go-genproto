@@ -793,7 +793,7 @@ type Host struct {
 	// Name of the SQL Server host. The host name is assigned by Managed Service for SQL Server
 	// at creation time, and cannot be changed. 1-63 characters long.
 	//
-	// The name is unique across all existing database hosts in Yandex.Cloud,
+	// The name is unique across all existing database hosts in Yandex Cloud,
 	// as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the SQL Server host. The ID is assigned by Managed Service for SQL Server

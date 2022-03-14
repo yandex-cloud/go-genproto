@@ -258,6 +258,26 @@ func (m *MysqlConfig5_7) SetInnodbPageSize(v *wrapperspb.Int64Value) {
 	m.InnodbPageSize = v
 }
 
+func (m *MysqlConfig5_7) SetInnodbOnlineAlterLogMaxSize(v *wrapperspb.Int64Value) {
+	m.InnodbOnlineAlterLogMaxSize = v
+}
+
+func (m *MysqlConfig5_7) SetInnodbFtMinTokenSize(v *wrapperspb.Int64Value) {
+	m.InnodbFtMinTokenSize = v
+}
+
+func (m *MysqlConfig5_7) SetInnodbFtMaxTokenSize(v *wrapperspb.Int64Value) {
+	m.InnodbFtMaxTokenSize = v
+}
+
+func (m *MysqlConfig5_7) SetLowerCaseTableNames(v *wrapperspb.Int64Value) {
+	m.LowerCaseTableNames = v
+}
+
+func (m *MysqlConfig5_7) SetShowCompatibility_56(v *wrapperspb.BoolValue) {
+	m.ShowCompatibility_56 = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

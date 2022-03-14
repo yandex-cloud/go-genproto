@@ -333,7 +333,7 @@ type ListMembersResponse_OrganizationUser struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// OpenID standard claims with additional Yandex.Organization claims.
+	// OpenID standard claims with additional Yandex Cloud Organization claims.
 	SubjectClaims *oauth.SubjectClaims `protobuf:"bytes,1,opt,name=subject_claims,json=subjectClaims,proto3" json:"subject_claims,omitempty"`
 }
 

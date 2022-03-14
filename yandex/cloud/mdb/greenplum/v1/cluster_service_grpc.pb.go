@@ -43,6 +43,10 @@ type ClusterServiceClient interface {
 	ListSegmentHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
+	// Retrieves the list of available backups for the specified Greenplum cluster.
+	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
+	// Creates a new Greenplum® cluster using the specified backup.
+	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type clusterServiceClient struct {
@@ -152,6 +156,24 @@ func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogs
 	return out, nil
 }
 
+func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error) {
+	out := new(ListClusterBackupsResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.greenplum.v1.ClusterService/Restore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility
@@ -180,6 +202,10 @@ type ClusterServiceServer interface {
 	ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
+	// Retrieves the list of available backups for the specified Greenplum cluster.
+	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
+	// Creates a new Greenplum® cluster using the specified backup.
+	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have forward compatible implementations.
@@ -218,6 +244,12 @@ func (UnimplementedClusterServiceServer) ListSegmentHosts(context.Context, *List
 }
 func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
+}
+func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBackups not implemented")
+}
+func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
 }
 
 // UnsafeClusterServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -429,6 +461,42 @@ func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterBackupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListBackups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListBackups(ctx, req.(*ListClusterBackupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Restore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.greenplum.v1.ClusterService/Restore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Restore(ctx, req.(*RestoreClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -479,6 +547,14 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListLogs",
 			Handler:    _ClusterService_ListLogs_Handler,
+		},
+		{
+			MethodName: "ListBackups",
+			Handler:    _ClusterService_ListBackups_Handler,
+		},
+		{
+			MethodName: "Restore",
+			Handler:    _ClusterService_Restore_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
