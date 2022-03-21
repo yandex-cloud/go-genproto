@@ -18,6 +18,18 @@ func (m *MongodConfig5_0Enterprise) SetNet(v *MongodConfig5_0Enterprise_Network)
 	m.Net = v
 }
 
+func (m *MongodConfig5_0Enterprise) SetSecurity(v *MongodConfig5_0Enterprise_Security) {
+	m.Security = v
+}
+
+func (m *MongodConfig5_0Enterprise) SetAuditLog(v *MongodConfig5_0Enterprise_AuditLog) {
+	m.AuditLog = v
+}
+
+func (m *MongodConfig5_0Enterprise) SetSetParameter(v *MongodConfig5_0Enterprise_SetParameter) {
+	m.SetParameter = v
+}
+
 func (m *MongodConfig5_0Enterprise_Storage) SetWiredTiger(v *MongodConfig5_0Enterprise_Storage_WiredTiger) {
 	m.WiredTiger = v
 }
@@ -56,6 +68,46 @@ func (m *MongodConfig5_0Enterprise_OperationProfiling) SetSlowOpThreshold(v *wra
 
 func (m *MongodConfig5_0Enterprise_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security) SetEnableEncryption(v *wrapperspb.BoolValue) {
+	m.EnableEncryption = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security) SetKmip(v *MongodConfig5_0Enterprise_Security_KMIP) {
+	m.Kmip = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security_KMIP) SetServerName(v string) {
+	m.ServerName = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security_KMIP) SetPort(v *wrapperspb.Int64Value) {
+	m.Port = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security_KMIP) SetServerCa(v string) {
+	m.ServerCa = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security_KMIP) SetClientCertificate(v string) {
+	m.ClientCertificate = v
+}
+
+func (m *MongodConfig5_0Enterprise_Security_KMIP) SetKeyIdentifier(v string) {
+	m.KeyIdentifier = v
+}
+
+func (m *MongodConfig5_0Enterprise_AuditLog) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *MongodConfig5_0Enterprise_AuditLog) SetRuntimeConfiguration(v *wrapperspb.BoolValue) {
+	m.RuntimeConfiguration = v
+}
+
+func (m *MongodConfig5_0Enterprise_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
+	m.AuditAuthorizationSuccess = v
 }
 
 func (m *MongoCfgConfig5_0Enterprise) SetStorage(v *MongoCfgConfig5_0Enterprise_Storage) {

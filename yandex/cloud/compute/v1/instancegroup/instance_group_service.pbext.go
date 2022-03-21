@@ -155,6 +155,10 @@ func (m *UpdateInstanceGroupRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *UpdateInstanceGroupRequest) SetApplicationLoadBalancerSpec(v *ApplicationLoadBalancerSpec) {
+	m.ApplicationLoadBalancerSpec = v
+}
+
 func (m *UpdateInstanceGroupFromYamlRequest) SetInstanceGroupId(v string) {
 	m.InstanceGroupId = v
 }

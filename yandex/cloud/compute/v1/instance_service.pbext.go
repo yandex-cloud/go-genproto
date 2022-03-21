@@ -79,6 +79,10 @@ func (m *CreateInstanceRequest) SetSecondaryDiskSpecs(v []*AttachedDiskSpec) {
 	m.SecondaryDiskSpecs = v
 }
 
+func (m *CreateInstanceRequest) SetLocalDiskSpecs(v []*AttachedLocalDiskSpec) {
+	m.LocalDiskSpecs = v
+}
+
 func (m *CreateInstanceRequest) SetFilesystemSpecs(v []*AttachedFilesystemSpec) {
 	m.FilesystemSpecs = v
 }
@@ -493,6 +497,10 @@ func (m *AttachedDiskSpec_DiskSpec) SetSnapshotId(v string) {
 	m.Source = &AttachedDiskSpec_DiskSpec_SnapshotId{
 		SnapshotId: v,
 	}
+}
+
+func (m *AttachedLocalDiskSpec) SetSize(v int64) {
+	m.Size = v
 }
 
 func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {

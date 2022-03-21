@@ -126,14 +126,16 @@ func (m *Hints) SetVolume(v float64) {
 	}
 }
 
+func (m *Hints) SetRole(v string) {
+	m.Hint = &Hints_Role{
+		Role: v,
+	}
+}
+
 type UtteranceSynthesisRequest_Utterance = isUtteranceSynthesisRequest_Utterance
 
 func (m *UtteranceSynthesisRequest) SetUtterance(v UtteranceSynthesisRequest_Utterance) {
 	m.Utterance = v
-}
-
-func (m *UtteranceSynthesisRequest) SetModel(v string) {
-	m.Model = v
 }
 
 func (m *UtteranceSynthesisRequest) SetText(v string) {

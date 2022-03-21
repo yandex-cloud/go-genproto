@@ -18,6 +18,18 @@ func (m *MongodConfig4_4Enterprise) SetNet(v *MongodConfig4_4Enterprise_Network)
 	m.Net = v
 }
 
+func (m *MongodConfig4_4Enterprise) SetSecurity(v *MongodConfig4_4Enterprise_Security) {
+	m.Security = v
+}
+
+func (m *MongodConfig4_4Enterprise) SetAuditLog(v *MongodConfig4_4Enterprise_AuditLog) {
+	m.AuditLog = v
+}
+
+func (m *MongodConfig4_4Enterprise) SetSetParameter(v *MongodConfig4_4Enterprise_SetParameter) {
+	m.SetParameter = v
+}
+
 func (m *MongodConfig4_4Enterprise_Storage) SetWiredTiger(v *MongodConfig4_4Enterprise_Storage_WiredTiger) {
 	m.WiredTiger = v
 }
@@ -56,6 +68,42 @@ func (m *MongodConfig4_4Enterprise_OperationProfiling) SetSlowOpThreshold(v *wra
 
 func (m *MongodConfig4_4Enterprise_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security) SetEnableEncryption(v *wrapperspb.BoolValue) {
+	m.EnableEncryption = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security) SetKmip(v *MongodConfig4_4Enterprise_Security_KMIP) {
+	m.Kmip = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security_KMIP) SetServerName(v string) {
+	m.ServerName = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security_KMIP) SetPort(v *wrapperspb.Int64Value) {
+	m.Port = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security_KMIP) SetServerCa(v string) {
+	m.ServerCa = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security_KMIP) SetClientCertificate(v string) {
+	m.ClientCertificate = v
+}
+
+func (m *MongodConfig4_4Enterprise_Security_KMIP) SetKeyIdentifier(v string) {
+	m.KeyIdentifier = v
+}
+
+func (m *MongodConfig4_4Enterprise_AuditLog) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *MongodConfig4_4Enterprise_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
+	m.AuditAuthorizationSuccess = v
 }
 
 func (m *MongoCfgConfig4_4Enterprise) SetStorage(v *MongoCfgConfig4_4Enterprise_Storage) {

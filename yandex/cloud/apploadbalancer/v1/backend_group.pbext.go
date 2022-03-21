@@ -196,6 +196,10 @@ func (m *StreamBackend) SetTls(v *BackendTls) {
 	m.Tls = v
 }
 
+func (m *StreamBackend) SetEnableProxyProtocol(v bool) {
+	m.EnableProxyProtocol = v
+}
+
 type HttpBackend_BackendType = isHttpBackend_BackendType
 
 func (m *HttpBackend) SetBackendType(v HttpBackend_BackendType) {

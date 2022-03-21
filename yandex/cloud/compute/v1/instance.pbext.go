@@ -58,6 +58,10 @@ func (m *Instance) SetSecondaryDisks(v []*AttachedDisk) {
 	m.SecondaryDisks = v
 }
 
+func (m *Instance) SetLocalDisks(v []*AttachedLocalDisk) {
+	m.LocalDisks = v
+}
+
 func (m *Instance) SetFilesystems(v []*AttachedFilesystem) {
 	m.Filesystems = v
 }
@@ -116,6 +120,14 @@ func (m *AttachedDisk) SetAutoDelete(v bool) {
 
 func (m *AttachedDisk) SetDiskId(v string) {
 	m.DiskId = v
+}
+
+func (m *AttachedLocalDisk) SetSize(v int64) {
+	m.Size = v
+}
+
+func (m *AttachedLocalDisk) SetDeviceName(v string) {
+	m.DeviceName = v
 }
 
 func (m *AttachedFilesystem) SetMode(v AttachedFilesystem_Mode) {
