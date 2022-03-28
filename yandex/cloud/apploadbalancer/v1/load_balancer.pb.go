@@ -724,7 +724,7 @@ type Listener struct {
 	//
 	// Endpoints are defined by their IP addresses and ports.
 	Endpoints []*Endpoint `protobuf:"bytes,2,rep,name=endpoints,proto3" json:"endpoints,omitempty"`
-	// HTTP or HTTPS (HTTP over TLS) listener settings.
+	// Listener type and settings.
 	//
 	// Types that are assignable to Listener:
 	//	*Listener_Http
@@ -812,17 +812,21 @@ type isListener_Listener interface {
 }
 
 type Listener_Http struct {
-	// HTTP listener settings.
+	// Unencrypted HTTP listener settings.
 	Http *HttpListener `protobuf:"bytes,3,opt,name=http,proto3,oneof"`
 }
 
 type Listener_Tls struct {
-	// HTTPS (HTTP over TLS) listener settings.
+	// TLS-encrypted HTTP or TCP stream listener settings.
+	//
+	// All handlers within a listener ([TlsListener.default_handler] and [TlsListener.sni_handlers]) must be of one
+	// type, [HttpHandler] or [StreamHandler]. Mixing HTTP and TCP stream traffic in a TLS-encrypted listener is not
+	// supported.
 	Tls *TlsListener `protobuf:"bytes,4,opt,name=tls,proto3,oneof"`
 }
 
 type Listener_Stream struct {
-	// Stream listener settings.
+	// Unencrypted stream (TCP) listener settings.
 	Stream *StreamListener `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
 }
 
@@ -952,7 +956,7 @@ func (x *HttpListener) GetRedirects() *Redirects {
 	return nil
 }
 
-// An HTTPS (HTTP over TLS) listener resource.
+// TLS-encrypted (HTTP or TCP stream) listener resource.
 type TlsListener struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1012,12 +1016,13 @@ func (x *TlsListener) GetSniHandlers() []*SniMatch {
 	return nil
 }
 
-// A Stream listener resource.
+// A stream (TCP) listener resource.
 type StreamListener struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Settings for handling stream (TCP) requests.
 	Handler *StreamHandler `protobuf:"bytes,1,opt,name=handler,proto3" json:"handler,omitempty"`
 }
 
@@ -1109,12 +1114,18 @@ func (x *Http2Options) GetMaxConcurrentStreams() int64 {
 	return 0
 }
 
-//A stream handler resource.
+// A stream (TCP) handler resource.
 type StreamHandler struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the backend group processing requests. For details about the concept, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group).
+	//
+	// The backend group type, specified via [BackendGroup.backend], must be `stream`.
+	//
+	// To get the list of all available backend groups, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 }
 
@@ -1163,9 +1174,10 @@ type HttpHandler struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the HTTP router processing requests.
+	// ID of the HTTP router processing requests. For details about the concept, see
+	// [documentation](/docs/application-load-balancer/concepts/http-router).
 	//
-	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router).
+	// To get the list of all available HTTP routers, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Protocol settings.
 	//
@@ -1377,7 +1389,7 @@ func (x *SniMatch) GetHandler() *TlsHandler {
 	return nil
 }
 
-// An HTTPS (HTTP over TLS) handler resource.
+// A TLS-encrypted (HTTP or TCP stream) handler resource.
 type TlsHandler struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1465,7 +1477,7 @@ type TlsHandler_HttpHandler struct {
 }
 
 type TlsHandler_StreamHandler struct {
-	// Stream handler
+	// Stream (TCP) handler.
 	StreamHandler *StreamHandler `protobuf:"bytes,4,opt,name=stream_handler,json=streamHandler,proto3,oneof"`
 }
 

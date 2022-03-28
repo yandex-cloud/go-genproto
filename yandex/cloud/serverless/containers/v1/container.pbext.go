@@ -83,6 +83,10 @@ func (m *Revision) SetSecrets(v []*Secret) {
 	m.Secrets = v
 }
 
+func (m *Revision) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -149,4 +153,12 @@ func (m *Secret) SetEnvironmentVariable(v string) {
 	m.Reference = &Secret_EnvironmentVariable{
 		EnvironmentVariable: v,
 	}
+}
+
+func (m *Connectivity) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *Connectivity) SetSubnetIds(v []string) {
+	m.SubnetIds = v
 }

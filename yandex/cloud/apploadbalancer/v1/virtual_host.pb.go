@@ -1219,6 +1219,8 @@ type HttpRouteAction struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Backend group to forward requests to.
+	//
+	// Stream (TCP) backend groups are not supported.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	// Overall timeout for an HTTP connection between a load balancer node an a backend from the backend group:
 	// the maximum time the connection is kept alive for, regardless of whether data is transferred over it.

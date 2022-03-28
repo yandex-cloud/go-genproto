@@ -356,7 +356,7 @@ type Host struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the Data Proc subcluster that the host belongs to.
 	SubclusterId string `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
-	// Host status code.
+	// Status code of the aggregated health of the host.
 	Health Health `protobuf:"varint,3,opt,name=health,proto3,enum=yandex.cloud.dataproc.v1.Health" json:"health,omitempty"`
 	// ID of the Compute virtual machine that is used as the Data Proc host.
 	ComputeInstanceId string `protobuf:"bytes,4,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`

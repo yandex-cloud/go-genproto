@@ -596,3 +596,7 @@ func (m *Resources) SetDiskTypeId(v string) {
 func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
 }
+
+func (m *Access) SetDataTransfer(v bool) {
+	m.DataTransfer = v
+}

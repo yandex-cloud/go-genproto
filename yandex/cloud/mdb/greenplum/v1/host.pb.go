@@ -21,7 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Type of the host.
 type Host_Type int32
 
 const (
@@ -78,7 +77,6 @@ func (Host_Type) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_greenplum_v1_host_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// Status code of the aggregated health of the host.
 type Host_Health int32
 
 const (

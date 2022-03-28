@@ -121,8 +121,6 @@ type BackendGroup struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Backends that the backend group consists of.
 	//
-	// A backend group must consist of either HTTP backends or gRPC backends.
-	//
 	// Types that are assignable to Backend:
 	//	*BackendGroup_Http
 	//	*BackendGroup_Grpc
@@ -249,7 +247,7 @@ type BackendGroup_Grpc struct {
 }
 
 type BackendGroup_Stream struct {
-	// List of stream backends that the backend group consist of.
+	// List of stream (TCP) backends that the backend group consists of.
 	Stream *StreamBackendGroup `protobuf:"bytes,10,opt,name=stream,proto3,oneof"`
 }
 
@@ -259,15 +257,23 @@ func (*BackendGroup_Grpc) isBackendGroup_Backend() {}
 
 func (*BackendGroup_Stream) isBackendGroup_Backend() {}
 
-// A Stream backend group resource.
+// A stream (TCP) backend group resource.
 type StreamBackendGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of stream (TCP) backends.
 	Backends []*StreamBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
-	// session_affinity is applicable when load_balancing_mode of the selected backend
-	// is MAGLEV_HASH.
+	// Session affinity configuration for the backend group.
+	//
+	// For details about the concept, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#session-affinity).
+	//
+	// If session affinity is configured, the backend group should contain exactly one active backend (i.e. with positive
+	// [HttpBackend.backend_weight]), its [HttpBackend.backend_type] should be [TargetGroupsBackend], and its
+	// [LoadBalancingConfig.load_balancing_mode] should be `MAGLEV_HASH`. If any of these conditions are not met, session
+	// affinity will not work.
 	//
 	// Types that are assignable to SessionAffinity:
 	//	*StreamBackendGroup_Connection
@@ -332,6 +338,9 @@ type isStreamBackendGroup_SessionAffinity interface {
 }
 
 type StreamBackendGroup_Connection struct {
+	// Connection-based session affinity configuration.
+	//
+	// For now, a connection is defined only by an IP address of the client.
 	Connection *ConnectionSessionAffinity `protobuf:"bytes,2,opt,name=connection,proto3,oneof"`
 }
 
@@ -841,23 +850,41 @@ func (x *LoadBalancingConfig) GetMode() LoadBalancingMode {
 	return LoadBalancingMode_ROUND_ROBIN
 }
 
-// A stream backend resource.
+// A stream (TCP) backend resource.
 type StreamBackend struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Name of the backend.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// If not set, backend will be disabled.
-	BackendWeight       *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
-	LoadBalancingConfig *LoadBalancingConfig   `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
-	// Optional alternative port for all targets.
+	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
+	//
+	// Weights must be set either for all backends in a group or for none of them.
+	// Setting no weights is the same as setting equal non-zero weights for all backends.
+	//
+	// If the weight is non-positive, traffic is not sent to the backend.
+	BackendWeight *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Load balancing configuration for the backend.
+	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
+	// Port used by all targets to receive traffic.
 	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Reference to targets that belong to the backend.
+	//
 	// Types that are assignable to BackendType:
 	//	*StreamBackend_TargetGroups
-	BackendType  isStreamBackend_BackendType `protobuf_oneof:"backend_type"`
-	Healthchecks []*HealthCheck              `protobuf:"bytes,6,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
-	Tls          *BackendTls                 `protobuf:"bytes,7,opt,name=tls,proto3" json:"tls,omitempty"`
+	BackendType isStreamBackend_BackendType `protobuf_oneof:"backend_type"`
+	// Health checks to perform on targets from target groups.
+	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
+	//
+	// If no health checks are specified, active health checking is not performed.
+	Healthchecks []*HealthCheck `protobuf:"bytes,6,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
+	// Settings for TLS connections between load balancer nodes and backend targets.
+	//
+	// If specified, the load balancer establishes TLS-encrypted TCP connections with targets and compares received
+	// certificates with the one specified in [BackendTls.validation_context].
+	// If not specified, the load balancer establishes unencrypted TCP connections with targets.
+	Tls *BackendTls `protobuf:"bytes,7,opt,name=tls,proto3" json:"tls,omitempty"`
 	// If set, proxy protocol will be enabled for this backend.
 	EnableProxyProtocol bool `protobuf:"varint,8,opt,name=enable_proxy_protocol,json=enableProxyProtocol,proto3" json:"enable_proxy_protocol,omitempty"`
 }
@@ -962,6 +989,8 @@ type isStreamBackend_BackendType interface {
 }
 
 type StreamBackend_TargetGroups struct {
+	// Target groups that belong to the backend. For details about target groups, see
+	// [documentation](/docs/application-load-balancer/concepts/target-group).
 	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
 }
 

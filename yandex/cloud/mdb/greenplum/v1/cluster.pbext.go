@@ -169,6 +169,10 @@ func (m *Access) SetWebSql(v bool) {
 	m.WebSql = v
 }
 
+func (m *Access) SetDataTransfer(v bool) {
+	m.DataTransfer = v
+}
+
 func (m *GreenplumRestoreConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }

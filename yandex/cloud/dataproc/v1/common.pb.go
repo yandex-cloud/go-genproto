@@ -23,13 +23,13 @@ const (
 type Health int32
 
 const (
-	// State of the cluster is unknown ([Host.health] for every host in the cluster is UNKNOWN).
+	// Object is in unknown state (we have no data).
 	Health_HEALTH_UNKNOWN Health = 0
-	// Cluster is alive and well ([Host.health] for every host in the cluster is ALIVE).
+	// Object is alive and well (for example, all hosts of the cluster are alive).
 	Health_ALIVE Health = 1
-	// Cluster is inoperable ([Host.health] for every host in the cluster is DEAD).
+	// Object is inoperable (it cannot perform any of its essential functions).
 	Health_DEAD Health = 2
-	// Cluster is working below capacity ([Host.health] for at least one host in the cluster is not ALIVE).
+	// Object is partially alive (it can perform some of its essential functions).
 	Health_DEGRADED Health = 3
 )
 

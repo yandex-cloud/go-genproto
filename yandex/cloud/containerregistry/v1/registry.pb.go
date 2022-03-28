@@ -76,7 +76,7 @@ func (Registry_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_containerregistry_v1_registry_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// A Registry resource. For more information, see [Registry](/docs/cloud/containerregistry/registry).
+// A Registry resource. For more information, see the [Registry](/docs/container-registry/concepts/registry) section of the documentation.
 type Registry struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

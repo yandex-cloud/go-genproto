@@ -1571,7 +1571,7 @@ type ListenerSpec struct {
 	//
 	// Endpoints are defined by their IP addresses and ports.
 	EndpointSpecs []*EndpointSpec `protobuf:"bytes,2,rep,name=endpoint_specs,json=endpointSpecs,proto3" json:"endpoint_specs,omitempty"`
-	// HTTP or HTTPS (HTTP over TLS) listener settings.
+	// Listener type and settings.
 	//
 	// Types that are assignable to Listener:
 	//	*ListenerSpec_Http
@@ -1659,17 +1659,21 @@ type isListenerSpec_Listener interface {
 }
 
 type ListenerSpec_Http struct {
-	// HTTP listener settings.
+	// Unencrypted HTTP listener settings.
 	Http *HttpListener `protobuf:"bytes,3,opt,name=http,proto3,oneof"`
 }
 
 type ListenerSpec_Tls struct {
-	// TLS listener settings.
+	// TLS-encrypted HTTP or TCP stream listener settings.
+	//
+	// All handlers within a listener ([TlsListener.default_handler] and [TlsListener.sni_handlers]) must be of one
+	// type, [HttpHandler] or [StreamHandler]. Mixing HTTP and TCP stream traffic in a TLS-encrypted listener is not
+	// supported.
 	Tls *TlsListener `protobuf:"bytes,4,opt,name=tls,proto3,oneof"`
 }
 
 type ListenerSpec_Stream struct {
-	// TCP listener settings.
+	// Unencrypted stream (TCP) listener settings.
 	Stream *StreamListener `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
 }
 

@@ -119,6 +119,10 @@ func (m *ConfigSpec) SetSchemaRegistry(v bool) {
 	m.SchemaRegistry = v
 }
 
+func (m *ConfigSpec) SetAccess(v *Access) {
+	m.Access = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {
@@ -373,4 +377,8 @@ func (m *Host) SetSubnetId(v string) {
 
 func (m *Host) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
+}
+
+func (m *Access) SetDataTransfer(v bool) {
+	m.DataTransfer = v
 }

@@ -162,6 +162,10 @@ func (m *DeployContainerRevisionRequest) SetSecrets(v []*Secret) {
 	m.Secrets = v
 }
 
+func (m *DeployContainerRevisionRequest) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

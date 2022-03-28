@@ -329,6 +329,10 @@ func (m *Access) SetServerless(v bool) {
 	m.Serverless = v
 }
 
+func (m *Access) SetDataTransfer(v bool) {
+	m.DataTransfer = v
+}
+
 func (m *PerformanceDiagnostics) SetEnabled(v bool) {
 	m.Enabled = v
 }

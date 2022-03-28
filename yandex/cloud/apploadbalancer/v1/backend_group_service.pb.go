@@ -348,8 +348,6 @@ type UpdateBackendGroupRequest struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// New list of backends in the backend group.
 	//
-	// A backend group must consist of either HTTP backends or gRPC backends.
-	//
 	// Existing list of backends is completely replaced by the specified list, so if you just want to add or remove
 	// a target, make a [BackendGroupService.AddBackend] request or a [BackendGroupService.RemoveBackend] request.
 	//
@@ -470,7 +468,7 @@ type UpdateBackendGroupRequest_Grpc struct {
 }
 
 type UpdateBackendGroupRequest_Stream struct {
-	// New list of Stream backends that the backend group will consist of.
+	// New list of stream (TCP) backends that the backend group will consist of.
 	Stream *StreamBackendGroup `protobuf:"bytes,8,opt,name=stream,proto3,oneof"`
 }
 
@@ -546,8 +544,6 @@ type CreateBackendGroupRequest struct {
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Backends that the backend group will consist of.
-	//
-	// A backend group must consist of either HTTP backends or gRPC backends.
 	//
 	// Types that are assignable to Backend:
 	//	*CreateBackendGroupRequest_Http
@@ -659,7 +655,7 @@ type CreateBackendGroupRequest_Grpc struct {
 }
 
 type CreateBackendGroupRequest_Stream struct {
-	// List of Stream backends that the backend group consists of.
+	// List of stream (TCP) backends that the backend group consists of.
 	Stream *StreamBackendGroup `protobuf:"bytes,7,opt,name=stream,proto3,oneof"`
 }
 
@@ -727,8 +723,6 @@ type AddBackendRequest struct {
 	// To get the backend group ID, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	// Backend to add to the backend group.
-	//
-	// A backend group must consist of either HTTP backends or gRPC backends.
 	//
 	// Types that are assignable to Backend:
 	//	*AddBackendRequest_Http
@@ -993,7 +987,7 @@ type UpdateBackendRequest_Grpc struct {
 }
 
 type UpdateBackendRequest_Stream struct {
-	// New settings for the Stream backend.
+	// New settings for the stream (TCP) backend.
 	Stream *StreamBackend `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
 }
 

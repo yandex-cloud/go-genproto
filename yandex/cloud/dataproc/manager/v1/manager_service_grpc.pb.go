@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DataprocManagerServiceClient interface {
-	// Sends a status report from a host
+	// Sends a status report from a host.
 	Report(ctx context.Context, in *ReportRequest, opts ...grpc.CallOption) (*ReportReply, error)
 }
 
@@ -43,7 +43,7 @@ func (c *dataprocManagerServiceClient) Report(ctx context.Context, in *ReportReq
 // All implementations should embed UnimplementedDataprocManagerServiceServer
 // for forward compatibility
 type DataprocManagerServiceServer interface {
-	// Sends a status report from a host
+	// Sends a status report from a host.
 	Report(context.Context, *ReportRequest) (*ReportReply, error)
 }
 
