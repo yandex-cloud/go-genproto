@@ -86,6 +86,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetHostGroupIds(v []string) {
+	m.HostGroupIds = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -188,6 +192,14 @@ func (m *RestoreClusterRequest) SetFolderId(v string) {
 
 func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
+}
+
+func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *RestoreClusterRequest) SetHostGroupIds(v []string) {
+	m.HostGroupIds = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

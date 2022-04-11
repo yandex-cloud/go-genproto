@@ -138,6 +138,10 @@ func (m *UtteranceSynthesisRequest) SetUtterance(v UtteranceSynthesisRequest_Utt
 	m.Utterance = v
 }
 
+func (m *UtteranceSynthesisRequest) SetModel(v string) {
+	m.Model = v
+}
+
 func (m *UtteranceSynthesisRequest) SetText(v string) {
 	m.Utterance = &UtteranceSynthesisRequest_Text{
 		Text: v,
