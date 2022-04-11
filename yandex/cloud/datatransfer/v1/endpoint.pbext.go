@@ -48,6 +48,18 @@ func (m *EndpointSettings) SetPostgresSource(v *endpoint.PostgresSource) {
 	}
 }
 
+func (m *EndpointSettings) SetMongoSource(v *endpoint.MongoSource) {
+	m.Settings = &EndpointSettings_MongoSource{
+		MongoSource: v,
+	}
+}
+
+func (m *EndpointSettings) SetClickhouseSource(v *endpoint.ClickhouseSource) {
+	m.Settings = &EndpointSettings_ClickhouseSource{
+		ClickhouseSource: v,
+	}
+}
+
 func (m *EndpointSettings) SetMysqlTarget(v *endpoint.MysqlTarget) {
 	m.Settings = &EndpointSettings_MysqlTarget{
 		MysqlTarget: v,
@@ -57,5 +69,17 @@ func (m *EndpointSettings) SetMysqlTarget(v *endpoint.MysqlTarget) {
 func (m *EndpointSettings) SetPostgresTarget(v *endpoint.PostgresTarget) {
 	m.Settings = &EndpointSettings_PostgresTarget{
 		PostgresTarget: v,
+	}
+}
+
+func (m *EndpointSettings) SetClickhouseTarget(v *endpoint.ClickhouseTarget) {
+	m.Settings = &EndpointSettings_ClickhouseTarget{
+		ClickhouseTarget: v,
+	}
+}
+
+func (m *EndpointSettings) SetMongoTarget(v *endpoint.MongoTarget) {
+	m.Settings = &EndpointSettings_MongoTarget{
+		MongoTarget: v,
 	}
 }

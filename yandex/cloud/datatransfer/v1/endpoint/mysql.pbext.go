@@ -52,8 +52,16 @@ func (m *MysqlSource) SetConnection(v *MysqlConnection) {
 	m.Connection = v
 }
 
+func (m *MysqlSource) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
+}
+
 func (m *MysqlSource) SetDatabase(v string) {
 	m.Database = v
+}
+
+func (m *MysqlSource) SetServiceDatabase(v string) {
+	m.ServiceDatabase = v
 }
 
 func (m *MysqlSource) SetUser(v string) {
@@ -82,6 +90,10 @@ func (m *MysqlSource) SetObjectTransferSettings(v *MysqlObjectTransferSettings) 
 
 func (m *MysqlTarget) SetConnection(v *MysqlConnection) {
 	m.Connection = v
+}
+
+func (m *MysqlTarget) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
 }
 
 func (m *MysqlTarget) SetDatabase(v string) {

@@ -190,6 +190,22 @@ func (m *DeployContainerRevisionMetadata) SetContainerRevisionId(v string) {
 	m.ContainerRevisionId = v
 }
 
+func (m *RollbackContainerRequest) SetContainerId(v string) {
+	m.ContainerId = v
+}
+
+func (m *RollbackContainerRequest) SetRevisionId(v string) {
+	m.RevisionId = v
+}
+
+func (m *RollbackContainerMetadata) SetContainerId(v string) {
+	m.ContainerId = v
+}
+
+func (m *RollbackContainerMetadata) SetRevisionId(v string) {
+	m.RevisionId = v
+}
+
 func (m *ListContainerOperationsRequest) SetContainerId(v string) {
 	m.ContainerId = v
 }

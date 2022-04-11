@@ -66,6 +66,10 @@ func (m *PostgresObjectTransferSettings) SetCast(v ObjectTransferStage) {
 	m.Cast = v
 }
 
+func (m *PostgresObjectTransferSettings) SetMaterializedView(v ObjectTransferStage) {
+	m.MaterializedView = v
+}
+
 func (m *OnPremisePostgres) SetHosts(v []string) {
 	m.Hosts = v
 }
@@ -104,6 +108,10 @@ func (m *PostgresSource) SetConnection(v *PostgresConnection) {
 	m.Connection = v
 }
 
+func (m *PostgresSource) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
+}
+
 func (m *PostgresSource) SetDatabase(v string) {
 	m.Database = v
 }
@@ -138,6 +146,10 @@ func (m *PostgresSource) SetObjectTransferSettings(v *PostgresObjectTransferSett
 
 func (m *PostgresTarget) SetConnection(v *PostgresConnection) {
 	m.Connection = v
+}
+
+func (m *PostgresTarget) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
 }
 
 func (m *PostgresTarget) SetDatabase(v string) {

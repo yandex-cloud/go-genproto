@@ -26,6 +26,7 @@ type ContainerServiceClient interface {
 	Update(ctx context.Context, in *UpdateContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Delete(ctx context.Context, in *DeleteContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	DeployRevision(ctx context.Context, in *DeployContainerRevisionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Rollback(ctx context.Context, in *RollbackContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	GetRevision(ctx context.Context, in *GetContainerRevisionRequest, opts ...grpc.CallOption) (*Revision, error)
 	ListRevisions(ctx context.Context, in *ListContainersRevisionsRequest, opts ...grpc.CallOption) (*ListContainersRevisionsResponse, error)
 	ListOperations(ctx context.Context, in *ListContainerOperationsRequest, opts ...grpc.CallOption) (*ListContainerOperationsResponse, error)
@@ -96,6 +97,15 @@ func (c *containerServiceClient) DeployRevision(ctx context.Context, in *DeployC
 	return out, nil
 }
 
+func (c *containerServiceClient) Rollback(ctx context.Context, in *RollbackContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.serverless.containers.v1.ContainerService/Rollback", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *containerServiceClient) GetRevision(ctx context.Context, in *GetContainerRevisionRequest, opts ...grpc.CallOption) (*Revision, error) {
 	out := new(Revision)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.serverless.containers.v1.ContainerService/GetRevision", in, out, opts...)
@@ -160,6 +170,7 @@ type ContainerServiceServer interface {
 	Update(context.Context, *UpdateContainerRequest) (*operation.Operation, error)
 	Delete(context.Context, *DeleteContainerRequest) (*operation.Operation, error)
 	DeployRevision(context.Context, *DeployContainerRevisionRequest) (*operation.Operation, error)
+	Rollback(context.Context, *RollbackContainerRequest) (*operation.Operation, error)
 	GetRevision(context.Context, *GetContainerRevisionRequest) (*Revision, error)
 	ListRevisions(context.Context, *ListContainersRevisionsRequest) (*ListContainersRevisionsResponse, error)
 	ListOperations(context.Context, *ListContainerOperationsRequest) (*ListContainerOperationsResponse, error)
@@ -189,6 +200,9 @@ func (UnimplementedContainerServiceServer) Delete(context.Context, *DeleteContai
 }
 func (UnimplementedContainerServiceServer) DeployRevision(context.Context, *DeployContainerRevisionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeployRevision not implemented")
+}
+func (UnimplementedContainerServiceServer) Rollback(context.Context, *RollbackContainerRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Rollback not implemented")
 }
 func (UnimplementedContainerServiceServer) GetRevision(context.Context, *GetContainerRevisionRequest) (*Revision, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRevision not implemented")
@@ -324,6 +338,24 @@ func _ContainerService_DeployRevision_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ContainerServiceServer).DeployRevision(ctx, req.(*DeployContainerRevisionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContainerService_Rollback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RollbackContainerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContainerServiceServer).Rollback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.serverless.containers.v1.ContainerService/Rollback",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContainerServiceServer).Rollback(ctx, req.(*RollbackContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -466,6 +498,10 @@ var ContainerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeployRevision",
 			Handler:    _ContainerService_DeployRevision_Handler,
+		},
+		{
+			MethodName: "Rollback",
+			Handler:    _ContainerService_Rollback_Handler,
 		},
 		{
 			MethodName: "GetRevision",

@@ -125,6 +125,63 @@ func (CleanupPolicy) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{1}
 }
 
+type AltName struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// From table name
+	FromName string `protobuf:"bytes,1,opt,name=from_name,json=fromName,proto3" json:"from_name,omitempty"`
+	// To table name
+	ToName string `protobuf:"bytes,2,opt,name=to_name,json=toName,proto3" json:"to_name,omitempty"`
+}
+
+func (x *AltName) Reset() {
+	*x = AltName{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AltName) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AltName) ProtoMessage() {}
+
+func (x *AltName) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AltName.ProtoReflect.Descriptor instead.
+func (*AltName) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *AltName) GetFromName() string {
+	if x != nil {
+		return x.FromName
+	}
+	return ""
+}
+
+func (x *AltName) GetToName() string {
+	if x != nil {
+		return x.ToName
+	}
+	return ""
+}
+
 type Secret struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -138,7 +195,7 @@ type Secret struct {
 func (x *Secret) Reset() {
 	*x = Secret{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[0]
+		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -151,7 +208,7 @@ func (x *Secret) String() string {
 func (*Secret) ProtoMessage() {}
 
 func (x *Secret) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[0]
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -164,7 +221,7 @@ func (x *Secret) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Secret.ProtoReflect.Descriptor instead.
 func (*Secret) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{1}
 }
 
 func (m *Secret) GetValue() isSecret_Value {
@@ -206,7 +263,7 @@ type TLSMode struct {
 func (x *TLSMode) Reset() {
 	*x = TLSMode{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[1]
+		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -219,7 +276,7 @@ func (x *TLSMode) String() string {
 func (*TLSMode) ProtoMessage() {}
 
 func (x *TLSMode) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[1]
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +289,7 @@ func (x *TLSMode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TLSMode.ProtoReflect.Descriptor instead.
 func (*TLSMode) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{2}
 }
 
 func (m *TLSMode) GetTlsMode() isTLSMode_TlsMode {
@@ -288,7 +345,7 @@ type TLSConfig struct {
 func (x *TLSConfig) Reset() {
 	*x = TLSConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[2]
+		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -301,7 +358,7 @@ func (x *TLSConfig) String() string {
 func (*TLSConfig) ProtoMessage() {}
 
 func (x *TLSConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[2]
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -314,7 +371,7 @@ func (x *TLSConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TLSConfig.ProtoReflect.Descriptor instead.
 func (*TLSConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *TLSConfig) GetCaCertificate() string {
@@ -322,6 +379,44 @@ func (x *TLSConfig) GetCaCertificate() string {
 		return x.CaCertificate
 	}
 	return ""
+}
+
+type ColumnValue struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ColumnValue) Reset() {
+	*x = ColumnValue{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ColumnValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ColumnValue) ProtoMessage() {}
+
+func (x *ColumnValue) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ColumnValue.ProtoReflect.Descriptor instead.
+func (*ColumnValue) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{4}
 }
 
 var File_yandex_cloud_datatransfer_v1_endpoint_common_proto protoreflect.FileDescriptor
@@ -334,22 +429,27 @@ var file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDesc = []byte{
 	0x75, 0x64, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x2e,
 	0x76, 0x31, 0x2e, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x1a, 0x1b, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70,
-	0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x25, 0x0a, 0x06, 0x53, 0x65, 0x63, 0x72,
-	0x65, 0x74, 0x12, 0x12, 0x0a, 0x03, 0x72, 0x61, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48,
-	0x00, 0x52, 0x03, 0x72, 0x61, 0x77, 0x42, 0x07, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22,
-	0x99, 0x01, 0x0a, 0x07, 0x54, 0x4c, 0x53, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x34, 0x0a, 0x08, 0x64,
-	0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x48, 0x00, 0x52, 0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65,
-	0x64, 0x12, 0x4c, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x2e, 0x76,
-	0x31, 0x2e, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x2e, 0x54, 0x4c, 0x53, 0x43, 0x6f,
-	0x6e, 0x66, 0x69, 0x67, 0x48, 0x00, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x42,
-	0x0a, 0x0a, 0x08, 0x74, 0x6c, 0x73, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x22, 0x32, 0x0a, 0x09, 0x54,
-	0x4c, 0x53, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x61, 0x5f, 0x63,
-	0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0d, 0x63, 0x61, 0x43, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x2a,
+	0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x3f, 0x0a, 0x07, 0x41, 0x6c, 0x74, 0x4e,
+	0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x72, 0x6f, 0x6d, 0x5f, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x72, 0x6f, 0x6d, 0x4e, 0x61, 0x6d, 0x65,
+	0x12, 0x17, 0x0a, 0x07, 0x74, 0x6f, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x74, 0x6f, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x25, 0x0a, 0x06, 0x53, 0x65, 0x63,
+	0x72, 0x65, 0x74, 0x12, 0x12, 0x0a, 0x03, 0x72, 0x61, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x48, 0x00, 0x52, 0x03, 0x72, 0x61, 0x77, 0x42, 0x07, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x22, 0x99, 0x01, 0x0a, 0x07, 0x54, 0x4c, 0x53, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x34, 0x0a, 0x08,
+	0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16,
+	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x48, 0x00, 0x52, 0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c,
+	0x65, 0x64, 0x12, 0x4c, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x2e, 0x54, 0x4c, 0x53, 0x43,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x48, 0x00, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64,
+	0x42, 0x0a, 0x0a, 0x08, 0x74, 0x6c, 0x73, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x22, 0x32, 0x0a, 0x09,
+	0x54, 0x4c, 0x53, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x61, 0x5f,
+	0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0d, 0x63, 0x61, 0x43, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65,
+	0x22, 0x0d, 0x0a, 0x0b, 0x43, 0x6f, 0x6c, 0x75, 0x6d, 0x6e, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x2a,
 	0x68, 0x0a, 0x13, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65,
 	0x72, 0x53, 0x74, 0x61, 0x67, 0x65, 0x12, 0x25, 0x0a, 0x21, 0x4f, 0x42, 0x4a, 0x45, 0x43, 0x54,
 	0x5f, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x46, 0x45, 0x52, 0x5f, 0x53, 0x54, 0x41, 0x47, 0x45, 0x5f,
@@ -389,18 +489,20 @@ func file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP() []byt
 }
 
 var file_yandex_cloud_datatransfer_v1_endpoint_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_datatransfer_v1_endpoint_common_proto_goTypes = []interface{}{
 	(ObjectTransferStage)(0), // 0: yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage
 	(CleanupPolicy)(0),       // 1: yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy
-	(*Secret)(nil),           // 2: yandex.cloud.datatransfer.v1.endpoint.Secret
-	(*TLSMode)(nil),          // 3: yandex.cloud.datatransfer.v1.endpoint.TLSMode
-	(*TLSConfig)(nil),        // 4: yandex.cloud.datatransfer.v1.endpoint.TLSConfig
-	(*emptypb.Empty)(nil),    // 5: google.protobuf.Empty
+	(*AltName)(nil),          // 2: yandex.cloud.datatransfer.v1.endpoint.AltName
+	(*Secret)(nil),           // 3: yandex.cloud.datatransfer.v1.endpoint.Secret
+	(*TLSMode)(nil),          // 4: yandex.cloud.datatransfer.v1.endpoint.TLSMode
+	(*TLSConfig)(nil),        // 5: yandex.cloud.datatransfer.v1.endpoint.TLSConfig
+	(*ColumnValue)(nil),      // 6: yandex.cloud.datatransfer.v1.endpoint.ColumnValue
+	(*emptypb.Empty)(nil),    // 7: google.protobuf.Empty
 }
 var file_yandex_cloud_datatransfer_v1_endpoint_common_proto_depIdxs = []int32{
-	5, // 0: yandex.cloud.datatransfer.v1.endpoint.TLSMode.disabled:type_name -> google.protobuf.Empty
-	4, // 1: yandex.cloud.datatransfer.v1.endpoint.TLSMode.enabled:type_name -> yandex.cloud.datatransfer.v1.endpoint.TLSConfig
+	7, // 0: yandex.cloud.datatransfer.v1.endpoint.TLSMode.disabled:type_name -> google.protobuf.Empty
+	5, // 1: yandex.cloud.datatransfer.v1.endpoint.TLSMode.enabled:type_name -> yandex.cloud.datatransfer.v1.endpoint.TLSConfig
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -415,7 +517,7 @@ func file_yandex_cloud_datatransfer_v1_endpoint_common_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Secret); i {
+			switch v := v.(*AltName); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -427,7 +529,7 @@ func file_yandex_cloud_datatransfer_v1_endpoint_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TLSMode); i {
+			switch v := v.(*Secret); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -439,6 +541,18 @@ func file_yandex_cloud_datatransfer_v1_endpoint_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TLSMode); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TLSConfig); i {
 			case 0:
 				return &v.state
@@ -450,11 +564,23 @@ func file_yandex_cloud_datatransfer_v1_endpoint_common_proto_init() {
 				return nil
 			}
 		}
-	}
-	file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[0].OneofWrappers = []interface{}{
-		(*Secret_Raw)(nil),
+		file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ColumnValue); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[1].OneofWrappers = []interface{}{
+		(*Secret_Raw)(nil),
+	}
+	file_yandex_cloud_datatransfer_v1_endpoint_common_proto_msgTypes[2].OneofWrappers = []interface{}{
 		(*TLSMode_Disabled)(nil),
 		(*TLSMode_Enabled)(nil),
 	}
@@ -464,7 +590,7 @@ func file_yandex_cloud_datatransfer_v1_endpoint_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

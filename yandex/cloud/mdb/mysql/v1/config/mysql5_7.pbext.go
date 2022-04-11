@@ -278,6 +278,10 @@ func (m *MysqlConfig5_7) SetShowCompatibility_56(v *wrapperspb.BoolValue) {
 	m.ShowCompatibility_56 = v
 }
 
+func (m *MysqlConfig5_7) SetMaxSpRecursionDepth(v *wrapperspb.Int64Value) {
+	m.MaxSpRecursionDepth = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

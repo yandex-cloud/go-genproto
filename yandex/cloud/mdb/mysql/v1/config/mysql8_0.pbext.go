@@ -278,6 +278,10 @@ func (m *MysqlConfig8_0) SetLowerCaseTableNames(v *wrapperspb.Int64Value) {
 	m.LowerCaseTableNames = v
 }
 
+func (m *MysqlConfig8_0) SetMaxSpRecursionDepth(v *wrapperspb.Int64Value) {
+	m.MaxSpRecursionDepth = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

@@ -6,6 +6,14 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
+func (m *AltName) SetFromName(v string) {
+	m.FromName = v
+}
+
+func (m *AltName) SetToName(v string) {
+	m.ToName = v
+}
+
 type Secret_Value = isSecret_Value
 
 func (m *Secret) SetValue(v Secret_Value) {
