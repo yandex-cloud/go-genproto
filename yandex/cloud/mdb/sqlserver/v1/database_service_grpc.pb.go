@@ -29,6 +29,10 @@ type DatabaseServiceClient interface {
 	Create(ctx context.Context, in *CreateDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new SQL Server database in the specified cluster from a backup
 	Restore(ctx context.Context, in *RestoreDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	//Imports a new SQL Server database from external backup
+	ImportBackup(ctx context.Context, in *ImportDatabaseBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	//Exports database backup to external backup
+	ExportBackup(ctx context.Context, in *ExportDatabaseBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified SQL Server database.
 	Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
@@ -77,6 +81,24 @@ func (c *databaseServiceClient) Restore(ctx context.Context, in *RestoreDatabase
 	return out, nil
 }
 
+func (c *databaseServiceClient) ImportBackup(ctx context.Context, in *ImportDatabaseBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.sqlserver.v1.DatabaseService/ImportBackup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *databaseServiceClient) ExportBackup(ctx context.Context, in *ExportDatabaseBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.sqlserver.v1.DatabaseService/ExportBackup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.sqlserver.v1.DatabaseService/Delete", in, out, opts...)
@@ -100,6 +122,10 @@ type DatabaseServiceServer interface {
 	Create(context.Context, *CreateDatabaseRequest) (*operation.Operation, error)
 	// Creates a new SQL Server database in the specified cluster from a backup
 	Restore(context.Context, *RestoreDatabaseRequest) (*operation.Operation, error)
+	//Imports a new SQL Server database from external backup
+	ImportBackup(context.Context, *ImportDatabaseBackupRequest) (*operation.Operation, error)
+	//Exports database backup to external backup
+	ExportBackup(context.Context, *ExportDatabaseBackupRequest) (*operation.Operation, error)
 	// Deletes the specified SQL Server database.
 	Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error)
 }
@@ -119,6 +145,12 @@ func (UnimplementedDatabaseServiceServer) Create(context.Context, *CreateDatabas
 }
 func (UnimplementedDatabaseServiceServer) Restore(context.Context, *RestoreDatabaseRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
+}
+func (UnimplementedDatabaseServiceServer) ImportBackup(context.Context, *ImportDatabaseBackupRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ImportBackup not implemented")
+}
+func (UnimplementedDatabaseServiceServer) ExportBackup(context.Context, *ExportDatabaseBackupRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportBackup not implemented")
 }
 func (UnimplementedDatabaseServiceServer) Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -207,6 +239,42 @@ func _DatabaseService_Restore_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DatabaseService_ImportBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ImportDatabaseBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseServiceServer).ImportBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.sqlserver.v1.DatabaseService/ImportBackup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseServiceServer).ImportBackup(ctx, req.(*ImportDatabaseBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DatabaseService_ExportBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportDatabaseBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseServiceServer).ExportBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.sqlserver.v1.DatabaseService/ExportBackup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseServiceServer).ExportBackup(ctx, req.(*ExportDatabaseBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DatabaseService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteDatabaseRequest)
 	if err := dec(in); err != nil {
@@ -247,6 +315,14 @@ var DatabaseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Restore",
 			Handler:    _DatabaseService_Restore_Handler,
+		},
+		{
+			MethodName: "ImportBackup",
+			Handler:    _DatabaseService_ImportBackup_Handler,
+		},
+		{
+			MethodName: "ExportBackup",
+			Handler:    _DatabaseService_ExportBackup_Handler,
 		},
 		{
 			MethodName: "Delete",

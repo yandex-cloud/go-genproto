@@ -50,22 +50,6 @@ func (m *CreateDatabaseMetadata) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
 
-func (m *RestoreDatabaseMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *RestoreDatabaseMetadata) SetDatabaseName(v string) {
-	m.DatabaseName = v
-}
-
-func (m *RestoreDatabaseMetadata) SetFromDatabase(v string) {
-	m.FromDatabase = v
-}
-
-func (m *RestoreDatabaseMetadata) SetBackupId(v string) {
-	m.BackupId = v
-}
-
 func (m *DeleteDatabaseRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -100,4 +84,92 @@ func (m *RestoreDatabaseRequest) SetBackupId(v string) {
 
 func (m *RestoreDatabaseRequest) SetTime(v *timestamppb.Timestamp) {
 	m.Time = v
+}
+
+func (m *RestoreDatabaseMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestoreDatabaseMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *RestoreDatabaseMetadata) SetFromDatabase(v string) {
+	m.FromDatabase = v
+}
+
+func (m *RestoreDatabaseMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *ImportDatabaseBackupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ImportDatabaseBackupRequest) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *ImportDatabaseBackupRequest) SetS3Bucket(v string) {
+	m.S3Bucket = v
+}
+
+func (m *ImportDatabaseBackupRequest) SetS3Path(v string) {
+	m.S3Path = v
+}
+
+func (m *ImportDatabaseBackupRequest) SetFiles(v []string) {
+	m.Files = v
+}
+
+func (m *ImportDatabaseBackupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ImportDatabaseBackupMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *ImportDatabaseBackupMetadata) SetS3Bucket(v string) {
+	m.S3Bucket = v
+}
+
+func (m *ImportDatabaseBackupMetadata) SetS3Path(v string) {
+	m.S3Path = v
+}
+
+func (m *ExportDatabaseBackupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ExportDatabaseBackupRequest) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *ExportDatabaseBackupRequest) SetS3Bucket(v string) {
+	m.S3Bucket = v
+}
+
+func (m *ExportDatabaseBackupRequest) SetS3Path(v string) {
+	m.S3Path = v
+}
+
+func (m *ExportDatabaseBackupRequest) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *ExportDatabaseBackupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ExportDatabaseBackupMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *ExportDatabaseBackupMetadata) SetS3Bucket(v string) {
+	m.S3Bucket = v
+}
+
+func (m *ExportDatabaseBackupMetadata) SetS3Path(v string) {
+	m.S3Path = v
 }

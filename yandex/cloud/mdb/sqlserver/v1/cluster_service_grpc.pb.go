@@ -41,6 +41,8 @@ type ClusterServiceClient interface {
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new SQL Server cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Starts a manual failover for a cluster.
+	StartFailover(ctx context.Context, in *StartClusterFailoverRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified SQL Server cluster.
 	//
 	// For more information about logs, see the [Logs](/docs/managed-sqlserver/operations/cluster-logs) section in the documentation.
@@ -151,6 +153,15 @@ func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRe
 	return out, nil
 }
 
+func (c *clusterServiceClient) StartFailover(ctx context.Context, in *StartClusterFailoverRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.sqlserver.v1.ClusterService/StartFailover", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error) {
 	out := new(ListClusterLogsResponse)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.sqlserver.v1.ClusterService/ListLogs", in, out, opts...)
@@ -213,6 +224,8 @@ type ClusterServiceServer interface {
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
 	// Creates a new SQL Server cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
+	// Starts a manual failover for a cluster.
+	StartFailover(context.Context, *StartClusterFailoverRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified SQL Server cluster.
 	//
 	// For more information about logs, see the [Logs](/docs/managed-sqlserver/operations/cluster-logs) section in the documentation.
@@ -258,6 +271,9 @@ func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterR
 }
 func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
+}
+func (UnimplementedClusterServiceServer) StartFailover(context.Context, *StartClusterFailoverRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartFailover not implemented")
 }
 func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
@@ -463,6 +479,24 @@ func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_StartFailover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartClusterFailoverRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).StartFailover(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.sqlserver.v1.ClusterService/StartFailover",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).StartFailover(ctx, req.(*StartClusterFailoverRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterLogsRequest)
 	if err := dec(in); err != nil {
@@ -581,6 +615,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Restore",
 			Handler:    _ClusterService_Restore_Handler,
+		},
+		{
+			MethodName: "StartFailover",
+			Handler:    _ClusterService_StartFailover_Handler,
 		},
 		{
 			MethodName: "ListLogs",

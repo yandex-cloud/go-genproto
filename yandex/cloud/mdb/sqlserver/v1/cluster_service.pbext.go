@@ -94,6 +94,10 @@ func (m *CreateClusterRequest) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *CreateClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -128,6 +132,10 @@ func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
@@ -202,12 +210,28 @@ func (m *RestoreClusterRequest) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *RestoreClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
 func (m *RestoreClusterMetadata) SetBackupId(v string) {
 	m.BackupId = v
+}
+
+func (m *StartClusterFailoverRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StartClusterFailoverRequest) SetHostName(v string) {
+	m.HostName = v
+}
+
+func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
+	m.ClusterId = v
 }
 
 func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
