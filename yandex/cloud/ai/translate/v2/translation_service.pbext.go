@@ -58,6 +58,10 @@ func (m *GlossaryPair) SetTranslatedText(v string) {
 	m.TranslatedText = v
 }
 
+func (m *GlossaryPair) SetExact(v bool) {
+	m.Exact = v
+}
+
 func (m *TranslateResponse) SetTranslations(v []*TranslatedText) {
 	m.Translations = v
 }

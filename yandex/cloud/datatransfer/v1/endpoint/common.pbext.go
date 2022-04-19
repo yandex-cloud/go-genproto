@@ -47,3 +47,15 @@ func (m *TLSMode) SetEnabled(v *TLSConfig) {
 func (m *TLSConfig) SetCaCertificate(v string) {
 	m.CaCertificate = v
 }
+
+type ColumnValue_Value = isColumnValue_Value
+
+func (m *ColumnValue) SetValue(v ColumnValue_Value) {
+	m.Value = v
+}
+
+func (m *ColumnValue) SetStringValue(v string) {
+	m.Value = &ColumnValue_StringValue{
+		StringValue: v,
+	}
+}

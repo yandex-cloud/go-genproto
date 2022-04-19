@@ -43,6 +43,8 @@ type ClusterServiceClient interface {
 	ListSegmentHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
+	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error)
 	// Retrieves the list of available backups for the specified Greenplum cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Creates a new Greenplum® cluster using the specified backup.
@@ -156,6 +158,38 @@ func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogs
 	return out, nil
 }
 
+func (c *clusterServiceClient) StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ClusterService_ServiceDesc.Streams[0], "/yandex.cloud.mdb.greenplum.v1.ClusterService/StreamLogs", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &clusterServiceStreamLogsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ClusterService_StreamLogsClient interface {
+	Recv() (*StreamLogRecord, error)
+	grpc.ClientStream
+}
+
+type clusterServiceStreamLogsClient struct {
+	grpc.ClientStream
+}
+
+func (x *clusterServiceStreamLogsClient) Recv() (*StreamLogRecord, error) {
+	m := new(StreamLogRecord)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error) {
 	out := new(ListClusterBackupsResponse)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups", in, out, opts...)
@@ -202,6 +236,8 @@ type ClusterServiceServer interface {
 	ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
+	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error
 	// Retrieves the list of available backups for the specified Greenplum cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Creates a new Greenplum® cluster using the specified backup.
@@ -244,6 +280,9 @@ func (UnimplementedClusterServiceServer) ListSegmentHosts(context.Context, *List
 }
 func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
+}
+func (UnimplementedClusterServiceServer) StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamLogs not implemented")
 }
 func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBackups not implemented")
@@ -461,6 +500,27 @@ func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_StreamLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamClusterLogsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ClusterServiceServer).StreamLogs(m, &clusterServiceStreamLogsServer{stream})
+}
+
+type ClusterService_StreamLogsServer interface {
+	Send(*StreamLogRecord) error
+	grpc.ServerStream
+}
+
+type clusterServiceStreamLogsServer struct {
+	grpc.ServerStream
+}
+
+func (x *clusterServiceStreamLogsServer) Send(m *StreamLogRecord) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterBackupsRequest)
 	if err := dec(in); err != nil {
@@ -557,6 +617,12 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_Restore_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamLogs",
+			Handler:       _ClusterService_StreamLogs_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "yandex/cloud/mdb/greenplum/v1/cluster_service.proto",
 }

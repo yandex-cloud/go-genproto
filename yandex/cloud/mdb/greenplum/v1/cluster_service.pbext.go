@@ -322,6 +322,42 @@ func (m *ListClusterBackupsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *StreamLogRecord) SetRecord(v *LogRecord) {
+	m.Record = v
+}
+
+func (m *StreamLogRecord) SetNextRecordToken(v string) {
+	m.NextRecordToken = v
+}
+
+func (m *StreamClusterLogsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StreamClusterLogsRequest) SetColumnFilter(v []string) {
+	m.ColumnFilter = v
+}
+
+func (m *StreamClusterLogsRequest) SetServiceType(v StreamClusterLogsRequest_ServiceType) {
+	m.ServiceType = v
+}
+
+func (m *StreamClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
+	m.FromTime = v
+}
+
+func (m *StreamClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
+	m.ToTime = v
+}
+
+func (m *StreamClusterLogsRequest) SetRecordToken(v string) {
+	m.RecordToken = v
+}
+
+func (m *StreamClusterLogsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
 func (m *ListClusterBackupsResponse) SetBackups(v []*Backup) {
 	m.Backups = v
 }

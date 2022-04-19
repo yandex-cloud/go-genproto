@@ -13,3 +13,11 @@ func (m *HostType) SetCores(v int64) {
 func (m *HostType) SetMemory(v int64) {
 	m.Memory = v
 }
+
+func (m *HostType) SetDisks(v int64) {
+	m.Disks = v
+}
+
+func (m *HostType) SetDiskSize(v int64) {
+	m.DiskSize = v
+}
