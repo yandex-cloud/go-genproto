@@ -71,3 +71,7 @@ func (m *Criteria) SetFilter(v string) {
 func (m *Criteria) SetPageSize(v int64) {
 	m.PageSize = v
 }
+
+func (m *Criteria) SetMaxResponseSize(v int64) {
+	m.MaxResponseSize = v
+}
