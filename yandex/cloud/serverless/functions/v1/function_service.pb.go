@@ -213,7 +213,7 @@ type ListFunctionsRequest struct {
 	// 1. The field name. Currently filtering can only be applied to the [Function.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	// Example of a filter: `name=my-function`.
+	// Example of a filter: `name="my-function"`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -806,10 +806,10 @@ type ListFunctionsVersionsRequest struct {
 	// A filter expression that filters resources listed in the response.
 	//
 	// The expression must specify:
-	// 1. The field name. Currently filtering can only be applied to the [Function.name] field.
+	// 1. The field name. Currently filtering can only be applied to the [Version.status] and [Version.runtime] fields.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	// Example of a filter: `name=my-function`.
+	// Example of a filter: `status="ACTIVE"`.
 	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -1611,10 +1611,10 @@ type ListFunctionTagHistoryRequest struct {
 	// A filter expression that filters resources listed in the response.
 	//
 	// The expression must specify:
-	// 1. The field name. Currently filtering can only be applied to the [Function.name] field.
-	// 2. An `=` operator.
+	// 1. The field name. Currently filtering can only be applied to the [FunctionTagHistoryRecord.effective_from] and [FunctionTagHistoryRecord.effective_to] fields.
+	// 2. An `=` or `>` or `<` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	// For example, `name=my-function`.
+	// For example, `effective_to>2021-01-01T12:00:00Z`.
 	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 

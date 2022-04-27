@@ -87,6 +87,10 @@ func (m *Revision) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
 
+func (m *Revision) SetProvisionPolicy(v *ProvisionPolicy) {
+	m.ProvisionPolicy = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -129,6 +133,10 @@ func (m *Resources) SetCores(v int64) {
 
 func (m *Resources) SetCoreFraction(v int64) {
 	m.CoreFraction = v
+}
+
+func (m *ProvisionPolicy) SetMinInstances(v int64) {
+	m.MinInstances = v
 }
 
 type Secret_Reference = isSecret_Reference

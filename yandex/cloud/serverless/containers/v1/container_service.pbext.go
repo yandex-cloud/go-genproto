@@ -166,6 +166,10 @@ func (m *DeployContainerRevisionRequest) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
 
+func (m *DeployContainerRevisionRequest) SetProvisionPolicy(v *ProvisionPolicy) {
+	m.ProvisionPolicy = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
