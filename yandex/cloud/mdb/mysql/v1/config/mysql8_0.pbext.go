@@ -282,6 +282,10 @@ func (m *MysqlConfig8_0) SetMaxSpRecursionDepth(v *wrapperspb.Int64Value) {
 	m.MaxSpRecursionDepth = v
 }
 
+func (m *MysqlConfig8_0) SetInnodbCompressionLevel(v *wrapperspb.Int64Value) {
+	m.InnodbCompressionLevel = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

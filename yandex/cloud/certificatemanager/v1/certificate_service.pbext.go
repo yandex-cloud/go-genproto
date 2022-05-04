@@ -39,6 +39,26 @@ func (m *ListCertificatesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *ListVersionsRequest) SetCertificateId(v string) {
+	m.CertificateId = v
+}
+
+func (m *ListVersionsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListVersionsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListVersionsResponse) SetVersions(v []*Version) {
+	m.Versions = v
+}
+
+func (m *ListVersionsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
 func (m *CreateCertificateRequest) SetFolderId(v string) {
 	m.FolderId = v
 }

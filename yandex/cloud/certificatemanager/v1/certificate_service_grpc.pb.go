@@ -26,6 +26,7 @@ type CertificateServiceClient interface {
 	Get(ctx context.Context, in *GetCertificateRequest, opts ...grpc.CallOption) (*Certificate, error)
 	// Returns the list of certificates in the specified folder.
 	List(ctx context.Context, in *ListCertificatesRequest, opts ...grpc.CallOption) (*ListCertificatesResponse, error)
+	ListVersions(ctx context.Context, in *ListVersionsRequest, opts ...grpc.CallOption) (*ListVersionsResponse, error)
 	// Creates a certificate in the specified folder.
 	Create(ctx context.Context, in *CreateCertificateRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified certificate.
@@ -64,6 +65,15 @@ func (c *certificateServiceClient) Get(ctx context.Context, in *GetCertificateRe
 func (c *certificateServiceClient) List(ctx context.Context, in *ListCertificatesRequest, opts ...grpc.CallOption) (*ListCertificatesResponse, error) {
 	out := new(ListCertificatesResponse)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.certificatemanager.v1.CertificateService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *certificateServiceClient) ListVersions(ctx context.Context, in *ListVersionsRequest, opts ...grpc.CallOption) (*ListVersionsResponse, error) {
+	out := new(ListVersionsResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.certificatemanager.v1.CertificateService/ListVersions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,6 +162,7 @@ type CertificateServiceServer interface {
 	Get(context.Context, *GetCertificateRequest) (*Certificate, error)
 	// Returns the list of certificates in the specified folder.
 	List(context.Context, *ListCertificatesRequest) (*ListCertificatesResponse, error)
+	ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error)
 	// Creates a certificate in the specified folder.
 	Create(context.Context, *CreateCertificateRequest) (*operation.Operation, error)
 	// Updates the specified certificate.
@@ -179,6 +190,9 @@ func (UnimplementedCertificateServiceServer) Get(context.Context, *GetCertificat
 }
 func (UnimplementedCertificateServiceServer) List(context.Context, *ListCertificatesRequest) (*ListCertificatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedCertificateServiceServer) ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListVersions not implemented")
 }
 func (UnimplementedCertificateServiceServer) Create(context.Context, *CreateCertificateRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -248,6 +262,24 @@ func _CertificateService_List_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CertificateServiceServer).List(ctx, req.(*ListCertificatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CertificateService_ListVersions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListVersionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CertificateServiceServer).ListVersions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.certificatemanager.v1.CertificateService/ListVersions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CertificateServiceServer).ListVersions(ctx, req.(*ListVersionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -410,6 +442,10 @@ var CertificateService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _CertificateService_List_Handler,
+		},
+		{
+			MethodName: "ListVersions",
+			Handler:    _CertificateService_ListVersions_Handler,
 		},
 		{
 			MethodName: "Create",

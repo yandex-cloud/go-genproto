@@ -593,6 +593,73 @@ func (*Challenge_DnsChallenge) isChallenge_Challenge() {}
 
 func (*Challenge_HttpChallenge) isChallenge_Challenge() {}
 
+// A certificate version
+type Version struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// ID of the version.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the certificate that the version belongs to.
+	CertificateId string `protobuf:"bytes,2,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
+	// Time when the version was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+}
+
+func (x *Version) Reset() {
+	*x = Version{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Version) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Version) ProtoMessage() {}
+
+func (x *Version) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Version.ProtoReflect.Descriptor instead.
+func (*Version) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Version) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Version) GetCertificateId() string {
+	if x != nil {
+		return x.CertificateId
+	}
+	return ""
+}
+
+func (x *Version) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 type Challenge_DnsRecord struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -609,7 +676,7 @@ type Challenge_DnsRecord struct {
 func (x *Challenge_DnsRecord) Reset() {
 	*x = Challenge_DnsRecord{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[3]
+		mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -622,7 +689,7 @@ func (x *Challenge_DnsRecord) String() string {
 func (*Challenge_DnsRecord) ProtoMessage() {}
 
 func (x *Challenge_DnsRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[3]
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -673,7 +740,7 @@ type Challenge_HttpFile struct {
 func (x *Challenge_HttpFile) Reset() {
 	*x = Challenge_HttpFile{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[4]
+		mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -686,7 +753,7 @@ func (x *Challenge_HttpFile) String() string {
 func (*Challenge_HttpFile) ProtoMessage() {}
 
 func (x *Challenge_HttpFile) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[4]
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -838,25 +905,32 @@ var file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDesc = []byte{
 	0x52, 0x4f, 0x43, 0x45, 0x53, 0x53, 0x49, 0x4e, 0x47, 0x10, 0x02, 0x12, 0x09, 0x0a, 0x05, 0x56,
 	0x41, 0x4c, 0x49, 0x44, 0x10, 0x03, 0x12, 0x0b, 0x0a, 0x07, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49,
 	0x44, 0x10, 0x04, 0x42, 0x0b, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65,
-	0x2a, 0x4e, 0x0a, 0x0f, 0x43, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x54,
-	0x79, 0x70, 0x65, 0x12, 0x20, 0x0a, 0x1c, 0x43, 0x45, 0x52, 0x54, 0x49, 0x46, 0x49, 0x43, 0x41,
-	0x54, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46,
-	0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x49, 0x4d, 0x50, 0x4f, 0x52, 0x54, 0x45,
-	0x44, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x41, 0x4e, 0x41, 0x47, 0x45, 0x44, 0x10, 0x02,
-	0x2a, 0x42, 0x0a, 0x0d, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x54, 0x79, 0x70,
-	0x65, 0x12, 0x1e, 0x0a, 0x1a, 0x43, 0x48, 0x41, 0x4c, 0x4c, 0x45, 0x4e, 0x47, 0x45, 0x5f, 0x54,
-	0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10,
-	0x00, 0x12, 0x07, 0x0a, 0x03, 0x44, 0x4e, 0x53, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x48, 0x54,
-	0x54, 0x50, 0x10, 0x02, 0x42, 0x83, 0x01, 0x0a, 0x26, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66,
-	0x69, 0x63, 0x61, 0x74, 0x65, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x5a,
-	0x59, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64,
-	0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2f, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x6d, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63,
-	0x61, 0x74, 0x65, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x22, 0x7b, 0x0a, 0x07, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x63,
+	0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65,
+	0x49, 0x64, 0x12, 0x39, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x2a, 0x4e, 0x0a,
+	0x0f, 0x43, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x54, 0x79, 0x70, 0x65,
+	0x12, 0x20, 0x0a, 0x1c, 0x43, 0x45, 0x52, 0x54, 0x49, 0x46, 0x49, 0x43, 0x41, 0x54, 0x45, 0x5f,
+	0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x49, 0x4d, 0x50, 0x4f, 0x52, 0x54, 0x45, 0x44, 0x10, 0x01,
+	0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x41, 0x4e, 0x41, 0x47, 0x45, 0x44, 0x10, 0x02, 0x2a, 0x42, 0x0a,
+	0x0d, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1e,
+	0x0a, 0x1a, 0x43, 0x48, 0x41, 0x4c, 0x4c, 0x45, 0x4e, 0x47, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45,
+	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x07,
+	0x0a, 0x03, 0x44, 0x4e, 0x53, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x48, 0x54, 0x54, 0x50, 0x10,
+	0x02, 0x42, 0x83, 0x01, 0x0a, 0x26, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61,
+	0x74, 0x65, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x5a, 0x59, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63,
+	0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x72, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65,
+	0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -872,7 +946,7 @@ func file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDescGZIP() []b
 }
 
 var file_yandex_cloud_certificatemanager_v1_certificate_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_certificatemanager_v1_certificate_proto_goTypes = []interface{}{
 	(CertificateType)(0),          // 0: yandex.cloud.certificatemanager.v1.CertificateType
 	(ChallengeType)(0),            // 1: yandex.cloud.certificatemanager.v1.ChallengeType
@@ -880,32 +954,34 @@ var file_yandex_cloud_certificatemanager_v1_certificate_proto_goTypes = []interf
 	(Challenge_Status)(0),         // 3: yandex.cloud.certificatemanager.v1.Challenge.Status
 	(*Certificate)(nil),           // 4: yandex.cloud.certificatemanager.v1.Certificate
 	(*Challenge)(nil),             // 5: yandex.cloud.certificatemanager.v1.Challenge
-	nil,                           // 6: yandex.cloud.certificatemanager.v1.Certificate.LabelsEntry
-	(*Challenge_DnsRecord)(nil),   // 7: yandex.cloud.certificatemanager.v1.Challenge.DnsRecord
-	(*Challenge_HttpFile)(nil),    // 8: yandex.cloud.certificatemanager.v1.Challenge.HttpFile
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(*Version)(nil),               // 6: yandex.cloud.certificatemanager.v1.Version
+	nil,                           // 7: yandex.cloud.certificatemanager.v1.Certificate.LabelsEntry
+	(*Challenge_DnsRecord)(nil),   // 8: yandex.cloud.certificatemanager.v1.Challenge.DnsRecord
+	(*Challenge_HttpFile)(nil),    // 9: yandex.cloud.certificatemanager.v1.Challenge.HttpFile
+	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
 }
 var file_yandex_cloud_certificatemanager_v1_certificate_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.certificatemanager.v1.Certificate.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 1: yandex.cloud.certificatemanager.v1.Certificate.labels:type_name -> yandex.cloud.certificatemanager.v1.Certificate.LabelsEntry
+	10, // 0: yandex.cloud.certificatemanager.v1.Certificate.created_at:type_name -> google.protobuf.Timestamp
+	7,  // 1: yandex.cloud.certificatemanager.v1.Certificate.labels:type_name -> yandex.cloud.certificatemanager.v1.Certificate.LabelsEntry
 	0,  // 2: yandex.cloud.certificatemanager.v1.Certificate.type:type_name -> yandex.cloud.certificatemanager.v1.CertificateType
 	2,  // 3: yandex.cloud.certificatemanager.v1.Certificate.status:type_name -> yandex.cloud.certificatemanager.v1.Certificate.Status
-	9,  // 4: yandex.cloud.certificatemanager.v1.Certificate.updated_at:type_name -> google.protobuf.Timestamp
-	9,  // 5: yandex.cloud.certificatemanager.v1.Certificate.issued_at:type_name -> google.protobuf.Timestamp
-	9,  // 6: yandex.cloud.certificatemanager.v1.Certificate.not_after:type_name -> google.protobuf.Timestamp
-	9,  // 7: yandex.cloud.certificatemanager.v1.Certificate.not_before:type_name -> google.protobuf.Timestamp
+	10, // 4: yandex.cloud.certificatemanager.v1.Certificate.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 5: yandex.cloud.certificatemanager.v1.Certificate.issued_at:type_name -> google.protobuf.Timestamp
+	10, // 6: yandex.cloud.certificatemanager.v1.Certificate.not_after:type_name -> google.protobuf.Timestamp
+	10, // 7: yandex.cloud.certificatemanager.v1.Certificate.not_before:type_name -> google.protobuf.Timestamp
 	5,  // 8: yandex.cloud.certificatemanager.v1.Certificate.challenges:type_name -> yandex.cloud.certificatemanager.v1.Challenge
 	1,  // 9: yandex.cloud.certificatemanager.v1.Challenge.type:type_name -> yandex.cloud.certificatemanager.v1.ChallengeType
-	9,  // 10: yandex.cloud.certificatemanager.v1.Challenge.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 11: yandex.cloud.certificatemanager.v1.Challenge.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 10: yandex.cloud.certificatemanager.v1.Challenge.created_at:type_name -> google.protobuf.Timestamp
+	10, // 11: yandex.cloud.certificatemanager.v1.Challenge.updated_at:type_name -> google.protobuf.Timestamp
 	3,  // 12: yandex.cloud.certificatemanager.v1.Challenge.status:type_name -> yandex.cloud.certificatemanager.v1.Challenge.Status
-	7,  // 13: yandex.cloud.certificatemanager.v1.Challenge.dns_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.DnsRecord
-	8,  // 14: yandex.cloud.certificatemanager.v1.Challenge.http_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.HttpFile
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	8,  // 13: yandex.cloud.certificatemanager.v1.Challenge.dns_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.DnsRecord
+	9,  // 14: yandex.cloud.certificatemanager.v1.Challenge.http_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.HttpFile
+	10, // 15: yandex.cloud.certificatemanager.v1.Version.created_at:type_name -> google.protobuf.Timestamp
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_certificatemanager_v1_certificate_proto_init() }
@@ -938,8 +1014,8 @@ func file_yandex_cloud_certificatemanager_v1_certificate_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Challenge_DnsRecord); i {
+		file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Version); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -951,6 +1027,18 @@ func file_yandex_cloud_certificatemanager_v1_certificate_proto_init() {
 			}
 		}
 		file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Challenge_DnsRecord); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_certificatemanager_v1_certificate_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Challenge_HttpFile); i {
 			case 0:
 				return &v.state
@@ -973,7 +1061,7 @@ func file_yandex_cloud_certificatemanager_v1_certificate_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDesc,
 			NumEnums:      4,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

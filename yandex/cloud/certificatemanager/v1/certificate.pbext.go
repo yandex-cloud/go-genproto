@@ -139,3 +139,15 @@ func (m *Challenge_HttpFile) SetUrl(v string) {
 func (m *Challenge_HttpFile) SetContent(v string) {
 	m.Content = v
 }
+
+func (m *Version) SetId(v string) {
+	m.Id = v
+}
+
+func (m *Version) SetCertificateId(v string) {
+	m.CertificateId = v
+}
+
+func (m *Version) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}

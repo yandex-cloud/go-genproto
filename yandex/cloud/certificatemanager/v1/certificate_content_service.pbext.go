@@ -17,3 +17,7 @@ func (m *GetCertificateContentResponse) SetPrivateKey(v string) {
 func (m *GetCertificateContentRequest) SetCertificateId(v string) {
 	m.CertificateId = v
 }
+
+func (m *GetCertificateContentRequest) SetVersionId(v string) {
+	m.VersionId = v
+}
