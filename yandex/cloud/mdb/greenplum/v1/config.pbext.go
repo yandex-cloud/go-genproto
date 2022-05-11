@@ -94,6 +94,14 @@ func (m *GreenplumConfig6_19) SetGpWorkfileCompression(v *wrapperspb.BoolValue) 
 	m.GpWorkfileCompression = v
 }
 
+func (m *GreenplumConfig6_19) SetMaxStatementMem(v *wrapperspb.Int64Value) {
+	m.MaxStatementMem = v
+}
+
+func (m *GreenplumConfig6_19) SetLogStatement(v LogStatement) {
+	m.LogStatement = v
+}
+
 func (m *GreenplumConfigSet6_17) SetEffectiveConfig(v *GreenplumConfig6_17) {
 	m.EffectiveConfig = v
 }

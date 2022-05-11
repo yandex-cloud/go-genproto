@@ -28,13 +28,13 @@ type Extension struct {
 
 	// Name of the extension.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Extension unique ID
+	// Unique ID of the extension.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the Elasticsearch cluster the extension belongs to.
 	ClusterId string `protobuf:"bytes,3,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Extension version
+	// Version of the extension.
 	Version int64 `protobuf:"varint,4,opt,name=version,proto3" json:"version,omitempty"`
-	// Flag is extension active now
+	// The flag shows whether the extension is active.
 	Active bool `protobuf:"varint,5,opt,name=active,proto3" json:"active,omitempty"`
 }
 
@@ -112,10 +112,10 @@ type ExtensionSpec struct {
 
 	// Name of the extension.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// URI of the zip arhive to create the new extension from.
-	// Currently only supports links that are stored in Yandex Object Storage.
-	Uri      string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
-	Disabled bool   `protobuf:"varint,3,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	// URI of the zip archive to create the new extension from. Currently only supports links that are stored in Yandex Object Storage.
+	Uri string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
+	// The flag shows whether to create the extension in disabled state.
+	Disabled bool `protobuf:"varint,3,opt,name=disabled,proto3" json:"disabled,omitempty"`
 }
 
 func (x *ExtensionSpec) Reset() {
