@@ -14,6 +14,14 @@ func (m *ElasticsearchConfig7) SetFielddataCacheSize(v string) {
 	m.FielddataCacheSize = v
 }
 
+func (m *ElasticsearchConfig7) SetReindexRemoteWhitelist(v string) {
+	m.ReindexRemoteWhitelist = v
+}
+
+func (m *ElasticsearchConfig7) SetReindexSslCaPath(v string) {
+	m.ReindexSslCaPath = v
+}
+
 func (m *ElasticsearchConfigSet7) SetEffectiveConfig(v *ElasticsearchConfig7) {
 	m.EffectiveConfig = v
 }

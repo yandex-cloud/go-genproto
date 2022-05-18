@@ -108,6 +108,10 @@ func (m *ExternalClusterConnectionSpec) SetSecurityProtocol(v string) {
 	m.SecurityProtocol = v
 }
 
+func (m *ExternalClusterConnectionSpec) SetSslTruststoreCertificates(v string) {
+	m.SslTruststoreCertificates = v
+}
+
 type Connector_ConnectorConfig = isConnector_ConnectorConfig
 
 func (m *Connector) SetConnectorConfig(v Connector_ConnectorConfig) {

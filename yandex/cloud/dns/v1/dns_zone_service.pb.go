@@ -719,13 +719,16 @@ type ListDnsZoneRecordSetsRequest struct {
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListDnsZoneRecordSetsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// A filter expression that filters record sets listed in the response.
+	// A filter expression that filters record sets listed in the response. The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
 	//
-	// The expression must specify:
-	// 1. The field name. Currently you can use filtering only on the [RecordSet.name] and [RecordSet.type] fields.
-	// 2. An `=` operator.
-	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	// Example of a filter: `name=my-record-set`.
+	// Each condition has the form `<field> <operator> <value>`, where:
+	// 1. `<field>` is the field name. Currently you can use filtering only on the [RecordSet.name] and [RecordSet.type] fields.
+	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
+	// 3. `<value>` represents a value.
+	// 3.1. In case of single value condition (`=` or `!=`), the value is a string in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// 3.2. In case of a list of values condition (`IN` or `NOT IN`), the value is `(<string1>, <string2>, .., <stringN>)`, where `<string>` is a string in double (`"`) or single (`'`) quotes.
+	//
+	// Examples of a filter: `name="my-record-set"`, `type IN ("MX","A") AND name="works.on.my.machine."`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
