@@ -22,14 +22,6 @@ func (m *ResourcePreset) SetType(v ResourcePreset_Type) {
 	m.Type = v
 }
 
-func (m *ResourcePreset) SetMinHostCount(v int64) {
-	m.MinHostCount = v
-}
-
-func (m *ResourcePreset) SetMaxHostCount(v int64) {
-	m.MaxHostCount = v
-}
-
 func (m *ResourcePreset) SetHostCountDivider(v int64) {
 	m.HostCountDivider = v
 }

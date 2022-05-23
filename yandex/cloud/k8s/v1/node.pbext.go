@@ -138,6 +138,10 @@ func (m *NodeTemplate) SetContainerRuntimeSettings(v *NodeTemplate_ContainerRunt
 	m.ContainerRuntimeSettings = v
 }
 
+func (m *NodeTemplate) SetName(v string) {
+	m.Name = v
+}
+
 func (m *NodeTemplate_NetworkSettings) SetType(v NodeTemplate_NetworkSettings_Type) {
 	m.Type = v
 }
@@ -164,6 +168,26 @@ func (m *NetworkInterfaceSpec) SetSecurityGroupIds(v []string) {
 
 func (m *NodeAddressSpec) SetOneToOneNatSpec(v *OneToOneNatSpec) {
 	m.OneToOneNatSpec = v
+}
+
+func (m *NodeAddressSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
+	m.DnsRecordSpecs = v
+}
+
+func (m *DnsRecordSpec) SetFqdn(v string) {
+	m.Fqdn = v
+}
+
+func (m *DnsRecordSpec) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecordSpec) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecordSpec) SetPtr(v bool) {
+	m.Ptr = v
 }
 
 func (m *OneToOneNatSpec) SetIpVersion(v IpVersion) {

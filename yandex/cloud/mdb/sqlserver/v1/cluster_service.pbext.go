@@ -402,6 +402,26 @@ func (m *HostSpec) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
 }
 
+func (m *UpdateHostSpec) SetHostName(v string) {
+	m.HostName = v
+}
+
+func (m *UpdateHostSpec) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateHostSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
+func (m *UpdateClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsRequest) SetUpdateHostSpecs(v []*UpdateHostSpec) {
+	m.UpdateHostSpecs = v
+}
+
 type ConfigSpec_SqlserverConfig = isConfigSpec_SqlserverConfig
 
 func (m *ConfigSpec) SetSqlserverConfig(v ConfigSpec_SqlserverConfig) {

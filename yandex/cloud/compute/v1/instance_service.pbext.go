@@ -590,3 +590,15 @@ func (m *MoveInstanceMetadata) SetSourceFolderId(v string) {
 func (m *MoveInstanceMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
 }
+
+func (m *GuestStopInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *PreemptInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *CrashInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
