@@ -68,6 +68,10 @@ func (m *Criteria) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *Criteria) SetStreamNames(v []string) {
+	m.StreamNames = v
+}
+
 func (m *Criteria) SetPageSize(v int64) {
 	m.PageSize = v
 }

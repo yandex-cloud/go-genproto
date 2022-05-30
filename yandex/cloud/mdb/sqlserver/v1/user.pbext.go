@@ -14,6 +14,10 @@ func (m *User) SetPermissions(v []*Permission) {
 	m.Permissions = v
 }
 
+func (m *User) SetServerRoles(v []ServerRole) {
+	m.ServerRoles = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -32,4 +36,8 @@ func (m *UserSpec) SetPassword(v string) {
 
 func (m *UserSpec) SetPermissions(v []*Permission) {
 	m.Permissions = v
+}
+
+func (m *UserSpec) SetServerRoles(v []ServerRole) {
+	m.ServerRoles = v
 }

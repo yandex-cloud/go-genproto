@@ -39,6 +39,10 @@ func (m *LogEntry) SetJsonPayload(v *structpb.Struct) {
 	m.JsonPayload = v
 }
 
+func (m *LogEntry) SetStreamName(v string) {
+	m.StreamName = v
+}
+
 func (m *IncomingLogEntry) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
@@ -55,12 +59,20 @@ func (m *IncomingLogEntry) SetJsonPayload(v *structpb.Struct) {
 	m.JsonPayload = v
 }
 
+func (m *IncomingLogEntry) SetStreamName(v string) {
+	m.StreamName = v
+}
+
 func (m *LogEntryDefaults) SetLevel(v LogLevel_Level) {
 	m.Level = v
 }
 
 func (m *LogEntryDefaults) SetJsonPayload(v *structpb.Struct) {
 	m.JsonPayload = v
+}
+
+func (m *LogEntryDefaults) SetStreamName(v string) {
+	m.StreamName = v
 }
 
 type Destination_Destination = isDestination_Destination

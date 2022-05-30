@@ -10,6 +10,10 @@ func (m *ResourcePreset) SetZoneIds(v []string) {
 	m.ZoneIds = v
 }
 
+func (m *ResourcePreset) SetDiskTypeIds(v []string) {
+	m.DiskTypeIds = v
+}
+
 func (m *ResourcePreset) SetCores(v int64) {
 	m.Cores = v
 }

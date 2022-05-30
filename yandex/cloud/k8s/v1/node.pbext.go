@@ -98,6 +98,10 @@ func (m *AttachedVolume) SetVolumeHandle(v string) {
 	m.VolumeHandle = v
 }
 
+func (m *NodeTemplate) SetName(v string) {
+	m.Name = v
+}
+
 func (m *NodeTemplate) SetPlatformId(v string) {
 	m.PlatformId = v
 }
@@ -136,10 +140,6 @@ func (m *NodeTemplate) SetNetworkSettings(v *NodeTemplate_NetworkSettings) {
 
 func (m *NodeTemplate) SetContainerRuntimeSettings(v *NodeTemplate_ContainerRuntimeSettings) {
 	m.ContainerRuntimeSettings = v
-}
-
-func (m *NodeTemplate) SetName(v string) {
-	m.Name = v
 }
 
 func (m *NodeTemplate_NetworkSettings) SetType(v NodeTemplate_NetworkSettings_Type) {

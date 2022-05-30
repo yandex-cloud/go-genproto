@@ -70,6 +70,10 @@ func (m *UpdateUserRequest) SetPermissions(v []*Permission) {
 	m.Permissions = v
 }
 
+func (m *UpdateUserRequest) SetServerRoles(v []ServerRole) {
+	m.ServerRoles = v
+}
+
 func (m *UpdateUserMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
