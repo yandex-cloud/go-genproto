@@ -21,14 +21,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Set of server roles.
 type ServerRole int32
 
 const (
 	ServerRole_SERVER_ROLE_UNSPECIFIED ServerRole = 0
-	//Effectively grants VIEW SERVER STATE to the login
-	//That gives an ability to use various dynamic management views to monitor server state
-	//Including Activity Monitor tool that is built-in into SSMS
-	//No intrusive actions are allowed, so this is pretty safe to grant
+	// Effectively grants VIEW SERVER STATE to the login.
+	//
+	// That gives an ability to use various dynamic management views to monitor server state, including Activity Monitor tool that is built-in into SSMS.
+	//
+	// No intrusive actions are allowed, so this is pretty safe to grant.
 	ServerRole_MDB_MONITOR ServerRole = 1
 )
 
@@ -71,15 +73,16 @@ func (ServerRole) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_sqlserver_v1_user_proto_rawDescGZIP(), []int{0}
 }
 
+// Role granted to the user within the database.
 type Permission_Role int32
 
 const (
 	Permission_ROLE_UNSPECIFIED Permission_Role = 0
-	// Members of this fixed database role can perform all configuration and maintenance activities on the database, and can also drop the database in SQL Server.
+	// Members of this fixed database role can perform all configuration and maintenance activities on a database and can also drop a database in SQL Server.
 	Permission_DB_OWNER Permission_Role = 1
 	// Members of this fixed database role can modify role membership for custom roles only and manage permissions. They can potentially elevate their privileges and their actions should be monitored.
 	Permission_DB_SECURITYADMIN Permission_Role = 2
-	// Members of this fixed database role can add or remove access to the database for Windows logins, Windows groups, and SQL Server logins.
+	// Members of this fixed database role can add or remove access to a database for Windows logins, Windows groups, and SQL Server logins.
 	Permission_DB_ACCESSADMIN Permission_Role = 3
 	// Members of this fixed database role can back up the database.
 	Permission_DB_BACKUPOPERATOR Permission_Role = 4
@@ -89,9 +92,9 @@ const (
 	Permission_DB_DATAWRITER Permission_Role = 6
 	// Members of this fixed database role can read all data from all user tables.
 	Permission_DB_DATAREADER Permission_Role = 7
-	// Members of this fixed database role cannot add, modify, or delete any data in the user tables within a database. Denial has a higher priority than a grant, so you can use this role to quickly restrict one's privileges without explicitly revoking permissions or roles.
+	// Members of this fixed database role cannot add, modify, or delete any data in the user tables within a database. A denial has a higher priority than a grant, so you can use this role to quickly restrict one's privileges without explicitly revoking permissions or roles.
 	Permission_DB_DENYDATAWRITER Permission_Role = 8
-	// Members of this fixed database role cannot read any data in the user tables within a database. Denial has a higher priority than a grant, so you can use this role to quickly restrict one's privileges without explicitly revoking permissions or roles.
+	// Members of this fixed database role cannot read any data in the user tables within a database. A denial has a higher priority than a grant, so you can use this role to quickly restrict one's privileges without explicitly revoking permissions or roles.
 	Permission_DB_DENYDATAREADER Permission_Role = 9
 )
 
@@ -162,7 +165,7 @@ type User struct {
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Set of permissions granted to the user.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	//Set of server roles granted to the login
+	//Set of server roles granted to the login.
 	ServerRoles []ServerRole `protobuf:"varint,4,rep,packed,name=server_roles,json=serverRoles,proto3,enum=yandex.cloud.mdb.sqlserver.v1.ServerRole" json:"server_roles,omitempty"`
 }
 
@@ -294,7 +297,7 @@ type UserSpec struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// Set of permissions to grant to the user.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	//Set of server roles
+	// Set of server roles.
 	ServerRoles []ServerRole `protobuf:"varint,4,rep,packed,name=server_roles,json=serverRoles,proto3,enum=yandex.cloud.mdb.sqlserver.v1.ServerRole" json:"server_roles,omitempty"`
 }
 

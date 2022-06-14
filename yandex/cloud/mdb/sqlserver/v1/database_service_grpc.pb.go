@@ -31,11 +31,11 @@ type DatabaseServiceClient interface {
 	List(ctx context.Context, in *ListDatabasesRequest, opts ...grpc.CallOption) (*ListDatabasesResponse, error)
 	// Creates a new SQL Server database in the specified cluster.
 	Create(ctx context.Context, in *CreateDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a new SQL Server database in the specified cluster from a backup
+	// Creates a new SQL Server database in the specified cluster from a backup.
 	Restore(ctx context.Context, in *RestoreDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	//Imports a new SQL Server database from external backup
+	//Imports a new SQL Server database from an external backup.
 	ImportBackup(ctx context.Context, in *ImportDatabaseBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	//Exports database backup to external backup
+	//Exports the last database backup to an external backup.
 	ExportBackup(ctx context.Context, in *ExportDatabaseBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified SQL Server database.
 	Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -124,11 +124,11 @@ type DatabaseServiceServer interface {
 	List(context.Context, *ListDatabasesRequest) (*ListDatabasesResponse, error)
 	// Creates a new SQL Server database in the specified cluster.
 	Create(context.Context, *CreateDatabaseRequest) (*operation.Operation, error)
-	// Creates a new SQL Server database in the specified cluster from a backup
+	// Creates a new SQL Server database in the specified cluster from a backup.
 	Restore(context.Context, *RestoreDatabaseRequest) (*operation.Operation, error)
-	//Imports a new SQL Server database from external backup
+	//Imports a new SQL Server database from an external backup.
 	ImportBackup(context.Context, *ImportDatabaseBackupRequest) (*operation.Operation, error)
-	//Exports database backup to external backup
+	//Exports the last database backup to an external backup.
 	ExportBackup(context.Context, *ExportDatabaseBackupRequest) (*operation.Operation, error)
 	// Deletes the specified SQL Server database.
 	Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error)

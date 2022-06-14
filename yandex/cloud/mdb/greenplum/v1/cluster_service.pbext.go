@@ -170,6 +170,10 @@ func (m *UpdateClusterRequest) SetSegmentConfig(v *SegmentSubclusterConfigSpec) 
 	m.SegmentConfig = v
 }
 
+func (m *UpdateClusterRequest) SetUserPassword(v string) {
+	m.UserPassword = v
+}
+
 func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
@@ -180,6 +184,10 @@ func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterRequest) SetConfigSpec(v *ConfigSpec) {
+	m.ConfigSpec = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {

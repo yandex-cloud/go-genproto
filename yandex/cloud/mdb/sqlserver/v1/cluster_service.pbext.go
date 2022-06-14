@@ -444,6 +444,30 @@ func (m *ConfigSpec) SetSqlserverConfig_2016Sp2Ent(v *config.SQLServerConfig2016
 	}
 }
 
+func (m *ConfigSpec) SetSqlserverConfig_2017Std(v *config.SQLServerConfig2017Std) {
+	m.SqlserverConfig = &ConfigSpec_SqlserverConfig_2017Std{
+		SqlserverConfig_2017Std: v,
+	}
+}
+
+func (m *ConfigSpec) SetSqlserverConfig_2017Ent(v *config.SQLServerConfig2017Ent) {
+	m.SqlserverConfig = &ConfigSpec_SqlserverConfig_2017Ent{
+		SqlserverConfig_2017Ent: v,
+	}
+}
+
+func (m *ConfigSpec) SetSqlserverConfig_2019Std(v *config.SQLServerConfig2019Std) {
+	m.SqlserverConfig = &ConfigSpec_SqlserverConfig_2019Std{
+		SqlserverConfig_2019Std: v,
+	}
+}
+
+func (m *ConfigSpec) SetSqlserverConfig_2019Ent(v *config.SQLServerConfig2019Ent) {
+	m.SqlserverConfig = &ConfigSpec_SqlserverConfig_2019Ent{
+		SqlserverConfig_2019Ent: v,
+	}
+}
+
 func (m *ConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -454,4 +478,8 @@ func (m *ConfigSpec) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 
 func (m *ConfigSpec) SetAccess(v *Access) {
 	m.Access = v
+}
+
+func (m *ConfigSpec) SetSecondaryConnections(v ClusterConfig_SecondaryConnections) {
+	m.SecondaryConnections = v
 }

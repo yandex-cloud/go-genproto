@@ -87,6 +87,10 @@ func (m *CreateCertificateRequest) SetPrivateKey(v string) {
 	m.PrivateKey = v
 }
 
+func (m *CreateCertificateRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *CreateCertificateMetadata) SetCertificateId(v string) {
 	m.CertificateId = v
 }
@@ -123,6 +127,10 @@ func (m *UpdateCertificateRequest) SetPrivateKey(v string) {
 	m.PrivateKey = v
 }
 
+func (m *UpdateCertificateRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *UpdateCertificateMetadata) SetCertificateId(v string) {
 	m.CertificateId = v
 }
@@ -157,6 +165,10 @@ func (m *RequestNewCertificateRequest) SetDomains(v []string) {
 
 func (m *RequestNewCertificateRequest) SetChallengeType(v ChallengeType) {
 	m.ChallengeType = v
+}
+
+func (m *RequestNewCertificateRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *RequestNewCertificateMetadata) SetCertificateId(v string) {

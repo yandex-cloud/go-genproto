@@ -95,12 +95,11 @@ type ListDatabasesRequest struct {
 	//
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than `page_size`, the service returns a [ListDatabasesResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the service returns a [ListDatabasesResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, Set `page_token` to the [ListDatabasesResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token. To get the next page of results, set [page_token] to the [ListDatabasesResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -164,10 +163,11 @@ type ListDatabasesResponse struct {
 
 	// List of SQL Server databases.
 	Databases []*Database `protobuf:"bytes,1,rep,name=databases,proto3" json:"databases,omitempty"`
-	// Token that allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListDatabasesRequest.page_size], use the `next_page_token` as the value
-	// for the [ListDatabasesRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own `next_page_token` to continue paging through the results.
+	// Token that allows you to get the next page of results for list requests.
+	//
+	// If the number of results is larger than [ListDatabasesRequest.page_size], use the [next_page_token] as the value for the [ListDatabasesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -456,16 +456,17 @@ type RestoreDatabaseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Required. ID of the SQL Server cluster to restore a database in.
-	// To get the cluster ID, use a [ClusterService.List] request
+	// ID of the SQL Server cluster to restore a database in.
+	//
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the SQLServer database that is being restored.
+	// Name of the SQL Server database that is being restored.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	//name of the database which backup will be used to restore the database
+	// Name of the database which backup is used to restore the database.
 	FromDatabase string `protobuf:"bytes,3,opt,name=from_database,json=fromDatabase,proto3" json:"from_database,omitempty"`
-	//ID of a backup to be used
+	// ID of a backup to be used.
 	BackupId string `protobuf:"bytes,4,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	//Timestamp which is used for Point-in-Time recovery
+	// Timestamp which is used for Point-in-Time recovery.
 	Time *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=time,proto3" json:"time,omitempty"`
 }
 
@@ -541,13 +542,13 @@ type RestoreDatabaseMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SQLServer cluster where a database is being created.
+	// ID of the SQL Server cluster where a database is being created.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the SQLServer database that is being created.
+	// Name of an SQL Server database that is being created.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	//name of the database which backup will be used to restore the database
+	// Name of the database which backup is used to restore the database.
 	FromDatabase string `protobuf:"bytes,3,opt,name=from_database,json=fromDatabase,proto3" json:"from_database,omitempty"`
-	//ID of a backup to be used
+	// ID of a backup to be used.
 	BackupId string `protobuf:"bytes,4,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 }
 
@@ -616,16 +617,17 @@ type ImportDatabaseBackupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Required. ID of the SQL Server cluster to import a database in.
-	// To get the cluster ID, use a [ClusterService.List] request
+	// ID of the SQL Server cluster to import a database in.
+	//
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the SQLServer database that is being imported.
+	// Name of the SQL Server database that is being imported.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	// Name of object storage bucket to import backups from.
 	S3Bucket string `protobuf:"bytes,3,opt,name=s3_bucket,json=s3Bucket,proto3" json:"s3_bucket,omitempty"`
 	// Path in object storage bucket to import backups from.
 	S3Path string `protobuf:"bytes,4,opt,name=s3_path,json=s3Path,proto3" json:"s3_path,omitempty"`
-	// List of .bak files in bucket containing database backup
+	// List of .bak files in bucket containing database backup.
 	Files []string `protobuf:"bytes,5,rep,name=files,proto3" json:"files,omitempty"`
 }
 
@@ -701,9 +703,9 @@ type ImportDatabaseBackupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SQLServer cluster where a database is being imported.
+	// ID of the SQL Server cluster where a database is being imported.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the SQLServer database that is being imported.
+	// Name of the SQL Server database that is being imported.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	// Name of object storage bucket to import backups from.
 	S3Bucket string `protobuf:"bytes,3,opt,name=s3_bucket,json=s3Bucket,proto3" json:"s3_bucket,omitempty"`
@@ -776,16 +778,17 @@ type ExportDatabaseBackupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Required. ID of the SQL Server cluster to export a database from.
-	// To get the cluster ID, use a [ClusterService.List] request
+	// ID of the SQL Server cluster to export a database from.
+	//
+	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the SQLServer database that is being exported.
+	// Name of the SQL Server database that is being exported.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	// Name of object storage bucket to export backups to
+	// Name of object storage bucket to export backups to.
 	S3Bucket string `protobuf:"bytes,3,opt,name=s3_bucket,json=s3Bucket,proto3" json:"s3_bucket,omitempty"`
 	// Path in object storage bucket to export backups to.
 	S3Path string `protobuf:"bytes,4,opt,name=s3_path,json=s3Path,proto3" json:"s3_path,omitempty"`
-	// Prefix for .bak files to
+	// Prefix for .bak files to export.
 	Prefix string `protobuf:"bytes,5,opt,name=prefix,proto3" json:"prefix,omitempty"`
 }
 
@@ -861,13 +864,13 @@ type ExportDatabaseBackupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SQLServer cluster where a database is being exported.
+	// ID of the SQL Server cluster where a database is being exported.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the SQLServer database that is being exported.
+	// Name of the SQL Server database that is being exported.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	// Name of object storage bucket to import backups from.
+	// Name of object storage bucket to export backups to.
 	S3Bucket string `protobuf:"bytes,3,opt,name=s3_bucket,json=s3Bucket,proto3" json:"s3_bucket,omitempty"`
-	// Path in object storage bucket to import backups from.
+	// Path in object storage bucket to export backups to.
 	S3Path string `protobuf:"bytes,4,opt,name=s3_path,json=s3Path,proto3" json:"s3_path,omitempty"`
 }
 

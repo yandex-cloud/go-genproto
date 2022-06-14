@@ -55,7 +55,7 @@ type ClusterServiceClient interface {
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves the list of available backups for the specified SQL Server cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
-	// Retrieves a list of hosts for the specified SQL Server cluster.
+	// Retrieves the list of hosts for the specified SQL Server cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Updates the specified hosts.
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -249,7 +249,7 @@ type ClusterServiceServer interface {
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves the list of available backups for the specified SQL Server cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
-	// Retrieves a list of hosts for the specified SQL Server cluster.
+	// Retrieves the list of hosts for the specified SQL Server cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Updates the specified hosts.
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)

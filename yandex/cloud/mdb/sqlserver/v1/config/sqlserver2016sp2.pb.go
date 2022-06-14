@@ -43,22 +43,25 @@ type SQLServerConfig2016Sp2Std struct {
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-cost-threshold-for-parallelism-server-configuration-option?view=sql-server-2016).
 	CostThresholdForParallelism *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=cost_threshold_for_parallelism,json=costThresholdForParallelism,proto3" json:"cost_threshold_for_parallelism,omitempty"`
 	// Describes how to configure login auditing to monitor SQL Server Database Engine login activity.
+	//
 	// Possible values:
-	// * 0 - do not log login attempts,
-	// * 1 - log only failed login attempts,
-	// * 2 - log only successful login attempts (not recommended),
+	// * 0 - do not log login attempts;
+	// * 1 - log only failed login attempts;
+	// * 2 - log only successful login attempts (not recommended);
 	// * 3 - log all login attempts (not recommended).
 	//
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/ssms/configure-login-auditing-sql-server-management-studio?view=sql-server-2016).
 	AuditLevel *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=audit_level,json=auditLevel,proto3" json:"audit_level,omitempty"`
 	// Manages the fill factor server configuration option.
-	// When an index is created or rebuilt the fill factor determines the percentage of space on each index leaf-level page to be filled with data, reserving the rest as free space for future growth.
+	//
+	// When an index is created or rebuilt, the fill factor determines the percentage of space on each index leaf-level page to be filled with data, reserving the rest as free space for future growth.
 	//
 	// Values 0 and 100 mean full page usage (no space reserved).
 	//
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-fill-factor-server-configuration-option?view=sql-server-2016).
 	FillFactorPercent *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=fill_factor_percent,json=fillFactorPercent,proto3" json:"fill_factor_percent,omitempty"`
 	// Determines whether plans should be cached only after second execution.
+	//
 	// Allows to avoid SQL cache bloat because of single-use plans.
 	//
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/optimize-for-ad-hoc-workloads-server-configuration-option?view=sql-server-2016).
@@ -219,22 +222,24 @@ type SQLServerConfig2016Sp2Ent struct {
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-cost-threshold-for-parallelism-server-configuration-option?view=sql-server-2016).
 	CostThresholdForParallelism *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=cost_threshold_for_parallelism,json=costThresholdForParallelism,proto3" json:"cost_threshold_for_parallelism,omitempty"`
 	// Describes how to configure login auditing to monitor SQL Server Database Engine login activity.
+	//
 	// Possible values:
-	// * 0 - do not log login attempts,
-	// * 1 - log only failed login attempts,
-	// * 2 - log only successful login attempts (not recommended),
+	// * 0 - do not log login attempts;
+	// * 1 - log only failed login attempts;
+	// * 2 - log only successful login attempts (not recommended);
 	// * 3 - log all login attempts (not recommended).
 	//
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/ssms/configure-login-auditing-sql-server-management-studio?view=sql-server-2016).
 	AuditLevel *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=audit_level,json=auditLevel,proto3" json:"audit_level,omitempty"`
 	// Manages the fill factor server configuration option.
-	// When an index is created or rebuilt the fill factor determines the percentage of space on each index leaf-level page to be filled with data, reserving the rest as free space for future growth.
+	// When an index is created or rebuilt, the fill factor determines the percentage of space on each index leaf-level page to be filled with data, reserving the rest as free space for future growth.
 	//
 	// Values 0 and 100 mean full page usage (no space reserved).
 	//
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-fill-factor-server-configuration-option?view=sql-server-2016).
 	FillFactorPercent *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=fill_factor_percent,json=fillFactorPercent,proto3" json:"fill_factor_percent,omitempty"`
 	// Determines whether plans should be cached only after second execution.
+	//
 	// Allows to avoid SQL cache bloat because of single-use plans.
 	//
 	// See in-depth description in [SQL Server documentation](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/optimize-for-ad-hoc-workloads-server-configuration-option?view=sql-server-2016).

@@ -77,12 +77,11 @@ type ListResourcePresetsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than `page_size`, the service returns a [ListResourcePresetsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the service returns a [ListResourcePresetsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set `page_token` to the [ListResourcePresetsResponse.next_page_token]
-	// returned by a previous list request.
+	// Page token. To get the next page of results, set [page_token] to the [ListResourcePresetsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -139,10 +138,11 @@ type ListResourcePresetsResponse struct {
 
 	// List of resource presets.
 	ResourcePresets []*ResourcePreset `protobuf:"bytes,1,rep,name=resource_presets,json=resourcePresets,proto3" json:"resource_presets,omitempty"`
-	// Token that allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListResourcePresetsRequest.page_size], use the `next_page_token` as the value
-	// for the [ListResourcePresetsRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own `next_page_token` to continue paging through the results.
+	// Token that allows you to get the next page of results for list requests.
+	//
+	// If the number of results is larger than [ListResourcePresetsRequest.page_size], use the [next_page_token] as the value for the [ListResourcePresetsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 

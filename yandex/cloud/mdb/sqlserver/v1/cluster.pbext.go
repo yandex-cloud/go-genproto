@@ -110,6 +110,30 @@ func (m *ClusterConfig) SetSqlserverConfig_2016Sp2Ent(v *config.SQLServerConfigS
 	}
 }
 
+func (m *ClusterConfig) SetSqlserverConfig_2017Std(v *config.SQLServerConfigSet2017Std) {
+	m.SqlserverConfig = &ClusterConfig_SqlserverConfig_2017Std{
+		SqlserverConfig_2017Std: v,
+	}
+}
+
+func (m *ClusterConfig) SetSqlserverConfig_2017Ent(v *config.SQLServerConfigSet2017Ent) {
+	m.SqlserverConfig = &ClusterConfig_SqlserverConfig_2017Ent{
+		SqlserverConfig_2017Ent: v,
+	}
+}
+
+func (m *ClusterConfig) SetSqlserverConfig_2019Std(v *config.SQLServerConfigSet2019Std) {
+	m.SqlserverConfig = &ClusterConfig_SqlserverConfig_2019Std{
+		SqlserverConfig_2019Std: v,
+	}
+}
+
+func (m *ClusterConfig) SetSqlserverConfig_2019Ent(v *config.SQLServerConfigSet2019Ent) {
+	m.SqlserverConfig = &ClusterConfig_SqlserverConfig_2019Ent{
+		SqlserverConfig_2019Ent: v,
+	}
+}
+
 func (m *ClusterConfig) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -120,6 +144,10 @@ func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 
 func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
+}
+
+func (m *ClusterConfig) SetSecondaryConnections(v ClusterConfig_SecondaryConnections) {
+	m.SecondaryConnections = v
 }
 
 func (m *Host) SetName(v string) {

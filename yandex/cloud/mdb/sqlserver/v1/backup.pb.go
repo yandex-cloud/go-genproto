@@ -22,6 +22,7 @@ const (
 )
 
 // An SQL Server backup resource.
+//
 // For more information, see the [Backup](/docs/managed-sqlserver/concepts/backup) section in the documentation.
 type Backup struct {
 	state         protoimpl.MessageState
@@ -32,13 +33,13 @@ type Backup struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the backup belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Creation timestamp (i.e. when the backup operation was completed).
+	// Time when the backup operation was completed.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// ID of the SQL Server cluster that the backup was created for.
 	SourceClusterId string `protobuf:"bytes,4,opt,name=source_cluster_id,json=sourceClusterId,proto3" json:"source_cluster_id,omitempty"`
 	// Time when the backup operation was started.
 	StartedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
-	// List databases included in the backup
+	// List of databases included in the backup.
 	Databases []string `protobuf:"bytes,6,rep,name=databases,proto3" json:"databases,omitempty"`
 }
 

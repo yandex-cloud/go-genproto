@@ -22,6 +22,7 @@ const (
 )
 
 // An SQL Server database.
+//
 // For more information, see the [Concepts](/docs/managed-sqlserver/concepts) section of the documentation.
 type Database struct {
 	state         protoimpl.MessageState
@@ -30,7 +31,7 @@ type Database struct {
 
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the SQL Server cluster the database belongs to.
+	// ID of the SQL Server cluster that the database belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 

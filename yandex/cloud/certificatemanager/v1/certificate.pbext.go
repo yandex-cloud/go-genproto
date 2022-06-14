@@ -74,6 +74,10 @@ func (m *Certificate) SetChallenges(v []*Challenge) {
 	m.Challenges = v
 }
 
+func (m *Certificate) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 type Challenge_Challenge = isChallenge_Challenge
 
 func (m *Challenge) SetChallenge(v Challenge_Challenge) {
