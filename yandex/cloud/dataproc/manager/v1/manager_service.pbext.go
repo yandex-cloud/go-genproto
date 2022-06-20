@@ -194,6 +194,14 @@ func (m *LivyInfo) SetAlive(v bool) {
 	m.Alive = v
 }
 
+func (m *InitActs) SetState(v InitActsState) {
+	m.State = v
+}
+
+func (m *InitActs) SetFqdns(v []string) {
+	m.Fqdns = v
+}
+
 func (m *Info) SetHdfs(v *HDFSInfo) {
 	m.Hdfs = v
 }
@@ -224,6 +232,10 @@ func (m *Info) SetReportCount(v int64) {
 
 func (m *Info) SetLivy(v *LivyInfo) {
 	m.Livy = v
+}
+
+func (m *Info) SetInitActs(v *InitActs) {
+	m.InitActs = v
 }
 
 func (m *ReportRequest) SetCid(v string) {

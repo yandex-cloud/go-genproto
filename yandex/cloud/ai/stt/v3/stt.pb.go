@@ -25,8 +25,8 @@ type CodeType int32
 const (
 	CodeType_CODE_TYPE_UNSPECIFIED CodeType = 0
 	CodeType_WORKING               CodeType = 1 //all good
-	CodeType_WARNING               CodeType = 2 //for example, if speech is sent not in real time. or unknown context (and we've made fallback)
-	CodeType_CLOSED                CodeType = 3 //after session was closed
+	CodeType_WARNING               CodeType = 2 //for example, if speech is sent not in real time. or unknown context (and we've made fallback).
+	CodeType_CLOSED                CodeType = 3 //after session was closed.
 )
 
 // Enum value maps for CodeType.
@@ -177,7 +177,8 @@ type RawAudio_AudioEncoding int32
 
 const (
 	RawAudio_AUDIO_ENCODING_UNSPECIFIED RawAudio_AudioEncoding = 0
-	RawAudio_LINEAR16_PCM               RawAudio_AudioEncoding = 1
+	// Audio bit depth 16-bit signed little-endian (Linear PCM).
+	RawAudio_LINEAR16_PCM RawAudio_AudioEncoding = 1
 )
 
 // Enum value maps for RawAudio_AudioEncoding.
@@ -223,9 +224,12 @@ type ContainerAudio_ContainerAudioType int32
 
 const (
 	ContainerAudio_CONTAINER_AUDIO_TYPE_UNSPECIFIED ContainerAudio_ContainerAudioType = 0
-	ContainerAudio_WAV                              ContainerAudio_ContainerAudioType = 1
-	ContainerAudio_OGG_OPUS                         ContainerAudio_ContainerAudioType = 2
-	ContainerAudio_MP3                              ContainerAudio_ContainerAudioType = 3
+	// Audio bit depth 16-bit signed little-endian (Linear PCM).
+	ContainerAudio_WAV ContainerAudio_ContainerAudioType = 1
+	// Data is encoded using the OPUS audio codec and compressed using the OGG container format.
+	ContainerAudio_OGG_OPUS ContainerAudio_ContainerAudioType = 2
+	// Data is encoded using MPEG-1/2 Layer III and compressed using the MP3 container format.
+	ContainerAudio_MP3 ContainerAudio_ContainerAudioType = 3
 )
 
 // Enum value maps for ContainerAudio_ContainerAudioType.
@@ -376,9 +380,9 @@ type TextNormalizationOptions struct {
 	unknownFields protoimpl.UnknownFields
 
 	TextNormalization TextNormalizationOptions_TextNormalization `protobuf:"varint,1,opt,name=text_normalization,json=textNormalization,proto3,enum=speechkit.stt.v3.TextNormalizationOptions_TextNormalization" json:"text_normalization,omitempty"`
-	// Filter profanity (default: false)
+	// Filter profanity (default: false).
 	ProfanityFilter bool `protobuf:"varint,2,opt,name=profanity_filter,json=profanityFilter,proto3" json:"profanity_filter,omitempty"`
-	// Rewrite text in literature style (default: false)
+	// Rewrite text in literature style (default: false).
 	LiteratureText bool `protobuf:"varint,3,opt,name=literature_text,json=literatureText,proto3" json:"literature_text,omitempty"`
 }
 
@@ -440,9 +444,9 @@ type DefaultEouClassifier struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// EOU sensitivity.  Currently two levels, faster with more error and more conservative (our default)
+	// EOU sensitivity. Currently two levels, faster with more error and more conservative (our default).
 	Type DefaultEouClassifier_EouSensitivity `protobuf:"varint,1,opt,name=type,proto3,enum=speechkit.stt.v3.DefaultEouClassifier_EouSensitivity" json:"type,omitempty"`
-	// hint for max pause between words. Our EoU detector could use this information to distinguish between end of utterance and slow speech (like one <long pause> two <long pause> three, etc)
+	// Hint for max pause between words. Our EoU detector could use this information to distinguish between end of utterance and slow speech (like one <long pause> two <long pause> three, etc).
 	MaxPauseBetweenWordsHintMs int64 `protobuf:"varint,2,opt,name=max_pause_between_words_hint_ms,json=maxPauseBetweenWordsHintMs,proto3" json:"max_pause_between_words_hint_ms,omitempty"`
 }
 
@@ -492,7 +496,7 @@ func (x *DefaultEouClassifier) GetMaxPauseBetweenWordsHintMs() int64 {
 	return 0
 }
 
-// use EOU provided by user
+// Use EOU provided by user
 type ExternalEouClassifier struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -536,7 +540,7 @@ type EouClassifierOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// type of EOU classifier.
+	// Type of EOU classifier.
 	//
 	// Types that are assignable to Classifier:
 	//	*EouClassifierOptions_DefaultClassifier
@@ -602,12 +606,12 @@ type isEouClassifierOptions_Classifier interface {
 }
 
 type EouClassifierOptions_DefaultClassifier struct {
-	//EOU classifier provided by SpeechKit. Default
+	// EOU classifier provided by SpeechKit. Default.
 	DefaultClassifier *DefaultEouClassifier `protobuf:"bytes,1,opt,name=default_classifier,json=defaultClassifier,proto3,oneof"`
 }
 
 type EouClassifierOptions_ExternalClassifier struct {
-	//EoU is enforced by external messages from user
+	// EoU is enforced by external messages from user.
 	ExternalClassifier *ExternalEouClassifier `protobuf:"bytes,2,opt,name=external_classifier,json=externalClassifier,proto3,oneof"`
 }
 
@@ -615,17 +619,17 @@ func (*EouClassifierOptions_DefaultClassifier) isEouClassifierOptions_Classifier
 
 func (*EouClassifierOptions_ExternalClassifier) isEouClassifierOptions_Classifier() {}
 
-// RAW Audio format spec (no container to infer type). used in AudioFormat options
+// RAW Audio format spec (no container to infer type). Used in AudioFormat options.
 type RawAudio struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  type of audio encoding
+	//  Type of audio encoding
 	AudioEncoding RawAudio_AudioEncoding `protobuf:"varint,1,opt,name=audio_encoding,json=audioEncoding,proto3,enum=speechkit.stt.v3.RawAudio_AudioEncoding" json:"audio_encoding,omitempty"`
 	//  PCM sample rate
 	SampleRateHertz int64 `protobuf:"varint,2,opt,name=sample_rate_hertz,json=sampleRateHertz,proto3" json:"sample_rate_hertz,omitempty"`
-	//  PCM channel count. Currently only single channel audio is supported in real-time recognition
+	//  PCM channel count. Currently only single channel audio is supported in real-time recognition.
 	AudioChannelCount int64 `protobuf:"varint,3,opt,name=audio_channel_count,json=audioChannelCount,proto3" json:"audio_channel_count,omitempty"`
 }
 
@@ -682,13 +686,13 @@ func (x *RawAudio) GetAudioChannelCount() int64 {
 	return 0
 }
 
-// Audio with fixed type in container. used in AudioFormat options
+// Audio with fixed type in container. Used in AudioFormat options.
 type ContainerAudio struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  type of audio container
+	//  Type of audio container.
 	ContainerAudioType ContainerAudio_ContainerAudioType `protobuf:"varint,1,opt,name=container_audio_type,json=containerAudioType,proto3,enum=speechkit.stt.v3.ContainerAudio_ContainerAudioType" json:"container_audio_type,omitempty"`
 }
 
@@ -731,7 +735,7 @@ func (x *ContainerAudio) GetContainerAudioType() ContainerAudio_ContainerAudioTy
 	return ContainerAudio_CONTAINER_AUDIO_TYPE_UNSPECIFIED
 }
 
-// audio format options
+// Audio format options.
 type AudioFormatOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -801,12 +805,12 @@ type isAudioFormatOptions_AudioFormat interface {
 }
 
 type AudioFormatOptions_RawAudio struct {
-	//    audio without container
+	// Audio without container.
 	RawAudio *RawAudio `protobuf:"bytes,1,opt,name=raw_audio,json=rawAudio,proto3,oneof"`
 }
 
 type AudioFormatOptions_ContainerAudio struct {
-	//    audio is wrapped in container
+	// Audio is wrapped in container.
 	ContainerAudio *ContainerAudio `protobuf:"bytes,2,opt,name=container_audio,json=containerAudio,proto3,oneof"`
 }
 
@@ -874,15 +878,15 @@ type RecognitionModelOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  reserved for future, do not use
+	//  Reserved for future, do not use.
 	Model string `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
-	//  config for input audio
+	//  Specified input audio.
 	AudioFormat *AudioFormatOptions `protobuf:"bytes,2,opt,name=audio_format,json=audioFormat,proto3" json:"audio_format,omitempty"`
-	//  text normalization options
+	//  Text normalization options.
 	TextNormalization *TextNormalizationOptions `protobuf:"bytes,3,opt,name=text_normalization,json=textNormalization,proto3" json:"text_normalization,omitempty"`
-	// possible languages in audio
+	// Possible languages in audio.
 	LanguageRestriction *LanguageRestrictionOptions `protobuf:"bytes,4,opt,name=language_restriction,json=languageRestriction,proto3" json:"language_restriction,omitempty"`
-	//how to deal with audio data (in real time, after all data is received, etc). Default is REAL_TIME
+	// How to deal with audio data (in real time, after all data is received, etc). Default is REAL_TIME.
 	AudioProcessingType RecognitionModelOptions_AudioProcessingType `protobuf:"varint,5,opt,name=audio_processing_type,json=audioProcessingType,proto3,enum=speechkit.stt.v3.RecognitionModelOptions_AudioProcessingType" json:"audio_processing_type,omitempty"`
 }
 
@@ -958,9 +962,9 @@ type StreamingOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  configuration for speech recognition model
+	//  Configuration for speech recognition model.
 	RecognitionModel *RecognitionModelOptions `protobuf:"bytes,1,opt,name=recognition_model,json=recognitionModel,proto3" json:"recognition_model,omitempty"`
-	//  configuration for end of utterance detection model
+	//  Configuration for end of utterance detection model.
 	EouClassifier *EouClassifierOptions `protobuf:"bytes,2,opt,name=eou_classifier,json=eouClassifier,proto3" json:"eou_classifier,omitempty"`
 }
 
@@ -1010,13 +1014,13 @@ func (x *StreamingOptions) GetEouClassifier() *EouClassifierOptions {
 	return nil
 }
 
-// data chunk with audio
+// Data chunk with audio.
 type AudioChunk struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  bytes with audio data
+	// Bytes with audio data.
 	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 }
 
@@ -1064,7 +1068,7 @@ type SilenceChunk struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  duration of silence chunk in ms
+	// Duration of silence chunk in ms.
 	DurationMs int64 `protobuf:"varint,1,opt,name=duration_ms,json=durationMs,proto3" json:"duration_ms,omitempty"`
 }
 
@@ -1107,7 +1111,7 @@ func (x *SilenceChunk) GetDurationMs() int64 {
 	return 0
 }
 
-// force EOU
+// Force EOU
 type Eou struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1146,11 +1150,10 @@ func (*Eou) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{12}
 }
 
-// streaming audio request
-// Events are control messages from user
-// first message should be session options
-// the next messages are audio data chunks or control messages
-//
+// Streaming audio request
+// Events are control messages from user.
+// First message should be session options.
+// The next messages are audio data chunks or control messages.
 type StreamingRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1236,22 +1239,22 @@ type isStreamingRequest_Event interface {
 }
 
 type StreamingRequest_SessionOptions struct {
-	//    Session options. should be first message from user
+	// Session options. should be first message from user
 	SessionOptions *StreamingOptions `protobuf:"bytes,1,opt,name=session_options,json=sessionOptions,proto3,oneof"`
 }
 
 type StreamingRequest_Chunk struct {
-	//    chunk with audio data
+	// Chunk with audio data.
 	Chunk *AudioChunk `protobuf:"bytes,2,opt,name=chunk,proto3,oneof"`
 }
 
 type StreamingRequest_SilenceChunk struct {
-	//    chunk with silence
+	// Chunk with silence.
 	SilenceChunk *SilenceChunk `protobuf:"bytes,3,opt,name=silence_chunk,json=silenceChunk,proto3,oneof"`
 }
 
 type StreamingRequest_Eou struct {
-	//    request to end current utterance. Works only with external EoU detector
+	// Request to end current utterance. Works only with external EoU detector.
 	Eou *Eou `protobuf:"bytes,4,opt,name=eou,proto3,oneof"`
 }
 
@@ -1263,17 +1266,17 @@ func (*StreamingRequest_SilenceChunk) isStreamingRequest_Event() {}
 
 func (*StreamingRequest_Eou) isStreamingRequest_Event() {}
 
-// recognized word
+// Recognized word.
 type Word struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  word text
+	//  Word text.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	//  estimation of word start time in ms
+	//  Estimation of word start time in ms
 	StartTimeMs int64 `protobuf:"varint,2,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
-	//  estimation of word end time in ms
+	//  Estimation of word end time in ms
 	EndTimeMs int64 `protobuf:"varint,3,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
 }
 
@@ -1330,21 +1333,21 @@ func (x *Word) GetEndTimeMs() int64 {
 	return 0
 }
 
-//recognition of specific time frame
+// Recognition of specific time frame.
 type Alternative struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  words in time frame
+	//  Words in time frame.
 	Words []*Word `protobuf:"bytes,1,rep,name=words,proto3" json:"words,omitempty"`
-	//  text in time frame
+	//  Text in time frame.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
-	//  start of time frame
+	// Start of time frame.
 	StartTimeMs int64 `protobuf:"varint,3,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
-	//  end of time frame
+	// End of time frame.
 	EndTimeMs int64 `protobuf:"varint,4,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
-	//  hypothesis confidence. Currently is not used
+	// Hypothesis confidence. Currently is not used.
 	Confidence float64 `protobuf:"fixed64,5,opt,name=confidence,proto3" json:"confidence,omitempty"`
 }
 
@@ -1415,13 +1418,13 @@ func (x *Alternative) GetConfidence() float64 {
 	return 0
 }
 
-//Update information from
+// Update information from
 type EouUpdate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  end of utterance estimated time
+	// End of utterance estimated time.
 	TimeMs int64 `protobuf:"varint,2,opt,name=time_ms,json=timeMs,proto3" json:"time_ms,omitempty"`
 }
 
@@ -1464,15 +1467,15 @@ func (x *EouUpdate) GetTimeMs() int64 {
 	return 0
 }
 
-// update of hypothesis
+// Update of hypothesis.
 type AlternativeUpdate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  list of hypothesis for timeframes
+	// List of hypothesis for timeframes.
 	Alternatives []*Alternative `protobuf:"bytes,1,rep,name=alternatives,proto3" json:"alternatives,omitempty"`
-	//  tag for distinguish audio channels.
+	// Tag for distinguish audio channels.
 	ChannelTag string `protobuf:"bytes,2,opt,name=channel_tag,json=channelTag,proto3" json:"channel_tag,omitempty"`
 }
 
@@ -1522,27 +1525,27 @@ func (x *AlternativeUpdate) GetChannelTag() string {
 	return ""
 }
 
-// AudioCursors are state of ASR recognition stream
+// AudioCursors are state of ASR recognition stream.
 type AudioCursors struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// amount of audio chunks server received. This cursor is moved after each audio chunk was received by server.
+	// Amount of audio chunks server received. This cursor is moved after each audio chunk was received by server.
 	ReceivedDataMs int64 `protobuf:"varint,1,opt,name=received_data_ms,json=receivedDataMs,proto3" json:"received_data_ms,omitempty"`
-	// input stream reset data
+	// Input stream reset data.
 	ResetTimeMs int64 `protobuf:"varint,2,opt,name=reset_time_ms,json=resetTimeMs,proto3" json:"reset_time_ms,omitempty"`
-	//  how much audio was processed. This time includes trimming silences as well. This cursor is moved after server received enough data
-	//  to update recognition results (includes silence as well)
+	//  How much audio was processed. This time includes trimming silences as well. This cursor is moved after server received enough data
+	//  to update recognition results (includes silence as well).
 	PartialTimeMs int64 `protobuf:"varint,3,opt,name=partial_time_ms,json=partialTimeMs,proto3" json:"partial_time_ms,omitempty"`
 	//  Time of last final. This cursor is moved when server decides that recognition from start of audio until final_time_ms will not change anymore
-	//  usually this even is followed by EOU detection (but this could change in future)
+	//  usually this even is followed by EOU detection (but this could change in future).
 	FinalTimeMs int64 `protobuf:"varint,4,opt,name=final_time_ms,json=finalTimeMs,proto3" json:"final_time_ms,omitempty"`
 	//  This is index of last final server send. Incremented after each new final.
 	FinalIndex int64 `protobuf:"varint,5,opt,name=final_index,json=finalIndex,proto3" json:"final_index,omitempty"`
-	//  Estimated time of EOU. Cursor is updated after each new EOU is sent
-	//  For external classifier this equals to received_data_ms at the moment EOU event arrives
-	//  For internal classifier this is estimation of time. The time is not exact and has the same guarantees as word timings
+	//  Estimated time of EOU. Cursor is updated after each new EOU is sent.
+	//  For external classifier this equals to received_data_ms at the moment EOU event arrives.
+	//  For internal classifier this is estimation of time. The time is not exact and has the same guarantees as word timings.
 	EouTimeMs int64 `protobuf:"varint,6,opt,name=eou_time_ms,json=eouTimeMs,proto3" json:"eou_time_ms,omitempty"`
 }
 
@@ -1620,15 +1623,15 @@ func (x *AudioCursors) GetEouTimeMs() int64 {
 	return 0
 }
 
-//refinement for final hypo. For example, text normalization is refinement.
+// Refinement for final hypo. For example, text normalization is refinement.
 type FinalRefinement struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  index of final for which server sends additional information
+	// Index of final for which server sends additional information.
 	FinalIndex int64 `protobuf:"varint,1,opt,name=final_index,json=finalIndex,proto3" json:"final_index,omitempty"`
-	//  type of refinement
+	// Type of refinement.
 	//
 	// Types that are assignable to Type:
 	//	*FinalRefinement_NormalizedText
@@ -1693,21 +1696,21 @@ type isFinalRefinement_Type interface {
 }
 
 type FinalRefinement_NormalizedText struct {
-	//   normalized text instead of raw one
+	// Normalized text instead of raw one.
 	NormalizedText *AlternativeUpdate `protobuf:"bytes,2,opt,name=normalized_text,json=normalizedText,proto3,oneof"`
 }
 
 func (*FinalRefinement_NormalizedText) isFinalRefinement_Type() {}
 
-//status message
+// Status message
 type StatusCode struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  code type
+	// Code type.
 	CodeType CodeType `protobuf:"varint,1,opt,name=code_type,json=codeType,proto3,enum=speechkit.stt.v3.CodeType" json:"code_type,omitempty"`
-	//  human readable message
+	// Human readable message.
 	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 }
 
@@ -1757,15 +1760,15 @@ func (x *StatusCode) GetMessage() string {
 	return ""
 }
 
-//session identifier
+// Session identifier.
 type SessionUuid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  internal session identifier
+	// Internal session identifier.
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	//  user session identifier
+	// User session identifier.
 	UserRequestId string `protobuf:"bytes,2,opt,name=user_request_id,json=userRequestId,proto3" json:"user_request_id,omitempty"`
 }
 
@@ -1815,20 +1818,20 @@ func (x *SessionUuid) GetUserRequestId() string {
 	return ""
 }
 
-// responses from server
-// each response contains session uuid
+// Responses from server.
+// Each response contains session uuid
 // AudioCursors
-// plus specific even
+// plus specific event
 type StreamingResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  session identifier
+	// Session identifier
 	SessionUuid *SessionUuid `protobuf:"bytes,1,opt,name=session_uuid,json=sessionUuid,proto3" json:"session_uuid,omitempty"`
-	//  progress bar for stream session recognition: how many data we obtained; final and partial times; etc
+	// Progress bar for stream session recognition: how many data we obtained; final and partial times; etc.
 	AudioCursors *AudioCursors `protobuf:"bytes,2,opt,name=audio_cursors,json=audioCursors,proto3" json:"audio_cursors,omitempty"`
-	// wall clock on server side. This is time when server wrote results to stream
+	// Wall clock on server side. This is time when server wrote results to stream
 	ResponseWallTimeMs int64 `protobuf:"varint,3,opt,name=response_wall_time_ms,json=responseWallTimeMs,proto3" json:"response_wall_time_ms,omitempty"`
 	// Types that are assignable to Event:
 	//	*StreamingResponse_Partial
@@ -1939,30 +1942,30 @@ type isStreamingResponse_Event interface {
 }
 
 type StreamingResponse_Partial struct {
-	//    partial results, server will send them regularly after enough audio data was received from user. This are current text estimation
-	//    from final_time_ms to partial_time_ms. Could change after new data will arrive
+	// Partial results, server will send them regularly after enough audio data was received from user. This are current text estimation
+	//  from final_time_ms to partial_time_ms. Could change after new data will arrive.
 	Partial *AlternativeUpdate `protobuf:"bytes,4,opt,name=partial,proto3,oneof"`
 }
 
 type StreamingResponse_Final struct {
-	//    final results, the recognition is now fixed until final_time_ms. For now, final is sent only if the EOU event was triggered. This could be change in future releases
+	//  Final results, the recognition is now fixed until final_time_ms. For now, final is sent only if the EOU event was triggered. This could be change in future releases.
 	Final *AlternativeUpdate `protobuf:"bytes,5,opt,name=final,proto3,oneof"`
 }
 
 type StreamingResponse_EouUpdate struct {
 	//  After EOU classifier, send the message with final, send the EouUpdate with time of EOU
-	//  before eou_update we send final with the same time. there could be several finals before eou update
+	//  before eou_update we send final with the same time. there could be several finals before eou update.
 	EouUpdate *EouUpdate `protobuf:"bytes,6,opt,name=eou_update,json=eouUpdate,proto3,oneof"`
 }
 
 type StreamingResponse_FinalRefinement struct {
 	//    For each final, if normalization is enabled, sent the normalized text (or some other advanced post-processing).
-	//    Final normalization will introduce additional latency
+	//    Final normalization will introduce additional latency.
 	FinalRefinement *FinalRefinement `protobuf:"bytes,7,opt,name=final_refinement,json=finalRefinement,proto3,oneof"`
 }
 
 type StreamingResponse_StatusCode struct {
-	//    Status messages, send by server with fixed interval (keep-alive)
+	//    Status messages, send by server with fixed interval (keep-alive).
 	StatusCode *StatusCode `protobuf:"bytes,8,opt,name=status_code,json=statusCode,proto3,oneof"`
 }
 

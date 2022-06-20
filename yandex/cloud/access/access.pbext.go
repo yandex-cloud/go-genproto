@@ -69,3 +69,7 @@ func (m *AccessBindingDelta) SetAction(v AccessBindingAction) {
 func (m *AccessBindingDelta) SetAccessBinding(v *AccessBinding) {
 	m.AccessBinding = v
 }
+
+func (m *AccessBindingsOperationResult) SetEffectiveDeltas(v []*AccessBindingDelta) {
+	m.EffectiveDeltas = v
+}

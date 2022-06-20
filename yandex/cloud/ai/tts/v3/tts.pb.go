@@ -72,9 +72,11 @@ type ContainerAudio_ContainerAudioType int32
 const (
 	ContainerAudio_CONTAINER_AUDIO_TYPE_UNSPECIFIED ContainerAudio_ContainerAudioType = 0
 	// Audio bit depth 16-bit signed little-endian (Linear PCM).
-	ContainerAudio_WAV      ContainerAudio_ContainerAudioType = 1
+	ContainerAudio_WAV ContainerAudio_ContainerAudioType = 1
+	// Data is encoded using the OPUS audio codec and compressed using the OGG container format.
 	ContainerAudio_OGG_OPUS ContainerAudio_ContainerAudioType = 2
-	ContainerAudio_MP3      ContainerAudio_ContainerAudioType = 3
+	// Data is encoded using MPEG-1/2 Layer III and compressed using the MP3 container format.
+	ContainerAudio_MP3 ContainerAudio_ContainerAudioType = 3
 )
 
 // Enum value maps for ContainerAudio_ContainerAudioType.
@@ -125,8 +127,12 @@ type UtteranceSynthesisRequest_LoudnessNormalizationType int32
 
 const (
 	UtteranceSynthesisRequest_LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED UtteranceSynthesisRequest_LoudnessNormalizationType = 0
-	UtteranceSynthesisRequest_MAX_PEAK                                UtteranceSynthesisRequest_LoudnessNormalizationType = 1
-	UtteranceSynthesisRequest_LUFS                                    UtteranceSynthesisRequest_LoudnessNormalizationType = 2
+	// The type of normalization, wherein the gain is changed to bring the highest PCM sample value or analog signal peak to a given level.
+	// The volume changes in a range (0;1], default value is 0.7.
+	UtteranceSynthesisRequest_MAX_PEAK UtteranceSynthesisRequest_LoudnessNormalizationType = 1
+	// The type of normalization based on EBU R 128 recommendation.
+	// the volume changes in a range [-145;0], default value is -19.
+	UtteranceSynthesisRequest_LUFS UtteranceSynthesisRequest_LoudnessNormalizationType = 2
 )
 
 // Enum value maps for UtteranceSynthesisRequest_LoudnessNormalizationType.
@@ -885,16 +891,17 @@ type Hints_AudioTemplate struct {
 }
 
 type Hints_Speed struct {
-	// hint to change speed
+	// Hint to change speed.
 	Speed float64 `protobuf:"fixed64,3,opt,name=speed,proto3,oneof"`
 }
 
 type Hints_Volume struct {
-	// hint to regulate volume. For LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED normalization will use MAX_PEAK, if volume in (0, 1], LUFS if volume in [-145, 0).
+	// Hint to regulate volume. For LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED normalization will use MAX_PEAK, if volume in (0, 1], LUFS if volume in [-145, 0).
 	Volume float64 `protobuf:"fixed64,4,opt,name=volume,proto3,oneof"`
 }
 
 type Hints_Role struct {
+	// Hint to specify pronunciation character for the speaker.
 	Role string `protobuf:"bytes,5,opt,name=role,proto3,oneof"`
 }
 
@@ -914,7 +921,7 @@ type UtteranceSynthesisRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The name of the model.
-	// Specifies basic synthesis functionality. Currently should be empty. Do not use it
+	// Specifies basic synthesis functionality. Currently should be empty. Do not use it.
 	Model string `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
 	// Text to synthesis, one of text synthesis markups.
 	//
@@ -926,7 +933,7 @@ type UtteranceSynthesisRequest struct {
 	Hints []*Hints `protobuf:"bytes,4,rep,name=hints,proto3" json:"hints,omitempty"`
 	// Optional. Default: 22050 Hz, linear 16-bit signed little-endian PCM, with WAV header
 	OutputAudioSpec *AudioFormatOptions `protobuf:"bytes,5,opt,name=output_audio_spec,json=outputAudioSpec,proto3" json:"output_audio_spec,omitempty"`
-	// Optional. Default: LUFS, type of loudness normalization, default value -19.
+	// Optional. Default: LUFS type of loudness normalization.
 	LoudnessNormalizationType UtteranceSynthesisRequest_LoudnessNormalizationType `protobuf:"varint,6,opt,name=loudness_normalization_type,json=loudnessNormalizationType,proto3,enum=speechkit.tts.v3.UtteranceSynthesisRequest_LoudnessNormalizationType" json:"loudness_normalization_type,omitempty"`
 	// Optional. Automatically split long text to several utterances and bill accordingly. Some degradation in service quality is possible.
 	UnsafeMode bool `protobuf:"varint,7,opt,name=unsafe_mode,json=unsafeMode,proto3" json:"unsafe_mode,omitempty"`
