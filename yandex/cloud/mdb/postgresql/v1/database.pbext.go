@@ -26,6 +26,10 @@ func (m *Database) SetExtensions(v []*Extension) {
 	m.Extensions = v
 }
 
+func (m *Database) SetTemplateDb(v string) {
+	m.TemplateDb = v
+}
+
 func (m *Extension) SetName(v string) {
 	m.Name = v
 }
@@ -52,4 +56,8 @@ func (m *DatabaseSpec) SetLcCtype(v string) {
 
 func (m *DatabaseSpec) SetExtensions(v []*Extension) {
 	m.Extensions = v
+}
+
+func (m *DatabaseSpec) SetTemplateDb(v string) {
+	m.TemplateDb = v
 }

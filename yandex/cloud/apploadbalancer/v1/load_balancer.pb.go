@@ -178,8 +178,6 @@ type LoadBalancer struct {
 	// Status of the application load balancer.
 	Status LoadBalancer_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.apploadbalancer.v1.LoadBalancer_Status" json:"status,omitempty"`
 	// ID of the region that the application load balancer is located at.
-	//
-	// Currently Yandex Cloud supports only `ru-central1` region.
 	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// ID of the network that the application load balancer belongs to.
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -595,7 +593,7 @@ type Location struct {
 
 	// ID of the availability zone where the application load balancer resides.
 	//
-	// Each Yandex Cloud availability zone can only be specified once.
+	// Each availability zone can only be specified once.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of the subnet that the application load balancer belongs to.
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`

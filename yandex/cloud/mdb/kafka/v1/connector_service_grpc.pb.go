@@ -23,21 +23,19 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConnectorServiceClient interface {
-	// Returns the specified Apache Kafka Connector resource.
-	//
-	// To get the list of available Apache Kafka Connector resources, make a [List] request.
+	// Returns information about an Apache Kafka® connector.
 	Get(ctx context.Context, in *GetConnectorRequest, opts ...grpc.CallOption) (*Connector, error)
-	// Retrieves the list of Apache Kafka Connector resources in the specified cluster.
+	// Retrieves the list of Apache Kafka® connectors in a cluster.
 	List(ctx context.Context, in *ListConnectorsRequest, opts ...grpc.CallOption) (*ListConnectorsResponse, error)
-	// Creates a new Apache Kafka connector in the specified cluster.
+	// Creates a new Apache Kafka® connector in a cluster.
 	Create(ctx context.Context, in *CreateConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates an Apache Kafka connector in the specified cluster.
+	// Updates an Apache Kafka® connector.
 	Update(ctx context.Context, in *UpdateConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Apache Kafka connector.
+	// Deletes an Apache Kafka® connector.
 	Delete(ctx context.Context, in *DeleteConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Resume the specified Apache Kafka connector.
+	// Resumes an Apache Kafka® connector.
 	Resume(ctx context.Context, in *ResumeConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Pause the specified Apache Kafka connector.
+	// Pauses an Apache Kafka® connector.
 	Pause(ctx context.Context, in *PauseConnectorRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -116,21 +114,19 @@ func (c *connectorServiceClient) Pause(ctx context.Context, in *PauseConnectorRe
 // All implementations should embed UnimplementedConnectorServiceServer
 // for forward compatibility
 type ConnectorServiceServer interface {
-	// Returns the specified Apache Kafka Connector resource.
-	//
-	// To get the list of available Apache Kafka Connector resources, make a [List] request.
+	// Returns information about an Apache Kafka® connector.
 	Get(context.Context, *GetConnectorRequest) (*Connector, error)
-	// Retrieves the list of Apache Kafka Connector resources in the specified cluster.
+	// Retrieves the list of Apache Kafka® connectors in a cluster.
 	List(context.Context, *ListConnectorsRequest) (*ListConnectorsResponse, error)
-	// Creates a new Apache Kafka connector in the specified cluster.
+	// Creates a new Apache Kafka® connector in a cluster.
 	Create(context.Context, *CreateConnectorRequest) (*operation.Operation, error)
-	// Updates an Apache Kafka connector in the specified cluster.
+	// Updates an Apache Kafka® connector.
 	Update(context.Context, *UpdateConnectorRequest) (*operation.Operation, error)
-	// Deletes the specified Apache Kafka connector.
+	// Deletes an Apache Kafka® connector.
 	Delete(context.Context, *DeleteConnectorRequest) (*operation.Operation, error)
-	// Resume the specified Apache Kafka connector.
+	// Resumes an Apache Kafka® connector.
 	Resume(context.Context, *ResumeConnectorRequest) (*operation.Operation, error)
-	// Pause the specified Apache Kafka connector.
+	// Pauses an Apache Kafka® connector.
 	Pause(context.Context, *PauseConnectorRequest) (*operation.Operation, error)
 }
 

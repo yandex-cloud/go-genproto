@@ -312,7 +312,7 @@ type CreateClusterRequest struct {
 	Sqlcollation string `protobuf:"bytes,13,opt,name=sqlcollation,proto3" json:"sqlcollation,omitempty"`
 	// Host groups hosting VMs of the cluster.
 	HostGroupIds []string `protobuf:"bytes,14,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,15,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 }
 
@@ -530,7 +530,7 @@ type UpdateClusterRequest struct {
 	SecurityGroupIds []string `protobuf:"bytes,7,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Determines whether the cluster is protected from being deleted.
 	DeletionProtection bool `protobuf:"varint,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 }
 
@@ -910,7 +910,7 @@ type RestoreClusterRequest struct {
 	DeletionProtection bool `protobuf:"varint,13,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Host groups hosting VMs of the cluster.
 	HostGroupIds []string `protobuf:"bytes,14,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,15,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 }
 

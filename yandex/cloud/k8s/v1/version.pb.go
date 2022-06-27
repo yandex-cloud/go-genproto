@@ -29,7 +29,7 @@ type VersionInfo struct {
 	// Current Kubernetes version, format: major.minor (e.g. 1.15).
 	CurrentVersion string `protobuf:"bytes,1,opt,name=current_version,json=currentVersion,proto3" json:"current_version,omitempty"`
 	// Newer revisions may include Kubernetes patches (e.g 1.15.1 -> 1.15.2) as well
-	// as some internal component updates - new features or bug fixes in Yandex specific
+	// as some internal component updates - new features or bug fixes in platform specific
 	// components either on the master or nodes.
 	NewRevisionAvailable bool `protobuf:"varint,2,opt,name=new_revision_available,json=newRevisionAvailable,proto3" json:"new_revision_available,omitempty"`
 	// Description of the changes to be applied when updating to the latest

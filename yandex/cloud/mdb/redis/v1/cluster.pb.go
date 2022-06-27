@@ -947,7 +947,7 @@ type Host struct {
 	// Name of the Redis host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
 	//
-	// The name is unique across all existing MDB hosts in Yandex Cloud, as it defines the FQDN of the host.
+	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the Redis cluster. The ID is assigned by MDB at creation time.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`

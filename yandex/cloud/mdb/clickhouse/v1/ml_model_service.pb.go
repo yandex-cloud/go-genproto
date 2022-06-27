@@ -228,7 +228,7 @@ type CreateMlModelRequest struct {
 	MlModelName string `protobuf:"bytes,2,opt,name=ml_model_name,json=mlModelName,proto3" json:"ml_model_name,omitempty"`
 	// Type of the model.
 	Type MlModelType `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.mdb.clickhouse.v1.MlModelType" json:"type,omitempty"`
-	// Model file URL. You can only use models stored in Yandex Object Storage.
+	// Model file URL. You can only use models stored in Object Storage.
 	Uri string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 
@@ -361,7 +361,7 @@ type UpdateMlModelRequest struct {
 	// Name of the the model to update.
 	MlModelName string                 `protobuf:"bytes,2,opt,name=ml_model_name,json=mlModelName,proto3" json:"ml_model_name,omitempty"`
 	UpdateMask  *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// The new model file URL. You can only use models stored in Yandex Object Storage.
+	// The new model file URL. You can only use models stored in Object Storage.
 	Uri string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 

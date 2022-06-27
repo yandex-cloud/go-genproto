@@ -24,11 +24,11 @@ const (
 type Connector_Health int32
 
 const (
-	// State of the connector is unknown.
+	// Health of the connector is unknown.
 	Connector_HEALTH_UNKNOWN Connector_Health = 0
 	// Connector is running.
 	Connector_ALIVE Connector_Health = 1
-	// Connector is failed to start.
+	// Connector has failed to start.
 	Connector_DEAD Connector_Health = 2
 )
 
@@ -80,9 +80,9 @@ const (
 	Connector_STATUS_UNKNOWN Connector_Status = 0
 	// Connector is running normally.
 	Connector_RUNNING Connector_Status = 1
-	// Connector encountered a problem and cannot operate.
+	// Connector has encountered a problem and cannot operate.
 	Connector_ERROR Connector_Status = 2
-	// Connector paused.
+	// Connector is paused.
 	Connector_PAUSED Connector_Status = 3
 )
 
@@ -129,7 +129,9 @@ func (Connector_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDescGZIP(), []int{6, 1}
 }
 
-// An Apache Kafka® connector specification
+// An object that represents an Apache Kafka® connector.
+//
+// See [the documentation](/docs/managed-kafka/concepts/connectors) for details.
 type ConnectorSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -137,15 +139,12 @@ type ConnectorSpec struct {
 
 	// Name of the connector.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Maximum number of connector tasks.
-	// Default is the number of brokers.
+	// Maximum number of connector tasks. Default value is the number of brokers.
 	TasksMax *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=tasks_max,json=tasksMax,proto3" json:"tasks_max,omitempty"`
-	// Properties passed with connector config to Connect service.
-	// Example: 'sync.topics.config.enabled: true'.
+	// A set of properties passed to Managed Service for Apache Kafka® with the connector configuration.
+	// Example: `sync.topics.config.enabled: true`.
 	Properties map[string]string `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Additional settings
-	// for specific connector.
-	// For example, of MirrorMaker.
+	// Additional settings for the connector.
 	//
 	// Types that are assignable to ConnectorConfig:
 	//	*ConnectorSpec_ConnectorConfigMirrormaker
@@ -224,25 +223,23 @@ type isConnectorSpec_ConnectorConfig interface {
 }
 
 type ConnectorSpec_ConnectorConfigMirrormaker struct {
-	// Configuration of MirrorMaker connector
+	// Configuration of the MirrorMaker connector.
 	ConnectorConfigMirrormaker *ConnectorConfigMirrorMakerSpec `protobuf:"bytes,10,opt,name=connector_config_mirrormaker,json=connectorConfigMirrormaker,proto3,oneof"`
 }
 
 func (*ConnectorSpec_ConnectorConfigMirrormaker) isConnectorSpec_ConnectorConfig() {}
 
-// An Apache Kafka® connector's update specification.
 type UpdateConnectorSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Maximum number of tasks to update.
+	// Maximum number of connector tasks to update.
 	TasksMax *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=tasks_max,json=tasksMax,proto3" json:"tasks_max,omitempty"`
-	// Properties passed with connector config to Connect service, that
-	// we should change or add in existing Properties-set of connector.
-	// Example: 'sync.topics.config.enabled: false'
+	// A set of new or changed properties to update for the connector. They are passed with the connector configuration to Managed Service for Apache Kafka®.
+	// Example: `sync.topics.config.enabled: false`.
 	Properties map[string]string `protobuf:"bytes,2,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Update specification for specific connector (for example, MirrorMaker).
+	// Updated configuration for the connector.
 	//
 	// Types that are assignable to ConnectorConfig:
 	//	*UpdateConnectorSpec_ConnectorConfigMirrormaker
@@ -314,24 +311,22 @@ type isUpdateConnectorSpec_ConnectorConfig interface {
 }
 
 type UpdateConnectorSpec_ConnectorConfigMirrormaker struct {
-	// Update specification for MirrorMaker.
+	// Configuration of the MirrorMaker connector.
 	ConnectorConfigMirrormaker *ConnectorConfigMirrorMakerSpec `protobuf:"bytes,10,opt,name=connector_config_mirrormaker,json=connectorConfigMirrormaker,proto3,oneof"`
 }
 
 func (*UpdateConnectorSpec_ConnectorConfigMirrormaker) isUpdateConnectorSpec_ConnectorConfig() {}
 
-// An An Apache Kafka® MirrorMaker
-// connector specification.
 type ConnectorConfigMirrorMakerSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Source cluster configuration.
+	// Source cluster configuration for the MirrorMaker connector.
 	SourceCluster *ClusterConnectionSpec `protobuf:"bytes,1,opt,name=source_cluster,json=sourceCluster,proto3" json:"source_cluster,omitempty"`
-	// Target cluster configuration.
+	// Target cluster configuration for the MirrorMaker connector.
 	TargetCluster *ClusterConnectionSpec `protobuf:"bytes,2,opt,name=target_cluster,json=targetCluster,proto3" json:"target_cluster,omitempty"`
-	// List of Kafka topics, separated by ','
+	// List of Kafka topics, separated by `,`.
 	Topics string `protobuf:"bytes,3,opt,name=topics,proto3" json:"topics,omitempty"`
 	// Replication factor for automatically created topics.
 	ReplicationFactor *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=replication_factor,json=replicationFactor,proto3" json:"replication_factor,omitempty"`
@@ -397,19 +392,15 @@ func (x *ConnectorConfigMirrorMakerSpec) GetReplicationFactor() *wrapperspb.Int6
 	return nil
 }
 
-// Specification of ClusterConnection -
-// connection to clusters, that
-// are source or target of MirrorMaker
-// clusters.
 type ClusterConnectionSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Alias of ClusterConnection.
-	// For example: 'source', 'target', ...
+	// Alias of cluster connection configuration.
+	// Examples: `source`, `target`.
 	Alias string `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
-	// Type of connection to Kafka cluster.
+	// Type of connection to Apache Kafka® cluster.
 	//
 	// Types that are assignable to ClusterConnection:
 	//	*ClusterConnectionSpec_ThisCluster
@@ -482,16 +473,12 @@ type isClusterConnectionSpec_ClusterConnection interface {
 }
 
 type ClusterConnectionSpec_ThisCluster struct {
-	// If type is 'this_cluster' - we connect to
-	// cluster that is handle Kafka Connect Worker,
-	// on which we try to register connector.
+	// Connection configuration of the cluster the connector belongs to. As all credentials are already known, leave this parameter empty.
 	ThisCluster *ThisClusterSpec `protobuf:"bytes,2,opt,name=this_cluster,json=thisCluster,proto3,oneof"`
 }
 
 type ClusterConnectionSpec_ExternalCluster struct {
-	// If type is 'external_cluster' - we connect
-	// to cluster that is not handle Kafka Connect Worker,
-	// on which we try to register connector.
+	// Configuration of connection to an external cluster with all the necessary credentials.
 	ExternalCluster *ExternalClusterConnectionSpec `protobuf:"bytes,3,opt,name=external_cluster,json=externalCluster,proto3,oneof"`
 }
 
@@ -499,10 +486,6 @@ func (*ClusterConnectionSpec_ThisCluster) isClusterConnectionSpec_ClusterConnect
 
 func (*ClusterConnectionSpec_ExternalCluster) isClusterConnectionSpec_ClusterConnection() {}
 
-// Specification of cluster_connection
-// type 'this_cluster'. This means
-// that we already have all credentials,
-// so this spec is empty.
 type ThisClusterSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -541,30 +524,20 @@ func (*ThisClusterSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDescGZIP(), []int{4}
 }
 
-// Specification of connection to
-// external cluster. It contains
-// all necessary credentials to
-// connect to external cluster.
 type ExternalClusterConnectionSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List bootstrap servers of cluster,
-	// separated by ','.
+	// List of bootstrap servers of the cluster, separated by `,`.
 	BootstrapServers string `protobuf:"bytes,1,opt,name=bootstrap_servers,json=bootstrapServers,proto3" json:"bootstrap_servers,omitempty"`
-	// Sasl username which
-	// we use to connect to cluster.
+	// SASL username to use for connection to the cluster.
 	SaslUsername string `protobuf:"bytes,2,opt,name=sasl_username,json=saslUsername,proto3" json:"sasl_username,omitempty"`
-	// Sasl password which we use
-	// to connect to cluster.
+	// SASL password to use for connection to the cluster.
 	SaslPassword string `protobuf:"bytes,3,opt,name=sasl_password,json=saslPassword,proto3" json:"sasl_password,omitempty"`
-	// Sasl mechanism, which we
-	// should use to connect to cluster.
+	// SASL mechanism to use for connection to the cluster.
 	SaslMechanism string `protobuf:"bytes,4,opt,name=sasl_mechanism,json=saslMechanism,proto3" json:"sasl_mechanism,omitempty"`
-	// Security protocol, which
-	// we should use to connect
-	// to cluster.
+	// Security protocol to use for connection to the cluster.
 	SecurityProtocol string `protobuf:"bytes,5,opt,name=security_protocol,json=securityProtocol,proto3" json:"security_protocol,omitempty"`
 	// CA in PEM format to connect to external cluster.
 	// Lines of certificate separated by '\n' symbol.
@@ -645,7 +618,6 @@ func (x *ExternalClusterConnectionSpec) GetSslTruststoreCertificates() string {
 	return ""
 }
 
-// An Apache Kafka® connector resource.
 type Connector struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -653,20 +625,18 @@ type Connector struct {
 
 	// Name of the connector.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Maximum number of tasks. Default is the number of brokers
+	// Maximum number of connector tasks. Default value is the number of brokers.
 	TasksMax *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=tasks_max,json=tasksMax,proto3" json:"tasks_max,omitempty"`
-	// Properties passed with connector config to Connect service
-	// Example: 'sync.topics.config.enabled: true'
+	// A set of properties passed to Managed Service for Apache Kafka® with the connector configuration.
+	// Example: `sync.topics.config.enabled: true`.
 	Properties map[string]string `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Connector health.
 	Health Connector_Health `protobuf:"varint,4,opt,name=health,proto3,enum=yandex.cloud.mdb.kafka.v1.Connector_Health" json:"health,omitempty"`
 	// Current status of the connector.
 	Status Connector_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.mdb.kafka.v1.Connector_Status" json:"status,omitempty"`
-	// ID of the Apache Kafka cluster that the connector belongs to.
+	// ID of the Apache Kafka® cluster that the connector belongs to.
 	ClusterId string `protobuf:"bytes,6,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Additional settings
-	// for specific connector.
-	// For example, of MirrorMaker.
+	// Additional settings for the connector.
 	//
 	// Types that are assignable to ConnectorConfig:
 	//	*Connector_ConnectorConfigMirrormaker
@@ -766,25 +736,22 @@ type isConnector_ConnectorConfig interface {
 }
 
 type Connector_ConnectorConfigMirrormaker struct {
+	// Configuration of the MirrorMaker connector.
 	ConnectorConfigMirrormaker *ConnectorConfigMirrorMaker `protobuf:"bytes,10,opt,name=connector_config_mirrormaker,json=connectorConfigMirrormaker,proto3,oneof"`
 }
 
 func (*Connector_ConnectorConfigMirrormaker) isConnector_ConnectorConfig() {}
 
-// An An Apache Kafka® MirrorMaker
-// connector resource.
 type ConnectorConfigMirrorMaker struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Source cluster resource
-	// settings.
+	// Source cluster connection configuration.
 	SourceCluster *ClusterConnection `protobuf:"bytes,1,opt,name=source_cluster,json=sourceCluster,proto3" json:"source_cluster,omitempty"`
-	// Target cluster resource
-	// settings.
+	// Target cluster connection configuration.
 	TargetCluster *ClusterConnection `protobuf:"bytes,2,opt,name=target_cluster,json=targetCluster,proto3" json:"target_cluster,omitempty"`
-	// List of Kafka topics, separated by ','
+	// List of Kafka topics, separated by `,`.
 	Topics string `protobuf:"bytes,3,opt,name=topics,proto3" json:"topics,omitempty"`
 	// Replication factor for automatically created topics.
 	ReplicationFactor *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=replication_factor,json=replicationFactor,proto3" json:"replication_factor,omitempty"`
@@ -850,20 +817,15 @@ func (x *ConnectorConfigMirrorMaker) GetReplicationFactor() *wrapperspb.Int64Val
 	return nil
 }
 
-// Resource ClusterConnection -
-// settings of
-// connection to clusters, that
-// are source or target of MirrorMaker
-// clusters.
 type ClusterConnection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Alias of ClusterConnection resource.
-	// For example: 'source', 'target', ...
+	// Alias of cluster connection configuration.
+	// Examples: `source`, `target`.
 	Alias string `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
-	// Type of connection to Kafka cluster.
+	// Type of connection to Apache Kafka® cluster.
 	//
 	// Types that are assignable to ClusterConnection:
 	//	*ClusterConnection_ThisCluster
@@ -936,16 +898,12 @@ type isClusterConnection_ClusterConnection interface {
 }
 
 type ClusterConnection_ThisCluster struct {
-	// If type is 'this_cluster' - we connect to
-	// cluster that is handle Kafka Connect Worker,
-	// on which we try to register connector.
+	// Connection configuration of the cluster the connector belongs to. As all credentials are already known, leave this parameter empty.
 	ThisCluster *ThisCluster `protobuf:"bytes,2,opt,name=this_cluster,json=thisCluster,proto3,oneof"`
 }
 
 type ClusterConnection_ExternalCluster struct {
-	// If type is 'external_cluster' - we connect
-	// to cluster that is not handle Kafka Connect Worker,
-	// on which we try to register connector.
+	// Configuration of connection to an external cluster with all the necessary credentials.
 	ExternalCluster *ExternalClusterConnection `protobuf:"bytes,3,opt,name=external_cluster,json=externalCluster,proto3,oneof"`
 }
 
@@ -953,8 +911,6 @@ func (*ClusterConnection_ThisCluster) isClusterConnection_ClusterConnection() {}
 
 func (*ClusterConnection_ExternalCluster) isClusterConnection_ClusterConnection() {}
 
-// Resource of cluster_connection
-// type 'this_cluster'.
 type ThisCluster struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -993,27 +949,18 @@ func (*ThisCluster) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDescGZIP(), []int{9}
 }
 
-// Resource of connection to
-// external cluster. It contains
-// all settings of connection
-// to external cluster.
 type ExternalClusterConnection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List bootstrap servers of cluster,
-	// separated by ','
+	// List of bootstrap servers of the cluster, separated by `,`.
 	BootstrapServers string `protobuf:"bytes,1,opt,name=bootstrap_servers,json=bootstrapServers,proto3" json:"bootstrap_servers,omitempty"`
-	// Sasl username which
-	// we use to connect to cluster.
+	// SASL username to use for connection to the cluster.
 	SaslUsername string `protobuf:"bytes,2,opt,name=sasl_username,json=saslUsername,proto3" json:"sasl_username,omitempty"`
-	// Sasl mechanism, which we
-	// should use to connect to cluster.
+	// SASL mechanism to use for connection to the cluster.
 	SaslMechanism string `protobuf:"bytes,4,opt,name=sasl_mechanism,json=saslMechanism,proto3" json:"sasl_mechanism,omitempty"`
-	// Security protocol, which
-	// we should use to connect
-	// to cluster.
+	// Security protocol to use for connection to the cluster.
 	SecurityProtocol string `protobuf:"bytes,5,opt,name=security_protocol,json=securityProtocol,proto3" json:"security_protocol,omitempty"`
 }
 

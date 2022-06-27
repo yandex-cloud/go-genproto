@@ -509,7 +509,7 @@ type Cluster struct {
 	Sqlcollation string `protobuf:"bytes,15,opt,name=sqlcollation,proto3" json:"sqlcollation,omitempty"`
 	// Host groups hosting VMs of the cluster.
 	HostGroupIds []string `protobuf:"bytes,16,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
-	// ID of the service account which is used for access to Yandex Object Storage.
+	// ID of the service account which is used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,17,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 }
 
@@ -929,7 +929,7 @@ type Host struct {
 	//
 	// The host name is assigned by Managed Service for SQL Server at the moment of creation and cannot be changed. 1-63 characters long.
 	//
-	// The name is unique across all existing database hosts in Yandex Cloud as it defines the FQDN of the host.
+	// The name is unique across all database hosts that exist on the platform as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the SQL Server host.
 	//

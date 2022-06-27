@@ -458,7 +458,7 @@ type CreateExtensionRequest struct {
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the extension.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// URI of the zip archive to create the new extension from. Currently only supports links that are stored in Yandex Object Storage.
+	// URI of the zip archive to create the new extension from. Currently only supports links that are stored in Object Storage.
 	Uri string `protobuf:"bytes,3,opt,name=uri,proto3" json:"uri,omitempty"`
 	// The flag that disables the extension.
 	Disabled bool `protobuf:"varint,4,opt,name=disabled,proto3" json:"disabled,omitempty"`

@@ -30,11 +30,13 @@ type GetConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Apache Kafka Cluster resource to return.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the cluster the connector belongs to.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka Connector resource to return.
-	// To get the name of the connector use a [ConnectorService.List] request.
+	// Name of the Apache Kafka® connector to return information about.
+	//
+	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -89,12 +91,17 @@ type ListConnectorsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Apache Kafka cluster to list connectors in.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the Apache Kafka® cluster to list connectors in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, Set [page_token] to the [ListConnectorsResponse.next_page_token]
-	// returned by a previous list request.
+	// The maximum number of results per page to return.
+	//
+	// If the number of available results is larger than [page_size], the API returns a [ListConnectorsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ConnectorService.List] requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token that can be used to iterate through multiple pages of results.
+	//
+	// To get the next page of results, set [page_token] to the [ListConnectorsResponse.next_page_token] returned by the previous [ConnectorService.List] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -156,12 +163,11 @@ type ListConnectorsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of Apache Kafka Connector resources.
+	// List of Apache Kafka® Connectors.
 	Connectors []*Connector `protobuf:"bytes,1,rep,name=connectors,proto3" json:"connectors,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListConnectorsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListConnectorsRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// The token that can be used to get the next page of results.
+	//
+	// If the number of results is larger than [ListConnectorsRequest.page_size], use the [next_page_token] as the value for the [ListConnectorsRequest.page_token] in the subsequent [ConnectorService.List] request to iterate through multiple pages of results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -216,10 +222,11 @@ type CreateConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster to create a connector in.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the Apache Kafka® cluster to create the connector in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Configuration of the connector to create.
+	// Configuration of the connector to create.
 	ConnectorSpec *ConnectorSpec `protobuf:"bytes,2,opt,name=connector_spec,json=connectorSpec,proto3" json:"connector_spec,omitempty"`
 }
 
@@ -274,9 +281,9 @@ type CreateConnectorMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Apache Kafka cluster where a connector is being created.
+	// ID of the Apache Kafka® cluster the connector is being created in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka connector that is being created.
+	// Name of the Apache Kafka® connector that is being created.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -331,15 +338,17 @@ type UpdateConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster to update a connector in.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the Apache Kafka® cluster to update the connector in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the connector to update.
-	// To get the name of the connector, use a [ConnectorService.List] request.
+	// Name of the connector to update.
+	//
+	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
-	// Field mask that specifies which fields of the Connector resource should be updated.
+	// Field mask that specifies which settings of the connector should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Required. Configuration of the connector to update.
+	// Configuration of the connector to update.
 	ConnectorSpec *UpdateConnectorSpec `protobuf:"bytes,4,opt,name=connector_spec,json=connectorSpec,proto3" json:"connector_spec,omitempty"`
 }
 
@@ -408,7 +417,7 @@ type UpdateConnectorMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Apache Kafka cluster where a connector is being updated.
+	// ID of the Apache Kafka® cluster the connector is being updated in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Apache Kafka connector that is being updated.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
@@ -465,11 +474,13 @@ type DeleteConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster to delete a connector in.
-	// To get the cluster ID, use a [ClusterService.List] request.
+	// ID of the Apache Kafka® cluster to delete the connector from.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the connector to delete.
-	// To get the name of the connector, use a [ConnectorService.List] request.
+	// Name of the connector to delete.
+	//
+	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -524,9 +535,9 @@ type DeleteConnectorMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Apache Kafka cluster where a connector is being deleted.
+	// ID of the Apache Kafka® cluster the connector is being deleted from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka connector that is being deleted.
+	// Name of the Apache Kafka® connector that is being deleted.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -581,10 +592,13 @@ type ResumeConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster to resume connector in.
+	// ID of the Apache Kafka® cluster to resume the connector in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka Connector resource to resume.
-	// To get the name of the connector use a [ConnectorService.List] request.
+	// Name of the Apache Kafka® connector to resume.
+	//
+	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -639,9 +653,9 @@ type ResumeConnectorMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster.
+	// ID of the Apache Kafka® cluster the connector is being resumed in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka Connector resource that is beign resumed.
+	// Name of the Apache Kafka® connector that is beign resumed.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -696,10 +710,13 @@ type PauseConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster to pause connector in.
+	// ID of the Apache Kafka® cluster to pause the connector in.
+	//
+	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka Connector resource to pause.
-	// To get the name of the connector use a [ConnectorService.List] request.
+	// Name of the Apache Kafka® connector to pause.
+	//
+	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 
@@ -754,9 +771,9 @@ type PauseConnectorMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Apache Kafka cluster.
+	// ID of the Apache Kafka® cluster the connector is being paused in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka Connector resource that is being paused.
+	// Name of the Apache Kafka® connector that is being paused.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 

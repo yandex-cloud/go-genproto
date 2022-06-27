@@ -398,7 +398,7 @@ type CreateClusterRequest struct {
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Name of the first shard in cluster. If not set, defaults to the value 'shard1'.
 	ShardName string `protobuf:"bytes,11,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,13,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -606,7 +606,7 @@ type UpdateClusterRequest struct {
 	ConfigSpec *ConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
 	// New name for the cluster.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,7,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// New maintenance window settings for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,8,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
@@ -1420,7 +1420,7 @@ type RestoreClusterRequest struct {
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// ID of the folder to create the ClickHouse cluster in.
 	FolderId string `protobuf:"bytes,9,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,10,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`

@@ -443,7 +443,7 @@ type Cluster struct {
 	Status Cluster_Status `protobuf:"varint,12,opt,name=status,proto3,enum=yandex.cloud.mdb.elasticsearch.v1.Cluster_Status" json:"status,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,13,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// ID of the service account used for access to Yandex Object Storage.
+	// ID of the service account used for access to Object Storage.
 	ServiceAccountId string `protobuf:"bytes,14,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,15,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`

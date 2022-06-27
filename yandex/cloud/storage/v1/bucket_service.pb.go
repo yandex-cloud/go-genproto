@@ -253,7 +253,7 @@ type CreateBucketRequest struct {
 
 	// Name of the bucket.
 	//
-	// The name must be unique within Yandex Cloud. For naming limitations and rules, see
+	// The name must be unique within the platform. For naming limitations and rules, see
 	// [documentation](/docs/storage/concepts/bucket#naming).
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the folder to create a bucket in.
@@ -849,7 +849,7 @@ func (x *SelfManagedHTTPSConfigParams) GetPrivateKeyPem() string {
 	return ""
 }
 
-// A resource for a TLS certificate from Yandex Certificate Manager.
+// A resource for a TLS certificate from Certificate Manager.
 type CertificateManagerHTTPSConfigParams struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -988,7 +988,7 @@ type SetBucketHTTPSConfigRequest_SelfManaged struct {
 }
 
 type SetBucketHTTPSConfigRequest_CertificateManager struct {
-	// TLS certificate from Yandex Certificate Manager.
+	// TLS certificate from Certificate Manager.
 	//
 	// To create a certificate in Certificate Manager, make a
 	// [yandex.cloud.certificatemanager.v1.CertificateService.Create] request.

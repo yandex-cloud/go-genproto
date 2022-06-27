@@ -81,7 +81,7 @@ type InstanceServiceClient interface {
 	//
 	// The instance must be stopped before moving. To stop the instance, make a [Stop] request.
 	//
-	// After moving, the instance will start recording its Yandex Monitoring default metrics to its new folder. Metrics
+	// After moving, the instance will start recording its Monitoring default metrics to its new folder. Metrics
 	// that have been recorded to the source folder prior to moving will be retained.
 	Move(ctx context.Context, in *MoveInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
@@ -327,7 +327,7 @@ type InstanceServiceServer interface {
 	//
 	// The instance must be stopped before moving. To stop the instance, make a [Stop] request.
 	//
-	// After moving, the instance will start recording its Yandex Monitoring default metrics to its new folder. Metrics
+	// After moving, the instance will start recording its Monitoring default metrics to its new folder. Metrics
 	// that have been recorded to the source folder prior to moving will be retained.
 	Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error)
 }

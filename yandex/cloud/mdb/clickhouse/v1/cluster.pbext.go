@@ -268,3 +268,15 @@ func (m *Access) SetYandexQuery(v bool) {
 func (m *CloudStorage) SetEnabled(v bool) {
 	m.Enabled = v
 }
+
+func (m *CloudStorage) SetMoveFactor(v *wrapperspb.DoubleValue) {
+	m.MoveFactor = v
+}
+
+func (m *CloudStorage) SetDataCacheEnabled(v *wrapperspb.BoolValue) {
+	m.DataCacheEnabled = v
+}
+
+func (m *CloudStorage) SetDataCacheMaxSize(v *wrapperspb.Int64Value) {
+	m.DataCacheMaxSize = v
+}

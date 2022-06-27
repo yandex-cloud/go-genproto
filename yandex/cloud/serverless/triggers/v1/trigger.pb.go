@@ -32,9 +32,9 @@ const (
 	TriggerType_TIMER TriggerType = 2
 	// The trigger is activated by messages from a message queue.
 	//
-	// Only Yandex Message Queue is currently supported.
+	// Only Message Queue is currently supported.
 	TriggerType_MESSAGE_QUEUE TriggerType = 3
-	// The trigger is activated by messages from Yandex IoT Core.
+	// The trigger is activated by messages from IoT Core.
 	TriggerType_IOT_MESSAGE        TriggerType = 4
 	TriggerType_OBJECT_STORAGE     TriggerType = 5
 	TriggerType_CONTAINER_REGISTRY TriggerType = 6
@@ -1384,7 +1384,7 @@ type Trigger_Rule_MessageQueue struct {
 }
 
 type Trigger_Rule_IotMessage struct {
-	// Rule for a Yandex IoT Core trigger.
+	// Rule for a IoT Core trigger.
 	IotMessage *Trigger_IoTMessage `protobuf:"bytes,4,opt,name=iot_message,json=iotMessage,proto3,oneof"`
 }
 
@@ -1545,7 +1545,7 @@ type Trigger_MessageQueue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the message queue in Yandex Message Queue.
+	// ID of the message queue in Message Queue.
 	QueueId string `protobuf:"bytes,11,opt,name=queue_id,json=queueId,proto3" json:"queue_id,omitempty"`
 	// ID of the service account which has read access to the message queue.
 	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
@@ -1660,15 +1660,15 @@ func (*Trigger_MessageQueue_InvokeFunction) isTrigger_MessageQueue_Action() {}
 
 func (*Trigger_MessageQueue_InvokeContainer) isTrigger_MessageQueue_Action() {}
 
-// Rule for activating a Yandex IoT Core trigger.
+// Rule for activating a IoT Core trigger.
 type Trigger_IoTMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Yandex IoT Core registry.
+	// ID of the IoT Core registry.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
-	// ID of the Yandex IoT Core device in the registry.
+	// ID of the IoT Core device in the registry.
 	DeviceId string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// MQTT topic whose messages activate the trigger.
 	MqttTopic string `protobuf:"bytes,3,opt,name=mqtt_topic,json=mqttTopic,proto3" json:"mqtt_topic,omitempty"`

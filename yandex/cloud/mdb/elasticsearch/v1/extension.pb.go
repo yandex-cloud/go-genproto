@@ -112,7 +112,7 @@ type ExtensionSpec struct {
 
 	// Name of the extension.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// URI of the zip archive to create the new extension from. Currently only supports links that are stored in Yandex Object Storage.
+	// URI of the zip archive to create the new extension from. Currently only supports links that are stored in Object Storage.
 	Uri string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
 	// The flag shows whether to create the extension in disabled state.
 	Disabled bool `protobuf:"varint,3,opt,name=disabled,proto3" json:"disabled,omitempty"`

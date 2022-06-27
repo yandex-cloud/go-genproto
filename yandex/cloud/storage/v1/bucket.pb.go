@@ -176,7 +176,7 @@ type ACL_Grant_GrantType int32
 
 const (
 	ACL_Grant_GRANT_TYPE_UNSPECIFIED ACL_Grant_GrantType = 0
-	// A grantee is a [Yandex Cloud account](/docs/iam/concepts/#accounts).
+	// A grantee is an [account on the platform](/docs/iam/concepts/#accounts).
 	//
 	// For this grantee type, you need to specify the user ID in [Bucket.acl.grants.grantee_id] field. To get user ID, see
 	// [instruction](/docs/iam/operations/users/get).
@@ -184,8 +184,8 @@ const (
 	// Maps to using `id="*"` value for `x-amz-grant-*` header ([bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput)
 	// method of Amazon S3-compatible HTTP API).
 	ACL_Grant_GRANT_TYPE_ACCOUNT ACL_Grant_GrantType = 1
-	// Grantees are all authenticated Yandex Cloud users, both from your clouds and other users' clouds. Access
-	// permission to this group allows any Yandex Cloud account to access the resource via a signed (authenticated)
+	// Grantees are all authenticated users, both from your clouds and other users' clouds. Access
+	// permission to this group allows any account on the platform to access the resource via a signed (authenticated)
 	// request.
 	//
 	// Maps to using `uri="http://acs.amazonaws.com/groups/global/AuthenticatedUsers"` value for `x-amz-grant-*`
@@ -369,7 +369,7 @@ const (
 	HTTPSConfig_SOURCE_TYPE_UNSPECIFIED HTTPSConfig_SourceType = 0
 	// Your certificate, uploaded directly.
 	HTTPSConfig_SOURCE_TYPE_SELF_MANAGED HTTPSConfig_SourceType = 1
-	// Certificate managed by Yandex Certificate Manager.
+	// Certificate managed by Certificate Manager.
 	HTTPSConfig_SOURCE_TYPE_MANAGED_BY_CERTIFICATE_MANAGER HTTPSConfig_SourceType = 2
 )
 
@@ -425,7 +425,7 @@ type Bucket struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the bucket.
 	//
-	// The name is unique within Yandex Cloud. For naming limitations and rules, see
+	// The name is unique within the platform. For naming limitations and rules, see
 	// [documentation](/docs/storage/concepts/bucket#naming).
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the folder that the bucket belongs to.
@@ -1472,7 +1472,7 @@ type HTTPSConfig struct {
 	NotBefore *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=not_before,json=notBefore,proto3" json:"not_before,omitempty"`
 	// End of the TLS certificate validity period (Not After field)
 	NotAfter *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=not_after,json=notAfter,proto3" json:"not_after,omitempty"`
-	// ID of the TLS certificate in Yandex Certificate Manager.
+	// ID of the TLS certificate in Certificate Manager.
 	//
 	// To get information about the certificate from Certificate Manager, make a
 	// [yandex.cloud.certificatemanager.v1.CertificateService.Get] request.
@@ -1577,7 +1577,7 @@ type ACL_Grant struct {
 	Permission ACL_Grant_Permission `protobuf:"varint,1,opt,name=permission,proto3,enum=yandex.cloud.storage.v1.ACL_Grant_Permission" json:"permission,omitempty"`
 	// The grantee type for the grant.
 	GrantType ACL_Grant_GrantType `protobuf:"varint,2,opt,name=grant_type,json=grantType,proto3,enum=yandex.cloud.storage.v1.ACL_Grant_GrantType" json:"grant_type,omitempty"`
-	// ID of the Yandex Cloud user who is a grantee. Required when the [grant_type] is `GRANT_TYPE_ACCOUNT`.
+	// ID of the account who is a grantee. Required when the [grant_type] is `GRANT_TYPE_ACCOUNT`.
 	GranteeId string `protobuf:"bytes,3,opt,name=grantee_id,json=granteeId,proto3" json:"grantee_id,omitempty"`
 }
 

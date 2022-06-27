@@ -301,17 +301,17 @@ type OriginMeta_Common struct {
 }
 
 type OriginMeta_Bucket struct {
-	// A Yandex Object Storage bucket not configured as a static site hosting.
+	// An Object Storage bucket not configured as a static site hosting.
 	Bucket *OriginNamedMeta `protobuf:"bytes,2,opt,name=bucket,proto3,oneof"`
 }
 
 type OriginMeta_Website struct {
-	// A Yandex Object Storage bucket configured as a static site hosting.
+	// An Object Storage bucket configured as a static site hosting.
 	Website *OriginNamedMeta `protobuf:"bytes,3,opt,name=website,proto3,oneof"`
 }
 
 type OriginMeta_Balancer struct {
-	// An L7 load balancer from Yandex Application Load Balancer.
+	// An L7 load balancer from Application Load Balancer.
 	// CDN servers will access the load balancer at one of its IP addresses that must be selected in the origin settings.
 	Balancer *OriginBalancerMeta `protobuf:"bytes,4,opt,name=balancer,proto3,oneof"`
 }
@@ -373,7 +373,7 @@ func (x *OriginNamedMeta) GetName() string {
 	return ""
 }
 
-// Yandex Application Load Balancer origin info. For details about the concept, see [documentation](/docs/cdn/concepts/origins).
+// Application Load Balancer origin info. For details about the concept, see [documentation](/docs/cdn/concepts/origins).
 type OriginBalancerMeta struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

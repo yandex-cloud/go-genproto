@@ -78,7 +78,7 @@ type MlModel struct {
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Type of the model.
 	Type MlModelType `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.mdb.clickhouse.v1.MlModelType" json:"type,omitempty"`
-	// Model file URL. You can only use models stored in Yandex Object Storage.
+	// Model file URL. You can only use models stored in Object Storage.
 	Uri string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 

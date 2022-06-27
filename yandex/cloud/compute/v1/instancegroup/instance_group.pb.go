@@ -3203,12 +3203,12 @@ type ScalePolicy_AutoScale struct {
 	InitialSize int64 `protobuf:"varint,6,opt,name=initial_size,json=initialSize,proto3" json:"initial_size,omitempty"`
 	// Defines an autoscaling rule based on the average CPU utilization of the instance group.
 	//
-	// If more than one rule is specified, e.g. CPU utilization and one or more Yandex Monitoring metrics ([custom_rules]),
+	// If more than one rule is specified, e.g. CPU utilization and one or more Monitoring metrics ([custom_rules]),
 	// the size of the instance group will be equal to the maximum of sizes calculated according to each metric.
 	CpuUtilizationRule *ScalePolicy_CpuUtilizationRule `protobuf:"bytes,7,opt,name=cpu_utilization_rule,json=cpuUtilizationRule,proto3" json:"cpu_utilization_rule,omitempty"`
-	// Defines an autoscaling rule based on a [custom metric](/docs/monitoring/operations/metric/add) from Yandex Monitoring.
+	// Defines an autoscaling rule based on a [custom metric](/docs/monitoring/operations/metric/add) from Monitoring.
 	//
-	// If more than one rule is specified, e.g. CPU utilization ([cpu_utilization_rule]) and one or more Yandex Monitoring
+	// If more than one rule is specified, e.g. CPU utilization ([cpu_utilization_rule]) and one or more Monitoring
 	// metrics, the size of the instance group will be equal to the maximum of sizes calculated according to each metric.
 	CustomRules []*ScalePolicy_CustomRule `protobuf:"bytes,8,rep,name=custom_rules,json=customRules,proto3" json:"custom_rules,omitempty"`
 	// Autoscaling type.
@@ -3368,15 +3368,15 @@ type ScalePolicy_CustomRule struct {
 	RuleType ScalePolicy_CustomRule_RuleType `protobuf:"varint,1,opt,name=rule_type,json=ruleType,proto3,enum=yandex.cloud.compute.v1.instancegroup.ScalePolicy_CustomRule_RuleType" json:"rule_type,omitempty"`
 	// Type of custom metric. This field affects how Instance Groups calculates the average metric value.
 	MetricType ScalePolicy_CustomRule_MetricType `protobuf:"varint,2,opt,name=metric_type,json=metricType,proto3,enum=yandex.cloud.compute.v1.instancegroup.ScalePolicy_CustomRule_MetricType" json:"metric_type,omitempty"`
-	// Name of custom metric in Yandex Monitoring that should be used for scaling.
+	// Name of custom metric in Monitoring that should be used for scaling.
 	MetricName string `protobuf:"bytes,3,opt,name=metric_name,json=metricName,proto3" json:"metric_name,omitempty"`
-	// Labels of custom metric in Yandex Monitoring that should be used for scaling.
+	// Labels of custom metric in Monitoring that should be used for scaling.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Target value for the custom metric. Instance Groups maintains this level for each availability zone.
 	Target float64 `protobuf:"fixed64,4,opt,name=target,proto3" json:"target,omitempty"`
-	// Folder id of custom metric in Yandex Monitoring that should be used for scaling.
+	// Folder id of custom metric in Monitoring that should be used for scaling.
 	FolderId string `protobuf:"bytes,6,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Service of custom metric in Yandex Monitoring that should be used for scaling.
+	// Service of custom metric in Monitoring that should be used for scaling.
 	Service string `protobuf:"bytes,7,opt,name=service,proto3" json:"service,omitempty"`
 }
 

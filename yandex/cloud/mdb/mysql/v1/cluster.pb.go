@@ -423,7 +423,7 @@ type Cluster struct {
 
 	// ID of the cluster.
 	//
-	// This ID is assigned by Yandex Cloud at the time of creation.
+	// This ID is assigned by the platform at the time of creation.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -813,8 +813,8 @@ type Host struct {
 
 	// Name of the host.
 	//
-	// This name is assigned by Yandex Cloud at the time of creation.
-	// The name is unique across all existing MDB hosts in Yandex Cloud, as it defines the FQDN of the host.
+	// This name is assigned by the platform at the time of creation.
+	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the cluster the host belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -1099,7 +1099,7 @@ type Access struct {
 	//
 	// See [the documentation](/docs/managed-mysql/operations/datalens-connect) for details.
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allows SQL queries to the cluster databases from Yandex Cloud management console.
+	// Allows SQL queries to the cluster databases from management console.
 	//
 	// See [the documentation](/docs/managed-mysql/operations/web-sql-query) for details.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`

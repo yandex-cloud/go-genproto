@@ -216,7 +216,7 @@ type Cluster struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the Greenplum® cluster.
-	// This ID is assigned by Yandex Cloud at the time of cluster creation.
+	// This ID is assigned by the platform at the time of cluster creation.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the Greenplum® cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -727,9 +727,9 @@ type Access struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Allows data export from the cluster to Yandex DataLens.
+	// Allows data export from the cluster to DataLens.
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allows SQL queries to the cluster databases from the Yandex Cloud management console.
+	// Allows SQL queries to the cluster databases from the management console.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
 	// Allow access for DataTransfer.
 	DataTransfer bool `protobuf:"varint,3,opt,name=data_transfer,json=dataTransfer,proto3" json:"data_transfer,omitempty"`

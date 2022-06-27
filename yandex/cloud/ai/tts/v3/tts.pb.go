@@ -122,16 +122,13 @@ func (ContainerAudio_ContainerAudioType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{3, 0}
 }
 
-// Normalization type
 type UtteranceSynthesisRequest_LoudnessNormalizationType int32
 
 const (
 	UtteranceSynthesisRequest_LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED UtteranceSynthesisRequest_LoudnessNormalizationType = 0
 	// The type of normalization, wherein the gain is changed to bring the highest PCM sample value or analog signal peak to a given level.
-	// The volume changes in a range (0;1], default value is 0.7.
 	UtteranceSynthesisRequest_MAX_PEAK UtteranceSynthesisRequest_LoudnessNormalizationType = 1
 	// The type of normalization based on EBU R 128 recommendation.
-	// the volume changes in a range [-145;0], default value is -19.
 	UtteranceSynthesisRequest_LUFS UtteranceSynthesisRequest_LoudnessNormalizationType = 2
 )
 
@@ -896,7 +893,9 @@ type Hints_Speed struct {
 }
 
 type Hints_Volume struct {
-	// Hint to regulate volume. For LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED normalization will use MAX_PEAK, if volume in (0, 1], LUFS if volume in [-145, 0).
+	// Hint to regulate normalization level.
+	// * For `MAX_PEAK` loudness_normalization_type: volume changes in a range (0;1], default value is 0.7.
+	// * For `LUFS` loudness_normalization_type: volume changes in a range [-145;0), default value is -19.
 	Volume float64 `protobuf:"fixed64,4,opt,name=volume,proto3,oneof"`
 }
 
@@ -933,7 +932,8 @@ type UtteranceSynthesisRequest struct {
 	Hints []*Hints `protobuf:"bytes,4,rep,name=hints,proto3" json:"hints,omitempty"`
 	// Optional. Default: 22050 Hz, linear 16-bit signed little-endian PCM, with WAV header
 	OutputAudioSpec *AudioFormatOptions `protobuf:"bytes,5,opt,name=output_audio_spec,json=outputAudioSpec,proto3" json:"output_audio_spec,omitempty"`
-	// Optional. Default: LUFS type of loudness normalization.
+	// Specifies type of loudness normalization.
+	// Optional. Default: `LUFS`.
 	LoudnessNormalizationType UtteranceSynthesisRequest_LoudnessNormalizationType `protobuf:"varint,6,opt,name=loudness_normalization_type,json=loudnessNormalizationType,proto3,enum=speechkit.tts.v3.UtteranceSynthesisRequest_LoudnessNormalizationType" json:"loudness_normalization_type,omitempty"`
 	// Optional. Automatically split long text to several utterances and bill accordingly. Some degradation in service quality is possible.
 	UnsafeMode bool `protobuf:"varint,7,opt,name=unsafe_mode,json=unsafeMode,proto3" json:"unsafe_mode,omitempty"`
