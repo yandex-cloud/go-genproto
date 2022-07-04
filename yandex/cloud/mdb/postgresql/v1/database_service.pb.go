@@ -92,7 +92,10 @@ type ListDatabasesRequest struct {
 	// ID of the PostgreSQL cluster to list databases in.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListDatabasesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, Set [page_token] to the [ListDatabasesResponse.next_page_token]
 	// returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`

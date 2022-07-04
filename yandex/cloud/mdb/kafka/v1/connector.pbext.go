@@ -30,6 +30,12 @@ func (m *ConnectorSpec) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMa
 	}
 }
 
+func (m *ConnectorSpec) SetConnectorConfigS3Sink(v *ConnectorConfigS3SinkSpec) {
+	m.ConnectorConfig = &ConnectorSpec_ConnectorConfigS3Sink{
+		ConnectorConfigS3Sink: v,
+	}
+}
+
 type UpdateConnectorSpec_ConnectorConfig = isUpdateConnectorSpec_ConnectorConfig
 
 func (m *UpdateConnectorSpec) SetConnectorConfig(v UpdateConnectorSpec_ConnectorConfig) {
@@ -47,6 +53,12 @@ func (m *UpdateConnectorSpec) SetProperties(v map[string]string) {
 func (m *UpdateConnectorSpec) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMakerSpec) {
 	m.ConnectorConfig = &UpdateConnectorSpec_ConnectorConfigMirrormaker{
 		ConnectorConfigMirrormaker: v,
+	}
+}
+
+func (m *UpdateConnectorSpec) SetConnectorConfigS3Sink(v *UpdateConnectorConfigS3SinkSpec) {
+	m.ConnectorConfig = &UpdateConnectorSpec_ConnectorConfigS3Sink{
+		ConnectorConfigS3Sink: v,
 	}
 }
 
@@ -148,6 +160,12 @@ func (m *Connector) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMaker)
 	}
 }
 
+func (m *Connector) SetConnectorConfigS3Sink(v *ConnectorConfigS3Sink) {
+	m.ConnectorConfig = &Connector_ConnectorConfigS3Sink{
+		ConnectorConfigS3Sink: v,
+	}
+}
+
 func (m *ConnectorConfigMirrorMaker) SetSourceCluster(v *ClusterConnection) {
 	m.SourceCluster = v
 }
@@ -200,4 +218,108 @@ func (m *ExternalClusterConnection) SetSaslMechanism(v string) {
 
 func (m *ExternalClusterConnection) SetSecurityProtocol(v string) {
 	m.SecurityProtocol = v
+}
+
+type S3ConnectionSpec_Storage = isS3ConnectionSpec_Storage
+
+func (m *S3ConnectionSpec) SetStorage(v S3ConnectionSpec_Storage) {
+	m.Storage = v
+}
+
+func (m *S3ConnectionSpec) SetBucketName(v string) {
+	m.BucketName = v
+}
+
+func (m *S3ConnectionSpec) SetExternalS3(v *ExternalS3StorageSpec) {
+	m.Storage = &S3ConnectionSpec_ExternalS3{
+		ExternalS3: v,
+	}
+}
+
+func (m *ExternalS3StorageSpec) SetAccessKeyId(v string) {
+	m.AccessKeyId = v
+}
+
+func (m *ExternalS3StorageSpec) SetSecretAccessKey(v string) {
+	m.SecretAccessKey = v
+}
+
+func (m *ExternalS3StorageSpec) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *ExternalS3StorageSpec) SetRegion(v string) {
+	m.Region = v
+}
+
+type S3Connection_Storage = isS3Connection_Storage
+
+func (m *S3Connection) SetStorage(v S3Connection_Storage) {
+	m.Storage = v
+}
+
+func (m *S3Connection) SetBucketName(v string) {
+	m.BucketName = v
+}
+
+func (m *S3Connection) SetExternalS3(v *ExternalS3Storage) {
+	m.Storage = &S3Connection_ExternalS3{
+		ExternalS3: v,
+	}
+}
+
+func (m *ExternalS3Storage) SetAccessKeyId(v string) {
+	m.AccessKeyId = v
+}
+
+func (m *ExternalS3Storage) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *ExternalS3Storage) SetRegion(v string) {
+	m.Region = v
+}
+
+func (m *ConnectorConfigS3Sink) SetTopics(v string) {
+	m.Topics = v
+}
+
+func (m *ConnectorConfigS3Sink) SetFileCompressionType(v string) {
+	m.FileCompressionType = v
+}
+
+func (m *ConnectorConfigS3Sink) SetFileMaxRecords(v *wrapperspb.Int64Value) {
+	m.FileMaxRecords = v
+}
+
+func (m *ConnectorConfigS3Sink) SetS3Connection(v *S3Connection) {
+	m.S3Connection = v
+}
+
+func (m *ConnectorConfigS3SinkSpec) SetTopics(v string) {
+	m.Topics = v
+}
+
+func (m *ConnectorConfigS3SinkSpec) SetFileCompressionType(v string) {
+	m.FileCompressionType = v
+}
+
+func (m *ConnectorConfigS3SinkSpec) SetFileMaxRecords(v *wrapperspb.Int64Value) {
+	m.FileMaxRecords = v
+}
+
+func (m *ConnectorConfigS3SinkSpec) SetS3Connection(v *S3ConnectionSpec) {
+	m.S3Connection = v
+}
+
+func (m *UpdateConnectorConfigS3SinkSpec) SetTopics(v string) {
+	m.Topics = v
+}
+
+func (m *UpdateConnectorConfigS3SinkSpec) SetFileMaxRecords(v *wrapperspb.Int64Value) {
+	m.FileMaxRecords = v
+}
+
+func (m *UpdateConnectorConfigS3SinkSpec) SetS3Connection(v *S3ConnectionSpec) {
+	m.S3Connection = v
 }

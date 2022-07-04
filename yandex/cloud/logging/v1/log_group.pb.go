@@ -112,7 +112,8 @@ type LogGroup struct {
 	//
 	// Entries will be present in group during this period.
 	RetentionPeriod *durationpb.Duration `protobuf:"bytes,9,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
-	DataStream      string               `protobuf:"bytes,10,opt,name=data_stream,json=dataStream,proto3" json:"data_stream,omitempty"`
+	// Data stream name
+	DataStream string `protobuf:"bytes,10,opt,name=data_stream,json=dataStream,proto3" json:"data_stream,omitempty"`
 }
 
 func (x *LogGroup) Reset() {

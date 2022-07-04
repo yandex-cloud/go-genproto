@@ -6,12 +6,20 @@ func (m *GetResourcePresetRequest) SetResourcePresetId(v string) {
 	m.ResourcePresetId = v
 }
 
+func (m *GetResourcePresetRequest) SetType(v ResourcePreset_Type) {
+	m.Type = v
+}
+
 func (m *ListResourcePresetsRequest) SetPageSize(v int64) {
 	m.PageSize = v
 }
 
 func (m *ListResourcePresetsRequest) SetPageToken(v string) {
 	m.PageToken = v
+}
+
+func (m *ListResourcePresetsRequest) SetType(v ResourcePreset_Type) {
+	m.Type = v
 }
 
 func (m *ListResourcePresetsResponse) SetResourcePresets(v []*ResourcePreset) {

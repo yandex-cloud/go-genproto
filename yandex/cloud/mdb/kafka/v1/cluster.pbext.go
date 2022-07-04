@@ -227,6 +227,22 @@ func (m *KafkaConfig2_1) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
 	m.DefaultReplicationFactor = v
 }
 
+func (m *KafkaConfig2_1) SetMessageMaxBytes(v *wrapperspb.Int64Value) {
+	m.MessageMaxBytes = v
+}
+
+func (m *KafkaConfig2_1) SetReplicaFetchMaxBytes(v *wrapperspb.Int64Value) {
+	m.ReplicaFetchMaxBytes = v
+}
+
+func (m *KafkaConfig2_1) SetSslCipherSuites(v []string) {
+	m.SslCipherSuites = v
+}
+
+func (m *KafkaConfig2_1) SetOffsetsRetentionMinutes(v *wrapperspb.Int64Value) {
+	m.OffsetsRetentionMinutes = v
+}
+
 func (m *KafkaConfig2_6) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -287,6 +303,22 @@ func (m *KafkaConfig2_6) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
 	m.DefaultReplicationFactor = v
 }
 
+func (m *KafkaConfig2_6) SetMessageMaxBytes(v *wrapperspb.Int64Value) {
+	m.MessageMaxBytes = v
+}
+
+func (m *KafkaConfig2_6) SetReplicaFetchMaxBytes(v *wrapperspb.Int64Value) {
+	m.ReplicaFetchMaxBytes = v
+}
+
+func (m *KafkaConfig2_6) SetSslCipherSuites(v []string) {
+	m.SslCipherSuites = v
+}
+
+func (m *KafkaConfig2_6) SetOffsetsRetentionMinutes(v *wrapperspb.Int64Value) {
+	m.OffsetsRetentionMinutes = v
+}
+
 func (m *KafkaConfig2_8) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -345,6 +377,22 @@ func (m *KafkaConfig2_8) SetNumPartitions(v *wrapperspb.Int64Value) {
 
 func (m *KafkaConfig2_8) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
 	m.DefaultReplicationFactor = v
+}
+
+func (m *KafkaConfig2_8) SetMessageMaxBytes(v *wrapperspb.Int64Value) {
+	m.MessageMaxBytes = v
+}
+
+func (m *KafkaConfig2_8) SetReplicaFetchMaxBytes(v *wrapperspb.Int64Value) {
+	m.ReplicaFetchMaxBytes = v
+}
+
+func (m *KafkaConfig2_8) SetSslCipherSuites(v []string) {
+	m.SslCipherSuites = v
+}
+
+func (m *KafkaConfig2_8) SetOffsetsRetentionMinutes(v *wrapperspb.Int64Value) {
+	m.OffsetsRetentionMinutes = v
 }
 
 func (m *Host) SetName(v string) {

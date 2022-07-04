@@ -100,6 +100,12 @@ func (m *Trigger_Rule) SetDataStream(v *DataStream) {
 	}
 }
 
+func (m *Trigger_Rule) SetMail(v *Mail) {
+	m.Rule = &Trigger_Rule_Mail{
+		Mail: v,
+	}
+}
+
 type Trigger_Timer_Action = isTrigger_Timer_Action
 
 func (m *Trigger_Timer) SetAction(v Trigger_Timer_Action) {
@@ -496,6 +502,28 @@ func (m *DataStream) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 
 func (m *DataStream) SetInvokeContainer(v *InvokeContainerWithRetry) {
 	m.Action = &DataStream_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
+type Mail_Action = isMail_Action
+
+func (m *Mail) SetAction(v Mail_Action) {
+	m.Action = v
+}
+
+func (m *Mail) SetEmail(v string) {
+	m.Email = v
+}
+
+func (m *Mail) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &Mail_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Mail) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Mail_InvokeContainer{
 		InvokeContainer: v,
 	}
 }

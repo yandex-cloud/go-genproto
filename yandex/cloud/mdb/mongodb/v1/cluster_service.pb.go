@@ -255,7 +255,10 @@ type ListClustersRequest struct {
 	// ID of the folder to list MongoDB clusters in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token]
 	// to the [ListClustersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -1660,8 +1663,11 @@ type ListClusterLogsRequest struct {
 	// Start timestamp for the logs request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-	ToTime   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	PageSize int64                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterLogsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListClusterLogsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -1985,7 +1991,10 @@ type ListClusterOperationsRequest struct {
 
 	// ID of the MongoDB Cluster resource to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListClusterOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -2112,7 +2121,10 @@ type ListClusterBackupsRequest struct {
 	// ID of the MongoDB cluster.
 	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.  To get the next page of results, set [page_token] to the
 	// [ListClusterBackupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -2239,7 +2251,10 @@ type ListClusterHostsRequest struct {
 	// ID of the MongoDB cluster.
 	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListClusterHostsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`

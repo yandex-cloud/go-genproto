@@ -102,6 +102,10 @@ func (m *NodeTemplate) SetName(v string) {
 	m.Name = v
 }
 
+func (m *NodeTemplate) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *NodeTemplate) SetPlatformId(v string) {
 	m.PlatformId = v
 }
