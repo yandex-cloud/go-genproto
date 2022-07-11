@@ -24,9 +24,9 @@ type ResourcePreset_Type int32
 
 const (
 	ResourcePreset_TYPE_UNSPECIFIED ResourcePreset_Type = 0
-	// Greenplum master host.
+	// Greenplum® master host.
 	ResourcePreset_MASTER ResourcePreset_Type = 1
-	// Greenplum segment host.
+	// Greenplum® segment host.
 	ResourcePreset_SEGMENT ResourcePreset_Type = 2
 )
 
@@ -71,7 +71,7 @@ func (ResourcePreset_Type) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_greenplum_v1_resource_preset_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// A preset of resources for hardware configuration of Greenplum hosts.
+// A preset of resources for hardware configuration of Greenplum® hosts.
 type ResourcePreset struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -83,15 +83,15 @@ type ResourcePreset struct {
 	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
 	// IDs of availability disk types available in the resource preset.
 	DiskTypeIds []string `protobuf:"bytes,10,rep,name=disk_type_ids,json=diskTypeIds,proto3" json:"disk_type_ids,omitempty"`
-	// Number of CPU cores for a Greenplum host created with the preset.
+	// Number of CPU cores for a Greenplum® host created with the preset.
 	Cores int64 `protobuf:"varint,3,opt,name=cores,proto3" json:"cores,omitempty"`
-	// RAM volume for a Greenplum host created with the preset, in bytes.
+	// RAM volume for a Greenplum® host created with the preset, in bytes.
 	Memory int64 `protobuf:"varint,4,opt,name=memory,proto3" json:"memory,omitempty"`
-	// Host type
+	// Host type.
 	Type ResourcePreset_Type `protobuf:"varint,5,opt,name=type,proto3,enum=yandex.cloud.mdb.greenplum.v1.ResourcePreset_Type" json:"type,omitempty"`
-	// The number of hosts must be divisible by host_count_divider
+	// The number of hosts must be divisible by [host_count_divider].
 	HostCountDivider int64 `protobuf:"varint,8,opt,name=host_count_divider,json=hostCountDivider,proto3" json:"host_count_divider,omitempty"`
-	// Max segment count in host (actual only for segment host)
+	// Maximum number of segments in segment host.
 	MaxSegmentInHostCount int64 `protobuf:"varint,9,opt,name=max_segment_in_host_count,json=maxSegmentInHostCount,proto3" json:"max_segment_in_host_count,omitempty"`
 }
 

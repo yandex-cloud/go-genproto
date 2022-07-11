@@ -25,7 +25,7 @@ const _ = grpc.SupportPackageIsVersion7
 type ClusterServiceClient interface {
 	// Returns the specified Greenplum® cluster.
 	//
-	// To get the list of available Greenplum® clusters, make a [List] request.
+	// To get the list of all available Greenplum® clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves a list of Greenplum® clusters that belong to the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
@@ -47,9 +47,9 @@ type ClusterServiceClient interface {
 	ListSegmentHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
-	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error)
-	// Retrieves the list of available backups for the specified Greenplum cluster.
+	// Retrieves a list of available backups for the specified Greenplum® cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Creates a new Greenplum® cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -218,7 +218,7 @@ func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRe
 type ClusterServiceServer interface {
 	// Returns the specified Greenplum® cluster.
 	//
-	// To get the list of available Greenplum® clusters, make a [List] request.
+	// To get the list of all available Greenplum® clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves a list of Greenplum® clusters that belong to the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
@@ -240,9 +240,9 @@ type ClusterServiceServer interface {
 	ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Retrieves logs for the specified Greenplum® cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
-	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
 	StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error
-	// Retrieves the list of available backups for the specified Greenplum cluster.
+	// Retrieves a list of available backups for the specified Greenplum® cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Creates a new Greenplum® cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)

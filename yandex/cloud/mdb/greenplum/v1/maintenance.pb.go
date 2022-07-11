@@ -26,13 +26,20 @@ type WeeklyMaintenanceWindow_WeekDay int32
 
 const (
 	WeeklyMaintenanceWindow_WEEK_DAY_UNSPECIFIED WeeklyMaintenanceWindow_WeekDay = 0
-	WeeklyMaintenanceWindow_MON                  WeeklyMaintenanceWindow_WeekDay = 1
-	WeeklyMaintenanceWindow_TUE                  WeeklyMaintenanceWindow_WeekDay = 2
-	WeeklyMaintenanceWindow_WED                  WeeklyMaintenanceWindow_WeekDay = 3
-	WeeklyMaintenanceWindow_THU                  WeeklyMaintenanceWindow_WeekDay = 4
-	WeeklyMaintenanceWindow_FRI                  WeeklyMaintenanceWindow_WeekDay = 5
-	WeeklyMaintenanceWindow_SAT                  WeeklyMaintenanceWindow_WeekDay = 6
-	WeeklyMaintenanceWindow_SUN                  WeeklyMaintenanceWindow_WeekDay = 7
+	// Monday
+	WeeklyMaintenanceWindow_MON WeeklyMaintenanceWindow_WeekDay = 1
+	// Tuesday
+	WeeklyMaintenanceWindow_TUE WeeklyMaintenanceWindow_WeekDay = 2
+	// Wednesday
+	WeeklyMaintenanceWindow_WED WeeklyMaintenanceWindow_WeekDay = 3
+	// Thursday
+	WeeklyMaintenanceWindow_THU WeeklyMaintenanceWindow_WeekDay = 4
+	// Friday
+	WeeklyMaintenanceWindow_FRI WeeklyMaintenanceWindow_WeekDay = 5
+	// Saturday
+	WeeklyMaintenanceWindow_SAT WeeklyMaintenanceWindow_WeekDay = 6
+	// Sunday
+	WeeklyMaintenanceWindow_SUN WeeklyMaintenanceWindow_WeekDay = 7
 )
 
 // Enum value maps for WeeklyMaintenanceWindow_WeekDay.
@@ -86,7 +93,6 @@ func (WeeklyMaintenanceWindow_WeekDay) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_greenplum_v1_maintenance_proto_rawDescGZIP(), []int{2, 0}
 }
 
-// A Greenplum® cluster maintenance window. Should be defined by either one of the two options.
 type MaintenanceWindow struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -266,13 +272,12 @@ func (x *WeeklyMaintenanceWindow) GetHour() int64 {
 	return 0
 }
 
-// The operation to perform during maintenance.
 type MaintenanceOperation struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The description of the operation, 1-256 characters long.
+	// The description of the operation.
 	Info string `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
 	// Delay time for the maintenance operation.
 	DelayedUntil *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`

@@ -3557,7 +3557,7 @@ func (x *AllocationPolicy_Zone) GetZoneId() string {
 	return ""
 }
 
-// Affinitity definition
+// Affinity definition
 type PlacementPolicy_HostAffinityRule struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

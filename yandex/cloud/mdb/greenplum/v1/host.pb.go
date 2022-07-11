@@ -88,7 +88,7 @@ const (
 	Host_DEAD Host_Health = 2
 	// The host is working below capacity or not fully functional.
 	Host_DEGRADED Host_Health = 3
-	// One or more segments are not in preferred role.
+	// One or more segments are not in the preferred role.
 	Host_UNBALANCED Host_Health = 4
 )
 
@@ -143,8 +143,9 @@ type Host struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the Greenplum® host. The host name is assigned by the platform at creation time and cannot be changed.
-	// 1-63 characters long.
+	// Name of the Greenplum® host.
+	//
+	// The host name is assigned by the platform at creation time and cannot be changed.
 	//
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -160,7 +161,7 @@ type Host struct {
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.greenplum.v1.Host_Health" json:"health,omitempty"`
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,7,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Whether or not a public IP is assigned to the host.
+	// Determines whether a public IP is assigned to the host.
 	AssignPublicIp bool `protobuf:"varint,8,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 }
 

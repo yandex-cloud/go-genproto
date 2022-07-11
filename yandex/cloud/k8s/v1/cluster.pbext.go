@@ -176,6 +176,10 @@ func (m *MasterEndpoints) SetExternalV4Endpoint(v string) {
 	m.ExternalV4Endpoint = v
 }
 
+func (m *MasterEndpoints) SetExternalV6Endpoint(v string) {
+	m.ExternalV6Endpoint = v
+}
+
 func (m *IPAllocationPolicy) SetClusterIpv4CidrBlock(v string) {
 	m.ClusterIpv4CidrBlock = v
 }

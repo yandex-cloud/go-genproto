@@ -26,10 +26,14 @@ type LogStatement int32
 
 const (
 	LogStatement_LOG_STATEMENT_UNSPECIFIED LogStatement = 0
-	LogStatement_NONE                      LogStatement = 1
-	LogStatement_DDL                       LogStatement = 2
-	LogStatement_MOD                       LogStatement = 3
-	LogStatement_ALL                       LogStatement = 4
+	// None statements are logged.
+	LogStatement_NONE LogStatement = 1
+	// Logs all data definition commands like `CREATE`, `ALTER`, and `DROP`. Default value.
+	LogStatement_DDL LogStatement = 2
+	// Logs all `DDL` statements, plus `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY FROM`.
+	LogStatement_MOD LogStatement = 3
+	// Logs all statements.
+	LogStatement_ALL LogStatement = 4
 )
 
 // Enum value maps for LogStatement.
@@ -77,7 +81,6 @@ func (LogStatement) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{0}
 }
 
-// Route server pool mode.
 type ConnectionPoolerConfig_PoolMode int32
 
 const (
@@ -129,13 +132,13 @@ func (ConnectionPoolerConfig_PoolMode) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{1, 0}
 }
 
-// A list of computational resources allocated to a host.
 type Resources struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the preset for computational resources allocated to a host.
+	//
 	// Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Volume of the storage used by the host, in bytes.
@@ -197,7 +200,6 @@ func (x *Resources) GetDiskTypeId() string {
 	return ""
 }
 
-// Route server configuration.
 type ConnectionPoolerConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -206,9 +208,13 @@ type ConnectionPoolerConfig struct {
 	// Route server pool mode.
 	Mode ConnectionPoolerConfig_PoolMode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig_PoolMode" json:"mode,omitempty"`
 	// The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+	//
 	// Set to zero to disable the limit.
 	Size *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=size,proto3" json:"size,omitempty"`
-	// Server pool idle timeout, in seconds. A server connection closes after it has been idle for the specified duration.
+	// Server pool idle timeout, in seconds.
+	//
+	// A server connection closes after being idle for the specified time.
+	//
 	// Set to zero to disable the limit.
 	ClientIdleTimeout *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=client_idle_timeout,json=clientIdleTimeout,proto3" json:"client_idle_timeout,omitempty"`
 }
@@ -266,7 +272,6 @@ func (x *ConnectionPoolerConfig) GetClientIdleTimeout() *wrapperspb.Int64Value {
 	return nil
 }
 
-// Configuration of the master subcluster.
 type MasterSubclusterConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -315,7 +320,6 @@ func (x *MasterSubclusterConfig) GetResources() *Resources {
 	return nil
 }
 
-// Configuration of the segment subcluster.
 type SegmentSubclusterConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -369,31 +373,45 @@ type GreenplumConfig6_17 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Maximum number of inbound connections on master segment
+	// Maximum number of inbound connections on master segment.
 	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
-	// Specify the maximum size of WAL files that replication slots are allowed to retain in the pg_wal directory at checkpoint time.
-	// https://www.postgresql.org/docs/current/runtime-config-replication.html
+	// The maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory at checkpoint time.
+	//
+	// More info in [PostgreSQL® documentation](https://www.postgresql.org/docs/current/runtime-config-replication.html).
 	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
-	// Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
-	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+	// The maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
+	//
+	// The default value is 0 (no limit).
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment).
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
-	// Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
-	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+	// The maximum disk size that an individual query is allowed to use for creating temporary spill files at each segment.
+	//
+	// The default value is 0 (no limit).
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query).
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
-	// Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
-	// Spill files are created when executing a query that requires more memory than it is allocated.
-	// The current query is terminated when the limit is exceeded.
-	// Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
-	// Default value is 10000
+	// The maximum number of temporary spill files allowed per query at each segment.
+	//
+	// Spill files, also known as workfiles, are created when a query requires more memory than there is allocated.
+	//
+	// The current query is terminated if the limit is exceeded.
+	//
+	// Set to zero to disable the limit.
+	//
+	// Master session reloads if the parameter changes.
+	//
+	// Default value is 10000.
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query).
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
-	// Sets the maximum number of transactions that can be in the "prepared" state simultaneously
-	// https://www.postgresql.org/docs/9.6/runtime-config-resource.html
+	// The maximum number of transactions that can be in the `prepared` state simultaneously.
+	//
+	// More info in [PostgreSQL® documentation](https://www.postgresql.org/docs/9.6/runtime-config-resource.html).
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
-	// Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+	// Whether the spill files are compressed or not.
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression).
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
 }
 
@@ -483,44 +501,64 @@ type GreenplumConfig6_19 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Maximum number of inbound connections on master segment
+	// Maximum number of inbound connections on master segment.
 	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
-	// Specify the maximum size of WAL files that replication slots are allowed to retain in the pg_wal directory at checkpoint time.
-	// https://www.postgresql.org/docs/current/runtime-config-replication.html
+	// The maximum size of WAL files that replication slots are allowed to retain in the `pg_wal` directory at checkpoint time.
+	//
+	// More info in [PostgreSQL® documentation](https://www.postgresql.org/docs/current/runtime-config-replication.html).
 	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
-	// Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
-	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+	// The maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
+	//
+	// The default value is 0 (no limit).
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment).
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
-	// Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
-	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+	// The maximum disk size that an individual query is allowed to use for creating temporary spill files at each segment.
+	//
+	// The default value is 0 (no limit).
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query).
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
-	// Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
-	// Spill files are created when executing a query that requires more memory than it is allocated.
-	// The current query is terminated when the limit is exceeded.
-	// Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
-	// Default value is 10000
+	// The maximum number of temporary spill files allowed per query at each segment.
+	//
+	// Spill files, also known as workfiles, are created when a query requires more memory than there is allocated.
+	//
+	// The current query is terminated if the limit is exceeded.
+	//
+	// Set to zero to disable the limit.
+	//
+	// Master session reloads if the parameter changes.
+	//
+	// Default value is 10000.
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query).
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
-	// Sets the maximum number of transactions that can be in the "prepared" state simultaneously
-	// https://www.postgresql.org/docs/9.6/runtime-config-resource.html
+	// The maximum number of transactions that can be in the `prepared` state simultaneously.
+	//
+	// More info in [PostgreSQL® documentation](https://www.postgresql.org/docs/9.6/runtime-config-resource.html).
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
-	// Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+	// Whether the spill files are compressed or not.
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression).
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
-	// Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
-	// Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
-	// (seghost_physical_memory) / (average_number_concurrent_queries)
-	// When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
-	// https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
-	// Default value is 2097152000 (2000MB)
+	// The maximum memory limit for a query, in bytes.
+	//
+	// Helps to avoid out-of-memory errors on a segment host during query processing as a result of setting `statement_mem` too high.
+	//
+	// Taking into account the configuration of a single segment host, calculate [max_statement_mem] as follows: `seghost_physical_memory` / `average_number_concurrent_queries`.
+	//
+	// When changing both [max_statement_mem] and `statement_mem`, [max_statement_mem] must be changed first, or listed first in the `postgresql.conf` file.
+	//
+	// Default value is 2097152000 (2000 MB).
+	//
+	// More info in [Greenplum® documentation](https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem).
 	MaxStatementMem *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_statement_mem,json=maxStatementMem,proto3" json:"max_statement_mem,omitempty"` // in bytes
-	// Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
-	// MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
-	// PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
-	// Default value is ddl
+	// Logged SQL statements.
+	//
+	// `PREPARE` and `EXPLAIN ANALYZE` statements are also logged if their contained command belongs to an appropriate type.
+	//
+	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement).
+	//
 	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
 }
 
@@ -619,17 +657,17 @@ func (x *GreenplumConfig6_19) GetLogStatement() LogStatement {
 	return LogStatement_LOG_STATEMENT_UNSPECIFIED
 }
 
+// Configuration settings version 6.17
 type GreenplumConfigSet6_17 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a Greenplum (a combination of settings defined
-	// in [user_config] and [default_config]).
+	// Effective settings for a Greenplum® cluster (a combination of settings defined in [GreenplumConfigSet6_17.user_config] and [GreenplumConfigSet6_17.default_config]).
 	EffectiveConfig *GreenplumConfig6_17 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Greenplum.
+	// User-defined settings for a Greenplum® cluster.
 	UserConfig *GreenplumConfig6_17 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Greenplum.
+	// Default configuration for a Greenplum® cluster.
 	DefaultConfig *GreenplumConfig6_17 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 }
 
@@ -686,17 +724,17 @@ func (x *GreenplumConfigSet6_17) GetDefaultConfig() *GreenplumConfig6_17 {
 	return nil
 }
 
+// Configuration settings version 6.19
 type GreenplumConfigSet6_19 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a Greenplum (a combination of settings defined
-	// in [user_config] and [default_config]).
+	// Effective settings for a Greenplum® cluster (a combination of settings defined in [GreenplumConfigSet6_19.user_config] and [GreenplumConfigSet6_19.default_config]).
 	EffectiveConfig *GreenplumConfig6_19 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Greenplum.
+	// User-defined settings for a Greenplum® cluster.
 	UserConfig *GreenplumConfig6_19 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Greenplum.
+	// Default configuration for a Greenplum® cluster.
 	DefaultConfig *GreenplumConfig6_19 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 }
 
@@ -758,12 +796,11 @@ type ConnectionPoolerConfigSet struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a odyssey (a combination of settings defined
-	// in [user_config] and [default_config]).
+	// Effective settings for an Odyssey® pooler (a combination of settings defined in [ConnectionPoolerConfigSet.user_config] and [ConnectionPoolerConfigSet.default_config]).
 	EffectiveConfig *ConnectionPoolerConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a odyssey.
+	// User-defined settings for an Odyssey® pooler.
 	UserConfig *ConnectionPoolerConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a odyssey.
+	// Default configuration for an Odyssey® pooler.
 	DefaultConfig *ConnectionPoolerConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 }
 

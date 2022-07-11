@@ -240,7 +240,7 @@ type ListClustersRequest struct {
 	// If the number of available results is larger than `page_size`, the service returns a [ListClustersResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	// To get the next page of results, set `page_token` to the [ListClustersResponse.next_page_token] returned by a previous list request.
+	// To get the next page of results, set `page_token` to the [ListClustersResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	//
@@ -894,7 +894,7 @@ type ListClusterLogsRequest struct {
 	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
 	//
-	// To get the next page of results, set `page_token` to the [ListClusterLogsResponse.next_page_token] returned by a previous list request.
+	// To get the next page of results, set `page_token` to the [ListClusterLogsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,6,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// The flag that defines behavior of providing the next page token.
 	//
@@ -1322,7 +1322,7 @@ type ListClusterOperationsRequest struct {
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
 	//
-	// To get the next page of results, set `page_token` to the [ListClusterOperationsResponse.next_page_token] returned by a previous list request.
+	// To get the next page of results, set `page_token` to the [ListClusterOperationsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -1454,7 +1454,7 @@ type ListClusterHostsRequest struct {
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
 	//
-	// To get the next page of results, set `page_token` to the [ListClusterHostsResponse.next_page_token] returned by a previous list request.
+	// To get the next page of results, set `page_token` to the [ListClusterHostsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 

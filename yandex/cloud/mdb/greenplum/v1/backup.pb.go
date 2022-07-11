@@ -30,14 +30,13 @@ type Backup struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the backup belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format
-	// (i.e. when the backup operation was completed).
+	// Time when the backup operation was completed.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// ID of the PostgreSQL cluster that the backup was created for.
+	// ID of the Greenplum® cluster that the backup was created for.
 	SourceClusterId string `protobuf:"bytes,4,opt,name=source_cluster_id,json=sourceClusterId,proto3" json:"source_cluster_id,omitempty"`
 	// Time when the backup operation was started.
 	StartedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
-	// Size of backup in bytes
+	// Size of the backup in bytes.
 	Size int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
 }
 

@@ -71,6 +71,10 @@ func (m *CreateInstanceRequest) SetMetadata(v map[string]string) {
 	m.Metadata = v
 }
 
+func (m *CreateInstanceRequest) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *CreateInstanceRequest) SetBootDiskSpec(v *AttachedDiskSpec) {
 	m.BootDiskSpec = v
 }
@@ -145,6 +149,10 @@ func (m *UpdateInstanceRequest) SetResourcesSpec(v *ResourcesSpec) {
 
 func (m *UpdateInstanceRequest) SetMetadata(v map[string]string) {
 	m.Metadata = v
+}
+
+func (m *UpdateInstanceRequest) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
 }
 
 func (m *UpdateInstanceRequest) SetServiceAccountId(v string) {

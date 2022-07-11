@@ -240,7 +240,7 @@ type ListClustersRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token]
-	// returned by a previous list request.
+	// returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
@@ -1802,7 +1802,7 @@ type ListClusterLogsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.  To get the next page of results, set [page_token] to the [ListClusterLogsResponse.next_page_token]
-	// returned by a previous list request.
+	// returned by the previous list request.
 	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -2131,7 +2131,7 @@ type ListClusterOperationsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.  To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token]
-	// returned by a previous list request.
+	// returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -2261,7 +2261,7 @@ type ListClusterBackupsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
-	// [ListClusterBackupsResponse.next_page_token] returned by a previous list request.
+	// [ListClusterBackupsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -2391,7 +2391,7 @@ type ListClusterHostsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.  To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token]
-	// returned by a previous list request.
+	// returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -3002,7 +3002,7 @@ type ListClusterShardsRequest struct {
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.  to get the next page of results, set [page_token] to the [ListClusterShardsResponse.next_page_token]
-	// returned by a previous list request.
+	// returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -3587,7 +3587,7 @@ type ListClusterShardGroupsRequest struct {
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
 	//
-	// To get the next page of results, set [page_token] to the [ListClusterShardGroupsResponse.next_page_token] returned by a previous list request.
+	// To get the next page of results, set [page_token] to the [ListClusterShardGroupsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 

@@ -50,6 +50,10 @@ func (m *Instance) SetMetadata(v map[string]string) {
 	m.Metadata = v
 }
 
+func (m *Instance) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *Instance) SetBootDisk(v *AttachedDisk) {
 	m.BootDisk = v
 }
@@ -232,4 +236,20 @@ func (m *PlacementPolicy_HostAffinityRule) SetOp(v PlacementPolicy_HostAffinityR
 
 func (m *PlacementPolicy_HostAffinityRule) SetValues(v []string) {
 	m.Values = v
+}
+
+func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {
+	m.GceHttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetAwsV1HttpEndpoint(v MetadataOption) {
+	m.AwsV1HttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetGceHttpToken(v MetadataOption) {
+	m.GceHttpToken = v
+}
+
+func (m *MetadataOptions) SetAwsV1HttpToken(v MetadataOption) {
+	m.AwsV1HttpToken = v
 }

@@ -329,8 +329,16 @@ func (m *RegionalMasterSpec) SetExternalV4AddressSpec(v *ExternalAddressSpec) {
 	m.ExternalV4AddressSpec = v
 }
 
+func (m *RegionalMasterSpec) SetExternalV6AddressSpec(v *ExternalAddressSpec) {
+	m.ExternalV6AddressSpec = v
+}
+
 func (m *InternalAddressSpec) SetSubnetId(v string) {
 	m.SubnetId = v
+}
+
+func (m *ExternalAddressSpec) SetAddress(v string) {
+	m.Address = v
 }
 
 func (m *MasterLocation) SetZoneId(v string) {

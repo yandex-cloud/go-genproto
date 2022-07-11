@@ -101,7 +101,7 @@ type ListUsersRequest struct {
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
 	//
-	// To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token] returned by a previous list request.
+	// To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
