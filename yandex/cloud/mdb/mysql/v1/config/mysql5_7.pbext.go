@@ -286,6 +286,10 @@ func (m *MysqlConfig5_7) SetInnodbCompressionLevel(v *wrapperspb.Int64Value) {
 	m.InnodbCompressionLevel = v
 }
 
+func (m *MysqlConfig5_7) SetBinlogTransactionDependencyTracking(v MysqlConfig5_7_BinlogTransactionDependencyTracking) {
+	m.BinlogTransactionDependencyTracking = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

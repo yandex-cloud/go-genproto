@@ -115,6 +115,14 @@ func (m *AddDomainRequest) SetDomainId(v string) {
 	m.DomainId = v
 }
 
+func (m *AddDomainRequest) SetDomainName(v string) {
+	m.DomainName = v
+}
+
+func (m *AddDomainRequest) SetCertificateId(v string) {
+	m.CertificateId = v
+}
+
 func (m *RemoveDomainRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
@@ -141,6 +149,10 @@ func (m *AddDomainMetadata) SetApiGatewayId(v string) {
 
 func (m *AddDomainMetadata) SetDomainId(v string) {
 	m.DomainId = v
+}
+
+func (m *AddDomainMetadata) SetDomainName(v string) {
+	m.DomainName = v
 }
 
 func (m *RemoveDomainMetadata) SetApiGatewayId(v string) {
