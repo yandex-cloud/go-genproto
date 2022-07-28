@@ -112,6 +112,10 @@ func (m *Database) SetMonitoringConfig(v *MonitoringConfig) {
 	m.MonitoringConfig = v
 }
 
+func (m *Database) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 type AlertParameter_Parameter = isAlertParameter_Parameter
 
 func (m *AlertParameter) SetParameter(v AlertParameter_Parameter) {

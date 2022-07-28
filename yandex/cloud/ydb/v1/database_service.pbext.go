@@ -6,6 +6,22 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
+func (m *MoveDatabaseRequest) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *MoveDatabaseRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveDatabaseMetadata) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *MoveDatabaseMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
 func (m *RestoreBackupRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
@@ -176,6 +192,10 @@ func (m *CreateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
 	m.MonitoringConfig = v
 }
 
+func (m *CreateDatabaseRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *CreateDatabaseMetadata) SetDatabaseId(v string) {
 	m.DatabaseId = v
 }
@@ -272,6 +292,10 @@ func (m *UpdateDatabaseRequest) SetBackupConfig(v *BackupConfig) {
 
 func (m *UpdateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
 	m.MonitoringConfig = v
+}
+
+func (m *UpdateDatabaseRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateDatabaseMetadata) SetDatabaseId(v string) {

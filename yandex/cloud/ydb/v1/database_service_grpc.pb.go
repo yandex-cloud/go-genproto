@@ -36,6 +36,7 @@ type DatabaseServiceClient interface {
 	Start(ctx context.Context, in *StartDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified database.
 	Stop(ctx context.Context, in *StopDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Move(ctx context.Context, in *MoveDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -102,6 +103,15 @@ func (c *databaseServiceClient) Start(ctx context.Context, in *StartDatabaseRequ
 func (c *databaseServiceClient) Stop(ctx context.Context, in *StopDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.ydb.v1.DatabaseService/Stop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *databaseServiceClient) Move(ctx context.Context, in *MoveDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.ydb.v1.DatabaseService/Move", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -178,6 +188,7 @@ type DatabaseServiceServer interface {
 	Start(context.Context, *StartDatabaseRequest) (*operation.Operation, error)
 	// Stops the specified database.
 	Stop(context.Context, *StopDatabaseRequest) (*operation.Operation, error)
+	Move(context.Context, *MoveDatabaseRequest) (*operation.Operation, error)
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
@@ -209,6 +220,9 @@ func (UnimplementedDatabaseServiceServer) Start(context.Context, *StartDatabaseR
 }
 func (UnimplementedDatabaseServiceServer) Stop(context.Context, *StopDatabaseRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedDatabaseServiceServer) Move(context.Context, *MoveDatabaseRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedDatabaseServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -344,6 +358,24 @@ func _DatabaseService_Stop_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DatabaseServiceServer).Stop(ctx, req.(*StopDatabaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DatabaseService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveDatabaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.ydb.v1.DatabaseService/Move",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseServiceServer).Move(ctx, req.(*MoveDatabaseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -486,6 +518,10 @@ var DatabaseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _DatabaseService_Stop_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _DatabaseService_Move_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",
