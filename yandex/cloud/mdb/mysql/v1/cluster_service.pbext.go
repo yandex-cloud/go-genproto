@@ -8,6 +8,7 @@ import (
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -554,4 +555,8 @@ func (m *ConfigSpec) SetAccess(v *Access) {
 
 func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 	m.PerformanceDiagnostics = v
+}
+
+func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
+	m.BackupRetainPeriodDays = v
 }

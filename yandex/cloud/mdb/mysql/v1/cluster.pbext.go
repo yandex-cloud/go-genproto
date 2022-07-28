@@ -6,6 +6,7 @@ import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1/config"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -124,6 +125,10 @@ func (m *ClusterConfig) SetAccess(v *Access) {
 
 func (m *ClusterConfig) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 	m.PerformanceDiagnostics = v
+}
+
+func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
+	m.BackupRetainPeriodDays = v
 }
 
 func (m *Host) SetName(v string) {
