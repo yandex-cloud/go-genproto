@@ -695,6 +695,26 @@ func (m *CreateClusterExternalDictionaryMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *UpdateClusterExternalDictionaryRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterExternalDictionaryRequest) SetExternalDictionary(v *config.ClickhouseConfig_ExternalDictionary) {
+	m.ExternalDictionary = v
+}
+
+func (m *UpdateClusterExternalDictionaryRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateClusterExternalDictionaryMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterExternalDictionaryMetadata) SetExternalDictionaryName(v string) {
+	m.ExternalDictionaryName = v
+}
+
 func (m *DeleteClusterExternalDictionaryRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

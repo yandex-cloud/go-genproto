@@ -30,7 +30,7 @@ type GetConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the cluster the connector belongs to.
+	// ID of the Apache Kafka® cluster the connector belongs to.
 	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -419,7 +419,7 @@ type UpdateConnectorMetadata struct {
 
 	// ID of the Apache Kafka® cluster the connector is being updated in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Apache Kafka connector that is being updated.
+	// Name of the Apache Kafka® connector that is being updated.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 }
 

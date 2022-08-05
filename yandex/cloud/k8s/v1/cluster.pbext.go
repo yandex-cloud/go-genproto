@@ -168,6 +168,10 @@ func (m *RegionalMaster) SetExternalV4Address(v string) {
 	m.ExternalV4Address = v
 }
 
+func (m *RegionalMaster) SetExternalV6Address(v string) {
+	m.ExternalV6Address = v
+}
+
 func (m *MasterEndpoints) SetInternalV4Endpoint(v string) {
 	m.InternalV4Endpoint = v
 }

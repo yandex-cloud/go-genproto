@@ -89,6 +89,10 @@ func (m *CreateDiskRequest) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
 	m.DiskPlacementPolicy = v
 }
 
+func (m *CreateDiskRequest) SetSnapshotScheduleIds(v []string) {
+	m.SnapshotScheduleIds = v
+}
+
 func (m *CreateDiskMetadata) SetDiskId(v string) {
 	m.DiskId = v
 }
@@ -171,4 +175,24 @@ func (m *MoveDiskMetadata) SetSourceFolderId(v string) {
 
 func (m *MoveDiskMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
+}
+
+func (m *ListDiskSnapshotSchedulesRequest) SetDiskId(v string) {
+	m.DiskId = v
+}
+
+func (m *ListDiskSnapshotSchedulesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDiskSnapshotSchedulesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListDiskSnapshotSchedulesResponse) SetSnapshotSchedules(v []*SnapshotSchedule) {
+	m.SnapshotSchedules = v
+}
+
+func (m *ListDiskSnapshotSchedulesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

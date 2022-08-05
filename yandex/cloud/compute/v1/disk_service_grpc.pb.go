@@ -47,6 +47,8 @@ type DiskServiceClient interface {
 	ListOperations(ctx context.Context, in *ListDiskOperationsRequest, opts ...grpc.CallOption) (*ListDiskOperationsResponse, error)
 	// Moves the specified disk to another folder of the same cloud.
 	Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// List snapshot schedules containing the disk
+	ListSnapshotSchedules(ctx context.Context, in *ListDiskSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListDiskSnapshotSchedulesResponse, error)
 }
 
 type diskServiceClient struct {
@@ -120,6 +122,15 @@ func (c *diskServiceClient) Move(ctx context.Context, in *MoveDiskRequest, opts 
 	return out, nil
 }
 
+func (c *diskServiceClient) ListSnapshotSchedules(ctx context.Context, in *ListDiskSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListDiskSnapshotSchedulesResponse, error) {
+	out := new(ListDiskSnapshotSchedulesResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.compute.v1.DiskService/ListSnapshotSchedules", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DiskServiceServer is the server API for DiskService service.
 // All implementations should embed UnimplementedDiskServiceServer
 // for forward compatibility
@@ -148,6 +159,8 @@ type DiskServiceServer interface {
 	ListOperations(context.Context, *ListDiskOperationsRequest) (*ListDiskOperationsResponse, error)
 	// Moves the specified disk to another folder of the same cloud.
 	Move(context.Context, *MoveDiskRequest) (*operation.Operation, error)
+	// List snapshot schedules containing the disk
+	ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error)
 }
 
 // UnimplementedDiskServiceServer should be embedded to have forward compatible implementations.
@@ -174,6 +187,9 @@ func (UnimplementedDiskServiceServer) ListOperations(context.Context, *ListDiskO
 }
 func (UnimplementedDiskServiceServer) Move(context.Context, *MoveDiskRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedDiskServiceServer) ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSnapshotSchedules not implemented")
 }
 
 // UnsafeDiskServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -313,6 +329,24 @@ func _DiskService_Move_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DiskService_ListSnapshotSchedules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDiskSnapshotSchedulesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskServiceServer).ListSnapshotSchedules(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.compute.v1.DiskService/ListSnapshotSchedules",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskServiceServer).ListSnapshotSchedules(ctx, req.(*ListDiskSnapshotSchedulesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DiskService_ServiceDesc is the grpc.ServiceDesc for DiskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -347,6 +381,10 @@ var DiskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _DiskService_Move_Handler,
+		},
+		{
+			MethodName: "ListSnapshotSchedules",
+			Handler:    _DiskService_ListSnapshotSchedules_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -62,6 +62,12 @@ func (m *StaticRoute) SetNextHopAddress(v string) {
 	}
 }
 
+func (m *StaticRoute) SetGatewayId(v string) {
+	m.NextHop = &StaticRoute_GatewayId{
+		GatewayId: v,
+	}
+}
+
 func (m *StaticRoute) SetLabels(v map[string]string) {
 	m.Labels = v
 }
