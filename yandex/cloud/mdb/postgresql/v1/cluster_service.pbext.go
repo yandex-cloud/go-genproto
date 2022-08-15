@@ -581,9 +581,21 @@ func (m *ConfigSpec) SetPostgresqlConfig_13(v *config.PostgresqlConfig13) {
 	}
 }
 
+func (m *ConfigSpec) SetPostgresqlConfig_13_1C(v *config.PostgresqlConfig13_1C) {
+	m.PostgresqlConfig = &ConfigSpec_PostgresqlConfig_13_1C{
+		PostgresqlConfig_13_1C: v,
+	}
+}
+
 func (m *ConfigSpec) SetPostgresqlConfig_14(v *config.PostgresqlConfig14) {
 	m.PostgresqlConfig = &ConfigSpec_PostgresqlConfig_14{
 		PostgresqlConfig_14: v,
+	}
+}
+
+func (m *ConfigSpec) SetPostgresqlConfig_14_1C(v *config.PostgresqlConfig14_1C) {
+	m.PostgresqlConfig = &ConfigSpec_PostgresqlConfig_14_1C{
+		PostgresqlConfig_14_1C: v,
 	}
 }
 
@@ -669,8 +681,20 @@ func (m *ConfigHostSpec) SetPostgresqlConfig_13(v *config.PostgresqlHostConfig13
 	}
 }
 
+func (m *ConfigHostSpec) SetPostgresqlConfig_13_1C(v *config.PostgresqlHostConfig13_1C) {
+	m.PostgresqlConfig = &ConfigHostSpec_PostgresqlConfig_13_1C{
+		PostgresqlConfig_13_1C: v,
+	}
+}
+
 func (m *ConfigHostSpec) SetPostgresqlConfig_14(v *config.PostgresqlHostConfig14) {
 	m.PostgresqlConfig = &ConfigHostSpec_PostgresqlConfig_14{
 		PostgresqlConfig_14: v,
+	}
+}
+
+func (m *ConfigHostSpec) SetPostgresqlConfig_14_1C(v *config.PostgresqlHostConfig14_1C) {
+	m.PostgresqlConfig = &ConfigHostSpec_PostgresqlConfig_14_1C{
+		PostgresqlConfig_14_1C: v,
 	}
 }

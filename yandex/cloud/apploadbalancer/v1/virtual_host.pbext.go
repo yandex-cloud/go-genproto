@@ -178,6 +178,12 @@ func (m *StringMatch) SetPrefixMatch(v string) {
 	}
 }
 
+func (m *StringMatch) SetRegexMatch(v string) {
+	m.Match = &StringMatch_RegexMatch{
+		RegexMatch: v,
+	}
+}
+
 type RedirectAction_Path = isRedirectAction_Path
 
 func (m *RedirectAction) SetPath(v RedirectAction_Path) {

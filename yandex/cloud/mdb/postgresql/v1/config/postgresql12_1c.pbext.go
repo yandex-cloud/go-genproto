@@ -314,6 +314,10 @@ func (m *PostgresqlConfig12_1C) SetTrackActivityQuerySize(v *wrapperspb.Int64Val
 	m.TrackActivityQuerySize = v
 }
 
+func (m *PostgresqlConfig12_1C) SetOnlineAnalyzeEnable(v *wrapperspb.BoolValue) {
+	m.OnlineAnalyzeEnable = v
+}
+
 func (m *PostgresqlConfig12_1C) SetEnableBitmapscan(v *wrapperspb.BoolValue) {
 	m.EnableBitmapscan = v
 }
@@ -508,6 +512,10 @@ func (m *PostgresqlConfig12_1C) SetPgQualstatsResolveOids(v *wrapperspb.BoolValu
 
 func (m *PostgresqlConfig12_1C) SetPgQualstatsSampleRate(v *wrapperspb.DoubleValue) {
 	m.PgQualstatsSampleRate = v
+}
+
+func (m *PostgresqlConfig12_1C) SetPlantunerFixEmptyTable(v *wrapperspb.BoolValue) {
+	m.PlantunerFixEmptyTable = v
 }
 
 func (m *PostgresqlConfigSet12_1C) SetEffectiveConfig(v *PostgresqlConfig12_1C) {

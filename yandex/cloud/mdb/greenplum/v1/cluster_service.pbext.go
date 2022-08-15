@@ -194,6 +194,26 @@ func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *AddClusterHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ExpandRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ExpandRequest) SetSegmentHostCount(v int64) {
+	m.SegmentHostCount = v
+}
+
+func (m *ExpandRequest) SetAddSegmentsPerHostCount(v int64) {
+	m.AddSegmentsPerHostCount = v
+}
+
+func (m *ExpandRequest) SetDuration(v int64) {
+	m.Duration = v
+}
+
 func (m *DeleteClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

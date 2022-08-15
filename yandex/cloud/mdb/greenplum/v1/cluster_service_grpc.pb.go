@@ -33,6 +33,8 @@ type ClusterServiceClient interface {
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified Greenplum® cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Expands the specified Greenplum® cluster.
+	Expand(ctx context.Context, in *ExpandRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Greenplum® cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts the specified Greenplum® cluster.
@@ -93,6 +95,15 @@ func (c *clusterServiceClient) Create(ctx context.Context, in *CreateClusterRequ
 func (c *clusterServiceClient) Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.greenplum.v1.ClusterService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Expand(ctx context.Context, in *ExpandRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.greenplum.v1.ClusterService/Expand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -226,6 +237,8 @@ type ClusterServiceServer interface {
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
 	// Updates the specified Greenplum® cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
+	// Expands the specified Greenplum® cluster.
+	Expand(context.Context, *ExpandRequest) (*operation.Operation, error)
 	// Deletes the specified Greenplum® cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
 	// Starts the specified Greenplum® cluster.
@@ -263,6 +276,9 @@ func (UnimplementedClusterServiceServer) Create(context.Context, *CreateClusterR
 }
 func (UnimplementedClusterServiceServer) Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedClusterServiceServer) Expand(context.Context, *ExpandRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Expand not implemented")
 }
 func (UnimplementedClusterServiceServer) Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -374,6 +390,24 @@ func _ClusterService_Update_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Update(ctx, req.(*UpdateClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Expand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExpandRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Expand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.greenplum.v1.ClusterService/Expand",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Expand(ctx, req.(*ExpandRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -583,6 +617,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _ClusterService_Update_Handler,
+		},
+		{
+			MethodName: "Expand",
+			Handler:    _ClusterService_Expand_Handler,
 		},
 		{
 			MethodName: "Delete",

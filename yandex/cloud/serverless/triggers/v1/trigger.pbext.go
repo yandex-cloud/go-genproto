@@ -64,6 +64,12 @@ func (m *Trigger_Rule) SetIotMessage(v *Trigger_IoTMessage) {
 	}
 }
 
+func (m *Trigger_Rule) SetIotBrokerMessage(v *Trigger_IoTBrokerMessage) {
+	m.Rule = &Trigger_Rule_IotBrokerMessage{
+		IotBrokerMessage: v,
+	}
+}
+
 func (m *Trigger_Rule) SetObjectStorage(v *Trigger_ObjectStorage) {
 	m.Rule = &Trigger_Rule_ObjectStorage{
 		ObjectStorage: v,
@@ -194,6 +200,32 @@ func (m *Trigger_IoTMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 
 func (m *Trigger_IoTMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
 	m.Action = &Trigger_IoTMessage_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
+type Trigger_IoTBrokerMessage_Action = isTrigger_IoTBrokerMessage_Action
+
+func (m *Trigger_IoTBrokerMessage) SetAction(v Trigger_IoTBrokerMessage_Action) {
+	m.Action = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetBrokerId(v string) {
+	m.BrokerId = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetMqttTopic(v string) {
+	m.MqttTopic = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &Trigger_IoTBrokerMessage_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_IoTBrokerMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_IoTBrokerMessage_InvokeContainer{
 		InvokeContainer: v,
 	}
 }
