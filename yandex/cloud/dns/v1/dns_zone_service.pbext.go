@@ -171,6 +171,14 @@ func (m *UpsertRecordSetsRequest) SetMerges(v []*RecordSet) {
 	m.Merges = v
 }
 
+func (m *RecordSetDiff) SetAdditions(v []*RecordSet) {
+	m.Additions = v
+}
+
+func (m *RecordSetDiff) SetDeletions(v []*RecordSet) {
+	m.Deletions = v
+}
+
 func (m *ListDnsZoneOperationsRequest) SetDnsZoneId(v string) {
 	m.DnsZoneId = v
 }

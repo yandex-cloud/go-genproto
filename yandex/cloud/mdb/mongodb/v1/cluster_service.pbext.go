@@ -227,6 +227,10 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *RestoreClusterRequest_RecoveryTargetSpec) SetTimestamp(v int64) {
 	m.Timestamp = v
 }
@@ -963,6 +967,110 @@ func (m *MongodbSpec5_0Enterprise_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *MongodbSpec6_0) SetMongod(v *MongodbSpec6_0_Mongod) {
+	m.Mongod = v
+}
+
+func (m *MongodbSpec6_0) SetMongocfg(v *MongodbSpec6_0_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *MongodbSpec6_0) SetMongos(v *MongodbSpec6_0_Mongos) {
+	m.Mongos = v
+}
+
+func (m *MongodbSpec6_0) SetMongoinfra(v *MongodbSpec6_0_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *MongodbSpec6_0_Mongod) SetConfig(v *config.MongodConfig6_0) {
+	m.Config = v
+}
+
+func (m *MongodbSpec6_0_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0_MongoCfg) SetConfig(v *config.MongoCfgConfig6_0) {
+	m.Config = v
+}
+
+func (m *MongodbSpec6_0_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0_Mongos) SetConfig(v *config.MongosConfig6_0) {
+	m.Config = v
+}
+
+func (m *MongodbSpec6_0_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0_MongoInfra) SetConfigMongos(v *config.MongosConfig6_0) {
+	m.ConfigMongos = v
+}
+
+func (m *MongodbSpec6_0_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfig6_0) {
+	m.ConfigMongocfg = v
+}
+
+func (m *MongodbSpec6_0_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0Enterprise) SetMongod(v *MongodbSpec6_0Enterprise_Mongod) {
+	m.Mongod = v
+}
+
+func (m *MongodbSpec6_0Enterprise) SetMongocfg(v *MongodbSpec6_0Enterprise_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *MongodbSpec6_0Enterprise) SetMongos(v *MongodbSpec6_0Enterprise_Mongos) {
+	m.Mongos = v
+}
+
+func (m *MongodbSpec6_0Enterprise) SetMongoinfra(v *MongodbSpec6_0Enterprise_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *MongodbSpec6_0Enterprise_Mongod) SetConfig(v *config.MongodConfig6_0Enterprise) {
+	m.Config = v
+}
+
+func (m *MongodbSpec6_0Enterprise_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0Enterprise_MongoCfg) SetConfig(v *config.MongoCfgConfig6_0Enterprise) {
+	m.Config = v
+}
+
+func (m *MongodbSpec6_0Enterprise_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0Enterprise_Mongos) SetConfig(v *config.MongosConfig6_0Enterprise) {
+	m.Config = v
+}
+
+func (m *MongodbSpec6_0Enterprise_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec6_0Enterprise_MongoInfra) SetConfigMongos(v *config.MongosConfig6_0Enterprise) {
+	m.ConfigMongos = v
+}
+
+func (m *MongodbSpec6_0Enterprise_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfig6_0Enterprise) {
+	m.ConfigMongocfg = v
+}
+
+func (m *MongodbSpec6_0Enterprise_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
 type ConfigSpec_MongodbSpec = isConfigSpec_MongodbSpec
 
 func (m *ConfigSpec) SetMongodbSpec(v ConfigSpec_MongodbSpec) {
@@ -1007,6 +1115,12 @@ func (m *ConfigSpec) SetMongodbSpec_5_0(v *MongodbSpec5_0) {
 	}
 }
 
+func (m *ConfigSpec) SetMongodbSpec_6_0(v *MongodbSpec6_0) {
+	m.MongodbSpec = &ConfigSpec_MongodbSpec_6_0{
+		MongodbSpec_6_0: v,
+	}
+}
+
 func (m *ConfigSpec) SetMongodbSpec_4_4Enterprise(v *MongodbSpec4_4Enterprise) {
 	m.MongodbSpec = &ConfigSpec_MongodbSpec_4_4Enterprise{
 		MongodbSpec_4_4Enterprise: v,
@@ -1019,12 +1133,22 @@ func (m *ConfigSpec) SetMongodbSpec_5_0Enterprise(v *MongodbSpec5_0Enterprise) {
 	}
 }
 
+func (m *ConfigSpec) SetMongodbSpec_6_0Enterprise(v *MongodbSpec6_0Enterprise) {
+	m.MongodbSpec = &ConfigSpec_MongodbSpec_6_0Enterprise{
+		MongodbSpec_6_0Enterprise: v,
+	}
+}
+
 func (m *ConfigSpec) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
 
 func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
+}
+
+func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnosticsConfig) {
+	m.PerformanceDiagnostics = v
 }
 
 func (m *ConfigSpec) SetAccess(v *Access) {

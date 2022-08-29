@@ -133,6 +133,12 @@ func (m *ClusterConfig) SetMongodb_5_0(v *Mongodb5_0) {
 	}
 }
 
+func (m *ClusterConfig) SetMongodb_6_0(v *Mongodb6_0) {
+	m.Mongodb = &ClusterConfig_Mongodb_6_0{
+		Mongodb_6_0: v,
+	}
+}
+
 func (m *ClusterConfig) SetMongodb_4_4Enterprise(v *Mongodb4_4Enterprise) {
 	m.Mongodb = &ClusterConfig_Mongodb_4_4Enterprise{
 		Mongodb_4_4Enterprise: v,
@@ -145,12 +151,22 @@ func (m *ClusterConfig) SetMongodb_5_0Enterprise(v *Mongodb5_0Enterprise) {
 	}
 }
 
+func (m *ClusterConfig) SetMongodb_6_0Enterprise(v *Mongodb6_0Enterprise) {
+	m.Mongodb = &ClusterConfig_Mongodb_6_0Enterprise{
+		Mongodb_6_0Enterprise: v,
+	}
+}
+
 func (m *ClusterConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
 }
 
 func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
+}
+
+func (m *ClusterConfig) SetPerformanceDiagnostics(v *PerformanceDiagnosticsConfig) {
+	m.PerformanceDiagnostics = v
 }
 
 func (m *ClusterConfig) SetAccess(v *Access) {
@@ -521,6 +537,110 @@ func (m *Mongodb5_0Enterprise_MongoInfra) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *Mongodb6_0) SetMongod(v *Mongodb6_0_Mongod) {
+	m.Mongod = v
+}
+
+func (m *Mongodb6_0) SetMongocfg(v *Mongodb6_0_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *Mongodb6_0) SetMongos(v *Mongodb6_0_Mongos) {
+	m.Mongos = v
+}
+
+func (m *Mongodb6_0) SetMongoinfra(v *Mongodb6_0_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *Mongodb6_0_Mongod) SetConfig(v *config.MongodConfigSet6_0) {
+	m.Config = v
+}
+
+func (m *Mongodb6_0_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0_MongoCfg) SetConfig(v *config.MongoCfgConfigSet6_0) {
+	m.Config = v
+}
+
+func (m *Mongodb6_0_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0_Mongos) SetConfig(v *config.MongosConfigSet6_0) {
+	m.Config = v
+}
+
+func (m *Mongodb6_0_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0_MongoInfra) SetConfigMongos(v *config.MongosConfigSet6_0) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb6_0_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet6_0) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb6_0_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0Enterprise) SetMongod(v *Mongodb6_0Enterprise_Mongod) {
+	m.Mongod = v
+}
+
+func (m *Mongodb6_0Enterprise) SetMongocfg(v *Mongodb6_0Enterprise_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *Mongodb6_0Enterprise) SetMongos(v *Mongodb6_0Enterprise_Mongos) {
+	m.Mongos = v
+}
+
+func (m *Mongodb6_0Enterprise) SetMongoinfra(v *Mongodb6_0Enterprise_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *Mongodb6_0Enterprise_Mongod) SetConfig(v *config.MongodConfigSet6_0Enterprise) {
+	m.Config = v
+}
+
+func (m *Mongodb6_0Enterprise_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0Enterprise_MongoCfg) SetConfig(v *config.MongoCfgConfigSet6_0Enterprise) {
+	m.Config = v
+}
+
+func (m *Mongodb6_0Enterprise_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0Enterprise_Mongos) SetConfig(v *config.MongosConfigSet6_0Enterprise) {
+	m.Config = v
+}
+
+func (m *Mongodb6_0Enterprise_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *Mongodb6_0Enterprise_MongoInfra) SetConfigMongos(v *config.MongosConfigSet6_0Enterprise) {
+	m.ConfigMongos = v
+}
+
+func (m *Mongodb6_0Enterprise_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfigSet6_0Enterprise) {
+	m.ConfigMongocfg = v
+}
+
+func (m *Mongodb6_0Enterprise_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }
@@ -599,4 +719,8 @@ func (m *Access) SetDataLens(v bool) {
 
 func (m *Access) SetDataTransfer(v bool) {
 	m.DataTransfer = v
+}
+
+func (m *PerformanceDiagnosticsConfig) SetProfilingEnabled(v bool) {
+	m.ProfilingEnabled = v
 }

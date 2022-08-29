@@ -49,6 +49,7 @@ type ClusterServiceClient interface {
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified MongoDB cluster.
+	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error)
@@ -62,7 +63,8 @@ type ClusterServiceClient interface {
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Enables sharding for the cluster: creates 3 mongoinfra (or 3 mongocfg and 2 mongos) hosts
+	// Enables sharding for the cluster:
+	// creates 3 mongoinfra (or 3 mongocfg and 2 mongos) hosts
 	// that would support adding and using shards in the cluster.
 	EnableSharding(ctx context.Context, in *EnableClusterShardingRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified shard.
@@ -376,6 +378,7 @@ type ClusterServiceServer interface {
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified MongoDB cluster.
+	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error
@@ -389,7 +392,8 @@ type ClusterServiceServer interface {
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
-	// Enables sharding for the cluster: creates 3 mongoinfra (or 3 mongocfg and 2 mongos) hosts
+	// Enables sharding for the cluster:
+	// creates 3 mongoinfra (or 3 mongocfg and 2 mongos) hosts
 	// that would support adding and using shards in the cluster.
 	EnableSharding(context.Context, *EnableClusterShardingRequest) (*operation.Operation, error)
 	// Returns the specified shard.

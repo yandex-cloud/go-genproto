@@ -433,8 +433,8 @@ type Bucket struct {
 	// Flags for configuring public (anonymous) access to the bucket's content and settings.
 	// For details, see [documentation](/docs/storage/concepts/bucket#bucket-access).
 	AnonymousAccessFlags *AnonymousAccessFlags `protobuf:"bytes,4,opt,name=anonymous_access_flags,json=anonymousAccessFlags,proto3" json:"anonymous_access_flags,omitempty"`
-	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`) and
-	// cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms).
+	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`), cold storage
+	// (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms), and ice storage (`ICE` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	DefaultStorageClass string `protobuf:"bytes,5,opt,name=default_storage_class,json=defaultStorageClass,proto3" json:"default_storage_class,omitempty"`
 	// Bucket versioning status.
@@ -1145,8 +1145,8 @@ type OptionalSizeByClass struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Storage class. Supported classes are standard storage (`STANDARD`) and cold storage (`COLD`, `STANDARD_IA`,
-	// `NEARLINE` all synonyms).
+	// Storage class. Supported classes are standard storage (`STANDARD`), cold storage (`COLD`, `STANDARD_IA`, `NEARLINE`
+	// all synonyms), and ice storage (`ICE` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	StorageClass string `protobuf:"bytes,1,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
 	// Size of available space in the bucket for the storage class.
@@ -1205,8 +1205,8 @@ type SizeByClass struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Storage class. Supported classes are standard storage (`STANDARD`) and cold storage (`COLD`, `STANDARD_IA`,
-	// `NEARLINE` all synonyms).
+	// Storage class. Supported classes are standard storage (`STANDARD`), cold storage (`COLD`, `STANDARD_IA`, `NEARLINE`
+	// all synonyms), and ice storage (`ICE` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	StorageClass string `protobuf:"bytes,1,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
 	// Size of used space in the bucket for the storage class.
@@ -1265,8 +1265,8 @@ type CountersByClass struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Storage class. Supported classes are standard storage (`STANDARD`) and cold storage (`COLD`, `STANDARD_IA`,
-	// `NEARLINE` all synonyms).
+	// Storage class. Supported classes are standard storage (`STANDARD`), cold storage (`COLD`, `STANDARD_IA`, `NEARLINE`
+	// all synonyms), and ice storage (`ice` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	StorageClass string `protobuf:"bytes,1,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
 	// Object-related statistics for the storage class by type of upload.
@@ -1337,8 +1337,8 @@ type BucketStats struct {
 	StorageClassUsedSizes []*SizeByClass `protobuf:"bytes,5,rep,name=storage_class_used_sizes,json=storageClassUsedSizes,proto3" json:"storage_class_used_sizes,omitempty"`
 	// Object-related statistics by storage class and type of upload (simple vs. multipart), in bytes.
 	StorageClassCounters []*CountersByClass `protobuf:"bytes,6,rep,name=storage_class_counters,json=storageClassCounters,proto3" json:"storage_class_counters,omitempty"`
-	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`) and
-	// cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms).
+	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`), cold storage
+	// (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms), and ice storage (`ICE` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	DefaultStorageClass *wrapperspb.StringValue `protobuf:"bytes,7,opt,name=default_storage_class,json=defaultStorageClass,proto3" json:"default_storage_class,omitempty"`
 	// Flags for configuring public (anonymous) access to the bucket's content and settings.
@@ -2007,10 +2007,10 @@ type LifecycleRule_NoncurrentTransition struct {
 	// Time period, in number of days since the version of an object was classified as non-current, after which the
 	// version is transitioned.
 	NoncurrentDays *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=noncurrent_days,json=noncurrentDays,proto3" json:"noncurrent_days,omitempty"`
-	// Storage class to which a non-current version of an object is transitioned.
+	// Storage class to which a non-current version of an object is transitioned from standard storage.
 	//
 	// The only supported class is cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms). Transitions from cold
-	// to standard storage are not allowed.
+	// to standard storage and transitions to or from ice storage are not allowed.
 	StorageClass string `protobuf:"bytes,2,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
 }
 
@@ -2086,10 +2086,10 @@ type LifecycleRule_Transition struct {
 	//
 	// At most one of [days] and [date] fields can be specified.
 	Days *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=days,proto3" json:"days,omitempty"`
-	// Storage class to which an object is transitioned.
+	// Storage class to which an object is transitioned from standard storage.
 	//
 	// The only supported class is cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms). Transitions from cold
-	// to standard storage are not allowed.
+	// to standard storage and transitions to or from ice storage are not allowed.
 	StorageClass string `protobuf:"bytes,4,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
 }
 

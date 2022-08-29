@@ -260,8 +260,8 @@ type CreateBucketRequest struct {
 	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`) and
-	// cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms).
+	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`), cold storage
+	// (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms), and ice storage (`ICE` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	DefaultStorageClass string `protobuf:"bytes,4,opt,name=default_storage_class,json=defaultStorageClass,proto3" json:"default_storage_class,omitempty"`
 	// Maximum size of the bucket.
@@ -413,8 +413,8 @@ type UpdateBucketRequest struct {
 	// Flags for configuring public (anonymous) access to the bucket's content and settings.
 	// For details, see [documentation](/docs/storage/concepts/bucket#bucket-access).
 	AnonymousAccessFlags *AnonymousAccessFlags `protobuf:"bytes,3,opt,name=anonymous_access_flags,json=anonymousAccessFlags,proto3" json:"anonymous_access_flags,omitempty"`
-	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`) and
-	// cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms).
+	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`), cold storage
+	// (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms), and ice storage (`ICE` and `GLACIER` are synonyms).
 	// For details, see [documentation](/docs/storage/concepts/storage-class).
 	DefaultStorageClass string `protobuf:"bytes,4,opt,name=default_storage_class,json=defaultStorageClass,proto3" json:"default_storage_class,omitempty"`
 	// Maximum size of the bucket, in bytes.

@@ -255,6 +255,10 @@ func (m *RestoreClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
 	m.PersistenceMode = v
 }
 
+func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
