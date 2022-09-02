@@ -27,6 +27,8 @@ type CustomerServiceClient interface {
 	List(ctx context.Context, in *ListCustomersRequest, opts ...grpc.CallOption) (*ListCustomersResponse, error)
 	// Invites customer to the specified reseller.
 	Invite(ctx context.Context, in *InviteCustomerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Creates new reseller-served customer.
+	CreateResellerServed(ctx context.Context, in *CreateResellerServedCustomerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Activates specified customer. After customer is activated, he can use resources associated with his billing account.
 	Activate(ctx context.Context, in *ActivateCustomerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Suspend specified customer. After customer is suspended, he can't use resources associated with his billing account.
@@ -59,6 +61,15 @@ func (c *customerServiceClient) Invite(ctx context.Context, in *InviteCustomerRe
 	return out, nil
 }
 
+func (c *customerServiceClient) CreateResellerServed(ctx context.Context, in *CreateResellerServedCustomerRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.billing.v1.CustomerService/CreateResellerServed", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *customerServiceClient) Activate(ctx context.Context, in *ActivateCustomerRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.billing.v1.CustomerService/Activate", in, out, opts...)
@@ -85,6 +96,8 @@ type CustomerServiceServer interface {
 	List(context.Context, *ListCustomersRequest) (*ListCustomersResponse, error)
 	// Invites customer to the specified reseller.
 	Invite(context.Context, *InviteCustomerRequest) (*operation.Operation, error)
+	// Creates new reseller-served customer.
+	CreateResellerServed(context.Context, *CreateResellerServedCustomerRequest) (*operation.Operation, error)
 	// Activates specified customer. After customer is activated, he can use resources associated with his billing account.
 	Activate(context.Context, *ActivateCustomerRequest) (*operation.Operation, error)
 	// Suspend specified customer. After customer is suspended, he can't use resources associated with his billing account.
@@ -100,6 +113,9 @@ func (UnimplementedCustomerServiceServer) List(context.Context, *ListCustomersRe
 }
 func (UnimplementedCustomerServiceServer) Invite(context.Context, *InviteCustomerRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Invite not implemented")
+}
+func (UnimplementedCustomerServiceServer) CreateResellerServed(context.Context, *CreateResellerServedCustomerRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateResellerServed not implemented")
 }
 func (UnimplementedCustomerServiceServer) Activate(context.Context, *ActivateCustomerRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Activate not implemented")
@@ -155,6 +171,24 @@ func _CustomerService_Invite_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CustomerService_CreateResellerServed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateResellerServedCustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CustomerServiceServer).CreateResellerServed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.billing.v1.CustomerService/CreateResellerServed",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CustomerServiceServer).CreateResellerServed(ctx, req.(*CreateResellerServedCustomerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CustomerService_Activate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ActivateCustomerRequest)
 	if err := dec(in); err != nil {
@@ -205,6 +239,10 @@ var CustomerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Invite",
 			Handler:    _CustomerService_Invite_Handler,
+		},
+		{
+			MethodName: "CreateResellerServed",
+			Handler:    _CustomerService_CreateResellerServed_Handler,
 		},
 		{
 			MethodName: "Activate",

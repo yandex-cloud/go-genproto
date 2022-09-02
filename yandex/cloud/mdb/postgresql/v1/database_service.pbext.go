@@ -58,6 +58,10 @@ func (m *UpdateDatabaseRequest) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
 
+func (m *UpdateDatabaseRequest) SetNewDatabaseName(v string) {
+	m.NewDatabaseName = v
+}
+
 func (m *UpdateDatabaseRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }

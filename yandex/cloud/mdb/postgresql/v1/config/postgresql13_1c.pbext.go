@@ -566,6 +566,22 @@ func (m *PostgresqlConfig13_1C) SetPlantunerFixEmptyTable(v *wrapperspb.BoolValu
 	m.PlantunerFixEmptyTable = v
 }
 
+func (m *PostgresqlConfig13_1C) SetGeqo(v *wrapperspb.BoolValue) {
+	m.Geqo = v
+}
+
+func (m *PostgresqlConfig13_1C) SetGeqoThreshold(v *wrapperspb.Int64Value) {
+	m.GeqoThreshold = v
+}
+
+func (m *PostgresqlConfig13_1C) SetGeqoEffort(v *wrapperspb.Int64Value) {
+	m.GeqoEffort = v
+}
+
+func (m *PostgresqlConfig13_1C) SetGeqoSeed(v *wrapperspb.DoubleValue) {
+	m.GeqoSeed = v
+}
+
 func (m *PostgresqlConfigSet13_1C) SetEffectiveConfig(v *PostgresqlConfig13_1C) {
 	m.EffectiveConfig = v
 }

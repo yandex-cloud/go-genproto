@@ -276,6 +276,10 @@ func (m *ServerlessDatabase) SetProvisionedRcuLimit(v int64) {
 	m.ProvisionedRcuLimit = v
 }
 
+func (m *ServerlessDatabase) SetTopicWriteQuota(v int64) {
+	m.TopicWriteQuota = v
+}
+
 func (m *ZonalDatabase) SetZoneId(v string) {
 	m.ZoneId = v
 }
