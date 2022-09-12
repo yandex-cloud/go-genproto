@@ -58,6 +58,10 @@ func (m *LoadBalancer) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *LoadBalancer) SetAutoScalePolicy(v *AutoScalePolicy) {
+	m.AutoScalePolicy = v
+}
+
 type Address_Address = isAddress_Address
 
 func (m *Address) SetAddress(v Address_Address) {
@@ -264,4 +268,12 @@ func (m *TargetState_ZoneHealthcheckStatus) SetStatus(v TargetState_Status) {
 
 func (m *TargetState_ZoneHealthcheckStatus) SetFailedActiveHc(v bool) {
 	m.FailedActiveHc = v
+}
+
+func (m *AutoScalePolicy) SetMinZoneSize(v int64) {
+	m.MinZoneSize = v
+}
+
+func (m *AutoScalePolicy) SetMaxSize(v int64) {
+	m.MaxSize = v
 }

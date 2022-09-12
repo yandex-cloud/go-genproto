@@ -160,6 +160,14 @@ func (m *Word) SetEndTimeMs(v int64) {
 	m.EndTimeMs = v
 }
 
+func (m *LanguageEstimation) SetLanguageCode(v string) {
+	m.LanguageCode = v
+}
+
+func (m *LanguageEstimation) SetProbability(v float64) {
+	m.Probability = v
+}
+
 func (m *Alternative) SetWords(v []*Word) {
 	m.Words = v
 }
@@ -178,6 +186,10 @@ func (m *Alternative) SetEndTimeMs(v int64) {
 
 func (m *Alternative) SetConfidence(v float64) {
 	m.Confidence = v
+}
+
+func (m *Alternative) SetLanguages(v []*LanguageEstimation) {
+	m.Languages = v
 }
 
 func (m *EouUpdate) SetTimeMs(v int64) {
