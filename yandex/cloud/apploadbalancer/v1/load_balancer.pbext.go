@@ -62,6 +62,10 @@ func (m *LoadBalancer) SetAutoScalePolicy(v *AutoScalePolicy) {
 	m.AutoScalePolicy = v
 }
 
+func (m *LoadBalancer) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 type Address_Address = isAddress_Address
 
 func (m *Address) SetAddress(v Address_Address) {

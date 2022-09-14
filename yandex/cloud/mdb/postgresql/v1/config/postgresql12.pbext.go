@@ -526,6 +526,18 @@ func (m *PostgresqlConfig12) SetGeqoEffort(v *wrapperspb.Int64Value) {
 	m.GeqoEffort = v
 }
 
+func (m *PostgresqlConfig12) SetGeqoPoolSize(v *wrapperspb.Int64Value) {
+	m.GeqoPoolSize = v
+}
+
+func (m *PostgresqlConfig12) SetGeqoGenerations(v *wrapperspb.Int64Value) {
+	m.GeqoGenerations = v
+}
+
+func (m *PostgresqlConfig12) SetGeqoSelectionBias(v *wrapperspb.DoubleValue) {
+	m.GeqoSelectionBias = v
+}
+
 func (m *PostgresqlConfig12) SetGeqoSeed(v *wrapperspb.DoubleValue) {
 	m.GeqoSeed = v
 }
