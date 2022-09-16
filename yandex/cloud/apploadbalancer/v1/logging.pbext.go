@@ -21,3 +21,7 @@ func (m *LogOptions) SetLogGroupId(v string) {
 func (m *LogOptions) SetDiscardRules(v []*LogDiscardRule) {
 	m.DiscardRules = v
 }
+
+func (m *LogOptions) SetDisable(v bool) {
+	m.Disable = v
+}

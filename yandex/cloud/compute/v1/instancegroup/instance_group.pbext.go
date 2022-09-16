@@ -349,6 +349,22 @@ func (m *InstanceTemplate) SetPlacementPolicy(v *PlacementPolicy) {
 	m.PlacementPolicy = v
 }
 
+func (m *InstanceTemplate) SetFilesystemSpecs(v []*AttachedFilesystemSpec) {
+	m.FilesystemSpecs = v
+}
+
+func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {
+	m.Mode = v
+}
+
+func (m *AttachedFilesystemSpec) SetDeviceName(v string) {
+	m.DeviceName = v
+}
+
+func (m *AttachedFilesystemSpec) SetFilesystemId(v string) {
+	m.FilesystemId = v
+}
+
 func (m *PlacementPolicy) SetPlacementGroupId(v string) {
 	m.PlacementGroupId = v
 }
