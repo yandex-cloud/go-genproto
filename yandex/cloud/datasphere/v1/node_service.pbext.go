@@ -21,3 +21,19 @@ func (m *NodeExecutionRequest) SetInput(v *structpb.Struct) {
 func (m *NodeExecutionResponse) SetOutput(v *structpb.Struct) {
 	m.Output = v
 }
+
+func (m *AliasExecutionRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *AliasExecutionRequest) SetAliasName(v string) {
+	m.AliasName = v
+}
+
+func (m *AliasExecutionRequest) SetInput(v *structpb.Struct) {
+	m.Input = v
+}
+
+func (m *AliasExecutionResponse) SetOutput(v *structpb.Struct) {
+	m.Output = v
+}

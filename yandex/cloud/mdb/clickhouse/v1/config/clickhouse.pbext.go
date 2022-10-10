@@ -146,12 +146,44 @@ func (m *ClickhouseConfig) SetTextLogLevel(v ClickhouseConfig_LogLevel) {
 	m.TextLogLevel = v
 }
 
+func (m *ClickhouseConfig) SetOpentelemetrySpanLogEnabled(v *wrapperspb.BoolValue) {
+	m.OpentelemetrySpanLogEnabled = v
+}
+
 func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
 	m.BackgroundPoolSize = v
 }
 
 func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrapperspb.Int64Value) {
 	m.BackgroundSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundFetchesPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundFetchesPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMovePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundMovePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundDistributedSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundDistributedSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundBufferFlushSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundBufferFlushSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetDefaultDatabase(v *wrapperspb.StringValue) {
+	m.DefaultDatabase = v
+}
+
+func (m *ClickhouseConfig) SetTotalMemoryProfilerStep(v *wrapperspb.Int64Value) {
+	m.TotalMemoryProfilerStep = v
+}
+
+func (m *ClickhouseConfig) SetTotalMemoryTrackerSampleProbability(v *wrapperspb.DoubleValue) {
+	m.TotalMemoryTrackerSampleProbability = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
@@ -170,6 +202,14 @@ func (m *ClickhouseConfig_MergeTree) SetPartsToThrowInsert(v *wrapperspb.Int64Va
 	m.PartsToThrowInsert = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetInactivePartsToDelayInsert(v *wrapperspb.Int64Value) {
+	m.InactivePartsToDelayInsert = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetInactivePartsToThrowInsert(v *wrapperspb.Int64Value) {
+	m.InactivePartsToThrowInsert = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetMaxReplicatedMergesInQueue(v *wrapperspb.Int64Value) {
 	m.MaxReplicatedMergesInQueue = v
 }
@@ -184,6 +224,22 @@ func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMinSpaceInPool(v *wrapp
 
 func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMaxSpaceInPool(v *wrapperspb.Int64Value) {
 	m.MaxBytesToMergeAtMaxSpaceInPool = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinBytesForWidePart(v *wrapperspb.Int64Value) {
+	m.MinBytesForWidePart = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinRowsForWidePart(v *wrapperspb.Int64Value) {
+	m.MinRowsForWidePart = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetTtlOnlyDropParts(v *wrapperspb.BoolValue) {
+	m.TtlOnlyDropParts = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetAllowRemoteFsZeroCopyReplication(v *wrapperspb.BoolValue) {
+	m.AllowRemoteFsZeroCopyReplication = v
 }
 
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
@@ -216,6 +272,10 @@ func (m *ClickhouseConfig_Rabbitmq) SetUsername(v string) {
 
 func (m *ClickhouseConfig_Rabbitmq) SetPassword(v string) {
 	m.Password = v
+}
+
+func (m *ClickhouseConfig_Rabbitmq) SetVhost(v string) {
+	m.Vhost = v
 }
 
 func (m *ClickhouseConfig_Compression) SetMethod(v ClickhouseConfig_Compression_Method) {

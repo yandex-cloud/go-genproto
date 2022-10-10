@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type NodeServiceClient interface {
 	// Executes deployed Node.
 	Execute(ctx context.Context, in *NodeExecutionRequest, opts ...grpc.CallOption) (*NodeExecutionResponse, error)
+	// Executes NodeAlias requests.
+	ExecuteAlias(ctx context.Context, in *AliasExecutionRequest, opts ...grpc.CallOption) (*AliasExecutionResponse, error)
 }
 
 type nodeServiceClient struct {
@@ -43,12 +45,23 @@ func (c *nodeServiceClient) Execute(ctx context.Context, in *NodeExecutionReques
 	return out, nil
 }
 
+func (c *nodeServiceClient) ExecuteAlias(ctx context.Context, in *AliasExecutionRequest, opts ...grpc.CallOption) (*AliasExecutionResponse, error) {
+	out := new(AliasExecutionResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.datasphere.v1.NodeService/ExecuteAlias", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NodeServiceServer is the server API for NodeService service.
 // All implementations should embed UnimplementedNodeServiceServer
 // for forward compatibility
 type NodeServiceServer interface {
 	// Executes deployed Node.
 	Execute(context.Context, *NodeExecutionRequest) (*NodeExecutionResponse, error)
+	// Executes NodeAlias requests.
+	ExecuteAlias(context.Context, *AliasExecutionRequest) (*AliasExecutionResponse, error)
 }
 
 // UnimplementedNodeServiceServer should be embedded to have forward compatible implementations.
@@ -57,6 +70,9 @@ type UnimplementedNodeServiceServer struct {
 
 func (UnimplementedNodeServiceServer) Execute(context.Context, *NodeExecutionRequest) (*NodeExecutionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
+}
+func (UnimplementedNodeServiceServer) ExecuteAlias(context.Context, *AliasExecutionRequest) (*AliasExecutionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecuteAlias not implemented")
 }
 
 // UnsafeNodeServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -88,6 +104,24 @@ func _NodeService_Execute_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NodeService_ExecuteAlias_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AliasExecutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServiceServer).ExecuteAlias(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.datasphere.v1.NodeService/ExecuteAlias",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServiceServer).ExecuteAlias(ctx, req.(*AliasExecutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NodeService_ServiceDesc is the grpc.ServiceDesc for NodeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +132,10 @@ var NodeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Execute",
 			Handler:    _NodeService_Execute_Handler,
+		},
+		{
+			MethodName: "ExecuteAlias",
+			Handler:    _NodeService_ExecuteAlias_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
