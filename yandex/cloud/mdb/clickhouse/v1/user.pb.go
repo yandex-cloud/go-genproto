@@ -757,14 +757,19 @@ type UserSettings struct {
 	//
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/permissions-for-queries/#settings_allow_ddl).
 	AllowDdl *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=allow_ddl,json=allowDdl,proto3" json:"allow_ddl,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#settings-allow_introspection_functions).
+	// Enables [introspections functions](https://clickhouse.com/docs/en/sql-reference/functions/introspection) for query profiling.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#settings-allow_introspection_functions).
 	AllowIntrospectionFunctions *wrapperspb.BoolValue `protobuf:"bytes,96,opt,name=allow_introspection_functions,json=allowIntrospectionFunctions,proto3" json:"allow_introspection_functions,omitempty"`
 	// Connection timeout in milliseconds.
 	//
 	// Value must be greater than **0** (default: **10000**, 10 seconds).
 	ConnectTimeout *wrapperspb.Int64Value `protobuf:"bytes,39,opt,name=connect_timeout,json=connectTimeout,proto3" json:"connect_timeout,omitempty"`
-	// Connection timeout with failover in milliseconds.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#connect-timeout-with-failover-ms).
+	// The timeout in milliseconds for connecting to a remote server for a Distributed table engine. Applies only if the cluster uses sharding and replication. If unsuccessful, several attempts are made to connect to various replicas.
+	//
+	// Default value: **50**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#connect-timeout-with-failover-ms).
 	ConnectTimeoutWithFailover *wrapperspb.Int64Value `protobuf:"bytes,97,opt,name=connect_timeout_with_failover,json=connectTimeoutWithFailover,proto3" json:"connect_timeout_with_failover,omitempty"`
 	// Receive timeout in milliseconds.
 	//
@@ -774,7 +779,9 @@ type UserSettings struct {
 	//
 	// Value must be greater than **0** (default: **300000**, 300 seconds or 5 minutes).
 	SendTimeout *wrapperspb.Int64Value `protobuf:"bytes,41,opt,name=send_timeout,json=sendTimeout,proto3" json:"send_timeout,omitempty"`
-	// Check that the speed is not too low after the specified time has elapsed.
+	// Timeout (in seconds) between checks of execution speed. It is checked that execution speed is not less that specified in [min_execution_speed] parameter.
+	//
+	// Default value: **10**.
 	TimeoutBeforeCheckingExecutionSpeed *wrapperspb.Int64Value `protobuf:"bytes,98,opt,name=timeout_before_checking_execution_speed,json=timeoutBeforeCheckingExecutionSpeed,proto3" json:"timeout_before_checking_execution_speed,omitempty"`
 	// Enables or disables write quorum for ClickHouse cluster.
 	// If the value is less than **2**, then write quorum is disabled, otherwise it is enabled.
@@ -796,7 +803,11 @@ type UserSettings struct {
 	InsertQuorumTimeout *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=insert_quorum_timeout,json=insertQuorumTimeout,proto3" json:"insert_quorum_timeout,omitempty"`
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#settings-insert_quorum_parallel).
 	InsertQuorumParallel *wrapperspb.BoolValue `protobuf:"bytes,99,opt,name=insert_quorum_parallel,json=insertQuorumParallel,proto3" json:"insert_quorum_parallel,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#insert_null_as_default).
+	// Enables the insertion of default values instead of NULL into columns with not nullable data type.
+	//
+	// Default value: **true**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#insert_null_as_default).
 	InsertNullAsDefault *wrapperspb.BoolValue `protobuf:"bytes,100,opt,name=insert_null_as_default,json=insertNullAsDefault,proto3" json:"insert_null_as_default,omitempty"`
 	// Determines the behavior of **SELECT** queries from the replicated table: if enabled, ClickHouse will terminate a query with error message in case the replica does not have a chunk written with the quorum and will not read the parts that have not yet been written with the quorum.
 	//
@@ -1017,6 +1028,7 @@ type UserSettings struct {
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/ru/operations/settings/query-complexity/#max-partitions-per-insert-block).
 	MaxPartitionsPerInsertBlock *wrapperspb.Int64Value `protobuf:"bytes,102,opt,name=max_partitions_per_insert_block,json=maxPartitionsPerInsertBlock,proto3" json:"max_partitions_per_insert_block,omitempty"`
 	// The maximum number of concurrent requests per user.
+	// Default value: 0 (no limit).
 	MaxConcurrentQueriesForUser *wrapperspb.Int64Value `protobuf:"bytes,103,opt,name=max_concurrent_queries_for_user,json=maxConcurrentQueriesForUser,proto3" json:"max_concurrent_queries_for_user,omitempty"`
 	// If enabled, query is not executed if the ClickHouse can't use index by date.
 	// This setting has effect only for tables of the MergeTree family.
@@ -1248,7 +1260,9 @@ type UserSettings struct {
 	//
 	// Default value: **true** (LowCardinality columns are used in Native format).
 	LowCardinalityAllowInNativeFormat *wrapperspb.BoolValue `protobuf:"bytes,78,opt,name=low_cardinality_allow_in_native_format,json=lowCardinalityAllowInNativeFormat,proto3" json:"low_cardinality_allow_in_native_format,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#allow_suspicious_low_cardinality_types).
+	// Allows specifying **LowCardinality** modifier for types of small fixed size (8 or less) in CREATE TABLE statements. Enabling this may increase merge times and memory consumption.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#allow_suspicious_low_cardinality_types).
 	AllowSuspiciousLowCardinalityTypes *wrapperspb.BoolValue `protobuf:"bytes,110,opt,name=allow_suspicious_low_cardinality_types,json=allowSuspiciousLowCardinalityTypes,proto3" json:"allow_suspicious_low_cardinality_types,omitempty"`
 	// Enables returning of empty result when aggregating without keys (with **GROUP BY** operation absent) on empty set (e.g., **SELECT count(*) FROM table WHERE 0**).
 	//
@@ -1292,16 +1306,26 @@ type UserSettings struct {
 	//
 	// Default value: **false** (header is not added).
 	AddHttpCorsHeader *wrapperspb.BoolValue `protobuf:"bytes,71,opt,name=add_http_cors_header,json=addHttpCorsHeader,proto3" json:"add_http_cors_header,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#cancel-http-readonly-queries-on-client-close).
+	// Cancels HTTP read-only queries (e.g. SELECT) when a client closes the connection without waiting for the response.
+	//
+	// Default value: **false**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#cancel-http-readonly-queries-on-client-close).
 	CancelHttpReadonlyQueriesOnClientClose *wrapperspb.BoolValue `protobuf:"bytes,111,opt,name=cancel_http_readonly_queries_on_client_close,json=cancelHttpReadonlyQueriesOnClientClose,proto3" json:"cancel_http_readonly_queries_on_client_close,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#setting-max_http_get_redirects).
+	// Limits the maximum number of HTTP GET redirect hops for [URL-engine](https://clickhouse.com/docs/en/engines/table-engines/special/url) tables.
+	//
+	// If the parameter is set to **0** (default), no hops is allowed.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#setting-max_http_get_redirects).
 	MaxHttpGetRedirects         *wrapperspb.Int64Value `protobuf:"bytes,112,opt,name=max_http_get_redirects,json=maxHttpGetRedirects,proto3" json:"max_http_get_redirects,omitempty"`
 	JoinedSubqueryRequiresAlias *wrapperspb.BoolValue  `protobuf:"bytes,93,opt,name=joined_subquery_requires_alias,json=joinedSubqueryRequiresAlias,proto3" json:"joined_subquery_requires_alias,omitempty"`
 	JoinUseNulls                *wrapperspb.BoolValue  `protobuf:"bytes,94,opt,name=join_use_nulls,json=joinUseNulls,proto3" json:"join_use_nulls,omitempty"`
 	TransformNullIn             *wrapperspb.BoolValue  `protobuf:"bytes,95,opt,name=transform_null_in,json=transformNullIn,proto3" json:"transform_null_in,omitempty"`
 	// Quota accounting mode. Possible values: QUOTA_MODE_DEFAULT, QUOTA_MODE_KEYED and QUOTA_MODE_KEYED_BY_IP.
 	QuotaMode UserSettings_QuotaMode `protobuf:"varint,80,opt,name=quota_mode,json=quotaMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_QuotaMode" json:"quota_mode,omitempty"`
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#flatten-nested).
+	// Sets the data format of a [nested](https://clickhouse.com/docs/en/sql-reference/data-types/nested-data-structures/nested) columns.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#flatten-nested).
 	FlattenNested *wrapperspb.BoolValue `protobuf:"bytes,113,opt,name=flatten_nested,json=flattenNested,proto3" json:"flatten_nested,omitempty"`
 	// Regular expression (for Regexp format)
 	FormatRegexp string `protobuf:"bytes,114,opt,name=format_regexp,json=formatRegexp,proto3" json:"format_regexp,omitempty"`
@@ -1309,23 +1333,53 @@ type UserSettings struct {
 	FormatRegexpEscapingRule UserSettings_FormatRegexpEscapingRule `protobuf:"varint,115,opt,name=format_regexp_escaping_rule,json=formatRegexpEscapingRule,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_FormatRegexpEscapingRule" json:"format_regexp_escaping_rule,omitempty"`
 	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#format_regexp_skip_unmatched).
 	FormatRegexpSkipUnmatched *wrapperspb.BoolValue `protobuf:"bytes,116,opt,name=format_regexp_skip_unmatched,json=formatRegexpSkipUnmatched,proto3" json:"format_regexp_skip_unmatched,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert).
+	// Enables asynchronous inserts.
+	//
+	// Disabled by default.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert).
 	AsyncInsert *wrapperspb.BoolValue `protobuf:"bytes,117,opt,name=async_insert,json=asyncInsert,proto3" json:"async_insert,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-threads).
+	// The maximum number of threads for background data parsing and insertion.
+	//
+	// If the parameter is set to **0**, asynchronous insertions are disabled. Default value: **16**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-threads).
 	AsyncInsertThreads *wrapperspb.Int64Value `protobuf:"bytes,118,opt,name=async_insert_threads,json=asyncInsertThreads,proto3" json:"async_insert_threads,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#wait-for-async-insert).
+	// Enables waiting for processing of asynchronous insertion. If enabled, server returns OK only after the data is inserted.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#wait-for-async-insert).
 	WaitForAsyncInsert *wrapperspb.BoolValue `protobuf:"bytes,119,opt,name=wait_for_async_insert,json=waitForAsyncInsert,proto3" json:"wait_for_async_insert,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#wait-for-async-insert-timeout).
+	// The timeout (in seconds) for waiting for processing of asynchronous insertion.
+	//
+	// Default value: **120**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#wait-for-async-insert-timeout).
 	WaitForAsyncInsertTimeout *wrapperspb.Int64Value `protobuf:"bytes,120,opt,name=wait_for_async_insert_timeout,json=waitForAsyncInsertTimeout,proto3" json:"wait_for_async_insert_timeout,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-max-data-size).
+	// The maximum size of the unparsed data in bytes collected per query before being inserted.
+	//
+	// If the parameter is set to **0**, asynchronous insertions are disabled. Default value: **100000**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-max-data-size).
 	AsyncInsertMaxDataSize *wrapperspb.Int64Value `protobuf:"bytes,121,opt,name=async_insert_max_data_size,json=asyncInsertMaxDataSize,proto3" json:"async_insert_max_data_size,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-busy-timeout-ms).
+	// The maximum timeout in milliseconds since the first INSERT query before inserting collected data.
+	//
+	// If the parameter is set to **0**, the timeout is disabled. Default value: **200**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-busy-timeout-ms).
 	AsyncInsertBusyTimeout *wrapperspb.Int64Value `protobuf:"bytes,122,opt,name=async_insert_busy_timeout,json=asyncInsertBusyTimeout,proto3" json:"async_insert_busy_timeout,omitempty"`
-	// // See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-stale-timeout-ms).
+	// The maximum timeout in milliseconds since the last INSERT query before dumping collected data. If enabled, the settings prolongs the [async_insert_busy_timeout] with every INSERT query as long as [async_insert_max_data_size] is not exceeded.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert-stale-timeout-ms).
 	AsyncInsertStaleTimeout *wrapperspb.Int64Value `protobuf:"bytes,123,opt,name=async_insert_stale_timeout,json=asyncInsertStaleTimeout,proto3" json:"async_insert_stale_timeout,omitempty"`
-	// Whenever query memory usage becomes larger than every next step in number of bytes the memory profiler will collect the allocating stack trace. Zero means disabled memory profiler.
+	// Memory profiler step (in bytes).
+	//
+	// If the next query step requires more memory than this parameter specifies, the memory profiler collects the allocating stack trace. Values lower than a few megabytes slow down query processing.
+	//
+	// Default value: **4194304** (4 MB). Zero means disabled memory profiler.
 	MemoryProfilerStep *wrapperspb.Int64Value `protobuf:"bytes,124,opt,name=memory_profiler_step,json=memoryProfilerStep,proto3" json:"memory_profiler_step,omitempty"`
 	// Collect random allocations and deallocations and write them into system.trace_log with 'MemorySample' trace_type. The probability is for every alloc/free regardless to the size of the allocation.
+	//
+	// Possible values: from **0** to **1**. Default: **0**.
 	MemoryProfilerSampleProbability *wrapperspb.DoubleValue `protobuf:"bytes,125,opt,name=memory_profiler_sample_probability,json=memoryProfilerSampleProbability,proto3" json:"memory_profiler_sample_probability,omitempty"`
 	// The setting is deprecated and has no effect.
 	//

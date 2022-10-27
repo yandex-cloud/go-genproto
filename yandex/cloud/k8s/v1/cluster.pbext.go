@@ -140,6 +140,10 @@ func (m *Master) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *Master) SetMasterLogging(v *MasterLogging) {
+	m.MasterLogging = v
+}
+
 func (m *MasterAuth) SetClusterCaCertificate(v string) {
 	m.ClusterCaCertificate = v
 }
@@ -210,6 +214,40 @@ func (m *MasterMaintenancePolicy) SetAutoUpgrade(v bool) {
 
 func (m *MasterMaintenancePolicy) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
+}
+
+type MasterLogging_Destination = isMasterLogging_Destination
+
+func (m *MasterLogging) SetDestination(v MasterLogging_Destination) {
+	m.Destination = v
+}
+
+func (m *MasterLogging) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *MasterLogging) SetLogGroupId(v string) {
+	m.Destination = &MasterLogging_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *MasterLogging) SetFolderId(v string) {
+	m.Destination = &MasterLogging_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *MasterLogging) SetClusterAutoscalerEnabled(v bool) {
+	m.ClusterAutoscalerEnabled = v
+}
+
+func (m *MasterLogging) SetKubeApiserverEnabled(v bool) {
+	m.KubeApiserverEnabled = v
+}
+
+func (m *MasterLogging) SetEventsEnabled(v bool) {
+	m.EventsEnabled = v
 }
 
 func (m *NetworkPolicy) SetProvider(v NetworkPolicy_Provider) {

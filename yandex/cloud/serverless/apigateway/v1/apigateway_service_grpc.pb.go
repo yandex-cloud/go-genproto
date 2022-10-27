@@ -25,7 +25,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiGatewayServiceClient interface {
 	// Returns the specified API gateway. Note that only API gateway basic attributes are returned.
-	// To get associated openapi specification, make a [GetOpenapiSpec] request.
+	// To get associated openapi specification, make a [GetOpenapiSpec](getOpenapiSpec) request.
 	//
 	// To get the list of all available API gateways, make a [List] request.
 	Get(ctx context.Context, in *GetApiGatewayRequest, opts ...grpc.CallOption) (*ApiGateway, error)
@@ -174,7 +174,7 @@ func (c *apiGatewayServiceClient) UpdateAccessBindings(ctx context.Context, in *
 // for forward compatibility
 type ApiGatewayServiceServer interface {
 	// Returns the specified API gateway. Note that only API gateway basic attributes are returned.
-	// To get associated openapi specification, make a [GetOpenapiSpec] request.
+	// To get associated openapi specification, make a [GetOpenapiSpec](getOpenapiSpec) request.
 	//
 	// To get the list of all available API gateways, make a [List] request.
 	Get(context.Context, *GetApiGatewayRequest) (*ApiGateway, error)

@@ -529,7 +529,7 @@ type ClusterConfig struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Image version for cluster provisioning.
-	// All available versions are listed in the [documentation](/docs/managed-hadoop/concepts/image-versions).
+	// All available versions are listed in the [documentation](/docs/data-proc/concepts/environment).
 	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
 	// Data Proc specific configuration options.
 	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`

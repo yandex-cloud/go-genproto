@@ -471,17 +471,26 @@ type ClickhouseConfig struct {
 	// text_log data based on time is disabled.
 	TextLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=text_log_retention_time,json=textLogRetentionTime,proto3" json:"text_log_retention_time,omitempty"`
 	// Logging level for text_log system table. Possible values: TRACE, DEBUG, INFORMATION, WARNING, ERROR.
-	TextLogLevel                          ClickhouseConfig_LogLevel `protobuf:"varint,32,opt,name=text_log_level,json=textLogLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"text_log_level,omitempty"`
-	OpentelemetrySpanLogEnabled           *wrapperspb.BoolValue     `protobuf:"bytes,42,opt,name=opentelemetry_span_log_enabled,json=opentelemetrySpanLogEnabled,proto3" json:"opentelemetry_span_log_enabled,omitempty"`
-	BackgroundPoolSize                    *wrapperspb.Int64Value    `protobuf:"bytes,33,opt,name=background_pool_size,json=backgroundPoolSize,proto3" json:"background_pool_size,omitempty"`
-	BackgroundSchedulePoolSize            *wrapperspb.Int64Value    `protobuf:"bytes,34,opt,name=background_schedule_pool_size,json=backgroundSchedulePoolSize,proto3" json:"background_schedule_pool_size,omitempty"`
-	BackgroundFetchesPoolSize             *wrapperspb.Int64Value    `protobuf:"bytes,38,opt,name=background_fetches_pool_size,json=backgroundFetchesPoolSize,proto3" json:"background_fetches_pool_size,omitempty"`
-	BackgroundMovePoolSize                *wrapperspb.Int64Value    `protobuf:"bytes,39,opt,name=background_move_pool_size,json=backgroundMovePoolSize,proto3" json:"background_move_pool_size,omitempty"`
-	BackgroundDistributedSchedulePoolSize *wrapperspb.Int64Value    `protobuf:"bytes,40,opt,name=background_distributed_schedule_pool_size,json=backgroundDistributedSchedulePoolSize,proto3" json:"background_distributed_schedule_pool_size,omitempty"`
-	BackgroundBufferFlushSchedulePoolSize *wrapperspb.Int64Value    `protobuf:"bytes,41,opt,name=background_buffer_flush_schedule_pool_size,json=backgroundBufferFlushSchedulePoolSize,proto3" json:"background_buffer_flush_schedule_pool_size,omitempty"`
-	DefaultDatabase                       *wrapperspb.StringValue   `protobuf:"bytes,43,opt,name=default_database,json=defaultDatabase,proto3" json:"default_database,omitempty"`
-	TotalMemoryProfilerStep               *wrapperspb.Int64Value    `protobuf:"bytes,44,opt,name=total_memory_profiler_step,json=totalMemoryProfilerStep,proto3" json:"total_memory_profiler_step,omitempty"`
-	TotalMemoryTrackerSampleProbability   *wrapperspb.DoubleValue   `protobuf:"bytes,45,opt,name=total_memory_tracker_sample_probability,json=totalMemoryTrackerSampleProbability,proto3" json:"total_memory_tracker_sample_probability,omitempty"`
+	TextLogLevel                ClickhouseConfig_LogLevel `protobuf:"varint,32,opt,name=text_log_level,json=textLogLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"text_log_level,omitempty"`
+	OpentelemetrySpanLogEnabled *wrapperspb.BoolValue     `protobuf:"bytes,42,opt,name=opentelemetry_span_log_enabled,json=opentelemetrySpanLogEnabled,proto3" json:"opentelemetry_span_log_enabled,omitempty"`
+	BackgroundPoolSize          *wrapperspb.Int64Value    `protobuf:"bytes,33,opt,name=background_pool_size,json=backgroundPoolSize,proto3" json:"background_pool_size,omitempty"`
+	BackgroundSchedulePoolSize  *wrapperspb.Int64Value    `protobuf:"bytes,34,opt,name=background_schedule_pool_size,json=backgroundSchedulePoolSize,proto3" json:"background_schedule_pool_size,omitempty"`
+	// Sets the number of threads performing background fetches for tables with **ReplicatedMergeTree** engines. Default value: 8.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings/#background_fetches_pool_size).
+	BackgroundFetchesPoolSize             *wrapperspb.Int64Value `protobuf:"bytes,38,opt,name=background_fetches_pool_size,json=backgroundFetchesPoolSize,proto3" json:"background_fetches_pool_size,omitempty"`
+	BackgroundMovePoolSize                *wrapperspb.Int64Value `protobuf:"bytes,39,opt,name=background_move_pool_size,json=backgroundMovePoolSize,proto3" json:"background_move_pool_size,omitempty"`
+	BackgroundDistributedSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,40,opt,name=background_distributed_schedule_pool_size,json=backgroundDistributedSchedulePoolSize,proto3" json:"background_distributed_schedule_pool_size,omitempty"`
+	BackgroundBufferFlushSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,41,opt,name=background_buffer_flush_schedule_pool_size,json=backgroundBufferFlushSchedulePoolSize,proto3" json:"background_buffer_flush_schedule_pool_size,omitempty"`
+	// The default database.
+	//
+	// To get a list of cluster databases, see [Yandex Managed ClickHouse documentation](https://cloud.yandex.com/en/docs/managed-clickhouse/operations/databases#list-db).
+	DefaultDatabase *wrapperspb.StringValue `protobuf:"bytes,43,opt,name=default_database,json=defaultDatabase,proto3" json:"default_database,omitempty"`
+	// Sets the memory size (in bytes) for a stack trace at every peak allocation step. Default value: **4194304**.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings/#total-memory-profiler-step).
+	TotalMemoryProfilerStep             *wrapperspb.Int64Value  `protobuf:"bytes,44,opt,name=total_memory_profiler_step,json=totalMemoryProfilerStep,proto3" json:"total_memory_profiler_step,omitempty"`
+	TotalMemoryTrackerSampleProbability *wrapperspb.DoubleValue `protobuf:"bytes,45,opt,name=total_memory_tracker_sample_probability,json=totalMemoryTrackerSampleProbability,proto3" json:"total_memory_tracker_sample_probability,omitempty"`
 }
 
 func (x *ClickhouseConfig) Reset() {
@@ -922,12 +931,21 @@ type ClickhouseConfig_MergeTree struct {
 	NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=number_of_free_entries_in_pool_to_lower_max_size_of_merge,json=numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge,proto3" json:"number_of_free_entries_in_pool_to_lower_max_size_of_merge,omitempty"`
 	// Maximum in total size of parts to merge, when there are minimum free threads in background pool (or entries
 	// in replication queue).
-	MaxBytesToMergeAtMinSpaceInPool  *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_bytes_to_merge_at_min_space_in_pool,json=maxBytesToMergeAtMinSpaceInPool,proto3" json:"max_bytes_to_merge_at_min_space_in_pool,omitempty"`
-	MaxBytesToMergeAtMaxSpaceInPool  *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_bytes_to_merge_at_max_space_in_pool,json=maxBytesToMergeAtMaxSpaceInPool,proto3" json:"max_bytes_to_merge_at_max_space_in_pool,omitempty"`
-	MinBytesForWidePart              *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_bytes_for_wide_part,json=minBytesForWidePart,proto3" json:"min_bytes_for_wide_part,omitempty"`
-	MinRowsForWidePart               *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=min_rows_for_wide_part,json=minRowsForWidePart,proto3" json:"min_rows_for_wide_part,omitempty"`
-	TtlOnlyDropParts                 *wrapperspb.BoolValue  `protobuf:"bytes,13,opt,name=ttl_only_drop_parts,json=ttlOnlyDropParts,proto3" json:"ttl_only_drop_parts,omitempty"`
-	AllowRemoteFsZeroCopyReplication *wrapperspb.BoolValue  `protobuf:"bytes,14,opt,name=allow_remote_fs_zero_copy_replication,json=allowRemoteFsZeroCopyReplication,proto3" json:"allow_remote_fs_zero_copy_replication,omitempty"`
+	MaxBytesToMergeAtMinSpaceInPool *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_bytes_to_merge_at_min_space_in_pool,json=maxBytesToMergeAtMinSpaceInPool,proto3" json:"max_bytes_to_merge_at_min_space_in_pool,omitempty"`
+	MaxBytesToMergeAtMaxSpaceInPool *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_bytes_to_merge_at_max_space_in_pool,json=maxBytesToMergeAtMaxSpaceInPool,proto3" json:"max_bytes_to_merge_at_max_space_in_pool,omitempty"`
+	// Minimum number of bytes in a data part that can be stored in **Wide** format.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/#min_bytes_for_wide_part).
+	MinBytesForWidePart *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_bytes_for_wide_part,json=minBytesForWidePart,proto3" json:"min_bytes_for_wide_part,omitempty"`
+	// Minimum number of rows in a data part that can be stored in **Wide** format.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/#min_bytes_for_wide_part).
+	MinRowsForWidePart *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=min_rows_for_wide_part,json=minRowsForWidePart,proto3" json:"min_rows_for_wide_part,omitempty"`
+	// Enables or disables complete dropping of data parts where all rows are expired in MergeTree tables.
+	//
+	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#ttl_only_drop_parts).
+	TtlOnlyDropParts                 *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=ttl_only_drop_parts,json=ttlOnlyDropParts,proto3" json:"ttl_only_drop_parts,omitempty"`
+	AllowRemoteFsZeroCopyReplication *wrapperspb.BoolValue `protobuf:"bytes,14,opt,name=allow_remote_fs_zero_copy_replication,json=allowRemoteFsZeroCopyReplication,proto3" json:"allow_remote_fs_zero_copy_replication,omitempty"`
 }
 
 func (x *ClickhouseConfig_MergeTree) Reset() {
@@ -1191,9 +1209,12 @@ type ClickhouseConfig_Rabbitmq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// [RabbitMQ](https://clickhouse.com/docs/en/engines/table-engines/integrations/rabbitmq/) username
 	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	// [RabbitMQ](https://clickhouse.com/docs/en/engines/table-engines/integrations/rabbitmq/) password
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Vhost    string `protobuf:"bytes,3,opt,name=vhost,proto3" json:"vhost,omitempty"`
+	// [RabbitMQ](https://clickhouse.com/docs/en/engines/table-engines/integrations/rabbitmq/) virtual host
+	Vhost string `protobuf:"bytes,3,opt,name=vhost,proto3" json:"vhost,omitempty"`
 }
 
 func (x *ClickhouseConfig_Rabbitmq) Reset() {
@@ -1254,7 +1275,7 @@ type ClickhouseConfig_Compression struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Compression method to use for the specified combination of `min_part_size` and `min_part_size_ratio`.
+	// Compression method to use for the specified combination of [min_part_size] and [min_part_size_ratio].
 	Method ClickhouseConfig_Compression_Method `protobuf:"varint,1,opt,name=method,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Compression_Method" json:"method,omitempty"`
 	// Minimum size of a part of a table.
 	MinPartSize int64 `protobuf:"varint,2,opt,name=min_part_size,json=minPartSize,proto3" json:"min_part_size,omitempty"`

@@ -123,6 +123,10 @@ func (m *MasterUpdateSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *MasterUpdateSpec) SetMasterLogging(v *MasterLogging) {
+	m.MasterLogging = v
+}
+
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -303,6 +307,10 @@ func (m *MasterSpec) SetMaintenancePolicy(v *MasterMaintenancePolicy) {
 
 func (m *MasterSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
+}
+
+func (m *MasterSpec) SetMasterLogging(v *MasterLogging) {
+	m.MasterLogging = v
 }
 
 func (m *ZonalMasterSpec) SetZoneId(v string) {

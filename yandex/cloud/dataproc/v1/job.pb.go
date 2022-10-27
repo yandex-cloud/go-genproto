@@ -92,7 +92,7 @@ func (Job_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_dataproc_v1_job_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// A Data Proc job. For details about the concept, see [documentation](/docs/dataproc/concepts/jobs).
+// A Data Proc job. For details about the concept, see [documentation](/docs/data-proc/concepts/jobs).
 type Job struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

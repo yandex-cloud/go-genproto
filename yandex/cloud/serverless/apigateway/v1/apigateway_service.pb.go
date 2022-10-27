@@ -146,7 +146,7 @@ type ListApiGatewayRequest struct {
 	// A filter expression that filters functions listed in the response.
 	//
 	// The expression must specify:
-	// 1. The field name. Currently filtering can only be applied to the [ApiGateway.name] field.
+	// 1. The field name. Currently filtering can only be applied to the [ApiGateway.name](index) field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	// Example of a filter: `name=my-apigw`.
@@ -410,7 +410,7 @@ type UpdateApiGatewayRequest struct {
 	// API gateway labels as `key:value` pairs.
 	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
-	// to add or remove a label, request the current set of labels with a [ApiGatewayService.Get] request.
+	// to add or remove a label, request the current set of labels with a [yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Get] request.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// New OpenAPI specification of API gateway.
 	//

@@ -418,7 +418,7 @@ type CreateClusterConfigSpec struct {
 
 	// Version of the image for cluster provisioning.
 	//
-	// All available versions are listed in the [documentation](/docs/data-proc/concepts/image-versions).
+	// All available versions are listed in the [documentation](/docs/data-proc/concepts/environment).
 	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
 	// Data Proc specific options.
 	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`

@@ -360,7 +360,7 @@ type UpdateUserRequest struct {
 	//
 	// Default value: `true` (login is allowed).
 	Login *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=login,proto3" json:"login,omitempty"`
-	// Roles and privileges that are granted to the user (`GRANT <role> TO <user>`).
+	// A set of roles and privileges that are granted to the user.
 	//
 	// For more information, see [the documentation](/docs/managed-postgresql/operations/grant).
 	Grants []string `protobuf:"bytes,9,rep,name=grants,proto3" json:"grants,omitempty"`

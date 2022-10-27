@@ -552,7 +552,7 @@ type MysqlConfig5_7 struct {
 	GeneralLog *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=general_log,json=generalLog,proto3" json:"general_log,omitempty"`
 	// Enable writing of audit log of MySQL.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/audit-log-options-variables.html#option_mysqld_audit-log) for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/mysql-security-excerpt/5.7/en/audit-log-reference.html#audit-log-options-variables) for details.
 	AuditLog *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	// Server SQL mode of MySQL.
 	//
