@@ -27,10 +27,14 @@ type Container_Status int32
 
 const (
 	Container_STATUS_UNSPECIFIED Container_Status = 0
-	Container_CREATING           Container_Status = 1
-	Container_ACTIVE             Container_Status = 2
-	Container_DELETING           Container_Status = 3
-	Container_ERROR              Container_Status = 4
+	// Container is being created.
+	Container_CREATING Container_Status = 1
+	// Container is ready for use.
+	Container_ACTIVE Container_Status = 2
+	// Container is being deleted.
+	Container_DELETING Container_Status = 3
+	// Container failed. The only allowed action is delete.
+	Container_ERROR Container_Status = 4
 )
 
 // Enum value maps for Container_Status.
@@ -82,9 +86,12 @@ type Revision_Status int32
 
 const (
 	Revision_STATUS_UNSPECIFIED Revision_Status = 0
-	Revision_CREATING           Revision_Status = 1
-	Revision_ACTIVE             Revision_Status = 2
-	Revision_OBSOLETE           Revision_Status = 3
+	// Revision is being created.
+	Revision_CREATING Revision_Status = 1
+	// Revision is currently used by the container.
+	Revision_ACTIVE Revision_Status = 2
+	// Revision is not used by the container. May be deleted later.
+	Revision_OBSOLETE Revision_Status = 3
 )
 
 // Enum value maps for Revision_Status.
@@ -135,14 +142,22 @@ type Container struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId    string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	CreatedAt   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string      `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Url         string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
-	Status      Container_Status       `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.serverless.containers.v1.Container_Status" json:"status,omitempty"`
+	// ID of the container. Generated at creation time.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the container belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp for the container.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Name of the container. The name is unique within the folder.
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the container.
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// Container labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// URL that needs to be requested to call the container.
+	Url string `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
+	// Status of the container.
+	Status Container_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.serverless.containers.v1.Container_Status" json:"status,omitempty"`
 }
 
 func (x *Container) Reset() {
@@ -238,19 +253,36 @@ type Revision struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ContainerId      string                 `protobuf:"bytes,2,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
-	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Image            *Image                 `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
-	Resources        *Resources             `protobuf:"bytes,6,opt,name=resources,proto3" json:"resources,omitempty"`
-	ExecutionTimeout *durationpb.Duration   `protobuf:"bytes,7,opt,name=execution_timeout,json=executionTimeout,proto3" json:"execution_timeout,omitempty"`
-	Concurrency      int64                  `protobuf:"varint,8,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
-	ServiceAccountId string                 `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	Status           Revision_Status        `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.serverless.containers.v1.Revision_Status" json:"status,omitempty"`
-	Secrets          []*Secret              `protobuf:"bytes,11,rep,name=secrets,proto3" json:"secrets,omitempty"`
-	Connectivity     *Connectivity          `protobuf:"bytes,12,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
-	ProvisionPolicy  *ProvisionPolicy       `protobuf:"bytes,13,opt,name=provision_policy,json=provisionPolicy,proto3" json:"provision_policy,omitempty"`
+	// ID of the revision.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the container that the revision belongs to.
+	ContainerId string `protobuf:"bytes,2,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
+	// Description of the revision.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Creation timestamp for the revision.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Image configuration for the revision.
+	Image *Image `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	// Resources allocated to the revision.
+	Resources *Resources `protobuf:"bytes,6,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Timeout for the execution of the revision.
+	//
+	// If the timeout is exceeded, Serverless Containers responds with a 504 HTTP code.
+	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,7,opt,name=execution_timeout,json=executionTimeout,proto3" json:"execution_timeout,omitempty"`
+	// The number of concurrent requests allowed per container instance.
+	Concurrency int64 `protobuf:"varint,8,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
+	// ID of the service account associated with the revision.
+	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Status of the revision.
+	Status Revision_Status `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.serverless.containers.v1.Revision_Status" json:"status,omitempty"`
+	// Yandex Lockbox secrets to be used by the revision.
+	Secrets []*Secret `protobuf:"bytes,11,rep,name=secrets,proto3" json:"secrets,omitempty"`
+	// Network access. If specified the revision will be attached to specified network/subnet(s).
+	Connectivity *Connectivity `protobuf:"bytes,12,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
+	// Policy for provisioning instances of the revision.
+	//
+	// The policy is only applied when the revision is ACTIVE.
+	ProvisionPolicy *ProvisionPolicy `protobuf:"bytes,13,opt,name=provision_policy,json=provisionPolicy,proto3" json:"provision_policy,omitempty"`
 }
 
 func (x *Revision) Reset() {
@@ -376,17 +408,24 @@ func (x *Revision) GetProvisionPolicy() *ProvisionPolicy {
 	return nil
 }
 
+// Revision image specification.
 type Image struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ImageUrl    string            `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	ImageDigest string            `protobuf:"bytes,2,opt,name=image_digest,json=imageDigest,proto3" json:"image_digest,omitempty"`
-	Command     *Command          `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
-	Args        *Args             `protobuf:"bytes,4,opt,name=args,proto3" json:"args,omitempty"`
+	// Image URL, that is used by the revision.
+	ImageUrl string `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	// Digest of the image. Calculated at creation time.
+	ImageDigest string `protobuf:"bytes,2,opt,name=image_digest,json=imageDigest,proto3" json:"image_digest,omitempty"`
+	// Override for the image's ENTRYPOINT.
+	Command *Command `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
+	// Override for the image's CMD.
+	Args *Args `protobuf:"bytes,4,opt,name=args,proto3" json:"args,omitempty"`
+	// Additional environment for the container.
 	Environment map[string]string `protobuf:"bytes,5,rep,name=environment,proto3" json:"environment,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	WorkingDir  string            `protobuf:"bytes,6,opt,name=working_dir,json=workingDir,proto3" json:"working_dir,omitempty"`
+	// Override for the image's WORKDIR.
+	WorkingDir string `protobuf:"bytes,6,opt,name=working_dir,json=workingDir,proto3" json:"working_dir,omitempty"`
 }
 
 func (x *Image) Reset() {
@@ -468,6 +507,11 @@ type Command struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Command that will override ENTRYPOINT of an image.
+	//
+	// Commands will be executed as is. The runtime will not substitute environment
+	// variables or execute shell commands. If one wants to do that, they should
+	// invoke shell interpreter with an appropriate shell script.
 	Command []string `protobuf:"bytes,1,rep,name=command,proto3" json:"command,omitempty"`
 }
 
@@ -515,6 +559,11 @@ type Args struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Arguments that will override CMD of an image.
+	//
+	// Arguments will be passed as is. The runtime will not substitute environment
+	// variables or execute shell commands. If one wants to do that, they should
+	// invoke shell interpreter with an appropriate shell script.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
 }
 
@@ -557,13 +606,17 @@ func (x *Args) GetArgs() []string {
 	return nil
 }
 
+// Resources allocated to a revision.
 type Resources struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Memory       int64 `protobuf:"varint,1,opt,name=memory,proto3" json:"memory,omitempty"`
-	Cores        int64 `protobuf:"varint,2,opt,name=cores,proto3" json:"cores,omitempty"`
+	// Amount of memory available to the revision, specified in bytes.
+	Memory int64 `protobuf:"varint,1,opt,name=memory,proto3" json:"memory,omitempty"`
+	// Number of cores available to the revision.
+	Cores int64 `protobuf:"varint,2,opt,name=cores,proto3" json:"cores,omitempty"`
+	// Specifies baseline performance for a core in percent.
 	CoreFraction int64 `protobuf:"varint,3,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
 }
 
@@ -625,6 +678,8 @@ type ProvisionPolicy struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Minimum number of guaranteed provisioned container instances for all zones
+	// in total.
 	MinInstances int64 `protobuf:"varint,1,opt,name=min_instances,json=minInstances,proto3" json:"min_instances,omitempty"`
 }
 
@@ -667,14 +722,18 @@ func (x *ProvisionPolicy) GetMinInstances() int64 {
 	return 0
 }
 
+// Secret that is available to the container at run time.
 type Secret struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of Yandex Lockbox secret.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of Yandex Lockbox secret.
 	VersionId string `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	Key       string `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
+	// Key in secret's payload, which value to be delivered into container environment.
+	Key string `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
 	// Types that are assignable to Reference:
 	//	*Secret_EnvironmentVariable
 	Reference isSecret_Reference `protobuf_oneof:"reference"`
@@ -752,17 +811,23 @@ type isSecret_Reference interface {
 }
 
 type Secret_EnvironmentVariable struct {
+	// Environment variable in which secret's value is delivered.
 	EnvironmentVariable string `protobuf:"bytes,4,opt,name=environment_variable,json=environmentVariable,proto3,oneof"`
 }
 
 func (*Secret_EnvironmentVariable) isSecret_Reference() {}
 
+// Revision connectivity specification.
 type Connectivity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	NetworkId string   `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	// Network the revision will have access to.
+	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	// The list of subnets (from the same network) the revision can be attached to.
+	//
+	// Deprecated, it is sufficient to specify only network_id, without the list of subnet_ids.
 	SubnetIds []string `protobuf:"bytes,2,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
 }
 

@@ -1153,7 +1153,7 @@ type CreateFunctionVersionRequest struct {
 	Connectivity *Connectivity `protobuf:"bytes,17,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
 	// Additional service accounts to be used by the version.
 	NamedServiceAccounts map[string]string `protobuf:"bytes,15,rep,name=named_service_accounts,json=namedServiceAccounts,proto3" json:"named_service_accounts,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Lockbox secrets to be used by the version
+	// Yandex Lockbox secrets to be used by the version.
 	Secrets []*Secret `protobuf:"bytes,18,rep,name=secrets,proto3" json:"secrets,omitempty"`
 }
 

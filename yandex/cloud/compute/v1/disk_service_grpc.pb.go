@@ -47,7 +47,7 @@ type DiskServiceClient interface {
 	ListOperations(ctx context.Context, in *ListDiskOperationsRequest, opts ...grpc.CallOption) (*ListDiskOperationsResponse, error)
 	// Moves the specified disk to another folder of the same cloud.
 	Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// List snapshot schedules containing the disk
+	// Retrieves the list of snapshot schedules the specified disk is attached to.
 	ListSnapshotSchedules(ctx context.Context, in *ListDiskSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListDiskSnapshotSchedulesResponse, error)
 }
 
@@ -159,7 +159,7 @@ type DiskServiceServer interface {
 	ListOperations(context.Context, *ListDiskOperationsRequest) (*ListDiskOperationsResponse, error)
 	// Moves the specified disk to another folder of the same cloud.
 	Move(context.Context, *MoveDiskRequest) (*operation.Operation, error)
-	// List snapshot schedules containing the disk
+	// Retrieves the list of snapshot schedules the specified disk is attached to.
 	ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error)
 }
 

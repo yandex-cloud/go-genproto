@@ -2,16 +2,25 @@
 
 package apploadbalancer
 
-func (m *LogDiscardRule) SetCodes(v []int64) {
-	m.Codes = v
+import (
+	code "google.golang.org/genproto/googleapis/rpc/code"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
+func (m *LogDiscardRule) SetHttpCodes(v []int64) {
+	m.HttpCodes = v
 }
 
-func (m *LogDiscardRule) SetIntervals(v []HttpCodeInterval) {
-	m.Intervals = v
+func (m *LogDiscardRule) SetHttpCodeIntervals(v []HttpCodeInterval) {
+	m.HttpCodeIntervals = v
 }
 
-func (m *LogDiscardRule) SetPercent(v int64) {
-	m.Percent = v
+func (m *LogDiscardRule) SetGrpcCodes(v []code.Code) {
+	m.GrpcCodes = v
+}
+
+func (m *LogDiscardRule) SetDiscardPercent(v *wrapperspb.Int64Value) {
+	m.DiscardPercent = v
 }
 
 func (m *LogOptions) SetLogGroupId(v string) {

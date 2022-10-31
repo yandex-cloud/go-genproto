@@ -252,7 +252,7 @@ type CreateDiskRequest struct {
 	BlockSize int64 `protobuf:"varint,10,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	// Placement policy configuration.
 	DiskPlacementPolicy *DiskPlacementPolicy `protobuf:"bytes,11,opt,name=disk_placement_policy,json=diskPlacementPolicy,proto3" json:"disk_placement_policy,omitempty"`
-	// Snapshot schedules
+	// List of IDs of the snapshot schedules to attach the disk to.
 	SnapshotScheduleIds []string `protobuf:"bytes,12,rep,name=snapshot_schedule_ids,json=snapshotScheduleIds,proto3" json:"snapshot_schedule_ids,omitempty"`
 }
 
@@ -956,13 +956,15 @@ type ListDiskSnapshotSchedulesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Disk resource to list snapshot schedules for.
+	// ID of the disk to list snapshot schedules for.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListDiskOperationsResponse.next_page_token]
+	// results is larger than `page_size`, the service returns a [ListDiskSnapshotSchedulesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListDiskSnapshotSchedulesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
@@ -1025,12 +1027,13 @@ type ListDiskSnapshotSchedulesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of snapshot schedules for the specified disk.
+	// List of snapshot schedules the specified disk is attached to.
 	SnapshotSchedules []*SnapshotSchedule `protobuf:"bytes,1,rep,name=snapshot_schedules,json=snapshotSchedules,proto3" json:"snapshot_schedules,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListDiskSnapshotSchedulesRequest.page_size], use the [next_page_token] as the value
-	// for the [ListDiskSnapshotSchedulesRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDiskSnapshotSchedulesRequest.page_size], use `next_page_token` as the value
+	// for the [ListDiskSnapshotSchedulesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 

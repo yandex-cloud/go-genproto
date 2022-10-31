@@ -24,18 +24,36 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ContainerServiceClient interface {
+	// Returns the specified container.
+	//
+	// To get the list of all available containers, make a [List] request.
 	Get(ctx context.Context, in *GetContainerRequest, opts ...grpc.CallOption) (*Container, error)
+	// Retrieves the list of containers in the specified folder.
 	List(ctx context.Context, in *ListContainersRequest, opts ...grpc.CallOption) (*ListContainersResponse, error)
+	// Creates a container in the specified folder.
 	Create(ctx context.Context, in *CreateContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified container.
 	Update(ctx context.Context, in *UpdateContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified container.
 	Delete(ctx context.Context, in *DeleteContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deploys a revision for the specified container.
 	DeployRevision(ctx context.Context, in *DeployContainerRevisionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Rollback the specified container to an old revision.
 	Rollback(ctx context.Context, in *RollbackContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the specified revision of a container.
+	//
+	// To get the list of available revision, make a [ListRevisions] request.
 	GetRevision(ctx context.Context, in *GetContainerRevisionRequest, opts ...grpc.CallOption) (*Revision, error)
+	// Retrieves the list of revisions for the specified container, or of all container revisions
+	// in the specified folder.
 	ListRevisions(ctx context.Context, in *ListContainersRevisionsRequest, opts ...grpc.CallOption) (*ListContainersRevisionsResponse, error)
+	// Lists operations for the specified container.
 	ListOperations(ctx context.Context, in *ListContainerOperationsRequest, opts ...grpc.CallOption) (*ListContainerOperationsResponse, error)
+	// Lists existing access bindings for the specified container.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the container.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified container.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -168,18 +186,36 @@ func (c *containerServiceClient) UpdateAccessBindings(ctx context.Context, in *a
 // All implementations should embed UnimplementedContainerServiceServer
 // for forward compatibility
 type ContainerServiceServer interface {
+	// Returns the specified container.
+	//
+	// To get the list of all available containers, make a [List] request.
 	Get(context.Context, *GetContainerRequest) (*Container, error)
+	// Retrieves the list of containers in the specified folder.
 	List(context.Context, *ListContainersRequest) (*ListContainersResponse, error)
+	// Creates a container in the specified folder.
 	Create(context.Context, *CreateContainerRequest) (*operation.Operation, error)
+	// Updates the specified container.
 	Update(context.Context, *UpdateContainerRequest) (*operation.Operation, error)
+	// Deletes the specified container.
 	Delete(context.Context, *DeleteContainerRequest) (*operation.Operation, error)
+	// Deploys a revision for the specified container.
 	DeployRevision(context.Context, *DeployContainerRevisionRequest) (*operation.Operation, error)
+	// Rollback the specified container to an old revision.
 	Rollback(context.Context, *RollbackContainerRequest) (*operation.Operation, error)
+	// Returns the specified revision of a container.
+	//
+	// To get the list of available revision, make a [ListRevisions] request.
 	GetRevision(context.Context, *GetContainerRevisionRequest) (*Revision, error)
+	// Retrieves the list of revisions for the specified container, or of all container revisions
+	// in the specified folder.
 	ListRevisions(context.Context, *ListContainersRevisionsRequest) (*ListContainersRevisionsResponse, error)
+	// Lists operations for the specified container.
 	ListOperations(context.Context, *ListContainerOperationsRequest) (*ListContainerOperationsResponse, error)
+	// Lists existing access bindings for the specified container.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the container.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified container.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 

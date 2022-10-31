@@ -298,7 +298,7 @@ type Version struct {
 	Connectivity *Connectivity `protobuf:"bytes,17,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
 	// Additional service accounts to be used by the version.
 	NamedServiceAccounts map[string]string `protobuf:"bytes,18,rep,name=named_service_accounts,json=namedServiceAccounts,proto3" json:"named_service_accounts,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Lockbox secrets to be used by the version
+	// Yandex Lockbox secrets to be used by the version.
 	Secrets []*Secret `protobuf:"bytes,19,rep,name=secrets,proto3" json:"secrets,omitempty"`
 }
 
@@ -734,17 +734,17 @@ func (x *ScalingPolicy) GetZoneRequestsLimit() int64 {
 	return 0
 }
 
-// Secret for serverless function
+// Secret for serverless function.
 type Secret struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of lockbox secret
+	// ID of Yandex Lockbox secret.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of secret version
+	// ID of Yandex Lockbox version.
 	VersionId string `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	// Key in secret's payload, which value to be delivered into function environment
+	// Key in secret's payload, which value to be delivered into function environment.
 	Key string `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
 	// Types that are assignable to Reference:
 	//	*Secret_EnvironmentVariable
@@ -823,7 +823,7 @@ type isSecret_Reference interface {
 }
 
 type Secret_EnvironmentVariable struct {
-	// environment variable in which secret's value to be delivered
+	// environment variable in which secret's value to be delivered.
 	EnvironmentVariable string `protobuf:"bytes,4,opt,name=environment_variable,json=environmentVariable,proto3,oneof"`
 }
 

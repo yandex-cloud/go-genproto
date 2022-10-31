@@ -32,6 +32,9 @@ type GetContainerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container to return.
+	//
+	// To get a container ID make a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 }
 
@@ -79,10 +82,27 @@ type ListContainersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// ID of the folder to list containers in.
+	//
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `pageSize`, the service returns a [ListContainersResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `pageToken` to the
+	// [ListContainersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// A filter expression that filters containers listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently filtering can only be applied to the [Container.name] field.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name="my-container"`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListContainersRequest) Reset() {
@@ -150,8 +170,14 @@ type ListContainersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Containers    []*Container `protobuf:"bytes,1,rep,name=containers,proto3" json:"containers,omitempty"`
-	NextPageToken string       `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of containers in the specified folder.
+	Containers []*Container `protobuf:"bytes,1,rep,name=containers,proto3" json:"containers,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListContainersRequest.page_size], use `nextPageToken` as the value
+	// for the [ListContainersRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListContainersResponse) Reset() {
@@ -205,10 +231,17 @@ type CreateContainerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId    string            `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name        string            `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the folder to create a container in.
+	//
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the container.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the container.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Resource labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *CreateContainerRequest) Reset() {
@@ -276,6 +309,7 @@ type CreateContainerMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container that is being created.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 }
 
@@ -323,11 +357,22 @@ type UpdateContainerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ContainerId string                 `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
-	UpdateMask  *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name        string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string      `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the container to update.
+	//
+	// To get a container ID make a [ContainerService.List] request.
+	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
+	// Field mask that specifies which attributes of the container should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the container.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description for the container.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Container labels as `key:value` pairs.
+	//
+	// Existing set of labels is completely replaced by the provided set, so if you just want
+	// to add or remove a label, request the current set of labels with a [ContainerService.Get] request.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *UpdateContainerRequest) Reset() {
@@ -402,6 +447,7 @@ type UpdateContainerMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container that is being updated.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 }
 
@@ -449,6 +495,8 @@ type DeleteContainerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container to delete.
+	// To get a container ID make a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 }
 
@@ -496,6 +544,7 @@ type DeleteContainerMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container that is being deleted.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 }
 
@@ -543,6 +592,9 @@ type GetContainerRevisionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the revision to return.
+	//
+	// To get a revision ID make a [ContainerService.ListRevisions] request.
 	ContainerRevisionId string `protobuf:"bytes,1,opt,name=container_revision_id,json=containerRevisionId,proto3" json:"container_revision_id,omitempty"`
 }
 
@@ -593,10 +645,24 @@ type ListContainersRevisionsRequest struct {
 	// Types that are assignable to Id:
 	//	*ListContainersRevisionsRequest_FolderId
 	//	*ListContainersRevisionsRequest_ContainerId
-	Id        isListContainersRevisionsRequest_Id `protobuf_oneof:"id"`
-	PageSize  int64                               `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken string                              `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string                              `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
+	Id isListContainersRevisionsRequest_Id `protobuf_oneof:"id"`
+	// The maximum number of results per page to return. If the number of available results
+	// is larger than `pageSize`, the service returns a [ListContainersRevisionsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `pageToken` to the
+	// [ListContainersRevisionsResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently filtering can only be applied to the [Revision.status] and [Revision.runtime] fields.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `status="ACTIVE"`.
+	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListContainersRevisionsRequest) Reset() {
@@ -678,10 +744,14 @@ type isListContainersRevisionsRequest_Id interface {
 }
 
 type ListContainersRevisionsRequest_FolderId struct {
+	// ID of the folder to list container revisions for.
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
 type ListContainersRevisionsRequest_ContainerId struct {
+	// ID of the container to list revisions for.
+	// To get a container ID use a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,2,opt,name=container_id,json=containerId,proto3,oneof"`
 }
 
@@ -694,8 +764,14 @@ type ListContainersRevisionsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Revisions     []*Revision `protobuf:"bytes,1,rep,name=revisions,proto3" json:"revisions,omitempty"`
-	NextPageToken string      `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of revisions for the specified folder or container.
+	Revisions []*Revision `protobuf:"bytes,1,rep,name=revisions,proto3" json:"revisions,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListContainersRevisionsRequest.page_size], use `nextPageToken` as the value
+	// for the [ListContainersRevisionsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListContainersRevisionsResponse) Reset() {
@@ -749,16 +825,34 @@ type DeployContainerRevisionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ContainerId      string               `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
-	Description      string               `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Resources        *Resources           `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
+	// ID of the container to create a revision for.
+	//
+	// To get a container ID, make a [ContainerService.List] request.
+	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
+	// Description of the revision.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Resources allocated to the revision.
+	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Timeout for the execution of the revision.
+	//
+	// If the timeout is exceeded, Serverless Containers responds with a 504 HTTP code.
 	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,6,opt,name=execution_timeout,json=executionTimeout,proto3" json:"execution_timeout,omitempty"`
-	ServiceAccountId string               `protobuf:"bytes,7,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	ImageSpec        *ImageSpec           `protobuf:"bytes,8,opt,name=image_spec,json=imageSpec,proto3" json:"image_spec,omitempty"`
-	Concurrency      int64                `protobuf:"varint,9,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
-	Secrets          []*Secret            `protobuf:"bytes,10,rep,name=secrets,proto3" json:"secrets,omitempty"`
-	Connectivity     *Connectivity        `protobuf:"bytes,11,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
-	ProvisionPolicy  *ProvisionPolicy     `protobuf:"bytes,12,opt,name=provision_policy,json=provisionPolicy,proto3" json:"provision_policy,omitempty"`
+	// ID of the service account to associate with the revision.
+	ServiceAccountId string `protobuf:"bytes,7,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Image configuration for the revision.
+	ImageSpec *ImageSpec `protobuf:"bytes,8,opt,name=image_spec,json=imageSpec,proto3" json:"image_spec,omitempty"`
+	// The number of concurrent requests allowed per container instance.
+	//
+	// The default value is 1.
+	Concurrency int64 `protobuf:"varint,9,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
+	// Yandex Lockbox secrets to be used by the revision.
+	Secrets []*Secret `protobuf:"bytes,10,rep,name=secrets,proto3" json:"secrets,omitempty"`
+	// Network access. If specified the revision will be attached to specified network/subnet(s).
+	Connectivity *Connectivity `protobuf:"bytes,11,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
+	// Policy for provisioning instances of the revision.
+	//
+	// The policy is only applied when the revision is ACTIVE.
+	ProvisionPolicy *ProvisionPolicy `protobuf:"bytes,12,opt,name=provision_policy,json=provisionPolicy,proto3" json:"provision_policy,omitempty"`
 }
 
 func (x *DeployContainerRevisionRequest) Reset() {
@@ -863,16 +957,22 @@ func (x *DeployContainerRevisionRequest) GetProvisionPolicy() *ProvisionPolicy {
 	return nil
 }
 
+// Revision image specification.
 type ImageSpec struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ImageUrl    string            `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	Command     *Command          `protobuf:"bytes,2,opt,name=command,proto3" json:"command,omitempty"`
-	Args        *Args             `protobuf:"bytes,3,opt,name=args,proto3" json:"args,omitempty"`
+	// Image URL, that is used by the revision.
+	ImageUrl string `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	// Override for the image's ENTRYPOINT.
+	Command *Command `protobuf:"bytes,2,opt,name=command,proto3" json:"command,omitempty"`
+	// Override for the image's CMD.
+	Args *Args `protobuf:"bytes,3,opt,name=args,proto3" json:"args,omitempty"`
+	// Additional environment for the container.
 	Environment map[string]string `protobuf:"bytes,4,rep,name=environment,proto3" json:"environment,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	WorkingDir  string            `protobuf:"bytes,5,opt,name=working_dir,json=workingDir,proto3" json:"working_dir,omitempty"`
+	// Override for the image's WORKDIR.
+	WorkingDir string `protobuf:"bytes,5,opt,name=working_dir,json=workingDir,proto3" json:"working_dir,omitempty"`
 }
 
 func (x *ImageSpec) Reset() {
@@ -947,6 +1047,7 @@ type DeployContainerRevisionMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the revision that is being created.
 	ContainerRevisionId string `protobuf:"bytes,1,opt,name=container_revision_id,json=containerRevisionId,proto3" json:"container_revision_id,omitempty"`
 }
 
@@ -994,8 +1095,14 @@ type RollbackContainerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container to rollback to an old revision.
+	//
+	// To get a container ID, make a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
-	RevisionId  string `protobuf:"bytes,2,opt,name=revision_id,json=revisionId,proto3" json:"revision_id,omitempty"`
+	// ID of the revision to rollback to.
+	//
+	// To get a revision ID make a [ContainerService.ListRevisions] request.
+	RevisionId string `protobuf:"bytes,2,opt,name=revision_id,json=revisionId,proto3" json:"revision_id,omitempty"`
 }
 
 func (x *RollbackContainerRequest) Reset() {
@@ -1049,8 +1156,10 @@ type RollbackContainerMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container that is being rolled back.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
-	RevisionId  string `protobuf:"bytes,2,opt,name=revision_id,json=revisionId,proto3" json:"revision_id,omitempty"`
+	// ID of the revision that the container is being rolled back to.
+	RevisionId string `protobuf:"bytes,2,opt,name=revision_id,json=revisionId,proto3" json:"revision_id,omitempty"`
 }
 
 func (x *RollbackContainerMetadata) Reset() {
@@ -1104,10 +1213,25 @@ type ListContainerOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the container to list operations for.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
-	PageSize    int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken   string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter      string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// The maximum number of results per page that should be returned. If the number of available
+	// results is larger than `pageSize`, the service returns a [ListContainerOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `pageToken` to the
+	// [ListContainerOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently filtering can be applied to the [operation.Operation.done], [operation.Operation.created_by] field.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Examples of a filter: `done=false`, `created_by='John.Doe'`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListContainerOperationsRequest) Reset() {
@@ -1175,8 +1299,14 @@ type ListContainerOperationsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Operations    []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of operations for the specified container.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListContainerOperationsRequest.page_size], use `nextPageToken` as the value
+	// for the [ListContainerOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListContainerOperationsResponse) Reset() {

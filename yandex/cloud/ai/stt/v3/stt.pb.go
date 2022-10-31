@@ -279,8 +279,10 @@ type LanguageRestrictionOptions_LanguageRestrictionType int32
 
 const (
 	LanguageRestrictionOptions_LANGUAGE_RESTRICTION_TYPE_UNSPECIFIED LanguageRestrictionOptions_LanguageRestrictionType = 0
-	LanguageRestrictionOptions_WHITELIST                             LanguageRestrictionOptions_LanguageRestrictionType = 1
-	LanguageRestrictionOptions_BLACKLIST                             LanguageRestrictionOptions_LanguageRestrictionType = 2
+	// The allowing list. The incoming audio can contain only the listed languages.
+	LanguageRestrictionOptions_WHITELIST LanguageRestrictionOptions_LanguageRestrictionType = 1
+	// The forbidding list. The incoming audio cannot contain the listed languages.
+	LanguageRestrictionOptions_BLACKLIST LanguageRestrictionOptions_LanguageRestrictionType = 2
 )
 
 // Enum value maps for LanguageRestrictionOptions_LanguageRestrictionType.
@@ -373,14 +375,14 @@ func (RecognitionModelOptions_AudioProcessingType) EnumDescriptor() ([]byte, []i
 	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{8, 0}
 }
 
-// options
+// Options
 type TextNormalizationOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	TextNormalization TextNormalizationOptions_TextNormalization `protobuf:"varint,1,opt,name=text_normalization,json=textNormalization,proto3,enum=speechkit.stt.v3.TextNormalizationOptions_TextNormalization" json:"text_normalization,omitempty"`
-	// Filter profanity (default: false).
+	// Profanity filter (default: false).
 	ProfanityFilter bool `protobuf:"varint,2,opt,name=profanity_filter,json=profanityFilter,proto3" json:"profanity_filter,omitempty"`
 	// Rewrite text in literature style (default: false).
 	LiteratureText bool `protobuf:"varint,3,opt,name=literature_text,json=literatureText,proto3" json:"literature_text,omitempty"`
@@ -446,7 +448,7 @@ type DefaultEouClassifier struct {
 
 	// EOU sensitivity. Currently two levels, faster with more error and more conservative (our default).
 	Type DefaultEouClassifier_EouSensitivity `protobuf:"varint,1,opt,name=type,proto3,enum=speechkit.stt.v3.DefaultEouClassifier_EouSensitivity" json:"type,omitempty"`
-	// Hint for max pause between words. Our EoU detector could use this information to distinguish between end of utterance and slow speech (like one <long pause> two <long pause> three, etc).
+	// Hint for max pause between words. Our EOU detector could use this information to distinguish between end of utterance and slow speech (like one <long pause> two <long pause> three, etc).
 	MaxPauseBetweenWordsHintMs int64 `protobuf:"varint,2,opt,name=max_pause_between_words_hint_ms,json=maxPauseBetweenWordsHintMs,proto3" json:"max_pause_between_words_hint_ms,omitempty"`
 }
 
@@ -611,7 +613,7 @@ type EouClassifierOptions_DefaultClassifier struct {
 }
 
 type EouClassifierOptions_ExternalClassifier struct {
-	// EoU is enforced by external messages from user.
+	// EOU is enforced by external messages from user.
 	ExternalClassifier *ExternalEouClassifier `protobuf:"bytes,2,opt,name=external_classifier,json=externalClassifier,proto3,oneof"`
 }
 
@@ -818,6 +820,7 @@ func (*AudioFormatOptions_RawAudio) isAudioFormatOptions_AudioFormat() {}
 
 func (*AudioFormatOptions_ContainerAudio) isAudioFormatOptions_AudioFormat() {}
 
+// Type of restriction for the list of languages expected in the incoming speech stream.
 type LanguageRestrictionOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1063,6 +1066,7 @@ func (x *AudioChunk) GetData() []byte {
 	return nil
 }
 
+// Data chunk with silence.
 type SilenceChunk struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1239,7 +1243,7 @@ type isStreamingRequest_Event interface {
 }
 
 type StreamingRequest_SessionOptions struct {
-	// Session options. should be first message from user
+	// Session options. Should be the first message from user.
 	SessionOptions *StreamingOptions `protobuf:"bytes,1,opt,name=session_options,json=sessionOptions,proto3,oneof"`
 }
 
@@ -1254,7 +1258,7 @@ type StreamingRequest_SilenceChunk struct {
 }
 
 type StreamingRequest_Eou struct {
-	// Request to end current utterance. Works only with external EoU detector.
+	// Request to end current utterance. Works only with external EOU detector.
 	Eou *Eou `protobuf:"bytes,4,opt,name=eou,proto3,oneof"`
 }
 
@@ -1274,9 +1278,9 @@ type Word struct {
 
 	//  Word text.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	//  Estimation of word start time in ms
+	//  Estimation of word start time in ms.
 	StartTimeMs int64 `protobuf:"varint,2,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
-	//  Estimation of word end time in ms
+	//  Estimation of word end time in ms.
 	EndTimeMs int64 `protobuf:"varint,3,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
 }
 
@@ -1333,14 +1337,16 @@ func (x *Word) GetEndTimeMs() int64 {
 	return 0
 }
 
-// Estimation of language probability
+// Estimation of language and its probability.
 type LanguageEstimation struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LanguageCode string  `protobuf:"bytes,1,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
-	Probability  float64 `protobuf:"fixed64,2,opt,name=probability,proto3" json:"probability,omitempty"`
+	// Language code in ISO 639-1 format.
+	LanguageCode string `protobuf:"bytes,1,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
+	// Estimation of language probability.
+	Probability float64 `protobuf:"fixed64,2,opt,name=probability,proto3" json:"probability,omitempty"`
 }
 
 func (x *LanguageEstimation) Reset() {
@@ -1395,17 +1401,17 @@ type Alternative struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//  Words in time frame.
+	// Words in time frame.
 	Words []*Word `protobuf:"bytes,1,rep,name=words,proto3" json:"words,omitempty"`
-	//  Text in time frame.
+	// Text in time frame.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
 	// Start of time frame.
 	StartTimeMs int64 `protobuf:"varint,3,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
 	// End of time frame.
 	EndTimeMs int64 `protobuf:"varint,4,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
-	// Hypothesis confidence. Currently is not used.
+	// The hypothesis confidence. Currently is not used.
 	Confidence float64 `protobuf:"fixed64,5,opt,name=confidence,proto3" json:"confidence,omitempty"`
-	// Distribution over possible languages
+	// Distribution over possible languages.
 	Languages []*LanguageEstimation `protobuf:"bytes,6,rep,name=languages,proto3" json:"languages,omitempty"`
 }
 
@@ -1483,13 +1489,13 @@ func (x *Alternative) GetLanguages() []*LanguageEstimation {
 	return nil
 }
 
-// Update information from
+// Update information for external End of Utterance.
 type EouUpdate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// End of utterance estimated time.
+	// EOU estimated time.
 	TimeMs int64 `protobuf:"varint,2,opt,name=time_ms,json=timeMs,proto3" json:"time_ms,omitempty"`
 }
 

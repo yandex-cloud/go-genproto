@@ -30,7 +30,9 @@ type GetSnapshotScheduleRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SnapshotSchedule resource to return.
+	// ID of the snapshot schedule to return.
+	//
+	// To get a schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -79,18 +81,30 @@ type ListSnapshotSchedulesRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the folder to list snapshot schedules in.
+	//
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size],
-	// the service returns a [ListSnapshotSchedulesResponse.next_page_token]
+	// results is larger than `page_size`, the service returns a [ListSnapshotSchedulesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
+	// Page token. To get the next page of results, set `page_token` to the
 	// [ListSnapshotSchedulesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "createdAt desc". "id asc" if omitted.
+	// A filter expression that filters snapshot schedules listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [SnapshotSchedule.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name=my-schedule`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// A sorting expression that sorts snapshot schedules listed in the response.
+	//
+	// The expression must specify the field name from [SnapshotSchedule] and `asc`ending or `desc`ending order,
+	// e.g. `createdAt desc`.
+	//
+	// Default value: `id asc`.
 	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
@@ -166,14 +180,13 @@ type ListSnapshotSchedulesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of SnapshotSchedule resources.
+	// List of snapshot schedules in the specified folder.
 	SnapshotSchedules []*SnapshotSchedule `protobuf:"bytes,1,rep,name=snapshot_schedules,json=snapshotSchedules,proto3" json:"snapshot_schedules,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListSnapshotSchedulesRequest.page_size], use
-	// the [next_page_token] as the value
-	// for the [ListSnapshotSchedulesRequest.page_token] query parameter
-	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListSnapshotSchedulesRequest.page_size], use `next_page_token` as the value
+	// for the [ListSnapshotSchedulesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -229,18 +242,34 @@ type CreateSnapshotScheduleRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the folder to create a snapshot schedule in.
-	FolderId    string            `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name        string            `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// schedule properties
+	//
+	// Snapshots are created in the same folder as the schedule, even if disks from other folders are attached
+	// to the schedule.
+	//
+	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the snapshot schedule.
+	//
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the snapshot schedule.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Snapshot schedule labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Frequency settings of the snapshot schedule.
 	SchedulePolicy *SchedulePolicy `protobuf:"bytes,5,opt,name=schedule_policy,json=schedulePolicy,proto3" json:"schedule_policy,omitempty"`
+	// Retention policy of the snapshot schedule.
+	//
 	// Types that are assignable to RetentionPolicy:
 	//	*CreateSnapshotScheduleRequest_RetentionPeriod
 	//	*CreateSnapshotScheduleRequest_SnapshotCount
 	RetentionPolicy isCreateSnapshotScheduleRequest_RetentionPolicy `protobuf_oneof:"retention_policy"`
-	SnapshotSpec    *SnapshotSpec                                   `protobuf:"bytes,8,opt,name=snapshot_spec,json=snapshotSpec,proto3" json:"snapshot_spec,omitempty"`
-	DiskIds         []string                                        `protobuf:"bytes,9,rep,name=disk_ids,json=diskIds,proto3" json:"disk_ids,omitempty"`
+	// Attributes of snapshots created by the snapshot schedule.
+	SnapshotSpec *SnapshotSpec `protobuf:"bytes,8,opt,name=snapshot_spec,json=snapshotSpec,proto3" json:"snapshot_spec,omitempty"`
+	// List of IDs of the disks attached to the snapshot schedule.
+	//
+	// To get a disk ID, make a [yandex.cloud.compute.v1.DiskService.List] request.
+	DiskIds []string `protobuf:"bytes,9,rep,name=disk_ids,json=diskIds,proto3" json:"disk_ids,omitempty"`
 }
 
 func (x *CreateSnapshotScheduleRequest) Reset() {
@@ -350,10 +379,15 @@ type isCreateSnapshotScheduleRequest_RetentionPolicy interface {
 }
 
 type CreateSnapshotScheduleRequest_RetentionPeriod struct {
+	// Retention period of the snapshot schedule. Once a snapshot created by the schedule reaches this age, it is
+	// automatically deleted.
 	RetentionPeriod *durationpb.Duration `protobuf:"bytes,6,opt,name=retention_period,json=retentionPeriod,proto3,oneof"`
 }
 
 type CreateSnapshotScheduleRequest_SnapshotCount struct {
+	// Retention count of the snapshot schedule. Once the number of snapshots created by the schedule exceeds this
+	// number, the oldest ones are automatically deleted. E.g. if the number is 5, the first snapshot is deleted
+	// after the sixth one is created, the second is deleted after the seventh one is created, and so on.
 	SnapshotCount int64 `protobuf:"varint,7,opt,name=snapshot_count,json=snapshotCount,proto3,oneof"`
 }
 
@@ -368,6 +402,7 @@ type CreateSnapshotScheduleMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the snapshot schedule that is being created.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -415,20 +450,36 @@ type UpdateSnapshotScheduleRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SnapshotSchedule resource to update.
+	// ID of the snapshot schedule to update.
+	//
+	// To get the snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
-	// Field mask that specifies which fields of the SnapshotSchedule resource are going to be updated.
+	// Field mask that specifies which attributes of the snapshot schedule should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// schedule properties
-	Name           string            `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description    string            `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels         map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	SchedulePolicy *SchedulePolicy   `protobuf:"bytes,6,opt,name=schedule_policy,json=schedulePolicy,proto3" json:"schedule_policy,omitempty"`
+	// New name for the snapshot schedule.
+	//
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description of the snapshot schedule.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Snapshot schedule labels as `key:value` pairs.
+	//
+	// Existing set of labels is completely replaced by the provided set, so if you just want
+	// to add or remove a label:
+	// 1. Get the current set of labels with a [SnapshotScheduleService.Get] request.
+	// 2. Add or remove a label in this set.
+	// 3. Send the new set in this field.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// New frequency settings of the snapshot schedule.
+	SchedulePolicy *SchedulePolicy `protobuf:"bytes,6,opt,name=schedule_policy,json=schedulePolicy,proto3" json:"schedule_policy,omitempty"`
+	// New retention policy of the snapshot schedule.
+	//
 	// Types that are assignable to RetentionPolicy:
 	//	*UpdateSnapshotScheduleRequest_RetentionPeriod
 	//	*UpdateSnapshotScheduleRequest_SnapshotCount
 	RetentionPolicy isUpdateSnapshotScheduleRequest_RetentionPolicy `protobuf_oneof:"retention_policy"`
-	SnapshotSpec    *SnapshotSpec                                   `protobuf:"bytes,9,opt,name=snapshot_spec,json=snapshotSpec,proto3" json:"snapshot_spec,omitempty"`
+	// New attributes of snapshots created by the snapshot schedule.
+	SnapshotSpec *SnapshotSpec `protobuf:"bytes,9,opt,name=snapshot_spec,json=snapshotSpec,proto3" json:"snapshot_spec,omitempty"`
 }
 
 func (x *UpdateSnapshotScheduleRequest) Reset() {
@@ -538,10 +589,15 @@ type isUpdateSnapshotScheduleRequest_RetentionPolicy interface {
 }
 
 type UpdateSnapshotScheduleRequest_RetentionPeriod struct {
+	// Retention period of the snapshot schedule. Once a snapshot created by the schedule reaches this age, it is
+	// automatically deleted.
 	RetentionPeriod *durationpb.Duration `protobuf:"bytes,7,opt,name=retention_period,json=retentionPeriod,proto3,oneof"`
 }
 
 type UpdateSnapshotScheduleRequest_SnapshotCount struct {
+	// Retention count of the snapshot schedule. Once the number of snapshots created by the schedule exceeds this
+	// number, the oldest ones are automatically deleted. E.g. if the number is 5, the first snapshot is deleted
+	// after the sixth one is created, the second is deleted after the seventh one is created, and so on.
 	SnapshotCount int64 `protobuf:"varint,8,opt,name=snapshot_count,json=snapshotCount,proto3,oneof"`
 }
 
@@ -556,6 +612,7 @@ type UpdateSnapshotScheduleMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the snapshot schedule that is being updated.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -604,6 +661,8 @@ type DeleteSnapshotScheduleRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the snapshot schedule to delete.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -651,6 +710,7 @@ type DeleteSnapshotScheduleMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the snapshot schedule that is being deleted.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -699,6 +759,8 @@ type DisableSnapshotScheduleRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the snapshot schedule to disable.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -746,6 +808,7 @@ type DisableSnapshotScheduleMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the snapshot schedule that is being disabled.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -794,6 +857,8 @@ type EnableSnapshotScheduleRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the snapshot schedule to enable.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -841,6 +906,7 @@ type EnableSnapshotScheduleMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the snapshot schedule that is being enabled.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 
@@ -888,11 +954,15 @@ type ListSnapshotScheduleOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SnapshotSchedule resource to list operations for.
+	// ID of the snapshot schedule to list operations for.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSnapshotScheduleOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListSnapshotScheduleOperationsResponse.next_page_token] returned by a previous list request.
@@ -959,10 +1029,11 @@ type ListSnapshotScheduleOperationsResponse struct {
 
 	// List of operations for the specified snapshot schedule.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListSnapshotScheduleOperationsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListSnapshotScheduleOperationsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListSnapshotScheduleOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListSnapshotScheduleOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1017,14 +1088,18 @@ type ListSnapshotScheduleSnapshotsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SnapshotSchedule resource to list snapshots for.
+	// ID of the snapshot schedule to list created snapshots for.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListSnapshotScheduleSnapshotsResponse.next_page_token]
+	// results is larger than [page_size], the service returns a [ListSnapshotScheduleOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
-	// [ListSnapshotScheduleSnapshotsResponse.next_page_token] returned by a previous list request.
+	// [ListSnapshotScheduleOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -1086,12 +1161,13 @@ type ListSnapshotScheduleSnapshotsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of snapshots for the specified snapshot schedule.
+	// List of snapshots created by the specified snapshot schedule.
 	Snapshots []*Snapshot `protobuf:"bytes,1,rep,name=snapshots,proto3" json:"snapshots,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListSnapshotScheduleSnapshotsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListSnapshotScheduleSnapshotsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListSnapshotScheduleSnapshotsRequest.page_size], use `next_page_token` as the value
+	// for the [ListSnapshotScheduleSnapshotsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1146,11 +1222,15 @@ type ListSnapshotScheduleDisksRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the SnapshotSchedule resource to list disks for.
+	// ID of the snapshot schedule to list attached disks for.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSnapshotScheduleDisksResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	//
+	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListSnapshotScheduleDisksResponse.next_page_token] returned by a previous list request.
@@ -1215,12 +1295,13 @@ type ListSnapshotScheduleDisksResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// List of disks for the specified snapshot schedule.
+	// List of disks attached to the specified snapshot schedule.
 	Disks []*Disk `protobuf:"bytes,1,rep,name=disks,proto3" json:"disks,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListSnapshotScheduleDisksRequest.page_size], use the [next_page_token] as the value
-	// for the [ListSnapshotScheduleDisksRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListSnapshotScheduleDisksRequest.page_size], use `next_page_token` as the value
+	// for the [ListSnapshotScheduleDisksRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -1276,10 +1357,16 @@ type UpdateSnapshotScheduleDisksRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the snapshot schedule to update.
+	//
+	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
-	// List of disk ids to remove from the specified schedule.
+	// List of IDs of the disks to detach from the specified schedule.
+	//
+	// To get an ID of a disk attached to the schedule, make a [SnapshotScheduleService.ListDisks] request.
 	Remove []string `protobuf:"bytes,2,rep,name=remove,proto3" json:"remove,omitempty"`
-	// List of disk ids to add to the specified schedule
+	// List of IDs of the disks to attach to the specified schedule.
+	//
+	// To get a disk ID, make a [yandex.cloud.compute.v1.DiskService.List] request.
 	Add []string `protobuf:"bytes,3,rep,name=add,proto3" json:"add,omitempty"`
 }
 
@@ -1341,6 +1428,7 @@ type UpdateSnapshotScheduleDisksMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the snapshot schedule that is being updated.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 }
 

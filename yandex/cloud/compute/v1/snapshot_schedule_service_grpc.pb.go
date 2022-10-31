@@ -23,34 +23,46 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SnapshotScheduleServiceClient interface {
-	// Returns the specified SnapshotSchedule resource.
+	// Returns the specified snapshot schedule.
 	//
-	// To get the list of available SnapshotSchedule resources, make a [List] request.
+	// To get the list of available snapshot schedules, make a [List] request.
 	Get(ctx context.Context, in *GetSnapshotScheduleRequest, opts ...grpc.CallOption) (*SnapshotSchedule, error)
-	// Retrieves the list of SnapshotSchedule resources in the specified folder.
+	// Retrieves the list of snapshot schedules in the specified folder.
 	List(ctx context.Context, in *ListSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListSnapshotSchedulesResponse, error)
 	// Creates a snapshot schedule in the specified folder.
 	Create(ctx context.Context, in *CreateSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified snapshot schedule.
+	//
+	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
 	Update(ctx context.Context, in *UpdateSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified snapshot schedule.
 	//
-	// Deleting a snapshot schedule removes its data permanently and is irreversible. However, deleting a schedule does not delete
-	// any snapshots previously made by the schedule. You must delete snapshots separately.
-	Delete(ctx context.Context, in *DeleteSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// UpdateDisks of schedule
-	UpdateDisks(ctx context.Context, in *UpdateSnapshotScheduleDisksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Disable schedule sets status InActive.
+	// Deleting a snapshot schedule removes its data permanently and is irreversible. However, deleting a schedule
+	// does not delete any snapshots created by the schedule. You must delete snapshots separately.
 	//
-	// When schedule os disabled snapshots will not be created or deleted according to retention policy.
+	// The schedule is deleted only after all snapshot creations and deletions triggered by the schedule are completed.
+	Delete(ctx context.Context, in *DeleteSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the list of disks attached to the specified schedule.
+	//
+	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
+	UpdateDisks(ctx context.Context, in *UpdateSnapshotScheduleDisksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Disables the specified snapshot schedule.
+	//
+	// The [SnapshotSchedule.status] is changed to `INACTIVE`: the schedule is interrupted, snapshots won't be created
+	// or deleted.
+	//
+	// The schedule is disabled only after all snapshot creations and deletions triggered by the schedule are completed.
 	Disable(ctx context.Context, in *DisableSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Enable schedule sets status Active.
+	// Enables the specified snapshot schedule.
+	//
+	// The [SnapshotSchedule.status] is changed to `ACTIVE`: new disk snapshots will be created, old ones deleted
+	// (if [SnapshotSchedule.retention_policy] is specified).
 	Enable(ctx context.Context, in *EnableSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified snapshot schedule.
 	ListOperations(ctx context.Context, in *ListSnapshotScheduleOperationsRequest, opts ...grpc.CallOption) (*ListSnapshotScheduleOperationsResponse, error)
-	// List snapshot created by schedule.
+	// Retrieves the list of snapshots created by the specified snapshot schedule.
 	ListSnapshots(ctx context.Context, in *ListSnapshotScheduleSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotScheduleSnapshotsResponse, error)
-	// List disks that belong to schedule.
+	// Retrieves the list of disks attached to the specified snapshot schedule.
 	ListDisks(ctx context.Context, in *ListSnapshotScheduleDisksRequest, opts ...grpc.CallOption) (*ListSnapshotScheduleDisksResponse, error)
 }
 
@@ -165,34 +177,46 @@ func (c *snapshotScheduleServiceClient) ListDisks(ctx context.Context, in *ListS
 // All implementations should embed UnimplementedSnapshotScheduleServiceServer
 // for forward compatibility
 type SnapshotScheduleServiceServer interface {
-	// Returns the specified SnapshotSchedule resource.
+	// Returns the specified snapshot schedule.
 	//
-	// To get the list of available SnapshotSchedule resources, make a [List] request.
+	// To get the list of available snapshot schedules, make a [List] request.
 	Get(context.Context, *GetSnapshotScheduleRequest) (*SnapshotSchedule, error)
-	// Retrieves the list of SnapshotSchedule resources in the specified folder.
+	// Retrieves the list of snapshot schedules in the specified folder.
 	List(context.Context, *ListSnapshotSchedulesRequest) (*ListSnapshotSchedulesResponse, error)
 	// Creates a snapshot schedule in the specified folder.
 	Create(context.Context, *CreateSnapshotScheduleRequest) (*operation.Operation, error)
 	// Updates the specified snapshot schedule.
+	//
+	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
 	Update(context.Context, *UpdateSnapshotScheduleRequest) (*operation.Operation, error)
 	// Deletes the specified snapshot schedule.
 	//
-	// Deleting a snapshot schedule removes its data permanently and is irreversible. However, deleting a schedule does not delete
-	// any snapshots previously made by the schedule. You must delete snapshots separately.
-	Delete(context.Context, *DeleteSnapshotScheduleRequest) (*operation.Operation, error)
-	// UpdateDisks of schedule
-	UpdateDisks(context.Context, *UpdateSnapshotScheduleDisksRequest) (*operation.Operation, error)
-	// Disable schedule sets status InActive.
+	// Deleting a snapshot schedule removes its data permanently and is irreversible. However, deleting a schedule
+	// does not delete any snapshots created by the schedule. You must delete snapshots separately.
 	//
-	// When schedule os disabled snapshots will not be created or deleted according to retention policy.
+	// The schedule is deleted only after all snapshot creations and deletions triggered by the schedule are completed.
+	Delete(context.Context, *DeleteSnapshotScheduleRequest) (*operation.Operation, error)
+	// Updates the list of disks attached to the specified schedule.
+	//
+	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
+	UpdateDisks(context.Context, *UpdateSnapshotScheduleDisksRequest) (*operation.Operation, error)
+	// Disables the specified snapshot schedule.
+	//
+	// The [SnapshotSchedule.status] is changed to `INACTIVE`: the schedule is interrupted, snapshots won't be created
+	// or deleted.
+	//
+	// The schedule is disabled only after all snapshot creations and deletions triggered by the schedule are completed.
 	Disable(context.Context, *DisableSnapshotScheduleRequest) (*operation.Operation, error)
-	// Enable schedule sets status Active.
+	// Enables the specified snapshot schedule.
+	//
+	// The [SnapshotSchedule.status] is changed to `ACTIVE`: new disk snapshots will be created, old ones deleted
+	// (if [SnapshotSchedule.retention_policy] is specified).
 	Enable(context.Context, *EnableSnapshotScheduleRequest) (*operation.Operation, error)
 	// Lists operations for the specified snapshot schedule.
 	ListOperations(context.Context, *ListSnapshotScheduleOperationsRequest) (*ListSnapshotScheduleOperationsResponse, error)
-	// List snapshot created by schedule.
+	// Retrieves the list of snapshots created by the specified snapshot schedule.
 	ListSnapshots(context.Context, *ListSnapshotScheduleSnapshotsRequest) (*ListSnapshotScheduleSnapshotsResponse, error)
-	// List disks that belong to schedule.
+	// Retrieves the list of disks attached to the specified snapshot schedule.
 	ListDisks(context.Context, *ListSnapshotScheduleDisksRequest) (*ListSnapshotScheduleDisksResponse, error)
 }
 

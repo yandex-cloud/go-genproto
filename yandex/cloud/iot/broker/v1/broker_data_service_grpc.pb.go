@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BrokerDataServiceClient interface {
-	// Publishes message on behalf of specified registry
+	// Publishes message on behalf of specified broker
 	Publish(ctx context.Context, in *PublishBrokerDataRequest, opts ...grpc.CallOption) (*PublishBrokerDataResponse, error)
 }
 
@@ -47,7 +47,7 @@ func (c *brokerDataServiceClient) Publish(ctx context.Context, in *PublishBroker
 // All implementations should embed UnimplementedBrokerDataServiceServer
 // for forward compatibility
 type BrokerDataServiceServer interface {
-	// Publishes message on behalf of specified registry
+	// Publishes message on behalf of specified broker
 	Publish(context.Context, *PublishBrokerDataRequest) (*PublishBrokerDataResponse, error)
 }
 
