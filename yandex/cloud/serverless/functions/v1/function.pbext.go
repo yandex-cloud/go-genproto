@@ -3,6 +3,7 @@
 package functions
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -111,6 +112,10 @@ func (m *Version) SetSecrets(v []*Secret) {
 	m.Secrets = v
 }
 
+func (m *Version) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -185,4 +190,30 @@ func (m *Secret) SetEnvironmentVariable(v string) {
 	m.Reference = &Secret_EnvironmentVariable{
 		EnvironmentVariable: v,
 	}
+}
+
+type LogOptions_Destination = isLogOptions_Destination
+
+func (m *LogOptions) SetDestination(v LogOptions_Destination) {
+	m.Destination = v
+}
+
+func (m *LogOptions) SetDisabled(v bool) {
+	m.Disabled = v
+}
+
+func (m *LogOptions) SetLogGroupId(v string) {
+	m.Destination = &LogOptions_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *LogOptions) SetFolderId(v string) {
+	m.Destination = &LogOptions_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
+	m.MinLevel = v
 }

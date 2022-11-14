@@ -239,6 +239,10 @@ func (m *CreateFunctionVersionRequest) SetSecrets(v []*Secret) {
 	m.Secrets = v
 }
 
+func (m *CreateFunctionVersionRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }
