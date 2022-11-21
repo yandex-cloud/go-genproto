@@ -47,6 +47,10 @@ func (m *CreateBucketRequest) SetAcl(v *ACL) {
 	m.Acl = v
 }
 
+func (m *CreateBucketRequest) SetTags(v []*Tag) {
+	m.Tags = v
+}
+
 func (m *CreateBucketMetadata) SetName(v string) {
 	m.Name = v
 }
@@ -93,6 +97,10 @@ func (m *UpdateBucketRequest) SetPolicy(v *structpb.Struct) {
 
 func (m *UpdateBucketRequest) SetAcl(v *ACL) {
 	m.Acl = v
+}
+
+func (m *UpdateBucketRequest) SetTags(v []*Tag) {
+	m.Tags = v
 }
 
 func (m *UpdateBucketMetadata) SetName(v string) {

@@ -91,6 +91,10 @@ func (m *Revision) SetProvisionPolicy(v *ProvisionPolicy) {
 	m.ProvisionPolicy = v
 }
 
+func (m *Revision) SetScalingPolicy(v *ScalingPolicy) {
+	m.ScalingPolicy = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -169,4 +173,12 @@ func (m *Connectivity) SetNetworkId(v string) {
 
 func (m *Connectivity) SetSubnetIds(v []string) {
 	m.SubnetIds = v
+}
+
+func (m *ScalingPolicy) SetZoneInstancesLimit(v int64) {
+	m.ZoneInstancesLimit = v
+}
+
+func (m *ScalingPolicy) SetZoneRequestsLimit(v int64) {
+	m.ZoneRequestsLimit = v
 }

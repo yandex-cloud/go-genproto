@@ -173,6 +173,10 @@ func (m *ListFederatedUserAccountsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListFederatedUserAccountsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
 func (m *ListFederatedUserAccountsResponse) SetUserAccounts(v []*v1.UserAccount) {
 	m.UserAccounts = v
 }

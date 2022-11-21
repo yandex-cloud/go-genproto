@@ -170,6 +170,10 @@ func (m *DeployContainerRevisionRequest) SetProvisionPolicy(v *ProvisionPolicy) 
 	m.ProvisionPolicy = v
 }
 
+func (m *DeployContainerRevisionRequest) SetScalingPolicy(v *ScalingPolicy) {
+	m.ScalingPolicy = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

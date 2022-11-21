@@ -60,6 +60,18 @@ func (m *Bucket) SetLifecycleRules(v []*LifecycleRule) {
 	m.LifecycleRules = v
 }
 
+func (m *Bucket) SetTags(v []*Tag) {
+	m.Tags = v
+}
+
+func (m *Tag) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *Tag) SetValue(v string) {
+	m.Value = v
+}
+
 func (m *ACL) SetGrants(v []*ACL_Grant) {
 	m.Grants = v
 }
