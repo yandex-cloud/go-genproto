@@ -58,6 +58,10 @@ func (m *Address) SetIpVersion(v Address_IpVersion) {
 	m.IpVersion = v
 }
 
+func (m *Address) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *ExternalIpv4Address) SetAddress(v string) {
 	m.Address = v
 }

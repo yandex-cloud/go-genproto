@@ -75,6 +75,10 @@ func (m *CreateAddressRequest) SetExternalIpv4AddressSpec(v *ExternalIpv4Address
 	}
 }
 
+func (m *CreateAddressRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *ExternalIpv4AddressSpec) SetAddress(v string) {
 	m.Address = v
 }
@@ -113,6 +117,10 @@ func (m *UpdateAddressRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateAddressRequest) SetReserved(v bool) {
 	m.Reserved = v
+}
+
+func (m *UpdateAddressRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateAddressMetadata) SetAddressId(v string) {
