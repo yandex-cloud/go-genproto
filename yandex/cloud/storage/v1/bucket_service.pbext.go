@@ -103,6 +103,10 @@ func (m *UpdateBucketRequest) SetTags(v []*Tag) {
 	m.Tags = v
 }
 
+func (m *UpdateBucketRequest) SetObjectLock(v *ObjectLock) {
+	m.ObjectLock = v
+}
+
 func (m *UpdateBucketMetadata) SetName(v string) {
 	m.Name = v
 }

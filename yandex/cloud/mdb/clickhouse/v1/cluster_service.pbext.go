@@ -95,6 +95,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

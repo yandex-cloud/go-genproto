@@ -3,6 +3,7 @@
 package containers
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -95,6 +96,10 @@ func (m *Revision) SetScalingPolicy(v *ScalingPolicy) {
 	m.ScalingPolicy = v
 }
 
+func (m *Revision) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -173,6 +178,32 @@ func (m *Connectivity) SetNetworkId(v string) {
 
 func (m *Connectivity) SetSubnetIds(v []string) {
 	m.SubnetIds = v
+}
+
+type LogOptions_Destination = isLogOptions_Destination
+
+func (m *LogOptions) SetDestination(v LogOptions_Destination) {
+	m.Destination = v
+}
+
+func (m *LogOptions) SetDisabled(v bool) {
+	m.Disabled = v
+}
+
+func (m *LogOptions) SetLogGroupId(v string) {
+	m.Destination = &LogOptions_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *LogOptions) SetFolderId(v string) {
+	m.Destination = &LogOptions_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
+	m.MinLevel = v
 }
 
 func (m *ScalingPolicy) SetZoneInstancesLimit(v int64) {

@@ -67,6 +67,10 @@ func (m *CreateApiGatewayRequest) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
 
+func (m *CreateApiGatewayRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 type UpdateApiGatewayRequest_Spec = isUpdateApiGatewayRequest_Spec
 
 func (m *UpdateApiGatewayRequest) SetSpec(v UpdateApiGatewayRequest_Spec) {
@@ -101,6 +105,10 @@ func (m *UpdateApiGatewayRequest) SetOpenapiSpec(v string) {
 
 func (m *UpdateApiGatewayRequest) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
+}
+
+func (m *UpdateApiGatewayRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
 }
 
 func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {

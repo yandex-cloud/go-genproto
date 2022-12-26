@@ -64,6 +64,10 @@ func (m *Bucket) SetTags(v []*Tag) {
 	m.Tags = v
 }
 
+func (m *Bucket) SetObjectLock(v *ObjectLock) {
+	m.ObjectLock = v
+}
+
 func (m *Tag) SetKey(v string) {
 	m.Key = v
 }
@@ -260,6 +264,14 @@ func (m *LifecycleRule_RuleFilter) SetPrefix(v string) {
 	m.Prefix = v
 }
 
+func (m *LifecycleRule_RuleFilter) SetObjectSizeGreaterThan(v *wrapperspb.Int64Value) {
+	m.ObjectSizeGreaterThan = v
+}
+
+func (m *LifecycleRule_RuleFilter) SetObjectSizeLessThan(v *wrapperspb.Int64Value) {
+	m.ObjectSizeLessThan = v
+}
+
 func (m *Counters) SetSimpleObjectSize(v int64) {
 	m.SimpleObjectSize = v
 }
@@ -382,4 +394,34 @@ func (m *HTTPSConfig) SetNotAfter(v *timestamppb.Timestamp) {
 
 func (m *HTTPSConfig) SetCertificateId(v string) {
 	m.CertificateId = v
+}
+
+func (m *ObjectLock) SetStatus(v ObjectLock_ObjectLockStatus) {
+	m.Status = v
+}
+
+func (m *ObjectLock) SetDefaultRetention(v *ObjectLock_DefaultRetention) {
+	m.DefaultRetention = v
+}
+
+type ObjectLock_DefaultRetention_Period = isObjectLock_DefaultRetention_Period
+
+func (m *ObjectLock_DefaultRetention) SetPeriod(v ObjectLock_DefaultRetention_Period) {
+	m.Period = v
+}
+
+func (m *ObjectLock_DefaultRetention) SetMode(v ObjectLock_DefaultRetention_Mode) {
+	m.Mode = v
+}
+
+func (m *ObjectLock_DefaultRetention) SetDays(v int64) {
+	m.Period = &ObjectLock_DefaultRetention_Days{
+		Days: v,
+	}
+}
+
+func (m *ObjectLock_DefaultRetention) SetYears(v int64) {
+	m.Period = &ObjectLock_DefaultRetention_Years{
+		Years: v,
+	}
 }
