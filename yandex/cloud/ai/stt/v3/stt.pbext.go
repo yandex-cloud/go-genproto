@@ -14,6 +14,10 @@ func (m *TextNormalizationOptions) SetLiteratureText(v bool) {
 	m.LiteratureText = v
 }
 
+func (m *TextNormalizationOptions) SetPhoneFormattingMode(v TextNormalizationOptions_PhoneFormattingMode) {
+	m.PhoneFormattingMode = v
+}
+
 func (m *DefaultEouClassifier) SetType(v DefaultEouClassifier_EouSensitivity) {
 	m.Type = v
 }

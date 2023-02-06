@@ -85,6 +85,10 @@ func (m *Cluster) SetPersistenceMode(v Cluster_PersistenceMode) {
 	m.PersistenceMode = v
 }
 
+func (m *Cluster) SetAnnounceHostnames(v bool) {
+	m.AnnounceHostnames = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

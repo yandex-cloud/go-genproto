@@ -86,6 +86,8 @@ type ClusterServiceClient interface {
 	UpdateShardGroup(ctx context.Context, in *UpdateClusterShardGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard group.
 	DeleteShardGroup(ctx context.Context, in *DeleteClusterShardGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves a list of external dictionaries that belong to specified cluster.
+	ListExternalDictionaries(ctx context.Context, in *ListClusterExternalDictionariesRequest, opts ...grpc.CallOption) (*ListClusterExternalDictionariesResponse, error)
 	// Creates an external dictionary for the specified ClickHouse cluster.
 	CreateExternalDictionary(ctx context.Context, in *CreateClusterExternalDictionaryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates an external dictionary for the specified ClickHouse cluster.
@@ -395,6 +397,15 @@ func (c *clusterServiceClient) DeleteShardGroup(ctx context.Context, in *DeleteC
 	return out, nil
 }
 
+func (c *clusterServiceClient) ListExternalDictionaries(ctx context.Context, in *ListClusterExternalDictionariesRequest, opts ...grpc.CallOption) (*ListClusterExternalDictionariesResponse, error) {
+	out := new(ListClusterExternalDictionariesResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.clickhouse.v1.ClusterService/ListExternalDictionaries", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) CreateExternalDictionary(ctx context.Context, in *CreateClusterExternalDictionaryRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.mdb.clickhouse.v1.ClusterService/CreateExternalDictionary", in, out, opts...)
@@ -489,6 +500,8 @@ type ClusterServiceServer interface {
 	UpdateShardGroup(context.Context, *UpdateClusterShardGroupRequest) (*operation.Operation, error)
 	// Deletes the specified shard group.
 	DeleteShardGroup(context.Context, *DeleteClusterShardGroupRequest) (*operation.Operation, error)
+	// Retrieves a list of external dictionaries that belong to specified cluster.
+	ListExternalDictionaries(context.Context, *ListClusterExternalDictionariesRequest) (*ListClusterExternalDictionariesResponse, error)
 	// Creates an external dictionary for the specified ClickHouse cluster.
 	CreateExternalDictionary(context.Context, *CreateClusterExternalDictionaryRequest) (*operation.Operation, error)
 	// Updates an external dictionary for the specified ClickHouse cluster.
@@ -590,6 +603,9 @@ func (UnimplementedClusterServiceServer) UpdateShardGroup(context.Context, *Upda
 }
 func (UnimplementedClusterServiceServer) DeleteShardGroup(context.Context, *DeleteClusterShardGroupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteShardGroup not implemented")
+}
+func (UnimplementedClusterServiceServer) ListExternalDictionaries(context.Context, *ListClusterExternalDictionariesRequest) (*ListClusterExternalDictionariesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExternalDictionaries not implemented")
 }
 func (UnimplementedClusterServiceServer) CreateExternalDictionary(context.Context, *CreateClusterExternalDictionaryRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateExternalDictionary not implemented")
@@ -1155,6 +1171,24 @@ func _ClusterService_DeleteShardGroup_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_ListExternalDictionaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterExternalDictionariesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListExternalDictionaries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.mdb.clickhouse.v1.ClusterService/ListExternalDictionaries",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListExternalDictionaries(ctx, req.(*ListClusterExternalDictionariesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_CreateExternalDictionary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateClusterExternalDictionaryRequest)
 	if err := dec(in); err != nil {
@@ -1331,6 +1365,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteShardGroup",
 			Handler:    _ClusterService_DeleteShardGroup_Handler,
+		},
+		{
+			MethodName: "ListExternalDictionaries",
+			Handler:    _ClusterService_ListExternalDictionaries_Handler,
 		},
 		{
 			MethodName: "CreateExternalDictionary",

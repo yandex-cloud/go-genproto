@@ -687,6 +687,26 @@ func (m *DeleteClusterShardGroupMetadata) SetShardGroupName(v string) {
 	m.ShardGroupName = v
 }
 
+func (m *ListClusterExternalDictionariesRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ListClusterExternalDictionariesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListClusterExternalDictionariesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListClusterExternalDictionariesResponse) SetExternalDictionaries(v []*config.ClickhouseConfig_ExternalDictionary) {
+	m.ExternalDictionaries = v
+}
+
+func (m *ListClusterExternalDictionariesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
 func (m *CreateClusterExternalDictionaryRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

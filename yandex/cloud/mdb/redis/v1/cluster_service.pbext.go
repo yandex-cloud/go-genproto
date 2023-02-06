@@ -91,6 +91,10 @@ func (m *CreateClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
 	m.PersistenceMode = v
 }
 
+func (m *CreateClusterRequest) SetAnnounceHostnames(v bool) {
+	m.AnnounceHostnames = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -133,6 +137,10 @@ func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 
 func (m *UpdateClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
 	m.PersistenceMode = v
+}
+
+func (m *UpdateClusterRequest) SetAnnounceHostnames(v bool) {
+	m.AnnounceHostnames = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
@@ -257,6 +265,10 @@ func (m *RestoreClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
 
 func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *RestoreClusterRequest) SetAnnounceHostnames(v bool) {
+	m.AnnounceHostnames = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

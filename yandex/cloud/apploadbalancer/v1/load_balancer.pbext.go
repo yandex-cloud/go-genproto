@@ -212,6 +212,10 @@ func (m *HttpHandler) SetAllowHttp10(v bool) {
 	}
 }
 
+func (m *HttpHandler) SetRewriteRequestId(v bool) {
+	m.RewriteRequestId = v
+}
+
 func (m *Redirects) SetHttpToHttps(v bool) {
 	m.HttpToHttps = v
 }

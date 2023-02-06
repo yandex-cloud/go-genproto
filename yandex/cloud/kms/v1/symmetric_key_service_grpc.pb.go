@@ -28,7 +28,7 @@ type SymmetricKeyServiceClient interface {
 	Create(ctx context.Context, in *CreateSymmetricKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified symmetric KMS key.
 	//
-	//  To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
+	//	To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
 	Get(ctx context.Context, in *GetSymmetricKeyRequest, opts ...grpc.CallOption) (*SymmetricKey, error)
 	// Returns the list of symmetric KMS keys in the specified folder.
 	List(ctx context.Context, in *ListSymmetricKeysRequest, opts ...grpc.CallOption) (*ListSymmetricKeysResponse, error)
@@ -206,7 +206,7 @@ type SymmetricKeyServiceServer interface {
 	Create(context.Context, *CreateSymmetricKeyRequest) (*operation.Operation, error)
 	// Returns the specified symmetric KMS key.
 	//
-	//  To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
+	//	To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
 	Get(context.Context, *GetSymmetricKeyRequest) (*SymmetricKey, error)
 	// Returns the list of symmetric KMS keys in the specified folder.
 	List(context.Context, *ListSymmetricKeysRequest) (*ListSymmetricKeysResponse, error)

@@ -36,10 +36,10 @@ type NetworkLoadBalancerServiceClient interface {
 	// Deletes the specified network load balancer.
 	Delete(ctx context.Context, in *DeleteNetworkLoadBalancerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts load balancing and health checking with the specified network load balancer with specified settings.
-	// Changes network load balancer status to `` ACTIVE ``.
+	// Changes network load balancer status to “ ACTIVE “.
 	Start(ctx context.Context, in *StartNetworkLoadBalancerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops load balancing and health checking with the specified network load balancer.
-	// Changes load balancer status to `` STOPPED ``.
+	// Changes load balancer status to “ STOPPED “.
 	Stop(ctx context.Context, in *StopNetworkLoadBalancerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Attaches a target group to the specified network load balancer.
 	AttachTargetGroup(ctx context.Context, in *AttachNetworkLoadBalancerTargetGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -197,10 +197,10 @@ type NetworkLoadBalancerServiceServer interface {
 	// Deletes the specified network load balancer.
 	Delete(context.Context, *DeleteNetworkLoadBalancerRequest) (*operation.Operation, error)
 	// Starts load balancing and health checking with the specified network load balancer with specified settings.
-	// Changes network load balancer status to `` ACTIVE ``.
+	// Changes network load balancer status to “ ACTIVE “.
 	Start(context.Context, *StartNetworkLoadBalancerRequest) (*operation.Operation, error)
 	// Stops load balancing and health checking with the specified network load balancer.
-	// Changes load balancer status to `` STOPPED ``.
+	// Changes load balancer status to “ STOPPED “.
 	Stop(context.Context, *StopNetworkLoadBalancerRequest) (*operation.Operation, error)
 	// Attaches a target group to the specified network load balancer.
 	AttachTargetGroup(context.Context, *AttachNetworkLoadBalancerTargetGroupRequest) (*operation.Operation, error)
