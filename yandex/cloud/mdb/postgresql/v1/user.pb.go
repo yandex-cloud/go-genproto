@@ -588,9 +588,13 @@ type UserSettings struct {
 	//
 	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-prepare.html)
 	PreparedStatementsPooling *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=prepared_statements_pooling,json=preparedStatementsPooling,proto3" json:"prepared_statements_pooling,omitempty"`
-	// The maximum time (in seconds) for synchronization between standby and primary
+	// The connection pooler setting. It determines the maximum allowed replication lag (in seconds).
+	// Pooler will reject connections to the replica with a lag above this threshold.
+	// It can be useful to prevent application from reading stale data.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/warm-standby.html)
+	// Default value: 0
+	//
+	// Value of `0` disables this mechanism
 	CatchupTimeout *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=catchup_timeout,json=catchupTimeout,proto3" json:"catchup_timeout,omitempty"`
 	// The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+)
 	// Terminate replication connections that are inactive for longer than this amount of time.
