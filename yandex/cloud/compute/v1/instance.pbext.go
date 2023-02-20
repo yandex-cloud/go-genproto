@@ -74,6 +74,10 @@ func (m *Instance) SetNetworkInterfaces(v []*NetworkInterface) {
 	m.NetworkInterfaces = v
 }
 
+func (m *Instance) SetGpuSettings(v *GpuSettings) {
+	m.GpuSettings = v
+}
+
 func (m *Instance) SetFqdn(v string) {
 	m.Fqdn = v
 }
@@ -216,6 +220,10 @@ func (m *SchedulingPolicy) SetPreemptible(v bool) {
 
 func (m *NetworkSettings) SetType(v NetworkSettings_Type) {
 	m.Type = v
+}
+
+func (m *GpuSettings) SetGpuClusterId(v string) {
+	m.GpuClusterId = v
 }
 
 func (m *PlacementPolicy) SetPlacementGroupId(v string) {

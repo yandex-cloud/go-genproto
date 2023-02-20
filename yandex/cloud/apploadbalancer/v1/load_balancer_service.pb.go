@@ -377,7 +377,14 @@ type UpdateLoadBalancerRequest struct {
 	// 2. Add or remove a group in this set.
 	// 3. Send the new set in this field.
 	SecurityGroupIds []string `protobuf:"bytes,8,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Autoscale settings of the application load balancer.
+	// New scaling settings of the application load balancer.
+	//
+	// The scaling settings relate to a special internal instance group which facilitates the balancer's work.
+	// Instances in this group are called _resource units_. The group is scaled automatically based on incoming load
+	// and within limitations specified in these settings.
+	//
+	// For details about the concept,
+	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lcu-scaling).
 	AutoScalePolicy *AutoScalePolicy `protobuf:"bytes,9,opt,name=auto_scale_policy,json=autoScalePolicy,proto3" json:"auto_scale_policy,omitempty"`
 	// Cloud logging settings of the application load balancer.
 	LogOptions *LogOptions `protobuf:"bytes,10,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
@@ -571,7 +578,14 @@ type CreateLoadBalancerRequest struct {
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#security-groups).
 	SecurityGroupIds []string `protobuf:"bytes,9,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Autoscale settings of the application load balancer.
+	// Scaling settings of the application load balancer.
+	//
+	// The scaling settings relate to a special internal instance group which facilitates the balancer's work.
+	// Instances in this group are called _resource units_. The group is scaled automatically based on incoming load
+	// and within limitations specified in these settings.
+	//
+	// For details about the concept,
+	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lcu-scaling).
 	AutoScalePolicy *AutoScalePolicy `protobuf:"bytes,10,opt,name=auto_scale_policy,json=autoScalePolicy,proto3" json:"auto_scale_policy,omitempty"`
 	// Cloud logging settings of the application load balancer.
 	LogOptions *LogOptions `protobuf:"bytes,11,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`

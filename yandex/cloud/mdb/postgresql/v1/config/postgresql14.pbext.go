@@ -610,6 +610,18 @@ func (m *PostgresqlConfig14) SetGeqoSeed(v *wrapperspb.DoubleValue) {
 	m.GeqoSeed = v
 }
 
+func (m *PostgresqlConfig14) SetPgTrgmSimilarityThreshold(v *wrapperspb.DoubleValue) {
+	m.PgTrgmSimilarityThreshold = v
+}
+
+func (m *PostgresqlConfig14) SetPgTrgmWordSimilarityThreshold(v *wrapperspb.DoubleValue) {
+	m.PgTrgmWordSimilarityThreshold = v
+}
+
+func (m *PostgresqlConfig14) SetPgTrgmStrictWordSimilarityThreshold(v *wrapperspb.DoubleValue) {
+	m.PgTrgmStrictWordSimilarityThreshold = v
+}
+
 func (m *PostgresqlConfigSet14) SetEffectiveConfig(v *PostgresqlConfig14) {
 	m.EffectiveConfig = v
 }

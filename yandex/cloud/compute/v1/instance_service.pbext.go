@@ -111,6 +111,10 @@ func (m *CreateInstanceRequest) SetNetworkSettings(v *NetworkSettings) {
 	m.NetworkSettings = v
 }
 
+func (m *CreateInstanceRequest) SetGpuSettings(v *GpuSettings) {
+	m.GpuSettings = v
+}
+
 func (m *CreateInstanceRequest) SetPlacementPolicy(v *PlacementPolicy) {
 	m.PlacementPolicy = v
 }

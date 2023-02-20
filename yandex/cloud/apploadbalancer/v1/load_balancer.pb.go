@@ -200,7 +200,14 @@ type LoadBalancer struct {
 	SecurityGroupIds []string `protobuf:"bytes,12,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Autoscale settings of the application load balancer.
+	// Scaling settings of the application load balancer.
+	//
+	// The scaling settings relate to a special internal instance group which facilitates the balancer's work.
+	// Instances in this group are called _resource units_. The group is scaled automatically based on incoming load
+	// and within limitations specified in these settings.
+	//
+	// For details about the concept,
+	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lcu-scaling).
 	AutoScalePolicy *AutoScalePolicy `protobuf:"bytes,14,opt,name=auto_scale_policy,json=autoScalePolicy,proto3" json:"auto_scale_policy,omitempty"`
 	// Cloud logging settings of the application load balancer.
 	LogOptions *LogOptions `protobuf:"bytes,15,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
@@ -1572,14 +1579,25 @@ func (x *TargetState) GetTarget() *Target {
 	return nil
 }
 
+// A resource for scaling settings of an application load balancer.
 type AutoScalePolicy struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Lower limit for the number of resource units in each zone.
+	// Lower limit for the number of resource units in each availability zone.
+	//
+	// If not specified previously (using other instruments such as management console), the default value is 2.
+	// To revert to it, specify it explicitly.
+	//
+	// The minimum value is 2.
 	MinZoneSize int64 `protobuf:"varint,1,opt,name=min_zone_size,json=minZoneSize,proto3" json:"min_zone_size,omitempty"`
-	// Upper limit for the total number of resource units across all zones.
+	// Upper limit for the total number of resource units across all availability zones.
+	//
+	// If a positive value is specified, it must be at least [min_zone_size] multiplied by the size of
+	// [AllocationPolicy.locations].
+	//
+	// If the value is 0, there is no upper limit.
 	MaxSize int64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 }
 

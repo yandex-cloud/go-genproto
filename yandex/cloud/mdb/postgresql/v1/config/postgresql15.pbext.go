@@ -586,6 +586,18 @@ func (m *PostgresqlConfig15) SetEnableGroupByReordering(v *wrapperspb.BoolValue)
 	m.EnableGroupByReordering = v
 }
 
+func (m *PostgresqlConfig15) SetPgTrgmSimilarityThreshold(v *wrapperspb.DoubleValue) {
+	m.PgTrgmSimilarityThreshold = v
+}
+
+func (m *PostgresqlConfig15) SetPgTrgmWordSimilarityThreshold(v *wrapperspb.DoubleValue) {
+	m.PgTrgmWordSimilarityThreshold = v
+}
+
+func (m *PostgresqlConfig15) SetPgTrgmStrictWordSimilarityThreshold(v *wrapperspb.DoubleValue) {
+	m.PgTrgmStrictWordSimilarityThreshold = v
+}
+
 func (m *PostgresqlConfigSet15) SetEffectiveConfig(v *PostgresqlConfig15) {
 	m.EffectiveConfig = v
 }
