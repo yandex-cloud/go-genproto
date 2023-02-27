@@ -50,6 +50,12 @@ type RegistryServiceClient interface {
 	DeletePassword(ctx context.Context, in *DeleteRegistryPasswordRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of device topic aliases for the specified registry.
 	ListDeviceTopicAliases(ctx context.Context, in *ListDeviceTopicAliasesRequest, opts ...grpc.CallOption) (*ListDeviceTopicAliasesResponse, error)
+	// Retrieves the list of YDS exports for the specified registry.
+	ListDataStreamExports(ctx context.Context, in *ListDataStreamExportsRequest, opts ...grpc.CallOption) (*ListDataStreamExportsResponse, error)
+	// Adds YDS export for the specified registry.
+	AddDataStreamExport(ctx context.Context, in *AddDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified YDS export.
+	DeleteDataStreamExport(ctx context.Context, in *DeleteDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified registry.
 	ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error)
 }
@@ -179,6 +185,33 @@ func (c *registryServiceClient) ListDeviceTopicAliases(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *registryServiceClient) ListDataStreamExports(ctx context.Context, in *ListDataStreamExportsRequest, opts ...grpc.CallOption) (*ListDataStreamExportsResponse, error) {
+	out := new(ListDataStreamExportsResponse)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.iot.devices.v1.RegistryService/ListDataStreamExports", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *registryServiceClient) AddDataStreamExport(ctx context.Context, in *AddDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.iot.devices.v1.RegistryService/AddDataStreamExport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *registryServiceClient) DeleteDataStreamExport(ctx context.Context, in *DeleteDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, "/yandex.cloud.iot.devices.v1.RegistryService/DeleteDataStreamExport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *registryServiceClient) ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error) {
 	out := new(ListRegistryOperationsResponse)
 	err := c.cc.Invoke(ctx, "/yandex.cloud.iot.devices.v1.RegistryService/ListOperations", in, out, opts...)
@@ -219,6 +252,12 @@ type RegistryServiceServer interface {
 	DeletePassword(context.Context, *DeleteRegistryPasswordRequest) (*operation.Operation, error)
 	// Retrieves the list of device topic aliases for the specified registry.
 	ListDeviceTopicAliases(context.Context, *ListDeviceTopicAliasesRequest) (*ListDeviceTopicAliasesResponse, error)
+	// Retrieves the list of YDS exports for the specified registry.
+	ListDataStreamExports(context.Context, *ListDataStreamExportsRequest) (*ListDataStreamExportsResponse, error)
+	// Adds YDS export for the specified registry.
+	AddDataStreamExport(context.Context, *AddDataStreamExportRequest) (*operation.Operation, error)
+	// Deletes the specified YDS export.
+	DeleteDataStreamExport(context.Context, *DeleteDataStreamExportRequest) (*operation.Operation, error)
 	// Lists operations for the specified registry.
 	ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error)
 }
@@ -265,6 +304,15 @@ func (UnimplementedRegistryServiceServer) DeletePassword(context.Context, *Delet
 }
 func (UnimplementedRegistryServiceServer) ListDeviceTopicAliases(context.Context, *ListDeviceTopicAliasesRequest) (*ListDeviceTopicAliasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDeviceTopicAliases not implemented")
+}
+func (UnimplementedRegistryServiceServer) ListDataStreamExports(context.Context, *ListDataStreamExportsRequest) (*ListDataStreamExportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDataStreamExports not implemented")
+}
+func (UnimplementedRegistryServiceServer) AddDataStreamExport(context.Context, *AddDataStreamExportRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDataStreamExport not implemented")
+}
+func (UnimplementedRegistryServiceServer) DeleteDataStreamExport(context.Context, *DeleteDataStreamExportRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDataStreamExport not implemented")
 }
 func (UnimplementedRegistryServiceServer) ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
@@ -515,6 +563,60 @@ func _RegistryService_ListDeviceTopicAliases_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RegistryService_ListDataStreamExports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDataStreamExportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).ListDataStreamExports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.iot.devices.v1.RegistryService/ListDataStreamExports",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).ListDataStreamExports(ctx, req.(*ListDataStreamExportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RegistryService_AddDataStreamExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDataStreamExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).AddDataStreamExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.iot.devices.v1.RegistryService/AddDataStreamExport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).AddDataStreamExport(ctx, req.(*AddDataStreamExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RegistryService_DeleteDataStreamExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDataStreamExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).DeleteDataStreamExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/yandex.cloud.iot.devices.v1.RegistryService/DeleteDataStreamExport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).DeleteDataStreamExport(ctx, req.(*DeleteDataStreamExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RegistryService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListRegistryOperationsRequest)
 	if err := dec(in); err != nil {
@@ -591,6 +693,18 @@ var RegistryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDeviceTopicAliases",
 			Handler:    _RegistryService_ListDeviceTopicAliases_Handler,
+		},
+		{
+			MethodName: "ListDataStreamExports",
+			Handler:    _RegistryService_ListDataStreamExports_Handler,
+		},
+		{
+			MethodName: "AddDataStreamExport",
+			Handler:    _RegistryService_AddDataStreamExport_Handler,
+		},
+		{
+			MethodName: "DeleteDataStreamExport",
+			Handler:    _RegistryService_DeleteDataStreamExport_Handler,
 		},
 		{
 			MethodName: "ListOperations",

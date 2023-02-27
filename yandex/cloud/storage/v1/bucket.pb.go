@@ -561,7 +561,6 @@ type Bucket struct {
 	// For details, see [documentation](/docs/storage/concepts/lifecycles).
 	LifecycleRules []*LifecycleRule `protobuf:"bytes,13,rep,name=lifecycle_rules,json=lifecycleRules,proto3" json:"lifecycle_rules,omitempty"`
 	// List of object tag for the bucket.
-	// TODO: documentation details.
 	Tags []*Tag `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty"`
 	// Configuration for object lock on the bucket.
 	// For details about the concept, see [documentation](/docs/storage/concepts/object-lock).

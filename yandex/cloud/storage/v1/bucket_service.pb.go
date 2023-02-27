@@ -274,7 +274,6 @@ type CreateBucketRequest struct {
 	// For details, see [documentation](/docs/storage/concepts/acl).
 	Acl *ACL `protobuf:"bytes,7,opt,name=acl,proto3" json:"acl,omitempty"`
 	// List of object tag for the bucket.
-	// TODO: documentation details.
 	Tags []*Tag `protobuf:"bytes,8,rep,name=tags,proto3" json:"tags,omitempty"`
 }
 
@@ -449,7 +448,6 @@ type UpdateBucketRequest struct {
 	// For details, see [documentation](/docs/storage/concepts/acl).
 	Acl *ACL `protobuf:"bytes,11,opt,name=acl,proto3" json:"acl,omitempty"`
 	// List of object tag for the bucket.
-	// TODO: documentation details.
 	Tags []*Tag `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
 	// Configuration for object lock on the bucket.
 	// For details about the concept, see [documentation](/docs/storage/concepts/object-lock).

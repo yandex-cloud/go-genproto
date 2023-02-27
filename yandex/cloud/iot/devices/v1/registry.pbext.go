@@ -77,3 +77,35 @@ func (m *RegistryPassword) SetId(v string) {
 func (m *RegistryPassword) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
+
+func (m *DataStreamExport) SetId(v string) {
+	m.Id = v
+}
+
+func (m *DataStreamExport) SetName(v string) {
+	m.Name = v
+}
+
+func (m *DataStreamExport) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *DataStreamExport) SetMqttTopicFilter(v string) {
+	m.MqttTopicFilter = v
+}
+
+func (m *DataStreamExport) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *DataStreamExport) SetStream(v string) {
+	m.Stream = v
+}
+
+func (m *DataStreamExport) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *DataStreamExport) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}

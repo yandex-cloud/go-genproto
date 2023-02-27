@@ -226,3 +226,59 @@ func (m *ListRegistryOperationsResponse) SetOperations(v []*operation.Operation)
 func (m *ListRegistryOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *AddDataStreamExportRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *AddDataStreamExportRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *AddDataStreamExportRequest) SetMqttTopicFilter(v string) {
+	m.MqttTopicFilter = v
+}
+
+func (m *AddDataStreamExportRequest) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *AddDataStreamExportRequest) SetStream(v string) {
+	m.Stream = v
+}
+
+func (m *AddDataStreamExportRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *AddDataStreamExportMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *AddDataStreamExportMetadata) SetDataStreamExportId(v string) {
+	m.DataStreamExportId = v
+}
+
+func (m *DeleteDataStreamExportRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *DeleteDataStreamExportRequest) SetDataStreamExportId(v string) {
+	m.DataStreamExportId = v
+}
+
+func (m *DeleteDataStreamExportMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *DeleteDataStreamExportMetadata) SetDataStreamExportId(v string) {
+	m.DataStreamExportId = v
+}
+
+func (m *ListDataStreamExportsRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *ListDataStreamExportsResponse) SetDataStreamExports(v []*DataStreamExport) {
+	m.DataStreamExports = v
+}
