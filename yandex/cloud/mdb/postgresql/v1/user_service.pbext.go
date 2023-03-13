@@ -87,6 +87,10 @@ func (m *UpdateUserRequest) SetGrants(v []string) {
 	m.Grants = v
 }
 
+func (m *UpdateUserRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
+}
+
 func (m *UpdateUserMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

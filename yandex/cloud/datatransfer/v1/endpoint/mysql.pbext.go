@@ -48,6 +48,10 @@ func (m *MysqlObjectTransferSettings) SetTrigger(v ObjectTransferStage) {
 	m.Trigger = v
 }
 
+func (m *MysqlObjectTransferSettings) SetTables(v ObjectTransferStage) {
+	m.Tables = v
+}
+
 func (m *MysqlSource) SetConnection(v *MysqlConnection) {
 	m.Connection = v
 }

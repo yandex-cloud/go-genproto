@@ -4,6 +4,7 @@ package postgresql
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetDatabaseRequest) SetClusterId(v string) {
@@ -68,6 +69,10 @@ func (m *UpdateDatabaseRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateDatabaseRequest) SetExtensions(v []*Extension) {
 	m.Extensions = v
+}
+
+func (m *UpdateDatabaseRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateDatabaseMetadata) SetClusterId(v string) {

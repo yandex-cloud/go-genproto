@@ -59,8 +59,8 @@ func (m *UpdateBucketRequest) SetName(v string) {
 	m.Name = v
 }
 
-func (m *UpdateBucketRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
-	m.FieldMask = v
+func (m *UpdateBucketRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateBucketRequest) SetAnonymousAccessFlags(v *AnonymousAccessFlags) {

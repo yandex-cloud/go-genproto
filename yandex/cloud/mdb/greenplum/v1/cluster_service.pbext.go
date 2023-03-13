@@ -410,6 +410,10 @@ func (m *RestoreClusterRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
 
+func (m *RestoreClusterRequest) SetTime(v *timestamppb.Timestamp) {
+	m.Time = v
+}
+
 func (m *RestoreClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
 }

@@ -10,6 +10,10 @@ func (m *PostgresObjectTransferSettings) SetSequenceOwnedBy(v ObjectTransferStag
 	m.SequenceOwnedBy = v
 }
 
+func (m *PostgresObjectTransferSettings) SetSequenceSet(v ObjectTransferStage) {
+	m.SequenceSet = v
+}
+
 func (m *PostgresObjectTransferSettings) SetTable(v ObjectTransferStage) {
 	m.Table = v
 }
@@ -38,6 +42,10 @@ func (m *PostgresObjectTransferSettings) SetView(v ObjectTransferStage) {
 	m.View = v
 }
 
+func (m *PostgresObjectTransferSettings) SetMaterializedView(v ObjectTransferStage) {
+	m.MaterializedView = v
+}
+
 func (m *PostgresObjectTransferSettings) SetFunction(v ObjectTransferStage) {
 	m.Function = v
 }
@@ -64,10 +72,6 @@ func (m *PostgresObjectTransferSettings) SetPolicy(v ObjectTransferStage) {
 
 func (m *PostgresObjectTransferSettings) SetCast(v ObjectTransferStage) {
 	m.Cast = v
-}
-
-func (m *PostgresObjectTransferSettings) SetMaterializedView(v ObjectTransferStage) {
-	m.MaterializedView = v
 }
 
 func (m *OnPremisePostgres) SetHosts(v []string) {
