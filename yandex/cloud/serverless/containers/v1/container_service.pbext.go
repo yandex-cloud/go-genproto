@@ -178,6 +178,10 @@ func (m *DeployContainerRevisionRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *DeployContainerRevisionRequest) SetS3Mounts(v []*S3Mount) {
+	m.S3Mounts = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

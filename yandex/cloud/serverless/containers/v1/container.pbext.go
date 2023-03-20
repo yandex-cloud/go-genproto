@@ -100,6 +100,10 @@ func (m *Revision) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *Revision) SetS3Mounts(v []*S3Mount) {
+	m.S3Mounts = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -212,4 +216,20 @@ func (m *ScalingPolicy) SetZoneInstancesLimit(v int64) {
 
 func (m *ScalingPolicy) SetZoneRequestsLimit(v int64) {
 	m.ZoneRequestsLimit = v
+}
+
+func (m *S3Mount) SetBucketId(v string) {
+	m.BucketId = v
+}
+
+func (m *S3Mount) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *S3Mount) SetMountPointName(v string) {
+	m.MountPointName = v
+}
+
+func (m *S3Mount) SetReadOnly(v bool) {
+	m.ReadOnly = v
 }

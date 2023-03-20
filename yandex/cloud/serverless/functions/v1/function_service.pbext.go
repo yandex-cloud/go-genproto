@@ -243,6 +243,10 @@ func (m *CreateFunctionVersionRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *CreateFunctionVersionRequest) SetS3Mounts(v []*S3Mount) {
+	m.S3Mounts = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }

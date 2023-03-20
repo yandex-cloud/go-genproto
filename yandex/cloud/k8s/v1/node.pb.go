@@ -606,10 +606,9 @@ type NodeTemplate struct {
 	ResourcesSpec *ResourcesSpec `protobuf:"bytes,2,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
 	// Specification for the boot disk that will be attached to the node.
 	BootDiskSpec *DiskSpec `protobuf:"bytes,3,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
-	// The metadata as `key:value` pairs assigned to this instance template. This includes custom metadata and predefined keys.
+	// The metadata as `key:value` pairs assigned to this instance template. Only SSH keys are supported as metadata.
 	//
-	// For example, you may use the metadata in order to provide your public SSH key to the node.
-	// For more information, see [Metadata](/docs/compute/concepts/vm-metadata).
+	// For more information, see [Connecting to a node over SSH](/docs/managed-kubernetes/operations/node-connect-ssh).
 	Metadata map[string]string `protobuf:"bytes,4,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Specification for the create network interfaces for the node group compute instances.
 	// Deprecated, please use network_interface_specs.

@@ -962,7 +962,7 @@ type GreenplumConfigSet6_17 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a Greenplum® cluster (a combination of settings defined in [GreenplumConfigSet6_17.user_config] and [GreenplumConfigSet6_17.default_config]).
+	// Effective settings for a Greenplum® cluster (a combination of settings defined in [user_config] and [default_config]).
 	EffectiveConfig *GreenplumConfig6_17 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
 	// User-defined settings for a Greenplum® cluster.
 	UserConfig *GreenplumConfig6_17 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
@@ -1029,7 +1029,7 @@ type GreenplumConfigSet6_19 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a Greenplum® cluster (a combination of settings defined in [GreenplumConfigSet6_19.user_config] and [GreenplumConfigSet6_19.default_config]).
+	// Effective settings for a Greenplum® cluster (a combination of settings defined in [user_config] and [default_config]).
 	EffectiveConfig *GreenplumConfig6_19 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
 	// User-defined settings for a Greenplum® cluster.
 	UserConfig *GreenplumConfig6_19 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
@@ -1095,12 +1095,11 @@ type GreenplumConfigSet6_21 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a Greenplum (a combination of settings defined
-	// in [user_config] and [default_config]).
+	// Effective settings for a Greenplum®  cluster (a combination of settings defined in [user_config] and [default_config]).
 	EffectiveConfig *GreenplumConfig6_21 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Greenplum.
+	// User-defined settings for a Greenplum® cluster.
 	UserConfig *GreenplumConfig6_21 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Greenplum.
+	// Default configuration for a Greenplum® cluster.
 	DefaultConfig *GreenplumConfig6_21 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 }
 
@@ -1162,12 +1161,11 @@ type GreenplumConfigSet6_22 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Effective settings for a Greenplum (a combination of settings defined
-	// in [user_config] and [default_config]).
+	// Effective settings for a Greenplum®  cluster (a combination of settings defined in [user_config] and [default_config]).
 	EffectiveConfig *GreenplumConfig6_22 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Greenplum.
+	// User-defined settings for a Greenplum® cluster.
 	UserConfig *GreenplumConfig6_22 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Greenplum.
+	// Default configuration for a Greenplum® cluster.
 	DefaultConfig *GreenplumConfig6_22 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 }
 

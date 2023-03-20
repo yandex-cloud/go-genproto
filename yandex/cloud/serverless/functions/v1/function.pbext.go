@@ -116,6 +116,10 @@ func (m *Version) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *Version) SetS3Mounts(v []*S3Mount) {
+	m.S3Mounts = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -216,4 +220,20 @@ func (m *LogOptions) SetFolderId(v string) {
 
 func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
 	m.MinLevel = v
+}
+
+func (m *S3Mount) SetBucketId(v string) {
+	m.BucketId = v
+}
+
+func (m *S3Mount) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *S3Mount) SetMountPointName(v string) {
+	m.MountPointName = v
+}
+
+func (m *S3Mount) SetReadOnly(v bool) {
+	m.ReadOnly = v
 }
