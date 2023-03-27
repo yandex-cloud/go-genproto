@@ -187,6 +187,10 @@ func (m *BackupClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *BackupClusterMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
 func (m *RestoreClusterRequest) SetBackupId(v string) {
 	m.BackupId = v
 }

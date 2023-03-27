@@ -122,6 +122,10 @@ func (m *Trigger_Timer) SetCronExpression(v string) {
 	m.CronExpression = v
 }
 
+func (m *Trigger_Timer) SetPayload(v string) {
+	m.Payload = v
+}
+
 func (m *Trigger_Timer) SetInvokeFunction(v *InvokeFunctionOnce) {
 	m.Action = &Trigger_Timer_InvokeFunction{
 		InvokeFunction: v,

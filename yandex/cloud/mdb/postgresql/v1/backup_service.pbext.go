@@ -33,3 +33,7 @@ func (m *DeleteBackupRequest) SetBackupId(v string) {
 func (m *DeleteBackupMetadata) SetBackupId(v string) {
 	m.BackupId = v
 }
+
+func (m *DeleteBackupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
