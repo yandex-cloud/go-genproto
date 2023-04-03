@@ -238,7 +238,7 @@ type CreateNetworkLoadBalancerRequest struct {
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of the region where the network load balancer resides.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// Type of the network load balancer. Only external network load balancers are currently available.
+	// Type of the network load balancer.
 	Type NetworkLoadBalancer_Type `protobuf:"varint,6,opt,name=type,proto3,enum=yandex.cloud.loadbalancer.v1.NetworkLoadBalancer_Type" json:"type,omitempty"`
 	// List of listeners and their specs for the network load balancer.
 	ListenerSpecs []*ListenerSpec `protobuf:"bytes,7,rep,name=listener_specs,json=listenerSpecs,proto3" json:"listener_specs,omitempty"`

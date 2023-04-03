@@ -148,7 +148,6 @@ func (NetworkLoadBalancer_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// Type of the load balancer. Only external load balancers are currently available.
 type NetworkLoadBalancer_Type int32
 
 const (
