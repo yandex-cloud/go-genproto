@@ -560,7 +560,8 @@ type Bucket struct {
 	// List of object lifecycle rules for the bucket.
 	// For details, see [documentation](/docs/storage/concepts/lifecycles).
 	LifecycleRules []*LifecycleRule `protobuf:"bytes,13,rep,name=lifecycle_rules,json=lifecycleRules,proto3" json:"lifecycle_rules,omitempty"`
-	// List of object tag for the bucket.
+	// List of tags for the bucket.
+	// For details, see [documentation](/docs/resource-manager/concepts/labels).
 	Tags []*Tag `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty"`
 	// Configuration for object lock on the bucket.
 	// For details about the concept, see [documentation](/docs/storage/concepts/object-lock).
@@ -709,7 +710,9 @@ type Tag struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Key of the bucket tag.
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Value of the bucket tag.
 	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 

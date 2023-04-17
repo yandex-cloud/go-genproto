@@ -146,12 +146,20 @@ func (m *NodeTemplate) SetContainerRuntimeSettings(v *NodeTemplate_ContainerRunt
 	m.ContainerRuntimeSettings = v
 }
 
+func (m *NodeTemplate) SetContainerNetworkSettings(v *NodeTemplate_ContainerNetworkSettings) {
+	m.ContainerNetworkSettings = v
+}
+
 func (m *NodeTemplate_NetworkSettings) SetType(v NodeTemplate_NetworkSettings_Type) {
 	m.Type = v
 }
 
 func (m *NodeTemplate_ContainerRuntimeSettings) SetType(v NodeTemplate_ContainerRuntimeSettings_Type) {
 	m.Type = v
+}
+
+func (m *NodeTemplate_ContainerNetworkSettings) SetPodMtu(v int64) {
+	m.PodMtu = v
 }
 
 func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {

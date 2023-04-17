@@ -38,7 +38,7 @@ type BucketServiceClient interface {
 	// Retrieves the list of buckets in the specified folder.
 	//
 	// The following fields will not be returned for buckets in the list: [Bucket.policy], [Bucket.acl], [Bucket.cors],
-	// [Bucket.website_settings], [Bucket.lifecycle_rules].
+	// [Bucket.website_settings], [Bucket.lifecycle_rules], [Bucket.tags].
 	List(ctx context.Context, in *ListBucketsRequest, opts ...grpc.CallOption) (*ListBucketsResponse, error)
 	// Returns the specified bucket.
 	//
@@ -161,7 +161,7 @@ type BucketServiceServer interface {
 	// Retrieves the list of buckets in the specified folder.
 	//
 	// The following fields will not be returned for buckets in the list: [Bucket.policy], [Bucket.acl], [Bucket.cors],
-	// [Bucket.website_settings], [Bucket.lifecycle_rules].
+	// [Bucket.website_settings], [Bucket.lifecycle_rules], [Bucket.tags].
 	List(context.Context, *ListBucketsRequest) (*ListBucketsResponse, error)
 	// Returns the specified bucket.
 	//

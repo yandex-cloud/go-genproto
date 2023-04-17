@@ -33,11 +33,12 @@ const (
 	// Returns basic information about a bucket.
 	//
 	// The following fields will _not_ be returned: [Bucket.acl], [Bucket.cors], [Bucket.website_settings],
-	// [Bucket.lifecycle_rules].
+	// [Bucket.lifecycle_rules], [Bucket.tags].
 	GetBucketRequest_VIEW_BASIC GetBucketRequest_View = 1
 	// Returns basic information and access control list (ACL) for the bucket.
 	//
-	// The following fields will _not_ be returned: [Bucket.cors], [Bucket.website_settings], [Bucket.lifecycle_rules].
+	// The following fields will _not_ be returned: [Bucket.cors], [Bucket.website_settings], [Bucket.lifecycle_rules],
+	// [Bucket.tags].
 	GetBucketRequest_VIEW_ACL GetBucketRequest_View = 2
 	// Returns full information about a bucket.
 	GetBucketRequest_VIEW_FULL GetBucketRequest_View = 3
@@ -273,7 +274,8 @@ type CreateBucketRequest struct {
 	// Access control list (ACL) of the bucket.
 	// For details, see [documentation](/docs/storage/concepts/acl).
 	Acl *ACL `protobuf:"bytes,7,opt,name=acl,proto3" json:"acl,omitempty"`
-	// List of object tag for the bucket.
+	// List of tags for the bucket.
+	// For details, see [documentation](/docs/resource-manager/concepts/labels).
 	Tags []*Tag `protobuf:"bytes,8,rep,name=tags,proto3" json:"tags,omitempty"`
 }
 
@@ -448,7 +450,8 @@ type UpdateBucketRequest struct {
 	// Access control list (ACL) of the bucket.
 	// For details, see [documentation](/docs/storage/concepts/acl).
 	Acl *ACL `protobuf:"bytes,11,opt,name=acl,proto3" json:"acl,omitempty"`
-	// List of object tag for the bucket.
+	// List of tags for the bucket.
+	// For details, see [documentation](/docs/resource-manager/concepts/labels).
 	Tags []*Tag `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
 	// Configuration for object lock on the bucket.
 	// For details about the concept, see [documentation](/docs/storage/concepts/object-lock).
