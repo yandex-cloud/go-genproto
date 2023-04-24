@@ -342,6 +342,10 @@ func (m *MysqlConfig5_7) SetOptimizerSearchDepth(v *wrapperspb.Int64Value) {
 	m.OptimizerSearchDepth = v
 }
 
+func (m *MysqlConfig5_7) SetQueryResponseTimeStats(v *wrapperspb.BoolValue) {
+	m.QueryResponseTimeStats = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

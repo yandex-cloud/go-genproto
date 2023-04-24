@@ -622,6 +622,10 @@ func (m *PostgresqlConfig14) SetPgTrgmStrictWordSimilarityThreshold(v *wrappersp
 	m.PgTrgmStrictWordSimilarityThreshold = v
 }
 
+func (m *PostgresqlConfig14) SetMaxStandbyArchiveDelay(v *wrapperspb.Int64Value) {
+	m.MaxStandbyArchiveDelay = v
+}
+
 func (m *PostgresqlConfigSet14) SetEffectiveConfig(v *PostgresqlConfig14) {
 	m.EffectiveConfig = v
 }
