@@ -6,6 +6,94 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+func (m *SessionState) SetTime(v *timestamppb.Timestamp) {
+	m.Time = v
+}
+
+func (m *SessionState) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *SessionState) SetPid(v int64) {
+	m.Pid = v
+}
+
+func (m *SessionState) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *SessionState) SetUser(v string) {
+	m.User = v
+}
+
+func (m *SessionState) SetApplicationName(v string) {
+	m.ApplicationName = v
+}
+
+func (m *SessionState) SetBackendStart(v *timestamppb.Timestamp) {
+	m.BackendStart = v
+}
+
+func (m *SessionState) SetXactStart(v *timestamppb.Timestamp) {
+	m.XactStart = v
+}
+
+func (m *SessionState) SetQueryStart(v *timestamppb.Timestamp) {
+	m.QueryStart = v
+}
+
+func (m *SessionState) SetStateChange(v *timestamppb.Timestamp) {
+	m.StateChange = v
+}
+
+func (m *SessionState) SetWaitEventType(v string) {
+	m.WaitEventType = v
+}
+
+func (m *SessionState) SetWaitEvent(v string) {
+	m.WaitEvent = v
+}
+
+func (m *SessionState) SetState(v string) {
+	m.State = v
+}
+
+func (m *SessionState) SetQuery(v string) {
+	m.Query = v
+}
+
+func (m *SessionState) SetBackendType(v string) {
+	m.BackendType = v
+}
+
+func (m *SessionState) SetClientAddr(v string) {
+	m.ClientAddr = v
+}
+
+func (m *SessionState) SetClientHostname(v string) {
+	m.ClientHostname = v
+}
+
+func (m *SessionState) SetClientPort(v int64) {
+	m.ClientPort = v
+}
+
+func (m *SessionState) SetBackendXid(v int64) {
+	m.BackendXid = v
+}
+
+func (m *SessionState) SetBackendXmin(v int64) {
+	m.BackendXmin = v
+}
+
+func (m *SessionState) SetBlockingPids(v string) {
+	m.BlockingPids = v
+}
+
+func (m *SessionState) SetQueryId(v string) {
+	m.QueryId = v
+}
+
 func (m *PrimaryKey) SetHost(v string) {
 	m.Host = v
 }

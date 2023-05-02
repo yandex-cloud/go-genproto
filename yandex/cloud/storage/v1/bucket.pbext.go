@@ -68,6 +68,10 @@ func (m *Bucket) SetObjectLock(v *ObjectLock) {
 	m.ObjectLock = v
 }
 
+func (m *Bucket) SetEncryption(v *Encryption) {
+	m.Encryption = v
+}
+
 func (m *Tag) SetKey(v string) {
 	m.Key = v
 }
@@ -424,4 +428,16 @@ func (m *ObjectLock_DefaultRetention) SetYears(v int64) {
 	m.Period = &ObjectLock_DefaultRetention_Years{
 		Years: v,
 	}
+}
+
+func (m *Encryption) SetRules(v []*Encryption_EncryptionRule) {
+	m.Rules = v
+}
+
+func (m *Encryption_EncryptionRule) SetKmsMasterKeyId(v string) {
+	m.KmsMasterKeyId = v
+}
+
+func (m *Encryption_EncryptionRule) SetSseAlgorithm(v string) {
+	m.SseAlgorithm = v
 }

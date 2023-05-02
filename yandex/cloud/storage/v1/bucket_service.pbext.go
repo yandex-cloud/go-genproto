@@ -107,6 +107,10 @@ func (m *UpdateBucketRequest) SetObjectLock(v *ObjectLock) {
 	m.ObjectLock = v
 }
 
+func (m *UpdateBucketRequest) SetEncryption(v *Encryption) {
+	m.Encryption = v
+}
+
 func (m *UpdateBucketMetadata) SetName(v string) {
 	m.Name = v
 }

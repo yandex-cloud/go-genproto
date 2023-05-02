@@ -238,6 +238,10 @@ func (m *MasterLogging) SetFolderId(v string) {
 	}
 }
 
+func (m *MasterLogging) SetAuditEnabled(v bool) {
+	m.AuditEnabled = v
+}
+
 func (m *MasterLogging) SetClusterAutoscalerEnabled(v bool) {
 	m.ClusterAutoscalerEnabled = v
 }

@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PerformanceDiagnosticsService_ListRawStatements_FullMethodName = "/yandex.cloud.mdb.postgresql.v1.PerformanceDiagnosticsService/ListRawStatements"
+	PerformanceDiagnosticsService_ListRawSessionStates_FullMethodName = "/yandex.cloud.mdb.postgresql.v1.PerformanceDiagnosticsService/ListRawSessionStates"
+	PerformanceDiagnosticsService_ListRawStatements_FullMethodName    = "/yandex.cloud.mdb.postgresql.v1.PerformanceDiagnosticsService/ListRawStatements"
 )
 
 // PerformanceDiagnosticsServiceClient is the client API for PerformanceDiagnosticsService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PerformanceDiagnosticsServiceClient interface {
 	// Handlers for raw data export
+	ListRawSessionStates(ctx context.Context, in *ListRawSessionStatesRequest, opts ...grpc.CallOption) (*ListRawSessionStatesResponse, error)
 	ListRawStatements(ctx context.Context, in *ListRawStatementsRequest, opts ...grpc.CallOption) (*ListRawStatementsResponse, error)
 }
 
@@ -36,6 +38,15 @@ type performanceDiagnosticsServiceClient struct {
 
 func NewPerformanceDiagnosticsServiceClient(cc grpc.ClientConnInterface) PerformanceDiagnosticsServiceClient {
 	return &performanceDiagnosticsServiceClient{cc}
+}
+
+func (c *performanceDiagnosticsServiceClient) ListRawSessionStates(ctx context.Context, in *ListRawSessionStatesRequest, opts ...grpc.CallOption) (*ListRawSessionStatesResponse, error) {
+	out := new(ListRawSessionStatesResponse)
+	err := c.cc.Invoke(ctx, PerformanceDiagnosticsService_ListRawSessionStates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *performanceDiagnosticsServiceClient) ListRawStatements(ctx context.Context, in *ListRawStatementsRequest, opts ...grpc.CallOption) (*ListRawStatementsResponse, error) {
@@ -52,6 +63,7 @@ func (c *performanceDiagnosticsServiceClient) ListRawStatements(ctx context.Cont
 // for forward compatibility
 type PerformanceDiagnosticsServiceServer interface {
 	// Handlers for raw data export
+	ListRawSessionStates(context.Context, *ListRawSessionStatesRequest) (*ListRawSessionStatesResponse, error)
 	ListRawStatements(context.Context, *ListRawStatementsRequest) (*ListRawStatementsResponse, error)
 }
 
@@ -59,6 +71,9 @@ type PerformanceDiagnosticsServiceServer interface {
 type UnimplementedPerformanceDiagnosticsServiceServer struct {
 }
 
+func (UnimplementedPerformanceDiagnosticsServiceServer) ListRawSessionStates(context.Context, *ListRawSessionStatesRequest) (*ListRawSessionStatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRawSessionStates not implemented")
+}
 func (UnimplementedPerformanceDiagnosticsServiceServer) ListRawStatements(context.Context, *ListRawStatementsRequest) (*ListRawStatementsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRawStatements not implemented")
 }
@@ -72,6 +87,24 @@ type UnsafePerformanceDiagnosticsServiceServer interface {
 
 func RegisterPerformanceDiagnosticsServiceServer(s grpc.ServiceRegistrar, srv PerformanceDiagnosticsServiceServer) {
 	s.RegisterService(&PerformanceDiagnosticsService_ServiceDesc, srv)
+}
+
+func _PerformanceDiagnosticsService_ListRawSessionStates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRawSessionStatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceDiagnosticsServiceServer).ListRawSessionStates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceDiagnosticsService_ListRawSessionStates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceDiagnosticsServiceServer).ListRawSessionStates(ctx, req.(*ListRawSessionStatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _PerformanceDiagnosticsService_ListRawStatements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -99,6 +132,10 @@ var PerformanceDiagnosticsService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "yandex.cloud.mdb.postgresql.v1.PerformanceDiagnosticsService",
 	HandlerType: (*PerformanceDiagnosticsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListRawSessionStates",
+			Handler:    _PerformanceDiagnosticsService_ListRawSessionStates_Handler,
+		},
 		{
 			MethodName: "ListRawStatements",
 			Handler:    _PerformanceDiagnosticsService_ListRawStatements_Handler,
