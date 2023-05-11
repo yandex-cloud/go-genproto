@@ -346,6 +346,10 @@ func (m *Trigger_Logging) SetResourceId(v []string) {
 	m.ResourceId = v
 }
 
+func (m *Trigger_Logging) SetStreamName(v []string) {
+	m.StreamName = v
+}
+
 func (m *Trigger_Logging) SetLevels(v []v1.LogLevel_Level) {
 	m.Levels = v
 }
