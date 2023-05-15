@@ -417,6 +417,10 @@ func (m *AttachedDiskSpec) SetDiskId(v string) {
 	m.DiskId = v
 }
 
+func (m *AttachedDiskSpec) SetName(v string) {
+	m.Name = v
+}
+
 type AttachedDiskSpec_DiskSpec_SourceOneof = isAttachedDiskSpec_DiskSpec_SourceOneof
 
 func (m *AttachedDiskSpec_DiskSpec) SetSourceOneof(v AttachedDiskSpec_DiskSpec_SourceOneof) {

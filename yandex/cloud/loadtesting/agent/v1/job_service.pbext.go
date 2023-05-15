@@ -26,6 +26,10 @@ func (m *Job) SetDataPayload(v []*TestDataEntry) {
 	m.DataPayload = v
 }
 
+func (m *Job) SetArtifactUploadSettings(v *TestArtifactUploadSettings) {
+	m.ArtifactUploadSettings = v
+}
+
 func (m *File) SetName(v string) {
 	m.Name = v
 }
@@ -52,6 +56,26 @@ func (m *TestDataEntry) SetIsTransient(v bool) {
 
 func (m *TestDataEntry) SetStorageObject(v *StorageObject) {
 	m.StorageObject = v
+}
+
+func (m *TestArtifactUploadSettings) SetOutputBucket(v string) {
+	m.OutputBucket = v
+}
+
+func (m *TestArtifactUploadSettings) SetOutputName(v string) {
+	m.OutputName = v
+}
+
+func (m *TestArtifactUploadSettings) SetIsArchive(v bool) {
+	m.IsArchive = v
+}
+
+func (m *TestArtifactUploadSettings) SetFilterInclude(v []string) {
+	m.FilterInclude = v
+}
+
+func (m *TestArtifactUploadSettings) SetFilterExclude(v []string) {
+	m.FilterExclude = v
 }
 
 func (m *GetJobTransientFile) SetJobId(v string) {

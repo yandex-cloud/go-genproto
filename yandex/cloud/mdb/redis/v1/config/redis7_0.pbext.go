@@ -42,6 +42,10 @@ func (m *RedisConfig7_0) SetClientOutputBufferLimitNormal(v *RedisConfig7_0_Clie
 	m.ClientOutputBufferLimitNormal = v
 }
 
+func (m *RedisConfig7_0) SetMaxmemoryPercent(v *wrapperspb.Int64Value) {
+	m.MaxmemoryPercent = v
+}
+
 func (m *RedisConfig7_0_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
 	m.HardLimit = v
 }
