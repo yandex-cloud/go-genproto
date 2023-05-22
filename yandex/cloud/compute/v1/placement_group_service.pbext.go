@@ -63,6 +63,12 @@ func (m *CreatePlacementGroupRequest) SetSpreadPlacementStrategy(v *SpreadPlacem
 	}
 }
 
+func (m *CreatePlacementGroupRequest) SetPartitionPlacementStrategy(v *PartitionPlacementStrategy) {
+	m.PlacementStrategy = &CreatePlacementGroupRequest_PartitionPlacementStrategy{
+		PartitionPlacementStrategy: v,
+	}
+}
+
 func (m *CreatePlacementGroupMetadata) SetPlacementGroupId(v string) {
 	m.PlacementGroupId = v
 }

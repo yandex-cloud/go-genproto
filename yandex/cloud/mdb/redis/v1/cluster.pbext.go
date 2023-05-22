@@ -147,6 +147,10 @@ func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ClusterConfig) SetRedis(v *config.RedisConfigSet) {
+	m.Redis = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }

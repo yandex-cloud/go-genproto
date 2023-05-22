@@ -602,6 +602,10 @@ func (m *PostgresqlConfig15) SetMaxStandbyArchiveDelay(v *wrapperspb.Int64Value)
 	m.MaxStandbyArchiveDelay = v
 }
 
+func (m *PostgresqlConfig15) SetSessionDurationTimeout(v *wrapperspb.Int64Value) {
+	m.SessionDurationTimeout = v
+}
+
 func (m *PostgresqlConfigSet15) SetEffectiveConfig(v *PostgresqlConfig15) {
 	m.EffectiveConfig = v
 }

@@ -510,6 +510,14 @@ func (m *PostgresqlConfig10_1C) SetGeqoSeed(v *wrapperspb.DoubleValue) {
 	m.GeqoSeed = v
 }
 
+func (m *PostgresqlConfig10_1C) SetMaxStandbyArchiveDelay(v *wrapperspb.Int64Value) {
+	m.MaxStandbyArchiveDelay = v
+}
+
+func (m *PostgresqlConfig10_1C) SetSessionDurationTimeout(v *wrapperspb.Int64Value) {
+	m.SessionDurationTimeout = v
+}
+
 func (m *PostgresqlConfigSet10_1C) SetEffectiveConfig(v *PostgresqlConfig10_1C) {
 	m.EffectiveConfig = v
 }
