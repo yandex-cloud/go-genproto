@@ -311,3 +311,7 @@ func (m *StreamingResponse) SetStatusCode(v *StatusCode) {
 		StatusCode: v,
 	}
 }
+
+func (m *StreamingResponse) SetChannelTag(v string) {
+	m.ChannelTag = v
+}

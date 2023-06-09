@@ -102,6 +102,10 @@ func (m *KafkaTarget) SetTopicSettings(v *KafkaTargetTopicSettings) {
 	m.TopicSettings = v
 }
 
+func (m *KafkaTarget) SetSerializer(v *Serializer) {
+	m.Serializer = v
+}
+
 type KafkaTargetTopicSettings_TopicSettings = isKafkaTargetTopicSettings_TopicSettings
 
 func (m *KafkaTargetTopicSettings) SetTopicSettings(v KafkaTargetTopicSettings_TopicSettings) {

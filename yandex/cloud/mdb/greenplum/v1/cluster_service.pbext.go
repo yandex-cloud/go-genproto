@@ -470,6 +470,14 @@ func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *RestoreClusterRequest) SetSegmentHostCount(v int64) {
+	m.SegmentHostCount = v
+}
+
+func (m *RestoreClusterRequest) SetSegmentInHost(v int64) {
+	m.SegmentInHost = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
