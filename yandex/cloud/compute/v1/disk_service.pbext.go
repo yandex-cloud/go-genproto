@@ -177,6 +177,26 @@ func (m *MoveDiskMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
 }
 
+func (m *RelocateDiskRequest) SetDiskId(v string) {
+	m.DiskId = v
+}
+
+func (m *RelocateDiskRequest) SetDestinationZoneId(v string) {
+	m.DestinationZoneId = v
+}
+
+func (m *RelocateDiskMetadata) SetDiskId(v string) {
+	m.DiskId = v
+}
+
+func (m *RelocateDiskMetadata) SetSourceZoneId(v string) {
+	m.SourceZoneId = v
+}
+
+func (m *RelocateDiskMetadata) SetDestinationZoneId(v string) {
+	m.DestinationZoneId = v
+}
+
 func (m *ListDiskSnapshotSchedulesRequest) SetDiskId(v string) {
 	m.DiskId = v
 }

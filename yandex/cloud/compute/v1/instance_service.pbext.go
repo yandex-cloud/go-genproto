@@ -603,6 +603,26 @@ func (m *MoveInstanceMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
 }
 
+func (m *RelocateInstanceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *RelocateInstanceRequest) SetDestinationZoneId(v string) {
+	m.DestinationZoneId = v
+}
+
+func (m *RelocateInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *RelocateInstanceMetadata) SetSourceZoneId(v string) {
+	m.SourceZoneId = v
+}
+
+func (m *RelocateInstanceMetadata) SetDestinationZoneId(v string) {
+	m.DestinationZoneId = v
+}
+
 func (m *GuestStopInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }

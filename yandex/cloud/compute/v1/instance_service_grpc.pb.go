@@ -39,6 +39,7 @@ const (
 	InstanceService_UpdateNetworkInterface_FullMethodName = "/yandex.cloud.compute.v1.InstanceService/UpdateNetworkInterface"
 	InstanceService_ListOperations_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/ListOperations"
 	InstanceService_Move_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/Move"
+	InstanceService_Relocate_FullMethodName               = "/yandex.cloud.compute.v1.InstanceService/Relocate"
 )
 
 // InstanceServiceClient is the client API for InstanceService service.
@@ -106,6 +107,10 @@ type InstanceServiceClient interface {
 	// After moving, the instance will start recording its Monitoring default metrics to its new folder. Metrics
 	// that have been recorded to the source folder prior to moving will be retained.
 	Move(ctx context.Context, in *MoveInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves the specified instance to another availability zone
+	//
+	// Running instance will be restarted during this operation.
+	Relocate(ctx context.Context, in *RelocateInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type instanceServiceClient struct {
@@ -287,6 +292,15 @@ func (c *instanceServiceClient) Move(ctx context.Context, in *MoveInstanceReques
 	return out, nil
 }
 
+func (c *instanceServiceClient) Relocate(ctx context.Context, in *RelocateInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_Relocate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InstanceServiceServer is the server API for InstanceService service.
 // All implementations should embed UnimplementedInstanceServiceServer
 // for forward compatibility
@@ -352,6 +366,10 @@ type InstanceServiceServer interface {
 	// After moving, the instance will start recording its Monitoring default metrics to its new folder. Metrics
 	// that have been recorded to the source folder prior to moving will be retained.
 	Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error)
+	// Moves the specified instance to another availability zone
+	//
+	// Running instance will be restarted during this operation.
+	Relocate(context.Context, *RelocateInstanceRequest) (*operation.Operation, error)
 }
 
 // UnimplementedInstanceServiceServer should be embedded to have forward compatible implementations.
@@ -414,6 +432,9 @@ func (UnimplementedInstanceServiceServer) ListOperations(context.Context, *ListI
 }
 func (UnimplementedInstanceServiceServer) Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedInstanceServiceServer) Relocate(context.Context, *RelocateInstanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Relocate not implemented")
 }
 
 // UnsafeInstanceServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -769,6 +790,24 @@ func _InstanceService_Move_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceService_Relocate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RelocateInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).Relocate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_Relocate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).Relocate(ctx, req.(*RelocateInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InstanceService_ServiceDesc is the grpc.ServiceDesc for InstanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -851,6 +890,10 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _InstanceService_Move_Handler,
+		},
+		{
+			MethodName: "Relocate",
+			Handler:    _InstanceService_Relocate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

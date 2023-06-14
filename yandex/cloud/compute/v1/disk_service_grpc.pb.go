@@ -27,6 +27,7 @@ const (
 	DiskService_Delete_FullMethodName                = "/yandex.cloud.compute.v1.DiskService/Delete"
 	DiskService_ListOperations_FullMethodName        = "/yandex.cloud.compute.v1.DiskService/ListOperations"
 	DiskService_Move_FullMethodName                  = "/yandex.cloud.compute.v1.DiskService/Move"
+	DiskService_Relocate_FullMethodName              = "/yandex.cloud.compute.v1.DiskService/Relocate"
 	DiskService_ListSnapshotSchedules_FullMethodName = "/yandex.cloud.compute.v1.DiskService/ListSnapshotSchedules"
 )
 
@@ -58,6 +59,11 @@ type DiskServiceClient interface {
 	ListOperations(ctx context.Context, in *ListDiskOperationsRequest, opts ...grpc.CallOption) (*ListDiskOperationsResponse, error)
 	// Moves the specified disk to another folder of the same cloud.
 	Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves the specified disk to another availability zone
+	//
+	// Disk must be detached from instances. To move attached
+	// disk use [InstanceService.Relocate] request.
+	Relocate(ctx context.Context, in *RelocateDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of snapshot schedules the specified disk is attached to.
 	ListSnapshotSchedules(ctx context.Context, in *ListDiskSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListDiskSnapshotSchedulesResponse, error)
 }
@@ -133,6 +139,15 @@ func (c *diskServiceClient) Move(ctx context.Context, in *MoveDiskRequest, opts 
 	return out, nil
 }
 
+func (c *diskServiceClient) Relocate(ctx context.Context, in *RelocateDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DiskService_Relocate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *diskServiceClient) ListSnapshotSchedules(ctx context.Context, in *ListDiskSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListDiskSnapshotSchedulesResponse, error) {
 	out := new(ListDiskSnapshotSchedulesResponse)
 	err := c.cc.Invoke(ctx, DiskService_ListSnapshotSchedules_FullMethodName, in, out, opts...)
@@ -170,6 +185,11 @@ type DiskServiceServer interface {
 	ListOperations(context.Context, *ListDiskOperationsRequest) (*ListDiskOperationsResponse, error)
 	// Moves the specified disk to another folder of the same cloud.
 	Move(context.Context, *MoveDiskRequest) (*operation.Operation, error)
+	// Moves the specified disk to another availability zone
+	//
+	// Disk must be detached from instances. To move attached
+	// disk use [InstanceService.Relocate] request.
+	Relocate(context.Context, *RelocateDiskRequest) (*operation.Operation, error)
 	// Retrieves the list of snapshot schedules the specified disk is attached to.
 	ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error)
 }
@@ -198,6 +218,9 @@ func (UnimplementedDiskServiceServer) ListOperations(context.Context, *ListDiskO
 }
 func (UnimplementedDiskServiceServer) Move(context.Context, *MoveDiskRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedDiskServiceServer) Relocate(context.Context, *RelocateDiskRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Relocate not implemented")
 }
 func (UnimplementedDiskServiceServer) ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSnapshotSchedules not implemented")
@@ -340,6 +363,24 @@ func _DiskService_Move_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DiskService_Relocate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RelocateDiskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskServiceServer).Relocate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskService_Relocate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskServiceServer).Relocate(ctx, req.(*RelocateDiskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DiskService_ListSnapshotSchedules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDiskSnapshotSchedulesRequest)
 	if err := dec(in); err != nil {
@@ -392,6 +433,10 @@ var DiskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _DiskService_Move_Handler,
+		},
+		{
+			MethodName: "Relocate",
+			Handler:    _DiskService_Relocate_Handler,
 		},
 		{
 			MethodName: "ListSnapshotSchedules",
