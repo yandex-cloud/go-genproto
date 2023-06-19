@@ -48,6 +48,12 @@ func (m *EndpointSettings) SetPostgresSource(v *endpoint.PostgresSource) {
 	}
 }
 
+func (m *EndpointSettings) SetYdbSource(v *endpoint.YdbSource) {
+	m.Settings = &EndpointSettings_YdbSource{
+		YdbSource: v,
+	}
+}
+
 func (m *EndpointSettings) SetKafkaSource(v *endpoint.KafkaSource) {
 	m.Settings = &EndpointSettings_KafkaSource{
 		KafkaSource: v,
@@ -81,6 +87,12 @@ func (m *EndpointSettings) SetPostgresTarget(v *endpoint.PostgresTarget) {
 func (m *EndpointSettings) SetClickhouseTarget(v *endpoint.ClickhouseTarget) {
 	m.Settings = &EndpointSettings_ClickhouseTarget{
 		ClickhouseTarget: v,
+	}
+}
+
+func (m *EndpointSettings) SetYdbTarget(v *endpoint.YdbTarget) {
+	m.Settings = &EndpointSettings_YdbTarget{
+		YdbTarget: v,
 	}
 }
 
