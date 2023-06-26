@@ -67,6 +67,12 @@ func (m *CreateDiskPlacementGroupRequest) SetSpreadPlacementStrategy(v *DiskSpre
 	}
 }
 
+func (m *CreateDiskPlacementGroupRequest) SetPartitionPlacementStrategy(v *DiskPartitionPlacementStrategy) {
+	m.PlacementStrategy = &CreateDiskPlacementGroupRequest_PartitionPlacementStrategy{
+		PartitionPlacementStrategy: v,
+	}
+}
+
 func (m *CreateDiskPlacementGroupMetadata) SetDiskPlacementGroupId(v string) {
 	m.DiskPlacementGroupId = v
 }

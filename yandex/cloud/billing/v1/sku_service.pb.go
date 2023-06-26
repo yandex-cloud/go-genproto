@@ -37,7 +37,7 @@ type GetSkuRequest struct {
 	// * `KZT`
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Optional ID of the billing account.
-	// If specified, contract prices for concrete billing account are included in the response.
+	// If specified, contract prices for a particular billing account are included in the response.
 	// To get the billing account ID, use [BillingAccountService.List] request.
 	BillingAccountId string `protobuf:"bytes,3,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 }
@@ -107,7 +107,7 @@ type ListSkusRequest struct {
 	// * `KZT`
 	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Optional ID of the billing account.
-	// If specified, contract prices for concrete billing account are included in the response.
+	// If specified, contract prices for a particular billing account are included in the response.
 	// To get the billing account ID, use [BillingAccountService.List] request.
 	BillingAccountId string `protobuf:"bytes,2,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 	// A filter expression that filters resources listed in the response.
