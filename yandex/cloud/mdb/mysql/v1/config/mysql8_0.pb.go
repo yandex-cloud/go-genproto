@@ -534,99 +534,99 @@ type MysqlConfig8_0 struct {
 	MaxAllowedPacket *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_allowed_packet,json=maxAllowedPacket,proto3" json:"max_allowed_packet,omitempty"`
 	// Authentication plugin used in the managed MySQL cluster.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) for details.
 	DefaultAuthenticationPlugin MysqlConfig8_0_AuthPlugin `protobuf:"varint,8,opt,name=default_authentication_plugin,json=defaultAuthenticationPlugin,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0_AuthPlugin" json:"default_authentication_plugin,omitempty"`
 	// Transaction log flush behaviour.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit) for details.
 	InnodbFlushLogAtTrxCommit *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=innodb_flush_log_at_trx_commit,json=innodbFlushLogAtTrxCommit,proto3" json:"innodb_flush_log_at_trx_commit,omitempty"`
 	// Max time in seconds for a transaction to wait for a row lock.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout) for details.
 	InnodbLockWaitTimeout *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=innodb_lock_wait_timeout,json=innodbLockWaitTimeout,proto3" json:"innodb_lock_wait_timeout,omitempty"`
 	// Default transaction isolation level.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_transaction_isolation for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_transaction_isolation) for details.
 	TransactionIsolation MysqlConfig8_0_TransactionIsolation `protobuf:"varint,11,opt,name=transaction_isolation,json=transactionIsolation,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0_TransactionIsolation" json:"transaction_isolation,omitempty"`
 	// Print information about deadlocks in error log.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_print_all_deadlocks for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_print_all_deadlocks) for details.
 	InnodbPrintAllDeadlocks *wrapperspb.BoolValue `protobuf:"bytes,12,opt,name=innodb_print_all_deadlocks,json=innodbPrintAllDeadlocks,proto3" json:"innodb_print_all_deadlocks,omitempty"`
 	// The number of seconds to wait for more data from a connection before aborting the read.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_net_read_timeout for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_net_read_timeout) for details.
 	NetReadTimeout *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=net_read_timeout,json=netReadTimeout,proto3" json:"net_read_timeout,omitempty"`
 	// The number of seconds to wait for a block to be written to a connection before aborting the write.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_net_write_timeout for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_net_write_timeout) for details.
 	NetWriteTimeout *wrapperspb.Int64Value `protobuf:"bytes,14,opt,name=net_write_timeout,json=netWriteTimeout,proto3" json:"net_write_timeout,omitempty"`
 	// The maximum permitted result length in bytes for the GROUP_CONCAT() function.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_group_concat_max_len for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_group_concat_max_len) for details.
 	GroupConcatMaxLen *wrapperspb.Int64Value `protobuf:"bytes,15,opt,name=group_concat_max_len,json=groupConcatMaxLen,proto3" json:"group_concat_max_len,omitempty"`
 	// The maximum size of internal in-memory temporary tables.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_tmp_table_size for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_tmp_table_size) for details.
 	TmpTableSize *wrapperspb.Int64Value `protobuf:"bytes,16,opt,name=tmp_table_size,json=tmpTableSize,proto3" json:"tmp_table_size,omitempty"`
 	// This variable sets the maximum size to which user-created MEMORY tables are permitted to grow.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_heap_table_size for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_heap_table_size) for details.
 	MaxHeapTableSize *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=max_heap_table_size,json=maxHeapTableSize,proto3" json:"max_heap_table_size,omitempty"`
 	// The servers default time zone.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_default-time-zone for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_default-time-zone) for details.
 	DefaultTimeZone string `protobuf:"bytes,18,opt,name=default_time_zone,json=defaultTimeZone,proto3" json:"default_time_zone,omitempty"`
 	// The servers default character set.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_character_set_server for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_character_set_server) for details.
 	CharacterSetServer string `protobuf:"bytes,19,opt,name=character_set_server,json=characterSetServer,proto3" json:"character_set_server,omitempty"`
 	// The server default collation.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_collation_server for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_collation_server) for details.
 	CollationServer string `protobuf:"bytes,20,opt,name=collation_server,json=collationServer,proto3" json:"collation_server,omitempty"`
 	// Enables InnoDB adaptive hash index.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index) for details.
 	InnodbAdaptiveHashIndex *wrapperspb.BoolValue `protobuf:"bytes,21,opt,name=innodb_adaptive_hash_index,json=innodbAdaptiveHashIndex,proto3" json:"innodb_adaptive_hash_index,omitempty"`
 	// Enables the NUMA interleave memory policy for allocation of the InnoDB buffer pool.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_numa_interleave for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_numa_interleave) for details.
 	InnodbNumaInterleave *wrapperspb.BoolValue `protobuf:"bytes,22,opt,name=innodb_numa_interleave,json=innodbNumaInterleave,proto3" json:"innodb_numa_interleave,omitempty"`
 	// The size in bytes of the buffer that InnoDB uses to write to the log files on disk.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_buffer_size for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_buffer_size) for details.
 	InnodbLogBufferSize *wrapperspb.Int64Value `protobuf:"bytes,23,opt,name=innodb_log_buffer_size,json=innodbLogBufferSize,proto3" json:"innodb_log_buffer_size,omitempty"`
 	// The size in bytes of the single InnoDB Redo log file.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size) for details.
 	InnodbLogFileSize *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=innodb_log_file_size,json=innodbLogFileSize,proto3" json:"innodb_log_file_size,omitempty"`
 	// Limits IO available for InnoDB background tasks.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_io_capacity for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_io_capacity) for details.
 	InnodbIoCapacity *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=innodb_io_capacity,json=innodbIoCapacity,proto3" json:"innodb_io_capacity,omitempty"`
 	// Limits IO available for InnoDB background tasks.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_io_capacity_max for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_io_capacity_max) for details.
 	InnodbIoCapacityMax *wrapperspb.Int64Value `protobuf:"bytes,26,opt,name=innodb_io_capacity_max,json=innodbIoCapacityMax,proto3" json:"innodb_io_capacity_max,omitempty"`
 	// The number of I/O threads for read operations in InnoDB.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_read_io_threads for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_read_io_threads) for details.
 	InnodbReadIoThreads *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=innodb_read_io_threads,json=innodbReadIoThreads,proto3" json:"innodb_read_io_threads,omitempty"`
 	// The number of I/O threads for write operations in InnoDB.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_write_io_threads for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_write_io_threads) for details.
 	InnodbWriteIoThreads *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=innodb_write_io_threads,json=innodbWriteIoThreads,proto3" json:"innodb_write_io_threads,omitempty"`
 	// The number of background threads devoted to the InnoDB purge operation.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_purge_threads for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_purge_threads) for details.
 	InnodbPurgeThreads *wrapperspb.Int64Value `protobuf:"bytes,29,opt,name=innodb_purge_threads,json=innodbPurgeThreads,proto3" json:"innodb_purge_threads,omitempty"`
 	// Defines the maximum number of threads permitted inside of InnoDB.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_thread_concurrency for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_thread_concurrency) for details.
 	InnodbThreadConcurrency *wrapperspb.Int64Value `protobuf:"bytes,30,opt,name=innodb_thread_concurrency,json=innodbThreadConcurrency,proto3" json:"innodb_thread_concurrency,omitempty"`
 	// Limits the max size of InnoDB temp tablespace.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_temp_data_file_path for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_temp_data_file_path) for details.
 	InnodbTempDataFileMaxSize *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=innodb_temp_data_file_max_size,json=innodbTempDataFileMaxSize,proto3" json:"innodb_temp_data_file_max_size,omitempty"`
 	// How many threads the server should cache for reuse.
 	//
@@ -662,11 +662,11 @@ type MysqlConfig8_0 struct {
 	ExplicitDefaultsForTimestamp *wrapperspb.BoolValue `protobuf:"bytes,39,opt,name=explicit_defaults_for_timestamp,json=explicitDefaultsForTimestamp,proto3" json:"explicit_defaults_for_timestamp,omitempty"`
 	// Can be used to control the operation of AUTO_INCREMENT columns.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_auto_increment_increment) for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_auto_increment_increment) for details.
 	AutoIncrementIncrement *wrapperspb.Int64Value `protobuf:"bytes,40,opt,name=auto_increment_increment,json=autoIncrementIncrement,proto3" json:"auto_increment_increment,omitempty"`
 	// Can be used to control the operation of AUTO_INCREMENT columns.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_auto_increment_offset) for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_auto_increment_offset) for details.
 	AutoIncrementOffset *wrapperspb.Int64Value `protobuf:"bytes,41,opt,name=auto_increment_offset,json=autoIncrementOffset,proto3" json:"auto_increment_offset,omitempty"`
 	// Controls how often the MySQL server synchronizes the binary log to disk.
 	//
@@ -690,7 +690,7 @@ type MysqlConfig8_0 struct {
 	BinlogRowsQueryLogEvents *wrapperspb.BoolValue `protobuf:"bytes,46,opt,name=binlog_rows_query_log_events,json=binlogRowsQueryLogEvents,proto3" json:"binlog_rows_query_log_events,omitempty"`
 	// The number of replica acknowledgments the source must receive per transaction before proceeding.
 	//
-	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_wait_for_slave_count) for details.
+	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_wait_for_slave_count) for details.
 	RplSemiSyncMasterWaitForSlaveCount *wrapperspb.Int64Value `protobuf:"bytes,47,opt,name=rpl_semi_sync_master_wait_for_slave_count,json=rplSemiSyncMasterWaitForSlaveCount,proto3" json:"rpl_semi_sync_master_wait_for_slave_count,omitempty"`
 	// When using a multi-threaded replica, this variable specifies the policy used to decide which transactions are allowed to execute in parallel on the replica.
 	//
@@ -816,8 +816,7 @@ type MysqlConfig8_0 struct {
 	MaxPreparedStmtCount *wrapperspb.Int64Value `protobuf:"bytes,79,opt,name=max_prepared_stmt_count,json=maxPreparedStmtCount,proto3" json:"max_prepared_stmt_count,omitempty"`
 	// The system variable enables control over optimizer behavior.
 	//
-	// For details, see [MySQL documentation for the variable]
-	// https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_optimizer_switch
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_optimizer_switch)
 	// https://dev.mysql.com/doc/refman/8.0/en/switchable-optimizations.html
 	OptimizerSwitch string `protobuf:"bytes,80,opt,name=optimizer_switch,json=optimizerSwitch,proto3" json:"optimizer_switch,omitempty"`
 	// The maximum depth of search performed by the query optimizer

@@ -383,13 +383,13 @@ type GreenplumConfig6_17 struct {
 	//
 	// The default value is 0 (no limit).
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment).
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
 	// The maximum disk size that an individual query is allowed to use for creating temporary spill files at each segment.
 	//
 	// The default value is 0 (no limit).
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query).
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
 	// The maximum number of temporary spill files allowed per query at each segment.
 	//
@@ -403,7 +403,7 @@ type GreenplumConfig6_17 struct {
 	//
 	// Default value is 10000.
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query).
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
 	// The maximum number of transactions that can be in the `prepared` state simultaneously.
 	//
@@ -411,7 +411,7 @@ type GreenplumConfig6_17 struct {
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
 	// Whether the spill files are compressed or not.
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression).
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
 }
 
@@ -511,13 +511,13 @@ type GreenplumConfig6_19 struct {
 	//
 	// The default value is 0 (no limit).
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment).
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
 	// The maximum disk size that an individual query is allowed to use for creating temporary spill files at each segment.
 	//
 	// The default value is 0 (no limit).
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query).
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
 	// The maximum number of temporary spill files allowed per query at each segment.
 	//
@@ -531,7 +531,7 @@ type GreenplumConfig6_19 struct {
 	//
 	// Default value is 10000.
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query).
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
 	// The maximum number of transactions that can be in the `prepared` state simultaneously.
 	//
@@ -539,7 +539,7 @@ type GreenplumConfig6_19 struct {
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
 	// Whether the spill files are compressed or not.
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression).
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
 	// The maximum memory limit for a query, in bytes.
 	//
@@ -557,7 +557,7 @@ type GreenplumConfig6_19 struct {
 	//
 	// `PREPARE` and `EXPLAIN ANALYZE` statements are also logged if their contained command belongs to an appropriate type.
 	//
-	// More info in [Greenplum® documentation](https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement).
+	// More info in [Greenplum® documentation](https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_statement).
 	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
 }
 
@@ -668,24 +668,24 @@ type GreenplumConfig6_21 struct {
 	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
 	// Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
 	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
 	// Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
 	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
 	// Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
 	// Spill files are created when executing a query that requires more memory than it is allocated.
 	// The current query is terminated when the limit is exceeded.
 	// Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query
 	// Default value is 10000
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
 	// Sets the maximum number of transactions that can be in the "prepared" state simultaneously
 	// https://www.postgresql.org/docs/9.6/runtime-config-resource.html
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
 	// Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
 	// Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
 	// Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
@@ -697,7 +697,7 @@ type GreenplumConfig6_21 struct {
 	// Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
 	// MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
 	// PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_statement
 	// Default value is ddl
 	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
 	// https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
@@ -818,24 +818,24 @@ type GreenplumConfig6_22 struct {
 	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
 	// Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
 	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
 	// Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
 	// The default value is 0, which means a limit is not enforced.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
 	// Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
 	// Spill files are created when executing a query that requires more memory than it is allocated.
 	// The current query is terminated when the limit is exceeded.
 	// Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query
 	// Default value is 10000
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
 	// Sets the maximum number of transactions that can be in the "prepared" state simultaneously
 	// https://www.postgresql.org/docs/9.6/runtime-config-resource.html
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
 	// Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
 	// Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
 	// Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
@@ -847,7 +847,7 @@ type GreenplumConfig6_22 struct {
 	// Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
 	// MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
 	// PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
-	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
+	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_statement
 	// Default value is ddl
 	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
 	// https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting

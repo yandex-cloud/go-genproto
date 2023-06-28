@@ -44,6 +44,18 @@ func (m *EouClassifierOptions) SetExternalClassifier(v *ExternalEouClassifier) {
 	}
 }
 
+func (m *RecognitionClassifier) SetClassifier(v string) {
+	m.Classifier = v
+}
+
+func (m *RecognitionClassifier) SetTriggers(v []RecognitionClassifier_TriggerType) {
+	m.Triggers = v
+}
+
+func (m *RecognitionClassifierOptions) SetClassifiers(v []*RecognitionClassifier) {
+	m.Classifiers = v
+}
+
 func (m *RawAudio) SetAudioEncoding(v RawAudio_AudioEncoding) {
 	m.AudioEncoding = v
 }
@@ -112,6 +124,10 @@ func (m *StreamingOptions) SetRecognitionModel(v *RecognitionModelOptions) {
 
 func (m *StreamingOptions) SetEouClassifier(v *EouClassifierOptions) {
 	m.EouClassifier = v
+}
+
+func (m *StreamingOptions) SetRecognitionClassifier(v *RecognitionClassifierOptions) {
+	m.RecognitionClassifier = v
 }
 
 func (m *AudioChunk) SetData(v []byte) {
@@ -264,6 +280,54 @@ func (m *SessionUuid) SetUserRequestId(v string) {
 	m.UserRequestId = v
 }
 
+func (m *PhraseHighlight) SetText(v string) {
+	m.Text = v
+}
+
+func (m *PhraseHighlight) SetStartTimeMs(v int64) {
+	m.StartTimeMs = v
+}
+
+func (m *PhraseHighlight) SetEndTimeMs(v int64) {
+	m.EndTimeMs = v
+}
+
+func (m *RecognitionClassifierLabel) SetLabel(v string) {
+	m.Label = v
+}
+
+func (m *RecognitionClassifierLabel) SetConfidence(v float64) {
+	m.Confidence = v
+}
+
+func (m *RecognitionClassifierResult) SetClassifier(v string) {
+	m.Classifier = v
+}
+
+func (m *RecognitionClassifierResult) SetHighlights(v []*PhraseHighlight) {
+	m.Highlights = v
+}
+
+func (m *RecognitionClassifierResult) SetLabels(v []*RecognitionClassifierLabel) {
+	m.Labels = v
+}
+
+func (m *RecognitionClassifierUpdate) SetWindowType(v RecognitionClassifierUpdate_WindowType) {
+	m.WindowType = v
+}
+
+func (m *RecognitionClassifierUpdate) SetStartTimeMs(v int64) {
+	m.StartTimeMs = v
+}
+
+func (m *RecognitionClassifierUpdate) SetEndTimeMs(v int64) {
+	m.EndTimeMs = v
+}
+
+func (m *RecognitionClassifierUpdate) SetClassifierResult(v *RecognitionClassifierResult) {
+	m.ClassifierResult = v
+}
+
 type StreamingResponse_Event = isStreamingResponse_Event
 
 func (m *StreamingResponse) SetEvent(v StreamingResponse_Event) {
@@ -309,6 +373,12 @@ func (m *StreamingResponse) SetFinalRefinement(v *FinalRefinement) {
 func (m *StreamingResponse) SetStatusCode(v *StatusCode) {
 	m.Event = &StreamingResponse_StatusCode{
 		StatusCode: v,
+	}
+}
+
+func (m *StreamingResponse) SetClassifierUpdate(v *RecognitionClassifierUpdate) {
+	m.Event = &StreamingResponse_ClassifierUpdate{
+		ClassifierUpdate: v,
 	}
 }
 
