@@ -7,6 +7,22 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
+func (m *UpdateDnsZonePrivateNetworksRequest) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *UpdateDnsZonePrivateNetworksRequest) SetPrivateNetworkIdAdditions(v []string) {
+	m.PrivateNetworkIdAdditions = v
+}
+
+func (m *UpdateDnsZonePrivateNetworksRequest) SetPrivateNetworkIdDeletions(v []string) {
+	m.PrivateNetworkIdDeletions = v
+}
+
+func (m *UpdateDnsZonePrivateNetworksMetadata) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
 func (m *GetDnsZoneRequest) SetDnsZoneId(v string) {
 	m.DnsZoneId = v
 }

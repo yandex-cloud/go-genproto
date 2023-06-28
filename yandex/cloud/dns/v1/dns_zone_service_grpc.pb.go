@@ -21,19 +21,20 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DnsZoneService_Get_FullMethodName                  = "/yandex.cloud.dns.v1.DnsZoneService/Get"
-	DnsZoneService_List_FullMethodName                 = "/yandex.cloud.dns.v1.DnsZoneService/List"
-	DnsZoneService_Create_FullMethodName               = "/yandex.cloud.dns.v1.DnsZoneService/Create"
-	DnsZoneService_Update_FullMethodName               = "/yandex.cloud.dns.v1.DnsZoneService/Update"
-	DnsZoneService_Delete_FullMethodName               = "/yandex.cloud.dns.v1.DnsZoneService/Delete"
-	DnsZoneService_GetRecordSet_FullMethodName         = "/yandex.cloud.dns.v1.DnsZoneService/GetRecordSet"
-	DnsZoneService_ListRecordSets_FullMethodName       = "/yandex.cloud.dns.v1.DnsZoneService/ListRecordSets"
-	DnsZoneService_UpdateRecordSets_FullMethodName     = "/yandex.cloud.dns.v1.DnsZoneService/UpdateRecordSets"
-	DnsZoneService_UpsertRecordSets_FullMethodName     = "/yandex.cloud.dns.v1.DnsZoneService/UpsertRecordSets"
-	DnsZoneService_ListOperations_FullMethodName       = "/yandex.cloud.dns.v1.DnsZoneService/ListOperations"
-	DnsZoneService_ListAccessBindings_FullMethodName   = "/yandex.cloud.dns.v1.DnsZoneService/ListAccessBindings"
-	DnsZoneService_SetAccessBindings_FullMethodName    = "/yandex.cloud.dns.v1.DnsZoneService/SetAccessBindings"
-	DnsZoneService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.dns.v1.DnsZoneService/UpdateAccessBindings"
+	DnsZoneService_Get_FullMethodName                   = "/yandex.cloud.dns.v1.DnsZoneService/Get"
+	DnsZoneService_List_FullMethodName                  = "/yandex.cloud.dns.v1.DnsZoneService/List"
+	DnsZoneService_Create_FullMethodName                = "/yandex.cloud.dns.v1.DnsZoneService/Create"
+	DnsZoneService_Update_FullMethodName                = "/yandex.cloud.dns.v1.DnsZoneService/Update"
+	DnsZoneService_Delete_FullMethodName                = "/yandex.cloud.dns.v1.DnsZoneService/Delete"
+	DnsZoneService_GetRecordSet_FullMethodName          = "/yandex.cloud.dns.v1.DnsZoneService/GetRecordSet"
+	DnsZoneService_ListRecordSets_FullMethodName        = "/yandex.cloud.dns.v1.DnsZoneService/ListRecordSets"
+	DnsZoneService_UpdateRecordSets_FullMethodName      = "/yandex.cloud.dns.v1.DnsZoneService/UpdateRecordSets"
+	DnsZoneService_UpsertRecordSets_FullMethodName      = "/yandex.cloud.dns.v1.DnsZoneService/UpsertRecordSets"
+	DnsZoneService_ListOperations_FullMethodName        = "/yandex.cloud.dns.v1.DnsZoneService/ListOperations"
+	DnsZoneService_ListAccessBindings_FullMethodName    = "/yandex.cloud.dns.v1.DnsZoneService/ListAccessBindings"
+	DnsZoneService_SetAccessBindings_FullMethodName     = "/yandex.cloud.dns.v1.DnsZoneService/SetAccessBindings"
+	DnsZoneService_UpdateAccessBindings_FullMethodName  = "/yandex.cloud.dns.v1.DnsZoneService/UpdateAccessBindings"
+	DnsZoneService_UpdatePrivateNetworks_FullMethodName = "/yandex.cloud.dns.v1.DnsZoneService/UpdatePrivateNetworks"
 )
 
 // DnsZoneServiceClient is the client API for DnsZoneService service.
@@ -74,6 +75,8 @@ type DnsZoneServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified DNS zone.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Atomically updates zone private networks
+	UpdatePrivateNetworks(ctx context.Context, in *UpdateDnsZonePrivateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type dnsZoneServiceClient struct {
@@ -201,6 +204,15 @@ func (c *dnsZoneServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 	return out, nil
 }
 
+func (c *dnsZoneServiceClient) UpdatePrivateNetworks(ctx context.Context, in *UpdateDnsZonePrivateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DnsZoneService_UpdatePrivateNetworks_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DnsZoneServiceServer is the server API for DnsZoneService service.
 // All implementations should embed UnimplementedDnsZoneServiceServer
 // for forward compatibility
@@ -239,6 +251,8 @@ type DnsZoneServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified DNS zone.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Atomically updates zone private networks
+	UpdatePrivateNetworks(context.Context, *UpdateDnsZonePrivateNetworksRequest) (*operation.Operation, error)
 }
 
 // UnimplementedDnsZoneServiceServer should be embedded to have forward compatible implementations.
@@ -283,6 +297,9 @@ func (UnimplementedDnsZoneServiceServer) SetAccessBindings(context.Context, *acc
 }
 func (UnimplementedDnsZoneServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedDnsZoneServiceServer) UpdatePrivateNetworks(context.Context, *UpdateDnsZonePrivateNetworksRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePrivateNetworks not implemented")
 }
 
 // UnsafeDnsZoneServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -530,6 +547,24 @@ func _DnsZoneService_UpdateAccessBindings_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DnsZoneService_UpdatePrivateNetworks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDnsZonePrivateNetworksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsZoneServiceServer).UpdatePrivateNetworks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DnsZoneService_UpdatePrivateNetworks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsZoneServiceServer).UpdatePrivateNetworks(ctx, req.(*UpdateDnsZonePrivateNetworksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DnsZoneService_ServiceDesc is the grpc.ServiceDesc for DnsZoneService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -588,6 +623,10 @@ var DnsZoneService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _DnsZoneService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdatePrivateNetworks",
+			Handler:    _DnsZoneService_UpdatePrivateNetworks_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
