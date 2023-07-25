@@ -132,6 +132,12 @@ func (m *Hints) SetRole(v string) {
 	}
 }
 
+func (m *Hints) SetPitchShift(v float64) {
+	m.Hint = &Hints_PitchShift{
+		PitchShift: v,
+	}
+}
+
 type UtteranceSynthesisRequest_Utterance = isUtteranceSynthesisRequest_Utterance
 
 func (m *UtteranceSynthesisRequest) SetUtterance(v UtteranceSynthesisRequest_Utterance) {

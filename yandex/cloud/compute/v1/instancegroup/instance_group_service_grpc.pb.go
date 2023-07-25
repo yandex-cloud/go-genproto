@@ -28,6 +28,8 @@ const (
 	InstanceGroupService_Update_FullMethodName               = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Update"
 	InstanceGroupService_UpdateFromYaml_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/UpdateFromYaml"
 	InstanceGroupService_Stop_FullMethodName                 = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Stop"
+	InstanceGroupService_RollingRestart_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/RollingRestart"
+	InstanceGroupService_RollingRecreate_FullMethodName      = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/RollingRecreate"
 	InstanceGroupService_Start_FullMethodName                = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Start"
 	InstanceGroupService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Delete"
 	InstanceGroupService_ListInstances_FullMethodName        = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ListInstances"
@@ -66,6 +68,12 @@ type InstanceGroupServiceClient interface {
 	UpdateFromYaml(ctx context.Context, in *UpdateInstanceGroupFromYamlRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified instance group.
 	Stop(ctx context.Context, in *StopInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Performs rolling restart of specified instances for the specified instance group.
+	// Rolling restart does restart of instances respecting all group policies.
+	RollingRestart(ctx context.Context, in *RollingRestartRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Performs rolling recreate of specified instances for the specified instance group.
+	// Rolling recreate does recreate of instance VMs respecting all group policies.
+	RollingRecreate(ctx context.Context, in *RollingRecreateRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts the specified instance group.
 	Start(ctx context.Context, in *StartInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified instance group.
@@ -159,6 +167,24 @@ func (c *instanceGroupServiceClient) UpdateFromYaml(ctx context.Context, in *Upd
 func (c *instanceGroupServiceClient) Stop(ctx context.Context, in *StopInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, InstanceGroupService_Stop_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) RollingRestart(ctx context.Context, in *RollingRestartRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_RollingRestart_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) RollingRecreate(ctx context.Context, in *RollingRecreateRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_RollingRecreate_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -297,6 +323,12 @@ type InstanceGroupServiceServer interface {
 	UpdateFromYaml(context.Context, *UpdateInstanceGroupFromYamlRequest) (*operation.Operation, error)
 	// Stops the specified instance group.
 	Stop(context.Context, *StopInstanceGroupRequest) (*operation.Operation, error)
+	// Performs rolling restart of specified instances for the specified instance group.
+	// Rolling restart does restart of instances respecting all group policies.
+	RollingRestart(context.Context, *RollingRestartRequest) (*operation.Operation, error)
+	// Performs rolling recreate of specified instances for the specified instance group.
+	// Rolling recreate does recreate of instance VMs respecting all group policies.
+	RollingRecreate(context.Context, *RollingRecreateRequest) (*operation.Operation, error)
 	// Starts the specified instance group.
 	Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error)
 	// Deletes the specified instance group.
@@ -349,6 +381,12 @@ func (UnimplementedInstanceGroupServiceServer) UpdateFromYaml(context.Context, *
 }
 func (UnimplementedInstanceGroupServiceServer) Stop(context.Context, *StopInstanceGroupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) RollingRestart(context.Context, *RollingRestartRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RollingRestart not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) RollingRecreate(context.Context, *RollingRecreateRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RollingRecreate not implemented")
 }
 func (UnimplementedInstanceGroupServiceServer) Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
@@ -520,6 +558,42 @@ func _InstanceGroupService_Stop_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InstanceGroupServiceServer).Stop(ctx, req.(*StopInstanceGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_RollingRestart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RollingRestartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).RollingRestart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_RollingRestart_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).RollingRestart(ctx, req.(*RollingRestartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_RollingRecreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RollingRecreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).RollingRecreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_RollingRecreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).RollingRecreate(ctx, req.(*RollingRecreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -774,6 +848,14 @@ var InstanceGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _InstanceGroupService_Stop_Handler,
+		},
+		{
+			MethodName: "RollingRestart",
+			Handler:    _InstanceGroupService_RollingRestart_Handler,
+		},
+		{
+			MethodName: "RollingRecreate",
+			Handler:    _InstanceGroupService_RollingRecreate_Handler,
 		},
 		{
 			MethodName: "Start",

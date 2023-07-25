@@ -174,6 +174,10 @@ func (m *ClickhouseConfig) SetBackgroundBufferFlushSchedulePoolSize(v *wrappersp
 	m.BackgroundBufferFlushSchedulePoolSize = v
 }
 
+func (m *ClickhouseConfig) SetBackgroundMessageBrokerSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundMessageBrokerSchedulePoolSize = v
+}
+
 func (m *ClickhouseConfig) SetDefaultDatabase(v *wrapperspb.StringValue) {
 	m.DefaultDatabase = v
 }
@@ -240,6 +244,30 @@ func (m *ClickhouseConfig_MergeTree) SetTtlOnlyDropParts(v *wrapperspb.BoolValue
 
 func (m *ClickhouseConfig_MergeTree) SetAllowRemoteFsZeroCopyReplication(v *wrapperspb.BoolValue) {
 	m.AllowRemoteFsZeroCopyReplication = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMergeWithTtlTimeout(v *wrapperspb.Int64Value) {
+	m.MergeWithTtlTimeout = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMergeWithRecompressionTtlTimeout(v *wrapperspb.Int64Value) {
+	m.MergeWithRecompressionTtlTimeout = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaxPartsInTotal(v *wrapperspb.Int64Value) {
+	m.MaxPartsInTotal = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaxNumberOfMergesWithTtlInPool(v *wrapperspb.Int64Value) {
+	m.MaxNumberOfMergesWithTtlInPool = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetCleanupDelayPeriod(v *wrapperspb.Int64Value) {
+	m.CleanupDelayPeriod = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToExecuteMutation(v *wrapperspb.Int64Value) {
+	m.NumberOfFreeEntriesInPoolToExecuteMutation = v
 }
 
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {

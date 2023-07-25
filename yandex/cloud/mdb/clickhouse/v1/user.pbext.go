@@ -534,6 +534,26 @@ func (m *UserSettings) SetMemoryProfilerSampleProbability(v *wrapperspb.DoubleVa
 	m.MemoryProfilerSampleProbability = v
 }
 
+func (m *UserSettings) SetMaxFinalThreads(v *wrapperspb.Int64Value) {
+	m.MaxFinalThreads = v
+}
+
+func (m *UserSettings) SetInputFormatParallelParsing(v *wrapperspb.BoolValue) {
+	m.InputFormatParallelParsing = v
+}
+
+func (m *UserSettings) SetInputFormatImportNestedJson(v *wrapperspb.BoolValue) {
+	m.InputFormatImportNestedJson = v
+}
+
+func (m *UserSettings) SetLocalFilesystemReadMethod(v UserSettings_LocalFilesystemReadMethod) {
+	m.LocalFilesystemReadMethod = v
+}
+
+func (m *UserSettings) SetMaxReadBufferSize(v *wrapperspb.Int64Value) {
+	m.MaxReadBufferSize = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

@@ -226,10 +226,10 @@ func (m *StorageMount) SetPrefix(v string) {
 	m.Prefix = v
 }
 
-func (m *StorageMount) SetMountPointName(v string) {
-	m.MountPointName = v
-}
-
 func (m *StorageMount) SetReadOnly(v bool) {
 	m.ReadOnly = v
+}
+
+func (m *StorageMount) SetMountPointPath(v string) {
+	m.MountPointPath = v
 }

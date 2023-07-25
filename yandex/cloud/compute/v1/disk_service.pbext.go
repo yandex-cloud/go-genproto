@@ -27,6 +27,10 @@ func (m *ListDisksRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListDisksRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListDisksResponse) SetDisks(v []*Disk) {
 	m.Disks = v
 }

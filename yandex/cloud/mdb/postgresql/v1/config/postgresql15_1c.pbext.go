@@ -634,6 +634,14 @@ func (m *PostgresqlConfig15_1C) SetSessionDurationTimeout(v *wrapperspb.Int64Val
 	m.SessionDurationTimeout = v
 }
 
+func (m *PostgresqlConfig15_1C) SetLogReplicationCommands(v *wrapperspb.BoolValue) {
+	m.LogReplicationCommands = v
+}
+
+func (m *PostgresqlConfig15_1C) SetLogAutovacuumMinDuration(v *wrapperspb.Int64Value) {
+	m.LogAutovacuumMinDuration = v
+}
+
 func (m *PostgresqlConfigSet15_1C) SetEffectiveConfig(v *PostgresqlConfig15_1C) {
 	m.EffectiveConfig = v
 }

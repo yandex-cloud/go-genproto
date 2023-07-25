@@ -150,6 +150,10 @@ func (m *NodeTemplate) SetContainerNetworkSettings(v *NodeTemplate_ContainerNetw
 	m.ContainerNetworkSettings = v
 }
 
+func (m *NodeTemplate) SetGpuSettings(v *GpuSettings) {
+	m.GpuSettings = v
+}
+
 func (m *NodeTemplate_NetworkSettings) SetType(v NodeTemplate_NetworkSettings_Type) {
 	m.Type = v
 }
@@ -160,6 +164,10 @@ func (m *NodeTemplate_ContainerRuntimeSettings) SetType(v NodeTemplate_Container
 
 func (m *NodeTemplate_ContainerNetworkSettings) SetPodMtu(v int64) {
 	m.PodMtu = v
+}
+
+func (m *GpuSettings) SetGpuClusterId(v string) {
+	m.GpuClusterId = v
 }
 
 func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {

@@ -27,6 +27,10 @@ func (m *ListPlacementGroupsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListPlacementGroupsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListPlacementGroupsResponse) SetPlacementGroups(v []*PlacementGroup) {
 	m.PlacementGroups = v
 }

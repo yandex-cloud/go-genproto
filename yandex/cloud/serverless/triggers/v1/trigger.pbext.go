@@ -196,6 +196,10 @@ func (m *Trigger_IoTMessage) SetMqttTopic(v string) {
 	m.MqttTopic = v
 }
 
+func (m *Trigger_IoTMessage) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
+}
+
 func (m *Trigger_IoTMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 	m.Action = &Trigger_IoTMessage_InvokeFunction{
 		InvokeFunction: v,
@@ -220,6 +224,10 @@ func (m *Trigger_IoTBrokerMessage) SetBrokerId(v string) {
 
 func (m *Trigger_IoTBrokerMessage) SetMqttTopic(v string) {
 	m.MqttTopic = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
 }
 
 func (m *Trigger_IoTBrokerMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
@@ -256,6 +264,10 @@ func (m *Trigger_ObjectStorage) SetSuffix(v string) {
 	m.Suffix = v
 }
 
+func (m *Trigger_ObjectStorage) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
+}
+
 func (m *Trigger_ObjectStorage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
 	m.Action = &Trigger_ObjectStorage_InvokeFunction{
 		InvokeFunction: v,
@@ -288,6 +300,10 @@ func (m *Trigger_ContainerRegistry) SetImageName(v string) {
 
 func (m *Trigger_ContainerRegistry) SetTag(v string) {
 	m.Tag = v
+}
+
+func (m *Trigger_ContainerRegistry) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
 }
 
 func (m *Trigger_ContainerRegistry) SetInvokeFunction(v *InvokeFunctionWithRetry) {
@@ -554,6 +570,10 @@ func (m *Mail) SetAction(v Mail_Action) {
 
 func (m *Mail) SetEmail(v string) {
 	m.Email = v
+}
+
+func (m *Mail) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
 }
 
 func (m *Mail) SetInvokeFunction(v *InvokeFunctionWithRetry) {

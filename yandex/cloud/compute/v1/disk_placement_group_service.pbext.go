@@ -27,6 +27,10 @@ func (m *ListDiskPlacementGroupsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListDiskPlacementGroupsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListDiskPlacementGroupsResponse) SetDiskPlacementGroups(v []*DiskPlacementGroup) {
 	m.DiskPlacementGroups = v
 }

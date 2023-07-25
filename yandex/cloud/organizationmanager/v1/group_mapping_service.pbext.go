@@ -30,8 +30,8 @@ func (m *UpdateGroupMappingRequest) SetFederationId(v string) {
 	m.FederationId = v
 }
 
-func (m *UpdateGroupMappingRequest) SetUpdatedFields(v *fieldmaskpb.FieldMask) {
-	m.UpdatedFields = v
+func (m *UpdateGroupMappingRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateGroupMappingRequest) SetEnabled(v bool) {

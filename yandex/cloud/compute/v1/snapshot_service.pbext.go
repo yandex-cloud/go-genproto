@@ -27,6 +27,10 @@ func (m *ListSnapshotsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListSnapshotsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListSnapshotsResponse) SetSnapshots(v []*Snapshot) {
 	m.Snapshots = v
 }

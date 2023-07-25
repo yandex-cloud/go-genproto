@@ -56,6 +56,18 @@ func (m *RecognitionClassifierOptions) SetClassifiers(v []*RecognitionClassifier
 	m.Classifiers = v
 }
 
+func (m *SpeechAnalysisOptions) SetEnableSpeakerAnalysis(v bool) {
+	m.EnableSpeakerAnalysis = v
+}
+
+func (m *SpeechAnalysisOptions) SetEnableConversationAnalysis(v bool) {
+	m.EnableConversationAnalysis = v
+}
+
+func (m *SpeechAnalysisOptions) SetDescriptiveStatisticsQuantiles(v []float64) {
+	m.DescriptiveStatisticsQuantiles = v
+}
+
 func (m *RawAudio) SetAudioEncoding(v RawAudio_AudioEncoding) {
 	m.AudioEncoding = v
 }
@@ -130,6 +142,10 @@ func (m *StreamingOptions) SetRecognitionClassifier(v *RecognitionClassifierOpti
 	m.RecognitionClassifier = v
 }
 
+func (m *StreamingOptions) SetSpeechAnalysis(v *SpeechAnalysisOptions) {
+	m.SpeechAnalysis = v
+}
+
 func (m *AudioChunk) SetData(v []byte) {
 	m.Data = v
 }
@@ -166,6 +182,36 @@ func (m *StreamingRequest) SetEou(v *Eou) {
 	m.Event = &StreamingRequest_Eou{
 		Eou: v,
 	}
+}
+
+type RecognizeFileRequest_AudioSource = isRecognizeFileRequest_AudioSource
+
+func (m *RecognizeFileRequest) SetAudioSource(v RecognizeFileRequest_AudioSource) {
+	m.AudioSource = v
+}
+
+func (m *RecognizeFileRequest) SetContent(v []byte) {
+	m.AudioSource = &RecognizeFileRequest_Content{
+		Content: v,
+	}
+}
+
+func (m *RecognizeFileRequest) SetUri(v string) {
+	m.AudioSource = &RecognizeFileRequest_Uri{
+		Uri: v,
+	}
+}
+
+func (m *RecognizeFileRequest) SetRecognitionModel(v *RecognitionModelOptions) {
+	m.RecognitionModel = v
+}
+
+func (m *RecognizeFileRequest) SetRecognitionClassifier(v *RecognitionClassifierOptions) {
+	m.RecognitionClassifier = v
+}
+
+func (m *RecognizeFileRequest) SetSpeechAnalysis(v *SpeechAnalysisOptions) {
+	m.SpeechAnalysis = v
 }
 
 func (m *Word) SetText(v string) {
@@ -328,6 +374,150 @@ func (m *RecognitionClassifierUpdate) SetClassifierResult(v *RecognitionClassifi
 	m.ClassifierResult = v
 }
 
+func (m *DescriptiveStatistics) SetMin(v float64) {
+	m.Min = v
+}
+
+func (m *DescriptiveStatistics) SetMax(v float64) {
+	m.Max = v
+}
+
+func (m *DescriptiveStatistics) SetMean(v float64) {
+	m.Mean = v
+}
+
+func (m *DescriptiveStatistics) SetStd(v float64) {
+	m.Std = v
+}
+
+func (m *DescriptiveStatistics) SetQuantiles(v []*DescriptiveStatistics_Quantile) {
+	m.Quantiles = v
+}
+
+func (m *DescriptiveStatistics_Quantile) SetLevel(v float64) {
+	m.Level = v
+}
+
+func (m *DescriptiveStatistics_Quantile) SetValue(v float64) {
+	m.Value = v
+}
+
+func (m *AudioSegmentBoundaries) SetStartTimeMs(v int64) {
+	m.StartTimeMs = v
+}
+
+func (m *AudioSegmentBoundaries) SetEndTimeMs(v int64) {
+	m.EndTimeMs = v
+}
+
+func (m *SpeakerAnalysis) SetSpeakerTag(v string) {
+	m.SpeakerTag = v
+}
+
+func (m *SpeakerAnalysis) SetWindowType(v SpeakerAnalysis_WindowType) {
+	m.WindowType = v
+}
+
+func (m *SpeakerAnalysis) SetSpeechBoundaries(v *AudioSegmentBoundaries) {
+	m.SpeechBoundaries = v
+}
+
+func (m *SpeakerAnalysis) SetTotalSpeechMs(v int64) {
+	m.TotalSpeechMs = v
+}
+
+func (m *SpeakerAnalysis) SetSpeechRatio(v float64) {
+	m.SpeechRatio = v
+}
+
+func (m *SpeakerAnalysis) SetTotalSilenceMs(v int64) {
+	m.TotalSilenceMs = v
+}
+
+func (m *SpeakerAnalysis) SetSilenceRatio(v float64) {
+	m.SilenceRatio = v
+}
+
+func (m *SpeakerAnalysis) SetWordsCount(v int64) {
+	m.WordsCount = v
+}
+
+func (m *SpeakerAnalysis) SetLettersCount(v int64) {
+	m.LettersCount = v
+}
+
+func (m *SpeakerAnalysis) SetWordsPerSecond(v *DescriptiveStatistics) {
+	m.WordsPerSecond = v
+}
+
+func (m *SpeakerAnalysis) SetLettersPerSecond(v *DescriptiveStatistics) {
+	m.LettersPerSecond = v
+}
+
+func (m *SpeakerAnalysis) SetWordsPerUtterance(v *DescriptiveStatistics) {
+	m.WordsPerUtterance = v
+}
+
+func (m *SpeakerAnalysis) SetLettersPerUtterance(v *DescriptiveStatistics) {
+	m.LettersPerUtterance = v
+}
+
+func (m *SpeakerAnalysis) SetUtteranceCount(v int64) {
+	m.UtteranceCount = v
+}
+
+func (m *SpeakerAnalysis) SetUtteranceDurationEstimation(v *DescriptiveStatistics) {
+	m.UtteranceDurationEstimation = v
+}
+
+func (m *ConversationAnalysis) SetConversationBoundaries(v *AudioSegmentBoundaries) {
+	m.ConversationBoundaries = v
+}
+
+func (m *ConversationAnalysis) SetTotalSimultaneousSilenceDurationMs(v int64) {
+	m.TotalSimultaneousSilenceDurationMs = v
+}
+
+func (m *ConversationAnalysis) SetTotalSimultaneousSilenceRatio(v float64) {
+	m.TotalSimultaneousSilenceRatio = v
+}
+
+func (m *ConversationAnalysis) SetSimultaneousSilenceDurationEstimation(v *DescriptiveStatistics) {
+	m.SimultaneousSilenceDurationEstimation = v
+}
+
+func (m *ConversationAnalysis) SetTotalSimultaneousSpeechDurationMs(v int64) {
+	m.TotalSimultaneousSpeechDurationMs = v
+}
+
+func (m *ConversationAnalysis) SetTotalSimultaneousSpeechRatio(v float64) {
+	m.TotalSimultaneousSpeechRatio = v
+}
+
+func (m *ConversationAnalysis) SetSimultaneousSpeechDurationEstimation(v *DescriptiveStatistics) {
+	m.SimultaneousSpeechDurationEstimation = v
+}
+
+func (m *ConversationAnalysis) SetSpeakerInterrupts(v []*ConversationAnalysis_InterruptsEvaluation) {
+	m.SpeakerInterrupts = v
+}
+
+func (m *ConversationAnalysis_InterruptsEvaluation) SetSpeakerTag(v string) {
+	m.SpeakerTag = v
+}
+
+func (m *ConversationAnalysis_InterruptsEvaluation) SetInterruptsCount(v int64) {
+	m.InterruptsCount = v
+}
+
+func (m *ConversationAnalysis_InterruptsEvaluation) SetInterruptsDurationMs(v int64) {
+	m.InterruptsDurationMs = v
+}
+
+func (m *ConversationAnalysis_InterruptsEvaluation) SetInterrupts(v []*AudioSegmentBoundaries) {
+	m.Interrupts = v
+}
+
 type StreamingResponse_Event = isStreamingResponse_Event
 
 func (m *StreamingResponse) SetEvent(v StreamingResponse_Event) {
@@ -379,6 +569,18 @@ func (m *StreamingResponse) SetStatusCode(v *StatusCode) {
 func (m *StreamingResponse) SetClassifierUpdate(v *RecognitionClassifierUpdate) {
 	m.Event = &StreamingResponse_ClassifierUpdate{
 		ClassifierUpdate: v,
+	}
+}
+
+func (m *StreamingResponse) SetSpeakerAnalysis(v *SpeakerAnalysis) {
+	m.Event = &StreamingResponse_SpeakerAnalysis{
+		SpeakerAnalysis: v,
+	}
+}
+
+func (m *StreamingResponse) SetConversationAnalysis(v *ConversationAnalysis) {
+	m.Event = &StreamingResponse_ConversationAnalysis{
+		ConversationAnalysis: v,
 	}
 }
 

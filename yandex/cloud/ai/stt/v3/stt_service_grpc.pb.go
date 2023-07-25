@@ -8,6 +8,7 @@ package stt
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -135,6 +136,159 @@ var Recognizer_ServiceDesc = grpc.ServiceDesc{
 			Handler:       _Recognizer_RecognizeStreaming_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
+		},
+	},
+	Metadata: "yandex/cloud/ai/stt/v3/stt_service.proto",
+}
+
+const (
+	AsyncRecognizer_RecognizeFile_FullMethodName  = "/speechkit.stt.v3.AsyncRecognizer/RecognizeFile"
+	AsyncRecognizer_GetRecognition_FullMethodName = "/speechkit.stt.v3.AsyncRecognizer/GetRecognition"
+)
+
+// AsyncRecognizerClient is the client API for AsyncRecognizer service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AsyncRecognizerClient interface {
+	RecognizeFile(ctx context.Context, in *RecognizeFileRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	GetRecognition(ctx context.Context, in *GetRecognitionRequest, opts ...grpc.CallOption) (AsyncRecognizer_GetRecognitionClient, error)
+}
+
+type asyncRecognizerClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAsyncRecognizerClient(cc grpc.ClientConnInterface) AsyncRecognizerClient {
+	return &asyncRecognizerClient{cc}
+}
+
+func (c *asyncRecognizerClient) RecognizeFile(ctx context.Context, in *RecognizeFileRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, AsyncRecognizer_RecognizeFile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *asyncRecognizerClient) GetRecognition(ctx context.Context, in *GetRecognitionRequest, opts ...grpc.CallOption) (AsyncRecognizer_GetRecognitionClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AsyncRecognizer_ServiceDesc.Streams[0], AsyncRecognizer_GetRecognition_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &asyncRecognizerGetRecognitionClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AsyncRecognizer_GetRecognitionClient interface {
+	Recv() (*StreamingResponse, error)
+	grpc.ClientStream
+}
+
+type asyncRecognizerGetRecognitionClient struct {
+	grpc.ClientStream
+}
+
+func (x *asyncRecognizerGetRecognitionClient) Recv() (*StreamingResponse, error) {
+	m := new(StreamingResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// AsyncRecognizerServer is the server API for AsyncRecognizer service.
+// All implementations should embed UnimplementedAsyncRecognizerServer
+// for forward compatibility
+type AsyncRecognizerServer interface {
+	RecognizeFile(context.Context, *RecognizeFileRequest) (*operation.Operation, error)
+	GetRecognition(*GetRecognitionRequest, AsyncRecognizer_GetRecognitionServer) error
+}
+
+// UnimplementedAsyncRecognizerServer should be embedded to have forward compatible implementations.
+type UnimplementedAsyncRecognizerServer struct {
+}
+
+func (UnimplementedAsyncRecognizerServer) RecognizeFile(context.Context, *RecognizeFileRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecognizeFile not implemented")
+}
+func (UnimplementedAsyncRecognizerServer) GetRecognition(*GetRecognitionRequest, AsyncRecognizer_GetRecognitionServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetRecognition not implemented")
+}
+
+// UnsafeAsyncRecognizerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AsyncRecognizerServer will
+// result in compilation errors.
+type UnsafeAsyncRecognizerServer interface {
+	mustEmbedUnimplementedAsyncRecognizerServer()
+}
+
+func RegisterAsyncRecognizerServer(s grpc.ServiceRegistrar, srv AsyncRecognizerServer) {
+	s.RegisterService(&AsyncRecognizer_ServiceDesc, srv)
+}
+
+func _AsyncRecognizer_RecognizeFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RecognizeFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AsyncRecognizerServer).RecognizeFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AsyncRecognizer_RecognizeFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AsyncRecognizerServer).RecognizeFile(ctx, req.(*RecognizeFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AsyncRecognizer_GetRecognition_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetRecognitionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AsyncRecognizerServer).GetRecognition(m, &asyncRecognizerGetRecognitionServer{stream})
+}
+
+type AsyncRecognizer_GetRecognitionServer interface {
+	Send(*StreamingResponse) error
+	grpc.ServerStream
+}
+
+type asyncRecognizerGetRecognitionServer struct {
+	grpc.ServerStream
+}
+
+func (x *asyncRecognizerGetRecognitionServer) Send(m *StreamingResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+// AsyncRecognizer_ServiceDesc is the grpc.ServiceDesc for AsyncRecognizer service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AsyncRecognizer_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "speechkit.stt.v3.AsyncRecognizer",
+	HandlerType: (*AsyncRecognizerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "RecognizeFile",
+			Handler:    _AsyncRecognizer_RecognizeFile_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetRecognition",
+			Handler:       _AsyncRecognizer_GetRecognition_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "yandex/cloud/ai/stt/v3/stt_service.proto",

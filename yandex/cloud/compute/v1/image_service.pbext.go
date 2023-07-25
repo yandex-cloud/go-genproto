@@ -35,6 +35,10 @@ func (m *ListImagesRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListImagesRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListImagesResponse) SetImages(v []*Image) {
 	m.Images = v
 }

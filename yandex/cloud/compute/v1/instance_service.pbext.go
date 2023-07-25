@@ -31,6 +31,10 @@ func (m *ListInstancesRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListInstancesRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListInstancesResponse) SetInstances(v []*Instance) {
 	m.Instances = v
 }

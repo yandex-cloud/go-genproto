@@ -27,6 +27,10 @@ func (m *ListHostGroupsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListHostGroupsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListHostGroupsResponse) SetHostGroups(v []*HostGroup) {
 	m.HostGroups = v
 }
