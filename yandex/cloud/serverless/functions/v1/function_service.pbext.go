@@ -101,6 +101,18 @@ func (m *DeleteFunctionMetadata) SetFunctionId(v string) {
 	m.FunctionId = v
 }
 
+func (m *DeleteFunctionVersionRequest) SetFunctionVersionId(v string) {
+	m.FunctionVersionId = v
+}
+
+func (m *DeleteFunctionVersionRequest) SetForce(v bool) {
+	m.Force = v
+}
+
+func (m *DeleteFunctionVersionMetadata) SetFunctionVersionId(v string) {
+	m.FunctionVersionId = v
+}
+
 func (m *ListRuntimesResponse) SetRuntimes(v []string) {
 	m.Runtimes = v
 }

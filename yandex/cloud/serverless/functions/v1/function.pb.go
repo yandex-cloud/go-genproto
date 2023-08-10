@@ -478,7 +478,7 @@ type Resources struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Amount of memory available to the version, specified in bytes.
+	// Amount of memory available to the version, specified in bytes, multiple of 128MB.
 	Memory int64 `protobuf:"varint,1,opt,name=memory,proto3" json:"memory,omitempty"`
 }
 

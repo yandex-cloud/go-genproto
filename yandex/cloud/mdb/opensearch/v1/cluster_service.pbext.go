@@ -3,6 +3,7 @@
 package opensearch
 
 import (
+	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -320,12 +321,24 @@ func (m *ConfigCreateSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+type OpenSearchCreateSpec_Config = isOpenSearchCreateSpec_Config
+
+func (m *OpenSearchCreateSpec) SetConfig(v OpenSearchCreateSpec_Config) {
+	m.Config = v
+}
+
 func (m *OpenSearchCreateSpec) SetPlugins(v []string) {
 	m.Plugins = v
 }
 
 func (m *OpenSearchCreateSpec) SetNodeGroups(v []*OpenSearchCreateSpec_NodeGroup) {
 	m.NodeGroups = v
+}
+
+func (m *OpenSearchCreateSpec) SetOpensearchConfig_2(v *config.OpenSearchConfig2) {
+	m.Config = &OpenSearchCreateSpec_OpensearchConfig_2{
+		OpensearchConfig_2: v,
+	}
 }
 
 func (m *OpenSearchCreateSpec_NodeGroup) SetName(v string) {
@@ -404,8 +417,20 @@ func (m *ConfigUpdateSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+type OpenSearchClusterUpdateSpec_Config = isOpenSearchClusterUpdateSpec_Config
+
+func (m *OpenSearchClusterUpdateSpec) SetConfig(v OpenSearchClusterUpdateSpec_Config) {
+	m.Config = v
+}
+
 func (m *OpenSearchClusterUpdateSpec) SetPlugins(v []string) {
 	m.Plugins = v
+}
+
+func (m *OpenSearchClusterUpdateSpec) SetOpensearchConfig_2(v *config.OpenSearchConfig2) {
+	m.Config = &OpenSearchClusterUpdateSpec_OpensearchConfig_2{
+		OpensearchConfig_2: v,
+	}
 }
 
 func (m *BackupClusterRequest) SetClusterId(v string) {

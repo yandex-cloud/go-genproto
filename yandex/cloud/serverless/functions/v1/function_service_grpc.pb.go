@@ -29,6 +29,7 @@ const (
 	FunctionService_GetVersion_FullMethodName           = "/yandex.cloud.serverless.functions.v1.FunctionService/GetVersion"
 	FunctionService_GetVersionByTag_FullMethodName      = "/yandex.cloud.serverless.functions.v1.FunctionService/GetVersionByTag"
 	FunctionService_ListVersions_FullMethodName         = "/yandex.cloud.serverless.functions.v1.FunctionService/ListVersions"
+	FunctionService_DeleteVersion_FullMethodName        = "/yandex.cloud.serverless.functions.v1.FunctionService/DeleteVersion"
 	FunctionService_SetTag_FullMethodName               = "/yandex.cloud.serverless.functions.v1.FunctionService/SetTag"
 	FunctionService_RemoveTag_FullMethodName            = "/yandex.cloud.serverless.functions.v1.FunctionService/RemoveTag"
 	FunctionService_ListTagHistory_FullMethodName       = "/yandex.cloud.serverless.functions.v1.FunctionService/ListTagHistory"
@@ -70,6 +71,10 @@ type FunctionServiceClient interface {
 	// Retrieves the list of versions for the specified function, or of all function versions
 	// in the specified folder.
 	ListVersions(ctx context.Context, in *ListFunctionsVersionsRequest, opts ...grpc.CallOption) (*ListFunctionsVersionsResponse, error)
+	// Deletes the specified version of a function.
+	//
+	// NOTE: old untagged function versions are deleted automatically.
+	DeleteVersion(ctx context.Context, in *DeleteFunctionVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Set a tag for the specified version of a function.
 	SetTag(ctx context.Context, in *SetFunctionTagRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Remove a tag from the specified version of a function.
@@ -170,6 +175,15 @@ func (c *functionServiceClient) GetVersionByTag(ctx context.Context, in *GetFunc
 func (c *functionServiceClient) ListVersions(ctx context.Context, in *ListFunctionsVersionsRequest, opts ...grpc.CallOption) (*ListFunctionsVersionsResponse, error) {
 	out := new(ListFunctionsVersionsResponse)
 	err := c.cc.Invoke(ctx, FunctionService_ListVersions_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *functionServiceClient) DeleteVersion(ctx context.Context, in *DeleteFunctionVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FunctionService_DeleteVersion_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -311,6 +325,10 @@ type FunctionServiceServer interface {
 	// Retrieves the list of versions for the specified function, or of all function versions
 	// in the specified folder.
 	ListVersions(context.Context, *ListFunctionsVersionsRequest) (*ListFunctionsVersionsResponse, error)
+	// Deletes the specified version of a function.
+	//
+	// NOTE: old untagged function versions are deleted automatically.
+	DeleteVersion(context.Context, *DeleteFunctionVersionRequest) (*operation.Operation, error)
 	// Set a tag for the specified version of a function.
 	SetTag(context.Context, *SetFunctionTagRequest) (*operation.Operation, error)
 	// Remove a tag from the specified version of a function.
@@ -364,6 +382,9 @@ func (UnimplementedFunctionServiceServer) GetVersionByTag(context.Context, *GetF
 }
 func (UnimplementedFunctionServiceServer) ListVersions(context.Context, *ListFunctionsVersionsRequest) (*ListFunctionsVersionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListVersions not implemented")
+}
+func (UnimplementedFunctionServiceServer) DeleteVersion(context.Context, *DeleteFunctionVersionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteVersion not implemented")
 }
 func (UnimplementedFunctionServiceServer) SetTag(context.Context, *SetFunctionTagRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetTag not implemented")
@@ -553,6 +574,24 @@ func _FunctionService_ListVersions_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FunctionServiceServer).ListVersions(ctx, req.(*ListFunctionsVersionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FunctionService_DeleteVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFunctionVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FunctionServiceServer).DeleteVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FunctionService_DeleteVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FunctionServiceServer).DeleteVersion(ctx, req.(*DeleteFunctionVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -811,6 +850,10 @@ var FunctionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListVersions",
 			Handler:    _FunctionService_ListVersions_Handler,
+		},
+		{
+			MethodName: "DeleteVersion",
+			Handler:    _FunctionService_DeleteVersion_Handler,
 		},
 		{
 			MethodName: "SetTag",

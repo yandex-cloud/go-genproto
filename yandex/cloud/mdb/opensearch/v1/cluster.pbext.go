@@ -3,6 +3,7 @@
 package opensearch
 
 import (
+	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -102,12 +103,24 @@ func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
 }
 
+type OpenSearch_Config = isOpenSearch_Config
+
+func (m *OpenSearch) SetConfig(v OpenSearch_Config) {
+	m.Config = v
+}
+
 func (m *OpenSearch) SetPlugins(v []string) {
 	m.Plugins = v
 }
 
 func (m *OpenSearch) SetNodeGroups(v []*OpenSearch_NodeGroup) {
 	m.NodeGroups = v
+}
+
+func (m *OpenSearch) SetOpensearchConfigSet_2(v *config.OpenSearchConfigSet2) {
+	m.Config = &OpenSearch_OpensearchConfigSet_2{
+		OpensearchConfigSet_2: v,
+	}
 }
 
 func (m *OpenSearch_NodeGroup) SetName(v string) {

@@ -170,6 +170,10 @@ func (m *GpuSettings) SetGpuClusterId(v string) {
 	m.GpuClusterId = v
 }
 
+func (m *GpuSettings) SetGpuEnvironment(v GpuSettings_GpuEnvironment) {
+	m.GpuEnvironment = v
+}
+
 func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }

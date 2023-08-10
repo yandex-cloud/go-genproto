@@ -108,6 +108,10 @@ func (m *Database) SetKinesisApiEndpoint(v string) {
 	m.KinesisApiEndpoint = v
 }
 
+func (m *Database) SetKafkaApiEndpoint(v string) {
+	m.KafkaApiEndpoint = v
+}
+
 func (m *Database) SetMonitoringConfig(v *MonitoringConfig) {
 	m.MonitoringConfig = v
 }
