@@ -1257,6 +1257,63 @@ func (*DataStream_InvokeFunction) isDataStream_Action() {}
 
 func (*DataStream_InvokeContainer) isDataStream_Action() {}
 
+type ObjectStorageBucketSettings struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Bucket for saving.
+	BucketId string `protobuf:"bytes,1,opt,name=bucket_id,json=bucketId,proto3" json:"bucket_id,omitempty"`
+	// SA which has write permission on storage.
+	ServiceAccountId string `protobuf:"bytes,2,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+}
+
+func (x *ObjectStorageBucketSettings) Reset() {
+	*x = ObjectStorageBucketSettings{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ObjectStorageBucketSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ObjectStorageBucketSettings) ProtoMessage() {}
+
+func (x *ObjectStorageBucketSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ObjectStorageBucketSettings.ProtoReflect.Descriptor instead.
+func (*ObjectStorageBucketSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ObjectStorageBucketSettings) GetBucketId() string {
+	if x != nil {
+		return x.BucketId
+	}
+	return ""
+}
+
+func (x *ObjectStorageBucketSettings) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
 type Mail struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1267,6 +1324,8 @@ type Mail struct {
 	Email string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	// Batch settings for processing events.
 	BatchSettings *BatchSettings `protobuf:"bytes,3,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
+	// Bucket settings for saving attachments.
+	AttachmentsBucket *ObjectStorageBucketSettings `protobuf:"bytes,4,opt,name=attachments_bucket,json=attachmentsBucket,proto3" json:"attachments_bucket,omitempty"`
 	// Types that are assignable to Action:
 	//
 	//	*Mail_InvokeFunction
@@ -1277,7 +1336,7 @@ type Mail struct {
 func (x *Mail) Reset() {
 	*x = Mail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1290,7 +1349,7 @@ func (x *Mail) String() string {
 func (*Mail) ProtoMessage() {}
 
 func (x *Mail) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +1362,7 @@ func (x *Mail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Mail.ProtoReflect.Descriptor instead.
 func (*Mail) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *Mail) GetEmail() string {
@@ -1316,6 +1375,13 @@ func (x *Mail) GetEmail() string {
 func (x *Mail) GetBatchSettings() *BatchSettings {
 	if x != nil {
 		return x.BatchSettings
+	}
+	return nil
+}
+
+func (x *Mail) GetAttachmentsBucket() *ObjectStorageBucketSettings {
+	if x != nil {
+		return x.AttachmentsBucket
 	}
 	return nil
 }
@@ -1382,7 +1448,7 @@ type Trigger_Rule struct {
 func (x *Trigger_Rule) Reset() {
 	*x = Trigger_Rule{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1395,7 +1461,7 @@ func (x *Trigger_Rule) String() string {
 func (*Trigger_Rule) ProtoMessage() {}
 
 func (x *Trigger_Rule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1591,7 +1657,7 @@ type Trigger_Timer struct {
 func (x *Trigger_Timer) Reset() {
 	*x = Trigger_Timer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1604,7 +1670,7 @@ func (x *Trigger_Timer) String() string {
 func (*Trigger_Timer) ProtoMessage() {}
 
 func (x *Trigger_Timer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1713,7 +1779,7 @@ type Trigger_MessageQueue struct {
 func (x *Trigger_MessageQueue) Reset() {
 	*x = Trigger_MessageQueue{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1726,7 +1792,7 @@ func (x *Trigger_MessageQueue) String() string {
 func (*Trigger_MessageQueue) ProtoMessage() {}
 
 func (x *Trigger_MessageQueue) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1835,7 +1901,7 @@ type Trigger_IoTMessage struct {
 func (x *Trigger_IoTMessage) Reset() {
 	*x = Trigger_IoTMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1848,7 +1914,7 @@ func (x *Trigger_IoTMessage) String() string {
 func (*Trigger_IoTMessage) ProtoMessage() {}
 
 func (x *Trigger_IoTMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1955,7 +2021,7 @@ type Trigger_IoTBrokerMessage struct {
 func (x *Trigger_IoTBrokerMessage) Reset() {
 	*x = Trigger_IoTBrokerMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1968,7 +2034,7 @@ func (x *Trigger_IoTBrokerMessage) String() string {
 func (*Trigger_IoTBrokerMessage) ProtoMessage() {}
 
 func (x *Trigger_IoTBrokerMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2069,7 +2135,7 @@ type Trigger_ObjectStorage struct {
 func (x *Trigger_ObjectStorage) Reset() {
 	*x = Trigger_ObjectStorage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2082,7 +2148,7 @@ func (x *Trigger_ObjectStorage) String() string {
 func (*Trigger_ObjectStorage) ProtoMessage() {}
 
 func (x *Trigger_ObjectStorage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2197,7 +2263,7 @@ type Trigger_ContainerRegistry struct {
 func (x *Trigger_ContainerRegistry) Reset() {
 	*x = Trigger_ContainerRegistry{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2210,7 +2276,7 @@ func (x *Trigger_ContainerRegistry) String() string {
 func (*Trigger_ContainerRegistry) ProtoMessage() {}
 
 func (x *Trigger_ContainerRegistry) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2319,7 +2385,7 @@ type Trigger_CloudLogs struct {
 func (x *Trigger_CloudLogs) Reset() {
 	*x = Trigger_CloudLogs{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2332,7 +2398,7 @@ func (x *Trigger_CloudLogs) String() string {
 func (*Trigger_CloudLogs) ProtoMessage() {}
 
 func (x *Trigger_CloudLogs) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2424,7 +2490,7 @@ type Trigger_Logging struct {
 func (x *Trigger_Logging) Reset() {
 	*x = Trigger_Logging{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
+		mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2437,7 +2503,7 @@ func (x *Trigger_Logging) String() string {
 func (*Trigger_Logging) ProtoMessage() {}
 
 func (x *Trigger_Logging) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3083,52 +3149,68 @@ var file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = []byte{
 	0x49, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x57,
 	0x69, 0x74, 0x68, 0x52, 0x65, 0x74, 0x72, 0x79, 0x48, 0x00, 0x52, 0x0f, 0x69, 0x6e, 0x76, 0x6f,
 	0x6b, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x42, 0x0e, 0x0a, 0x06, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x22, 0xdc, 0x02, 0x0a, 0x04,
-	0x4d, 0x61, 0x69, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x59, 0x0a, 0x0e, 0x62, 0x61,
-	0x74, 0x63, 0x68, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x32, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2e, 0x74, 0x72, 0x69,
-	0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x42, 0x61, 0x74, 0x63, 0x68, 0x53, 0x65,
-	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x0d, 0x62, 0x61, 0x74, 0x63, 0x68, 0x53, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x67, 0x0a, 0x0f, 0x69, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x5f,
-	0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x65, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3c,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x22, 0x92, 0x01, 0x0a, 0x1b,
+	0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x42, 0x75, 0x63,
+	0x6b, 0x65, 0x74, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x37, 0x0a, 0x09, 0x62,
+	0x75, 0x63, 0x6b, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x1a,
+	0xf2, 0xc7, 0x31, 0x0e, 0x5b, 0x2d, 0x2e, 0x30, 0x2d, 0x39, 0x61, 0x2d, 0x7a, 0x41, 0x2d, 0x5a,
+	0x5d, 0x2a, 0x8a, 0xc8, 0x31, 0x04, 0x33, 0x2d, 0x36, 0x33, 0x52, 0x08, 0x62, 0x75, 0x63, 0x6b,
+	0x65, 0x74, 0x49, 0x64, 0x12, 0x3a, 0x0a, 0x12, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x42, 0x0c, 0xe8, 0xc7, 0x31, 0x01, 0x8a, 0xc8, 0x31, 0x04, 0x3c, 0x3d, 0x35, 0x30, 0x52, 0x10,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64,
+	0x22, 0xcd, 0x03, 0x0a, 0x04, 0x4d, 0x61, 0x69, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61,
+	0x69, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12,
+	0x59, 0x0a, 0x0e, 0x62, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x32, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73,
+	0x73, 0x2e, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x42, 0x61,
+	0x74, 0x63, 0x68, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x0d, 0x62, 0x61, 0x74,
+	0x63, 0x68, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x6f, 0x0a, 0x12, 0x61, 0x74,
+	0x74, 0x61, 0x63, 0x68, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x5f, 0x62, 0x75, 0x63, 0x6b, 0x65, 0x74,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x40, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73,
+	0x2e, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x62, 0x6a,
+	0x65, 0x63, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x42, 0x75, 0x63, 0x6b, 0x65, 0x74,
+	0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x11, 0x61, 0x74, 0x74, 0x61, 0x63, 0x68,
+	0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x75, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x67, 0x0a, 0x0f, 0x69,
+	0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x5f, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x65,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x3c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2e, 0x74,
+	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x76, 0x6f, 0x6b,
+	0x65, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x69, 0x74, 0x68, 0x52, 0x65, 0x74,
+	0x72, 0x79, 0x48, 0x00, 0x52, 0x0e, 0x69, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x46, 0x75, 0x6e, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x6a, 0x0a, 0x10, 0x69, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x5f, 0x63,
+	0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x18, 0x67, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3d,
 	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65,
 	0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2e, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72,
-	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x46, 0x75, 0x6e, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x57, 0x69, 0x74, 0x68, 0x52, 0x65, 0x74, 0x72, 0x79, 0x48, 0x00, 0x52, 0x0e,
-	0x69, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x6a,
-	0x0a, 0x10, 0x69, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e,
-	0x65, 0x72, 0x18, 0x67, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
-	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65,
-	0x73, 0x73, 0x2e, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x49,
-	0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x57, 0x69,
-	0x74, 0x68, 0x52, 0x65, 0x74, 0x72, 0x79, 0x48, 0x00, 0x52, 0x0f, 0x69, 0x6e, 0x76, 0x6f, 0x6b,
-	0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x42, 0x0e, 0x0a, 0x06, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x2a, 0xe2, 0x01, 0x0a, 0x0b, 0x54,
-	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1c, 0x0a, 0x18, 0x54, 0x52,
-	0x49, 0x47, 0x47, 0x45, 0x52, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
-	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x54, 0x49, 0x4d, 0x45,
-	0x52, 0x10, 0x02, 0x12, 0x11, 0x0a, 0x0d, 0x4d, 0x45, 0x53, 0x53, 0x41, 0x47, 0x45, 0x5f, 0x51,
-	0x55, 0x45, 0x55, 0x45, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x49, 0x4f, 0x54, 0x5f, 0x4d, 0x45,
-	0x53, 0x53, 0x41, 0x47, 0x45, 0x10, 0x04, 0x12, 0x16, 0x0a, 0x12, 0x49, 0x4f, 0x54, 0x5f, 0x42,
-	0x52, 0x4f, 0x4b, 0x45, 0x52, 0x5f, 0x4d, 0x45, 0x53, 0x53, 0x41, 0x47, 0x45, 0x10, 0x0c, 0x12,
-	0x12, 0x0a, 0x0e, 0x4f, 0x42, 0x4a, 0x45, 0x43, 0x54, 0x5f, 0x53, 0x54, 0x4f, 0x52, 0x41, 0x47,
-	0x45, 0x10, 0x05, 0x12, 0x16, 0x0a, 0x12, 0x43, 0x4f, 0x4e, 0x54, 0x41, 0x49, 0x4e, 0x45, 0x52,
-	0x5f, 0x52, 0x45, 0x47, 0x49, 0x53, 0x54, 0x52, 0x59, 0x10, 0x06, 0x12, 0x0e, 0x0a, 0x0a, 0x43,
-	0x4c, 0x4f, 0x55, 0x44, 0x5f, 0x4c, 0x4f, 0x47, 0x53, 0x10, 0x07, 0x12, 0x0b, 0x0a, 0x07, 0x4c,
-	0x4f, 0x47, 0x47, 0x49, 0x4e, 0x47, 0x10, 0x08, 0x12, 0x12, 0x0a, 0x0e, 0x42, 0x49, 0x4c, 0x4c,
-	0x49, 0x4e, 0x47, 0x5f, 0x42, 0x55, 0x44, 0x47, 0x45, 0x54, 0x10, 0x09, 0x12, 0x07, 0x0a, 0x03,
-	0x59, 0x44, 0x53, 0x10, 0x0a, 0x12, 0x08, 0x0a, 0x04, 0x4d, 0x41, 0x49, 0x4c, 0x10, 0x0b, 0x42,
-	0x7b, 0x0a, 0x27, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2e, 0x74,
-	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x50, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f,
-	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x73, 0x65, 0x72,
-	0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2f, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73,
-	0x2f, 0x76, 0x31, 0x3b, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61,
+	0x69, 0x6e, 0x65, 0x72, 0x57, 0x69, 0x74, 0x68, 0x52, 0x65, 0x74, 0x72, 0x79, 0x48, 0x00, 0x52,
+	0x0f, 0x69, 0x6e, 0x76, 0x6f, 0x6b, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72,
+	0x42, 0x0e, 0x0a, 0x06, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01,
+	0x2a, 0xe2, 0x01, 0x0a, 0x0b, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65,
+	0x12, 0x1c, 0x0a, 0x18, 0x54, 0x52, 0x49, 0x47, 0x47, 0x45, 0x52, 0x5f, 0x54, 0x59, 0x50, 0x45,
+	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x09,
+	0x0a, 0x05, 0x54, 0x49, 0x4d, 0x45, 0x52, 0x10, 0x02, 0x12, 0x11, 0x0a, 0x0d, 0x4d, 0x45, 0x53,
+	0x53, 0x41, 0x47, 0x45, 0x5f, 0x51, 0x55, 0x45, 0x55, 0x45, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b,
+	0x49, 0x4f, 0x54, 0x5f, 0x4d, 0x45, 0x53, 0x53, 0x41, 0x47, 0x45, 0x10, 0x04, 0x12, 0x16, 0x0a,
+	0x12, 0x49, 0x4f, 0x54, 0x5f, 0x42, 0x52, 0x4f, 0x4b, 0x45, 0x52, 0x5f, 0x4d, 0x45, 0x53, 0x53,
+	0x41, 0x47, 0x45, 0x10, 0x0c, 0x12, 0x12, 0x0a, 0x0e, 0x4f, 0x42, 0x4a, 0x45, 0x43, 0x54, 0x5f,
+	0x53, 0x54, 0x4f, 0x52, 0x41, 0x47, 0x45, 0x10, 0x05, 0x12, 0x16, 0x0a, 0x12, 0x43, 0x4f, 0x4e,
+	0x54, 0x41, 0x49, 0x4e, 0x45, 0x52, 0x5f, 0x52, 0x45, 0x47, 0x49, 0x53, 0x54, 0x52, 0x59, 0x10,
+	0x06, 0x12, 0x0e, 0x0a, 0x0a, 0x43, 0x4c, 0x4f, 0x55, 0x44, 0x5f, 0x4c, 0x4f, 0x47, 0x53, 0x10,
+	0x07, 0x12, 0x0b, 0x0a, 0x07, 0x4c, 0x4f, 0x47, 0x47, 0x49, 0x4e, 0x47, 0x10, 0x08, 0x12, 0x12,
+	0x0a, 0x0e, 0x42, 0x49, 0x4c, 0x4c, 0x49, 0x4e, 0x47, 0x5f, 0x42, 0x55, 0x44, 0x47, 0x45, 0x54,
+	0x10, 0x09, 0x12, 0x07, 0x0a, 0x03, 0x59, 0x44, 0x53, 0x10, 0x0a, 0x12, 0x08, 0x0a, 0x04, 0x4d,
+	0x41, 0x49, 0x4c, 0x10, 0x0b, 0x42, 0x7b, 0x0a, 0x27, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
+	0x6c, 0x65, 0x73, 0x73, 0x2e, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31,
+	0x5a, 0x50, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x6c, 0x65, 0x73, 0x73, 0x2f, 0x74, 0x72,
+	0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65,
+	0x72, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3144,7 +3226,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP() []byte
 }
 
 var file_yandex_cloud_serverless_triggers_v1_trigger_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_yandex_cloud_serverless_triggers_v1_trigger_proto_goTypes = []interface{}{
 	(TriggerType)(0),                        // 0: yandex.cloud.serverless.triggers.v1.TriggerType
 	(Trigger_ObjectStorageEventType)(0),     // 1: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
@@ -3163,87 +3245,89 @@ var file_yandex_cloud_serverless_triggers_v1_trigger_proto_goTypes = []interface
 	(*BillingBudget)(nil),                   // 14: yandex.cloud.serverless.triggers.v1.BillingBudget
 	(*DataStreamBatchSettings)(nil),         // 15: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings
 	(*DataStream)(nil),                      // 16: yandex.cloud.serverless.triggers.v1.DataStream
-	(*Mail)(nil),                            // 17: yandex.cloud.serverless.triggers.v1.Mail
-	nil,                                     // 18: yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
-	(*Trigger_Rule)(nil),                    // 19: yandex.cloud.serverless.triggers.v1.Trigger.Rule
-	(*Trigger_Timer)(nil),                   // 20: yandex.cloud.serverless.triggers.v1.Trigger.Timer
-	(*Trigger_MessageQueue)(nil),            // 21: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
-	(*Trigger_IoTMessage)(nil),              // 22: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
-	(*Trigger_IoTBrokerMessage)(nil),        // 23: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
-	(*Trigger_ObjectStorage)(nil),           // 24: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
-	(*Trigger_ContainerRegistry)(nil),       // 25: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
-	(*Trigger_CloudLogs)(nil),               // 26: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
-	(*Trigger_Logging)(nil),                 // 27: yandex.cloud.serverless.triggers.v1.Trigger.Logging
-	(*timestamppb.Timestamp)(nil),           // 28: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),             // 29: google.protobuf.Duration
-	(v1.LogLevel_Level)(0),                  // 30: yandex.cloud.logging.v1.LogLevel.Level
+	(*ObjectStorageBucketSettings)(nil),     // 17: yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettings
+	(*Mail)(nil),                            // 18: yandex.cloud.serverless.triggers.v1.Mail
+	nil,                                     // 19: yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
+	(*Trigger_Rule)(nil),                    // 20: yandex.cloud.serverless.triggers.v1.Trigger.Rule
+	(*Trigger_Timer)(nil),                   // 21: yandex.cloud.serverless.triggers.v1.Trigger.Timer
+	(*Trigger_MessageQueue)(nil),            // 22: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
+	(*Trigger_IoTMessage)(nil),              // 23: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
+	(*Trigger_IoTBrokerMessage)(nil),        // 24: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
+	(*Trigger_ObjectStorage)(nil),           // 25: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
+	(*Trigger_ContainerRegistry)(nil),       // 26: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
+	(*Trigger_CloudLogs)(nil),               // 27: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
+	(*Trigger_Logging)(nil),                 // 28: yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	(*timestamppb.Timestamp)(nil),           // 29: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),             // 30: google.protobuf.Duration
+	(v1.LogLevel_Level)(0),                  // 31: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_serverless_triggers_v1_trigger_proto_depIdxs = []int32{
-	28, // 0: yandex.cloud.serverless.triggers.v1.Trigger.created_at:type_name -> google.protobuf.Timestamp
-	18, // 1: yandex.cloud.serverless.triggers.v1.Trigger.labels:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
-	19, // 2: yandex.cloud.serverless.triggers.v1.Trigger.rule:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Rule
+	29, // 0: yandex.cloud.serverless.triggers.v1.Trigger.created_at:type_name -> google.protobuf.Timestamp
+	19, // 1: yandex.cloud.serverless.triggers.v1.Trigger.labels:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
+	20, // 2: yandex.cloud.serverless.triggers.v1.Trigger.rule:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Rule
 	3,  // 3: yandex.cloud.serverless.triggers.v1.Trigger.status:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Status
 	13, // 4: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
 	9,  // 5: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
 	13, // 6: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
 	9,  // 7: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
-	29, // 8: yandex.cloud.serverless.triggers.v1.BatchSettings.cutoff:type_name -> google.protobuf.Duration
-	29, // 9: yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings.cutoff:type_name -> google.protobuf.Duration
-	29, // 10: yandex.cloud.serverless.triggers.v1.LoggingBatchSettings.cutoff:type_name -> google.protobuf.Duration
-	29, // 11: yandex.cloud.serverless.triggers.v1.RetrySettings.interval:type_name -> google.protobuf.Duration
+	30, // 8: yandex.cloud.serverless.triggers.v1.BatchSettings.cutoff:type_name -> google.protobuf.Duration
+	30, // 9: yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings.cutoff:type_name -> google.protobuf.Duration
+	30, // 10: yandex.cloud.serverless.triggers.v1.LoggingBatchSettings.cutoff:type_name -> google.protobuf.Duration
+	30, // 11: yandex.cloud.serverless.triggers.v1.RetrySettings.interval:type_name -> google.protobuf.Duration
 	6,  // 12: yandex.cloud.serverless.triggers.v1.BillingBudget.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
 	8,  // 13: yandex.cloud.serverless.triggers.v1.BillingBudget.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	29, // 14: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings.cutoff:type_name -> google.protobuf.Duration
+	30, // 14: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings.cutoff:type_name -> google.protobuf.Duration
 	15, // 15: yandex.cloud.serverless.triggers.v1.DataStream.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings
 	6,  // 16: yandex.cloud.serverless.triggers.v1.DataStream.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
 	8,  // 17: yandex.cloud.serverless.triggers.v1.DataStream.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
 	10, // 18: yandex.cloud.serverless.triggers.v1.Mail.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 19: yandex.cloud.serverless.triggers.v1.Mail.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 20: yandex.cloud.serverless.triggers.v1.Mail.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	20, // 21: yandex.cloud.serverless.triggers.v1.Trigger.Rule.timer:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Timer
-	21, // 22: yandex.cloud.serverless.triggers.v1.Trigger.Rule.message_queue:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
-	22, // 23: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
-	23, // 24: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_broker_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
-	24, // 25: yandex.cloud.serverless.triggers.v1.Trigger.Rule.object_storage:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
-	25, // 26: yandex.cloud.serverless.triggers.v1.Trigger.Rule.container_registry:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
-	26, // 27: yandex.cloud.serverless.triggers.v1.Trigger.Rule.cloud_logs:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
-	27, // 28: yandex.cloud.serverless.triggers.v1.Trigger.Rule.logging:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Logging
-	14, // 29: yandex.cloud.serverless.triggers.v1.Trigger.Rule.billing_budget:type_name -> yandex.cloud.serverless.triggers.v1.BillingBudget
-	16, // 30: yandex.cloud.serverless.triggers.v1.Trigger.Rule.data_stream:type_name -> yandex.cloud.serverless.triggers.v1.DataStream
-	17, // 31: yandex.cloud.serverless.triggers.v1.Trigger.Rule.mail:type_name -> yandex.cloud.serverless.triggers.v1.Mail
-	5,  // 32: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
-	6,  // 33: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 34: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_container_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	10, // 35: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	29, // 36: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
-	5,  // 37: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
-	7,  // 38: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
-	10, // 39: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 40: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 41: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	10, // 42: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 43: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 44: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	1,  // 45: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
-	10, // 46: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 47: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 48: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	2,  // 49: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventType
-	10, // 50: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 51: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 52: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 53: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
-	6,  // 54: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 55: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	30, // 56: yandex.cloud.serverless.triggers.v1.Trigger.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	12, // 57: yandex.cloud.serverless.triggers.v1.Trigger.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
-	6,  // 58: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 59: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	60, // [60:60] is the sub-list for method output_type
-	60, // [60:60] is the sub-list for method input_type
-	60, // [60:60] is the sub-list for extension type_name
-	60, // [60:60] is the sub-list for extension extendee
-	0,  // [0:60] is the sub-list for field type_name
+	17, // 19: yandex.cloud.serverless.triggers.v1.Mail.attachments_bucket:type_name -> yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettings
+	6,  // 20: yandex.cloud.serverless.triggers.v1.Mail.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 21: yandex.cloud.serverless.triggers.v1.Mail.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	21, // 22: yandex.cloud.serverless.triggers.v1.Trigger.Rule.timer:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Timer
+	22, // 23: yandex.cloud.serverless.triggers.v1.Trigger.Rule.message_queue:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
+	23, // 24: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
+	24, // 25: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_broker_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
+	25, // 26: yandex.cloud.serverless.triggers.v1.Trigger.Rule.object_storage:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
+	26, // 27: yandex.cloud.serverless.triggers.v1.Trigger.Rule.container_registry:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
+	27, // 28: yandex.cloud.serverless.triggers.v1.Trigger.Rule.cloud_logs:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
+	28, // 29: yandex.cloud.serverless.triggers.v1.Trigger.Rule.logging:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	14, // 30: yandex.cloud.serverless.triggers.v1.Trigger.Rule.billing_budget:type_name -> yandex.cloud.serverless.triggers.v1.BillingBudget
+	16, // 31: yandex.cloud.serverless.triggers.v1.Trigger.Rule.data_stream:type_name -> yandex.cloud.serverless.triggers.v1.DataStream
+	18, // 32: yandex.cloud.serverless.triggers.v1.Trigger.Rule.mail:type_name -> yandex.cloud.serverless.triggers.v1.Mail
+	5,  // 33: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
+	6,  // 34: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 35: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_container_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	10, // 36: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	30, // 37: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
+	5,  // 38: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
+	7,  // 39: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
+	10, // 40: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 41: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 42: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	10, // 43: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 44: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 45: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	1,  // 46: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
+	10, // 47: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 48: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 49: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	2,  // 50: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventType
+	10, // 51: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 52: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 53: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 54: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
+	6,  // 55: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 56: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	31, // 57: yandex.cloud.serverless.triggers.v1.Trigger.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	12, // 58: yandex.cloud.serverless.triggers.v1.Trigger.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
+	6,  // 59: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 60: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	61, // [61:61] is the sub-list for method output_type
+	61, // [61:61] is the sub-list for method input_type
+	61, // [61:61] is the sub-list for extension type_name
+	61, // [61:61] is the sub-list for extension extendee
+	0,  // [0:61] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() }
@@ -3409,6 +3493,18 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 			}
 		}
 		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ObjectStorageBucketSettings); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Mail); i {
 			case 0:
 				return &v.state
@@ -3420,7 +3516,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_Rule); i {
 			case 0:
 				return &v.state
@@ -3432,7 +3528,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_Timer); i {
 			case 0:
 				return &v.state
@@ -3444,7 +3540,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_MessageQueue); i {
 			case 0:
 				return &v.state
@@ -3456,7 +3552,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_IoTMessage); i {
 			case 0:
 				return &v.state
@@ -3468,7 +3564,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_IoTBrokerMessage); i {
 			case 0:
 				return &v.state
@@ -3480,7 +3576,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_ObjectStorage); i {
 			case 0:
 				return &v.state
@@ -3492,7 +3588,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_ContainerRegistry); i {
 			case 0:
 				return &v.state
@@ -3504,7 +3600,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_CloudLogs); i {
 			case 0:
 				return &v.state
@@ -3516,7 +3612,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Trigger_Logging); i {
 			case 0:
 				return &v.state
@@ -3537,11 +3633,11 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 		(*DataStream_InvokeFunction)(nil),
 		(*DataStream_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14].OneofWrappers = []interface{}{
 		(*Mail_InvokeFunction)(nil),
 		(*Mail_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16].OneofWrappers = []interface{}{
 		(*Trigger_Rule_Timer)(nil),
 		(*Trigger_Rule_MessageQueue)(nil),
 		(*Trigger_Rule_IotMessage)(nil),
@@ -3554,36 +3650,36 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 		(*Trigger_Rule_DataStream)(nil),
 		(*Trigger_Rule_Mail)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17].OneofWrappers = []interface{}{
 		(*Trigger_Timer_InvokeFunction)(nil),
 		(*Trigger_Timer_InvokeFunctionWithRetry)(nil),
 		(*Trigger_Timer_InvokeContainerWithRetry)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18].OneofWrappers = []interface{}{
 		(*Trigger_MessageQueue_InvokeFunction)(nil),
 		(*Trigger_MessageQueue_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19].OneofWrappers = []interface{}{
 		(*Trigger_IoTMessage_InvokeFunction)(nil),
 		(*Trigger_IoTMessage_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].OneofWrappers = []interface{}{
 		(*Trigger_IoTBrokerMessage_InvokeFunction)(nil),
 		(*Trigger_IoTBrokerMessage_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].OneofWrappers = []interface{}{
 		(*Trigger_ObjectStorage_InvokeFunction)(nil),
 		(*Trigger_ObjectStorage_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].OneofWrappers = []interface{}{
 		(*Trigger_ContainerRegistry_InvokeFunction)(nil),
 		(*Trigger_ContainerRegistry_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].OneofWrappers = []interface{}{
 		(*Trigger_CloudLogs_InvokeFunction)(nil),
 		(*Trigger_CloudLogs_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].OneofWrappers = []interface{}{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24].OneofWrappers = []interface{}{
 		(*Trigger_Logging_InvokeFunction)(nil),
 		(*Trigger_Logging_InvokeContainer)(nil),
 	}
@@ -3593,7 +3689,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc,
 			NumEnums:      4,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

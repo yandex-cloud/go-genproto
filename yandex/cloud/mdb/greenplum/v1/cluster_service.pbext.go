@@ -146,6 +146,14 @@ func (m *ConfigSpec) SetPool(v *ConnectionPoolerConfig) {
 	m.Pool = v
 }
 
+func (m *ConfigSpec) SetBackgroundActivities(v *BackgroundActivitiesConfig) {
+	m.BackgroundActivities = v
+}
+
+func (m *ConfigSpec) SetPxfConfig(v *PXFConfig) {
+	m.PxfConfig = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

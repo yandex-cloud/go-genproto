@@ -30,6 +30,38 @@ func (m *ConnectionPoolerConfig) SetClientIdleTimeout(v *wrapperspb.Int64Value) 
 	m.ClientIdleTimeout = v
 }
 
+func (m *BackgroundActivityStartAt) SetHours(v int64) {
+	m.Hours = v
+}
+
+func (m *BackgroundActivityStartAt) SetMinutes(v int64) {
+	m.Minutes = v
+}
+
+func (m *TableSizes) SetStarts(v []*BackgroundActivityStartAt) {
+	m.Starts = v
+}
+
+func (m *AnalyzeAndVacuum) SetStart(v *BackgroundActivityStartAt) {
+	m.Start = v
+}
+
+func (m *AnalyzeAndVacuum) SetAnalyzeTimeout(v *wrapperspb.Int64Value) {
+	m.AnalyzeTimeout = v
+}
+
+func (m *AnalyzeAndVacuum) SetVacuumTimeout(v *wrapperspb.Int64Value) {
+	m.VacuumTimeout = v
+}
+
+func (m *BackgroundActivitiesConfig) SetTableSizes(v *TableSizes) {
+	m.TableSizes = v
+}
+
+func (m *BackgroundActivitiesConfig) SetAnalyzeAndVacuum(v *AnalyzeAndVacuum) {
+	m.AnalyzeAndVacuum = v
+}
+
 func (m *MasterSubclusterConfig) SetResources(v *Resources) {
 	m.Resources = v
 }

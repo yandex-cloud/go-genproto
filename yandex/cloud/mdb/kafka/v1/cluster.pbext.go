@@ -123,6 +123,10 @@ func (m *ConfigSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ConfigSpec) SetRestApiConfig(v *ConfigSpec_RestAPIConfig) {
+	m.RestApiConfig = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {
@@ -159,6 +163,10 @@ func (m *ConfigSpec_Kafka) SetKafkaConfig_3(v *KafkaConfig3) {
 
 func (m *ConfigSpec_Zookeeper) SetResources(v *Resources) {
 	m.Resources = v
+}
+
+func (m *ConfigSpec_RestAPIConfig) SetEnabled(v bool) {
+	m.Enabled = v
 }
 
 func (m *Resources) SetResourcePresetId(v string) {

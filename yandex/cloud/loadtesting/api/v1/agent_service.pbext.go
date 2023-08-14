@@ -41,3 +41,27 @@ func (m *DeleteAgentRequest) SetAgentId(v string) {
 func (m *DeleteAgentMetadata) SetAgentId(v string) {
 	m.AgentId = v
 }
+
+func (m *ListAgentsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListAgentsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListAgentsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListAgentsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListAgentsResponse) SetAgents(v []*agent.Agent) {
+	m.Agents = v
+}
+
+func (m *ListAgentsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

@@ -137,6 +137,14 @@ func (m *ClusterConfigSet) SetPool(v *ConnectionPoolerConfigSet) {
 	m.Pool = v
 }
 
+func (m *ClusterConfigSet) SetBackgroundActivities(v *BackgroundActivitiesConfig) {
+	m.BackgroundActivities = v
+}
+
+func (m *ClusterConfigSet) SetPxfConfig(v *PXFConfigSet) {
+	m.PxfConfig = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

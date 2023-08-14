@@ -562,6 +562,14 @@ func (m *DataStream) SetInvokeContainer(v *InvokeContainerWithRetry) {
 	}
 }
 
+func (m *ObjectStorageBucketSettings) SetBucketId(v string) {
+	m.BucketId = v
+}
+
+func (m *ObjectStorageBucketSettings) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 type Mail_Action = isMail_Action
 
 func (m *Mail) SetAction(v Mail_Action) {
@@ -574,6 +582,10 @@ func (m *Mail) SetEmail(v string) {
 
 func (m *Mail) SetBatchSettings(v *BatchSettings) {
 	m.BatchSettings = v
+}
+
+func (m *Mail) SetAttachmentsBucket(v *ObjectStorageBucketSettings) {
+	m.AttachmentsBucket = v
 }
 
 func (m *Mail) SetInvokeFunction(v *InvokeFunctionWithRetry) {

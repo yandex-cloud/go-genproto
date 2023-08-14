@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	AgentService_Create_FullMethodName = "/yandex.cloud.loadtesting.api.v1.AgentService/Create"
 	AgentService_Get_FullMethodName    = "/yandex.cloud.loadtesting.api.v1.AgentService/Get"
+	AgentService_List_FullMethodName   = "/yandex.cloud.loadtesting.api.v1.AgentService/List"
 	AgentService_Delete_FullMethodName = "/yandex.cloud.loadtesting.api.v1.AgentService/Delete"
 )
 
@@ -32,6 +33,7 @@ const (
 type AgentServiceClient interface {
 	Create(ctx context.Context, in *CreateAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Get(ctx context.Context, in *GetAgentRequest, opts ...grpc.CallOption) (*agent.Agent, error)
+	List(ctx context.Context, in *ListAgentsRequest, opts ...grpc.CallOption) (*ListAgentsResponse, error)
 	Delete(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -61,6 +63,15 @@ func (c *agentServiceClient) Get(ctx context.Context, in *GetAgentRequest, opts 
 	return out, nil
 }
 
+func (c *agentServiceClient) List(ctx context.Context, in *ListAgentsRequest, opts ...grpc.CallOption) (*ListAgentsResponse, error) {
+	out := new(ListAgentsResponse)
+	err := c.cc.Invoke(ctx, AgentService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *agentServiceClient) Delete(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, AgentService_Delete_FullMethodName, in, out, opts...)
@@ -76,6 +87,7 @@ func (c *agentServiceClient) Delete(ctx context.Context, in *DeleteAgentRequest,
 type AgentServiceServer interface {
 	Create(context.Context, *CreateAgentRequest) (*operation.Operation, error)
 	Get(context.Context, *GetAgentRequest) (*agent.Agent, error)
+	List(context.Context, *ListAgentsRequest) (*ListAgentsResponse, error)
 	Delete(context.Context, *DeleteAgentRequest) (*operation.Operation, error)
 }
 
@@ -88,6 +100,9 @@ func (UnimplementedAgentServiceServer) Create(context.Context, *CreateAgentReque
 }
 func (UnimplementedAgentServiceServer) Get(context.Context, *GetAgentRequest) (*agent.Agent, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAgentServiceServer) List(context.Context, *ListAgentsRequest) (*ListAgentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedAgentServiceServer) Delete(context.Context, *DeleteAgentRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -140,6 +155,24 @@ func _AgentService_Get_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAgentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).List(ctx, req.(*ListAgentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AgentService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAgentRequest)
 	if err := dec(in); err != nil {
@@ -172,6 +205,10 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _AgentService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _AgentService_List_Handler,
 		},
 		{
 			MethodName: "Delete",

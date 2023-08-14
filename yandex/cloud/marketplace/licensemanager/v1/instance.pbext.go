@@ -30,6 +30,10 @@ func (m *Instance) SetName(v string) {
 	m.Name = v
 }
 
+func (m *Instance) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *Instance) SetStartTime(v *timestamppb.Timestamp) {
 	m.StartTime = v
 }
