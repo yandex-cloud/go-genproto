@@ -71,6 +71,14 @@ func (m *CreateApiGatewayRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *CreateApiGatewayRequest) SetVariables(v map[string]*VariableInput) {
+	m.Variables = v
+}
+
+func (m *CreateApiGatewayRequest) SetCanary(v *Canary) {
+	m.Canary = v
+}
+
 type UpdateApiGatewayRequest_Spec = isUpdateApiGatewayRequest_Spec
 
 func (m *UpdateApiGatewayRequest) SetSpec(v UpdateApiGatewayRequest_Spec) {
@@ -109,6 +117,14 @@ func (m *UpdateApiGatewayRequest) SetConnectivity(v *Connectivity) {
 
 func (m *UpdateApiGatewayRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
+}
+
+func (m *UpdateApiGatewayRequest) SetVariables(v map[string]*VariableInput) {
+	m.Variables = v
+}
+
+func (m *UpdateApiGatewayRequest) SetCanary(v *Canary) {
+	m.Canary = v
 }
 
 func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {

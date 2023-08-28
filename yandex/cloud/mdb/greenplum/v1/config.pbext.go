@@ -70,6 +70,46 @@ func (m *SegmentSubclusterConfig) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *GreenplumConfig6) SetMaxConnections(v *wrapperspb.Int64Value) {
+	m.MaxConnections = v
+}
+
+func (m *GreenplumConfig6) SetMaxSlotWalKeepSize(v *wrapperspb.Int64Value) {
+	m.MaxSlotWalKeepSize = v
+}
+
+func (m *GreenplumConfig6) SetGpWorkfileLimitPerSegment(v *wrapperspb.Int64Value) {
+	m.GpWorkfileLimitPerSegment = v
+}
+
+func (m *GreenplumConfig6) SetGpWorkfileLimitPerQuery(v *wrapperspb.Int64Value) {
+	m.GpWorkfileLimitPerQuery = v
+}
+
+func (m *GreenplumConfig6) SetGpWorkfileLimitFilesPerQuery(v *wrapperspb.Int64Value) {
+	m.GpWorkfileLimitFilesPerQuery = v
+}
+
+func (m *GreenplumConfig6) SetMaxPreparedTransactions(v *wrapperspb.Int64Value) {
+	m.MaxPreparedTransactions = v
+}
+
+func (m *GreenplumConfig6) SetGpWorkfileCompression(v *wrapperspb.BoolValue) {
+	m.GpWorkfileCompression = v
+}
+
+func (m *GreenplumConfig6) SetMaxStatementMem(v *wrapperspb.Int64Value) {
+	m.MaxStatementMem = v
+}
+
+func (m *GreenplumConfig6) SetLogStatement(v LogStatement) {
+	m.LogStatement = v
+}
+
+func (m *GreenplumConfig6) SetGpAddColumnInheritsTableSetting(v *wrapperspb.BoolValue) {
+	m.GpAddColumnInheritsTableSetting = v
+}
+
 func (m *GreenplumConfig6_17) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
@@ -259,6 +299,18 @@ func (m *GreenplumConfigSet6_22) SetUserConfig(v *GreenplumConfig6_22) {
 }
 
 func (m *GreenplumConfigSet6_22) SetDefaultConfig(v *GreenplumConfig6_22) {
+	m.DefaultConfig = v
+}
+
+func (m *GreenplumConfigSet6) SetEffectiveConfig(v *GreenplumConfig6) {
+	m.EffectiveConfig = v
+}
+
+func (m *GreenplumConfigSet6) SetUserConfig(v *GreenplumConfig6) {
+	m.UserConfig = v
+}
+
+func (m *GreenplumConfigSet6) SetDefaultConfig(v *GreenplumConfig6) {
 	m.DefaultConfig = v
 }
 

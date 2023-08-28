@@ -127,6 +127,10 @@ func (m *MasterUpdateSpec) SetMasterLogging(v *MasterLogging) {
 	m.MasterLogging = v
 }
 
+func (m *MasterUpdateSpec) SetLocations(v []*LocationSpec) {
+	m.Locations = v
+}
+
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -297,6 +301,14 @@ func (m *MasterSpec) SetRegionalMasterSpec(v *RegionalMasterSpec) {
 	}
 }
 
+func (m *MasterSpec) SetLocations(v []*LocationSpec) {
+	m.Locations = v
+}
+
+func (m *MasterSpec) SetEtcdClusterSize(v int64) {
+	m.EtcdClusterSize = v
+}
+
 func (m *MasterSpec) SetVersion(v string) {
 	m.Version = v
 }
@@ -355,4 +367,12 @@ func (m *MasterLocation) SetZoneId(v string) {
 
 func (m *MasterLocation) SetInternalV4AddressSpec(v *InternalAddressSpec) {
 	m.InternalV4AddressSpec = v
+}
+
+func (m *LocationSpec) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
+func (m *LocationSpec) SetSubnetId(v string) {
+	m.SubnetId = v
 }

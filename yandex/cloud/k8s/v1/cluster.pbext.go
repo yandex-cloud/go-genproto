@@ -116,6 +116,14 @@ func (m *Master) SetRegionalMaster(v *RegionalMaster) {
 	}
 }
 
+func (m *Master) SetLocations(v []*Location) {
+	m.Locations = v
+}
+
+func (m *Master) SetEtcdClusterSize(v int64) {
+	m.EtcdClusterSize = v
+}
+
 func (m *Master) SetVersion(v string) {
 	m.Version = v
 }
@@ -174,6 +182,14 @@ func (m *RegionalMaster) SetExternalV4Address(v string) {
 
 func (m *RegionalMaster) SetExternalV6Address(v string) {
 	m.ExternalV6Address = v
+}
+
+func (m *Location) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
+func (m *Location) SetSubnetId(v string) {
+	m.SubnetId = v
 }
 
 func (m *MasterEndpoints) SetInternalV4Endpoint(v string) {

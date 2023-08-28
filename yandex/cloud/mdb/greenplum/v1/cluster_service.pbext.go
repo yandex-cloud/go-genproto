@@ -112,6 +112,10 @@ func (m *CreateClusterRequest) SetConfigSpec(v *ConfigSpec) {
 	m.ConfigSpec = v
 }
 
+func (m *CreateClusterRequest) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
+}
+
 type ConfigSpec_GreenplumConfig = isConfigSpec_GreenplumConfig
 
 func (m *ConfigSpec) SetGreenplumConfig(v ConfigSpec_GreenplumConfig) {
@@ -139,6 +143,12 @@ func (m *ConfigSpec) SetGreenplumConfig_6_21(v *GreenplumConfig6_21) {
 func (m *ConfigSpec) SetGreenplumConfig_6_22(v *GreenplumConfig6_22) {
 	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6_22{
 		GreenplumConfig_6_22: v,
+	}
+}
+
+func (m *ConfigSpec) SetGreenplumConfig_6(v *GreenplumConfig6) {
+	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6{
+		GreenplumConfig_6: v,
 	}
 }
 
@@ -208,6 +218,10 @@ func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
 
 func (m *UpdateClusterRequest) SetConfigSpec(v *ConfigSpec) {
 	m.ConfigSpec = v
+}
+
+func (m *UpdateClusterRequest) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {

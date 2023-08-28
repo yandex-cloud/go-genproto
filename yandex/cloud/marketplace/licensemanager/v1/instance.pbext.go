@@ -26,10 +26,6 @@ func (m *Instance) SetTemplateVersionId(v string) {
 	m.TemplateVersionId = v
 }
 
-func (m *Instance) SetName(v string) {
-	m.Name = v
-}
-
 func (m *Instance) SetDescription(v string) {
 	m.Description = v
 }

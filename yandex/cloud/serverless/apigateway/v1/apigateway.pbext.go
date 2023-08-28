@@ -55,6 +55,14 @@ func (m *ApiGateway) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *ApiGateway) SetVariables(v map[string]*VariableInput) {
+	m.Variables = v
+}
+
+func (m *ApiGateway) SetCanary(v *Canary) {
+	m.Canary = v
+}
+
 func (m *AttachedDomain) SetDomainId(v string) {
 	m.DomainId = v
 }
@@ -103,4 +111,42 @@ func (m *LogOptions) SetFolderId(v string) {
 
 func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
 	m.MinLevel = v
+}
+
+func (m *Canary) SetWeight(v int64) {
+	m.Weight = v
+}
+
+func (m *Canary) SetVariables(v map[string]*VariableInput) {
+	m.Variables = v
+}
+
+type VariableInput_VariableValue = isVariableInput_VariableValue
+
+func (m *VariableInput) SetVariableValue(v VariableInput_VariableValue) {
+	m.VariableValue = v
+}
+
+func (m *VariableInput) SetStringValue(v string) {
+	m.VariableValue = &VariableInput_StringValue{
+		StringValue: v,
+	}
+}
+
+func (m *VariableInput) SetIntValue(v int64) {
+	m.VariableValue = &VariableInput_IntValue{
+		IntValue: v,
+	}
+}
+
+func (m *VariableInput) SetDoubleValue(v float64) {
+	m.VariableValue = &VariableInput_DoubleValue{
+		DoubleValue: v,
+	}
+}
+
+func (m *VariableInput) SetBoolValue(v bool) {
+	m.VariableValue = &VariableInput_BoolValue{
+		BoolValue: v,
+	}
 }

@@ -103,6 +103,10 @@ func (m *Cluster) SetClusterConfig(v *ClusterConfigSet) {
 	m.ClusterConfig = v
 }
 
+func (m *Cluster) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
+}
+
 type ClusterConfigSet_GreenplumConfig = isClusterConfigSet_GreenplumConfig
 
 func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig) {
@@ -130,6 +134,12 @@ func (m *ClusterConfigSet) SetGreenplumConfigSet_6_21(v *GreenplumConfigSet6_21)
 func (m *ClusterConfigSet) SetGreenplumConfigSet_6_22(v *GreenplumConfigSet6_22) {
 	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_22{
 		GreenplumConfigSet_6_22: v,
+	}
+}
+
+func (m *ClusterConfigSet) SetGreenplumConfigSet_6(v *GreenplumConfigSet6) {
+	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6{
+		GreenplumConfigSet_6: v,
 	}
 }
 
@@ -219,4 +229,8 @@ func (m *RestoreResources) SetResourcePresetId(v string) {
 
 func (m *RestoreResources) SetDiskSize(v int64) {
 	m.DiskSize = v
+}
+
+func (m *CloudStorage) SetEnable(v bool) {
+	m.Enable = v
 }

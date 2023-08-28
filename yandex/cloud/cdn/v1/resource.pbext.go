@@ -58,6 +58,10 @@ func (m *Resource) SetSslCertificate(v *SSLCertificate) {
 	m.SslCertificate = v
 }
 
+func (m *Resource) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *ResourceOptions) SetDisableCache(v *ResourceOptions_BoolOption) {
 	m.DisableCache = v
 }
