@@ -88,7 +88,7 @@ type ActivateProviderMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Activate provider for Folder iD.
+	// Activate provider for folder specified by ID.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
@@ -136,6 +136,7 @@ type ListActivatedProvidersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the folder to find out the backup provider.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
@@ -183,8 +184,10 @@ type ListActivatedProvidersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId string   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Names    []string `protobuf:"bytes,3,rep,name=names,proto3" json:"names,omitempty"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the backup provider.
+	Names []string `protobuf:"bytes,3,rep,name=names,proto3" json:"names,omitempty"`
 }
 
 func (x *ListActivatedProvidersResponse) Reset() {

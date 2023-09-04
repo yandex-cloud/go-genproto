@@ -28,6 +28,12 @@ func (m *InstructRequest) SetInstructionText(v string) {
 	}
 }
 
+func (m *InstructRequest) SetInstructionUri(v string) {
+	m.Instruction = &InstructRequest_InstructionUri{
+		InstructionUri: v,
+	}
+}
+
 func (m *InstructRequest) SetRequestText(v string) {
 	m.Request = &InstructRequest_RequestText{
 		RequestText: v,
@@ -84,4 +90,24 @@ func (m *TokenizeRequest) SetText(v string) {
 
 func (m *TokenizeResponse) SetTokens(v []*Token) {
 	m.Tokens = v
+}
+
+func (m *EmbeddingRequest) SetEmbeddingType(v EmbeddingRequest_EmbeddingType) {
+	m.EmbeddingType = v
+}
+
+func (m *EmbeddingRequest) SetModel(v string) {
+	m.Model = v
+}
+
+func (m *EmbeddingRequest) SetText(v string) {
+	m.Text = v
+}
+
+func (m *EmbeddingResponse) SetEmbedding(v []float64) {
+	m.Embedding = v
+}
+
+func (m *EmbeddingResponse) SetNumTokens(v int64) {
+	m.NumTokens = v
 }

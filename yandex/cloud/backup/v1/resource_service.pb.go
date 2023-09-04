@@ -81,8 +81,11 @@ type ListResourcesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Number of results per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token for the results page.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -144,8 +147,10 @@ type ListResourcesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Resources     []*Resource `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
-	NextPageToken string      `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// Set of resource parameters.
+	Resources []*Resource `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
+	// Token for the next results page.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListResourcesResponse) Reset() {
@@ -199,6 +204,7 @@ type GetResourceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -246,6 +252,7 @@ type GetResourceResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Set of resource parameters.
 	Resource *Resource `protobuf:"bytes,1,opt,name=resource,proto3" json:"resource,omitempty"`
 }
 
@@ -293,8 +300,10 @@ type DeleteResourceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	ResourceId        string `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Resource ID is used to identify Compute Cloud instance in backup service.
+	ResourceId string `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 }
 
 func (x *DeleteResourceRequest) Reset() {
@@ -348,7 +357,7 @@ type DeleteResourceMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Compute Cloud Instance ID of the Backup.
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -396,9 +405,12 @@ type ListTasksRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	PageSize          int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken         string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Number of results per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token for the results page.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
 func (x *ListTasksRequest) Reset() {
@@ -459,8 +471,10 @@ type ListTasksResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tasks         []*Task `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	NextPageToken string  `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// Set of tasks parameters.
+	Tasks []*Task `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	// Token for the next results page.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListTasksResponse) Reset() {
@@ -514,9 +528,12 @@ type ListDirectoryRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId          string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	Path              string `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
+	// Path to list items in.
+	Path string `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 }
 
 func (x *ListDirectoryRequest) Reset() {
@@ -624,9 +641,12 @@ type CreateDirectoryRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId          string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	Path              string `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
+	// Path to create directory in.
+	Path string `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 }
 
 func (x *CreateDirectoryRequest) Reset() {
@@ -687,8 +707,10 @@ type CreateDirectoryMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	Path              string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	// Path to create directory metadata in.
+	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
 }
 
 func (x *CreateDirectoryMetadata) Reset() {
@@ -742,6 +764,7 @@ type ListDirectoryResponse_FilesystemItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Item name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Might be Volume, Directory of File.
 	Type ListDirectoryResponse_FilesystemItem_Type `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.backup.v1.ListDirectoryResponse_FilesystemItem_Type" json:"type,omitempty"`

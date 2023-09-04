@@ -32,7 +32,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ResourceServiceClient interface {
-	// List resources: [Compute Cloud instances](/docs/backup/concepts/vm-connection#os).
+	// List resources: Compute Cloud instances.
 	List(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
 	// Get specific Compute Cloud instance.
 	Get(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*GetResourceResponse, error)
@@ -114,7 +114,7 @@ func (c *resourceServiceClient) CreateDirectory(ctx context.Context, in *CreateD
 // All implementations should embed UnimplementedResourceServiceServer
 // for forward compatibility
 type ResourceServiceServer interface {
-	// List resources: [Compute Cloud instances](/docs/backup/concepts/vm-connection#os).
+	// List resources: Compute Cloud instances.
 	List(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
 	// Get specific Compute Cloud instance.
 	Get(context.Context, *GetResourceRequest) (*GetResourceResponse, error)

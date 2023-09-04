@@ -31,7 +31,7 @@ type GenerationOptions struct {
 	PartialResults bool `protobuf:"varint,1,opt,name=partial_results,json=partialResults,proto3" json:"partial_results,omitempty"`
 	// Affects creativity and randomness of the responses. It is a double number between 0 and infinity. A low temperature causes the responses to be straightforward, a high temperature causes high-level creativity and randomness.
 	Temperature *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=temperature,proto3" json:"temperature,omitempty"`
-	// Sets response limit in tokens. It is a int number between 1 and 2000.
+	// Sets response limit in tokens. The total length of [instruction_text], [request_text], and [max_tokens] should be equal or less than 7400 tokens.
 	MaxTokens *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_tokens,json=maxTokens,proto3" json:"max_tokens,omitempty"`
 }
 
@@ -161,7 +161,7 @@ type Message struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Message sender.
+	// Identifies who sent message. For message from the LLM model, the mandatory value is "assistant".
 	Role string `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
 	// Text of the message.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
@@ -219,11 +219,11 @@ type Token struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Internal token id.
+	// Internal token ID.
 	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Token text representation.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
-	// Defines if token is special or not. Special tokens define the behaviour of the model and are not visible for users.
+	// Type of token (special or not special). Special tokens define the behaviour of the model and are not visible for users.
 	Special bool `protobuf:"varint,3,opt,name=special,proto3" json:"special,omitempty"`
 }
 

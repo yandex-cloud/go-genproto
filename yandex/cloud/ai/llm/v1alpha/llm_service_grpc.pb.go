@@ -284,3 +284,91 @@ var TokenizerService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "yandex/cloud/ai/llm/v1alpha/llm_service.proto",
 }
+
+const (
+	EmbeddingsService_Embedding_FullMethodName = "/yandex.cloud.ai.llm.v1alpha.EmbeddingsService/Embedding"
+)
+
+// EmbeddingsServiceClient is the client API for EmbeddingsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type EmbeddingsServiceClient interface {
+	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
+}
+
+type embeddingsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEmbeddingsServiceClient(cc grpc.ClientConnInterface) EmbeddingsServiceClient {
+	return &embeddingsServiceClient{cc}
+}
+
+func (c *embeddingsServiceClient) Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error) {
+	out := new(EmbeddingResponse)
+	err := c.cc.Invoke(ctx, EmbeddingsService_Embedding_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EmbeddingsServiceServer is the server API for EmbeddingsService service.
+// All implementations should embed UnimplementedEmbeddingsServiceServer
+// for forward compatibility
+type EmbeddingsServiceServer interface {
+	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
+}
+
+// UnimplementedEmbeddingsServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedEmbeddingsServiceServer struct {
+}
+
+func (UnimplementedEmbeddingsServiceServer) Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Embedding not implemented")
+}
+
+// UnsafeEmbeddingsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EmbeddingsServiceServer will
+// result in compilation errors.
+type UnsafeEmbeddingsServiceServer interface {
+	mustEmbedUnimplementedEmbeddingsServiceServer()
+}
+
+func RegisterEmbeddingsServiceServer(s grpc.ServiceRegistrar, srv EmbeddingsServiceServer) {
+	s.RegisterService(&EmbeddingsService_ServiceDesc, srv)
+}
+
+func _EmbeddingsService_Embedding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmbeddingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmbeddingsServiceServer).Embedding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EmbeddingsService_Embedding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmbeddingsServiceServer).Embedding(ctx, req.(*EmbeddingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// EmbeddingsService_ServiceDesc is the grpc.ServiceDesc for EmbeddingsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var EmbeddingsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "yandex.cloud.ai.llm.v1alpha.EmbeddingsService",
+	HandlerType: (*EmbeddingsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Embedding",
+			Handler:    _EmbeddingsService_Embedding_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "yandex/cloud/ai/llm/v1alpha/llm_service.proto",
+}

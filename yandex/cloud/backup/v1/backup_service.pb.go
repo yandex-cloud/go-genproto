@@ -356,12 +356,12 @@ type ListBackupsRequest_InstancePolicy_ struct {
 }
 
 type ListBackupsRequest_ResourceId struct {
-	// List backups by specific resource_id (not resource_id).
+	// List backups by specific resource ID.
 	ResourceId string `protobuf:"bytes,6,opt,name=resource_id,json=resourceId,proto3,oneof"`
 }
 
 type ListBackupsRequest_PolicyId struct {
-	// List backups by specific policy_id.
+	// List backups by specific policy ID.
 	PolicyId string `protobuf:"bytes,7,opt,name=policy_id,json=policyId,proto3,oneof"`
 }
 
@@ -429,7 +429,9 @@ type ListFilesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Folder ID.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Backup ID.
 	BackupId string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// Empty source will list disks of the backup.
 	SourceId string `protobuf:"bytes,3,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
@@ -540,7 +542,9 @@ type GetBackupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Backup ID.
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	// Folder ID.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
@@ -756,6 +760,7 @@ type TargetPathCustom struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Custom folder for file recovery.
 	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 }
 
@@ -807,7 +812,7 @@ type FilesRecoveryOptions struct {
 	Overwrite FilesRecoveryOptions_Overwrite `protobuf:"varint,1,opt,name=overwrite,proto3,enum=yandex.cloud.backup.v1.FilesRecoveryOptions_Overwrite" json:"overwrite,omitempty"`
 	// specifies whether the recovery plan is able to reboot host if needed.
 	RebootIfNeeded bool `protobuf:"varint,2,opt,name=reboot_if_needed,json=rebootIfNeeded,proto3" json:"reboot_if_needed,omitempty"`
-	// Path strategory for selected files.
+	// Path strategy for selected files.
 	//
 	// Types that are assignable to Type:
 	//
@@ -906,11 +911,12 @@ type StartFilesRecoveryRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// compute_instance_id is a destination instance id.
-	ComputeInstanceId string                `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	BackupId          string                `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	Opts              *FilesRecoveryOptions `protobuf:"bytes,3,opt,name=opts,proto3" json:"opts,omitempty"`
-	SourceIds         []string              `protobuf:"bytes,4,rep,name=source_ids,json=sourceIds,proto3" json:"source_ids,omitempty"`
+	// Destination instance ID.
+	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	// Backup ID.
+	BackupId  string                `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	Opts      *FilesRecoveryOptions `protobuf:"bytes,3,opt,name=opts,proto3" json:"opts,omitempty"`
+	SourceIds []string              `protobuf:"bytes,4,rep,name=source_ids,json=sourceIds,proto3" json:"source_ids,omitempty"`
 }
 
 func (x *StartFilesRecoveryRequest) Reset() {
@@ -978,10 +984,12 @@ type StartFilesRecoveryMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProgressPercentage float64  `protobuf:"fixed64,1,opt,name=progress_percentage,json=progressPercentage,proto3" json:"progress_percentage,omitempty"`
-	ComputeInstanceId  string   `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	BackupId           string   `protobuf:"bytes,3,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	SourceIds          []string `protobuf:"bytes,4,rep,name=source_ids,json=sourceIds,proto3" json:"source_ids,omitempty"`
+	ProgressPercentage float64 `protobuf:"fixed64,1,opt,name=progress_percentage,json=progressPercentage,proto3" json:"progress_percentage,omitempty"`
+	// Destination instance ID.
+	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	// Backup ID.
+	BackupId  string   `protobuf:"bytes,3,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	SourceIds []string `protobuf:"bytes,4,rep,name=source_ids,json=sourceIds,proto3" json:"source_ids,omitempty"`
 }
 
 func (x *StartFilesRecoveryMetadata) Reset() {
@@ -1163,8 +1171,10 @@ type ListBackupsRequest_ArchiveParameters struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Archive ID.
 	ArchiveId string `protobuf:"bytes,1,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
-	FolderId  string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
 func (x *ListBackupsRequest_ArchiveParameters) Reset() {
@@ -1218,8 +1228,10 @@ type ListBackupsRequest_InstancePolicy struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	PolicyId          string `protobuf:"bytes,2,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,2,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 }
 
 func (x *ListBackupsRequest_InstancePolicy) Reset() {

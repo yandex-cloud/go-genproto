@@ -23,7 +23,9 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Encryption Algorithm for underlying backups.
+// Encryption Algorithm for underlying backups:
+// `ENCRYPTION_ALGORITHM_UNSPECIFIED`, `NONE`, `AES128`, `AES192`,
+// `AES256`.
 type Archive_EncryptionAlgorithm int32
 
 const (
@@ -79,6 +81,8 @@ func (Archive_EncryptionAlgorithm) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_backup_v1_backup_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Action with archive backup: `ACTION_UNSPECIFIED`, `REFRESH`,
+// `DELETE_BY_AGENT`.
 type Archive_Action int32
 
 const (
@@ -235,33 +239,50 @@ type Archive struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                  string                     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                string                     `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	VaultId             string                     `protobuf:"bytes,3,opt,name=vault_id,json=vaultId,proto3" json:"vault_id,omitempty"`
-	Attributes          *Archive_ArchiveAttributes `protobuf:"bytes,4,opt,name=attributes,proto3" json:"attributes,omitempty"`
-	Size                int64                      `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`
-	CompressedDataSize  int64                      `protobuf:"varint,6,opt,name=compressed_data_size,json=compressedDataSize,proto3" json:"compressed_data_size,omitempty"`
-	DataSize            int64                      `protobuf:"varint,7,opt,name=data_size,json=dataSize,proto3" json:"data_size,omitempty"`
-	OriginalDataSize    int64                      `protobuf:"varint,8,opt,name=original_data_size,json=originalDataSize,proto3" json:"original_data_size,omitempty"`
-	LogicalSize         int64                      `protobuf:"varint,9,opt,name=logical_size,json=logicalSize,proto3" json:"logical_size,omitempty"`
-	Format              Format                     `protobuf:"varint,10,opt,name=format,proto3,enum=yandex.cloud.backup.v1.Format" json:"format,omitempty"`
-	CreatedAt           *timestamppb.Timestamp     `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt           *timestamppb.Timestamp     `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	LastBackupCreatedAt *timestamppb.Timestamp     `protobuf:"bytes,13,opt,name=last_backup_created_at,json=lastBackupCreatedAt,proto3" json:"last_backup_created_at,omitempty"`
-	LastSeenAt          *timestamppb.Timestamp     `protobuf:"bytes,14,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"`
+	// ID of the backup.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Name of the backup.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// ID of the backup vault.
+	VaultId string `protobuf:"bytes,3,opt,name=vault_id,json=vaultId,proto3" json:"vault_id,omitempty"`
+	// Archive attributes.
+	Attributes *Archive_ArchiveAttributes `protobuf:"bytes,4,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	// Archive size.
+	Size int64 `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`
+	// Compressed data size.
+	CompressedDataSize int64 `protobuf:"varint,6,opt,name=compressed_data_size,json=compressedDataSize,proto3" json:"compressed_data_size,omitempty"`
+	// Data size.
+	DataSize int64 `protobuf:"varint,7,opt,name=data_size,json=dataSize,proto3" json:"data_size,omitempty"`
+	// Original data size.
+	OriginalDataSize int64 `protobuf:"varint,8,opt,name=original_data_size,json=originalDataSize,proto3" json:"original_data_size,omitempty"`
+	// Logical size.
+	LogicalSize         int64                  `protobuf:"varint,9,opt,name=logical_size,json=logicalSize,proto3" json:"logical_size,omitempty"`
+	Format              Format                 `protobuf:"varint,10,opt,name=format,proto3,enum=yandex.cloud.backup.v1.Format" json:"format,omitempty"`
+	CreatedAt           *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt           *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	LastBackupCreatedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=last_backup_created_at,json=lastBackupCreatedAt,proto3" json:"last_backup_created_at,omitempty"`
+	LastSeenAt          *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"`
 	// If this field is true, it means that any of encryption algorithm
 	// has been chosen.
 	ProtectedByPassword bool                        `protobuf:"varint,15,opt,name=protected_by_password,json=protectedByPassword,proto3" json:"protected_by_password,omitempty"`
 	EncryptionAlgorithm Archive_EncryptionAlgorithm `protobuf:"varint,16,opt,name=encryption_algorithm,json=encryptionAlgorithm,proto3,enum=yandex.cloud.backup.v1.Archive_EncryptionAlgorithm" json:"encryption_algorithm,omitempty"`
 	Actions             []Archive_Action            `protobuf:"varint,20,rep,packed,name=actions,proto3,enum=yandex.cloud.backup.v1.Archive_Action" json:"actions,omitempty"`
-	BackupPlanId        string                      `protobuf:"bytes,22,opt,name=backup_plan_id,json=backupPlanId,proto3" json:"backup_plan_id,omitempty"`
-	BackupPlanName      string                      `protobuf:"bytes,23,opt,name=backup_plan_name,json=backupPlanName,proto3" json:"backup_plan_name,omitempty"`
-	Description         string                      `protobuf:"bytes,24,opt,name=description,proto3" json:"description,omitempty"`
-	DisplayName         string                      `protobuf:"bytes,25,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	ComputeInstanceId   string                      `protobuf:"bytes,26,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	Consistent          bool                        `protobuf:"varint,27,opt,name=consistent,proto3" json:"consistent,omitempty"`
-	Deleted             bool                        `protobuf:"varint,30,opt,name=deleted,proto3" json:"deleted,omitempty"`
-	ResourceId          string                      `protobuf:"bytes,31,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Backup plan ID.
+	BackupPlanId string `protobuf:"bytes,22,opt,name=backup_plan_id,json=backupPlanId,proto3" json:"backup_plan_id,omitempty"`
+	// Backup plan name.
+	BackupPlanName string `protobuf:"bytes,23,opt,name=backup_plan_name,json=backupPlanName,proto3" json:"backup_plan_name,omitempty"`
+	// Backup plan description.
+	Description string `protobuf:"bytes,24,opt,name=description,proto3" json:"description,omitempty"`
+	// Display name, e.g. `INSTANCE_NAME - POLICY_NAME`.
+	DisplayName string `protobuf:"bytes,25,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// Compute Cloud instance ID.
+	ComputeInstanceId string `protobuf:"bytes,26,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	// If this field is true, it means that the archive is consistent.
+	Consistent bool `protobuf:"varint,27,opt,name=consistent,proto3" json:"consistent,omitempty"`
+	// If this field is true, it means that the archive was deleted.
+	Deleted bool `protobuf:"varint,30,opt,name=deleted,proto3" json:"deleted,omitempty"`
+	// Resource ID.
+	ResourceId string `protobuf:"bytes,31,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 }
 
 func (x *Archive) Reset() {
@@ -476,11 +497,17 @@ type Volume struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FreeSpace  int64  `protobuf:"varint,1,opt,name=free_space,json=freeSpace,proto3" json:"free_space,omitempty"`
-	IsBootable bool   `protobuf:"varint,2,opt,name=is_bootable,json=isBootable,proto3" json:"is_bootable,omitempty"`
-	IsSystem   bool   `protobuf:"varint,3,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
-	Name       string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Size       int64  `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`
+	// Free space in the volume.
+	FreeSpace int64 `protobuf:"varint,1,opt,name=free_space,json=freeSpace,proto3" json:"free_space,omitempty"`
+	// If this field is true, it means that the volume is bootable.
+	IsBootable bool `protobuf:"varint,2,opt,name=is_bootable,json=isBootable,proto3" json:"is_bootable,omitempty"`
+	// If this field is true, it means that the volume is a system volume.
+	IsSystem bool `protobuf:"varint,3,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
+	// Volume name.
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Volume size.
+	Size int64 `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`
+	// Mount string ID.
 	MountStrid string `protobuf:"bytes,6,opt,name=mount_strid,json=mountStrid,proto3" json:"mount_strid,omitempty"`
 }
 
@@ -563,10 +590,13 @@ type Disk struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DeviceModel string    `protobuf:"bytes,1,opt,name=device_model,json=deviceModel,proto3" json:"device_model,omitempty"`
-	Name        string    `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Size        int64     `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
-	Volumes     []*Volume `protobuf:"bytes,4,rep,name=volumes,proto3" json:"volumes,omitempty"`
+	// Device model.
+	DeviceModel string `protobuf:"bytes,1,opt,name=device_model,json=deviceModel,proto3" json:"device_model,omitempty"`
+	// Disk name.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Disk size.
+	Size    int64     `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	Volumes []*Volume `protobuf:"bytes,4,rep,name=volumes,proto3" json:"volumes,omitempty"`
 }
 
 func (x *Disk) Reset() {
@@ -634,22 +664,33 @@ type Backup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	VaultId           string                   `protobuf:"bytes,2,opt,name=vault_id,json=vaultId,proto3" json:"vault_id,omitempty"`
-	ArchiveId         string                   `protobuf:"bytes,3,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
-	CreatedAt         *timestamppb.Timestamp   `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	LastSeenAt        *timestamppb.Timestamp   `protobuf:"bytes,5,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"`
-	Size              int64                    `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
-	DeduplicatedSize  int64                    `protobuf:"varint,7,opt,name=deduplicated_size,json=deduplicatedSize,proto3" json:"deduplicated_size,omitempty"`
-	BackedUpDataSize  int64                    `protobuf:"varint,8,opt,name=backed_up_data_size,json=backedUpDataSize,proto3" json:"backed_up_data_size,omitempty"`
-	OriginalDataSize  int64                    `protobuf:"varint,9,opt,name=original_data_size,json=originalDataSize,proto3" json:"original_data_size,omitempty"`
-	Attributes        *Backup_BackupAttributes `protobuf:"bytes,10,opt,name=attributes,proto3" json:"attributes,omitempty"`
-	ComputeInstanceId string                   `protobuf:"bytes,11,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	Disks             []*Disk                  `protobuf:"bytes,14,rep,name=disks,proto3" json:"disks,omitempty"`
-	Type              Backup_Type              `protobuf:"varint,15,opt,name=type,proto3,enum=yandex.cloud.backup.v1.Backup_Type" json:"type,omitempty"`
-	Deleted           bool                     `protobuf:"varint,21,opt,name=deleted,proto3" json:"deleted,omitempty"`
-	PolicyId          string                   `protobuf:"bytes,22,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
-	ResourceId        string                   `protobuf:"bytes,23,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// ID of the backup.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the backup vault.
+	VaultId string `protobuf:"bytes,2,opt,name=vault_id,json=vaultId,proto3" json:"vault_id,omitempty"`
+	// ID of the backup archive.
+	ArchiveId  string                 `protobuf:"bytes,3,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
+	CreatedAt  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastSeenAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"`
+	// Backup size.
+	Size int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
+	// Deduplicated backup size.
+	DeduplicatedSize int64 `protobuf:"varint,7,opt,name=deduplicated_size,json=deduplicatedSize,proto3" json:"deduplicated_size,omitempty"`
+	// Backed up data size.
+	BackedUpDataSize int64 `protobuf:"varint,8,opt,name=backed_up_data_size,json=backedUpDataSize,proto3" json:"backed_up_data_size,omitempty"`
+	// Original data size.
+	OriginalDataSize int64                    `protobuf:"varint,9,opt,name=original_data_size,json=originalDataSize,proto3" json:"original_data_size,omitempty"`
+	Attributes       *Backup_BackupAttributes `protobuf:"bytes,10,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	// Compute Cloud instance ID.
+	ComputeInstanceId string      `protobuf:"bytes,11,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	Disks             []*Disk     `protobuf:"bytes,14,rep,name=disks,proto3" json:"disks,omitempty"`
+	Type              Backup_Type `protobuf:"varint,15,opt,name=type,proto3,enum=yandex.cloud.backup.v1.Backup_Type" json:"type,omitempty"`
+	// If this field is true, it means that the backup was deleted.
+	Deleted bool `protobuf:"varint,21,opt,name=deleted,proto3" json:"deleted,omitempty"`
+	// [Policy](/docs/backup/concepts/policy) ID.
+	PolicyId string `protobuf:"bytes,22,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Resource ID. It identifies Compute Cloud instance in backup service.
+	ResourceId string `protobuf:"bytes,23,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 }
 
 func (x *Backup) Reset() {
@@ -802,9 +843,9 @@ type BackupFile struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// id of the item. Should be used as source id in case of listing.
+	// ID of the item. Should be used as source ID in case of listing.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// might be empty if this is root directory.
+	// Might be empty if this is root directory.
 	ParentId *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	// Type of the item.
 	Type BackupFile_Type `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.backup.v1.BackupFile_Type" json:"type,omitempty"`
@@ -907,13 +948,16 @@ func (x *BackupFile) GetModifiedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+// Archive attributes.
 type Archive_ArchiveAttributes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Archive attribute. Default value: `0`.
 	Aaib string `protobuf:"bytes,1,opt,name=aaib,proto3" json:"aaib,omitempty"`
-	Uri  string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
+	// URI of the backup archive.
+	Uri string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 
 func (x *Archive_ArchiveAttributes) Reset() {
@@ -962,13 +1006,16 @@ func (x *Archive_ArchiveAttributes) GetUri() string {
 	return ""
 }
 
+// Backup attributes.
 type Backup_BackupAttributes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Backup stream name.
 	StreamName string `protobuf:"bytes,1,opt,name=stream_name,json=streamName,proto3" json:"stream_name,omitempty"`
-	Uri        string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
+	// URI of the backup archive.
+	Uri string `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 
 func (x *Backup_BackupAttributes) Reset() {

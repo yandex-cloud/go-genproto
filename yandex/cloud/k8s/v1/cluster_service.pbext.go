@@ -309,6 +309,14 @@ func (m *MasterSpec) SetEtcdClusterSize(v int64) {
 	m.EtcdClusterSize = v
 }
 
+func (m *MasterSpec) SetExternalV4AddressSpec(v *ExternalAddressSpec) {
+	m.ExternalV4AddressSpec = v
+}
+
+func (m *MasterSpec) SetExternalV6AddressSpec(v *ExternalAddressSpec) {
+	m.ExternalV6AddressSpec = v
+}
+
 func (m *MasterSpec) SetVersion(v string) {
 	m.Version = v
 }

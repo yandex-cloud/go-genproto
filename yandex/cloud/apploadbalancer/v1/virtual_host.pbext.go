@@ -42,6 +42,10 @@ func (m *RouteOptions) SetRbac(v *RBAC) {
 	m.Rbac = v
 }
 
+func (m *RouteOptions) SetSecurityProfileId(v string) {
+	m.SecurityProfileId = v
+}
+
 func (m *RBAC) SetAction(v RBAC_Action) {
 	m.Action = v
 }

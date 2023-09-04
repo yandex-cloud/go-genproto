@@ -29,8 +29,9 @@ type ListPoliciesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Either Folder ID or Compute Cloud instance ID should be set.
-	FolderId          string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Folder ID. Either Folder ID or Compute Cloud instance ID should be set.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Compute Cloud instance ID. Either Folder ID or Compute Cloud instance ID should be set.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -132,7 +133,9 @@ type CreatePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId string          `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Policy name.
 	Name     string          `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Settings *PolicySettings `protobuf:"bytes,3,opt,name=settings,proto3" json:"settings,omitempty"`
 }
@@ -195,6 +198,7 @@ type CreatePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Policy ID.
 	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 }
 
@@ -242,6 +246,7 @@ type GetPolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Policy ID.
 	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 }
 
@@ -289,6 +294,7 @@ type UpdatePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Policy ID.
 	PolicyId string          `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 	Settings *PolicySettings `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
 }
@@ -344,6 +350,7 @@ type UpdatePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Policy ID.
 	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 }
 
@@ -391,6 +398,7 @@ type DeletePolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Policy ID.
 	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 }
 
@@ -438,6 +446,7 @@ type DeletePolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Policy ID.
 	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
 }
 
@@ -485,7 +494,9 @@ type ApplyPolicyRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -540,7 +551,9 @@ type ApplyPolicyMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -668,14 +681,17 @@ type isListApplicationsRequest_Id interface {
 }
 
 type ListApplicationsRequest_FolderId struct {
+	// Folder ID.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
 type ListApplicationsRequest_PolicyId struct {
+	// Policy ID.
 	PolicyId string `protobuf:"bytes,2,opt,name=policy_id,json=policyId,proto3,oneof"`
 }
 
 type ListApplicationsRequest_ComputeInstanceId struct {
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,3,opt,name=compute_instance_id,json=computeInstanceId,proto3,oneof"`
 }
 
@@ -737,7 +753,9 @@ type ExecuteRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -792,7 +810,9 @@ type ExecuteMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -847,7 +867,9 @@ type RevokeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
@@ -902,7 +924,9 @@ type RevokeMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 

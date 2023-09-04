@@ -546,13 +546,18 @@ type Policy struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Policy ID.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Policy name.
 	Name      string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Enabled   bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Settings  *PolicySettings        `protobuf:"bytes,6,opt,name=settings,proto3" json:"settings,omitempty"`
-	FolderId  string                 `protobuf:"bytes,7,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// If this field is true, it means that the policy is enabled.
+	Enabled bool `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Set of policy settings
+	Settings *PolicySettings `protobuf:"bytes,6,opt,name=settings,proto3" json:"settings,omitempty"`
+	// ID of the folder that the policy belongs to.
+	FolderId string `protobuf:"bytes,7,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
 func (x *Policy) Reset() {
@@ -636,6 +641,7 @@ func (x *Policy) GetFolderId() string {
 	return ""
 }
 
+// Set of policy settings
 type PolicySettings struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -824,7 +830,9 @@ type PolicyApplication struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PolicyId          string                   `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Compute Cloud instance ID.
 	ComputeInstanceId string                   `protobuf:"bytes,2,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 	Enabled           bool                     `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Status            PolicyApplication_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.backup.v1.PolicyApplication_Status" json:"status,omitempty"`
@@ -1136,7 +1144,7 @@ type PolicySettings_ArchiveProperties struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The name of the generated archive. The name may use the following variables: `[Machine Name]`, `[Plan ID]`, `[Plan Name]`, `[Unique ID]`, `[Virtualization Server Type]`.
-	// Default value: `[Machine Name]-[Plan ID]-[Unique ID]`.
+	// Default value: `[Machine Name]-[Plan ID]-[Unique ID]A`.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 
@@ -1232,7 +1240,9 @@ type PolicySettings_TimeOfDay struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hour   int64 `protobuf:"varint,1,opt,name=hour,proto3" json:"hour,omitempty"`
+	// Hours.
+	Hour int64 `protobuf:"varint,1,opt,name=hour,proto3" json:"hour,omitempty"`
+	// Minutes.
 	Minute int64 `protobuf:"varint,2,opt,name=minute,proto3" json:"minute,omitempty"`
 }
 
@@ -1611,20 +1621,26 @@ type PolicySettings_Scheduling_BackupSet_Time struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Weekdays    []PolicySettings_Day        `protobuf:"varint,1,rep,packed,name=weekdays,proto3,enum=yandex.cloud.backup.v1.PolicySettings_Day" json:"weekdays,omitempty"`
-	RepeatAt    []*PolicySettings_TimeOfDay `protobuf:"bytes,2,rep,name=repeat_at,json=repeatAt,proto3" json:"repeat_at,omitempty"`
-	RepeatEvery *PolicySettings_Interval    `protobuf:"bytes,3,opt,name=repeat_every,json=repeatEvery,proto3" json:"repeat_every,omitempty"`
-	TimeFrom    *PolicySettings_TimeOfDay   `protobuf:"bytes,4,opt,name=time_from,json=timeFrom,proto3" json:"time_from,omitempty"`
-	TimeTo      *PolicySettings_TimeOfDay   `protobuf:"bytes,5,opt,name=time_to,json=timeTo,proto3" json:"time_to,omitempty"`
-	// Monthdays are days in month.
+	// Days in a week to perform a backup.
+	Weekdays []PolicySettings_Day `protobuf:"varint,1,rep,packed,name=weekdays,proto3,enum=yandex.cloud.backup.v1.PolicySettings_Day" json:"weekdays,omitempty"`
+	// Time to repeat the backup.
+	RepeatAt []*PolicySettings_TimeOfDay `protobuf:"bytes,2,rep,name=repeat_at,json=repeatAt,proto3" json:"repeat_at,omitempty"`
+	// Frequency of backup repetition.
+	RepeatEvery *PolicySettings_Interval `protobuf:"bytes,3,opt,name=repeat_every,json=repeatEvery,proto3" json:"repeat_every,omitempty"`
+	// The start time of the backup time interval.
+	TimeFrom *PolicySettings_TimeOfDay `protobuf:"bytes,4,opt,name=time_from,json=timeFrom,proto3" json:"time_from,omitempty"`
+	// The end time of the backup time interval.
+	TimeTo *PolicySettings_TimeOfDay `protobuf:"bytes,5,opt,name=time_to,json=timeTo,proto3" json:"time_to,omitempty"`
+	// Days in a month to perform a backup.
 	// Allowed values are from 1 to 31.
 	Monthdays []int64 `protobuf:"varint,6,rep,packed,name=monthdays,proto3" json:"monthdays,omitempty"`
 	// If set to true, last day of month will activate
 	// the policy.
 	IncludeLastDayOfMonth bool `protobuf:"varint,7,opt,name=include_last_day_of_month,json=includeLastDayOfMonth,proto3" json:"include_last_day_of_month,omitempty"`
 	// Set of values. Allowed values form 1 to 12.
-	Months []int64                      `protobuf:"varint,8,rep,packed,name=months,proto3" json:"months,omitempty"`
-	Type   PolicySettings_RepeatePeriod `protobuf:"varint,9,opt,name=type,proto3,enum=yandex.cloud.backup.v1.PolicySettings_RepeatePeriod" json:"type,omitempty"`
+	Months []int64 `protobuf:"varint,8,rep,packed,name=months,proto3" json:"months,omitempty"`
+	// Possible types: `REPEATE_PERIOD_UNSPECIFIED`, `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
+	Type PolicySettings_RepeatePeriod `protobuf:"varint,9,opt,name=type,proto3,enum=yandex.cloud.backup.v1.PolicySettings_RepeatePeriod" json:"type,omitempty"`
 }
 
 func (x *PolicySettings_Scheduling_BackupSet_Time) Reset() {
@@ -1727,6 +1743,7 @@ type PolicySettings_Scheduling_BackupSet_SinceLastExecTime struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The interval between backups.
 	Delay *PolicySettings_Interval `protobuf:"bytes,1,opt,name=delay,proto3" json:"delay,omitempty"`
 }
 

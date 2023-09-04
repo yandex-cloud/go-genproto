@@ -202,12 +202,15 @@ type Resource struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Compute Cloud instance ID.
 	ComputeInstanceId string                 `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Online            bool                   `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
-	Enabled           bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Status            Resource_Status        `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.backup.v1.Resource_Status" json:"status,omitempty"`
+	// If this field is true, it means that instance is online.
+	Online bool `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
+	// If this field is true, it means that backup is enabled to instance.
+	Enabled bool            `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Status  Resource_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.backup.v1.Resource_Status" json:"status,omitempty"`
 	// If status value is one of `OTHER` or `FAILED`,
 	// detailed info might be stored here.
 	StatusDetails string `protobuf:"bytes,7,opt,name=status_details,json=statusDetails,proto3" json:"status_details,omitempty"`
@@ -216,7 +219,7 @@ type Resource struct {
 	StatusProgress int64                  `protobuf:"varint,8,opt,name=status_progress,json=statusProgress,proto3" json:"status_progress,omitempty"`
 	LastBackupTime *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_backup_time,json=lastBackupTime,proto3" json:"last_backup_time,omitempty"`
 	NextBackupTime *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=next_backup_time,json=nextBackupTime,proto3" json:"next_backup_time,omitempty"`
-	// Resource Identifier is used to identify Compute Cloud instance in backup service.
+	// Resource ID is used to identify Compute Cloud instance in backup service.
 	ResourceId string `protobuf:"bytes,11,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// Status `is_active` shows whether current Compute Cloud instance controls Cloud Backup resource.
 	// If status `is_active` is false it means Compute Cloud instance is not able to manipulate
@@ -400,19 +403,25 @@ type Task struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Task ID.
 	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Shows whether the task is cancellable.
 	// Note: task cancellation is not supported yet.
-	Cancellable       bool                   `protobuf:"varint,2,opt,name=cancellable,proto3" json:"cancellable,omitempty"`
-	PolicyId          string                 `protobuf:"bytes,3,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
-	Type              Task_Type              `protobuf:"varint,4,opt,name=type,proto3,enum=yandex.cloud.backup.v1.Task_Type" json:"type,omitempty"`
-	Progress          *Progress              `protobuf:"bytes,5,opt,name=progress,proto3" json:"progress,omitempty"`
-	Status            Task_Status            `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.backup.v1.Task_Status" json:"status,omitempty"`
-	EnqueuedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=enqueued_at,json=enqueuedAt,proto3" json:"enqueued_at,omitempty"`
-	StartedAt         *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
-	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CompletedAt       *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=completed_at,json=completedAt,proto3" json:"completed_at,omitempty"`
-	ComputeInstanceId string                 `protobuf:"bytes,11,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	Cancellable bool `protobuf:"varint,2,opt,name=cancellable,proto3" json:"cancellable,omitempty"`
+	// Policy ID.
+	PolicyId string `protobuf:"bytes,3,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Type of the task.
+	Type Task_Type `protobuf:"varint,4,opt,name=type,proto3,enum=yandex.cloud.backup.v1.Task_Type" json:"type,omitempty"`
+	// Task progress.
+	Progress *Progress `protobuf:"bytes,5,opt,name=progress,proto3" json:"progress,omitempty"`
+	// Task status.
+	Status      Task_Status            `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.backup.v1.Task_Status" json:"status,omitempty"`
+	EnqueuedAt  *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=enqueued_at,json=enqueuedAt,proto3" json:"enqueued_at,omitempty"`
+	StartedAt   *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
+	UpdatedAt   *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CompletedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=completed_at,json=completedAt,proto3" json:"completed_at,omitempty"`
+	// Compute Cloud instance ID.
+	ComputeInstanceId string `protobuf:"bytes,11,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 }
 
 func (x *Task) Reset() {

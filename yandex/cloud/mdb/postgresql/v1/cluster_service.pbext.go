@@ -643,6 +643,10 @@ func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 	m.PerformanceDiagnostics = v
 }
 
+func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 type ConfigHostSpec_PostgresqlConfig = isConfigHostSpec_PostgresqlConfig
 
 func (m *ConfigHostSpec) SetPostgresqlConfig(v ConfigHostSpec_PostgresqlConfig) {
