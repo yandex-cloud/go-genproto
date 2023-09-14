@@ -27,6 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TextRecognitionServiceClient interface {
+	// To send the image for text recognition.
 	Recognize(ctx context.Context, in *RecognizeTextRequest, opts ...grpc.CallOption) (TextRecognitionService_RecognizeClient, error)
 }
 
@@ -74,6 +75,7 @@ func (x *textRecognitionServiceRecognizeClient) Recv() (*RecognizeTextResponse, 
 // All implementations should embed UnimplementedTextRecognitionServiceServer
 // for forward compatibility
 type TextRecognitionServiceServer interface {
+	// To send the image for text recognition.
 	Recognize(*RecognizeTextRequest, TextRecognitionService_RecognizeServer) error
 }
 
@@ -143,7 +145,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TextRecognitionAsyncServiceClient interface {
+	// To send the image for asynchronous text recognition.
 	Recognize(ctx context.Context, in *RecognizeTextRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// To get recognition results.
 	GetRecognition(ctx context.Context, in *GetRecognitionRequest, opts ...grpc.CallOption) (TextRecognitionAsyncService_GetRecognitionClient, error)
 }
 
@@ -200,7 +204,9 @@ func (x *textRecognitionAsyncServiceGetRecognitionClient) Recv() (*RecognizeText
 // All implementations should embed UnimplementedTextRecognitionAsyncServiceServer
 // for forward compatibility
 type TextRecognitionAsyncServiceServer interface {
+	// To send the image for asynchronous text recognition.
 	Recognize(context.Context, *RecognizeTextRequest) (*operation.Operation, error)
+	// To get recognition results.
 	GetRecognition(*GetRecognitionRequest, TextRecognitionAsyncService_GetRecognitionServer) error
 }
 

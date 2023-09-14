@@ -27,8 +27,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PerformanceDiagnosticsServiceClient interface {
-	// Handlers for raw data export
+	// Retrieves raw statistics on sessions. Corresponds to the [pg_stat_activity view](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW).
 	ListRawSessionStates(ctx context.Context, in *ListRawSessionStatesRequest, opts ...grpc.CallOption) (*ListRawSessionStatesResponse, error)
+	// Retrieves statistics on planning and execution of SQL statements (queries).
 	ListRawStatements(ctx context.Context, in *ListRawStatementsRequest, opts ...grpc.CallOption) (*ListRawStatementsResponse, error)
 }
 
@@ -62,8 +63,9 @@ func (c *performanceDiagnosticsServiceClient) ListRawStatements(ctx context.Cont
 // All implementations should embed UnimplementedPerformanceDiagnosticsServiceServer
 // for forward compatibility
 type PerformanceDiagnosticsServiceServer interface {
-	// Handlers for raw data export
+	// Retrieves raw statistics on sessions. Corresponds to the [pg_stat_activity view](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW).
 	ListRawSessionStates(context.Context, *ListRawSessionStatesRequest) (*ListRawSessionStatesResponse, error)
+	// Retrieves statistics on planning and execution of SQL statements (queries).
 	ListRawStatements(context.Context, *ListRawStatementsRequest) (*ListRawStatementsResponse, error)
 }
 

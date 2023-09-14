@@ -33,12 +33,22 @@ type RecognizeTextRequest struct {
 	//
 	//	*RecognizeTextRequest_Content
 	Source isRecognizeTextRequest_Source `protobuf_oneof:"source"`
-	// [MIME type](https://en.wikipedia.org/wiki/Media_type) of content (for example, “ application/pdf “).
+	// Specifications of the ([MIME type](https://en.wikipedia.org/wiki/Media_type)). Each specification contains the file to analyze and features to use for analysis. Restrictions:
+	// * Supported file formats: `JPEG`, `PNG`, `WEBP`, `PDF`.
+	// * Maximum file size: 20 MB.
+	// * Image size should not exceed 20M pixels (length x width).
+	// * The number of pages in a PDF file should not exceed 200 (each page counts as 1 request).
 	MimeType string `protobuf:"bytes,2,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
 	// List of the languages to recognize text.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “).
+	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, `ru`).
 	LanguageCodes []string `protobuf:"bytes,3,rep,name=language_codes,json=languageCodes,proto3" json:"language_codes,omitempty"`
-	// Model to use for text detection.
+	// Model to use for text detection. The maximum string length is 50 characters. Possible values:
+	// * `page` (default): this model is suitable for detecting multiple text entries in an image.
+	// * `passport`: passport, the main double-page spread.
+	// * `driver-license-front`: driver's license, the front side.
+	// * `driver-license-back`: driver's license, the reverse side.
+	// * `vehicle-registration-front`: front side of the vehicle registration certificate.
+	// * `vehicle-registration-back`: back side of the vehicle registration certificate.
 	Model string `protobuf:"bytes,4,opt,name=model,proto3" json:"model,omitempty"`
 }
 
@@ -114,7 +124,7 @@ type isRecognizeTextRequest_Source interface {
 }
 
 type RecognizeTextRequest_Content struct {
-	// bytes with data
+	// Bytes with data
 	Content []byte `protobuf:"bytes,1,opt,name=content,proto3,oneof"`
 }
 

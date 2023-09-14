@@ -280,3 +280,7 @@ func (m *CloudStorage) SetDataCacheEnabled(v *wrapperspb.BoolValue) {
 func (m *CloudStorage) SetDataCacheMaxSize(v *wrapperspb.Int64Value) {
 	m.DataCacheMaxSize = v
 }
+
+func (m *CloudStorage) SetPreferNotToMerge(v *wrapperspb.BoolValue) {
+	m.PreferNotToMerge = v
+}

@@ -489,7 +489,7 @@ type CreateImageRequest_SnapshotId struct {
 type CreateImageRequest_Uri struct {
 	// URI of the source image to create the new image from.
 	// Currently only supports links to images that are stored in Object Storage.
-	// Currently only supports Qcow2, VMDK, and VHD formats.
+	// Currently only supports Qcow2, VMDK, and RAW formats.
 	Uri string `protobuf:"bytes,11,opt,name=uri,proto3,oneof"`
 }
 

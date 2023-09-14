@@ -8,6 +8,7 @@ package llm
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,7 +28,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TextGenerationServiceClient interface {
+	// RPC method for instructing the model to generate text.
 	Instruct(ctx context.Context, in *InstructRequest, opts ...grpc.CallOption) (TextGenerationService_InstructClient, error)
+	// RPC method for engaging in a chat conversation with the model.
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (TextGenerationService_ChatClient, error)
 }
 
@@ -107,7 +110,9 @@ func (x *textGenerationServiceChatClient) Recv() (*ChatResponse, error) {
 // All implementations should embed UnimplementedTextGenerationServiceServer
 // for forward compatibility
 type TextGenerationServiceServer interface {
+	// RPC method for instructing the model to generate text.
 	Instruct(*InstructRequest, TextGenerationService_InstructServer) error
+	// RPC method for engaging in a chat conversation with the model.
 	Chat(*ChatRequest, TextGenerationService_ChatServer) error
 }
 
@@ -205,6 +210,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TokenizerServiceClient interface {
+	// RPC method for tokenizing input text.
 	Tokenize(ctx context.Context, in *TokenizeRequest, opts ...grpc.CallOption) (*TokenizeResponse, error)
 }
 
@@ -229,6 +235,7 @@ func (c *tokenizerServiceClient) Tokenize(ctx context.Context, in *TokenizeReque
 // All implementations should embed UnimplementedTokenizerServiceServer
 // for forward compatibility
 type TokenizerServiceServer interface {
+	// RPC method for tokenizing input text.
 	Tokenize(context.Context, *TokenizeRequest) (*TokenizeResponse, error)
 }
 
@@ -293,6 +300,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmbeddingsServiceClient interface {
+	// RPC method to obtain embeddings for input text data.
 	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
 }
 
@@ -317,6 +325,7 @@ func (c *embeddingsServiceClient) Embedding(ctx context.Context, in *EmbeddingRe
 // All implementations should embed UnimplementedEmbeddingsServiceServer
 // for forward compatibility
 type EmbeddingsServiceServer interface {
+	// RPC method to obtain embeddings for input text data.
 	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
 }
 
@@ -367,6 +376,96 @@ var EmbeddingsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Embedding",
 			Handler:    _EmbeddingsService_Embedding_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "yandex/cloud/ai/llm/v1alpha/llm_service.proto",
+}
+
+const (
+	TextGenerationAsyncService_Instruct_FullMethodName = "/yandex.cloud.ai.llm.v1alpha.TextGenerationAsyncService/Instruct"
+)
+
+// TextGenerationAsyncServiceClient is the client API for TextGenerationAsyncService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TextGenerationAsyncServiceClient interface {
+	// RPC method for instructing the model to generate text.
+	Instruct(ctx context.Context, in *InstructRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+}
+
+type textGenerationAsyncServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTextGenerationAsyncServiceClient(cc grpc.ClientConnInterface) TextGenerationAsyncServiceClient {
+	return &textGenerationAsyncServiceClient{cc}
+}
+
+func (c *textGenerationAsyncServiceClient) Instruct(ctx context.Context, in *InstructRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, TextGenerationAsyncService_Instruct_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TextGenerationAsyncServiceServer is the server API for TextGenerationAsyncService service.
+// All implementations should embed UnimplementedTextGenerationAsyncServiceServer
+// for forward compatibility
+type TextGenerationAsyncServiceServer interface {
+	// RPC method for instructing the model to generate text.
+	Instruct(context.Context, *InstructRequest) (*operation.Operation, error)
+}
+
+// UnimplementedTextGenerationAsyncServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedTextGenerationAsyncServiceServer struct {
+}
+
+func (UnimplementedTextGenerationAsyncServiceServer) Instruct(context.Context, *InstructRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Instruct not implemented")
+}
+
+// UnsafeTextGenerationAsyncServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TextGenerationAsyncServiceServer will
+// result in compilation errors.
+type UnsafeTextGenerationAsyncServiceServer interface {
+	mustEmbedUnimplementedTextGenerationAsyncServiceServer()
+}
+
+func RegisterTextGenerationAsyncServiceServer(s grpc.ServiceRegistrar, srv TextGenerationAsyncServiceServer) {
+	s.RegisterService(&TextGenerationAsyncService_ServiceDesc, srv)
+}
+
+func _TextGenerationAsyncService_Instruct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InstructRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TextGenerationAsyncServiceServer).Instruct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TextGenerationAsyncService_Instruct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TextGenerationAsyncServiceServer).Instruct(ctx, req.(*InstructRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TextGenerationAsyncService_ServiceDesc is the grpc.ServiceDesc for TextGenerationAsyncService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TextGenerationAsyncService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "yandex.cloud.ai.llm.v1alpha.TextGenerationAsyncService",
+	HandlerType: (*TextGenerationAsyncServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Instruct",
+			Handler:    _TextGenerationAsyncService_Instruct_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

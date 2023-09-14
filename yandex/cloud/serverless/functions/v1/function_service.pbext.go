@@ -259,6 +259,10 @@ func (m *CreateFunctionVersionRequest) SetStorageMounts(v []*StorageMount) {
 	m.StorageMounts = v
 }
 
+func (m *CreateFunctionVersionRequest) SetAsyncInvocationConfig(v *AsyncInvocationConfig) {
+	m.AsyncInvocationConfig = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }

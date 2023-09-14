@@ -177,6 +177,18 @@ func (m *ClusterConfig) SetPostgresqlConfig_15_1C(v *config.PostgresqlConfigSet1
 	}
 }
 
+func (m *ClusterConfig) SetPostgresqlConfig_16(v *config.PostgresqlConfigSet16) {
+	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_16{
+		PostgresqlConfig_16: v,
+	}
+}
+
+func (m *ClusterConfig) SetPostgresqlConfig_16_1C(v *config.PostgresqlConfigSet16_1C) {
+	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_16_1C{
+		PostgresqlConfig_16_1C: v,
+	}
+}
+
 func (m *ClusterConfig) SetPoolerConfig(v *ConnectionPoolerConfig) {
 	m.PoolerConfig = v
 }
@@ -353,6 +365,18 @@ func (m *HostConfig) SetPostgresqlConfig_15_1C(v *config.PostgresqlHostConfig15_
 	}
 }
 
+func (m *HostConfig) SetPostgresqlConfig_16(v *config.PostgresqlHostConfig16) {
+	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_16{
+		PostgresqlConfig_16: v,
+	}
+}
+
+func (m *HostConfig) SetPostgresqlConfig_16_1C(v *config.PostgresqlHostConfig16_1C) {
+	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_16_1C{
+		PostgresqlConfig_16_1C: v,
+	}
+}
+
 func (m *Service) SetType(v Service_Type) {
 	m.Type = v
 }
@@ -387,6 +411,10 @@ func (m *Access) SetServerless(v bool) {
 
 func (m *Access) SetDataTransfer(v bool) {
 	m.DataTransfer = v
+}
+
+func (m *Access) SetYandexQuery(v bool) {
+	m.YandexQuery = v
 }
 
 func (m *PerformanceDiagnostics) SetEnabled(v bool) {

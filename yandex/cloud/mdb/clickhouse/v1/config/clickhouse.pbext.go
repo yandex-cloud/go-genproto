@@ -190,6 +190,86 @@ func (m *ClickhouseConfig) SetTotalMemoryTrackerSampleProbability(v *wrapperspb.
 	m.TotalMemoryTrackerSampleProbability = v
 }
 
+func (m *ClickhouseConfig) SetBackgroundCommonPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundCommonPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMergesMutationsConcurrencyRatio(v *wrapperspb.Int64Value) {
+	m.BackgroundMergesMutationsConcurrencyRatio = v
+}
+
+func (m *ClickhouseConfig) SetQueryViewsLogEnabled(v *wrapperspb.BoolValue) {
+	m.QueryViewsLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetQueryViewsLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.QueryViewsLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetQueryViewsLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.QueryViewsLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetAsynchronousMetricLogEnabled(v *wrapperspb.BoolValue) {
+	m.AsynchronousMetricLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetAsynchronousMetricLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.AsynchronousMetricLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetAsynchronousMetricLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.AsynchronousMetricLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetOpentelemetrySpanLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.OpentelemetrySpanLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetOpentelemetrySpanLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.OpentelemetrySpanLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetSessionLogEnabled(v *wrapperspb.BoolValue) {
+	m.SessionLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetSessionLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.SessionLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetSessionLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.SessionLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetZookeeperLogEnabled(v *wrapperspb.BoolValue) {
+	m.ZookeeperLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetZookeeperLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.ZookeeperLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetZookeeperLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.ZookeeperLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetAsynchronousInsertLogEnabled(v *wrapperspb.BoolValue) {
+	m.AsynchronousInsertLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetAsynchronousInsertLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.AsynchronousInsertLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetAsynchronousInsertLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.AsynchronousInsertLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetGeobaseEnabled(v *wrapperspb.BoolValue) {
+	m.GeobaseEnabled = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
 	m.ReplicatedDeduplicationWindow = v
 }
@@ -270,6 +350,22 @@ func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToExecuteMutati
 	m.NumberOfFreeEntriesInPoolToExecuteMutation = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetMaxAvgPartSizeForTooManyParts(v *wrapperspb.Int64Value) {
+	m.MaxAvgPartSizeForTooManyParts = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinAgeToForceMergeSeconds(v *wrapperspb.Int64Value) {
+	m.MinAgeToForceMergeSeconds = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinAgeToForceMergeOnPartitionOnly(v *wrapperspb.BoolValue) {
+	m.MinAgeToForceMergeOnPartitionOnly = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMergeSelectingSleepMs(v *wrapperspb.Int64Value) {
+	m.MergeSelectingSleepMs = v
+}
+
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
 	m.SecurityProtocol = v
 }
@@ -284,6 +380,18 @@ func (m *ClickhouseConfig_Kafka) SetSaslUsername(v string) {
 
 func (m *ClickhouseConfig_Kafka) SetSaslPassword(v string) {
 	m.SaslPassword = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetEnableSslCertificateVerification(v *wrapperspb.BoolValue) {
+	m.EnableSslCertificateVerification = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetMaxPollIntervalMs(v *wrapperspb.Int64Value) {
+	m.MaxPollIntervalMs = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetSessionTimeoutMs(v *wrapperspb.Int64Value) {
+	m.SessionTimeoutMs = v
 }
 
 func (m *ClickhouseConfig_KafkaTopic) SetName(v string) {
@@ -316,6 +424,10 @@ func (m *ClickhouseConfig_Compression) SetMinPartSize(v int64) {
 
 func (m *ClickhouseConfig_Compression) SetMinPartSizeRatio(v float64) {
 	m.MinPartSizeRatio = v
+}
+
+func (m *ClickhouseConfig_Compression) SetLevel(v *wrapperspb.Int64Value) {
+	m.Level = v
 }
 
 type ClickhouseConfig_ExternalDictionary_Lifetime = isClickhouseConfig_ExternalDictionary_Lifetime
@@ -494,6 +606,10 @@ func (m *ClickhouseConfig_ExternalDictionary_MongodbSource) SetUser(v string) {
 
 func (m *ClickhouseConfig_ExternalDictionary_MongodbSource) SetPassword(v string) {
 	m.Password = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_MongodbSource) SetOptions(v string) {
+	m.Options = v
 }
 
 func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSource) SetDb(v string) {

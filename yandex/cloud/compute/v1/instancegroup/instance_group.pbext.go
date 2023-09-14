@@ -293,6 +293,10 @@ func (m *AllocationPolicy_Zone) SetZoneId(v string) {
 	m.ZoneId = v
 }
 
+func (m *AllocationPolicy_Zone) SetInstanceTagsPool(v []string) {
+	m.InstanceTagsPool = v
+}
+
 func (m *InstanceTemplate) SetDescription(v string) {
 	m.Description = v
 }
@@ -531,6 +535,10 @@ func (m *LoadBalancerSpec) SetMaxOpeningTrafficDuration(v *durationpb.Duration) 
 	m.MaxOpeningTrafficDuration = v
 }
 
+func (m *LoadBalancerSpec) SetIgnoreHealthChecks(v bool) {
+	m.IgnoreHealthChecks = v
+}
+
 func (m *TargetGroupSpec) SetName(v string) {
 	m.Name = v
 }
@@ -549,6 +557,10 @@ func (m *ApplicationLoadBalancerSpec) SetTargetGroupSpec(v *ApplicationTargetGro
 
 func (m *ApplicationLoadBalancerSpec) SetMaxOpeningTrafficDuration(v *durationpb.Duration) {
 	m.MaxOpeningTrafficDuration = v
+}
+
+func (m *ApplicationLoadBalancerSpec) SetIgnoreHealthChecks(v bool) {
+	m.IgnoreHealthChecks = v
 }
 
 func (m *ApplicationTargetGroupSpec) SetName(v string) {
@@ -651,6 +663,10 @@ func (m *ManagedInstance) SetNetworkInterfaces(v []*NetworkInterface) {
 
 func (m *ManagedInstance) SetStatusChangedAt(v *timestamppb.Timestamp) {
 	m.StatusChangedAt = v
+}
+
+func (m *ManagedInstance) SetInstanceTag(v string) {
+	m.InstanceTag = v
 }
 
 func (m *NetworkInterface) SetIndex(v string) {

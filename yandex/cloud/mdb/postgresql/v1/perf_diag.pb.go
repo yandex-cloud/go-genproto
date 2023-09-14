@@ -26,29 +26,66 @@ type SessionState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Collect timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-	Time            *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
-	Host            string                 `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
-	Pid             int64                  `protobuf:"varint,3,opt,name=pid,proto3" json:"pid,omitempty"`
-	Database        string                 `protobuf:"bytes,4,opt,name=database,proto3" json:"database,omitempty"`
-	User            string                 `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
-	ApplicationName string                 `protobuf:"bytes,6,opt,name=application_name,json=applicationName,proto3" json:"application_name,omitempty"`
-	BackendStart    *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=backend_start,json=backendStart,proto3" json:"backend_start,omitempty"`
-	XactStart       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=xact_start,json=xactStart,proto3" json:"xact_start,omitempty"`
-	QueryStart      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=query_start,json=queryStart,proto3" json:"query_start,omitempty"`
-	StateChange     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=state_change,json=stateChange,proto3" json:"state_change,omitempty"`
-	WaitEventType   string                 `protobuf:"bytes,11,opt,name=wait_event_type,json=waitEventType,proto3" json:"wait_event_type,omitempty"`
-	WaitEvent       string                 `protobuf:"bytes,12,opt,name=wait_event,json=waitEvent,proto3" json:"wait_event,omitempty"`
-	State           string                 `protobuf:"bytes,13,opt,name=state,proto3" json:"state,omitempty"`
-	Query           string                 `protobuf:"bytes,14,opt,name=query,proto3" json:"query,omitempty"`
-	BackendType     string                 `protobuf:"bytes,15,opt,name=backend_type,json=backendType,proto3" json:"backend_type,omitempty"`
-	ClientAddr      string                 `protobuf:"bytes,16,opt,name=client_addr,json=clientAddr,proto3" json:"client_addr,omitempty"`
-	ClientHostname  string                 `protobuf:"bytes,17,opt,name=client_hostname,json=clientHostname,proto3" json:"client_hostname,omitempty"`
-	ClientPort      int64                  `protobuf:"varint,18,opt,name=client_port,json=clientPort,proto3" json:"client_port,omitempty"`
-	BackendXid      int64                  `protobuf:"varint,19,opt,name=backend_xid,json=backendXid,proto3" json:"backend_xid,omitempty"`
-	BackendXmin     int64                  `protobuf:"varint,20,opt,name=backend_xmin,json=backendXmin,proto3" json:"backend_xmin,omitempty"`
-	BlockingPids    string                 `protobuf:"bytes,22,opt,name=blocking_pids,json=blockingPids,proto3" json:"blocking_pids,omitempty"`
-	QueryId         string                 `protobuf:"bytes,23,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
+	// Time of collecting statistics on sessions (in the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format).
+	Time *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
+	// Host of the connected client.
+	Host string `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
+	// Server process ID. For client connections, this is a client connection ID.
+	Pid int64 `protobuf:"varint,3,opt,name=pid,proto3" json:"pid,omitempty"`
+	// Database ID.
+	Database string `protobuf:"bytes,4,opt,name=database,proto3" json:"database,omitempty"`
+	// User ID.
+	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
+	// Application name on the connected client.
+	ApplicationName string `protobuf:"bytes,6,opt,name=application_name,json=applicationName,proto3" json:"application_name,omitempty"`
+	// Time when a given process was started. For client connections, this is the time when the client connected to the server.
+	BackendStart *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=backend_start,json=backendStart,proto3" json:"backend_start,omitempty"`
+	// Time when a transaction of a given process was started. Returns [NULL] if no transaction is active.
+	//
+	// If the currently active query is the first of its transaction, the value of this parameter is equal to the value of the [query_start] parameter.
+	XactStart *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=xact_start,json=xactStart,proto3" json:"xact_start,omitempty"`
+	// Time when the currently active query was started.
+	//
+	// If the [state] parameter does not take the value [active], the parameter returns the time when the lastest query was started.
+	QueryStart *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=query_start,json=queryStart,proto3" json:"query_start,omitempty"`
+	// Time when the [state] parameter was last changed.
+	StateChange *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=state_change,json=stateChange,proto3" json:"state_change,omitempty"`
+	// Type of event for which the backend is waiting. Such an event is called a wait event. A backend refers to the process that maintains the client connection.
+	//
+	// For the list of wait events, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/monitoring-stats.html#WAIT-EVENT-TABLE). If the backend is not waiting for any event, the parameter returns [NULL].
+	WaitEventType string `protobuf:"bytes,11,opt,name=wait_event_type,json=waitEventType,proto3" json:"wait_event_type,omitempty"`
+	// Wait event name.
+	//
+	// For the list of such names, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/monitoring-stats.html#WAIT-EVENT-ACTIVITY-TABLE). If the backend is not waiting for any event, the parameter returns [NULL].
+	WaitEvent string `protobuf:"bytes,12,opt,name=wait_event,json=waitEvent,proto3" json:"wait_event,omitempty"`
+	// Current backend state. For the list of possible values, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW).
+	State string `protobuf:"bytes,13,opt,name=state,proto3" json:"state,omitempty"`
+	// Text of the most recent query.
+	//
+	// If the [state] parameter takes the value [active], the parameter shows the currently executing query. For the rest of the states, the parameter shows the last query that was executed. By default, the query text is truncated to 1024 bytes.
+	Query string `protobuf:"bytes,14,opt,name=query,proto3" json:"query,omitempty"`
+	// Current backend type. For the list of possible values, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW).
+	BackendType string `protobuf:"bytes,15,opt,name=backend_type,json=backendType,proto3" json:"backend_type,omitempty"`
+	// IP address of the connected client.
+	//
+	// The parameter returns [NULL] in the following cases:
+	// - The client is connected via a Unix socket on the server.
+	// - A given process is internal (for example, autovacuum).
+	ClientAddr string `protobuf:"bytes,16,opt,name=client_addr,json=clientAddr,proto3" json:"client_addr,omitempty"`
+	// Host name of the connected client (relevant for IP connections).
+	ClientHostname string `protobuf:"bytes,17,opt,name=client_hostname,json=clientHostname,proto3" json:"client_hostname,omitempty"`
+	// TCP port number that the client is using for communication with the server.
+	//
+	// Returns [-1] if the client is connected via a Unix socket on the server. Returns [NULL] if a given process is internal (for example, autovacuum).
+	ClientPort int64 `protobuf:"varint,18,opt,name=client_port,json=clientPort,proto3" json:"client_port,omitempty"`
+	// Top-level transaction ID, if any.
+	BackendXid int64 `protobuf:"varint,19,opt,name=backend_xid,json=backendXid,proto3" json:"backend_xid,omitempty"`
+	// Current [xmin horizon].
+	BackendXmin int64 `protobuf:"varint,20,opt,name=backend_xmin,json=backendXmin,proto3" json:"backend_xmin,omitempty"`
+	// Process IDs that are blocking a given server process ID.
+	BlockingPids string `protobuf:"bytes,22,opt,name=blocking_pids,json=blockingPids,proto3" json:"blocking_pids,omitempty"`
+	// Query ID.
+	QueryId string `protobuf:"bytes,23,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
 }
 
 func (x *SessionState) Reset() {
@@ -242,12 +279,18 @@ type PrimaryKey struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Host     string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	User     string `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	// Host of the connected client.
+	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	// User ID.
+	User string `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	// Database ID.
 	Database string `protobuf:"bytes,4,opt,name=database,proto3" json:"database,omitempty"`
-	Toplevel bool   `protobuf:"varint,5,opt,name=toplevel,proto3" json:"toplevel,omitempty"`
-	QueryId  string `protobuf:"bytes,6,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	PlanId   string `protobuf:"bytes,7,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
+	// Returns [true] if a query is executed as a top-level SQL statement or if the [pg_stat_statements.track](https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.41.9) parameter is set to the value [top].
+	Toplevel bool `protobuf:"varint,5,opt,name=toplevel,proto3" json:"toplevel,omitempty"`
+	// Query ID.
+	QueryId string `protobuf:"bytes,6,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
+	// Query planning ID.
+	PlanId string `protobuf:"bytes,7,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
 }
 
 func (x *PrimaryKey) Reset() {
@@ -329,56 +372,126 @@ type QueryStats struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Time                 *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
-	Query                string                 `protobuf:"bytes,2,opt,name=query,proto3" json:"query,omitempty"`
-	NormalizedPlan       string                 `protobuf:"bytes,3,opt,name=normalized_plan,json=normalizedPlan,proto3" json:"normalized_plan,omitempty"`
-	ExamplePlan          string                 `protobuf:"bytes,4,opt,name=example_plan,json=examplePlan,proto3" json:"example_plan,omitempty"`
-	Plans                int64                  `protobuf:"varint,5,opt,name=plans,proto3" json:"plans,omitempty"`
-	TotalPlanTime        float64                `protobuf:"fixed64,6,opt,name=total_plan_time,json=totalPlanTime,proto3" json:"total_plan_time,omitempty"`
-	MinPlanTime          float64                `protobuf:"fixed64,7,opt,name=min_plan_time,json=minPlanTime,proto3" json:"min_plan_time,omitempty"`
-	MaxPlanTime          float64                `protobuf:"fixed64,8,opt,name=max_plan_time,json=maxPlanTime,proto3" json:"max_plan_time,omitempty"`
-	MeanPlanTime         float64                `protobuf:"fixed64,9,opt,name=mean_plan_time,json=meanPlanTime,proto3" json:"mean_plan_time,omitempty"`
-	StddevPlanTime       float64                `protobuf:"fixed64,10,opt,name=stddev_plan_time,json=stddevPlanTime,proto3" json:"stddev_plan_time,omitempty"`
-	Calls                int64                  `protobuf:"varint,11,opt,name=calls,proto3" json:"calls,omitempty"`
-	TotalTime            float64                `protobuf:"fixed64,12,opt,name=total_time,json=totalTime,proto3" json:"total_time,omitempty"`    // total_exec_time
-	MinTime              float64                `protobuf:"fixed64,13,opt,name=min_time,json=minTime,proto3" json:"min_time,omitempty"`          // min_exec_time
-	MaxTime              float64                `protobuf:"fixed64,14,opt,name=max_time,json=maxTime,proto3" json:"max_time,omitempty"`          // max_exec_time
-	MeanTime             float64                `protobuf:"fixed64,15,opt,name=mean_time,json=meanTime,proto3" json:"mean_time,omitempty"`       // mean_exec_time
-	StddevTime           float64                `protobuf:"fixed64,16,opt,name=stddev_time,json=stddevTime,proto3" json:"stddev_time,omitempty"` // stddev_exec_time
-	Rows                 int64                  `protobuf:"varint,17,opt,name=rows,proto3" json:"rows,omitempty"`
-	SharedBlksHit        int64                  `protobuf:"varint,18,opt,name=shared_blks_hit,json=sharedBlksHit,proto3" json:"shared_blks_hit,omitempty"`
-	SharedBlksRead       int64                  `protobuf:"varint,19,opt,name=shared_blks_read,json=sharedBlksRead,proto3" json:"shared_blks_read,omitempty"`
-	SharedBlksDirtied    int64                  `protobuf:"varint,20,opt,name=shared_blks_dirtied,json=sharedBlksDirtied,proto3" json:"shared_blks_dirtied,omitempty"`
-	SharedBlksWritten    int64                  `protobuf:"varint,21,opt,name=shared_blks_written,json=sharedBlksWritten,proto3" json:"shared_blks_written,omitempty"`
-	LocalBlksHit         int64                  `protobuf:"varint,22,opt,name=local_blks_hit,json=localBlksHit,proto3" json:"local_blks_hit,omitempty"`
-	LocalBlksRead        int64                  `protobuf:"varint,23,opt,name=local_blks_read,json=localBlksRead,proto3" json:"local_blks_read,omitempty"`
-	LocalBlksDirtied     int64                  `protobuf:"varint,24,opt,name=local_blks_dirtied,json=localBlksDirtied,proto3" json:"local_blks_dirtied,omitempty"`
-	LocalBlksWritten     int64                  `protobuf:"varint,25,opt,name=local_blks_written,json=localBlksWritten,proto3" json:"local_blks_written,omitempty"`
-	TempBlksRead         int64                  `protobuf:"varint,26,opt,name=temp_blks_read,json=tempBlksRead,proto3" json:"temp_blks_read,omitempty"`
-	TempBlksWritten      int64                  `protobuf:"varint,27,opt,name=temp_blks_written,json=tempBlksWritten,proto3" json:"temp_blks_written,omitempty"`
-	BlkReadTime          float64                `protobuf:"fixed64,28,opt,name=blk_read_time,json=blkReadTime,proto3" json:"blk_read_time,omitempty"`
-	BlkWriteTime         float64                `protobuf:"fixed64,29,opt,name=blk_write_time,json=blkWriteTime,proto3" json:"blk_write_time,omitempty"`
-	TempBlkReadTime      float64                `protobuf:"fixed64,30,opt,name=temp_blk_read_time,json=tempBlkReadTime,proto3" json:"temp_blk_read_time,omitempty"`
-	TempBlkWriteTime     float64                `protobuf:"fixed64,31,opt,name=temp_blk_write_time,json=tempBlkWriteTime,proto3" json:"temp_blk_write_time,omitempty"`
-	WalRecords           int64                  `protobuf:"varint,32,opt,name=wal_records,json=walRecords,proto3" json:"wal_records,omitempty"`
-	WalFpi               int64                  `protobuf:"varint,33,opt,name=wal_fpi,json=walFpi,proto3" json:"wal_fpi,omitempty"`
-	WalBytes             int64                  `protobuf:"varint,34,opt,name=wal_bytes,json=walBytes,proto3" json:"wal_bytes,omitempty"`
-	JitFunctions         int64                  `protobuf:"varint,35,opt,name=jit_functions,json=jitFunctions,proto3" json:"jit_functions,omitempty"`
-	JitGenerationTime    float64                `protobuf:"fixed64,36,opt,name=jit_generation_time,json=jitGenerationTime,proto3" json:"jit_generation_time,omitempty"`
-	JitInliningCount     int64                  `protobuf:"varint,37,opt,name=jit_inlining_count,json=jitInliningCount,proto3" json:"jit_inlining_count,omitempty"`
-	JitInliningTime      float64                `protobuf:"fixed64,38,opt,name=jit_inlining_time,json=jitInliningTime,proto3" json:"jit_inlining_time,omitempty"`
-	JitOptimizationCount int64                  `protobuf:"varint,39,opt,name=jit_optimization_count,json=jitOptimizationCount,proto3" json:"jit_optimization_count,omitempty"`
-	JitOptimizationTime  float64                `protobuf:"fixed64,40,opt,name=jit_optimization_time,json=jitOptimizationTime,proto3" json:"jit_optimization_time,omitempty"`
-	JitEmissionCount     int64                  `protobuf:"varint,41,opt,name=jit_emission_count,json=jitEmissionCount,proto3" json:"jit_emission_count,omitempty"`
-	JitEmissionTime      float64                `protobuf:"fixed64,42,opt,name=jit_emission_time,json=jitEmissionTime,proto3" json:"jit_emission_time,omitempty"`
-	StartupCost          int64                  `protobuf:"varint,43,opt,name=startup_cost,json=startupCost,proto3" json:"startup_cost,omitempty"`
-	TotalCost            int64                  `protobuf:"varint,44,opt,name=total_cost,json=totalCost,proto3" json:"total_cost,omitempty"`
-	PlanRows             int64                  `protobuf:"varint,45,opt,name=plan_rows,json=planRows,proto3" json:"plan_rows,omitempty"`
-	PlanWidth            int64                  `protobuf:"varint,46,opt,name=plan_width,json=planWidth,proto3" json:"plan_width,omitempty"`
-	Reads                int64                  `protobuf:"varint,47,opt,name=reads,proto3" json:"reads,omitempty"`
-	Writes               int64                  `protobuf:"varint,48,opt,name=writes,proto3" json:"writes,omitempty"`
-	UserTime             float64                `protobuf:"fixed64,49,opt,name=user_time,json=userTime,proto3" json:"user_time,omitempty"`
-	SystemTime           float64                `protobuf:"fixed64,50,opt,name=system_time,json=systemTime,proto3" json:"system_time,omitempty"`
+	// Time of collecting statistics on planning and execution of queries.
+	Time *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
+	// Statement text.
+	Query string `protobuf:"bytes,2,opt,name=query,proto3" json:"query,omitempty"`
+	// Normalized query plan.
+	NormalizedPlan string `protobuf:"bytes,3,opt,name=normalized_plan,json=normalizedPlan,proto3" json:"normalized_plan,omitempty"`
+	// Example of a query execution plan (without normalization).
+	ExamplePlan string `protobuf:"bytes,4,opt,name=example_plan,json=examplePlan,proto3" json:"example_plan,omitempty"`
+	// Number of times that a query was planned.
+	//
+	// The parameter returns a non-zero value if the [pg_stat_statements.track_planning](https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.41.9) parameter is enabled.
+	Plans int64 `protobuf:"varint,5,opt,name=plans,proto3" json:"plans,omitempty"`
+	// Total time taken to plan a query, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [pg_stat_statements.track_planning] parameter is enabled.
+	TotalPlanTime float64 `protobuf:"fixed64,6,opt,name=total_plan_time,json=totalPlanTime,proto3" json:"total_plan_time,omitempty"`
+	// Minimum time taken to plan a query, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [pg_stat_statements.track_planning] parameter is enabled.
+	MinPlanTime float64 `protobuf:"fixed64,7,opt,name=min_plan_time,json=minPlanTime,proto3" json:"min_plan_time,omitempty"`
+	// Maximum time taken to plan a query, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [pg_stat_statements.track_planning] parameter is enabled.
+	MaxPlanTime float64 `protobuf:"fixed64,8,opt,name=max_plan_time,json=maxPlanTime,proto3" json:"max_plan_time,omitempty"`
+	// Average time taken to plan a query, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [pg_stat_statements.track_planning] parameter is enabled.
+	MeanPlanTime float64 `protobuf:"fixed64,9,opt,name=mean_plan_time,json=meanPlanTime,proto3" json:"mean_plan_time,omitempty"`
+	// Population standard deviation of the time taken to plan a query, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [pg_stat_statements.track_planning] parameter is enabled.
+	StddevPlanTime float64 `protobuf:"fixed64,10,opt,name=stddev_plan_time,json=stddevPlanTime,proto3" json:"stddev_plan_time,omitempty"`
+	// Number of times that a query was executed.
+	Calls int64 `protobuf:"varint,11,opt,name=calls,proto3" json:"calls,omitempty"`
+	// Total time taken to execute a query, in milliseconds.
+	TotalTime float64 `protobuf:"fixed64,12,opt,name=total_time,json=totalTime,proto3" json:"total_time,omitempty"` // total_exec_time
+	// Minimum time taken to execute a query, in milliseconds.
+	MinTime float64 `protobuf:"fixed64,13,opt,name=min_time,json=minTime,proto3" json:"min_time,omitempty"` // min_exec_time
+	// Maximum time taken to execute a query, in milliseconds.
+	MaxTime float64 `protobuf:"fixed64,14,opt,name=max_time,json=maxTime,proto3" json:"max_time,omitempty"` // max_exec_time
+	// Average time taken to execute a query, in milliseconds.
+	MeanTime float64 `protobuf:"fixed64,15,opt,name=mean_time,json=meanTime,proto3" json:"mean_time,omitempty"` // mean_exec_time
+	// Population standard deviation of the time taken to execute a query, in milliseconds.
+	StddevTime float64 `protobuf:"fixed64,16,opt,name=stddev_time,json=stddevTime,proto3" json:"stddev_time,omitempty"` // stddev_exec_time
+	// Number of retrieved or affected rows.
+	Rows int64 `protobuf:"varint,17,opt,name=rows,proto3" json:"rows,omitempty"`
+	// Number of shared blocks that are hit from cache.
+	SharedBlksHit int64 `protobuf:"varint,18,opt,name=shared_blks_hit,json=sharedBlksHit,proto3" json:"shared_blks_hit,omitempty"`
+	// Number of read shared blocks.
+	SharedBlksRead int64 `protobuf:"varint,19,opt,name=shared_blks_read,json=sharedBlksRead,proto3" json:"shared_blks_read,omitempty"`
+	// Number of 'dirtied' shared blocks.
+	SharedBlksDirtied int64 `protobuf:"varint,20,opt,name=shared_blks_dirtied,json=sharedBlksDirtied,proto3" json:"shared_blks_dirtied,omitempty"`
+	// Number of written shared blocks.
+	SharedBlksWritten int64 `protobuf:"varint,21,opt,name=shared_blks_written,json=sharedBlksWritten,proto3" json:"shared_blks_written,omitempty"`
+	// Number of local blocks that are hit from cache.
+	LocalBlksHit int64 `protobuf:"varint,22,opt,name=local_blks_hit,json=localBlksHit,proto3" json:"local_blks_hit,omitempty"`
+	// Number of read local blocks.
+	LocalBlksRead int64 `protobuf:"varint,23,opt,name=local_blks_read,json=localBlksRead,proto3" json:"local_blks_read,omitempty"`
+	// Number of 'dirtied' local blocks.
+	LocalBlksDirtied int64 `protobuf:"varint,24,opt,name=local_blks_dirtied,json=localBlksDirtied,proto3" json:"local_blks_dirtied,omitempty"`
+	// Number of written local blocks.
+	LocalBlksWritten int64 `protobuf:"varint,25,opt,name=local_blks_written,json=localBlksWritten,proto3" json:"local_blks_written,omitempty"`
+	// Number of read temporary blocks.
+	TempBlksRead int64 `protobuf:"varint,26,opt,name=temp_blks_read,json=tempBlksRead,proto3" json:"temp_blks_read,omitempty"`
+	// Number of written temporary blocks.
+	TempBlksWritten int64 `protobuf:"varint,27,opt,name=temp_blks_written,json=tempBlksWritten,proto3" json:"temp_blks_written,omitempty"`
+	// Time taken to read data blocks, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [track_io_timing](https://www.postgresql.org/docs/current/runtime-config-statistics.html#GUC-TRACK-IO-TIMING) parameter is enabled.
+	BlkReadTime float64 `protobuf:"fixed64,28,opt,name=blk_read_time,json=blkReadTime,proto3" json:"blk_read_time,omitempty"`
+	// Time taken to record data blocks, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [track_io_timing] parameter is enabled.
+	BlkWriteTime float64 `protobuf:"fixed64,29,opt,name=blk_write_time,json=blkWriteTime,proto3" json:"blk_write_time,omitempty"`
+	// Time taken to read temporary data blocks, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [track_io_timing] parameter is enabled.
+	TempBlkReadTime float64 `protobuf:"fixed64,30,opt,name=temp_blk_read_time,json=tempBlkReadTime,proto3" json:"temp_blk_read_time,omitempty"`
+	// Time taken to record temporary data blocks, in milliseconds.
+	//
+	// The parameter returns a non-zero value if the [track_io_timing] parameter is enabled.
+	TempBlkWriteTime float64 `protobuf:"fixed64,31,opt,name=temp_blk_write_time,json=tempBlkWriteTime,proto3" json:"temp_blk_write_time,omitempty"`
+	// Number of WAL records generated during a given period.
+	WalRecords int64 `protobuf:"varint,32,opt,name=wal_records,json=walRecords,proto3" json:"wal_records,omitempty"`
+	// Number of WAL full page images generated during a given period.
+	WalFpi int64 `protobuf:"varint,33,opt,name=wal_fpi,json=walFpi,proto3" json:"wal_fpi,omitempty"`
+	// Number of WAL logs generated during a given period, in bytes.
+	WalBytes int64 `protobuf:"varint,34,opt,name=wal_bytes,json=walBytes,proto3" json:"wal_bytes,omitempty"`
+	// Number of JIT-compiled functions.
+	JitFunctions int64 `protobuf:"varint,35,opt,name=jit_functions,json=jitFunctions,proto3" json:"jit_functions,omitempty"`
+	// Time taken to generate JIT code, in milliseconds.
+	JitGenerationTime float64 `protobuf:"fixed64,36,opt,name=jit_generation_time,json=jitGenerationTime,proto3" json:"jit_generation_time,omitempty"`
+	// Number of times that functions have been inlined.
+	JitInliningCount int64 `protobuf:"varint,37,opt,name=jit_inlining_count,json=jitInliningCount,proto3" json:"jit_inlining_count,omitempty"`
+	// Time taken to inline functions, in milliseconds.
+	JitInliningTime float64 `protobuf:"fixed64,38,opt,name=jit_inlining_time,json=jitInliningTime,proto3" json:"jit_inlining_time,omitempty"`
+	// Number of times that a query was optimized.
+	JitOptimizationCount int64 `protobuf:"varint,39,opt,name=jit_optimization_count,json=jitOptimizationCount,proto3" json:"jit_optimization_count,omitempty"`
+	// Time taken to optimize a query, in milliseconds.
+	JitOptimizationTime float64 `protobuf:"fixed64,40,opt,name=jit_optimization_time,json=jitOptimizationTime,proto3" json:"jit_optimization_time,omitempty"`
+	// Number of times that code was emitted.
+	JitEmissionCount int64 `protobuf:"varint,41,opt,name=jit_emission_count,json=jitEmissionCount,proto3" json:"jit_emission_count,omitempty"`
+	// Time taken to emit code.
+	JitEmissionTime float64 `protobuf:"fixed64,42,opt,name=jit_emission_time,json=jitEmissionTime,proto3" json:"jit_emission_time,omitempty"`
+	// Cost of receiving a response to a query before the first row of the response is issued.
+	StartupCost int64 `protobuf:"varint,43,opt,name=startup_cost,json=startupCost,proto3" json:"startup_cost,omitempty"`
+	// Cost of receiving a response to a query when all the rows of the response are issued.
+	TotalCost int64 `protobuf:"varint,44,opt,name=total_cost,json=totalCost,proto3" json:"total_cost,omitempty"`
+	// Expected number of rows that a given plan node should issue.
+	PlanRows int64 `protobuf:"varint,45,opt,name=plan_rows,json=planRows,proto3" json:"plan_rows,omitempty"`
+	// Expected average size of rows that a given plan node should issue.
+	PlanWidth int64 `protobuf:"varint,46,opt,name=plan_width,json=planWidth,proto3" json:"plan_width,omitempty"`
+	// Number of bytes that the filesystem layer has read.
+	Reads int64 `protobuf:"varint,47,opt,name=reads,proto3" json:"reads,omitempty"`
+	// Number of bytes that the filesystem layer has written.
+	Writes int64 `protobuf:"varint,48,opt,name=writes,proto3" json:"writes,omitempty"`
+	// User CPU time used.
+	UserTime float64 `protobuf:"fixed64,49,opt,name=user_time,json=userTime,proto3" json:"user_time,omitempty"`
+	// System CPU time used.
+	SystemTime float64 `protobuf:"fixed64,50,opt,name=system_time,json=systemTime,proto3" json:"system_time,omitempty"`
 }
 
 func (x *QueryStats) Reset() {
@@ -768,7 +881,9 @@ type QueryStatement struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Key   *PrimaryKey `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Primary keys in tables with the statistics on planning and execution of queries.
+	Key *PrimaryKey `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Statistics on planning and execution of queries.
 	Stats *QueryStats `protobuf:"bytes,2,opt,name=stats,proto3" json:"stats,omitempty"`
 }
 

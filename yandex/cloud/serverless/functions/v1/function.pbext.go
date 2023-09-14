@@ -120,6 +120,10 @@ func (m *Version) SetStorageMounts(v []*StorageMount) {
 	m.StorageMounts = v
 }
 
+func (m *Version) SetAsyncInvocationConfig(v *AsyncInvocationConfig) {
+	m.AsyncInvocationConfig = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -236,4 +240,46 @@ func (m *StorageMount) SetMountPointName(v string) {
 
 func (m *StorageMount) SetReadOnly(v bool) {
 	m.ReadOnly = v
+}
+
+func (m *AsyncInvocationConfig) SetRetriesCount(v int64) {
+	m.RetriesCount = v
+}
+
+func (m *AsyncInvocationConfig) SetSuccessTarget(v *AsyncInvocationConfig_ResponseTarget) {
+	m.SuccessTarget = v
+}
+
+func (m *AsyncInvocationConfig) SetFailureTarget(v *AsyncInvocationConfig_ResponseTarget) {
+	m.FailureTarget = v
+}
+
+func (m *AsyncInvocationConfig) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+type AsyncInvocationConfig_ResponseTarget_Target = isAsyncInvocationConfig_ResponseTarget_Target
+
+func (m *AsyncInvocationConfig_ResponseTarget) SetTarget(v AsyncInvocationConfig_ResponseTarget_Target) {
+	m.Target = v
+}
+
+func (m *AsyncInvocationConfig_ResponseTarget) SetEmptyTarget(v *EmptyTarget) {
+	m.Target = &AsyncInvocationConfig_ResponseTarget_EmptyTarget{
+		EmptyTarget: v,
+	}
+}
+
+func (m *AsyncInvocationConfig_ResponseTarget) SetYmqTarget(v *YMQTarget) {
+	m.Target = &AsyncInvocationConfig_ResponseTarget_YmqTarget{
+		YmqTarget: v,
+	}
+}
+
+func (m *YMQTarget) SetQueueArn(v string) {
+	m.QueueArn = v
+}
+
+func (m *YMQTarget) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }

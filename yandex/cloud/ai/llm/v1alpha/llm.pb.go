@@ -21,17 +21,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Sets the generation options.
+// Defines the options for text generation.
 type GenerationOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Enables streaming of the partially generated text.
+	// Enables streaming of partially generated text.
 	PartialResults bool `protobuf:"varint,1,opt,name=partial_results,json=partialResults,proto3" json:"partial_results,omitempty"`
-	// Affects creativity and randomness of the responses. It is a double number between 0 and infinity. A low temperature causes the responses to be straightforward, a high temperature causes high-level creativity and randomness.
+	// Affects creativity and randomness of responses. Should be a double number between 0 (inclusive) and infinity.
+	// Lower values produce more straightforward responses, while higher values lead to increased creativity and randomness.
 	Temperature *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=temperature,proto3" json:"temperature,omitempty"`
-	// Sets response limit in tokens. The total length of [instruction_text], [request_text], and [max_tokens] should be equal or less than 7400 tokens.
+	// Sets the maximum limit on the total number of tokens used for both the input prompt and the generated response.
+	// Must be greater than zero and not exceed 7400 tokens.
 	MaxTokens *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_tokens,json=maxTokens,proto3" json:"max_tokens,omitempty"`
 }
 
@@ -88,17 +90,17 @@ func (x *GenerationOptions) GetMaxTokens() *wrapperspb.Int64Value {
 	return nil
 }
 
-// Contains the response, its score and length in tokens.
+// Represents an alternative generated response, including its score and token count.
 type Alternative struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Text of the response.
+	// The generated text response.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	// Text log likelihood.
+	// The score or confidence of the generated text.
 	Score float64 `protobuf:"fixed64,2,opt,name=score,proto3" json:"score,omitempty"`
-	// Number of tokens in the response.
+	// The number of tokens in the generated response.
 	NumTokens int64 `protobuf:"varint,3,opt,name=num_tokens,json=numTokens,proto3" json:"num_tokens,omitempty"`
 }
 
@@ -155,15 +157,15 @@ func (x *Alternative) GetNumTokens() int64 {
 	return 0
 }
 
-// Contains description of the message for Chat.
+// Represents a message within a chat.
 type Message struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Identifies who sent message. For message from the LLM model, the mandatory value is "assistant".
+	// Identifies the sender of the message.
 	Role string `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
-	// Text of the message.
+	// The text content of the message.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
 }
 
@@ -213,17 +215,17 @@ func (x *Message) GetText() string {
 	return ""
 }
 
-// Contains description of the LLM token (base coding unit).
+// Represents a token, the basic unit of text, used by the LLM.
 type Token struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Internal token ID.
+	// An internal token identifier.
 	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Token text representation.
+	// The textual representation of the token.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
-	// Type of token (special or not special). Special tokens define the behaviour of the model and are not visible for users.
+	// Indicates whether the token is special or not. Special tokens define the model's behavior and are not visible to users.
 	Special bool `protobuf:"varint,3,opt,name=special,proto3" json:"special,omitempty"`
 }
 

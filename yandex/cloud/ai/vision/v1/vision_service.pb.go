@@ -90,7 +90,7 @@ type BatchAnalyzeRequest struct {
 	// A list of specifications. Each specification contains the file to analyze and features to use for analysis.
 	//
 	// Restrictions:
-	// * Supported file formats: JPEG, PNG.
+	// * Supported file formats: `JPEG`, `PNG`.
 	// * Maximum file size: 1 MB.
 	// * Image size should not exceed 20M pixels (length x width).
 	AnalyzeSpecs []*AnalyzeSpec `protobuf:"bytes,1,rep,name=analyze_specs,json=analyzeSpecs,proto3" json:"analyze_specs,omitempty"`
@@ -395,12 +395,12 @@ type FeatureTextDetectionConfig struct {
 	unknownFields protoimpl.UnknownFields
 
 	// List of the languages to recognize text.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “).
+	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, `ru`).
 	LanguageCodes []string `protobuf:"bytes,1,rep,name=language_codes,json=languageCodes,proto3" json:"language_codes,omitempty"`
 	// Model to use for text detection.
 	// Possible values:
-	// * page (default) - this model is suitable for detecting multiple text entries in an image.
-	// * line - this model is suitable for cropped images with one line of text.
+	// * `page` (default): this model is suitable for detecting multiple text entries in an image.
+	// * `line`: this model is suitable for cropped images with one line of text.
 	Model string `protobuf:"bytes,2,opt,name=model,proto3" json:"model,omitempty"`
 }
 

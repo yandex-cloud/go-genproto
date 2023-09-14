@@ -554,6 +554,38 @@ func (m *UserSettings) SetMaxReadBufferSize(v *wrapperspb.Int64Value) {
 	m.MaxReadBufferSize = v
 }
 
+func (m *UserSettings) SetInsertKeeperMaxRetries(v *wrapperspb.Int64Value) {
+	m.InsertKeeperMaxRetries = v
+}
+
+func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForUser(v *wrapperspb.Int64Value) {
+	m.MaxTemporaryDataOnDiskSizeForUser = v
+}
+
+func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForQuery(v *wrapperspb.Int64Value) {
+	m.MaxTemporaryDataOnDiskSizeForQuery = v
+}
+
+func (m *UserSettings) SetMaxParserDepth(v *wrapperspb.Int64Value) {
+	m.MaxParserDepth = v
+}
+
+func (m *UserSettings) SetRemoteFilesystemReadMethod(v UserSettings_RemoteFilesystemReadMethod) {
+	m.RemoteFilesystemReadMethod = v
+}
+
+func (m *UserSettings) SetMemoryOvercommitRatioDenominator(v *wrapperspb.Int64Value) {
+	m.MemoryOvercommitRatioDenominator = v
+}
+
+func (m *UserSettings) SetMemoryOvercommitRatioDenominatorForUser(v *wrapperspb.Int64Value) {
+	m.MemoryOvercommitRatioDenominatorForUser = v
+}
+
+func (m *UserSettings) SetMemoryUsageOvercommitMaxWaitMicroseconds(v *wrapperspb.Int64Value) {
+	m.MemoryUsageOvercommitMaxWaitMicroseconds = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

@@ -27,19 +27,17 @@ type ListRawStatementsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the PostgreSQL cluster to request statements history for.
-	// To get the PostgreSQL cluster ID use a [ClusterService.List] request.
+	// ID of a PostgreSQL cluster to request query statistics for.
+	//
+	// To get a PostgreSQL cluster ID, use the [ClusterService.List] method.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Start timestamp for the request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	// Beginning of the period for which you need to request data (in the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format).
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
-	// End timestamp for the request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	// End of the period for which you need to request data (in the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format).
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListRawStatementsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return. If the number of the results is larger than [page_size], the service returns [ListRawStatementsResponse.next_page_token]. You can use it to get the next page of the results in subsequent requests.
 	PageSize int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListRawStatementsResponse.next_page_token] returned by a previous list request.
+	// Page token. To get the next page of results, set [page_token] to the [ListRawStatementsResponse.next_page_token] returned by the previous SQL statement list request.
 	PageToken string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -115,19 +113,17 @@ type ListRawSessionStatesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the PostgreSQL cluster to request statements history for.
-	// To get the PostgreSQL cluster ID use a [ClusterService.List] request.
+	// ID of a PostgreSQL cluster to request session statistics for.
+	//
+	// To get a PostgreSQL cluster ID, use the [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Start timestamp for the request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	// Beginning of the period for which you need to request data (in the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format).
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
-	// End timestamp for the request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	// End of the period for which you need to request data (in the [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format).
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListRawSessionStatesResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
+	// The maximum number of results per page to return. If the number of the results is larger than [page_size], the service returns [ListRawSessionStatesResponse.next_page_token]. You can use it to get the next page of the results in subsequent requests.
 	PageSize int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListRawSessionStatesResponse.next_page_token] returned by a previous list request.
+	// Page token. To get the next page of results, set [page_token] to the [ListRawSessionStatesResponse.next_page_token] returned by the previous PostgreSQL session list request.
 	PageToken string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -203,11 +199,9 @@ type ListRawSessionStatesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of PostgreSQL sessions.
 	SessionStates []*SessionState `protobuf:"bytes,1,rep,name=session_states,json=sessionStates,proto3" json:"session_states,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListRawSessionStatesRequest.page_size], use the [next_page_token] as the value
-	// for the [ListRawSessionStatesRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// This token allows you to get the next page of results when requesting the PostgreSQL session list. If the number of the results is larger than [ListRawSessionStatesRequest.page_size], use the [next_page_token] as the value for the [ListRawSessionStatesRequest.page_token] parameter in the next request. Each subsequent request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -262,11 +256,9 @@ type ListRawStatementsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of SQL statements (queries).
 	Statements []*QueryStatement `protobuf:"bytes,1,rep,name=statements,proto3" json:"statements,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListRawStatementsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListRawStatementsRequest.page_token] parameter in the next list request. Each subsequent
-	// list request will have its own [next_page_token] to continue paging through the results.
+	// This token allows you to get the next page of results when requesting the PostgreSQL session list. If the number of the results is larger than [ListRawStatementsRequest.page_size], use the [next_page_token] as the value for the [ListRawStatementsRequest.page_token] parameter in the next request. Each subsequent request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 

@@ -54,20 +54,16 @@ func (m *Block_DetectedLanguage) SetLanguageCode(v string) {
 	m.LanguageCode = v
 }
 
-func (m *Alternative) SetText(v string) {
-	m.Text = v
-}
-
-func (m *Alternative) SetWords(v []*Word) {
-	m.Words = v
-}
-
 func (m *Line) SetBoundingBox(v *Polygon) {
 	m.BoundingBox = v
 }
 
-func (m *Line) SetAlternatives(v []*Alternative) {
-	m.Alternatives = v
+func (m *Line) SetText(v string) {
+	m.Text = v
+}
+
+func (m *Line) SetWords(v []*Word) {
+	m.Words = v
 }
 
 func (m *Word) SetBoundingBox(v *Polygon) {

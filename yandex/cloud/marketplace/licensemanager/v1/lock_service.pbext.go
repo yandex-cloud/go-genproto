@@ -14,6 +14,14 @@ func (m *CreateLockRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
 
+func (m *EnsureLockRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *EnsureLockRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
 func (m *CreateLockMetadata) SetLockId(v string) {
 	m.LockId = v
 }

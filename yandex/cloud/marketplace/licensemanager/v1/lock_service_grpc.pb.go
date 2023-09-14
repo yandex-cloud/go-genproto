@@ -34,7 +34,7 @@ type LockServiceClient interface {
 	Get(ctx context.Context, in *GetLockRequest, opts ...grpc.CallOption) (*Lock, error)
 	GetByInstanceAndResource(ctx context.Context, in *GetLockByInstanceAndResourceRequest, opts ...grpc.CallOption) (*Lock, error)
 	Create(ctx context.Context, in *CreateLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	Ensure(ctx context.Context, in *CreateLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Ensure(ctx context.Context, in *EnsureLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Delete(ctx context.Context, in *DeleteLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -73,7 +73,7 @@ func (c *lockServiceClient) Create(ctx context.Context, in *CreateLockRequest, o
 	return out, nil
 }
 
-func (c *lockServiceClient) Ensure(ctx context.Context, in *CreateLockRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *lockServiceClient) Ensure(ctx context.Context, in *EnsureLockRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, LockService_Ensure_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -98,7 +98,7 @@ type LockServiceServer interface {
 	Get(context.Context, *GetLockRequest) (*Lock, error)
 	GetByInstanceAndResource(context.Context, *GetLockByInstanceAndResourceRequest) (*Lock, error)
 	Create(context.Context, *CreateLockRequest) (*operation.Operation, error)
-	Ensure(context.Context, *CreateLockRequest) (*operation.Operation, error)
+	Ensure(context.Context, *EnsureLockRequest) (*operation.Operation, error)
 	Delete(context.Context, *DeleteLockRequest) (*operation.Operation, error)
 }
 
@@ -115,7 +115,7 @@ func (UnimplementedLockServiceServer) GetByInstanceAndResource(context.Context, 
 func (UnimplementedLockServiceServer) Create(context.Context, *CreateLockRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedLockServiceServer) Ensure(context.Context, *CreateLockRequest) (*operation.Operation, error) {
+func (UnimplementedLockServiceServer) Ensure(context.Context, *EnsureLockRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ensure not implemented")
 }
 func (UnimplementedLockServiceServer) Delete(context.Context, *DeleteLockRequest) (*operation.Operation, error) {
@@ -188,7 +188,7 @@ func _LockService_Create_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _LockService_Ensure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateLockRequest)
+	in := new(EnsureLockRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -200,7 +200,7 @@ func _LockService_Ensure_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: LockService_Ensure_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LockServiceServer).Ensure(ctx, req.(*CreateLockRequest))
+		return srv.(LockServiceServer).Ensure(ctx, req.(*EnsureLockRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
