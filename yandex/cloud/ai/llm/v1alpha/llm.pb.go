@@ -29,7 +29,7 @@ type GenerationOptions struct {
 
 	// Enables streaming of partially generated text.
 	PartialResults bool `protobuf:"varint,1,opt,name=partial_results,json=partialResults,proto3" json:"partial_results,omitempty"`
-	// Affects creativity and randomness of responses. Should be a double number between 0 (inclusive) and infinity.
+	// Affects creativity and randomness of responses. Should be a double number between 0 (inclusive) and 1 (inclusive).
 	// Lower values produce more straightforward responses, while higher values lead to increased creativity and randomness.
 	Temperature *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=temperature,proto3" json:"temperature,omitempty"`
 	// Sets the maximum limit on the total number of tokens used for both the input prompt and the generated response.

@@ -1943,11 +1943,11 @@ type DiskSizeAutoscaling struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Amount of used storage for automatic disk scaling in the maintenance window, 0 means disabled, in percent.
+	// Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
 	PlannedUsageThreshold int64 `protobuf:"varint,1,opt,name=planned_usage_threshold,json=plannedUsageThreshold,proto3" json:"planned_usage_threshold,omitempty"`
-	// Amount of used storage for immediately  automatic disk scaling, 0 means disabled, in percent.
+	// Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
 	EmergencyUsageThreshold int64 `protobuf:"varint,2,opt,name=emergency_usage_threshold,json=emergencyUsageThreshold,proto3" json:"emergency_usage_threshold,omitempty"`
-	// Limit on how large the storage for database instances can automatically grow, in bytes.
+	// New storage size (in bytes) that is set when one of the thresholds is achieved.
 	DiskSizeLimit int64 `protobuf:"varint,3,opt,name=disk_size_limit,json=diskSizeLimit,proto3" json:"disk_size_limit,omitempty"`
 }
 

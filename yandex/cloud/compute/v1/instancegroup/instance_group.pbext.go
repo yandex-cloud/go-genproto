@@ -285,6 +285,10 @@ func (m *DeployPolicy) SetStrategy(v DeployPolicy_Strategy) {
 	m.Strategy = v
 }
 
+func (m *DeployPolicy) SetMinimalAction(v DeployPolicy_MinimalAction) {
+	m.MinimalAction = v
+}
+
 func (m *AllocationPolicy) SetZones(v []*AllocationPolicy_Zone) {
 	m.Zones = v
 }
