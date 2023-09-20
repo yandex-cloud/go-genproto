@@ -74,6 +74,10 @@ func (m *ClickhouseConfig) SetTimezone(v string) {
 	m.Timezone = v
 }
 
+func (m *ClickhouseConfig) SetGeobaseEnabled(v *wrapperspb.BoolValue) {
+	m.GeobaseEnabled = v
+}
+
 func (m *ClickhouseConfig) SetGeobaseUri(v string) {
 	m.GeobaseUri = v
 }
@@ -150,52 +154,12 @@ func (m *ClickhouseConfig) SetOpentelemetrySpanLogEnabled(v *wrapperspb.BoolValu
 	m.OpentelemetrySpanLogEnabled = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundPoolSize = v
+func (m *ClickhouseConfig) SetOpentelemetrySpanLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.OpentelemetrySpanLogRetentionSize = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundSchedulePoolSize = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundFetchesPoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundFetchesPoolSize = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundMovePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundMovePoolSize = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundDistributedSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundDistributedSchedulePoolSize = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundBufferFlushSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundBufferFlushSchedulePoolSize = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundMessageBrokerSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundMessageBrokerSchedulePoolSize = v
-}
-
-func (m *ClickhouseConfig) SetDefaultDatabase(v *wrapperspb.StringValue) {
-	m.DefaultDatabase = v
-}
-
-func (m *ClickhouseConfig) SetTotalMemoryProfilerStep(v *wrapperspb.Int64Value) {
-	m.TotalMemoryProfilerStep = v
-}
-
-func (m *ClickhouseConfig) SetTotalMemoryTrackerSampleProbability(v *wrapperspb.DoubleValue) {
-	m.TotalMemoryTrackerSampleProbability = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundCommonPoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundCommonPoolSize = v
-}
-
-func (m *ClickhouseConfig) SetBackgroundMergesMutationsConcurrencyRatio(v *wrapperspb.Int64Value) {
-	m.BackgroundMergesMutationsConcurrencyRatio = v
+func (m *ClickhouseConfig) SetOpentelemetrySpanLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.OpentelemetrySpanLogRetentionTime = v
 }
 
 func (m *ClickhouseConfig) SetQueryViewsLogEnabled(v *wrapperspb.BoolValue) {
@@ -220,14 +184,6 @@ func (m *ClickhouseConfig) SetAsynchronousMetricLogRetentionSize(v *wrapperspb.I
 
 func (m *ClickhouseConfig) SetAsynchronousMetricLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.AsynchronousMetricLogRetentionTime = v
-}
-
-func (m *ClickhouseConfig) SetOpentelemetrySpanLogRetentionSize(v *wrapperspb.Int64Value) {
-	m.OpentelemetrySpanLogRetentionSize = v
-}
-
-func (m *ClickhouseConfig) SetOpentelemetrySpanLogRetentionTime(v *wrapperspb.Int64Value) {
-	m.OpentelemetrySpanLogRetentionTime = v
 }
 
 func (m *ClickhouseConfig) SetSessionLogEnabled(v *wrapperspb.BoolValue) {
@@ -266,8 +222,52 @@ func (m *ClickhouseConfig) SetAsynchronousInsertLogRetentionTime(v *wrapperspb.I
 	m.AsynchronousInsertLogRetentionTime = v
 }
 
-func (m *ClickhouseConfig) SetGeobaseEnabled(v *wrapperspb.BoolValue) {
-	m.GeobaseEnabled = v
+func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMergesMutationsConcurrencyRatio(v *wrapperspb.Int64Value) {
+	m.BackgroundMergesMutationsConcurrencyRatio = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundFetchesPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundFetchesPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMovePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundMovePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundDistributedSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundDistributedSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundBufferFlushSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundBufferFlushSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMessageBrokerSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundMessageBrokerSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundCommonPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundCommonPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetDefaultDatabase(v *wrapperspb.StringValue) {
+	m.DefaultDatabase = v
+}
+
+func (m *ClickhouseConfig) SetTotalMemoryProfilerStep(v *wrapperspb.Int64Value) {
+	m.TotalMemoryProfilerStep = v
+}
+
+func (m *ClickhouseConfig) SetTotalMemoryTrackerSampleProbability(v *wrapperspb.DoubleValue) {
+	m.TotalMemoryTrackerSampleProbability = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {

@@ -615,6 +615,10 @@ func (m *RelocateInstanceRequest) SetDestinationZoneId(v string) {
 	m.DestinationZoneId = v
 }
 
+func (m *RelocateInstanceRequest) SetNetworkInterfaceSpecs(v []*NetworkInterfaceSpec) {
+	m.NetworkInterfaceSpecs = v
+}
+
 func (m *RelocateInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }
