@@ -25,10 +25,14 @@ type Template_State int32
 
 const (
 	Template_STATE_UNSPECIFIED Template_State = 0
-	Template_PENDING           Template_State = 1
-	Template_ACTIVE            Template_State = 2
-	Template_DEPRECATED        Template_State = 3
-	Template_DELETED           Template_State = 4
+	// Subscription template created but not active yet.
+	Template_PENDING Template_State = 1
+	// Subscription template is active.
+	Template_ACTIVE Template_State = 2
+	// Subscription template deprecated.
+	Template_DEPRECATED Template_State = 3
+	// Subscription template deleted.
+	Template_DELETED Template_State = 4
 )
 
 // Enum value maps for Template_State.
@@ -81,17 +85,28 @@ type Template struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	VersionId    string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	Name         string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	PublisherId  string                 `protobuf:"bytes,4,opt,name=publisher_id,json=publisherId,proto3" json:"publisher_id,omitempty"`
-	ProductId    string                 `protobuf:"bytes,5,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	TariffId     string                 `protobuf:"bytes,6,opt,name=tariff_id,json=tariffId,proto3" json:"tariff_id,omitempty"`
-	LicenseSkuId string                 `protobuf:"bytes,7,opt,name=license_sku_id,json=licenseSkuId,proto3" json:"license_sku_id,omitempty"`
-	Period       string                 `protobuf:"bytes,8,opt,name=period,proto3" json:"period,omitempty"`
-	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	State        Template_State         `protobuf:"varint,11,opt,name=state,proto3,enum=yandex.cloud.marketplace.licensemanager.v1.Template_State" json:"state,omitempty"`
+	// ID of the subscription template.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Version of the subscription template.
+	VersionId string `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	// Name of the subscription template.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// ID of publisher.
+	PublisherId string `protobuf:"bytes,4,opt,name=publisher_id,json=publisherId,proto3" json:"publisher_id,omitempty"`
+	// ID of product.
+	ProductId string `protobuf:"bytes,5,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	// ID of tariff.
+	TariffId string `protobuf:"bytes,6,opt,name=tariff_id,json=tariffId,proto3" json:"tariff_id,omitempty"`
+	// ID of subscription SKU.
+	LicenseSkuId string `protobuf:"bytes,7,opt,name=license_sku_id,json=licenseSkuId,proto3" json:"license_sku_id,omitempty"`
+	// Subscription period.
+	Period string `protobuf:"bytes,8,opt,name=period,proto3" json:"period,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Update timestamp.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Subscription template state.
+	State Template_State `protobuf:"varint,11,opt,name=state,proto3,enum=yandex.cloud.marketplace.licensemanager.v1.Template_State" json:"state,omitempty"`
 }
 
 func (x *Template) Reset() {

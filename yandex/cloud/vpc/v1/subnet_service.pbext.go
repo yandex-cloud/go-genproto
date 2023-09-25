@@ -207,3 +207,15 @@ func (m *UsedAddress) SetIpVersion(v IpVersion) {
 func (m *UsedAddress) SetReferences(v []*reference.Reference) {
 	m.References = v
 }
+
+func (m *RelocateSubnetRequest) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *RelocateSubnetRequest) SetDestinationZoneId(v string) {
+	m.DestinationZoneId = v
+}
+
+func (m *RelocateSubnetMetadata) SetSubnetId(v string) {
+	m.SubnetId = v
+}

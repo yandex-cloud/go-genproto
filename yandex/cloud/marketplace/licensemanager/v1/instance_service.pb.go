@@ -27,6 +27,7 @@ type GetInstanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the subscription instance.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 }
 
@@ -74,11 +75,26 @@ type ListInstancesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// ID of the folder that the subscription instance belongs to.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListInstancesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListInstancesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy   string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	// A filter expression that filters subscription instances listed in the response.
+	//
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on [Instance.name] field.
+	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name=my-subscription-instance`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Sorting order for the list of subscription instances.
+	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
 func (x *ListInstancesRequest) Reset() {
@@ -153,8 +169,14 @@ type ListInstancesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instances     []*Instance `protobuf:"bytes,1,rep,name=instances,proto3" json:"instances,omitempty"`
-	NextPageToken string      `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of subscription instances.
+	Instances []*Instance `protobuf:"bytes,1,rep,name=instances,proto3" json:"instances,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListInstancesRequest.page_size], use `next_page_token` as the value
+	// for the [ListInstancesRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListInstancesResponse) Reset() {

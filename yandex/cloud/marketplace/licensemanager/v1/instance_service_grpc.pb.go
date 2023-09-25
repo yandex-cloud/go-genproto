@@ -27,7 +27,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type InstanceServiceClient interface {
+	// Returns the specified subscription instance.
+	//
+	// To get the list of all available subscription instances, make a [List] request.
 	Get(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
+	// Retrieves the list of subscription instances in the specified folder.
 	List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error)
 }
 
@@ -61,7 +65,11 @@ func (c *instanceServiceClient) List(ctx context.Context, in *ListInstancesReque
 // All implementations should embed UnimplementedInstanceServiceServer
 // for forward compatibility
 type InstanceServiceServer interface {
+	// Returns the specified subscription instance.
+	//
+	// To get the list of all available subscription instances, make a [List] request.
 	Get(context.Context, *GetInstanceRequest) (*Instance, error)
+	// Retrieves the list of subscription instances in the specified folder.
 	List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error)
 }
 

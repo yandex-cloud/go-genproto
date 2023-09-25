@@ -25,9 +25,12 @@ type Lock_State int32
 
 const (
 	Lock_STATE_UNSPECIFIED Lock_State = 0
-	Lock_UNLOCKED          Lock_State = 1
-	Lock_LOCKED            Lock_State = 2
-	Lock_DELETED           Lock_State = 3
+	// Subscription unlocked.
+	Lock_UNLOCKED Lock_State = 1
+	// Subscription locked to the resource.
+	Lock_LOCKED Lock_State = 2
+	// Subscription lock deleted.
+	Lock_DELETED Lock_State = 3
 )
 
 // Enum value maps for Lock_State.
@@ -78,14 +81,22 @@ type Lock struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	InstanceId string                 `protobuf:"bytes,2,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	ResourceId string                 `protobuf:"bytes,3,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	StartTime  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	CreatedAt  *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt  *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	State      Lock_State             `protobuf:"varint,8,opt,name=state,proto3,enum=yandex.cloud.marketplace.licensemanager.v1.Lock_State" json:"state,omitempty"`
+	// ID of the subscription lock.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the subscription instance.
+	InstanceId string `protobuf:"bytes,2,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// ID of the resource.
+	ResourceId string `protobuf:"bytes,3,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Timestamp of the start of the subscription lock.
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	// Timestamp of the end of the subscription lock.
+	EndTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Update timestamp.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Subscription lock state.
+	State Lock_State `protobuf:"varint,8,opt,name=state,proto3,enum=yandex.cloud.marketplace.licensemanager.v1.Lock_State" json:"state,omitempty"`
 }
 
 func (x *Lock) Reset() {

@@ -29,6 +29,7 @@ const (
 	SubnetService_Delete_FullMethodName            = "/yandex.cloud.vpc.v1.SubnetService/Delete"
 	SubnetService_ListOperations_FullMethodName    = "/yandex.cloud.vpc.v1.SubnetService/ListOperations"
 	SubnetService_Move_FullMethodName              = "/yandex.cloud.vpc.v1.SubnetService/Move"
+	SubnetService_Relocate_FullMethodName          = "/yandex.cloud.vpc.v1.SubnetService/Relocate"
 	SubnetService_ListUsedAddresses_FullMethodName = "/yandex.cloud.vpc.v1.SubnetService/ListUsedAddresses"
 )
 
@@ -60,6 +61,7 @@ type SubnetServiceClient interface {
 	ListOperations(ctx context.Context, in *ListSubnetOperationsRequest, opts ...grpc.CallOption) (*ListSubnetOperationsResponse, error)
 	// Move subnet to another folder.
 	Move(ctx context.Context, in *MoveSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Relocate(ctx context.Context, in *RelocateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// List used addresses in specified subnet.
 	ListUsedAddresses(ctx context.Context, in *ListUsedAddressesRequest, opts ...grpc.CallOption) (*ListUsedAddressesResponse, error)
 }
@@ -153,6 +155,15 @@ func (c *subnetServiceClient) Move(ctx context.Context, in *MoveSubnetRequest, o
 	return out, nil
 }
 
+func (c *subnetServiceClient) Relocate(ctx context.Context, in *RelocateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SubnetService_Relocate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subnetServiceClient) ListUsedAddresses(ctx context.Context, in *ListUsedAddressesRequest, opts ...grpc.CallOption) (*ListUsedAddressesResponse, error) {
 	out := new(ListUsedAddressesResponse)
 	err := c.cc.Invoke(ctx, SubnetService_ListUsedAddresses_FullMethodName, in, out, opts...)
@@ -190,6 +201,7 @@ type SubnetServiceServer interface {
 	ListOperations(context.Context, *ListSubnetOperationsRequest) (*ListSubnetOperationsResponse, error)
 	// Move subnet to another folder.
 	Move(context.Context, *MoveSubnetRequest) (*operation.Operation, error)
+	Relocate(context.Context, *RelocateSubnetRequest) (*operation.Operation, error)
 	// List used addresses in specified subnet.
 	ListUsedAddresses(context.Context, *ListUsedAddressesRequest) (*ListUsedAddressesResponse, error)
 }
@@ -224,6 +236,9 @@ func (UnimplementedSubnetServiceServer) ListOperations(context.Context, *ListSub
 }
 func (UnimplementedSubnetServiceServer) Move(context.Context, *MoveSubnetRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedSubnetServiceServer) Relocate(context.Context, *RelocateSubnetRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Relocate not implemented")
 }
 func (UnimplementedSubnetServiceServer) ListUsedAddresses(context.Context, *ListUsedAddressesRequest) (*ListUsedAddressesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsedAddresses not implemented")
@@ -402,6 +417,24 @@ func _SubnetService_Move_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubnetService_Relocate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RelocateSubnetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubnetServiceServer).Relocate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubnetService_Relocate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubnetServiceServer).Relocate(ctx, req.(*RelocateSubnetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubnetService_ListUsedAddresses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUsedAddressesRequest)
 	if err := dec(in); err != nil {
@@ -462,6 +495,10 @@ var SubnetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _SubnetService_Move_Handler,
+		},
+		{
+			MethodName: "Relocate",
+			Handler:    _SubnetService_Relocate_Handler,
 		},
 		{
 			MethodName: "ListUsedAddresses",

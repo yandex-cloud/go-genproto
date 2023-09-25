@@ -25,12 +25,18 @@ type Instance_State int32
 
 const (
 	Instance_STATE_UNSPECIFIED Instance_State = 0
-	Instance_PENDING           Instance_State = 1
-	Instance_ACTIVE            Instance_State = 2
-	Instance_CANCELLED         Instance_State = 3
-	Instance_EXPIRED           Instance_State = 4
-	Instance_DEPRECATED        Instance_State = 5
-	Instance_DELETED           Instance_State = 6
+	// Subscription created but not active yet.
+	Instance_PENDING Instance_State = 1
+	// Subscription is active.
+	Instance_ACTIVE Instance_State = 2
+	// Subscription canceled. It is still active, but won't be automatically renewed after the end of the current period.
+	Instance_CANCELLED Instance_State = 3
+	// Subscription expired.
+	Instance_EXPIRED Instance_State = 4
+	// Subscription deprecated.
+	Instance_DEPRECATED Instance_State = 5
+	// Subscription deleted.
+	Instance_DELETED Instance_State = 6
 )
 
 // Enum value maps for Instance_State.
@@ -87,19 +93,32 @@ type Instance struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	CloudId           string                 `protobuf:"bytes,2,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
-	FolderId          string                 `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	TemplateId        string                 `protobuf:"bytes,4,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	TemplateVersionId string                 `protobuf:"bytes,5,opt,name=template_version_id,json=templateVersionId,proto3" json:"template_version_id,omitempty"`
-	Description       string                 `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
-	StartTime         *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime           *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	State             Instance_State         `protobuf:"varint,11,opt,name=state,proto3,enum=yandex.cloud.marketplace.licensemanager.v1.Instance_State" json:"state,omitempty"`
-	Locks             []*Lock                `protobuf:"bytes,12,rep,name=locks,proto3" json:"locks,omitempty"`
-	LicenseTemplate   *Template              `protobuf:"bytes,13,opt,name=license_template,json=licenseTemplate,proto3" json:"license_template,omitempty"`
+	// ID of the subscription instance.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the cloud that the subscription instance belongs to.
+	CloudId string `protobuf:"bytes,2,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the folder that the subscription instance belongs to.
+	FolderId string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the subscription template that was used to create subscription instance.
+	TemplateId string `protobuf:"bytes,4,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	// ID of the version of subscription template.
+	TemplateVersionId string `protobuf:"bytes,5,opt,name=template_version_id,json=templateVersionId,proto3" json:"template_version_id,omitempty"`
+	// Description of the subscription instance.
+	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
+	// Timestamp of the start of the subscription.
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	// Timestamp of the end of the subscription.
+	EndTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Update timestamp.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Subscription state.
+	State Instance_State `protobuf:"varint,11,opt,name=state,proto3,enum=yandex.cloud.marketplace.licensemanager.v1.Instance_State" json:"state,omitempty"`
+	// List of subscription locks.
+	Locks []*Lock `protobuf:"bytes,12,rep,name=locks,proto3" json:"locks,omitempty"`
+	// Subscription template.
+	LicenseTemplate *Template `protobuf:"bytes,13,opt,name=license_template,json=licenseTemplate,proto3" json:"license_template,omitempty"`
 }
 
 func (x *Instance) Reset() {

@@ -31,10 +31,16 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LockServiceClient interface {
+	// Returns the specified subscription lock.
 	Get(ctx context.Context, in *GetLockRequest, opts ...grpc.CallOption) (*Lock, error)
+	// Returns the subscription lock for specified subscription instance and resource.
 	GetByInstanceAndResource(ctx context.Context, in *GetLockByInstanceAndResourceRequest, opts ...grpc.CallOption) (*Lock, error)
+	// Locks the specified subscription instance to the resource.
 	Create(ctx context.Context, in *CreateLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Checks if the she specified subscription is already locked to the specified resource.
+	// If it is not locked, locks the subscription to the resource.
 	Ensure(ctx context.Context, in *EnsureLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Unlocks the specified subscription lock.
 	Delete(ctx context.Context, in *DeleteLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -95,10 +101,16 @@ func (c *lockServiceClient) Delete(ctx context.Context, in *DeleteLockRequest, o
 // All implementations should embed UnimplementedLockServiceServer
 // for forward compatibility
 type LockServiceServer interface {
+	// Returns the specified subscription lock.
 	Get(context.Context, *GetLockRequest) (*Lock, error)
+	// Returns the subscription lock for specified subscription instance and resource.
 	GetByInstanceAndResource(context.Context, *GetLockByInstanceAndResourceRequest) (*Lock, error)
+	// Locks the specified subscription instance to the resource.
 	Create(context.Context, *CreateLockRequest) (*operation.Operation, error)
+	// Checks if the she specified subscription is already locked to the specified resource.
+	// If it is not locked, locks the subscription to the resource.
 	Ensure(context.Context, *EnsureLockRequest) (*operation.Operation, error)
+	// Unlocks the specified subscription lock.
 	Delete(context.Context, *DeleteLockRequest) (*operation.Operation, error)
 }
 
