@@ -3,6 +3,8 @@
 package logging
 
 import (
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -64,4 +66,132 @@ func (m *RunExportMetadata) SetSinkId(v string) {
 
 func (m *RunExportMetadata) SetResultFilename(v string) {
 	m.ResultFilename = v
+}
+
+func (m *GetExportRequest) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *ListExportsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListExportsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListExportsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListExportsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListExportsResponse) SetExports(v []*Export) {
+	m.Exports = v
+}
+
+func (m *ListExportsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *CreateExportRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CreateExportRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CreateExportRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CreateExportRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *CreateExportRequest) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *CreateExportRequest) SetSinkId(v string) {
+	m.SinkId = v
+}
+
+func (m *CreateExportRequest) SetParams(v *ExportParams) {
+	m.Params = v
+}
+
+func (m *CreateExportMetadata) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *UpdateExportRequest) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *UpdateExportRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateExportRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateExportRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateExportRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateExportRequest) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *UpdateExportRequest) SetSinkId(v string) {
+	m.SinkId = v
+}
+
+func (m *UpdateExportRequest) SetParams(v *ExportParams) {
+	m.Params = v
+}
+
+func (m *UpdateExportMetadata) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *DeleteExportRequest) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *DeleteExportMetadata) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *ListExportOperationsRequest) SetExportId(v string) {
+	m.ExportId = v
+}
+
+func (m *ListExportOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListExportOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListExportOperationsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListExportOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListExportOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

@@ -22,7 +22,7 @@ const (
 )
 
 // A Group resource.
-// For more information, see [Groups](/docs/organization/manage-groups).
+// For more information, see [Groups](/docs/organization/operations/manage-groups).
 type Group struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

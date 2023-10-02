@@ -2,6 +2,50 @@
 
 package logging
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
+func (m *Export) SetId(v string) {
+	m.Id = v
+}
+
+func (m *Export) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *Export) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *Export) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *Export) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Export) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *Export) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *Export) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *Export) SetSinkId(v string) {
+	m.SinkId = v
+}
+
+func (m *Export) SetParams(v *ExportParams) {
+	m.Params = v
+}
+
 func (m *ExportParams) SetResourceTypes(v []string) {
 	m.ResourceTypes = v
 }
