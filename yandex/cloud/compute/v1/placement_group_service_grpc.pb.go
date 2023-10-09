@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,13 +21,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PlacementGroupService_Get_FullMethodName            = "/yandex.cloud.compute.v1.PlacementGroupService/Get"
-	PlacementGroupService_List_FullMethodName           = "/yandex.cloud.compute.v1.PlacementGroupService/List"
-	PlacementGroupService_Create_FullMethodName         = "/yandex.cloud.compute.v1.PlacementGroupService/Create"
-	PlacementGroupService_Update_FullMethodName         = "/yandex.cloud.compute.v1.PlacementGroupService/Update"
-	PlacementGroupService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.PlacementGroupService/Delete"
-	PlacementGroupService_ListInstances_FullMethodName  = "/yandex.cloud.compute.v1.PlacementGroupService/ListInstances"
-	PlacementGroupService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.PlacementGroupService/ListOperations"
+	PlacementGroupService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.PlacementGroupService/Get"
+	PlacementGroupService_List_FullMethodName                 = "/yandex.cloud.compute.v1.PlacementGroupService/List"
+	PlacementGroupService_Create_FullMethodName               = "/yandex.cloud.compute.v1.PlacementGroupService/Create"
+	PlacementGroupService_Update_FullMethodName               = "/yandex.cloud.compute.v1.PlacementGroupService/Update"
+	PlacementGroupService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.PlacementGroupService/Delete"
+	PlacementGroupService_ListInstances_FullMethodName        = "/yandex.cloud.compute.v1.PlacementGroupService/ListInstances"
+	PlacementGroupService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.PlacementGroupService/ListOperations"
+	PlacementGroupService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.PlacementGroupService/ListAccessBindings"
+	PlacementGroupService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.PlacementGroupService/SetAccessBindings"
+	PlacementGroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.PlacementGroupService/UpdateAccessBindings"
 )
 
 // PlacementGroupServiceClient is the client API for PlacementGroupService service.
@@ -49,6 +53,12 @@ type PlacementGroupServiceClient interface {
 	ListInstances(ctx context.Context, in *ListPlacementGroupInstancesRequest, opts ...grpc.CallOption) (*ListPlacementGroupInstancesResponse, error)
 	// Lists operations for the specified placement group.
 	ListOperations(ctx context.Context, in *ListPlacementGroupOperationsRequest, opts ...grpc.CallOption) (*ListPlacementGroupOperationsResponse, error)
+	// Lists access bindings for the placement group.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the placement group.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the placement group.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type placementGroupServiceClient struct {
@@ -122,6 +132,33 @@ func (c *placementGroupServiceClient) ListOperations(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *placementGroupServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, PlacementGroupService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *placementGroupServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PlacementGroupService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *placementGroupServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PlacementGroupService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PlacementGroupServiceServer is the server API for PlacementGroupService service.
 // All implementations should embed UnimplementedPlacementGroupServiceServer
 // for forward compatibility
@@ -142,6 +179,12 @@ type PlacementGroupServiceServer interface {
 	ListInstances(context.Context, *ListPlacementGroupInstancesRequest) (*ListPlacementGroupInstancesResponse, error)
 	// Lists operations for the specified placement group.
 	ListOperations(context.Context, *ListPlacementGroupOperationsRequest) (*ListPlacementGroupOperationsResponse, error)
+	// Lists access bindings for the placement group.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the placement group.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the placement group.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedPlacementGroupServiceServer should be embedded to have forward compatible implementations.
@@ -168,6 +211,15 @@ func (UnimplementedPlacementGroupServiceServer) ListInstances(context.Context, *
 }
 func (UnimplementedPlacementGroupServiceServer) ListOperations(context.Context, *ListPlacementGroupOperationsRequest) (*ListPlacementGroupOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedPlacementGroupServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedPlacementGroupServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedPlacementGroupServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafePlacementGroupServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -307,6 +359,60 @@ func _PlacementGroupService_ListOperations_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PlacementGroupService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlacementGroupServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlacementGroupService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlacementGroupServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PlacementGroupService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlacementGroupServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlacementGroupService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlacementGroupServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PlacementGroupService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlacementGroupServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlacementGroupService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlacementGroupServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PlacementGroupService_ServiceDesc is the grpc.ServiceDesc for PlacementGroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -341,6 +447,18 @@ var PlacementGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _PlacementGroupService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _PlacementGroupService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _PlacementGroupService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _PlacementGroupService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

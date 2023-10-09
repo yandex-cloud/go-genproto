@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -29,6 +30,9 @@ const (
 	DiskService_Move_FullMethodName                  = "/yandex.cloud.compute.v1.DiskService/Move"
 	DiskService_Relocate_FullMethodName              = "/yandex.cloud.compute.v1.DiskService/Relocate"
 	DiskService_ListSnapshotSchedules_FullMethodName = "/yandex.cloud.compute.v1.DiskService/ListSnapshotSchedules"
+	DiskService_ListAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.DiskService/ListAccessBindings"
+	DiskService_SetAccessBindings_FullMethodName     = "/yandex.cloud.compute.v1.DiskService/SetAccessBindings"
+	DiskService_UpdateAccessBindings_FullMethodName  = "/yandex.cloud.compute.v1.DiskService/UpdateAccessBindings"
 )
 
 // DiskServiceClient is the client API for DiskService service.
@@ -66,6 +70,12 @@ type DiskServiceClient interface {
 	Relocate(ctx context.Context, in *RelocateDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of snapshot schedules the specified disk is attached to.
 	ListSnapshotSchedules(ctx context.Context, in *ListDiskSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListDiskSnapshotSchedulesResponse, error)
+	// Lists access bindings for the disk.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the disk.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the disk.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type diskServiceClient struct {
@@ -157,6 +167,33 @@ func (c *diskServiceClient) ListSnapshotSchedules(ctx context.Context, in *ListD
 	return out, nil
 }
 
+func (c *diskServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, DiskService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diskServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DiskService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diskServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DiskService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DiskServiceServer is the server API for DiskService service.
 // All implementations should embed UnimplementedDiskServiceServer
 // for forward compatibility
@@ -192,6 +229,12 @@ type DiskServiceServer interface {
 	Relocate(context.Context, *RelocateDiskRequest) (*operation.Operation, error)
 	// Retrieves the list of snapshot schedules the specified disk is attached to.
 	ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error)
+	// Lists access bindings for the disk.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the disk.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the disk.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedDiskServiceServer should be embedded to have forward compatible implementations.
@@ -224,6 +267,15 @@ func (UnimplementedDiskServiceServer) Relocate(context.Context, *RelocateDiskReq
 }
 func (UnimplementedDiskServiceServer) ListSnapshotSchedules(context.Context, *ListDiskSnapshotSchedulesRequest) (*ListDiskSnapshotSchedulesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSnapshotSchedules not implemented")
+}
+func (UnimplementedDiskServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedDiskServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedDiskServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeDiskServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -399,6 +451,60 @@ func _DiskService_ListSnapshotSchedules_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DiskService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DiskService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DiskService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DiskService_ServiceDesc is the grpc.ServiceDesc for DiskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -441,6 +547,18 @@ var DiskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSnapshotSchedules",
 			Handler:    _DiskService_ListSnapshotSchedules_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _DiskService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _DiskService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _DiskService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

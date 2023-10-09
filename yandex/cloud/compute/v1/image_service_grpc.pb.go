@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,13 +21,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ImageService_Get_FullMethodName               = "/yandex.cloud.compute.v1.ImageService/Get"
-	ImageService_GetLatestByFamily_FullMethodName = "/yandex.cloud.compute.v1.ImageService/GetLatestByFamily"
-	ImageService_List_FullMethodName              = "/yandex.cloud.compute.v1.ImageService/List"
-	ImageService_Create_FullMethodName            = "/yandex.cloud.compute.v1.ImageService/Create"
-	ImageService_Update_FullMethodName            = "/yandex.cloud.compute.v1.ImageService/Update"
-	ImageService_Delete_FullMethodName            = "/yandex.cloud.compute.v1.ImageService/Delete"
-	ImageService_ListOperations_FullMethodName    = "/yandex.cloud.compute.v1.ImageService/ListOperations"
+	ImageService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.ImageService/Get"
+	ImageService_GetLatestByFamily_FullMethodName    = "/yandex.cloud.compute.v1.ImageService/GetLatestByFamily"
+	ImageService_List_FullMethodName                 = "/yandex.cloud.compute.v1.ImageService/List"
+	ImageService_Create_FullMethodName               = "/yandex.cloud.compute.v1.ImageService/Create"
+	ImageService_Update_FullMethodName               = "/yandex.cloud.compute.v1.ImageService/Update"
+	ImageService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.ImageService/Delete"
+	ImageService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.ImageService/ListOperations"
+	ImageService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.ImageService/ListAccessBindings"
+	ImageService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.ImageService/SetAccessBindings"
+	ImageService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.ImageService/UpdateAccessBindings"
 )
 
 // ImageServiceClient is the client API for ImageService service.
@@ -54,6 +58,12 @@ type ImageServiceClient interface {
 	Delete(ctx context.Context, in *DeleteImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified image.
 	ListOperations(ctx context.Context, in *ListImageOperationsRequest, opts ...grpc.CallOption) (*ListImageOperationsResponse, error)
+	// Lists access bindings for the image.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the image.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the image.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type imageServiceClient struct {
@@ -127,6 +137,33 @@ func (c *imageServiceClient) ListOperations(ctx context.Context, in *ListImageOp
 	return out, nil
 }
 
+func (c *imageServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, ImageService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ImageService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ImageService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ImageServiceServer is the server API for ImageService service.
 // All implementations should embed UnimplementedImageServiceServer
 // for forward compatibility
@@ -152,6 +189,12 @@ type ImageServiceServer interface {
 	Delete(context.Context, *DeleteImageRequest) (*operation.Operation, error)
 	// Lists operations for the specified image.
 	ListOperations(context.Context, *ListImageOperationsRequest) (*ListImageOperationsResponse, error)
+	// Lists access bindings for the image.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the image.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the image.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedImageServiceServer should be embedded to have forward compatible implementations.
@@ -178,6 +221,15 @@ func (UnimplementedImageServiceServer) Delete(context.Context, *DeleteImageReque
 }
 func (UnimplementedImageServiceServer) ListOperations(context.Context, *ListImageOperationsRequest) (*ListImageOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedImageServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedImageServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedImageServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeImageServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -317,6 +369,60 @@ func _ImageService_ListOperations_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ImageService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImageService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ImageService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImageService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ImageService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImageService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ImageService_ServiceDesc is the grpc.ServiceDesc for ImageService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -351,6 +457,18 @@ var ImageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _ImageService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _ImageService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _ImageService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _ImageService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,12 +21,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	FilesystemService_Get_FullMethodName            = "/yandex.cloud.compute.v1.FilesystemService/Get"
-	FilesystemService_List_FullMethodName           = "/yandex.cloud.compute.v1.FilesystemService/List"
-	FilesystemService_Create_FullMethodName         = "/yandex.cloud.compute.v1.FilesystemService/Create"
-	FilesystemService_Update_FullMethodName         = "/yandex.cloud.compute.v1.FilesystemService/Update"
-	FilesystemService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.FilesystemService/Delete"
-	FilesystemService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.FilesystemService/ListOperations"
+	FilesystemService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.FilesystemService/Get"
+	FilesystemService_List_FullMethodName                 = "/yandex.cloud.compute.v1.FilesystemService/List"
+	FilesystemService_Create_FullMethodName               = "/yandex.cloud.compute.v1.FilesystemService/Create"
+	FilesystemService_Update_FullMethodName               = "/yandex.cloud.compute.v1.FilesystemService/Update"
+	FilesystemService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.FilesystemService/Delete"
+	FilesystemService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.FilesystemService/ListOperations"
+	FilesystemService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.FilesystemService/ListAccessBindings"
+	FilesystemService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.FilesystemService/SetAccessBindings"
+	FilesystemService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.FilesystemService/UpdateAccessBindings"
 )
 
 // FilesystemServiceClient is the client API for FilesystemService service.
@@ -50,6 +54,12 @@ type FilesystemServiceClient interface {
 	Delete(ctx context.Context, in *DeleteFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified filesystem.
 	ListOperations(ctx context.Context, in *ListFilesystemOperationsRequest, opts ...grpc.CallOption) (*ListFilesystemOperationsResponse, error)
+	// Lists access bindings for the filesystem.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the filesystem.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the filesystem.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type filesystemServiceClient struct {
@@ -114,6 +124,33 @@ func (c *filesystemServiceClient) ListOperations(ctx context.Context, in *ListFi
 	return out, nil
 }
 
+func (c *filesystemServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, FilesystemService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *filesystemServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FilesystemService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *filesystemServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FilesystemService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FilesystemServiceServer is the server API for FilesystemService service.
 // All implementations should embed UnimplementedFilesystemServiceServer
 // for forward compatibility
@@ -136,6 +173,12 @@ type FilesystemServiceServer interface {
 	Delete(context.Context, *DeleteFilesystemRequest) (*operation.Operation, error)
 	// Lists operations for the specified filesystem.
 	ListOperations(context.Context, *ListFilesystemOperationsRequest) (*ListFilesystemOperationsResponse, error)
+	// Lists access bindings for the filesystem.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the filesystem.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the filesystem.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedFilesystemServiceServer should be embedded to have forward compatible implementations.
@@ -159,6 +202,15 @@ func (UnimplementedFilesystemServiceServer) Delete(context.Context, *DeleteFiles
 }
 func (UnimplementedFilesystemServiceServer) ListOperations(context.Context, *ListFilesystemOperationsRequest) (*ListFilesystemOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedFilesystemServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedFilesystemServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedFilesystemServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeFilesystemServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -280,6 +332,60 @@ func _FilesystemService_ListOperations_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FilesystemService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FilesystemServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FilesystemService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FilesystemServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FilesystemService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FilesystemServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FilesystemService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FilesystemServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FilesystemService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FilesystemServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FilesystemService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FilesystemServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FilesystemService_ServiceDesc is the grpc.ServiceDesc for FilesystemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -310,6 +416,18 @@ var FilesystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _FilesystemService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _FilesystemService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _FilesystemService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _FilesystemService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

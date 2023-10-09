@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,13 +21,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DiskPlacementGroupService_Get_FullMethodName            = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Get"
-	DiskPlacementGroupService_List_FullMethodName           = "/yandex.cloud.compute.v1.DiskPlacementGroupService/List"
-	DiskPlacementGroupService_Create_FullMethodName         = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Create"
-	DiskPlacementGroupService_Update_FullMethodName         = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Update"
-	DiskPlacementGroupService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Delete"
-	DiskPlacementGroupService_ListDisks_FullMethodName      = "/yandex.cloud.compute.v1.DiskPlacementGroupService/ListDisks"
-	DiskPlacementGroupService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.DiskPlacementGroupService/ListOperations"
+	DiskPlacementGroupService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Get"
+	DiskPlacementGroupService_List_FullMethodName                 = "/yandex.cloud.compute.v1.DiskPlacementGroupService/List"
+	DiskPlacementGroupService_Create_FullMethodName               = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Create"
+	DiskPlacementGroupService_Update_FullMethodName               = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Update"
+	DiskPlacementGroupService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.DiskPlacementGroupService/Delete"
+	DiskPlacementGroupService_ListDisks_FullMethodName            = "/yandex.cloud.compute.v1.DiskPlacementGroupService/ListDisks"
+	DiskPlacementGroupService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.DiskPlacementGroupService/ListOperations"
+	DiskPlacementGroupService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.DiskPlacementGroupService/ListAccessBindings"
+	DiskPlacementGroupService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.DiskPlacementGroupService/SetAccessBindings"
+	DiskPlacementGroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.DiskPlacementGroupService/UpdateAccessBindings"
 )
 
 // DiskPlacementGroupServiceClient is the client API for DiskPlacementGroupService service.
@@ -47,6 +51,12 @@ type DiskPlacementGroupServiceClient interface {
 	ListDisks(ctx context.Context, in *ListDiskPlacementGroupDisksRequest, opts ...grpc.CallOption) (*ListDiskPlacementGroupDisksResponse, error)
 	// Lists operations for the specified placement group.
 	ListOperations(ctx context.Context, in *ListDiskPlacementGroupOperationsRequest, opts ...grpc.CallOption) (*ListDiskPlacementGroupOperationsResponse, error)
+	// Lists access bindings for the disk placement group.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the disk placement group.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the disk placement group.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type diskPlacementGroupServiceClient struct {
@@ -120,6 +130,33 @@ func (c *diskPlacementGroupServiceClient) ListOperations(ctx context.Context, in
 	return out, nil
 }
 
+func (c *diskPlacementGroupServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, DiskPlacementGroupService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diskPlacementGroupServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DiskPlacementGroupService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diskPlacementGroupServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DiskPlacementGroupService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DiskPlacementGroupServiceServer is the server API for DiskPlacementGroupService service.
 // All implementations should embed UnimplementedDiskPlacementGroupServiceServer
 // for forward compatibility
@@ -138,6 +175,12 @@ type DiskPlacementGroupServiceServer interface {
 	ListDisks(context.Context, *ListDiskPlacementGroupDisksRequest) (*ListDiskPlacementGroupDisksResponse, error)
 	// Lists operations for the specified placement group.
 	ListOperations(context.Context, *ListDiskPlacementGroupOperationsRequest) (*ListDiskPlacementGroupOperationsResponse, error)
+	// Lists access bindings for the disk placement group.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the disk placement group.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the disk placement group.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedDiskPlacementGroupServiceServer should be embedded to have forward compatible implementations.
@@ -164,6 +207,15 @@ func (UnimplementedDiskPlacementGroupServiceServer) ListDisks(context.Context, *
 }
 func (UnimplementedDiskPlacementGroupServiceServer) ListOperations(context.Context, *ListDiskPlacementGroupOperationsRequest) (*ListDiskPlacementGroupOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedDiskPlacementGroupServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedDiskPlacementGroupServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedDiskPlacementGroupServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeDiskPlacementGroupServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -303,6 +355,60 @@ func _DiskPlacementGroupService_ListOperations_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DiskPlacementGroupService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskPlacementGroupServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskPlacementGroupService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskPlacementGroupServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DiskPlacementGroupService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskPlacementGroupServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskPlacementGroupService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskPlacementGroupServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DiskPlacementGroupService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiskPlacementGroupServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiskPlacementGroupService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiskPlacementGroupServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DiskPlacementGroupService_ServiceDesc is the grpc.ServiceDesc for DiskPlacementGroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -337,6 +443,18 @@ var DiskPlacementGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _DiskPlacementGroupService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _DiskPlacementGroupService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _DiskPlacementGroupService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _DiskPlacementGroupService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

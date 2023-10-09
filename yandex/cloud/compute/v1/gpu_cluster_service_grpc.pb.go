@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,13 +21,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GpuClusterService_Get_FullMethodName            = "/yandex.cloud.compute.v1.GpuClusterService/Get"
-	GpuClusterService_List_FullMethodName           = "/yandex.cloud.compute.v1.GpuClusterService/List"
-	GpuClusterService_Create_FullMethodName         = "/yandex.cloud.compute.v1.GpuClusterService/Create"
-	GpuClusterService_Update_FullMethodName         = "/yandex.cloud.compute.v1.GpuClusterService/Update"
-	GpuClusterService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.GpuClusterService/Delete"
-	GpuClusterService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.GpuClusterService/ListOperations"
-	GpuClusterService_ListInstances_FullMethodName  = "/yandex.cloud.compute.v1.GpuClusterService/ListInstances"
+	GpuClusterService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.GpuClusterService/Get"
+	GpuClusterService_List_FullMethodName                 = "/yandex.cloud.compute.v1.GpuClusterService/List"
+	GpuClusterService_Create_FullMethodName               = "/yandex.cloud.compute.v1.GpuClusterService/Create"
+	GpuClusterService_Update_FullMethodName               = "/yandex.cloud.compute.v1.GpuClusterService/Update"
+	GpuClusterService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.GpuClusterService/Delete"
+	GpuClusterService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.GpuClusterService/ListOperations"
+	GpuClusterService_ListInstances_FullMethodName        = "/yandex.cloud.compute.v1.GpuClusterService/ListInstances"
+	GpuClusterService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.GpuClusterService/ListAccessBindings"
+	GpuClusterService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.GpuClusterService/SetAccessBindings"
+	GpuClusterService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.GpuClusterService/UpdateAccessBindings"
 )
 
 // GpuClusterServiceClient is the client API for GpuClusterService service.
@@ -53,6 +57,12 @@ type GpuClusterServiceClient interface {
 	ListOperations(ctx context.Context, in *ListGpuClusterOperationsRequest, opts ...grpc.CallOption) (*ListGpuClusterOperationsResponse, error)
 	// List instances created in this GPU cluster.
 	ListInstances(ctx context.Context, in *ListGpuClusterInstancesRequest, opts ...grpc.CallOption) (*ListGpuClusterInstancesResponse, error)
+	// Lists access bindings for the GPU cluster.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the GPU cluster.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the GPU cluster.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type gpuClusterServiceClient struct {
@@ -126,6 +136,33 @@ func (c *gpuClusterServiceClient) ListInstances(ctx context.Context, in *ListGpu
 	return out, nil
 }
 
+func (c *gpuClusterServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, GpuClusterService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gpuClusterServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, GpuClusterService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gpuClusterServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, GpuClusterService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GpuClusterServiceServer is the server API for GpuClusterService service.
 // All implementations should embed UnimplementedGpuClusterServiceServer
 // for forward compatibility
@@ -150,6 +187,12 @@ type GpuClusterServiceServer interface {
 	ListOperations(context.Context, *ListGpuClusterOperationsRequest) (*ListGpuClusterOperationsResponse, error)
 	// List instances created in this GPU cluster.
 	ListInstances(context.Context, *ListGpuClusterInstancesRequest) (*ListGpuClusterInstancesResponse, error)
+	// Lists access bindings for the GPU cluster.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the GPU cluster.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the GPU cluster.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedGpuClusterServiceServer should be embedded to have forward compatible implementations.
@@ -176,6 +219,15 @@ func (UnimplementedGpuClusterServiceServer) ListOperations(context.Context, *Lis
 }
 func (UnimplementedGpuClusterServiceServer) ListInstances(context.Context, *ListGpuClusterInstancesRequest) (*ListGpuClusterInstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListInstances not implemented")
+}
+func (UnimplementedGpuClusterServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedGpuClusterServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedGpuClusterServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeGpuClusterServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -315,6 +367,60 @@ func _GpuClusterService_ListInstances_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GpuClusterService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GpuClusterServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GpuClusterService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GpuClusterServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GpuClusterService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GpuClusterServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GpuClusterService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GpuClusterServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GpuClusterService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GpuClusterServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GpuClusterService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GpuClusterServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GpuClusterService_ServiceDesc is the grpc.ServiceDesc for GpuClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -349,6 +455,18 @@ var GpuClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListInstances",
 			Handler:    _GpuClusterService_ListInstances_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _GpuClusterService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _GpuClusterService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _GpuClusterService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

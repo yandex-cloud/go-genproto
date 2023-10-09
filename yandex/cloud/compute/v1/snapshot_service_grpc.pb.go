@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,12 +21,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SnapshotService_Get_FullMethodName            = "/yandex.cloud.compute.v1.SnapshotService/Get"
-	SnapshotService_List_FullMethodName           = "/yandex.cloud.compute.v1.SnapshotService/List"
-	SnapshotService_Create_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotService/Create"
-	SnapshotService_Update_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotService/Update"
-	SnapshotService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotService/Delete"
-	SnapshotService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.SnapshotService/ListOperations"
+	SnapshotService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.SnapshotService/Get"
+	SnapshotService_List_FullMethodName                 = "/yandex.cloud.compute.v1.SnapshotService/List"
+	SnapshotService_Create_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotService/Create"
+	SnapshotService_Update_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotService/Update"
+	SnapshotService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotService/Delete"
+	SnapshotService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.SnapshotService/ListOperations"
+	SnapshotService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.SnapshotService/ListAccessBindings"
+	SnapshotService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.SnapshotService/SetAccessBindings"
+	SnapshotService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.SnapshotService/UpdateAccessBindings"
 )
 
 // SnapshotServiceClient is the client API for SnapshotService service.
@@ -50,6 +54,12 @@ type SnapshotServiceClient interface {
 	Delete(ctx context.Context, in *DeleteSnapshotRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified snapshot.
 	ListOperations(ctx context.Context, in *ListSnapshotOperationsRequest, opts ...grpc.CallOption) (*ListSnapshotOperationsResponse, error)
+	// Lists access bindings for the snapshot.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the snapshot.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the snapshot.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type snapshotServiceClient struct {
@@ -114,6 +124,33 @@ func (c *snapshotServiceClient) ListOperations(ctx context.Context, in *ListSnap
 	return out, nil
 }
 
+func (c *snapshotServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, SnapshotService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *snapshotServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SnapshotService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *snapshotServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SnapshotService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SnapshotServiceServer is the server API for SnapshotService service.
 // All implementations should embed UnimplementedSnapshotServiceServer
 // for forward compatibility
@@ -136,6 +173,12 @@ type SnapshotServiceServer interface {
 	Delete(context.Context, *DeleteSnapshotRequest) (*operation.Operation, error)
 	// Lists operations for the specified snapshot.
 	ListOperations(context.Context, *ListSnapshotOperationsRequest) (*ListSnapshotOperationsResponse, error)
+	// Lists access bindings for the snapshot.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the snapshot.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the snapshot.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedSnapshotServiceServer should be embedded to have forward compatible implementations.
@@ -159,6 +202,15 @@ func (UnimplementedSnapshotServiceServer) Delete(context.Context, *DeleteSnapsho
 }
 func (UnimplementedSnapshotServiceServer) ListOperations(context.Context, *ListSnapshotOperationsRequest) (*ListSnapshotOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedSnapshotServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedSnapshotServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedSnapshotServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeSnapshotServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -280,6 +332,60 @@ func _SnapshotService_ListOperations_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SnapshotService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SnapshotService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SnapshotService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SnapshotService_ServiceDesc is the grpc.ServiceDesc for SnapshotService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -310,6 +416,18 @@ var SnapshotService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _SnapshotService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _SnapshotService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _SnapshotService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _SnapshotService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

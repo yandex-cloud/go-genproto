@@ -21,15 +21,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ProjectJobService_Create_FullMethodName          = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Create"
-	ProjectJobService_Execute_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Execute"
-	ProjectJobService_Cancel_FullMethodName          = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Cancel"
-	ProjectJobService_Finalize_FullMethodName        = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Finalize"
-	ProjectJobService_ReadStdLogs_FullMethodName     = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadStdLogs"
-	ProjectJobService_DownloadStdLogs_FullMethodName = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DownloadStdLogs"
-	ProjectJobService_List_FullMethodName            = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/List"
-	ProjectJobService_Get_FullMethodName             = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Get"
-	ProjectJobService_Delete_FullMethodName          = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Delete"
+	ProjectJobService_Create_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Create"
+	ProjectJobService_Execute_FullMethodName     = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Execute"
+	ProjectJobService_Cancel_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Cancel"
+	ProjectJobService_Finalize_FullMethodName    = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Finalize"
+	ProjectJobService_ReadStdLogs_FullMethodName = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadStdLogs"
+	ProjectJobService_ReadLogs_FullMethodName    = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadLogs"
+	ProjectJobService_List_FullMethodName        = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/List"
+	ProjectJobService_Get_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Get"
+	ProjectJobService_Delete_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Delete"
 )
 
 // ProjectJobServiceClient is the client API for ProjectJobService service.
@@ -44,10 +44,11 @@ type ProjectJobServiceClient interface {
 	Cancel(ctx context.Context, in *CancelProjectJobRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Triggers cleanup after downloading job results.
 	Finalize(ctx context.Context, in *FinalizeProjectJobRequest, opts ...grpc.CallOption) (*FinalizeProjectJobResponse, error)
+	// Deprecated: Do not use.
 	// Returns stream of job logs.
 	ReadStdLogs(ctx context.Context, in *ReadProjectJobStdLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadStdLogsClient, error)
-	// Returns URL for downloading job logs.
-	DownloadStdLogs(ctx context.Context, in *DownloadProjectJobStdLogsRequest, opts ...grpc.CallOption) (*DownloadProjectJobStdLogsResponse, error)
+	// Returns stream of job logs.
+	ReadLogs(ctx context.Context, in *ReadProjectJobLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadLogsClient, error)
 	// Lists jobs.
 	List(ctx context.Context, in *ListProjectJobRequest, opts ...grpc.CallOption) (*ListProjectJobResponse, error)
 	// Returns job by id.
@@ -100,6 +101,7 @@ func (c *projectJobServiceClient) Finalize(ctx context.Context, in *FinalizeProj
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *projectJobServiceClient) ReadStdLogs(ctx context.Context, in *ReadProjectJobStdLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadStdLogsClient, error) {
 	stream, err := c.cc.NewStream(ctx, &ProjectJobService_ServiceDesc.Streams[0], ProjectJobService_ReadStdLogs_FullMethodName, opts...)
 	if err != nil {
@@ -132,13 +134,36 @@ func (x *projectJobServiceReadStdLogsClient) Recv() (*ReadProjectJobStdLogsRespo
 	return m, nil
 }
 
-func (c *projectJobServiceClient) DownloadStdLogs(ctx context.Context, in *DownloadProjectJobStdLogsRequest, opts ...grpc.CallOption) (*DownloadProjectJobStdLogsResponse, error) {
-	out := new(DownloadProjectJobStdLogsResponse)
-	err := c.cc.Invoke(ctx, ProjectJobService_DownloadStdLogs_FullMethodName, in, out, opts...)
+func (c *projectJobServiceClient) ReadLogs(ctx context.Context, in *ReadProjectJobLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadLogsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ProjectJobService_ServiceDesc.Streams[1], ProjectJobService_ReadLogs_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &projectJobServiceReadLogsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ProjectJobService_ReadLogsClient interface {
+	Recv() (*ReadProjectJobLogsResponse, error)
+	grpc.ClientStream
+}
+
+type projectJobServiceReadLogsClient struct {
+	grpc.ClientStream
+}
+
+func (x *projectJobServiceReadLogsClient) Recv() (*ReadProjectJobLogsResponse, error) {
+	m := new(ReadProjectJobLogsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *projectJobServiceClient) List(ctx context.Context, in *ListProjectJobRequest, opts ...grpc.CallOption) (*ListProjectJobResponse, error) {
@@ -180,10 +205,11 @@ type ProjectJobServiceServer interface {
 	Cancel(context.Context, *CancelProjectJobRequest) (*emptypb.Empty, error)
 	// Triggers cleanup after downloading job results.
 	Finalize(context.Context, *FinalizeProjectJobRequest) (*FinalizeProjectJobResponse, error)
+	// Deprecated: Do not use.
 	// Returns stream of job logs.
 	ReadStdLogs(*ReadProjectJobStdLogsRequest, ProjectJobService_ReadStdLogsServer) error
-	// Returns URL for downloading job logs.
-	DownloadStdLogs(context.Context, *DownloadProjectJobStdLogsRequest) (*DownloadProjectJobStdLogsResponse, error)
+	// Returns stream of job logs.
+	ReadLogs(*ReadProjectJobLogsRequest, ProjectJobService_ReadLogsServer) error
 	// Lists jobs.
 	List(context.Context, *ListProjectJobRequest) (*ListProjectJobResponse, error)
 	// Returns job by id.
@@ -211,8 +237,8 @@ func (UnimplementedProjectJobServiceServer) Finalize(context.Context, *FinalizeP
 func (UnimplementedProjectJobServiceServer) ReadStdLogs(*ReadProjectJobStdLogsRequest, ProjectJobService_ReadStdLogsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadStdLogs not implemented")
 }
-func (UnimplementedProjectJobServiceServer) DownloadStdLogs(context.Context, *DownloadProjectJobStdLogsRequest) (*DownloadProjectJobStdLogsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DownloadStdLogs not implemented")
+func (UnimplementedProjectJobServiceServer) ReadLogs(*ReadProjectJobLogsRequest, ProjectJobService_ReadLogsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadLogs not implemented")
 }
 func (UnimplementedProjectJobServiceServer) List(context.Context, *ListProjectJobRequest) (*ListProjectJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -328,22 +354,25 @@ func (x *projectJobServiceReadStdLogsServer) Send(m *ReadProjectJobStdLogsRespon
 	return x.ServerStream.SendMsg(m)
 }
 
-func _ProjectJobService_DownloadStdLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DownloadProjectJobStdLogsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _ProjectJobService_ReadLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadProjectJobLogsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(ProjectJobServiceServer).DownloadStdLogs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectJobService_DownloadStdLogs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectJobServiceServer).DownloadStdLogs(ctx, req.(*DownloadProjectJobStdLogsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(ProjectJobServiceServer).ReadLogs(m, &projectJobServiceReadLogsServer{stream})
+}
+
+type ProjectJobService_ReadLogsServer interface {
+	Send(*ReadProjectJobLogsResponse) error
+	grpc.ServerStream
+}
+
+type projectJobServiceReadLogsServer struct {
+	grpc.ServerStream
+}
+
+func (x *projectJobServiceReadLogsServer) Send(m *ReadProjectJobLogsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _ProjectJobService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -424,10 +453,6 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProjectJobService_Finalize_Handler,
 		},
 		{
-			MethodName: "DownloadStdLogs",
-			Handler:    _ProjectJobService_DownloadStdLogs_Handler,
-		},
-		{
 			MethodName: "List",
 			Handler:    _ProjectJobService_List_Handler,
 		},
@@ -444,6 +469,11 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadStdLogs",
 			Handler:       _ProjectJobService_ReadStdLogs_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadLogs",
+			Handler:       _ProjectJobService_ReadLogs_Handler,
 			ServerStreams: true,
 		},
 	},

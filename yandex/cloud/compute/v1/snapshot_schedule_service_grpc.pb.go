@@ -8,6 +8,7 @@ package compute
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,17 +21,20 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SnapshotScheduleService_Get_FullMethodName            = "/yandex.cloud.compute.v1.SnapshotScheduleService/Get"
-	SnapshotScheduleService_List_FullMethodName           = "/yandex.cloud.compute.v1.SnapshotScheduleService/List"
-	SnapshotScheduleService_Create_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotScheduleService/Create"
-	SnapshotScheduleService_Update_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotScheduleService/Update"
-	SnapshotScheduleService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotScheduleService/Delete"
-	SnapshotScheduleService_UpdateDisks_FullMethodName    = "/yandex.cloud.compute.v1.SnapshotScheduleService/UpdateDisks"
-	SnapshotScheduleService_Disable_FullMethodName        = "/yandex.cloud.compute.v1.SnapshotScheduleService/Disable"
-	SnapshotScheduleService_Enable_FullMethodName         = "/yandex.cloud.compute.v1.SnapshotScheduleService/Enable"
-	SnapshotScheduleService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListOperations"
-	SnapshotScheduleService_ListSnapshots_FullMethodName  = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListSnapshots"
-	SnapshotScheduleService_ListDisks_FullMethodName      = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListDisks"
+	SnapshotScheduleService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.SnapshotScheduleService/Get"
+	SnapshotScheduleService_List_FullMethodName                 = "/yandex.cloud.compute.v1.SnapshotScheduleService/List"
+	SnapshotScheduleService_Create_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Create"
+	SnapshotScheduleService_Update_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Update"
+	SnapshotScheduleService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Delete"
+	SnapshotScheduleService_UpdateDisks_FullMethodName          = "/yandex.cloud.compute.v1.SnapshotScheduleService/UpdateDisks"
+	SnapshotScheduleService_Disable_FullMethodName              = "/yandex.cloud.compute.v1.SnapshotScheduleService/Disable"
+	SnapshotScheduleService_Enable_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Enable"
+	SnapshotScheduleService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListOperations"
+	SnapshotScheduleService_ListSnapshots_FullMethodName        = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListSnapshots"
+	SnapshotScheduleService_ListDisks_FullMethodName            = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListDisks"
+	SnapshotScheduleService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListAccessBindings"
+	SnapshotScheduleService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.SnapshotScheduleService/SetAccessBindings"
+	SnapshotScheduleService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.SnapshotScheduleService/UpdateAccessBindings"
 )
 
 // SnapshotScheduleServiceClient is the client API for SnapshotScheduleService service.
@@ -78,6 +82,12 @@ type SnapshotScheduleServiceClient interface {
 	ListSnapshots(ctx context.Context, in *ListSnapshotScheduleSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotScheduleSnapshotsResponse, error)
 	// Retrieves the list of disks attached to the specified snapshot schedule.
 	ListDisks(ctx context.Context, in *ListSnapshotScheduleDisksRequest, opts ...grpc.CallOption) (*ListSnapshotScheduleDisksResponse, error)
+	// Lists access bindings for the snapshot schedule.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the snapshot schedule.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the snapshot schedule.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type snapshotScheduleServiceClient struct {
@@ -187,6 +197,33 @@ func (c *snapshotScheduleServiceClient) ListDisks(ctx context.Context, in *ListS
 	return out, nil
 }
 
+func (c *snapshotScheduleServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, SnapshotScheduleService_ListAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *snapshotScheduleServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SnapshotScheduleService_SetAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *snapshotScheduleServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SnapshotScheduleService_UpdateAccessBindings_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SnapshotScheduleServiceServer is the server API for SnapshotScheduleService service.
 // All implementations should embed UnimplementedSnapshotScheduleServiceServer
 // for forward compatibility
@@ -232,6 +269,12 @@ type SnapshotScheduleServiceServer interface {
 	ListSnapshots(context.Context, *ListSnapshotScheduleSnapshotsRequest) (*ListSnapshotScheduleSnapshotsResponse, error)
 	// Retrieves the list of disks attached to the specified snapshot schedule.
 	ListDisks(context.Context, *ListSnapshotScheduleDisksRequest) (*ListSnapshotScheduleDisksResponse, error)
+	// Lists access bindings for the snapshot schedule.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the snapshot schedule.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the snapshot schedule.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedSnapshotScheduleServiceServer should be embedded to have forward compatible implementations.
@@ -270,6 +313,15 @@ func (UnimplementedSnapshotScheduleServiceServer) ListSnapshots(context.Context,
 }
 func (UnimplementedSnapshotScheduleServiceServer) ListDisks(context.Context, *ListSnapshotScheduleDisksRequest) (*ListSnapshotScheduleDisksResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDisks not implemented")
+}
+func (UnimplementedSnapshotScheduleServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedSnapshotScheduleServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedSnapshotScheduleServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 
 // UnsafeSnapshotScheduleServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -481,6 +533,60 @@ func _SnapshotScheduleService_ListDisks_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SnapshotScheduleService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotScheduleServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotScheduleService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotScheduleServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SnapshotScheduleService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotScheduleServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotScheduleService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotScheduleServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SnapshotScheduleService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotScheduleServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotScheduleService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotScheduleServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SnapshotScheduleService_ServiceDesc is the grpc.ServiceDesc for SnapshotScheduleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -531,6 +637,18 @@ var SnapshotScheduleService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDisks",
 			Handler:    _SnapshotScheduleService_ListDisks_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _SnapshotScheduleService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _SnapshotScheduleService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _SnapshotScheduleService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

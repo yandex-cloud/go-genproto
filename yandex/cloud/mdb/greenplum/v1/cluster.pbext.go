@@ -5,6 +5,7 @@ package greenplum
 import (
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -173,6 +174,10 @@ func (m *GreenplumConfig) SetVersion(v string) {
 
 func (m *GreenplumConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
 	m.BackupWindowStart = v
+}
+
+func (m *GreenplumConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
+	m.BackupRetainPeriodDays = v
 }
 
 func (m *GreenplumConfig) SetAccess(v *Access) {
