@@ -40,6 +40,7 @@ const (
 	ClusterService_AddHosts_FullMethodName                 = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/AddHosts"
 	ClusterService_UpdateHosts_FullMethodName              = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/UpdateHosts"
 	ClusterService_DeleteHosts_FullMethodName              = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/DeleteHosts"
+	ClusterService_RestartHosts_FullMethodName             = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/RestartHosts"
 	ClusterService_GetShard_FullMethodName                 = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/GetShard"
 	ClusterService_ListShards_FullMethodName               = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/ListShards"
 	ClusterService_AddShard_FullMethodName                 = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/AddShard"
@@ -103,6 +104,7 @@ type ClusterServiceClient interface {
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	RestartHosts(ctx context.Context, in *RestartClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified shard.
 	GetShard(ctx context.Context, in *GetClusterShardRequest, opts ...grpc.CallOption) (*Shard, error)
 	// Retrieves a list of shards that belong to the specified cluster.
@@ -344,6 +346,15 @@ func (c *clusterServiceClient) DeleteHosts(ctx context.Context, in *DeleteCluste
 	return out, nil
 }
 
+func (c *clusterServiceClient) RestartHosts(ctx context.Context, in *RestartClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_RestartHosts_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) GetShard(ctx context.Context, in *GetClusterShardRequest, opts ...grpc.CallOption) (*Shard, error) {
 	out := new(Shard)
 	err := c.cc.Invoke(ctx, ClusterService_GetShard_FullMethodName, in, out, opts...)
@@ -517,6 +528,7 @@ type ClusterServiceServer interface {
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
+	RestartHosts(context.Context, *RestartClusterHostsRequest) (*operation.Operation, error)
 	// Returns the specified shard.
 	GetShard(context.Context, *GetClusterShardRequest) (*Shard, error)
 	// Retrieves a list of shards that belong to the specified cluster.
@@ -610,6 +622,9 @@ func (UnimplementedClusterServiceServer) UpdateHosts(context.Context, *UpdateClu
 }
 func (UnimplementedClusterServiceServer) DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHosts not implemented")
+}
+func (UnimplementedClusterServiceServer) RestartHosts(context.Context, *RestartClusterHostsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RestartHosts not implemented")
 }
 func (UnimplementedClusterServiceServer) GetShard(context.Context, *GetClusterShardRequest) (*Shard, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetShard not implemented")
@@ -1028,6 +1043,24 @@ func _ClusterService_DeleteHosts_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_RestartHosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestartClusterHostsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RestartHosts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_RestartHosts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RestartHosts(ctx, req.(*RestartClusterHostsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_GetShard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetClusterShardRequest)
 	if err := dec(in); err != nil {
@@ -1362,6 +1395,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteHosts",
 			Handler:    _ClusterService_DeleteHosts_Handler,
+		},
+		{
+			MethodName: "RestartHosts",
+			Handler:    _ClusterService_RestartHosts_Handler,
 		},
 		{
 			MethodName: "GetShard",

@@ -37,3 +37,7 @@ func (m *Lock) SetUpdatedAt(v *timestamppb.Timestamp) {
 func (m *Lock) SetState(v Lock_State) {
 	m.State = v
 }
+
+func (m *Lock) SetTemplateId(v string) {
+	m.TemplateId = v
+}

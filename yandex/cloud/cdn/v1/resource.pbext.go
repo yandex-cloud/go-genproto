@@ -138,6 +138,10 @@ func (m *ResourceOptions) SetRewrite(v *ResourceOptions_RewriteOption) {
 	m.Rewrite = v
 }
 
+func (m *ResourceOptions) SetSecureKey(v *ResourceOptions_SecureKeyOption) {
+	m.SecureKey = v
+}
+
 func (m *ResourceOptions_BoolOption) SetEnabled(v bool) {
 	m.Enabled = v
 }
@@ -328,6 +332,18 @@ func (m *ResourceOptions_RewriteOption) SetBody(v string) {
 
 func (m *ResourceOptions_RewriteOption) SetFlag(v RewriteFlag) {
 	m.Flag = v
+}
+
+func (m *ResourceOptions_SecureKeyOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_SecureKeyOption) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *ResourceOptions_SecureKeyOption) SetType(v SecureKeyURLType) {
+	m.Type = v
 }
 
 func (m *SSLTargetCertificate) SetType(v SSLCertificateType) {

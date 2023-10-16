@@ -45,3 +45,35 @@ func (m *GetLockByInstanceAndResourceRequest) SetInstanceId(v string) {
 func (m *GetLockByInstanceAndResourceRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
+
+func (m *ListLocksRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *ListLocksRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListLocksRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListLocksRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListLocksRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListLocksRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListLocksResponse) SetLocks(v []*Lock) {
+	m.Locks = v
+}
+
+func (m *ListLocksResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

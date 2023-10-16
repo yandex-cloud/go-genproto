@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	LockService_Get_FullMethodName                      = "/yandex.cloud.marketplace.licensemanager.v1.LockService/Get"
 	LockService_GetByInstanceAndResource_FullMethodName = "/yandex.cloud.marketplace.licensemanager.v1.LockService/GetByInstanceAndResource"
+	LockService_List_FullMethodName                     = "/yandex.cloud.marketplace.licensemanager.v1.LockService/List"
 	LockService_Create_FullMethodName                   = "/yandex.cloud.marketplace.licensemanager.v1.LockService/Create"
 	LockService_Ensure_FullMethodName                   = "/yandex.cloud.marketplace.licensemanager.v1.LockService/Ensure"
 	LockService_Delete_FullMethodName                   = "/yandex.cloud.marketplace.licensemanager.v1.LockService/Delete"
@@ -35,6 +36,7 @@ type LockServiceClient interface {
 	Get(ctx context.Context, in *GetLockRequest, opts ...grpc.CallOption) (*Lock, error)
 	// Returns the subscription lock for specified subscription instance and resource.
 	GetByInstanceAndResource(ctx context.Context, in *GetLockByInstanceAndResourceRequest, opts ...grpc.CallOption) (*Lock, error)
+	List(ctx context.Context, in *ListLocksRequest, opts ...grpc.CallOption) (*ListLocksResponse, error)
 	// Locks the specified subscription instance to the resource.
 	Create(ctx context.Context, in *CreateLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Checks if the she specified subscription is already locked to the specified resource.
@@ -64,6 +66,15 @@ func (c *lockServiceClient) Get(ctx context.Context, in *GetLockRequest, opts ..
 func (c *lockServiceClient) GetByInstanceAndResource(ctx context.Context, in *GetLockByInstanceAndResourceRequest, opts ...grpc.CallOption) (*Lock, error) {
 	out := new(Lock)
 	err := c.cc.Invoke(ctx, LockService_GetByInstanceAndResource_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lockServiceClient) List(ctx context.Context, in *ListLocksRequest, opts ...grpc.CallOption) (*ListLocksResponse, error) {
+	out := new(ListLocksResponse)
+	err := c.cc.Invoke(ctx, LockService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +116,7 @@ type LockServiceServer interface {
 	Get(context.Context, *GetLockRequest) (*Lock, error)
 	// Returns the subscription lock for specified subscription instance and resource.
 	GetByInstanceAndResource(context.Context, *GetLockByInstanceAndResourceRequest) (*Lock, error)
+	List(context.Context, *ListLocksRequest) (*ListLocksResponse, error)
 	// Locks the specified subscription instance to the resource.
 	Create(context.Context, *CreateLockRequest) (*operation.Operation, error)
 	// Checks if the she specified subscription is already locked to the specified resource.
@@ -123,6 +135,9 @@ func (UnimplementedLockServiceServer) Get(context.Context, *GetLockRequest) (*Lo
 }
 func (UnimplementedLockServiceServer) GetByInstanceAndResource(context.Context, *GetLockByInstanceAndResourceRequest) (*Lock, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByInstanceAndResource not implemented")
+}
+func (UnimplementedLockServiceServer) List(context.Context, *ListLocksRequest) (*ListLocksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedLockServiceServer) Create(context.Context, *CreateLockRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -177,6 +192,24 @@ func _LockService_GetByInstanceAndResource_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LockServiceServer).GetByInstanceAndResource(ctx, req.(*GetLockByInstanceAndResourceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LockService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLocksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LockServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LockService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LockServiceServer).List(ctx, req.(*ListLocksRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -249,6 +282,10 @@ var LockService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetByInstanceAndResource",
 			Handler:    _LockService_GetByInstanceAndResource_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _LockService_List_Handler,
 		},
 		{
 			MethodName: "Create",

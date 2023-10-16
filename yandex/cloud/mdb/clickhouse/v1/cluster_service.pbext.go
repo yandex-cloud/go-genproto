@@ -495,6 +495,22 @@ func (m *DeleteClusterHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
 }
 
+func (m *RestartClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestartClusterHostsRequest) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *RestartHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestartHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
 func (m *GetClusterShardRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

@@ -33,3 +33,7 @@ func (m *Agent) SetErrors(v []string) {
 func (m *Agent) SetCurrentJobId(v string) {
 	m.CurrentJobId = v
 }
+
+func (m *Agent) SetAgentVersionId(v string) {
+	m.AgentVersionId = v
+}
