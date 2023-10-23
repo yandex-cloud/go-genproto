@@ -21,15 +21,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ProjectJobService_Create_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Create"
-	ProjectJobService_Execute_FullMethodName     = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Execute"
-	ProjectJobService_Cancel_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Cancel"
-	ProjectJobService_Finalize_FullMethodName    = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Finalize"
-	ProjectJobService_ReadStdLogs_FullMethodName = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadStdLogs"
-	ProjectJobService_ReadLogs_FullMethodName    = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadLogs"
-	ProjectJobService_List_FullMethodName        = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/List"
-	ProjectJobService_Get_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Get"
-	ProjectJobService_Delete_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Delete"
+	ProjectJobService_Create_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Create"
+	ProjectJobService_Execute_FullMethodName          = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Execute"
+	ProjectJobService_Cancel_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Cancel"
+	ProjectJobService_Finalize_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Finalize"
+	ProjectJobService_ReadStdLogs_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadStdLogs"
+	ProjectJobService_ReadLogs_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadLogs"
+	ProjectJobService_DownloadJobFiles_FullMethodName = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DownloadJobFiles"
+	ProjectJobService_List_FullMethodName             = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/List"
+	ProjectJobService_Get_FullMethodName              = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Get"
+	ProjectJobService_Delete_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Delete"
 )
 
 // ProjectJobServiceClient is the client API for ProjectJobService service.
@@ -49,6 +50,8 @@ type ProjectJobServiceClient interface {
 	ReadStdLogs(ctx context.Context, in *ReadProjectJobStdLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadStdLogsClient, error)
 	// Returns stream of job logs.
 	ReadLogs(ctx context.Context, in *ReadProjectJobLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadLogsClient, error)
+	// Returns download urls for job files.
+	DownloadJobFiles(ctx context.Context, in *DownloadProjectJobFilesRequest, opts ...grpc.CallOption) (*DownloadProjectJobFilesResponse, error)
 	// Lists jobs.
 	List(ctx context.Context, in *ListProjectJobRequest, opts ...grpc.CallOption) (*ListProjectJobResponse, error)
 	// Returns job by id.
@@ -166,6 +169,15 @@ func (x *projectJobServiceReadLogsClient) Recv() (*ReadProjectJobLogsResponse, e
 	return m, nil
 }
 
+func (c *projectJobServiceClient) DownloadJobFiles(ctx context.Context, in *DownloadProjectJobFilesRequest, opts ...grpc.CallOption) (*DownloadProjectJobFilesResponse, error) {
+	out := new(DownloadProjectJobFilesResponse)
+	err := c.cc.Invoke(ctx, ProjectJobService_DownloadJobFiles_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *projectJobServiceClient) List(ctx context.Context, in *ListProjectJobRequest, opts ...grpc.CallOption) (*ListProjectJobResponse, error) {
 	out := new(ListProjectJobResponse)
 	err := c.cc.Invoke(ctx, ProjectJobService_List_FullMethodName, in, out, opts...)
@@ -210,6 +222,8 @@ type ProjectJobServiceServer interface {
 	ReadStdLogs(*ReadProjectJobStdLogsRequest, ProjectJobService_ReadStdLogsServer) error
 	// Returns stream of job logs.
 	ReadLogs(*ReadProjectJobLogsRequest, ProjectJobService_ReadLogsServer) error
+	// Returns download urls for job files.
+	DownloadJobFiles(context.Context, *DownloadProjectJobFilesRequest) (*DownloadProjectJobFilesResponse, error)
 	// Lists jobs.
 	List(context.Context, *ListProjectJobRequest) (*ListProjectJobResponse, error)
 	// Returns job by id.
@@ -239,6 +253,9 @@ func (UnimplementedProjectJobServiceServer) ReadStdLogs(*ReadProjectJobStdLogsRe
 }
 func (UnimplementedProjectJobServiceServer) ReadLogs(*ReadProjectJobLogsRequest, ProjectJobService_ReadLogsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadLogs not implemented")
+}
+func (UnimplementedProjectJobServiceServer) DownloadJobFiles(context.Context, *DownloadProjectJobFilesRequest) (*DownloadProjectJobFilesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DownloadJobFiles not implemented")
 }
 func (UnimplementedProjectJobServiceServer) List(context.Context, *ListProjectJobRequest) (*ListProjectJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -375,6 +392,24 @@ func (x *projectJobServiceReadLogsServer) Send(m *ReadProjectJobLogsResponse) er
 	return x.ServerStream.SendMsg(m)
 }
 
+func _ProjectJobService_DownloadJobFiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DownloadProjectJobFilesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectJobServiceServer).DownloadJobFiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectJobService_DownloadJobFiles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectJobServiceServer).DownloadJobFiles(ctx, req.(*DownloadProjectJobFilesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProjectJobService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListProjectJobRequest)
 	if err := dec(in); err != nil {
@@ -451,6 +486,10 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Finalize",
 			Handler:    _ProjectJobService_Finalize_Handler,
+		},
+		{
+			MethodName: "DownloadJobFiles",
+			Handler:    _ProjectJobService_DownloadJobFiles_Handler,
 		},
 		{
 			MethodName: "List",

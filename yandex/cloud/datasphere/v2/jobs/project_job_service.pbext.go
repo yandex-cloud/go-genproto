@@ -102,6 +102,18 @@ func (m *ReadProjectJobLogsResponse) SetOffset(v int64) {
 	m.Offset = v
 }
 
+func (m *DownloadProjectJobFilesRequest) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *DownloadProjectJobFilesRequest) SetFiles(v []*File) {
+	m.Files = v
+}
+
+func (m *DownloadProjectJobFilesResponse) SetDownloadFiles(v []*StorageFile) {
+	m.DownloadFiles = v
+}
+
 func (m *ListProjectJobRequest) SetProjectId(v string) {
 	m.ProjectId = v
 }
