@@ -130,6 +130,10 @@ func (m *RecognitionModelOptions) SetAudioProcessingType(v RecognitionModelOptio
 	m.AudioProcessingType = v
 }
 
+func (m *SpeakerLabelingOptions) SetSpeakerLabeling(v SpeakerLabelingOptions_SpeakerLabeling) {
+	m.SpeakerLabeling = v
+}
+
 func (m *StreamingOptions) SetRecognitionModel(v *RecognitionModelOptions) {
 	m.RecognitionModel = v
 }
@@ -144,6 +148,10 @@ func (m *StreamingOptions) SetRecognitionClassifier(v *RecognitionClassifierOpti
 
 func (m *StreamingOptions) SetSpeechAnalysis(v *SpeechAnalysisOptions) {
 	m.SpeechAnalysis = v
+}
+
+func (m *StreamingOptions) SetSpeakerLabeling(v *SpeakerLabelingOptions) {
+	m.SpeakerLabeling = v
 }
 
 func (m *AudioChunk) SetData(v []byte) {
