@@ -330,6 +330,14 @@ func (m *MysqlConfig8_0) SetOptimizerSearchDepth(v *wrapperspb.Int64Value) {
 	m.OptimizerSearchDepth = v
 }
 
+func (m *MysqlConfig8_0) SetUserstat(v *wrapperspb.BoolValue) {
+	m.Userstat = v
+}
+
+func (m *MysqlConfig8_0) SetMaxExecutionTime(v *wrapperspb.Int64Value) {
+	m.MaxExecutionTime = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

@@ -573,6 +573,18 @@ func (m *OpenSearchNodeGroupUpdateSpec) SetRoles(v []OpenSearch_GroupRole) {
 	m.Roles = v
 }
 
+func (m *OpenSearchNodeGroupUpdateSpec) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *OpenSearchNodeGroupUpdateSpec) SetSubnetIds(v []string) {
+	m.SubnetIds = v
+}
+
+func (m *OpenSearchNodeGroupUpdateSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
 func (m *AddOpenSearchNodeGroupRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -611,6 +623,18 @@ func (m *DashboardsNodeGroupUpdateSpec) SetResources(v *Resources) {
 
 func (m *DashboardsNodeGroupUpdateSpec) SetHostsCount(v int64) {
 	m.HostsCount = v
+}
+
+func (m *DashboardsNodeGroupUpdateSpec) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *DashboardsNodeGroupUpdateSpec) SetSubnetIds(v []string) {
+	m.SubnetIds = v
+}
+
+func (m *DashboardsNodeGroupUpdateSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
 }
 
 func (m *AddDashboardsNodeGroupRequest) SetClusterId(v string) {

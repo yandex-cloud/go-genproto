@@ -346,6 +346,14 @@ func (m *MysqlConfig5_7) SetQueryResponseTimeStats(v *wrapperspb.BoolValue) {
 	m.QueryResponseTimeStats = v
 }
 
+func (m *MysqlConfig5_7) SetUserstat(v *wrapperspb.BoolValue) {
+	m.Userstat = v
+}
+
+func (m *MysqlConfig5_7) SetMaxExecutionTime(v *wrapperspb.Int64Value) {
+	m.MaxExecutionTime = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

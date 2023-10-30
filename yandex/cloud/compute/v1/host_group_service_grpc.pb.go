@@ -29,6 +29,7 @@ const (
 	HostGroupService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.HostGroupService/ListOperations"
 	HostGroupService_ListInstances_FullMethodName        = "/yandex.cloud.compute.v1.HostGroupService/ListInstances"
 	HostGroupService_ListHosts_FullMethodName            = "/yandex.cloud.compute.v1.HostGroupService/ListHosts"
+	HostGroupService_UpdateHost_FullMethodName           = "/yandex.cloud.compute.v1.HostGroupService/UpdateHost"
 	HostGroupService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.HostGroupService/ListAccessBindings"
 	HostGroupService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.HostGroupService/SetAccessBindings"
 	HostGroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.HostGroupService/UpdateAccessBindings"
@@ -54,6 +55,8 @@ type HostGroupServiceClient interface {
 	ListInstances(ctx context.Context, in *ListHostGroupInstancesRequest, opts ...grpc.CallOption) (*ListHostGroupInstancesResponse, error)
 	// Lists hosts that belongs to the specified host group.
 	ListHosts(ctx context.Context, in *ListHostGroupHostsRequest, opts ...grpc.CallOption) (*ListHostGroupHostsResponse, error)
+	// Update host
+	UpdateHost(ctx context.Context, in *UpdateHostGroupHostRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists access bindings for the host group.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the host group.
@@ -142,6 +145,15 @@ func (c *hostGroupServiceClient) ListHosts(ctx context.Context, in *ListHostGrou
 	return out, nil
 }
 
+func (c *hostGroupServiceClient) UpdateHost(ctx context.Context, in *UpdateHostGroupHostRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, HostGroupService_UpdateHost_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *hostGroupServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
 	out := new(access.ListAccessBindingsResponse)
 	err := c.cc.Invoke(ctx, HostGroupService_ListAccessBindings_FullMethodName, in, out, opts...)
@@ -189,6 +201,8 @@ type HostGroupServiceServer interface {
 	ListInstances(context.Context, *ListHostGroupInstancesRequest) (*ListHostGroupInstancesResponse, error)
 	// Lists hosts that belongs to the specified host group.
 	ListHosts(context.Context, *ListHostGroupHostsRequest) (*ListHostGroupHostsResponse, error)
+	// Update host
+	UpdateHost(context.Context, *UpdateHostGroupHostRequest) (*operation.Operation, error)
 	// Lists access bindings for the host group.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the host group.
@@ -224,6 +238,9 @@ func (UnimplementedHostGroupServiceServer) ListInstances(context.Context, *ListH
 }
 func (UnimplementedHostGroupServiceServer) ListHosts(context.Context, *ListHostGroupHostsRequest) (*ListHostGroupHostsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListHosts not implemented")
+}
+func (UnimplementedHostGroupServiceServer) UpdateHost(context.Context, *UpdateHostGroupHostRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHost not implemented")
 }
 func (UnimplementedHostGroupServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -390,6 +407,24 @@ func _HostGroupService_ListHosts_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HostGroupService_UpdateHost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHostGroupHostRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HostGroupServiceServer).UpdateHost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HostGroupService_UpdateHost_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HostGroupServiceServer).UpdateHost(ctx, req.(*UpdateHostGroupHostRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _HostGroupService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(access.ListAccessBindingsRequest)
 	if err := dec(in); err != nil {
@@ -482,6 +517,10 @@ var HostGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListHosts",
 			Handler:    _HostGroupService_ListHosts_Handler,
+		},
+		{
+			MethodName: "UpdateHost",
+			Handler:    _HostGroupService_UpdateHost_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

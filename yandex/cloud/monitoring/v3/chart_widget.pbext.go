@@ -62,6 +62,10 @@ func (m *ChartWidget_Queries_Target) SetHidden(v bool) {
 	m.Hidden = v
 }
 
+func (m *ChartWidget_Queries_Target) SetName(v string) {
+	m.Name = v
+}
+
 func (m *ChartWidget_VisualizationSettings) SetType(v ChartWidget_VisualizationSettings_VisualizationType) {
 	m.Type = v
 }
