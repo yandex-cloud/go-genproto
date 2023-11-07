@@ -3,6 +3,7 @@
 package datasphere
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
@@ -77,6 +78,18 @@ func (m *Project_Settings) SetDefaultFolderId(v string) {
 
 func (m *Project_Settings) SetStaleExecTimeoutMode(v Project_Settings_StaleExecutionTimeoutMode) {
 	m.StaleExecTimeoutMode = v
+}
+
+func (m *Project_Settings) SetIdeExecutionMode(v Project_Settings_IdeExecutionMode) {
+	m.IdeExecutionMode = v
+}
+
+func (m *Project_Settings) SetVmInactivityTimeout(v *durationpb.Duration) {
+	m.VmInactivityTimeout = v
+}
+
+func (m *Project_Settings) SetDefaultDedicatedSpec(v string) {
+	m.DefaultDedicatedSpec = v
 }
 
 func (m *Project_Limits) SetMaxUnitsPerHour(v *wrapperspb.Int64Value) {

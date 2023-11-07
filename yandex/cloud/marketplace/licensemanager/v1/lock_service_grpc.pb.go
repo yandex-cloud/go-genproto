@@ -36,6 +36,7 @@ type LockServiceClient interface {
 	Get(ctx context.Context, in *GetLockRequest, opts ...grpc.CallOption) (*Lock, error)
 	// Returns the subscription lock for specified subscription instance and resource.
 	GetByInstanceAndResource(ctx context.Context, in *GetLockByInstanceAndResourceRequest, opts ...grpc.CallOption) (*Lock, error)
+	// Returns subscriptions locks for specified resource and folder.
 	List(ctx context.Context, in *ListLocksRequest, opts ...grpc.CallOption) (*ListLocksResponse, error)
 	// Locks the specified subscription instance to the resource.
 	Create(ctx context.Context, in *CreateLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -116,6 +117,7 @@ type LockServiceServer interface {
 	Get(context.Context, *GetLockRequest) (*Lock, error)
 	// Returns the subscription lock for specified subscription instance and resource.
 	GetByInstanceAndResource(context.Context, *GetLockByInstanceAndResourceRequest) (*Lock, error)
+	// Returns subscriptions locks for specified resource and folder.
 	List(context.Context, *ListLocksRequest) (*ListLocksResponse, error)
 	// Locks the specified subscription instance to the resource.
 	Create(context.Context, *CreateLockRequest) (*operation.Operation, error)

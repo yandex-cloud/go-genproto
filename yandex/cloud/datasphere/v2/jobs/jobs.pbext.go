@@ -170,6 +170,18 @@ func (m *Job) SetJobParameters(v *JobParameters) {
 	m.JobParameters = v
 }
 
+func (m *Job) SetDataExpiresAt(v *timestamppb.Timestamp) {
+	m.DataExpiresAt = v
+}
+
+func (m *Job) SetDataCleared(v bool) {
+	m.DataCleared = v
+}
+
+func (m *Job) SetOutputFiles(v []*File) {
+	m.OutputFiles = v
+}
+
 func (m *JobResult) SetReturnCode(v int64) {
 	m.ReturnCode = v
 }

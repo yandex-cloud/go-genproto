@@ -3,6 +3,7 @@
 package datasphere
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -24,6 +25,10 @@ func (m *CreateProjectJobRequest) SetName(v string) {
 
 func (m *CreateProjectJobRequest) SetDesc(v string) {
 	m.Desc = v
+}
+
+func (m *CreateProjectJobRequest) SetDataTtl(v *durationpb.Duration) {
+	m.DataTtl = v
 }
 
 func (m *CreateProjectJobMetadata) SetProjectId(v string) {
