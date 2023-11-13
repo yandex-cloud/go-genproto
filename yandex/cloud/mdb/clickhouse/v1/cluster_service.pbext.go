@@ -503,11 +503,11 @@ func (m *RestartClusterHostsRequest) SetHostNames(v []string) {
 	m.HostNames = v
 }
 
-func (m *RestartHostsMetadata) SetClusterId(v string) {
+func (m *RestartClusterHostsMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *RestartHostsMetadata) SetHostNames(v []string) {
+func (m *RestartClusterHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
 }
 

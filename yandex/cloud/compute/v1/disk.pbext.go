@@ -87,3 +87,11 @@ func (m *DiskPlacementPolicy) SetPlacementGroupId(v string) {
 func (m *DiskPlacementPolicy) SetPlacementGroupPartition(v int64) {
 	m.PlacementGroupPartition = v
 }
+
+func (m *DiskPlacementPolicyChange) SetDiskId(v string) {
+	m.DiskId = v
+}
+
+func (m *DiskPlacementPolicyChange) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
+	m.DiskPlacementPolicy = v
+}

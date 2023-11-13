@@ -619,6 +619,14 @@ func (m *RelocateInstanceRequest) SetNetworkInterfaceSpecs(v []*NetworkInterface
 	m.NetworkInterfaceSpecs = v
 }
 
+func (m *RelocateInstanceRequest) SetBootDiskPlacement(v *DiskPlacementPolicy) {
+	m.BootDiskPlacement = v
+}
+
+func (m *RelocateInstanceRequest) SetSecondaryDiskPlacements(v []*DiskPlacementPolicyChange) {
+	m.SecondaryDiskPlacements = v
+}
+
 func (m *RelocateInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }

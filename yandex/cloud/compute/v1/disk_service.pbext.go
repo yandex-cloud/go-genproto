@@ -189,6 +189,10 @@ func (m *RelocateDiskRequest) SetDestinationZoneId(v string) {
 	m.DestinationZoneId = v
 }
 
+func (m *RelocateDiskRequest) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
+	m.DiskPlacementPolicy = v
+}
+
 func (m *RelocateDiskMetadata) SetDiskId(v string) {
 	m.DiskId = v
 }

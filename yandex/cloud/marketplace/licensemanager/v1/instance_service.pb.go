@@ -90,8 +90,8 @@ type ListInstancesRequest struct {
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Instance.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	// Example of a filter: `name=my-subscription-instance`.
+	// 3. The value. Must be in double quotes `""`. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// Example of a filter: `name="my-subscription-instance"`.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Sorting order for the list of subscription instances.
 	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
