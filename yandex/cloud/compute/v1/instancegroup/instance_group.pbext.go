@@ -87,6 +87,10 @@ func (m *InstanceGroup) SetApplicationLoadBalancerState(v *ApplicationLoadBalanc
 	m.ApplicationLoadBalancerState = v
 }
 
+func (m *InstanceGroup) SetAutoHealingPolicy(v *AutoHealingPolicy) {
+	m.AutoHealingPolicy = v
+}
+
 func (m *ApplicationLoadBalancerState) SetTargetGroupId(v string) {
 	m.TargetGroupId = v
 }
@@ -739,4 +743,8 @@ func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 
 func (m *LogRecord) SetMessage(v string) {
 	m.Message = v
+}
+
+func (m *AutoHealingPolicy) SetAutoHealingAction(v AutoHealingPolicy_AutoHealingAction) {
+	m.AutoHealingAction = v
 }

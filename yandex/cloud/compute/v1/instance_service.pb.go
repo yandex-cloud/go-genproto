@@ -2297,7 +2297,7 @@ type UpdateInstanceNetworkInterfaceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the network interface that is being updated.
+	// ID of the instance that is being updated.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// The index of the network interface to be updated.
 	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
