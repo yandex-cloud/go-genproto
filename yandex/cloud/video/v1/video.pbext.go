@@ -3,6 +3,7 @@
 package video
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -40,6 +41,14 @@ func (m *Video) SetThumbnailId(v string) {
 
 func (m *Video) SetStatus(v Video_VideoStatus) {
 	m.Status = v
+}
+
+func (m *Video) SetDuration(v *durationpb.Duration) {
+	m.Duration = v
+}
+
+func (m *Video) SetVisibilityStatus(v Video_VisibilityStatus) {
+	m.VisibilityStatus = v
 }
 
 func (m *Video) SetTusd(v *VideoTUSDSource) {

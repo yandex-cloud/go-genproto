@@ -510,6 +510,14 @@ func (m *ConversationAnalysis) SetSpeakerInterrupts(v []*ConversationAnalysis_In
 	m.SpeakerInterrupts = v
 }
 
+func (m *ConversationAnalysis) SetTotalSpeechDurationMs(v int64) {
+	m.TotalSpeechDurationMs = v
+}
+
+func (m *ConversationAnalysis) SetTotalSpeechRatio(v float64) {
+	m.TotalSpeechRatio = v
+}
+
 func (m *ConversationAnalysis_InterruptsEvaluation) SetSpeakerTag(v string) {
 	m.SpeakerTag = v
 }

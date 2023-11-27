@@ -30,7 +30,13 @@ type GetFormatSchemaRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ClickHouse cluster ID.
+	//
+	// To get a ClickHouse cluster ID, use the [ClusterService.List] method.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
+	//
+	// To get a format schema name, use the [FormatSchemaService.List] method.
 	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
 }
 
@@ -85,8 +91,13 @@ type ListFormatSchemasRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ClickHouse cluster ID.
+	//
+	// To get a ClickHouse cluster ID, use the [ClusterService.List] method.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of results per page to return. If the number of the results is larger than [page_size], the service returns [ListFormatSchemasResponse.next_page_token]. You can use it to get the next page of the results in subsequent requests of a format schema list.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the [ListFormatSchemasResponse.next_page_token] returned by the previous format schema list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -148,8 +159,10 @@ type ListFormatSchemasResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of format schemas.
 	FormatSchemas []*FormatSchema `protobuf:"bytes,1,rep,name=format_schemas,json=formatSchemas,proto3" json:"format_schemas,omitempty"`
-	NextPageToken string          `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// This token allows you to get the next page of results when requesting the format schema list. If the number of the results is larger than [ListFormatSchemasRequest.page_size], use the [next_page_token] as the value for the [ListFormatSchemasRequest.page_token] parameter in the next request. Each subsequent request will have its own [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListFormatSchemasResponse) Reset() {
@@ -203,10 +216,19 @@ type CreateFormatSchemaRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string           `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	FormatSchemaName string           `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
-	Type             FormatSchemaType `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.mdb.clickhouse.v1.FormatSchemaType" json:"type,omitempty"`
-	Uri              string           `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
+	// ClickHouse cluster ID.
+	//
+	// To get a ClickHouse cluster ID, use the [ClusterService.List] method.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
+	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
+	// Schema type. Possible values are the following:
+	//
+	// * FORMAT_SCHEMA_TYPE_PROTOBUF - [Protobuf](https://protobuf.dev/) data format (including [ProtobufSingle](https://clickhouse.com/docs/en/interfaces/formats#protobufsingle)).
+	// * FORMAT_SCHEMA_TYPE_CAPNPROTO - [Cap'n Proto](https://capnproto.org/) data format.
+	Type FormatSchemaType `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.mdb.clickhouse.v1.FormatSchemaType" json:"type,omitempty"`
+	// [Link to the file](https://cloud.yandex.com/en/docs/managed-clickhouse/operations/s3-access#get-link-to-object) of a format schema in Yandex Object Storage. Managed Service for ClickHouse works only with format schemas imported to Object Storage.
+	Uri string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 
 func (x *CreateFormatSchemaRequest) Reset() {
@@ -274,7 +296,9 @@ type CreateFormatSchemaMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ClickHouse cluster ID.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
 	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
 }
 
@@ -329,10 +353,17 @@ type UpdateFormatSchemaRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ClickHouse cluster ID.
+	//
+	// To get a ClickHouse cluster ID, use the [ClusterService.List] method.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
+	//
+	// To get a format schema name, use the [FormatSchemaService.List] method.
 	FormatSchemaName string                 `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
 	UpdateMask       *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Uri              string                 `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
+	// [Link to the file](https://cloud.yandex.com/en/docs/managed-clickhouse/operations/s3-access#get-link-to-object) of a format schema in Yandex Object Storage. Managed Service for ClickHouse works only with format schemas imported to Object Storage.
+	Uri string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 }
 
 func (x *UpdateFormatSchemaRequest) Reset() {
@@ -400,7 +431,9 @@ type UpdateFormatSchemaMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ClickHouse cluster ID.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
 	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
 }
 
@@ -455,7 +488,13 @@ type DeleteFormatSchemaRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ClickHouse cluster ID.
+	//
+	// To get a ClickHouse cluster ID, use the [ClusterService.List] method.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
+	//
+	// To get a format schema name, use the [FormatSchemaService.List] method.
 	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
 }
 
@@ -510,7 +549,9 @@ type DeleteFormatSchemaMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClusterId        string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ClickHouse cluster ID.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Format schema name.
 	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
 }
 

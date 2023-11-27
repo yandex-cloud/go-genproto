@@ -96,6 +96,14 @@ func (m *TextTemplate) SetVariables(v []*TextVariable) {
 	m.Variables = v
 }
 
+func (m *DurationHint) SetPolicy(v DurationHint_DurationHintPolicy) {
+	m.Policy = v
+}
+
+func (m *DurationHint) SetDurationMs(v int64) {
+	m.DurationMs = v
+}
+
 type Hints_Hint = isHints_Hint
 
 func (m *Hints) SetHint(v Hints_Hint) {
@@ -135,6 +143,12 @@ func (m *Hints) SetRole(v string) {
 func (m *Hints) SetPitchShift(v float64) {
 	m.Hint = &Hints_PitchShift{
 		PitchShift: v,
+	}
+}
+
+func (m *Hints) SetDuration(v *DurationHint) {
+	m.Hint = &Hints_Duration{
+		Duration: v,
 	}
 }
 

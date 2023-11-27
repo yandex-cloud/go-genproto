@@ -21,7 +21,6 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	TestService_Get_FullMethodName    = "/yandex.cloud.loadtesting.agent.v1.TestService/Get"
-	TestService_Create_FullMethodName = "/yandex.cloud.loadtesting.agent.v1.TestService/Create"
 	TestService_Update_FullMethodName = "/yandex.cloud.loadtesting.agent.v1.TestService/Update"
 )
 
@@ -31,8 +30,6 @@ const (
 type TestServiceClient interface {
 	// Returns test by test id.
 	Get(ctx context.Context, in *GetTestRequest, opts ...grpc.CallOption) (*Test, error)
-	// Creates test for the specified folder.
-	Create(ctx context.Context, in *CreateTestRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified test.
 	Update(ctx context.Context, in *UpdateTestRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
@@ -54,15 +51,6 @@ func (c *testServiceClient) Get(ctx context.Context, in *GetTestRequest, opts ..
 	return out, nil
 }
 
-func (c *testServiceClient) Create(ctx context.Context, in *CreateTestRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, TestService_Create_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *testServiceClient) Update(ctx context.Context, in *UpdateTestRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, TestService_Update_FullMethodName, in, out, opts...)
@@ -78,8 +66,6 @@ func (c *testServiceClient) Update(ctx context.Context, in *UpdateTestRequest, o
 type TestServiceServer interface {
 	// Returns test by test id.
 	Get(context.Context, *GetTestRequest) (*Test, error)
-	// Creates test for the specified folder.
-	Create(context.Context, *CreateTestRequest) (*operation.Operation, error)
 	// Updates the specified test.
 	Update(context.Context, *UpdateTestRequest) (*operation.Operation, error)
 }
@@ -90,9 +76,6 @@ type UnimplementedTestServiceServer struct {
 
 func (UnimplementedTestServiceServer) Get(context.Context, *GetTestRequest) (*Test, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (UnimplementedTestServiceServer) Create(context.Context, *CreateTestRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedTestServiceServer) Update(context.Context, *UpdateTestRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -127,24 +110,6 @@ func _TestService_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TestService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateTestRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TestServiceServer).Create(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TestService_Create_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TestServiceServer).Create(ctx, req.(*CreateTestRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _TestService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTestRequest)
 	if err := dec(in); err != nil {
@@ -173,10 +138,6 @@ var TestService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _TestService_Get_Handler,
-		},
-		{
-			MethodName: "Create",
-			Handler:    _TestService_Create_Handler,
 		},
 		{
 			MethodName: "Update",

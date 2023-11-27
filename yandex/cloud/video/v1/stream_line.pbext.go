@@ -64,6 +64,12 @@ func (m *StreamLine) SetTcpPull(v *TCPPullInput) {
 	}
 }
 
+func (m *StreamLine) SetRtspPull(v *RTSPPullInput) {
+	m.InputType = &StreamLine_RtspPull{
+		RtspPull: v,
+	}
+}
+
 func (m *StreamLine) SetManualLine(v *ManualLine) {
 	m.LineType = &StreamLine_ManualLine{
 		ManualLine: v,
@@ -105,6 +111,10 @@ func (m *SRTPullInput) SetUrl(v string) {
 }
 
 func (m *TCPPullInput) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *RTSPPullInput) SetUrl(v string) {
 	m.Url = v
 }
 

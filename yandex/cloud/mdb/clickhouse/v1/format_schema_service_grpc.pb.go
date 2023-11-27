@@ -31,10 +31,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FormatSchemaServiceClient interface {
+	// Returns detailed information about a given format schema.
 	Get(ctx context.Context, in *GetFormatSchemaRequest, opts ...grpc.CallOption) (*FormatSchema, error)
+	// Returns a list of format schemas in a cluster.
 	List(ctx context.Context, in *ListFormatSchemasRequest, opts ...grpc.CallOption) (*ListFormatSchemasResponse, error)
+	// Adds a format schema to a cluster.
 	Create(ctx context.Context, in *CreateFormatSchemaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Changes a format schema.
 	Update(ctx context.Context, in *UpdateFormatSchemaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes a format schema from a cluster.
 	Delete(ctx context.Context, in *DeleteFormatSchemaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -95,10 +100,15 @@ func (c *formatSchemaServiceClient) Delete(ctx context.Context, in *DeleteFormat
 // All implementations should embed UnimplementedFormatSchemaServiceServer
 // for forward compatibility
 type FormatSchemaServiceServer interface {
+	// Returns detailed information about a given format schema.
 	Get(context.Context, *GetFormatSchemaRequest) (*FormatSchema, error)
+	// Returns a list of format schemas in a cluster.
 	List(context.Context, *ListFormatSchemasRequest) (*ListFormatSchemasResponse, error)
+	// Adds a format schema to a cluster.
 	Create(context.Context, *CreateFormatSchemaRequest) (*operation.Operation, error)
+	// Changes a format schema.
 	Update(context.Context, *UpdateFormatSchemaRequest) (*operation.Operation, error)
+	// Deletes a format schema from a cluster.
 	Delete(context.Context, *DeleteFormatSchemaRequest) (*operation.Operation, error)
 }
 

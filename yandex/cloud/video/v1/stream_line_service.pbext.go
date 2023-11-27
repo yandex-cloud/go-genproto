@@ -160,6 +160,12 @@ func (m *UpdateStreamLineRequest) SetTcpPull(v *TCPPullParams) {
 	}
 }
 
+func (m *UpdateStreamLineRequest) SetRtspPull(v *RTSPPullParams) {
+	m.InputParams = &UpdateStreamLineRequest_RtspPull{
+		RtspPull: v,
+	}
+}
+
 func (m *UpdateStreamLineMetadata) SetStreamLineId(v string) {
 	m.StreamLineId = v
 }
@@ -207,6 +213,10 @@ func (m *SRTPullParams) SetUrl(v string) {
 }
 
 func (m *TCPPullParams) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *RTSPPullParams) SetUrl(v string) {
 	m.Url = v
 }
 

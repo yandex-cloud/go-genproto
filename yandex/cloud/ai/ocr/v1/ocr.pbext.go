@@ -30,6 +30,14 @@ func (m *TextAnnotation) SetEntities(v []*Entity) {
 	m.Entities = v
 }
 
+func (m *TextAnnotation) SetTables(v []*Table) {
+	m.Tables = v
+}
+
+func (m *TextAnnotation) SetFullText(v string) {
+	m.FullText = v
+}
+
 func (m *Entity) SetName(v string) {
 	m.Name = v
 }
@@ -50,6 +58,10 @@ func (m *Block) SetLanguages(v []*Block_DetectedLanguage) {
 	m.Languages = v
 }
 
+func (m *Block) SetTextSegments(v []*TextSegments) {
+	m.TextSegments = v
+}
+
 func (m *Block_DetectedLanguage) SetLanguageCode(v string) {
 	m.LanguageCode = v
 }
@@ -66,6 +78,10 @@ func (m *Line) SetWords(v []*Word) {
 	m.Words = v
 }
 
+func (m *Line) SetTextSegments(v []*TextSegments) {
+	m.TextSegments = v
+}
+
 func (m *Word) SetBoundingBox(v *Polygon) {
 	m.BoundingBox = v
 }
@@ -76,4 +92,64 @@ func (m *Word) SetText(v string) {
 
 func (m *Word) SetEntityIndex(v int64) {
 	m.EntityIndex = v
+}
+
+func (m *Word) SetTextSegments(v []*TextSegments) {
+	m.TextSegments = v
+}
+
+func (m *TextSegments) SetStartIndex(v int64) {
+	m.StartIndex = v
+}
+
+func (m *TextSegments) SetLength(v int64) {
+	m.Length = v
+}
+
+func (m *Table) SetBoundingBox(v *Polygon) {
+	m.BoundingBox = v
+}
+
+func (m *Table) SetRowCount(v int64) {
+	m.RowCount = v
+}
+
+func (m *Table) SetColumnCount(v int64) {
+	m.ColumnCount = v
+}
+
+func (m *Table) SetTextSegments(v *TextSegments) {
+	m.TextSegments = v
+}
+
+func (m *Table) SetCells(v []*TableCell) {
+	m.Cells = v
+}
+
+func (m *TableCell) SetBoundingBox(v *Polygon) {
+	m.BoundingBox = v
+}
+
+func (m *TableCell) SetRowIndex(v int64) {
+	m.RowIndex = v
+}
+
+func (m *TableCell) SetColumnIndex(v int64) {
+	m.ColumnIndex = v
+}
+
+func (m *TableCell) SetColumnSpan(v int64) {
+	m.ColumnSpan = v
+}
+
+func (m *TableCell) SetRowSpan(v int64) {
+	m.RowSpan = v
+}
+
+func (m *TableCell) SetText(v string) {
+	m.Text = v
+}
+
+func (m *TableCell) SetTextSegments(v *TextSegments) {
+	m.TextSegments = v
 }

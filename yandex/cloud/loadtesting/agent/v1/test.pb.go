@@ -21,179 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Ammo type for generators: phantom.ammo_type,
-// ammo.type in pandora.config_content.pool
-type AmmoType int32
-
-const (
-	AmmoType_AMMO_TYPE_UNSPECIFIED AmmoType = 0
-	AmmoType_HTTP_JSON             AmmoType = 1
-	AmmoType_RAW                   AmmoType = 2
-	AmmoType_URI                   AmmoType = 3
-	AmmoType_URIPOST               AmmoType = 4
-	AmmoType_PHANTOM               AmmoType = 5
-	AmmoType_ACCESS                AmmoType = 6
-)
-
-// Enum value maps for AmmoType.
-var (
-	AmmoType_name = map[int32]string{
-		0: "AMMO_TYPE_UNSPECIFIED",
-		1: "HTTP_JSON",
-		2: "RAW",
-		3: "URI",
-		4: "URIPOST",
-		5: "PHANTOM",
-		6: "ACCESS",
-	}
-	AmmoType_value = map[string]int32{
-		"AMMO_TYPE_UNSPECIFIED": 0,
-		"HTTP_JSON":             1,
-		"RAW":                   2,
-		"URI":                   3,
-		"URIPOST":               4,
-		"PHANTOM":               5,
-		"ACCESS":                6,
-	}
-)
-
-func (x AmmoType) Enum() *AmmoType {
-	p := new(AmmoType)
-	*p = x
-	return p
-}
-
-func (x AmmoType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (AmmoType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[0].Descriptor()
-}
-
-func (AmmoType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[0]
-}
-
-func (x AmmoType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use AmmoType.Descriptor instead.
-func (AmmoType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescGZIP(), []int{0}
-}
-
-// Load type: phantom.load_profile.load_type,
-type LoadType int32
-
-const (
-	LoadType_LOAD_TYPE_UNSPECIFIED LoadType = 0
-	LoadType_RPS                   LoadType = 1
-	LoadType_INSTANCES             LoadType = 2
-	LoadType_STPD_FILE             LoadType = 3
-)
-
-// Enum value maps for LoadType.
-var (
-	LoadType_name = map[int32]string{
-		0: "LOAD_TYPE_UNSPECIFIED",
-		1: "RPS",
-		2: "INSTANCES",
-		3: "STPD_FILE",
-	}
-	LoadType_value = map[string]int32{
-		"LOAD_TYPE_UNSPECIFIED": 0,
-		"RPS":                   1,
-		"INSTANCES":             2,
-		"STPD_FILE":             3,
-	}
-)
-
-func (x LoadType) Enum() *LoadType {
-	p := new(LoadType)
-	*p = x
-	return p
-}
-
-func (x LoadType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (LoadType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[1].Descriptor()
-}
-
-func (LoadType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[1]
-}
-
-func (x LoadType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use LoadType.Descriptor instead.
-func (LoadType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescGZIP(), []int{1}
-}
-
-// Schedule type: phantom.load_profile.schedule,
-// rps.schedule.type in pandora.config_content.pool
-type ScheduleType int32
-
-const (
-	ScheduleType_SCHEDULE_TYPE_UNSPECIFIED ScheduleType = 0
-	ScheduleType_ONCE                      ScheduleType = 1
-	ScheduleType_CONST                     ScheduleType = 2
-	ScheduleType_LINE                      ScheduleType = 3
-	ScheduleType_STEP                      ScheduleType = 4
-)
-
-// Enum value maps for ScheduleType.
-var (
-	ScheduleType_name = map[int32]string{
-		0: "SCHEDULE_TYPE_UNSPECIFIED",
-		1: "ONCE",
-		2: "CONST",
-		3: "LINE",
-		4: "STEP",
-	}
-	ScheduleType_value = map[string]int32{
-		"SCHEDULE_TYPE_UNSPECIFIED": 0,
-		"ONCE":                      1,
-		"CONST":                     2,
-		"LINE":                      3,
-		"STEP":                      4,
-	}
-)
-
-func (x ScheduleType) Enum() *ScheduleType {
-	p := new(ScheduleType)
-	*p = x
-	return p
-}
-
-func (x ScheduleType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ScheduleType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[2].Descriptor()
-}
-
-func (ScheduleType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[2]
-}
-
-func (x ScheduleType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ScheduleType.Descriptor instead.
-func (ScheduleType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescGZIP(), []int{2}
-}
-
 type Test_Status int32
 
 const (
@@ -263,11 +90,11 @@ func (x Test_Status) String() string {
 }
 
 func (Test_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[0].Descriptor()
 }
 
 func (Test_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[3]
+	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[0]
 }
 
 func (x Test_Status) Number() protoreflect.EnumNumber {
@@ -315,11 +142,11 @@ func (x Test_Generator) String() string {
 }
 
 func (Test_Generator) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[1].Descriptor()
 }
 
 func (Test_Generator) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[4]
+	return &file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes[1]
 }
 
 func (x Test_Generator) Number() protoreflect.EnumNumber {
@@ -568,177 +395,6 @@ func (*Test_AmmoUrls) isTest_Ammo() {}
 
 func (*Test_AmmoId) isTest_Ammo() {}
 
-//	Load schedule string:
-//
-// {duration: 180s, type: line, from: 1, to: 10000} for pandora,
-// step(25, 5, 5, 60) for phantom.
-type LoadSchedule struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Type      ScheduleType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.loadtesting.agent.v1.ScheduleType" json:"type,omitempty"`
-	Instances int64        `protobuf:"varint,2,opt,name=instances,proto3" json:"instances,omitempty"` // times for pandora
-	Duration  string       `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
-	RpsFrom   int64        `protobuf:"varint,4,opt,name=rps_from,json=rpsFrom,proto3" json:"rps_from,omitempty"`
-	RpsTo     int64        `protobuf:"varint,5,opt,name=rps_to,json=rpsTo,proto3" json:"rps_to,omitempty"`
-	Step      int64        `protobuf:"varint,6,opt,name=step,proto3" json:"step,omitempty"`
-	Ops       int64        `protobuf:"varint,7,opt,name=ops,proto3" json:"ops,omitempty"`
-	StpdPath  string       `protobuf:"bytes,8,opt,name=stpd_path,json=stpdPath,proto3" json:"stpd_path,omitempty"`
-}
-
-func (x *LoadSchedule) Reset() {
-	*x = LoadSchedule{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *LoadSchedule) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LoadSchedule) ProtoMessage() {}
-
-func (x *LoadSchedule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use LoadSchedule.ProtoReflect.Descriptor instead.
-func (*LoadSchedule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *LoadSchedule) GetType() ScheduleType {
-	if x != nil {
-		return x.Type
-	}
-	return ScheduleType_SCHEDULE_TYPE_UNSPECIFIED
-}
-
-func (x *LoadSchedule) GetInstances() int64 {
-	if x != nil {
-		return x.Instances
-	}
-	return 0
-}
-
-func (x *LoadSchedule) GetDuration() string {
-	if x != nil {
-		return x.Duration
-	}
-	return ""
-}
-
-func (x *LoadSchedule) GetRpsFrom() int64 {
-	if x != nil {
-		return x.RpsFrom
-	}
-	return 0
-}
-
-func (x *LoadSchedule) GetRpsTo() int64 {
-	if x != nil {
-		return x.RpsTo
-	}
-	return 0
-}
-
-func (x *LoadSchedule) GetStep() int64 {
-	if x != nil {
-		return x.Step
-	}
-	return 0
-}
-
-func (x *LoadSchedule) GetOps() int64 {
-	if x != nil {
-		return x.Ops
-	}
-	return 0
-}
-
-func (x *LoadSchedule) GetStpdPath() string {
-	if x != nil {
-		return x.StpdPath
-	}
-	return ""
-}
-
-// Load profile in general: phantom.load_profile, pool schedule for pandora
-type Schedule struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	LoadType     LoadType        `protobuf:"varint,1,opt,name=load_type,json=loadType,proto3,enum=yandex.cloud.loadtesting.agent.v1.LoadType" json:"load_type,omitempty"`
-	LoadSchedule []*LoadSchedule `protobuf:"bytes,2,rep,name=load_schedule,json=loadSchedule,proto3" json:"load_schedule,omitempty"`
-	LoadProfile  []string        `protobuf:"bytes,3,rep,name=load_profile,json=loadProfile,proto3" json:"load_profile,omitempty"`
-}
-
-func (x *Schedule) Reset() {
-	*x = Schedule{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Schedule) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Schedule) ProtoMessage() {}
-
-func (x *Schedule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Schedule.ProtoReflect.Descriptor instead.
-func (*Schedule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *Schedule) GetLoadType() LoadType {
-	if x != nil {
-		return x.LoadType
-	}
-	return LoadType_LOAD_TYPE_UNSPECIFIED
-}
-
-func (x *Schedule) GetLoadSchedule() []*LoadSchedule {
-	if x != nil {
-		return x.LoadSchedule
-	}
-	return nil
-}
-
-func (x *Schedule) GetLoadProfile() []string {
-	if x != nil {
-		return x.LoadProfile
-	}
-	return nil
-}
-
 var File_yandex_cloud_loadtesting_agent_v1_test_proto protoreflect.FileDescriptor
 
 var file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDesc = []byte{
@@ -828,61 +484,14 @@ var file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDesc = []byte{
 	0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x41, 0x4e, 0x44, 0x4f, 0x52, 0x41, 0x10, 0x01, 0x12,
 	0x0b, 0x0a, 0x07, 0x50, 0x48, 0x41, 0x4e, 0x54, 0x4f, 0x4d, 0x10, 0x02, 0x12, 0x0a, 0x0a, 0x06,
 	0x4a, 0x4d, 0x45, 0x54, 0x45, 0x52, 0x10, 0x03, 0x42, 0x06, 0x0a, 0x04, 0x61, 0x6d, 0x6d, 0x6f,
-	0x22, 0x82, 0x02, 0x0a, 0x0c, 0x4c, 0x6f, 0x61, 0x64, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c,
-	0x65, 0x12, 0x43, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32,
-	0x2f, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6c,
-	0x6f, 0x61, 0x64, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74,
-	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65,
-	0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x6e, 0x73, 0x74, 0x61, 0x6e,
-	0x63, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x69, 0x6e, 0x73, 0x74, 0x61,
-	0x6e, 0x63, 0x65, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x19, 0x0a, 0x08, 0x72, 0x70, 0x73, 0x5f, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x07, 0x72, 0x70, 0x73, 0x46, 0x72, 0x6f, 0x6d, 0x12, 0x15, 0x0a, 0x06, 0x72,
-	0x70, 0x73, 0x5f, 0x74, 0x6f, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x72, 0x70, 0x73,
-	0x54, 0x6f, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x74, 0x65, 0x70, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03,
-	0x52, 0x04, 0x73, 0x74, 0x65, 0x70, 0x12, 0x10, 0x0a, 0x03, 0x6f, 0x70, 0x73, 0x18, 0x07, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x03, 0x6f, 0x70, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x74, 0x70, 0x64,
-	0x5f, 0x70, 0x61, 0x74, 0x68, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x74, 0x70,
-	0x64, 0x50, 0x61, 0x74, 0x68, 0x22, 0xcd, 0x01, 0x0a, 0x08, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75,
-	0x6c, 0x65, 0x12, 0x48, 0x0a, 0x09, 0x6c, 0x6f, 0x61, 0x64, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x2b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6c, 0x6f, 0x61, 0x64, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67,
-	0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x6f, 0x61, 0x64, 0x54, 0x79,
-	0x70, 0x65, 0x52, 0x08, 0x6c, 0x6f, 0x61, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12, 0x54, 0x0a, 0x0d,
-	0x6c, 0x6f, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x18, 0x02, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2e, 0x6c, 0x6f, 0x61, 0x64, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x61,
-	0x67, 0x65, 0x6e, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x6f, 0x61, 0x64, 0x53, 0x63, 0x68, 0x65,
-	0x64, 0x75, 0x6c, 0x65, 0x52, 0x0c, 0x6c, 0x6f, 0x61, 0x64, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75,
-	0x6c, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x6c, 0x6f, 0x61, 0x64, 0x5f, 0x70, 0x72, 0x6f, 0x66, 0x69,
-	0x6c, 0x65, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b, 0x6c, 0x6f, 0x61, 0x64, 0x50, 0x72,
-	0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2a, 0x6c, 0x0a, 0x08, 0x41, 0x6d, 0x6d, 0x6f, 0x54, 0x79, 0x70,
-	0x65, 0x12, 0x19, 0x0a, 0x15, 0x41, 0x4d, 0x4d, 0x4f, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55,
-	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09,
-	0x48, 0x54, 0x54, 0x50, 0x5f, 0x4a, 0x53, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x07, 0x0a, 0x03, 0x52,
-	0x41, 0x57, 0x10, 0x02, 0x12, 0x07, 0x0a, 0x03, 0x55, 0x52, 0x49, 0x10, 0x03, 0x12, 0x0b, 0x0a,
-	0x07, 0x55, 0x52, 0x49, 0x50, 0x4f, 0x53, 0x54, 0x10, 0x04, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x48,
-	0x41, 0x4e, 0x54, 0x4f, 0x4d, 0x10, 0x05, 0x12, 0x0a, 0x0a, 0x06, 0x41, 0x43, 0x43, 0x45, 0x53,
-	0x53, 0x10, 0x06, 0x2a, 0x4c, 0x0a, 0x08, 0x4c, 0x6f, 0x61, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12,
-	0x19, 0x0a, 0x15, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53,
-	0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x07, 0x0a, 0x03, 0x52, 0x50,
-	0x53, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x49, 0x4e, 0x53, 0x54, 0x41, 0x4e, 0x43, 0x45, 0x53,
-	0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x54, 0x50, 0x44, 0x5f, 0x46, 0x49, 0x4c, 0x45, 0x10,
-	0x03, 0x2a, 0x56, 0x0a, 0x0c, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x54, 0x79, 0x70,
-	0x65, 0x12, 0x1d, 0x0a, 0x19, 0x53, 0x43, 0x48, 0x45, 0x44, 0x55, 0x4c, 0x45, 0x5f, 0x54, 0x59,
-	0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00,
-	0x12, 0x08, 0x0a, 0x04, 0x4f, 0x4e, 0x43, 0x45, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x43, 0x4f,
-	0x4e, 0x53, 0x54, 0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x4c, 0x49, 0x4e, 0x45, 0x10, 0x03, 0x12,
-	0x08, 0x0a, 0x04, 0x53, 0x54, 0x45, 0x50, 0x10, 0x04, 0x42, 0x74, 0x0a, 0x25, 0x79, 0x61, 0x6e,
-	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6c, 0x6f,
-	0x61, 0x64, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
-	0x76, 0x31, 0x5a, 0x4b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79,
-	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67,
-	0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6c, 0x6f, 0x61, 0x64, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67,
-	0x2f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2f, 0x76, 0x31, 0x3b, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x42, 0x74, 0x0a, 0x25, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6c, 0x6f, 0x61, 0x64, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67,
+	0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x76, 0x31, 0x5a, 0x4b, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6c, 0x6f, 0x61, 0x64,
+	0x74, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x2f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2f, 0x76, 0x31,
+	0x3b, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -897,36 +506,28 @@ func file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDescData
 }
 
-var file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_loadtesting_agent_v1_test_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_loadtesting_agent_v1_test_proto_goTypes = []interface{}{
-	(AmmoType)(0),                 // 0: yandex.cloud.loadtesting.agent.v1.AmmoType
-	(LoadType)(0),                 // 1: yandex.cloud.loadtesting.agent.v1.LoadType
-	(ScheduleType)(0),             // 2: yandex.cloud.loadtesting.agent.v1.ScheduleType
-	(Test_Status)(0),              // 3: yandex.cloud.loadtesting.agent.v1.Test.Status
-	(Test_Generator)(0),           // 4: yandex.cloud.loadtesting.agent.v1.Test.Generator
-	(*Test)(nil),                  // 5: yandex.cloud.loadtesting.agent.v1.Test
-	(*LoadSchedule)(nil),          // 6: yandex.cloud.loadtesting.agent.v1.LoadSchedule
-	(*Schedule)(nil),              // 7: yandex.cloud.loadtesting.agent.v1.Schedule
-	nil,                           // 8: yandex.cloud.loadtesting.agent.v1.Test.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(Test_Status)(0),              // 0: yandex.cloud.loadtesting.agent.v1.Test.Status
+	(Test_Generator)(0),           // 1: yandex.cloud.loadtesting.agent.v1.Test.Generator
+	(*Test)(nil),                  // 2: yandex.cloud.loadtesting.agent.v1.Test
+	nil,                           // 3: yandex.cloud.loadtesting.agent.v1.Test.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_yandex_cloud_loadtesting_agent_v1_test_proto_depIdxs = []int32{
-	8,  // 0: yandex.cloud.loadtesting.agent.v1.Test.labels:type_name -> yandex.cloud.loadtesting.agent.v1.Test.LabelsEntry
-	9,  // 1: yandex.cloud.loadtesting.agent.v1.Test.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 2: yandex.cloud.loadtesting.agent.v1.Test.started_at:type_name -> google.protobuf.Timestamp
-	9,  // 3: yandex.cloud.loadtesting.agent.v1.Test.finished_at:type_name -> google.protobuf.Timestamp
-	9,  // 4: yandex.cloud.loadtesting.agent.v1.Test.updated_at:type_name -> google.protobuf.Timestamp
-	4,  // 5: yandex.cloud.loadtesting.agent.v1.Test.generator:type_name -> yandex.cloud.loadtesting.agent.v1.Test.Generator
-	3,  // 6: yandex.cloud.loadtesting.agent.v1.Test.status:type_name -> yandex.cloud.loadtesting.agent.v1.Test.Status
-	2,  // 7: yandex.cloud.loadtesting.agent.v1.LoadSchedule.type:type_name -> yandex.cloud.loadtesting.agent.v1.ScheduleType
-	1,  // 8: yandex.cloud.loadtesting.agent.v1.Schedule.load_type:type_name -> yandex.cloud.loadtesting.agent.v1.LoadType
-	6,  // 9: yandex.cloud.loadtesting.agent.v1.Schedule.load_schedule:type_name -> yandex.cloud.loadtesting.agent.v1.LoadSchedule
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	3, // 0: yandex.cloud.loadtesting.agent.v1.Test.labels:type_name -> yandex.cloud.loadtesting.agent.v1.Test.LabelsEntry
+	4, // 1: yandex.cloud.loadtesting.agent.v1.Test.created_at:type_name -> google.protobuf.Timestamp
+	4, // 2: yandex.cloud.loadtesting.agent.v1.Test.started_at:type_name -> google.protobuf.Timestamp
+	4, // 3: yandex.cloud.loadtesting.agent.v1.Test.finished_at:type_name -> google.protobuf.Timestamp
+	4, // 4: yandex.cloud.loadtesting.agent.v1.Test.updated_at:type_name -> google.protobuf.Timestamp
+	1, // 5: yandex.cloud.loadtesting.agent.v1.Test.generator:type_name -> yandex.cloud.loadtesting.agent.v1.Test.Generator
+	0, // 6: yandex.cloud.loadtesting.agent.v1.Test.status:type_name -> yandex.cloud.loadtesting.agent.v1.Test.Status
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_loadtesting_agent_v1_test_proto_init() }
@@ -947,30 +548,6 @@ func file_yandex_cloud_loadtesting_agent_v1_test_proto_init() {
 				return nil
 			}
 		}
-		file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LoadSchedule); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Schedule); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	file_yandex_cloud_loadtesting_agent_v1_test_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*Test_AmmoUrls)(nil),
@@ -981,8 +558,8 @@ func file_yandex_cloud_loadtesting_agent_v1_test_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_loadtesting_agent_v1_test_proto_rawDesc,
-			NumEnums:      5,
-			NumMessages:   4,
+			NumEnums:      2,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
