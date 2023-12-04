@@ -8,6 +8,7 @@ package loadtesting
 
 import (
 	context "context"
+	config "github.com/yandex-cloud/go-genproto/yandex/cloud/loadtesting/api/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -21,13 +22,22 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	ConfigService_Create_FullMethodName = "/yandex.cloud.loadtesting.api.v1.ConfigService/Create"
+	ConfigService_Get_FullMethodName    = "/yandex.cloud.loadtesting.api.v1.ConfigService/Get"
+	ConfigService_List_FullMethodName   = "/yandex.cloud.loadtesting.api.v1.ConfigService/List"
 )
 
 // ConfigServiceClient is the client API for ConfigService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConfigServiceClient interface {
+	// Creates a test config in the specified folder.
 	Create(ctx context.Context, in *CreateConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the specified config.
+	//
+	// To get the list of all available configs, make a [List] request.
+	Get(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*config.Config, error)
+	// Retrieves the list of configs in the specified folder.
+	List(ctx context.Context, in *ListConfigsRequest, opts ...grpc.CallOption) (*ListConfigsResponse, error)
 }
 
 type configServiceClient struct {
@@ -47,11 +57,36 @@ func (c *configServiceClient) Create(ctx context.Context, in *CreateConfigReques
 	return out, nil
 }
 
+func (c *configServiceClient) Get(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*config.Config, error) {
+	out := new(config.Config)
+	err := c.cc.Invoke(ctx, ConfigService_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configServiceClient) List(ctx context.Context, in *ListConfigsRequest, opts ...grpc.CallOption) (*ListConfigsResponse, error) {
+	out := new(ListConfigsResponse)
+	err := c.cc.Invoke(ctx, ConfigService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConfigServiceServer is the server API for ConfigService service.
 // All implementations should embed UnimplementedConfigServiceServer
 // for forward compatibility
 type ConfigServiceServer interface {
+	// Creates a test config in the specified folder.
 	Create(context.Context, *CreateConfigRequest) (*operation.Operation, error)
+	// Returns the specified config.
+	//
+	// To get the list of all available configs, make a [List] request.
+	Get(context.Context, *GetConfigRequest) (*config.Config, error)
+	// Retrieves the list of configs in the specified folder.
+	List(context.Context, *ListConfigsRequest) (*ListConfigsResponse, error)
 }
 
 // UnimplementedConfigServiceServer should be embedded to have forward compatible implementations.
@@ -60,6 +95,12 @@ type UnimplementedConfigServiceServer struct {
 
 func (UnimplementedConfigServiceServer) Create(context.Context, *CreateConfigRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedConfigServiceServer) Get(context.Context, *GetConfigRequest) (*config.Config, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedConfigServiceServer) List(context.Context, *ListConfigsRequest) (*ListConfigsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 
 // UnsafeConfigServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -91,6 +132,42 @@ func _ConfigService_Create_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConfigService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfigServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConfigService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfigServiceServer).Get(ctx, req.(*GetConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConfigService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfigServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConfigService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfigServiceServer).List(ctx, req.(*ListConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConfigService_ServiceDesc is the grpc.ServiceDesc for ConfigService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -101,6 +178,14 @@ var ConfigService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _ConfigService_Create_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _ConfigService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _ConfigService_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,17 +22,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Details specific for Cloud, without progress and results.
-// These details will be used for retry also.
+// Test meta information.
 type Details struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name              string        `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description       string        `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Tags              []*common.Tag `protobuf:"bytes,3,rep,name=tags,proto3" json:"tags,omitempty"`
-	LoggingLogGroupId string        `protobuf:"bytes,4,opt,name=logging_log_group_id,json=loggingLogGroupId,proto3" json:"logging_log_group_id,omitempty"`
+	// Name of the test.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the test.
+	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	// Tags assigned to the test.
+	Tags []*common.Tag `protobuf:"bytes,3,rep,name=tags,proto3" json:"tags,omitempty"`
+	// ID of the logging group to which test artifacts are uploaded.
+	LoggingLogGroupId string `protobuf:"bytes,4,opt,name=logging_log_group_id,json=loggingLogGroupId,proto3" json:"logging_log_group_id,omitempty"`
 }
 
 func (x *Details) Reset() {

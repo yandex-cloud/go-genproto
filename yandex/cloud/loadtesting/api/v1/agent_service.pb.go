@@ -30,11 +30,22 @@ type CreateAgentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId              string                       `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name                  string                       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description           string                       `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the folder to create an agent in.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the agent.
+	//
+	// A created compute instance will have the same name.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the agent.
+	//
+	// A created compute instance will have the same description.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Parameters for compute instance to be created.
 	ComputeInstanceParams *agent.CreateComputeInstance `protobuf:"bytes,4,opt,name=compute_instance_params,json=computeInstanceParams,proto3" json:"compute_instance_params,omitempty"`
-	AgentVersion          string                       `protobuf:"bytes,5,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
+	// Version of the agent.
+	//
+	// If not provided, the most recent agent version will be used.
+	AgentVersion string `protobuf:"bytes,5,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
 }
 
 func (x *CreateAgentRequest) Reset() {
@@ -109,6 +120,7 @@ type CreateAgentMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the agent that is being created.
 	AgentId string `protobuf:"bytes,1,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 }
 
@@ -156,6 +168,7 @@ type GetAgentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the agent to return.
 	AgentId string `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 }
 
@@ -203,6 +216,7 @@ type DeleteAgentRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the agent to delete.
 	AgentId string `protobuf:"bytes,1,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 }
 
@@ -250,6 +264,7 @@ type DeleteAgentMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the agent that is being deleted.
 	AgentId string `protobuf:"bytes,1,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 }
 
@@ -297,10 +312,38 @@ type ListAgentsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// ID of the folder to list agents in.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListAgentsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListAgentsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	// A filter expression that filters agents listed in the response.
+	//
+	// The filter expression may contain multiple field expressions joined by `AND`.
+	// The field expression must specify:
+	// 1. The field name.
+	// 2. An operator:
+	//   - `=`, `!=`, `CONTAINS`, for single values.
+	//   - `IN` or `NOT IN` for lists of values.
+	//
+	// 3. The value. String values must be encosed in `"`, boolean values are {`true`, `false`}, timestamp values in ISO-8601.
+	//
+	// Currently supported fields:
+	// - `id` [yandex.cloud.loadtesting.api.v1.agent.Agent.id]
+	//   - operators: `=`, `!=`, `IN`, `NOT IN`
+	//
+	// - `name` [yandex.cloud.loadtesting.api.v1.agent.Agent.name]
+	//   - operators: `=`, `!=`, `IN`, `NOT IN`, `CONTAINS`
+	//
+	// Examples:
+	// - `id IN ("1", "2", "3")`
+	// - `name CONTAINS "compute-agent-large" AND id NOT IN ("4", "5")`
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *ListAgentsRequest) Reset() {
@@ -368,8 +411,14 @@ type ListAgentsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Agents        []*agent.Agent `protobuf:"bytes,1,rep,name=agents,proto3" json:"agents,omitempty"`
-	NextPageToken string         `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of agents in the specified folder.
+	Agents []*agent.Agent `protobuf:"bytes,1,rep,name=agents,proto3" json:"agents,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListAgentsRequest.page_size], use `next_page_token` as the value
+	// for the [ListAgentsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListAgentsResponse) Reset() {

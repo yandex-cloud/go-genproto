@@ -72,6 +72,18 @@ func (m *UtteranceSynthesisResponse) SetAudioChunk(v *AudioChunk) {
 	m.AudioChunk = v
 }
 
+func (m *UtteranceSynthesisResponse) SetTextChunk(v *TextChunk) {
+	m.TextChunk = v
+}
+
+func (m *UtteranceSynthesisResponse) SetStartMs(v int64) {
+	m.StartMs = v
+}
+
+func (m *UtteranceSynthesisResponse) SetLengthMs(v int64) {
+	m.LengthMs = v
+}
+
 func (m *AudioTemplate) SetAudio(v *AudioContent) {
 	m.Audio = v
 }
@@ -86,6 +98,10 @@ func (m *AudioTemplate) SetVariables(v []*AudioVariable) {
 
 func (m *AudioChunk) SetData(v []byte) {
 	m.Data = v
+}
+
+func (m *TextChunk) SetText(v string) {
+	m.Text = v
 }
 
 func (m *TextTemplate) SetTextTemplate(v string) {

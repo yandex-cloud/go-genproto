@@ -20,6 +20,9 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Agent selection criterion.
+//
+// The structure is used by service to determine on which agents a specific test should be executed.
 type AgentSelector struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -82,6 +85,7 @@ type isAgentSelector_Agent interface {
 }
 
 type AgentSelector_AgentId struct {
+	// Selection by agent ID.
 	AgentId string `protobuf:"bytes,1,opt,name=agent_id,json=agentId,proto3,oneof"`
 }
 

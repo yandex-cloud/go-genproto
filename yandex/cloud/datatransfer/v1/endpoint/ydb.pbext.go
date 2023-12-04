@@ -61,3 +61,7 @@ func (m *YdbTarget) SetSaKeyContent(v string) {
 func (m *YdbTarget) SetCleanupPolicy(v YdbCleanupPolicy) {
 	m.CleanupPolicy = v
 }
+
+func (m *YdbTarget) SetIsTableColumnOriented(v bool) {
+	m.IsTableColumnOriented = v
+}

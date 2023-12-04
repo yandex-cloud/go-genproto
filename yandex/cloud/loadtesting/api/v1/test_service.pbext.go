@@ -25,3 +25,43 @@ func (m *CreateTestMetadata) SetTestId(v string) {
 func (m *GetTestRequest) SetTestId(v string) {
 	m.TestId = v
 }
+
+func (m *StopTestRequest) SetTestId(v string) {
+	m.TestId = v
+}
+
+func (m *StopTestMetadata) SetTestId(v string) {
+	m.TestId = v
+}
+
+func (m *DeleteTestRequest) SetTestId(v string) {
+	m.TestId = v
+}
+
+func (m *DeleteTestMetadata) SetTestId(v string) {
+	m.TestId = v
+}
+
+func (m *ListTestsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListTestsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListTestsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListTestsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListTestsResponse) SetTests(v []*test.Test) {
+	m.Tests = v
+}
+
+func (m *ListTestsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

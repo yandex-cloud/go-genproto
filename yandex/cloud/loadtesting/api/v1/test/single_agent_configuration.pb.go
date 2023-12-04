@@ -20,14 +20,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Configuration of a test.
 type SingleAgentConfiguration struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ConfigId      string                  `protobuf:"bytes,1,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
-	AgentSelector *AgentSelector          `protobuf:"bytes,2,opt,name=agent_selector,json=agentSelector,proto3" json:"agent_selector,omitempty"`
-	Files         map[string]*FilePointer `protobuf:"bytes,3,rep,name=files,proto3" json:"files,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the config.
+	ConfigId string `protobuf:"bytes,1,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
+	// Agent selection criterion.
+	AgentSelector *AgentSelector `protobuf:"bytes,2,opt,name=agent_selector,json=agentSelector,proto3" json:"agent_selector,omitempty"`
+	// Additional files to be used during test execution, represented as `rel_path:file` pairs.
+	//
+	// `rel_path` can be either a simple file name, a relative path, or absolute path. Files are
+	// downloaded by the agent to appropriate location.
+	//
+	// Use cases include:
+	// - [Test Data files](https://cloud.yandex.com/en-ru/docs/load-testing/concepts/payload).
+	// - Custom Pandora executable.
+	// - JMeter executable or ".jmx" scenario.
+	// - etc.
+	Files map[string]*FilePointer `protobuf:"bytes,3,rep,name=files,proto3" json:"files,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *SingleAgentConfiguration) Reset() {

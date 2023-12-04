@@ -23,21 +23,39 @@ const (
 type Status int32
 
 const (
+	// Status is unspecified.
 	Status_STATUS_UNSPECIFIED Status = 0
-	Status_CREATED            Status = 1
-	Status_INITIATED          Status = 2
-	Status_PREPARING          Status = 3
-	Status_RUNNING            Status = 4
-	Status_FINISHING          Status = 5
-	Status_DONE               Status = 6
-	Status_POST_PROCESSING    Status = 7
-	Status_FAILED             Status = 8
-	Status_STOPPING           Status = 9
-	Status_STOPPED            Status = 10
-	Status_AUTOSTOPPED        Status = 11
-	Status_WAITING            Status = 12
-	Status_DELETING           Status = 13
-	Status_LOST               Status = 14
+	// Test has been created, but not started by any agent.
+	Status_CREATED Status = 1
+	// Execution stage: initialization.
+	Status_INITIATED Status = 2
+	// Execution stage: data preparation and warm-up.
+	Status_PREPARING Status = 3
+	// Execution stage: load generation.
+	Status_RUNNING Status = 4
+	// Execution stage: termination.
+	Status_FINISHING Status = 5
+	// Test is done.
+	Status_DONE Status = 6
+	// Execution stage: results post-processing.
+	Status_POST_PROCESSING Status = 7
+	// Test has failed due to some error.
+	Status_FAILED Status = 8
+	// Test is being stopped.
+	Status_STOPPING Status = 9
+	// Test has been stopped.
+	Status_STOPPED Status = 10
+	// Test has been stopped automatically by satisfying autostop condition.
+	Status_AUTOSTOPPED Status = 11
+	// Execution stage: waiting for a trigger to start.
+	Status_WAITING Status = 12
+	// Test is being deleted.
+	Status_DELETING Status = 13
+	// Test status has not been reported in a while during execution stage.
+	//
+	// Means that either an agent is too busy to send it, got offline, or failed without
+	// reporting a final status.
+	Status_LOST Status = 14
 )
 
 // Enum value maps for Status.

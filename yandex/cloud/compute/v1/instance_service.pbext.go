@@ -4,6 +4,7 @@ package compute
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -115,12 +116,20 @@ func (m *CreateInstanceRequest) SetNetworkSettings(v *NetworkSettings) {
 	m.NetworkSettings = v
 }
 
+func (m *CreateInstanceRequest) SetPlacementPolicy(v *PlacementPolicy) {
+	m.PlacementPolicy = v
+}
+
 func (m *CreateInstanceRequest) SetGpuSettings(v *GpuSettings) {
 	m.GpuSettings = v
 }
 
-func (m *CreateInstanceRequest) SetPlacementPolicy(v *PlacementPolicy) {
-	m.PlacementPolicy = v
+func (m *CreateInstanceRequest) SetMaintenancePolicy(v MaintenancePolicy) {
+	m.MaintenancePolicy = v
+}
+
+func (m *CreateInstanceRequest) SetMaintenanceGracePeriod(v *durationpb.Duration) {
+	m.MaintenanceGracePeriod = v
 }
 
 func (m *CreateInstanceMetadata) SetInstanceId(v string) {
@@ -177,6 +186,14 @@ func (m *UpdateInstanceRequest) SetPlacementPolicy(v *PlacementPolicy) {
 
 func (m *UpdateInstanceRequest) SetSchedulingPolicy(v *SchedulingPolicy) {
 	m.SchedulingPolicy = v
+}
+
+func (m *UpdateInstanceRequest) SetMaintenancePolicy(v MaintenancePolicy) {
+	m.MaintenancePolicy = v
+}
+
+func (m *UpdateInstanceRequest) SetMaintenanceGracePeriod(v *durationpb.Duration) {
+	m.MaintenanceGracePeriod = v
 }
 
 func (m *UpdateInstanceMetadata) SetInstanceId(v string) {

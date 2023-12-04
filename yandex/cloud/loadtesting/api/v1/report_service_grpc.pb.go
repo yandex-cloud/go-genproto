@@ -26,6 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReportServiceClient interface {
+	// Returns a report table for the specified test.
 	GetTable(ctx context.Context, in *GetTableReportRequest, opts ...grpc.CallOption) (*GetTableReportResponse, error)
 }
 
@@ -50,6 +51,7 @@ func (c *reportServiceClient) GetTable(ctx context.Context, in *GetTableReportRe
 // All implementations should embed UnimplementedReportServiceServer
 // for forward compatibility
 type ReportServiceServer interface {
+	// Returns a report table for the specified test.
 	GetTable(context.Context, *GetTableReportRequest) (*GetTableReportResponse, error)
 }
 

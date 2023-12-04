@@ -86,6 +86,10 @@ func (m *KafkaSource) SetParser(v *Parser) {
 	m.Parser = v
 }
 
+func (m *KafkaSource) SetTopicNames(v []string) {
+	m.TopicNames = v
+}
+
 func (m *KafkaTarget) SetConnection(v *KafkaConnectionOptions) {
 	m.Connection = v
 }

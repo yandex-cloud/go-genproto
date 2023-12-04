@@ -20,20 +20,32 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Load testing agent on which tests are executed.
 type Agent struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId          string   `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name              string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description       string   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	ComputeInstanceId string   `protobuf:"bytes,5,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	Status            Status   `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.loadtesting.api.v1.agent.Status" json:"status,omitempty"`
-	Errors            []string `protobuf:"bytes,8,rep,name=errors,proto3" json:"errors,omitempty"`
-	CurrentJobId      string   `protobuf:"bytes,9,opt,name=current_job_id,json=currentJobId,proto3" json:"current_job_id,omitempty"`
-	AgentVersionId    string   `protobuf:"bytes,10,opt,name=agent_version_id,json=agentVersionId,proto3" json:"agent_version_id,omitempty"`
+	// ID of the agent. Generated at creation time.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the agent belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the agent.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the agent.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the compute instance managed by the agent.
+	//
+	// Empty if there is no such instance (i.e. the case of external agent).
+	ComputeInstanceId string `protobuf:"bytes,5,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	// Status of the agent.
+	Status Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.loadtesting.api.v1.agent.Status" json:"status,omitempty"`
+	// List of errors reported by the agent.
+	Errors []string `protobuf:"bytes,8,rep,name=errors,proto3" json:"errors,omitempty"`
+	// ID of the test that is currently being executed by the agent.
+	CurrentJobId string `protobuf:"bytes,9,opt,name=current_job_id,json=currentJobId,proto3" json:"current_job_id,omitempty"`
+	// Version of the agent.
+	AgentVersionId string `protobuf:"bytes,10,opt,name=agent_version_id,json=agentVersionId,proto3" json:"agent_version_id,omitempty"`
 }
 
 func (x *Agent) Reset() {

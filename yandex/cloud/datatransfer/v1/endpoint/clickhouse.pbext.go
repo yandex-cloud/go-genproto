@@ -96,6 +96,12 @@ func (m *ClickhouseSharding) SetTransferId(v *emptypb.Empty) {
 	}
 }
 
+func (m *ClickhouseSharding) SetRoundRobin(v *emptypb.Empty) {
+	m.Sharding = &ClickhouseSharding_RoundRobin{
+		RoundRobin: v,
+	}
+}
+
 func (m *ClickhouseSharding_ColumnValueHash) SetColumnName(v string) {
 	m.ColumnName = v
 }

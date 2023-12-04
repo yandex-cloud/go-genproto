@@ -20,16 +20,28 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Load Test.
+//
+// In context of the service, Test represents a single testing task/job.
 type Test struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             string                      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the test. Generated at creation time.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Configuration of the test.
+	//
+	// A test can have multiple configurations if it can be
+	// executed on multiple agents simultaneously. For more information, see
+	// [Load testing using multiple agents](docs/load-testing/tutorials/loadtesting-multiply).
 	Configurations []*SingleAgentConfiguration `protobuf:"bytes,2,rep,name=configurations,proto3" json:"configurations,omitempty"`
-	Details        *Details                    `protobuf:"bytes,3,opt,name=details,proto3" json:"details,omitempty"`
-	Summary        *Summary                    `protobuf:"bytes,4,opt,name=summary,proto3" json:"summary,omitempty"`
-	FolderId       string                      `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Test meta information. Name, description, etc.
+	Details *Details `protobuf:"bytes,3,opt,name=details,proto3" json:"details,omitempty"`
+	// Test execution information.
+	Summary *Summary `protobuf:"bytes,4,opt,name=summary,proto3" json:"summary,omitempty"`
+	// ID of the folder that the test belongs to.
+	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 
 func (x *Test) Reset() {

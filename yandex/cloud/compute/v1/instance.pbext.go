@@ -3,6 +3,7 @@
 package compute
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -104,6 +105,14 @@ func (m *Instance) SetHostGroupId(v string) {
 
 func (m *Instance) SetHostId(v string) {
 	m.HostId = v
+}
+
+func (m *Instance) SetMaintenancePolicy(v MaintenancePolicy) {
+	m.MaintenancePolicy = v
+}
+
+func (m *Instance) SetMaintenanceGracePeriod(v *durationpb.Duration) {
+	m.MaintenanceGracePeriod = v
 }
 
 func (m *Resources) SetMemory(v int64) {

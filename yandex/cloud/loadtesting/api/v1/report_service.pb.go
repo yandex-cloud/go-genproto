@@ -29,6 +29,7 @@ type GetTableReportRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the test for which report table will be returned.
 	TestId string `protobuf:"bytes,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
 }
 
@@ -76,9 +77,12 @@ type GetTableReportResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status  report.Status            `protobuf:"varint,1,opt,name=status,proto3,enum=yandex.cloud.loadtesting.api.v1.report.Status" json:"status,omitempty"`
-	Overall *table.Report            `protobuf:"bytes,2,opt,name=overall,proto3" json:"overall,omitempty"`
-	Cases   map[string]*table.Report `protobuf:"bytes,3,rep,name=cases,proto3" json:"cases,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Status of report table.
+	Status report.Status `protobuf:"varint,1,opt,name=status,proto3,enum=yandex.cloud.loadtesting.api.v1.report.Status" json:"status,omitempty"`
+	// Result for all test cases combined ("overall" test case).
+	Overall *table.Report `protobuf:"bytes,2,opt,name=overall,proto3" json:"overall,omitempty"`
+	// Results for individual test cases, mapped as `case_name:report`.
+	Cases map[string]*table.Report `protobuf:"bytes,3,rep,name=cases,proto3" json:"cases,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *GetTableReportResponse) Reset() {

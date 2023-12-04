@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Variant-like structure for referencing files in different sources.
 type FilePointer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -82,6 +83,7 @@ type isFilePointer_FilePointer interface {
 }
 
 type FilePointer_ObjectStorage struct {
+	// Reference to a file in Object Storage.
 	ObjectStorage *ObjectStorage `protobuf:"bytes,1,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 

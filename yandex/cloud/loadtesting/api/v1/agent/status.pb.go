@@ -20,26 +20,44 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Agent status.
 type Status int32
 
 const (
-	Status_STATUS_UNSPECIFIED         Status = 0
-	Status_PREPARING_TEST             Status = 1
-	Status_READY_FOR_TEST             Status = 2
-	Status_TESTING                    Status = 3
-	Status_TANK_FAILED                Status = 4
-	Status_PROVISIONING               Status = 5
-	Status_STOPPING                   Status = 6
-	Status_STOPPED                    Status = 7
-	Status_STARTING                   Status = 8
-	Status_RESTARTING                 Status = 9
-	Status_UPDATING                   Status = 10
-	Status_ERROR                      Status = 11
-	Status_CRASHED                    Status = 12
-	Status_DELETING                   Status = 13
-	Status_INITIALIZING_CONNECTION    Status = 15
+	// Status is not specified.
+	Status_STATUS_UNSPECIFIED Status = 0
+	// Agent is preparing a test to be executed.
+	Status_PREPARING_TEST Status = 1
+	// Agent is ready to take a test.
+	Status_READY_FOR_TEST Status = 2
+	// Agent is executing a test.
+	Status_TESTING Status = 3
+	// Agent application encountered an error and cannot operate normally.
+	Status_TANK_FAILED Status = 4
+	// Agent is waiting for resources to be allocated.
+	Status_PROVISIONING Status = 5
+	// Agent is being stopped.
+	Status_STOPPING Status = 6
+	// Agent is stopped.
+	Status_STOPPED Status = 7
+	// Agent is being started.
+	Status_STARTING Status = 8
+	// Agent is being restarted.
+	Status_RESTARTING Status = 9
+	// Agent is being updated.
+	Status_UPDATING Status = 10
+	// Agent encountered an error and cannot operate.
+	Status_ERROR Status = 11
+	// Agent is crashed and will be restarted automatically.
+	Status_CRASHED Status = 12
+	// Agent is being deleted.
+	Status_DELETING Status = 13
+	// Service is waiting for connection with agent to be established.
+	Status_INITIALIZING_CONNECTION Status = 15
+	// Service has lost connection with agent.
 	Status_LOST_CONNECTION_WITH_AGENT Status = 16
-	Status_UPLOADING_ARTIFACTS        Status = 17
+	// Agent is uploading test artifacts.
+	Status_UPLOADING_ARTIFACTS Status = 17
 )
 
 // Enum value maps for Status.

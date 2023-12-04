@@ -20,19 +20,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Statistical data aggregated by predefined set of quantiles.
 type Quantiles struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Q50  float64 `protobuf:"fixed64,1,opt,name=q50,proto3" json:"q50,omitempty"`
-	Q75  float64 `protobuf:"fixed64,2,opt,name=q75,proto3" json:"q75,omitempty"`
-	Q80  float64 `protobuf:"fixed64,3,opt,name=q80,proto3" json:"q80,omitempty"`
-	Q85  float64 `protobuf:"fixed64,4,opt,name=q85,proto3" json:"q85,omitempty"`
-	Q90  float64 `protobuf:"fixed64,5,opt,name=q90,proto3" json:"q90,omitempty"`
-	Q95  float64 `protobuf:"fixed64,6,opt,name=q95,proto3" json:"q95,omitempty"`
-	Q98  float64 `protobuf:"fixed64,7,opt,name=q98,proto3" json:"q98,omitempty"`
-	Q99  float64 `protobuf:"fixed64,8,opt,name=q99,proto3" json:"q99,omitempty"`
+	// 50 percentile (median).
+	Q50 float64 `protobuf:"fixed64,1,opt,name=q50,proto3" json:"q50,omitempty"`
+	// 75 percentile.
+	Q75 float64 `protobuf:"fixed64,2,opt,name=q75,proto3" json:"q75,omitempty"`
+	// 80 percentile.
+	Q80 float64 `protobuf:"fixed64,3,opt,name=q80,proto3" json:"q80,omitempty"`
+	// 85 percentile.
+	Q85 float64 `protobuf:"fixed64,4,opt,name=q85,proto3" json:"q85,omitempty"`
+	// 90 percentile.
+	Q90 float64 `protobuf:"fixed64,5,opt,name=q90,proto3" json:"q90,omitempty"`
+	// 95 percentile.
+	Q95 float64 `protobuf:"fixed64,6,opt,name=q95,proto3" json:"q95,omitempty"`
+	// 98 percentile.
+	Q98 float64 `protobuf:"fixed64,7,opt,name=q98,proto3" json:"q98,omitempty"`
+	// 99 percentile.
+	Q99 float64 `protobuf:"fixed64,8,opt,name=q99,proto3" json:"q99,omitempty"`
+	// 100 percentile (maximum or minimum).
 	Q100 float64 `protobuf:"fixed64,9,opt,name=q100,proto3" json:"q100,omitempty"`
 }
 

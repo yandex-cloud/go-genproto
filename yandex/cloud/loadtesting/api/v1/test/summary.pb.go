@@ -27,14 +27,31 @@ type Summary struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status         Status                 `protobuf:"varint,1,opt,name=status,proto3,enum=yandex.cloud.loadtesting.api.v1.test.Status" json:"status,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy      string                 `protobuf:"bytes,3,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	StartedAt      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
-	FinishedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
-	IsFinished     bool                   `protobuf:"varint,6,opt,name=is_finished,json=isFinished,proto3" json:"is_finished,omitempty"`
-	Error          string                 `protobuf:"bytes,7,opt,name=error,proto3" json:"error,omitempty"`
-	ImbalancePoint *ImbalancePoint        `protobuf:"bytes,8,opt,name=imbalance_point,json=imbalancePoint,proto3" json:"imbalance_point,omitempty"`
+	// Status of the test.
+	Status Status `protobuf:"varint,1,opt,name=status,proto3,enum=yandex.cloud.loadtesting.api.v1.test.Status" json:"status,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// UA or SA that created the test.
+	CreatedBy string `protobuf:"bytes,3,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Test start timestamp.
+	//
+	// Empty if the test has not been started yet.
+	StartedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
+	// Test finish timestamp.
+	//
+	// Empty if the test has not been finished yet.
+	FinishedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
+	// Indicates whether the test is finished.
+	IsFinished bool `protobuf:"varint,6,opt,name=is_finished,json=isFinished,proto3" json:"is_finished,omitempty"`
+	// Error message.
+	Error string `protobuf:"bytes,7,opt,name=error,proto3" json:"error,omitempty"`
+	// Detected imbalance point.
+	//
+	// Contains information about a state at the moment it has been
+	// [auto-stopped](/docs/load-testing/concepts/auto-stop).
+	//
+	// Empty if no auto-stop occured.
+	ImbalancePoint *ImbalancePoint `protobuf:"bytes,8,opt,name=imbalance_point,json=imbalancePoint,proto3" json:"imbalance_point,omitempty"`
 }
 
 func (x *Summary) Reset() {

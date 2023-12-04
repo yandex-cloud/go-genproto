@@ -20,13 +20,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Report status.
 type Status int32
 
 const (
+	// Status is not specified.
 	Status_STATUS_UNSPECIFIED Status = 0
-	Status_COLLECTING         Status = 1
-	Status_CALCULATING        Status = 2
-	Status_READY              Status = 3
+	// Report is being collected.
+	Status_COLLECTING Status = 1
+	// Report is being calculated.
+	Status_CALCULATING Status = 2
+	// Report is ready.
+	Status_READY Status = 3
 )
 
 // Enum value maps for Status.

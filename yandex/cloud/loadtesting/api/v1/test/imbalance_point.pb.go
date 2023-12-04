@@ -21,13 +21,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Test imbalance point.
 type ImbalancePoint struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	At  *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=at,proto3" json:"at,omitempty"`
-	Rps int64                  `protobuf:"varint,2,opt,name=rps,proto3" json:"rps,omitempty"`
+	// Imbalance moment timestamp.
+	At *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=at,proto3" json:"at,omitempty"`
+	// Imbalance moment RPS.
+	Rps int64 `protobuf:"varint,2,opt,name=rps,proto3" json:"rps,omitempty"`
 }
 
 func (x *ImbalancePoint) Reset() {

@@ -21,13 +21,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Aggregated test results.
 type Report struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HttpCodes map[int64]int64   `protobuf:"bytes,1,rep,name=http_codes,json=httpCodes,proto3" json:"http_codes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	NetCodes  map[int64]int64   `protobuf:"bytes,2,rep,name=net_codes,json=netCodes,proto3" json:"net_codes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	// Total count of HTTP responses, grouped by HTTP response code.
+	HttpCodes map[int64]int64 `protobuf:"bytes,1,rep,name=http_codes,json=httpCodes,proto3" json:"http_codes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	// Total count of network responses, grouped by response code.
+	NetCodes map[int64]int64 `protobuf:"bytes,2,rep,name=net_codes,json=netCodes,proto3" json:"net_codes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	// Response time statistics, aggregated by quantiles.
 	Quantiles *common.Quantiles `protobuf:"bytes,3,opt,name=quantiles,proto3" json:"quantiles,omitempty"`
 }
 

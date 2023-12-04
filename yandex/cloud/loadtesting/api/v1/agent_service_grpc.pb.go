@@ -31,9 +31,19 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AgentServiceClient interface {
+	// Creates an agent in the specified folder.
+	//
+	// Also creates a corresponding compute instance.
 	Create(ctx context.Context, in *CreateAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the specified agent.
+	//
+	// To get the list of all available agents, make a [List] request.
 	Get(ctx context.Context, in *GetAgentRequest, opts ...grpc.CallOption) (*agent.Agent, error)
+	// Retrieves the list of agents in the specified folder.
 	List(ctx context.Context, in *ListAgentsRequest, opts ...grpc.CallOption) (*ListAgentsResponse, error)
+	// Deletes the specified agent.
+	//
+	// Also deletes a corresponding compute instance.
 	Delete(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -85,9 +95,19 @@ func (c *agentServiceClient) Delete(ctx context.Context, in *DeleteAgentRequest,
 // All implementations should embed UnimplementedAgentServiceServer
 // for forward compatibility
 type AgentServiceServer interface {
+	// Creates an agent in the specified folder.
+	//
+	// Also creates a corresponding compute instance.
 	Create(context.Context, *CreateAgentRequest) (*operation.Operation, error)
+	// Returns the specified agent.
+	//
+	// To get the list of all available agents, make a [List] request.
 	Get(context.Context, *GetAgentRequest) (*agent.Agent, error)
+	// Retrieves the list of agents in the specified folder.
 	List(context.Context, *ListAgentsRequest) (*ListAgentsResponse, error)
+	// Deletes the specified agent.
+	//
+	// Also deletes a corresponding compute instance.
 	Delete(context.Context, *DeleteAgentRequest) (*operation.Operation, error)
 }
 

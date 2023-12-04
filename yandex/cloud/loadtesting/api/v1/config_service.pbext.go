@@ -2,6 +2,10 @@
 
 package loadtesting
 
+import (
+	config "github.com/yandex-cloud/go-genproto/yandex/cloud/loadtesting/api/v1/config"
+)
+
 type CreateConfigRequest_Config = isCreateConfigRequest_Config
 
 func (m *CreateConfigRequest) SetConfig(v CreateConfigRequest_Config) {
@@ -20,4 +24,28 @@ func (m *CreateConfigRequest) SetYamlString(v string) {
 
 func (m *CreateConfigMetadata) SetConfigId(v string) {
 	m.ConfigId = v
+}
+
+func (m *GetConfigRequest) SetConfigId(v string) {
+	m.ConfigId = v
+}
+
+func (m *ListConfigsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListConfigsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListConfigsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListConfigsResponse) SetConfigs(v []*config.Config) {
+	m.Configs = v
+}
+
+func (m *ListConfigsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
