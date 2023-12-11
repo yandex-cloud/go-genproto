@@ -18,6 +18,10 @@ func (m *MongodConfig6_0) SetNet(v *MongodConfig6_0_Network) {
 	m.Net = v
 }
 
+func (m *MongodConfig6_0) SetSetParameter(v *MongodConfig6_0_SetParameter) {
+	m.SetParameter = v
+}
+
 func (m *MongodConfig6_0_Storage) SetWiredTiger(v *MongodConfig6_0_Storage_WiredTiger) {
 	m.WiredTiger = v
 }
@@ -34,12 +38,20 @@ func (m *MongodConfig6_0_Storage_WiredTiger) SetCollectionConfig(v *MongodConfig
 	m.CollectionConfig = v
 }
 
+func (m *MongodConfig6_0_Storage_WiredTiger) SetIndexConfig(v *MongodConfig6_0_Storage_WiredTiger_IndexConfig) {
+	m.IndexConfig = v
+}
+
 func (m *MongodConfig6_0_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrapperspb.DoubleValue) {
 	m.CacheSizeGb = v
 }
 
 func (m *MongodConfig6_0_Storage_WiredTiger_CollectionConfig) SetBlockCompressor(v MongodConfig6_0_Storage_WiredTiger_CollectionConfig_Compressor) {
 	m.BlockCompressor = v
+}
+
+func (m *MongodConfig6_0_Storage_WiredTiger_IndexConfig) SetPrefixCompression(v *wrapperspb.BoolValue) {
+	m.PrefixCompression = v
 }
 
 func (m *MongodConfig6_0_Storage_Journal) SetCommitInterval(v *wrapperspb.Int64Value) {
@@ -54,8 +66,24 @@ func (m *MongodConfig6_0_OperationProfiling) SetSlowOpThreshold(v *wrapperspb.In
 	m.SlowOpThreshold = v
 }
 
+func (m *MongodConfig6_0_OperationProfiling) SetSlowOpSampleRate(v *wrapperspb.DoubleValue) {
+	m.SlowOpSampleRate = v
+}
+
 func (m *MongodConfig6_0_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
+}
+
+func (m *MongodConfig6_0_Network) SetCompression(v *MongodConfig6_0_Network_Compression) {
+	m.Compression = v
+}
+
+func (m *MongodConfig6_0_Network_Compression) SetCompressors(v []MongodConfig6_0_Network_Compression_Compressor) {
+	m.Compressors = v
+}
+
+func (m *MongodConfig6_0_SetParameter) SetEnableFlowControl(v *wrapperspb.BoolValue) {
+	m.EnableFlowControl = v
 }
 
 func (m *MongoCfgConfig6_0) SetStorage(v *MongoCfgConfig6_0_Storage) {
@@ -100,6 +128,14 @@ func (m *MongosConfig6_0) SetNet(v *MongosConfig6_0_Network) {
 
 func (m *MongosConfig6_0_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
+}
+
+func (m *MongosConfig6_0_Network) SetCompression(v *MongosConfig6_0_Network_Compression) {
+	m.Compression = v
+}
+
+func (m *MongosConfig6_0_Network_Compression) SetCompressors(v []MongosConfig6_0_Network_Compression_Compressor) {
+	m.Compressors = v
 }
 
 func (m *MongodConfigSet6_0) SetEffectiveConfig(v *MongodConfig6_0) {

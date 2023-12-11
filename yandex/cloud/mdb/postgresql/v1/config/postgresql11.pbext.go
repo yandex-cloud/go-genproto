@@ -562,6 +562,10 @@ func (m *PostgresqlConfig11) SetLogAutovacuumMinDuration(v *wrapperspb.Int64Valu
 	m.LogAutovacuumMinDuration = v
 }
 
+func (m *PostgresqlConfig11) SetPasswordEncryption(v PostgresqlConfig11_PasswordEncryption) {
+	m.PasswordEncryption = v
+}
+
 func (m *PostgresqlConfigSet11) SetEffectiveConfig(v *PostgresqlConfig11) {
 	m.EffectiveConfig = v
 }

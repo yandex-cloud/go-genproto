@@ -21,29 +21,30 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	InstanceService_Get_FullMethodName                    = "/yandex.cloud.compute.v1.InstanceService/Get"
-	InstanceService_List_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/List"
-	InstanceService_Create_FullMethodName                 = "/yandex.cloud.compute.v1.InstanceService/Create"
-	InstanceService_Update_FullMethodName                 = "/yandex.cloud.compute.v1.InstanceService/Update"
-	InstanceService_Delete_FullMethodName                 = "/yandex.cloud.compute.v1.InstanceService/Delete"
-	InstanceService_UpdateMetadata_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/UpdateMetadata"
-	InstanceService_GetSerialPortOutput_FullMethodName    = "/yandex.cloud.compute.v1.InstanceService/GetSerialPortOutput"
-	InstanceService_Stop_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/Stop"
-	InstanceService_Start_FullMethodName                  = "/yandex.cloud.compute.v1.InstanceService/Start"
-	InstanceService_Restart_FullMethodName                = "/yandex.cloud.compute.v1.InstanceService/Restart"
-	InstanceService_AttachDisk_FullMethodName             = "/yandex.cloud.compute.v1.InstanceService/AttachDisk"
-	InstanceService_DetachDisk_FullMethodName             = "/yandex.cloud.compute.v1.InstanceService/DetachDisk"
-	InstanceService_AttachFilesystem_FullMethodName       = "/yandex.cloud.compute.v1.InstanceService/AttachFilesystem"
-	InstanceService_DetachFilesystem_FullMethodName       = "/yandex.cloud.compute.v1.InstanceService/DetachFilesystem"
-	InstanceService_AddOneToOneNat_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/AddOneToOneNat"
-	InstanceService_RemoveOneToOneNat_FullMethodName      = "/yandex.cloud.compute.v1.InstanceService/RemoveOneToOneNat"
-	InstanceService_UpdateNetworkInterface_FullMethodName = "/yandex.cloud.compute.v1.InstanceService/UpdateNetworkInterface"
-	InstanceService_ListOperations_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/ListOperations"
-	InstanceService_Move_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/Move"
-	InstanceService_Relocate_FullMethodName               = "/yandex.cloud.compute.v1.InstanceService/Relocate"
-	InstanceService_ListAccessBindings_FullMethodName     = "/yandex.cloud.compute.v1.InstanceService/ListAccessBindings"
-	InstanceService_SetAccessBindings_FullMethodName      = "/yandex.cloud.compute.v1.InstanceService/SetAccessBindings"
-	InstanceService_UpdateAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/UpdateAccessBindings"
+	InstanceService_Get_FullMethodName                      = "/yandex.cloud.compute.v1.InstanceService/Get"
+	InstanceService_List_FullMethodName                     = "/yandex.cloud.compute.v1.InstanceService/List"
+	InstanceService_Create_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/Create"
+	InstanceService_Update_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/Update"
+	InstanceService_Delete_FullMethodName                   = "/yandex.cloud.compute.v1.InstanceService/Delete"
+	InstanceService_UpdateMetadata_FullMethodName           = "/yandex.cloud.compute.v1.InstanceService/UpdateMetadata"
+	InstanceService_GetSerialPortOutput_FullMethodName      = "/yandex.cloud.compute.v1.InstanceService/GetSerialPortOutput"
+	InstanceService_Stop_FullMethodName                     = "/yandex.cloud.compute.v1.InstanceService/Stop"
+	InstanceService_Start_FullMethodName                    = "/yandex.cloud.compute.v1.InstanceService/Start"
+	InstanceService_Restart_FullMethodName                  = "/yandex.cloud.compute.v1.InstanceService/Restart"
+	InstanceService_AttachDisk_FullMethodName               = "/yandex.cloud.compute.v1.InstanceService/AttachDisk"
+	InstanceService_DetachDisk_FullMethodName               = "/yandex.cloud.compute.v1.InstanceService/DetachDisk"
+	InstanceService_AttachFilesystem_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/AttachFilesystem"
+	InstanceService_DetachFilesystem_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/DetachFilesystem"
+	InstanceService_AddOneToOneNat_FullMethodName           = "/yandex.cloud.compute.v1.InstanceService/AddOneToOneNat"
+	InstanceService_RemoveOneToOneNat_FullMethodName        = "/yandex.cloud.compute.v1.InstanceService/RemoveOneToOneNat"
+	InstanceService_UpdateNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/UpdateNetworkInterface"
+	InstanceService_ListOperations_FullMethodName           = "/yandex.cloud.compute.v1.InstanceService/ListOperations"
+	InstanceService_Move_FullMethodName                     = "/yandex.cloud.compute.v1.InstanceService/Move"
+	InstanceService_Relocate_FullMethodName                 = "/yandex.cloud.compute.v1.InstanceService/Relocate"
+	InstanceService_SimulateMaintenanceEvent_FullMethodName = "/yandex.cloud.compute.v1.InstanceService/SimulateMaintenanceEvent"
+	InstanceService_ListAccessBindings_FullMethodName       = "/yandex.cloud.compute.v1.InstanceService/ListAccessBindings"
+	InstanceService_SetAccessBindings_FullMethodName        = "/yandex.cloud.compute.v1.InstanceService/SetAccessBindings"
+	InstanceService_UpdateAccessBindings_FullMethodName     = "/yandex.cloud.compute.v1.InstanceService/UpdateAccessBindings"
 )
 
 // InstanceServiceClient is the client API for InstanceService service.
@@ -115,6 +116,7 @@ type InstanceServiceClient interface {
 	//
 	// Running instance will be restarted during this operation.
 	Relocate(ctx context.Context, in *RelocateInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	SimulateMaintenanceEvent(ctx context.Context, in *SimulateInstanceMaintenanceEventRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists access bindings for the instance.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the instance.
@@ -311,6 +313,15 @@ func (c *instanceServiceClient) Relocate(ctx context.Context, in *RelocateInstan
 	return out, nil
 }
 
+func (c *instanceServiceClient) SimulateMaintenanceEvent(ctx context.Context, in *SimulateInstanceMaintenanceEventRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_SimulateMaintenanceEvent_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instanceServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
 	out := new(access.ListAccessBindingsResponse)
 	err := c.cc.Invoke(ctx, InstanceService_ListAccessBindings_FullMethodName, in, out, opts...)
@@ -407,6 +418,7 @@ type InstanceServiceServer interface {
 	//
 	// Running instance will be restarted during this operation.
 	Relocate(context.Context, *RelocateInstanceRequest) (*operation.Operation, error)
+	SimulateMaintenanceEvent(context.Context, *SimulateInstanceMaintenanceEventRequest) (*operation.Operation, error)
 	// Lists access bindings for the instance.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the instance.
@@ -478,6 +490,9 @@ func (UnimplementedInstanceServiceServer) Move(context.Context, *MoveInstanceReq
 }
 func (UnimplementedInstanceServiceServer) Relocate(context.Context, *RelocateInstanceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Relocate not implemented")
+}
+func (UnimplementedInstanceServiceServer) SimulateMaintenanceEvent(context.Context, *SimulateInstanceMaintenanceEventRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SimulateMaintenanceEvent not implemented")
 }
 func (UnimplementedInstanceServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -860,6 +875,24 @@ func _InstanceService_Relocate_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceService_SimulateMaintenanceEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SimulateInstanceMaintenanceEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).SimulateMaintenanceEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_SimulateMaintenanceEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).SimulateMaintenanceEvent(ctx, req.(*SimulateInstanceMaintenanceEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstanceService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(access.ListAccessBindingsRequest)
 	if err := dec(in); err != nil {
@@ -1000,6 +1033,10 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Relocate",
 			Handler:    _InstanceService_Relocate_Handler,
+		},
+		{
+			MethodName: "SimulateMaintenanceEvent",
+			Handler:    _InstanceService_SimulateMaintenanceEvent_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

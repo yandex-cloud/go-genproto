@@ -38,6 +38,10 @@ func (m *User) SetDeletionProtection(v *wrapperspb.BoolValue) {
 	m.DeletionProtection = v
 }
 
+func (m *User) SetUserPasswordEncryption(v UserPasswordEncryption) {
+	m.UserPasswordEncryption = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -72,6 +76,10 @@ func (m *UserSpec) SetGrants(v []string) {
 
 func (m *UserSpec) SetDeletionProtection(v *wrapperspb.BoolValue) {
 	m.DeletionProtection = v
+}
+
+func (m *UserSpec) SetUserPasswordEncryption(v UserPasswordEncryption) {
+	m.UserPasswordEncryption = v
 }
 
 func (m *UserSettings) SetDefaultTransactionIsolation(v UserSettings_TransactionIsolation) {

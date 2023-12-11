@@ -413,6 +413,55 @@ func (PostgresqlConfig15_LogStatement) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 6}
 }
 
+type PostgresqlConfig15_PasswordEncryption int32
+
+const (
+	PostgresqlConfig15_PASSWORD_ENCRYPTION_UNSPECIFIED   PostgresqlConfig15_PasswordEncryption = 0
+	PostgresqlConfig15_PASSWORD_ENCRYPTION_MD5           PostgresqlConfig15_PasswordEncryption = 1
+	PostgresqlConfig15_PASSWORD_ENCRYPTION_SCRAM_SHA_256 PostgresqlConfig15_PasswordEncryption = 2
+)
+
+// Enum value maps for PostgresqlConfig15_PasswordEncryption.
+var (
+	PostgresqlConfig15_PasswordEncryption_name = map[int32]string{
+		0: "PASSWORD_ENCRYPTION_UNSPECIFIED",
+		1: "PASSWORD_ENCRYPTION_MD5",
+		2: "PASSWORD_ENCRYPTION_SCRAM_SHA_256",
+	}
+	PostgresqlConfig15_PasswordEncryption_value = map[string]int32{
+		"PASSWORD_ENCRYPTION_UNSPECIFIED":   0,
+		"PASSWORD_ENCRYPTION_MD5":           1,
+		"PASSWORD_ENCRYPTION_SCRAM_SHA_256": 2,
+	}
+)
+
+func (x PostgresqlConfig15_PasswordEncryption) Enum() *PostgresqlConfig15_PasswordEncryption {
+	p := new(PostgresqlConfig15_PasswordEncryption)
+	*p = x
+	return p
+}
+
+func (x PostgresqlConfig15_PasswordEncryption) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PostgresqlConfig15_PasswordEncryption) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[7].Descriptor()
+}
+
+func (PostgresqlConfig15_PasswordEncryption) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[7]
+}
+
+func (x PostgresqlConfig15_PasswordEncryption) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PostgresqlConfig15_PasswordEncryption.Descriptor instead.
+func (PostgresqlConfig15_PasswordEncryption) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 7}
+}
+
 type PostgresqlConfig15_PgHintPlanDebugPrint int32
 
 const (
@@ -452,11 +501,11 @@ func (x PostgresqlConfig15_PgHintPlanDebugPrint) String() string {
 }
 
 func (PostgresqlConfig15_PgHintPlanDebugPrint) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[7].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[8].Descriptor()
 }
 
 func (PostgresqlConfig15_PgHintPlanDebugPrint) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[7]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[8]
 }
 
 func (x PostgresqlConfig15_PgHintPlanDebugPrint) Number() protoreflect.EnumNumber {
@@ -465,7 +514,7 @@ func (x PostgresqlConfig15_PgHintPlanDebugPrint) Number() protoreflect.EnumNumbe
 
 // Deprecated: Use PostgresqlConfig15_PgHintPlanDebugPrint.Descriptor instead.
 func (PostgresqlConfig15_PgHintPlanDebugPrint) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 7}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 8}
 }
 
 type PostgresqlConfig15_PlanCacheMode int32
@@ -504,11 +553,11 @@ func (x PostgresqlConfig15_PlanCacheMode) String() string {
 }
 
 func (PostgresqlConfig15_PlanCacheMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[8].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[9].Descriptor()
 }
 
 func (PostgresqlConfig15_PlanCacheMode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[8]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[9]
 }
 
 func (x PostgresqlConfig15_PlanCacheMode) Number() protoreflect.EnumNumber {
@@ -517,7 +566,7 @@ func (x PostgresqlConfig15_PlanCacheMode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostgresqlConfig15_PlanCacheMode.Descriptor instead.
 func (PostgresqlConfig15_PlanCacheMode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 8}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 9}
 }
 
 type PostgresqlConfig15_SharedPreloadLibraries int32
@@ -571,11 +620,11 @@ func (x PostgresqlConfig15_SharedPreloadLibraries) String() string {
 }
 
 func (PostgresqlConfig15_SharedPreloadLibraries) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[9].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[10].Descriptor()
 }
 
 func (PostgresqlConfig15_SharedPreloadLibraries) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[9]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[10]
 }
 
 func (x PostgresqlConfig15_SharedPreloadLibraries) Number() protoreflect.EnumNumber {
@@ -584,7 +633,7 @@ func (x PostgresqlConfig15_SharedPreloadLibraries) Number() protoreflect.EnumNum
 
 // Deprecated: Use PostgresqlConfig15_SharedPreloadLibraries.Descriptor instead.
 func (PostgresqlConfig15_SharedPreloadLibraries) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 9}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 10}
 }
 
 type PostgresqlConfig15_SynchronousCommit int32
@@ -629,11 +678,11 @@ func (x PostgresqlConfig15_SynchronousCommit) String() string {
 }
 
 func (PostgresqlConfig15_SynchronousCommit) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[10].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[11].Descriptor()
 }
 
 func (PostgresqlConfig15_SynchronousCommit) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[10]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[11]
 }
 
 func (x PostgresqlConfig15_SynchronousCommit) Number() protoreflect.EnumNumber {
@@ -642,7 +691,7 @@ func (x PostgresqlConfig15_SynchronousCommit) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostgresqlConfig15_SynchronousCommit.Descriptor instead.
 func (PostgresqlConfig15_SynchronousCommit) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 10}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 11}
 }
 
 type PostgresqlConfig15_TransactionIsolation int32
@@ -684,11 +733,11 @@ func (x PostgresqlConfig15_TransactionIsolation) String() string {
 }
 
 func (PostgresqlConfig15_TransactionIsolation) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[11].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[12].Descriptor()
 }
 
 func (PostgresqlConfig15_TransactionIsolation) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[11]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[12]
 }
 
 func (x PostgresqlConfig15_TransactionIsolation) Number() protoreflect.EnumNumber {
@@ -697,7 +746,7 @@ func (x PostgresqlConfig15_TransactionIsolation) Number() protoreflect.EnumNumbe
 
 // Deprecated: Use PostgresqlConfig15_TransactionIsolation.Descriptor instead.
 func (PostgresqlConfig15_TransactionIsolation) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 11}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 12}
 }
 
 type PostgresqlConfig15_WalLevel int32
@@ -733,11 +782,11 @@ func (x PostgresqlConfig15_WalLevel) String() string {
 }
 
 func (PostgresqlConfig15_WalLevel) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[12].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[13].Descriptor()
 }
 
 func (PostgresqlConfig15_WalLevel) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[12]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[13]
 }
 
 func (x PostgresqlConfig15_WalLevel) Number() protoreflect.EnumNumber {
@@ -746,7 +795,7 @@ func (x PostgresqlConfig15_WalLevel) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostgresqlConfig15_WalLevel.Descriptor instead.
 func (PostgresqlConfig15_WalLevel) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 12}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 13}
 }
 
 type PostgresqlConfig15_XmlBinary int32
@@ -782,11 +831,11 @@ func (x PostgresqlConfig15_XmlBinary) String() string {
 }
 
 func (PostgresqlConfig15_XmlBinary) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[13].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[14].Descriptor()
 }
 
 func (PostgresqlConfig15_XmlBinary) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[13]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[14]
 }
 
 func (x PostgresqlConfig15_XmlBinary) Number() protoreflect.EnumNumber {
@@ -795,7 +844,7 @@ func (x PostgresqlConfig15_XmlBinary) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostgresqlConfig15_XmlBinary.Descriptor instead.
 func (PostgresqlConfig15_XmlBinary) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 13}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 14}
 }
 
 type PostgresqlConfig15_XmlOption int32
@@ -831,11 +880,11 @@ func (x PostgresqlConfig15_XmlOption) String() string {
 }
 
 func (PostgresqlConfig15_XmlOption) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[14].Descriptor()
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[15].Descriptor()
 }
 
 func (PostgresqlConfig15_XmlOption) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[14]
+	return &file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes[15]
 }
 
 func (x PostgresqlConfig15_XmlOption) Number() protoreflect.EnumNumber {
@@ -844,7 +893,7 @@ func (x PostgresqlConfig15_XmlOption) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostgresqlConfig15_XmlOption.Descriptor instead.
 func (PostgresqlConfig15_XmlOption) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 14}
+	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP(), []int{0, 15}
 }
 
 // Options and structure of `PostgresqlConfig` reflects PostgreSQL configuration file
@@ -1013,7 +1062,8 @@ type PostgresqlConfig15 struct {
 	MaxStandbyArchiveDelay              *wrapperspb.Int64Value                      `protobuf:"bytes,162,opt,name=max_standby_archive_delay,json=maxStandbyArchiveDelay,proto3" json:"max_standby_archive_delay,omitempty"` // in milliseconds.
 	SessionDurationTimeout              *wrapperspb.Int64Value                      `protobuf:"bytes,163,opt,name=session_duration_timeout,json=sessionDurationTimeout,proto3" json:"session_duration_timeout,omitempty"`   // Terminate any session that exceeds the designated timeout, specified in milliseconds. If a timeout is not specified, the default session timeout is set to 12 hours. To disable it, specify a value of 0.
 	LogReplicationCommands              *wrapperspb.BoolValue                       `protobuf:"bytes,164,opt,name=log_replication_commands,json=logReplicationCommands,proto3" json:"log_replication_commands,omitempty"`
-	LogAutovacuumMinDuration            *wrapperspb.Int64Value                      `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"` // in milliseconds. The default is 1000 (1 sec).
+	LogAutovacuumMinDuration            *wrapperspb.Int64Value                      `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`                                                             // in milliseconds. The default is 1000 (1 sec).
+	PasswordEncryption                  PostgresqlConfig15_PasswordEncryption       `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_PasswordEncryption" json:"password_encryption,omitempty"` // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
 }
 
 func (x *PostgresqlConfig15) Reset() {
@@ -2161,6 +2211,13 @@ func (x *PostgresqlConfig15) GetLogAutovacuumMinDuration() *wrapperspb.Int64Valu
 	return nil
 }
 
+func (x *PostgresqlConfig15) GetPasswordEncryption() PostgresqlConfig15_PasswordEncryption {
+	if x != nil {
+		return x.PasswordEncryption
+	}
+	return PostgresqlConfig15_PASSWORD_ENCRYPTION_UNSPECIFIED
+}
+
 type PostgresqlConfigSet15 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2241,7 +2298,7 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDesc = []by
 	0x75, 0x66, 0x2f, 0x77, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x1a, 0x1d, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f,
 	0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x22, 0xc6, 0x83, 0x01, 0x0a, 0x12, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c,
+	0x22, 0xc5, 0x85, 0x01, 0x0a, 0x12, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c,
 	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x12, 0x44, 0x0a, 0x0f, 0x6d, 0x61, 0x78, 0x5f,
 	0x63, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
@@ -3130,7 +3187,15 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDesc = []by
 	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c,
 	0x75, 0x65, 0x42, 0x11, 0xfa, 0xc7, 0x31, 0x0d, 0x2d, 0x31, 0x2d, 0x32, 0x31, 0x34, 0x37, 0x34,
 	0x38, 0x33, 0x36, 0x34, 0x37, 0x52, 0x18, 0x6c, 0x6f, 0x67, 0x41, 0x75, 0x74, 0x6f, 0x76, 0x61,
-	0x63, 0x75, 0x75, 0x6d, 0x4d, 0x69, 0x6e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22,
+	0x63, 0x75, 0x75, 0x6d, 0x4d, 0x69, 0x6e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12,
+	0x7e, 0x0a, 0x13, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x5f, 0x65, 0x6e, 0x63, 0x72,
+	0x79, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0xa7, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x4c, 0x2e,
+	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64, 0x62,
+	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x2e, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72,
+	0x64, 0x45, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x12, 0x70, 0x61, 0x73,
+	0x73, 0x77, 0x6f, 0x72, 0x64, 0x45, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22,
 	0x9a, 0x01, 0x0a, 0x0e, 0x42, 0x61, 0x63, 0x6b, 0x73, 0x6c, 0x61, 0x73, 0x68, 0x51, 0x75, 0x6f,
 	0x74, 0x65, 0x12, 0x1f, 0x0a, 0x1b, 0x42, 0x41, 0x43, 0x4b, 0x53, 0x4c, 0x41, 0x53, 0x48, 0x5f,
 	0x51, 0x55, 0x4f, 0x54, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45,
@@ -3201,128 +3266,136 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDesc = []by
 	0x45, 0x4d, 0x45, 0x4e, 0x54, 0x5f, 0x44, 0x44, 0x4c, 0x10, 0x02, 0x12, 0x15, 0x0a, 0x11, 0x4c,
 	0x4f, 0x47, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x45, 0x4d, 0x45, 0x4e, 0x54, 0x5f, 0x4d, 0x4f, 0x44,
 	0x10, 0x03, 0x12, 0x15, 0x0a, 0x11, 0x4c, 0x4f, 0x47, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x45, 0x4d,
-	0x45, 0x4e, 0x54, 0x5f, 0x41, 0x4c, 0x4c, 0x10, 0x04, 0x22, 0xd0, 0x01, 0x0a, 0x14, 0x50, 0x67,
-	0x48, 0x69, 0x6e, 0x74, 0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x62, 0x75, 0x67, 0x50, 0x72, 0x69,
-	0x6e, 0x74, 0x12, 0x28, 0x0a, 0x24, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c,
-	0x41, 0x4e, 0x5f, 0x44, 0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x55,
-	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x20, 0x0a, 0x1c,
-	0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44, 0x45, 0x42,
-	0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x4f, 0x46, 0x46, 0x10, 0x01, 0x12, 0x1f,
-	0x0a, 0x1b, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44,
-	0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x4f, 0x4e, 0x10, 0x02, 0x12,
-	0x25, 0x0a, 0x21, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f,
-	0x44, 0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x44, 0x45, 0x54, 0x41,
-	0x49, 0x4c, 0x45, 0x44, 0x10, 0x03, 0x12, 0x24, 0x0a, 0x20, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e,
-	0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44, 0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49,
-	0x4e, 0x54, 0x5f, 0x56, 0x45, 0x52, 0x42, 0x4f, 0x53, 0x45, 0x10, 0x04, 0x22, 0x99, 0x01, 0x0a,
-	0x0d, 0x50, 0x6c, 0x61, 0x6e, 0x43, 0x61, 0x63, 0x68, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x1f,
-	0x0a, 0x1b, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f, 0x44,
-	0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12,
-	0x18, 0x0a, 0x14, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f,
-	0x44, 0x45, 0x5f, 0x41, 0x55, 0x54, 0x4f, 0x10, 0x01, 0x12, 0x25, 0x0a, 0x21, 0x50, 0x4c, 0x41,
-	0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x46, 0x4f, 0x52,
-	0x43, 0x45, 0x5f, 0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x10, 0x02,
-	0x12, 0x26, 0x0a, 0x22, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d,
-	0x4f, 0x44, 0x45, 0x5f, 0x46, 0x4f, 0x52, 0x43, 0x45, 0x5f, 0x47, 0x45, 0x4e, 0x45, 0x52, 0x49,
-	0x43, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x10, 0x03, 0x22, 0x8a, 0x03, 0x0a, 0x16, 0x53, 0x68, 0x61,
-	0x72, 0x65, 0x64, 0x50, 0x72, 0x65, 0x6c, 0x6f, 0x61, 0x64, 0x4c, 0x69, 0x62, 0x72, 0x61, 0x72,
-	0x69, 0x65, 0x73, 0x12, 0x28, 0x0a, 0x24, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52,
-	0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f,
-	0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x29, 0x0a,
-	0x25, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f,
-	0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x41, 0x55, 0x54, 0x4f, 0x5f, 0x45,
-	0x58, 0x50, 0x4c, 0x41, 0x49, 0x4e, 0x10, 0x01, 0x12, 0x29, 0x0a, 0x25, 0x53, 0x48, 0x41, 0x52,
-	0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41,
-	0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41,
-	0x4e, 0x10, 0x02, 0x12, 0x28, 0x0a, 0x24, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52,
-	0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f,
-	0x54, 0x49, 0x4d, 0x45, 0x53, 0x43, 0x41, 0x4c, 0x45, 0x44, 0x42, 0x10, 0x03, 0x12, 0x29, 0x0a,
-	0x25, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f,
-	0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x51, 0x55, 0x41,
-	0x4c, 0x53, 0x54, 0x41, 0x54, 0x53, 0x10, 0x04, 0x12, 0x24, 0x0a, 0x20, 0x53, 0x48, 0x41, 0x52,
-	0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41,
-	0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x43, 0x52, 0x4f, 0x4e, 0x10, 0x05, 0x12, 0x26,
-	0x0a, 0x22, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44,
-	0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x4c, 0x4f, 0x47,
-	0x49, 0x43, 0x41, 0x4c, 0x10, 0x06, 0x12, 0x27, 0x0a, 0x23, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44,
-	0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49,
-	0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x50, 0x52, 0x45, 0x57, 0x41, 0x52, 0x4d, 0x10, 0x07, 0x12,
-	0x24, 0x0a, 0x20, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41,
-	0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x41, 0x55,
-	0x44, 0x49, 0x54, 0x10, 0x08, 0x22, 0xd6, 0x01, 0x0a, 0x11, 0x53, 0x79, 0x6e, 0x63, 0x68, 0x72,
-	0x6f, 0x6e, 0x6f, 0x75, 0x73, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x12, 0x22, 0x0a, 0x1e, 0x53,
-	0x59, 0x4e, 0x43, 0x48, 0x52, 0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49,
-	0x54, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12,
-	0x19, 0x0a, 0x15, 0x53, 0x59, 0x4e, 0x43, 0x48, 0x52, 0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43,
-	0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x1a, 0x0a, 0x16, 0x53, 0x59,
+	0x45, 0x4e, 0x54, 0x5f, 0x41, 0x4c, 0x4c, 0x10, 0x04, 0x22, 0x7d, 0x0a, 0x12, 0x50, 0x61, 0x73,
+	0x73, 0x77, 0x6f, 0x72, 0x64, 0x45, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12,
+	0x23, 0x0a, 0x1f, 0x50, 0x41, 0x53, 0x53, 0x57, 0x4f, 0x52, 0x44, 0x5f, 0x45, 0x4e, 0x43, 0x52,
+	0x59, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
+	0x45, 0x44, 0x10, 0x00, 0x12, 0x1b, 0x0a, 0x17, 0x50, 0x41, 0x53, 0x53, 0x57, 0x4f, 0x52, 0x44,
+	0x5f, 0x45, 0x4e, 0x43, 0x52, 0x59, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x4d, 0x44, 0x35, 0x10,
+	0x01, 0x12, 0x25, 0x0a, 0x21, 0x50, 0x41, 0x53, 0x53, 0x57, 0x4f, 0x52, 0x44, 0x5f, 0x45, 0x4e,
+	0x43, 0x52, 0x59, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x43, 0x52, 0x41, 0x4d, 0x5f, 0x53,
+	0x48, 0x41, 0x5f, 0x32, 0x35, 0x36, 0x10, 0x02, 0x22, 0xd0, 0x01, 0x0a, 0x14, 0x50, 0x67, 0x48,
+	0x69, 0x6e, 0x74, 0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x62, 0x75, 0x67, 0x50, 0x72, 0x69, 0x6e,
+	0x74, 0x12, 0x28, 0x0a, 0x24, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41,
+	0x4e, 0x5f, 0x44, 0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x55, 0x4e,
+	0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x20, 0x0a, 0x1c, 0x50,
+	0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44, 0x45, 0x42, 0x55,
+	0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x4f, 0x46, 0x46, 0x10, 0x01, 0x12, 0x1f, 0x0a,
+	0x1b, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44, 0x45,
+	0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x4f, 0x4e, 0x10, 0x02, 0x12, 0x25,
+	0x0a, 0x21, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44,
+	0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e, 0x54, 0x5f, 0x44, 0x45, 0x54, 0x41, 0x49,
+	0x4c, 0x45, 0x44, 0x10, 0x03, 0x12, 0x24, 0x0a, 0x20, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54,
+	0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x44, 0x45, 0x42, 0x55, 0x47, 0x5f, 0x50, 0x52, 0x49, 0x4e,
+	0x54, 0x5f, 0x56, 0x45, 0x52, 0x42, 0x4f, 0x53, 0x45, 0x10, 0x04, 0x22, 0x99, 0x01, 0x0a, 0x0d,
+	0x50, 0x6c, 0x61, 0x6e, 0x43, 0x61, 0x63, 0x68, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x1f, 0x0a,
+	0x1b, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f, 0x44, 0x45,
+	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x18,
+	0x0a, 0x14, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f, 0x44,
+	0x45, 0x5f, 0x41, 0x55, 0x54, 0x4f, 0x10, 0x01, 0x12, 0x25, 0x0a, 0x21, 0x50, 0x4c, 0x41, 0x4e,
+	0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x46, 0x4f, 0x52, 0x43,
+	0x45, 0x5f, 0x43, 0x55, 0x53, 0x54, 0x4f, 0x4d, 0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x10, 0x02, 0x12,
+	0x26, 0x0a, 0x22, 0x50, 0x4c, 0x41, 0x4e, 0x5f, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f, 0x4d, 0x4f,
+	0x44, 0x45, 0x5f, 0x46, 0x4f, 0x52, 0x43, 0x45, 0x5f, 0x47, 0x45, 0x4e, 0x45, 0x52, 0x49, 0x43,
+	0x5f, 0x50, 0x4c, 0x41, 0x4e, 0x10, 0x03, 0x22, 0x8a, 0x03, 0x0a, 0x16, 0x53, 0x68, 0x61, 0x72,
+	0x65, 0x64, 0x50, 0x72, 0x65, 0x6c, 0x6f, 0x61, 0x64, 0x4c, 0x69, 0x62, 0x72, 0x61, 0x72, 0x69,
+	0x65, 0x73, 0x12, 0x28, 0x0a, 0x24, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45,
+	0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x55,
+	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x29, 0x0a, 0x25,
+	0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c,
+	0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x41, 0x55, 0x54, 0x4f, 0x5f, 0x45, 0x58,
+	0x50, 0x4c, 0x41, 0x49, 0x4e, 0x10, 0x01, 0x12, 0x29, 0x0a, 0x25, 0x53, 0x48, 0x41, 0x52, 0x45,
+	0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52,
+	0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x48, 0x49, 0x4e, 0x54, 0x5f, 0x50, 0x4c, 0x41, 0x4e,
+	0x10, 0x02, 0x12, 0x28, 0x0a, 0x24, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45,
+	0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x54,
+	0x49, 0x4d, 0x45, 0x53, 0x43, 0x41, 0x4c, 0x45, 0x44, 0x42, 0x10, 0x03, 0x12, 0x29, 0x0a, 0x25,
+	0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c,
+	0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x51, 0x55, 0x41, 0x4c,
+	0x53, 0x54, 0x41, 0x54, 0x53, 0x10, 0x04, 0x12, 0x24, 0x0a, 0x20, 0x53, 0x48, 0x41, 0x52, 0x45,
+	0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52,
+	0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x5f, 0x43, 0x52, 0x4f, 0x4e, 0x10, 0x05, 0x12, 0x26, 0x0a,
+	0x22, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f,
+	0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x4c, 0x4f, 0x47, 0x49,
+	0x43, 0x41, 0x4c, 0x10, 0x06, 0x12, 0x27, 0x0a, 0x23, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f,
+	0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44, 0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45,
+	0x53, 0x5f, 0x50, 0x47, 0x5f, 0x50, 0x52, 0x45, 0x57, 0x41, 0x52, 0x4d, 0x10, 0x07, 0x12, 0x24,
+	0x0a, 0x20, 0x53, 0x48, 0x41, 0x52, 0x45, 0x44, 0x5f, 0x50, 0x52, 0x45, 0x4c, 0x4f, 0x41, 0x44,
+	0x5f, 0x4c, 0x49, 0x42, 0x52, 0x41, 0x52, 0x49, 0x45, 0x53, 0x5f, 0x50, 0x47, 0x41, 0x55, 0x44,
+	0x49, 0x54, 0x10, 0x08, 0x22, 0xd6, 0x01, 0x0a, 0x11, 0x53, 0x79, 0x6e, 0x63, 0x68, 0x72, 0x6f,
+	0x6e, 0x6f, 0x75, 0x73, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x12, 0x22, 0x0a, 0x1e, 0x53, 0x59,
 	0x4e, 0x43, 0x48, 0x52, 0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54,
-	0x5f, 0x4f, 0x46, 0x46, 0x10, 0x02, 0x12, 0x1c, 0x0a, 0x18, 0x53, 0x59, 0x4e, 0x43, 0x48, 0x52,
-	0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x4c, 0x4f, 0x43,
-	0x41, 0x4c, 0x10, 0x03, 0x12, 0x23, 0x0a, 0x1f, 0x53, 0x59, 0x4e, 0x43, 0x48, 0x52, 0x4f, 0x4e,
-	0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x52, 0x45, 0x4d, 0x4f, 0x54,
-	0x45, 0x5f, 0x57, 0x52, 0x49, 0x54, 0x45, 0x10, 0x04, 0x12, 0x23, 0x0a, 0x1f, 0x53, 0x59, 0x4e,
+	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x19,
+	0x0a, 0x15, 0x53, 0x59, 0x4e, 0x43, 0x48, 0x52, 0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f,
+	0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x1a, 0x0a, 0x16, 0x53, 0x59, 0x4e,
 	0x43, 0x48, 0x52, 0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f,
-	0x52, 0x45, 0x4d, 0x4f, 0x54, 0x45, 0x5f, 0x41, 0x50, 0x50, 0x4c, 0x59, 0x10, 0x05, 0x22, 0xe6,
-	0x01, 0x0a, 0x14, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x73,
-	0x6f, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x25, 0x0a, 0x21, 0x54, 0x52, 0x41, 0x4e, 0x53,
-	0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e,
-	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x2a,
-	0x0a, 0x26, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53,
-	0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x41, 0x44, 0x5f, 0x55, 0x4e, 0x43,
-	0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x28, 0x0a, 0x24, 0x54, 0x52,
-	0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f, 0x4c, 0x41, 0x54,
-	0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x41, 0x44, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x54,
-	0x45, 0x44, 0x10, 0x02, 0x12, 0x29, 0x0a, 0x25, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54,
-	0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45,
-	0x50, 0x45, 0x41, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x5f, 0x52, 0x45, 0x41, 0x44, 0x10, 0x03, 0x12,
-	0x26, 0x0a, 0x22, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49,
-	0x53, 0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x45, 0x52, 0x49, 0x41, 0x4c, 0x49,
-	0x5a, 0x41, 0x42, 0x4c, 0x45, 0x10, 0x04, 0x22, 0x53, 0x0a, 0x08, 0x57, 0x61, 0x6c, 0x4c, 0x65,
-	0x76, 0x65, 0x6c, 0x12, 0x19, 0x0a, 0x15, 0x57, 0x41, 0x4c, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c,
-	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x15,
-	0x0a, 0x11, 0x57, 0x41, 0x4c, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x5f, 0x52, 0x45, 0x50, 0x4c,
-	0x49, 0x43, 0x41, 0x10, 0x01, 0x12, 0x15, 0x0a, 0x11, 0x57, 0x41, 0x4c, 0x5f, 0x4c, 0x45, 0x56,
-	0x45, 0x4c, 0x5f, 0x4c, 0x4f, 0x47, 0x49, 0x43, 0x41, 0x4c, 0x10, 0x02, 0x22, 0x52, 0x0a, 0x09,
-	0x58, 0x6d, 0x6c, 0x42, 0x69, 0x6e, 0x61, 0x72, 0x79, 0x12, 0x1a, 0x0a, 0x16, 0x58, 0x4d, 0x4c,
-	0x5f, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46,
-	0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x58, 0x4d, 0x4c, 0x5f, 0x42, 0x49, 0x4e,
-	0x41, 0x52, 0x59, 0x5f, 0x42, 0x41, 0x53, 0x45, 0x36, 0x34, 0x10, 0x01, 0x12, 0x12, 0x0a, 0x0e,
-	0x58, 0x4d, 0x4c, 0x5f, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x5f, 0x48, 0x45, 0x58, 0x10, 0x02,
-	0x22, 0x58, 0x0a, 0x09, 0x58, 0x6d, 0x6c, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a,
-	0x16, 0x58, 0x4d, 0x4c, 0x5f, 0x4f, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x55, 0x4e, 0x53, 0x50,
-	0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x17, 0x0a, 0x13, 0x58, 0x4d, 0x4c,
-	0x5f, 0x4f, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x44, 0x4f, 0x43, 0x55, 0x4d, 0x45, 0x4e, 0x54,
-	0x10, 0x01, 0x12, 0x16, 0x0a, 0x12, 0x58, 0x4d, 0x4c, 0x5f, 0x4f, 0x50, 0x54, 0x49, 0x4f, 0x4e,
-	0x5f, 0x43, 0x4f, 0x4e, 0x54, 0x45, 0x4e, 0x54, 0x10, 0x02, 0x22, 0xbb, 0x02, 0x0a, 0x15, 0x50,
-	0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x53,
-	0x65, 0x74, 0x31, 0x35, 0x12, 0x64, 0x0a, 0x10, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76,
-	0x65, 0x5f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39,
+	0x4f, 0x46, 0x46, 0x10, 0x02, 0x12, 0x1c, 0x0a, 0x18, 0x53, 0x59, 0x4e, 0x43, 0x48, 0x52, 0x4f,
+	0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x4c, 0x4f, 0x43, 0x41,
+	0x4c, 0x10, 0x03, 0x12, 0x23, 0x0a, 0x1f, 0x53, 0x59, 0x4e, 0x43, 0x48, 0x52, 0x4f, 0x4e, 0x4f,
+	0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x52, 0x45, 0x4d, 0x4f, 0x54, 0x45,
+	0x5f, 0x57, 0x52, 0x49, 0x54, 0x45, 0x10, 0x04, 0x12, 0x23, 0x0a, 0x1f, 0x53, 0x59, 0x4e, 0x43,
+	0x48, 0x52, 0x4f, 0x4e, 0x4f, 0x55, 0x53, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x5f, 0x52,
+	0x45, 0x4d, 0x4f, 0x54, 0x45, 0x5f, 0x41, 0x50, 0x50, 0x4c, 0x59, 0x10, 0x05, 0x22, 0xe6, 0x01,
+	0x0a, 0x14, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x73, 0x6f,
+	0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x25, 0x0a, 0x21, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41,
+	0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f,
+	0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x2a, 0x0a,
+	0x26, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f,
+	0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x41, 0x44, 0x5f, 0x55, 0x4e, 0x43, 0x4f,
+	0x4d, 0x4d, 0x49, 0x54, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x28, 0x0a, 0x24, 0x54, 0x52, 0x41,
+	0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f, 0x4c, 0x41, 0x54, 0x49,
+	0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x41, 0x44, 0x5f, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x54, 0x45,
+	0x44, 0x10, 0x02, 0x12, 0x29, 0x0a, 0x25, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49,
+	0x4f, 0x4e, 0x5f, 0x49, 0x53, 0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x50,
+	0x45, 0x41, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x5f, 0x52, 0x45, 0x41, 0x44, 0x10, 0x03, 0x12, 0x26,
+	0x0a, 0x22, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x49, 0x53,
+	0x4f, 0x4c, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x45, 0x52, 0x49, 0x41, 0x4c, 0x49, 0x5a,
+	0x41, 0x42, 0x4c, 0x45, 0x10, 0x04, 0x22, 0x53, 0x0a, 0x08, 0x57, 0x61, 0x6c, 0x4c, 0x65, 0x76,
+	0x65, 0x6c, 0x12, 0x19, 0x0a, 0x15, 0x57, 0x41, 0x4c, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x5f,
+	0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x15, 0x0a,
+	0x11, 0x57, 0x41, 0x4c, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x5f, 0x52, 0x45, 0x50, 0x4c, 0x49,
+	0x43, 0x41, 0x10, 0x01, 0x12, 0x15, 0x0a, 0x11, 0x57, 0x41, 0x4c, 0x5f, 0x4c, 0x45, 0x56, 0x45,
+	0x4c, 0x5f, 0x4c, 0x4f, 0x47, 0x49, 0x43, 0x41, 0x4c, 0x10, 0x02, 0x22, 0x52, 0x0a, 0x09, 0x58,
+	0x6d, 0x6c, 0x42, 0x69, 0x6e, 0x61, 0x72, 0x79, 0x12, 0x1a, 0x0a, 0x16, 0x58, 0x4d, 0x4c, 0x5f,
+	0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
+	0x45, 0x44, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x58, 0x4d, 0x4c, 0x5f, 0x42, 0x49, 0x4e, 0x41,
+	0x52, 0x59, 0x5f, 0x42, 0x41, 0x53, 0x45, 0x36, 0x34, 0x10, 0x01, 0x12, 0x12, 0x0a, 0x0e, 0x58,
+	0x4d, 0x4c, 0x5f, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x5f, 0x48, 0x45, 0x58, 0x10, 0x02, 0x22,
+	0x58, 0x0a, 0x09, 0x58, 0x6d, 0x6c, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x16,
+	0x58, 0x4d, 0x4c, 0x5f, 0x4f, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
+	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x17, 0x0a, 0x13, 0x58, 0x4d, 0x4c, 0x5f,
+	0x4f, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x44, 0x4f, 0x43, 0x55, 0x4d, 0x45, 0x4e, 0x54, 0x10,
+	0x01, 0x12, 0x16, 0x0a, 0x12, 0x58, 0x4d, 0x4c, 0x5f, 0x4f, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x5f,
+	0x43, 0x4f, 0x4e, 0x54, 0x45, 0x4e, 0x54, 0x10, 0x02, 0x22, 0xbb, 0x02, 0x0a, 0x15, 0x50, 0x6f,
+	0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x53, 0x65,
+	0x74, 0x31, 0x35, 0x12, 0x64, 0x0a, 0x10, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65,
+	0x5f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39, 0x2e,
+	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64, 0x62,
+	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x52, 0x0f, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74,
+	0x69, 0x76, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x5a, 0x0a, 0x0b, 0x75, 0x73, 0x65,
+	0x72, 0x5f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39,
 	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64,
 	0x62, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e,
 	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71,
-	0x6c, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x52, 0x0f, 0x65, 0x66, 0x66, 0x65, 0x63,
-	0x74, 0x69, 0x76, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x5a, 0x0a, 0x0b, 0x75, 0x73,
-	0x65, 0x72, 0x5f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x39, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d,
-	0x64, 0x62, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31,
-	0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73,
-	0x71, 0x6c, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x52, 0x0a, 0x75, 0x73, 0x65, 0x72,
-	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x60, 0x0a, 0x0e, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c,
-	0x74, 0x5f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39,
-	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64,
-	0x62, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e,
-	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71,
-	0x6c, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x52, 0x0d, 0x64, 0x65, 0x66, 0x61, 0x75,
-	0x6c, 0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x42, 0x81, 0x01, 0x0a, 0x29, 0x79, 0x61, 0x6e,
-	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x64,
-	0x62, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e,
-	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x5a, 0x54, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f,
-	0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64,
-	0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x64, 0x62, 0x2f, 0x70, 0x6f, 0x73,
-	0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69,
-	0x67, 0x3b, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x6c, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x52, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x43,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x60, 0x0a, 0x0e, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
+	0x5f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39, 0x2e,
+	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64, 0x62,
+	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31, 0x35, 0x52, 0x0d, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c,
+	0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x42, 0x81, 0x01, 0x0a, 0x29, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x64, 0x62,
+	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2e, 0x76, 0x31, 0x2e, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x5a, 0x54, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67,
+	0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x64, 0x62, 0x2f, 0x70, 0x6f, 0x73, 0x74,
+	0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x3b, 0x70, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x65, 0x73, 0x71, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3337,7 +3410,7 @@ func file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescGZIP()
 	return file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes = make([]protoimpl.EnumInfo, 15)
+var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_enumTypes = make([]protoimpl.EnumInfo, 16)
 var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_goTypes = []interface{}{
 	(PostgresqlConfig15_BackslashQuote)(0),         // 0: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.BackslashQuote
@@ -3347,186 +3420,188 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_goTypes = []in
 	(PostgresqlConfig15_LogErrorVerbosity)(0),      // 4: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogErrorVerbosity
 	(PostgresqlConfig15_LogLevel)(0),               // 5: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogLevel
 	(PostgresqlConfig15_LogStatement)(0),           // 6: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogStatement
-	(PostgresqlConfig15_PgHintPlanDebugPrint)(0),   // 7: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PgHintPlanDebugPrint
-	(PostgresqlConfig15_PlanCacheMode)(0),          // 8: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PlanCacheMode
-	(PostgresqlConfig15_SharedPreloadLibraries)(0), // 9: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SharedPreloadLibraries
-	(PostgresqlConfig15_SynchronousCommit)(0),      // 10: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SynchronousCommit
-	(PostgresqlConfig15_TransactionIsolation)(0),   // 11: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.TransactionIsolation
-	(PostgresqlConfig15_WalLevel)(0),               // 12: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.WalLevel
-	(PostgresqlConfig15_XmlBinary)(0),              // 13: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlBinary
-	(PostgresqlConfig15_XmlOption)(0),              // 14: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlOption
-	(*PostgresqlConfig15)(nil),                     // 15: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	(*PostgresqlConfigSet15)(nil),                  // 16: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15
-	(*wrapperspb.Int64Value)(nil),                  // 17: google.protobuf.Int64Value
-	(*wrapperspb.DoubleValue)(nil),                 // 18: google.protobuf.DoubleValue
-	(*wrapperspb.BoolValue)(nil),                   // 19: google.protobuf.BoolValue
+	(PostgresqlConfig15_PasswordEncryption)(0),     // 7: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PasswordEncryption
+	(PostgresqlConfig15_PgHintPlanDebugPrint)(0),   // 8: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PgHintPlanDebugPrint
+	(PostgresqlConfig15_PlanCacheMode)(0),          // 9: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PlanCacheMode
+	(PostgresqlConfig15_SharedPreloadLibraries)(0), // 10: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SharedPreloadLibraries
+	(PostgresqlConfig15_SynchronousCommit)(0),      // 11: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SynchronousCommit
+	(PostgresqlConfig15_TransactionIsolation)(0),   // 12: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.TransactionIsolation
+	(PostgresqlConfig15_WalLevel)(0),               // 13: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.WalLevel
+	(PostgresqlConfig15_XmlBinary)(0),              // 14: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlBinary
+	(PostgresqlConfig15_XmlOption)(0),              // 15: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlOption
+	(*PostgresqlConfig15)(nil),                     // 16: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	(*PostgresqlConfigSet15)(nil),                  // 17: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15
+	(*wrapperspb.Int64Value)(nil),                  // 18: google.protobuf.Int64Value
+	(*wrapperspb.DoubleValue)(nil),                 // 19: google.protobuf.DoubleValue
+	(*wrapperspb.BoolValue)(nil),                   // 20: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_depIdxs = []int32{
-	17,  // 0: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_connections:type_name -> google.protobuf.Int64Value
-	17,  // 1: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.shared_buffers:type_name -> google.protobuf.Int64Value
-	17,  // 2: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.temp_buffers:type_name -> google.protobuf.Int64Value
-	17,  // 3: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_prepared_transactions:type_name -> google.protobuf.Int64Value
-	17,  // 4: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.work_mem:type_name -> google.protobuf.Int64Value
-	17,  // 5: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.maintenance_work_mem:type_name -> google.protobuf.Int64Value
-	17,  // 6: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_work_mem:type_name -> google.protobuf.Int64Value
-	17,  // 7: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.temp_file_limit:type_name -> google.protobuf.Int64Value
-	17,  // 8: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_delay:type_name -> google.protobuf.Int64Value
-	17,  // 9: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_page_hit:type_name -> google.protobuf.Int64Value
-	17,  // 10: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_page_miss:type_name -> google.protobuf.Int64Value
-	17,  // 11: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_page_dirty:type_name -> google.protobuf.Int64Value
-	17,  // 12: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_limit:type_name -> google.protobuf.Int64Value
-	17,  // 13: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_delay:type_name -> google.protobuf.Int64Value
-	17,  // 14: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_lru_maxpages:type_name -> google.protobuf.Int64Value
-	18,  // 15: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_lru_multiplier:type_name -> google.protobuf.DoubleValue
-	17,  // 16: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_flush_after:type_name -> google.protobuf.Int64Value
-	17,  // 17: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.backend_flush_after:type_name -> google.protobuf.Int64Value
-	17,  // 18: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.old_snapshot_threshold:type_name -> google.protobuf.Int64Value
-	12,  // 19: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.wal_level:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.WalLevel
-	10,  // 20: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.synchronous_commit:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SynchronousCommit
-	17,  // 21: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_timeout:type_name -> google.protobuf.Int64Value
-	18,  // 22: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_completion_target:type_name -> google.protobuf.DoubleValue
-	17,  // 23: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_flush_after:type_name -> google.protobuf.Int64Value
-	17,  // 24: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_wal_size:type_name -> google.protobuf.Int64Value
-	17,  // 25: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.min_wal_size:type_name -> google.protobuf.Int64Value
-	17,  // 26: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_standby_streaming_delay:type_name -> google.protobuf.Int64Value
-	17,  // 27: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_statistics_target:type_name -> google.protobuf.Int64Value
+	18,  // 0: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_connections:type_name -> google.protobuf.Int64Value
+	18,  // 1: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.shared_buffers:type_name -> google.protobuf.Int64Value
+	18,  // 2: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.temp_buffers:type_name -> google.protobuf.Int64Value
+	18,  // 3: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_prepared_transactions:type_name -> google.protobuf.Int64Value
+	18,  // 4: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.work_mem:type_name -> google.protobuf.Int64Value
+	18,  // 5: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.maintenance_work_mem:type_name -> google.protobuf.Int64Value
+	18,  // 6: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_work_mem:type_name -> google.protobuf.Int64Value
+	18,  // 7: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.temp_file_limit:type_name -> google.protobuf.Int64Value
+	18,  // 8: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_delay:type_name -> google.protobuf.Int64Value
+	18,  // 9: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_page_hit:type_name -> google.protobuf.Int64Value
+	18,  // 10: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_page_miss:type_name -> google.protobuf.Int64Value
+	18,  // 11: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_page_dirty:type_name -> google.protobuf.Int64Value
+	18,  // 12: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_cost_limit:type_name -> google.protobuf.Int64Value
+	18,  // 13: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_delay:type_name -> google.protobuf.Int64Value
+	18,  // 14: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_lru_maxpages:type_name -> google.protobuf.Int64Value
+	19,  // 15: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_lru_multiplier:type_name -> google.protobuf.DoubleValue
+	18,  // 16: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bgwriter_flush_after:type_name -> google.protobuf.Int64Value
+	18,  // 17: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.backend_flush_after:type_name -> google.protobuf.Int64Value
+	18,  // 18: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.old_snapshot_threshold:type_name -> google.protobuf.Int64Value
+	13,  // 19: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.wal_level:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.WalLevel
+	11,  // 20: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.synchronous_commit:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SynchronousCommit
+	18,  // 21: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_timeout:type_name -> google.protobuf.Int64Value
+	19,  // 22: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_completion_target:type_name -> google.protobuf.DoubleValue
+	18,  // 23: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_flush_after:type_name -> google.protobuf.Int64Value
+	18,  // 24: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_wal_size:type_name -> google.protobuf.Int64Value
+	18,  // 25: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.min_wal_size:type_name -> google.protobuf.Int64Value
+	18,  // 26: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_standby_streaming_delay:type_name -> google.protobuf.Int64Value
+	18,  // 27: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_statistics_target:type_name -> google.protobuf.Int64Value
 	2,   // 28: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.constraint_exclusion:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.ConstraintExclusion
-	18,  // 29: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.cursor_tuple_fraction:type_name -> google.protobuf.DoubleValue
-	17,  // 30: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.from_collapse_limit:type_name -> google.protobuf.Int64Value
-	17,  // 31: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.join_collapse_limit:type_name -> google.protobuf.Int64Value
+	19,  // 29: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.cursor_tuple_fraction:type_name -> google.protobuf.DoubleValue
+	18,  // 30: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.from_collapse_limit:type_name -> google.protobuf.Int64Value
+	18,  // 31: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.join_collapse_limit:type_name -> google.protobuf.Int64Value
 	3,   // 32: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.force_parallel_mode:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.ForceParallelMode
 	5,   // 33: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.client_min_messages:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogLevel
 	5,   // 34: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_min_messages:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogLevel
 	5,   // 35: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_min_error_statement:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogLevel
-	17,  // 36: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_min_duration_statement:type_name -> google.protobuf.Int64Value
-	19,  // 37: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_checkpoints:type_name -> google.protobuf.BoolValue
-	19,  // 38: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_connections:type_name -> google.protobuf.BoolValue
-	19,  // 39: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_disconnections:type_name -> google.protobuf.BoolValue
-	19,  // 40: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_duration:type_name -> google.protobuf.BoolValue
+	18,  // 36: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_min_duration_statement:type_name -> google.protobuf.Int64Value
+	20,  // 37: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_checkpoints:type_name -> google.protobuf.BoolValue
+	20,  // 38: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_connections:type_name -> google.protobuf.BoolValue
+	20,  // 39: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_disconnections:type_name -> google.protobuf.BoolValue
+	20,  // 40: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_duration:type_name -> google.protobuf.BoolValue
 	4,   // 41: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_error_verbosity:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogErrorVerbosity
-	19,  // 42: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_lock_waits:type_name -> google.protobuf.BoolValue
+	20,  // 42: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_lock_waits:type_name -> google.protobuf.BoolValue
 	6,   // 43: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_statement:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogStatement
-	17,  // 44: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_temp_files:type_name -> google.protobuf.Int64Value
-	19,  // 45: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.row_security:type_name -> google.protobuf.BoolValue
-	11,  // 46: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_transaction_isolation:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.TransactionIsolation
-	17,  // 47: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.statement_timeout:type_name -> google.protobuf.Int64Value
-	17,  // 48: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.lock_timeout:type_name -> google.protobuf.Int64Value
-	17,  // 49: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
+	18,  // 44: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_temp_files:type_name -> google.protobuf.Int64Value
+	20,  // 45: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.row_security:type_name -> google.protobuf.BoolValue
+	12,  // 46: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_transaction_isolation:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.TransactionIsolation
+	18,  // 47: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.statement_timeout:type_name -> google.protobuf.Int64Value
+	18,  // 48: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.lock_timeout:type_name -> google.protobuf.Int64Value
+	18,  // 49: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
 	1,   // 50: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.bytea_output:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.ByteaOutput
-	13,  // 51: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.xmlbinary:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlBinary
-	14,  // 52: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.xmloption:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlOption
-	17,  // 53: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.gin_pending_list_limit:type_name -> google.protobuf.Int64Value
-	17,  // 54: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.deadlock_timeout:type_name -> google.protobuf.Int64Value
-	17,  // 55: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_locks_per_transaction:type_name -> google.protobuf.Int64Value
-	17,  // 56: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_pred_locks_per_transaction:type_name -> google.protobuf.Int64Value
-	19,  // 57: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.array_nulls:type_name -> google.protobuf.BoolValue
+	14,  // 51: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.xmlbinary:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlBinary
+	15,  // 52: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.xmloption:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.XmlOption
+	18,  // 53: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.gin_pending_list_limit:type_name -> google.protobuf.Int64Value
+	18,  // 54: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.deadlock_timeout:type_name -> google.protobuf.Int64Value
+	18,  // 55: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_locks_per_transaction:type_name -> google.protobuf.Int64Value
+	18,  // 56: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_pred_locks_per_transaction:type_name -> google.protobuf.Int64Value
+	20,  // 57: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.array_nulls:type_name -> google.protobuf.BoolValue
 	0,   // 58: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.backslash_quote:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.BackslashQuote
-	19,  // 59: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_with_oids:type_name -> google.protobuf.BoolValue
-	19,  // 60: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.escape_string_warning:type_name -> google.protobuf.BoolValue
-	19,  // 61: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.lo_compat_privileges:type_name -> google.protobuf.BoolValue
-	19,  // 62: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.quote_all_identifiers:type_name -> google.protobuf.BoolValue
-	19,  // 63: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.standard_conforming_strings:type_name -> google.protobuf.BoolValue
-	19,  // 64: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.synchronize_seqscans:type_name -> google.protobuf.BoolValue
-	19,  // 65: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.transform_null_equals:type_name -> google.protobuf.BoolValue
-	19,  // 66: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.exit_on_error:type_name -> google.protobuf.BoolValue
-	18,  // 67: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.seq_page_cost:type_name -> google.protobuf.DoubleValue
-	18,  // 68: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.random_page_cost:type_name -> google.protobuf.DoubleValue
-	17,  // 69: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_max_workers:type_name -> google.protobuf.Int64Value
-	17,  // 70: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_cost_delay:type_name -> google.protobuf.Int64Value
-	17,  // 71: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_cost_limit:type_name -> google.protobuf.Int64Value
-	17,  // 72: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_naptime:type_name -> google.protobuf.Int64Value
-	17,  // 73: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.archive_timeout:type_name -> google.protobuf.Int64Value
-	17,  // 74: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.track_activity_query_size:type_name -> google.protobuf.Int64Value
-	19,  // 75: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_bitmapscan:type_name -> google.protobuf.BoolValue
-	19,  // 76: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_hashagg:type_name -> google.protobuf.BoolValue
-	19,  // 77: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_hashjoin:type_name -> google.protobuf.BoolValue
-	19,  // 78: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_indexscan:type_name -> google.protobuf.BoolValue
-	19,  // 79: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_indexonlyscan:type_name -> google.protobuf.BoolValue
-	19,  // 80: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_material:type_name -> google.protobuf.BoolValue
-	19,  // 81: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_mergejoin:type_name -> google.protobuf.BoolValue
-	19,  // 82: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_nestloop:type_name -> google.protobuf.BoolValue
-	19,  // 83: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_seqscan:type_name -> google.protobuf.BoolValue
-	19,  // 84: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_sort:type_name -> google.protobuf.BoolValue
-	19,  // 85: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_tidscan:type_name -> google.protobuf.BoolValue
-	17,  // 86: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_worker_processes:type_name -> google.protobuf.Int64Value
-	17,  // 87: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_parallel_workers:type_name -> google.protobuf.Int64Value
-	17,  // 88: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_parallel_workers_per_gather:type_name -> google.protobuf.Int64Value
-	18,  // 89: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_scale_factor:type_name -> google.protobuf.DoubleValue
-	18,  // 90: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_analyze_scale_factor:type_name -> google.protobuf.DoubleValue
-	19,  // 91: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_transaction_read_only:type_name -> google.protobuf.BoolValue
-	19,  // 92: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_parallel_append:type_name -> google.protobuf.BoolValue
-	19,  // 93: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_parallel_hash:type_name -> google.protobuf.BoolValue
-	19,  // 94: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_partition_pruning:type_name -> google.protobuf.BoolValue
-	19,  // 95: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_partitionwise_aggregate:type_name -> google.protobuf.BoolValue
-	19,  // 96: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_partitionwise_join:type_name -> google.protobuf.BoolValue
-	19,  // 97: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.jit:type_name -> google.protobuf.BoolValue
-	17,  // 98: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_parallel_maintenance_workers:type_name -> google.protobuf.Int64Value
-	19,  // 99: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.parallel_leader_participation:type_name -> google.protobuf.BoolValue
-	18,  // 100: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_transaction_sample_rate:type_name -> google.protobuf.DoubleValue
-	8,   // 101: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.plan_cache_mode:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PlanCacheMode
-	17,  // 102: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.effective_io_concurrency:type_name -> google.protobuf.Int64Value
-	17,  // 103: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.effective_cache_size:type_name -> google.protobuf.Int64Value
-	9,   // 104: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.shared_preload_libraries:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SharedPreloadLibraries
-	17,  // 105: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_min_duration:type_name -> google.protobuf.Int64Value
-	19,  // 106: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_analyze:type_name -> google.protobuf.BoolValue
-	19,  // 107: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_buffers:type_name -> google.protobuf.BoolValue
-	19,  // 108: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_timing:type_name -> google.protobuf.BoolValue
-	19,  // 109: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_triggers:type_name -> google.protobuf.BoolValue
-	19,  // 110: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_verbose:type_name -> google.protobuf.BoolValue
-	19,  // 111: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_nested_statements:type_name -> google.protobuf.BoolValue
-	18,  // 112: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_sample_rate:type_name -> google.protobuf.DoubleValue
-	19,  // 113: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_enable_hint:type_name -> google.protobuf.BoolValue
-	19,  // 114: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_enable_hint_table:type_name -> google.protobuf.BoolValue
-	7,   // 115: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_debug_print:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PgHintPlanDebugPrint
+	20,  // 59: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_with_oids:type_name -> google.protobuf.BoolValue
+	20,  // 60: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.escape_string_warning:type_name -> google.protobuf.BoolValue
+	20,  // 61: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.lo_compat_privileges:type_name -> google.protobuf.BoolValue
+	20,  // 62: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.quote_all_identifiers:type_name -> google.protobuf.BoolValue
+	20,  // 63: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.standard_conforming_strings:type_name -> google.protobuf.BoolValue
+	20,  // 64: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.synchronize_seqscans:type_name -> google.protobuf.BoolValue
+	20,  // 65: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.transform_null_equals:type_name -> google.protobuf.BoolValue
+	20,  // 66: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.exit_on_error:type_name -> google.protobuf.BoolValue
+	19,  // 67: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.seq_page_cost:type_name -> google.protobuf.DoubleValue
+	19,  // 68: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.random_page_cost:type_name -> google.protobuf.DoubleValue
+	18,  // 69: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_max_workers:type_name -> google.protobuf.Int64Value
+	18,  // 70: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_cost_delay:type_name -> google.protobuf.Int64Value
+	18,  // 71: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_cost_limit:type_name -> google.protobuf.Int64Value
+	18,  // 72: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_naptime:type_name -> google.protobuf.Int64Value
+	18,  // 73: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.archive_timeout:type_name -> google.protobuf.Int64Value
+	18,  // 74: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.track_activity_query_size:type_name -> google.protobuf.Int64Value
+	20,  // 75: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_bitmapscan:type_name -> google.protobuf.BoolValue
+	20,  // 76: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_hashagg:type_name -> google.protobuf.BoolValue
+	20,  // 77: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_hashjoin:type_name -> google.protobuf.BoolValue
+	20,  // 78: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_indexscan:type_name -> google.protobuf.BoolValue
+	20,  // 79: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_indexonlyscan:type_name -> google.protobuf.BoolValue
+	20,  // 80: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_material:type_name -> google.protobuf.BoolValue
+	20,  // 81: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_mergejoin:type_name -> google.protobuf.BoolValue
+	20,  // 82: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_nestloop:type_name -> google.protobuf.BoolValue
+	20,  // 83: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_seqscan:type_name -> google.protobuf.BoolValue
+	20,  // 84: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_sort:type_name -> google.protobuf.BoolValue
+	20,  // 85: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_tidscan:type_name -> google.protobuf.BoolValue
+	18,  // 86: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_worker_processes:type_name -> google.protobuf.Int64Value
+	18,  // 87: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_parallel_workers:type_name -> google.protobuf.Int64Value
+	18,  // 88: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_parallel_workers_per_gather:type_name -> google.protobuf.Int64Value
+	19,  // 89: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_scale_factor:type_name -> google.protobuf.DoubleValue
+	19,  // 90: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_analyze_scale_factor:type_name -> google.protobuf.DoubleValue
+	20,  // 91: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.default_transaction_read_only:type_name -> google.protobuf.BoolValue
+	20,  // 92: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_parallel_append:type_name -> google.protobuf.BoolValue
+	20,  // 93: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_parallel_hash:type_name -> google.protobuf.BoolValue
+	20,  // 94: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_partition_pruning:type_name -> google.protobuf.BoolValue
+	20,  // 95: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_partitionwise_aggregate:type_name -> google.protobuf.BoolValue
+	20,  // 96: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_partitionwise_join:type_name -> google.protobuf.BoolValue
+	20,  // 97: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.jit:type_name -> google.protobuf.BoolValue
+	18,  // 98: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_parallel_maintenance_workers:type_name -> google.protobuf.Int64Value
+	20,  // 99: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.parallel_leader_participation:type_name -> google.protobuf.BoolValue
+	19,  // 100: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_transaction_sample_rate:type_name -> google.protobuf.DoubleValue
+	9,   // 101: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.plan_cache_mode:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PlanCacheMode
+	18,  // 102: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.effective_io_concurrency:type_name -> google.protobuf.Int64Value
+	18,  // 103: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.effective_cache_size:type_name -> google.protobuf.Int64Value
+	10,  // 104: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.shared_preload_libraries:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.SharedPreloadLibraries
+	18,  // 105: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_min_duration:type_name -> google.protobuf.Int64Value
+	20,  // 106: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_analyze:type_name -> google.protobuf.BoolValue
+	20,  // 107: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_buffers:type_name -> google.protobuf.BoolValue
+	20,  // 108: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_timing:type_name -> google.protobuf.BoolValue
+	20,  // 109: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_triggers:type_name -> google.protobuf.BoolValue
+	20,  // 110: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_verbose:type_name -> google.protobuf.BoolValue
+	20,  // 111: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_nested_statements:type_name -> google.protobuf.BoolValue
+	19,  // 112: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_sample_rate:type_name -> google.protobuf.DoubleValue
+	20,  // 113: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_enable_hint:type_name -> google.protobuf.BoolValue
+	20,  // 114: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_enable_hint_table:type_name -> google.protobuf.BoolValue
+	8,   // 115: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_debug_print:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PgHintPlanDebugPrint
 	5,   // 116: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_message_level:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.LogLevel
-	18,  // 117: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.hash_mem_multiplier:type_name -> google.protobuf.DoubleValue
-	17,  // 118: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.logical_decoding_work_mem:type_name -> google.protobuf.Int64Value
-	17,  // 119: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.maintenance_io_concurrency:type_name -> google.protobuf.Int64Value
-	17,  // 120: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
-	17,  // 121: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.wal_keep_size:type_name -> google.protobuf.Int64Value
-	19,  // 122: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_incremental_sort:type_name -> google.protobuf.BoolValue
-	17,  // 123: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_insert_threshold:type_name -> google.protobuf.Int64Value
-	18,  // 124: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_insert_scale_factor:type_name -> google.protobuf.DoubleValue
-	17,  // 125: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_min_duration_sample:type_name -> google.protobuf.Int64Value
-	18,  // 126: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_statement_sample_rate:type_name -> google.protobuf.DoubleValue
-	17,  // 127: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_parameter_max_length:type_name -> google.protobuf.Int64Value
-	17,  // 128: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_parameter_max_length_on_error:type_name -> google.protobuf.Int64Value
-	17,  // 129: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.client_connection_check_interval:type_name -> google.protobuf.Int64Value
-	19,  // 130: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_async_append:type_name -> google.protobuf.BoolValue
-	19,  // 131: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_gathermerge:type_name -> google.protobuf.BoolValue
-	19,  // 132: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_memoize:type_name -> google.protobuf.BoolValue
-	19,  // 133: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_recovery_conflict_waits:type_name -> google.protobuf.BoolValue
-	17,  // 134: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_failsafe_age:type_name -> google.protobuf.Int64Value
-	17,  // 135: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_multixact_failsafe_age:type_name -> google.protobuf.Int64Value
-	19,  // 136: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_enabled:type_name -> google.protobuf.BoolValue
-	19,  // 137: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_track_constants:type_name -> google.protobuf.BoolValue
-	17,  // 138: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_max:type_name -> google.protobuf.Int64Value
-	19,  // 139: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_resolve_oids:type_name -> google.protobuf.BoolValue
-	18,  // 140: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_sample_rate:type_name -> google.protobuf.DoubleValue
-	17,  // 141: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_stack_depth:type_name -> google.protobuf.Int64Value
-	19,  // 142: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_group_by_reordering:type_name -> google.protobuf.BoolValue
-	19,  // 143: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo:type_name -> google.protobuf.BoolValue
-	17,  // 144: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_threshold:type_name -> google.protobuf.Int64Value
-	17,  // 145: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_effort:type_name -> google.protobuf.Int64Value
-	17,  // 146: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_pool_size:type_name -> google.protobuf.Int64Value
-	17,  // 147: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_generations:type_name -> google.protobuf.Int64Value
-	18,  // 148: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_selection_bias:type_name -> google.protobuf.DoubleValue
-	18,  // 149: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_seed:type_name -> google.protobuf.DoubleValue
-	18,  // 150: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_trgm_similarity_threshold:type_name -> google.protobuf.DoubleValue
-	18,  // 151: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_trgm_word_similarity_threshold:type_name -> google.protobuf.DoubleValue
-	18,  // 152: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_trgm_strict_word_similarity_threshold:type_name -> google.protobuf.DoubleValue
-	17,  // 153: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_standby_archive_delay:type_name -> google.protobuf.Int64Value
-	17,  // 154: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.session_duration_timeout:type_name -> google.protobuf.Int64Value
-	19,  // 155: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_replication_commands:type_name -> google.protobuf.BoolValue
-	17,  // 156: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_autovacuum_min_duration:type_name -> google.protobuf.Int64Value
-	15,  // 157: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	15,  // 158: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	15,  // 159: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	160, // [160:160] is the sub-list for method output_type
-	160, // [160:160] is the sub-list for method input_type
-	160, // [160:160] is the sub-list for extension type_name
-	160, // [160:160] is the sub-list for extension extendee
-	0,   // [0:160] is the sub-list for field type_name
+	19,  // 117: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.hash_mem_multiplier:type_name -> google.protobuf.DoubleValue
+	18,  // 118: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.logical_decoding_work_mem:type_name -> google.protobuf.Int64Value
+	18,  // 119: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.maintenance_io_concurrency:type_name -> google.protobuf.Int64Value
+	18,  // 120: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
+	18,  // 121: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.wal_keep_size:type_name -> google.protobuf.Int64Value
+	20,  // 122: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_incremental_sort:type_name -> google.protobuf.BoolValue
+	18,  // 123: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_insert_threshold:type_name -> google.protobuf.Int64Value
+	19,  // 124: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.autovacuum_vacuum_insert_scale_factor:type_name -> google.protobuf.DoubleValue
+	18,  // 125: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_min_duration_sample:type_name -> google.protobuf.Int64Value
+	19,  // 126: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_statement_sample_rate:type_name -> google.protobuf.DoubleValue
+	18,  // 127: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_parameter_max_length:type_name -> google.protobuf.Int64Value
+	18,  // 128: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_parameter_max_length_on_error:type_name -> google.protobuf.Int64Value
+	18,  // 129: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.client_connection_check_interval:type_name -> google.protobuf.Int64Value
+	20,  // 130: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_async_append:type_name -> google.protobuf.BoolValue
+	20,  // 131: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_gathermerge:type_name -> google.protobuf.BoolValue
+	20,  // 132: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_memoize:type_name -> google.protobuf.BoolValue
+	20,  // 133: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_recovery_conflict_waits:type_name -> google.protobuf.BoolValue
+	18,  // 134: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_failsafe_age:type_name -> google.protobuf.Int64Value
+	18,  // 135: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.vacuum_multixact_failsafe_age:type_name -> google.protobuf.Int64Value
+	20,  // 136: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_enabled:type_name -> google.protobuf.BoolValue
+	20,  // 137: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_track_constants:type_name -> google.protobuf.BoolValue
+	18,  // 138: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_max:type_name -> google.protobuf.Int64Value
+	20,  // 139: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_resolve_oids:type_name -> google.protobuf.BoolValue
+	19,  // 140: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_qualstats_sample_rate:type_name -> google.protobuf.DoubleValue
+	18,  // 141: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_stack_depth:type_name -> google.protobuf.Int64Value
+	20,  // 142: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.enable_group_by_reordering:type_name -> google.protobuf.BoolValue
+	20,  // 143: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo:type_name -> google.protobuf.BoolValue
+	18,  // 144: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_threshold:type_name -> google.protobuf.Int64Value
+	18,  // 145: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_effort:type_name -> google.protobuf.Int64Value
+	18,  // 146: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_pool_size:type_name -> google.protobuf.Int64Value
+	18,  // 147: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_generations:type_name -> google.protobuf.Int64Value
+	19,  // 148: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_selection_bias:type_name -> google.protobuf.DoubleValue
+	19,  // 149: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.geqo_seed:type_name -> google.protobuf.DoubleValue
+	19,  // 150: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_trgm_similarity_threshold:type_name -> google.protobuf.DoubleValue
+	19,  // 151: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_trgm_word_similarity_threshold:type_name -> google.protobuf.DoubleValue
+	19,  // 152: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_trgm_strict_word_similarity_threshold:type_name -> google.protobuf.DoubleValue
+	18,  // 153: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.max_standby_archive_delay:type_name -> google.protobuf.Int64Value
+	18,  // 154: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.session_duration_timeout:type_name -> google.protobuf.Int64Value
+	20,  // 155: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_replication_commands:type_name -> google.protobuf.BoolValue
+	18,  // 156: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.log_autovacuum_min_duration:type_name -> google.protobuf.Int64Value
+	7,   // 157: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.password_encryption:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PasswordEncryption
+	16,  // 158: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	16,  // 159: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	16,  // 160: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	161, // [161:161] is the sub-list for method output_type
+	161, // [161:161] is the sub-list for method input_type
+	161, // [161:161] is the sub-list for extension type_name
+	161, // [161:161] is the sub-list for extension extendee
+	0,   // [0:161] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_init() }
@@ -3565,7 +3640,7 @@ func file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDesc,
-			NumEnums:      15,
+			NumEnums:      16,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -424,6 +424,14 @@ func (m *UpdateInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v stri
 	m.NetworkInterfaceIndex = v
 }
 
+func (m *SimulateInstanceMaintenanceEventRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *SimulateInstanceMaintenanceEventMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
 func (m *ListInstanceOperationsRequest) SetInstanceId(v string) {
 	m.InstanceId = v
 }

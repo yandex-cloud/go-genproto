@@ -142,6 +142,10 @@ func (m *ResourceOptions) SetSecureKey(v *ResourceOptions_SecureKeyOption) {
 	m.SecureKey = v
 }
 
+func (m *ResourceOptions) SetIpAddressAcl(v *ResourceOptions_IPAddresACL) {
+	m.IpAddressAcl = v
+}
+
 func (m *ResourceOptions_BoolOption) SetEnabled(v bool) {
 	m.Enabled = v
 }
@@ -344,6 +348,18 @@ func (m *ResourceOptions_SecureKeyOption) SetKey(v string) {
 
 func (m *ResourceOptions_SecureKeyOption) SetType(v SecureKeyURLType) {
 	m.Type = v
+}
+
+func (m *ResourceOptions_IPAddresACL) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_IPAddresACL) SetPolicyType(v PolicyType) {
+	m.PolicyType = v
+}
+
+func (m *ResourceOptions_IPAddresACL) SetExceptedValues(v *ResourceOptions_StringsListOption) {
+	m.ExceptedValues = v
 }
 
 func (m *SSLTargetCertificate) SetType(v SSLCertificateType) {

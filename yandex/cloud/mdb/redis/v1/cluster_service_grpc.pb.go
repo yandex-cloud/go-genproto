@@ -45,6 +45,7 @@ const (
 	ClusterService_AddShard_FullMethodName              = "/yandex.cloud.mdb.redis.v1.ClusterService/AddShard"
 	ClusterService_DeleteShard_FullMethodName           = "/yandex.cloud.mdb.redis.v1.ClusterService/DeleteShard"
 	ClusterService_Rebalance_FullMethodName             = "/yandex.cloud.mdb.redis.v1.ClusterService/Rebalance"
+	ClusterService_EnableSharding_FullMethodName        = "/yandex.cloud.mdb.redis.v1.ClusterService/EnableSharding"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -104,6 +105,8 @@ type ClusterServiceClient interface {
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Rebalances the cluster. Evenly distributes all the hash slots between the shards.
 	Rebalance(ctx context.Context, in *RebalanceClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Enable Sharding on non sharded cluster
+	EnableSharding(ctx context.Context, in *EnableShardingClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type clusterServiceClient struct {
@@ -362,6 +365,15 @@ func (c *clusterServiceClient) Rebalance(ctx context.Context, in *RebalanceClust
 	return out, nil
 }
 
+func (c *clusterServiceClient) EnableSharding(ctx context.Context, in *EnableShardingClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_EnableSharding_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility
@@ -419,6 +431,8 @@ type ClusterServiceServer interface {
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)
 	// Rebalances the cluster. Evenly distributes all the hash slots between the shards.
 	Rebalance(context.Context, *RebalanceClusterRequest) (*operation.Operation, error)
+	// Enable Sharding on non sharded cluster
+	EnableSharding(context.Context, *EnableShardingClusterRequest) (*operation.Operation, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have forward compatible implementations.
@@ -499,6 +513,9 @@ func (UnimplementedClusterServiceServer) DeleteShard(context.Context, *DeleteClu
 }
 func (UnimplementedClusterServiceServer) Rebalance(context.Context, *RebalanceClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Rebalance not implemented")
+}
+func (UnimplementedClusterServiceServer) EnableSharding(context.Context, *EnableShardingClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableSharding not implemented")
 }
 
 // UnsafeClusterServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -965,6 +982,24 @@ func _ClusterService_Rebalance_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_EnableSharding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableShardingClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).EnableSharding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_EnableSharding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).EnableSharding(ctx, req.(*EnableShardingClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1067,6 +1102,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Rebalance",
 			Handler:    _ClusterService_Rebalance_Handler,
+		},
+		{
+			MethodName: "EnableSharding",
+			Handler:    _ClusterService_EnableSharding_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

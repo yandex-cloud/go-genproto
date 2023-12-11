@@ -118,10 +118,6 @@ func (m *Table) SetColumnCount(v int64) {
 	m.ColumnCount = v
 }
 
-func (m *Table) SetTextSegments(v *TextSegments) {
-	m.TextSegments = v
-}
-
 func (m *Table) SetCells(v []*TableCell) {
 	m.Cells = v
 }
@@ -150,6 +146,6 @@ func (m *TableCell) SetText(v string) {
 	m.Text = v
 }
 
-func (m *TableCell) SetTextSegments(v *TextSegments) {
+func (m *TableCell) SetTextSegments(v []*TextSegments) {
 	m.TextSegments = v
 }

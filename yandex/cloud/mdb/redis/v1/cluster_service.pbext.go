@@ -11,6 +11,14 @@ import (
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
+func (m *EnableShardingClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *EnableShardingClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
 func (m *GetClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
