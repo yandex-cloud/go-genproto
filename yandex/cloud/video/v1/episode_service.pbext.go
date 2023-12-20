@@ -107,6 +107,12 @@ func (m *CreateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
 	}
 }
 
+func (m *CreateEpisodeRequest) SetAuthSystemAccess(v *EpisodeAuthSystemAccessParams) {
+	m.AccessRights = &CreateEpisodeRequest_AuthSystemAccess{
+		AuthSystemAccess: v,
+	}
+}
+
 func (m *CreateEpisodeMetadata) SetEpisodeId(v string) {
 	m.EpisodeId = v
 }
@@ -152,6 +158,12 @@ func (m *UpdateEpisodeRequest) SetDvrSeconds(v int64) {
 func (m *UpdateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
 	m.AccessRights = &UpdateEpisodeRequest_PublicAccess{
 		PublicAccess: v,
+	}
+}
+
+func (m *UpdateEpisodeRequest) SetAuthSystemAccess(v *EpisodeAuthSystemAccessParams) {
+	m.AccessRights = &UpdateEpisodeRequest_AuthSystemAccess{
+		AuthSystemAccess: v,
 	}
 }
 

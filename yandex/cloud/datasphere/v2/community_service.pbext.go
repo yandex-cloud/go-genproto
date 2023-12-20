@@ -105,3 +105,27 @@ func (m *SetCommunityAccessBindingsMetadata) SetCommunityId(v string) {
 func (m *UpdateCommunityAccessBindingsMetadata) SetCommunityId(v string) {
 	m.CommunityId = v
 }
+
+func (m *AddCommunityResourceRequest) SetCommunityId(v string) {
+	m.CommunityId = v
+}
+
+func (m *AddCommunityResourceRequest) SetResourceType(v ResourceType) {
+	m.ResourceType = v
+}
+
+func (m *AddCommunityResourceRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *RemoveCommunityResourceRequest) SetCommunityId(v string) {
+	m.CommunityId = v
+}
+
+func (m *RemoveCommunityResourceRequest) SetResourceType(v ResourceType) {
+	m.ResourceType = v
+}
+
+func (m *RemoveCommunityResourceRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}

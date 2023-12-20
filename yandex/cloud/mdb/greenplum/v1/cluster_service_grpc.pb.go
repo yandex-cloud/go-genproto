@@ -34,6 +34,7 @@ const (
 	ClusterService_ListLogs_FullMethodName         = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs"
 	ClusterService_StreamLogs_FullMethodName       = "/yandex.cloud.mdb.greenplum.v1.ClusterService/StreamLogs"
 	ClusterService_ListBackups_FullMethodName      = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups"
+	ClusterService_Backup_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Backup"
 	ClusterService_Restore_FullMethodName          = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Restore"
 )
 
@@ -71,6 +72,8 @@ type ClusterServiceClient interface {
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (ClusterService_StreamLogsClient, error)
 	// Retrieves a list of available backups for the specified Greenplum® cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
+	// Creates a backup for the specified Greenplum cluster.
+	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new Greenplum® cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
@@ -232,6 +235,15 @@ func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterB
 	return out, nil
 }
 
+func (c *clusterServiceClient) Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_Backup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Restore_FullMethodName, in, out, opts...)
@@ -275,6 +287,8 @@ type ClusterServiceServer interface {
 	StreamLogs(*StreamClusterLogsRequest, ClusterService_StreamLogsServer) error
 	// Retrieves a list of available backups for the specified Greenplum® cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
+	// Creates a backup for the specified Greenplum cluster.
+	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
 	// Creates a new Greenplum® cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 }
@@ -324,6 +338,9 @@ func (UnimplementedClusterServiceServer) StreamLogs(*StreamClusterLogsRequest, C
 }
 func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBackups not implemented")
+}
+func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Backup not implemented")
 }
 func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
@@ -595,6 +612,24 @@ func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_Backup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Backup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_Backup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Backup(ctx, req.(*BackupClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RestoreClusterRequest)
 	if err := dec(in); err != nil {
@@ -671,6 +706,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBackups",
 			Handler:    _ClusterService_ListBackups_Handler,
+		},
+		{
+			MethodName: "Backup",
+			Handler:    _ClusterService_Backup_Handler,
 		},
 		{
 			MethodName: "Restore",

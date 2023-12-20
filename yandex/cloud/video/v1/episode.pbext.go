@@ -58,6 +58,12 @@ func (m *Episode) SetPublicAccess(v *EpisodePublicAccessRights) {
 	}
 }
 
+func (m *Episode) SetAuthSystemAccess(v *EpisodeAuthSystemAccessRights) {
+	m.AccessRights = &Episode_AuthSystemAccess{
+		AuthSystemAccess: v,
+	}
+}
+
 func (m *Episode) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

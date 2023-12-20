@@ -63,6 +63,12 @@ func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
 	}
 }
 
+func (m *Video) SetAuthSystemAccess(v *VideoAuthSystemAccessRights) {
+	m.AccessRights = &Video_AuthSystemAccess{
+		AuthSystemAccess: v,
+	}
+}
+
 func (m *Video) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

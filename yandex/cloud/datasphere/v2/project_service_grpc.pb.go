@@ -35,6 +35,8 @@ const (
 	ProjectService_ListAccessBindings_FullMethodName   = "/yandex.cloud.datasphere.v2.ProjectService/ListAccessBindings"
 	ProjectService_SetAccessBindings_FullMethodName    = "/yandex.cloud.datasphere.v2.ProjectService/SetAccessBindings"
 	ProjectService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.datasphere.v2.ProjectService/UpdateAccessBindings"
+	ProjectService_AddResource_FullMethodName          = "/yandex.cloud.datasphere.v2.ProjectService/AddResource"
+	ProjectService_RemoveResource_FullMethodName       = "/yandex.cloud.datasphere.v2.ProjectService/RemoveResource"
 )
 
 // ProjectServiceClient is the client API for ProjectService service.
@@ -69,6 +71,10 @@ type ProjectServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the project.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Adds shared resource to project
+	AddResource(ctx context.Context, in *AddResourceToProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes shared resource from project
+	RemoveResource(ctx context.Context, in *RemoveResourceFromProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type projectServiceClient struct {
@@ -205,6 +211,24 @@ func (c *projectServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 	return out, nil
 }
 
+func (c *projectServiceClient) AddResource(ctx context.Context, in *AddResourceToProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectService_AddResource_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) RemoveResource(ctx context.Context, in *RemoveResourceFromProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectService_RemoveResource_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations should embed UnimplementedProjectServiceServer
 // for forward compatibility
@@ -237,6 +261,10 @@ type ProjectServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the project.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Adds shared resource to project
+	AddResource(context.Context, *AddResourceToProjectRequest) (*operation.Operation, error)
+	// Removes shared resource from project
+	RemoveResource(context.Context, *RemoveResourceFromProjectRequest) (*operation.Operation, error)
 }
 
 // UnimplementedProjectServiceServer should be embedded to have forward compatible implementations.
@@ -284,6 +312,12 @@ func (UnimplementedProjectServiceServer) SetAccessBindings(context.Context, *acc
 }
 func (UnimplementedProjectServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedProjectServiceServer) AddResource(context.Context, *AddResourceToProjectRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResource not implemented")
+}
+func (UnimplementedProjectServiceServer) RemoveResource(context.Context, *RemoveResourceFromProjectRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveResource not implemented")
 }
 
 // UnsafeProjectServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -549,6 +583,42 @@ func _ProjectService_UpdateAccessBindings_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectService_AddResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddResourceToProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).AddResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_AddResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).AddResource(ctx, req.(*AddResourceToProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectService_RemoveResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveResourceFromProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).RemoveResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_RemoveResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).RemoveResource(ctx, req.(*RemoveResourceFromProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjectService_ServiceDesc is the grpc.ServiceDesc for ProjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -611,6 +681,14 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _ProjectService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "AddResource",
+			Handler:    _ProjectService_AddResource_Handler,
+		},
+		{
+			MethodName: "RemoveResource",
+			Handler:    _ProjectService_RemoveResource_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

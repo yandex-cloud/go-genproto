@@ -2524,6 +2524,10 @@ type LifecycleRule_RuleFilter struct {
 	ObjectSizeGreaterThan *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=object_size_greater_than,json=objectSizeGreaterThan,proto3" json:"object_size_greater_than,omitempty"`
 	// Size that the object must be less t.
 	ObjectSizeLessThan *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=object_size_less_than,json=objectSizeLessThan,proto3" json:"object_size_less_than,omitempty"`
+	// Tags that the object's tag set must have for the rule to apply.
+	Tag *Tag `protobuf:"bytes,4,opt,name=tag,proto3" json:"tag,omitempty"`
+	// Apply a logical AND to all of the predicates configured inside the And operator.
+	AndOperator *LifecycleRule_RuleFilter_And `protobuf:"bytes,5,opt,name=and_operator,json=andOperator,proto3" json:"and_operator,omitempty"`
 }
 
 func (x *LifecycleRule_RuleFilter) Reset() {
@@ -2579,6 +2583,91 @@ func (x *LifecycleRule_RuleFilter) GetObjectSizeLessThan() *wrapperspb.Int64Valu
 	return nil
 }
 
+func (x *LifecycleRule_RuleFilter) GetTag() *Tag {
+	if x != nil {
+		return x.Tag
+	}
+	return nil
+}
+
+func (x *LifecycleRule_RuleFilter) GetAndOperator() *LifecycleRule_RuleFilter_And {
+	if x != nil {
+		return x.AndOperator
+	}
+	return nil
+}
+
+type LifecycleRule_RuleFilter_And struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Prefix                string                 `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	ObjectSizeGreaterThan *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=object_size_greater_than,json=objectSizeGreaterThan,proto3" json:"object_size_greater_than,omitempty"`
+	ObjectSizeLessThan    *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=object_size_less_than,json=objectSizeLessThan,proto3" json:"object_size_less_than,omitempty"`
+	Tag                   []*Tag                 `protobuf:"bytes,4,rep,name=tag,proto3" json:"tag,omitempty"`
+}
+
+func (x *LifecycleRule_RuleFilter_And) Reset() {
+	*x = LifecycleRule_RuleFilter_And{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LifecycleRule_RuleFilter_And) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LifecycleRule_RuleFilter_And) ProtoMessage() {}
+
+func (x *LifecycleRule_RuleFilter_And) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LifecycleRule_RuleFilter_And.ProtoReflect.Descriptor instead.
+func (*LifecycleRule_RuleFilter_And) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_proto_rawDescGZIP(), []int{6, 5, 0}
+}
+
+func (x *LifecycleRule_RuleFilter_And) GetPrefix() string {
+	if x != nil {
+		return x.Prefix
+	}
+	return ""
+}
+
+func (x *LifecycleRule_RuleFilter_And) GetObjectSizeGreaterThan() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ObjectSizeGreaterThan
+	}
+	return nil
+}
+
+func (x *LifecycleRule_RuleFilter_And) GetObjectSizeLessThan() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ObjectSizeLessThan
+	}
+	return nil
+}
+
+func (x *LifecycleRule_RuleFilter_And) GetTag() []*Tag {
+	if x != nil {
+		return x.Tag
+	}
+	return nil
+}
+
 // Default lock configuration for added objects
 type ObjectLock_DefaultRetention struct {
 	state         protoimpl.MessageState
@@ -2596,7 +2685,7 @@ type ObjectLock_DefaultRetention struct {
 func (x *ObjectLock_DefaultRetention) Reset() {
 	*x = ObjectLock_DefaultRetention{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
+		mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2609,7 +2698,7 @@ func (x *ObjectLock_DefaultRetention) String() string {
 func (*ObjectLock_DefaultRetention) ProtoMessage() {}
 
 func (x *ObjectLock_DefaultRetention) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2683,7 +2772,7 @@ type Encryption_EncryptionRule struct {
 func (x *Encryption_EncryptionRule) Reset() {
 	*x = Encryption_EncryptionRule{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
+		mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2696,7 +2785,7 @@ func (x *Encryption_EncryptionRule) String() string {
 func (*Encryption_EncryptionRule) ProtoMessage() {}
 
 func (x *Encryption_EncryptionRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2939,7 +3028,7 @@ var file_yandex_cloud_storage_v1_bucket_proto_rawDesc = []byte{
 	0x43, 0x4f, 0x4c, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10,
 	0x00, 0x12, 0x11, 0x0a, 0x0d, 0x50, 0x52, 0x4f, 0x54, 0x4f, 0x43, 0x4f, 0x4c, 0x5f, 0x48, 0x54,
 	0x54, 0x50, 0x10, 0x01, 0x12, 0x12, 0x0a, 0x0e, 0x50, 0x52, 0x4f, 0x54, 0x4f, 0x43, 0x4f, 0x4c,
-	0x5f, 0x48, 0x54, 0x54, 0x50, 0x53, 0x10, 0x02, 0x22, 0xa8, 0x0c, 0x0a, 0x0d, 0x4c, 0x69, 0x66,
+	0x5f, 0x48, 0x54, 0x54, 0x50, 0x53, 0x10, 0x02, 0x22, 0xa8, 0x0f, 0x0a, 0x0d, 0x4c, 0x69, 0x66,
 	0x65, 0x63, 0x79, 0x63, 0x6c, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x2c, 0x0a, 0x02, 0x69, 0x64,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56,
@@ -3025,7 +3114,7 @@ var file_yandex_cloud_storage_v1_bucket_proto_rawDesc = []byte{
 	0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
 	0x66, 0x2e, 0x42, 0x6f, 0x6f, 0x6c, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x19, 0x65, 0x78, 0x70,
 	0x69, 0x72, 0x65, 0x64, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x4d, 0x61, 0x72, 0x6b, 0x65, 0x72, 0x1a, 0xca, 0x01, 0x0a, 0x0a, 0x52, 0x75, 0x6c, 0x65, 0x46,
+	0x4d, 0x61, 0x72, 0x6b, 0x65, 0x72, 0x1a, 0xca, 0x04, 0x0a, 0x0a, 0x52, 0x75, 0x6c, 0x65, 0x46,
 	0x69, 0x6c, 0x74, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x12, 0x54, 0x0a,
 	0x18, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x5f, 0x67, 0x72, 0x65,
@@ -3038,7 +3127,31 @@ var file_yandex_cloud_storage_v1_bucket_proto_rawDesc = []byte{
 	0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52,
 	0x12, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65, 0x4c, 0x65, 0x73, 0x73, 0x54,
-	0x68, 0x61, 0x6e, 0x22, 0xea, 0x02, 0x0a, 0x08, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73,
+	0x68, 0x61, 0x6e, 0x12, 0x2e, 0x0a, 0x03, 0x74, 0x61, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x61, 0x67, 0x52, 0x03,
+	0x74, 0x61, 0x67, 0x12, 0x58, 0x0a, 0x0c, 0x61, 0x6e, 0x64, 0x5f, 0x6f, 0x70, 0x65, 0x72, 0x61,
+	0x74, 0x6f, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x35, 0x2e, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65,
+	0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x66, 0x65, 0x63, 0x79, 0x63, 0x6c, 0x65, 0x52, 0x75, 0x6c,
+	0x65, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x2e, 0x41, 0x6e, 0x64,
+	0x52, 0x0b, 0x61, 0x6e, 0x64, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x1a, 0xf3, 0x01,
+	0x0a, 0x03, 0x41, 0x6e, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x12, 0x54, 0x0a,
+	0x18, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x5f, 0x67, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x72, 0x5f, 0x74, 0x68, 0x61, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x15, 0x6f, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65, 0x47, 0x72, 0x65, 0x61, 0x74, 0x65, 0x72, 0x54,
+	0x68, 0x61, 0x6e, 0x12, 0x4e, 0x0a, 0x15, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x73, 0x69,
+	0x7a, 0x65, 0x5f, 0x6c, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x68, 0x61, 0x6e, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52,
+	0x12, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65, 0x4c, 0x65, 0x73, 0x73, 0x54,
+	0x68, 0x61, 0x6e, 0x12, 0x2e, 0x0a, 0x03, 0x74, 0x61, 0x67, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x1c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x61, 0x67, 0x52, 0x03,
+	0x74, 0x61, 0x67, 0x22, 0xea, 0x02, 0x0a, 0x08, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73,
 	0x12, 0x2c, 0x0a, 0x12, 0x73, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x5f, 0x6f, 0x62, 0x6a, 0x65, 0x63,
 	0x74, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x73, 0x69,
 	0x6d, 0x70, 0x6c, 0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x2e,
@@ -3234,7 +3347,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_storage_v1_bucket_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_yandex_cloud_storage_v1_bucket_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_yandex_cloud_storage_v1_bucket_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_yandex_cloud_storage_v1_bucket_proto_goTypes = []interface{}{
 	(Versioning)(0),                            // 0: yandex.cloud.storage.v1.Versioning
 	(ACL_Grant_Permission)(0),                  // 1: yandex.cloud.storage.v1.ACL.Grant.Permission
@@ -3270,20 +3383,21 @@ var file_yandex_cloud_storage_v1_bucket_proto_goTypes = []interface{}{
 	(*LifecycleRule_Transition)(nil),           // 31: yandex.cloud.storage.v1.LifecycleRule.Transition
 	(*LifecycleRule_Expiration)(nil),           // 32: yandex.cloud.storage.v1.LifecycleRule.Expiration
 	(*LifecycleRule_RuleFilter)(nil),           // 33: yandex.cloud.storage.v1.LifecycleRule.RuleFilter
-	(*ObjectLock_DefaultRetention)(nil),        // 34: yandex.cloud.storage.v1.ObjectLock.DefaultRetention
-	(*Encryption_EncryptionRule)(nil),          // 35: yandex.cloud.storage.v1.Encryption.EncryptionRule
-	(*structpb.Struct)(nil),                    // 36: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),              // 37: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),               // 38: google.protobuf.BoolValue
-	(*wrapperspb.Int64Value)(nil),              // 39: google.protobuf.Int64Value
-	(*wrapperspb.StringValue)(nil),             // 40: google.protobuf.StringValue
+	(*LifecycleRule_RuleFilter_And)(nil),       // 34: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
+	(*ObjectLock_DefaultRetention)(nil),        // 35: yandex.cloud.storage.v1.ObjectLock.DefaultRetention
+	(*Encryption_EncryptionRule)(nil),          // 36: yandex.cloud.storage.v1.Encryption.EncryptionRule
+	(*structpb.Struct)(nil),                    // 37: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),              // 38: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),               // 39: google.protobuf.BoolValue
+	(*wrapperspb.Int64Value)(nil),              // 40: google.protobuf.Int64Value
+	(*wrapperspb.StringValue)(nil),             // 41: google.protobuf.StringValue
 }
 var file_yandex_cloud_storage_v1_bucket_proto_depIdxs = []int32{
 	11, // 0: yandex.cloud.storage.v1.Bucket.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
 	0,  // 1: yandex.cloud.storage.v1.Bucket.versioning:type_name -> yandex.cloud.storage.v1.Versioning
-	36, // 2: yandex.cloud.storage.v1.Bucket.policy:type_name -> google.protobuf.Struct
+	37, // 2: yandex.cloud.storage.v1.Bucket.policy:type_name -> google.protobuf.Struct
 	10, // 3: yandex.cloud.storage.v1.Bucket.acl:type_name -> yandex.cloud.storage.v1.ACL
-	37, // 4: yandex.cloud.storage.v1.Bucket.created_at:type_name -> google.protobuf.Timestamp
+	38, // 4: yandex.cloud.storage.v1.Bucket.created_at:type_name -> google.protobuf.Timestamp
 	12, // 5: yandex.cloud.storage.v1.Bucket.cors:type_name -> yandex.cloud.storage.v1.CorsRule
 	13, // 6: yandex.cloud.storage.v1.Bucket.website_settings:type_name -> yandex.cloud.storage.v1.WebsiteSettings
 	14, // 7: yandex.cloud.storage.v1.Bucket.lifecycle_rules:type_name -> yandex.cloud.storage.v1.LifecycleRule
@@ -3291,60 +3405,65 @@ var file_yandex_cloud_storage_v1_bucket_proto_depIdxs = []int32{
 	21, // 9: yandex.cloud.storage.v1.Bucket.object_lock:type_name -> yandex.cloud.storage.v1.ObjectLock
 	22, // 10: yandex.cloud.storage.v1.Bucket.encryption:type_name -> yandex.cloud.storage.v1.Encryption
 	23, // 11: yandex.cloud.storage.v1.ACL.grants:type_name -> yandex.cloud.storage.v1.ACL.Grant
-	38, // 12: yandex.cloud.storage.v1.AnonymousAccessFlags.read:type_name -> google.protobuf.BoolValue
-	38, // 13: yandex.cloud.storage.v1.AnonymousAccessFlags.list:type_name -> google.protobuf.BoolValue
-	38, // 14: yandex.cloud.storage.v1.AnonymousAccessFlags.config_read:type_name -> google.protobuf.BoolValue
+	39, // 12: yandex.cloud.storage.v1.AnonymousAccessFlags.read:type_name -> google.protobuf.BoolValue
+	39, // 13: yandex.cloud.storage.v1.AnonymousAccessFlags.list:type_name -> google.protobuf.BoolValue
+	39, // 14: yandex.cloud.storage.v1.AnonymousAccessFlags.config_read:type_name -> google.protobuf.BoolValue
 	3,  // 15: yandex.cloud.storage.v1.CorsRule.allowed_methods:type_name -> yandex.cloud.storage.v1.CorsRule.Method
-	39, // 16: yandex.cloud.storage.v1.CorsRule.max_age_seconds:type_name -> google.protobuf.Int64Value
+	40, // 16: yandex.cloud.storage.v1.CorsRule.max_age_seconds:type_name -> google.protobuf.Int64Value
 	24, // 17: yandex.cloud.storage.v1.WebsiteSettings.redirect_all_requests:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Scheme
 	27, // 18: yandex.cloud.storage.v1.WebsiteSettings.routing_rules:type_name -> yandex.cloud.storage.v1.WebsiteSettings.RoutingRule
-	40, // 19: yandex.cloud.storage.v1.LifecycleRule.id:type_name -> google.protobuf.StringValue
+	41, // 19: yandex.cloud.storage.v1.LifecycleRule.id:type_name -> google.protobuf.StringValue
 	33, // 20: yandex.cloud.storage.v1.LifecycleRule.filter:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter
 	32, // 21: yandex.cloud.storage.v1.LifecycleRule.expiration:type_name -> yandex.cloud.storage.v1.LifecycleRule.Expiration
 	31, // 22: yandex.cloud.storage.v1.LifecycleRule.transitions:type_name -> yandex.cloud.storage.v1.LifecycleRule.Transition
 	28, // 23: yandex.cloud.storage.v1.LifecycleRule.abort_incomplete_multipart_upload:type_name -> yandex.cloud.storage.v1.LifecycleRule.AfterDays
 	29, // 24: yandex.cloud.storage.v1.LifecycleRule.noncurrent_expiration:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration
 	30, // 25: yandex.cloud.storage.v1.LifecycleRule.noncurrent_transitions:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition
-	39, // 26: yandex.cloud.storage.v1.OptionalSizeByClass.class_size:type_name -> google.protobuf.Int64Value
+	40, // 26: yandex.cloud.storage.v1.OptionalSizeByClass.class_size:type_name -> google.protobuf.Int64Value
 	15, // 27: yandex.cloud.storage.v1.CountersByClass.counters:type_name -> yandex.cloud.storage.v1.Counters
-	39, // 28: yandex.cloud.storage.v1.BucketStats.max_size:type_name -> google.protobuf.Int64Value
+	40, // 28: yandex.cloud.storage.v1.BucketStats.max_size:type_name -> google.protobuf.Int64Value
 	16, // 29: yandex.cloud.storage.v1.BucketStats.storage_class_max_sizes:type_name -> yandex.cloud.storage.v1.OptionalSizeByClass
 	17, // 30: yandex.cloud.storage.v1.BucketStats.storage_class_used_sizes:type_name -> yandex.cloud.storage.v1.SizeByClass
 	18, // 31: yandex.cloud.storage.v1.BucketStats.storage_class_counters:type_name -> yandex.cloud.storage.v1.CountersByClass
-	40, // 32: yandex.cloud.storage.v1.BucketStats.default_storage_class:type_name -> google.protobuf.StringValue
+	41, // 32: yandex.cloud.storage.v1.BucketStats.default_storage_class:type_name -> google.protobuf.StringValue
 	11, // 33: yandex.cloud.storage.v1.BucketStats.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
-	37, // 34: yandex.cloud.storage.v1.BucketStats.created_at:type_name -> google.protobuf.Timestamp
-	37, // 35: yandex.cloud.storage.v1.BucketStats.updated_at:type_name -> google.protobuf.Timestamp
+	38, // 34: yandex.cloud.storage.v1.BucketStats.created_at:type_name -> google.protobuf.Timestamp
+	38, // 35: yandex.cloud.storage.v1.BucketStats.updated_at:type_name -> google.protobuf.Timestamp
 	5,  // 36: yandex.cloud.storage.v1.HTTPSConfig.source_type:type_name -> yandex.cloud.storage.v1.HTTPSConfig.SourceType
-	40, // 37: yandex.cloud.storage.v1.HTTPSConfig.issuer:type_name -> google.protobuf.StringValue
-	40, // 38: yandex.cloud.storage.v1.HTTPSConfig.subject:type_name -> google.protobuf.StringValue
-	37, // 39: yandex.cloud.storage.v1.HTTPSConfig.not_before:type_name -> google.protobuf.Timestamp
-	37, // 40: yandex.cloud.storage.v1.HTTPSConfig.not_after:type_name -> google.protobuf.Timestamp
+	41, // 37: yandex.cloud.storage.v1.HTTPSConfig.issuer:type_name -> google.protobuf.StringValue
+	41, // 38: yandex.cloud.storage.v1.HTTPSConfig.subject:type_name -> google.protobuf.StringValue
+	38, // 39: yandex.cloud.storage.v1.HTTPSConfig.not_before:type_name -> google.protobuf.Timestamp
+	38, // 40: yandex.cloud.storage.v1.HTTPSConfig.not_after:type_name -> google.protobuf.Timestamp
 	6,  // 41: yandex.cloud.storage.v1.ObjectLock.status:type_name -> yandex.cloud.storage.v1.ObjectLock.ObjectLockStatus
-	34, // 42: yandex.cloud.storage.v1.ObjectLock.default_retention:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention
-	35, // 43: yandex.cloud.storage.v1.Encryption.rules:type_name -> yandex.cloud.storage.v1.Encryption.EncryptionRule
+	35, // 42: yandex.cloud.storage.v1.ObjectLock.default_retention:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention
+	36, // 43: yandex.cloud.storage.v1.Encryption.rules:type_name -> yandex.cloud.storage.v1.Encryption.EncryptionRule
 	1,  // 44: yandex.cloud.storage.v1.ACL.Grant.permission:type_name -> yandex.cloud.storage.v1.ACL.Grant.Permission
 	2,  // 45: yandex.cloud.storage.v1.ACL.Grant.grant_type:type_name -> yandex.cloud.storage.v1.ACL.Grant.GrantType
 	4,  // 46: yandex.cloud.storage.v1.WebsiteSettings.Scheme.protocol:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Protocol
 	4,  // 47: yandex.cloud.storage.v1.WebsiteSettings.Redirect.protocol:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Protocol
 	25, // 48: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule.condition:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Condition
 	26, // 49: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule.redirect:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Redirect
-	39, // 50: yandex.cloud.storage.v1.LifecycleRule.AfterDays.days_after_expiration:type_name -> google.protobuf.Int64Value
-	39, // 51: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.noncurrent_days:type_name -> google.protobuf.Int64Value
-	39, // 52: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.noncurrent_days:type_name -> google.protobuf.Int64Value
-	37, // 53: yandex.cloud.storage.v1.LifecycleRule.Transition.date:type_name -> google.protobuf.Timestamp
-	39, // 54: yandex.cloud.storage.v1.LifecycleRule.Transition.days:type_name -> google.protobuf.Int64Value
-	37, // 55: yandex.cloud.storage.v1.LifecycleRule.Expiration.date:type_name -> google.protobuf.Timestamp
-	39, // 56: yandex.cloud.storage.v1.LifecycleRule.Expiration.days:type_name -> google.protobuf.Int64Value
-	38, // 57: yandex.cloud.storage.v1.LifecycleRule.Expiration.expired_object_delete_marker:type_name -> google.protobuf.BoolValue
-	39, // 58: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_greater_than:type_name -> google.protobuf.Int64Value
-	39, // 59: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_less_than:type_name -> google.protobuf.Int64Value
-	7,  // 60: yandex.cloud.storage.v1.ObjectLock.DefaultRetention.mode:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention.Mode
-	61, // [61:61] is the sub-list for method output_type
-	61, // [61:61] is the sub-list for method input_type
-	61, // [61:61] is the sub-list for extension type_name
-	61, // [61:61] is the sub-list for extension extendee
-	0,  // [0:61] is the sub-list for field type_name
+	40, // 50: yandex.cloud.storage.v1.LifecycleRule.AfterDays.days_after_expiration:type_name -> google.protobuf.Int64Value
+	40, // 51: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.noncurrent_days:type_name -> google.protobuf.Int64Value
+	40, // 52: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.noncurrent_days:type_name -> google.protobuf.Int64Value
+	38, // 53: yandex.cloud.storage.v1.LifecycleRule.Transition.date:type_name -> google.protobuf.Timestamp
+	40, // 54: yandex.cloud.storage.v1.LifecycleRule.Transition.days:type_name -> google.protobuf.Int64Value
+	38, // 55: yandex.cloud.storage.v1.LifecycleRule.Expiration.date:type_name -> google.protobuf.Timestamp
+	40, // 56: yandex.cloud.storage.v1.LifecycleRule.Expiration.days:type_name -> google.protobuf.Int64Value
+	39, // 57: yandex.cloud.storage.v1.LifecycleRule.Expiration.expired_object_delete_marker:type_name -> google.protobuf.BoolValue
+	40, // 58: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_greater_than:type_name -> google.protobuf.Int64Value
+	40, // 59: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_less_than:type_name -> google.protobuf.Int64Value
+	9,  // 60: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.tag:type_name -> yandex.cloud.storage.v1.Tag
+	34, // 61: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.and_operator:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
+	40, // 62: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_greater_than:type_name -> google.protobuf.Int64Value
+	40, // 63: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_less_than:type_name -> google.protobuf.Int64Value
+	9,  // 64: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.tag:type_name -> yandex.cloud.storage.v1.Tag
+	7,  // 65: yandex.cloud.storage.v1.ObjectLock.DefaultRetention.mode:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention.Mode
+	66, // [66:66] is the sub-list for method output_type
+	66, // [66:66] is the sub-list for method input_type
+	66, // [66:66] is the sub-list for extension type_name
+	66, // [66:66] is the sub-list for extension extendee
+	0,  // [0:66] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_storage_v1_bucket_proto_init() }
@@ -3666,7 +3785,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_init() {
 			}
 		}
 		file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObjectLock_DefaultRetention); i {
+			switch v := v.(*LifecycleRule_RuleFilter_And); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3678,6 +3797,18 @@ func file_yandex_cloud_storage_v1_bucket_proto_init() {
 			}
 		}
 		file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ObjectLock_DefaultRetention); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Encryption_EncryptionRule); i {
 			case 0:
 				return &v.state
@@ -3690,7 +3821,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_init() {
 			}
 		}
 	}
-	file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26].OneofWrappers = []interface{}{
+	file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27].OneofWrappers = []interface{}{
 		(*ObjectLock_DefaultRetention_Days)(nil),
 		(*ObjectLock_DefaultRetention_Years)(nil),
 	}
@@ -3700,7 +3831,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_storage_v1_bucket_proto_rawDesc,
 			NumEnums:      8,
-			NumMessages:   28,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

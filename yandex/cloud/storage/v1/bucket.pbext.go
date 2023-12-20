@@ -276,6 +276,30 @@ func (m *LifecycleRule_RuleFilter) SetObjectSizeLessThan(v *wrapperspb.Int64Valu
 	m.ObjectSizeLessThan = v
 }
 
+func (m *LifecycleRule_RuleFilter) SetTag(v *Tag) {
+	m.Tag = v
+}
+
+func (m *LifecycleRule_RuleFilter) SetAndOperator(v *LifecycleRule_RuleFilter_And) {
+	m.AndOperator = v
+}
+
+func (m *LifecycleRule_RuleFilter_And) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *LifecycleRule_RuleFilter_And) SetObjectSizeGreaterThan(v *wrapperspb.Int64Value) {
+	m.ObjectSizeGreaterThan = v
+}
+
+func (m *LifecycleRule_RuleFilter_And) SetObjectSizeLessThan(v *wrapperspb.Int64Value) {
+	m.ObjectSizeLessThan = v
+}
+
+func (m *LifecycleRule_RuleFilter_And) SetTag(v []*Tag) {
+	m.Tag = v
+}
+
 func (m *Counters) SetSimpleObjectSize(v int64) {
 	m.SimpleObjectSize = v
 }

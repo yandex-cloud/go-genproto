@@ -142,7 +142,7 @@ func (m *ResourceOptions) SetSecureKey(v *ResourceOptions_SecureKeyOption) {
 	m.SecureKey = v
 }
 
-func (m *ResourceOptions) SetIpAddressAcl(v *ResourceOptions_IPAddresACL) {
+func (m *ResourceOptions) SetIpAddressAcl(v *ResourceOptions_IPAddressACLOption) {
 	m.IpAddressAcl = v
 }
 
@@ -350,15 +350,15 @@ func (m *ResourceOptions_SecureKeyOption) SetType(v SecureKeyURLType) {
 	m.Type = v
 }
 
-func (m *ResourceOptions_IPAddresACL) SetEnabled(v bool) {
+func (m *ResourceOptions_IPAddressACLOption) SetEnabled(v bool) {
 	m.Enabled = v
 }
 
-func (m *ResourceOptions_IPAddresACL) SetPolicyType(v PolicyType) {
+func (m *ResourceOptions_IPAddressACLOption) SetPolicyType(v PolicyType) {
 	m.PolicyType = v
 }
 
-func (m *ResourceOptions_IPAddresACL) SetExceptedValues(v *ResourceOptions_StringsListOption) {
+func (m *ResourceOptions_IPAddressACLOption) SetExceptedValues(v []string) {
 	m.ExceptedValues = v
 }
 

@@ -63,6 +63,10 @@ func (m *CreateRegistryRequest) SetPassword(v string) {
 	m.Password = v
 }
 
+func (m *CreateRegistryRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 func (m *CreateRegistryRequest_Certificate) SetCertificateData(v string) {
 	m.CertificateData = v
 }
@@ -89,6 +93,10 @@ func (m *UpdateRegistryRequest) SetDescription(v string) {
 
 func (m *UpdateRegistryRequest) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *UpdateRegistryRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
 }
 
 func (m *UpdateRegistryMetadata) SetRegistryId(v string) {

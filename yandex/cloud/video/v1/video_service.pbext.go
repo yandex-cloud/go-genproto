@@ -78,6 +78,12 @@ func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
 	}
 }
 
+func (m *CreateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams) {
+	m.AccessRights = &CreateVideoRequest_AuthSystemAccess{
+		AuthSystemAccess: v,
+	}
+}
+
 func (m *VideoTUSDParams) SetFileSize(v int64) {
 	m.FileSize = v
 }
@@ -115,6 +121,12 @@ func (m *UpdateVideoRequest) SetThumbnailId(v string) {
 func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
 	m.AccessRights = &UpdateVideoRequest_PublicAccess{
 		PublicAccess: v,
+	}
+}
+
+func (m *UpdateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams) {
+	m.AccessRights = &UpdateVideoRequest_AuthSystemAccess{
+		AuthSystemAccess: v,
 	}
 }
 

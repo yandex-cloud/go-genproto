@@ -29,6 +29,8 @@ const (
 	CommunityService_ListAccessBindings_FullMethodName   = "/yandex.cloud.datasphere.v2.CommunityService/ListAccessBindings"
 	CommunityService_SetAccessBindings_FullMethodName    = "/yandex.cloud.datasphere.v2.CommunityService/SetAccessBindings"
 	CommunityService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.datasphere.v2.CommunityService/UpdateAccessBindings"
+	CommunityService_AddResource_FullMethodName          = "/yandex.cloud.datasphere.v2.CommunityService/AddResource"
+	CommunityService_RemoveResource_FullMethodName       = "/yandex.cloud.datasphere.v2.CommunityService/RemoveResource"
 )
 
 // CommunityServiceClient is the client API for CommunityService service.
@@ -51,6 +53,10 @@ type CommunityServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for specified community.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Adds shared resource to community
+	AddResource(ctx context.Context, in *AddCommunityResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes shared resource from community
+	RemoveResource(ctx context.Context, in *RemoveCommunityResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type communityServiceClient struct {
@@ -133,6 +139,24 @@ func (c *communityServiceClient) UpdateAccessBindings(ctx context.Context, in *a
 	return out, nil
 }
 
+func (c *communityServiceClient) AddResource(ctx context.Context, in *AddCommunityResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, CommunityService_AddResource_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *communityServiceClient) RemoveResource(ctx context.Context, in *RemoveCommunityResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, CommunityService_RemoveResource_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CommunityServiceServer is the server API for CommunityService service.
 // All implementations should embed UnimplementedCommunityServiceServer
 // for forward compatibility
@@ -153,6 +177,10 @@ type CommunityServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for specified community.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Adds shared resource to community
+	AddResource(context.Context, *AddCommunityResourceRequest) (*operation.Operation, error)
+	// Removes shared resource from community
+	RemoveResource(context.Context, *RemoveCommunityResourceRequest) (*operation.Operation, error)
 }
 
 // UnimplementedCommunityServiceServer should be embedded to have forward compatible implementations.
@@ -182,6 +210,12 @@ func (UnimplementedCommunityServiceServer) SetAccessBindings(context.Context, *a
 }
 func (UnimplementedCommunityServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedCommunityServiceServer) AddResource(context.Context, *AddCommunityResourceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResource not implemented")
+}
+func (UnimplementedCommunityServiceServer) RemoveResource(context.Context, *RemoveCommunityResourceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveResource not implemented")
 }
 
 // UnsafeCommunityServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -339,6 +373,42 @@ func _CommunityService_UpdateAccessBindings_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CommunityService_AddResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCommunityResourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommunityServiceServer).AddResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommunityService_AddResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommunityServiceServer).AddResource(ctx, req.(*AddCommunityResourceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommunityService_RemoveResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveCommunityResourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommunityServiceServer).RemoveResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommunityService_RemoveResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommunityServiceServer).RemoveResource(ctx, req.(*RemoveCommunityResourceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CommunityService_ServiceDesc is the grpc.ServiceDesc for CommunityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -377,6 +447,14 @@ var CommunityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _CommunityService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "AddResource",
+			Handler:    _CommunityService_AddResource_Handler,
+		},
+		{
+			MethodName: "RemoveResource",
+			Handler:    _CommunityService_RemoveResource_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

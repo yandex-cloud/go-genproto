@@ -260,3 +260,27 @@ func (m *SetProjectAccessBindingsMetadata) SetProjectId(v string) {
 func (m *UpdateProjectAccessBindingsMetadata) SetProjectId(v string) {
 	m.ProjectId = v
 }
+
+func (m *AddResourceToProjectRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *AddResourceToProjectRequest) SetResourceType(v ResourceType) {
+	m.ResourceType = v
+}
+
+func (m *AddResourceToProjectRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *RemoveResourceFromProjectRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *RemoveResourceFromProjectRequest) SetResourceType(v ResourceType) {
+	m.ResourceType = v
+}
+
+func (m *RemoveResourceFromProjectRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
