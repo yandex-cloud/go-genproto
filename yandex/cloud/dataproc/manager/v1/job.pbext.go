@@ -243,3 +243,39 @@ func (m *HiveJob) SetQueryList(v *QueryList) {
 		QueryList: v,
 	}
 }
+
+func (m *SupportJob) SetId(v string) {
+	m.Id = v
+}
+
+func (m *SupportJob) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *SupportJob) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *SupportJob) SetStartedAt(v *timestamppb.Timestamp) {
+	m.StartedAt = v
+}
+
+func (m *SupportJob) SetFinishedAt(v *timestamppb.Timestamp) {
+	m.FinishedAt = v
+}
+
+func (m *SupportJob) SetStatus(v SupportJob_Status) {
+	m.Status = v
+}
+
+func (m *SupportJob) SetCmd(v string) {
+	m.Cmd = v
+}
+
+func (m *SupportJob) SetTimeout(v int64) {
+	m.Timeout = v
+}
+
+func (m *SupportJob) SetCreatedBy(v string) {
+	m.CreatedBy = v
+}

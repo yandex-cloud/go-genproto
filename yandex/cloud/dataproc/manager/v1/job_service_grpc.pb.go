@@ -19,8 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	JobService_ListActive_FullMethodName   = "/yandex.cloud.dataproc.manager.v1.JobService/ListActive"
-	JobService_UpdateStatus_FullMethodName = "/yandex.cloud.dataproc.manager.v1.JobService/UpdateStatus"
+	JobService_ListActive_FullMethodName          = "/yandex.cloud.dataproc.manager.v1.JobService/ListActive"
+	JobService_UpdateStatus_FullMethodName        = "/yandex.cloud.dataproc.manager.v1.JobService/UpdateStatus"
+	JobService_ListSupportActive_FullMethodName   = "/yandex.cloud.dataproc.manager.v1.JobService/ListSupportActive"
+	JobService_UpdateSupportStatus_FullMethodName = "/yandex.cloud.dataproc.manager.v1.JobService/UpdateSupportStatus"
+	JobService_SaveSupportLog_FullMethodName      = "/yandex.cloud.dataproc.manager.v1.JobService/SaveSupportLog"
 )
 
 // JobServiceClient is the client API for JobService service.
@@ -31,6 +34,12 @@ type JobServiceClient interface {
 	ListActive(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListJobsResponse, error)
 	// Currently used to update Job status.
 	UpdateStatus(ctx context.Context, in *UpdateJobStatusRequest, opts ...grpc.CallOption) (*UpdateJobStatusResponse, error)
+	// Retrieves a list of support jobs for Data Proc cluster.
+	ListSupportActive(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListSupportJobsResponse, error)
+	// Currently used to update support job status.
+	UpdateSupportStatus(ctx context.Context, in *UpdateSupportJobStatusRequest, opts ...grpc.CallOption) (*UpdateJobStatusResponse, error)
+	// Save support job output.
+	SaveSupportLog(ctx context.Context, in *SaveSupportJobLogRequest, opts ...grpc.CallOption) (*SaveSupportJobLogResponse, error)
 }
 
 type jobServiceClient struct {
@@ -59,6 +68,33 @@ func (c *jobServiceClient) UpdateStatus(ctx context.Context, in *UpdateJobStatus
 	return out, nil
 }
 
+func (c *jobServiceClient) ListSupportActive(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListSupportJobsResponse, error) {
+	out := new(ListSupportJobsResponse)
+	err := c.cc.Invoke(ctx, JobService_ListSupportActive_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobServiceClient) UpdateSupportStatus(ctx context.Context, in *UpdateSupportJobStatusRequest, opts ...grpc.CallOption) (*UpdateJobStatusResponse, error) {
+	out := new(UpdateJobStatusResponse)
+	err := c.cc.Invoke(ctx, JobService_UpdateSupportStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobServiceClient) SaveSupportLog(ctx context.Context, in *SaveSupportJobLogRequest, opts ...grpc.CallOption) (*SaveSupportJobLogResponse, error) {
+	out := new(SaveSupportJobLogResponse)
+	err := c.cc.Invoke(ctx, JobService_SaveSupportLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // JobServiceServer is the server API for JobService service.
 // All implementations should embed UnimplementedJobServiceServer
 // for forward compatibility
@@ -67,6 +103,12 @@ type JobServiceServer interface {
 	ListActive(context.Context, *ListJobsRequest) (*ListJobsResponse, error)
 	// Currently used to update Job status.
 	UpdateStatus(context.Context, *UpdateJobStatusRequest) (*UpdateJobStatusResponse, error)
+	// Retrieves a list of support jobs for Data Proc cluster.
+	ListSupportActive(context.Context, *ListJobsRequest) (*ListSupportJobsResponse, error)
+	// Currently used to update support job status.
+	UpdateSupportStatus(context.Context, *UpdateSupportJobStatusRequest) (*UpdateJobStatusResponse, error)
+	// Save support job output.
+	SaveSupportLog(context.Context, *SaveSupportJobLogRequest) (*SaveSupportJobLogResponse, error)
 }
 
 // UnimplementedJobServiceServer should be embedded to have forward compatible implementations.
@@ -78,6 +120,15 @@ func (UnimplementedJobServiceServer) ListActive(context.Context, *ListJobsReques
 }
 func (UnimplementedJobServiceServer) UpdateStatus(context.Context, *UpdateJobStatusRequest) (*UpdateJobStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
+}
+func (UnimplementedJobServiceServer) ListSupportActive(context.Context, *ListJobsRequest) (*ListSupportJobsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSupportActive not implemented")
+}
+func (UnimplementedJobServiceServer) UpdateSupportStatus(context.Context, *UpdateSupportJobStatusRequest) (*UpdateJobStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSupportStatus not implemented")
+}
+func (UnimplementedJobServiceServer) SaveSupportLog(context.Context, *SaveSupportJobLogRequest) (*SaveSupportJobLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveSupportLog not implemented")
 }
 
 // UnsafeJobServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -127,6 +178,60 @@ func _JobService_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _JobService_ListSupportActive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListJobsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServiceServer).ListSupportActive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobService_ListSupportActive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServiceServer).ListSupportActive(ctx, req.(*ListJobsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobService_UpdateSupportStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSupportJobStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServiceServer).UpdateSupportStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobService_UpdateSupportStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServiceServer).UpdateSupportStatus(ctx, req.(*UpdateSupportJobStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobService_SaveSupportLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveSupportJobLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServiceServer).SaveSupportLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobService_SaveSupportLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServiceServer).SaveSupportLog(ctx, req.(*SaveSupportJobLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // JobService_ServiceDesc is the grpc.ServiceDesc for JobService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -141,6 +246,18 @@ var JobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateStatus",
 			Handler:    _JobService_UpdateStatus_Handler,
+		},
+		{
+			MethodName: "ListSupportActive",
+			Handler:    _JobService_ListSupportActive_Handler,
+		},
+		{
+			MethodName: "UpdateSupportStatus",
+			Handler:    _JobService_UpdateSupportStatus_Handler,
+		},
+		{
+			MethodName: "SaveSupportLog",
+			Handler:    _JobService_SaveSupportLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

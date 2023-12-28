@@ -41,3 +41,35 @@ func (m *UpdateJobStatusRequest) SetStatus(v Job_Status) {
 func (m *UpdateJobStatusRequest) SetApplicationInfo(v *ApplicationInfo) {
 	m.ApplicationInfo = v
 }
+
+func (m *ListSupportJobsResponse) SetJobs(v []*SupportJob) {
+	m.Jobs = v
+}
+
+func (m *ListSupportJobsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *UpdateSupportJobStatusRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateSupportJobStatusRequest) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *UpdateSupportJobStatusRequest) SetStatus(v SupportJob_Status) {
+	m.Status = v
+}
+
+func (m *SaveSupportJobLogRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *SaveSupportJobLogRequest) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *SaveSupportJobLogRequest) SetOutput(v string) {
+	m.Output = v
+}
