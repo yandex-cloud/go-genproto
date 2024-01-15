@@ -88,7 +88,7 @@ type ListVideoRequest struct {
 	// Value in quotes: `'` or `"`
 	// Example: "key1='value' AND key2='value'"
 	// Supported operators: ["AND"].
-	// Supported fields: ["title", "status"]
+	// Supported fields: ["title", "status", "visibility_status"]
 	// Both snake_case and camelCase are supported for fields.
 	Filter string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 }

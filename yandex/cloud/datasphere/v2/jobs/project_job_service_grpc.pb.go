@@ -24,13 +24,14 @@ const (
 	ProjectJobService_Create_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Create"
 	ProjectJobService_Execute_FullMethodName          = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Execute"
 	ProjectJobService_Cancel_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Cancel"
-	ProjectJobService_Finalize_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Finalize"
 	ProjectJobService_ReadStdLogs_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadStdLogs"
 	ProjectJobService_ReadLogs_FullMethodName         = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadLogs"
 	ProjectJobService_DownloadJobFiles_FullMethodName = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DownloadJobFiles"
 	ProjectJobService_List_FullMethodName             = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/List"
 	ProjectJobService_Get_FullMethodName              = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Get"
 	ProjectJobService_Delete_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Delete"
+	ProjectJobService_DeleteData_FullMethodName       = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DeleteData"
+	ProjectJobService_DeleteAllData_FullMethodName    = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DeleteAllData"
 )
 
 // ProjectJobServiceClient is the client API for ProjectJobService service.
@@ -43,8 +44,6 @@ type ProjectJobServiceClient interface {
 	Execute(ctx context.Context, in *ExecuteProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Cancels running job.
 	Cancel(ctx context.Context, in *CancelProjectJobRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Triggers cleanup after downloading job results.
-	Finalize(ctx context.Context, in *FinalizeProjectJobRequest, opts ...grpc.CallOption) (*FinalizeProjectJobResponse, error)
 	// Deprecated: Do not use.
 	// Returns stream of job logs.
 	ReadStdLogs(ctx context.Context, in *ReadProjectJobStdLogsRequest, opts ...grpc.CallOption) (ProjectJobService_ReadStdLogsClient, error)
@@ -58,6 +57,10 @@ type ProjectJobServiceClient interface {
 	Get(ctx context.Context, in *GetProjectJobRequest, opts ...grpc.CallOption) (*Job, error)
 	// Deletes specified job.
 	Delete(ctx context.Context, in *DeleteProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete job data.
+	DeleteData(ctx context.Context, in *DeleteProjectJobDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete all jobs data.
+	DeleteAllData(ctx context.Context, in *DeleteAllDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type projectJobServiceClient struct {
@@ -89,15 +92,6 @@ func (c *projectJobServiceClient) Execute(ctx context.Context, in *ExecuteProjec
 func (c *projectJobServiceClient) Cancel(ctx context.Context, in *CancelProjectJobRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, ProjectJobService_Cancel_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectJobServiceClient) Finalize(ctx context.Context, in *FinalizeProjectJobRequest, opts ...grpc.CallOption) (*FinalizeProjectJobResponse, error) {
-	out := new(FinalizeProjectJobResponse)
-	err := c.cc.Invoke(ctx, ProjectJobService_Finalize_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -205,6 +199,24 @@ func (c *projectJobServiceClient) Delete(ctx context.Context, in *DeleteProjectJ
 	return out, nil
 }
 
+func (c *projectJobServiceClient) DeleteData(ctx context.Context, in *DeleteProjectJobDataRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectJobService_DeleteData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectJobServiceClient) DeleteAllData(ctx context.Context, in *DeleteAllDataRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectJobService_DeleteAllData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectJobServiceServer is the server API for ProjectJobService service.
 // All implementations should embed UnimplementedProjectJobServiceServer
 // for forward compatibility
@@ -215,8 +227,6 @@ type ProjectJobServiceServer interface {
 	Execute(context.Context, *ExecuteProjectJobRequest) (*operation.Operation, error)
 	// Cancels running job.
 	Cancel(context.Context, *CancelProjectJobRequest) (*emptypb.Empty, error)
-	// Triggers cleanup after downloading job results.
-	Finalize(context.Context, *FinalizeProjectJobRequest) (*FinalizeProjectJobResponse, error)
 	// Deprecated: Do not use.
 	// Returns stream of job logs.
 	ReadStdLogs(*ReadProjectJobStdLogsRequest, ProjectJobService_ReadStdLogsServer) error
@@ -230,6 +240,10 @@ type ProjectJobServiceServer interface {
 	Get(context.Context, *GetProjectJobRequest) (*Job, error)
 	// Deletes specified job.
 	Delete(context.Context, *DeleteProjectJobRequest) (*operation.Operation, error)
+	// Delete job data.
+	DeleteData(context.Context, *DeleteProjectJobDataRequest) (*operation.Operation, error)
+	// Delete all jobs data.
+	DeleteAllData(context.Context, *DeleteAllDataRequest) (*operation.Operation, error)
 }
 
 // UnimplementedProjectJobServiceServer should be embedded to have forward compatible implementations.
@@ -244,9 +258,6 @@ func (UnimplementedProjectJobServiceServer) Execute(context.Context, *ExecutePro
 }
 func (UnimplementedProjectJobServiceServer) Cancel(context.Context, *CancelProjectJobRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Cancel not implemented")
-}
-func (UnimplementedProjectJobServiceServer) Finalize(context.Context, *FinalizeProjectJobRequest) (*FinalizeProjectJobResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Finalize not implemented")
 }
 func (UnimplementedProjectJobServiceServer) ReadStdLogs(*ReadProjectJobStdLogsRequest, ProjectJobService_ReadStdLogsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadStdLogs not implemented")
@@ -265,6 +276,12 @@ func (UnimplementedProjectJobServiceServer) Get(context.Context, *GetProjectJobR
 }
 func (UnimplementedProjectJobServiceServer) Delete(context.Context, *DeleteProjectJobRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedProjectJobServiceServer) DeleteData(context.Context, *DeleteProjectJobDataRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteData not implemented")
+}
+func (UnimplementedProjectJobServiceServer) DeleteAllData(context.Context, *DeleteAllDataRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAllData not implemented")
 }
 
 // UnsafeProjectJobServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -328,24 +345,6 @@ func _ProjectJobService_Cancel_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProjectJobServiceServer).Cancel(ctx, req.(*CancelProjectJobRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjectJobService_Finalize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FinalizeProjectJobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectJobServiceServer).Finalize(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectJobService_Finalize_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectJobServiceServer).Finalize(ctx, req.(*FinalizeProjectJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -464,6 +463,42 @@ func _ProjectJobService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectJobService_DeleteData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProjectJobDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectJobServiceServer).DeleteData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectJobService_DeleteData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectJobServiceServer).DeleteData(ctx, req.(*DeleteProjectJobDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectJobService_DeleteAllData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAllDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectJobServiceServer).DeleteAllData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectJobService_DeleteAllData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectJobServiceServer).DeleteAllData(ctx, req.(*DeleteAllDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjectJobService_ServiceDesc is the grpc.ServiceDesc for ProjectJobService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -484,10 +519,6 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProjectJobService_Cancel_Handler,
 		},
 		{
-			MethodName: "Finalize",
-			Handler:    _ProjectJobService_Finalize_Handler,
-		},
-		{
 			MethodName: "DownloadJobFiles",
 			Handler:    _ProjectJobService_DownloadJobFiles_Handler,
 		},
@@ -502,6 +533,14 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ProjectJobService_Delete_Handler,
+		},
+		{
+			MethodName: "DeleteData",
+			Handler:    _ProjectJobService_DeleteData_Handler,
+		},
+		{
+			MethodName: "DeleteAllData",
+			Handler:    _ProjectJobService_DeleteAllData_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

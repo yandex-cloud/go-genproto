@@ -35,6 +35,10 @@ func (m *CreateProjectJobMetadata) SetProjectId(v string) {
 	m.ProjectId = v
 }
 
+func (m *CreateProjectJobMetadata) SetJobId(v string) {
+	m.JobId = v
+}
+
 func (m *CreateProjectJobResponse) SetJobId(v string) {
 	m.JobId = v
 }
@@ -65,14 +69,6 @@ func (m *CancelProjectJobRequest) SetJobId(v string) {
 
 func (m *CancelProjectJobRequest) SetReason(v string) {
 	m.Reason = v
-}
-
-func (m *FinalizeProjectJobRequest) SetJobId(v string) {
-	m.JobId = v
-}
-
-func (m *FinalizeProjectJobResponse) SetJobId(v string) {
-	m.JobId = v
 }
 
 func (m *ReadProjectJobStdLogsRequest) SetJobId(v string) {
@@ -149,6 +145,22 @@ func (m *DeleteProjectJobRequest) SetJobId(v string) {
 
 func (m *DeleteProjectJobMetadata) SetJobId(v string) {
 	m.JobId = v
+}
+
+func (m *DeleteProjectJobDataRequest) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *DeleteProjectJobDataMetadata) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *DeleteAllDataRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *DeleteAllDataMetadata) SetProjectId(v string) {
+	m.ProjectId = v
 }
 
 func (m *StdLog) SetContent(v []byte) {

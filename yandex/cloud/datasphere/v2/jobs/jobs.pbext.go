@@ -38,8 +38,20 @@ func (m *JobParameters) SetCloudInstanceType(v *CloudInstanceType) {
 	m.CloudInstanceType = v
 }
 
+func (m *JobParameters) SetExtendedWorkingStorage(v *ExtendedWorkingStorage) {
+	m.ExtendedWorkingStorage = v
+}
+
 func (m *CloudInstanceType) SetName(v string) {
 	m.Name = v
+}
+
+func (m *ExtendedWorkingStorage) SetType(v ExtendedWorkingStorage_StorageType) {
+	m.Type = v
+}
+
+func (m *ExtendedWorkingStorage) SetSizeGb(v int64) {
+	m.SizeGb = v
 }
 
 func (m *File) SetDesc(v *FileDesc) {
@@ -180,6 +192,18 @@ func (m *Job) SetDataCleared(v bool) {
 
 func (m *Job) SetOutputFiles(v []*File) {
 	m.OutputFiles = v
+}
+
+func (m *Job) SetLogFiles(v []*File) {
+	m.LogFiles = v
+}
+
+func (m *Job) SetDiagnosticFiles(v []*File) {
+	m.DiagnosticFiles = v
+}
+
+func (m *Job) SetDataSizeBytes(v int64) {
+	m.DataSizeBytes = v
 }
 
 func (m *JobResult) SetReturnCode(v int64) {
