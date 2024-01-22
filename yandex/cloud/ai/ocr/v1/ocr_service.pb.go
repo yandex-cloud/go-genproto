@@ -42,13 +42,7 @@ type RecognizeTextRequest struct {
 	// List of the languages to recognize text.
 	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, `ru`).
 	LanguageCodes []string `protobuf:"bytes,3,rep,name=language_codes,json=languageCodes,proto3" json:"language_codes,omitempty"`
-	// Model to use for text detection. The maximum string length is 50 characters. Possible values:
-	// * `page` (default): this model is suitable for detecting multiple text entries in an image.
-	// * `passport`: passport, the main double-page spread.
-	// * `driver-license-front`: driver's license, the front side.
-	// * `driver-license-back`: driver's license, the reverse side.
-	// * `vehicle-registration-front`: front side of the vehicle registration certificate.
-	// * `vehicle-registration-back`: back side of the vehicle registration certificate.
+	// Model to use for text detection.
 	Model string `protobuf:"bytes,4,opt,name=model,proto3" json:"model,omitempty"`
 }
 

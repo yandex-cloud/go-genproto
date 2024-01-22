@@ -512,6 +512,10 @@ func (m *RestoreClusterRequest) SetSegmentInHost(v int64) {
 	m.SegmentInHost = v
 }
 
+func (m *RestoreClusterRequest) SetRestoreOnly(v []string) {
+	m.RestoreOnly = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
