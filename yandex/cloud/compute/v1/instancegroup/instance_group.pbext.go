@@ -365,6 +365,10 @@ func (m *InstanceTemplate) SetFilesystemSpecs(v []*AttachedFilesystemSpec) {
 	m.FilesystemSpecs = v
 }
 
+func (m *InstanceTemplate) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {
 	m.Mode = v
 }
@@ -747,4 +751,20 @@ func (m *LogRecord) SetMessage(v string) {
 
 func (m *AutoHealingPolicy) SetAutoHealingAction(v AutoHealingPolicy_AutoHealingAction) {
 	m.AutoHealingAction = v
+}
+
+func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {
+	m.GceHttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetAwsV1HttpEndpoint(v MetadataOption) {
+	m.AwsV1HttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetGceHttpToken(v MetadataOption) {
+	m.GceHttpToken = v
+}
+
+func (m *MetadataOptions) SetAwsV1HttpToken(v MetadataOption) {
+	m.AwsV1HttpToken = v
 }

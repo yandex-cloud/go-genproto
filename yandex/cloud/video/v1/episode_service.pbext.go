@@ -189,15 +189,15 @@ func (m *PerformEpisodeActionRequest) SetEpisodeId(v string) {
 	m.EpisodeId = v
 }
 
-func (m *PerformEpisodeActionRequest) SetBan(v *BanAction) {
-	m.Action = &PerformEpisodeActionRequest_Ban{
-		Ban: v,
+func (m *PerformEpisodeActionRequest) SetPublish(v *PublishEpisodeAction) {
+	m.Action = &PerformEpisodeActionRequest_Publish{
+		Publish: v,
 	}
 }
 
-func (m *PerformEpisodeActionRequest) SetUnban(v *UnbanAction) {
-	m.Action = &PerformEpisodeActionRequest_Unban{
-		Unban: v,
+func (m *PerformEpisodeActionRequest) SetUnpublish(v *UnpublishEpisodeAction) {
+	m.Action = &PerformEpisodeActionRequest_Unpublish{
+		Unpublish: v,
 	}
 }
 

@@ -48,8 +48,8 @@ func (m *Episode) SetDvrSeconds(v int64) {
 	m.DvrSeconds = v
 }
 
-func (m *Episode) SetStatus(v Episode_EpisodeStatus) {
-	m.Status = v
+func (m *Episode) SetVisibilityStatus(v Episode_VisibilityStatus) {
+	m.VisibilityStatus = v
 }
 
 func (m *Episode) SetPublicAccess(v *EpisodePublicAccessRights) {

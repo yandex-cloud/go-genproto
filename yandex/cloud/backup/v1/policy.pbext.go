@@ -154,6 +154,10 @@ func (m *PolicySettings_Retention) SetAfterBackup(v bool) {
 	m.AfterBackup = v
 }
 
+func (m *PolicySettings_Retention) SetBeforeBackup(v bool) {
+	m.BeforeBackup = v
+}
+
 type PolicySettings_Retention_RetentionRule_Condition = isPolicySettings_Retention_RetentionRule_Condition
 
 func (m *PolicySettings_Retention_RetentionRule) SetCondition(v PolicySettings_Retention_RetentionRule_Condition) {
