@@ -48,16 +48,16 @@ func (m *ClickhouseConnectionOptions) SetOnPremise(v *OnPremiseClickhouse) {
 	}
 }
 
-func (m *ClickhouseConnectionOptions) SetDatabase(v string) {
-	m.Database = v
-}
-
 func (m *ClickhouseConnectionOptions) SetUser(v string) {
 	m.User = v
 }
 
 func (m *ClickhouseConnectionOptions) SetPassword(v *Secret) {
 	m.Password = v
+}
+
+func (m *ClickhouseConnectionOptions) SetDatabase(v string) {
+	m.Database = v
 }
 
 type ClickhouseConnection_Connection = isClickhouseConnection_Connection
@@ -126,20 +126,20 @@ func (m *ClickhouseSource) SetConnection(v *ClickhouseConnection) {
 	m.Connection = v
 }
 
-func (m *ClickhouseSource) SetSubnetId(v string) {
-	m.SubnetId = v
-}
-
-func (m *ClickhouseSource) SetSecurityGroups(v []string) {
-	m.SecurityGroups = v
-}
-
 func (m *ClickhouseSource) SetIncludeTables(v []string) {
 	m.IncludeTables = v
 }
 
 func (m *ClickhouseSource) SetExcludeTables(v []string) {
 	m.ExcludeTables = v
+}
+
+func (m *ClickhouseSource) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *ClickhouseSource) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
 }
 
 func (m *ClickhouseTarget) SetConnection(v *ClickhouseConnection) {
@@ -150,22 +150,22 @@ func (m *ClickhouseTarget) SetSubnetId(v string) {
 	m.SubnetId = v
 }
 
-func (m *ClickhouseTarget) SetSecurityGroups(v []string) {
-	m.SecurityGroups = v
-}
-
-func (m *ClickhouseTarget) SetClickhouseClusterName(v string) {
-	m.ClickhouseClusterName = v
-}
-
 func (m *ClickhouseTarget) SetAltNames(v []*AltName) {
 	m.AltNames = v
+}
+
+func (m *ClickhouseTarget) SetCleanupPolicy(v ClickhouseCleanupPolicy) {
+	m.CleanupPolicy = v
 }
 
 func (m *ClickhouseTarget) SetSharding(v *ClickhouseSharding) {
 	m.Sharding = v
 }
 
-func (m *ClickhouseTarget) SetCleanupPolicy(v ClickhouseCleanupPolicy) {
-	m.CleanupPolicy = v
+func (m *ClickhouseTarget) SetClickhouseClusterName(v string) {
+	m.ClickhouseClusterName = v
+}
+
+func (m *ClickhouseTarget) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
 }

@@ -2,20 +2,20 @@
 
 package endpoint
 
-func (m *OnPremiseMysql) SetHosts(v []string) {
-	m.Hosts = v
-}
-
 func (m *OnPremiseMysql) SetPort(v int64) {
 	m.Port = v
 }
 
-func (m *OnPremiseMysql) SetTlsMode(v *TLSMode) {
-	m.TlsMode = v
-}
-
 func (m *OnPremiseMysql) SetSubnetId(v string) {
 	m.SubnetId = v
+}
+
+func (m *OnPremiseMysql) SetHosts(v []string) {
+	m.Hosts = v
+}
+
+func (m *OnPremiseMysql) SetTlsMode(v *TLSMode) {
+	m.TlsMode = v
 }
 
 type MysqlConnection_Connection = isMysqlConnection_Connection
@@ -56,16 +56,8 @@ func (m *MysqlSource) SetConnection(v *MysqlConnection) {
 	m.Connection = v
 }
 
-func (m *MysqlSource) SetSecurityGroups(v []string) {
-	m.SecurityGroups = v
-}
-
 func (m *MysqlSource) SetDatabase(v string) {
 	m.Database = v
-}
-
-func (m *MysqlSource) SetServiceDatabase(v string) {
-	m.ServiceDatabase = v
 }
 
 func (m *MysqlSource) SetUser(v string) {
@@ -76,14 +68,6 @@ func (m *MysqlSource) SetPassword(v *Secret) {
 	m.Password = v
 }
 
-func (m *MysqlSource) SetIncludeTablesRegex(v []string) {
-	m.IncludeTablesRegex = v
-}
-
-func (m *MysqlSource) SetExcludeTablesRegex(v []string) {
-	m.ExcludeTablesRegex = v
-}
-
 func (m *MysqlSource) SetTimezone(v string) {
 	m.Timezone = v
 }
@@ -92,12 +76,24 @@ func (m *MysqlSource) SetObjectTransferSettings(v *MysqlObjectTransferSettings) 
 	m.ObjectTransferSettings = v
 }
 
-func (m *MysqlTarget) SetConnection(v *MysqlConnection) {
-	m.Connection = v
+func (m *MysqlSource) SetIncludeTablesRegex(v []string) {
+	m.IncludeTablesRegex = v
 }
 
-func (m *MysqlTarget) SetSecurityGroups(v []string) {
+func (m *MysqlSource) SetExcludeTablesRegex(v []string) {
+	m.ExcludeTablesRegex = v
+}
+
+func (m *MysqlSource) SetSecurityGroups(v []string) {
 	m.SecurityGroups = v
+}
+
+func (m *MysqlSource) SetServiceDatabase(v string) {
+	m.ServiceDatabase = v
+}
+
+func (m *MysqlTarget) SetConnection(v *MysqlConnection) {
+	m.Connection = v
 }
 
 func (m *MysqlTarget) SetDatabase(v string) {
@@ -130,4 +126,8 @@ func (m *MysqlTarget) SetCleanupPolicy(v CleanupPolicy) {
 
 func (m *MysqlTarget) SetServiceDatabase(v string) {
 	m.ServiceDatabase = v
+}
+
+func (m *MysqlTarget) SetSecurityGroups(v []string) {
+	m.SecurityGroups = v
 }

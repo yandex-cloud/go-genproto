@@ -435,6 +435,46 @@ func (m *DeleteClusterHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
 }
 
+func (m *UpdateClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsRequest) SetUpdateHostSpecs(v []*UpdateHostSpec) {
+	m.UpdateHostSpecs = v
+}
+
+func (m *UpdateClusterHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *UpdateHostSpec) SetHostName(v string) {
+	m.HostName = v
+}
+
+func (m *UpdateHostSpec) SetHidden(v *wrapperspb.BoolValue) {
+	m.Hidden = v
+}
+
+func (m *UpdateHostSpec) SetSecondaryDelaySecs(v *wrapperspb.Int64Value) {
+	m.SecondaryDelaySecs = v
+}
+
+func (m *UpdateHostSpec) SetPriority(v *wrapperspb.DoubleValue) {
+	m.Priority = v
+}
+
+func (m *UpdateHostSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
+func (m *UpdateHostSpec) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
 func (m *EnableClusterShardingRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

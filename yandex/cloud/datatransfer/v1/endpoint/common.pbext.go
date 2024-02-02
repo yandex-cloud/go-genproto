@@ -84,10 +84,6 @@ func (m *DataTransformationOptions) SetCloudFunction(v string) {
 	m.CloudFunction = v
 }
 
-func (m *DataTransformationOptions) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
-}
-
 func (m *DataTransformationOptions) SetNumberOfRetries(v int64) {
 	m.NumberOfRetries = v
 }
@@ -102,6 +98,10 @@ func (m *DataTransformationOptions) SetBufferFlushInterval(v string) {
 
 func (m *DataTransformationOptions) SetInvocationTimeout(v string) {
 	m.InvocationTimeout = v
+}
+
+func (m *DataTransformationOptions) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }
 
 func (m *FieldList) SetFields(v []*ColSchema) {

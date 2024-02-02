@@ -54,6 +54,12 @@ func (m *EndpointSettings) SetYdbSource(v *endpoint.YdbSource) {
 	}
 }
 
+func (m *EndpointSettings) SetYdsSource(v *endpoint.YDSSource) {
+	m.Settings = &EndpointSettings_YdsSource{
+		YdsSource: v,
+	}
+}
+
 func (m *EndpointSettings) SetKafkaSource(v *endpoint.KafkaSource) {
 	m.Settings = &EndpointSettings_KafkaSource{
 		KafkaSource: v,
@@ -105,5 +111,11 @@ func (m *EndpointSettings) SetKafkaTarget(v *endpoint.KafkaTarget) {
 func (m *EndpointSettings) SetMongoTarget(v *endpoint.MongoTarget) {
 	m.Settings = &EndpointSettings_MongoTarget{
 		MongoTarget: v,
+	}
+}
+
+func (m *EndpointSettings) SetYdsTarget(v *endpoint.YDSTarget) {
+	m.Settings = &EndpointSettings_YdsTarget{
+		YdsTarget: v,
 	}
 }

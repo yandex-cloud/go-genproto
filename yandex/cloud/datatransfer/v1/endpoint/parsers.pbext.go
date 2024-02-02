@@ -43,3 +43,7 @@ func (m *GenericParserCommon) SetNullKeysAllowed(v bool) {
 func (m *GenericParserCommon) SetAddRestColumn(v bool) {
 	m.AddRestColumn = v
 }
+
+func (m *GenericParserCommon) SetUnescapeStringValues(v bool) {
+	m.UnescapeStringValues = v
+}
