@@ -161,6 +161,26 @@ func (m *AddFederatedUserAccountsResponse) SetUserAccounts(v []*v1.UserAccount) 
 	m.UserAccounts = v
 }
 
+func (m *DeleteFederatedUserAccountsRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *DeleteFederatedUserAccountsRequest) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
+
+func (m *DeleteFederatedUserAccountsMetadata) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *DeleteFederatedUserAccountsResponse) SetDeletedSubjects(v []string) {
+	m.DeletedSubjects = v
+}
+
+func (m *DeleteFederatedUserAccountsResponse) SetNonExistingSubjects(v []string) {
+	m.NonExistingSubjects = v
+}
+
 func (m *ListFederatedUserAccountsRequest) SetFederationId(v string) {
 	m.FederationId = v
 }

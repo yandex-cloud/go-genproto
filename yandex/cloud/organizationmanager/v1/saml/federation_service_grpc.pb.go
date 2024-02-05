@@ -20,14 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	FederationService_Get_FullMethodName              = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Get"
-	FederationService_List_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/List"
-	FederationService_Create_FullMethodName           = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Create"
-	FederationService_Update_FullMethodName           = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Update"
-	FederationService_Delete_FullMethodName           = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Delete"
-	FederationService_AddUserAccounts_FullMethodName  = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddUserAccounts"
-	FederationService_ListUserAccounts_FullMethodName = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListUserAccounts"
-	FederationService_ListOperations_FullMethodName   = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListOperations"
+	FederationService_Get_FullMethodName                = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Get"
+	FederationService_List_FullMethodName               = "/yandex.cloud.organizationmanager.v1.saml.FederationService/List"
+	FederationService_Create_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Create"
+	FederationService_Update_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Update"
+	FederationService_Delete_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Delete"
+	FederationService_AddUserAccounts_FullMethodName    = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddUserAccounts"
+	FederationService_DeleteUserAccounts_FullMethodName = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteUserAccounts"
+	FederationService_ListUserAccounts_FullMethodName   = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListUserAccounts"
+	FederationService_ListOperations_FullMethodName     = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListOperations"
 )
 
 // FederationServiceClient is the client API for FederationService service.
@@ -48,6 +49,8 @@ type FederationServiceClient interface {
 	Delete(ctx context.Context, in *DeleteFederationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Adds users to the specified federation.
 	AddUserAccounts(ctx context.Context, in *AddFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes users from the specified federation.
+	DeleteUserAccounts(ctx context.Context, in *DeleteFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists users for the specified federation.
 	ListUserAccounts(ctx context.Context, in *ListFederatedUserAccountsRequest, opts ...grpc.CallOption) (*ListFederatedUserAccountsResponse, error)
 	// Lists operations for the specified federation.
@@ -116,6 +119,15 @@ func (c *federationServiceClient) AddUserAccounts(ctx context.Context, in *AddFe
 	return out, nil
 }
 
+func (c *federationServiceClient) DeleteUserAccounts(ctx context.Context, in *DeleteFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FederationService_DeleteUserAccounts_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *federationServiceClient) ListUserAccounts(ctx context.Context, in *ListFederatedUserAccountsRequest, opts ...grpc.CallOption) (*ListFederatedUserAccountsResponse, error) {
 	out := new(ListFederatedUserAccountsResponse)
 	err := c.cc.Invoke(ctx, FederationService_ListUserAccounts_FullMethodName, in, out, opts...)
@@ -152,6 +164,8 @@ type FederationServiceServer interface {
 	Delete(context.Context, *DeleteFederationRequest) (*operation.Operation, error)
 	// Adds users to the specified federation.
 	AddUserAccounts(context.Context, *AddFederatedUserAccountsRequest) (*operation.Operation, error)
+	// Deletes users from the specified federation.
+	DeleteUserAccounts(context.Context, *DeleteFederatedUserAccountsRequest) (*operation.Operation, error)
 	// Lists users for the specified federation.
 	ListUserAccounts(context.Context, *ListFederatedUserAccountsRequest) (*ListFederatedUserAccountsResponse, error)
 	// Lists operations for the specified federation.
@@ -179,6 +193,9 @@ func (UnimplementedFederationServiceServer) Delete(context.Context, *DeleteFeder
 }
 func (UnimplementedFederationServiceServer) AddUserAccounts(context.Context, *AddFederatedUserAccountsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserAccounts not implemented")
+}
+func (UnimplementedFederationServiceServer) DeleteUserAccounts(context.Context, *DeleteFederatedUserAccountsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserAccounts not implemented")
 }
 func (UnimplementedFederationServiceServer) ListUserAccounts(context.Context, *ListFederatedUserAccountsRequest) (*ListFederatedUserAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserAccounts not implemented")
@@ -306,6 +323,24 @@ func _FederationService_AddUserAccounts_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FederationService_DeleteUserAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFederatedUserAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).DeleteUserAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_DeleteUserAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).DeleteUserAccounts(ctx, req.(*DeleteFederatedUserAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FederationService_ListUserAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFederatedUserAccountsRequest)
 	if err := dec(in); err != nil {
@@ -372,6 +407,10 @@ var FederationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddUserAccounts",
 			Handler:    _FederationService_AddUserAccounts_Handler,
+		},
+		{
+			MethodName: "DeleteUserAccounts",
+			Handler:    _FederationService_DeleteUserAccounts_Handler,
 		},
 		{
 			MethodName: "ListUserAccounts",

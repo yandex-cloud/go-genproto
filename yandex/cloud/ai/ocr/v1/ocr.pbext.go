@@ -46,6 +46,10 @@ func (m *Entity) SetText(v string) {
 	m.Text = v
 }
 
+func (m *Entity) SetRotate(v Angle) {
+	m.Rotate = v
+}
+
 func (m *Block) SetBoundingBox(v *Polygon) {
 	m.BoundingBox = v
 }
@@ -80,6 +84,10 @@ func (m *Line) SetWords(v []*Word) {
 
 func (m *Line) SetTextSegments(v []*TextSegments) {
 	m.TextSegments = v
+}
+
+func (m *Line) SetOrientation(v Angle) {
+	m.Orientation = v
 }
 
 func (m *Word) SetBoundingBox(v *Polygon) {
