@@ -78,6 +78,14 @@ func (m *CreateDashboardRequest) SetParametrization(v *Parametrization) {
 	m.Parametrization = v
 }
 
+func (m *CreateDashboardRequest) SetManagedBy(v string) {
+	m.ManagedBy = v
+}
+
+func (m *CreateDashboardRequest) SetManagedLink(v string) {
+	m.ManagedLink = v
+}
+
 func (m *CreateDashboardMetadata) SetDashboardId(v string) {
 	m.DashboardId = v
 }
@@ -112,6 +120,14 @@ func (m *UpdateDashboardRequest) SetParametrization(v *Parametrization) {
 
 func (m *UpdateDashboardRequest) SetEtag(v string) {
 	m.Etag = v
+}
+
+func (m *UpdateDashboardRequest) SetManagedBy(v string) {
+	m.ManagedBy = v
+}
+
+func (m *UpdateDashboardRequest) SetManagedLink(v string) {
+	m.ManagedLink = v
 }
 
 func (m *UpdateDashboardMetadata) SetDashboardId(v string) {

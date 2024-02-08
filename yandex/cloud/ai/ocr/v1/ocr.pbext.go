@@ -38,16 +38,16 @@ func (m *TextAnnotation) SetFullText(v string) {
 	m.FullText = v
 }
 
+func (m *TextAnnotation) SetRotate(v Angle) {
+	m.Rotate = v
+}
+
 func (m *Entity) SetName(v string) {
 	m.Name = v
 }
 
 func (m *Entity) SetText(v string) {
 	m.Text = v
-}
-
-func (m *Entity) SetRotate(v Angle) {
-	m.Rotate = v
 }
 
 func (m *Block) SetBoundingBox(v *Polygon) {

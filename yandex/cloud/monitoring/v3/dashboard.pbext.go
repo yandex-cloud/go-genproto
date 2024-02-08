@@ -65,3 +65,11 @@ func (m *Dashboard) SetParametrization(v *Parametrization) {
 func (m *Dashboard) SetEtag(v string) {
 	m.Etag = v
 }
+
+func (m *Dashboard) SetManagedBy(v string) {
+	m.ManagedBy = v
+}
+
+func (m *Dashboard) SetManagedLink(v string) {
+	m.ManagedLink = v
+}
