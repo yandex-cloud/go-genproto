@@ -75,6 +75,10 @@ func (m *Instance) SetNetworkInterfaces(v []*NetworkInterface) {
 	m.NetworkInterfaces = v
 }
 
+func (m *Instance) SetSerialPortSettings(v *SerialPortSettings) {
+	m.SerialPortSettings = v
+}
+
 func (m *Instance) SetGpuSettings(v *GpuSettings) {
 	m.GpuSettings = v
 }
@@ -281,4 +285,8 @@ func (m *MetadataOptions) SetGceHttpToken(v MetadataOption) {
 
 func (m *MetadataOptions) SetAwsV1HttpToken(v MetadataOption) {
 	m.AwsV1HttpToken = v
+}
+
+func (m *SerialPortSettings) SetSshAuthorization(v SerialPortSettings_SSHAuthorization) {
+	m.SshAuthorization = v
 }

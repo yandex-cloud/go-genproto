@@ -150,10 +150,6 @@ func (m *PolicySettings_Retention) SetRules(v []*PolicySettings_Retention_Retent
 	m.Rules = v
 }
 
-func (m *PolicySettings_Retention) SetAfterBackup(v bool) {
-	m.AfterBackup = v
-}
-
 func (m *PolicySettings_Retention) SetBeforeBackup(v bool) {
 	m.BeforeBackup = v
 }
