@@ -62,6 +62,10 @@ func (m *CreateStreamLineRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+func (m *CreateStreamLineRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	m.InputParams = &CreateStreamLineRequest_RtmpPush{
 		RtmpPush: v,
@@ -89,6 +93,12 @@ func (m *CreateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
 func (m *CreateStreamLineRequest) SetTcpPull(v *TCPPullParams) {
 	m.InputParams = &CreateStreamLineRequest_TcpPull{
 		TcpPull: v,
+	}
+}
+
+func (m *CreateStreamLineRequest) SetRtspPull(v *RTSPPullParams) {
+	m.InputParams = &CreateStreamLineRequest_RtspPull{
+		RtspPull: v,
 	}
 }
 
@@ -128,6 +138,10 @@ func (m *UpdateStreamLineRequest) SetTitle(v string) {
 
 func (m *UpdateStreamLineRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
+}
+
+func (m *UpdateStreamLineRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {

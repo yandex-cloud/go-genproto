@@ -66,6 +66,10 @@ func (m *CreateVideoRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+func (m *CreateVideoRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateVideoRequest) SetTusd(v *VideoTUSDParams) {
 	m.Source = &CreateVideoRequest_Tusd{
 		Tusd: v,
@@ -86,6 +90,10 @@ func (m *CreateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams)
 
 func (m *VideoTUSDParams) SetFileSize(v int64) {
 	m.FileSize = v
+}
+
+func (m *VideoTUSDParams) SetFileName(v string) {
+	m.FileName = v
 }
 
 func (m *CreateVideoMetadata) SetVideoId(v string) {
@@ -116,6 +124,10 @@ func (m *UpdateVideoRequest) SetDescription(v string) {
 
 func (m *UpdateVideoRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
+}
+
+func (m *UpdateVideoRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {

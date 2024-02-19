@@ -65,6 +65,10 @@ func (m *CreateStreamRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+func (m *CreateStreamRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateStreamRequest) SetOnDemand(v *OnDemandParams) {
 	m.StreamType = &CreateStreamRequest_OnDemand{
 		OnDemand: v,
@@ -117,6 +121,10 @@ func (m *UpdateStreamRequest) SetDescription(v string) {
 
 func (m *UpdateStreamRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
+}
+
+func (m *UpdateStreamRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateStreamRequest) SetOnDemand(v *OnDemandParams) {

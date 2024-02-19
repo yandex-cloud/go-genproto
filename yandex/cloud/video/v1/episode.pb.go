@@ -75,26 +75,40 @@ type Episode struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	StreamId    string                 `protobuf:"bytes,2,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
-	LineId      string                 `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
-	Title       string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	Description string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	ThumbnailId string                 `protobuf:"bytes,6,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	StartTime   *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	FinishTime  *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
+	// ID of the episode.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the stream. Optional, empty if the episode is linked to the line
+	StreamId string `protobuf:"bytes,2,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
+	// ID of the line. Optional, empty if the episode is linked to the stream
+	LineId string `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
+	// Channel title.
+	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	// Channel description.
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the thumbnail.
+	ThumbnailId string `protobuf:"bytes,6,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
+	// Episode start time.
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	// Episode finish time.
+	FinishTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
+	// Enables episode DVR mode. DVR seconds determines how many last seconds of the stream are available.
+	//
 	// possible values:
 	//   - `0`: infinite dvr size, the full length of the stream allowed to display
 	//   - `>0`: size of dvr window in seconds, the minimum value is 30s
 	DvrSeconds       int64                    `protobuf:"varint,9,opt,name=dvr_seconds,json=dvrSeconds,proto3" json:"dvr_seconds,omitempty"`
 	VisibilityStatus Episode_VisibilityStatus `protobuf:"varint,10,opt,name=visibility_status,json=visibilityStatus,proto3,enum=yandex.cloud.video.v1.Episode_VisibilityStatus" json:"visibility_status,omitempty"`
+	// Episode access rights.
+	//
 	// Types that are assignable to AccessRights:
 	//
 	//	*Episode_PublicAccess
 	//	*Episode_AuthSystemAccess
 	AccessRights isEpisode_AccessRights `protobuf_oneof:"access_rights"`
-	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt    *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Time when episode was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Time of last episode update.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *Episode) Reset() {
@@ -239,10 +253,12 @@ type isEpisode_AccessRights interface {
 }
 
 type Episode_PublicAccess struct {
+	// Episode is available to everyone.
 	PublicAccess *EpisodePublicAccessRights `protobuf:"bytes,1000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
 type Episode_AuthSystemAccess struct {
+	// Checking access rights using the authorization system.
 	AuthSystemAccess *EpisodeAuthSystemAccessRights `protobuf:"bytes,1002,opt,name=auth_system_access,json=authSystemAccess,proto3,oneof"`
 }
 

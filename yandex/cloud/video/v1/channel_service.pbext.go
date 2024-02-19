@@ -50,6 +50,10 @@ func (m *CreateChannelRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *CreateChannelRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateChannelMetadata) SetChannelId(v string) {
 	m.ChannelId = v
 }
@@ -68,6 +72,10 @@ func (m *UpdateChannelRequest) SetTitle(v string) {
 
 func (m *UpdateChannelRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *UpdateChannelRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateChannelMetadata) SetChannelId(v string) {

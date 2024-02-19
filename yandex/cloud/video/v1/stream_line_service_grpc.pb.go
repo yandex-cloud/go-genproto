@@ -34,13 +34,21 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StreamLineServiceClient interface {
+	// Returns the specific stream line.
 	Get(ctx context.Context, in *GetStreamLineRequest, opts ...grpc.CallOption) (*StreamLine, error)
+	// List lines for channel.
 	List(ctx context.Context, in *ListStreamLinesRequest, opts ...grpc.CallOption) (*ListStreamLinesResponse, error)
+	// Create stream line.
 	Create(ctx context.Context, in *CreateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update stream line.
 	Update(ctx context.Context, in *UpdateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete stream line.
 	Delete(ctx context.Context, in *DeleteStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Perform an action on the line.
 	PerformAction(ctx context.Context, in *PerformLineActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns unique stream key.
 	GetStreamKey(ctx context.Context, in *GetStreamKeyRequest, opts ...grpc.CallOption) (*PushStreamKey, error)
+	// Change stream key.
 	UpdateStreamKey(ctx context.Context, in *UpdateStreamKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -128,13 +136,21 @@ func (c *streamLineServiceClient) UpdateStreamKey(ctx context.Context, in *Updat
 // All implementations should embed UnimplementedStreamLineServiceServer
 // for forward compatibility
 type StreamLineServiceServer interface {
+	// Returns the specific stream line.
 	Get(context.Context, *GetStreamLineRequest) (*StreamLine, error)
+	// List lines for channel.
 	List(context.Context, *ListStreamLinesRequest) (*ListStreamLinesResponse, error)
+	// Create stream line.
 	Create(context.Context, *CreateStreamLineRequest) (*operation.Operation, error)
+	// Update stream line.
 	Update(context.Context, *UpdateStreamLineRequest) (*operation.Operation, error)
+	// Delete stream line.
 	Delete(context.Context, *DeleteStreamLineRequest) (*operation.Operation, error)
+	// Perform an action on the line.
 	PerformAction(context.Context, *PerformLineActionRequest) (*operation.Operation, error)
+	// Returns unique stream key.
 	GetStreamKey(context.Context, *GetStreamKeyRequest) (*PushStreamKey, error)
+	// Change stream key.
 	UpdateStreamKey(context.Context, *UpdateStreamKeyRequest) (*operation.Operation, error)
 }
 

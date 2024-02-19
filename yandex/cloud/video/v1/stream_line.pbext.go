@@ -90,6 +90,10 @@ func (m *StreamLine) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 
+func (m *StreamLine) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *PushStreamKey) SetKey(v string) {
 	m.Key = v
 }

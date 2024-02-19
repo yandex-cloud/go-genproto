@@ -77,6 +77,10 @@ func (m *Video) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 
+func (m *Video) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *VideoTUSDSource) SetUrl(v string) {
 	m.Url = v
 }

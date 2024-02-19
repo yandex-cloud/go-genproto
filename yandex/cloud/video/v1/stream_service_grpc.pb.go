@@ -32,11 +32,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StreamServiceClient interface {
+	// Returns the specific stream.
 	Get(ctx context.Context, in *GetStreamRequest, opts ...grpc.CallOption) (*Stream, error)
+	// List streams for channel.
 	List(ctx context.Context, in *ListStreamsRequest, opts ...grpc.CallOption) (*ListStreamsResponse, error)
+	// Create stream.
 	Create(ctx context.Context, in *CreateStreamRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update stream.
 	Update(ctx context.Context, in *UpdateStreamRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete stream.
 	Delete(ctx context.Context, in *DeleteStreamRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Perform an action on the episode.
 	PerformAction(ctx context.Context, in *PerformStreamActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -106,11 +112,17 @@ func (c *streamServiceClient) PerformAction(ctx context.Context, in *PerformStre
 // All implementations should embed UnimplementedStreamServiceServer
 // for forward compatibility
 type StreamServiceServer interface {
+	// Returns the specific stream.
 	Get(context.Context, *GetStreamRequest) (*Stream, error)
+	// List streams for channel.
 	List(context.Context, *ListStreamsRequest) (*ListStreamsResponse, error)
+	// Create stream.
 	Create(context.Context, *CreateStreamRequest) (*operation.Operation, error)
+	// Update stream.
 	Update(context.Context, *UpdateStreamRequest) (*operation.Operation, error)
+	// Delete stream.
 	Delete(context.Context, *DeleteStreamRequest) (*operation.Operation, error)
+	// Perform an action on the episode.
 	PerformAction(context.Context, *PerformStreamActionRequest) (*operation.Operation, error)
 }
 

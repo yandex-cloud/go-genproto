@@ -27,8 +27,11 @@ type ListThumbnailRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the channel.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// The maximum number of the results per page to return. Default value: 100.
+	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token for getting the next page of the result.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -90,8 +93,10 @@ type ListThumbnailResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Thumbnails    []*Thumbnail `protobuf:"bytes,1,rep,name=thumbnails,proto3" json:"thumbnails,omitempty"`
-	NextPageToken string       `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of thumbnails.
+	Thumbnails []*Thumbnail `protobuf:"bytes,1,rep,name=thumbnails,proto3" json:"thumbnails,omitempty"`
+	// Token for getting the next page.
+	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListThumbnailResponse) Reset() {
@@ -145,6 +150,7 @@ type CreateThumbnailRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the channel.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 }
 
@@ -192,6 +198,7 @@ type CreateThumbnailMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thumbnail.
 	ThumbnailId string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 }
 
@@ -239,7 +246,9 @@ type BatchGenerateDownloadURLsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ChannelId    string   `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// ID of the channel.
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// List of thumbnails IDs.
 	ThumbnailIds []string `protobuf:"bytes,2,rep,name=thumbnail_ids,json=thumbnailIds,proto3" json:"thumbnail_ids,omitempty"`
 }
 
@@ -294,6 +303,7 @@ type BatchGenerateDownloadURLsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of download urls.
 	DownloadUrls []*ThumbnailDownloadURL `protobuf:"bytes,1,rep,name=download_urls,json=downloadUrls,proto3" json:"download_urls,omitempty"`
 }
 
@@ -341,7 +351,9 @@ type ThumbnailDownloadURL struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thumbnail.
 	ThumbnailId string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
+	// Download url.
 	DownloadUrl string `protobuf:"bytes,2,opt,name=download_url,json=downloadUrl,proto3" json:"download_url,omitempty"`
 }
 
@@ -396,6 +408,7 @@ type GenerateThumbnailUploadURLRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thumbnail.
 	ThumbnailId string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 }
 
@@ -443,6 +456,7 @@ type GenerateThumbnailUploadURLResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Upload url.
 	UploadUrl string `protobuf:"bytes,1,opt,name=upload_url,json=uploadUrl,proto3" json:"upload_url,omitempty"`
 }
 

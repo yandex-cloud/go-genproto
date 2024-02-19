@@ -33,12 +33,19 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EpisodeServiceClient interface {
+	// Returns the specific channel.
 	Get(ctx context.Context, in *GetEpisodeRequest, opts ...grpc.CallOption) (*Episode, error)
+	// List episodes for stream or line.
 	List(ctx context.Context, in *ListEpisodesRequest, opts ...grpc.CallOption) (*ListEpisodesResponse, error)
+	// Create episode.
 	Create(ctx context.Context, in *CreateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update episode.
 	Update(ctx context.Context, in *UpdateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete episode.
 	Delete(ctx context.Context, in *DeleteEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Perform an action on the episode.
 	PerformAction(ctx context.Context, in *PerformEpisodeActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns url to the player.
 	GetPlayerURL(ctx context.Context, in *GetEpisodePlayerURLRequest, opts ...grpc.CallOption) (*GetEpisodePlayerURLResponse, error)
 }
 
@@ -117,12 +124,19 @@ func (c *episodeServiceClient) GetPlayerURL(ctx context.Context, in *GetEpisodeP
 // All implementations should embed UnimplementedEpisodeServiceServer
 // for forward compatibility
 type EpisodeServiceServer interface {
+	// Returns the specific channel.
 	Get(context.Context, *GetEpisodeRequest) (*Episode, error)
+	// List episodes for stream or line.
 	List(context.Context, *ListEpisodesRequest) (*ListEpisodesResponse, error)
+	// Create episode.
 	Create(context.Context, *CreateEpisodeRequest) (*operation.Operation, error)
+	// Update episode.
 	Update(context.Context, *UpdateEpisodeRequest) (*operation.Operation, error)
+	// Delete episode.
 	Delete(context.Context, *DeleteEpisodeRequest) (*operation.Operation, error)
+	// Perform an action on the episode.
 	PerformAction(context.Context, *PerformEpisodeActionRequest) (*operation.Operation, error)
+	// Returns url to the player.
 	GetPlayerURL(context.Context, *GetEpisodePlayerURLRequest) (*GetEpisodePlayerURLResponse, error)
 }
 

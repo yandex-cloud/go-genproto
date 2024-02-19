@@ -79,6 +79,10 @@ func (m *CreateAddressRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateAddressRequest) SetDnsRecordSpecs(v []*DnsRecordSpec) {
+	m.DnsRecordSpecs = v
+}
+
 func (m *ExternalIpv4AddressSpec) SetAddress(v string) {
 	m.Address = v
 }
@@ -89,6 +93,22 @@ func (m *ExternalIpv4AddressSpec) SetZoneId(v string) {
 
 func (m *ExternalIpv4AddressSpec) SetRequirements(v *AddressRequirements) {
 	m.Requirements = v
+}
+
+func (m *DnsRecordSpec) SetFqdn(v string) {
+	m.Fqdn = v
+}
+
+func (m *DnsRecordSpec) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecordSpec) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecordSpec) SetPtr(v bool) {
+	m.Ptr = v
 }
 
 func (m *CreateAddressMetadata) SetAddressId(v string) {
@@ -121,6 +141,10 @@ func (m *UpdateAddressRequest) SetReserved(v bool) {
 
 func (m *UpdateAddressRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateAddressRequest) SetDnsRecordSpecs(v []*DnsRecordSpec) {
+	m.DnsRecordSpecs = v
 }
 
 func (m *UpdateAddressMetadata) SetAddressId(v string) {

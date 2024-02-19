@@ -29,3 +29,7 @@ func (m *Channel) SetCreatedAt(v *timestamppb.Timestamp) {
 func (m *Channel) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
+
+func (m *Channel) SetLabels(v map[string]string) {
+	m.Labels = v
+}

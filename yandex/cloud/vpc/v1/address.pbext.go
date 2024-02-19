@@ -62,6 +62,10 @@ func (m *Address) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *Address) SetDnsRecords(v []*DnsRecord) {
+	m.DnsRecords = v
+}
+
 func (m *ExternalIpv4Address) SetAddress(v string) {
 	m.Address = v
 }
@@ -80,4 +84,20 @@ func (m *AddressRequirements) SetDdosProtectionProvider(v string) {
 
 func (m *AddressRequirements) SetOutgoingSmtpCapability(v string) {
 	m.OutgoingSmtpCapability = v
+}
+
+func (m *DnsRecord) SetFqdn(v string) {
+	m.Fqdn = v
+}
+
+func (m *DnsRecord) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecord) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecord) SetPtr(v bool) {
+	m.Ptr = v
 }

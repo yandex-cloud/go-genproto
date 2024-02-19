@@ -72,6 +72,10 @@ func (m *Stream) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 
+func (m *Stream) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *Schedule) SetStartTime(v *timestamppb.Timestamp) {
 	m.StartTime = v
 }

@@ -33,12 +33,19 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VideoServiceClient interface {
+	// Returns the specific video.
 	Get(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*Video, error)
+	// List videos for channel.
 	List(ctx context.Context, in *ListVideoRequest, opts ...grpc.CallOption) (*ListVideoResponse, error)
+	// Create video.
 	Create(ctx context.Context, in *CreateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update video.
 	Update(ctx context.Context, in *UpdateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete video.
 	Delete(ctx context.Context, in *DeleteVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Perform an action on the episode.
 	PerformAction(ctx context.Context, in *PerformVideoActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns url to the player.
 	GetPlayerURL(ctx context.Context, in *GetVideoPlayerURLRequest, opts ...grpc.CallOption) (*GetVideoPlayerURLResponse, error)
 }
 
@@ -117,12 +124,19 @@ func (c *videoServiceClient) GetPlayerURL(ctx context.Context, in *GetVideoPlaye
 // All implementations should embed UnimplementedVideoServiceServer
 // for forward compatibility
 type VideoServiceServer interface {
+	// Returns the specific video.
 	Get(context.Context, *GetVideoRequest) (*Video, error)
+	// List videos for channel.
 	List(context.Context, *ListVideoRequest) (*ListVideoResponse, error)
+	// Create video.
 	Create(context.Context, *CreateVideoRequest) (*operation.Operation, error)
+	// Update video.
 	Update(context.Context, *UpdateVideoRequest) (*operation.Operation, error)
+	// Delete video.
 	Delete(context.Context, *DeleteVideoRequest) (*operation.Operation, error)
+	// Perform an action on the episode.
 	PerformAction(context.Context, *PerformVideoActionRequest) (*operation.Operation, error)
+	// Returns url to the player.
 	GetPlayerURL(context.Context, *GetVideoPlayerURLRequest) (*GetVideoPlayerURLResponse, error)
 }
 

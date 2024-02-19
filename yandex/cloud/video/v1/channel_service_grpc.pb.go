@@ -31,10 +31,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ChannelServiceClient interface {
+	// Returns the specific channel.
 	Get(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*Channel, error)
+	// List channels for organization.
 	List(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsResponse, error)
+	// Create channel.
 	Create(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update channel.
 	Update(ctx context.Context, in *UpdateChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete channel.
 	Delete(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -95,10 +100,15 @@ func (c *channelServiceClient) Delete(ctx context.Context, in *DeleteChannelRequ
 // All implementations should embed UnimplementedChannelServiceServer
 // for forward compatibility
 type ChannelServiceServer interface {
+	// Returns the specific channel.
 	Get(context.Context, *GetChannelRequest) (*Channel, error)
+	// List channels for organization.
 	List(context.Context, *ListChannelsRequest) (*ListChannelsResponse, error)
+	// Create channel.
 	Create(context.Context, *CreateChannelRequest) (*operation.Operation, error)
+	// Update channel.
 	Update(context.Context, *UpdateChannelRequest) (*operation.Operation, error)
+	// Delete channel.
 	Delete(context.Context, *DeleteChannelRequest) (*operation.Operation, error)
 }
 

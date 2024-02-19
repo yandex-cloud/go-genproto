@@ -30,9 +30,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ThumbnailServiceClient interface {
+	// List thumbnails for channel.
 	List(ctx context.Context, in *ListThumbnailRequest, opts ...grpc.CallOption) (*ListThumbnailResponse, error)
+	// Create thumbnail.
 	Create(ctx context.Context, in *CreateThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Generate urls for download images.
 	BatchGenerateDownloadURLs(ctx context.Context, in *BatchGenerateDownloadURLsRequest, opts ...grpc.CallOption) (*BatchGenerateDownloadURLsResponse, error)
+	// Generate url for upload image.
 	GenerateUploadURL(ctx context.Context, in *GenerateThumbnailUploadURLRequest, opts ...grpc.CallOption) (*GenerateThumbnailUploadURLResponse, error)
 }
 
@@ -84,9 +88,13 @@ func (c *thumbnailServiceClient) GenerateUploadURL(ctx context.Context, in *Gene
 // All implementations should embed UnimplementedThumbnailServiceServer
 // for forward compatibility
 type ThumbnailServiceServer interface {
+	// List thumbnails for channel.
 	List(context.Context, *ListThumbnailRequest) (*ListThumbnailResponse, error)
+	// Create thumbnail.
 	Create(context.Context, *CreateThumbnailRequest) (*operation.Operation, error)
+	// Generate urls for download images.
 	BatchGenerateDownloadURLs(context.Context, *BatchGenerateDownloadURLsRequest) (*BatchGenerateDownloadURLsResponse, error)
+	// Generate url for upload image.
 	GenerateUploadURL(context.Context, *GenerateThumbnailUploadURLRequest) (*GenerateThumbnailUploadURLResponse, error)
 }
 
