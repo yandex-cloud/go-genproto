@@ -2,6 +2,10 @@
 
 package config
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *Config) SetId(v string) {
 	m.Id = v
 }
@@ -12,4 +16,16 @@ func (m *Config) SetFolderId(v string) {
 
 func (m *Config) SetYamlString(v string) {
 	m.YamlString = v
+}
+
+func (m *Config) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Config) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *Config) SetCreatedBy(v string) {
+	m.CreatedBy = v
 }

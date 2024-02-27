@@ -4,6 +4,7 @@ package loadtesting
 
 import (
 	agent "github.com/yandex-cloud/go-genproto/yandex/cloud/loadtesting/api/v1/agent"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *CreateAgentRequest) SetFolderId(v string) {
@@ -24,6 +25,10 @@ func (m *CreateAgentRequest) SetComputeInstanceParams(v *agent.CreateComputeInst
 
 func (m *CreateAgentRequest) SetAgentVersion(v string) {
 	m.AgentVersion = v
+}
+
+func (m *CreateAgentRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *CreateAgentMetadata) SetAgentId(v string) {
@@ -64,4 +69,32 @@ func (m *ListAgentsResponse) SetAgents(v []*agent.Agent) {
 
 func (m *ListAgentsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *UpdateAgentRequest) SetAgentId(v string) {
+	m.AgentId = v
+}
+
+func (m *UpdateAgentRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateAgentRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateAgentRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateAgentRequest) SetComputeInstanceParams(v *agent.CreateComputeInstance) {
+	m.ComputeInstanceParams = v
+}
+
+func (m *UpdateAgentRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateAgentMetadata) SetAgentId(v string) {
+	m.AgentId = v
 }

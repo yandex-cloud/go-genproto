@@ -218,6 +218,10 @@ func (m *PolicySettings_Scheduling_BackupSet) SetSinceLastExecTime(v *PolicySett
 	}
 }
 
+func (m *PolicySettings_Scheduling_BackupSet) SetType(v PolicySettings_Scheduling_BackupSet_Type) {
+	m.Type = v
+}
+
 func (m *PolicySettings_Scheduling_BackupSet_Time) SetWeekdays(v []PolicySettings_Day) {
 	m.Weekdays = v
 }

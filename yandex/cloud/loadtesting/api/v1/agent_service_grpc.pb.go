@@ -25,6 +25,7 @@ const (
 	AgentService_Get_FullMethodName    = "/yandex.cloud.loadtesting.api.v1.AgentService/Get"
 	AgentService_List_FullMethodName   = "/yandex.cloud.loadtesting.api.v1.AgentService/List"
 	AgentService_Delete_FullMethodName = "/yandex.cloud.loadtesting.api.v1.AgentService/Delete"
+	AgentService_Update_FullMethodName = "/yandex.cloud.loadtesting.api.v1.AgentService/Update"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -45,6 +46,8 @@ type AgentServiceClient interface {
 	//
 	// Also deletes a corresponding compute instance.
 	Delete(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified agent.
+	Update(ctx context.Context, in *UpdateAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type agentServiceClient struct {
@@ -91,6 +94,15 @@ func (c *agentServiceClient) Delete(ctx context.Context, in *DeleteAgentRequest,
 	return out, nil
 }
 
+func (c *agentServiceClient) Update(ctx context.Context, in *UpdateAgentRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, AgentService_Update_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations should embed UnimplementedAgentServiceServer
 // for forward compatibility
@@ -109,6 +121,8 @@ type AgentServiceServer interface {
 	//
 	// Also deletes a corresponding compute instance.
 	Delete(context.Context, *DeleteAgentRequest) (*operation.Operation, error)
+	// Updates the specified agent.
+	Update(context.Context, *UpdateAgentRequest) (*operation.Operation, error)
 }
 
 // UnimplementedAgentServiceServer should be embedded to have forward compatible implementations.
@@ -126,6 +140,9 @@ func (UnimplementedAgentServiceServer) List(context.Context, *ListAgentsRequest)
 }
 func (UnimplementedAgentServiceServer) Delete(context.Context, *DeleteAgentRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedAgentServiceServer) Update(context.Context, *UpdateAgentRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 
 // UnsafeAgentServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -211,6 +228,24 @@ func _AgentService_Delete_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).Update(ctx, req.(*UpdateAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -233,6 +268,10 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _AgentService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _AgentService_Update_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

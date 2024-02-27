@@ -24,6 +24,7 @@ const (
 	ConfigService_Create_FullMethodName = "/yandex.cloud.loadtesting.api.v1.ConfigService/Create"
 	ConfigService_Get_FullMethodName    = "/yandex.cloud.loadtesting.api.v1.ConfigService/Get"
 	ConfigService_List_FullMethodName   = "/yandex.cloud.loadtesting.api.v1.ConfigService/List"
+	ConfigService_Delete_FullMethodName = "/yandex.cloud.loadtesting.api.v1.ConfigService/Delete"
 )
 
 // ConfigServiceClient is the client API for ConfigService service.
@@ -38,6 +39,8 @@ type ConfigServiceClient interface {
 	Get(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*config.Config, error)
 	// Retrieves the list of configs in the specified folder.
 	List(ctx context.Context, in *ListConfigsRequest, opts ...grpc.CallOption) (*ListConfigsResponse, error)
+	// Deletes the specified config.
+	Delete(ctx context.Context, in *DeleteConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type configServiceClient struct {
@@ -75,6 +78,15 @@ func (c *configServiceClient) List(ctx context.Context, in *ListConfigsRequest, 
 	return out, nil
 }
 
+func (c *configServiceClient) Delete(ctx context.Context, in *DeleteConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ConfigService_Delete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConfigServiceServer is the server API for ConfigService service.
 // All implementations should embed UnimplementedConfigServiceServer
 // for forward compatibility
@@ -87,6 +99,8 @@ type ConfigServiceServer interface {
 	Get(context.Context, *GetConfigRequest) (*config.Config, error)
 	// Retrieves the list of configs in the specified folder.
 	List(context.Context, *ListConfigsRequest) (*ListConfigsResponse, error)
+	// Deletes the specified config.
+	Delete(context.Context, *DeleteConfigRequest) (*operation.Operation, error)
 }
 
 // UnimplementedConfigServiceServer should be embedded to have forward compatible implementations.
@@ -101,6 +115,9 @@ func (UnimplementedConfigServiceServer) Get(context.Context, *GetConfigRequest) 
 }
 func (UnimplementedConfigServiceServer) List(context.Context, *ListConfigsRequest) (*ListConfigsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedConfigServiceServer) Delete(context.Context, *DeleteConfigRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 
 // UnsafeConfigServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -168,6 +185,24 @@ func _ConfigService_List_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConfigService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfigServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConfigService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfigServiceServer).Delete(ctx, req.(*DeleteConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConfigService_ServiceDesc is the grpc.ServiceDesc for ConfigService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -186,6 +221,10 @@ var ConfigService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _ConfigService_List_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _ConfigService_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

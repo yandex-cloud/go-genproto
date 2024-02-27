@@ -258,7 +258,7 @@ type CreateDashboardRequest struct {
 	// Dashboard parametrization.
 	Parametrization *Parametrization `protobuf:"bytes,24,opt,name=parametrization,proto3" json:"parametrization,omitempty"`
 	// Entity that controls dashboard
-	// Must match the regular expression "[a-zA-Z0-9_\-\W]{1,100}"
+	// Must match the regular expression "[\w \-]{1,100}"
 	ManagedBy string `protobuf:"bytes,26,opt,name=managed_by,json=managedBy,proto3" json:"managed_by,omitempty"`
 	// Information about entity that controls dashboard
 	// Must be valid URI
@@ -450,7 +450,7 @@ type UpdateDashboardRequest struct {
 	// The current etag of the dashboard.
 	Etag string `protobuf:"bytes,8,opt,name=etag,proto3" json:"etag,omitempty"`
 	// Entity that controls dashboard
-	// Must match the regular expression "[a-zA-Z0-9_\-\W]{1,100}"
+	// Must match the regular expression "[\w \-]{1,100}"
 	ManagedBy string `protobuf:"bytes,26,opt,name=managed_by,json=managedBy,proto3" json:"managed_by,omitempty"`
 	// Information about entity that controls dashboard
 	// Must be valid URI

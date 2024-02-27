@@ -22,6 +22,10 @@ func (m *CreateConfigRequest) SetYamlString(v string) {
 	}
 }
 
+func (m *CreateConfigRequest) SetName(v string) {
+	m.Name = v
+}
+
 func (m *CreateConfigMetadata) SetConfigId(v string) {
 	m.ConfigId = v
 }
@@ -42,10 +46,22 @@ func (m *ListConfigsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListConfigsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
 func (m *ListConfigsResponse) SetConfigs(v []*config.Config) {
 	m.Configs = v
 }
 
 func (m *ListConfigsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *DeleteConfigRequest) SetConfigId(v string) {
+	m.ConfigId = v
+}
+
+func (m *DeleteConfigMetadata) SetConfigId(v string) {
+	m.ConfigId = v
 }

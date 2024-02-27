@@ -13,3 +13,15 @@ func (m *AgentSelector) SetAgentId(v string) {
 		AgentId: v,
 	}
 }
+
+func (m *AgentSelector) SetMatchByFilter(v string) {
+	m.Agent = &AgentSelector_MatchByFilter{
+		MatchByFilter: v,
+	}
+}
+
+func (m *AgentSelector) SetAnonymousAgent(v bool) {
+	m.Agent = &AgentSelector_AnonymousAgent{
+		AnonymousAgent: v,
+	}
+}

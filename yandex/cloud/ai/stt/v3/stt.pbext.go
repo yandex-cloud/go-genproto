@@ -222,6 +222,10 @@ func (m *RecognizeFileRequest) SetSpeechAnalysis(v *SpeechAnalysisOptions) {
 	m.SpeechAnalysis = v
 }
 
+func (m *RecognizeFileRequest) SetSpeakerLabeling(v *SpeakerLabelingOptions) {
+	m.SpeakerLabeling = v
+}
+
 func (m *Word) SetText(v string) {
 	m.Text = v
 }

@@ -58,7 +58,7 @@ type Dashboard struct {
 	// Dashboard etag.
 	Etag string `protobuf:"bytes,30,opt,name=etag,proto3" json:"etag,omitempty"`
 	// Entity that controls dashboard
-	// Must match the regular expression "[a-zA-Z0-9_\-\W]{1,100}"
+	// Must match the regular expression "[\w \-]{1,100}"
 	ManagedBy string `protobuf:"bytes,32,opt,name=managed_by,json=managedBy,proto3" json:"managed_by,omitempty"`
 	// Information about entity that controls dashboard
 	// Must be valid URI
