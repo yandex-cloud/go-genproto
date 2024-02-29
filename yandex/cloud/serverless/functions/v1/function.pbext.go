@@ -124,6 +124,10 @@ func (m *Version) SetAsyncInvocationConfig(v *AsyncInvocationConfig) {
 	m.AsyncInvocationConfig = v
 }
 
+func (m *Version) SetTmpfsSize(v int64) {
+	m.TmpfsSize = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

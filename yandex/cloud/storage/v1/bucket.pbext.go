@@ -224,8 +224,16 @@ func (m *LifecycleRule) SetNoncurrentTransitions(v []*LifecycleRule_NoncurrentTr
 	m.NoncurrentTransitions = v
 }
 
+func (m *LifecycleRule) SetNoncurrentDeleteMarkers(v *LifecycleRule_NoncurrentDeleteMarkers) {
+	m.NoncurrentDeleteMarkers = v
+}
+
 func (m *LifecycleRule_AfterDays) SetDaysAfterExpiration(v *wrapperspb.Int64Value) {
 	m.DaysAfterExpiration = v
+}
+
+func (m *LifecycleRule_NoncurrentDeleteMarkers) SetNoncurrentDays(v *wrapperspb.Int64Value) {
+	m.NoncurrentDays = v
 }
 
 func (m *LifecycleRule_NoncurrentExpiration) SetNoncurrentDays(v *wrapperspb.Int64Value) {
