@@ -104,6 +104,10 @@ func (m *UpdateSubnetRequest) SetDhcpOptions(v *DhcpOptions) {
 	m.DhcpOptions = v
 }
 
+func (m *UpdateSubnetRequest) SetV4CidrBlocks(v []string) {
+	m.V4CidrBlocks = v
+}
+
 func (m *UpdateSubnetMetadata) SetSubnetId(v string) {
 	m.SubnetId = v
 }
