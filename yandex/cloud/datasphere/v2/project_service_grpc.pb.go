@@ -59,11 +59,13 @@ type ProjectServiceClient interface {
 	GetUnitBalance(ctx context.Context, in *GetUnitBalanceRequest, opts ...grpc.CallOption) (*GetUnitBalanceResponse, error)
 	// Sets the unit balance of the specified project.
 	SetUnitBalance(ctx context.Context, in *SetUnitBalanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Executes code in the specified cell or notebook.
+	// // Executes code of the specified notebook using configuration defined in the project settings. If the default project configuration is not specified, `c1.4` is used.
 	Execute(ctx context.Context, in *ProjectExecutionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns outputs of the specified cell.
+	// Deprecated
 	GetCellOutputs(ctx context.Context, in *CellOutputsRequest, opts ...grpc.CallOption) (*CellOutputsResponse, error)
 	// Returns state variables of the specified notebook.
+	// Deprecated
 	GetStateVariables(ctx context.Context, in *GetStateVariablesRequest, opts ...grpc.CallOption) (*GetStateVariablesResponse, error)
 	// Lists access bindings for the project.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -249,11 +251,13 @@ type ProjectServiceServer interface {
 	GetUnitBalance(context.Context, *GetUnitBalanceRequest) (*GetUnitBalanceResponse, error)
 	// Sets the unit balance of the specified project.
 	SetUnitBalance(context.Context, *SetUnitBalanceRequest) (*operation.Operation, error)
-	// Executes code in the specified cell or notebook.
+	// // Executes code of the specified notebook using configuration defined in the project settings. If the default project configuration is not specified, `c1.4` is used.
 	Execute(context.Context, *ProjectExecutionRequest) (*operation.Operation, error)
 	// Returns outputs of the specified cell.
+	// Deprecated
 	GetCellOutputs(context.Context, *CellOutputsRequest) (*CellOutputsResponse, error)
 	// Returns state variables of the specified notebook.
+	// Deprecated
 	GetStateVariables(context.Context, *GetStateVariablesRequest) (*GetStateVariablesResponse, error)
 	// Lists access bindings for the project.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
