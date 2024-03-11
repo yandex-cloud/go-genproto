@@ -79,6 +79,10 @@ func (m *CreateDnsZoneRequest) SetPublicVisibility(v *PublicVisibility) {
 	m.PublicVisibility = v
 }
 
+func (m *CreateDnsZoneRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *CreateDnsZoneMetadata) SetDnsZoneId(v string) {
 	m.DnsZoneId = v
 }
@@ -109,6 +113,10 @@ func (m *UpdateDnsZoneRequest) SetPrivateVisibility(v *PrivateVisibility) {
 
 func (m *UpdateDnsZoneRequest) SetPublicVisibility(v *PublicVisibility) {
 	m.PublicVisibility = v
+}
+
+func (m *UpdateDnsZoneRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateDnsZoneMetadata) SetDnsZoneId(v string) {
