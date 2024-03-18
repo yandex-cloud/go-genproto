@@ -35,6 +35,8 @@ const (
 	InstanceService_DetachDisk_FullMethodName               = "/yandex.cloud.compute.v1.InstanceService/DetachDisk"
 	InstanceService_AttachFilesystem_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/AttachFilesystem"
 	InstanceService_DetachFilesystem_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/DetachFilesystem"
+	InstanceService_AttachNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/AttachNetworkInterface"
+	InstanceService_DetachNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/DetachNetworkInterface"
 	InstanceService_AddOneToOneNat_FullMethodName           = "/yandex.cloud.compute.v1.InstanceService/AddOneToOneNat"
 	InstanceService_RemoveOneToOneNat_FullMethodName        = "/yandex.cloud.compute.v1.InstanceService/RemoveOneToOneNat"
 	InstanceService_UpdateNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/UpdateNetworkInterface"
@@ -84,19 +86,23 @@ type InstanceServiceClient interface {
 	//
 	// The instance and the filesystem must reside in the same availability zone.
 	//
-	// To attach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
-	// To check the instance status, make a [InstanceService.Get] request.
-	// To stop the running instance, make a [InstanceService.Stop] request.
-	//
 	// To use the instance with an attached filesystem, the latter must be mounted.
 	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	AttachFilesystem(ctx context.Context, in *AttachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Detaches the filesystem from the instance.
+	DetachFilesystem(ctx context.Context, in *DetachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Attaches the network-interface to the instance.
 	//
-	// To detach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
+	// To attach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
 	// To check the instance status, make a [InstanceService.Get] request.
 	// To stop the running instance, make a [InstanceService.Stop] request.
-	DetachFilesystem(ctx context.Context, in *DetachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	AttachNetworkInterface(ctx context.Context, in *AttachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Detaches the network-interface to the instance.
+	//
+	// To Detach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	DetachNetworkInterface(ctx context.Context, in *DetachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(ctx context.Context, in *AddInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Removes One-to-one NAT from the network interface.
@@ -259,6 +265,24 @@ func (c *instanceServiceClient) DetachFilesystem(ctx context.Context, in *Detach
 	return out, nil
 }
 
+func (c *instanceServiceClient) AttachNetworkInterface(ctx context.Context, in *AttachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_AttachNetworkInterface_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceServiceClient) DetachNetworkInterface(ctx context.Context, in *DetachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_DetachNetworkInterface_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instanceServiceClient) AddOneToOneNat(ctx context.Context, in *AddInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, InstanceService_AddOneToOneNat_FullMethodName, in, out, opts...)
@@ -386,19 +410,23 @@ type InstanceServiceServer interface {
 	//
 	// The instance and the filesystem must reside in the same availability zone.
 	//
-	// To attach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
-	// To check the instance status, make a [InstanceService.Get] request.
-	// To stop the running instance, make a [InstanceService.Stop] request.
-	//
 	// To use the instance with an attached filesystem, the latter must be mounted.
 	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	AttachFilesystem(context.Context, *AttachInstanceFilesystemRequest) (*operation.Operation, error)
 	// Detaches the filesystem from the instance.
+	DetachFilesystem(context.Context, *DetachInstanceFilesystemRequest) (*operation.Operation, error)
+	// Attaches the network-interface to the instance.
 	//
-	// To detach a filesystem, the instance must have a `STOPPED` status ([Instance.status]).
+	// To attach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
 	// To check the instance status, make a [InstanceService.Get] request.
 	// To stop the running instance, make a [InstanceService.Stop] request.
-	DetachFilesystem(context.Context, *DetachInstanceFilesystemRequest) (*operation.Operation, error)
+	AttachNetworkInterface(context.Context, *AttachInstanceNetworkInterfaceRequest) (*operation.Operation, error)
+	// Detaches the network-interface to the instance.
+	//
+	// To Detach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	DetachNetworkInterface(context.Context, *DetachInstanceNetworkInterfaceRequest) (*operation.Operation, error)
 	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(context.Context, *AddInstanceOneToOneNatRequest) (*operation.Operation, error)
 	// Removes One-to-one NAT from the network interface.
@@ -472,6 +500,12 @@ func (UnimplementedInstanceServiceServer) AttachFilesystem(context.Context, *Att
 }
 func (UnimplementedInstanceServiceServer) DetachFilesystem(context.Context, *DetachInstanceFilesystemRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachFilesystem not implemented")
+}
+func (UnimplementedInstanceServiceServer) AttachNetworkInterface(context.Context, *AttachInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachNetworkInterface not implemented")
+}
+func (UnimplementedInstanceServiceServer) DetachNetworkInterface(context.Context, *DetachInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachNetworkInterface not implemented")
 }
 func (UnimplementedInstanceServiceServer) AddOneToOneNat(context.Context, *AddInstanceOneToOneNatRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOneToOneNat not implemented")
@@ -767,6 +801,42 @@ func _InstanceService_DetachFilesystem_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceService_AttachNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachInstanceNetworkInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).AttachNetworkInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_AttachNetworkInterface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).AttachNetworkInterface(ctx, req.(*AttachInstanceNetworkInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceService_DetachNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DetachInstanceNetworkInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).DetachNetworkInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_DetachNetworkInterface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).DetachNetworkInterface(ctx, req.(*DetachInstanceNetworkInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstanceService_AddOneToOneNat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddInstanceOneToOneNatRequest)
 	if err := dec(in); err != nil {
@@ -1009,6 +1079,14 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DetachFilesystem",
 			Handler:    _InstanceService_DetachFilesystem_Handler,
+		},
+		{
+			MethodName: "AttachNetworkInterface",
+			Handler:    _InstanceService_AttachNetworkInterface_Handler,
+		},
+		{
+			MethodName: "DetachNetworkInterface",
+			Handler:    _InstanceService_DetachNetworkInterface_Handler,
 		},
 		{
 			MethodName: "AddOneToOneNat",

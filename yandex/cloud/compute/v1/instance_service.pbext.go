@@ -360,6 +360,50 @@ func (m *DetachInstanceFilesystemMetadata) SetFilesystemId(v string) {
 	m.FilesystemId = v
 }
 
+func (m *AttachInstanceNetworkInterfaceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetPrimaryV4AddressSpec(v *PrimaryAddressSpec) {
+	m.PrimaryV4AddressSpec = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
+func (m *AttachInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *AttachInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *DetachInstanceNetworkInterfaceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DetachInstanceNetworkInterfaceRequest) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *DetachInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DetachInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
 func (m *AddInstanceOneToOneNatRequest) SetInstanceId(v string) {
 	m.InstanceId = v
 }

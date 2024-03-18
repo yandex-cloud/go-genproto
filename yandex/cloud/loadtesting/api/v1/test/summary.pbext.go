@@ -41,3 +41,7 @@ func (m *Summary) SetImbalancePoint(v *ImbalancePoint) {
 func (m *Summary) SetAssignedAgentId(v string) {
 	m.AssignedAgentId = v
 }
+
+func (m *Summary) SetArtifacts(v *FilePointer) {
+	m.Artifacts = v
+}

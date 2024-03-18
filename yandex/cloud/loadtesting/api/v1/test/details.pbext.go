@@ -21,3 +21,7 @@ func (m *Details) SetTags(v []*common.Tag) {
 func (m *Details) SetLoggingLogGroupId(v string) {
 	m.LoggingLogGroupId = v
 }
+
+func (m *Details) SetArtifactSettings(v *ArtifactSettings) {
+	m.ArtifactSettings = v
+}
