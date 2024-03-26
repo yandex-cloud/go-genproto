@@ -6,18 +6,30 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (m *TextRequest) SetEntries(v []*TextEntry) {
-	m.Entries = v
+func (m *TextContent) SetMessages(v []*Message) {
+	m.Messages = v
 }
 
-func (m *TextEntry) SetChannelNumber(v int64) {
-	m.ChannelNumber = v
+type Message_Payload = isMessage_Payload
+
+func (m *Message) SetPayload(v Message_Payload) {
+	m.Payload = v
 }
 
-func (m *TextEntry) SetTimestamp(v *timestamppb.Timestamp) {
+func (m *Message) SetUserId(v string) {
+	m.UserId = v
+}
+
+func (m *Message) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }
 
-func (m *TextEntry) SetText(v string) {
+func (m *Message) SetText(v *TextPayload) {
+	m.Payload = &Message_Text{
+		Text: v,
+	}
+}
+
+func (m *TextPayload) SetText(v string) {
 	m.Text = v
 }

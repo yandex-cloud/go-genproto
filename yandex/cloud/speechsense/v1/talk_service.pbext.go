@@ -20,26 +20,28 @@ func (m *StreamTalkRequest) SetAudio(v *AudioStreamingRequest) {
 	}
 }
 
-type UploadTalkRequest_Payload = isUploadTalkRequest_Payload
-
-func (m *UploadTalkRequest) SetPayload(v UploadTalkRequest_Payload) {
-	m.Payload = v
-}
-
 func (m *UploadTalkRequest) SetMetadata(v *TalkMetadata) {
 	m.Metadata = v
 }
 
 func (m *UploadTalkRequest) SetAudio(v *AudioRequest) {
-	m.Payload = &UploadTalkRequest_Audio{
-		Audio: v,
-	}
+	m.Audio = v
 }
 
-func (m *UploadTalkRequest) SetText(v *TextRequest) {
-	m.Payload = &UploadTalkRequest_Text{
-		Text: v,
-	}
+func (m *UploadTalkResponse) SetTalkId(v string) {
+	m.TalkId = v
+}
+
+func (m *UploadTextRequest) SetMetadata(v *TalkMetadata) {
+	m.Metadata = v
+}
+
+func (m *UploadTextRequest) SetTextContent(v []*TextContent) {
+	m.TextContent = v
+}
+
+func (m *UploadTextResponse) SetTalkId(v string) {
+	m.TalkId = v
 }
 
 func (m *TalkMetadata) SetConnectionId(v string) {
@@ -48,8 +50,4 @@ func (m *TalkMetadata) SetConnectionId(v string) {
 
 func (m *TalkMetadata) SetFields(v map[string]string) {
 	m.Fields = v
-}
-
-func (m *UploadTalkResponse) SetTalkId(v string) {
-	m.TalkId = v
 }

@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	TalkService_UploadAsStream_FullMethodName = "/yandex.cloud.speechsense.v1.TalkService/UploadAsStream"
 	TalkService_Upload_FullMethodName         = "/yandex.cloud.speechsense.v1.TalkService/Upload"
+	TalkService_UploadText_FullMethodName     = "/yandex.cloud.speechsense.v1.TalkService/UploadText"
 )
 
 // TalkServiceClient is the client API for TalkService service.
@@ -32,6 +33,8 @@ type TalkServiceClient interface {
 	UploadAsStream(ctx context.Context, opts ...grpc.CallOption) (TalkService_UploadAsStreamClient, error)
 	// rpc for uploading talk document as single message
 	Upload(ctx context.Context, in *UploadTalkRequest, opts ...grpc.CallOption) (*UploadTalkResponse, error)
+	// rpc for uploading text talk document
+	UploadText(ctx context.Context, in *UploadTextRequest, opts ...grpc.CallOption) (*UploadTextResponse, error)
 }
 
 type talkServiceClient struct {
@@ -85,6 +88,15 @@ func (c *talkServiceClient) Upload(ctx context.Context, in *UploadTalkRequest, o
 	return out, nil
 }
 
+func (c *talkServiceClient) UploadText(ctx context.Context, in *UploadTextRequest, opts ...grpc.CallOption) (*UploadTextResponse, error) {
+	out := new(UploadTextResponse)
+	err := c.cc.Invoke(ctx, TalkService_UploadText_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TalkServiceServer is the server API for TalkService service.
 // All implementations should embed UnimplementedTalkServiceServer
 // for forward compatibility
@@ -94,6 +106,8 @@ type TalkServiceServer interface {
 	UploadAsStream(TalkService_UploadAsStreamServer) error
 	// rpc for uploading talk document as single message
 	Upload(context.Context, *UploadTalkRequest) (*UploadTalkResponse, error)
+	// rpc for uploading text talk document
+	UploadText(context.Context, *UploadTextRequest) (*UploadTextResponse, error)
 }
 
 // UnimplementedTalkServiceServer should be embedded to have forward compatible implementations.
@@ -105,6 +119,9 @@ func (UnimplementedTalkServiceServer) UploadAsStream(TalkService_UploadAsStreamS
 }
 func (UnimplementedTalkServiceServer) Upload(context.Context, *UploadTalkRequest) (*UploadTalkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upload not implemented")
+}
+func (UnimplementedTalkServiceServer) UploadText(context.Context, *UploadTextRequest) (*UploadTextResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadText not implemented")
 }
 
 // UnsafeTalkServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -162,6 +179,24 @@ func _TalkService_Upload_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TalkService_UploadText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TalkServiceServer).UploadText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TalkService_UploadText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TalkServiceServer).UploadText(ctx, req.(*UploadTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TalkService_ServiceDesc is the grpc.ServiceDesc for TalkService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -172,6 +207,10 @@ var TalkService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Upload",
 			Handler:    _TalkService_Upload_Handler,
+		},
+		{
+			MethodName: "UploadText",
+			Handler:    _TalkService_UploadText_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

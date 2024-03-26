@@ -158,6 +158,10 @@ func (m *Job) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *Job) SetStartedAt(v *timestamppb.Timestamp) {
+	m.StartedAt = v
+}
+
 func (m *Job) SetFinishedAt(v *timestamppb.Timestamp) {
 	m.FinishedAt = v
 }

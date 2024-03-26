@@ -134,6 +134,10 @@ func (m *MongodConfig5_0Enterprise_SetParameter) SetEnableFlowControl(v *wrapper
 	m.EnableFlowControl = v
 }
 
+func (m *MongodConfig5_0Enterprise_SetParameter) SetMinSnapshotHistoryWindowInSeconds(v *wrapperspb.Int64Value) {
+	m.MinSnapshotHistoryWindowInSeconds = v
+}
+
 func (m *MongoCfgConfig5_0Enterprise) SetStorage(v *MongoCfgConfig5_0Enterprise_Storage) {
 	m.Storage = v
 }

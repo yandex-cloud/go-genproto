@@ -475,6 +475,10 @@ func (m *UpdateHostSpec) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
+func (m *UpdateHostSpec) SetTags(v map[string]string) {
+	m.Tags = v
+}
+
 func (m *EnableClusterShardingRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -641,6 +645,22 @@ func (m *HostSpec) SetType(v Host_Type) {
 
 func (m *HostSpec) SetShardName(v string) {
 	m.ShardName = v
+}
+
+func (m *HostSpec) SetHidden(v *wrapperspb.BoolValue) {
+	m.Hidden = v
+}
+
+func (m *HostSpec) SetSecondaryDelaySecs(v *wrapperspb.Int64Value) {
+	m.SecondaryDelaySecs = v
+}
+
+func (m *HostSpec) SetPriority(v *wrapperspb.DoubleValue) {
+	m.Priority = v
+}
+
+func (m *HostSpec) SetTags(v map[string]string) {
+	m.Tags = v
 }
 
 func (m *MongodbSpec3_6) SetMongod(v *MongodbSpec3_6_Mongod) {
