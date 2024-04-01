@@ -380,9 +380,9 @@ type AnalyzeAndVacuum struct {
 	unknownFields protoimpl.UnknownFields
 
 	Start *BackgroundActivityStartAt `protobuf:"bytes,1,opt,name=start,proto3" json:"start,omitempty"`
-	// in seconds 24*60*60-1 = 86399
+	// Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
 	AnalyzeTimeout *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=analyze_timeout,json=analyzeTimeout,proto3" json:"analyze_timeout,omitempty"`
-	// in seconds 24*60*60-1 = 86399
+	// Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
 	VacuumTimeout *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=vacuum_timeout,json=vacuumTimeout,proto3" json:"vacuum_timeout,omitempty"`
 }
 

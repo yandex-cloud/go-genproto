@@ -82,6 +82,10 @@ func (m *UserSpec) SetUserPasswordEncryption(v UserPasswordEncryption) {
 	m.UserPasswordEncryption = v
 }
 
+func (m *PGAuditSettings) SetLog(v []PGAuditSettings_PGAuditSettingsLog) {
+	m.Log = v
+}
+
 func (m *UserSettings) SetDefaultTransactionIsolation(v UserSettings_TransactionIsolation) {
 	m.DefaultTransactionIsolation = v
 }
@@ -128,4 +132,8 @@ func (m *UserSettings) SetIdleInTransactionSessionTimeout(v *wrapperspb.Int64Val
 
 func (m *UserSettings) SetStatementTimeout(v *wrapperspb.Int64Value) {
 	m.StatementTimeout = v
+}
+
+func (m *UserSettings) SetPgaudit(v *PGAuditSettings) {
+	m.Pgaudit = v
 }

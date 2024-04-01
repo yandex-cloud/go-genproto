@@ -105,3 +105,7 @@ func (m *Task) SetCompletedAt(v *timestamppb.Timestamp) {
 func (m *Task) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
+
+func (m *Task) SetResultCode(v Task_Code) {
+	m.ResultCode = v
+}
