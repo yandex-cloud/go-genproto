@@ -386,7 +386,9 @@ type VideoTUSDParams struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FileSize int64  `protobuf:"varint,1,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	// File size.
+	FileSize int64 `protobuf:"varint,1,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	// File name.
 	FileName string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 }
 
@@ -1114,9 +1116,12 @@ type VideoPlayerParams struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Mute     bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
+	// If true, a player will be muted by default.
+	Mute bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
+	// If true, playback will start automatically.
 	Autoplay bool `protobuf:"varint,2,opt,name=autoplay,proto3" json:"autoplay,omitempty"`
-	Hidden   bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	// If true, a player interface will be hidden by default.
+	Hidden bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
 }
 
 func (x *VideoPlayerParams) Reset() {
@@ -1177,8 +1182,10 @@ type GetVideoPlayerURLResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Direct link to the video.
 	PlayerUrl string `protobuf:"bytes,1,opt,name=player_url,json=playerUrl,proto3" json:"player_url,omitempty"`
-	Html      string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
+	// HTML embed code in Iframe format.
+	Html string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
 }
 
 func (x *GetVideoPlayerURLResponse) Reset() {

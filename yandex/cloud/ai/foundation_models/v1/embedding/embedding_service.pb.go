@@ -27,7 +27,7 @@ type TextEmbeddingRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The identifier of the model to be used for obtaining text embeddings.
+	// The [ID of the model](/docs/foundation-models/concepts/embeddings) to be used for obtaining text embeddings.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// The input text for which the embedding is requested.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
@@ -89,7 +89,7 @@ type TextEmbeddingResponse struct {
 	Embedding []float64 `protobuf:"fixed64,1,rep,packed,name=embedding,proto3" json:"embedding,omitempty"`
 	// The number of tokens in the input text.
 	NumTokens int64 `protobuf:"varint,2,opt,name=num_tokens,json=numTokens,proto3" json:"num_tokens,omitempty"`
-	// Model version (changes with model releases).
+	// The model version changes with each new releases.
 	ModelVersion string `protobuf:"bytes,3,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`
 }
 

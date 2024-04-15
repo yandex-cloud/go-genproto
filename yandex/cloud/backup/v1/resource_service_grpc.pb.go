@@ -26,6 +26,7 @@ const (
 	ResourceService_ListTasks_FullMethodName       = "/yandex.cloud.backup.v1.ResourceService/ListTasks"
 	ResourceService_ListDirectory_FullMethodName   = "/yandex.cloud.backup.v1.ResourceService/ListDirectory"
 	ResourceService_CreateDirectory_FullMethodName = "/yandex.cloud.backup.v1.ResourceService/CreateDirectory"
+	ResourceService_ListOperations_FullMethodName  = "/yandex.cloud.backup.v1.ResourceService/ListOperations"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -46,6 +47,8 @@ type ResourceServiceClient interface {
 	ListDirectory(ctx context.Context, in *ListDirectoryRequest, opts ...grpc.CallOption) (*ListDirectoryResponse, error)
 	// CreateDirectory creates new directory by requested path.
 	CreateDirectory(ctx context.Context, in *CreateDirectoryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// ListOperations return all operations in backup service for given instance
+	ListOperations(ctx context.Context, in *ListResourceOperationsRequest, opts ...grpc.CallOption) (*ListResourceOperationsResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -110,6 +113,15 @@ func (c *resourceServiceClient) CreateDirectory(ctx context.Context, in *CreateD
 	return out, nil
 }
 
+func (c *resourceServiceClient) ListOperations(ctx context.Context, in *ListResourceOperationsRequest, opts ...grpc.CallOption) (*ListResourceOperationsResponse, error) {
+	out := new(ListResourceOperationsResponse)
+	err := c.cc.Invoke(ctx, ResourceService_ListOperations_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations should embed UnimplementedResourceServiceServer
 // for forward compatibility
@@ -128,6 +140,8 @@ type ResourceServiceServer interface {
 	ListDirectory(context.Context, *ListDirectoryRequest) (*ListDirectoryResponse, error)
 	// CreateDirectory creates new directory by requested path.
 	CreateDirectory(context.Context, *CreateDirectoryRequest) (*operation.Operation, error)
+	// ListOperations return all operations in backup service for given instance
+	ListOperations(context.Context, *ListResourceOperationsRequest) (*ListResourceOperationsResponse, error)
 }
 
 // UnimplementedResourceServiceServer should be embedded to have forward compatible implementations.
@@ -151,6 +165,9 @@ func (UnimplementedResourceServiceServer) ListDirectory(context.Context, *ListDi
 }
 func (UnimplementedResourceServiceServer) CreateDirectory(context.Context, *CreateDirectoryRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDirectory not implemented")
+}
+func (UnimplementedResourceServiceServer) ListOperations(context.Context, *ListResourceOperationsRequest) (*ListResourceOperationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
 }
 
 // UnsafeResourceServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -272,6 +289,24 @@ func _ResourceService_CreateDirectory_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ResourceService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResourceOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).ListOperations(ctx, req.(*ListResourceOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ResourceService_ServiceDesc is the grpc.ServiceDesc for ResourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -302,6 +337,10 @@ var ResourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateDirectory",
 			Handler:    _ResourceService_CreateDirectory_Handler,
+		},
+		{
+			MethodName: "ListOperations",
+			Handler:    _ResourceService_ListOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

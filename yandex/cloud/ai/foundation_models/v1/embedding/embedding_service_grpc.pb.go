@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmbeddingsServiceClient interface {
-	// RPC method for obtaining embeddings from text data.
+	// A method for obtaining embeddings from text data.
 	TextEmbedding(ctx context.Context, in *TextEmbeddingRequest, opts ...grpc.CallOption) (*TextEmbeddingResponse, error)
 }
 
@@ -51,7 +51,7 @@ func (c *embeddingsServiceClient) TextEmbedding(ctx context.Context, in *TextEmb
 // All implementations should embed UnimplementedEmbeddingsServiceServer
 // for forward compatibility
 type EmbeddingsServiceServer interface {
-	// RPC method for obtaining embeddings from text data.
+	// A method for obtaining embeddings from text data.
 	TextEmbedding(context.Context, *TextEmbeddingRequest) (*TextEmbeddingResponse, error)
 }
 

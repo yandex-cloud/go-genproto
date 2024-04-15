@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ImageGenerationAsyncServiceClient interface {
-	// RPC method for obtaining image from inpt data.
+	// A method for generating an image based on a textual description.
 	Generate(ctx context.Context, in *ImageGenerationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -52,7 +52,7 @@ func (c *imageGenerationAsyncServiceClient) Generate(ctx context.Context, in *Im
 // All implementations should embed UnimplementedImageGenerationAsyncServiceServer
 // for forward compatibility
 type ImageGenerationAsyncServiceServer interface {
-	// RPC method for obtaining image from inpt data.
+	// A method for generating an image based on a textual description.
 	Generate(context.Context, *ImageGenerationRequest) (*operation.Operation, error)
 }
 

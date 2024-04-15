@@ -50,6 +50,10 @@ func (m *Transfer) SetTransformation(v *Transformation) {
 	m.Transformation = v
 }
 
+func (m *Transfer) SetPrestable(v bool) {
+	m.Prestable = v
+}
+
 type Runtime_Runtime = isRuntime_Runtime
 
 func (m *Runtime) SetRuntime(v Runtime_Runtime) {

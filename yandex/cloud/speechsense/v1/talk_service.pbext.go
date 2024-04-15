@@ -36,7 +36,7 @@ func (m *UploadTextRequest) SetMetadata(v *TalkMetadata) {
 	m.Metadata = v
 }
 
-func (m *UploadTextRequest) SetTextContent(v []*TextContent) {
+func (m *UploadTextRequest) SetTextContent(v *TextContent) {
 	m.TextContent = v
 }
 

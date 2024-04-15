@@ -20,15 +20,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Text message to control generation
+// The text descriptions and weights that the model uses to generate an image.
 type Message struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// text
+	// Text describing the image.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	// Message weight. Negative values for negative messages
+	// Message weight. Negative values indicate negative messages.
 	Weight float64 `protobuf:"fixed64,2,opt,name=weight,proto3" json:"weight,omitempty"`
 }
 
@@ -83,9 +83,9 @@ type ImageGenerationOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// generated image format
+	// MIME type of generated image format.
 	MimeType string `protobuf:"bytes,1,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	// Seed for image generation
+	// Seed for image generation.
 	Seed int64 `protobuf:"varint,2,opt,name=seed,proto3" json:"seed,omitempty"`
 }
 

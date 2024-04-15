@@ -30,7 +30,7 @@ type CompletionRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The identifier of the model to be used for completion generation.
+	// The [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for completion generation.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Configuration options for completion generation.
 	CompletionOptions *v1.CompletionOptions `protobuf:"bytes,2,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
@@ -91,7 +91,7 @@ func (x *CompletionRequest) GetMessages() []*v1.Message {
 	return nil
 }
 
-// Response containing generated text completions
+// Response containing generated text completions.
 type CompletionResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -101,7 +101,7 @@ type CompletionResponse struct {
 	Alternatives []*v1.Alternative `protobuf:"bytes,1,rep,name=alternatives,proto3" json:"alternatives,omitempty"`
 	// A set of statistics describing the number of content tokens used by the completion model.
 	Usage *v1.ContentUsage `protobuf:"bytes,2,opt,name=usage,proto3" json:"usage,omitempty"`
-	// Model version (changes with model releases).
+	// The model version changes with each new releases.
 	ModelVersion string `protobuf:"bytes,3,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`
 }
 

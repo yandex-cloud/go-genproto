@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TextGenerationServiceClient interface {
-	// RPC method for generating text completions.
+	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Completion(ctx context.Context, in *CompletionRequest, opts ...grpc.CallOption) (TextGenerationService_CompletionClient, error)
 }
 
@@ -75,7 +75,7 @@ func (x *textGenerationServiceCompletionClient) Recv() (*CompletionResponse, err
 // All implementations should embed UnimplementedTextGenerationServiceServer
 // for forward compatibility
 type TextGenerationServiceServer interface {
-	// RPC method for generating text completions.
+	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Completion(*CompletionRequest, TextGenerationService_CompletionServer) error
 }
 
@@ -144,7 +144,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TextGenerationAsyncServiceClient interface {
-	// RPC method for generating text completions in asynchronous mode.
+	// A method for generating text completions in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Completion(ctx context.Context, in *CompletionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -169,7 +169,7 @@ func (c *textGenerationAsyncServiceClient) Completion(ctx context.Context, in *C
 // All implementations should embed UnimplementedTextGenerationAsyncServiceServer
 // for forward compatibility
 type TextGenerationAsyncServiceServer interface {
-	// RPC method for generating text completions in asynchronous mode.
+	// A method for generating text completions in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Completion(context.Context, *CompletionRequest) (*operation.Operation, error)
 }
 

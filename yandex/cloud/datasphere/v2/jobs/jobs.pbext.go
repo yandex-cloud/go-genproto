@@ -66,6 +66,10 @@ func (m *File) SetSizeBytes(v int64) {
 	m.SizeBytes = v
 }
 
+func (m *File) SetCompressionType(v FileCompressionType) {
+	m.CompressionType = v
+}
+
 func (m *StorageFile) SetFile(v *File) {
 	m.File = v
 }

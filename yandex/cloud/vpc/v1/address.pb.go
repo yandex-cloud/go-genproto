@@ -432,7 +432,7 @@ type DnsRecord struct {
 	unknownFields protoimpl.UnknownFields
 
 	Fqdn      string `protobuf:"bytes,1,opt,name=fqdn,proto3" json:"fqdn,omitempty"`                              // DNS record name (absolute, or relative to the DNS zone used)
-	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"` // if not set, private zone used
+	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"` // id of public zone
 	Ttl       int64  `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`                               // TTL of record
 	Ptr       bool   `protobuf:"varint,4,opt,name=ptr,proto3" json:"ptr,omitempty"`                               // set if PTR record required
 }

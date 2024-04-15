@@ -92,11 +92,11 @@ type CompletionOptions struct {
 	// Enables streaming of partially generated text.
 	Stream bool `protobuf:"varint,1,opt,name=stream,proto3" json:"stream,omitempty"`
 	// Affects creativity and randomness of responses. Should be a double number between 0 (inclusive) and 1 (inclusive).
-	// Lower values produce more straightforward responses, while higher values lead to increased creativity and randomness.
-	// Default temperature: 0.6
+	// Lower values produce more straightforward responses while higher values lead to increased creativity and randomness.
+	// Default temperature: 0.3
 	Temperature *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=temperature,proto3" json:"temperature,omitempty"`
 	// The limit on the number of tokens used for single completion generation.
-	// Must be greater than zero. The maximum allowed parameter value may depend on the model used.
+	// Must be greater than zero. This maximum allowed parameter value may depend on the model being used.
 	MaxTokens *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_tokens,json=maxTokens,proto3" json:"max_tokens,omitempty"`
 }
 
@@ -159,10 +159,10 @@ type Message struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Identifier of the message sender. Supported roles:
-	// * `system` - special role used to define the behaviour of the completion model
-	// * `assistant` - a role used by the model to generate responses
-	// * `user` - a role used by the user to describe requests to the model
+	// The ID of the message sender. Supported roles:
+	// * `system`: Special role used to define the behaviour of the completion model.
+	// * `assistant`: A role used by the model to generate responses.
+	// * `user`: A role used by the user to describe requests to the model.
 	Role string `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
 	// Message content.
 	//
@@ -236,13 +236,13 @@ type Message_Text struct {
 
 func (*Message_Text) isMessage_Content() {}
 
-// An object representing the number of content tokens used by the completion model.
+// An object representing the number of content [tokens](/docs/foundation-models/concepts/yandexgpt/tokens) used by the completion model.
 type ContentUsage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The number of tokens in the text parts of the model input.
+	// The number of tokens in the textual part of the model input.
 	InputTextTokens int64 `protobuf:"varint,1,opt,name=input_text_tokens,json=inputTextTokens,proto3" json:"input_text_tokens,omitempty"`
 	// The total number of tokens in the generated completions.
 	CompletionTokens int64 `protobuf:"varint,2,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`

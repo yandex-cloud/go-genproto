@@ -114,6 +114,12 @@ func (m *EndpointSettings) SetMongoTarget(v *endpoint.MongoTarget) {
 	}
 }
 
+func (m *EndpointSettings) SetMetrikaSource(v *endpoint.MetrikaSource) {
+	m.Settings = &EndpointSettings_MetrikaSource{
+		MetrikaSource: v,
+	}
+}
+
 func (m *EndpointSettings) SetYdsTarget(v *endpoint.YDSTarget) {
 	m.Settings = &EndpointSettings_YdsTarget{
 		YdsTarget: v,

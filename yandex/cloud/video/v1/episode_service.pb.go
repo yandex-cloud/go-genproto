@@ -1147,9 +1147,12 @@ type EpisodePlayerParams struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Mute     bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
+	// If true, a player will be muted by default.
+	Mute bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
+	// If true, playback will start automatically.
 	Autoplay bool `protobuf:"varint,2,opt,name=autoplay,proto3" json:"autoplay,omitempty"`
-	Hidden   bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	// If true, a player interface will be hidden by default.
+	Hidden bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
 }
 
 func (x *EpisodePlayerParams) Reset() {
@@ -1210,8 +1213,10 @@ type GetEpisodePlayerURLResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Direct link to the video.
 	PlayerUrl string `protobuf:"bytes,1,opt,name=player_url,json=playerUrl,proto3" json:"player_url,omitempty"`
-	Html      string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
+	// HTML embed code in Iframe format.
+	Html string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
 }
 
 func (x *GetEpisodePlayerURLResponse) Reset() {
