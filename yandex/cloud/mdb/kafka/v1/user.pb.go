@@ -25,11 +25,11 @@ type Permission_AccessRole int32
 
 const (
 	Permission_ACCESS_ROLE_UNSPECIFIED Permission_AccessRole = 0
-	// producer role for the user.
+	// Producer role for the user.
 	Permission_ACCESS_ROLE_PRODUCER Permission_AccessRole = 1
-	// consumer role for the user.
+	// Consumer role for the user.
 	Permission_ACCESS_ROLE_CONSUMER Permission_AccessRole = 2
-	// admin role for the user.
+	// Admin role for the user.
 	Permission_ACCESS_ROLE_ADMIN Permission_AccessRole = 3
 )
 

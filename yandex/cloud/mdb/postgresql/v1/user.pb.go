@@ -139,18 +139,18 @@ type UserSettings_SynchronousCommit int32
 
 const (
 	UserSettings_SYNCHRONOUS_COMMIT_UNSPECIFIED UserSettings_SynchronousCommit = 0
-	// (default value) success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server.
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server. Default value.
 	UserSettings_SYNCHRONOUS_COMMIT_ON UserSettings_SynchronousCommit = 1
-	// success is reported to the client even if the data is not in WAL.
+	// Success is reported to the client even if the data is not in WAL.
 	// There is no synchronous write operation, data may be loss in case of storage subsystem failure.
 	UserSettings_SYNCHRONOUS_COMMIT_OFF UserSettings_SynchronousCommit = 2
-	// success is reported to the client if the data is in WAL, and WAL is written to the storage of the master server.
+	// Success is reported to the client if the data is in WAL, and WAL is written to the storage of the master server.
 	// The transaction may be lost due to storage subsystem failure on the master server.
 	UserSettings_SYNCHRONOUS_COMMIT_LOCAL UserSettings_SynchronousCommit = 3
-	// success is reported to the client if the data is in WAL, WAL is written to the storage of the master server, and the server's synchronous standby indicates that it has received WAL and written it out to its operating system.
+	// Success is reported to the client if the data is in WAL, WAL is written to the storage of the master server, and the server's synchronous standby indicates that it has received WAL and written it out to its operating system.
 	// The transaction may be lost due to simultaneous storage subsystem failure on the master and operating system's failure on the synchronous standby.
 	UserSettings_SYNCHRONOUS_COMMIT_REMOTE_WRITE UserSettings_SynchronousCommit = 4
-	// success is reported to the client if the data is in WAL (Write-Ahead Log), WAL is written to the storage of the master server, and its synchronous standby indicates that it has received WAL and applied it.
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), WAL is written to the storage of the master server, and its synchronous standby indicates that it has received WAL and applied it.
 	// The transaction may be lost due to irrecoverably failure of both the master and its synchronous standby.
 	UserSettings_SYNCHRONOUS_COMMIT_REMOTE_APPLY UserSettings_SynchronousCommit = 5
 )
@@ -206,13 +206,13 @@ type UserSettings_LogStatement int32
 
 const (
 	UserSettings_LOG_STATEMENT_UNSPECIFIED UserSettings_LogStatement = 0
-	// (default) logs none of SQL statements.
+	// Logs none of SQL statements. Default value.
 	UserSettings_LOG_STATEMENT_NONE UserSettings_LogStatement = 1
-	// logs all data definition statements (such as `CREATE`, `ALTER`, `DROP` and others).
+	// Logs all data definition statements (such as `CREATE`, `ALTER`, `DROP` and others).
 	UserSettings_LOG_STATEMENT_DDL UserSettings_LogStatement = 2
-	// logs all statements that fall in the `LOG_STATEMENT_DDL` category plus data-modifying statements (such as `INSERT`, `UPDATE` and others).
+	// Logs all statements that fall in the `LOG_STATEMENT_DDL` category plus data-modifying statements (such as `INSERT`, `UPDATE` and others).
 	UserSettings_LOG_STATEMENT_MOD UserSettings_LogStatement = 3
-	// logs all SQL statements.
+	// Logs all SQL statements.
 	UserSettings_LOG_STATEMENT_ALL UserSettings_LogStatement = 4
 )
 
@@ -265,13 +265,13 @@ type UserSettings_TransactionIsolation int32
 
 const (
 	UserSettings_TRANSACTION_ISOLATION_UNSPECIFIED UserSettings_TransactionIsolation = 0
-	// this level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	UserSettings_TRANSACTION_ISOLATION_READ_UNCOMMITTED UserSettings_TransactionIsolation = 1
-	// (default) on this level query sees only data committed before the query began.
+	// On this level query sees only data committed before the query began. Default value.
 	UserSettings_TRANSACTION_ISOLATION_READ_COMMITTED UserSettings_TransactionIsolation = 2
-	// on this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
 	UserSettings_TRANSACTION_ISOLATION_REPEATABLE_READ UserSettings_TransactionIsolation = 3
-	// this level provides the strictest transaction isolation.
+	// This level provides the strictest transaction isolation.
 	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
 	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
 	UserSettings_TRANSACTION_ISOLATION_SERIALIZABLE UserSettings_TransactionIsolation = 4
@@ -326,11 +326,11 @@ type UserSettings_PoolingMode int32
 
 const (
 	UserSettings_POOLING_MODE_UNSPECIFIED UserSettings_PoolingMode = 0
-	// (default) server connection will be assigned to it for the whole duration the client stays connected
+	// Server connection will be assigned to it for the whole duration the client stays connected. Default value.
 	UserSettings_SESSION UserSettings_PoolingMode = 1
-	// server connection is assigned to a client only during a transaction
+	// Server connection is assigned to a client only during a transaction.
 	UserSettings_TRANSACTION UserSettings_PoolingMode = 2
-	// server connection will be put back into the pool immediately after a query completes
+	// Server connection will be put back into the pool immediately after a query completes.
 	UserSettings_STATEMENT UserSettings_PoolingMode = 3
 )
 

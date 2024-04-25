@@ -24,7 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Deployment environment.
 type Cluster_Environment int32
 
 const (
@@ -209,6 +208,7 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Host_Type int32
 
 const (
+	// Type of the host is unspecified. Default value.
 	Host_TYPE_UNSPECIFIED Host_Type = 0
 	// A mongod host.
 	Host_MONGOD Host_Type = 1
@@ -268,7 +268,7 @@ func (Host_Type) EnumDescriptor() ([]byte, []int) {
 type Host_Role int32
 
 const (
-	// Role of the host in the cluster is unknown.
+	// Role of the host in the cluster is unknown. Default value.
 	Host_ROLE_UNKNOWN Host_Role = 0
 	// Host is the primary MongoDB server in the cluster.
 	Host_PRIMARY Host_Role = 1
@@ -320,7 +320,7 @@ func (Host_Role) EnumDescriptor() ([]byte, []int) {
 type Host_Health int32
 
 const (
-	// Health of the host is unknown.
+	// Health of the host is unknown. Default value.
 	Host_HEALTH_UNKNOWN Host_Health = 0
 	// The host is performing all its functions normally.
 	Host_ALIVE Host_Health = 1
@@ -376,6 +376,7 @@ func (Host_Health) EnumDescriptor() ([]byte, []int) {
 type Service_Type int32
 
 const (
+	// Service type of the host is unspecified. Default value.
 	Service_TYPE_UNSPECIFIED Service_Type = 0
 	// The host is running a mongod daemon.
 	Service_MONGOD Service_Type = 1
@@ -1742,9 +1743,9 @@ type Host struct {
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Resources allocated to the MongoDB host.
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
-	// Role of the host in the cluster.
+	// Role of the host in the cluster. If the field has default value, it is not returned in the response.
 	Role Host_Role `protobuf:"varint,5,opt,name=role,proto3,enum=yandex.cloud.mdb.mongodb.v1.Host_Role" json:"role,omitempty"`
-	// Status code of the aggregated health of the host.
+	// Aggregated health of the host. If the field has default value, it is not returned in the response.
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.mongodb.v1.Host_Health" json:"health,omitempty"`
 	// Services provided by the host.
 	Services []*Service `protobuf:"bytes,7,rep,name=services,proto3" json:"services,omitempty"`
@@ -1754,7 +1755,7 @@ type Host struct {
 	AssignPublicIp bool `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Shard which this host belongs to.
 	ShardName string `protobuf:"bytes,10,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
-	// Host type
+	// Host type. If the field has default value, it is not returned in the response.
 	Type Host_Type `protobuf:"varint,11,opt,name=type,proto3,enum=yandex.cloud.mdb.mongodb.v1.Host_Type" json:"type,omitempty"`
 }
 
@@ -1872,9 +1873,9 @@ type Service struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Type of the service provided by the host.
+	// Type of the service provided by the host. If the field has default value, it is not returned in the response.
 	Type Service_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.mdb.mongodb.v1.Service_Type" json:"type,omitempty"`
-	// Status code of server availability.
+	// Aggregated health of the service. If the field has default value, it is not returned in the response.
 	Health Service_Health `protobuf:"varint,2,opt,name=health,proto3,enum=yandex.cloud.mdb.mongodb.v1.Service_Health" json:"health,omitempty"`
 }
 

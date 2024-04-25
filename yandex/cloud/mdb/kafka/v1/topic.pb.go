@@ -26,11 +26,11 @@ type TopicConfig2_8_CleanupPolicy int32
 
 const (
 	TopicConfig2_8_CLEANUP_POLICY_UNSPECIFIED TopicConfig2_8_CleanupPolicy = 0
-	// this policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig2_8.log_retention_ms] and other similar parameters.
+	// This policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig2_8.log_retention_ms] and other similar parameters.
 	TopicConfig2_8_CLEANUP_POLICY_DELETE TopicConfig2_8_CleanupPolicy = 1
-	// this policy compacts messages in log.
+	// This policy compacts messages in log.
 	TopicConfig2_8_CLEANUP_POLICY_COMPACT TopicConfig2_8_CleanupPolicy = 2
-	// this policy use both compaction and deletion for messages and log segments.
+	// This policy use both compaction and deletion for messages and log segments.
 	TopicConfig2_8_CLEANUP_POLICY_COMPACT_AND_DELETE TopicConfig2_8_CleanupPolicy = 3
 )
 
@@ -81,11 +81,11 @@ type TopicConfig3_CleanupPolicy int32
 
 const (
 	TopicConfig3_CLEANUP_POLICY_UNSPECIFIED TopicConfig3_CleanupPolicy = 0
-	// this policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig3.log_retention_ms] and other similar parameters.
+	// This policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig3.log_retention_ms] and other similar parameters.
 	TopicConfig3_CLEANUP_POLICY_DELETE TopicConfig3_CleanupPolicy = 1
-	// this policy compacts messages in log.
+	// This policy compacts messages in log.
 	TopicConfig3_CLEANUP_POLICY_COMPACT TopicConfig3_CleanupPolicy = 2
-	// this policy use both compaction and deletion for messages and log segments.
+	// This policy use both compaction and deletion for messages and log segments.
 	TopicConfig3_CLEANUP_POLICY_COMPACT_AND_DELETE TopicConfig3_CleanupPolicy = 3
 )
 

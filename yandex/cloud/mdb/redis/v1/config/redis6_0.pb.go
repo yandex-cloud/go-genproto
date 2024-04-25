@@ -123,7 +123,7 @@ type RedisConfig6_0 struct {
 	SlowlogLogSlowerThan *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=slowlog_log_slower_than,json=slowlogLogSlowerThan,proto3" json:"slowlog_log_slower_than,omitempty"`
 	// Max slow requests number to log.
 	SlowlogMaxLen *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=slowlog_max_len,json=slowlogMaxLen,proto3" json:"slowlog_max_len,omitempty"`
-	// String setting for pub\sub functionality; subset of KEg$lshzxeAtm.
+	// String setting for pub\sub functionality.
 	NotifyKeyspaceEvents string `protobuf:"bytes,7,opt,name=notify_keyspace_events,json=notifyKeyspaceEvents,proto3" json:"notify_keyspace_events,omitempty"`
 	// Redis connection output buffers limits for pubsub operations.
 	ClientOutputBufferLimitPubsub *RedisConfig6_0_ClientOutputBufferLimit `protobuf:"bytes,8,opt,name=client_output_buffer_limit_pubsub,json=clientOutputBufferLimitPubsub,proto3" json:"client_output_buffer_limit_pubsub,omitempty"`

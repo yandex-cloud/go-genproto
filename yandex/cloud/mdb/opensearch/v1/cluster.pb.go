@@ -256,7 +256,7 @@ func (OpenSearch_GroupRole) EnumDescriptor() ([]byte, []int) {
 type Host_Health int32
 
 const (
-	// Health of the host is unknown.
+	// Health of the host is unknown. Default value.
 	Host_UNKNOWN Host_Health = 0
 	// The host is performing all its functions normally.
 	Host_ALIVE Host_Health = 1
@@ -312,7 +312,7 @@ func (Host_Health) EnumDescriptor() ([]byte, []int) {
 type Host_Type int32
 
 const (
-	// The type is not specified.
+	// Type of the host is unspecified. Default value.
 	Host_TYPE_UNSPECIFIED Host_Type = 0
 	// An OpenSearch type host.
 	Host_OPENSEARCH Host_Type = 1
@@ -920,9 +920,9 @@ type Host struct {
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Resources allocated to the OpenSearch host.
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
-	// Type of the host.
+	// Type of the host. If the field has default value, it is not returned in the response.
 	Type Host_Type `protobuf:"varint,5,opt,name=type,proto3,enum=yandex.cloud.mdb.opensearch.v1.Host_Type" json:"type,omitempty"`
-	// Status code of the aggregated health of the host.
+	// Aggregated health of the host. If the field has default value, it is not returned in the response.
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.opensearch.v1.Host_Health" json:"health,omitempty"`
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`

@@ -414,7 +414,7 @@ type CreateClusterRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the cluster as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Deployment environment of the cluster.
+	// Deployment environment of the MySQL cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Environment" json:"environment,omitempty"`
 	// Configuration of the cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
@@ -1000,7 +1000,7 @@ type RestoreClusterRequest struct {
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the new cluster as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Deployment environment for the new cluster.
+	// Deployment environment of the new cluster.
 	Environment Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.mysql.v1.Cluster_Environment" json:"environment,omitempty"`
 	// Configuration of the new cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,8,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`

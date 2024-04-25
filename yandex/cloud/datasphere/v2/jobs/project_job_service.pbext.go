@@ -47,6 +47,42 @@ func (m *CreateProjectJobResponse) SetUploadFiles(v []*StorageFile) {
 	m.UploadFiles = v
 }
 
+func (m *CloneProjectJobRequest) SetSourceJobId(v string) {
+	m.SourceJobId = v
+}
+
+func (m *CloneProjectJobRequest) SetJobParametersOverrides(v *JobParameters) {
+	m.JobParametersOverrides = v
+}
+
+func (m *CloneProjectJobRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CloneProjectJobRequest) SetDesc(v string) {
+	m.Desc = v
+}
+
+func (m *CloneProjectJobRequest) SetDataTtl(v *durationpb.Duration) {
+	m.DataTtl = v
+}
+
+func (m *CloneProjectJobResponse) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *CloneProjectJobResponse) SetUploadFiles(v []*StorageFile) {
+	m.UploadFiles = v
+}
+
+func (m *CloneProjectJobMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *CloneProjectJobMetadata) SetJobId(v string) {
+	m.JobId = v
+}
+
 func (m *ExecuteProjectJobRequest) SetJobId(v string) {
 	m.JobId = v
 }
@@ -155,12 +191,20 @@ func (m *DeleteProjectJobDataMetadata) SetJobId(v string) {
 	m.JobId = v
 }
 
-func (m *DeleteAllDataRequest) SetProjectId(v string) {
+func (m *DeleteAllProjectJobDataRequest) SetProjectId(v string) {
 	m.ProjectId = v
 }
 
-func (m *DeleteAllDataMetadata) SetProjectId(v string) {
+func (m *DeleteAllProjectJobDataMetadata) SetProjectId(v string) {
 	m.ProjectId = v
+}
+
+func (m *SetProjectJobDataTtlRequest) SetJobId(v string) {
+	m.JobId = v
+}
+
+func (m *SetProjectJobDataTtlRequest) SetTtl(v *durationpb.Duration) {
+	m.Ttl = v
 }
 
 func (m *StdLog) SetContent(v []byte) {

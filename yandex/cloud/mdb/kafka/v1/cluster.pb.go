@@ -27,9 +27,9 @@ type Cluster_Environment int32
 
 const (
 	Cluster_ENVIRONMENT_UNSPECIFIED Cluster_Environment = 0
-	// stable environment with a conservative update policy when only hotfixes are applied during regular maintenance.
+	// Stable environment with a conservative update policy when only hotfixes are applied during regular maintenance.
 	Cluster_PRODUCTION Cluster_Environment = 1
-	// environment with a more aggressive update policy when new versions are rolled out irrespective of backward compatibility.
+	// Environment with a more aggressive update policy when new versions are rolled out irrespective of backward compatibility.
 	Cluster_PRESTABLE Cluster_Environment = 2
 )
 
@@ -77,13 +77,13 @@ func (Cluster_Environment) EnumDescriptor() ([]byte, []int) {
 type Cluster_Health int32
 
 const (
-	// state of the cluster is unknown ([Host.health] of all hosts in the cluster is `UNKNOWN`).
+	// State of the cluster is unknown ([Host.health] of all hosts in the cluster is `UNKNOWN`).
 	Cluster_HEALTH_UNKNOWN Cluster_Health = 0
-	// cluster is alive and well ([Host.health] of all hosts in the cluster is `ALIVE`).
+	// Cluster is alive and well ([Host.health] of all hosts in the cluster is `ALIVE`).
 	Cluster_ALIVE Cluster_Health = 1
-	// cluster is inoperable ([Host.health] of all hosts in the cluster is `DEAD`).
+	// Cluster is inoperable ([Host.health] of all hosts in the cluster is `DEAD`).
 	Cluster_DEAD Cluster_Health = 2
-	// cluster is in degraded state ([Host.health] of at least one of the hosts in the cluster is not `ALIVE`).
+	// Cluster is in degraded state ([Host.health] of at least one of the hosts in the cluster is not `ALIVE`).
 	Cluster_DEGRADED Cluster_Health = 3
 )
 
@@ -133,21 +133,21 @@ func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
 type Cluster_Status int32
 
 const (
-	// cluster state is unknown.
+	// Cluster state is unknown.
 	Cluster_STATUS_UNKNOWN Cluster_Status = 0
-	// cluster is being created.
+	// Cluster is being created.
 	Cluster_CREATING Cluster_Status = 1
-	// cluster is running normally.
+	// Cluster is running normally.
 	Cluster_RUNNING Cluster_Status = 2
-	// cluster encountered a problem and cannot operate.
+	// Cluster encountered a problem and cannot operate.
 	Cluster_ERROR Cluster_Status = 3
-	// cluster is being updated.
+	// Cluster is being updated.
 	Cluster_UPDATING Cluster_Status = 4
-	// cluster is stopping.
+	// Cluster is stopping.
 	Cluster_STOPPING Cluster_Status = 5
-	// cluster stopped.
+	// Cluster stopped.
 	Cluster_STOPPED Cluster_Status = 6
-	// cluster is starting.
+	// Cluster is starting.
 	Cluster_STARTING Cluster_Status = 7
 )
 
@@ -205,10 +205,11 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Host_Role int32
 
 const (
+	// Role of the host is unspecified. Default value.
 	Host_ROLE_UNSPECIFIED Host_Role = 0
-	// the host is a Kafka broker.
+	// The host is a Kafka broker.
 	Host_KAFKA Host_Role = 1
-	// the host is a ZooKeeper server.
+	// The host is a ZooKeeper server.
 	Host_ZOOKEEPER Host_Role = 2
 )
 
@@ -256,13 +257,13 @@ func (Host_Role) EnumDescriptor() ([]byte, []int) {
 type Host_Health int32
 
 const (
-	// health of the host is unknown.
+	// Health of the host is unknown. Default value.
 	Host_UNKNOWN Host_Health = 0
-	// the host is performing all its functions normally.
+	// The host is performing all its functions normally.
 	Host_ALIVE Host_Health = 1
-	// the host is inoperable and cannot perform any of its essential functions.
+	// The host is inoperable and cannot perform any of its essential functions.
 	Host_DEAD Host_Health = 2
-	// the host is degraded and can perform only some of its essential functions.
+	// The host is degraded and can perform only some of its essential functions.
 	Host_DEGRADED Host_Health = 3
 )
 
@@ -1264,11 +1265,11 @@ type Host struct {
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the availability zone where the host resides.
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// Host role.
+	// Host role. If the field has default value, it is not returned in the response.
 	Role Host_Role `protobuf:"varint,4,opt,name=role,proto3,enum=yandex.cloud.mdb.kafka.v1.Host_Role" json:"role,omitempty"`
 	// Computational resources allocated to the host.
 	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
-	// Aggregated host health data.
+	// Aggregated host health data. If the field has default value, it is not returned in the response.
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.kafka.v1.Host_Health" json:"health,omitempty"`
 	// ID of the subnet the host resides in.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`

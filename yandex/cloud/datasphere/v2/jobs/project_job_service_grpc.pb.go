@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	ProjectJobService_Create_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Create"
+	ProjectJobService_Clone_FullMethodName            = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Clone"
 	ProjectJobService_Execute_FullMethodName          = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Execute"
 	ProjectJobService_Cancel_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Cancel"
 	ProjectJobService_ReadStdLogs_FullMethodName      = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/ReadStdLogs"
@@ -32,6 +33,7 @@ const (
 	ProjectJobService_Delete_FullMethodName           = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/Delete"
 	ProjectJobService_DeleteData_FullMethodName       = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DeleteData"
 	ProjectJobService_DeleteAllData_FullMethodName    = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/DeleteAllData"
+	ProjectJobService_SetDataTtl_FullMethodName       = "/yandex.cloud.datasphere.v2.jobs.ProjectJobService/SetDataTtl"
 )
 
 // ProjectJobServiceClient is the client API for ProjectJobService service.
@@ -40,6 +42,8 @@ const (
 type ProjectJobServiceClient interface {
 	// Creates job.
 	Create(ctx context.Context, in *CreateProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Clone job.
+	Clone(ctx context.Context, in *CloneProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Runs job execution.
 	Execute(ctx context.Context, in *ExecuteProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Cancels running job.
@@ -60,7 +64,9 @@ type ProjectJobServiceClient interface {
 	// Delete job data.
 	DeleteData(ctx context.Context, in *DeleteProjectJobDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete all jobs data.
-	DeleteAllData(ctx context.Context, in *DeleteAllDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	DeleteAllData(ctx context.Context, in *DeleteAllProjectJobDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update job data ttl.
+	SetDataTtl(ctx context.Context, in *SetProjectJobDataTtlRequest, opts ...grpc.CallOption) (*SetProjectJobDataTtlResponse, error)
 }
 
 type projectJobServiceClient struct {
@@ -74,6 +80,15 @@ func NewProjectJobServiceClient(cc grpc.ClientConnInterface) ProjectJobServiceCl
 func (c *projectJobServiceClient) Create(ctx context.Context, in *CreateProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ProjectJobService_Create_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectJobServiceClient) Clone(ctx context.Context, in *CloneProjectJobRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectJobService_Clone_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -208,9 +223,18 @@ func (c *projectJobServiceClient) DeleteData(ctx context.Context, in *DeleteProj
 	return out, nil
 }
 
-func (c *projectJobServiceClient) DeleteAllData(ctx context.Context, in *DeleteAllDataRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *projectJobServiceClient) DeleteAllData(ctx context.Context, in *DeleteAllProjectJobDataRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ProjectJobService_DeleteAllData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectJobServiceClient) SetDataTtl(ctx context.Context, in *SetProjectJobDataTtlRequest, opts ...grpc.CallOption) (*SetProjectJobDataTtlResponse, error) {
+	out := new(SetProjectJobDataTtlResponse)
+	err := c.cc.Invoke(ctx, ProjectJobService_SetDataTtl_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -223,6 +247,8 @@ func (c *projectJobServiceClient) DeleteAllData(ctx context.Context, in *DeleteA
 type ProjectJobServiceServer interface {
 	// Creates job.
 	Create(context.Context, *CreateProjectJobRequest) (*operation.Operation, error)
+	// Clone job.
+	Clone(context.Context, *CloneProjectJobRequest) (*operation.Operation, error)
 	// Runs job execution.
 	Execute(context.Context, *ExecuteProjectJobRequest) (*operation.Operation, error)
 	// Cancels running job.
@@ -243,7 +269,9 @@ type ProjectJobServiceServer interface {
 	// Delete job data.
 	DeleteData(context.Context, *DeleteProjectJobDataRequest) (*operation.Operation, error)
 	// Delete all jobs data.
-	DeleteAllData(context.Context, *DeleteAllDataRequest) (*operation.Operation, error)
+	DeleteAllData(context.Context, *DeleteAllProjectJobDataRequest) (*operation.Operation, error)
+	// Update job data ttl.
+	SetDataTtl(context.Context, *SetProjectJobDataTtlRequest) (*SetProjectJobDataTtlResponse, error)
 }
 
 // UnimplementedProjectJobServiceServer should be embedded to have forward compatible implementations.
@@ -252,6 +280,9 @@ type UnimplementedProjectJobServiceServer struct {
 
 func (UnimplementedProjectJobServiceServer) Create(context.Context, *CreateProjectJobRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedProjectJobServiceServer) Clone(context.Context, *CloneProjectJobRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Clone not implemented")
 }
 func (UnimplementedProjectJobServiceServer) Execute(context.Context, *ExecuteProjectJobRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
@@ -280,8 +311,11 @@ func (UnimplementedProjectJobServiceServer) Delete(context.Context, *DeleteProje
 func (UnimplementedProjectJobServiceServer) DeleteData(context.Context, *DeleteProjectJobDataRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteData not implemented")
 }
-func (UnimplementedProjectJobServiceServer) DeleteAllData(context.Context, *DeleteAllDataRequest) (*operation.Operation, error) {
+func (UnimplementedProjectJobServiceServer) DeleteAllData(context.Context, *DeleteAllProjectJobDataRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAllData not implemented")
+}
+func (UnimplementedProjectJobServiceServer) SetDataTtl(context.Context, *SetProjectJobDataTtlRequest) (*SetProjectJobDataTtlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDataTtl not implemented")
 }
 
 // UnsafeProjectJobServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -309,6 +343,24 @@ func _ProjectJobService_Create_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProjectJobServiceServer).Create(ctx, req.(*CreateProjectJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectJobService_Clone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneProjectJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectJobServiceServer).Clone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectJobService_Clone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectJobServiceServer).Clone(ctx, req.(*CloneProjectJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -482,7 +534,7 @@ func _ProjectJobService_DeleteData_Handler(srv interface{}, ctx context.Context,
 }
 
 func _ProjectJobService_DeleteAllData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteAllDataRequest)
+	in := new(DeleteAllProjectJobDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -494,7 +546,25 @@ func _ProjectJobService_DeleteAllData_Handler(srv interface{}, ctx context.Conte
 		FullMethod: ProjectJobService_DeleteAllData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectJobServiceServer).DeleteAllData(ctx, req.(*DeleteAllDataRequest))
+		return srv.(ProjectJobServiceServer).DeleteAllData(ctx, req.(*DeleteAllProjectJobDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectJobService_SetDataTtl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetProjectJobDataTtlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectJobServiceServer).SetDataTtl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectJobService_SetDataTtl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectJobServiceServer).SetDataTtl(ctx, req.(*SetProjectJobDataTtlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -509,6 +579,10 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _ProjectJobService_Create_Handler,
+		},
+		{
+			MethodName: "Clone",
+			Handler:    _ProjectJobService_Clone_Handler,
 		},
 		{
 			MethodName: "Execute",
@@ -541,6 +615,10 @@ var ProjectJobService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAllData",
 			Handler:    _ProjectJobService_DeleteAllData_Handler,
+		},
+		{
+			MethodName: "SetDataTtl",
+			Handler:    _ProjectJobService_SetDataTtl_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -33,3 +33,7 @@ func (m *CreateComputeInstance) SetNetworkInterfaceSpecs(v []*v1.NetworkInterfac
 func (m *CreateComputeInstance) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
+
+func (m *CreateComputeInstance) SetPlatformId(v string) {
+	m.PlatformId = v
+}
