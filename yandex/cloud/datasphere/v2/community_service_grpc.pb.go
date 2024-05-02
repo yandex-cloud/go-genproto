@@ -13,6 +13,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -31,6 +32,9 @@ const (
 	CommunityService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.datasphere.v2.CommunityService/UpdateAccessBindings"
 	CommunityService_AddResource_FullMethodName          = "/yandex.cloud.datasphere.v2.CommunityService/AddResource"
 	CommunityService_RemoveResource_FullMethodName       = "/yandex.cloud.datasphere.v2.CommunityService/RemoveResource"
+	CommunityService_GetRestrictionsMeta_FullMethodName  = "/yandex.cloud.datasphere.v2.CommunityService/GetRestrictionsMeta"
+	CommunityService_GetRestrictions_FullMethodName      = "/yandex.cloud.datasphere.v2.CommunityService/GetRestrictions"
+	CommunityService_SetRestrictions_FullMethodName      = "/yandex.cloud.datasphere.v2.CommunityService/SetRestrictions"
 )
 
 // CommunityServiceClient is the client API for CommunityService service.
@@ -57,6 +61,12 @@ type CommunityServiceClient interface {
 	AddResource(ctx context.Context, in *AddCommunityResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Removes shared resource from community
 	RemoveResource(ctx context.Context, in *RemoveCommunityResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Get meta information about available restrictions.
+	GetRestrictionsMeta(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetRestrictionsMetaResponse, error)
+	// Get current community restrictions.
+	GetRestrictions(ctx context.Context, in *GetCommunityRestrictionsRequest, opts ...grpc.CallOption) (*RestrictionsResponse, error)
+	// Set community restrictions.
+	SetRestrictions(ctx context.Context, in *SetCommunityRestrictionsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type communityServiceClient struct {
@@ -157,6 +167,33 @@ func (c *communityServiceClient) RemoveResource(ctx context.Context, in *RemoveC
 	return out, nil
 }
 
+func (c *communityServiceClient) GetRestrictionsMeta(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetRestrictionsMetaResponse, error) {
+	out := new(GetRestrictionsMetaResponse)
+	err := c.cc.Invoke(ctx, CommunityService_GetRestrictionsMeta_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *communityServiceClient) GetRestrictions(ctx context.Context, in *GetCommunityRestrictionsRequest, opts ...grpc.CallOption) (*RestrictionsResponse, error) {
+	out := new(RestrictionsResponse)
+	err := c.cc.Invoke(ctx, CommunityService_GetRestrictions_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *communityServiceClient) SetRestrictions(ctx context.Context, in *SetCommunityRestrictionsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, CommunityService_SetRestrictions_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CommunityServiceServer is the server API for CommunityService service.
 // All implementations should embed UnimplementedCommunityServiceServer
 // for forward compatibility
@@ -181,6 +218,12 @@ type CommunityServiceServer interface {
 	AddResource(context.Context, *AddCommunityResourceRequest) (*operation.Operation, error)
 	// Removes shared resource from community
 	RemoveResource(context.Context, *RemoveCommunityResourceRequest) (*operation.Operation, error)
+	// Get meta information about available restrictions.
+	GetRestrictionsMeta(context.Context, *emptypb.Empty) (*GetRestrictionsMetaResponse, error)
+	// Get current community restrictions.
+	GetRestrictions(context.Context, *GetCommunityRestrictionsRequest) (*RestrictionsResponse, error)
+	// Set community restrictions.
+	SetRestrictions(context.Context, *SetCommunityRestrictionsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedCommunityServiceServer should be embedded to have forward compatible implementations.
@@ -216,6 +259,15 @@ func (UnimplementedCommunityServiceServer) AddResource(context.Context, *AddComm
 }
 func (UnimplementedCommunityServiceServer) RemoveResource(context.Context, *RemoveCommunityResourceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveResource not implemented")
+}
+func (UnimplementedCommunityServiceServer) GetRestrictionsMeta(context.Context, *emptypb.Empty) (*GetRestrictionsMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRestrictionsMeta not implemented")
+}
+func (UnimplementedCommunityServiceServer) GetRestrictions(context.Context, *GetCommunityRestrictionsRequest) (*RestrictionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRestrictions not implemented")
+}
+func (UnimplementedCommunityServiceServer) SetRestrictions(context.Context, *SetCommunityRestrictionsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetRestrictions not implemented")
 }
 
 // UnsafeCommunityServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -409,6 +461,60 @@ func _CommunityService_RemoveResource_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CommunityService_GetRestrictionsMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommunityServiceServer).GetRestrictionsMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommunityService_GetRestrictionsMeta_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommunityServiceServer).GetRestrictionsMeta(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommunityService_GetRestrictions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommunityRestrictionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommunityServiceServer).GetRestrictions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommunityService_GetRestrictions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommunityServiceServer).GetRestrictions(ctx, req.(*GetCommunityRestrictionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommunityService_SetRestrictions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCommunityRestrictionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommunityServiceServer).SetRestrictions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommunityService_SetRestrictions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommunityServiceServer).SetRestrictions(ctx, req.(*SetCommunityRestrictionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CommunityService_ServiceDesc is the grpc.ServiceDesc for CommunityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -455,6 +561,18 @@ var CommunityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveResource",
 			Handler:    _CommunityService_RemoveResource_Handler,
+		},
+		{
+			MethodName: "GetRestrictionsMeta",
+			Handler:    _CommunityService_GetRestrictionsMeta_Handler,
+		},
+		{
+			MethodName: "GetRestrictions",
+			Handler:    _CommunityService_GetRestrictions_Handler,
+		},
+		{
+			MethodName: "SetRestrictions",
+			Handler:    _CommunityService_SetRestrictions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

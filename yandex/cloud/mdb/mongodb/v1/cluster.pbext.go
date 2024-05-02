@@ -693,6 +693,26 @@ func (m *Host) SetType(v Host_Type) {
 	m.Type = v
 }
 
+func (m *Host) SetHostParameters(v *Host_HostParameters) {
+	m.HostParameters = v
+}
+
+func (m *Host_HostParameters) SetHidden(v bool) {
+	m.Hidden = v
+}
+
+func (m *Host_HostParameters) SetSecondaryDelaySecs(v int64) {
+	m.SecondaryDelaySecs = v
+}
+
+func (m *Host_HostParameters) SetPriority(v float64) {
+	m.Priority = v
+}
+
+func (m *Host_HostParameters) SetTags(v map[string]string) {
+	m.Tags = v
+}
+
 func (m *Service) SetType(v Service_Type) {
 	m.Type = v
 }

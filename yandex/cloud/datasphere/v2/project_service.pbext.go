@@ -284,3 +284,15 @@ func (m *RemoveResourceFromProjectRequest) SetResourceType(v ResourceType) {
 func (m *RemoveResourceFromProjectRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
+
+func (m *GetProjectRestrictionsRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *SetProjectRestrictionsRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *SetProjectRestrictionsRequest) SetRestrictions(v []*Restriction) {
+	m.Restrictions = v
+}

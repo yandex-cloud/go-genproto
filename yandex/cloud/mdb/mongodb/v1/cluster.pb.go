@@ -1757,6 +1757,8 @@ type Host struct {
 	ShardName string `protobuf:"bytes,10,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	// Host type. If the field has default value, it is not returned in the response.
 	Type Host_Type `protobuf:"varint,11,opt,name=type,proto3,enum=yandex.cloud.mdb.mongodb.v1.Host_Type" json:"type,omitempty"`
+	// Host parameters
+	HostParameters *Host_HostParameters `protobuf:"bytes,12,opt,name=host_parameters,json=hostParameters,proto3" json:"host_parameters,omitempty"`
 }
 
 func (x *Host) Reset() {
@@ -1866,6 +1868,13 @@ func (x *Host) GetType() Host_Type {
 		return x.Type
 	}
 	return Host_TYPE_UNSPECIFIED
+}
+
+func (x *Host) GetHostParameters() *Host_HostParameters {
+	if x != nil {
+		return x.HostParameters
+	}
+	return nil
 }
 
 type Service struct {
@@ -4213,6 +4222,77 @@ func (x *Mongodb6_0Enterprise_MongoInfra) GetResources() *Resources {
 	return nil
 }
 
+type Host_HostParameters struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Hidden             bool              `protobuf:"varint,1,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	SecondaryDelaySecs int64             `protobuf:"varint,2,opt,name=secondary_delay_secs,json=secondaryDelaySecs,proto3" json:"secondary_delay_secs,omitempty"`
+	Priority           float64           `protobuf:"fixed64,3,opt,name=priority,proto3" json:"priority,omitempty"`
+	Tags               map[string]string `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *Host_HostParameters) Reset() {
+	*x = Host_HostParameters{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_mdb_mongodb_v1_cluster_proto_msgTypes[55]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Host_HostParameters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Host_HostParameters) ProtoMessage() {}
+
+func (x *Host_HostParameters) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_cluster_proto_msgTypes[55]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Host_HostParameters.ProtoReflect.Descriptor instead.
+func (*Host_HostParameters) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDescGZIP(), []int{13, 0}
+}
+
+func (x *Host_HostParameters) GetHidden() bool {
+	if x != nil {
+		return x.Hidden
+	}
+	return false
+}
+
+func (x *Host_HostParameters) GetSecondaryDelaySecs() int64 {
+	if x != nil {
+		return x.SecondaryDelaySecs
+	}
+	return 0
+}
+
+func (x *Host_HostParameters) GetPriority() float64 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *Host_HostParameters) GetTags() map[string]string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_mongodb_v1_cluster_proto protoreflect.FileDescriptor
 
 var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = []byte{
@@ -5059,7 +5139,7 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = []byte{
 	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x5f, 0x69,
 	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
-	0x49, 0x64, 0x22, 0xc5, 0x05, 0x0a, 0x04, 0x48, 0x6f, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x49, 0x64, 0x22, 0xa2, 0x08, 0x0a, 0x04, 0x48, 0x6f, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
 	0x1d, 0x0a, 0x0a, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x49, 0x64, 0x12, 0x17,
@@ -5090,61 +5170,83 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = []byte{
 	0x61, 0x6d, 0x65, 0x12, 0x3a, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28,
 	0x0e, 0x32, 0x26, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
 	0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62, 0x2e, 0x76, 0x31, 0x2e,
-	0x48, 0x6f, 0x73, 0x74, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x22,
-	0x52, 0x0a, 0x04, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x10, 0x54, 0x59, 0x50, 0x45, 0x5f,
-	0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0a, 0x0a,
-	0x06, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x44, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f, 0x4e,
-	0x47, 0x4f, 0x53, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x43, 0x46,
-	0x47, 0x10, 0x03, 0x12, 0x0e, 0x0a, 0x0a, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x49, 0x4e, 0x46, 0x52,
-	0x41, 0x10, 0x04, 0x22, 0x34, 0x0a, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x10, 0x0a, 0x0c, 0x52,
-	0x4f, 0x4c, 0x45, 0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0b, 0x0a,
-	0x07, 0x50, 0x52, 0x49, 0x4d, 0x41, 0x52, 0x59, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x45,
-	0x43, 0x4f, 0x4e, 0x44, 0x41, 0x52, 0x59, 0x10, 0x02, 0x22, 0x3f, 0x0a, 0x06, 0x48, 0x65, 0x61,
-	0x6c, 0x74, 0x68, 0x12, 0x12, 0x0a, 0x0e, 0x48, 0x45, 0x41, 0x4c, 0x54, 0x48, 0x5f, 0x55, 0x4e,
-	0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x4c, 0x49, 0x56, 0x45,
-	0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x44, 0x45, 0x41, 0x44, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08,
-	0x44, 0x45, 0x47, 0x52, 0x41, 0x44, 0x45, 0x44, 0x10, 0x03, 0x22, 0x84, 0x02, 0x0a, 0x07, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3d, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0e, 0x32, 0x29, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62, 0x2e,
-	0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x52,
-	0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x43, 0x0a, 0x06, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x2b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62,
-	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x48, 0x65, 0x61, 0x6c,
-	0x74, 0x68, 0x52, 0x06, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x22, 0x42, 0x0a, 0x04, 0x54, 0x79,
-	0x70, 0x65, 0x12, 0x14, 0x0a, 0x10, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
-	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f, 0x4e, 0x47,
-	0x4f, 0x44, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x53, 0x10, 0x02,
-	0x12, 0x0c, 0x0a, 0x08, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x43, 0x46, 0x47, 0x10, 0x03, 0x22, 0x31,
-	0x0a, 0x06, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x12, 0x12, 0x0a, 0x0e, 0x48, 0x45, 0x41, 0x4c,
-	0x54, 0x48, 0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05,
-	0x41, 0x4c, 0x49, 0x56, 0x45, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x44, 0x45, 0x41, 0x44, 0x10,
-	0x02, 0x22, 0x78, 0x0a, 0x09, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x12, 0x2c,
-	0x0a, 0x12, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x70, 0x72, 0x65, 0x73, 0x65,
-	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x72, 0x65, 0x73, 0x6f,
-	0x75, 0x72, 0x63, 0x65, 0x50, 0x72, 0x65, 0x73, 0x65, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09,
-	0x64, 0x69, 0x73, 0x6b, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52,
-	0x08, 0x64, 0x69, 0x73, 0x6b, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x20, 0x0a, 0x0c, 0x64, 0x69, 0x73,
-	0x6b, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0a, 0x64, 0x69, 0x73, 0x6b, 0x54, 0x79, 0x70, 0x65, 0x49, 0x64, 0x22, 0x4a, 0x0a, 0x06, 0x41,
-	0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6c, 0x65,
-	0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x64, 0x61, 0x74, 0x61, 0x4c, 0x65,
-	0x6e, 0x73, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x66, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x54,
-	0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x22, 0x4b, 0x0a, 0x1c, 0x50, 0x65, 0x72, 0x66, 0x6f,
-	0x72, 0x6d, 0x61, 0x6e, 0x63, 0x65, 0x44, 0x69, 0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69, 0x63,
-	0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x2b, 0x0a, 0x11, 0x70, 0x72, 0x6f, 0x66, 0x69,
-	0x6c, 0x69, 0x6e, 0x67, 0x5f, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x10, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x69, 0x6e, 0x67, 0x45, 0x6e, 0x61,
-	0x62, 0x6c, 0x65, 0x64, 0x42, 0x6a, 0x0a, 0x1f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e,
-	0x67, 0x6f, 0x64, 0x62, 0x2e, 0x76, 0x31, 0x5a, 0x47, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e,
-	0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x64, 0x62, 0x2f, 0x6d, 0x6f,
-	0x6e, 0x67, 0x6f, 0x64, 0x62, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x48, 0x6f, 0x73, 0x74, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12,
+	0x59, 0x0a, 0x0f, 0x68, 0x6f, 0x73, 0x74, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65,
+	0x72, 0x73, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67,
+	0x6f, 0x64, 0x62, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x6f, 0x73, 0x74, 0x2e, 0x48, 0x6f, 0x73, 0x74,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x0e, 0x68, 0x6f, 0x73, 0x74,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x1a, 0xff, 0x01, 0x0a, 0x0e, 0x48,
+	0x6f, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x16, 0x0a,
+	0x06, 0x68, 0x69, 0x64, 0x64, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x68,
+	0x69, 0x64, 0x64, 0x65, 0x6e, 0x12, 0x30, 0x0a, 0x14, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61,
+	0x72, 0x79, 0x5f, 0x64, 0x65, 0x6c, 0x61, 0x79, 0x5f, 0x73, 0x65, 0x63, 0x73, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x12, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x44, 0x65,
+	0x6c, 0x61, 0x79, 0x53, 0x65, 0x63, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72, 0x69, 0x6f, 0x72,
+	0x69, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x52, 0x08, 0x70, 0x72, 0x69, 0x6f, 0x72,
+	0x69, 0x74, 0x79, 0x12, 0x4e, 0x0a, 0x04, 0x74, 0x61, 0x67, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x3a, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62, 0x2e, 0x76, 0x31, 0x2e,
+	0x48, 0x6f, 0x73, 0x74, 0x2e, 0x48, 0x6f, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74,
+	0x65, 0x72, 0x73, 0x2e, 0x54, 0x61, 0x67, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x74,
+	0x61, 0x67, 0x73, 0x1a, 0x37, 0x0a, 0x09, 0x54, 0x61, 0x67, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79,
+	0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b,
+	0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x52, 0x0a, 0x04,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x10, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53,
+	0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f,
+	0x4e, 0x47, 0x4f, 0x44, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x53,
+	0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x43, 0x46, 0x47, 0x10, 0x03,
+	0x12, 0x0e, 0x0a, 0x0a, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x49, 0x4e, 0x46, 0x52, 0x41, 0x10, 0x04,
+	0x22, 0x34, 0x0a, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x10, 0x0a, 0x0c, 0x52, 0x4f, 0x4c, 0x45,
+	0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52,
+	0x49, 0x4d, 0x41, 0x52, 0x59, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x45, 0x43, 0x4f, 0x4e,
+	0x44, 0x41, 0x52, 0x59, 0x10, 0x02, 0x22, 0x3f, 0x0a, 0x06, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68,
+	0x12, 0x12, 0x0a, 0x0e, 0x48, 0x45, 0x41, 0x4c, 0x54, 0x48, 0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f,
+	0x57, 0x4e, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x4c, 0x49, 0x56, 0x45, 0x10, 0x01, 0x12,
+	0x08, 0x0a, 0x04, 0x44, 0x45, 0x41, 0x44, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x44, 0x45, 0x47,
+	0x52, 0x41, 0x44, 0x45, 0x44, 0x10, 0x03, 0x22, 0x84, 0x02, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x12, 0x3d, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0e, 0x32, 0x29, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62, 0x2e, 0x76, 0x31, 0x2e,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x74, 0x79,
+	0x70, 0x65, 0x12, 0x43, 0x0a, 0x06, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0e, 0x32, 0x2b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62, 0x2e, 0x76, 0x31,
+	0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52,
+	0x06, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x22, 0x42, 0x0a, 0x04, 0x54, 0x79, 0x70, 0x65, 0x12,
+	0x14, 0x0a, 0x10, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46,
+	0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x44, 0x10,
+	0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x53, 0x10, 0x02, 0x12, 0x0c, 0x0a,
+	0x08, 0x4d, 0x4f, 0x4e, 0x47, 0x4f, 0x43, 0x46, 0x47, 0x10, 0x03, 0x22, 0x31, 0x0a, 0x06, 0x48,
+	0x65, 0x61, 0x6c, 0x74, 0x68, 0x12, 0x12, 0x0a, 0x0e, 0x48, 0x45, 0x41, 0x4c, 0x54, 0x48, 0x5f,
+	0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x4c, 0x49,
+	0x56, 0x45, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x44, 0x45, 0x41, 0x44, 0x10, 0x02, 0x22, 0x78,
+	0x0a, 0x09, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x72,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x70, 0x72, 0x65, 0x73, 0x65, 0x74, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63,
+	0x65, 0x50, 0x72, 0x65, 0x73, 0x65, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x69, 0x73,
+	0x6b, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x64, 0x69,
+	0x73, 0x6b, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x20, 0x0a, 0x0c, 0x64, 0x69, 0x73, 0x6b, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x64, 0x69,
+	0x73, 0x6b, 0x54, 0x79, 0x70, 0x65, 0x49, 0x64, 0x22, 0x4a, 0x0a, 0x06, 0x41, 0x63, 0x63, 0x65,
+	0x73, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x6c, 0x65, 0x6e, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x64, 0x61, 0x74, 0x61, 0x4c, 0x65, 0x6e, 0x73, 0x12,
+	0x23, 0x0a, 0x0d, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x54, 0x72, 0x61, 0x6e,
+	0x73, 0x66, 0x65, 0x72, 0x22, 0x4b, 0x0a, 0x1c, 0x50, 0x65, 0x72, 0x66, 0x6f, 0x72, 0x6d, 0x61,
+	0x6e, 0x63, 0x65, 0x44, 0x69, 0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69, 0x63, 0x73, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x12, 0x2b, 0x0a, 0x11, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x69, 0x6e,
+	0x67, 0x5f, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x10, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x69, 0x6e, 0x67, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65,
+	0x64, 0x42, 0x6a, 0x0a, 0x1f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x64, 0x62, 0x2e, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64,
+	0x62, 0x2e, 0x76, 0x31, 0x5a, 0x47, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f,
+	0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x64, 0x62, 0x2f, 0x6d, 0x6f, 0x6e, 0x67, 0x6f,
+	0x64, 0x62, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x67, 0x6f, 0x64, 0x62, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -5160,7 +5262,7 @@ func file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
+var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
 var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_goTypes = []interface{}{
 	(Cluster_Environment)(0),                      // 0: yandex.cloud.mdb.mongodb.v1.Cluster.Environment
 	(Cluster_Health)(0),                           // 1: yandex.cloud.mdb.mongodb.v1.Cluster.Health
@@ -5225,49 +5327,51 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_goTypes = []interface{}{
 	(*Mongodb6_0Enterprise_MongoCfg)(nil),         // 60: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoCfg
 	(*Mongodb6_0Enterprise_Mongos)(nil),           // 61: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongos
 	(*Mongodb6_0Enterprise_MongoInfra)(nil),       // 62: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra
-	(*timestamppb.Timestamp)(nil),                 // 63: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),                     // 64: yandex.cloud.mdb.mongodb.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),                  // 65: yandex.cloud.mdb.mongodb.v1.MaintenanceOperation
-	(*timeofday.TimeOfDay)(nil),                   // 66: google.type.TimeOfDay
-	(*wrapperspb.Int64Value)(nil),                 // 67: google.protobuf.Int64Value
-	(*config.MongodConfigSet3_6)(nil),             // 68: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet3_6
-	(*config.MongoCfgConfigSet3_6)(nil),           // 69: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6
-	(*config.MongosConfigSet3_6)(nil),             // 70: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6
-	(*config.MongodConfigSet4_0)(nil),             // 71: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_0
-	(*config.MongoCfgConfigSet4_0)(nil),           // 72: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0
-	(*config.MongosConfigSet4_0)(nil),             // 73: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0
-	(*config.MongodConfigSet4_2)(nil),             // 74: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_2
-	(*config.MongoCfgConfigSet4_2)(nil),           // 75: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2
-	(*config.MongosConfigSet4_2)(nil),             // 76: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2
-	(*config.MongodConfigSet4_4)(nil),             // 77: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4
-	(*config.MongoCfgConfigSet4_4)(nil),           // 78: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4
-	(*config.MongosConfigSet4_4)(nil),             // 79: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4
-	(*config.MongodConfigSet4_4Enterprise)(nil),   // 80: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4_enterprise
-	(*config.MongoCfgConfigSet4_4Enterprise)(nil), // 81: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterprise
-	(*config.MongosConfigSet4_4Enterprise)(nil),   // 82: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterprise
-	(*config.MongodConfigSet5_0)(nil),             // 83: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0
-	(*config.MongoCfgConfigSet5_0)(nil),           // 84: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0
-	(*config.MongosConfigSet5_0)(nil),             // 85: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0
-	(*config.MongodConfigSet5_0Enterprise)(nil),   // 86: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0_enterprise
-	(*config.MongoCfgConfigSet5_0Enterprise)(nil), // 87: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterprise
-	(*config.MongosConfigSet5_0Enterprise)(nil),   // 88: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterprise
-	(*config.MongodConfigSet6_0)(nil),             // 89: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0
-	(*config.MongoCfgConfigSet6_0)(nil),           // 90: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0
-	(*config.MongosConfigSet6_0)(nil),             // 91: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0
-	(*config.MongodConfigSet6_0Enterprise)(nil),   // 92: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0_enterprise
-	(*config.MongoCfgConfigSet6_0Enterprise)(nil), // 93: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterprise
-	(*config.MongosConfigSet6_0Enterprise)(nil),   // 94: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterprise
+	(*Host_HostParameters)(nil),                   // 63: yandex.cloud.mdb.mongodb.v1.Host.HostParameters
+	nil,                                           // 64: yandex.cloud.mdb.mongodb.v1.Host.HostParameters.TagsEntry
+	(*timestamppb.Timestamp)(nil),                 // 65: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),                     // 66: yandex.cloud.mdb.mongodb.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),                  // 67: yandex.cloud.mdb.mongodb.v1.MaintenanceOperation
+	(*timeofday.TimeOfDay)(nil),                   // 68: google.type.TimeOfDay
+	(*wrapperspb.Int64Value)(nil),                 // 69: google.protobuf.Int64Value
+	(*config.MongodConfigSet3_6)(nil),             // 70: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet3_6
+	(*config.MongoCfgConfigSet3_6)(nil),           // 71: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6
+	(*config.MongosConfigSet3_6)(nil),             // 72: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6
+	(*config.MongodConfigSet4_0)(nil),             // 73: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_0
+	(*config.MongoCfgConfigSet4_0)(nil),           // 74: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0
+	(*config.MongosConfigSet4_0)(nil),             // 75: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0
+	(*config.MongodConfigSet4_2)(nil),             // 76: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_2
+	(*config.MongoCfgConfigSet4_2)(nil),           // 77: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2
+	(*config.MongosConfigSet4_2)(nil),             // 78: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2
+	(*config.MongodConfigSet4_4)(nil),             // 79: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4
+	(*config.MongoCfgConfigSet4_4)(nil),           // 80: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4
+	(*config.MongosConfigSet4_4)(nil),             // 81: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4
+	(*config.MongodConfigSet4_4Enterprise)(nil),   // 82: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4_enterprise
+	(*config.MongoCfgConfigSet4_4Enterprise)(nil), // 83: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterprise
+	(*config.MongosConfigSet4_4Enterprise)(nil),   // 84: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterprise
+	(*config.MongodConfigSet5_0)(nil),             // 85: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0
+	(*config.MongoCfgConfigSet5_0)(nil),           // 86: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0
+	(*config.MongosConfigSet5_0)(nil),             // 87: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0
+	(*config.MongodConfigSet5_0Enterprise)(nil),   // 88: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0_enterprise
+	(*config.MongoCfgConfigSet5_0Enterprise)(nil), // 89: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterprise
+	(*config.MongosConfigSet5_0Enterprise)(nil),   // 90: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterprise
+	(*config.MongodConfigSet6_0)(nil),             // 91: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0
+	(*config.MongoCfgConfigSet6_0)(nil),           // 92: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0
+	(*config.MongosConfigSet6_0)(nil),             // 93: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0
+	(*config.MongodConfigSet6_0Enterprise)(nil),   // 94: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0_enterprise
+	(*config.MongoCfgConfigSet6_0Enterprise)(nil), // 95: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterprise
+	(*config.MongosConfigSet6_0Enterprise)(nil),   // 96: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterprise
 }
 var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_depIdxs = []int32{
-	63,  // 0: yandex.cloud.mdb.mongodb.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	65,  // 0: yandex.cloud.mdb.mongodb.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
 	26,  // 1: yandex.cloud.mdb.mongodb.v1.Cluster.labels:type_name -> yandex.cloud.mdb.mongodb.v1.Cluster.LabelsEntry
 	0,   // 2: yandex.cloud.mdb.mongodb.v1.Cluster.environment:type_name -> yandex.cloud.mdb.mongodb.v1.Cluster.Environment
 	9,   // 3: yandex.cloud.mdb.mongodb.v1.Cluster.monitoring:type_name -> yandex.cloud.mdb.mongodb.v1.Monitoring
 	10,  // 4: yandex.cloud.mdb.mongodb.v1.Cluster.config:type_name -> yandex.cloud.mdb.mongodb.v1.ClusterConfig
 	1,   // 5: yandex.cloud.mdb.mongodb.v1.Cluster.health:type_name -> yandex.cloud.mdb.mongodb.v1.Cluster.Health
 	2,   // 6: yandex.cloud.mdb.mongodb.v1.Cluster.status:type_name -> yandex.cloud.mdb.mongodb.v1.Cluster.Status
-	64,  // 7: yandex.cloud.mdb.mongodb.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.mongodb.v1.MaintenanceWindow
-	65,  // 8: yandex.cloud.mdb.mongodb.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.mongodb.v1.MaintenanceOperation
+	66,  // 7: yandex.cloud.mdb.mongodb.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.mongodb.v1.MaintenanceWindow
+	67,  // 8: yandex.cloud.mdb.mongodb.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.mongodb.v1.MaintenanceOperation
 	11,  // 9: yandex.cloud.mdb.mongodb.v1.ClusterConfig.mongodb_3_6:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb3_6
 	12,  // 10: yandex.cloud.mdb.mongodb.v1.ClusterConfig.mongodb_4_0:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb4_0
 	13,  // 11: yandex.cloud.mdb.mongodb.v1.ClusterConfig.mongodb_4_2:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb4_2
@@ -5277,8 +5381,8 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_depIdxs = []int32{
 	15,  // 15: yandex.cloud.mdb.mongodb.v1.ClusterConfig.mongodb_4_4_enterprise:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise
 	17,  // 16: yandex.cloud.mdb.mongodb.v1.ClusterConfig.mongodb_5_0_enterprise:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise
 	19,  // 17: yandex.cloud.mdb.mongodb.v1.ClusterConfig.mongodb_6_0_enterprise:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise
-	66,  // 18: yandex.cloud.mdb.mongodb.v1.ClusterConfig.backup_window_start:type_name -> google.type.TimeOfDay
-	67,  // 19: yandex.cloud.mdb.mongodb.v1.ClusterConfig.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	68,  // 18: yandex.cloud.mdb.mongodb.v1.ClusterConfig.backup_window_start:type_name -> google.type.TimeOfDay
+	69,  // 19: yandex.cloud.mdb.mongodb.v1.ClusterConfig.backup_retain_period_days:type_name -> google.protobuf.Int64Value
 	25,  // 20: yandex.cloud.mdb.mongodb.v1.ClusterConfig.performance_diagnostics:type_name -> yandex.cloud.mdb.mongodb.v1.PerformanceDiagnosticsConfig
 	24,  // 21: yandex.cloud.mdb.mongodb.v1.ClusterConfig.access:type_name -> yandex.cloud.mdb.mongodb.v1.Access
 	27,  // 22: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.mongod:type_name -> yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongod
@@ -5322,94 +5426,96 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_proto_depIdxs = []int32{
 	5,   // 60: yandex.cloud.mdb.mongodb.v1.Host.health:type_name -> yandex.cloud.mdb.mongodb.v1.Host.Health
 	22,  // 61: yandex.cloud.mdb.mongodb.v1.Host.services:type_name -> yandex.cloud.mdb.mongodb.v1.Service
 	3,   // 62: yandex.cloud.mdb.mongodb.v1.Host.type:type_name -> yandex.cloud.mdb.mongodb.v1.Host.Type
-	6,   // 63: yandex.cloud.mdb.mongodb.v1.Service.type:type_name -> yandex.cloud.mdb.mongodb.v1.Service.Type
-	7,   // 64: yandex.cloud.mdb.mongodb.v1.Service.health:type_name -> yandex.cloud.mdb.mongodb.v1.Service.Health
-	68,  // 65: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet3_6
-	23,  // 66: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	69,  // 67: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6
-	23,  // 68: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	70,  // 69: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6
-	23,  // 70: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	70,  // 71: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6
-	69,  // 72: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6
-	23,  // 73: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	71,  // 74: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_0
-	23,  // 75: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	72,  // 76: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0
-	23,  // 77: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	73,  // 78: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0
-	23,  // 79: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	73,  // 80: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0
-	72,  // 81: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0
-	23,  // 82: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	74,  // 83: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_2
-	23,  // 84: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	75,  // 85: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2
-	23,  // 86: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	76,  // 87: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2
-	23,  // 88: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	76,  // 89: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2
-	75,  // 90: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2
-	23,  // 91: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	77,  // 92: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4
-	23,  // 93: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	78,  // 94: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4
-	23,  // 95: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	79,  // 96: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4
-	23,  // 97: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	79,  // 98: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4
-	78,  // 99: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4
-	23,  // 100: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	80,  // 101: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4_enterprise
-	23,  // 102: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	81,  // 103: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterprise
-	23,  // 104: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	82,  // 105: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterprise
-	23,  // 106: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	82,  // 107: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterprise
-	81,  // 108: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterprise
-	23,  // 109: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	83,  // 110: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0
-	23,  // 111: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	84,  // 112: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0
-	23,  // 113: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	85,  // 114: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0
-	23,  // 115: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	85,  // 116: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0
-	84,  // 117: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0
-	23,  // 118: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	86,  // 119: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0_enterprise
-	23,  // 120: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	87,  // 121: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterprise
-	23,  // 122: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	88,  // 123: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterprise
-	23,  // 124: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	88,  // 125: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterprise
-	87,  // 126: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterprise
-	23,  // 127: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	89,  // 128: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0
-	23,  // 129: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	90,  // 130: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0
-	23,  // 131: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	91,  // 132: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0
-	23,  // 133: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	91,  // 134: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0
-	90,  // 135: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0
-	23,  // 136: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	92,  // 137: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0_enterprise
-	23,  // 138: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	93,  // 139: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterprise
-	23,  // 140: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	94,  // 141: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterprise
-	23,  // 142: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	94,  // 143: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterprise
-	93,  // 144: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterprise
-	23,  // 145: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
-	146, // [146:146] is the sub-list for method output_type
-	146, // [146:146] is the sub-list for method input_type
-	146, // [146:146] is the sub-list for extension type_name
-	146, // [146:146] is the sub-list for extension extendee
-	0,   // [0:146] is the sub-list for field type_name
+	63,  // 63: yandex.cloud.mdb.mongodb.v1.Host.host_parameters:type_name -> yandex.cloud.mdb.mongodb.v1.Host.HostParameters
+	6,   // 64: yandex.cloud.mdb.mongodb.v1.Service.type:type_name -> yandex.cloud.mdb.mongodb.v1.Service.Type
+	7,   // 65: yandex.cloud.mdb.mongodb.v1.Service.health:type_name -> yandex.cloud.mdb.mongodb.v1.Service.Health
+	70,  // 66: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet3_6
+	23,  // 67: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	71,  // 68: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6
+	23,  // 69: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	72,  // 70: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6
+	23,  // 71: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	72,  // 72: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6
+	71,  // 73: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6
+	23,  // 74: yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	73,  // 75: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_0
+	23,  // 76: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	74,  // 77: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0
+	23,  // 78: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	75,  // 79: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0
+	23,  // 80: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	75,  // 81: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0
+	74,  // 82: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0
+	23,  // 83: yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	76,  // 84: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_2
+	23,  // 85: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	77,  // 86: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2
+	23,  // 87: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	78,  // 88: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2
+	23,  // 89: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	78,  // 90: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2
+	77,  // 91: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2
+	23,  // 92: yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	79,  // 93: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4
+	23,  // 94: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	80,  // 95: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4
+	23,  // 96: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	81,  // 97: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4
+	23,  // 98: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	81,  // 99: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4
+	80,  // 100: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4
+	23,  // 101: yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	82,  // 102: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet4_4_enterprise
+	23,  // 103: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	83,  // 104: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterprise
+	23,  // 105: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	84,  // 106: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterprise
+	23,  // 107: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	84,  // 108: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterprise
+	83,  // 109: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterprise
+	23,  // 110: yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	85,  // 111: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0
+	23,  // 112: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	86,  // 113: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0
+	23,  // 114: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	87,  // 115: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0
+	23,  // 116: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	87,  // 117: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0
+	86,  // 118: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0
+	23,  // 119: yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	88,  // 120: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet5_0_enterprise
+	23,  // 121: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	89,  // 122: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterprise
+	23,  // 123: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	90,  // 124: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterprise
+	23,  // 125: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	90,  // 126: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterprise
+	89,  // 127: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterprise
+	23,  // 128: yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	91,  // 129: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0
+	23,  // 130: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	92,  // 131: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0
+	23,  // 132: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	93,  // 133: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0
+	23,  // 134: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	93,  // 135: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0
+	92,  // 136: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0
+	23,  // 137: yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	94,  // 138: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongod.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet6_0_enterprise
+	23,  // 139: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongod.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	95,  // 140: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoCfg.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterprise
+	23,  // 141: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoCfg.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	96,  // 142: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongos.config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterprise
+	23,  // 143: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.Mongos.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	96,  // 144: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra.config_mongos:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterprise
+	95,  // 145: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra.config_mongocfg:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterprise
+	23,  // 146: yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoInfra.resources:type_name -> yandex.cloud.mdb.mongodb.v1.Resources
+	64,  // 147: yandex.cloud.mdb.mongodb.v1.Host.HostParameters.tags:type_name -> yandex.cloud.mdb.mongodb.v1.Host.HostParameters.TagsEntry
+	148, // [148:148] is the sub-list for method output_type
+	148, // [148:148] is the sub-list for method input_type
+	148, // [148:148] is the sub-list for extension type_name
+	148, // [148:148] is the sub-list for extension extendee
+	0,   // [0:148] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mongodb_v1_cluster_proto_init() }
@@ -6067,6 +6173,18 @@ func file_yandex_cloud_mdb_mongodb_v1_cluster_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_mdb_mongodb_v1_cluster_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Host_HostParameters); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_yandex_cloud_mdb_mongodb_v1_cluster_proto_msgTypes[2].OneofWrappers = []interface{}{
 		(*ClusterConfig_Mongodb_3_6)(nil),
@@ -6085,7 +6203,7 @@ func file_yandex_cloud_mdb_mongodb_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc,
 			NumEnums:      8,
-			NumMessages:   55,
+			NumMessages:   57,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -17,3 +17,31 @@ func (m *TextClassificationResponse) SetPredictions(v []*ClassificationLabel) {
 func (m *TextClassificationResponse) SetModelVersion(v string) {
 	m.ModelVersion = v
 }
+
+func (m *FewShotTextClassificationRequest) SetModelUri(v string) {
+	m.ModelUri = v
+}
+
+func (m *FewShotTextClassificationRequest) SetTaskDescription(v string) {
+	m.TaskDescription = v
+}
+
+func (m *FewShotTextClassificationRequest) SetLabels(v []string) {
+	m.Labels = v
+}
+
+func (m *FewShotTextClassificationRequest) SetText(v string) {
+	m.Text = v
+}
+
+func (m *FewShotTextClassificationRequest) SetSamples(v []*ClassificationSample) {
+	m.Samples = v
+}
+
+func (m *FewShotTextClassificationResponse) SetPredictions(v []*ClassificationLabel) {
+	m.Predictions = v
+}
+
+func (m *FewShotTextClassificationResponse) SetModelVersion(v string) {
+	m.ModelVersion = v
+}

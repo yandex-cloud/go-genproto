@@ -42,6 +42,10 @@ func (m *JobParameters) SetExtendedWorkingStorage(v *ExtendedWorkingStorage) {
 	m.ExtendedWorkingStorage = v
 }
 
+func (m *JobParameters) SetArguments(v []*Argument) {
+	m.Arguments = v
+}
+
 func (m *CloudInstanceType) SetName(v string) {
 	m.Name = v
 }
@@ -52,6 +56,14 @@ func (m *ExtendedWorkingStorage) SetType(v ExtendedWorkingStorage_StorageType) {
 
 func (m *ExtendedWorkingStorage) SetSizeGb(v int64) {
 	m.SizeGb = v
+}
+
+func (m *Argument) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Argument) SetValue(v string) {
+	m.Value = v
 }
 
 func (m *File) SetDesc(v *FileDesc) {

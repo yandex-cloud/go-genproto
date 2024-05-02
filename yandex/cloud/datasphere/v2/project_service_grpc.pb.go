@@ -13,6 +13,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -37,6 +38,9 @@ const (
 	ProjectService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.datasphere.v2.ProjectService/UpdateAccessBindings"
 	ProjectService_AddResource_FullMethodName          = "/yandex.cloud.datasphere.v2.ProjectService/AddResource"
 	ProjectService_RemoveResource_FullMethodName       = "/yandex.cloud.datasphere.v2.ProjectService/RemoveResource"
+	ProjectService_GetRestrictionsMeta_FullMethodName  = "/yandex.cloud.datasphere.v2.ProjectService/GetRestrictionsMeta"
+	ProjectService_GetRestrictions_FullMethodName      = "/yandex.cloud.datasphere.v2.ProjectService/GetRestrictions"
+	ProjectService_SetRestrictions_FullMethodName      = "/yandex.cloud.datasphere.v2.ProjectService/SetRestrictions"
 )
 
 // ProjectServiceClient is the client API for ProjectService service.
@@ -77,6 +81,12 @@ type ProjectServiceClient interface {
 	AddResource(ctx context.Context, in *AddResourceToProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Removes shared resource from project
 	RemoveResource(ctx context.Context, in *RemoveResourceFromProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Get meta information about available restrictions.
+	GetRestrictionsMeta(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetRestrictionsMetaResponse, error)
+	// Get current project restrictions.
+	GetRestrictions(ctx context.Context, in *GetProjectRestrictionsRequest, opts ...grpc.CallOption) (*RestrictionsResponse, error)
+	// Set project restrictions.
+	SetRestrictions(ctx context.Context, in *SetProjectRestrictionsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type projectServiceClient struct {
@@ -231,6 +241,33 @@ func (c *projectServiceClient) RemoveResource(ctx context.Context, in *RemoveRes
 	return out, nil
 }
 
+func (c *projectServiceClient) GetRestrictionsMeta(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetRestrictionsMetaResponse, error) {
+	out := new(GetRestrictionsMetaResponse)
+	err := c.cc.Invoke(ctx, ProjectService_GetRestrictionsMeta_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) GetRestrictions(ctx context.Context, in *GetProjectRestrictionsRequest, opts ...grpc.CallOption) (*RestrictionsResponse, error) {
+	out := new(RestrictionsResponse)
+	err := c.cc.Invoke(ctx, ProjectService_GetRestrictions_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) SetRestrictions(ctx context.Context, in *SetProjectRestrictionsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectService_SetRestrictions_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations should embed UnimplementedProjectServiceServer
 // for forward compatibility
@@ -269,6 +306,12 @@ type ProjectServiceServer interface {
 	AddResource(context.Context, *AddResourceToProjectRequest) (*operation.Operation, error)
 	// Removes shared resource from project
 	RemoveResource(context.Context, *RemoveResourceFromProjectRequest) (*operation.Operation, error)
+	// Get meta information about available restrictions.
+	GetRestrictionsMeta(context.Context, *emptypb.Empty) (*GetRestrictionsMetaResponse, error)
+	// Get current project restrictions.
+	GetRestrictions(context.Context, *GetProjectRestrictionsRequest) (*RestrictionsResponse, error)
+	// Set project restrictions.
+	SetRestrictions(context.Context, *SetProjectRestrictionsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedProjectServiceServer should be embedded to have forward compatible implementations.
@@ -322,6 +365,15 @@ func (UnimplementedProjectServiceServer) AddResource(context.Context, *AddResour
 }
 func (UnimplementedProjectServiceServer) RemoveResource(context.Context, *RemoveResourceFromProjectRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveResource not implemented")
+}
+func (UnimplementedProjectServiceServer) GetRestrictionsMeta(context.Context, *emptypb.Empty) (*GetRestrictionsMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRestrictionsMeta not implemented")
+}
+func (UnimplementedProjectServiceServer) GetRestrictions(context.Context, *GetProjectRestrictionsRequest) (*RestrictionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRestrictions not implemented")
+}
+func (UnimplementedProjectServiceServer) SetRestrictions(context.Context, *SetProjectRestrictionsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetRestrictions not implemented")
 }
 
 // UnsafeProjectServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -623,6 +675,60 @@ func _ProjectService_RemoveResource_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectService_GetRestrictionsMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).GetRestrictionsMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_GetRestrictionsMeta_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).GetRestrictionsMeta(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectService_GetRestrictions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectRestrictionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).GetRestrictions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_GetRestrictions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).GetRestrictions(ctx, req.(*GetProjectRestrictionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectService_SetRestrictions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetProjectRestrictionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).SetRestrictions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_SetRestrictions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).SetRestrictions(ctx, req.(*SetProjectRestrictionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjectService_ServiceDesc is the grpc.ServiceDesc for ProjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -693,6 +799,18 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveResource",
 			Handler:    _ProjectService_RemoveResource_Handler,
+		},
+		{
+			MethodName: "GetRestrictionsMeta",
+			Handler:    _ProjectService_GetRestrictionsMeta_Handler,
+		},
+		{
+			MethodName: "GetRestrictions",
+			Handler:    _ProjectService_GetRestrictions_Handler,
+		},
+		{
+			MethodName: "SetRestrictions",
+			Handler:    _ProjectService_SetRestrictions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

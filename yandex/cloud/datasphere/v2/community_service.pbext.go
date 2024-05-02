@@ -129,3 +129,15 @@ func (m *RemoveCommunityResourceRequest) SetResourceType(v ResourceType) {
 func (m *RemoveCommunityResourceRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
+
+func (m *GetCommunityRestrictionsRequest) SetCommunityId(v string) {
+	m.CommunityId = v
+}
+
+func (m *SetCommunityRestrictionsRequest) SetCommunityId(v string) {
+	m.CommunityId = v
+}
+
+func (m *SetCommunityRestrictionsRequest) SetRestrictions(v []*Restriction) {
+	m.Restrictions = v
+}
