@@ -34,8 +34,8 @@ func (m *JobParameters) SetAttachProjectDisk(v bool) {
 	m.AttachProjectDisk = v
 }
 
-func (m *JobParameters) SetCloudInstanceType(v *CloudInstanceType) {
-	m.CloudInstanceType = v
+func (m *JobParameters) SetCloudInstanceTypes(v []*CloudInstanceType) {
+	m.CloudInstanceTypes = v
 }
 
 func (m *JobParameters) SetExtendedWorkingStorage(v *ExtendedWorkingStorage) {
