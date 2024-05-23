@@ -321,6 +321,14 @@ func (m *ConfigCreateSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *KeystoreSetting) SetName(v string) {
+	m.Name = v
+}
+
+func (m *KeystoreSetting) SetValue(v string) {
+	m.Value = v
+}
+
 type OpenSearchCreateSpec_Config = isOpenSearchCreateSpec_Config
 
 func (m *OpenSearchCreateSpec) SetConfig(v OpenSearchCreateSpec_Config) {
@@ -339,6 +347,10 @@ func (m *OpenSearchCreateSpec) SetOpensearchConfig_2(v *config.OpenSearchConfig2
 	m.Config = &OpenSearchCreateSpec_OpensearchConfig_2{
 		OpensearchConfig_2: v,
 	}
+}
+
+func (m *OpenSearchCreateSpec) SetKeystoreSettings(v []*KeystoreSetting) {
+	m.KeystoreSettings = v
 }
 
 func (m *OpenSearchCreateSpec_NodeGroup) SetName(v string) {
@@ -431,6 +443,14 @@ func (m *OpenSearchClusterUpdateSpec) SetOpensearchConfig_2(v *config.OpenSearch
 	m.Config = &OpenSearchClusterUpdateSpec_OpensearchConfig_2{
 		OpensearchConfig_2: v,
 	}
+}
+
+func (m *OpenSearchClusterUpdateSpec) SetSetKeystoreSettings(v []*KeystoreSetting) {
+	m.SetKeystoreSettings = v
+}
+
+func (m *OpenSearchClusterUpdateSpec) SetRemoveKeystoreSettings(v []string) {
+	m.RemoveKeystoreSettings = v
 }
 
 func (m *BackupClusterRequest) SetClusterId(v string) {

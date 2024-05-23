@@ -35,15 +35,26 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SecurityGroupServiceClient interface {
+	// Returns the specified SecurityGroup resource.
+	//
+	// To get the list of all available SecurityGroup resources, make a [List] request.
 	Get(ctx context.Context, in *GetSecurityGroupRequest, opts ...grpc.CallOption) (*SecurityGroup, error)
+	// Retrieves the list of SecurityGroup resources in the specified folder.
 	List(ctx context.Context, in *ListSecurityGroupsRequest, opts ...grpc.CallOption) (*ListSecurityGroupsResponse, error)
+	// Creates a security group in the specified folder and network.
 	Create(ctx context.Context, in *CreateSecurityGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified security group.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Update(ctx context.Context, in *UpdateSecurityGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the rules of the specified security group.
 	UpdateRules(ctx context.Context, in *UpdateSecurityGroupRulesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// update rule description or labels
+	// Updates the specified rule.
 	UpdateRule(ctx context.Context, in *UpdateSecurityGroupRuleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified security group.
 	Delete(ctx context.Context, in *DeleteSecurityGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves security groups to another folder.
 	Move(ctx context.Context, in *MoveSecurityGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified security groups.
 	ListOperations(ctx context.Context, in *ListSecurityGroupOperationsRequest, opts ...grpc.CallOption) (*ListSecurityGroupOperationsResponse, error)
 }
 
@@ -140,15 +151,26 @@ func (c *securityGroupServiceClient) ListOperations(ctx context.Context, in *Lis
 // All implementations should embed UnimplementedSecurityGroupServiceServer
 // for forward compatibility
 type SecurityGroupServiceServer interface {
+	// Returns the specified SecurityGroup resource.
+	//
+	// To get the list of all available SecurityGroup resources, make a [List] request.
 	Get(context.Context, *GetSecurityGroupRequest) (*SecurityGroup, error)
+	// Retrieves the list of SecurityGroup resources in the specified folder.
 	List(context.Context, *ListSecurityGroupsRequest) (*ListSecurityGroupsResponse, error)
+	// Creates a security group in the specified folder and network.
 	Create(context.Context, *CreateSecurityGroupRequest) (*operation.Operation, error)
+	// Updates the specified security group.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Update(context.Context, *UpdateSecurityGroupRequest) (*operation.Operation, error)
+	// Updates the rules of the specified security group.
 	UpdateRules(context.Context, *UpdateSecurityGroupRulesRequest) (*operation.Operation, error)
-	// update rule description or labels
+	// Updates the specified rule.
 	UpdateRule(context.Context, *UpdateSecurityGroupRuleRequest) (*operation.Operation, error)
+	// Deletes the specified security group.
 	Delete(context.Context, *DeleteSecurityGroupRequest) (*operation.Operation, error)
+	// Moves security groups to another folder.
 	Move(context.Context, *MoveSecurityGroupRequest) (*operation.Operation, error)
+	// Lists operations for the specified security groups.
 	ListOperations(context.Context, *ListSecurityGroupOperationsRequest) (*ListSecurityGroupOperationsResponse, error)
 }
 

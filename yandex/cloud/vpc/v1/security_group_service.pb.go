@@ -30,6 +30,8 @@ type GetSecurityGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the Security Group resource to return.
+	// To get the security group ID, use a [SecurityGroup.List] request.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 }
 
@@ -77,10 +79,23 @@ type ListSecurityGroupsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// ID of the folder to list security groups in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size],
+	// the service returns a [ListSecurityGroupsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the
+	// [ListSecurityGroupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter    string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"` //filter by network_id is here
+	// A filter expression that filters resources listed in the response.
+	// The expression must specify:
+	// 1. The field name. Currently you can use filtering only on the [SecurityGroup.name] field.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"` //filter by network_id is here
 }
 
 func (x *ListSecurityGroupsRequest) Reset() {
@@ -148,8 +163,15 @@ type ListSecurityGroupsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of SecurityGroup resources.
 	SecurityGroups []*SecurityGroup `protobuf:"bytes,1,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	NextPageToken  string           `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListNetworksRequest.page_size], use
+	// the [next_page_token] as the value
+	// for the [ListNetworksRequest.page_token] query parameter
+	// in the next list request. Subsequent list requests will have their own
+	// [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListSecurityGroupsResponse) Reset() {
@@ -203,12 +225,20 @@ type CreateSecurityGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId    string                   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name        string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description string                   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string        `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	NetworkId   string                   `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	RuleSpecs   []*SecurityGroupRuleSpec `protobuf:"bytes,6,rep,name=rule_specs,json=ruleSpecs,proto3" json:"rule_specs,omitempty"`
+	// ID of the folder for this request to create a security group in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the security group.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the security group.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Resource labels as “ key:value “ pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the Network to create security group for.
+	NetworkId string `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	// Security rules specifications.
+	RuleSpecs []*SecurityGroupRuleSpec `protobuf:"bytes,6,rep,name=rule_specs,json=ruleSpecs,proto3" json:"rule_specs,omitempty"`
 }
 
 func (x *CreateSecurityGroupRequest) Reset() {
@@ -290,12 +320,16 @@ type SecurityGroupRuleSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Description string                      `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string           `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Direction   SecurityGroupRule_Direction `protobuf:"varint,3,opt,name=direction,proto3,enum=yandex.cloud.vpc.v1.SecurityGroupRule_Direction" json:"direction,omitempty"`
-	Ports       *PortRange                  `protobuf:"bytes,4,opt,name=ports,proto3" json:"ports,omitempty"` // null value means any port
-	// values from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-	// null value means any protocol
+	// Description of the security rule.
+	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
+	// Rule labels as “ key:value “ pairs.
+	Labels map[string]string `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The direction of network traffic allowed by this rule.
+	Direction SecurityGroupRule_Direction `protobuf:"varint,3,opt,name=direction,proto3,enum=yandex.cloud.vpc.v1.SecurityGroupRule_Direction" json:"direction,omitempty"`
+	// The range of ports that allow traffic to pass through. Null value means any port.
+	Ports *PortRange `protobuf:"bytes,4,opt,name=ports,proto3" json:"ports,omitempty"` // null value means any port
+	// Values from [IANA protocol numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
+	// Null value means any protocol.
 	//
 	// Types that are assignable to Protocol:
 	//
@@ -424,10 +458,12 @@ type isSecurityGroupRuleSpec_Protocol interface {
 }
 
 type SecurityGroupRuleSpec_ProtocolName struct {
+	// Protocol name.
 	ProtocolName string `protobuf:"bytes,5,opt,name=protocol_name,json=protocolName,proto3,oneof"`
 }
 
 type SecurityGroupRuleSpec_ProtocolNumber struct {
+	// Protocol number from [IANA protocol numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
 	ProtocolNumber int64 `protobuf:"varint,6,opt,name=protocol_number,json=protocolNumber,proto3,oneof"`
 }
 
@@ -440,14 +476,17 @@ type isSecurityGroupRuleSpec_Target interface {
 }
 
 type SecurityGroupRuleSpec_CidrBlocks struct {
+	// CIDR blocks to allow to recieve or send traffic.
 	CidrBlocks *CidrBlocks `protobuf:"bytes,7,opt,name=cidr_blocks,json=cidrBlocks,proto3,oneof"`
 }
 
 type SecurityGroupRuleSpec_SecurityGroupId struct {
+	// ID of the security group to add rule to.
 	SecurityGroupId string `protobuf:"bytes,8,opt,name=security_group_id,json=securityGroupId,proto3,oneof"`
 }
 
 type SecurityGroupRuleSpec_PredefinedTarget struct {
+	// Predefined target. See [security groups rules](/docs/vpc/concepts/security-groups#security-groups-rules) for more information.
 	PredefinedTarget string `protobuf:"bytes,9,opt,name=predefined_target,json=predefinedTarget,proto3,oneof"` // string subnet_id = .. ;
 }
 
@@ -462,6 +501,7 @@ type CreateSecurityGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the security group that is being created.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 }
 
@@ -509,12 +549,26 @@ type UpdateSecurityGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SecurityGroupId string                 `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
-	UpdateMask      *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name            string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels          map[string]string      `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// all existing rules will be replaced with given list
+	// ID of the security group to update.
+	//
+	// To get the security group ID make a [SecurityGroupService.List] request.
+	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
+	// Field mask that specifies which attributes of the Address should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the security group.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description of the security group.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Security group labels as `key:value` pairs.
+	//
+	// Existing set of labels is completely replaced by the provided set, so if you just want
+	// to add or remove a label:
+	// 1. Get the current set of labels with a [SecurityGroupService.Get] request.
+	// 2. Add or remove a label in this set.
+	// 3. Send the new set in this field.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Updated rule list. All existing rules will be replaced with given list.
 	RuleSpecs []*SecurityGroupRuleSpec `protobuf:"bytes,6,rep,name=rule_specs,json=ruleSpecs,proto3" json:"rule_specs,omitempty"`
 }
 
@@ -597,8 +651,10 @@ type UpdateSecurityGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SecurityGroupId string   `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
-	AddedRuleIds    []string `protobuf:"bytes,2,rep,name=added_rule_ids,json=addedRuleIds,proto3" json:"added_rule_ids,omitempty"`
+	// ID of the SecurityGroup that is being updated.
+	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
+	// List of added security rules IDs.
+	AddedRuleIds []string `protobuf:"bytes,2,rep,name=added_rule_ids,json=addedRuleIds,proto3" json:"added_rule_ids,omitempty"`
 }
 
 func (x *UpdateSecurityGroupMetadata) Reset() {
@@ -652,8 +708,11 @@ type UpdateSecurityGroupRulesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SecurityGroupId   string                   `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
-	DeletionRuleIds   []string                 `protobuf:"bytes,2,rep,name=deletion_rule_ids,json=deletionRuleIds,proto3" json:"deletion_rule_ids,omitempty"` //list of rules ids to delete
+	// ID of the SecurityGroup that is being updated with new rules.
+	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
+	// List of rules IDs to delete.
+	DeletionRuleIds []string `protobuf:"bytes,2,rep,name=deletion_rule_ids,json=deletionRuleIds,proto3" json:"deletion_rule_ids,omitempty"`
+	// Security rules specifications.
 	AdditionRuleSpecs []*SecurityGroupRuleSpec `protobuf:"bytes,3,rep,name=addition_rule_specs,json=additionRuleSpecs,proto3" json:"addition_rule_specs,omitempty"`
 }
 
@@ -715,11 +774,22 @@ type UpdateSecurityGroupRuleRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SecurityGroupId string                 `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
-	RuleId          string                 `protobuf:"bytes,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	UpdateMask      *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Description     string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels          map[string]string      `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// ID of the SecurityGroup to update rule in.
+	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
+	// ID of the rule to update.
+	RuleId string `protobuf:"bytes,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
+	// Field mask that specifies which attributes of the Address should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New description of the rule.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Rule labels as `key:value` pairs.
+	//
+	// Existing set of labels is completely replaced by the provided set, so if you just want
+	// to add or remove a label:
+	// 1. Get the current set of labels with a [AddressService.Get] request.
+	// 2. Add or remove a label in this set.
+	// 3. Send the new set in this field.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *UpdateSecurityGroupRuleRequest) Reset() {
@@ -794,8 +864,10 @@ type UpdateSecurityGroupRuleMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the SecurityGroup that is being updated with new rules.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
-	RuleId          string `protobuf:"bytes,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
+	// ID of the rule that is being updated.
+	RuleId string `protobuf:"bytes,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
 }
 
 func (x *UpdateSecurityGroupRuleMetadata) Reset() {
@@ -849,6 +921,9 @@ type DeleteSecurityGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the security group to delete.
+	//
+	// To get a address ID make a [SecurityGroup.List] request.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 }
 
@@ -896,6 +971,7 @@ type DeleteSecurityGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the SecurityGroup that is being deleted.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 }
 
@@ -943,9 +1019,18 @@ type ListSecurityGroupOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the address to list operations for.
+	//
+	// To get a address ID make a [SecurityGroup.List] request.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
-	PageSize        int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken       string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListSecurityGroupOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the
+	// [ListSecurityGroupOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
 func (x *ListSecurityGroupOperationsRequest) Reset() {
@@ -1006,8 +1091,14 @@ type ListSecurityGroupOperationsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Operations    []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of operations for the specified security group.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListSecurityGroupOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListSecurityGroupOperationsRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListSecurityGroupOperationsResponse) Reset() {
@@ -1061,7 +1152,9 @@ type MoveSecurityGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SecurityGroupId     string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
+	// ID of the security group to move.
+	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
+	// ID of the folder to move security group to.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 }
 
@@ -1116,6 +1209,7 @@ type MoveSecurityGroupMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the security group that is being moved.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 }
 

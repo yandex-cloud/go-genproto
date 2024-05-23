@@ -123,6 +123,10 @@ func (m *OpenSearch) SetOpensearchConfigSet_2(v *config.OpenSearchConfigSet2) {
 	}
 }
 
+func (m *OpenSearch) SetKeystoreSettings(v []string) {
+	m.KeystoreSettings = v
+}
+
 func (m *OpenSearch_NodeGroup) SetName(v string) {
 	m.Name = v
 }
