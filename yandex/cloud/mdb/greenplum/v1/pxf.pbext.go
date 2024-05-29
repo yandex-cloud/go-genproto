@@ -186,6 +186,10 @@ func (m *PXFDatasourceHDFSDfs) SetNamenodes(v map[string]*PXFDatasourceHDFSDfsNa
 	m.Namenodes = v
 }
 
+func (m *PXFDatasourceHDFSDfs) SetNameservices(v string) {
+	m.Nameservices = v
+}
+
 func (m *PXFDatasourceHDFSYarnHaRm) SetResourcemanagerAddress(v string) {
 	m.ResourcemanagerAddress = v
 }

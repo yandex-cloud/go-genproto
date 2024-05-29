@@ -36,7 +36,7 @@ type SingleAgentConfiguration struct {
 	// downloaded by the agent to appropriate location.
 	//
 	// Use cases include:
-	// - [Test Data files](https://cloud.yandex.com/en-ru/docs/load-testing/concepts/payload).
+	// - [Test Data files](/docs/load-testing/concepts/payload).
 	// - Custom Pandora executable.
 	// - JMeter executable or ".jmx" scenario.
 	// - etc.

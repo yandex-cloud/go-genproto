@@ -331,7 +331,7 @@ type Cluster struct {
 	// When creating a Kubernetes cluster, you should specify one of three release channels. The release channel contains several Kubernetes versions.
 	// Channels differ in the set of available versions, the management of auto-updates, and the updates received.
 	// You can't change the channel once the Kubernetes cluster is created, you can only recreate the Kubernetes cluster and specify a new release channel.
-	// For more details see [documentation](https://cloud.yandex.com/docs/managed-kubernetes/concepts/release-channels-and-updates).
+	// For more details see [documentation](/docs/managed-kubernetes/concepts/release-channels-and-updates).
 	ReleaseChannel ReleaseChannel `protobuf:"varint,15,opt,name=release_channel,json=releaseChannel,proto3,enum=yandex.cloud.k8s.v1.ReleaseChannel" json:"release_channel,omitempty"`
 	NetworkPolicy  *NetworkPolicy `protobuf:"bytes,16,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
 	// KMS provider configuration.

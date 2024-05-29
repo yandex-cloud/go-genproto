@@ -1053,10 +1053,9 @@ func (x *ReplacePrimaryKeyTransformer) GetKeys() []string {
 	return nil
 }
 
-// Convert column values to strings
-// The values will be converted depending on the source type
-// Conversion rules are described here:
-// https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#convert-to-string
+// Convert column values to strings.
+// The values will be converted depending on the source type.
+// Conversion rules are described in [documentation](/docs/data-transfer/concepts/data-transformation#convert-to-string).
 type ToStringTransformer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1273,8 +1272,7 @@ type FilterRowsTransformer struct {
 	// Filtering criterion. This can be comparison operators for numeric, string, and
 	// Boolean values,
 	// comparison to NULL, and checking whether a substring is part of a string.
-	// Details here:
-	// https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#append-only-sources
+	// For more details see [documentation](/docs/data-transfer/concepts/data-transformation#append-only-sources).
 	Filter string `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 

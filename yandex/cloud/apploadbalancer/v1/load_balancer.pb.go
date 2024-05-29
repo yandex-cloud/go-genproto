@@ -438,7 +438,7 @@ type Address_ExternalIpv4Address struct {
 type Address_InternalIpv4Address struct {
 	// Internal IPv4 endpoint address.
 	//
-	// To enable the use of listeners with internal addresses, [contact support](https://console.cloud.yandex.ru/support).
+	// To enable the use of listeners with internal addresses, [contact support](/docs/support/overview#response-time).
 	InternalIpv4Address *InternalIpv4Address `protobuf:"bytes,2,opt,name=internal_ipv4_address,json=internalIpv4Address,proto3,oneof"`
 }
 

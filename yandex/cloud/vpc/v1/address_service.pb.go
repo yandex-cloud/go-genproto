@@ -489,10 +489,14 @@ type DnsRecordSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Fqdn      string `protobuf:"bytes,1,opt,name=fqdn,proto3" json:"fqdn,omitempty"`                              // required: DNS record name (absolute, or relative to the DNS zone used)
-	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"` // required: id of public zone
-	Ttl       int64  `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`                               // optional, 0-86400
-	Ptr       bool   `protobuf:"varint,4,opt,name=ptr,proto3" json:"ptr,omitempty"`                               // optional, set if PTR record required
+	// Required. DNS record name (absolute or relative to the DNS zone in use).
+	Fqdn string `protobuf:"bytes,1,opt,name=fqdn,proto3" json:"fqdn,omitempty"`
+	// Required. ID of the public DNS zone. The maximum string length in characters is 20.
+	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	// TTL of record. Acceptable values are 0 to 86400, inclusive.
+	Ttl int64 `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	// Optional. If the PTR record is required, this parameter must be set to "true".
+	Ptr bool `protobuf:"varint,4,opt,name=ptr,proto3" json:"ptr,omitempty"`
 }
 
 func (x *DnsRecordSpec) Reset() {

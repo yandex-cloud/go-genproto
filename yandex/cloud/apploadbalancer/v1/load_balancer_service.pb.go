@@ -1386,7 +1386,7 @@ type AddressSpec_ExternalIpv4AddressSpec struct {
 type AddressSpec_InternalIpv4AddressSpec struct {
 	// Internal IPv4 endpoint address.
 	//
-	// To enable the use of listeners with internal addresses, [contact support](https://console.cloud.yandex.ru/support).
+	// To enable the use of listeners with internal addresses, [contact support](/docs/support/overview#response-time).
 	InternalIpv4AddressSpec *InternalIpv4AddressSpec `protobuf:"bytes,2,opt,name=internal_ipv4_address_spec,json=internalIpv4AddressSpec,proto3,oneof"`
 }
 

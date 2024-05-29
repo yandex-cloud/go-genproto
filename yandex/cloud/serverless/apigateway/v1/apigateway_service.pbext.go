@@ -4,6 +4,7 @@ package apigateway
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -79,6 +80,10 @@ func (m *CreateApiGatewayRequest) SetCanary(v *Canary) {
 	m.Canary = v
 }
 
+func (m *CreateApiGatewayRequest) SetExecutionTimeout(v *durationpb.Duration) {
+	m.ExecutionTimeout = v
+}
+
 type UpdateApiGatewayRequest_Spec = isUpdateApiGatewayRequest_Spec
 
 func (m *UpdateApiGatewayRequest) SetSpec(v UpdateApiGatewayRequest_Spec) {
@@ -125,6 +130,10 @@ func (m *UpdateApiGatewayRequest) SetVariables(v map[string]*VariableInput) {
 
 func (m *UpdateApiGatewayRequest) SetCanary(v *Canary) {
 	m.Canary = v
+}
+
+func (m *UpdateApiGatewayRequest) SetExecutionTimeout(v *durationpb.Duration) {
+	m.ExecutionTimeout = v
 }
 
 func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {

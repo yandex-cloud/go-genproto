@@ -4,6 +4,7 @@ package apigateway
 
 import (
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -61,6 +62,10 @@ func (m *ApiGateway) SetVariables(v map[string]*VariableInput) {
 
 func (m *ApiGateway) SetCanary(v *Canary) {
 	m.Canary = v
+}
+
+func (m *ApiGateway) SetExecutionTimeout(v *durationpb.Duration) {
+	m.ExecutionTimeout = v
 }
 
 func (m *AttachedDomain) SetDomainId(v string) {

@@ -114,6 +114,10 @@ func (m *ExecuteMetadata) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
 
+func (m *ExecuteMetadata) SetProgressPercentage(v float64) {
+	m.ProgressPercentage = v
+}
+
 func (m *RevokeRequest) SetPolicyId(v string) {
 	m.PolicyId = v
 }

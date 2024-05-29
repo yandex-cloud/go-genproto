@@ -112,7 +112,7 @@ type AvailableVersions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Release channel: `RAPID`, `REGULAR` or `STABLE`. For more details see [documentation](https://cloud.yandex.ru/docs/managed-kubernetes/concepts/release-channels-and-updates).
+	// Release channel: `RAPID`, `REGULAR` or `STABLE`. For more details see [documentation](/docs/managed-kubernetes/concepts/release-channels-and-updates).
 	ReleaseChannel ReleaseChannel `protobuf:"varint,1,opt,name=release_channel,json=releaseChannel,proto3,enum=yandex.cloud.k8s.v1.ReleaseChannel" json:"release_channel,omitempty"`
 	// Version of Kubernetes components.
 	Versions []string `protobuf:"bytes,2,rep,name=versions,proto3" json:"versions,omitempty"`

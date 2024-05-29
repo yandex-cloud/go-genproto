@@ -203,6 +203,10 @@ func (m *AddClusterZookeeperRequest) SetHostSpecs(v []*HostSpec) {
 	m.HostSpecs = v
 }
 
+func (m *AddClusterZookeeperRequest) SetConvertTablesToReplicated(v *wrapperspb.BoolValue) {
+	m.ConvertTablesToReplicated = v
+}
+
 func (m *AddClusterZookeeperMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -261,6 +265,10 @@ func (m *RestoreClusterRequest) SetServiceAccountId(v string) {
 
 func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
+}
+
+func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

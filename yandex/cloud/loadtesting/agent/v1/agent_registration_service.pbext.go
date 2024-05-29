@@ -6,6 +6,10 @@ func (m *RegisterRequest) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
 
+func (m *RegisterRequest) SetAgentVersion(v string) {
+	m.AgentVersion = v
+}
+
 func (m *RegisterResponse) SetAgentInstanceId(v string) {
 	m.AgentInstanceId = v
 }

@@ -543,7 +543,7 @@ type ClickhouseConfig struct {
 	BackgroundCommonPoolSize *wrapperspb.Int64Value `protobuf:"bytes,47,opt,name=background_common_pool_size,json=backgroundCommonPoolSize,proto3" json:"background_common_pool_size,omitempty"`
 	// The default database.
 	//
-	// To get a list of cluster databases, see [Yandex Managed ClickHouse documentation](https://cloud.yandex.com/en/docs/managed-clickhouse/operations/databases#list-db).
+	// To get a list of cluster databases, see [Yandex Managed ClickHouse documentation](/docs/managed-clickhouse/operations/databases#list-db).
 	DefaultDatabase *wrapperspb.StringValue `protobuf:"bytes,43,opt,name=default_database,json=defaultDatabase,proto3" json:"default_database,omitempty"`
 	// Sets the memory size (in bytes) for a stack trace at every peak allocation step. Default value: **4194304**.
 	//
