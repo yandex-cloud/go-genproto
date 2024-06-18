@@ -162,7 +162,7 @@ type InviteCustomerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the reseller that customer will be associated with.
+	// Billing account ID of the reseller that the customer will be associated with.
 	ResellerId string `protobuf:"bytes,1,opt,name=reseller_id,json=resellerId,proto3" json:"reseller_id,omitempty"`
 	// Name of the customer.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`

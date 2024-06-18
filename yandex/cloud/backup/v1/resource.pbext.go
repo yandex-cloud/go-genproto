@@ -54,6 +54,14 @@ func (m *Resource) SetIsActive(v bool) {
 	m.IsActive = v
 }
 
+func (m *Resource) SetInitStatus(v Resource_InitStatus) {
+	m.InitStatus = v
+}
+
+func (m *Resource) SetMetadata(v string) {
+	m.Metadata = v
+}
+
 func (m *Progress) SetCurrent(v int64) {
 	m.Current = v
 }

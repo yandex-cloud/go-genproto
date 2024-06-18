@@ -99,3 +99,19 @@ func (m *ListApiKeyOperationsResponse) SetOperations(v []*operation.Operation) {
 func (m *ListApiKeyOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *ListApiKeyScopesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListApiKeyScopesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListApiKeyScopesResponse) SetScopes(v []string) {
+	m.Scopes = v
+}
+
+func (m *ListApiKeyScopesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

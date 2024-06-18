@@ -91,6 +91,10 @@ func (m *ExecuteProjectJobResponse) SetOutputFiles(v []*StorageFile) {
 	m.OutputFiles = v
 }
 
+func (m *ExecuteProjectJobResponse) SetOutputDatasets(v []*OutputDataset) {
+	m.OutputDatasets = v
+}
+
 func (m *ExecuteProjectJobResponse) SetResult(v *JobResult) {
 	m.Result = v
 }
@@ -163,12 +167,16 @@ func (m *ListProjectJobRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListProjectJobRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
 func (m *ListProjectJobResponse) SetJobs(v []*Job) {
 	m.Jobs = v
 }
 
-func (m *ListProjectJobResponse) SetPageToken(v string) {
-	m.PageToken = v
+func (m *ListProjectJobResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *GetProjectJobRequest) SetJobId(v string) {

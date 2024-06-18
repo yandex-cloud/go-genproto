@@ -37,6 +37,8 @@ const (
 	RegistryService_AddDataStreamExport_FullMethodName    = "/yandex.cloud.iot.devices.v1.RegistryService/AddDataStreamExport"
 	RegistryService_DeleteDataStreamExport_FullMethodName = "/yandex.cloud.iot.devices.v1.RegistryService/DeleteDataStreamExport"
 	RegistryService_ListOperations_FullMethodName         = "/yandex.cloud.iot.devices.v1.RegistryService/ListOperations"
+	RegistryService_Disable_FullMethodName                = "/yandex.cloud.iot.devices.v1.RegistryService/Disable"
+	RegistryService_Enable_FullMethodName                 = "/yandex.cloud.iot.devices.v1.RegistryService/Enable"
 )
 
 // RegistryServiceClient is the client API for RegistryService service.
@@ -78,6 +80,10 @@ type RegistryServiceClient interface {
 	DeleteDataStreamExport(ctx context.Context, in *DeleteDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified registry.
 	ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error)
+	// Disables the specified registry.
+	Disable(ctx context.Context, in *DisableRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Enables the specified registry.
+	Enable(ctx context.Context, in *EnableRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type registryServiceClient struct {
@@ -241,6 +247,24 @@ func (c *registryServiceClient) ListOperations(ctx context.Context, in *ListRegi
 	return out, nil
 }
 
+func (c *registryServiceClient) Disable(ctx context.Context, in *DisableRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RegistryService_Disable_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *registryServiceClient) Enable(ctx context.Context, in *EnableRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RegistryService_Enable_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RegistryServiceServer is the server API for RegistryService service.
 // All implementations should embed UnimplementedRegistryServiceServer
 // for forward compatibility
@@ -280,6 +304,10 @@ type RegistryServiceServer interface {
 	DeleteDataStreamExport(context.Context, *DeleteDataStreamExportRequest) (*operation.Operation, error)
 	// Lists operations for the specified registry.
 	ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error)
+	// Disables the specified registry.
+	Disable(context.Context, *DisableRegistryRequest) (*operation.Operation, error)
+	// Enables the specified registry.
+	Enable(context.Context, *EnableRegistryRequest) (*operation.Operation, error)
 }
 
 // UnimplementedRegistryServiceServer should be embedded to have forward compatible implementations.
@@ -336,6 +364,12 @@ func (UnimplementedRegistryServiceServer) DeleteDataStreamExport(context.Context
 }
 func (UnimplementedRegistryServiceServer) ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedRegistryServiceServer) Disable(context.Context, *DisableRegistryRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
+}
+func (UnimplementedRegistryServiceServer) Enable(context.Context, *EnableRegistryRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Enable not implemented")
 }
 
 // UnsafeRegistryServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -655,6 +689,42 @@ func _RegistryService_ListOperations_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RegistryService_Disable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableRegistryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).Disable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RegistryService_Disable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).Disable(ctx, req.(*DisableRegistryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RegistryService_Enable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableRegistryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).Enable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RegistryService_Enable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).Enable(ctx, req.(*EnableRegistryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RegistryService_ServiceDesc is the grpc.ServiceDesc for RegistryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -729,6 +799,14 @@ var RegistryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _RegistryService_ListOperations_Handler,
+		},
+		{
+			MethodName: "Disable",
+			Handler:    _RegistryService_Disable_Handler,
+		},
+		{
+			MethodName: "Enable",
+			Handler:    _RegistryService_Enable_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

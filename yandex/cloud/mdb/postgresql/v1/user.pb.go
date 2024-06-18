@@ -407,9 +407,9 @@ type User struct {
 	//
 	// For more information, see [the documentation](/docs/managed-postgresql/operations/grant).
 	Grants []string `protobuf:"bytes,7,rep,name=grants,proto3" json:"grants,omitempty"`
-	// Deletion Protection inhibits deletion of the user
+	// Determines whether the user deletion protection is enabled.
 	//
-	// Default value: `unspecified` (inherits cluster's deletion_protection)
+	// The default value is `unspecified`. In this case, the user configuration inherits the cluster's deletion protection settings.
 	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Password-based authentication method for user.
 	// Possible values are “ USER_PASSWORD_ENCRYPTION_MD5 “ or “ USER_PASSWORD_ENCRYPTION_SCRAM_SHA_256 “.
@@ -699,6 +699,19 @@ type PGAuditSettings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Defines which user queries will be written to the audit log. Corresponds to the [Pg audit log](https://yandex.cloud/en/docs/managed-postgresql/concepts/settings-list#setting-pg-audit-log) user setting.
+	//
+	// The possible values are the following:
+	//
+	// * PG_AUDIT_SETTINGS_LOG_READ: `SELECT` and `COPY` queries are logged if the data source is a relation or query.
+	// * PG_AUDIT_SETTINGS_LOG_WRITE: `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` queries are logged if the data target is a relation.
+	// * PG_AUDIT_SETTINGS_LOG_FUNCTION: Function invocations and `DO` sections are logged.
+	// * PG_AUDIT_SETTINGS_LOG_ROLE: Statements related to role and privilege management, such as `GRANT`, `REVOKE`, or `CREATE/ALTER/DROP ROLE`, are logged.
+	// * PG_AUDIT_SETTINGS_LOG_DDL: Any `DDL` statements that do not belong to the `ROLE` class are logged.
+	// * PG_AUDIT_SETTINGS_LOG_MISC: Miscellaneous commands, such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`, are logged.
+	// * PG_AUDIT_SETTINGS_LOG_MISC_SET: Miscellaneous `SET` commands, e.g., `SET ROLE`, are logged.
+	//
+	// The default value is PG_AUDIT_SETTINGS_LOG_UNSPECIFIED. In this case, the parameter is not configured.
 	Log []PGAuditSettings_PGAuditSettingsLog `protobuf:"varint,1,rep,packed,name=log,proto3,enum=yandex.cloud.mdb.postgresql.v1.PGAuditSettings_PGAuditSettingsLog" json:"log,omitempty"`
 }
 
@@ -750,7 +763,7 @@ type UserSettings struct {
 	// SQL sets an isolation level for each transaction.
 	// This setting defines the default isolation level to be set for all new SQL transactions.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/transaction-iso.html).
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/transaction-iso.html).
 	DefaultTransactionIsolation UserSettings_TransactionIsolation `protobuf:"varint,1,opt,name=default_transaction_isolation,json=defaultTransactionIsolation,proto3,enum=yandex.cloud.mdb.postgresql.v1.UserSettings_TransactionIsolation" json:"default_transaction_isolation,omitempty"`
 	// The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object.
 	// If the wait time is longer than the specified amount, then this statement is aborted.
@@ -766,14 +779,14 @@ type UserSettings struct {
 	//
 	// Value of `-1` (default) disables logging of the duration of statements.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html).
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 	LogMinDurationStatement *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"`
 	// This setting defines whether DBMS will commit transaction in a synchronous way.
 	//
 	// When synchronization is enabled, cluster waits for the synchronous operations to be completed prior to reporting `success` to the client.
 	// These operations guarantee different levels of the data safety and visibility in the cluster.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT).
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT).
 	SynchronousCommit UserSettings_SynchronousCommit `protobuf:"varint,4,opt,name=synchronous_commit,json=synchronousCommit,proto3,enum=yandex.cloud.mdb.postgresql.v1.UserSettings_SynchronousCommit" json:"synchronous_commit,omitempty"`
 	// The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
 	// If a transaction exceeds this limit during execution, it will be aborted.
@@ -782,15 +795,15 @@ type UserSettings struct {
 	TempFileLimit *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`
 	// This setting specifies which SQL statements should be logged (on the user level).
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html).
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 	LogStatement UserSettings_LogStatement `protobuf:"varint,6,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.UserSettings_LogStatement" json:"log_statement,omitempty"`
 	// Mode that the connection pooler is working in with specified user.
 	//
-	// See in-depth description in [Odyssey documentation](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string)
+	// For more information, see the [Odyssey documentation](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string).
 	PoolMode UserSettings_PoolingMode `protobuf:"varint,7,opt,name=pool_mode,json=poolMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.UserSettings_PoolingMode" json:"pool_mode,omitempty"`
 	// User can use prepared statements with transaction pooling.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-prepare.html)
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-prepare.html).
 	PreparedStatementsPooling *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=prepared_statements_pooling,json=preparedStatementsPooling,proto3" json:"prepared_statements_pooling,omitempty"`
 	// The connection pooler setting. It determines the maximum allowed replication lag (in seconds).
 	// Pooler will reject connections to the replica with a lag above this threshold.
@@ -807,24 +820,25 @@ type UserSettings struct {
 	//
 	// Value of `0` disables the timeout mechanism.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-replication.html)
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-replication.html).
 	WalSenderTimeout *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=wal_sender_timeout,json=walSenderTimeout,proto3" json:"wal_sender_timeout,omitempty"`
-	// Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction.
+	// Sets the maximum allowed idle time, in milliseconds, between queries while in a transaction.
 	//
-	// Values of `0` (default) disables the timeout.
+	// The default value is `0`, which disables the timeout.
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-client.html)
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-client.html).
 	IdleInTransactionSessionTimeout *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=idle_in_transaction_session_timeout,json=idleInTransactionSessionTimeout,proto3" json:"idle_in_transaction_session_timeout,omitempty"` // in milliseconds.
-	// The maximum time (in milliseconds) to wait for statement
+	// The maximum time (in milliseconds) to wait for statement.
 	// The timeout is measured from the time a command arrives at the server until it is completed by the server.
 	//
 	// If `log_min_error_statement` is set to ERROR or lower, the statement that timed out will also be logged.
 	//
 	// # Value of `0` (default) disables the timeout
 	//
-	// See in-depth description in [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-client.html)
+	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-client.html).
 	StatementTimeout *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=statement_timeout,json=statementTimeout,proto3" json:"statement_timeout,omitempty"`
-	Pgaudit          *PGAuditSettings       `protobuf:"bytes,13,opt,name=pgaudit,proto3" json:"pgaudit,omitempty"`
+	// Settings of the [PostgreSQL Audit Extension](https://www.pgaudit.org/) (pgaudit).
+	Pgaudit *PGAuditSettings `protobuf:"bytes,13,opt,name=pgaudit,proto3" json:"pgaudit,omitempty"`
 }
 
 func (x *UserSettings) Reset() {

@@ -624,6 +624,10 @@ func (m *NetworkInterfaceSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *NetworkInterfaceSpec) SetIndex(v string) {
+	m.Index = v
+}
+
 func (m *PrimaryAddressSpec) SetAddress(v string) {
 	m.Address = v
 }

@@ -22,6 +22,8 @@ const (
 	TalkService_UploadAsStream_FullMethodName = "/yandex.cloud.speechsense.v1.TalkService/UploadAsStream"
 	TalkService_Upload_FullMethodName         = "/yandex.cloud.speechsense.v1.TalkService/Upload"
 	TalkService_UploadText_FullMethodName     = "/yandex.cloud.speechsense.v1.TalkService/UploadText"
+	TalkService_Search_FullMethodName         = "/yandex.cloud.speechsense.v1.TalkService/Search"
+	TalkService_Get_FullMethodName            = "/yandex.cloud.speechsense.v1.TalkService/Get"
 )
 
 // TalkServiceClient is the client API for TalkService service.
@@ -35,6 +37,10 @@ type TalkServiceClient interface {
 	Upload(ctx context.Context, in *UploadTalkRequest, opts ...grpc.CallOption) (*UploadTalkResponse, error)
 	// rpc for uploading text talk document
 	UploadText(ctx context.Context, in *UploadTextRequest, opts ...grpc.CallOption) (*UploadTextResponse, error)
+	// rpc for searching talks. will return ids only
+	Search(ctx context.Context, in *SearchTalkRequest, opts ...grpc.CallOption) (*SearchTalkResponse, error)
+	// rpc for bulk get
+	Get(ctx context.Context, in *GetTalkRequest, opts ...grpc.CallOption) (*GetTalkResponse, error)
 }
 
 type talkServiceClient struct {
@@ -97,6 +103,24 @@ func (c *talkServiceClient) UploadText(ctx context.Context, in *UploadTextReques
 	return out, nil
 }
 
+func (c *talkServiceClient) Search(ctx context.Context, in *SearchTalkRequest, opts ...grpc.CallOption) (*SearchTalkResponse, error) {
+	out := new(SearchTalkResponse)
+	err := c.cc.Invoke(ctx, TalkService_Search_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *talkServiceClient) Get(ctx context.Context, in *GetTalkRequest, opts ...grpc.CallOption) (*GetTalkResponse, error) {
+	out := new(GetTalkResponse)
+	err := c.cc.Invoke(ctx, TalkService_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TalkServiceServer is the server API for TalkService service.
 // All implementations should embed UnimplementedTalkServiceServer
 // for forward compatibility
@@ -108,6 +132,10 @@ type TalkServiceServer interface {
 	Upload(context.Context, *UploadTalkRequest) (*UploadTalkResponse, error)
 	// rpc for uploading text talk document
 	UploadText(context.Context, *UploadTextRequest) (*UploadTextResponse, error)
+	// rpc for searching talks. will return ids only
+	Search(context.Context, *SearchTalkRequest) (*SearchTalkResponse, error)
+	// rpc for bulk get
+	Get(context.Context, *GetTalkRequest) (*GetTalkResponse, error)
 }
 
 // UnimplementedTalkServiceServer should be embedded to have forward compatible implementations.
@@ -122,6 +150,12 @@ func (UnimplementedTalkServiceServer) Upload(context.Context, *UploadTalkRequest
 }
 func (UnimplementedTalkServiceServer) UploadText(context.Context, *UploadTextRequest) (*UploadTextResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UploadText not implemented")
+}
+func (UnimplementedTalkServiceServer) Search(context.Context, *SearchTalkRequest) (*SearchTalkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (UnimplementedTalkServiceServer) Get(context.Context, *GetTalkRequest) (*GetTalkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 
 // UnsafeTalkServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -197,6 +231,42 @@ func _TalkService_UploadText_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TalkService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchTalkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TalkServiceServer).Search(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TalkService_Search_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TalkServiceServer).Search(ctx, req.(*SearchTalkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TalkService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTalkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TalkServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TalkService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TalkServiceServer).Get(ctx, req.(*GetTalkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TalkService_ServiceDesc is the grpc.ServiceDesc for TalkService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,6 +281,14 @@ var TalkService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UploadText",
 			Handler:    _TalkService_UploadText_Handler,
+		},
+		{
+			MethodName: "Search",
+			Handler:    _TalkService_Search_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _TalkService_Get_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

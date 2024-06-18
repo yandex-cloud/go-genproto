@@ -128,6 +128,10 @@ func (m *Version) SetTmpfsSize(v int64) {
 	m.TmpfsSize = v
 }
 
+func (m *Version) SetConcurrency(v int64) {
+	m.Concurrency = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

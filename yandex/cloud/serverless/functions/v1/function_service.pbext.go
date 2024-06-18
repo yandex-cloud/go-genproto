@@ -267,6 +267,10 @@ func (m *CreateFunctionVersionRequest) SetTmpfsSize(v int64) {
 	m.TmpfsSize = v
 }
 
+func (m *CreateFunctionVersionRequest) SetConcurrency(v int64) {
+	m.Concurrency = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }

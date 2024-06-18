@@ -46,6 +46,10 @@ func (m *JobParameters) SetArguments(v []*Argument) {
 	m.Arguments = v
 }
 
+func (m *JobParameters) SetOutputDatasets(v []*OutputDatasetDesc) {
+	m.OutputDatasets = v
+}
+
 func (m *CloudInstanceType) SetName(v string) {
 	m.Name = v
 }
@@ -156,6 +160,34 @@ func (m *PythonEnv) SetCondaYaml(v string) {
 
 func (m *PythonEnv) SetLocalModules(v []*File) {
 	m.LocalModules = v
+}
+
+func (m *OutputDatasetDesc) SetName(v string) {
+	m.Name = v
+}
+
+func (m *OutputDatasetDesc) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *OutputDatasetDesc) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *OutputDatasetDesc) SetSizeGb(v int64) {
+	m.SizeGb = v
+}
+
+func (m *OutputDatasetDesc) SetVar(v string) {
+	m.Var = v
+}
+
+func (m *OutputDataset) SetDesc(v *OutputDatasetDesc) {
+	m.Desc = v
+}
+
+func (m *OutputDataset) SetId(v string) {
+	m.Id = v
 }
 
 func (m *Job) SetId(v string) {

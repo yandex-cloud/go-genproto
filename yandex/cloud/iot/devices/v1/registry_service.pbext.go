@@ -290,3 +290,19 @@ func (m *ListDataStreamExportsRequest) SetRegistryId(v string) {
 func (m *ListDataStreamExportsResponse) SetDataStreamExports(v []*DataStreamExport) {
 	m.DataStreamExports = v
 }
+
+func (m *DisableRegistryRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *DisableRegistryMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *EnableRegistryRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *EnableRegistryMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}

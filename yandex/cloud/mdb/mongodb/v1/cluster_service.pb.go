@@ -2626,7 +2626,7 @@ type UpdateClusterHostsRequest struct {
 	// ID of the MongoDB cluster to update hosts from.
 	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// New configurations to apply to hosts.
+	// New configurations to apply to hosts of a Managed Service for MongoDB cluster.
 	UpdateHostSpecs []*UpdateHostSpec `protobuf:"bytes,2,rep,name=update_host_specs,json=updateHostSpecs,proto3" json:"update_host_specs,omitempty"`
 }
 
@@ -2738,19 +2738,23 @@ type UpdateHostSpec struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Names of hosts to update.
+	// Host to be updated. Specify the [host FQDN](https://yandex.cloud/en/docs/managed-mongodb/operations/connect/#fqdn).
 	HostName string `protobuf:"bytes,1,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
-	// Is host hidden in replSet
+	// Determines if the host is a hidden replica set member.
+	//
+	// Such members cannot become primary in a replica set, and they are invisible to client applications. However, hidden members can participate in elections of the primary host. For more information, see the [MongoDB documentation](https://www.mongodb.com/docs/manual/core/replica-set-hidden-member/).
 	Hidden *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	// The number of seconds "behind" the primary that this replica set member should "lag"
+	// The time, in seconds, by which the given replica set member lags behind the primary host.
 	SecondaryDelaySecs *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=secondary_delay_secs,json=secondaryDelaySecs,proto3" json:"secondary_delay_secs,omitempty"`
-	// Priority of host for the election in replSet
+	// Priority of the host to be elected as the primary in the replica set.
+	//
+	// The minimum value is `0` if the Managed Service for MongoDB cluster contains three or more secondary hosts. Otherwise, the minimum value is `1`.
 	Priority *wrapperspb.DoubleValue `protobuf:"bytes,4,opt,name=priority,proto3" json:"priority,omitempty"`
-	// Whether the host should get a public IP address on update.
+	// Determines whether the host should get a public IP address after the update.
 	AssignPublicIp bool `protobuf:"varint,5,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Field mask that specifies which fields of the MongoDB host should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,6,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Host tags
+	// Host tag list that contains key-value pairs for the given replica set member. For more information about how to specify the tags and what values to choose, see the [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
 	Tags map[string]string `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 

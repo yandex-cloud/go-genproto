@@ -179,6 +179,14 @@ func (m *ProjectExecutionRequest) SetOutputVariableNames(v []string) {
 	m.OutputVariableNames = v
 }
 
+func (m *ProjectExecutionRequest) SetSpec(v string) {
+	m.Spec = v
+}
+
+func (m *ProjectExecutionRequest) SetSparkConnectorId(v string) {
+	m.SparkConnectorId = v
+}
+
 type ProjectExecutionMetadata_Target = isProjectExecutionMetadata_Target
 
 func (m *ProjectExecutionMetadata) SetTarget(v ProjectExecutionMetadata_Target) {

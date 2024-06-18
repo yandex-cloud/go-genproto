@@ -26,6 +26,7 @@ const (
 	ApiKeyService_Update_FullMethodName         = "/yandex.cloud.iam.v1.ApiKeyService/Update"
 	ApiKeyService_Delete_FullMethodName         = "/yandex.cloud.iam.v1.ApiKeyService/Delete"
 	ApiKeyService_ListOperations_FullMethodName = "/yandex.cloud.iam.v1.ApiKeyService/ListOperations"
+	ApiKeyService_ListScopes_FullMethodName     = "/yandex.cloud.iam.v1.ApiKeyService/ListScopes"
 )
 
 // ApiKeyServiceClient is the client API for ApiKeyService service.
@@ -46,6 +47,8 @@ type ApiKeyServiceClient interface {
 	Delete(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of operations for the specified API key.
 	ListOperations(ctx context.Context, in *ListApiKeyOperationsRequest, opts ...grpc.CallOption) (*ListApiKeyOperationsResponse, error)
+	// Retrieves the list of scopes.
+	ListScopes(ctx context.Context, in *ListApiKeyScopesRequest, opts ...grpc.CallOption) (*ListApiKeyScopesResponse, error)
 }
 
 type apiKeyServiceClient struct {
@@ -110,6 +113,15 @@ func (c *apiKeyServiceClient) ListOperations(ctx context.Context, in *ListApiKey
 	return out, nil
 }
 
+func (c *apiKeyServiceClient) ListScopes(ctx context.Context, in *ListApiKeyScopesRequest, opts ...grpc.CallOption) (*ListApiKeyScopesResponse, error) {
+	out := new(ListApiKeyScopesResponse)
+	err := c.cc.Invoke(ctx, ApiKeyService_ListScopes_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiKeyServiceServer is the server API for ApiKeyService service.
 // All implementations should embed UnimplementedApiKeyServiceServer
 // for forward compatibility
@@ -128,6 +140,8 @@ type ApiKeyServiceServer interface {
 	Delete(context.Context, *DeleteApiKeyRequest) (*operation.Operation, error)
 	// Retrieves the list of operations for the specified API key.
 	ListOperations(context.Context, *ListApiKeyOperationsRequest) (*ListApiKeyOperationsResponse, error)
+	// Retrieves the list of scopes.
+	ListScopes(context.Context, *ListApiKeyScopesRequest) (*ListApiKeyScopesResponse, error)
 }
 
 // UnimplementedApiKeyServiceServer should be embedded to have forward compatible implementations.
@@ -151,6 +165,9 @@ func (UnimplementedApiKeyServiceServer) Delete(context.Context, *DeleteApiKeyReq
 }
 func (UnimplementedApiKeyServiceServer) ListOperations(context.Context, *ListApiKeyOperationsRequest) (*ListApiKeyOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedApiKeyServiceServer) ListScopes(context.Context, *ListApiKeyScopesRequest) (*ListApiKeyScopesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListScopes not implemented")
 }
 
 // UnsafeApiKeyServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -272,6 +289,24 @@ func _ApiKeyService_ListOperations_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiKeyService_ListScopes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListApiKeyScopesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiKeyServiceServer).ListScopes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApiKeyService_ListScopes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiKeyServiceServer).ListScopes(ctx, req.(*ListApiKeyScopesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiKeyService_ServiceDesc is the grpc.ServiceDesc for ApiKeyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -302,6 +337,10 @@ var ApiKeyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _ApiKeyService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListScopes",
+			Handler:    _ApiKeyService_ListScopes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

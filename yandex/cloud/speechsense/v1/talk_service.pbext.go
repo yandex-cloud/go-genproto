@@ -2,6 +2,10 @@
 
 package speechsense
 
+import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
 type StreamTalkRequest_Event = isStreamTalkRequest_Event
 
 func (m *StreamTalkRequest) SetEvent(v StreamTalkRequest_Event) {
@@ -50,4 +54,80 @@ func (m *TalkMetadata) SetConnectionId(v string) {
 
 func (m *TalkMetadata) SetFields(v map[string]string) {
 	m.Fields = v
+}
+
+func (m *SearchTalkRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
+func (m *SearchTalkRequest) SetSpaceId(v string) {
+	m.SpaceId = v
+}
+
+func (m *SearchTalkRequest) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
+func (m *SearchTalkRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *SearchTalkRequest) SetFilters(v []*Filter) {
+	m.Filters = v
+}
+
+func (m *SearchTalkRequest) SetQuery(v *Query) {
+	m.Query = v
+}
+
+func (m *SearchTalkRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *SearchTalkRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *SearchTalkRequest) SetSortData(v *SortData) {
+	m.SortData = v
+}
+
+func (m *SearchTalkResponse) SetTalkIds(v []string) {
+	m.TalkIds = v
+}
+
+func (m *SearchTalkResponse) SetTalksCount(v int64) {
+	m.TalksCount = v
+}
+
+func (m *SearchTalkResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *GetTalkRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
+func (m *GetTalkRequest) SetSpaceId(v string) {
+	m.SpaceId = v
+}
+
+func (m *GetTalkRequest) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
+func (m *GetTalkRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *GetTalkRequest) SetTalkIds(v []string) {
+	m.TalkIds = v
+}
+
+func (m *GetTalkRequest) SetResultsMask(v *fieldmaskpb.FieldMask) {
+	m.ResultsMask = v
+}
+
+func (m *GetTalkResponse) SetTalk(v []*Talk) {
+	m.Talk = v
 }
