@@ -26,6 +26,10 @@ func (m *CreateCommunityRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateCommunityRequest) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
 func (m *CreateCommunityMetadata) SetCommunityId(v string) {
 	m.CommunityId = v
 }

@@ -103,6 +103,10 @@ func (m *CreateClusterRequest) SetAnnounceHostnames(v bool) {
 	m.AnnounceHostnames = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -277,6 +281,10 @@ func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 
 func (m *RestoreClusterRequest) SetAnnounceHostnames(v bool) {
 	m.AnnounceHostnames = v
+}
+
+func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
@@ -651,4 +659,8 @@ func (m *ConfigSpec) SetAccess(v *Access) {
 
 func (m *ConfigSpec) SetRedis(v *config.RedisConfig) {
 	m.Redis = v
+}
+
+func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }

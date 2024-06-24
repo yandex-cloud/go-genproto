@@ -248,6 +248,18 @@ func (m *ExpandRequest) SetDuration(v int64) {
 	m.Duration = v
 }
 
+func (m *ExpandRequest) SetParallel(v int64) {
+	m.Parallel = v
+}
+
+func (m *ExpandRequest) SetCloseCluster(v bool) {
+	m.CloseCluster = v
+}
+
+func (m *ExpandRequest) SetDelayRedistribution(v bool) {
+	m.DelayRedistribution = v
+}
+
 func (m *DeleteClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

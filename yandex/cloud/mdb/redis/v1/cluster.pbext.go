@@ -151,6 +151,10 @@ func (m *ClusterConfig) SetRedis(v *config.RedisConfigSet) {
 	m.Redis = v
 }
 
+func (m *ClusterConfig) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }
@@ -225,4 +229,16 @@ func (m *Resources) SetDiskTypeId(v string) {
 
 func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
+}
+
+func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v *wrapperspb.Int64Value) {
+	m.PlannedUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v *wrapperspb.Int64Value) {
+	m.EmergencyUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v *wrapperspb.Int64Value) {
+	m.DiskSizeLimit = v
 }

@@ -33,3 +33,7 @@ func (m *Community) SetCreatedById(v string) {
 func (m *Community) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
+
+func (m *Community) SetZoneId(v string) {
+	m.ZoneId = v
+}
