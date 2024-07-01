@@ -36,7 +36,7 @@ type PurgeCacheRequest struct {
 	//
 	// You may use asterisk (`*`) as a wildcard character that substitutes any number of characters.
 	//
-	// If an empty array of paths is specified, the cache is purged entirely.
+	// If an empty array of paths is specified (`"paths": []`), the cache is purged entirely.
 	Paths []string `protobuf:"bytes,2,rep,name=paths,proto3" json:"paths,omitempty"`
 }
 

@@ -56,6 +56,22 @@ func (m *TalkMetadata) SetFields(v map[string]string) {
 	m.Fields = v
 }
 
+func (m *TalkMetadata) SetUsers(v []*UserMetadata) {
+	m.Users = v
+}
+
+func (m *UserMetadata) SetId(v string) {
+	m.Id = v
+}
+
+func (m *UserMetadata) SetRole(v UserRole) {
+	m.Role = v
+}
+
+func (m *UserMetadata) SetFields(v map[string]string) {
+	m.Fields = v
+}
+
 func (m *SearchTalkRequest) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }

@@ -143,11 +143,18 @@ type SecurityGroup struct {
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the security group. 1-63 characters long.
+	// Name of the security group.
+	// The name must be unique within the folder.
+	// Value must match the regular expression “\|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?“.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the security group. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
+	// Resource labels as `key:value` pairs.
+	// No more than 64 per resource.
+	// The maximum string length in characters for each value is 63.
+	// Each value must match the regular expression `[-_./\\@0-9a-z]*`.
+	// The string length in characters for each key must be 1-63.
+	// Each key must match the regular expression `[a-z][-_./\\@0-9a-z]*`.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of the network that the security group belongs to.
 	NetworkId string `protobuf:"bytes,7,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`

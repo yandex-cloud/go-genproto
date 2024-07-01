@@ -82,11 +82,18 @@ type Subnet struct {
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the subnet. The name is unique within the project. 3-63 characters long.
+	// Name of the subnet.
+	// The name must be unique within the folder.
+	// Value must match the regular expression “\|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?“.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the subnet. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
+	// Resource labels, `key:value` pairs.
+	// No more than 64 per resource.
+	// The maximum string length in characters for each value is 63.
+	// Each value must match the regular expression `[-_0-9a-z]*`.
+	// The string length in characters for each key must be 1-63.
+	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// ID of the network the subnet belongs to.
 	NetworkId string `protobuf:"bytes,7,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -101,8 +108,9 @@ type Subnet struct {
 	// IPv6 not available yet.
 	V6CidrBlocks []string `protobuf:"bytes,11,rep,name=v6_cidr_blocks,json=v6CidrBlocks,proto3" json:"v6_cidr_blocks,omitempty"`
 	// ID of route table the subnet is linked to.
-	RouteTableId string       `protobuf:"bytes,12,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
-	DhcpOptions  *DhcpOptions `protobuf:"bytes,13,opt,name=dhcp_options,json=dhcpOptions,proto3" json:"dhcp_options,omitempty"`
+	RouteTableId string `protobuf:"bytes,12,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
+	// DHCP options for the subnet.
+	DhcpOptions *DhcpOptions `protobuf:"bytes,13,opt,name=dhcp_options,json=dhcpOptions,proto3" json:"dhcp_options,omitempty"`
 }
 
 func (x *Subnet) Reset() {
@@ -226,9 +234,12 @@ type DhcpOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// A list of DHCP servers for this subnet.
 	DomainNameServers []string `protobuf:"bytes,1,rep,name=domain_name_servers,json=domainNameServers,proto3" json:"domain_name_servers,omitempty"`
-	DomainName        string   `protobuf:"bytes,2,opt,name=domain_name,json=domainName,proto3" json:"domain_name,omitempty"`
-	NtpServers        []string `protobuf:"bytes,3,rep,name=ntp_servers,json=ntpServers,proto3" json:"ntp_servers,omitempty"`
+	// A domain name to us as a suffix when resolving host names in this subnet.
+	DomainName string `protobuf:"bytes,2,opt,name=domain_name,json=domainName,proto3" json:"domain_name,omitempty"`
+	// List of NTP servers for this subnet.
+	NtpServers []string `protobuf:"bytes,3,rep,name=ntp_servers,json=ntpServers,proto3" json:"ntp_servers,omitempty"`
 }
 
 func (x *DhcpOptions) Reset() {

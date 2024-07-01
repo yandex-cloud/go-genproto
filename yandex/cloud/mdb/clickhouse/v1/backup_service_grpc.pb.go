@@ -8,6 +8,7 @@ package clickhouse
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,8 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	BackupService_Get_FullMethodName  = "/yandex.cloud.mdb.clickhouse.v1.BackupService/Get"
-	BackupService_List_FullMethodName = "/yandex.cloud.mdb.clickhouse.v1.BackupService/List"
+	BackupService_Get_FullMethodName    = "/yandex.cloud.mdb.clickhouse.v1.BackupService/Get"
+	BackupService_List_FullMethodName   = "/yandex.cloud.mdb.clickhouse.v1.BackupService/List"
+	BackupService_Delete_FullMethodName = "/yandex.cloud.mdb.clickhouse.v1.BackupService/Delete"
 )
 
 // BackupServiceClient is the client API for BackupService service.
@@ -33,6 +35,8 @@ type BackupServiceClient interface {
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of Backup resources available for the specified folder.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
+	// Deletes the specified ClickHouse Backup.
+	Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type backupServiceClient struct {
@@ -61,6 +65,15 @@ func (c *backupServiceClient) List(ctx context.Context, in *ListBackupsRequest, 
 	return out, nil
 }
 
+func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, BackupService_Delete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackupServiceServer is the server API for BackupService service.
 // All implementations should embed UnimplementedBackupServiceServer
 // for forward compatibility
@@ -71,6 +84,8 @@ type BackupServiceServer interface {
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of Backup resources available for the specified folder.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
+	// Deletes the specified ClickHouse Backup.
+	Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
 }
 
 // UnimplementedBackupServiceServer should be embedded to have forward compatible implementations.
@@ -82,6 +97,9 @@ func (UnimplementedBackupServiceServer) Get(context.Context, *GetBackupRequest) 
 }
 func (UnimplementedBackupServiceServer) List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedBackupServiceServer) Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 
 // UnsafeBackupServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -131,6 +149,24 @@ func _BackupService_List_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackupService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).Delete(ctx, req.(*DeleteBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackupService_ServiceDesc is the grpc.ServiceDesc for BackupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -145,6 +181,10 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _BackupService_List_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _BackupService_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
