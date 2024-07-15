@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ReportService_GetTable_FullMethodName = "/yandex.cloud.loadtesting.api.v1.ReportService/GetTable"
+	ReportService_GetTable_FullMethodName           = "/yandex.cloud.loadtesting.api.v1.ReportService/GetTable"
+	ReportService_CalculateKpiValues_FullMethodName = "/yandex.cloud.loadtesting.api.v1.ReportService/CalculateKpiValues"
 )
 
 // ReportServiceClient is the client API for ReportService service.
@@ -28,6 +29,8 @@ const (
 type ReportServiceClient interface {
 	// Returns a report table for the specified test.
 	GetTable(ctx context.Context, in *GetTableReportRequest, opts ...grpc.CallOption) (*GetTableReportResponse, error)
+	// Returns a list of KPI values for tests matching the specified filter.
+	CalculateKpiValues(ctx context.Context, in *CalculateReportKpiValuesRequest, opts ...grpc.CallOption) (*CalculateReportKpiValuesResponse, error)
 }
 
 type reportServiceClient struct {
@@ -47,12 +50,23 @@ func (c *reportServiceClient) GetTable(ctx context.Context, in *GetTableReportRe
 	return out, nil
 }
 
+func (c *reportServiceClient) CalculateKpiValues(ctx context.Context, in *CalculateReportKpiValuesRequest, opts ...grpc.CallOption) (*CalculateReportKpiValuesResponse, error) {
+	out := new(CalculateReportKpiValuesResponse)
+	err := c.cc.Invoke(ctx, ReportService_CalculateKpiValues_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReportServiceServer is the server API for ReportService service.
 // All implementations should embed UnimplementedReportServiceServer
 // for forward compatibility
 type ReportServiceServer interface {
 	// Returns a report table for the specified test.
 	GetTable(context.Context, *GetTableReportRequest) (*GetTableReportResponse, error)
+	// Returns a list of KPI values for tests matching the specified filter.
+	CalculateKpiValues(context.Context, *CalculateReportKpiValuesRequest) (*CalculateReportKpiValuesResponse, error)
 }
 
 // UnimplementedReportServiceServer should be embedded to have forward compatible implementations.
@@ -61,6 +75,9 @@ type UnimplementedReportServiceServer struct {
 
 func (UnimplementedReportServiceServer) GetTable(context.Context, *GetTableReportRequest) (*GetTableReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTable not implemented")
+}
+func (UnimplementedReportServiceServer) CalculateKpiValues(context.Context, *CalculateReportKpiValuesRequest) (*CalculateReportKpiValuesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalculateKpiValues not implemented")
 }
 
 // UnsafeReportServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -92,6 +109,24 @@ func _ReportService_GetTable_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ReportService_CalculateKpiValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalculateReportKpiValuesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReportServiceServer).CalculateKpiValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReportService_CalculateKpiValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReportServiceServer).CalculateKpiValues(ctx, req.(*CalculateReportKpiValuesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ReportService_ServiceDesc is the grpc.ServiceDesc for ReportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +137,10 @@ var ReportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTable",
 			Handler:    _ReportService_GetTable_Handler,
+		},
+		{
+			MethodName: "CalculateKpiValues",
+			Handler:    _ReportService_CalculateKpiValues_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -835,6 +835,10 @@ func (m *ConfigSpec) SetEmbeddedKeeper(v *wrapperspb.BoolValue) {
 	m.EmbeddedKeeper = v
 }
 
+func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
+	m.BackupRetainPeriodDays = v
+}
+
 func (m *ConfigSpec_Clickhouse) SetConfig(v *config.ClickhouseConfig) {
 	m.Config = v
 }

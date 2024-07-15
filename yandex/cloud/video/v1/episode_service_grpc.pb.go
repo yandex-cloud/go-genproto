@@ -27,6 +27,7 @@ const (
 	EpisodeService_Delete_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Delete"
 	EpisodeService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.EpisodeService/PerformAction"
 	EpisodeService_GetPlayerURL_FullMethodName  = "/yandex.cloud.video.v1.EpisodeService/GetPlayerURL"
+	EpisodeService_GetManifests_FullMethodName  = "/yandex.cloud.video.v1.EpisodeService/GetManifests"
 )
 
 // EpisodeServiceClient is the client API for EpisodeService service.
@@ -47,6 +48,8 @@ type EpisodeServiceClient interface {
 	PerformAction(ctx context.Context, in *PerformEpisodeActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns url to the player.
 	GetPlayerURL(ctx context.Context, in *GetEpisodePlayerURLRequest, opts ...grpc.CallOption) (*GetEpisodePlayerURLResponse, error)
+	// Returns manifest urls.
+	GetManifests(ctx context.Context, in *GetEpisodeManifestsRequest, opts ...grpc.CallOption) (*GetEpisodeManifestsResponse, error)
 }
 
 type episodeServiceClient struct {
@@ -120,6 +123,15 @@ func (c *episodeServiceClient) GetPlayerURL(ctx context.Context, in *GetEpisodeP
 	return out, nil
 }
 
+func (c *episodeServiceClient) GetManifests(ctx context.Context, in *GetEpisodeManifestsRequest, opts ...grpc.CallOption) (*GetEpisodeManifestsResponse, error) {
+	out := new(GetEpisodeManifestsResponse)
+	err := c.cc.Invoke(ctx, EpisodeService_GetManifests_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EpisodeServiceServer is the server API for EpisodeService service.
 // All implementations should embed UnimplementedEpisodeServiceServer
 // for forward compatibility
@@ -138,6 +150,8 @@ type EpisodeServiceServer interface {
 	PerformAction(context.Context, *PerformEpisodeActionRequest) (*operation.Operation, error)
 	// Returns url to the player.
 	GetPlayerURL(context.Context, *GetEpisodePlayerURLRequest) (*GetEpisodePlayerURLResponse, error)
+	// Returns manifest urls.
+	GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error)
 }
 
 // UnimplementedEpisodeServiceServer should be embedded to have forward compatible implementations.
@@ -164,6 +178,9 @@ func (UnimplementedEpisodeServiceServer) PerformAction(context.Context, *Perform
 }
 func (UnimplementedEpisodeServiceServer) GetPlayerURL(context.Context, *GetEpisodePlayerURLRequest) (*GetEpisodePlayerURLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerURL not implemented")
+}
+func (UnimplementedEpisodeServiceServer) GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetManifests not implemented")
 }
 
 // UnsafeEpisodeServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -303,6 +320,24 @@ func _EpisodeService_GetPlayerURL_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EpisodeService_GetManifests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEpisodeManifestsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EpisodeServiceServer).GetManifests(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EpisodeService_GetManifests_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EpisodeServiceServer).GetManifests(ctx, req.(*GetEpisodeManifestsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EpisodeService_ServiceDesc is the grpc.ServiceDesc for EpisodeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -337,6 +372,10 @@ var EpisodeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayerURL",
 			Handler:    _EpisodeService_GetPlayerURL_Handler,
+		},
+		{
+			MethodName: "GetManifests",
+			Handler:    _EpisodeService_GetManifests_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

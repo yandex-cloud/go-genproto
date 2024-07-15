@@ -232,3 +232,11 @@ func (m *GetEpisodePlayerURLResponse) SetPlayerUrl(v string) {
 func (m *GetEpisodePlayerURLResponse) SetHtml(v string) {
 	m.Html = v
 }
+
+func (m *GetEpisodeManifestsRequest) SetEpisodeId(v string) {
+	m.EpisodeId = v
+}
+
+func (m *GetEpisodeManifestsResponse) SetManifests(v []*Manifest) {
+	m.Manifests = v
+}

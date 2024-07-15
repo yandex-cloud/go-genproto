@@ -94,6 +94,10 @@ func (m *ListApplicationsRequest) SetComputeInstanceId(v string) {
 	}
 }
 
+func (m *ListApplicationsRequest) SetShowProcessing(v bool) {
+	m.ShowProcessing = v
+}
+
 func (m *ListApplicationsResponse) SetApplications(v []*PolicyApplication) {
 	m.Applications = v
 }

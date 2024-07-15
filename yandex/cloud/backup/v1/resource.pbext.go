@@ -62,6 +62,10 @@ func (m *Resource) SetMetadata(v string) {
 	m.Metadata = v
 }
 
+func (m *Resource) SetType(v ResourceType) {
+	m.Type = v
+}
+
 func (m *Progress) SetCurrent(v int64) {
 	m.Current = v
 }

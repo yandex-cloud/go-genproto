@@ -36,15 +36,15 @@ func (m *ClickhouseConnectionOptions) SetAddress(v ClickhouseConnectionOptions_A
 	m.Address = v
 }
 
-func (m *ClickhouseConnectionOptions) SetMdbClusterId(v string) {
-	m.Address = &ClickhouseConnectionOptions_MdbClusterId{
-		MdbClusterId: v,
-	}
-}
-
 func (m *ClickhouseConnectionOptions) SetOnPremise(v *OnPremiseClickhouse) {
 	m.Address = &ClickhouseConnectionOptions_OnPremise{
 		OnPremise: v,
+	}
+}
+
+func (m *ClickhouseConnectionOptions) SetMdbClusterId(v string) {
+	m.Address = &ClickhouseConnectionOptions_MdbClusterId{
+		MdbClusterId: v,
 	}
 }
 

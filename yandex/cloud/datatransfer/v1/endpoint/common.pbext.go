@@ -114,14 +114,14 @@ func (m *DataSchema) SetSchema(v DataSchema_Schema) {
 	m.Schema = v
 }
 
-func (m *DataSchema) SetFields(v *FieldList) {
-	m.Schema = &DataSchema_Fields{
-		Fields: v,
-	}
-}
-
 func (m *DataSchema) SetJsonFields(v string) {
 	m.Schema = &DataSchema_JsonFields{
 		JsonFields: v,
+	}
+}
+
+func (m *DataSchema) SetFields(v *FieldList) {
+	m.Schema = &DataSchema_Fields{
+		Fields: v,
 	}
 }

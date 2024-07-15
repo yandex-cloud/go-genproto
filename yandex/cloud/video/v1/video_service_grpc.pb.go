@@ -27,6 +27,7 @@ const (
 	VideoService_Delete_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Delete"
 	VideoService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.VideoService/PerformAction"
 	VideoService_GetPlayerURL_FullMethodName  = "/yandex.cloud.video.v1.VideoService/GetPlayerURL"
+	VideoService_GetManifests_FullMethodName  = "/yandex.cloud.video.v1.VideoService/GetManifests"
 )
 
 // VideoServiceClient is the client API for VideoService service.
@@ -47,6 +48,8 @@ type VideoServiceClient interface {
 	PerformAction(ctx context.Context, in *PerformVideoActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns url to the player.
 	GetPlayerURL(ctx context.Context, in *GetVideoPlayerURLRequest, opts ...grpc.CallOption) (*GetVideoPlayerURLResponse, error)
+	// Returns manifest urls.
+	GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error)
 }
 
 type videoServiceClient struct {
@@ -120,6 +123,15 @@ func (c *videoServiceClient) GetPlayerURL(ctx context.Context, in *GetVideoPlaye
 	return out, nil
 }
 
+func (c *videoServiceClient) GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error) {
+	out := new(GetVideoManifestsResponse)
+	err := c.cc.Invoke(ctx, VideoService_GetManifests_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VideoServiceServer is the server API for VideoService service.
 // All implementations should embed UnimplementedVideoServiceServer
 // for forward compatibility
@@ -138,6 +150,8 @@ type VideoServiceServer interface {
 	PerformAction(context.Context, *PerformVideoActionRequest) (*operation.Operation, error)
 	// Returns url to the player.
 	GetPlayerURL(context.Context, *GetVideoPlayerURLRequest) (*GetVideoPlayerURLResponse, error)
+	// Returns manifest urls.
+	GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error)
 }
 
 // UnimplementedVideoServiceServer should be embedded to have forward compatible implementations.
@@ -164,6 +178,9 @@ func (UnimplementedVideoServiceServer) PerformAction(context.Context, *PerformVi
 }
 func (UnimplementedVideoServiceServer) GetPlayerURL(context.Context, *GetVideoPlayerURLRequest) (*GetVideoPlayerURLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerURL not implemented")
+}
+func (UnimplementedVideoServiceServer) GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetManifests not implemented")
 }
 
 // UnsafeVideoServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -303,6 +320,24 @@ func _VideoService_GetPlayerURL_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VideoService_GetManifests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVideoManifestsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).GetManifests(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_GetManifests_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).GetManifests(ctx, req.(*GetVideoManifestsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VideoService_ServiceDesc is the grpc.ServiceDesc for VideoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -337,6 +372,10 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayerURL",
 			Handler:    _VideoService_GetPlayerURL_Handler,
+		},
+		{
+			MethodName: "GetManifests",
+			Handler:    _VideoService_GetManifests_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -207,3 +207,11 @@ func (m *GetVideoPlayerURLResponse) SetPlayerUrl(v string) {
 func (m *GetVideoPlayerURLResponse) SetHtml(v string) {
 	m.Html = v
 }
+
+func (m *GetVideoManifestsRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *GetVideoManifestsResponse) SetManifests(v []*Manifest) {
+	m.Manifests = v
+}

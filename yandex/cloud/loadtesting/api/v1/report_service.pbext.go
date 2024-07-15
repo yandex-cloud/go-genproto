@@ -22,3 +22,27 @@ func (m *GetTableReportResponse) SetOverall(v *table.Report) {
 func (m *GetTableReportResponse) SetCases(v map[string]*table.Report) {
 	m.Cases = v
 }
+
+func (m *CalculateReportKpiValuesRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CalculateReportKpiValuesRequest) SetTestFilter(v string) {
+	m.TestFilter = v
+}
+
+func (m *CalculateReportKpiValuesRequest) SetTestCase(v string) {
+	m.TestCase = v
+}
+
+func (m *CalculateReportKpiValuesRequest) SetKpi(v *report.Kpi) {
+	m.Kpi = v
+}
+
+func (m *CalculateReportKpiValuesResponse) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CalculateReportKpiValuesResponse) SetValues(v []*report.KpiValue) {
+	m.Values = v
+}

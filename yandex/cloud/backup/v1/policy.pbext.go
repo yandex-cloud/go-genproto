@@ -281,3 +281,7 @@ func (m *PolicyApplication) SetStatus(v PolicyApplication_Status) {
 func (m *PolicyApplication) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
+
+func (m *PolicyApplication) SetIsProcessing(v bool) {
+	m.IsProcessing = v
+}
