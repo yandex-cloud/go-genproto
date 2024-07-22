@@ -664,7 +664,16 @@ type ListHostGroupInstancesRequest struct {
 	// set [page_token] to the [ListHostGroupInstancesResponse.next_page_token]
 	// returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Filter support is not currently implemented. Any filters are ignored.
+	// A filter expression that filters resources listed in the response.
+	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
+	//
+	// Each condition has the form `<field> <operator> <value>`, where:
+	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
+	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
+	// 3. `<value>` represents a value.
+	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// Currently you can use filtering only on the [Host.id] field.
+	// To get the host ID, use [HostGroupService.ListHosts] request.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 

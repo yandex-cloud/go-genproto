@@ -3,6 +3,7 @@
 package datasphere
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -48,6 +49,10 @@ func (m *JobParameters) SetArguments(v []*Argument) {
 
 func (m *JobParameters) SetOutputDatasets(v []*OutputDatasetDesc) {
 	m.OutputDatasets = v
+}
+
+func (m *JobParameters) SetGracefulShutdownParameters(v *GracefulShutdownParameters) {
+	m.GracefulShutdownParameters = v
 }
 
 func (m *CloudInstanceType) SetName(v string) {
@@ -260,4 +265,12 @@ func (m *Job) SetDataSizeBytes(v int64) {
 
 func (m *JobResult) SetReturnCode(v int64) {
 	m.ReturnCode = v
+}
+
+func (m *GracefulShutdownParameters) SetTimeout(v *durationpb.Duration) {
+	m.Timeout = v
+}
+
+func (m *GracefulShutdownParameters) SetSignal(v int64) {
+	m.Signal = v
 }

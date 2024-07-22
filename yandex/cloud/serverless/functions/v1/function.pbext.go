@@ -32,10 +32,6 @@ func (m *Function) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *Function) SetLogGroupId(v string) {
-	m.LogGroupId = v
-}
-
 func (m *Function) SetHttpInvokeUrl(v string) {
 	m.HttpInvokeUrl = v
 }
@@ -90,10 +86,6 @@ func (m *Version) SetStatus(v Version_Status) {
 
 func (m *Version) SetTags(v []string) {
 	m.Tags = v
-}
-
-func (m *Version) SetLogGroupId(v string) {
-	m.LogGroupId = v
 }
 
 func (m *Version) SetEnvironment(v map[string]string) {
