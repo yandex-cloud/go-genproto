@@ -28,6 +28,7 @@ const (
 	ClusterService_Delete_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Delete"
 	ClusterService_Start_FullMethodName            = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Start"
 	ClusterService_Stop_FullMethodName             = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Stop"
+	ClusterService_Move_FullMethodName             = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Move"
 	ClusterService_ListOperations_FullMethodName   = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListOperations"
 	ClusterService_ListMasterHosts_FullMethodName  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListMasterHosts"
 	ClusterService_ListSegmentHosts_FullMethodName = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListSegmentHosts"
@@ -60,6 +61,8 @@ type ClusterServiceClient interface {
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified Greenplum® cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves the specified Greenplum® cluster to the specified folder.
+	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of master hosts for the specified cluster.
@@ -152,6 +155,15 @@ func (c *clusterServiceClient) Start(ctx context.Context, in *StartClusterReques
 func (c *clusterServiceClient) Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Stop_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_Move_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -275,6 +287,8 @@ type ClusterServiceServer interface {
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
 	// Stops the specified Greenplum® cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Moves the specified Greenplum® cluster to the specified folder.
+	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of master hosts for the specified cluster.
@@ -320,6 +334,9 @@ func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterReq
 }
 func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedClusterServiceServer) Move(context.Context, *MoveClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
@@ -497,6 +514,24 @@ func _ClusterService_Stop_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Stop(ctx, req.(*StopClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_Move_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Move(ctx, req.(*MoveClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -686,6 +721,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _ClusterService_Stop_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _ClusterService_Move_Handler,
 		},
 		{
 			MethodName: "ListOperations",

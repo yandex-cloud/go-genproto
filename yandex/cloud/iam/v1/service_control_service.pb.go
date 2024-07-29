@@ -694,6 +694,72 @@ func (x *DisableServiceMetadata) GetResource() *Resource {
 	return nil
 }
 
+type ResolveServiceAgentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// ID of the Service.
+	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
+	// ID of the Microservice.
+	MicroserviceId string `protobuf:"bytes,2,opt,name=microservice_id,json=microserviceId,proto3" json:"microservice_id,omitempty"`
+	// Resource container.
+	Resource *Resource `protobuf:"bytes,3,opt,name=resource,proto3" json:"resource,omitempty"`
+}
+
+func (x *ResolveServiceAgentRequest) Reset() {
+	*x = ResolveServiceAgentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ResolveServiceAgentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveServiceAgentRequest) ProtoMessage() {}
+
+func (x *ResolveServiceAgentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveServiceAgentRequest.ProtoReflect.Descriptor instead.
+func (*ResolveServiceAgentRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ResolveServiceAgentRequest) GetServiceId() string {
+	if x != nil {
+		return x.ServiceId
+	}
+	return ""
+}
+
+func (x *ResolveServiceAgentRequest) GetMicroserviceId() string {
+	if x != nil {
+		return x.MicroserviceId
+	}
+	return ""
+}
+
+func (x *ResolveServiceAgentRequest) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
 var File_yandex_cloud_iam_v1_service_control_service_proto protoreflect.FileDescriptor
 
 var file_yandex_cloud_iam_v1_service_control_service_proto_rawDesc = []byte{
@@ -805,7 +871,19 @@ var file_yandex_cloud_iam_v1_service_control_service_proto_rawDesc = []byte{
 	0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d,
 	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x61,
 	0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x52, 0x08, 0x72,
-	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x32, 0xb6, 0x07, 0x0a, 0x15, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x22, 0xbd, 0x01, 0x0a, 0x1a, 0x52, 0x65, 0x73, 0x6f,
+	0x6c, 0x76, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2b, 0x0a, 0x0a, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0c, 0xe8, 0xc7, 0x31, 0x01,
+	0x8a, 0xc8, 0x31, 0x04, 0x3c, 0x3d, 0x35, 0x30, 0x52, 0x09, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x49, 0x64, 0x12, 0x31, 0x0a, 0x0f, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0x8a, 0xc8,
+	0x31, 0x04, 0x3c, 0x3d, 0x35, 0x30, 0x52, 0x0e, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x49, 0x64, 0x12, 0x3f, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72,
+	0x63, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x52,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x08, 0x72,
+	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x32, 0xe0, 0x08, 0x0a, 0x15, 0x53, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x12, 0x72, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x26, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
 	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x69, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x47,
@@ -865,12 +943,23 @@ var file_yandex_cloud_iam_v1_service_control_service_proto_rawDesc = []byte{
 	0x65, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x29, 0x3a, 0x01, 0x2a, 0x22, 0x24, 0x2f, 0x69, 0x61, 0x6d,
 	0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x7b, 0x73, 0x65, 0x72,
 	0x76, 0x69, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x7d, 0x3a, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65,
-	0x42, 0x56, 0x0a, 0x17, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x69, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x5a, 0x3b, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x69, 0x61,
-	0x6d, 0x2f, 0x76, 0x31, 0x3b, 0x69, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x12, 0xa7, 0x01, 0x0a, 0x0c, 0x52, 0x65, 0x73, 0x6f, 0x6c, 0x76, 0x65, 0x41, 0x67, 0x65, 0x6e,
+	0x74, 0x12, 0x2f, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x69, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x73, 0x6f, 0x6c, 0x76, 0x65, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x21, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x69, 0x61, 0x6d, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x41, 0x67, 0x65, 0x6e, 0x74, 0x22, 0x43, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x3d, 0x12, 0x3b, 0x2f,
+	0x69, 0x61, 0x6d, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x7b,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x7d, 0x2f, 0x6d, 0x69, 0x63, 0x72,
+	0x6f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x7b, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x7d, 0x42, 0x56, 0x0a, 0x17, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x69,
+	0x61, 0x6d, 0x2e, 0x76, 0x31, 0x5a, 0x3b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67,
+	0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x69, 0x61, 0x6d, 0x2f, 0x76, 0x31, 0x3b, 0x69,
+	0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -885,52 +974,57 @@ func file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP() []byte
 	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescData
 }
 
-var file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_iam_v1_service_control_service_proto_goTypes = []interface{}{
-	(*GetServiceRequest)(nil),      // 0: yandex.cloud.iam.v1.GetServiceRequest
-	(*ListServicesRequest)(nil),    // 1: yandex.cloud.iam.v1.ListServicesRequest
-	(*ListServicesResponse)(nil),   // 2: yandex.cloud.iam.v1.ListServicesResponse
-	(*EnableServiceRequest)(nil),   // 3: yandex.cloud.iam.v1.EnableServiceRequest
-	(*EnableServiceMetadata)(nil),  // 4: yandex.cloud.iam.v1.EnableServiceMetadata
-	(*ResumeServiceRequest)(nil),   // 5: yandex.cloud.iam.v1.ResumeServiceRequest
-	(*ResumeServiceMetadata)(nil),  // 6: yandex.cloud.iam.v1.ResumeServiceMetadata
-	(*PauseServiceRequest)(nil),    // 7: yandex.cloud.iam.v1.PauseServiceRequest
-	(*PauseServiceMetadata)(nil),   // 8: yandex.cloud.iam.v1.PauseServiceMetadata
-	(*DisableServiceRequest)(nil),  // 9: yandex.cloud.iam.v1.DisableServiceRequest
-	(*DisableServiceMetadata)(nil), // 10: yandex.cloud.iam.v1.DisableServiceMetadata
-	(*Resource)(nil),               // 11: yandex.cloud.iam.v1.Resource
-	(*Service)(nil),                // 12: yandex.cloud.iam.v1.Service
-	(*operation.Operation)(nil),    // 13: yandex.cloud.operation.Operation
+	(*GetServiceRequest)(nil),          // 0: yandex.cloud.iam.v1.GetServiceRequest
+	(*ListServicesRequest)(nil),        // 1: yandex.cloud.iam.v1.ListServicesRequest
+	(*ListServicesResponse)(nil),       // 2: yandex.cloud.iam.v1.ListServicesResponse
+	(*EnableServiceRequest)(nil),       // 3: yandex.cloud.iam.v1.EnableServiceRequest
+	(*EnableServiceMetadata)(nil),      // 4: yandex.cloud.iam.v1.EnableServiceMetadata
+	(*ResumeServiceRequest)(nil),       // 5: yandex.cloud.iam.v1.ResumeServiceRequest
+	(*ResumeServiceMetadata)(nil),      // 6: yandex.cloud.iam.v1.ResumeServiceMetadata
+	(*PauseServiceRequest)(nil),        // 7: yandex.cloud.iam.v1.PauseServiceRequest
+	(*PauseServiceMetadata)(nil),       // 8: yandex.cloud.iam.v1.PauseServiceMetadata
+	(*DisableServiceRequest)(nil),      // 9: yandex.cloud.iam.v1.DisableServiceRequest
+	(*DisableServiceMetadata)(nil),     // 10: yandex.cloud.iam.v1.DisableServiceMetadata
+	(*ResolveServiceAgentRequest)(nil), // 11: yandex.cloud.iam.v1.ResolveServiceAgentRequest
+	(*Resource)(nil),                   // 12: yandex.cloud.iam.v1.Resource
+	(*Service)(nil),                    // 13: yandex.cloud.iam.v1.Service
+	(*operation.Operation)(nil),        // 14: yandex.cloud.operation.Operation
+	(*ServiceAgent)(nil),               // 15: yandex.cloud.iam.v1.ServiceAgent
 }
 var file_yandex_cloud_iam_v1_service_control_service_proto_depIdxs = []int32{
-	11, // 0: yandex.cloud.iam.v1.GetServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 1: yandex.cloud.iam.v1.ListServicesRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	12, // 2: yandex.cloud.iam.v1.ListServicesResponse.services:type_name -> yandex.cloud.iam.v1.Service
-	11, // 3: yandex.cloud.iam.v1.EnableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 4: yandex.cloud.iam.v1.EnableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 5: yandex.cloud.iam.v1.ResumeServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 6: yandex.cloud.iam.v1.ResumeServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 7: yandex.cloud.iam.v1.PauseServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 8: yandex.cloud.iam.v1.PauseServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 9: yandex.cloud.iam.v1.DisableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	11, // 10: yandex.cloud.iam.v1.DisableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
-	0,  // 11: yandex.cloud.iam.v1.ServiceControlService.Get:input_type -> yandex.cloud.iam.v1.GetServiceRequest
-	1,  // 12: yandex.cloud.iam.v1.ServiceControlService.List:input_type -> yandex.cloud.iam.v1.ListServicesRequest
-	3,  // 13: yandex.cloud.iam.v1.ServiceControlService.Enable:input_type -> yandex.cloud.iam.v1.EnableServiceRequest
-	5,  // 14: yandex.cloud.iam.v1.ServiceControlService.Resume:input_type -> yandex.cloud.iam.v1.ResumeServiceRequest
-	7,  // 15: yandex.cloud.iam.v1.ServiceControlService.Pause:input_type -> yandex.cloud.iam.v1.PauseServiceRequest
-	9,  // 16: yandex.cloud.iam.v1.ServiceControlService.Disable:input_type -> yandex.cloud.iam.v1.DisableServiceRequest
-	12, // 17: yandex.cloud.iam.v1.ServiceControlService.Get:output_type -> yandex.cloud.iam.v1.Service
-	2,  // 18: yandex.cloud.iam.v1.ServiceControlService.List:output_type -> yandex.cloud.iam.v1.ListServicesResponse
-	13, // 19: yandex.cloud.iam.v1.ServiceControlService.Enable:output_type -> yandex.cloud.operation.Operation
-	13, // 20: yandex.cloud.iam.v1.ServiceControlService.Resume:output_type -> yandex.cloud.operation.Operation
-	13, // 21: yandex.cloud.iam.v1.ServiceControlService.Pause:output_type -> yandex.cloud.operation.Operation
-	13, // 22: yandex.cloud.iam.v1.ServiceControlService.Disable:output_type -> yandex.cloud.operation.Operation
-	17, // [17:23] is the sub-list for method output_type
-	11, // [11:17] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	12, // 0: yandex.cloud.iam.v1.GetServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 1: yandex.cloud.iam.v1.ListServicesRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	13, // 2: yandex.cloud.iam.v1.ListServicesResponse.services:type_name -> yandex.cloud.iam.v1.Service
+	12, // 3: yandex.cloud.iam.v1.EnableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 4: yandex.cloud.iam.v1.EnableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 5: yandex.cloud.iam.v1.ResumeServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 6: yandex.cloud.iam.v1.ResumeServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 7: yandex.cloud.iam.v1.PauseServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 8: yandex.cloud.iam.v1.PauseServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 9: yandex.cloud.iam.v1.DisableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 10: yandex.cloud.iam.v1.DisableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	12, // 11: yandex.cloud.iam.v1.ResolveServiceAgentRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	0,  // 12: yandex.cloud.iam.v1.ServiceControlService.Get:input_type -> yandex.cloud.iam.v1.GetServiceRequest
+	1,  // 13: yandex.cloud.iam.v1.ServiceControlService.List:input_type -> yandex.cloud.iam.v1.ListServicesRequest
+	3,  // 14: yandex.cloud.iam.v1.ServiceControlService.Enable:input_type -> yandex.cloud.iam.v1.EnableServiceRequest
+	5,  // 15: yandex.cloud.iam.v1.ServiceControlService.Resume:input_type -> yandex.cloud.iam.v1.ResumeServiceRequest
+	7,  // 16: yandex.cloud.iam.v1.ServiceControlService.Pause:input_type -> yandex.cloud.iam.v1.PauseServiceRequest
+	9,  // 17: yandex.cloud.iam.v1.ServiceControlService.Disable:input_type -> yandex.cloud.iam.v1.DisableServiceRequest
+	11, // 18: yandex.cloud.iam.v1.ServiceControlService.ResolveAgent:input_type -> yandex.cloud.iam.v1.ResolveServiceAgentRequest
+	13, // 19: yandex.cloud.iam.v1.ServiceControlService.Get:output_type -> yandex.cloud.iam.v1.Service
+	2,  // 20: yandex.cloud.iam.v1.ServiceControlService.List:output_type -> yandex.cloud.iam.v1.ListServicesResponse
+	14, // 21: yandex.cloud.iam.v1.ServiceControlService.Enable:output_type -> yandex.cloud.operation.Operation
+	14, // 22: yandex.cloud.iam.v1.ServiceControlService.Resume:output_type -> yandex.cloud.operation.Operation
+	14, // 23: yandex.cloud.iam.v1.ServiceControlService.Pause:output_type -> yandex.cloud.operation.Operation
+	14, // 24: yandex.cloud.iam.v1.ServiceControlService.Disable:output_type -> yandex.cloud.operation.Operation
+	15, // 25: yandex.cloud.iam.v1.ServiceControlService.ResolveAgent:output_type -> yandex.cloud.iam.v1.ServiceAgent
+	19, // [19:26] is the sub-list for method output_type
+	12, // [12:19] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_iam_v1_service_control_service_proto_init() }
@@ -1073,6 +1167,18 @@ func file_yandex_cloud_iam_v1_service_control_service_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ResolveServiceAgentRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1080,7 +1186,7 @@ func file_yandex_cloud_iam_v1_service_control_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_iam_v1_service_control_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -97,3 +97,15 @@ func (m *DisableServiceMetadata) SetServiceId(v string) {
 func (m *DisableServiceMetadata) SetResource(v *Resource) {
 	m.Resource = v
 }
+
+func (m *ResolveServiceAgentRequest) SetServiceId(v string) {
+	m.ServiceId = v
+}
+
+func (m *ResolveServiceAgentRequest) SetMicroserviceId(v string) {
+	m.MicroserviceId = v
+}
+
+func (m *ResolveServiceAgentRequest) SetResource(v *Resource) {
+	m.Resource = v
+}

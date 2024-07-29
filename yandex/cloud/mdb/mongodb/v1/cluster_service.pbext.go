@@ -87,6 +87,10 @@ func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -229,6 +233,10 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
 }
 
 func (m *RestoreClusterRequest_RecoveryTargetSpec) SetTimestamp(v int64) {
@@ -1275,6 +1283,74 @@ func (m *MongodbSpec6_0Enterprise_MongoInfra) SetDiskSizeAutoscaling(v *DiskSize
 	m.DiskSizeAutoscaling = v
 }
 
+func (m *MongodbSpec) SetMongod(v *MongodbSpec_Mongod) {
+	m.Mongod = v
+}
+
+func (m *MongodbSpec) SetMongocfg(v *MongodbSpec_MongoCfg) {
+	m.Mongocfg = v
+}
+
+func (m *MongodbSpec) SetMongos(v *MongodbSpec_Mongos) {
+	m.Mongos = v
+}
+
+func (m *MongodbSpec) SetMongoinfra(v *MongodbSpec_MongoInfra) {
+	m.Mongoinfra = v
+}
+
+func (m *MongodbSpec_Mongod) SetConfig(v *config.MongodConfig) {
+	m.Config = v
+}
+
+func (m *MongodbSpec_Mongod) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec_Mongod) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
+func (m *MongodbSpec_MongoCfg) SetConfig(v *config.MongoCfgConfig) {
+	m.Config = v
+}
+
+func (m *MongodbSpec_MongoCfg) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec_MongoCfg) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
+func (m *MongodbSpec_Mongos) SetConfig(v *config.MongosConfig) {
+	m.Config = v
+}
+
+func (m *MongodbSpec_Mongos) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec_Mongos) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
+func (m *MongodbSpec_MongoInfra) SetConfigMongos(v *config.MongosConfig) {
+	m.ConfigMongos = v
+}
+
+func (m *MongodbSpec_MongoInfra) SetConfigMongocfg(v *config.MongoCfgConfig) {
+	m.ConfigMongocfg = v
+}
+
+func (m *MongodbSpec_MongoInfra) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MongodbSpec_MongoInfra) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 type ConfigSpec_MongodbSpec = isConfigSpec_MongodbSpec
 
 func (m *ConfigSpec) SetMongodbSpec(v ConfigSpec_MongodbSpec) {
@@ -1357,4 +1433,8 @@ func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnosticsConfig) 
 
 func (m *ConfigSpec) SetAccess(v *Access) {
 	m.Access = v
+}
+
+func (m *ConfigSpec) SetMongodb(v *MongodbSpec) {
+	m.Mongodb = v
 }

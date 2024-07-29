@@ -20,12 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ServiceControlService_Get_FullMethodName     = "/yandex.cloud.iam.v1.ServiceControlService/Get"
-	ServiceControlService_List_FullMethodName    = "/yandex.cloud.iam.v1.ServiceControlService/List"
-	ServiceControlService_Enable_FullMethodName  = "/yandex.cloud.iam.v1.ServiceControlService/Enable"
-	ServiceControlService_Resume_FullMethodName  = "/yandex.cloud.iam.v1.ServiceControlService/Resume"
-	ServiceControlService_Pause_FullMethodName   = "/yandex.cloud.iam.v1.ServiceControlService/Pause"
-	ServiceControlService_Disable_FullMethodName = "/yandex.cloud.iam.v1.ServiceControlService/Disable"
+	ServiceControlService_Get_FullMethodName          = "/yandex.cloud.iam.v1.ServiceControlService/Get"
+	ServiceControlService_List_FullMethodName         = "/yandex.cloud.iam.v1.ServiceControlService/List"
+	ServiceControlService_Enable_FullMethodName       = "/yandex.cloud.iam.v1.ServiceControlService/Enable"
+	ServiceControlService_Resume_FullMethodName       = "/yandex.cloud.iam.v1.ServiceControlService/Resume"
+	ServiceControlService_Pause_FullMethodName        = "/yandex.cloud.iam.v1.ServiceControlService/Pause"
+	ServiceControlService_Disable_FullMethodName      = "/yandex.cloud.iam.v1.ServiceControlService/Disable"
+	ServiceControlService_ResolveAgent_FullMethodName = "/yandex.cloud.iam.v1.ServiceControlService/ResolveAgent"
 )
 
 // ServiceControlServiceClient is the client API for ServiceControlService service.
@@ -46,6 +47,8 @@ type ServiceControlServiceClient interface {
 	Pause(ctx context.Context, in *PauseServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Disable a service in the specified resource container.
 	Disable(ctx context.Context, in *DisableServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Resolve agent service account for the service in the specified resource container.
+	ResolveAgent(ctx context.Context, in *ResolveServiceAgentRequest, opts ...grpc.CallOption) (*ServiceAgent, error)
 }
 
 type serviceControlServiceClient struct {
@@ -110,6 +113,15 @@ func (c *serviceControlServiceClient) Disable(ctx context.Context, in *DisableSe
 	return out, nil
 }
 
+func (c *serviceControlServiceClient) ResolveAgent(ctx context.Context, in *ResolveServiceAgentRequest, opts ...grpc.CallOption) (*ServiceAgent, error) {
+	out := new(ServiceAgent)
+	err := c.cc.Invoke(ctx, ServiceControlService_ResolveAgent_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServiceControlServiceServer is the server API for ServiceControlService service.
 // All implementations should embed UnimplementedServiceControlServiceServer
 // for forward compatibility
@@ -128,6 +140,8 @@ type ServiceControlServiceServer interface {
 	Pause(context.Context, *PauseServiceRequest) (*operation.Operation, error)
 	// Disable a service in the specified resource container.
 	Disable(context.Context, *DisableServiceRequest) (*operation.Operation, error)
+	// Resolve agent service account for the service in the specified resource container.
+	ResolveAgent(context.Context, *ResolveServiceAgentRequest) (*ServiceAgent, error)
 }
 
 // UnimplementedServiceControlServiceServer should be embedded to have forward compatible implementations.
@@ -151,6 +165,9 @@ func (UnimplementedServiceControlServiceServer) Pause(context.Context, *PauseSer
 }
 func (UnimplementedServiceControlServiceServer) Disable(context.Context, *DisableServiceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
+}
+func (UnimplementedServiceControlServiceServer) ResolveAgent(context.Context, *ResolveServiceAgentRequest) (*ServiceAgent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResolveAgent not implemented")
 }
 
 // UnsafeServiceControlServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -272,6 +289,24 @@ func _ServiceControlService_Disable_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServiceControlService_ResolveAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveServiceAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceControlServiceServer).ResolveAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServiceControlService_ResolveAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceControlServiceServer).ResolveAgent(ctx, req.(*ResolveServiceAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ServiceControlService_ServiceDesc is the grpc.ServiceDesc for ServiceControlService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -302,6 +337,10 @@ var ServiceControlService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Disable",
 			Handler:    _ServiceControlService_Disable_Handler,
+		},
+		{
+			MethodName: "ResolveAgent",
+			Handler:    _ServiceControlService_ResolveAgent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

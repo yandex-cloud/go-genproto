@@ -284,6 +284,26 @@ func (m *StopClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *MoveClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *MoveClusterRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *MoveClusterMetadata) SetSourceFolderId(v string) {
+	m.SourceFolderId = v
+}
+
+func (m *MoveClusterMetadata) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
 func (m *ListClusterOperationsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

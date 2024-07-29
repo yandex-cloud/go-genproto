@@ -21,3 +21,15 @@ func (m *Service) SetUpdatedAt(v *timestamppb.Timestamp) {
 func (m *Service) SetStatus(v Service_Status) {
 	m.Status = v
 }
+
+func (m *ServiceAgent) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *ServiceAgent) SetServiceId(v string) {
+	m.ServiceId = v
+}
+
+func (m *ServiceAgent) SetMicroserviceId(v string) {
+	m.MicroserviceId = v
+}
