@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	AgentService_ClaimStatus_FullMethodName = "/yandex.cloud.loadtesting.agent.v1.AgentService/ClaimStatus"
+	AgentService_ClaimStatus_FullMethodName     = "/yandex.cloud.loadtesting.agent.v1.AgentService/ClaimStatus"
+	AgentService_ReportEventLogs_FullMethodName = "/yandex.cloud.loadtesting.agent.v1.AgentService/ReportEventLogs"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -28,6 +29,7 @@ const (
 type AgentServiceClient interface {
 	// Claims status for the specified agent.
 	ClaimStatus(ctx context.Context, in *ClaimAgentStatusRequest, opts ...grpc.CallOption) (*ClaimAgentStatusResponse, error)
+	ReportEventLogs(ctx context.Context, in *ReportEventLogsRequest, opts ...grpc.CallOption) (*ReportEventLogsResponse, error)
 }
 
 type agentServiceClient struct {
@@ -47,12 +49,22 @@ func (c *agentServiceClient) ClaimStatus(ctx context.Context, in *ClaimAgentStat
 	return out, nil
 }
 
+func (c *agentServiceClient) ReportEventLogs(ctx context.Context, in *ReportEventLogsRequest, opts ...grpc.CallOption) (*ReportEventLogsResponse, error) {
+	out := new(ReportEventLogsResponse)
+	err := c.cc.Invoke(ctx, AgentService_ReportEventLogs_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations should embed UnimplementedAgentServiceServer
 // for forward compatibility
 type AgentServiceServer interface {
 	// Claims status for the specified agent.
 	ClaimStatus(context.Context, *ClaimAgentStatusRequest) (*ClaimAgentStatusResponse, error)
+	ReportEventLogs(context.Context, *ReportEventLogsRequest) (*ReportEventLogsResponse, error)
 }
 
 // UnimplementedAgentServiceServer should be embedded to have forward compatible implementations.
@@ -61,6 +73,9 @@ type UnimplementedAgentServiceServer struct {
 
 func (UnimplementedAgentServiceServer) ClaimStatus(context.Context, *ClaimAgentStatusRequest) (*ClaimAgentStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClaimStatus not implemented")
+}
+func (UnimplementedAgentServiceServer) ReportEventLogs(context.Context, *ReportEventLogsRequest) (*ReportEventLogsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportEventLogs not implemented")
 }
 
 // UnsafeAgentServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -92,6 +107,24 @@ func _AgentService_ClaimStatus_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_ReportEventLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportEventLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ReportEventLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ReportEventLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ReportEventLogs(ctx, req.(*ReportEventLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +135,10 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClaimStatus",
 			Handler:    _AgentService_ClaimStatus_Handler,
+		},
+		{
+			MethodName: "ReportEventLogs",
+			Handler:    _AgentService_ReportEventLogs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

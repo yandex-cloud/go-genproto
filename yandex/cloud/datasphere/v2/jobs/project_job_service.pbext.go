@@ -111,6 +111,10 @@ func (m *CancelProjectJobRequest) SetReason(v string) {
 	m.Reason = v
 }
 
+func (m *CancelProjectJobRequest) SetGraceful(v bool) {
+	m.Graceful = v
+}
+
 func (m *ReadProjectJobStdLogsRequest) SetJobId(v string) {
 	m.JobId = v
 }

@@ -18,6 +18,10 @@ func (m *ListResourcesRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListResourcesRequest) SetType(v ResourceType) {
+	m.Type = v
+}
+
 func (m *ListResourcesResponse) SetResources(v []*Resource) {
 	m.Resources = v
 }

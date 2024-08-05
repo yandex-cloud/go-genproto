@@ -402,7 +402,7 @@ type Resource struct {
 	// Metadata to provide details about instance registration process
 	// if status is FAILED_REGISTRATION or REGISTERING
 	Metadata string `protobuf:"bytes,14,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Type of resource -- could be compute VM or baremetal server
+	// Type of resource. Could be compute VM or baremetal server.
 	Type ResourceType `protobuf:"varint,15,opt,name=type,proto3,enum=yandex.cloud.backup.v1.ResourceType" json:"type,omitempty"`
 }
 

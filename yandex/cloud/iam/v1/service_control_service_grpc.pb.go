@@ -23,8 +23,6 @@ const (
 	ServiceControlService_Get_FullMethodName          = "/yandex.cloud.iam.v1.ServiceControlService/Get"
 	ServiceControlService_List_FullMethodName         = "/yandex.cloud.iam.v1.ServiceControlService/List"
 	ServiceControlService_Enable_FullMethodName       = "/yandex.cloud.iam.v1.ServiceControlService/Enable"
-	ServiceControlService_Resume_FullMethodName       = "/yandex.cloud.iam.v1.ServiceControlService/Resume"
-	ServiceControlService_Pause_FullMethodName        = "/yandex.cloud.iam.v1.ServiceControlService/Pause"
 	ServiceControlService_Disable_FullMethodName      = "/yandex.cloud.iam.v1.ServiceControlService/Disable"
 	ServiceControlService_ResolveAgent_FullMethodName = "/yandex.cloud.iam.v1.ServiceControlService/ResolveAgent"
 )
@@ -41,10 +39,6 @@ type ServiceControlServiceClient interface {
 	List(ctx context.Context, in *ListServicesRequest, opts ...grpc.CallOption) (*ListServicesResponse, error)
 	// Enable a service in the specified resource container.
 	Enable(ctx context.Context, in *EnableServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Resume a service in the specified resource container.
-	Resume(ctx context.Context, in *ResumeServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Pause a service in the specified resource container.
-	Pause(ctx context.Context, in *PauseServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Disable a service in the specified resource container.
 	Disable(ctx context.Context, in *DisableServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resolve agent service account for the service in the specified resource container.
@@ -86,24 +80,6 @@ func (c *serviceControlServiceClient) Enable(ctx context.Context, in *EnableServ
 	return out, nil
 }
 
-func (c *serviceControlServiceClient) Resume(ctx context.Context, in *ResumeServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ServiceControlService_Resume_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceControlServiceClient) Pause(ctx context.Context, in *PauseServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ServiceControlService_Pause_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *serviceControlServiceClient) Disable(ctx context.Context, in *DisableServiceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ServiceControlService_Disable_FullMethodName, in, out, opts...)
@@ -134,10 +110,6 @@ type ServiceControlServiceServer interface {
 	List(context.Context, *ListServicesRequest) (*ListServicesResponse, error)
 	// Enable a service in the specified resource container.
 	Enable(context.Context, *EnableServiceRequest) (*operation.Operation, error)
-	// Resume a service in the specified resource container.
-	Resume(context.Context, *ResumeServiceRequest) (*operation.Operation, error)
-	// Pause a service in the specified resource container.
-	Pause(context.Context, *PauseServiceRequest) (*operation.Operation, error)
 	// Disable a service in the specified resource container.
 	Disable(context.Context, *DisableServiceRequest) (*operation.Operation, error)
 	// Resolve agent service account for the service in the specified resource container.
@@ -156,12 +128,6 @@ func (UnimplementedServiceControlServiceServer) List(context.Context, *ListServi
 }
 func (UnimplementedServiceControlServiceServer) Enable(context.Context, *EnableServiceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Enable not implemented")
-}
-func (UnimplementedServiceControlServiceServer) Resume(context.Context, *ResumeServiceRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Resume not implemented")
-}
-func (UnimplementedServiceControlServiceServer) Pause(context.Context, *PauseServiceRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Pause not implemented")
 }
 func (UnimplementedServiceControlServiceServer) Disable(context.Context, *DisableServiceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
@@ -235,42 +201,6 @@ func _ServiceControlService_Enable_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ServiceControlService_Resume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResumeServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceControlServiceServer).Resume(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServiceControlService_Resume_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceControlServiceServer).Resume(ctx, req.(*ResumeServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ServiceControlService_Pause_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PauseServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceControlServiceServer).Pause(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServiceControlService_Pause_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceControlServiceServer).Pause(ctx, req.(*PauseServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ServiceControlService_Disable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DisableServiceRequest)
 	if err := dec(in); err != nil {
@@ -325,14 +255,6 @@ var ServiceControlService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Enable",
 			Handler:    _ServiceControlService_Enable_Handler,
-		},
-		{
-			MethodName: "Resume",
-			Handler:    _ServiceControlService_Resume_Handler,
-		},
-		{
-			MethodName: "Pause",
-			Handler:    _ServiceControlService_Pause_Handler,
 		},
 		{
 			MethodName: "Disable",

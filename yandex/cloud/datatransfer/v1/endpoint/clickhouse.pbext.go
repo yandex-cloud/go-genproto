@@ -142,6 +142,10 @@ func (m *ClickhouseSource) SetSecurityGroups(v []string) {
 	m.SecurityGroups = v
 }
 
+func (m *ClickhouseSource) SetClickhouseClusterName(v string) {
+	m.ClickhouseClusterName = v
+}
+
 func (m *ClickhouseTarget) SetConnection(v *ClickhouseConnection) {
 	m.Connection = v
 }

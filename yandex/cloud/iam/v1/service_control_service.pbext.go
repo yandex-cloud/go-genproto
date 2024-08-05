@@ -46,42 +46,6 @@ func (m *EnableServiceMetadata) SetResource(v *Resource) {
 	m.Resource = v
 }
 
-func (m *ResumeServiceRequest) SetServiceId(v string) {
-	m.ServiceId = v
-}
-
-func (m *ResumeServiceRequest) SetResource(v *Resource) {
-	m.Resource = v
-}
-
-func (m *ResumeServiceMetadata) SetServiceId(v string) {
-	m.ServiceId = v
-}
-
-func (m *ResumeServiceMetadata) SetResource(v *Resource) {
-	m.Resource = v
-}
-
-func (m *PauseServiceRequest) SetServiceId(v string) {
-	m.ServiceId = v
-}
-
-func (m *PauseServiceRequest) SetResource(v *Resource) {
-	m.Resource = v
-}
-
-func (m *PauseServiceRequest) SetForce(v bool) {
-	m.Force = v
-}
-
-func (m *PauseServiceMetadata) SetServiceId(v string) {
-	m.ServiceId = v
-}
-
-func (m *PauseServiceMetadata) SetResource(v *Resource) {
-	m.Resource = v
-}
-
 func (m *DisableServiceRequest) SetServiceId(v string) {
 	m.ServiceId = v
 }

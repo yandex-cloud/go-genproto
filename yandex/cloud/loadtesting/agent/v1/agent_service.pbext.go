@@ -2,6 +2,10 @@
 
 package agent
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *ClaimAgentStatusRequest) SetAgentInstanceId(v string) {
 	m.AgentInstanceId = v
 }
@@ -16,4 +20,32 @@ func (m *ClaimAgentStatusRequest) SetStatusMessage(v string) {
 
 func (m *ClaimAgentStatusResponse) SetCode(v int64) {
 	m.Code = v
+}
+
+func (m *ReportEventLogsRequest) SetAgentInstanceId(v string) {
+	m.AgentInstanceId = v
+}
+
+func (m *ReportEventLogsRequest) SetIdempotencyKey(v string) {
+	m.IdempotencyKey = v
+}
+
+func (m *ReportEventLogsRequest) SetEvents(v []*EventLog) {
+	m.Events = v
+}
+
+func (m *EventLog) SetMessage(v string) {
+	m.Message = v
+}
+
+func (m *EventLog) SetSeverity(v EventLog_Severity) {
+	m.Severity = v
+}
+
+func (m *EventLog) SetTimestamp(v *timestamppb.Timestamp) {
+	m.Timestamp = v
+}
+
+func (m *EventLog) SetMetadata(v map[string]string) {
+	m.Metadata = v
 }
