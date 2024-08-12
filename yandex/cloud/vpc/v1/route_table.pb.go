@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A RouteTable resource. For more information, see [Static Routes](/docs/vpc/concepts/static-routes).
+// A RouteTable resource. For more information, see [Static Routes](/docs/vpc/concepts/routing).
 type RouteTable struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -139,7 +139,7 @@ func (x *RouteTable) GetStaticRoutes() []*StaticRoute {
 	return nil
 }
 
-// A StaticRoute resource. For more information, see [Static Routes](/docs/vpc/concepts/static-routes).
+// A StaticRoute resource. For more information, see [Static Routes](/docs/vpc/concepts/routing).
 type StaticRoute struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
