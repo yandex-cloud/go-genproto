@@ -586,6 +586,34 @@ func (m *UserSettings) SetMemoryUsageOvercommitMaxWaitMicroseconds(v *wrapperspb
 	m.MemoryUsageOvercommitMaxWaitMicroseconds = v
 }
 
+func (m *UserSettings) SetLogQueryThreads(v *wrapperspb.BoolValue) {
+	m.LogQueryThreads = v
+}
+
+func (m *UserSettings) SetMaxInsertThreads(v *wrapperspb.Int64Value) {
+	m.MaxInsertThreads = v
+}
+
+func (m *UserSettings) SetUseHedgedRequests(v *wrapperspb.BoolValue) {
+	m.UseHedgedRequests = v
+}
+
+func (m *UserSettings) SetIdleConnectionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleConnectionTimeout = v
+}
+
+func (m *UserSettings) SetHedgedConnectionTimeoutMs(v *wrapperspb.Int64Value) {
+	m.HedgedConnectionTimeoutMs = v
+}
+
+func (m *UserSettings) SetLoadBalancing(v UserSettings_LoadBalancing) {
+	m.LoadBalancing = v
+}
+
+func (m *UserSettings) SetPreferLocalhostReplica(v *wrapperspb.BoolValue) {
+	m.PreferLocalhostReplica = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

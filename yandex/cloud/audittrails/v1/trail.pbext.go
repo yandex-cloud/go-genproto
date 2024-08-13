@@ -58,6 +58,10 @@ func (m *Trail) SetCloudId(v string) {
 	m.CloudId = v
 }
 
+func (m *Trail) SetFilteringPolicy(v *Trail_FilteringPolicy) {
+	m.FilteringPolicy = v
+}
+
 type Trail_Destination_Destination = isTrail_Destination_Destination
 
 func (m *Trail_Destination) SetDestination(v Trail_Destination_Destination) {
@@ -182,4 +186,46 @@ func (m *Trail_EventFilterElementCategory) SetPlane(v Trail_EventCategoryFilter)
 
 func (m *Trail_EventFilterElementCategory) SetType(v Trail_EventAccessTypeFilter) {
 	m.Type = v
+}
+
+type Trail_DataEventsFiltering_AdditionalRules = isTrail_DataEventsFiltering_AdditionalRules
+
+func (m *Trail_DataEventsFiltering) SetAdditionalRules(v Trail_DataEventsFiltering_AdditionalRules) {
+	m.AdditionalRules = v
+}
+
+func (m *Trail_DataEventsFiltering) SetService(v string) {
+	m.Service = v
+}
+
+func (m *Trail_DataEventsFiltering) SetIncludedEvents(v *Trail_EventTypes) {
+	m.AdditionalRules = &Trail_DataEventsFiltering_IncludedEvents{
+		IncludedEvents: v,
+	}
+}
+
+func (m *Trail_DataEventsFiltering) SetExcludedEvents(v *Trail_EventTypes) {
+	m.AdditionalRules = &Trail_DataEventsFiltering_ExcludedEvents{
+		ExcludedEvents: v,
+	}
+}
+
+func (m *Trail_DataEventsFiltering) SetResourceScopes(v []*Trail_Resource) {
+	m.ResourceScopes = v
+}
+
+func (m *Trail_EventTypes) SetEventTypes(v []string) {
+	m.EventTypes = v
+}
+
+func (m *Trail_ManagementEventsFiltering) SetResourceScopes(v []*Trail_Resource) {
+	m.ResourceScopes = v
+}
+
+func (m *Trail_FilteringPolicy) SetManagementEventsFilter(v *Trail_ManagementEventsFiltering) {
+	m.ManagementEventsFilter = v
+}
+
+func (m *Trail_FilteringPolicy) SetDataEventsFilters(v []*Trail_DataEventsFiltering) {
+	m.DataEventsFilters = v
 }

@@ -270,6 +270,18 @@ func (m *ClickhouseConfig) SetTotalMemoryTrackerSampleProbability(v *wrapperspb.
 	m.TotalMemoryTrackerSampleProbability = v
 }
 
+func (m *ClickhouseConfig) SetQueryMaskingRules(v []*ClickhouseConfig_QueryMaskingRule) {
+	m.QueryMaskingRules = v
+}
+
+func (m *ClickhouseConfig) SetDictionariesLazyLoad(v *wrapperspb.BoolValue) {
+	m.DictionariesLazyLoad = v
+}
+
+func (m *ClickhouseConfig) SetQueryCache(v *ClickhouseConfig_QueryCache) {
+	m.QueryCache = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
 	m.ReplicatedDeduplicationWindow = v
 }
@@ -366,6 +378,22 @@ func (m *ClickhouseConfig_MergeTree) SetMergeSelectingSleepMs(v *wrapperspb.Int6
 	m.MergeSelectingSleepMs = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetMergeMaxBlockSize(v *wrapperspb.Int64Value) {
+	m.MergeMaxBlockSize = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetCheckSampleColumnIsCorrect(v *wrapperspb.BoolValue) {
+	m.CheckSampleColumnIsCorrect = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaxMergeSelectingSleepMs(v *wrapperspb.Int64Value) {
+	m.MaxMergeSelectingSleepMs = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaxCleanupDelayPeriod(v *wrapperspb.Int64Value) {
+	m.MaxCleanupDelayPeriod = v
+}
+
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
 	m.SecurityProtocol = v
 }
@@ -392,6 +420,14 @@ func (m *ClickhouseConfig_Kafka) SetMaxPollIntervalMs(v *wrapperspb.Int64Value) 
 
 func (m *ClickhouseConfig_Kafka) SetSessionTimeoutMs(v *wrapperspb.Int64Value) {
 	m.SessionTimeoutMs = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetDebug(v ClickhouseConfig_Kafka_Debug) {
+	m.Debug = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetAutoOffsetReset(v ClickhouseConfig_Kafka_AutoOffsetReset) {
+	m.AutoOffsetReset = v
 }
 
 func (m *ClickhouseConfig_KafkaTopic) SetName(v string) {
@@ -504,6 +540,18 @@ func (m *ClickhouseConfig_ExternalDictionary_HttpSource) SetFormat(v string) {
 	m.Format = v
 }
 
+func (m *ClickhouseConfig_ExternalDictionary_HttpSource) SetHeaders(v []*ClickhouseConfig_ExternalDictionary_HttpSource_Header) {
+	m.Headers = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_HttpSource_Header) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_HttpSource_Header) SetValue(v string) {
+	m.Value = v
+}
+
 func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) SetDb(v string) {
 	m.Db = v
 }
@@ -534,6 +582,14 @@ func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) SetWhere(v string) {
 
 func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) SetInvalidateQuery(v string) {
 	m.InvalidateQuery = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) SetCloseConnection(v *wrapperspb.BoolValue) {
+	m.CloseConnection = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_MysqlSource) SetShareConnection(v *wrapperspb.BoolValue) {
+	m.ShareConnection = v
 }
 
 func (m *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) SetHost(v string) {
@@ -582,6 +638,10 @@ func (m *ClickhouseConfig_ExternalDictionary_ClickhouseSource) SetPassword(v str
 
 func (m *ClickhouseConfig_ExternalDictionary_ClickhouseSource) SetWhere(v string) {
 	m.Where = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_ClickhouseSource) SetSecure(v *wrapperspb.BoolValue) {
+	m.Secure = v
 }
 
 func (m *ClickhouseConfig_ExternalDictionary_MongodbSource) SetDb(v string) {
@@ -704,6 +764,10 @@ func (m *ClickhouseConfig_ExternalDictionary_Layout) SetSizeInCells(v int64) {
 	m.SizeInCells = v
 }
 
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxArraySize(v int64) {
+	m.MaxArraySize = v
+}
+
 func (m *ClickhouseConfig_ExternalDictionary_Range) SetMin(v int64) {
 	m.Min = v
 }
@@ -718,6 +782,22 @@ func (m *ClickhouseConfig_GraphiteRollup) SetName(v string) {
 
 func (m *ClickhouseConfig_GraphiteRollup) SetPatterns(v []*ClickhouseConfig_GraphiteRollup_Pattern) {
 	m.Patterns = v
+}
+
+func (m *ClickhouseConfig_GraphiteRollup) SetPathColumnName(v string) {
+	m.PathColumnName = v
+}
+
+func (m *ClickhouseConfig_GraphiteRollup) SetTimeColumnName(v string) {
+	m.TimeColumnName = v
+}
+
+func (m *ClickhouseConfig_GraphiteRollup) SetValueColumnName(v string) {
+	m.ValueColumnName = v
+}
+
+func (m *ClickhouseConfig_GraphiteRollup) SetVersionColumnName(v string) {
+	m.VersionColumnName = v
 }
 
 func (m *ClickhouseConfig_GraphiteRollup_Pattern) SetRegexp(v string) {
@@ -738,6 +818,34 @@ func (m *ClickhouseConfig_GraphiteRollup_Pattern_Retention) SetAge(v int64) {
 
 func (m *ClickhouseConfig_GraphiteRollup_Pattern_Retention) SetPrecision(v int64) {
 	m.Precision = v
+}
+
+func (m *ClickhouseConfig_QueryMaskingRule) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickhouseConfig_QueryMaskingRule) SetRegexp(v string) {
+	m.Regexp = v
+}
+
+func (m *ClickhouseConfig_QueryMaskingRule) SetReplace(v string) {
+	m.Replace = v
+}
+
+func (m *ClickhouseConfig_QueryCache) SetMaxSizeInBytes(v *wrapperspb.Int64Value) {
+	m.MaxSizeInBytes = v
+}
+
+func (m *ClickhouseConfig_QueryCache) SetMaxEntries(v *wrapperspb.Int64Value) {
+	m.MaxEntries = v
+}
+
+func (m *ClickhouseConfig_QueryCache) SetMaxEntrySizeInBytes(v *wrapperspb.Int64Value) {
+	m.MaxEntrySizeInBytes = v
+}
+
+func (m *ClickhouseConfig_QueryCache) SetMaxEntrySizeInRows(v *wrapperspb.Int64Value) {
+	m.MaxEntrySizeInRows = v
 }
 
 func (m *ClickhouseConfigSet) SetEffectiveConfig(v *ClickhouseConfig) {

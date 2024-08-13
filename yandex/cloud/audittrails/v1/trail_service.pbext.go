@@ -67,6 +67,10 @@ func (m *CreateTrailRequest) SetFilter(v *Trail_Filter) {
 	m.Filter = v
 }
 
+func (m *CreateTrailRequest) SetFilteringPolicy(v *Trail_FilteringPolicy) {
+	m.FilteringPolicy = v
+}
+
 func (m *UpdateTrailRequest) SetTrailId(v string) {
 	m.TrailId = v
 }
@@ -97,6 +101,10 @@ func (m *UpdateTrailRequest) SetServiceAccountId(v string) {
 
 func (m *UpdateTrailRequest) SetFilter(v *Trail_Filter) {
 	m.Filter = v
+}
+
+func (m *UpdateTrailRequest) SetFilteringPolicy(v *Trail_FilteringPolicy) {
+	m.FilteringPolicy = v
 }
 
 func (m *DeleteTrailRequest) SetTrailId(v string) {
