@@ -271,6 +271,10 @@ func (m *CreateFunctionVersionRequest) SetConcurrency(v int64) {
 	m.Concurrency = v
 }
 
+func (m *CreateFunctionVersionRequest) SetMounts(v []*Mount) {
+	m.Mounts = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }

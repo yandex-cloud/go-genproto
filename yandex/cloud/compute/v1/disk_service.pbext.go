@@ -97,6 +97,10 @@ func (m *CreateDiskRequest) SetSnapshotScheduleIds(v []string) {
 	m.SnapshotScheduleIds = v
 }
 
+func (m *CreateDiskRequest) SetHardwareGeneration(v *HardwareGeneration) {
+	m.HardwareGeneration = v
+}
+
 func (m *CreateDiskMetadata) SetDiskId(v string) {
 	m.DiskId = v
 }

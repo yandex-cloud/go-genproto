@@ -124,6 +124,10 @@ func (m *Version) SetConcurrency(v int64) {
 	m.Concurrency = v
 }
 
+func (m *Version) SetMounts(v []*Mount) {
+	m.Mounts = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -240,6 +244,48 @@ func (m *StorageMount) SetMountPointName(v string) {
 
 func (m *StorageMount) SetReadOnly(v bool) {
 	m.ReadOnly = v
+}
+
+type Mount_Target = isMount_Target
+
+func (m *Mount) SetTarget(v Mount_Target) {
+	m.Target = v
+}
+
+func (m *Mount) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Mount) SetMode(v Mount_Mode) {
+	m.Mode = v
+}
+
+func (m *Mount) SetObjectStorage(v *Mount_ObjectStorage) {
+	m.Target = &Mount_ObjectStorage_{
+		ObjectStorage: v,
+	}
+}
+
+func (m *Mount) SetEphemeralDiskSpec(v *Mount_DiskSpec) {
+	m.Target = &Mount_EphemeralDiskSpec{
+		EphemeralDiskSpec: v,
+	}
+}
+
+func (m *Mount_ObjectStorage) SetBucketId(v string) {
+	m.BucketId = v
+}
+
+func (m *Mount_ObjectStorage) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *Mount_DiskSpec) SetSize(v int64) {
+	m.Size = v
+}
+
+func (m *Mount_DiskSpec) SetBlockSize(v int64) {
+	m.BlockSize = v
 }
 
 func (m *AsyncInvocationConfig) SetRetriesCount(v int64) {

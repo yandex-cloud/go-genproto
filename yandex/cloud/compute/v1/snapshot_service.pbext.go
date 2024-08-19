@@ -59,6 +59,10 @@ func (m *CreateSnapshotRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateSnapshotRequest) SetHardwareGeneration(v *HardwareGeneration) {
+	m.HardwareGeneration = v
+}
+
 func (m *CreateSnapshotMetadata) SetSnapshotId(v string) {
 	m.SnapshotId = v
 }

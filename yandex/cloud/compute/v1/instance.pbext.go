@@ -119,6 +119,10 @@ func (m *Instance) SetMaintenanceGracePeriod(v *durationpb.Duration) {
 	m.MaintenanceGracePeriod = v
 }
 
+func (m *Instance) SetHardwareGeneration(v *HardwareGeneration) {
+	m.HardwareGeneration = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

@@ -182,6 +182,10 @@ func (m *DeployContainerRevisionRequest) SetStorageMounts(v []*StorageMount) {
 	m.StorageMounts = v
 }
 
+func (m *DeployContainerRevisionRequest) SetMounts(v []*Mount) {
+	m.Mounts = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

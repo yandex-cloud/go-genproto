@@ -113,6 +113,10 @@ func (m *CreateImageRequest) SetPooled(v bool) {
 	m.Pooled = v
 }
 
+func (m *CreateImageRequest) SetHardwareGeneration(v *HardwareGeneration) {
+	m.HardwareGeneration = v
+}
+
 func (m *CreateImageMetadata) SetImageId(v string) {
 	m.ImageId = v
 }

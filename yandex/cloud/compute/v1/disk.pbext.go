@@ -80,6 +80,10 @@ func (m *Disk) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
 	m.DiskPlacementPolicy = v
 }
 
+func (m *Disk) SetHardwareGeneration(v *HardwareGeneration) {
+	m.HardwareGeneration = v
+}
+
 func (m *DiskPlacementPolicy) SetPlacementGroupId(v string) {
 	m.PlacementGroupId = v
 }
