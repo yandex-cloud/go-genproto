@@ -126,6 +126,12 @@ func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetGradient(v *C
 	}
 }
 
+func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetHash(v *ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme) {
+	m.Scheme = &ChartWidget_VisualizationSettings_ColorSchemeSettings_Hash{
+		Hash: v,
+	}
+}
+
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetGreenValue(v string) {
 	m.GreenValue = v
 }

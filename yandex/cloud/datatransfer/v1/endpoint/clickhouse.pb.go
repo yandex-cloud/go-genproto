@@ -495,7 +495,8 @@ type ClickhouseSource struct {
 	ExcludeTables  []string `protobuf:"bytes,8,rep,name=exclude_tables,json=excludeTables,proto3" json:"exclude_tables,omitempty"`
 	SubnetId       string   `protobuf:"bytes,9,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	SecurityGroups []string `protobuf:"bytes,10,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	// Also could be name of MDB's shard group.
+	// Name of the ClickHouse cluster. For Managed ClickHouse that is name of
+	// ShardGroup.
 	ClickhouseClusterName string `protobuf:"bytes,11,opt,name=clickhouse_cluster_name,json=clickhouseClusterName,proto3" json:"clickhouse_cluster_name,omitempty"`
 }
 
@@ -584,7 +585,8 @@ type ClickhouseTarget struct {
 	AltNames      []*AltName              `protobuf:"bytes,17,rep,name=alt_names,json=altNames,proto3" json:"alt_names,omitempty"`
 	CleanupPolicy ClickhouseCleanupPolicy `protobuf:"varint,21,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ClickhouseCleanupPolicy" json:"cleanup_policy,omitempty"`
 	Sharding      *ClickhouseSharding     `protobuf:"bytes,22,opt,name=sharding,proto3" json:"sharding,omitempty"`
-	// Also could be name of MDB's shard group.
+	// Name of the ClickHouse cluster. For Managed ClickHouse that is name of
+	// ShardGroup.
 	ClickhouseClusterName string   `protobuf:"bytes,50,opt,name=clickhouse_cluster_name,json=clickhouseClusterName,proto3" json:"clickhouse_cluster_name,omitempty"`
 	SecurityGroups        []string `protobuf:"bytes,51,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 }

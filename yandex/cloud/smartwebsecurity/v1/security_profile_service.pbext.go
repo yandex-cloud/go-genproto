@@ -46,6 +46,10 @@ func (m *CreateSecurityProfileRequest) SetCaptchaId(v string) {
 	m.CaptchaId = v
 }
 
+func (m *CreateSecurityProfileRequest) SetAdvancedRateLimiterProfileId(v string) {
+	m.AdvancedRateLimiterProfileId = v
+}
+
 func (m *CreateSecurityProfileMetadata) SetSecurityProfileId(v string) {
 	m.SecurityProfileId = v
 }
@@ -80,6 +84,10 @@ func (m *UpdateSecurityProfileRequest) SetSecurityRules(v []*SecurityRule) {
 
 func (m *UpdateSecurityProfileRequest) SetCaptchaId(v string) {
 	m.CaptchaId = v
+}
+
+func (m *UpdateSecurityProfileRequest) SetAdvancedRateLimiterProfileId(v string) {
+	m.AdvancedRateLimiterProfileId = v
 }
 
 func (m *UpdateSecurityProfileMetadata) SetSecurityProfileId(v string) {

@@ -231,6 +231,10 @@ func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
 }
 
+func (m *Access) SetWebSql(v bool) {
+	m.WebSql = v
+}
+
 func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v *wrapperspb.Int64Value) {
 	m.PlannedUsageThreshold = v
 }

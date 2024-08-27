@@ -151,6 +151,10 @@ func (m *UpdateClusterRequest) SetPersistenceMode(v Cluster_PersistenceMode) {
 	m.PersistenceMode = v
 }
 
+func (m *UpdateClusterRequest) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
 func (m *UpdateClusterRequest) SetAnnounceHostnames(v bool) {
 	m.AnnounceHostnames = v
 }

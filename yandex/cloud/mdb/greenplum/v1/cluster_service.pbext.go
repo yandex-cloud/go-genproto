@@ -116,6 +116,14 @@ func (m *CreateClusterRequest) SetCloudStorage(v *CloudStorage) {
 	m.CloudStorage = v
 }
 
+func (m *CreateClusterRequest) SetMasterHostGroupIds(v []string) {
+	m.MasterHostGroupIds = v
+}
+
+func (m *CreateClusterRequest) SetSegmentHostGroupIds(v []string) {
+	m.SegmentHostGroupIds = v
+}
+
 type ConfigSpec_GreenplumConfig = isConfigSpec_GreenplumConfig
 
 func (m *ConfigSpec) SetGreenplumConfig(v ConfigSpec_GreenplumConfig) {
@@ -202,6 +210,10 @@ func (m *UpdateClusterRequest) SetSegmentConfig(v *SegmentSubclusterConfigSpec) 
 
 func (m *UpdateClusterRequest) SetUserPassword(v string) {
 	m.UserPassword = v
+}
+
+func (m *UpdateClusterRequest) SetNetworkId(v string) {
+	m.NetworkId = v
 }
 
 func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
@@ -546,6 +558,14 @@ func (m *RestoreClusterRequest) SetSegmentInHost(v int64) {
 
 func (m *RestoreClusterRequest) SetRestoreOnly(v []string) {
 	m.RestoreOnly = v
+}
+
+func (m *RestoreClusterRequest) SetMasterHostGroupIds(v []string) {
+	m.MasterHostGroupIds = v
+}
+
+func (m *RestoreClusterRequest) SetSegmentHostGroupIds(v []string) {
+	m.SegmentHostGroupIds = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

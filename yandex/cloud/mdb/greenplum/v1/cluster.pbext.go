@@ -108,6 +108,14 @@ func (m *Cluster) SetCloudStorage(v *CloudStorage) {
 	m.CloudStorage = v
 }
 
+func (m *Cluster) SetMasterHostGroupIds(v []string) {
+	m.MasterHostGroupIds = v
+}
+
+func (m *Cluster) SetSegmentHostGroupIds(v []string) {
+	m.SegmentHostGroupIds = v
+}
+
 type ClusterConfigSet_GreenplumConfig = isClusterConfigSet_GreenplumConfig
 
 func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig) {
@@ -206,6 +214,10 @@ func (m *Access) SetWebSql(v bool) {
 
 func (m *Access) SetDataTransfer(v bool) {
 	m.DataTransfer = v
+}
+
+func (m *Access) SetYandexQuery(v bool) {
+	m.YandexQuery = v
 }
 
 func (m *GreenplumRestoreConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {

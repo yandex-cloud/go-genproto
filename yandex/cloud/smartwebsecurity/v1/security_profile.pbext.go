@@ -14,10 +14,6 @@ func (m *SecurityProfile) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *SecurityProfile) SetCloudId(v string) {
-	m.CloudId = v
-}
-
 func (m *SecurityProfile) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -42,8 +38,16 @@ func (m *SecurityProfile) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *SecurityProfile) SetCloudId(v string) {
+	m.CloudId = v
+}
+
 func (m *SecurityProfile) SetCaptchaId(v string) {
 	m.CaptchaId = v
+}
+
+func (m *SecurityProfile) SetAdvancedRateLimiterProfileId(v string) {
+	m.AdvancedRateLimiterProfileId = v
 }
 
 type SecurityRule_RuleSpecifier = isSecurityRule_RuleSpecifier
@@ -76,6 +80,12 @@ func (m *SecurityRule) SetSmartProtection(v *SecurityRule_SmartProtection) {
 	}
 }
 
+func (m *SecurityRule) SetWaf(v *SecurityRule_Waf) {
+	m.RuleSpecifier = &SecurityRule_Waf_{
+		Waf: v,
+	}
+}
+
 func (m *SecurityRule) SetDescription(v string) {
 	m.Description = v
 }
@@ -94,6 +104,18 @@ func (m *SecurityRule_SmartProtection) SetMode(v SecurityRule_SmartProtection_Mo
 
 func (m *SecurityRule_SmartProtection) SetCondition(v *Condition) {
 	m.Condition = v
+}
+
+func (m *SecurityRule_Waf) SetMode(v SecurityRule_Waf_Mode) {
+	m.Mode = v
+}
+
+func (m *SecurityRule_Waf) SetCondition(v *Condition) {
+	m.Condition = v
+}
+
+func (m *SecurityRule_Waf) SetWafProfileId(v string) {
+	m.WafProfileId = v
 }
 
 func (m *Condition) SetAuthority(v *Condition_AuthorityMatcher) {

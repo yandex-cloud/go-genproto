@@ -21,16 +21,19 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	IamTokenService_Create_FullMethodName                  = "/yandex.cloud.iam.v1.IamTokenService/Create"
 	IamTokenService_CreateForServiceAccount_FullMethodName = "/yandex.cloud.iam.v1.IamTokenService/CreateForServiceAccount"
+	IamTokenService_Revoke_FullMethodName                  = "/yandex.cloud.iam.v1.IamTokenService/Revoke"
 )
 
 // IamTokenServiceClient is the client API for IamTokenService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IamTokenServiceClient interface {
-	// Creates an IAM token for the specified identity.
+	// Create an IAM token for the specified identity.
 	Create(ctx context.Context, in *CreateIamTokenRequest, opts ...grpc.CallOption) (*CreateIamTokenResponse, error)
-	// Create iam token for service account.
+	// Create an IAM token for service account.
 	CreateForServiceAccount(ctx context.Context, in *CreateIamTokenForServiceAccountRequest, opts ...grpc.CallOption) (*CreateIamTokenResponse, error)
+	// Revoke the IAM token.
+	Revoke(ctx context.Context, in *RevokeIamTokenRequest, opts ...grpc.CallOption) (*RevokeIamTokenResponse, error)
 }
 
 type iamTokenServiceClient struct {
@@ -59,14 +62,25 @@ func (c *iamTokenServiceClient) CreateForServiceAccount(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *iamTokenServiceClient) Revoke(ctx context.Context, in *RevokeIamTokenRequest, opts ...grpc.CallOption) (*RevokeIamTokenResponse, error) {
+	out := new(RevokeIamTokenResponse)
+	err := c.cc.Invoke(ctx, IamTokenService_Revoke_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IamTokenServiceServer is the server API for IamTokenService service.
 // All implementations should embed UnimplementedIamTokenServiceServer
 // for forward compatibility
 type IamTokenServiceServer interface {
-	// Creates an IAM token for the specified identity.
+	// Create an IAM token for the specified identity.
 	Create(context.Context, *CreateIamTokenRequest) (*CreateIamTokenResponse, error)
-	// Create iam token for service account.
+	// Create an IAM token for service account.
 	CreateForServiceAccount(context.Context, *CreateIamTokenForServiceAccountRequest) (*CreateIamTokenResponse, error)
+	// Revoke the IAM token.
+	Revoke(context.Context, *RevokeIamTokenRequest) (*RevokeIamTokenResponse, error)
 }
 
 // UnimplementedIamTokenServiceServer should be embedded to have forward compatible implementations.
@@ -78,6 +92,9 @@ func (UnimplementedIamTokenServiceServer) Create(context.Context, *CreateIamToke
 }
 func (UnimplementedIamTokenServiceServer) CreateForServiceAccount(context.Context, *CreateIamTokenForServiceAccountRequest) (*CreateIamTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateForServiceAccount not implemented")
+}
+func (UnimplementedIamTokenServiceServer) Revoke(context.Context, *RevokeIamTokenRequest) (*RevokeIamTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Revoke not implemented")
 }
 
 // UnsafeIamTokenServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -127,6 +144,24 @@ func _IamTokenService_CreateForServiceAccount_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IamTokenService_Revoke_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeIamTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamTokenServiceServer).Revoke(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IamTokenService_Revoke_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamTokenServiceServer).Revoke(ctx, req.(*RevokeIamTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IamTokenService_ServiceDesc is the grpc.ServiceDesc for IamTokenService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -141,6 +176,10 @@ var IamTokenService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateForServiceAccount",
 			Handler:    _IamTokenService_CreateForServiceAccount_Handler,
+		},
+		{
+			MethodName: "Revoke",
+			Handler:    _IamTokenService_Revoke_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
