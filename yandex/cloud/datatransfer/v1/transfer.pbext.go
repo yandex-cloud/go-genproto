@@ -202,6 +202,10 @@ func (m *FilterRowsTransformer) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *FilterRowsTransformer) SetFilters(v []string) {
+	m.Filters = v
+}
+
 type Transformer_Transformer = isTransformer_Transformer
 
 func (m *Transformer) SetTransformer(v Transformer_Transformer) {

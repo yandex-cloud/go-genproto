@@ -121,3 +121,7 @@ func (m *Task) SetComputeInstanceId(v string) {
 func (m *Task) SetResultCode(v Task_Code) {
 	m.ResultCode = v
 }
+
+func (m *Task) SetError(v string) {
+	m.Error = v
+}

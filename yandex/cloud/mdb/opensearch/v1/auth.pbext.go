@@ -2,6 +2,10 @@
 
 package opensearch
 
+import (
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *AuthSettings) SetSaml(v *SAMLSettings) {
 	m.Saml = v
 }
@@ -32,4 +36,8 @@ func (m *SAMLSettings) SetRolesKey(v string) {
 
 func (m *SAMLSettings) SetSubjectKey(v string) {
 	m.SubjectKey = v
+}
+
+func (m *SAMLSettings) SetJwtDefaultExpirationTimeout(v *wrapperspb.Int64Value) {
+	m.JwtDefaultExpirationTimeout = v
 }

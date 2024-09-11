@@ -13,3 +13,7 @@ func (m *ImbalancePoint) SetAt(v *timestamppb.Timestamp) {
 func (m *ImbalancePoint) SetRps(v int64) {
 	m.Rps = v
 }
+
+func (m *ImbalancePoint) SetComment(v string) {
+	m.Comment = v
+}

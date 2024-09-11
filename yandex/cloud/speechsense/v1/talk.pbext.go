@@ -75,6 +75,10 @@ func (m *Talk) SetTextClassifiers(v *analysis.TextClassifiers) {
 	m.TextClassifiers = v
 }
 
+func (m *Talk) SetSummarization(v *analysis.Summarization) {
+	m.Summarization = v
+}
+
 func (m *Field) SetName(v string) {
 	m.Name = v
 }
