@@ -385,6 +385,10 @@ func (m *OpenSearchCreateSpec_NodeGroup) SetRoles(v []OpenSearch_GroupRole) {
 	m.Roles = v
 }
 
+func (m *OpenSearchCreateSpec_NodeGroup) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 func (m *DashboardsCreateSpec) SetNodeGroups(v []*DashboardsCreateSpec_NodeGroup) {
 	m.NodeGroups = v
 }
@@ -411,6 +415,10 @@ func (m *DashboardsCreateSpec_NodeGroup) SetSubnetIds(v []string) {
 
 func (m *DashboardsCreateSpec_NodeGroup) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
+}
+
+func (m *DashboardsCreateSpec_NodeGroup) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *ConfigUpdateSpec) SetVersion(v string) {
@@ -609,6 +617,10 @@ func (m *OpenSearchNodeGroupUpdateSpec) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
 }
 
+func (m *OpenSearchNodeGroupUpdateSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 func (m *AddOpenSearchNodeGroupRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -659,6 +671,10 @@ func (m *DashboardsNodeGroupUpdateSpec) SetSubnetIds(v []string) {
 
 func (m *DashboardsNodeGroupUpdateSpec) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
+}
+
+func (m *DashboardsNodeGroupUpdateSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *AddDashboardsNodeGroupRequest) SetClusterId(v string) {

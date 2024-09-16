@@ -276,6 +276,7 @@ type GetExecutionResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Workflow execution details.
 	Execution *Execution `protobuf:"bytes,1,opt,name=execution,proto3" json:"execution,omitempty"`
 }
 
@@ -371,6 +372,7 @@ type GetExecutionHistoryResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Workflow execution details.
 	Execution *ExecutionPreview `protobuf:"bytes,1,opt,name=execution,proto3" json:"execution,omitempty"`
 	// Workflow execution detailed history items.
 	Entries []*HistoryEntry `protobuf:"bytes,2,rep,name=entries,proto3" json:"entries,omitempty"`

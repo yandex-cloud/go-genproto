@@ -31,6 +31,10 @@ func (m *CreateAgentRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateAgentRequest) SetLogSettings(v *agent.LogSettings) {
+	m.LogSettings = v
+}
+
 func (m *CreateAgentMetadata) SetAgentId(v string) {
 	m.AgentId = v
 }

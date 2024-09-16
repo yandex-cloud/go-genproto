@@ -155,6 +155,10 @@ func (m *OpenSearch_NodeGroup) SetRoles(v []OpenSearch_GroupRole) {
 	m.Roles = v
 }
 
+func (m *OpenSearch_NodeGroup) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 func (m *Dashboards) SetNodeGroups(v []*Dashboards_NodeGroup) {
 	m.NodeGroups = v
 }
@@ -181,6 +185,10 @@ func (m *Dashboards_NodeGroup) SetSubnetIds(v []string) {
 
 func (m *Dashboards_NodeGroup) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
+}
+
+func (m *Dashboards_NodeGroup) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *Resources) SetResourcePresetId(v string) {
@@ -289,4 +297,16 @@ func (m *Access) SetDataTransfer(v bool) {
 
 func (m *Access) SetServerless(v bool) {
 	m.Serverless = v
+}
+
+func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v int64) {
+	m.PlannedUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v int64) {
+	m.EmergencyUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v int64) {
+	m.DiskSizeLimit = v
 }

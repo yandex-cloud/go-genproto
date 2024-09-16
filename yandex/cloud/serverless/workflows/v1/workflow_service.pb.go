@@ -406,6 +406,7 @@ type GetWorkflowResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Workflow properties.
 	Workflow *Workflow `protobuf:"bytes,1,opt,name=workflow,proto3" json:"workflow,omitempty"`
 }
 
@@ -635,6 +636,7 @@ type ListWorkflowsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// List of Workflows.
 	Workflows []*WorkflowPreview `protobuf:"bytes,1,rep,name=workflows,proto3" json:"workflows,omitempty"`
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListWorkflowsRequest.page_size], use `next_page_token` as the value

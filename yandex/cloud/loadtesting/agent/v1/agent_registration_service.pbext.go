@@ -30,6 +30,10 @@ func (m *ExternalAgentRegisterRequest) SetAgentVersion(v string) {
 	m.AgentVersion = v
 }
 
+func (m *ExternalAgentRegisterRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *ExternalAgentRegisterMetadata) SetAgentInstanceId(v string) {
 	m.AgentInstanceId = v
 }
