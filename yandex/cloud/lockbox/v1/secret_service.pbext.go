@@ -55,6 +55,12 @@ func (m *ListSecretsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+type CreateSecretRequest_PayloadSpecification = isCreateSecretRequest_PayloadSpecification
+
+func (m *CreateSecretRequest) SetPayloadSpecification(v CreateSecretRequest_PayloadSpecification) {
+	m.PayloadSpecification = v
+}
+
 func (m *CreateSecretRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -87,12 +93,24 @@ func (m *CreateSecretRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
+	m.PayloadSpecification = &CreateSecretRequest_PasswordPayloadSpecification{
+		PasswordPayloadSpecification: v,
+	}
+}
+
 func (m *CreateSecretMetadata) SetSecretId(v string) {
 	m.SecretId = v
 }
 
 func (m *CreateSecretMetadata) SetVersionId(v string) {
 	m.VersionId = v
+}
+
+type UpdateSecretRequest_PayloadSpecification = isUpdateSecretRequest_PayloadSpecification
+
+func (m *UpdateSecretRequest) SetPayloadSpecification(v UpdateSecretRequest_PayloadSpecification) {
+	m.PayloadSpecification = v
 }
 
 func (m *UpdateSecretRequest) SetSecretId(v string) {
@@ -117,6 +135,12 @@ func (m *UpdateSecretRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateSecretRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
+	m.PayloadSpecification = &UpdateSecretRequest_PasswordPayloadSpecification{
+		PasswordPayloadSpecification: v,
+	}
 }
 
 func (m *UpdateSecretMetadata) SetSecretId(v string) {

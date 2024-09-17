@@ -2,6 +2,10 @@
 
 package oauth
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *SubjectClaims) SetSub(v string) {
 	m.Sub = v
 }
@@ -48,6 +52,10 @@ func (m *SubjectClaims) SetSubType(v SubjectType) {
 
 func (m *SubjectClaims) SetFederation(v *Federation) {
 	m.Federation = v
+}
+
+func (m *SubjectClaims) SetLastAuthenticatedAt(v *timestamppb.Timestamp) {
+	m.LastAuthenticatedAt = v
 }
 
 func (m *Federation) SetId(v string) {

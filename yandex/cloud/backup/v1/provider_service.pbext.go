@@ -10,6 +10,10 @@ func (m *ActivateProviderRequest) SetName(v string) {
 	m.Name = v
 }
 
+func (m *ActivateProviderRequest) SetSkipDefaultPolicy(v bool) {
+	m.SkipDefaultPolicy = v
+}
+
 func (m *ActivateProviderMetadata) SetFolderId(v string) {
 	m.FolderId = v
 }
