@@ -153,6 +153,10 @@ func (m *Shard) SetConfig(v *ShardConfig) {
 	m.Config = v
 }
 
+func (m *Shards) SetShards(v []*Shard) {
+	m.Shards = v
+}
+
 func (m *ShardGroup) SetName(v string) {
 	m.Name = v
 }

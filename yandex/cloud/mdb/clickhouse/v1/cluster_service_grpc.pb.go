@@ -44,8 +44,10 @@ const (
 	ClusterService_GetShard_FullMethodName                 = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/GetShard"
 	ClusterService_ListShards_FullMethodName               = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/ListShards"
 	ClusterService_AddShard_FullMethodName                 = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/AddShard"
+	ClusterService_AddShards_FullMethodName                = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/AddShards"
 	ClusterService_UpdateShard_FullMethodName              = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/UpdateShard"
 	ClusterService_DeleteShard_FullMethodName              = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/DeleteShard"
+	ClusterService_DeleteShards_FullMethodName             = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/DeleteShards"
 	ClusterService_GetShardGroup_FullMethodName            = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/GetShardGroup"
 	ClusterService_ListShardGroups_FullMethodName          = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/ListShardGroups"
 	ClusterService_CreateShardGroup_FullMethodName         = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/CreateShardGroup"
@@ -113,10 +115,14 @@ type ClusterServiceClient interface {
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
 	// Creates a new shard in the specified cluster.
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Creates one or more shards in the specified cluster.
+	AddShards(ctx context.Context, in *AddClusterShardsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Modifies the specified shard.
 	UpdateShard(ctx context.Context, in *UpdateClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified shards (one or more).
+	DeleteShards(ctx context.Context, in *DeleteClusterShardsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified shard group.
 	GetShardGroup(ctx context.Context, in *GetClusterShardGroupRequest, opts ...grpc.CallOption) (*ShardGroup, error)
 	// Retrieves a list of shard groups that belong to specified cluster.
@@ -394,6 +400,16 @@ func (c *clusterServiceClient) AddShard(ctx context.Context, in *AddClusterShard
 	return out, nil
 }
 
+func (c *clusterServiceClient) AddShards(ctx context.Context, in *AddClusterShardsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_AddShards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) UpdateShard(ctx context.Context, in *UpdateClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -408,6 +424,16 @@ func (c *clusterServiceClient) DeleteShard(ctx context.Context, in *DeleteCluste
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_DeleteShard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) DeleteShards(ctx context.Context, in *DeleteClusterShardsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_DeleteShards_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -560,10 +586,14 @@ type ClusterServiceServer interface {
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
 	// Creates a new shard in the specified cluster.
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
+	// Creates one or more shards in the specified cluster.
+	AddShards(context.Context, *AddClusterShardsRequest) (*operation.Operation, error)
 	// Modifies the specified shard.
 	UpdateShard(context.Context, *UpdateClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)
+	// Deletes the specified shards (one or more).
+	DeleteShards(context.Context, *DeleteClusterShardsRequest) (*operation.Operation, error)
 	// Returns the specified shard group.
 	GetShardGroup(context.Context, *GetClusterShardGroupRequest) (*ShardGroup, error)
 	// Retrieves a list of shard groups that belong to specified cluster.
@@ -663,11 +693,17 @@ func (UnimplementedClusterServiceServer) ListShards(context.Context, *ListCluste
 func (UnimplementedClusterServiceServer) AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddShard not implemented")
 }
+func (UnimplementedClusterServiceServer) AddShards(context.Context, *AddClusterShardsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddShards not implemented")
+}
 func (UnimplementedClusterServiceServer) UpdateShard(context.Context, *UpdateClusterShardRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateShard not implemented")
 }
 func (UnimplementedClusterServiceServer) DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteShard not implemented")
+}
+func (UnimplementedClusterServiceServer) DeleteShards(context.Context, *DeleteClusterShardsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteShards not implemented")
 }
 func (UnimplementedClusterServiceServer) GetShardGroup(context.Context, *GetClusterShardGroupRequest) (*ShardGroup, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetShardGroup not implemented")
@@ -1141,6 +1177,24 @@ func _ClusterService_AddShard_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_AddShards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddClusterShardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).AddShards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_AddShards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).AddShards(ctx, req.(*AddClusterShardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_UpdateShard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateClusterShardRequest)
 	if err := dec(in); err != nil {
@@ -1173,6 +1227,24 @@ func _ClusterService_DeleteShard_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).DeleteShard(ctx, req.(*DeleteClusterShardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_DeleteShards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteClusterShardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).DeleteShards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_DeleteShards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).DeleteShards(ctx, req.(*DeleteClusterShardsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1439,12 +1511,20 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_AddShard_Handler,
 		},
 		{
+			MethodName: "AddShards",
+			Handler:    _ClusterService_AddShards_Handler,
+		},
+		{
 			MethodName: "UpdateShard",
 			Handler:    _ClusterService_UpdateShard_Handler,
 		},
 		{
 			MethodName: "DeleteShard",
 			Handler:    _ClusterService_DeleteShard_Handler,
+		},
+		{
+			MethodName: "DeleteShards",
+			Handler:    _ClusterService_DeleteShards_Handler,
 		},
 		{
 			MethodName: "GetShardGroup",

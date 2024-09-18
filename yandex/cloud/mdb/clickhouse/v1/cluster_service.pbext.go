@@ -579,6 +579,30 @@ func (m *AddClusterShardMetadata) SetShardName(v string) {
 	m.ShardName = v
 }
 
+func (m *AddClusterShardsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *AddClusterShardsRequest) SetShardSpecs(v []*ShardSpec) {
+	m.ShardSpecs = v
+}
+
+func (m *AddClusterShardsRequest) SetHostSpecs(v []*HostSpec) {
+	m.HostSpecs = v
+}
+
+func (m *AddClusterShardsRequest) SetCopySchema(v *wrapperspb.BoolValue) {
+	m.CopySchema = v
+}
+
+func (m *AddClusterShardsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *AddClusterShardsMetadata) SetShardNames(v []string) {
+	m.ShardNames = v
+}
+
 func (m *UpdateClusterShardRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -617,6 +641,22 @@ func (m *DeleteClusterShardMetadata) SetClusterId(v string) {
 
 func (m *DeleteClusterShardMetadata) SetShardName(v string) {
 	m.ShardName = v
+}
+
+func (m *DeleteClusterShardsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterShardsRequest) SetShardNames(v []string) {
+	m.ShardNames = v
+}
+
+func (m *DeleteClusterShardsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterShardsMetadata) SetShardNames(v []string) {
+	m.ShardNames = v
 }
 
 func (m *GetClusterShardGroupRequest) SetClusterId(v string) {
@@ -869,4 +909,16 @@ func (m *ShardConfigSpec_Clickhouse) SetResources(v *Resources) {
 
 func (m *ShardConfigSpec_Clickhouse) SetWeight(v *wrapperspb.Int64Value) {
 	m.Weight = v
+}
+
+func (m *ShardSpec) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ShardSpec) SetConfigSpec(v *ShardConfigSpec) {
+	m.ConfigSpec = v
+}
+
+func (m *ShardSpec) SetShardGroupNames(v []string) {
+	m.ShardGroupNames = v
 }
