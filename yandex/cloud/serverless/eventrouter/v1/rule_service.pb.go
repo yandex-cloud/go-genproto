@@ -177,10 +177,12 @@ type isListRulesRequest_ContainerId interface {
 }
 
 type ListRulesRequest_BusId struct {
+	// ID of the bus to list rules in.
 	BusId string `protobuf:"bytes,1,opt,name=bus_id,json=busId,proto3,oneof"`
 }
 
 type ListRulesRequest_FolderId struct {
+	// ID of the folder to list rules in.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 

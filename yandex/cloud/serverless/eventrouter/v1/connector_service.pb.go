@@ -252,7 +252,7 @@ type CreateConnectorRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// / ID of the bus to create a connector in.
+	// ID of the bus to create a connector in.
 	BusId string `protobuf:"bytes,1,opt,name=bus_id,json=busId,proto3" json:"bus_id,omitempty"`
 	// Name of the connector.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
