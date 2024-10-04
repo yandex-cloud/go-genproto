@@ -105,3 +105,143 @@ func (m *S3APIDeleteObjectResponse) SetRequestId(v string) {
 func (m *S3APIDeleteObjectResponse) SetVersionId(v string) {
 	m.VersionId = v
 }
+
+func (m *CopyObjectResult) SetEtag(v string) {
+	m.Etag = v
+}
+
+func (m *CopyObjectResult) SetLastModifiedAt(v *timestamppb.Timestamp) {
+	m.LastModifiedAt = v
+}
+
+func (m *S3APICopyObjectResponse) SetCopyObjectResult(v *CopyObjectResult) {
+	m.CopyObjectResult = v
+}
+
+func (m *S3APICopyObjectResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APICopyObjectResponse) SetCopySourceVersionId(v string) {
+	m.CopySourceVersionId = v
+}
+
+func (m *S3APICopyObjectResponse) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *SuccessfullyDeletedObject) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *SuccessfullyDeletedObject) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *SuccessfullyDeletedObject) SetDeleteMarker(v bool) {
+	m.DeleteMarker = v
+}
+
+func (m *SuccessfullyDeletedObject) SetDeleteMarkerVersionId(v string) {
+	m.DeleteMarkerVersionId = v
+}
+
+func (m *DeleteObjectError) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *DeleteObjectError) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *DeleteObjectError) SetCode(v string) {
+	m.Code = v
+}
+
+func (m *DeleteObjectError) SetMsg(v string) {
+	m.Msg = v
+}
+
+func (m *S3APIDeleteObjectsResponse) SetDeleted(v []*SuccessfullyDeletedObject) {
+	m.Deleted = v
+}
+
+func (m *S3APIDeleteObjectsResponse) SetErrors(v []*DeleteObjectError) {
+	m.Errors = v
+}
+
+func (m *S3APIDeleteObjectsResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIPutObjectRetentionResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *ObjectLockRetention) SetMode(v string) {
+	m.Mode = v
+}
+
+func (m *ObjectLockRetention) SetRetainUntilDate(v *timestamppb.Timestamp) {
+	m.RetainUntilDate = v
+}
+
+func (m *S3APIGetObjectRetentionResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIGetObjectRetentionResponse) SetRetention(v *ObjectLockRetention) {
+	m.Retention = v
+}
+
+func (m *S3APIPutObjectLegalHoldResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *ObjectLockLegalHold) SetStatus(v string) {
+	m.Status = v
+}
+
+func (m *S3APIGetObjectLegalHoldResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIGetObjectLegalHoldResponse) SetLegalHold(v *ObjectLockLegalHold) {
+	m.LegalHold = v
+}
+
+func (m *S3APIPutObjectTaggingResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIPutObjectTaggingResponse) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *ObjectTag) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *ObjectTag) SetValue(v string) {
+	m.Value = v
+}
+
+func (m *S3APIGetObjectTaggingResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIGetObjectTaggingResponse) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *S3APIGetObjectTaggingResponse) SetTagSet(v []*ObjectTag) {
+	m.TagSet = v
+}
+
+func (m *S3APIDeleteObjectTaggingResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIDeleteObjectTaggingResponse) SetVersionId(v string) {
+	m.VersionId = v
+}

@@ -47,6 +47,26 @@ func (m *HistoryEntry) SetType(v string) {
 	m.Type = v
 }
 
+func (m *HistoryEntry) SetAttempts(v int64) {
+	m.Attempts = v
+}
+
+func (m *HistoryEntry) SetLastError(v *HistoryEntryError) {
+	m.LastError = v
+}
+
+func (m *HistoryEntry_FailedAttempt) SetStartedAt(v *timestamppb.Timestamp) {
+	m.StartedAt = v
+}
+
+func (m *HistoryEntry_FailedAttempt) SetDuration(v *durationpb.Duration) {
+	m.Duration = v
+}
+
+func (m *HistoryEntry_FailedAttempt) SetError(v *HistoryEntryError) {
+	m.Error = v
+}
+
 type HistoryEntryInput_Input = isHistoryEntryInput_Input
 
 func (m *HistoryEntryInput) SetInput(v HistoryEntryInput_Input) {

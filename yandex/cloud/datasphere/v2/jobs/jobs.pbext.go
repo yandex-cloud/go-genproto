@@ -107,6 +107,28 @@ func (m *FileDesc) SetVar(v string) {
 	m.Var = v
 }
 
+type FileUploadError_FileType = isFileUploadError_FileType
+
+func (m *FileUploadError) SetFileType(v FileUploadError_FileType) {
+	m.FileType = v
+}
+
+func (m *FileUploadError) SetOutputFileDesc(v *FileDesc) {
+	m.FileType = &FileUploadError_OutputFileDesc{
+		OutputFileDesc: v,
+	}
+}
+
+func (m *FileUploadError) SetLogFileName(v string) {
+	m.FileType = &FileUploadError_LogFileName{
+		LogFileName: v,
+	}
+}
+
+func (m *FileUploadError) SetDescription(v string) {
+	m.Description = v
+}
+
 type Environment_DockerImage = isEnvironment_DockerImage
 
 func (m *Environment) SetDockerImage(v Environment_DockerImage) {
@@ -211,10 +233,6 @@ func (m *Job) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *Job) SetStartedAt(v *timestamppb.Timestamp) {
-	m.StartedAt = v
-}
-
 func (m *Job) SetFinishedAt(v *timestamppb.Timestamp) {
 	m.FinishedAt = v
 }
@@ -261,6 +279,30 @@ func (m *Job) SetDiagnosticFiles(v []*File) {
 
 func (m *Job) SetDataSizeBytes(v int64) {
 	m.DataSizeBytes = v
+}
+
+func (m *Job) SetStartedAt(v *timestamppb.Timestamp) {
+	m.StartedAt = v
+}
+
+func (m *Job) SetStatusDetails(v string) {
+	m.StatusDetails = v
+}
+
+func (m *Job) SetActualCloudInstanceType(v *CloudInstanceType) {
+	m.ActualCloudInstanceType = v
+}
+
+func (m *Job) SetParentJobId(v string) {
+	m.ParentJobId = v
+}
+
+func (m *Job) SetFileErrors(v []*FileUploadError) {
+	m.FileErrors = v
+}
+
+func (m *Job) SetOutputDatasets(v []*OutputDataset) {
+	m.OutputDatasets = v
 }
 
 func (m *JobResult) SetReturnCode(v int64) {

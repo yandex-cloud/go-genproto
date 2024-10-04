@@ -196,7 +196,7 @@ type TextAnnotation struct {
 	Tables   []*Table  `protobuf:"bytes,5,rep,name=tables,proto3" json:"tables,omitempty"`
 	// Full text recognized from image.
 	FullText string `protobuf:"bytes,6,opt,name=full_text,json=fullText,proto3" json:"full_text,omitempty"`
-	// Angle of rotate image
+	// Angle of image rotation.
 	Rotate Angle `protobuf:"varint,7,opt,name=rotate,proto3,enum=yandex.cloud.ai.ocr.v1.Angle" json:"rotate,omitempty"`
 }
 
@@ -426,7 +426,7 @@ type Line struct {
 	Words []*Word `protobuf:"bytes,3,rep,name=words,proto3" json:"words,omitempty"`
 	// Line position from full_text string.
 	TextSegments []*TextSegments `protobuf:"bytes,4,rep,name=text_segments,json=textSegments,proto3" json:"text_segments,omitempty"`
-	// Angle of rotate line
+	// Angle of line rotation.
 	Orientation Angle `protobuf:"varint,5,opt,name=orientation,proto3,enum=yandex.cloud.ai.ocr.v1.Angle" json:"orientation,omitempty"`
 }
 
