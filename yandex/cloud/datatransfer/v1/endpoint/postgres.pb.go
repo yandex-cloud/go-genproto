@@ -420,7 +420,7 @@ type PostgresSource struct {
 	Connection *PostgresConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// Database name
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access.
+	// User for database access. not required as may be in connection
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
@@ -557,7 +557,7 @@ type PostgresTarget struct {
 	Connection *PostgresConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// Database name
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access.
+	// User for database access. not required as may be in connection
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`

@@ -337,7 +337,7 @@ type PXFDatasourceJDBC struct {
 	//
 	// The default value is `5`.
 	PoolMaximumSize *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=pool_maximum_size,json=poolMaximumSize,proto3" json:"pool_maximum_size,omitempty"`
-	// Maximum amount of time, in milliseconds, after which an inactive connection is considered idle.
+	// Maximum time, in milliseconds, to wait for a connection from the pool.
 	//
 	// The default value is `30000`.
 	PoolConnectionTimeout *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=pool_connection_timeout,json=poolConnectionTimeout,proto3" json:"pool_connection_timeout,omitempty"`
