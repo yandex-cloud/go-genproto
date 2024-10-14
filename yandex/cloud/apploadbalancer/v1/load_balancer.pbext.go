@@ -3,6 +3,7 @@
 package apploadbalancer
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -188,6 +189,10 @@ func (m *Http2Options) SetMaxConcurrentStreams(v int64) {
 
 func (m *StreamHandler) SetBackendGroupId(v string) {
 	m.BackendGroupId = v
+}
+
+func (m *StreamHandler) SetIdleTimeout(v *durationpb.Duration) {
+	m.IdleTimeout = v
 }
 
 type HttpHandler_ProtocolSettings = isHttpHandler_ProtocolSettings

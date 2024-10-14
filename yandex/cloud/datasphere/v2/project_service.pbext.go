@@ -304,3 +304,55 @@ func (m *SetProjectRestrictionsRequest) SetProjectId(v string) {
 func (m *SetProjectRestrictionsRequest) SetRestrictions(v []*Restriction) {
 	m.Restrictions = v
 }
+
+func (m *ResizeProjectDiskRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ResizeProjectDiskRequest) SetNewDiskSizeGb(v int64) {
+	m.NewDiskSizeGb = v
+}
+
+func (m *ResizeProjectDiskMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ResizeProjectDiskMetadata) SetOldDiskSizeGb(v int64) {
+	m.OldDiskSizeGb = v
+}
+
+func (m *ResizeProjectDiskMetadata) SetNewDiskSizeGb(v int64) {
+	m.NewDiskSizeGb = v
+}
+
+func (m *DiskInfo) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *DiskInfo) SetDiskSizeGb(v float64) {
+	m.DiskSizeGb = v
+}
+
+func (m *DiskInfo) SetDiskUsedGb(v float64) {
+	m.DiskUsedGb = v
+}
+
+func (m *DiskInfo) SetDetailedUsage(v *DiskInfo_DetailedDiskInfo) {
+	m.DetailedUsage = v
+}
+
+func (m *DiskInfo_DetailedDiskInfo) SetUserDataGb(v float64) {
+	m.UserDataGb = v
+}
+
+func (m *DiskInfo_DetailedDiskInfo) SetPackagesGb(v float64) {
+	m.PackagesGb = v
+}
+
+func (m *DiskInfo_DetailedDiskInfo) SetSystemDataGb(v float64) {
+	m.SystemDataGb = v
+}
+
+func (m *DiskInfo_DetailedDiskInfo) SetFreeSpaceGb(v float64) {
+	m.FreeSpaceGb = v
+}

@@ -38,6 +38,7 @@ const (
 	ProjectService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.datasphere.v2.ProjectService/UpdateAccessBindings"
 	ProjectService_AddResource_FullMethodName          = "/yandex.cloud.datasphere.v2.ProjectService/AddResource"
 	ProjectService_RemoveResource_FullMethodName       = "/yandex.cloud.datasphere.v2.ProjectService/RemoveResource"
+	ProjectService_ResizeDisk_FullMethodName           = "/yandex.cloud.datasphere.v2.ProjectService/ResizeDisk"
 	ProjectService_GetRestrictionsMeta_FullMethodName  = "/yandex.cloud.datasphere.v2.ProjectService/GetRestrictionsMeta"
 	ProjectService_GetRestrictions_FullMethodName      = "/yandex.cloud.datasphere.v2.ProjectService/GetRestrictions"
 	ProjectService_SetRestrictions_FullMethodName      = "/yandex.cloud.datasphere.v2.ProjectService/SetRestrictions"
@@ -83,6 +84,8 @@ type ProjectServiceClient interface {
 	AddResource(ctx context.Context, in *AddResourceToProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Removes shared resource from project
 	RemoveResource(ctx context.Context, in *RemoveResourceFromProjectRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Resizes project disk
+	ResizeDisk(ctx context.Context, in *ResizeProjectDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Get meta information about available restrictions.
 	GetRestrictionsMeta(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetRestrictionsMetaResponse, error)
 	// Get current project restrictions.
@@ -259,6 +262,16 @@ func (c *projectServiceClient) RemoveResource(ctx context.Context, in *RemoveRes
 	return out, nil
 }
 
+func (c *projectServiceClient) ResizeDisk(ctx context.Context, in *ResizeProjectDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ProjectService_ResizeDisk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *projectServiceClient) GetRestrictionsMeta(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetRestrictionsMetaResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetRestrictionsMetaResponse)
@@ -329,6 +342,8 @@ type ProjectServiceServer interface {
 	AddResource(context.Context, *AddResourceToProjectRequest) (*operation.Operation, error)
 	// Removes shared resource from project
 	RemoveResource(context.Context, *RemoveResourceFromProjectRequest) (*operation.Operation, error)
+	// Resizes project disk
+	ResizeDisk(context.Context, *ResizeProjectDiskRequest) (*operation.Operation, error)
 	// Get meta information about available restrictions.
 	GetRestrictionsMeta(context.Context, *emptypb.Empty) (*GetRestrictionsMetaResponse, error)
 	// Get current project restrictions.
@@ -391,6 +406,9 @@ func (UnimplementedProjectServiceServer) AddResource(context.Context, *AddResour
 }
 func (UnimplementedProjectServiceServer) RemoveResource(context.Context, *RemoveResourceFromProjectRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveResource not implemented")
+}
+func (UnimplementedProjectServiceServer) ResizeDisk(context.Context, *ResizeProjectDiskRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResizeDisk not implemented")
 }
 func (UnimplementedProjectServiceServer) GetRestrictionsMeta(context.Context, *emptypb.Empty) (*GetRestrictionsMetaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRestrictionsMeta not implemented")
@@ -709,6 +727,24 @@ func _ProjectService_RemoveResource_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectService_ResizeDisk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeProjectDiskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).ResizeDisk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_ResizeDisk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).ResizeDisk(ctx, req.(*ResizeProjectDiskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProjectService_GetRestrictionsMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
@@ -833,6 +869,10 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveResource",
 			Handler:    _ProjectService_RemoveResource_Handler,
+		},
+		{
+			MethodName: "ResizeDisk",
+			Handler:    _ProjectService_ResizeDisk_Handler,
 		},
 		{
 			MethodName: "GetRestrictionsMeta",

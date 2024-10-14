@@ -62,6 +62,10 @@ func (m *CreateVirtualHostRequest) SetRouteOptions(v *RouteOptions) {
 	m.RouteOptions = v
 }
 
+func (m *CreateVirtualHostRequest) SetRateLimit(v *RateLimit) {
+	m.RateLimit = v
+}
+
 func (m *CreateVirtualHostMetadata) SetHttpRouterId(v string) {
 	m.HttpRouterId = v
 }
@@ -100,6 +104,10 @@ func (m *UpdateVirtualHostRequest) SetModifyResponseHeaders(v []*HeaderModificat
 
 func (m *UpdateVirtualHostRequest) SetRouteOptions(v *RouteOptions) {
 	m.RouteOptions = v
+}
+
+func (m *UpdateVirtualHostRequest) SetRateLimit(v *RateLimit) {
+	m.RateLimit = v
 }
 
 func (m *UpdateVirtualHostMetadata) SetHttpRouterId(v string) {

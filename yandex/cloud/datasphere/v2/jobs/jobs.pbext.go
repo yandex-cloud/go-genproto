@@ -189,6 +189,34 @@ func (m *PythonEnv) SetLocalModules(v []*File) {
 	m.LocalModules = v
 }
 
+func (m *PythonEnv) SetPythonVersion(v string) {
+	m.PythonVersion = v
+}
+
+func (m *PythonEnv) SetRequirements(v []string) {
+	m.Requirements = v
+}
+
+func (m *PythonEnv) SetPipOptions(v *PipOptions) {
+	m.PipOptions = v
+}
+
+func (m *PipOptions) SetIndexUrl(v string) {
+	m.IndexUrl = v
+}
+
+func (m *PipOptions) SetExtraIndexUrls(v []string) {
+	m.ExtraIndexUrls = v
+}
+
+func (m *PipOptions) SetTrustedHosts(v []string) {
+	m.TrustedHosts = v
+}
+
+func (m *PipOptions) SetNoDeps(v bool) {
+	m.NoDeps = v
+}
+
 func (m *OutputDatasetDesc) SetName(v string) {
 	m.Name = v
 }

@@ -131,6 +131,10 @@ func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
 }
 
+func (m *ConfigSpec) SetKraft(v *ConfigSpec_KRaft) {
+	m.Kraft = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {
@@ -154,6 +158,10 @@ func (m *ConfigSpec_Kafka) SetKafkaConfig_3(v *KafkaConfig3) {
 }
 
 func (m *ConfigSpec_Zookeeper) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *ConfigSpec_KRaft) SetResources(v *Resources) {
 	m.Resources = v
 }
 

@@ -30,6 +30,10 @@ func (m *VirtualHost) SetRouteOptions(v *RouteOptions) {
 	m.RouteOptions = v
 }
 
+func (m *VirtualHost) SetRateLimit(v *RateLimit) {
+	m.RateLimit = v
+}
+
 func (m *RouteOptions) SetModifyRequestHeaders(v []*HeaderModification) {
 	m.ModifyRequestHeaders = v
 }
@@ -324,6 +328,10 @@ func (m *HttpRouteAction) SetUpgradeTypes(v []string) {
 	m.UpgradeTypes = v
 }
 
+func (m *HttpRouteAction) SetRateLimit(v *RateLimit) {
+	m.RateLimit = v
+}
+
 type GrpcRouteAction_HostRewriteSpecifier = isGrpcRouteAction_HostRewriteSpecifier
 
 func (m *GrpcRouteAction) SetHostRewriteSpecifier(v GrpcRouteAction_HostRewriteSpecifier) {
@@ -352,4 +360,8 @@ func (m *GrpcRouteAction) SetAutoHostRewrite(v bool) {
 	m.HostRewriteSpecifier = &GrpcRouteAction_AutoHostRewrite{
 		AutoHostRewrite: v,
 	}
+}
+
+func (m *GrpcRouteAction) SetRateLimit(v *RateLimit) {
+	m.RateLimit = v
 }
