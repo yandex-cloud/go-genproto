@@ -26,8 +26,12 @@ const (
 // SearchIndexFileServiceClient is the client API for SearchIndexFileService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// ThreadService provides operations for managing files within search indexes.
 type SearchIndexFileServiceClient interface {
+	// Retrieves details of a specific file that has been indexed within a search index.
 	Get(ctx context.Context, in *GetSearchIndexFileRequest, opts ...grpc.CallOption) (*SearchIndexFile, error)
+	// List files that are indexed within a specific search index.
 	List(ctx context.Context, in *ListSearchIndexFilesRequest, opts ...grpc.CallOption) (*ListSearchIndexFilesResponse, error)
 }
 
@@ -62,8 +66,12 @@ func (c *searchIndexFileServiceClient) List(ctx context.Context, in *ListSearchI
 // SearchIndexFileServiceServer is the server API for SearchIndexFileService service.
 // All implementations should embed UnimplementedSearchIndexFileServiceServer
 // for forward compatibility.
+//
+// ThreadService provides operations for managing files within search indexes.
 type SearchIndexFileServiceServer interface {
+	// Retrieves details of a specific file that has been indexed within a search index.
 	Get(context.Context, *GetSearchIndexFileRequest) (*SearchIndexFile, error)
+	// List files that are indexed within a specific search index.
 	List(context.Context, *ListSearchIndexFilesRequest) (*ListSearchIndexFilesResponse, error)
 }
 

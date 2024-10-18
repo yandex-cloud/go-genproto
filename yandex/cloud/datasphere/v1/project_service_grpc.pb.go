@@ -21,18 +21,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProjectService_Create_FullMethodName              = "/yandex.cloud.datasphere.v1.ProjectService/Create"
-	ProjectService_Update_FullMethodName              = "/yandex.cloud.datasphere.v1.ProjectService/Update"
-	ProjectService_Delete_FullMethodName              = "/yandex.cloud.datasphere.v1.ProjectService/Delete"
-	ProjectService_Open_FullMethodName                = "/yandex.cloud.datasphere.v1.ProjectService/Open"
-	ProjectService_Get_FullMethodName                 = "/yandex.cloud.datasphere.v1.ProjectService/Get"
-	ProjectService_List_FullMethodName                = "/yandex.cloud.datasphere.v1.ProjectService/List"
-	ProjectService_GetUnitBalance_FullMethodName      = "/yandex.cloud.datasphere.v1.ProjectService/GetUnitBalance"
-	ProjectService_SetUnitBalance_FullMethodName      = "/yandex.cloud.datasphere.v1.ProjectService/SetUnitBalance"
-	ProjectService_Execute_FullMethodName             = "/yandex.cloud.datasphere.v1.ProjectService/Execute"
-	ProjectService_GetCellOutputs_FullMethodName      = "/yandex.cloud.datasphere.v1.ProjectService/GetCellOutputs"
-	ProjectService_GetStateVariables_FullMethodName   = "/yandex.cloud.datasphere.v1.ProjectService/GetStateVariables"
-	ProjectService_GetNotebookMetadata_FullMethodName = "/yandex.cloud.datasphere.v1.ProjectService/GetNotebookMetadata"
+	ProjectService_Create_FullMethodName         = "/yandex.cloud.datasphere.v1.ProjectService/Create"
+	ProjectService_Update_FullMethodName         = "/yandex.cloud.datasphere.v1.ProjectService/Update"
+	ProjectService_Delete_FullMethodName         = "/yandex.cloud.datasphere.v1.ProjectService/Delete"
+	ProjectService_Open_FullMethodName           = "/yandex.cloud.datasphere.v1.ProjectService/Open"
+	ProjectService_Get_FullMethodName            = "/yandex.cloud.datasphere.v1.ProjectService/Get"
+	ProjectService_List_FullMethodName           = "/yandex.cloud.datasphere.v1.ProjectService/List"
+	ProjectService_GetUnitBalance_FullMethodName = "/yandex.cloud.datasphere.v1.ProjectService/GetUnitBalance"
+	ProjectService_SetUnitBalance_FullMethodName = "/yandex.cloud.datasphere.v1.ProjectService/SetUnitBalance"
+	ProjectService_Execute_FullMethodName        = "/yandex.cloud.datasphere.v1.ProjectService/Execute"
 )
 
 // ProjectServiceClient is the client API for ProjectService service.
@@ -59,12 +56,6 @@ type ProjectServiceClient interface {
 	SetUnitBalance(ctx context.Context, in *SetUnitBalanceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Executes code in the specified cell or notebook.
 	Execute(ctx context.Context, in *ProjectExecutionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns outputs of the specified cell.
-	GetCellOutputs(ctx context.Context, in *CellOutputsRequest, opts ...grpc.CallOption) (*CellOutputsResponse, error)
-	// Returns state variables of the specified notebook.
-	GetStateVariables(ctx context.Context, in *GetStateVariablesRequest, opts ...grpc.CallOption) (*GetStateVariablesResponse, error)
-	// Returns metadata of the specified notebook.
-	GetNotebookMetadata(ctx context.Context, in *GetNotebookMetadataRequest, opts ...grpc.CallOption) (*GetNotebookMetadataResponse, error)
 }
 
 type projectServiceClient struct {
@@ -165,36 +156,6 @@ func (c *projectServiceClient) Execute(ctx context.Context, in *ProjectExecution
 	return out, nil
 }
 
-func (c *projectServiceClient) GetCellOutputs(ctx context.Context, in *CellOutputsRequest, opts ...grpc.CallOption) (*CellOutputsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CellOutputsResponse)
-	err := c.cc.Invoke(ctx, ProjectService_GetCellOutputs_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectServiceClient) GetStateVariables(ctx context.Context, in *GetStateVariablesRequest, opts ...grpc.CallOption) (*GetStateVariablesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStateVariablesResponse)
-	err := c.cc.Invoke(ctx, ProjectService_GetStateVariables_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectServiceClient) GetNotebookMetadata(ctx context.Context, in *GetNotebookMetadataRequest, opts ...grpc.CallOption) (*GetNotebookMetadataResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNotebookMetadataResponse)
-	err := c.cc.Invoke(ctx, ProjectService_GetNotebookMetadata_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations should embed UnimplementedProjectServiceServer
 // for forward compatibility.
@@ -219,12 +180,6 @@ type ProjectServiceServer interface {
 	SetUnitBalance(context.Context, *SetUnitBalanceRequest) (*emptypb.Empty, error)
 	// Executes code in the specified cell or notebook.
 	Execute(context.Context, *ProjectExecutionRequest) (*operation.Operation, error)
-	// Returns outputs of the specified cell.
-	GetCellOutputs(context.Context, *CellOutputsRequest) (*CellOutputsResponse, error)
-	// Returns state variables of the specified notebook.
-	GetStateVariables(context.Context, *GetStateVariablesRequest) (*GetStateVariablesResponse, error)
-	// Returns metadata of the specified notebook.
-	GetNotebookMetadata(context.Context, *GetNotebookMetadataRequest) (*GetNotebookMetadataResponse, error)
 }
 
 // UnimplementedProjectServiceServer should be embedded to have
@@ -260,15 +215,6 @@ func (UnimplementedProjectServiceServer) SetUnitBalance(context.Context, *SetUni
 }
 func (UnimplementedProjectServiceServer) Execute(context.Context, *ProjectExecutionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
-}
-func (UnimplementedProjectServiceServer) GetCellOutputs(context.Context, *CellOutputsRequest) (*CellOutputsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCellOutputs not implemented")
-}
-func (UnimplementedProjectServiceServer) GetStateVariables(context.Context, *GetStateVariablesRequest) (*GetStateVariablesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetStateVariables not implemented")
-}
-func (UnimplementedProjectServiceServer) GetNotebookMetadata(context.Context, *GetNotebookMetadataRequest) (*GetNotebookMetadataResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetNotebookMetadata not implemented")
 }
 func (UnimplementedProjectServiceServer) testEmbeddedByValue() {}
 
@@ -452,60 +398,6 @@ func _ProjectService_Execute_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProjectService_GetCellOutputs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CellOutputsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectServiceServer).GetCellOutputs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectService_GetCellOutputs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectServiceServer).GetCellOutputs(ctx, req.(*CellOutputsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjectService_GetStateVariables_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStateVariablesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectServiceServer).GetStateVariables(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectService_GetStateVariables_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectServiceServer).GetStateVariables(ctx, req.(*GetStateVariablesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjectService_GetNotebookMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNotebookMetadataRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectServiceServer).GetNotebookMetadata(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectService_GetNotebookMetadata_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectServiceServer).GetNotebookMetadata(ctx, req.(*GetNotebookMetadataRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ProjectService_ServiceDesc is the grpc.ServiceDesc for ProjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -548,18 +440,6 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Execute",
 			Handler:    _ProjectService_Execute_Handler,
-		},
-		{
-			MethodName: "GetCellOutputs",
-			Handler:    _ProjectService_GetCellOutputs_Handler,
-		},
-		{
-			MethodName: "GetStateVariables",
-			Handler:    _ProjectService_GetStateVariables_Handler,
-		},
-		{
-			MethodName: "GetNotebookMetadata",
-			Handler:    _ProjectService_GetNotebookMetadata_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

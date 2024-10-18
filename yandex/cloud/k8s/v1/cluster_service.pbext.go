@@ -131,6 +131,10 @@ func (m *MasterUpdateSpec) SetLocations(v []*LocationSpec) {
 	m.Locations = v
 }
 
+func (m *MasterUpdateSpec) SetExternalV6AddressSpec(v *ExternalAddressSpec) {
+	m.ExternalV6AddressSpec = v
+}
+
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

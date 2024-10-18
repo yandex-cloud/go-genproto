@@ -22,12 +22,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request message for retrieving a file from a search index.
 type GetSearchIndexFileRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FileId        string `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	// ID of the file to retrieve.
+	FileId string `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	// ID of the search index that contains the file.
 	SearchIndexId string `protobuf:"bytes,2,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
 }
 
@@ -77,14 +80,18 @@ func (x *GetSearchIndexFileRequest) GetSearchIndexId() string {
 	return ""
 }
 
+// Request message for listing files in a specific search index.
 type ListSearchIndexFilesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the search index whose files will be listed.
 	SearchIndexId string `protobuf:"bytes,1,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
-	PageSize      int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Maximum number of files to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
 func (x *ListSearchIndexFilesRequest) Reset() {
@@ -140,13 +147,16 @@ func (x *ListSearchIndexFilesRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for the list operation.
 type ListSearchIndexFilesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Files         []*SearchIndexFile `protobuf:"bytes,1,rep,name=files,proto3" json:"files,omitempty"`
-	NextPageToken string             `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of files in the specified search index.
+	Files []*SearchIndexFile `protobuf:"bytes,1,rep,name=files,proto3" json:"files,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListSearchIndexFilesResponse) Reset() {

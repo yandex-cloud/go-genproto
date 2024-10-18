@@ -24,17 +24,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request message for creating a new file.
 type CreateFileRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId         string                   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name             string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	MimeType         string                   `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	Content          []byte                   `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the file.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the file.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// MIME type of the file, indicating the file's format (e.g., "application/pdf").
+	// If not specified, will be deduced automatically based on the file content.
+	MimeType string `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	// Binary content of the file.
+	Content []byte `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	// Set of key-value pairs to label the file.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Expiration configuration for the file.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,7,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
 }
 
@@ -119,11 +127,13 @@ func (x *CreateFileRequest) GetExpirationConfig() *common.ExpirationConfig {
 	return nil
 }
 
+// Request message for retrieving a file by ID.
 type GetFileRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the file to retrieve.
 	FileId string `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
 }
 
@@ -166,11 +176,13 @@ func (x *GetFileRequest) GetFileId() string {
 	return ""
 }
 
+// Request message for retrieving the URL of a specific file.
 type GetFileUrlRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the file which the URL is requested.
 	FileId string `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
 }
 
@@ -213,11 +225,13 @@ func (x *GetFileUrlRequest) GetFileId() string {
 	return ""
 }
 
+// Response message containing the URL to access the requested file.
 type GetFileUrlResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// URL that can be used to access or download the file.
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 }
 
@@ -260,17 +274,24 @@ func (x *GetFileUrlResponse) GetUrl() string {
 	return ""
 }
 
+// Request message for updating an existing file.
 type UpdateFileRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FileId           string                   `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
-	UpdateMask       *fieldmaskpb.FieldMask   `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name             string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the file to update.
+	FileId string `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	// Field mask specifying which fields to update.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the file.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description for the file.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New expiration configuration for the file.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,5,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// New set of labels for the file.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *UpdateFileRequest) Reset() {
@@ -347,11 +368,13 @@ func (x *UpdateFileRequest) GetLabels() map[string]string {
 	return nil
 }
 
+// Request message for deleting a file by ID.
 type DeleteFileRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the file to delete.
 	FileId string `protobuf:"bytes,1,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
 }
 
@@ -394,6 +417,7 @@ func (x *DeleteFileRequest) GetFileId() string {
 	return ""
 }
 
+// Response message for the delete operation.
 type DeleteFileResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -432,13 +456,17 @@ func (*DeleteFileResponse) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_files_v1_file_service_proto_rawDescGZIP(), []int{6}
 }
 
+// Request message for listing files in a specific folder.
 type ListFilesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID from which to list files.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Maximum number of files to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -495,13 +523,16 @@ func (x *ListFilesRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for the list operation.
 type ListFilesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Files         []*File `protobuf:"bytes,1,rep,name=files,proto3" json:"files,omitempty"`
-	NextPageToken string  `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of files in the specified folder.
+	Files []*File `protobuf:"bytes,1,rep,name=files,proto3" json:"files,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListFilesResponse) Reset() {

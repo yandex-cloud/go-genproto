@@ -47,10 +47,6 @@ func (m *Project_Settings) SetDataProcClusterId(v string) {
 	m.DataProcClusterId = v
 }
 
-func (m *Project_Settings) SetCommitMode(v Project_Settings_CommitMode) {
-	m.CommitMode = v
-}
-
 func (m *Project_Settings) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }

@@ -29,11 +29,18 @@ const (
 // ThreadServiceClient is the client API for ThreadService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// ThreadService provides operations for managing threads.
 type ThreadServiceClient interface {
+	// Create a new thread.
 	Create(ctx context.Context, in *CreateThreadRequest, opts ...grpc.CallOption) (*Thread, error)
+	// Retrieve details of a specific thread by its ID.
 	Get(ctx context.Context, in *GetThreadRequest, opts ...grpc.CallOption) (*Thread, error)
+	// Update an existing thread.
 	Update(ctx context.Context, in *UpdateThreadRequest, opts ...grpc.CallOption) (*Thread, error)
+	// Delete a thread by its ID.
 	Delete(ctx context.Context, in *DeleteThreadRequest, opts ...grpc.CallOption) (*DeleteThreadResponse, error)
+	// List threads in a specific folder.
 	List(ctx context.Context, in *ListThreadsRequest, opts ...grpc.CallOption) (*ListThreadsResponse, error)
 }
 
@@ -98,11 +105,18 @@ func (c *threadServiceClient) List(ctx context.Context, in *ListThreadsRequest, 
 // ThreadServiceServer is the server API for ThreadService service.
 // All implementations should embed UnimplementedThreadServiceServer
 // for forward compatibility.
+//
+// ThreadService provides operations for managing threads.
 type ThreadServiceServer interface {
+	// Create a new thread.
 	Create(context.Context, *CreateThreadRequest) (*Thread, error)
+	// Retrieve details of a specific thread by its ID.
 	Get(context.Context, *GetThreadRequest) (*Thread, error)
+	// Update an existing thread.
 	Update(context.Context, *UpdateThreadRequest) (*Thread, error)
+	// Delete a thread by its ID.
 	Delete(context.Context, *DeleteThreadRequest) (*DeleteThreadResponse, error)
+	// List threads in a specific folder.
 	List(context.Context, *ListThreadsRequest) (*ListThreadsResponse, error)
 }
 

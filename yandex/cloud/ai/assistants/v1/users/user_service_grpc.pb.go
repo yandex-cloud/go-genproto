@@ -29,11 +29,18 @@ const (
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// UserService provides operations for managing users.
 type UserServiceClient interface {
+	// Create a new user.
 	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*User, error)
+	// Retrieve details of a specific user by its ID.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
+	// Update an existing user.
 	Update(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*User, error)
+	// Delete a user by its ID.
 	Delete(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
+	// List users in a specific folder.
 	List(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 }
 
@@ -98,11 +105,18 @@ func (c *userServiceClient) List(ctx context.Context, in *ListUsersRequest, opts
 // UserServiceServer is the server API for UserService service.
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility.
+//
+// UserService provides operations for managing users.
 type UserServiceServer interface {
+	// Create a new user.
 	Create(context.Context, *CreateUserRequest) (*User, error)
+	// Retrieve details of a specific user by its ID.
 	Get(context.Context, *GetUserRequest) (*User, error)
+	// Update an existing user.
 	Update(context.Context, *UpdateUserRequest) (*User, error)
+	// Delete a user by its ID.
 	Delete(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	// List users in a specific folder.
 	List(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 }
 

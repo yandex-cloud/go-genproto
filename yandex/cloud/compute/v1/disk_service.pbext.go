@@ -101,6 +101,10 @@ func (m *CreateDiskRequest) SetHardwareGeneration(v *HardwareGeneration) {
 	m.HardwareGeneration = v
 }
 
+func (m *CreateDiskRequest) SetKmsKeyId(v string) {
+	m.KmsKeyId = v
+}
+
 func (m *CreateDiskMetadata) SetDiskId(v string) {
 	m.DiskId = v
 }

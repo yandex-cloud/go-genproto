@@ -21,14 +21,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Represents a file that has been indexed within a search index.
 type SearchIndexFile struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	SearchIndexId    string                 `protobuf:"bytes,2,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
-	CreatedBy        string                 `protobuf:"bytes,3,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Unique identifier of the file that was used for indexing.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the search index that contains this file.
+	SearchIndexId string `protobuf:"bytes,2,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
+	// Identifier of the subject who created the file in the search index.
+	CreatedBy string `protobuf:"bytes,3,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Timestamp representing when the file was created.
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	ChunkingStrategy *ChunkingStrategy      `protobuf:"bytes,5,opt,name=chunking_strategy,json=chunkingStrategy,proto3" json:"chunking_strategy,omitempty"`
 }

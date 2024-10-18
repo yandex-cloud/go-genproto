@@ -20,12 +20,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Defines a chunking strategy where chunks are created with a fixed maximum chunk size and an overlap between consecutive chunks.
 type StaticChunkingStrategy struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The maximum number of tokens allowed in a single chunk.
+	// Constraints: must be within the range [100, 2048].
+	// Default value: 800
 	MaxChunkSizeTokens int64 `protobuf:"varint,1,opt,name=max_chunk_size_tokens,json=maxChunkSizeTokens,proto3" json:"max_chunk_size_tokens,omitempty"`
+	// The number of tokens that should overlap between consecutive chunks.
+	// This allows for some context from the previous chunk to be included in the next chunk.
+	// Constraints: must be less than or equal to half of `max_chunk_size_tokens`.
+	// Default value: 400
 	ChunkOverlapTokens int64 `protobuf:"varint,2,opt,name=chunk_overlap_tokens,json=chunkOverlapTokens,proto3" json:"chunk_overlap_tokens,omitempty"`
 }
 
@@ -75,6 +83,8 @@ func (x *StaticChunkingStrategy) GetChunkOverlapTokens() int64 {
 	return 0
 }
 
+// Defines a general strategy for chunking text into smaller segments.
+// Currently, only StaticChunkingStrategy is supported.
 type ChunkingStrategy struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

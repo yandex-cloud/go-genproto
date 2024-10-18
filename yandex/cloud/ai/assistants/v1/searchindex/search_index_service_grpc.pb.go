@@ -30,11 +30,18 @@ const (
 // SearchIndexServiceClient is the client API for SearchIndexService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// ThreadService provides operations for managing search indexes.
 type SearchIndexServiceClient interface {
+	// Create a new search index in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Create(ctx context.Context, in *CreateSearchIndexRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieve details of a specific search index by its ID.
 	Get(ctx context.Context, in *GetSearchIndexRequest, opts ...grpc.CallOption) (*SearchIndex, error)
+	// Update an existing search index.
 	Update(ctx context.Context, in *UpdateSearchIndexRequest, opts ...grpc.CallOption) (*SearchIndex, error)
+	// Delete a search index by its ID.
 	Delete(ctx context.Context, in *DeleteSearchIndexRequest, opts ...grpc.CallOption) (*DeleteSearchIndexResponse, error)
+	// List search indexes in a specific folder.
 	List(ctx context.Context, in *ListSearchIndicesRequest, opts ...grpc.CallOption) (*ListSearchIndicesResponse, error)
 }
 
@@ -99,11 +106,18 @@ func (c *searchIndexServiceClient) List(ctx context.Context, in *ListSearchIndic
 // SearchIndexServiceServer is the server API for SearchIndexService service.
 // All implementations should embed UnimplementedSearchIndexServiceServer
 // for forward compatibility.
+//
+// ThreadService provides operations for managing search indexes.
 type SearchIndexServiceServer interface {
+	// Create a new search index in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Create(context.Context, *CreateSearchIndexRequest) (*operation.Operation, error)
+	// Retrieve details of a specific search index by its ID.
 	Get(context.Context, *GetSearchIndexRequest) (*SearchIndex, error)
+	// Update an existing search index.
 	Update(context.Context, *UpdateSearchIndexRequest) (*SearchIndex, error)
+	// Delete a search index by its ID.
 	Delete(context.Context, *DeleteSearchIndexRequest) (*DeleteSearchIndexResponse, error)
+	// List search indexes in a specific folder.
 	List(context.Context, *ListSearchIndicesRequest) (*ListSearchIndicesResponse, error)
 }
 

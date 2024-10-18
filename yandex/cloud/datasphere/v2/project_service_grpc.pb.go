@@ -31,8 +31,6 @@ const (
 	ProjectService_GetUnitBalance_FullMethodName       = "/yandex.cloud.datasphere.v2.ProjectService/GetUnitBalance"
 	ProjectService_SetUnitBalance_FullMethodName       = "/yandex.cloud.datasphere.v2.ProjectService/SetUnitBalance"
 	ProjectService_Execute_FullMethodName              = "/yandex.cloud.datasphere.v2.ProjectService/Execute"
-	ProjectService_GetCellOutputs_FullMethodName       = "/yandex.cloud.datasphere.v2.ProjectService/GetCellOutputs"
-	ProjectService_GetStateVariables_FullMethodName    = "/yandex.cloud.datasphere.v2.ProjectService/GetStateVariables"
 	ProjectService_ListAccessBindings_FullMethodName   = "/yandex.cloud.datasphere.v2.ProjectService/ListAccessBindings"
 	ProjectService_SetAccessBindings_FullMethodName    = "/yandex.cloud.datasphere.v2.ProjectService/SetAccessBindings"
 	ProjectService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.datasphere.v2.ProjectService/UpdateAccessBindings"
@@ -68,12 +66,6 @@ type ProjectServiceClient interface {
 	SetUnitBalance(ctx context.Context, in *SetUnitBalanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Executes code of the specified notebook using configuration defined in the project settings. If the default project configuration is not specified, `c1.4` is used.
 	Execute(ctx context.Context, in *ProjectExecutionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns outputs of the specified cell.
-	// Deprecated
-	GetCellOutputs(ctx context.Context, in *CellOutputsRequest, opts ...grpc.CallOption) (*CellOutputsResponse, error)
-	// Returns state variables of the specified notebook.
-	// Deprecated
-	GetStateVariables(ctx context.Context, in *GetStateVariablesRequest, opts ...grpc.CallOption) (*GetStateVariablesResponse, error)
 	// Lists access bindings for the project.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the project.
@@ -186,26 +178,6 @@ func (c *projectServiceClient) Execute(ctx context.Context, in *ProjectExecution
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ProjectService_Execute_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectServiceClient) GetCellOutputs(ctx context.Context, in *CellOutputsRequest, opts ...grpc.CallOption) (*CellOutputsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CellOutputsResponse)
-	err := c.cc.Invoke(ctx, ProjectService_GetCellOutputs_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectServiceClient) GetStateVariables(ctx context.Context, in *GetStateVariablesRequest, opts ...grpc.CallOption) (*GetStateVariablesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStateVariablesResponse)
-	err := c.cc.Invoke(ctx, ProjectService_GetStateVariables_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -326,12 +298,6 @@ type ProjectServiceServer interface {
 	SetUnitBalance(context.Context, *SetUnitBalanceRequest) (*operation.Operation, error)
 	// Executes code of the specified notebook using configuration defined in the project settings. If the default project configuration is not specified, `c1.4` is used.
 	Execute(context.Context, *ProjectExecutionRequest) (*operation.Operation, error)
-	// Returns outputs of the specified cell.
-	// Deprecated
-	GetCellOutputs(context.Context, *CellOutputsRequest) (*CellOutputsResponse, error)
-	// Returns state variables of the specified notebook.
-	// Deprecated
-	GetStateVariables(context.Context, *GetStateVariablesRequest) (*GetStateVariablesResponse, error)
 	// Lists access bindings for the project.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the project.
@@ -385,12 +351,6 @@ func (UnimplementedProjectServiceServer) SetUnitBalance(context.Context, *SetUni
 }
 func (UnimplementedProjectServiceServer) Execute(context.Context, *ProjectExecutionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
-}
-func (UnimplementedProjectServiceServer) GetCellOutputs(context.Context, *CellOutputsRequest) (*CellOutputsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCellOutputs not implemented")
-}
-func (UnimplementedProjectServiceServer) GetStateVariables(context.Context, *GetStateVariablesRequest) (*GetStateVariablesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetStateVariables not implemented")
 }
 func (UnimplementedProjectServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -601,42 +561,6 @@ func _ProjectService_Execute_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProjectService_GetCellOutputs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CellOutputsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectServiceServer).GetCellOutputs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectService_GetCellOutputs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectServiceServer).GetCellOutputs(ctx, req.(*CellOutputsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjectService_GetStateVariables_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStateVariablesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectServiceServer).GetStateVariables(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectService_GetStateVariables_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectServiceServer).GetStateVariables(ctx, req.(*GetStateVariablesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ProjectService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(access.ListAccessBindingsRequest)
 	if err := dec(in); err != nil {
@@ -841,14 +765,6 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Execute",
 			Handler:    _ProjectService_Execute_Handler,
-		},
-		{
-			MethodName: "GetCellOutputs",
-			Handler:    _ProjectService_GetCellOutputs_Handler,
-		},
-		{
-			MethodName: "GetStateVariables",
-			Handler:    _ProjectService_GetStateVariables_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

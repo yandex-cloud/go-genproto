@@ -24,14 +24,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Enum representing the status of a run.
 type RunState_RunStatus int32
 
 const (
+	// Default unspecified status.
 	RunState_RUN_STATUS_UNSPECIFIED RunState_RunStatus = 0
-	RunState_PENDING                RunState_RunStatus = 1
-	RunState_IN_PROGRESS            RunState_RunStatus = 2
-	RunState_FAILED                 RunState_RunStatus = 3
-	RunState_COMPLETED              RunState_RunStatus = 4
+	// Run has been created but has not started yet.
+	RunState_PENDING RunState_RunStatus = 1
+	// Run is currently in progress.
+	RunState_IN_PROGRESS RunState_RunStatus = 2
+	// Run has failed due to an error.
+	RunState_FAILED RunState_RunStatus = 3
+	// Run has completed successfully.
+	RunState_COMPLETED RunState_RunStatus = 4
 )
 
 // Enum value maps for RunState_RunStatus.
@@ -79,21 +85,34 @@ func (RunState_RunStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_assistants_v1_runs_run_proto_rawDescGZIP(), []int{1, 0}
 }
 
+// Represents a run of an assistant over a specific thread of messages.
 type Run struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                            string                      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	AssistantId                   string                      `protobuf:"bytes,2,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
-	ThreadId                      string                      `protobuf:"bytes,3,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
-	CreatedBy                     string                      `protobuf:"bytes,4,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt                     *timestamppb.Timestamp      `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Labels                        map[string]string           `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	State                         *RunState                   `protobuf:"bytes,7,opt,name=state,proto3" json:"state,omitempty"`
-	Usage                         *ContentUsage               `protobuf:"bytes,8,opt,name=usage,proto3" json:"usage,omitempty"`
+	// Unique identifier of the run.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Identifier for the assistant that is being run.
+	AssistantId string `protobuf:"bytes,2,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
+	// Identifier for the thread of messages that this run is associated with.
+	ThreadId string `protobuf:"bytes,3,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	// Identifier of the subject who created this run.
+	CreatedBy string `protobuf:"bytes,4,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Timestamp representing when the run was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Set of key-value pairs that can be used to organize and categorize the run.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Current state of the run, including its status and any associated data.
+	State *RunState `protobuf:"bytes,7,opt,name=state,proto3" json:"state,omitempty"`
+	// Information about the content usage during the run, such as the number of [tokens](/docs/foundation-models/concepts/yandexgpt/tokens) used by the completion model.
+	Usage *ContentUsage `protobuf:"bytes,8,opt,name=usage,proto3" json:"usage,omitempty"`
+	// Configuration options for truncating the prompt when the token count exceeds a specified limit.
+	// If specified, these options will override the assistant's prompt truncation settings for this run.
 	CustomPromptTruncationOptions *v1.PromptTruncationOptions `protobuf:"bytes,9,opt,name=custom_prompt_truncation_options,json=customPromptTruncationOptions,proto3" json:"custom_prompt_truncation_options,omitempty"`
-	CustomCompletionOptions       *v1.CompletionOptions       `protobuf:"bytes,10,opt,name=custom_completion_options,json=customCompletionOptions,proto3" json:"custom_completion_options,omitempty"`
+	// Configuration options for completion generation.
+	// If specified, these options will override the assistant's completion settings for this run.
+	CustomCompletionOptions *v1.CompletionOptions `protobuf:"bytes,10,opt,name=custom_completion_options,json=customCompletionOptions,proto3" json:"custom_completion_options,omitempty"`
 }
 
 func (x *Run) Reset() {
@@ -198,12 +217,16 @@ func (x *Run) GetCustomCompletionOptions() *v1.CompletionOptions {
 	return nil
 }
 
+// Represents the current state of a run.
 type RunState struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Current status of a run.
 	Status RunState_RunStatus `protobuf:"varint,1,opt,name=status,proto3,enum=yandex.cloud.ai.assistants.v1.runs.RunState_RunStatus" json:"status,omitempty"`
+	// Oneof field to capture additional data depending on the state of a run.
+	//
 	// Types that are assignable to StateData:
 	//
 	//	*RunState_Error
@@ -276,10 +299,12 @@ type isRunState_StateData interface {
 }
 
 type RunState_Error struct {
+	// Error information if a run has failed.
 	Error *common.Error `protobuf:"bytes,2,opt,name=error,proto3,oneof"`
 }
 
 type RunState_CompletedMessage struct {
+	// Final message generated by an assistant if a run has completed successfully.
 	CompletedMessage *threads.Message `protobuf:"bytes,3,opt,name=completed_message,json=completedMessage,proto3,oneof"`
 }
 
@@ -287,14 +312,18 @@ func (*RunState_Error) isRunState_StateData() {}
 
 func (*RunState_CompletedMessage) isRunState_StateData() {}
 
+// Represents the content usage during a run, such as the number of [tokens](/docs/foundation-models/concepts/yandexgpt/tokens) used by the completion model.
 type ContentUsage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PromptTokens     int64 `protobuf:"varint,1,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
+	// The number of tokens used in the prompt.
+	PromptTokens int64 `protobuf:"varint,1,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
+	// The number of tokens used in the completion response.
 	CompletionTokens int64 `protobuf:"varint,2,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
-	TotalTokens      int64 `protobuf:"varint,3,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	// The total number of tokens used (prompt + completion).
+	TotalTokens int64 `protobuf:"varint,3,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
 }
 
 func (x *ContentUsage) Reset() {

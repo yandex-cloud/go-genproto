@@ -22,27 +22,46 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Assistant represents an AI assistant configuration with various settings and metadata.
 type Assistant struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                      string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId                string                   `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name                    string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description             string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	CreatedBy               string                   `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt               *timestamppb.Timestamp   `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedBy               string                   `protobuf:"bytes,7,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	UpdatedAt               *timestamppb.Timestamp   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	ExpirationConfig        *common.ExpirationConfig `protobuf:"bytes,9,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	ExpiresAt               *timestamppb.Timestamp   `protobuf:"bytes,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	Labels                  map[string]string        `protobuf:"bytes,11,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	ModelUri                string                   `protobuf:"bytes,12,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
-	Instruction             string                   `protobuf:"bytes,13,opt,name=instruction,proto3" json:"instruction,omitempty"`
+	// Unique identifier of the assistant.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the assistant belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the assistant.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the assistant.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Identifier of the subject who created this assistant.
+	CreatedBy string `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Timestamp representing when the assistant was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Identifier of the subject who last updated this assistant.
+	UpdatedBy string `protobuf:"bytes,7,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	// Timestamp representing the last time this assistant was updated.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Configuration for the expiration of the assistant, defining when and how the assistant will expire.
+	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,9,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
+	// Timestamp representing when the assistant will expire.
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Set of key-value pairs that can be used to organize and categorize the assistant.
+	Labels map[string]string `protobuf:"bytes,11,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for completion generation.
+	ModelUri string `protobuf:"bytes,12,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
+	// Instructions or guidelines that the assistant should follow when generating responses or performing tasks.
+	// These instructions can help guide the assistant's behavior and responses.
+	Instruction string `protobuf:"bytes,13,opt,name=instruction,proto3" json:"instruction,omitempty"`
+	// Configuration options for truncating the prompt when the token count exceeds a specified limit.
 	PromptTruncationOptions *PromptTruncationOptions `protobuf:"bytes,14,opt,name=prompt_truncation_options,json=promptTruncationOptions,proto3" json:"prompt_truncation_options,omitempty"`
-	CompletionOptions       *CompletionOptions       `protobuf:"bytes,15,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
-	Tools                   []*Tool                  `protobuf:"bytes,16,rep,name=tools,proto3" json:"tools,omitempty"`
+	// Configuration options for completion generation.
+	CompletionOptions *CompletionOptions `protobuf:"bytes,15,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
+	// List of tools that the assistant can use to perform additional tasks.
+	// One example is the SearchIndexTool, which is used for Retrieval-Augmented Generation (RAG).
+	Tools []*Tool `protobuf:"bytes,16,rep,name=tools,proto3" json:"tools,omitempty"`
 }
 
 func (x *Assistant) Reset() {

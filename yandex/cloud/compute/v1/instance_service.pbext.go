@@ -572,14 +572,6 @@ func (m *AttachedDiskSpec_DiskSpec) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *AttachedDiskSpec_DiskSpec) SetBlockSize(v int64) {
-	m.BlockSize = v
-}
-
-func (m *AttachedDiskSpec_DiskSpec) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
-	m.DiskPlacementPolicy = v
-}
-
 func (m *AttachedDiskSpec_DiskSpec) SetImageId(v string) {
 	m.Source = &AttachedDiskSpec_DiskSpec_ImageId{
 		ImageId: v,
@@ -590,6 +582,18 @@ func (m *AttachedDiskSpec_DiskSpec) SetSnapshotId(v string) {
 	m.Source = &AttachedDiskSpec_DiskSpec_SnapshotId{
 		SnapshotId: v,
 	}
+}
+
+func (m *AttachedDiskSpec_DiskSpec) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
+	m.DiskPlacementPolicy = v
+}
+
+func (m *AttachedDiskSpec_DiskSpec) SetBlockSize(v int64) {
+	m.BlockSize = v
+}
+
+func (m *AttachedDiskSpec_DiskSpec) SetKmsKeyId(v string) {
+	m.KmsKeyId = v
 }
 
 func (m *AttachedLocalDiskSpec) SetSize(v int64) {

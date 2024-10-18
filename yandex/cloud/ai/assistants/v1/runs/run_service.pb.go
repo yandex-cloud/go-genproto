@@ -26,13 +26,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Enum representing events that can occur in the stream.
 type StreamEvent_EventType int32
 
 const (
+	// Unspecified event type.
 	StreamEvent_EVENT_TYPE_UNSPECIFIED StreamEvent_EventType = 0
-	StreamEvent_PARTIAL_MESSAGE        StreamEvent_EventType = 1
-	StreamEvent_ERROR                  StreamEvent_EventType = 2
-	StreamEvent_DONE                   StreamEvent_EventType = 3
+	// Partial message is available.
+	StreamEvent_PARTIAL_MESSAGE StreamEvent_EventType = 1
+	// Run has failed due to an error.
+	StreamEvent_ERROR StreamEvent_EventType = 2
+	// The run has completed.
+	StreamEvent_DONE StreamEvent_EventType = 3
 )
 
 // Enum value maps for StreamEvent_EventType.
@@ -78,18 +83,28 @@ func (StreamEvent_EventType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_assistants_v1_runs_run_service_proto_rawDescGZIP(), []int{7, 0}
 }
 
+// Request message for creating a new run.
 type CreateRunRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AssistantId                   string                      `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
-	ThreadId                      string                      `protobuf:"bytes,2,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
-	Labels                        map[string]string           `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	AdditionalMessages            []*threads.MessageData      `protobuf:"bytes,4,rep,name=additional_messages,json=additionalMessages,proto3" json:"additional_messages,omitempty"`
+	// ID of the assistant for which the run is being created
+	AssistantId string `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
+	// ID of the thread associated with the run.
+	ThreadId string `protobuf:"bytes,2,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	// Set of key-value pairs to label the run.
+	Labels map[string]string `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Additional messages that will be written to the thread before the run starts.
+	AdditionalMessages []*threads.MessageData `protobuf:"bytes,4,rep,name=additional_messages,json=additionalMessages,proto3" json:"additional_messages,omitempty"`
+	// Configuration options for truncating the prompt when the token count exceeds a specified limit.
+	// If specified, these options will override the assistant's prompt truncation settings for this run.
 	CustomPromptTruncationOptions *v1.PromptTruncationOptions `protobuf:"bytes,5,opt,name=custom_prompt_truncation_options,json=customPromptTruncationOptions,proto3" json:"custom_prompt_truncation_options,omitempty"`
-	CustomCompletionOptions       *v1.CompletionOptions       `protobuf:"bytes,6,opt,name=custom_completion_options,json=customCompletionOptions,proto3" json:"custom_completion_options,omitempty"`
-	Stream                        bool                        `protobuf:"varint,7,opt,name=stream,proto3" json:"stream,omitempty"`
+	// Configuration options for completion generation.
+	// If specified, these options will override the assistant's completion settings for this run.
+	CustomCompletionOptions *v1.CompletionOptions `protobuf:"bytes,6,opt,name=custom_completion_options,json=customCompletionOptions,proto3" json:"custom_completion_options,omitempty"`
+	// Enables streaming of intermediate events, such as partial messages.
+	Stream bool `protobuf:"varint,7,opt,name=stream,proto3" json:"stream,omitempty"`
 }
 
 func (x *CreateRunRequest) Reset() {
@@ -173,12 +188,15 @@ func (x *CreateRunRequest) GetStream() bool {
 	return false
 }
 
+// Request message for listing to a run events.
 type ListenRunRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RunId          string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	// ID of the run to listen to.
+	RunId string `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	// Starting index for events. If provided, listening will start from this event.
 	EventsStartIdx *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=events_start_idx,json=eventsStartIdx,proto3" json:"events_start_idx,omitempty"`
 }
 
@@ -228,11 +246,13 @@ func (x *ListenRunRequest) GetEventsStartIdx() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Request message for retrieving a specific run by its ID.
 type GetRunRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the run to retrieve.
 	RunId string `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
 }
 
@@ -275,11 +295,13 @@ func (x *GetRunRequest) GetRunId() string {
 	return ""
 }
 
+// Request message for retrieving the last run associated with a specific thread.
 type GetLastRunByThreadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thread for which the last run is being fetched.
 	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
 }
 
@@ -322,13 +344,17 @@ func (x *GetLastRunByThreadRequest) GetThreadId() string {
 	return ""
 }
 
+// Request message for listing runs.
 type ListRunsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID from which to list runs.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Maximum number of threads to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -385,12 +411,15 @@ func (x *ListRunsRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for the list operation.
 type ListRunsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Runs          []*Run `protobuf:"bytes,1,rep,name=runs,proto3" json:"runs,omitempty"`
+	// List of runs in the specified folder.
+	Runs []*Run `protobuf:"bytes,1,rep,name=runs,proto3" json:"runs,omitempty"`
+	// Token to retrieve the next page of results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
@@ -440,12 +469,15 @@ func (x *ListRunsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Represents the cursor position in a stream of events.
 type StreamCursor struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CurrentEventIdx       int64 `protobuf:"varint,1,opt,name=current_event_idx,json=currentEventIdx,proto3" json:"current_event_idx,omitempty"`
+	// Index of the current event in the stream.
+	CurrentEventIdx int64 `protobuf:"varint,1,opt,name=current_event_idx,json=currentEventIdx,proto3" json:"current_event_idx,omitempty"`
+	// The number of user events received so far.
 	NumUserEventsReceived int64 `protobuf:"varint,2,opt,name=num_user_events_received,json=numUserEventsReceived,proto3" json:"num_user_events_received,omitempty"`
 }
 
@@ -495,13 +527,18 @@ func (x *StreamCursor) GetNumUserEventsReceived() int64 {
 	return 0
 }
 
+// Represents an event in the stream of a run.
 type StreamEvent struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	EventType    StreamEvent_EventType `protobuf:"varint,1,opt,name=event_type,json=eventType,proto3,enum=yandex.cloud.ai.assistants.v1.runs.StreamEvent_EventType" json:"event_type,omitempty"`
-	StreamCursor *StreamCursor         `protobuf:"bytes,2,opt,name=stream_cursor,json=streamCursor,proto3" json:"stream_cursor,omitempty"`
+	// The type of event.
+	EventType StreamEvent_EventType `protobuf:"varint,1,opt,name=event_type,json=eventType,proto3,enum=yandex.cloud.ai.assistants.v1.runs.StreamEvent_EventType" json:"event_type,omitempty"`
+	// The current position in the stream.
+	StreamCursor *StreamCursor `protobuf:"bytes,2,opt,name=stream_cursor,json=streamCursor,proto3" json:"stream_cursor,omitempty"`
+	// Event data, which can be one of several types.
+	//
 	// Types that are assignable to EventData:
 	//
 	//	*StreamEvent_Error
@@ -589,14 +626,17 @@ type isStreamEvent_EventData interface {
 }
 
 type StreamEvent_Error struct {
+	// Error information if the run has failed.
 	Error *common.Error `protobuf:"bytes,3,opt,name=error,proto3,oneof"`
 }
 
 type StreamEvent_PartialMessage struct {
+	// Partially generated message.
 	PartialMessage *threads.MessageContent `protobuf:"bytes,4,opt,name=partial_message,json=partialMessage,proto3,oneof"`
 }
 
 type StreamEvent_CompletedMessage struct {
+	// Final message generated by an assistant if a run has completed successfully.
 	CompletedMessage *threads.Message `protobuf:"bytes,5,opt,name=completed_message,json=completedMessage,proto3,oneof"`
 }
 

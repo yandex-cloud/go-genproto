@@ -5,7 +5,6 @@ package datasphere
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -175,80 +174,4 @@ func (m *ProjectExecutionMetadata) SetCellId(v string) {
 	m.Target = &ProjectExecutionMetadata_CellId{
 		CellId: v,
 	}
-}
-
-func (m *ProjectExecutionResponse) SetCheckpointId(v string) {
-	m.CheckpointId = v
-}
-
-func (m *ProjectExecutionResponse) SetOutputVariables(v *structpb.Struct) {
-	m.OutputVariables = v
-}
-
-func (m *CellOutputsRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *CellOutputsRequest) SetCellId(v string) {
-	m.CellId = v
-}
-
-func (m *CellOutputsRequest) SetCheckpointId(v string) {
-	m.CheckpointId = v
-}
-
-func (m *CellOutputsRequest) SetStartAt(v *timestamppb.Timestamp) {
-	m.StartAt = v
-}
-
-func (m *CellOutputsResponse) SetOutputs(v []string) {
-	m.Outputs = v
-}
-
-func (m *GetStateVariablesRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *GetStateVariablesRequest) SetNotebookId(v string) {
-	m.NotebookId = v
-}
-
-func (m *GetStateVariablesRequest) SetVariableNames(v []string) {
-	m.VariableNames = v
-}
-
-func (m *GetStateVariablesRequest) SetCheckpointId(v string) {
-	m.CheckpointId = v
-}
-
-func (m *GetStateVariablesResponse) SetVariables(v *structpb.Struct) {
-	m.Variables = v
-}
-
-func (m *GetNotebookMetadataRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *GetNotebookMetadataRequest) SetNotebookPath(v string) {
-	m.NotebookPath = v
-}
-
-func (m *GetNotebookMetadataResponse) SetNotebookId(v string) {
-	m.NotebookId = v
-}
-
-func (m *GetNotebookMetadataResponse) SetCreatedAt(v *timestamppb.Timestamp) {
-	m.CreatedAt = v
-}
-
-func (m *GetNotebookMetadataResponse) SetModifiedAt(v *timestamppb.Timestamp) {
-	m.ModifiedAt = v
-}
-
-func (m *GetNotebookMetadataResponse) SetContentLength(v int64) {
-	m.ContentLength = v
-}
-
-func (m *GetNotebookMetadataResponse) SetCellIds(v []string) {
-	m.CellIds = v
 }

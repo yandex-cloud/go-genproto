@@ -22,22 +22,36 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Represents a search index used to store and query data, either using traditional keyword-based text search or vector-based search mechanisms.
 type SearchIndex struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId         string                   `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name             string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	CreatedBy        string                   `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt        *timestamppb.Timestamp   `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedBy        string                   `protobuf:"bytes,7,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	UpdatedAt        *timestamppb.Timestamp   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Unique identifier of the search index.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the search index belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the search index.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the search index.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Identifier of the subject who created this search index.
+	CreatedBy string `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Timestamp representing when the search index was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Identifier of the subject who last updated this search index.
+	UpdatedBy string `protobuf:"bytes,7,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	// Timestamp representing the last time this search index was updated.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Configuration for the expiration of the search index, defining when and how the search index will expire.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,9,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	ExpiresAt        *timestamppb.Timestamp   `protobuf:"bytes,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,11,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Timestamp representing when the search index will expire.
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Set of key-value pairs that can be used to organize and categorize the search index.
+	Labels map[string]string `protobuf:"bytes,11,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Type of the search index. It can be either a traditional keyword-based text search or a vector-based search.
+	//
 	// Types that are assignable to IndexType:
 	//
 	//	*SearchIndex_TextSearchIndex
@@ -180,10 +194,14 @@ type isSearchIndex_IndexType interface {
 }
 
 type SearchIndex_TextSearchIndex struct {
+	// Keyword-based text search index configuration.
+	// This type of index is used for traditional text search, where documents are indexed based on their keywords.
 	TextSearchIndex *TextSearchIndex `protobuf:"bytes,12,opt,name=text_search_index,json=textSearchIndex,proto3,oneof"`
 }
 
 type SearchIndex_VectorSearchIndex struct {
+	// Vector-based search index configuration.
+	// This type is used for vector search, where documents are indexed using vector embeddings.
 	VectorSearchIndex *VectorSearchIndex `protobuf:"bytes,13,opt,name=vector_search_index,json=vectorSearchIndex,proto3,oneof"`
 }
 
@@ -191,11 +209,13 @@ func (*SearchIndex_TextSearchIndex) isSearchIndex_IndexType() {}
 
 func (*SearchIndex_VectorSearchIndex) isSearchIndex_IndexType() {}
 
+// Defines the configuration for a traditional keyword-based text search index.
 type TextSearchIndex struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Chunking strategy used to split text into smaller chunks before indexing.
 	ChunkingStrategy *ChunkingStrategy `protobuf:"bytes,1,opt,name=chunking_strategy,json=chunkingStrategy,proto3" json:"chunking_strategy,omitempty"`
 }
 
@@ -238,13 +258,17 @@ func (x *TextSearchIndex) GetChunkingStrategy() *ChunkingStrategy {
 	return nil
 }
 
+// Defines the configuration for a vector-based search index. This type uses embeddings to represent documents and queries.
 type VectorSearchIndex struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DocEmbedderUri   string            `protobuf:"bytes,1,opt,name=doc_embedder_uri,json=docEmbedderUri,proto3" json:"doc_embedder_uri,omitempty"`
-	QueryEmbedderUri string            `protobuf:"bytes,2,opt,name=query_embedder_uri,json=queryEmbedderUri,proto3" json:"query_embedder_uri,omitempty"`
+	// The [ID of the model](/docs/foundation-models/concepts/embeddings) to be used for obtaining document text embeddings.
+	DocEmbedderUri string `protobuf:"bytes,1,opt,name=doc_embedder_uri,json=docEmbedderUri,proto3" json:"doc_embedder_uri,omitempty"`
+	// The [ID of the model](/docs/foundation-models/concepts/embeddings) to be used for obtaining query text embeddings.
+	QueryEmbedderUri string `protobuf:"bytes,2,opt,name=query_embedder_uri,json=queryEmbedderUri,proto3" json:"query_embedder_uri,omitempty"`
+	// Chunking strategy used to split text into smaller chunks before indexing.
 	ChunkingStrategy *ChunkingStrategy `protobuf:"bytes,3,opt,name=chunking_strategy,json=chunkingStrategy,proto3" json:"chunking_strategy,omitempty"`
 }
 

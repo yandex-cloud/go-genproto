@@ -26,17 +26,23 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request to create a new search index.
 type CreateSearchIndexRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId         string                   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	FileIds          []string                 `protobuf:"bytes,2,rep,name=file_ids,json=fileIds,proto3" json:"file_ids,omitempty"`
-	Name             string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// List of file IDs to be indexed.
+	FileIds []string `protobuf:"bytes,2,rep,name=file_ids,json=fileIds,proto3" json:"file_ids,omitempty"`
+	// Name of the search index.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the search index.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Expiration configuration for the search index.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,5,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Set of key-value pairs to label the search index.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Types that are assignable to IndexType:
 	//
 	//	*CreateSearchIndexRequest_TextSearchIndex
@@ -144,10 +150,12 @@ type isCreateSearchIndexRequest_IndexType interface {
 }
 
 type CreateSearchIndexRequest_TextSearchIndex struct {
+	// Configuration for a traditional keyword-based text search index.
 	TextSearchIndex *TextSearchIndex `protobuf:"bytes,7,opt,name=text_search_index,json=textSearchIndex,proto3,oneof"`
 }
 
 type CreateSearchIndexRequest_VectorSearchIndex struct {
+	// Configuration for a vector-based search index using embeddings.
 	VectorSearchIndex *VectorSearchIndex `protobuf:"bytes,8,opt,name=vector_search_index,json=vectorSearchIndex,proto3,oneof"`
 }
 
@@ -155,11 +163,13 @@ func (*CreateSearchIndexRequest_TextSearchIndex) isCreateSearchIndexRequest_Inde
 
 func (*CreateSearchIndexRequest_VectorSearchIndex) isCreateSearchIndexRequest_IndexType() {}
 
+// Request message for retrieving a search index by ID.
 type GetSearchIndexRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the search index to retrieve.
 	SearchIndexId string `protobuf:"bytes,1,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
 }
 
@@ -202,17 +212,24 @@ func (x *GetSearchIndexRequest) GetSearchIndexId() string {
 	return ""
 }
 
+// Request message for updating an existing search index.
 type UpdateSearchIndexRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SearchIndexId    string                   `protobuf:"bytes,1,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
-	UpdateMask       *fieldmaskpb.FieldMask   `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name             string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the search index to update.
+	SearchIndexId string `protobuf:"bytes,1,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
+	// Field mask specifying which fields to update.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the search index.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description for the search index.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New expiration configuration for the search index.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,5,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// New set of labels for the search index.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *UpdateSearchIndexRequest) Reset() {
@@ -289,11 +306,13 @@ func (x *UpdateSearchIndexRequest) GetLabels() map[string]string {
 	return nil
 }
 
+// Request message for deleting a search index by ID.
 type DeleteSearchIndexRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the search index to delete.
 	SearchIndexId string `protobuf:"bytes,1,opt,name=search_index_id,json=searchIndexId,proto3" json:"search_index_id,omitempty"`
 }
 
@@ -336,6 +355,7 @@ func (x *DeleteSearchIndexRequest) GetSearchIndexId() string {
 	return ""
 }
 
+// Response message for the delete operation.
 type DeleteSearchIndexResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -374,13 +394,17 @@ func (*DeleteSearchIndexResponse) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_rawDescGZIP(), []int{4}
 }
 
+// Request message for listing search indexes in a specific folder.
 type ListSearchIndicesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID from which to list search indexes.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Maximum number of threads to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -437,13 +461,16 @@ func (x *ListSearchIndicesRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for the list operation.
 type ListSearchIndicesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Indices       []*SearchIndex `protobuf:"bytes,1,rep,name=indices,proto3" json:"indices,omitempty"`
-	NextPageToken string         `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of search indexes in the specified folder.
+	Indices []*SearchIndex `protobuf:"bytes,1,rep,name=indices,proto3" json:"indices,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListSearchIndicesResponse) Reset() {

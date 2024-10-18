@@ -27,18 +27,29 @@ type User struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId         string                   `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name             string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Source           string                   `protobuf:"bytes,5,opt,name=source,proto3" json:"source,omitempty"`
-	CreatedBy        string                   `protobuf:"bytes,6,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt        *timestamppb.Timestamp   `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedBy        string                   `protobuf:"bytes,8,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	UpdatedAt        *timestamppb.Timestamp   `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Unique identifier of the user.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the user belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the user.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the user.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Source      string `protobuf:"bytes,5,opt,name=source,proto3" json:"source,omitempty"`
+	// Identifier of the subject who created this user.
+	CreatedBy string `protobuf:"bytes,6,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Timestamp representing when the user was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Identifier of the subject who last updated this user.
+	UpdatedBy string `protobuf:"bytes,8,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	// Timestamp representing the last time this user was updated.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Configuration for the expiration of the user, defining when and how the user will expire.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,10,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	ExpiresAt        *timestamppb.Timestamp   `protobuf:"bytes,11,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Timestamp representing when the user will expire.
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Set of key-value pairs that can be used to organize and categorize the user.
+	Labels map[string]string `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *User) Reset() {

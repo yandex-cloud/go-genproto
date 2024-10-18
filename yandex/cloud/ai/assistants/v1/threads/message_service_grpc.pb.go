@@ -27,9 +27,15 @@ const (
 // MessageServiceClient is the client API for MessageService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// MessageService provides operations for managing messages.
 type MessageServiceClient interface {
+	// Create a new message.
 	Create(ctx context.Context, in *CreateMessageRequest, opts ...grpc.CallOption) (*Message, error)
+	// Retrieve details of a specific message by its ID.
 	Get(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*Message, error)
+	// List messages in a specific thread.
+	// By default, messages are listed in reverse chronological order, i.e., from the newest to the oldest.
 	List(ctx context.Context, in *ListMessagesRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Message], error)
 }
 
@@ -83,9 +89,15 @@ type MessageService_ListClient = grpc.ServerStreamingClient[Message]
 // MessageServiceServer is the server API for MessageService service.
 // All implementations should embed UnimplementedMessageServiceServer
 // for forward compatibility.
+//
+// MessageService provides operations for managing messages.
 type MessageServiceServer interface {
+	// Create a new message.
 	Create(context.Context, *CreateMessageRequest) (*Message, error)
+	// Retrieve details of a specific message by its ID.
 	Get(context.Context, *GetMessageRequest) (*Message, error)
+	// List messages in a specific thread.
+	// By default, messages are listed in reverse chronological order, i.e., from the newest to the oldest.
 	List(*ListMessagesRequest, grpc.ServerStreamingServer[Message]) error
 }
 

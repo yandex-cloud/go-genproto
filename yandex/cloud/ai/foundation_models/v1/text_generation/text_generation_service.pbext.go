@@ -18,6 +18,10 @@ func (m *CompletionRequest) SetMessages(v []*v1.Message) {
 	m.Messages = v
 }
 
+func (m *CompletionRequest) SetTools(v []*v1.Tool) {
+	m.Tools = v
+}
+
 func (m *CompletionResponse) SetAlternatives(v []*v1.Alternative) {
 	m.Alternatives = v
 }

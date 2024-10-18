@@ -29,11 +29,20 @@ const (
 // RunServiceClient is the client API for RunService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// RunService provides operations for managing runs.
 type RunServiceClient interface {
+	// Create a new run for a given assistant and thread.
 	Create(ctx context.Context, in *CreateRunRequest, opts ...grpc.CallOption) (*Run, error)
+	// Listen to events from a specific run.
+	// If the run was created with `stream = false`, Listen will only respond with the final status of the run
+	// and will not stream partial messages or intermediate events.
 	Listen(ctx context.Context, in *ListenRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamEvent], error)
+	// Retrieve details of a specific run by its ID.
 	Get(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*Run, error)
+	// Retrieves the most recent run for a specific thread.
 	GetLastByThread(ctx context.Context, in *GetLastRunByThreadRequest, opts ...grpc.CallOption) (*Run, error)
+	// List runs in a specific folder.
 	List(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
 }
 
@@ -107,11 +116,20 @@ func (c *runServiceClient) List(ctx context.Context, in *ListRunsRequest, opts .
 // RunServiceServer is the server API for RunService service.
 // All implementations should embed UnimplementedRunServiceServer
 // for forward compatibility.
+//
+// RunService provides operations for managing runs.
 type RunServiceServer interface {
+	// Create a new run for a given assistant and thread.
 	Create(context.Context, *CreateRunRequest) (*Run, error)
+	// Listen to events from a specific run.
+	// If the run was created with `stream = false`, Listen will only respond with the final status of the run
+	// and will not stream partial messages or intermediate events.
 	Listen(*ListenRunRequest, grpc.ServerStreamingServer[StreamEvent]) error
+	// Retrieve details of a specific run by its ID.
 	Get(context.Context, *GetRunRequest) (*Run, error)
+	// Retrieves the most recent run for a specific thread.
 	GetLastByThread(context.Context, *GetLastRunByThreadRequest) (*Run, error)
+	// List runs in a specific folder.
 	List(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
 }
 

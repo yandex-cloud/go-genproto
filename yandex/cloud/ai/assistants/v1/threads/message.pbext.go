@@ -34,6 +34,10 @@ func (m *Message) SetContent(v *MessageContent) {
 	m.Content = v
 }
 
+func (m *Message) SetStatus(v Message_MessageStatus) {
+	m.Status = v
+}
+
 func (m *MessageContent) SetContent(v []*ContentPart) {
 	m.Content = v
 }

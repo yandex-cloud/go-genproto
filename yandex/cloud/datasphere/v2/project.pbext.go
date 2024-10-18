@@ -56,10 +56,6 @@ func (m *Project_Settings) SetDataProcClusterId(v string) {
 	m.DataProcClusterId = v
 }
 
-func (m *Project_Settings) SetCommitMode(v Project_Settings_CommitMode) {
-	m.CommitMode = v
-}
-
 func (m *Project_Settings) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
@@ -78,10 +74,6 @@ func (m *Project_Settings) SetDefaultFolderId(v string) {
 
 func (m *Project_Settings) SetStaleExecTimeoutMode(v Project_Settings_StaleExecutionTimeoutMode) {
 	m.StaleExecTimeoutMode = v
-}
-
-func (m *Project_Settings) SetIdeExecutionMode(v Project_Settings_IdeExecutionMode) {
-	m.IdeExecutionMode = v
 }
 
 func (m *Project_Settings) SetVmInactivityTimeout(v *durationpb.Duration) {

@@ -21,11 +21,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Defines the options for truncating thread messages within a prompt.
 type PromptTruncationOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The maximum number of tokens allowed in the prompt.
+	// If the prompt exceeds this limit, the thread messages will be truncated.
+	// Default max_prompt_tokens: 7000
 	MaxPromptTokens *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_prompt_tokens,json=maxPromptTokens,proto3" json:"max_prompt_tokens,omitempty"`
 }
 
@@ -68,12 +72,18 @@ func (x *PromptTruncationOptions) GetMaxPromptTokens() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Defines the options for completion generation.
 type CompletionOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MaxTokens   *wrapperspb.Int64Value  `protobuf:"bytes,2,opt,name=max_tokens,json=maxTokens,proto3" json:"max_tokens,omitempty"`
+	// The limit on the number of tokens used for single completion generation.
+	// Must be greater than zero. This maximum allowed parameter value may depend on the model being used.
+	MaxTokens *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_tokens,json=maxTokens,proto3" json:"max_tokens,omitempty"`
+	// Affects creativity and randomness of responses. Should be a double number between 0 (inclusive) and 1 (inclusive).
+	// Lower values produce more straightforward responses while higher values lead to increased creativity and randomness.
+	// Default temperature: 0.3
 	Temperature *wrapperspb.DoubleValue `protobuf:"bytes,3,opt,name=temperature,proto3" json:"temperature,omitempty"`
 }
 
@@ -123,13 +133,18 @@ func (x *CompletionOptions) GetTemperature() *wrapperspb.DoubleValue {
 	return nil
 }
 
+// Configures a tool that enables Retrieval-Augmented Generation (RAG) by allowing the assistant to search across a specified search index.
 type SearchIndexTool struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SearchIndexIds []string               `protobuf:"bytes,1,rep,name=search_index_ids,json=searchIndexIds,proto3" json:"search_index_ids,omitempty"`
-	MaxNumResults  *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_num_results,json=maxNumResults,proto3" json:"max_num_results,omitempty"`
+	// A list of search index IDs that this tool will query. Currently, only a single index ID is supported.
+	SearchIndexIds []string `protobuf:"bytes,1,rep,name=search_index_ids,json=searchIndexIds,proto3" json:"search_index_ids,omitempty"`
+	// The maximum number of results to return from the search.
+	// Fewer results may be returned if necessary to fit within the prompt's token limit.
+	// This ensures that the combined prompt and search results do not exceed the token constraints.
+	MaxNumResults *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_num_results,json=maxNumResults,proto3" json:"max_num_results,omitempty"`
 }
 
 func (x *SearchIndexTool) Reset() {
@@ -178,6 +193,7 @@ func (x *SearchIndexTool) GetMaxNumResults() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Represents a general tool that can be one of several types.
 type Tool struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -240,6 +256,7 @@ type isTool_ToolType interface {
 }
 
 type Tool_SearchIndex struct {
+	// SearchIndexTool tool that performs search across specified indexes.
 	SearchIndex *SearchIndexTool `protobuf:"bytes,1,opt,name=search_index,json=searchIndex,proto3,oneof"`
 }
 

@@ -22,15 +22,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request to create a new message in a specific thread.
 type CreateMessageRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ThreadId string            `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
-	Author   *Author           `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
-	Labels   map[string]string `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Content  *MessageContent   `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	// ID of the thread to which the message will be added.
+	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	// Author of the message, containing details about the message's creator.
+	// If not provided, the default author ID specified in the corresponding thread will be used.
+	Author *Author `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	// Set of key-value pairs to label the message.
+	Labels map[string]string `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Content of the message.
+	Content *MessageContent `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 }
 
 func (x *CreateMessageRequest) Reset() {
@@ -93,12 +99,15 @@ func (x *CreateMessageRequest) GetContent() *MessageContent {
 	return nil
 }
 
+// Request message for retrieving a message from a thread.
 type GetMessageRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ThreadId  string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	// ID of the thread that contains the message.
+	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	// ID of the message to retrieve.
 	MessageId string `protobuf:"bytes,2,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 }
 
@@ -148,11 +157,13 @@ func (x *GetMessageRequest) GetMessageId() string {
 	return ""
 }
 
+// Request message for listing messages in a specific thread.
 type ListMessagesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thread whose messages will be listed.
 	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
 }
 

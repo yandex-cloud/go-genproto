@@ -30,12 +30,20 @@ const (
 // AssistantServiceClient is the client API for AssistantService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// AssistantService provides operations for managing assistants.
 type AssistantServiceClient interface {
+	// Create a new assistant.
 	Create(ctx context.Context, in *CreateAssistantRequest, opts ...grpc.CallOption) (*Assistant, error)
+	// Retrieve details of a specific assistant by its ID.
 	Get(ctx context.Context, in *GetAssistantRequest, opts ...grpc.CallOption) (*Assistant, error)
+	// Update an existing assistant.
 	Update(ctx context.Context, in *UpdateAssistantRequest, opts ...grpc.CallOption) (*Assistant, error)
+	// Delete an assistant by its ID.
 	Delete(ctx context.Context, in *DeleteAssistantRequest, opts ...grpc.CallOption) (*DeleteAssistantResponse, error)
+	// List assistants in a specific folder.
 	List(ctx context.Context, in *ListAssistantsRequest, opts ...grpc.CallOption) (*ListAssistantsResponse, error)
+	// Lists all versions of a specific assistant.
 	ListVersions(ctx context.Context, in *ListAssistantVersionsRequest, opts ...grpc.CallOption) (*ListAssistantVersionsResponse, error)
 }
 
@@ -110,12 +118,20 @@ func (c *assistantServiceClient) ListVersions(ctx context.Context, in *ListAssis
 // AssistantServiceServer is the server API for AssistantService service.
 // All implementations should embed UnimplementedAssistantServiceServer
 // for forward compatibility.
+//
+// AssistantService provides operations for managing assistants.
 type AssistantServiceServer interface {
+	// Create a new assistant.
 	Create(context.Context, *CreateAssistantRequest) (*Assistant, error)
+	// Retrieve details of a specific assistant by its ID.
 	Get(context.Context, *GetAssistantRequest) (*Assistant, error)
+	// Update an existing assistant.
 	Update(context.Context, *UpdateAssistantRequest) (*Assistant, error)
+	// Delete an assistant by its ID.
 	Delete(context.Context, *DeleteAssistantRequest) (*DeleteAssistantResponse, error)
+	// List assistants in a specific folder.
 	List(context.Context, *ListAssistantsRequest) (*ListAssistantsResponse, error)
+	// Lists all versions of a specific assistant.
 	ListVersions(context.Context, *ListAssistantVersionsRequest) (*ListAssistantVersionsResponse, error)
 }
 

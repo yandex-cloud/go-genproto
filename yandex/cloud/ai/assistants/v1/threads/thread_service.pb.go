@@ -24,18 +24,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request message for creating a new thread.
 type CreateThreadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId               string                   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Messages               []*MessageData           `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
-	Name                   string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description            string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	DefaultMessageAuthorId string                   `protobuf:"bytes,5,opt,name=default_message_author_id,json=defaultMessageAuthorId,proto3" json:"default_message_author_id,omitempty"`
-	ExpirationConfig       *common.ExpirationConfig `protobuf:"bytes,6,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels                 map[string]string        `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// List of messages to initialize the thread.
+	Messages []*MessageData `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
+	// Name of the thread.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the thread.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Default user ID that will be used as the author for thread messages if no other author is specified.
+	DefaultMessageAuthorId string `protobuf:"bytes,5,opt,name=default_message_author_id,json=defaultMessageAuthorId,proto3" json:"default_message_author_id,omitempty"`
+	// Expiration configuration for the thread.
+	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,6,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
+	// Set of key-value pairs to label the thread.
+	Labels map[string]string `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *CreateThreadRequest) Reset() {
@@ -119,11 +126,13 @@ func (x *CreateThreadRequest) GetLabels() map[string]string {
 	return nil
 }
 
+// Request message for retrieving a thread by ID.
 type GetThreadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thread to retrieve.
 	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
 }
 
@@ -166,17 +175,24 @@ func (x *GetThreadRequest) GetThreadId() string {
 	return ""
 }
 
+// Request message for updating an existing thread.
 type UpdateThreadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ThreadId         string                   `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
-	UpdateMask       *fieldmaskpb.FieldMask   `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name             string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the thread to update.
+	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	// Field mask specifying which fields to update.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the thread.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description for the thread.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New expiration configuration for the thread.
 	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,5,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels           map[string]string        `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// New set of labels for the thread.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *UpdateThreadRequest) Reset() {
@@ -253,11 +269,13 @@ func (x *UpdateThreadRequest) GetLabels() map[string]string {
 	return nil
 }
 
+// Request message for deleting a thread by ID.
 type DeleteThreadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the thread to delete.
 	ThreadId string `protobuf:"bytes,1,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
 }
 
@@ -300,6 +318,7 @@ func (x *DeleteThreadRequest) GetThreadId() string {
 	return ""
 }
 
+// Response message for the delete operation.
 type DeleteThreadResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -338,13 +357,17 @@ func (*DeleteThreadResponse) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_assistants_v1_threads_thread_service_proto_rawDescGZIP(), []int{4}
 }
 
+// Request message for listing threads in a specific folder.
 type ListThreadsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID from which to list threads.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Maximum number of threads to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -401,13 +424,16 @@ func (x *ListThreadsRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for the list operation.
 type ListThreadsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Threads       []*Thread `protobuf:"bytes,1,rep,name=threads,proto3" json:"threads,omitempty"`
-	NextPageToken string    `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of threads in the specified folder.
+	Threads []*Thread `protobuf:"bytes,1,rep,name=threads,proto3" json:"threads,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListThreadsResponse) Reset() {

@@ -3,6 +3,7 @@
 package foundation_models
 
 import (
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -64,4 +65,84 @@ func (m *Token) SetText(v string) {
 
 func (m *Token) SetSpecial(v bool) {
 	m.Special = v
+}
+
+type Tool_ToolType = isTool_ToolType
+
+func (m *Tool) SetToolType(v Tool_ToolType) {
+	m.ToolType = v
+}
+
+func (m *Tool) SetFunction(v *Function) {
+	m.ToolType = &Tool_Function{
+		Function: v,
+	}
+}
+
+func (m *Function) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Function) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *Function) SetParameters(v *structpb.Struct) {
+	m.Parameters = v
+}
+
+type ToolCall_ToolCallType = isToolCall_ToolCallType
+
+func (m *ToolCall) SetToolCallType(v ToolCall_ToolCallType) {
+	m.ToolCallType = v
+}
+
+func (m *ToolCall) SetFunctionCall(v *FunctionCall) {
+	m.ToolCallType = &ToolCall_FunctionCall{
+		FunctionCall: v,
+	}
+}
+
+func (m *FunctionCall) SetName(v string) {
+	m.Name = v
+}
+
+func (m *FunctionCall) SetArguments(v *structpb.Struct) {
+	m.Arguments = v
+}
+
+func (m *ToolCallList) SetToolCalls(v []*ToolCall) {
+	m.ToolCalls = v
+}
+
+type ToolResult_ToolResultType = isToolResult_ToolResultType
+
+func (m *ToolResult) SetToolResultType(v ToolResult_ToolResultType) {
+	m.ToolResultType = v
+}
+
+func (m *ToolResult) SetFunctionResult(v *FunctionResult) {
+	m.ToolResultType = &ToolResult_FunctionResult{
+		FunctionResult: v,
+	}
+}
+
+type FunctionResult_ContentType = isFunctionResult_ContentType
+
+func (m *FunctionResult) SetContentType(v FunctionResult_ContentType) {
+	m.ContentType = v
+}
+
+func (m *FunctionResult) SetName(v string) {
+	m.Name = v
+}
+
+func (m *FunctionResult) SetContent(v string) {
+	m.ContentType = &FunctionResult_Content{
+		Content: v,
+	}
+}
+
+func (m *ToolResultList) SetToolResults(v []*ToolResult) {
+	m.ToolResults = v
 }

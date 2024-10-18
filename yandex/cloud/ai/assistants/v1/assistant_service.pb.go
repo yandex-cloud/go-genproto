@@ -24,21 +24,33 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request to create a new assistant.
 type CreateAssistantRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId                string                   `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name                    string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description             string                   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	ExpirationConfig        *common.ExpirationConfig `protobuf:"bytes,4,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels                  map[string]string        `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	ModelUri                string                   `protobuf:"bytes,6,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
-	Instruction             string                   `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"`
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the assistant.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the assistant.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Expiration configuration for the assistant.
+	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,4,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
+	// Set of key-value pairs to label the user.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for completion generation.
+	ModelUri string `protobuf:"bytes,6,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
+	// Instructions or guidelines that the assistant should follow when generating responses or performing tasks.
+	// These instructions can help guide the assistant's behavior and responses.
+	Instruction string `protobuf:"bytes,7,opt,name=instruction,proto3" json:"instruction,omitempty"`
+	// Configuration options for truncating the prompt when the token count exceeds a specified limit.
 	PromptTruncationOptions *PromptTruncationOptions `protobuf:"bytes,8,opt,name=prompt_truncation_options,json=promptTruncationOptions,proto3" json:"prompt_truncation_options,omitempty"`
-	CompletionOptions       *CompletionOptions       `protobuf:"bytes,9,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
-	Tools                   []*Tool                  `protobuf:"bytes,10,rep,name=tools,proto3" json:"tools,omitempty"`
+	// Configuration options for completion generation.
+	CompletionOptions *CompletionOptions `protobuf:"bytes,9,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
+	// List of tools that the assistant can use to perform additional tasks.
+	// One example is the SearchIndexTool, which is used for Retrieval-Augmented Generation (RAG).
+	Tools []*Tool `protobuf:"bytes,10,rep,name=tools,proto3" json:"tools,omitempty"`
 }
 
 func (x *CreateAssistantRequest) Reset() {
@@ -143,11 +155,13 @@ func (x *CreateAssistantRequest) GetTools() []*Tool {
 	return nil
 }
 
+// Request message for retrieving an assistant by ID.
 type GetAssistantRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the assistant to retrieve.
 	AssistantId string `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
 }
 
@@ -190,22 +204,34 @@ func (x *GetAssistantRequest) GetAssistantId() string {
 	return ""
 }
 
+// Request message for updating an existing assistant.
 type UpdateAssistantRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AssistantId             string                   `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
-	UpdateMask              *fieldmaskpb.FieldMask   `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name                    string                   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description             string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	ExpirationConfig        *common.ExpirationConfig `protobuf:"bytes,5,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
-	Labels                  map[string]string        `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	ModelUri                string                   `protobuf:"bytes,7,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
-	Instruction             string                   `protobuf:"bytes,8,opt,name=instruction,proto3" json:"instruction,omitempty"`
+	// ID of the assistant to update.
+	AssistantId string `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
+	// Field mask specifying which fields to update.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the assistant.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description for the assistant.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New expiration configuration for the assistant.
+	ExpirationConfig *common.ExpirationConfig `protobuf:"bytes,5,opt,name=expiration_config,json=expirationConfig,proto3" json:"expiration_config,omitempty"`
+	// New set of labels for the assistant.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The new [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for completion generation.
+	ModelUri string `protobuf:"bytes,7,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
+	// New instructions or guidelines for the assistant to follow.
+	Instruction string `protobuf:"bytes,8,opt,name=instruction,proto3" json:"instruction,omitempty"`
+	// New configuration for truncating the prompt.
 	PromptTruncationOptions *PromptTruncationOptions `protobuf:"bytes,9,opt,name=prompt_truncation_options,json=promptTruncationOptions,proto3" json:"prompt_truncation_options,omitempty"`
-	CompletionOptions       *CompletionOptions       `protobuf:"bytes,10,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
-	Tools                   []*Tool                  `protobuf:"bytes,11,rep,name=tools,proto3" json:"tools,omitempty"`
+	// New configuration for completion generation.
+	CompletionOptions *CompletionOptions `protobuf:"bytes,10,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
+	// New list of tools the assistant can use.
+	Tools []*Tool `protobuf:"bytes,11,rep,name=tools,proto3" json:"tools,omitempty"`
 }
 
 func (x *UpdateAssistantRequest) Reset() {
@@ -317,11 +343,13 @@ func (x *UpdateAssistantRequest) GetTools() []*Tool {
 	return nil
 }
 
+// Request message for deleting an assistant by ID.
 type DeleteAssistantRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the assistant to delete.
 	AssistantId string `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
 }
 
@@ -364,6 +392,7 @@ func (x *DeleteAssistantRequest) GetAssistantId() string {
 	return ""
 }
 
+// Response message for the delete operation.
 type DeleteAssistantResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -402,13 +431,17 @@ func (*DeleteAssistantResponse) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_assistants_v1_assistant_service_proto_rawDescGZIP(), []int{4}
 }
 
+// Request message for listing assistants in a specific folder.
 type ListAssistantsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId  string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Folder ID from which to list assistants.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Maximum number of assistants to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -465,13 +498,16 @@ func (x *ListAssistantsRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for the list operation.
 type ListAssistantsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Assistants    []*Assistant `protobuf:"bytes,1,rep,name=assistants,proto3" json:"assistants,omitempty"`
-	NextPageToken string       `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of assistants in the specified folder.
+	Assistants []*Assistant `protobuf:"bytes,1,rep,name=assistants,proto3" json:"assistants,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListAssistantsResponse) Reset() {
@@ -520,14 +556,18 @@ func (x *ListAssistantsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Request to list all versions of a specific assistant.
 type ListAssistantVersionsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the assistant whose versions are to be listed.
 	AssistantId string `protobuf:"bytes,1,opt,name=assistant_id,json=assistantId,proto3" json:"assistant_id,omitempty"`
-	PageSize    int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken   string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Maximum number of versions to return per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token to retrieve the next page of results.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
 func (x *ListAssistantVersionsRequest) Reset() {
@@ -583,14 +623,18 @@ func (x *ListAssistantVersionsRequest) GetPageToken() string {
 	return ""
 }
 
+// Represents a specific version of an assistant.
 type AssistantVersion struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the assistant version.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Mask specifying which fields were updated in this version.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Assistant  *Assistant             `protobuf:"bytes,3,opt,name=assistant,proto3" json:"assistant,omitempty"`
+	// Assistant configuration for this version.
+	Assistant *Assistant `protobuf:"bytes,3,opt,name=assistant,proto3" json:"assistant,omitempty"`
 }
 
 func (x *AssistantVersion) Reset() {
@@ -646,13 +690,16 @@ func (x *AssistantVersion) GetAssistant() *Assistant {
 	return nil
 }
 
+// Response message containing the list versions operation.
 type ListAssistantVersionsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Versions      []*AssistantVersion `protobuf:"bytes,1,rep,name=versions,proto3" json:"versions,omitempty"`
-	NextPageToken string              `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	// List of assistant versions.
+	Versions []*AssistantVersion `protobuf:"bytes,1,rep,name=versions,proto3" json:"versions,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *ListAssistantVersionsResponse) Reset() {

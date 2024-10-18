@@ -84,6 +84,10 @@ func (m *Disk) SetHardwareGeneration(v *HardwareGeneration) {
 	m.HardwareGeneration = v
 }
 
+func (m *Disk) SetKmsKey(v *KMSKey) {
+	m.KmsKey = v
+}
+
 func (m *DiskPlacementPolicy) SetPlacementGroupId(v string) {
 	m.PlacementGroupId = v
 }

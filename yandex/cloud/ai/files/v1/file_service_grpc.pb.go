@@ -30,12 +30,20 @@ const (
 // FileServiceClient is the client API for FileService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// FileService provides operations for managing files.
 type FileServiceClient interface {
+	// Create a new file.
 	Create(ctx context.Context, in *CreateFileRequest, opts ...grpc.CallOption) (*File, error)
+	// Retrieve details of a specific file by its ID.
 	Get(ctx context.Context, in *GetFileRequest, opts ...grpc.CallOption) (*File, error)
+	// Retrieve a URL for accessing or downloading a specific file.
 	GetUrl(ctx context.Context, in *GetFileUrlRequest, opts ...grpc.CallOption) (*GetFileUrlResponse, error)
+	// Update an existing file.
 	Update(ctx context.Context, in *UpdateFileRequest, opts ...grpc.CallOption) (*File, error)
+	// Delete a file by its ID.
 	Delete(ctx context.Context, in *DeleteFileRequest, opts ...grpc.CallOption) (*DeleteFileResponse, error)
+	// List files in a specific folder.
 	List(ctx context.Context, in *ListFilesRequest, opts ...grpc.CallOption) (*ListFilesResponse, error)
 }
 
@@ -110,12 +118,20 @@ func (c *fileServiceClient) List(ctx context.Context, in *ListFilesRequest, opts
 // FileServiceServer is the server API for FileService service.
 // All implementations should embed UnimplementedFileServiceServer
 // for forward compatibility.
+//
+// FileService provides operations for managing files.
 type FileServiceServer interface {
+	// Create a new file.
 	Create(context.Context, *CreateFileRequest) (*File, error)
+	// Retrieve details of a specific file by its ID.
 	Get(context.Context, *GetFileRequest) (*File, error)
+	// Retrieve a URL for accessing or downloading a specific file.
 	GetUrl(context.Context, *GetFileUrlRequest) (*GetFileUrlResponse, error)
+	// Update an existing file.
 	Update(context.Context, *UpdateFileRequest) (*File, error)
+	// Delete a file by its ID.
 	Delete(context.Context, *DeleteFileRequest) (*DeleteFileResponse, error)
+	// List files in a specific folder.
 	List(context.Context, *ListFilesRequest) (*ListFilesResponse, error)
 }
 
