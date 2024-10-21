@@ -73,21 +73,21 @@ func (m *Tool) SetToolType(v Tool_ToolType) {
 	m.ToolType = v
 }
 
-func (m *Tool) SetFunction(v *Function) {
+func (m *Tool) SetFunction(v *FunctionTool) {
 	m.ToolType = &Tool_Function{
 		Function: v,
 	}
 }
 
-func (m *Function) SetName(v string) {
+func (m *FunctionTool) SetName(v string) {
 	m.Name = v
 }
 
-func (m *Function) SetDescription(v string) {
+func (m *FunctionTool) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *Function) SetParameters(v *structpb.Struct) {
+func (m *FunctionTool) SetParameters(v *structpb.Struct) {
 	m.Parameters = v
 }
 
