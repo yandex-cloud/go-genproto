@@ -35,6 +35,18 @@ func (m *Message) SetText(v string) {
 	}
 }
 
+func (m *Message) SetToolCallList(v *ToolCallList) {
+	m.Content = &Message_ToolCallList{
+		ToolCallList: v,
+	}
+}
+
+func (m *Message) SetToolResultList(v *ToolResultList) {
+	m.Content = &Message_ToolResultList{
+		ToolResultList: v,
+	}
+}
+
 func (m *ContentUsage) SetInputTextTokens(v int64) {
 	m.InputTextTokens = v
 }

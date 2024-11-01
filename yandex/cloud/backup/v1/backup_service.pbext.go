@@ -74,6 +74,10 @@ func (m *ListBackupsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListBackupsRequest) SetType(v ResourceType) {
+	m.Type = v
+}
+
 func (m *ListBackupsRequest_ArchiveParameters) SetArchiveId(v string) {
 	m.ArchiveId = v
 }

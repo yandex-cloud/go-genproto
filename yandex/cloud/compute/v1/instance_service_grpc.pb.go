@@ -68,7 +68,7 @@ type InstanceServiceClient interface {
 	Update(ctx context.Context, in *UpdateInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified instance.
 	Delete(ctx context.Context, in *DeleteInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the metadata of the specified instance.
+	// Updates the metadata of the specified instance. For more information on metadata, see [VM metadata](/docs/compute/concepts/vm-metadata).
 	UpdateMetadata(ctx context.Context, in *UpdateInstanceMetadataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the serial port output of the specified Instance resource.
 	GetSerialPortOutput(ctx context.Context, in *GetInstanceSerialPortOutputRequest, opts ...grpc.CallOption) (*GetInstanceSerialPortOutputResponse, error)
@@ -420,7 +420,7 @@ type InstanceServiceServer interface {
 	Update(context.Context, *UpdateInstanceRequest) (*operation.Operation, error)
 	// Deletes the specified instance.
 	Delete(context.Context, *DeleteInstanceRequest) (*operation.Operation, error)
-	// Updates the metadata of the specified instance.
+	// Updates the metadata of the specified instance. For more information on metadata, see [VM metadata](/docs/compute/concepts/vm-metadata).
 	UpdateMetadata(context.Context, *UpdateInstanceMetadataRequest) (*operation.Operation, error)
 	// Returns the serial port output of the specified Instance resource.
 	GetSerialPortOutput(context.Context, *GetInstanceSerialPortOutputRequest) (*GetInstanceSerialPortOutputResponse, error)

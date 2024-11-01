@@ -26,6 +26,7 @@ const (
 	ClusterService_Update_FullMethodName                    = "/yandex.cloud.mdb.opensearch.v1.ClusterService/Update"
 	ClusterService_Delete_FullMethodName                    = "/yandex.cloud.mdb.opensearch.v1.ClusterService/Delete"
 	ClusterService_Backup_FullMethodName                    = "/yandex.cloud.mdb.opensearch.v1.ClusterService/Backup"
+	ClusterService_DeleteBackup_FullMethodName              = "/yandex.cloud.mdb.opensearch.v1.ClusterService/DeleteBackup"
 	ClusterService_Restore_FullMethodName                   = "/yandex.cloud.mdb.opensearch.v1.ClusterService/Restore"
 	ClusterService_RescheduleMaintenance_FullMethodName     = "/yandex.cloud.mdb.opensearch.v1.ClusterService/RescheduleMaintenance"
 	ClusterService_ListBackups_FullMethodName               = "/yandex.cloud.mdb.opensearch.v1.ClusterService/ListBackups"
@@ -66,6 +67,8 @@ type ClusterServiceClient interface {
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a backup for the specified OpenSearch cluster.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete backup for the specified OpenSearch cluster.
+	DeleteBackup(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new OpenSearch cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reschedules a planned maintenance operation.
@@ -167,6 +170,16 @@ func (c *clusterServiceClient) Backup(ctx context.Context, in *BackupClusterRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Backup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) DeleteBackup(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_DeleteBackup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -382,6 +395,8 @@ type ClusterServiceServer interface {
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
 	// Creates a backup for the specified OpenSearch cluster.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
+	// Delete backup for the specified OpenSearch cluster.
+	DeleteBackup(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
 	// Creates a new OpenSearch cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Reschedules a planned maintenance operation.
@@ -445,6 +460,9 @@ func (UnimplementedClusterServiceServer) Delete(context.Context, *DeleteClusterR
 }
 func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Backup not implemented")
+}
+func (UnimplementedClusterServiceServer) DeleteBackup(context.Context, *DeleteBackupRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBackup not implemented")
 }
 func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
@@ -624,6 +642,24 @@ func _ClusterService_Backup_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Backup(ctx, req.(*BackupClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_DeleteBackup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).DeleteBackup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_DeleteBackup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).DeleteBackup(ctx, req.(*DeleteBackupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -975,6 +1011,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Backup",
 			Handler:    _ClusterService_Backup_Handler,
+		},
+		{
+			MethodName: "DeleteBackup",
+			Handler:    _ClusterService_DeleteBackup_Handler,
 		},
 		{
 			MethodName: "Restore",

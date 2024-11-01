@@ -7,6 +7,7 @@ import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 type PayloadEntryChange_Value = isPayloadEntryChange_Value
@@ -97,6 +98,10 @@ func (m *CreateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayload
 	m.PayloadSpecification = &CreateSecretRequest_PasswordPayloadSpecification{
 		PasswordPayloadSpecification: v,
 	}
+}
+
+func (m *CreateSecretRequest) SetCreateVersion(v *wrapperspb.BoolValue) {
+	m.CreateVersion = v
 }
 
 func (m *CreateSecretMetadata) SetSecretId(v string) {

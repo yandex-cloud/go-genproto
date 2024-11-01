@@ -631,6 +631,18 @@ func (m *ConfigSpec) SetPostgresqlConfig_16_1C(v *config.PostgresqlConfig16_1C) 
 	}
 }
 
+func (m *ConfigSpec) SetPostgresqlConfig_17(v *config.PostgresqlConfig17) {
+	m.PostgresqlConfig = &ConfigSpec_PostgresqlConfig_17{
+		PostgresqlConfig_17: v,
+	}
+}
+
+func (m *ConfigSpec) SetPostgresqlConfig_17_1C(v *config.PostgresqlConfig17_1C) {
+	m.PostgresqlConfig = &ConfigSpec_PostgresqlConfig_17_1C{
+		PostgresqlConfig_17_1C: v,
+	}
+}
+
 func (m *ConfigSpec) SetPoolerConfig(v *ConnectionPoolerConfig) {
 	m.PoolerConfig = v
 }
@@ -756,5 +768,17 @@ func (m *ConfigHostSpec) SetPostgresqlConfig_16(v *config.PostgresqlHostConfig16
 func (m *ConfigHostSpec) SetPostgresqlConfig_16_1C(v *config.PostgresqlHostConfig16_1C) {
 	m.PostgresqlConfig = &ConfigHostSpec_PostgresqlConfig_16_1C{
 		PostgresqlConfig_16_1C: v,
+	}
+}
+
+func (m *ConfigHostSpec) SetPostgresqlConfig_17(v *config.PostgresqlHostConfig17) {
+	m.PostgresqlConfig = &ConfigHostSpec_PostgresqlConfig_17{
+		PostgresqlConfig_17: v,
+	}
+}
+
+func (m *ConfigHostSpec) SetPostgresqlConfig_17_1C(v *config.PostgresqlHostConfig17_1C) {
+	m.PostgresqlConfig = &ConfigHostSpec_PostgresqlConfig_17_1C{
+		PostgresqlConfig_17_1C: v,
 	}
 }

@@ -54,22 +54,10 @@ func (m *RoutingInstance_VpcAzInfo) SetManualInfo(v *RoutingInstance_VpcManualIn
 	m.ManualInfo = v
 }
 
-func (m *RoutingInstance_VpcAzInfo) SetAutomaticInfo(v *RoutingInstance_VpcAutomaticInfo) {
-	m.AutomaticInfo = v
-}
-
 func (m *RoutingInstance_VpcManualInfo) SetAzId(v string) {
 	m.AzId = v
 }
 
 func (m *RoutingInstance_VpcManualInfo) SetPrefixes(v []string) {
-	m.Prefixes = v
-}
-
-func (m *RoutingInstance_VpcAutomaticInfo) SetAzId(v string) {
-	m.AzId = v
-}
-
-func (m *RoutingInstance_VpcAutomaticInfo) SetPrefixes(v []string) {
 	m.Prefixes = v
 }

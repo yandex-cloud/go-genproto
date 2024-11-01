@@ -473,6 +473,22 @@ func (m *BackupClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *DeleteBackupRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteBackupRequest) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *DeleteBackupMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteBackupMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
 func (m *RestoreClusterRequest) SetBackupId(v string) {
 	m.BackupId = v
 }
