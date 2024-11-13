@@ -607,3 +607,7 @@ func (m *StreamingResponse) SetConversationAnalysis(v *ConversationAnalysis) {
 func (m *StreamingResponse) SetChannelTag(v string) {
 	m.ChannelTag = v
 }
+
+func (m *DeleteRecognitionRequest) SetOperationId(v string) {
+	m.OperationId = v
+}

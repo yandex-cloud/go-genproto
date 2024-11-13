@@ -20,15 +20,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A pair of text label and corresponding confidence used in classification problems.
+// A pair of text labels and their corresponding confidence values.
 type ClassificationLabel struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// A label with a class name.
+	// A class name label.
 	Label string `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
-	// Confidence of item's belonging to a class.
+	// The probability of classifying text into a specific class.
 	Confidence float64 `protobuf:"fixed64,2,opt,name=confidence,proto3" json:"confidence,omitempty"`
 }
 

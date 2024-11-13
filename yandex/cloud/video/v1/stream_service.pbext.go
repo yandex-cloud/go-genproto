@@ -39,6 +39,18 @@ func (m *ListStreamsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *BatchGetStreamsRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchGetStreamsRequest) SetStreamIds(v []string) {
+	m.StreamIds = v
+}
+
+func (m *BatchGetStreamsResponse) SetStreams(v []*Stream) {
+	m.Streams = v
+}
+
 type CreateStreamRequest_StreamType = isCreateStreamRequest_StreamType
 
 func (m *CreateStreamRequest) SetStreamType(v CreateStreamRequest_StreamType) {
@@ -149,6 +161,18 @@ func (m *DeleteStreamRequest) SetStreamId(v string) {
 
 func (m *DeleteStreamMetadata) SetStreamId(v string) {
 	m.StreamId = v
+}
+
+func (m *BatchDeleteStreamsRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchDeleteStreamsRequest) SetStreamIds(v []string) {
+	m.StreamIds = v
+}
+
+func (m *BatchDeleteStreamsMetadata) SetStreamIds(v []string) {
+	m.StreamIds = v
 }
 
 type PerformStreamActionRequest_Action = isPerformStreamActionRequest_Action

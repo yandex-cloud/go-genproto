@@ -3464,6 +3464,53 @@ func (*StreamingResponse_SpeakerAnalysis) isStreamingResponse_Event() {}
 
 func (*StreamingResponse_ConversationAnalysis) isStreamingResponse_Event() {}
 
+type DeleteRecognitionRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OperationId string `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
+}
+
+func (x *DeleteRecognitionRequest) Reset() {
+	*x = DeleteRecognitionRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteRecognitionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteRecognitionRequest) ProtoMessage() {}
+
+func (x *DeleteRecognitionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteRecognitionRequest.ProtoReflect.Descriptor instead.
+func (*DeleteRecognitionRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *DeleteRecognitionRequest) GetOperationId() string {
+	if x != nil {
+		return x.OperationId
+	}
+	return ""
+}
+
 type DescriptiveStatistics_Quantile struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3478,7 +3525,7 @@ type DescriptiveStatistics_Quantile struct {
 func (x *DescriptiveStatistics_Quantile) Reset() {
 	*x = DescriptiveStatistics_Quantile{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
+		mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3491,7 +3538,7 @@ func (x *DescriptiveStatistics_Quantile) String() string {
 func (*DescriptiveStatistics_Quantile) ProtoMessage() {}
 
 func (x *DescriptiveStatistics_Quantile) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3539,7 +3586,7 @@ type ConversationAnalysis_InterruptsEvaluation struct {
 func (x *ConversationAnalysis_InterruptsEvaluation) Reset() {
 	*x = ConversationAnalysis_InterruptsEvaluation{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
+		mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3552,7 +3599,7 @@ func (x *ConversationAnalysis_InterruptsEvaluation) String() string {
 func (*ConversationAnalysis_InterruptsEvaluation) ProtoMessage() {}
 
 func (x *ConversationAnalysis_InterruptsEvaluation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4216,18 +4263,22 @@ var file_yandex_cloud_ai_stt_v3_stt_proto_rawDesc = []byte{
 	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x73, 0x69, 0x73, 0x12,
 	0x1f, 0x0a, 0x0b, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x74, 0x61, 0x67, 0x18, 0x09,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x54, 0x61, 0x67,
-	0x42, 0x07, 0x0a, 0x05, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x2a, 0x4f, 0x0a, 0x08, 0x43, 0x6f, 0x64,
-	0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x15, 0x43, 0x4f, 0x44, 0x45, 0x5f, 0x54, 0x59,
-	0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00,
-	0x1a, 0x02, 0x08, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x57, 0x4f, 0x52, 0x4b, 0x49, 0x4e, 0x47, 0x10,
-	0x01, 0x12, 0x0b, 0x0a, 0x07, 0x57, 0x41, 0x52, 0x4e, 0x49, 0x4e, 0x47, 0x10, 0x02, 0x12, 0x0a,
-	0x0a, 0x06, 0x43, 0x4c, 0x4f, 0x53, 0x45, 0x44, 0x10, 0x03, 0x42, 0x5c, 0x0a, 0x1a, 0x79, 0x61,
-	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61,
-	0x69, 0x2e, 0x73, 0x74, 0x74, 0x2e, 0x76, 0x33, 0x5a, 0x3e, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61,
-	0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x73, 0x74,
-	0x74, 0x2f, 0x76, 0x33, 0x3b, 0x73, 0x74, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x42, 0x07, 0x0a, 0x05, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x22, 0x3d, 0x0a, 0x18, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x52, 0x65, 0x63, 0x6f, 0x67, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x2a, 0x4f, 0x0a, 0x08, 0x43, 0x6f, 0x64, 0x65,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x15, 0x43, 0x4f, 0x44, 0x45, 0x5f, 0x54, 0x59, 0x50,
+	0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x1a,
+	0x02, 0x08, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x57, 0x4f, 0x52, 0x4b, 0x49, 0x4e, 0x47, 0x10, 0x01,
+	0x12, 0x0b, 0x0a, 0x07, 0x57, 0x41, 0x52, 0x4e, 0x49, 0x4e, 0x47, 0x10, 0x02, 0x12, 0x0a, 0x0a,
+	0x06, 0x43, 0x4c, 0x4f, 0x53, 0x45, 0x44, 0x10, 0x03, 0x42, 0x5c, 0x0a, 0x1a, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69,
+	0x2e, 0x73, 0x74, 0x74, 0x2e, 0x76, 0x33, 0x5a, 0x3e, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x73, 0x74, 0x74,
+	0x2f, 0x76, 0x33, 0x3b, 0x73, 0x74, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4243,7 +4294,7 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_ai_stt_v3_stt_proto_enumTypes = make([]protoimpl.EnumInfo, 12)
-var file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_yandex_cloud_ai_stt_v3_stt_proto_goTypes = []any{
 	(CodeType)(0), // 0: speechkit.stt.v3.CodeType
 	(TextNormalizationOptions_TextNormalization)(0),         // 1: speechkit.stt.v3.TextNormalizationOptions.TextNormalization
@@ -4294,8 +4345,9 @@ var file_yandex_cloud_ai_stt_v3_stt_proto_goTypes = []any{
 	(*SpeakerAnalysis)(nil),                                 // 46: speechkit.stt.v3.SpeakerAnalysis
 	(*ConversationAnalysis)(nil),                            // 47: speechkit.stt.v3.ConversationAnalysis
 	(*StreamingResponse)(nil),                               // 48: speechkit.stt.v3.StreamingResponse
-	(*DescriptiveStatistics_Quantile)(nil),                  // 49: speechkit.stt.v3.DescriptiveStatistics.Quantile
-	(*ConversationAnalysis_InterruptsEvaluation)(nil),       // 50: speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
+	(*DeleteRecognitionRequest)(nil),                        // 49: speechkit.stt.v3.DeleteRecognitionRequest
+	(*DescriptiveStatistics_Quantile)(nil),                  // 50: speechkit.stt.v3.DescriptiveStatistics.Quantile
+	(*ConversationAnalysis_InterruptsEvaluation)(nil),       // 51: speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
 }
 var file_yandex_cloud_ai_stt_v3_stt_proto_depIdxs = []int32{
 	1,  // 0: speechkit.stt.v3.TextNormalizationOptions.text_normalization:type_name -> speechkit.stt.v3.TextNormalizationOptions.TextNormalization
@@ -4337,7 +4389,7 @@ var file_yandex_cloud_ai_stt_v3_stt_proto_depIdxs = []int32{
 	41, // 36: speechkit.stt.v3.RecognitionClassifierResult.labels:type_name -> speechkit.stt.v3.RecognitionClassifierLabel
 	10, // 37: speechkit.stt.v3.RecognitionClassifierUpdate.window_type:type_name -> speechkit.stt.v3.RecognitionClassifierUpdate.WindowType
 	42, // 38: speechkit.stt.v3.RecognitionClassifierUpdate.classifier_result:type_name -> speechkit.stt.v3.RecognitionClassifierResult
-	49, // 39: speechkit.stt.v3.DescriptiveStatistics.quantiles:type_name -> speechkit.stt.v3.DescriptiveStatistics.Quantile
+	50, // 39: speechkit.stt.v3.DescriptiveStatistics.quantiles:type_name -> speechkit.stt.v3.DescriptiveStatistics.Quantile
 	11, // 40: speechkit.stt.v3.SpeakerAnalysis.window_type:type_name -> speechkit.stt.v3.SpeakerAnalysis.WindowType
 	45, // 41: speechkit.stt.v3.SpeakerAnalysis.speech_boundaries:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
 	44, // 42: speechkit.stt.v3.SpeakerAnalysis.words_per_second:type_name -> speechkit.stt.v3.DescriptiveStatistics
@@ -4348,7 +4400,7 @@ var file_yandex_cloud_ai_stt_v3_stt_proto_depIdxs = []int32{
 	45, // 47: speechkit.stt.v3.ConversationAnalysis.conversation_boundaries:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
 	44, // 48: speechkit.stt.v3.ConversationAnalysis.simultaneous_silence_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
 	44, // 49: speechkit.stt.v3.ConversationAnalysis.simultaneous_speech_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	50, // 50: speechkit.stt.v3.ConversationAnalysis.speaker_interrupts:type_name -> speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
+	51, // 50: speechkit.stt.v3.ConversationAnalysis.speaker_interrupts:type_name -> speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
 	39, // 51: speechkit.stt.v3.StreamingResponse.session_uuid:type_name -> speechkit.stt.v3.SessionUuid
 	36, // 52: speechkit.stt.v3.StreamingResponse.audio_cursors:type_name -> speechkit.stt.v3.AudioCursors
 	35, // 53: speechkit.stt.v3.StreamingResponse.partial:type_name -> speechkit.stt.v3.AlternativeUpdate
@@ -4818,7 +4870,7 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37].Exporter = func(v any, i int) any {
-			switch v := v.(*DescriptiveStatistics_Quantile); i {
+			switch v := v.(*DeleteRecognitionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4830,6 +4882,18 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38].Exporter = func(v any, i int) any {
+			switch v := v.(*DescriptiveStatistics_Quantile); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39].Exporter = func(v any, i int) any {
 			switch v := v.(*ConversationAnalysis_InterruptsEvaluation); i {
 			case 0:
 				return &v.state
@@ -4879,7 +4943,7 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_stt_v3_stt_proto_rawDesc,
 			NumEnums:      12,
-			NumMessages:   39,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

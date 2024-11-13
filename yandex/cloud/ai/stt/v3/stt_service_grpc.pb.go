@@ -12,6 +12,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -120,8 +121,9 @@ var Recognizer_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	AsyncRecognizer_RecognizeFile_FullMethodName  = "/speechkit.stt.v3.AsyncRecognizer/RecognizeFile"
-	AsyncRecognizer_GetRecognition_FullMethodName = "/speechkit.stt.v3.AsyncRecognizer/GetRecognition"
+	AsyncRecognizer_RecognizeFile_FullMethodName     = "/speechkit.stt.v3.AsyncRecognizer/RecognizeFile"
+	AsyncRecognizer_GetRecognition_FullMethodName    = "/speechkit.stt.v3.AsyncRecognizer/GetRecognition"
+	AsyncRecognizer_DeleteRecognition_FullMethodName = "/speechkit.stt.v3.AsyncRecognizer/DeleteRecognition"
 )
 
 // AsyncRecognizerClient is the client API for AsyncRecognizer service.
@@ -132,6 +134,7 @@ const (
 type AsyncRecognizerClient interface {
 	RecognizeFile(ctx context.Context, in *RecognizeFileRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	GetRecognition(ctx context.Context, in *GetRecognitionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamingResponse], error)
+	DeleteRecognition(ctx context.Context, in *DeleteRecognitionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type asyncRecognizerClient struct {
@@ -171,6 +174,16 @@ func (c *asyncRecognizerClient) GetRecognition(ctx context.Context, in *GetRecog
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type AsyncRecognizer_GetRecognitionClient = grpc.ServerStreamingClient[StreamingResponse]
 
+func (c *asyncRecognizerClient) DeleteRecognition(ctx context.Context, in *DeleteRecognitionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AsyncRecognizer_DeleteRecognition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AsyncRecognizerServer is the server API for AsyncRecognizer service.
 // All implementations should embed UnimplementedAsyncRecognizerServer
 // for forward compatibility.
@@ -179,6 +192,7 @@ type AsyncRecognizer_GetRecognitionClient = grpc.ServerStreamingClient[Streaming
 type AsyncRecognizerServer interface {
 	RecognizeFile(context.Context, *RecognizeFileRequest) (*operation.Operation, error)
 	GetRecognition(*GetRecognitionRequest, grpc.ServerStreamingServer[StreamingResponse]) error
+	DeleteRecognition(context.Context, *DeleteRecognitionRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedAsyncRecognizerServer should be embedded to have
@@ -193,6 +207,9 @@ func (UnimplementedAsyncRecognizerServer) RecognizeFile(context.Context, *Recogn
 }
 func (UnimplementedAsyncRecognizerServer) GetRecognition(*GetRecognitionRequest, grpc.ServerStreamingServer[StreamingResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method GetRecognition not implemented")
+}
+func (UnimplementedAsyncRecognizerServer) DeleteRecognition(context.Context, *DeleteRecognitionRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRecognition not implemented")
 }
 func (UnimplementedAsyncRecognizerServer) testEmbeddedByValue() {}
 
@@ -243,6 +260,24 @@ func _AsyncRecognizer_GetRecognition_Handler(srv interface{}, stream grpc.Server
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type AsyncRecognizer_GetRecognitionServer = grpc.ServerStreamingServer[StreamingResponse]
 
+func _AsyncRecognizer_DeleteRecognition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRecognitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AsyncRecognizerServer).DeleteRecognition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AsyncRecognizer_DeleteRecognition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AsyncRecognizerServer).DeleteRecognition(ctx, req.(*DeleteRecognitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AsyncRecognizer_ServiceDesc is the grpc.ServiceDesc for AsyncRecognizer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -253,6 +288,10 @@ var AsyncRecognizer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RecognizeFile",
 			Handler:    _AsyncRecognizer_RecognizeFile_Handler,
+		},
+		{
+			MethodName: "DeleteRecognition",
+			Handler:    _AsyncRecognizer_DeleteRecognition_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

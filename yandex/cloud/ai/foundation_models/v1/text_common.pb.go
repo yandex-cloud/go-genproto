@@ -279,7 +279,7 @@ type ContentUsage struct {
 
 	// The number of tokens in the textual part of the model input.
 	InputTextTokens int64 `protobuf:"varint,1,opt,name=input_text_tokens,json=inputTextTokens,proto3" json:"input_text_tokens,omitempty"`
-	// The total number of tokens in the generated completions.
+	// The number of tokens in the generated completion.
 	CompletionTokens int64 `protobuf:"varint,2,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
 	// The total number of tokens, including all input tokens and all generated tokens.
 	TotalTokens int64 `protobuf:"varint,3,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
@@ -344,9 +344,9 @@ type Alternative struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// A message containing the content of the alternative.
+	// A message with the content of the alternative.
 	Message *Message `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
-	// The generation status of the alternative
+	// The generation status of the alternative.
 	Status Alternative_AlternativeStatus `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.ai.foundation_models.v1.Alternative_AlternativeStatus" json:"status,omitempty"`
 }
 

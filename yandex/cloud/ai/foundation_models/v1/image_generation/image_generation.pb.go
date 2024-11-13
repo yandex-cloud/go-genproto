@@ -140,9 +140,10 @@ type ImageGenerationOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// MIME type of generated image format.
+	// The [MIME type](https://en.wikipedia.org/wiki/Media_type) of generated image format.
+	// For possible specifications, see [documentation](/docs/foundation-models/concepts).
 	MimeType string `protobuf:"bytes,1,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	// Seed for image generation.
+	// Seed for image generation. It serves as a starting point for image generation from noise.
 	Seed int64 `protobuf:"varint,2,opt,name=seed,proto3" json:"seed,omitempty"`
 	// Aspect ratio of generated image.
 	AspectRatio *AspectRatio `protobuf:"bytes,3,opt,name=aspect_ratio,json=aspectRatio,proto3" json:"aspect_ratio,omitempty"`

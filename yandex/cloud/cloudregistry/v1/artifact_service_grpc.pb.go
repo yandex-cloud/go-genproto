@@ -27,12 +27,14 @@ const (
 // ArtifactServiceClient is the client API for ArtifactService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// A set of methods for managing Artifacts.
 type ArtifactServiceClient interface {
-	// Returns the specified Registry artifact resource.
+	// Returns the specified artifact resource.
 	//
-	// To get the list of available Registry artifact resources, make RegistryService.ListArtifacts method call.
+	// To get the list of available artifact resources, make [RegistryService.ListArtifacts] method call.
 	Get(ctx context.Context, in *GetArtifactRequest, opts ...grpc.CallOption) (*Artifact, error)
-	// Deletes the specified registry artifact.
+	// Deletes the specified artifact.
 	Delete(ctx context.Context, in *DeleteArtifactRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -67,12 +69,14 @@ func (c *artifactServiceClient) Delete(ctx context.Context, in *DeleteArtifactRe
 // ArtifactServiceServer is the server API for ArtifactService service.
 // All implementations should embed UnimplementedArtifactServiceServer
 // for forward compatibility.
+//
+// A set of methods for managing Artifacts.
 type ArtifactServiceServer interface {
-	// Returns the specified Registry artifact resource.
+	// Returns the specified artifact resource.
 	//
-	// To get the list of available Registry artifact resources, make RegistryService.ListArtifacts method call.
+	// To get the list of available artifact resources, make [RegistryService.ListArtifacts] method call.
 	Get(context.Context, *GetArtifactRequest) (*Artifact, error)
-	// Deletes the specified registry artifact.
+	// Deletes the specified artifact.
 	Delete(context.Context, *DeleteArtifactRequest) (*operation.Operation, error)
 }
 

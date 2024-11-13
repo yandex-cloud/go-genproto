@@ -51,6 +51,14 @@ func (m *Video) SetVisibilityStatus(v Video_VisibilityStatus) {
 	m.VisibilityStatus = v
 }
 
+func (m *Video) SetAutoTranscode(v AutoTranscode) {
+	m.AutoTranscode = v
+}
+
+func (m *Video) SetSubtitleIds(v []string) {
+	m.SubtitleIds = v
+}
+
 func (m *Video) SetTusd(v *VideoTUSDSource) {
 	m.Source = &Video_Tusd{
 		Tusd: v,
@@ -66,6 +74,12 @@ func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
 func (m *Video) SetAuthSystemAccess(v *VideoAuthSystemAccessRights) {
 	m.AccessRights = &Video_AuthSystemAccess{
 		AuthSystemAccess: v,
+	}
+}
+
+func (m *Video) SetSignUrlAccess(v *VideoSignURLAccessRights) {
+	m.AccessRights = &Video_SignUrlAccess{
+		SignUrlAccess: v,
 	}
 }
 

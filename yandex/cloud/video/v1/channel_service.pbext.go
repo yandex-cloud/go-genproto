@@ -89,3 +89,15 @@ func (m *DeleteChannelRequest) SetChannelId(v string) {
 func (m *DeleteChannelMetadata) SetChannelId(v string) {
 	m.ChannelId = v
 }
+
+func (m *BatchDeleteChannelsRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
+func (m *BatchDeleteChannelsRequest) SetChannelIds(v []string) {
+	m.ChannelIds = v
+}
+
+func (m *BatchDeleteChannelsMetadata) SetChannelIds(v []string) {
+	m.ChannelIds = v
+}

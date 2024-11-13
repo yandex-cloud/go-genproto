@@ -200,6 +200,10 @@ func (m *StreamBackend) SetEnableProxyProtocol(v bool) {
 	m.EnableProxyProtocol = v
 }
 
+func (m *StreamBackend) SetKeepConnectionsOnHostHealthFailure(v bool) {
+	m.KeepConnectionsOnHostHealthFailure = v
+}
+
 type HttpBackend_BackendType = isHttpBackend_BackendType
 
 func (m *HttpBackend) SetBackendType(v HttpBackend_BackendType) {

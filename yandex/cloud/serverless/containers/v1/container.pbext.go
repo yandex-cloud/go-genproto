@@ -108,6 +108,10 @@ func (m *Revision) SetMounts(v []*Mount) {
 	m.Mounts = v
 }
 
+func (m *Revision) SetRuntime(v *Runtime) {
+	m.Runtime = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -278,4 +282,22 @@ func (m *Mount_DiskSpec) SetSize(v int64) {
 
 func (m *Mount_DiskSpec) SetBlockSize(v int64) {
 	m.BlockSize = v
+}
+
+type Runtime_Type = isRuntime_Type
+
+func (m *Runtime) SetType(v Runtime_Type) {
+	m.Type = v
+}
+
+func (m *Runtime) SetHttp(v *Runtime_Http) {
+	m.Type = &Runtime_Http_{
+		Http: v,
+	}
+}
+
+func (m *Runtime) SetTask(v *Runtime_Task) {
+	m.Type = &Runtime_Task_{
+		Task: v,
+	}
 }

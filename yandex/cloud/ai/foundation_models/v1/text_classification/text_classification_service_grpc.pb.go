@@ -27,11 +27,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Service for classifying text from input text.
+// Service for classifying the text requests provided in prompts.
 type TextClassificationServiceClient interface {
-	// RPC method for text classification.
+	// RPC method to classify text with tuned model.
+	//
+	// The names of the classes between which the model will be distributing requests
+	// must be specified during model tuning and are not provided in the request.
 	Classify(ctx context.Context, in *TextClassificationRequest, opts ...grpc.CallOption) (*TextClassificationResponse, error)
-	// RPC method for few-shot text classification.
+	// RPC method for binary and multi-class classification.
+	//
+	// You can provide up to 20 classes for few-shot text classification
+	// with optional examples.
 	FewShotClassify(ctx context.Context, in *FewShotTextClassificationRequest, opts ...grpc.CallOption) (*FewShotTextClassificationResponse, error)
 }
 
@@ -67,11 +73,17 @@ func (c *textClassificationServiceClient) FewShotClassify(ctx context.Context, i
 // All implementations should embed UnimplementedTextClassificationServiceServer
 // for forward compatibility.
 //
-// Service for classifying text from input text.
+// Service for classifying the text requests provided in prompts.
 type TextClassificationServiceServer interface {
-	// RPC method for text classification.
+	// RPC method to classify text with tuned model.
+	//
+	// The names of the classes between which the model will be distributing requests
+	// must be specified during model tuning and are not provided in the request.
 	Classify(context.Context, *TextClassificationRequest) (*TextClassificationResponse, error)
-	// RPC method for few-shot text classification.
+	// RPC method for binary and multi-class classification.
+	//
+	// You can provide up to 20 classes for few-shot text classification
+	// with optional examples.
 	FewShotClassify(context.Context, *FewShotTextClassificationRequest) (*FewShotTextClassificationResponse, error)
 }
 

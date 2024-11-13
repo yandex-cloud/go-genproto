@@ -43,7 +43,7 @@ const (
 type RegistryServiceClient interface {
 	// Returns the specified Registry resource.
 	//
-	// To get the list of available Registry resources, make a [List] request.
+	// To get the list of available Registry resources, make a [RegistryService.List] request.
 	Get(ctx context.Context, in *GetRegistryRequest, opts ...grpc.CallOption) (*Registry, error)
 	// Retrieves the list of Registry resources in the specified folder.
 	List(ctx context.Context, in *ListRegistriesRequest, opts ...grpc.CallOption) (*ListRegistriesResponse, error)
@@ -65,7 +65,7 @@ type RegistryServiceClient interface {
 	SetIpPermissions(ctx context.Context, in *SetIpPermissionsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Update ip permissions for the specified registry.
 	UpdateIpPermissions(ctx context.Context, in *UpdateIpPermissionsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves the list of Registry artifact resources in the specified registry.
+	// Retrieves the list of registry artifact resources in the specified registry.
 	ListArtifacts(ctx context.Context, in *ListArtifactsRequest, opts ...grpc.CallOption) (*ListArtifactsResponse, error)
 }
 
@@ -205,7 +205,7 @@ func (c *registryServiceClient) ListArtifacts(ctx context.Context, in *ListArtif
 type RegistryServiceServer interface {
 	// Returns the specified Registry resource.
 	//
-	// To get the list of available Registry resources, make a [List] request.
+	// To get the list of available Registry resources, make a [RegistryService.List] request.
 	Get(context.Context, *GetRegistryRequest) (*Registry, error)
 	// Retrieves the list of Registry resources in the specified folder.
 	List(context.Context, *ListRegistriesRequest) (*ListRegistriesResponse, error)
@@ -227,7 +227,7 @@ type RegistryServiceServer interface {
 	SetIpPermissions(context.Context, *SetIpPermissionsRequest) (*operation.Operation, error)
 	// Update ip permissions for the specified registry.
 	UpdateIpPermissions(context.Context, *UpdateIpPermissionsRequest) (*operation.Operation, error)
-	// Retrieves the list of Registry artifact resources in the specified registry.
+	// Retrieves the list of registry artifact resources in the specified registry.
 	ListArtifacts(context.Context, *ListArtifactsRequest) (*ListArtifactsResponse, error)
 }
 

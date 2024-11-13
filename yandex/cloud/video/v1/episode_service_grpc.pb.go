@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	EpisodeService_Get_FullMethodName           = "/yandex.cloud.video.v1.EpisodeService/Get"
 	EpisodeService_List_FullMethodName          = "/yandex.cloud.video.v1.EpisodeService/List"
+	EpisodeService_BatchGet_FullMethodName      = "/yandex.cloud.video.v1.EpisodeService/BatchGet"
 	EpisodeService_Create_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Create"
 	EpisodeService_Update_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Update"
 	EpisodeService_Delete_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Delete"
@@ -40,6 +41,8 @@ type EpisodeServiceClient interface {
 	Get(ctx context.Context, in *GetEpisodeRequest, opts ...grpc.CallOption) (*Episode, error)
 	// List episodes for stream or line.
 	List(ctx context.Context, in *ListEpisodesRequest, opts ...grpc.CallOption) (*ListEpisodesResponse, error)
+	// Batch get episodes for channel.
+	BatchGet(ctx context.Context, in *BatchGetEpisodesRequest, opts ...grpc.CallOption) (*BatchGetEpisodesResponse, error)
 	// Create episode.
 	Create(ctx context.Context, in *CreateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Update episode.
@@ -76,6 +79,16 @@ func (c *episodeServiceClient) List(ctx context.Context, in *ListEpisodesRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListEpisodesResponse)
 	err := c.cc.Invoke(ctx, EpisodeService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *episodeServiceClient) BatchGet(ctx context.Context, in *BatchGetEpisodesRequest, opts ...grpc.CallOption) (*BatchGetEpisodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetEpisodesResponse)
+	err := c.cc.Invoke(ctx, EpisodeService_BatchGet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,6 +165,8 @@ type EpisodeServiceServer interface {
 	Get(context.Context, *GetEpisodeRequest) (*Episode, error)
 	// List episodes for stream or line.
 	List(context.Context, *ListEpisodesRequest) (*ListEpisodesResponse, error)
+	// Batch get episodes for channel.
+	BatchGet(context.Context, *BatchGetEpisodesRequest) (*BatchGetEpisodesResponse, error)
 	// Create episode.
 	Create(context.Context, *CreateEpisodeRequest) (*operation.Operation, error)
 	// Update episode.
@@ -178,6 +193,9 @@ func (UnimplementedEpisodeServiceServer) Get(context.Context, *GetEpisodeRequest
 }
 func (UnimplementedEpisodeServiceServer) List(context.Context, *ListEpisodesRequest) (*ListEpisodesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedEpisodeServiceServer) BatchGet(context.Context, *BatchGetEpisodesRequest) (*BatchGetEpisodesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchGet not implemented")
 }
 func (UnimplementedEpisodeServiceServer) Create(context.Context, *CreateEpisodeRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -249,6 +267,24 @@ func _EpisodeService_List_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EpisodeServiceServer).List(ctx, req.(*ListEpisodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EpisodeService_BatchGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetEpisodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EpisodeServiceServer).BatchGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EpisodeService_BatchGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EpisodeServiceServer).BatchGet(ctx, req.(*BatchGetEpisodesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -375,6 +411,10 @@ var EpisodeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _EpisodeService_List_Handler,
+		},
+		{
+			MethodName: "BatchGet",
+			Handler:    _EpisodeService_BatchGet_Handler,
 		},
 		{
 			MethodName: "Create",

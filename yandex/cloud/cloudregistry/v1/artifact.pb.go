@@ -131,6 +131,7 @@ func (Artifact_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDescGZIP(), []int{0, 1}
 }
 
+// A Artifact resource.
 type Artifact struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

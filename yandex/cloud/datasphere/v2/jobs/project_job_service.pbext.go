@@ -103,6 +103,14 @@ func (m *ExecuteProjectJobMetadata) SetJob(v *Job) {
 	m.Job = v
 }
 
+func (m *ExecuteProjectJobMetadata) SetProgress(v *JobProgress) {
+	m.Progress = v
+}
+
+func (m *ExecuteProjectJobMetadata) SetMetadata(v *JobMetadata) {
+	m.Metadata = v
+}
+
 func (m *CancelProjectJobRequest) SetJobId(v string) {
 	m.JobId = v
 }

@@ -20,10 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	ThumbnailService_Get_FullMethodName                       = "/yandex.cloud.video.v1.ThumbnailService/Get"
 	ThumbnailService_List_FullMethodName                      = "/yandex.cloud.video.v1.ThumbnailService/List"
 	ThumbnailService_Create_FullMethodName                    = "/yandex.cloud.video.v1.ThumbnailService/Create"
 	ThumbnailService_BatchGenerateDownloadURLs_FullMethodName = "/yandex.cloud.video.v1.ThumbnailService/BatchGenerateDownloadURLs"
 	ThumbnailService_GenerateUploadURL_FullMethodName         = "/yandex.cloud.video.v1.ThumbnailService/GenerateUploadURL"
+	ThumbnailService_Delete_FullMethodName                    = "/yandex.cloud.video.v1.ThumbnailService/Delete"
 )
 
 // ThumbnailServiceClient is the client API for ThumbnailService service.
@@ -32,6 +34,8 @@ const (
 //
 // Thumbnail management service.
 type ThumbnailServiceClient interface {
+	// Returns the specific thumbnail.
+	Get(ctx context.Context, in *GetThumbnailRequest, opts ...grpc.CallOption) (*Thumbnail, error)
 	// List thumbnails for channel.
 	List(ctx context.Context, in *ListThumbnailRequest, opts ...grpc.CallOption) (*ListThumbnailResponse, error)
 	// Create thumbnail.
@@ -40,6 +44,8 @@ type ThumbnailServiceClient interface {
 	BatchGenerateDownloadURLs(ctx context.Context, in *BatchGenerateDownloadURLsRequest, opts ...grpc.CallOption) (*BatchGenerateDownloadURLsResponse, error)
 	// Generate url for upload image.
 	GenerateUploadURL(ctx context.Context, in *GenerateThumbnailUploadURLRequest, opts ...grpc.CallOption) (*GenerateThumbnailUploadURLResponse, error)
+	// Delete thumbnail.
+	Delete(ctx context.Context, in *DeleteThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type thumbnailServiceClient struct {
@@ -48,6 +54,16 @@ type thumbnailServiceClient struct {
 
 func NewThumbnailServiceClient(cc grpc.ClientConnInterface) ThumbnailServiceClient {
 	return &thumbnailServiceClient{cc}
+}
+
+func (c *thumbnailServiceClient) Get(ctx context.Context, in *GetThumbnailRequest, opts ...grpc.CallOption) (*Thumbnail, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Thumbnail)
+	err := c.cc.Invoke(ctx, ThumbnailService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *thumbnailServiceClient) List(ctx context.Context, in *ListThumbnailRequest, opts ...grpc.CallOption) (*ListThumbnailResponse, error) {
@@ -90,12 +106,24 @@ func (c *thumbnailServiceClient) GenerateUploadURL(ctx context.Context, in *Gene
 	return out, nil
 }
 
+func (c *thumbnailServiceClient) Delete(ctx context.Context, in *DeleteThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ThumbnailService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ThumbnailServiceServer is the server API for ThumbnailService service.
 // All implementations should embed UnimplementedThumbnailServiceServer
 // for forward compatibility.
 //
 // Thumbnail management service.
 type ThumbnailServiceServer interface {
+	// Returns the specific thumbnail.
+	Get(context.Context, *GetThumbnailRequest) (*Thumbnail, error)
 	// List thumbnails for channel.
 	List(context.Context, *ListThumbnailRequest) (*ListThumbnailResponse, error)
 	// Create thumbnail.
@@ -104,6 +132,8 @@ type ThumbnailServiceServer interface {
 	BatchGenerateDownloadURLs(context.Context, *BatchGenerateDownloadURLsRequest) (*BatchGenerateDownloadURLsResponse, error)
 	// Generate url for upload image.
 	GenerateUploadURL(context.Context, *GenerateThumbnailUploadURLRequest) (*GenerateThumbnailUploadURLResponse, error)
+	// Delete thumbnail.
+	Delete(context.Context, *DeleteThumbnailRequest) (*operation.Operation, error)
 }
 
 // UnimplementedThumbnailServiceServer should be embedded to have
@@ -113,6 +143,9 @@ type ThumbnailServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedThumbnailServiceServer struct{}
 
+func (UnimplementedThumbnailServiceServer) Get(context.Context, *GetThumbnailRequest) (*Thumbnail, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
 func (UnimplementedThumbnailServiceServer) List(context.Context, *ListThumbnailRequest) (*ListThumbnailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
@@ -124,6 +157,9 @@ func (UnimplementedThumbnailServiceServer) BatchGenerateDownloadURLs(context.Con
 }
 func (UnimplementedThumbnailServiceServer) GenerateUploadURL(context.Context, *GenerateThumbnailUploadURLRequest) (*GenerateThumbnailUploadURLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateUploadURL not implemented")
+}
+func (UnimplementedThumbnailServiceServer) Delete(context.Context, *DeleteThumbnailRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedThumbnailServiceServer) testEmbeddedByValue() {}
 
@@ -143,6 +179,24 @@ func RegisterThumbnailServiceServer(s grpc.ServiceRegistrar, srv ThumbnailServic
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ThumbnailService_ServiceDesc, srv)
+}
+
+func _ThumbnailService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetThumbnailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ThumbnailServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ThumbnailService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ThumbnailServiceServer).Get(ctx, req.(*GetThumbnailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ThumbnailService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -217,6 +271,24 @@ func _ThumbnailService_GenerateUploadURL_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ThumbnailService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteThumbnailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ThumbnailServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ThumbnailService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ThumbnailServiceServer).Delete(ctx, req.(*DeleteThumbnailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ThumbnailService_ServiceDesc is the grpc.ServiceDesc for ThumbnailService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -224,6 +296,10 @@ var ThumbnailService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "yandex.cloud.video.v1.ThumbnailService",
 	HandlerType: (*ThumbnailServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Get",
+			Handler:    _ThumbnailService_Get_Handler,
+		},
 		{
 			MethodName: "List",
 			Handler:    _ThumbnailService_List_Handler,
@@ -239,6 +315,10 @@ var ThumbnailService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateUploadURL",
 			Handler:    _ThumbnailService_GenerateUploadURL_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _ThumbnailService_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

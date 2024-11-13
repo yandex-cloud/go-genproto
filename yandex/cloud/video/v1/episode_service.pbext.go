@@ -53,6 +53,18 @@ func (m *ListEpisodesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *BatchGetEpisodesRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchGetEpisodesRequest) SetEpisodeIds(v []string) {
+	m.EpisodeIds = v
+}
+
+func (m *BatchGetEpisodesResponse) SetEpisodes(v []*Episode) {
+	m.Episodes = v
+}
+
 type CreateEpisodeRequest_ParentId = isCreateEpisodeRequest_ParentId
 
 func (m *CreateEpisodeRequest) SetParentId(v CreateEpisodeRequest_ParentId) {
@@ -113,6 +125,12 @@ func (m *CreateEpisodeRequest) SetAuthSystemAccess(v *EpisodeAuthSystemAccessPar
 	}
 }
 
+func (m *CreateEpisodeRequest) SetSignUrlAccess(v *EpisodeSignURLAccessParams) {
+	m.AccessRights = &CreateEpisodeRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *CreateEpisodeMetadata) SetEpisodeId(v string) {
 	m.EpisodeId = v
 }
@@ -164,6 +182,12 @@ func (m *UpdateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
 func (m *UpdateEpisodeRequest) SetAuthSystemAccess(v *EpisodeAuthSystemAccessParams) {
 	m.AccessRights = &UpdateEpisodeRequest_AuthSystemAccess{
 		AuthSystemAccess: v,
+	}
+}
+
+func (m *UpdateEpisodeRequest) SetSignUrlAccess(v *EpisodeSignURLAccessParams) {
+	m.AccessRights = &UpdateEpisodeRequest_SignUrlAccess{
+		SignUrlAccess: v,
 	}
 }
 

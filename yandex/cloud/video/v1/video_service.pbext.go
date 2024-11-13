@@ -38,6 +38,18 @@ func (m *ListVideoResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *BatchGetVideosRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchGetVideosRequest) SetVideoIds(v []string) {
+	m.VideoIds = v
+}
+
+func (m *BatchGetVideosResponse) SetVideos(v []*Video) {
+	m.Videos = v
+}
+
 type CreateVideoRequest_Source = isCreateVideoRequest_Source
 
 func (m *CreateVideoRequest) SetSource(v CreateVideoRequest_Source) {
@@ -66,6 +78,10 @@ func (m *CreateVideoRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+func (m *CreateVideoRequest) SetAutoTranscode(v AutoTranscode) {
+	m.AutoTranscode = v
+}
+
 func (m *CreateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -85,6 +101,12 @@ func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
 func (m *CreateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams) {
 	m.AccessRights = &CreateVideoRequest_AuthSystemAccess{
 		AuthSystemAccess: v,
+	}
+}
+
+func (m *CreateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
+	m.AccessRights = &CreateVideoRequest_SignUrlAccess{
+		SignUrlAccess: v,
 	}
 }
 
@@ -126,6 +148,10 @@ func (m *UpdateVideoRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+func (m *UpdateVideoRequest) SetAutoTranscode(v AutoTranscode) {
+	m.AutoTranscode = v
+}
+
 func (m *UpdateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -142,7 +168,29 @@ func (m *UpdateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams)
 	}
 }
 
+func (m *UpdateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
+	m.AccessRights = &UpdateVideoRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *UpdateVideoMetadata) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *TranscodeVideoRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *TranscodeVideoRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
+	m.FieldMask = v
+}
+
+func (m *TranscodeVideoRequest) SetSubtitleIds(v []string) {
+	m.SubtitleIds = v
+}
+
+func (m *TranscodeVideoMetadata) SetVideoId(v string) {
 	m.VideoId = v
 }
 
@@ -152,6 +200,18 @@ func (m *DeleteVideoRequest) SetVideoId(v string) {
 
 func (m *DeleteVideoMetadata) SetVideoId(v string) {
 	m.VideoId = v
+}
+
+func (m *BatchDeleteVideosRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchDeleteVideosRequest) SetVideoIds(v []string) {
+	m.VideoIds = v
+}
+
+func (m *BatchDeleteVideosMetadata) SetVideoIds(v []string) {
+	m.VideoIds = v
 }
 
 type PerformVideoActionRequest_Action = isPerformVideoActionRequest_Action

@@ -22,9 +22,11 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	StreamLineService_Get_FullMethodName             = "/yandex.cloud.video.v1.StreamLineService/Get"
 	StreamLineService_List_FullMethodName            = "/yandex.cloud.video.v1.StreamLineService/List"
+	StreamLineService_BatchGet_FullMethodName        = "/yandex.cloud.video.v1.StreamLineService/BatchGet"
 	StreamLineService_Create_FullMethodName          = "/yandex.cloud.video.v1.StreamLineService/Create"
 	StreamLineService_Update_FullMethodName          = "/yandex.cloud.video.v1.StreamLineService/Update"
 	StreamLineService_Delete_FullMethodName          = "/yandex.cloud.video.v1.StreamLineService/Delete"
+	StreamLineService_BatchDelete_FullMethodName     = "/yandex.cloud.video.v1.StreamLineService/BatchDelete"
 	StreamLineService_PerformAction_FullMethodName   = "/yandex.cloud.video.v1.StreamLineService/PerformAction"
 	StreamLineService_GetStreamKey_FullMethodName    = "/yandex.cloud.video.v1.StreamLineService/GetStreamKey"
 	StreamLineService_UpdateStreamKey_FullMethodName = "/yandex.cloud.video.v1.StreamLineService/UpdateStreamKey"
@@ -40,12 +42,16 @@ type StreamLineServiceClient interface {
 	Get(ctx context.Context, in *GetStreamLineRequest, opts ...grpc.CallOption) (*StreamLine, error)
 	// List lines for channel.
 	List(ctx context.Context, in *ListStreamLinesRequest, opts ...grpc.CallOption) (*ListStreamLinesResponse, error)
+	// Batch get lines for channel.
+	BatchGet(ctx context.Context, in *BatchGetStreamLinesRequest, opts ...grpc.CallOption) (*BatchGetStreamLinesResponse, error)
 	// Create stream line.
 	Create(ctx context.Context, in *CreateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Update stream line.
 	Update(ctx context.Context, in *UpdateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete stream line.
 	Delete(ctx context.Context, in *DeleteStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Batch delete stream lines.
+	BatchDelete(ctx context.Context, in *BatchDeleteStreamLinesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Perform an action on the line.
 	PerformAction(ctx context.Context, in *PerformLineActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns unique stream key.
@@ -82,6 +88,16 @@ func (c *streamLineServiceClient) List(ctx context.Context, in *ListStreamLinesR
 	return out, nil
 }
 
+func (c *streamLineServiceClient) BatchGet(ctx context.Context, in *BatchGetStreamLinesRequest, opts ...grpc.CallOption) (*BatchGetStreamLinesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetStreamLinesResponse)
+	err := c.cc.Invoke(ctx, StreamLineService_BatchGet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *streamLineServiceClient) Create(ctx context.Context, in *CreateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -106,6 +122,16 @@ func (c *streamLineServiceClient) Delete(ctx context.Context, in *DeleteStreamLi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, StreamLineService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *streamLineServiceClient) BatchDelete(ctx context.Context, in *BatchDeleteStreamLinesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, StreamLineService_BatchDelete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,12 +178,16 @@ type StreamLineServiceServer interface {
 	Get(context.Context, *GetStreamLineRequest) (*StreamLine, error)
 	// List lines for channel.
 	List(context.Context, *ListStreamLinesRequest) (*ListStreamLinesResponse, error)
+	// Batch get lines for channel.
+	BatchGet(context.Context, *BatchGetStreamLinesRequest) (*BatchGetStreamLinesResponse, error)
 	// Create stream line.
 	Create(context.Context, *CreateStreamLineRequest) (*operation.Operation, error)
 	// Update stream line.
 	Update(context.Context, *UpdateStreamLineRequest) (*operation.Operation, error)
 	// Delete stream line.
 	Delete(context.Context, *DeleteStreamLineRequest) (*operation.Operation, error)
+	// Batch delete stream lines.
+	BatchDelete(context.Context, *BatchDeleteStreamLinesRequest) (*operation.Operation, error)
 	// Perform an action on the line.
 	PerformAction(context.Context, *PerformLineActionRequest) (*operation.Operation, error)
 	// Returns unique stream key.
@@ -179,6 +209,9 @@ func (UnimplementedStreamLineServiceServer) Get(context.Context, *GetStreamLineR
 func (UnimplementedStreamLineServiceServer) List(context.Context, *ListStreamLinesRequest) (*ListStreamLinesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
+func (UnimplementedStreamLineServiceServer) BatchGet(context.Context, *BatchGetStreamLinesRequest) (*BatchGetStreamLinesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchGet not implemented")
+}
 func (UnimplementedStreamLineServiceServer) Create(context.Context, *CreateStreamLineRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
@@ -187,6 +220,9 @@ func (UnimplementedStreamLineServiceServer) Update(context.Context, *UpdateStrea
 }
 func (UnimplementedStreamLineServiceServer) Delete(context.Context, *DeleteStreamLineRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedStreamLineServiceServer) BatchDelete(context.Context, *BatchDeleteStreamLinesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchDelete not implemented")
 }
 func (UnimplementedStreamLineServiceServer) PerformAction(context.Context, *PerformLineActionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PerformAction not implemented")
@@ -253,6 +289,24 @@ func _StreamLineService_List_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StreamLineService_BatchGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetStreamLinesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StreamLineServiceServer).BatchGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StreamLineService_BatchGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StreamLineServiceServer).BatchGet(ctx, req.(*BatchGetStreamLinesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _StreamLineService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateStreamLineRequest)
 	if err := dec(in); err != nil {
@@ -303,6 +357,24 @@ func _StreamLineService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(StreamLineServiceServer).Delete(ctx, req.(*DeleteStreamLineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StreamLineService_BatchDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchDeleteStreamLinesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StreamLineServiceServer).BatchDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StreamLineService_BatchDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StreamLineServiceServer).BatchDelete(ctx, req.(*BatchDeleteStreamLinesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -377,6 +449,10 @@ var StreamLineService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StreamLineService_List_Handler,
 		},
 		{
+			MethodName: "BatchGet",
+			Handler:    _StreamLineService_BatchGet_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _StreamLineService_Create_Handler,
 		},
@@ -387,6 +463,10 @@ var StreamLineService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _StreamLineService_Delete_Handler,
+		},
+		{
+			MethodName: "BatchDelete",
+			Handler:    _StreamLineService_BatchDelete_Handler,
 		},
 		{
 			MethodName: "PerformAction",

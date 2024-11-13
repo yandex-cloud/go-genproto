@@ -22,6 +22,14 @@ func (m *StopExecutionResponse) SetExecutionId(v string) {
 	m.ExecutionId = v
 }
 
+func (m *TerminateExecutionRequest) SetExecutionId(v string) {
+	m.ExecutionId = v
+}
+
+func (m *TerminateExecutionResponse) SetExecutionId(v string) {
+	m.ExecutionId = v
+}
+
 func (m *GetExecutionRequest) SetExecutionId(v string) {
 	m.ExecutionId = v
 }

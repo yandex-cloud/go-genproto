@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ChannelService_Get_FullMethodName    = "/yandex.cloud.video.v1.ChannelService/Get"
-	ChannelService_List_FullMethodName   = "/yandex.cloud.video.v1.ChannelService/List"
-	ChannelService_Create_FullMethodName = "/yandex.cloud.video.v1.ChannelService/Create"
-	ChannelService_Update_FullMethodName = "/yandex.cloud.video.v1.ChannelService/Update"
-	ChannelService_Delete_FullMethodName = "/yandex.cloud.video.v1.ChannelService/Delete"
+	ChannelService_Get_FullMethodName         = "/yandex.cloud.video.v1.ChannelService/Get"
+	ChannelService_List_FullMethodName        = "/yandex.cloud.video.v1.ChannelService/List"
+	ChannelService_Create_FullMethodName      = "/yandex.cloud.video.v1.ChannelService/Create"
+	ChannelService_Update_FullMethodName      = "/yandex.cloud.video.v1.ChannelService/Update"
+	ChannelService_Delete_FullMethodName      = "/yandex.cloud.video.v1.ChannelService/Delete"
+	ChannelService_BatchDelete_FullMethodName = "/yandex.cloud.video.v1.ChannelService/BatchDelete"
 )
 
 // ChannelServiceClient is the client API for ChannelService service.
@@ -43,6 +44,8 @@ type ChannelServiceClient interface {
 	Update(ctx context.Context, in *UpdateChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete channel.
 	Delete(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Batch delete channels.
+	BatchDelete(ctx context.Context, in *BatchDeleteChannelsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type channelServiceClient struct {
@@ -103,6 +106,16 @@ func (c *channelServiceClient) Delete(ctx context.Context, in *DeleteChannelRequ
 	return out, nil
 }
 
+func (c *channelServiceClient) BatchDelete(ctx context.Context, in *BatchDeleteChannelsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ChannelService_BatchDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChannelServiceServer is the server API for ChannelService service.
 // All implementations should embed UnimplementedChannelServiceServer
 // for forward compatibility.
@@ -119,6 +132,8 @@ type ChannelServiceServer interface {
 	Update(context.Context, *UpdateChannelRequest) (*operation.Operation, error)
 	// Delete channel.
 	Delete(context.Context, *DeleteChannelRequest) (*operation.Operation, error)
+	// Batch delete channels.
+	BatchDelete(context.Context, *BatchDeleteChannelsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedChannelServiceServer should be embedded to have
@@ -142,6 +157,9 @@ func (UnimplementedChannelServiceServer) Update(context.Context, *UpdateChannelR
 }
 func (UnimplementedChannelServiceServer) Delete(context.Context, *DeleteChannelRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedChannelServiceServer) BatchDelete(context.Context, *BatchDeleteChannelsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchDelete not implemented")
 }
 func (UnimplementedChannelServiceServer) testEmbeddedByValue() {}
 
@@ -253,6 +271,24 @@ func _ChannelService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChannelService_BatchDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchDeleteChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChannelServiceServer).BatchDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChannelService_BatchDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChannelServiceServer).BatchDelete(ctx, req.(*BatchDeleteChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChannelService_ServiceDesc is the grpc.ServiceDesc for ChannelService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -279,6 +315,10 @@ var ChannelService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ChannelService_Delete_Handler,
+		},
+		{
+			MethodName: "BatchDelete",
+			Handler:    _ChannelService_BatchDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

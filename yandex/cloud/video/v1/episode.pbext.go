@@ -64,6 +64,12 @@ func (m *Episode) SetAuthSystemAccess(v *EpisodeAuthSystemAccessRights) {
 	}
 }
 
+func (m *Episode) SetSignUrlAccess(v *EpisodeSignURLAccessRights) {
+	m.AccessRights = &Episode_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *Episode) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

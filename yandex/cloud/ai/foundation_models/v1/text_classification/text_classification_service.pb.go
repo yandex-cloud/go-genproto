@@ -21,13 +21,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Request for the service to classify text.
+// Request for the service to classify text with tuned model.
+//
+// The names of the classes between which the model will be distributing requests must be specified during model tuning;
+// therefore, they are not provided in the request.
+//
+// For examples of usage, see [step-by-step guides](/docs/operations/classifier/additionally-trained).
 type TextClassificationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The identifier of the classification model.
+	// The [URI](/docs/foundation-models/concepts/classifier/models) of your tuned classifier model.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Text for classification.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
@@ -79,15 +84,16 @@ func (x *TextClassificationRequest) GetText() string {
 	return ""
 }
 
-// Response containing classifier predictions.
+// Response with classifier predictions.
 type TextClassificationResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Result of classification - a list of label-confidence pairs.
+	// The classification results with the `confidence“ values
+	// for the probability of classifying the request text into each class.
 	Predictions []*ClassificationLabel `protobuf:"bytes,1,rep,name=predictions,proto3" json:"predictions,omitempty"`
-	// Model version (changes with model releases).
+	// The model version changes with each new releases.
 	ModelVersion string `protobuf:"bytes,2,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`
 }
 
@@ -138,16 +144,19 @@ func (x *TextClassificationResponse) GetModelVersion() string {
 }
 
 // Request for the service to classify text.
+// For examples of usage, see [step-by-step guides](/docs/operations/classifier/readymade).
 type FewShotTextClassificationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The identifier of the classification model.
+	// The [URI](/docs/foundation-models/concepts/classifier/models) of the classifier model.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Text description of the classification task.
 	TaskDescription string `protobuf:"bytes,2,opt,name=task_description,json=taskDescription,proto3" json:"task_description,omitempty"`
 	// List of available labels for the classification result.
+	// Give meaningful names to label classes: this is essential for correct classification results.
+	// For example, use “chemistry“ and “physics“ rather than “chm“ and “phs“ for class names.
 	Labels []string `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty"`
 	// Text for classification.
 	Text string `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
@@ -228,9 +237,10 @@ type FewShotTextClassificationResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Result of classification - a list of label-confidence pairs.
+	// The classification results with the `confidence“ values
+	// for the probability of classifying the request text into each class.
 	Predictions []*ClassificationLabel `protobuf:"bytes,1,rep,name=predictions,proto3" json:"predictions,omitempty"`
-	// Model version (changes with model releases).
+	// The model version changes with each new releases.
 	ModelVersion string `protobuf:"bytes,2,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`
 }
 

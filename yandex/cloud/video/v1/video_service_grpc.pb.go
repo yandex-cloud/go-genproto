@@ -22,9 +22,12 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	VideoService_Get_FullMethodName           = "/yandex.cloud.video.v1.VideoService/Get"
 	VideoService_List_FullMethodName          = "/yandex.cloud.video.v1.VideoService/List"
+	VideoService_BatchGet_FullMethodName      = "/yandex.cloud.video.v1.VideoService/BatchGet"
 	VideoService_Create_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Create"
 	VideoService_Update_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Update"
+	VideoService_Transcode_FullMethodName     = "/yandex.cloud.video.v1.VideoService/Transcode"
 	VideoService_Delete_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Delete"
+	VideoService_BatchDelete_FullMethodName   = "/yandex.cloud.video.v1.VideoService/BatchDelete"
 	VideoService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.VideoService/PerformAction"
 	VideoService_GetPlayerURL_FullMethodName  = "/yandex.cloud.video.v1.VideoService/GetPlayerURL"
 	VideoService_GetManifests_FullMethodName  = "/yandex.cloud.video.v1.VideoService/GetManifests"
@@ -40,12 +43,18 @@ type VideoServiceClient interface {
 	Get(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*Video, error)
 	// List videos for channel.
 	List(ctx context.Context, in *ListVideoRequest, opts ...grpc.CallOption) (*ListVideoResponse, error)
+	// Batch get video in specific channel.
+	BatchGet(ctx context.Context, in *BatchGetVideosRequest, opts ...grpc.CallOption) (*BatchGetVideosResponse, error)
 	// Create video.
 	Create(ctx context.Context, in *CreateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Update video.
 	Update(ctx context.Context, in *UpdateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Transcode video.
+	Transcode(ctx context.Context, in *TranscodeVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete video.
 	Delete(ctx context.Context, in *DeleteVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Batch delete video.
+	BatchDelete(ctx context.Context, in *BatchDeleteVideosRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Perform an action on the episode.
 	PerformAction(ctx context.Context, in *PerformVideoActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns url to the player.
@@ -82,6 +91,16 @@ func (c *videoServiceClient) List(ctx context.Context, in *ListVideoRequest, opt
 	return out, nil
 }
 
+func (c *videoServiceClient) BatchGet(ctx context.Context, in *BatchGetVideosRequest, opts ...grpc.CallOption) (*BatchGetVideosResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetVideosResponse)
+	err := c.cc.Invoke(ctx, VideoService_BatchGet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *videoServiceClient) Create(ctx context.Context, in *CreateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -102,10 +121,30 @@ func (c *videoServiceClient) Update(ctx context.Context, in *UpdateVideoRequest,
 	return out, nil
 }
 
+func (c *videoServiceClient) Transcode(ctx context.Context, in *TranscodeVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, VideoService_Transcode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *videoServiceClient) Delete(ctx context.Context, in *DeleteVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, VideoService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *videoServiceClient) BatchDelete(ctx context.Context, in *BatchDeleteVideosRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, VideoService_BatchDelete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,12 +191,18 @@ type VideoServiceServer interface {
 	Get(context.Context, *GetVideoRequest) (*Video, error)
 	// List videos for channel.
 	List(context.Context, *ListVideoRequest) (*ListVideoResponse, error)
+	// Batch get video in specific channel.
+	BatchGet(context.Context, *BatchGetVideosRequest) (*BatchGetVideosResponse, error)
 	// Create video.
 	Create(context.Context, *CreateVideoRequest) (*operation.Operation, error)
 	// Update video.
 	Update(context.Context, *UpdateVideoRequest) (*operation.Operation, error)
+	// Transcode video.
+	Transcode(context.Context, *TranscodeVideoRequest) (*operation.Operation, error)
 	// Delete video.
 	Delete(context.Context, *DeleteVideoRequest) (*operation.Operation, error)
+	// Batch delete video.
+	BatchDelete(context.Context, *BatchDeleteVideosRequest) (*operation.Operation, error)
 	// Perform an action on the episode.
 	PerformAction(context.Context, *PerformVideoActionRequest) (*operation.Operation, error)
 	// Returns url to the player.
@@ -179,14 +224,23 @@ func (UnimplementedVideoServiceServer) Get(context.Context, *GetVideoRequest) (*
 func (UnimplementedVideoServiceServer) List(context.Context, *ListVideoRequest) (*ListVideoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
+func (UnimplementedVideoServiceServer) BatchGet(context.Context, *BatchGetVideosRequest) (*BatchGetVideosResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchGet not implemented")
+}
 func (UnimplementedVideoServiceServer) Create(context.Context, *CreateVideoRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedVideoServiceServer) Update(context.Context, *UpdateVideoRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
+func (UnimplementedVideoServiceServer) Transcode(context.Context, *TranscodeVideoRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Transcode not implemented")
+}
 func (UnimplementedVideoServiceServer) Delete(context.Context, *DeleteVideoRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedVideoServiceServer) BatchDelete(context.Context, *BatchDeleteVideosRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchDelete not implemented")
 }
 func (UnimplementedVideoServiceServer) PerformAction(context.Context, *PerformVideoActionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PerformAction not implemented")
@@ -253,6 +307,24 @@ func _VideoService_List_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VideoService_BatchGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetVideosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).BatchGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_BatchGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).BatchGet(ctx, req.(*BatchGetVideosRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _VideoService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateVideoRequest)
 	if err := dec(in); err != nil {
@@ -289,6 +361,24 @@ func _VideoService_Update_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VideoService_Transcode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TranscodeVideoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).Transcode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_Transcode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).Transcode(ctx, req.(*TranscodeVideoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _VideoService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteVideoRequest)
 	if err := dec(in); err != nil {
@@ -303,6 +393,24 @@ func _VideoService_Delete_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VideoServiceServer).Delete(ctx, req.(*DeleteVideoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VideoService_BatchDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchDeleteVideosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).BatchDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_BatchDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).BatchDelete(ctx, req.(*BatchDeleteVideosRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -377,6 +485,10 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _VideoService_List_Handler,
 		},
 		{
+			MethodName: "BatchGet",
+			Handler:    _VideoService_BatchGet_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _VideoService_Create_Handler,
 		},
@@ -385,8 +497,16 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _VideoService_Update_Handler,
 		},
 		{
+			MethodName: "Transcode",
+			Handler:    _VideoService_Transcode_Handler,
+		},
+		{
 			MethodName: "Delete",
 			Handler:    _VideoService_Delete_Handler,
+		},
+		{
+			MethodName: "BatchDelete",
+			Handler:    _VideoService_BatchDelete_Handler,
 		},
 		{
 			MethodName: "PerformAction",

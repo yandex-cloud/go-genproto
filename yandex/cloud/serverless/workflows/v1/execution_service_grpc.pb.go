@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ExecutionService_Start_FullMethodName      = "/yandex.cloud.serverless.workflows.v1.ExecutionService/Start"
 	ExecutionService_Stop_FullMethodName       = "/yandex.cloud.serverless.workflows.v1.ExecutionService/Stop"
+	ExecutionService_Terminate_FullMethodName  = "/yandex.cloud.serverless.workflows.v1.ExecutionService/Terminate"
 	ExecutionService_Get_FullMethodName        = "/yandex.cloud.serverless.workflows.v1.ExecutionService/Get"
 	ExecutionService_GetHistory_FullMethodName = "/yandex.cloud.serverless.workflows.v1.ExecutionService/GetHistory"
 	ExecutionService_List_FullMethodName       = "/yandex.cloud.serverless.workflows.v1.ExecutionService/List"
@@ -36,6 +37,8 @@ type ExecutionServiceClient interface {
 	Start(ctx context.Context, in *StartExecutionRequest, opts ...grpc.CallOption) (*StartExecutionResponse, error)
 	// Stops specified Workflow execution.
 	Stop(ctx context.Context, in *StopExecutionRequest, opts ...grpc.CallOption) (*StopExecutionResponse, error)
+	// Terminates specified Workflow execution.
+	Terminate(ctx context.Context, in *TerminateExecutionRequest, opts ...grpc.CallOption) (*TerminateExecutionResponse, error)
 	// Retrieves specified Workflow execution.
 	Get(ctx context.Context, in *GetExecutionRequest, opts ...grpc.CallOption) (*GetExecutionResponse, error)
 	// Retrieves detailed history of specified Workflow execution.
@@ -66,6 +69,16 @@ func (c *executionServiceClient) Stop(ctx context.Context, in *StopExecutionRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StopExecutionResponse)
 	err := c.cc.Invoke(ctx, ExecutionService_Stop_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *executionServiceClient) Terminate(ctx context.Context, in *TerminateExecutionRequest, opts ...grpc.CallOption) (*TerminateExecutionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TerminateExecutionResponse)
+	err := c.cc.Invoke(ctx, ExecutionService_Terminate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,6 +125,8 @@ type ExecutionServiceServer interface {
 	Start(context.Context, *StartExecutionRequest) (*StartExecutionResponse, error)
 	// Stops specified Workflow execution.
 	Stop(context.Context, *StopExecutionRequest) (*StopExecutionResponse, error)
+	// Terminates specified Workflow execution.
+	Terminate(context.Context, *TerminateExecutionRequest) (*TerminateExecutionResponse, error)
 	// Retrieves specified Workflow execution.
 	Get(context.Context, *GetExecutionRequest) (*GetExecutionResponse, error)
 	// Retrieves detailed history of specified Workflow execution.
@@ -132,6 +147,9 @@ func (UnimplementedExecutionServiceServer) Start(context.Context, *StartExecutio
 }
 func (UnimplementedExecutionServiceServer) Stop(context.Context, *StopExecutionRequest) (*StopExecutionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedExecutionServiceServer) Terminate(context.Context, *TerminateExecutionRequest) (*TerminateExecutionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Terminate not implemented")
 }
 func (UnimplementedExecutionServiceServer) Get(context.Context, *GetExecutionRequest) (*GetExecutionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
@@ -194,6 +212,24 @@ func _ExecutionService_Stop_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ExecutionServiceServer).Stop(ctx, req.(*StopExecutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ExecutionService_Terminate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TerminateExecutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExecutionServiceServer).Terminate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ExecutionService_Terminate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExecutionServiceServer).Terminate(ctx, req.(*TerminateExecutionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -266,6 +302,10 @@ var ExecutionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _ExecutionService_Stop_Handler,
+		},
+		{
+			MethodName: "Terminate",
+			Handler:    _ExecutionService_Terminate_Handler,
 		},
 		{
 			MethodName: "Get",

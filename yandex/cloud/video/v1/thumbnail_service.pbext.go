@@ -2,6 +2,10 @@
 
 package video
 
+func (m *GetThumbnailRequest) SetThumbnailId(v string) {
+	m.ThumbnailId = v
+}
+
 func (m *ListThumbnailRequest) SetChannelId(v string) {
 	m.ChannelId = v
 }
@@ -56,4 +60,12 @@ func (m *GenerateThumbnailUploadURLRequest) SetThumbnailId(v string) {
 
 func (m *GenerateThumbnailUploadURLResponse) SetUploadUrl(v string) {
 	m.UploadUrl = v
+}
+
+func (m *DeleteThumbnailRequest) SetThumbnailId(v string) {
+	m.ThumbnailId = v
+}
+
+func (m *DeleteThumbnailMetadata) SetThumbnailId(v string) {
+	m.ThumbnailId = v
 }

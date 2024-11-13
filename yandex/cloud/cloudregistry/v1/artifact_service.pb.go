@@ -29,7 +29,7 @@ type GetArtifactRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Registry artifact resource to return.
+	// ID of the artifact resource to return.
 	ArtifactId string `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
 }
 
@@ -77,7 +77,7 @@ type DeleteArtifactRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Registry artifact to delete.
+	// ID of the artifact to delete.
 	ArtifactId string `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
 }
 
@@ -125,7 +125,7 @@ type DeleteArtifactMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the registry artifact to delete.
+	// ID of the artifact to delete.
 	ArtifactId string `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
 }
 

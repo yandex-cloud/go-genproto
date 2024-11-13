@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Currently represents only [Yandex account](/docs/iam/concepts/#passport).
+// Currently represents only [Yandex account](/docs/iam/concepts/users/accounts#passport).
 type UserAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -115,7 +115,7 @@ func (*UserAccount_YandexPassportUserAccount) isUserAccount_UserAccount() {}
 func (*UserAccount_SamlUserAccount) isUserAccount_UserAccount() {}
 
 // A YandexPassportUserAccount resource.
-// For more information, see [Yandex account](/docs/iam/concepts/#passport).
+// For more information, see [Yandex account](/docs/iam/concepts/users/accounts#passport).
 type YandexPassportUserAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

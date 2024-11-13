@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing user accounts. Currently applicable only for [Yandex accounts](/docs/iam/concepts/#passport).
+// A set of methods for managing user accounts. Currently applicable only for [Yandex accounts](/docs/iam/concepts/users/accounts#passport).
 type UserAccountServiceClient interface {
 	// Returns the specified UserAccount resource.
 	Get(ctx context.Context, in *GetUserAccountRequest, opts ...grpc.CallOption) (*UserAccount, error)
@@ -54,7 +54,7 @@ func (c *userAccountServiceClient) Get(ctx context.Context, in *GetUserAccountRe
 // All implementations should embed UnimplementedUserAccountServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing user accounts. Currently applicable only for [Yandex accounts](/docs/iam/concepts/#passport).
+// A set of methods for managing user accounts. Currently applicable only for [Yandex accounts](/docs/iam/concepts/users/accounts#passport).
 type UserAccountServiceServer interface {
 	// Returns the specified UserAccount resource.
 	Get(context.Context, *GetUserAccountRequest) (*UserAccount, error)

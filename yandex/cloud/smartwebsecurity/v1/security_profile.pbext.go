@@ -50,6 +50,18 @@ func (m *SecurityProfile) SetAdvancedRateLimiterProfileId(v string) {
 	m.AdvancedRateLimiterProfileId = v
 }
 
+func (m *SecurityProfile) SetAnalyzeRequestBody(v *SecurityProfile_AnalyzeRequestBody) {
+	m.AnalyzeRequestBody = v
+}
+
+func (m *SecurityProfile_AnalyzeRequestBody) SetSizeLimit(v int64) {
+	m.SizeLimit = v
+}
+
+func (m *SecurityProfile_AnalyzeRequestBody) SetSizeLimitAction(v SecurityProfile_AnalyzeRequestBody_Action) {
+	m.SizeLimitAction = v
+}
+
 type SecurityRule_RuleSpecifier = isSecurityRule_RuleSpecifier
 
 func (m *SecurityRule) SetRuleSpecifier(v SecurityRule_RuleSpecifier) {

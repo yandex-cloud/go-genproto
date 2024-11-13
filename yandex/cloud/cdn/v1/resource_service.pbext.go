@@ -134,6 +134,10 @@ func (m *UpdateResourceRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *UpdateResourceRequest) SetRemoveLabels(v bool) {
+	m.RemoveLabels = v
+}
+
 func (m *UpdateResourceMetadata) SetResourceId(v string) {
 	m.ResourceId = v
 }

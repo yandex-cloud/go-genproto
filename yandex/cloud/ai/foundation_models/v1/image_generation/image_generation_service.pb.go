@@ -24,12 +24,14 @@ const (
 )
 
 // Request for the service to generate an image.
+//
+// For examples of usage, see [step-by-step guide](/docs/operations/yandexart/request).
 type ImageGenerationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The [ID of the model](/docs/foundation-models/concepts/yandexart/models) to be used for image generation.
+	// The [model URI](/docs/foundation-models/concepts/yandexart/models) to be used for image generation.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// A list of messages representing the context for the image generation model.
 	Messages []*Message `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
@@ -96,7 +98,7 @@ type ImageGenerationResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The image is serialized as an array of bytes encoded in base64.
+	// The image is serialized as an array of bytes encoded in [Base64](https://en.wikipedia.org/wiki/Base64).
 	Image []byte `protobuf:"bytes,1,opt,name=image,proto3" json:"image,omitempty"`
 	// The model version changes with each new releases.
 	ModelVersion string `protobuf:"bytes,2,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`

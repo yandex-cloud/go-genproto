@@ -344,3 +344,63 @@ func (m *GracefulShutdownParameters) SetTimeout(v *durationpb.Duration) {
 func (m *GracefulShutdownParameters) SetSignal(v int64) {
 	m.Signal = v
 }
+
+func (m *JobMetadata) SetId(v string) {
+	m.Id = v
+}
+
+func (m *JobMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *JobMetadata) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *JobMetadata) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *JobMetadata) SetStartedAt(v *timestamppb.Timestamp) {
+	m.StartedAt = v
+}
+
+func (m *JobMetadata) SetFinishedAt(v *timestamppb.Timestamp) {
+	m.FinishedAt = v
+}
+
+func (m *JobMetadata) SetDataExpiresAt(v *timestamppb.Timestamp) {
+	m.DataExpiresAt = v
+}
+
+func (m *JobMetadata) SetStatus(v JobStatus) {
+	m.Status = v
+}
+
+func (m *JobMetadata) SetStatusDetails(v string) {
+	m.StatusDetails = v
+}
+
+func (m *JobMetadata) SetCreatedById(v string) {
+	m.CreatedById = v
+}
+
+func (m *JobMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *JobMetadata) SetParentJobId(v string) {
+	m.ParentJobId = v
+}
+
+func (m *JobProgress) SetMessage(v string) {
+	m.Message = v
+}
+
+func (m *JobProgress) SetProgress(v int64) {
+	m.Progress = v
+}
+
+func (m *JobProgress) SetCreateTime(v *timestamppb.Timestamp) {
+	m.CreateTime = v
+}

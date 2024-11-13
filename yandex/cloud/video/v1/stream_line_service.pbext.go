@@ -38,6 +38,18 @@ func (m *ListStreamLinesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *BatchGetStreamLinesRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchGetStreamLinesRequest) SetStreamLineIds(v []string) {
+	m.StreamLineIds = v
+}
+
+func (m *BatchGetStreamLinesResponse) SetStreamLines(v []*StreamLine) {
+	m.StreamLines = v
+}
+
 type CreateStreamLineRequest_InputParams = isCreateStreamLineRequest_InputParams
 
 func (m *CreateStreamLineRequest) SetInputParams(v CreateStreamLineRequest_InputParams) {
@@ -190,6 +202,18 @@ func (m *DeleteStreamLineRequest) SetStreamLineId(v string) {
 
 func (m *DeleteStreamLineMetadata) SetStreamLineId(v string) {
 	m.StreamLineId = v
+}
+
+func (m *BatchDeleteStreamLinesRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchDeleteStreamLinesRequest) SetStreamLineIds(v []string) {
+	m.StreamLineIds = v
+}
+
+func (m *BatchDeleteStreamLinesMetadata) SetStreamLineIds(v []string) {
+	m.StreamLineIds = v
 }
 
 type PerformLineActionRequest_Action = isPerformLineActionRequest_Action
