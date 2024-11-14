@@ -25,7 +25,7 @@ const (
 
 // Request for the service to generate an image.
 //
-// For examples of usage, see [step-by-step guide](/docs/operations/yandexart/request).
+// For examples of usage, see [step-by-step guide](/docs/foundation-models/operations/yandexart/request).
 type ImageGenerationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

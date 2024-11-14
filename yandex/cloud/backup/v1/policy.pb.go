@@ -704,7 +704,7 @@ type PolicySettings struct {
 
 	// Archive compression level.
 	Compression PolicySettings_Compression `protobuf:"varint,1,opt,name=compression,proto3,enum=yandex.cloud.backup.v1.PolicySettings_Compression" json:"compression,omitempty"`
-	// Format of the Acronis backup archive.
+	// Format of the Cyberprotect backup archive.
 	Format Format `protobuf:"varint,2,opt,name=format,proto3,enum=yandex.cloud.backup.v1.Format" json:"format,omitempty"`
 	// If true, snapshots of multiple volumes will be taken simultaneously.
 	MultiVolumeSnapshottingEnabled bool `protobuf:"varint,3,opt,name=multi_volume_snapshotting_enabled,json=multiVolumeSnapshottingEnabled,proto3" json:"multi_volume_snapshotting_enabled,omitempty"`
