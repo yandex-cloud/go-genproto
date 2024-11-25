@@ -79,6 +79,18 @@ func (m *Talk) SetSummarization(v *analysis.Summarization) {
 	m.Summarization = v
 }
 
+func (m *Talk) SetTalkState(v *TalkState) {
+	m.TalkState = v
+}
+
+func (m *TalkState) SetProcessingState(v ProcessingState) {
+	m.ProcessingState = v
+}
+
+func (m *TalkState) SetAlgorithmProcessingInfos(v []*AlgorithmProcessingInfo) {
+	m.AlgorithmProcessingInfos = v
+}
+
 func (m *Field) SetName(v string) {
 	m.Name = v
 }
@@ -89,4 +101,12 @@ func (m *Field) SetValue(v string) {
 
 func (m *Field) SetType(v FieldType) {
 	m.Type = v
+}
+
+func (m *AlgorithmProcessingInfo) SetAlgorithm(v Algorithm) {
+	m.Algorithm = v
+}
+
+func (m *AlgorithmProcessingInfo) SetProcessingState(v ProcessingState) {
+	m.ProcessingState = v
 }

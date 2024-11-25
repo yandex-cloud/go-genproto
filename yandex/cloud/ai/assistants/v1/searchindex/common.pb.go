@@ -9,6 +9,7 @@ package searchindex
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -19,6 +20,113 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+// Normalization strategy for relevance scores from different indices
+type NormalizationStrategy int32
+
+const (
+	NormalizationStrategy_NORMALIZATION_STRATEGY_UNSPECIFIED NormalizationStrategy = 0
+	// https://en.wikipedia.org/wiki/Feature_scaling#Rescaling_(min-max_normalization)
+	NormalizationStrategy_MIN_MAX NormalizationStrategy = 1
+	// https://en.wikipedia.org/wiki/Cosine_similarity#L2-normalized_Euclidean_distance
+	NormalizationStrategy_L2 NormalizationStrategy = 2
+)
+
+// Enum value maps for NormalizationStrategy.
+var (
+	NormalizationStrategy_name = map[int32]string{
+		0: "NORMALIZATION_STRATEGY_UNSPECIFIED",
+		1: "MIN_MAX",
+		2: "L2",
+	}
+	NormalizationStrategy_value = map[string]int32{
+		"NORMALIZATION_STRATEGY_UNSPECIFIED": 0,
+		"MIN_MAX":                            1,
+		"L2":                                 2,
+	}
+)
+
+func (x NormalizationStrategy) Enum() *NormalizationStrategy {
+	p := new(NormalizationStrategy)
+	*p = x
+	return p
+}
+
+func (x NormalizationStrategy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (NormalizationStrategy) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes[0].Descriptor()
+}
+
+func (NormalizationStrategy) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes[0]
+}
+
+func (x NormalizationStrategy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use NormalizationStrategy.Descriptor instead.
+func (NormalizationStrategy) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{0}
+}
+
+type MeanCombinationStrategy_MeanEvaluationTechnique int32
+
+const (
+	MeanCombinationStrategy_MEAN_EVALUATION_TECHNIQUE_UNSPECIFIED MeanCombinationStrategy_MeanEvaluationTechnique = 0
+	// https://en.wikipedia.org/wiki/Arithmetic_mean
+	MeanCombinationStrategy_ARITHMETIC MeanCombinationStrategy_MeanEvaluationTechnique = 1
+	// https://en.wikipedia.org/wiki/Geometric_mean
+	MeanCombinationStrategy_GEOMETRIC MeanCombinationStrategy_MeanEvaluationTechnique = 2
+	// https://en.wikipedia.org/wiki/Harmonic_mean
+	MeanCombinationStrategy_HARMONIC MeanCombinationStrategy_MeanEvaluationTechnique = 3
+)
+
+// Enum value maps for MeanCombinationStrategy_MeanEvaluationTechnique.
+var (
+	MeanCombinationStrategy_MeanEvaluationTechnique_name = map[int32]string{
+		0: "MEAN_EVALUATION_TECHNIQUE_UNSPECIFIED",
+		1: "ARITHMETIC",
+		2: "GEOMETRIC",
+		3: "HARMONIC",
+	}
+	MeanCombinationStrategy_MeanEvaluationTechnique_value = map[string]int32{
+		"MEAN_EVALUATION_TECHNIQUE_UNSPECIFIED": 0,
+		"ARITHMETIC":                            1,
+		"GEOMETRIC":                             2,
+		"HARMONIC":                              3,
+	}
+)
+
+func (x MeanCombinationStrategy_MeanEvaluationTechnique) Enum() *MeanCombinationStrategy_MeanEvaluationTechnique {
+	p := new(MeanCombinationStrategy_MeanEvaluationTechnique)
+	*p = x
+	return p
+}
+
+func (x MeanCombinationStrategy_MeanEvaluationTechnique) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MeanCombinationStrategy_MeanEvaluationTechnique) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes[1].Descriptor()
+}
+
+func (MeanCombinationStrategy_MeanEvaluationTechnique) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes[1]
+}
+
+func (x MeanCombinationStrategy_MeanEvaluationTechnique) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MeanCombinationStrategy_MeanEvaluationTechnique.Descriptor instead.
+func (MeanCombinationStrategy_MeanEvaluationTechnique) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{2, 0}
+}
 
 // Defines a chunking strategy where chunks are created with a fixed maximum chunk size and an overlap between consecutive chunks.
 type StaticChunkingStrategy struct {
@@ -152,6 +260,252 @@ type ChunkingStrategy_StaticStrategy struct {
 
 func (*ChunkingStrategy_StaticStrategy) isChunkingStrategy_Strategy() {}
 
+type MeanCombinationStrategy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Technique for averaging relevance scores from different indices. Default is ARITHMETIC
+	MeanEvaluationTechnique MeanCombinationStrategy_MeanEvaluationTechnique `protobuf:"varint,1,opt,name=mean_evaluation_technique,json=meanEvaluationTechnique,proto3,enum=yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy_MeanEvaluationTechnique" json:"mean_evaluation_technique,omitempty"`
+	// Weights used for evaluating the weighted mean of relevance scores. The sum of the values must equal 1.0
+	// If not provided, all scores are given equal weight
+	Weights []float64 `protobuf:"fixed64,2,rep,packed,name=weights,proto3" json:"weights,omitempty"`
+}
+
+func (x *MeanCombinationStrategy) Reset() {
+	*x = MeanCombinationStrategy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MeanCombinationStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MeanCombinationStrategy) ProtoMessage() {}
+
+func (x *MeanCombinationStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MeanCombinationStrategy.ProtoReflect.Descriptor instead.
+func (*MeanCombinationStrategy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *MeanCombinationStrategy) GetMeanEvaluationTechnique() MeanCombinationStrategy_MeanEvaluationTechnique {
+	if x != nil {
+		return x.MeanEvaluationTechnique
+	}
+	return MeanCombinationStrategy_MEAN_EVALUATION_TECHNIQUE_UNSPECIFIED
+}
+
+func (x *MeanCombinationStrategy) GetWeights() []float64 {
+	if x != nil {
+		return x.Weights
+	}
+	return nil
+}
+
+// https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf
+type ReciprocalRankFusionCombinationStrategy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The parameter k for RRFscore. Default is 60
+	K *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=k,proto3" json:"k,omitempty"`
+}
+
+func (x *ReciprocalRankFusionCombinationStrategy) Reset() {
+	*x = ReciprocalRankFusionCombinationStrategy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReciprocalRankFusionCombinationStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReciprocalRankFusionCombinationStrategy) ProtoMessage() {}
+
+func (x *ReciprocalRankFusionCombinationStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReciprocalRankFusionCombinationStrategy.ProtoReflect.Descriptor instead.
+func (*ReciprocalRankFusionCombinationStrategy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ReciprocalRankFusionCombinationStrategy) GetK() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.K
+	}
+	return nil
+}
+
+// Combination strategy for merging rankings from different indices
+type CombinationStrategy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Strategy:
+	//
+	//	*CombinationStrategy_MeanCombination
+	//	*CombinationStrategy_RrfCombination
+	Strategy isCombinationStrategy_Strategy `protobuf_oneof:"Strategy"`
+}
+
+func (x *CombinationStrategy) Reset() {
+	*x = CombinationStrategy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CombinationStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CombinationStrategy) ProtoMessage() {}
+
+func (x *CombinationStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CombinationStrategy.ProtoReflect.Descriptor instead.
+func (*CombinationStrategy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{4}
+}
+
+func (m *CombinationStrategy) GetStrategy() isCombinationStrategy_Strategy {
+	if m != nil {
+		return m.Strategy
+	}
+	return nil
+}
+
+func (x *CombinationStrategy) GetMeanCombination() *MeanCombinationStrategy {
+	if x, ok := x.GetStrategy().(*CombinationStrategy_MeanCombination); ok {
+		return x.MeanCombination
+	}
+	return nil
+}
+
+func (x *CombinationStrategy) GetRrfCombination() *ReciprocalRankFusionCombinationStrategy {
+	if x, ok := x.GetStrategy().(*CombinationStrategy_RrfCombination); ok {
+		return x.RrfCombination
+	}
+	return nil
+}
+
+type isCombinationStrategy_Strategy interface {
+	isCombinationStrategy_Strategy()
+}
+
+type CombinationStrategy_MeanCombination struct {
+	MeanCombination *MeanCombinationStrategy `protobuf:"bytes,1,opt,name=mean_combination,json=meanCombination,proto3,oneof"`
+}
+
+type CombinationStrategy_RrfCombination struct {
+	RrfCombination *ReciprocalRankFusionCombinationStrategy `protobuf:"bytes,2,opt,name=rrf_combination,json=rrfCombination,proto3,oneof"`
+}
+
+func (*CombinationStrategy_MeanCombination) isCombinationStrategy_Strategy() {}
+
+func (*CombinationStrategy_RrfCombination) isCombinationStrategy_Strategy() {}
+
+type NgramTokenizer struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Minimum length of characters in a gram. Defaults to 3
+	MinGram *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=min_gram,json=minGram,proto3" json:"min_gram,omitempty"`
+	// Maximum length of characters in a gram. Defaults to 4
+	MaxGram *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_gram,json=maxGram,proto3" json:"max_gram,omitempty"`
+}
+
+func (x *NgramTokenizer) Reset() {
+	*x = NgramTokenizer{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NgramTokenizer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NgramTokenizer) ProtoMessage() {}
+
+func (x *NgramTokenizer) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NgramTokenizer.ProtoReflect.Descriptor instead.
+func (*NgramTokenizer) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *NgramTokenizer) GetMinGram() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MinGram
+	}
+	return nil
+}
+
+func (x *NgramTokenizer) GetMaxGram() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxGram
+	}
+	return nil
+}
+
 var File_yandex_cloud_ai_assistants_v1_searchindex_common_proto protoreflect.FileDescriptor
 
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc = []byte{
@@ -161,7 +515,9 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc = []byte
 	0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x29, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
 	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74,
 	0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e,
-	0x64, 0x65, 0x78, 0x22, 0x7d, 0x0a, 0x16, 0x53, 0x74, 0x61, 0x74, 0x69, 0x63, 0x43, 0x68, 0x75,
+	0x64, 0x65, 0x78, 0x1a, 0x1e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2f, 0x77, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x73, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x22, 0x7d, 0x0a, 0x16, 0x53, 0x74, 0x61, 0x74, 0x69, 0x63, 0x43, 0x68, 0x75,
 	0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x31, 0x0a,
 	0x15, 0x6d, 0x61, 0x78, 0x5f, 0x63, 0x68, 0x75, 0x6e, 0x6b, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x5f,
 	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x12, 0x6d, 0x61,
@@ -178,16 +534,72 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc = []byte
 	0x74, 0x69, 0x63, 0x43, 0x68, 0x75, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x53, 0x74, 0x72, 0x61, 0x74,
 	0x65, 0x67, 0x79, 0x48, 0x00, 0x52, 0x0e, 0x73, 0x74, 0x61, 0x74, 0x69, 0x63, 0x53, 0x74, 0x72,
 	0x61, 0x74, 0x65, 0x67, 0x79, 0x42, 0x0a, 0x0a, 0x08, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67,
-	0x79, 0x42, 0x8a, 0x01, 0x0a, 0x2d, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74,
-	0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e,
-	0x64, 0x65, 0x78, 0x5a, 0x59, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d,
-	0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61,
-	0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e, 0x64,
-	0x65, 0x78, 0x3b, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x79, 0x22, 0xbf, 0x02, 0x0a, 0x17, 0x4d, 0x65, 0x61, 0x6e, 0x43, 0x6f, 0x6d, 0x62, 0x69, 0x6e,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x96, 0x01,
+	0x0a, 0x19, 0x6d, 0x65, 0x61, 0x6e, 0x5f, 0x65, 0x76, 0x61, 0x6c, 0x75, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x74, 0x65, 0x63, 0x68, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0e, 0x32, 0x5a, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76,
+	0x31, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x4d, 0x65,
+	0x61, 0x6e, 0x43, 0x6f, 0x6d, 0x62, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72,
+	0x61, 0x74, 0x65, 0x67, 0x79, 0x2e, 0x4d, 0x65, 0x61, 0x6e, 0x45, 0x76, 0x61, 0x6c, 0x75, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x65, 0x63, 0x68, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x52, 0x17, 0x6d,
+	0x65, 0x61, 0x6e, 0x45, 0x76, 0x61, 0x6c, 0x75, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x65, 0x63,
+	0x68, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74,
+	0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x01, 0x52, 0x07, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x73,
+	0x22, 0x71, 0x0a, 0x17, 0x4d, 0x65, 0x61, 0x6e, 0x45, 0x76, 0x61, 0x6c, 0x75, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x54, 0x65, 0x63, 0x68, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x12, 0x29, 0x0a, 0x25, 0x4d,
+	0x45, 0x41, 0x4e, 0x5f, 0x45, 0x56, 0x41, 0x4c, 0x55, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x54,
+	0x45, 0x43, 0x48, 0x4e, 0x49, 0x51, 0x55, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49,
+	0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x41, 0x52, 0x49, 0x54, 0x48, 0x4d,
+	0x45, 0x54, 0x49, 0x43, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x47, 0x45, 0x4f, 0x4d, 0x45, 0x54,
+	0x52, 0x49, 0x43, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x41, 0x52, 0x4d, 0x4f, 0x4e, 0x49,
+	0x43, 0x10, 0x03, 0x22, 0x54, 0x0a, 0x27, 0x52, 0x65, 0x63, 0x69, 0x70, 0x72, 0x6f, 0x63, 0x61,
+	0x6c, 0x52, 0x61, 0x6e, 0x6b, 0x46, 0x75, 0x73, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6d, 0x62, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x29,
+	0x0a, 0x01, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36,
+	0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x01, 0x6b, 0x22, 0x91, 0x02, 0x0a, 0x13, 0x43, 0x6f,
+	0x6d, 0x62, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67,
+	0x79, 0x12, 0x6f, 0x0a, 0x10, 0x6d, 0x65, 0x61, 0x6e, 0x5f, 0x63, 0x6f, 0x6d, 0x62, 0x69, 0x6e,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x42, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x4d, 0x65, 0x61, 0x6e, 0x43, 0x6f, 0x6d, 0x62,
+	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x48,
+	0x00, 0x52, 0x0f, 0x6d, 0x65, 0x61, 0x6e, 0x43, 0x6f, 0x6d, 0x62, 0x69, 0x6e, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x12, 0x7d, 0x0a, 0x0f, 0x72, 0x72, 0x66, 0x5f, 0x63, 0x6f, 0x6d, 0x62, 0x69, 0x6e,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x52, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x52, 0x65, 0x63, 0x69, 0x70, 0x72, 0x6f, 0x63,
+	0x61, 0x6c, 0x52, 0x61, 0x6e, 0x6b, 0x46, 0x75, 0x73, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6d, 0x62,
+	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x48,
+	0x00, 0x52, 0x0e, 0x72, 0x72, 0x66, 0x43, 0x6f, 0x6d, 0x62, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x42, 0x0a, 0x0a, 0x08, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x22, 0x80, 0x01,
+	0x0a, 0x0e, 0x4e, 0x67, 0x72, 0x61, 0x6d, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x69, 0x7a, 0x65, 0x72,
+	0x12, 0x36, 0x0a, 0x08, 0x6d, 0x69, 0x6e, 0x5f, 0x67, 0x72, 0x61, 0x6d, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52,
+	0x07, 0x6d, 0x69, 0x6e, 0x47, 0x72, 0x61, 0x6d, 0x12, 0x36, 0x0a, 0x08, 0x6d, 0x61, 0x78, 0x5f,
+	0x67, 0x72, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74,
+	0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x07, 0x6d, 0x61, 0x78, 0x47, 0x72, 0x61, 0x6d,
+	0x2a, 0x54, 0x0a, 0x15, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x26, 0x0a, 0x22, 0x4e, 0x4f, 0x52,
+	0x4d, 0x41, 0x4c, 0x49, 0x5a, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x52, 0x41, 0x54,
+	0x45, 0x47, 0x59, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10,
+	0x00, 0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x49, 0x4e, 0x5f, 0x4d, 0x41, 0x58, 0x10, 0x01, 0x12, 0x06,
+	0x0a, 0x02, 0x4c, 0x32, 0x10, 0x02, 0x42, 0x8a, 0x01, 0x0a, 0x2d, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x61,
+	0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x5a, 0x59, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x61, 0x73,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x3b, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e,
+	0x64, 0x65, 0x78, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -202,18 +614,32 @@ func file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP() [
 	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_goTypes = []any{
-	(*StaticChunkingStrategy)(nil), // 0: yandex.cloud.ai.assistants.v1.searchindex.StaticChunkingStrategy
-	(*ChunkingStrategy)(nil),       // 1: yandex.cloud.ai.assistants.v1.searchindex.ChunkingStrategy
+	(NormalizationStrategy)(0),                           // 0: yandex.cloud.ai.assistants.v1.searchindex.NormalizationStrategy
+	(MeanCombinationStrategy_MeanEvaluationTechnique)(0), // 1: yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.MeanEvaluationTechnique
+	(*StaticChunkingStrategy)(nil),                       // 2: yandex.cloud.ai.assistants.v1.searchindex.StaticChunkingStrategy
+	(*ChunkingStrategy)(nil),                             // 3: yandex.cloud.ai.assistants.v1.searchindex.ChunkingStrategy
+	(*MeanCombinationStrategy)(nil),                      // 4: yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy
+	(*ReciprocalRankFusionCombinationStrategy)(nil),      // 5: yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy
+	(*CombinationStrategy)(nil),                          // 6: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy
+	(*NgramTokenizer)(nil),                               // 7: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer
+	(*wrapperspb.Int64Value)(nil),                        // 8: google.protobuf.Int64Value
 }
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_depIdxs = []int32{
-	0, // 0: yandex.cloud.ai.assistants.v1.searchindex.ChunkingStrategy.static_strategy:type_name -> yandex.cloud.ai.assistants.v1.searchindex.StaticChunkingStrategy
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: yandex.cloud.ai.assistants.v1.searchindex.ChunkingStrategy.static_strategy:type_name -> yandex.cloud.ai.assistants.v1.searchindex.StaticChunkingStrategy
+	1, // 1: yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.mean_evaluation_technique:type_name -> yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.MeanEvaluationTechnique
+	8, // 2: yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy.k:type_name -> google.protobuf.Int64Value
+	4, // 3: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy.mean_combination:type_name -> yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy
+	5, // 4: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy.rrf_combination:type_name -> yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy
+	8, // 5: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer.min_gram:type_name -> google.protobuf.Int64Value
+	8, // 6: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer.max_gram:type_name -> google.protobuf.Int64Value
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_init() }
@@ -246,22 +672,75 @@ func file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[2].Exporter = func(v any, i int) any {
+			switch v := v.(*MeanCombinationStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[3].Exporter = func(v any, i int) any {
+			switch v := v.(*ReciprocalRankFusionCombinationStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[4].Exporter = func(v any, i int) any {
+			switch v := v.(*CombinationStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[5].Exporter = func(v any, i int) any {
+			switch v := v.(*NgramTokenizer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[1].OneofWrappers = []any{
 		(*ChunkingStrategy_StaticStrategy)(nil),
+	}
+	file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[4].OneofWrappers = []any{
+		(*CombinationStrategy_MeanCombination)(nil),
+		(*CombinationStrategy_RrfCombination)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   2,
+			NumEnums:      2,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_ai_assistants_v1_searchindex_common_proto = out.File

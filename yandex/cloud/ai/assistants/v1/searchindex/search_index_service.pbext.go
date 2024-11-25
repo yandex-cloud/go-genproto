@@ -49,6 +49,12 @@ func (m *CreateSearchIndexRequest) SetVectorSearchIndex(v *VectorSearchIndex) {
 	}
 }
 
+func (m *CreateSearchIndexRequest) SetHybridSearchIndex(v *HybridSearchIndex) {
+	m.IndexType = &CreateSearchIndexRequest_HybridSearchIndex{
+		HybridSearchIndex: v,
+	}
+}
+
 func (m *GetSearchIndexRequest) SetSearchIndexId(v string) {
 	m.SearchIndexId = v
 }

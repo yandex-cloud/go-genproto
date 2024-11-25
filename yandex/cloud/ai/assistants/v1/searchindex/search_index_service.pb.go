@@ -47,6 +47,7 @@ type CreateSearchIndexRequest struct {
 	//
 	//	*CreateSearchIndexRequest_TextSearchIndex
 	//	*CreateSearchIndexRequest_VectorSearchIndex
+	//	*CreateSearchIndexRequest_HybridSearchIndex
 	IndexType isCreateSearchIndexRequest_IndexType `protobuf_oneof:"IndexType"`
 }
 
@@ -145,6 +146,13 @@ func (x *CreateSearchIndexRequest) GetVectorSearchIndex() *VectorSearchIndex {
 	return nil
 }
 
+func (x *CreateSearchIndexRequest) GetHybridSearchIndex() *HybridSearchIndex {
+	if x, ok := x.GetIndexType().(*CreateSearchIndexRequest_HybridSearchIndex); ok {
+		return x.HybridSearchIndex
+	}
+	return nil
+}
+
 type isCreateSearchIndexRequest_IndexType interface {
 	isCreateSearchIndexRequest_IndexType()
 }
@@ -159,9 +167,16 @@ type CreateSearchIndexRequest_VectorSearchIndex struct {
 	VectorSearchIndex *VectorSearchIndex `protobuf:"bytes,8,opt,name=vector_search_index,json=vectorSearchIndex,proto3,oneof"`
 }
 
+type CreateSearchIndexRequest_HybridSearchIndex struct {
+	// Configuration for a hybrid (vector-based + keyword-based) search index.
+	HybridSearchIndex *HybridSearchIndex `protobuf:"bytes,9,opt,name=hybrid_search_index,json=hybridSearchIndex,proto3,oneof"`
+}
+
 func (*CreateSearchIndexRequest_TextSearchIndex) isCreateSearchIndexRequest_IndexType() {}
 
 func (*CreateSearchIndexRequest_VectorSearchIndex) isCreateSearchIndexRequest_IndexType() {}
+
+func (*CreateSearchIndexRequest_HybridSearchIndex) isCreateSearchIndexRequest_IndexType() {}
 
 // Request message for retrieving a search index by ID.
 type GetSearchIndexRequest struct {
@@ -545,7 +560,7 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_ra
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x20, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x66, 0x69, 0x65,
-	0x6c, 0x64, 0x5f, 0x6d, 0x61, 0x73, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xf0, 0x04,
+	0x6c, 0x64, 0x5f, 0x6d, 0x61, 0x73, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xe0, 0x05,
 	0x0a, 0x18, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e,
 	0x64, 0x65, 0x78, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x09, 0x66, 0x6f,
 	0x6c, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8,
@@ -580,6 +595,13 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_ra
 	0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65,
 	0x78, 0x2e, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e,
 	0x64, 0x65, 0x78, 0x48, 0x00, 0x52, 0x11, 0x76, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x6e, 0x0a, 0x13, 0x68, 0x79, 0x62, 0x72,
+	0x69, 0x64, 0x5f, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18,
+	0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e,
+	0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x48, 0x79, 0x62, 0x72, 0x69, 0x64, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e,
+	0x64, 0x65, 0x78, 0x48, 0x00, 0x52, 0x11, 0x68, 0x79, 0x62, 0x72, 0x69, 0x64, 0x53, 0x65, 0x61,
 	0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x1a, 0x39, 0x0a, 0x0b, 0x4c, 0x61, 0x62, 0x65,
 	0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c,
@@ -739,34 +761,36 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_go
 	(*common.ExpirationConfig)(nil),   // 9: yandex.cloud.ai.common.ExpirationConfig
 	(*TextSearchIndex)(nil),           // 10: yandex.cloud.ai.assistants.v1.searchindex.TextSearchIndex
 	(*VectorSearchIndex)(nil),         // 11: yandex.cloud.ai.assistants.v1.searchindex.VectorSearchIndex
-	(*fieldmaskpb.FieldMask)(nil),     // 12: google.protobuf.FieldMask
-	(*SearchIndex)(nil),               // 13: yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
-	(*operation.Operation)(nil),       // 14: yandex.cloud.operation.Operation
+	(*HybridSearchIndex)(nil),         // 12: yandex.cloud.ai.assistants.v1.searchindex.HybridSearchIndex
+	(*fieldmaskpb.FieldMask)(nil),     // 13: google.protobuf.FieldMask
+	(*SearchIndex)(nil),               // 14: yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
+	(*operation.Operation)(nil),       // 15: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_depIdxs = []int32{
 	9,  // 0: yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest.expiration_config:type_name -> yandex.cloud.ai.common.ExpirationConfig
 	7,  // 1: yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest.labels:type_name -> yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest.LabelsEntry
 	10, // 2: yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest.text_search_index:type_name -> yandex.cloud.ai.assistants.v1.searchindex.TextSearchIndex
 	11, // 3: yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest.vector_search_index:type_name -> yandex.cloud.ai.assistants.v1.searchindex.VectorSearchIndex
-	12, // 4: yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.update_mask:type_name -> google.protobuf.FieldMask
-	9,  // 5: yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.expiration_config:type_name -> yandex.cloud.ai.common.ExpirationConfig
-	8,  // 6: yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.labels:type_name -> yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.LabelsEntry
-	13, // 7: yandex.cloud.ai.assistants.v1.searchindex.ListSearchIndicesResponse.indices:type_name -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
-	0,  // 8: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Create:input_type -> yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest
-	1,  // 9: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Get:input_type -> yandex.cloud.ai.assistants.v1.searchindex.GetSearchIndexRequest
-	2,  // 10: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Update:input_type -> yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest
-	3,  // 11: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Delete:input_type -> yandex.cloud.ai.assistants.v1.searchindex.DeleteSearchIndexRequest
-	5,  // 12: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.List:input_type -> yandex.cloud.ai.assistants.v1.searchindex.ListSearchIndicesRequest
-	14, // 13: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Create:output_type -> yandex.cloud.operation.Operation
-	13, // 14: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Get:output_type -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
-	13, // 15: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Update:output_type -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
-	4,  // 16: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Delete:output_type -> yandex.cloud.ai.assistants.v1.searchindex.DeleteSearchIndexResponse
-	6,  // 17: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.List:output_type -> yandex.cloud.ai.assistants.v1.searchindex.ListSearchIndicesResponse
-	13, // [13:18] is the sub-list for method output_type
-	8,  // [8:13] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	12, // 4: yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest.hybrid_search_index:type_name -> yandex.cloud.ai.assistants.v1.searchindex.HybridSearchIndex
+	13, // 5: yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.update_mask:type_name -> google.protobuf.FieldMask
+	9,  // 6: yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.expiration_config:type_name -> yandex.cloud.ai.common.ExpirationConfig
+	8,  // 7: yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.labels:type_name -> yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest.LabelsEntry
+	14, // 8: yandex.cloud.ai.assistants.v1.searchindex.ListSearchIndicesResponse.indices:type_name -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
+	0,  // 9: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Create:input_type -> yandex.cloud.ai.assistants.v1.searchindex.CreateSearchIndexRequest
+	1,  // 10: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Get:input_type -> yandex.cloud.ai.assistants.v1.searchindex.GetSearchIndexRequest
+	2,  // 11: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Update:input_type -> yandex.cloud.ai.assistants.v1.searchindex.UpdateSearchIndexRequest
+	3,  // 12: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Delete:input_type -> yandex.cloud.ai.assistants.v1.searchindex.DeleteSearchIndexRequest
+	5,  // 13: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.List:input_type -> yandex.cloud.ai.assistants.v1.searchindex.ListSearchIndicesRequest
+	15, // 14: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Create:output_type -> yandex.cloud.operation.Operation
+	14, // 15: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Get:output_type -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
+	14, // 16: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Update:output_type -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
+	4,  // 17: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.Delete:output_type -> yandex.cloud.ai.assistants.v1.searchindex.DeleteSearchIndexResponse
+	6,  // 18: yandex.cloud.ai.assistants.v1.searchindex.SearchIndexService.List:output_type -> yandex.cloud.ai.assistants.v1.searchindex.ListSearchIndicesResponse
+	14, // [14:19] is the sub-list for method output_type
+	9,  // [9:14] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_init() }
@@ -864,6 +888,7 @@ func file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_i
 	file_yandex_cloud_ai_assistants_v1_searchindex_search_index_service_proto_msgTypes[0].OneofWrappers = []any{
 		(*CreateSearchIndexRequest_TextSearchIndex)(nil),
 		(*CreateSearchIndexRequest_VectorSearchIndex)(nil),
+		(*CreateSearchIndexRequest_HybridSearchIndex)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

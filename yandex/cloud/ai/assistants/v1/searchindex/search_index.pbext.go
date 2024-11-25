@@ -69,6 +69,12 @@ func (m *SearchIndex) SetVectorSearchIndex(v *VectorSearchIndex) {
 	}
 }
 
+func (m *SearchIndex) SetHybridSearchIndex(v *HybridSearchIndex) {
+	m.IndexType = &SearchIndex_HybridSearchIndex{
+		HybridSearchIndex: v,
+	}
+}
+
 func (m *TextSearchIndex) SetChunkingStrategy(v *ChunkingStrategy) {
 	m.ChunkingStrategy = v
 }
@@ -83,4 +89,24 @@ func (m *VectorSearchIndex) SetQueryEmbedderUri(v string) {
 
 func (m *VectorSearchIndex) SetChunkingStrategy(v *ChunkingStrategy) {
 	m.ChunkingStrategy = v
+}
+
+func (m *HybridSearchIndex) SetTextSearchIndex(v *TextSearchIndex) {
+	m.TextSearchIndex = v
+}
+
+func (m *HybridSearchIndex) SetVectorSearchIndex(v *VectorSearchIndex) {
+	m.VectorSearchIndex = v
+}
+
+func (m *HybridSearchIndex) SetChunkingStrategy(v *ChunkingStrategy) {
+	m.ChunkingStrategy = v
+}
+
+func (m *HybridSearchIndex) SetNormalizationStrategy(v NormalizationStrategy) {
+	m.NormalizationStrategy = v
+}
+
+func (m *HybridSearchIndex) SetCombinationStrategy(v *CombinationStrategy) {
+	m.CombinationStrategy = v
 }

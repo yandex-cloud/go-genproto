@@ -2,6 +2,10 @@
 
 package searchindex
 
+import (
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *StaticChunkingStrategy) SetMaxChunkSizeTokens(v int64) {
 	m.MaxChunkSizeTokens = v
 }
@@ -20,4 +24,42 @@ func (m *ChunkingStrategy) SetStaticStrategy(v *StaticChunkingStrategy) {
 	m.Strategy = &ChunkingStrategy_StaticStrategy{
 		StaticStrategy: v,
 	}
+}
+
+func (m *MeanCombinationStrategy) SetMeanEvaluationTechnique(v MeanCombinationStrategy_MeanEvaluationTechnique) {
+	m.MeanEvaluationTechnique = v
+}
+
+func (m *MeanCombinationStrategy) SetWeights(v []float64) {
+	m.Weights = v
+}
+
+func (m *ReciprocalRankFusionCombinationStrategy) SetK(v *wrapperspb.Int64Value) {
+	m.K = v
+}
+
+type CombinationStrategy_Strategy = isCombinationStrategy_Strategy
+
+func (m *CombinationStrategy) SetStrategy(v CombinationStrategy_Strategy) {
+	m.Strategy = v
+}
+
+func (m *CombinationStrategy) SetMeanCombination(v *MeanCombinationStrategy) {
+	m.Strategy = &CombinationStrategy_MeanCombination{
+		MeanCombination: v,
+	}
+}
+
+func (m *CombinationStrategy) SetRrfCombination(v *ReciprocalRankFusionCombinationStrategy) {
+	m.Strategy = &CombinationStrategy_RrfCombination{
+		RrfCombination: v,
+	}
+}
+
+func (m *NgramTokenizer) SetMinGram(v *wrapperspb.Int64Value) {
+	m.MinGram = v
+}
+
+func (m *NgramTokenizer) SetMaxGram(v *wrapperspb.Int64Value) {
+	m.MaxGram = v
 }

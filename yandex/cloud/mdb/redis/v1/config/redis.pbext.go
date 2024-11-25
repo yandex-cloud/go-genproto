@@ -82,6 +82,14 @@ func (m *RedisConfig) SetAllowDataLoss(v *wrapperspb.BoolValue) {
 	m.AllowDataLoss = v
 }
 
+func (m *RedisConfig) SetUseLuajit(v *wrapperspb.BoolValue) {
+	m.UseLuajit = v
+}
+
+func (m *RedisConfig) SetIoThreadsAllowed(v *wrapperspb.BoolValue) {
+	m.IoThreadsAllowed = v
+}
+
 func (m *RedisConfig_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
 	m.HardLimit = v
 }

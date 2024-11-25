@@ -2,6 +2,10 @@
 
 package iam
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 type UserAccount_UserAccount = isUserAccount_UserAccount
 
 func (m *UserAccount) SetUserAccount(v UserAccount_UserAccount) {
@@ -22,6 +26,10 @@ func (m *UserAccount) SetSamlUserAccount(v *SamlUserAccount) {
 	m.UserAccount = &UserAccount_SamlUserAccount{
 		SamlUserAccount: v,
 	}
+}
+
+func (m *UserAccount) SetLastAuthenticatedAt(v *timestamppb.Timestamp) {
+	m.LastAuthenticatedAt = v
 }
 
 func (m *YandexPassportUserAccount) SetLogin(v string) {

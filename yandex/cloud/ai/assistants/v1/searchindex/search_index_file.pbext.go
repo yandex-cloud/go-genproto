@@ -21,7 +21,3 @@ func (m *SearchIndexFile) SetCreatedBy(v string) {
 func (m *SearchIndexFile) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
-
-func (m *SearchIndexFile) SetChunkingStrategy(v *ChunkingStrategy) {
-	m.ChunkingStrategy = v
-}

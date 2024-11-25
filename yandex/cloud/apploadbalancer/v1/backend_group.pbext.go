@@ -396,6 +396,10 @@ func (m *HealthCheck_HttpHealthCheck) SetUseHttp2(v bool) {
 	m.UseHttp2 = v
 }
 
+func (m *HealthCheck_HttpHealthCheck) SetExpectedStatuses(v []int64) {
+	m.ExpectedStatuses = v
+}
+
 func (m *HealthCheck_GrpcHealthCheck) SetServiceName(v string) {
 	m.ServiceName = v
 }
