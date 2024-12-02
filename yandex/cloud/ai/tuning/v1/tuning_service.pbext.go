@@ -82,6 +82,18 @@ func (m *TuningRequest) SetTextToTextCompletion(v *TextToTextCompletionTuningPar
 	}
 }
 
+func (m *TuningRequest) SetTextClassificationMultilabel(v *TextClassificationMultilabelParams) {
+	m.TuningParams = &TuningRequest_TextClassificationMultilabel{
+		TextClassificationMultilabel: v,
+	}
+}
+
+func (m *TuningRequest) SetTextClassificationMulticlass(v *TextClassificationMulticlassParams) {
+	m.TuningParams = &TuningRequest_TextClassificationMulticlass{
+		TextClassificationMulticlass: v,
+	}
+}
+
 func (m *TuningRequest) SetName(v string) {
 	m.Name = v
 }
@@ -180,6 +192,170 @@ func (m *TextToTextCompletionTuningParams_Optimizer) SetType(v TextToTextComplet
 
 func (m *TextToTextCompletionTuningParams_Optimizer) SetAdamw(v *OptimizerAdamw) {
 	m.Type = &TextToTextCompletionTuningParams_Optimizer_Adamw{
+		Adamw: v,
+	}
+}
+
+type TextClassificationMultilabelParams_TuningType = isTextClassificationMultilabelParams_TuningType
+
+func (m *TextClassificationMultilabelParams) SetTuningType(v TextClassificationMultilabelParams_TuningType) {
+	m.TuningType = v
+}
+
+func (m *TextClassificationMultilabelParams) SetSeed(v int64) {
+	m.Seed = v
+}
+
+func (m *TextClassificationMultilabelParams) SetLr(v float64) {
+	m.Lr = v
+}
+
+func (m *TextClassificationMultilabelParams) SetNSamples(v int64) {
+	m.NSamples = v
+}
+
+func (m *TextClassificationMultilabelParams) SetAdditionalArguments(v string) {
+	m.AdditionalArguments = v
+}
+
+func (m *TextClassificationMultilabelParams) SetLora(v *TuningTypeLora) {
+	m.TuningType = &TextClassificationMultilabelParams_Lora{
+		Lora: v,
+	}
+}
+
+func (m *TextClassificationMultilabelParams) SetPromptTune(v *TuningTypePromptTune) {
+	m.TuningType = &TextClassificationMultilabelParams_PromptTune{
+		PromptTune: v,
+	}
+}
+
+func (m *TextClassificationMultilabelParams) SetScheduler(v *TextClassificationMultilabelParams_Scheduler) {
+	m.Scheduler = v
+}
+
+func (m *TextClassificationMultilabelParams) SetOptimizer(v *TextClassificationMultilabelParams_Optimizer) {
+	m.Optimizer = v
+}
+
+type TextClassificationMultilabelParams_Scheduler_Type = isTextClassificationMultilabelParams_Scheduler_Type
+
+func (m *TextClassificationMultilabelParams_Scheduler) SetType(v TextClassificationMultilabelParams_Scheduler_Type) {
+	m.Type = v
+}
+
+func (m *TextClassificationMultilabelParams_Scheduler) SetLinear(v *SchedulerLinear) {
+	m.Type = &TextClassificationMultilabelParams_Scheduler_Linear{
+		Linear: v,
+	}
+}
+
+func (m *TextClassificationMultilabelParams_Scheduler) SetConstant(v *SchedulerConstant) {
+	m.Type = &TextClassificationMultilabelParams_Scheduler_Constant{
+		Constant: v,
+	}
+}
+
+func (m *TextClassificationMultilabelParams_Scheduler) SetCosine(v *SchedulerCosine) {
+	m.Type = &TextClassificationMultilabelParams_Scheduler_Cosine{
+		Cosine: v,
+	}
+}
+
+func (m *TextClassificationMultilabelParams_Scheduler) SetWarmupRatio(v float64) {
+	m.WarmupRatio = v
+}
+
+type TextClassificationMultilabelParams_Optimizer_Type = isTextClassificationMultilabelParams_Optimizer_Type
+
+func (m *TextClassificationMultilabelParams_Optimizer) SetType(v TextClassificationMultilabelParams_Optimizer_Type) {
+	m.Type = v
+}
+
+func (m *TextClassificationMultilabelParams_Optimizer) SetAdamw(v *OptimizerAdamw) {
+	m.Type = &TextClassificationMultilabelParams_Optimizer_Adamw{
+		Adamw: v,
+	}
+}
+
+type TextClassificationMulticlassParams_TuningType = isTextClassificationMulticlassParams_TuningType
+
+func (m *TextClassificationMulticlassParams) SetTuningType(v TextClassificationMulticlassParams_TuningType) {
+	m.TuningType = v
+}
+
+func (m *TextClassificationMulticlassParams) SetSeed(v int64) {
+	m.Seed = v
+}
+
+func (m *TextClassificationMulticlassParams) SetLr(v float64) {
+	m.Lr = v
+}
+
+func (m *TextClassificationMulticlassParams) SetNSamples(v int64) {
+	m.NSamples = v
+}
+
+func (m *TextClassificationMulticlassParams) SetAdditionalArguments(v string) {
+	m.AdditionalArguments = v
+}
+
+func (m *TextClassificationMulticlassParams) SetLora(v *TuningTypeLora) {
+	m.TuningType = &TextClassificationMulticlassParams_Lora{
+		Lora: v,
+	}
+}
+
+func (m *TextClassificationMulticlassParams) SetPromptTune(v *TuningTypePromptTune) {
+	m.TuningType = &TextClassificationMulticlassParams_PromptTune{
+		PromptTune: v,
+	}
+}
+
+func (m *TextClassificationMulticlassParams) SetScheduler(v *TextClassificationMulticlassParams_Scheduler) {
+	m.Scheduler = v
+}
+
+func (m *TextClassificationMulticlassParams) SetOptimizer(v *TextClassificationMulticlassParams_Optimizer) {
+	m.Optimizer = v
+}
+
+type TextClassificationMulticlassParams_Scheduler_Type = isTextClassificationMulticlassParams_Scheduler_Type
+
+func (m *TextClassificationMulticlassParams_Scheduler) SetType(v TextClassificationMulticlassParams_Scheduler_Type) {
+	m.Type = v
+}
+
+func (m *TextClassificationMulticlassParams_Scheduler) SetLinear(v *SchedulerLinear) {
+	m.Type = &TextClassificationMulticlassParams_Scheduler_Linear{
+		Linear: v,
+	}
+}
+
+func (m *TextClassificationMulticlassParams_Scheduler) SetConstant(v *SchedulerConstant) {
+	m.Type = &TextClassificationMulticlassParams_Scheduler_Constant{
+		Constant: v,
+	}
+}
+
+func (m *TextClassificationMulticlassParams_Scheduler) SetCosine(v *SchedulerCosine) {
+	m.Type = &TextClassificationMulticlassParams_Scheduler_Cosine{
+		Cosine: v,
+	}
+}
+
+func (m *TextClassificationMulticlassParams_Scheduler) SetWarmupRatio(v float64) {
+	m.WarmupRatio = v
+}
+
+type TextClassificationMulticlassParams_Optimizer_Type = isTextClassificationMulticlassParams_Optimizer_Type
+
+func (m *TextClassificationMulticlassParams_Optimizer) SetType(v TextClassificationMulticlassParams_Optimizer_Type) {
+	m.Type = v
+}
+
+func (m *TextClassificationMulticlassParams_Optimizer) SetAdamw(v *OptimizerAdamw) {
+	m.Type = &TextClassificationMulticlassParams_Optimizer_Adamw{
 		Adamw: v,
 	}
 }
