@@ -69,6 +69,12 @@ func (m *Source) SetMessageQueue(v *MessageQueue) {
 	}
 }
 
+func (m *Source) SetTimer(v *Timer) {
+	m.Source = &Source_Timer{
+		Timer: v,
+	}
+}
+
 func (m *DataStream) SetDatabase(v string) {
 	m.Database = v
 }
@@ -103,4 +109,16 @@ func (m *MessageQueue) SetBatchSize(v int64) {
 
 func (m *MessageQueue) SetPollingTimeout(v *durationpb.Duration) {
 	m.PollingTimeout = v
+}
+
+func (m *Timer) SetCronExpression(v string) {
+	m.CronExpression = v
+}
+
+func (m *Timer) SetTimeZone(v string) {
+	m.TimeZone = v
+}
+
+func (m *Timer) SetPayload(v string) {
+	m.Payload = v
 }

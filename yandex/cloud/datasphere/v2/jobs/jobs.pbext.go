@@ -129,6 +129,10 @@ func (m *FileUploadError) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *FileUploadError) SetType(v FileUploadError_ErrorType) {
+	m.Type = v
+}
+
 type Environment_DockerImage = isEnvironment_DockerImage
 
 func (m *Environment) SetDockerImage(v Environment_DockerImage) {

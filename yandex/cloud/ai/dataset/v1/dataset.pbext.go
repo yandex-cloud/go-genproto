@@ -58,6 +58,14 @@ func (m *DatasetInfo) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *DatasetInfo) SetCreatedBy(v string) {
+	m.CreatedBy = v
+}
+
+func (m *DatasetInfo) SetUpdatedBy(v string) {
+	m.UpdatedBy = v
+}
+
 func (m *ValidationError) SetError(v string) {
 	m.Error = v
 }

@@ -174,8 +174,24 @@ func (m *ListDatasetsRequest) SetDatasetNamePattern(v string) {
 	m.DatasetNamePattern = v
 }
 
+func (m *ListDatasetsRequest) SetTaskTypeFilter(v string) {
+	m.TaskTypeFilter = v
+}
+
+func (m *ListDatasetsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDatasetsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
 func (m *ListDatasetsResponse) SetDatasets(v []*DatasetInfo) {
 	m.Datasets = v
+}
+
+func (m *ListDatasetsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *ListUploadFormatsRequest) SetTaskType(v string) {
@@ -184,4 +200,8 @@ func (m *ListUploadFormatsRequest) SetTaskType(v string) {
 
 func (m *ListUploadFormatsResponse) SetFormats(v []string) {
 	m.Formats = v
+}
+
+func (m *ListTypesResponse) SetTypes(v []string) {
+	m.Types = v
 }

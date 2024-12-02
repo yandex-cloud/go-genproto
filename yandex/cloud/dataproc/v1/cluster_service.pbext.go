@@ -155,6 +155,10 @@ func (m *CreateClusterRequest) SetLogGroupId(v string) {
 	m.LogGroupId = v
 }
 
+func (m *CreateClusterRequest) SetEnvironment(v Cluster_Environment) {
+	m.Environment = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

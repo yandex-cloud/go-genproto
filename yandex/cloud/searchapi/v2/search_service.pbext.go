@@ -50,6 +50,14 @@ func (m *WebSearchRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *WebSearchRequest) SetResponseFormat(v WebSearchRequest_Format) {
+	m.ResponseFormat = v
+}
+
+func (m *WebSearchRequest) SetUserAgent(v string) {
+	m.UserAgent = v
+}
+
 func (m *WebSearchResponse) SetRawData(v []byte) {
 	m.RawData = v
 }

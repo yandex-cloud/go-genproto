@@ -78,6 +78,10 @@ func (m *Cluster) SetLogGroupId(v string) {
 	m.LogGroupId = v
 }
 
+func (m *Cluster) SetEnvironment(v Cluster_Environment) {
+	m.Environment = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

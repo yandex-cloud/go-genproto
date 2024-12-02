@@ -30,6 +30,7 @@ const (
 	DatasetService_GetUploadDraftUrl_FullMethodName          = "/yandex.cloud.ai.dataset.v1.DatasetService/GetUploadDraftUrl"
 	DatasetService_StartMultipartUploadDraft_FullMethodName  = "/yandex.cloud.ai.dataset.v1.DatasetService/StartMultipartUploadDraft"
 	DatasetService_FinishMultipartUploadDraft_FullMethodName = "/yandex.cloud.ai.dataset.v1.DatasetService/FinishMultipartUploadDraft"
+	DatasetService_ListTypes_FullMethodName                  = "/yandex.cloud.ai.dataset.v1.DatasetService/ListTypes"
 )
 
 // DatasetServiceClient is the client API for DatasetService service.
@@ -59,6 +60,8 @@ type DatasetServiceClient interface {
 	StartMultipartUploadDraft(ctx context.Context, in *StartMultipartUploadDraftRequest, opts ...grpc.CallOption) (*StartMultipartUploadDraftResponse, error)
 	// Finishes multipart upload of the dataset.
 	FinishMultipartUploadDraft(ctx context.Context, in *FinishMultipartUploadDraftRequest, opts ...grpc.CallOption) (*FinishMultipartUploadDraftResponse, error)
+	// Returns a list of dataset types
+	ListTypes(ctx context.Context, in *ListTypesRequest, opts ...grpc.CallOption) (*ListTypesResponse, error)
 }
 
 type datasetServiceClient struct {
@@ -169,6 +172,16 @@ func (c *datasetServiceClient) FinishMultipartUploadDraft(ctx context.Context, i
 	return out, nil
 }
 
+func (c *datasetServiceClient) ListTypes(ctx context.Context, in *ListTypesRequest, opts ...grpc.CallOption) (*ListTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTypesResponse)
+	err := c.cc.Invoke(ctx, DatasetService_ListTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DatasetServiceServer is the server API for DatasetService service.
 // All implementations should embed UnimplementedDatasetServiceServer
 // for forward compatibility.
@@ -196,6 +209,8 @@ type DatasetServiceServer interface {
 	StartMultipartUploadDraft(context.Context, *StartMultipartUploadDraftRequest) (*StartMultipartUploadDraftResponse, error)
 	// Finishes multipart upload of the dataset.
 	FinishMultipartUploadDraft(context.Context, *FinishMultipartUploadDraftRequest) (*FinishMultipartUploadDraftResponse, error)
+	// Returns a list of dataset types
+	ListTypes(context.Context, *ListTypesRequest) (*ListTypesResponse, error)
 }
 
 // UnimplementedDatasetServiceServer should be embedded to have
@@ -234,6 +249,9 @@ func (UnimplementedDatasetServiceServer) StartMultipartUploadDraft(context.Conte
 }
 func (UnimplementedDatasetServiceServer) FinishMultipartUploadDraft(context.Context, *FinishMultipartUploadDraftRequest) (*FinishMultipartUploadDraftResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FinishMultipartUploadDraft not implemented")
+}
+func (UnimplementedDatasetServiceServer) ListTypes(context.Context, *ListTypesRequest) (*ListTypesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTypes not implemented")
 }
 func (UnimplementedDatasetServiceServer) testEmbeddedByValue() {}
 
@@ -435,6 +453,24 @@ func _DatasetService_FinishMultipartUploadDraft_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DatasetService_ListTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatasetServiceServer).ListTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatasetService_ListTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatasetServiceServer).ListTypes(ctx, req.(*ListTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DatasetService_ServiceDesc is the grpc.ServiceDesc for DatasetService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -481,6 +517,10 @@ var DatasetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FinishMultipartUploadDraft",
 			Handler:    _DatasetService_FinishMultipartUploadDraft_Handler,
+		},
+		{
+			MethodName: "ListTypes",
+			Handler:    _DatasetService_ListTypes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

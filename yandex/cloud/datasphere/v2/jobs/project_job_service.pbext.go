@@ -91,6 +91,10 @@ func (m *ExecuteProjectJobResponse) SetOutputFiles(v []*StorageFile) {
 	m.OutputFiles = v
 }
 
+func (m *ExecuteProjectJobResponse) SetOutputFilesErrors(v []*FileUploadError) {
+	m.OutputFilesErrors = v
+}
+
 func (m *ExecuteProjectJobResponse) SetOutputDatasets(v []*OutputDataset) {
 	m.OutputDatasets = v
 }

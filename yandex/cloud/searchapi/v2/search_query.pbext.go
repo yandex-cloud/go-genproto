@@ -17,3 +17,7 @@ func (m *SearchQuery) SetFamilyMode(v SearchQuery_FamilyMode) {
 func (m *SearchQuery) SetPage(v int64) {
 	m.Page = v
 }
+
+func (m *SearchQuery) SetFixTypoMode(v SearchQuery_FixTypoMode) {
+	m.FixTypoMode = v
+}
