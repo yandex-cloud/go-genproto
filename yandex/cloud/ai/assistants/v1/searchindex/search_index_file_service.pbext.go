@@ -2,6 +2,18 @@
 
 package searchindex
 
+func (m *BatchCreateSearchIndexFileRequest) SetFileIds(v []string) {
+	m.FileIds = v
+}
+
+func (m *BatchCreateSearchIndexFileRequest) SetSearchIndexId(v string) {
+	m.SearchIndexId = v
+}
+
+func (m *BatchCreateSearchIndexFileResponse) SetFiles(v []*SearchIndexFile) {
+	m.Files = v
+}
+
 func (m *GetSearchIndexFileRequest) SetFileId(v string) {
 	m.FileId = v
 }

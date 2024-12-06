@@ -55,6 +55,10 @@ func (m *JobParameters) SetGracefulShutdownParameters(v *GracefulShutdownParamet
 	m.GracefulShutdownParameters = v
 }
 
+func (m *JobParameters) SetSparkParameters(v *SparkParameters) {
+	m.SparkParameters = v
+}
+
 func (m *CloudInstanceType) SetName(v string) {
 	m.Name = v
 }
@@ -407,4 +411,8 @@ func (m *JobProgress) SetProgress(v int64) {
 
 func (m *JobProgress) SetCreateTime(v *timestamppb.Timestamp) {
 	m.CreateTime = v
+}
+
+func (m *SparkParameters) SetConnectorId(v string) {
+	m.ConnectorId = v
 }

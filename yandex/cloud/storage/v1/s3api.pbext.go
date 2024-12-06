@@ -245,3 +245,211 @@ func (m *S3APIDeleteObjectTaggingResponse) SetRequestId(v string) {
 func (m *S3APIDeleteObjectTaggingResponse) SetVersionId(v string) {
 	m.VersionId = v
 }
+
+func (m *S3APIStartMultipartUploadResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIStartMultipartUploadResponse) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *S3APIStartMultipartUploadResponse) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *S3APIStartMultipartUploadResponse) SetUploadId(v string) {
+	m.UploadId = v
+}
+
+func (m *S3APIUploadPartResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIUploadPartResponse) SetEtag(v string) {
+	m.Etag = v
+}
+
+func (m *S3APIListPartsResponse) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *S3APIListPartsResponse) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *S3APIListPartsResponse) SetUploadId(v string) {
+	m.UploadId = v
+}
+
+func (m *S3APIListPartsResponse) SetPartNumberMarker(v string) {
+	m.PartNumberMarker = v
+}
+
+func (m *S3APIListPartsResponse) SetNextPartNumberMarker(v string) {
+	m.NextPartNumberMarker = v
+}
+
+func (m *S3APIListPartsResponse) SetMaxParts(v int64) {
+	m.MaxParts = v
+}
+
+func (m *S3APIListPartsResponse) SetIsTruncated(v bool) {
+	m.IsTruncated = v
+}
+
+func (m *S3APIListPartsResponse) SetParts(v []*S3APIPart) {
+	m.Parts = v
+}
+
+func (m *S3APIListPartsResponse) SetInitiator(v *S3APIOwner) {
+	m.Initiator = v
+}
+
+func (m *S3APIListPartsResponse) SetOwner(v *S3APIOwner) {
+	m.Owner = v
+}
+
+func (m *S3APIListPartsResponse) SetStorageClass(v string) {
+	m.StorageClass = v
+}
+
+func (m *S3APIListPartsResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIPart) SetPartNumber(v int64) {
+	m.PartNumber = v
+}
+
+func (m *S3APIPart) SetLastModifiedAt(v *timestamppb.Timestamp) {
+	m.LastModifiedAt = v
+}
+
+func (m *S3APIPart) SetSize(v int64) {
+	m.Size = v
+}
+
+func (m *S3APIPart) SetEtag(v string) {
+	m.Etag = v
+}
+
+func (m *S3APIAbortMultipartUploadResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APICompleteMultipartUploadResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APICompleteMultipartUploadResponse) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *S3APICompleteMultipartUploadResponse) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *S3APICompleteMultipartUploadResponse) SetEtag(v string) {
+	m.Etag = v
+}
+
+func (m *S3APICompleteMultipartUploadResponse) SetLocation(v string) {
+	m.Location = v
+}
+
+func (m *S3APICompleteMultipartUploadResponse) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetKeyMarker(v string) {
+	m.KeyMarker = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetUploadIdMarker(v string) {
+	m.UploadIdMarker = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetNextKeyMarker(v string) {
+	m.NextKeyMarker = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetNextUploadIdMarker(v string) {
+	m.NextUploadIdMarker = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetDelimiter(v string) {
+	m.Delimiter = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetMaxUploads(v int64) {
+	m.MaxUploads = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetIsTruncated(v bool) {
+	m.IsTruncated = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetUploads(v []*S3APIMultipartUpload) {
+	m.Uploads = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetCommonPrefixes(v []string) {
+	m.CommonPrefixes = v
+}
+
+func (m *S3APIListMultipartUploadsResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIMultipartUpload) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *S3APIMultipartUpload) SetUploadId(v string) {
+	m.UploadId = v
+}
+
+func (m *S3APIMultipartUpload) SetInitiator(v *S3APIOwner) {
+	m.Initiator = v
+}
+
+func (m *S3APIMultipartUpload) SetOwner(v *S3APIOwner) {
+	m.Owner = v
+}
+
+func (m *S3APIMultipartUpload) SetStorageClass(v string) {
+	m.StorageClass = v
+}
+
+func (m *S3APIMultipartUpload) SetInitiatedAt(v *timestamppb.Timestamp) {
+	m.InitiatedAt = v
+}
+
+func (m *S3APIOwner) SetId(v string) {
+	m.Id = v
+}
+
+func (m *S3APIOwner) SetDisplayName(v string) {
+	m.DisplayName = v
+}
+
+func (m *S3APIUploadPartCopyResponse) SetEtag(v string) {
+	m.Etag = v
+}
+
+func (m *S3APIUploadPartCopyResponse) SetLastModifiedAt(v *timestamppb.Timestamp) {
+	m.LastModifiedAt = v
+}
+
+func (m *S3APIUploadPartCopyResponse) SetRequestId(v string) {
+	m.RequestId = v
+}

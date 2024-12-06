@@ -269,7 +269,7 @@ type MysqlSource struct {
 	// You can leave it empty, then it will be possible to transfer tables from several
 	// databases at the same time from this source.
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access.
+	// User for database access. not required as may be in connection
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
@@ -408,7 +408,7 @@ type MysqlTarget struct {
 	// same names as on the source. If this field is empty, then you must fill below db
 	// schema for service table.
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access.
+	// User for database access. not required as may be in connection
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`

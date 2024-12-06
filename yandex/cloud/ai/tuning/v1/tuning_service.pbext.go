@@ -399,3 +399,15 @@ func (m *GetOptionsResponse) SetTextToTextCompletion(v *TextToTextCompletionTuni
 		TextToTextCompletion: v,
 	}
 }
+
+func (m *GetOptionsResponse) SetTextClassificationMultilabel(v *TextClassificationMultilabelParams) {
+	m.TuningParams = &GetOptionsResponse_TextClassificationMultilabel{
+		TextClassificationMultilabel: v,
+	}
+}
+
+func (m *GetOptionsResponse) SetTextClassificationMulticlass(v *TextClassificationMulticlassParams) {
+	m.TuningParams = &GetOptionsResponse_TextClassificationMulticlass{
+		TextClassificationMulticlass: v,
+	}
+}

@@ -128,6 +128,10 @@ func (m *Version) SetMounts(v []*Mount) {
 	m.Mounts = v
 }
 
+func (m *Version) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -328,4 +332,12 @@ func (m *YMQTarget) SetQueueArn(v string) {
 
 func (m *YMQTarget) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
+}
+
+func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {
+	m.GceHttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetAwsV1HttpEndpoint(v MetadataOption) {
+	m.AwsV1HttpEndpoint = v
 }

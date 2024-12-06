@@ -112,6 +112,10 @@ func (m *Revision) SetRuntime(v *Runtime) {
 	m.Runtime = v
 }
 
+func (m *Revision) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -300,4 +304,12 @@ func (m *Runtime) SetTask(v *Runtime_Task) {
 	m.Type = &Runtime_Task_{
 		Task: v,
 	}
+}
+
+func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {
+	m.GceHttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetAwsV1HttpEndpoint(v MetadataOption) {
+	m.AwsV1HttpEndpoint = v
 }

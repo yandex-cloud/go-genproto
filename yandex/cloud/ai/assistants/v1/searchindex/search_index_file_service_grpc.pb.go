@@ -8,6 +8,7 @@ package searchindex
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,16 +20,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SearchIndexFileService_Get_FullMethodName  = "/yandex.cloud.ai.assistants.v1.searchindex.SearchIndexFileService/Get"
-	SearchIndexFileService_List_FullMethodName = "/yandex.cloud.ai.assistants.v1.searchindex.SearchIndexFileService/List"
+	SearchIndexFileService_BatchCreate_FullMethodName = "/yandex.cloud.ai.assistants.v1.searchindex.SearchIndexFileService/BatchCreate"
+	SearchIndexFileService_Get_FullMethodName         = "/yandex.cloud.ai.assistants.v1.searchindex.SearchIndexFileService/Get"
+	SearchIndexFileService_List_FullMethodName        = "/yandex.cloud.ai.assistants.v1.searchindex.SearchIndexFileService/List"
 )
 
 // SearchIndexFileServiceClient is the client API for SearchIndexFileService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// ThreadService provides operations for managing files within search indexes.
+// SearchIndexFileService provides operations for managing files within search indexes.
 type SearchIndexFileServiceClient interface {
+	// Creates multiple files within a search index in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
+	BatchCreate(ctx context.Context, in *BatchCreateSearchIndexFileRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves details of a specific file that has been indexed within a search index.
 	Get(ctx context.Context, in *GetSearchIndexFileRequest, opts ...grpc.CallOption) (*SearchIndexFile, error)
 	// List files that are indexed within a specific search index.
@@ -41,6 +45,16 @@ type searchIndexFileServiceClient struct {
 
 func NewSearchIndexFileServiceClient(cc grpc.ClientConnInterface) SearchIndexFileServiceClient {
 	return &searchIndexFileServiceClient{cc}
+}
+
+func (c *searchIndexFileServiceClient) BatchCreate(ctx context.Context, in *BatchCreateSearchIndexFileRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SearchIndexFileService_BatchCreate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *searchIndexFileServiceClient) Get(ctx context.Context, in *GetSearchIndexFileRequest, opts ...grpc.CallOption) (*SearchIndexFile, error) {
@@ -67,8 +81,10 @@ func (c *searchIndexFileServiceClient) List(ctx context.Context, in *ListSearchI
 // All implementations should embed UnimplementedSearchIndexFileServiceServer
 // for forward compatibility.
 //
-// ThreadService provides operations for managing files within search indexes.
+// SearchIndexFileService provides operations for managing files within search indexes.
 type SearchIndexFileServiceServer interface {
+	// Creates multiple files within a search index in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
+	BatchCreate(context.Context, *BatchCreateSearchIndexFileRequest) (*operation.Operation, error)
 	// Retrieves details of a specific file that has been indexed within a search index.
 	Get(context.Context, *GetSearchIndexFileRequest) (*SearchIndexFile, error)
 	// List files that are indexed within a specific search index.
@@ -82,6 +98,9 @@ type SearchIndexFileServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedSearchIndexFileServiceServer struct{}
 
+func (UnimplementedSearchIndexFileServiceServer) BatchCreate(context.Context, *BatchCreateSearchIndexFileRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchCreate not implemented")
+}
 func (UnimplementedSearchIndexFileServiceServer) Get(context.Context, *GetSearchIndexFileRequest) (*SearchIndexFile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
@@ -106,6 +125,24 @@ func RegisterSearchIndexFileServiceServer(s grpc.ServiceRegistrar, srv SearchInd
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&SearchIndexFileService_ServiceDesc, srv)
+}
+
+func _SearchIndexFileService_BatchCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchCreateSearchIndexFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchIndexFileServiceServer).BatchCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SearchIndexFileService_BatchCreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchIndexFileServiceServer).BatchCreate(ctx, req.(*BatchCreateSearchIndexFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _SearchIndexFileService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -151,6 +188,10 @@ var SearchIndexFileService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "yandex.cloud.ai.assistants.v1.searchindex.SearchIndexFileService",
 	HandlerType: (*SearchIndexFileServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "BatchCreate",
+			Handler:    _SearchIndexFileService_BatchCreate_Handler,
+		},
 		{
 			MethodName: "Get",
 			Handler:    _SearchIndexFileService_Get_Handler,

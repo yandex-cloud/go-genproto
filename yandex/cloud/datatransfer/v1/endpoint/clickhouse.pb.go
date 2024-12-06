@@ -487,7 +487,7 @@ type ClickhouseSource struct {
 	unknownFields protoimpl.UnknownFields
 
 	Connection *ClickhouseConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	// While list of tables for replication. If none or empty list is presented - will
+	// White list of tables for replication. If none or empty list is presented - will
 	// replicate all tables. Can contain * patterns.
 	IncludeTables []string `protobuf:"bytes,7,rep,name=include_tables,json=includeTables,proto3" json:"include_tables,omitempty"`
 	// Exclude list of tables for replication. If none or empty list is presented -

@@ -66,6 +66,10 @@ func (m *DatasetInfo) SetUpdatedBy(v string) {
 	m.UpdatedBy = v
 }
 
+func (m *DatasetInfo) SetValidationError(v []*ValidationError) {
+	m.ValidationError = v
+}
+
 func (m *ValidationError) SetError(v string) {
 	m.Error = v
 }

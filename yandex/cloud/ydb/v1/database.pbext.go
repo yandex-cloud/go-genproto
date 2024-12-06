@@ -304,8 +304,46 @@ func (m *ScalePolicy) SetFixedScale(v *ScalePolicy_FixedScale) {
 	}
 }
 
+func (m *ScalePolicy) SetAutoScale(v *ScalePolicy_AutoScale) {
+	m.ScaleType = &ScalePolicy_AutoScale_{
+		AutoScale: v,
+	}
+}
+
 func (m *ScalePolicy_FixedScale) SetSize(v int64) {
 	m.Size = v
+}
+
+type ScalePolicy_AutoScale_AutoScaleType = isScalePolicy_AutoScale_AutoScaleType
+
+func (m *ScalePolicy_AutoScale) SetAutoScaleType(v ScalePolicy_AutoScale_AutoScaleType) {
+	m.AutoScaleType = v
+}
+
+func (m *ScalePolicy_AutoScale) SetMinSize(v int64) {
+	m.MinSize = v
+}
+
+func (m *ScalePolicy_AutoScale) SetMaxSize(v int64) {
+	m.MaxSize = v
+}
+
+func (m *ScalePolicy_AutoScale) SetTargetTracking(v *ScalePolicy_AutoScale_TargetTracking) {
+	m.AutoScaleType = &ScalePolicy_AutoScale_TargetTracking_{
+		TargetTracking: v,
+	}
+}
+
+type ScalePolicy_AutoScale_TargetTracking_Target = isScalePolicy_AutoScale_TargetTracking_Target
+
+func (m *ScalePolicy_AutoScale_TargetTracking) SetTarget(v ScalePolicy_AutoScale_TargetTracking_Target) {
+	m.Target = v
+}
+
+func (m *ScalePolicy_AutoScale_TargetTracking) SetCpuUtilizationPercent(v int64) {
+	m.Target = &ScalePolicy_AutoScale_TargetTracking_CpuUtilizationPercent{
+		CpuUtilizationPercent: v,
+	}
 }
 
 func (m *StorageConfig) SetStorageOptions(v []*StorageOption) {

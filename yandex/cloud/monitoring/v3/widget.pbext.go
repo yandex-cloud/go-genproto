@@ -30,6 +30,12 @@ func (m *Widget) SetChart(v *ChartWidget) {
 	}
 }
 
+func (m *Widget) SetMultiSourceChart(v *MultiSourceChartWidget) {
+	m.Widget = &Widget_MultiSourceChart{
+		MultiSourceChart: v,
+	}
+}
+
 func (m *Widget_LayoutPosition) SetX(v int64) {
 	m.X = v
 }

@@ -24,6 +24,10 @@ func (m *StreamTalkRequest) SetAudio(v *AudioStreamingRequest) {
 	}
 }
 
+func (m *UploadTalkRequest) SetTalkId(v string) {
+	m.TalkId = v
+}
+
 func (m *UploadTalkRequest) SetMetadata(v *TalkMetadata) {
 	m.Metadata = v
 }
@@ -33,6 +37,10 @@ func (m *UploadTalkRequest) SetAudio(v *AudioRequest) {
 }
 
 func (m *UploadTalkResponse) SetTalkId(v string) {
+	m.TalkId = v
+}
+
+func (m *UploadTextRequest) SetTalkId(v string) {
 	m.TalkId = v
 }
 

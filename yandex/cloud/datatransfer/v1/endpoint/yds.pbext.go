@@ -58,6 +58,10 @@ func (m *YDSTarget) SetSaveTxOrder(v bool) {
 	m.SaveTxOrder = v
 }
 
+func (m *YDSTarget) SetCompressionCodec(v YdsCompressionCodec) {
+	m.CompressionCodec = v
+}
+
 func (m *YDSTarget) SetSerializer(v *Serializer) {
 	m.Serializer = v
 }

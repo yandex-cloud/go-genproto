@@ -190,6 +190,10 @@ func (m *DeployContainerRevisionRequest) SetRuntime(v *Runtime) {
 	m.Runtime = v
 }
 
+func (m *DeployContainerRevisionRequest) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

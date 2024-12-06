@@ -275,6 +275,10 @@ func (m *CreateFunctionVersionRequest) SetMounts(v []*Mount) {
 	m.Mounts = v
 }
 
+func (m *CreateFunctionVersionRequest) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *CreateFunctionVersionMetadata) SetFunctionVersionId(v string) {
 	m.FunctionVersionId = v
 }

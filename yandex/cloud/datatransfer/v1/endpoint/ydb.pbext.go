@@ -34,6 +34,10 @@ func (m *YdbSource) SetChangefeedCustomName(v string) {
 	m.ChangefeedCustomName = v
 }
 
+func (m *YdbSource) SetChangefeedCustomConsumerName(v string) {
+	m.ChangefeedCustomConsumerName = v
+}
+
 func (m *YdbTarget) SetDatabase(v string) {
 	m.Database = v
 }
