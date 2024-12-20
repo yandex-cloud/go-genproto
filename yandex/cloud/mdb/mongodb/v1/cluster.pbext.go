@@ -953,6 +953,10 @@ func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
 }
 
+func (m *Access) SetWebSql(v bool) {
+	m.WebSql = v
+}
+
 func (m *Access) SetDataTransfer(v bool) {
 	m.DataTransfer = v
 }

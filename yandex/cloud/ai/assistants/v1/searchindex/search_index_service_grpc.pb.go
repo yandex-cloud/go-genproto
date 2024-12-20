@@ -31,7 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// ThreadService provides operations for managing search indexes.
+// SearchIndexService provides operations for managing search indexes.
 type SearchIndexServiceClient interface {
 	// Create a new search index in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Create(ctx context.Context, in *CreateSearchIndexRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -107,7 +107,7 @@ func (c *searchIndexServiceClient) List(ctx context.Context, in *ListSearchIndic
 // All implementations should embed UnimplementedSearchIndexServiceServer
 // for forward compatibility.
 //
-// ThreadService provides operations for managing search indexes.
+// SearchIndexService provides operations for managing search indexes.
 type SearchIndexServiceServer interface {
 	// Create a new search index in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
 	Create(context.Context, *CreateSearchIndexRequest) (*operation.Operation, error)

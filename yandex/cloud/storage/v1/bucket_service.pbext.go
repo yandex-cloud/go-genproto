@@ -111,6 +111,10 @@ func (m *UpdateBucketRequest) SetEncryption(v *Encryption) {
 	m.Encryption = v
 }
 
+func (m *UpdateBucketRequest) SetAllowedPrivateEndpoints(v *BucketAllowedPrivateEndpoints) {
+	m.AllowedPrivateEndpoints = v
+}
+
 func (m *UpdateBucketMetadata) SetName(v string) {
 	m.Name = v
 }

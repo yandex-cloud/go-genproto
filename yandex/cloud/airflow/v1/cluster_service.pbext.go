@@ -111,6 +111,14 @@ func (m *UpdateClusterConfigSpec) SetLockbox(v *LockboxConfig) {
 	m.Lockbox = v
 }
 
+func (m *UpdateClusterConfigSpec) SetAirflowVersion(v string) {
+	m.AirflowVersion = v
+}
+
+func (m *UpdateClusterConfigSpec) SetPythonVersion(v string) {
+	m.PythonVersion = v
+}
+
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }

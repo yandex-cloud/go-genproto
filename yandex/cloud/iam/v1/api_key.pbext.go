@@ -30,6 +30,10 @@ func (m *ApiKey) SetScope(v string) {
 	m.Scope = v
 }
 
+func (m *ApiKey) SetScopes(v []string) {
+	m.Scopes = v
+}
+
 func (m *ApiKey) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
 }

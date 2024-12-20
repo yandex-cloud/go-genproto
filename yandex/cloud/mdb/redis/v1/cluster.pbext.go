@@ -155,6 +155,10 @@ func (m *ClusterConfig) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
 }
 
+func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
+	m.BackupRetainPeriodDays = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }

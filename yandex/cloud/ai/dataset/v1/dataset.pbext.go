@@ -81,3 +81,15 @@ func (m *ValidationError) SetErrorDescription(v string) {
 func (m *ValidationError) SetRowNumbers(v []int64) {
 	m.RowNumbers = v
 }
+
+func (m *DatasetUploadSchema) SetTaskType(v string) {
+	m.TaskType = v
+}
+
+func (m *DatasetUploadSchema) SetUploadFormat(v string) {
+	m.UploadFormat = v
+}
+
+func (m *DatasetUploadSchema) SetSchema(v string) {
+	m.Schema = v
+}

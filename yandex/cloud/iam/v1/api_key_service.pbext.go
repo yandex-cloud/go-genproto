@@ -44,6 +44,10 @@ func (m *CreateApiKeyRequest) SetScope(v string) {
 	m.Scope = v
 }
 
+func (m *CreateApiKeyRequest) SetScopes(v []string) {
+	m.Scopes = v
+}
+
 func (m *CreateApiKeyRequest) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
 }
@@ -66,6 +70,14 @@ func (m *UpdateApiKeyRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateApiKeyRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *UpdateApiKeyRequest) SetScopes(v []string) {
+	m.Scopes = v
+}
+
+func (m *UpdateApiKeyRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
 }
 
 func (m *UpdateApiKeyMetadata) SetApiKeyId(v string) {

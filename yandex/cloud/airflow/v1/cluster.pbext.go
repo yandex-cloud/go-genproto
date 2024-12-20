@@ -115,6 +115,14 @@ func (m *ClusterConfig) SetLockbox(v *LockboxConfig) {
 	m.Lockbox = v
 }
 
+func (m *ClusterConfig) SetAirflowVersion(v string) {
+	m.AirflowVersion = v
+}
+
+func (m *ClusterConfig) SetPythonVersion(v string) {
+	m.PythonVersion = v
+}
+
 func (m *AirflowConfig) SetConfig(v map[string]string) {
 	m.Config = v
 }

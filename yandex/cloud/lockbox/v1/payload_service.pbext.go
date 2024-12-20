@@ -9,3 +9,41 @@ func (m *GetPayloadRequest) SetSecretId(v string) {
 func (m *GetPayloadRequest) SetVersionId(v string) {
 	m.VersionId = v
 }
+
+type GetExRequest_Identifier = isGetExRequest_Identifier
+
+func (m *GetExRequest) SetIdentifier(v GetExRequest_Identifier) {
+	m.Identifier = v
+}
+
+func (m *GetExRequest) SetSecretId(v string) {
+	m.Identifier = &GetExRequest_SecretId{
+		SecretId: v,
+	}
+}
+
+func (m *GetExRequest) SetFolderAndName(v *FolderAndName) {
+	m.Identifier = &GetExRequest_FolderAndName{
+		FolderAndName: v,
+	}
+}
+
+func (m *GetExRequest) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *FolderAndName) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *FolderAndName) SetSecretName(v string) {
+	m.SecretName = v
+}
+
+func (m *GetExResponse) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *GetExResponse) SetEntries(v map[string][]byte) {
+	m.Entries = v
+}

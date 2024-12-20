@@ -14,6 +14,10 @@ func (m *ListTuningsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListTuningsRequest) SetStatus(v TuningTask_Status) {
+	m.Status = v
+}
+
 func (m *ListTuningsResponse) SetTuningTasks(v []*TuningTask) {
 	m.TuningTasks = v
 }
@@ -56,6 +60,14 @@ func (m *TuningMetadata) SetTuningTaskId(v string) {
 
 func (m *TuningMetadata) SetStatus(v TuningTask_Status) {
 	m.Status = v
+}
+
+func (m *TuningMetadata) SetTotalSteps(v int64) {
+	m.TotalSteps = v
+}
+
+func (m *TuningMetadata) SetCurrentStep(v int64) {
+	m.CurrentStep = v
 }
 
 type TuningRequest_TuningParams = isTuningRequest_TuningParams

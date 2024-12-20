@@ -668,3 +668,7 @@ func (m *ConfigSpec) SetRedis(v *config.RedisConfig) {
 func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
 }
+
+func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
+	m.BackupRetainPeriodDays = v
+}

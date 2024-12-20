@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PayloadService_Get_FullMethodName = "/yandex.cloud.lockbox.v1.PayloadService/Get"
+	PayloadService_Get_FullMethodName   = "/yandex.cloud.lockbox.v1.PayloadService/Get"
+	PayloadService_GetEx_FullMethodName = "/yandex.cloud.lockbox.v1.PayloadService/GetEx"
 )
 
 // PayloadServiceClient is the client API for PayloadService service.
@@ -32,6 +33,7 @@ type PayloadServiceClient interface {
 	//
 	// To get the list of all available secrets, make a [SecretService.List] request.
 	Get(ctx context.Context, in *GetPayloadRequest, opts ...grpc.CallOption) (*Payload, error)
+	GetEx(ctx context.Context, in *GetExRequest, opts ...grpc.CallOption) (*GetExResponse, error)
 }
 
 type payloadServiceClient struct {
@@ -52,6 +54,16 @@ func (c *payloadServiceClient) Get(ctx context.Context, in *GetPayloadRequest, o
 	return out, nil
 }
 
+func (c *payloadServiceClient) GetEx(ctx context.Context, in *GetExRequest, opts ...grpc.CallOption) (*GetExResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExResponse)
+	err := c.cc.Invoke(ctx, PayloadService_GetEx_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PayloadServiceServer is the server API for PayloadService service.
 // All implementations should embed UnimplementedPayloadServiceServer
 // for forward compatibility.
@@ -62,6 +74,7 @@ type PayloadServiceServer interface {
 	//
 	// To get the list of all available secrets, make a [SecretService.List] request.
 	Get(context.Context, *GetPayloadRequest) (*Payload, error)
+	GetEx(context.Context, *GetExRequest) (*GetExResponse, error)
 }
 
 // UnimplementedPayloadServiceServer should be embedded to have
@@ -73,6 +86,9 @@ type UnimplementedPayloadServiceServer struct{}
 
 func (UnimplementedPayloadServiceServer) Get(context.Context, *GetPayloadRequest) (*Payload, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedPayloadServiceServer) GetEx(context.Context, *GetExRequest) (*GetExResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEx not implemented")
 }
 func (UnimplementedPayloadServiceServer) testEmbeddedByValue() {}
 
@@ -112,6 +128,24 @@ func _PayloadService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PayloadService_GetEx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PayloadServiceServer).GetEx(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PayloadService_GetEx_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PayloadServiceServer).GetEx(ctx, req.(*GetExRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PayloadService_ServiceDesc is the grpc.ServiceDesc for PayloadService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -122,6 +156,10 @@ var PayloadService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _PayloadService_Get_Handler,
+		},
+		{
+			MethodName: "GetEx",
+			Handler:    _PayloadService_GetEx_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -202,6 +202,26 @@ func (m *ListUploadFormatsResponse) SetFormats(v []string) {
 	m.Formats = v
 }
 
+func (m *ListUploadSchemasRequest) SetTaskType(v string) {
+	m.TaskType = v
+}
+
+func (m *ListUploadSchemasResponse) SetSchemas(v []*DatasetUploadSchema) {
+	m.Schemas = v
+}
+
 func (m *ListTypesResponse) SetTypes(v []string) {
 	m.Types = v
+}
+
+func (m *GetDatasetPreviewRequest) SetDatasetId(v string) {
+	m.DatasetId = v
+}
+
+func (m *GetDatasetPreviewResponse) SetDatasetId(v string) {
+	m.DatasetId = v
+}
+
+func (m *GetDatasetPreviewResponse) SetPreviewLines(v []string) {
+	m.PreviewLines = v
 }

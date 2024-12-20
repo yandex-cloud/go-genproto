@@ -27,10 +27,12 @@ const (
 	DatasetService_Delete_FullMethodName                     = "/yandex.cloud.ai.dataset.v1.DatasetService/Delete"
 	DatasetService_List_FullMethodName                       = "/yandex.cloud.ai.dataset.v1.DatasetService/List"
 	DatasetService_ListUploadFormats_FullMethodName          = "/yandex.cloud.ai.dataset.v1.DatasetService/ListUploadFormats"
+	DatasetService_ListUploadSchemas_FullMethodName          = "/yandex.cloud.ai.dataset.v1.DatasetService/ListUploadSchemas"
 	DatasetService_GetUploadDraftUrl_FullMethodName          = "/yandex.cloud.ai.dataset.v1.DatasetService/GetUploadDraftUrl"
 	DatasetService_StartMultipartUploadDraft_FullMethodName  = "/yandex.cloud.ai.dataset.v1.DatasetService/StartMultipartUploadDraft"
 	DatasetService_FinishMultipartUploadDraft_FullMethodName = "/yandex.cloud.ai.dataset.v1.DatasetService/FinishMultipartUploadDraft"
 	DatasetService_ListTypes_FullMethodName                  = "/yandex.cloud.ai.dataset.v1.DatasetService/ListTypes"
+	DatasetService_GetPreview_FullMethodName                 = "/yandex.cloud.ai.dataset.v1.DatasetService/GetPreview"
 )
 
 // DatasetServiceClient is the client API for DatasetService service.
@@ -51,8 +53,11 @@ type DatasetServiceClient interface {
 	Delete(ctx context.Context, in *DeleteDatasetRequest, opts ...grpc.CallOption) (*DeleteDatasetResponse, error)
 	// Lists datasets in specified folder.
 	List(ctx context.Context, in *ListDatasetsRequest, opts ...grpc.CallOption) (*ListDatasetsResponse, error)
-	// Lists supported upload formats for the specified dataset task type.
+	// Deprecated: Do not use.
+	// Deprecated. Use ListUploadSchemas.
 	ListUploadFormats(ctx context.Context, in *ListUploadFormatsRequest, opts ...grpc.CallOption) (*ListUploadFormatsResponse, error)
+	// Lists supported dataset upload formats types and schemas for the specified dataset task type.
+	ListUploadSchemas(ctx context.Context, in *ListUploadSchemasRequest, opts ...grpc.CallOption) (*ListUploadSchemasResponse, error)
 	// Returns an S3 presigned URL for dataset upload.
 	// This method only applicable if the dataset size does not exceed 5GB.
 	GetUploadDraftUrl(ctx context.Context, in *GetUploadDraftUrlRequest, opts ...grpc.CallOption) (*GetUploadDraftUrlResponse, error)
@@ -62,6 +67,8 @@ type DatasetServiceClient interface {
 	FinishMultipartUploadDraft(ctx context.Context, in *FinishMultipartUploadDraftRequest, opts ...grpc.CallOption) (*FinishMultipartUploadDraftResponse, error)
 	// Returns a list of dataset types
 	ListTypes(ctx context.Context, in *ListTypesRequest, opts ...grpc.CallOption) (*ListTypesResponse, error)
+	// Returns a preview of dataset types
+	GetPreview(ctx context.Context, in *GetDatasetPreviewRequest, opts ...grpc.CallOption) (*GetDatasetPreviewResponse, error)
 }
 
 type datasetServiceClient struct {
@@ -132,10 +139,21 @@ func (c *datasetServiceClient) List(ctx context.Context, in *ListDatasetsRequest
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *datasetServiceClient) ListUploadFormats(ctx context.Context, in *ListUploadFormatsRequest, opts ...grpc.CallOption) (*ListUploadFormatsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUploadFormatsResponse)
 	err := c.cc.Invoke(ctx, DatasetService_ListUploadFormats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *datasetServiceClient) ListUploadSchemas(ctx context.Context, in *ListUploadSchemasRequest, opts ...grpc.CallOption) (*ListUploadSchemasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUploadSchemasResponse)
+	err := c.cc.Invoke(ctx, DatasetService_ListUploadSchemas_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -182,6 +200,16 @@ func (c *datasetServiceClient) ListTypes(ctx context.Context, in *ListTypesReque
 	return out, nil
 }
 
+func (c *datasetServiceClient) GetPreview(ctx context.Context, in *GetDatasetPreviewRequest, opts ...grpc.CallOption) (*GetDatasetPreviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDatasetPreviewResponse)
+	err := c.cc.Invoke(ctx, DatasetService_GetPreview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DatasetServiceServer is the server API for DatasetService service.
 // All implementations should embed UnimplementedDatasetServiceServer
 // for forward compatibility.
@@ -200,8 +228,11 @@ type DatasetServiceServer interface {
 	Delete(context.Context, *DeleteDatasetRequest) (*DeleteDatasetResponse, error)
 	// Lists datasets in specified folder.
 	List(context.Context, *ListDatasetsRequest) (*ListDatasetsResponse, error)
-	// Lists supported upload formats for the specified dataset task type.
+	// Deprecated: Do not use.
+	// Deprecated. Use ListUploadSchemas.
 	ListUploadFormats(context.Context, *ListUploadFormatsRequest) (*ListUploadFormatsResponse, error)
+	// Lists supported dataset upload formats types and schemas for the specified dataset task type.
+	ListUploadSchemas(context.Context, *ListUploadSchemasRequest) (*ListUploadSchemasResponse, error)
 	// Returns an S3 presigned URL for dataset upload.
 	// This method only applicable if the dataset size does not exceed 5GB.
 	GetUploadDraftUrl(context.Context, *GetUploadDraftUrlRequest) (*GetUploadDraftUrlResponse, error)
@@ -211,6 +242,8 @@ type DatasetServiceServer interface {
 	FinishMultipartUploadDraft(context.Context, *FinishMultipartUploadDraftRequest) (*FinishMultipartUploadDraftResponse, error)
 	// Returns a list of dataset types
 	ListTypes(context.Context, *ListTypesRequest) (*ListTypesResponse, error)
+	// Returns a preview of dataset types
+	GetPreview(context.Context, *GetDatasetPreviewRequest) (*GetDatasetPreviewResponse, error)
 }
 
 // UnimplementedDatasetServiceServer should be embedded to have
@@ -241,6 +274,9 @@ func (UnimplementedDatasetServiceServer) List(context.Context, *ListDatasetsRequ
 func (UnimplementedDatasetServiceServer) ListUploadFormats(context.Context, *ListUploadFormatsRequest) (*ListUploadFormatsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUploadFormats not implemented")
 }
+func (UnimplementedDatasetServiceServer) ListUploadSchemas(context.Context, *ListUploadSchemasRequest) (*ListUploadSchemasResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUploadSchemas not implemented")
+}
 func (UnimplementedDatasetServiceServer) GetUploadDraftUrl(context.Context, *GetUploadDraftUrlRequest) (*GetUploadDraftUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUploadDraftUrl not implemented")
 }
@@ -252,6 +288,9 @@ func (UnimplementedDatasetServiceServer) FinishMultipartUploadDraft(context.Cont
 }
 func (UnimplementedDatasetServiceServer) ListTypes(context.Context, *ListTypesRequest) (*ListTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTypes not implemented")
+}
+func (UnimplementedDatasetServiceServer) GetPreview(context.Context, *GetDatasetPreviewRequest) (*GetDatasetPreviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPreview not implemented")
 }
 func (UnimplementedDatasetServiceServer) testEmbeddedByValue() {}
 
@@ -399,6 +438,24 @@ func _DatasetService_ListUploadFormats_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DatasetService_ListUploadSchemas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUploadSchemasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatasetServiceServer).ListUploadSchemas(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatasetService_ListUploadSchemas_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatasetServiceServer).ListUploadSchemas(ctx, req.(*ListUploadSchemasRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DatasetService_GetUploadDraftUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUploadDraftUrlRequest)
 	if err := dec(in); err != nil {
@@ -471,6 +528,24 @@ func _DatasetService_ListTypes_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DatasetService_GetPreview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDatasetPreviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatasetServiceServer).GetPreview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatasetService_GetPreview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatasetServiceServer).GetPreview(ctx, req.(*GetDatasetPreviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DatasetService_ServiceDesc is the grpc.ServiceDesc for DatasetService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -507,6 +582,10 @@ var DatasetService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DatasetService_ListUploadFormats_Handler,
 		},
 		{
+			MethodName: "ListUploadSchemas",
+			Handler:    _DatasetService_ListUploadSchemas_Handler,
+		},
+		{
 			MethodName: "GetUploadDraftUrl",
 			Handler:    _DatasetService_GetUploadDraftUrl_Handler,
 		},
@@ -521,6 +600,10 @@ var DatasetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTypes",
 			Handler:    _DatasetService_ListTypes_Handler,
+		},
+		{
+			MethodName: "GetPreview",
+			Handler:    _DatasetService_GetPreview_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

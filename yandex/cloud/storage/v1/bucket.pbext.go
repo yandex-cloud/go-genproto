@@ -72,6 +72,10 @@ func (m *Bucket) SetEncryption(v *Encryption) {
 	m.Encryption = v
 }
 
+func (m *Bucket) SetAllowedPrivateEndpoints(v *BucketAllowedPrivateEndpoints) {
+	m.AllowedPrivateEndpoints = v
+}
+
 func (m *Tag) SetKey(v string) {
 	m.Key = v
 }
@@ -472,4 +476,12 @@ func (m *Encryption_EncryptionRule) SetKmsMasterKeyId(v string) {
 
 func (m *Encryption_EncryptionRule) SetSseAlgorithm(v string) {
 	m.SseAlgorithm = v
+}
+
+func (m *BucketAllowedPrivateEndpoints) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *BucketAllowedPrivateEndpoints) SetPrivateEndpoints(v []string) {
+	m.PrivateEndpoints = v
 }
