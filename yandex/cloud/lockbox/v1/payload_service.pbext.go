@@ -40,6 +40,10 @@ func (m *FolderAndName) SetSecretName(v string) {
 	m.SecretName = v
 }
 
+func (m *GetExResponse) SetSecretId(v string) {
+	m.SecretId = v
+}
+
 func (m *GetExResponse) SetVersionId(v string) {
 	m.VersionId = v
 }

@@ -9,6 +9,7 @@ package assistants
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
@@ -31,6 +32,13 @@ type PromptTruncationOptions struct {
 	// If the prompt exceeds this limit, the thread messages will be truncated.
 	// Default max_prompt_tokens: 7000
 	MaxPromptTokens *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_prompt_tokens,json=maxPromptTokens,proto3" json:"max_prompt_tokens,omitempty"`
+	// Specifies the truncation strategy to use when the prompt exceeds the token limit.
+	//
+	// Types that are assignable to TruncationStrategy:
+	//
+	//	*PromptTruncationOptions_AutoStrategy_
+	//	*PromptTruncationOptions_LastMessagesStrategy_
+	TruncationStrategy isPromptTruncationOptions_TruncationStrategy `protobuf_oneof:"TruncationStrategy"`
 }
 
 func (x *PromptTruncationOptions) Reset() {
@@ -70,6 +78,46 @@ func (x *PromptTruncationOptions) GetMaxPromptTokens() *wrapperspb.Int64Value {
 		return x.MaxPromptTokens
 	}
 	return nil
+}
+
+func (m *PromptTruncationOptions) GetTruncationStrategy() isPromptTruncationOptions_TruncationStrategy {
+	if m != nil {
+		return m.TruncationStrategy
+	}
+	return nil
+}
+
+func (x *PromptTruncationOptions) GetAutoStrategy() *PromptTruncationOptions_AutoStrategy {
+	if x, ok := x.GetTruncationStrategy().(*PromptTruncationOptions_AutoStrategy_); ok {
+		return x.AutoStrategy
+	}
+	return nil
+}
+
+func (x *PromptTruncationOptions) GetLastMessagesStrategy() *PromptTruncationOptions_LastMessagesStrategy {
+	if x, ok := x.GetTruncationStrategy().(*PromptTruncationOptions_LastMessagesStrategy_); ok {
+		return x.LastMessagesStrategy
+	}
+	return nil
+}
+
+type isPromptTruncationOptions_TruncationStrategy interface {
+	isPromptTruncationOptions_TruncationStrategy()
+}
+
+type PromptTruncationOptions_AutoStrategy_ struct {
+	AutoStrategy *PromptTruncationOptions_AutoStrategy `protobuf:"bytes,2,opt,name=auto_strategy,json=autoStrategy,proto3,oneof"`
+}
+
+type PromptTruncationOptions_LastMessagesStrategy_ struct {
+	// Retains only the last `num_messages` messages in the thread.
+	// If these messages exceed `max_prompt_tokens`, older messages will be further truncated to fit the limit.
+	LastMessagesStrategy *PromptTruncationOptions_LastMessagesStrategy `protobuf:"bytes,3,opt,name=last_messages_strategy,json=lastMessagesStrategy,proto3,oneof"`
+}
+
+func (*PromptTruncationOptions_AutoStrategy_) isPromptTruncationOptions_TruncationStrategy() {}
+
+func (*PromptTruncationOptions_LastMessagesStrategy_) isPromptTruncationOptions_TruncationStrategy() {
 }
 
 // Defines the options for completion generation.
@@ -133,6 +181,326 @@ func (x *CompletionOptions) GetTemperature() *wrapperspb.DoubleValue {
 	return nil
 }
 
+// Represents a general tool that can be one of several types.
+type Tool struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to ToolType:
+	//
+	//	*Tool_SearchIndex
+	//	*Tool_Function
+	ToolType isTool_ToolType `protobuf_oneof:"ToolType"`
+}
+
+func (x *Tool) Reset() {
+	*x = Tool{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Tool) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Tool) ProtoMessage() {}
+
+func (x *Tool) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Tool.ProtoReflect.Descriptor instead.
+func (*Tool) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{2}
+}
+
+func (m *Tool) GetToolType() isTool_ToolType {
+	if m != nil {
+		return m.ToolType
+	}
+	return nil
+}
+
+func (x *Tool) GetSearchIndex() *SearchIndexTool {
+	if x, ok := x.GetToolType().(*Tool_SearchIndex); ok {
+		return x.SearchIndex
+	}
+	return nil
+}
+
+func (x *Tool) GetFunction() *FunctionTool {
+	if x, ok := x.GetToolType().(*Tool_Function); ok {
+		return x.Function
+	}
+	return nil
+}
+
+type isTool_ToolType interface {
+	isTool_ToolType()
+}
+
+type Tool_SearchIndex struct {
+	// SearchIndexTool tool that performs search across specified indexes.
+	SearchIndex *SearchIndexTool `protobuf:"bytes,1,opt,name=search_index,json=searchIndex,proto3,oneof"`
+}
+
+type Tool_Function struct {
+	// Function tool that can be invoked by the assistant.
+	Function *FunctionTool `protobuf:"bytes,2,opt,name=function,proto3,oneof"`
+}
+
+func (*Tool_SearchIndex) isTool_ToolType() {}
+
+func (*Tool_Function) isTool_ToolType() {}
+
+// Represents a call to a tool.
+type ToolCall struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to ToolCallType:
+	//
+	//	*ToolCall_FunctionCall
+	ToolCallType isToolCall_ToolCallType `protobuf_oneof:"ToolCallType"`
+}
+
+func (x *ToolCall) Reset() {
+	*x = ToolCall{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ToolCall) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolCall) ProtoMessage() {}
+
+func (x *ToolCall) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolCall.ProtoReflect.Descriptor instead.
+func (*ToolCall) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{3}
+}
+
+func (m *ToolCall) GetToolCallType() isToolCall_ToolCallType {
+	if m != nil {
+		return m.ToolCallType
+	}
+	return nil
+}
+
+func (x *ToolCall) GetFunctionCall() *FunctionCall {
+	if x, ok := x.GetToolCallType().(*ToolCall_FunctionCall); ok {
+		return x.FunctionCall
+	}
+	return nil
+}
+
+type isToolCall_ToolCallType interface {
+	isToolCall_ToolCallType()
+}
+
+type ToolCall_FunctionCall struct {
+	// Represents a call to a function.
+	FunctionCall *FunctionCall `protobuf:"bytes,1,opt,name=function_call,json=functionCall,proto3,oneof"`
+}
+
+func (*ToolCall_FunctionCall) isToolCall_ToolCallType() {}
+
+// Represents a list of tool calls.
+type ToolCallList struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// A list of tool calls to be executed.
+	ToolCalls []*ToolCall `protobuf:"bytes,1,rep,name=tool_calls,json=toolCalls,proto3" json:"tool_calls,omitempty"`
+}
+
+func (x *ToolCallList) Reset() {
+	*x = ToolCallList{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ToolCallList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolCallList) ProtoMessage() {}
+
+func (x *ToolCallList) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolCallList.ProtoReflect.Descriptor instead.
+func (*ToolCallList) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ToolCallList) GetToolCalls() []*ToolCall {
+	if x != nil {
+		return x.ToolCalls
+	}
+	return nil
+}
+
+// Represents the result of a tool call.
+type ToolResult struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to ToolResultType:
+	//
+	//	*ToolResult_FunctionResult
+	ToolResultType isToolResult_ToolResultType `protobuf_oneof:"ToolResultType"`
+}
+
+func (x *ToolResult) Reset() {
+	*x = ToolResult{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ToolResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolResult) ProtoMessage() {}
+
+func (x *ToolResult) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolResult.ProtoReflect.Descriptor instead.
+func (*ToolResult) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{5}
+}
+
+func (m *ToolResult) GetToolResultType() isToolResult_ToolResultType {
+	if m != nil {
+		return m.ToolResultType
+	}
+	return nil
+}
+
+func (x *ToolResult) GetFunctionResult() *FunctionResult {
+	if x, ok := x.GetToolResultType().(*ToolResult_FunctionResult); ok {
+		return x.FunctionResult
+	}
+	return nil
+}
+
+type isToolResult_ToolResultType interface {
+	isToolResult_ToolResultType()
+}
+
+type ToolResult_FunctionResult struct {
+	// Represents the result of a function call.
+	FunctionResult *FunctionResult `protobuf:"bytes,1,opt,name=function_result,json=functionResult,proto3,oneof"`
+}
+
+func (*ToolResult_FunctionResult) isToolResult_ToolResultType() {}
+
+// Represents a list of tool results.
+type ToolResultList struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// A list of tool results.
+	ToolResults []*ToolResult `protobuf:"bytes,1,rep,name=tool_results,json=toolResults,proto3" json:"tool_results,omitempty"`
+}
+
+func (x *ToolResultList) Reset() {
+	*x = ToolResultList{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ToolResultList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolResultList) ProtoMessage() {}
+
+func (x *ToolResultList) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolResultList.ProtoReflect.Descriptor instead.
+func (*ToolResultList) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ToolResultList) GetToolResults() []*ToolResult {
+	if x != nil {
+		return x.ToolResults
+	}
+	return nil
+}
+
 // Configures a tool that enables Retrieval-Augmented Generation (RAG) by allowing the assistant to search across a specified search index.
 type SearchIndexTool struct {
 	state         protoimpl.MessageState
@@ -150,7 +518,7 @@ type SearchIndexTool struct {
 func (x *SearchIndexTool) Reset() {
 	*x = SearchIndexTool{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -163,7 +531,7 @@ func (x *SearchIndexTool) String() string {
 func (*SearchIndexTool) ProtoMessage() {}
 
 func (x *SearchIndexTool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -176,7 +544,7 @@ func (x *SearchIndexTool) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchIndexTool.ProtoReflect.Descriptor instead.
 func (*SearchIndexTool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SearchIndexTool) GetSearchIndexIds() []string {
@@ -193,35 +561,38 @@ func (x *SearchIndexTool) GetMaxNumResults() *wrapperspb.Int64Value {
 	return nil
 }
 
-// Represents a general tool that can be one of several types.
-type Tool struct {
+// Represents a function tool that can be invoked by the assistant.
+type FunctionTool struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Types that are assignable to ToolType:
-	//
-	//	*Tool_SearchIndex
-	ToolType isTool_ToolType `protobuf_oneof:"ToolType"`
+	// The name of the function.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// A description of the function's purpose or behavior.
+	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	// A JSON Schema that defines the expected parameters for the function.
+	// The schema should describe the required fields, their types, and any constraints or default values.
+	Parameters *structpb.Struct `protobuf:"bytes,3,opt,name=parameters,proto3" json:"parameters,omitempty"`
 }
 
-func (x *Tool) Reset() {
-	*x = Tool{}
+func (x *FunctionTool) Reset() {
+	*x = FunctionTool{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *Tool) String() string {
+func (x *FunctionTool) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Tool) ProtoMessage() {}
+func (*FunctionTool) ProtoMessage() {}
 
-func (x *Tool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3]
+func (x *FunctionTool) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,35 +603,258 @@ func (x *Tool) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Tool.ProtoReflect.Descriptor instead.
-func (*Tool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use FunctionTool.ProtoReflect.Descriptor instead.
+func (*FunctionTool) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{8}
 }
 
-func (m *Tool) GetToolType() isTool_ToolType {
+func (x *FunctionTool) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *FunctionTool) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *FunctionTool) GetParameters() *structpb.Struct {
+	if x != nil {
+		return x.Parameters
+	}
+	return nil
+}
+
+// Represents the invocation of a function with specific arguments.
+type FunctionCall struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The name of the function being called.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The structured arguments passed to the function.
+	// These arguments must adhere to the JSON Schema defined in the corresponding function's parameters.
+	Arguments *structpb.Struct `protobuf:"bytes,2,opt,name=arguments,proto3" json:"arguments,omitempty"`
+}
+
+func (x *FunctionCall) Reset() {
+	*x = FunctionCall{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FunctionCall) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FunctionCall) ProtoMessage() {}
+
+func (x *FunctionCall) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FunctionCall.ProtoReflect.Descriptor instead.
+func (*FunctionCall) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *FunctionCall) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *FunctionCall) GetArguments() *structpb.Struct {
+	if x != nil {
+		return x.Arguments
+	}
+	return nil
+}
+
+// Represents the result of a function call.
+type FunctionResult struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The name of the function that was executed.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Types that are assignable to ContentType:
+	//
+	//	*FunctionResult_Content
+	ContentType isFunctionResult_ContentType `protobuf_oneof:"ContentType"`
+}
+
+func (x *FunctionResult) Reset() {
+	*x = FunctionResult{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FunctionResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FunctionResult) ProtoMessage() {}
+
+func (x *FunctionResult) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FunctionResult.ProtoReflect.Descriptor instead.
+func (*FunctionResult) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *FunctionResult) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (m *FunctionResult) GetContentType() isFunctionResult_ContentType {
 	if m != nil {
-		return m.ToolType
+		return m.ContentType
 	}
 	return nil
 }
 
-func (x *Tool) GetSearchIndex() *SearchIndexTool {
-	if x, ok := x.GetToolType().(*Tool_SearchIndex); ok {
-		return x.SearchIndex
+func (x *FunctionResult) GetContent() string {
+	if x, ok := x.GetContentType().(*FunctionResult_Content); ok {
+		return x.Content
 	}
-	return nil
+	return ""
 }
 
-type isTool_ToolType interface {
-	isTool_ToolType()
+type isFunctionResult_ContentType interface {
+	isFunctionResult_ContentType()
 }
 
-type Tool_SearchIndex struct {
-	// SearchIndexTool tool that performs search across specified indexes.
-	SearchIndex *SearchIndexTool `protobuf:"bytes,1,opt,name=search_index,json=searchIndex,proto3,oneof"`
+type FunctionResult_Content struct {
+	// The result of the function call, represented as a string.
+	// This field can be used to store the output of the function.
+	Content string `protobuf:"bytes,2,opt,name=content,proto3,oneof"`
 }
 
-func (*Tool_SearchIndex) isTool_ToolType() {}
+func (*FunctionResult_Content) isFunctionResult_ContentType() {}
+
+// Auto truncation strategy.
+type PromptTruncationOptions_AutoStrategy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *PromptTruncationOptions_AutoStrategy) Reset() {
+	*x = PromptTruncationOptions_AutoStrategy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PromptTruncationOptions_AutoStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PromptTruncationOptions_AutoStrategy) ProtoMessage() {}
+
+func (x *PromptTruncationOptions_AutoStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PromptTruncationOptions_AutoStrategy.ProtoReflect.Descriptor instead.
+func (*PromptTruncationOptions_AutoStrategy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{0, 0}
+}
+
+// Truncates the prompt by retaining only the last `num_messages` messages in the thread.
+type PromptTruncationOptions_LastMessagesStrategy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The number of most recent messages to retain in the prompt.
+	// If these messages exceed `max_prompt_tokens`, older messages will be further truncated to fit the limit.
+	NumMessages int64 `protobuf:"varint,1,opt,name=num_messages,json=numMessages,proto3" json:"num_messages,omitempty"`
+}
+
+func (x *PromptTruncationOptions_LastMessagesStrategy) Reset() {
+	*x = PromptTruncationOptions_LastMessagesStrategy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PromptTruncationOptions_LastMessagesStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PromptTruncationOptions_LastMessagesStrategy) ProtoMessage() {}
+
+func (x *PromptTruncationOptions_LastMessagesStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PromptTruncationOptions_LastMessagesStrategy.ProtoReflect.Descriptor instead.
+func (*PromptTruncationOptions_LastMessagesStrategy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{0, 1}
+}
+
+func (x *PromptTruncationOptions_LastMessagesStrategy) GetNumMessages() int64 {
+	if x != nil {
+		return x.NumMessages
+	}
+	return 0
+}
 
 var File_yandex_cloud_ai_assistants_v1_common_proto protoreflect.FileDescriptor
 
@@ -269,47 +863,120 @@ var file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = []byte{
 	0x69, 0x2f, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31, 0x2f,
 	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x1d, 0x79, 0x61,
 	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73,
-	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x1a, 0x1e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x77, 0x72, 0x61,
-	0x70, 0x70, 0x65, 0x72, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x62, 0x0a, 0x17, 0x50,
-	0x72, 0x6f, 0x6d, 0x70, 0x74, 0x54, 0x72, 0x75, 0x6e, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f,
-	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x47, 0x0a, 0x11, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x72,
-	0x6f, 0x6d, 0x70, 0x74, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0f,
-	0x6d, 0x61, 0x78, 0x50, 0x72, 0x6f, 0x6d, 0x70, 0x74, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x22,
-	0x8f, 0x01, 0x0a, 0x11, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x3a, 0x0a, 0x0a, 0x6d, 0x61, 0x78, 0x5f, 0x74, 0x6f, 0x6b,
-	0x65, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
-	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36,
-	0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x09, 0x6d, 0x61, 0x78, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
-	0x73, 0x12, 0x3e, 0x0a, 0x0b, 0x74, 0x65, 0x6d, 0x70, 0x65, 0x72, 0x61, 0x74, 0x75, 0x72, 0x65,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x52, 0x0b, 0x74, 0x65, 0x6d, 0x70, 0x65, 0x72, 0x61, 0x74, 0x75, 0x72,
-	0x65, 0x22, 0x80, 0x01, 0x0a, 0x0f, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65,
-	0x78, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x28, 0x0a, 0x10, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f,
-	0x69, 0x6e, 0x64, 0x65, 0x78, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52,
-	0x0e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x49, 0x64, 0x73, 0x12,
-	0x43, 0x0a, 0x0f, 0x6d, 0x61, 0x78, 0x5f, 0x6e, 0x75, 0x6d, 0x5f, 0x72, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
-	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34,
-	0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0d, 0x6d, 0x61, 0x78, 0x4e, 0x75, 0x6d, 0x52, 0x65, 0x73,
-	0x75, 0x6c, 0x74, 0x73, 0x22, 0x67, 0x0a, 0x04, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x53, 0x0a, 0x0c,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x1a, 0x1c, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x73, 0x74, 0x72,
+	0x75, 0x63, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x77, 0x72, 0x61, 0x70, 0x70,
+	0x65, 0x72, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb5, 0x03, 0x0a, 0x17, 0x50, 0x72,
+	0x6f, 0x6d, 0x70, 0x74, 0x54, 0x72, 0x75, 0x6e, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x47, 0x0a, 0x11, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x72, 0x6f,
+	0x6d, 0x70, 0x74, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0f, 0x6d,
+	0x61, 0x78, 0x50, 0x72, 0x6f, 0x6d, 0x70, 0x74, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x12, 0x6a,
+	0x0a, 0x0d, 0x61, 0x75, 0x74, 0x6f, 0x5f, 0x73, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x43, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e,
+	0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x6f, 0x6d, 0x70, 0x74, 0x54, 0x72, 0x75, 0x6e,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x41, 0x75,
+	0x74, 0x6f, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x48, 0x00, 0x52, 0x0c, 0x61, 0x75,
+	0x74, 0x6f, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x83, 0x01, 0x0a, 0x16, 0x6c,
+	0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x5f, 0x73, 0x74, 0x72,
+	0x61, 0x74, 0x65, 0x67, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x4b, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x6f, 0x6d,
+	0x70, 0x74, 0x54, 0x72, 0x75, 0x6e, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x2e, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73,
+	0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x48, 0x00, 0x52, 0x14, 0x6c, 0x61, 0x73, 0x74,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79,
+	0x1a, 0x0e, 0x0a, 0x0c, 0x41, 0x75, 0x74, 0x6f, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79,
+	0x1a, 0x39, 0x0a, 0x14, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73,
+	0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x21, 0x0a, 0x0c, 0x6e, 0x75, 0x6d, 0x5f,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b,
+	0x6e, 0x75, 0x6d, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x42, 0x14, 0x0a, 0x12, 0x54,
+	0x72, 0x75, 0x6e, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67,
+	0x79, 0x22, 0x8f, 0x01, 0x0a, 0x11, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e,
+	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x3a, 0x0a, 0x0a, 0x6d, 0x61, 0x78, 0x5f, 0x74,
+	0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e,
+	0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x09, 0x6d, 0x61, 0x78, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x73, 0x12, 0x3e, 0x0a, 0x0b, 0x74, 0x65, 0x6d, 0x70, 0x65, 0x72, 0x61, 0x74, 0x75,
+	0x72, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x6f, 0x75, 0x62, 0x6c,
+	0x65, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0b, 0x74, 0x65, 0x6d, 0x70, 0x65, 0x72, 0x61, 0x74,
+	0x75, 0x72, 0x65, 0x22, 0xb2, 0x01, 0x0a, 0x04, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x53, 0x0a, 0x0c,
 	0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
 	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e,
 	0x76, 0x31, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x54, 0x6f,
 	0x6f, 0x6c, 0x48, 0x00, 0x52, 0x0b, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65,
-	0x78, 0x42, 0x0a, 0x0a, 0x08, 0x54, 0x6f, 0x6f, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x42, 0x71, 0x0a,
-	0x21, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e,
-	0x76, 0x31, 0x5a, 0x4c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79,
-	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67,
-	0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e,
-	0x74, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x78, 0x12, 0x49, 0x0a, 0x08, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73,
+	0x2e, 0x76, 0x31, 0x2e, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6f, 0x6c,
+	0x48, 0x00, 0x52, 0x08, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x0a, 0x0a, 0x08,
+	0x54, 0x6f, 0x6f, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x22, 0x6e, 0x0a, 0x08, 0x54, 0x6f, 0x6f, 0x6c,
+	0x43, 0x61, 0x6c, 0x6c, 0x12, 0x52, 0x0a, 0x0d, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x75, 0x6e, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x6c, 0x6c, 0x48, 0x00, 0x52, 0x0c, 0x66, 0x75, 0x6e, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x6c, 0x6c, 0x42, 0x0e, 0x0a, 0x0c, 0x54, 0x6f, 0x6f, 0x6c,
+	0x43, 0x61, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x22, 0x56, 0x0a, 0x0c, 0x54, 0x6f, 0x6f, 0x6c,
+	0x43, 0x61, 0x6c, 0x6c, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x74, 0x6f, 0x6f, 0x6c,
+	0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61,
+	0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x6f, 0x6f,
+	0x6c, 0x43, 0x61, 0x6c, 0x6c, 0x52, 0x09, 0x74, 0x6f, 0x6f, 0x6c, 0x43, 0x61, 0x6c, 0x6c, 0x73,
+	0x22, 0x78, 0x0a, 0x0a, 0x54, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x58,
+	0x0a, 0x0f, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74,
+	0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x48, 0x00, 0x52, 0x0e, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x10, 0x0a, 0x0e, 0x54, 0x6f, 0x6f, 0x6c,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x54, 0x79, 0x70, 0x65, 0x22, 0x5e, 0x0a, 0x0e, 0x54, 0x6f,
+	0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x4c, 0x0a, 0x0c,
+	0x74, 0x6f, 0x6f, 0x6c, 0x5f, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x29, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e,
+	0x76, 0x31, 0x2e, 0x54, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x0b, 0x74,
+	0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x22, 0x80, 0x01, 0x0a, 0x0f, 0x53,
+	0x65, 0x61, 0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x28,
+	0x0a, 0x10, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x5f, 0x69,
+	0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68,
+	0x49, 0x6e, 0x64, 0x65, 0x78, 0x49, 0x64, 0x73, 0x12, 0x43, 0x0a, 0x0f, 0x6d, 0x61, 0x78, 0x5f,
+	0x6e, 0x75, 0x6d, 0x5f, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0d,
+	0x6d, 0x61, 0x78, 0x4e, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x22, 0x7d, 0x0a,
+	0x0c, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x12, 0x0a,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x37, 0x0a, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72,
+	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74,
+	0x52, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x22, 0x59, 0x0a, 0x0c,
+	0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x6c, 0x6c, 0x12, 0x12, 0x0a, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x12, 0x35, 0x0a, 0x09, 0x61, 0x72, 0x67, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x09, 0x61, 0x72,
+	0x67, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x4f, 0x0a, 0x0e, 0x46, 0x75, 0x6e, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a,
+	0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00,
+	0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x0d, 0x0a, 0x0b, 0x43, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x42, 0x71, 0x0a, 0x21, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e,
+	0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x4c, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f,
+	0x61, 0x69, 0x2f, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31,
+	0x3b, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -324,26 +991,45 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_ai_assistants_v1_common_proto_goTypes = []any{
-	(*PromptTruncationOptions)(nil), // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions
-	(*CompletionOptions)(nil),       // 1: yandex.cloud.ai.assistants.v1.CompletionOptions
-	(*SearchIndexTool)(nil),         // 2: yandex.cloud.ai.assistants.v1.SearchIndexTool
-	(*Tool)(nil),                    // 3: yandex.cloud.ai.assistants.v1.Tool
-	(*wrapperspb.Int64Value)(nil),   // 4: google.protobuf.Int64Value
-	(*wrapperspb.DoubleValue)(nil),  // 5: google.protobuf.DoubleValue
+	(*PromptTruncationOptions)(nil),                      // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions
+	(*CompletionOptions)(nil),                            // 1: yandex.cloud.ai.assistants.v1.CompletionOptions
+	(*Tool)(nil),                                         // 2: yandex.cloud.ai.assistants.v1.Tool
+	(*ToolCall)(nil),                                     // 3: yandex.cloud.ai.assistants.v1.ToolCall
+	(*ToolCallList)(nil),                                 // 4: yandex.cloud.ai.assistants.v1.ToolCallList
+	(*ToolResult)(nil),                                   // 5: yandex.cloud.ai.assistants.v1.ToolResult
+	(*ToolResultList)(nil),                               // 6: yandex.cloud.ai.assistants.v1.ToolResultList
+	(*SearchIndexTool)(nil),                              // 7: yandex.cloud.ai.assistants.v1.SearchIndexTool
+	(*FunctionTool)(nil),                                 // 8: yandex.cloud.ai.assistants.v1.FunctionTool
+	(*FunctionCall)(nil),                                 // 9: yandex.cloud.ai.assistants.v1.FunctionCall
+	(*FunctionResult)(nil),                               // 10: yandex.cloud.ai.assistants.v1.FunctionResult
+	(*PromptTruncationOptions_AutoStrategy)(nil),         // 11: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
+	(*PromptTruncationOptions_LastMessagesStrategy)(nil), // 12: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
+	(*wrapperspb.Int64Value)(nil),                        // 13: google.protobuf.Int64Value
+	(*wrapperspb.DoubleValue)(nil),                       // 14: google.protobuf.DoubleValue
+	(*structpb.Struct)(nil),                              // 15: google.protobuf.Struct
 }
 var file_yandex_cloud_ai_assistants_v1_common_proto_depIdxs = []int32{
-	4, // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.max_prompt_tokens:type_name -> google.protobuf.Int64Value
-	4, // 1: yandex.cloud.ai.assistants.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
-	5, // 2: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
-	4, // 3: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
-	2, // 4: yandex.cloud.ai.assistants.v1.Tool.search_index:type_name -> yandex.cloud.ai.assistants.v1.SearchIndexTool
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	13, // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.max_prompt_tokens:type_name -> google.protobuf.Int64Value
+	11, // 1: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.auto_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
+	12, // 2: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.last_messages_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
+	13, // 3: yandex.cloud.ai.assistants.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
+	14, // 4: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
+	7,  // 5: yandex.cloud.ai.assistants.v1.Tool.search_index:type_name -> yandex.cloud.ai.assistants.v1.SearchIndexTool
+	8,  // 6: yandex.cloud.ai.assistants.v1.Tool.function:type_name -> yandex.cloud.ai.assistants.v1.FunctionTool
+	9,  // 7: yandex.cloud.ai.assistants.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.assistants.v1.FunctionCall
+	3,  // 8: yandex.cloud.ai.assistants.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.assistants.v1.ToolCall
+	10, // 9: yandex.cloud.ai.assistants.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.assistants.v1.FunctionResult
+	5,  // 10: yandex.cloud.ai.assistants.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.assistants.v1.ToolResult
+	13, // 11: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
+	15, // 12: yandex.cloud.ai.assistants.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
+	15, // 13: yandex.cloud.ai.assistants.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_assistants_v1_common_proto_init() }
@@ -377,18 +1063,6 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2].Exporter = func(v any, i int) any {
-			switch v := v.(*SearchIndexTool); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3].Exporter = func(v any, i int) any {
 			switch v := v.(*Tool); i {
 			case 0:
 				return &v.state
@@ -400,9 +1074,143 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3].Exporter = func(v any, i int) any {
+			switch v := v.(*ToolCall); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[4].Exporter = func(v any, i int) any {
+			switch v := v.(*ToolCallList); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[5].Exporter = func(v any, i int) any {
+			switch v := v.(*ToolResult); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[6].Exporter = func(v any, i int) any {
+			switch v := v.(*ToolResultList); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[7].Exporter = func(v any, i int) any {
+			switch v := v.(*SearchIndexTool); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8].Exporter = func(v any, i int) any {
+			switch v := v.(*FunctionTool); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9].Exporter = func(v any, i int) any {
+			switch v := v.(*FunctionCall); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10].Exporter = func(v any, i int) any {
+			switch v := v.(*FunctionResult); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11].Exporter = func(v any, i int) any {
+			switch v := v.(*PromptTruncationOptions_AutoStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12].Exporter = func(v any, i int) any {
+			switch v := v.(*PromptTruncationOptions_LastMessagesStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[0].OneofWrappers = []any{
+		(*PromptTruncationOptions_AutoStrategy_)(nil),
+		(*PromptTruncationOptions_LastMessagesStrategy_)(nil),
+	}
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2].OneofWrappers = []any{
+		(*Tool_SearchIndex)(nil),
+		(*Tool_Function)(nil),
 	}
 	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3].OneofWrappers = []any{
-		(*Tool_SearchIndex)(nil),
+		(*ToolCall_FunctionCall)(nil),
+	}
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[5].OneofWrappers = []any{
+		(*ToolResult_FunctionResult)(nil),
+	}
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10].OneofWrappers = []any{
+		(*FunctionResult_Content)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -410,7 +1218,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

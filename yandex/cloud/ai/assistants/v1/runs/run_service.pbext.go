@@ -37,12 +37,36 @@ func (m *CreateRunRequest) SetStream(v bool) {
 	m.Stream = v
 }
 
+func (m *CreateRunRequest) SetTools(v []*v1.Tool) {
+	m.Tools = v
+}
+
 func (m *ListenRunRequest) SetRunId(v string) {
 	m.RunId = v
 }
 
 func (m *ListenRunRequest) SetEventsStartIdx(v *wrapperspb.Int64Value) {
 	m.EventsStartIdx = v
+}
+
+type AttachRunRequest_Event = isAttachRunRequest_Event
+
+func (m *AttachRunRequest) SetEvent(v AttachRunRequest_Event) {
+	m.Event = v
+}
+
+func (m *AttachRunRequest) SetRunId(v string) {
+	m.RunId = v
+}
+
+func (m *AttachRunRequest) SetEventsStartIdx(v *wrapperspb.Int64Value) {
+	m.EventsStartIdx = v
+}
+
+func (m *AttachRunRequest) SetToolResultList(v *v1.ToolResultList) {
+	m.Event = &AttachRunRequest_ToolResultList{
+		ToolResultList: v,
+	}
 }
 
 func (m *GetRunRequest) SetRunId(v string) {
@@ -110,5 +134,11 @@ func (m *StreamEvent) SetPartialMessage(v *threads.MessageContent) {
 func (m *StreamEvent) SetCompletedMessage(v *threads.Message) {
 	m.EventData = &StreamEvent_CompletedMessage{
 		CompletedMessage: v,
+	}
+}
+
+func (m *StreamEvent) SetToolCallList(v *v1.ToolCallList) {
+	m.EventData = &StreamEvent_ToolCallList{
+		ToolCallList: v,
 	}
 }

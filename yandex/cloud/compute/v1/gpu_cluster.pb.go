@@ -127,7 +127,7 @@ func (GpuCluster_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_compute_v1_gpu_cluster_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// A GPU cluster. For details about the concept, see [documentation](/docs/compute/concepts/gpu-cluster).
+// A GPU cluster. For details about the concept, see [documentation](/docs/compute/concepts/gpus#gpu-clusters).
 type GpuCluster struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

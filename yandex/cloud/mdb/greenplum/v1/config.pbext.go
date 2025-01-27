@@ -138,6 +138,14 @@ func (m *GreenplumConfig6) SetGpAddColumnInheritsTableSetting(v *wrapperspb.Bool
 	m.GpAddColumnInheritsTableSetting = v
 }
 
+func (m *GreenplumConfig6) SetGpEnableGlobalDeadlockDetector(v *wrapperspb.BoolValue) {
+	m.GpEnableGlobalDeadlockDetector = v
+}
+
+func (m *GreenplumConfig6) SetGpGlobalDeadlockDetectorPeriod(v *wrapperspb.Int64Value) {
+	m.GpGlobalDeadlockDetectorPeriod = v
+}
+
 func (m *GreenplumConfig6_17) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }

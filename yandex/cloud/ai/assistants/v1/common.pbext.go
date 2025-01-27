@@ -3,11 +3,34 @@
 package assistants
 
 import (
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
+type PromptTruncationOptions_TruncationStrategy = isPromptTruncationOptions_TruncationStrategy
+
+func (m *PromptTruncationOptions) SetTruncationStrategy(v PromptTruncationOptions_TruncationStrategy) {
+	m.TruncationStrategy = v
+}
+
 func (m *PromptTruncationOptions) SetMaxPromptTokens(v *wrapperspb.Int64Value) {
 	m.MaxPromptTokens = v
+}
+
+func (m *PromptTruncationOptions) SetAutoStrategy(v *PromptTruncationOptions_AutoStrategy) {
+	m.TruncationStrategy = &PromptTruncationOptions_AutoStrategy_{
+		AutoStrategy: v,
+	}
+}
+
+func (m *PromptTruncationOptions) SetLastMessagesStrategy(v *PromptTruncationOptions_LastMessagesStrategy) {
+	m.TruncationStrategy = &PromptTruncationOptions_LastMessagesStrategy_{
+		LastMessagesStrategy: v,
+	}
+}
+
+func (m *PromptTruncationOptions_LastMessagesStrategy) SetNumMessages(v int64) {
+	m.NumMessages = v
 }
 
 func (m *CompletionOptions) SetMaxTokens(v *wrapperspb.Int64Value) {
@@ -16,14 +39,6 @@ func (m *CompletionOptions) SetMaxTokens(v *wrapperspb.Int64Value) {
 
 func (m *CompletionOptions) SetTemperature(v *wrapperspb.DoubleValue) {
 	m.Temperature = v
-}
-
-func (m *SearchIndexTool) SetSearchIndexIds(v []string) {
-	m.SearchIndexIds = v
-}
-
-func (m *SearchIndexTool) SetMaxNumResults(v *wrapperspb.Int64Value) {
-	m.MaxNumResults = v
 }
 
 type Tool_ToolType = isTool_ToolType
@@ -35,5 +50,87 @@ func (m *Tool) SetToolType(v Tool_ToolType) {
 func (m *Tool) SetSearchIndex(v *SearchIndexTool) {
 	m.ToolType = &Tool_SearchIndex{
 		SearchIndex: v,
+	}
+}
+
+func (m *Tool) SetFunction(v *FunctionTool) {
+	m.ToolType = &Tool_Function{
+		Function: v,
+	}
+}
+
+type ToolCall_ToolCallType = isToolCall_ToolCallType
+
+func (m *ToolCall) SetToolCallType(v ToolCall_ToolCallType) {
+	m.ToolCallType = v
+}
+
+func (m *ToolCall) SetFunctionCall(v *FunctionCall) {
+	m.ToolCallType = &ToolCall_FunctionCall{
+		FunctionCall: v,
+	}
+}
+
+func (m *ToolCallList) SetToolCalls(v []*ToolCall) {
+	m.ToolCalls = v
+}
+
+type ToolResult_ToolResultType = isToolResult_ToolResultType
+
+func (m *ToolResult) SetToolResultType(v ToolResult_ToolResultType) {
+	m.ToolResultType = v
+}
+
+func (m *ToolResult) SetFunctionResult(v *FunctionResult) {
+	m.ToolResultType = &ToolResult_FunctionResult{
+		FunctionResult: v,
+	}
+}
+
+func (m *ToolResultList) SetToolResults(v []*ToolResult) {
+	m.ToolResults = v
+}
+
+func (m *SearchIndexTool) SetSearchIndexIds(v []string) {
+	m.SearchIndexIds = v
+}
+
+func (m *SearchIndexTool) SetMaxNumResults(v *wrapperspb.Int64Value) {
+	m.MaxNumResults = v
+}
+
+func (m *FunctionTool) SetName(v string) {
+	m.Name = v
+}
+
+func (m *FunctionTool) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *FunctionTool) SetParameters(v *structpb.Struct) {
+	m.Parameters = v
+}
+
+func (m *FunctionCall) SetName(v string) {
+	m.Name = v
+}
+
+func (m *FunctionCall) SetArguments(v *structpb.Struct) {
+	m.Arguments = v
+}
+
+type FunctionResult_ContentType = isFunctionResult_ContentType
+
+func (m *FunctionResult) SetContentType(v FunctionResult_ContentType) {
+	m.ContentType = v
+}
+
+func (m *FunctionResult) SetName(v string) {
+	m.Name = v
+}
+
+func (m *FunctionResult) SetContent(v string) {
+	m.ContentType = &FunctionResult_Content{
+		Content: v,
 	}
 }

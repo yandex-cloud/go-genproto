@@ -192,7 +192,7 @@ type LoadBalancer struct {
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,10,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
 	// ID of the log group that stores access logs of the application load balancer.
 	//
-	// The logs can be accessed using a Cloud Functions [trigger for Cloud Logs](/docs/functions/operations/trigger/cloudlogs-trigger-create).
+	// The logs can be accessed using a Cloud Functions [trigger for Cloud Logs](/docs/functions/operations/trigger/cloud-logging-trigger-create).
 	LogGroupId string `protobuf:"bytes,11,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// ID's of the security groups attributed to the application load balancer.
 	//

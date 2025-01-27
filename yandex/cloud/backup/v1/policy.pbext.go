@@ -200,6 +200,10 @@ func (m *PolicySettings_Scheduling) SetWeeklyBackupDay(v PolicySettings_Day) {
 	m.WeeklyBackupDay = v
 }
 
+func (m *PolicySettings_Scheduling) SetTaskFailure(v *PolicySettings_RetriesConfiguration) {
+	m.TaskFailure = v
+}
+
 type PolicySettings_Scheduling_BackupSet_Setting = isPolicySettings_Scheduling_BackupSet_Setting
 
 func (m *PolicySettings_Scheduling_BackupSet) SetSetting(v PolicySettings_Scheduling_BackupSet_Setting) {

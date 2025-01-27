@@ -82,7 +82,6 @@ type ClusterServiceClient interface {
 	// Stops the specified OpenSearch cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified OpenSearch cluster.
-	// For detailed description, see the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developer's guide.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
@@ -410,7 +409,6 @@ type ClusterServiceServer interface {
 	// Stops the specified OpenSearch cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified OpenSearch cluster.
-	// For detailed description, see the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developer's guide.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error

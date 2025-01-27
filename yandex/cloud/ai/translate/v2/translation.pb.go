@@ -28,7 +28,7 @@ type TranslatedText struct {
 	// Translated text.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
 	// The language code of the source text.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ en “).
+	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
 	DetectedLanguageCode string `protobuf:"bytes,2,opt,name=detected_language_code,json=detectedLanguageCode,proto3" json:"detected_language_code,omitempty"`
 }
 
@@ -84,7 +84,7 @@ type Language struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The language code.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ en “).
+	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
 	Code string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	// The name of the language (for example, “ English “).
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`

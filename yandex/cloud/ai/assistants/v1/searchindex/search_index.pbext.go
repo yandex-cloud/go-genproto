@@ -75,8 +75,20 @@ func (m *SearchIndex) SetHybridSearchIndex(v *HybridSearchIndex) {
 	}
 }
 
+type TextSearchIndex_TextTokenizer = isTextSearchIndex_TextTokenizer
+
+func (m *TextSearchIndex) SetTextTokenizer(v TextSearchIndex_TextTokenizer) {
+	m.TextTokenizer = v
+}
+
 func (m *TextSearchIndex) SetChunkingStrategy(v *ChunkingStrategy) {
 	m.ChunkingStrategy = v
+}
+
+func (m *TextSearchIndex) SetNgramTokenizer(v *NgramTokenizer) {
+	m.TextTokenizer = &TextSearchIndex_NgramTokenizer{
+		NgramTokenizer: v,
+	}
 }
 
 func (m *VectorSearchIndex) SetDocEmbedderUri(v string) {

@@ -240,8 +240,8 @@ type CreateResellerServedCustomerRequest struct {
 	// ID of the reseller that customer will be associated with.</br>
 	//
 	// Value must match either one of the three regular expressions:
-	// </br>- `^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$`
-	// </br>- `^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{32})$`
+	// </br>- `^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`
+	// </br>- `^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{32}$`
 	// </br>- `^[a-z][-a-zA-Z0-9.]{0,48}[a-zA-Z0-9]$`
 	ResellerId string `protobuf:"bytes,1,opt,name=reseller_id,json=resellerId,proto3" json:"reseller_id,omitempty"`
 	// Name of the customer.

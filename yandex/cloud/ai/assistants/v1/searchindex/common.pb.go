@@ -449,6 +449,17 @@ func (*CombinationStrategy_MeanCombination) isCombinationStrategy_Strategy() {}
 
 func (*CombinationStrategy_RrfCombination) isCombinationStrategy_Strategy() {}
 
+// Configuration for the NgramTokenizer, which splits text into overlapping character sequences (n-grams) of specified lengths.
+//
+// Example:
+// Input text: `hello`
+// min_gram = 2, max_gram = 3
+//
+// Generated tokens:
+// * For n = 2 (2-character n-grams): `he`, `el`, `ll`, `lo`
+// * For n = 3 (3-character n-grams): `hel`, `ell`, `llo`
+//
+// Final tokens: `[he, el, ll, lo, hel, ell, llo]`
 type NgramTokenizer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

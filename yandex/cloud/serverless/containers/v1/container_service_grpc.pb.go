@@ -60,7 +60,7 @@ type ContainerServiceClient interface {
 	Rollback(ctx context.Context, in *RollbackContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified revision of a container.
 	//
-	// To get the list of available revision, make a [ListRevisions] request.
+	// To get the list of available revisions, make a [ListRevisions] request.
 	GetRevision(ctx context.Context, in *GetContainerRevisionRequest, opts ...grpc.CallOption) (*Revision, error)
 	// Retrieves the list of revisions for the specified container, or of all container revisions
 	// in the specified folder.
@@ -237,7 +237,7 @@ type ContainerServiceServer interface {
 	Rollback(context.Context, *RollbackContainerRequest) (*operation.Operation, error)
 	// Returns the specified revision of a container.
 	//
-	// To get the list of available revision, make a [ListRevisions] request.
+	// To get the list of available revisions, make a [ListRevisions] request.
 	GetRevision(context.Context, *GetContainerRevisionRequest) (*Revision, error)
 	// Retrieves the list of revisions for the specified container, or of all container revisions
 	// in the specified folder.

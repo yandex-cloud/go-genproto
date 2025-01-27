@@ -79,27 +79,27 @@ type TranslateRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The text language to translate from.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “).
+	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
 	//
-	// Required for translating with glossary.
+	// Required for translating with [glossary](/docs/translate/concepts/glossary).
 	SourceLanguageCode string `protobuf:"bytes,1,opt,name=source_language_code,json=sourceLanguageCode,proto3" json:"source_language_code,omitempty"`
 	// The target language to translate the text.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ en “).
+	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
 	TargetLanguageCode string `protobuf:"bytes,2,opt,name=target_language_code,json=targetLanguageCode,proto3" json:"target_language_code,omitempty"`
-	// Format of the text.
+	// Format of the text to be translated.
 	Format TranslateRequest_Format `protobuf:"varint,3,opt,name=format,proto3,enum=yandex.cloud.ai.translate.v2.TranslateRequest_Format" json:"format,omitempty"`
 	// Array of the strings to translate.
 	// The maximum total length of all strings is 10000 characters.
 	Texts []string `protobuf:"bytes,4,rep,name=texts,proto3" json:"texts,omitempty"`
 	// ID of the folder to which you have access.
-	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
-	// Don't specify this field if you make the request on behalf of a service account.
+	// Required for authorization with a [user account](/docs/iam/concepts/users/accounts).
+	// Do not specify this field if you make the request on behalf of a [service account](/docs/iam/concepts/users/accounts#sa).
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Do not specify this field, custom models are not supported yet.
+	// Model ID if you use custom model.
 	Model string `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"`
 	// Glossary to be applied for the translation. For more information, see [Glossaries](/docs/translate/concepts/glossary).
 	GlossaryConfig *TranslateGlossaryConfig `protobuf:"bytes,7,opt,name=glossary_config,json=glossaryConfig,proto3" json:"glossary_config,omitempty"`
-	// use speller
+	// Enable spell checking.
 	Speller bool `protobuf:"varint,8,opt,name=speller,proto3" json:"speller,omitempty"`
 }
 
@@ -253,7 +253,7 @@ type isTranslateGlossaryConfig_GlossarySource interface {
 }
 
 type TranslateGlossaryConfig_GlossaryData struct {
-	// Pass glossary data in the request. Currently, only this way to pass glossary is supported.
+	// Pass glossary data in the request. Currently, the only way to pass glossary.
 	GlossaryData *GlossaryData `protobuf:"bytes,1,opt,name=glossary_data,json=glossaryData,proto3,oneof"`
 }
 
@@ -319,7 +319,8 @@ type GlossaryPair struct {
 	SourceText string `protobuf:"bytes,1,opt,name=source_text,json=sourceText,proto3" json:"source_text,omitempty"`
 	// Text in the target language.
 	TranslatedText string `protobuf:"bytes,2,opt,name=translated_text,json=translatedText,proto3" json:"translated_text,omitempty"`
-	Exact          bool   `protobuf:"varint,3,opt,name=exact,proto3" json:"exact,omitempty"`
+	// Allows to add translations for specific terms to [neuroglossaries](/docs/translate/concepts/glossary#word-forms).
+	Exact bool `protobuf:"varint,3,opt,name=exact,proto3" json:"exact,omitempty"`
 }
 
 func (x *GlossaryPair) Reset() {
@@ -431,7 +432,7 @@ type DetectLanguageRequest struct {
 	// The text to detect the language for.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
 	// List of the most likely languages. These languages will be given preference when detecting the text language.
-	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “).
+	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
 	//
 	// To get the list of supported languages, use a [TranslationService.ListLanguages] request.
 	LanguageCodeHints []string `protobuf:"bytes,2,rep,name=language_code_hints,json=languageCodeHints,proto3" json:"language_code_hints,omitempty"`
@@ -499,7 +500,7 @@ type DetectLanguageResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The text language in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “).
+	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
 	//
 	// To get the language name, use a [TranslationService.ListLanguages] request.
 	LanguageCode string `protobuf:"bytes,1,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
@@ -550,8 +551,8 @@ type ListLanguagesRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// ID of the folder to which you have access.
-	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
-	// Don't specify this field if you make the request on behalf of a service account.
+	// Required for authorization with a [user account](/docs/iam/concepts/users/accounts).
+	// Do not specify this field if you make the request on behalf of a [service account](/docs/iam/concepts/users/accounts#sa).
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }
 

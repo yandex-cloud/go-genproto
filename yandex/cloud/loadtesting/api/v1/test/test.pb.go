@@ -34,7 +34,7 @@ type Test struct {
 	//
 	// A test can have multiple configurations if it can be
 	// executed on multiple agents simultaneously. For more information, see
-	// [Load testing using multiple agents](docs/load-testing/tutorials/loadtesting-multiply).
+	// [Load testing using multiple agents](/docs/load-testing/tutorials/loadtesting-multiply).
 	Configurations []*SingleAgentConfiguration `protobuf:"bytes,2,rep,name=configurations,proto3" json:"configurations,omitempty"`
 	// Test meta information. Name, description, etc.
 	Details *Details `protobuf:"bytes,3,opt,name=details,proto3" json:"details,omitempty"`

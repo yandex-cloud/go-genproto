@@ -81,7 +81,6 @@ type ClusterServiceClient interface {
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified MongoDB cluster.
-	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
@@ -436,7 +435,6 @@ type ClusterServiceServer interface {
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified MongoDB cluster.
-	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error

@@ -3,6 +3,7 @@
 package threads
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/assistants/v1"
 	common "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/common"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -53,4 +54,8 @@ func (m *Thread) SetExpiresAt(v *timestamppb.Timestamp) {
 
 func (m *Thread) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *Thread) SetTools(v []*v1.Tool) {
+	m.Tools = v
 }

@@ -26,6 +26,7 @@ const (
 	TuningService_Cancel_FullMethodName        = "/yandex.cloud.ai.tuning.v1.TuningService/Cancel"
 	TuningService_GetMetricsUrl_FullMethodName = "/yandex.cloud.ai.tuning.v1.TuningService/GetMetricsUrl"
 	TuningService_GetOptions_FullMethodName    = "/yandex.cloud.ai.tuning.v1.TuningService/GetOptions"
+	TuningService_ListErrors_FullMethodName    = "/yandex.cloud.ai.tuning.v1.TuningService/ListErrors"
 )
 
 // TuningServiceClient is the client API for TuningService service.
@@ -38,6 +39,7 @@ type TuningServiceClient interface {
 	Cancel(ctx context.Context, in *CancelTuningRequest, opts ...grpc.CallOption) (*CancelTuningResponse, error)
 	GetMetricsUrl(ctx context.Context, in *GetMetricsUrlRequest, opts ...grpc.CallOption) (*GetMetricsUrlResponse, error)
 	GetOptions(ctx context.Context, in *GetOptionsRequest, opts ...grpc.CallOption) (*GetOptionsResponse, error)
+	ListErrors(ctx context.Context, in *ListErrorsRequest, opts ...grpc.CallOption) (*ListErrorsResponse, error)
 }
 
 type tuningServiceClient struct {
@@ -108,6 +110,16 @@ func (c *tuningServiceClient) GetOptions(ctx context.Context, in *GetOptionsRequ
 	return out, nil
 }
 
+func (c *tuningServiceClient) ListErrors(ctx context.Context, in *ListErrorsRequest, opts ...grpc.CallOption) (*ListErrorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListErrorsResponse)
+	err := c.cc.Invoke(ctx, TuningService_ListErrors_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TuningServiceServer is the server API for TuningService service.
 // All implementations should embed UnimplementedTuningServiceServer
 // for forward compatibility.
@@ -118,6 +130,7 @@ type TuningServiceServer interface {
 	Cancel(context.Context, *CancelTuningRequest) (*CancelTuningResponse, error)
 	GetMetricsUrl(context.Context, *GetMetricsUrlRequest) (*GetMetricsUrlResponse, error)
 	GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsResponse, error)
+	ListErrors(context.Context, *ListErrorsRequest) (*ListErrorsResponse, error)
 }
 
 // UnimplementedTuningServiceServer should be embedded to have
@@ -144,6 +157,9 @@ func (UnimplementedTuningServiceServer) GetMetricsUrl(context.Context, *GetMetri
 }
 func (UnimplementedTuningServiceServer) GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOptions not implemented")
+}
+func (UnimplementedTuningServiceServer) ListErrors(context.Context, *ListErrorsRequest) (*ListErrorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListErrors not implemented")
 }
 func (UnimplementedTuningServiceServer) testEmbeddedByValue() {}
 
@@ -273,6 +289,24 @@ func _TuningService_GetOptions_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TuningService_ListErrors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListErrorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TuningServiceServer).ListErrors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TuningService_ListErrors_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TuningServiceServer).ListErrors(ctx, req.(*ListErrorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TuningService_ServiceDesc is the grpc.ServiceDesc for TuningService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -303,6 +337,10 @@ var TuningService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOptions",
 			Handler:    _TuningService_GetOptions_Handler,
+		},
+		{
+			MethodName: "ListErrors",
+			Handler:    _TuningService_ListErrors_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

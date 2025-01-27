@@ -74,6 +74,10 @@ func (m *CreateDatasetRequest) SetUploadFormat(v string) {
 	m.UploadFormat = v
 }
 
+func (m *CreateDatasetRequest) SetAllowDataLog(v bool) {
+	m.AllowDataLog = v
+}
+
 func (m *CreateDatasetResponse) SetDatasetId(v string) {
 	m.DatasetId = v
 }
@@ -224,4 +228,24 @@ func (m *GetDatasetPreviewResponse) SetDatasetId(v string) {
 
 func (m *GetDatasetPreviewResponse) SetPreviewLines(v []string) {
 	m.PreviewLines = v
+}
+
+func (m *GetDownloadUrlsRequest) SetDatasetId(v string) {
+	m.DatasetId = v
+}
+
+func (m *GetDownloadUrlsResponse) SetDatasetId(v string) {
+	m.DatasetId = v
+}
+
+func (m *GetDownloadUrlsResponse) SetDownloadUrls(v []*DatasetFileDownloadUrl) {
+	m.DownloadUrls = v
+}
+
+func (m *ListOperationsIdsRequest) SetDatasetId(v []string) {
+	m.DatasetId = v
+}
+
+func (m *ListOperationsIdsResponse) SetDatasetIdToOperationId(v map[string]string) {
+	m.DatasetIdToOperationId = v
 }

@@ -25,7 +25,8 @@ type TuningTypeLora struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Rank           int64   `protobuf:"varint,1,opt,name=rank,proto3" json:"rank,omitempty"`
+	Rank int64 `protobuf:"varint,1,opt,name=rank,proto3" json:"rank,omitempty"`
+	// Integer value
 	Alpha          float64 `protobuf:"fixed64,2,opt,name=alpha,proto3" json:"alpha,omitempty"`
 	Initialization string  `protobuf:"bytes,3,opt,name=initialization,proto3" json:"initialization,omitempty"`
 	Type           string  `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`

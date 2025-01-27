@@ -70,6 +70,10 @@ func (m *DatasetInfo) SetValidationError(v []*ValidationError) {
 	m.ValidationError = v
 }
 
+func (m *DatasetInfo) SetAllowDataLog(v bool) {
+	m.AllowDataLog = v
+}
+
 func (m *ValidationError) SetError(v string) {
 	m.Error = v
 }
@@ -92,4 +96,12 @@ func (m *DatasetUploadSchema) SetUploadFormat(v string) {
 
 func (m *DatasetUploadSchema) SetSchema(v string) {
 	m.Schema = v
+}
+
+func (m *DatasetFileDownloadUrl) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *DatasetFileDownloadUrl) SetUrl(v string) {
+	m.Url = v
 }

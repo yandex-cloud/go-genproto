@@ -91,6 +91,10 @@ func (m *CreateClusterRequest) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

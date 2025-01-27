@@ -19,6 +19,14 @@ func (m *CompletionOptions) SetMaxTokens(v *wrapperspb.Int64Value) {
 	m.MaxTokens = v
 }
 
+func (m *CompletionOptions) SetReasoningOptions(v *ReasoningOptions) {
+	m.ReasoningOptions = v
+}
+
+func (m *ReasoningOptions) SetMode(v ReasoningOptions_ReasoningMode) {
+	m.Mode = v
+}
+
 type Message_Content = isMessage_Content
 
 func (m *Message) SetContent(v Message_Content) {
@@ -57,6 +65,14 @@ func (m *ContentUsage) SetCompletionTokens(v int64) {
 
 func (m *ContentUsage) SetTotalTokens(v int64) {
 	m.TotalTokens = v
+}
+
+func (m *ContentUsage) SetCompletionTokensDetails(v *ContentUsage_CompletionTokensDetails) {
+	m.CompletionTokensDetails = v
+}
+
+func (m *ContentUsage_CompletionTokensDetails) SetReasoningTokens(v int64) {
+	m.ReasoningTokens = v
 }
 
 func (m *Alternative) SetMessage(v *Message) {

@@ -49,6 +49,10 @@ func (m *Run) SetCustomCompletionOptions(v *v1.CompletionOptions) {
 	m.CustomCompletionOptions = v
 }
 
+func (m *Run) SetTools(v []*v1.Tool) {
+	m.Tools = v
+}
+
 type RunState_StateData = isRunState_StateData
 
 func (m *RunState) SetStateData(v RunState_StateData) {
@@ -68,6 +72,12 @@ func (m *RunState) SetError(v *common.Error) {
 func (m *RunState) SetCompletedMessage(v *threads.Message) {
 	m.StateData = &RunState_CompletedMessage{
 		CompletedMessage: v,
+	}
+}
+
+func (m *RunState) SetToolCallList(v *v1.ToolCallList) {
+	m.StateData = &RunState_ToolCallList{
+		ToolCallList: v,
 	}
 }
 

@@ -423,3 +423,11 @@ func (m *GetOptionsResponse) SetTextClassificationMulticlass(v *TextClassificati
 		TextClassificationMulticlass: v,
 	}
 }
+
+func (m *ListErrorsRequest) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *ListErrorsResponse) SetTuningError(v []*TuningError) {
+	m.TuningError = v
+}
