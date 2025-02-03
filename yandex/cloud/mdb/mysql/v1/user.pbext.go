@@ -30,6 +30,10 @@ func (m *User) SetAuthenticationPlugin(v AuthPlugin) {
 	m.AuthenticationPlugin = v
 }
 
+func (m *User) SetConnectionManager(v *ConnectionManager) {
+	m.ConnectionManager = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -54,6 +58,10 @@ func (m *ConnectionLimits) SetMaxUserConnections(v *wrapperspb.Int64Value) {
 	m.MaxUserConnections = v
 }
 
+func (m *ConnectionManager) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
 func (m *UserSpec) SetName(v string) {
 	m.Name = v
 }
@@ -76,4 +84,8 @@ func (m *UserSpec) SetConnectionLimits(v *ConnectionLimits) {
 
 func (m *UserSpec) SetAuthenticationPlugin(v AuthPlugin) {
 	m.AuthenticationPlugin = v
+}
+
+func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
 }

@@ -29,6 +29,9 @@ type GetEndpointRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Identifier of the endpoint to return.
+	//
+	// To get the endpoint ID, make an [EndpointService.List] request.
 	EndpointId string `protobuf:"bytes,1,opt,name=endpoint_id,json=endpointId,proto3" json:"endpoint_id,omitempty"`
 }
 
@@ -213,11 +216,23 @@ type CreateEndpointRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FolderId    string            `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name        string            `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Settings    *EndpointSettings `protobuf:"bytes,52,opt,name=settings,proto3" json:"settings,omitempty"`
+	// ID of the folder to create the endpoint in.
+	//
+	// To get the folder ID, make a
+	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the endpoint.
+	//
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the endpoint.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Endpoint labels as `key:value` pairs.
+	//
+	// For details about the concept, see [documentation]({{ api-url-prefix
+	// }}/resource-manager/concepts/labels).
+	Labels   map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Settings *EndpointSettings `protobuf:"bytes,52,opt,name=settings,proto3" json:"settings,omitempty"`
 }
 
 func (x *CreateEndpointRequest) Reset() {
@@ -344,9 +359,13 @@ type UpdateEndpointRequest struct {
 	// The new endpoint name. Must be unique within the folder.
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
 	// The new description for the endpoint.
-	Description string            `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// The new endpoint name. Must be unique within the folder.
+	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	// Endpoint labels as `key:value` pairs.
+	//
+	// For details about the concept, see [documentation]({{ api-url-prefix
+	// }}/resource-manager/concepts/labels).
+	Labels map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The new endpoint settings.
 	Settings *EndpointSettings `protobuf:"bytes,52,opt,name=settings,proto3" json:"settings,omitempty"`
 	// Field mask specifying endpoint fields to be updated. Semantics for this field is
 	// described here:
@@ -482,6 +501,9 @@ type DeleteEndpointRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Identifier of the endpoint to delete.
+	//
+	// To get the list of all available endpoints, make a [List] request.
 	EndpointId string `protobuf:"bytes,1,opt,name=endpoint_id,json=endpointId,proto3" json:"endpoint_id,omitempty"`
 }
 

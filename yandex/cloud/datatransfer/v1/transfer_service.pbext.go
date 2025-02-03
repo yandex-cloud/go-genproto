@@ -42,6 +42,10 @@ func (m *CreateTransferRequest) SetTransformation(v *Transformation) {
 	m.Transformation = v
 }
 
+func (m *CreateTransferRequest) SetDataObjects(v *DataObjects) {
+	m.DataObjects = v
+}
+
 func (m *CreateTransferMetadata) SetTransferId(v string) {
 	m.TransferId = v
 }
@@ -72,6 +76,10 @@ func (m *UpdateTransferRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateTransferRequest) SetTransformation(v *Transformation) {
 	m.Transformation = v
+}
+
+func (m *UpdateTransferRequest) SetDataObjects(v *DataObjects) {
+	m.DataObjects = v
 }
 
 func (m *UpdateTransferMetadata) SetTransferId(v string) {

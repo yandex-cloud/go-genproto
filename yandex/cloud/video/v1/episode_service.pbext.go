@@ -203,6 +203,32 @@ func (m *DeleteEpisodeMetadata) SetEpisodeId(v string) {
 	m.EpisodeId = v
 }
 
+type BatchDeleteEpisodesRequest_Id = isBatchDeleteEpisodesRequest_Id
+
+func (m *BatchDeleteEpisodesRequest) SetId(v BatchDeleteEpisodesRequest_Id) {
+	m.Id = v
+}
+
+func (m *BatchDeleteEpisodesRequest) SetStreamId(v string) {
+	m.Id = &BatchDeleteEpisodesRequest_StreamId{
+		StreamId: v,
+	}
+}
+
+func (m *BatchDeleteEpisodesRequest) SetLineId(v string) {
+	m.Id = &BatchDeleteEpisodesRequest_LineId{
+		LineId: v,
+	}
+}
+
+func (m *BatchDeleteEpisodesRequest) SetEpisodeIds(v []string) {
+	m.EpisodeIds = v
+}
+
+func (m *BatchDeleteEpisodesMetadata) SetEpisodeIds(v []string) {
+	m.EpisodeIds = v
+}
+
 type PerformEpisodeActionRequest_Action = isPerformEpisodeActionRequest_Action
 
 func (m *PerformEpisodeActionRequest) SetAction(v PerformEpisodeActionRequest_Action) {

@@ -4,6 +4,7 @@ package clickhouse
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -76,6 +77,10 @@ func (m *UpdateUserRequest) SetSettings(v *UserSettings) {
 
 func (m *UpdateUserRequest) SetQuotas(v []*UserQuota) {
 	m.Quotas = v
+}
+
+func (m *UpdateUserRequest) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
 }
 
 func (m *UpdateUserMetadata) SetClusterId(v string) {

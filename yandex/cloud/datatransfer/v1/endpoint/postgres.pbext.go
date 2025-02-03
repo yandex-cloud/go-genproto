@@ -108,6 +108,12 @@ func (m *PostgresConnection) SetOnPremise(v *OnPremisePostgres) {
 	}
 }
 
+func (m *PostgresConnection) SetConnectionManagerConnection(v *ConnectionManagerConnection) {
+	m.Connection = &PostgresConnection_ConnectionManagerConnection{
+		ConnectionManagerConnection: v,
+	}
+}
+
 func (m *PostgresSource) SetConnection(v *PostgresConnection) {
 	m.Connection = v
 }

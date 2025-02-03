@@ -282,6 +282,10 @@ func (m *ClickhouseConfig) SetQueryCache(v *ClickhouseConfig_QueryCache) {
 	m.QueryCache = v
 }
 
+func (m *ClickhouseConfig) SetJdbcBridge(v *ClickhouseConfig_JdbcBridge) {
+	m.JdbcBridge = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
 	m.ReplicatedDeduplicationWindow = v
 }
@@ -846,6 +850,14 @@ func (m *ClickhouseConfig_QueryCache) SetMaxEntrySizeInBytes(v *wrapperspb.Int64
 
 func (m *ClickhouseConfig_QueryCache) SetMaxEntrySizeInRows(v *wrapperspb.Int64Value) {
 	m.MaxEntrySizeInRows = v
+}
+
+func (m *ClickhouseConfig_JdbcBridge) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *ClickhouseConfig_JdbcBridge) SetPort(v *wrapperspb.Int64Value) {
+	m.Port = v
 }
 
 func (m *ClickhouseConfigSet) SetEffectiveConfig(v *ClickhouseConfig) {

@@ -50,6 +50,10 @@ func (m *Transfer) SetTransformation(v *Transformation) {
 	m.Transformation = v
 }
 
+func (m *Transfer) SetDataObjects(v *DataObjects) {
+	m.DataObjects = v
+}
+
 func (m *Transfer) SetPrestable(v bool) {
 	m.Prestable = v
 }
@@ -262,4 +266,8 @@ func (m *Transformer) SetFilterRows(v *FilterRowsTransformer) {
 
 func (m *Transformation) SetTransformers(v []*Transformer) {
 	m.Transformers = v
+}
+
+func (m *DataObjects) SetIncludeObjects(v []string) {
+	m.IncludeObjects = v
 }

@@ -36,6 +36,12 @@ func (m *MysqlConnection) SetOnPremise(v *OnPremiseMysql) {
 	}
 }
 
+func (m *MysqlConnection) SetConnectionManagerConnection(v *ConnectionManagerConnection) {
+	m.Connection = &MysqlConnection_ConnectionManagerConnection{
+		ConnectionManagerConnection: v,
+	}
+}
+
 func (m *MysqlObjectTransferSettings) SetView(v ObjectTransferStage) {
 	m.View = v
 }

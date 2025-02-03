@@ -26,6 +26,7 @@ const (
 	EpisodeService_Create_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Create"
 	EpisodeService_Update_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Update"
 	EpisodeService_Delete_FullMethodName        = "/yandex.cloud.video.v1.EpisodeService/Delete"
+	EpisodeService_BatchDelete_FullMethodName   = "/yandex.cloud.video.v1.EpisodeService/BatchDelete"
 	EpisodeService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.EpisodeService/PerformAction"
 	EpisodeService_GetPlayerURL_FullMethodName  = "/yandex.cloud.video.v1.EpisodeService/GetPlayerURL"
 	EpisodeService_GetManifests_FullMethodName  = "/yandex.cloud.video.v1.EpisodeService/GetManifests"
@@ -49,6 +50,8 @@ type EpisodeServiceClient interface {
 	Update(ctx context.Context, in *UpdateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete episode.
 	Delete(ctx context.Context, in *DeleteEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Batch delete episode.
+	BatchDelete(ctx context.Context, in *BatchDeleteEpisodesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Perform an action on the episode.
 	PerformAction(ctx context.Context, in *PerformEpisodeActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns url to the player.
@@ -125,6 +128,16 @@ func (c *episodeServiceClient) Delete(ctx context.Context, in *DeleteEpisodeRequ
 	return out, nil
 }
 
+func (c *episodeServiceClient) BatchDelete(ctx context.Context, in *BatchDeleteEpisodesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, EpisodeService_BatchDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *episodeServiceClient) PerformAction(ctx context.Context, in *PerformEpisodeActionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -173,6 +186,8 @@ type EpisodeServiceServer interface {
 	Update(context.Context, *UpdateEpisodeRequest) (*operation.Operation, error)
 	// Delete episode.
 	Delete(context.Context, *DeleteEpisodeRequest) (*operation.Operation, error)
+	// Batch delete episode.
+	BatchDelete(context.Context, *BatchDeleteEpisodesRequest) (*operation.Operation, error)
 	// Perform an action on the episode.
 	PerformAction(context.Context, *PerformEpisodeActionRequest) (*operation.Operation, error)
 	// Returns url to the player.
@@ -205,6 +220,9 @@ func (UnimplementedEpisodeServiceServer) Update(context.Context, *UpdateEpisodeR
 }
 func (UnimplementedEpisodeServiceServer) Delete(context.Context, *DeleteEpisodeRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedEpisodeServiceServer) BatchDelete(context.Context, *BatchDeleteEpisodesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchDelete not implemented")
 }
 func (UnimplementedEpisodeServiceServer) PerformAction(context.Context, *PerformEpisodeActionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PerformAction not implemented")
@@ -343,6 +361,24 @@ func _EpisodeService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EpisodeService_BatchDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchDeleteEpisodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EpisodeServiceServer).BatchDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EpisodeService_BatchDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EpisodeServiceServer).BatchDelete(ctx, req.(*BatchDeleteEpisodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EpisodeService_PerformAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PerformEpisodeActionRequest)
 	if err := dec(in); err != nil {
@@ -427,6 +463,10 @@ var EpisodeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _EpisodeService_Delete_Handler,
+		},
+		{
+			MethodName: "BatchDelete",
+			Handler:    _EpisodeService_BatchDelete_Handler,
 		},
 		{
 			MethodName: "PerformAction",

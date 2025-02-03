@@ -4,6 +4,7 @@ package mysql
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -80,6 +81,10 @@ func (m *UpdateUserRequest) SetConnectionLimits(v *ConnectionLimits) {
 
 func (m *UpdateUserRequest) SetAuthenticationPlugin(v AuthPlugin) {
 	m.AuthenticationPlugin = v
+}
+
+func (m *UpdateUserRequest) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
 }
 
 func (m *UpdateUserMetadata) SetClusterId(v string) {

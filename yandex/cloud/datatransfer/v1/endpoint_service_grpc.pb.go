@@ -30,11 +30,21 @@ const (
 // EndpointServiceClient is the client API for EndpointService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// A set of methods for managing [endpoints]({{ api-url-prefix
+// }}/data-transfer/concepts/#endpoint).
 type EndpointServiceClient interface {
+	// Returns the specified endpoint.
+	//
+	// To get the list of all available endpoints, make a [List] request.
 	Get(ctx context.Context, in *GetEndpointRequest, opts ...grpc.CallOption) (*Endpoint, error)
+	// Lists endpoints in the specified folder.
 	List(ctx context.Context, in *ListEndpointsRequest, opts ...grpc.CallOption) (*ListEndpointsResponse, error)
+	// Creates an endpoint in the specified folder.
 	Create(ctx context.Context, in *CreateEndpointRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified endpoint.
 	Update(ctx context.Context, in *UpdateEndpointRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified endpoint.
 	Delete(ctx context.Context, in *DeleteEndpointRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -99,11 +109,21 @@ func (c *endpointServiceClient) Delete(ctx context.Context, in *DeleteEndpointRe
 // EndpointServiceServer is the server API for EndpointService service.
 // All implementations should embed UnimplementedEndpointServiceServer
 // for forward compatibility.
+//
+// A set of methods for managing [endpoints]({{ api-url-prefix
+// }}/data-transfer/concepts/#endpoint).
 type EndpointServiceServer interface {
+	// Returns the specified endpoint.
+	//
+	// To get the list of all available endpoints, make a [List] request.
 	Get(context.Context, *GetEndpointRequest) (*Endpoint, error)
+	// Lists endpoints in the specified folder.
 	List(context.Context, *ListEndpointsRequest) (*ListEndpointsResponse, error)
+	// Creates an endpoint in the specified folder.
 	Create(context.Context, *CreateEndpointRequest) (*operation.Operation, error)
+	// Updates the specified endpoint.
 	Update(context.Context, *UpdateEndpointRequest) (*operation.Operation, error)
+	// Deletes the specified endpoint.
 	Delete(context.Context, *DeleteEndpointRequest) (*operation.Operation, error)
 }
 

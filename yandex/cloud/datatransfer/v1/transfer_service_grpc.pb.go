@@ -33,12 +33,25 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TransferServiceClient interface {
+	// Creates a transfer in the specified folder.
 	Create(ctx context.Context, in *CreateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified transfer.
 	Update(ctx context.Context, in *UpdateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified transfer.
 	Delete(ctx context.Context, in *DeleteTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists transfers in the specified folder.
 	List(ctx context.Context, in *ListTransfersRequest, opts ...grpc.CallOption) (*ListTransfersResponse, error)
+	// Returns the specified transfer.
+	//
+	// To get the list of all available transfers, make a [List] request.
 	Get(ctx context.Context, in *GetTransferRequest, opts ...grpc.CallOption) (*Transfer, error)
+	// Deactivates the specified transfer.
+	//
+	// To get the list of all available transfers, make a [List] request.
 	Deactivate(ctx context.Context, in *DeactivateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Activates the specified transfer.
+	//
+	// To get the list of all available transfers, make a [List] request.
 	Activate(ctx context.Context, in *ActivateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -124,12 +137,25 @@ func (c *transferServiceClient) Activate(ctx context.Context, in *ActivateTransf
 // All implementations should embed UnimplementedTransferServiceServer
 // for forward compatibility.
 type TransferServiceServer interface {
+	// Creates a transfer in the specified folder.
 	Create(context.Context, *CreateTransferRequest) (*operation.Operation, error)
+	// Updates the specified transfer.
 	Update(context.Context, *UpdateTransferRequest) (*operation.Operation, error)
+	// Deletes the specified transfer.
 	Delete(context.Context, *DeleteTransferRequest) (*operation.Operation, error)
+	// Lists transfers in the specified folder.
 	List(context.Context, *ListTransfersRequest) (*ListTransfersResponse, error)
+	// Returns the specified transfer.
+	//
+	// To get the list of all available transfers, make a [List] request.
 	Get(context.Context, *GetTransferRequest) (*Transfer, error)
+	// Deactivates the specified transfer.
+	//
+	// To get the list of all available transfers, make a [List] request.
 	Deactivate(context.Context, *DeactivateTransferRequest) (*operation.Operation, error)
+	// Activates the specified transfer.
+	//
+	// To get the list of all available transfers, make a [List] request.
 	Activate(context.Context, *ActivateTransferRequest) (*operation.Operation, error)
 }
 
