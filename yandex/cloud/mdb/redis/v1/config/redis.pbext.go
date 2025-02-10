@@ -90,6 +90,10 @@ func (m *RedisConfig) SetIoThreadsAllowed(v *wrapperspb.BoolValue) {
 	m.IoThreadsAllowed = v
 }
 
+func (m *RedisConfig) SetZsetMaxListpackEntries(v *wrapperspb.Int64Value) {
+	m.ZsetMaxListpackEntries = v
+}
+
 func (m *RedisConfig_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
 	m.HardLimit = v
 }

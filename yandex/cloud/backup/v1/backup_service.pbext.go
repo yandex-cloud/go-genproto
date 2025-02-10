@@ -219,3 +219,27 @@ func (m *DeleteBackupMetadata) SetComputeInstanceId(v string) {
 func (m *DeleteBackupMetadata) SetBackupId(v string) {
 	m.BackupId = v
 }
+
+func (m *DeleteArchiveRequest) SetArchiveId(v string) {
+	m.ArchiveId = v
+}
+
+func (m *DeleteArchiveRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *DeleteArchiveRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DeleteArchiveRequest) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
+func (m *DeleteArchiveMetadata) SetArchiveId(v string) {
+	m.ArchiveId = v
+}
+
+func (m *DeleteArchiveMetadata) SetFolderId(v string) {
+	m.FolderId = v
+}

@@ -106,6 +106,18 @@ func (m *TuningRequest) SetTextClassificationMulticlass(v *TextClassificationMul
 	}
 }
 
+func (m *TuningRequest) SetTextEmbeddingPairParams(v *TextEmbeddingPairParams) {
+	m.TuningParams = &TuningRequest_TextEmbeddingPairParams{
+		TextEmbeddingPairParams: v,
+	}
+}
+
+func (m *TuningRequest) SetTextEmbeddingTripletParams(v *TextEmbeddingTripletParams) {
+	m.TuningParams = &TuningRequest_TextEmbeddingTripletParams{
+		TextEmbeddingTripletParams: v,
+	}
+}
+
 func (m *TuningRequest) SetName(v string) {
 	m.Name = v
 }
@@ -368,6 +380,194 @@ func (m *TextClassificationMulticlassParams_Optimizer) SetType(v TextClassificat
 
 func (m *TextClassificationMulticlassParams_Optimizer) SetAdamw(v *OptimizerAdamw) {
 	m.Type = &TextClassificationMulticlassParams_Optimizer_Adamw{
+		Adamw: v,
+	}
+}
+
+type TextEmbeddingPairParams_TuningType = isTextEmbeddingPairParams_TuningType
+
+func (m *TextEmbeddingPairParams) SetTuningType(v TextEmbeddingPairParams_TuningType) {
+	m.TuningType = v
+}
+
+func (m *TextEmbeddingPairParams) SetSeed(v int64) {
+	m.Seed = v
+}
+
+func (m *TextEmbeddingPairParams) SetLr(v float64) {
+	m.Lr = v
+}
+
+func (m *TextEmbeddingPairParams) SetNSamples(v int64) {
+	m.NSamples = v
+}
+
+func (m *TextEmbeddingPairParams) SetAdditionalArguments(v string) {
+	m.AdditionalArguments = v
+}
+
+func (m *TextEmbeddingPairParams) SetEmbeddingDims(v []int64) {
+	m.EmbeddingDims = v
+}
+
+func (m *TextEmbeddingPairParams) SetLora(v *TuningTypeLora) {
+	m.TuningType = &TextEmbeddingPairParams_Lora{
+		Lora: v,
+	}
+}
+
+func (m *TextEmbeddingPairParams) SetPromptTune(v *TuningTypePromptTune) {
+	m.TuningType = &TextEmbeddingPairParams_PromptTune{
+		PromptTune: v,
+	}
+}
+
+func (m *TextEmbeddingPairParams) SetScheduler(v *TextEmbeddingPairParams_Scheduler) {
+	m.Scheduler = v
+}
+
+func (m *TextEmbeddingPairParams) SetOptimizer(v *TextEmbeddingPairParams_Optimizer) {
+	m.Optimizer = v
+}
+
+type TextEmbeddingPairParams_Scheduler_Type = isTextEmbeddingPairParams_Scheduler_Type
+
+func (m *TextEmbeddingPairParams_Scheduler) SetType(v TextEmbeddingPairParams_Scheduler_Type) {
+	m.Type = v
+}
+
+type TextEmbeddingPairParams_Scheduler_OptionalWarmupRatio = isTextEmbeddingPairParams_Scheduler_OptionalWarmupRatio
+
+func (m *TextEmbeddingPairParams_Scheduler) SetOptionalWarmupRatio(v TextEmbeddingPairParams_Scheduler_OptionalWarmupRatio) {
+	m.OptionalWarmupRatio = v
+}
+
+func (m *TextEmbeddingPairParams_Scheduler) SetLinear(v *SchedulerLinear) {
+	m.Type = &TextEmbeddingPairParams_Scheduler_Linear{
+		Linear: v,
+	}
+}
+
+func (m *TextEmbeddingPairParams_Scheduler) SetConstant(v *SchedulerConstant) {
+	m.Type = &TextEmbeddingPairParams_Scheduler_Constant{
+		Constant: v,
+	}
+}
+
+func (m *TextEmbeddingPairParams_Scheduler) SetCosine(v *SchedulerCosine) {
+	m.Type = &TextEmbeddingPairParams_Scheduler_Cosine{
+		Cosine: v,
+	}
+}
+
+func (m *TextEmbeddingPairParams_Scheduler) SetWarmupRatio(v float64) {
+	m.OptionalWarmupRatio = &TextEmbeddingPairParams_Scheduler_WarmupRatio{
+		WarmupRatio: v,
+	}
+}
+
+type TextEmbeddingPairParams_Optimizer_Type = isTextEmbeddingPairParams_Optimizer_Type
+
+func (m *TextEmbeddingPairParams_Optimizer) SetType(v TextEmbeddingPairParams_Optimizer_Type) {
+	m.Type = v
+}
+
+func (m *TextEmbeddingPairParams_Optimizer) SetAdamw(v *OptimizerAdamw) {
+	m.Type = &TextEmbeddingPairParams_Optimizer_Adamw{
+		Adamw: v,
+	}
+}
+
+type TextEmbeddingTripletParams_TuningType = isTextEmbeddingTripletParams_TuningType
+
+func (m *TextEmbeddingTripletParams) SetTuningType(v TextEmbeddingTripletParams_TuningType) {
+	m.TuningType = v
+}
+
+func (m *TextEmbeddingTripletParams) SetSeed(v int64) {
+	m.Seed = v
+}
+
+func (m *TextEmbeddingTripletParams) SetLr(v float64) {
+	m.Lr = v
+}
+
+func (m *TextEmbeddingTripletParams) SetNSamples(v int64) {
+	m.NSamples = v
+}
+
+func (m *TextEmbeddingTripletParams) SetAdditionalArguments(v string) {
+	m.AdditionalArguments = v
+}
+
+func (m *TextEmbeddingTripletParams) SetEmbeddingDims(v []int64) {
+	m.EmbeddingDims = v
+}
+
+func (m *TextEmbeddingTripletParams) SetLora(v *TuningTypeLora) {
+	m.TuningType = &TextEmbeddingTripletParams_Lora{
+		Lora: v,
+	}
+}
+
+func (m *TextEmbeddingTripletParams) SetPromptTune(v *TuningTypePromptTune) {
+	m.TuningType = &TextEmbeddingTripletParams_PromptTune{
+		PromptTune: v,
+	}
+}
+
+func (m *TextEmbeddingTripletParams) SetScheduler(v *TextEmbeddingTripletParams_Scheduler) {
+	m.Scheduler = v
+}
+
+func (m *TextEmbeddingTripletParams) SetOptimizer(v *TextEmbeddingTripletParams_Optimizer) {
+	m.Optimizer = v
+}
+
+type TextEmbeddingTripletParams_Scheduler_Type = isTextEmbeddingTripletParams_Scheduler_Type
+
+func (m *TextEmbeddingTripletParams_Scheduler) SetType(v TextEmbeddingTripletParams_Scheduler_Type) {
+	m.Type = v
+}
+
+type TextEmbeddingTripletParams_Scheduler_OptionalWarmupRatio = isTextEmbeddingTripletParams_Scheduler_OptionalWarmupRatio
+
+func (m *TextEmbeddingTripletParams_Scheduler) SetOptionalWarmupRatio(v TextEmbeddingTripletParams_Scheduler_OptionalWarmupRatio) {
+	m.OptionalWarmupRatio = v
+}
+
+func (m *TextEmbeddingTripletParams_Scheduler) SetLinear(v *SchedulerLinear) {
+	m.Type = &TextEmbeddingTripletParams_Scheduler_Linear{
+		Linear: v,
+	}
+}
+
+func (m *TextEmbeddingTripletParams_Scheduler) SetConstant(v *SchedulerConstant) {
+	m.Type = &TextEmbeddingTripletParams_Scheduler_Constant{
+		Constant: v,
+	}
+}
+
+func (m *TextEmbeddingTripletParams_Scheduler) SetCosine(v *SchedulerCosine) {
+	m.Type = &TextEmbeddingTripletParams_Scheduler_Cosine{
+		Cosine: v,
+	}
+}
+
+func (m *TextEmbeddingTripletParams_Scheduler) SetWarmupRatio(v float64) {
+	m.OptionalWarmupRatio = &TextEmbeddingTripletParams_Scheduler_WarmupRatio{
+		WarmupRatio: v,
+	}
+}
+
+type TextEmbeddingTripletParams_Optimizer_Type = isTextEmbeddingTripletParams_Optimizer_Type
+
+func (m *TextEmbeddingTripletParams_Optimizer) SetType(v TextEmbeddingTripletParams_Optimizer_Type) {
+	m.Type = v
+}
+
+func (m *TextEmbeddingTripletParams_Optimizer) SetAdamw(v *OptimizerAdamw) {
+	m.Type = &TextEmbeddingTripletParams_Optimizer_Adamw{
 		Adamw: v,
 	}
 }

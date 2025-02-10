@@ -30,6 +30,10 @@ func (m *ValidateDatasetMetadata) SetProcessedRows(v int64) {
 	m.ProcessedRows = v
 }
 
+func (m *ValidateDatasetMetadata) SetTotalRows(v int64) {
+	m.TotalRows = v
+}
+
 func (m *ValidateDatasetResponse) SetDatasetId(v string) {
 	m.DatasetId = v
 }

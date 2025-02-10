@@ -20,16 +20,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_Get_FullMethodName            = "/yandex.cloud.k8s.v1.ClusterService/Get"
-	ClusterService_List_FullMethodName           = "/yandex.cloud.k8s.v1.ClusterService/List"
-	ClusterService_Create_FullMethodName         = "/yandex.cloud.k8s.v1.ClusterService/Create"
-	ClusterService_Update_FullMethodName         = "/yandex.cloud.k8s.v1.ClusterService/Update"
-	ClusterService_Delete_FullMethodName         = "/yandex.cloud.k8s.v1.ClusterService/Delete"
-	ClusterService_Stop_FullMethodName           = "/yandex.cloud.k8s.v1.ClusterService/Stop"
-	ClusterService_Start_FullMethodName          = "/yandex.cloud.k8s.v1.ClusterService/Start"
-	ClusterService_ListNodeGroups_FullMethodName = "/yandex.cloud.k8s.v1.ClusterService/ListNodeGroups"
-	ClusterService_ListOperations_FullMethodName = "/yandex.cloud.k8s.v1.ClusterService/ListOperations"
-	ClusterService_ListNodes_FullMethodName      = "/yandex.cloud.k8s.v1.ClusterService/ListNodes"
+	ClusterService_Get_FullMethodName                   = "/yandex.cloud.k8s.v1.ClusterService/Get"
+	ClusterService_List_FullMethodName                  = "/yandex.cloud.k8s.v1.ClusterService/List"
+	ClusterService_Create_FullMethodName                = "/yandex.cloud.k8s.v1.ClusterService/Create"
+	ClusterService_Update_FullMethodName                = "/yandex.cloud.k8s.v1.ClusterService/Update"
+	ClusterService_Delete_FullMethodName                = "/yandex.cloud.k8s.v1.ClusterService/Delete"
+	ClusterService_Stop_FullMethodName                  = "/yandex.cloud.k8s.v1.ClusterService/Stop"
+	ClusterService_Start_FullMethodName                 = "/yandex.cloud.k8s.v1.ClusterService/Start"
+	ClusterService_RescheduleMaintenance_FullMethodName = "/yandex.cloud.k8s.v1.ClusterService/RescheduleMaintenance"
+	ClusterService_ListNodeGroups_FullMethodName        = "/yandex.cloud.k8s.v1.ClusterService/ListNodeGroups"
+	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.k8s.v1.ClusterService/ListOperations"
+	ClusterService_ListNodes_FullMethodName             = "/yandex.cloud.k8s.v1.ClusterService/ListNodes"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -54,6 +55,8 @@ type ClusterServiceClient interface {
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts the specified Kubernetes cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Reschedules mandatory maintenance for the specified cluster.
+	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists nodegroup for the specified Kubernetes cluster.
 	ListNodeGroups(ctx context.Context, in *ListClusterNodeGroupsRequest, opts ...grpc.CallOption) (*ListClusterNodeGroupsResponse, error)
 	// Lists operations for the specified Kubernetes cluster.
@@ -140,6 +143,16 @@ func (c *clusterServiceClient) Start(ctx context.Context, in *StartClusterReques
 	return out, nil
 }
 
+func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_RescheduleMaintenance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) ListNodeGroups(ctx context.Context, in *ListClusterNodeGroupsRequest, opts ...grpc.CallOption) (*ListClusterNodeGroupsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListClusterNodeGroupsResponse)
@@ -192,6 +205,8 @@ type ClusterServiceServer interface {
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
 	// Starts the specified Kubernetes cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
+	// Reschedules mandatory maintenance for the specified cluster.
+	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Lists nodegroup for the specified Kubernetes cluster.
 	ListNodeGroups(context.Context, *ListClusterNodeGroupsRequest) (*ListClusterNodeGroupsResponse, error)
 	// Lists operations for the specified Kubernetes cluster.
@@ -227,6 +242,9 @@ func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterReque
 }
 func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
+}
+func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RescheduleMaintenance not implemented")
 }
 func (UnimplementedClusterServiceServer) ListNodeGroups(context.Context, *ListClusterNodeGroupsRequest) (*ListClusterNodeGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListNodeGroups not implemented")
@@ -383,6 +401,24 @@ func _ClusterService_Start_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_RescheduleMaintenance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RescheduleMaintenanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_RescheduleMaintenance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, req.(*RescheduleMaintenanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListNodeGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterNodeGroupsRequest)
 	if err := dec(in); err != nil {
@@ -471,6 +507,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Start",
 			Handler:    _ClusterService_Start_Handler,
+		},
+		{
+			MethodName: "RescheduleMaintenance",
+			Handler:    _ClusterService_RescheduleMaintenance_Handler,
 		},
 		{
 			MethodName: "ListNodeGroups",

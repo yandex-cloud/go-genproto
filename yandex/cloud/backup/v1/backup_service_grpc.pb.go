@@ -27,6 +27,7 @@ const (
 	BackupService_StartRecovery_FullMethodName      = "/yandex.cloud.backup.v1.BackupService/StartRecovery"
 	BackupService_StartFilesRecovery_FullMethodName = "/yandex.cloud.backup.v1.BackupService/StartFilesRecovery"
 	BackupService_Delete_FullMethodName             = "/yandex.cloud.backup.v1.BackupService/Delete"
+	BackupService_DeleteArchive_FullMethodName      = "/yandex.cloud.backup.v1.BackupService/DeleteArchive"
 )
 
 // BackupServiceClient is the client API for BackupService service.
@@ -52,6 +53,8 @@ type BackupServiceClient interface {
 	StartFilesRecovery(ctx context.Context, in *StartFilesRecoveryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete specific backup.
 	Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Delete specific archive.
+	DeleteArchive(ctx context.Context, in *DeleteArchiveRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type backupServiceClient struct {
@@ -132,6 +135,16 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 	return out, nil
 }
 
+func (c *backupServiceClient) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, BackupService_DeleteArchive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackupServiceServer is the server API for BackupService service.
 // All implementations should embed UnimplementedBackupServiceServer
 // for forward compatibility.
@@ -155,6 +168,8 @@ type BackupServiceServer interface {
 	StartFilesRecovery(context.Context, *StartFilesRecoveryRequest) (*operation.Operation, error)
 	// Delete specific backup.
 	Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
+	// Delete specific archive.
+	DeleteArchive(context.Context, *DeleteArchiveRequest) (*operation.Operation, error)
 }
 
 // UnimplementedBackupServiceServer should be embedded to have
@@ -184,6 +199,9 @@ func (UnimplementedBackupServiceServer) StartFilesRecovery(context.Context, *Sta
 }
 func (UnimplementedBackupServiceServer) Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedBackupServiceServer) DeleteArchive(context.Context, *DeleteArchiveRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteArchive not implemented")
 }
 func (UnimplementedBackupServiceServer) testEmbeddedByValue() {}
 
@@ -331,6 +349,24 @@ func _BackupService_Delete_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackupService_DeleteArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteArchiveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).DeleteArchive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_DeleteArchive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).DeleteArchive(ctx, req.(*DeleteArchiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackupService_ServiceDesc is the grpc.ServiceDesc for BackupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -365,6 +401,10 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _BackupService_Delete_Handler,
+		},
+		{
+			MethodName: "DeleteArchive",
+			Handler:    _BackupService_DeleteArchive_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

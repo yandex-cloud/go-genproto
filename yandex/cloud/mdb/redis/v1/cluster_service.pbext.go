@@ -107,6 +107,14 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *CreateClusterRequest) SetUserSpecs(v []*UserSpec) {
+	m.UserSpecs = v
+}
+
+func (m *CreateClusterRequest) SetAuthSentinel(v bool) {
+	m.AuthSentinel = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -157,6 +165,10 @@ func (m *UpdateClusterRequest) SetNetworkId(v string) {
 
 func (m *UpdateClusterRequest) SetAnnounceHostnames(v bool) {
 	m.AnnounceHostnames = v
+}
+
+func (m *UpdateClusterRequest) SetAuthSentinel(v bool) {
+	m.AuthSentinel = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
@@ -289,6 +301,10 @@ func (m *RestoreClusterRequest) SetAnnounceHostnames(v bool) {
 
 func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
+}
+
+func (m *RestoreClusterRequest) SetAuthSentinel(v bool) {
+	m.AuthSentinel = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

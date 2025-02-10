@@ -98,6 +98,10 @@ func (m *Cluster) SetCilium(v *Cilium) {
 	}
 }
 
+func (m *Cluster) SetScheduledMaintenance(v *ScheduledMaintenance) {
+	m.ScheduledMaintenance = v
+}
+
 type Master_MasterType = isMaster_MasterType
 
 func (m *Master) SetMasterType(v Master_MasterType) {

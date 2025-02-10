@@ -6,6 +6,7 @@ import (
 	dayofweek "google.golang.org/genproto/googleapis/type/dayofweek"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type MaintenanceWindow_Policy = isMaintenanceWindow_Policy
@@ -54,4 +55,20 @@ func (m *DaysOfWeekMaintenanceWindow) SetDuration(v *durationpb.Duration) {
 
 func (m *WeeklyMaintenanceWindow) SetDaysOfWeek(v []*DaysOfWeekMaintenanceWindow) {
 	m.DaysOfWeek = v
+}
+
+func (m *ScheduledMaintenance) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
+}
+
+func (m *ScheduledMaintenance) SetAvailableFrom(v *timestamppb.Timestamp) {
+	m.AvailableFrom = v
+}
+
+func (m *ScheduledMaintenance) SetNoLaterThan(v *timestamppb.Timestamp) {
+	m.NoLaterThan = v
+}
+
+func (m *ScheduledMaintenance) SetDescription(v string) {
+	m.Description = v
 }

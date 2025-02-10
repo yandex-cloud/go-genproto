@@ -3,7 +3,7 @@
 package threads
 
 import (
-	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/assistants/v1"
+	v11 "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/assistants/v1"
 	common "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/common"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
@@ -36,7 +36,7 @@ func (m *CreateThreadRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreateThreadRequest) SetTools(v []*v1.Tool) {
+func (m *CreateThreadRequest) SetTools(v []*v11.Tool) {
 	m.Tools = v
 }
 
@@ -68,7 +68,7 @@ func (m *UpdateThreadRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *UpdateThreadRequest) SetTools(v []*v1.Tool) {
+func (m *UpdateThreadRequest) SetTools(v []*v11.Tool) {
 	m.Tools = v
 }
 

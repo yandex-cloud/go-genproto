@@ -342,6 +342,7 @@ type Cluster struct {
 	//
 	//	*Cluster_Cilium
 	NetworkImplementation isCluster_NetworkImplementation `protobuf_oneof:"network_implementation"`
+	ScheduledMaintenance  *ScheduledMaintenance           `protobuf:"bytes,20,opt,name=scheduled_maintenance,json=scheduledMaintenance,proto3" json:"scheduled_maintenance,omitempty"`
 }
 
 func (x *Cluster) Reset() {
@@ -519,6 +520,13 @@ func (m *Cluster) GetNetworkImplementation() isCluster_NetworkImplementation {
 func (x *Cluster) GetCilium() *Cilium {
 	if x, ok := x.GetNetworkImplementation().(*Cluster_Cilium); ok {
 		return x.Cilium
+	}
+	return nil
+}
+
+func (x *Cluster) GetScheduledMaintenance() *ScheduledMaintenance {
+	if x != nil {
+		return x.ScheduledMaintenance
 	}
 	return nil
 }
@@ -1459,7 +1467,7 @@ var file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = []byte{
 	0x38, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x1d, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75,
 	0x64, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0x9d, 0x0a, 0x0a, 0x07, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x0e,
+	0x74, 0x6f, 0x22, 0xfd, 0x0a, 0x0a, 0x07, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x0e,
 	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1b,
 	0x0a, 0x09, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x08, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x39, 0x0a, 0x0a, 0x63,
@@ -1522,7 +1530,13 @@ var file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = []byte{
 	0x6c, 0x69, 0x75, 0x6d, 0x18, 0x13, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x79, 0x61, 0x6e,
 	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6b, 0x38, 0x73, 0x2e, 0x76, 0x31,
 	0x2e, 0x43, 0x69, 0x6c, 0x69, 0x75, 0x6d, 0x48, 0x01, 0x52, 0x06, 0x63, 0x69, 0x6c, 0x69, 0x75,
-	0x6d, 0x1a, 0x39, 0x0a, 0x0b, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79,
+	0x6d, 0x12, 0x5e, 0x0a, 0x15, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x64, 0x5f, 0x6d,
+	0x61, 0x69, 0x6e, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x14, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x29, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x6b, 0x38, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x64,
+	0x4d, 0x61, 0x69, 0x6e, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x63, 0x65, 0x52, 0x14, 0x73, 0x63, 0x68,
+	0x65, 0x64, 0x75, 0x6c, 0x65, 0x64, 0x4d, 0x61, 0x69, 0x6e, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x63,
+	0x65, 0x1a, 0x39, 0x0a, 0x0b, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79,
 	0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b,
 	0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x87, 0x01, 0x0a,
@@ -1749,8 +1763,9 @@ var file_yandex_cloud_k8s_v1_cluster_proto_goTypes = []any{
 	(*Cilium)(nil),                  // 17: yandex.cloud.k8s.v1.Cilium
 	nil,                             // 18: yandex.cloud.k8s.v1.Cluster.LabelsEntry
 	(*timestamppb.Timestamp)(nil),   // 19: google.protobuf.Timestamp
-	(*VersionInfo)(nil),             // 20: yandex.cloud.k8s.v1.VersionInfo
-	(*MaintenanceWindow)(nil),       // 21: yandex.cloud.k8s.v1.MaintenanceWindow
+	(*ScheduledMaintenance)(nil),    // 20: yandex.cloud.k8s.v1.ScheduledMaintenance
+	(*VersionInfo)(nil),             // 21: yandex.cloud.k8s.v1.VersionInfo
+	(*MaintenanceWindow)(nil),       // 22: yandex.cloud.k8s.v1.MaintenanceWindow
 }
 var file_yandex_cloud_k8s_v1_cluster_proto_depIdxs = []int32{
 	19, // 0: yandex.cloud.k8s.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
@@ -1763,22 +1778,23 @@ var file_yandex_cloud_k8s_v1_cluster_proto_depIdxs = []int32{
 	15, // 7: yandex.cloud.k8s.v1.Cluster.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
 	16, // 8: yandex.cloud.k8s.v1.Cluster.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
 	17, // 9: yandex.cloud.k8s.v1.Cluster.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
-	8,  // 10: yandex.cloud.k8s.v1.Master.zonal_master:type_name -> yandex.cloud.k8s.v1.ZonalMaster
-	9,  // 11: yandex.cloud.k8s.v1.Master.regional_master:type_name -> yandex.cloud.k8s.v1.RegionalMaster
-	10, // 12: yandex.cloud.k8s.v1.Master.locations:type_name -> yandex.cloud.k8s.v1.Location
-	11, // 13: yandex.cloud.k8s.v1.Master.endpoints:type_name -> yandex.cloud.k8s.v1.MasterEndpoints
-	7,  // 14: yandex.cloud.k8s.v1.Master.master_auth:type_name -> yandex.cloud.k8s.v1.MasterAuth
-	20, // 15: yandex.cloud.k8s.v1.Master.version_info:type_name -> yandex.cloud.k8s.v1.VersionInfo
-	13, // 16: yandex.cloud.k8s.v1.Master.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	14, // 17: yandex.cloud.k8s.v1.Master.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	21, // 18: yandex.cloud.k8s.v1.MasterMaintenancePolicy.maintenance_window:type_name -> yandex.cloud.k8s.v1.MaintenanceWindow
-	3,  // 19: yandex.cloud.k8s.v1.NetworkPolicy.provider:type_name -> yandex.cloud.k8s.v1.NetworkPolicy.Provider
-	4,  // 20: yandex.cloud.k8s.v1.Cilium.routing_mode:type_name -> yandex.cloud.k8s.v1.Cilium.RoutingMode
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	20, // 10: yandex.cloud.k8s.v1.Cluster.scheduled_maintenance:type_name -> yandex.cloud.k8s.v1.ScheduledMaintenance
+	8,  // 11: yandex.cloud.k8s.v1.Master.zonal_master:type_name -> yandex.cloud.k8s.v1.ZonalMaster
+	9,  // 12: yandex.cloud.k8s.v1.Master.regional_master:type_name -> yandex.cloud.k8s.v1.RegionalMaster
+	10, // 13: yandex.cloud.k8s.v1.Master.locations:type_name -> yandex.cloud.k8s.v1.Location
+	11, // 14: yandex.cloud.k8s.v1.Master.endpoints:type_name -> yandex.cloud.k8s.v1.MasterEndpoints
+	7,  // 15: yandex.cloud.k8s.v1.Master.master_auth:type_name -> yandex.cloud.k8s.v1.MasterAuth
+	21, // 16: yandex.cloud.k8s.v1.Master.version_info:type_name -> yandex.cloud.k8s.v1.VersionInfo
+	13, // 17: yandex.cloud.k8s.v1.Master.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	14, // 18: yandex.cloud.k8s.v1.Master.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	22, // 19: yandex.cloud.k8s.v1.MasterMaintenancePolicy.maintenance_window:type_name -> yandex.cloud.k8s.v1.MaintenanceWindow
+	3,  // 20: yandex.cloud.k8s.v1.NetworkPolicy.provider:type_name -> yandex.cloud.k8s.v1.NetworkPolicy.Provider
+	4,  // 21: yandex.cloud.k8s.v1.Cilium.routing_mode:type_name -> yandex.cloud.k8s.v1.Cilium.RoutingMode
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_k8s_v1_cluster_proto_init() }

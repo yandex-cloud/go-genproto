@@ -3,6 +3,8 @@
 package threads
 
 import (
+	searchindex "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/assistants/v1/searchindex"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/files/v1"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -36,6 +38,10 @@ func (m *Message) SetContent(v *MessageContent) {
 
 func (m *Message) SetStatus(v Message_MessageStatus) {
 	m.Status = v
+}
+
+func (m *Message) SetCitations(v []*Citation) {
+	m.Citations = v
 }
 
 func (m *MessageContent) SetContent(v []*ContentPart) {
@@ -76,4 +82,36 @@ func (m *Author) SetId(v string) {
 
 func (m *Author) SetRole(v string) {
 	m.Role = v
+}
+
+func (m *Citation) SetSources(v []*Source) {
+	m.Sources = v
+}
+
+type Source_SourceType = isSource_SourceType
+
+func (m *Source) SetSourceType(v Source_SourceType) {
+	m.SourceType = v
+}
+
+func (m *Source) SetChunk(v *FileChunk) {
+	m.SourceType = &Source_Chunk{
+		Chunk: v,
+	}
+}
+
+func (m *FileChunk) SetSearchIndex(v *searchindex.SearchIndex) {
+	m.SearchIndex = v
+}
+
+func (m *FileChunk) SetSourceFile(v *v1.File) {
+	m.SourceFile = v
+}
+
+func (m *FileChunk) SetContent(v *ChunkContent) {
+	m.Content = v
+}
+
+func (m *ChunkContent) SetContent(v []*ContentPart) {
+	m.Content = v
 }
