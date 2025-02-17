@@ -98,6 +98,10 @@ func (m *PolicySettings) SetQuiesceSnapshottingEnabled(v bool) {
 	m.QuiesceSnapshottingEnabled = v
 }
 
+func (m *PolicySettings) SetFileFilters(v *PolicySettings_FileFilters) {
+	m.FileFilters = v
+}
+
 func (m *PolicySettings_Interval) SetType(v PolicySettings_Interval_Type) {
 	m.Type = v
 }
@@ -264,6 +268,14 @@ func (m *PolicySettings_Scheduling_BackupSet_Time) SetType(v PolicySettings_Repe
 
 func (m *PolicySettings_Scheduling_BackupSet_SinceLastExecTime) SetDelay(v *PolicySettings_Interval) {
 	m.Delay = v
+}
+
+func (m *PolicySettings_FileFilters) SetExclusionMasks(v []string) {
+	m.ExclusionMasks = v
+}
+
+func (m *PolicySettings_FileFilters) SetInclusionMasks(v []string) {
+	m.InclusionMasks = v
 }
 
 func (m *PolicyApplication) SetPolicyId(v string) {

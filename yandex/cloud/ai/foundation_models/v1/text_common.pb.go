@@ -1094,6 +1094,55 @@ func (x *ToolResultList) GetToolResults() []*ToolResult {
 	return nil
 }
 
+// Represents the expected structure of the model's response using a JSON Schema.
+type JsonSchema struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The JSON Schema that the model's output must conform to.
+	Schema *structpb.Struct `protobuf:"bytes,1,opt,name=schema,proto3" json:"schema,omitempty"`
+}
+
+func (x *JsonSchema) Reset() {
+	*x = JsonSchema{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *JsonSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JsonSchema) ProtoMessage() {}
+
+func (x *JsonSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JsonSchema.ProtoReflect.Descriptor instead.
+func (*JsonSchema) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *JsonSchema) GetSchema() *structpb.Struct {
+	if x != nil {
+		return x.Schema
+	}
+	return nil
+}
+
 // Provides additional information about how the completion tokens were utilized.
 type ContentUsage_CompletionTokensDetails struct {
 	state         protoimpl.MessageState
@@ -1107,7 +1156,7 @@ type ContentUsage_CompletionTokensDetails struct {
 func (x *ContentUsage_CompletionTokensDetails) Reset() {
 	*x = ContentUsage_CompletionTokensDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[14]
+		mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1120,7 +1169,7 @@ func (x *ContentUsage_CompletionTokensDetails) String() string {
 func (*ContentUsage_CompletionTokensDetails) ProtoMessage() {}
 
 func (x *ContentUsage_CompletionTokensDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1305,16 +1354,20 @@ var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc = []byte
 	0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61,
 	0x69, 0x2e, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x6f, 0x64,
 	0x65, 0x6c, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x52, 0x0b, 0x74, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x42, 0x86,
-	0x01, 0x0a, 0x28, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x5a, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69,
-	0x2f, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x6f, 0x64, 0x65,
-	0x6c, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x52, 0x0b, 0x74, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x22, 0x3d,
+	0x0a, 0x0a, 0x4a, 0x73, 0x6f, 0x6e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x12, 0x2f, 0x0a, 0x06,
+	0x73, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67,
+	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53,
+	0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x06, 0x73, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x42, 0x86, 0x01,
+	0x0a, 0x28, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x5a, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f,
+	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f,
+	0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x6c,
+	0x73, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
+	0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1330,7 +1383,7 @@ func file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_goTypes = []any{
 	(ReasoningOptions_ReasoningMode)(0),          // 0: yandex.cloud.ai.foundation_models.v1.ReasoningOptions.ReasoningMode
 	(Alternative_AlternativeStatus)(0),           // 1: yandex.cloud.ai.foundation_models.v1.Alternative.AlternativeStatus
@@ -1348,33 +1401,35 @@ var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_goTypes = []any{
 	(*ToolResult)(nil),                           // 13: yandex.cloud.ai.foundation_models.v1.ToolResult
 	(*FunctionResult)(nil),                       // 14: yandex.cloud.ai.foundation_models.v1.FunctionResult
 	(*ToolResultList)(nil),                       // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList
-	(*ContentUsage_CompletionTokensDetails)(nil), // 16: yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
-	(*wrapperspb.DoubleValue)(nil),               // 17: google.protobuf.DoubleValue
-	(*wrapperspb.Int64Value)(nil),                // 18: google.protobuf.Int64Value
-	(*structpb.Struct)(nil),                      // 19: google.protobuf.Struct
+	(*JsonSchema)(nil),                           // 16: yandex.cloud.ai.foundation_models.v1.JsonSchema
+	(*ContentUsage_CompletionTokensDetails)(nil), // 17: yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
+	(*wrapperspb.DoubleValue)(nil),               // 18: google.protobuf.DoubleValue
+	(*wrapperspb.Int64Value)(nil),                // 19: google.protobuf.Int64Value
+	(*structpb.Struct)(nil),                      // 20: google.protobuf.Struct
 }
 var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_depIdxs = []int32{
-	17, // 0: yandex.cloud.ai.foundation_models.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
-	18, // 1: yandex.cloud.ai.foundation_models.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
+	18, // 0: yandex.cloud.ai.foundation_models.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
+	19, // 1: yandex.cloud.ai.foundation_models.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
 	3,  // 2: yandex.cloud.ai.foundation_models.v1.CompletionOptions.reasoning_options:type_name -> yandex.cloud.ai.foundation_models.v1.ReasoningOptions
 	0,  // 3: yandex.cloud.ai.foundation_models.v1.ReasoningOptions.mode:type_name -> yandex.cloud.ai.foundation_models.v1.ReasoningOptions.ReasoningMode
 	12, // 4: yandex.cloud.ai.foundation_models.v1.Message.tool_call_list:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCallList
 	15, // 5: yandex.cloud.ai.foundation_models.v1.Message.tool_result_list:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResultList
-	16, // 6: yandex.cloud.ai.foundation_models.v1.ContentUsage.completion_tokens_details:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
+	17, // 6: yandex.cloud.ai.foundation_models.v1.ContentUsage.completion_tokens_details:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
 	4,  // 7: yandex.cloud.ai.foundation_models.v1.Alternative.message:type_name -> yandex.cloud.ai.foundation_models.v1.Message
 	1,  // 8: yandex.cloud.ai.foundation_models.v1.Alternative.status:type_name -> yandex.cloud.ai.foundation_models.v1.Alternative.AlternativeStatus
 	9,  // 9: yandex.cloud.ai.foundation_models.v1.Tool.function:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionTool
-	19, // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
+	20, // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
 	11, // 11: yandex.cloud.ai.foundation_models.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionCall
-	19, // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
+	20, // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
 	10, // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCall
 	14, // 14: yandex.cloud.ai.foundation_models.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionResult
 	13, // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResult
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	20, // 16: yandex.cloud.ai.foundation_models.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_foundation_models_v1_text_common_proto_init() }
@@ -1552,6 +1607,18 @@ func file_yandex_cloud_ai_foundation_models_v1_text_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[14].Exporter = func(v any, i int) any {
+			switch v := v.(*JsonSchema); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15].Exporter = func(v any, i int) any {
 			switch v := v.(*ContentUsage_CompletionTokensDetails); i {
 			case 0:
 				return &v.state
@@ -1587,7 +1654,7 @@ func file_yandex_cloud_ai_foundation_models_v1_text_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

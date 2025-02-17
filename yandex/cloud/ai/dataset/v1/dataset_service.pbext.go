@@ -174,7 +174,7 @@ func (m *ListDatasetsRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *ListDatasetsRequest) SetStatus(v DatasetInfo_Status) {
+func (m *ListDatasetsRequest) SetStatus(v []DatasetInfo_Status) {
 	m.Status = v
 }
 
@@ -182,7 +182,7 @@ func (m *ListDatasetsRequest) SetDatasetNamePattern(v string) {
 	m.DatasetNamePattern = v
 }
 
-func (m *ListDatasetsRequest) SetTaskTypeFilter(v string) {
+func (m *ListDatasetsRequest) SetTaskTypeFilter(v []string) {
 	m.TaskTypeFilter = v
 }
 

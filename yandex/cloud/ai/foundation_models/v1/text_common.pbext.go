@@ -174,3 +174,7 @@ func (m *FunctionResult) SetContent(v string) {
 func (m *ToolResultList) SetToolResults(v []*ToolResult) {
 	m.ToolResults = v
 }
+
+func (m *JsonSchema) SetSchema(v *structpb.Struct) {
+	m.Schema = v
+}

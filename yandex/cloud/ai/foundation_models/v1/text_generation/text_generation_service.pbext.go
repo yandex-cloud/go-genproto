@@ -6,6 +6,12 @@ import (
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/foundation_models/v1"
 )
 
+type CompletionRequest_ResponseFormat = isCompletionRequest_ResponseFormat
+
+func (m *CompletionRequest) SetResponseFormat(v CompletionRequest_ResponseFormat) {
+	m.ResponseFormat = v
+}
+
 func (m *CompletionRequest) SetModelUri(v string) {
 	m.ModelUri = v
 }
@@ -20,6 +26,18 @@ func (m *CompletionRequest) SetMessages(v []*v1.Message) {
 
 func (m *CompletionRequest) SetTools(v []*v1.Tool) {
 	m.Tools = v
+}
+
+func (m *CompletionRequest) SetJsonObject(v bool) {
+	m.ResponseFormat = &CompletionRequest_JsonObject{
+		JsonObject: v,
+	}
+}
+
+func (m *CompletionRequest) SetJsonSchema(v *v1.JsonSchema) {
+	m.ResponseFormat = &CompletionRequest_JsonSchema{
+		JsonSchema: v,
+	}
 }
 
 func (m *CompletionResponse) SetAlternatives(v []*v1.Alternative) {

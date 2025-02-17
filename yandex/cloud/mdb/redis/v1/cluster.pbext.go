@@ -89,6 +89,10 @@ func (m *Cluster) SetAnnounceHostnames(v bool) {
 	m.AnnounceHostnames = v
 }
 
+func (m *Cluster) SetAuthSentinel(v bool) {
+	m.AuthSentinel = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
