@@ -136,6 +136,10 @@ func (m *CreateInstanceRequest) SetSerialPortSettings(v *SerialPortSettings) {
 	m.SerialPortSettings = v
 }
 
+func (m *CreateInstanceRequest) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
+}
+
 func (m *CreateInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }
@@ -202,6 +206,10 @@ func (m *UpdateInstanceRequest) SetMaintenanceGracePeriod(v *durationpb.Duration
 
 func (m *UpdateInstanceRequest) SetSerialPortSettings(v *SerialPortSettings) {
 	m.SerialPortSettings = v
+}
+
+func (m *UpdateInstanceRequest) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
 }
 
 func (m *UpdateInstanceMetadata) SetInstanceId(v string) {

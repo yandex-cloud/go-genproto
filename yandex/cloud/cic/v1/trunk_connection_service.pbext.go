@@ -2,6 +2,13 @@
 
 package cic
 
+import (
+	common "github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1/common"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *GetTrunkConnectionRequest) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
@@ -27,5 +34,145 @@ func (m *ListTrunkConnectionsResponse) SetTrunkConnections(v []*TrunkConnection)
 }
 
 func (m *ListTrunkConnectionsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+type CreateTrunkConnectionRequest_Joint = isCreateTrunkConnectionRequest_Joint
+
+func (m *CreateTrunkConnectionRequest) SetJoint(v CreateTrunkConnectionRequest_Joint) {
+	m.Joint = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetRegionId(v string) {
+	m.RegionId = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetSinglePortDirectJoint(v *CreateTrunkConnectionRequest_SinglePortDirectJoint) {
+	m.Joint = &CreateTrunkConnectionRequest_SinglePortDirectJoint_{
+		SinglePortDirectJoint: v,
+	}
+}
+
+func (m *CreateTrunkConnectionRequest) SetLagDirectJoint(v *CreateTrunkConnectionRequest_LagDirectJoint) {
+	m.Joint = &CreateTrunkConnectionRequest_LagDirectJoint_{
+		LagDirectJoint: v,
+	}
+}
+
+func (m *CreateTrunkConnectionRequest) SetPartnerJointInfo(v *CreateTrunkConnectionRequest_PartnerJoint) {
+	m.Joint = &CreateTrunkConnectionRequest_PartnerJointInfo{
+		PartnerJointInfo: v,
+	}
+}
+
+func (m *CreateTrunkConnectionRequest) SetPointOfPresenceId(v *wrapperspb.StringValue) {
+	m.PointOfPresenceId = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetCapacity(v TrunkConnection_Capacity) {
+	m.Capacity = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *CreateTrunkConnectionRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *CreateTrunkConnectionRequest_SinglePortDirectJoint) SetTransceiverType(v common.TransceiverType) {
+	m.TransceiverType = v
+}
+
+func (m *CreateTrunkConnectionRequest_LagDirectJoint) SetTransceiverType(v common.TransceiverType) {
+	m.TransceiverType = v
+}
+
+func (m *CreateTrunkConnectionRequest_PartnerJoint) SetPartnerId(v *wrapperspb.StringValue) {
+	m.PartnerId = v
+}
+
+func (m *CreateTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetRegionId(v string) {
+	m.RegionId = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetPointOfPresenceId(v *wrapperspb.StringValue) {
+	m.PointOfPresenceId = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetCapacity(v TrunkConnection_Capacity) {
+	m.Capacity = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateTrunkConnectionRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *UpdateTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *DeleteTrunkConnectionRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *DeleteTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *ListTrunkConnectionOperationsRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *ListTrunkConnectionOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListTrunkConnectionOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListTrunkConnectionOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListTrunkConnectionOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }

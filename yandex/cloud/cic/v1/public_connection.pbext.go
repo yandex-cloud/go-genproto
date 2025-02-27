@@ -3,6 +3,7 @@
 package cic
 
 import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -48,4 +49,12 @@ func (m *PublicConnection) SetIpv4PeerAnnouncedPrefixes(v []string) {
 
 func (m *PublicConnection) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *PublicConnection) SetStatus(v PublicConnection_Status) {
+	m.Status = v
+}
+
+func (m *PublicConnection) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
 }

@@ -8,6 +8,7 @@ package cic
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,8 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PrivateConnectionService_Get_FullMethodName  = "/yandex.cloud.cic.v1.PrivateConnectionService/Get"
-	PrivateConnectionService_List_FullMethodName = "/yandex.cloud.cic.v1.PrivateConnectionService/List"
+	PrivateConnectionService_Get_FullMethodName               = "/yandex.cloud.cic.v1.PrivateConnectionService/Get"
+	PrivateConnectionService_List_FullMethodName              = "/yandex.cloud.cic.v1.PrivateConnectionService/List"
+	PrivateConnectionService_Create_FullMethodName            = "/yandex.cloud.cic.v1.PrivateConnectionService/Create"
+	PrivateConnectionService_Update_FullMethodName            = "/yandex.cloud.cic.v1.PrivateConnectionService/Update"
+	PrivateConnectionService_Delete_FullMethodName            = "/yandex.cloud.cic.v1.PrivateConnectionService/Delete"
+	PrivateConnectionService_UpsertStaticRoute_FullMethodName = "/yandex.cloud.cic.v1.PrivateConnectionService/UpsertStaticRoute"
+	PrivateConnectionService_RemoveStaticRoute_FullMethodName = "/yandex.cloud.cic.v1.PrivateConnectionService/RemoveStaticRoute"
+	PrivateConnectionService_ListOperations_FullMethodName    = "/yandex.cloud.cic.v1.PrivateConnectionService/ListOperations"
 )
 
 // PrivateConnectionServiceClient is the client API for PrivateConnectionService service.
@@ -35,6 +42,23 @@ type PrivateConnectionServiceClient interface {
 	Get(ctx context.Context, in *GetPrivateConnectionRequest, opts ...grpc.CallOption) (*PrivateConnection, error)
 	// Retrieves the list of PrivateConnection resources in the specified folder.
 	List(ctx context.Context, in *ListPrivateConnectionsRequest, opts ...grpc.CallOption) (*ListPrivateConnectionsResponse, error)
+	// Creates a PrivateConnection resource in the specified folder using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Create(ctx context.Context, in *CreatePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates a PrivateConnection resource using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Update(ctx context.Context, in *UpdatePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes a PrivateConnection resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Delete(ctx context.Context, in *DeletePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Upserts specified static routes to a PrivateConnection resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpsertStaticRoute(ctx context.Context, in *UpsertStaticRouteRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes specified static routes to a PrivateConnection resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	RemoveStaticRoute(ctx context.Context, in *RemoveStaticRouteRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified PrivateConnection.
+	ListOperations(ctx context.Context, in *ListPrivateConnectionOperationsRequest, opts ...grpc.CallOption) (*ListPrivateConnectionOperationsResponse, error)
 }
 
 type privateConnectionServiceClient struct {
@@ -65,6 +89,66 @@ func (c *privateConnectionServiceClient) List(ctx context.Context, in *ListPriva
 	return out, nil
 }
 
+func (c *privateConnectionServiceClient) Create(ctx context.Context, in *CreatePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *privateConnectionServiceClient) Update(ctx context.Context, in *UpdatePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *privateConnectionServiceClient) Delete(ctx context.Context, in *DeletePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *privateConnectionServiceClient) UpsertStaticRoute(ctx context.Context, in *UpsertStaticRouteRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_UpsertStaticRoute_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *privateConnectionServiceClient) RemoveStaticRoute(ctx context.Context, in *RemoveStaticRouteRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_RemoveStaticRoute_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *privateConnectionServiceClient) ListOperations(ctx context.Context, in *ListPrivateConnectionOperationsRequest, opts ...grpc.CallOption) (*ListPrivateConnectionOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPrivateConnectionOperationsResponse)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrivateConnectionServiceServer is the server API for PrivateConnectionService service.
 // All implementations should embed UnimplementedPrivateConnectionServiceServer
 // for forward compatibility.
@@ -77,6 +161,23 @@ type PrivateConnectionServiceServer interface {
 	Get(context.Context, *GetPrivateConnectionRequest) (*PrivateConnection, error)
 	// Retrieves the list of PrivateConnection resources in the specified folder.
 	List(context.Context, *ListPrivateConnectionsRequest) (*ListPrivateConnectionsResponse, error)
+	// Creates a PrivateConnection resource in the specified folder using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Create(context.Context, *CreatePrivateConnectionRequest) (*operation.Operation, error)
+	// Updates a PrivateConnection resource using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Update(context.Context, *UpdatePrivateConnectionRequest) (*operation.Operation, error)
+	// Deletes a PrivateConnection resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Delete(context.Context, *DeletePrivateConnectionRequest) (*operation.Operation, error)
+	// Upserts specified static routes to a PrivateConnection resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpsertStaticRoute(context.Context, *UpsertStaticRouteRequest) (*operation.Operation, error)
+	// Removes specified static routes to a PrivateConnection resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	RemoveStaticRoute(context.Context, *RemoveStaticRouteRequest) (*operation.Operation, error)
+	// Lists operations for the specified PrivateConnection.
+	ListOperations(context.Context, *ListPrivateConnectionOperationsRequest) (*ListPrivateConnectionOperationsResponse, error)
 }
 
 // UnimplementedPrivateConnectionServiceServer should be embedded to have
@@ -91,6 +192,24 @@ func (UnimplementedPrivateConnectionServiceServer) Get(context.Context, *GetPriv
 }
 func (UnimplementedPrivateConnectionServiceServer) List(context.Context, *ListPrivateConnectionsRequest) (*ListPrivateConnectionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) Create(context.Context, *CreatePrivateConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) Update(context.Context, *UpdatePrivateConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) Delete(context.Context, *DeletePrivateConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) UpsertStaticRoute(context.Context, *UpsertStaticRouteRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertStaticRoute not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) RemoveStaticRoute(context.Context, *RemoveStaticRouteRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveStaticRoute not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) ListOperations(context.Context, *ListPrivateConnectionOperationsRequest) (*ListPrivateConnectionOperationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedPrivateConnectionServiceServer) testEmbeddedByValue() {}
 
@@ -148,6 +267,114 @@ func _PrivateConnectionService_List_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PrivateConnectionService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePrivateConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).Create(ctx, req.(*CreatePrivateConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrivateConnectionService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePrivateConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).Update(ctx, req.(*UpdatePrivateConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrivateConnectionService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePrivateConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).Delete(ctx, req.(*DeletePrivateConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrivateConnectionService_UpsertStaticRoute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertStaticRouteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).UpsertStaticRoute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_UpsertStaticRoute_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).UpsertStaticRoute(ctx, req.(*UpsertStaticRouteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrivateConnectionService_RemoveStaticRoute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveStaticRouteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).RemoveStaticRoute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_RemoveStaticRoute_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).RemoveStaticRoute(ctx, req.(*RemoveStaticRouteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrivateConnectionService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPrivateConnectionOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).ListOperations(ctx, req.(*ListPrivateConnectionOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PrivateConnectionService_ServiceDesc is the grpc.ServiceDesc for PrivateConnectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -162,6 +389,30 @@ var PrivateConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _PrivateConnectionService_List_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _PrivateConnectionService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _PrivateConnectionService_Update_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _PrivateConnectionService_Delete_Handler,
+		},
+		{
+			MethodName: "UpsertStaticRoute",
+			Handler:    _PrivateConnectionService_UpsertStaticRoute_Handler,
+		},
+		{
+			MethodName: "RemoveStaticRoute",
+			Handler:    _PrivateConnectionService_RemoveStaticRoute_Handler,
+		},
+		{
+			MethodName: "ListOperations",
+			Handler:    _PrivateConnectionService_ListOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -8,6 +8,7 @@ package video
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,12 +21,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ChannelService_Get_FullMethodName         = "/yandex.cloud.video.v1.ChannelService/Get"
-	ChannelService_List_FullMethodName        = "/yandex.cloud.video.v1.ChannelService/List"
-	ChannelService_Create_FullMethodName      = "/yandex.cloud.video.v1.ChannelService/Create"
-	ChannelService_Update_FullMethodName      = "/yandex.cloud.video.v1.ChannelService/Update"
-	ChannelService_Delete_FullMethodName      = "/yandex.cloud.video.v1.ChannelService/Delete"
-	ChannelService_BatchDelete_FullMethodName = "/yandex.cloud.video.v1.ChannelService/BatchDelete"
+	ChannelService_Get_FullMethodName                  = "/yandex.cloud.video.v1.ChannelService/Get"
+	ChannelService_List_FullMethodName                 = "/yandex.cloud.video.v1.ChannelService/List"
+	ChannelService_Create_FullMethodName               = "/yandex.cloud.video.v1.ChannelService/Create"
+	ChannelService_Update_FullMethodName               = "/yandex.cloud.video.v1.ChannelService/Update"
+	ChannelService_Delete_FullMethodName               = "/yandex.cloud.video.v1.ChannelService/Delete"
+	ChannelService_BatchDelete_FullMethodName          = "/yandex.cloud.video.v1.ChannelService/BatchDelete"
+	ChannelService_ListAccessBindings_FullMethodName   = "/yandex.cloud.video.v1.ChannelService/ListAccessBindings"
+	ChannelService_SetAccessBindings_FullMethodName    = "/yandex.cloud.video.v1.ChannelService/SetAccessBindings"
+	ChannelService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.video.v1.ChannelService/UpdateAccessBindings"
 )
 
 // ChannelServiceClient is the client API for ChannelService service.
@@ -46,6 +50,12 @@ type ChannelServiceClient interface {
 	Delete(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Batch delete channels.
 	BatchDelete(ctx context.Context, in *BatchDeleteChannelsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists existing access bindings for the specified channel.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the channel.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified channel.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type channelServiceClient struct {
@@ -116,6 +126,36 @@ func (c *channelServiceClient) BatchDelete(ctx context.Context, in *BatchDeleteC
 	return out, nil
 }
 
+func (c *channelServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, ChannelService_ListAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *channelServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ChannelService_SetAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *channelServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ChannelService_UpdateAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChannelServiceServer is the server API for ChannelService service.
 // All implementations should embed UnimplementedChannelServiceServer
 // for forward compatibility.
@@ -134,6 +174,12 @@ type ChannelServiceServer interface {
 	Delete(context.Context, *DeleteChannelRequest) (*operation.Operation, error)
 	// Batch delete channels.
 	BatchDelete(context.Context, *BatchDeleteChannelsRequest) (*operation.Operation, error)
+	// Lists existing access bindings for the specified channel.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the channel.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified channel.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedChannelServiceServer should be embedded to have
@@ -160,6 +206,15 @@ func (UnimplementedChannelServiceServer) Delete(context.Context, *DeleteChannelR
 }
 func (UnimplementedChannelServiceServer) BatchDelete(context.Context, *BatchDeleteChannelsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchDelete not implemented")
+}
+func (UnimplementedChannelServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedChannelServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedChannelServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 func (UnimplementedChannelServiceServer) testEmbeddedByValue() {}
 
@@ -289,6 +344,60 @@ func _ChannelService_BatchDelete_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChannelService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChannelServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChannelService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChannelServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChannelService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChannelServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChannelService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChannelServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChannelService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChannelServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChannelService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChannelServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChannelService_ServiceDesc is the grpc.ServiceDesc for ChannelService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -319,6 +428,18 @@ var ChannelService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchDelete",
 			Handler:    _ChannelService_BatchDelete_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _ChannelService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _ChannelService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _ChannelService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -4,6 +4,7 @@ package cic
 
 import (
 	common "github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1/common"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -31,6 +32,10 @@ func (m *TrunkConnection) SetFolderId(v string) {
 
 func (m *TrunkConnection) SetRegionId(v string) {
 	m.RegionId = v
+}
+
+func (m *TrunkConnection) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
 }
 
 func (m *TrunkConnection) SetSinglePortDirectJoint(v *TrunkConnection_SinglePortDirectJoint) {
@@ -61,6 +66,14 @@ func (m *TrunkConnection) SetCapacity(v TrunkConnection_Capacity) {
 
 func (m *TrunkConnection) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *TrunkConnection) SetStatus(v TrunkConnection_Status) {
+	m.Status = v
+}
+
+func (m *TrunkConnection) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *TrunkConnection_PartnerJointInfo) SetServiceKey(v string) {

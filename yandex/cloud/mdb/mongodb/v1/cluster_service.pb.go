@@ -92,8 +92,7 @@ const (
 	ListClusterLogsRequest_MONGOD   ListClusterLogsRequest_ServiceType = 1
 	ListClusterLogsRequest_MONGOS   ListClusterLogsRequest_ServiceType = 2
 	ListClusterLogsRequest_MONGOCFG ListClusterLogsRequest_ServiceType = 3
-	// MongoDB Enterprise audit logs
-	ListClusterLogsRequest_AUDIT ListClusterLogsRequest_ServiceType = 4
+	ListClusterLogsRequest_AUDIT    ListClusterLogsRequest_ServiceType = 4
 )
 
 // Enum value maps for ListClusterLogsRequest_ServiceType.

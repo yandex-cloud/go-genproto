@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
@@ -1407,6 +1408,8 @@ type GetEpisodePlayerURLRequest struct {
 	// ID of the episode.
 	EpisodeId string               `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	Params    *EpisodePlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
+	// Optional field, used to set custom url expiration duration for episodes with sign_url_access
+	SignedUrlExpirationDuration *durationpb.Duration `protobuf:"bytes,3,opt,name=signed_url_expiration_duration,json=signedUrlExpirationDuration,proto3" json:"signed_url_expiration_duration,omitempty"`
 }
 
 func (x *GetEpisodePlayerURLRequest) Reset() {
@@ -1451,6 +1454,13 @@ func (x *GetEpisodePlayerURLRequest) GetEpisodeId() string {
 func (x *GetEpisodePlayerURLRequest) GetParams() *EpisodePlayerParams {
 	if x != nil {
 		return x.Params
+	}
+	return nil
+}
+
+func (x *GetEpisodePlayerURLRequest) GetSignedUrlExpirationDuration() *durationpb.Duration {
+	if x != nil {
+		return x.SignedUrlExpirationDuration
 	}
 	return nil
 }
@@ -1682,6 +1692,8 @@ var file_yandex_cloud_video_v1_episode_service_proto_rawDesc = []byte{
 	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65,
 	0x6f, 0x2e, 0x76, 0x31, 0x1a, 0x1c, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69,
 	0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x1a, 0x1e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2f, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x1a, 0x20, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x62, 0x75, 0x66, 0x2f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x5f, 0x6d, 0x61, 0x73, 0x6b, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f,
@@ -1888,7 +1900,7 @@ var file_yandex_cloud_video_v1_episode_service_proto_rawDesc = []byte{
 	0x65, 0x72, 0x66, 0x6f, 0x72, 0x6d, 0x45, 0x70, 0x69, 0x73, 0x6f, 0x64, 0x65, 0x41, 0x63, 0x74,
 	0x69, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x1d, 0x0a, 0x0a, 0x65,
 	0x70, 0x69, 0x73, 0x6f, 0x64, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x09, 0x65, 0x70, 0x69, 0x73, 0x6f, 0x64, 0x65, 0x49, 0x64, 0x22, 0x8d, 0x01, 0x0a, 0x1a, 0x47,
+	0x09, 0x65, 0x70, 0x69, 0x73, 0x6f, 0x64, 0x65, 0x49, 0x64, 0x22, 0xed, 0x01, 0x0a, 0x1a, 0x47,
 	0x65, 0x74, 0x45, 0x70, 0x69, 0x73, 0x6f, 0x64, 0x65, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x55,
 	0x52, 0x4c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2b, 0x0a, 0x0a, 0x65, 0x70, 0x69,
 	0x73, 0x6f, 0x64, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0c, 0xe8,
@@ -1897,7 +1909,13 @@ var file_yandex_cloud_video_v1_episode_service_proto_rawDesc = []byte{
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
 	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x45,
 	0x70, 0x69, 0x73, 0x6f, 0x64, 0x65, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61,
-	0x6d, 0x73, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x5d, 0x0a, 0x13, 0x45, 0x70,
+	0x6d, 0x73, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x5e, 0x0a, 0x1e, 0x73, 0x69,
+	0x67, 0x6e, 0x65, 0x64, 0x5f, 0x75, 0x72, 0x6c, 0x5f, 0x65, 0x78, 0x70, 0x69, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x5f, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x1b, 0x73,
+	0x69, 0x67, 0x6e, 0x65, 0x64, 0x55, 0x72, 0x6c, 0x45, 0x78, 0x70, 0x69, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x5d, 0x0a, 0x13, 0x45, 0x70,
 	0x69, 0x73, 0x6f, 0x64, 0x65, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d,
 	0x73, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x75, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
 	0x04, 0x6d, 0x75, 0x74, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x61, 0x75, 0x74, 0x6f, 0x70, 0x6c, 0x61,
@@ -2073,8 +2091,9 @@ var file_yandex_cloud_video_v1_episode_service_proto_goTypes = []any{
 	(*Episode)(nil),                       // 25: yandex.cloud.video.v1.Episode
 	(*timestamppb.Timestamp)(nil),         // 26: google.protobuf.Timestamp
 	(*fieldmaskpb.FieldMask)(nil),         // 27: google.protobuf.FieldMask
-	(*Manifest)(nil),                      // 28: yandex.cloud.video.v1.Manifest
-	(*operation.Operation)(nil),           // 29: yandex.cloud.operation.Operation
+	(*durationpb.Duration)(nil),           // 28: google.protobuf.Duration
+	(*Manifest)(nil),                      // 29: yandex.cloud.video.v1.Manifest
+	(*operation.Operation)(nil),           // 30: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_video_v1_episode_service_proto_depIdxs = []int32{
 	25, // 0: yandex.cloud.video.v1.ListEpisodesResponse.episodes:type_name -> yandex.cloud.video.v1.Episode
@@ -2093,32 +2112,33 @@ var file_yandex_cloud_video_v1_episode_service_proto_depIdxs = []int32{
 	17, // 13: yandex.cloud.video.v1.PerformEpisodeActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishEpisodeAction
 	18, // 14: yandex.cloud.video.v1.PerformEpisodeActionRequest.unpublish:type_name -> yandex.cloud.video.v1.UnpublishEpisodeAction
 	21, // 15: yandex.cloud.video.v1.GetEpisodePlayerURLRequest.params:type_name -> yandex.cloud.video.v1.EpisodePlayerParams
-	28, // 16: yandex.cloud.video.v1.GetEpisodeManifestsResponse.manifests:type_name -> yandex.cloud.video.v1.Manifest
-	0,  // 17: yandex.cloud.video.v1.EpisodeService.Get:input_type -> yandex.cloud.video.v1.GetEpisodeRequest
-	1,  // 18: yandex.cloud.video.v1.EpisodeService.List:input_type -> yandex.cloud.video.v1.ListEpisodesRequest
-	3,  // 19: yandex.cloud.video.v1.EpisodeService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetEpisodesRequest
-	5,  // 20: yandex.cloud.video.v1.EpisodeService.Create:input_type -> yandex.cloud.video.v1.CreateEpisodeRequest
-	10, // 21: yandex.cloud.video.v1.EpisodeService.Update:input_type -> yandex.cloud.video.v1.UpdateEpisodeRequest
-	12, // 22: yandex.cloud.video.v1.EpisodeService.Delete:input_type -> yandex.cloud.video.v1.DeleteEpisodeRequest
-	14, // 23: yandex.cloud.video.v1.EpisodeService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteEpisodesRequest
-	16, // 24: yandex.cloud.video.v1.EpisodeService.PerformAction:input_type -> yandex.cloud.video.v1.PerformEpisodeActionRequest
-	20, // 25: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:input_type -> yandex.cloud.video.v1.GetEpisodePlayerURLRequest
-	23, // 26: yandex.cloud.video.v1.EpisodeService.GetManifests:input_type -> yandex.cloud.video.v1.GetEpisodeManifestsRequest
-	25, // 27: yandex.cloud.video.v1.EpisodeService.Get:output_type -> yandex.cloud.video.v1.Episode
-	2,  // 28: yandex.cloud.video.v1.EpisodeService.List:output_type -> yandex.cloud.video.v1.ListEpisodesResponse
-	4,  // 29: yandex.cloud.video.v1.EpisodeService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetEpisodesResponse
-	29, // 30: yandex.cloud.video.v1.EpisodeService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 31: yandex.cloud.video.v1.EpisodeService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 32: yandex.cloud.video.v1.EpisodeService.Delete:output_type -> yandex.cloud.operation.Operation
-	29, // 33: yandex.cloud.video.v1.EpisodeService.BatchDelete:output_type -> yandex.cloud.operation.Operation
-	29, // 34: yandex.cloud.video.v1.EpisodeService.PerformAction:output_type -> yandex.cloud.operation.Operation
-	22, // 35: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:output_type -> yandex.cloud.video.v1.GetEpisodePlayerURLResponse
-	24, // 36: yandex.cloud.video.v1.EpisodeService.GetManifests:output_type -> yandex.cloud.video.v1.GetEpisodeManifestsResponse
-	27, // [27:37] is the sub-list for method output_type
-	17, // [17:27] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	28, // 16: yandex.cloud.video.v1.GetEpisodePlayerURLRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
+	29, // 17: yandex.cloud.video.v1.GetEpisodeManifestsResponse.manifests:type_name -> yandex.cloud.video.v1.Manifest
+	0,  // 18: yandex.cloud.video.v1.EpisodeService.Get:input_type -> yandex.cloud.video.v1.GetEpisodeRequest
+	1,  // 19: yandex.cloud.video.v1.EpisodeService.List:input_type -> yandex.cloud.video.v1.ListEpisodesRequest
+	3,  // 20: yandex.cloud.video.v1.EpisodeService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetEpisodesRequest
+	5,  // 21: yandex.cloud.video.v1.EpisodeService.Create:input_type -> yandex.cloud.video.v1.CreateEpisodeRequest
+	10, // 22: yandex.cloud.video.v1.EpisodeService.Update:input_type -> yandex.cloud.video.v1.UpdateEpisodeRequest
+	12, // 23: yandex.cloud.video.v1.EpisodeService.Delete:input_type -> yandex.cloud.video.v1.DeleteEpisodeRequest
+	14, // 24: yandex.cloud.video.v1.EpisodeService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteEpisodesRequest
+	16, // 25: yandex.cloud.video.v1.EpisodeService.PerformAction:input_type -> yandex.cloud.video.v1.PerformEpisodeActionRequest
+	20, // 26: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:input_type -> yandex.cloud.video.v1.GetEpisodePlayerURLRequest
+	23, // 27: yandex.cloud.video.v1.EpisodeService.GetManifests:input_type -> yandex.cloud.video.v1.GetEpisodeManifestsRequest
+	25, // 28: yandex.cloud.video.v1.EpisodeService.Get:output_type -> yandex.cloud.video.v1.Episode
+	2,  // 29: yandex.cloud.video.v1.EpisodeService.List:output_type -> yandex.cloud.video.v1.ListEpisodesResponse
+	4,  // 30: yandex.cloud.video.v1.EpisodeService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetEpisodesResponse
+	30, // 31: yandex.cloud.video.v1.EpisodeService.Create:output_type -> yandex.cloud.operation.Operation
+	30, // 32: yandex.cloud.video.v1.EpisodeService.Update:output_type -> yandex.cloud.operation.Operation
+	30, // 33: yandex.cloud.video.v1.EpisodeService.Delete:output_type -> yandex.cloud.operation.Operation
+	30, // 34: yandex.cloud.video.v1.EpisodeService.BatchDelete:output_type -> yandex.cloud.operation.Operation
+	30, // 35: yandex.cloud.video.v1.EpisodeService.PerformAction:output_type -> yandex.cloud.operation.Operation
+	22, // 36: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:output_type -> yandex.cloud.video.v1.GetEpisodePlayerURLResponse
+	24, // 37: yandex.cloud.video.v1.EpisodeService.GetManifests:output_type -> yandex.cloud.video.v1.GetEpisodeManifestsResponse
+	28, // [28:38] is the sub-list for method output_type
+	18, // [18:28] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_episode_service_proto_init() }

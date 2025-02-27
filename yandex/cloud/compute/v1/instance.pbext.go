@@ -123,6 +123,10 @@ func (m *Instance) SetHardwareGeneration(v *HardwareGeneration) {
 	m.HardwareGeneration = v
 }
 
+func (m *Instance) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

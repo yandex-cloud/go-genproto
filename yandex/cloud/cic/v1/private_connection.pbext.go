@@ -3,6 +3,7 @@
 package cic
 
 import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -46,10 +47,14 @@ func (m *PrivateConnection) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *PrivateConnection_StaticRoute) SetPrefix(v string) {
-	m.Prefix = v
+func (m *PrivateConnection) SetStatus(v PrivateConnection_Status) {
+	m.Status = v
 }
 
-func (m *PrivateConnection_StaticRoute) SetNextHop(v []string) {
-	m.NextHop = v
+func (m *PrivateConnection) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *PrivateConnection_StaticRoute) SetPrefix(v string) {
+	m.Prefix = v
 }

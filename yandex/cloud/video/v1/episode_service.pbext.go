@@ -3,6 +3,7 @@
 package video
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -261,6 +262,10 @@ func (m *GetEpisodePlayerURLRequest) SetEpisodeId(v string) {
 
 func (m *GetEpisodePlayerURLRequest) SetParams(v *EpisodePlayerParams) {
 	m.Params = v
+}
+
+func (m *GetEpisodePlayerURLRequest) SetSignedUrlExpirationDuration(v *durationpb.Duration) {
+	m.SignedUrlExpirationDuration = v
 }
 
 func (m *EpisodePlayerParams) SetMute(v bool) {

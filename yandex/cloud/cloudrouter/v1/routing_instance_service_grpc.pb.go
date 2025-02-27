@@ -8,6 +8,7 @@ package cloudrouter
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -23,6 +24,14 @@ const (
 	RoutingInstanceService_GetByVpcNetworkId_FullMethodName           = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/GetByVpcNetworkId"
 	RoutingInstanceService_GetByCicPrivateConnectionId_FullMethodName = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/GetByCicPrivateConnectionId"
 	RoutingInstanceService_List_FullMethodName                        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/List"
+	RoutingInstanceService_Create_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Create"
+	RoutingInstanceService_Update_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Update"
+	RoutingInstanceService_UpsertPrefixes_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpsertPrefixes"
+	RoutingInstanceService_RemovePrefixes_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/RemovePrefixes"
+	RoutingInstanceService_AddPrivateConnection_FullMethodName        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/AddPrivateConnection"
+	RoutingInstanceService_RemovePrivateConnection_FullMethodName     = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/RemovePrivateConnection"
+	RoutingInstanceService_Delete_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Delete"
+	RoutingInstanceService_ListOperations_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/ListOperations"
 )
 
 // RoutingInstanceServiceClient is the client API for RoutingInstanceService service.
@@ -45,6 +54,29 @@ type RoutingInstanceServiceClient interface {
 	GetByCicPrivateConnectionId(ctx context.Context, in *GetRoutingInstanceByCicPrivateConnectionIdRequest, opts ...grpc.CallOption) (*RoutingInstance, error)
 	// Retrieves the list of RoutingInstance resources in the specified folder.
 	List(ctx context.Context, in *ListRoutingInstancesRequest, opts ...grpc.CallOption) (*ListRoutingInstancesResponse, error)
+	// Creates a RoutingInstance resource in the specified folder using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Create(ctx context.Context, in *CreateRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates a RoutingInstance resource using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Update(ctx context.Context, in *UpdateRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Upserts specified prefixes to a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpsertPrefixes(ctx context.Context, in *UpsertPrefixesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes specified prefixes from a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	RemovePrefixes(ctx context.Context, in *RemovePrefixesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Adds specified PrivateConnection to a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	AddPrivateConnection(ctx context.Context, in *AddPrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes specified PrivateConnection from a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	RemovePrivateConnection(ctx context.Context, in *RemovePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Delete(ctx context.Context, in *DeleteRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified RoutingInstance.
+	ListOperations(ctx context.Context, in *ListRoutingInstanceOperationsRequest, opts ...grpc.CallOption) (*ListRoutingInstanceOperationsResponse, error)
 }
 
 type routingInstanceServiceClient struct {
@@ -95,6 +127,86 @@ func (c *routingInstanceServiceClient) List(ctx context.Context, in *ListRouting
 	return out, nil
 }
 
+func (c *routingInstanceServiceClient) Create(ctx context.Context, in *CreateRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) Update(ctx context.Context, in *UpdateRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) UpsertPrefixes(ctx context.Context, in *UpsertPrefixesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_UpsertPrefixes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) RemovePrefixes(ctx context.Context, in *RemovePrefixesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_RemovePrefixes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) AddPrivateConnection(ctx context.Context, in *AddPrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_AddPrivateConnection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) RemovePrivateConnection(ctx context.Context, in *RemovePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_RemovePrivateConnection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) Delete(ctx context.Context, in *DeleteRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) ListOperations(ctx context.Context, in *ListRoutingInstanceOperationsRequest, opts ...grpc.CallOption) (*ListRoutingInstanceOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRoutingInstanceOperationsResponse)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RoutingInstanceServiceServer is the server API for RoutingInstanceService service.
 // All implementations should embed UnimplementedRoutingInstanceServiceServer
 // for forward compatibility.
@@ -115,6 +227,29 @@ type RoutingInstanceServiceServer interface {
 	GetByCicPrivateConnectionId(context.Context, *GetRoutingInstanceByCicPrivateConnectionIdRequest) (*RoutingInstance, error)
 	// Retrieves the list of RoutingInstance resources in the specified folder.
 	List(context.Context, *ListRoutingInstancesRequest) (*ListRoutingInstancesResponse, error)
+	// Creates a RoutingInstance resource in the specified folder using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Create(context.Context, *CreateRoutingInstanceRequest) (*operation.Operation, error)
+	// Updates a RoutingInstance resource using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Update(context.Context, *UpdateRoutingInstanceRequest) (*operation.Operation, error)
+	// Upserts specified prefixes to a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpsertPrefixes(context.Context, *UpsertPrefixesRequest) (*operation.Operation, error)
+	// Removes specified prefixes from a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	RemovePrefixes(context.Context, *RemovePrefixesRequest) (*operation.Operation, error)
+	// Adds specified PrivateConnection to a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	AddPrivateConnection(context.Context, *AddPrivateConnectionRequest) (*operation.Operation, error)
+	// Removes specified PrivateConnection from a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	RemovePrivateConnection(context.Context, *RemovePrivateConnectionRequest) (*operation.Operation, error)
+	// Deletes a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	Delete(context.Context, *DeleteRoutingInstanceRequest) (*operation.Operation, error)
+	// Lists operations for the specified RoutingInstance.
+	ListOperations(context.Context, *ListRoutingInstanceOperationsRequest) (*ListRoutingInstanceOperationsResponse, error)
 }
 
 // UnimplementedRoutingInstanceServiceServer should be embedded to have
@@ -135,6 +270,30 @@ func (UnimplementedRoutingInstanceServiceServer) GetByCicPrivateConnectionId(con
 }
 func (UnimplementedRoutingInstanceServiceServer) List(context.Context, *ListRoutingInstancesRequest) (*ListRoutingInstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) Create(context.Context, *CreateRoutingInstanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) Update(context.Context, *UpdateRoutingInstanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) UpsertPrefixes(context.Context, *UpsertPrefixesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertPrefixes not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) RemovePrefixes(context.Context, *RemovePrefixesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePrefixes not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) AddPrivateConnection(context.Context, *AddPrivateConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPrivateConnection not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) RemovePrivateConnection(context.Context, *RemovePrivateConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePrivateConnection not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) Delete(context.Context, *DeleteRoutingInstanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) ListOperations(context.Context, *ListRoutingInstanceOperationsRequest) (*ListRoutingInstanceOperationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedRoutingInstanceServiceServer) testEmbeddedByValue() {}
 
@@ -228,6 +387,150 @@ func _RoutingInstanceService_List_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RoutingInstanceService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRoutingInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).Create(ctx, req.(*CreateRoutingInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRoutingInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).Update(ctx, req.(*UpdateRoutingInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_UpsertPrefixes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertPrefixesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).UpsertPrefixes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_UpsertPrefixes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).UpsertPrefixes(ctx, req.(*UpsertPrefixesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_RemovePrefixes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePrefixesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).RemovePrefixes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_RemovePrefixes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).RemovePrefixes(ctx, req.(*RemovePrefixesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_AddPrivateConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPrivateConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).AddPrivateConnection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_AddPrivateConnection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).AddPrivateConnection(ctx, req.(*AddPrivateConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_RemovePrivateConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePrivateConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).RemovePrivateConnection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_RemovePrivateConnection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).RemovePrivateConnection(ctx, req.(*RemovePrivateConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRoutingInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).Delete(ctx, req.(*DeleteRoutingInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRoutingInstanceOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).ListOperations(ctx, req.(*ListRoutingInstanceOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RoutingInstanceService_ServiceDesc is the grpc.ServiceDesc for RoutingInstanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -250,6 +553,38 @@ var RoutingInstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _RoutingInstanceService_List_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _RoutingInstanceService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _RoutingInstanceService_Update_Handler,
+		},
+		{
+			MethodName: "UpsertPrefixes",
+			Handler:    _RoutingInstanceService_UpsertPrefixes_Handler,
+		},
+		{
+			MethodName: "RemovePrefixes",
+			Handler:    _RoutingInstanceService_RemovePrefixes_Handler,
+		},
+		{
+			MethodName: "AddPrivateConnection",
+			Handler:    _RoutingInstanceService_AddPrivateConnection_Handler,
+		},
+		{
+			MethodName: "RemovePrivateConnection",
+			Handler:    _RoutingInstanceService_RemovePrivateConnection_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _RoutingInstanceService_Delete_Handler,
+		},
+		{
+			MethodName: "ListOperations",
+			Handler:    _RoutingInstanceService_ListOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

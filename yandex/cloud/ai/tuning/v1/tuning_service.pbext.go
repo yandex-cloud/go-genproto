@@ -624,6 +624,18 @@ func (m *GetOptionsResponse) SetTextClassificationMulticlass(v *TextClassificati
 	}
 }
 
+func (m *GetOptionsResponse) SetTextEmbeddingPairParams(v *TextEmbeddingPairParams) {
+	m.TuningParams = &GetOptionsResponse_TextEmbeddingPairParams{
+		TextEmbeddingPairParams: v,
+	}
+}
+
+func (m *GetOptionsResponse) SetTextEmbeddingTripletParams(v *TextEmbeddingTripletParams) {
+	m.TuningParams = &GetOptionsResponse_TextEmbeddingTripletParams{
+		TextEmbeddingTripletParams: v,
+	}
+}
+
 func (m *ListErrorsRequest) SetTuningTaskId(v string) {
 	m.TuningTaskId = v
 }

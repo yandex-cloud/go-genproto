@@ -2,6 +2,10 @@
 
 package cloudrouter
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *RoutingInstance) SetId(v string) {
 	m.Id = v
 }
@@ -32,6 +36,10 @@ func (m *RoutingInstance) SetCicPrivateConnectionInfo(v []*RoutingInstance_CicPr
 
 func (m *RoutingInstance) SetStatus(v RoutingInstance_Status) {
 	m.Status = v
+}
+
+func (m *RoutingInstance) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
 }
 
 func (m *RoutingInstance) SetLabels(v map[string]string) {

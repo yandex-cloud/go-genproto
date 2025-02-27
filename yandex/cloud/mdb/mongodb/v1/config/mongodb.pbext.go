@@ -150,6 +150,14 @@ func (m *MongoCfgConfig) SetNet(v *MongoCfgConfig_Network) {
 	m.Net = v
 }
 
+func (m *MongoCfgConfig) SetSetParameter(v *MongoCfgConfig_SetParameter) {
+	m.SetParameter = v
+}
+
+func (m *MongoCfgConfig) SetAuditLog(v *MongoCfgConfig_AuditLog) {
+	m.AuditLog = v
+}
+
 func (m *MongoCfgConfig_Storage) SetWiredTiger(v *MongoCfgConfig_Storage_WiredTiger) {
 	m.WiredTiger = v
 }
@@ -158,8 +166,16 @@ func (m *MongoCfgConfig_Storage_WiredTiger) SetEngineConfig(v *MongoCfgConfig_St
 	m.EngineConfig = v
 }
 
+func (m *MongoCfgConfig_Storage_WiredTiger) SetIndexConfig(v *MongoCfgConfig_Storage_WiredTiger_IndexConfig) {
+	m.IndexConfig = v
+}
+
 func (m *MongoCfgConfig_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrapperspb.DoubleValue) {
 	m.CacheSizeGb = v
+}
+
+func (m *MongoCfgConfig_Storage_WiredTiger_IndexConfig) SetPrefixCompression(v *wrapperspb.BoolValue) {
+	m.PrefixCompression = v
 }
 
 func (m *MongoCfgConfig_OperationProfiling) SetMode(v MongoCfgConfig_OperationProfiling_Mode) {
@@ -174,8 +190,36 @@ func (m *MongoCfgConfig_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Va
 	m.MaxIncomingConnections = v
 }
 
+func (m *MongoCfgConfig_Network) SetCompression(v *MongoCfgConfig_Network_Compression) {
+	m.Compression = v
+}
+
+func (m *MongoCfgConfig_Network_Compression) SetCompressors(v []MongoCfgConfig_Network_Compression_Compressor) {
+	m.Compressors = v
+}
+
+func (m *MongoCfgConfig_SetParameter) SetEnableFlowControl(v *wrapperspb.BoolValue) {
+	m.EnableFlowControl = v
+}
+
+func (m *MongoCfgConfig_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
+	m.AuditAuthorizationSuccess = v
+}
+
+func (m *MongoCfgConfig_AuditLog) SetFilter(v string) {
+	m.Filter = v
+}
+
 func (m *MongosConfig) SetNet(v *MongosConfig_Network) {
 	m.Net = v
+}
+
+func (m *MongosConfig) SetSetParameter(v *MongosConfig_SetParameter) {
+	m.SetParameter = v
+}
+
+func (m *MongosConfig) SetAuditLog(v *MongosConfig_AuditLog) {
+	m.AuditLog = v
 }
 
 func (m *MongosConfig_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
@@ -188,6 +232,14 @@ func (m *MongosConfig_Network) SetCompression(v *MongosConfig_Network_Compressio
 
 func (m *MongosConfig_Network_Compression) SetCompressors(v []MongosConfig_Network_Compression_Compressor) {
 	m.Compressors = v
+}
+
+func (m *MongosConfig_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
+	m.AuditAuthorizationSuccess = v
+}
+
+func (m *MongosConfig_AuditLog) SetFilter(v string) {
+	m.Filter = v
 }
 
 func (m *MongodConfigSet) SetEffectiveConfig(v *MongodConfig) {
