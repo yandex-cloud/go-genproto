@@ -85,3 +85,7 @@ func (m *DeviceMonitoringData) SetLastSubActivityTime(v *timestamppb.Timestamp) 
 func (m *DeviceMonitoringData) SetLastOnlineTime(v *timestamppb.Timestamp) {
 	m.LastOnlineTime = v
 }
+
+func (m *DeviceMonitoringData) SetLastDisconnectTime(v *timestamppb.Timestamp) {
+	m.LastDisconnectTime = v
+}

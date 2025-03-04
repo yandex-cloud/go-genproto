@@ -33,3 +33,35 @@ func (m *Channel) SetUpdatedAt(v *timestamppb.Timestamp) {
 func (m *Channel) SetLabels(v map[string]string) {
 	m.Labels = v
 }
+
+func (m *Channel) SetSettings(v *ChannelSettings) {
+	m.Settings = v
+}
+
+func (m *ChannelSettings) SetAdvertisement(v *AdvertisementSettings) {
+	m.Advertisement = v
+}
+
+type AdvertisementSettings_Provider = isAdvertisementSettings_Provider
+
+func (m *AdvertisementSettings) SetProvider(v AdvertisementSettings_Provider) {
+	m.Provider = v
+}
+
+func (m *AdvertisementSettings) SetYandexDirect(v *AdvertisementSettings_YandexDirect) {
+	m.Provider = &AdvertisementSettings_YandexDirect_{
+		YandexDirect: v,
+	}
+}
+
+func (m *AdvertisementSettings_YandexDirect) SetEnable(v bool) {
+	m.Enable = v
+}
+
+func (m *AdvertisementSettings_YandexDirect) SetPageId(v int64) {
+	m.PageId = v
+}
+
+func (m *AdvertisementSettings_YandexDirect) SetCategory(v int64) {
+	m.Category = v
+}

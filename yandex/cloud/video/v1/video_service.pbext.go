@@ -5,6 +5,7 @@ package video
 import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetVideoRequest) SetVideoId(v string) {
@@ -83,6 +84,10 @@ func (m *CreateVideoRequest) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
 }
 
+func (m *CreateVideoRequest) SetEnableAd(v *wrapperspb.BoolValue) {
+	m.EnableAd = v
+}
+
 func (m *CreateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -151,6 +156,10 @@ func (m *UpdateVideoRequest) SetThumbnailId(v string) {
 
 func (m *UpdateVideoRequest) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
+}
+
+func (m *UpdateVideoRequest) SetEnableAd(v *wrapperspb.BoolValue) {
+	m.EnableAd = v
 }
 
 func (m *UpdateVideoRequest) SetLabels(v map[string]string) {

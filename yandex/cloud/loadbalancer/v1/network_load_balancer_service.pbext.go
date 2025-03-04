@@ -71,6 +71,10 @@ func (m *CreateNetworkLoadBalancerRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateNetworkLoadBalancerRequest) SetAllowZonalShift(v bool) {
+	m.AllowZonalShift = v
+}
+
 func (m *CreateNetworkLoadBalancerMetadata) SetNetworkLoadBalancerId(v string) {
 	m.NetworkLoadBalancerId = v
 }
@@ -105,6 +109,10 @@ func (m *UpdateNetworkLoadBalancerRequest) SetAttachedTargetGroups(v []*Attached
 
 func (m *UpdateNetworkLoadBalancerRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateNetworkLoadBalancerRequest) SetAllowZonalShift(v bool) {
+	m.AllowZonalShift = v
 }
 
 func (m *UpdateNetworkLoadBalancerMetadata) SetNetworkLoadBalancerId(v string) {

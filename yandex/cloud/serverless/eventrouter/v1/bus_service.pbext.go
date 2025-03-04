@@ -55,6 +55,14 @@ func (m *CreateBusRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateBusRequest) SetLoggingEnabled(v bool) {
+	m.LoggingEnabled = v
+}
+
+func (m *CreateBusRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
+}
+
 func (m *CreateBusMetadata) SetBusId(v string) {
 	m.BusId = v
 }
@@ -85,6 +93,14 @@ func (m *UpdateBusRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateBusRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateBusRequest) SetLoggingEnabled(v bool) {
+	m.LoggingEnabled = v
+}
+
+func (m *UpdateBusRequest) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
 }
 
 func (m *UpdateBusMetadata) SetBusId(v string) {

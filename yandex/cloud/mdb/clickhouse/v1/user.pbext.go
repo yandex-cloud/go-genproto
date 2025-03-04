@@ -478,6 +478,14 @@ func (m *UserSettings) SetMaxHttpGetRedirects(v *wrapperspb.Int64Value) {
 	m.MaxHttpGetRedirects = v
 }
 
+func (m *UserSettings) SetHttpMaxFieldNameSize(v *wrapperspb.Int64Value) {
+	m.HttpMaxFieldNameSize = v
+}
+
+func (m *UserSettings) SetHttpMaxFieldValueSize(v *wrapperspb.Int64Value) {
+	m.HttpMaxFieldValueSize = v
+}
+
 func (m *UserSettings) SetJoinedSubqueryRequiresAlias(v *wrapperspb.BoolValue) {
 	m.JoinedSubqueryRequiresAlias = v
 }
@@ -534,8 +542,8 @@ func (m *UserSettings) SetAsyncInsertBusyTimeout(v *wrapperspb.Int64Value) {
 	m.AsyncInsertBusyTimeout = v
 }
 
-func (m *UserSettings) SetAsyncInsertStaleTimeout(v *wrapperspb.Int64Value) {
-	m.AsyncInsertStaleTimeout = v
+func (m *UserSettings) SetAsyncInsertUseAdaptiveBusyTimeout(v *wrapperspb.BoolValue) {
+	m.AsyncInsertUseAdaptiveBusyTimeout = v
 }
 
 func (m *UserSettings) SetMemoryProfilerStep(v *wrapperspb.Int64Value) {
@@ -556,6 +564,14 @@ func (m *UserSettings) SetInputFormatParallelParsing(v *wrapperspb.BoolValue) {
 
 func (m *UserSettings) SetInputFormatImportNestedJson(v *wrapperspb.BoolValue) {
 	m.InputFormatImportNestedJson = v
+}
+
+func (m *UserSettings) SetFormatAvroSchemaRegistryUrl(v string) {
+	m.FormatAvroSchemaRegistryUrl = v
+}
+
+func (m *UserSettings) SetDataTypeDefaultNullable(v *wrapperspb.BoolValue) {
+	m.DataTypeDefaultNullable = v
 }
 
 func (m *UserSettings) SetLocalFilesystemReadMethod(v UserSettings_LocalFilesystemReadMethod) {
@@ -602,6 +618,62 @@ func (m *UserSettings) SetLogQueryThreads(v *wrapperspb.BoolValue) {
 	m.LogQueryThreads = v
 }
 
+func (m *UserSettings) SetLogQueryViews(v *wrapperspb.BoolValue) {
+	m.LogQueryViews = v
+}
+
+func (m *UserSettings) SetLogQueriesProbability(v *wrapperspb.DoubleValue) {
+	m.LogQueriesProbability = v
+}
+
+func (m *UserSettings) SetLogProcessorsProfiles(v *wrapperspb.BoolValue) {
+	m.LogProcessorsProfiles = v
+}
+
+func (m *UserSettings) SetUseQueryCache(v *wrapperspb.BoolValue) {
+	m.UseQueryCache = v
+}
+
+func (m *UserSettings) SetEnableReadsFromQueryCache(v *wrapperspb.BoolValue) {
+	m.EnableReadsFromQueryCache = v
+}
+
+func (m *UserSettings) SetEnableWritesToQueryCache(v *wrapperspb.BoolValue) {
+	m.EnableWritesToQueryCache = v
+}
+
+func (m *UserSettings) SetQueryCacheMinQueryRuns(v *wrapperspb.Int64Value) {
+	m.QueryCacheMinQueryRuns = v
+}
+
+func (m *UserSettings) SetQueryCacheMinQueryDuration(v *wrapperspb.Int64Value) {
+	m.QueryCacheMinQueryDuration = v
+}
+
+func (m *UserSettings) SetQueryCacheTtl(v *wrapperspb.Int64Value) {
+	m.QueryCacheTtl = v
+}
+
+func (m *UserSettings) SetQueryCacheMaxEntries(v *wrapperspb.Int64Value) {
+	m.QueryCacheMaxEntries = v
+}
+
+func (m *UserSettings) SetQueryCacheMaxSizeInBytes(v *wrapperspb.Int64Value) {
+	m.QueryCacheMaxSizeInBytes = v
+}
+
+func (m *UserSettings) SetQueryCacheTag(v string) {
+	m.QueryCacheTag = v
+}
+
+func (m *UserSettings) SetQueryCacheShareBetweenUsers(v *wrapperspb.BoolValue) {
+	m.QueryCacheShareBetweenUsers = v
+}
+
+func (m *UserSettings) SetQueryCacheNondeterministicFunctionHandling(v UserSettings_QueryCacheNondeterministicFunctionHandling) {
+	m.QueryCacheNondeterministicFunctionHandling = v
+}
+
 func (m *UserSettings) SetMaxInsertThreads(v *wrapperspb.Int64Value) {
 	m.MaxInsertThreads = v
 }
@@ -626,12 +698,24 @@ func (m *UserSettings) SetPreferLocalhostReplica(v *wrapperspb.BoolValue) {
 	m.PreferLocalhostReplica = v
 }
 
+func (m *UserSettings) SetDoNotMergeAcrossPartitionsSelectFinal(v *wrapperspb.BoolValue) {
+	m.DoNotMergeAcrossPartitionsSelectFinal = v
+}
+
+func (m *UserSettings) SetIgnoreMaterializedViewsWithDroppedTargetTable(v *wrapperspb.BoolValue) {
+	m.IgnoreMaterializedViewsWithDroppedTargetTable = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }
 
 func (m *UserSettings) SetMinCountToCompile(v *wrapperspb.Int64Value) {
 	m.MinCountToCompile = v
+}
+
+func (m *UserSettings) SetAsyncInsertStaleTimeout(v *wrapperspb.Int64Value) {
+	m.AsyncInsertStaleTimeout = v
 }
 
 func (m *UserQuota) SetIntervalDuration(v *wrapperspb.Int64Value) {

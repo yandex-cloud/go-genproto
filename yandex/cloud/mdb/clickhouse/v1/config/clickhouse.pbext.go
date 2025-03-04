@@ -222,6 +222,18 @@ func (m *ClickhouseConfig) SetAsynchronousInsertLogRetentionTime(v *wrapperspb.I
 	m.AsynchronousInsertLogRetentionTime = v
 }
 
+func (m *ClickhouseConfig) SetProcessorsProfileLogEnabled(v *wrapperspb.BoolValue) {
+	m.ProcessorsProfileLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetProcessorsProfileLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.ProcessorsProfileLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetProcessorsProfileLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.ProcessorsProfileLogRetentionTime = v
+}
+
 func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
 	m.BackgroundPoolSize = v
 }
@@ -396,6 +408,18 @@ func (m *ClickhouseConfig_MergeTree) SetMaxMergeSelectingSleepMs(v *wrapperspb.I
 
 func (m *ClickhouseConfig_MergeTree) SetMaxCleanupDelayPeriod(v *wrapperspb.Int64Value) {
 	m.MaxCleanupDelayPeriod = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetDeduplicateMergeProjectionMode(v ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode) {
+	m.DeduplicateMergeProjectionMode = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetLightweightMutationProjectionMode(v ClickhouseConfig_MergeTree_LightweightMutationProjectionMode) {
+	m.LightweightMutationProjectionMode = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaterializeTtlRecalculateOnly(v *wrapperspb.BoolValue) {
+	m.MaterializeTtlRecalculateOnly = v
 }
 
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
@@ -768,8 +792,36 @@ func (m *ClickhouseConfig_ExternalDictionary_Layout) SetSizeInCells(v int64) {
 	m.SizeInCells = v
 }
 
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAllowReadExpiredKeys(v *wrapperspb.BoolValue) {
+	m.AllowReadExpiredKeys = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxUpdateQueueSize(v int64) {
+	m.MaxUpdateQueueSize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetUpdateQueuePushTimeoutMilliseconds(v int64) {
+	m.UpdateQueuePushTimeoutMilliseconds = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetQueryWaitTimeoutMilliseconds(v int64) {
+	m.QueryWaitTimeoutMilliseconds = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxThreadsForUpdates(v int64) {
+	m.MaxThreadsForUpdates = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetInitialArraySize(v int64) {
+	m.InitialArraySize = v
+}
+
 func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxArraySize(v int64) {
 	m.MaxArraySize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAccessToKeyFromAttributes(v *wrapperspb.BoolValue) {
+	m.AccessToKeyFromAttributes = v
 }
 
 func (m *ClickhouseConfig_ExternalDictionary_Range) SetMin(v int64) {

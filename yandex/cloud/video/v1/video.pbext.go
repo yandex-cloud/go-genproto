@@ -5,6 +5,7 @@ package video
 import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 type Video_Source = isVideo_Source
@@ -53,6 +54,10 @@ func (m *Video) SetVisibilityStatus(v Video_VisibilityStatus) {
 
 func (m *Video) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
+}
+
+func (m *Video) SetEnableAd(v *wrapperspb.BoolValue) {
+	m.EnableAd = v
 }
 
 func (m *Video) SetSubtitleIds(v []string) {

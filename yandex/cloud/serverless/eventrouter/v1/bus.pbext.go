@@ -3,8 +3,35 @@
 package eventrouter
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
+
+type LogOptions_Destination = isLogOptions_Destination
+
+func (m *LogOptions) SetDestination(v LogOptions_Destination) {
+	m.Destination = v
+}
+
+func (m *LogOptions) SetLogGroupId(v string) {
+	m.Destination = &LogOptions_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *LogOptions) SetFolderId(v string) {
+	m.Destination = &LogOptions_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
+	m.MinLevel = v
+}
+
+func (m *LogOptions) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
 
 func (m *Bus) SetId(v string) {
 	m.Id = v
@@ -40,4 +67,12 @@ func (m *Bus) SetDeletionProtection(v bool) {
 
 func (m *Bus) SetStatus(v Bus_Status) {
 	m.Status = v
+}
+
+func (m *Bus) SetLoggingEnabled(v bool) {
+	m.LoggingEnabled = v
+}
+
+func (m *Bus) SetLogOptions(v *LogOptions) {
+	m.LogOptions = v
 }

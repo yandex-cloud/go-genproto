@@ -101,6 +101,10 @@ func (m *CreateTrunkConnectionRequest_LagDirectJoint) SetTransceiverType(v commo
 	m.TransceiverType = v
 }
 
+func (m *CreateTrunkConnectionRequest_LagDirectJoint) SetLagAllocationSettings(v *common.LagAllocationSettingsRequest) {
+	m.LagAllocationSettings = v
+}
+
 func (m *CreateTrunkConnectionRequest_PartnerJoint) SetPartnerId(v *wrapperspb.StringValue) {
 	m.PartnerId = v
 }

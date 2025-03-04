@@ -14,12 +14,6 @@ func (m *LagAllocationSettingsRequest) SetLagSize(v int64) {
 	}
 }
 
-func (m *LagAllocationSettingsRequest) SetLagInfo(v *LagInfo) {
-	m.Lag = &LagAllocationSettingsRequest_LagInfo{
-		LagInfo: v,
-	}
-}
-
 func (m *LagAllocationSettings) SetLagInfo(v *LagInfo) {
 	m.LagInfo = v
 }

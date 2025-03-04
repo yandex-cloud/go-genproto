@@ -58,6 +58,10 @@ func (m *NetworkLoadBalancer) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *NetworkLoadBalancer) SetAllowZonalShift(v bool) {
+	m.AllowZonalShift = v
+}
+
 func (m *AttachedTargetGroup) SetTargetGroupId(v string) {
 	m.TargetGroupId = v
 }
