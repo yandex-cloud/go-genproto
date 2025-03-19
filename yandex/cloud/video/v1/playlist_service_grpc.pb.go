@@ -35,7 +35,7 @@ const (
 //
 // Playlist management service.
 type PlaylistServiceClient interface {
-	// Returns the specific playlist.
+	// Get the specific playlist.
 	Get(ctx context.Context, in *GetPlaylistRequest, opts ...grpc.CallOption) (*Playlist, error)
 	// List playlists for a channel.
 	List(ctx context.Context, in *ListPlaylistsRequest, opts ...grpc.CallOption) (*ListPlaylistsResponse, error)
@@ -45,9 +45,9 @@ type PlaylistServiceClient interface {
 	Update(ctx context.Context, in *UpdatePlaylistRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete playlist.
 	Delete(ctx context.Context, in *DeletePlaylistRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete playlist.
+	// Batch delete playlists.
 	BatchDelete(ctx context.Context, in *BatchDeletePlaylistsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns player's url.
+	// Get player url.
 	GetPlayerURL(ctx context.Context, in *GetPlaylistPlayerURLRequest, opts ...grpc.CallOption) (*GetPlaylistPlayerURLResponse, error)
 }
 
@@ -135,7 +135,7 @@ func (c *playlistServiceClient) GetPlayerURL(ctx context.Context, in *GetPlaylis
 //
 // Playlist management service.
 type PlaylistServiceServer interface {
-	// Returns the specific playlist.
+	// Get the specific playlist.
 	Get(context.Context, *GetPlaylistRequest) (*Playlist, error)
 	// List playlists for a channel.
 	List(context.Context, *ListPlaylistsRequest) (*ListPlaylistsResponse, error)
@@ -145,9 +145,9 @@ type PlaylistServiceServer interface {
 	Update(context.Context, *UpdatePlaylistRequest) (*operation.Operation, error)
 	// Delete playlist.
 	Delete(context.Context, *DeletePlaylistRequest) (*operation.Operation, error)
-	// Batch delete playlist.
+	// Batch delete playlists.
 	BatchDelete(context.Context, *BatchDeletePlaylistsRequest) (*operation.Operation, error)
-	// Returns player's url.
+	// Get player url.
 	GetPlayerURL(context.Context, *GetPlaylistPlayerURLRequest) (*GetPlaylistPlayerURLResponse, error)
 }
 

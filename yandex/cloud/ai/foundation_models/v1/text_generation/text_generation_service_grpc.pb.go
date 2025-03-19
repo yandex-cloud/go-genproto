@@ -235,6 +235,114 @@ var TextGenerationAsyncService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	TextGenerationBatchService_Completion_FullMethodName = "/yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService/Completion"
+)
+
+// TextGenerationBatchServiceClient is the client API for TextGenerationBatchService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Service for text generation.
+type TextGenerationBatchServiceClient interface {
+	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// Note: Not implemented yet
+	Completion(ctx context.Context, in *BatchCompletionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+}
+
+type textGenerationBatchServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTextGenerationBatchServiceClient(cc grpc.ClientConnInterface) TextGenerationBatchServiceClient {
+	return &textGenerationBatchServiceClient{cc}
+}
+
+func (c *textGenerationBatchServiceClient) Completion(ctx context.Context, in *BatchCompletionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, TextGenerationBatchService_Completion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TextGenerationBatchServiceServer is the server API for TextGenerationBatchService service.
+// All implementations should embed UnimplementedTextGenerationBatchServiceServer
+// for forward compatibility.
+//
+// Service for text generation.
+type TextGenerationBatchServiceServer interface {
+	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// Note: Not implemented yet
+	Completion(context.Context, *BatchCompletionRequest) (*operation.Operation, error)
+}
+
+// UnimplementedTextGenerationBatchServiceServer should be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedTextGenerationBatchServiceServer struct{}
+
+func (UnimplementedTextGenerationBatchServiceServer) Completion(context.Context, *BatchCompletionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Completion not implemented")
+}
+func (UnimplementedTextGenerationBatchServiceServer) testEmbeddedByValue() {}
+
+// UnsafeTextGenerationBatchServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TextGenerationBatchServiceServer will
+// result in compilation errors.
+type UnsafeTextGenerationBatchServiceServer interface {
+	mustEmbedUnimplementedTextGenerationBatchServiceServer()
+}
+
+func RegisterTextGenerationBatchServiceServer(s grpc.ServiceRegistrar, srv TextGenerationBatchServiceServer) {
+	// If the following call pancis, it indicates UnimplementedTextGenerationBatchServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&TextGenerationBatchService_ServiceDesc, srv)
+}
+
+func _TextGenerationBatchService_Completion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchCompletionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TextGenerationBatchServiceServer).Completion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TextGenerationBatchService_Completion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TextGenerationBatchServiceServer).Completion(ctx, req.(*BatchCompletionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TextGenerationBatchService_ServiceDesc is the grpc.ServiceDesc for TextGenerationBatchService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TextGenerationBatchService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService",
+	HandlerType: (*TextGenerationBatchServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Completion",
+			Handler:    _TextGenerationBatchService_Completion_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "yandex/cloud/ai/foundation_models/v1/text_generation/text_generation_service.proto",
+}
+
+const (
 	TokenizerService_Tokenize_FullMethodName           = "/yandex.cloud.ai.foundation_models.v1.TokenizerService/Tokenize"
 	TokenizerService_TokenizeCompletion_FullMethodName = "/yandex.cloud.ai.foundation_models.v1.TokenizerService/TokenizeCompletion"
 )

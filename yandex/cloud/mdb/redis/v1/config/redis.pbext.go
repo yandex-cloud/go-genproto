@@ -94,6 +94,14 @@ func (m *RedisConfig) SetZsetMaxListpackEntries(v *wrapperspb.Int64Value) {
 	m.ZsetMaxListpackEntries = v
 }
 
+func (m *RedisConfig) SetAofMaxSizePercent(v *wrapperspb.Int64Value) {
+	m.AofMaxSizePercent = v
+}
+
+func (m *RedisConfig) SetActivedefrag(v *wrapperspb.BoolValue) {
+	m.Activedefrag = v
+}
+
 func (m *RedisConfig_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
 	m.HardLimit = v
 }

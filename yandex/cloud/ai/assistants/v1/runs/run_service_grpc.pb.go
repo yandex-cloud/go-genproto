@@ -25,6 +25,7 @@ const (
 	RunService_Get_FullMethodName             = "/yandex.cloud.ai.assistants.v1.runs.RunService/Get"
 	RunService_GetLastByThread_FullMethodName = "/yandex.cloud.ai.assistants.v1.runs.RunService/GetLastByThread"
 	RunService_List_FullMethodName            = "/yandex.cloud.ai.assistants.v1.runs.RunService/List"
+	RunService_Submit_FullMethodName          = "/yandex.cloud.ai.assistants.v1.runs.RunService/Submit"
 )
 
 // RunServiceClient is the client API for RunService service.
@@ -49,6 +50,9 @@ type RunServiceClient interface {
 	GetLastByThread(ctx context.Context, in *GetLastRunByThreadRequest, opts ...grpc.CallOption) (*Run, error)
 	// List runs in a specific folder.
 	List(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
+	// Submit event to run
+	// For example, submit function call results when the run is waiting for user input.
+	Submit(ctx context.Context, in *SubmitToRunRequest, opts ...grpc.CallOption) (*SubmitToRunResponse, error)
 }
 
 type runServiceClient struct {
@@ -131,6 +135,16 @@ func (c *runServiceClient) List(ctx context.Context, in *ListRunsRequest, opts .
 	return out, nil
 }
 
+func (c *runServiceClient) Submit(ctx context.Context, in *SubmitToRunRequest, opts ...grpc.CallOption) (*SubmitToRunResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SubmitToRunResponse)
+	err := c.cc.Invoke(ctx, RunService_Submit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RunServiceServer is the server API for RunService service.
 // All implementations should embed UnimplementedRunServiceServer
 // for forward compatibility.
@@ -153,6 +167,9 @@ type RunServiceServer interface {
 	GetLastByThread(context.Context, *GetLastRunByThreadRequest) (*Run, error)
 	// List runs in a specific folder.
 	List(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
+	// Submit event to run
+	// For example, submit function call results when the run is waiting for user input.
+	Submit(context.Context, *SubmitToRunRequest) (*SubmitToRunResponse, error)
 }
 
 // UnimplementedRunServiceServer should be embedded to have
@@ -179,6 +196,9 @@ func (UnimplementedRunServiceServer) GetLastByThread(context.Context, *GetLastRu
 }
 func (UnimplementedRunServiceServer) List(context.Context, *ListRunsRequest) (*ListRunsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedRunServiceServer) Submit(context.Context, *SubmitToRunRequest) (*SubmitToRunResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Submit not implemented")
 }
 func (UnimplementedRunServiceServer) testEmbeddedByValue() {}
 
@@ -290,6 +310,24 @@ func _RunService_List_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RunService_Submit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitToRunRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RunServiceServer).Submit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RunService_Submit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RunServiceServer).Submit(ctx, req.(*SubmitToRunRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RunService_ServiceDesc is the grpc.ServiceDesc for RunService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -312,6 +350,10 @@ var RunService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _RunService_List_Handler,
+		},
+		{
+			MethodName: "Submit",
+			Handler:    _RunService_Submit_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

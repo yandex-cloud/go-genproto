@@ -45,3 +45,15 @@ func (m *TuningTask) SetSourceModelUri(v string) {
 func (m *TuningTask) SetTargetModelUri(v string) {
 	m.TargetModelUri = v
 }
+
+func (m *TuningTask) SetName(v string) {
+	m.Name = v
+}
+
+func (m *TuningTask) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *TuningTask) SetLabels(v map[string]string) {
+	m.Labels = v
+}

@@ -5,3 +5,7 @@ package licensemanager
 func (m *GetInstanceRequest) SetInstanceId(v string) {
 	m.InstanceId = v
 }
+
+func (m *GetUserInfoRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}

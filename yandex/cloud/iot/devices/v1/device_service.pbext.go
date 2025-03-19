@@ -89,6 +89,10 @@ func (m *CreateDeviceRequest) SetPassword(v string) {
 	m.Password = v
 }
 
+func (m *CreateDeviceRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateDeviceRequest_Certificate) SetCertificateData(v string) {
 	m.CertificateData = v
 }
@@ -115,6 +119,10 @@ func (m *UpdateDeviceRequest) SetDescription(v string) {
 
 func (m *UpdateDeviceRequest) SetTopicAliases(v map[string]string) {
 	m.TopicAliases = v
+}
+
+func (m *UpdateDeviceRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateDeviceMetadata) SetDeviceId(v string) {

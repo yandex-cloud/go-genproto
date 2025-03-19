@@ -86,6 +86,10 @@ func (m *CreateDashboardRequest) SetManagedLink(v string) {
 	m.ManagedLink = v
 }
 
+func (m *CreateDashboardRequest) SetTimeline(v *Timeline) {
+	m.Timeline = v
+}
+
 func (m *CreateDashboardMetadata) SetDashboardId(v string) {
 	m.DashboardId = v
 }
@@ -128,6 +132,10 @@ func (m *UpdateDashboardRequest) SetManagedBy(v string) {
 
 func (m *UpdateDashboardRequest) SetManagedLink(v string) {
 	m.ManagedLink = v
+}
+
+func (m *UpdateDashboardRequest) SetTimeline(v *Timeline) {
+	m.Timeline = v
 }
 
 func (m *UpdateDashboardMetadata) SetDashboardId(v string) {

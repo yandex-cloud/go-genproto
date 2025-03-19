@@ -38,7 +38,7 @@ const (
 //
 // Channel management service.
 type ChannelServiceClient interface {
-	// Returns the specific channel.
+	// Get the specific channel.
 	Get(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*Channel, error)
 	// List channels for organization.
 	List(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsResponse, error)
@@ -50,11 +50,11 @@ type ChannelServiceClient interface {
 	Delete(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Batch delete channels.
 	BatchDelete(ctx context.Context, in *BatchDeleteChannelsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Lists existing access bindings for the specified channel.
+	// List existing access bindings for the specified channel.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the channel.
+	// Set access bindings for the channel.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates access bindings for the specified channel.
+	// Update access bindings for the specified channel.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -162,7 +162,7 @@ func (c *channelServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 //
 // Channel management service.
 type ChannelServiceServer interface {
-	// Returns the specific channel.
+	// Get the specific channel.
 	Get(context.Context, *GetChannelRequest) (*Channel, error)
 	// List channels for organization.
 	List(context.Context, *ListChannelsRequest) (*ListChannelsResponse, error)
@@ -174,11 +174,11 @@ type ChannelServiceServer interface {
 	Delete(context.Context, *DeleteChannelRequest) (*operation.Operation, error)
 	// Batch delete channels.
 	BatchDelete(context.Context, *BatchDeleteChannelsRequest) (*operation.Operation, error)
-	// Lists existing access bindings for the specified channel.
+	// List existing access bindings for the specified channel.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the channel.
+	// Set access bindings for the channel.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
-	// Updates access bindings for the specified channel.
+	// Update access bindings for the specified channel.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 

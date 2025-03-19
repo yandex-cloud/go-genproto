@@ -142,3 +142,19 @@ func (m *StreamEvent) SetToolCallList(v *v1.ToolCallList) {
 		ToolCallList: v,
 	}
 }
+
+type SubmitToRunRequest_Event = isSubmitToRunRequest_Event
+
+func (m *SubmitToRunRequest) SetEvent(v SubmitToRunRequest_Event) {
+	m.Event = v
+}
+
+func (m *SubmitToRunRequest) SetRunId(v string) {
+	m.RunId = v
+}
+
+func (m *SubmitToRunRequest) SetToolResultList(v *v1.ToolResultList) {
+	m.Event = &SubmitToRunRequest_ToolResultList{
+		ToolResultList: v,
+	}
+}

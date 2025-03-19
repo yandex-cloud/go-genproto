@@ -79,6 +79,10 @@ func (m *CreateClusterRequest) SetAdminPassword(v string) {
 	m.AdminPassword = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -165,6 +169,10 @@ func (m *UpdateClusterRequest) SetServiceAccountId(v string) {
 
 func (m *UpdateClusterRequest) SetLogging(v *LoggingConfig) {
 	m.Logging = v
+}
+
+func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {

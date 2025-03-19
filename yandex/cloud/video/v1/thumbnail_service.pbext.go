@@ -50,8 +50,28 @@ func (m *ThumbnailDownloadURL) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
-func (m *ThumbnailDownloadURL) SetDownloadUrl(v string) {
-	m.DownloadUrl = v
+func (m *ThumbnailDownloadURL) SetOriginalUrl(v string) {
+	m.OriginalUrl = v
+}
+
+func (m *ThumbnailDownloadURL) SetScaledUrls(v []*ThumbnailDownloadURL_ScaledURL) {
+	m.ScaledUrls = v
+}
+
+func (m *ThumbnailDownloadURL_ScaledURL) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *ThumbnailDownloadURL_ScaledURL) SetMaxWidth(v int64) {
+	m.MaxWidth = v
+}
+
+func (m *ThumbnailDownloadURL_ScaledURL) SetMaxHeight(v int64) {
+	m.MaxHeight = v
+}
+
+func (m *ThumbnailDownloadURL_ScaledURL) SetImageFormat(v ThumbnailDownloadURL_ImageFormat) {
+	m.ImageFormat = v
 }
 
 func (m *GenerateThumbnailUploadURLRequest) SetThumbnailId(v string) {

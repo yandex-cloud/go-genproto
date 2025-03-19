@@ -84,33 +84,9 @@ func (m *CreateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	}
 }
 
-func (m *CreateStreamLineRequest) SetSrtPush(v *SRTPushParams) {
-	m.InputParams = &CreateStreamLineRequest_SrtPush{
-		SrtPush: v,
-	}
-}
-
 func (m *CreateStreamLineRequest) SetRtmpPull(v *RTMPPullParams) {
 	m.InputParams = &CreateStreamLineRequest_RtmpPull{
 		RtmpPull: v,
-	}
-}
-
-func (m *CreateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
-	m.InputParams = &CreateStreamLineRequest_SrtPull{
-		SrtPull: v,
-	}
-}
-
-func (m *CreateStreamLineRequest) SetTcpPull(v *TCPPullParams) {
-	m.InputParams = &CreateStreamLineRequest_TcpPull{
-		TcpPull: v,
-	}
-}
-
-func (m *CreateStreamLineRequest) SetRtspPull(v *RTSPPullParams) {
-	m.InputParams = &CreateStreamLineRequest_RtspPull{
-		RtspPull: v,
 	}
 }
 
@@ -162,33 +138,9 @@ func (m *UpdateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	}
 }
 
-func (m *UpdateStreamLineRequest) SetSrtPush(v *SRTPushParams) {
-	m.InputParams = &UpdateStreamLineRequest_SrtPush{
-		SrtPush: v,
-	}
-}
-
 func (m *UpdateStreamLineRequest) SetRtmpPull(v *RTMPPullParams) {
 	m.InputParams = &UpdateStreamLineRequest_RtmpPull{
 		RtmpPull: v,
-	}
-}
-
-func (m *UpdateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
-	m.InputParams = &UpdateStreamLineRequest_SrtPull{
-		SrtPull: v,
-	}
-}
-
-func (m *UpdateStreamLineRequest) SetTcpPull(v *TCPPullParams) {
-	m.InputParams = &UpdateStreamLineRequest_TcpPull{
-		TcpPull: v,
-	}
-}
-
-func (m *UpdateStreamLineRequest) SetRtspPull(v *RTSPPullParams) {
-	m.InputParams = &UpdateStreamLineRequest_RtspPull{
-		RtspPull: v,
 	}
 }
 
@@ -243,18 +195,6 @@ func (m *PerformLineActionMetadata) SetStreamLineId(v string) {
 }
 
 func (m *RTMPPullParams) SetUrl(v string) {
-	m.Url = v
-}
-
-func (m *SRTPullParams) SetUrl(v string) {
-	m.Url = v
-}
-
-func (m *TCPPullParams) SetUrl(v string) {
-	m.Url = v
-}
-
-func (m *RTSPPullParams) SetUrl(v string) {
 	m.Url = v
 }
 

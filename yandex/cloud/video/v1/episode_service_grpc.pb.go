@@ -38,7 +38,7 @@ const (
 //
 // Episode management service.
 type EpisodeServiceClient interface {
-	// Returns the specific channel.
+	// Get the specific channel.
 	Get(ctx context.Context, in *GetEpisodeRequest, opts ...grpc.CallOption) (*Episode, error)
 	// List episodes for stream or line.
 	List(ctx context.Context, in *ListEpisodesRequest, opts ...grpc.CallOption) (*ListEpisodesResponse, error)
@@ -50,13 +50,13 @@ type EpisodeServiceClient interface {
 	Update(ctx context.Context, in *UpdateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete episode.
 	Delete(ctx context.Context, in *DeleteEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete episode.
+	// Batch delete episodes.
 	BatchDelete(ctx context.Context, in *BatchDeleteEpisodesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Perform an action on the episode.
 	PerformAction(ctx context.Context, in *PerformEpisodeActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns url to the player.
+	// Get player url.
 	GetPlayerURL(ctx context.Context, in *GetEpisodePlayerURLRequest, opts ...grpc.CallOption) (*GetEpisodePlayerURLResponse, error)
-	// Returns manifest urls.
+	// Get manifest urls.
 	GetManifests(ctx context.Context, in *GetEpisodeManifestsRequest, opts ...grpc.CallOption) (*GetEpisodeManifestsResponse, error)
 }
 
@@ -174,7 +174,7 @@ func (c *episodeServiceClient) GetManifests(ctx context.Context, in *GetEpisodeM
 //
 // Episode management service.
 type EpisodeServiceServer interface {
-	// Returns the specific channel.
+	// Get the specific channel.
 	Get(context.Context, *GetEpisodeRequest) (*Episode, error)
 	// List episodes for stream or line.
 	List(context.Context, *ListEpisodesRequest) (*ListEpisodesResponse, error)
@@ -186,13 +186,13 @@ type EpisodeServiceServer interface {
 	Update(context.Context, *UpdateEpisodeRequest) (*operation.Operation, error)
 	// Delete episode.
 	Delete(context.Context, *DeleteEpisodeRequest) (*operation.Operation, error)
-	// Batch delete episode.
+	// Batch delete episodes.
 	BatchDelete(context.Context, *BatchDeleteEpisodesRequest) (*operation.Operation, error)
 	// Perform an action on the episode.
 	PerformAction(context.Context, *PerformEpisodeActionRequest) (*operation.Operation, error)
-	// Returns url to the player.
+	// Get player url.
 	GetPlayerURL(context.Context, *GetEpisodePlayerURLRequest) (*GetEpisodePlayerURLResponse, error)
-	// Returns manifest urls.
+	// Get manifest urls.
 	GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error)
 }
 

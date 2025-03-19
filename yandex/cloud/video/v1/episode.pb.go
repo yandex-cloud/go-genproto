@@ -81,9 +81,9 @@ type Episode struct {
 	StreamId string `protobuf:"bytes,2,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	// ID of the line. Optional, empty if the episode is linked to the stream
 	LineId string `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
-	// Channel title.
+	// Episode title.
 	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	// Channel description.
+	// Episode description.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the thumbnail.
 	ThumbnailId string `protobuf:"bytes,6,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
@@ -91,9 +91,10 @@ type Episode struct {
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// Episode finish time.
 	FinishTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
-	// Enables episode DVR mode. DVR seconds determines how many last seconds of the stream are available.
+	// Enables episode DVR mode.
+	// Determines how many last seconds of the stream are available for watching.
 	//
-	// possible values:
+	// Possible values:
 	//   - `0`: infinite dvr size, the full length of the stream allowed to display
 	//   - `>0`: size of dvr window in seconds, the minimum value is 30s
 	DvrSeconds       int64                    `protobuf:"varint,9,opt,name=dvr_seconds,json=dvrSeconds,proto3" json:"dvr_seconds,omitempty"`

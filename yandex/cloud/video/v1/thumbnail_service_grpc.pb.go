@@ -34,15 +34,15 @@ const (
 //
 // Thumbnail management service.
 type ThumbnailServiceClient interface {
-	// Returns the specific thumbnail.
+	// Get the specific thumbnail.
 	Get(ctx context.Context, in *GetThumbnailRequest, opts ...grpc.CallOption) (*Thumbnail, error)
 	// List thumbnails for channel.
 	List(ctx context.Context, in *ListThumbnailRequest, opts ...grpc.CallOption) (*ListThumbnailResponse, error)
 	// Create thumbnail.
 	Create(ctx context.Context, in *CreateThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Generate urls for download images.
+	// Generate urls for downloading images.
 	BatchGenerateDownloadURLs(ctx context.Context, in *BatchGenerateDownloadURLsRequest, opts ...grpc.CallOption) (*BatchGenerateDownloadURLsResponse, error)
-	// Generate url for upload image.
+	// Generate url for uploading an image.
 	GenerateUploadURL(ctx context.Context, in *GenerateThumbnailUploadURLRequest, opts ...grpc.CallOption) (*GenerateThumbnailUploadURLResponse, error)
 	// Delete thumbnail.
 	Delete(ctx context.Context, in *DeleteThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -122,15 +122,15 @@ func (c *thumbnailServiceClient) Delete(ctx context.Context, in *DeleteThumbnail
 //
 // Thumbnail management service.
 type ThumbnailServiceServer interface {
-	// Returns the specific thumbnail.
+	// Get the specific thumbnail.
 	Get(context.Context, *GetThumbnailRequest) (*Thumbnail, error)
 	// List thumbnails for channel.
 	List(context.Context, *ListThumbnailRequest) (*ListThumbnailResponse, error)
 	// Create thumbnail.
 	Create(context.Context, *CreateThumbnailRequest) (*operation.Operation, error)
-	// Generate urls for download images.
+	// Generate urls for downloading images.
 	BatchGenerateDownloadURLs(context.Context, *BatchGenerateDownloadURLsRequest) (*BatchGenerateDownloadURLsResponse, error)
-	// Generate url for upload image.
+	// Generate url for uploading an image.
 	GenerateUploadURL(context.Context, *GenerateThumbnailUploadURLRequest) (*GenerateThumbnailUploadURLResponse, error)
 	// Delete thumbnail.
 	Delete(context.Context, *DeleteThumbnailRequest) (*operation.Operation, error)

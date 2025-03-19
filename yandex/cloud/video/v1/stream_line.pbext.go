@@ -40,33 +40,9 @@ func (m *StreamLine) SetRtmpPush(v *RTMPPushInput) {
 	}
 }
 
-func (m *StreamLine) SetSrtPush(v *SRTPushInput) {
-	m.InputType = &StreamLine_SrtPush{
-		SrtPush: v,
-	}
-}
-
 func (m *StreamLine) SetRtmpPull(v *RTMPPullInput) {
 	m.InputType = &StreamLine_RtmpPull{
 		RtmpPull: v,
-	}
-}
-
-func (m *StreamLine) SetSrtPull(v *SRTPullInput) {
-	m.InputType = &StreamLine_SrtPull{
-		SrtPull: v,
-	}
-}
-
-func (m *StreamLine) SetTcpPull(v *TCPPullInput) {
-	m.InputType = &StreamLine_TcpPull{
-		TcpPull: v,
-	}
-}
-
-func (m *StreamLine) SetRtspPull(v *RTSPPullInput) {
-	m.InputType = &StreamLine_RtspPull{
-		RtspPull: v,
 	}
 }
 
@@ -102,23 +78,7 @@ func (m *RTMPPushInput) SetUrl(v string) {
 	m.Url = v
 }
 
-func (m *SRTPushInput) SetUrl(v string) {
-	m.Url = v
-}
-
 func (m *RTMPPullInput) SetUrl(v string) {
-	m.Url = v
-}
-
-func (m *SRTPullInput) SetUrl(v string) {
-	m.Url = v
-}
-
-func (m *TCPPullInput) SetUrl(v string) {
-	m.Url = v
-}
-
-func (m *RTSPPullInput) SetUrl(v string) {
 	m.Url = v
 }
 

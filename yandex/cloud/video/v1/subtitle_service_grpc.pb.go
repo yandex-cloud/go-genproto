@@ -33,7 +33,7 @@ const (
 //
 // Subtitle management service.
 type SubtitleServiceClient interface {
-	// Return a specific subtitle.
+	// Get a specific subtitle.
 	Get(ctx context.Context, in *GetSubtitleRequest, opts ...grpc.CallOption) (*Subtitle, error)
 	// List subtitles.
 	List(ctx context.Context, in *ListSubtitlesRequest, opts ...grpc.CallOption) (*ListSubtitlesResponse, error)
@@ -109,7 +109,7 @@ func (c *subtitleServiceClient) Delete(ctx context.Context, in *DeleteSubtitleRe
 //
 // Subtitle management service.
 type SubtitleServiceServer interface {
-	// Return a specific subtitle.
+	// Get a specific subtitle.
 	Get(context.Context, *GetSubtitleRequest) (*Subtitle, error)
 	// List subtitles.
 	List(context.Context, *ListSubtitlesRequest) (*ListSubtitlesResponse, error)

@@ -1935,7 +1935,7 @@ func (x *S3APIListMultipartUploadsResponse) GetRequestId() string {
 	return ""
 }
 
-// Container for the MultipartUpload for the Amazon S3 object.
+// Container for the MultipartUpload for the S3 object.
 type S3APIMultipartUpload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2150,6 +2150,297 @@ func (x *S3APIUploadPartCopyResponse) GetLastModifiedAt() *timestamppb.Timestamp
 func (x *S3APIUploadPartCopyResponse) GetRequestId() string {
 	if x != nil {
 		return x.RequestId
+	}
+	return ""
+}
+
+// Represents a response of list objects v2 request to S3.
+type S3APIListObjectsV2Response struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// A flag that indicates whether S3 returned all of the results that satisfied the search criteria.
+	IsTruncated bool `protobuf:"varint,1,opt,name=is_truncated,json=isTruncated,proto3" json:"is_truncated,omitempty"`
+	// Metadata about each object returned.
+	Contents []*S3APIObject `protobuf:"bytes,2,rep,name=contents,proto3" json:"contents,omitempty"`
+	// The bucket name.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Keys that begin with the indicated prefix.
+	Prefix string `protobuf:"bytes,4,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	// Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection.
+	Delimiter string `protobuf:"bytes,5,opt,name=delimiter,proto3" json:"delimiter,omitempty"`
+	// The maximum number of keys returned in the response body.
+	MaxKeys int64 `protobuf:"varint,6,opt,name=max_keys,json=maxKeys,proto3" json:"max_keys,omitempty"`
+	// All of the keys rolled up into a common prefix count as a single return when calculating the number of returns.
+	CommonPrefixes []*S3APICommonPrefix `protobuf:"bytes,7,rep,name=common_prefixes,json=commonPrefixes,proto3" json:"common_prefixes,omitempty"`
+	// The number of keys returned with this request.
+	KeyCount int64 `protobuf:"varint,8,opt,name=key_count,json=keyCount,proto3" json:"key_count,omitempty"`
+	// Indicates where in the bucket listing begins. This is only returned if a continuation token was used in the request.
+	ContinuationToken string `protobuf:"bytes,9,opt,name=continuation_token,json=continuationToken,proto3" json:"continuation_token,omitempty"`
+	// If the response is truncated, S3 returns this continuation token, which you can use in the next request to fetch the next set of keys.
+	NextContinuationToken string `protobuf:"bytes,10,opt,name=next_continuation_token,json=nextContinuationToken,proto3" json:"next_continuation_token,omitempty"`
+	// StartAfter is where you want S3 to start listing from. This is only returned if a start-after was used in the request.
+	StartAfter string `protobuf:"bytes,11,opt,name=start_after,json=startAfter,proto3" json:"start_after,omitempty"`
+	// Unique request ID.
+	RequestId string `protobuf:"bytes,12,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+}
+
+func (x *S3APIListObjectsV2Response) Reset() {
+	*x = S3APIListObjectsV2Response{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_storage_v1_s3api_proto_msgTypes[28]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *S3APIListObjectsV2Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3APIListObjectsV2Response) ProtoMessage() {}
+
+func (x *S3APIListObjectsV2Response) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_s3api_proto_msgTypes[28]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3APIListObjectsV2Response.ProtoReflect.Descriptor instead.
+func (*S3APIListObjectsV2Response) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_s3api_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *S3APIListObjectsV2Response) GetIsTruncated() bool {
+	if x != nil {
+		return x.IsTruncated
+	}
+	return false
+}
+
+func (x *S3APIListObjectsV2Response) GetContents() []*S3APIObject {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+func (x *S3APIListObjectsV2Response) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *S3APIListObjectsV2Response) GetPrefix() string {
+	if x != nil {
+		return x.Prefix
+	}
+	return ""
+}
+
+func (x *S3APIListObjectsV2Response) GetDelimiter() string {
+	if x != nil {
+		return x.Delimiter
+	}
+	return ""
+}
+
+func (x *S3APIListObjectsV2Response) GetMaxKeys() int64 {
+	if x != nil {
+		return x.MaxKeys
+	}
+	return 0
+}
+
+func (x *S3APIListObjectsV2Response) GetCommonPrefixes() []*S3APICommonPrefix {
+	if x != nil {
+		return x.CommonPrefixes
+	}
+	return nil
+}
+
+func (x *S3APIListObjectsV2Response) GetKeyCount() int64 {
+	if x != nil {
+		return x.KeyCount
+	}
+	return 0
+}
+
+func (x *S3APIListObjectsV2Response) GetContinuationToken() string {
+	if x != nil {
+		return x.ContinuationToken
+	}
+	return ""
+}
+
+func (x *S3APIListObjectsV2Response) GetNextContinuationToken() string {
+	if x != nil {
+		return x.NextContinuationToken
+	}
+	return ""
+}
+
+func (x *S3APIListObjectsV2Response) GetStartAfter() string {
+	if x != nil {
+		return x.StartAfter
+	}
+	return ""
+}
+
+func (x *S3APIListObjectsV2Response) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+// Container for object metadata.
+type S3APIObject struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The object key.
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Date and time the object was last modified.
+	LastModified *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=last_modified,json=lastModified,proto3" json:"last_modified,omitempty"`
+	// The entity tag is a hash of the object.
+	Etag string `protobuf:"bytes,3,opt,name=etag,proto3" json:"etag,omitempty"`
+	// Size in bytes of the object.
+	Size int64 `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	// The owner of the object.
+	Owner *S3APIOwner `protobuf:"bytes,5,opt,name=owner,proto3" json:"owner,omitempty"`
+	// The class of storage used to store the object.
+	StorageClass string `protobuf:"bytes,6,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
+}
+
+func (x *S3APIObject) Reset() {
+	*x = S3APIObject{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_storage_v1_s3api_proto_msgTypes[29]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *S3APIObject) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3APIObject) ProtoMessage() {}
+
+func (x *S3APIObject) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_s3api_proto_msgTypes[29]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3APIObject.ProtoReflect.Descriptor instead.
+func (*S3APIObject) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_s3api_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *S3APIObject) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *S3APIObject) GetLastModified() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastModified
+	}
+	return nil
+}
+
+func (x *S3APIObject) GetEtag() string {
+	if x != nil {
+		return x.Etag
+	}
+	return ""
+}
+
+func (x *S3APIObject) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *S3APIObject) GetOwner() *S3APIOwner {
+	if x != nil {
+		return x.Owner
+	}
+	return nil
+}
+
+func (x *S3APIObject) GetStorageClass() string {
+	if x != nil {
+		return x.StorageClass
+	}
+	return ""
+}
+
+// Container for common prefix information.
+type S3APICommonPrefix struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Container for the specified common prefix.
+	Prefix string `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
+}
+
+func (x *S3APICommonPrefix) Reset() {
+	*x = S3APICommonPrefix{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_storage_v1_s3api_proto_msgTypes[30]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *S3APICommonPrefix) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3APICommonPrefix) ProtoMessage() {}
+
+func (x *S3APICommonPrefix) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_s3api_proto_msgTypes[30]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3APICommonPrefix.ProtoReflect.Descriptor instead.
+func (*S3APICommonPrefix) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_s3api_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *S3APICommonPrefix) GetPrefix() string {
+	if x != nil {
+		return x.Prefix
 	}
 	return ""
 }
@@ -2488,14 +2779,64 @@ var file_yandex_cloud_storage_v1_s3api_proto_rawDesc = []byte{
 	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x0e,
 	0x6c, 0x61, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d,
 	0x0a, 0x0a, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x42, 0x62, 0x0a,
-	0x1b, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x5a, 0x43, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x73,
-	0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67,
-	0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x22, 0xff, 0x03,
+	0x0a, 0x1a, 0x53, 0x33, 0x41, 0x50, 0x49, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x73, 0x56, 0x32, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x0c,
+	0x69, 0x73, 0x5f, 0x74, 0x72, 0x75, 0x6e, 0x63, 0x61, 0x74, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x0b, 0x69, 0x73, 0x54, 0x72, 0x75, 0x6e, 0x63, 0x61, 0x74, 0x65, 0x64, 0x12,
+	0x40, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x24, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x33, 0x41, 0x50,
+	0x49, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x73, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x12, 0x1c, 0x0a,
+	0x09, 0x64, 0x65, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x09, 0x64, 0x65, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x12, 0x19, 0x0a, 0x08, 0x6d,
+	0x61, 0x78, 0x5f, 0x6b, 0x65, 0x79, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6d,
+	0x61, 0x78, 0x4b, 0x65, 0x79, 0x73, 0x12, 0x53, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
+	0x5f, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x65, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x2a, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73,
+	0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x33, 0x41, 0x50, 0x49, 0x43,
+	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x50, 0x72, 0x65, 0x66, 0x69, 0x78, 0x52, 0x0e, 0x63, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x50, 0x72, 0x65, 0x66, 0x69, 0x78, 0x65, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x6b,
+	0x65, 0x79, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08,
+	0x6b, 0x65, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2d, 0x0a, 0x12, 0x63, 0x6f, 0x6e, 0x74,
+	0x69, 0x6e, 0x75, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x09,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x11, 0x63, 0x6f, 0x6e, 0x74, 0x69, 0x6e, 0x75, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x36, 0x0a, 0x17, 0x6e, 0x65, 0x78, 0x74, 0x5f,
+	0x63, 0x6f, 0x6e, 0x74, 0x69, 0x6e, 0x75, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x6f, 0x6b,
+	0x65, 0x6e, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x15, 0x6e, 0x65, 0x78, 0x74, 0x43, 0x6f,
+	0x6e, 0x74, 0x69, 0x6e, 0x75, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12,
+	0x1f, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x61, 0x66, 0x74, 0x65, 0x72, 0x18, 0x0b,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x41, 0x66, 0x74, 0x65, 0x72,
+	0x12, 0x1d, 0x0a, 0x0a, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x0c,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x22,
+	0xe8, 0x01, 0x0a, 0x0b, 0x53, 0x33, 0x41, 0x50, 0x49, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12,
+	0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65,
+	0x79, 0x12, 0x3f, 0x0a, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x69,
+	0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73,
+	0x74, 0x61, 0x6d, 0x70, 0x52, 0x0c, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69,
+	0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x65, 0x74, 0x61, 0x67, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x65, 0x74, 0x61, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x12, 0x39, 0x0a, 0x05, 0x6f, 0x77,
+	0x6e, 0x65, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65,
+	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x33, 0x41, 0x50, 0x49, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x52, 0x05,
+	0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x23, 0x0a, 0x0d, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65,
+	0x5f, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x73, 0x74,
+	0x6f, 0x72, 0x61, 0x67, 0x65, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x22, 0x2b, 0x0a, 0x11, 0x53, 0x33,
+	0x41, 0x50, 0x49, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x50, 0x72, 0x65, 0x66, 0x69, 0x78, 0x12,
+	0x16, 0x0a, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x42, 0x62, 0x0a, 0x1b, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x74, 0x6f, 0x72,
+	0x61, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x5a, 0x43, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f,
+	0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65,
+	0x2f, 0x76, 0x31, 0x3b, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2510,7 +2851,7 @@ func file_yandex_cloud_storage_v1_s3api_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_storage_v1_s3api_proto_rawDescData
 }
 
-var file_yandex_cloud_storage_v1_s3api_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_yandex_cloud_storage_v1_s3api_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_yandex_cloud_storage_v1_s3api_proto_goTypes = []any{
 	(*S3APIGetObjectResponse)(nil),               // 0: yandex.cloud.storage.v1.S3APIGetObjectResponse
 	(*S3APIPutObjectResponse)(nil),               // 1: yandex.cloud.storage.v1.S3APIPutObjectResponse
@@ -2540,36 +2881,43 @@ var file_yandex_cloud_storage_v1_s3api_proto_goTypes = []any{
 	(*S3APIMultipartUpload)(nil),                 // 25: yandex.cloud.storage.v1.S3APIMultipartUpload
 	(*S3APIOwner)(nil),                           // 26: yandex.cloud.storage.v1.S3APIOwner
 	(*S3APIUploadPartCopyResponse)(nil),          // 27: yandex.cloud.storage.v1.S3APIUploadPartCopyResponse
-	nil,                                          // 28: yandex.cloud.storage.v1.S3APIGetObjectResponse.MetadataEntry
-	(*timestamppb.Timestamp)(nil),                // 29: google.protobuf.Timestamp
+	(*S3APIListObjectsV2Response)(nil),           // 28: yandex.cloud.storage.v1.S3APIListObjectsV2Response
+	(*S3APIObject)(nil),                          // 29: yandex.cloud.storage.v1.S3APIObject
+	(*S3APICommonPrefix)(nil),                    // 30: yandex.cloud.storage.v1.S3APICommonPrefix
+	nil,                                          // 31: yandex.cloud.storage.v1.S3APIGetObjectResponse.MetadataEntry
+	(*timestamppb.Timestamp)(nil),                // 32: google.protobuf.Timestamp
 }
 var file_yandex_cloud_storage_v1_s3api_proto_depIdxs = []int32{
-	29, // 0: yandex.cloud.storage.v1.S3APIGetObjectResponse.expires_at:type_name -> google.protobuf.Timestamp
-	29, // 1: yandex.cloud.storage.v1.S3APIGetObjectResponse.last_modified_at:type_name -> google.protobuf.Timestamp
-	28, // 2: yandex.cloud.storage.v1.S3APIGetObjectResponse.metadata:type_name -> yandex.cloud.storage.v1.S3APIGetObjectResponse.MetadataEntry
-	29, // 3: yandex.cloud.storage.v1.S3APIGetObjectResponse.object_lock_retain_until_date:type_name -> google.protobuf.Timestamp
-	29, // 4: yandex.cloud.storage.v1.CopyObjectResult.last_modified_at:type_name -> google.protobuf.Timestamp
+	32, // 0: yandex.cloud.storage.v1.S3APIGetObjectResponse.expires_at:type_name -> google.protobuf.Timestamp
+	32, // 1: yandex.cloud.storage.v1.S3APIGetObjectResponse.last_modified_at:type_name -> google.protobuf.Timestamp
+	31, // 2: yandex.cloud.storage.v1.S3APIGetObjectResponse.metadata:type_name -> yandex.cloud.storage.v1.S3APIGetObjectResponse.MetadataEntry
+	32, // 3: yandex.cloud.storage.v1.S3APIGetObjectResponse.object_lock_retain_until_date:type_name -> google.protobuf.Timestamp
+	32, // 4: yandex.cloud.storage.v1.CopyObjectResult.last_modified_at:type_name -> google.protobuf.Timestamp
 	3,  // 5: yandex.cloud.storage.v1.S3APICopyObjectResponse.copy_object_result:type_name -> yandex.cloud.storage.v1.CopyObjectResult
 	5,  // 6: yandex.cloud.storage.v1.S3APIDeleteObjectsResponse.deleted:type_name -> yandex.cloud.storage.v1.SuccessfullyDeletedObject
 	6,  // 7: yandex.cloud.storage.v1.S3APIDeleteObjectsResponse.errors:type_name -> yandex.cloud.storage.v1.DeleteObjectError
-	29, // 8: yandex.cloud.storage.v1.ObjectLockRetention.retain_until_date:type_name -> google.protobuf.Timestamp
+	32, // 8: yandex.cloud.storage.v1.ObjectLockRetention.retain_until_date:type_name -> google.protobuf.Timestamp
 	9,  // 9: yandex.cloud.storage.v1.S3APIGetObjectRetentionResponse.retention:type_name -> yandex.cloud.storage.v1.ObjectLockRetention
 	12, // 10: yandex.cloud.storage.v1.S3APIGetObjectLegalHoldResponse.legal_hold:type_name -> yandex.cloud.storage.v1.ObjectLockLegalHold
 	15, // 11: yandex.cloud.storage.v1.S3APIGetObjectTaggingResponse.tag_set:type_name -> yandex.cloud.storage.v1.ObjectTag
 	21, // 12: yandex.cloud.storage.v1.S3APIListPartsResponse.parts:type_name -> yandex.cloud.storage.v1.S3APIPart
 	26, // 13: yandex.cloud.storage.v1.S3APIListPartsResponse.initiator:type_name -> yandex.cloud.storage.v1.S3APIOwner
 	26, // 14: yandex.cloud.storage.v1.S3APIListPartsResponse.owner:type_name -> yandex.cloud.storage.v1.S3APIOwner
-	29, // 15: yandex.cloud.storage.v1.S3APIPart.last_modified_at:type_name -> google.protobuf.Timestamp
+	32, // 15: yandex.cloud.storage.v1.S3APIPart.last_modified_at:type_name -> google.protobuf.Timestamp
 	25, // 16: yandex.cloud.storage.v1.S3APIListMultipartUploadsResponse.uploads:type_name -> yandex.cloud.storage.v1.S3APIMultipartUpload
 	26, // 17: yandex.cloud.storage.v1.S3APIMultipartUpload.initiator:type_name -> yandex.cloud.storage.v1.S3APIOwner
 	26, // 18: yandex.cloud.storage.v1.S3APIMultipartUpload.owner:type_name -> yandex.cloud.storage.v1.S3APIOwner
-	29, // 19: yandex.cloud.storage.v1.S3APIMultipartUpload.initiated_at:type_name -> google.protobuf.Timestamp
-	29, // 20: yandex.cloud.storage.v1.S3APIUploadPartCopyResponse.last_modified_at:type_name -> google.protobuf.Timestamp
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	32, // 19: yandex.cloud.storage.v1.S3APIMultipartUpload.initiated_at:type_name -> google.protobuf.Timestamp
+	32, // 20: yandex.cloud.storage.v1.S3APIUploadPartCopyResponse.last_modified_at:type_name -> google.protobuf.Timestamp
+	29, // 21: yandex.cloud.storage.v1.S3APIListObjectsV2Response.contents:type_name -> yandex.cloud.storage.v1.S3APIObject
+	30, // 22: yandex.cloud.storage.v1.S3APIListObjectsV2Response.common_prefixes:type_name -> yandex.cloud.storage.v1.S3APICommonPrefix
+	32, // 23: yandex.cloud.storage.v1.S3APIObject.last_modified:type_name -> google.protobuf.Timestamp
+	26, // 24: yandex.cloud.storage.v1.S3APIObject.owner:type_name -> yandex.cloud.storage.v1.S3APIOwner
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_storage_v1_s3api_proto_init() }
@@ -2914,6 +3262,42 @@ func file_yandex_cloud_storage_v1_s3api_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_storage_v1_s3api_proto_msgTypes[28].Exporter = func(v any, i int) any {
+			switch v := v.(*S3APIListObjectsV2Response); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_storage_v1_s3api_proto_msgTypes[29].Exporter = func(v any, i int) any {
+			switch v := v.(*S3APIObject); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_storage_v1_s3api_proto_msgTypes[30].Exporter = func(v any, i int) any {
+			switch v := v.(*S3APICommonPrefix); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2921,7 +3305,7 @@ func file_yandex_cloud_storage_v1_s3api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_storage_v1_s3api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

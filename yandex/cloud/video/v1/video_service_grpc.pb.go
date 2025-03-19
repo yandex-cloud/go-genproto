@@ -20,17 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VideoService_Get_FullMethodName           = "/yandex.cloud.video.v1.VideoService/Get"
-	VideoService_List_FullMethodName          = "/yandex.cloud.video.v1.VideoService/List"
-	VideoService_BatchGet_FullMethodName      = "/yandex.cloud.video.v1.VideoService/BatchGet"
-	VideoService_Create_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Create"
-	VideoService_Update_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Update"
-	VideoService_Transcode_FullMethodName     = "/yandex.cloud.video.v1.VideoService/Transcode"
-	VideoService_Delete_FullMethodName        = "/yandex.cloud.video.v1.VideoService/Delete"
-	VideoService_BatchDelete_FullMethodName   = "/yandex.cloud.video.v1.VideoService/BatchDelete"
-	VideoService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.VideoService/PerformAction"
-	VideoService_GetPlayerURL_FullMethodName  = "/yandex.cloud.video.v1.VideoService/GetPlayerURL"
-	VideoService_GetManifests_FullMethodName  = "/yandex.cloud.video.v1.VideoService/GetManifests"
+	VideoService_Get_FullMethodName                = "/yandex.cloud.video.v1.VideoService/Get"
+	VideoService_List_FullMethodName               = "/yandex.cloud.video.v1.VideoService/List"
+	VideoService_BatchGet_FullMethodName           = "/yandex.cloud.video.v1.VideoService/BatchGet"
+	VideoService_Create_FullMethodName             = "/yandex.cloud.video.v1.VideoService/Create"
+	VideoService_Update_FullMethodName             = "/yandex.cloud.video.v1.VideoService/Update"
+	VideoService_Transcode_FullMethodName          = "/yandex.cloud.video.v1.VideoService/Transcode"
+	VideoService_Delete_FullMethodName             = "/yandex.cloud.video.v1.VideoService/Delete"
+	VideoService_BatchDelete_FullMethodName        = "/yandex.cloud.video.v1.VideoService/BatchDelete"
+	VideoService_PerformAction_FullMethodName      = "/yandex.cloud.video.v1.VideoService/PerformAction"
+	VideoService_GetPlayerURL_FullMethodName       = "/yandex.cloud.video.v1.VideoService/GetPlayerURL"
+	VideoService_BatchGetPlayerURLs_FullMethodName = "/yandex.cloud.video.v1.VideoService/BatchGetPlayerURLs"
+	VideoService_GetManifests_FullMethodName       = "/yandex.cloud.video.v1.VideoService/GetManifests"
 )
 
 // VideoServiceClient is the client API for VideoService service.
@@ -39,11 +40,11 @@ const (
 //
 // Video management service.
 type VideoServiceClient interface {
-	// Returns the specific video.
+	// Get the specific video.
 	Get(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*Video, error)
 	// List videos for channel.
 	List(ctx context.Context, in *ListVideoRequest, opts ...grpc.CallOption) (*ListVideoResponse, error)
-	// Batch get video in specific channel.
+	// Batch get videos in specific channel.
 	BatchGet(ctx context.Context, in *BatchGetVideosRequest, opts ...grpc.CallOption) (*BatchGetVideosResponse, error)
 	// Create video.
 	Create(ctx context.Context, in *CreateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -53,13 +54,15 @@ type VideoServiceClient interface {
 	Transcode(ctx context.Context, in *TranscodeVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete video.
 	Delete(ctx context.Context, in *DeleteVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete video.
+	// Batch delete videos.
 	BatchDelete(ctx context.Context, in *BatchDeleteVideosRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Perform an action on the episode.
+	// Perform an action on the video.
 	PerformAction(ctx context.Context, in *PerformVideoActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns url to the player.
+	// Get player url.
 	GetPlayerURL(ctx context.Context, in *GetVideoPlayerURLRequest, opts ...grpc.CallOption) (*GetVideoPlayerURLResponse, error)
-	// Returns manifest urls.
+	// Batch get player urls.
+	BatchGetPlayerURLs(ctx context.Context, in *BatchGetVideoPlayerURLsRequest, opts ...grpc.CallOption) (*BatchGetVideoPlayerURLsResponse, error)
+	// Get manifest urls.
 	GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error)
 }
 
@@ -171,6 +174,16 @@ func (c *videoServiceClient) GetPlayerURL(ctx context.Context, in *GetVideoPlaye
 	return out, nil
 }
 
+func (c *videoServiceClient) BatchGetPlayerURLs(ctx context.Context, in *BatchGetVideoPlayerURLsRequest, opts ...grpc.CallOption) (*BatchGetVideoPlayerURLsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetVideoPlayerURLsResponse)
+	err := c.cc.Invoke(ctx, VideoService_BatchGetPlayerURLs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *videoServiceClient) GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetVideoManifestsResponse)
@@ -187,11 +200,11 @@ func (c *videoServiceClient) GetManifests(ctx context.Context, in *GetVideoManif
 //
 // Video management service.
 type VideoServiceServer interface {
-	// Returns the specific video.
+	// Get the specific video.
 	Get(context.Context, *GetVideoRequest) (*Video, error)
 	// List videos for channel.
 	List(context.Context, *ListVideoRequest) (*ListVideoResponse, error)
-	// Batch get video in specific channel.
+	// Batch get videos in specific channel.
 	BatchGet(context.Context, *BatchGetVideosRequest) (*BatchGetVideosResponse, error)
 	// Create video.
 	Create(context.Context, *CreateVideoRequest) (*operation.Operation, error)
@@ -201,13 +214,15 @@ type VideoServiceServer interface {
 	Transcode(context.Context, *TranscodeVideoRequest) (*operation.Operation, error)
 	// Delete video.
 	Delete(context.Context, *DeleteVideoRequest) (*operation.Operation, error)
-	// Batch delete video.
+	// Batch delete videos.
 	BatchDelete(context.Context, *BatchDeleteVideosRequest) (*operation.Operation, error)
-	// Perform an action on the episode.
+	// Perform an action on the video.
 	PerformAction(context.Context, *PerformVideoActionRequest) (*operation.Operation, error)
-	// Returns url to the player.
+	// Get player url.
 	GetPlayerURL(context.Context, *GetVideoPlayerURLRequest) (*GetVideoPlayerURLResponse, error)
-	// Returns manifest urls.
+	// Batch get player urls.
+	BatchGetPlayerURLs(context.Context, *BatchGetVideoPlayerURLsRequest) (*BatchGetVideoPlayerURLsResponse, error)
+	// Get manifest urls.
 	GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error)
 }
 
@@ -247,6 +262,9 @@ func (UnimplementedVideoServiceServer) PerformAction(context.Context, *PerformVi
 }
 func (UnimplementedVideoServiceServer) GetPlayerURL(context.Context, *GetVideoPlayerURLRequest) (*GetVideoPlayerURLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerURL not implemented")
+}
+func (UnimplementedVideoServiceServer) BatchGetPlayerURLs(context.Context, *BatchGetVideoPlayerURLsRequest) (*BatchGetVideoPlayerURLsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchGetPlayerURLs not implemented")
 }
 func (UnimplementedVideoServiceServer) GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetManifests not implemented")
@@ -451,6 +469,24 @@ func _VideoService_GetPlayerURL_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VideoService_BatchGetPlayerURLs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetVideoPlayerURLsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).BatchGetPlayerURLs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_BatchGetPlayerURLs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).BatchGetPlayerURLs(ctx, req.(*BatchGetVideoPlayerURLsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _VideoService_GetManifests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetVideoManifestsRequest)
 	if err := dec(in); err != nil {
@@ -515,6 +551,10 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayerURL",
 			Handler:    _VideoService_GetPlayerURL_Handler,
+		},
+		{
+			MethodName: "BatchGetPlayerURLs",
+			Handler:    _VideoService_BatchGetPlayerURLs_Handler,
 		},
 		{
 			MethodName: "GetManifests",

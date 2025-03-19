@@ -44,12 +44,16 @@ func (m *Video) SetStatus(v Video_VideoStatus) {
 	m.Status = v
 }
 
-func (m *Video) SetDuration(v *durationpb.Duration) {
-	m.Duration = v
+func (m *Video) SetErrorMessage(v string) {
+	m.ErrorMessage = v
 }
 
 func (m *Video) SetVisibilityStatus(v Video_VisibilityStatus) {
 	m.VisibilityStatus = v
+}
+
+func (m *Video) SetDuration(v *durationpb.Duration) {
+	m.Duration = v
 }
 
 func (m *Video) SetAutoTranscode(v AutoTranscode) {
@@ -64,6 +68,10 @@ func (m *Video) SetSubtitleIds(v []string) {
 	m.SubtitleIds = v
 }
 
+func (m *Video) SetFeatures(v *VideoFeatures) {
+	m.Features = v
+}
+
 func (m *Video) SetTusd(v *VideoTUSDSource) {
 	m.Source = &Video_Tusd{
 		Tusd: v,
@@ -73,12 +81,6 @@ func (m *Video) SetTusd(v *VideoTUSDSource) {
 func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
 	m.AccessRights = &Video_PublicAccess{
 		PublicAccess: v,
-	}
-}
-
-func (m *Video) SetAuthSystemAccess(v *VideoAuthSystemAccessRights) {
-	m.AccessRights = &Video_AuthSystemAccess{
-		AuthSystemAccess: v,
 	}
 }
 
@@ -102,4 +104,32 @@ func (m *Video) SetLabels(v map[string]string) {
 
 func (m *VideoTUSDSource) SetUrl(v string) {
 	m.Url = v
+}
+
+func (m *VideoTUSDSource) SetFileSize(v int64) {
+	m.FileSize = v
+}
+
+func (m *VideoFeatures) SetSummary(v *VideoFeatures_Summary) {
+	m.Summary = v
+}
+
+func (m *VideoFeatures_Summary) SetResult(v VideoFeatures_FeatureResult) {
+	m.Result = v
+}
+
+func (m *VideoFeatures_Summary) SetUrls(v []*VideoFeatures_Summary_SummaryURL) {
+	m.Urls = v
+}
+
+func (m *VideoFeatures_Summary_SummaryURL) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *VideoFeatures_Summary_SummaryURL) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *VideoFeatures_Summary_SummaryURL) SetSrcLang(v string) {
+	m.SrcLang = v
 }

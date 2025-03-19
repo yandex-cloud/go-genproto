@@ -73,3 +73,7 @@ func (m *Dashboard) SetManagedBy(v string) {
 func (m *Dashboard) SetManagedLink(v string) {
 	m.ManagedLink = v
 }
+
+func (m *Dashboard) SetTimeline(v *Timeline) {
+	m.Timeline = v
+}

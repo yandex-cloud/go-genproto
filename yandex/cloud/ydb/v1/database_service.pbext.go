@@ -196,6 +196,10 @@ func (m *CreateDatabaseRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *CreateDatabaseRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *CreateDatabaseMetadata) SetDatabaseId(v string) {
 	m.DatabaseId = v
 }
@@ -296,6 +300,10 @@ func (m *UpdateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
 
 func (m *UpdateDatabaseRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *UpdateDatabaseRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
 }
 
 func (m *UpdateDatabaseMetadata) SetDatabaseId(v string) {

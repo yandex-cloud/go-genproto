@@ -214,8 +214,16 @@ func (m *ListUploadSchemasRequest) SetTaskType(v string) {
 	m.TaskType = v
 }
 
+func (m *ListUploadSchemasRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
 func (m *ListUploadSchemasResponse) SetSchemas(v []*DatasetUploadSchema) {
 	m.Schemas = v
+}
+
+func (m *ListTypesRequest) SetFolderId(v string) {
+	m.FolderId = v
 }
 
 func (m *ListTypesResponse) SetTypes(v []string) {

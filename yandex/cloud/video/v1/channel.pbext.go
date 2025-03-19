@@ -42,6 +42,10 @@ func (m *ChannelSettings) SetAdvertisement(v *AdvertisementSettings) {
 	m.Advertisement = v
 }
 
+func (m *ChannelSettings) SetRefererVerification(v *RefererVerificationSettings) {
+	m.RefererVerification = v
+}
+
 type AdvertisementSettings_Provider = isAdvertisementSettings_Provider
 
 func (m *AdvertisementSettings) SetProvider(v AdvertisementSettings_Provider) {
@@ -64,4 +68,12 @@ func (m *AdvertisementSettings_YandexDirect) SetPageId(v int64) {
 
 func (m *AdvertisementSettings_YandexDirect) SetCategory(v int64) {
 	m.Category = v
+}
+
+func (m *RefererVerificationSettings) SetEnable(v bool) {
+	m.Enable = v
+}
+
+func (m *RefererVerificationSettings) SetAllowedDomains(v []string) {
+	m.AllowedDomains = v
 }

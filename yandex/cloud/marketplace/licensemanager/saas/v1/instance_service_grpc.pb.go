@@ -20,7 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	InstanceService_Get_FullMethodName = "/yandex.cloud.marketplace.licensemanager.saas.v1.InstanceService/Get"
+	InstanceService_Get_FullMethodName         = "/yandex.cloud.marketplace.licensemanager.saas.v1.InstanceService/Get"
+	InstanceService_GetUserInfo_FullMethodName = "/yandex.cloud.marketplace.licensemanager.saas.v1.InstanceService/GetUserInfo"
 )
 
 // InstanceServiceClient is the client API for InstanceService service.
@@ -31,6 +32,8 @@ const (
 type InstanceServiceClient interface {
 	// Returns the specified subscription instance.
 	Get(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*v1.Instance, error)
+	// Returns information about legal person (Russia only) who owns this subscription instance.
+	GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*v1.UserInfo, error)
 }
 
 type instanceServiceClient struct {
@@ -51,6 +54,16 @@ func (c *instanceServiceClient) Get(ctx context.Context, in *GetInstanceRequest,
 	return out, nil
 }
 
+func (c *instanceServiceClient) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*v1.UserInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UserInfo)
+	err := c.cc.Invoke(ctx, InstanceService_GetUserInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InstanceServiceServer is the server API for InstanceService service.
 // All implementations should embed UnimplementedInstanceServiceServer
 // for forward compatibility.
@@ -59,6 +72,8 @@ func (c *instanceServiceClient) Get(ctx context.Context, in *GetInstanceRequest,
 type InstanceServiceServer interface {
 	// Returns the specified subscription instance.
 	Get(context.Context, *GetInstanceRequest) (*v1.Instance, error)
+	// Returns information about legal person (Russia only) who owns this subscription instance.
+	GetUserInfo(context.Context, *GetUserInfoRequest) (*v1.UserInfo, error)
 }
 
 // UnimplementedInstanceServiceServer should be embedded to have
@@ -70,6 +85,9 @@ type UnimplementedInstanceServiceServer struct{}
 
 func (UnimplementedInstanceServiceServer) Get(context.Context, *GetInstanceRequest) (*v1.Instance, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedInstanceServiceServer) GetUserInfo(context.Context, *GetUserInfoRequest) (*v1.UserInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
 func (UnimplementedInstanceServiceServer) testEmbeddedByValue() {}
 
@@ -109,6 +127,24 @@ func _InstanceService_Get_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceService_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).GetUserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_GetUserInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).GetUserInfo(ctx, req.(*GetUserInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InstanceService_ServiceDesc is the grpc.ServiceDesc for InstanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -119,6 +155,10 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _InstanceService_Get_Handler,
+		},
+		{
+			MethodName: "GetUserInfo",
+			Handler:    _InstanceService_GetUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

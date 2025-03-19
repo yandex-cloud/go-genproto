@@ -5,6 +5,7 @@ package video
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetStreamRequest) SetStreamId(v string) {
@@ -77,6 +78,10 @@ func (m *CreateStreamRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+func (m *CreateStreamRequest) SetAutoPublish(v *wrapperspb.BoolValue) {
+	m.AutoPublish = v
+}
+
 func (m *CreateStreamRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -133,6 +138,10 @@ func (m *UpdateStreamRequest) SetDescription(v string) {
 
 func (m *UpdateStreamRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
+}
+
+func (m *UpdateStreamRequest) SetAutoPublish(v *wrapperspb.BoolValue) {
+	m.AutoPublish = v
 }
 
 func (m *UpdateStreamRequest) SetLabels(v map[string]string) {

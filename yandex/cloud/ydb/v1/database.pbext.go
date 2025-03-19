@@ -120,6 +120,10 @@ func (m *Database) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
+func (m *Database) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 type AlertParameter_Parameter = isAlertParameter_Parameter
 
 func (m *AlertParameter) SetParameter(v AlertParameter_Parameter) {
@@ -262,6 +266,10 @@ func (m *DedicatedDatabase) SetSubnetIds(v []string) {
 
 func (m *DedicatedDatabase) SetAssignPublicIps(v bool) {
 	m.AssignPublicIps = v
+}
+
+func (m *DedicatedDatabase) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
 }
 
 func (m *ServerlessDatabase) SetThrottlingRcuLimit(v int64) {

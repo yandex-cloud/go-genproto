@@ -2,12 +2,20 @@
 
 package foundation_models
 
+import (
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *TextEmbeddingRequest) SetModelUri(v string) {
 	m.ModelUri = v
 }
 
 func (m *TextEmbeddingRequest) SetText(v string) {
 	m.Text = v
+}
+
+func (m *TextEmbeddingRequest) SetDim(v *wrapperspb.Int64Value) {
+	m.Dim = v
 }
 
 func (m *TextEmbeddingResponse) SetEmbedding(v []float64) {

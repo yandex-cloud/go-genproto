@@ -99,6 +99,10 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *CreateClusterRequest) SetShardSpecs(v []*ShardSpec) {
+	m.ShardSpecs = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -273,6 +277,10 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
+}
+
+func (m *RestoreClusterRequest) SetShardSpecs(v []*ShardSpec) {
+	m.ShardSpecs = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

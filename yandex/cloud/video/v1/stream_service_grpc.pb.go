@@ -36,7 +36,7 @@ const (
 //
 // Stream management service.
 type StreamServiceClient interface {
-	// Returns the specific stream.
+	// Get the specific stream.
 	Get(ctx context.Context, in *GetStreamRequest, opts ...grpc.CallOption) (*Stream, error)
 	// List streams for channel.
 	List(ctx context.Context, in *ListStreamsRequest, opts ...grpc.CallOption) (*ListStreamsResponse, error)
@@ -50,7 +50,7 @@ type StreamServiceClient interface {
 	Delete(ctx context.Context, in *DeleteStreamRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Batch delete streams.
 	BatchDelete(ctx context.Context, in *BatchDeleteStreamsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Perform an action on the episode.
+	// Perform an action on the stream.
 	PerformAction(ctx context.Context, in *PerformStreamActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -148,7 +148,7 @@ func (c *streamServiceClient) PerformAction(ctx context.Context, in *PerformStre
 //
 // Stream management service.
 type StreamServiceServer interface {
-	// Returns the specific stream.
+	// Get the specific stream.
 	Get(context.Context, *GetStreamRequest) (*Stream, error)
 	// List streams for channel.
 	List(context.Context, *ListStreamsRequest) (*ListStreamsResponse, error)
@@ -162,7 +162,7 @@ type StreamServiceServer interface {
 	Delete(context.Context, *DeleteStreamRequest) (*operation.Operation, error)
 	// Batch delete streams.
 	BatchDelete(context.Context, *BatchDeleteStreamsRequest) (*operation.Operation, error)
-	// Perform an action on the episode.
+	// Perform an action on the stream.
 	PerformAction(context.Context, *PerformStreamActionRequest) (*operation.Operation, error)
 }
 

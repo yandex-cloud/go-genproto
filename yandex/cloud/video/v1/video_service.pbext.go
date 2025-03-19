@@ -84,6 +84,10 @@ func (m *CreateVideoRequest) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
 }
 
+func (m *CreateVideoRequest) SetAutoPublish(v *wrapperspb.BoolValue) {
+	m.AutoPublish = v
+}
+
 func (m *CreateVideoRequest) SetEnableAd(v *wrapperspb.BoolValue) {
 	m.EnableAd = v
 }
@@ -101,12 +105,6 @@ func (m *CreateVideoRequest) SetTusd(v *VideoTUSDParams) {
 func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
 	m.AccessRights = &CreateVideoRequest_PublicAccess{
 		PublicAccess: v,
-	}
-}
-
-func (m *CreateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams) {
-	m.AccessRights = &CreateVideoRequest_AuthSystemAccess{
-		AuthSystemAccess: v,
 	}
 }
 
@@ -172,12 +170,6 @@ func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
 	}
 }
 
-func (m *UpdateVideoRequest) SetAuthSystemAccess(v *VideoAuthSystemAccessParams) {
-	m.AccessRights = &UpdateVideoRequest_AuthSystemAccess{
-		AuthSystemAccess: v,
-	}
-}
-
 func (m *UpdateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
 	m.AccessRights = &UpdateVideoRequest_SignUrlAccess{
 		SignUrlAccess: v,
@@ -198,6 +190,74 @@ func (m *TranscodeVideoRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
 
 func (m *TranscodeVideoRequest) SetSubtitleIds(v []string) {
 	m.SubtitleIds = v
+}
+
+func (m *TranscodeVideoRequest) SetTranslationSettings(v *VideoTranslationSettings) {
+	m.TranslationSettings = v
+}
+
+func (m *TranscodeVideoRequest) SetSummarizationSettings(v *VideoSummarizationSettings) {
+	m.SummarizationSettings = v
+}
+
+func (m *VideoTranslationSettings) SetTracks(v []*VideoTranslationSettings_TranslationTrack) {
+	m.Tracks = v
+}
+
+func (m *VideoTranslationSettings_TranslationTrack) SetInputTrack(v *VideoTranslationSettings_InputTrack) {
+	m.InputTrack = v
+}
+
+func (m *VideoTranslationSettings_TranslationTrack) SetSubtitles(v []*VideoTranslationSettings_SubtitleTrack) {
+	m.Subtitles = v
+}
+
+func (m *VideoTranslationSettings_TranslationTrack) SetAudio(v []*VideoTranslationSettings_AudioTrack) {
+	m.Audio = v
+}
+
+func (m *VideoTranslationSettings_InputTrack) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *VideoTranslationSettings_InputTrack) SetSrcLang(v string) {
+	m.SrcLang = v
+}
+
+func (m *VideoTranslationSettings_SubtitleTrack) SetDstLang(v string) {
+	m.DstLang = v
+}
+
+func (m *VideoTranslationSettings_SubtitleTrack) SetLabel(v string) {
+	m.Label = v
+}
+
+func (m *VideoTranslationSettings_AudioTrack) SetDstLang(v string) {
+	m.DstLang = v
+}
+
+func (m *VideoTranslationSettings_AudioTrack) SetLabel(v string) {
+	m.Label = v
+}
+
+func (m *VideoSummarizationSettings) SetTracks(v []*VideoSummarizationSettings_SummarizationTrack) {
+	m.Tracks = v
+}
+
+func (m *VideoSummarizationSettings) SetProcessAllTracks(v bool) {
+	m.ProcessAllTracks = v
+}
+
+func (m *VideoSummarizationSettings_SummarizationTrack) SetInputTrack(v *VideoSummarizationSettings_InputTrack) {
+	m.InputTrack = v
+}
+
+func (m *VideoSummarizationSettings_InputTrack) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *VideoSummarizationSettings_InputTrack) SetSrcLang(v string) {
+	m.SrcLang = v
 }
 
 func (m *TranscodeVideoMetadata) SetVideoId(v string) {
@@ -280,6 +340,26 @@ func (m *GetVideoPlayerURLResponse) SetPlayerUrl(v string) {
 
 func (m *GetVideoPlayerURLResponse) SetHtml(v string) {
 	m.Html = v
+}
+
+func (m *BatchGetVideoPlayerURLsRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchGetVideoPlayerURLsRequest) SetVideoIds(v []string) {
+	m.VideoIds = v
+}
+
+func (m *BatchGetVideoPlayerURLsRequest) SetParams(v *VideoPlayerParams) {
+	m.Params = v
+}
+
+func (m *BatchGetVideoPlayerURLsRequest) SetSignedUrlExpirationDuration(v *durationpb.Duration) {
+	m.SignedUrlExpirationDuration = v
+}
+
+func (m *BatchGetVideoPlayerURLsResponse) SetPlayerUrls(v []string) {
+	m.PlayerUrls = v
 }
 
 func (m *GetVideoManifestsRequest) SetVideoId(v string) {

@@ -38,7 +38,7 @@ const (
 //
 // Stream line management service.
 type StreamLineServiceClient interface {
-	// Returns the specific stream line.
+	// Get the specific stream line.
 	Get(ctx context.Context, in *GetStreamLineRequest, opts ...grpc.CallOption) (*StreamLine, error)
 	// List lines for channel.
 	List(ctx context.Context, in *ListStreamLinesRequest, opts ...grpc.CallOption) (*ListStreamLinesResponse, error)
@@ -54,9 +54,9 @@ type StreamLineServiceClient interface {
 	BatchDelete(ctx context.Context, in *BatchDeleteStreamLinesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Perform an action on the line.
 	PerformAction(ctx context.Context, in *PerformLineActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns unique stream key.
+	// Get unique stream key.
 	GetStreamKey(ctx context.Context, in *GetStreamKeyRequest, opts ...grpc.CallOption) (*PushStreamKey, error)
-	// Change stream key.
+	// Update stream key.
 	UpdateStreamKey(ctx context.Context, in *UpdateStreamKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -174,7 +174,7 @@ func (c *streamLineServiceClient) UpdateStreamKey(ctx context.Context, in *Updat
 //
 // Stream line management service.
 type StreamLineServiceServer interface {
-	// Returns the specific stream line.
+	// Get the specific stream line.
 	Get(context.Context, *GetStreamLineRequest) (*StreamLine, error)
 	// List lines for channel.
 	List(context.Context, *ListStreamLinesRequest) (*ListStreamLinesResponse, error)
@@ -190,9 +190,9 @@ type StreamLineServiceServer interface {
 	BatchDelete(context.Context, *BatchDeleteStreamLinesRequest) (*operation.Operation, error)
 	// Perform an action on the line.
 	PerformAction(context.Context, *PerformLineActionRequest) (*operation.Operation, error)
-	// Returns unique stream key.
+	// Get unique stream key.
 	GetStreamKey(context.Context, *GetStreamKeyRequest) (*PushStreamKey, error)
-	// Change stream key.
+	// Update stream key.
 	UpdateStreamKey(context.Context, *UpdateStreamKeyRequest) (*operation.Operation, error)
 }
 

@@ -4,6 +4,7 @@ package video
 
 import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 type Stream_StreamType = isStream_StreamType
@@ -50,6 +51,10 @@ func (m *Stream) SetPublishTime(v *timestamppb.Timestamp) {
 
 func (m *Stream) SetFinishTime(v *timestamppb.Timestamp) {
 	m.FinishTime = v
+}
+
+func (m *Stream) SetAutoPublish(v *wrapperspb.BoolValue) {
+	m.AutoPublish = v
 }
 
 func (m *Stream) SetOnDemand(v *OnDemand) {

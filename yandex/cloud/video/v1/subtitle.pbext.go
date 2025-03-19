@@ -28,6 +28,10 @@ func (m *Subtitle) SetStatus(v Subtitle_SubtitleStatus) {
 	m.Status = v
 }
 
+func (m *Subtitle) SetSourceType(v Subtitle_SubtitleSourceType) {
+	m.SourceType = v
+}
+
 func (m *Subtitle) SetFilename(v string) {
 	m.Filename = v
 }

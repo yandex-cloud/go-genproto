@@ -52,6 +52,54 @@ func (m *CompletionResponse) SetModelVersion(v string) {
 	m.ModelVersion = v
 }
 
+type BatchCompletionRequest_RequestFormat = isBatchCompletionRequest_RequestFormat
+
+func (m *BatchCompletionRequest) SetRequestFormat(v BatchCompletionRequest_RequestFormat) {
+	m.RequestFormat = v
+}
+
+func (m *BatchCompletionRequest) SetModelUri(v string) {
+	m.ModelUri = v
+}
+
+func (m *BatchCompletionRequest) SetCompletionOptions(v *v1.CompletionOptions) {
+	m.CompletionOptions = v
+}
+
+func (m *BatchCompletionRequest) SetSourceDatasetId(v string) {
+	m.RequestFormat = &BatchCompletionRequest_SourceDatasetId{
+		SourceDatasetId: v,
+	}
+}
+
+func (m *BatchCompletionMetadata) SetTaskId(v string) {
+	m.TaskId = v
+}
+
+func (m *BatchCompletionMetadata) SetTaskStatus(v v1.BatchInferenceTaskStatus) {
+	m.TaskStatus = v
+}
+
+func (m *BatchCompletionMetadata) SetCompletedBatches(v int64) {
+	m.CompletedBatches = v
+}
+
+func (m *BatchCompletionMetadata) SetTotalBatches(v int64) {
+	m.TotalBatches = v
+}
+
+func (m *BatchCompletionResponse) SetTaskId(v string) {
+	m.TaskId = v
+}
+
+func (m *BatchCompletionResponse) SetTaskStatus(v v1.BatchInferenceTaskStatus) {
+	m.TaskStatus = v
+}
+
+func (m *BatchCompletionResponse) SetResultDatasetId(v string) {
+	m.ResultDatasetId = v
+}
+
 func (m *TokenizeRequest) SetModelUri(v string) {
 	m.ModelUri = v
 }

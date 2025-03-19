@@ -54,6 +54,10 @@ func (m *CreateChannelRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateChannelRequest) SetSettings(v *ChannelSettings) {
+	m.Settings = v
+}
+
 func (m *CreateChannelMetadata) SetChannelId(v string) {
 	m.ChannelId = v
 }
@@ -76,6 +80,10 @@ func (m *UpdateChannelRequest) SetDescription(v string) {
 
 func (m *UpdateChannelRequest) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *UpdateChannelRequest) SetSettings(v *ChannelSettings) {
+	m.Settings = v
 }
 
 func (m *UpdateChannelMetadata) SetChannelId(v string) {

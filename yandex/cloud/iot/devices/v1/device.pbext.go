@@ -38,6 +38,10 @@ func (m *Device) SetMonitoringData(v *DeviceMonitoringData) {
 	m.MonitoringData = v
 }
 
+func (m *Device) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *DeviceCertificate) SetDeviceId(v string) {
 	m.DeviceId = v
 }

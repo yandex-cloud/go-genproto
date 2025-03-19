@@ -453,3 +453,79 @@ func (m *S3APIUploadPartCopyResponse) SetLastModifiedAt(v *timestamppb.Timestamp
 func (m *S3APIUploadPartCopyResponse) SetRequestId(v string) {
 	m.RequestId = v
 }
+
+func (m *S3APIListObjectsV2Response) SetIsTruncated(v bool) {
+	m.IsTruncated = v
+}
+
+func (m *S3APIListObjectsV2Response) SetContents(v []*S3APIObject) {
+	m.Contents = v
+}
+
+func (m *S3APIListObjectsV2Response) SetName(v string) {
+	m.Name = v
+}
+
+func (m *S3APIListObjectsV2Response) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *S3APIListObjectsV2Response) SetDelimiter(v string) {
+	m.Delimiter = v
+}
+
+func (m *S3APIListObjectsV2Response) SetMaxKeys(v int64) {
+	m.MaxKeys = v
+}
+
+func (m *S3APIListObjectsV2Response) SetCommonPrefixes(v []*S3APICommonPrefix) {
+	m.CommonPrefixes = v
+}
+
+func (m *S3APIListObjectsV2Response) SetKeyCount(v int64) {
+	m.KeyCount = v
+}
+
+func (m *S3APIListObjectsV2Response) SetContinuationToken(v string) {
+	m.ContinuationToken = v
+}
+
+func (m *S3APIListObjectsV2Response) SetNextContinuationToken(v string) {
+	m.NextContinuationToken = v
+}
+
+func (m *S3APIListObjectsV2Response) SetStartAfter(v string) {
+	m.StartAfter = v
+}
+
+func (m *S3APIListObjectsV2Response) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIObject) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *S3APIObject) SetLastModified(v *timestamppb.Timestamp) {
+	m.LastModified = v
+}
+
+func (m *S3APIObject) SetEtag(v string) {
+	m.Etag = v
+}
+
+func (m *S3APIObject) SetSize(v int64) {
+	m.Size = v
+}
+
+func (m *S3APIObject) SetOwner(v *S3APIOwner) {
+	m.Owner = v
+}
+
+func (m *S3APIObject) SetStorageClass(v string) {
+	m.StorageClass = v
+}
+
+func (m *S3APICommonPrefix) SetPrefix(v string) {
+	m.Prefix = v
+}
