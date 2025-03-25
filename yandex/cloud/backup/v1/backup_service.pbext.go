@@ -78,6 +78,14 @@ func (m *ListBackupsRequest) SetType(v ResourceType) {
 	m.Type = v
 }
 
+func (m *ListBackupsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListBackupsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
 func (m *ListBackupsRequest_ArchiveParameters) SetArchiveId(v string) {
 	m.ArchiveId = v
 }
@@ -96,6 +104,10 @@ func (m *ListBackupsRequest_InstancePolicy) SetPolicyId(v string) {
 
 func (m *ListBackupsResponse) SetBackups(v []*Backup) {
 	m.Backups = v
+}
+
+func (m *ListBackupsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *ListFilesRequest) SetFolderId(v string) {

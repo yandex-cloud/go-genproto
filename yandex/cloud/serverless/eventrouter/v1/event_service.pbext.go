@@ -9,3 +9,11 @@ func (m *PutEventRequest) SetBusId(v string) {
 func (m *PutEventRequest) SetBody(v string) {
 	m.Body = v
 }
+
+func (m *SendEventsRequest) SetConnectorId(v string) {
+	m.ConnectorId = v
+}
+
+func (m *SendEventsRequest) SetMessage(v []string) {
+	m.Message = v
+}

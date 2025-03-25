@@ -45,6 +45,8 @@ const (
 	ClusterService_UpdateDashboardsNodeGroup_FullMethodName = "/yandex.cloud.mdb.opensearch.v1.ClusterService/UpdateDashboardsNodeGroup"
 	ClusterService_GetAuthSettings_FullMethodName           = "/yandex.cloud.mdb.opensearch.v1.ClusterService/GetAuthSettings"
 	ClusterService_UpdateAuthSettings_FullMethodName        = "/yandex.cloud.mdb.opensearch.v1.ClusterService/UpdateAuthSettings"
+	ClusterService_RestartOpenSearch_FullMethodName         = "/yandex.cloud.mdb.opensearch.v1.ClusterService/RestartOpenSearch"
+	ClusterService_SwitchMaster_FullMethodName              = "/yandex.cloud.mdb.opensearch.v1.ClusterService/SwitchMaster"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -82,6 +84,7 @@ type ClusterServiceClient interface {
 	// Stops the specified OpenSearch cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified OpenSearch cluster.
+	// For detailed description, see the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developer's guide.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
@@ -105,6 +108,10 @@ type ClusterServiceClient interface {
 	GetAuthSettings(ctx context.Context, in *GetAuthSettingsRequest, opts ...grpc.CallOption) (*AuthSettings, error)
 	// Updates auth settings for specified cluster.
 	UpdateAuthSettings(ctx context.Context, in *UpdateAuthSettingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Restarts OpenSearch on specified host.
+	RestartOpenSearch(ctx context.Context, in *RestartOpenSearchRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Switches current master or ensures that master not on specified hosts.
+	SwitchMaster(ctx context.Context, in *SwitchMasterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type clusterServiceClient struct {
@@ -374,6 +381,26 @@ func (c *clusterServiceClient) UpdateAuthSettings(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *clusterServiceClient) RestartOpenSearch(ctx context.Context, in *RestartOpenSearchRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_RestartOpenSearch_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) SwitchMaster(ctx context.Context, in *SwitchMasterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_SwitchMaster_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
@@ -409,6 +436,7 @@ type ClusterServiceServer interface {
 	// Stops the specified OpenSearch cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified OpenSearch cluster.
+	// For detailed description, see the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developer's guide.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
@@ -432,6 +460,10 @@ type ClusterServiceServer interface {
 	GetAuthSettings(context.Context, *GetAuthSettingsRequest) (*AuthSettings, error)
 	// Updates auth settings for specified cluster.
 	UpdateAuthSettings(context.Context, *UpdateAuthSettingsRequest) (*operation.Operation, error)
+	// Restarts OpenSearch on specified host.
+	RestartOpenSearch(context.Context, *RestartOpenSearchRequest) (*operation.Operation, error)
+	// Switches current master or ensures that master not on specified hosts.
+	SwitchMaster(context.Context, *SwitchMasterRequest) (*operation.Operation, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have
@@ -515,6 +547,12 @@ func (UnimplementedClusterServiceServer) GetAuthSettings(context.Context, *GetAu
 }
 func (UnimplementedClusterServiceServer) UpdateAuthSettings(context.Context, *UpdateAuthSettingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAuthSettings not implemented")
+}
+func (UnimplementedClusterServiceServer) RestartOpenSearch(context.Context, *RestartOpenSearchRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RestartOpenSearch not implemented")
+}
+func (UnimplementedClusterServiceServer) SwitchMaster(context.Context, *SwitchMasterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SwitchMaster not implemented")
 }
 func (UnimplementedClusterServiceServer) testEmbeddedByValue() {}
 
@@ -979,6 +1017,42 @@ func _ClusterService_UpdateAuthSettings_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_RestartOpenSearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestartOpenSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RestartOpenSearch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_RestartOpenSearch_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RestartOpenSearch(ctx, req.(*RestartOpenSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_SwitchMaster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SwitchMasterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).SwitchMaster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_SwitchMaster_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).SwitchMaster(ctx, req.(*SwitchMasterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1081,6 +1155,14 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAuthSettings",
 			Handler:    _ClusterService_UpdateAuthSettings_Handler,
+		},
+		{
+			MethodName: "RestartOpenSearch",
+			Handler:    _ClusterService_RestartOpenSearch_Handler,
+		},
+		{
+			MethodName: "SwitchMaster",
+			Handler:    _ClusterService_SwitchMaster_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

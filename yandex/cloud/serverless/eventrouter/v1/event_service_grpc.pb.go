@@ -20,7 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EventService_Put_FullMethodName = "/yandex.cloud.serverless.eventrouter.v1.EventService/Put"
+	EventService_Put_FullMethodName  = "/yandex.cloud.serverless.eventrouter.v1.EventService/Put"
+	EventService_Send_FullMethodName = "/yandex.cloud.serverless.eventrouter.v1.EventService/Send"
 )
 
 // EventServiceClient is the client API for EventService service.
@@ -31,6 +32,8 @@ const (
 type EventServiceClient interface {
 	// Puts event to bus.
 	Put(ctx context.Context, in *PutEventRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Send events to bus.
+	Send(ctx context.Context, in *SendEventsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type eventServiceClient struct {
@@ -51,6 +54,16 @@ func (c *eventServiceClient) Put(ctx context.Context, in *PutEventRequest, opts 
 	return out, nil
 }
 
+func (c *eventServiceClient) Send(ctx context.Context, in *SendEventsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, EventService_Send_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventServiceServer is the server API for EventService service.
 // All implementations should embed UnimplementedEventServiceServer
 // for forward compatibility.
@@ -59,6 +72,8 @@ func (c *eventServiceClient) Put(ctx context.Context, in *PutEventRequest, opts 
 type EventServiceServer interface {
 	// Puts event to bus.
 	Put(context.Context, *PutEventRequest) (*emptypb.Empty, error)
+	// Send events to bus.
+	Send(context.Context, *SendEventsRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedEventServiceServer should be embedded to have
@@ -70,6 +85,9 @@ type UnimplementedEventServiceServer struct{}
 
 func (UnimplementedEventServiceServer) Put(context.Context, *PutEventRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Put not implemented")
+}
+func (UnimplementedEventServiceServer) Send(context.Context, *SendEventsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Send not implemented")
 }
 func (UnimplementedEventServiceServer) testEmbeddedByValue() {}
 
@@ -109,6 +127,24 @@ func _EventService_Put_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EventService_Send_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventServiceServer).Send(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EventService_Send_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventServiceServer).Send(ctx, req.(*SendEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventService_ServiceDesc is the grpc.ServiceDesc for EventService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -119,6 +155,10 @@ var EventService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Put",
 			Handler:    _EventService_Put_Handler,
+		},
+		{
+			MethodName: "Send",
+			Handler:    _EventService_Send_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

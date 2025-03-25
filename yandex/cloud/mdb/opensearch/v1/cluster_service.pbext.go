@@ -740,3 +740,35 @@ func (m *UpdateAuthSettingsRequest) SetSettings(v *AuthSettings) {
 func (m *UpdateAuthSettingsMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
+
+func (m *RestartOpenSearchRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestartOpenSearchRequest) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *RestartOpenSearchMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RestartOpenSearchMetadata) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *SwitchMasterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *SwitchMasterRequest) SetFromHosts(v []string) {
+	m.FromHosts = v
+}
+
+func (m *SwitchMasterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *SwitchMasterMetadata) SetFromHosts(v []string) {
+	m.FromHosts = v
+}
