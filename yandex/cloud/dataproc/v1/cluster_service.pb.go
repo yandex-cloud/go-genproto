@@ -30,7 +30,7 @@ type GetClusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster.
+	// ID of the Yandex Data Processing cluster.
 	//
 	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -230,7 +230,7 @@ type CreateSubclusterConfigSpec struct {
 
 	// Name of the subcluster.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Role of the subcluster in the Data Proc cluster.
+	// Role of the subcluster in the Yandex Data Processing cluster.
 	Role Role `protobuf:"varint,2,opt,name=role,proto3,enum=yandex.cloud.dataproc.v1.Role" json:"role,omitempty"`
 	// Resource configuration for hosts in the subcluster.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
@@ -420,7 +420,7 @@ type CreateClusterConfigSpec struct {
 	//
 	// All available versions are listed in the [documentation](/docs/data-proc/concepts/environment).
 	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	// Data Proc specific options.
+	// Yandex Data Processing specific options.
 	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
 	// Specification for creating subclusters.
 	SubclustersSpec []*CreateSubclusterConfigSpec `protobuf:"bytes,3,rep,name=subclusters_spec,json=subclustersSpec,proto3" json:"subclusters_spec,omitempty"`
@@ -546,7 +546,7 @@ type CreateClusterRequest struct {
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the cluster. The name must be unique within the folder.
-	// The name can't be changed after the Data Proc cluster is created.
+	// The name can't be changed after the Yandex Data Processing cluster is created.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
@@ -558,9 +558,9 @@ type CreateClusterRequest struct {
 	//
 	// To get the list of available zones make a [yandex.cloud.compute.v1.ZoneService.List] request.
 	ZoneId string `protobuf:"bytes,7,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of the service account to be used by the Data Proc manager agent.
+	// ID of the service account to be used by the Yandex Data Processing manager agent.
 	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Name of the Object Storage bucket to use for Data Proc jobs.
+	// Name of the Object Storage bucket to use for Yandex Data Processing jobs.
 	Bucket string `protobuf:"bytes,9,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	// Enable UI Proxy feature.
 	UiProxy bool `protobuf:"varint,10,opt,name=ui_proxy,json=uiProxy,proto3" json:"ui_proxy,omitempty"`
@@ -769,13 +769,13 @@ type UpdateClusterRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// A new set of cluster labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Configuration and resources for hosts that should be created with the Data Proc cluster.
+	// Configuration and resources for hosts that should be created with the Yandex Data Processing cluster.
 	ConfigSpec *UpdateClusterConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// New name for the Data Proc cluster. The name must be unique within the folder.
+	// New name for the Yandex Data Processing cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the new service account to be used by the Data Proc manager agent.
+	// ID of the new service account to be used by the Yandex Data Processing manager agent.
 	ServiceAccountId string `protobuf:"bytes,7,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Name of the new Object Storage bucket to use for Data Proc jobs.
+	// Name of the new Object Storage bucket to use for Yandex Data Processing jobs.
 	Bucket string `protobuf:"bytes,8,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	// Timeout to gracefully decommission nodes. In seconds. Default value: 0
 	DecommissionTimeout int64 `protobuf:"varint,9,opt,name=decommission_timeout,json=decommissionTimeout,proto3" json:"decommission_timeout,omitempty"`
@@ -1024,7 +1024,7 @@ type DeleteClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster that is being deleted.
+	// ID of the Yandex Data Processing cluster that is being deleted.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -1122,7 +1122,7 @@ type StartClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster that is being started.
+	// ID of the Yandex Data Processing cluster that is being started.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -1229,7 +1229,7 @@ type StopClusterMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster that is being stopped.
+	// ID of the Yandex Data Processing cluster that is being stopped.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 

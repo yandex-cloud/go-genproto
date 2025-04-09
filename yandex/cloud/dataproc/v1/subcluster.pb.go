@@ -38,7 +38,7 @@ const (
 	// * Zeppelin
 	// * ZooKeeper
 	Role_MASTERNODE Role = 1
-	// The subcluster is a DATANODE in a Data Proc cluster.
+	// The subcluster is a DATANODE in a Yandex Data Processing cluster.
 	//
 	// DATANODE can run the following services, depending on the requested components:
 	// * HDFS DataNode
@@ -46,7 +46,7 @@ const (
 	// * HBase RegionServer
 	// * Spark libraries
 	Role_DATANODE Role = 2
-	// The subcluster is a COMPUTENODE in a Data Proc cluster.
+	// The subcluster is a COMPUTENODE in a Yandex Data Processing cluster.
 	//
 	// COMPUTENODE can run the following services, depending on the requested components:
 	// * YARN NodeManager
@@ -205,7 +205,7 @@ func (x *AutoscalingConfig) GetDecommissionTimeout() int64 {
 	return 0
 }
 
-// A Data Proc subcluster. For details about the concept, see [documentation](/docs/data-proc/concepts/).
+// A Yandex Data Processing subcluster. For details about the concept, see [documentation](/docs/data-proc/concepts/).
 type Subcluster struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -213,7 +213,7 @@ type Subcluster struct {
 
 	// ID of the subcluster. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the Data Proc cluster that the subcluster belongs to.
+	// ID of the Yandex Data Processing cluster that the subcluster belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -344,21 +344,21 @@ func (x *Subcluster) GetInstanceGroupId() string {
 	return ""
 }
 
-// A Data Proc host. For details about the concept, see [documentation](/docs/data-proc/concepts/).
+// A Yandex Data Processing host. For details about the concept, see [documentation](/docs/data-proc/concepts/).
 type Host struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name of the Data Proc host. The host name is assigned by Data Proc at creation time
-	// and cannot be changed. The name is generated to be unique across all Data Proc
+	// Name of the Yandex Data Processing host. The host name is assigned by Yandex Data Processing at creation time
+	// and cannot be changed. The name is generated to be unique across all Yandex Data Processing
 	// hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the Data Proc subcluster that the host belongs to.
+	// ID of the Yandex Data Processing subcluster that the host belongs to.
 	SubclusterId string `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	// Status code of the aggregated health of the host.
 	Health Health `protobuf:"varint,3,opt,name=health,proto3,enum=yandex.cloud.dataproc.v1.Health" json:"health,omitempty"`
-	// ID of the Compute virtual machine that is used as the Data Proc host.
+	// ID of the Compute virtual machine that is used as the Yandex Data Processing host.
 	ComputeInstanceId string `protobuf:"bytes,4,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
 	// Role of the host in the cluster.
 	Role Role `protobuf:"varint,5,opt,name=role,proto3,enum=yandex.cloud.dataproc.v1.Role" json:"role,omitempty"`

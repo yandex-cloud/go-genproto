@@ -906,8 +906,8 @@ type Info struct {
 	Zookeeper *ZookeeperInfo `protobuf:"bytes,4,opt,name=zookeeper,proto3" json:"zookeeper,omitempty"`
 	Hbase     *HbaseInfo     `protobuf:"bytes,5,opt,name=hbase,proto3" json:"hbase,omitempty"`
 	Oozie     *OozieInfo     `protobuf:"bytes,6,opt,name=oozie,proto3" json:"oozie,omitempty"`
-	// Report count is incremented every time report is sent by Dataproc Agent.
-	// So Worker can use this property to make sure that Dataproc Agent got data sent by Worker through Dataproc Manager
+	// Report count is incremented every time report is sent by Yandex Data Processing Agent.
+	// So Worker can use this property to make sure that Yandex Data Processing Agent got data sent by Worker through Yandex Data Processing Manager
 	// for synchronization purposes
 	ReportCount int64     `protobuf:"varint,7,opt,name=report_count,json=reportCount,proto3" json:"report_count,omitempty"`
 	Livy        *LivyInfo `protobuf:"bytes,8,opt,name=livy,proto3" json:"livy,omitempty"`

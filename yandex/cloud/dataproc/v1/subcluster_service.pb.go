@@ -30,7 +30,7 @@ type GetSubclusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster that the subcluster belongs to.
+	// ID of the Yandex Data Processing cluster that the subcluster belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the subcluster to return.
 	//
@@ -89,7 +89,7 @@ type ListSubclustersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster to list subclusters in.
+	// ID of the Yandex Data Processing cluster to list subclusters in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSubclustersResponse.next_page_token]
@@ -235,7 +235,7 @@ type CreateSubclusterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ID of the Data Proc cluster to create a subcluster in.
+	// ID of the Yandex Data Processing cluster to create a subcluster in.
 	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`

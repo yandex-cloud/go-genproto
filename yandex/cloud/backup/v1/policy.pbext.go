@@ -102,6 +102,18 @@ func (m *PolicySettings) SetFileFilters(v *PolicySettings_FileFilters) {
 	m.FileFilters = v
 }
 
+func (m *PolicySettings) SetSectorBySector(v bool) {
+	m.SectorBySector = v
+}
+
+func (m *PolicySettings) SetValidationEnabled(v bool) {
+	m.ValidationEnabled = v
+}
+
+func (m *PolicySettings) SetLvmSnapshottingEnabled(v bool) {
+	m.LvmSnapshottingEnabled = v
+}
+
 func (m *PolicySettings_Interval) SetType(v PolicySettings_Interval_Type) {
 	m.Type = v
 }
@@ -264,6 +276,10 @@ func (m *PolicySettings_Scheduling_BackupSet_Time) SetMonths(v []int64) {
 
 func (m *PolicySettings_Scheduling_BackupSet_Time) SetType(v PolicySettings_RepeatePeriod) {
 	m.Type = v
+}
+
+func (m *PolicySettings_Scheduling_BackupSet_Time) SetRunLater(v bool) {
+	m.RunLater = v
 }
 
 func (m *PolicySettings_Scheduling_BackupSet_SinceLastExecTime) SetDelay(v *PolicySettings_Interval) {

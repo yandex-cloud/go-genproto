@@ -136,6 +136,10 @@ func (m *MasterUpdateSpec) SetExternalV6AddressSpec(v *ExternalAddressSpec) {
 	m.ExternalV6AddressSpec = v
 }
 
+func (m *MasterUpdateSpec) SetScalePolicy(v *MasterScalePolicySpec) {
+	m.ScalePolicy = v
+}
+
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -338,6 +342,10 @@ func (m *MasterSpec) SetMasterLogging(v *MasterLogging) {
 	m.MasterLogging = v
 }
 
+func (m *MasterSpec) SetScalePolicy(v *MasterScalePolicySpec) {
+	m.ScalePolicy = v
+}
+
 func (m *ZonalMasterSpec) SetZoneId(v string) {
 	m.ZoneId = v
 }
@@ -400,4 +408,30 @@ func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp)
 
 func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+type MasterScalePolicySpec_ScaleType = isMasterScalePolicySpec_ScaleType
+
+func (m *MasterScalePolicySpec) SetScaleType(v MasterScalePolicySpec_ScaleType) {
+	m.ScaleType = v
+}
+
+func (m *MasterScalePolicySpec) SetFixedScale(v *MasterScalePolicySpec_FixedScale) {
+	m.ScaleType = &MasterScalePolicySpec_FixedScale_{
+		FixedScale: v,
+	}
+}
+
+func (m *MasterScalePolicySpec) SetAutoScale(v *MasterScalePolicySpec_AutoScale) {
+	m.ScaleType = &MasterScalePolicySpec_AutoScale_{
+		AutoScale: v,
+	}
+}
+
+func (m *MasterScalePolicySpec_FixedScale) SetResourcePresetId(v string) {
+	m.ResourcePresetId = v
+}
+
+func (m *MasterScalePolicySpec_AutoScale) SetMinResourcePresetId(v string) {
+	m.MinResourcePresetId = v
 }

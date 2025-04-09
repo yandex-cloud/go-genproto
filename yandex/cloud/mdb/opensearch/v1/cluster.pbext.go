@@ -103,6 +103,10 @@ func (m *ClusterConfig) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ClusterConfig) SetSnapshotManagement(v *SnapshotManagement) {
+	m.SnapshotManagement = v
+}
+
 type OpenSearch_Config = isOpenSearch_Config
 
 func (m *OpenSearch) SetConfig(v OpenSearch_Config) {

@@ -36,7 +36,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Data Proc clusters.
+// A set of methods for managing Yandex Data Processing clusters.
 type ClusterServiceClient interface {
 	// Returns the specified cluster.
 	//
@@ -58,7 +58,7 @@ type ClusterServiceClient interface {
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves the list of hosts in the specified cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
-	// Retrieves a list of links to web interfaces being proxied by Data Proc UI Proxy.
+	// Retrieves a list of links to web interfaces being proxied by Yandex Data Processing UI Proxy.
 	ListUILinks(ctx context.Context, in *ListUILinksRequest, opts ...grpc.CallOption) (*ListUILinksResponse, error)
 }
 
@@ -174,7 +174,7 @@ func (c *clusterServiceClient) ListUILinks(ctx context.Context, in *ListUILinksR
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Data Proc clusters.
+// A set of methods for managing Yandex Data Processing clusters.
 type ClusterServiceServer interface {
 	// Returns the specified cluster.
 	//
@@ -196,7 +196,7 @@ type ClusterServiceServer interface {
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves the list of hosts in the specified cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
-	// Retrieves a list of links to web interfaces being proxied by Data Proc UI Proxy.
+	// Retrieves a list of links to web interfaces being proxied by Yandex Data Processing UI Proxy.
 	ListUILinks(context.Context, *ListUILinksRequest) (*ListUILinksResponse, error)
 }
 

@@ -20,21 +20,23 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LoadBalancerService_Get_FullMethodName             = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Get"
-	LoadBalancerService_List_FullMethodName            = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/List"
-	LoadBalancerService_Create_FullMethodName          = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Create"
-	LoadBalancerService_Update_FullMethodName          = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Update"
-	LoadBalancerService_Delete_FullMethodName          = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Delete"
-	LoadBalancerService_Start_FullMethodName           = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Start"
-	LoadBalancerService_Stop_FullMethodName            = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Stop"
-	LoadBalancerService_AddListener_FullMethodName     = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/AddListener"
-	LoadBalancerService_RemoveListener_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/RemoveListener"
-	LoadBalancerService_UpdateListener_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/UpdateListener"
-	LoadBalancerService_AddSniMatch_FullMethodName     = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/AddSniMatch"
-	LoadBalancerService_UpdateSniMatch_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/UpdateSniMatch"
-	LoadBalancerService_RemoveSniMatch_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/RemoveSniMatch"
-	LoadBalancerService_GetTargetStates_FullMethodName = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/GetTargetStates"
-	LoadBalancerService_ListOperations_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/ListOperations"
+	LoadBalancerService_Get_FullMethodName              = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Get"
+	LoadBalancerService_List_FullMethodName             = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/List"
+	LoadBalancerService_Create_FullMethodName           = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Create"
+	LoadBalancerService_Update_FullMethodName           = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Update"
+	LoadBalancerService_Delete_FullMethodName           = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Delete"
+	LoadBalancerService_Start_FullMethodName            = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Start"
+	LoadBalancerService_Stop_FullMethodName             = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/Stop"
+	LoadBalancerService_AddListener_FullMethodName      = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/AddListener"
+	LoadBalancerService_RemoveListener_FullMethodName   = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/RemoveListener"
+	LoadBalancerService_UpdateListener_FullMethodName   = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/UpdateListener"
+	LoadBalancerService_AddSniMatch_FullMethodName      = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/AddSniMatch"
+	LoadBalancerService_UpdateSniMatch_FullMethodName   = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/UpdateSniMatch"
+	LoadBalancerService_RemoveSniMatch_FullMethodName   = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/RemoveSniMatch"
+	LoadBalancerService_GetTargetStates_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/GetTargetStates"
+	LoadBalancerService_ListOperations_FullMethodName   = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/ListOperations"
+	LoadBalancerService_StartZonalShift_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/StartZonalShift"
+	LoadBalancerService_CancelZonalShift_FullMethodName = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/CancelZonalShift"
 )
 
 // LoadBalancerServiceClient is the client API for LoadBalancerService service.
@@ -81,6 +83,10 @@ type LoadBalancerServiceClient interface {
 	GetTargetStates(ctx context.Context, in *GetTargetStatesRequest, opts ...grpc.CallOption) (*GetTargetStatesResponse, error)
 	// Lists operations for the specified application load balancer.
 	ListOperations(ctx context.Context, in *ListLoadBalancerOperationsRequest, opts ...grpc.CallOption) (*ListLoadBalancerOperationsResponse, error)
+	// Start ZonalShift for the specified load balancer.
+	StartZonalShift(ctx context.Context, in *StartZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Cancel ZonalShift for the specified load balancer.
+	CancelZonalShift(ctx context.Context, in *CancelZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type loadBalancerServiceClient struct {
@@ -241,6 +247,26 @@ func (c *loadBalancerServiceClient) ListOperations(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *loadBalancerServiceClient) StartZonalShift(ctx context.Context, in *StartZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, LoadBalancerService_StartZonalShift_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loadBalancerServiceClient) CancelZonalShift(ctx context.Context, in *CancelZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, LoadBalancerService_CancelZonalShift_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LoadBalancerServiceServer is the server API for LoadBalancerService service.
 // All implementations should embed UnimplementedLoadBalancerServiceServer
 // for forward compatibility.
@@ -285,6 +311,10 @@ type LoadBalancerServiceServer interface {
 	GetTargetStates(context.Context, *GetTargetStatesRequest) (*GetTargetStatesResponse, error)
 	// Lists operations for the specified application load balancer.
 	ListOperations(context.Context, *ListLoadBalancerOperationsRequest) (*ListLoadBalancerOperationsResponse, error)
+	// Start ZonalShift for the specified load balancer.
+	StartZonalShift(context.Context, *StartZonalShiftRequest) (*operation.Operation, error)
+	// Cancel ZonalShift for the specified load balancer.
+	CancelZonalShift(context.Context, *CancelZonalShiftRequest) (*operation.Operation, error)
 }
 
 // UnimplementedLoadBalancerServiceServer should be embedded to have
@@ -338,6 +368,12 @@ func (UnimplementedLoadBalancerServiceServer) GetTargetStates(context.Context, *
 }
 func (UnimplementedLoadBalancerServiceServer) ListOperations(context.Context, *ListLoadBalancerOperationsRequest) (*ListLoadBalancerOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedLoadBalancerServiceServer) StartZonalShift(context.Context, *StartZonalShiftRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartZonalShift not implemented")
+}
+func (UnimplementedLoadBalancerServiceServer) CancelZonalShift(context.Context, *CancelZonalShiftRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelZonalShift not implemented")
 }
 func (UnimplementedLoadBalancerServiceServer) testEmbeddedByValue() {}
 
@@ -629,6 +665,42 @@ func _LoadBalancerService_ListOperations_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LoadBalancerService_StartZonalShift_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartZonalShiftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoadBalancerServiceServer).StartZonalShift(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoadBalancerService_StartZonalShift_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoadBalancerServiceServer).StartZonalShift(ctx, req.(*StartZonalShiftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LoadBalancerService_CancelZonalShift_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelZonalShiftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoadBalancerServiceServer).CancelZonalShift(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoadBalancerService_CancelZonalShift_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoadBalancerServiceServer).CancelZonalShift(ctx, req.(*CancelZonalShiftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LoadBalancerService_ServiceDesc is the grpc.ServiceDesc for LoadBalancerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -695,6 +767,14 @@ var LoadBalancerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _LoadBalancerService_ListOperations_Handler,
+		},
+		{
+			MethodName: "StartZonalShift",
+			Handler:    _LoadBalancerService_StartZonalShift_Handler,
+		},
+		{
+			MethodName: "CancelZonalShift",
+			Handler:    _LoadBalancerService_CancelZonalShift_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

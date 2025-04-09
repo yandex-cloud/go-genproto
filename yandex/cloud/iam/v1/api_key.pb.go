@@ -37,6 +37,7 @@ type ApiKey struct {
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Timestamp for the last authentication using this API key.
 	LastUsedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_used_at,json=lastUsedAt,proto3" json:"last_used_at,omitempty"`
+	// Draft
 	// Scope of the API key. 0-256 characters long.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/iam/v1/api_key.proto.

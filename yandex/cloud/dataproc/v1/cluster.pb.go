@@ -221,7 +221,7 @@ func (HadoopConfig_Service) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_dataproc_v1_cluster_proto_rawDescGZIP(), []int{2, 0}
 }
 
-// A Data Proc cluster. For details about the concept, see [documentation](/docs/data-proc/concepts/).
+// A Yandex Data Processing cluster. For details about the concept, see [documentation](/docs/data-proc/concepts/).
 type Cluster struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -249,9 +249,9 @@ type Cluster struct {
 	Status Cluster_Status `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.dataproc.v1.Cluster_Status" json:"status,omitempty"`
 	// ID of the availability zone where the cluster resides.
 	ZoneId string `protobuf:"bytes,11,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of service account for the Data Proc manager agent.
+	// ID of service account for the Yandex Data Processing manager agent.
 	ServiceAccountId string `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Object Storage bucket to be used for Data Proc jobs that are run in the cluster.
+	// Object Storage bucket to be used for Yandex Data Processing jobs that are run in the cluster.
 	Bucket string `protobuf:"bytes,13,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	// Whether UI Proxy feature is enabled.
 	UiProxy bool `protobuf:"varint,14,opt,name=ui_proxy,json=uiProxy,proto3" json:"ui_proxy,omitempty"`
@@ -433,7 +433,7 @@ func (x *Cluster) GetEnvironment() Cluster_Environment {
 	return Cluster_ENVIRONMENT_UNSPECIFIED
 }
 
-// Metadata of a monitoring system for a Data Proc cluster.
+// Metadata of a monitoring system for a Yandex Data Processing cluster.
 type Monitoring struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -589,7 +589,7 @@ type ClusterConfig struct {
 	// Image version for cluster provisioning.
 	// All available versions are listed in the [documentation](/docs/data-proc/concepts/environment).
 	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	// Data Proc specific configuration options.
+	// Yandex Data Processing specific configuration options.
 	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
 }
 

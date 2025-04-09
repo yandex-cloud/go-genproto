@@ -27,6 +27,10 @@ const (
 	TuningService_GetMetricsUrl_FullMethodName = "/yandex.cloud.ai.tuning.v1.TuningService/GetMetricsUrl"
 	TuningService_GetOptions_FullMethodName    = "/yandex.cloud.ai.tuning.v1.TuningService/GetOptions"
 	TuningService_ListErrors_FullMethodName    = "/yandex.cloud.ai.tuning.v1.TuningService/ListErrors"
+	TuningService_CreateDraft_FullMethodName   = "/yandex.cloud.ai.tuning.v1.TuningService/CreateDraft"
+	TuningService_UpdateDraft_FullMethodName   = "/yandex.cloud.ai.tuning.v1.TuningService/UpdateDraft"
+	TuningService_DeleteDraft_FullMethodName   = "/yandex.cloud.ai.tuning.v1.TuningService/DeleteDraft"
+	TuningService_TuneDraft_FullMethodName     = "/yandex.cloud.ai.tuning.v1.TuningService/TuneDraft"
 )
 
 // TuningServiceClient is the client API for TuningService service.
@@ -40,6 +44,10 @@ type TuningServiceClient interface {
 	GetMetricsUrl(ctx context.Context, in *GetMetricsUrlRequest, opts ...grpc.CallOption) (*GetMetricsUrlResponse, error)
 	GetOptions(ctx context.Context, in *GetOptionsRequest, opts ...grpc.CallOption) (*GetOptionsResponse, error)
 	ListErrors(ctx context.Context, in *ListErrorsRequest, opts ...grpc.CallOption) (*ListErrorsResponse, error)
+	CreateDraft(ctx context.Context, in *CreateTuningDraftRequest, opts ...grpc.CallOption) (*CreateTuningDraftResponse, error)
+	UpdateDraft(ctx context.Context, in *UpdateTuningDraftRequest, opts ...grpc.CallOption) (*UpdateTuningDraftResponse, error)
+	DeleteDraft(ctx context.Context, in *DeleteTuningDraftRequest, opts ...grpc.CallOption) (*DeleteTuningDraftResponse, error)
+	TuneDraft(ctx context.Context, in *TuneDraftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type tuningServiceClient struct {
@@ -120,6 +128,46 @@ func (c *tuningServiceClient) ListErrors(ctx context.Context, in *ListErrorsRequ
 	return out, nil
 }
 
+func (c *tuningServiceClient) CreateDraft(ctx context.Context, in *CreateTuningDraftRequest, opts ...grpc.CallOption) (*CreateTuningDraftResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTuningDraftResponse)
+	err := c.cc.Invoke(ctx, TuningService_CreateDraft_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tuningServiceClient) UpdateDraft(ctx context.Context, in *UpdateTuningDraftRequest, opts ...grpc.CallOption) (*UpdateTuningDraftResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTuningDraftResponse)
+	err := c.cc.Invoke(ctx, TuningService_UpdateDraft_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tuningServiceClient) DeleteDraft(ctx context.Context, in *DeleteTuningDraftRequest, opts ...grpc.CallOption) (*DeleteTuningDraftResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTuningDraftResponse)
+	err := c.cc.Invoke(ctx, TuningService_DeleteDraft_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tuningServiceClient) TuneDraft(ctx context.Context, in *TuneDraftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, TuningService_TuneDraft_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TuningServiceServer is the server API for TuningService service.
 // All implementations should embed UnimplementedTuningServiceServer
 // for forward compatibility.
@@ -131,6 +179,10 @@ type TuningServiceServer interface {
 	GetMetricsUrl(context.Context, *GetMetricsUrlRequest) (*GetMetricsUrlResponse, error)
 	GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsResponse, error)
 	ListErrors(context.Context, *ListErrorsRequest) (*ListErrorsResponse, error)
+	CreateDraft(context.Context, *CreateTuningDraftRequest) (*CreateTuningDraftResponse, error)
+	UpdateDraft(context.Context, *UpdateTuningDraftRequest) (*UpdateTuningDraftResponse, error)
+	DeleteDraft(context.Context, *DeleteTuningDraftRequest) (*DeleteTuningDraftResponse, error)
+	TuneDraft(context.Context, *TuneDraftRequest) (*operation.Operation, error)
 }
 
 // UnimplementedTuningServiceServer should be embedded to have
@@ -160,6 +212,18 @@ func (UnimplementedTuningServiceServer) GetOptions(context.Context, *GetOptionsR
 }
 func (UnimplementedTuningServiceServer) ListErrors(context.Context, *ListErrorsRequest) (*ListErrorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListErrors not implemented")
+}
+func (UnimplementedTuningServiceServer) CreateDraft(context.Context, *CreateTuningDraftRequest) (*CreateTuningDraftResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDraft not implemented")
+}
+func (UnimplementedTuningServiceServer) UpdateDraft(context.Context, *UpdateTuningDraftRequest) (*UpdateTuningDraftResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDraft not implemented")
+}
+func (UnimplementedTuningServiceServer) DeleteDraft(context.Context, *DeleteTuningDraftRequest) (*DeleteTuningDraftResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDraft not implemented")
+}
+func (UnimplementedTuningServiceServer) TuneDraft(context.Context, *TuneDraftRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TuneDraft not implemented")
 }
 func (UnimplementedTuningServiceServer) testEmbeddedByValue() {}
 
@@ -307,6 +371,78 @@ func _TuningService_ListErrors_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TuningService_CreateDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTuningDraftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TuningServiceServer).CreateDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TuningService_CreateDraft_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TuningServiceServer).CreateDraft(ctx, req.(*CreateTuningDraftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TuningService_UpdateDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTuningDraftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TuningServiceServer).UpdateDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TuningService_UpdateDraft_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TuningServiceServer).UpdateDraft(ctx, req.(*UpdateTuningDraftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TuningService_DeleteDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTuningDraftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TuningServiceServer).DeleteDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TuningService_DeleteDraft_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TuningServiceServer).DeleteDraft(ctx, req.(*DeleteTuningDraftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TuningService_TuneDraft_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TuneDraftRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TuningServiceServer).TuneDraft(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TuningService_TuneDraft_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TuningServiceServer).TuneDraft(ctx, req.(*TuneDraftRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TuningService_ServiceDesc is the grpc.ServiceDesc for TuningService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -341,6 +477,22 @@ var TuningService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListErrors",
 			Handler:    _TuningService_ListErrors_Handler,
+		},
+		{
+			MethodName: "CreateDraft",
+			Handler:    _TuningService_CreateDraft_Handler,
+		},
+		{
+			MethodName: "UpdateDraft",
+			Handler:    _TuningService_UpdateDraft_Handler,
+		},
+		{
+			MethodName: "DeleteDraft",
+			Handler:    _TuningService_DeleteDraft_Handler,
+		},
+		{
+			MethodName: "TuneDraft",
+			Handler:    _TuningService_TuneDraft_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -643,3 +643,147 @@ func (m *ListErrorsRequest) SetTuningTaskId(v string) {
 func (m *ListErrorsResponse) SetTuningError(v []*TuningError) {
 	m.TuningError = v
 }
+
+type CreateTuningDraftRequest_TuningParams = isCreateTuningDraftRequest_TuningParams
+
+func (m *CreateTuningDraftRequest) SetTuningParams(v CreateTuningDraftRequest_TuningParams) {
+	m.TuningParams = v
+}
+
+func (m *CreateTuningDraftRequest) SetBaseModelUri(v string) {
+	m.BaseModelUri = v
+}
+
+func (m *CreateTuningDraftRequest) SetTrainDatasets(v []*TuningRequest_WeightedDataset) {
+	m.TrainDatasets = v
+}
+
+func (m *CreateTuningDraftRequest) SetValidationDatasets(v []*TuningRequest_WeightedDataset) {
+	m.ValidationDatasets = v
+}
+
+func (m *CreateTuningDraftRequest) SetTextToTextCompletion(v *TextToTextCompletionTuningParams) {
+	m.TuningParams = &CreateTuningDraftRequest_TextToTextCompletion{
+		TextToTextCompletion: v,
+	}
+}
+
+func (m *CreateTuningDraftRequest) SetTextClassificationMultilabel(v *TextClassificationMultilabelParams) {
+	m.TuningParams = &CreateTuningDraftRequest_TextClassificationMultilabel{
+		TextClassificationMultilabel: v,
+	}
+}
+
+func (m *CreateTuningDraftRequest) SetTextClassificationMulticlass(v *TextClassificationMulticlassParams) {
+	m.TuningParams = &CreateTuningDraftRequest_TextClassificationMulticlass{
+		TextClassificationMulticlass: v,
+	}
+}
+
+func (m *CreateTuningDraftRequest) SetTextEmbeddingPairParams(v *TextEmbeddingPairParams) {
+	m.TuningParams = &CreateTuningDraftRequest_TextEmbeddingPairParams{
+		TextEmbeddingPairParams: v,
+	}
+}
+
+func (m *CreateTuningDraftRequest) SetTextEmbeddingTripletParams(v *TextEmbeddingTripletParams) {
+	m.TuningParams = &CreateTuningDraftRequest_TextEmbeddingTripletParams{
+		TextEmbeddingTripletParams: v,
+	}
+}
+
+func (m *CreateTuningDraftRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CreateTuningDraftRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CreateTuningDraftRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *CreateTuningDraftResponse) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+type UpdateTuningDraftRequest_TuningParams = isUpdateTuningDraftRequest_TuningParams
+
+func (m *UpdateTuningDraftRequest) SetTuningParams(v UpdateTuningDraftRequest_TuningParams) {
+	m.TuningParams = v
+}
+
+func (m *UpdateTuningDraftRequest) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *UpdateTuningDraftRequest) SetBaseModelUri(v string) {
+	m.BaseModelUri = v
+}
+
+func (m *UpdateTuningDraftRequest) SetTrainDatasets(v []*TuningRequest_WeightedDataset) {
+	m.TrainDatasets = v
+}
+
+func (m *UpdateTuningDraftRequest) SetValidationDatasets(v []*TuningRequest_WeightedDataset) {
+	m.ValidationDatasets = v
+}
+
+func (m *UpdateTuningDraftRequest) SetTextToTextCompletion(v *TextToTextCompletionTuningParams) {
+	m.TuningParams = &UpdateTuningDraftRequest_TextToTextCompletion{
+		TextToTextCompletion: v,
+	}
+}
+
+func (m *UpdateTuningDraftRequest) SetTextClassificationMultilabel(v *TextClassificationMultilabelParams) {
+	m.TuningParams = &UpdateTuningDraftRequest_TextClassificationMultilabel{
+		TextClassificationMultilabel: v,
+	}
+}
+
+func (m *UpdateTuningDraftRequest) SetTextClassificationMulticlass(v *TextClassificationMulticlassParams) {
+	m.TuningParams = &UpdateTuningDraftRequest_TextClassificationMulticlass{
+		TextClassificationMulticlass: v,
+	}
+}
+
+func (m *UpdateTuningDraftRequest) SetTextEmbeddingPairParams(v *TextEmbeddingPairParams) {
+	m.TuningParams = &UpdateTuningDraftRequest_TextEmbeddingPairParams{
+		TextEmbeddingPairParams: v,
+	}
+}
+
+func (m *UpdateTuningDraftRequest) SetTextEmbeddingTripletParams(v *TextEmbeddingTripletParams) {
+	m.TuningParams = &UpdateTuningDraftRequest_TextEmbeddingTripletParams{
+		TextEmbeddingTripletParams: v,
+	}
+}
+
+func (m *UpdateTuningDraftRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateTuningDraftRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateTuningDraftRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateTuningDraftResponse) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *DeleteTuningDraftRequest) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *DeleteTuningDraftResponse) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *TuneDraftRequest) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}

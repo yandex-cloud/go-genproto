@@ -338,6 +338,34 @@ func (m *MysqlConfig8_0) SetMaxExecutionTime(v *wrapperspb.Int64Value) {
 	m.MaxExecutionTime = v
 }
 
+func (m *MysqlConfig8_0) SetAuditLogPolicy(v MysqlConfig8_0_AuditLogPolicy) {
+	m.AuditLogPolicy = v
+}
+
+func (m *MysqlConfig8_0) SetReplicationSenderObserveCommitOnly(v *wrapperspb.BoolValue) {
+	m.ReplicationSenderObserveCommitOnly = v
+}
+
+func (m *MysqlConfig8_0) SetReplicationOptimizeForStaticPluginConfig(v *wrapperspb.BoolValue) {
+	m.ReplicationOptimizeForStaticPluginConfig = v
+}
+
+func (m *MysqlConfig8_0) SetInnodbLruScanDepth(v *wrapperspb.Int64Value) {
+	m.InnodbLruScanDepth = v
+}
+
+func (m *MysqlConfig8_0) SetSqlRequirePrimaryKey(v *wrapperspb.BoolValue) {
+	m.SqlRequirePrimaryKey = v
+}
+
+func (m *MysqlConfig8_0) SetMdbForceSsl(v *wrapperspb.BoolValue) {
+	m.MdbForceSsl = v
+}
+
+func (m *MysqlConfig8_0) SetInnodbChangeBuffering(v MysqlConfig8_0_InnodbChangeBuffering) {
+	m.InnodbChangeBuffering = v
+}
+
 func (m *MysqlConfigSet8_0) SetEffectiveConfig(v *MysqlConfig8_0) {
 	m.EffectiveConfig = v
 }

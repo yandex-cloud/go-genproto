@@ -6,6 +6,18 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+func (m *TenantInfo) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *TenantInfo) SetPersonalTenantId(v string) {
+	m.PersonalTenantId = v
+}
+
+func (m *TenantInfo) SetUserId(v string) {
+	m.UserId = v
+}
+
 func (m *Resource) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
@@ -64,6 +76,10 @@ func (m *Resource) SetMetadata(v string) {
 
 func (m *Resource) SetType(v ResourceType) {
 	m.Type = v
+}
+
+func (m *Resource) SetTenantInfo(v *TenantInfo) {
+	m.TenantInfo = v
 }
 
 func (m *Progress) SetCurrent(v int64) {

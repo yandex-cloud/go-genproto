@@ -222,6 +222,7 @@ type CreateApiKeyRequest struct {
 	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"` // use current subject identity if this not set
 	// Description of the API key.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	// Draft
 	// Scope of the API key.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/iam/v1/api_key_service.proto.

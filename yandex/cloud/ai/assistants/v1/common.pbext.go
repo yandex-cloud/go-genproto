@@ -99,6 +99,10 @@ func (m *SearchIndexTool) SetMaxNumResults(v *wrapperspb.Int64Value) {
 	m.MaxNumResults = v
 }
 
+func (m *SearchIndexTool) SetRephraserOptions(v *RephraserOptions) {
+	m.RephraserOptions = v
+}
+
 func (m *FunctionTool) SetName(v string) {
 	m.Name = v
 }
@@ -133,4 +137,8 @@ func (m *FunctionResult) SetContent(v string) {
 	m.ContentType = &FunctionResult_Content{
 		Content: v,
 	}
+}
+
+func (m *RephraserOptions) SetRephraserUri(v string) {
+	m.RephraserUri = v
 }

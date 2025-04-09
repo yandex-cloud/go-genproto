@@ -31,7 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Data Proc subclusters.
+// A set of methods for managing Yandex Data Processing subclusters.
 type SubclusterServiceClient interface {
 	// Returns the specified subcluster.
 	//
@@ -109,7 +109,7 @@ func (c *subclusterServiceClient) Delete(ctx context.Context, in *DeleteSubclust
 // All implementations should embed UnimplementedSubclusterServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Data Proc subclusters.
+// A set of methods for managing Yandex Data Processing subclusters.
 type SubclusterServiceServer interface {
 	// Returns the specified subcluster.
 	//

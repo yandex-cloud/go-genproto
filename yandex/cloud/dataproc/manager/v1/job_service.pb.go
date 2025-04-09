@@ -26,7 +26,7 @@ type ListJobsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the cluster to list Data Proc jobs of.
+	// Required. ID of the cluster to list Yandex Data Processing jobs of.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
@@ -105,7 +105,7 @@ type ListJobsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Requested list of Data Proc jobs.
+	// Requested list of Yandex Data Processing jobs.
 	Jobs []*Job `protobuf:"bytes,1,rep,name=jobs,proto3" json:"jobs,omitempty"`
 	// This token allows you to get the next page of results for ListJobs requests,
 	// if the number of results is larger than `page_size` specified in the request.
@@ -166,9 +166,9 @@ type UpdateJobStatusRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Data Proc cluster.
+	// Required. ID of the Yandex Data Processing cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. ID of the Data Proc job to update.
+	// Required. ID of the Yandex Data Processing job to update.
 	JobId string `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	// Required. New status of the job.
 	Status Job_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.dataproc.manager.v1.Job_Status" json:"status,omitempty"`
@@ -279,7 +279,7 @@ type ListSupportJobsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Requested list of Data Proc jobs.
+	// Requested list of Yandex Data Processing jobs.
 	Jobs []*SupportJob `protobuf:"bytes,1,rep,name=jobs,proto3" json:"jobs,omitempty"`
 	// This token allows you to get the next page of results for ListJobs requests,
 	// if the number of results is larger than `page_size` specified in the request.
@@ -340,9 +340,9 @@ type UpdateSupportJobStatusRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Data Proc cluster.
+	// Required. ID of the Yandex Data Processing cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. ID of the Data Proc job to update.
+	// Required. ID of the Yandex Data Processing job to update.
 	JobId string `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	// Required. New status of the job.
 	Status SupportJob_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.dataproc.manager.v1.SupportJob_Status" json:"status,omitempty"`

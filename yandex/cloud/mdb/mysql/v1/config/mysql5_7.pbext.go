@@ -354,6 +354,22 @@ func (m *MysqlConfig5_7) SetMaxExecutionTime(v *wrapperspb.Int64Value) {
 	m.MaxExecutionTime = v
 }
 
+func (m *MysqlConfig5_7) SetAuditLogPolicy(v MysqlConfig5_7_AuditLogPolicy) {
+	m.AuditLogPolicy = v
+}
+
+func (m *MysqlConfig5_7) SetInnodbLruScanDepth(v *wrapperspb.Int64Value) {
+	m.InnodbLruScanDepth = v
+}
+
+func (m *MysqlConfig5_7) SetMdbForceSsl(v *wrapperspb.BoolValue) {
+	m.MdbForceSsl = v
+}
+
+func (m *MysqlConfig5_7) SetInnodbChangeBuffering(v MysqlConfig5_7_InnodbChangeBuffering) {
+	m.InnodbChangeBuffering = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

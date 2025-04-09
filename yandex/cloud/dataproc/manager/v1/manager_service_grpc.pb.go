@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Data Proc manager service definition.
+// Yandex Data Processing manager service definition.
 type DataprocManagerServiceClient interface {
 	// Sends a status report from a host.
 	Report(ctx context.Context, in *ReportRequest, opts ...grpc.CallOption) (*ReportReply, error)
@@ -54,7 +54,7 @@ func (c *dataprocManagerServiceClient) Report(ctx context.Context, in *ReportReq
 // All implementations should embed UnimplementedDataprocManagerServiceServer
 // for forward compatibility.
 //
-// Data Proc manager service definition.
+// Yandex Data Processing manager service definition.
 type DataprocManagerServiceServer interface {
 	// Sends a status report from a host.
 	Report(context.Context, *ReportRequest) (*ReportReply, error)

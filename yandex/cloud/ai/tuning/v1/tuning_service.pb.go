@@ -1703,6 +1703,597 @@ func (x *ListErrorsResponse) GetTuningError() []*TuningError {
 	return nil
 }
 
+type CreateTuningDraftRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BaseModelUri       string                           `protobuf:"bytes,1,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
+	TrainDatasets      []*TuningRequest_WeightedDataset `protobuf:"bytes,2,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	ValidationDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=validation_datasets,json=validationDatasets,proto3" json:"validation_datasets,omitempty"`
+	// Types that are assignable to TuningParams:
+	//
+	//	*CreateTuningDraftRequest_TextToTextCompletion
+	//	*CreateTuningDraftRequest_TextClassificationMultilabel
+	//	*CreateTuningDraftRequest_TextClassificationMulticlass
+	//	*CreateTuningDraftRequest_TextEmbeddingPairParams
+	//	*CreateTuningDraftRequest_TextEmbeddingTripletParams
+	TuningParams isCreateTuningDraftRequest_TuningParams `protobuf_oneof:"tuning_params"`
+	Name         string                                  `protobuf:"bytes,200,opt,name=name,proto3" json:"name,omitempty"`
+	Description  string                                  `protobuf:"bytes,201,opt,name=description,proto3" json:"description,omitempty"`
+	Labels       map[string]string                       `protobuf:"bytes,202,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *CreateTuningDraftRequest) Reset() {
+	*x = CreateTuningDraftRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateTuningDraftRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTuningDraftRequest) ProtoMessage() {}
+
+func (x *CreateTuningDraftRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTuningDraftRequest.ProtoReflect.Descriptor instead.
+func (*CreateTuningDraftRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *CreateTuningDraftRequest) GetBaseModelUri() string {
+	if x != nil {
+		return x.BaseModelUri
+	}
+	return ""
+}
+
+func (x *CreateTuningDraftRequest) GetTrainDatasets() []*TuningRequest_WeightedDataset {
+	if x != nil {
+		return x.TrainDatasets
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetValidationDatasets() []*TuningRequest_WeightedDataset {
+	if x != nil {
+		return x.ValidationDatasets
+	}
+	return nil
+}
+
+func (m *CreateTuningDraftRequest) GetTuningParams() isCreateTuningDraftRequest_TuningParams {
+	if m != nil {
+		return m.TuningParams
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetTextToTextCompletion() *TextToTextCompletionTuningParams {
+	if x, ok := x.GetTuningParams().(*CreateTuningDraftRequest_TextToTextCompletion); ok {
+		return x.TextToTextCompletion
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetTextClassificationMultilabel() *TextClassificationMultilabelParams {
+	if x, ok := x.GetTuningParams().(*CreateTuningDraftRequest_TextClassificationMultilabel); ok {
+		return x.TextClassificationMultilabel
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetTextClassificationMulticlass() *TextClassificationMulticlassParams {
+	if x, ok := x.GetTuningParams().(*CreateTuningDraftRequest_TextClassificationMulticlass); ok {
+		return x.TextClassificationMulticlass
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetTextEmbeddingPairParams() *TextEmbeddingPairParams {
+	if x, ok := x.GetTuningParams().(*CreateTuningDraftRequest_TextEmbeddingPairParams); ok {
+		return x.TextEmbeddingPairParams
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetTextEmbeddingTripletParams() *TextEmbeddingTripletParams {
+	if x, ok := x.GetTuningParams().(*CreateTuningDraftRequest_TextEmbeddingTripletParams); ok {
+		return x.TextEmbeddingTripletParams
+	}
+	return nil
+}
+
+func (x *CreateTuningDraftRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateTuningDraftRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateTuningDraftRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+type isCreateTuningDraftRequest_TuningParams interface {
+	isCreateTuningDraftRequest_TuningParams()
+}
+
+type CreateTuningDraftRequest_TextToTextCompletion struct {
+	TextToTextCompletion *TextToTextCompletionTuningParams `protobuf:"bytes,100,opt,name=text_to_text_completion,json=textToTextCompletion,proto3,oneof"`
+}
+
+type CreateTuningDraftRequest_TextClassificationMultilabel struct {
+	TextClassificationMultilabel *TextClassificationMultilabelParams `protobuf:"bytes,101,opt,name=text_classification_multilabel,json=textClassificationMultilabel,proto3,oneof"`
+}
+
+type CreateTuningDraftRequest_TextClassificationMulticlass struct {
+	TextClassificationMulticlass *TextClassificationMulticlassParams `protobuf:"bytes,102,opt,name=text_classification_multiclass,json=textClassificationMulticlass,proto3,oneof"`
+}
+
+type CreateTuningDraftRequest_TextEmbeddingPairParams struct {
+	TextEmbeddingPairParams *TextEmbeddingPairParams `protobuf:"bytes,103,opt,name=text_embedding_pair_params,json=textEmbeddingPairParams,proto3,oneof"`
+}
+
+type CreateTuningDraftRequest_TextEmbeddingTripletParams struct {
+	TextEmbeddingTripletParams *TextEmbeddingTripletParams `protobuf:"bytes,104,opt,name=text_embedding_triplet_params,json=textEmbeddingTripletParams,proto3,oneof"`
+}
+
+func (*CreateTuningDraftRequest_TextToTextCompletion) isCreateTuningDraftRequest_TuningParams() {}
+
+func (*CreateTuningDraftRequest_TextClassificationMultilabel) isCreateTuningDraftRequest_TuningParams() {
+}
+
+func (*CreateTuningDraftRequest_TextClassificationMulticlass) isCreateTuningDraftRequest_TuningParams() {
+}
+
+func (*CreateTuningDraftRequest_TextEmbeddingPairParams) isCreateTuningDraftRequest_TuningParams() {}
+
+func (*CreateTuningDraftRequest_TextEmbeddingTripletParams) isCreateTuningDraftRequest_TuningParams() {
+}
+
+type CreateTuningDraftResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TuningTaskId string `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+}
+
+func (x *CreateTuningDraftResponse) Reset() {
+	*x = CreateTuningDraftResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[21]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateTuningDraftResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTuningDraftResponse) ProtoMessage() {}
+
+func (x *CreateTuningDraftResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[21]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTuningDraftResponse.ProtoReflect.Descriptor instead.
+func (*CreateTuningDraftResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *CreateTuningDraftResponse) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
+type UpdateTuningDraftRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TuningTaskId       string                           `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+	BaseModelUri       string                           `protobuf:"bytes,2,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
+	TrainDatasets      []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	ValidationDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,4,rep,name=validation_datasets,json=validationDatasets,proto3" json:"validation_datasets,omitempty"`
+	// Types that are assignable to TuningParams:
+	//
+	//	*UpdateTuningDraftRequest_TextToTextCompletion
+	//	*UpdateTuningDraftRequest_TextClassificationMultilabel
+	//	*UpdateTuningDraftRequest_TextClassificationMulticlass
+	//	*UpdateTuningDraftRequest_TextEmbeddingPairParams
+	//	*UpdateTuningDraftRequest_TextEmbeddingTripletParams
+	TuningParams isUpdateTuningDraftRequest_TuningParams `protobuf_oneof:"tuning_params"`
+	Name         string                                  `protobuf:"bytes,200,opt,name=name,proto3" json:"name,omitempty"`
+	Description  string                                  `protobuf:"bytes,201,opt,name=description,proto3" json:"description,omitempty"`
+	Labels       map[string]string                       `protobuf:"bytes,202,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *UpdateTuningDraftRequest) Reset() {
+	*x = UpdateTuningDraftRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTuningDraftRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTuningDraftRequest) ProtoMessage() {}
+
+func (x *UpdateTuningDraftRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTuningDraftRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTuningDraftRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *UpdateTuningDraftRequest) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
+func (x *UpdateTuningDraftRequest) GetBaseModelUri() string {
+	if x != nil {
+		return x.BaseModelUri
+	}
+	return ""
+}
+
+func (x *UpdateTuningDraftRequest) GetTrainDatasets() []*TuningRequest_WeightedDataset {
+	if x != nil {
+		return x.TrainDatasets
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetValidationDatasets() []*TuningRequest_WeightedDataset {
+	if x != nil {
+		return x.ValidationDatasets
+	}
+	return nil
+}
+
+func (m *UpdateTuningDraftRequest) GetTuningParams() isUpdateTuningDraftRequest_TuningParams {
+	if m != nil {
+		return m.TuningParams
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetTextToTextCompletion() *TextToTextCompletionTuningParams {
+	if x, ok := x.GetTuningParams().(*UpdateTuningDraftRequest_TextToTextCompletion); ok {
+		return x.TextToTextCompletion
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetTextClassificationMultilabel() *TextClassificationMultilabelParams {
+	if x, ok := x.GetTuningParams().(*UpdateTuningDraftRequest_TextClassificationMultilabel); ok {
+		return x.TextClassificationMultilabel
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetTextClassificationMulticlass() *TextClassificationMulticlassParams {
+	if x, ok := x.GetTuningParams().(*UpdateTuningDraftRequest_TextClassificationMulticlass); ok {
+		return x.TextClassificationMulticlass
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetTextEmbeddingPairParams() *TextEmbeddingPairParams {
+	if x, ok := x.GetTuningParams().(*UpdateTuningDraftRequest_TextEmbeddingPairParams); ok {
+		return x.TextEmbeddingPairParams
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetTextEmbeddingTripletParams() *TextEmbeddingTripletParams {
+	if x, ok := x.GetTuningParams().(*UpdateTuningDraftRequest_TextEmbeddingTripletParams); ok {
+		return x.TextEmbeddingTripletParams
+	}
+	return nil
+}
+
+func (x *UpdateTuningDraftRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateTuningDraftRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateTuningDraftRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+type isUpdateTuningDraftRequest_TuningParams interface {
+	isUpdateTuningDraftRequest_TuningParams()
+}
+
+type UpdateTuningDraftRequest_TextToTextCompletion struct {
+	TextToTextCompletion *TextToTextCompletionTuningParams `protobuf:"bytes,100,opt,name=text_to_text_completion,json=textToTextCompletion,proto3,oneof"`
+}
+
+type UpdateTuningDraftRequest_TextClassificationMultilabel struct {
+	TextClassificationMultilabel *TextClassificationMultilabelParams `protobuf:"bytes,101,opt,name=text_classification_multilabel,json=textClassificationMultilabel,proto3,oneof"`
+}
+
+type UpdateTuningDraftRequest_TextClassificationMulticlass struct {
+	TextClassificationMulticlass *TextClassificationMulticlassParams `protobuf:"bytes,102,opt,name=text_classification_multiclass,json=textClassificationMulticlass,proto3,oneof"`
+}
+
+type UpdateTuningDraftRequest_TextEmbeddingPairParams struct {
+	TextEmbeddingPairParams *TextEmbeddingPairParams `protobuf:"bytes,103,opt,name=text_embedding_pair_params,json=textEmbeddingPairParams,proto3,oneof"`
+}
+
+type UpdateTuningDraftRequest_TextEmbeddingTripletParams struct {
+	TextEmbeddingTripletParams *TextEmbeddingTripletParams `protobuf:"bytes,104,opt,name=text_embedding_triplet_params,json=textEmbeddingTripletParams,proto3,oneof"`
+}
+
+func (*UpdateTuningDraftRequest_TextToTextCompletion) isUpdateTuningDraftRequest_TuningParams() {}
+
+func (*UpdateTuningDraftRequest_TextClassificationMultilabel) isUpdateTuningDraftRequest_TuningParams() {
+}
+
+func (*UpdateTuningDraftRequest_TextClassificationMulticlass) isUpdateTuningDraftRequest_TuningParams() {
+}
+
+func (*UpdateTuningDraftRequest_TextEmbeddingPairParams) isUpdateTuningDraftRequest_TuningParams() {}
+
+func (*UpdateTuningDraftRequest_TextEmbeddingTripletParams) isUpdateTuningDraftRequest_TuningParams() {
+}
+
+type UpdateTuningDraftResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TuningTaskId string `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+}
+
+func (x *UpdateTuningDraftResponse) Reset() {
+	*x = UpdateTuningDraftResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTuningDraftResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTuningDraftResponse) ProtoMessage() {}
+
+func (x *UpdateTuningDraftResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTuningDraftResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTuningDraftResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *UpdateTuningDraftResponse) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
+type DeleteTuningDraftRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TuningTaskId string `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+}
+
+func (x *DeleteTuningDraftRequest) Reset() {
+	*x = DeleteTuningDraftRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTuningDraftRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTuningDraftRequest) ProtoMessage() {}
+
+func (x *DeleteTuningDraftRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTuningDraftRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTuningDraftRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *DeleteTuningDraftRequest) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
+type DeleteTuningDraftResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TuningTaskId string `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+}
+
+func (x *DeleteTuningDraftResponse) Reset() {
+	*x = DeleteTuningDraftResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTuningDraftResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTuningDraftResponse) ProtoMessage() {}
+
+func (x *DeleteTuningDraftResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTuningDraftResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTuningDraftResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *DeleteTuningDraftResponse) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
+type TuneDraftRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TuningTaskId string `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+}
+
+func (x *TuneDraftRequest) Reset() {
+	*x = TuneDraftRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TuneDraftRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TuneDraftRequest) ProtoMessage() {}
+
+func (x *TuneDraftRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TuneDraftRequest.ProtoReflect.Descriptor instead.
+func (*TuneDraftRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *TuneDraftRequest) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
 type TuningRequest_WeightedDataset struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1715,7 +2306,7 @@ type TuningRequest_WeightedDataset struct {
 func (x *TuningRequest_WeightedDataset) Reset() {
 	*x = TuningRequest_WeightedDataset{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[21]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1728,7 +2319,7 @@ func (x *TuningRequest_WeightedDataset) String() string {
 func (*TuningRequest_WeightedDataset) ProtoMessage() {}
 
 func (x *TuningRequest_WeightedDataset) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1775,7 +2366,7 @@ type TextToTextCompletionTuningParams_Scheduler struct {
 func (x *TextToTextCompletionTuningParams_Scheduler) Reset() {
 	*x = TextToTextCompletionTuningParams_Scheduler{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[22]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1788,7 +2379,7 @@ func (x *TextToTextCompletionTuningParams_Scheduler) String() string {
 func (*TextToTextCompletionTuningParams_Scheduler) ProtoMessage() {}
 
 func (x *TextToTextCompletionTuningParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1878,7 +2469,7 @@ type TextToTextCompletionTuningParams_Optimizer struct {
 func (x *TextToTextCompletionTuningParams_Optimizer) Reset() {
 	*x = TextToTextCompletionTuningParams_Optimizer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[23]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1891,7 +2482,7 @@ func (x *TextToTextCompletionTuningParams_Optimizer) String() string {
 func (*TextToTextCompletionTuningParams_Optimizer) ProtoMessage() {}
 
 func (x *TextToTextCompletionTuningParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1949,7 +2540,7 @@ type TextClassificationMultilabelParams_Scheduler struct {
 func (x *TextClassificationMultilabelParams_Scheduler) Reset() {
 	*x = TextClassificationMultilabelParams_Scheduler{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[24]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1962,7 +2553,7 @@ func (x *TextClassificationMultilabelParams_Scheduler) String() string {
 func (*TextClassificationMultilabelParams_Scheduler) ProtoMessage() {}
 
 func (x *TextClassificationMultilabelParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2052,7 +2643,7 @@ type TextClassificationMultilabelParams_Optimizer struct {
 func (x *TextClassificationMultilabelParams_Optimizer) Reset() {
 	*x = TextClassificationMultilabelParams_Optimizer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[25]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2065,7 +2656,7 @@ func (x *TextClassificationMultilabelParams_Optimizer) String() string {
 func (*TextClassificationMultilabelParams_Optimizer) ProtoMessage() {}
 
 func (x *TextClassificationMultilabelParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2123,7 +2714,7 @@ type TextClassificationMulticlassParams_Scheduler struct {
 func (x *TextClassificationMulticlassParams_Scheduler) Reset() {
 	*x = TextClassificationMulticlassParams_Scheduler{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[26]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2136,7 +2727,7 @@ func (x *TextClassificationMulticlassParams_Scheduler) String() string {
 func (*TextClassificationMulticlassParams_Scheduler) ProtoMessage() {}
 
 func (x *TextClassificationMulticlassParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2226,7 +2817,7 @@ type TextClassificationMulticlassParams_Optimizer struct {
 func (x *TextClassificationMulticlassParams_Optimizer) Reset() {
 	*x = TextClassificationMulticlassParams_Optimizer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[27]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2239,7 +2830,7 @@ func (x *TextClassificationMulticlassParams_Optimizer) String() string {
 func (*TextClassificationMulticlassParams_Optimizer) ProtoMessage() {}
 
 func (x *TextClassificationMulticlassParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2300,7 +2891,7 @@ type TextEmbeddingPairParams_Scheduler struct {
 func (x *TextEmbeddingPairParams_Scheduler) Reset() {
 	*x = TextEmbeddingPairParams_Scheduler{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2313,7 +2904,7 @@ func (x *TextEmbeddingPairParams_Scheduler) String() string {
 func (*TextEmbeddingPairParams_Scheduler) ProtoMessage() {}
 
 func (x *TextEmbeddingPairParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2418,7 +3009,7 @@ type TextEmbeddingPairParams_Optimizer struct {
 func (x *TextEmbeddingPairParams_Optimizer) Reset() {
 	*x = TextEmbeddingPairParams_Optimizer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2431,7 +3022,7 @@ func (x *TextEmbeddingPairParams_Optimizer) String() string {
 func (*TextEmbeddingPairParams_Optimizer) ProtoMessage() {}
 
 func (x *TextEmbeddingPairParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2491,7 +3082,7 @@ type TextEmbeddingTripletParams_Scheduler struct {
 func (x *TextEmbeddingTripletParams_Scheduler) Reset() {
 	*x = TextEmbeddingTripletParams_Scheduler{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2504,7 +3095,7 @@ func (x *TextEmbeddingTripletParams_Scheduler) String() string {
 func (*TextEmbeddingTripletParams_Scheduler) ProtoMessage() {}
 
 func (x *TextEmbeddingTripletParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2609,7 +3200,7 @@ type TextEmbeddingTripletParams_Optimizer struct {
 func (x *TextEmbeddingTripletParams_Optimizer) Reset() {
 	*x = TextEmbeddingTripletParams_Optimizer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
+		mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2622,7 +3213,7 @@ func (x *TextEmbeddingTripletParams_Optimizer) String() string {
 func (*TextEmbeddingTripletParams_Optimizer) ProtoMessage() {}
 
 func (x *TextEmbeddingTripletParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3197,63 +3788,263 @@ var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = []byte{
 	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69,
 	0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x75, 0x6e, 0x69, 0x6e,
 	0x67, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x52, 0x0b, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x45, 0x72,
-	0x72, 0x6f, 0x72, 0x32, 0x97, 0x06, 0x0a, 0x0d, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x79, 0x0a, 0x04, 0x54, 0x75, 0x6e, 0x65, 0x12, 0x28, 0x2e,
+	0x72, 0x6f, 0x72, 0x22, 0x97, 0x09, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x2a, 0x0a, 0x0e, 0x62, 0x61, 0x73, 0x65, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x5f, 0x75,
+	0x72, 0x69, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0c,
+	0x62, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x55, 0x72, 0x69, 0x12, 0x67, 0x0a, 0x0e,
+	0x74, 0x72, 0x61, 0x69, 0x6e, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x73, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x38, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31,
+	0x2e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x57,
+	0x65, 0x69, 0x67, 0x68, 0x74, 0x65, 0x64, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x42, 0x06,
+	0x82, 0xc8, 0x31, 0x02, 0x3e, 0x30, 0x52, 0x0d, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x44, 0x61, 0x74,
+	0x61, 0x73, 0x65, 0x74, 0x73, 0x12, 0x69, 0x0a, 0x13, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x73, 0x18, 0x03, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x38, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54,
+	0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x57, 0x65, 0x69,
+	0x67, 0x68, 0x74, 0x65, 0x64, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x52, 0x12, 0x76, 0x61,
+	0x6c, 0x69, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x73,
+	0x12, 0x74, 0x0a, 0x17, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x74, 0x6f, 0x5f, 0x74, 0x65, 0x78, 0x74,
+	0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x64, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x3b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65,
+	0x78, 0x74, 0x54, 0x6f, 0x54, 0x65, 0x78, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69,
+	0x6f, 0x6e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00,
+	0x52, 0x14, 0x74, 0x65, 0x78, 0x74, 0x54, 0x6f, 0x54, 0x65, 0x78, 0x74, 0x43, 0x6f, 0x6d, 0x70,
+	0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x85, 0x01, 0x0a, 0x1e, 0x74, 0x65, 0x78, 0x74, 0x5f,
+	0x63, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d,
+	0x75, 0x6c, 0x74, 0x69, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x18, 0x65, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x3d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61,
+	0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78, 0x74,
+	0x43, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x75,
+	0x6c, 0x74, 0x69, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00,
+	0x52, 0x1c, 0x74, 0x65, 0x78, 0x74, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x85,
+	0x01, 0x0a, 0x1e, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x63, 0x6c, 0x61, 0x73,
+	0x73, 0x18, 0x66, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67,
+	0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78, 0x74, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x63, 0x6c, 0x61, 0x73, 0x73,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00, 0x52, 0x1c, 0x74, 0x65, 0x78, 0x74, 0x43, 0x6c,
+	0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x75, 0x6c, 0x74,
+	0x69, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x12, 0x71, 0x0a, 0x1a, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x65,
+	0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x61, 0x69, 0x72, 0x5f, 0x70, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x18, 0x67, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x32, 0x2e, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78, 0x74, 0x45, 0x6d, 0x62, 0x65, 0x64,
+	0x64, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x69, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00,
+	0x52, 0x17, 0x74, 0x65, 0x78, 0x74, 0x45, 0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x50,
+	0x61, 0x69, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x7a, 0x0a, 0x1d, 0x74, 0x65, 0x78,
+	0x74, 0x5f, 0x65, 0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x72, 0x69, 0x70,
+	0x6c, 0x65, 0x74, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x68, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x35, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78,
+	0x74, 0x45, 0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x54, 0x72, 0x69, 0x70, 0x6c, 0x65,
+	0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00, 0x52, 0x1a, 0x74, 0x65, 0x78, 0x74, 0x45,
+	0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x54, 0x72, 0x69, 0x70, 0x6c, 0x65, 0x74, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x30, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0xc8, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x42, 0x1b, 0xf2, 0xc7, 0x31, 0x17, 0x5e, 0x5b, 0x41, 0x2d, 0x5a, 0x61,
+	0x2d, 0x7a, 0x30, 0x2d, 0x39, 0x20, 0x5f, 0x2d, 0x5d, 0x7b, 0x33, 0x2c, 0x31, 0x30, 0x30, 0x7d,
+	0x24, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x21, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72,
+	0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0xc9, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64,
+	0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x58, 0x0a, 0x06, 0x6c, 0x61,
+	0x62, 0x65, 0x6c, 0x73, 0x18, 0xca, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x3f, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x2e, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x06, 0x6c, 0x61,
+	0x62, 0x65, 0x6c, 0x73, 0x1a, 0x39, 0x0a, 0x0b, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e,
+	0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42,
+	0x0f, 0x0a, 0x0d, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x4a, 0x04, 0x08, 0x04, 0x10, 0x64, 0x4a, 0x05, 0x08, 0x69, 0x10, 0xc8, 0x01, 0x22, 0x41, 0x0a,
+	0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61,
+	0x66, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x0e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x61, 0x73, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0c, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x54, 0x61, 0x73, 0x6b, 0x49, 0x64,
+	0x22, 0x98, 0x09, 0x0a, 0x18, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e,
+	0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a,
+	0x0e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x61, 0x73, 0x6b, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0c, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x54, 0x61, 0x73, 0x6b, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x0e, 0x62, 0x61, 0x73,
+	0x65, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x5f, 0x75, 0x72, 0x69, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0c, 0x62, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x55, 0x72, 0x69, 0x12,
+	0x5f, 0x0a, 0x0e, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74,
+	0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x38, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67,
+	0x2e, 0x76, 0x31, 0x2e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x2e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x65, 0x64, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65,
+	0x74, 0x52, 0x0d, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x73,
+	0x12, 0x69, 0x0a, 0x13, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x64,
+	0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x38, 0x2e,
 	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e,
 	0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
-	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x24, 0xb2, 0xd2, 0x2a, 0x20,
-	0x0a, 0x0e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
-	0x12, 0x0e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x65, 0x0a, 0x04, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x2d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
-	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e,
-	0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x73,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
-	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67,
-	0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f, 0x0a, 0x08, 0x44, 0x65, 0x73, 0x63, 0x72,
-	0x69, 0x62, 0x65, 0x12, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x65, 0x64,
+	0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x52, 0x12, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x73, 0x12, 0x74, 0x0a, 0x17, 0x74,
+	0x65, 0x78, 0x74, 0x5f, 0x74, 0x6f, 0x5f, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x63, 0x6f, 0x6d, 0x70,
+	0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3b, 0x2e, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74,
+	0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78, 0x74, 0x54, 0x6f, 0x54,
+	0x65, 0x78, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00, 0x52, 0x14, 0x74, 0x65, 0x78,
+	0x74, 0x54, 0x6f, 0x54, 0x65, 0x78, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x69, 0x6f,
+	0x6e, 0x12, 0x85, 0x01, 0x0a, 0x1e, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x63, 0x6c, 0x61, 0x73, 0x73,
+	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x6c,
+	0x61, 0x62, 0x65, 0x6c, 0x18, 0x65, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3d, 0x2e, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78, 0x74, 0x43, 0x6c, 0x61, 0x73, 0x73,
+	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x6c, 0x61,
+	0x62, 0x65, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00, 0x52, 0x1c, 0x74, 0x65, 0x78,
+	0x74, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d,
+	0x75, 0x6c, 0x74, 0x69, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x85, 0x01, 0x0a, 0x1e, 0x74, 0x65,
+	0x78, 0x74, 0x5f, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x18, 0x66, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x3d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54,
+	0x65, 0x78, 0x74, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x48, 0x00, 0x52, 0x1c, 0x74, 0x65, 0x78, 0x74, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x63, 0x6c, 0x61, 0x73,
+	0x73, 0x12, 0x71, 0x0a, 0x1a, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x65, 0x6d, 0x62, 0x65, 0x64, 0x64,
+	0x69, 0x6e, 0x67, 0x5f, 0x70, 0x61, 0x69, 0x72, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18,
+	0x67, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x32, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76,
+	0x31, 0x2e, 0x54, 0x65, 0x78, 0x74, 0x45, 0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x50,
+	0x61, 0x69, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x48, 0x00, 0x52, 0x17, 0x74, 0x65, 0x78,
+	0x74, 0x45, 0x6d, 0x62, 0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x69, 0x72, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x12, 0x7a, 0x0a, 0x1d, 0x74, 0x65, 0x78, 0x74, 0x5f, 0x65, 0x6d, 0x62,
+	0x65, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x72, 0x69, 0x70, 0x6c, 0x65, 0x74, 0x5f, 0x70,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x68, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x35, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x78, 0x74, 0x45, 0x6d, 0x62, 0x65,
+	0x64, 0x64, 0x69, 0x6e, 0x67, 0x54, 0x72, 0x69, 0x70, 0x6c, 0x65, 0x74, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x73, 0x48, 0x00, 0x52, 0x1a, 0x74, 0x65, 0x78, 0x74, 0x45, 0x6d, 0x62, 0x65, 0x64, 0x64,
+	0x69, 0x6e, 0x67, 0x54, 0x72, 0x69, 0x70, 0x6c, 0x65, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x12, 0x13, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0xc8, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x21, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0xc9, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73,
+	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x58, 0x0a, 0x06, 0x6c, 0x61, 0x62, 0x65,
+	0x6c, 0x73, 0x18, 0xca, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x3f, 0x2e, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69,
+	0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x4c,
+	0x61, 0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x06, 0x6c, 0x61, 0x62, 0x65,
+	0x6c, 0x73, 0x1a, 0x39, 0x0a, 0x0b, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72,
+	0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x0f, 0x0a,
+	0x0d, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x4a, 0x04,
+	0x08, 0x05, 0x10, 0x64, 0x4a, 0x05, 0x08, 0x69, 0x10, 0xc8, 0x01, 0x22, 0x41, 0x0a, 0x19, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x0e, 0x74, 0x75, 0x6e, 0x69,
+	0x6e, 0x67, 0x5f, 0x74, 0x61, 0x73, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0c, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x54, 0x61, 0x73, 0x6b, 0x49, 0x64, 0x22, 0x46,
+	0x0a, 0x18, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72,
+	0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a, 0x0e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x61, 0x73, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0c, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67,
+	0x54, 0x61, 0x73, 0x6b, 0x49, 0x64, 0x22, 0x41, 0x0a, 0x19, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x0e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x61,
+	0x73, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x54, 0x61, 0x73, 0x6b, 0x49, 0x64, 0x22, 0x3e, 0x0a, 0x10, 0x54, 0x75, 0x6e,
+	0x65, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a,
+	0x0e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x61, 0x73, 0x6b, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0c, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x54, 0x61, 0x73, 0x6b, 0x49, 0x64, 0x32, 0x89, 0x0a, 0x0a, 0x0d, 0x54, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x79, 0x0a, 0x04, 0x54,
+	0x75, 0x6e, 0x65, 0x12, 0x28, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
 	0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e,
-	0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76,
-	0x31, 0x2e, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a, 0x06, 0x43, 0x61, 0x6e, 0x63,
-	0x65, 0x6c, 0x12, 0x2e, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43,
-	0x61, 0x6e, 0x63, 0x65, 0x6c, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x2f, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43,
-	0x61, 0x6e, 0x63, 0x65, 0x6c, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x72, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63,
-	0x73, 0x55, 0x72, 0x6c, 0x12, 0x2f, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31,
-	0x2e, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x55, 0x72, 0x6c, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76,
-	0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x55, 0x72, 0x6c, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x4f, 0x70,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76,
-	0x31, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e,
-	0x47, 0x65, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x69, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x73,
-	0x12, 0x2c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73,
-	0x74, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d,
+	0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e,
+	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x22, 0x24, 0xb2, 0xd2, 0x2a, 0x20, 0x0a, 0x0e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x4d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x0e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x65, 0x0a, 0x04, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x2d,
 	0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69,
-	0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x45,
-	0x72, 0x72, 0x6f, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x63, 0x0a,
-	0x1d, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x5a, 0x42,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
-	0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2f, 0x61, 0x69, 0x2f, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x6f,
-	0x6d, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54,
+	0x75, 0x6e, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e,
+	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e,
+	0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f, 0x0a,
+	0x08, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x12, 0x30, 0x2e, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65,
+	0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69,
+	0x0a, 0x06, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x12, 0x2e, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e,
+	0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x54, 0x75, 0x6e, 0x69, 0x6e,
+	0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2f, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e,
+	0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x54, 0x75, 0x6e, 0x69, 0x6e,
+	0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x72, 0x0a, 0x0d, 0x47, 0x65, 0x74,
+	0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x55, 0x72, 0x6c, 0x12, 0x2f, 0x2e, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63,
+	0x73, 0x55, 0x72, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x30, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69,
+	0x63, 0x73, 0x55, 0x72, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a,
+	0x0a, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2c, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74,
+	0x45, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x12, 0x2c, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e,
+	0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31,
+	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x78, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x44, 0x72, 0x61,
+	0x66, 0x74, 0x12, 0x33, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x34, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67,
+	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67,
+	0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x78, 0x0a,
+	0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x44, 0x72, 0x61, 0x66, 0x74, 0x12, 0x33, 0x2e, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74,
+	0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54,
+	0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x34, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x78, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x44, 0x72, 0x61, 0x66, 0x74, 0x12, 0x33, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e,
+	0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x44,
+	0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x34, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x75,
+	0x6e, 0x69, 0x6e, 0x67, 0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x81, 0x01, 0x0a, 0x09, 0x54, 0x75, 0x6e, 0x65, 0x44, 0x72, 0x61, 0x66, 0x74, 0x12,
+	0x2b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61,
+	0x69, 0x2e, 0x74, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x75, 0x6e, 0x65,
+	0x44, 0x72, 0x61, 0x66, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22,
+	0x24, 0xb2, 0xd2, 0x2a, 0x20, 0x0a, 0x0e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x0e, 0x54, 0x75, 0x6e, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x63, 0x0a, 0x1d, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x74, 0x75, 0x6e,
+	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f,
+	0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x74, 0x75, 0x6e, 0x69,
+	0x6e, 0x67, 0x2f, 0x76, 0x31, 0x3b, 0x66, 0x6f, 0x6d, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -3268,7 +4059,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_goTypes = []any{
 	(*ListTuningsRequest)(nil),                           // 0: yandex.cloud.ai.tuning.v1.ListTuningsRequest
 	(*ListTuningsResponse)(nil),                          // 1: yandex.cloud.ai.tuning.v1.ListTuningsResponse
@@ -3290,110 +4081,143 @@ var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_goTypes = []any{
 	(*GetOptionsResponse)(nil),                           // 17: yandex.cloud.ai.tuning.v1.GetOptionsResponse
 	(*ListErrorsRequest)(nil),                            // 18: yandex.cloud.ai.tuning.v1.ListErrorsRequest
 	(*ListErrorsResponse)(nil),                           // 19: yandex.cloud.ai.tuning.v1.ListErrorsResponse
-	nil,                                                  // 20: yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
-	(*TuningRequest_WeightedDataset)(nil),                // 21: yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	(*TextToTextCompletionTuningParams_Scheduler)(nil),   // 22: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
-	(*TextToTextCompletionTuningParams_Optimizer)(nil),   // 23: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
-	(*TextClassificationMultilabelParams_Scheduler)(nil), // 24: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
-	(*TextClassificationMultilabelParams_Optimizer)(nil), // 25: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
-	(*TextClassificationMulticlassParams_Scheduler)(nil), // 26: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
-	(*TextClassificationMulticlassParams_Optimizer)(nil), // 27: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
-	(*TextEmbeddingPairParams_Scheduler)(nil),            // 28: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
-	(*TextEmbeddingPairParams_Optimizer)(nil),            // 29: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
-	(*TextEmbeddingTripletParams_Scheduler)(nil),         // 30: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
-	(*TextEmbeddingTripletParams_Optimizer)(nil),         // 31: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
-	(TuningTask_Status)(0),                               // 32: yandex.cloud.ai.tuning.v1.TuningTask.Status
-	(*TuningTask)(nil),                                   // 33: yandex.cloud.ai.tuning.v1.TuningTask
-	(*TuningTypeLora)(nil),                               // 34: yandex.cloud.ai.tuning.v1.TuningTypeLora
-	(*TuningTypePromptTune)(nil),                         // 35: yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	(*TuningError)(nil),                                  // 36: yandex.cloud.ai.tuning.v1.TuningError
-	(*SchedulerLinear)(nil),                              // 37: yandex.cloud.ai.tuning.v1.SchedulerLinear
-	(*SchedulerConstant)(nil),                            // 38: yandex.cloud.ai.tuning.v1.SchedulerConstant
-	(*SchedulerCosine)(nil),                              // 39: yandex.cloud.ai.tuning.v1.SchedulerCosine
-	(*OptimizerAdamw)(nil),                               // 40: yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	(*operation.Operation)(nil),                          // 41: yandex.cloud.operation.Operation
+	(*CreateTuningDraftRequest)(nil),                     // 20: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest
+	(*CreateTuningDraftResponse)(nil),                    // 21: yandex.cloud.ai.tuning.v1.CreateTuningDraftResponse
+	(*UpdateTuningDraftRequest)(nil),                     // 22: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest
+	(*UpdateTuningDraftResponse)(nil),                    // 23: yandex.cloud.ai.tuning.v1.UpdateTuningDraftResponse
+	(*DeleteTuningDraftRequest)(nil),                     // 24: yandex.cloud.ai.tuning.v1.DeleteTuningDraftRequest
+	(*DeleteTuningDraftResponse)(nil),                    // 25: yandex.cloud.ai.tuning.v1.DeleteTuningDraftResponse
+	(*TuneDraftRequest)(nil),                             // 26: yandex.cloud.ai.tuning.v1.TuneDraftRequest
+	nil,                                                  // 27: yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
+	(*TuningRequest_WeightedDataset)(nil),                // 28: yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	(*TextToTextCompletionTuningParams_Scheduler)(nil),   // 29: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
+	(*TextToTextCompletionTuningParams_Optimizer)(nil),   // 30: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
+	(*TextClassificationMultilabelParams_Scheduler)(nil), // 31: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
+	(*TextClassificationMultilabelParams_Optimizer)(nil), // 32: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
+	(*TextClassificationMulticlassParams_Scheduler)(nil), // 33: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
+	(*TextClassificationMulticlassParams_Optimizer)(nil), // 34: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
+	(*TextEmbeddingPairParams_Scheduler)(nil),            // 35: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
+	(*TextEmbeddingPairParams_Optimizer)(nil),            // 36: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
+	(*TextEmbeddingTripletParams_Scheduler)(nil),         // 37: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
+	(*TextEmbeddingTripletParams_Optimizer)(nil),         // 38: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
+	nil,                          // 39: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.LabelsEntry
+	nil,                          // 40: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.LabelsEntry
+	(TuningTask_Status)(0),       // 41: yandex.cloud.ai.tuning.v1.TuningTask.Status
+	(*TuningTask)(nil),           // 42: yandex.cloud.ai.tuning.v1.TuningTask
+	(*TuningTypeLora)(nil),       // 43: yandex.cloud.ai.tuning.v1.TuningTypeLora
+	(*TuningTypePromptTune)(nil), // 44: yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	(*TuningError)(nil),          // 45: yandex.cloud.ai.tuning.v1.TuningError
+	(*SchedulerLinear)(nil),      // 46: yandex.cloud.ai.tuning.v1.SchedulerLinear
+	(*SchedulerConstant)(nil),    // 47: yandex.cloud.ai.tuning.v1.SchedulerConstant
+	(*SchedulerCosine)(nil),      // 48: yandex.cloud.ai.tuning.v1.SchedulerCosine
+	(*OptimizerAdamw)(nil),       // 49: yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	(*operation.Operation)(nil),  // 50: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_depIdxs = []int32{
-	32, // 0: yandex.cloud.ai.tuning.v1.ListTuningsRequest.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
-	33, // 1: yandex.cloud.ai.tuning.v1.ListTuningsResponse.tuning_tasks:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
-	33, // 2: yandex.cloud.ai.tuning.v1.DescribeTuningResponse.tuning_task:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
-	32, // 3: yandex.cloud.ai.tuning.v1.TuningResponse.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
-	32, // 4: yandex.cloud.ai.tuning.v1.TuningMetadata.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
-	21, // 5: yandex.cloud.ai.tuning.v1.TuningRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	21, // 6: yandex.cloud.ai.tuning.v1.TuningRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	41, // 0: yandex.cloud.ai.tuning.v1.ListTuningsRequest.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
+	42, // 1: yandex.cloud.ai.tuning.v1.ListTuningsResponse.tuning_tasks:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
+	42, // 2: yandex.cloud.ai.tuning.v1.DescribeTuningResponse.tuning_task:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
+	41, // 3: yandex.cloud.ai.tuning.v1.TuningResponse.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
+	41, // 4: yandex.cloud.ai.tuning.v1.TuningMetadata.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
+	28, // 5: yandex.cloud.ai.tuning.v1.TuningRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	28, // 6: yandex.cloud.ai.tuning.v1.TuningRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
 	9,  // 7: yandex.cloud.ai.tuning.v1.TuningRequest.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
 	10, // 8: yandex.cloud.ai.tuning.v1.TuningRequest.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
 	11, // 9: yandex.cloud.ai.tuning.v1.TuningRequest.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
 	12, // 10: yandex.cloud.ai.tuning.v1.TuningRequest.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
 	13, // 11: yandex.cloud.ai.tuning.v1.TuningRequest.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
-	20, // 12: yandex.cloud.ai.tuning.v1.TuningRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
-	34, // 13: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	35, // 14: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	22, // 15: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
-	23, // 16: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
-	34, // 17: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	35, // 18: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	24, // 19: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
-	25, // 20: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
-	34, // 21: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	35, // 22: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	26, // 23: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
-	27, // 24: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
-	34, // 25: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	35, // 26: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	28, // 27: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
-	29, // 28: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
-	34, // 29: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	35, // 30: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	30, // 31: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
-	31, // 32: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
-	21, // 33: yandex.cloud.ai.tuning.v1.GetOptionsResponse.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	21, // 34: yandex.cloud.ai.tuning.v1.GetOptionsResponse.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	27, // 12: yandex.cloud.ai.tuning.v1.TuningRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
+	43, // 13: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	44, // 14: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	29, // 15: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
+	30, // 16: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
+	43, // 17: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	44, // 18: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	31, // 19: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
+	32, // 20: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
+	43, // 21: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	44, // 22: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	33, // 23: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
+	34, // 24: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
+	43, // 25: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	44, // 26: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	35, // 27: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
+	36, // 28: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
+	43, // 29: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	44, // 30: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	37, // 31: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
+	38, // 32: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
+	28, // 33: yandex.cloud.ai.tuning.v1.GetOptionsResponse.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	28, // 34: yandex.cloud.ai.tuning.v1.GetOptionsResponse.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
 	9,  // 35: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
 	10, // 36: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
 	11, // 37: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
 	12, // 38: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
 	13, // 39: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
-	36, // 40: yandex.cloud.ai.tuning.v1.ListErrorsResponse.tuning_error:type_name -> yandex.cloud.ai.tuning.v1.TuningError
-	37, // 41: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	38, // 42: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	39, // 43: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	40, // 44: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	37, // 45: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	38, // 46: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	39, // 47: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	40, // 48: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	37, // 49: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	38, // 50: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	39, // 51: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	40, // 52: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	37, // 53: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	38, // 54: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	39, // 55: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	40, // 56: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	37, // 57: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	38, // 58: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	39, // 59: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	40, // 60: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	8,  // 61: yandex.cloud.ai.tuning.v1.TuningService.Tune:input_type -> yandex.cloud.ai.tuning.v1.TuningRequest
-	0,  // 62: yandex.cloud.ai.tuning.v1.TuningService.List:input_type -> yandex.cloud.ai.tuning.v1.ListTuningsRequest
-	2,  // 63: yandex.cloud.ai.tuning.v1.TuningService.Describe:input_type -> yandex.cloud.ai.tuning.v1.DescribeTuningRequest
-	4,  // 64: yandex.cloud.ai.tuning.v1.TuningService.Cancel:input_type -> yandex.cloud.ai.tuning.v1.CancelTuningRequest
-	14, // 65: yandex.cloud.ai.tuning.v1.TuningService.GetMetricsUrl:input_type -> yandex.cloud.ai.tuning.v1.GetMetricsUrlRequest
-	16, // 66: yandex.cloud.ai.tuning.v1.TuningService.GetOptions:input_type -> yandex.cloud.ai.tuning.v1.GetOptionsRequest
-	18, // 67: yandex.cloud.ai.tuning.v1.TuningService.ListErrors:input_type -> yandex.cloud.ai.tuning.v1.ListErrorsRequest
-	41, // 68: yandex.cloud.ai.tuning.v1.TuningService.Tune:output_type -> yandex.cloud.operation.Operation
-	1,  // 69: yandex.cloud.ai.tuning.v1.TuningService.List:output_type -> yandex.cloud.ai.tuning.v1.ListTuningsResponse
-	3,  // 70: yandex.cloud.ai.tuning.v1.TuningService.Describe:output_type -> yandex.cloud.ai.tuning.v1.DescribeTuningResponse
-	5,  // 71: yandex.cloud.ai.tuning.v1.TuningService.Cancel:output_type -> yandex.cloud.ai.tuning.v1.CancelTuningResponse
-	15, // 72: yandex.cloud.ai.tuning.v1.TuningService.GetMetricsUrl:output_type -> yandex.cloud.ai.tuning.v1.GetMetricsUrlResponse
-	17, // 73: yandex.cloud.ai.tuning.v1.TuningService.GetOptions:output_type -> yandex.cloud.ai.tuning.v1.GetOptionsResponse
-	19, // 74: yandex.cloud.ai.tuning.v1.TuningService.ListErrors:output_type -> yandex.cloud.ai.tuning.v1.ListErrorsResponse
-	68, // [68:75] is the sub-list for method output_type
-	61, // [61:68] is the sub-list for method input_type
-	61, // [61:61] is the sub-list for extension type_name
-	61, // [61:61] is the sub-list for extension extendee
-	0,  // [0:61] is the sub-list for field type_name
+	45, // 40: yandex.cloud.ai.tuning.v1.ListErrorsResponse.tuning_error:type_name -> yandex.cloud.ai.tuning.v1.TuningError
+	28, // 41: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	28, // 42: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	9,  // 43: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
+	10, // 44: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
+	11, // 45: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
+	12, // 46: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
+	13, // 47: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
+	39, // 48: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.LabelsEntry
+	28, // 49: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	28, // 50: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	9,  // 51: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
+	10, // 52: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
+	11, // 53: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
+	12, // 54: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
+	13, // 55: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
+	40, // 56: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.LabelsEntry
+	46, // 57: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	47, // 58: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	48, // 59: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	49, // 60: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	46, // 61: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	47, // 62: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	48, // 63: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	49, // 64: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	46, // 65: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	47, // 66: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	48, // 67: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	49, // 68: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	46, // 69: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	47, // 70: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	48, // 71: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	49, // 72: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	46, // 73: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	47, // 74: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	48, // 75: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	49, // 76: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	8,  // 77: yandex.cloud.ai.tuning.v1.TuningService.Tune:input_type -> yandex.cloud.ai.tuning.v1.TuningRequest
+	0,  // 78: yandex.cloud.ai.tuning.v1.TuningService.List:input_type -> yandex.cloud.ai.tuning.v1.ListTuningsRequest
+	2,  // 79: yandex.cloud.ai.tuning.v1.TuningService.Describe:input_type -> yandex.cloud.ai.tuning.v1.DescribeTuningRequest
+	4,  // 80: yandex.cloud.ai.tuning.v1.TuningService.Cancel:input_type -> yandex.cloud.ai.tuning.v1.CancelTuningRequest
+	14, // 81: yandex.cloud.ai.tuning.v1.TuningService.GetMetricsUrl:input_type -> yandex.cloud.ai.tuning.v1.GetMetricsUrlRequest
+	16, // 82: yandex.cloud.ai.tuning.v1.TuningService.GetOptions:input_type -> yandex.cloud.ai.tuning.v1.GetOptionsRequest
+	18, // 83: yandex.cloud.ai.tuning.v1.TuningService.ListErrors:input_type -> yandex.cloud.ai.tuning.v1.ListErrorsRequest
+	20, // 84: yandex.cloud.ai.tuning.v1.TuningService.CreateDraft:input_type -> yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest
+	22, // 85: yandex.cloud.ai.tuning.v1.TuningService.UpdateDraft:input_type -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest
+	24, // 86: yandex.cloud.ai.tuning.v1.TuningService.DeleteDraft:input_type -> yandex.cloud.ai.tuning.v1.DeleteTuningDraftRequest
+	26, // 87: yandex.cloud.ai.tuning.v1.TuningService.TuneDraft:input_type -> yandex.cloud.ai.tuning.v1.TuneDraftRequest
+	50, // 88: yandex.cloud.ai.tuning.v1.TuningService.Tune:output_type -> yandex.cloud.operation.Operation
+	1,  // 89: yandex.cloud.ai.tuning.v1.TuningService.List:output_type -> yandex.cloud.ai.tuning.v1.ListTuningsResponse
+	3,  // 90: yandex.cloud.ai.tuning.v1.TuningService.Describe:output_type -> yandex.cloud.ai.tuning.v1.DescribeTuningResponse
+	5,  // 91: yandex.cloud.ai.tuning.v1.TuningService.Cancel:output_type -> yandex.cloud.ai.tuning.v1.CancelTuningResponse
+	15, // 92: yandex.cloud.ai.tuning.v1.TuningService.GetMetricsUrl:output_type -> yandex.cloud.ai.tuning.v1.GetMetricsUrlResponse
+	17, // 93: yandex.cloud.ai.tuning.v1.TuningService.GetOptions:output_type -> yandex.cloud.ai.tuning.v1.GetOptionsResponse
+	19, // 94: yandex.cloud.ai.tuning.v1.TuningService.ListErrors:output_type -> yandex.cloud.ai.tuning.v1.ListErrorsResponse
+	21, // 95: yandex.cloud.ai.tuning.v1.TuningService.CreateDraft:output_type -> yandex.cloud.ai.tuning.v1.CreateTuningDraftResponse
+	23, // 96: yandex.cloud.ai.tuning.v1.TuningService.UpdateDraft:output_type -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftResponse
+	25, // 97: yandex.cloud.ai.tuning.v1.TuningService.DeleteDraft:output_type -> yandex.cloud.ai.tuning.v1.DeleteTuningDraftResponse
+	50, // 98: yandex.cloud.ai.tuning.v1.TuningService.TuneDraft:output_type -> yandex.cloud.operation.Operation
+	88, // [88:99] is the sub-list for method output_type
+	77, // [77:88] is the sub-list for method input_type
+	77, // [77:77] is the sub-list for extension type_name
+	77, // [77:77] is the sub-list for extension extendee
+	0,  // [0:77] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() }
@@ -3647,8 +4471,20 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[20].Exporter = func(v any, i int) any {
+			switch v := v.(*CreateTuningDraftRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[21].Exporter = func(v any, i int) any {
-			switch v := v.(*TuningRequest_WeightedDataset); i {
+			switch v := v.(*CreateTuningDraftResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3660,7 +4496,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[22].Exporter = func(v any, i int) any {
-			switch v := v.(*TextToTextCompletionTuningParams_Scheduler); i {
+			switch v := v.(*UpdateTuningDraftRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3672,7 +4508,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[23].Exporter = func(v any, i int) any {
-			switch v := v.(*TextToTextCompletionTuningParams_Optimizer); i {
+			switch v := v.(*UpdateTuningDraftResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3684,7 +4520,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[24].Exporter = func(v any, i int) any {
-			switch v := v.(*TextClassificationMultilabelParams_Scheduler); i {
+			switch v := v.(*DeleteTuningDraftRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3696,7 +4532,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[25].Exporter = func(v any, i int) any {
-			switch v := v.(*TextClassificationMultilabelParams_Optimizer); i {
+			switch v := v.(*DeleteTuningDraftResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3708,19 +4544,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[26].Exporter = func(v any, i int) any {
-			switch v := v.(*TextClassificationMulticlassParams_Scheduler); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[27].Exporter = func(v any, i int) any {
-			switch v := v.(*TextClassificationMulticlassParams_Optimizer); i {
+			switch v := v.(*TuneDraftRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3732,7 +4556,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28].Exporter = func(v any, i int) any {
-			switch v := v.(*TextEmbeddingPairParams_Scheduler); i {
+			switch v := v.(*TuningRequest_WeightedDataset); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3744,7 +4568,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29].Exporter = func(v any, i int) any {
-			switch v := v.(*TextEmbeddingPairParams_Optimizer); i {
+			switch v := v.(*TextToTextCompletionTuningParams_Scheduler); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3756,7 +4580,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30].Exporter = func(v any, i int) any {
-			switch v := v.(*TextEmbeddingTripletParams_Scheduler); i {
+			switch v := v.(*TextToTextCompletionTuningParams_Optimizer); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3768,6 +4592,90 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31].Exporter = func(v any, i int) any {
+			switch v := v.(*TextClassificationMultilabelParams_Scheduler); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32].Exporter = func(v any, i int) any {
+			switch v := v.(*TextClassificationMultilabelParams_Optimizer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33].Exporter = func(v any, i int) any {
+			switch v := v.(*TextClassificationMulticlassParams_Scheduler); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34].Exporter = func(v any, i int) any {
+			switch v := v.(*TextClassificationMulticlassParams_Optimizer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35].Exporter = func(v any, i int) any {
+			switch v := v.(*TextEmbeddingPairParams_Scheduler); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36].Exporter = func(v any, i int) any {
+			switch v := v.(*TextEmbeddingPairParams_Optimizer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37].Exporter = func(v any, i int) any {
+			switch v := v.(*TextEmbeddingTripletParams_Scheduler); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38].Exporter = func(v any, i int) any {
 			switch v := v.(*TextEmbeddingTripletParams_Optimizer); i {
 			case 0:
 				return &v.state
@@ -3814,46 +4722,60 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 		(*GetOptionsResponse_TextEmbeddingPairParams)(nil),
 		(*GetOptionsResponse_TextEmbeddingTripletParams)(nil),
 	}
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[20].OneofWrappers = []any{
+		(*CreateTuningDraftRequest_TextToTextCompletion)(nil),
+		(*CreateTuningDraftRequest_TextClassificationMultilabel)(nil),
+		(*CreateTuningDraftRequest_TextClassificationMulticlass)(nil),
+		(*CreateTuningDraftRequest_TextEmbeddingPairParams)(nil),
+		(*CreateTuningDraftRequest_TextEmbeddingTripletParams)(nil),
+	}
 	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[22].OneofWrappers = []any{
+		(*UpdateTuningDraftRequest_TextToTextCompletion)(nil),
+		(*UpdateTuningDraftRequest_TextClassificationMultilabel)(nil),
+		(*UpdateTuningDraftRequest_TextClassificationMulticlass)(nil),
+		(*UpdateTuningDraftRequest_TextEmbeddingPairParams)(nil),
+		(*UpdateTuningDraftRequest_TextEmbeddingTripletParams)(nil),
+	}
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29].OneofWrappers = []any{
 		(*TextToTextCompletionTuningParams_Scheduler_Linear)(nil),
 		(*TextToTextCompletionTuningParams_Scheduler_Constant)(nil),
 		(*TextToTextCompletionTuningParams_Scheduler_Cosine)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[23].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30].OneofWrappers = []any{
 		(*TextToTextCompletionTuningParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[24].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31].OneofWrappers = []any{
 		(*TextClassificationMultilabelParams_Scheduler_Linear)(nil),
 		(*TextClassificationMultilabelParams_Scheduler_Constant)(nil),
 		(*TextClassificationMultilabelParams_Scheduler_Cosine)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[25].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32].OneofWrappers = []any{
 		(*TextClassificationMultilabelParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[26].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33].OneofWrappers = []any{
 		(*TextClassificationMulticlassParams_Scheduler_Linear)(nil),
 		(*TextClassificationMulticlassParams_Scheduler_Constant)(nil),
 		(*TextClassificationMulticlassParams_Scheduler_Cosine)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[27].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34].OneofWrappers = []any{
 		(*TextClassificationMulticlassParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35].OneofWrappers = []any{
 		(*TextEmbeddingPairParams_Scheduler_Linear)(nil),
 		(*TextEmbeddingPairParams_Scheduler_Constant)(nil),
 		(*TextEmbeddingPairParams_Scheduler_Cosine)(nil),
 		(*TextEmbeddingPairParams_Scheduler_WarmupRatio)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36].OneofWrappers = []any{
 		(*TextEmbeddingPairParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37].OneofWrappers = []any{
 		(*TextEmbeddingTripletParams_Scheduler_Linear)(nil),
 		(*TextEmbeddingTripletParams_Scheduler_Constant)(nil),
 		(*TextEmbeddingTripletParams_Scheduler_Cosine)(nil),
 		(*TextEmbeddingTripletParams_Scheduler_WarmupRatio)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38].OneofWrappers = []any{
 		(*TextEmbeddingTripletParams_Optimizer_Adamw)(nil),
 	}
 	type x struct{}
@@ -3862,7 +4784,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

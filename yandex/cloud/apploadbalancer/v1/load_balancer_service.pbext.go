@@ -83,6 +83,10 @@ func (m *UpdateLoadBalancerRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *UpdateLoadBalancerRequest) SetAllowZonalShift(v bool) {
+	m.AllowZonalShift = v
+}
+
 func (m *UpdateLoadBalancerMetadata) SetLoadBalancerId(v string) {
 	m.LoadBalancerId = v
 }
@@ -129,6 +133,10 @@ func (m *CreateLoadBalancerRequest) SetAutoScalePolicy(v *AutoScalePolicy) {
 
 func (m *CreateLoadBalancerRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
+}
+
+func (m *CreateLoadBalancerRequest) SetAllowZonalShift(v bool) {
+	m.AllowZonalShift = v
 }
 
 func (m *CreateLoadBalancerMetadata) SetLoadBalancerId(v string) {
@@ -409,4 +417,36 @@ func (m *ListLoadBalancerOperationsResponse) SetOperations(v []*operation.Operat
 
 func (m *ListLoadBalancerOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *StartZonalShiftRequest) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *StartZonalShiftRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *StartZonalShiftMetadata) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *StartZonalShiftMetadata) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *CancelZonalShiftRequest) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *CancelZonalShiftRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *CancelZonalShiftMetadata) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *CancelZonalShiftMetadata) SetZoneIds(v []string) {
+	m.ZoneIds = v
 }

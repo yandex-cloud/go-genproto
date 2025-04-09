@@ -325,6 +325,10 @@ func (m *ConfigCreateSpec) SetAccess(v *Access) {
 	m.Access = v
 }
 
+func (m *ConfigCreateSpec) SetSnapshotManagement(v *SnapshotManagement) {
+	m.SnapshotManagement = v
+}
+
 func (m *KeystoreSetting) SetName(v string) {
 	m.Name = v
 }
@@ -439,6 +443,10 @@ func (m *ConfigUpdateSpec) SetDashboardsSpec(v *DashboardsClusterUpdateSpec) {
 
 func (m *ConfigUpdateSpec) SetAccess(v *Access) {
 	m.Access = v
+}
+
+func (m *ConfigUpdateSpec) SetSnapshotManagement(v *SnapshotManagement) {
+	m.SnapshotManagement = v
 }
 
 type OpenSearchClusterUpdateSpec_Config = isOpenSearchClusterUpdateSpec_Config

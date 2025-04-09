@@ -31,7 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Data Proc jobs.
+// A set of methods for managing Yandex Data Processing jobs.
 type JobServiceClient interface {
 	// Retrieves a list of jobs for a cluster.
 	List(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListJobsResponse, error)
@@ -41,7 +41,7 @@ type JobServiceClient interface {
 	Get(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*Job, error)
 	// Returns a log for specified job.
 	ListLog(ctx context.Context, in *ListJobLogRequest, opts ...grpc.CallOption) (*ListJobLogResponse, error)
-	// Cancels the specified Dataproc job.
+	// Cancels the specified Yandex Data Processing job.
 	Cancel(ctx context.Context, in *CancelJobRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -107,7 +107,7 @@ func (c *jobServiceClient) Cancel(ctx context.Context, in *CancelJobRequest, opt
 // All implementations should embed UnimplementedJobServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Data Proc jobs.
+// A set of methods for managing Yandex Data Processing jobs.
 type JobServiceServer interface {
 	// Retrieves a list of jobs for a cluster.
 	List(context.Context, *ListJobsRequest) (*ListJobsResponse, error)
@@ -117,7 +117,7 @@ type JobServiceServer interface {
 	Get(context.Context, *GetJobRequest) (*Job, error)
 	// Returns a log for specified job.
 	ListLog(context.Context, *ListJobLogRequest) (*ListJobLogResponse, error)
-	// Cancels the specified Dataproc job.
+	// Cancels the specified Yandex Data Processing job.
 	Cancel(context.Context, *CancelJobRequest) (*operation.Operation, error)
 }
 

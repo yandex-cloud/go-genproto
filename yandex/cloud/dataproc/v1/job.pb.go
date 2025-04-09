@@ -92,7 +92,7 @@ func (Job_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_dataproc_v1_job_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// A Data Proc job. For details about the concept, see [documentation](/docs/data-proc/concepts/jobs).
+// A Yandex Data Processing job. For details about the concept, see [documentation](/docs/data-proc/concepts/jobs).
 type Job struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -100,7 +100,7 @@ type Job struct {
 
 	// ID of the job. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the Data Proc cluster that the job belongs to.
+	// ID of the Yandex Data Processing cluster that the job belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -410,14 +410,14 @@ type MapreduceJob struct {
 
 	// Optional arguments to pass to the driver.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
-	// JAR file URIs to add to CLASSPATH of the Data Proc driver and each task.
+	// JAR file URIs to add to CLASSPATH of the Yandex Data Processing driver and each task.
 	JarFileUris []string `protobuf:"bytes,2,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
-	// URIs of resource files to be copied to the working directory of Data Proc drivers
+	// URIs of resource files to be copied to the working directory of Yandex Data Processing drivers
 	// and distributed Hadoop tasks.
 	FileUris []string `protobuf:"bytes,3,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
-	// URIs of archives to be extracted to the working directory of Data Proc drivers and tasks.
+	// URIs of archives to be extracted to the working directory of Yandex Data Processing drivers and tasks.
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
-	// Property names and values, used to configure Data Proc and MapReduce.
+	// Property names and values, used to configure Yandex Data Processing and MapReduce.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Types that are assignable to Driver:
 	//
@@ -539,14 +539,14 @@ type SparkJob struct {
 
 	// Optional arguments to pass to the driver.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
-	// JAR file URIs to add to CLASSPATH of the Data Proc driver and each task.
+	// JAR file URIs to add to CLASSPATH of the Yandex Data Processing driver and each task.
 	JarFileUris []string `protobuf:"bytes,2,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
-	// URIs of resource files to be copied to the working directory of Data Proc drivers
+	// URIs of resource files to be copied to the working directory of Yandex Data Processing drivers
 	// and distributed Hadoop tasks.
 	FileUris []string `protobuf:"bytes,3,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
-	// URIs of archives to be extracted to the working directory of Data Proc drivers and tasks.
+	// URIs of archives to be extracted to the working directory of Yandex Data Processing drivers and tasks.
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
-	// Property names and values, used to configure Data Proc and Spark.
+	// Property names and values, used to configure Yandex Data Processing and Spark.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// The HCFS URI of the JAR file containing the `main` class for the job.
 	MainJarFileUri string `protobuf:"bytes,6,opt,name=main_jar_file_uri,json=mainJarFileUri,proto3" json:"main_jar_file_uri,omitempty"`
@@ -669,14 +669,14 @@ type PysparkJob struct {
 
 	// Optional arguments to pass to the driver.
 	Args []string `protobuf:"bytes,1,rep,name=args,proto3" json:"args,omitempty"`
-	// JAR file URIs to add to CLASSPATH of the Data Proc driver and each task.
+	// JAR file URIs to add to CLASSPATH of the Yandex Data Processing driver and each task.
 	JarFileUris []string `protobuf:"bytes,2,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
-	// URIs of resource files to be copied to the working directory of Data Proc drivers
+	// URIs of resource files to be copied to the working directory of Yandex Data Processing drivers
 	// and distributed Hadoop tasks.
 	FileUris []string `protobuf:"bytes,3,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
-	// URIs of archives to be extracted to the working directory of Data Proc drivers and tasks.
+	// URIs of archives to be extracted to the working directory of Yandex Data Processing drivers and tasks.
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
-	// Property names and values, used to configure Data Proc and PySpark.
+	// Property names and values, used to configure Yandex Data Processing and PySpark.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// URI of the file with the driver code. Must be a .py file.
 	MainPythonFileUri string `protobuf:"bytes,6,opt,name=main_python_file_uri,json=mainPythonFileUri,proto3" json:"main_python_file_uri,omitempty"`
@@ -845,7 +845,7 @@ type HiveJob struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Property names and values, used to configure Data Proc and Hive.
+	// Property names and values, used to configure Yandex Data Processing and Hive.
 	Properties map[string]string `protobuf:"bytes,1,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Flag indicating whether a job should continue to run if a query fails.
 	ContinueOnFailure bool `protobuf:"varint,2,opt,name=continue_on_failure,json=continueOnFailure,proto3" json:"continue_on_failure,omitempty"`

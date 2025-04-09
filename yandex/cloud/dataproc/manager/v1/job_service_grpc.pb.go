@@ -30,11 +30,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type JobServiceClient interface {
-	// Retrieves a list of jobs for Data Proc cluster.
+	// Retrieves a list of jobs for Yandex Data Processing cluster.
 	ListActive(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListJobsResponse, error)
 	// Currently used to update Job status.
 	UpdateStatus(ctx context.Context, in *UpdateJobStatusRequest, opts ...grpc.CallOption) (*UpdateJobStatusResponse, error)
-	// Retrieves a list of support jobs for Data Proc cluster.
+	// Retrieves a list of support jobs for Yandex Data Processing cluster.
 	ListSupportActive(ctx context.Context, in *ListJobsRequest, opts ...grpc.CallOption) (*ListSupportJobsResponse, error)
 	// Currently used to update support job status.
 	UpdateSupportStatus(ctx context.Context, in *UpdateSupportJobStatusRequest, opts ...grpc.CallOption) (*UpdateJobStatusResponse, error)
@@ -104,11 +104,11 @@ func (c *jobServiceClient) SaveSupportLog(ctx context.Context, in *SaveSupportJo
 // All implementations should embed UnimplementedJobServiceServer
 // for forward compatibility.
 type JobServiceServer interface {
-	// Retrieves a list of jobs for Data Proc cluster.
+	// Retrieves a list of jobs for Yandex Data Processing cluster.
 	ListActive(context.Context, *ListJobsRequest) (*ListJobsResponse, error)
 	// Currently used to update Job status.
 	UpdateStatus(context.Context, *UpdateJobStatusRequest) (*UpdateJobStatusResponse, error)
-	// Retrieves a list of support jobs for Data Proc cluster.
+	// Retrieves a list of support jobs for Yandex Data Processing cluster.
 	ListSupportActive(context.Context, *ListJobsRequest) (*ListSupportJobsResponse, error)
 	// Currently used to update support job status.
 	UpdateSupportStatus(context.Context, *UpdateSupportJobStatusRequest) (*UpdateJobStatusResponse, error)

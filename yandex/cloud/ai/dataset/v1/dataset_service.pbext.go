@@ -194,6 +194,10 @@ func (m *ListDatasetsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListDatasetsRequest) SetDatasetIds(v []string) {
+	m.DatasetIds = v
+}
+
 func (m *ListDatasetsResponse) SetDatasets(v []*DatasetInfo) {
 	m.Datasets = v
 }

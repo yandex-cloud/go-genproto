@@ -34,6 +34,10 @@ func (m *GetResourceRequest) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
 
+func (m *GetResourceRequest) SetIncludeTenantInfo(v bool) {
+	m.IncludeTenantInfo = v
+}
+
 func (m *GetResourceResponse) SetResource(v *Resource) {
 	m.Resource = v
 }

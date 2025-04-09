@@ -424,9 +424,9 @@ type CancelJobRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. ID of the Dataproc cluster.
+	// Required. ID of the Yandex Data Processing cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. ID of the Dataproc job to cancel.
+	// Required. ID of the Yandex Data Processing job to cancel.
 	JobId string `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 }
 
@@ -560,7 +560,7 @@ type ListJobLogResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Requested part of Data Proc Job log.
+	// Requested part of Yandex Data Processing Job log.
 	Content string `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
 	// This token allows you to get the next page of results for ListLog requests,
 	// if the number of results is larger than `page_size` specified in the request.

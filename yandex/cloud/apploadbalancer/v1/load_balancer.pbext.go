@@ -67,6 +67,10 @@ func (m *LoadBalancer) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
 }
 
+func (m *LoadBalancer) SetAllowZonalShift(v bool) {
+	m.AllowZonalShift = v
+}
+
 type Address_Address = isAddress_Address
 
 func (m *Address) SetAddress(v Address_Address) {
@@ -117,6 +121,10 @@ func (m *Location) SetSubnetId(v string) {
 
 func (m *Location) SetDisableTraffic(v bool) {
 	m.DisableTraffic = v
+}
+
+func (m *Location) SetZonalShiftActive(v bool) {
+	m.ZonalShiftActive = v
 }
 
 func (m *AllocationPolicy) SetLocations(v []*Location) {
