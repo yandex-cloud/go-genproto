@@ -18,6 +18,10 @@ func (m *TextClassificationResponse) SetModelVersion(v string) {
 	m.ModelVersion = v
 }
 
+func (m *TextClassificationResponse) SetInputTokens(v int64) {
+	m.InputTokens = v
+}
+
 func (m *FewShotTextClassificationRequest) SetModelUri(v string) {
 	m.ModelUri = v
 }
@@ -44,4 +48,8 @@ func (m *FewShotTextClassificationResponse) SetPredictions(v []*ClassificationLa
 
 func (m *FewShotTextClassificationResponse) SetModelVersion(v string) {
 	m.ModelVersion = v
+}
+
+func (m *FewShotTextClassificationResponse) SetInputTokens(v int64) {
+	m.InputTokens = v
 }

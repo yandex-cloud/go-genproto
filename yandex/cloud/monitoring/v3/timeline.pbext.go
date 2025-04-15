@@ -6,6 +6,6 @@ func (m *Timeline) SetPeriod(v string) {
 	m.Period = v
 }
 
-func (m *Timeline) SetRefreshInterval(v int64) {
+func (m *Timeline) SetRefreshInterval(v *int64) {
 	m.RefreshInterval = v
 }

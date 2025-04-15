@@ -20,23 +20,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_Get_FullMethodName              = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Get"
-	ClusterService_List_FullMethodName             = "/yandex.cloud.mdb.greenplum.v1.ClusterService/List"
-	ClusterService_Create_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Create"
-	ClusterService_Update_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Update"
-	ClusterService_Expand_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Expand"
-	ClusterService_Delete_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Delete"
-	ClusterService_Start_FullMethodName            = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Start"
-	ClusterService_Stop_FullMethodName             = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Stop"
-	ClusterService_Move_FullMethodName             = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Move"
-	ClusterService_ListOperations_FullMethodName   = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListOperations"
-	ClusterService_ListMasterHosts_FullMethodName  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListMasterHosts"
-	ClusterService_ListSegmentHosts_FullMethodName = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListSegmentHosts"
-	ClusterService_ListLogs_FullMethodName         = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs"
-	ClusterService_StreamLogs_FullMethodName       = "/yandex.cloud.mdb.greenplum.v1.ClusterService/StreamLogs"
-	ClusterService_ListBackups_FullMethodName      = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups"
-	ClusterService_Backup_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Backup"
-	ClusterService_Restore_FullMethodName          = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Restore"
+	ClusterService_Get_FullMethodName                   = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Get"
+	ClusterService_List_FullMethodName                  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/List"
+	ClusterService_Create_FullMethodName                = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Create"
+	ClusterService_Update_FullMethodName                = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Update"
+	ClusterService_Expand_FullMethodName                = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Expand"
+	ClusterService_Delete_FullMethodName                = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Delete"
+	ClusterService_Start_FullMethodName                 = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Start"
+	ClusterService_Stop_FullMethodName                  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Stop"
+	ClusterService_Move_FullMethodName                  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Move"
+	ClusterService_RescheduleMaintenance_FullMethodName = "/yandex.cloud.mdb.greenplum.v1.ClusterService/RescheduleMaintenance"
+	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListOperations"
+	ClusterService_ListMasterHosts_FullMethodName       = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListMasterHosts"
+	ClusterService_ListSegmentHosts_FullMethodName      = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListSegmentHosts"
+	ClusterService_ListLogs_FullMethodName              = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs"
+	ClusterService_StreamLogs_FullMethodName            = "/yandex.cloud.mdb.greenplum.v1.ClusterService/StreamLogs"
+	ClusterService_ListBackups_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups"
+	ClusterService_Backup_FullMethodName                = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Backup"
+	ClusterService_Restore_FullMethodName               = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Restore"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -65,6 +66,8 @@ type ClusterServiceClient interface {
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves the specified Greenplum® cluster to the specified folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Reschedule planned maintenance operation.
+	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of master hosts for the specified cluster.
@@ -175,6 +178,16 @@ func (c *clusterServiceClient) Move(ctx context.Context, in *MoveClusterRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Move_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_RescheduleMaintenance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -296,6 +309,8 @@ type ClusterServiceServer interface {
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
 	// Moves the specified Greenplum® cluster to the specified folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
+	// Reschedule planned maintenance operation.
+	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of master hosts for the specified cluster.
@@ -347,6 +362,9 @@ func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterReque
 }
 func (UnimplementedClusterServiceServer) Move(context.Context, *MoveClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RescheduleMaintenance not implemented")
 }
 func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
@@ -554,6 +572,24 @@ func _ClusterService_Move_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_RescheduleMaintenance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RescheduleMaintenanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_RescheduleMaintenance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, req.(*RescheduleMaintenanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterOperationsRequest)
 	if err := dec(in); err != nil {
@@ -733,6 +769,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _ClusterService_Move_Handler,
+		},
+		{
+			MethodName: "RescheduleMaintenance",
+			Handler:    _ClusterService_RescheduleMaintenance_Handler,
 		},
 		{
 			MethodName: "ListOperations",

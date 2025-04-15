@@ -332,6 +332,26 @@ func (m *MoveClusterMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
 }
 
+func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenanceRequest_RescheduleType) {
+	m.RescheduleType = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
+}
+
 func (m *ListClusterOperationsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
