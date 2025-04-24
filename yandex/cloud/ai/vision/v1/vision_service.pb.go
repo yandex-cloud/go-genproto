@@ -95,7 +95,7 @@ type BatchAnalyzeRequest struct {
 	// * Image size should not exceed 20M pixels (length x width).
 	AnalyzeSpecs []*AnalyzeSpec `protobuf:"bytes,1,rep,name=analyze_specs,json=analyzeSpecs,proto3" json:"analyze_specs,omitempty"`
 	// ID of the folder to which you have access.
-	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
+	// Required for authorization with a user account.
 	// Don't specify this field if you make the request on behalf of a service account.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }

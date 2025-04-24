@@ -110,6 +110,10 @@ func (m *HadoopConfig) SetInitializationActions(v []*InitializationAction) {
 	m.InitializationActions = v
 }
 
+func (m *HadoopConfig) SetOsloginEnabled(v bool) {
+	m.OsloginEnabled = v
+}
+
 func (m *ClusterConfig) SetVersionId(v string) {
 	m.VersionId = v
 }

@@ -437,7 +437,7 @@ type DetectLanguageRequest struct {
 	// To get the list of supported languages, use a [TranslationService.ListLanguages] request.
 	LanguageCodeHints []string `protobuf:"bytes,2,rep,name=language_code_hints,json=languageCodeHints,proto3" json:"language_code_hints,omitempty"`
 	// ID of the folder to which you have access.
-	// Required for authorization with a user account (see [yandex.cloud.iam.v1.UserAccount] resource).
+	// Required for authorization with a user account.
 	// Don't specify this field if you make the request on behalf of a service account.
 	FolderId string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 }

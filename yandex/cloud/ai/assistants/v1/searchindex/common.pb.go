@@ -517,6 +517,131 @@ func (x *NgramTokenizer) GetMaxGram() *wrapperspb.Int64Value {
 	return nil
 }
 
+// A standard tokenizer that splits text on word boundaries and removes punctuation.
+// It follows the Unicode Text Segmentation rules as specified in Unicode Standard Annex #29.
+//
+// Example:
+// Input text: `Hello, world! How are you?`
+// Output tokens: `[Hello, world, How, are, you]`
+type StandardTokenizer struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *StandardTokenizer) Reset() {
+	*x = StandardTokenizer{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StandardTokenizer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StandardTokenizer) ProtoMessage() {}
+
+func (x *StandardTokenizer) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StandardTokenizer.ProtoReflect.Descriptor instead.
+func (*StandardTokenizer) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{6}
+}
+
+// A standard analyzer that uses StandardTokenizer.
+type StandardAnalyzer struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *StandardAnalyzer) Reset() {
+	*x = StandardAnalyzer{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StandardAnalyzer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StandardAnalyzer) ProtoMessage() {}
+
+func (x *StandardAnalyzer) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StandardAnalyzer.ProtoReflect.Descriptor instead.
+func (*StandardAnalyzer) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{7}
+}
+
+// A specialized analyzer that uses Yandex's lemmatization technology to reduce words to their base forms.
+// Particularly effective for Russian and other Slavic languages, handling their complex morphology.
+// For more information, see:
+// https://yandex.cloud/en/docs/tutorials/dataplatform/opensearch-yandex-lemmer
+type YandexLemmerAnalyzer struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *YandexLemmerAnalyzer) Reset() {
+	*x = YandexLemmerAnalyzer{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *YandexLemmerAnalyzer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*YandexLemmerAnalyzer) ProtoMessage() {}
+
+func (x *YandexLemmerAnalyzer) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use YandexLemmerAnalyzer.ProtoReflect.Descriptor instead.
+func (*YandexLemmerAnalyzer) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP(), []int{8}
+}
+
 var File_yandex_cloud_ai_assistants_v1_searchindex_common_proto protoreflect.FileDescriptor
 
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc = []byte{
@@ -596,21 +721,25 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc = []byte
 	0x67, 0x72, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74,
 	0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x07, 0x6d, 0x61, 0x78, 0x47, 0x72, 0x61, 0x6d,
-	0x2a, 0x54, 0x0a, 0x15, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x26, 0x0a, 0x22, 0x4e, 0x4f, 0x52,
-	0x4d, 0x41, 0x4c, 0x49, 0x5a, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x52, 0x41, 0x54,
-	0x45, 0x47, 0x59, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10,
-	0x00, 0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x49, 0x4e, 0x5f, 0x4d, 0x41, 0x58, 0x10, 0x01, 0x12, 0x06,
-	0x0a, 0x02, 0x4c, 0x32, 0x10, 0x02, 0x42, 0x8a, 0x01, 0x0a, 0x2d, 0x79, 0x61, 0x6e, 0x64, 0x65,
-	0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x61,
-	0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65, 0x61,
-	0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x5a, 0x59, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61,
-	0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x61, 0x73,
-	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x61, 0x72,
-	0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x3b, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69, 0x6e,
-	0x64, 0x65, 0x78, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x13, 0x0a, 0x11, 0x53, 0x74, 0x61, 0x6e, 0x64, 0x61, 0x72, 0x64, 0x54, 0x6f, 0x6b, 0x65,
+	0x6e, 0x69, 0x7a, 0x65, 0x72, 0x22, 0x12, 0x0a, 0x10, 0x53, 0x74, 0x61, 0x6e, 0x64, 0x61, 0x72,
+	0x64, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x72, 0x22, 0x16, 0x0a, 0x14, 0x59, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x4c, 0x65, 0x6d, 0x6d, 0x65, 0x72, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65,
+	0x72, 0x2a, 0x54, 0x0a, 0x15, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x26, 0x0a, 0x22, 0x4e, 0x4f,
+	0x52, 0x4d, 0x41, 0x4c, 0x49, 0x5a, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x52, 0x41,
+	0x54, 0x45, 0x47, 0x59, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x49, 0x4e, 0x5f, 0x4d, 0x41, 0x58, 0x10, 0x01, 0x12,
+	0x06, 0x0a, 0x02, 0x4c, 0x32, 0x10, 0x02, 0x42, 0x8a, 0x01, 0x0a, 0x2d, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e,
+	0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x73, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x5a, 0x59, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x61,
+	0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x3b, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x69,
+	0x6e, 0x64, 0x65, 0x78, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -626,7 +755,7 @@ func file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_goTypes = []any{
 	(NormalizationStrategy)(0),                           // 0: yandex.cloud.ai.assistants.v1.searchindex.NormalizationStrategy
 	(MeanCombinationStrategy_MeanEvaluationTechnique)(0), // 1: yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.MeanEvaluationTechnique
@@ -636,21 +765,24 @@ var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_goTypes = []any{
 	(*ReciprocalRankFusionCombinationStrategy)(nil),      // 5: yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy
 	(*CombinationStrategy)(nil),                          // 6: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy
 	(*NgramTokenizer)(nil),                               // 7: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer
-	(*wrapperspb.Int64Value)(nil),                        // 8: google.protobuf.Int64Value
+	(*StandardTokenizer)(nil),                            // 8: yandex.cloud.ai.assistants.v1.searchindex.StandardTokenizer
+	(*StandardAnalyzer)(nil),                             // 9: yandex.cloud.ai.assistants.v1.searchindex.StandardAnalyzer
+	(*YandexLemmerAnalyzer)(nil),                         // 10: yandex.cloud.ai.assistants.v1.searchindex.YandexLemmerAnalyzer
+	(*wrapperspb.Int64Value)(nil),                        // 11: google.protobuf.Int64Value
 }
 var file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.ai.assistants.v1.searchindex.ChunkingStrategy.static_strategy:type_name -> yandex.cloud.ai.assistants.v1.searchindex.StaticChunkingStrategy
-	1, // 1: yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.mean_evaluation_technique:type_name -> yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.MeanEvaluationTechnique
-	8, // 2: yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy.k:type_name -> google.protobuf.Int64Value
-	4, // 3: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy.mean_combination:type_name -> yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy
-	5, // 4: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy.rrf_combination:type_name -> yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy
-	8, // 5: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer.min_gram:type_name -> google.protobuf.Int64Value
-	8, // 6: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer.max_gram:type_name -> google.protobuf.Int64Value
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	2,  // 0: yandex.cloud.ai.assistants.v1.searchindex.ChunkingStrategy.static_strategy:type_name -> yandex.cloud.ai.assistants.v1.searchindex.StaticChunkingStrategy
+	1,  // 1: yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.mean_evaluation_technique:type_name -> yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy.MeanEvaluationTechnique
+	11, // 2: yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy.k:type_name -> google.protobuf.Int64Value
+	4,  // 3: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy.mean_combination:type_name -> yandex.cloud.ai.assistants.v1.searchindex.MeanCombinationStrategy
+	5,  // 4: yandex.cloud.ai.assistants.v1.searchindex.CombinationStrategy.rrf_combination:type_name -> yandex.cloud.ai.assistants.v1.searchindex.ReciprocalRankFusionCombinationStrategy
+	11, // 5: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer.min_gram:type_name -> google.protobuf.Int64Value
+	11, // 6: yandex.cloud.ai.assistants.v1.searchindex.NgramTokenizer.max_gram:type_name -> google.protobuf.Int64Value
+	7,  // [7:7] is the sub-list for method output_type
+	7,  // [7:7] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_init() }
@@ -731,6 +863,42 @@ func file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_init() {
 				return nil
 			}
 		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[6].Exporter = func(v any, i int) any {
+			switch v := v.(*StandardTokenizer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[7].Exporter = func(v any, i int) any {
+			switch v := v.(*StandardAnalyzer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[8].Exporter = func(v any, i int) any {
+			switch v := v.(*YandexLemmerAnalyzer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_msgTypes[1].OneofWrappers = []any{
 		(*ChunkingStrategy_StaticStrategy)(nil),
@@ -745,7 +913,7 @@ func file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_assistants_v1_searchindex_common_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   6,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

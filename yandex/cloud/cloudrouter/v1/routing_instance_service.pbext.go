@@ -143,6 +143,54 @@ func (m *VpcAzInfoPrefixes) SetPrefixes(v []string) {
 	m.Prefixes = v
 }
 
+func (m *MovePrefixRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *MovePrefixRequest) SetSrcVpcNetworkId(v string) {
+	m.SrcVpcNetworkId = v
+}
+
+func (m *MovePrefixRequest) SetSrcAzId(v string) {
+	m.SrcAzId = v
+}
+
+func (m *MovePrefixRequest) SetDstVpcNetworkId(v string) {
+	m.DstVpcNetworkId = v
+}
+
+func (m *MovePrefixRequest) SetDstAzId(v string) {
+	m.DstAzId = v
+}
+
+func (m *MovePrefixRequest) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *UpdatePrefixMaskRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *UpdatePrefixMaskRequest) SetVpcNetworkId(v string) {
+	m.VpcNetworkId = v
+}
+
+func (m *UpdatePrefixMaskRequest) SetAzId(v string) {
+	m.AzId = v
+}
+
+func (m *UpdatePrefixMaskRequest) SetPrefix(v string) {
+	m.Prefix = v
+}
+
+func (m *UpdatePrefixMaskRequest) SetNewMask(v int64) {
+	m.NewMask = v
+}
+
+func (m *UpdatePrefixMaskRequest) SetRemoveSubPrefixes(v bool) {
+	m.RemoveSubPrefixes = v
+}
+
 func (m *AddPrivateConnectionRequest) SetRoutingInstanceId(v string) {
 	m.RoutingInstanceId = v
 }

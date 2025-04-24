@@ -44,9 +44,13 @@ type TuningServiceClient interface {
 	GetMetricsUrl(ctx context.Context, in *GetMetricsUrlRequest, opts ...grpc.CallOption) (*GetMetricsUrlResponse, error)
 	GetOptions(ctx context.Context, in *GetOptionsRequest, opts ...grpc.CallOption) (*GetOptionsResponse, error)
 	ListErrors(ctx context.Context, in *ListErrorsRequest, opts ...grpc.CallOption) (*ListErrorsResponse, error)
+	// Unimplemented
 	CreateDraft(ctx context.Context, in *CreateTuningDraftRequest, opts ...grpc.CallOption) (*CreateTuningDraftResponse, error)
+	// Unimplemented
 	UpdateDraft(ctx context.Context, in *UpdateTuningDraftRequest, opts ...grpc.CallOption) (*UpdateTuningDraftResponse, error)
+	// Unimplemented
 	DeleteDraft(ctx context.Context, in *DeleteTuningDraftRequest, opts ...grpc.CallOption) (*DeleteTuningDraftResponse, error)
+	// Unimplemented
 	TuneDraft(ctx context.Context, in *TuneDraftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -179,9 +183,13 @@ type TuningServiceServer interface {
 	GetMetricsUrl(context.Context, *GetMetricsUrlRequest) (*GetMetricsUrlResponse, error)
 	GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsResponse, error)
 	ListErrors(context.Context, *ListErrorsRequest) (*ListErrorsResponse, error)
+	// Unimplemented
 	CreateDraft(context.Context, *CreateTuningDraftRequest) (*CreateTuningDraftResponse, error)
+	// Unimplemented
 	UpdateDraft(context.Context, *UpdateTuningDraftRequest) (*UpdateTuningDraftResponse, error)
+	// Unimplemented
 	DeleteDraft(context.Context, *DeleteTuningDraftRequest) (*DeleteTuningDraftResponse, error)
+	// Unimplemented
 	TuneDraft(context.Context, *TuneDraftRequest) (*operation.Operation, error)
 }
 

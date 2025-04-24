@@ -81,6 +81,12 @@ func (m *TextSearchIndex) SetTextTokenizer(v TextSearchIndex_TextTokenizer) {
 	m.TextTokenizer = v
 }
 
+type TextSearchIndex_TextAnalyzer = isTextSearchIndex_TextAnalyzer
+
+func (m *TextSearchIndex) SetTextAnalyzer(v TextSearchIndex_TextAnalyzer) {
+	m.TextAnalyzer = v
+}
+
 func (m *TextSearchIndex) SetChunkingStrategy(v *ChunkingStrategy) {
 	m.ChunkingStrategy = v
 }
@@ -88,6 +94,24 @@ func (m *TextSearchIndex) SetChunkingStrategy(v *ChunkingStrategy) {
 func (m *TextSearchIndex) SetNgramTokenizer(v *NgramTokenizer) {
 	m.TextTokenizer = &TextSearchIndex_NgramTokenizer{
 		NgramTokenizer: v,
+	}
+}
+
+func (m *TextSearchIndex) SetStandardTokenizer(v *StandardTokenizer) {
+	m.TextTokenizer = &TextSearchIndex_StandardTokenizer{
+		StandardTokenizer: v,
+	}
+}
+
+func (m *TextSearchIndex) SetStandardAnalyzer(v *StandardAnalyzer) {
+	m.TextAnalyzer = &TextSearchIndex_StandardAnalyzer{
+		StandardAnalyzer: v,
+	}
+}
+
+func (m *TextSearchIndex) SetYandexLemmerAnalyzer(v *YandexLemmerAnalyzer) {
+	m.TextAnalyzer = &TextSearchIndex_YandexLemmerAnalyzer{
+		YandexLemmerAnalyzer: v,
 	}
 }
 

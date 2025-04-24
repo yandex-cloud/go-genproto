@@ -338,7 +338,7 @@ type CostBudgetSpec struct {
 
 	// Max cost threshold of the budget. Amount currency is the same as corresponding [yandex.cloud.billing.v1.BillingAccount.currency].
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	// IDs of the [yandex.cloud.iam.v1.UserAccount].
+	// User account IDs.
 	// Specified users will be be notified if the budget exceeds.
 	NotificationUserAccountIds []string `protobuf:"bytes,2,rep,name=notification_user_account_ids,json=notificationUserAccountIds,proto3" json:"notification_user_account_ids,omitempty"`
 	// List of the [ThresholdRule].
@@ -474,7 +474,7 @@ type ExpenseBudgetSpec struct {
 
 	// Max expense threshold of the budget. Amount currency is the same as corresponding [yandex.cloud.billing.v1.BillingAccount.currency].
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	// IDs of the [yandex.cloud.iam.v1.UserAccount].
+	// User account IDs.
 	// Specified users will be be notified if the budget exceeds.
 	NotificationUserAccountIds []string `protobuf:"bytes,2,rep,name=notification_user_account_ids,json=notificationUserAccountIds,proto3" json:"notification_user_account_ids,omitempty"`
 	// List of the [ThresholdRule].
@@ -610,7 +610,7 @@ type BalanceBudgetSpec struct {
 
 	// Max balance threshold of the budget. Amount currency is the same as corresponding [yandex.cloud.billing.v1.BillingAccount.currency].
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	// IDs of the [yandex.cloud.iam.v1.UserAccount].
+	// User account IDs.
 	// Specified users will be be notified if the budget exceeds.
 	NotificationUserAccountIds []string `protobuf:"bytes,2,rep,name=notification_user_account_ids,json=notificationUserAccountIds,proto3" json:"notification_user_account_ids,omitempty"`
 	// List of the [ThresholdRule].
@@ -826,7 +826,7 @@ type ThresholdRule struct {
 	//   - Must be less than 100 if type is PERCENT.
 	//   - Must be less than budget's amount if type is AMOUNT.
 	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	// IDs of the [yandex.cloud.iam.v1.UserAccount].
+	// User account IDs.
 	// Specified users will be be notified if the threshold exceeds.
 	NotificationUserAccountIds []string `protobuf:"bytes,3,rep,name=notification_user_account_ids,json=notificationUserAccountIds,proto3" json:"notification_user_account_ids,omitempty"`
 }

@@ -1442,7 +1442,7 @@ type DeployPolicy struct {
 	// Instance startup duration.
 	// Instance will be considered up and running (and start receiving traffic) only after startup_duration
 	// has elapsed and all health checks are passed.
-	// See [yandex.cloud.compute.v1.instancegroup.ManagedInstance.Status] for more information.
+	// See [ManagedInstance.Status] for more information.
 	StartupDuration *durationpb.Duration `protobuf:"bytes,7,opt,name=startup_duration,json=startupDuration,proto3" json:"startup_duration,omitempty"`
 	// Affects the lifecycle of the instance during deployment.
 	Strategy DeployPolicy_Strategy `protobuf:"varint,8,opt,name=strategy,proto3,enum=yandex.cloud.compute.v1.instancegroup.DeployPolicy_Strategy" json:"strategy,omitempty"`

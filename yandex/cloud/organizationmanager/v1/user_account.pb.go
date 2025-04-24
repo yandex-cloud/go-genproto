@@ -174,7 +174,7 @@ func (x *YandexPassportUserAccount) GetDefaultEmail() string {
 }
 
 // A SAML federated user.
-// For more information, see [federations](/docs/iam/concepts/users/saml-federations).
+// For more information, see [federations](/docs/iam/concepts/users/accounts#saml-federation).
 type SamlUserAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

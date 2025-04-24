@@ -153,7 +153,7 @@ func (x *TextClassificationResponse) GetInputTokens() int64 {
 }
 
 // Request for the service to classify text.
-// For examples of usage, see [step-by-step guides](/docs/operations/classifier/readymade).
+// For examples of usage, see [step-by-step guides](/docs/foundation-models/operations/classifier/readymade).
 type FewShotTextClassificationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -611,3 +611,7 @@ func (m *StreamingResponse) SetChannelTag(v string) {
 func (m *DeleteRecognitionRequest) SetOperationId(v string) {
 	m.OperationId = v
 }
+
+func (m *StreamingResponseList) SetStreamingResponses(v []*StreamingResponse) {
+	m.StreamingResponses = v
+}
