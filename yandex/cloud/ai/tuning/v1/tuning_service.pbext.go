@@ -88,6 +88,14 @@ func (m *TuningRequest) SetValidationDatasets(v []*TuningRequest_WeightedDataset
 	m.ValidationDatasets = v
 }
 
+func (m *TuningRequest) SetValidationDataset(v *TuningRequest_WeightedDataset) {
+	m.ValidationDataset = v
+}
+
+func (m *TuningRequest) SetTestDatasets(v []*TuningRequest_WeightedDataset) {
+	m.TestDatasets = v
+}
+
 func (m *TuningRequest) SetTextToTextCompletion(v *TextToTextCompletionTuningParams) {
 	m.TuningParams = &TuningRequest_TextToTextCompletion{
 		TextToTextCompletion: v,

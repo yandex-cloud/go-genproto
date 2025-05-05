@@ -75,6 +75,12 @@ func (m *Source) SetTimer(v *Timer) {
 	}
 }
 
+func (m *Source) SetEventServiceSource(v *EventServiceSource) {
+	m.Source = &Source_EventServiceSource{
+		EventServiceSource: v,
+	}
+}
+
 func (m *DataStream) SetDatabase(v string) {
 	m.Database = v
 }

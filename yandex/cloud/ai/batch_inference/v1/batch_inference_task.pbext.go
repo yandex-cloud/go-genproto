@@ -3,6 +3,7 @@
 package fomo
 
 import (
+	status "google.golang.org/genproto/googleapis/rpc/status"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -64,4 +65,44 @@ func (m *BatchInferenceTask) SetStartedAt(v *timestamppb.Timestamp) {
 
 func (m *BatchInferenceTask) SetFinishedAt(v *timestamppb.Timestamp) {
 	m.FinishedAt = v
+}
+
+func (m *BatchInferenceTask) SetErrors(v *BatchInferenceTask_ErrorsInfo) {
+	m.Errors = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo) SetStatus(v *status.Status) {
+	m.Status = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo) SetLineErrors(v []*BatchInferenceTask_ErrorsInfo_LineError) {
+	m.LineErrors = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo) SetBatchErrors(v []*BatchInferenceTask_ErrorsInfo_BatchError) {
+	m.BatchErrors = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo_LineError) SetLineNumber(v int64) {
+	m.LineNumber = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo_LineError) SetMessage(v string) {
+	m.Message = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo_BatchError) SetBatchNumber(v int64) {
+	m.BatchNumber = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo_BatchError) SetFirstLine(v int64) {
+	m.FirstLine = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo_BatchError) SetLastLine(v int64) {
+	m.LastLine = v
+}
+
+func (m *BatchInferenceTask_ErrorsInfo_BatchError) SetMessage(v string) {
+	m.Message = v
 }

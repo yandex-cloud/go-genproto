@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CertificateContentService_Get_FullMethodName = "/yandex.cloud.certificatemanager.v1.CertificateContentService/Get"
+	CertificateContentService_Get_FullMethodName   = "/yandex.cloud.certificatemanager.v1.CertificateContentService/Get"
+	CertificateContentService_GetEx_FullMethodName = "/yandex.cloud.certificatemanager.v1.CertificateContentService/GetEx"
 )
 
 // CertificateContentServiceClient is the client API for CertificateContentService service.
@@ -30,6 +31,7 @@ const (
 type CertificateContentServiceClient interface {
 	// Returns chain and private key of the specified certificate.
 	Get(ctx context.Context, in *GetCertificateContentRequest, opts ...grpc.CallOption) (*GetCertificateContentResponse, error)
+	GetEx(ctx context.Context, in *GetExCertificateContentRequest, opts ...grpc.CallOption) (*GetExCertificateContentResponse, error)
 }
 
 type certificateContentServiceClient struct {
@@ -50,6 +52,16 @@ func (c *certificateContentServiceClient) Get(ctx context.Context, in *GetCertif
 	return out, nil
 }
 
+func (c *certificateContentServiceClient) GetEx(ctx context.Context, in *GetExCertificateContentRequest, opts ...grpc.CallOption) (*GetExCertificateContentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExCertificateContentResponse)
+	err := c.cc.Invoke(ctx, CertificateContentService_GetEx_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CertificateContentServiceServer is the server API for CertificateContentService service.
 // All implementations should embed UnimplementedCertificateContentServiceServer
 // for forward compatibility.
@@ -58,6 +70,7 @@ func (c *certificateContentServiceClient) Get(ctx context.Context, in *GetCertif
 type CertificateContentServiceServer interface {
 	// Returns chain and private key of the specified certificate.
 	Get(context.Context, *GetCertificateContentRequest) (*GetCertificateContentResponse, error)
+	GetEx(context.Context, *GetExCertificateContentRequest) (*GetExCertificateContentResponse, error)
 }
 
 // UnimplementedCertificateContentServiceServer should be embedded to have
@@ -69,6 +82,9 @@ type UnimplementedCertificateContentServiceServer struct{}
 
 func (UnimplementedCertificateContentServiceServer) Get(context.Context, *GetCertificateContentRequest) (*GetCertificateContentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedCertificateContentServiceServer) GetEx(context.Context, *GetExCertificateContentRequest) (*GetExCertificateContentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEx not implemented")
 }
 func (UnimplementedCertificateContentServiceServer) testEmbeddedByValue() {}
 
@@ -108,6 +124,24 @@ func _CertificateContentService_Get_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CertificateContentService_GetEx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExCertificateContentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CertificateContentServiceServer).GetEx(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CertificateContentService_GetEx_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CertificateContentServiceServer).GetEx(ctx, req.(*GetExCertificateContentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CertificateContentService_ServiceDesc is the grpc.ServiceDesc for CertificateContentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -118,6 +152,10 @@ var CertificateContentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _CertificateContentService_Get_Handler,
+		},
+		{
+			MethodName: "GetEx",
+			Handler:    _CertificateContentService_GetEx_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
