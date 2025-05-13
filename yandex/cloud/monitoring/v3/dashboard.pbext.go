@@ -77,3 +77,7 @@ func (m *Dashboard) SetManagedLink(v string) {
 func (m *Dashboard) SetTimeline(v *Timeline) {
 	m.Timeline = v
 }
+
+func (m *Dashboard) SetLinks(v []*LinkItem) {
+	m.Links = v
+}

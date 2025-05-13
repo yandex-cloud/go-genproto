@@ -90,6 +90,10 @@ func (m *CreateDashboardRequest) SetTimeline(v *Timeline) {
 	m.Timeline = v
 }
 
+func (m *CreateDashboardRequest) SetLinks(v []*LinkItem) {
+	m.Links = v
+}
+
 func (m *CreateDashboardMetadata) SetDashboardId(v string) {
 	m.DashboardId = v
 }
@@ -136,6 +140,10 @@ func (m *UpdateDashboardRequest) SetManagedLink(v string) {
 
 func (m *UpdateDashboardRequest) SetTimeline(v *Timeline) {
 	m.Timeline = v
+}
+
+func (m *UpdateDashboardRequest) SetLinks(v []*LinkItem) {
+	m.Links = v
 }
 
 func (m *UpdateDashboardMetadata) SetDashboardId(v string) {

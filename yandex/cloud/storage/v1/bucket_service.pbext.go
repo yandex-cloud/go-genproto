@@ -51,6 +51,18 @@ func (m *CreateBucketRequest) SetTags(v []*Tag) {
 	m.Tags = v
 }
 
+func (m *CreateBucketRequest) SetEncryption(v *Encryption) {
+	m.Encryption = v
+}
+
+func (m *CreateBucketRequest) SetVersioning(v Versioning) {
+	m.Versioning = v
+}
+
+func (m *CreateBucketRequest) SetAllowedPrivateEndpoints(v *BucketAllowedPrivateEndpoints) {
+	m.AllowedPrivateEndpoints = v
+}
+
 func (m *CreateBucketMetadata) SetName(v string) {
 	m.Name = v
 }

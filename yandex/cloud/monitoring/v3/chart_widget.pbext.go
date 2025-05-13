@@ -46,6 +46,10 @@ func (m *ChartWidget) SetRepeat(v *ChartWidget_RepeatSettings) {
 	m.Repeat = v
 }
 
+func (m *ChartWidget) SetThresholds(v *Thresholds) {
+	m.Thresholds = v
+}
+
 func (m *ChartWidget_Queries) SetTargets(v []*ChartWidget_Queries_Target) {
 	m.Targets = v
 }
@@ -136,6 +140,12 @@ func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetHash(v *Chart
 	}
 }
 
+func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetThreshold(v *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) {
+	m.Scheme = &ChartWidget_VisualizationSettings_ColorSchemeSettings_Threshold{
+		Threshold: v,
+	}
+}
+
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetGreenValue(v string) {
 	m.GreenValue = v
 }
@@ -150,6 +160,10 @@ func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorSche
 
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetVioletValue(v string) {
 	m.VioletValue = v
+}
+
+func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) SetAggregation(v ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) {
+	m.Aggregation = v
 }
 
 func (m *ChartWidget_VisualizationSettings_HeatmapSettings) SetGreenValue(v string) {

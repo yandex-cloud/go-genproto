@@ -36,6 +36,10 @@ func (m *Widget) SetMultiSourceChart(v *MultiSourceChartWidget) {
 	}
 }
 
+func (m *Widget) SetLinks(v []*LinkItem) {
+	m.Links = v
+}
+
 func (m *Widget_LayoutPosition) SetX(v int64) {
 	m.X = v
 }

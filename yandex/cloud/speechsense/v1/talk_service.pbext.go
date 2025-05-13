@@ -155,3 +155,15 @@ func (m *GetTalkRequest) SetResultsMask(v *fieldmaskpb.FieldMask) {
 func (m *GetTalkResponse) SetTalk(v []*Talk) {
 	m.Talk = v
 }
+
+func (m *UploadBadgeMetadata) SetBadgeId(v string) {
+	m.BadgeId = v
+}
+
+func (m *UploadBadgeResponse) SetBadgeId(v string) {
+	m.BadgeId = v
+}
+
+func (m *UploadBadgeResponse) SetTalkIds(v []string) {
+	m.TalkIds = v
+}

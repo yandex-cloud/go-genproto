@@ -50,6 +50,10 @@ func (m *MultiSourceChartWidget) SetRepeat(v *MultiSourceChartWidget_RepeatSetti
 	m.Repeat = v
 }
 
+func (m *MultiSourceChartWidget) SetThresholds(v *Thresholds) {
+	m.Thresholds = v
+}
+
 type MultiSourceChartWidget_Target_Target = isMultiSourceChartWidget_Target_Target
 
 func (m *MultiSourceChartWidget_Target) SetTarget(v MultiSourceChartWidget_Target_Target) {
@@ -212,6 +216,12 @@ func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetHa
 	}
 }
 
+func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetThreshold(v *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) {
+	m.Scheme = &MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Threshold{
+		Threshold: v,
+	}
+}
+
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetGreenValue(v string) {
 	m.GreenValue = v
 }
@@ -226,6 +236,10 @@ func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Gradie
 
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetVioletValue(v string) {
 	m.VioletValue = v
+}
+
+func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) SetAggregation(v MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) {
+	m.Aggregation = v
 }
 
 func (m *MultiSourceChartWidget_VisualizationSettings_HeatmapSettings) SetGreenValue(v string) {

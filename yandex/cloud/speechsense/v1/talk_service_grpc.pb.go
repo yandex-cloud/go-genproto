@@ -8,6 +8,7 @@ package speechsense
 
 import (
 	context "context"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -22,6 +23,7 @@ const (
 	TalkService_UploadAsStream_FullMethodName = "/yandex.cloud.speechsense.v1.TalkService/UploadAsStream"
 	TalkService_Upload_FullMethodName         = "/yandex.cloud.speechsense.v1.TalkService/Upload"
 	TalkService_UploadText_FullMethodName     = "/yandex.cloud.speechsense.v1.TalkService/UploadText"
+	TalkService_UploadBadge_FullMethodName    = "/yandex.cloud.speechsense.v1.TalkService/UploadBadge"
 	TalkService_Search_FullMethodName         = "/yandex.cloud.speechsense.v1.TalkService/Search"
 	TalkService_Get_FullMethodName            = "/yandex.cloud.speechsense.v1.TalkService/Get"
 )
@@ -37,6 +39,9 @@ type TalkServiceClient interface {
 	Upload(ctx context.Context, in *UploadTalkRequest, opts ...grpc.CallOption) (*UploadTalkResponse, error)
 	// rpc for uploading text talk document
 	UploadText(ctx context.Context, in *UploadTextRequest, opts ...grpc.CallOption) (*UploadTextResponse, error)
+	// rpc for streaming document that contains combined talks. First message should contain Talk related metadata,
+	// second - audio metadata, others should contain audio bytes in chunks
+	UploadBadge(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[StreamTalkRequest, operation.Operation], error)
 	// rpc for searching talks. will return ids only
 	Search(ctx context.Context, in *SearchTalkRequest, opts ...grpc.CallOption) (*SearchTalkResponse, error)
 	// rpc for bulk get
@@ -84,6 +89,19 @@ func (c *talkServiceClient) UploadText(ctx context.Context, in *UploadTextReques
 	return out, nil
 }
 
+func (c *talkServiceClient) UploadBadge(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[StreamTalkRequest, operation.Operation], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &TalkService_ServiceDesc.Streams[1], TalkService_UploadBadge_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[StreamTalkRequest, operation.Operation]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type TalkService_UploadBadgeClient = grpc.ClientStreamingClient[StreamTalkRequest, operation.Operation]
+
 func (c *talkServiceClient) Search(ctx context.Context, in *SearchTalkRequest, opts ...grpc.CallOption) (*SearchTalkResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SearchTalkResponse)
@@ -115,6 +133,9 @@ type TalkServiceServer interface {
 	Upload(context.Context, *UploadTalkRequest) (*UploadTalkResponse, error)
 	// rpc for uploading text talk document
 	UploadText(context.Context, *UploadTextRequest) (*UploadTextResponse, error)
+	// rpc for streaming document that contains combined talks. First message should contain Talk related metadata,
+	// second - audio metadata, others should contain audio bytes in chunks
+	UploadBadge(grpc.ClientStreamingServer[StreamTalkRequest, operation.Operation]) error
 	// rpc for searching talks. will return ids only
 	Search(context.Context, *SearchTalkRequest) (*SearchTalkResponse, error)
 	// rpc for bulk get
@@ -136,6 +157,9 @@ func (UnimplementedTalkServiceServer) Upload(context.Context, *UploadTalkRequest
 }
 func (UnimplementedTalkServiceServer) UploadText(context.Context, *UploadTextRequest) (*UploadTextResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UploadText not implemented")
+}
+func (UnimplementedTalkServiceServer) UploadBadge(grpc.ClientStreamingServer[StreamTalkRequest, operation.Operation]) error {
+	return status.Errorf(codes.Unimplemented, "method UploadBadge not implemented")
 }
 func (UnimplementedTalkServiceServer) Search(context.Context, *SearchTalkRequest) (*SearchTalkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
@@ -206,6 +230,13 @@ func _TalkService_UploadText_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TalkService_UploadBadge_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(TalkServiceServer).UploadBadge(&grpc.GenericServerStream[StreamTalkRequest, operation.Operation]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type TalkService_UploadBadgeServer = grpc.ClientStreamingServer[StreamTalkRequest, operation.Operation]
+
 func _TalkService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchTalkRequest)
 	if err := dec(in); err != nil {
@@ -270,6 +301,11 @@ var TalkService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "UploadAsStream",
 			Handler:       _TalkService_UploadAsStream_Handler,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "UploadBadge",
+			Handler:       _TalkService_UploadBadge_Handler,
 			ClientStreams: true,
 		},
 	},
