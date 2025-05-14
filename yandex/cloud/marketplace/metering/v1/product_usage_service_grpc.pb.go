@@ -25,6 +25,8 @@ const (
 // ProductUsageServiceClient is the client API for ProductUsageService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// A set of methods for managing product's usage with product instances.
 type ProductUsageServiceClient interface {
 	// Writes product's usage (authenticated by publisher's service account)
 	Write(ctx context.Context, in *WriteUsageRequest, opts ...grpc.CallOption) (*WriteUsageResponse, error)
@@ -51,6 +53,8 @@ func (c *productUsageServiceClient) Write(ctx context.Context, in *WriteUsageReq
 // ProductUsageServiceServer is the server API for ProductUsageService service.
 // All implementations should embed UnimplementedProductUsageServiceServer
 // for forward compatibility.
+//
+// A set of methods for managing product's usage with product instances.
 type ProductUsageServiceServer interface {
 	// Writes product's usage (authenticated by publisher's service account)
 	Write(context.Context, *WriteUsageRequest) (*WriteUsageResponse, error)

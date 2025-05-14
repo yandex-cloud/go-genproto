@@ -140,9 +140,9 @@ func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetHash(v *Chart
 	}
 }
 
-func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetThreshold(v *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) {
-	m.Scheme = &ChartWidget_VisualizationSettings_ColorSchemeSettings_Threshold{
-		Threshold: v,
+func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetThresholds(v *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) {
+	m.Scheme = &ChartWidget_VisualizationSettings_ColorSchemeSettings_Thresholds{
+		Thresholds: v,
 	}
 }
 

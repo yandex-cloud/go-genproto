@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Synthesizer_UtteranceSynthesis_FullMethodName = "/speechkit.tts.v3.Synthesizer/UtteranceSynthesis"
+	Synthesizer_StreamSynthesis_FullMethodName    = "/speechkit.tts.v3.Synthesizer/StreamSynthesis"
 )
 
 // SynthesizerClient is the client API for Synthesizer service.
@@ -30,6 +31,8 @@ const (
 type SynthesizerClient interface {
 	// Synthesizing text into speech.
 	UtteranceSynthesis(ctx context.Context, in *UtteranceSynthesisRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[UtteranceSynthesisResponse], error)
+	// Bidirectional streaming RPC for real-time synthesis.
+	StreamSynthesis(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamSynthesisRequest, StreamSynthesisResponse], error)
 }
 
 type synthesizerClient struct {
@@ -59,6 +62,19 @@ func (c *synthesizerClient) UtteranceSynthesis(ctx context.Context, in *Utteranc
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Synthesizer_UtteranceSynthesisClient = grpc.ServerStreamingClient[UtteranceSynthesisResponse]
 
+func (c *synthesizerClient) StreamSynthesis(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamSynthesisRequest, StreamSynthesisResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Synthesizer_ServiceDesc.Streams[1], Synthesizer_StreamSynthesis_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[StreamSynthesisRequest, StreamSynthesisResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Synthesizer_StreamSynthesisClient = grpc.BidiStreamingClient[StreamSynthesisRequest, StreamSynthesisResponse]
+
 // SynthesizerServer is the server API for Synthesizer service.
 // All implementations should embed UnimplementedSynthesizerServer
 // for forward compatibility.
@@ -67,6 +83,8 @@ type Synthesizer_UtteranceSynthesisClient = grpc.ServerStreamingClient[Utterance
 type SynthesizerServer interface {
 	// Synthesizing text into speech.
 	UtteranceSynthesis(*UtteranceSynthesisRequest, grpc.ServerStreamingServer[UtteranceSynthesisResponse]) error
+	// Bidirectional streaming RPC for real-time synthesis.
+	StreamSynthesis(grpc.BidiStreamingServer[StreamSynthesisRequest, StreamSynthesisResponse]) error
 }
 
 // UnimplementedSynthesizerServer should be embedded to have
@@ -78,6 +96,9 @@ type UnimplementedSynthesizerServer struct{}
 
 func (UnimplementedSynthesizerServer) UtteranceSynthesis(*UtteranceSynthesisRequest, grpc.ServerStreamingServer[UtteranceSynthesisResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method UtteranceSynthesis not implemented")
+}
+func (UnimplementedSynthesizerServer) StreamSynthesis(grpc.BidiStreamingServer[StreamSynthesisRequest, StreamSynthesisResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method StreamSynthesis not implemented")
 }
 func (UnimplementedSynthesizerServer) testEmbeddedByValue() {}
 
@@ -110,6 +131,13 @@ func _Synthesizer_UtteranceSynthesis_Handler(srv interface{}, stream grpc.Server
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Synthesizer_UtteranceSynthesisServer = grpc.ServerStreamingServer[UtteranceSynthesisResponse]
 
+func _Synthesizer_StreamSynthesis_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(SynthesizerServer).StreamSynthesis(&grpc.GenericServerStream[StreamSynthesisRequest, StreamSynthesisResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Synthesizer_StreamSynthesisServer = grpc.BidiStreamingServer[StreamSynthesisRequest, StreamSynthesisResponse]
+
 // Synthesizer_ServiceDesc is the grpc.ServiceDesc for Synthesizer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -122,6 +150,12 @@ var Synthesizer_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "UtteranceSynthesis",
 			Handler:       _Synthesizer_UtteranceSynthesis_Handler,
 			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamSynthesis",
+			Handler:       _Synthesizer_StreamSynthesis_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "yandex/cloud/ai/tts/v3/tts_service.proto",

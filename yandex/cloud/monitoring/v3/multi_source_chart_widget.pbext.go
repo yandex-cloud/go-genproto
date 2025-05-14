@@ -216,9 +216,9 @@ func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetHa
 	}
 }
 
-func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetThreshold(v *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) {
-	m.Scheme = &MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Threshold{
-		Threshold: v,
+func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetThresholds(v *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) {
+	m.Scheme = &MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Thresholds{
+		Thresholds: v,
 	}
 }
 

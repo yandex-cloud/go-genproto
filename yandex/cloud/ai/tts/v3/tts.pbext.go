@@ -205,3 +205,79 @@ func (m *UtteranceSynthesisRequest) SetLoudnessNormalizationType(v UtteranceSynt
 func (m *UtteranceSynthesisRequest) SetUnsafeMode(v bool) {
 	m.UnsafeMode = v
 }
+
+func (m *SynthesisOptions) SetModel(v string) {
+	m.Model = v
+}
+
+func (m *SynthesisOptions) SetVoice(v string) {
+	m.Voice = v
+}
+
+func (m *SynthesisOptions) SetRole(v string) {
+	m.Role = v
+}
+
+func (m *SynthesisOptions) SetSpeed(v float64) {
+	m.Speed = v
+}
+
+func (m *SynthesisOptions) SetVolume(v float64) {
+	m.Volume = v
+}
+
+func (m *SynthesisOptions) SetPitchShift(v float64) {
+	m.PitchShift = v
+}
+
+func (m *SynthesisOptions) SetOutputAudioSpec(v *AudioFormatOptions) {
+	m.OutputAudioSpec = v
+}
+
+func (m *SynthesisOptions) SetLoudnessNormalizationType(v LoudnessNormalizationType) {
+	m.LoudnessNormalizationType = v
+}
+
+func (m *SynthesisInput) SetText(v string) {
+	m.Text = v
+}
+
+type StreamSynthesisRequest_Event = isStreamSynthesisRequest_Event
+
+func (m *StreamSynthesisRequest) SetEvent(v StreamSynthesisRequest_Event) {
+	m.Event = v
+}
+
+func (m *StreamSynthesisRequest) SetOptions(v *SynthesisOptions) {
+	m.Event = &StreamSynthesisRequest_Options{
+		Options: v,
+	}
+}
+
+func (m *StreamSynthesisRequest) SetSynthesisInput(v *SynthesisInput) {
+	m.Event = &StreamSynthesisRequest_SynthesisInput{
+		SynthesisInput: v,
+	}
+}
+
+func (m *StreamSynthesisRequest) SetForceSynthesis(v *ForceSynthesisEvent) {
+	m.Event = &StreamSynthesisRequest_ForceSynthesis{
+		ForceSynthesis: v,
+	}
+}
+
+func (m *StreamSynthesisResponse) SetAudioChunk(v *AudioChunk) {
+	m.AudioChunk = v
+}
+
+func (m *StreamSynthesisResponse) SetTextChunk(v *TextChunk) {
+	m.TextChunk = v
+}
+
+func (m *StreamSynthesisResponse) SetStartMs(v int64) {
+	m.StartMs = v
+}
+
+func (m *StreamSynthesisResponse) SetLengthMs(v int64) {
+	m.LengthMs = v
+}
