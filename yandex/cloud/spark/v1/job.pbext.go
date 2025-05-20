@@ -56,28 +56,8 @@ func (m *Job) SetPysparkJob(v *PysparkJob) {
 	}
 }
 
-func (m *Job) SetApplicationInfo(v *ApplicationInfo) {
-	m.ApplicationInfo = v
-}
-
 func (m *Job) SetUiUrl(v string) {
 	m.UiUrl = v
-}
-
-func (m *ApplicationAttempt) SetId(v string) {
-	m.Id = v
-}
-
-func (m *ApplicationAttempt) SetAmContainerId(v string) {
-	m.AmContainerId = v
-}
-
-func (m *ApplicationInfo) SetId(v string) {
-	m.Id = v
-}
-
-func (m *ApplicationInfo) SetApplicationAttempts(v []*ApplicationAttempt) {
-	m.ApplicationAttempts = v
 }
 
 func (m *SparkJob) SetArgs(v []string) {

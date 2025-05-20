@@ -40,6 +40,7 @@ const (
 	ClusterService_ListHosts_FullMethodName             = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListHosts"
 	ClusterService_ListHostsAtRevision_FullMethodName   = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListHostsAtRevision"
 	ClusterService_AddHosts_FullMethodName              = "/yandex.cloud.mdb.spqr.v1.ClusterService/AddHosts"
+	ClusterService_UpdateHosts_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.ClusterService/UpdateHosts"
 	ClusterService_DeleteHosts_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.ClusterService/DeleteHosts"
 	ClusterService_ResetupHosts_FullMethodName          = "/yandex.cloud.mdb.spqr.v1.ClusterService/ResetupHosts"
 	ClusterService_GetShard_FullMethodName              = "/yandex.cloud.mdb.spqr.v1.ClusterService/GetShard"
@@ -97,6 +98,8 @@ type ClusterServiceClient interface {
 	ListHostsAtRevision(ctx context.Context, in *ListClusterHostsAtRevisionRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Creates new hosts for a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified hosts.
+	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resetups hosts.
@@ -330,6 +333,16 @@ func (c *clusterServiceClient) AddHosts(ctx context.Context, in *AddClusterHosts
 	return out, nil
 }
 
+func (c *clusterServiceClient) UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_UpdateHosts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -448,6 +461,8 @@ type ClusterServiceServer interface {
 	ListHostsAtRevision(context.Context, *ListClusterHostsAtRevisionRequest) (*ListClusterHostsResponse, error)
 	// Creates new hosts for a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
+	// Updates the specified hosts.
+	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 	// Resetups hosts.
@@ -530,6 +545,9 @@ func (UnimplementedClusterServiceServer) ListHostsAtRevision(context.Context, *L
 }
 func (UnimplementedClusterServiceServer) AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddHosts not implemented")
+}
+func (UnimplementedClusterServiceServer) UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHosts not implemented")
 }
 func (UnimplementedClusterServiceServer) DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHosts not implemented")
@@ -925,6 +943,24 @@ func _ClusterService_AddHosts_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_UpdateHosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateClusterHostsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).UpdateHosts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_UpdateHosts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).UpdateHosts(ctx, req.(*UpdateClusterHostsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_DeleteHosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteClusterHostsRequest)
 	if err := dec(in); err != nil {
@@ -1133,6 +1169,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddHosts",
 			Handler:    _ClusterService_AddHosts_Handler,
+		},
+		{
+			MethodName: "UpdateHosts",
+			Handler:    _ClusterService_UpdateHosts_Handler,
 		},
 		{
 			MethodName: "DeleteHosts",

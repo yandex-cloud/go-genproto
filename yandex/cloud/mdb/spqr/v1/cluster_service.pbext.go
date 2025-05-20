@@ -558,6 +558,34 @@ func (m *AddClusterHostsMetadata) SetHostNames(v []string) {
 	m.HostNames = v
 }
 
+func (m *UpdateClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsRequest) SetUpdateHostSpecs(v []*UpdateHostSpec) {
+	m.UpdateHostSpecs = v
+}
+
+func (m *UpdateClusterHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *UpdateHostSpec) SetHostName(v string) {
+	m.HostName = v
+}
+
+func (m *UpdateHostSpec) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateHostSpec) SetAssignPublicIp(v bool) {
+	m.AssignPublicIp = v
+}
+
 func (m *DeleteClusterHostsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

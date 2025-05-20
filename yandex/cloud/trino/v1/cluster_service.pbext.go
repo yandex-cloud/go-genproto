@@ -75,6 +75,10 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *TrinoConfigSpec) SetCatalogs(v []*CatalogSpec) {
+	m.Catalogs = v
+}
+
 func (m *TrinoConfigSpec) SetCoordinatorConfig(v *CoordinatorConfig) {
 	m.CoordinatorConfig = v
 }

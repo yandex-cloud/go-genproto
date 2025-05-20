@@ -91,6 +91,10 @@ func (m *CreatePrivateSubnetMetadata) SetPrivateSubnetId(v string) {
 	m.PrivateSubnetId = v
 }
 
+func (m *UpdatePrivateSubnetRequest) SetPrivateSubnetId(v string) {
+	m.PrivateSubnetId = v
+}
+
 func (m *UpdatePrivateSubnetRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
@@ -105,10 +109,6 @@ func (m *UpdatePrivateSubnetRequest) SetDescription(v string) {
 
 func (m *UpdatePrivateSubnetRequest) SetVrfOptionsSpec(v *VrfOptionsSpec) {
 	m.VrfOptionsSpec = v
-}
-
-func (m *UpdatePrivateSubnetRequest) SetPrivateSubnetId(v string) {
-	m.PrivateSubnetId = v
 }
 
 func (m *UpdatePrivateSubnetRequest) SetLabels(v map[string]string) {

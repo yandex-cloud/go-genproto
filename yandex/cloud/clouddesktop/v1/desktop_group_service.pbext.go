@@ -123,6 +123,14 @@ func (m *UpdateDesktopGroupRequest) SetGroupConfig(v *DesktopGroupConfiguration)
 	m.GroupConfig = v
 }
 
+func (m *UpdateDesktopGroupRequest) SetBootDiskSpec(v *DiskSpec) {
+	m.BootDiskSpec = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetDataDiskSpec(v *DiskSpec) {
+	m.DataDiskSpec = v
+}
+
 func (m *CreateDesktopGroupRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
