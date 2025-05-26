@@ -29,6 +29,7 @@ type GetProductInstanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// ID of the product instance to return.
 	ProductInstanceId string `protobuf:"bytes,1,opt,name=product_instance_id,json=productInstanceId,proto3" json:"product_instance_id,omitempty"`
 }
 
@@ -76,8 +77,11 @@ type ClaimProductInstanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Token        string    `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	ResourceId   string    `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Signed JWT token which contains information about product instance and subscription.
+	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	// ID of the resource to which the product instance will be claimed.
+	ResourceId string `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Additional information about the resource.
 	ResourceInfo *SaasInfo `protobuf:"bytes,3,opt,name=resource_info,json=resourceInfo,proto3" json:"resource_info,omitempty"`
 }
 
@@ -139,8 +143,11 @@ type ClaimProductInstanceMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProductId         string `protobuf:"bytes,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	// ID of the product to which the product instance belongs.
+	ProductId string `protobuf:"bytes,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	// ID of the product instance.
 	ProductInstanceId string `protobuf:"bytes,2,opt,name=product_instance_id,json=productInstanceId,proto3" json:"product_instance_id,omitempty"`
+	// ID of the subscription.
 	LicenseInstanceId string `protobuf:"bytes,3,opt,name=license_instance_id,json=licenseInstanceId,proto3" json:"license_instance_id,omitempty"`
 }
 

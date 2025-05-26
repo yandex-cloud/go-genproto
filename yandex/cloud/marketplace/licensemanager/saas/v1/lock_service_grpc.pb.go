@@ -21,8 +21,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LockService_Ensure_FullMethodName = "/yandex.cloud.marketplace.licensemanager.saas.v1.LockService/Ensure"
-	LockService_Get_FullMethodName    = "/yandex.cloud.marketplace.licensemanager.saas.v1.LockService/Get"
+	LockService_Ensure_FullMethodName          = "/yandex.cloud.marketplace.licensemanager.saas.v1.LockService/Ensure"
+	LockService_Get_FullMethodName             = "/yandex.cloud.marketplace.licensemanager.saas.v1.LockService/Get"
+	LockService_GetByResourceID_FullMethodName = "/yandex.cloud.marketplace.licensemanager.saas.v1.LockService/GetByResourceID"
 )
 
 // LockServiceClient is the client API for LockService service.
@@ -36,6 +37,8 @@ type LockServiceClient interface {
 	Ensure(ctx context.Context, in *EnsureLockRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified subscription lock.
 	Get(ctx context.Context, in *GetLockRequest, opts ...grpc.CallOption) (*v1.Lock, error)
+	// Returns the subscription lock for given resource and subscription.
+	GetByResourceID(ctx context.Context, in *GetLockByResourceIDRequest, opts ...grpc.CallOption) (*v1.Lock, error)
 }
 
 type lockServiceClient struct {
@@ -66,6 +69,16 @@ func (c *lockServiceClient) Get(ctx context.Context, in *GetLockRequest, opts ..
 	return out, nil
 }
 
+func (c *lockServiceClient) GetByResourceID(ctx context.Context, in *GetLockByResourceIDRequest, opts ...grpc.CallOption) (*v1.Lock, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.Lock)
+	err := c.cc.Invoke(ctx, LockService_GetByResourceID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LockServiceServer is the server API for LockService service.
 // All implementations should embed UnimplementedLockServiceServer
 // for forward compatibility.
@@ -77,6 +90,8 @@ type LockServiceServer interface {
 	Ensure(context.Context, *EnsureLockRequest) (*operation.Operation, error)
 	// Returns the specified subscription lock.
 	Get(context.Context, *GetLockRequest) (*v1.Lock, error)
+	// Returns the subscription lock for given resource and subscription.
+	GetByResourceID(context.Context, *GetLockByResourceIDRequest) (*v1.Lock, error)
 }
 
 // UnimplementedLockServiceServer should be embedded to have
@@ -91,6 +106,9 @@ func (UnimplementedLockServiceServer) Ensure(context.Context, *EnsureLockRequest
 }
 func (UnimplementedLockServiceServer) Get(context.Context, *GetLockRequest) (*v1.Lock, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedLockServiceServer) GetByResourceID(context.Context, *GetLockByResourceIDRequest) (*v1.Lock, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByResourceID not implemented")
 }
 func (UnimplementedLockServiceServer) testEmbeddedByValue() {}
 
@@ -148,6 +166,24 @@ func _LockService_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LockService_GetByResourceID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLockByResourceIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LockServiceServer).GetByResourceID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LockService_GetByResourceID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LockServiceServer).GetByResourceID(ctx, req.(*GetLockByResourceIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LockService_ServiceDesc is the grpc.ServiceDesc for LockService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -162,6 +198,10 @@ var LockService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _LockService_Get_Handler,
+		},
+		{
+			MethodName: "GetByResourceID",
+			Handler:    _LockService_GetByResourceID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

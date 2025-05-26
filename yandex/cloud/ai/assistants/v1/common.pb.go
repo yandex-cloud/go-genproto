@@ -518,6 +518,10 @@ type SearchIndexTool struct {
 	// Used to rewrite the last user message for search,
 	// incorporating context from the previous conversation.
 	RephraserOptions *RephraserOptions `protobuf:"bytes,3,opt,name=rephraser_options,json=rephraserOptions,proto3" json:"rephraser_options,omitempty"`
+	// Defines the strategy for triggering search.
+	// Controls whether search results are always included or returned only when
+	// the model explicitly calls the tool.
+	CallStrategy *CallStrategy `protobuf:"bytes,4,opt,name=call_strategy,json=callStrategy,proto3" json:"call_strategy,omitempty"`
 }
 
 func (x *SearchIndexTool) Reset() {
@@ -573,6 +577,98 @@ func (x *SearchIndexTool) GetRephraserOptions() *RephraserOptions {
 	return nil
 }
 
+func (x *SearchIndexTool) GetCallStrategy() *CallStrategy {
+	if x != nil {
+		return x.CallStrategy
+	}
+	return nil
+}
+
+// Defines when the assistant uses the search tool.
+type CallStrategy struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// One of `always_call` or `auto_call`.
+	// always_call is used if no strategy is explicitly set
+	//
+	// Types that are assignable to Strategy:
+	//
+	//	*CallStrategy_AlwaysCall_
+	//	*CallStrategy_AutoCall_
+	Strategy isCallStrategy_Strategy `protobuf_oneof:"Strategy"`
+}
+
+func (x *CallStrategy) Reset() {
+	*x = CallStrategy{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CallStrategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallStrategy) ProtoMessage() {}
+
+func (x *CallStrategy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallStrategy.ProtoReflect.Descriptor instead.
+func (*CallStrategy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{8}
+}
+
+func (m *CallStrategy) GetStrategy() isCallStrategy_Strategy {
+	if m != nil {
+		return m.Strategy
+	}
+	return nil
+}
+
+func (x *CallStrategy) GetAlwaysCall() *CallStrategy_AlwaysCall {
+	if x, ok := x.GetStrategy().(*CallStrategy_AlwaysCall_); ok {
+		return x.AlwaysCall
+	}
+	return nil
+}
+
+func (x *CallStrategy) GetAutoCall() *CallStrategy_AutoCall {
+	if x, ok := x.GetStrategy().(*CallStrategy_AutoCall_); ok {
+		return x.AutoCall
+	}
+	return nil
+}
+
+type isCallStrategy_Strategy interface {
+	isCallStrategy_Strategy()
+}
+
+type CallStrategy_AlwaysCall_ struct {
+	AlwaysCall *CallStrategy_AlwaysCall `protobuf:"bytes,1,opt,name=always_call,json=alwaysCall,proto3,oneof"`
+}
+
+type CallStrategy_AutoCall_ struct {
+	AutoCall *CallStrategy_AutoCall `protobuf:"bytes,2,opt,name=auto_call,json=autoCall,proto3,oneof"`
+}
+
+func (*CallStrategy_AlwaysCall_) isCallStrategy_Strategy() {}
+
+func (*CallStrategy_AutoCall_) isCallStrategy_Strategy() {}
+
 // Represents a function tool that can be invoked by the assistant.
 type FunctionTool struct {
 	state         protoimpl.MessageState
@@ -591,7 +687,7 @@ type FunctionTool struct {
 func (x *FunctionTool) Reset() {
 	*x = FunctionTool{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -604,7 +700,7 @@ func (x *FunctionTool) String() string {
 func (*FunctionTool) ProtoMessage() {}
 
 func (x *FunctionTool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -617,7 +713,7 @@ func (x *FunctionTool) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionTool.ProtoReflect.Descriptor instead.
 func (*FunctionTool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *FunctionTool) GetName() string {
@@ -657,7 +753,7 @@ type FunctionCall struct {
 func (x *FunctionCall) Reset() {
 	*x = FunctionCall{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -670,7 +766,7 @@ func (x *FunctionCall) String() string {
 func (*FunctionCall) ProtoMessage() {}
 
 func (x *FunctionCall) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,7 +779,7 @@ func (x *FunctionCall) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionCall.ProtoReflect.Descriptor instead.
 func (*FunctionCall) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *FunctionCall) GetName() string {
@@ -717,7 +813,7 @@ type FunctionResult struct {
 func (x *FunctionResult) Reset() {
 	*x = FunctionResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -730,7 +826,7 @@ func (x *FunctionResult) String() string {
 func (*FunctionResult) ProtoMessage() {}
 
 func (x *FunctionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -743,7 +839,7 @@ func (x *FunctionResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionResult.ProtoReflect.Descriptor instead.
 func (*FunctionResult) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *FunctionResult) GetName() string {
@@ -792,7 +888,7 @@ type RephraserOptions struct {
 func (x *RephraserOptions) Reset() {
 	*x = RephraserOptions{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -805,7 +901,7 @@ func (x *RephraserOptions) String() string {
 func (*RephraserOptions) ProtoMessage() {}
 
 func (x *RephraserOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -818,7 +914,7 @@ func (x *RephraserOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RephraserOptions.ProtoReflect.Descriptor instead.
 func (*RephraserOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RephraserOptions) GetRephraserUri() string {
@@ -838,7 +934,7 @@ type PromptTruncationOptions_AutoStrategy struct {
 func (x *PromptTruncationOptions_AutoStrategy) Reset() {
 	*x = PromptTruncationOptions_AutoStrategy{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -851,7 +947,7 @@ func (x *PromptTruncationOptions_AutoStrategy) String() string {
 func (*PromptTruncationOptions_AutoStrategy) ProtoMessage() {}
 
 func (x *PromptTruncationOptions_AutoStrategy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -881,7 +977,7 @@ type PromptTruncationOptions_LastMessagesStrategy struct {
 func (x *PromptTruncationOptions_LastMessagesStrategy) Reset() {
 	*x = PromptTruncationOptions_LastMessagesStrategy{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -894,7 +990,7 @@ func (x *PromptTruncationOptions_LastMessagesStrategy) String() string {
 func (*PromptTruncationOptions_LastMessagesStrategy) ProtoMessage() {}
 
 func (x *PromptTruncationOptions_LastMessagesStrategy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -915,6 +1011,104 @@ func (x *PromptTruncationOptions_LastMessagesStrategy) GetNumMessages() int64 {
 		return x.NumMessages
 	}
 	return 0
+}
+
+// Always includes retrieved search results in the prompt.
+type CallStrategy_AlwaysCall struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CallStrategy_AlwaysCall) Reset() {
+	*x = CallStrategy_AlwaysCall{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CallStrategy_AlwaysCall) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallStrategy_AlwaysCall) ProtoMessage() {}
+
+func (x *CallStrategy_AlwaysCall) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallStrategy_AlwaysCall.ProtoReflect.Descriptor instead.
+func (*CallStrategy_AlwaysCall) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{8, 0}
+}
+
+// Exposes the tool as a callable function.
+// The model decides when to trigger search based on the instruction.
+type CallStrategy_AutoCall struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The name of the tool as exposed to the model.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required instruction that helps the model decide when to call the tool.
+	Instruction string `protobuf:"bytes,2,opt,name=instruction,proto3" json:"instruction,omitempty"`
+}
+
+func (x *CallStrategy_AutoCall) Reset() {
+	*x = CallStrategy_AutoCall{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CallStrategy_AutoCall) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallStrategy_AutoCall) ProtoMessage() {}
+
+func (x *CallStrategy_AutoCall) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallStrategy_AutoCall.ProtoReflect.Descriptor instead.
+func (*CallStrategy_AutoCall) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{8, 1}
+}
+
+func (x *CallStrategy_AutoCall) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CallStrategy_AutoCall) GetInstruction() string {
+	if x != nil {
+		return x.Instruction
+	}
+	return ""
 }
 
 var File_yandex_cloud_ai_assistants_v1_common_proto protoreflect.FileDescriptor
@@ -1004,7 +1198,7 @@ var file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = []byte{
 	0x0b, 0x32, 0x29, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
 	0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76,
 	0x31, 0x2e, 0x54, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x0b, 0x74, 0x6f,
-	0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x22, 0xde, 0x01, 0x0a, 0x0f, 0x53, 0x65,
+	0x6f, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x22, 0xb0, 0x02, 0x0a, 0x0f, 0x53, 0x65,
 	0x61, 0x72, 0x63, 0x68, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x28, 0x0a,
 	0x10, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x5f, 0x69, 0x64,
 	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x49,
@@ -1018,37 +1212,61 @@ var file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = []byte{
 	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74,
 	0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65,
 	0x72, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x10, 0x72, 0x65, 0x70, 0x68, 0x72, 0x61,
-	0x73, 0x65, 0x72, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x7d, 0x0a, 0x0c, 0x46, 0x75,
-	0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6f, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61,
-	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20,
-	0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x37, 0x0a, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x0a, 0x70,
-	0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x22, 0x59, 0x0a, 0x0c, 0x46, 0x75, 0x6e,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x6c, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x35, 0x0a,
-	0x09, 0x61, 0x72, 0x67, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
-	0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x09, 0x61, 0x72, 0x67, 0x75, 0x6d,
-	0x65, 0x6e, 0x74, 0x73, 0x22, 0x4f, 0x0a, 0x0e, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x07, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x07, 0x63,
-	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x0d, 0x0a, 0x0b, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
-	0x74, 0x54, 0x79, 0x70, 0x65, 0x22, 0x3d, 0x0a, 0x10, 0x52, 0x65, 0x70, 0x68, 0x72, 0x61, 0x73,
-	0x65, 0x72, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x29, 0x0a, 0x0d, 0x72, 0x65, 0x70,
-	0x68, 0x72, 0x61, 0x73, 0x65, 0x72, 0x5f, 0x75, 0x72, 0x69, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0c, 0x72, 0x65, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65,
-	0x72, 0x55, 0x72, 0x69, 0x42, 0x71, 0x0a, 0x21, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69,
-	0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x4c, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79,
-	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x2f, 0x61,
-	0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x61, 0x73, 0x73,
-	0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x65, 0x72, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x50, 0x0a, 0x0d, 0x63, 0x61,
+	0x6c, 0x6c, 0x5f, 0x73, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x2b, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76,
+	0x31, 0x2e, 0x43, 0x61, 0x6c, 0x6c, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x52, 0x0c,
+	0x63, 0x61, 0x6c, 0x6c, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x22, 0xa0, 0x02, 0x0a,
+	0x0c, 0x43, 0x61, 0x6c, 0x6c, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x12, 0x59, 0x0a,
+	0x0b, 0x61, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x36, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e,
+	0x76, 0x31, 0x2e, 0x43, 0x61, 0x6c, 0x6c, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x2e,
+	0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x43, 0x61, 0x6c, 0x6c, 0x48, 0x00, 0x52, 0x0a, 0x61, 0x6c,
+	0x77, 0x61, 0x79, 0x73, 0x43, 0x61, 0x6c, 0x6c, 0x12, 0x53, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x6f,
+	0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x34, 0x2e, 0x79, 0x61,
+	0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x2e, 0x61, 0x73,
+	0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61, 0x6c, 0x6c,
+	0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x2e, 0x41, 0x75, 0x74, 0x6f, 0x43, 0x61, 0x6c,
+	0x6c, 0x48, 0x00, 0x52, 0x08, 0x61, 0x75, 0x74, 0x6f, 0x43, 0x61, 0x6c, 0x6c, 0x1a, 0x0c, 0x0a,
+	0x0a, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x43, 0x61, 0x6c, 0x6c, 0x1a, 0x46, 0x0a, 0x08, 0x41,
+	0x75, 0x74, 0x6f, 0x43, 0x61, 0x6c, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x26, 0x0a, 0x0b, 0x69,
+	0x6e, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0b, 0x69, 0x6e, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x42, 0x0a, 0x0a, 0x08, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67, 0x79, 0x22,
+	0x7d, 0x0a, 0x0c, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6f, 0x6c, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x37, 0x0a, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74,
+	0x65, 0x72, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75,
+	0x63, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x22, 0x59,
+	0x0a, 0x0c, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x61, 0x6c, 0x6c, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x35, 0x0a, 0x09, 0x61, 0x72, 0x67, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x09,
+	0x61, 0x72, 0x67, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x4f, 0x0a, 0x0e, 0x46, 0x75, 0x6e,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x1a, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x48, 0x00, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x0d, 0x0a, 0x0b, 0x43,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x22, 0x3d, 0x0a, 0x10, 0x52, 0x65,
+	0x70, 0x68, 0x72, 0x61, 0x73, 0x65, 0x72, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x29,
+	0x0a, 0x0d, 0x72, 0x65, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65, 0x72, 0x5f, 0x75, 0x72, 0x69, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0xe8, 0xc7, 0x31, 0x01, 0x52, 0x0c, 0x72, 0x65, 0x70,
+	0x68, 0x72, 0x61, 0x73, 0x65, 0x72, 0x55, 0x72, 0x69, 0x42, 0x71, 0x0a, 0x21, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69,
+	0x2e, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x5a, 0x4c,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2f, 0x61, 0x69, 0x2f, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x2f, 0x76,
+	0x31, 0x3b, 0x61, 0x73, 0x73, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1063,7 +1281,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_ai_assistants_v1_common_proto_goTypes = []any{
 	(*PromptTruncationOptions)(nil),                      // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions
 	(*CompletionOptions)(nil),                            // 1: yandex.cloud.ai.assistants.v1.CompletionOptions
@@ -1073,37 +1291,43 @@ var file_yandex_cloud_ai_assistants_v1_common_proto_goTypes = []any{
 	(*ToolResult)(nil),                                   // 5: yandex.cloud.ai.assistants.v1.ToolResult
 	(*ToolResultList)(nil),                               // 6: yandex.cloud.ai.assistants.v1.ToolResultList
 	(*SearchIndexTool)(nil),                              // 7: yandex.cloud.ai.assistants.v1.SearchIndexTool
-	(*FunctionTool)(nil),                                 // 8: yandex.cloud.ai.assistants.v1.FunctionTool
-	(*FunctionCall)(nil),                                 // 9: yandex.cloud.ai.assistants.v1.FunctionCall
-	(*FunctionResult)(nil),                               // 10: yandex.cloud.ai.assistants.v1.FunctionResult
-	(*RephraserOptions)(nil),                             // 11: yandex.cloud.ai.assistants.v1.RephraserOptions
-	(*PromptTruncationOptions_AutoStrategy)(nil),         // 12: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
-	(*PromptTruncationOptions_LastMessagesStrategy)(nil), // 13: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
-	(*wrapperspb.Int64Value)(nil),                        // 14: google.protobuf.Int64Value
-	(*wrapperspb.DoubleValue)(nil),                       // 15: google.protobuf.DoubleValue
-	(*structpb.Struct)(nil),                              // 16: google.protobuf.Struct
+	(*CallStrategy)(nil),                                 // 8: yandex.cloud.ai.assistants.v1.CallStrategy
+	(*FunctionTool)(nil),                                 // 9: yandex.cloud.ai.assistants.v1.FunctionTool
+	(*FunctionCall)(nil),                                 // 10: yandex.cloud.ai.assistants.v1.FunctionCall
+	(*FunctionResult)(nil),                               // 11: yandex.cloud.ai.assistants.v1.FunctionResult
+	(*RephraserOptions)(nil),                             // 12: yandex.cloud.ai.assistants.v1.RephraserOptions
+	(*PromptTruncationOptions_AutoStrategy)(nil),         // 13: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
+	(*PromptTruncationOptions_LastMessagesStrategy)(nil), // 14: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
+	(*CallStrategy_AlwaysCall)(nil),                      // 15: yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
+	(*CallStrategy_AutoCall)(nil),                        // 16: yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
+	(*wrapperspb.Int64Value)(nil),                        // 17: google.protobuf.Int64Value
+	(*wrapperspb.DoubleValue)(nil),                       // 18: google.protobuf.DoubleValue
+	(*structpb.Struct)(nil),                              // 19: google.protobuf.Struct
 }
 var file_yandex_cloud_ai_assistants_v1_common_proto_depIdxs = []int32{
-	14, // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.max_prompt_tokens:type_name -> google.protobuf.Int64Value
-	12, // 1: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.auto_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
-	13, // 2: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.last_messages_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
-	14, // 3: yandex.cloud.ai.assistants.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
-	15, // 4: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
+	17, // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.max_prompt_tokens:type_name -> google.protobuf.Int64Value
+	13, // 1: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.auto_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
+	14, // 2: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.last_messages_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
+	17, // 3: yandex.cloud.ai.assistants.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
+	18, // 4: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
 	7,  // 5: yandex.cloud.ai.assistants.v1.Tool.search_index:type_name -> yandex.cloud.ai.assistants.v1.SearchIndexTool
-	8,  // 6: yandex.cloud.ai.assistants.v1.Tool.function:type_name -> yandex.cloud.ai.assistants.v1.FunctionTool
-	9,  // 7: yandex.cloud.ai.assistants.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.assistants.v1.FunctionCall
+	9,  // 6: yandex.cloud.ai.assistants.v1.Tool.function:type_name -> yandex.cloud.ai.assistants.v1.FunctionTool
+	10, // 7: yandex.cloud.ai.assistants.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.assistants.v1.FunctionCall
 	3,  // 8: yandex.cloud.ai.assistants.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.assistants.v1.ToolCall
-	10, // 9: yandex.cloud.ai.assistants.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.assistants.v1.FunctionResult
+	11, // 9: yandex.cloud.ai.assistants.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.assistants.v1.FunctionResult
 	5,  // 10: yandex.cloud.ai.assistants.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.assistants.v1.ToolResult
-	14, // 11: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
-	11, // 12: yandex.cloud.ai.assistants.v1.SearchIndexTool.rephraser_options:type_name -> yandex.cloud.ai.assistants.v1.RephraserOptions
-	16, // 13: yandex.cloud.ai.assistants.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
-	16, // 14: yandex.cloud.ai.assistants.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	17, // 11: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
+	12, // 12: yandex.cloud.ai.assistants.v1.SearchIndexTool.rephraser_options:type_name -> yandex.cloud.ai.assistants.v1.RephraserOptions
+	8,  // 13: yandex.cloud.ai.assistants.v1.SearchIndexTool.call_strategy:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy
+	15, // 14: yandex.cloud.ai.assistants.v1.CallStrategy.always_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
+	16, // 15: yandex.cloud.ai.assistants.v1.CallStrategy.auto_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
+	19, // 16: yandex.cloud.ai.assistants.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
+	19, // 17: yandex.cloud.ai.assistants.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_assistants_v1_common_proto_init() }
@@ -1209,7 +1433,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8].Exporter = func(v any, i int) any {
-			switch v := v.(*FunctionTool); i {
+			switch v := v.(*CallStrategy); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1221,7 +1445,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[9].Exporter = func(v any, i int) any {
-			switch v := v.(*FunctionCall); i {
+			switch v := v.(*FunctionTool); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1233,7 +1457,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10].Exporter = func(v any, i int) any {
-			switch v := v.(*FunctionResult); i {
+			switch v := v.(*FunctionCall); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1245,7 +1469,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11].Exporter = func(v any, i int) any {
-			switch v := v.(*RephraserOptions); i {
+			switch v := v.(*FunctionResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1257,7 +1481,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12].Exporter = func(v any, i int) any {
-			switch v := v.(*PromptTruncationOptions_AutoStrategy); i {
+			switch v := v.(*RephraserOptions); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1269,7 +1493,43 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			}
 		}
 		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13].Exporter = func(v any, i int) any {
+			switch v := v.(*PromptTruncationOptions_AutoStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14].Exporter = func(v any, i int) any {
 			switch v := v.(*PromptTruncationOptions_LastMessagesStrategy); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15].Exporter = func(v any, i int) any {
+			switch v := v.(*CallStrategy_AlwaysCall); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16].Exporter = func(v any, i int) any {
+			switch v := v.(*CallStrategy_AutoCall); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1295,7 +1555,11 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[5].OneofWrappers = []any{
 		(*ToolResult_FunctionResult)(nil),
 	}
-	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[10].OneofWrappers = []any{
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[8].OneofWrappers = []any{
+		(*CallStrategy_AlwaysCall_)(nil),
+		(*CallStrategy_AutoCall_)(nil),
+	}
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11].OneofWrappers = []any{
 		(*FunctionResult_Content)(nil),
 	}
 	type x struct{}
@@ -1304,7 +1568,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

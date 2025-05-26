@@ -24,12 +24,17 @@ const (
 type State int32
 
 const (
-	State_STATE_UNSPECIFIED  State = 0
-	State_ACTIVATED          State = 1
-	State_DEACTIVATED        State = 2
+	State_STATE_UNSPECIFIED State = 0
+	// Product instance is activated.
+	State_ACTIVATED State = 1
+	// Product instance is deactivated.
+	State_DEACTIVATED State = 2
+	// Product instance is pending activation.
 	State_PENDING_ACTIVATION State = 3
-	State_DEPRECATED         State = 4
-	State_DELETED            State = 5
+	// Product instance is deprecated.
+	State_DEPRECATED State = 4
+	// Product instance is deleted.
+	State_DELETED State = 5
 )
 
 // Enum value maps for State.
@@ -83,10 +88,14 @@ type ResourceType int32
 
 const (
 	ResourceType_RESOURCE_TYPE_UNSPECIFIED ResourceType = 0
-	ResourceType_SAAS                      ResourceType = 1
-	ResourceType_K8S                       ResourceType = 2
-	ResourceType_COMPUTE                   ResourceType = 3
-	ResourceType_CLOUD_APPS                ResourceType = 4
+	// SaaS resource.
+	ResourceType_SAAS ResourceType = 1
+	// Kubernetes resource.
+	ResourceType_K8S ResourceType = 2
+	// Compute resource.
+	ResourceType_COMPUTE ResourceType = 3
+	// Cloud Apps resource.
+	ResourceType_CLOUD_APPS ResourceType = 4
 )
 
 // Enum value maps for ResourceType.
@@ -139,13 +148,22 @@ type ProductInstance struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ResourceId       string                 `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	ResourceType     ResourceType           `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=yandex.cloud.marketplace.pim.v1.saas.ResourceType" json:"resource_type,omitempty"`
-	ResourceMetadata map[string]string      `protobuf:"bytes,4,rep,name=resource_metadata,json=resourceMetadata,proto3" json:"resource_metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	State            State                  `protobuf:"varint,5,opt,name=state,proto3,enum=yandex.cloud.marketplace.pim.v1.saas.State" json:"state,omitempty"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// ID of the product instance.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the resource.
+	ResourceId string `protobuf:"bytes,2,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Type of the resource.
+	ResourceType ResourceType `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=yandex.cloud.marketplace.pim.v1.saas.ResourceType" json:"resource_type,omitempty"`
+	// Metadata of the resource; Reserved for future use.
+	ResourceMetadata map[string]string `protobuf:"bytes,4,rep,name=resource_metadata,json=resourceMetadata,proto3" json:"resource_metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// State of the product instance.
+	State State `protobuf:"varint,5,opt,name=state,proto3,enum=yandex.cloud.marketplace.pim.v1.saas.State" json:"state,omitempty"`
+	// Creation timestamp
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Update timestamp
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Additional information about the resource.
+	//
 	// Types that are assignable to ResourceInfo:
 	//
 	//	*ProductInstance_SaasInfo
@@ -262,7 +280,9 @@ type SaasInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the SaaS resource.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Additional data about the SaaS resource.
 	Data map[string]string `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 

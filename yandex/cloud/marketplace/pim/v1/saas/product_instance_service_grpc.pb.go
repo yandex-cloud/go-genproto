@@ -27,8 +27,12 @@ const (
 // ProductInstanceServiceClient is the client API for ProductInstanceService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// A set of methods for managing product instances.
 type ProductInstanceServiceClient interface {
+	// Returns the specified product instance.
 	Get(ctx context.Context, in *GetProductInstanceRequest, opts ...grpc.CallOption) (*ProductInstance, error)
+	// Claims a product instance - activates it and optionally locks to subscription
 	Claim(ctx context.Context, in *ClaimProductInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -63,8 +67,12 @@ func (c *productInstanceServiceClient) Claim(ctx context.Context, in *ClaimProdu
 // ProductInstanceServiceServer is the server API for ProductInstanceService service.
 // All implementations should embed UnimplementedProductInstanceServiceServer
 // for forward compatibility.
+//
+// A set of methods for managing product instances.
 type ProductInstanceServiceServer interface {
+	// Returns the specified product instance.
 	Get(context.Context, *GetProductInstanceRequest) (*ProductInstance, error)
+	// Claims a product instance - activates it and optionally locks to subscription
 	Claim(context.Context, *ClaimProductInstanceRequest) (*operation.Operation, error)
 }
 

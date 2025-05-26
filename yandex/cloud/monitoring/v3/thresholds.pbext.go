@@ -14,6 +14,6 @@ func (m *Thresholds_Item) SetColor(v string) {
 	m.Color = v
 }
 
-func (m *Thresholds_Item) SetValue(v float64) {
+func (m *Thresholds_Item) SetValue(v *float64) {
 	m.Value = v
 }

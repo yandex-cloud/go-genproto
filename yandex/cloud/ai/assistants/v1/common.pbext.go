@@ -103,6 +103,36 @@ func (m *SearchIndexTool) SetRephraserOptions(v *RephraserOptions) {
 	m.RephraserOptions = v
 }
 
+func (m *SearchIndexTool) SetCallStrategy(v *CallStrategy) {
+	m.CallStrategy = v
+}
+
+type CallStrategy_Strategy = isCallStrategy_Strategy
+
+func (m *CallStrategy) SetStrategy(v CallStrategy_Strategy) {
+	m.Strategy = v
+}
+
+func (m *CallStrategy) SetAlwaysCall(v *CallStrategy_AlwaysCall) {
+	m.Strategy = &CallStrategy_AlwaysCall_{
+		AlwaysCall: v,
+	}
+}
+
+func (m *CallStrategy) SetAutoCall(v *CallStrategy_AutoCall) {
+	m.Strategy = &CallStrategy_AutoCall_{
+		AutoCall: v,
+	}
+}
+
+func (m *CallStrategy_AutoCall) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CallStrategy_AutoCall) SetInstruction(v string) {
+	m.Instruction = v
+}
+
 func (m *FunctionTool) SetName(v string) {
 	m.Name = v
 }

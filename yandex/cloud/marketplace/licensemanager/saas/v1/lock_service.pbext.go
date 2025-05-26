@@ -17,3 +17,11 @@ func (m *EnsureLockMetadata) SetLockId(v string) {
 func (m *GetLockRequest) SetLockId(v string) {
 	m.LockId = v
 }
+
+func (m *GetLockByResourceIDRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *GetLockByResourceIDRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}

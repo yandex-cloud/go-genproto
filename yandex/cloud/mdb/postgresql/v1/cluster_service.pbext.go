@@ -275,6 +275,10 @@ func (m *RestoreClusterRequest) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
