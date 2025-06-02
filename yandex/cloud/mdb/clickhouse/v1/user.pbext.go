@@ -674,6 +674,10 @@ func (m *UserSettings) SetQueryCacheNondeterministicFunctionHandling(v UserSetti
 	m.QueryCacheNondeterministicFunctionHandling = v
 }
 
+func (m *UserSettings) SetQueryCacheSystemTableHandling(v UserSettings_QueryCacheSystemTableHandling) {
+	m.QueryCacheSystemTableHandling = v
+}
+
 func (m *UserSettings) SetMaxInsertThreads(v *wrapperspb.Int64Value) {
 	m.MaxInsertThreads = v
 }
@@ -704,6 +708,10 @@ func (m *UserSettings) SetDoNotMergeAcrossPartitionsSelectFinal(v *wrapperspb.Bo
 
 func (m *UserSettings) SetIgnoreMaterializedViewsWithDroppedTargetTable(v *wrapperspb.BoolValue) {
 	m.IgnoreMaterializedViewsWithDroppedTargetTable = v
+}
+
+func (m *UserSettings) SetEnableAnalyzer(v *wrapperspb.BoolValue) {
+	m.EnableAnalyzer = v
 }
 
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {

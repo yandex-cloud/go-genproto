@@ -529,3 +529,55 @@ func (m *S3APIObject) SetStorageClass(v string) {
 func (m *S3APICommonPrefix) SetPrefix(v string) {
 	m.Prefix = v
 }
+
+func (m *S3APIGetAclResponse) SetRequestId(v string) {
+	m.RequestId = v
+}
+
+func (m *S3APIGetAclResponse) SetOwner(v *S3APIGetAclResponse_Owner) {
+	m.Owner = v
+}
+
+func (m *S3APIGetAclResponse) SetGrants(v []*S3APIGetAclResponse_Grant) {
+	m.Grants = v
+}
+
+func (m *S3APIGetAclResponse_Owner) SetId(v string) {
+	m.Id = v
+}
+
+func (m *S3APIGetAclResponse_Owner) SetDisplayName(v string) {
+	m.DisplayName = v
+}
+
+func (m *S3APIGetAclResponse_Grant) SetGrantee(v *S3APIGetAclResponse_Grant_Grantee) {
+	m.Grantee = v
+}
+
+func (m *S3APIGetAclResponse_Grant) SetPermission(v string) {
+	m.Permission = v
+}
+
+func (m *S3APIGetAclResponse_Grant_Grantee) SetId(v string) {
+	m.Id = v
+}
+
+func (m *S3APIGetAclResponse_Grant_Grantee) SetType(v string) {
+	m.Type = v
+}
+
+func (m *S3APIGetAclResponse_Grant_Grantee) SetUri(v string) {
+	m.Uri = v
+}
+
+func (m *S3APIGetAclResponse_Grant_Grantee) SetDisplayName(v string) {
+	m.DisplayName = v
+}
+
+func (m *S3APIGetAclResponse_Grant_Grantee) SetEmailAddress(v string) {
+	m.EmailAddress = v
+}
+
+func (m *S3APIPutAclResponse) SetRequestId(v string) {
+	m.RequestId = v
+}

@@ -98,6 +98,10 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *CreateClusterRequest) SetShardSpecs(v []*ShardSpec) {
+	m.ShardSpecs = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -662,24 +666,12 @@ func (m *ListClusterShardsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-type AddClusterShardRequest_ShardSpec = isAddClusterShardRequest_ShardSpec
-
-func (m *AddClusterShardRequest) SetShardSpec(v AddClusterShardRequest_ShardSpec) {
-	m.ShardSpec = v
-}
-
 func (m *AddClusterShardRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *AddClusterShardRequest) SetShardName(v string) {
-	m.ShardName = v
-}
-
-func (m *AddClusterShardRequest) SetMdbPostgresql(v *MDBPostgreSQL) {
-	m.ShardSpec = &AddClusterShardRequest_MdbPostgresql{
-		MdbPostgresql: v,
-	}
+func (m *AddClusterShardRequest) SetShardSpec(v *ShardSpec) {
+	m.ShardSpec = v
 }
 
 func (m *AddClusterShardMetadata) SetClusterId(v string) {

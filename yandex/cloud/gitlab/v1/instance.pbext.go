@@ -85,11 +85,3 @@ func (m *Instance) SetApprovalRulesId(v string) {
 func (m *Instance) SetGitlabVersion(v string) {
 	m.GitlabVersion = v
 }
-
-func (m *Instance) SetSecurityGroup(v string) {
-	m.SecurityGroup = v
-}
-
-func (m *Instance) SetDiskTypeId(v string) {
-	m.DiskTypeId = v
-}

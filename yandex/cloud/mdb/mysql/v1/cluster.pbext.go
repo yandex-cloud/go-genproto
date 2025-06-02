@@ -211,6 +211,10 @@ func (m *Access) SetDataTransfer(v bool) {
 	m.DataTransfer = v
 }
 
+func (m *Access) SetYandexQuery(v bool) {
+	m.YandexQuery = v
+}
+
 func (m *PerformanceDiagnostics) SetEnabled(v bool) {
 	m.Enabled = v
 }

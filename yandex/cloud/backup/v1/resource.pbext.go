@@ -18,6 +18,18 @@ func (m *TenantInfo) SetUserId(v string) {
 	m.UserId = v
 }
 
+func (m *AgentInfo) SetCurrentVersion(v string) {
+	m.CurrentVersion = v
+}
+
+func (m *AgentInfo) SetLatestVersion(v string) {
+	m.LatestVersion = v
+}
+
+func (m *AgentInfo) SetCanUpdate(v bool) {
+	m.CanUpdate = v
+}
+
 func (m *Resource) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
@@ -80,6 +92,10 @@ func (m *Resource) SetType(v ResourceType) {
 
 func (m *Resource) SetTenantInfo(v *TenantInfo) {
 	m.TenantInfo = v
+}
+
+func (m *Resource) SetAgentInfo(v *AgentInfo) {
+	m.AgentInfo = v
 }
 
 func (m *Progress) SetCurrent(v int64) {

@@ -116,6 +116,10 @@ func (m *MultiSourceChartWidget_Target_PrometheusTarget) SetName(v string) {
 	m.Name = v
 }
 
+func (m *MultiSourceChartWidget_Target_PrometheusTarget) SetStep(v string) {
+	m.Step = v
+}
+
 type MultiSourceChartWidget_DataSource_DataSource = isMultiSourceChartWidget_DataSource_DataSource
 
 func (m *MultiSourceChartWidget_DataSource) SetDataSource(v MultiSourceChartWidget_DataSource_DataSource) {

@@ -234,6 +234,22 @@ func (m *ClickhouseConfig) SetProcessorsProfileLogRetentionTime(v *wrapperspb.In
 	m.ProcessorsProfileLogRetentionTime = v
 }
 
+func (m *ClickhouseConfig) SetErrorLogEnabled(v *wrapperspb.BoolValue) {
+	m.ErrorLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetErrorLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.ErrorLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetErrorLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.ErrorLogRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetAccessControlImprovements(v *ClickhouseConfig_AccessControlImprovements) {
+	m.AccessControlImprovements = v
+}
+
 func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
 	m.BackgroundPoolSize = v
 }
@@ -420,6 +436,26 @@ func (m *ClickhouseConfig_MergeTree) SetLightweightMutationProjectionMode(v Clic
 
 func (m *ClickhouseConfig_MergeTree) SetMaterializeTtlRecalculateOnly(v *wrapperspb.BoolValue) {
 	m.MaterializeTtlRecalculateOnly = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetFsyncAfterInsert(v *wrapperspb.BoolValue) {
+	m.FsyncAfterInsert = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetFsyncPartDirectory(v *wrapperspb.BoolValue) {
+	m.FsyncPartDirectory = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinCompressedBytesToFsyncAfterFetch(v *wrapperspb.Int64Value) {
+	m.MinCompressedBytesToFsyncAfterFetch = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinCompressedBytesToFsyncAfterMerge(v *wrapperspb.Int64Value) {
+	m.MinCompressedBytesToFsyncAfterMerge = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMinRowsToFsyncAfterMerge(v *wrapperspb.Int64Value) {
+	m.MinRowsToFsyncAfterMerge = v
 }
 
 func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
@@ -910,6 +946,14 @@ func (m *ClickhouseConfig_JdbcBridge) SetHost(v string) {
 
 func (m *ClickhouseConfig_JdbcBridge) SetPort(v *wrapperspb.Int64Value) {
 	m.Port = v
+}
+
+func (m *ClickhouseConfig_AccessControlImprovements) SetSelectFromSystemDbRequiresGrant(v *wrapperspb.BoolValue) {
+	m.SelectFromSystemDbRequiresGrant = v
+}
+
+func (m *ClickhouseConfig_AccessControlImprovements) SetSelectFromInformationSchemaRequiresGrant(v *wrapperspb.BoolValue) {
+	m.SelectFromInformationSchemaRequiresGrant = v
 }
 
 func (m *ClickhouseConfigSet) SetEffectiveConfig(v *ClickhouseConfig) {

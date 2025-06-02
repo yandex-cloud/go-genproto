@@ -9,3 +9,19 @@ func (m *Shard) SetName(v string) {
 func (m *Shard) SetClusterId(v string) {
 	m.ClusterId = v
 }
+
+type ShardSpec_Spec = isShardSpec_Spec
+
+func (m *ShardSpec) SetSpec(v ShardSpec_Spec) {
+	m.Spec = v
+}
+
+func (m *ShardSpec) SetShardName(v string) {
+	m.ShardName = v
+}
+
+func (m *ShardSpec) SetMdbPostgresql(v *MDBPostgreSQL) {
+	m.Spec = &ShardSpec_MdbPostgresql{
+		MdbPostgresql: v,
+	}
+}

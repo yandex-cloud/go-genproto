@@ -78,24 +78,8 @@ func (m *CreateInstanceRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
-func (m *CreateInstanceRequest) SetGitlabType(v string) {
-	m.GitlabType = v
-}
-
-func (m *CreateInstanceRequest) SetGitlabVersion(v string) {
-	m.GitlabVersion = v
-}
-
 func (m *CreateInstanceRequest) SetApprovalRulesId(v string) {
 	m.ApprovalRulesId = v
-}
-
-func (m *CreateInstanceRequest) SetSecurityGroup(v string) {
-	m.SecurityGroup = v
-}
-
-func (m *CreateInstanceRequest) SetDiskTypeId(v string) {
-	m.DiskTypeId = v
 }
 
 func (m *CreateInstanceMetadata) SetInstanceId(v string) {
