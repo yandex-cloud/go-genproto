@@ -177,3 +177,7 @@ func (m *PostgresTarget) SetCleanupPolicy(v CleanupPolicy) {
 func (m *PostgresTarget) SetSecurityGroups(v []string) {
 	m.SecurityGroups = v
 }
+
+func (m *PostgresTarget) SetIsSchemaMigrationDisabled(v bool) {
+	m.IsSchemaMigrationDisabled = v
+}

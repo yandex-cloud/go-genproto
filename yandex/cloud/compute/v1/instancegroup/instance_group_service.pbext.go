@@ -87,6 +87,10 @@ func (m *CreateInstanceGroupRequest) SetApplicationLoadBalancerSpec(v *Applicati
 	m.ApplicationLoadBalancerSpec = v
 }
 
+func (m *CreateInstanceGroupRequest) SetAutoHealingPolicy(v *AutoHealingPolicy) {
+	m.AutoHealingPolicy = v
+}
+
 func (m *CreateInstanceGroupFromYamlRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -157,6 +161,10 @@ func (m *UpdateInstanceGroupRequest) SetDeletionProtection(v bool) {
 
 func (m *UpdateInstanceGroupRequest) SetApplicationLoadBalancerSpec(v *ApplicationLoadBalancerSpec) {
 	m.ApplicationLoadBalancerSpec = v
+}
+
+func (m *UpdateInstanceGroupRequest) SetAutoHealingPolicy(v *AutoHealingPolicy) {
+	m.AutoHealingPolicy = v
 }
 
 func (m *UpdateInstanceGroupFromYamlRequest) SetInstanceGroupId(v string) {

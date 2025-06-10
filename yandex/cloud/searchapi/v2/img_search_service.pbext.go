@@ -45,3 +45,87 @@ func (m *ImageSearchRequest) SetUserAgent(v string) {
 func (m *ImageSearchResponse) SetRawData(v []byte) {
 	m.RawData = v
 }
+
+type ImageSearchByImageRequest_Image = isImageSearchByImageRequest_Image
+
+func (m *ImageSearchByImageRequest) SetImage(v ImageSearchByImageRequest_Image) {
+	m.Image = v
+}
+
+func (m *ImageSearchByImageRequest) SetSite(v string) {
+	m.Site = v
+}
+
+func (m *ImageSearchByImageRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ImageSearchByImageRequest) SetUrl(v string) {
+	m.Image = &ImageSearchByImageRequest_Url{
+		Url: v,
+	}
+}
+
+func (m *ImageSearchByImageRequest) SetData(v []byte) {
+	m.Image = &ImageSearchByImageRequest_Data{
+		Data: v,
+	}
+}
+
+func (m *ImageSearchByImageRequest) SetId(v string) {
+	m.Image = &ImageSearchByImageRequest_Id{
+		Id: v,
+	}
+}
+
+func (m *ImageSearchByImageRequest) SetPage(v int64) {
+	m.Page = v
+}
+
+func (m *ImageSearchByImageResponse) SetImages(v []*ImageSearchByImageResponse_ImageInfo) {
+	m.Images = v
+}
+
+func (m *ImageSearchByImageResponse) SetPage(v int64) {
+	m.Page = v
+}
+
+func (m *ImageSearchByImageResponse) SetMaxPage(v int64) {
+	m.MaxPage = v
+}
+
+func (m *ImageSearchByImageResponse) SetId(v string) {
+	m.Id = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetFormat(v ImageSpec_ImageFormat) {
+	m.Format = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetWidth(v int64) {
+	m.Width = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetHeight(v int64) {
+	m.Height = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetPassage(v string) {
+	m.Passage = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetPageTitle(v string) {
+	m.PageTitle = v
+}
+
+func (m *ImageSearchByImageResponse_ImageInfo) SetPageUrl(v string) {
+	m.PageUrl = v
+}

@@ -57,3 +57,7 @@ func (m *Instance) SetLocks(v []*Lock) {
 func (m *Instance) SetLicenseTemplate(v *Template) {
 	m.LicenseTemplate = v
 }
+
+func (m *Instance) SetExternalInstance(v *ExternalInstance) {
+	m.ExternalInstance = v
+}

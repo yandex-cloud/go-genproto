@@ -46,12 +46,12 @@ func (m *CopyDesktopImageRequest) SetImageId(v string) {
 	m.ImageId = v
 }
 
-func (m *UpdateDesktopImageRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
-	m.UpdateMask = v
-}
-
 func (m *UpdateDesktopImageRequest) SetImageId(v string) {
 	m.ImageId = v
+}
+
+func (m *UpdateDesktopImageRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateDesktopImageRequest) SetName(v string) {

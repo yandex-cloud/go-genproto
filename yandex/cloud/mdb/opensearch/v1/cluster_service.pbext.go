@@ -4,6 +4,7 @@ package opensearch
 
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -85,6 +86,10 @@ func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *CreateClusterMetadata) SetOperationLog(v *v1.OperationLog) {
+	m.OperationLog = v
+}
+
 func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -131,6 +136,10 @@ func (m *UpdateClusterRequest) SetNetworkId(v string) {
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *UpdateClusterMetadata) SetOperationLog(v *v1.OperationLog) {
+	m.OperationLog = v
 }
 
 func (m *DeleteClusterRequest) SetClusterId(v string) {

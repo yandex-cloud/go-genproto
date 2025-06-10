@@ -41,3 +41,7 @@ func (m *Lock) SetState(v Lock_State) {
 func (m *Lock) SetTemplateId(v string) {
 	m.TemplateId = v
 }
+
+func (m *Lock) SetExternalInstance(v *ExternalInstance) {
+	m.ExternalInstance = v
+}

@@ -137,3 +137,7 @@ func (m *MysqlTarget) SetServiceDatabase(v string) {
 func (m *MysqlTarget) SetSecurityGroups(v []string) {
 	m.SecurityGroups = v
 }
+
+func (m *MysqlTarget) SetIsSchemaMigrationDisabled(v bool) {
+	m.IsSchemaMigrationDisabled = v
+}

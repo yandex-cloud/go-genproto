@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ImageSearchService_Search_FullMethodName = "/yandex.cloud.searchapi.v2.ImageSearchService/Search"
+	ImageSearchService_Search_FullMethodName        = "/yandex.cloud.searchapi.v2.ImageSearchService/Search"
+	ImageSearchService_SearchByImage_FullMethodName = "/yandex.cloud.searchapi.v2.ImageSearchService/SearchByImage"
 )
 
 // ImageSearchServiceClient is the client API for ImageSearchService service.
@@ -29,6 +30,7 @@ const (
 // A set of methods for searching of images using the Yandex Images.
 type ImageSearchServiceClient interface {
 	Search(ctx context.Context, in *ImageSearchRequest, opts ...grpc.CallOption) (*ImageSearchResponse, error)
+	SearchByImage(ctx context.Context, in *ImageSearchByImageRequest, opts ...grpc.CallOption) (*ImageSearchByImageResponse, error)
 }
 
 type imageSearchServiceClient struct {
@@ -49,6 +51,16 @@ func (c *imageSearchServiceClient) Search(ctx context.Context, in *ImageSearchRe
 	return out, nil
 }
 
+func (c *imageSearchServiceClient) SearchByImage(ctx context.Context, in *ImageSearchByImageRequest, opts ...grpc.CallOption) (*ImageSearchByImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ImageSearchByImageResponse)
+	err := c.cc.Invoke(ctx, ImageSearchService_SearchByImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ImageSearchServiceServer is the server API for ImageSearchService service.
 // All implementations should embed UnimplementedImageSearchServiceServer
 // for forward compatibility.
@@ -56,6 +68,7 @@ func (c *imageSearchServiceClient) Search(ctx context.Context, in *ImageSearchRe
 // A set of methods for searching of images using the Yandex Images.
 type ImageSearchServiceServer interface {
 	Search(context.Context, *ImageSearchRequest) (*ImageSearchResponse, error)
+	SearchByImage(context.Context, *ImageSearchByImageRequest) (*ImageSearchByImageResponse, error)
 }
 
 // UnimplementedImageSearchServiceServer should be embedded to have
@@ -67,6 +80,9 @@ type UnimplementedImageSearchServiceServer struct{}
 
 func (UnimplementedImageSearchServiceServer) Search(context.Context, *ImageSearchRequest) (*ImageSearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (UnimplementedImageSearchServiceServer) SearchByImage(context.Context, *ImageSearchByImageRequest) (*ImageSearchByImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchByImage not implemented")
 }
 func (UnimplementedImageSearchServiceServer) testEmbeddedByValue() {}
 
@@ -106,6 +122,24 @@ func _ImageSearchService_Search_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ImageSearchService_SearchByImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ImageSearchByImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageSearchServiceServer).SearchByImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImageSearchService_SearchByImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageSearchServiceServer).SearchByImage(ctx, req.(*ImageSearchByImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ImageSearchService_ServiceDesc is the grpc.ServiceDesc for ImageSearchService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -116,6 +150,10 @@ var ImageSearchService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Search",
 			Handler:    _ImageSearchService_Search_Handler,
+		},
+		{
+			MethodName: "SearchByImage",
+			Handler:    _ImageSearchService_SearchByImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

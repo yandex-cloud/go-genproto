@@ -373,7 +373,7 @@ type ClusterConfig struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Version of Apache Airflow that runs on the cluster.
-	// Use `airlow_version` instead.
+	// Use `airflow_version` instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/airflow/v1/cluster.proto.
 	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
@@ -947,6 +947,77 @@ func (x *S3Config) GetBucket() string {
 	return ""
 }
 
+type GitSyncConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Repo    string `protobuf:"bytes,1,opt,name=repo,proto3" json:"repo,omitempty"`
+	Branch  string `protobuf:"bytes,2,opt,name=branch,proto3" json:"branch,omitempty"`
+	SubPath string `protobuf:"bytes,3,opt,name=sub_path,json=subPath,proto3" json:"sub_path,omitempty"`
+	SshKey  string `protobuf:"bytes,4,opt,name=ssh_key,json=sshKey,proto3" json:"ssh_key,omitempty"`
+}
+
+func (x *GitSyncConfig) Reset() {
+	*x = GitSyncConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GitSyncConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GitSyncConfig) ProtoMessage() {}
+
+func (x *GitSyncConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GitSyncConfig.ProtoReflect.Descriptor instead.
+func (*GitSyncConfig) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GitSyncConfig) GetRepo() string {
+	if x != nil {
+		return x.Repo
+	}
+	return ""
+}
+
+func (x *GitSyncConfig) GetBranch() string {
+	if x != nil {
+		return x.Branch
+	}
+	return ""
+}
+
+func (x *GitSyncConfig) GetSubPath() string {
+	if x != nil {
+		return x.SubPath
+	}
+	return ""
+}
+
+func (x *GitSyncConfig) GetSshKey() string {
+	if x != nil {
+		return x.SshKey
+	}
+	return ""
+}
+
 type CodeSyncConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -955,13 +1026,14 @@ type CodeSyncConfig struct {
 	// Types that are assignable to Source:
 	//
 	//	*CodeSyncConfig_S3
+	//	*CodeSyncConfig_GitSync
 	Source isCodeSyncConfig_Source `protobuf_oneof:"source"`
 }
 
 func (x *CodeSyncConfig) Reset() {
 	*x = CodeSyncConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
+		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -974,7 +1046,7 @@ func (x *CodeSyncConfig) String() string {
 func (*CodeSyncConfig) ProtoMessage() {}
 
 func (x *CodeSyncConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -987,7 +1059,7 @@ func (x *CodeSyncConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodeSyncConfig.ProtoReflect.Descriptor instead.
 func (*CodeSyncConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
 func (m *CodeSyncConfig) GetSource() isCodeSyncConfig_Source {
@@ -1004,6 +1076,13 @@ func (x *CodeSyncConfig) GetS3() *S3Config {
 	return nil
 }
 
+func (x *CodeSyncConfig) GetGitSync() *GitSyncConfig {
+	if x, ok := x.GetSource().(*CodeSyncConfig_GitSync); ok {
+		return x.GitSync
+	}
+	return nil
+}
+
 type isCodeSyncConfig_Source interface {
 	isCodeSyncConfig_Source()
 }
@@ -1012,7 +1091,13 @@ type CodeSyncConfig_S3 struct {
 	S3 *S3Config `protobuf:"bytes,1,opt,name=s3,proto3,oneof"`
 }
 
+type CodeSyncConfig_GitSync struct {
+	GitSync *GitSyncConfig `protobuf:"bytes,2,opt,name=git_sync,json=gitSync,proto3,oneof"`
+}
+
 func (*CodeSyncConfig_S3) isCodeSyncConfig_Source() {}
+
+func (*CodeSyncConfig_GitSync) isCodeSyncConfig_Source() {}
 
 type LoggingConfig struct {
 	state         protoimpl.MessageState
@@ -1037,7 +1122,7 @@ type LoggingConfig struct {
 func (x *LoggingConfig) Reset() {
 	*x = LoggingConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
+		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1050,7 +1135,7 @@ func (x *LoggingConfig) String() string {
 func (*LoggingConfig) ProtoMessage() {}
 
 func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1063,7 +1148,7 @@ func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoggingConfig.ProtoReflect.Descriptor instead.
 func (*LoggingConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *LoggingConfig) GetEnabled() bool {
@@ -1131,7 +1216,7 @@ type LockboxConfig struct {
 func (x *LockboxConfig) Reset() {
 	*x = LockboxConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
+		mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1144,7 +1229,7 @@ func (x *LockboxConfig) String() string {
 func (*LockboxConfig) ProtoMessage() {}
 
 func (x *LockboxConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1157,7 +1242,7 @@ func (x *LockboxConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LockboxConfig.ProtoReflect.Descriptor instead.
 func (*LockboxConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *LockboxConfig) GetEnabled() bool {
@@ -1362,38 +1447,50 @@ var file_yandex_cloud_airflow_v1_cluster_proto_rawDesc = []byte{
 	0x69, 0x74, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x73, 0x22, 0x22, 0x0a, 0x08, 0x53,
 	0x33, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x75, 0x63, 0x6b, 0x65,
 	0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x62, 0x75, 0x63, 0x6b, 0x65, 0x74, 0x22,
-	0x55, 0x0a, 0x0e, 0x43, 0x6f, 0x64, 0x65, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x6f, 0x6e, 0x66, 0x69,
-	0x67, 0x12, 0x33, 0x0a, 0x02, 0x73, 0x33, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e,
-	0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x72,
-	0x66, 0x6c, 0x6f, 0x77, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x33, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
-	0x48, 0x00, 0x52, 0x02, 0x73, 0x33, 0x42, 0x0e, 0x0a, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
-	0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x22, 0x8b, 0x02, 0x0a, 0x0d, 0x4c, 0x6f, 0x67, 0x67, 0x69,
-	0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62,
-	0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c,
-	0x65, 0x64, 0x12, 0x42, 0x0a, 0x09, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x23, 0xf2, 0xc7, 0x31, 0x1f, 0x28, 0x5b, 0x61, 0x2d, 0x7a,
-	0x41, 0x2d, 0x5a, 0x5d, 0x5b, 0x2d, 0x61, 0x2d, 0x7a, 0x41, 0x2d, 0x5a, 0x30, 0x2d, 0x39, 0x5f,
-	0x2e, 0x5d, 0x7b, 0x30, 0x2c, 0x36, 0x33, 0x7d, 0x29, 0x3f, 0x48, 0x00, 0x52, 0x08, 0x66, 0x6f,
-	0x6c, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x47, 0x0a, 0x0c, 0x6c, 0x6f, 0x67, 0x5f, 0x67, 0x72,
-	0x6f, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x42, 0x23, 0xf2, 0xc7,
+	0x6f, 0x0a, 0x0d, 0x47, 0x69, 0x74, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x12, 0x12, 0x0a, 0x04, 0x72, 0x65, 0x70, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x72, 0x65, 0x70, 0x6f, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x72, 0x61, 0x6e, 0x63, 0x68, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x62, 0x72, 0x61, 0x6e, 0x63, 0x68, 0x12, 0x19, 0x0a, 0x08,
+	0x73, 0x75, 0x62, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x73, 0x75, 0x62, 0x50, 0x61, 0x74, 0x68, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x73, 0x68, 0x5f, 0x6b,
+	0x65, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x73, 0x68, 0x4b, 0x65, 0x79,
+	0x22, 0x9a, 0x01, 0x0a, 0x0e, 0x43, 0x6f, 0x64, 0x65, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x12, 0x33, 0x0a, 0x02, 0x73, 0x33, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x21, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61,
+	0x69, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x33, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x48, 0x00, 0x52, 0x02, 0x73, 0x33, 0x12, 0x43, 0x0a, 0x08, 0x67, 0x69, 0x74, 0x5f,
+	0x73, 0x79, 0x6e, 0x63, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x79, 0x61, 0x6e,
+	0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x69, 0x72, 0x66, 0x6c, 0x6f,
+	0x77, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x69, 0x74, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x48, 0x00, 0x52, 0x07, 0x67, 0x69, 0x74, 0x53, 0x79, 0x6e, 0x63, 0x42, 0x0e, 0x0a,
+	0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x04, 0xc0, 0xc1, 0x31, 0x01, 0x22, 0x8b, 0x02,
+	0x0a, 0x0d, 0x4c, 0x6f, 0x67, 0x67, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12,
+	0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x42, 0x0a, 0x09, 0x66, 0x6f, 0x6c,
+	0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x23, 0xf2, 0xc7,
 	0x31, 0x1f, 0x28, 0x5b, 0x61, 0x2d, 0x7a, 0x41, 0x2d, 0x5a, 0x5d, 0x5b, 0x2d, 0x61, 0x2d, 0x7a,
 	0x41, 0x2d, 0x5a, 0x30, 0x2d, 0x39, 0x5f, 0x2e, 0x5d, 0x7b, 0x30, 0x2c, 0x36, 0x33, 0x7d, 0x29,
-	0x3f, 0x48, 0x00, 0x52, 0x0a, 0x6c, 0x6f, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12,
-	0x44, 0x0a, 0x09, 0x6d, 0x69, 0x6e, 0x5f, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x0e, 0x32, 0x27, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x6c, 0x6f, 0x67, 0x67, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x6f, 0x67,
-	0x4c, 0x65, 0x76, 0x65, 0x6c, 0x2e, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x08, 0x6d, 0x69, 0x6e,
-	0x4c, 0x65, 0x76, 0x65, 0x6c, 0x42, 0x0d, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x22, 0x29, 0x0a, 0x0d, 0x4c, 0x6f, 0x63, 0x6b, 0x62, 0x6f, 0x78, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x42,
-	0x62, 0x0a, 0x1b, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x2e, 0x76, 0x31, 0x5a, 0x43,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
-	0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2f, 0x61, 0x69, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x2f, 0x76, 0x31, 0x3b, 0x61, 0x69, 0x72, 0x66,
-	0x6c, 0x6f, 0x77, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x3f, 0x48, 0x00, 0x52, 0x08, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x47, 0x0a,
+	0x0c, 0x6c, 0x6f, 0x67, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x42, 0x23, 0xf2, 0xc7, 0x31, 0x1f, 0x28, 0x5b, 0x61, 0x2d, 0x7a, 0x41, 0x2d,
+	0x5a, 0x5d, 0x5b, 0x2d, 0x61, 0x2d, 0x7a, 0x41, 0x2d, 0x5a, 0x30, 0x2d, 0x39, 0x5f, 0x2e, 0x5d,
+	0x7b, 0x30, 0x2c, 0x36, 0x33, 0x7d, 0x29, 0x3f, 0x48, 0x00, 0x52, 0x0a, 0x6c, 0x6f, 0x67, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x44, 0x0a, 0x09, 0x6d, 0x69, 0x6e, 0x5f, 0x6c, 0x65,
+	0x76, 0x65, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x27, 0x2e, 0x79, 0x61, 0x6e, 0x64,
+	0x65, 0x78, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x6c, 0x6f, 0x67, 0x67, 0x69, 0x6e, 0x67,
+	0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x6f, 0x67, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x2e, 0x4c, 0x65, 0x76,
+	0x65, 0x6c, 0x52, 0x08, 0x6d, 0x69, 0x6e, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x42, 0x0d, 0x0a, 0x0b,
+	0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x29, 0x0a, 0x0d, 0x4c,
+	0x6f, 0x63, 0x6b, 0x62, 0x6f, 0x78, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x18, 0x0a, 0x07,
+	0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65,
+	0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x42, 0x62, 0x0a, 0x1b, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78,
+	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x69, 0x72, 0x66, 0x6c,
+	0x6f, 0x77, 0x2e, 0x76, 0x31, 0x5a, 0x43, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2d, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x67,
+	0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x79, 0x61, 0x6e, 0x64, 0x65,
+	0x78, 0x2f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x61, 0x69, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x2f,
+	0x76, 0x31, 0x3b, 0x61, 0x69, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1409,7 +1506,7 @@ func file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_airflow_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_airflow_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_yandex_cloud_airflow_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_airflow_v1_cluster_proto_goTypes = []any{
 	(Cluster_Status)(0),           // 0: yandex.cloud.airflow.v1.Cluster.Status
 	(*Cluster)(nil),               // 1: yandex.cloud.airflow.v1.Cluster
@@ -1423,49 +1520,51 @@ var file_yandex_cloud_airflow_v1_cluster_proto_goTypes = []any{
 	(*Dependencies)(nil),          // 9: yandex.cloud.airflow.v1.Dependencies
 	(*NetworkConfig)(nil),         // 10: yandex.cloud.airflow.v1.NetworkConfig
 	(*S3Config)(nil),              // 11: yandex.cloud.airflow.v1.S3Config
-	(*CodeSyncConfig)(nil),        // 12: yandex.cloud.airflow.v1.CodeSyncConfig
-	(*LoggingConfig)(nil),         // 13: yandex.cloud.airflow.v1.LoggingConfig
-	(*LockboxConfig)(nil),         // 14: yandex.cloud.airflow.v1.LockboxConfig
-	nil,                           // 15: yandex.cloud.airflow.v1.Cluster.LabelsEntry
-	nil,                           // 16: yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
-	(*timestamppb.Timestamp)(nil), // 17: google.protobuf.Timestamp
-	(Health)(0),                   // 18: yandex.cloud.airflow.v1.Health
-	(*MaintenanceWindow)(nil),     // 19: yandex.cloud.airflow.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),  // 20: yandex.cloud.airflow.v1.MaintenanceOperation
-	(*Resources)(nil),             // 21: yandex.cloud.airflow.v1.Resources
-	(v1.LogLevel_Level)(0),        // 22: yandex.cloud.logging.v1.LogLevel.Level
+	(*GitSyncConfig)(nil),         // 12: yandex.cloud.airflow.v1.GitSyncConfig
+	(*CodeSyncConfig)(nil),        // 13: yandex.cloud.airflow.v1.CodeSyncConfig
+	(*LoggingConfig)(nil),         // 14: yandex.cloud.airflow.v1.LoggingConfig
+	(*LockboxConfig)(nil),         // 15: yandex.cloud.airflow.v1.LockboxConfig
+	nil,                           // 16: yandex.cloud.airflow.v1.Cluster.LabelsEntry
+	nil,                           // 17: yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
+	(*timestamppb.Timestamp)(nil), // 18: google.protobuf.Timestamp
+	(Health)(0),                   // 19: yandex.cloud.airflow.v1.Health
+	(*MaintenanceWindow)(nil),     // 20: yandex.cloud.airflow.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),  // 21: yandex.cloud.airflow.v1.MaintenanceOperation
+	(*Resources)(nil),             // 22: yandex.cloud.airflow.v1.Resources
+	(v1.LogLevel_Level)(0),        // 23: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_airflow_v1_cluster_proto_depIdxs = []int32{
-	17, // 0: yandex.cloud.airflow.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	15, // 1: yandex.cloud.airflow.v1.Cluster.labels:type_name -> yandex.cloud.airflow.v1.Cluster.LabelsEntry
+	18, // 0: yandex.cloud.airflow.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	16, // 1: yandex.cloud.airflow.v1.Cluster.labels:type_name -> yandex.cloud.airflow.v1.Cluster.LabelsEntry
 	2,  // 2: yandex.cloud.airflow.v1.Cluster.monitoring:type_name -> yandex.cloud.airflow.v1.Monitoring
 	3,  // 3: yandex.cloud.airflow.v1.Cluster.config:type_name -> yandex.cloud.airflow.v1.ClusterConfig
-	18, // 4: yandex.cloud.airflow.v1.Cluster.health:type_name -> yandex.cloud.airflow.v1.Health
+	19, // 4: yandex.cloud.airflow.v1.Cluster.health:type_name -> yandex.cloud.airflow.v1.Health
 	0,  // 5: yandex.cloud.airflow.v1.Cluster.status:type_name -> yandex.cloud.airflow.v1.Cluster.Status
 	10, // 6: yandex.cloud.airflow.v1.Cluster.network:type_name -> yandex.cloud.airflow.v1.NetworkConfig
-	12, // 7: yandex.cloud.airflow.v1.Cluster.code_sync:type_name -> yandex.cloud.airflow.v1.CodeSyncConfig
-	13, // 8: yandex.cloud.airflow.v1.Cluster.logging:type_name -> yandex.cloud.airflow.v1.LoggingConfig
-	19, // 9: yandex.cloud.airflow.v1.Cluster.maintenance_window:type_name -> yandex.cloud.airflow.v1.MaintenanceWindow
-	20, // 10: yandex.cloud.airflow.v1.Cluster.planned_operation:type_name -> yandex.cloud.airflow.v1.MaintenanceOperation
+	13, // 7: yandex.cloud.airflow.v1.Cluster.code_sync:type_name -> yandex.cloud.airflow.v1.CodeSyncConfig
+	14, // 8: yandex.cloud.airflow.v1.Cluster.logging:type_name -> yandex.cloud.airflow.v1.LoggingConfig
+	20, // 9: yandex.cloud.airflow.v1.Cluster.maintenance_window:type_name -> yandex.cloud.airflow.v1.MaintenanceWindow
+	21, // 10: yandex.cloud.airflow.v1.Cluster.planned_operation:type_name -> yandex.cloud.airflow.v1.MaintenanceOperation
 	4,  // 11: yandex.cloud.airflow.v1.ClusterConfig.airflow:type_name -> yandex.cloud.airflow.v1.AirflowConfig
 	5,  // 12: yandex.cloud.airflow.v1.ClusterConfig.webserver:type_name -> yandex.cloud.airflow.v1.WebserverConfig
 	6,  // 13: yandex.cloud.airflow.v1.ClusterConfig.scheduler:type_name -> yandex.cloud.airflow.v1.SchedulerConfig
 	7,  // 14: yandex.cloud.airflow.v1.ClusterConfig.triggerer:type_name -> yandex.cloud.airflow.v1.TriggererConfig
 	8,  // 15: yandex.cloud.airflow.v1.ClusterConfig.worker:type_name -> yandex.cloud.airflow.v1.WorkerConfig
 	9,  // 16: yandex.cloud.airflow.v1.ClusterConfig.dependencies:type_name -> yandex.cloud.airflow.v1.Dependencies
-	14, // 17: yandex.cloud.airflow.v1.ClusterConfig.lockbox:type_name -> yandex.cloud.airflow.v1.LockboxConfig
-	16, // 18: yandex.cloud.airflow.v1.AirflowConfig.config:type_name -> yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
-	21, // 19: yandex.cloud.airflow.v1.WebserverConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	21, // 20: yandex.cloud.airflow.v1.SchedulerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	21, // 21: yandex.cloud.airflow.v1.TriggererConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	21, // 22: yandex.cloud.airflow.v1.WorkerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	15, // 17: yandex.cloud.airflow.v1.ClusterConfig.lockbox:type_name -> yandex.cloud.airflow.v1.LockboxConfig
+	17, // 18: yandex.cloud.airflow.v1.AirflowConfig.config:type_name -> yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
+	22, // 19: yandex.cloud.airflow.v1.WebserverConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	22, // 20: yandex.cloud.airflow.v1.SchedulerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	22, // 21: yandex.cloud.airflow.v1.TriggererConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	22, // 22: yandex.cloud.airflow.v1.WorkerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
 	11, // 23: yandex.cloud.airflow.v1.CodeSyncConfig.s3:type_name -> yandex.cloud.airflow.v1.S3Config
-	22, // 24: yandex.cloud.airflow.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	25, // [25:25] is the sub-list for method output_type
-	25, // [25:25] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	12, // 24: yandex.cloud.airflow.v1.CodeSyncConfig.git_sync:type_name -> yandex.cloud.airflow.v1.GitSyncConfig
+	23, // 25: yandex.cloud.airflow.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_airflow_v1_cluster_proto_init() }
@@ -1609,7 +1708,7 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 			}
 		}
 		file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11].Exporter = func(v any, i int) any {
-			switch v := v.(*CodeSyncConfig); i {
+			switch v := v.(*GitSyncConfig); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1621,7 +1720,7 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 			}
 		}
 		file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12].Exporter = func(v any, i int) any {
-			switch v := v.(*LoggingConfig); i {
+			switch v := v.(*CodeSyncConfig); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1633,6 +1732,18 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 			}
 		}
 		file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13].Exporter = func(v any, i int) any {
+			switch v := v.(*LoggingConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14].Exporter = func(v any, i int) any {
 			switch v := v.(*LockboxConfig); i {
 			case 0:
 				return &v.state
@@ -1645,10 +1756,11 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 			}
 		}
 	}
-	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11].OneofWrappers = []any{
-		(*CodeSyncConfig_S3)(nil),
-	}
 	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12].OneofWrappers = []any{
+		(*CodeSyncConfig_S3)(nil),
+		(*CodeSyncConfig_GitSync)(nil),
+	}
+	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13].OneofWrappers = []any{
 		(*LoggingConfig_FolderId)(nil),
 		(*LoggingConfig_LogGroupId)(nil),
 	}
@@ -1658,7 +1770,7 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_yandex_cloud_airflow_v1_cluster_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

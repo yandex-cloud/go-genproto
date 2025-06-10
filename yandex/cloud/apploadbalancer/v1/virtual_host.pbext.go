@@ -204,12 +204,36 @@ func (m *GrpcRoute) SetStatusResponse(v *GrpcStatusResponseAction) {
 	}
 }
 
+func (m *HttpRouteHeaderMatch) SetName(v string) {
+	m.Name = v
+}
+
+func (m *HttpRouteHeaderMatch) SetValue(v *StringMatch) {
+	m.Value = v
+}
+
+func (m *HttpRouteQueryParamMatch) SetName(v string) {
+	m.Name = v
+}
+
+func (m *HttpRouteQueryParamMatch) SetValue(v *StringMatch) {
+	m.Value = v
+}
+
 func (m *HttpRouteMatch) SetHttpMethod(v []string) {
 	m.HttpMethod = v
 }
 
 func (m *HttpRouteMatch) SetPath(v *StringMatch) {
 	m.Path = v
+}
+
+func (m *HttpRouteMatch) SetHeaders(v []*HttpRouteHeaderMatch) {
+	m.Headers = v
+}
+
+func (m *HttpRouteMatch) SetQueryParameters(v []*HttpRouteQueryParamMatch) {
+	m.QueryParameters = v
 }
 
 func (m *GrpcRouteMatch) SetFqmn(v *StringMatch) {
@@ -330,6 +354,18 @@ func (m *HttpRouteAction) SetUpgradeTypes(v []string) {
 
 func (m *HttpRouteAction) SetRateLimit(v *RateLimit) {
 	m.RateLimit = v
+}
+
+func (m *HttpRouteAction) SetRegexRewrite(v *RegexMatchAndSubstitute) {
+	m.RegexRewrite = v
+}
+
+func (m *RegexMatchAndSubstitute) SetRegex(v string) {
+	m.Regex = v
+}
+
+func (m *RegexMatchAndSubstitute) SetSubstitute(v string) {
+	m.Substitute = v
 }
 
 type GrpcRouteAction_HostRewriteSpecifier = isGrpcRouteAction_HostRewriteSpecifier

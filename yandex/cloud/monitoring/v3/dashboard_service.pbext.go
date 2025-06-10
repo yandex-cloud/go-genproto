@@ -181,3 +181,55 @@ func (m *ListDashboardOperationsResponse) SetOperations(v []*operation.Operation
 func (m *ListDashboardOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *ListDashboardLabelNamesRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ListDashboardLabelNamesRequest) SetText(v string) {
+	m.Text = v
+}
+
+func (m *ListDashboardLabelNamesRequest) SetSelectors(v string) {
+	m.Selectors = v
+}
+
+func (m *ListDashboardLabelNamesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDashboardLabelNamesResponse) SetLabelNames(v []string) {
+	m.LabelNames = v
+}
+
+func (m *ListDashboardLabelNamesResponse) SetTruncated(v bool) {
+	m.Truncated = v
+}
+
+func (m *ListDashboardLabelValuesRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ListDashboardLabelValuesRequest) SetSelectors(v string) {
+	m.Selectors = v
+}
+
+func (m *ListDashboardLabelValuesRequest) SetLabelName(v string) {
+	m.LabelName = v
+}
+
+func (m *ListDashboardLabelValuesRequest) SetText(v string) {
+	m.Text = v
+}
+
+func (m *ListDashboardLabelValuesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDashboardLabelValuesResponse) SetLabelValues(v []string) {
+	m.LabelValues = v
+}
+
+func (m *ListDashboardLabelValuesResponse) SetTruncated(v bool) {
+	m.Truncated = v
+}

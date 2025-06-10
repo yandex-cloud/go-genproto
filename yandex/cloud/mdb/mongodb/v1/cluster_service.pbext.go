@@ -4,6 +4,7 @@ package mongodb
 
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -95,6 +96,10 @@ func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *CreateClusterMetadata) SetOperationLog(v *v1.OperationLog) {
+	m.OperationLog = v
+}
+
 func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -137,6 +142,10 @@ func (m *UpdateClusterRequest) SetNetworkId(v string) {
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *UpdateClusterMetadata) SetOperationLog(v *v1.OperationLog) {
+	m.OperationLog = v
 }
 
 func (m *DeleteClusterRequest) SetClusterId(v string) {

@@ -29,3 +29,7 @@ func (m *ClaimProductInstanceMetadata) SetProductInstanceId(v string) {
 func (m *ClaimProductInstanceMetadata) SetLicenseInstanceId(v string) {
 	m.LicenseInstanceId = v
 }
+
+func (m *ClaimProductInstanceMetadata) SetLockId(v string) {
+	m.LockId = v
+}

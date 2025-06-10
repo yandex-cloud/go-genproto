@@ -42,6 +42,12 @@ func (m *ClickhouseConnectionOptions) SetOnPremise(v *OnPremiseClickhouse) {
 	}
 }
 
+func (m *ClickhouseConnectionOptions) SetConnectionManagerConnection(v *ConnectionManagerConnection) {
+	m.Address = &ClickhouseConnectionOptions_ConnectionManagerConnection{
+		ConnectionManagerConnection: v,
+	}
+}
+
 func (m *ClickhouseConnectionOptions) SetMdbClusterId(v string) {
 	m.Address = &ClickhouseConnectionOptions_MdbClusterId{
 		MdbClusterId: v,
@@ -164,6 +170,10 @@ func (m *ClickhouseTarget) SetCleanupPolicy(v ClickhouseCleanupPolicy) {
 
 func (m *ClickhouseTarget) SetSharding(v *ClickhouseSharding) {
 	m.Sharding = v
+}
+
+func (m *ClickhouseTarget) SetIsSchemaMigrationDisabled(v bool) {
+	m.IsSchemaMigrationDisabled = v
 }
 
 func (m *ClickhouseTarget) SetClickhouseClusterName(v string) {

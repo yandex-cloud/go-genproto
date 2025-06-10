@@ -77,3 +77,7 @@ func (m *YdbTarget) SetIsTableColumnOriented(v bool) {
 func (m *YdbTarget) SetDefaultCompression(v YdbDefaultCompression) {
 	m.DefaultCompression = v
 }
+
+func (m *YdbTarget) SetIsSchemaMigrationDisabled(v bool) {
+	m.IsSchemaMigrationDisabled = v
+}

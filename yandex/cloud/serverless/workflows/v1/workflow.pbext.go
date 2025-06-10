@@ -51,6 +51,10 @@ func (m *Workflow) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
+func (m *Workflow) SetExpress(v bool) {
+	m.Express = v
+}
+
 func (m *WorkflowPreview) SetId(v string) {
 	m.Id = v
 }
@@ -89,6 +93,10 @@ func (m *WorkflowPreview) SetNetworkId(v string) {
 
 func (m *WorkflowPreview) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
+}
+
+func (m *WorkflowPreview) SetExpress(v bool) {
+	m.Express = v
 }
 
 type WorkflowSpecification_Spec = isWorkflowSpecification_Spec

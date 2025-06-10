@@ -191,6 +191,22 @@ func (m *S3Config) SetBucket(v string) {
 	m.Bucket = v
 }
 
+func (m *GitSyncConfig) SetRepo(v string) {
+	m.Repo = v
+}
+
+func (m *GitSyncConfig) SetBranch(v string) {
+	m.Branch = v
+}
+
+func (m *GitSyncConfig) SetSubPath(v string) {
+	m.SubPath = v
+}
+
+func (m *GitSyncConfig) SetSshKey(v string) {
+	m.SshKey = v
+}
+
 type CodeSyncConfig_Source = isCodeSyncConfig_Source
 
 func (m *CodeSyncConfig) SetSource(v CodeSyncConfig_Source) {
@@ -200,6 +216,12 @@ func (m *CodeSyncConfig) SetSource(v CodeSyncConfig_Source) {
 func (m *CodeSyncConfig) SetS3(v *S3Config) {
 	m.Source = &CodeSyncConfig_S3{
 		S3: v,
+	}
+}
+
+func (m *CodeSyncConfig) SetGitSync(v *GitSyncConfig) {
+	m.Source = &CodeSyncConfig_GitSync{
+		GitSync: v,
 	}
 }
 

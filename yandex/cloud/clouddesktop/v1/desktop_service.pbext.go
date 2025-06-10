@@ -7,12 +7,12 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
-func (m *UpdatePropertiesRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
-	m.UpdateMask = v
-}
-
 func (m *UpdatePropertiesRequest) SetDesktopId(v string) {
 	m.DesktopId = v
+}
+
+func (m *UpdatePropertiesRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdatePropertiesRequest) SetName(v string) {

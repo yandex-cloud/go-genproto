@@ -91,12 +91,12 @@ func (m *ListDesktopGroupOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-func (m *UpdateDesktopGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
-	m.UpdateMask = v
-}
-
 func (m *UpdateDesktopGroupRequest) SetDesktopGroupId(v string) {
 	m.DesktopGroupId = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateDesktopGroupRequest) SetDesktopImageId(v string) {

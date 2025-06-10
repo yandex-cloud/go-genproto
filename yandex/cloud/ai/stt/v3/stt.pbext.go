@@ -2,6 +2,10 @@
 
 package stt
 
+import (
+	structpb "google.golang.org/protobuf/types/known/structpb"
+)
+
 func (m *TextNormalizationOptions) SetTextNormalization(v TextNormalizationOptions_TextNormalization) {
 	m.TextNormalization = v
 }
@@ -110,6 +114,44 @@ func (m *LanguageRestrictionOptions) SetLanguageCode(v []string) {
 	m.LanguageCode = v
 }
 
+func (m *JsonSchema) SetSchema(v *structpb.Struct) {
+	m.Schema = v
+}
+
+type SummarizationProperty_ResponseFormat = isSummarizationProperty_ResponseFormat
+
+func (m *SummarizationProperty) SetResponseFormat(v SummarizationProperty_ResponseFormat) {
+	m.ResponseFormat = v
+}
+
+func (m *SummarizationProperty) SetInstruction(v string) {
+	m.Instruction = v
+}
+
+func (m *SummarizationProperty) SetJsonObject(v bool) {
+	m.ResponseFormat = &SummarizationProperty_JsonObject{
+		JsonObject: v,
+	}
+}
+
+func (m *SummarizationProperty) SetJsonSchema(v *JsonSchema) {
+	m.ResponseFormat = &SummarizationProperty_JsonSchema{
+		JsonSchema: v,
+	}
+}
+
+func (m *SummarizationOptions) SetModelUri(v string) {
+	m.ModelUri = v
+}
+
+func (m *SummarizationOptions) SetProperties(v []*SummarizationProperty) {
+	m.Properties = v
+}
+
+func (m *SummarizationPropertyResult) SetResponse(v string) {
+	m.Response = v
+}
+
 func (m *RecognitionModelOptions) SetModel(v string) {
 	m.Model = v
 }
@@ -152,6 +194,10 @@ func (m *StreamingOptions) SetSpeechAnalysis(v *SpeechAnalysisOptions) {
 
 func (m *StreamingOptions) SetSpeakerLabeling(v *SpeakerLabelingOptions) {
 	m.SpeakerLabeling = v
+}
+
+func (m *StreamingOptions) SetSummarization(v *SummarizationOptions) {
+	m.Summarization = v
 }
 
 func (m *AudioChunk) SetData(v []byte) {
@@ -224,6 +270,10 @@ func (m *RecognizeFileRequest) SetSpeechAnalysis(v *SpeechAnalysisOptions) {
 
 func (m *RecognizeFileRequest) SetSpeakerLabeling(v *SpeakerLabelingOptions) {
 	m.SpeakerLabeling = v
+}
+
+func (m *RecognizeFileRequest) SetSummarization(v *SummarizationOptions) {
+	m.Summarization = v
 }
 
 func (m *Word) SetText(v string) {
@@ -538,6 +588,26 @@ func (m *ConversationAnalysis_InterruptsEvaluation) SetInterrupts(v []*AudioSegm
 	m.Interrupts = v
 }
 
+func (m *ContentUsage) SetInputTextTokens(v int64) {
+	m.InputTextTokens = v
+}
+
+func (m *ContentUsage) SetCompletionTokens(v int64) {
+	m.CompletionTokens = v
+}
+
+func (m *ContentUsage) SetTotalTokens(v int64) {
+	m.TotalTokens = v
+}
+
+func (m *Summarization) SetResults(v []*SummarizationPropertyResult) {
+	m.Results = v
+}
+
+func (m *Summarization) SetContentUsage(v *ContentUsage) {
+	m.ContentUsage = v
+}
+
 type StreamingResponse_Event = isStreamingResponse_Event
 
 func (m *StreamingResponse) SetEvent(v StreamingResponse_Event) {
@@ -601,6 +671,12 @@ func (m *StreamingResponse) SetSpeakerAnalysis(v *SpeakerAnalysis) {
 func (m *StreamingResponse) SetConversationAnalysis(v *ConversationAnalysis) {
 	m.Event = &StreamingResponse_ConversationAnalysis{
 		ConversationAnalysis: v,
+	}
+}
+
+func (m *StreamingResponse) SetSummarization(v *Summarization) {
+	m.Event = &StreamingResponse_Summarization{
+		Summarization: v,
 	}
 }
 

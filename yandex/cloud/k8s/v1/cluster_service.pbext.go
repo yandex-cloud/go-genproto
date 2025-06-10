@@ -416,20 +416,10 @@ func (m *MasterScalePolicySpec) SetScaleType(v MasterScalePolicySpec_ScaleType) 
 	m.ScaleType = v
 }
 
-func (m *MasterScalePolicySpec) SetFixedScale(v *MasterScalePolicySpec_FixedScale) {
-	m.ScaleType = &MasterScalePolicySpec_FixedScale_{
-		FixedScale: v,
-	}
-}
-
 func (m *MasterScalePolicySpec) SetAutoScale(v *MasterScalePolicySpec_AutoScale) {
 	m.ScaleType = &MasterScalePolicySpec_AutoScale_{
 		AutoScale: v,
 	}
-}
-
-func (m *MasterScalePolicySpec_FixedScale) SetResourcePresetId(v string) {
-	m.ResourcePresetId = v
 }
 
 func (m *MasterScalePolicySpec_AutoScale) SetMinResourcePresetId(v string) {

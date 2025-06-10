@@ -39,6 +39,10 @@ func (m *CreateWorkflowRequest) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
+func (m *CreateWorkflowRequest) SetExpress(v bool) {
+	m.Express = v
+}
+
 func (m *CreateWorkflowMetadata) SetWorkflowId(v string) {
 	m.WorkflowId = v
 }
@@ -77,6 +81,10 @@ func (m *UpdateWorkflowRequest) SetServiceAccountId(v string) {
 
 func (m *UpdateWorkflowRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
+}
+
+func (m *UpdateWorkflowRequest) SetExpress(v bool) {
+	m.Express = v
 }
 
 func (m *UpdateWorkflowMetadata) SetWorkflowId(v string) {

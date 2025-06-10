@@ -3,6 +3,7 @@
 package postgresql
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/postgresql/v1/config"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
@@ -119,6 +120,10 @@ func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *CreateClusterMetadata) SetOperationLog(v *v1.OperationLog) {
+	m.OperationLog = v
+}
+
 func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -161,6 +166,10 @@ func (m *UpdateClusterRequest) SetNetworkId(v string) {
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *UpdateClusterMetadata) SetOperationLog(v *v1.OperationLog) {
+	m.OperationLog = v
 }
 
 func (m *DeleteClusterRequest) SetClusterId(v string) {
