@@ -115,6 +115,10 @@ func (m *CreateClusterRequest) SetAuthSentinel(v bool) {
 	m.AuthSentinel = v
 }
 
+func (m *CreateClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -305,6 +309,10 @@ func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 
 func (m *RestoreClusterRequest) SetAuthSentinel(v bool) {
 	m.AuthSentinel = v
+}
+
+func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

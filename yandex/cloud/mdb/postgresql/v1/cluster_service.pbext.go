@@ -116,6 +116,10 @@ func (m *CreateClusterRequest) SetRetentionPolicies(v []*BackupRetentionPolicySp
 	m.RetentionPolicies = v
 }
 
+func (m *CreateClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -286,6 +290,10 @@ func (m *RestoreClusterRequest) SetHostGroupIds(v []string) {
 
 func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
+}
+
+func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

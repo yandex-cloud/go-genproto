@@ -5,6 +5,7 @@ package opensearch
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Cluster) SetId(v string) {
@@ -73,6 +74,10 @@ func (m *Cluster) SetMaintenanceWindow(v *MaintenanceWindow) {
 
 func (m *Cluster) SetPlannedOperation(v *MaintenanceOperation) {
 	m.PlannedOperation = v
+}
+
+func (m *Cluster) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
 }
 
 func (m *Monitoring) SetName(v string) {

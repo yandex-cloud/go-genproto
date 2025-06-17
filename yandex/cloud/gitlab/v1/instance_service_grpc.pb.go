@@ -31,12 +31,20 @@ const (
 // InstanceServiceClient is the client API for InstanceService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// InstanceService provides methods for managing GitLab instances.
 type InstanceServiceClient interface {
+	// Returns the specified GitLab instance.
 	Get(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
+	// Retrieves the list of GitLab instances in the specified folder.
 	List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error)
+	// Creates a new GitLab instance in the specified folder.
 	Create(ctx context.Context, in *CreateInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified GitLab instance.
 	Delete(ctx context.Context, in *DeleteInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Starts the specified GitLab instance.
 	Start(ctx context.Context, in *StartInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Stops the specified GitLab instance.
 	Stop(ctx context.Context, in *StopInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -111,12 +119,20 @@ func (c *instanceServiceClient) Stop(ctx context.Context, in *StopInstanceReques
 // InstanceServiceServer is the server API for InstanceService service.
 // All implementations should embed UnimplementedInstanceServiceServer
 // for forward compatibility.
+//
+// InstanceService provides methods for managing GitLab instances.
 type InstanceServiceServer interface {
+	// Returns the specified GitLab instance.
 	Get(context.Context, *GetInstanceRequest) (*Instance, error)
+	// Retrieves the list of GitLab instances in the specified folder.
 	List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error)
+	// Creates a new GitLab instance in the specified folder.
 	Create(context.Context, *CreateInstanceRequest) (*operation.Operation, error)
+	// Deletes the specified GitLab instance.
 	Delete(context.Context, *DeleteInstanceRequest) (*operation.Operation, error)
+	// Starts the specified GitLab instance.
 	Start(context.Context, *StartInstanceRequest) (*operation.Operation, error)
+	// Stops the specified GitLab instance.
 	Stop(context.Context, *StopInstanceRequest) (*operation.Operation, error)
 }
 

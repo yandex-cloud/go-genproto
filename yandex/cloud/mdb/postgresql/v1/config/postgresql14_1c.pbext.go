@@ -646,6 +646,10 @@ func (m *PostgresqlConfig14_1C) SetPasswordEncryption(v PostgresqlConfig14_1C_Pa
 	m.PasswordEncryption = v
 }
 
+func (m *PostgresqlConfig14_1C) SetAutoExplainLogFormat(v PostgresqlConfig14_1C_AutoExplainLogFormat) {
+	m.AutoExplainLogFormat = v
+}
+
 func (m *PostgresqlConfigSet14_1C) SetEffectiveConfig(v *PostgresqlConfig14_1C) {
 	m.EffectiveConfig = v
 }

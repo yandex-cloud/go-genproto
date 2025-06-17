@@ -172,3 +172,25 @@ func (m *FunctionResult) SetContent(v string) {
 func (m *RephraserOptions) SetRephraserUri(v string) {
 	m.RephraserUri = v
 }
+
+func (m *JsonSchema) SetSchema(v *structpb.Struct) {
+	m.Schema = v
+}
+
+type ResponseFormat_ResponseFormat = isResponseFormat_ResponseFormat
+
+func (m *ResponseFormat) SetResponseFormat(v ResponseFormat_ResponseFormat) {
+	m.ResponseFormat = v
+}
+
+func (m *ResponseFormat) SetJsonObject(v bool) {
+	m.ResponseFormat = &ResponseFormat_JsonObject{
+		JsonObject: v,
+	}
+}
+
+func (m *ResponseFormat) SetJsonSchema(v *JsonSchema) {
+	m.ResponseFormat = &ResponseFormat_JsonSchema{
+		JsonSchema: v,
+	}
+}

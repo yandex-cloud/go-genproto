@@ -47,6 +47,10 @@ func (m *CreateAssistantRequest) SetTools(v []*Tool) {
 	m.Tools = v
 }
 
+func (m *CreateAssistantRequest) SetResponseFormat(v *ResponseFormat) {
+	m.ResponseFormat = v
+}
+
 func (m *GetAssistantRequest) SetAssistantId(v string) {
 	m.AssistantId = v
 }
@@ -93,6 +97,10 @@ func (m *UpdateAssistantRequest) SetCompletionOptions(v *CompletionOptions) {
 
 func (m *UpdateAssistantRequest) SetTools(v []*Tool) {
 	m.Tools = v
+}
+
+func (m *UpdateAssistantRequest) SetResponseFormat(v *ResponseFormat) {
+	m.ResponseFormat = v
 }
 
 func (m *DeleteAssistantRequest) SetAssistantId(v string) {

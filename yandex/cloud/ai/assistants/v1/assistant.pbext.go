@@ -70,3 +70,7 @@ func (m *Assistant) SetCompletionOptions(v *CompletionOptions) {
 func (m *Assistant) SetTools(v []*Tool) {
 	m.Tools = v
 }
+
+func (m *Assistant) SetResponseFormat(v *ResponseFormat) {
+	m.ResponseFormat = v
+}

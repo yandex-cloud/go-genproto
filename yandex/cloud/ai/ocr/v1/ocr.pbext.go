@@ -42,6 +42,14 @@ func (m *TextAnnotation) SetRotate(v Angle) {
 	m.Rotate = v
 }
 
+func (m *TextAnnotation) SetMarkdown(v string) {
+	m.Markdown = v
+}
+
+func (m *TextAnnotation) SetPictures(v []*Picture) {
+	m.Pictures = v
+}
+
 func (m *Entity) SetName(v string) {
 	m.Name = v
 }
@@ -64,6 +72,10 @@ func (m *Block) SetLanguages(v []*Block_DetectedLanguage) {
 
 func (m *Block) SetTextSegments(v []*TextSegments) {
 	m.TextSegments = v
+}
+
+func (m *Block) SetLayoutType(v LayoutType) {
+	m.LayoutType = v
 }
 
 func (m *Block_DetectedLanguage) SetLanguageCode(v string) {
@@ -156,4 +168,12 @@ func (m *TableCell) SetText(v string) {
 
 func (m *TableCell) SetTextSegments(v []*TextSegments) {
 	m.TextSegments = v
+}
+
+func (m *Picture) SetBoundingBox(v *Polygon) {
+	m.BoundingBox = v
+}
+
+func (m *Picture) SetScore(v float64) {
+	m.Score = v
 }

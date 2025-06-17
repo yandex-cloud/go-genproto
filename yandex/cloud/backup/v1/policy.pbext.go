@@ -114,6 +114,10 @@ func (m *PolicySettings) SetLvmSnapshottingEnabled(v bool) {
 	m.LvmSnapshottingEnabled = v
 }
 
+func (m *PolicySettings) SetPrePostCommands(v []*PolicySettings_PrePostCommand) {
+	m.PrePostCommands = v
+}
+
 func (m *PolicySettings_Interval) SetType(v PolicySettings_Interval_Type) {
 	m.Type = v
 }
@@ -292,6 +296,34 @@ func (m *PolicySettings_FileFilters) SetExclusionMasks(v []string) {
 
 func (m *PolicySettings_FileFilters) SetInclusionMasks(v []string) {
 	m.InclusionMasks = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetCmd(v string) {
+	m.Cmd = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetArgs(v string) {
+	m.Args = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetStopOnError(v bool) {
+	m.StopOnError = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetType(v PolicySettings_CommandType) {
+	m.Type = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetWait(v bool) {
+	m.Wait = v
+}
+
+func (m *PolicySettings_PrePostCommand) SetWorkdir(v string) {
+	m.Workdir = v
 }
 
 func (m *PolicyApplication) SetPolicyId(v string) {

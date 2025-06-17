@@ -30,6 +30,7 @@ const (
 	BucketService_GetHTTPSConfig_FullMethodName       = "/yandex.cloud.storage.v1.BucketService/GetHTTPSConfig"
 	BucketService_SetHTTPSConfig_FullMethodName       = "/yandex.cloud.storage.v1.BucketService/SetHTTPSConfig"
 	BucketService_DeleteHTTPSConfig_FullMethodName    = "/yandex.cloud.storage.v1.BucketService/DeleteHTTPSConfig"
+	BucketService_SetAccessBindings_FullMethodName    = "/yandex.cloud.storage.v1.BucketService/SetAccessBindings"
 	BucketService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.storage.v1.BucketService/UpdateAccessBindings"
 	BucketService_ListAccessBindings_FullMethodName   = "/yandex.cloud.storage.v1.BucketService/ListAccessBindings"
 )
@@ -68,6 +69,7 @@ type BucketServiceClient interface {
 	SetHTTPSConfig(ctx context.Context, in *SetBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the HTTPS configuration for the specified bucket.
 	DeleteHTTPSConfig(ctx context.Context, in *DeleteBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 }
@@ -170,6 +172,16 @@ func (c *bucketServiceClient) DeleteHTTPSConfig(ctx context.Context, in *DeleteB
 	return out, nil
 }
 
+func (c *bucketServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, BucketService_SetAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *bucketServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -224,6 +236,7 @@ type BucketServiceServer interface {
 	SetHTTPSConfig(context.Context, *SetBucketHTTPSConfigRequest) (*operation.Operation, error)
 	// Deletes the HTTPS configuration for the specified bucket.
 	DeleteHTTPSConfig(context.Context, *DeleteBucketHTTPSConfigRequest) (*operation.Operation, error)
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 }
@@ -261,6 +274,9 @@ func (UnimplementedBucketServiceServer) SetHTTPSConfig(context.Context, *SetBuck
 }
 func (UnimplementedBucketServiceServer) DeleteHTTPSConfig(context.Context, *DeleteBucketHTTPSConfigRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHTTPSConfig not implemented")
+}
+func (UnimplementedBucketServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
 }
 func (UnimplementedBucketServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
@@ -450,6 +466,24 @@ func _BucketService_DeleteHTTPSConfig_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BucketService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BucketService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BucketService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(access.UpdateAccessBindingsRequest)
 	if err := dec(in); err != nil {
@@ -528,6 +562,10 @@ var BucketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteHTTPSConfig",
 			Handler:    _BucketService_DeleteHTTPSConfig_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _BucketService_SetAccessBindings_Handler,
 		},
 		{
 			MethodName: "UpdateAccessBindings",

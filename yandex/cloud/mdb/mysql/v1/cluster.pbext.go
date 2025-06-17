@@ -77,6 +77,10 @@ func (m *Cluster) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *Cluster) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
@@ -129,6 +133,10 @@ func (m *ClusterConfig) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 
 func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
+}
+
+func (m *ClusterConfig) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *Host) SetName(v string) {
@@ -225,4 +233,16 @@ func (m *PerformanceDiagnostics) SetSessionsSamplingInterval(v int64) {
 
 func (m *PerformanceDiagnostics) SetStatementsSamplingInterval(v int64) {
 	m.StatementsSamplingInterval = v
+}
+
+func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v int64) {
+	m.PlannedUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v int64) {
+	m.EmergencyUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v int64) {
+	m.DiskSizeLimit = v
 }

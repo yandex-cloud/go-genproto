@@ -103,6 +103,10 @@ func (m *CreateClusterRequest) SetShardSpecs(v []*ShardSpec) {
 	m.ShardSpecs = v
 }
 
+func (m *CreateClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -281,6 +285,10 @@ func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 
 func (m *RestoreClusterRequest) SetShardSpecs(v []*ShardSpec) {
 	m.ShardSpecs = v
+}
+
+func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

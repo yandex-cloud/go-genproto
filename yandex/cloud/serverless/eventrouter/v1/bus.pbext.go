@@ -29,10 +29,6 @@ func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
 	m.MinLevel = v
 }
 
-func (m *LogOptions) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
-}
-
 func (m *Bus) SetId(v string) {
 	m.Id = v
 }

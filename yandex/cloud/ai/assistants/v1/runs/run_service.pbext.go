@@ -41,6 +41,10 @@ func (m *CreateRunRequest) SetTools(v []*v1.Tool) {
 	m.Tools = v
 }
 
+func (m *CreateRunRequest) SetCustomResponseFormat(v *v1.ResponseFormat) {
+	m.CustomResponseFormat = v
+}
+
 func (m *ListenRunRequest) SetRunId(v string) {
 	m.RunId = v
 }

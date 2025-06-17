@@ -77,6 +77,10 @@ func (m *Cluster) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
 }
 
+func (m *Cluster) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

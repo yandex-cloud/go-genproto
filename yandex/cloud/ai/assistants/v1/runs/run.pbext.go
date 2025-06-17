@@ -53,6 +53,10 @@ func (m *Run) SetTools(v []*v1.Tool) {
 	m.Tools = v
 }
 
+func (m *Run) SetCustomResponseFormat(v *v1.ResponseFormat) {
+	m.CustomResponseFormat = v
+}
+
 type RunState_StateData = isRunState_StateData
 
 func (m *RunState) SetStateData(v RunState_StateData) {
