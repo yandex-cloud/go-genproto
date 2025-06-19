@@ -4,7 +4,6 @@ package loadbalancer
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
-	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -284,32 +283,4 @@ func (m *ListenerSpec) SetInternalAddressSpec(v *InternalAddressSpec) {
 
 func (m *ListenerSpec) SetTargetPort(v int64) {
 	m.TargetPort = v
-}
-
-func (m *StartZonalShiftRequest) SetNetworkLoadBalancerId(v string) {
-	m.NetworkLoadBalancerId = v
-}
-
-func (m *StartZonalShiftRequest) SetZoneIds(v []string) {
-	m.ZoneIds = v
-}
-
-func (m *StartZonalShiftRequest) SetDuration(v *durationpb.Duration) {
-	m.Duration = v
-}
-
-func (m *StartZonalShiftMetadata) SetNetworkLoadBalancerId(v string) {
-	m.NetworkLoadBalancerId = v
-}
-
-func (m *CancelZonalShiftRequest) SetNetworkLoadBalancerId(v string) {
-	m.NetworkLoadBalancerId = v
-}
-
-func (m *CancelZonalShiftRequest) SetZoneIds(v []string) {
-	m.ZoneIds = v
-}
-
-func (m *CancelZonalShiftMetadata) SetNetworkLoadBalancerId(v string) {
-	m.NetworkLoadBalancerId = v
 }

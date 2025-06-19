@@ -13,7 +13,6 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -406,197 +405,6 @@ func (x *CreateInstanceMetadata) GetInstanceId() string {
 	return ""
 }
 
-// Request message for InstanceService.Update.
-type UpdateInstanceRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the GitLab instance to update.
-	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// Name of the instance (must be unique within the folder).
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the instance.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the instance as “ key:value “ pairs. For example, "env": "prod"
-	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Number of days to retain backups.
-	BackupRetainPeriodDays int64 `protobuf:"varint,6,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
-	// ID of the resource preset for computational resources.
-	ResourcePresetId string `protobuf:"bytes,7,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
-	// Whether to delete untagged resources during maintenance.
-	MaintenanceDeleteUntagged bool `protobuf:"varint,10,opt,name=maintenance_delete_untagged,json=maintenanceDeleteUntagged,proto3" json:"maintenance_delete_untagged,omitempty"`
-	// Whether deletion protection is enabled.
-	DeletionProtection bool `protobuf:"varint,11,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// ID of approval rules for the instance.
-	ApprovalRulesId string `protobuf:"bytes,12,opt,name=approval_rules_id,json=approvalRulesId,proto3" json:"approval_rules_id,omitempty"`
-	// Token of approval rules for the instance.
-	ApprovalRulesToken string `protobuf:"bytes,13,opt,name=approval_rules_token,json=approvalRulesToken,proto3" json:"approval_rules_token,omitempty"`
-	// Disk size in bytes.
-	DiskSize int64 `protobuf:"varint,21,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
-	// Field mask that specifies which attributes of the trail are going to be updated.
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,24,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateInstanceRequest) Reset() {
-	*x = UpdateInstanceRequest{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateInstanceRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateInstanceRequest) ProtoMessage() {}
-
-func (x *UpdateInstanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateInstanceRequest.ProtoReflect.Descriptor instead.
-func (*UpdateInstanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateInstanceRequest) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *UpdateInstanceRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *UpdateInstanceRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *UpdateInstanceRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *UpdateInstanceRequest) GetBackupRetainPeriodDays() int64 {
-	if x != nil {
-		return x.BackupRetainPeriodDays
-	}
-	return 0
-}
-
-func (x *UpdateInstanceRequest) GetResourcePresetId() string {
-	if x != nil {
-		return x.ResourcePresetId
-	}
-	return ""
-}
-
-func (x *UpdateInstanceRequest) GetMaintenanceDeleteUntagged() bool {
-	if x != nil {
-		return x.MaintenanceDeleteUntagged
-	}
-	return false
-}
-
-func (x *UpdateInstanceRequest) GetDeletionProtection() bool {
-	if x != nil {
-		return x.DeletionProtection
-	}
-	return false
-}
-
-func (x *UpdateInstanceRequest) GetApprovalRulesId() string {
-	if x != nil {
-		return x.ApprovalRulesId
-	}
-	return ""
-}
-
-func (x *UpdateInstanceRequest) GetApprovalRulesToken() string {
-	if x != nil {
-		return x.ApprovalRulesToken
-	}
-	return ""
-}
-
-func (x *UpdateInstanceRequest) GetDiskSize() int64 {
-	if x != nil {
-		return x.DiskSize
-	}
-	return 0
-}
-
-func (x *UpdateInstanceRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.UpdateMask
-	}
-	return nil
-}
-
-// Metadata message for InstanceService.Update.
-type UpdateInstanceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the GitLab instance to update.
-	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateInstanceMetadata) Reset() {
-	*x = UpdateInstanceMetadata{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateInstanceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateInstanceMetadata) ProtoMessage() {}
-
-func (x *UpdateInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateInstanceMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UpdateInstanceMetadata) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
 // Request message for InstanceService.Delete.
 type DeleteInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -608,7 +416,7 @@ type DeleteInstanceRequest struct {
 
 func (x *DeleteInstanceRequest) Reset() {
 	*x = DeleteInstanceRequest{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -620,7 +428,7 @@ func (x *DeleteInstanceRequest) String() string {
 func (*DeleteInstanceRequest) ProtoMessage() {}
 
 func (x *DeleteInstanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -633,7 +441,7 @@ func (x *DeleteInstanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteInstanceRequest.ProtoReflect.Descriptor instead.
 func (*DeleteInstanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteInstanceRequest) GetInstanceId() string {
@@ -654,7 +462,7 @@ type DeleteInstanceMetadata struct {
 
 func (x *DeleteInstanceMetadata) Reset() {
 	*x = DeleteInstanceMetadata{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -666,7 +474,7 @@ func (x *DeleteInstanceMetadata) String() string {
 func (*DeleteInstanceMetadata) ProtoMessage() {}
 
 func (x *DeleteInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -679,7 +487,7 @@ func (x *DeleteInstanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteInstanceMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteInstanceMetadata) GetInstanceId() string {
@@ -700,7 +508,7 @@ type StartInstanceRequest struct {
 
 func (x *StartInstanceRequest) Reset() {
 	*x = StartInstanceRequest{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -712,7 +520,7 @@ func (x *StartInstanceRequest) String() string {
 func (*StartInstanceRequest) ProtoMessage() {}
 
 func (x *StartInstanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -725,7 +533,7 @@ func (x *StartInstanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartInstanceRequest.ProtoReflect.Descriptor instead.
 func (*StartInstanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *StartInstanceRequest) GetInstanceId() string {
@@ -746,7 +554,7 @@ type StartInstanceMetadata struct {
 
 func (x *StartInstanceMetadata) Reset() {
 	*x = StartInstanceMetadata{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -758,7 +566,7 @@ func (x *StartInstanceMetadata) String() string {
 func (*StartInstanceMetadata) ProtoMessage() {}
 
 func (x *StartInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -771,7 +579,7 @@ func (x *StartInstanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartInstanceMetadata.ProtoReflect.Descriptor instead.
 func (*StartInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *StartInstanceMetadata) GetInstanceId() string {
@@ -791,7 +599,7 @@ type StopInstanceRequest struct {
 
 func (x *StopInstanceRequest) Reset() {
 	*x = StopInstanceRequest{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -803,7 +611,7 @@ func (x *StopInstanceRequest) String() string {
 func (*StopInstanceRequest) ProtoMessage() {}
 
 func (x *StopInstanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -816,7 +624,7 @@ func (x *StopInstanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopInstanceRequest.ProtoReflect.Descriptor instead.
 func (*StopInstanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StopInstanceRequest) GetInstanceId() string {
@@ -837,7 +645,7 @@ type StopInstanceMetadata struct {
 
 func (x *StopInstanceMetadata) Reset() {
 	*x = StopInstanceMetadata{}
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -849,7 +657,7 @@ func (x *StopInstanceMetadata) String() string {
 func (*StopInstanceMetadata) ProtoMessage() {}
 
 func (x *StopInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -862,7 +670,7 @@ func (x *StopInstanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopInstanceMetadata.ProtoReflect.Descriptor instead.
 func (*StopInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StopInstanceMetadata) GetInstanceId() string {
@@ -876,7 +684,7 @@ var File_yandex_cloud_gitlab_v1_instance_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/gitlab/v1/instance_service.proto\x12\x16yandex.cloud.gitlab.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/gitlab/v1/instance.proto\"C\n" +
+	"-yandex/cloud/gitlab/v1/instance_service.proto\x12\x16yandex.cloud.gitlab.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/gitlab/v1/instance.proto\"C\n" +
 	"\x12GetInstanceRequest\x12-\n" +
 	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"instanceId\"\x94\x01\n" +
@@ -912,29 +720,6 @@ const file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\v\x10\fJ\x04\b\r\x10\x0eJ\x04\b\x10\x10\x13\"9\n" +
 	"\x16CreateInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"\xb5\x06\n" +
-	"\x15UpdateInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x125\n" +
-	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8e\x01\n" +
-	"\x06labels\x18\x04 \x03(\v29.yandex.cloud.gitlab.v1.UpdateInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x129\n" +
-	"\x19backup_retain_period_days\x18\x06 \x01(\x03R\x16backupRetainPeriodDays\x12,\n" +
-	"\x12resource_preset_id\x18\a \x01(\tR\x10resourcePresetId\x12>\n" +
-	"\x1bmaintenance_delete_untagged\x18\n" +
-	" \x01(\bR\x19maintenanceDeleteUntagged\x12/\n" +
-	"\x13deletion_protection\x18\v \x01(\bR\x12deletionProtection\x124\n" +
-	"\x11approval_rules_id\x18\f \x01(\tB\b\x8a\xc81\x04<=30R\x0fapprovalRulesId\x12;\n" +
-	"\x14approval_rules_token\x18\r \x01(\tB\t\x8a\xc81\x05<=100R\x12approvalRulesToken\x12\x1b\n" +
-	"\tdisk_size\x18\x15 \x01(\x03R\bdiskSize\x12;\n" +
-	"\vupdate_mask\x18\x18 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06J\x04\b\b\x10\n" +
-	"J\x04\b\x0e\x10\x15J\x04\b\x16\x10\x18\"9\n" +
-	"\x16UpdateInstanceMetadata\x12\x1f\n" +
-	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\"8\n" +
 	"\x15DeleteInstanceRequest\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
@@ -953,14 +738,12 @@ const file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc = "" +
 	"instanceId\"7\n" +
 	"\x14StopInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId2\x88\t\n" +
+	"instanceId2\xd6\a\n" +
 	"\x0fInstanceService\x12\x7f\n" +
 	"\x03Get\x12*.yandex.cloud.gitlab.v1.GetInstanceRequest\x1a .yandex.cloud.gitlab.v1.Instance\"*\x82\xd3\xe4\x93\x02$\x12\"/gitlab/v1/instances/{instance_id}\x12\x81\x01\n" +
 	"\x04List\x12,.yandex.cloud.gitlab.v1.ListInstancesRequest\x1a-.yandex.cloud.gitlab.v1.ListInstancesResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/gitlab/v1/instances\x12\xa1\x01\n" +
 	"\x06Create\x12-.yandex.cloud.gitlab.v1.CreateInstanceRequest\x1a!.yandex.cloud.operation.Operation\"E\xb2\xd2*\"\n" +
-	"\x16CreateInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/gitlab/v1/instances\x12\xaf\x01\n" +
-	"\x06Update\x12-.yandex.cloud.gitlab.v1.UpdateInstanceRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2*\"\n" +
-	"\x16UpdateInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02':\x01*2\"/gitlab/v1/instances/{instance_id}\x12\xb9\x01\n" +
+	"\x16CreateInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/gitlab/v1/instances\x12\xb9\x01\n" +
 	"\x06Delete\x12-.yandex.cloud.gitlab.v1.DeleteInstanceRequest\x1a!.yandex.cloud.operation.Operation\"]\xb2\xd2*/\n" +
 	"\x16DeleteInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02$*\"/gitlab/v1/instances/{instance_id}\x12\xaf\x01\n" +
 	"\x05Start\x12,.yandex.cloud.gitlab.v1.StartInstanceRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2*!\n" +
@@ -981,51 +764,43 @@ func file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_gitlab_v1_instance_service_proto_rawDescData
 }
 
-var file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_yandex_cloud_gitlab_v1_instance_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_gitlab_v1_instance_service_proto_goTypes = []any{
 	(*GetInstanceRequest)(nil),     // 0: yandex.cloud.gitlab.v1.GetInstanceRequest
 	(*ListInstancesRequest)(nil),   // 1: yandex.cloud.gitlab.v1.ListInstancesRequest
 	(*ListInstancesResponse)(nil),  // 2: yandex.cloud.gitlab.v1.ListInstancesResponse
 	(*CreateInstanceRequest)(nil),  // 3: yandex.cloud.gitlab.v1.CreateInstanceRequest
 	(*CreateInstanceMetadata)(nil), // 4: yandex.cloud.gitlab.v1.CreateInstanceMetadata
-	(*UpdateInstanceRequest)(nil),  // 5: yandex.cloud.gitlab.v1.UpdateInstanceRequest
-	(*UpdateInstanceMetadata)(nil), // 6: yandex.cloud.gitlab.v1.UpdateInstanceMetadata
-	(*DeleteInstanceRequest)(nil),  // 7: yandex.cloud.gitlab.v1.DeleteInstanceRequest
-	(*DeleteInstanceMetadata)(nil), // 8: yandex.cloud.gitlab.v1.DeleteInstanceMetadata
-	(*StartInstanceRequest)(nil),   // 9: yandex.cloud.gitlab.v1.StartInstanceRequest
-	(*StartInstanceMetadata)(nil),  // 10: yandex.cloud.gitlab.v1.StartInstanceMetadata
-	(*StopInstanceRequest)(nil),    // 11: yandex.cloud.gitlab.v1.StopInstanceRequest
-	(*StopInstanceMetadata)(nil),   // 12: yandex.cloud.gitlab.v1.StopInstanceMetadata
-	nil,                            // 13: yandex.cloud.gitlab.v1.CreateInstanceRequest.LabelsEntry
-	nil,                            // 14: yandex.cloud.gitlab.v1.UpdateInstanceRequest.LabelsEntry
-	(*Instance)(nil),               // 15: yandex.cloud.gitlab.v1.Instance
-	(*fieldmaskpb.FieldMask)(nil),  // 16: google.protobuf.FieldMask
-	(*operation.Operation)(nil),    // 17: yandex.cloud.operation.Operation
+	(*DeleteInstanceRequest)(nil),  // 5: yandex.cloud.gitlab.v1.DeleteInstanceRequest
+	(*DeleteInstanceMetadata)(nil), // 6: yandex.cloud.gitlab.v1.DeleteInstanceMetadata
+	(*StartInstanceRequest)(nil),   // 7: yandex.cloud.gitlab.v1.StartInstanceRequest
+	(*StartInstanceMetadata)(nil),  // 8: yandex.cloud.gitlab.v1.StartInstanceMetadata
+	(*StopInstanceRequest)(nil),    // 9: yandex.cloud.gitlab.v1.StopInstanceRequest
+	(*StopInstanceMetadata)(nil),   // 10: yandex.cloud.gitlab.v1.StopInstanceMetadata
+	nil,                            // 11: yandex.cloud.gitlab.v1.CreateInstanceRequest.LabelsEntry
+	(*Instance)(nil),               // 12: yandex.cloud.gitlab.v1.Instance
+	(*operation.Operation)(nil),    // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_gitlab_v1_instance_service_proto_depIdxs = []int32{
-	15, // 0: yandex.cloud.gitlab.v1.ListInstancesResponse.instances:type_name -> yandex.cloud.gitlab.v1.Instance
-	13, // 1: yandex.cloud.gitlab.v1.CreateInstanceRequest.labels:type_name -> yandex.cloud.gitlab.v1.CreateInstanceRequest.LabelsEntry
-	14, // 2: yandex.cloud.gitlab.v1.UpdateInstanceRequest.labels:type_name -> yandex.cloud.gitlab.v1.UpdateInstanceRequest.LabelsEntry
-	16, // 3: yandex.cloud.gitlab.v1.UpdateInstanceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	0,  // 4: yandex.cloud.gitlab.v1.InstanceService.Get:input_type -> yandex.cloud.gitlab.v1.GetInstanceRequest
-	1,  // 5: yandex.cloud.gitlab.v1.InstanceService.List:input_type -> yandex.cloud.gitlab.v1.ListInstancesRequest
-	3,  // 6: yandex.cloud.gitlab.v1.InstanceService.Create:input_type -> yandex.cloud.gitlab.v1.CreateInstanceRequest
-	5,  // 7: yandex.cloud.gitlab.v1.InstanceService.Update:input_type -> yandex.cloud.gitlab.v1.UpdateInstanceRequest
-	7,  // 8: yandex.cloud.gitlab.v1.InstanceService.Delete:input_type -> yandex.cloud.gitlab.v1.DeleteInstanceRequest
-	9,  // 9: yandex.cloud.gitlab.v1.InstanceService.Start:input_type -> yandex.cloud.gitlab.v1.StartInstanceRequest
-	11, // 10: yandex.cloud.gitlab.v1.InstanceService.Stop:input_type -> yandex.cloud.gitlab.v1.StopInstanceRequest
-	15, // 11: yandex.cloud.gitlab.v1.InstanceService.Get:output_type -> yandex.cloud.gitlab.v1.Instance
-	2,  // 12: yandex.cloud.gitlab.v1.InstanceService.List:output_type -> yandex.cloud.gitlab.v1.ListInstancesResponse
-	17, // 13: yandex.cloud.gitlab.v1.InstanceService.Create:output_type -> yandex.cloud.operation.Operation
-	17, // 14: yandex.cloud.gitlab.v1.InstanceService.Update:output_type -> yandex.cloud.operation.Operation
-	17, // 15: yandex.cloud.gitlab.v1.InstanceService.Delete:output_type -> yandex.cloud.operation.Operation
-	17, // 16: yandex.cloud.gitlab.v1.InstanceService.Start:output_type -> yandex.cloud.operation.Operation
-	17, // 17: yandex.cloud.gitlab.v1.InstanceService.Stop:output_type -> yandex.cloud.operation.Operation
-	11, // [11:18] is the sub-list for method output_type
-	4,  // [4:11] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	12, // 0: yandex.cloud.gitlab.v1.ListInstancesResponse.instances:type_name -> yandex.cloud.gitlab.v1.Instance
+	11, // 1: yandex.cloud.gitlab.v1.CreateInstanceRequest.labels:type_name -> yandex.cloud.gitlab.v1.CreateInstanceRequest.LabelsEntry
+	0,  // 2: yandex.cloud.gitlab.v1.InstanceService.Get:input_type -> yandex.cloud.gitlab.v1.GetInstanceRequest
+	1,  // 3: yandex.cloud.gitlab.v1.InstanceService.List:input_type -> yandex.cloud.gitlab.v1.ListInstancesRequest
+	3,  // 4: yandex.cloud.gitlab.v1.InstanceService.Create:input_type -> yandex.cloud.gitlab.v1.CreateInstanceRequest
+	5,  // 5: yandex.cloud.gitlab.v1.InstanceService.Delete:input_type -> yandex.cloud.gitlab.v1.DeleteInstanceRequest
+	7,  // 6: yandex.cloud.gitlab.v1.InstanceService.Start:input_type -> yandex.cloud.gitlab.v1.StartInstanceRequest
+	9,  // 7: yandex.cloud.gitlab.v1.InstanceService.Stop:input_type -> yandex.cloud.gitlab.v1.StopInstanceRequest
+	12, // 8: yandex.cloud.gitlab.v1.InstanceService.Get:output_type -> yandex.cloud.gitlab.v1.Instance
+	2,  // 9: yandex.cloud.gitlab.v1.InstanceService.List:output_type -> yandex.cloud.gitlab.v1.ListInstancesResponse
+	13, // 10: yandex.cloud.gitlab.v1.InstanceService.Create:output_type -> yandex.cloud.operation.Operation
+	13, // 11: yandex.cloud.gitlab.v1.InstanceService.Delete:output_type -> yandex.cloud.operation.Operation
+	13, // 12: yandex.cloud.gitlab.v1.InstanceService.Start:output_type -> yandex.cloud.operation.Operation
+	13, // 13: yandex.cloud.gitlab.v1.InstanceService.Stop:output_type -> yandex.cloud.operation.Operation
+	8,  // [8:14] is the sub-list for method output_type
+	2,  // [2:8] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_gitlab_v1_instance_service_proto_init() }
@@ -1040,7 +815,7 @@ func file_yandex_cloud_gitlab_v1_instance_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc), len(file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -33,8 +33,6 @@ const (
 	NetworkLoadBalancerService_AddListener_FullMethodName       = "/yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService/AddListener"
 	NetworkLoadBalancerService_RemoveListener_FullMethodName    = "/yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService/RemoveListener"
 	NetworkLoadBalancerService_ListOperations_FullMethodName    = "/yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService/ListOperations"
-	NetworkLoadBalancerService_StartZonalShift_FullMethodName   = "/yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService/StartZonalShift"
-	NetworkLoadBalancerService_CancelZonalShift_FullMethodName  = "/yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService/CancelZonalShift"
 )
 
 // NetworkLoadBalancerServiceClient is the client API for NetworkLoadBalancerService service.
@@ -73,10 +71,6 @@ type NetworkLoadBalancerServiceClient interface {
 	RemoveListener(ctx context.Context, in *RemoveNetworkLoadBalancerListenerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified network load balancer.
 	ListOperations(ctx context.Context, in *ListNetworkLoadBalancerOperationsRequest, opts ...grpc.CallOption) (*ListNetworkLoadBalancerOperationsResponse, error)
-	// Start zonal shift for the specified network load balancer.
-	StartZonalShift(ctx context.Context, in *StartZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Cancel zonal shift for the specified network load balancer.
-	CancelZonalShift(ctx context.Context, in *CancelZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type networkLoadBalancerServiceClient struct {
@@ -217,26 +211,6 @@ func (c *networkLoadBalancerServiceClient) ListOperations(ctx context.Context, i
 	return out, nil
 }
 
-func (c *networkLoadBalancerServiceClient) StartZonalShift(ctx context.Context, in *StartZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, NetworkLoadBalancerService_StartZonalShift_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *networkLoadBalancerServiceClient) CancelZonalShift(ctx context.Context, in *CancelZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, NetworkLoadBalancerService_CancelZonalShift_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // NetworkLoadBalancerServiceServer is the server API for NetworkLoadBalancerService service.
 // All implementations should embed UnimplementedNetworkLoadBalancerServiceServer
 // for forward compatibility.
@@ -273,10 +247,6 @@ type NetworkLoadBalancerServiceServer interface {
 	RemoveListener(context.Context, *RemoveNetworkLoadBalancerListenerRequest) (*operation.Operation, error)
 	// Lists operations for the specified network load balancer.
 	ListOperations(context.Context, *ListNetworkLoadBalancerOperationsRequest) (*ListNetworkLoadBalancerOperationsResponse, error)
-	// Start zonal shift for the specified network load balancer.
-	StartZonalShift(context.Context, *StartZonalShiftRequest) (*operation.Operation, error)
-	// Cancel zonal shift for the specified network load balancer.
-	CancelZonalShift(context.Context, *CancelZonalShiftRequest) (*operation.Operation, error)
 }
 
 // UnimplementedNetworkLoadBalancerServiceServer should be embedded to have
@@ -324,12 +294,6 @@ func (UnimplementedNetworkLoadBalancerServiceServer) RemoveListener(context.Cont
 }
 func (UnimplementedNetworkLoadBalancerServiceServer) ListOperations(context.Context, *ListNetworkLoadBalancerOperationsRequest) (*ListNetworkLoadBalancerOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
-}
-func (UnimplementedNetworkLoadBalancerServiceServer) StartZonalShift(context.Context, *StartZonalShiftRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartZonalShift not implemented")
-}
-func (UnimplementedNetworkLoadBalancerServiceServer) CancelZonalShift(context.Context, *CancelZonalShiftRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CancelZonalShift not implemented")
 }
 func (UnimplementedNetworkLoadBalancerServiceServer) testEmbeddedByValue() {}
 
@@ -585,42 +549,6 @@ func _NetworkLoadBalancerService_ListOperations_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NetworkLoadBalancerService_StartZonalShift_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartZonalShiftRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NetworkLoadBalancerServiceServer).StartZonalShift(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NetworkLoadBalancerService_StartZonalShift_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NetworkLoadBalancerServiceServer).StartZonalShift(ctx, req.(*StartZonalShiftRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NetworkLoadBalancerService_CancelZonalShift_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelZonalShiftRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NetworkLoadBalancerServiceServer).CancelZonalShift(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NetworkLoadBalancerService_CancelZonalShift_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NetworkLoadBalancerServiceServer).CancelZonalShift(ctx, req.(*CancelZonalShiftRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // NetworkLoadBalancerService_ServiceDesc is the grpc.ServiceDesc for NetworkLoadBalancerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -679,14 +607,6 @@ var NetworkLoadBalancerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _NetworkLoadBalancerService_ListOperations_Handler,
-		},
-		{
-			MethodName: "StartZonalShift",
-			Handler:    _NetworkLoadBalancerService_StartZonalShift_Handler,
-		},
-		{
-			MethodName: "CancelZonalShift",
-			Handler:    _NetworkLoadBalancerService_CancelZonalShift_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

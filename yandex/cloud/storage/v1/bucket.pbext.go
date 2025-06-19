@@ -76,10 +76,6 @@ func (m *Bucket) SetAllowedPrivateEndpoints(v *BucketAllowedPrivateEndpoints) {
 	m.AllowedPrivateEndpoints = v
 }
 
-func (m *Bucket) SetResourceId(v string) {
-	m.ResourceId = v
-}
-
 func (m *Tag) SetKey(v string) {
 	m.Key = v
 }
