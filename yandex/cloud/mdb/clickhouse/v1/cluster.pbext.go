@@ -141,8 +141,16 @@ func (m *ClusterConfig_Clickhouse) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *ClusterConfig_Clickhouse) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 func (m *ClusterConfig_Zookeeper) SetResources(v *Resources) {
 	m.Resources = v
+}
+
+func (m *ClusterConfig_Zookeeper) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *Shard) SetName(v string) {
@@ -191,6 +199,10 @@ func (m *ShardConfig_Clickhouse) SetResources(v *Resources) {
 
 func (m *ShardConfig_Clickhouse) SetWeight(v *wrapperspb.Int64Value) {
 	m.Weight = v
+}
+
+func (m *ShardConfig_Clickhouse) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *Host) SetName(v string) {
@@ -295,4 +307,16 @@ func (m *CloudStorage) SetDataCacheMaxSize(v *wrapperspb.Int64Value) {
 
 func (m *CloudStorage) SetPreferNotToMerge(v *wrapperspb.BoolValue) {
 	m.PreferNotToMerge = v
+}
+
+func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v *wrapperspb.Int64Value) {
+	m.PlannedUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v *wrapperspb.Int64Value) {
+	m.EmergencyUsageThreshold = v
+}
+
+func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v *wrapperspb.Int64Value) {
+	m.DiskSizeLimit = v
 }

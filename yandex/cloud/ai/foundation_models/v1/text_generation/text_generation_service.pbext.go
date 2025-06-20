@@ -4,6 +4,7 @@ package foundation_models
 
 import (
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/ai/foundation_models/v1"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 type CompletionRequest_ResponseFormat = isCompletionRequest_ResponseFormat
@@ -38,6 +39,14 @@ func (m *CompletionRequest) SetJsonSchema(v *v1.JsonSchema) {
 	m.ResponseFormat = &CompletionRequest_JsonSchema{
 		JsonSchema: v,
 	}
+}
+
+func (m *CompletionRequest) SetParallelToolCalls(v *wrapperspb.BoolValue) {
+	m.ParallelToolCalls = v
+}
+
+func (m *CompletionRequest) SetToolChoice(v *v1.ToolChoice) {
+	m.ToolChoice = v
 }
 
 func (m *CompletionResponse) SetAlternatives(v []*v1.Alternative) {

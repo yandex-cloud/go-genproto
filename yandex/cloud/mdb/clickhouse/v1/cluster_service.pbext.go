@@ -907,8 +907,16 @@ func (m *ConfigSpec_Clickhouse) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *ConfigSpec_Clickhouse) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
+}
+
 func (m *ConfigSpec_Zookeeper) SetResources(v *Resources) {
 	m.Resources = v
+}
+
+func (m *ConfigSpec_Zookeeper) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *ShardConfigSpec) SetClickhouse(v *ShardConfigSpec_Clickhouse) {
@@ -925,6 +933,10 @@ func (m *ShardConfigSpec_Clickhouse) SetResources(v *Resources) {
 
 func (m *ShardConfigSpec_Clickhouse) SetWeight(v *wrapperspb.Int64Value) {
 	m.Weight = v
+}
+
+func (m *ShardConfigSpec_Clickhouse) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *ShardSpec) SetName(v string) {

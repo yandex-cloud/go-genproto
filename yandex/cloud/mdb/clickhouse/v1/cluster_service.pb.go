@@ -5138,9 +5138,11 @@ type ConfigSpec_Clickhouse struct {
 	// Configuration for a ClickHouse server.
 	Config *config.ClickhouseConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
 	// Resources allocated to ClickHouse hosts.
-	Resources     *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Resources *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Disk size autoscaling settings.
+	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,3,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ConfigSpec_Clickhouse) Reset() {
@@ -5187,13 +5189,22 @@ func (x *ConfigSpec_Clickhouse) GetResources() *Resources {
 	return nil
 }
 
+func (x *ConfigSpec_Clickhouse) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
+	if x != nil {
+		return x.DiskSizeAutoscaling
+	}
+	return nil
+}
+
 type ConfigSpec_Zookeeper struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Resources allocated to ZooKeeper hosts. If not set, minimal available resources will be used.
 	// All available resource presets can be retrieved with a [ResourcePresetService.List] request.
-	Resources     *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Resources *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Disk size autoscaling settings.
+	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,2,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ConfigSpec_Zookeeper) Reset() {
@@ -5233,6 +5244,13 @@ func (x *ConfigSpec_Zookeeper) GetResources() *Resources {
 	return nil
 }
 
+func (x *ConfigSpec_Zookeeper) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
+	if x != nil {
+		return x.DiskSizeAutoscaling
+	}
+	return nil
+}
+
 type ShardConfigSpec_Clickhouse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ClickHouse settings for the shard.
@@ -5241,9 +5259,11 @@ type ShardConfigSpec_Clickhouse struct {
 	Resources *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Relative weight of the shard considered when writing data to the cluster.
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/operations/table_engines/distributed/).
-	Weight        *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=weight,proto3" json:"weight,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Weight *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=weight,proto3" json:"weight,omitempty"`
+	// Disk size autoscaling settings.
+	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,4,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ShardConfigSpec_Clickhouse) Reset() {
@@ -5293,6 +5313,13 @@ func (x *ShardConfigSpec_Clickhouse) GetResources() *Resources {
 func (x *ShardConfigSpec_Clickhouse) GetWeight() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.Weight
+	}
+	return nil
+}
+
+func (x *ShardConfigSpec_Clickhouse) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
+	if x != nil {
+		return x.DiskSizeAutoscaling
 	}
 	return nil
 }
@@ -5742,7 +5769,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\tsubnet_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
 	"\x10assign_public_ip\x18\x04 \x01(\bR\x0eassignPublicIp\x129\n" +
 	"\n" +
-	"shard_name\x18\x05 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\"\x8f\b\n" +
+	"shard_name\x18\x05 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\"\xe2\t\n" +
 	"\n" +
 	"ConfigSpec\x12\x18\n" +
 	"\aversion\x18\x03 \x01(\tR\aversion\x12U\n" +
@@ -5758,22 +5785,25 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x0eadmin_password\x18\t \x01(\tR\radminPassword\x12C\n" +
 	"\x0fembedded_keeper\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0eembeddedKeeper\x12V\n" +
-	"\x19backup_retain_period_days\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x1a\xa6\x01\n" +
+	"\x19backup_retain_period_days\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x1a\x8f\x02\n" +
 	"\n" +
 	"Clickhouse\x12O\n" +
 	"\x06config\x18\x01 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigR\x06config\x12G\n" +
-	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x1aT\n" +
+	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x12g\n" +
+	"\x15disk_size_autoscaling\x18\x03 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x1a\xbd\x01\n" +
 	"\tZookeeper\x12G\n" +
-	"\tresources\x18\x01 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\"\xcb\x02\n" +
+	"\tresources\x18\x01 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x12g\n" +
+	"\x15disk_size_autoscaling\x18\x02 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xb4\x03\n" +
 	"\x0fShardConfigSpec\x12Z\n" +
 	"\n" +
 	"clickhouse\x18\x01 \x01(\v2:.yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.ClickhouseR\n" +
-	"clickhouse\x1a\xdb\x01\n" +
+	"clickhouse\x1a\xc4\x02\n" +
 	"\n" +
 	"Clickhouse\x12O\n" +
 	"\x06config\x18\x01 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigR\x06config\x12G\n" +
 	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x123\n" +
-	"\x06weight\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x06weight\"\xbd\x01\n" +
+	"\x06weight\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x06weight\x12g\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xbd\x01\n" +
 	"\tShardSpec\x122\n" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12P\n" +
 	"\vconfig_spec\x18\x02 \x01(\v2/.yandex.cloud.mdb.clickhouse.v1.ShardConfigSpecR\n" +
@@ -5972,6 +6002,7 @@ var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_goTypes = []any{
 	(*CloudStorage)(nil),                               // 106: yandex.cloud.mdb.clickhouse.v1.CloudStorage
 	(*wrapperspb.Int64Value)(nil),                      // 107: google.protobuf.Int64Value
 	(*config.ClickhouseConfig)(nil),                    // 108: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	(*DiskSizeAutoscaling)(nil),                        // 109: yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
 }
 var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_depIdxs = []int32{
 	87,  // 0: yandex.cloud.mdb.clickhouse.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster
@@ -6047,89 +6078,92 @@ var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_depIdxs = []int32{
 	78,  // 70: yandex.cloud.mdb.clickhouse.v1.ShardSpec.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
 	108, // 71: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
 	94,  // 72: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	94,  // 73: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	108, // 74: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	94,  // 75: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	107, // 76: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.weight:type_name -> google.protobuf.Int64Value
-	3,   // 77: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterRequest
-	4,   // 78: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersRequest
-	6,   // 79: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest
-	8,   // 80: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest
-	10,  // 81: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterRequest
-	12,  // 82: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.clickhouse.v1.StartClusterRequest
-	14,  // 83: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.clickhouse.v1.StopClusterRequest
-	16,  // 84: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.clickhouse.v1.MoveClusterRequest
-	18,  // 85: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest
-	20,  // 86: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.clickhouse.v1.BackupClusterRequest
-	22,  // 87: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest
-	24,  // 88: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest
-	27,  // 89: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest
-	30,  // 90: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest
-	31,  // 91: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsRequest
-	33,  // 92: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsRequest
-	35,  // 93: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsRequest
-	37,  // 94: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest
-	40,  // 95: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest
-	42,  // 96: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsRequest
-	44,  // 97: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsRequest
-	46,  // 98: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest
-	47,  // 99: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest
-	49,  // 100: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest
-	51,  // 101: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest
-	53,  // 102: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest
-	55,  // 103: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest
-	57,  // 104: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest
-	59,  // 105: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest
-	60,  // 106: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsRequest
-	62,  // 107: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupRequest
-	64,  // 108: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest
-	66,  // 109: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupRequest
-	68,  // 110: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesRequest
-	70,  // 111: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest
-	72,  // 112: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest
-	74,  // 113: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryRequest
-	87,  // 114: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.clickhouse.v1.Cluster
-	5,   // 115: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersResponse
-	97,  // 116: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	97,  // 117: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	97,  // 118: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	97,  // 119: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	97,  // 120: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	97,  // 121: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	97,  // 122: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:output_type -> yandex.cloud.operation.Operation
-	97,  // 123: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	97,  // 124: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	97,  // 125: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	28,  // 126: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse
-	29,  // 127: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.StreamLogRecord
-	32,  // 128: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse
-	34,  // 129: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse
-	36,  // 130: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse
-	97,  // 131: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	97,  // 132: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
-	97,  // 133: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	97,  // 134: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:output_type -> yandex.cloud.operation.Operation
-	100, // 135: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.clickhouse.v1.Shard
-	48,  // 136: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse
-	97,  // 137: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
-	97,  // 138: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:output_type -> yandex.cloud.operation.Operation
-	97,  // 139: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:output_type -> yandex.cloud.operation.Operation
-	97,  // 140: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
-	97,  // 141: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:output_type -> yandex.cloud.operation.Operation
-	101, // 142: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:output_type -> yandex.cloud.mdb.clickhouse.v1.ShardGroup
-	61,  // 143: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse
-	97,  // 144: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:output_type -> yandex.cloud.operation.Operation
-	97,  // 145: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:output_type -> yandex.cloud.operation.Operation
-	97,  // 146: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:output_type -> yandex.cloud.operation.Operation
-	69,  // 147: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse
-	97,  // 148: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:output_type -> yandex.cloud.operation.Operation
-	97,  // 149: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:output_type -> yandex.cloud.operation.Operation
-	97,  // 150: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:output_type -> yandex.cloud.operation.Operation
-	114, // [114:151] is the sub-list for method output_type
-	77,  // [77:114] is the sub-list for method input_type
-	77,  // [77:77] is the sub-list for extension type_name
-	77,  // [77:77] is the sub-list for extension extendee
-	0,   // [0:77] is the sub-list for field type_name
+	109, // 73: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	94,  // 74: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
+	109, // 75: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	108, // 76: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	94,  // 77: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
+	107, // 78: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.weight:type_name -> google.protobuf.Int64Value
+	109, // 79: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	3,   // 80: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterRequest
+	4,   // 81: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersRequest
+	6,   // 82: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest
+	8,   // 83: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest
+	10,  // 84: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterRequest
+	12,  // 85: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.clickhouse.v1.StartClusterRequest
+	14,  // 86: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.clickhouse.v1.StopClusterRequest
+	16,  // 87: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.clickhouse.v1.MoveClusterRequest
+	18,  // 88: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest
+	20,  // 89: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.clickhouse.v1.BackupClusterRequest
+	22,  // 90: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest
+	24,  // 91: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest
+	27,  // 92: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest
+	30,  // 93: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest
+	31,  // 94: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsRequest
+	33,  // 95: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsRequest
+	35,  // 96: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsRequest
+	37,  // 97: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest
+	40,  // 98: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest
+	42,  // 99: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsRequest
+	44,  // 100: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsRequest
+	46,  // 101: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest
+	47,  // 102: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest
+	49,  // 103: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest
+	51,  // 104: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest
+	53,  // 105: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest
+	55,  // 106: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest
+	57,  // 107: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest
+	59,  // 108: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest
+	60,  // 109: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsRequest
+	62,  // 110: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupRequest
+	64,  // 111: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest
+	66,  // 112: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupRequest
+	68,  // 113: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesRequest
+	70,  // 114: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest
+	72,  // 115: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest
+	74,  // 116: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryRequest
+	87,  // 117: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.clickhouse.v1.Cluster
+	5,   // 118: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersResponse
+	97,  // 119: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	97,  // 120: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	97,  // 121: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	97,  // 122: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	97,  // 123: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	97,  // 124: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	97,  // 125: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:output_type -> yandex.cloud.operation.Operation
+	97,  // 126: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	97,  // 127: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	97,  // 128: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	28,  // 129: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse
+	29,  // 130: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.StreamLogRecord
+	32,  // 131: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse
+	34,  // 132: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse
+	36,  // 133: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse
+	97,  // 134: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	97,  // 135: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
+	97,  // 136: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
+	97,  // 137: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:output_type -> yandex.cloud.operation.Operation
+	100, // 138: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.clickhouse.v1.Shard
+	48,  // 139: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse
+	97,  // 140: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
+	97,  // 141: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:output_type -> yandex.cloud.operation.Operation
+	97,  // 142: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:output_type -> yandex.cloud.operation.Operation
+	97,  // 143: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
+	97,  // 144: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:output_type -> yandex.cloud.operation.Operation
+	101, // 145: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:output_type -> yandex.cloud.mdb.clickhouse.v1.ShardGroup
+	61,  // 146: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse
+	97,  // 147: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:output_type -> yandex.cloud.operation.Operation
+	97,  // 148: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:output_type -> yandex.cloud.operation.Operation
+	97,  // 149: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:output_type -> yandex.cloud.operation.Operation
+	69,  // 150: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse
+	97,  // 151: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:output_type -> yandex.cloud.operation.Operation
+	97,  // 152: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:output_type -> yandex.cloud.operation.Operation
+	97,  // 153: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:output_type -> yandex.cloud.operation.Operation
+	117, // [117:154] is the sub-list for method output_type
+	80,  // [80:117] is the sub-list for method input_type
+	80,  // [80:80] is the sub-list for extension type_name
+	80,  // [80:80] is the sub-list for extension extendee
+	0,   // [0:80] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_init() }

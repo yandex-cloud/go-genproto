@@ -2,6 +2,10 @@
 
 package gitlab
 
+import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
 func (m *GetInstanceRequest) SetInstanceId(v string) {
 	m.InstanceId = v
 }
@@ -83,6 +87,58 @@ func (m *CreateInstanceRequest) SetApprovalRulesId(v string) {
 }
 
 func (m *CreateInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *UpdateInstanceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *UpdateInstanceRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateInstanceRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateInstanceRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateInstanceRequest) SetBackupRetainPeriodDays(v int64) {
+	m.BackupRetainPeriodDays = v
+}
+
+func (m *UpdateInstanceRequest) SetResourcePresetId(v string) {
+	m.ResourcePresetId = v
+}
+
+func (m *UpdateInstanceRequest) SetMaintenanceDeleteUntagged(v bool) {
+	m.MaintenanceDeleteUntagged = v
+}
+
+func (m *UpdateInstanceRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *UpdateInstanceRequest) SetApprovalRulesId(v string) {
+	m.ApprovalRulesId = v
+}
+
+func (m *UpdateInstanceRequest) SetApprovalRulesToken(v string) {
+	m.ApprovalRulesToken = v
+}
+
+func (m *UpdateInstanceRequest) SetDiskSize(v int64) {
+	m.DiskSize = v
+}
+
+func (m *UpdateInstanceRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }
 

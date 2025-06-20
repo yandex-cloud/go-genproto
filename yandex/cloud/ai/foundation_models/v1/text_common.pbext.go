@@ -119,6 +119,10 @@ func (m *FunctionTool) SetParameters(v *structpb.Struct) {
 	m.Parameters = v
 }
 
+func (m *FunctionTool) SetStrict(v bool) {
+	m.Strict = v
+}
+
 type ToolCall_ToolCallType = isToolCall_ToolCallType
 
 func (m *ToolCall) SetToolCallType(v ToolCall_ToolCallType) {
@@ -177,4 +181,22 @@ func (m *ToolResultList) SetToolResults(v []*ToolResult) {
 
 func (m *JsonSchema) SetSchema(v *structpb.Struct) {
 	m.Schema = v
+}
+
+type ToolChoice_ToolChoice = isToolChoice_ToolChoice
+
+func (m *ToolChoice) SetToolChoice(v ToolChoice_ToolChoice) {
+	m.ToolChoice = v
+}
+
+func (m *ToolChoice) SetMode(v ToolChoice_ToolChoiceMode) {
+	m.ToolChoice = &ToolChoice_Mode{
+		Mode: v,
+	}
+}
+
+func (m *ToolChoice) SetFunctionName(v string) {
+	m.ToolChoice = &ToolChoice_FunctionName{
+		FunctionName: v,
+	}
 }

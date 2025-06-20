@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -44,8 +45,12 @@ type CompletionRequest struct {
 	//	*CompletionRequest_JsonObject
 	//	*CompletionRequest_JsonSchema
 	ResponseFormat isCompletionRequest_ResponseFormat `protobuf_oneof:"ResponseFormat"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Controls whether the model can generate multiple tool calls in a single response. Defaults to true.
+	ParallelToolCalls *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=parallel_tool_calls,json=parallelToolCalls,proto3" json:"parallel_tool_calls,omitempty"`
+	// Specifies how the model should select which tool (or tools) to use when generating a response.
+	ToolChoice    *v1.ToolChoice `protobuf:"bytes,8,opt,name=tool_choice,json=toolChoice,proto3" json:"tool_choice,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CompletionRequest) Reset() {
@@ -127,6 +132,20 @@ func (x *CompletionRequest) GetJsonSchema() *v1.JsonSchema {
 		if x, ok := x.ResponseFormat.(*CompletionRequest_JsonSchema); ok {
 			return x.JsonSchema
 		}
+	}
+	return nil
+}
+
+func (x *CompletionRequest) GetParallelToolCalls() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ParallelToolCalls
+	}
+	return nil
+}
+
+func (x *CompletionRequest) GetToolChoice() *v1.ToolChoice {
+	if x != nil {
+		return x.ToolChoice
 	}
 	return nil
 }
@@ -554,7 +573,7 @@ var File_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_se
 
 const file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_service_proto_rawDesc = "" +
 	"\n" +
-	"Ryandex/cloud/ai/foundation_models/v1/text_generation/text_generation_service.proto\x12$yandex.cloud.ai.foundation_models.v1\x1a\x1cgoogle/api/annotations.proto\x1a6yandex/cloud/ai/foundation_models/v1/text_common.proto\x1aFyandex/cloud/ai/foundation_models/v1/batch_inference_task_status.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\xaf\x03\n" +
+	"Ryandex/cloud/ai/foundation_models/v1/text_generation/text_generation_service.proto\x12$yandex.cloud.ai.foundation_models.v1\x1a\x1cgoogle/api/annotations.proto\x1a6yandex/cloud/ai/foundation_models/v1/text_common.proto\x1aFyandex/cloud/ai/foundation_models/v1/batch_inference_task_status.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x04\n" +
 	"\x11CompletionRequest\x12\x1b\n" +
 	"\tmodel_uri\x18\x01 \x01(\tR\bmodelUri\x12f\n" +
 	"\x12completion_options\x18\x02 \x01(\v27.yandex.cloud.ai.foundation_models.v1.CompletionOptionsR\x11completionOptions\x12I\n" +
@@ -563,7 +582,10 @@ const file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_
 	"\vjson_object\x18\x05 \x01(\bH\x00R\n" +
 	"jsonObject\x12S\n" +
 	"\vjson_schema\x18\x06 \x01(\v20.yandex.cloud.ai.foundation_models.v1.JsonSchemaH\x00R\n" +
-	"jsonSchemaB\x10\n" +
+	"jsonSchema\x12J\n" +
+	"\x13parallel_tool_calls\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x11parallelToolCalls\x12Q\n" +
+	"\vtool_choice\x18\b \x01(\v20.yandex.cloud.ai.foundation_models.v1.ToolChoiceR\n" +
+	"toolChoiceB\x10\n" +
 	"\x0eResponseFormat\"\xda\x01\n" +
 	"\x12CompletionResponse\x12U\n" +
 	"\falternatives\x18\x01 \x03(\v21.yandex.cloud.ai.foundation_models.v1.AlternativeR\falternatives\x12H\n" +
@@ -631,38 +653,42 @@ var file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_se
 	(*v1.Message)(nil),               // 8: yandex.cloud.ai.foundation_models.v1.Message
 	(*v1.Tool)(nil),                  // 9: yandex.cloud.ai.foundation_models.v1.Tool
 	(*v1.JsonSchema)(nil),            // 10: yandex.cloud.ai.foundation_models.v1.JsonSchema
-	(*v1.Alternative)(nil),           // 11: yandex.cloud.ai.foundation_models.v1.Alternative
-	(*v1.ContentUsage)(nil),          // 12: yandex.cloud.ai.foundation_models.v1.ContentUsage
-	(v1.BatchInferenceTaskStatus)(0), // 13: yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
-	(*v1.Token)(nil),                 // 14: yandex.cloud.ai.foundation_models.v1.Token
-	(*operation.Operation)(nil),      // 15: yandex.cloud.operation.Operation
+	(*wrapperspb.BoolValue)(nil),     // 11: google.protobuf.BoolValue
+	(*v1.ToolChoice)(nil),            // 12: yandex.cloud.ai.foundation_models.v1.ToolChoice
+	(*v1.Alternative)(nil),           // 13: yandex.cloud.ai.foundation_models.v1.Alternative
+	(*v1.ContentUsage)(nil),          // 14: yandex.cloud.ai.foundation_models.v1.ContentUsage
+	(v1.BatchInferenceTaskStatus)(0), // 15: yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
+	(*v1.Token)(nil),                 // 16: yandex.cloud.ai.foundation_models.v1.Token
+	(*operation.Operation)(nil),      // 17: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_service_proto_depIdxs = []int32{
 	7,  // 0: yandex.cloud.ai.foundation_models.v1.CompletionRequest.completion_options:type_name -> yandex.cloud.ai.foundation_models.v1.CompletionOptions
 	8,  // 1: yandex.cloud.ai.foundation_models.v1.CompletionRequest.messages:type_name -> yandex.cloud.ai.foundation_models.v1.Message
 	9,  // 2: yandex.cloud.ai.foundation_models.v1.CompletionRequest.tools:type_name -> yandex.cloud.ai.foundation_models.v1.Tool
 	10, // 3: yandex.cloud.ai.foundation_models.v1.CompletionRequest.json_schema:type_name -> yandex.cloud.ai.foundation_models.v1.JsonSchema
-	11, // 4: yandex.cloud.ai.foundation_models.v1.CompletionResponse.alternatives:type_name -> yandex.cloud.ai.foundation_models.v1.Alternative
-	12, // 5: yandex.cloud.ai.foundation_models.v1.CompletionResponse.usage:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage
-	7,  // 6: yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest.completion_options:type_name -> yandex.cloud.ai.foundation_models.v1.CompletionOptions
-	13, // 7: yandex.cloud.ai.foundation_models.v1.BatchCompletionMetadata.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
-	13, // 8: yandex.cloud.ai.foundation_models.v1.BatchCompletionResponse.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
-	14, // 9: yandex.cloud.ai.foundation_models.v1.TokenizeResponse.tokens:type_name -> yandex.cloud.ai.foundation_models.v1.Token
-	0,  // 10: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
-	0,  // 11: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
-	2,  // 12: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest
-	5,  // 13: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:input_type -> yandex.cloud.ai.foundation_models.v1.TokenizeRequest
-	0,  // 14: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
-	1,  // 15: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:output_type -> yandex.cloud.ai.foundation_models.v1.CompletionResponse
-	15, // 16: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:output_type -> yandex.cloud.operation.Operation
-	15, // 17: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:output_type -> yandex.cloud.operation.Operation
-	6,  // 18: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
-	6,  // 19: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	11, // 4: yandex.cloud.ai.foundation_models.v1.CompletionRequest.parallel_tool_calls:type_name -> google.protobuf.BoolValue
+	12, // 5: yandex.cloud.ai.foundation_models.v1.CompletionRequest.tool_choice:type_name -> yandex.cloud.ai.foundation_models.v1.ToolChoice
+	13, // 6: yandex.cloud.ai.foundation_models.v1.CompletionResponse.alternatives:type_name -> yandex.cloud.ai.foundation_models.v1.Alternative
+	14, // 7: yandex.cloud.ai.foundation_models.v1.CompletionResponse.usage:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage
+	7,  // 8: yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest.completion_options:type_name -> yandex.cloud.ai.foundation_models.v1.CompletionOptions
+	15, // 9: yandex.cloud.ai.foundation_models.v1.BatchCompletionMetadata.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
+	15, // 10: yandex.cloud.ai.foundation_models.v1.BatchCompletionResponse.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
+	16, // 11: yandex.cloud.ai.foundation_models.v1.TokenizeResponse.tokens:type_name -> yandex.cloud.ai.foundation_models.v1.Token
+	0,  // 12: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
+	0,  // 13: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
+	2,  // 14: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest
+	5,  // 15: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:input_type -> yandex.cloud.ai.foundation_models.v1.TokenizeRequest
+	0,  // 16: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
+	1,  // 17: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:output_type -> yandex.cloud.ai.foundation_models.v1.CompletionResponse
+	17, // 18: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:output_type -> yandex.cloud.operation.Operation
+	17, // 19: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:output_type -> yandex.cloud.operation.Operation
+	6,  // 20: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
+	6,  // 21: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
+	17, // [17:22] is the sub-list for method output_type
+	12, // [12:17] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() {

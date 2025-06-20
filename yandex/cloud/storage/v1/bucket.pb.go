@@ -569,8 +569,10 @@ type Bucket struct {
 	Encryption *Encryption `protobuf:"bytes,16,opt,name=encryption,proto3" json:"encryption,omitempty"`
 	// Bucket allowed private endpoints.
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,17,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// ID of the Yandex.Cloud entity that owns the bucket.
+	ResourceId    string `protobuf:"bytes,18,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Bucket) Reset() {
@@ -720,6 +722,13 @@ func (x *Bucket) GetAllowedPrivateEndpoints() *BucketAllowedPrivateEndpoints {
 		return x.AllowedPrivateEndpoints
 	}
 	return nil
+}
+
+func (x *Bucket) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
 }
 
 type Tag struct {
@@ -2860,7 +2869,7 @@ var File_yandex_cloud_storage_v1_bucket_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/storage/v1/bucket.proto\x12\x17yandex.cloud.storage.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xec\a\n" +
+	"$yandex/cloud/storage/v1/bucket.proto\x12\x17yandex.cloud.storage.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8d\b\n" +
 	"\x06Bucket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -2885,7 +2894,9 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\n" +
 	"encryption\x18\x10 \x01(\v2#.yandex.cloud.storage.v1.EncryptionR\n" +
 	"encryption\x12r\n" +
-	"\x19allowed_private_endpoints\x18\x11 \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\"-\n" +
+	"\x19allowed_private_endpoints\x18\x11 \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x12\x1f\n" +
+	"\vresource_id\x18\x12 \x01(\tR\n" +
+	"resourceId\"-\n" +
 	"\x03Tag\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\"\xc6\x04\n" +

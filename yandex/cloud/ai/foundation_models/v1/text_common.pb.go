@@ -142,6 +142,64 @@ func (Alternative_AlternativeStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{4, 0}
 }
 
+// Defines the different modes for tool calling.
+type ToolChoice_ToolChoiceMode int32
+
+const (
+	// The server will choose the default behavior, which is AUTO.
+	ToolChoice_TOOL_CHOICE_MODE_UNSPECIFIED ToolChoice_ToolChoiceMode = 0
+	// The model will not call any tool and will generate a standard text response.
+	ToolChoice_NONE ToolChoice_ToolChoiceMode = 1
+	// The model can choose between generating a text response or calling one or more tools.
+	// This is the default behavior.
+	ToolChoice_AUTO ToolChoice_ToolChoiceMode = 2
+	// The model is required to call one or more tools.
+	ToolChoice_REQUIRED ToolChoice_ToolChoiceMode = 3
+)
+
+// Enum value maps for ToolChoice_ToolChoiceMode.
+var (
+	ToolChoice_ToolChoiceMode_name = map[int32]string{
+		0: "TOOL_CHOICE_MODE_UNSPECIFIED",
+		1: "NONE",
+		2: "AUTO",
+		3: "REQUIRED",
+	}
+	ToolChoice_ToolChoiceMode_value = map[string]int32{
+		"TOOL_CHOICE_MODE_UNSPECIFIED": 0,
+		"NONE":                         1,
+		"AUTO":                         2,
+		"REQUIRED":                     3,
+	}
+)
+
+func (x ToolChoice_ToolChoiceMode) Enum() *ToolChoice_ToolChoiceMode {
+	p := new(ToolChoice_ToolChoiceMode)
+	*p = x
+	return p
+}
+
+func (x ToolChoice_ToolChoiceMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ToolChoice_ToolChoiceMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_enumTypes[2].Descriptor()
+}
+
+func (ToolChoice_ToolChoiceMode) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_enumTypes[2]
+}
+
+func (x ToolChoice_ToolChoiceMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ToolChoice_ToolChoiceMode.Descriptor instead.
+func (ToolChoice_ToolChoiceMode) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{15, 0}
+}
+
 // Defines the options for completion generation.
 type CompletionOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -649,7 +707,9 @@ type FunctionTool struct {
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// A JSON Schema that defines the expected parameters for the function.
 	// The schema should describe the required fields, their types, and any constraints or default values.
-	Parameters    *structpb.Struct `protobuf:"bytes,3,opt,name=parameters,proto3" json:"parameters,omitempty"`
+	Parameters *structpb.Struct `protobuf:"bytes,3,opt,name=parameters,proto3" json:"parameters,omitempty"`
+	// Enforces strict adherence to the function schema, ensuring only defined parameters are used.
+	Strict        bool `protobuf:"varint,4,opt,name=strict,proto3" json:"strict,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -703,6 +763,13 @@ func (x *FunctionTool) GetParameters() *structpb.Struct {
 		return x.Parameters
 	}
 	return nil
+}
+
+func (x *FunctionTool) GetStrict() bool {
+	if x != nil {
+		return x.Strict
+	}
+	return false
 }
 
 // Represents a call to a tool.
@@ -1113,6 +1180,92 @@ func (x *JsonSchema) GetSchema() *structpb.Struct {
 	return nil
 }
 
+// Specifies how the model should select which tool (or tools) to use when generating a response.
+type ToolChoice struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to ToolChoice:
+	//
+	//	*ToolChoice_Mode
+	//	*ToolChoice_FunctionName
+	ToolChoice    isToolChoice_ToolChoice `protobuf_oneof:"ToolChoice"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToolChoice) Reset() {
+	*x = ToolChoice{}
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToolChoice) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolChoice) ProtoMessage() {}
+
+func (x *ToolChoice) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolChoice.ProtoReflect.Descriptor instead.
+func (*ToolChoice) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ToolChoice) GetToolChoice() isToolChoice_ToolChoice {
+	if x != nil {
+		return x.ToolChoice
+	}
+	return nil
+}
+
+func (x *ToolChoice) GetMode() ToolChoice_ToolChoiceMode {
+	if x != nil {
+		if x, ok := x.ToolChoice.(*ToolChoice_Mode); ok {
+			return x.Mode
+		}
+	}
+	return ToolChoice_TOOL_CHOICE_MODE_UNSPECIFIED
+}
+
+func (x *ToolChoice) GetFunctionName() string {
+	if x != nil {
+		if x, ok := x.ToolChoice.(*ToolChoice_FunctionName); ok {
+			return x.FunctionName
+		}
+	}
+	return ""
+}
+
+type isToolChoice_ToolChoice interface {
+	isToolChoice_ToolChoice()
+}
+
+type ToolChoice_Mode struct {
+	// Specifies the overall tool-calling mode.
+	Mode ToolChoice_ToolChoiceMode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.ai.foundation_models.v1.ToolChoice_ToolChoiceMode,oneof"`
+}
+
+type ToolChoice_FunctionName struct {
+	// Forces the model to call a specific function.
+	// The provided string must match the name of a function in the API request.
+	FunctionName string `protobuf:"bytes,2,opt,name=function_name,json=functionName,proto3,oneof"`
+}
+
+func (*ToolChoice_Mode) isToolChoice_ToolChoice() {}
+
+func (*ToolChoice_FunctionName) isToolChoice_ToolChoice() {}
+
 // Provides additional information about how the completion tokens were utilized.
 type ContentUsage_CompletionTokensDetails struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1124,7 +1277,7 @@ type ContentUsage_CompletionTokensDetails struct {
 
 func (x *ContentUsage_CompletionTokensDetails) Reset() {
 	*x = ContentUsage_CompletionTokensDetails{}
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1136,7 +1289,7 @@ func (x *ContentUsage_CompletionTokensDetails) String() string {
 func (*ContentUsage_CompletionTokensDetails) ProtoMessage() {}
 
 func (x *ContentUsage_CompletionTokensDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1206,13 +1359,14 @@ const file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc = "" +
 	"\x04Tool\x12P\n" +
 	"\bfunction\x18\x01 \x01(\v22.yandex.cloud.ai.foundation_models.v1.FunctionToolH\x00R\bfunctionB\n" +
 	"\n" +
-	"\bToolType\"}\n" +
+	"\bToolType\"\x95\x01\n" +
 	"\fFunctionTool\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x127\n" +
 	"\n" +
 	"parameters\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
-	"parameters\"u\n" +
+	"parameters\x12\x16\n" +
+	"\x06strict\x18\x04 \x01(\bR\x06strict\"u\n" +
 	"\bToolCall\x12Y\n" +
 	"\rfunction_call\x18\x01 \x01(\v22.yandex.cloud.ai.foundation_models.v1.FunctionCallH\x00R\ffunctionCallB\x0e\n" +
 	"\fToolCallType\"Y\n" +
@@ -1234,7 +1388,18 @@ const file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc = "" +
 	"\ftool_results\x18\x01 \x03(\v20.yandex.cloud.ai.foundation_models.v1.ToolResultR\vtoolResults\"=\n" +
 	"\n" +
 	"JsonSchema\x12/\n" +
-	"\x06schema\x18\x01 \x01(\v2\x17.google.protobuf.StructR\x06schemaB\x86\x01\n" +
+	"\x06schema\x18\x01 \x01(\v2\x17.google.protobuf.StructR\x06schema\"\xee\x01\n" +
+	"\n" +
+	"ToolChoice\x12U\n" +
+	"\x04mode\x18\x01 \x01(\x0e2?.yandex.cloud.ai.foundation_models.v1.ToolChoice.ToolChoiceModeH\x00R\x04mode\x12%\n" +
+	"\rfunction_name\x18\x02 \x01(\tH\x00R\ffunctionName\"T\n" +
+	"\x0eToolChoiceMode\x12 \n" +
+	"\x1cTOOL_CHOICE_MODE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04NONE\x10\x01\x12\b\n" +
+	"\x04AUTO\x10\x02\x12\f\n" +
+	"\bREQUIRED\x10\x03B\f\n" +
+	"\n" +
+	"ToolChoiceB\x86\x01\n" +
 	"(yandex.cloud.api.ai.foundation_models.v1ZZgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/foundation_models/v1;foundation_modelsb\x06proto3"
 
 var (
@@ -1249,54 +1414,57 @@ func file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP() [
 	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_goTypes = []any{
 	(ReasoningOptions_ReasoningMode)(0),          // 0: yandex.cloud.ai.foundation_models.v1.ReasoningOptions.ReasoningMode
 	(Alternative_AlternativeStatus)(0),           // 1: yandex.cloud.ai.foundation_models.v1.Alternative.AlternativeStatus
-	(*CompletionOptions)(nil),                    // 2: yandex.cloud.ai.foundation_models.v1.CompletionOptions
-	(*ReasoningOptions)(nil),                     // 3: yandex.cloud.ai.foundation_models.v1.ReasoningOptions
-	(*Message)(nil),                              // 4: yandex.cloud.ai.foundation_models.v1.Message
-	(*ContentUsage)(nil),                         // 5: yandex.cloud.ai.foundation_models.v1.ContentUsage
-	(*Alternative)(nil),                          // 6: yandex.cloud.ai.foundation_models.v1.Alternative
-	(*Token)(nil),                                // 7: yandex.cloud.ai.foundation_models.v1.Token
-	(*Tool)(nil),                                 // 8: yandex.cloud.ai.foundation_models.v1.Tool
-	(*FunctionTool)(nil),                         // 9: yandex.cloud.ai.foundation_models.v1.FunctionTool
-	(*ToolCall)(nil),                             // 10: yandex.cloud.ai.foundation_models.v1.ToolCall
-	(*FunctionCall)(nil),                         // 11: yandex.cloud.ai.foundation_models.v1.FunctionCall
-	(*ToolCallList)(nil),                         // 12: yandex.cloud.ai.foundation_models.v1.ToolCallList
-	(*ToolResult)(nil),                           // 13: yandex.cloud.ai.foundation_models.v1.ToolResult
-	(*FunctionResult)(nil),                       // 14: yandex.cloud.ai.foundation_models.v1.FunctionResult
-	(*ToolResultList)(nil),                       // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList
-	(*JsonSchema)(nil),                           // 16: yandex.cloud.ai.foundation_models.v1.JsonSchema
-	(*ContentUsage_CompletionTokensDetails)(nil), // 17: yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
-	(*wrapperspb.DoubleValue)(nil),               // 18: google.protobuf.DoubleValue
-	(*wrapperspb.Int64Value)(nil),                // 19: google.protobuf.Int64Value
-	(*structpb.Struct)(nil),                      // 20: google.protobuf.Struct
+	(ToolChoice_ToolChoiceMode)(0),               // 2: yandex.cloud.ai.foundation_models.v1.ToolChoice.ToolChoiceMode
+	(*CompletionOptions)(nil),                    // 3: yandex.cloud.ai.foundation_models.v1.CompletionOptions
+	(*ReasoningOptions)(nil),                     // 4: yandex.cloud.ai.foundation_models.v1.ReasoningOptions
+	(*Message)(nil),                              // 5: yandex.cloud.ai.foundation_models.v1.Message
+	(*ContentUsage)(nil),                         // 6: yandex.cloud.ai.foundation_models.v1.ContentUsage
+	(*Alternative)(nil),                          // 7: yandex.cloud.ai.foundation_models.v1.Alternative
+	(*Token)(nil),                                // 8: yandex.cloud.ai.foundation_models.v1.Token
+	(*Tool)(nil),                                 // 9: yandex.cloud.ai.foundation_models.v1.Tool
+	(*FunctionTool)(nil),                         // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool
+	(*ToolCall)(nil),                             // 11: yandex.cloud.ai.foundation_models.v1.ToolCall
+	(*FunctionCall)(nil),                         // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall
+	(*ToolCallList)(nil),                         // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList
+	(*ToolResult)(nil),                           // 14: yandex.cloud.ai.foundation_models.v1.ToolResult
+	(*FunctionResult)(nil),                       // 15: yandex.cloud.ai.foundation_models.v1.FunctionResult
+	(*ToolResultList)(nil),                       // 16: yandex.cloud.ai.foundation_models.v1.ToolResultList
+	(*JsonSchema)(nil),                           // 17: yandex.cloud.ai.foundation_models.v1.JsonSchema
+	(*ToolChoice)(nil),                           // 18: yandex.cloud.ai.foundation_models.v1.ToolChoice
+	(*ContentUsage_CompletionTokensDetails)(nil), // 19: yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
+	(*wrapperspb.DoubleValue)(nil),               // 20: google.protobuf.DoubleValue
+	(*wrapperspb.Int64Value)(nil),                // 21: google.protobuf.Int64Value
+	(*structpb.Struct)(nil),                      // 22: google.protobuf.Struct
 }
 var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_depIdxs = []int32{
-	18, // 0: yandex.cloud.ai.foundation_models.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
-	19, // 1: yandex.cloud.ai.foundation_models.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
-	3,  // 2: yandex.cloud.ai.foundation_models.v1.CompletionOptions.reasoning_options:type_name -> yandex.cloud.ai.foundation_models.v1.ReasoningOptions
+	20, // 0: yandex.cloud.ai.foundation_models.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
+	21, // 1: yandex.cloud.ai.foundation_models.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
+	4,  // 2: yandex.cloud.ai.foundation_models.v1.CompletionOptions.reasoning_options:type_name -> yandex.cloud.ai.foundation_models.v1.ReasoningOptions
 	0,  // 3: yandex.cloud.ai.foundation_models.v1.ReasoningOptions.mode:type_name -> yandex.cloud.ai.foundation_models.v1.ReasoningOptions.ReasoningMode
-	12, // 4: yandex.cloud.ai.foundation_models.v1.Message.tool_call_list:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCallList
-	15, // 5: yandex.cloud.ai.foundation_models.v1.Message.tool_result_list:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResultList
-	17, // 6: yandex.cloud.ai.foundation_models.v1.ContentUsage.completion_tokens_details:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
-	4,  // 7: yandex.cloud.ai.foundation_models.v1.Alternative.message:type_name -> yandex.cloud.ai.foundation_models.v1.Message
+	13, // 4: yandex.cloud.ai.foundation_models.v1.Message.tool_call_list:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCallList
+	16, // 5: yandex.cloud.ai.foundation_models.v1.Message.tool_result_list:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResultList
+	19, // 6: yandex.cloud.ai.foundation_models.v1.ContentUsage.completion_tokens_details:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage.CompletionTokensDetails
+	5,  // 7: yandex.cloud.ai.foundation_models.v1.Alternative.message:type_name -> yandex.cloud.ai.foundation_models.v1.Message
 	1,  // 8: yandex.cloud.ai.foundation_models.v1.Alternative.status:type_name -> yandex.cloud.ai.foundation_models.v1.Alternative.AlternativeStatus
-	9,  // 9: yandex.cloud.ai.foundation_models.v1.Tool.function:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionTool
-	20, // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
-	11, // 11: yandex.cloud.ai.foundation_models.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionCall
-	20, // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
-	10, // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCall
-	14, // 14: yandex.cloud.ai.foundation_models.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionResult
-	13, // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResult
-	20, // 16: yandex.cloud.ai.foundation_models.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	10, // 9: yandex.cloud.ai.foundation_models.v1.Tool.function:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionTool
+	22, // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
+	12, // 11: yandex.cloud.ai.foundation_models.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionCall
+	22, // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
+	11, // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCall
+	15, // 14: yandex.cloud.ai.foundation_models.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionResult
+	14, // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResult
+	22, // 16: yandex.cloud.ai.foundation_models.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
+	2,  // 17: yandex.cloud.ai.foundation_models.v1.ToolChoice.mode:type_name -> yandex.cloud.ai.foundation_models.v1.ToolChoice.ToolChoiceMode
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_foundation_models_v1_text_common_proto_init() }
@@ -1321,13 +1489,17 @@ func file_yandex_cloud_ai_foundation_models_v1_text_common_proto_init() {
 	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[12].OneofWrappers = []any{
 		(*FunctionResult_Content)(nil),
 	}
+	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15].OneofWrappers = []any{
+		(*ToolChoice_Mode)(nil),
+		(*ToolChoice_FunctionName)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc), len(file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   16,
+			NumEnums:      3,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

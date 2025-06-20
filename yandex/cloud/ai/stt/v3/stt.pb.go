@@ -2216,7 +2216,7 @@ func (x *Word) GetEndTimeMs() int64 {
 // Estimation of language and its probability.
 type LanguageEstimation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Language code in ISO 639-1 format.
+	// Language tag in IETF BCP 47 format, consisting of ISO 639-1 language code and ISO 3166-1 country code (e.g., en-US, ru-RU).
 	LanguageCode string `protobuf:"bytes,1,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
 	// Estimation of language probability.
 	Probability   float64 `protobuf:"fixed64,2,opt,name=probability,proto3" json:"probability,omitempty"`
