@@ -31,6 +31,7 @@ const (
 	TuningService_UpdateDraft_FullMethodName   = "/yandex.cloud.ai.tuning.v1.TuningService/UpdateDraft"
 	TuningService_DeleteDraft_FullMethodName   = "/yandex.cloud.ai.tuning.v1.TuningService/DeleteDraft"
 	TuningService_TuneDraft_FullMethodName     = "/yandex.cloud.ai.tuning.v1.TuningService/TuneDraft"
+	TuningService_Archive_FullMethodName       = "/yandex.cloud.ai.tuning.v1.TuningService/Archive"
 )
 
 // TuningServiceClient is the client API for TuningService service.
@@ -52,6 +53,7 @@ type TuningServiceClient interface {
 	DeleteDraft(ctx context.Context, in *DeleteTuningDraftRequest, opts ...grpc.CallOption) (*DeleteTuningDraftResponse, error)
 	// Unimplemented
 	TuneDraft(ctx context.Context, in *TuneDraftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Archive(ctx context.Context, in *ArchiveTuningRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type tuningServiceClient struct {
@@ -172,6 +174,16 @@ func (c *tuningServiceClient) TuneDraft(ctx context.Context, in *TuneDraftReques
 	return out, nil
 }
 
+func (c *tuningServiceClient) Archive(ctx context.Context, in *ArchiveTuningRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, TuningService_Archive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TuningServiceServer is the server API for TuningService service.
 // All implementations should embed UnimplementedTuningServiceServer
 // for forward compatibility.
@@ -191,6 +203,7 @@ type TuningServiceServer interface {
 	DeleteDraft(context.Context, *DeleteTuningDraftRequest) (*DeleteTuningDraftResponse, error)
 	// Unimplemented
 	TuneDraft(context.Context, *TuneDraftRequest) (*operation.Operation, error)
+	Archive(context.Context, *ArchiveTuningRequest) (*operation.Operation, error)
 }
 
 // UnimplementedTuningServiceServer should be embedded to have
@@ -232,6 +245,9 @@ func (UnimplementedTuningServiceServer) DeleteDraft(context.Context, *DeleteTuni
 }
 func (UnimplementedTuningServiceServer) TuneDraft(context.Context, *TuneDraftRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TuneDraft not implemented")
+}
+func (UnimplementedTuningServiceServer) Archive(context.Context, *ArchiveTuningRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Archive not implemented")
 }
 func (UnimplementedTuningServiceServer) testEmbeddedByValue() {}
 
@@ -451,6 +467,24 @@ func _TuningService_TuneDraft_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TuningService_Archive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveTuningRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TuningServiceServer).Archive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TuningService_Archive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TuningServiceServer).Archive(ctx, req.(*ArchiveTuningRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TuningService_ServiceDesc is the grpc.ServiceDesc for TuningService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -501,6 +535,10 @@ var TuningService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TuneDraft",
 			Handler:    _TuningService_TuneDraft_Handler,
+		},
+		{
+			MethodName: "Archive",
+			Handler:    _TuningService_Archive_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

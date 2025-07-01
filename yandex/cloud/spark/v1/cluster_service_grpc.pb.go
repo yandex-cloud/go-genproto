@@ -23,6 +23,7 @@ const (
 	ClusterService_Get_FullMethodName            = "/yandex.cloud.spark.v1.ClusterService/Get"
 	ClusterService_List_FullMethodName           = "/yandex.cloud.spark.v1.ClusterService/List"
 	ClusterService_Create_FullMethodName         = "/yandex.cloud.spark.v1.ClusterService/Create"
+	ClusterService_Update_FullMethodName         = "/yandex.cloud.spark.v1.ClusterService/Update"
 	ClusterService_Delete_FullMethodName         = "/yandex.cloud.spark.v1.ClusterService/Delete"
 	ClusterService_Start_FullMethodName          = "/yandex.cloud.spark.v1.ClusterService/Start"
 	ClusterService_Stop_FullMethodName           = "/yandex.cloud.spark.v1.ClusterService/Stop"
@@ -41,6 +42,8 @@ type ClusterServiceClient interface {
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
 	// Creates a Spark cluster.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates configuration of the specified Spark cluster.
+	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Spark cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Start the specified Spark cluster.
@@ -82,6 +85,16 @@ func (c *clusterServiceClient) Create(ctx context.Context, in *CreateClusterRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -140,6 +153,8 @@ type ClusterServiceServer interface {
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
 	// Creates a Spark cluster.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
+	// Updates configuration of the specified Spark cluster.
+	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified Spark cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
 	// Start the specified Spark cluster.
@@ -164,6 +179,9 @@ func (UnimplementedClusterServiceServer) List(context.Context, *ListClustersRequ
 }
 func (UnimplementedClusterServiceServer) Create(context.Context, *CreateClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedClusterServiceServer) Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedClusterServiceServer) Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -247,6 +265,24 @@ func _ClusterService_Create_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Create(ctx, req.(*CreateClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Update(ctx, req.(*UpdateClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -341,6 +377,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _ClusterService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _ClusterService_Update_Handler,
 		},
 		{
 			MethodName: "Delete",

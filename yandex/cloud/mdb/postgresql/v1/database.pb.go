@@ -142,7 +142,9 @@ type Extension struct {
 	// Name of the extension, e.g. `pg_trgm` or `pg_btree`.
 	// Extensions supported by Managed Service for PostgreSQL are [listed in the Developer's Guide](/docs/managed-postgresql/operations/extensions/cluster-extensions).
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Version of the extension.
+	// Version of the extension. The setting is deprecated and has no effect.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/database.proto.
 	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -185,6 +187,7 @@ func (x *Extension) GetName() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/database.proto.
 func (x *Extension) GetVersion() string {
 	if x != nil {
 		return x.Version
@@ -314,10 +317,10 @@ const file_yandex_cloud_mdb_postgresql_v1_database_proto_rawDesc = "" +
 	"extensions\x12\x1f\n" +
 	"\vtemplate_db\x18\a \x01(\tR\n" +
 	"templateDb\x12K\n" +
-	"\x13deletion_protection\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"9\n" +
+	"\x13deletion_protection\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"=\n" +
 	"\tExtension\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\tR\aversion\"\xb9\x03\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n" +
+	"\aversion\x18\x02 \x01(\tB\x02\x18\x01R\aversion\"\xb9\x03\n" +
 	"\fDatabaseSpec\x122\n" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x124\n" +
 	"\x05owner\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x05owner\x126\n" +

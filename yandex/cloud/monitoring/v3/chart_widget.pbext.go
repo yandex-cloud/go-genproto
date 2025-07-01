@@ -146,6 +146,12 @@ func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetThresholds(v 
 	}
 }
 
+func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetConstant(v *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) {
+	m.Scheme = &ChartWidget_VisualizationSettings_ColorSchemeSettings_Constant{
+		Constant: v,
+	}
+}
+
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetGreenValue(v string) {
 	m.GreenValue = v
 }
@@ -160,6 +166,10 @@ func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorSche
 
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetVioletValue(v string) {
 	m.VioletValue = v
+}
+
+func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) SetColor(v string) {
+	m.Color = v
 }
 
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) SetAggregation(v ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) {
@@ -236,6 +246,14 @@ func (m *ChartWidget_SeriesOverrides) SetSettings(v *ChartWidget_SeriesOverrides
 	m.Settings = v
 }
 
+func (m *ChartWidget_SeriesOverrides) SetOverrideName(v string) {
+	m.OverrideName = v
+}
+
+func (m *ChartWidget_SeriesOverrides) SetMatcher(v *ChartWidget_OverrideMatcher) {
+	m.Matcher = v
+}
+
 func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetName(v string) {
 	m.Name = v
 }
@@ -258,6 +276,60 @@ func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetGrowDown(v bool)
 
 func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetYaxisPosition(v ChartWidget_SeriesOverrides_YaxisPosition) {
 	m.YaxisPosition = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineWidth(v int64) {
+	m.LineWidth = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineStyle(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) {
+	m.LineStyle = v
+}
+
+type ChartWidget_OverrideMatcher_Type = isChartWidget_OverrideMatcher_Type
+
+func (m *ChartWidget_OverrideMatcher) SetType(v ChartWidget_OverrideMatcher_Type) {
+	m.Type = v
+}
+
+func (m *ChartWidget_OverrideMatcher) SetQuery(v *ChartWidget_QueryMatcher) {
+	m.Type = &ChartWidget_OverrideMatcher_Query{
+		Query: v,
+	}
+}
+
+func (m *ChartWidget_OverrideMatcher) SetLine(v *ChartWidget_LineMatcher) {
+	m.Type = &ChartWidget_OverrideMatcher_Line{
+		Line: v,
+	}
+}
+
+func (m *ChartWidget_OverrideMatcher) SetRegexp(v *ChartWidget_RegExpMatcher) {
+	m.Type = &ChartWidget_OverrideMatcher_Regexp{
+		Regexp: v,
+	}
+}
+
+func (m *ChartWidget_OverrideMatcher) SetValues(v *ChartWidget_ValueMatcher) {
+	m.Type = &ChartWidget_OverrideMatcher_Values{
+		Values: v,
+	}
+}
+
+func (m *ChartWidget_QueryMatcher) SetNames(v []string) {
+	m.Names = v
+}
+
+func (m *ChartWidget_LineMatcher) SetLineIds(v []string) {
+	m.LineIds = v
+}
+
+func (m *ChartWidget_RegExpMatcher) SetRegExp(v string) {
+	m.RegExp = v
+}
+
+func (m *ChartWidget_ValueMatcher) SetValueType(v ChartWidget_ValuesType) {
+	m.ValueType = v
 }
 
 func (m *ChartWidget_NameHidingSettings) SetPositive(v bool) {

@@ -527,7 +527,14 @@ type UpdateDesktopGroupRequest struct {
 	// Boot disk specification of the desktop group.
 	BootDiskSpec *DiskSpec `protobuf:"bytes,11,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
 	// Data disk specification of the desktop group.
-	DataDiskSpec  *DiskSpec `protobuf:"bytes,12,opt,name=data_disk_spec,json=dataDiskSpec,proto3" json:"data_disk_spec,omitempty"`
+	DataDiskSpec *DiskSpec `protobuf:"bytes,12,opt,name=data_disk_spec,json=dataDiskSpec,proto3" json:"data_disk_spec,omitempty"`
+	// Update policy of the desktop group.
+	//
+	// Types that are valid to be assigned to UpdatePolicy:
+	//
+	//	*UpdateDesktopGroupRequest_AutoUpdatePolicy
+	//	*UpdateDesktopGroupRequest_ManualUpdatePolicy
+	UpdatePolicy  isUpdateDesktopGroupRequest_UpdatePolicy `protobuf_oneof:"update_policy"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -631,6 +638,47 @@ func (x *UpdateDesktopGroupRequest) GetDataDiskSpec() *DiskSpec {
 	}
 	return nil
 }
+
+func (x *UpdateDesktopGroupRequest) GetUpdatePolicy() isUpdateDesktopGroupRequest_UpdatePolicy {
+	if x != nil {
+		return x.UpdatePolicy
+	}
+	return nil
+}
+
+func (x *UpdateDesktopGroupRequest) GetAutoUpdatePolicy() *AutoUpdatePolicy {
+	if x != nil {
+		if x, ok := x.UpdatePolicy.(*UpdateDesktopGroupRequest_AutoUpdatePolicy); ok {
+			return x.AutoUpdatePolicy
+		}
+	}
+	return nil
+}
+
+func (x *UpdateDesktopGroupRequest) GetManualUpdatePolicy() *ManualUpdatePolicy {
+	if x != nil {
+		if x, ok := x.UpdatePolicy.(*UpdateDesktopGroupRequest_ManualUpdatePolicy); ok {
+			return x.ManualUpdatePolicy
+		}
+	}
+	return nil
+}
+
+type isUpdateDesktopGroupRequest_UpdatePolicy interface {
+	isUpdateDesktopGroupRequest_UpdatePolicy()
+}
+
+type UpdateDesktopGroupRequest_AutoUpdatePolicy struct {
+	AutoUpdatePolicy *AutoUpdatePolicy `protobuf:"bytes,13,opt,name=auto_update_policy,json=autoUpdatePolicy,proto3,oneof"`
+}
+
+type UpdateDesktopGroupRequest_ManualUpdatePolicy struct {
+	ManualUpdatePolicy *ManualUpdatePolicy `protobuf:"bytes,14,opt,name=manual_update_policy,json=manualUpdatePolicy,proto3,oneof"`
+}
+
+func (*UpdateDesktopGroupRequest_AutoUpdatePolicy) isUpdateDesktopGroupRequest_UpdatePolicy() {}
+
+func (*UpdateDesktopGroupRequest_ManualUpdatePolicy) isUpdateDesktopGroupRequest_UpdatePolicy() {}
 
 type CreateDesktopGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -977,7 +1025,7 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDesc = ""
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\xe7\x06\n" +
+	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\xc6\b\n" +
 	"\x19UpdateDesktopGroupRequest\x126\n" +
 	"\x10desktop_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0edesktopGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -991,10 +1039,13 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDesc = ""
 	"\fgroup_config\x18\n" +
 	" \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x12P\n" +
 	"\x0eboot_disk_spec\x18\v \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fbootDiskSpec\x12P\n" +
-	"\x0edata_disk_spec\x18\f \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fdataDiskSpec\x1a9\n" +
+	"\x0edata_disk_spec\x18\f \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fdataDiskSpec\x12b\n" +
+	"\x12auto_update_policy\x18\r \x01(\v22.yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicyH\x00R\x10autoUpdatePolicy\x12h\n" +
+	"\x14manual_update_policy\x18\x0e \x01(\v24.yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicyH\x00R\x12manualUpdatePolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
+	"\rupdate_policyJ\x04\b\b\x10\n" +
 	"\"\xba\x05\n" +
 	"\x19CreateDesktopGroupRequest\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x126\n" +
@@ -1068,11 +1119,13 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_goTypes = []an
 	(*ResourcesSpec)(nil),                      // 18: yandex.cloud.clouddesktop.v1.api.ResourcesSpec
 	(*DesktopGroupConfiguration)(nil),          // 19: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
 	(*DiskSpec)(nil),                           // 20: yandex.cloud.clouddesktop.v1.api.DiskSpec
-	(*NetworkInterfaceSpec)(nil),               // 21: yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
-	(*access.ListAccessBindingsRequest)(nil),   // 22: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 23: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 24: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 25: yandex.cloud.access.ListAccessBindingsResponse
+	(*AutoUpdatePolicy)(nil),                   // 21: yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
+	(*ManualUpdatePolicy)(nil),                 // 22: yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
+	(*NetworkInterfaceSpec)(nil),               // 23: yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
+	(*access.ListAccessBindingsRequest)(nil),   // 24: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 25: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 26: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 27: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_depIdxs = []int32{
 	14, // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsResponse.desktop_groups:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup
@@ -1084,36 +1137,38 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_depIdxs = []in
 	19, // 6: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
 	20, // 7: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
 	20, // 8: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	18, // 9: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
-	21, // 10: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.network_interface_spec:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
-	20, // 11: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	20, // 12: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	19, // 13: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
-	0,  // 14: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopGroupRequest
-	1,  // 15: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsRequest
-	3,  // 16: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListDesktops:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsRequest
-	5,  // 17: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListOperations:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsRequest
-	8,  // 18: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:input_type -> yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest
-	7,  // 19: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest
-	10, // 20: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest
-	22, // 21: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	23, // 22: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	24, // 23: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	14, // 24: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.DesktopGroup
-	2,  // 25: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsResponse
-	4,  // 26: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListDesktops:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsResponse
-	6,  // 27: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListOperations:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsResponse
-	16, // 28: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:output_type -> yandex.cloud.operation.Operation
-	16, // 29: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 30: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:output_type -> yandex.cloud.operation.Operation
-	25, // 31: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	16, // 32: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	16, // 33: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	24, // [24:34] is the sub-list for method output_type
-	14, // [14:24] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	21, // 9: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.auto_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
+	22, // 10: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.manual_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
+	18, // 11: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
+	23, // 12: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.network_interface_spec:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
+	20, // 13: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	20, // 14: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	19, // 15: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
+	0,  // 16: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopGroupRequest
+	1,  // 17: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsRequest
+	3,  // 18: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListDesktops:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsRequest
+	5,  // 19: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListOperations:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsRequest
+	8,  // 20: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:input_type -> yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest
+	7,  // 21: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest
+	10, // 22: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest
+	24, // 23: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	25, // 24: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	26, // 25: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	14, // 26: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.DesktopGroup
+	2,  // 27: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsResponse
+	4,  // 28: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListDesktops:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsResponse
+	6,  // 29: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListOperations:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsResponse
+	16, // 30: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:output_type -> yandex.cloud.operation.Operation
+	16, // 31: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:output_type -> yandex.cloud.operation.Operation
+	16, // 32: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	27, // 33: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	16, // 34: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	16, // 35: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	26, // [26:36] is the sub-list for method output_type
+	16, // [16:26] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_init() }
@@ -1124,6 +1179,10 @@ func file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_init() {
 	file_yandex_cloud_clouddesktop_v1_desktop_proto_init()
 	file_yandex_cloud_clouddesktop_v1_desktop_group_proto_init()
 	file_yandex_cloud_clouddesktop_v1_disk_proto_init()
+	file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[7].OneofWrappers = []any{
+		(*UpdateDesktopGroupRequest_AutoUpdatePolicy)(nil),
+		(*UpdateDesktopGroupRequest_ManualUpdatePolicy)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

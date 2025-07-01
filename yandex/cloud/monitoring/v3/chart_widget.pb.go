@@ -22,6 +22,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ChartWidget_ValuesType int32
+
+const (
+	ChartWidget_VALUES_TYPE_UNSPECIFIED ChartWidget_ValuesType = 0
+	ChartWidget_VALUES_TYPE_ALL_ZEROS   ChartWidget_ValuesType = 1
+	ChartWidget_VALUES_TYPE_ALL_NULL    ChartWidget_ValuesType = 2
+)
+
+// Enum value maps for ChartWidget_ValuesType.
+var (
+	ChartWidget_ValuesType_name = map[int32]string{
+		0: "VALUES_TYPE_UNSPECIFIED",
+		1: "VALUES_TYPE_ALL_ZEROS",
+		2: "VALUES_TYPE_ALL_NULL",
+	}
+	ChartWidget_ValuesType_value = map[string]int32{
+		"VALUES_TYPE_UNSPECIFIED": 0,
+		"VALUES_TYPE_ALL_ZEROS":   1,
+		"VALUES_TYPE_ALL_NULL":    2,
+	}
+)
+
+func (x ChartWidget_ValuesType) Enum() *ChartWidget_ValuesType {
+	p := new(ChartWidget_ValuesType)
+	*p = x
+	return p
+}
+
+func (x ChartWidget_ValuesType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ChartWidget_ValuesType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[0].Descriptor()
+}
+
+func (ChartWidget_ValuesType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[0]
+}
+
+func (x ChartWidget_ValuesType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ChartWidget_ValuesType.Descriptor instead.
+func (ChartWidget_ValuesType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 0}
+}
+
 type ChartWidget_FreezeDuration int32
 
 const (
@@ -65,11 +114,11 @@ func (x ChartWidget_FreezeDuration) String() string {
 }
 
 func (ChartWidget_FreezeDuration) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[0].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[1].Descriptor()
 }
 
 func (ChartWidget_FreezeDuration) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[0]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[1]
 }
 
 func (x ChartWidget_FreezeDuration) Number() protoreflect.EnumNumber {
@@ -78,7 +127,7 @@ func (x ChartWidget_FreezeDuration) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ChartWidget_FreezeDuration.Descriptor instead.
 func (ChartWidget_FreezeDuration) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 0}
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1}
 }
 
 // Chart visualization type.
@@ -142,11 +191,11 @@ func (x ChartWidget_VisualizationSettings_VisualizationType) String() string {
 }
 
 func (ChartWidget_VisualizationSettings_VisualizationType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[2].Descriptor()
 }
 
 func (ChartWidget_VisualizationSettings_VisualizationType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[1]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[2]
 }
 
 func (x ChartWidget_VisualizationSettings_VisualizationType) Number() protoreflect.EnumNumber {
@@ -198,11 +247,11 @@ func (x ChartWidget_VisualizationSettings_Interpolate) String() string {
 }
 
 func (ChartWidget_VisualizationSettings_Interpolate) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[3].Descriptor()
 }
 
 func (ChartWidget_VisualizationSettings_Interpolate) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[2]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[3]
 }
 
 func (x ChartWidget_VisualizationSettings_Interpolate) Number() protoreflect.EnumNumber {
@@ -252,11 +301,11 @@ func (x ChartWidget_VisualizationSettings_YaxisType) String() string {
 }
 
 func (ChartWidget_VisualizationSettings_YaxisType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[4].Descriptor()
 }
 
 func (ChartWidget_VisualizationSettings_YaxisType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[3]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[4]
 }
 
 func (x ChartWidget_VisualizationSettings_YaxisType) Number() protoreflect.EnumNumber {
@@ -316,11 +365,11 @@ func (x ChartWidget_VisualizationSettings_SeriesAggregation) String() string {
 }
 
 func (ChartWidget_VisualizationSettings_SeriesAggregation) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[5].Descriptor()
 }
 
 func (ChartWidget_VisualizationSettings_SeriesAggregation) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[4]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[5]
 }
 
 func (x ChartWidget_VisualizationSettings_SeriesAggregation) Number() protoreflect.EnumNumber {
@@ -374,11 +423,11 @@ func (x ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorSch
 }
 
 func (ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[5].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[6].Descriptor()
 }
 
 func (ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[5]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[6]
 }
 
 func (x ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) Number() protoreflect.EnumNumber {
@@ -387,7 +436,7 @@ func (x ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorSch
 
 // Deprecated: Use ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation.Descriptor instead.
 func (ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1, 0, 4, 0}
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1, 0, 5, 0}
 }
 
 type ChartWidget_SeriesOverrides_YaxisPosition int32
@@ -426,11 +475,11 @@ func (x ChartWidget_SeriesOverrides_YaxisPosition) String() string {
 }
 
 func (ChartWidget_SeriesOverrides_YaxisPosition) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[6].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[7].Descriptor()
 }
 
 func (ChartWidget_SeriesOverrides_YaxisPosition) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[6]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[7]
 }
 
 func (x ChartWidget_SeriesOverrides_YaxisPosition) Number() protoreflect.EnumNumber {
@@ -486,11 +535,11 @@ func (x ChartWidget_SeriesOverrides_SeriesVisualizationType) String() string {
 }
 
 func (ChartWidget_SeriesOverrides_SeriesVisualizationType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[7].Descriptor()
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[8].Descriptor()
 }
 
 func (ChartWidget_SeriesOverrides_SeriesVisualizationType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[7]
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[8]
 }
 
 func (x ChartWidget_SeriesOverrides_SeriesVisualizationType) Number() protoreflect.EnumNumber {
@@ -500,6 +549,58 @@ func (x ChartWidget_SeriesOverrides_SeriesVisualizationType) Number() protorefle
 // Deprecated: Use ChartWidget_SeriesOverrides_SeriesVisualizationType.Descriptor instead.
 func (ChartWidget_SeriesOverrides_SeriesVisualizationType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 2, 1}
+}
+
+type ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle int32
+
+const (
+	ChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_STYLE_UNSPECIFIED ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle = 0
+	ChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_STYLE_SOLID       ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle = 1
+	ChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_STYLE_DASH        ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle = 2
+	ChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_STYLE_DOTS        ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle = 3
+)
+
+// Enum value maps for ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle.
+var (
+	ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle_name = map[int32]string{
+		0: "LINE_STYLE_UNSPECIFIED",
+		1: "LINE_STYLE_SOLID",
+		2: "LINE_STYLE_DASH",
+		3: "LINE_STYLE_DOTS",
+	}
+	ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle_value = map[string]int32{
+		"LINE_STYLE_UNSPECIFIED": 0,
+		"LINE_STYLE_SOLID":       1,
+		"LINE_STYLE_DASH":        2,
+		"LINE_STYLE_DOTS":        3,
+	}
+)
+
+func (x ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) Enum() *ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle {
+	p := new(ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle)
+	*p = x
+	return p
+}
+
+func (x ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[9].Descriptor()
+}
+
+func (ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes[9]
+}
+
+func (x ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle.Descriptor instead.
+func (ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 2, 0, 0}
 }
 
 // Chart widget.
@@ -823,6 +924,8 @@ type ChartWidget_SeriesOverrides struct {
 	Type isChartWidget_SeriesOverrides_Type `protobuf_oneof:"type"`
 	// Required. Override settings.
 	Settings      *ChartWidget_SeriesOverrides_SeriesOverrideSettings `protobuf:"bytes,3,opt,name=settings,proto3" json:"settings,omitempty"`
+	OverrideName  string                                              `protobuf:"bytes,4,opt,name=override_name,json=overrideName,proto3" json:"override_name,omitempty"`
+	Matcher       *ChartWidget_OverrideMatcher                        `protobuf:"bytes,5,opt,name=matcher,proto3" json:"matcher,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -889,6 +992,20 @@ func (x *ChartWidget_SeriesOverrides) GetSettings() *ChartWidget_SeriesOverrides
 	return nil
 }
 
+func (x *ChartWidget_SeriesOverrides) GetOverrideName() string {
+	if x != nil {
+		return x.OverrideName
+	}
+	return ""
+}
+
+func (x *ChartWidget_SeriesOverrides) GetMatcher() *ChartWidget_OverrideMatcher {
+	if x != nil {
+		return x.Matcher
+	}
+	return nil
+}
+
 type isChartWidget_SeriesOverrides_Type interface {
 	isChartWidget_SeriesOverrides_Type()
 }
@@ -907,6 +1024,296 @@ func (*ChartWidget_SeriesOverrides_Name) isChartWidget_SeriesOverrides_Type() {}
 
 func (*ChartWidget_SeriesOverrides_TargetIndex) isChartWidget_SeriesOverrides_Type() {}
 
+type ChartWidget_OverrideMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Type:
+	//
+	//	*ChartWidget_OverrideMatcher_Query
+	//	*ChartWidget_OverrideMatcher_Line
+	//	*ChartWidget_OverrideMatcher_Regexp
+	//	*ChartWidget_OverrideMatcher_Values
+	Type          isChartWidget_OverrideMatcher_Type `protobuf_oneof:"type"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartWidget_OverrideMatcher) Reset() {
+	*x = ChartWidget_OverrideMatcher{}
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartWidget_OverrideMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartWidget_OverrideMatcher) ProtoMessage() {}
+
+func (x *ChartWidget_OverrideMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartWidget_OverrideMatcher.ProtoReflect.Descriptor instead.
+func (*ChartWidget_OverrideMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 3}
+}
+
+func (x *ChartWidget_OverrideMatcher) GetType() isChartWidget_OverrideMatcher_Type {
+	if x != nil {
+		return x.Type
+	}
+	return nil
+}
+
+func (x *ChartWidget_OverrideMatcher) GetQuery() *ChartWidget_QueryMatcher {
+	if x != nil {
+		if x, ok := x.Type.(*ChartWidget_OverrideMatcher_Query); ok {
+			return x.Query
+		}
+	}
+	return nil
+}
+
+func (x *ChartWidget_OverrideMatcher) GetLine() *ChartWidget_LineMatcher {
+	if x != nil {
+		if x, ok := x.Type.(*ChartWidget_OverrideMatcher_Line); ok {
+			return x.Line
+		}
+	}
+	return nil
+}
+
+func (x *ChartWidget_OverrideMatcher) GetRegexp() *ChartWidget_RegExpMatcher {
+	if x != nil {
+		if x, ok := x.Type.(*ChartWidget_OverrideMatcher_Regexp); ok {
+			return x.Regexp
+		}
+	}
+	return nil
+}
+
+func (x *ChartWidget_OverrideMatcher) GetValues() *ChartWidget_ValueMatcher {
+	if x != nil {
+		if x, ok := x.Type.(*ChartWidget_OverrideMatcher_Values); ok {
+			return x.Values
+		}
+	}
+	return nil
+}
+
+type isChartWidget_OverrideMatcher_Type interface {
+	isChartWidget_OverrideMatcher_Type()
+}
+
+type ChartWidget_OverrideMatcher_Query struct {
+	Query *ChartWidget_QueryMatcher `protobuf:"bytes,1,opt,name=query,proto3,oneof"`
+}
+
+type ChartWidget_OverrideMatcher_Line struct {
+	Line *ChartWidget_LineMatcher `protobuf:"bytes,2,opt,name=line,proto3,oneof"`
+}
+
+type ChartWidget_OverrideMatcher_Regexp struct {
+	Regexp *ChartWidget_RegExpMatcher `protobuf:"bytes,3,opt,name=regexp,proto3,oneof"`
+}
+
+type ChartWidget_OverrideMatcher_Values struct {
+	Values *ChartWidget_ValueMatcher `protobuf:"bytes,4,opt,name=values,proto3,oneof"`
+}
+
+func (*ChartWidget_OverrideMatcher_Query) isChartWidget_OverrideMatcher_Type() {}
+
+func (*ChartWidget_OverrideMatcher_Line) isChartWidget_OverrideMatcher_Type() {}
+
+func (*ChartWidget_OverrideMatcher_Regexp) isChartWidget_OverrideMatcher_Type() {}
+
+func (*ChartWidget_OverrideMatcher_Values) isChartWidget_OverrideMatcher_Type() {}
+
+type ChartWidget_QueryMatcher struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Names         []string               `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartWidget_QueryMatcher) Reset() {
+	*x = ChartWidget_QueryMatcher{}
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartWidget_QueryMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartWidget_QueryMatcher) ProtoMessage() {}
+
+func (x *ChartWidget_QueryMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartWidget_QueryMatcher.ProtoReflect.Descriptor instead.
+func (*ChartWidget_QueryMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 4}
+}
+
+func (x *ChartWidget_QueryMatcher) GetNames() []string {
+	if x != nil {
+		return x.Names
+	}
+	return nil
+}
+
+type ChartWidget_LineMatcher struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LineIds       []string               `protobuf:"bytes,1,rep,name=line_ids,json=lineIds,proto3" json:"line_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartWidget_LineMatcher) Reset() {
+	*x = ChartWidget_LineMatcher{}
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartWidget_LineMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartWidget_LineMatcher) ProtoMessage() {}
+
+func (x *ChartWidget_LineMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartWidget_LineMatcher.ProtoReflect.Descriptor instead.
+func (*ChartWidget_LineMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 5}
+}
+
+func (x *ChartWidget_LineMatcher) GetLineIds() []string {
+	if x != nil {
+		return x.LineIds
+	}
+	return nil
+}
+
+type ChartWidget_RegExpMatcher struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RegExp        string                 `protobuf:"bytes,1,opt,name=reg_exp,json=regExp,proto3" json:"reg_exp,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartWidget_RegExpMatcher) Reset() {
+	*x = ChartWidget_RegExpMatcher{}
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartWidget_RegExpMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartWidget_RegExpMatcher) ProtoMessage() {}
+
+func (x *ChartWidget_RegExpMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartWidget_RegExpMatcher.ProtoReflect.Descriptor instead.
+func (*ChartWidget_RegExpMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 6}
+}
+
+func (x *ChartWidget_RegExpMatcher) GetRegExp() string {
+	if x != nil {
+		return x.RegExp
+	}
+	return ""
+}
+
+type ChartWidget_ValueMatcher struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ValueType     ChartWidget_ValuesType `protobuf:"varint,1,opt,name=value_type,json=valueType,proto3,enum=yandex.cloud.monitoring.v3.ChartWidget_ValuesType" json:"value_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartWidget_ValueMatcher) Reset() {
+	*x = ChartWidget_ValueMatcher{}
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartWidget_ValueMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartWidget_ValueMatcher) ProtoMessage() {}
+
+func (x *ChartWidget_ValueMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartWidget_ValueMatcher.ProtoReflect.Descriptor instead.
+func (*ChartWidget_ValueMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 7}
+}
+
+func (x *ChartWidget_ValueMatcher) GetValueType() ChartWidget_ValuesType {
+	if x != nil {
+		return x.ValueType
+	}
+	return ChartWidget_VALUES_TYPE_UNSPECIFIED
+}
+
 // Name hiding settings.
 type ChartWidget_NameHidingSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -920,7 +1327,7 @@ type ChartWidget_NameHidingSettings struct {
 
 func (x *ChartWidget_NameHidingSettings) Reset() {
 	*x = ChartWidget_NameHidingSettings{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[4]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -932,7 +1339,7 @@ func (x *ChartWidget_NameHidingSettings) String() string {
 func (*ChartWidget_NameHidingSettings) ProtoMessage() {}
 
 func (x *ChartWidget_NameHidingSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[4]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +1352,7 @@ func (x *ChartWidget_NameHidingSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChartWidget_NameHidingSettings.ProtoReflect.Descriptor instead.
 func (*ChartWidget_NameHidingSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 3}
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 8}
 }
 
 func (x *ChartWidget_NameHidingSettings) GetPositive() bool {
@@ -974,7 +1381,7 @@ type ChartWidget_RepeatSettings struct {
 
 func (x *ChartWidget_RepeatSettings) Reset() {
 	*x = ChartWidget_RepeatSettings{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[5]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -986,7 +1393,7 @@ func (x *ChartWidget_RepeatSettings) String() string {
 func (*ChartWidget_RepeatSettings) ProtoMessage() {}
 
 func (x *ChartWidget_RepeatSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[5]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -999,7 +1406,7 @@ func (x *ChartWidget_RepeatSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChartWidget_RepeatSettings.ProtoReflect.Descriptor instead.
 func (*ChartWidget_RepeatSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 4}
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 9}
 }
 
 func (x *ChartWidget_RepeatSettings) GetRepeatBy() []string {
@@ -1033,7 +1440,7 @@ type ChartWidget_Queries_Target struct {
 
 func (x *ChartWidget_Queries_Target) Reset() {
 	*x = ChartWidget_Queries_Target{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[6]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +1452,7 @@ func (x *ChartWidget_Queries_Target) String() string {
 func (*ChartWidget_Queries_Target) ProtoMessage() {}
 
 func (x *ChartWidget_Queries_Target) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[6]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1098,6 +1505,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings struct {
 	//	*ChartWidget_VisualizationSettings_ColorSchemeSettings_Gradient
 	//	*ChartWidget_VisualizationSettings_ColorSchemeSettings_Hash
 	//	*ChartWidget_VisualizationSettings_ColorSchemeSettings_Thresholds
+	//	*ChartWidget_VisualizationSettings_ColorSchemeSettings_Constant
 	Scheme        isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme `protobuf_oneof:"scheme"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1105,7 +1513,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings struct {
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings) Reset() {
 	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[7]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1117,7 +1525,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings) String() string 
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[7]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1185,6 +1593,15 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings) GetThresholds() 
 	return nil
 }
 
+func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings) GetConstant() *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme {
+	if x != nil {
+		if x, ok := x.Scheme.(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Constant); ok {
+			return x.Constant
+		}
+	}
+	return nil
+}
+
 type isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme interface {
 	isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme()
 }
@@ -1214,6 +1631,10 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings_Thresholds struct {
 	Thresholds *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme `protobuf:"bytes,5,opt,name=thresholds,proto3,oneof"`
 }
 
+type ChartWidget_VisualizationSettings_ColorSchemeSettings_Constant struct {
+	Constant *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme `protobuf:"bytes,6,opt,name=constant,proto3,oneof"`
+}
+
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_Automatic) isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme() {
 }
 
@@ -1227,6 +1648,9 @@ func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_Hash) isChartWidget
 }
 
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_Thresholds) isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme() {
+}
+
+func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_Constant) isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme() {
 }
 
 type ChartWidget_VisualizationSettings_HeatmapSettings struct {
@@ -1245,7 +1669,7 @@ type ChartWidget_VisualizationSettings_HeatmapSettings struct {
 
 func (x *ChartWidget_VisualizationSettings_HeatmapSettings) Reset() {
 	*x = ChartWidget_VisualizationSettings_HeatmapSettings{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[8]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1257,7 +1681,7 @@ func (x *ChartWidget_VisualizationSettings_HeatmapSettings) String() string {
 func (*ChartWidget_VisualizationSettings_HeatmapSettings) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_HeatmapSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[8]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1322,7 +1746,7 @@ type ChartWidget_VisualizationSettings_Yaxis struct {
 
 func (x *ChartWidget_VisualizationSettings_Yaxis) Reset() {
 	*x = ChartWidget_VisualizationSettings_Yaxis{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[9]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1334,7 +1758,7 @@ func (x *ChartWidget_VisualizationSettings_Yaxis) String() string {
 func (*ChartWidget_VisualizationSettings_Yaxis) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_Yaxis) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[9]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1404,7 +1828,7 @@ type ChartWidget_VisualizationSettings_YaxisSettings struct {
 
 func (x *ChartWidget_VisualizationSettings_YaxisSettings) Reset() {
 	*x = ChartWidget_VisualizationSettings_YaxisSettings{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[10]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1416,7 +1840,7 @@ func (x *ChartWidget_VisualizationSettings_YaxisSettings) String() string {
 func (*ChartWidget_VisualizationSettings_YaxisSettings) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_YaxisSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[10]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1454,7 +1878,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme 
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme) Reset() {
 	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[11]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1466,7 +1890,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorSch
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[11]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1490,7 +1914,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme s
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme) Reset() {
 	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[12]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1502,7 +1926,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorSche
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[12]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1534,7 +1958,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme s
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) Reset() {
 	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[13]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1546,7 +1970,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorSche
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[13]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1598,7 +2022,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme struc
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme) Reset() {
 	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[14]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1610,7 +2034,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme) 
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[14]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1626,6 +2050,50 @@ func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme) De
 	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1, 0, 3}
 }
 
+type ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Color         string                 `protobuf:"bytes,1,opt,name=color,proto3" json:"color,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) Reset() {
+	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme{}
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) ProtoMessage() {}
+
+func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme.ProtoReflect.Descriptor instead.
+func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1, 0, 4}
+}
+
+func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
 type ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme struct {
 	state         protoimpl.MessageState                                                                  `protogen:"open.v1"`
 	Aggregation   ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation `protobuf:"varint,1,opt,name=aggregation,proto3,enum=yandex.cloud.monitoring.v3.ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation" json:"aggregation,omitempty"`
@@ -1635,7 +2103,7 @@ type ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) Reset() {
 	*x = ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[15]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1647,7 +2115,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorSc
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) ProtoMessage() {}
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[15]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1660,7 +2128,7 @@ func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorSc
 
 // Deprecated: Use ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme.ProtoReflect.Descriptor instead.
 func (*ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1, 0, 4}
+	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP(), []int{0, 1, 0, 5}
 }
 
 func (x *ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) GetAggregation() ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation {
@@ -1684,13 +2152,16 @@ type ChartWidget_SeriesOverrides_SeriesOverrideSettings struct {
 	GrowDown bool `protobuf:"varint,5,opt,name=grow_down,json=growDown,proto3" json:"grow_down,omitempty"`
 	// Yaxis position.
 	YaxisPosition ChartWidget_SeriesOverrides_YaxisPosition `protobuf:"varint,6,opt,name=yaxis_position,json=yaxisPosition,proto3,enum=yandex.cloud.monitoring.v3.ChartWidget_SeriesOverrides_YaxisPosition" json:"yaxis_position,omitempty"`
+	// Line Border Width
+	LineWidth     int64                                                        `protobuf:"varint,7,opt,name=line_width,json=lineWidth,proto3" json:"line_width,omitempty"`
+	LineStyle     ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle `protobuf:"varint,8,opt,name=line_style,json=lineStyle,proto3,enum=yandex.cloud.monitoring.v3.ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle" json:"line_style,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) Reset() {
 	*x = ChartWidget_SeriesOverrides_SeriesOverrideSettings{}
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[16]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1702,7 +2173,7 @@ func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) String() string {
 func (*ChartWidget_SeriesOverrides_SeriesOverrideSettings) ProtoMessage() {}
 
 func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[16]
+	mi := &file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1760,11 +2231,25 @@ func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) GetYaxisPosition() 
 	return ChartWidget_SeriesOverrides_YAXIS_POSITION_UNSPECIFIED
 }
 
+func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineWidth() int64 {
+	if x != nil {
+		return x.LineWidth
+	}
+	return 0
+}
+
+func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineStyle() ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle {
+	if x != nil {
+		return x.LineStyle
+	}
+	return ChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_STYLE_UNSPECIFIED
+}
+
 var File_yandex_cloud_monitoring_v3_chart_widget_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/monitoring/v3/chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\xf6+\n" +
+	"-yandex/cloud/monitoring/v3/chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\xb55\n" +
 	"\vChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12I\n" +
 	"\aqueries\x18\x02 \x01(\v2/.yandex.cloud.monitoring.v3.ChartWidget.QueriesR\aqueries\x12t\n" +
@@ -1787,7 +2272,7 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x1b\n" +
 	"\ttext_mode\x18\x02 \x01(\bR\btextMode\x12\x16\n" +
 	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x1a\xd2\x1a\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x1a\x85\x1c\n" +
 	"\x15VisualizationSettings\x12c\n" +
 	"\x04type\x18\x01 \x01(\x0e2O.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationTypeR\x04type\x12\x1c\n" +
 	"\tnormalize\x18\x02 \x01(\bR\tnormalize\x12k\n" +
@@ -1798,7 +2283,7 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x0eyaxis_settings\x18\a \x01(\v2K.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettingsR\ryaxisSettings\x12\x14\n" +
 	"\x05title\x18\b \x01(\tR\x05title\x12\x1f\n" +
 	"\vshow_labels\x18\t \x01(\bR\n" +
-	"showLabels\x1a\xe0\t\n" +
+	"showLabels\x1a\x93\v\n" +
 	"\x13ColorSchemeSettings\x12\x86\x01\n" +
 	"\tautomatic\x18\x01 \x01(\v2f.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorSchemeH\x00R\tautomatic\x12\x83\x01\n" +
 	"\bstandard\x18\x02 \x01(\v2e.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorSchemeH\x00R\bstandard\x12\x83\x01\n" +
@@ -1806,7 +2291,8 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x04hash\x18\x04 \x01(\v2a.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorSchemeH\x00R\x04hash\x12\x89\x01\n" +
 	"\n" +
 	"thresholds\x18\x05 \x01(\v2g.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorSchemeH\x00R\n" +
-	"thresholds\x1a\x16\n" +
+	"thresholds\x12\x83\x01\n" +
+	"\bconstant\x18\x06 \x01(\v2e.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorSchemeH\x00R\bconstant\x1a\x16\n" +
 	"\x14AutomaticColorScheme\x1a\x15\n" +
 	"\x13StandardColorScheme\x1a\x99\x01\n" +
 	"\x13GradientColorScheme\x12\x1f\n" +
@@ -1815,7 +2301,9 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\fyellow_value\x18\x03 \x01(\tR\vyellowValue\x12\x1b\n" +
 	"\tred_value\x18\x04 \x01(\tR\bredValue\x12!\n" +
 	"\fviolet_value\x18\x05 \x01(\tR\vvioletValue\x1a\x11\n" +
-	"\x0fHashColorScheme\x1a\xc6\x02\n" +
+	"\x0fHashColorScheme\x1a+\n" +
+	"\x13ConstantColorScheme\x12\x14\n" +
+	"\x05color\x18\x01 \x01(\tR\x05color\x1a\xc6\x02\n" +
 	"\x15ThresholdsColorScheme\x12\x95\x01\n" +
 	"\vaggregation\x18\x01 \x01(\x0e2s.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.AggregationR\vaggregation\"\x94\x01\n" +
 	"\vAggregation\x12\x1b\n" +
@@ -1868,11 +2356,13 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x16SERIES_AGGREGATION_MIN\x10\x02\x12\x1a\n" +
 	"\x16SERIES_AGGREGATION_MAX\x10\x03\x12\x1b\n" +
 	"\x17SERIES_AGGREGATION_LAST\x10\x04\x12\x1a\n" +
-	"\x16SERIES_AGGREGATION_SUM\x10\x05\x1a\xd4\x06\n" +
+	"\x16SERIES_AGGREGATION_SUM\x10\x05\x1a\xcd\t\n" +
 	"\x0fSeriesOverrides\x12\x14\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x12#\n" +
 	"\ftarget_index\x18\x02 \x01(\tH\x00R\vtargetIndex\x12j\n" +
-	"\bsettings\x18\x03 \x01(\v2N.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettingsR\bsettings\x1a\xd1\x02\n" +
+	"\bsettings\x18\x03 \x01(\v2N.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettingsR\bsettings\x12#\n" +
+	"\roverride_name\x18\x04 \x01(\tR\foverrideName\x12Q\n" +
+	"\amatcher\x18\x05 \x01(\v27.yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcherR\amatcher\x1a\xd2\x04\n" +
 	"\x16SeriesOverrideSettings\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05color\x18\x02 \x01(\tR\x05color\x12c\n" +
@@ -1880,7 +2370,16 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\n" +
 	"stack_name\x18\x04 \x01(\tR\tstackName\x12\x1b\n" +
 	"\tgrow_down\x18\x05 \x01(\bR\bgrowDown\x12l\n" +
-	"\x0eyaxis_position\x18\x06 \x01(\x0e2E.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPositionR\ryaxisPosition\"b\n" +
+	"\x0eyaxis_position\x18\x06 \x01(\x0e2E.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPositionR\ryaxisPosition\x12\x1d\n" +
+	"\n" +
+	"line_width\x18\a \x01(\x03R\tlineWidth\x12w\n" +
+	"\n" +
+	"line_style\x18\b \x01(\x0e2X.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyleR\tlineStyle\"g\n" +
+	"\tLineStyle\x12\x1a\n" +
+	"\x16LINE_STYLE_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10LINE_STYLE_SOLID\x10\x01\x12\x13\n" +
+	"\x0fLINE_STYLE_DASH\x10\x02\x12\x13\n" +
+	"\x0fLINE_STYLE_DOTS\x10\x03\"b\n" +
 	"\rYaxisPosition\x12\x1e\n" +
 	"\x1aYAXIS_POSITION_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13YAXIS_POSITION_LEFT\x10\x01\x12\x18\n" +
@@ -1891,13 +2390,33 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x1fSERIES_VISUALIZATION_TYPE_STACK\x10\x02\x12$\n" +
 	" SERIES_VISUALIZATION_TYPE_COLUMN\x10\x03\x12$\n" +
 	" SERIES_VISUALIZATION_TYPE_POINTS\x10\x04B\x06\n" +
-	"\x04type\x1aF\n" +
+	"\x04type\x1a\xd3\x02\n" +
+	"\x0fOverrideMatcher\x12L\n" +
+	"\x05query\x18\x01 \x01(\v24.yandex.cloud.monitoring.v3.ChartWidget.QueryMatcherH\x00R\x05query\x12I\n" +
+	"\x04line\x18\x02 \x01(\v23.yandex.cloud.monitoring.v3.ChartWidget.LineMatcherH\x00R\x04line\x12O\n" +
+	"\x06regexp\x18\x03 \x01(\v25.yandex.cloud.monitoring.v3.ChartWidget.RegExpMatcherH\x00R\x06regexp\x12N\n" +
+	"\x06values\x18\x04 \x01(\v24.yandex.cloud.monitoring.v3.ChartWidget.ValueMatcherH\x00R\x06valuesB\x06\n" +
+	"\x04type\x1a$\n" +
+	"\fQueryMatcher\x12\x14\n" +
+	"\x05names\x18\x01 \x03(\tR\x05names\x1a(\n" +
+	"\vLineMatcher\x12\x19\n" +
+	"\bline_ids\x18\x01 \x03(\tR\alineIds\x1a(\n" +
+	"\rRegExpMatcher\x12\x17\n" +
+	"\areg_exp\x18\x01 \x01(\tR\x06regExp\x1aa\n" +
+	"\fValueMatcher\x12Q\n" +
+	"\n" +
+	"value_type\x18\x01 \x01(\x0e22.yandex.cloud.monitoring.v3.ChartWidget.ValuesTypeR\tvalueType\x1aF\n" +
 	"\x12NameHidingSettings\x12\x1a\n" +
 	"\bpositive\x18\x01 \x01(\bR\bpositive\x12\x14\n" +
 	"\x05names\x18\x02 \x03(\tR\x05names\x1aX\n" +
 	"\x0eRepeatSettings\x12\x1b\n" +
 	"\trepeat_by\x18\x01 \x03(\tR\brepeatBy\x12)\n" +
-	"\x11max_charts_in_row\x18\x02 \x01(\x03R\x0emaxChartsInRow\"\x99\x01\n" +
+	"\x11max_charts_in_row\x18\x02 \x01(\x03R\x0emaxChartsInRow\"^\n" +
+	"\n" +
+	"ValuesType\x12\x1b\n" +
+	"\x17VALUES_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15VALUES_TYPE_ALL_ZEROS\x10\x01\x12\x18\n" +
+	"\x14VALUES_TYPE_ALL_NULL\x10\x02\"\x99\x01\n" +
 	"\x0eFreezeDuration\x12\x1f\n" +
 	"\x1bFREEZE_DURATION_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14FREEZE_DURATION_HOUR\x10\x01\x12\x17\n" +
@@ -1918,74 +2437,90 @@ func file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDescData
 }
 
-var file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_yandex_cloud_monitoring_v3_chart_widget_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
+var file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_yandex_cloud_monitoring_v3_chart_widget_proto_goTypes = []any{
-	(ChartWidget_FreezeDuration)(0),                                                              // 0: yandex.cloud.monitoring.v3.ChartWidget.FreezeDuration
-	(ChartWidget_VisualizationSettings_VisualizationType)(0),                                     // 1: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationType
-	(ChartWidget_VisualizationSettings_Interpolate)(0),                                           // 2: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Interpolate
-	(ChartWidget_VisualizationSettings_YaxisType)(0),                                             // 3: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisType
-	(ChartWidget_VisualizationSettings_SeriesAggregation)(0),                                     // 4: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.SeriesAggregation
-	(ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation)(0), // 5: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
-	(ChartWidget_SeriesOverrides_YaxisPosition)(0),                                               // 6: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPosition
-	(ChartWidget_SeriesOverrides_SeriesVisualizationType)(0),                                     // 7: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesVisualizationType
-	(*ChartWidget)(nil),                                                                 // 8: yandex.cloud.monitoring.v3.ChartWidget
-	(*ChartWidget_Queries)(nil),                                                         // 9: yandex.cloud.monitoring.v3.ChartWidget.Queries
-	(*ChartWidget_VisualizationSettings)(nil),                                           // 10: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings
-	(*ChartWidget_SeriesOverrides)(nil),                                                 // 11: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides
-	(*ChartWidget_NameHidingSettings)(nil),                                              // 12: yandex.cloud.monitoring.v3.ChartWidget.NameHidingSettings
-	(*ChartWidget_RepeatSettings)(nil),                                                  // 13: yandex.cloud.monitoring.v3.ChartWidget.RepeatSettings
-	(*ChartWidget_Queries_Target)(nil),                                                  // 14: yandex.cloud.monitoring.v3.ChartWidget.Queries.Target
-	(*ChartWidget_VisualizationSettings_ColorSchemeSettings)(nil),                       // 15: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings
-	(*ChartWidget_VisualizationSettings_HeatmapSettings)(nil),                           // 16: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.HeatmapSettings
-	(*ChartWidget_VisualizationSettings_Yaxis)(nil),                                     // 17: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
-	(*ChartWidget_VisualizationSettings_YaxisSettings)(nil),                             // 18: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings
-	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme)(nil),  // 19: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
-	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme)(nil),   // 20: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
-	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme)(nil),   // 21: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
-	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme)(nil),       // 22: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
-	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme)(nil), // 23: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
-	(*ChartWidget_SeriesOverrides_SeriesOverrideSettings)(nil),                          // 24: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings
-	(*Thresholds)(nil),            // 25: yandex.cloud.monitoring.v3.Thresholds
-	(*Downsampling)(nil),          // 26: yandex.cloud.monitoring.v3.Downsampling
-	(UnitFormat)(0),               // 27: yandex.cloud.monitoring.v3.UnitFormat
-	(*wrapperspb.Int64Value)(nil), // 28: google.protobuf.Int64Value
+	(ChartWidget_ValuesType)(0),                                                                  // 0: yandex.cloud.monitoring.v3.ChartWidget.ValuesType
+	(ChartWidget_FreezeDuration)(0),                                                              // 1: yandex.cloud.monitoring.v3.ChartWidget.FreezeDuration
+	(ChartWidget_VisualizationSettings_VisualizationType)(0),                                     // 2: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationType
+	(ChartWidget_VisualizationSettings_Interpolate)(0),                                           // 3: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Interpolate
+	(ChartWidget_VisualizationSettings_YaxisType)(0),                                             // 4: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisType
+	(ChartWidget_VisualizationSettings_SeriesAggregation)(0),                                     // 5: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.SeriesAggregation
+	(ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation)(0), // 6: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
+	(ChartWidget_SeriesOverrides_YaxisPosition)(0),                                               // 7: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPosition
+	(ChartWidget_SeriesOverrides_SeriesVisualizationType)(0),                                     // 8: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesVisualizationType
+	(ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle)(0),                            // 9: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyle
+	(*ChartWidget)(nil),                                                                 // 10: yandex.cloud.monitoring.v3.ChartWidget
+	(*ChartWidget_Queries)(nil),                                                         // 11: yandex.cloud.monitoring.v3.ChartWidget.Queries
+	(*ChartWidget_VisualizationSettings)(nil),                                           // 12: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings
+	(*ChartWidget_SeriesOverrides)(nil),                                                 // 13: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides
+	(*ChartWidget_OverrideMatcher)(nil),                                                 // 14: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher
+	(*ChartWidget_QueryMatcher)(nil),                                                    // 15: yandex.cloud.monitoring.v3.ChartWidget.QueryMatcher
+	(*ChartWidget_LineMatcher)(nil),                                                     // 16: yandex.cloud.monitoring.v3.ChartWidget.LineMatcher
+	(*ChartWidget_RegExpMatcher)(nil),                                                   // 17: yandex.cloud.monitoring.v3.ChartWidget.RegExpMatcher
+	(*ChartWidget_ValueMatcher)(nil),                                                    // 18: yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher
+	(*ChartWidget_NameHidingSettings)(nil),                                              // 19: yandex.cloud.monitoring.v3.ChartWidget.NameHidingSettings
+	(*ChartWidget_RepeatSettings)(nil),                                                  // 20: yandex.cloud.monitoring.v3.ChartWidget.RepeatSettings
+	(*ChartWidget_Queries_Target)(nil),                                                  // 21: yandex.cloud.monitoring.v3.ChartWidget.Queries.Target
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings)(nil),                       // 22: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings
+	(*ChartWidget_VisualizationSettings_HeatmapSettings)(nil),                           // 23: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.HeatmapSettings
+	(*ChartWidget_VisualizationSettings_Yaxis)(nil),                                     // 24: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
+	(*ChartWidget_VisualizationSettings_YaxisSettings)(nil),                             // 25: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_AutomaticColorScheme)(nil),  // 26: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_StandardColorScheme)(nil),   // 27: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme)(nil),   // 28: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_HashColorScheme)(nil),       // 29: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme)(nil),   // 30: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorScheme
+	(*ChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme)(nil), // 31: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
+	(*ChartWidget_SeriesOverrides_SeriesOverrideSettings)(nil),                          // 32: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings
+	(*Thresholds)(nil),            // 33: yandex.cloud.monitoring.v3.Thresholds
+	(*Downsampling)(nil),          // 34: yandex.cloud.monitoring.v3.Downsampling
+	(UnitFormat)(0),               // 35: yandex.cloud.monitoring.v3.UnitFormat
+	(*wrapperspb.Int64Value)(nil), // 36: google.protobuf.Int64Value
 }
 var file_yandex_cloud_monitoring_v3_chart_widget_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.monitoring.v3.ChartWidget.queries:type_name -> yandex.cloud.monitoring.v3.ChartWidget.Queries
-	10, // 1: yandex.cloud.monitoring.v3.ChartWidget.visualization_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings
-	11, // 2: yandex.cloud.monitoring.v3.ChartWidget.series_overrides:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides
-	12, // 3: yandex.cloud.monitoring.v3.ChartWidget.name_hiding_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.NameHidingSettings
-	0,  // 4: yandex.cloud.monitoring.v3.ChartWidget.freeze:type_name -> yandex.cloud.monitoring.v3.ChartWidget.FreezeDuration
-	13, // 5: yandex.cloud.monitoring.v3.ChartWidget.repeat:type_name -> yandex.cloud.monitoring.v3.ChartWidget.RepeatSettings
-	25, // 6: yandex.cloud.monitoring.v3.ChartWidget.thresholds:type_name -> yandex.cloud.monitoring.v3.Thresholds
-	14, // 7: yandex.cloud.monitoring.v3.ChartWidget.Queries.targets:type_name -> yandex.cloud.monitoring.v3.ChartWidget.Queries.Target
-	26, // 8: yandex.cloud.monitoring.v3.ChartWidget.Queries.downsampling:type_name -> yandex.cloud.monitoring.v3.Downsampling
-	1,  // 9: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationType
-	2,  // 10: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.interpolate:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Interpolate
-	4,  // 11: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.aggregation:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.SeriesAggregation
-	15, // 12: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.color_scheme_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings
-	16, // 13: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.heatmap_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.HeatmapSettings
-	18, // 14: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.yaxis_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings
-	24, // 15: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings
-	19, // 16: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.automatic:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
-	20, // 17: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.standard:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
-	21, // 18: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.gradient:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
-	22, // 19: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.hash:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
-	23, // 20: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.thresholds:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
-	3,  // 21: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisType
-	27, // 22: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	28, // 23: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.precision:type_name -> google.protobuf.Int64Value
-	17, // 24: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.left:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
-	17, // 25: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.right:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
-	5,  // 26: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.aggregation:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
-	7,  // 27: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesVisualizationType
-	6,  // 28: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.yaxis_position:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPosition
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	11, // 0: yandex.cloud.monitoring.v3.ChartWidget.queries:type_name -> yandex.cloud.monitoring.v3.ChartWidget.Queries
+	12, // 1: yandex.cloud.monitoring.v3.ChartWidget.visualization_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings
+	13, // 2: yandex.cloud.monitoring.v3.ChartWidget.series_overrides:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides
+	19, // 3: yandex.cloud.monitoring.v3.ChartWidget.name_hiding_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.NameHidingSettings
+	1,  // 4: yandex.cloud.monitoring.v3.ChartWidget.freeze:type_name -> yandex.cloud.monitoring.v3.ChartWidget.FreezeDuration
+	20, // 5: yandex.cloud.monitoring.v3.ChartWidget.repeat:type_name -> yandex.cloud.monitoring.v3.ChartWidget.RepeatSettings
+	33, // 6: yandex.cloud.monitoring.v3.ChartWidget.thresholds:type_name -> yandex.cloud.monitoring.v3.Thresholds
+	21, // 7: yandex.cloud.monitoring.v3.ChartWidget.Queries.targets:type_name -> yandex.cloud.monitoring.v3.ChartWidget.Queries.Target
+	34, // 8: yandex.cloud.monitoring.v3.ChartWidget.Queries.downsampling:type_name -> yandex.cloud.monitoring.v3.Downsampling
+	2,  // 9: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationType
+	3,  // 10: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.interpolate:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Interpolate
+	5,  // 11: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.aggregation:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.SeriesAggregation
+	22, // 12: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.color_scheme_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings
+	23, // 13: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.heatmap_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.HeatmapSettings
+	25, // 14: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.yaxis_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings
+	32, // 15: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings
+	14, // 16: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.matcher:type_name -> yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher
+	15, // 17: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.query:type_name -> yandex.cloud.monitoring.v3.ChartWidget.QueryMatcher
+	16, // 18: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.line:type_name -> yandex.cloud.monitoring.v3.ChartWidget.LineMatcher
+	17, // 19: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.regexp:type_name -> yandex.cloud.monitoring.v3.ChartWidget.RegExpMatcher
+	18, // 20: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.values:type_name -> yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher
+	0,  // 21: yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher.value_type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.ValuesType
+	26, // 22: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.automatic:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
+	27, // 23: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.standard:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
+	28, // 24: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.gradient:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
+	29, // 25: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.hash:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
+	31, // 26: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.thresholds:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
+	30, // 27: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.constant:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorScheme
+	4,  // 28: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisType
+	35, // 29: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	36, // 30: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.precision:type_name -> google.protobuf.Int64Value
+	24, // 31: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.left:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
+	24, // 32: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.right:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
+	6,  // 33: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.aggregation:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
+	8,  // 34: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesVisualizationType
+	7,  // 35: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.yaxis_position:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPosition
+	9,  // 36: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_style:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyle
+	37, // [37:37] is the sub-list for method output_type
+	37, // [37:37] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_chart_widget_proto_init() }
@@ -2000,20 +2535,27 @@ func file_yandex_cloud_monitoring_v3_chart_widget_proto_init() {
 		(*ChartWidget_SeriesOverrides_Name)(nil),
 		(*ChartWidget_SeriesOverrides_TargetIndex)(nil),
 	}
-	file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[7].OneofWrappers = []any{
+	file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[4].OneofWrappers = []any{
+		(*ChartWidget_OverrideMatcher_Query)(nil),
+		(*ChartWidget_OverrideMatcher_Line)(nil),
+		(*ChartWidget_OverrideMatcher_Regexp)(nil),
+		(*ChartWidget_OverrideMatcher_Values)(nil),
+	}
+	file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[12].OneofWrappers = []any{
 		(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Automatic)(nil),
 		(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Standard)(nil),
 		(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Gradient)(nil),
 		(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Hash)(nil),
 		(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Thresholds)(nil),
+		(*ChartWidget_VisualizationSettings_ColorSchemeSettings_Constant)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc), len(file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc)),
-			NumEnums:      8,
-			NumMessages:   17,
+			NumEnums:      10,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

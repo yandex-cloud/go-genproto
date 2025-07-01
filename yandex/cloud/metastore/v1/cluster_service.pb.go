@@ -1066,7 +1066,7 @@ type ExportDataRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Metastore Cluster to export data from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// S3 bucket to export backup from.
+	// S3 bucket to export backup to.
 	Bucket string `protobuf:"bytes,2,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	// Export dump filepath.
 	Filepath      string `protobuf:"bytes,3,opt,name=filepath,proto3" json:"filepath,omitempty"`

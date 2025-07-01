@@ -221,6 +221,8 @@ type GenSearchRequest struct {
 	EnableNrfmDocs bool `protobuf:"varint,7,opt,name=enable_nrfm_docs,json=enableNrfmDocs,proto3" json:"enable_nrfm_docs,omitempty"`
 	// Restricts the search by date, document formats or language.
 	SearchFilters []*GenSearchRequest_SearchFilter `protobuf:"bytes,8,rep,name=search_filters,json=searchFilters,proto3" json:"search_filters,omitempty"`
+	// Search type that determines the domain name that will be used for the search queries.
+	SearchType    SearchQuery_SearchType `protobuf:"varint,9,opt,name=search_type,json=searchType,proto3,enum=yandex.cloud.searchapi.v2.SearchQuery_SearchType" json:"search_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -322,6 +324,13 @@ func (x *GenSearchRequest) GetSearchFilters() []*GenSearchRequest_SearchFilter {
 		return x.SearchFilters
 	}
 	return nil
+}
+
+func (x *GenSearchRequest) GetSearchType() SearchQuery_SearchType {
+	if x != nil {
+		return x.SearchType
+	}
+	return SearchQuery_SEARCH_TYPE_UNSPECIFIED
 }
 
 type isGenSearchRequest_SiteOptions interface {
@@ -793,19 +802,21 @@ var File_yandex_cloud_searchapi_v2_gen_search_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"x\n" +
+	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"x\n" +
 	"\x10GenSearchMessage\x12)\n" +
 	"\acontent\x18\x01 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=16384R\acontent\x129\n" +
-	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xa4\t\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xe6\t\n" +
 	"\x10GenSearchRequest\x12R\n" +
 	"\bmessages\x18\x01 \x03(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageB\t\x82\xc81\x051-100R\bmessages\x12)\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12R\n" +
-	"\x04site\x18\x03 \x01(\v26.yandex.cloud.searchapi.v2.GenSearchRequest.SiteOptionB\x04\xe8\xc71\x01H\x00R\x04site\x12R\n" +
-	"\x04host\x18\x04 \x01(\v26.yandex.cloud.searchapi.v2.GenSearchRequest.HostOptionB\x04\xe8\xc71\x01H\x00R\x04host\x12O\n" +
-	"\x03url\x18\x05 \x01(\v25.yandex.cloud.searchapi.v2.GenSearchRequest.UrlOptionB\x04\xe8\xc71\x01H\x00R\x03url\x12!\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12L\n" +
+	"\x04site\x18\x03 \x01(\v26.yandex.cloud.searchapi.v2.GenSearchRequest.SiteOptionH\x00R\x04site\x12L\n" +
+	"\x04host\x18\x04 \x01(\v26.yandex.cloud.searchapi.v2.GenSearchRequest.HostOptionH\x00R\x04host\x12I\n" +
+	"\x03url\x18\x05 \x01(\v25.yandex.cloud.searchapi.v2.GenSearchRequest.UrlOptionH\x00R\x03url\x12!\n" +
 	"\ffix_misspell\x18\x06 \x01(\bR\vfixMisspell\x12(\n" +
 	"\x10enable_nrfm_docs\x18\a \x01(\bR\x0eenableNrfmDocs\x12i\n" +
-	"\x0esearch_filters\x18\b \x03(\v28.yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilterB\b\x82\xc81\x04<=10R\rsearchFilters\x1a5\n" +
+	"\x0esearch_filters\x18\b \x03(\v28.yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilterB\b\x82\xc81\x04<=10R\rsearchFilters\x12R\n" +
+	"\vsearch_type\x18\t \x01(\x0e21.yandex.cloud.searchapi.v2.SearchQuery.SearchTypeR\n" +
+	"searchType\x1a5\n" +
 	"\n" +
 	"SiteOption\x12'\n" +
 	"\x04site\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04site\x1a2\n" +
@@ -881,6 +892,7 @@ var file_yandex_cloud_searchapi_v2_gen_search_service_proto_goTypes = []any{
 	(*GenSearchRequest_SearchFilter)(nil),        // 8: yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter
 	(*GenSearchResponse_Source)(nil),             // 9: yandex.cloud.searchapi.v2.GenSearchResponse.Source
 	(*GenSearchResponse_SearchQuery)(nil),        // 10: yandex.cloud.searchapi.v2.GenSearchResponse.SearchQuery
+	(SearchQuery_SearchType)(0),                  // 11: yandex.cloud.searchapi.v2.SearchQuery.SearchType
 }
 var file_yandex_cloud_searchapi_v2_gen_search_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.searchapi.v2.GenSearchMessage.role:type_name -> yandex.cloud.searchapi.v2.Role
@@ -889,17 +901,18 @@ var file_yandex_cloud_searchapi_v2_gen_search_service_proto_depIdxs = []int32{
 	7,  // 3: yandex.cloud.searchapi.v2.GenSearchRequest.host:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.HostOption
 	6,  // 4: yandex.cloud.searchapi.v2.GenSearchRequest.url:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.UrlOption
 	8,  // 5: yandex.cloud.searchapi.v2.GenSearchRequest.search_filters:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter
-	2,  // 6: yandex.cloud.searchapi.v2.GenSearchResponse.message:type_name -> yandex.cloud.searchapi.v2.GenSearchMessage
-	9,  // 7: yandex.cloud.searchapi.v2.GenSearchResponse.sources:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.Source
-	10, // 8: yandex.cloud.searchapi.v2.GenSearchResponse.search_queries:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.SearchQuery
-	1,  // 9: yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.format:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.DocFormat
-	3,  // 10: yandex.cloud.searchapi.v2.GenSearchService.Search:input_type -> yandex.cloud.searchapi.v2.GenSearchRequest
-	4,  // 11: yandex.cloud.searchapi.v2.GenSearchService.Search:output_type -> yandex.cloud.searchapi.v2.GenSearchResponse
-	11, // [11:12] is the sub-list for method output_type
-	10, // [10:11] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	11, // 6: yandex.cloud.searchapi.v2.GenSearchRequest.search_type:type_name -> yandex.cloud.searchapi.v2.SearchQuery.SearchType
+	2,  // 7: yandex.cloud.searchapi.v2.GenSearchResponse.message:type_name -> yandex.cloud.searchapi.v2.GenSearchMessage
+	9,  // 8: yandex.cloud.searchapi.v2.GenSearchResponse.sources:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.Source
+	10, // 9: yandex.cloud.searchapi.v2.GenSearchResponse.search_queries:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.SearchQuery
+	1,  // 10: yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.format:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.DocFormat
+	3,  // 11: yandex.cloud.searchapi.v2.GenSearchService.Search:input_type -> yandex.cloud.searchapi.v2.GenSearchRequest
+	4,  // 12: yandex.cloud.searchapi.v2.GenSearchService.Search:output_type -> yandex.cloud.searchapi.v2.GenSearchResponse
+	12, // [12:13] is the sub-list for method output_type
+	11, // [11:12] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_gen_search_service_proto_init() }
@@ -907,6 +920,7 @@ func file_yandex_cloud_searchapi_v2_gen_search_service_proto_init() {
 	if File_yandex_cloud_searchapi_v2_gen_search_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_searchapi_v2_search_query_proto_init()
 	file_yandex_cloud_searchapi_v2_gen_search_service_proto_msgTypes[1].OneofWrappers = []any{
 		(*GenSearchRequest_Site)(nil),
 		(*GenSearchRequest_Host)(nil),

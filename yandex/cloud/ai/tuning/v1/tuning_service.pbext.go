@@ -795,3 +795,11 @@ func (m *DeleteTuningDraftResponse) SetTuningTaskId(v string) {
 func (m *TuneDraftRequest) SetTuningTaskId(v string) {
 	m.TuningTaskId = v
 }
+
+func (m *ArchiveTuningRequest) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *ArchiveTuningResponse) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}

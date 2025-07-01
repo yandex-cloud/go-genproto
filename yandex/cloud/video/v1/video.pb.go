@@ -748,7 +748,7 @@ type VideoFeatures_Summary_SummaryURL struct {
 	Url   string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	// Input audio track index (one-based).
 	TrackIndex int64 `protobuf:"varint,2,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
-	// Source track language (three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3).
+	// Source track language represented as a three-letter code according to ISO 639-2/T.
 	// Either provided in transcoding settings earlier or automatically deduced.
 	SrcLang       string `protobuf:"bytes,3,opt,name=src_lang,json=srcLang,proto3" json:"src_lang,omitempty"`
 	unknownFields protoimpl.UnknownFields

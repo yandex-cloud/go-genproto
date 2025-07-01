@@ -211,9 +211,7 @@ func (x *ListSubtitlesResponse) GetNextPageToken() string {
 
 type CreateSubtitleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Subtitle language in any of the following formats:
-	// * three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3
-	// * two-letter code according to ISO 639-1
+	// Subtitle language represented as a three-letter code according to ISO 639-2/T.
 	Language string `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
 	// Contains the subtitle label (or title) that will be displayed on screen during video playback.
 	// Should provide a concise and accurate representation of the spoken content.
@@ -616,9 +614,9 @@ const file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc = "" +
 	"\tparent_id\x12\x04\xc0\xc11\x01J\x04\b\x01\x10dJ\x05\bf\x10\xe8\a\"\x84\x01\n" +
 	"\x15ListSubtitlesResponse\x12=\n" +
 	"\tsubtitles\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.SubtitleR\tsubtitles\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xfe\x01\n" +
-	"\x15CreateSubtitleRequest\x12#\n" +
-	"\blanguage\x18\x01 \x01(\tB\a\x8a\xc81\x032-3R\blanguage\x12\x1e\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xa7\x02\n" +
+	"\x15CreateSubtitleRequest\x12L\n" +
+	"\blanguage\x18\x01 \x01(\tB0\xf2\xc71'deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x013R\blanguage\x12\x1e\n" +
 	"\x05label\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05label\x12&\n" +
 	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12F\n" +
 	"\x06upload\x18\xcc\b \x01(\v2+.yandex.cloud.video.v1.SubtitleUploadParamsH\x01R\x06uploadB\x11\n" +

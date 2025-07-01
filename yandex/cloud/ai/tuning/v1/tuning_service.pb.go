@@ -2292,6 +2292,130 @@ func (x *TuneDraftRequest) GetTuningTaskId() string {
 	return ""
 }
 
+type ArchiveTuningRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TuningTaskId  string                 `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveTuningRequest) Reset() {
+	*x = ArchiveTuningRequest{}
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveTuningRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveTuningRequest) ProtoMessage() {}
+
+func (x *ArchiveTuningRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveTuningRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveTuningRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *ArchiveTuningRequest) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
+type ArchiveTuningMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveTuningMetadata) Reset() {
+	*x = ArchiveTuningMetadata{}
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveTuningMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveTuningMetadata) ProtoMessage() {}
+
+func (x *ArchiveTuningMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveTuningMetadata.ProtoReflect.Descriptor instead.
+func (*ArchiveTuningMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{28}
+}
+
+type ArchiveTuningResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TuningTaskId  string                 `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveTuningResponse) Reset() {
+	*x = ArchiveTuningResponse{}
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveTuningResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveTuningResponse) ProtoMessage() {}
+
+func (x *ArchiveTuningResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveTuningResponse.ProtoReflect.Descriptor instead.
+func (*ArchiveTuningResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ArchiveTuningResponse) GetTuningTaskId() string {
+	if x != nil {
+		return x.TuningTaskId
+	}
+	return ""
+}
+
 type TuningRequest_WeightedDataset struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DatasetId     string                 `protobuf:"bytes,1,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
@@ -2302,7 +2426,7 @@ type TuningRequest_WeightedDataset struct {
 
 func (x *TuningRequest_WeightedDataset) Reset() {
 	*x = TuningRequest_WeightedDataset{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2314,7 +2438,7 @@ func (x *TuningRequest_WeightedDataset) String() string {
 func (*TuningRequest_WeightedDataset) ProtoMessage() {}
 
 func (x *TuningRequest_WeightedDataset) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2359,7 +2483,7 @@ type TextToTextCompletionTuningParams_Scheduler struct {
 
 func (x *TextToTextCompletionTuningParams_Scheduler) Reset() {
 	*x = TextToTextCompletionTuningParams_Scheduler{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2371,7 +2495,7 @@ func (x *TextToTextCompletionTuningParams_Scheduler) String() string {
 func (*TextToTextCompletionTuningParams_Scheduler) ProtoMessage() {}
 
 func (x *TextToTextCompletionTuningParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2465,7 +2589,7 @@ type TextToTextCompletionTuningParams_Optimizer struct {
 
 func (x *TextToTextCompletionTuningParams_Optimizer) Reset() {
 	*x = TextToTextCompletionTuningParams_Optimizer{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2477,7 +2601,7 @@ func (x *TextToTextCompletionTuningParams_Optimizer) String() string {
 func (*TextToTextCompletionTuningParams_Optimizer) ProtoMessage() {}
 
 func (x *TextToTextCompletionTuningParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2535,7 +2659,7 @@ type TextClassificationMultilabelParams_Scheduler struct {
 
 func (x *TextClassificationMultilabelParams_Scheduler) Reset() {
 	*x = TextClassificationMultilabelParams_Scheduler{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2547,7 +2671,7 @@ func (x *TextClassificationMultilabelParams_Scheduler) String() string {
 func (*TextClassificationMultilabelParams_Scheduler) ProtoMessage() {}
 
 func (x *TextClassificationMultilabelParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2641,7 +2765,7 @@ type TextClassificationMultilabelParams_Optimizer struct {
 
 func (x *TextClassificationMultilabelParams_Optimizer) Reset() {
 	*x = TextClassificationMultilabelParams_Optimizer{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2653,7 +2777,7 @@ func (x *TextClassificationMultilabelParams_Optimizer) String() string {
 func (*TextClassificationMultilabelParams_Optimizer) ProtoMessage() {}
 
 func (x *TextClassificationMultilabelParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2711,7 +2835,7 @@ type TextClassificationMulticlassParams_Scheduler struct {
 
 func (x *TextClassificationMulticlassParams_Scheduler) Reset() {
 	*x = TextClassificationMulticlassParams_Scheduler{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2723,7 +2847,7 @@ func (x *TextClassificationMulticlassParams_Scheduler) String() string {
 func (*TextClassificationMulticlassParams_Scheduler) ProtoMessage() {}
 
 func (x *TextClassificationMulticlassParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2817,7 +2941,7 @@ type TextClassificationMulticlassParams_Optimizer struct {
 
 func (x *TextClassificationMulticlassParams_Optimizer) Reset() {
 	*x = TextClassificationMulticlassParams_Optimizer{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2829,7 +2953,7 @@ func (x *TextClassificationMulticlassParams_Optimizer) String() string {
 func (*TextClassificationMulticlassParams_Optimizer) ProtoMessage() {}
 
 func (x *TextClassificationMulticlassParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2890,7 +3014,7 @@ type TextEmbeddingPairParams_Scheduler struct {
 
 func (x *TextEmbeddingPairParams_Scheduler) Reset() {
 	*x = TextEmbeddingPairParams_Scheduler{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2902,7 +3026,7 @@ func (x *TextEmbeddingPairParams_Scheduler) String() string {
 func (*TextEmbeddingPairParams_Scheduler) ProtoMessage() {}
 
 func (x *TextEmbeddingPairParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3013,7 +3137,7 @@ type TextEmbeddingPairParams_Optimizer struct {
 
 func (x *TextEmbeddingPairParams_Optimizer) Reset() {
 	*x = TextEmbeddingPairParams_Optimizer{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3025,7 +3149,7 @@ func (x *TextEmbeddingPairParams_Optimizer) String() string {
 func (*TextEmbeddingPairParams_Optimizer) ProtoMessage() {}
 
 func (x *TextEmbeddingPairParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3085,7 +3209,7 @@ type TextEmbeddingTripletParams_Scheduler struct {
 
 func (x *TextEmbeddingTripletParams_Scheduler) Reset() {
 	*x = TextEmbeddingTripletParams_Scheduler{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3097,7 +3221,7 @@ func (x *TextEmbeddingTripletParams_Scheduler) String() string {
 func (*TextEmbeddingTripletParams_Scheduler) ProtoMessage() {}
 
 func (x *TextEmbeddingTripletParams_Scheduler) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3208,7 +3332,7 @@ type TextEmbeddingTripletParams_Optimizer struct {
 
 func (x *TextEmbeddingTripletParams_Optimizer) Reset() {
 	*x = TextEmbeddingTripletParams_Optimizer{}
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3220,7 +3344,7 @@ func (x *TextEmbeddingTripletParams_Optimizer) String() string {
 func (*TextEmbeddingTripletParams_Optimizer) ProtoMessage() {}
 
 func (x *TextEmbeddingTripletParams_Optimizer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3484,8 +3608,12 @@ const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\x19DeleteTuningDraftResponse\x12$\n" +
 	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\">\n" +
 	"\x10TuneDraftRequest\x12*\n" +
-	"\x0etuning_task_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\ftuningTaskId2\x89\n" +
-	"\n" +
+	"\x0etuning_task_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\ftuningTaskId\"B\n" +
+	"\x14ArchiveTuningRequest\x12*\n" +
+	"\x0etuning_task_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\ftuningTaskId\"\x17\n" +
+	"\x15ArchiveTuningMetadata\"=\n" +
+	"\x15ArchiveTuningResponse\x12$\n" +
+	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId2\x9d\v\n" +
 	"\rTuningService\x12y\n" +
 	"\x04Tune\x12(.yandex.cloud.ai.tuning.v1.TuningRequest\x1a!.yandex.cloud.operation.Operation\"$\xb2\xd2* \n" +
 	"\x0eTuningMetadata\x12\x0eTuningResponse\x12e\n" +
@@ -3501,7 +3629,9 @@ const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\vUpdateDraft\x123.yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest\x1a4.yandex.cloud.ai.tuning.v1.UpdateTuningDraftResponse\x12x\n" +
 	"\vDeleteDraft\x123.yandex.cloud.ai.tuning.v1.DeleteTuningDraftRequest\x1a4.yandex.cloud.ai.tuning.v1.DeleteTuningDraftResponse\x12\x81\x01\n" +
 	"\tTuneDraft\x12+.yandex.cloud.ai.tuning.v1.TuneDraftRequest\x1a!.yandex.cloud.operation.Operation\"$\xb2\xd2* \n" +
-	"\x0eTuningMetadata\x12\x0eTuningResponseBc\n" +
+	"\x0eTuningMetadata\x12\x0eTuningResponse\x12\x91\x01\n" +
+	"\aArchive\x12/.yandex.cloud.ai.tuning.v1.ArchiveTuningRequest\x1a!.yandex.cloud.operation.Operation\"2\xb2\xd2*.\n" +
+	"\x15ArchiveTuningMetadata\x12\x15ArchiveTuningResponseBc\n" +
 	"\x1dyandex.cloud.api.ai.tuning.v1ZBgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/tuning/v1;fomob\x06proto3"
 
 var (
@@ -3516,7 +3646,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
+var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_goTypes = []any{
 	(*ListTuningsRequest)(nil),                           // 0: yandex.cloud.ai.tuning.v1.ListTuningsRequest
 	(*ListTuningsResponse)(nil),                          // 1: yandex.cloud.ai.tuning.v1.ListTuningsResponse
@@ -3545,111 +3675,114 @@ var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_goTypes = []any{
 	(*DeleteTuningDraftRequest)(nil),                     // 24: yandex.cloud.ai.tuning.v1.DeleteTuningDraftRequest
 	(*DeleteTuningDraftResponse)(nil),                    // 25: yandex.cloud.ai.tuning.v1.DeleteTuningDraftResponse
 	(*TuneDraftRequest)(nil),                             // 26: yandex.cloud.ai.tuning.v1.TuneDraftRequest
-	nil,                                                  // 27: yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
-	(*TuningRequest_WeightedDataset)(nil),                // 28: yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	(*TextToTextCompletionTuningParams_Scheduler)(nil),   // 29: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
-	(*TextToTextCompletionTuningParams_Optimizer)(nil),   // 30: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
-	(*TextClassificationMultilabelParams_Scheduler)(nil), // 31: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
-	(*TextClassificationMultilabelParams_Optimizer)(nil), // 32: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
-	(*TextClassificationMulticlassParams_Scheduler)(nil), // 33: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
-	(*TextClassificationMulticlassParams_Optimizer)(nil), // 34: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
-	(*TextEmbeddingPairParams_Scheduler)(nil),            // 35: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
-	(*TextEmbeddingPairParams_Optimizer)(nil),            // 36: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
-	(*TextEmbeddingTripletParams_Scheduler)(nil),         // 37: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
-	(*TextEmbeddingTripletParams_Optimizer)(nil),         // 38: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
-	nil,                          // 39: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.LabelsEntry
-	nil,                          // 40: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.LabelsEntry
-	(TuningTask_Status)(0),       // 41: yandex.cloud.ai.tuning.v1.TuningTask.Status
-	(*TuningTask)(nil),           // 42: yandex.cloud.ai.tuning.v1.TuningTask
-	(*TuningTypeLora)(nil),       // 43: yandex.cloud.ai.tuning.v1.TuningTypeLora
-	(*TuningTypePromptTune)(nil), // 44: yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	(*TuningError)(nil),          // 45: yandex.cloud.ai.tuning.v1.TuningError
-	(*SchedulerLinear)(nil),      // 46: yandex.cloud.ai.tuning.v1.SchedulerLinear
-	(*SchedulerConstant)(nil),    // 47: yandex.cloud.ai.tuning.v1.SchedulerConstant
-	(*SchedulerCosine)(nil),      // 48: yandex.cloud.ai.tuning.v1.SchedulerCosine
-	(*OptimizerAdamw)(nil),       // 49: yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	(*operation.Operation)(nil),  // 50: yandex.cloud.operation.Operation
+	(*ArchiveTuningRequest)(nil),                         // 27: yandex.cloud.ai.tuning.v1.ArchiveTuningRequest
+	(*ArchiveTuningMetadata)(nil),                        // 28: yandex.cloud.ai.tuning.v1.ArchiveTuningMetadata
+	(*ArchiveTuningResponse)(nil),                        // 29: yandex.cloud.ai.tuning.v1.ArchiveTuningResponse
+	nil,                                                  // 30: yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
+	(*TuningRequest_WeightedDataset)(nil),                // 31: yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	(*TextToTextCompletionTuningParams_Scheduler)(nil),   // 32: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
+	(*TextToTextCompletionTuningParams_Optimizer)(nil),   // 33: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
+	(*TextClassificationMultilabelParams_Scheduler)(nil), // 34: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
+	(*TextClassificationMultilabelParams_Optimizer)(nil), // 35: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
+	(*TextClassificationMulticlassParams_Scheduler)(nil), // 36: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
+	(*TextClassificationMulticlassParams_Optimizer)(nil), // 37: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
+	(*TextEmbeddingPairParams_Scheduler)(nil),            // 38: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
+	(*TextEmbeddingPairParams_Optimizer)(nil),            // 39: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
+	(*TextEmbeddingTripletParams_Scheduler)(nil),         // 40: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
+	(*TextEmbeddingTripletParams_Optimizer)(nil),         // 41: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
+	nil,                          // 42: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.LabelsEntry
+	nil,                          // 43: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.LabelsEntry
+	(TuningTask_Status)(0),       // 44: yandex.cloud.ai.tuning.v1.TuningTask.Status
+	(*TuningTask)(nil),           // 45: yandex.cloud.ai.tuning.v1.TuningTask
+	(*TuningTypeLora)(nil),       // 46: yandex.cloud.ai.tuning.v1.TuningTypeLora
+	(*TuningTypePromptTune)(nil), // 47: yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	(*TuningError)(nil),          // 48: yandex.cloud.ai.tuning.v1.TuningError
+	(*SchedulerLinear)(nil),      // 49: yandex.cloud.ai.tuning.v1.SchedulerLinear
+	(*SchedulerConstant)(nil),    // 50: yandex.cloud.ai.tuning.v1.SchedulerConstant
+	(*SchedulerCosine)(nil),      // 51: yandex.cloud.ai.tuning.v1.SchedulerCosine
+	(*OptimizerAdamw)(nil),       // 52: yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	(*operation.Operation)(nil),  // 53: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_depIdxs = []int32{
-	41, // 0: yandex.cloud.ai.tuning.v1.ListTuningsRequest.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
-	42, // 1: yandex.cloud.ai.tuning.v1.ListTuningsResponse.tuning_tasks:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
-	42, // 2: yandex.cloud.ai.tuning.v1.DescribeTuningResponse.tuning_task:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
-	41, // 3: yandex.cloud.ai.tuning.v1.TuningResponse.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
-	41, // 4: yandex.cloud.ai.tuning.v1.TuningMetadata.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
-	28, // 5: yandex.cloud.ai.tuning.v1.TuningRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	28, // 6: yandex.cloud.ai.tuning.v1.TuningRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	28, // 7: yandex.cloud.ai.tuning.v1.TuningRequest.validation_dataset:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	28, // 8: yandex.cloud.ai.tuning.v1.TuningRequest.test_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	44, // 0: yandex.cloud.ai.tuning.v1.ListTuningsRequest.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
+	45, // 1: yandex.cloud.ai.tuning.v1.ListTuningsResponse.tuning_tasks:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
+	45, // 2: yandex.cloud.ai.tuning.v1.DescribeTuningResponse.tuning_task:type_name -> yandex.cloud.ai.tuning.v1.TuningTask
+	44, // 3: yandex.cloud.ai.tuning.v1.TuningResponse.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
+	44, // 4: yandex.cloud.ai.tuning.v1.TuningMetadata.status:type_name -> yandex.cloud.ai.tuning.v1.TuningTask.Status
+	31, // 5: yandex.cloud.ai.tuning.v1.TuningRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	31, // 6: yandex.cloud.ai.tuning.v1.TuningRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	31, // 7: yandex.cloud.ai.tuning.v1.TuningRequest.validation_dataset:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	31, // 8: yandex.cloud.ai.tuning.v1.TuningRequest.test_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
 	9,  // 9: yandex.cloud.ai.tuning.v1.TuningRequest.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
 	10, // 10: yandex.cloud.ai.tuning.v1.TuningRequest.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
 	11, // 11: yandex.cloud.ai.tuning.v1.TuningRequest.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
 	12, // 12: yandex.cloud.ai.tuning.v1.TuningRequest.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
 	13, // 13: yandex.cloud.ai.tuning.v1.TuningRequest.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
-	27, // 14: yandex.cloud.ai.tuning.v1.TuningRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
-	43, // 15: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	44, // 16: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	29, // 17: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
-	30, // 18: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
-	43, // 19: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	44, // 20: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	31, // 21: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
-	32, // 22: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
-	43, // 23: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	44, // 24: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	33, // 25: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
-	34, // 26: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
-	43, // 27: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	44, // 28: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	35, // 29: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
-	36, // 30: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
-	43, // 31: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
-	44, // 32: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
-	37, // 33: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
-	38, // 34: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
-	28, // 35: yandex.cloud.ai.tuning.v1.GetOptionsResponse.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	28, // 36: yandex.cloud.ai.tuning.v1.GetOptionsResponse.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	30, // 14: yandex.cloud.ai.tuning.v1.TuningRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.LabelsEntry
+	46, // 15: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	47, // 16: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	32, // 17: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler
+	33, // 18: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer
+	46, // 19: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	47, // 20: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	34, // 21: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler
+	35, // 22: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer
+	46, // 23: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	47, // 24: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	36, // 25: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler
+	37, // 26: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer
+	46, // 27: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	47, // 28: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	38, // 29: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler
+	39, // 30: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer
+	46, // 31: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.lora:type_name -> yandex.cloud.ai.tuning.v1.TuningTypeLora
+	47, // 32: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.prompt_tune:type_name -> yandex.cloud.ai.tuning.v1.TuningTypePromptTune
+	40, // 33: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.scheduler:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler
+	41, // 34: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.optimizer:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer
+	31, // 35: yandex.cloud.ai.tuning.v1.GetOptionsResponse.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	31, // 36: yandex.cloud.ai.tuning.v1.GetOptionsResponse.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
 	9,  // 37: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
 	10, // 38: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
 	11, // 39: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
 	12, // 40: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
 	13, // 41: yandex.cloud.ai.tuning.v1.GetOptionsResponse.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
-	45, // 42: yandex.cloud.ai.tuning.v1.ListErrorsResponse.tuning_error:type_name -> yandex.cloud.ai.tuning.v1.TuningError
-	28, // 43: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	28, // 44: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	48, // 42: yandex.cloud.ai.tuning.v1.ListErrorsResponse.tuning_error:type_name -> yandex.cloud.ai.tuning.v1.TuningError
+	31, // 43: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	31, // 44: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
 	9,  // 45: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
 	10, // 46: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
 	11, // 47: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
 	12, // 48: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
 	13, // 49: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
-	39, // 50: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.LabelsEntry
-	28, // 51: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
-	28, // 52: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	42, // 50: yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.CreateTuningDraftRequest.LabelsEntry
+	31, // 51: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.train_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
+	31, // 52: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.validation_datasets:type_name -> yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDataset
 	9,  // 53: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_to_text_completion:type_name -> yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams
 	10, // 54: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_classification_multilabel:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams
 	11, // 55: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_classification_multiclass:type_name -> yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams
 	12, // 56: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_embedding_pair_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams
 	13, // 57: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.text_embedding_triplet_params:type_name -> yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams
-	40, // 58: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.LabelsEntry
-	46, // 59: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	47, // 60: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	48, // 61: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	49, // 62: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	46, // 63: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	47, // 64: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	48, // 65: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	49, // 66: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	46, // 67: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	47, // 68: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	48, // 69: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	49, // 70: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	46, // 71: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	47, // 72: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	48, // 73: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	49, // 74: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
-	46, // 75: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
-	47, // 76: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
-	48, // 77: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
-	49, // 78: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	43, // 58: yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.labels:type_name -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest.LabelsEntry
+	49, // 59: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	50, // 60: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	51, // 61: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	52, // 62: yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	49, // 63: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	50, // 64: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	51, // 65: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	52, // 66: yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	49, // 67: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	50, // 68: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	51, // 69: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	52, // 70: yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	49, // 71: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	50, // 72: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	51, // 73: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	52, // 74: yandex.cloud.ai.tuning.v1.TextEmbeddingPairParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
+	49, // 75: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.linear:type_name -> yandex.cloud.ai.tuning.v1.SchedulerLinear
+	50, // 76: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.constant:type_name -> yandex.cloud.ai.tuning.v1.SchedulerConstant
+	51, // 77: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Scheduler.cosine:type_name -> yandex.cloud.ai.tuning.v1.SchedulerCosine
+	52, // 78: yandex.cloud.ai.tuning.v1.TextEmbeddingTripletParams.Optimizer.adamw:type_name -> yandex.cloud.ai.tuning.v1.OptimizerAdamw
 	8,  // 79: yandex.cloud.ai.tuning.v1.TuningService.Tune:input_type -> yandex.cloud.ai.tuning.v1.TuningRequest
 	0,  // 80: yandex.cloud.ai.tuning.v1.TuningService.List:input_type -> yandex.cloud.ai.tuning.v1.ListTuningsRequest
 	2,  // 81: yandex.cloud.ai.tuning.v1.TuningService.Describe:input_type -> yandex.cloud.ai.tuning.v1.DescribeTuningRequest
@@ -3661,19 +3794,21 @@ var file_yandex_cloud_ai_tuning_v1_tuning_service_proto_depIdxs = []int32{
 	22, // 87: yandex.cloud.ai.tuning.v1.TuningService.UpdateDraft:input_type -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftRequest
 	24, // 88: yandex.cloud.ai.tuning.v1.TuningService.DeleteDraft:input_type -> yandex.cloud.ai.tuning.v1.DeleteTuningDraftRequest
 	26, // 89: yandex.cloud.ai.tuning.v1.TuningService.TuneDraft:input_type -> yandex.cloud.ai.tuning.v1.TuneDraftRequest
-	50, // 90: yandex.cloud.ai.tuning.v1.TuningService.Tune:output_type -> yandex.cloud.operation.Operation
-	1,  // 91: yandex.cloud.ai.tuning.v1.TuningService.List:output_type -> yandex.cloud.ai.tuning.v1.ListTuningsResponse
-	3,  // 92: yandex.cloud.ai.tuning.v1.TuningService.Describe:output_type -> yandex.cloud.ai.tuning.v1.DescribeTuningResponse
-	5,  // 93: yandex.cloud.ai.tuning.v1.TuningService.Cancel:output_type -> yandex.cloud.ai.tuning.v1.CancelTuningResponse
-	15, // 94: yandex.cloud.ai.tuning.v1.TuningService.GetMetricsUrl:output_type -> yandex.cloud.ai.tuning.v1.GetMetricsUrlResponse
-	17, // 95: yandex.cloud.ai.tuning.v1.TuningService.GetOptions:output_type -> yandex.cloud.ai.tuning.v1.GetOptionsResponse
-	19, // 96: yandex.cloud.ai.tuning.v1.TuningService.ListErrors:output_type -> yandex.cloud.ai.tuning.v1.ListErrorsResponse
-	21, // 97: yandex.cloud.ai.tuning.v1.TuningService.CreateDraft:output_type -> yandex.cloud.ai.tuning.v1.CreateTuningDraftResponse
-	23, // 98: yandex.cloud.ai.tuning.v1.TuningService.UpdateDraft:output_type -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftResponse
-	25, // 99: yandex.cloud.ai.tuning.v1.TuningService.DeleteDraft:output_type -> yandex.cloud.ai.tuning.v1.DeleteTuningDraftResponse
-	50, // 100: yandex.cloud.ai.tuning.v1.TuningService.TuneDraft:output_type -> yandex.cloud.operation.Operation
-	90, // [90:101] is the sub-list for method output_type
-	79, // [79:90] is the sub-list for method input_type
+	27, // 90: yandex.cloud.ai.tuning.v1.TuningService.Archive:input_type -> yandex.cloud.ai.tuning.v1.ArchiveTuningRequest
+	53, // 91: yandex.cloud.ai.tuning.v1.TuningService.Tune:output_type -> yandex.cloud.operation.Operation
+	1,  // 92: yandex.cloud.ai.tuning.v1.TuningService.List:output_type -> yandex.cloud.ai.tuning.v1.ListTuningsResponse
+	3,  // 93: yandex.cloud.ai.tuning.v1.TuningService.Describe:output_type -> yandex.cloud.ai.tuning.v1.DescribeTuningResponse
+	5,  // 94: yandex.cloud.ai.tuning.v1.TuningService.Cancel:output_type -> yandex.cloud.ai.tuning.v1.CancelTuningResponse
+	15, // 95: yandex.cloud.ai.tuning.v1.TuningService.GetMetricsUrl:output_type -> yandex.cloud.ai.tuning.v1.GetMetricsUrlResponse
+	17, // 96: yandex.cloud.ai.tuning.v1.TuningService.GetOptions:output_type -> yandex.cloud.ai.tuning.v1.GetOptionsResponse
+	19, // 97: yandex.cloud.ai.tuning.v1.TuningService.ListErrors:output_type -> yandex.cloud.ai.tuning.v1.ListErrorsResponse
+	21, // 98: yandex.cloud.ai.tuning.v1.TuningService.CreateDraft:output_type -> yandex.cloud.ai.tuning.v1.CreateTuningDraftResponse
+	23, // 99: yandex.cloud.ai.tuning.v1.TuningService.UpdateDraft:output_type -> yandex.cloud.ai.tuning.v1.UpdateTuningDraftResponse
+	25, // 100: yandex.cloud.ai.tuning.v1.TuningService.DeleteDraft:output_type -> yandex.cloud.ai.tuning.v1.DeleteTuningDraftResponse
+	53, // 101: yandex.cloud.ai.tuning.v1.TuningService.TuneDraft:output_type -> yandex.cloud.operation.Operation
+	53, // 102: yandex.cloud.ai.tuning.v1.TuningService.Archive:output_type -> yandex.cloud.operation.Operation
+	91, // [91:103] is the sub-list for method output_type
+	79, // [79:91] is the sub-list for method input_type
 	79, // [79:79] is the sub-list for extension type_name
 	79, // [79:79] is the sub-list for extension extendee
 	0,  // [0:79] is the sub-list for field type_name
@@ -3737,46 +3872,46 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 		(*UpdateTuningDraftRequest_TextEmbeddingPairParams)(nil),
 		(*UpdateTuningDraftRequest_TextEmbeddingTripletParams)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[29].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32].OneofWrappers = []any{
 		(*TextToTextCompletionTuningParams_Scheduler_Linear)(nil),
 		(*TextToTextCompletionTuningParams_Scheduler_Constant)(nil),
 		(*TextToTextCompletionTuningParams_Scheduler_Cosine)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[30].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33].OneofWrappers = []any{
 		(*TextToTextCompletionTuningParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[31].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34].OneofWrappers = []any{
 		(*TextClassificationMultilabelParams_Scheduler_Linear)(nil),
 		(*TextClassificationMultilabelParams_Scheduler_Constant)(nil),
 		(*TextClassificationMultilabelParams_Scheduler_Cosine)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[32].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35].OneofWrappers = []any{
 		(*TextClassificationMultilabelParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[33].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36].OneofWrappers = []any{
 		(*TextClassificationMulticlassParams_Scheduler_Linear)(nil),
 		(*TextClassificationMulticlassParams_Scheduler_Constant)(nil),
 		(*TextClassificationMulticlassParams_Scheduler_Cosine)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[34].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37].OneofWrappers = []any{
 		(*TextClassificationMulticlassParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[35].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38].OneofWrappers = []any{
 		(*TextEmbeddingPairParams_Scheduler_Linear)(nil),
 		(*TextEmbeddingPairParams_Scheduler_Constant)(nil),
 		(*TextEmbeddingPairParams_Scheduler_Cosine)(nil),
 		(*TextEmbeddingPairParams_Scheduler_WarmupRatio)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[36].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[39].OneofWrappers = []any{
 		(*TextEmbeddingPairParams_Optimizer_Adamw)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[37].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[40].OneofWrappers = []any{
 		(*TextEmbeddingTripletParams_Scheduler_Linear)(nil),
 		(*TextEmbeddingTripletParams_Scheduler_Constant)(nil),
 		(*TextEmbeddingTripletParams_Scheduler_Cosine)(nil),
 		(*TextEmbeddingTripletParams_Scheduler_WarmupRatio)(nil),
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[38].OneofWrappers = []any{
+	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[41].OneofWrappers = []any{
 		(*TextEmbeddingTripletParams_Optimizer_Adamw)(nil),
 	}
 	type x struct{}
@@ -3785,7 +3920,7 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc), len(file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   41,
+			NumMessages:   44,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

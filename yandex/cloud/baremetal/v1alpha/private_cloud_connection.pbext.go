@@ -30,6 +30,10 @@ func (m *PrivateCloudConnection) SetStatus(v PrivateCloudConnection_Status) {
 	m.Status = v
 }
 
+func (m *PrivateCloudConnection) SetName(v string) {
+	m.Name = v
+}
+
 func (m *PrivateCloudConnection) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

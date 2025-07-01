@@ -86,6 +86,22 @@ func (m *ClusterConfig) SetMetastore(v *Metastore) {
 	m.Metastore = v
 }
 
+func (m *UpdateClusterConfigSpec) SetResourcePools(v *ResourcePools) {
+	m.ResourcePools = v
+}
+
+func (m *UpdateClusterConfigSpec) SetHistoryServer(v *HistoryServerConfig) {
+	m.HistoryServer = v
+}
+
+func (m *UpdateClusterConfigSpec) SetDependencies(v *Dependencies) {
+	m.Dependencies = v
+}
+
+func (m *UpdateClusterConfigSpec) SetMetastore(v *Metastore) {
+	m.Metastore = v
+}
+
 func (m *HistoryServerConfig) SetEnabled(v bool) {
 	m.Enabled = v
 }
@@ -95,6 +111,10 @@ func (m *NetworkConfig) SetSubnetIds(v []string) {
 }
 
 func (m *NetworkConfig) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
+func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 

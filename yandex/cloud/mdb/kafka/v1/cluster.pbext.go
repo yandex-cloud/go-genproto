@@ -75,6 +75,14 @@ func (m *Cluster) SetPlannedOperation(v *MaintenanceOperation) {
 	m.PlannedOperation = v
 }
 
+func (m *Cluster) SetKafkaUi(v *Cluster_KafkaUI) {
+	m.KafkaUi = v
+}
+
+func (m *Cluster_KafkaUI) SetUrl(v string) {
+	m.Url = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
@@ -135,6 +143,10 @@ func (m *ConfigSpec) SetKraft(v *ConfigSpec_KRaft) {
 	m.Kraft = v
 }
 
+func (m *ConfigSpec) SetKafkaUiConfig(v *ConfigSpec_KafkaUIConfig) {
+	m.KafkaUiConfig = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {
@@ -166,6 +178,10 @@ func (m *ConfigSpec_KRaft) SetResources(v *Resources) {
 }
 
 func (m *ConfigSpec_RestAPIConfig) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ConfigSpec_KafkaUIConfig) SetEnabled(v bool) {
 	m.Enabled = v
 }
 

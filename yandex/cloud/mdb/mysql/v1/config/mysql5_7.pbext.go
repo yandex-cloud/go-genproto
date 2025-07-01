@@ -370,6 +370,10 @@ func (m *MysqlConfig5_7) SetInnodbChangeBuffering(v MysqlConfig5_7_InnodbChangeB
 	m.InnodbChangeBuffering = v
 }
 
+func (m *MysqlConfig5_7) SetMaxWriteLockCount(v *wrapperspb.Int64Value) {
+	m.MaxWriteLockCount = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

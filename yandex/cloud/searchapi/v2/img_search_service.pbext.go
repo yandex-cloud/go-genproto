@@ -82,6 +82,10 @@ func (m *ImageSearchByImageRequest) SetPage(v int64) {
 	m.Page = v
 }
 
+func (m *ImageSearchByImageRequest) SetFamilyMode(v SearchQuery_FamilyMode) {
+	m.FamilyMode = v
+}
+
 func (m *ImageSearchByImageResponse) SetImages(v []*ImageSearchByImageResponse_ImageInfo) {
 	m.Images = v
 }

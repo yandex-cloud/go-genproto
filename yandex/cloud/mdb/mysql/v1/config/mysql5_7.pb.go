@@ -1013,8 +1013,13 @@ type MysqlConfig5_7 struct {
 	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_change_buffering).
 	InnodbChangeBuffering MysqlConfig5_7_InnodbChangeBuffering `protobuf:"varint,91,opt,name=innodb_change_buffering,json=innodbChangeBuffering,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_InnodbChangeBuffering" json:"innodb_change_buffering,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Permit some pending read lock requests interval
+	// P.S. Should be UInt64, but java fails to handle UInt64 limits
+	//
+	// For details, see [Percona documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_write_lock_count).
+	MaxWriteLockCount *wrapperspb.Int64Value `protobuf:"bytes,92,opt,name=max_write_lock_count,json=maxWriteLockCount,proto3" json:"max_write_lock_count,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *MysqlConfig5_7) Reset() {
@@ -1684,6 +1689,13 @@ func (x *MysqlConfig5_7) GetInnodbChangeBuffering() MysqlConfig5_7_InnodbChangeB
 	return MysqlConfig5_7_INNODB_CHANGE_BUFFERING_UNSPECIFIED
 }
 
+func (x *MysqlConfig5_7) GetMaxWriteLockCount() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxWriteLockCount
+	}
+	return nil
+}
+
 type MysqlConfigSet5_7 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a MySQL 5.7 cluster (a combination of settings defined
@@ -1752,7 +1764,7 @@ var File_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xbeP\n" +
+	"/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x95Q\n" +
 	"\x0eMysqlConfig5_7\x12a\n" +
 	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=5242880R\x14innodbBufferPoolSize\x12R\n" +
 	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x0emaxConnections\x12P\n" +
@@ -1863,7 +1875,8 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\x10audit_log_policy\x18X \x01(\x0e2?.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.AuditLogPolicyR\x0eauditLogPolicy\x12b\n" +
 	"\x15innodb_lru_scan_depth\x18Y \x01(\v2\x1b.google.protobuf.Int64ValueB\x12\xfa\xc71\x0e100-4294967295R\x12innodbLruScanDepth\x12>\n" +
 	"\rmdb_force_ssl\x18Z \x01(\v2\x1a.google.protobuf.BoolValueR\vmdbForceSsl\x12~\n" +
-	"\x17innodb_change_buffering\x18[ \x01(\x0e2F.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.InnodbChangeBufferingR\x15innodbChangeBuffering\"\x99\x05\n" +
+	"\x17innodb_change_buffering\x18[ \x01(\x0e2F.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.InnodbChangeBufferingR\x15innodbChangeBuffering\x12U\n" +
+	"\x14max_write_lock_count\x18\\ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x11maxWriteLockCount\"\x99\x05\n" +
 	"\aSQLMode\x12\x17\n" +
 	"\x13SQLMODE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13ALLOW_INVALID_DATES\x10\x01\x12\x0f\n" +
@@ -2081,14 +2094,15 @@ var file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_depIdxs = []int32{
 	12, // 84: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_lru_scan_depth:type_name -> google.protobuf.Int64Value
 	14, // 85: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.mdb_force_ssl:type_name -> google.protobuf.BoolValue
 	9,  // 86: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_change_buffering:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.InnodbChangeBuffering
-	10, // 87: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.effective_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	10, // 88: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.user_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	10, // 89: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.default_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	90, // [90:90] is the sub-list for method output_type
-	90, // [90:90] is the sub-list for method input_type
-	90, // [90:90] is the sub-list for extension type_name
-	90, // [90:90] is the sub-list for extension extendee
-	0,  // [0:90] is the sub-list for field type_name
+	12, // 87: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.max_write_lock_count:type_name -> google.protobuf.Int64Value
+	10, // 88: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.effective_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	10, // 89: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.user_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	10, // 90: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.default_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	91, // [91:91] is the sub-list for method output_type
+	91, // [91:91] is the sub-list for method input_type
+	91, // [91:91] is the sub-list for extension type_name
+	91, // [91:91] is the sub-list for extension extendee
+	0,  // [0:91] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_init() }

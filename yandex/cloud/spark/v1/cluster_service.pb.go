@@ -12,6 +12,7 @@ import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -371,6 +372,181 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+type UpdateClusterRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Spark cluster.
+	ClusterId  string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	Name       string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the Spark cluster. 0-256 characters long.
+	Description string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Labels      map[string]string        `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ConfigSpec  *UpdateClusterConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	NetworkSpec *UpdateNetworkConfigSpec `protobuf:"bytes,7,opt,name=network_spec,json=networkSpec,proto3" json:"network_spec,omitempty"`
+	// Deletion Protection inhibits deletion of the cluster
+	DeletionProtection bool `protobuf:"varint,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	// Service account used to access Cloud resources.
+	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Cloud logging configuration
+	Logging *LoggingConfig `protobuf:"bytes,10,opt,name=logging,proto3" json:"logging,omitempty"`
+	// Window of maintenance operations.
+	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,11,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *UpdateClusterRequest) Reset() {
+	*x = UpdateClusterRequest{}
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateClusterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateClusterRequest) ProtoMessage() {}
+
+func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
+func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateClusterRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetConfigSpec() *UpdateClusterConfigSpec {
+	if x != nil {
+		return x.ConfigSpec
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetNetworkSpec() *UpdateNetworkConfigSpec {
+	if x != nil {
+		return x.NetworkSpec
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetDeletionProtection() bool {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return false
+}
+
+func (x *UpdateClusterRequest) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetLogging() *LoggingConfig {
+	if x != nil {
+		return x.Logging
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
+	if x != nil {
+		return x.MaintenanceWindow
+	}
+	return nil
+}
+
+type UpdateClusterMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the updating Spark cluster.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateClusterMetadata) Reset() {
+	*x = UpdateClusterMetadata{}
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateClusterMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateClusterMetadata) ProtoMessage() {}
+
+func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateClusterMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateClusterMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster to delete.
@@ -381,7 +557,7 @@ type DeleteClusterRequest struct {
 
 func (x *DeleteClusterRequest) Reset() {
 	*x = DeleteClusterRequest{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -393,7 +569,7 @@ func (x *DeleteClusterRequest) String() string {
 func (*DeleteClusterRequest) ProtoMessage() {}
 
 func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -406,7 +582,7 @@ func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteClusterRequest) GetClusterId() string {
@@ -426,7 +602,7 @@ type DeleteClusterMetadata struct {
 
 func (x *DeleteClusterMetadata) Reset() {
 	*x = DeleteClusterMetadata{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -438,7 +614,7 @@ func (x *DeleteClusterMetadata) String() string {
 func (*DeleteClusterMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -451,7 +627,7 @@ func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteClusterMetadata) GetClusterId() string {
@@ -471,7 +647,7 @@ type StartClusterRequest struct {
 
 func (x *StartClusterRequest) Reset() {
 	*x = StartClusterRequest{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +659,7 @@ func (x *StartClusterRequest) String() string {
 func (*StartClusterRequest) ProtoMessage() {}
 
 func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -496,7 +672,7 @@ func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
 func (*StartClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StartClusterRequest) GetClusterId() string {
@@ -516,7 +692,7 @@ type StartClusterMetadata struct {
 
 func (x *StartClusterMetadata) Reset() {
 	*x = StartClusterMetadata{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -528,7 +704,7 @@ func (x *StartClusterMetadata) String() string {
 func (*StartClusterMetadata) ProtoMessage() {}
 
 func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +717,7 @@ func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StartClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StartClusterMetadata) GetClusterId() string {
@@ -561,7 +737,7 @@ type StopClusterRequest struct {
 
 func (x *StopClusterRequest) Reset() {
 	*x = StopClusterRequest{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -573,7 +749,7 @@ func (x *StopClusterRequest) String() string {
 func (*StopClusterRequest) ProtoMessage() {}
 
 func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -586,7 +762,7 @@ func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
 func (*StopClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StopClusterRequest) GetClusterId() string {
@@ -606,7 +782,7 @@ type StopClusterMetadata struct {
 
 func (x *StopClusterMetadata) Reset() {
 	*x = StopClusterMetadata{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -618,7 +794,7 @@ func (x *StopClusterMetadata) String() string {
 func (*StopClusterMetadata) ProtoMessage() {}
 
 func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,7 +807,7 @@ func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StopClusterMetadata) GetClusterId() string {
@@ -659,7 +835,7 @@ type ListClusterOperationsRequest struct {
 
 func (x *ListClusterOperationsRequest) Reset() {
 	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -671,7 +847,7 @@ func (x *ListClusterOperationsRequest) String() string {
 func (*ListClusterOperationsRequest) ProtoMessage() {}
 
 func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -684,7 +860,7 @@ func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListClusterOperationsRequest) GetClusterId() string {
@@ -723,7 +899,7 @@ type ListClusterOperationsResponse struct {
 
 func (x *ListClusterOperationsResponse) Reset() {
 	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -735,7 +911,7 @@ func (x *ListClusterOperationsResponse) String() string {
 func (*ListClusterOperationsResponse) ProtoMessage() {}
 
 func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -748,7 +924,7 @@ func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
@@ -769,7 +945,7 @@ var File_yandex_cloud_spark_v1_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/spark/v1/cluster_service.proto\x12\x15yandex.cloud.spark.v1\x1a#yandex/cloud/spark/v1/cluster.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
+	"+yandex/cloud/spark/v1/cluster_service.proto\x12\x15yandex.cloud.spark.v1\x1a google/protobuf/field_mask.proto\x1a#yandex/cloud/spark/v1/cluster.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -801,7 +977,29 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"<\n" +
 	"\x15CreateClusterMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"C\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xd4\x06\n" +
+	"\x14UpdateClusterRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\x125\n" +
+	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8c\x01\n" +
+	"\x06labels\x18\x05 \x03(\v27.yandex.cloud.spark.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12O\n" +
+	"\vconfig_spec\x18\x06 \x01(\v2..yandex.cloud.spark.v1.UpdateClusterConfigSpecR\n" +
+	"configSpec\x12Q\n" +
+	"\fnetwork_spec\x18\a \x01(\v2..yandex.cloud.spark.v1.UpdateNetworkConfigSpecR\vnetworkSpec\x12/\n" +
+	"\x13deletion_protection\x18\b \x01(\bR\x12deletionProtection\x126\n" +
+	"\x12service_account_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12>\n" +
+	"\alogging\x18\n" +
+	" \x01(\v2$.yandex.cloud.spark.v1.LoggingConfigR\alogging\x12W\n" +
+	"\x12maintenance_window\x18\v \x01(\v2(.yandex.cloud.spark.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
+	"\x15UpdateClusterMetadata\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"C\n" +
 	"\x14DeleteClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"<\n" +
@@ -831,12 +1029,14 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\xcb\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\xcb\a\n" +
 	"\x0eClusterService\x12Q\n" +
 	"\x03Get\x12(.yandex.cloud.spark.v1.GetClusterRequest\x1a\x1e.yandex.cloud.spark.v1.Cluster\"\x00\x12a\n" +
 	"\x04List\x12*.yandex.cloud.spark.v1.ListClustersRequest\x1a+.yandex.cloud.spark.v1.ListClustersResponse\"\x00\x12~\n" +
 	"\x06Create\x12+.yandex.cloud.spark.v1.CreateClusterRequest\x1a!.yandex.cloud.operation.Operation\"$\xb2\xd2* \n" +
-	"\x15CreateClusterMetadata\x12\aCluster\x12\x8c\x01\n" +
+	"\x15CreateClusterMetadata\x12\aCluster\x12~\n" +
+	"\x06Update\x12+.yandex.cloud.spark.v1.UpdateClusterRequest\x1a!.yandex.cloud.operation.Operation\"$\xb2\xd2* \n" +
+	"\x15UpdateClusterMetadata\x12\aCluster\x12\x8c\x01\n" +
 	"\x06Delete\x12+.yandex.cloud.spark.v1.DeleteClusterRequest\x1a!.yandex.cloud.operation.Operation\"2\xb2\xd2*.\n" +
 	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x12{\n" +
 	"\x05Start\x12*.yandex.cloud.spark.v1.StartClusterRequest\x1a!.yandex.cloud.operation.Operation\"#\xb2\xd2*\x1f\n" +
@@ -858,56 +1058,70 @@ func file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_spark_v1_cluster_service_proto_rawDescData
 }
 
-var file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_spark_v1_cluster_service_proto_goTypes = []any{
 	(*GetClusterRequest)(nil),             // 0: yandex.cloud.spark.v1.GetClusterRequest
 	(*ListClustersRequest)(nil),           // 1: yandex.cloud.spark.v1.ListClustersRequest
 	(*ListClustersResponse)(nil),          // 2: yandex.cloud.spark.v1.ListClustersResponse
 	(*CreateClusterRequest)(nil),          // 3: yandex.cloud.spark.v1.CreateClusterRequest
 	(*CreateClusterMetadata)(nil),         // 4: yandex.cloud.spark.v1.CreateClusterMetadata
-	(*DeleteClusterRequest)(nil),          // 5: yandex.cloud.spark.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),         // 6: yandex.cloud.spark.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),           // 7: yandex.cloud.spark.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),          // 8: yandex.cloud.spark.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),            // 9: yandex.cloud.spark.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),           // 10: yandex.cloud.spark.v1.StopClusterMetadata
-	(*ListClusterOperationsRequest)(nil),  // 11: yandex.cloud.spark.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil), // 12: yandex.cloud.spark.v1.ListClusterOperationsResponse
-	nil,                                   // 13: yandex.cloud.spark.v1.CreateClusterRequest.LabelsEntry
-	(*Cluster)(nil),                       // 14: yandex.cloud.spark.v1.Cluster
-	(*ClusterConfig)(nil),                 // 15: yandex.cloud.spark.v1.ClusterConfig
-	(*NetworkConfig)(nil),                 // 16: yandex.cloud.spark.v1.NetworkConfig
-	(*LoggingConfig)(nil),                 // 17: yandex.cloud.spark.v1.LoggingConfig
-	(*MaintenanceWindow)(nil),             // 18: yandex.cloud.spark.v1.MaintenanceWindow
-	(*operation.Operation)(nil),           // 19: yandex.cloud.operation.Operation
+	(*UpdateClusterRequest)(nil),          // 5: yandex.cloud.spark.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),         // 6: yandex.cloud.spark.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),          // 7: yandex.cloud.spark.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),         // 8: yandex.cloud.spark.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),           // 9: yandex.cloud.spark.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),          // 10: yandex.cloud.spark.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),            // 11: yandex.cloud.spark.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),           // 12: yandex.cloud.spark.v1.StopClusterMetadata
+	(*ListClusterOperationsRequest)(nil),  // 13: yandex.cloud.spark.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil), // 14: yandex.cloud.spark.v1.ListClusterOperationsResponse
+	nil,                                   // 15: yandex.cloud.spark.v1.CreateClusterRequest.LabelsEntry
+	nil,                                   // 16: yandex.cloud.spark.v1.UpdateClusterRequest.LabelsEntry
+	(*Cluster)(nil),                       // 17: yandex.cloud.spark.v1.Cluster
+	(*ClusterConfig)(nil),                 // 18: yandex.cloud.spark.v1.ClusterConfig
+	(*NetworkConfig)(nil),                 // 19: yandex.cloud.spark.v1.NetworkConfig
+	(*LoggingConfig)(nil),                 // 20: yandex.cloud.spark.v1.LoggingConfig
+	(*MaintenanceWindow)(nil),             // 21: yandex.cloud.spark.v1.MaintenanceWindow
+	(*fieldmaskpb.FieldMask)(nil),         // 22: google.protobuf.FieldMask
+	(*UpdateClusterConfigSpec)(nil),       // 23: yandex.cloud.spark.v1.UpdateClusterConfigSpec
+	(*UpdateNetworkConfigSpec)(nil),       // 24: yandex.cloud.spark.v1.UpdateNetworkConfigSpec
+	(*operation.Operation)(nil),           // 25: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_spark_v1_cluster_service_proto_depIdxs = []int32{
-	14, // 0: yandex.cloud.spark.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.spark.v1.Cluster
-	13, // 1: yandex.cloud.spark.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.spark.v1.CreateClusterRequest.LabelsEntry
-	15, // 2: yandex.cloud.spark.v1.CreateClusterRequest.config:type_name -> yandex.cloud.spark.v1.ClusterConfig
-	16, // 3: yandex.cloud.spark.v1.CreateClusterRequest.network:type_name -> yandex.cloud.spark.v1.NetworkConfig
-	17, // 4: yandex.cloud.spark.v1.CreateClusterRequest.logging:type_name -> yandex.cloud.spark.v1.LoggingConfig
-	18, // 5: yandex.cloud.spark.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.spark.v1.MaintenanceWindow
-	19, // 6: yandex.cloud.spark.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 7: yandex.cloud.spark.v1.ClusterService.Get:input_type -> yandex.cloud.spark.v1.GetClusterRequest
-	1,  // 8: yandex.cloud.spark.v1.ClusterService.List:input_type -> yandex.cloud.spark.v1.ListClustersRequest
-	3,  // 9: yandex.cloud.spark.v1.ClusterService.Create:input_type -> yandex.cloud.spark.v1.CreateClusterRequest
-	5,  // 10: yandex.cloud.spark.v1.ClusterService.Delete:input_type -> yandex.cloud.spark.v1.DeleteClusterRequest
-	7,  // 11: yandex.cloud.spark.v1.ClusterService.Start:input_type -> yandex.cloud.spark.v1.StartClusterRequest
-	9,  // 12: yandex.cloud.spark.v1.ClusterService.Stop:input_type -> yandex.cloud.spark.v1.StopClusterRequest
-	11, // 13: yandex.cloud.spark.v1.ClusterService.ListOperations:input_type -> yandex.cloud.spark.v1.ListClusterOperationsRequest
-	14, // 14: yandex.cloud.spark.v1.ClusterService.Get:output_type -> yandex.cloud.spark.v1.Cluster
-	2,  // 15: yandex.cloud.spark.v1.ClusterService.List:output_type -> yandex.cloud.spark.v1.ListClustersResponse
-	19, // 16: yandex.cloud.spark.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	19, // 17: yandex.cloud.spark.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	19, // 18: yandex.cloud.spark.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	19, // 19: yandex.cloud.spark.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	12, // 20: yandex.cloud.spark.v1.ClusterService.ListOperations:output_type -> yandex.cloud.spark.v1.ListClusterOperationsResponse
-	14, // [14:21] is the sub-list for method output_type
-	7,  // [7:14] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	17, // 0: yandex.cloud.spark.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.spark.v1.Cluster
+	15, // 1: yandex.cloud.spark.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.spark.v1.CreateClusterRequest.LabelsEntry
+	18, // 2: yandex.cloud.spark.v1.CreateClusterRequest.config:type_name -> yandex.cloud.spark.v1.ClusterConfig
+	19, // 3: yandex.cloud.spark.v1.CreateClusterRequest.network:type_name -> yandex.cloud.spark.v1.NetworkConfig
+	20, // 4: yandex.cloud.spark.v1.CreateClusterRequest.logging:type_name -> yandex.cloud.spark.v1.LoggingConfig
+	21, // 5: yandex.cloud.spark.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.spark.v1.MaintenanceWindow
+	22, // 6: yandex.cloud.spark.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	16, // 7: yandex.cloud.spark.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.spark.v1.UpdateClusterRequest.LabelsEntry
+	23, // 8: yandex.cloud.spark.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.spark.v1.UpdateClusterConfigSpec
+	24, // 9: yandex.cloud.spark.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.spark.v1.UpdateNetworkConfigSpec
+	20, // 10: yandex.cloud.spark.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.spark.v1.LoggingConfig
+	21, // 11: yandex.cloud.spark.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.spark.v1.MaintenanceWindow
+	25, // 12: yandex.cloud.spark.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 13: yandex.cloud.spark.v1.ClusterService.Get:input_type -> yandex.cloud.spark.v1.GetClusterRequest
+	1,  // 14: yandex.cloud.spark.v1.ClusterService.List:input_type -> yandex.cloud.spark.v1.ListClustersRequest
+	3,  // 15: yandex.cloud.spark.v1.ClusterService.Create:input_type -> yandex.cloud.spark.v1.CreateClusterRequest
+	5,  // 16: yandex.cloud.spark.v1.ClusterService.Update:input_type -> yandex.cloud.spark.v1.UpdateClusterRequest
+	7,  // 17: yandex.cloud.spark.v1.ClusterService.Delete:input_type -> yandex.cloud.spark.v1.DeleteClusterRequest
+	9,  // 18: yandex.cloud.spark.v1.ClusterService.Start:input_type -> yandex.cloud.spark.v1.StartClusterRequest
+	11, // 19: yandex.cloud.spark.v1.ClusterService.Stop:input_type -> yandex.cloud.spark.v1.StopClusterRequest
+	13, // 20: yandex.cloud.spark.v1.ClusterService.ListOperations:input_type -> yandex.cloud.spark.v1.ListClusterOperationsRequest
+	17, // 21: yandex.cloud.spark.v1.ClusterService.Get:output_type -> yandex.cloud.spark.v1.Cluster
+	2,  // 22: yandex.cloud.spark.v1.ClusterService.List:output_type -> yandex.cloud.spark.v1.ListClustersResponse
+	25, // 23: yandex.cloud.spark.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	25, // 24: yandex.cloud.spark.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	25, // 25: yandex.cloud.spark.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	25, // 26: yandex.cloud.spark.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	25, // 27: yandex.cloud.spark.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	14, // 28: yandex.cloud.spark.v1.ClusterService.ListOperations:output_type -> yandex.cloud.spark.v1.ListClusterOperationsResponse
+	21, // [21:29] is the sub-list for method output_type
+	13, // [13:21] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_spark_v1_cluster_service_proto_init() }
@@ -923,7 +1137,7 @@ func file_yandex_cloud_spark_v1_cluster_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc), len(file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

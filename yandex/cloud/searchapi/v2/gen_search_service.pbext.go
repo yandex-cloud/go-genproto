@@ -54,6 +54,10 @@ func (m *GenSearchRequest) SetSearchFilters(v []*GenSearchRequest_SearchFilter) 
 	m.SearchFilters = v
 }
 
+func (m *GenSearchRequest) SetSearchType(v SearchQuery_SearchType) {
+	m.SearchType = v
+}
+
 func (m *GenSearchRequest_SiteOption) SetSite(v []string) {
 	m.Site = v
 }

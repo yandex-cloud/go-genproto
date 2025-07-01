@@ -866,10 +866,8 @@ func (*NoAuth) Descriptor() ([]byte, []int) {
 }
 
 type ConnectionManagerConnection struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
-	SubnetId      string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -907,13 +905,6 @@ func (*ConnectionManagerConnection) Descriptor() ([]byte, []int) {
 func (x *ConnectionManagerConnection) GetConnectionId() string {
 	if x != nil {
 		return x.ConnectionId
-	}
-	return ""
-}
-
-func (x *ConnectionManagerConnection) GetSubnetId() string {
-	if x != nil {
-		return x.SubnetId
 	}
 	return ""
 }
@@ -961,10 +952,9 @@ const file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDesc = "" +
 	"jsonFields\x12J\n" +
 	"\x06fields\x18\x02 \x01(\v20.yandex.cloud.datatransfer.v1.endpoint.FieldListH\x00R\x06fieldsB\b\n" +
 	"\x06schema\"\b\n" +
-	"\x06NoAuth\"_\n" +
+	"\x06NoAuth\"B\n" +
 	"\x1bConnectionManagerConnection\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\x12\x1b\n" +
-	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId*h\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId*h\n" +
 	"\x13ObjectTransferStage\x12%\n" +
 	"!OBJECT_TRANSFER_STAGE_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vBEFORE_DATA\x10\x01\x12\x0e\n" +

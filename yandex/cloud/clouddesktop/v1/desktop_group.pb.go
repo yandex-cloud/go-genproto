@@ -154,7 +154,14 @@ type DesktopGroup struct {
 	// Data disk specification of the desktop group.
 	DataDiskSpec *DiskSpec `protobuf:"bytes,25,opt,name=data_disk_spec,json=dataDiskSpec,proto3" json:"data_disk_spec,omitempty"`
 	// Desktop group configuration.
-	GroupConfig   *DesktopGroupConfiguration `protobuf:"bytes,26,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
+	GroupConfig *DesktopGroupConfiguration `protobuf:"bytes,26,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
+	// Desktop group update policy.
+	//
+	// Types that are valid to be assigned to UpdatePolicy:
+	//
+	//	*DesktopGroup_AutoUpdatePolicy
+	//	*DesktopGroup_ManualUpdatePolicy
+	UpdatePolicy  isDesktopGroup_UpdatePolicy `protobuf_oneof:"update_policy"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -272,6 +279,47 @@ func (x *DesktopGroup) GetGroupConfig() *DesktopGroupConfiguration {
 	}
 	return nil
 }
+
+func (x *DesktopGroup) GetUpdatePolicy() isDesktopGroup_UpdatePolicy {
+	if x != nil {
+		return x.UpdatePolicy
+	}
+	return nil
+}
+
+func (x *DesktopGroup) GetAutoUpdatePolicy() *AutoUpdatePolicy {
+	if x != nil {
+		if x, ok := x.UpdatePolicy.(*DesktopGroup_AutoUpdatePolicy); ok {
+			return x.AutoUpdatePolicy
+		}
+	}
+	return nil
+}
+
+func (x *DesktopGroup) GetManualUpdatePolicy() *ManualUpdatePolicy {
+	if x != nil {
+		if x, ok := x.UpdatePolicy.(*DesktopGroup_ManualUpdatePolicy); ok {
+			return x.ManualUpdatePolicy
+		}
+	}
+	return nil
+}
+
+type isDesktopGroup_UpdatePolicy interface {
+	isDesktopGroup_UpdatePolicy()
+}
+
+type DesktopGroup_AutoUpdatePolicy struct {
+	AutoUpdatePolicy *AutoUpdatePolicy `protobuf:"bytes,27,opt,name=auto_update_policy,json=autoUpdatePolicy,proto3,oneof"`
+}
+
+type DesktopGroup_ManualUpdatePolicy struct {
+	ManualUpdatePolicy *ManualUpdatePolicy `protobuf:"bytes,28,opt,name=manual_update_policy,json=manualUpdatePolicy,proto3,oneof"`
+}
+
+func (*DesktopGroup_AutoUpdatePolicy) isDesktopGroup_UpdatePolicy() {}
+
+func (*DesktopGroup_ManualUpdatePolicy) isDesktopGroup_UpdatePolicy() {}
 
 type DesktopGroupConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -463,11 +511,83 @@ func (x *NetworkInterfaceSpec) GetSubnetIds() []string {
 	return nil
 }
 
+type ManualUpdatePolicy struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ManualUpdatePolicy) Reset() {
+	*x = ManualUpdatePolicy{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ManualUpdatePolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ManualUpdatePolicy) ProtoMessage() {}
+
+func (x *ManualUpdatePolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ManualUpdatePolicy.ProtoReflect.Descriptor instead.
+func (*ManualUpdatePolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDescGZIP(), []int{4}
+}
+
+type AutoUpdatePolicy struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AutoUpdatePolicy) Reset() {
+	*x = AutoUpdatePolicy{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AutoUpdatePolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AutoUpdatePolicy) ProtoMessage() {}
+
+func (x *AutoUpdatePolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AutoUpdatePolicy.ProtoReflect.Descriptor instead.
+func (*AutoUpdatePolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDescGZIP(), []int{5}
+}
+
 var File_yandex_cloud_clouddesktop_v1_desktop_group_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/clouddesktop/v1/desktop_group.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/clouddesktop/v1/disk.proto\"\xaa\a\n" +
+	"0yandex/cloud/clouddesktop/v1/desktop_group.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/clouddesktop/v1/disk.proto\"\x8f\t\n" +
 	"\fDesktopGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -481,7 +601,9 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\x06labels\x18\x17 \x03(\v2:.yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntryR\x06labels\x12P\n" +
 	"\x0eboot_disk_spec\x18\x18 \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fbootDiskSpec\x12P\n" +
 	"\x0edata_disk_spec\x18\x19 \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fdataDiskSpec\x12^\n" +
-	"\fgroup_config\x18\x1a \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x1a9\n" +
+	"\fgroup_config\x18\x1a \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x12b\n" +
+	"\x12auto_update_policy\x18\x1b \x01(\v22.yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicyH\x00R\x10autoUpdatePolicy\x12h\n" +
+	"\x14manual_update_policy\x18\x1c \x01(\v24.yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicyH\x00R\x12manualUpdatePolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"H\n" +
@@ -490,7 +612,8 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03J\x04\b\r\x10\x15J\x04\b\x05\x10\v\"\x8e\x03\n" +
+	"\bDELETING\x10\x03B\x15\n" +
+	"\rupdate_policy\x12\x04\xc0\xc11\x01J\x04\b\r\x10\x15J\x04\b\x05\x10\v\"\x8e\x03\n" +
 	"\x19DesktopGroupConfiguration\x127\n" +
 	"\x12min_ready_desktops\x18\x01 \x01(\x03B\t\xfa\xc71\x051-512R\x10minReadyDesktops\x129\n" +
 	"\x13max_desktops_amount\x18\x02 \x01(\x03B\t\xfa\xc71\x050-512R\x11maxDesktopsAmount\x12j\n" +
@@ -509,7 +632,9 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x121\n" +
 	"\n" +
-	"subnet_ids\x18\x02 \x03(\tB\x12\x82\xc81\x02>0\x8a\xc81\x04<=50\x90\xc81\x01R\tsubnetIdsBq\n" +
+	"subnet_ids\x18\x02 \x03(\tB\x12\x82\xc81\x02>0\x8a\xc81\x04<=50\x90\xc81\x01R\tsubnetIds\"\x14\n" +
+	"\x12ManualUpdatePolicy\"\x12\n" +
+	"\x10AutoUpdatePolicyBq\n" +
 	" yandex.cloud.api.clouddesktop.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/clouddesktop/v1;clouddesktopb\x06proto3"
 
 var (
@@ -525,7 +650,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDescGZIP() []byte 
 }
 
 var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_goTypes = []any{
 	(DesktopGroup_Status)(0),                   // 0: yandex.cloud.clouddesktop.v1.api.DesktopGroup.Status
 	(DesktopGroupConfiguration_DesktopType)(0), // 1: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopType
@@ -533,27 +658,31 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_goTypes = []any{
 	(*DesktopGroupConfiguration)(nil),          // 3: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
 	(*ResourcesSpec)(nil),                      // 4: yandex.cloud.clouddesktop.v1.api.ResourcesSpec
 	(*NetworkInterfaceSpec)(nil),               // 5: yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
-	nil,                                        // 6: yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntry
-	(*timestamppb.Timestamp)(nil),              // 7: google.protobuf.Timestamp
-	(*DiskSpec)(nil),                           // 8: yandex.cloud.clouddesktop.v1.api.DiskSpec
-	(*access.Subject)(nil),                     // 9: yandex.cloud.access.Subject
+	(*ManualUpdatePolicy)(nil),                 // 6: yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
+	(*AutoUpdatePolicy)(nil),                   // 7: yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
+	nil,                                        // 8: yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntry
+	(*timestamppb.Timestamp)(nil),              // 9: google.protobuf.Timestamp
+	(*DiskSpec)(nil),                           // 10: yandex.cloud.clouddesktop.v1.api.DiskSpec
+	(*access.Subject)(nil),                     // 11: yandex.cloud.access.Subject
 }
 var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_depIdxs = []int32{
-	7,  // 0: yandex.cloud.clouddesktop.v1.api.DesktopGroup.created_at:type_name -> google.protobuf.Timestamp
+	9,  // 0: yandex.cloud.clouddesktop.v1.api.DesktopGroup.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 1: yandex.cloud.clouddesktop.v1.api.DesktopGroup.status:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup.Status
 	4,  // 2: yandex.cloud.clouddesktop.v1.api.DesktopGroup.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
 	5,  // 3: yandex.cloud.clouddesktop.v1.api.DesktopGroup.network_interface_spec:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
-	6,  // 4: yandex.cloud.clouddesktop.v1.api.DesktopGroup.labels:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntry
-	8,  // 5: yandex.cloud.clouddesktop.v1.api.DesktopGroup.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	8,  // 6: yandex.cloud.clouddesktop.v1.api.DesktopGroup.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	8,  // 4: yandex.cloud.clouddesktop.v1.api.DesktopGroup.labels:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntry
+	10, // 5: yandex.cloud.clouddesktop.v1.api.DesktopGroup.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	10, // 6: yandex.cloud.clouddesktop.v1.api.DesktopGroup.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
 	3,  // 7: yandex.cloud.clouddesktop.v1.api.DesktopGroup.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
-	1,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.desktop_type:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopType
-	9,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.members:type_name -> yandex.cloud.access.Subject
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	7,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopGroup.auto_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
+	6,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopGroup.manual_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
+	1,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.desktop_type:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopType
+	11, // 11: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.members:type_name -> yandex.cloud.access.Subject
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_clouddesktop_v1_desktop_group_proto_init() }
@@ -562,13 +691,17 @@ func file_yandex_cloud_clouddesktop_v1_desktop_group_proto_init() {
 		return
 	}
 	file_yandex_cloud_clouddesktop_v1_disk_proto_init()
+	file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[0].OneofWrappers = []any{
+		(*DesktopGroup_AutoUpdatePolicy)(nil),
+		(*DesktopGroup_ManualUpdatePolicy)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc), len(file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

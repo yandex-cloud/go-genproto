@@ -130,9 +130,7 @@ type Subtitle struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subtitle.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Subtitle language in any of the following formats:
-	// * three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3
-	// * two-letter code according to ISO 639-1
+	// Subtitle language represented as a three-letter code according to ISO 639-2/T.
 	Language string `protobuf:"bytes,2,opt,name=language,proto3" json:"language,omitempty"`
 	// Subtitle caption to be displayed on screen during video playback.
 	Label string `protobuf:"bytes,3,opt,name=label,proto3" json:"label,omitempty"`

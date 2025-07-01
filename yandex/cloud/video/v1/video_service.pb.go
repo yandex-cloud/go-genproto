@@ -1969,9 +1969,7 @@ type VideoTranslationSettings_InputTrack struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Input audio track index (one-based).
 	TrackIndex int64 `protobuf:"varint,1,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
-	// Source track language in any of the following formats:
-	// * three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3
-	// * two-letter code according to ISO 639-1
+	// Source track language represented as a three-letter code according to ISO 639-2/T.
 	// Track language will be deduced automatically if not provided.
 	// In the latter case the deduction accuracy is not guaranteed.
 	// For better performance please do specify the source track language when possible.
@@ -2026,9 +2024,7 @@ func (x *VideoTranslationSettings_InputTrack) GetSrcLang() string {
 
 type VideoTranslationSettings_SubtitleTrack struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Target language in any of the following formats:
-	// * three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3
-	// * two-letter code according to ISO 639-1
+	// Target language represented as a three-letter code according to ISO 639-2/T.
 	DstLang string `protobuf:"bytes,1,opt,name=dst_lang,json=dstLang,proto3" json:"dst_lang,omitempty"`
 	// Track label to be displayed on the screen during video playback.
 	Label         string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
@@ -2082,9 +2078,7 @@ func (x *VideoTranslationSettings_SubtitleTrack) GetLabel() string {
 
 type VideoTranslationSettings_AudioTrack struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Target language in any of the following formats:
-	// * three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3
-	// * two-letter code according to ISO 639-1
+	// Target language represented as a three-letter code according to ISO 639-2/T.
 	DstLang string `protobuf:"bytes,1,opt,name=dst_lang,json=dstLang,proto3" json:"dst_lang,omitempty"`
 	// Track label to be displayed on the screen during video playback.
 	Label         string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
@@ -2185,7 +2179,7 @@ type VideoSummarizationSettings_InputTrack struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Input audio track index (one-based).
 	TrackIndex int64 `protobuf:"varint,1,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
-	// Source track language (three-letter code according to ISO 639-2/T, ISO 639-2/B, or ISO 639-3).
+	// Source track language represented as a three-letter code according to ISO 639-2/T.
 	// It will be deduced automatically if not provided.
 	// In the latter case the deduction accuracy is not guaranteed.
 	// For better performance please do specify the source track language when possible.
@@ -2314,37 +2308,37 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12!\n" +
 	"\fsubtitle_ids\x18\x03 \x03(\tR\vsubtitleIds\x12b\n" +
 	"\x14translation_settings\x18\x04 \x01(\v2/.yandex.cloud.video.v1.VideoTranslationSettingsR\x13translationSettings\x12h\n" +
-	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\"\xae\x05\n" +
+	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\"\xaf\x06\n" +
 	"\x18VideoTranslationSettings\x12X\n" +
 	"\x06tracks\x18\x01 \x03(\v2@.yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrackR\x06tracks\x1a\xa4\x02\n" +
 	"\x10TranslationTrack\x12a\n" +
 	"\vinput_track\x18\x01 \x01(\v2:.yandex.cloud.video.v1.VideoTranslationSettings.InputTrackB\x04\xe8\xc71\x01R\n" +
 	"inputTrack\x12[\n" +
 	"\tsubtitles\x18\x02 \x03(\v2=.yandex.cloud.video.v1.VideoTranslationSettings.SubtitleTrackR\tsubtitles\x12P\n" +
-	"\x05audio\x18\x03 \x03(\v2:.yandex.cloud.video.v1.VideoTranslationSettings.AudioTrackR\x05audio\x1aZ\n" +
+	"\x05audio\x18\x03 \x03(\v2:.yandex.cloud.video.v1.VideoTranslationSettings.AudioTrackR\x05audio\x1a\x86\x01\n" +
 	"\n" +
 	"InputTrack\x12(\n" +
 	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
-	"trackIndex\x12\"\n" +
-	"\bsrc_lang\x18\x02 \x01(\tB\a\x8a\xc81\x03<=3R\asrcLang\x1a[\n" +
-	"\rSubtitleTrack\x12&\n" +
-	"\bdst_lang\x18\x01 \x01(\tB\v\xe8\xc71\x01\x8a\xc81\x032-3R\adstLang\x12\"\n" +
-	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\x1aX\n" +
+	"trackIndex\x12N\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB3\xf2\xc71(|deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x030,3R\asrcLang\x1a\x84\x01\n" +
+	"\rSubtitleTrack\x12O\n" +
+	"\bdst_lang\x18\x01 \x01(\tB4\xe8\xc71\x01\xf2\xc71'deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
+	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\x1a\x81\x01\n" +
 	"\n" +
-	"AudioTrack\x12&\n" +
-	"\bdst_lang\x18\x01 \x01(\tB\v\xe8\xc71\x01\x8a\xc81\x032-3R\adstLang\x12\"\n" +
-	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\"\x85\x03\n" +
+	"AudioTrack\x12O\n" +
+	"\bdst_lang\x18\x01 \x01(\tB4\xe8\xc71\x01\xf2\xc71'deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
+	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\"\xb2\x03\n" +
 	"\x1aVideoSummarizationSettings\x12\\\n" +
 	"\x06tracks\x18\x02 \x03(\v2D.yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrackR\x06tracks\x12,\n" +
 	"\x12process_all_tracks\x18\x03 \x01(\bR\x10processAllTracks\x1ay\n" +
 	"\x12SummarizationTrack\x12c\n" +
 	"\vinput_track\x18\x01 \x01(\v2<.yandex.cloud.video.v1.VideoSummarizationSettings.InputTrackB\x04\xe8\xc71\x01R\n" +
-	"inputTrack\x1aZ\n" +
+	"inputTrack\x1a\x86\x01\n" +
 	"\n" +
 	"InputTrack\x12(\n" +
 	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
-	"trackIndex\x12\"\n" +
-	"\bsrc_lang\x18\x02 \x01(\tB\a\x8a\xc81\x03<=3R\asrcLangJ\x04\b\x01\x10\x02\"3\n" +
+	"trackIndex\x12N\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB3\xf2\xc71(|deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x030,3R\asrcLangJ\x04\b\x01\x10\x02\"3\n" +
 	"\x16TranscodeVideoMetadata\x12\x19\n" +
 	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"=\n" +
 	"\x12DeleteVideoRequest\x12'\n" +

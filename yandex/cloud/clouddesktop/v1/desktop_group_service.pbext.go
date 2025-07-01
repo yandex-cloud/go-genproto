@@ -91,6 +91,12 @@ func (m *ListDesktopGroupOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+type UpdateDesktopGroupRequest_UpdatePolicy = isUpdateDesktopGroupRequest_UpdatePolicy
+
+func (m *UpdateDesktopGroupRequest) SetUpdatePolicy(v UpdateDesktopGroupRequest_UpdatePolicy) {
+	m.UpdatePolicy = v
+}
+
 func (m *UpdateDesktopGroupRequest) SetDesktopGroupId(v string) {
 	m.DesktopGroupId = v
 }
@@ -129,6 +135,18 @@ func (m *UpdateDesktopGroupRequest) SetBootDiskSpec(v *DiskSpec) {
 
 func (m *UpdateDesktopGroupRequest) SetDataDiskSpec(v *DiskSpec) {
 	m.DataDiskSpec = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetAutoUpdatePolicy(v *AutoUpdatePolicy) {
+	m.UpdatePolicy = &UpdateDesktopGroupRequest_AutoUpdatePolicy{
+		AutoUpdatePolicy: v,
+	}
+}
+
+func (m *UpdateDesktopGroupRequest) SetManualUpdatePolicy(v *ManualUpdatePolicy) {
+	m.UpdatePolicy = &UpdateDesktopGroupRequest_ManualUpdatePolicy{
+		ManualUpdatePolicy: v,
+	}
 }
 
 func (m *CreateDesktopGroupRequest) SetFolderId(v string) {

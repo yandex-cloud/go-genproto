@@ -95,6 +95,7 @@ type MongoConnectionOptions struct {
 	//
 	//	*MongoConnectionOptions_MdbClusterId
 	//	*MongoConnectionOptions_OnPremise
+	//	*MongoConnectionOptions_ConnectionManagerConnection
 	Address isMongoConnectionOptions_Address `protobuf_oneof:"address"`
 	// User name
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
@@ -161,6 +162,15 @@ func (x *MongoConnectionOptions) GetOnPremise() *OnPremiseMongo {
 	return nil
 }
 
+func (x *MongoConnectionOptions) GetConnectionManagerConnection() *MongoConnectionManagerConnection {
+	if x != nil {
+		if x, ok := x.Address.(*MongoConnectionOptions_ConnectionManagerConnection); ok {
+			return x.ConnectionManagerConnection
+		}
+	}
+	return nil
+}
+
 func (x *MongoConnectionOptions) GetUser() string {
 	if x != nil {
 		return x.User
@@ -194,9 +204,15 @@ type MongoConnectionOptions_OnPremise struct {
 	OnPremise *OnPremiseMongo `protobuf:"bytes,2,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
+type MongoConnectionOptions_ConnectionManagerConnection struct {
+	ConnectionManagerConnection *MongoConnectionManagerConnection `protobuf:"bytes,6,opt,name=connection_manager_connection,json=connectionManagerConnection,proto3,oneof"`
+}
+
 func (*MongoConnectionOptions_MdbClusterId) isMongoConnectionOptions_Address() {}
 
 func (*MongoConnectionOptions_OnPremise) isMongoConnectionOptions_Address() {}
+
+func (*MongoConnectionOptions_ConnectionManagerConnection) isMongoConnectionOptions_Address() {}
 
 type MongoConnection struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -484,6 +500,59 @@ func (x *MongoTarget) GetSecurityGroups() []string {
 	return nil
 }
 
+type MongoConnectionManagerConnection struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	// Used only for on-premise connections
+	ReplicaSet    string `protobuf:"bytes,2,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MongoConnectionManagerConnection) Reset() {
+	*x = MongoConnectionManagerConnection{}
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongoConnectionManagerConnection) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongoConnectionManagerConnection) ProtoMessage() {}
+
+func (x *MongoConnectionManagerConnection) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongoConnectionManagerConnection.ProtoReflect.Descriptor instead.
+func (*MongoConnectionManagerConnection) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *MongoConnectionManagerConnection) GetConnectionId() string {
+	if x != nil {
+		return x.ConnectionId
+	}
+	return ""
+}
+
+func (x *MongoConnectionManagerConnection) GetReplicaSet() string {
+	if x != nil {
+		return x.ReplicaSet
+	}
+	return ""
+}
+
 var File_yandex_cloud_datatransfer_v1_endpoint_mongo_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDesc = "" +
@@ -494,11 +563,12 @@ const file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDesc = "" +
 	"\x04port\x18\x02 \x01(\x03R\x04port\x12\x1f\n" +
 	"\vreplica_set\x18\x05 \x01(\tR\n" +
 	"replicaSet\x12I\n" +
-	"\btls_mode\x18\x06 \x01(\v2..yandex.cloud.datatransfer.v1.endpoint.TLSModeR\atlsModeJ\x04\b\x03\x10\x05\"\xa3\x02\n" +
+	"\btls_mode\x18\x06 \x01(\v2..yandex.cloud.datatransfer.v1.endpoint.TLSModeR\atlsModeJ\x04\b\x03\x10\x05\"\xb3\x03\n" +
 	"\x16MongoConnectionOptions\x12&\n" +
 	"\x0emdb_cluster_id\x18\x01 \x01(\tH\x00R\fmdbClusterId\x12V\n" +
 	"\n" +
-	"on_premise\x18\x02 \x01(\v25.yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongoH\x00R\tonPremise\x12\x12\n" +
+	"on_premise\x18\x02 \x01(\v25.yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongoH\x00R\tonPremise\x12\x8d\x01\n" +
+	"\x1dconnection_manager_connection\x18\x06 \x01(\v2G.yandex.cloud.datatransfer.v1.endpoint.MongoConnectionManagerConnectionH\x00R\x1bconnectionManagerConnection\x12\x12\n" +
 	"\x04user\x18\x03 \x01(\tR\x04user\x12I\n" +
 	"\bpassword\x18\x04 \x01(\v2-.yandex.cloud.datatransfer.v1.endpoint.SecretR\bpassword\x12\x1f\n" +
 	"\vauth_source\x18\x05 \x01(\tR\n" +
@@ -527,7 +597,11 @@ const file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDesc = "" +
 	"\bdatabase\x18\x02 \x01(\tR\bdatabase\x12[\n" +
 	"\x0ecleanup_policy\x18\x06 \x01(\x0e24.yandex.cloud.datatransfer.v1.endpoint.CleanupPolicyR\rcleanupPolicy\x12\x1b\n" +
 	"\tsubnet_id\x18\a \x01(\tR\bsubnetId\x12'\n" +
-	"\x0fsecurity_groups\x18\b \x03(\tR\x0esecurityGroupsJ\x04\b\x03\x10\x06B\xa7\x01\n" +
+	"\x0fsecurity_groups\x18\b \x03(\tR\x0esecurityGroupsJ\x04\b\x03\x10\x06\"h\n" +
+	" MongoConnectionManagerConnection\x12#\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\x12\x1f\n" +
+	"\vreplica_set\x18\x02 \x01(\tR\n" +
+	"replicaSetB\xa7\x01\n" +
 	")yandex.cloud.api.datatransfer.v1.endpointZRgithub.com/yandex-cloud/go-genproto/yandex/cloud/datatransfer/v1/endpoint;endpoint\xaa\x02%Yandex.Cloud.Datatransfer.V1.EndPointb\x06proto3"
 
 var (
@@ -542,33 +616,35 @@ func file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDescGZIP() []byte
 	return file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDescData
 }
 
-var file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_goTypes = []any{
-	(*OnPremiseMongo)(nil),         // 0: yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongo
-	(*MongoConnectionOptions)(nil), // 1: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions
-	(*MongoConnection)(nil),        // 2: yandex.cloud.datatransfer.v1.endpoint.MongoConnection
-	(*MongoCollection)(nil),        // 3: yandex.cloud.datatransfer.v1.endpoint.MongoCollection
-	(*MongoSource)(nil),            // 4: yandex.cloud.datatransfer.v1.endpoint.MongoSource
-	(*MongoTarget)(nil),            // 5: yandex.cloud.datatransfer.v1.endpoint.MongoTarget
-	(*TLSMode)(nil),                // 6: yandex.cloud.datatransfer.v1.endpoint.TLSMode
-	(*Secret)(nil),                 // 7: yandex.cloud.datatransfer.v1.endpoint.Secret
-	(CleanupPolicy)(0),             // 8: yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy
+	(*OnPremiseMongo)(nil),                   // 0: yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongo
+	(*MongoConnectionOptions)(nil),           // 1: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions
+	(*MongoConnection)(nil),                  // 2: yandex.cloud.datatransfer.v1.endpoint.MongoConnection
+	(*MongoCollection)(nil),                  // 3: yandex.cloud.datatransfer.v1.endpoint.MongoCollection
+	(*MongoSource)(nil),                      // 4: yandex.cloud.datatransfer.v1.endpoint.MongoSource
+	(*MongoTarget)(nil),                      // 5: yandex.cloud.datatransfer.v1.endpoint.MongoTarget
+	(*MongoConnectionManagerConnection)(nil), // 6: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionManagerConnection
+	(*TLSMode)(nil),                          // 7: yandex.cloud.datatransfer.v1.endpoint.TLSMode
+	(*Secret)(nil),                           // 8: yandex.cloud.datatransfer.v1.endpoint.Secret
+	(CleanupPolicy)(0),                       // 9: yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy
 }
 var file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_depIdxs = []int32{
-	6, // 0: yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongo.tls_mode:type_name -> yandex.cloud.datatransfer.v1.endpoint.TLSMode
-	0, // 1: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions.on_premise:type_name -> yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongo
-	7, // 2: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions.password:type_name -> yandex.cloud.datatransfer.v1.endpoint.Secret
-	1, // 3: yandex.cloud.datatransfer.v1.endpoint.MongoConnection.connection_options:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions
-	2, // 4: yandex.cloud.datatransfer.v1.endpoint.MongoSource.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnection
-	3, // 5: yandex.cloud.datatransfer.v1.endpoint.MongoSource.collections:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoCollection
-	3, // 6: yandex.cloud.datatransfer.v1.endpoint.MongoSource.excluded_collections:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoCollection
-	2, // 7: yandex.cloud.datatransfer.v1.endpoint.MongoTarget.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnection
-	8, // 8: yandex.cloud.datatransfer.v1.endpoint.MongoTarget.cleanup_policy:type_name -> yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	7,  // 0: yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongo.tls_mode:type_name -> yandex.cloud.datatransfer.v1.endpoint.TLSMode
+	0,  // 1: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions.on_premise:type_name -> yandex.cloud.datatransfer.v1.endpoint.OnPremiseMongo
+	6,  // 2: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions.connection_manager_connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnectionManagerConnection
+	8,  // 3: yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions.password:type_name -> yandex.cloud.datatransfer.v1.endpoint.Secret
+	1,  // 4: yandex.cloud.datatransfer.v1.endpoint.MongoConnection.connection_options:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnectionOptions
+	2,  // 5: yandex.cloud.datatransfer.v1.endpoint.MongoSource.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnection
+	3,  // 6: yandex.cloud.datatransfer.v1.endpoint.MongoSource.collections:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoCollection
+	3,  // 7: yandex.cloud.datatransfer.v1.endpoint.MongoSource.excluded_collections:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoCollection
+	2,  // 8: yandex.cloud.datatransfer.v1.endpoint.MongoTarget.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.MongoConnection
+	9,  // 9: yandex.cloud.datatransfer.v1.endpoint.MongoTarget.cleanup_policy:type_name -> yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_init() }
@@ -580,6 +656,7 @@ func file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_init() {
 	file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_msgTypes[1].OneofWrappers = []any{
 		(*MongoConnectionOptions_MdbClusterId)(nil),
 		(*MongoConnectionOptions_OnPremise)(nil),
+		(*MongoConnectionOptions_ConnectionManagerConnection)(nil),
 	}
 	file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_msgTypes[2].OneofWrappers = []any{
 		(*MongoConnection_ConnectionOptions)(nil),
@@ -590,7 +667,7 @@ func file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDesc), len(file_yandex_cloud_datatransfer_v1_endpoint_mongo_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

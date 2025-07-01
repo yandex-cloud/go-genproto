@@ -36,6 +36,12 @@ func (m *MongoConnectionOptions) SetOnPremise(v *OnPremiseMongo) {
 	}
 }
 
+func (m *MongoConnectionOptions) SetConnectionManagerConnection(v *MongoConnectionManagerConnection) {
+	m.Address = &MongoConnectionOptions_ConnectionManagerConnection{
+		ConnectionManagerConnection: v,
+	}
+}
+
 func (m *MongoConnectionOptions) SetUser(v string) {
 	m.User = v
 }
@@ -110,4 +116,12 @@ func (m *MongoTarget) SetSubnetId(v string) {
 
 func (m *MongoTarget) SetSecurityGroups(v []string) {
 	m.SecurityGroups = v
+}
+
+func (m *MongoConnectionManagerConnection) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
+func (m *MongoConnectionManagerConnection) SetReplicaSet(v string) {
+	m.ReplicaSet = v
 }

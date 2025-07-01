@@ -456,7 +456,7 @@ type ListTransfersRequest struct {
 	// to
 	// fetch the next page. Defaults to `100` if not specified. The maximum allowed
 	// value
-	// for this field is `500`.
+	// for this field is `1000`.
 	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Opaque value identifying the transfers page to be fetched. Should be empty in
 	// the first `ListTransfersRequest`. Subsequent requests should have this field

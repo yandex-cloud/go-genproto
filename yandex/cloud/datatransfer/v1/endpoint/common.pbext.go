@@ -129,7 +129,3 @@ func (m *DataSchema) SetFields(v *FieldList) {
 func (m *ConnectionManagerConnection) SetConnectionId(v string) {
 	m.ConnectionId = v
 }
-
-func (m *ConnectionManagerConnection) SetSubnetId(v string) {
-	m.SubnetId = v
-}

@@ -87,6 +87,8 @@ const (
 	HBARule_LDAP HBARule_AuthMethod = 2
 	// Disable authentication
 	HBARule_REJECT HBARule_AuthMethod = 3
+	// Perform authentication with IAM token
+	HBARule_IAM HBARule_AuthMethod = 4
 )
 
 // Enum value maps for HBARule_AuthMethod.
@@ -96,12 +98,14 @@ var (
 		1: "MD5",
 		2: "LDAP",
 		3: "REJECT",
+		4: "IAM",
 	}
 	HBARule_AuthMethod_value = map[string]int32{
 		"AUTH_METHOD_UNSPECIFIED": 0,
 		"MD5":                     1,
 		"LDAP":                    2,
 		"REJECT":                  3,
+		"IAM":                     4,
 	}
 )
 
@@ -226,7 +230,7 @@ var File_yandex_cloud_mdb_greenplum_v1_hba_rule_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_greenplum_v1_hba_rule_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/greenplum/v1/hba_rule.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xe4\x03\n" +
+	",yandex/cloud/mdb/greenplum/v1/hba_rule.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xed\x03\n" +
 	"\aHBARule\x12&\n" +
 	"\bpriority\x18\x01 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpriority\x12^\n" +
@@ -240,14 +244,15 @@ const file_yandex_cloud_mdb_greenplum_v1_hba_rule_proto_rawDesc = "" +
 	"\x1bCONNECTION_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04HOST\x10\x01\x12\v\n" +
 	"\aHOSTSSL\x10\x02\x12\r\n" +
-	"\tHOSTNOSSL\x10\x03\"H\n" +
+	"\tHOSTNOSSL\x10\x03\"Q\n" +
 	"\n" +
 	"AuthMethod\x12\x1b\n" +
 	"\x17AUTH_METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03MD5\x10\x01\x12\b\n" +
 	"\x04LDAP\x10\x02\x12\n" +
 	"\n" +
-	"\x06REJECT\x10\x03Bp\n" +
+	"\x06REJECT\x10\x03\x12\a\n" +
+	"\x03IAM\x10\x04Bp\n" +
 	"!yandex.cloud.api.mdb.greenplum.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/greenplum/v1;greenplumb\x06proto3"
 
 var (

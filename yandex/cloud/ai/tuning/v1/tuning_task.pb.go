@@ -34,6 +34,7 @@ const (
 	TuningTask_FAILED             TuningTask_Status = 5
 	TuningTask_CANCELED           TuningTask_Status = 6
 	TuningTask_DRAFT              TuningTask_Status = 7
+	TuningTask_ARCHIVED           TuningTask_Status = 8
 )
 
 // Enum value maps for TuningTask_Status.
@@ -47,6 +48,7 @@ var (
 		5: "FAILED",
 		6: "CANCELED",
 		7: "DRAFT",
+		8: "ARCHIVED",
 	}
 	TuningTask_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
@@ -57,6 +59,7 @@ var (
 		"FAILED":             5,
 		"CANCELED":           6,
 		"DRAFT":              7,
+		"ARCHIVED":           8,
 	}
 )
 
@@ -231,7 +234,7 @@ var File_yandex_cloud_ai_tuning_v1_tuning_task_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_tuning_v1_tuning_task_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/ai/tuning/v1/tuning_task.proto\x12\x19yandex.cloud.ai.tuning.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xb1\x06\n" +
+	"+yandex/cloud/ai/tuning/v1/tuning_task.proto\x12\x19yandex.cloud.ai.tuning.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc0\x06\n" +
 	"\n" +
 	"TuningTask\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12!\n" +
@@ -254,7 +257,7 @@ const file_yandex_cloud_ai_tuning_v1_tuning_task_proto_rawDesc = "" +
 	"\x06labels\x18\x0e \x03(\v21.yandex.cloud.ai.tuning.v1.TuningTask.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x7f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8d\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aCREATED\x10\x01\x12\v\n" +
@@ -264,7 +267,8 @@ const file_yandex_cloud_ai_tuning_v1_tuning_task_proto_rawDesc = "" +
 	"\n" +
 	"\x06FAILED\x10\x05\x12\f\n" +
 	"\bCANCELED\x10\x06\x12\t\n" +
-	"\x05DRAFT\x10\aJ\x04\b\x02\x10\x03Bc\n" +
+	"\x05DRAFT\x10\a\x12\f\n" +
+	"\bARCHIVED\x10\bJ\x04\b\x02\x10\x03Bc\n" +
 	"\x1dyandex.cloud.api.ai.tuning.v1ZBgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/tuning/v1;fomob\x06proto3"
 
 var (

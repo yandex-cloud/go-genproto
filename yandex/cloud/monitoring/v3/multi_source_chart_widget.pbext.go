@@ -226,6 +226,12 @@ func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetTh
 	}
 }
 
+func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetConstant(v *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) {
+	m.Scheme = &MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Constant{
+		Constant: v,
+	}
+}
+
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetGreenValue(v string) {
 	m.GreenValue = v
 }
@@ -240,6 +246,10 @@ func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Gradie
 
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_GradientColorScheme) SetVioletValue(v string) {
 	m.VioletValue = v
+}
+
+func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ConstantColorScheme) SetColor(v string) {
+	m.Color = v
 }
 
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme) SetAggregation(v MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme_Aggregation) {
@@ -316,6 +326,14 @@ func (m *MultiSourceChartWidget_SeriesOverrides) SetSettings(v *MultiSourceChart
 	m.Settings = v
 }
 
+func (m *MultiSourceChartWidget_SeriesOverrides) SetOverrideName(v string) {
+	m.OverrideName = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides) SetMatcher(v *MultiSourceChartWidget_OverrideMatcher) {
+	m.Matcher = v
+}
+
 func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetName(v string) {
 	m.Name = v
 }
@@ -338,6 +356,60 @@ func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetGrowD
 
 func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetYaxisPosition(v MultiSourceChartWidget_SeriesOverrides_YaxisPosition) {
 	m.YaxisPosition = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineWidth(v int64) {
+	m.LineWidth = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineStyle(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) {
+	m.LineStyle = v
+}
+
+type MultiSourceChartWidget_OverrideMatcher_Type = isMultiSourceChartWidget_OverrideMatcher_Type
+
+func (m *MultiSourceChartWidget_OverrideMatcher) SetType(v MultiSourceChartWidget_OverrideMatcher_Type) {
+	m.Type = v
+}
+
+func (m *MultiSourceChartWidget_OverrideMatcher) SetQuery(v *MultiSourceChartWidget_QueryMatcher) {
+	m.Type = &MultiSourceChartWidget_OverrideMatcher_Query{
+		Query: v,
+	}
+}
+
+func (m *MultiSourceChartWidget_OverrideMatcher) SetLine(v *MultiSourceChartWidget_LineMatcher) {
+	m.Type = &MultiSourceChartWidget_OverrideMatcher_Line{
+		Line: v,
+	}
+}
+
+func (m *MultiSourceChartWidget_OverrideMatcher) SetRegexp(v *MultiSourceChartWidget_RegExpMatcher) {
+	m.Type = &MultiSourceChartWidget_OverrideMatcher_Regexp{
+		Regexp: v,
+	}
+}
+
+func (m *MultiSourceChartWidget_OverrideMatcher) SetValues(v *MultiSourceChartWidget_ValueMatcher) {
+	m.Type = &MultiSourceChartWidget_OverrideMatcher_Values{
+		Values: v,
+	}
+}
+
+func (m *MultiSourceChartWidget_QueryMatcher) SetNames(v []string) {
+	m.Names = v
+}
+
+func (m *MultiSourceChartWidget_LineMatcher) SetLineIds(v []string) {
+	m.LineIds = v
+}
+
+func (m *MultiSourceChartWidget_RegExpMatcher) SetRegExp(v string) {
+	m.RegExp = v
+}
+
+func (m *MultiSourceChartWidget_ValueMatcher) SetValueType(v MultiSourceChartWidget_ValuesType) {
+	m.ValueType = v
 }
 
 func (m *MultiSourceChartWidget_NameHidingSettings) SetPositive(v bool) {

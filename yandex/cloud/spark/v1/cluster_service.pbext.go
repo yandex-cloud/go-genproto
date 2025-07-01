@@ -4,6 +4,7 @@ package spark
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -75,6 +76,54 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *UpdateClusterRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateClusterRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateClusterRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateClusterRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateClusterRequest) SetConfigSpec(v *UpdateClusterConfigSpec) {
+	m.ConfigSpec = v
+}
+
+func (m *UpdateClusterRequest) SetNetworkSpec(v *UpdateNetworkConfigSpec) {
+	m.NetworkSpec = v
+}
+
+func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
+func (m *UpdateClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *UpdateClusterRequest) SetLogging(v *LoggingConfig) {
+	m.Logging = v
+}
+
+func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
+func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 

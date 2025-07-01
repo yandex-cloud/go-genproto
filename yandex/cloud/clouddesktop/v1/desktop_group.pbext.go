@@ -7,6 +7,12 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+type DesktopGroup_UpdatePolicy = isDesktopGroup_UpdatePolicy
+
+func (m *DesktopGroup) SetUpdatePolicy(v DesktopGroup_UpdatePolicy) {
+	m.UpdatePolicy = v
+}
+
 func (m *DesktopGroup) SetId(v string) {
 	m.Id = v
 }
@@ -53,6 +59,18 @@ func (m *DesktopGroup) SetDataDiskSpec(v *DiskSpec) {
 
 func (m *DesktopGroup) SetGroupConfig(v *DesktopGroupConfiguration) {
 	m.GroupConfig = v
+}
+
+func (m *DesktopGroup) SetAutoUpdatePolicy(v *AutoUpdatePolicy) {
+	m.UpdatePolicy = &DesktopGroup_AutoUpdatePolicy{
+		AutoUpdatePolicy: v,
+	}
+}
+
+func (m *DesktopGroup) SetManualUpdatePolicy(v *ManualUpdatePolicy) {
+	m.UpdatePolicy = &DesktopGroup_ManualUpdatePolicy{
+		ManualUpdatePolicy: v,
+	}
 }
 
 func (m *DesktopGroupConfiguration) SetMinReadyDesktops(v int64) {

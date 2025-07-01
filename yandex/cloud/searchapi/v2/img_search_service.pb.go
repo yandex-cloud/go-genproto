@@ -507,7 +507,9 @@ type ImageSearchByImageRequest struct {
 	//	*ImageSearchByImageRequest_Id
 	Image isImageSearchByImageRequest_Image `protobuf_oneof:"image"`
 	// The number of a requested page with search results.
-	Page          int64 `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	Page int64 `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	// Rule for filtering search results and determines whether any documents should be excluded.
+	FamilyMode    SearchQuery_FamilyMode `protobuf:"varint,7,opt,name=family_mode,json=familyMode,proto3,enum=yandex.cloud.searchapi.v2.SearchQuery_FamilyMode" json:"family_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -595,6 +597,13 @@ func (x *ImageSearchByImageRequest) GetPage() int64 {
 		return x.Page
 	}
 	return 0
+}
+
+func (x *ImageSearchByImageRequest) GetFamilyMode() SearchQuery_FamilyMode {
+	if x != nil {
+		return x.FamilyMode
+	}
+	return SearchQuery_FAMILY_MODE_UNSPECIFIED
 }
 
 type isImageSearchByImageRequest_Image interface {
@@ -856,7 +865,7 @@ const file_yandex_cloud_searchapi_v2_img_search_service_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x06 \x01(\tB\t\x8a\xc81\x05<=200R\tuserAgent\"6\n" +
 	"\x13ImageSearchResponse\x12\x1f\n" +
-	"\braw_data\x18\x01 \x01(\fB\x04\xe8\xc71\x01R\arawData\"\xf7\x01\n" +
+	"\braw_data\x18\x01 \x01(\fB\x04\xe8\xc71\x01R\arawData\"\xcb\x02\n" +
 	"\x19ImageSearchByImageRequest\x12\x1e\n" +
 	"\x04site\x18\x01 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\x04site\x12%\n" +
@@ -864,7 +873,9 @@ const file_yandex_cloud_searchapi_v2_img_search_service_proto_rawDesc = "" +
 	"\x03url\x18\x03 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1024H\x00R\x03url\x12'\n" +
 	"\x04data\x18\x04 \x01(\fB\x11\xe8\xc71\x01\x8a\xc81\t<=3145728H\x00R\x04data\x12 \n" +
 	"\x02id\x18\x05 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1024H\x00R\x02id\x12\x1b\n" +
-	"\x04page\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\x04pageB\a\n" +
+	"\x04page\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\x04page\x12R\n" +
+	"\vfamily_mode\x18\a \x01(\x0e21.yandex.cloud.searchapi.v2.SearchQuery.FamilyModeR\n" +
+	"familyModeB\a\n" +
 	"\x05image\"\xb4\x03\n" +
 	"\x1aImageSearchByImageResponse\x12W\n" +
 	"\x06images\x18\x01 \x03(\v2?.yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfoR\x06images\x12\x12\n" +
@@ -912,6 +923,7 @@ var file_yandex_cloud_searchapi_v2_img_search_service_proto_goTypes = []any{
 	(*ImageSearchByImageResponse)(nil),           // 8: yandex.cloud.searchapi.v2.ImageSearchByImageResponse
 	(*ImageSearchByImageResponse_ImageInfo)(nil), // 9: yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfo
 	(*SearchQuery)(nil),                          // 10: yandex.cloud.searchapi.v2.SearchQuery
+	(SearchQuery_FamilyMode)(0),                  // 11: yandex.cloud.searchapi.v2.SearchQuery.FamilyMode
 }
 var file_yandex_cloud_searchapi_v2_img_search_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.searchapi.v2.ImageSpec.format:type_name -> yandex.cloud.searchapi.v2.ImageSpec.ImageFormat
@@ -920,17 +932,18 @@ var file_yandex_cloud_searchapi_v2_img_search_service_proto_depIdxs = []int32{
 	3,  // 3: yandex.cloud.searchapi.v2.ImageSpec.color:type_name -> yandex.cloud.searchapi.v2.ImageSpec.ImageColor
 	10, // 4: yandex.cloud.searchapi.v2.ImageSearchRequest.query:type_name -> yandex.cloud.searchapi.v2.SearchQuery
 	4,  // 5: yandex.cloud.searchapi.v2.ImageSearchRequest.image_spec:type_name -> yandex.cloud.searchapi.v2.ImageSpec
-	9,  // 6: yandex.cloud.searchapi.v2.ImageSearchByImageResponse.images:type_name -> yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfo
-	0,  // 7: yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfo.format:type_name -> yandex.cloud.searchapi.v2.ImageSpec.ImageFormat
-	5,  // 8: yandex.cloud.searchapi.v2.ImageSearchService.Search:input_type -> yandex.cloud.searchapi.v2.ImageSearchRequest
-	7,  // 9: yandex.cloud.searchapi.v2.ImageSearchService.SearchByImage:input_type -> yandex.cloud.searchapi.v2.ImageSearchByImageRequest
-	6,  // 10: yandex.cloud.searchapi.v2.ImageSearchService.Search:output_type -> yandex.cloud.searchapi.v2.ImageSearchResponse
-	8,  // 11: yandex.cloud.searchapi.v2.ImageSearchService.SearchByImage:output_type -> yandex.cloud.searchapi.v2.ImageSearchByImageResponse
-	10, // [10:12] is the sub-list for method output_type
-	8,  // [8:10] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	11, // 6: yandex.cloud.searchapi.v2.ImageSearchByImageRequest.family_mode:type_name -> yandex.cloud.searchapi.v2.SearchQuery.FamilyMode
+	9,  // 7: yandex.cloud.searchapi.v2.ImageSearchByImageResponse.images:type_name -> yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfo
+	0,  // 8: yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfo.format:type_name -> yandex.cloud.searchapi.v2.ImageSpec.ImageFormat
+	5,  // 9: yandex.cloud.searchapi.v2.ImageSearchService.Search:input_type -> yandex.cloud.searchapi.v2.ImageSearchRequest
+	7,  // 10: yandex.cloud.searchapi.v2.ImageSearchService.SearchByImage:input_type -> yandex.cloud.searchapi.v2.ImageSearchByImageRequest
+	6,  // 11: yandex.cloud.searchapi.v2.ImageSearchService.Search:output_type -> yandex.cloud.searchapi.v2.ImageSearchResponse
+	8,  // 12: yandex.cloud.searchapi.v2.ImageSearchService.SearchByImage:output_type -> yandex.cloud.searchapi.v2.ImageSearchByImageResponse
+	11, // [11:13] is the sub-list for method output_type
+	9,  // [9:11] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_img_search_service_proto_init() }

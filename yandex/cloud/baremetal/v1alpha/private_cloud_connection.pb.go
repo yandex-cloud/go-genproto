@@ -102,6 +102,8 @@ type PrivateCloudConnection struct {
 	VrfId string `protobuf:"bytes,7,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
 	// Status of the private cloud connection.
 	Status PrivateCloudConnection_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.baremetal.v1alpha.PrivateCloudConnection_Status" json:"status,omitempty"`
+	// Name of the private cloud connection.
+	Name string `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
 	// Creation timestamp.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -180,6 +182,13 @@ func (x *PrivateCloudConnection) GetStatus() PrivateCloudConnection_Status {
 	return PrivateCloudConnection_STATUS_UNSPECIFIED
 }
 
+func (x *PrivateCloudConnection) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 func (x *PrivateCloudConnection) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -191,14 +200,15 @@ var File_yandex_cloud_baremetal_v1alpha_private_cloud_connection_proto protorefl
 
 const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_proto_rawDesc = "" +
 	"\n" +
-	"=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x03\n" +
+	"=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\x03\n" +
 	"\x16PrivateCloudConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x19\n" +
 	"\bcloud_id\x18\x05 \x01(\tR\acloudId\x12.\n" +
 	"\x13routing_instance_id\x18\x06 \x01(\tR\x11routingInstanceId\x12\x15\n" +
 	"\x06vrf_id\x18\a \x01(\tR\x05vrfId\x12U\n" +
-	"\x06status\x18\b \x01(\x0e2=.yandex.cloud.baremetal.v1alpha.PrivateCloudConnection.StatusR\x06status\x129\n" +
+	"\x06status\x18\b \x01(\x0e2=.yandex.cloud.baremetal.v1alpha.PrivateCloudConnection.StatusR\x06status\x12\x12\n" +
+	"\x04name\x18\t \x01(\tR\x04name\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"`\n" +
 	"\x06Status\x12\x16\n" +
@@ -207,7 +217,8 @@ const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_proto_rawDesc
 	"\x05READY\x10\x02\x12\t\n" +
 	"\x05ERROR\x10\x03\x12\f\n" +
 	"\bDELETING\x10\x04\x12\f\n" +
-	"\bUPDATING\x10\x05J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\t\x10dJ\x05\be\x10\xc9\x01Br\n" +
+	"\bUPDATING\x10\x05J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\n" +
+	"\x10dJ\x05\be\x10\xc9\x01Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

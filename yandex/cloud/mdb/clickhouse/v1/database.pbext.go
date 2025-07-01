@@ -10,6 +10,14 @@ func (m *Database) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *Database) SetEngine(v DatabaseEngine) {
+	m.Engine = v
+}
+
 func (m *DatabaseSpec) SetName(v string) {
 	m.Name = v
+}
+
+func (m *DatabaseSpec) SetEngine(v DatabaseEngine) {
+	m.Engine = v
 }
