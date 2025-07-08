@@ -263,9 +263,11 @@ type Cluster struct {
 	// To prevent logs from being sent to the cloud set cluster property dataproc:disable_cloud_logging = true
 	LogGroupId string `protobuf:"bytes,18,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// Environment of the cluster
-	Environment   Cluster_Environment `protobuf:"varint,19,opt,name=environment,proto3,enum=yandex.cloud.dataproc.v1.Cluster_Environment" json:"environment,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Environment Cluster_Environment `protobuf:"varint,19,opt,name=environment,proto3,enum=yandex.cloud.dataproc.v1.Cluster_Environment" json:"environment,omitempty"`
+	// ID of service account for working with the Instance Groups service.
+	AutoscalingServiceAccountId string `protobuf:"bytes,20,opt,name=autoscaling_service_account_id,json=autoscalingServiceAccountId,proto3" json:"autoscaling_service_account_id,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *Cluster) Reset() {
@@ -429,6 +431,13 @@ func (x *Cluster) GetEnvironment() Cluster_Environment {
 		return x.Environment
 	}
 	return Cluster_ENVIRONMENT_UNSPECIFIED
+}
+
+func (x *Cluster) GetAutoscalingServiceAccountId() string {
+	if x != nil {
+		return x.AutoscalingServiceAccountId
+	}
+	return ""
 }
 
 // Metadata of a monitoring system for a Yandex Data Processing cluster.
@@ -704,7 +713,7 @@ var File_yandex_cloud_dataproc_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_dataproc_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/dataproc/v1/cluster.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xf5\b\n" +
+	"&yandex/cloud/dataproc/v1/cluster.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xba\t\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -729,7 +738,8 @@ const file_yandex_cloud_dataproc_v1_cluster_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\x11 \x01(\bR\x12deletionProtection\x12 \n" +
 	"\flog_group_id\x18\x12 \x01(\tR\n" +
 	"logGroupId\x12O\n" +
-	"\venvironment\x18\x13 \x01(\x0e2-.yandex.cloud.dataproc.v1.Cluster.EnvironmentR\venvironment\x1a9\n" +
+	"\venvironment\x18\x13 \x01(\x0e2-.yandex.cloud.dataproc.v1.Cluster.EnvironmentR\venvironment\x12C\n" +
+	"\x1eautoscaling_service_account_id\x18\x14 \x01(\tR\x1bautoscalingServiceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"k\n" +

@@ -174,22 +174,6 @@ type Cluster struct {
 	Health Cluster_Health `protobuf:"varint,8,opt,name=health,proto3,enum=yandex.cloud.metastore.v1.Cluster_Health" json:"health,omitempty"`
 	// Current state of the cluster.
 	Status Cluster_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.metastore.v1.Cluster_Status" json:"status,omitempty"`
-	// Subnet ids to put metastore servers
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster.proto.
-	SubnetIds []string `protobuf:"bytes,10,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
-	// Minimum number of metastore servers per zone
-	MinServersPerZone int64 `protobuf:"varint,11,opt,name=min_servers_per_zone,json=minServersPerZone,proto3" json:"min_servers_per_zone,omitempty"`
-	// Maximum number of metastore servers per zone
-	MaxServersPerZone int64 `protobuf:"varint,12,opt,name=max_servers_per_zone,json=maxServersPerZone,proto3" json:"max_servers_per_zone,omitempty"`
-	// Actual number of metastore servers per zone
-	ServersPerZone int64 `protobuf:"varint,13,opt,name=servers_per_zone,json=serversPerZone,proto3" json:"servers_per_zone,omitempty"`
-	// User security groups
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster.proto.
-	SecurityGroupIds []string `protobuf:"bytes,14,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Host groups hosting VMs of the cluster.
-	HostGroupIds []string `protobuf:"bytes,15,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,16,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Metastore server version
@@ -298,50 +282,6 @@ func (x *Cluster) GetStatus() Cluster_Status {
 		return x.Status
 	}
 	return Cluster_STATUS_UNKNOWN
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster.proto.
-func (x *Cluster) GetSubnetIds() []string {
-	if x != nil {
-		return x.SubnetIds
-	}
-	return nil
-}
-
-func (x *Cluster) GetMinServersPerZone() int64 {
-	if x != nil {
-		return x.MinServersPerZone
-	}
-	return 0
-}
-
-func (x *Cluster) GetMaxServersPerZone() int64 {
-	if x != nil {
-		return x.MaxServersPerZone
-	}
-	return 0
-}
-
-func (x *Cluster) GetServersPerZone() int64 {
-	if x != nil {
-		return x.ServersPerZone
-	}
-	return 0
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster.proto.
-func (x *Cluster) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
-}
-
-func (x *Cluster) GetHostGroupIds() []string {
-	if x != nil {
-		return x.HostGroupIds
-	}
-	return nil
 }
 
 func (x *Cluster) GetDeletionProtection() bool {
@@ -659,7 +599,7 @@ var File_yandex_cloud_metastore_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xd0\v\n" +
+	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\t\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -669,15 +609,7 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12F\n" +
 	"\x06labels\x18\x06 \x03(\v2..yandex.cloud.metastore.v1.Cluster.LabelsEntryR\x06labels\x12A\n" +
 	"\x06health\x18\b \x01(\x0e2).yandex.cloud.metastore.v1.Cluster.HealthR\x06health\x12A\n" +
-	"\x06status\x18\t \x01(\x0e2).yandex.cloud.metastore.v1.Cluster.StatusR\x06status\x12!\n" +
-	"\n" +
-	"subnet_ids\x18\n" +
-	" \x03(\tB\x02\x18\x01R\tsubnetIds\x12/\n" +
-	"\x14min_servers_per_zone\x18\v \x01(\x03R\x11minServersPerZone\x12/\n" +
-	"\x14max_servers_per_zone\x18\f \x01(\x03R\x11maxServersPerZone\x12(\n" +
-	"\x10servers_per_zone\x18\r \x01(\x03R\x0eserversPerZone\x120\n" +
-	"\x12security_group_ids\x18\x0e \x03(\tB\x02\x18\x01R\x10securityGroupIds\x12$\n" +
-	"\x0ehost_group_ids\x18\x0f \x03(\tR\fhostGroupIds\x12/\n" +
+	"\x06status\x18\t \x01(\x0e2).yandex.cloud.metastore.v1.Cluster.StatusR\x06status\x12/\n" +
 	"\x13deletion_protection\x18\x10 \x01(\bR\x12deletionProtection\x12\x18\n" +
 	"\aversion\x18\x11 \x01(\tR\aversion\x12\x1d\n" +
 	"\n" +
@@ -706,7 +638,8 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\bUPDATING\x10\x04\x12\f\n" +
 	"\bSTOPPING\x10\x05\x12\v\n" +
 	"\aSTOPPED\x10\x06\x12\f\n" +
-	"\bSTARTING\x10\aJ\x04\b\a\x10\b\"Y\n" +
+	"\bSTARTING\x10\aJ\x04\b\a\x10\bJ\x04\b\n" +
+	"\x10\x10\"Y\n" +
 	"\rClusterConfig\x12B\n" +
 	"\tresources\x18\x02 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresourcesJ\x04\b\x01\x10\x02\"\\\n" +
 	"\rNetworkConfig\x12\x1d\n" +

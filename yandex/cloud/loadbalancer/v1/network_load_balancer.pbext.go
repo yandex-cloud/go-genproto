@@ -62,8 +62,8 @@ func (m *NetworkLoadBalancer) SetAllowZonalShift(v bool) {
 	m.AllowZonalShift = v
 }
 
-func (m *NetworkLoadBalancer) SetZonalShiftStatuses(v []*ZonalShiftStatus) {
-	m.ZonalShiftStatuses = v
+func (m *NetworkLoadBalancer) SetDisableZoneStatuses(v []*DisableZoneStatus) {
+	m.DisableZoneStatuses = v
 }
 
 func (m *AttachedTargetGroup) SetTargetGroupId(v string) {
@@ -114,10 +114,10 @@ func (m *TargetState) SetStatus(v TargetState_Status) {
 	m.Status = v
 }
 
-func (m *ZonalShiftStatus) SetZoneId(v string) {
+func (m *DisableZoneStatus) SetZoneId(v string) {
 	m.ZoneId = v
 }
 
-func (m *ZonalShiftStatus) SetShiftedUntil(v *timestamppb.Timestamp) {
-	m.ShiftedUntil = v
+func (m *DisableZoneStatus) SetDisabledUntil(v *timestamppb.Timestamp) {
+	m.DisabledUntil = v
 }

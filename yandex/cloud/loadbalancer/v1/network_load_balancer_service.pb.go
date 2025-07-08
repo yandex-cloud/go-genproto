@@ -1713,33 +1713,33 @@ func (*ListenerSpec_ExternalAddressSpec) isListenerSpec_Address() {}
 
 func (*ListenerSpec_InternalAddressSpec) isListenerSpec_Address() {}
 
-type StartZonalShiftRequest struct {
+type DisableZonesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the network load balancer to start zonal shift.
+	// ID of the network load balancer to disable zones.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
-	// Zone IDs to start zonal shift.
+	// Zone IDs to disable.
 	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
-	// The interval during which the zones will be shifted. Format 1m-72h.
-	// If not set then zone will be shifted until it is removed through a separate call.
+	// The interval during which the zones will be disabled. Format 1m-72h.
+	// If not set then zone will be disabled until it is removed through a separate call.
 	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartZonalShiftRequest) Reset() {
-	*x = StartZonalShiftRequest{}
+func (x *DisableZonesRequest) Reset() {
+	*x = DisableZonesRequest{}
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartZonalShiftRequest) String() string {
+func (x *DisableZonesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartZonalShiftRequest) ProtoMessage() {}
+func (*DisableZonesRequest) ProtoMessage() {}
 
-func (x *StartZonalShiftRequest) ProtoReflect() protoreflect.Message {
+func (x *DisableZonesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1751,54 +1751,54 @@ func (x *StartZonalShiftRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartZonalShiftRequest.ProtoReflect.Descriptor instead.
-func (*StartZonalShiftRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DisableZonesRequest.ProtoReflect.Descriptor instead.
+func (*DisableZonesRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *StartZonalShiftRequest) GetNetworkLoadBalancerId() string {
+func (x *DisableZonesRequest) GetNetworkLoadBalancerId() string {
 	if x != nil {
 		return x.NetworkLoadBalancerId
 	}
 	return ""
 }
 
-func (x *StartZonalShiftRequest) GetZoneIds() []string {
+func (x *DisableZonesRequest) GetZoneIds() []string {
 	if x != nil {
 		return x.ZoneIds
 	}
 	return nil
 }
 
-func (x *StartZonalShiftRequest) GetDuration() *durationpb.Duration {
+func (x *DisableZonesRequest) GetDuration() *durationpb.Duration {
 	if x != nil {
 		return x.Duration
 	}
 	return nil
 }
 
-type StartZonalShiftMetadata struct {
+type DisableZonesMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the network load balancer that the zonal shift is being started to.
+	// ID of the network load balancer on which the zones were disabled.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *StartZonalShiftMetadata) Reset() {
-	*x = StartZonalShiftMetadata{}
+func (x *DisableZonesMetadata) Reset() {
+	*x = DisableZonesMetadata{}
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartZonalShiftMetadata) String() string {
+func (x *DisableZonesMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartZonalShiftMetadata) ProtoMessage() {}
+func (*DisableZonesMetadata) ProtoMessage() {}
 
-func (x *StartZonalShiftMetadata) ProtoReflect() protoreflect.Message {
+func (x *DisableZonesMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1810,42 +1810,42 @@ func (x *StartZonalShiftMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartZonalShiftMetadata.ProtoReflect.Descriptor instead.
-func (*StartZonalShiftMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use DisableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*DisableZonesMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *StartZonalShiftMetadata) GetNetworkLoadBalancerId() string {
+func (x *DisableZonesMetadata) GetNetworkLoadBalancerId() string {
 	if x != nil {
 		return x.NetworkLoadBalancerId
 	}
 	return ""
 }
 
-type CancelZonalShiftRequest struct {
+type EnableZonesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the network load balancer to cancel zonal shift.
+	// ID of the network load balancer to enable zones.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
-	// Zone IDs to cancel zonal shift.
+	// Zone IDs to enable.
 	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CancelZonalShiftRequest) Reset() {
-	*x = CancelZonalShiftRequest{}
+func (x *EnableZonesRequest) Reset() {
+	*x = EnableZonesRequest{}
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CancelZonalShiftRequest) String() string {
+func (x *EnableZonesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CancelZonalShiftRequest) ProtoMessage() {}
+func (*EnableZonesRequest) ProtoMessage() {}
 
-func (x *CancelZonalShiftRequest) ProtoReflect() protoreflect.Message {
+func (x *EnableZonesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1857,47 +1857,47 @@ func (x *CancelZonalShiftRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelZonalShiftRequest.ProtoReflect.Descriptor instead.
-func (*CancelZonalShiftRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnableZonesRequest.ProtoReflect.Descriptor instead.
+func (*EnableZonesRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *CancelZonalShiftRequest) GetNetworkLoadBalancerId() string {
+func (x *EnableZonesRequest) GetNetworkLoadBalancerId() string {
 	if x != nil {
 		return x.NetworkLoadBalancerId
 	}
 	return ""
 }
 
-func (x *CancelZonalShiftRequest) GetZoneIds() []string {
+func (x *EnableZonesRequest) GetZoneIds() []string {
 	if x != nil {
 		return x.ZoneIds
 	}
 	return nil
 }
 
-type CancelZonalShiftMetadata struct {
+type EnableZonesMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the network load balancer that the zonal shift is being canceled to.
+	// ID of the network load balancer on which the zones were enabled.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *CancelZonalShiftMetadata) Reset() {
-	*x = CancelZonalShiftMetadata{}
+func (x *EnableZonesMetadata) Reset() {
+	*x = EnableZonesMetadata{}
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CancelZonalShiftMetadata) String() string {
+func (x *EnableZonesMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CancelZonalShiftMetadata) ProtoMessage() {}
+func (*EnableZonesMetadata) ProtoMessage() {}
 
-func (x *CancelZonalShiftMetadata) ProtoReflect() protoreflect.Message {
+func (x *EnableZonesMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1909,12 +1909,12 @@ func (x *CancelZonalShiftMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelZonalShiftMetadata.ProtoReflect.Descriptor instead.
-func (*CancelZonalShiftMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*EnableZonesMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *CancelZonalShiftMetadata) GetNetworkLoadBalancerId() string {
+func (x *EnableZonesMetadata) GetNetworkLoadBalancerId() string {
 	if x != nil {
 		return x.NetworkLoadBalancerId
 	}
@@ -2043,19 +2043,19 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawD
 	"\x15internal_address_spec\x18\x06 \x01(\v21.yandex.cloud.loadbalancer.v1.InternalAddressSpecH\x00R\x13internalAddressSpec\x12\x1f\n" +
 	"\vtarget_port\x18\x05 \x01(\x03R\n" +
 	"targetPortB\t\n" +
-	"\aaddress\"\xc5\x01\n" +
-	"\x16StartZonalShiftRequest\x12E\n" +
+	"\aaddress\"\xc2\x01\n" +
+	"\x13DisableZonesRequest\x12E\n" +
 	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12!\n" +
 	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\x12A\n" +
 	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x061m-72hR\bduration\"R\n" +
-	"\x17StartZonalShiftMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\x83\x01\n" +
-	"\x17CancelZonalShiftRequest\x12E\n" +
+	"\xfa\xc71\x061m-72hR\bduration\"O\n" +
+	"\x14DisableZonesMetadata\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"~\n" +
+	"\x12EnableZonesRequest\x12E\n" +
 	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"S\n" +
-	"\x18CancelZonalShiftMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId2\xb9\x1d\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"N\n" +
+	"\x13EnableZonesMetadata\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId2\x99\x1d\n" +
 	"\x1aNetworkLoadBalancerService\x12\xc0\x01\n" +
 	"\x03Get\x12;.yandex.cloud.loadbalancer.v1.GetNetworkLoadBalancerRequest\x1a1.yandex.cloud.loadbalancer.v1.NetworkLoadBalancer\"I\x82\xd3\xe4\x93\x02C\x12A/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}\x12\xb5\x01\n" +
 	"\x04List\x12=.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancersRequest\x1a>.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancersResponse\".\x82\xd3\xe4\x93\x02(\x12&/load-balancer/v1/networkLoadBalancers\x12\xda\x01\n" +
@@ -2078,11 +2078,11 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawD
 	"&AddNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:addListener\x12\x9d\x02\n" +
 	"\x0eRemoveListener\x12F.yandex.cloud.loadbalancer.v1.RemoveNetworkLoadBalancerListenerRequest\x1a!.yandex.cloud.operation.Operation\"\x9f\x01\xb2\xd2*@\n" +
 	")RemoveNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02U:\x01*\"P/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:removeListener\x12\xf7\x01\n" +
-	"\x0eListOperations\x12F.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsRequest\x1aG.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsResponse\"T\x82\xd3\xe4\x93\x02N\x12L/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/operations\x12\xfb\x01\n" +
-	"\x0fStartZonalShift\x124.yandex.cloud.loadbalancer.v1.StartZonalShiftRequest\x1a!.yandex.cloud.operation.Operation\"\x8e\x01\xb2\xd2*.\n" +
-	"\x17StartZonalShiftMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02V:\x01*\"Q/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:startZonalShift\x12\xff\x01\n" +
-	"\x10CancelZonalShift\x125.yandex.cloud.loadbalancer.v1.CancelZonalShiftRequest\x1a!.yandex.cloud.operation.Operation\"\x90\x01\xb2\xd2*/\n" +
-	"\x18CancelZonalShiftMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02W:\x01*\"R/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:cancelZonalShiftBq\n" +
+	"\x0eListOperations\x12F.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsRequest\x1aG.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsResponse\"T\x82\xd3\xe4\x93\x02N\x12L/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/operations\x12\xef\x01\n" +
+	"\fDisableZones\x121.yandex.cloud.loadbalancer.v1.DisableZonesRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xb2\xd2*+\n" +
+	"\x14DisableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02S:\x01*\"N/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:disableZones\x12\xeb\x01\n" +
+	"\vEnableZones\x120.yandex.cloud.loadbalancer.v1.EnableZonesRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2**\n" +
+	"\x13EnableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:enableZonesBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 
 var (
@@ -2127,10 +2127,10 @@ var file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_goType
 	(*ExternalAddressSpec)(nil),                          // 25: yandex.cloud.loadbalancer.v1.ExternalAddressSpec
 	(*InternalAddressSpec)(nil),                          // 26: yandex.cloud.loadbalancer.v1.InternalAddressSpec
 	(*ListenerSpec)(nil),                                 // 27: yandex.cloud.loadbalancer.v1.ListenerSpec
-	(*StartZonalShiftRequest)(nil),                       // 28: yandex.cloud.loadbalancer.v1.StartZonalShiftRequest
-	(*StartZonalShiftMetadata)(nil),                      // 29: yandex.cloud.loadbalancer.v1.StartZonalShiftMetadata
-	(*CancelZonalShiftRequest)(nil),                      // 30: yandex.cloud.loadbalancer.v1.CancelZonalShiftRequest
-	(*CancelZonalShiftMetadata)(nil),                     // 31: yandex.cloud.loadbalancer.v1.CancelZonalShiftMetadata
+	(*DisableZonesRequest)(nil),                          // 28: yandex.cloud.loadbalancer.v1.DisableZonesRequest
+	(*DisableZonesMetadata)(nil),                         // 29: yandex.cloud.loadbalancer.v1.DisableZonesMetadata
+	(*EnableZonesRequest)(nil),                           // 30: yandex.cloud.loadbalancer.v1.EnableZonesRequest
+	(*EnableZonesMetadata)(nil),                          // 31: yandex.cloud.loadbalancer.v1.EnableZonesMetadata
 	nil,                                                  // 32: yandex.cloud.loadbalancer.v1.CreateNetworkLoadBalancerRequest.LabelsEntry
 	nil,                                                  // 33: yandex.cloud.loadbalancer.v1.UpdateNetworkLoadBalancerRequest.LabelsEntry
 	(*NetworkLoadBalancer)(nil),                          // 34: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer
@@ -2162,7 +2162,7 @@ var file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_depIdx
 	41, // 15: yandex.cloud.loadbalancer.v1.ListenerSpec.protocol:type_name -> yandex.cloud.loadbalancer.v1.Listener.Protocol
 	25, // 16: yandex.cloud.loadbalancer.v1.ListenerSpec.external_address_spec:type_name -> yandex.cloud.loadbalancer.v1.ExternalAddressSpec
 	26, // 17: yandex.cloud.loadbalancer.v1.ListenerSpec.internal_address_spec:type_name -> yandex.cloud.loadbalancer.v1.InternalAddressSpec
-	42, // 18: yandex.cloud.loadbalancer.v1.StartZonalShiftRequest.duration:type_name -> google.protobuf.Duration
+	42, // 18: yandex.cloud.loadbalancer.v1.DisableZonesRequest.duration:type_name -> google.protobuf.Duration
 	0,  // 19: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.Get:input_type -> yandex.cloud.loadbalancer.v1.GetNetworkLoadBalancerRequest
 	1,  // 20: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.List:input_type -> yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancersRequest
 	3,  // 21: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.Create:input_type -> yandex.cloud.loadbalancer.v1.CreateNetworkLoadBalancerRequest
@@ -2176,8 +2176,8 @@ var file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_depIdx
 	17, // 29: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.AddListener:input_type -> yandex.cloud.loadbalancer.v1.AddNetworkLoadBalancerListenerRequest
 	19, // 30: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.RemoveListener:input_type -> yandex.cloud.loadbalancer.v1.RemoveNetworkLoadBalancerListenerRequest
 	21, // 31: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.ListOperations:input_type -> yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsRequest
-	28, // 32: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.StartZonalShift:input_type -> yandex.cloud.loadbalancer.v1.StartZonalShiftRequest
-	30, // 33: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.CancelZonalShift:input_type -> yandex.cloud.loadbalancer.v1.CancelZonalShiftRequest
+	28, // 32: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.DisableZones:input_type -> yandex.cloud.loadbalancer.v1.DisableZonesRequest
+	30, // 33: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.EnableZones:input_type -> yandex.cloud.loadbalancer.v1.EnableZonesRequest
 	34, // 34: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.Get:output_type -> yandex.cloud.loadbalancer.v1.NetworkLoadBalancer
 	2,  // 35: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.List:output_type -> yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancersResponse
 	38, // 36: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.Create:output_type -> yandex.cloud.operation.Operation
@@ -2191,8 +2191,8 @@ var file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_depIdx
 	38, // 44: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.AddListener:output_type -> yandex.cloud.operation.Operation
 	38, // 45: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.RemoveListener:output_type -> yandex.cloud.operation.Operation
 	22, // 46: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.ListOperations:output_type -> yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsResponse
-	38, // 47: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.StartZonalShift:output_type -> yandex.cloud.operation.Operation
-	38, // 48: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.CancelZonalShift:output_type -> yandex.cloud.operation.Operation
+	38, // 47: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.DisableZones:output_type -> yandex.cloud.operation.Operation
+	38, // 48: yandex.cloud.loadbalancer.v1.NetworkLoadBalancerService.EnableZones:output_type -> yandex.cloud.operation.Operation
 	34, // [34:49] is the sub-list for method output_type
 	19, // [19:34] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name

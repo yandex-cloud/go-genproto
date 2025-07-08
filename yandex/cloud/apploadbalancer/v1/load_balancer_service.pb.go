@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
@@ -2571,11 +2572,236 @@ func (x *CancelZonalShiftMetadata) GetZoneIds() []string {
 	return nil
 }
 
+type DisableZonesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the application load balancer to disable traffic in zones.
+	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
+	// Zone IDs to disable traffic.
+	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	// The interval during which the zones will be disabled (1m-72h). If not set then until EnableZones call.
+	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableZonesRequest) Reset() {
+	*x = DisableZonesRequest{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableZonesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableZonesRequest) ProtoMessage() {}
+
+func (x *DisableZonesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableZonesRequest.ProtoReflect.Descriptor instead.
+func (*DisableZonesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *DisableZonesRequest) GetLoadBalancerId() string {
+	if x != nil {
+		return x.LoadBalancerId
+	}
+	return ""
+}
+
+func (x *DisableZonesRequest) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+func (x *DisableZonesRequest) GetDuration() *durationpb.Duration {
+	if x != nil {
+		return x.Duration
+	}
+	return nil
+}
+
+type DisableZonesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the application load balancer to disable traffic in zones.
+	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
+	// Zone IDs where traffic was disabled.
+	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableZonesMetadata) Reset() {
+	*x = DisableZonesMetadata{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableZonesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableZonesMetadata) ProtoMessage() {}
+
+func (x *DisableZonesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*DisableZonesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *DisableZonesMetadata) GetLoadBalancerId() string {
+	if x != nil {
+		return x.LoadBalancerId
+	}
+	return ""
+}
+
+func (x *DisableZonesMetadata) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+type EnableZonesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the application load balancer to enable traffic in zones.
+	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
+	// Zone IDs to enable traffic.
+	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableZonesRequest) Reset() {
+	*x = EnableZonesRequest{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableZonesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableZonesRequest) ProtoMessage() {}
+
+func (x *EnableZonesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableZonesRequest.ProtoReflect.Descriptor instead.
+func (*EnableZonesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *EnableZonesRequest) GetLoadBalancerId() string {
+	if x != nil {
+		return x.LoadBalancerId
+	}
+	return ""
+}
+
+func (x *EnableZonesRequest) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+type EnableZonesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the application load balancer to enable traffic in zones.
+	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
+	// Zone IDs where traffic was enabled.
+	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableZonesMetadata) Reset() {
+	*x = EnableZonesMetadata{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableZonesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableZonesMetadata) ProtoMessage() {}
+
+func (x *EnableZonesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*EnableZonesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *EnableZonesMetadata) GetLoadBalancerId() string {
+	if x != nil {
+		return x.LoadBalancerId
+	}
+	return ""
+}
+
+func (x *EnableZonesMetadata) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
 var File_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/apploadbalancer/v1/load_balancer_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/apploadbalancer/v1/load_balancer.proto\x1a-yandex/cloud/apploadbalancer/v1/logging.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
+	";yandex/cloud/apploadbalancer/v1/load_balancer_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/apploadbalancer/v1/load_balancer.proto\x1a-yandex/cloud/apploadbalancer/v1/logging.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
 	"\x16GetLoadBalancerRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\"\xb4\x01\n" +
 	"\x18ListLoadBalancersRequest\x12!\n" +
@@ -2742,7 +2968,21 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc =
 	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"_\n" +
 	"\x18CancelZonalShiftMetadata\x12(\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12\x19\n" +
-	"\bzone_ids\x18\x02 \x03(\tR\azoneIds2\xc7\x1d\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\"\xab\x01\n" +
+	"\x13DisableZonesRequest\x12.\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12!\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\x12A\n" +
+	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\n" +
+	"\xfa\xc71\x061m-72hR\bduration\"[\n" +
+	"\x14DisableZonesMetadata\x12(\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12\x19\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\"g\n" +
+	"\x12EnableZonesRequest\x12.\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12!\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"Z\n" +
+	"\x13EnableZonesMetadata\x12(\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12\x19\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds2\x89!\n" +
 	"\x13LoadBalancerService\x12\xab\x01\n" +
 	"\x03Get\x127.yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest\x1a-.yandex.cloud.apploadbalancer.v1.LoadBalancer\"<\x82\xd3\xe4\x93\x026\x124/apploadbalancer/v1/loadBalancers/{load_balancer_id}\x12\xa8\x01\n" +
 	"\x04List\x129.yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest\x1a:.yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse\")\x82\xd3\xe4\x93\x02#\x12!/apploadbalancer/v1/loadBalancers\x12\xc3\x01\n" +
@@ -2769,11 +3009,15 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc =
 	"\x0eRemoveSniMatch\x126.yandex.cloud.apploadbalancer.v1.RemoveSniMatchRequest\x1a!.yandex.cloud.operation.Operation\"\x81\x01\xb2\xd2*/\n" +
 	"\x16RemoveSniMatchMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H:\x01*\"C/apploadbalancer/v1/loadBalancers/{load_balancer_id}:removeSniMatch\x12\xf4\x01\n" +
 	"\x0fGetTargetStates\x127.yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest\x1a8.yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse\"n\x82\xd3\xe4\x93\x02h\x12f/apploadbalancer/v1/loadBalancers/{load_balancer_id}/targetStates/{backend_group_id}/{target_group_id}\x12\xe2\x01\n" +
-	"\x0eListOperations\x12B.yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsRequest\x1aC.yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse\"G\x82\xd3\xe4\x93\x02A\x12?/apploadbalancer/v1/loadBalancers/{load_balancer_id}/operations\x12\xe9\x01\n" +
-	"\x0fStartZonalShift\x127.yandex.cloud.apploadbalancer.v1.StartZonalShiftRequest\x1a!.yandex.cloud.operation.Operation\"z\xb2\xd2*'\n" +
-	"\x17StartZonalShiftMetadata\x12\fLoadBalancer\x82\xd3\xe4\x93\x02I:\x01*\"D/apploadbalancer/v1/loadBalancers/{load_balancer_id}:startZonalShift\x12\xed\x01\n" +
-	"\x10CancelZonalShift\x128.yandex.cloud.apploadbalancer.v1.CancelZonalShiftRequest\x1a!.yandex.cloud.operation.Operation\"|\xb2\xd2*(\n" +
-	"\x18CancelZonalShiftMetadata\x12\fLoadBalancer\x82\xd3\xe4\x93\x02J:\x01*\"E/apploadbalancer/v1/loadBalancers/{load_balancer_id}:cancelZonalShiftBz\n" +
+	"\x0eListOperations\x12B.yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsRequest\x1aC.yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse\"G\x82\xd3\xe4\x93\x02A\x12?/apploadbalancer/v1/loadBalancers/{load_balancer_id}/operations\x12\xec\x01\n" +
+	"\x0fStartZonalShift\x127.yandex.cloud.apploadbalancer.v1.StartZonalShiftRequest\x1a!.yandex.cloud.operation.Operation\"}\xb2\xd2*'\n" +
+	"\x17StartZonalShiftMetadata\x12\fLoadBalancer\x82\xd3\xe4\x93\x02I:\x01*\"D/apploadbalancer/v1/loadBalancers/{load_balancer_id}:startZonalShift\x88\x02\x01\x12\xf0\x01\n" +
+	"\x10CancelZonalShift\x128.yandex.cloud.apploadbalancer.v1.CancelZonalShiftRequest\x1a!.yandex.cloud.operation.Operation\"\x7f\xb2\xd2*(\n" +
+	"\x18CancelZonalShiftMetadata\x12\fLoadBalancer\x82\xd3\xe4\x93\x02J:\x01*\"E/apploadbalancer/v1/loadBalancers/{load_balancer_id}:cancelZonalShift\x88\x02\x01\x12\xdd\x01\n" +
+	"\fDisableZones\x124.yandex.cloud.apploadbalancer.v1.DisableZonesRequest\x1a!.yandex.cloud.operation.Operation\"t\xb2\xd2*$\n" +
+	"\x14DisableZonesMetadata\x12\fLoadBalancer\x82\xd3\xe4\x93\x02F:\x01*\"A/apploadbalancer/v1/loadBalancers/{load_balancer_id}:disableZones\x12\xd9\x01\n" +
+	"\vEnableZones\x123.yandex.cloud.apploadbalancer.v1.EnableZonesRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*#\n" +
+	"\x13EnableZonesMetadata\x12\fLoadBalancer\x82\xd3\xe4\x93\x02E:\x01*\"@/apploadbalancer/v1/loadBalancers/{load_balancer_id}:enableZonesBz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 
 var (
@@ -2788,7 +3032,7 @@ func file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZI
 	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescData
 }
 
-var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
+var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_goTypes = []any{
 	(*GetLoadBalancerRequest)(nil),             // 0: yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
 	(*ListLoadBalancersRequest)(nil),           // 1: yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
@@ -2829,88 +3073,98 @@ var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_goTypes = [
 	(*StartZonalShiftMetadata)(nil),            // 36: yandex.cloud.apploadbalancer.v1.StartZonalShiftMetadata
 	(*CancelZonalShiftRequest)(nil),            // 37: yandex.cloud.apploadbalancer.v1.CancelZonalShiftRequest
 	(*CancelZonalShiftMetadata)(nil),           // 38: yandex.cloud.apploadbalancer.v1.CancelZonalShiftMetadata
-	nil,                                        // 39: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
-	nil,                                        // 40: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
-	(*LoadBalancer)(nil),                       // 41: yandex.cloud.apploadbalancer.v1.LoadBalancer
-	(*fieldmaskpb.FieldMask)(nil),              // 42: google.protobuf.FieldMask
-	(*AllocationPolicy)(nil),                   // 43: yandex.cloud.apploadbalancer.v1.AllocationPolicy
-	(*AutoScalePolicy)(nil),                    // 44: yandex.cloud.apploadbalancer.v1.AutoScalePolicy
-	(*LogOptions)(nil),                         // 45: yandex.cloud.apploadbalancer.v1.LogOptions
-	(*HttpListener)(nil),                       // 46: yandex.cloud.apploadbalancer.v1.HttpListener
-	(*TlsListener)(nil),                        // 47: yandex.cloud.apploadbalancer.v1.TlsListener
-	(*StreamListener)(nil),                     // 48: yandex.cloud.apploadbalancer.v1.StreamListener
-	(*TargetState)(nil),                        // 49: yandex.cloud.apploadbalancer.v1.TargetState
-	(*TlsHandler)(nil),                         // 50: yandex.cloud.apploadbalancer.v1.TlsHandler
-	(*operation.Operation)(nil),                // 51: yandex.cloud.operation.Operation
+	(*DisableZonesRequest)(nil),                // 39: yandex.cloud.apploadbalancer.v1.DisableZonesRequest
+	(*DisableZonesMetadata)(nil),               // 40: yandex.cloud.apploadbalancer.v1.DisableZonesMetadata
+	(*EnableZonesRequest)(nil),                 // 41: yandex.cloud.apploadbalancer.v1.EnableZonesRequest
+	(*EnableZonesMetadata)(nil),                // 42: yandex.cloud.apploadbalancer.v1.EnableZonesMetadata
+	nil,                                        // 43: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
+	nil,                                        // 44: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
+	(*LoadBalancer)(nil),                       // 45: yandex.cloud.apploadbalancer.v1.LoadBalancer
+	(*fieldmaskpb.FieldMask)(nil),              // 46: google.protobuf.FieldMask
+	(*AllocationPolicy)(nil),                   // 47: yandex.cloud.apploadbalancer.v1.AllocationPolicy
+	(*AutoScalePolicy)(nil),                    // 48: yandex.cloud.apploadbalancer.v1.AutoScalePolicy
+	(*LogOptions)(nil),                         // 49: yandex.cloud.apploadbalancer.v1.LogOptions
+	(*HttpListener)(nil),                       // 50: yandex.cloud.apploadbalancer.v1.HttpListener
+	(*TlsListener)(nil),                        // 51: yandex.cloud.apploadbalancer.v1.TlsListener
+	(*StreamListener)(nil),                     // 52: yandex.cloud.apploadbalancer.v1.StreamListener
+	(*TargetState)(nil),                        // 53: yandex.cloud.apploadbalancer.v1.TargetState
+	(*TlsHandler)(nil),                         // 54: yandex.cloud.apploadbalancer.v1.TlsHandler
+	(*operation.Operation)(nil),                // 55: yandex.cloud.operation.Operation
+	(*durationpb.Duration)(nil),                // 56: google.protobuf.Duration
 }
 var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_depIdxs = []int32{
-	41, // 0: yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse.load_balancers:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancer
-	42, // 1: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.update_mask:type_name -> google.protobuf.FieldMask
-	39, // 2: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
+	45, // 0: yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse.load_balancers:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancer
+	46, // 1: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	43, // 2: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
 	24, // 3: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.listener_specs:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	43, // 4: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
-	44, // 5: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
-	45, // 6: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
-	40, // 7: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
+	47, // 4: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
+	48, // 5: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
+	49, // 6: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
+	44, // 7: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
 	24, // 8: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.listener_specs:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	43, // 9: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
-	44, // 10: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
-	45, // 11: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
+	47, // 9: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
+	48, // 10: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
+	49, // 11: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
 	24, // 12: yandex.cloud.apploadbalancer.v1.AddListenerRequest.listener_spec:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	42, // 13: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	46, // 13: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.update_mask:type_name -> google.protobuf.FieldMask
 	24, // 14: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.listener_spec:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
 	20, // 15: yandex.cloud.apploadbalancer.v1.AddressSpec.external_ipv4_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.ExternalIpv4AddressSpec
 	21, // 16: yandex.cloud.apploadbalancer.v1.AddressSpec.internal_ipv4_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.InternalIpv4AddressSpec
 	22, // 17: yandex.cloud.apploadbalancer.v1.AddressSpec.external_ipv6_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.ExternalIpv6AddressSpec
 	19, // 18: yandex.cloud.apploadbalancer.v1.EndpointSpec.address_specs:type_name -> yandex.cloud.apploadbalancer.v1.AddressSpec
 	23, // 19: yandex.cloud.apploadbalancer.v1.ListenerSpec.endpoint_specs:type_name -> yandex.cloud.apploadbalancer.v1.EndpointSpec
-	46, // 20: yandex.cloud.apploadbalancer.v1.ListenerSpec.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpListener
-	47, // 21: yandex.cloud.apploadbalancer.v1.ListenerSpec.tls:type_name -> yandex.cloud.apploadbalancer.v1.TlsListener
-	48, // 22: yandex.cloud.apploadbalancer.v1.ListenerSpec.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamListener
-	49, // 23: yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse.target_states:type_name -> yandex.cloud.apploadbalancer.v1.TargetState
-	50, // 24: yandex.cloud.apploadbalancer.v1.AddSniMatchRequest.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
-	42, // 25: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.update_mask:type_name -> google.protobuf.FieldMask
-	50, // 26: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
-	51, // 27: yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 28: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
-	1,  // 29: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
-	7,  // 30: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:input_type -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest
-	5,  // 31: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:input_type -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest
-	3,  // 32: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:input_type -> yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerRequest
-	9,  // 33: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Start:input_type -> yandex.cloud.apploadbalancer.v1.StartLoadBalancerRequest
-	11, // 34: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Stop:input_type -> yandex.cloud.apploadbalancer.v1.StopLoadBalancerRequest
-	13, // 35: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddListener:input_type -> yandex.cloud.apploadbalancer.v1.AddListenerRequest
-	15, // 36: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveListener:input_type -> yandex.cloud.apploadbalancer.v1.RemoveListenerRequest
-	17, // 37: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateListener:input_type -> yandex.cloud.apploadbalancer.v1.UpdateListenerRequest
-	27, // 38: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.AddSniMatchRequest
-	31, // 39: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest
-	29, // 40: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.RemoveSniMatchRequest
-	25, // 41: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:input_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest
-	33, // 42: yandex.cloud.apploadbalancer.v1.LoadBalancerService.ListOperations:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsRequest
-	35, // 43: yandex.cloud.apploadbalancer.v1.LoadBalancerService.StartZonalShift:input_type -> yandex.cloud.apploadbalancer.v1.StartZonalShiftRequest
-	37, // 44: yandex.cloud.apploadbalancer.v1.LoadBalancerService.CancelZonalShift:input_type -> yandex.cloud.apploadbalancer.v1.CancelZonalShiftRequest
-	41, // 45: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:output_type -> yandex.cloud.apploadbalancer.v1.LoadBalancer
-	2,  // 46: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse
-	51, // 47: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:output_type -> yandex.cloud.operation.Operation
-	51, // 48: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:output_type -> yandex.cloud.operation.Operation
-	51, // 49: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:output_type -> yandex.cloud.operation.Operation
-	51, // 50: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Start:output_type -> yandex.cloud.operation.Operation
-	51, // 51: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Stop:output_type -> yandex.cloud.operation.Operation
-	51, // 52: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddListener:output_type -> yandex.cloud.operation.Operation
-	51, // 53: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveListener:output_type -> yandex.cloud.operation.Operation
-	51, // 54: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateListener:output_type -> yandex.cloud.operation.Operation
-	51, // 55: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddSniMatch:output_type -> yandex.cloud.operation.Operation
-	51, // 56: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateSniMatch:output_type -> yandex.cloud.operation.Operation
-	51, // 57: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveSniMatch:output_type -> yandex.cloud.operation.Operation
-	26, // 58: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:output_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse
-	34, // 59: yandex.cloud.apploadbalancer.v1.LoadBalancerService.ListOperations:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse
-	51, // 60: yandex.cloud.apploadbalancer.v1.LoadBalancerService.StartZonalShift:output_type -> yandex.cloud.operation.Operation
-	51, // 61: yandex.cloud.apploadbalancer.v1.LoadBalancerService.CancelZonalShift:output_type -> yandex.cloud.operation.Operation
-	45, // [45:62] is the sub-list for method output_type
-	28, // [28:45] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	50, // 20: yandex.cloud.apploadbalancer.v1.ListenerSpec.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpListener
+	51, // 21: yandex.cloud.apploadbalancer.v1.ListenerSpec.tls:type_name -> yandex.cloud.apploadbalancer.v1.TlsListener
+	52, // 22: yandex.cloud.apploadbalancer.v1.ListenerSpec.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamListener
+	53, // 23: yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse.target_states:type_name -> yandex.cloud.apploadbalancer.v1.TargetState
+	54, // 24: yandex.cloud.apploadbalancer.v1.AddSniMatchRequest.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
+	46, // 25: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.update_mask:type_name -> google.protobuf.FieldMask
+	54, // 26: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
+	55, // 27: yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	56, // 28: yandex.cloud.apploadbalancer.v1.DisableZonesRequest.duration:type_name -> google.protobuf.Duration
+	0,  // 29: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
+	1,  // 30: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
+	7,  // 31: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:input_type -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest
+	5,  // 32: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:input_type -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest
+	3,  // 33: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:input_type -> yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerRequest
+	9,  // 34: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Start:input_type -> yandex.cloud.apploadbalancer.v1.StartLoadBalancerRequest
+	11, // 35: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Stop:input_type -> yandex.cloud.apploadbalancer.v1.StopLoadBalancerRequest
+	13, // 36: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddListener:input_type -> yandex.cloud.apploadbalancer.v1.AddListenerRequest
+	15, // 37: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveListener:input_type -> yandex.cloud.apploadbalancer.v1.RemoveListenerRequest
+	17, // 38: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateListener:input_type -> yandex.cloud.apploadbalancer.v1.UpdateListenerRequest
+	27, // 39: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.AddSniMatchRequest
+	31, // 40: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest
+	29, // 41: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.RemoveSniMatchRequest
+	25, // 42: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:input_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest
+	33, // 43: yandex.cloud.apploadbalancer.v1.LoadBalancerService.ListOperations:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsRequest
+	35, // 44: yandex.cloud.apploadbalancer.v1.LoadBalancerService.StartZonalShift:input_type -> yandex.cloud.apploadbalancer.v1.StartZonalShiftRequest
+	37, // 45: yandex.cloud.apploadbalancer.v1.LoadBalancerService.CancelZonalShift:input_type -> yandex.cloud.apploadbalancer.v1.CancelZonalShiftRequest
+	39, // 46: yandex.cloud.apploadbalancer.v1.LoadBalancerService.DisableZones:input_type -> yandex.cloud.apploadbalancer.v1.DisableZonesRequest
+	41, // 47: yandex.cloud.apploadbalancer.v1.LoadBalancerService.EnableZones:input_type -> yandex.cloud.apploadbalancer.v1.EnableZonesRequest
+	45, // 48: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:output_type -> yandex.cloud.apploadbalancer.v1.LoadBalancer
+	2,  // 49: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse
+	55, // 50: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:output_type -> yandex.cloud.operation.Operation
+	55, // 51: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:output_type -> yandex.cloud.operation.Operation
+	55, // 52: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:output_type -> yandex.cloud.operation.Operation
+	55, // 53: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Start:output_type -> yandex.cloud.operation.Operation
+	55, // 54: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Stop:output_type -> yandex.cloud.operation.Operation
+	55, // 55: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddListener:output_type -> yandex.cloud.operation.Operation
+	55, // 56: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveListener:output_type -> yandex.cloud.operation.Operation
+	55, // 57: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateListener:output_type -> yandex.cloud.operation.Operation
+	55, // 58: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddSniMatch:output_type -> yandex.cloud.operation.Operation
+	55, // 59: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateSniMatch:output_type -> yandex.cloud.operation.Operation
+	55, // 60: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveSniMatch:output_type -> yandex.cloud.operation.Operation
+	26, // 61: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:output_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse
+	34, // 62: yandex.cloud.apploadbalancer.v1.LoadBalancerService.ListOperations:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse
+	55, // 63: yandex.cloud.apploadbalancer.v1.LoadBalancerService.StartZonalShift:output_type -> yandex.cloud.operation.Operation
+	55, // 64: yandex.cloud.apploadbalancer.v1.LoadBalancerService.CancelZonalShift:output_type -> yandex.cloud.operation.Operation
+	55, // 65: yandex.cloud.apploadbalancer.v1.LoadBalancerService.DisableZones:output_type -> yandex.cloud.operation.Operation
+	55, // 66: yandex.cloud.apploadbalancer.v1.LoadBalancerService.EnableZones:output_type -> yandex.cloud.operation.Operation
+	48, // [48:67] is the sub-list for method output_type
+	29, // [29:48] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_init() }
@@ -2936,7 +3190,7 @@ func file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc), len(file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   41,
+			NumMessages:   45,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

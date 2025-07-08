@@ -82,6 +82,10 @@ func (m *Cluster) SetEnvironment(v Cluster_Environment) {
 	m.Environment = v
 }
 
+func (m *Cluster) SetAutoscalingServiceAccountId(v string) {
+	m.AutoscalingServiceAccountId = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

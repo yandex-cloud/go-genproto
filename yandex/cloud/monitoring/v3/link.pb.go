@@ -135,8 +135,11 @@ type Link_Dashboard struct {
 	Container      isLink_Dashboard_Container `protobuf_oneof:"container"`
 	DashboardName  string                     `protobuf:"bytes,3,opt,name=dashboard_name,json=dashboardName,proto3" json:"dashboard_name,omitempty"`
 	ApplyTimeRange bool                       `protobuf:"varint,4,opt,name=apply_time_range,json=applyTimeRange,proto3" json:"apply_time_range,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// What parameter values to pass to dashboard when opening link
+	// See Parametrization field in dashboard.proto
+	Parameters    map[string]string `protobuf:"bytes,5,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Link_Dashboard) Reset() {
@@ -208,6 +211,13 @@ func (x *Link_Dashboard) GetApplyTimeRange() bool {
 	return false
 }
 
+func (x *Link_Dashboard) GetParameters() map[string]string {
+	if x != nil {
+		return x.Parameters
+	}
+	return nil
+}
+
 type isLink_Dashboard_Container interface {
 	isLink_Dashboard_Container()
 }
@@ -228,18 +238,24 @@ var File_yandex_cloud_monitoring_v3_link_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_link_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/monitoring/v3/link.proto\x12\x1ayandex.cloud.monitoring.v3\"\xd7\x02\n" +
+	"%yandex/cloud/monitoring/v3/link.proto\x12\x1ayandex.cloud.monitoring.v3\"\xf2\x03\n" +
 	"\x04Link\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12%\n" +
 	"\x0fopen_in_new_tab\x18\x02 \x01(\bR\fopenInNewTab\x12\x12\n" +
 	"\x03url\x18\x03 \x01(\tH\x00R\x03url\x12J\n" +
-	"\tdashboard\x18\x04 \x01(\v2*.yandex.cloud.monitoring.v3.Link.DashboardH\x00R\tdashboard\x1a\xa9\x01\n" +
+	"\tdashboard\x18\x04 \x01(\v2*.yandex.cloud.monitoring.v3.Link.DashboardH\x00R\tdashboard\x1a\xc4\x02\n" +
 	"\tDashboard\x12\x1f\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tH\x00R\tprojectId\x12\x1d\n" +
 	"\tfolder_id\x18\x02 \x01(\tH\x00R\bfolderId\x12%\n" +
 	"\x0edashboard_name\x18\x03 \x01(\tR\rdashboardName\x12(\n" +
-	"\x10apply_time_range\x18\x04 \x01(\bR\x0eapplyTimeRangeB\v\n" +
+	"\x10apply_time_range\x18\x04 \x01(\bR\x0eapplyTimeRange\x12Z\n" +
+	"\n" +
+	"parameters\x18\x05 \x03(\v2:.yandex.cloud.monitoring.v3.Link.Dashboard.ParametersEntryR\n" +
+	"parameters\x1a=\n" +
+	"\x0fParametersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
 	"\tcontainerB\x06\n" +
 	"\x04typeBk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
@@ -256,18 +272,20 @@ func file_yandex_cloud_monitoring_v3_link_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_monitoring_v3_link_proto_rawDescData
 }
 
-var file_yandex_cloud_monitoring_v3_link_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_monitoring_v3_link_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_monitoring_v3_link_proto_goTypes = []any{
 	(*Link)(nil),           // 0: yandex.cloud.monitoring.v3.Link
 	(*Link_Dashboard)(nil), // 1: yandex.cloud.monitoring.v3.Link.Dashboard
+	nil,                    // 2: yandex.cloud.monitoring.v3.Link.Dashboard.ParametersEntry
 }
 var file_yandex_cloud_monitoring_v3_link_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.monitoring.v3.Link.dashboard:type_name -> yandex.cloud.monitoring.v3.Link.Dashboard
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: yandex.cloud.monitoring.v3.Link.Dashboard.parameters:type_name -> yandex.cloud.monitoring.v3.Link.Dashboard.ParametersEntry
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_link_proto_init() }
@@ -289,7 +307,7 @@ func file_yandex_cloud_monitoring_v3_link_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_monitoring_v3_link_proto_rawDesc), len(file_yandex_cloud_monitoring_v3_link_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

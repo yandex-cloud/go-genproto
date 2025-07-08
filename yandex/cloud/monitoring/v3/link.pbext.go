@@ -53,3 +53,7 @@ func (m *Link_Dashboard) SetDashboardName(v string) {
 func (m *Link_Dashboard) SetApplyTimeRange(v bool) {
 	m.ApplyTimeRange = v
 }
+
+func (m *Link_Dashboard) SetParameters(v map[string]string) {
+	m.Parameters = v
+}

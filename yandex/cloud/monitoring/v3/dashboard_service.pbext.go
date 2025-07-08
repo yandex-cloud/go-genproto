@@ -34,6 +34,10 @@ func (m *ListDashboardsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListDashboardsRequest) SetSelectors(v string) {
+	m.Selectors = v
+}
+
 func (m *ListDashboardsResponse) SetDashboards(v []*Dashboard) {
 	m.Dashboards = v
 }

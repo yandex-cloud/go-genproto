@@ -550,9 +550,11 @@ type CreateClusterRequest struct {
 	// ID of the cloud logging log group to write logs. If not set, logs will not be sent to logging service
 	LogGroupId string `protobuf:"bytes,14,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// Environment of the cluster
-	Environment   Cluster_Environment `protobuf:"varint,15,opt,name=environment,proto3,enum=yandex.cloud.dataproc.v1.Cluster_Environment" json:"environment,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Environment Cluster_Environment `protobuf:"varint,15,opt,name=environment,proto3,enum=yandex.cloud.dataproc.v1.Cluster_Environment" json:"environment,omitempty"`
+	// ID of the service account to be used by the Instance Groups service.
+	AutoscalingServiceAccountId string `protobuf:"bytes,16,opt,name=autoscaling_service_account_id,json=autoscalingServiceAccountId,proto3" json:"autoscaling_service_account_id,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *CreateClusterRequest) Reset() {
@@ -683,6 +685,13 @@ func (x *CreateClusterRequest) GetEnvironment() Cluster_Environment {
 	return Cluster_ENVIRONMENT_UNSPECIFIED
 }
 
+func (x *CreateClusterRequest) GetAutoscalingServiceAccountId() string {
+	if x != nil {
+		return x.AutoscalingServiceAccountId
+	}
+	return ""
+}
+
 type CreateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster that is being created.
@@ -757,9 +766,11 @@ type UpdateClusterRequest struct {
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,12,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// ID of the cloud logging log group to write logs. If not set, logs will not be sent to logging service
-	LogGroupId    string `protobuf:"bytes,13,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LogGroupId string `protobuf:"bytes,13,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// ID of the new service account to be used by the Instance Groups service.
+	AutoscalingServiceAccountId string `protobuf:"bytes,14,opt,name=autoscaling_service_account_id,json=autoscalingServiceAccountId,proto3" json:"autoscaling_service_account_id,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *UpdateClusterRequest) Reset() {
@@ -879,6 +890,13 @@ func (x *UpdateClusterRequest) GetDeletionProtection() bool {
 func (x *UpdateClusterRequest) GetLogGroupId() string {
 	if x != nil {
 		return x.LogGroupId
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetAutoscalingServiceAccountId() string {
+	if x != nil {
+		return x.AutoscalingServiceAccountId
 	}
 	return ""
 }
@@ -1673,7 +1691,7 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x10subclusters_spec\x18\x03 \x03(\v24.yandex.cloud.dataproc.v1.CreateSubclusterConfigSpecR\x0fsubclustersSpec\"\xba\x01\n" +
 	"\x17UpdateClusterConfigSpec\x12_\n" +
 	"\x10subclusters_spec\x18\x01 \x03(\v24.yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpecR\x0fsubclustersSpec\x12>\n" +
-	"\x06hadoop\x18\x02 \x01(\v2&.yandex.cloud.dataproc.v1.HadoopConfigR\x06hadoop\"\xd8\x06\n" +
+	"\x06hadoop\x18\x02 \x01(\v2&.yandex.cloud.dataproc.v1.HadoopConfigR\x06hadoop\"\x9d\a\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
@@ -1691,13 +1709,14 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\r \x01(\bR\x12deletionProtection\x12 \n" +
 	"\flog_group_id\x18\x0e \x01(\tR\n" +
 	"logGroupId\x12O\n" +
-	"\venvironment\x18\x0f \x01(\x0e2-.yandex.cloud.dataproc.v1.Cluster.EnvironmentR\venvironment\x1a9\n" +
+	"\venvironment\x18\x0f \x01(\x0e2-.yandex.cloud.dataproc.v1.Cluster.EnvironmentR\venvironment\x12C\n" +
+	"\x1eautoscaling_service_account_id\x18\x10 \x01(\tR\x1bautoscalingServiceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xa3\x06\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xe8\x06\n" +
 	"\x14UpdateClusterRequest\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -1716,7 +1735,8 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12 \n" +
 	"\flog_group_id\x18\r \x01(\tR\n" +
-	"logGroupId\x1a9\n" +
+	"logGroupId\x12C\n" +
+	"\x1eautoscaling_service_account_id\x18\x0e \x01(\tR\x1bautoscalingServiceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +

@@ -39,30 +39,6 @@ func (m *Cluster) SetStatus(v Cluster_Status) {
 	m.Status = v
 }
 
-func (m *Cluster) SetSubnetIds(v []string) {
-	m.SubnetIds = v
-}
-
-func (m *Cluster) SetMinServersPerZone(v int64) {
-	m.MinServersPerZone = v
-}
-
-func (m *Cluster) SetMaxServersPerZone(v int64) {
-	m.MaxServersPerZone = v
-}
-
-func (m *Cluster) SetServersPerZone(v int64) {
-	m.ServersPerZone = v
-}
-
-func (m *Cluster) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
-}
-
-func (m *Cluster) SetHostGroupIds(v []string) {
-	m.HostGroupIds = v
-}
-
 func (m *Cluster) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }

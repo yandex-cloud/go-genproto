@@ -85,13 +85,16 @@ type ListDashboardsRequest struct {
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListDashboardResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,20,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// A filter expression that filters resources listed in the response.
-	// The expression must specify:
-	// 1. The field name. Currently you can use filtering only on the [Dashboard.name] field.
-	// 2. An `=` operator.
-	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	// Example: name="abc"
-	Filter        string `protobuf:"bytes,21,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Text substring to find in any of dashboard fields: id, name, etc
+	// result will include dashboards that meet BOTH filter and selector (see below) criteria
+	Filter string `protobuf:"bytes,21,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Selector string to match dashboard fields:
+	// id, name, description, managed_by, etc, format: FIELDNAME PREDICATE VALUE, FIELDNAME PREDICATE VALUE, ...
+	// and dashboard labels, format: labels.KEY PREDICATE VALUE, labels.KEY PREDICATE VALUE, ...
+	// supports GLOB and regex expressions
+	// dashboard must meet ALL tokens in selector string
+	// example: name = "New", description = "*new*", labels.key != "bad"
+	Selectors     string `protobuf:"bytes,22,opt,name=selectors,proto3" json:"selectors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -159,6 +162,13 @@ func (x *ListDashboardsRequest) GetPageToken() string {
 func (x *ListDashboardsRequest) GetFilter() string {
 	if x != nil {
 		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListDashboardsRequest) GetSelectors() string {
+	if x != nil {
+		return x.Selectors
 	}
 	return ""
 }
@@ -1108,7 +1118,7 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\n" +
 	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\"F\n" +
 	"\x13GetDashboardRequest\x12/\n" +
-	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xce\x01\n" +
+	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xf8\x01\n" +
 	"\x15ListDashboardsRequest\x12+\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50H\x00R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x13 \x01(\x03B\n" +
@@ -1116,7 +1126,9 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\n" +
 	"page_token\x18\x14 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x15 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filterB\v\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12(\n" +
+	"\tselectors\x18\x16 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\tselectorsB\v\n" +
 	"\tcontainerJ\x04\b\x03\x10\x13\"\x87\x01\n" +
 	"\x16ListDashboardsResponse\x12E\n" +
 	"\n" +

@@ -53,13 +53,13 @@ type ClusterServiceClient interface {
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Hive Metastore Cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stop the specified Hive Metastore Cluster.
+	// Stops the specified Hive Metastore Cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start the specified Hive a Metastore Cluster.
+	// Starts the specified Hive a Metastore Cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Import data to the specified Hive Metastore Cluster.
+	// Imports data to the specified Hive Metastore Cluster.
 	ImportData(ctx context.Context, in *ImportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Export data from the specified Hive Metastore Cluster.
+	// Exports data from the specified Hive Metastore Cluster.
 	ExportData(ctx context.Context, in *ExportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -192,13 +192,13 @@ type ClusterServiceServer interface {
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified Hive Metastore Cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Stop the specified Hive Metastore Cluster.
+	// Stops the specified Hive Metastore Cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Start the specified Hive a Metastore Cluster.
+	// Starts the specified Hive a Metastore Cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Import data to the specified Hive Metastore Cluster.
+	// Imports data to the specified Hive Metastore Cluster.
 	ImportData(context.Context, *ImportDataRequest) (*operation.Operation, error)
-	// Export data from the specified Hive Metastore Cluster.
+	// Exports data from the specified Hive Metastore Cluster.
 	ExportData(context.Context, *ExportDataRequest) (*operation.Operation, error)
 }
 

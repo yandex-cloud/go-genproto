@@ -37,6 +37,8 @@ const (
 	LoadBalancerService_ListOperations_FullMethodName   = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/ListOperations"
 	LoadBalancerService_StartZonalShift_FullMethodName  = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/StartZonalShift"
 	LoadBalancerService_CancelZonalShift_FullMethodName = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/CancelZonalShift"
+	LoadBalancerService_DisableZones_FullMethodName     = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/DisableZones"
+	LoadBalancerService_EnableZones_FullMethodName      = "/yandex.cloud.apploadbalancer.v1.LoadBalancerService/EnableZones"
 )
 
 // LoadBalancerServiceClient is the client API for LoadBalancerService service.
@@ -83,10 +85,16 @@ type LoadBalancerServiceClient interface {
 	GetTargetStates(ctx context.Context, in *GetTargetStatesRequest, opts ...grpc.CallOption) (*GetTargetStatesResponse, error)
 	// Lists operations for the specified application load balancer.
 	ListOperations(ctx context.Context, in *ListLoadBalancerOperationsRequest, opts ...grpc.CallOption) (*ListLoadBalancerOperationsResponse, error)
+	// Deprecated: Do not use.
 	// Start ZonalShift for the specified load balancer.
 	StartZonalShift(ctx context.Context, in *StartZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Cancel ZonalShift for the specified load balancer.
 	CancelZonalShift(ctx context.Context, in *CancelZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Disable L7 traffic routing in zones for the specified load balancer.
+	DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Enable L7 traffic routing back in zones for the specified load balancer.
+	EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type loadBalancerServiceClient struct {
@@ -247,6 +255,7 @@ func (c *loadBalancerServiceClient) ListOperations(ctx context.Context, in *List
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *loadBalancerServiceClient) StartZonalShift(ctx context.Context, in *StartZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -257,10 +266,31 @@ func (c *loadBalancerServiceClient) StartZonalShift(ctx context.Context, in *Sta
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *loadBalancerServiceClient) CancelZonalShift(ctx context.Context, in *CancelZonalShiftRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, LoadBalancerService_CancelZonalShift_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loadBalancerServiceClient) DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, LoadBalancerService_DisableZones_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *loadBalancerServiceClient) EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, LoadBalancerService_EnableZones_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -311,10 +341,16 @@ type LoadBalancerServiceServer interface {
 	GetTargetStates(context.Context, *GetTargetStatesRequest) (*GetTargetStatesResponse, error)
 	// Lists operations for the specified application load balancer.
 	ListOperations(context.Context, *ListLoadBalancerOperationsRequest) (*ListLoadBalancerOperationsResponse, error)
+	// Deprecated: Do not use.
 	// Start ZonalShift for the specified load balancer.
 	StartZonalShift(context.Context, *StartZonalShiftRequest) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Cancel ZonalShift for the specified load balancer.
 	CancelZonalShift(context.Context, *CancelZonalShiftRequest) (*operation.Operation, error)
+	// Disable L7 traffic routing in zones for the specified load balancer.
+	DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error)
+	// Enable L7 traffic routing back in zones for the specified load balancer.
+	EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error)
 }
 
 // UnimplementedLoadBalancerServiceServer should be embedded to have
@@ -374,6 +410,12 @@ func (UnimplementedLoadBalancerServiceServer) StartZonalShift(context.Context, *
 }
 func (UnimplementedLoadBalancerServiceServer) CancelZonalShift(context.Context, *CancelZonalShiftRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelZonalShift not implemented")
+}
+func (UnimplementedLoadBalancerServiceServer) DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DisableZones not implemented")
+}
+func (UnimplementedLoadBalancerServiceServer) EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableZones not implemented")
 }
 func (UnimplementedLoadBalancerServiceServer) testEmbeddedByValue() {}
 
@@ -701,6 +743,42 @@ func _LoadBalancerService_CancelZonalShift_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LoadBalancerService_DisableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableZonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoadBalancerServiceServer).DisableZones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoadBalancerService_DisableZones_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoadBalancerServiceServer).DisableZones(ctx, req.(*DisableZonesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LoadBalancerService_EnableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableZonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoadBalancerServiceServer).EnableZones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LoadBalancerService_EnableZones_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoadBalancerServiceServer).EnableZones(ctx, req.(*EnableZonesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LoadBalancerService_ServiceDesc is the grpc.ServiceDesc for LoadBalancerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -775,6 +853,14 @@ var LoadBalancerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelZonalShift",
 			Handler:    _LoadBalancerService_CancelZonalShift_Handler,
+		},
+		{
+			MethodName: "DisableZones",
+			Handler:    _LoadBalancerService_DisableZones_Handler,
+		},
+		{
+			MethodName: "EnableZones",
+			Handler:    _LoadBalancerService_EnableZones_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

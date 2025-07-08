@@ -394,10 +394,10 @@ type NetworkLoadBalancer struct {
 	DeletionProtection bool `protobuf:"varint,14,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Specifies if network load balancer available to zonal shift.
 	AllowZonalShift bool `protobuf:"varint,15,opt,name=allow_zonal_shift,json=allowZonalShift,proto3" json:"allow_zonal_shift,omitempty"`
-	// List of shifted zones for the network load balancer.
-	ZonalShiftStatuses []*ZonalShiftStatus `protobuf:"bytes,17,rep,name=zonal_shift_statuses,json=zonalShiftStatuses,proto3" json:"zonal_shift_statuses,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// List of disabled zones for the network load balancer.
+	DisableZoneStatuses []*DisableZoneStatus `protobuf:"bytes,18,rep,name=disable_zone_statuses,json=disableZoneStatuses,proto3" json:"disable_zone_statuses,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *NetworkLoadBalancer) Reset() {
@@ -528,9 +528,9 @@ func (x *NetworkLoadBalancer) GetAllowZonalShift() bool {
 	return false
 }
 
-func (x *NetworkLoadBalancer) GetZonalShiftStatuses() []*ZonalShiftStatus {
+func (x *NetworkLoadBalancer) GetDisableZoneStatuses() []*DisableZoneStatus {
 	if x != nil {
-		return x.ZonalShiftStatuses
+		return x.DisableZoneStatuses
 	}
 	return nil
 }
@@ -755,32 +755,32 @@ func (x *TargetState) GetStatus() TargetState_Status {
 	return TargetState_STATUS_UNSPECIFIED
 }
 
-// Status of the shifted zones.
-type ZonalShiftStatus struct {
+// Status of the disabled zone.
+type DisableZoneStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of zone.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// Timestamp until which the zone will be shifted.
-	// If not present then zone will be shifted until it is removed through a separate call.
-	ShiftedUntil  *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=shifted_until,json=shiftedUntil,proto3" json:"shifted_until,omitempty"`
+	// Timestamp until which the zone will be disabled.
+	// If not present then zone will be disabled until it is removed through a separate call.
+	DisabledUntil *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=disabled_until,json=disabledUntil,proto3" json:"disabled_until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ZonalShiftStatus) Reset() {
-	*x = ZonalShiftStatus{}
+func (x *DisableZoneStatus) Reset() {
+	*x = DisableZoneStatus{}
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ZonalShiftStatus) String() string {
+func (x *DisableZoneStatus) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ZonalShiftStatus) ProtoMessage() {}
+func (*DisableZoneStatus) ProtoMessage() {}
 
-func (x *ZonalShiftStatus) ProtoReflect() protoreflect.Message {
+func (x *DisableZoneStatus) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -792,21 +792,21 @@ func (x *ZonalShiftStatus) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ZonalShiftStatus.ProtoReflect.Descriptor instead.
-func (*ZonalShiftStatus) Descriptor() ([]byte, []int) {
+// Deprecated: Use DisableZoneStatus.ProtoReflect.Descriptor instead.
+func (*DisableZoneStatus) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ZonalShiftStatus) GetZoneId() string {
+func (x *DisableZoneStatus) GetZoneId() string {
 	if x != nil {
 		return x.ZoneId
 	}
 	return ""
 }
 
-func (x *ZonalShiftStatus) GetShiftedUntil() *timestamppb.Timestamp {
+func (x *DisableZoneStatus) GetDisabledUntil() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ShiftedUntil
+		return x.DisabledUntil
 	}
 	return nil
 }
@@ -815,7 +815,7 @@ var File_yandex_cloud_loadbalancer_v1_network_load_balancer_proto protoreflect.F
 
 const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/loadbalancer/v1/network_load_balancer.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a/yandex/cloud/loadbalancer/v1/health_check.proto\x1a\x1dyandex/cloud/validation.proto\"\xf2\t\n" +
+	"8yandex/cloud/loadbalancer/v1/network_load_balancer.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a/yandex/cloud/loadbalancer/v1/health_check.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\t\n" +
 	"\x13NetworkLoadBalancer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -832,8 +832,8 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = ""
 	"\tlisteners\x18\f \x03(\v2&.yandex.cloud.loadbalancer.v1.ListenerR\tlisteners\x12g\n" +
 	"\x16attached_target_groups\x18\r \x03(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupR\x14attachedTargetGroups\x12/\n" +
 	"\x13deletion_protection\x18\x0e \x01(\bR\x12deletionProtection\x12*\n" +
-	"\x11allow_zonal_shift\x18\x0f \x01(\bR\x0fallowZonalShift\x12`\n" +
-	"\x14zonal_shift_statuses\x18\x11 \x03(\v2..yandex.cloud.loadbalancer.v1.ZonalShiftStatusR\x12zonalShiftStatuses\x1a9\n" +
+	"\x11allow_zonal_shift\x18\x0f \x01(\bR\x0fallowZonalShift\x12c\n" +
+	"\x15disable_zone_statuses\x18\x12 \x03(\v2/.yandex.cloud.loadbalancer.v1.DisableZoneStatusR\x13disableZoneStatuses\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x7f\n" +
@@ -853,7 +853,7 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = ""
 	"\bINTERNAL\x10\x02\"M\n" +
 	"\x0fSessionAffinity\x12 \n" +
 	"\x1cSESSION_AFFINITY_UNSPECIFIED\x10\x00\x12\x18\n" +
-	"\x14CLIENT_IP_PORT_PROTO\x10\x01J\x04\b\b\x10\tJ\x04\b\x10\x10\x11\"\xa2\x01\n" +
+	"\x14CLIENT_IP_PORT_PROTO\x10\x01J\x04\b\b\x10\tJ\x04\b\x10\x10\x11J\x04\b\x11\x10\x12\"\xa2\x01\n" +
 	"\x13AttachedTargetGroup\x124\n" +
 	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\x12U\n" +
 	"\rhealth_checks\x18\x02 \x03(\v2).yandex.cloud.loadbalancer.v1.HealthCheckB\x05\x82\xc81\x011R\fhealthChecks\"\xd7\x02\n" +
@@ -881,10 +881,10 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = ""
 	"\aHEALTHY\x10\x02\x12\r\n" +
 	"\tUNHEALTHY\x10\x03\x12\f\n" +
 	"\bDRAINING\x10\x04\x12\f\n" +
-	"\bINACTIVE\x10\x05\"r\n" +
-	"\x10ZonalShiftStatus\x12\x1d\n" +
-	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12?\n" +
-	"\rshifted_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fshiftedUntil*;\n" +
+	"\bINACTIVE\x10\x05\"u\n" +
+	"\x11DisableZoneStatus\x12\x1d\n" +
+	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12A\n" +
+	"\x0edisabled_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rdisabledUntil*;\n" +
 	"\tIpVersion\x12\x1a\n" +
 	"\x16IP_VERSION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04IPV4\x10\x01\x12\b\n" +
@@ -916,7 +916,7 @@ var file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_goTypes = []an
 	(*AttachedTargetGroup)(nil),              // 7: yandex.cloud.loadbalancer.v1.AttachedTargetGroup
 	(*Listener)(nil),                         // 8: yandex.cloud.loadbalancer.v1.Listener
 	(*TargetState)(nil),                      // 9: yandex.cloud.loadbalancer.v1.TargetState
-	(*ZonalShiftStatus)(nil),                 // 10: yandex.cloud.loadbalancer.v1.ZonalShiftStatus
+	(*DisableZoneStatus)(nil),                // 10: yandex.cloud.loadbalancer.v1.DisableZoneStatus
 	nil,                                      // 11: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.LabelsEntry
 	(*timestamppb.Timestamp)(nil),            // 12: google.protobuf.Timestamp
 	(*HealthCheck)(nil),                      // 13: yandex.cloud.loadbalancer.v1.HealthCheck
@@ -929,12 +929,12 @@ var file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_depIdxs = []in
 	3,  // 4: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.session_affinity:type_name -> yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.SessionAffinity
 	8,  // 5: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.listeners:type_name -> yandex.cloud.loadbalancer.v1.Listener
 	7,  // 6: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.attached_target_groups:type_name -> yandex.cloud.loadbalancer.v1.AttachedTargetGroup
-	10, // 7: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.zonal_shift_statuses:type_name -> yandex.cloud.loadbalancer.v1.ZonalShiftStatus
+	10, // 7: yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.disable_zone_statuses:type_name -> yandex.cloud.loadbalancer.v1.DisableZoneStatus
 	13, // 8: yandex.cloud.loadbalancer.v1.AttachedTargetGroup.health_checks:type_name -> yandex.cloud.loadbalancer.v1.HealthCheck
 	4,  // 9: yandex.cloud.loadbalancer.v1.Listener.protocol:type_name -> yandex.cloud.loadbalancer.v1.Listener.Protocol
 	0,  // 10: yandex.cloud.loadbalancer.v1.Listener.ip_version:type_name -> yandex.cloud.loadbalancer.v1.IpVersion
 	5,  // 11: yandex.cloud.loadbalancer.v1.TargetState.status:type_name -> yandex.cloud.loadbalancer.v1.TargetState.Status
-	12, // 12: yandex.cloud.loadbalancer.v1.ZonalShiftStatus.shifted_until:type_name -> google.protobuf.Timestamp
+	12, // 12: yandex.cloud.loadbalancer.v1.DisableZoneStatus.disabled_until:type_name -> google.protobuf.Timestamp
 	13, // [13:13] is the sub-list for method output_type
 	13, // [13:13] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name

@@ -4,6 +4,7 @@ package apploadbalancer
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -448,5 +449,41 @@ func (m *CancelZonalShiftMetadata) SetLoadBalancerId(v string) {
 }
 
 func (m *CancelZonalShiftMetadata) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *DisableZonesRequest) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *DisableZonesRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *DisableZonesRequest) SetDuration(v *durationpb.Duration) {
+	m.Duration = v
+}
+
+func (m *DisableZonesMetadata) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *DisableZonesMetadata) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *EnableZonesRequest) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *EnableZonesRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *EnableZonesMetadata) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *EnableZonesMetadata) SetZoneIds(v []string) {
 	m.ZoneIds = v
 }

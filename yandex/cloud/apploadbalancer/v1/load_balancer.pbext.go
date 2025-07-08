@@ -127,6 +127,10 @@ func (m *Location) SetZonalShiftActive(v bool) {
 	m.ZonalShiftActive = v
 }
 
+func (m *Location) SetZonalTrafficDisabled(v bool) {
+	m.ZonalTrafficDisabled = v
+}
+
 func (m *AllocationPolicy) SetLocations(v []*Location) {
 	m.Locations = v
 }

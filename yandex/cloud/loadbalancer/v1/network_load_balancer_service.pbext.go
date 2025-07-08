@@ -286,30 +286,30 @@ func (m *ListenerSpec) SetTargetPort(v int64) {
 	m.TargetPort = v
 }
 
-func (m *StartZonalShiftRequest) SetNetworkLoadBalancerId(v string) {
+func (m *DisableZonesRequest) SetNetworkLoadBalancerId(v string) {
 	m.NetworkLoadBalancerId = v
 }
 
-func (m *StartZonalShiftRequest) SetZoneIds(v []string) {
+func (m *DisableZonesRequest) SetZoneIds(v []string) {
 	m.ZoneIds = v
 }
 
-func (m *StartZonalShiftRequest) SetDuration(v *durationpb.Duration) {
+func (m *DisableZonesRequest) SetDuration(v *durationpb.Duration) {
 	m.Duration = v
 }
 
-func (m *StartZonalShiftMetadata) SetNetworkLoadBalancerId(v string) {
+func (m *DisableZonesMetadata) SetNetworkLoadBalancerId(v string) {
 	m.NetworkLoadBalancerId = v
 }
 
-func (m *CancelZonalShiftRequest) SetNetworkLoadBalancerId(v string) {
+func (m *EnableZonesRequest) SetNetworkLoadBalancerId(v string) {
 	m.NetworkLoadBalancerId = v
 }
 
-func (m *CancelZonalShiftRequest) SetZoneIds(v []string) {
+func (m *EnableZonesRequest) SetZoneIds(v []string) {
 	m.ZoneIds = v
 }
 
-func (m *CancelZonalShiftMetadata) SetNetworkLoadBalancerId(v string) {
+func (m *EnableZonesMetadata) SetNetworkLoadBalancerId(v string) {
 	m.NetworkLoadBalancerId = v
 }

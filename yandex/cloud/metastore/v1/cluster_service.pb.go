@@ -220,20 +220,6 @@ type CreateClusterRequest struct {
 	// Custom labels for the Metastore cluster as “ key:value “ pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Subnet ids to put metastore servers.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster_service.proto.
-	SubnetIds []string `protobuf:"bytes,6,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
-	// Minimum number of metastore servers per zone.
-	MinServersPerZone int64 `protobuf:"varint,7,opt,name=min_servers_per_zone,json=minServersPerZone,proto3" json:"min_servers_per_zone,omitempty"`
-	// Maximum number of metastore servers per zone.
-	MaxServersPerZone int64 `protobuf:"varint,8,opt,name=max_servers_per_zone,json=maxServersPerZone,proto3" json:"max_servers_per_zone,omitempty"`
-	// User security groups.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster_service.proto.
-	SecurityGroupIds []string `protobuf:"bytes,9,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// Host groups to place VMs of cluster on. Note: unused property.
-	HostGroupIds []string `protobuf:"bytes,10,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,11,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Metastore server version.
@@ -306,43 +292,6 @@ func (x *CreateClusterRequest) GetDescription() string {
 func (x *CreateClusterRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster_service.proto.
-func (x *CreateClusterRequest) GetSubnetIds() []string {
-	if x != nil {
-		return x.SubnetIds
-	}
-	return nil
-}
-
-func (x *CreateClusterRequest) GetMinServersPerZone() int64 {
-	if x != nil {
-		return x.MinServersPerZone
-	}
-	return 0
-}
-
-func (x *CreateClusterRequest) GetMaxServersPerZone() int64 {
-	if x != nil {
-		return x.MaxServersPerZone
-	}
-	return 0
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster_service.proto.
-func (x *CreateClusterRequest) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
-}
-
-func (x *CreateClusterRequest) GetHostGroupIds() []string {
-	if x != nil {
-		return x.HostGroupIds
 	}
 	return nil
 }
@@ -501,10 +450,6 @@ type UpdateClusterRequest struct {
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// User security groups.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster_service.proto.
-	SecurityGroupIds []string `protobuf:"bytes,6,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Service account used to access Cloud resources.
@@ -582,14 +527,6 @@ func (x *UpdateClusterRequest) GetDescription() string {
 func (x *UpdateClusterRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/metastore/v1/cluster_service.proto.
-func (x *UpdateClusterRequest) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
 	}
 	return nil
 }
@@ -1399,19 +1336,12 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.metastore.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x83\b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa6\x06\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.metastore.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12!\n" +
-	"\n" +
-	"subnet_ids\x18\x06 \x03(\tB\x02\x18\x01R\tsubnetIds\x12/\n" +
-	"\x14min_servers_per_zone\x18\a \x01(\x03R\x11minServersPerZone\x12/\n" +
-	"\x14max_servers_per_zone\x18\b \x01(\x03R\x11maxServersPerZone\x120\n" +
-	"\x12security_group_ids\x18\t \x03(\tB\x02\x18\x01R\x10securityGroupIds\x12$\n" +
-	"\x0ehost_group_ids\x18\n" +
-	" \x03(\tR\fhostGroupIds\x12/\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.metastore.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
 	"\x13deletion_protection\x18\v \x01(\bR\x12deletionProtection\x12\x18\n" +
 	"\aversion\x18\f \x01(\tR\aversion\x12F\n" +
 	"\vconfig_spec\x18\r \x01(\v2%.yandex.cloud.metastore.v1.ConfigSpecR\n" +
@@ -1422,13 +1352,13 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\x12maintenance_window\x18\x11 \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"6\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\v\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"6\n" +
 	"\x15UpdateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x9a\a\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xee\x06\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -1436,8 +1366,7 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"updateMask\x125\n" +
 	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.metastore.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x120\n" +
-	"\x12security_group_ids\x18\x06 \x03(\tB\x02\x18\x01R\x10securityGroupIds\x12/\n" +
+	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.metastore.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
 	"\x13deletion_protection\x18\a \x01(\bR\x12deletionProtection\x126\n" +
 	"\x12service_account_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12B\n" +
 	"\alogging\x18\t \x01(\v2(.yandex.cloud.metastore.v1.LoggingConfigR\alogging\x12U\n" +
@@ -1448,7 +1377,7 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\x12maintenance_window\x18\f \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"G\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\a\"G\n" +
 	"\x17UpdateNetworkConfigSpec\x12,\n" +
 	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds\"C\n" +
 	"\x14DeleteClusterRequest\x12+\n" +

@@ -51,26 +51,6 @@ func (m *CreateClusterRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreateClusterRequest) SetSubnetIds(v []string) {
-	m.SubnetIds = v
-}
-
-func (m *CreateClusterRequest) SetMinServersPerZone(v int64) {
-	m.MinServersPerZone = v
-}
-
-func (m *CreateClusterRequest) SetMaxServersPerZone(v int64) {
-	m.MaxServersPerZone = v
-}
-
-func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
-}
-
-func (m *CreateClusterRequest) SetHostGroupIds(v []string) {
-	m.HostGroupIds = v
-}
-
 func (m *CreateClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
@@ -125,10 +105,6 @@ func (m *UpdateClusterRequest) SetDescription(v string) {
 
 func (m *UpdateClusterRequest) SetLabels(v map[string]string) {
 	m.Labels = v
-}
-
-func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
 }
 
 func (m *UpdateClusterRequest) SetDeletionProtection(v bool) {

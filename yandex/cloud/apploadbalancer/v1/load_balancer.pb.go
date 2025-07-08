@@ -629,9 +629,15 @@ type Location struct {
 	// subject to [LoadBalancingConfig.locality_aware_routing_percent] and [LoadBalancingConfig.strict_locality] settings.
 	DisableTraffic bool `protobuf:"varint,3,opt,name=disable_traffic,json=disableTraffic,proto3" json:"disable_traffic,omitempty"`
 	// Show zonal shift status for the location.
+	// Deprecated: use [zonal_traffic_disabled] below to track traffic status.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/apploadbalancer/v1/load_balancer.proto.
 	ZonalShiftActive bool `protobuf:"varint,4,opt,name=zonal_shift_active,json=zonalShiftActive,proto3" json:"zonal_shift_active,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Computed field: will be set to true if all traffic in zone is disabled
+	// either manually by user or automatically by Cloud infrastructure.
+	ZonalTrafficDisabled bool `protobuf:"varint,5,opt,name=zonal_traffic_disabled,json=zonalTrafficDisabled,proto3" json:"zonal_traffic_disabled,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Location) Reset() {
@@ -685,9 +691,17 @@ func (x *Location) GetDisableTraffic() bool {
 	return false
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/apploadbalancer/v1/load_balancer.proto.
 func (x *Location) GetZonalShiftActive() bool {
 	if x != nil {
 		return x.ZonalShiftActive
+	}
+	return false
+}
+
+func (x *Location) GetZonalTrafficDisabled() bool {
+	if x != nil {
+		return x.ZonalTrafficDisabled
 	}
 	return false
 }
@@ -1802,12 +1816,13 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_rawDesc = "" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x1b\n" +
 	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\"/\n" +
 	"\x13ExternalIpv6Address\x12\x18\n" +
-	"\aaddress\x18\x01 \x01(\tR\aaddress\"\x9d\x01\n" +
+	"\aaddress\x18\x01 \x01(\tR\aaddress\"\xd7\x01\n" +
 	"\bLocation\x12\x1d\n" +
 	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12\x1b\n" +
 	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\x12'\n" +
-	"\x0fdisable_traffic\x18\x03 \x01(\bR\x0edisableTraffic\x12,\n" +
-	"\x12zonal_shift_active\x18\x04 \x01(\bR\x10zonalShiftActive\"h\n" +
+	"\x0fdisable_traffic\x18\x03 \x01(\bR\x0edisableTraffic\x120\n" +
+	"\x12zonal_shift_active\x18\x04 \x01(\bB\x02\x18\x01R\x10zonalShiftActive\x124\n" +
+	"\x16zonal_traffic_disabled\x18\x05 \x01(\bR\x14zonalTrafficDisabled\"h\n" +
 	"\x10AllocationPolicy\x12T\n" +
 	"\tlocations\x18\x01 \x03(\v2).yandex.cloud.apploadbalancer.v1.LocationB\v\x82\xc81\x03>=1\x90\xc81\x01R\tlocations\"\xd1\x02\n" +
 	"\bListener\x12\x18\n" +
