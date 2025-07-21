@@ -28,7 +28,7 @@ const (
 
 type GetStreamLineRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line to retrieve.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -73,30 +73,32 @@ func (x *GetStreamLineRequest) GetStreamLineId() string {
 
 type ListStreamLinesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the stream lines to list.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of stream lines to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListStreamLinesResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "<field> <order>" (e.g. "createdAt desc").
+	// Specifies the ordering of results.
+	// Format is "<field> <order>" (e.g., "createdAt desc").
 	// Default: "id asc".
-	// Possible fields: ["id", "title", "createdAt", "updatedAt"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported fields: ["id", "title", "createdAt", "updatedAt"].
+	// Both snake_case and camelCase field names are supported.
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	// Filter expression that filters resources listed in the response.
-	// Expressions are composed of terms connected by logic operators.
-	// If value contains spaces or quotes,
-	// it should be in quotes (`'` or `"`) with the inner quotes being backslash escaped.
+	// Filter expression to narrow down the list of returned stream lines.
+	// Expressions consist of terms connected by logical operators.
+	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
+	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
-	// Supported string match operators: ["=", "!=", ":"].
-	// Operator ":" stands for substring matching.
-	// Filter expressions may also contain parentheses to group logical operands.
-	// Example: `key1='value' AND (key2!='\'value\” OR key2:"\"value\"")`
-	// Supported fields: ["id", "title"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
+	// Parentheses can be used to group logical expressions.
+	//
+	// Example: `title:'main' AND id='line-1'`
+	//
+	// Filterable fields: ["id", "title"].
+	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -169,9 +171,11 @@ func (x *ListStreamLinesRequest) GetFilter() string {
 
 type ListStreamLinesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of lines for channel.
+	// List of stream lines matching the request criteria.
+	// May be empty if no stream lines match the criteria or if the channel has no stream lines.
 	StreamLines []*StreamLine `protobuf:"bytes,1,rep,name=stream_lines,json=streamLines,proto3" json:"stream_lines,omitempty"`
-	// Token for getting the next page.
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -223,9 +227,9 @@ func (x *ListStreamLinesResponse) GetNextPageToken() string {
 
 type BatchGetStreamLinesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the stream lines to retrieve.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of requested stream line IDs.
+	// List of stream line IDs to retrieve.
 	StreamLineIds []string `protobuf:"bytes,2,rep,name=stream_line_ids,json=streamLineIds,proto3" json:"stream_line_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -277,7 +281,7 @@ func (x *BatchGetStreamLinesRequest) GetStreamLineIds() []string {
 
 type BatchGetStreamLinesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of lines for specific channel.
+	// List of stream lines matching the requested IDs.
 	StreamLines   []*StreamLine `protobuf:"bytes,1,rep,name=stream_lines,json=streamLines,proto3" json:"stream_lines,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -326,10 +330,6 @@ type CreateStreamLineRequest struct {
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Line title.
 	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	// ID of the thumbnail.
-	ThumbnailId string `protobuf:"bytes,3,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
-	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Video signal settings.
 	//
 	// Types that are valid to be assigned to InputParams:
@@ -344,8 +344,13 @@ type CreateStreamLineRequest struct {
 	//	*CreateStreamLineRequest_ManualLine
 	//	*CreateStreamLineRequest_AutoLine
 	LineTypeParams isCreateStreamLineRequest_LineTypeParams `protobuf_oneof:"line_type_params"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Custom user-defined labels as key:value pairs.
+	// Maximum 64 labels per stream line.
+	// Keys must be lowercase alphanumeric strings with optional hyphens/underscores.
+	// Values can contain alphanumeric characters and various symbols.
+	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateStreamLineRequest) Reset() {
@@ -390,20 +395,6 @@ func (x *CreateStreamLineRequest) GetTitle() string {
 		return x.Title
 	}
 	return ""
-}
-
-func (x *CreateStreamLineRequest) GetThumbnailId() string {
-	if x != nil {
-		return x.ThumbnailId
-	}
-	return ""
-}
-
-func (x *CreateStreamLineRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
 }
 
 func (x *CreateStreamLineRequest) GetInputParams() isCreateStreamLineRequest_InputParams {
@@ -456,6 +447,13 @@ func (x *CreateStreamLineRequest) GetAutoLine() *AutoLineParams {
 	return nil
 }
 
+func (x *CreateStreamLineRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
 type isCreateStreamLineRequest_InputParams interface {
 	isCreateStreamLineRequest_InputParams()
 }
@@ -479,12 +477,12 @@ type isCreateStreamLineRequest_LineTypeParams interface {
 }
 
 type CreateStreamLineRequest_ManualLine struct {
-	// Manual control of stream.
+	// Manual stream control.
 	ManualLine *ManualLineParams `protobuf:"bytes,2000,opt,name=manual_line,json=manualLine,proto3,oneof"`
 }
 
 type CreateStreamLineRequest_AutoLine struct {
-	// Automatic control of stream.
+	// Automatic stream control.
 	AutoLine *AutoLineParams `protobuf:"bytes,2001,opt,name=auto_line,json=autoLine,proto3,oneof"`
 }
 
@@ -494,7 +492,7 @@ func (*CreateStreamLineRequest_AutoLine) isCreateStreamLineRequest_LineTypeParam
 
 type CreateStreamLineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -541,21 +539,24 @@ type UpdateStreamLineRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the line.
 	StreamLineId string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
-	// Field mask that specifies which fields of the line are going to be updated.
+	// Field mask specifying which fields of the stream line should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
 	// Line title.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// ID of the thumbnail.
-	ThumbnailId string `protobuf:"bytes,4,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
-	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Video signal settings.
 	//
 	// Types that are valid to be assigned to InputParams:
 	//
 	//	*UpdateStreamLineRequest_RtmpPush
 	//	*UpdateStreamLineRequest_RtmpPull
-	InputParams   isUpdateStreamLineRequest_InputParams `protobuf_oneof:"input_params"`
+	InputParams isUpdateStreamLineRequest_InputParams `protobuf_oneof:"input_params"`
+	// New custom labels for the stream line as `key:value` pairs.
+	// Maximum 64 labels per stream line.
+	// If provided, replaces all existing labels.
+	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -611,20 +612,6 @@ func (x *UpdateStreamLineRequest) GetTitle() string {
 	return ""
 }
 
-func (x *UpdateStreamLineRequest) GetThumbnailId() string {
-	if x != nil {
-		return x.ThumbnailId
-	}
-	return ""
-}
-
-func (x *UpdateStreamLineRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
 func (x *UpdateStreamLineRequest) GetInputParams() isUpdateStreamLineRequest_InputParams {
 	if x != nil {
 		return x.InputParams
@@ -650,6 +637,13 @@ func (x *UpdateStreamLineRequest) GetRtmpPull() *RTMPPullParams {
 	return nil
 }
 
+func (x *UpdateStreamLineRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
 type isUpdateStreamLineRequest_InputParams interface {
 	isUpdateStreamLineRequest_InputParams()
 }
@@ -670,7 +664,7 @@ func (*UpdateStreamLineRequest_RtmpPull) isUpdateStreamLineRequest_InputParams()
 
 type UpdateStreamLineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -715,7 +709,7 @@ func (x *UpdateStreamLineMetadata) GetStreamLineId() string {
 
 type DeleteStreamLineRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line to delete.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -760,7 +754,8 @@ func (x *DeleteStreamLineRequest) GetStreamLineId() string {
 
 type DeleteStreamLineMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line.
+	// This identifier can be used to track the stream line deletion operation.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -805,9 +800,10 @@ func (x *DeleteStreamLineMetadata) GetStreamLineId() string {
 
 type BatchDeleteStreamLinesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the stream lines to delete.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of line IDs.
+	// List of stream line IDs to delete.
+	// All stream lines must exist in the specified channel.
 	StreamLineIds []string `protobuf:"bytes,2,rep,name=stream_line_ids,json=streamLineIds,proto3" json:"stream_line_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -859,7 +855,9 @@ func (x *BatchDeleteStreamLinesRequest) GetStreamLineIds() []string {
 
 type BatchDeleteStreamLinesMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of line IDs.
+	// List of stream line IDs being deleted.
+	// This list can be used to track which stream lines are included
+	// in the batch deletion operation.
 	StreamLineIds []string `protobuf:"bytes,1,rep,name=stream_line_ids,json=streamLineIds,proto3" json:"stream_line_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -904,8 +902,10 @@ func (x *BatchDeleteStreamLinesMetadata) GetStreamLineIds() []string {
 
 type PerformLineActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line on which to perform the action.
 	StreamLineId string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
+	// Specifies which action to perform on the stream line.
+	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformLineActionRequest_Activate
@@ -982,10 +982,14 @@ type isPerformLineActionRequest_Action interface {
 }
 
 type PerformLineActionRequest_Activate struct {
+	// Activate the stream line, enabling it to receive and process video signals.
+	// This is typically used for automatic stream lines.
 	Activate *ActivateAction `protobuf:"bytes,1000,opt,name=activate,proto3,oneof"`
 }
 
 type PerformLineActionRequest_Deactivate struct {
+	// Deactivate the stream line, disabling it from receiving and processing video signals.
+	// This is typically used for automatic stream lines.
 	Deactivate *DeactivateAction `protobuf:"bytes,1001,opt,name=deactivate,proto3,oneof"`
 }
 
@@ -995,7 +999,9 @@ func (*PerformLineActionRequest_Deactivate) isPerformLineActionRequest_Action() 
 
 type PerformLineActionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line on which the action is being performed.
+	// This identifier can be used to track the action operation
+	// and to verify that the action is being applied to the correct stream line.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1038,6 +1044,7 @@ func (x *PerformLineActionMetadata) GetStreamLineId() string {
 	return ""
 }
 
+// Parameters for creating an RTMP push input type stream line.
 type RTMPPushParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1074,9 +1081,11 @@ func (*RTMPPushParams) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_line_service_proto_rawDescGZIP(), []int{15}
 }
 
+// Parameters for creating an RTMP pull input type stream line.
 type RTMPPullParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// URL of a RTMP streaming server.
+	// The RTMP URL from which to pull the video stream.
+	// Must be a valid RTMP URL starting with "rtmp://".
 	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1119,6 +1128,7 @@ func (x *RTMPPullParams) GetUrl() string {
 	return ""
 }
 
+// Parameters for manual stream line.
 type ManualLineParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1155,6 +1165,7 @@ func (*ManualLineParams) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_line_service_proto_rawDescGZIP(), []int{17}
 }
 
+// Parameters for auto stream line.
 type AutoLineParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1191,6 +1202,7 @@ func (*AutoLineParams) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_line_service_proto_rawDescGZIP(), []int{18}
 }
 
+// Parameters for the activate action.
 type ActivateAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1227,6 +1239,7 @@ func (*ActivateAction) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_line_service_proto_rawDescGZIP(), []int{19}
 }
 
+// Parameters for the deactivate action.
 type DeactivateAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1265,7 +1278,8 @@ func (*DeactivateAction) Descriptor() ([]byte, []int) {
 
 type GetStreamKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line for which to retrieve the stream key.
+	// The stream line must be a push-type input (RTMP push or SRT push).
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1310,7 +1324,8 @@ func (x *GetStreamKeyRequest) GetStreamLineId() string {
 
 type UpdateStreamKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line for which to update the stream key.
+	// The stream line must be a push-type input (RTMP push or SRT push).
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1355,7 +1370,7 @@ func (x *UpdateStreamKeyRequest) GetStreamLineId() string {
 
 type UpdateStreamKeyMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the line.
+	// ID of the stream line.
 	StreamLineId  string `protobuf:"bytes,1,opt,name=stream_line_id,json=streamLineId,proto3" json:"stream_line_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1404,14 +1419,14 @@ const file_yandex_cloud_video_v1_stream_line_service_proto_rawDesc = "" +
 	"\n" +
 	"/yandex/cloud/video/v1/stream_line_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/video/v1/stream_line.proto\"J\n" +
 	"\x14GetStreamLineRequest\x122\n" +
-	"\x0estream_line_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fstreamLineId\"\xde\x01\n" +
+	"\x0estream_line_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fstreamLineId\"\xe8\x01\n" +
 	"\x16ListStreamLinesRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12*\n" +
 	"\n" +
-	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageToken\x12\x19\n" +
-	"\border_by\x18f \x01(\tR\aorderBy\x12\"\n" +
+	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageToken\x12#\n" +
+	"\border_by\x18f \x01(\tB\b\x8a\xc81\x04<=50R\aorderBy\x12\"\n" +
 	"\x06filter\x18g \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filterJ\x04\b\x02\x10d\"\x8d\x01\n" +
 	"\x17ListStreamLinesResponse\x12D\n" +
@@ -1422,38 +1437,36 @@ const file_yandex_cloud_video_v1_stream_line_service_proto_rawDesc = "" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x129\n" +
 	"\x0fstream_line_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\rstreamLineIds\"c\n" +
 	"\x1bBatchGetStreamLinesResponse\x12D\n" +
-	"\fstream_lines\x18\x01 \x03(\v2!.yandex.cloud.video.v1.StreamLineR\vstreamLines\"\xde\x05\n" +
+	"\fstream_lines\x18\x01 \x03(\v2!.yandex.cloud.video.v1.StreamLineR\vstreamLines\"\xb7\x05\n" +
 	"\x17CreateStreamLineRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12#\n" +
-	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12+\n" +
-	"\fthumbnail_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x12\x97\x01\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v2:.yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12E\n" +
+	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12E\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.RTMPPushParamsH\x00R\brtmpPush\x12E\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2%.yandex.cloud.video.v1.RTMPPullParamsH\x00R\brtmpPull\x12K\n" +
 	"\vmanual_line\x18\xd0\x0f \x01(\v2'.yandex.cloud.video.v1.ManualLineParamsH\x01R\n" +
 	"manualLine\x12E\n" +
-	"\tauto_line\x18\xd1\x0f \x01(\v2%.yandex.cloud.video.v1.AutoLineParamsH\x01R\bautoLine\x1a9\n" +
+	"\tauto_line\x18\xd1\x0f \x01(\v2%.yandex.cloud.video.v1.AutoLineParamsH\x01R\bautoLine\x12\x97\x01\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v2:.yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x14\n" +
 	"\finput_params\x12\x04\xc0\xc11\x01B\x18\n" +
-	"\x10line_type_params\x12\x04\xc0\xc11\x01J\x05\b\x04\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xeb\a\x10\xd0\x0f\"@\n" +
+	"\x10line_type_params\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04J\x05\b\x04\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xeb\a\x10\xd0\x0f\"@\n" +
 	"\x18CreateStreamLineMetadata\x12$\n" +
-	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"\xee\x04\n" +
+	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"\xc7\x04\n" +
 	"\x17UpdateStreamLineRequest\x122\n" +
 	"\x0estream_line_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fstreamLineId\x12?\n" +
 	"\n" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
-	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12+\n" +
-	"\fthumbnail_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x12\x97\x01\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v2:.yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12E\n" +
+	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12E\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.RTMPPushParamsH\x00R\brtmpPush\x12E\n" +
-	"\trtmp_pull\x18\xea\a \x01(\v2%.yandex.cloud.video.v1.RTMPPullParamsH\x00R\brtmpPull\x1a9\n" +
+	"\trtmp_pull\x18\xea\a \x01(\v2%.yandex.cloud.video.v1.RTMPPullParamsH\x00R\brtmpPull\x12\x97\x01\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v2:.yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\finput_paramsJ\x05\b\x05\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xeb\a\x10\xef\a\"@\n" +
+	"\finput_paramsJ\x04\b\x04\x10\x05J\x05\b\x05\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xeb\a\x10\xef\a\"@\n" +
 	"\x18UpdateStreamLineMetadata\x12$\n" +
 	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"M\n" +
 	"\x17DeleteStreamLineRequest\x122\n" +
@@ -1558,15 +1571,15 @@ var file_yandex_cloud_video_v1_stream_line_service_proto_goTypes = []any{
 var file_yandex_cloud_video_v1_stream_line_service_proto_depIdxs = []int32{
 	26, // 0: yandex.cloud.video.v1.ListStreamLinesResponse.stream_lines:type_name -> yandex.cloud.video.v1.StreamLine
 	26, // 1: yandex.cloud.video.v1.BatchGetStreamLinesResponse.stream_lines:type_name -> yandex.cloud.video.v1.StreamLine
-	24, // 2: yandex.cloud.video.v1.CreateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntry
-	15, // 3: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
-	16, // 4: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
-	17, // 5: yandex.cloud.video.v1.CreateStreamLineRequest.manual_line:type_name -> yandex.cloud.video.v1.ManualLineParams
-	18, // 6: yandex.cloud.video.v1.CreateStreamLineRequest.auto_line:type_name -> yandex.cloud.video.v1.AutoLineParams
+	15, // 2: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
+	16, // 3: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
+	17, // 4: yandex.cloud.video.v1.CreateStreamLineRequest.manual_line:type_name -> yandex.cloud.video.v1.ManualLineParams
+	18, // 5: yandex.cloud.video.v1.CreateStreamLineRequest.auto_line:type_name -> yandex.cloud.video.v1.AutoLineParams
+	24, // 6: yandex.cloud.video.v1.CreateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntry
 	27, // 7: yandex.cloud.video.v1.UpdateStreamLineRequest.field_mask:type_name -> google.protobuf.FieldMask
-	25, // 8: yandex.cloud.video.v1.UpdateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntry
-	15, // 9: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
-	16, // 10: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
+	15, // 8: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
+	16, // 9: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
+	25, // 10: yandex.cloud.video.v1.UpdateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntry
 	19, // 11: yandex.cloud.video.v1.PerformLineActionRequest.activate:type_name -> yandex.cloud.video.v1.ActivateAction
 	20, // 12: yandex.cloud.video.v1.PerformLineActionRequest.deactivate:type_name -> yandex.cloud.video.v1.DeactivateAction
 	0,  // 13: yandex.cloud.video.v1.StreamLineService.Get:input_type -> yandex.cloud.video.v1.GetStreamLineRequest

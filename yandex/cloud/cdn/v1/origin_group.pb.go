@@ -38,7 +38,9 @@ type OriginGroup struct {
 	// false - the option is disabled.
 	UseNext bool `protobuf:"varint,4,opt,name=use_next,json=useNext,proto3" json:"use_next,omitempty"`
 	// List of origins.
-	Origins       []*Origin `protobuf:"bytes,5,rep,name=origins,proto3" json:"origins,omitempty"`
+	Origins []*Origin `protobuf:"bytes,5,rep,name=origins,proto3" json:"origins,omitempty"`
+	// RESERVED: This field is reserved for future use and should not be used at this time.
+	ProviderType  string `protobuf:"bytes,6,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -108,17 +110,25 @@ func (x *OriginGroup) GetOrigins() []*Origin {
 	return nil
 }
 
+func (x *OriginGroup) GetProviderType() string {
+	if x != nil {
+		return x.ProviderType
+	}
+	return ""
+}
+
 var File_yandex_cloud_cdn_v1_origin_group_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_origin_group_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/cdn/v1/origin_group.proto\x12\x13yandex.cloud.cdn.v1\x1a yandex/cloud/cdn/v1/origin.proto\"\xa0\x01\n" +
+	"&yandex/cloud/cdn/v1/origin_group.proto\x12\x13yandex.cloud.cdn.v1\x1a yandex/cloud/cdn/v1/origin.proto\"\xc5\x01\n" +
 	"\vOriginGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x19\n" +
 	"\buse_next\x18\x04 \x01(\bR\auseNext\x125\n" +
-	"\aorigins\x18\x05 \x03(\v2\x1b.yandex.cloud.cdn.v1.OriginR\aoriginsBV\n" +
+	"\aorigins\x18\x05 \x03(\v2\x1b.yandex.cloud.cdn.v1.OriginR\aorigins\x12#\n" +
+	"\rprovider_type\x18\x06 \x01(\tR\fproviderTypeBV\n" +
 	"\x17yandex.cloud.api.cdn.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cdn/v1;cdnb\x06proto3"
 
 var (

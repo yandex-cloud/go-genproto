@@ -30,7 +30,7 @@ const (
 
 type GetEpisodeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode to retrieve.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -75,33 +75,37 @@ func (x *GetEpisodeRequest) GetEpisodeId() string {
 
 type ListEpisodesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the parent resource to list episodes from (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*ListEpisodesRequest_StreamId
 	//	*ListEpisodesRequest_LineId
 	ParentId isListEpisodesRequest_ParentId `protobuf_oneof:"parent_id"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of episodes to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListEpisodesResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "<field> <order>" (e.g. "createdAt desc").
+	// Specifies the ordering of results.
+	// Format is "<field> <order>" (e.g., "createdAt desc").
 	// Default: "id asc".
-	// Possible fields: ["id", "createdAt", "updatedAt"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported fields: ["id", "createdAt", "updatedAt"].
+	// Both snake_case and camelCase field names are supported.
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	// Filter expression that filters resources listed in the response.
-	// Expressions are composed of terms connected by logic operators.
-	// If value contains spaces or quotes,
-	// it should be in quotes (`'` or `"`) with the inner quotes being backslash escaped.
+	// Filter expression to narrow down the list of returned episodes.
+	// Expressions consist of terms connected by logical operators.
+	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
+	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
-	// Supported string match operators: ["=", "!=", ":"].
-	// Operator ":" stands for substring matching.
-	// Filter expressions may also contain parentheses to group logical operands.
-	// Example: `key1='value' AND (key2!='\'value\” OR key2:"\"value\"")`
-	// Supported fields: ["id", "title"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
+	// Parentheses can be used to group logical expressions.
+	//
+	// Example: `title:'highlight' AND id='episode-1'`
+	//
+	// Filterable fields: ["id", "title"].
+	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -195,12 +199,12 @@ type isListEpisodesRequest_ParentId interface {
 }
 
 type ListEpisodesRequest_StreamId struct {
-	// ID of the stream.
+	// ID of the stream containing the episodes to list.
 	StreamId string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3,oneof"`
 }
 
 type ListEpisodesRequest_LineId struct {
-	// ID of the line.
+	// ID of the stream line containing the episodes to list.
 	LineId string `protobuf:"bytes,2,opt,name=line_id,json=lineId,proto3,oneof"`
 }
 
@@ -210,9 +214,11 @@ func (*ListEpisodesRequest_LineId) isListEpisodesRequest_ParentId() {}
 
 type ListEpisodesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of episodes for specific parent_id.
+	// List of episodes matching the request criteria.
+	// May be empty if no episodes match the criteria or if the parent resource has no episodes.
 	Episodes []*Episode `protobuf:"bytes,1,rep,name=episodes,proto3" json:"episodes,omitempty"`
-	// Token for getting the next page.
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -264,9 +270,9 @@ func (x *ListEpisodesResponse) GetNextPageToken() string {
 
 type BatchGetEpisodesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the episodes to retrieve.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of requested episode IDs.
+	// List of episode IDs to retrieve.
 	EpisodeIds    []string `protobuf:"bytes,2,rep,name=episode_ids,json=episodeIds,proto3" json:"episode_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -318,7 +324,7 @@ func (x *BatchGetEpisodesRequest) GetEpisodeIds() []string {
 
 type BatchGetEpisodesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of episodes for specific channel.
+	// List of episodes matching the requested IDs.
 	Episodes      []*Episode `protobuf:"bytes,1,rep,name=episodes,proto3" json:"episodes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -363,6 +369,8 @@ func (x *BatchGetEpisodesResponse) GetEpisodes() []*Episode {
 
 type CreateEpisodeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Parent resource ID to link the episode to (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*CreateEpisodeRequest_StreamId
@@ -385,12 +393,13 @@ type CreateEpisodeRequest struct {
 	//   - `0`: infinite dvr size, the full length of the stream allowed to display
 	//   - `>0`: size of dvr window in seconds, the minimum value is 30s
 	DvrSeconds int64 `protobuf:"varint,7,opt,name=dvr_seconds,json=dvrSeconds,proto3" json:"dvr_seconds,omitempty"`
-	// Episode access rights.
+	// ID of the style preset.
+	StylePresetId string `protobuf:"bytes,8,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// Episode access permission settings (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to AccessRights:
 	//
 	//	*CreateEpisodeRequest_PublicAccess
-	//	*CreateEpisodeRequest_AuthSystemAccess
 	//	*CreateEpisodeRequest_SignUrlAccess
 	AccessRights  isCreateEpisodeRequest_AccessRights `protobuf_oneof:"access_rights"`
 	unknownFields protoimpl.UnknownFields
@@ -494,6 +503,13 @@ func (x *CreateEpisodeRequest) GetDvrSeconds() int64 {
 	return 0
 }
 
+func (x *CreateEpisodeRequest) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *CreateEpisodeRequest) GetAccessRights() isCreateEpisodeRequest_AccessRights {
 	if x != nil {
 		return x.AccessRights
@@ -505,15 +521,6 @@ func (x *CreateEpisodeRequest) GetPublicAccess() *EpisodePublicAccessParams {
 	if x != nil {
 		if x, ok := x.AccessRights.(*CreateEpisodeRequest_PublicAccess); ok {
 			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *CreateEpisodeRequest) GetAuthSystemAccess() *EpisodeAuthSystemAccessParams {
-	if x != nil {
-		if x, ok := x.AccessRights.(*CreateEpisodeRequest_AuthSystemAccess); ok {
-			return x.AuthSystemAccess
 		}
 	}
 	return nil
@@ -551,26 +558,20 @@ type isCreateEpisodeRequest_AccessRights interface {
 }
 
 type CreateEpisodeRequest_PublicAccess struct {
-	// Episode is available to everyone.
+	// Episode is publicly available.
 	PublicAccess *EpisodePublicAccessParams `protobuf:"bytes,1000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
-type CreateEpisodeRequest_AuthSystemAccess struct {
-	// Checking access rights using the authorization system.
-	AuthSystemAccess *EpisodeAuthSystemAccessParams `protobuf:"bytes,1002,opt,name=auth_system_access,json=authSystemAccess,proto3,oneof"`
-}
-
 type CreateEpisodeRequest_SignUrlAccess struct {
-	// Checking access rights using url's signature.
+	// Access to the episode is restricted by temporarily signed links.
 	SignUrlAccess *EpisodeSignURLAccessParams `protobuf:"bytes,1003,opt,name=sign_url_access,json=signUrlAccess,proto3,oneof"`
 }
 
 func (*CreateEpisodeRequest_PublicAccess) isCreateEpisodeRequest_AccessRights() {}
 
-func (*CreateEpisodeRequest_AuthSystemAccess) isCreateEpisodeRequest_AccessRights() {}
-
 func (*CreateEpisodeRequest_SignUrlAccess) isCreateEpisodeRequest_AccessRights() {}
 
+// Parameters for episode public access rights.
 type EpisodePublicAccessParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -607,42 +608,7 @@ func (*EpisodePublicAccessParams) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{6}
 }
 
-type EpisodeAuthSystemAccessParams struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EpisodeAuthSystemAccessParams) Reset() {
-	*x = EpisodeAuthSystemAccessParams{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EpisodeAuthSystemAccessParams) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EpisodeAuthSystemAccessParams) ProtoMessage() {}
-
-func (x *EpisodeAuthSystemAccessParams) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EpisodeAuthSystemAccessParams.ProtoReflect.Descriptor instead.
-func (*EpisodeAuthSystemAccessParams) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{7}
-}
-
+// Parameters for episode access restrictions based on temporary signed links.
 type EpisodeSignURLAccessParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -651,7 +617,7 @@ type EpisodeSignURLAccessParams struct {
 
 func (x *EpisodeSignURLAccessParams) Reset() {
 	*x = EpisodeSignURLAccessParams{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -663,7 +629,7 @@ func (x *EpisodeSignURLAccessParams) String() string {
 func (*EpisodeSignURLAccessParams) ProtoMessage() {}
 
 func (x *EpisodeSignURLAccessParams) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -676,12 +642,12 @@ func (x *EpisodeSignURLAccessParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpisodeSignURLAccessParams.ProtoReflect.Descriptor instead.
 func (*EpisodeSignURLAccessParams) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{7}
 }
 
 type CreateEpisodeMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode being created.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -689,7 +655,7 @@ type CreateEpisodeMetadata struct {
 
 func (x *CreateEpisodeMetadata) Reset() {
 	*x = CreateEpisodeMetadata{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -701,7 +667,7 @@ func (x *CreateEpisodeMetadata) String() string {
 func (*CreateEpisodeMetadata) ProtoMessage() {}
 
 func (x *CreateEpisodeMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -714,7 +680,7 @@ func (x *CreateEpisodeMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEpisodeMetadata.ProtoReflect.Descriptor instead.
 func (*CreateEpisodeMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateEpisodeMetadata) GetEpisodeId() string {
@@ -728,15 +694,19 @@ type UpdateEpisodeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the episode.
 	EpisodeId string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
-	// Field mask that specifies which fields of the episode are going to be updated.
+	// Field mask specifying which fields of the episode should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
 	// Episode title.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	// Episode description.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the thumbnail.
-	ThumbnailId string                 `protobuf:"bytes,5,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	StartTime   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	ThumbnailId string `protobuf:"bytes,5,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
+	// Episode start time.
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// Episode finish time.
 	FinishTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
 	// Enables episode DVR mode.
@@ -746,12 +716,13 @@ type UpdateEpisodeRequest struct {
 	//   - `0`: infinite dvr size, the full length of the stream allowed to display
 	//   - `>0`: size of dvr window in seconds, the minimum value is 30s
 	DvrSeconds int64 `protobuf:"varint,8,opt,name=dvr_seconds,json=dvrSeconds,proto3" json:"dvr_seconds,omitempty"`
+	// New ID of the style preset to be applied to the episode player.
+	StylePresetId string `protobuf:"bytes,9,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
 	// Episode access rights.
 	//
 	// Types that are valid to be assigned to AccessRights:
 	//
 	//	*UpdateEpisodeRequest_PublicAccess
-	//	*UpdateEpisodeRequest_AuthSystemAccess
 	//	*UpdateEpisodeRequest_SignUrlAccess
 	AccessRights  isUpdateEpisodeRequest_AccessRights `protobuf_oneof:"access_rights"`
 	unknownFields protoimpl.UnknownFields
@@ -760,7 +731,7 @@ type UpdateEpisodeRequest struct {
 
 func (x *UpdateEpisodeRequest) Reset() {
 	*x = UpdateEpisodeRequest{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -772,7 +743,7 @@ func (x *UpdateEpisodeRequest) String() string {
 func (*UpdateEpisodeRequest) ProtoMessage() {}
 
 func (x *UpdateEpisodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -785,7 +756,7 @@ func (x *UpdateEpisodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEpisodeRequest.ProtoReflect.Descriptor instead.
 func (*UpdateEpisodeRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateEpisodeRequest) GetEpisodeId() string {
@@ -844,6 +815,13 @@ func (x *UpdateEpisodeRequest) GetDvrSeconds() int64 {
 	return 0
 }
 
+func (x *UpdateEpisodeRequest) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *UpdateEpisodeRequest) GetAccessRights() isUpdateEpisodeRequest_AccessRights {
 	if x != nil {
 		return x.AccessRights
@@ -855,15 +833,6 @@ func (x *UpdateEpisodeRequest) GetPublicAccess() *EpisodePublicAccessParams {
 	if x != nil {
 		if x, ok := x.AccessRights.(*UpdateEpisodeRequest_PublicAccess); ok {
 			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *UpdateEpisodeRequest) GetAuthSystemAccess() *EpisodeAuthSystemAccessParams {
-	if x != nil {
-		if x, ok := x.AccessRights.(*UpdateEpisodeRequest_AuthSystemAccess); ok {
-			return x.AuthSystemAccess
 		}
 	}
 	return nil
@@ -883,29 +852,22 @@ type isUpdateEpisodeRequest_AccessRights interface {
 }
 
 type UpdateEpisodeRequest_PublicAccess struct {
-	// Episode is available to everyone.
+	// Episode is publicly available.
 	PublicAccess *EpisodePublicAccessParams `protobuf:"bytes,1000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
-type UpdateEpisodeRequest_AuthSystemAccess struct {
-	// Checking access rights using the authorization system.
-	AuthSystemAccess *EpisodeAuthSystemAccessParams `protobuf:"bytes,1002,opt,name=auth_system_access,json=authSystemAccess,proto3,oneof"`
-}
-
 type UpdateEpisodeRequest_SignUrlAccess struct {
-	// Checking access rights using url's signature.
+	// Access to the episode is restricted by temporarily signed links.
 	SignUrlAccess *EpisodeSignURLAccessParams `protobuf:"bytes,1003,opt,name=sign_url_access,json=signUrlAccess,proto3,oneof"`
 }
 
 func (*UpdateEpisodeRequest_PublicAccess) isUpdateEpisodeRequest_AccessRights() {}
 
-func (*UpdateEpisodeRequest_AuthSystemAccess) isUpdateEpisodeRequest_AccessRights() {}
-
 func (*UpdateEpisodeRequest_SignUrlAccess) isUpdateEpisodeRequest_AccessRights() {}
 
 type UpdateEpisodeMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode being updated.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -913,7 +875,7 @@ type UpdateEpisodeMetadata struct {
 
 func (x *UpdateEpisodeMetadata) Reset() {
 	*x = UpdateEpisodeMetadata{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -925,7 +887,7 @@ func (x *UpdateEpisodeMetadata) String() string {
 func (*UpdateEpisodeMetadata) ProtoMessage() {}
 
 func (x *UpdateEpisodeMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -938,7 +900,7 @@ func (x *UpdateEpisodeMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEpisodeMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateEpisodeMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateEpisodeMetadata) GetEpisodeId() string {
@@ -950,7 +912,7 @@ func (x *UpdateEpisodeMetadata) GetEpisodeId() string {
 
 type DeleteEpisodeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode to delete.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -958,7 +920,7 @@ type DeleteEpisodeRequest struct {
 
 func (x *DeleteEpisodeRequest) Reset() {
 	*x = DeleteEpisodeRequest{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -970,7 +932,7 @@ func (x *DeleteEpisodeRequest) String() string {
 func (*DeleteEpisodeRequest) ProtoMessage() {}
 
 func (x *DeleteEpisodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -983,7 +945,7 @@ func (x *DeleteEpisodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteEpisodeRequest.ProtoReflect.Descriptor instead.
 func (*DeleteEpisodeRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteEpisodeRequest) GetEpisodeId() string {
@@ -995,7 +957,8 @@ func (x *DeleteEpisodeRequest) GetEpisodeId() string {
 
 type DeleteEpisodeMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode being deleted.
+	// This identifier can be used to track the episode deletion operation.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1003,7 +966,7 @@ type DeleteEpisodeMetadata struct {
 
 func (x *DeleteEpisodeMetadata) Reset() {
 	*x = DeleteEpisodeMetadata{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1015,7 +978,7 @@ func (x *DeleteEpisodeMetadata) String() string {
 func (*DeleteEpisodeMetadata) ProtoMessage() {}
 
 func (x *DeleteEpisodeMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1028,7 +991,7 @@ func (x *DeleteEpisodeMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteEpisodeMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteEpisodeMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *DeleteEpisodeMetadata) GetEpisodeId() string {
@@ -1040,19 +1003,23 @@ func (x *DeleteEpisodeMetadata) GetEpisodeId() string {
 
 type BatchDeleteEpisodesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the parent resource containing the episodes to delete (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to Id:
 	//
 	//	*BatchDeleteEpisodesRequest_StreamId
 	//	*BatchDeleteEpisodesRequest_LineId
-	Id            isBatchDeleteEpisodesRequest_Id `protobuf_oneof:"id"`
-	EpisodeIds    []string                        `protobuf:"bytes,1,rep,name=episode_ids,json=episodeIds,proto3" json:"episode_ids,omitempty"`
+	Id isBatchDeleteEpisodesRequest_Id `protobuf_oneof:"id"`
+	// List of episode IDs to delete.
+	// All episodes must exist and be linked to the specified parent resource.
+	EpisodeIds    []string `protobuf:"bytes,1,rep,name=episode_ids,json=episodeIds,proto3" json:"episode_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BatchDeleteEpisodesRequest) Reset() {
 	*x = BatchDeleteEpisodesRequest{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1064,7 +1031,7 @@ func (x *BatchDeleteEpisodesRequest) String() string {
 func (*BatchDeleteEpisodesRequest) ProtoMessage() {}
 
 func (x *BatchDeleteEpisodesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1077,7 +1044,7 @@ func (x *BatchDeleteEpisodesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchDeleteEpisodesRequest.ProtoReflect.Descriptor instead.
 func (*BatchDeleteEpisodesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BatchDeleteEpisodesRequest) GetId() isBatchDeleteEpisodesRequest_Id {
@@ -1117,12 +1084,12 @@ type isBatchDeleteEpisodesRequest_Id interface {
 }
 
 type BatchDeleteEpisodesRequest_StreamId struct {
-	// ID of the stream.
+	// ID of the stream containing the episodes to delete.
 	StreamId string `protobuf:"bytes,100,opt,name=stream_id,json=streamId,proto3,oneof"`
 }
 
 type BatchDeleteEpisodesRequest_LineId struct {
-	// ID of the line.
+	// ID of the stream line containing the episodes to delete.
 	LineId string `protobuf:"bytes,101,opt,name=line_id,json=lineId,proto3,oneof"`
 }
 
@@ -1131,15 +1098,18 @@ func (*BatchDeleteEpisodesRequest_StreamId) isBatchDeleteEpisodesRequest_Id() {}
 func (*BatchDeleteEpisodesRequest_LineId) isBatchDeleteEpisodesRequest_Id() {}
 
 type BatchDeleteEpisodesMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	EpisodeIds    []string               `protobuf:"bytes,1,rep,name=episode_ids,json=episodeIds,proto3" json:"episode_ids,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of episode IDs being deleted.
+	// This list can be used to track which episodes are included
+	// in the batch deletion operation.
+	EpisodeIds    []string `protobuf:"bytes,1,rep,name=episode_ids,json=episodeIds,proto3" json:"episode_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BatchDeleteEpisodesMetadata) Reset() {
 	*x = BatchDeleteEpisodesMetadata{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1121,7 @@ func (x *BatchDeleteEpisodesMetadata) String() string {
 func (*BatchDeleteEpisodesMetadata) ProtoMessage() {}
 
 func (x *BatchDeleteEpisodesMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1164,7 +1134,7 @@ func (x *BatchDeleteEpisodesMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchDeleteEpisodesMetadata.ProtoReflect.Descriptor instead.
 func (*BatchDeleteEpisodesMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BatchDeleteEpisodesMetadata) GetEpisodeIds() []string {
@@ -1176,8 +1146,10 @@ func (x *BatchDeleteEpisodesMetadata) GetEpisodeIds() []string {
 
 type PerformEpisodeActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode on which to perform the action.
 	EpisodeId string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
+	// Specifies which action to perform on the episode (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformEpisodeActionRequest_Publish
@@ -1189,7 +1161,7 @@ type PerformEpisodeActionRequest struct {
 
 func (x *PerformEpisodeActionRequest) Reset() {
 	*x = PerformEpisodeActionRequest{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1201,7 +1173,7 @@ func (x *PerformEpisodeActionRequest) String() string {
 func (*PerformEpisodeActionRequest) ProtoMessage() {}
 
 func (x *PerformEpisodeActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1214,7 +1186,7 @@ func (x *PerformEpisodeActionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PerformEpisodeActionRequest.ProtoReflect.Descriptor instead.
 func (*PerformEpisodeActionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *PerformEpisodeActionRequest) GetEpisodeId() string {
@@ -1254,10 +1226,14 @@ type isPerformEpisodeActionRequest_Action interface {
 }
 
 type PerformEpisodeActionRequest_Publish struct {
+	// Publish the episode, making it available for watching.
+	// Changes the episode's visibility status to PUBLISHED.
 	Publish *PublishEpisodeAction `protobuf:"bytes,1002,opt,name=publish,proto3,oneof"`
 }
 
 type PerformEpisodeActionRequest_Unpublish struct {
+	// Unpublish the episode, making it unavailable for watching.
+	// Changes the episode's visibility status to UNPUBLISHED.
 	Unpublish *UnpublishEpisodeAction `protobuf:"bytes,1003,opt,name=unpublish,proto3,oneof"`
 }
 
@@ -1265,6 +1241,7 @@ func (*PerformEpisodeActionRequest_Publish) isPerformEpisodeActionRequest_Action
 
 func (*PerformEpisodeActionRequest_Unpublish) isPerformEpisodeActionRequest_Action() {}
 
+// Parameters for the publish action.
 type PublishEpisodeAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1273,7 +1250,7 @@ type PublishEpisodeAction struct {
 
 func (x *PublishEpisodeAction) Reset() {
 	*x = PublishEpisodeAction{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1285,7 +1262,7 @@ func (x *PublishEpisodeAction) String() string {
 func (*PublishEpisodeAction) ProtoMessage() {}
 
 func (x *PublishEpisodeAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1298,9 +1275,10 @@ func (x *PublishEpisodeAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublishEpisodeAction.ProtoReflect.Descriptor instead.
 func (*PublishEpisodeAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{16}
 }
 
+// Parameters for the unpublish action.
 type UnpublishEpisodeAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1309,7 +1287,7 @@ type UnpublishEpisodeAction struct {
 
 func (x *UnpublishEpisodeAction) Reset() {
 	*x = UnpublishEpisodeAction{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1321,7 +1299,7 @@ func (x *UnpublishEpisodeAction) String() string {
 func (*UnpublishEpisodeAction) ProtoMessage() {}
 
 func (x *UnpublishEpisodeAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1334,12 +1312,14 @@ func (x *UnpublishEpisodeAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnpublishEpisodeAction.ProtoReflect.Descriptor instead.
 func (*UnpublishEpisodeAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{17}
 }
 
 type PerformEpisodeActionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode on which the action is being performed.
+	// This identifier can be used to track the action operation
+	// and to verify that the action is being applied to the correct episode.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1347,7 +1327,7 @@ type PerformEpisodeActionMetadata struct {
 
 func (x *PerformEpisodeActionMetadata) Reset() {
 	*x = PerformEpisodeActionMetadata{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1359,7 +1339,7 @@ func (x *PerformEpisodeActionMetadata) String() string {
 func (*PerformEpisodeActionMetadata) ProtoMessage() {}
 
 func (x *PerformEpisodeActionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1372,7 +1352,7 @@ func (x *PerformEpisodeActionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PerformEpisodeActionMetadata.ProtoReflect.Descriptor instead.
 func (*PerformEpisodeActionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *PerformEpisodeActionMetadata) GetEpisodeId() string {
@@ -1384,10 +1364,13 @@ func (x *PerformEpisodeActionMetadata) GetEpisodeId() string {
 
 type GetEpisodePlayerURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
-	EpisodeId string               `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
-	Params    *EpisodePlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
-	// Optional field, used to set custom url expiration duration for episodes with sign_url_access
+	// ID of the episode for which to generate a player URL.
+	EpisodeId string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
+	// Optional player parameters to customize the playback experience.
+	// These parameters control initial player state such as mute, autoplay, and visibility of interface controls.
+	Params *EpisodePlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
+	// For episodes with signed URL access, specifies how long the generated URL will be valid.
+	// If not provided, a default expiration duration will be used.
 	SignedUrlExpirationDuration *durationpb.Duration `protobuf:"bytes,3,opt,name=signed_url_expiration_duration,json=signedUrlExpirationDuration,proto3" json:"signed_url_expiration_duration,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
@@ -1395,7 +1378,7 @@ type GetEpisodePlayerURLRequest struct {
 
 func (x *GetEpisodePlayerURLRequest) Reset() {
 	*x = GetEpisodePlayerURLRequest{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1407,7 +1390,7 @@ func (x *GetEpisodePlayerURLRequest) String() string {
 func (*GetEpisodePlayerURLRequest) ProtoMessage() {}
 
 func (x *GetEpisodePlayerURLRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1420,7 +1403,7 @@ func (x *GetEpisodePlayerURLRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEpisodePlayerURLRequest.ProtoReflect.Descriptor instead.
 func (*GetEpisodePlayerURLRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetEpisodePlayerURLRequest) GetEpisodeId() string {
@@ -1446,11 +1429,14 @@ func (x *GetEpisodePlayerURLRequest) GetSignedUrlExpirationDuration() *durationp
 
 type EpisodePlayerParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, a player will be muted by default.
+	// If true, the player will start with audio muted.
+	// Users can unmute the audio manually after playback starts.
 	Mute bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
-	// If true, playback will start automatically.
+	// If true, the episode will start playing automatically when the player loads.
+	// This may be subject to browser autoplay policies that restrict autoplay with sound.
 	Autoplay bool `protobuf:"varint,2,opt,name=autoplay,proto3" json:"autoplay,omitempty"`
-	// If true, a player interface will be hidden by default.
+	// If true, the player interface controls will be hidden initially.
+	// Users can typically reveal the controls by moving the mouse over the player.
 	Hidden        bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1458,7 +1444,7 @@ type EpisodePlayerParams struct {
 
 func (x *EpisodePlayerParams) Reset() {
 	*x = EpisodePlayerParams{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1470,7 +1456,7 @@ func (x *EpisodePlayerParams) String() string {
 func (*EpisodePlayerParams) ProtoMessage() {}
 
 func (x *EpisodePlayerParams) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1483,7 +1469,7 @@ func (x *EpisodePlayerParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpisodePlayerParams.ProtoReflect.Descriptor instead.
 func (*EpisodePlayerParams) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *EpisodePlayerParams) GetMute() bool {
@@ -1509,9 +1495,12 @@ func (x *EpisodePlayerParams) GetHidden() bool {
 
 type GetEpisodePlayerURLResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Direct link to the episode.
+	// Direct URL to the episode player.
+	// This URL can be used to access the episode in a web browser
+	// or shared with users who have appropriate permissions.
 	PlayerUrl string `protobuf:"bytes,1,opt,name=player_url,json=playerUrl,proto3" json:"player_url,omitempty"`
-	// HTML embed code in Iframe format.
+	// HTML embed code in iframe format that can be inserted into web pages.
+	// This code allows the episode to be embedded directly in third-party websites.
 	Html          string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1519,7 +1508,7 @@ type GetEpisodePlayerURLResponse struct {
 
 func (x *GetEpisodePlayerURLResponse) Reset() {
 	*x = GetEpisodePlayerURLResponse{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1531,7 +1520,7 @@ func (x *GetEpisodePlayerURLResponse) String() string {
 func (*GetEpisodePlayerURLResponse) ProtoMessage() {}
 
 func (x *GetEpisodePlayerURLResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1544,7 +1533,7 @@ func (x *GetEpisodePlayerURLResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEpisodePlayerURLResponse.ProtoReflect.Descriptor instead.
 func (*GetEpisodePlayerURLResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetEpisodePlayerURLResponse) GetPlayerUrl() string {
@@ -1563,7 +1552,7 @@ func (x *GetEpisodePlayerURLResponse) GetHtml() string {
 
 type GetEpisodeManifestsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// ID of the episode for which to retrieve manifest URLs.
 	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1571,7 +1560,7 @@ type GetEpisodeManifestsRequest struct {
 
 func (x *GetEpisodeManifestsRequest) Reset() {
 	*x = GetEpisodeManifestsRequest{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1583,7 +1572,7 @@ func (x *GetEpisodeManifestsRequest) String() string {
 func (*GetEpisodeManifestsRequest) ProtoMessage() {}
 
 func (x *GetEpisodeManifestsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1596,7 +1585,7 @@ func (x *GetEpisodeManifestsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEpisodeManifestsRequest.ProtoReflect.Descriptor instead.
 func (*GetEpisodeManifestsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetEpisodeManifestsRequest) GetEpisodeId() string {
@@ -1607,15 +1596,17 @@ func (x *GetEpisodeManifestsRequest) GetEpisodeId() string {
 }
 
 type GetEpisodeManifestsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Manifests     []*Manifest            `protobuf:"bytes,1,rep,name=manifests,proto3" json:"manifests,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of manifests available for the episode.
+	// Different manifests may represent different streaming formats (e.g., HLS, DASH)
+	Manifests     []*Manifest `protobuf:"bytes,1,rep,name=manifests,proto3" json:"manifests,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetEpisodeManifestsResponse) Reset() {
 	*x = GetEpisodeManifestsResponse{}
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1627,7 +1618,7 @@ func (x *GetEpisodeManifestsResponse) String() string {
 func (*GetEpisodeManifestsResponse) ProtoMessage() {}
 
 func (x *GetEpisodeManifestsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_video_v1_episode_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1640,7 +1631,7 @@ func (x *GetEpisodeManifestsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEpisodeManifestsResponse.ProtoReflect.Descriptor instead.
 func (*GetEpisodeManifestsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetEpisodeManifestsResponse) GetManifests() []*Manifest {
@@ -1677,7 +1668,7 @@ const file_yandex_cloud_video_v1_episode_service_proto_rawDesc = "" +
 	"\vepisode_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\n" +
 	"episodeIds\"V\n" +
 	"\x18BatchGetEpisodesResponse\x12:\n" +
-	"\bepisodes\x18\x01 \x03(\v2\x1e.yandex.cloud.video.v1.EpisodeR\bepisodes\"\xe1\x05\n" +
+	"\bepisodes\x18\x01 \x03(\v2\x1e.yandex.cloud.video.v1.EpisodeR\bepisodes\"\xb4\x05\n" +
 	"\x14CreateEpisodeRequest\x12'\n" +
 	"\tstream_id\x18d \x01(\tB\b\x8a\xc81\x04<=50H\x00R\bstreamId\x12#\n" +
 	"\aline_id\x18e \x01(\tB\b\x8a\xc81\x04<=50H\x00R\x06lineId\x12#\n" +
@@ -1690,18 +1681,17 @@ const file_yandex_cloud_video_v1_episode_service_proto_rawDesc = "" +
 	"\vfinish_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"finishTime\x12\x1f\n" +
 	"\vdvr_seconds\x18\a \x01(\x03R\n" +
-	"dvrSeconds\x12X\n" +
-	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessParamsH\x01R\fpublicAccess\x12e\n" +
-	"\x12auth_system_access\x18\xea\a \x01(\v24.yandex.cloud.video.v1.EpisodeAuthSystemAccessParamsH\x01R\x10authSystemAccess\x12\\\n" +
+	"dvrSeconds\x120\n" +
+	"\x0fstyle_preset_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\x12X\n" +
+	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessParamsH\x01R\fpublicAccess\x12\\\n" +
 	"\x0fsign_url_access\x18\xeb\a \x01(\v21.yandex.cloud.video.v1.EpisodeSignURLAccessParamsH\x01R\rsignUrlAccessB\x11\n" +
 	"\tparent_id\x12\x04\xc0\xc11\x01B\x15\n" +
-	"\raccess_rights\x12\x04\xc0\xc11\x01J\x06\b\xe9\a\x10\xea\aJ\x04\b\x01\x10\x02J\x04\b\b\x10dJ\x05\bf\x10\xe8\a\"\x1b\n" +
-	"\x19EpisodePublicAccessParams\"\x1f\n" +
-	"\x1dEpisodeAuthSystemAccessParams\"\x1c\n" +
+	"\raccess_rights\x12\x04\xc0\xc11\x01J\x06\b\xe9\a\x10\xea\aJ\x06\b\xea\a\x10\xeb\aJ\x04\b\x01\x10\x02J\x04\b\t\x10dJ\x05\bf\x10\xe8\a\"\x1b\n" +
+	"\x19EpisodePublicAccessParams\"\x1c\n" +
 	"\x1aEpisodeSignURLAccessParams\"6\n" +
 	"\x15CreateEpisodeMetadata\x12\x1d\n" +
 	"\n" +
-	"episode_id\x18\x01 \x01(\tR\tepisodeId\"\xd8\x05\n" +
+	"episode_id\x18\x01 \x01(\tR\tepisodeId\"\xab\x05\n" +
 	"\x14UpdateEpisodeRequest\x12+\n" +
 	"\n" +
 	"episode_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tepisodeId\x12?\n" +
@@ -1716,11 +1706,12 @@ const file_yandex_cloud_video_v1_episode_service_proto_rawDesc = "" +
 	"\vfinish_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"finishTime\x12\x1f\n" +
 	"\vdvr_seconds\x18\b \x01(\x03R\n" +
-	"dvrSeconds\x12X\n" +
-	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessParamsH\x00R\fpublicAccess\x12e\n" +
-	"\x12auth_system_access\x18\xea\a \x01(\v24.yandex.cloud.video.v1.EpisodeAuthSystemAccessParamsH\x00R\x10authSystemAccess\x12\\\n" +
+	"dvrSeconds\x120\n" +
+	"\x0fstyle_preset_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\x12X\n" +
+	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessParamsH\x00R\fpublicAccess\x12\\\n" +
 	"\x0fsign_url_access\x18\xeb\a \x01(\v21.yandex.cloud.video.v1.EpisodeSignURLAccessParamsH\x00R\rsignUrlAccessB\x0f\n" +
-	"\raccess_rightsJ\x06\b\xe9\a\x10\xea\aJ\x05\b\t\x10\xe8\a\"6\n" +
+	"\raccess_rightsJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xea\a\x10\xeb\aJ\x05\b\n" +
+	"\x10\xe8\a\"6\n" +
 	"\x15UpdateEpisodeMetadata\x12\x1d\n" +
 	"\n" +
 	"episode_id\x18\x01 \x01(\tR\tepisodeId\"C\n" +
@@ -1799,84 +1790,81 @@ func file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_video_v1_episode_service_proto_rawDescData
 }
 
-var file_yandex_cloud_video_v1_episode_service_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_yandex_cloud_video_v1_episode_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_yandex_cloud_video_v1_episode_service_proto_goTypes = []any{
-	(*GetEpisodeRequest)(nil),             // 0: yandex.cloud.video.v1.GetEpisodeRequest
-	(*ListEpisodesRequest)(nil),           // 1: yandex.cloud.video.v1.ListEpisodesRequest
-	(*ListEpisodesResponse)(nil),          // 2: yandex.cloud.video.v1.ListEpisodesResponse
-	(*BatchGetEpisodesRequest)(nil),       // 3: yandex.cloud.video.v1.BatchGetEpisodesRequest
-	(*BatchGetEpisodesResponse)(nil),      // 4: yandex.cloud.video.v1.BatchGetEpisodesResponse
-	(*CreateEpisodeRequest)(nil),          // 5: yandex.cloud.video.v1.CreateEpisodeRequest
-	(*EpisodePublicAccessParams)(nil),     // 6: yandex.cloud.video.v1.EpisodePublicAccessParams
-	(*EpisodeAuthSystemAccessParams)(nil), // 7: yandex.cloud.video.v1.EpisodeAuthSystemAccessParams
-	(*EpisodeSignURLAccessParams)(nil),    // 8: yandex.cloud.video.v1.EpisodeSignURLAccessParams
-	(*CreateEpisodeMetadata)(nil),         // 9: yandex.cloud.video.v1.CreateEpisodeMetadata
-	(*UpdateEpisodeRequest)(nil),          // 10: yandex.cloud.video.v1.UpdateEpisodeRequest
-	(*UpdateEpisodeMetadata)(nil),         // 11: yandex.cloud.video.v1.UpdateEpisodeMetadata
-	(*DeleteEpisodeRequest)(nil),          // 12: yandex.cloud.video.v1.DeleteEpisodeRequest
-	(*DeleteEpisodeMetadata)(nil),         // 13: yandex.cloud.video.v1.DeleteEpisodeMetadata
-	(*BatchDeleteEpisodesRequest)(nil),    // 14: yandex.cloud.video.v1.BatchDeleteEpisodesRequest
-	(*BatchDeleteEpisodesMetadata)(nil),   // 15: yandex.cloud.video.v1.BatchDeleteEpisodesMetadata
-	(*PerformEpisodeActionRequest)(nil),   // 16: yandex.cloud.video.v1.PerformEpisodeActionRequest
-	(*PublishEpisodeAction)(nil),          // 17: yandex.cloud.video.v1.PublishEpisodeAction
-	(*UnpublishEpisodeAction)(nil),        // 18: yandex.cloud.video.v1.UnpublishEpisodeAction
-	(*PerformEpisodeActionMetadata)(nil),  // 19: yandex.cloud.video.v1.PerformEpisodeActionMetadata
-	(*GetEpisodePlayerURLRequest)(nil),    // 20: yandex.cloud.video.v1.GetEpisodePlayerURLRequest
-	(*EpisodePlayerParams)(nil),           // 21: yandex.cloud.video.v1.EpisodePlayerParams
-	(*GetEpisodePlayerURLResponse)(nil),   // 22: yandex.cloud.video.v1.GetEpisodePlayerURLResponse
-	(*GetEpisodeManifestsRequest)(nil),    // 23: yandex.cloud.video.v1.GetEpisodeManifestsRequest
-	(*GetEpisodeManifestsResponse)(nil),   // 24: yandex.cloud.video.v1.GetEpisodeManifestsResponse
-	(*Episode)(nil),                       // 25: yandex.cloud.video.v1.Episode
-	(*timestamppb.Timestamp)(nil),         // 26: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),         // 27: google.protobuf.FieldMask
-	(*durationpb.Duration)(nil),           // 28: google.protobuf.Duration
-	(*Manifest)(nil),                      // 29: yandex.cloud.video.v1.Manifest
-	(*operation.Operation)(nil),           // 30: yandex.cloud.operation.Operation
+	(*GetEpisodeRequest)(nil),            // 0: yandex.cloud.video.v1.GetEpisodeRequest
+	(*ListEpisodesRequest)(nil),          // 1: yandex.cloud.video.v1.ListEpisodesRequest
+	(*ListEpisodesResponse)(nil),         // 2: yandex.cloud.video.v1.ListEpisodesResponse
+	(*BatchGetEpisodesRequest)(nil),      // 3: yandex.cloud.video.v1.BatchGetEpisodesRequest
+	(*BatchGetEpisodesResponse)(nil),     // 4: yandex.cloud.video.v1.BatchGetEpisodesResponse
+	(*CreateEpisodeRequest)(nil),         // 5: yandex.cloud.video.v1.CreateEpisodeRequest
+	(*EpisodePublicAccessParams)(nil),    // 6: yandex.cloud.video.v1.EpisodePublicAccessParams
+	(*EpisodeSignURLAccessParams)(nil),   // 7: yandex.cloud.video.v1.EpisodeSignURLAccessParams
+	(*CreateEpisodeMetadata)(nil),        // 8: yandex.cloud.video.v1.CreateEpisodeMetadata
+	(*UpdateEpisodeRequest)(nil),         // 9: yandex.cloud.video.v1.UpdateEpisodeRequest
+	(*UpdateEpisodeMetadata)(nil),        // 10: yandex.cloud.video.v1.UpdateEpisodeMetadata
+	(*DeleteEpisodeRequest)(nil),         // 11: yandex.cloud.video.v1.DeleteEpisodeRequest
+	(*DeleteEpisodeMetadata)(nil),        // 12: yandex.cloud.video.v1.DeleteEpisodeMetadata
+	(*BatchDeleteEpisodesRequest)(nil),   // 13: yandex.cloud.video.v1.BatchDeleteEpisodesRequest
+	(*BatchDeleteEpisodesMetadata)(nil),  // 14: yandex.cloud.video.v1.BatchDeleteEpisodesMetadata
+	(*PerformEpisodeActionRequest)(nil),  // 15: yandex.cloud.video.v1.PerformEpisodeActionRequest
+	(*PublishEpisodeAction)(nil),         // 16: yandex.cloud.video.v1.PublishEpisodeAction
+	(*UnpublishEpisodeAction)(nil),       // 17: yandex.cloud.video.v1.UnpublishEpisodeAction
+	(*PerformEpisodeActionMetadata)(nil), // 18: yandex.cloud.video.v1.PerformEpisodeActionMetadata
+	(*GetEpisodePlayerURLRequest)(nil),   // 19: yandex.cloud.video.v1.GetEpisodePlayerURLRequest
+	(*EpisodePlayerParams)(nil),          // 20: yandex.cloud.video.v1.EpisodePlayerParams
+	(*GetEpisodePlayerURLResponse)(nil),  // 21: yandex.cloud.video.v1.GetEpisodePlayerURLResponse
+	(*GetEpisodeManifestsRequest)(nil),   // 22: yandex.cloud.video.v1.GetEpisodeManifestsRequest
+	(*GetEpisodeManifestsResponse)(nil),  // 23: yandex.cloud.video.v1.GetEpisodeManifestsResponse
+	(*Episode)(nil),                      // 24: yandex.cloud.video.v1.Episode
+	(*timestamppb.Timestamp)(nil),        // 25: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),        // 26: google.protobuf.FieldMask
+	(*durationpb.Duration)(nil),          // 27: google.protobuf.Duration
+	(*Manifest)(nil),                     // 28: yandex.cloud.video.v1.Manifest
+	(*operation.Operation)(nil),          // 29: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_video_v1_episode_service_proto_depIdxs = []int32{
-	25, // 0: yandex.cloud.video.v1.ListEpisodesResponse.episodes:type_name -> yandex.cloud.video.v1.Episode
-	25, // 1: yandex.cloud.video.v1.BatchGetEpisodesResponse.episodes:type_name -> yandex.cloud.video.v1.Episode
-	26, // 2: yandex.cloud.video.v1.CreateEpisodeRequest.start_time:type_name -> google.protobuf.Timestamp
-	26, // 3: yandex.cloud.video.v1.CreateEpisodeRequest.finish_time:type_name -> google.protobuf.Timestamp
+	24, // 0: yandex.cloud.video.v1.ListEpisodesResponse.episodes:type_name -> yandex.cloud.video.v1.Episode
+	24, // 1: yandex.cloud.video.v1.BatchGetEpisodesResponse.episodes:type_name -> yandex.cloud.video.v1.Episode
+	25, // 2: yandex.cloud.video.v1.CreateEpisodeRequest.start_time:type_name -> google.protobuf.Timestamp
+	25, // 3: yandex.cloud.video.v1.CreateEpisodeRequest.finish_time:type_name -> google.protobuf.Timestamp
 	6,  // 4: yandex.cloud.video.v1.CreateEpisodeRequest.public_access:type_name -> yandex.cloud.video.v1.EpisodePublicAccessParams
-	7,  // 5: yandex.cloud.video.v1.CreateEpisodeRequest.auth_system_access:type_name -> yandex.cloud.video.v1.EpisodeAuthSystemAccessParams
-	8,  // 6: yandex.cloud.video.v1.CreateEpisodeRequest.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessParams
-	27, // 7: yandex.cloud.video.v1.UpdateEpisodeRequest.field_mask:type_name -> google.protobuf.FieldMask
-	26, // 8: yandex.cloud.video.v1.UpdateEpisodeRequest.start_time:type_name -> google.protobuf.Timestamp
-	26, // 9: yandex.cloud.video.v1.UpdateEpisodeRequest.finish_time:type_name -> google.protobuf.Timestamp
-	6,  // 10: yandex.cloud.video.v1.UpdateEpisodeRequest.public_access:type_name -> yandex.cloud.video.v1.EpisodePublicAccessParams
-	7,  // 11: yandex.cloud.video.v1.UpdateEpisodeRequest.auth_system_access:type_name -> yandex.cloud.video.v1.EpisodeAuthSystemAccessParams
-	8,  // 12: yandex.cloud.video.v1.UpdateEpisodeRequest.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessParams
-	17, // 13: yandex.cloud.video.v1.PerformEpisodeActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishEpisodeAction
-	18, // 14: yandex.cloud.video.v1.PerformEpisodeActionRequest.unpublish:type_name -> yandex.cloud.video.v1.UnpublishEpisodeAction
-	21, // 15: yandex.cloud.video.v1.GetEpisodePlayerURLRequest.params:type_name -> yandex.cloud.video.v1.EpisodePlayerParams
-	28, // 16: yandex.cloud.video.v1.GetEpisodePlayerURLRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
-	29, // 17: yandex.cloud.video.v1.GetEpisodeManifestsResponse.manifests:type_name -> yandex.cloud.video.v1.Manifest
-	0,  // 18: yandex.cloud.video.v1.EpisodeService.Get:input_type -> yandex.cloud.video.v1.GetEpisodeRequest
-	1,  // 19: yandex.cloud.video.v1.EpisodeService.List:input_type -> yandex.cloud.video.v1.ListEpisodesRequest
-	3,  // 20: yandex.cloud.video.v1.EpisodeService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetEpisodesRequest
-	5,  // 21: yandex.cloud.video.v1.EpisodeService.Create:input_type -> yandex.cloud.video.v1.CreateEpisodeRequest
-	10, // 22: yandex.cloud.video.v1.EpisodeService.Update:input_type -> yandex.cloud.video.v1.UpdateEpisodeRequest
-	12, // 23: yandex.cloud.video.v1.EpisodeService.Delete:input_type -> yandex.cloud.video.v1.DeleteEpisodeRequest
-	14, // 24: yandex.cloud.video.v1.EpisodeService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteEpisodesRequest
-	16, // 25: yandex.cloud.video.v1.EpisodeService.PerformAction:input_type -> yandex.cloud.video.v1.PerformEpisodeActionRequest
-	20, // 26: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:input_type -> yandex.cloud.video.v1.GetEpisodePlayerURLRequest
-	23, // 27: yandex.cloud.video.v1.EpisodeService.GetManifests:input_type -> yandex.cloud.video.v1.GetEpisodeManifestsRequest
-	25, // 28: yandex.cloud.video.v1.EpisodeService.Get:output_type -> yandex.cloud.video.v1.Episode
-	2,  // 29: yandex.cloud.video.v1.EpisodeService.List:output_type -> yandex.cloud.video.v1.ListEpisodesResponse
-	4,  // 30: yandex.cloud.video.v1.EpisodeService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetEpisodesResponse
-	30, // 31: yandex.cloud.video.v1.EpisodeService.Create:output_type -> yandex.cloud.operation.Operation
-	30, // 32: yandex.cloud.video.v1.EpisodeService.Update:output_type -> yandex.cloud.operation.Operation
-	30, // 33: yandex.cloud.video.v1.EpisodeService.Delete:output_type -> yandex.cloud.operation.Operation
-	30, // 34: yandex.cloud.video.v1.EpisodeService.BatchDelete:output_type -> yandex.cloud.operation.Operation
-	30, // 35: yandex.cloud.video.v1.EpisodeService.PerformAction:output_type -> yandex.cloud.operation.Operation
-	22, // 36: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:output_type -> yandex.cloud.video.v1.GetEpisodePlayerURLResponse
-	24, // 37: yandex.cloud.video.v1.EpisodeService.GetManifests:output_type -> yandex.cloud.video.v1.GetEpisodeManifestsResponse
-	28, // [28:38] is the sub-list for method output_type
-	18, // [18:28] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	7,  // 5: yandex.cloud.video.v1.CreateEpisodeRequest.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessParams
+	26, // 6: yandex.cloud.video.v1.UpdateEpisodeRequest.field_mask:type_name -> google.protobuf.FieldMask
+	25, // 7: yandex.cloud.video.v1.UpdateEpisodeRequest.start_time:type_name -> google.protobuf.Timestamp
+	25, // 8: yandex.cloud.video.v1.UpdateEpisodeRequest.finish_time:type_name -> google.protobuf.Timestamp
+	6,  // 9: yandex.cloud.video.v1.UpdateEpisodeRequest.public_access:type_name -> yandex.cloud.video.v1.EpisodePublicAccessParams
+	7,  // 10: yandex.cloud.video.v1.UpdateEpisodeRequest.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessParams
+	16, // 11: yandex.cloud.video.v1.PerformEpisodeActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishEpisodeAction
+	17, // 12: yandex.cloud.video.v1.PerformEpisodeActionRequest.unpublish:type_name -> yandex.cloud.video.v1.UnpublishEpisodeAction
+	20, // 13: yandex.cloud.video.v1.GetEpisodePlayerURLRequest.params:type_name -> yandex.cloud.video.v1.EpisodePlayerParams
+	27, // 14: yandex.cloud.video.v1.GetEpisodePlayerURLRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
+	28, // 15: yandex.cloud.video.v1.GetEpisodeManifestsResponse.manifests:type_name -> yandex.cloud.video.v1.Manifest
+	0,  // 16: yandex.cloud.video.v1.EpisodeService.Get:input_type -> yandex.cloud.video.v1.GetEpisodeRequest
+	1,  // 17: yandex.cloud.video.v1.EpisodeService.List:input_type -> yandex.cloud.video.v1.ListEpisodesRequest
+	3,  // 18: yandex.cloud.video.v1.EpisodeService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetEpisodesRequest
+	5,  // 19: yandex.cloud.video.v1.EpisodeService.Create:input_type -> yandex.cloud.video.v1.CreateEpisodeRequest
+	9,  // 20: yandex.cloud.video.v1.EpisodeService.Update:input_type -> yandex.cloud.video.v1.UpdateEpisodeRequest
+	11, // 21: yandex.cloud.video.v1.EpisodeService.Delete:input_type -> yandex.cloud.video.v1.DeleteEpisodeRequest
+	13, // 22: yandex.cloud.video.v1.EpisodeService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteEpisodesRequest
+	15, // 23: yandex.cloud.video.v1.EpisodeService.PerformAction:input_type -> yandex.cloud.video.v1.PerformEpisodeActionRequest
+	19, // 24: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:input_type -> yandex.cloud.video.v1.GetEpisodePlayerURLRequest
+	22, // 25: yandex.cloud.video.v1.EpisodeService.GetManifests:input_type -> yandex.cloud.video.v1.GetEpisodeManifestsRequest
+	24, // 26: yandex.cloud.video.v1.EpisodeService.Get:output_type -> yandex.cloud.video.v1.Episode
+	2,  // 27: yandex.cloud.video.v1.EpisodeService.List:output_type -> yandex.cloud.video.v1.ListEpisodesResponse
+	4,  // 28: yandex.cloud.video.v1.EpisodeService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetEpisodesResponse
+	29, // 29: yandex.cloud.video.v1.EpisodeService.Create:output_type -> yandex.cloud.operation.Operation
+	29, // 30: yandex.cloud.video.v1.EpisodeService.Update:output_type -> yandex.cloud.operation.Operation
+	29, // 31: yandex.cloud.video.v1.EpisodeService.Delete:output_type -> yandex.cloud.operation.Operation
+	29, // 32: yandex.cloud.video.v1.EpisodeService.BatchDelete:output_type -> yandex.cloud.operation.Operation
+	29, // 33: yandex.cloud.video.v1.EpisodeService.PerformAction:output_type -> yandex.cloud.operation.Operation
+	21, // 34: yandex.cloud.video.v1.EpisodeService.GetPlayerURL:output_type -> yandex.cloud.video.v1.GetEpisodePlayerURLResponse
+	23, // 35: yandex.cloud.video.v1.EpisodeService.GetManifests:output_type -> yandex.cloud.video.v1.GetEpisodeManifestsResponse
+	26, // [26:36] is the sub-list for method output_type
+	16, // [16:26] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_episode_service_proto_init() }
@@ -1894,19 +1882,17 @@ func file_yandex_cloud_video_v1_episode_service_proto_init() {
 		(*CreateEpisodeRequest_StreamId)(nil),
 		(*CreateEpisodeRequest_LineId)(nil),
 		(*CreateEpisodeRequest_PublicAccess)(nil),
-		(*CreateEpisodeRequest_AuthSystemAccess)(nil),
 		(*CreateEpisodeRequest_SignUrlAccess)(nil),
 	}
-	file_yandex_cloud_video_v1_episode_service_proto_msgTypes[10].OneofWrappers = []any{
+	file_yandex_cloud_video_v1_episode_service_proto_msgTypes[9].OneofWrappers = []any{
 		(*UpdateEpisodeRequest_PublicAccess)(nil),
-		(*UpdateEpisodeRequest_AuthSystemAccess)(nil),
 		(*UpdateEpisodeRequest_SignUrlAccess)(nil),
 	}
-	file_yandex_cloud_video_v1_episode_service_proto_msgTypes[14].OneofWrappers = []any{
+	file_yandex_cloud_video_v1_episode_service_proto_msgTypes[13].OneofWrappers = []any{
 		(*BatchDeleteEpisodesRequest_StreamId)(nil),
 		(*BatchDeleteEpisodesRequest_LineId)(nil),
 	}
-	file_yandex_cloud_video_v1_episode_service_proto_msgTypes[16].OneofWrappers = []any{
+	file_yandex_cloud_video_v1_episode_service_proto_msgTypes[15].OneofWrappers = []any{
 		(*PerformEpisodeActionRequest_Publish)(nil),
 		(*PerformEpisodeActionRequest_Unpublish)(nil),
 	}
@@ -1916,7 +1902,7 @@ func file_yandex_cloud_video_v1_episode_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_episode_service_proto_rawDesc), len(file_yandex_cloud_video_v1_episode_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

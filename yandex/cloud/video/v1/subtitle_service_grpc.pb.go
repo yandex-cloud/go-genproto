@@ -32,16 +32,25 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Subtitle management service.
+// Provides methods for creating, retrieving, updating, and deleting subtitles,
+// which provide text translations or transcriptions of video content in various languages.
 type SubtitleServiceClient interface {
-	// Get a specific subtitle.
+	// Retrieves detailed information about a specific subtitle by its ID.
+	// Returns all subtitle metadata and related information.
 	Get(ctx context.Context, in *GetSubtitleRequest, opts ...grpc.CallOption) (*Subtitle, error)
-	// List subtitles.
+	// Lists all subtitles associated with a specific video with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(ctx context.Context, in *ListSubtitlesRequest, opts ...grpc.CallOption) (*ListSubtitlesResponse, error)
-	// Create a new subtitle.
+	// Creates a new subtitle record for a specific video.
+	// This method only creates the metadata record; the actual subtitle file must be uploaded
+	// using the URL obtained from the GenerateUploadURL method.
 	Create(ctx context.Context, in *CreateSubtitleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Generate an upload URL to add a new subtitle file.
+	// Generates a URL for uploading a subtitle file to an existing subtitle record.
+	// This URL can be used to upload the actual subtitle file using an HTTP PUT request.
+	// The URL is pre-signed and has a limited validity period.
 	GenerateUploadURL(ctx context.Context, in *GenerateSubtitleUploadURLRequest, opts ...grpc.CallOption) (*GenerateSubtitleUploadURLResponse, error)
-	// Delete a specific subtitle.
+	// Deletes a specific subtitle by its ID.
+	// This removes both the metadata record and the associated subtitle file.
 	Delete(ctx context.Context, in *DeleteSubtitleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -108,16 +117,25 @@ func (c *subtitleServiceClient) Delete(ctx context.Context, in *DeleteSubtitleRe
 // for forward compatibility.
 //
 // Subtitle management service.
+// Provides methods for creating, retrieving, updating, and deleting subtitles,
+// which provide text translations or transcriptions of video content in various languages.
 type SubtitleServiceServer interface {
-	// Get a specific subtitle.
+	// Retrieves detailed information about a specific subtitle by its ID.
+	// Returns all subtitle metadata and related information.
 	Get(context.Context, *GetSubtitleRequest) (*Subtitle, error)
-	// List subtitles.
+	// Lists all subtitles associated with a specific video with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(context.Context, *ListSubtitlesRequest) (*ListSubtitlesResponse, error)
-	// Create a new subtitle.
+	// Creates a new subtitle record for a specific video.
+	// This method only creates the metadata record; the actual subtitle file must be uploaded
+	// using the URL obtained from the GenerateUploadURL method.
 	Create(context.Context, *CreateSubtitleRequest) (*operation.Operation, error)
-	// Generate an upload URL to add a new subtitle file.
+	// Generates a URL for uploading a subtitle file to an existing subtitle record.
+	// This URL can be used to upload the actual subtitle file using an HTTP PUT request.
+	// The URL is pre-signed and has a limited validity period.
 	GenerateUploadURL(context.Context, *GenerateSubtitleUploadURLRequest) (*GenerateSubtitleUploadURLResponse, error)
-	// Delete a specific subtitle.
+	// Deletes a specific subtitle by its ID.
+	// This removes both the metadata record and the associated subtitle file.
 	Delete(context.Context, *DeleteSubtitleRequest) (*operation.Operation, error)
 }
 

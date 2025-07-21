@@ -28,7 +28,7 @@ const (
 
 type GetPlaylistRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// ID of the playlist to retrieve.
 	PlaylistId    string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -73,30 +73,32 @@ func (x *GetPlaylistRequest) GetPlaylistId() string {
 
 type ListPlaylistsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the playlists to list.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of playlists to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListPlaylistsResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "<field> <order>" (e.g. "createdAt desc").
+	// Specifies the ordering of results.
+	// Format is "<field> <order>" (e.g., "createdAt desc").
 	// Default: "id asc".
-	// Possible fields: ["id", "title", "createdAt", "updatedAt"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported fields: ["id", "title", "createdAt", "updatedAt"].
+	// Both snake_case and camelCase field names are supported.
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	// Filter expression that filters resources listed in the response.
-	// Expressions are composed of terms connected by logic operators.
-	// If value contains spaces or quotes,
-	// it should be in quotes (`'` or `"`) with the inner quotes being backslash escaped.
+	// Filter expression to narrow down the list of returned playlists.
+	// Expressions consist of terms connected by logical operators.
+	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
+	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
-	// Supported string match operators: ["=", "!=", ":"].
-	// Operator ":" stands for substring matching.
-	// Filter expressions may also contain parentheses to group logical operands.
-	// Example: `key1='value' AND (key2!='\'value\” OR key2:"\"value\"")`
-	// Supported fields: ["id", "title"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
+	// Parentheses can be used to group logical expressions.
+	//
+	// Example: `title:'highlights' AND id='playlist-1'`
+	//
+	// Filterable fields: ["id", "title"].
+	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -169,9 +171,11 @@ func (x *ListPlaylistsRequest) GetFilter() string {
 
 type ListPlaylistsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of playlists for specific channel.
+	// List of playlists matching the request criteria.
+	// May be empty if no playlists match the criteria or if the channel has no playlists.
 	Playlists []*Playlist `protobuf:"bytes,1,rep,name=playlists,proto3" json:"playlists,omitempty"`
-	// Token for getting the next page.
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -223,14 +227,20 @@ func (x *ListPlaylistsResponse) GetNextPageToken() string {
 
 type CreatePlaylistRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel where the playlist will be created.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Playlist title.
+	// Title of the playlist to be displayed in interfaces and players.
 	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	// Playlist description.
+	// Detailed description of the playlist content and context.
+	// Optional field that can provide additional information about the playlist.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// List of playlist items.
-	Items         []*PlaylistItem `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	// List of items to include in the playlist.
+	// Each item represents a video or episode to be played in sequence.
+	// The order of items in this list determines the playback order.
+	Items []*PlaylistItem `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	// ID of the style preset to be applied to the playlist player.
+	// Style presets control the visual appearance of the player.
+	StylePresetId string `protobuf:"bytes,5,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -293,9 +303,16 @@ func (x *CreatePlaylistRequest) GetItems() []*PlaylistItem {
 	return nil
 }
 
+func (x *CreatePlaylistRequest) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 type CreatePlaylistMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// ID of the playlist being created.
 	PlaylistId    string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -340,16 +357,24 @@ func (x *CreatePlaylistMetadata) GetPlaylistId() string {
 
 type UpdatePlaylistRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// ID of the playlist to update.
 	PlaylistId string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
-	// Field mask that specifies which fields of the playlist are going to be updated.
+	// Field mask specifying which fields of the playlist should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	// Playlist title.
+	// New title for the playlist.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Playlist description.
+	// New description for the playlist.
+	// Optional field that can provide additional information about the playlist.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// List of playlist items.
-	Items         []*PlaylistItem `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
+	// New list of items to include in the playlist.
+	// This completely replaces the existing items if specified in the field mask.
+	// The order of items in this list determines the playback order.
+	Items []*PlaylistItem `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
+	// New ID of the style preset to be applied to the playlist player.
+	StylePresetId string `protobuf:"bytes,6,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -419,9 +444,16 @@ func (x *UpdatePlaylistRequest) GetItems() []*PlaylistItem {
 	return nil
 }
 
+func (x *UpdatePlaylistRequest) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 type UpdatePlaylistMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// ID of the playlist being updated.
 	PlaylistId    string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -466,7 +498,7 @@ func (x *UpdatePlaylistMetadata) GetPlaylistId() string {
 
 type DeletePlaylistRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// ID of the playlist to delete.
 	PlaylistId    string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -511,7 +543,8 @@ func (x *DeletePlaylistRequest) GetPlaylistId() string {
 
 type DeletePlaylistMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// ID of the playlist being deleted.
+	// This identifier can be used to track the playlist deletion operation.
 	PlaylistId    string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -556,9 +589,10 @@ func (x *DeletePlaylistMetadata) GetPlaylistId() string {
 
 type BatchDeletePlaylistsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the playlists to delete.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of playlist IDs.
+	// List of playlist IDs to delete.
+	// All playlists must exist in the specified channel.
 	PlaylistIds   []string `protobuf:"bytes,2,rep,name=playlist_ids,json=playlistIds,proto3" json:"playlist_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -610,7 +644,9 @@ func (x *BatchDeletePlaylistsRequest) GetPlaylistIds() []string {
 
 type BatchDeletePlaylistsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of playlist IDs.
+	// List of playlist IDs being deleted.
+	// This list can be used to track which playlists are included
+	// in the batch deletion operation.
 	PlaylistIds   []string `protobuf:"bytes,1,rep,name=playlist_ids,json=playlistIds,proto3" json:"playlist_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -655,8 +691,10 @@ func (x *BatchDeletePlaylistsMetadata) GetPlaylistIds() []string {
 
 type GetPlaylistPlayerURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
-	PlaylistId    string                `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
+	// ID of the playlist for which to generate a player URL.
+	PlaylistId string `protobuf:"bytes,1,opt,name=playlist_id,json=playlistId,proto3" json:"playlist_id,omitempty"`
+	// Optional player parameters to customize the playback experience.
+	// These parameters control initial player state such as mute, autoplay, and visibility of interface controls.
 	Params        *PlaylistPlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -708,11 +746,14 @@ func (x *GetPlaylistPlayerURLRequest) GetParams() *PlaylistPlayerParams {
 
 type PlaylistPlayerParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, a player will be muted by default.
+	// If true, the player will start with audio muted.
+	// Users can unmute the audio manually after playback starts.
 	Mute bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
-	// If true, playback will start automatically.
+	// If true, the playlist will start playing automatically when the player loads.
+	// This may be subject to browser autoplay policies that restrict autoplay with sound.
 	Autoplay bool `protobuf:"varint,2,opt,name=autoplay,proto3" json:"autoplay,omitempty"`
-	// If true, a player interface will be hidden by default.
+	// If true, the player interface controls will be hidden initially.
+	// Users can typically reveal the controls by moving the mouse over the player.
 	Hidden        bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -771,9 +812,12 @@ func (x *PlaylistPlayerParams) GetHidden() bool {
 
 type GetPlaylistPlayerURLResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Direct link to the playlist.
+	// Direct URL to the playlist player.
+	// This URL can be used to access the playlist in a web browser
+	// or shared with users who have appropriate permissions.
 	PlayerUrl string `protobuf:"bytes,1,opt,name=player_url,json=playerUrl,proto3" json:"player_url,omitempty"`
-	// HTML embed code in Iframe format.
+	// HTML embed code in iframe format that can be inserted into web pages.
+	// This code allows the playlist to be embedded directly in third-party websites.
 	Html          string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -842,17 +886,18 @@ const file_yandex_cloud_video_v1_playlist_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filterJ\x04\b\x02\x10d\"\x84\x01\n" +
 	"\x15ListPlaylistsResponse\x12=\n" +
 	"\tplaylists\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.PlaylistR\tplaylists\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xdd\x01\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x8f\x02\n" +
 	"\x15CreatePlaylistRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12#\n" +
 	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12D\n" +
-	"\x05items\x18\x04 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemB\t\x82\xc81\x05<=100R\x05items\"9\n" +
+	"\x05items\x18\x04 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemB\t\x82\xc81\x05<=100R\x05items\x120\n" +
+	"\x0fstyle_preset_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\"9\n" +
 	"\x16CreatePlaylistMetadata\x12\x1f\n" +
 	"\vplaylist_id\x18\x01 \x01(\tR\n" +
-	"playlistId\"\x9c\x02\n" +
+	"playlistId\"\xce\x02\n" +
 	"\x15UpdatePlaylistRequest\x12-\n" +
 	"\vplaylist_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"playlistId\x12?\n" +
@@ -861,7 +906,8 @@ const file_yandex_cloud_video_v1_playlist_service_proto_rawDesc = "" +
 	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12D\n" +
-	"\x05items\x18\x05 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemB\t\x82\xc81\x05<=100R\x05items\"9\n" +
+	"\x05items\x18\x05 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemB\t\x82\xc81\x05<=100R\x05items\x120\n" +
+	"\x0fstyle_preset_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\"9\n" +
 	"\x16UpdatePlaylistMetadata\x12\x1f\n" +
 	"\vplaylist_id\x18\x01 \x01(\tR\n" +
 	"playlistId\"F\n" +

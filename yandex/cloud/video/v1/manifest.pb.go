@@ -21,12 +21,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Manifest format supported by the platform.
 type Manifest_ManifestType int32
 
 const (
+	// The manifest type is not specified.
 	Manifest_MANIFEST_TYPE_UNSPECIFIED Manifest_ManifestType = 0
-	Manifest_DASH                      Manifest_ManifestType = 1
-	Manifest_HLS                       Manifest_ManifestType = 2
+	// Dynamic Adaptive Streaming over HTTP (DASH) format.
+	// @see https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP
+	Manifest_DASH Manifest_ManifestType = 1
+	// HTTP Live Streaming (HLS) format.
+	// @see https://en.wikipedia.org/wiki/HTTP_Live_Streaming
+	Manifest_HLS Manifest_ManifestType = 2
 )
 
 // Enum value maps for Manifest_ManifestType.
@@ -70,10 +76,15 @@ func (Manifest_ManifestType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_manifest_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Represents a streaming manifest file that defines how video content is delivered.
+// Manifests contain information about available video qualities, audio tracks,
+// and other metadata needed by video players to stream content efficiently.
 type Manifest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Type          Manifest_ManifestType  `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.video.v1.Manifest_ManifestType" json:"type,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// URL where the manifest file can be accessed.
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// Format of the manifest file.
+	Type          Manifest_ManifestType `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.video.v1.Manifest_ManifestType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

@@ -66,6 +66,10 @@ func (m *CreateResourceRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateResourceRequest) SetProviderType(v string) {
+	m.ProviderType = v
+}
+
 type CreateResourceRequest_Origin_OriginVariant = isCreateResourceRequest_Origin_OriginVariant
 
 func (m *CreateResourceRequest_Origin) SetOriginVariant(v CreateResourceRequest_Origin_OriginVariant) {

@@ -224,3 +224,83 @@ func (m *ListFederationOperationsResponse) SetOperations(v []*operation.Operatio
 func (m *ListFederationOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *GetFederationDomainRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *GetFederationDomainRequest) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *ListFederationDomainsRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *ListFederationDomainsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListFederationDomainsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListFederationDomainsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListFederationDomainsResponse) SetDomains(v []*Domain) {
+	m.Domains = v
+}
+
+func (m *ListFederationDomainsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *AddFederationDomainRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *AddFederationDomainRequest) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *AddFederationDomainMetadata) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *AddFederationDomainMetadata) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *ValidateFederationDomainRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *ValidateFederationDomainRequest) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *ValidateFederationDomainMetadata) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *ValidateFederationDomainMetadata) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *DeleteFederationDomainRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *DeleteFederationDomainRequest) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *DeleteFederationDomainMetadata) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *DeleteFederationDomainMetadata) SetDomain(v string) {
+	m.Domain = v
+}

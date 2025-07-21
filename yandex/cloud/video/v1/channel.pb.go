@@ -23,24 +23,42 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Root entity for content separation.
+// Root entity for content organization and separation within the video platform.
+// A channel serves as a container for videos and streams, providing a way to
+// group related content and apply common settings and access controls.
+// Each channel belongs to a specific organization and can have its own
+// configuration for advertisements, content cleanup, and embedding restrictions.
 type Channel struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// Unique identifier of the channel.
+	// This ID is used to reference the channel in API calls and URLs.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the organization where channel should be created.
+	// Identifier of the organization to which this channel belongs.
+	// Each channel must be associated with exactly one organization.
 	OrganizationId string `protobuf:"bytes,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Channel title.
+	// Title of the channel displayed in interfaces.
+	// This is the primary display name shown to users.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Channel description.
+	// Detailed description of the channel's purpose and content.
+	// This optional field provides additional context about the channel.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// Time when channel was created.
+	// Identifier of the default style preset applied to videos in this channel.
+	// Videos, episodes, and playlists created in this channel
+	// inherit this preset unless explicitly overridden.
+	DefaultStylePresetId string `protobuf:"bytes,5,opt,name=default_style_preset_id,json=defaultStylePresetId,proto3" json:"default_style_preset_id,omitempty"`
+	// Timestamp when the channel was initially created.
+	// This value is set automatically by the system and cannot be modified.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time of last channel update.
+	// Timestamp of the last modification to the channel or its settings.
+	// This value is updated automatically whenever the channel is modified.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as `key:value` pairs.
+	// Maximum 64 labels per channel.
+	// Labels can be used for organization, filtering, and metadata purposes.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Channel settings.
+	// Configuration settings for the channel's behavior and features.
+	// These settings control advertisements, content cleanup policies,
+	// and embedding restrictions for all content in the channel.
 	Settings      *ChannelSettings `protobuf:"bytes,201,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -104,6 +122,13 @@ func (x *Channel) GetDescription() string {
 	return ""
 }
 
+func (x *Channel) GetDefaultStylePresetId() string {
+	if x != nil {
+		return x.DefaultStylePresetId
+	}
+	return ""
+}
+
 func (x *Channel) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -132,12 +157,18 @@ func (x *Channel) GetSettings() *ChannelSettings {
 	return nil
 }
 
-// Channel settings.
+// Configuration settings for the channel's behavior and features.
+// These settings apply to all content in the channel and control
+// various aspects of how the channel and its content behave.
 type ChannelSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Advertisement settings.
+	// Settings for advertisement display and behavior.
+	// Controls whether and how advertisements are shown with content in this channel.
+	// If not specified, default advertisement settings are applied.
 	Advertisement *AdvertisementSettings `protobuf:"bytes,1,opt,name=advertisement,proto3" json:"advertisement,omitempty"`
-	// Referer verification settings
+	// Settings for HTTP Referer verification to control content embedding.
+	// Restricts which domains can embed content from this channel.
+	// If not specified or disabled, content can be embedded on any domain.
 	RefererVerification *RefererVerificationSettings `protobuf:"bytes,3,opt,name=referer_verification,json=refererVerification,proto3" json:"referer_verification,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -187,10 +218,13 @@ func (x *ChannelSettings) GetRefererVerification() *RefererVerificationSettings 
 	return nil
 }
 
-// Advertisement settings.
+// Settings for advertisement display and behavior in the channel.
+// These settings control whether and how advertisements are shown
+// with content in this channel, including both videos and streams.
 type AdvertisementSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Advertisement provider.
+	// Specifies the advertisement provider to use.
+	// Only one provider can be active at a time.
 	//
 	// Types that are valid to be assigned to Provider:
 	//
@@ -251,17 +285,25 @@ type isAdvertisementSettings_Provider interface {
 }
 
 type AdvertisementSettings_YandexDirect_ struct {
+	// Yandex.Direct advertisement provider settings.
+	// When specified, advertisements will be served through Yandex.Direct.
 	YandexDirect *AdvertisementSettings_YandexDirect `protobuf:"bytes,100,opt,name=yandex_direct,json=yandexDirect,proto3,oneof"`
 }
 
 func (*AdvertisementSettings_YandexDirect_) isAdvertisementSettings_Provider() {}
 
-// Referer verification settings.
+// Settings for HTTP Referer verification to control where content can be embedded.
+// When enabled, the system checks the HTTP Referer request header to ensure
+// that content is only embedded on allowed domains.
 type RefererVerificationSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Enable verification
+	// Enables or disables Referer verification for this channel.
+	// When set to true, only requests from allowed domains will be permitted.
+	// When set to false, content can be embedded on any domain.
 	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
-	// List of available domains
+	// List of domains allowed to embed content from this channel.
+	// Only relevant when enable is set to true.
+	// Supports wildcard notation (e.g., "*.example.com") to allow all subdomains.
 	AllowedDomains []string `protobuf:"bytes,2,rep,name=allowed_domains,json=allowedDomains,proto3" json:"allowed_domains,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -311,14 +353,21 @@ func (x *RefererVerificationSettings) GetAllowedDomains() []string {
 	return nil
 }
 
-// YandexDirect provider settings.
+// Configuration for the Yandex.Direct advertisement provider.
+// These settings are specific to the Yandex.Direct advertising platform.
 type AdvertisementSettings_YandexDirect struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Enable Partner Ad for Live and VOD content.
+	// Enables or disables Partner Ad for both Live and VOD content.
+	// When set to true, advertisements will be shown with content.
+	// When set to false, no advertisements will be shown.
 	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
-	// Advertisement page ID.
+	// Yandex.Direct page identifier.
+	// This ID is used to associate the channel with a specific page
+	// in the Yandex.Direct system for targeting and reporting.
 	PageId int64 `protobuf:"varint,2,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
-	// Advertisement category.
+	// Yandex.Direct category identifier.
+	// This ID is used to categorize the channel's content for
+	// appropriate advertisement targeting and compliance.
 	Category      int64 `protobuf:"varint,3,opt,name=category,proto3" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -379,12 +428,13 @@ var File_yandex_cloud_video_v1_channel_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_channel_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/video/v1/channel.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc2\x03\n" +
+	"#yandex/cloud/video/v1/channel.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf9\x03\n" +
 	"\aChannel\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x129\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x125\n" +
+	"\x17default_style_preset_id\x18\x05 \x01(\tR\x14defaultStylePresetId\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -393,7 +443,7 @@ const file_yandex_cloud_video_v1_channel_proto_rawDesc = "" +
 	"\bsettings\x18\xc9\x01 \x01(\v2&.yandex.cloud.video.v1.ChannelSettingsR\bsettings\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10dJ\x05\bf\x10\xc8\x01\"\xd2\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10dJ\x05\bf\x10\xc8\x01\"\xd2\x01\n" +
 	"\x0fChannelSettings\x12R\n" +
 	"\radvertisement\x18\x01 \x01(\v2,.yandex.cloud.video.v1.AdvertisementSettingsR\radvertisement\x12e\n" +
 	"\x14referer_verification\x18\x03 \x01(\v22.yandex.cloud.video.v1.RefererVerificationSettingsR\x13refererVerificationJ\x04\b\x02\x10\x03\"\xe8\x01\n" +

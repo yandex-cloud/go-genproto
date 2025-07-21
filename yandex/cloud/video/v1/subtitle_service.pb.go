@@ -27,7 +27,7 @@ const (
 
 type GetSubtitleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the subtitle.
+	// ID of the subtitle to retrieve.
 	SubtitleId    string `protobuf:"bytes,1,opt,name=subtitle_id,json=subtitleId,proto3" json:"subtitle_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -72,11 +72,13 @@ func (x *GetSubtitleRequest) GetSubtitleId() string {
 
 type ListSubtitlesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of subtitles to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListSubtitlesResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Specifies the parent resource to list subtitles from (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*ListSubtitlesRequest_VideoId
@@ -150,16 +152,19 @@ type isListSubtitlesRequest_ParentId interface {
 }
 
 type ListSubtitlesRequest_VideoId struct {
-	// ID of the video.
+	// ID of the video containing the subtitles to list.
 	VideoId string `protobuf:"bytes,1000,opt,name=video_id,json=videoId,proto3,oneof"`
 }
 
 func (*ListSubtitlesRequest_VideoId) isListSubtitlesRequest_ParentId() {}
 
 type ListSubtitlesResponse struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Subtitles []*Subtitle            `protobuf:"bytes,1,rep,name=subtitles,proto3" json:"subtitles,omitempty"`
-	// Token for getting the next page.
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of subtitles matching the request criteria.
+	// May be empty if no subtitles match the criteria or if the video has no subtitles.
+	Subtitles []*Subtitle `protobuf:"bytes,1,rep,name=subtitles,proto3" json:"subtitles,omitempty"`
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -330,8 +335,9 @@ type CreateSubtitleRequest_Upload struct {
 func (*CreateSubtitleRequest_Upload) isCreateSubtitleRequest_Source() {}
 
 type SubtitleUploadParams struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Original filename of the subtitle file being uploaded.
+	Filename      string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -375,7 +381,7 @@ func (x *SubtitleUploadParams) GetFilename() string {
 
 type CreateSubtitleMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the subtitle.
+	// ID of the subtitle being created.
 	SubtitleId    string `protobuf:"bytes,1,opt,name=subtitle_id,json=subtitleId,proto3" json:"subtitle_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -420,7 +426,7 @@ func (x *CreateSubtitleMetadata) GetSubtitleId() string {
 
 type GenerateSubtitleUploadURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the subtitle.
+	// ID of the subtitle for which to generate an upload URL.
 	SubtitleId    string `protobuf:"bytes,1,opt,name=subtitle_id,json=subtitleId,proto3" json:"subtitle_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -465,7 +471,9 @@ func (x *GenerateSubtitleUploadURLRequest) GetSubtitleId() string {
 
 type GenerateSubtitleUploadURLResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Upload url.
+	// Pre-signed URL for uploading the subtitle file.
+	// This URL can be used with an HTTP PUT request to upload the subtitle file.
+	// The URL has a limited validity period and will expire after a certain time.
 	UploadUrl     string `protobuf:"bytes,1,opt,name=upload_url,json=uploadUrl,proto3" json:"upload_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -510,7 +518,7 @@ func (x *GenerateSubtitleUploadURLResponse) GetUploadUrl() string {
 
 type DeleteSubtitleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the subtitle.
+	// ID of the subtitle to delete.
 	SubtitleId    string `protobuf:"bytes,1,opt,name=subtitle_id,json=subtitleId,proto3" json:"subtitle_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -555,7 +563,8 @@ func (x *DeleteSubtitleRequest) GetSubtitleId() string {
 
 type DeleteSubtitleMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the subtitle.
+	// ID of the subtitle being deleted.
+	// This identifier can be used to track the subtitle deletion operation.
 	SubtitleId    string `protobuf:"bytes,1,opt,name=subtitle_id,json=subtitleId,proto3" json:"subtitle_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -614,9 +623,9 @@ const file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc = "" +
 	"\tparent_id\x12\x04\xc0\xc11\x01J\x04\b\x01\x10dJ\x05\bf\x10\xe8\a\"\x84\x01\n" +
 	"\x15ListSubtitlesResponse\x12=\n" +
 	"\tsubtitles\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.SubtitleR\tsubtitles\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xa7\x02\n" +
-	"\x15CreateSubtitleRequest\x12L\n" +
-	"\blanguage\x18\x01 \x01(\tB0\xf2\xc71'deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x013R\blanguage\x12\x1e\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xb3\x02\n" +
+	"\x15CreateSubtitleRequest\x12X\n" +
+	"\blanguage\x18\x01 \x01(\tB<\xf2\xc713ara|deu|eng|fra|ita|jpn|kaz|kor|rus|spa|tur|ukr|zho\x8a\xc81\x013R\blanguage\x12\x1e\n" +
 	"\x05label\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05label\x12&\n" +
 	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12F\n" +
 	"\x06upload\x18\xcc\b \x01(\v2+.yandex.cloud.video.v1.SubtitleUploadParamsH\x01R\x06uploadB\x11\n" +

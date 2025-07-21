@@ -27,13 +27,13 @@ const (
 type Cluster_Health int32
 
 const (
-	// State of the cluster is unknown ([Host.health] for every host in the cluster is UNKNOWN).
+	// Cluster is in unknown state (we have no data).
 	Cluster_HEALTH_UNKNOWN Cluster_Health = 0
-	// Cluster is alive and well ([Host.health] for every host in the cluster is ALIVE).
+	// Cluster is alive and operates properly.
 	Cluster_ALIVE Cluster_Health = 1
-	// Cluster is inoperable ([Host.health] for every host in the cluster is DEAD).
+	// Cluster is inoperable (it cannot perform any of its essential functions).
 	Cluster_DEAD Cluster_Health = 2
-	// Cluster is working below capacity ([Host.health] for at least one host in the cluster is not ALIVE).
+	// Cluster is partially alive (it can perform some of its essential functions).
 	Cluster_DEGRADED Cluster_Health = 3
 )
 
@@ -152,47 +152,46 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{0, 1}
 }
 
-// Hive Metastore Cluster.
+// Metastore Cluster.
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster.
-	// This ID is assigned by MDB at creation time.
+	// Unique ID of the Metastore Cluster.
+	// This ID is assigned by Cloud in the process of creating a Trino cluster.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the folder that the Metastore cluster belongs to.
+	// ID of the folder that the Metastore Cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	// The time the Metastore Cluster was created at.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the Metastore cluster.
-	// The name is unique within the folder. 1-63 characters long.
+	// Name of the Metastore Cluster.
+	// The name is unique within the folder.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the Metastore cluster. 0-256 characters long.
+	// Description of the Metastore Cluster.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Metastore cluster as “ key:value “ pairs.
-	// Maximum 64 per resource.
+	// Custom labels for the Metastore Cluster as “ key:value “ pairs.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Aggregated cluster health.
 	Health Cluster_Health `protobuf:"varint,8,opt,name=health,proto3,enum=yandex.cloud.metastore.v1.Cluster_Health" json:"health,omitempty"`
-	// Current state of the cluster.
+	// Cluster status.
 	Status Cluster_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.metastore.v1.Cluster_Status" json:"status,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	// Deletion Protection prevents deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,16,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Metastore server version
+	// Metastore server version.
 	Version string `protobuf:"bytes,17,opt,name=version,proto3" json:"version,omitempty"`
-	// Metastore network
+	// Metastore network ID.
 	NetworkId string `protobuf:"bytes,18,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// IP address of metastore server balancer endpoint
+	// IP address of the Metastore server load balancer.
 	EndpointIp string `protobuf:"bytes,19,opt,name=endpoint_ip,json=endpointIp,proto3" json:"endpoint_ip,omitempty"`
-	// Metastore cluster configuration
+	// Configuration of the Metastore Cluster.
 	ClusterConfig *ClusterConfig `protobuf:"bytes,20,opt,name=cluster_config,json=clusterConfig,proto3" json:"cluster_config,omitempty"`
-	// Service account that will be used to access a YC resources
+	// Service account used to access Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,21,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cloud logging configuration
+	// Cloud logging configuration.
 	Logging *LoggingConfig `protobuf:"bytes,22,opt,name=logging,proto3" json:"logging,omitempty"`
-	// Network related configuration options.
+	// Network-related configuration options.
 	Network *NetworkConfig `protobuf:"bytes,23,opt,name=network,proto3" json:"network,omitempty"`
-	// Window of maintenance operations.
+	// Maintenance window.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,24,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// Maintenance operation planned at nearest maintenance_window.
+	// Maintenance operation scheduled for the nearest maintenance window.
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,25,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -355,8 +354,9 @@ func (x *Cluster) GetPlannedOperation() *MaintenanceOperation {
 }
 
 type ClusterConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resources     *Resources             `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Configuration for computational resources for Metastore server instances.
+	Resources     *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -454,7 +454,7 @@ func (x *NetworkConfig) GetSecurityGroupIds() []string {
 
 type Resources struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the preset for computational resources available to a pod (CPU, memory etc.).
+	// ID of the preset for computational resources allocated to an instance (e.g., CPU, memory, etc.).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -498,14 +498,20 @@ func (x *Resources) GetResourcePresetId() string {
 }
 
 type LoggingConfig struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Logs generated by the Metastore server are delivered to Cloud Logging.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Destination of log records.
+	//
 	// Types that are valid to be assigned to Destination:
 	//
 	//	*LoggingConfig_FolderId
 	//	*LoggingConfig_LogGroupId
-	Destination   isLoggingConfig_Destination `protobuf_oneof:"destination"`
-	MinLevel      v1.LogLevel_Level           `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
+	Destination isLoggingConfig_Destination `protobuf_oneof:"destination"`
+	// Minimum severity level for log entries.
+	//
+	// See [LogLevel.Level] for details.
+	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -584,10 +590,12 @@ type isLoggingConfig_Destination interface {
 }
 
 type LoggingConfig_FolderId struct {
+	// Logs will be written to the default log group of the specified folder.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
 type LoggingConfig_LogGroupId struct {
+	// Logs will be written to the log group specified by its ID.
 	LogGroupId string `protobuf:"bytes,3,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
 }
 
@@ -599,7 +607,7 @@ var File_yandex_cloud_metastore_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\t\n" +
+	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xc5\t\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -616,8 +624,8 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"network_id\x18\x12 \x01(\tR\tnetworkId\x12\x1f\n" +
 	"\vendpoint_ip\x18\x13 \x01(\tR\n" +
 	"endpointIp\x12O\n" +
-	"\x0ecluster_config\x18\x14 \x01(\v2(.yandex.cloud.metastore.v1.ClusterConfigR\rclusterConfig\x126\n" +
-	"\x12service_account_id\x18\x15 \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12B\n" +
+	"\x0ecluster_config\x18\x14 \x01(\v2(.yandex.cloud.metastore.v1.ClusterConfigR\rclusterConfig\x12,\n" +
+	"\x12service_account_id\x18\x15 \x01(\tR\x10serviceAccountId\x12B\n" +
 	"\alogging\x18\x16 \x01(\v2(.yandex.cloud.metastore.v1.LoggingConfigR\alogging\x12B\n" +
 	"\anetwork\x18\x17 \x01(\v2(.yandex.cloud.metastore.v1.NetworkConfigR\anetwork\x12[\n" +
 	"\x12maintenance_window\x18\x18 \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x12\\\n" +
@@ -645,9 +653,9 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\rNetworkConfig\x12\x1d\n" +
 	"\n" +
 	"subnet_ids\x18\x01 \x03(\tR\tsubnetIds\x12,\n" +
-	"\x12security_group_ids\x18\x02 \x03(\tR\x10securityGroupIds\"9\n" +
-	"\tResources\x12,\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\"\x8b\x02\n" +
+	"\x12security_group_ids\x18\x02 \x03(\tR\x10securityGroupIds\"G\n" +
+	"\tResources\x12:\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10resourcePresetId\"\x8b\x02\n" +
 	"\rLoggingConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12B\n" +
 	"\tfolder_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12G\n" +

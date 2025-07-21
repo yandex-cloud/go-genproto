@@ -43,7 +43,9 @@ type Origin struct {
 	// A backup origin is used when one of active origins becomes unavailable.
 	Backup bool `protobuf:"varint,5,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up origin of the content.
-	Meta          *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
+	Meta *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
+	// RESERVED: This field is reserved for future use and should not be used at this time.
+	ProviderType  string `protobuf:"bytes,7,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -118,6 +120,13 @@ func (x *Origin) GetMeta() *OriginMeta {
 		return x.Meta
 	}
 	return nil
+}
+
+func (x *Origin) GetProviderType() string {
+	if x != nil {
+		return x.ProviderType
+	}
+	return ""
 }
 
 // Origin parameters. For details about the concept, see [documentation](/docs/cdn/concepts/origins).
@@ -421,14 +430,15 @@ var File_yandex_cloud_cdn_v1_origin_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_origin_proto_rawDesc = "" +
 	"\n" +
-	" yandex/cloud/cdn/v1/origin.proto\x12\x13yandex.cloud.cdn.v1\"\xbf\x01\n" +
+	" yandex/cloud/cdn/v1/origin.proto\x12\x13yandex.cloud.cdn.v1\"\xe4\x01\n" +
 	"\x06Origin\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
 	"\x0forigin_group_id\x18\x02 \x01(\x03R\roriginGroupId\x12\x16\n" +
 	"\x06source\x18\x03 \x01(\tR\x06source\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabled\x12\x16\n" +
 	"\x06backup\x18\x05 \x01(\bR\x06backup\x123\n" +
-	"\x04meta\x18\x06 \x01(\v2\x1f.yandex.cloud.cdn.v1.OriginMetaR\x04meta\"\x8d\x01\n" +
+	"\x04meta\x18\x06 \x01(\v2\x1f.yandex.cloud.cdn.v1.OriginMetaR\x04meta\x12#\n" +
+	"\rprovider_type\x18\a \x01(\tR\fproviderType\"\x8d\x01\n" +
 	"\fOriginParams\x12\x16\n" +
 	"\x06source\x18\x01 \x01(\tR\x06source\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +

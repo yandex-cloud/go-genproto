@@ -37,26 +37,40 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Episode management service.
+// Provides methods for creating, retrieving, updating, and deleting episodes,
+// which represent specific time segments of streams
+// that can be individually accessed, managed, and published.
 type EpisodeServiceClient interface {
-	// Get the specific channel.
+	// Retrieves detailed information about a specific episode by its ID.
+	// Returns all episode metadata, status, and related information.
 	Get(ctx context.Context, in *GetEpisodeRequest, opts ...grpc.CallOption) (*Episode, error)
-	// List episodes for stream or line.
+	// Lists all episodes associated with a specific stream or stream line with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(ctx context.Context, in *ListEpisodesRequest, opts ...grpc.CallOption) (*ListEpisodesResponse, error)
-	// Batch get episodes for channel.
+	// Retrieves multiple episodes by their IDs in a specific channel in a single request.
+	// This is more efficient than making multiple Get requests when retrieving several episodes.
 	BatchGet(ctx context.Context, in *BatchGetEpisodesRequest, opts ...grpc.CallOption) (*BatchGetEpisodesResponse, error)
-	// Create episode.
+	// Creates a new episode associated with a stream or stream line.
+	// Episodes can be configured with various settings including title, description,
+	// time boundaries, and access rights.
 	Create(ctx context.Context, in *CreateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Update episode.
+	// Updates an existing episode's metadata and settings.
+	// Only fields specified in the field_mask will be updated.
 	Update(ctx context.Context, in *UpdateEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Delete episode.
+	// Deletes a specific episode by its ID.
 	Delete(ctx context.Context, in *DeleteEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete episodes.
+	// Deletes multiple episodes associated with a specific stream or stream line in a single request.
+	// This is more efficient than making multiple Delete requests when removing several episodes.
 	BatchDelete(ctx context.Context, in *BatchDeleteEpisodesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Perform an action on the episode.
+	// Performs a specific action on an episode, such as publishing or unpublishing.
 	PerformAction(ctx context.Context, in *PerformEpisodeActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Get player url.
+	// Generates a player URL for watching the episode.
+	// The URL can include player parameters such as autoplay, mute, and visibility of interface controls.
+	// For episodes with signed URL access, an expiration duration can be specified.
 	GetPlayerURL(ctx context.Context, in *GetEpisodePlayerURLRequest, opts ...grpc.CallOption) (*GetEpisodePlayerURLResponse, error)
-	// Get manifest urls.
+	// Retrieves the manifest URLs for the episode's media content.
+	// Manifests provide players with necessary information
+	// for streaming the content with different quality levels and formats.
 	GetManifests(ctx context.Context, in *GetEpisodeManifestsRequest, opts ...grpc.CallOption) (*GetEpisodeManifestsResponse, error)
 }
 
@@ -173,26 +187,40 @@ func (c *episodeServiceClient) GetManifests(ctx context.Context, in *GetEpisodeM
 // for forward compatibility.
 //
 // Episode management service.
+// Provides methods for creating, retrieving, updating, and deleting episodes,
+// which represent specific time segments of streams
+// that can be individually accessed, managed, and published.
 type EpisodeServiceServer interface {
-	// Get the specific channel.
+	// Retrieves detailed information about a specific episode by its ID.
+	// Returns all episode metadata, status, and related information.
 	Get(context.Context, *GetEpisodeRequest) (*Episode, error)
-	// List episodes for stream or line.
+	// Lists all episodes associated with a specific stream or stream line with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(context.Context, *ListEpisodesRequest) (*ListEpisodesResponse, error)
-	// Batch get episodes for channel.
+	// Retrieves multiple episodes by their IDs in a specific channel in a single request.
+	// This is more efficient than making multiple Get requests when retrieving several episodes.
 	BatchGet(context.Context, *BatchGetEpisodesRequest) (*BatchGetEpisodesResponse, error)
-	// Create episode.
+	// Creates a new episode associated with a stream or stream line.
+	// Episodes can be configured with various settings including title, description,
+	// time boundaries, and access rights.
 	Create(context.Context, *CreateEpisodeRequest) (*operation.Operation, error)
-	// Update episode.
+	// Updates an existing episode's metadata and settings.
+	// Only fields specified in the field_mask will be updated.
 	Update(context.Context, *UpdateEpisodeRequest) (*operation.Operation, error)
-	// Delete episode.
+	// Deletes a specific episode by its ID.
 	Delete(context.Context, *DeleteEpisodeRequest) (*operation.Operation, error)
-	// Batch delete episodes.
+	// Deletes multiple episodes associated with a specific stream or stream line in a single request.
+	// This is more efficient than making multiple Delete requests when removing several episodes.
 	BatchDelete(context.Context, *BatchDeleteEpisodesRequest) (*operation.Operation, error)
-	// Perform an action on the episode.
+	// Performs a specific action on an episode, such as publishing or unpublishing.
 	PerformAction(context.Context, *PerformEpisodeActionRequest) (*operation.Operation, error)
-	// Get player url.
+	// Generates a player URL for watching the episode.
+	// The URL can include player parameters such as autoplay, mute, and visibility of interface controls.
+	// For episodes with signed URL access, an expiration duration can be specified.
 	GetPlayerURL(context.Context, *GetEpisodePlayerURLRequest) (*GetEpisodePlayerURLResponse, error)
-	// Get manifest urls.
+	// Retrieves the manifest URLs for the episode's media content.
+	// Manifests provide players with necessary information
+	// for streaming the content with different quality levels and formats.
 	GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error)
 }
 

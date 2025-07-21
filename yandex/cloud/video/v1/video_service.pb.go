@@ -30,7 +30,7 @@ const (
 
 type GetVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video to retrieve.
 	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -75,30 +75,32 @@ func (x *GetVideoRequest) GetVideoId() string {
 
 type ListVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the videos to list.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of videos to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListVideoResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "<field> <order>" (e.g. "createdAt desc").
+	// Specifies the ordering of results.
+	// Format is "<field> <order>" (e.g., "createdAt desc").
 	// Default: "id asc".
-	// Possible fields: ["id", "title", "createdAt", "updatedAt"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported fields: ["id", "title", "createdAt", "updatedAt"].
+	// Both snake_case and camelCase field names are supported.
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	// Filter expression that filters resources listed in the response.
-	// Expressions are composed of terms connected by logic operators.
-	// If value contains spaces or quotes,
-	// it should be in quotes (`'` or `"`) with the inner quotes being backslash escaped.
+	// Filter expression to narrow down the list of returned videos.
+	// Expressions consist of terms connected by logical operators.
+	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
+	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
-	// Supported string match operators: ["=", "!=", ":"].
-	// Operator ":" stands for substring matching.
-	// Filter expressions may also contain parentheses to group logical operands.
-	// Example: `key1='value' AND (key2!='\'value\” OR key2:"\"value\"")`
-	// Supported fields: ["id", "title", "status", "visibilityStatus"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
+	// Parentheses can be used to group logical expressions.
+	//
+	// Example: `title:'sample' AND (status='READY' OR visibilityStatus='PUBLISHED')`
+	//
+	// Filterable fields: ["id", "title", "status", "visibilityStatus"].
+	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -170,9 +172,12 @@ func (x *ListVideoRequest) GetFilter() string {
 }
 
 type ListVideoResponse struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	Videos []*Video               `protobuf:"bytes,1,rep,name=videos,proto3" json:"videos,omitempty"`
-	// Token for getting the next page.
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of videos matching the request criteria.
+	// May be empty if no videos match the criteria or if the channel is empty.
+	Videos []*Video `protobuf:"bytes,1,rep,name=videos,proto3" json:"videos,omitempty"`
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -224,9 +229,9 @@ func (x *ListVideoResponse) GetNextPageToken() string {
 
 type BatchGetVideosRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the videos to retrieve.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of requested video IDs.
+	// List of video IDs to retrieve.
 	VideoIds      []string `protobuf:"bytes,2,rep,name=video_ids,json=videoIds,proto3" json:"video_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -278,7 +283,7 @@ func (x *BatchGetVideosRequest) GetVideoIds() []string {
 
 type BatchGetVideosResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of videos for channel.
+	// List of videos matching the requested IDs.
 	Videos        []*Video `protobuf:"bytes,1,rep,name=videos,proto3" json:"videos,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -323,32 +328,43 @@ func (x *BatchGetVideosResponse) GetVideos() []*Video {
 
 type CreateVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel where the video will be created.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Video title.
+	// Title of the video to be displayed in interfaces and players.
 	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	// Video description.
+	// Detailed description of the video content and context.
+	// Optional field that can provide additional information about the video.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the thumbnail.
+	// ID of the thumbnail image to be used for the video.
+	// If not provided, a thumbnail may be automatically generated during transcoding.
 	ThumbnailId string `protobuf:"bytes,4,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Auto start transcoding.
+	// Controls whether transcoding starts automatically after upload.
+	// Set to ENABLE to automatically initiate transcoding after upload,
+	// or DISABLE for manual initiation via the Transcode() method.
 	AutoTranscode AutoTranscode `protobuf:"varint,5,opt,name=auto_transcode,json=autoTranscode,proto3,enum=yandex.cloud.video.v1.AutoTranscode" json:"auto_transcode,omitempty"`
-	// Automatically publish video after transcoding.
-	// Switches visibility status to PUBLISHED.
+	// ID of the style preset to apply to the video during processing.
+	// Style presets define visual appearance settings for the video player.
+	StylePresetId string `protobuf:"bytes,6,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// Controls whether the video is automatically published after transcoding.
+	// When set to true, the video's visibility status will be set to PUBLISHED
+	// once transcoding is complete, making it available for watching.
 	AutoPublish *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=auto_publish,json=autoPublish,proto3" json:"auto_publish,omitempty"`
-	// Enable advertisement for this video.
-	// Default: true.
-	// Set explicitly to false to disable advertisements for a specific video.
+	// Controls the ability to display advertisements for this video.
+	// Default: true
+	// Set explicitly to false to disable advertisements for this specific video.
 	EnableAd *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=enable_ad,json=enableAd,proto3" json:"enable_ad,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as `key:value` pairs.
+	// Maximum 64 labels per video.
+	// Keys must be lowercase alphanumeric strings with optional hyphens/underscores.
+	// Values can contain alphanumeric characters and various symbols.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Source type.
+	// Specifies the video upload source method (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to Source:
 	//
 	//	*CreateVideoRequest_Tusd
 	Source isCreateVideoRequest_Source `protobuf_oneof:"source"`
-	// Video access permission settings.
+	// Video access permission settings (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to AccessRights:
 	//
@@ -424,6 +440,13 @@ func (x *CreateVideoRequest) GetAutoTranscode() AutoTranscode {
 	return AutoTranscode_AUTO_TRANSCODE_UNSPECIFIED
 }
 
+func (x *CreateVideoRequest) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *CreateVideoRequest) GetAutoPublish() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.AutoPublish
@@ -491,7 +514,8 @@ type isCreateVideoRequest_Source interface {
 }
 
 type CreateVideoRequest_Tusd struct {
-	// Upload video using the tus protocol.
+	// Upload video using the TUS (Tus Resumable Upload Protocol) protocol.
+	// This is a push-based upload method where the client pushes data to the server.
 	Tusd *VideoTUSDParams `protobuf:"bytes,1000,opt,name=tusd,proto3,oneof"`
 }
 
@@ -502,13 +526,12 @@ type isCreateVideoRequest_AccessRights interface {
 }
 
 type CreateVideoRequest_PublicAccess struct {
-	// Publicly accessible video available for viewing by anyone with the direct link.
-	// No additional authorization or access control is applied.
+	// Video is publicly available.
 	PublicAccess *VideoPublicAccessParams `protobuf:"bytes,2000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
 type CreateVideoRequest_SignUrlAccess struct {
-	// Checking access rights using url's signature.
+	// Access to the video is restricted by temporarily signed links.
 	SignUrlAccess *VideoSignURLAccessParams `protobuf:"bytes,2003,opt,name=sign_url_access,json=signUrlAccess,proto3,oneof"`
 }
 
@@ -518,9 +541,10 @@ func (*CreateVideoRequest_SignUrlAccess) isCreateVideoRequest_AccessRights() {}
 
 type VideoTUSDParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// File size.
+	// Total size of the file to be uploaded, in bytes.
 	FileSize int64 `protobuf:"varint,1,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
-	// File name.
+	// Original name of the file being uploaded.
+	// This is used for reference and does not affect the upload process.
 	FileName      string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -570,6 +594,7 @@ func (x *VideoTUSDParams) GetFileName() string {
 	return ""
 }
 
+// Parameters for video public access rights.
 type VideoPublicAccessParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -606,6 +631,7 @@ func (*VideoPublicAccessParams) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{7}
 }
 
+// Parameters for video access restrictions based on temporary signed links.
 type VideoSignURLAccessParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -644,7 +670,7 @@ func (*VideoSignURLAccessParams) Descriptor() ([]byte, []int) {
 
 type CreateVideoMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// Unique identifier of the video.
 	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -689,25 +715,32 @@ func (x *CreateVideoMetadata) GetVideoId() string {
 
 type UpdateVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video to update.
 	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
-	// Field mask that specifies which fields of the video are going to be updated.
+	// Field mask specifying which fields of the video should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	// Video title.
+	// New title for the video.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Video description.
+	// New description for the video.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the thumbnail.
+	// New thumbnail ID for the video.
 	ThumbnailId string `protobuf:"bytes,5,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Auto start transcoding.
+	// New auto-transcoding setting for the video.
+	// Controls whether transcoding starts automatically after upload.
 	AutoTranscode AutoTranscode `protobuf:"varint,6,opt,name=auto_transcode,json=autoTranscode,proto3,enum=yandex.cloud.video.v1.AutoTranscode" json:"auto_transcode,omitempty"`
-	// Enable advertisement for this video.
-	// Default: true.
-	// Use this to disable advertisement for a specific video.
+	// New style preset ID for the video.
+	StylePresetId string `protobuf:"bytes,7,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// New advertisement setting for the video.
+	// Set to false to disable advertisements for this specific video.
 	EnableAd *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=enable_ad,json=enableAd,proto3" json:"enable_ad,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// New custom labels for the video as `key:value` pairs.
+	// Maximum 64 labels per video.
+	// If provided, replaces all existing labels.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Video access permission settings.
+	// New access rights setting for the video.
 	//
 	// Types that are valid to be assigned to AccessRights:
 	//
@@ -790,6 +823,13 @@ func (x *UpdateVideoRequest) GetAutoTranscode() AutoTranscode {
 	return AutoTranscode_AUTO_TRANSCODE_UNSPECIFIED
 }
 
+func (x *UpdateVideoRequest) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *UpdateVideoRequest) GetEnableAd() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.EnableAd
@@ -834,13 +874,12 @@ type isUpdateVideoRequest_AccessRights interface {
 }
 
 type UpdateVideoRequest_PublicAccess struct {
-	// Publicly accessible video available for viewing by anyone with the direct link.
-	// No additional authorization or access control is applied.
+	// Makes the video publicly accessible to anyone with the direct link.
 	PublicAccess *VideoPublicAccessParams `protobuf:"bytes,2000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
 type UpdateVideoRequest_SignUrlAccess struct {
-	// Checking access rights using url's signature.
+	// Restricts video access using URL signatures for secure time-limited access.
 	SignUrlAccess *VideoSignURLAccessParams `protobuf:"bytes,2003,opt,name=sign_url_access,json=signUrlAccess,proto3,oneof"`
 }
 
@@ -895,16 +934,21 @@ func (x *UpdateVideoMetadata) GetVideoId() string {
 
 type TranscodeVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video to transcode.
 	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
-	// Field mask that specifies which transcoding specific fields of the video
-	// are going to be updated.
+	// Field mask specifying which transcoding-specific fields should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	// IDs of active manually uploaded video subtitles.
+	// IDs of manually uploaded subtitle files to include in the transcoding process.
+	// These subtitles will be embedded in the video output.
 	SubtitleIds []string `protobuf:"bytes,3,rep,name=subtitle_ids,json=subtitleIds,proto3" json:"subtitle_ids,omitempty"`
-	// Video translation settings.
+	// Settings for automatic translation of audio tracks.
+	// Defines source tracks and target languages for subtitle and audio translation.
 	TranslationSettings *VideoTranslationSettings `protobuf:"bytes,4,opt,name=translation_settings,json=translationSettings,proto3" json:"translation_settings,omitempty"`
-	// Video summarization settings.
+	// Settings for automatic video content summarization.
+	// Defines which audio tracks should be processed to generate text summaries.
 	SummarizationSettings *VideoSummarizationSettings `protobuf:"bytes,5,opt,name=summarization_settings,json=summarizationSettings,proto3" json:"summarization_settings,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -1124,7 +1168,7 @@ func (x *TranscodeVideoMetadata) GetVideoId() string {
 
 type DeleteVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video to delete.
 	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1170,6 +1214,7 @@ func (x *DeleteVideoRequest) GetVideoId() string {
 type DeleteVideoMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the video.
+	// This identifier can be used to track the video deletion operation.
 	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1214,9 +1259,9 @@ func (x *DeleteVideoMetadata) GetVideoId() string {
 
 type BatchDeleteVideosRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the videos to delete.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of video IDs.
+	// List of video IDs to delete.
 	VideoIds      []string `protobuf:"bytes,2,rep,name=video_ids,json=videoIds,proto3" json:"video_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1268,7 +1313,9 @@ func (x *BatchDeleteVideosRequest) GetVideoIds() []string {
 
 type BatchDeleteVideosMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of video IDs.
+	// List of video IDs being deleted.
+	// This list can be used to track which videos are included
+	// in the batch deletion operation.
 	VideoIds      []string `protobuf:"bytes,1,rep,name=video_ids,json=videoIds,proto3" json:"video_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1313,8 +1360,10 @@ func (x *BatchDeleteVideosMetadata) GetVideoIds() []string {
 
 type PerformVideoActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video on which to perform the action.
 	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	// Specifies the action to perform on the video (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformVideoActionRequest_Publish
@@ -1391,10 +1440,14 @@ type isPerformVideoActionRequest_Action interface {
 }
 
 type PerformVideoActionRequest_Publish struct {
+	// Publish the video, making it available for watching.
+	// Changes the video's visibility status to PUBLISHED.
 	Publish *PublishVideoAction `protobuf:"bytes,1000,opt,name=publish,proto3,oneof"`
 }
 
 type PerformVideoActionRequest_Unpublish struct {
+	// Unpublish the video, making it unavailable for watching.
+	// Changes the video's visibility status to UNPUBLISHED.
 	Unpublish *UnpublishVideoAction `protobuf:"bytes,1001,opt,name=unpublish,proto3,oneof"`
 }
 
@@ -1402,6 +1455,7 @@ func (*PerformVideoActionRequest_Publish) isPerformVideoActionRequest_Action() {
 
 func (*PerformVideoActionRequest_Unpublish) isPerformVideoActionRequest_Action() {}
 
+// Parameters for the publish action.
 type PublishVideoAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1438,6 +1492,7 @@ func (*PublishVideoAction) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{21}
 }
 
+// Parameters for the unpublish action.
 type UnpublishVideoAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1476,7 +1531,9 @@ func (*UnpublishVideoAction) Descriptor() ([]byte, []int) {
 
 type PerformVideoActionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video on which the action is being performed.
+	// This identifier can be used to track the action operation
+	// and to verify that the action is being applied to the correct video.
 	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1521,10 +1578,13 @@ func (x *PerformVideoActionMetadata) GetVideoId() string {
 
 type GetVideoPlayerURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
-	VideoId string             `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
-	Params  *VideoPlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
-	// Optional field, used to set custom url expiration duration for videos with sign_url_access
+	// ID of the video for which to generate a player URL.
+	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	// Optional player parameters to customize the playback experience.
+	// These parameters control initial player state such as mute, autoplay, and visibility of interface controls.
+	Params *VideoPlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
+	// For episodes with signed URL access, specifies how long the generated URL will be valid.
+	// If not provided, a default expiration duration will be used.
 	SignedUrlExpirationDuration *durationpb.Duration `protobuf:"bytes,3,opt,name=signed_url_expiration_duration,json=signedUrlExpirationDuration,proto3" json:"signed_url_expiration_duration,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
@@ -1583,11 +1643,14 @@ func (x *GetVideoPlayerURLRequest) GetSignedUrlExpirationDuration() *durationpb.
 
 type VideoPlayerParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// If true, a player will be muted by default.
+	// If true, the player will start with audio muted.
+	// Users can unmute the audio manually after playback starts.
 	Mute bool `protobuf:"varint,1,opt,name=mute,proto3" json:"mute,omitempty"`
-	// If true, playback will start automatically.
+	// If true, the video will start playing automatically when the player loads.
+	// This may be subject to browser autoplay policies that restrict autoplay with sound.
 	Autoplay bool `protobuf:"varint,2,opt,name=autoplay,proto3" json:"autoplay,omitempty"`
-	// If true, a player interface will be hidden by default.
+	// If true, the player interface controls will be hidden initially.
+	// Users can typically reveal the controls by moving the mouse over the player.
 	Hidden        bool `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1646,9 +1709,12 @@ func (x *VideoPlayerParams) GetHidden() bool {
 
 type GetVideoPlayerURLResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Direct link to the video.
+	// Direct URL to the video player.
+	// This URL can be used to access the video in a web browser
+	// or shared with users who have appropriate permissions.
 	PlayerUrl string `protobuf:"bytes,1,opt,name=player_url,json=playerUrl,proto3" json:"player_url,omitempty"`
-	// HTML embed code in Iframe format.
+	// HTML embed code in iframe format that can be inserted into web pages.
+	// This code allows the video to be embedded directly in third-party websites.
 	Html          string `protobuf:"bytes,2,opt,name=html,proto3" json:"html,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1700,12 +1766,17 @@ func (x *GetVideoPlayerURLResponse) GetHtml() string {
 
 type BatchGetVideoPlayerURLsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the videos for which to generate player URLs.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of requested video IDs.
-	VideoIds []string           `protobuf:"bytes,2,rep,name=video_ids,json=videoIds,proto3" json:"video_ids,omitempty"`
-	Params   *VideoPlayerParams `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
-	// Optional field, used to set custom url expiration duration for videos with sign_url_access
+	// List of video IDs for which to generate player URLs.
+	VideoIds []string `protobuf:"bytes,2,rep,name=video_ids,json=videoIds,proto3" json:"video_ids,omitempty"`
+	// Optional player parameters to customize the playback experience.
+	// These parameters control initial player state such as mute, autoplay, and visibility of interface controls.
+	// These parameters will be applied to all generated player URLs.
+	Params *VideoPlayerParams `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
+	// For episodes with signed URL access, specifies how long the generated URL will be valid.
+	// If not provided, a default expiration duration will be used.
+	// This setting applies to all videos in the batch that use sign_url_access.
 	SignedUrlExpirationDuration *durationpb.Duration `protobuf:"bytes,4,opt,name=signed_url_expiration_duration,json=signedUrlExpirationDuration,proto3" json:"signed_url_expiration_duration,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
@@ -1770,8 +1841,10 @@ func (x *BatchGetVideoPlayerURLsRequest) GetSignedUrlExpirationDuration() *durat
 }
 
 type BatchGetVideoPlayerURLsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlayerUrls    []string               `protobuf:"bytes,1,rep,name=player_urls,json=playerUrls,proto3" json:"player_urls,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of player URLs corresponding to the requested video IDs.
+	// The order of URLs matches the order of video IDs in the request.
+	PlayerUrls    []string `protobuf:"bytes,1,rep,name=player_urls,json=playerUrls,proto3" json:"player_urls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1815,7 +1888,7 @@ func (x *BatchGetVideoPlayerURLsResponse) GetPlayerUrls() []string {
 
 type GetVideoManifestsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// ID of the video for which to retrieve manifest URLs.
 	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1859,8 +1932,10 @@ func (x *GetVideoManifestsRequest) GetVideoId() string {
 }
 
 type GetVideoManifestsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Manifests     []*Manifest            `protobuf:"bytes,1,rep,name=manifests,proto3" json:"manifests,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of manifests available for the video.
+	// Different manifests may represent different streaming formats (e.g., HLS, DASH)
+	Manifests     []*Manifest `protobuf:"bytes,1,rep,name=manifests,proto3" json:"manifests,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2256,7 +2331,7 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12.\n" +
 	"\tvideo_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\bvideoIds\"N\n" +
 	"\x16BatchGetVideosResponse\x124\n" +
-	"\x06videos\x18\x01 \x03(\v2\x1c.yandex.cloud.video.v1.VideoR\x06videos\"\x97\a\n" +
+	"\x06videos\x18\x01 \x03(\v2\x1c.yandex.cloud.video.v1.VideoR\x06videos\"\xd5\a\n" +
 	"\x12CreateVideoRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12#\n" +
@@ -2264,7 +2339,8 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
 	"\fthumbnail_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x12K\n" +
-	"\x0eauto_transcode\x18\x05 \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x12=\n" +
+	"\x0eauto_transcode\x18\x05 \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x120\n" +
+	"\x0fstyle_preset_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\x12=\n" +
 	"\fauto_publish\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\vautoPublish\x127\n" +
 	"\tenable_ad\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12\x92\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v25.yandex.cloud.video.v1.CreateVideoRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12=\n" +
@@ -2274,15 +2350,17 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\x06source\x12\x04\xc0\xc11\x01B\x0f\n" +
-	"\raccess_rightsJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\x06\x10\aJ\x05\b\t\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0f\"S\n" +
+	"\x06source\x12\x04\xc0\xc11\x01B\x15\n" +
+	"\raccess_rights\x12\x04\xc0\xc11\x01J\x04\b\n" +
+	"\x10\vJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\t\x10\n" +
+	"J\x05\b\v\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0f\"S\n" +
 	"\x0fVideoTUSDParams\x12#\n" +
 	"\tfile_size\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0R\bfileSize\x12\x1b\n" +
 	"\tfile_name\x18\x02 \x01(\tR\bfileName\"\x19\n" +
 	"\x17VideoPublicAccessParams\"\x1a\n" +
 	"\x18VideoSignURLAccessParams\"0\n" +
 	"\x13CreateVideoMetadata\x12\x19\n" +
-	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xba\x06\n" +
+	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xf2\x06\n" +
 	"\x12UpdateVideoRequest\x12'\n" +
 	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\x12?\n" +
 	"\n" +
@@ -2291,7 +2369,8 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
 	"\fthumbnail_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x12K\n" +
-	"\x0eauto_transcode\x18\x06 \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x127\n" +
+	"\x0eauto_transcode\x18\x06 \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x120\n" +
+	"\x0fstyle_preset_id\x18\a \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\x127\n" +
 	"\tenable_ad\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12\x92\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v25.yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
 	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessParamsH\x00R\fpublicAccess\x12Z\n" +
@@ -2299,7 +2378,9 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
-	"\raccess_rightsJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\a\x10\bJ\x05\b\t\x10\xc8\x01J\x06\b\xc9\x01\x10\xd0\x0f\"0\n" +
+	"\raccess_rightsJ\x04\b\n" +
+	"\x10\vJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\t\x10\n" +
+	"J\x05\b\v\x10\xc8\x01J\x06\b\xc9\x01\x10\xd0\x0f\"0\n" +
 	"\x13UpdateVideoMetadata\x12\x19\n" +
 	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xe4\x02\n" +
 	"\x15TranscodeVideoRequest\x12\x19\n" +
@@ -2308,37 +2389,37 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12!\n" +
 	"\fsubtitle_ids\x18\x03 \x03(\tR\vsubtitleIds\x12b\n" +
 	"\x14translation_settings\x18\x04 \x01(\v2/.yandex.cloud.video.v1.VideoTranslationSettingsR\x13translationSettings\x12h\n" +
-	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\"\xaf\x06\n" +
+	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\"\xa2\x06\n" +
 	"\x18VideoTranslationSettings\x12X\n" +
 	"\x06tracks\x18\x01 \x03(\v2@.yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrackR\x06tracks\x1a\xa4\x02\n" +
 	"\x10TranslationTrack\x12a\n" +
 	"\vinput_track\x18\x01 \x01(\v2:.yandex.cloud.video.v1.VideoTranslationSettings.InputTrackB\x04\xe8\xc71\x01R\n" +
 	"inputTrack\x12[\n" +
 	"\tsubtitles\x18\x02 \x03(\v2=.yandex.cloud.video.v1.VideoTranslationSettings.SubtitleTrackR\tsubtitles\x12P\n" +
-	"\x05audio\x18\x03 \x03(\v2:.yandex.cloud.video.v1.VideoTranslationSettings.AudioTrackR\x05audio\x1a\x86\x01\n" +
+	"\x05audio\x18\x03 \x03(\v2:.yandex.cloud.video.v1.VideoTranslationSettings.AudioTrackR\x05audio\x1a\x8a\x01\n" +
 	"\n" +
 	"InputTrack\x12(\n" +
 	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
-	"trackIndex\x12N\n" +
-	"\bsrc_lang\x18\x02 \x01(\tB3\xf2\xc71(|deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x030,3R\asrcLang\x1a\x84\x01\n" +
-	"\rSubtitleTrack\x12O\n" +
-	"\bdst_lang\x18\x01 \x01(\tB4\xe8\xc71\x01\xf2\xc71'deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
-	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\x1a\x81\x01\n" +
+	"trackIndex\x12R\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLang\x1a\x90\x01\n" +
+	"\rSubtitleTrack\x12[\n" +
+	"\bdst_lang\x18\x01 \x01(\tB@\xe8\xc71\x01\xf2\xc713ara|deu|eng|fra|ita|jpn|kaz|kor|rus|spa|tur|ukr|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
+	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\x1ae\n" +
 	"\n" +
-	"AudioTrack\x12O\n" +
-	"\bdst_lang\x18\x01 \x01(\tB4\xe8\xc71\x01\xf2\xc71'deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
-	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\"\xb2\x03\n" +
+	"AudioTrack\x123\n" +
+	"\bdst_lang\x18\x01 \x01(\tB\x18\xe8\xc71\x01\xf2\xc71\veng|kaz|rus\x8a\xc81\x013R\adstLang\x12\"\n" +
+	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\"\xb6\x03\n" +
 	"\x1aVideoSummarizationSettings\x12\\\n" +
 	"\x06tracks\x18\x02 \x03(\v2D.yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrackR\x06tracks\x12,\n" +
 	"\x12process_all_tracks\x18\x03 \x01(\bR\x10processAllTracks\x1ay\n" +
 	"\x12SummarizationTrack\x12c\n" +
 	"\vinput_track\x18\x01 \x01(\v2<.yandex.cloud.video.v1.VideoSummarizationSettings.InputTrackB\x04\xe8\xc71\x01R\n" +
-	"inputTrack\x1a\x86\x01\n" +
+	"inputTrack\x1a\x8a\x01\n" +
 	"\n" +
 	"InputTrack\x12(\n" +
 	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
-	"trackIndex\x12N\n" +
-	"\bsrc_lang\x18\x02 \x01(\tB3\xf2\xc71(|deu|eng|fra|ita|jpn|kaz|rus|spa|ukr|zho\x8a\xc81\x030,3R\asrcLangJ\x04\b\x01\x10\x02\"3\n" +
+	"trackIndex\x12R\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLangJ\x04\b\x01\x10\x02\"3\n" +
 	"\x16TranscodeVideoMetadata\x12\x19\n" +
 	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"=\n" +
 	"\x12DeleteVideoRequest\x12'\n" +

@@ -26,6 +26,10 @@ func (m *Origin) SetMeta(v *OriginMeta) {
 	m.Meta = v
 }
 
+func (m *Origin) SetProviderType(v string) {
+	m.ProviderType = v
+}
+
 func (m *OriginParams) SetSource(v string) {
 	m.Source = v
 }

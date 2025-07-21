@@ -29,8 +29,12 @@ const (
 	// Matches connection attempts made using TCP/IP.
 	HBARule_HOST HBARule_ConnectionType = 1
 	// Matches connection attempts made using TCP/IP, but only when the connection is made with SSL encryption.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/hba_rule.proto.
 	HBARule_HOSTSSL HBARule_ConnectionType = 2
 	// Matches connection attempts made over TCP/IP that do not use SSL.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/hba_rule.proto.
 	HBARule_HOSTNOSSL HBARule_ConnectionType = 3
 )
 
@@ -230,7 +234,7 @@ var File_yandex_cloud_mdb_greenplum_v1_hba_rule_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_greenplum_v1_hba_rule_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/greenplum/v1/hba_rule.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xed\x03\n" +
+	",yandex/cloud/mdb/greenplum/v1/hba_rule.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xf5\x03\n" +
 	"\aHBARule\x12&\n" +
 	"\bpriority\x18\x01 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpriority\x12^\n" +
@@ -239,12 +243,12 @@ const file_yandex_cloud_mdb_greenplum_v1_hba_rule_proto_rawDesc = "" +
 	"\x04user\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1e\n" +
 	"\aaddress\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\aaddress\x12R\n" +
 	"\vauth_method\x18\x06 \x01(\x0e21.yandex.cloud.mdb.greenplum.v1.HBARule.AuthMethodR\n" +
-	"authMethod\"W\n" +
+	"authMethod\"_\n" +
 	"\x0eConnectionType\x12\x1f\n" +
 	"\x1bCONNECTION_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04HOST\x10\x01\x12\v\n" +
-	"\aHOSTSSL\x10\x02\x12\r\n" +
-	"\tHOSTNOSSL\x10\x03\"Q\n" +
+	"\x04HOST\x10\x01\x12\x0f\n" +
+	"\aHOSTSSL\x10\x02\x1a\x02\b\x01\x12\x11\n" +
+	"\tHOSTNOSSL\x10\x03\x1a\x02\b\x01\"Q\n" +
 	"\n" +
 	"AuthMethod\x12\x1b\n" +
 	"\x17AUTH_METHOD_UNSPECIFIED\x10\x00\x12\a\n" +

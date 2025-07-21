@@ -629,14 +629,14 @@ const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = ""
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xe3\a\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd5\a\n" +
 	"\x13QuotaRequestService\x12\xa3\x01\n" +
 	"\x03Get\x124.yandex.cloud.quotamanager.v1.GetQuotaRequestRequest\x1a*.yandex.cloud.quotamanager.v1.QuotaRequest\":\x82\xd3\xe4\x93\x024\x122/quota-manager/v1/quotaRequests/{quota_request_id}\x12\xbe\x01\n" +
 	"\x06Create\x127.yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2**\n" +
 	"\x1aCreateQuotaRequestMetadata\x12\fQuotaRequest\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/quota-manager/v1/quotaRequests\x12\xd8\x01\n" +
 	"\x06Cancel\x127.yandex.cloud.quotamanager.v1.CancelQuotaRequestRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2**\n" +
-	"\x1aCancelQuotaRequestMetadata\x12\fQuotaRequest\x82\xd3\xe4\x93\x02>:\x01*\"9/quota-manager/v1/quotaRequests/{quota_request_id}/cancel\x12\xac\x01\n" +
-	"\x04List\x125.yandex.cloud.quotamanager.v1.ListQuotaRequestRequest\x1a6.yandex.cloud.quotamanager.v1.ListQuotaRequestResponse\"5\x82\xd3\xe4\x93\x02/\x12-/quota-manager/v1/quotaRequests/quotaRequests\x12\xda\x01\n" +
+	"\x1aCancelQuotaRequestMetadata\x12\fQuotaRequest\x82\xd3\xe4\x93\x02>:\x01*\"9/quota-manager/v1/quotaRequests/{quota_request_id}/cancel\x12\x9e\x01\n" +
+	"\x04List\x125.yandex.cloud.quotamanager.v1.ListQuotaRequestRequest\x1a6.yandex.cloud.quotamanager.v1.ListQuotaRequestResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/quota-manager/v1/quotaRequests\x12\xda\x01\n" +
 	"\x0eListOperations\x12?.yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsRequest\x1a@.yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/quota-manager/v1/quotaRequests/{quota_request_id}/operationsBq\n" +
 	" yandex.cloud.api.quotamanager.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/quotamanager/v1;quotamanagerb\x06proto3"
 

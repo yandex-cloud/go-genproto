@@ -81,6 +81,12 @@ func (m *Source) SetEventServiceSource(v *EventServiceSource) {
 	}
 }
 
+func (m *Source) SetAuditTrails(v *AuditTrails) {
+	m.Source = &Source_AuditTrails{
+		AuditTrails: v,
+	}
+}
+
 func (m *DataStream) SetDatabase(v string) {
 	m.Database = v
 }

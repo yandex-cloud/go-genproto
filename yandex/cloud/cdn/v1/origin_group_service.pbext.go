@@ -50,6 +50,10 @@ func (m *CreateOriginGroupRequest) SetOrigins(v []*OriginParams) {
 	m.Origins = v
 }
 
+func (m *CreateOriginGroupRequest) SetProviderType(v string) {
+	m.ProviderType = v
+}
+
 func (m *CreateOriginGroupMetadata) SetOriginGroupId(v int64) {
 	m.OriginGroupId = v
 }

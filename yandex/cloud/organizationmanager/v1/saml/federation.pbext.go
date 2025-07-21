@@ -66,3 +66,67 @@ func (m *FederationSecuritySettings) SetEncryptedAssertions(v bool) {
 func (m *FederationSecuritySettings) SetForceAuthn(v bool) {
 	m.ForceAuthn = v
 }
+
+func (m *Domain) SetDomain(v string) {
+	m.Domain = v
+}
+
+func (m *Domain) SetStatus(v Domain_Status) {
+	m.Status = v
+}
+
+func (m *Domain) SetStatusCode(v string) {
+	m.StatusCode = v
+}
+
+func (m *Domain) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *Domain) SetValidatedAt(v *timestamppb.Timestamp) {
+	m.ValidatedAt = v
+}
+
+func (m *Domain) SetChallenges(v []*DomainChallenge) {
+	m.Challenges = v
+}
+
+type DomainChallenge_Challenge = isDomainChallenge_Challenge
+
+func (m *DomainChallenge) SetChallenge(v DomainChallenge_Challenge) {
+	m.Challenge = v
+}
+
+func (m *DomainChallenge) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *DomainChallenge) SetUpdatedAt(v *timestamppb.Timestamp) {
+	m.UpdatedAt = v
+}
+
+func (m *DomainChallenge) SetType(v DomainChallenge_Type) {
+	m.Type = v
+}
+
+func (m *DomainChallenge) SetStatus(v DomainChallenge_Status) {
+	m.Status = v
+}
+
+func (m *DomainChallenge) SetDnsChallenge(v *DomainChallenge_DnsRecord) {
+	m.Challenge = &DomainChallenge_DnsChallenge{
+		DnsChallenge: v,
+	}
+}
+
+func (m *DomainChallenge_DnsRecord) SetName(v string) {
+	m.Name = v
+}
+
+func (m *DomainChallenge_DnsRecord) SetType(v DomainChallenge_DnsRecord_Type) {
+	m.Type = v
+}
+
+func (m *DomainChallenge_DnsRecord) SetValue(v string) {
+	m.Value = v
+}

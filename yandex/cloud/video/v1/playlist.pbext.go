@@ -26,6 +26,10 @@ func (m *Playlist) SetItems(v []*PlaylistItem) {
 	m.Items = v
 }
 
+func (m *Playlist) SetStylePresetId(v string) {
+	m.StylePresetId = v
+}
+
 func (m *Playlist) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

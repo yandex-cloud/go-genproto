@@ -23,22 +23,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Entity representing an ordered list of videos or episodes.
+// Entity representing an ordered collection of videos or episodes.
+// Playlists allow organizing content into sequences for improved user experience.
 type Playlist struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the playlist.
+	// Unique identifier of the playlist.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the channel to create the playlist in.
+	// Identifier of the channel where this playlist is created and managed.
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Playlist title.
+	// Title of the playlist displayed in interfaces and players.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Playlist description.
+	// Detailed description of the playlist's content and purpose.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// List of playlist items.
+	// Ordered list of content items included in this playlist.
 	Items []*PlaylistItem `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
-	// Time when playlist was created.
+	// Identifier of the style preset used in the player during playlist playback.
+	StylePresetId string `protobuf:"bytes,6,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// Timestamp when the playlist was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time of last playlist update.
+	// Timestamp of the last modification to the playlist or its metadata.
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -109,6 +112,13 @@ func (x *Playlist) GetItems() []*PlaylistItem {
 	return nil
 }
 
+func (x *Playlist) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *Playlist) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -123,14 +133,19 @@ func (x *Playlist) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+// Represents a single item in a playlist.
+// Each item references either a video or an episode and specifies its position in the sequence.
 type PlaylistItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the content identifier type for this playlist item.
+	//
 	// Types that are valid to be assigned to Id:
 	//
 	//	*PlaylistItem_VideoId
 	//	*PlaylistItem_EpisodeId
 	Id isPlaylistItem_Id `protobuf_oneof:"id"`
-	// Item position (zero-indexed).
+	// Position of this item in the playlist sequence (zero-indexed).
+	// Determines the playback order of content in the playlist.
 	Position      int64 `protobuf:"varint,1,opt,name=position,proto3" json:"position,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -203,12 +218,12 @@ type isPlaylistItem_Id interface {
 }
 
 type PlaylistItem_VideoId struct {
-	// ID of the video.
+	// Identifier of a video included in the playlist.
 	VideoId string `protobuf:"bytes,100,opt,name=video_id,json=videoId,proto3,oneof"`
 }
 
 type PlaylistItem_EpisodeId struct {
-	// ID of the episode.
+	// Identifier of an episode included in the playlist.
 	EpisodeId string `protobuf:"bytes,101,opt,name=episode_id,json=episodeId,proto3,oneof"`
 }
 
@@ -220,25 +235,25 @@ var File_yandex_cloud_video_v1_playlist_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_playlist_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/video/v1/playlist.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xa8\x02\n" +
+	"$yandex/cloud/video/v1/playlist.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd0\x02\n" +
 	"\bPlaylist\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x129\n" +
-	"\x05items\x18\x05 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemR\x05items\x129\n" +
+	"\x05items\x18\x05 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemR\x05items\x12&\n" +
+	"\x0fstyle_preset_id\x18\x06 \x01(\tR\rstylePresetId\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtJ\x04\b\x06\x10d\"\x99\x01\n" +
+	"updated_at\x18e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtJ\x04\b\a\x10d\"\x93\x01\n" +
 	"\fPlaylistItem\x12%\n" +
 	"\bvideo_id\x18d \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12)\n" +
 	"\n" +
 	"episode_id\x18e \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tepisodeId\x12%\n" +
-	"\bposition\x18\x01 \x01(\x03B\t\xfa\xc71\x050-100R\bpositionB\n" +
-	"\n" +
-	"\x02id\x12\x04\xc0\xc11\x01J\x04\b\x02\x10dB\\\n" +
+	"\bposition\x18\x01 \x01(\x03B\t\xfa\xc71\x050-100R\bpositionB\x04\n" +
+	"\x02idJ\x04\b\x02\x10dB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (

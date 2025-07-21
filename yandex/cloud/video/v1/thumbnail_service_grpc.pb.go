@@ -33,18 +33,29 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Thumbnail management service.
+// Provides methods for creating, retrieving, and managing thumbnail images
+// that can be associated with various resources such as videos, streams, episodes, and channels.
 type ThumbnailServiceClient interface {
-	// Get the specific thumbnail.
+	// Retrieves detailed information about a specific thumbnail by its ID.
+	// Returns all thumbnail metadata and related information.
 	Get(ctx context.Context, in *GetThumbnailRequest, opts ...grpc.CallOption) (*Thumbnail, error)
-	// List thumbnails for channel.
+	// Lists all thumbnails associated with a specific resource (channel, stream, video, etc.)
+	// with pagination support.
 	List(ctx context.Context, in *ListThumbnailRequest, opts ...grpc.CallOption) (*ListThumbnailResponse, error)
-	// Create thumbnail.
+	// Creates a new thumbnail record for a specific resource.
+	// This method only creates the metadata record; the actual image must be uploaded
+	// using the URL obtained from the GenerateUploadURL method.
 	Create(ctx context.Context, in *CreateThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Generate urls for downloading images.
+	// Generates download URLs for multiple thumbnails in a single request.
+	// The response includes URLs for both original and scaled versions of each thumbnail.
+	// This is useful for efficiently retrieving multiple thumbnails at once.
 	BatchGenerateDownloadURLs(ctx context.Context, in *BatchGenerateDownloadURLsRequest, opts ...grpc.CallOption) (*BatchGenerateDownloadURLsResponse, error)
-	// Generate url for uploading an image.
+	// Generates a URL for uploading an image to an existing thumbnail record.
+	// This URL can be used to upload the actual image file using an HTTP PUT request.
+	// The URL is pre-signed and has a limited validity period.
 	GenerateUploadURL(ctx context.Context, in *GenerateThumbnailUploadURLRequest, opts ...grpc.CallOption) (*GenerateThumbnailUploadURLResponse, error)
-	// Delete thumbnail.
+	// Deletes a specific thumbnail by its ID.
+	// This removes both the metadata record and the associated image file.
 	Delete(ctx context.Context, in *DeleteThumbnailRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -121,18 +132,29 @@ func (c *thumbnailServiceClient) Delete(ctx context.Context, in *DeleteThumbnail
 // for forward compatibility.
 //
 // Thumbnail management service.
+// Provides methods for creating, retrieving, and managing thumbnail images
+// that can be associated with various resources such as videos, streams, episodes, and channels.
 type ThumbnailServiceServer interface {
-	// Get the specific thumbnail.
+	// Retrieves detailed information about a specific thumbnail by its ID.
+	// Returns all thumbnail metadata and related information.
 	Get(context.Context, *GetThumbnailRequest) (*Thumbnail, error)
-	// List thumbnails for channel.
+	// Lists all thumbnails associated with a specific resource (channel, stream, video, etc.)
+	// with pagination support.
 	List(context.Context, *ListThumbnailRequest) (*ListThumbnailResponse, error)
-	// Create thumbnail.
+	// Creates a new thumbnail record for a specific resource.
+	// This method only creates the metadata record; the actual image must be uploaded
+	// using the URL obtained from the GenerateUploadURL method.
 	Create(context.Context, *CreateThumbnailRequest) (*operation.Operation, error)
-	// Generate urls for downloading images.
+	// Generates download URLs for multiple thumbnails in a single request.
+	// The response includes URLs for both original and scaled versions of each thumbnail.
+	// This is useful for efficiently retrieving multiple thumbnails at once.
 	BatchGenerateDownloadURLs(context.Context, *BatchGenerateDownloadURLsRequest) (*BatchGenerateDownloadURLsResponse, error)
-	// Generate url for uploading an image.
+	// Generates a URL for uploading an image to an existing thumbnail record.
+	// This URL can be used to upload the actual image file using an HTTP PUT request.
+	// The URL is pre-signed and has a limited validity period.
 	GenerateUploadURL(context.Context, *GenerateThumbnailUploadURLRequest) (*GenerateThumbnailUploadURLResponse, error)
-	// Delete thumbnail.
+	// Deletes a specific thumbnail by its ID.
+	// This removes both the metadata record and the associated image file.
 	Delete(context.Context, *DeleteThumbnailRequest) (*operation.Operation, error)
 }
 

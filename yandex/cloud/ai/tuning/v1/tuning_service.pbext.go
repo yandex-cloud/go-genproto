@@ -803,3 +803,11 @@ func (m *ArchiveTuningRequest) SetTuningTaskId(v string) {
 func (m *ArchiveTuningResponse) SetTuningTaskId(v string) {
 	m.TuningTaskId = v
 }
+
+func (m *EnableBillingRequest) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}
+
+func (m *EnableBillingResponse) SetTuningTaskId(v string) {
+	m.TuningTaskId = v
+}

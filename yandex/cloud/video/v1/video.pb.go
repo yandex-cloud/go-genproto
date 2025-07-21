@@ -24,14 +24,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Enum controlling whether videos are automatically transcoded after upload.
 type AutoTranscode int32
 
 const (
-	// Unspecified auto transcoding value.
+	// The auto-transcoding setting is not specified.
 	AutoTranscode_AUTO_TRANSCODE_UNSPECIFIED AutoTranscode = 0
-	// Enable auto transcoding.
+	// Automatically start transcoding after the video upload is complete.
 	AutoTranscode_ENABLE AutoTranscode = 1
-	// Disable auto transcoding.
+	// Do not automatically transcode; requires manual initiation via the Transcode() method.
 	AutoTranscode_DISABLE AutoTranscode = 2
 )
 
@@ -76,20 +77,21 @@ func (AutoTranscode) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{0}
 }
 
+// Current processing status of the video.
 type Video_VideoStatus int32
 
 const (
-	// Video status unspecified.
+	// The video status is not specified.
 	Video_VIDEO_STATUS_UNSPECIFIED Video_VideoStatus = 0
-	// Waiting for all the bytes to be loaded.
+	// The video upload is in progress, waiting for all bytes to be received.
 	Video_WAIT_UPLOADING Video_VideoStatus = 1
-	// Fully uploaded, ready to be transcoded.
+	// The video has been fully uploaded and is ready for transcoding.
 	Video_UPLOADED Video_VideoStatus = 2
-	// Video is being processed.
+	// The video is currently being processed.
 	Video_PROCESSING Video_VideoStatus = 4
-	// Successfully processed and ready for use.
+	// The video has been successfully processed and is ready for watching.
 	Video_READY Video_VideoStatus = 5
-	// Video processing has failed.
+	// An error occurred during video processing.
 	Video_ERROR Video_VideoStatus = 7
 )
 
@@ -140,14 +142,15 @@ func (Video_VideoStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Visibility status of the video.
 type Video_VisibilityStatus int32
 
 const (
-	// Visibility status unspecified.
+	// The visibility status is not specified.
 	Video_VISIBILITY_STATUS_UNSPECIFIED Video_VisibilityStatus = 0
-	// Video published and available for public viewing.
+	// The video is publicly available, subject to its access permission settings.
 	Video_PUBLISHED Video_VisibilityStatus = 1
-	// Video unpublished, available only to administrators.
+	// The video is available only to administrators.
 	Video_UNPUBLISHED Video_VisibilityStatus = 2
 )
 
@@ -192,17 +195,19 @@ func (Video_VisibilityStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{0, 1}
 }
 
+// Status of a feature processing request.
 type VideoFeatures_FeatureResult int32
 
 const (
+	// The feature result status is not specified.
 	VideoFeatures_FEATURE_RESULT_UNSPECIFIED VideoFeatures_FeatureResult = 0
-	// Feature has not been requested.
+	// The feature processing has not been requested.
 	VideoFeatures_NOT_REQUESTED VideoFeatures_FeatureResult = 1
-	// Feature is being processed.
+	// The feature is currently being processed.
 	VideoFeatures_PROCESSING VideoFeatures_FeatureResult = 2
-	// Feature processing completed successfully.
+	// The feature processing has completed successfully.
 	VideoFeatures_SUCCESS VideoFeatures_FeatureResult = 3
-	// Feature processing has failed.
+	// The feature processing has failed.
 	VideoFeatures_FAILED VideoFeatures_FeatureResult = 4
 )
 
@@ -251,56 +256,62 @@ func (VideoFeatures_FeatureResult) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{4, 0}
 }
 
+// Main entity representing a video in the platform.
 type Video struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the video.
+	// Unique identifier of the video.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the channel where the video was created.
+	// Identifier of the channel where the video is created and managed.
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Video title displayed to users.
+	// Title of the video displayed to users in interfaces and players.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Detailed description of the video.
+	// Detailed description of the video content and context.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the video's thumbnail image.
+	// Identifier of the thumbnail image used to represent the video visually.
 	ThumbnailId string `protobuf:"bytes,5,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Video status.
+	// Current processing status of the video.
 	Status Video_VideoStatus `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.video.v1.Video_VideoStatus" json:"status,omitempty"`
 	// Error message describing the reason for video processing failure, if any.
 	ErrorMessage string `protobuf:"bytes,18,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	// Visibility status of the video.
+	// Current visibility status controlling whether the video is publicly available.
 	VisibilityStatus Video_VisibilityStatus `protobuf:"varint,9,opt,name=visibility_status,json=visibilityStatus,proto3,enum=yandex.cloud.video.v1.Video_VisibilityStatus" json:"visibility_status,omitempty"`
-	// Video duration. Optional, may be empty until the transcoding result is ready.
+	// Total duration of the video.
+	// Optional, may be empty until the transcoding result is ready.
 	Duration *durationpb.Duration `protobuf:"bytes,8,opt,name=duration,proto3" json:"duration,omitempty"`
-	// Auto-transcoding setting.
+	// Auto-transcoding setting that controls the video processing workflow.
 	// Set ENABLE to automatically initiate transcoding after upload,
 	// or DISABLE for manual initiation via the Transcode() method.
 	AutoTranscode AutoTranscode `protobuf:"varint,11,opt,name=auto_transcode,json=autoTranscode,proto3,enum=yandex.cloud.video.v1.AutoTranscode" json:"auto_transcode,omitempty"`
-	// Enable advertisement for this video.
+	// Identifier of the style preset applied to the video during processing.
+	StylePresetId string `protobuf:"bytes,16,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// Controls the ability to display advertisements for this video.
 	// Default: true.
 	// Set explicitly to false to disable advertisements for a specific video.
 	EnableAd *wrapperspb.BoolValue `protobuf:"bytes,17,opt,name=enable_ad,json=enableAd,proto3" json:"enable_ad,omitempty"`
-	// List of IDs defining the active subtitles for the video.
+	// List of identifiers defining the active subtitles available for the video.
 	SubtitleIds []string `protobuf:"bytes,12,rep,name=subtitle_ids,json=subtitleIds,proto3" json:"subtitle_ids,omitempty"`
-	// Additional video processing features and their results.
+	// Additional video processing features and their results, such as summarization.
 	Features *VideoFeatures `protobuf:"bytes,13,opt,name=features,proto3" json:"features,omitempty"`
-	// Video upload source definition (one source variant must be chosen).
+	// Specifies the video upload source method (one source variant must be chosen).
 	//
 	// Types that are valid to be assigned to Source:
 	//
 	//	*Video_Tusd
 	Source isVideo_Source `protobuf_oneof:"source"`
-	// Video access permission settings.
+	// Specifies the video access permission settings.
 	//
 	// Types that are valid to be assigned to AccessRights:
 	//
 	//	*Video_PublicAccess
 	//	*Video_SignUrlAccess
 	AccessRights isVideo_AccessRights `protobuf_oneof:"access_rights"`
-	// Time when video was created.
+	// Timestamp when the video was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time of last video update.
+	// Timestamp of the last modification to the video or its metadata.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as `key:value` pairs.
+	// Maximum 64 labels per video.
+	// Labels can be used for organization, filtering, and metadata purposes.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -406,6 +417,13 @@ func (x *Video) GetAutoTranscode() AutoTranscode {
 	return AutoTranscode_AUTO_TRANSCODE_UNSPECIFIED
 }
 
+func (x *Video) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *Video) GetEnableAd() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.EnableAd
@@ -494,7 +512,8 @@ type isVideo_Source interface {
 }
 
 type Video_Tusd struct {
-	// Upload video using the tus protocol.
+	// Upload video using the TUS (Tus Resumable Upload Protocol) protocol.
+	// @see https://tus.io/
 	Tusd *VideoTUSDSource `protobuf:"bytes,1000,opt,name=tusd,proto3,oneof"`
 }
 
@@ -505,13 +524,13 @@ type isVideo_AccessRights interface {
 }
 
 type Video_PublicAccess struct {
-	// Publicly accessible video available for viewing by anyone with the direct link.
+	// Allows unrestricted public access to the video via direct link.
 	// No additional authorization or access control is applied.
 	PublicAccess *VideoPublicAccessRights `protobuf:"bytes,2000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
 type Video_SignUrlAccess struct {
-	// Checking access rights using url's signature.
+	// Restricts video access using URL signatures for secure time-limited access.
 	SignUrlAccess *VideoSignURLAccessRights `protobuf:"bytes,2003,opt,name=sign_url_access,json=signUrlAccess,proto3,oneof"`
 }
 
@@ -519,12 +538,14 @@ func (*Video_PublicAccess) isVideo_AccessRights() {}
 
 func (*Video_SignUrlAccess) isVideo_AccessRights() {}
 
-// Video upload source via tus protocol.
+// Represents a video upload source using the TUS (Tus Resumable Upload Protocol) protocol.
+// This is a push-based upload method where the client pushes data to the server.
+// @see https://tus.io/
 type VideoTUSDSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// URL for uploading video via the tus protocol.
+	// URL endpoint for uploading the video via the TUS protocol.
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	// Size of the uploaded file, in bytes.
+	// Total size of the uploaded file, in bytes.
 	FileSize      int64 `protobuf:"varint,2,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -574,6 +595,8 @@ func (x *VideoTUSDSource) GetFileSize() int64 {
 	return 0
 }
 
+// Represents public access rights for a video.
+// When this access type is set, the video is publicly accessible via direct link.
 type VideoPublicAccessRights struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -610,6 +633,8 @@ func (*VideoPublicAccessRights) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{2}
 }
 
+// Represents access rights controlled by URL signatures.
+// When this access type is set, the video is accessible only via properly signed temporary link.
 type VideoSignURLAccessRights struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -646,9 +671,10 @@ func (*VideoSignURLAccessRights) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{3}
 }
 
+// Contains additional processing features and their results for the video.
 type VideoFeatures struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Summarization result.
+	// Results of the video content summarization process.
 	Summary       *VideoFeatures_Summary `protobuf:"bytes,1,opt,name=summary,proto3" json:"summary,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -691,9 +717,12 @@ func (x *VideoFeatures) GetSummary() *VideoFeatures_Summary {
 	return nil
 }
 
+// Contains the results of video summarization.
 type VideoFeatures_Summary struct {
-	state         protoimpl.MessageState              `protogen:"open.v1"`
-	Result        VideoFeatures_FeatureResult         `protobuf:"varint,1,opt,name=result,proto3,enum=yandex.cloud.video.v1.VideoFeatures_FeatureResult" json:"result,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Current status of the summarization process.
+	Result VideoFeatures_FeatureResult `protobuf:"varint,1,opt,name=result,proto3,enum=yandex.cloud.video.v1.VideoFeatures_FeatureResult" json:"result,omitempty"`
+	// List of URLs to summarization results for different audio tracks.
 	Urls          []*VideoFeatures_Summary_SummaryURL `protobuf:"bytes,3,rep,name=urls,proto3" json:"urls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -743,13 +772,14 @@ func (x *VideoFeatures_Summary) GetUrls() []*VideoFeatures_Summary_SummaryURL {
 	return nil
 }
 
+// Contains a URL to a summarization result for a specific audio track.
 type VideoFeatures_Summary_SummaryURL struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Url   string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	// Input audio track index (one-based).
+	// URL to the summarization result file.
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// Input audio track index (one-based) that was summarized.
 	TrackIndex int64 `protobuf:"varint,2,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
 	// Source track language represented as a three-letter code according to ISO 639-2/T.
-	// Either provided in transcoding settings earlier or automatically deduced.
 	SrcLang       string `protobuf:"bytes,3,opt,name=src_lang,json=srcLang,proto3" json:"src_lang,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -810,7 +840,7 @@ var File_yandex_cloud_video_v1_video_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/video/v1/video.proto\x12\x15yandex.cloud.video.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8f\v\n" +
+	"!yandex/cloud/video/v1/video.proto\x12\x15yandex.cloud.video.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb7\v\n" +
 	"\x05Video\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -822,7 +852,8 @@ const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\rerror_message\x18\x12 \x01(\tR\ferrorMessage\x12Z\n" +
 	"\x11visibility_status\x18\t \x01(\x0e2-.yandex.cloud.video.v1.Video.VisibilityStatusR\x10visibilityStatus\x125\n" +
 	"\bduration\x18\b \x01(\v2\x19.google.protobuf.DurationR\bduration\x12K\n" +
-	"\x0eauto_transcode\x18\v \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x127\n" +
+	"\x0eauto_transcode\x18\v \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x12&\n" +
+	"\x0fstyle_preset_id\x18\x10 \x01(\tR\rstylePresetId\x127\n" +
 	"\tenable_ad\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12!\n" +
 	"\fsubtitle_ids\x18\f \x03(\tR\vsubtitleIds\x12@\n" +
 	"\bfeatures\x18\r \x01(\v2$.yandex.cloud.video.v1.VideoFeaturesR\bfeatures\x12=\n" +
@@ -850,8 +881,8 @@ const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\tPUBLISHED\x10\x01\x12\x0f\n" +
 	"\vUNPUBLISHED\x10\x02B\b\n" +
 	"\x06sourceB\x0f\n" +
-	"\raccess_rightsJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\a\x10\bJ\x04\b\n" +
-	"\x10\vJ\x04\b\x0e\x10\x11J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0f\"@\n" +
+	"\raccess_rightsJ\x04\b\n" +
+	"\x10\vJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\a\x10\bJ\x04\b\x0e\x10\x10J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0f\"@\n" +
 	"\x0fVideoTUSDSource\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1b\n" +
 	"\tfile_size\x18\x02 \x01(\x03R\bfileSize\"\x19\n" +

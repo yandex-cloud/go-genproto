@@ -247,8 +247,15 @@ type BatchCompletionRequest struct {
 	//
 	//	*BatchCompletionRequest_SourceDatasetId
 	RequestFormat isBatchCompletionRequest_RequestFormat `protobuf_oneof:"request_format"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Specifies the format of the model's response.
+	//
+	// Types that are valid to be assigned to ResponseFormat:
+	//
+	//	*BatchCompletionRequest_JsonObject
+	//	*BatchCompletionRequest_JsonSchema
+	ResponseFormat isBatchCompletionRequest_ResponseFormat `protobuf_oneof:"ResponseFormat"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *BatchCompletionRequest) Reset() {
@@ -311,6 +318,31 @@ func (x *BatchCompletionRequest) GetSourceDatasetId() string {
 	return ""
 }
 
+func (x *BatchCompletionRequest) GetResponseFormat() isBatchCompletionRequest_ResponseFormat {
+	if x != nil {
+		return x.ResponseFormat
+	}
+	return nil
+}
+
+func (x *BatchCompletionRequest) GetJsonObject() bool {
+	if x != nil {
+		if x, ok := x.ResponseFormat.(*BatchCompletionRequest_JsonObject); ok {
+			return x.JsonObject
+		}
+	}
+	return false
+}
+
+func (x *BatchCompletionRequest) GetJsonSchema() *v1.JsonSchema {
+	if x != nil {
+		if x, ok := x.ResponseFormat.(*BatchCompletionRequest_JsonSchema); ok {
+			return x.JsonSchema
+		}
+	}
+	return nil
+}
+
 type isBatchCompletionRequest_RequestFormat interface {
 	isBatchCompletionRequest_RequestFormat()
 }
@@ -321,6 +353,26 @@ type BatchCompletionRequest_SourceDatasetId struct {
 }
 
 func (*BatchCompletionRequest_SourceDatasetId) isBatchCompletionRequest_RequestFormat() {}
+
+type isBatchCompletionRequest_ResponseFormat interface {
+	isBatchCompletionRequest_ResponseFormat()
+}
+
+type BatchCompletionRequest_JsonObject struct {
+	// When set to true, the model will respond with a valid JSON object.
+	// Be sure to explicitly ask the model for JSON.
+	// Otherwise, it may generate excessive whitespace and run indefinitely until it reaches the token limit.
+	JsonObject bool `protobuf:"varint,4,opt,name=json_object,json=jsonObject,proto3,oneof"`
+}
+
+type BatchCompletionRequest_JsonSchema struct {
+	// Enforces a specific JSON structure for the model's response based on a provided schema.
+	JsonSchema *v1.JsonSchema `protobuf:"bytes,5,opt,name=json_schema,json=jsonSchema,proto3,oneof"`
+}
+
+func (*BatchCompletionRequest_JsonObject) isBatchCompletionRequest_ResponseFormat() {}
+
+func (*BatchCompletionRequest_JsonSchema) isBatchCompletionRequest_ResponseFormat() {}
 
 // Metadata of the batch completion operation.
 type BatchCompletionMetadata struct {
@@ -590,12 +642,17 @@ const file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_
 	"\x12CompletionResponse\x12U\n" +
 	"\falternatives\x18\x01 \x03(\v21.yandex.cloud.ai.foundation_models.v1.AlternativeR\falternatives\x12H\n" +
 	"\x05usage\x18\x02 \x01(\v22.yandex.cloud.ai.foundation_models.v1.ContentUsageR\x05usage\x12#\n" +
-	"\rmodel_version\x18\x03 \x01(\tR\fmodelVersion\"\xdd\x01\n" +
+	"\rmodel_version\x18\x03 \x01(\tR\fmodelVersion\"\xe7\x02\n" +
 	"\x16BatchCompletionRequest\x12\x1b\n" +
 	"\tmodel_uri\x18\x01 \x01(\tR\bmodelUri\x12f\n" +
 	"\x12completion_options\x18\x02 \x01(\v27.yandex.cloud.ai.foundation_models.v1.CompletionOptionsR\x11completionOptions\x12,\n" +
-	"\x11source_dataset_id\x18\x03 \x01(\tH\x00R\x0fsourceDatasetIdB\x10\n" +
-	"\x0erequest_format\"\xe5\x01\n" +
+	"\x11source_dataset_id\x18\x03 \x01(\tH\x00R\x0fsourceDatasetId\x12!\n" +
+	"\vjson_object\x18\x04 \x01(\bH\x01R\n" +
+	"jsonObject\x12S\n" +
+	"\vjson_schema\x18\x05 \x01(\v20.yandex.cloud.ai.foundation_models.v1.JsonSchemaH\x01R\n" +
+	"jsonSchemaB\x10\n" +
+	"\x0erequest_formatB\x10\n" +
+	"\x0eResponseFormat\"\xe5\x01\n" +
 	"\x17BatchCompletionMetadata\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12_\n" +
 	"\vtask_status\x18\x02 \x01(\x0e2>.yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatusR\n" +
@@ -671,24 +728,25 @@ var file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_se
 	13, // 6: yandex.cloud.ai.foundation_models.v1.CompletionResponse.alternatives:type_name -> yandex.cloud.ai.foundation_models.v1.Alternative
 	14, // 7: yandex.cloud.ai.foundation_models.v1.CompletionResponse.usage:type_name -> yandex.cloud.ai.foundation_models.v1.ContentUsage
 	7,  // 8: yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest.completion_options:type_name -> yandex.cloud.ai.foundation_models.v1.CompletionOptions
-	15, // 9: yandex.cloud.ai.foundation_models.v1.BatchCompletionMetadata.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
-	15, // 10: yandex.cloud.ai.foundation_models.v1.BatchCompletionResponse.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
-	16, // 11: yandex.cloud.ai.foundation_models.v1.TokenizeResponse.tokens:type_name -> yandex.cloud.ai.foundation_models.v1.Token
-	0,  // 12: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
-	0,  // 13: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
-	2,  // 14: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest
-	5,  // 15: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:input_type -> yandex.cloud.ai.foundation_models.v1.TokenizeRequest
-	0,  // 16: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
-	1,  // 17: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:output_type -> yandex.cloud.ai.foundation_models.v1.CompletionResponse
-	17, // 18: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:output_type -> yandex.cloud.operation.Operation
-	17, // 19: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:output_type -> yandex.cloud.operation.Operation
-	6,  // 20: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
-	6,  // 21: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
-	17, // [17:22] is the sub-list for method output_type
-	12, // [12:17] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	10, // 9: yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest.json_schema:type_name -> yandex.cloud.ai.foundation_models.v1.JsonSchema
+	15, // 10: yandex.cloud.ai.foundation_models.v1.BatchCompletionMetadata.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
+	15, // 11: yandex.cloud.ai.foundation_models.v1.BatchCompletionResponse.task_status:type_name -> yandex.cloud.ai.foundation_models.v1.BatchInferenceTaskStatus
+	16, // 12: yandex.cloud.ai.foundation_models.v1.TokenizeResponse.tokens:type_name -> yandex.cloud.ai.foundation_models.v1.Token
+	0,  // 13: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
+	0,  // 14: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
+	2,  // 15: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:input_type -> yandex.cloud.ai.foundation_models.v1.BatchCompletionRequest
+	5,  // 16: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:input_type -> yandex.cloud.ai.foundation_models.v1.TokenizeRequest
+	0,  // 17: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:input_type -> yandex.cloud.ai.foundation_models.v1.CompletionRequest
+	1,  // 18: yandex.cloud.ai.foundation_models.v1.TextGenerationService.Completion:output_type -> yandex.cloud.ai.foundation_models.v1.CompletionResponse
+	17, // 19: yandex.cloud.ai.foundation_models.v1.TextGenerationAsyncService.Completion:output_type -> yandex.cloud.operation.Operation
+	17, // 20: yandex.cloud.ai.foundation_models.v1.TextGenerationBatchService.Completion:output_type -> yandex.cloud.operation.Operation
+	6,  // 21: yandex.cloud.ai.foundation_models.v1.TokenizerService.Tokenize:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
+	6,  // 22: yandex.cloud.ai.foundation_models.v1.TokenizerService.TokenizeCompletion:output_type -> yandex.cloud.ai.foundation_models.v1.TokenizeResponse
+	18, // [18:23] is the sub-list for method output_type
+	13, // [13:18] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() {
@@ -704,6 +762,8 @@ func file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_s
 	}
 	file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_service_proto_msgTypes[2].OneofWrappers = []any{
 		(*BatchCompletionRequest_SourceDatasetId)(nil),
+		(*BatchCompletionRequest_JsonObject)(nil),
+		(*BatchCompletionRequest_JsonSchema)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

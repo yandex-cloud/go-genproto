@@ -219,7 +219,9 @@ type CreateResourceRequest struct {
 	// SSL Certificate options.
 	SslCertificate *SSLTargetCertificate `protobuf:"bytes,8,opt,name=ssl_certificate,json=sslCertificate,proto3" json:"ssl_certificate,omitempty"`
 	// Labels of the resource.
-	Labels        map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// RESERVED: This field is reserved for future use and should not be used at this time.
+	ProviderType  string `protobuf:"bytes,10,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -315,6 +317,13 @@ func (x *CreateResourceRequest) GetLabels() map[string]string {
 		return x.Labels
 	}
 	return nil
+}
+
+func (x *CreateResourceRequest) GetProviderType() string {
+	if x != nil {
+		return x.ProviderType
+	}
+	return ""
 }
 
 // A set of resource origin parameters.
@@ -889,7 +898,7 @@ const file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"|\n" +
 	"\x15ListResourcesResponse\x12;\n" +
 	"\tresources\x18\x01 \x03(\v2\x1d.yandex.cloud.cdn.v1.ResourceR\tresources\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf7\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\a\n" +
 	"\x15CreateResourceRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x1a\n" +
 	"\x05cname\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05cname\x12O\n" +
@@ -899,7 +908,9 @@ const file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc = "" +
 	"\x06active\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x06active\x12>\n" +
 	"\aoptions\x18\a \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12R\n" +
 	"\x0fssl_certificate\x18\b \x01(\v2).yandex.cloud.cdn.v1.SSLTargetCertificateR\x0esslCertificate\x12N\n" +
-	"\x06labels\x18\t \x03(\v26.yandex.cloud.cdn.v1.CreateResourceRequest.LabelsEntryR\x06labels\x1a\xca\x01\n" +
+	"\x06labels\x18\t \x03(\v26.yandex.cloud.cdn.v1.CreateResourceRequest.LabelsEntryR\x06labels\x12#\n" +
+	"\rprovider_type\x18\n" +
+	" \x01(\tR\fproviderType\x1a\xca\x01\n" +
 	"\x06Origin\x12(\n" +
 	"\x0forigin_group_id\x18\x01 \x01(\x03H\x00R\roriginGroupId\x12%\n" +
 	"\rorigin_source\x18\x02 \x01(\tH\x00R\foriginSource\x12]\n" +

@@ -238,6 +238,7 @@ type Source struct {
 	//	*Source_MessageQueue
 	//	*Source_Timer
 	//	*Source_EventServiceSource
+	//	*Source_AuditTrails
 	Source        isSource_Source `protobuf_oneof:"source"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -316,6 +317,15 @@ func (x *Source) GetEventServiceSource() *EventServiceSource {
 	return nil
 }
 
+func (x *Source) GetAuditTrails() *AuditTrails {
+	if x != nil {
+		if x, ok := x.Source.(*Source_AuditTrails); ok {
+			return x.AuditTrails
+		}
+	}
+	return nil
+}
+
 type isSource_Source interface {
 	isSource_Source()
 }
@@ -336,6 +346,10 @@ type Source_EventServiceSource struct {
 	EventServiceSource *EventServiceSource `protobuf:"bytes,4,opt,name=event_service_source,json=eventServiceSource,proto3,oneof"`
 }
 
+type Source_AuditTrails struct {
+	AuditTrails *AuditTrails `protobuf:"bytes,5,opt,name=audit_trails,json=auditTrails,proto3,oneof"`
+}
+
 func (*Source_DataStream) isSource_Source() {}
 
 func (*Source_MessageQueue) isSource_Source() {}
@@ -343,6 +357,8 @@ func (*Source_MessageQueue) isSource_Source() {}
 func (*Source_Timer) isSource_Source() {}
 
 func (*Source_EventServiceSource) isSource_Source() {}
+
+func (*Source_AuditTrails) isSource_Source() {}
 
 type DataStream struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -598,6 +614,42 @@ func (x *Timer) GetPayload() string {
 	return ""
 }
 
+type AuditTrails struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditTrails) Reset() {
+	*x = AuditTrails{}
+	mi := &file_yandex_cloud_serverless_eventrouter_v1_connector_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditTrails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditTrails) ProtoMessage() {}
+
+func (x *AuditTrails) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_eventrouter_v1_connector_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditTrails.ProtoReflect.Descriptor instead.
+func (*AuditTrails) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDescGZIP(), []int{6}
+}
+
 var File_yandex_cloud_serverless_eventrouter_v1_connector_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDesc = "" +
@@ -628,13 +680,14 @@ const file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDesc = "" +
 	"\x11PERMISSION_DENIED\x10\x04\x12\x15\n" +
 	"\x11SUBJECT_NOT_FOUND\x10\x05\x12\f\n" +
 	"\bDELETING\x10\a\x12\f\n" +
-	"\bCREATING\x10\b\"\x83\x03\n" +
+	"\bCREATING\x10\b\"\xdd\x03\n" +
 	"\x06Source\x12U\n" +
 	"\vdata_stream\x18\x01 \x01(\v22.yandex.cloud.serverless.eventrouter.v1.DataStreamH\x00R\n" +
 	"dataStream\x12[\n" +
 	"\rmessage_queue\x18\x02 \x01(\v24.yandex.cloud.serverless.eventrouter.v1.MessageQueueH\x00R\fmessageQueue\x12E\n" +
 	"\x05timer\x18\x03 \x01(\v2-.yandex.cloud.serverless.eventrouter.v1.TimerH\x00R\x05timer\x12n\n" +
-	"\x14event_service_source\x18\x04 \x01(\v2:.yandex.cloud.serverless.eventrouter.v1.EventServiceSourceH\x00R\x12eventServiceSourceB\x0e\n" +
+	"\x14event_service_source\x18\x04 \x01(\v2:.yandex.cloud.serverless.eventrouter.v1.EventServiceSourceH\x00R\x12eventServiceSource\x12X\n" +
+	"\faudit_trails\x18\x05 \x01(\v23.yandex.cloud.serverless.eventrouter.v1.AuditTrailsH\x00R\vauditTrailsB\x0e\n" +
 	"\x06source\x12\x04\xc0\xc11\x01\"\xab\x01\n" +
 	"\n" +
 	"DataStream\x12 \n" +
@@ -655,7 +708,8 @@ const file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDesc = "" +
 	"\x0fcron_expression\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0ecronExpression\x12\x1b\n" +
 	"\ttime_zone\x18\x02 \x01(\tR\btimeZone\x12$\n" +
 	"\apayload\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4096R\apayloadJ\x04\b\x03\x10\x04B\x8a\x01\n" +
+	"\x8a\xc81\x06<=4096R\apayloadJ\x04\b\x03\x10\x04\"\r\n" +
+	"\vAuditTrailsB\x8a\x01\n" +
 	"*yandex.cloud.api.serverless.eventrouter.v1B\x04PERCZVgithub.com/yandex-cloud/go-genproto/yandex/cloud/serverless/eventrouter/v1;eventrouterb\x06proto3"
 
 var (
@@ -671,7 +725,7 @@ func file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_goTypes = []any{
 	(Connector_Status)(0),         // 0: yandex.cloud.serverless.eventrouter.v1.Connector.Status
 	(*Connector)(nil),             // 1: yandex.cloud.serverless.eventrouter.v1.Connector
@@ -680,26 +734,28 @@ var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_goTypes = []any{
 	(*MessageQueue)(nil),          // 4: yandex.cloud.serverless.eventrouter.v1.MessageQueue
 	(*EventServiceSource)(nil),    // 5: yandex.cloud.serverless.eventrouter.v1.EventServiceSource
 	(*Timer)(nil),                 // 6: yandex.cloud.serverless.eventrouter.v1.Timer
-	nil,                           // 7: yandex.cloud.serverless.eventrouter.v1.Connector.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),   // 9: google.protobuf.Duration
+	(*AuditTrails)(nil),           // 7: yandex.cloud.serverless.eventrouter.v1.AuditTrails
+	nil,                           // 8: yandex.cloud.serverless.eventrouter.v1.Connector.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),   // 10: google.protobuf.Duration
 }
 var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_depIdxs = []int32{
-	8,  // 0: yandex.cloud.serverless.eventrouter.v1.Connector.created_at:type_name -> google.protobuf.Timestamp
-	7,  // 1: yandex.cloud.serverless.eventrouter.v1.Connector.labels:type_name -> yandex.cloud.serverless.eventrouter.v1.Connector.LabelsEntry
+	9,  // 0: yandex.cloud.serverless.eventrouter.v1.Connector.created_at:type_name -> google.protobuf.Timestamp
+	8,  // 1: yandex.cloud.serverless.eventrouter.v1.Connector.labels:type_name -> yandex.cloud.serverless.eventrouter.v1.Connector.LabelsEntry
 	2,  // 2: yandex.cloud.serverless.eventrouter.v1.Connector.source:type_name -> yandex.cloud.serverless.eventrouter.v1.Source
 	0,  // 3: yandex.cloud.serverless.eventrouter.v1.Connector.status:type_name -> yandex.cloud.serverless.eventrouter.v1.Connector.Status
 	3,  // 4: yandex.cloud.serverless.eventrouter.v1.Source.data_stream:type_name -> yandex.cloud.serverless.eventrouter.v1.DataStream
 	4,  // 5: yandex.cloud.serverless.eventrouter.v1.Source.message_queue:type_name -> yandex.cloud.serverless.eventrouter.v1.MessageQueue
 	6,  // 6: yandex.cloud.serverless.eventrouter.v1.Source.timer:type_name -> yandex.cloud.serverless.eventrouter.v1.Timer
 	5,  // 7: yandex.cloud.serverless.eventrouter.v1.Source.event_service_source:type_name -> yandex.cloud.serverless.eventrouter.v1.EventServiceSource
-	9,  // 8: yandex.cloud.serverless.eventrouter.v1.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
-	9,  // 9: yandex.cloud.serverless.eventrouter.v1.MessageQueue.polling_timeout:type_name -> google.protobuf.Duration
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	7,  // 8: yandex.cloud.serverless.eventrouter.v1.Source.audit_trails:type_name -> yandex.cloud.serverless.eventrouter.v1.AuditTrails
+	10, // 9: yandex.cloud.serverless.eventrouter.v1.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
+	10, // 10: yandex.cloud.serverless.eventrouter.v1.MessageQueue.polling_timeout:type_name -> google.protobuf.Duration
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_eventrouter_v1_connector_proto_init() }
@@ -712,6 +768,7 @@ func file_yandex_cloud_serverless_eventrouter_v1_connector_proto_init() {
 		(*Source_MessageQueue)(nil),
 		(*Source_Timer)(nil),
 		(*Source_EventServiceSource)(nil),
+		(*Source_AuditTrails)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -719,7 +776,7 @@ func file_yandex_cloud_serverless_eventrouter_v1_connector_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDesc), len(file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -22,6 +22,10 @@ func (m *Channel) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *Channel) SetDefaultStylePresetId(v string) {
+	m.DefaultStylePresetId = v
+}
+
 func (m *Channel) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

@@ -50,6 +50,10 @@ func (m *CreateOriginRequest) SetMeta(v *OriginMeta) {
 	m.Meta = v
 }
 
+func (m *CreateOriginRequest) SetProviderType(v string) {
+	m.ProviderType = v
+}
+
 func (m *CreateOriginMetadata) SetOriginId(v int64) {
 	m.OriginId = v
 }

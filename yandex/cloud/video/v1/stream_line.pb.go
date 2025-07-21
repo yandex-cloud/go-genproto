@@ -76,7 +76,7 @@ func (AutoLine_AutoLineStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{5, 0}
 }
 
-// Entity that is responsible for the incoming video signal settings.
+// Entity representing the incoming video signal settings.
 type StreamLine struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the line.
@@ -85,8 +85,6 @@ type StreamLine struct {
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Title of the stream line.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// ID of the thumbnail image associated with the stream line..
-	ThumbnailId string `protobuf:"bytes,4,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 	// Specifies the input type and settings for the video signal source.
 	//
 	// Types that are valid to be assigned to InputType:
@@ -101,11 +99,13 @@ type StreamLine struct {
 	//	*StreamLine_ManualLine
 	//	*StreamLine_AutoLine
 	LineType isStreamLine_LineType `protobuf_oneof:"line_type"`
-	// Time when the stream line was created.
+	// Timestamp when the stream line was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time when the stream line was last updated.
+	// Timestamp of the last modification to the stream line or its metadata.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as `key:value` pairs.
+	// Maximum 64 labels per stream line.
+	// Labels can be used for organization, filtering, and metadata purposes.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -158,13 +158,6 @@ func (x *StreamLine) GetChannelId() string {
 func (x *StreamLine) GetTitle() string {
 	if x != nil {
 		return x.Title
-	}
-	return ""
-}
-
-func (x *StreamLine) GetThumbnailId() string {
-	if x != nil {
-		return x.ThumbnailId
 	}
 	return ""
 }
@@ -245,7 +238,7 @@ type isStreamLine_InputType interface {
 }
 
 type StreamLine_RtmpPush struct {
-	// Real-Time Messaging Protocol (RTMP) push input settings.
+	// Real-Time Messaging Protocol (RTMP) push input type.
 	RtmpPush *RTMPPushInput `protobuf:"bytes,1000,opt,name=rtmp_push,json=rtmpPush,proto3,oneof"`
 }
 
@@ -263,12 +256,12 @@ type isStreamLine_LineType interface {
 }
 
 type StreamLine_ManualLine struct {
-	// Manual control of stream.
+	// Manual stream control.
 	ManualLine *ManualLine `protobuf:"bytes,2000,opt,name=manual_line,json=manualLine,proto3,oneof"`
 }
 
 type StreamLine_AutoLine struct {
-	// Automatic control of stream.
+	// Automatic stream control.
 	AutoLine *AutoLine `protobuf:"bytes,2001,opt,name=auto_line,json=autoLine,proto3,oneof"`
 }
 
@@ -506,14 +499,13 @@ var File_yandex_cloud_video_v1_stream_line_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc1\x05\n" +
+	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\x05\n" +
 	"\n" +
 	"StreamLine\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12!\n" +
-	"\fthumbnail_id\x18\x04 \x01(\tR\vthumbnailId\x12D\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12D\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2$.yandex.cloud.video.v1.RTMPPushInputH\x00R\brtmpPush\x12D\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2$.yandex.cloud.video.v1.RTMPPullInputH\x00R\brtmpPull\x12E\n" +
 	"\vmanual_line\x18\xd0\x0f \x01(\v2!.yandex.cloud.video.v1.ManualLineH\x01R\n" +
@@ -529,7 +521,7 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\n" +
 	"input_typeB\v\n" +
-	"\tline_typeJ\x04\b\x05\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xeb\a\x10\xd0\x0f\"!\n" +
+	"\tline_typeJ\x04\b\x04\x10\x05J\x04\b\x05\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xeb\a\x10\xd0\x0f\"!\n" +
 	"\rPushStreamKey\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\"!\n" +
 	"\rRTMPPushInput\x12\x10\n" +

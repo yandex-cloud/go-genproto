@@ -78,6 +78,10 @@ func (m *UpdateChannelRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *UpdateChannelRequest) SetDefaultStylePresetId(v string) {
+	m.DefaultStylePresetId = v
+}
+
 func (m *UpdateChannelRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }

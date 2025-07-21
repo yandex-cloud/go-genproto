@@ -21,3 +21,7 @@ func (m *OriginGroup) SetUseNext(v bool) {
 func (m *OriginGroup) SetOrigins(v []*Origin) {
 	m.Origins = v
 }
+
+func (m *OriginGroup) SetProviderType(v string) {
+	m.ProviderType = v
+}

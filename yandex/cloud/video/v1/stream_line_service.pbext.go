@@ -70,14 +70,6 @@ func (m *CreateStreamLineRequest) SetTitle(v string) {
 	m.Title = v
 }
 
-func (m *CreateStreamLineRequest) SetThumbnailId(v string) {
-	m.ThumbnailId = v
-}
-
-func (m *CreateStreamLineRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
 func (m *CreateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	m.InputParams = &CreateStreamLineRequest_RtmpPush{
 		RtmpPush: v,
@@ -102,6 +94,10 @@ func (m *CreateStreamLineRequest) SetAutoLine(v *AutoLineParams) {
 	}
 }
 
+func (m *CreateStreamLineRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateStreamLineMetadata) SetStreamLineId(v string) {
 	m.StreamLineId = v
 }
@@ -124,14 +120,6 @@ func (m *UpdateStreamLineRequest) SetTitle(v string) {
 	m.Title = v
 }
 
-func (m *UpdateStreamLineRequest) SetThumbnailId(v string) {
-	m.ThumbnailId = v
-}
-
-func (m *UpdateStreamLineRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
 func (m *UpdateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	m.InputParams = &UpdateStreamLineRequest_RtmpPush{
 		RtmpPush: v,
@@ -142,6 +130,10 @@ func (m *UpdateStreamLineRequest) SetRtmpPull(v *RTMPPullParams) {
 	m.InputParams = &UpdateStreamLineRequest_RtmpPull{
 		RtmpPull: v,
 	}
+}
+
+func (m *UpdateStreamLineRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateStreamLineMetadata) SetStreamLineId(v string) {

@@ -60,6 +60,10 @@ func (m *Video) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
 }
 
+func (m *Video) SetStylePresetId(v string) {
+	m.StylePresetId = v
+}
+
 func (m *Video) SetEnableAd(v *wrapperspb.BoolValue) {
 	m.EnableAd = v
 }

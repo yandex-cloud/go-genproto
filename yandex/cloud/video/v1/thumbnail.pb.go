@@ -22,13 +22,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Entity representing an image used as a visual representation for various content entities.
+// Thumbnails provide preview images for channels, streams, episodes, videos, and stream lines.
 type Thumbnail struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// Unique identifier of the thumbnail.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the channel where the thumbnail was created.
+	// Identifier of the channel where the thumbnail is created and managed.
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Time when thumbnail was created.
+	// Types that are valid to be assigned to ParentId:
+	//
+	//	*Thumbnail_EpisodeId
+	//	*Thumbnail_VideoId
+	ParentId isThumbnail_ParentId `protobuf_oneof:"parent_id"`
+	// Timestamp when the thumbnail was initially created in the system.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -78,6 +85,31 @@ func (x *Thumbnail) GetChannelId() string {
 	return ""
 }
 
+func (x *Thumbnail) GetParentId() isThumbnail_ParentId {
+	if x != nil {
+		return x.ParentId
+	}
+	return nil
+}
+
+func (x *Thumbnail) GetEpisodeId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*Thumbnail_EpisodeId); ok {
+			return x.EpisodeId
+		}
+	}
+	return ""
+}
+
+func (x *Thumbnail) GetVideoId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*Thumbnail_VideoId); ok {
+			return x.VideoId
+		}
+	}
+	return ""
+}
+
 func (x *Thumbnail) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -85,17 +117,39 @@ func (x *Thumbnail) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type isThumbnail_ParentId interface {
+	isThumbnail_ParentId()
+}
+
+type Thumbnail_EpisodeId struct {
+	// ID of the episode which the thumbnail is associated with.
+	EpisodeId string `protobuf:"bytes,1003,opt,name=episode_id,json=episodeId,proto3,oneof"`
+}
+
+type Thumbnail_VideoId struct {
+	// ID of the video which the thumbnail is associated with.
+	VideoId string `protobuf:"bytes,1004,opt,name=video_id,json=videoId,proto3,oneof"`
+}
+
+func (*Thumbnail_EpisodeId) isThumbnail_ParentId() {}
+
+func (*Thumbnail_VideoId) isThumbnail_ParentId() {}
+
 var File_yandex_cloud_video_v1_thumbnail_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_thumbnail_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/video/v1/thumbnail.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"{\n" +
+	"%yandex/cloud/video/v1/thumbnail.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcf\x01\n" +
 	"\tThumbnail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x02 \x01(\tR\tchannelId\x129\n" +
+	"channel_id\x18\x02 \x01(\tR\tchannelId\x12 \n" +
 	"\n" +
-	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtJ\x04\b\x03\x10dB\\\n" +
+	"episode_id\x18\xeb\a \x01(\tH\x00R\tepisodeId\x12\x1c\n" +
+	"\bvideo_id\x18\xec\a \x01(\tH\x00R\avideoId\x129\n" +
+	"\n" +
+	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\v\n" +
+	"\tparent_idJ\x04\b\x03\x10dJ\x05\be\x10\xeb\aB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (
@@ -128,6 +182,10 @@ func init() { file_yandex_cloud_video_v1_thumbnail_proto_init() }
 func file_yandex_cloud_video_v1_thumbnail_proto_init() {
 	if File_yandex_cloud_video_v1_thumbnail_proto != nil {
 		return
+	}
+	file_yandex_cloud_video_v1_thumbnail_proto_msgTypes[0].OneofWrappers = []any{
+		(*Thumbnail_EpisodeId)(nil),
+		(*Thumbnail_VideoId)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

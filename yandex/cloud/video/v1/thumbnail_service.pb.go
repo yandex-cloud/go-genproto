@@ -25,14 +25,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Image format of a thumbnail.
 type ThumbnailDownloadURL_ImageFormat int32
 
 const (
-	// Image format unspecified.
+	// The image format is not specified.
 	ThumbnailDownloadURL_IMAGE_FORMAT_UNSPECIFIED ThumbnailDownloadURL_ImageFormat = 0
 	// JPEG image format.
+	// Provides good compression with some quality loss.
+	// Widely supported across all platforms and browsers.
 	ThumbnailDownloadURL_JPEG ThumbnailDownloadURL_ImageFormat = 1
 	// WebP image format.
+	// Provides better compression than JPEG with similar quality.
+	// May not be supported on all platforms and older browsers.
 	ThumbnailDownloadURL_WEBP ThumbnailDownloadURL_ImageFormat = 2
 )
 
@@ -79,7 +84,8 @@ func (ThumbnailDownloadURL_ImageFormat) EnumDescriptor() ([]byte, []int) {
 
 type GetThumbnailRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// ID of the thumbnail to retrieve.
+	// Must be a valid thumbnail identifier string.
 	ThumbnailId   string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -124,12 +130,17 @@ func (x *GetThumbnailRequest) GetThumbnailId() string {
 
 type ListThumbnailRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// [Deprecated] ID of the channel.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// Types that are valid to be assigned to ParentId:
+	//
+	//	*ListThumbnailRequest_EpisodeId
+	//	*ListThumbnailRequest_VideoId
+	ParentId isListThumbnailRequest_ParentId `protobuf_oneof:"parent_id"`
+	// The maximum number of thumbnails to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListThumbnailResponse.
 	PageToken     string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -172,6 +183,31 @@ func (x *ListThumbnailRequest) GetChannelId() string {
 	return ""
 }
 
+func (x *ListThumbnailRequest) GetParentId() isListThumbnailRequest_ParentId {
+	if x != nil {
+		return x.ParentId
+	}
+	return nil
+}
+
+func (x *ListThumbnailRequest) GetEpisodeId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*ListThumbnailRequest_EpisodeId); ok {
+			return x.EpisodeId
+		}
+	}
+	return ""
+}
+
+func (x *ListThumbnailRequest) GetVideoId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*ListThumbnailRequest_VideoId); ok {
+			return x.VideoId
+		}
+	}
+	return ""
+}
+
 func (x *ListThumbnailRequest) GetPageSize() int64 {
 	if x != nil {
 		return x.PageSize
@@ -186,11 +222,31 @@ func (x *ListThumbnailRequest) GetPageToken() string {
 	return ""
 }
 
+type isListThumbnailRequest_ParentId interface {
+	isListThumbnailRequest_ParentId()
+}
+
+type ListThumbnailRequest_EpisodeId struct {
+	// ID of the episode containing the thumbnails to list.
+	EpisodeId string `protobuf:"bytes,1003,opt,name=episode_id,json=episodeId,proto3,oneof"`
+}
+
+type ListThumbnailRequest_VideoId struct {
+	// ID of the video containing the thumbnails to list.
+	VideoId string `protobuf:"bytes,1004,opt,name=video_id,json=videoId,proto3,oneof"`
+}
+
+func (*ListThumbnailRequest_EpisodeId) isListThumbnailRequest_ParentId() {}
+
+func (*ListThumbnailRequest_VideoId) isListThumbnailRequest_ParentId() {}
+
 type ListThumbnailResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of thumbnails.
+	// List of thumbnails matching the request criteria.
+	// May be empty if no thumbnails match the criteria or if the parent resource has no thumbnails.
 	Thumbnails []*Thumbnail `protobuf:"bytes,1,rep,name=thumbnails,proto3" json:"thumbnails,omitempty"`
-	// Token for getting the next page.
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -242,8 +298,13 @@ func (x *ListThumbnailResponse) GetNextPageToken() string {
 
 type CreateThumbnailRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
-	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// [Deprecated] ID of the channel.
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Types that are valid to be assigned to ParentId:
+	//
+	//	*CreateThumbnailRequest_EpisodeId
+	//	*CreateThumbnailRequest_VideoId
+	ParentId      isCreateThumbnailRequest_ParentId `protobuf_oneof:"parent_id"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -285,9 +346,52 @@ func (x *CreateThumbnailRequest) GetChannelId() string {
 	return ""
 }
 
+func (x *CreateThumbnailRequest) GetParentId() isCreateThumbnailRequest_ParentId {
+	if x != nil {
+		return x.ParentId
+	}
+	return nil
+}
+
+func (x *CreateThumbnailRequest) GetEpisodeId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*CreateThumbnailRequest_EpisodeId); ok {
+			return x.EpisodeId
+		}
+	}
+	return ""
+}
+
+func (x *CreateThumbnailRequest) GetVideoId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*CreateThumbnailRequest_VideoId); ok {
+			return x.VideoId
+		}
+	}
+	return ""
+}
+
+type isCreateThumbnailRequest_ParentId interface {
+	isCreateThumbnailRequest_ParentId()
+}
+
+type CreateThumbnailRequest_EpisodeId struct {
+	// ID of the episode to associate the thumbnail with.
+	EpisodeId string `protobuf:"bytes,1003,opt,name=episode_id,json=episodeId,proto3,oneof"`
+}
+
+type CreateThumbnailRequest_VideoId struct {
+	// ID of the video to associate the thumbnail with.
+	VideoId string `protobuf:"bytes,1004,opt,name=video_id,json=videoId,proto3,oneof"`
+}
+
+func (*CreateThumbnailRequest_EpisodeId) isCreateThumbnailRequest_ParentId() {}
+
+func (*CreateThumbnailRequest_VideoId) isCreateThumbnailRequest_ParentId() {}
+
 type CreateThumbnailMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// ID of the thumbnail being created.
 	ThumbnailId   string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -332,9 +436,9 @@ func (x *CreateThumbnailMetadata) GetThumbnailId() string {
 
 type BatchGenerateDownloadURLsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the thumbnails.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of thumbnails IDs.
+	// List of thumbnail IDs for which to generate download URLs.
 	ThumbnailIds  []string `protobuf:"bytes,2,rep,name=thumbnail_ids,json=thumbnailIds,proto3" json:"thumbnail_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -386,7 +490,8 @@ func (x *BatchGenerateDownloadURLsRequest) GetThumbnailIds() []string {
 
 type BatchGenerateDownloadURLsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of download urls.
+	// List of download URLs for the requested thumbnails.
+	// Each entry contains URLs for both the original image and various scaled versions.
 	DownloadUrls  []*ThumbnailDownloadURL `protobuf:"bytes,1,rep,name=download_urls,json=downloadUrls,proto3" json:"download_urls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -431,11 +536,13 @@ func (x *BatchGenerateDownloadURLsResponse) GetDownloadUrls() []*ThumbnailDownlo
 
 type ThumbnailDownloadURL struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// ID of the thumbnail for which download URLs are provided.
 	ThumbnailId string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Original download url.
+	// URL for downloading the original, unmodified thumbnail image.
+	// This provides access to the image at its original resolution and format.
 	OriginalUrl string `protobuf:"bytes,2,opt,name=original_url,json=originalUrl,proto3" json:"original_url,omitempty"`
-	// List of download urls, one per each available image size.
+	// List of URLs for downloading scaled versions of the thumbnail.
+	// Different scaled versions are optimized for different display sizes and purposes.
 	ScaledUrls    []*ThumbnailDownloadURL_ScaledURL `protobuf:"bytes,3,rep,name=scaled_urls,json=scaledUrls,proto3" json:"scaled_urls,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -494,7 +601,8 @@ func (x *ThumbnailDownloadURL) GetScaledUrls() []*ThumbnailDownloadURL_ScaledURL
 
 type GenerateThumbnailUploadURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// ID of the thumbnail for which to generate an upload URL.
+	// The thumbnail record must already exist, typically created using the Create method.
 	ThumbnailId   string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -539,7 +647,9 @@ func (x *GenerateThumbnailUploadURLRequest) GetThumbnailId() string {
 
 type GenerateThumbnailUploadURLResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Upload url.
+	// Pre-signed URL for uploading the thumbnail image.
+	// This URL can be used with an HTTP PUT request to upload the image file.
+	// The URL has a limited validity period and will expire after a certain time.
 	UploadUrl     string `protobuf:"bytes,1,opt,name=upload_url,json=uploadUrl,proto3" json:"upload_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -584,7 +694,7 @@ func (x *GenerateThumbnailUploadURLResponse) GetUploadUrl() string {
 
 type DeleteThumbnailRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// ID of the thumbnail to delete.
 	ThumbnailId   string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -629,7 +739,8 @@ func (x *DeleteThumbnailRequest) GetThumbnailId() string {
 
 type DeleteThumbnailMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the thumbnail.
+	// ID of the thumbnail being deleted.
+	// This identifier can be used to track the thumbnail deletion operation.
 	ThumbnailId   string `protobuf:"bytes,1,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -672,15 +783,19 @@ func (x *DeleteThumbnailMetadata) GetThumbnailId() string {
 	return ""
 }
 
+// Represents a URL for a specific scaled version of a thumbnail image.
 type ThumbnailDownloadURL_ScaledURL struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Download url.
+	// URL for downloading this scaled version of the thumbnail.
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	// Maximum width of the rectangle to inscribe the thumbnail into.
+	// Maximum width in pixels of the scaled image.
+	// The actual width may be smaller to maintain the aspect ratio.
 	MaxWidth int64 `protobuf:"varint,2,opt,name=max_width,json=maxWidth,proto3" json:"max_width,omitempty"`
-	// Maximum height of the rectangle to inscribe the thumbnail into.
+	// Maximum height in pixels of the scaled image.
+	// The actual height may be smaller to maintain the aspect ratio.
 	MaxHeight int64 `protobuf:"varint,3,opt,name=max_height,json=maxHeight,proto3" json:"max_height,omitempty"`
-	// Image format.
+	// Format of the scaled image (JPEG, WebP, etc.).
+	// Different formats offer different trade-offs between quality and file size.
 	ImageFormat   ThumbnailDownloadURL_ImageFormat `protobuf:"varint,4,opt,name=image_format,json=imageFormat,proto3,enum=yandex.cloud.video.v1.ThumbnailDownloadURL_ImageFormat" json:"image_format,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -750,26 +865,34 @@ const file_yandex_cloud_video_v1_thumbnail_service_proto_rawDesc = "" +
 	"\n" +
 	"-yandex/cloud/video/v1/thumbnail_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/video/v1/thumbnail.proto\"F\n" +
 	"\x13GetThumbnailRequest\x12/\n" +
-	"\fthumbnail_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vthumbnailId\"\x99\x01\n" +
+	"\fthumbnail_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vthumbnailId\"\x81\x02\n" +
 	"\x14ListThumbnailRequest\x12'\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tchannelId\x12&\n" +
+	"channel_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tchannelId\x12*\n" +
+	"\n" +
+	"episode_id\x18\xeb\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tepisodeId\x12&\n" +
+	"\bvideo_id\x18\xec\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12*\n" +
 	"\n" +
-	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageTokenJ\x04\b\x02\x10d\"\x87\x01\n" +
+	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageTokenB\v\n" +
+	"\tparent_idJ\x04\b\x02\x10dJ\x05\bf\x10\xeb\a\"\x87\x01\n" +
 	"\x15ListThumbnailResponse\x12@\n" +
 	"\n" +
 	"thumbnails\x18\x01 \x03(\v2 .yandex.cloud.video.v1.ThumbnailR\n" +
 	"thumbnails\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"B\n" +
-	"\x16CreateThumbnailRequest\x12(\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xa9\x01\n" +
+	"\x16CreateThumbnailRequest\x12'\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=200R\tchannelId\"<\n" +
+	"channel_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tchannelId\x12*\n" +
+	"\n" +
+	"episode_id\x18\xeb\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tepisodeId\x12&\n" +
+	"\bvideo_id\x18\xec\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoIdB\v\n" +
+	"\tparent_idJ\x05\b\x02\x10\xeb\a\"<\n" +
 	"\x17CreateThumbnailMetadata\x12!\n" +
-	"\fthumbnail_id\x18\x01 \x01(\tR\vthumbnailId\"\x88\x01\n" +
-	" BatchGenerateDownloadURLsRequest\x12,\n" +
+	"\fthumbnail_id\x18\x01 \x01(\tR\vthumbnailId\"\x87\x01\n" +
+	" BatchGenerateDownloadURLsRequest\x12+\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=200R\tchannelId\x126\n" +
+	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x126\n" +
 	"\rthumbnail_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\fthumbnailIds\"u\n" +
 	"!BatchGenerateDownloadURLsResponse\x12P\n" +
 	"\rdownload_urls\x18\x01 \x03(\v2+.yandex.cloud.video.v1.ThumbnailDownloadURLR\fdownloadUrls\"\xad\x03\n" +
@@ -870,6 +993,14 @@ func file_yandex_cloud_video_v1_thumbnail_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_video_v1_thumbnail_proto_init()
+	file_yandex_cloud_video_v1_thumbnail_service_proto_msgTypes[1].OneofWrappers = []any{
+		(*ListThumbnailRequest_EpisodeId)(nil),
+		(*ListThumbnailRequest_VideoId)(nil),
+	}
+	file_yandex_cloud_video_v1_thumbnail_service_proto_msgTypes[3].OneofWrappers = []any{
+		(*CreateThumbnailRequest_EpisodeId)(nil),
+		(*CreateThumbnailRequest_VideoId)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

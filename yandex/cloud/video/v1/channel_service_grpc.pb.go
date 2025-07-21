@@ -37,24 +37,35 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Channel management service.
+// Provides methods for creating, retrieving, updating, and deleting channels,
+// as well as managing channel-related operations such as access control.
+// Channels serve as containers for videos and streams in an organization.
 type ChannelServiceClient interface {
-	// Get the specific channel.
+	// Retrieves detailed information about a specific channel by its ID.
+	// Returns all channel metadata, settings, and related information.
 	Get(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*Channel, error)
-	// List channels for organization.
+	// Lists all channels in a specific organization with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsResponse, error)
-	// Create channel.
+	// Creates a new channel in the specified organization.
 	Create(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Update channel.
+	// Updates an existing channel's metadata and settings.
+	// Only fields specified in the field_mask will be updated.
 	Update(ctx context.Context, in *UpdateChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Delete channel.
+	// Deletes a specific channel by its ID.
 	Delete(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete channels.
+	// Deletes multiple channels in a specific organization in a single request.
+	// This is more efficient than making multiple Delete requests when removing several channels.
 	BatchDelete(ctx context.Context, in *BatchDeleteChannelsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// List existing access bindings for the specified channel.
+	// Lists all access bindings for a specific channel.
+	// Access bindings define which users or service accounts have access to the channel
+	// and what actions they can perform.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	// Set access bindings for the channel.
+	// Sets all access bindings for a specific channel.
+	// This operation completely replaces any existing access bindings.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Update access bindings for the specified channel.
+	// Updates access bindings for a specific channel by adding or removing individual bindings.
+	// This operation modifies existing access bindings without replacing them completely.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -161,24 +172,35 @@ func (c *channelServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // for forward compatibility.
 //
 // Channel management service.
+// Provides methods for creating, retrieving, updating, and deleting channels,
+// as well as managing channel-related operations such as access control.
+// Channels serve as containers for videos and streams in an organization.
 type ChannelServiceServer interface {
-	// Get the specific channel.
+	// Retrieves detailed information about a specific channel by its ID.
+	// Returns all channel metadata, settings, and related information.
 	Get(context.Context, *GetChannelRequest) (*Channel, error)
-	// List channels for organization.
+	// Lists all channels in a specific organization with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(context.Context, *ListChannelsRequest) (*ListChannelsResponse, error)
-	// Create channel.
+	// Creates a new channel in the specified organization.
 	Create(context.Context, *CreateChannelRequest) (*operation.Operation, error)
-	// Update channel.
+	// Updates an existing channel's metadata and settings.
+	// Only fields specified in the field_mask will be updated.
 	Update(context.Context, *UpdateChannelRequest) (*operation.Operation, error)
-	// Delete channel.
+	// Deletes a specific channel by its ID.
 	Delete(context.Context, *DeleteChannelRequest) (*operation.Operation, error)
-	// Batch delete channels.
+	// Deletes multiple channels in a specific organization in a single request.
+	// This is more efficient than making multiple Delete requests when removing several channels.
 	BatchDelete(context.Context, *BatchDeleteChannelsRequest) (*operation.Operation, error)
-	// List existing access bindings for the specified channel.
+	// Lists all access bindings for a specific channel.
+	// Access bindings define which users or service accounts have access to the channel
+	// and what actions they can perform.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	// Set access bindings for the channel.
+	// Sets all access bindings for a specific channel.
+	// This operation completely replaces any existing access bindings.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
-	// Update access bindings for the specified channel.
+	// Updates access bindings for a specific channel by adding or removing individual bindings.
+	// This operation modifies existing access bindings without replacing them completely.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 

@@ -224,7 +224,9 @@ type CreateOriginGroupRequest struct {
 	UseNext *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=use_next,json=useNext,proto3" json:"use_next,omitempty"`
 	// List of origins: IP addresses or Domain names of your origins and the port
 	// (if custom).
-	Origins       []*OriginParams `protobuf:"bytes,4,rep,name=origins,proto3" json:"origins,omitempty"`
+	Origins []*OriginParams `protobuf:"bytes,4,rep,name=origins,proto3" json:"origins,omitempty"`
+	// RESERVED: This field is reserved for future use and should not be used at this time.
+	ProviderType  string `protobuf:"bytes,5,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -285,6 +287,13 @@ func (x *CreateOriginGroupRequest) GetOrigins() []*OriginParams {
 		return x.Origins
 	}
 	return nil
+}
+
+func (x *CreateOriginGroupRequest) GetProviderType() string {
+	if x != nil {
+		return x.ProviderType
+	}
+	return ""
 }
 
 type CreateOriginGroupMetadata struct {
@@ -578,12 +587,13 @@ const file_yandex_cloud_cdn_v1_origin_group_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x89\x01\n" +
 	"\x18ListOriginGroupsResponse\x12E\n" +
 	"\rorigin_groups\x18\x01 \x03(\v2 .yandex.cloud.cdn.v1.OriginGroupR\foriginGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xcd\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf2\x01\n" +
 	"\x18CreateOriginGroupRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x125\n" +
 	"\buse_next\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\auseNext\x12;\n" +
-	"\aorigins\x18\x04 \x03(\v2!.yandex.cloud.cdn.v1.OriginParamsR\aorigins\"K\n" +
+	"\aorigins\x18\x04 \x03(\v2!.yandex.cloud.cdn.v1.OriginParamsR\aorigins\x12#\n" +
+	"\rprovider_type\x18\x05 \x01(\tR\fproviderType\"K\n" +
 	"\x19CreateOriginGroupMetadata\x12.\n" +
 	"\x0forigin_group_id\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0R\roriginGroupId\"\xa6\x02\n" +
 	"\x18UpdateOriginGroupRequest\x12)\n" +

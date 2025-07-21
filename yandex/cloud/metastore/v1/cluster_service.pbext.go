@@ -83,10 +83,6 @@ func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *UpdateClusterMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
 func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -131,8 +127,12 @@ func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
-func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
+func (m *UpdateClusterRequest) SetVersion(v string) {
+	m.Version = v
+}
+
+func (m *UpdateClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
 }
 
 func (m *DeleteClusterRequest) SetClusterId(v string) {
@@ -143,19 +143,19 @@ func (m *DeleteClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *StopClusterRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StopClusterMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
 func (m *StartClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
 func (m *StartClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StopClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StopClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
@@ -217,4 +217,8 @@ func (m *ConfigSpec) SetResources(v *Resources) {
 
 func (m *UpdateClusterConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
+}
+
+func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
 }

@@ -3277,10 +3277,10 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x87\b\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x81\b\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
-	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x124\n" +
-	"\x04time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\x04time\x12*\n" +
+	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12.\n" +
+	"\x04time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12*\n" +
 	"\x04name\x18\x04 \x01(\tB\x16\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*R\x04name\x12+\n" +
 	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
 	"\x06labels\x18\x06 \x03(\v2<.yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12P\n" +

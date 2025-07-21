@@ -29,6 +29,11 @@ const (
 	FederationService_DeleteUserAccounts_FullMethodName = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteUserAccounts"
 	FederationService_ListUserAccounts_FullMethodName   = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListUserAccounts"
 	FederationService_ListOperations_FullMethodName     = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListOperations"
+	FederationService_GetDomain_FullMethodName          = "/yandex.cloud.organizationmanager.v1.saml.FederationService/GetDomain"
+	FederationService_ListDomains_FullMethodName        = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListDomains"
+	FederationService_AddDomain_FullMethodName          = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddDomain"
+	FederationService_ValidateDomain_FullMethodName     = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ValidateDomain"
+	FederationService_DeleteDomain_FullMethodName       = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteDomain"
 )
 
 // FederationServiceClient is the client API for FederationService service.
@@ -57,6 +62,18 @@ type FederationServiceClient interface {
 	ListUserAccounts(ctx context.Context, in *ListFederatedUserAccountsRequest, opts ...grpc.CallOption) (*ListFederatedUserAccountsResponse, error)
 	// Lists operations for the specified federation.
 	ListOperations(ctx context.Context, in *ListFederationOperationsRequest, opts ...grpc.CallOption) (*ListFederationOperationsResponse, error)
+	// Returns the specified domain in the federation.
+	//
+	// To get the list of available domains, make a [ListDomains] request.
+	GetDomain(ctx context.Context, in *GetFederationDomainRequest, opts ...grpc.CallOption) (*Domain, error)
+	// Retrieves the list of domains in the specified federation.
+	ListDomains(ctx context.Context, in *ListFederationDomainsRequest, opts ...grpc.CallOption) (*ListFederationDomainsResponse, error)
+	// Adds a domain to the specified federation.
+	AddDomain(ctx context.Context, in *AddFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Validates a domain in the specified federation.
+	ValidateDomain(ctx context.Context, in *ValidateFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified domain from the federation.
+	DeleteDomain(ctx context.Context, in *DeleteFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type federationServiceClient struct {
@@ -157,6 +174,56 @@ func (c *federationServiceClient) ListOperations(ctx context.Context, in *ListFe
 	return out, nil
 }
 
+func (c *federationServiceClient) GetDomain(ctx context.Context, in *GetFederationDomainRequest, opts ...grpc.CallOption) (*Domain, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Domain)
+	err := c.cc.Invoke(ctx, FederationService_GetDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *federationServiceClient) ListDomains(ctx context.Context, in *ListFederationDomainsRequest, opts ...grpc.CallOption) (*ListFederationDomainsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFederationDomainsResponse)
+	err := c.cc.Invoke(ctx, FederationService_ListDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *federationServiceClient) AddDomain(ctx context.Context, in *AddFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FederationService_AddDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *federationServiceClient) ValidateDomain(ctx context.Context, in *ValidateFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FederationService_ValidateDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *federationServiceClient) DeleteDomain(ctx context.Context, in *DeleteFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FederationService_DeleteDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FederationServiceServer is the server API for FederationService service.
 // All implementations should embed UnimplementedFederationServiceServer
 // for forward compatibility.
@@ -183,6 +250,18 @@ type FederationServiceServer interface {
 	ListUserAccounts(context.Context, *ListFederatedUserAccountsRequest) (*ListFederatedUserAccountsResponse, error)
 	// Lists operations for the specified federation.
 	ListOperations(context.Context, *ListFederationOperationsRequest) (*ListFederationOperationsResponse, error)
+	// Returns the specified domain in the federation.
+	//
+	// To get the list of available domains, make a [ListDomains] request.
+	GetDomain(context.Context, *GetFederationDomainRequest) (*Domain, error)
+	// Retrieves the list of domains in the specified federation.
+	ListDomains(context.Context, *ListFederationDomainsRequest) (*ListFederationDomainsResponse, error)
+	// Adds a domain to the specified federation.
+	AddDomain(context.Context, *AddFederationDomainRequest) (*operation.Operation, error)
+	// Validates a domain in the specified federation.
+	ValidateDomain(context.Context, *ValidateFederationDomainRequest) (*operation.Operation, error)
+	// Deletes the specified domain from the federation.
+	DeleteDomain(context.Context, *DeleteFederationDomainRequest) (*operation.Operation, error)
 }
 
 // UnimplementedFederationServiceServer should be embedded to have
@@ -218,6 +297,21 @@ func (UnimplementedFederationServiceServer) ListUserAccounts(context.Context, *L
 }
 func (UnimplementedFederationServiceServer) ListOperations(context.Context, *ListFederationOperationsRequest) (*ListFederationOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedFederationServiceServer) GetDomain(context.Context, *GetFederationDomainRequest) (*Domain, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDomain not implemented")
+}
+func (UnimplementedFederationServiceServer) ListDomains(context.Context, *ListFederationDomainsRequest) (*ListFederationDomainsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDomains not implemented")
+}
+func (UnimplementedFederationServiceServer) AddDomain(context.Context, *AddFederationDomainRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDomain not implemented")
+}
+func (UnimplementedFederationServiceServer) ValidateDomain(context.Context, *ValidateFederationDomainRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateDomain not implemented")
+}
+func (UnimplementedFederationServiceServer) DeleteDomain(context.Context, *DeleteFederationDomainRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDomain not implemented")
 }
 func (UnimplementedFederationServiceServer) testEmbeddedByValue() {}
 
@@ -401,6 +495,96 @@ func _FederationService_ListOperations_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FederationService_GetDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFederationDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).GetDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_GetDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).GetDomain(ctx, req.(*GetFederationDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FederationService_ListDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFederationDomainsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).ListDomains(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_ListDomains_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).ListDomains(ctx, req.(*ListFederationDomainsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FederationService_AddDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddFederationDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).AddDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_AddDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).AddDomain(ctx, req.(*AddFederationDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FederationService_ValidateDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateFederationDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).ValidateDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_ValidateDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).ValidateDomain(ctx, req.(*ValidateFederationDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FederationService_DeleteDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFederationDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).DeleteDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_DeleteDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).DeleteDomain(ctx, req.(*DeleteFederationDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FederationService_ServiceDesc is the grpc.ServiceDesc for FederationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -443,6 +627,26 @@ var FederationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _FederationService_ListOperations_Handler,
+		},
+		{
+			MethodName: "GetDomain",
+			Handler:    _FederationService_GetDomain_Handler,
+		},
+		{
+			MethodName: "ListDomains",
+			Handler:    _FederationService_ListDomains_Handler,
+		},
+		{
+			MethodName: "AddDomain",
+			Handler:    _FederationService_AddDomain_Handler,
+		},
+		{
+			MethodName: "ValidateDomain",
+			Handler:    _FederationService_ValidateDomain_Handler,
+		},
+		{
+			MethodName: "DeleteDomain",
+			Handler:    _FederationService_DeleteDomain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

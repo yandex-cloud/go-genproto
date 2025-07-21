@@ -30,7 +30,7 @@ const (
 
 type GetStreamRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the stream.
+	// ID of the stream to retrieve.
 	StreamId      string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -75,30 +75,32 @@ func (x *GetStreamRequest) GetStreamId() string {
 
 type ListStreamsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the streams to list.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of streams to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListStreamsResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "<field> <order>" (e.g. "createdAt desc").
+	// Specifies the ordering of results.
+	// Format is "<field> <order>" (e.g., "startTime desc").
 	// Default: "id asc".
-	// Possible fields: ["id", "title", "startTime", "finishTime", "createdAt", "updatedAt"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported fields: ["id", "title", "startTime", "finishTime", "createdAt", "updatedAt"].
+	// Both snake_case and camelCase field names are supported.
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	// Filter expression that filters resources listed in the response.
-	// Expressions are composed of terms connected by logic operators.
-	// If value contains spaces or quotes,
-	// it should be in quotes (`'` or `"`) with the inner quotes being backslash escaped.
+	// Filter expression to narrow down the list of returned streams.
+	// Expressions consist of terms connected by logical operators.
+	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
+	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
-	// Supported string match operators: ["=", "!=", ":"].
-	// Operator ":" stands for substring matching.
-	// Filter expressions may also contain parentheses to group logical operands.
-	// Example: `key1='value' AND (key2!='\'value\” OR key2:"\"value\"")`
-	// Supported fields: ["id", "title", "lineId", "status"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
+	// Parentheses can be used to group logical expressions.
+	//
+	// Example: `title:'live' AND (status='READY' OR status='ONAIR')`
+	//
+	// Filterable fields: ["id", "title", "lineId", "status"].
+	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -171,9 +173,11 @@ func (x *ListStreamsRequest) GetFilter() string {
 
 type ListStreamsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of streams for channel.
+	// List of streams matching the request criteria.
+	// May be empty if no streams match the criteria or if the channel has no streams.
 	Streams []*Stream `protobuf:"bytes,1,rep,name=streams,proto3" json:"streams,omitempty"`
-	// Token for getting the next page.
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -225,9 +229,9 @@ func (x *ListStreamsResponse) GetNextPageToken() string {
 
 type BatchGetStreamsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the streams to retrieve.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of requested stream IDs.
+	// List of stream IDs to retrieve.
 	StreamIds     []string `protobuf:"bytes,2,rep,name=stream_ids,json=streamIds,proto3" json:"stream_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -279,7 +283,7 @@ func (x *BatchGetStreamsRequest) GetStreamIds() []string {
 
 type BatchGetStreamsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of streams for specific channel.
+	// List of streams matching the requested IDs.
 	Streams       []*Stream `protobuf:"bytes,1,rep,name=streams,proto3" json:"streams,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -324,22 +328,29 @@ func (x *BatchGetStreamsResponse) GetStreams() []*Stream {
 
 type CreateStreamRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel where the stream will be created.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// ID of the line.
+	// ID of the stream line to which this stream will be linked.
+	// Stream lines define the technical configuration for streaming.
 	LineId string `protobuf:"bytes,2,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
-	// Stream title.
+	// Title of the stream to be displayed in interfaces and players.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Stream description.
+	// Detailed description of the stream content and context.
+	// Optional field that can provide additional information about the stream.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the thumbnail.
+	// ID of the thumbnail image to be used for the stream.
 	ThumbnailId string `protobuf:"bytes,5,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Automatically publish stream when ready.
-	// Switches status from READY to ONAIR.
+	// Controls whether the stream is automatically published when ready.
+	// When set to true, the stream's status will automatically change from
+	// READY to ONAIR when the streaming infrastructure is prepared,
+	// making it available for viewing without manual intervention.
 	AutoPublish *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=auto_publish,json=autoPublish,proto3" json:"auto_publish,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as `key:value` pairs.
+	// Maximum 64 labels per stream.
+	// Keys must be lowercase alphanumeric strings with optional hyphens/underscores.
+	// Values can contain alphanumeric characters and various symbols.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Stream type.
+	// Specifies the stream scheduling type (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to StreamType:
 	//
@@ -459,12 +470,14 @@ type isCreateStreamRequest_StreamType interface {
 }
 
 type CreateStreamRequest_OnDemand struct {
-	// On-demand stream. Starts immediately when a signal appears.
+	// On-demand stream that starts immediately when a video signal appears.
+	// This type of stream has no predetermined start or end time.
 	OnDemand *OnDemandParams `protobuf:"bytes,1000,opt,name=on_demand,json=onDemand,proto3,oneof"`
 }
 
 type CreateStreamRequest_Schedule struct {
-	// Schedule stream. Starts or finishes at the specified time.
+	// Scheduled stream that starts and finishes at specified time.
+	// This type of stream has predetermined start and end time.
 	Schedule *ScheduleParams `protobuf:"bytes,1001,opt,name=schedule,proto3,oneof"`
 }
 
@@ -472,6 +485,8 @@ func (*CreateStreamRequest_OnDemand) isCreateStreamRequest_StreamType() {}
 
 func (*CreateStreamRequest_Schedule) isCreateStreamRequest_StreamType() {}
 
+// On-demand streams start automatically when a video signal is detected
+// and must be manually stopped when no longer needed.
 type OnDemandParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -509,8 +524,14 @@ func (*OnDemandParams) Descriptor() ([]byte, []int) {
 }
 
 type ScheduleParams struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Scheduled time when the stream should automatically start.
+	// The streaming infrastructure will be prepared at this time
+	// and will begin accepting the video signal.
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	// Scheduled time when the stream should automatically finish.
+	// The streaming infrastructure will be shut down at this time
+	// and the stream will be marked as FINISHED.
 	FinishTime    *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -562,7 +583,7 @@ func (x *ScheduleParams) GetFinishTime() *timestamppb.Timestamp {
 
 type CreateStreamMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the stream.
+	// ID of the stream being created.
 	StreamId      string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -609,9 +630,12 @@ type UpdateStreamRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the stream.
 	StreamId string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
-	// Field mask that specifies which fields of the stream are going to be updated.
+	// Field mask specifying which fields of the stream should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	// ID of the line.
+	// DEPRECATED.
 	LineId string `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
 	// Stream title.
 	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
@@ -622,7 +646,9 @@ type UpdateStreamRequest struct {
 	// Automatically publish stream when ready.
 	// Switches status from READY to ONAIR.
 	AutoPublish *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=auto_publish,json=autoPublish,proto3" json:"auto_publish,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// New custom labels for the stream as `key:value` pairs.
+	// Maximum 64 labels per stream.
+	// If provided, replaces all existing labels.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Stream type.
 	//
@@ -751,12 +777,14 @@ type isUpdateStreamRequest_StreamType interface {
 }
 
 type UpdateStreamRequest_OnDemand struct {
-	// On demand stream. It starts immediately when a signal appears.
+	// On demand stream.
+	// It starts immediately when a signal appears.
 	OnDemand *OnDemandParams `protobuf:"bytes,1000,opt,name=on_demand,json=onDemand,proto3,oneof"`
 }
 
 type UpdateStreamRequest_Schedule struct {
-	// Schedule stream. Determines when to start receiving the signal or finish time.
+	// Scheduled stream.
+	// It starts and finishes at specified time.
 	Schedule *ScheduleParams `protobuf:"bytes,1001,opt,name=schedule,proto3,oneof"`
 }
 
@@ -811,7 +839,7 @@ func (x *UpdateStreamMetadata) GetStreamId() string {
 
 type DeleteStreamRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the stream.
+	// ID of the stream to delete.
 	StreamId      string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -857,6 +885,7 @@ func (x *DeleteStreamRequest) GetStreamId() string {
 type DeleteStreamMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the stream.
+	// This identifier can be used to track the stream deletion operation.
 	StreamId      string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -901,9 +930,10 @@ func (x *DeleteStreamMetadata) GetStreamId() string {
 
 type BatchDeleteStreamsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel containing the streams to delete.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// List of stream IDs.
+	// List of stream IDs to delete.
+	// All streams must exist in the specified channel.
 	StreamIds     []string `protobuf:"bytes,2,rep,name=stream_ids,json=streamIds,proto3" json:"stream_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -955,7 +985,9 @@ func (x *BatchDeleteStreamsRequest) GetStreamIds() []string {
 
 type BatchDeleteStreamsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of stream IDs.
+	// List of stream IDs being deleted.
+	// This list can be used to track which streams are included
+	// in the batch deletion operation.
 	StreamIds     []string `protobuf:"bytes,1,rep,name=stream_ids,json=streamIds,proto3" json:"stream_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1000,8 +1032,10 @@ func (x *BatchDeleteStreamsMetadata) GetStreamIds() []string {
 
 type PerformStreamActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the stream.
+	// ID of the stream on which to perform the action.
 	StreamId string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
+	// Specifies which action to perform on the stream (exactly one must be chosen).
+	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformStreamActionRequest_Publish
@@ -1078,10 +1112,14 @@ type isPerformStreamActionRequest_Action interface {
 }
 
 type PerformStreamActionRequest_Publish struct {
+	// Publish the stream, changing its status from READY to ONAIR.
+	// This makes the stream available for watching.
 	Publish *PublishAction `protobuf:"bytes,1000,opt,name=publish,proto3,oneof"`
 }
 
 type PerformStreamActionRequest_Stop struct {
+	// Stop the stream, changing its status to FINISHED.
+	// This terminates the streaming session and releases resources.
 	Stop *StopAction `protobuf:"bytes,1002,opt,name=stop,proto3,oneof"`
 }
 
@@ -1089,6 +1127,8 @@ func (*PerformStreamActionRequest_Publish) isPerformStreamActionRequest_Action()
 
 func (*PerformStreamActionRequest_Stop) isPerformStreamActionRequest_Action() {}
 
+// Parameters for the publish action.
+// The action changes the stream's status from READY to ONAIR.
 type PublishAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1125,6 +1165,8 @@ func (*PublishAction) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{16}
 }
 
+// Parameters for the stop action.
+// The action changes the stream's status to FINISHED.
 type StopAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1163,7 +1205,9 @@ func (*StopAction) Descriptor() ([]byte, []int) {
 
 type PerformStreamActionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the stream.
+	// ID of the stream on which the action is being performed.
+	// This identifier can be used to track the action operation
+	// and to verify that the action is being applied to the correct stream.
 	StreamId      string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

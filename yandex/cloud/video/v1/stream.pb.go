@@ -23,21 +23,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Stream status.
+// Current status of the stream.
 type Stream_StreamStatus int32
 
 const (
-	// Stream status unspecified.
+	// The stream status is not specified.
 	Stream_STREAM_STATUS_UNSPECIFIED Stream_StreamStatus = 0
-	// Stream offline.
+	// The stream is offline and not broadcasting.
 	Stream_OFFLINE Stream_StreamStatus = 1
-	// Preparing the infrastructure for receiving video signal.
+	// The system is preparing the infrastructure for receiving the video signal.
 	Stream_PREPARING Stream_StreamStatus = 2
-	// Everything is ready to launch stream.
+	// The infrastructure is ready to launch the stream.
 	Stream_READY Stream_StreamStatus = 3
-	// Stream onair.
+	// The stream is currently broadcasting live.
 	Stream_ONAIR Stream_StreamStatus = 4
-	// Stream finished.
+	// The stream has completed and is no longer broadcasting.
 	Stream_FINISHED Stream_StreamStatus = 5
 )
 
@@ -88,43 +88,48 @@ func (Stream_StreamStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Entity representing a live video stream.
+// A stream is a real-time video broadcast linked to a specific stream line.
 type Stream struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the stream.
+	// Unique identifier of the stream.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the channel where the stream was created.
+	// Identifier of the channel where the stream is created and managed.
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// ID of the line to which stream is linked.
+	// Identifier of the stream line to which this stream is linked.
 	LineId string `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
-	// Stream title.
+	// Title of the stream displayed in interfaces and players.
 	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	// Stream description.
+	// Detailed description of the stream content and context.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the thumbnail.
+	// Identifier of the thumbnail image used to represent the stream visually.
 	ThumbnailId string `protobuf:"bytes,6,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Stream status.
+	// Current status of the stream.
 	Status Stream_StreamStatus `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.video.v1.Stream_StreamStatus" json:"status,omitempty"`
-	// Stream start time.
+	// Timestamp when the stream was initiated.
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	// Stream publish time. Time when stream switched to ONAIR status.
+	// Timestamp when the stream was published (switched to ONAIR status).
 	PublishTime *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=publish_time,json=publishTime,proto3" json:"publish_time,omitempty"`
-	// Stream finish time.
+	// Timestamp when the stream was completed.
 	FinishTime *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
-	// Automatically publish stream when ready.
-	// Switches status from READY to ONAIR.
+	// Controls automatic publishing of the stream when it's ready.
+	// When set to true, automatically switches status from READY to ONAIR.
 	AutoPublish *wrapperspb.BoolValue `protobuf:"bytes,12,opt,name=auto_publish,json=autoPublish,proto3" json:"auto_publish,omitempty"`
-	// Stream type.
+	// Specifies the stream scheduling type.
 	//
 	// Types that are valid to be assigned to StreamType:
 	//
 	//	*Stream_OnDemand
 	//	*Stream_Schedule
 	StreamType isStream_StreamType `protobuf_oneof:"stream_type"`
-	// Time when stream was created.
+	// Timestamp when the stream was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time of last stream update.
+	// Timestamp of the last modification to the stream or its metadata.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as `key:value` pairs.
+	// Maximum 64 labels per stream.
+	// Used for organization, filtering, and metadata purposes.
+	// Labels can be used for organization, filtering, and metadata purposes.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -288,12 +293,12 @@ type isStream_StreamType interface {
 }
 
 type Stream_OnDemand struct {
-	// On-demand stream. Starts immediately when a signal appears.
+	// On-demand stream starts immediately when a video signal appears.
 	OnDemand *OnDemand `protobuf:"bytes,1000,opt,name=on_demand,json=onDemand,proto3,oneof"`
 }
 
 type Stream_Schedule struct {
-	// Schedule stream. Starts or finished at the specified time.
+	// Scheduled stream starts and finishes at specified time.
 	Schedule *Schedule `protobuf:"bytes,1001,opt,name=schedule,proto3,oneof"`
 }
 
@@ -301,8 +306,9 @@ func (*Stream_OnDemand) isStream_StreamType() {}
 
 func (*Stream_Schedule) isStream_StreamType() {}
 
-// On-demand stream type.
-// This type of streams should be started and finished explicitly.
+// Represents an on-demand stream type.
+// This type of stream must be started and finished explicitly by the user.
+// It begins broadcasting immediately when a video signal is detected.
 type OnDemand struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -339,11 +345,13 @@ func (*OnDemand) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_proto_rawDescGZIP(), []int{1}
 }
 
-// Schedule stream type.
-// This type of streams start and finish automatically at the specified time.
+// Represents a scheduled stream type.
+// This type of stream starts and finishes automatically at specified time.
 type Schedule struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Scheduled time when the stream should automatically start.
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	// Scheduled time when the stream should automatically finish.
 	FinishTime    *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

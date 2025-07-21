@@ -22,12 +22,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Visibility status of the episode.
 type Episode_VisibilityStatus int32
 
 const (
+	// The visibility status is not specified.
 	Episode_VISIBILITY_STATUS_UNSPECIFIED Episode_VisibilityStatus = 0
-	Episode_PUBLISHED                     Episode_VisibilityStatus = 1
-	Episode_UNPUBLISHED                   Episode_VisibilityStatus = 2
+	// The episode is publicly available, subject to its access permission settings.
+	Episode_PUBLISHED Episode_VisibilityStatus = 1
+	// The episode is available only to administrators.
+	Episode_UNPUBLISHED Episode_VisibilityStatus = 2
 )
 
 // Enum value maps for Episode_VisibilityStatus.
@@ -71,43 +75,50 @@ func (Episode_VisibilityStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_episode_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Entity representing a stream fragment that can be accessed independently.
+// Episodes can be linked to either a stream or a line
+// and provide a way to reference specific portions of the corresponding content.
 type Episode struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the episode.
+	// Unique identifier of the episode.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the stream. Optional, empty if the episode is linked to the line
+	// Identifier of the stream this episode is linked to.
+	// Optional, empty if the episode is linked to a line.
 	StreamId string `protobuf:"bytes,2,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
-	// ID of the line. Optional, empty if the episode is linked to the stream
+	// Identifier of the line this episode is linked to.
+	// Optional, empty if the episode is linked to a stream.
 	LineId string `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
-	// Episode title.
+	// Title of the episode displayed in interfaces and players.
 	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	// Episode description.
+	// Detailed description of the episode content and context.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the thumbnail.
+	// Identifier of the thumbnail image used to represent the episode visually.
 	ThumbnailId string `protobuf:"bytes,6,opt,name=thumbnail_id,json=thumbnailId,proto3" json:"thumbnail_id,omitempty"`
-	// Episode start time.
+	// Timestamp marking the beginning of the episode content.
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	// Episode finish time.
+	// Timestamp marking the end of the episode content.
 	FinishTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
-	// Enables episode DVR mode.
-	// Determines how many last seconds of the stream are available for watching.
+	// Controls the Digital Video Recording (DVR) functionality for the episode.
+	// Determines how many seconds of the stream are available for time-shifted viewing.
 	//
 	// Possible values:
-	//   - `0`: infinite dvr size, the full length of the stream allowed to display
-	//   - `>0`: size of dvr window in seconds, the minimum value is 30s
-	DvrSeconds       int64                    `protobuf:"varint,9,opt,name=dvr_seconds,json=dvrSeconds,proto3" json:"dvr_seconds,omitempty"`
+	//   - `0`: Infinite DVR size, the full length of the stream is available for viewing.
+	//   - `>0`: Size of DVR window in seconds, the minimum value is 30s.
+	DvrSeconds int64 `protobuf:"varint,9,opt,name=dvr_seconds,json=dvrSeconds,proto3" json:"dvr_seconds,omitempty"`
+	// Current visibility status controlling whether the episode is publicly available.
 	VisibilityStatus Episode_VisibilityStatus `protobuf:"varint,10,opt,name=visibility_status,json=visibilityStatus,proto3,enum=yandex.cloud.video.v1.Episode_VisibilityStatus" json:"visibility_status,omitempty"`
-	// Episode access rights.
+	// Identifier of the style preset used in the player during episode playback.
+	StylePresetId string `protobuf:"bytes,12,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// Specifies the episode access permission settings.
 	//
 	// Types that are valid to be assigned to AccessRights:
 	//
 	//	*Episode_PublicAccess
-	//	*Episode_AuthSystemAccess
 	//	*Episode_SignUrlAccess
 	AccessRights isEpisode_AccessRights `protobuf_oneof:"access_rights"`
-	// Time when episode was created.
+	// Timestamp when the episode was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time of last episode update.
+	// Timestamp of the last modification to the episode or its metadata.
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -213,6 +224,13 @@ func (x *Episode) GetVisibilityStatus() Episode_VisibilityStatus {
 	return Episode_VISIBILITY_STATUS_UNSPECIFIED
 }
 
+func (x *Episode) GetStylePresetId() string {
+	if x != nil {
+		return x.StylePresetId
+	}
+	return ""
+}
+
 func (x *Episode) GetAccessRights() isEpisode_AccessRights {
 	if x != nil {
 		return x.AccessRights
@@ -224,15 +242,6 @@ func (x *Episode) GetPublicAccess() *EpisodePublicAccessRights {
 	if x != nil {
 		if x, ok := x.AccessRights.(*Episode_PublicAccess); ok {
 			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *Episode) GetAuthSystemAccess() *EpisodeAuthSystemAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Episode_AuthSystemAccess); ok {
-			return x.AuthSystemAccess
 		}
 	}
 	return nil
@@ -266,26 +275,22 @@ type isEpisode_AccessRights interface {
 }
 
 type Episode_PublicAccess struct {
-	// Episode is available to everyone.
+	// Allows unrestricted public access to the episode via direct link.
+	// No additional authorization or access control is applied.
 	PublicAccess *EpisodePublicAccessRights `protobuf:"bytes,1000,opt,name=public_access,json=publicAccess,proto3,oneof"`
 }
 
-type Episode_AuthSystemAccess struct {
-	// Checking access rights using the authorization system.
-	AuthSystemAccess *EpisodeAuthSystemAccessRights `protobuf:"bytes,1002,opt,name=auth_system_access,json=authSystemAccess,proto3,oneof"`
-}
-
 type Episode_SignUrlAccess struct {
-	// Checking access rights using url's signature.
+	// Restricts episode access using URL signatures for secure time-limited access.
 	SignUrlAccess *EpisodeSignURLAccessRights `protobuf:"bytes,1003,opt,name=sign_url_access,json=signUrlAccess,proto3,oneof"`
 }
 
 func (*Episode_PublicAccess) isEpisode_AccessRights() {}
 
-func (*Episode_AuthSystemAccess) isEpisode_AccessRights() {}
-
 func (*Episode_SignUrlAccess) isEpisode_AccessRights() {}
 
+// Represents public access rights for an episode.
+// When this access type is set, the episode is publicly accessible via direct link.
 type EpisodePublicAccessRights struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -322,42 +327,8 @@ func (*EpisodePublicAccessRights) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_episode_proto_rawDescGZIP(), []int{1}
 }
 
-type EpisodeAuthSystemAccessRights struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EpisodeAuthSystemAccessRights) Reset() {
-	*x = EpisodeAuthSystemAccessRights{}
-	mi := &file_yandex_cloud_video_v1_episode_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EpisodeAuthSystemAccessRights) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EpisodeAuthSystemAccessRights) ProtoMessage() {}
-
-func (x *EpisodeAuthSystemAccessRights) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EpisodeAuthSystemAccessRights.ProtoReflect.Descriptor instead.
-func (*EpisodeAuthSystemAccessRights) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_proto_rawDescGZIP(), []int{2}
-}
-
+// Represents access rights controlled by URL signatures.
+// When this access type is set, the episode is accessible only via properly signed temporary link.
 type EpisodeSignURLAccessRights struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -366,7 +337,7 @@ type EpisodeSignURLAccessRights struct {
 
 func (x *EpisodeSignURLAccessRights) Reset() {
 	*x = EpisodeSignURLAccessRights{}
-	mi := &file_yandex_cloud_video_v1_episode_proto_msgTypes[3]
+	mi := &file_yandex_cloud_video_v1_episode_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -378,7 +349,7 @@ func (x *EpisodeSignURLAccessRights) String() string {
 func (*EpisodeSignURLAccessRights) ProtoMessage() {}
 
 func (x *EpisodeSignURLAccessRights) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_episode_proto_msgTypes[3]
+	mi := &file_yandex_cloud_video_v1_episode_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -391,14 +362,14 @@ func (x *EpisodeSignURLAccessRights) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpisodeSignURLAccessRights.ProtoReflect.Descriptor instead.
 func (*EpisodeSignURLAccessRights) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_episode_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_video_v1_episode_proto_rawDescGZIP(), []int{2}
 }
 
 var File_yandex_cloud_video_v1_episode_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_episode_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/video/v1/episode.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb3\a\n" +
+	"#yandex/cloud/video/v1/episode.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\a\n" +
 	"\aEpisode\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tstream_id\x18\x02 \x01(\tR\bstreamId\x12\x17\n" +
@@ -413,9 +384,9 @@ const file_yandex_cloud_video_v1_episode_proto_rawDesc = "" +
 	"\vdvr_seconds\x18\t \x01(\x03R\n" +
 	"dvrSeconds\x12\\\n" +
 	"\x11visibility_status\x18\n" +
-	" \x01(\x0e2/.yandex.cloud.video.v1.Episode.VisibilityStatusR\x10visibilityStatus\x12X\n" +
-	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessRightsH\x00R\fpublicAccess\x12e\n" +
-	"\x12auth_system_access\x18\xea\a \x01(\v24.yandex.cloud.video.v1.EpisodeAuthSystemAccessRightsH\x00R\x10authSystemAccess\x12\\\n" +
+	" \x01(\x0e2/.yandex.cloud.video.v1.Episode.VisibilityStatusR\x10visibilityStatus\x12&\n" +
+	"\x0fstyle_preset_id\x18\f \x01(\tR\rstylePresetId\x12X\n" +
+	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessRightsH\x00R\fpublicAccess\x12\\\n" +
 	"\x0fsign_url_access\x18\xeb\a \x01(\v21.yandex.cloud.video.v1.EpisodeSignURLAccessRightsH\x00R\rsignUrlAccess\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
@@ -425,9 +396,8 @@ const file_yandex_cloud_video_v1_episode_proto_rawDesc = "" +
 	"\x1dVISIBILITY_STATUS_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tPUBLISHED\x10\x01\x12\x0f\n" +
 	"\vUNPUBLISHED\x10\x02B\x0f\n" +
-	"\raccess_rightsJ\x06\b\xe9\a\x10\xea\aJ\x04\b\v\x10dJ\x05\bf\x10\xe8\a\"\x1b\n" +
-	"\x19EpisodePublicAccessRights\"\x1f\n" +
-	"\x1dEpisodeAuthSystemAccessRights\"\x1c\n" +
+	"\raccess_rightsJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xea\a\x10\xeb\aJ\x04\b\v\x10\fJ\x04\b\r\x10dJ\x05\bf\x10\xe8\a\"\x1b\n" +
+	"\x19EpisodePublicAccessRights\"\x1c\n" +
 	"\x1aEpisodeSignURLAccessRightsB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
@@ -444,29 +414,27 @@ func file_yandex_cloud_video_v1_episode_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_video_v1_episode_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_video_v1_episode_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_video_v1_episode_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_video_v1_episode_proto_goTypes = []any{
-	(Episode_VisibilityStatus)(0),         // 0: yandex.cloud.video.v1.Episode.VisibilityStatus
-	(*Episode)(nil),                       // 1: yandex.cloud.video.v1.Episode
-	(*EpisodePublicAccessRights)(nil),     // 2: yandex.cloud.video.v1.EpisodePublicAccessRights
-	(*EpisodeAuthSystemAccessRights)(nil), // 3: yandex.cloud.video.v1.EpisodeAuthSystemAccessRights
-	(*EpisodeSignURLAccessRights)(nil),    // 4: yandex.cloud.video.v1.EpisodeSignURLAccessRights
-	(*timestamppb.Timestamp)(nil),         // 5: google.protobuf.Timestamp
+	(Episode_VisibilityStatus)(0),      // 0: yandex.cloud.video.v1.Episode.VisibilityStatus
+	(*Episode)(nil),                    // 1: yandex.cloud.video.v1.Episode
+	(*EpisodePublicAccessRights)(nil),  // 2: yandex.cloud.video.v1.EpisodePublicAccessRights
+	(*EpisodeSignURLAccessRights)(nil), // 3: yandex.cloud.video.v1.EpisodeSignURLAccessRights
+	(*timestamppb.Timestamp)(nil),      // 4: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_episode_proto_depIdxs = []int32{
-	5, // 0: yandex.cloud.video.v1.Episode.start_time:type_name -> google.protobuf.Timestamp
-	5, // 1: yandex.cloud.video.v1.Episode.finish_time:type_name -> google.protobuf.Timestamp
+	4, // 0: yandex.cloud.video.v1.Episode.start_time:type_name -> google.protobuf.Timestamp
+	4, // 1: yandex.cloud.video.v1.Episode.finish_time:type_name -> google.protobuf.Timestamp
 	0, // 2: yandex.cloud.video.v1.Episode.visibility_status:type_name -> yandex.cloud.video.v1.Episode.VisibilityStatus
 	2, // 3: yandex.cloud.video.v1.Episode.public_access:type_name -> yandex.cloud.video.v1.EpisodePublicAccessRights
-	3, // 4: yandex.cloud.video.v1.Episode.auth_system_access:type_name -> yandex.cloud.video.v1.EpisodeAuthSystemAccessRights
-	4, // 5: yandex.cloud.video.v1.Episode.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessRights
-	5, // 6: yandex.cloud.video.v1.Episode.created_at:type_name -> google.protobuf.Timestamp
-	5, // 7: yandex.cloud.video.v1.Episode.updated_at:type_name -> google.protobuf.Timestamp
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	3, // 4: yandex.cloud.video.v1.Episode.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessRights
+	4, // 5: yandex.cloud.video.v1.Episode.created_at:type_name -> google.protobuf.Timestamp
+	4, // 6: yandex.cloud.video.v1.Episode.updated_at:type_name -> google.protobuf.Timestamp
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_episode_proto_init() }
@@ -476,7 +444,6 @@ func file_yandex_cloud_video_v1_episode_proto_init() {
 	}
 	file_yandex_cloud_video_v1_episode_proto_msgTypes[0].OneofWrappers = []any{
 		(*Episode_PublicAccess)(nil),
-		(*Episode_AuthSystemAccess)(nil),
 		(*Episode_SignUrlAccess)(nil),
 	}
 	type x struct{}
@@ -485,7 +452,7 @@ func file_yandex_cloud_video_v1_episode_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_episode_proto_rawDesc), len(file_yandex_cloud_video_v1_episode_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

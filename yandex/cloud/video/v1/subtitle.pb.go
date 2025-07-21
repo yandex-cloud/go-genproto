@@ -22,14 +22,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Current processing status of the subtitle.
 type Subtitle_SubtitleStatus int32
 
 const (
-	// Subtitle status unspecified.
+	// The subtitle status is not specified.
 	Subtitle_SUBTITLE_STATUS_UNSPECIFIED Subtitle_SubtitleStatus = 0
-	// Waiting for all the bytes to be loaded.
+	// The subtitle file upload is in progress, waiting for all bytes to be received.
 	Subtitle_WAIT_UPLOADING Subtitle_SubtitleStatus = 1
-	// Uploading is complete.
+	// The subtitle file has been fully uploaded and is ready for use.
 	Subtitle_UPLOADED Subtitle_SubtitleStatus = 2
 )
 
@@ -74,14 +75,15 @@ func (Subtitle_SubtitleStatus) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_subtitle_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Source type representing how the subtitle was created or obtained.
 type Subtitle_SubtitleSourceType int32
 
 const (
-	// Subtitle source type unspecified.
+	// The subtitle source type is not specified.
 	Subtitle_SUBTITLE_SOURCE_TYPE_UNSPECIFIED Subtitle_SubtitleSourceType = 0
-	// Manually uploaded subtitle.
+	// The subtitle was manually created and uploaded by a user.
 	Subtitle_MANUAL Subtitle_SubtitleSourceType = 1
-	// Automatically generated subtitle.
+	// The subtitle was automatically generated through speech recognition.
 	Subtitle_GENERATED Subtitle_SubtitleSourceType = 2
 )
 
@@ -126,24 +128,29 @@ func (Subtitle_SubtitleSourceType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_subtitle_proto_rawDescGZIP(), []int{0, 1}
 }
 
+// Entity representing a subtitle track that can be associated with a video.
+// Subtitles provide text versions of the audio content, enabling accessibility
+// and multilingual support for video content.
 type Subtitle struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the subtitle.
+	// Unique identifier of the subtitle track.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Subtitle language represented as a three-letter code according to ISO 639-2/T.
+	// Language of the subtitle content according to ISO 639-2/T.
 	Language string `protobuf:"bytes,2,opt,name=language,proto3" json:"language,omitempty"`
-	// Subtitle caption to be displayed on screen during video playback.
+	// Display label for the subtitle track shown in the video player's subtitle selection menu.
 	Label string `protobuf:"bytes,3,opt,name=label,proto3" json:"label,omitempty"`
-	// Subtitle status.
+	// Current processing status of the subtitle.
 	Status Subtitle_SubtitleStatus `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.video.v1.Subtitle_SubtitleStatus" json:"status,omitempty"`
-	// Source type.
+	// Indicates how the subtitle was created or obtained.
 	SourceType Subtitle_SubtitleSourceType `protobuf:"varint,6,opt,name=source_type,json=sourceType,proto3,enum=yandex.cloud.video.v1.Subtitle_SubtitleSourceType" json:"source_type,omitempty"`
-	// Subtitle filename.
+	// Original filename of the subtitle file.
 	Filename string `protobuf:"bytes,5,opt,name=filename,proto3" json:"filename,omitempty"`
-	// Time when subtitle was created.
+	// Timestamp when the subtitle was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time of last subtitle update.
+	// Timestamp of the last modification to the subtitle or its metadata.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Specifies the parent content this subtitle is associated with.
+	//
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*Subtitle_VideoId
@@ -259,7 +266,7 @@ type isSubtitle_ParentId interface {
 }
 
 type Subtitle_VideoId struct {
-	// ID of the video.
+	// Identifier of the video this subtitle belongs to.
 	VideoId string `protobuf:"bytes,1000,opt,name=video_id,json=videoId,proto3,oneof"`
 }
 

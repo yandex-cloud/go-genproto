@@ -22,45 +22,42 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ClusterService_Get_FullMethodName            = "/yandex.cloud.metastore.v1.ClusterService/Get"
 	ClusterService_List_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/List"
-	ClusterService_ListOperations_FullMethodName = "/yandex.cloud.metastore.v1.ClusterService/ListOperations"
 	ClusterService_Create_FullMethodName         = "/yandex.cloud.metastore.v1.ClusterService/Create"
 	ClusterService_Update_FullMethodName         = "/yandex.cloud.metastore.v1.ClusterService/Update"
 	ClusterService_Delete_FullMethodName         = "/yandex.cloud.metastore.v1.ClusterService/Delete"
-	ClusterService_Stop_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/Stop"
 	ClusterService_Start_FullMethodName          = "/yandex.cloud.metastore.v1.ClusterService/Start"
+	ClusterService_Stop_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/Stop"
 	ClusterService_ImportData_FullMethodName     = "/yandex.cloud.metastore.v1.ClusterService/ImportData"
 	ClusterService_ExportData_FullMethodName     = "/yandex.cloud.metastore.v1.ClusterService/ExportData"
+	ClusterService_ListOperations_FullMethodName = "/yandex.cloud.metastore.v1.ClusterService/ListOperations"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Hive Metastore Cluster resources.
+// A set of methods for managing Metastore Cluster resources.
 type ClusterServiceClient interface {
-	// Returns the specified Hive Metastore Cluster resource.
-	//
-	// To get the list of available Hive Metastore Cluster resources, make a [List] request.
+	// Returns the specified Metastore Cluster.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves the list of Hive Metastore Cluster resources that belong
-	// to the specified folder.
+	// Retrieves a list of Metastore Clusters.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
+	// Creates a Metastore Cluster.
+	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the configuration of the specified Metastore Cluster.
+	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified Metastore Cluster.
+	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Starts the specified Metastore Cluster.
+	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Stops the specified Metastore Cluster.
+	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Imports data to the specified Metastore Cluster.
+	ImportData(ctx context.Context, in *ImportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Exports data from the specified Metastore Cluster.
+	ExportData(ctx context.Context, in *ExportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified Hive Metastore Cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
-	// Creates a Hive Metastore Cluster in the specified folder.
-	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates configuration of the specified Hive Metastore Cluster.
-	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Hive Metastore Cluster.
-	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stops the specified Hive Metastore Cluster.
-	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Starts the specified Hive a Metastore Cluster.
-	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Imports data to the specified Hive Metastore Cluster.
-	ImportData(ctx context.Context, in *ImportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Exports data from the specified Hive Metastore Cluster.
-	ExportData(ctx context.Context, in *ExportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type clusterServiceClient struct {
@@ -85,16 +82,6 @@ func (c *clusterServiceClient) List(ctx context.Context, in *ListClustersRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListClustersResponse)
 	err := c.cc.Invoke(ctx, ClusterService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterOperationsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListOperations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -131,20 +118,20 @@ func (c *clusterServiceClient) Delete(ctx context.Context, in *DeleteClusterRequ
 	return out, nil
 }
 
-func (c *clusterServiceClient) Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *clusterServiceClient) Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ClusterService_Stop_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ClusterService_Start_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *clusterServiceClient) Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *clusterServiceClient) Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ClusterService_Start_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ClusterService_Stop_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -171,35 +158,42 @@ func (c *clusterServiceClient) ExportData(ctx context.Context, in *ExportDataReq
 	return out, nil
 }
 
+func (c *clusterServiceClient) ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListClusterOperationsResponse)
+	err := c.cc.Invoke(ctx, ClusterService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Hive Metastore Cluster resources.
+// A set of methods for managing Metastore Cluster resources.
 type ClusterServiceServer interface {
-	// Returns the specified Hive Metastore Cluster resource.
-	//
-	// To get the list of available Hive Metastore Cluster resources, make a [List] request.
+	// Returns the specified Metastore Cluster.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves the list of Hive Metastore Cluster resources that belong
-	// to the specified folder.
+	// Retrieves a list of Metastore Clusters.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
+	// Creates a Metastore Cluster.
+	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
+	// Updates the configuration of the specified Metastore Cluster.
+	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
+	// Deletes the specified Metastore Cluster.
+	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
+	// Starts the specified Metastore Cluster.
+	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
+	// Stops the specified Metastore Cluster.
+	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Imports data to the specified Metastore Cluster.
+	ImportData(context.Context, *ImportDataRequest) (*operation.Operation, error)
+	// Exports data from the specified Metastore Cluster.
+	ExportData(context.Context, *ExportDataRequest) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified Hive Metastore Cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
-	// Creates a Hive Metastore Cluster in the specified folder.
-	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
-	// Updates configuration of the specified Hive Metastore Cluster.
-	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
-	// Deletes the specified Hive Metastore Cluster.
-	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Stops the specified Hive Metastore Cluster.
-	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Starts the specified Hive a Metastore Cluster.
-	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Imports data to the specified Hive Metastore Cluster.
-	ImportData(context.Context, *ImportDataRequest) (*operation.Operation, error)
-	// Exports data from the specified Hive Metastore Cluster.
-	ExportData(context.Context, *ExportDataRequest) (*operation.Operation, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have
@@ -215,9 +209,6 @@ func (UnimplementedClusterServiceServer) Get(context.Context, *GetClusterRequest
 func (UnimplementedClusterServiceServer) List(context.Context, *ListClustersRequest) (*ListClustersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
-}
 func (UnimplementedClusterServiceServer) Create(context.Context, *CreateClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
@@ -227,17 +218,20 @@ func (UnimplementedClusterServiceServer) Update(context.Context, *UpdateClusterR
 func (UnimplementedClusterServiceServer) Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterRequest) (*operation.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
-}
 func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
+}
+func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
 }
 func (UnimplementedClusterServiceServer) ImportData(context.Context, *ImportDataRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportData not implemented")
 }
 func (UnimplementedClusterServiceServer) ExportData(context.Context, *ExportDataRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportData not implemented")
+}
+func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedClusterServiceServer) testEmbeddedByValue() {}
 
@@ -291,24 +285,6 @@ func _ClusterService_List_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).List(ctx, req.(*ListClustersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterOperationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListOperations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListOperations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListOperations(ctx, req.(*ListClusterOperationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -367,24 +343,6 @@ func _ClusterService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopClusterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).Stop(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_Stop_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).Stop(ctx, req.(*StopClusterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ClusterService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartClusterRequest)
 	if err := dec(in); err != nil {
@@ -399,6 +357,24 @@ func _ClusterService_Start_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Start(ctx, req.(*StartClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Stop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_Stop_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Stop(ctx, req.(*StopClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -439,6 +415,24 @@ func _ClusterService_ExportData_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListOperations(ctx, req.(*ListClusterOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -455,10 +449,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_List_Handler,
 		},
 		{
-			MethodName: "ListOperations",
-			Handler:    _ClusterService_ListOperations_Handler,
-		},
-		{
 			MethodName: "Create",
 			Handler:    _ClusterService_Create_Handler,
 		},
@@ -471,12 +461,12 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_Delete_Handler,
 		},
 		{
-			MethodName: "Stop",
-			Handler:    _ClusterService_Stop_Handler,
-		},
-		{
 			MethodName: "Start",
 			Handler:    _ClusterService_Start_Handler,
+		},
+		{
+			MethodName: "Stop",
+			Handler:    _ClusterService_Stop_Handler,
 		},
 		{
 			MethodName: "ImportData",
@@ -485,6 +475,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportData",
 			Handler:    _ClusterService_ExportData_Handler,
+		},
+		{
+			MethodName: "ListOperations",
+			Handler:    _ClusterService_ListOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

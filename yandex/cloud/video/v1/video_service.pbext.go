@@ -84,6 +84,10 @@ func (m *CreateVideoRequest) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
 }
 
+func (m *CreateVideoRequest) SetStylePresetId(v string) {
+	m.StylePresetId = v
+}
+
 func (m *CreateVideoRequest) SetAutoPublish(v *wrapperspb.BoolValue) {
 	m.AutoPublish = v
 }
@@ -154,6 +158,10 @@ func (m *UpdateVideoRequest) SetThumbnailId(v string) {
 
 func (m *UpdateVideoRequest) SetAutoTranscode(v AutoTranscode) {
 	m.AutoTranscode = v
+}
+
+func (m *UpdateVideoRequest) SetStylePresetId(v string) {
+	m.StylePresetId = v
 }
 
 func (m *UpdateVideoRequest) SetEnableAd(v *wrapperspb.BoolValue) {

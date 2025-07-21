@@ -54,6 +54,10 @@ func (m *CreatePlaylistRequest) SetItems(v []*PlaylistItem) {
 	m.Items = v
 }
 
+func (m *CreatePlaylistRequest) SetStylePresetId(v string) {
+	m.StylePresetId = v
+}
+
 func (m *CreatePlaylistMetadata) SetPlaylistId(v string) {
 	m.PlaylistId = v
 }
@@ -76,6 +80,10 @@ func (m *UpdatePlaylistRequest) SetDescription(v string) {
 
 func (m *UpdatePlaylistRequest) SetItems(v []*PlaylistItem) {
 	m.Items = v
+}
+
+func (m *UpdatePlaylistRequest) SetStylePresetId(v string) {
+	m.StylePresetId = v
 }
 
 func (m *UpdatePlaylistMetadata) SetPlaylistId(v string) {

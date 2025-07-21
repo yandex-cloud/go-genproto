@@ -29,7 +29,7 @@ const (
 
 type GetChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel to retrieve.
 	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -74,30 +74,32 @@ func (x *GetChannelRequest) GetChannelId() string {
 
 type ListChannelsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the organization.
+	// ID of the organization containing the channels to list.
 	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// The maximum number of the results per page to return.
-	// Default value: 100.
+	// The maximum number of channels to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for getting the next page of the result.
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListChannelsResponse.
 	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// By which column the listing should be ordered and in which direction,
-	// format is "<field> <order>" (e.g. "createdAt desc").
+	// Specifies the ordering of results.
+	// Format is "<field> <order>" (e.g., "createdAt desc").
 	// Default: "id asc".
-	// Possible fields: ["id", "title", "createdAt", "updatedAt"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported fields: ["id", "title", "createdAt", "updatedAt"].
+	// Both snake_case and camelCase field names are supported.
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	// Filter expression that filters resources listed in the response.
-	// Expressions are composed of terms connected by logic operators.
-	// If value contains spaces or quotes,
-	// it should be in quotes (`'` or `"`) with the inner quotes being backslash escaped.
+	// Filter expression to narrow down the list of returned channels.
+	// Expressions consist of terms connected by logical operators.
+	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
+	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
-	// Supported string match operators: ["=", "!=", ":"].
-	// Operator ":" stands for substring matching.
-	// Filter expressions may also contain parentheses to group logical operands.
-	// Example: `key1='value' AND (key2!='\'value\” OR key2:"\"value\"")`
-	// Supported fields: ["id", "title"].
-	// Both snake_case and camelCase are supported for fields.
+	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
+	// Parentheses can be used to group logical expressions.
+	//
+	// Example: `title:'news' AND id!='channel-123'`
+	//
+	// Filterable fields: ["id", "title"].
+	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -170,9 +172,11 @@ func (x *ListChannelsRequest) GetFilter() string {
 
 type ListChannelsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of channels for specific organization.
+	// List of channels matching the request criteria.
+	// May be empty if no channels match the criteria or if the organization has no channels.
 	Channels []*Channel `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
-	// Token for getting the next page.
+	// Token for retrieving the next page of results.
+	// Empty if there are no more results available.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -224,15 +228,19 @@ func (x *ListChannelsResponse) GetNextPageToken() string {
 
 type CreateChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the organization.
+	// ID of the organization where the channel will be created.
 	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Channel title.
+	// Title of the channel to be displayed in interfaces.
 	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	// Channel description.
+	// Detailed description of the channel's purpose and content.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom user-defined labels as key:value pairs.
+	// Maximum 64 labels per channel.
+	// Keys must be lowercase alphanumeric strings with optional hyphens/underscores.
+	// Values can contain alphanumeric characters and various symbols.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Channel settings.
+	// Configuration settings for the channel's behavior and features.
+	// Includes settings for advertisements, content cleanup, and Referer verification.
 	Settings      *ChannelSettings `protobuf:"bytes,201,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -305,7 +313,7 @@ func (x *CreateChannelRequest) GetSettings() *ChannelSettings {
 
 type CreateChannelMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel being created.
 	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -350,17 +358,25 @@ func (x *CreateChannelMetadata) GetChannelId() string {
 
 type UpdateChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel to update.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Field mask that specifies which fields of the channel are going to be updated.
+	// Field mask specifying which fields of the channel should be updated.
+	// Only fields specified in this mask will be modified;
+	// all other fields will retain their current values.
+	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	// Channel title.
+	// New title for the channel.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Channel description.
+	// New description for the channel.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels as “ key:value “ pairs. Maximum 64 per resource.
+	// New default style preset ID for the channel.
+	// This preset will be applied to new videos created in this channel unless explicitly overridden.
+	DefaultStylePresetId string `protobuf:"bytes,5,opt,name=default_style_preset_id,json=defaultStylePresetId,proto3" json:"default_style_preset_id,omitempty"`
+	// New custom labels for the channel as `key:value` pairs.
+	// Maximum 64 labels per channel.
+	// If provided, replaces all existing labels.
 	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Channel settings.
+	// New configuration settings for the channel's behavior and features.
 	Settings      *ChannelSettings `protobuf:"bytes,201,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -424,6 +440,13 @@ func (x *UpdateChannelRequest) GetDescription() string {
 	return ""
 }
 
+func (x *UpdateChannelRequest) GetDefaultStylePresetId() string {
+	if x != nil {
+		return x.DefaultStylePresetId
+	}
+	return ""
+}
+
 func (x *UpdateChannelRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
@@ -440,7 +463,7 @@ func (x *UpdateChannelRequest) GetSettings() *ChannelSettings {
 
 type UpdateChannelMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel being updated.
 	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -485,7 +508,9 @@ func (x *UpdateChannelMetadata) GetChannelId() string {
 
 type DeleteChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel to delete.
+	// Deleting a channel will also delete all its content,
+	// including videos, streams, and related resources.
 	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -530,7 +555,8 @@ func (x *DeleteChannelRequest) GetChannelId() string {
 
 type DeleteChannelMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the channel.
+	// ID of the channel being deleted.
+	// This identifier can be used to track the channel deletion operation.
 	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -575,9 +601,11 @@ func (x *DeleteChannelMetadata) GetChannelId() string {
 
 type BatchDeleteChannelsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the organization.
+	// ID of the organization containing the channels to delete.
 	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// List of channel IDs.
+	// List of channel IDs to delete.
+	// Deleting channels will also delete all their content,
+	// including videos, streams, and related resources.
 	ChannelIds    []string `protobuf:"bytes,2,rep,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -629,7 +657,9 @@ func (x *BatchDeleteChannelsRequest) GetChannelIds() []string {
 
 type BatchDeleteChannelsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of channel IDs.
+	// List of channel IDs being deleted.
+	// This list can be used to track which channels are included
+	// in the batch deletion operation.
 	ChannelIds    []string `protobuf:"bytes,1,rep,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -703,7 +733,7 @@ const file_yandex_cloud_video_v1_channel_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x04\x10\xc8\x01\"6\n" +
 	"\x15CreateChannelMetadata\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xf1\x03\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa8\x04\n" +
 	"\x14UpdateChannelRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12?\n" +
@@ -711,12 +741,13 @@ const file_yandex_cloud_video_v1_channel_service_proto_rawDesc = "" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
 	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12\x94\x01\n" +
+	"\x8a\xc81\x06<=4000R\vdescription\x125\n" +
+	"\x17default_style_preset_id\x18\x05 \x01(\tR\x14defaultStylePresetId\x12\x94\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v27.yandex.cloud.video.v1.UpdateChannelRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12C\n" +
 	"\bsettings\x18\xc9\x01 \x01(\v2&.yandex.cloud.video.v1.ChannelSettingsR\bsettings\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x05\x10\xc8\x01\"6\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x06\x10\xc8\x01\"6\n" +
 	"\x15UpdateChannelMetadata\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\"C\n" +

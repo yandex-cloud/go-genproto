@@ -52,15 +52,13 @@ func (m *Episode) SetVisibilityStatus(v Episode_VisibilityStatus) {
 	m.VisibilityStatus = v
 }
 
+func (m *Episode) SetStylePresetId(v string) {
+	m.StylePresetId = v
+}
+
 func (m *Episode) SetPublicAccess(v *EpisodePublicAccessRights) {
 	m.AccessRights = &Episode_PublicAccess{
 		PublicAccess: v,
-	}
-}
-
-func (m *Episode) SetAuthSystemAccess(v *EpisodeAuthSystemAccessRights) {
-	m.AccessRights = &Episode_AuthSystemAccess{
-		AuthSystemAccess: v,
 	}
 }
 

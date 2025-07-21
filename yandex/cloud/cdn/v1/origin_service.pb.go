@@ -202,7 +202,9 @@ type CreateOriginRequest struct {
 	// Default value: False.
 	Backup *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up origin of the content.
-	Meta          *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
+	Meta *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
+	// RESERVED: This field is reserved for future use and should not be used at this time.
+	ProviderType  string `protobuf:"bytes,7,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -277,6 +279,13 @@ func (x *CreateOriginRequest) GetMeta() *OriginMeta {
 		return x.Meta
 	}
 	return nil
+}
+
+func (x *CreateOriginRequest) GetProviderType() string {
+	if x != nil {
+		return x.ProviderType
+	}
+	return ""
 }
 
 type CreateOriginMetadata struct {
@@ -601,14 +610,15 @@ const file_yandex_cloud_cdn_v1_origin_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12.\n" +
 	"\x0forigin_group_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\roriginGroupId\"L\n" +
 	"\x13ListOriginsResponse\x125\n" +
-	"\aorigins\x18\x01 \x03(\v2\x1b.yandex.cloud.cdn.v1.OriginR\aorigins\"\xb5\x02\n" +
+	"\aorigins\x18\x01 \x03(\v2\x1b.yandex.cloud.cdn.v1.OriginR\aorigins\"\xda\x02\n" +
 	"\x13CreateOriginRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12.\n" +
 	"\x0forigin_group_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\roriginGroupId\x12$\n" +
 	"\x06source\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06source\x124\n" +
 	"\aenabled\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
 	"\x06backup\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x06backup\x123\n" +
-	"\x04meta\x18\x06 \x01(\v2\x1f.yandex.cloud.cdn.v1.OriginMetaR\x04meta\"k\n" +
+	"\x04meta\x18\x06 \x01(\v2\x1f.yandex.cloud.cdn.v1.OriginMetaR\x04meta\x12#\n" +
+	"\rprovider_type\x18\a \x01(\tR\fproviderType\"k\n" +
 	"\x14CreateOriginMetadata\x12#\n" +
 	"\torigin_id\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0R\boriginId\x12.\n" +
 	"\x0forigin_group_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\roriginGroupId\"\xe4\x01\n" +

@@ -30,10 +30,6 @@ func (m *StreamLine) SetTitle(v string) {
 	m.Title = v
 }
 
-func (m *StreamLine) SetThumbnailId(v string) {
-	m.ThumbnailId = v
-}
-
 func (m *StreamLine) SetRtmpPush(v *RTMPPushInput) {
 	m.InputType = &StreamLine_RtmpPush{
 		RtmpPush: v,

@@ -437,7 +437,11 @@ type Resource struct {
 	// SSL certificate options.
 	SslCertificate *SSLCertificate `protobuf:"bytes,12,opt,name=ssl_certificate,json=sslCertificate,proto3" json:"ssl_certificate,omitempty"`
 	// Labels of the resource.
-	Labels        map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// RESERVED: This field is reserved for future use and should not be used at this time.
+	ProviderType string `protobuf:"bytes,14,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
+	// RESERVED: Provider CNAME.
+	ProviderCname string `protobuf:"bytes,15,opt,name=provider_cname,json=providerCname,proto3" json:"provider_cname,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -561,6 +565,20 @@ func (x *Resource) GetLabels() map[string]string {
 		return x.Labels
 	}
 	return nil
+}
+
+func (x *Resource) GetProviderType() string {
+	if x != nil {
+		return x.ProviderType
+	}
+	return ""
+}
+
+func (x *Resource) GetProviderCname() string {
+	if x != nil {
+		return x.ProviderCname
+	}
+	return ""
 }
 
 // A major set of various resource options.
@@ -2224,7 +2242,7 @@ const file_yandex_cloud_cdn_v1_resource_proto_rawDesc = "" +
 	"\n" +
 	"\"yandex/cloud/cdn/v1/resource.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1fgoogle/protobuf/timestamp.proto\",\n" +
 	"\x12SecondaryHostnames\x12\x16\n" +
-	"\x06values\x18\x01 \x03(\tR\x06values\"\xba\x05\n" +
+	"\x06values\x18\x01 \x03(\tR\x06values\"\x86\x06\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x14\n" +
@@ -2241,7 +2259,9 @@ const file_yandex_cloud_cdn_v1_resource_proto_rawDesc = "" +
 	" \x01(\tR\x0foriginGroupName\x12L\n" +
 	"\x0forigin_protocol\x18\v \x01(\x0e2#.yandex.cloud.cdn.v1.OriginProtocolR\x0eoriginProtocol\x12L\n" +
 	"\x0fssl_certificate\x18\f \x01(\v2#.yandex.cloud.cdn.v1.SSLCertificateR\x0esslCertificate\x12A\n" +
-	"\x06labels\x18\r \x03(\v2).yandex.cloud.cdn.v1.Resource.LabelsEntryR\x06labels\x1a9\n" +
+	"\x06labels\x18\r \x03(\v2).yandex.cloud.cdn.v1.Resource.LabelsEntryR\x06labels\x12#\n" +
+	"\rprovider_type\x18\x0e \x01(\tR\fproviderType\x12%\n" +
+	"\x0eprovider_cname\x18\x0f \x01(\tR\rproviderCname\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xfd%\n" +

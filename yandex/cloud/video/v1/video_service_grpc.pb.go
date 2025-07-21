@@ -39,30 +39,47 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Video management service.
+// Provides methods for creating, retrieving, updating, and deleting videos,
+// as well as managing video-related operations such as transcoding, publishing,
+// and generating playback URLs.
 type VideoServiceClient interface {
-	// Get the specific video.
+	// Retrieves detailed information about a specific video by its ID.
+	// Returns all video metadata, status, and related information.
 	Get(ctx context.Context, in *GetVideoRequest, opts ...grpc.CallOption) (*Video, error)
-	// List videos for channel.
+	// Lists all videos in a specific channel with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(ctx context.Context, in *ListVideoRequest, opts ...grpc.CallOption) (*ListVideoResponse, error)
-	// Batch get videos in specific channel.
+	// Retrieves multiple videos by their IDs in a specific channel in a single request.
+	// This is more efficient than making multiple Get requests when retrieving several videos.
 	BatchGet(ctx context.Context, in *BatchGetVideosRequest, opts ...grpc.CallOption) (*BatchGetVideosResponse, error)
-	// Create video.
+	// Creates a new video in the specified channel.
+	// The video can be created from different sources: TUS upload, direct link, or S3 storage.
 	Create(ctx context.Context, in *CreateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Update video.
+	// Updates an existing video's metadata and settings.
+	// Only fields specified in the field_mask will be updated.
 	Update(ctx context.Context, in *UpdateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Transcode video.
+	// Initiates or updates video transcoding with specified parameters.
+	// Can be used to start transcoding for videos with auto_transcode=DISABLE,
+	// or to re-process a completed video with new transcoding settings.
+	// Supports additional features like subtitle processing, translation, and summarization.
 	Transcode(ctx context.Context, in *TranscodeVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Delete video.
+	// Deletes a specific video by its ID.
 	Delete(ctx context.Context, in *DeleteVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete videos.
+	// Deletes multiple videos in a specific channel in a single request.
+	// This is more efficient than making multiple Delete requests when removing several videos.
 	BatchDelete(ctx context.Context, in *BatchDeleteVideosRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Perform an action on the video.
+	// Performs a specific action on a video, such as publishing or unpublishing.
 	PerformAction(ctx context.Context, in *PerformVideoActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Get player url.
+	// Generates a standard player URL for watching the video.
+	// The URL respects the video's access rights and can include custom player parameters.
+	// For videos with signed URL access, an expiration duration can be specified.
 	GetPlayerURL(ctx context.Context, in *GetVideoPlayerURLRequest, opts ...grpc.CallOption) (*GetVideoPlayerURLResponse, error)
-	// Batch get player urls.
+	// Generates multiple player URLs for a list of videos in a specific channel in a single request.
+	// This is more efficient than making multiple GetPlayerURL requests when retrieving several URLs.
 	BatchGetPlayerURLs(ctx context.Context, in *BatchGetVideoPlayerURLsRequest, opts ...grpc.CallOption) (*BatchGetVideoPlayerURLsResponse, error)
-	// Get manifest urls.
+	// Retrieves the manifest URLs for a specific video.
+	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
+	// Supports different manifest types (HLS, DASH) and configuration parameters.
 	GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error)
 }
 
@@ -199,30 +216,47 @@ func (c *videoServiceClient) GetManifests(ctx context.Context, in *GetVideoManif
 // for forward compatibility.
 //
 // Video management service.
+// Provides methods for creating, retrieving, updating, and deleting videos,
+// as well as managing video-related operations such as transcoding, publishing,
+// and generating playback URLs.
 type VideoServiceServer interface {
-	// Get the specific video.
+	// Retrieves detailed information about a specific video by its ID.
+	// Returns all video metadata, status, and related information.
 	Get(context.Context, *GetVideoRequest) (*Video, error)
-	// List videos for channel.
+	// Lists all videos in a specific channel with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(context.Context, *ListVideoRequest) (*ListVideoResponse, error)
-	// Batch get videos in specific channel.
+	// Retrieves multiple videos by their IDs in a specific channel in a single request.
+	// This is more efficient than making multiple Get requests when retrieving several videos.
 	BatchGet(context.Context, *BatchGetVideosRequest) (*BatchGetVideosResponse, error)
-	// Create video.
+	// Creates a new video in the specified channel.
+	// The video can be created from different sources: TUS upload, direct link, or S3 storage.
 	Create(context.Context, *CreateVideoRequest) (*operation.Operation, error)
-	// Update video.
+	// Updates an existing video's metadata and settings.
+	// Only fields specified in the field_mask will be updated.
 	Update(context.Context, *UpdateVideoRequest) (*operation.Operation, error)
-	// Transcode video.
+	// Initiates or updates video transcoding with specified parameters.
+	// Can be used to start transcoding for videos with auto_transcode=DISABLE,
+	// or to re-process a completed video with new transcoding settings.
+	// Supports additional features like subtitle processing, translation, and summarization.
 	Transcode(context.Context, *TranscodeVideoRequest) (*operation.Operation, error)
-	// Delete video.
+	// Deletes a specific video by its ID.
 	Delete(context.Context, *DeleteVideoRequest) (*operation.Operation, error)
-	// Batch delete videos.
+	// Deletes multiple videos in a specific channel in a single request.
+	// This is more efficient than making multiple Delete requests when removing several videos.
 	BatchDelete(context.Context, *BatchDeleteVideosRequest) (*operation.Operation, error)
-	// Perform an action on the video.
+	// Performs a specific action on a video, such as publishing or unpublishing.
 	PerformAction(context.Context, *PerformVideoActionRequest) (*operation.Operation, error)
-	// Get player url.
+	// Generates a standard player URL for watching the video.
+	// The URL respects the video's access rights and can include custom player parameters.
+	// For videos with signed URL access, an expiration duration can be specified.
 	GetPlayerURL(context.Context, *GetVideoPlayerURLRequest) (*GetVideoPlayerURLResponse, error)
-	// Batch get player urls.
+	// Generates multiple player URLs for a list of videos in a specific channel in a single request.
+	// This is more efficient than making multiple GetPlayerURL requests when retrieving several URLs.
 	BatchGetPlayerURLs(context.Context, *BatchGetVideoPlayerURLsRequest) (*BatchGetVideoPlayerURLsResponse, error)
-	// Get manifest urls.
+	// Retrieves the manifest URLs for a specific video.
+	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
+	// Supports different manifest types (HLS, DASH) and configuration parameters.
 	GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error)
 }
 

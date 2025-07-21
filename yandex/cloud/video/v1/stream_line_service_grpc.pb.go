@@ -37,26 +37,37 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Stream line management service.
+// Provides methods for creating, retrieving, updating, and deleting stream lines,
+// which define the technical configuration for receiving and processing video signals.
 type StreamLineServiceClient interface {
-	// Get the specific stream line.
+	// Retrieves detailed information about a specific stream line by its ID.
+	// Returns all stream line metadata, configuration, and related information.
 	Get(ctx context.Context, in *GetStreamLineRequest, opts ...grpc.CallOption) (*StreamLine, error)
-	// List lines for channel.
+	// Lists all stream lines in a specific channel with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(ctx context.Context, in *ListStreamLinesRequest, opts ...grpc.CallOption) (*ListStreamLinesResponse, error)
-	// Batch get lines for channel.
+	// Retrieves multiple stream lines by their IDs in a specific channel in a single request.
+	// This is more efficient than making multiple Get requests when retrieving several stream lines.
 	BatchGet(ctx context.Context, in *BatchGetStreamLinesRequest, opts ...grpc.CallOption) (*BatchGetStreamLinesResponse, error)
-	// Create stream line.
+	// Creates a new stream line in the specified channel with the provided configuration.
+	// Stream lines define the technical settings for receiving and processing video signals.
 	Create(ctx context.Context, in *CreateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Update stream line.
+	// Updates an existing stream line's metadata and configuration.
+	// Only fields specified in the field_mask will be updated.
 	Update(ctx context.Context, in *UpdateStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Delete stream line.
+	// Deletes a specific stream line by its ID.
 	Delete(ctx context.Context, in *DeleteStreamLineRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete stream lines.
+	// Deletes multiple stream lines in a specific channel in a single request.
+	// This is more efficient than making multiple Delete requests when removing several stream lines.
 	BatchDelete(ctx context.Context, in *BatchDeleteStreamLinesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Perform an action on the line.
+	// Performs a specific action on a stream line, such as activation or deactivation.
+	// Actions change the stream line's state without modifying its configuration.
 	PerformAction(ctx context.Context, in *PerformLineActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Get unique stream key.
+	// Retrieves the unique stream key for a push-type stream line.
+	// This key is used to authenticate when pushing video streams to the platform.
 	GetStreamKey(ctx context.Context, in *GetStreamKeyRequest, opts ...grpc.CallOption) (*PushStreamKey, error)
-	// Update stream key.
+	// Regenerates and updates the stream key for a push-type stream line.
+	// This is useful for security purposes when the existing key may be compromised.
 	UpdateStreamKey(ctx context.Context, in *UpdateStreamKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -173,26 +184,37 @@ func (c *streamLineServiceClient) UpdateStreamKey(ctx context.Context, in *Updat
 // for forward compatibility.
 //
 // Stream line management service.
+// Provides methods for creating, retrieving, updating, and deleting stream lines,
+// which define the technical configuration for receiving and processing video signals.
 type StreamLineServiceServer interface {
-	// Get the specific stream line.
+	// Retrieves detailed information about a specific stream line by its ID.
+	// Returns all stream line metadata, configuration, and related information.
 	Get(context.Context, *GetStreamLineRequest) (*StreamLine, error)
-	// List lines for channel.
+	// Lists all stream lines in a specific channel with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(context.Context, *ListStreamLinesRequest) (*ListStreamLinesResponse, error)
-	// Batch get lines for channel.
+	// Retrieves multiple stream lines by their IDs in a specific channel in a single request.
+	// This is more efficient than making multiple Get requests when retrieving several stream lines.
 	BatchGet(context.Context, *BatchGetStreamLinesRequest) (*BatchGetStreamLinesResponse, error)
-	// Create stream line.
+	// Creates a new stream line in the specified channel with the provided configuration.
+	// Stream lines define the technical settings for receiving and processing video signals.
 	Create(context.Context, *CreateStreamLineRequest) (*operation.Operation, error)
-	// Update stream line.
+	// Updates an existing stream line's metadata and configuration.
+	// Only fields specified in the field_mask will be updated.
 	Update(context.Context, *UpdateStreamLineRequest) (*operation.Operation, error)
-	// Delete stream line.
+	// Deletes a specific stream line by its ID.
 	Delete(context.Context, *DeleteStreamLineRequest) (*operation.Operation, error)
-	// Batch delete stream lines.
+	// Deletes multiple stream lines in a specific channel in a single request.
+	// This is more efficient than making multiple Delete requests when removing several stream lines.
 	BatchDelete(context.Context, *BatchDeleteStreamLinesRequest) (*operation.Operation, error)
-	// Perform an action on the line.
+	// Performs a specific action on a stream line, such as activation or deactivation.
+	// Actions change the stream line's state without modifying its configuration.
 	PerformAction(context.Context, *PerformLineActionRequest) (*operation.Operation, error)
-	// Get unique stream key.
+	// Retrieves the unique stream key for a push-type stream line.
+	// This key is used to authenticate when pushing video streams to the platform.
 	GetStreamKey(context.Context, *GetStreamKeyRequest) (*PushStreamKey, error)
-	// Update stream key.
+	// Regenerates and updates the stream key for a push-type stream line.
+	// This is useful for security purposes when the existing key may be compromised.
 	UpdateStreamKey(context.Context, *UpdateStreamKeyRequest) (*operation.Operation, error)
 }
 

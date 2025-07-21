@@ -41,6 +41,8 @@ const (
 	// Server encountered a problem and cannot operate.
 	Server_ERROR Server_Status = 7
 	// Server is being deleted.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
 	Server_DELETING Server_Status = 8
 	// Server operating system is being reinstalled.
 	Server_REINSTALLING Server_Status = 9
@@ -548,7 +550,7 @@ var File_yandex_cloud_baremetal_v1alpha_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\"\x82\b\n" +
+	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\"\x86\b\n" +
 	"\x06Server\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
@@ -569,7 +571,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\x06labels\x18\xc8\x01 \x03(\v22.yandex.cloud.baremetal.v1alpha.Server.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd4\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd8\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROVISIONING\x10\x01\x12\f\n" +
@@ -578,8 +580,8 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\bSTARTING\x10\x05\x12\x0e\n" +
 	"\n" +
 	"RESTARTING\x10\x06\x12\t\n" +
-	"\x05ERROR\x10\a\x12\f\n" +
-	"\bDELETING\x10\b\x12\x10\n" +
+	"\x05ERROR\x10\a\x12\x10\n" +
+	"\bDELETING\x10\b\x1a\x02\b\x01\x12\x10\n" +
 	"\fREINSTALLING\x10\t\x12\f\n" +
 	"\bUPDATING\x10\n" +
 	"\x12\x0f\n" +

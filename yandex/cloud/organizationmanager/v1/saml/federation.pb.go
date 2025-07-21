@@ -79,6 +79,226 @@ func (BindingType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{0}
 }
 
+// Status of the domain.
+type Domain_Status int32
+
+const (
+	Domain_STATUS_UNSPECIFIED Domain_Status = 0
+	// Domain requires ownership validation.
+	Domain_NEED_TO_VALIDATE Domain_Status = 1
+	// Domain validation is in progress.
+	Domain_VALIDATING Domain_Status = 2
+	// Domain has been successfully validated and is active.
+	Domain_VALID Domain_Status = 3
+	// Domain validation failed (check status_code for details).
+	Domain_INVALID Domain_Status = 4
+	// Domain is being deleted.
+	Domain_DELETING Domain_Status = 5
+)
+
+// Enum value maps for Domain_Status.
+var (
+	Domain_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "NEED_TO_VALIDATE",
+		2: "VALIDATING",
+		3: "VALID",
+		4: "INVALID",
+		5: "DELETING",
+	}
+	Domain_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"NEED_TO_VALIDATE":   1,
+		"VALIDATING":         2,
+		"VALID":              3,
+		"INVALID":            4,
+		"DELETING":           5,
+	}
+)
+
+func (x Domain_Status) Enum() *Domain_Status {
+	p := new(Domain_Status)
+	*p = x
+	return p
+}
+
+func (x Domain_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Domain_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[1].Descriptor()
+}
+
+func (Domain_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[1]
+}
+
+func (x Domain_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Domain_Status.Descriptor instead.
+func (Domain_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{2, 0}
+}
+
+// Type of validation challenge.
+type DomainChallenge_Type int32
+
+const (
+	DomainChallenge_TYPE_UNSPECIFIED DomainChallenge_Type = 0
+	// DNS TXT record validation method.
+	DomainChallenge_DNS_TXT DomainChallenge_Type = 1
+)
+
+// Enum value maps for DomainChallenge_Type.
+var (
+	DomainChallenge_Type_name = map[int32]string{
+		0: "TYPE_UNSPECIFIED",
+		1: "DNS_TXT",
+	}
+	DomainChallenge_Type_value = map[string]int32{
+		"TYPE_UNSPECIFIED": 0,
+		"DNS_TXT":          1,
+	}
+)
+
+func (x DomainChallenge_Type) Enum() *DomainChallenge_Type {
+	p := new(DomainChallenge_Type)
+	*p = x
+	return p
+}
+
+func (x DomainChallenge_Type) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DomainChallenge_Type) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[2].Descriptor()
+}
+
+func (DomainChallenge_Type) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[2]
+}
+
+func (x DomainChallenge_Type) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DomainChallenge_Type.Descriptor instead.
+func (DomainChallenge_Type) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{3, 0}
+}
+
+// Status of the validation challenge.
+type DomainChallenge_Status int32
+
+const (
+	DomainChallenge_STATUS_UNSPECIFIED DomainChallenge_Status = 0
+	// Challenge is awaiting completion.
+	DomainChallenge_PENDING DomainChallenge_Status = 1
+	// Challenge verification is in progress.
+	DomainChallenge_PROCESSING DomainChallenge_Status = 2
+	// Challenge has been completed successfully.
+	DomainChallenge_VALID DomainChallenge_Status = 3
+	// Challenge verification failed.
+	DomainChallenge_INVALID DomainChallenge_Status = 4
+)
+
+// Enum value maps for DomainChallenge_Status.
+var (
+	DomainChallenge_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "PENDING",
+		2: "PROCESSING",
+		3: "VALID",
+		4: "INVALID",
+	}
+	DomainChallenge_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"PENDING":            1,
+		"PROCESSING":         2,
+		"VALID":              3,
+		"INVALID":            4,
+	}
+)
+
+func (x DomainChallenge_Status) Enum() *DomainChallenge_Status {
+	p := new(DomainChallenge_Status)
+	*p = x
+	return p
+}
+
+func (x DomainChallenge_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DomainChallenge_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[3].Descriptor()
+}
+
+func (DomainChallenge_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[3]
+}
+
+func (x DomainChallenge_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DomainChallenge_Status.Descriptor instead.
+func (DomainChallenge_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{3, 1}
+}
+
+// Type of DNS record.
+type DomainChallenge_DnsRecord_Type int32
+
+const (
+	DomainChallenge_DnsRecord_TYPE_UNSPECIFIED DomainChallenge_DnsRecord_Type = 0
+	// TXT record type.
+	DomainChallenge_DnsRecord_TXT DomainChallenge_DnsRecord_Type = 1
+)
+
+// Enum value maps for DomainChallenge_DnsRecord_Type.
+var (
+	DomainChallenge_DnsRecord_Type_name = map[int32]string{
+		0: "TYPE_UNSPECIFIED",
+		1: "TXT",
+	}
+	DomainChallenge_DnsRecord_Type_value = map[string]int32{
+		"TYPE_UNSPECIFIED": 0,
+		"TXT":              1,
+	}
+)
+
+func (x DomainChallenge_DnsRecord_Type) Enum() *DomainChallenge_DnsRecord_Type {
+	p := new(DomainChallenge_DnsRecord_Type)
+	*p = x
+	return p
+}
+
+func (x DomainChallenge_DnsRecord_Type) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DomainChallenge_DnsRecord_Type) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[4].Descriptor()
+}
+
+func (DomainChallenge_DnsRecord_Type) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes[4]
+}
+
+func (x DomainChallenge_DnsRecord_Type) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DomainChallenge_DnsRecord_Type.Descriptor instead.
+func (DomainChallenge_DnsRecord_Type) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{3, 0, 0}
+}
+
 // A federation.
 // For more information, see [SAML-compatible identity federations](/docs/iam/concepts/federations).
 type Federation struct {
@@ -301,6 +521,268 @@ func (x *FederationSecuritySettings) GetForceAuthn() bool {
 	return false
 }
 
+// A domain.
+type Domain struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Domain name
+	Domain string `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	// Current status of the domain.
+	Status Domain_Status `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.organizationmanager.v1.saml.Domain_Status" json:"status,omitempty"`
+	// Optional code providing details about validation errors.
+	StatusCode string `protobuf:"bytes,3,opt,name=status_code,json=statusCode,proto3" json:"status_code,omitempty"`
+	// Timestamp of domain creation.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Timestamp when the domain was successfully validated.
+	// Not set if validation hasn't been completed.
+	ValidatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=validated_at,json=validatedAt,proto3" json:"validated_at,omitempty"`
+	// List of challenges to confirm domain ownership.
+	Challenges    []*DomainChallenge `protobuf:"bytes,6,rep,name=challenges,proto3" json:"challenges,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Domain) Reset() {
+	*x = Domain{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Domain) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Domain) ProtoMessage() {}
+
+func (x *Domain) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Domain.ProtoReflect.Descriptor instead.
+func (*Domain) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Domain) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *Domain) GetStatus() Domain_Status {
+	if x != nil {
+		return x.Status
+	}
+	return Domain_STATUS_UNSPECIFIED
+}
+
+func (x *Domain) GetStatusCode() string {
+	if x != nil {
+		return x.StatusCode
+	}
+	return ""
+}
+
+func (x *Domain) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Domain) GetValidatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ValidatedAt
+	}
+	return nil
+}
+
+func (x *Domain) GetChallenges() []*DomainChallenge {
+	if x != nil {
+		return x.Challenges
+	}
+	return nil
+}
+
+// A domain validation challenge.
+type DomainChallenge struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Timestamp of challenge creation.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Timestamp of the last challenge status update.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Type of the validation challenge.
+	Type DomainChallenge_Type `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.organizationmanager.v1.saml.DomainChallenge_Type" json:"type,omitempty"`
+	// Current status of the challenge.
+	Status DomainChallenge_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.organizationmanager.v1.saml.DomainChallenge_Status" json:"status,omitempty"`
+	// Validation challenge payload. Currently supports only DNS records.
+	//
+	// Types that are valid to be assigned to Challenge:
+	//
+	//	*DomainChallenge_DnsChallenge
+	Challenge     isDomainChallenge_Challenge `protobuf_oneof:"challenge"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DomainChallenge) Reset() {
+	*x = DomainChallenge{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DomainChallenge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DomainChallenge) ProtoMessage() {}
+
+func (x *DomainChallenge) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DomainChallenge.ProtoReflect.Descriptor instead.
+func (*DomainChallenge) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DomainChallenge) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *DomainChallenge) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *DomainChallenge) GetType() DomainChallenge_Type {
+	if x != nil {
+		return x.Type
+	}
+	return DomainChallenge_TYPE_UNSPECIFIED
+}
+
+func (x *DomainChallenge) GetStatus() DomainChallenge_Status {
+	if x != nil {
+		return x.Status
+	}
+	return DomainChallenge_STATUS_UNSPECIFIED
+}
+
+func (x *DomainChallenge) GetChallenge() isDomainChallenge_Challenge {
+	if x != nil {
+		return x.Challenge
+	}
+	return nil
+}
+
+func (x *DomainChallenge) GetDnsChallenge() *DomainChallenge_DnsRecord {
+	if x != nil {
+		if x, ok := x.Challenge.(*DomainChallenge_DnsChallenge); ok {
+			return x.DnsChallenge
+		}
+	}
+	return nil
+}
+
+type isDomainChallenge_Challenge interface {
+	isDomainChallenge_Challenge()
+}
+
+type DomainChallenge_DnsChallenge struct {
+	// DNS record configuration for domain verification.
+	DnsChallenge *DomainChallenge_DnsRecord `protobuf:"bytes,5,opt,name=dns_challenge,json=dnsChallenge,proto3,oneof"`
+}
+
+func (*DomainChallenge_DnsChallenge) isDomainChallenge_Challenge() {}
+
+// DNS record data for validation challenges.
+type DomainChallenge_DnsRecord struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Fully qualified domain name for the record.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// DNS record type (always TXT for current implementation).
+	Type DomainChallenge_DnsRecord_Type `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.organizationmanager.v1.saml.DomainChallenge_DnsRecord_Type" json:"type,omitempty"`
+	// Value to set in the DNS record for verification.
+	Value         string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DomainChallenge_DnsRecord) Reset() {
+	*x = DomainChallenge_DnsRecord{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DomainChallenge_DnsRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DomainChallenge_DnsRecord) ProtoMessage() {}
+
+func (x *DomainChallenge_DnsRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DomainChallenge_DnsRecord.ProtoReflect.Descriptor instead.
+func (*DomainChallenge_DnsRecord) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *DomainChallenge_DnsRecord) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DomainChallenge_DnsRecord) GetType() DomainChallenge_DnsRecord_Type {
+	if x != nil {
+		return x.Type
+	}
+	return DomainChallenge_DnsRecord_TYPE_UNSPECIFIED
+}
+
+func (x *DomainChallenge_DnsRecord) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 var File_yandex_cloud_organizationmanager_v1_saml_federation_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDesc = "" +
@@ -330,7 +812,52 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDesc = "
 	"\x1aFederationSecuritySettings\x121\n" +
 	"\x14encrypted_assertions\x18\x01 \x01(\bR\x13encryptedAssertions\x12\x1f\n" +
 	"\vforce_authn\x18\x02 \x01(\bR\n" +
-	"forceAuthn*Q\n" +
+	"forceAuthn\"\xd5\x03\n" +
+	"\x06Domain\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12O\n" +
+	"\x06status\x18\x02 \x01(\x0e27.yandex.cloud.organizationmanager.v1.saml.Domain.StatusR\x06status\x12\x1f\n" +
+	"\vstatus_code\x18\x03 \x01(\tR\n" +
+	"statusCode\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12=\n" +
+	"\fvalidated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vvalidatedAt\x12Y\n" +
+	"\n" +
+	"challenges\x18\x06 \x03(\v29.yandex.cloud.organizationmanager.v1.saml.DomainChallengeR\n" +
+	"challenges\"l\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10NEED_TO_VALIDATE\x10\x01\x12\x0e\n" +
+	"\n" +
+	"VALIDATING\x10\x02\x12\t\n" +
+	"\x05VALID\x10\x03\x12\v\n" +
+	"\aINVALID\x10\x04\x12\f\n" +
+	"\bDELETING\x10\x05\"\xed\x05\n" +
+	"\x0fDomainChallenge\x129\n" +
+	"\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12R\n" +
+	"\x04type\x18\x03 \x01(\x0e2>.yandex.cloud.organizationmanager.v1.saml.DomainChallenge.TypeR\x04type\x12X\n" +
+	"\x06status\x18\x04 \x01(\x0e2@.yandex.cloud.organizationmanager.v1.saml.DomainChallenge.StatusR\x06status\x12j\n" +
+	"\rdns_challenge\x18\x05 \x01(\v2C.yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecordH\x00R\fdnsChallenge\x1a\xba\x01\n" +
+	"\tDnsRecord\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\\\n" +
+	"\x04type\x18\x02 \x01(\x0e2H.yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecord.TypeR\x04type\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\"%\n" +
+	"\x04Type\x12\x14\n" +
+	"\x10TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
+	"\x03TXT\x10\x01\")\n" +
+	"\x04Type\x12\x14\n" +
+	"\x10TYPE_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aDNS_TXT\x10\x01\"U\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aPENDING\x10\x01\x12\x0e\n" +
+	"\n" +
+	"PROCESSING\x10\x02\x12\t\n" +
+	"\x05VALID\x10\x03\x12\v\n" +
+	"\aINVALID\x10\x04B\v\n" +
+	"\tchallenge*Q\n" +
 	"\vBindingType\x12\x1c\n" +
 	"\x18BINDING_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04POST\x10\x01\x12\f\n" +
@@ -350,27 +877,44 @@ func file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescGZIP(
 	return file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_organizationmanager_v1_saml_federation_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_organizationmanager_v1_saml_federation_proto_goTypes = []any{
-	(BindingType)(0),                   // 0: yandex.cloud.organizationmanager.v1.saml.BindingType
-	(*Federation)(nil),                 // 1: yandex.cloud.organizationmanager.v1.saml.Federation
-	(*FederationSecuritySettings)(nil), // 2: yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	nil,                                // 3: yandex.cloud.organizationmanager.v1.saml.Federation.LabelsEntry
-	(*timestamppb.Timestamp)(nil),      // 4: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),        // 5: google.protobuf.Duration
+	(BindingType)(0),                    // 0: yandex.cloud.organizationmanager.v1.saml.BindingType
+	(Domain_Status)(0),                  // 1: yandex.cloud.organizationmanager.v1.saml.Domain.Status
+	(DomainChallenge_Type)(0),           // 2: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.Type
+	(DomainChallenge_Status)(0),         // 3: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.Status
+	(DomainChallenge_DnsRecord_Type)(0), // 4: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecord.Type
+	(*Federation)(nil),                  // 5: yandex.cloud.organizationmanager.v1.saml.Federation
+	(*FederationSecuritySettings)(nil),  // 6: yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	(*Domain)(nil),                      // 7: yandex.cloud.organizationmanager.v1.saml.Domain
+	(*DomainChallenge)(nil),             // 8: yandex.cloud.organizationmanager.v1.saml.DomainChallenge
+	nil,                                 // 9: yandex.cloud.organizationmanager.v1.saml.Federation.LabelsEntry
+	(*DomainChallenge_DnsRecord)(nil),   // 10: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecord
+	(*timestamppb.Timestamp)(nil),       // 11: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),         // 12: google.protobuf.Duration
 }
 var file_yandex_cloud_organizationmanager_v1_saml_federation_proto_depIdxs = []int32{
-	4, // 0: yandex.cloud.organizationmanager.v1.saml.Federation.created_at:type_name -> google.protobuf.Timestamp
-	5, // 1: yandex.cloud.organizationmanager.v1.saml.Federation.cookie_max_age:type_name -> google.protobuf.Duration
-	0, // 2: yandex.cloud.organizationmanager.v1.saml.Federation.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
-	2, // 3: yandex.cloud.organizationmanager.v1.saml.Federation.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	3, // 4: yandex.cloud.organizationmanager.v1.saml.Federation.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.Federation.LabelsEntry
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	11, // 0: yandex.cloud.organizationmanager.v1.saml.Federation.created_at:type_name -> google.protobuf.Timestamp
+	12, // 1: yandex.cloud.organizationmanager.v1.saml.Federation.cookie_max_age:type_name -> google.protobuf.Duration
+	0,  // 2: yandex.cloud.organizationmanager.v1.saml.Federation.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
+	6,  // 3: yandex.cloud.organizationmanager.v1.saml.Federation.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	9,  // 4: yandex.cloud.organizationmanager.v1.saml.Federation.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.Federation.LabelsEntry
+	1,  // 5: yandex.cloud.organizationmanager.v1.saml.Domain.status:type_name -> yandex.cloud.organizationmanager.v1.saml.Domain.Status
+	11, // 6: yandex.cloud.organizationmanager.v1.saml.Domain.created_at:type_name -> google.protobuf.Timestamp
+	11, // 7: yandex.cloud.organizationmanager.v1.saml.Domain.validated_at:type_name -> google.protobuf.Timestamp
+	8,  // 8: yandex.cloud.organizationmanager.v1.saml.Domain.challenges:type_name -> yandex.cloud.organizationmanager.v1.saml.DomainChallenge
+	11, // 9: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.created_at:type_name -> google.protobuf.Timestamp
+	11, // 10: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.updated_at:type_name -> google.protobuf.Timestamp
+	2,  // 11: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.type:type_name -> yandex.cloud.organizationmanager.v1.saml.DomainChallenge.Type
+	3,  // 12: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.status:type_name -> yandex.cloud.organizationmanager.v1.saml.DomainChallenge.Status
+	10, // 13: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.dns_challenge:type_name -> yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecord
+	4,  // 14: yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecord.type:type_name -> yandex.cloud.organizationmanager.v1.saml.DomainChallenge.DnsRecord.Type
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_saml_federation_proto_init() }
@@ -378,13 +922,16 @@ func file_yandex_cloud_organizationmanager_v1_saml_federation_proto_init() {
 	if File_yandex_cloud_organizationmanager_v1_saml_federation_proto != nil {
 		return
 	}
+	file_yandex_cloud_organizationmanager_v1_saml_federation_proto_msgTypes[3].OneofWrappers = []any{
+		(*DomainChallenge_DnsChallenge)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_saml_federation_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   3,
+			NumEnums:      5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

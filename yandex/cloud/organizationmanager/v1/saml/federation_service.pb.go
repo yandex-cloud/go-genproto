@@ -1268,6 +1268,538 @@ func (x *ListFederationOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type GetFederationDomainRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to get domain information for.
+	// To get the federation ID, make a [FederationService.List] request.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name to get information for.
+	// Must be a valid domain name (1-253 characters).
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetFederationDomainRequest) Reset() {
+	*x = GetFederationDomainRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetFederationDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFederationDomainRequest) ProtoMessage() {}
+
+func (x *GetFederationDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFederationDomainRequest.ProtoReflect.Descriptor instead.
+func (*GetFederationDomainRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetFederationDomainRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *GetFederationDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type ListFederationDomainsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to list domains for.
+	// To get the federation ID, make a [FederationService.List] request.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListFederationDomainsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token]
+	// to the [ListFederationDomainsResponse.next_page_token]
+	// returned by a previous list request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	// The expression supports the following operations:
+	// - `=` for exact match: `domain = 'domain-1.com'`
+	// - `IN` for multiple values: `status IN ('NEED_TO_VALIDATE', 'VALID')`
+	// - `contains` for domain substring search: `domain contains '3'`
+	// - `AND` for combining conditions: `status = 'INVALID' AND domain contains '3'`
+	//
+	// Available fields for filtering:
+	// - `domain` - domain name
+	// - `status` - domain validation status
+	//
+	// Must be 1-1000 characters long.
+	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListFederationDomainsRequest) Reset() {
+	*x = ListFederationDomainsRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListFederationDomainsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListFederationDomainsRequest) ProtoMessage() {}
+
+func (x *ListFederationDomainsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListFederationDomainsRequest.ProtoReflect.Descriptor instead.
+func (*ListFederationDomainsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ListFederationDomainsRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *ListFederationDomainsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListFederationDomainsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListFederationDomainsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+type ListFederationDomainsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of domains for the specified federation.
+	Domains []*Domain `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"`
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListFederationDomainsRequest.page_size], use the [next_page_token] as the value
+	// for the [ListFederationDomainsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListFederationDomainsResponse) Reset() {
+	*x = ListFederationDomainsResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListFederationDomainsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListFederationDomainsResponse) ProtoMessage() {}
+
+func (x *ListFederationDomainsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListFederationDomainsResponse.ProtoReflect.Descriptor instead.
+func (*ListFederationDomainsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ListFederationDomainsResponse) GetDomains() []*Domain {
+	if x != nil {
+		return x.Domains
+	}
+	return nil
+}
+
+func (x *ListFederationDomainsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type AddFederationDomainRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to add a domain to.
+	// To get the federation ID, make a [FederationService.List] request.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name to add to the federation.
+	// Must be a valid domain name (1-253 characters).
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddFederationDomainRequest) Reset() {
+	*x = AddFederationDomainRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddFederationDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddFederationDomainRequest) ProtoMessage() {}
+
+func (x *AddFederationDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddFederationDomainRequest.ProtoReflect.Descriptor instead.
+func (*AddFederationDomainRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *AddFederationDomainRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *AddFederationDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type AddFederationDomainMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation that the domain is being added to.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name that is being added to the federation.
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddFederationDomainMetadata) Reset() {
+	*x = AddFederationDomainMetadata{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddFederationDomainMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddFederationDomainMetadata) ProtoMessage() {}
+
+func (x *AddFederationDomainMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddFederationDomainMetadata.ProtoReflect.Descriptor instead.
+func (*AddFederationDomainMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *AddFederationDomainMetadata) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *AddFederationDomainMetadata) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type ValidateFederationDomainRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to validate a domain for.
+	// To get the federation ID, make a [FederationService.List] request.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name to validate for the federation.
+	// Must be a valid domain name (1-253 characters).
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateFederationDomainRequest) Reset() {
+	*x = ValidateFederationDomainRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateFederationDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateFederationDomainRequest) ProtoMessage() {}
+
+func (x *ValidateFederationDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateFederationDomainRequest.ProtoReflect.Descriptor instead.
+func (*ValidateFederationDomainRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ValidateFederationDomainRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *ValidateFederationDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type ValidateFederationDomainMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation that the domain validation is being performed for.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name that is being validated for the federation.
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateFederationDomainMetadata) Reset() {
+	*x = ValidateFederationDomainMetadata{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateFederationDomainMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateFederationDomainMetadata) ProtoMessage() {}
+
+func (x *ValidateFederationDomainMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateFederationDomainMetadata.ProtoReflect.Descriptor instead.
+func (*ValidateFederationDomainMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ValidateFederationDomainMetadata) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *ValidateFederationDomainMetadata) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type DeleteFederationDomainRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to delete a domain from.
+	// To get the federation ID, make a [FederationService.List] request.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name to delete from the federation.
+	// Must be a valid domain name (1-253 characters).
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteFederationDomainRequest) Reset() {
+	*x = DeleteFederationDomainRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteFederationDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteFederationDomainRequest) ProtoMessage() {}
+
+func (x *DeleteFederationDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteFederationDomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteFederationDomainRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *DeleteFederationDomainRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *DeleteFederationDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type DeleteFederationDomainMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation that the domain is being deleted from.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// Domain name that is being deleted from the federation.
+	Domain        string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteFederationDomainMetadata) Reset() {
+	*x = DeleteFederationDomainMetadata{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteFederationDomainMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteFederationDomainMetadata) ProtoMessage() {}
+
+func (x *DeleteFederationDomainMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteFederationDomainMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteFederationDomainMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *DeleteFederationDomainMetadata) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *DeleteFederationDomainMetadata) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
 var File_yandex_cloud_organizationmanager_v1_saml_federation_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc = "" +
@@ -1371,7 +1903,40 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xfb\x10\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"v\n" +
+	"\x1aGetFederationDomainRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"\xc9\x01\n" +
+	"\x1cListFederationDomainsRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
+	"\x06filter\x18\x04 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"\x93\x01\n" +
+	"\x1dListFederationDomainsResponse\x12J\n" +
+	"\adomains\x18\x01 \x03(\v20.yandex.cloud.organizationmanager.v1.saml.DomainR\adomains\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"v\n" +
+	"\x1aAddFederationDomainRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"Z\n" +
+	"\x1bAddFederationDomainMetadata\x12#\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"{\n" +
+	"\x1fValidateFederationDomainRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"_\n" +
+	" ValidateFederationDomainMetadata\x12#\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"y\n" +
+	"\x1dDeleteFederationDomainRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"]\n" +
+	"\x1eDeleteFederationDomainMetadata\x12#\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain2\xcc\x1a\n" +
 	"\x11FederationService\x12\xbe\x01\n" +
 	"\x03Get\x12>.yandex.cloud.organizationmanager.v1.saml.GetFederationRequest\x1a4.yandex.cloud.organizationmanager.v1.saml.Federation\"A\x82\xd3\xe4\x93\x02;\x129/organization-manager/v1/saml/federations/{federation_id}\x12\xbe\x01\n" +
 	"\x04List\x12@.yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest\x1aA.yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse\"1\x82\xd3\xe4\x93\x02+\x12)/organization-manager/v1/saml/federations\x12\xce\x01\n" +
@@ -1388,7 +1953,15 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\x12DeleteUserAccounts\x12L.yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsRequest\x1a!.yandex.cloud.operation.Operation\"\xa5\x01\xb2\xd2*J\n" +
 	"#DeleteFederatedUserAccountsMetadata\x12#DeleteFederatedUserAccountsResponse\x82\xd3\xe4\x93\x02Q:\x01*\"L/organization-manager/v1/saml/federations/{federation_id}:deleteUserAccounts\x12\xff\x01\n" +
 	"\x10ListUserAccounts\x12J.yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsRequest\x1aK.yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse\"R\x82\xd3\xe4\x93\x02L\x12J/organization-manager/v1/saml/federations/{federation_id}:listUserAccounts\x12\xf5\x01\n" +
-	"\x0eListOperations\x12I.yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest\x1aJ.yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse\"L\x82\xd3\xe4\x93\x02F\x12D/organization-manager/v1/saml/federations/{federation_id}/operationsB\x81\x01\n" +
+	"\x0eListOperations\x12I.yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest\x1aJ.yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse\"L\x82\xd3\xe4\x93\x02F\x12D/organization-manager/v1/saml/federations/{federation_id}/operations\x12\xd7\x01\n" +
+	"\tGetDomain\x12D.yandex.cloud.organizationmanager.v1.saml.GetFederationDomainRequest\x1a0.yandex.cloud.organizationmanager.v1.saml.Domain\"R\x82\xd3\xe4\x93\x02L\x12J/organization-manager/v1/saml/federations/{federation_id}/domains/{domain}\x12\xe9\x01\n" +
+	"\vListDomains\x12F.yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsRequest\x1aG.yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse\"I\x82\xd3\xe4\x93\x02C\x12A/organization-manager/v1/saml/federations/{federation_id}/domains\x12\xeb\x01\n" +
+	"\tAddDomain\x12D.yandex.cloud.organizationmanager.v1.saml.AddFederationDomainRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*%\n" +
+	"\x1bAddFederationDomainMetadata\x12\x06Domain\x82\xd3\xe4\x93\x02F:\x01*\"A/organization-manager/v1/saml/federations/{federation_id}/domains\x12\x8d\x02\n" +
+	"\x0eValidateDomain\x12I.yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2**\n" +
+	" ValidateFederationDomainMetadata\x12\x06Domain\x82\xd3\xe4\x93\x02X:\x01*\"S/organization-manager/v1/saml/federations/{federation_id}/domains/{domain}:validate\x12\x8a\x02\n" +
+	"\fDeleteDomain\x12G.yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest\x1a!.yandex.cloud.operation.Operation\"\x8d\x01\xb2\xd2*7\n" +
+	"\x1eDeleteFederationDomainMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02L*J/organization-manager/v1/saml/federations/{federation_id}/domains/{domain}B\x81\x01\n" +
 	",yandex.cloud.api.organizationmanager.v1.samlZQgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/saml;samlb\x06proto3"
 
 var (
@@ -1403,7 +1976,7 @@ func file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawD
 	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_goTypes = []any{
 	(*GetFederationRequest)(nil),                // 0: yandex.cloud.organizationmanager.v1.saml.GetFederationRequest
 	(*ListFederationsRequest)(nil),              // 1: yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest
@@ -1424,53 +1997,74 @@ var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_goTyp
 	(*ListFederatedUserAccountsResponse)(nil),   // 16: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
 	(*ListFederationOperationsRequest)(nil),     // 17: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest
 	(*ListFederationOperationsResponse)(nil),    // 18: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
-	nil,                                         // 19: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
-	nil,                                         // 20: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
-	(*Federation)(nil),                          // 21: yandex.cloud.organizationmanager.v1.saml.Federation
-	(*durationpb.Duration)(nil),                 // 22: google.protobuf.Duration
-	(BindingType)(0),                            // 23: yandex.cloud.organizationmanager.v1.saml.BindingType
-	(*FederationSecuritySettings)(nil),          // 24: yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	(*fieldmaskpb.FieldMask)(nil),               // 25: google.protobuf.FieldMask
-	(*v1.UserAccount)(nil),                      // 26: yandex.cloud.organizationmanager.v1.UserAccount
-	(*operation.Operation)(nil),                 // 27: yandex.cloud.operation.Operation
+	(*GetFederationDomainRequest)(nil),          // 19: yandex.cloud.organizationmanager.v1.saml.GetFederationDomainRequest
+	(*ListFederationDomainsRequest)(nil),        // 20: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsRequest
+	(*ListFederationDomainsResponse)(nil),       // 21: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse
+	(*AddFederationDomainRequest)(nil),          // 22: yandex.cloud.organizationmanager.v1.saml.AddFederationDomainRequest
+	(*AddFederationDomainMetadata)(nil),         // 23: yandex.cloud.organizationmanager.v1.saml.AddFederationDomainMetadata
+	(*ValidateFederationDomainRequest)(nil),     // 24: yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest
+	(*ValidateFederationDomainMetadata)(nil),    // 25: yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainMetadata
+	(*DeleteFederationDomainRequest)(nil),       // 26: yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest
+	(*DeleteFederationDomainMetadata)(nil),      // 27: yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainMetadata
+	nil,                                         // 28: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
+	nil,                                         // 29: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
+	(*Federation)(nil),                          // 30: yandex.cloud.organizationmanager.v1.saml.Federation
+	(*durationpb.Duration)(nil),                 // 31: google.protobuf.Duration
+	(BindingType)(0),                            // 32: yandex.cloud.organizationmanager.v1.saml.BindingType
+	(*FederationSecuritySettings)(nil),          // 33: yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	(*fieldmaskpb.FieldMask)(nil),               // 34: google.protobuf.FieldMask
+	(*v1.UserAccount)(nil),                      // 35: yandex.cloud.organizationmanager.v1.UserAccount
+	(*operation.Operation)(nil),                 // 36: yandex.cloud.operation.Operation
+	(*Domain)(nil),                              // 37: yandex.cloud.organizationmanager.v1.saml.Domain
 }
 var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_depIdxs = []int32{
-	21, // 0: yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse.federations:type_name -> yandex.cloud.organizationmanager.v1.saml.Federation
-	22, // 1: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
-	23, // 2: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
-	24, // 3: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	19, // 4: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
-	25, // 5: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.update_mask:type_name -> google.protobuf.FieldMask
-	22, // 6: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
-	23, // 7: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
-	24, // 8: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	20, // 9: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
-	26, // 10: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
-	26, // 11: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
-	27, // 12: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 13: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:input_type -> yandex.cloud.organizationmanager.v1.saml.GetFederationRequest
-	1,  // 14: yandex.cloud.organizationmanager.v1.saml.FederationService.List:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest
-	3,  // 15: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:input_type -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest
-	5,  // 16: yandex.cloud.organizationmanager.v1.saml.FederationService.Update:input_type -> yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest
-	7,  // 17: yandex.cloud.organizationmanager.v1.saml.FederationService.Delete:input_type -> yandex.cloud.organizationmanager.v1.saml.DeleteFederationRequest
-	9,  // 18: yandex.cloud.organizationmanager.v1.saml.FederationService.AddUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsRequest
-	12, // 19: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsRequest
-	15, // 20: yandex.cloud.organizationmanager.v1.saml.FederationService.ListUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsRequest
-	17, // 21: yandex.cloud.organizationmanager.v1.saml.FederationService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest
-	21, // 22: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:output_type -> yandex.cloud.organizationmanager.v1.saml.Federation
-	2,  // 23: yandex.cloud.organizationmanager.v1.saml.FederationService.List:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse
-	27, // 24: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:output_type -> yandex.cloud.operation.Operation
-	27, // 25: yandex.cloud.organizationmanager.v1.saml.FederationService.Update:output_type -> yandex.cloud.operation.Operation
-	27, // 26: yandex.cloud.organizationmanager.v1.saml.FederationService.Delete:output_type -> yandex.cloud.operation.Operation
-	27, // 27: yandex.cloud.organizationmanager.v1.saml.FederationService.AddUserAccounts:output_type -> yandex.cloud.operation.Operation
-	27, // 28: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteUserAccounts:output_type -> yandex.cloud.operation.Operation
-	16, // 29: yandex.cloud.organizationmanager.v1.saml.FederationService.ListUserAccounts:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
-	18, // 30: yandex.cloud.organizationmanager.v1.saml.FederationService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
-	22, // [22:31] is the sub-list for method output_type
-	13, // [13:22] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	30, // 0: yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse.federations:type_name -> yandex.cloud.organizationmanager.v1.saml.Federation
+	31, // 1: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
+	32, // 2: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
+	33, // 3: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	28, // 4: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
+	34, // 5: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.update_mask:type_name -> google.protobuf.FieldMask
+	31, // 6: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
+	32, // 7: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
+	33, // 8: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	29, // 9: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
+	35, // 10: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
+	35, // 11: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
+	36, // 12: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	37, // 13: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse.domains:type_name -> yandex.cloud.organizationmanager.v1.saml.Domain
+	0,  // 14: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:input_type -> yandex.cloud.organizationmanager.v1.saml.GetFederationRequest
+	1,  // 15: yandex.cloud.organizationmanager.v1.saml.FederationService.List:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest
+	3,  // 16: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:input_type -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest
+	5,  // 17: yandex.cloud.organizationmanager.v1.saml.FederationService.Update:input_type -> yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest
+	7,  // 18: yandex.cloud.organizationmanager.v1.saml.FederationService.Delete:input_type -> yandex.cloud.organizationmanager.v1.saml.DeleteFederationRequest
+	9,  // 19: yandex.cloud.organizationmanager.v1.saml.FederationService.AddUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsRequest
+	12, // 20: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsRequest
+	15, // 21: yandex.cloud.organizationmanager.v1.saml.FederationService.ListUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsRequest
+	17, // 22: yandex.cloud.organizationmanager.v1.saml.FederationService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest
+	19, // 23: yandex.cloud.organizationmanager.v1.saml.FederationService.GetDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.GetFederationDomainRequest
+	20, // 24: yandex.cloud.organizationmanager.v1.saml.FederationService.ListDomains:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsRequest
+	22, // 25: yandex.cloud.organizationmanager.v1.saml.FederationService.AddDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.AddFederationDomainRequest
+	24, // 26: yandex.cloud.organizationmanager.v1.saml.FederationService.ValidateDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest
+	26, // 27: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest
+	30, // 28: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:output_type -> yandex.cloud.organizationmanager.v1.saml.Federation
+	2,  // 29: yandex.cloud.organizationmanager.v1.saml.FederationService.List:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse
+	36, // 30: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:output_type -> yandex.cloud.operation.Operation
+	36, // 31: yandex.cloud.organizationmanager.v1.saml.FederationService.Update:output_type -> yandex.cloud.operation.Operation
+	36, // 32: yandex.cloud.organizationmanager.v1.saml.FederationService.Delete:output_type -> yandex.cloud.operation.Operation
+	36, // 33: yandex.cloud.organizationmanager.v1.saml.FederationService.AddUserAccounts:output_type -> yandex.cloud.operation.Operation
+	36, // 34: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteUserAccounts:output_type -> yandex.cloud.operation.Operation
+	16, // 35: yandex.cloud.organizationmanager.v1.saml.FederationService.ListUserAccounts:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
+	18, // 36: yandex.cloud.organizationmanager.v1.saml.FederationService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
+	37, // 37: yandex.cloud.organizationmanager.v1.saml.FederationService.GetDomain:output_type -> yandex.cloud.organizationmanager.v1.saml.Domain
+	21, // 38: yandex.cloud.organizationmanager.v1.saml.FederationService.ListDomains:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse
+	36, // 39: yandex.cloud.organizationmanager.v1.saml.FederationService.AddDomain:output_type -> yandex.cloud.operation.Operation
+	36, // 40: yandex.cloud.organizationmanager.v1.saml.FederationService.ValidateDomain:output_type -> yandex.cloud.operation.Operation
+	36, // 41: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteDomain:output_type -> yandex.cloud.operation.Operation
+	28, // [28:42] is the sub-list for method output_type
+	14, // [14:28] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_init() }
@@ -1485,7 +2079,7 @@ func file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_init
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

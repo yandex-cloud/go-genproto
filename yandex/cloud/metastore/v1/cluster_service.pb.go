@@ -28,8 +28,7 @@ const (
 
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster resource to return.
-	// To get the cluster ID use a [ClusterService.List] request.
+	// ID of the Metastore Cluster to return.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -74,8 +73,7 @@ func (x *GetClusterRequest) GetClusterId() string {
 
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to list Metastore clusters in.
-	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// ID of the folder to list Metastore Clusters in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token]
@@ -87,8 +85,8 @@ type ListClustersRequest struct {
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
-	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-zA-Z0-9_-]+$`.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-zA-Z0-9_-]+`.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -154,7 +152,7 @@ func (x *ListClustersRequest) GetFilter() string {
 
 type ListClustersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Metastore Cluster resources.
+	// List of Metastore Clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
@@ -211,28 +209,29 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to create the Metastore cluster in.
+	// ID of the folder to create the Metastore Cluster in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the Metastore cluster. The name must be unique within the folder.
+	// Name of the Metastore Cluster.
+	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the Metastore cluster.
+	// Description of the Metastore Cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Metastore cluster as “ key:value “ pairs. Maximum 64 per resource.
-	// For example, "project": "mvp" or "source": "dictionary".
+	// Custom labels for the Metastore Cluster as “ key:value “ pairs.
+	// For example: {"env": "prod"}.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deletion Protection inhibits deletion of the cluster.
+	// Deletion Protection prevents deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,11,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Metastore server version.
 	Version string `protobuf:"bytes,12,opt,name=version,proto3" json:"version,omitempty"`
-	// Metastore cluster configuration.
+	// Configuration of the Metastore Cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,13,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Service account that will be used to access YC resources
+	// Service account used to access Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,14,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cloud logging configuration
+	// Cloud logging configuration.
 	Logging *LoggingConfig `protobuf:"bytes,15,opt,name=logging,proto3" json:"logging,omitempty"`
-	// Network related configuration options.
+	// Network-related configuration options.
 	Network *NetworkConfig `protobuf:"bytes,16,opt,name=network,proto3" json:"network,omitempty"`
-	// Window of maintenance operations.
+	// Maintenance window.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,17,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -347,7 +346,7 @@ func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 
 type CreateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster that is being created.
+	// ID of the Metastore Cluster that is being created.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -390,85 +389,40 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-type UpdateClusterMetadata struct {
+type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster resource that is being updated.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the Metastore Cluster to update.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Fields of the Metastore Cluster to be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name of the Metastore Cluster.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description of the Metastore Cluster.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Custom labels for the Metastore Cluster as “ key:value “ pairs.
+	// For example: {"env": "prod"}.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Deletion Protection prevents deletion of the cluster.
+	DeletionProtection bool `protobuf:"varint,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	// Service account used to access Cloud resources.
+	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Cloud logging configuration.
+	Logging *LoggingConfig `protobuf:"bytes,9,opt,name=logging,proto3" json:"logging,omitempty"`
+	// Network-related configuration options.
+	NetworkSpec *UpdateNetworkConfigSpec `protobuf:"bytes,10,opt,name=network_spec,json=networkSpec,proto3" json:"network_spec,omitempty"`
+	// Metastore Cluster configuration.
+	ConfigSpec *UpdateClusterConfigSpec `protobuf:"bytes,11,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	// Maintenance window.
+	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,12,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
+	// Metastore server version.
+	Version       string `protobuf:"bytes,13,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateClusterMetadata) Reset() {
-	*x = UpdateClusterMetadata{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateClusterMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateClusterMetadata) ProtoMessage() {}
-
-func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateClusterMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateClusterMetadata) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-type UpdateClusterRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster resource to update.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Field mask that specifies which fields of the Metastore Cluster resource should be updated.
-	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// New name of the cluster.
-	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// New description of the Metastore cluster.
-	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Metastore cluster as “ key:value “ pairs. For example, "env": "prod".
-	//
-	// The new set of labels will completely replace the old ones. To add a label, request the current
-	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
-	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deletion Protection inhibits deletion of the cluster
-	DeletionProtection bool `protobuf:"varint,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Service account used to access Cloud resources.
-	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cloud logging configuration
-	Logging *LoggingConfig `protobuf:"bytes,9,opt,name=logging,proto3" json:"logging,omitempty"`
-	// Network related configuration options.
-	NetworkSpec *UpdateNetworkConfigSpec `protobuf:"bytes,10,opt,name=network_spec,json=networkSpec,proto3" json:"network_spec,omitempty"`
-	// Metastore cluster configuration.
-	ConfigSpec *UpdateClusterConfigSpec `protobuf:"bytes,11,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Window of maintenance operations.
-	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,12,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
 func (x *UpdateClusterRequest) Reset() {
 	*x = UpdateClusterRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -480,7 +434,7 @@ func (x *UpdateClusterRequest) String() string {
 func (*UpdateClusterRequest) ProtoMessage() {}
 
 func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -493,7 +447,7 @@ func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateClusterRequest) GetClusterId() string {
@@ -573,29 +527,36 @@ func (x *UpdateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	return nil
 }
 
-type UpdateNetworkConfigSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// User security groups.
-	SecurityGroupIds []string `protobuf:"bytes,1,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+func (x *UpdateClusterRequest) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
 }
 
-func (x *UpdateNetworkConfigSpec) Reset() {
-	*x = UpdateNetworkConfigSpec{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[7]
+type UpdateClusterMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Metastore Cluster that is being updated.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateClusterMetadata) Reset() {
+	*x = UpdateClusterMetadata{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateNetworkConfigSpec) String() string {
+func (x *UpdateClusterMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateNetworkConfigSpec) ProtoMessage() {}
+func (*UpdateClusterMetadata) ProtoMessage() {}
 
-func (x *UpdateNetworkConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[7]
+func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -606,22 +567,21 @@ func (x *UpdateNetworkConfigSpec) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateNetworkConfigSpec.ProtoReflect.Descriptor instead.
-func (*UpdateNetworkConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{7}
+// Deprecated: Use UpdateClusterMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdateNetworkConfigSpec) GetSecurityGroupIds() []string {
+func (x *UpdateClusterMetadata) GetClusterId() string {
 	if x != nil {
-		return x.SecurityGroupIds
+		return x.ClusterId
 	}
-	return nil
+	return ""
 }
 
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster to delete.
-	// To get the Metastore cluster ID, use a [ClusterService.List] request.
+	// ID of the Metastore Cluster to delete.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -629,7 +589,7 @@ type DeleteClusterRequest struct {
 
 func (x *DeleteClusterRequest) Reset() {
 	*x = DeleteClusterRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -641,7 +601,7 @@ func (x *DeleteClusterRequest) String() string {
 func (*DeleteClusterRequest) ProtoMessage() {}
 
 func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -654,7 +614,7 @@ func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteClusterRequest) GetClusterId() string {
@@ -666,7 +626,7 @@ func (x *DeleteClusterRequest) GetClusterId() string {
 
 type DeleteClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster that is being deleted.
+	// ID of the Metastore Cluster that is being deleted.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -674,7 +634,7 @@ type DeleteClusterMetadata struct {
 
 func (x *DeleteClusterMetadata) Reset() {
 	*x = DeleteClusterMetadata{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -686,7 +646,7 @@ func (x *DeleteClusterMetadata) String() string {
 func (*DeleteClusterMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -699,7 +659,7 @@ func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteClusterMetadata) GetClusterId() string {
@@ -709,101 +669,9 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-type StopClusterRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster to stop.
-	// To get the Metastore cluster ID, use a [ClusterService.List] request.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopClusterRequest) Reset() {
-	*x = StopClusterRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopClusterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopClusterRequest) ProtoMessage() {}
-
-func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
-func (*StopClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *StopClusterRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-type StopClusterMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster that is being stopped.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopClusterMetadata) Reset() {
-	*x = StopClusterMetadata{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopClusterMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopClusterMetadata) ProtoMessage() {}
-
-func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopClusterMetadata.ProtoReflect.Descriptor instead.
-func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *StopClusterMetadata) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster to start.
-	// To get the Metastore cluster ID, use a [ClusterService.List] request.
+	// ID of the Metastore Cluster to start.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -811,7 +679,7 @@ type StartClusterRequest struct {
 
 func (x *StartClusterRequest) Reset() {
 	*x = StartClusterRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -823,7 +691,7 @@ func (x *StartClusterRequest) String() string {
 func (*StartClusterRequest) ProtoMessage() {}
 
 func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -836,7 +704,7 @@ func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
 func (*StartClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StartClusterRequest) GetClusterId() string {
@@ -848,7 +716,7 @@ func (x *StartClusterRequest) GetClusterId() string {
 
 type StartClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore cluster that is being started.
+	// ID of the Metastore Cluster that is being started.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -856,7 +724,7 @@ type StartClusterMetadata struct {
 
 func (x *StartClusterMetadata) Reset() {
 	*x = StartClusterMetadata{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -868,7 +736,7 @@ func (x *StartClusterMetadata) String() string {
 func (*StartClusterMetadata) ProtoMessage() {}
 
 func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -881,7 +749,7 @@ func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StartClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StartClusterMetadata) GetClusterId() string {
@@ -891,13 +759,103 @@ func (x *StartClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+type StopClusterRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Metastore Cluster to stop.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopClusterRequest) Reset() {
+	*x = StopClusterRequest{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopClusterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopClusterRequest) ProtoMessage() {}
+
+func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
+func (*StopClusterRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *StopClusterRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+type StopClusterMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Metastore Cluster that is being stopped.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopClusterMetadata) Reset() {
+	*x = StopClusterMetadata{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopClusterMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopClusterMetadata) ProtoMessage() {}
+
+func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopClusterMetadata.ProtoReflect.Descriptor instead.
+func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *StopClusterMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
 type ImportDataRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster to import data in.
+	// ID of the Metastore Cluster into which data will be imported.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// S3 bucket to import backup from.
 	Bucket string `protobuf:"bytes,2,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	// Import dump filepath.
+	// Path to the import dump in the bucket.
 	Filepath      string `protobuf:"bytes,3,opt,name=filepath,proto3" json:"filepath,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -905,7 +863,7 @@ type ImportDataRequest struct {
 
 func (x *ImportDataRequest) Reset() {
 	*x = ImportDataRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -917,7 +875,7 @@ func (x *ImportDataRequest) String() string {
 func (*ImportDataRequest) ProtoMessage() {}
 
 func (x *ImportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -930,7 +888,7 @@ func (x *ImportDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportDataRequest.ProtoReflect.Descriptor instead.
 func (*ImportDataRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ImportDataRequest) GetClusterId() string {
@@ -956,7 +914,7 @@ func (x *ImportDataRequest) GetFilepath() string {
 
 type ImportDataMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster to import data in.
+	// ID of the Metastore Cluster into which data is being imported.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -964,7 +922,7 @@ type ImportDataMetadata struct {
 
 func (x *ImportDataMetadata) Reset() {
 	*x = ImportDataMetadata{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -976,7 +934,7 @@ func (x *ImportDataMetadata) String() string {
 func (*ImportDataMetadata) ProtoMessage() {}
 
 func (x *ImportDataMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -989,7 +947,7 @@ func (x *ImportDataMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImportDataMetadata.ProtoReflect.Descriptor instead.
 func (*ImportDataMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ImportDataMetadata) GetClusterId() string {
@@ -1001,11 +959,11 @@ func (x *ImportDataMetadata) GetClusterId() string {
 
 type ExportDataRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster to export data from.
+	// ID of the Metastore Cluster from which data will be exported.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// S3 bucket to export backup to.
 	Bucket string `protobuf:"bytes,2,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	// Export dump filepath.
+	// Path to the export dump in the bucket.
 	Filepath      string `protobuf:"bytes,3,opt,name=filepath,proto3" json:"filepath,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1013,7 +971,7 @@ type ExportDataRequest struct {
 
 func (x *ExportDataRequest) Reset() {
 	*x = ExportDataRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1025,7 +983,7 @@ func (x *ExportDataRequest) String() string {
 func (*ExportDataRequest) ProtoMessage() {}
 
 func (x *ExportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1038,7 +996,7 @@ func (x *ExportDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportDataRequest.ProtoReflect.Descriptor instead.
 func (*ExportDataRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ExportDataRequest) GetClusterId() string {
@@ -1064,7 +1022,7 @@ func (x *ExportDataRequest) GetFilepath() string {
 
 type ExportDataMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Metastore Cluster to export data from.
+	// ID of the Metastore Cluster from which data is being exported.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1072,7 +1030,7 @@ type ExportDataMetadata struct {
 
 func (x *ExportDataMetadata) Reset() {
 	*x = ExportDataMetadata{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1084,7 +1042,7 @@ func (x *ExportDataMetadata) String() string {
 func (*ExportDataMetadata) ProtoMessage() {}
 
 func (x *ExportDataMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1097,7 +1055,7 @@ func (x *ExportDataMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportDataMetadata.ProtoReflect.Descriptor instead.
 func (*ExportDataMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ExportDataMetadata) GetClusterId() string {
@@ -1109,13 +1067,14 @@ func (x *ExportDataMetadata) GetClusterId() string {
 
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Apache Kafka Cluster resource to list operations for.
+	// ID of the Metastore Cluster to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token.  To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token]
+	// Page token.
+	// To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token]
 	// returned by a previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1124,7 +1083,7 @@ type ListClusterOperationsRequest struct {
 
 func (x *ListClusterOperationsRequest) Reset() {
 	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1136,7 +1095,7 @@ func (x *ListClusterOperationsRequest) String() string {
 func (*ListClusterOperationsRequest) ProtoMessage() {}
 
 func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1149,7 +1108,7 @@ func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListClusterOperationsRequest) GetClusterId() string {
@@ -1175,7 +1134,7 @@ func (x *ListClusterOperationsRequest) GetPageToken() string {
 
 type ListClusterOperationsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Operation resources for the specified Apache Kafka cluster.
+	// List of Operation resources for the specified Metastore Cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value
@@ -1188,7 +1147,7 @@ type ListClusterOperationsResponse struct {
 
 func (x *ListClusterOperationsResponse) Reset() {
 	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1200,7 +1159,7 @@ func (x *ListClusterOperationsResponse) String() string {
 func (*ListClusterOperationsResponse) ProtoMessage() {}
 
 func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1213,7 +1172,7 @@ func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
@@ -1231,15 +1190,16 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 }
 
 type ConfigSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resources     *Resources             `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Configuration for computational resources for Metastore server instances.
+	Resources     *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ConfigSpec) Reset() {
 	*x = ConfigSpec{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1251,7 +1211,7 @@ func (x *ConfigSpec) String() string {
 func (*ConfigSpec) ProtoMessage() {}
 
 func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1264,7 +1224,7 @@ func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigSpec.ProtoReflect.Descriptor instead.
 func (*ConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ConfigSpec) GetResources() *Resources {
@@ -1275,15 +1235,16 @@ func (x *ConfigSpec) GetResources() *Resources {
 }
 
 type UpdateClusterConfigSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resources     *Resources             `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Configuration for computational resources for Metastore server instances.
+	Resources     *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateClusterConfigSpec) Reset() {
 	*x = UpdateClusterConfigSpec{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1295,7 +1256,7 @@ func (x *UpdateClusterConfigSpec) String() string {
 func (*UpdateClusterConfigSpec) ProtoMessage() {}
 
 func (x *UpdateClusterConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1269,7 @@ func (x *UpdateClusterConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterConfigSpec.ProtoReflect.Descriptor instead.
 func (*UpdateClusterConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UpdateClusterConfigSpec) GetResources() *Resources {
@@ -1318,11 +1279,56 @@ func (x *UpdateClusterConfigSpec) GetResources() *Resources {
 	return nil
 }
 
+type UpdateNetworkConfigSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// User security groups.
+	SecurityGroupIds []string `protobuf:"bytes,1,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UpdateNetworkConfigSpec) Reset() {
+	*x = UpdateNetworkConfigSpec{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateNetworkConfigSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateNetworkConfigSpec) ProtoMessage() {}
+
+func (x *UpdateNetworkConfigSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateNetworkConfigSpec.ProtoReflect.Descriptor instead.
+func (*UpdateNetworkConfigSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *UpdateNetworkConfigSpec) GetSecurityGroupIds() []string {
+	if x != nil {
+		return x.SecurityGroupIds
+	}
+	return nil
+}
+
 var File_yandex_cloud_metastore_v1_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/metastore/v1/cluster_service.proto\x12\x19yandex.cloud.metastore.v1\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a'yandex/cloud/metastore/v1/cluster.proto\"@\n" +
+	"/yandex/cloud/metastore/v1/cluster_service.proto\x12\x19yandex.cloud.metastore.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a'yandex/cloud/metastore/v1/cluster.proto\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -1355,16 +1361,13 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\v\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"6\n" +
-	"\x15UpdateClusterMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xee\x06\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xf9\x06\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x125\n" +
-	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"updateMask\x12&\n" +
+	"\x04name\x18\x03 \x01(\tB\x12\xf2\xc71\x0e[a-zA-Z0-9_-]*R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.metastore.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
 	"\x13deletion_protection\x18\a \x01(\bR\x12deletionProtection\x126\n" +
@@ -1374,28 +1377,30 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v22.yandex.cloud.metastore.v1.UpdateNetworkConfigSpecR\vnetworkSpec\x12S\n" +
 	"\vconfig_spec\x18\v \x01(\v22.yandex.cloud.metastore.v1.UpdateClusterConfigSpecR\n" +
 	"configSpec\x12[\n" +
-	"\x12maintenance_window\x18\f \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
+	"\x12maintenance_window\x18\f \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x12\x18\n" +
+	"\aversion\x18\r \x01(\tR\aversion\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\a\"G\n" +
-	"\x17UpdateNetworkConfigSpec\x12,\n" +
-	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds\"C\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\a\"6\n" +
+	"\x15UpdateClusterMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"C\n" +
 	"\x14DeleteClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15DeleteClusterMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"A\n" +
-	"\x12StopClusterRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"4\n" +
-	"\x13StopClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"B\n" +
 	"\x13StartClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"5\n" +
 	"\x14StartClusterMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"A\n" +
+	"\x12StopClusterRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"4\n" +
+	"\x13StopClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x80\x01\n" +
 	"\x11ImportDataRequest\x12+\n" +
@@ -1430,27 +1435,29 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"ConfigSpec\x12B\n" +
 	"\tresources\x18\x02 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresourcesJ\x04\b\x01\x10\x02\"]\n" +
 	"\x17UpdateClusterConfigSpec\x12B\n" +
-	"\tresources\x18\x01 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresources2\x98\x0e\n" +
+	"\tresources\x18\x01 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresources\"G\n" +
+	"\x17UpdateNetworkConfigSpec\x12,\n" +
+	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds2\x98\x0e\n" +
 	"\x0eClusterService\x12\x8c\x01\n" +
 	"\x03Get\x12,.yandex.cloud.metastore.v1.GetClusterRequest\x1a\".yandex.cloud.metastore.v1.Cluster\"3\x82\xd3\xe4\x93\x02-\x12+/managed-metastore/v1/clusters/{cluster_id}\x12\x8f\x01\n" +
-	"\x04List\x12..yandex.cloud.metastore.v1.ListClustersRequest\x1a/.yandex.cloud.metastore.v1.ListClustersResponse\"&\x82\xd3\xe4\x93\x02 \x12\x1e/managed-metastore/v1/clusters\x12\xc3\x01\n" +
-	"\x0eListOperations\x127.yandex.cloud.metastore.v1.ListClusterOperationsRequest\x1a8.yandex.cloud.metastore.v1.ListClusterOperationsResponse\">\x82\xd3\xe4\x93\x028\x126/managed-metastore/v1/clusters/{cluster_id}/operations\x12\xab\x01\n" +
+	"\x04List\x12..yandex.cloud.metastore.v1.ListClustersRequest\x1a/.yandex.cloud.metastore.v1.ListClustersResponse\"&\x82\xd3\xe4\x93\x02 \x12\x1e/managed-metastore/v1/clusters\x12\xab\x01\n" +
 	"\x06Create\x12/.yandex.cloud.metastore.v1.CreateClusterRequest\x1a!.yandex.cloud.operation.Operation\"M\xb2\xd2* \n" +
 	"\x15CreateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/managed-metastore/v1/clusters\x12\xb8\x01\n" +
 	"\x06Update\x12/.yandex.cloud.metastore.v1.UpdateClusterRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2* \n" +
 	"\x15UpdateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x020:\x01*2+/managed-metastore/v1/clusters/{cluster_id}\x12\xc3\x01\n" +
 	"\x06Delete\x12/.yandex.cloud.metastore.v1.DeleteClusterRequest\x1a!.yandex.cloud.operation.Operation\"e\xb2\xd2*.\n" +
-	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02-*+/managed-metastore/v1/clusters/{cluster_id}\x12\xb4\x01\n" +
-	"\x04Stop\x12-.yandex.cloud.metastore.v1.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*\x1e\n" +
-	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x022\"0/managed-metastore/v1/clusters/{cluster_id}:stop\x12\xb8\x01\n" +
+	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02-*+/managed-metastore/v1/clusters/{cluster_id}\x12\xb8\x01\n" +
 	"\x05Start\x12..yandex.cloud.metastore.v1.StartClusterRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2*\x1f\n" +
-	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x023\"1/managed-metastore/v1/clusters/{cluster_id}:start\x12\xbd\x01\n" +
+	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x023\"1/managed-metastore/v1/clusters/{cluster_id}:start\x12\xb4\x01\n" +
+	"\x04Stop\x12-.yandex.cloud.metastore.v1.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*\x1e\n" +
+	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x022\"0/managed-metastore/v1/clusters/{cluster_id}:stop\x12\xbd\x01\n" +
 	"\n" +
 	"ImportData\x12,.yandex.cloud.metastore.v1.ImportDataRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2*\x1d\n" +
 	"\x12ImportDataMetadata\x12\aCluster\x82\xd3\xe4\x93\x027:\x01*\"2/managed-metastore/v1/clusters/{cluster_id}:import\x12\xbd\x01\n" +
 	"\n" +
 	"ExportData\x12,.yandex.cloud.metastore.v1.ExportDataRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2*\x1d\n" +
-	"\x12ExportDataMetadata\x12\aCluster\x82\xd3\xe4\x93\x027:\x01*\"2/managed-metastore/v1/clusters/{cluster_id}:exportBh\n" +
+	"\x12ExportDataMetadata\x12\aCluster\x82\xd3\xe4\x93\x027:\x01*\"2/managed-metastore/v1/clusters/{cluster_id}:export\x12\xc3\x01\n" +
+	"\x0eListOperations\x127.yandex.cloud.metastore.v1.ListClusterOperationsRequest\x1a8.yandex.cloud.metastore.v1.ListClusterOperationsResponse\">\x82\xd3\xe4\x93\x028\x126/managed-metastore/v1/clusters/{cluster_id}/operationsBh\n" +
 	"\x1dyandex.cloud.api.metastore.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/metastore/v1;metastoreb\x06proto3"
 
 var (
@@ -1472,23 +1479,23 @@ var file_yandex_cloud_metastore_v1_cluster_service_proto_goTypes = []any{
 	(*ListClustersResponse)(nil),          // 2: yandex.cloud.metastore.v1.ListClustersResponse
 	(*CreateClusterRequest)(nil),          // 3: yandex.cloud.metastore.v1.CreateClusterRequest
 	(*CreateClusterMetadata)(nil),         // 4: yandex.cloud.metastore.v1.CreateClusterMetadata
-	(*UpdateClusterMetadata)(nil),         // 5: yandex.cloud.metastore.v1.UpdateClusterMetadata
-	(*UpdateClusterRequest)(nil),          // 6: yandex.cloud.metastore.v1.UpdateClusterRequest
-	(*UpdateNetworkConfigSpec)(nil),       // 7: yandex.cloud.metastore.v1.UpdateNetworkConfigSpec
-	(*DeleteClusterRequest)(nil),          // 8: yandex.cloud.metastore.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),         // 9: yandex.cloud.metastore.v1.DeleteClusterMetadata
-	(*StopClusterRequest)(nil),            // 10: yandex.cloud.metastore.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),           // 11: yandex.cloud.metastore.v1.StopClusterMetadata
-	(*StartClusterRequest)(nil),           // 12: yandex.cloud.metastore.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),          // 13: yandex.cloud.metastore.v1.StartClusterMetadata
-	(*ImportDataRequest)(nil),             // 14: yandex.cloud.metastore.v1.ImportDataRequest
-	(*ImportDataMetadata)(nil),            // 15: yandex.cloud.metastore.v1.ImportDataMetadata
-	(*ExportDataRequest)(nil),             // 16: yandex.cloud.metastore.v1.ExportDataRequest
-	(*ExportDataMetadata)(nil),            // 17: yandex.cloud.metastore.v1.ExportDataMetadata
-	(*ListClusterOperationsRequest)(nil),  // 18: yandex.cloud.metastore.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil), // 19: yandex.cloud.metastore.v1.ListClusterOperationsResponse
-	(*ConfigSpec)(nil),                    // 20: yandex.cloud.metastore.v1.ConfigSpec
-	(*UpdateClusterConfigSpec)(nil),       // 21: yandex.cloud.metastore.v1.UpdateClusterConfigSpec
+	(*UpdateClusterRequest)(nil),          // 5: yandex.cloud.metastore.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),         // 6: yandex.cloud.metastore.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),          // 7: yandex.cloud.metastore.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),         // 8: yandex.cloud.metastore.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),           // 9: yandex.cloud.metastore.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),          // 10: yandex.cloud.metastore.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),            // 11: yandex.cloud.metastore.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),           // 12: yandex.cloud.metastore.v1.StopClusterMetadata
+	(*ImportDataRequest)(nil),             // 13: yandex.cloud.metastore.v1.ImportDataRequest
+	(*ImportDataMetadata)(nil),            // 14: yandex.cloud.metastore.v1.ImportDataMetadata
+	(*ExportDataRequest)(nil),             // 15: yandex.cloud.metastore.v1.ExportDataRequest
+	(*ExportDataMetadata)(nil),            // 16: yandex.cloud.metastore.v1.ExportDataMetadata
+	(*ListClusterOperationsRequest)(nil),  // 17: yandex.cloud.metastore.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil), // 18: yandex.cloud.metastore.v1.ListClusterOperationsResponse
+	(*ConfigSpec)(nil),                    // 19: yandex.cloud.metastore.v1.ConfigSpec
+	(*UpdateClusterConfigSpec)(nil),       // 20: yandex.cloud.metastore.v1.UpdateClusterConfigSpec
+	(*UpdateNetworkConfigSpec)(nil),       // 21: yandex.cloud.metastore.v1.UpdateNetworkConfigSpec
 	nil,                                   // 22: yandex.cloud.metastore.v1.CreateClusterRequest.LabelsEntry
 	nil,                                   // 23: yandex.cloud.metastore.v1.UpdateClusterRequest.LabelsEntry
 	(*Cluster)(nil),                       // 24: yandex.cloud.metastore.v1.Cluster
@@ -1502,39 +1509,39 @@ var file_yandex_cloud_metastore_v1_cluster_service_proto_goTypes = []any{
 var file_yandex_cloud_metastore_v1_cluster_service_proto_depIdxs = []int32{
 	24, // 0: yandex.cloud.metastore.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.metastore.v1.Cluster
 	22, // 1: yandex.cloud.metastore.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.metastore.v1.CreateClusterRequest.LabelsEntry
-	20, // 2: yandex.cloud.metastore.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.metastore.v1.ConfigSpec
+	19, // 2: yandex.cloud.metastore.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.metastore.v1.ConfigSpec
 	25, // 3: yandex.cloud.metastore.v1.CreateClusterRequest.logging:type_name -> yandex.cloud.metastore.v1.LoggingConfig
 	26, // 4: yandex.cloud.metastore.v1.CreateClusterRequest.network:type_name -> yandex.cloud.metastore.v1.NetworkConfig
 	27, // 5: yandex.cloud.metastore.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.metastore.v1.MaintenanceWindow
 	28, // 6: yandex.cloud.metastore.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
 	23, // 7: yandex.cloud.metastore.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.metastore.v1.UpdateClusterRequest.LabelsEntry
 	25, // 8: yandex.cloud.metastore.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.metastore.v1.LoggingConfig
-	7,  // 9: yandex.cloud.metastore.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.metastore.v1.UpdateNetworkConfigSpec
-	21, // 10: yandex.cloud.metastore.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.metastore.v1.UpdateClusterConfigSpec
+	21, // 9: yandex.cloud.metastore.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.metastore.v1.UpdateNetworkConfigSpec
+	20, // 10: yandex.cloud.metastore.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.metastore.v1.UpdateClusterConfigSpec
 	27, // 11: yandex.cloud.metastore.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.metastore.v1.MaintenanceWindow
 	29, // 12: yandex.cloud.metastore.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	30, // 13: yandex.cloud.metastore.v1.ConfigSpec.resources:type_name -> yandex.cloud.metastore.v1.Resources
 	30, // 14: yandex.cloud.metastore.v1.UpdateClusterConfigSpec.resources:type_name -> yandex.cloud.metastore.v1.Resources
 	0,  // 15: yandex.cloud.metastore.v1.ClusterService.Get:input_type -> yandex.cloud.metastore.v1.GetClusterRequest
 	1,  // 16: yandex.cloud.metastore.v1.ClusterService.List:input_type -> yandex.cloud.metastore.v1.ListClustersRequest
-	18, // 17: yandex.cloud.metastore.v1.ClusterService.ListOperations:input_type -> yandex.cloud.metastore.v1.ListClusterOperationsRequest
-	3,  // 18: yandex.cloud.metastore.v1.ClusterService.Create:input_type -> yandex.cloud.metastore.v1.CreateClusterRequest
-	6,  // 19: yandex.cloud.metastore.v1.ClusterService.Update:input_type -> yandex.cloud.metastore.v1.UpdateClusterRequest
-	8,  // 20: yandex.cloud.metastore.v1.ClusterService.Delete:input_type -> yandex.cloud.metastore.v1.DeleteClusterRequest
-	10, // 21: yandex.cloud.metastore.v1.ClusterService.Stop:input_type -> yandex.cloud.metastore.v1.StopClusterRequest
-	12, // 22: yandex.cloud.metastore.v1.ClusterService.Start:input_type -> yandex.cloud.metastore.v1.StartClusterRequest
-	14, // 23: yandex.cloud.metastore.v1.ClusterService.ImportData:input_type -> yandex.cloud.metastore.v1.ImportDataRequest
-	16, // 24: yandex.cloud.metastore.v1.ClusterService.ExportData:input_type -> yandex.cloud.metastore.v1.ExportDataRequest
+	3,  // 17: yandex.cloud.metastore.v1.ClusterService.Create:input_type -> yandex.cloud.metastore.v1.CreateClusterRequest
+	5,  // 18: yandex.cloud.metastore.v1.ClusterService.Update:input_type -> yandex.cloud.metastore.v1.UpdateClusterRequest
+	7,  // 19: yandex.cloud.metastore.v1.ClusterService.Delete:input_type -> yandex.cloud.metastore.v1.DeleteClusterRequest
+	9,  // 20: yandex.cloud.metastore.v1.ClusterService.Start:input_type -> yandex.cloud.metastore.v1.StartClusterRequest
+	11, // 21: yandex.cloud.metastore.v1.ClusterService.Stop:input_type -> yandex.cloud.metastore.v1.StopClusterRequest
+	13, // 22: yandex.cloud.metastore.v1.ClusterService.ImportData:input_type -> yandex.cloud.metastore.v1.ImportDataRequest
+	15, // 23: yandex.cloud.metastore.v1.ClusterService.ExportData:input_type -> yandex.cloud.metastore.v1.ExportDataRequest
+	17, // 24: yandex.cloud.metastore.v1.ClusterService.ListOperations:input_type -> yandex.cloud.metastore.v1.ListClusterOperationsRequest
 	24, // 25: yandex.cloud.metastore.v1.ClusterService.Get:output_type -> yandex.cloud.metastore.v1.Cluster
 	2,  // 26: yandex.cloud.metastore.v1.ClusterService.List:output_type -> yandex.cloud.metastore.v1.ListClustersResponse
-	19, // 27: yandex.cloud.metastore.v1.ClusterService.ListOperations:output_type -> yandex.cloud.metastore.v1.ListClusterOperationsResponse
-	29, // 28: yandex.cloud.metastore.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 29: yandex.cloud.metastore.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 30: yandex.cloud.metastore.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	29, // 27: yandex.cloud.metastore.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	29, // 28: yandex.cloud.metastore.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	29, // 29: yandex.cloud.metastore.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	29, // 30: yandex.cloud.metastore.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
 	29, // 31: yandex.cloud.metastore.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	29, // 32: yandex.cloud.metastore.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	29, // 33: yandex.cloud.metastore.v1.ClusterService.ImportData:output_type -> yandex.cloud.operation.Operation
-	29, // 34: yandex.cloud.metastore.v1.ClusterService.ExportData:output_type -> yandex.cloud.operation.Operation
+	29, // 32: yandex.cloud.metastore.v1.ClusterService.ImportData:output_type -> yandex.cloud.operation.Operation
+	29, // 33: yandex.cloud.metastore.v1.ClusterService.ExportData:output_type -> yandex.cloud.operation.Operation
+	18, // 34: yandex.cloud.metastore.v1.ClusterService.ListOperations:output_type -> yandex.cloud.metastore.v1.ListClusterOperationsResponse
 	25, // [25:35] is the sub-list for method output_type
 	15, // [15:25] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
@@ -1547,8 +1554,8 @@ func file_yandex_cloud_metastore_v1_cluster_service_proto_init() {
 	if File_yandex_cloud_metastore_v1_cluster_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_metastore_v1_maintenance_proto_init()
 	file_yandex_cloud_metastore_v1_cluster_proto_init()
+	file_yandex_cloud_metastore_v1_maintenance_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -67,6 +67,12 @@ func (m *BatchCompletionRequest) SetRequestFormat(v BatchCompletionRequest_Reque
 	m.RequestFormat = v
 }
 
+type BatchCompletionRequest_ResponseFormat = isBatchCompletionRequest_ResponseFormat
+
+func (m *BatchCompletionRequest) SetResponseFormat(v BatchCompletionRequest_ResponseFormat) {
+	m.ResponseFormat = v
+}
+
 func (m *BatchCompletionRequest) SetModelUri(v string) {
 	m.ModelUri = v
 }
@@ -78,6 +84,18 @@ func (m *BatchCompletionRequest) SetCompletionOptions(v *v1.CompletionOptions) {
 func (m *BatchCompletionRequest) SetSourceDatasetId(v string) {
 	m.RequestFormat = &BatchCompletionRequest_SourceDatasetId{
 		SourceDatasetId: v,
+	}
+}
+
+func (m *BatchCompletionRequest) SetJsonObject(v bool) {
+	m.ResponseFormat = &BatchCompletionRequest_JsonObject{
+		JsonObject: v,
+	}
+}
+
+func (m *BatchCompletionRequest) SetJsonSchema(v *v1.JsonSchema) {
+	m.ResponseFormat = &BatchCompletionRequest_JsonSchema{
+		JsonSchema: v,
 	}
 }
 

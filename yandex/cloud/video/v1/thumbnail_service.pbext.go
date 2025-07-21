@@ -6,8 +6,26 @@ func (m *GetThumbnailRequest) SetThumbnailId(v string) {
 	m.ThumbnailId = v
 }
 
+type ListThumbnailRequest_ParentId = isListThumbnailRequest_ParentId
+
+func (m *ListThumbnailRequest) SetParentId(v ListThumbnailRequest_ParentId) {
+	m.ParentId = v
+}
+
 func (m *ListThumbnailRequest) SetChannelId(v string) {
 	m.ChannelId = v
+}
+
+func (m *ListThumbnailRequest) SetEpisodeId(v string) {
+	m.ParentId = &ListThumbnailRequest_EpisodeId{
+		EpisodeId: v,
+	}
+}
+
+func (m *ListThumbnailRequest) SetVideoId(v string) {
+	m.ParentId = &ListThumbnailRequest_VideoId{
+		VideoId: v,
+	}
 }
 
 func (m *ListThumbnailRequest) SetPageSize(v int64) {
@@ -26,8 +44,26 @@ func (m *ListThumbnailResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+type CreateThumbnailRequest_ParentId = isCreateThumbnailRequest_ParentId
+
+func (m *CreateThumbnailRequest) SetParentId(v CreateThumbnailRequest_ParentId) {
+	m.ParentId = v
+}
+
 func (m *CreateThumbnailRequest) SetChannelId(v string) {
 	m.ChannelId = v
+}
+
+func (m *CreateThumbnailRequest) SetEpisodeId(v string) {
+	m.ParentId = &CreateThumbnailRequest_EpisodeId{
+		EpisodeId: v,
+	}
+}
+
+func (m *CreateThumbnailRequest) SetVideoId(v string) {
+	m.ParentId = &CreateThumbnailRequest_VideoId{
+		VideoId: v,
+	}
 }
 
 func (m *CreateThumbnailMetadata) SetThumbnailId(v string) {

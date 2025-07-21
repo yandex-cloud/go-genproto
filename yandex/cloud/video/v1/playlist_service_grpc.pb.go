@@ -34,20 +34,29 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Playlist management service.
+// Provides methods for creating, retrieving, updating, and deleting playlists,
+// which are collections of videos or episodes that can be played sequentially.
 type PlaylistServiceClient interface {
-	// Get the specific playlist.
+	// Retrieves detailed information about a specific playlist by its ID.
+	// Returns all playlist metadata, items, and related information.
 	Get(ctx context.Context, in *GetPlaylistRequest, opts ...grpc.CallOption) (*Playlist, error)
-	// List playlists for a channel.
+	// Lists all playlists in a specific channel with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(ctx context.Context, in *ListPlaylistsRequest, opts ...grpc.CallOption) (*ListPlaylistsResponse, error)
-	// Create playlist.
+	// Creates a new playlist in the specified channel with the provided items.
+	// Playlists can contain videos, episodes, or a mix of both content types.
 	Create(ctx context.Context, in *CreatePlaylistRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Update playlist.
+	// Updates an existing playlist's metadata and items.
+	// Only fields specified in the field_mask will be updated.
 	Update(ctx context.Context, in *UpdatePlaylistRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Delete playlist.
+	// Deletes a specific playlist by its ID.
+	// This removes the playlist but does not affect the videos or episodes it contains.
 	Delete(ctx context.Context, in *DeletePlaylistRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Batch delete playlists.
+	// Deletes multiple playlists in a specific channel in a single request.
+	// This is more efficient than making multiple Delete requests when removing several playlists.
 	BatchDelete(ctx context.Context, in *BatchDeletePlaylistsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Get player url.
+	// Generates a player URL for watching the playlist.
+	// The URL can include player parameters such as autoplay, mute, and visibility of interface controls.
 	GetPlayerURL(ctx context.Context, in *GetPlaylistPlayerURLRequest, opts ...grpc.CallOption) (*GetPlaylistPlayerURLResponse, error)
 }
 
@@ -134,20 +143,29 @@ func (c *playlistServiceClient) GetPlayerURL(ctx context.Context, in *GetPlaylis
 // for forward compatibility.
 //
 // Playlist management service.
+// Provides methods for creating, retrieving, updating, and deleting playlists,
+// which are collections of videos or episodes that can be played sequentially.
 type PlaylistServiceServer interface {
-	// Get the specific playlist.
+	// Retrieves detailed information about a specific playlist by its ID.
+	// Returns all playlist metadata, items, and related information.
 	Get(context.Context, *GetPlaylistRequest) (*Playlist, error)
-	// List playlists for a channel.
+	// Lists all playlists in a specific channel with pagination support.
+	// Results can be filtered and sorted using the provided parameters.
 	List(context.Context, *ListPlaylistsRequest) (*ListPlaylistsResponse, error)
-	// Create playlist.
+	// Creates a new playlist in the specified channel with the provided items.
+	// Playlists can contain videos, episodes, or a mix of both content types.
 	Create(context.Context, *CreatePlaylistRequest) (*operation.Operation, error)
-	// Update playlist.
+	// Updates an existing playlist's metadata and items.
+	// Only fields specified in the field_mask will be updated.
 	Update(context.Context, *UpdatePlaylistRequest) (*operation.Operation, error)
-	// Delete playlist.
+	// Deletes a specific playlist by its ID.
+	// This removes the playlist but does not affect the videos or episodes it contains.
 	Delete(context.Context, *DeletePlaylistRequest) (*operation.Operation, error)
-	// Batch delete playlists.
+	// Deletes multiple playlists in a specific channel in a single request.
+	// This is more efficient than making multiple Delete requests when removing several playlists.
 	BatchDelete(context.Context, *BatchDeletePlaylistsRequest) (*operation.Operation, error)
-	// Get player url.
+	// Generates a player URL for watching the playlist.
+	// The URL can include player parameters such as autoplay, mute, and visibility of interface controls.
 	GetPlayerURL(context.Context, *GetPlaylistPlayerURLRequest) (*GetPlaylistPlayerURLResponse, error)
 }
 

@@ -62,6 +62,14 @@ func (m *Resource) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *Resource) SetProviderType(v string) {
+	m.ProviderType = v
+}
+
+func (m *Resource) SetProviderCname(v string) {
+	m.ProviderCname = v
+}
+
 func (m *ResourceOptions) SetDisableCache(v *ResourceOptions_BoolOption) {
 	m.DisableCache = v
 }
