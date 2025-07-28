@@ -25,3 +25,11 @@ func (m *Group) SetName(v string) {
 func (m *Group) SetDescription(v string) {
 	m.Description = v
 }
+
+func (m *Group) SetSubjectContainerId(v string) {
+	m.SubjectContainerId = v
+}
+
+func (m *Group) SetExternalId(v string) {
+	m.ExternalId = v
+}

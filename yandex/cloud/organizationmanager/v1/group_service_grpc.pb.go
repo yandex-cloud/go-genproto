@@ -22,9 +22,14 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	GroupService_Get_FullMethodName                  = "/yandex.cloud.organizationmanager.v1.GroupService/Get"
+	GroupService_ResolveExternal_FullMethodName      = "/yandex.cloud.organizationmanager.v1.GroupService/ResolveExternal"
 	GroupService_List_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.GroupService/List"
+	GroupService_ListExternal_FullMethodName         = "/yandex.cloud.organizationmanager.v1.GroupService/ListExternal"
 	GroupService_Create_FullMethodName               = "/yandex.cloud.organizationmanager.v1.GroupService/Create"
+	GroupService_CreateExternal_FullMethodName       = "/yandex.cloud.organizationmanager.v1.GroupService/CreateExternal"
 	GroupService_Update_FullMethodName               = "/yandex.cloud.organizationmanager.v1.GroupService/Update"
+	GroupService_ConvertToExternal_FullMethodName    = "/yandex.cloud.organizationmanager.v1.GroupService/ConvertToExternal"
+	GroupService_ConvertAllToBasic_FullMethodName    = "/yandex.cloud.organizationmanager.v1.GroupService/ConvertAllToBasic"
 	GroupService_Delete_FullMethodName               = "/yandex.cloud.organizationmanager.v1.GroupService/Delete"
 	GroupService_ListOperations_FullMethodName       = "/yandex.cloud.organizationmanager.v1.GroupService/ListOperations"
 	GroupService_ListMembers_FullMethodName          = "/yandex.cloud.organizationmanager.v1.GroupService/ListMembers"
@@ -44,12 +49,22 @@ type GroupServiceClient interface {
 	//
 	// To get the list of available Group resources, make a [List] request.
 	Get(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*Group, error)
+	// Returns external group by subject container and external id
+	ResolveExternal(ctx context.Context, in *ResolveExternalGroupRequest, opts ...grpc.CallOption) (*Group, error)
 	// Retrieves the list of group resources.
 	List(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsResponse, error)
+	// Retrieves the list of external group linked subject container
+	ListExternal(ctx context.Context, in *ListExternalGroupsRequest, opts ...grpc.CallOption) (*ListExternalGroupsResponse, error)
 	// Creates a group in the specified organization.
 	Create(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Creates an external group.
+	CreateExternal(ctx context.Context, in *CreateExternalGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified group.
 	Update(ctx context.Context, in *UpdateGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Converts single basic (not external) group to external. Precondition: group must be basic.
+	ConvertToExternal(ctx context.Context, in *ConvertToExternalGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Converts all groups that belongs to subject container from external to basic (not external).
+	ConvertAllToBasic(ctx context.Context, in *ConvertAllToBasicGroupsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified group.
 	Delete(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified group.
@@ -84,10 +99,30 @@ func (c *groupServiceClient) Get(ctx context.Context, in *GetGroupRequest, opts 
 	return out, nil
 }
 
+func (c *groupServiceClient) ResolveExternal(ctx context.Context, in *ResolveExternalGroupRequest, opts ...grpc.CallOption) (*Group, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Group)
+	err := c.cc.Invoke(ctx, GroupService_ResolveExternal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *groupServiceClient) List(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListGroupsResponse)
 	err := c.cc.Invoke(ctx, GroupService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupServiceClient) ListExternal(ctx context.Context, in *ListExternalGroupsRequest, opts ...grpc.CallOption) (*ListExternalGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListExternalGroupsResponse)
+	err := c.cc.Invoke(ctx, GroupService_ListExternal_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -104,10 +139,40 @@ func (c *groupServiceClient) Create(ctx context.Context, in *CreateGroupRequest,
 	return out, nil
 }
 
+func (c *groupServiceClient) CreateExternal(ctx context.Context, in *CreateExternalGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, GroupService_CreateExternal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *groupServiceClient) Update(ctx context.Context, in *UpdateGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, GroupService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupServiceClient) ConvertToExternal(ctx context.Context, in *ConvertToExternalGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, GroupService_ConvertToExternal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupServiceClient) ConvertAllToBasic(ctx context.Context, in *ConvertAllToBasicGroupsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, GroupService_ConvertAllToBasic_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -194,12 +259,22 @@ type GroupServiceServer interface {
 	//
 	// To get the list of available Group resources, make a [List] request.
 	Get(context.Context, *GetGroupRequest) (*Group, error)
+	// Returns external group by subject container and external id
+	ResolveExternal(context.Context, *ResolveExternalGroupRequest) (*Group, error)
 	// Retrieves the list of group resources.
 	List(context.Context, *ListGroupsRequest) (*ListGroupsResponse, error)
+	// Retrieves the list of external group linked subject container
+	ListExternal(context.Context, *ListExternalGroupsRequest) (*ListExternalGroupsResponse, error)
 	// Creates a group in the specified organization.
 	Create(context.Context, *CreateGroupRequest) (*operation.Operation, error)
+	// Creates an external group.
+	CreateExternal(context.Context, *CreateExternalGroupRequest) (*operation.Operation, error)
 	// Updates the specified group.
 	Update(context.Context, *UpdateGroupRequest) (*operation.Operation, error)
+	// Converts single basic (not external) group to external. Precondition: group must be basic.
+	ConvertToExternal(context.Context, *ConvertToExternalGroupRequest) (*operation.Operation, error)
+	// Converts all groups that belongs to subject container from external to basic (not external).
+	ConvertAllToBasic(context.Context, *ConvertAllToBasicGroupsRequest) (*operation.Operation, error)
 	// Deletes the specified group.
 	Delete(context.Context, *DeleteGroupRequest) (*operation.Operation, error)
 	// Lists operations for the specified group.
@@ -226,14 +301,29 @@ type UnimplementedGroupServiceServer struct{}
 func (UnimplementedGroupServiceServer) Get(context.Context, *GetGroupRequest) (*Group, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
+func (UnimplementedGroupServiceServer) ResolveExternal(context.Context, *ResolveExternalGroupRequest) (*Group, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResolveExternal not implemented")
+}
 func (UnimplementedGroupServiceServer) List(context.Context, *ListGroupsRequest) (*ListGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedGroupServiceServer) ListExternal(context.Context, *ListExternalGroupsRequest) (*ListExternalGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExternal not implemented")
 }
 func (UnimplementedGroupServiceServer) Create(context.Context, *CreateGroupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
+func (UnimplementedGroupServiceServer) CreateExternal(context.Context, *CreateExternalGroupRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExternal not implemented")
+}
 func (UnimplementedGroupServiceServer) Update(context.Context, *UpdateGroupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedGroupServiceServer) ConvertToExternal(context.Context, *ConvertToExternalGroupRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConvertToExternal not implemented")
+}
+func (UnimplementedGroupServiceServer) ConvertAllToBasic(context.Context, *ConvertAllToBasicGroupsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConvertAllToBasic not implemented")
 }
 func (UnimplementedGroupServiceServer) Delete(context.Context, *DeleteGroupRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -294,6 +384,24 @@ func _GroupService_Get_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_ResolveExternal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveExternalGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).ResolveExternal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_ResolveExternal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).ResolveExternal(ctx, req.(*ResolveExternalGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GroupService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListGroupsRequest)
 	if err := dec(in); err != nil {
@@ -308,6 +416,24 @@ func _GroupService_List_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GroupServiceServer).List(ctx, req.(*ListGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupService_ListExternal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExternalGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).ListExternal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_ListExternal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).ListExternal(ctx, req.(*ListExternalGroupsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -330,6 +456,24 @@ func _GroupService_Create_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_CreateExternal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateExternalGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).CreateExternal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_CreateExternal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).CreateExternal(ctx, req.(*CreateExternalGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GroupService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateGroupRequest)
 	if err := dec(in); err != nil {
@@ -344,6 +488,42 @@ func _GroupService_Update_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GroupServiceServer).Update(ctx, req.(*UpdateGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupService_ConvertToExternal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConvertToExternalGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).ConvertToExternal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_ConvertToExternal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).ConvertToExternal(ctx, req.(*ConvertToExternalGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupService_ConvertAllToBasic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConvertAllToBasicGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).ConvertAllToBasic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_ConvertAllToBasic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).ConvertAllToBasic(ctx, req.(*ConvertAllToBasicGroupsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -486,16 +666,36 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GroupService_Get_Handler,
 		},
 		{
+			MethodName: "ResolveExternal",
+			Handler:    _GroupService_ResolveExternal_Handler,
+		},
+		{
 			MethodName: "List",
 			Handler:    _GroupService_List_Handler,
+		},
+		{
+			MethodName: "ListExternal",
+			Handler:    _GroupService_ListExternal_Handler,
 		},
 		{
 			MethodName: "Create",
 			Handler:    _GroupService_Create_Handler,
 		},
 		{
+			MethodName: "CreateExternal",
+			Handler:    _GroupService_CreateExternal_Handler,
+		},
+		{
 			MethodName: "Update",
 			Handler:    _GroupService_Update_Handler,
+		},
+		{
+			MethodName: "ConvertToExternal",
+			Handler:    _GroupService_ConvertToExternal_Handler,
+		},
+		{
+			MethodName: "ConvertAllToBasic",
+			Handler:    _GroupService_ConvertAllToBasic_Handler,
 		},
 		{
 			MethodName: "Delete",
