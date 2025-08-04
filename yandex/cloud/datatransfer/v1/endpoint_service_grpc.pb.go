@@ -31,8 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing [endpoints]({{ api-url-prefix
-// }}/data-transfer/concepts/#endpoint).
+// A set of methods for managing [endpoints]({{ api-url-prefix }}/data-transfer/concepts/#endpoint).
 type EndpointServiceClient interface {
 	// Returns the specified endpoint.
 	//
@@ -110,8 +109,7 @@ func (c *endpointServiceClient) Delete(ctx context.Context, in *DeleteEndpointRe
 // All implementations should embed UnimplementedEndpointServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing [endpoints]({{ api-url-prefix
-// }}/data-transfer/concepts/#endpoint).
+// A set of methods for managing [endpoints]({{ api-url-prefix }}/data-transfer/concepts/#endpoint).
 type EndpointServiceServer interface {
 	// Returns the specified endpoint.
 	//
