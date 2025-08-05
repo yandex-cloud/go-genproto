@@ -59,12 +59,6 @@ func (m *Tool) SetFunction(v *FunctionTool) {
 	}
 }
 
-func (m *Tool) SetGenSearch(v *GenSearchTool) {
-	m.ToolType = &Tool_GenSearch{
-		GenSearch: v,
-	}
-}
-
 type ToolCall_ToolCallType = isToolCall_ToolCallType
 
 func (m *ToolCall) SetToolCallType(v ToolCall_ToolCallType) {
@@ -198,81 +192,5 @@ func (m *ResponseFormat) SetJsonObject(v bool) {
 func (m *ResponseFormat) SetJsonSchema(v *JsonSchema) {
 	m.ResponseFormat = &ResponseFormat_JsonSchema{
 		JsonSchema: v,
-	}
-}
-
-func (m *GenSearchTool) SetOptions(v *GenSearchOptions) {
-	m.Options = v
-}
-
-func (m *GenSearchTool) SetDescription(v string) {
-	m.Description = v
-}
-
-type GenSearchOptions_SiteOptions = isGenSearchOptions_SiteOptions
-
-func (m *GenSearchOptions) SetSiteOptions(v GenSearchOptions_SiteOptions) {
-	m.SiteOptions = v
-}
-
-func (m *GenSearchOptions) SetSite(v *GenSearchOptions_SiteOption) {
-	m.SiteOptions = &GenSearchOptions_Site{
-		Site: v,
-	}
-}
-
-func (m *GenSearchOptions) SetHost(v *GenSearchOptions_HostOption) {
-	m.SiteOptions = &GenSearchOptions_Host{
-		Host: v,
-	}
-}
-
-func (m *GenSearchOptions) SetUrl(v *GenSearchOptions_UrlOption) {
-	m.SiteOptions = &GenSearchOptions_Url{
-		Url: v,
-	}
-}
-
-func (m *GenSearchOptions) SetEnableNrfmDocs(v bool) {
-	m.EnableNrfmDocs = v
-}
-
-func (m *GenSearchOptions) SetSearchFilters(v []*GenSearchOptions_SearchFilter) {
-	m.SearchFilters = v
-}
-
-func (m *GenSearchOptions_SiteOption) SetSite(v []string) {
-	m.Site = v
-}
-
-func (m *GenSearchOptions_UrlOption) SetUrl(v []string) {
-	m.Url = v
-}
-
-func (m *GenSearchOptions_HostOption) SetHost(v []string) {
-	m.Host = v
-}
-
-type GenSearchOptions_SearchFilter_FilterOptions = isGenSearchOptions_SearchFilter_FilterOptions
-
-func (m *GenSearchOptions_SearchFilter) SetFilterOptions(v GenSearchOptions_SearchFilter_FilterOptions) {
-	m.FilterOptions = v
-}
-
-func (m *GenSearchOptions_SearchFilter) SetDate(v string) {
-	m.FilterOptions = &GenSearchOptions_SearchFilter_Date{
-		Date: v,
-	}
-}
-
-func (m *GenSearchOptions_SearchFilter) SetLang(v string) {
-	m.FilterOptions = &GenSearchOptions_SearchFilter_Lang{
-		Lang: v,
-	}
-}
-
-func (m *GenSearchOptions_SearchFilter) SetFormat(v GenSearchOptions_SearchFilter_DocFormat) {
-	m.FilterOptions = &GenSearchOptions_SearchFilter_Format{
-		Format: v,
 	}
 }

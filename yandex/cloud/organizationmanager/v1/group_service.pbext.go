@@ -11,14 +11,6 @@ func (m *GetGroupRequest) SetGroupId(v string) {
 	m.GroupId = v
 }
 
-func (m *ResolveExternalGroupRequest) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *ResolveExternalGroupRequest) SetExternalId(v string) {
-	m.ExternalId = v
-}
-
 func (m *ListGroupsRequest) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
@@ -43,30 +35,6 @@ func (m *ListGroupsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-func (m *ListExternalGroupsRequest) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *ListExternalGroupsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListExternalGroupsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListExternalGroupsRequest) SetFilter(v string) {
-	m.Filter = v
-}
-
-func (m *ListExternalGroupsResponse) SetGroups(v []*Group) {
-	m.Groups = v
-}
-
-func (m *ListExternalGroupsResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
-}
-
 func (m *CreateGroupRequest) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
@@ -81,54 +49,6 @@ func (m *CreateGroupRequest) SetDescription(v string) {
 
 func (m *CreateGroupMetadata) SetGroupId(v string) {
 	m.GroupId = v
-}
-
-func (m *CreateExternalGroupRequest) SetOrganizationId(v string) {
-	m.OrganizationId = v
-}
-
-func (m *CreateExternalGroupRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *CreateExternalGroupRequest) SetDescription(v string) {
-	m.Description = v
-}
-
-func (m *CreateExternalGroupRequest) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *CreateExternalGroupRequest) SetExternalId(v string) {
-	m.ExternalId = v
-}
-
-func (m *CreateExternalGroupRequest) SetMakeEditor(v bool) {
-	m.MakeEditor = v
-}
-
-func (m *CreateExternalGroupMetadata) SetGroupId(v string) {
-	m.GroupId = v
-}
-
-func (m *CreateExternalGroupMetadata) SetOrganizationId(v string) {
-	m.OrganizationId = v
-}
-
-func (m *CreateExternalGroupMetadata) SetGroupName(v string) {
-	m.GroupName = v
-}
-
-func (m *CreateExternalGroupMetadata) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *CreateExternalGroupMetadata) SetExternalId(v string) {
-	m.ExternalId = v
-}
-
-func (m *CreateExternalGroupMetadata) SetMakeEditor(v bool) {
-	m.MakeEditor = v
 }
 
 func (m *UpdateGroupRequest) SetGroupId(v string) {
@@ -149,46 +69,6 @@ func (m *UpdateGroupRequest) SetDescription(v string) {
 
 func (m *UpdateGroupMetadata) SetGroupId(v string) {
 	m.GroupId = v
-}
-
-func (m *ConvertToExternalGroupRequest) SetGroupId(v string) {
-	m.GroupId = v
-}
-
-func (m *ConvertToExternalGroupRequest) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *ConvertToExternalGroupRequest) SetExternalId(v string) {
-	m.ExternalId = v
-}
-
-func (m *ConvertToExternalGroupRequest) SetMakeEditor(v bool) {
-	m.MakeEditor = v
-}
-
-func (m *ConvertToExternalGroupMetadata) SetGroupId(v string) {
-	m.GroupId = v
-}
-
-func (m *ConvertToExternalGroupMetadata) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *ConvertToExternalGroupMetadata) SetExternalId(v string) {
-	m.ExternalId = v
-}
-
-func (m *ConvertToExternalGroupMetadata) SetMakeEditor(v bool) {
-	m.MakeEditor = v
-}
-
-func (m *ConvertAllToBasicGroupsRequest) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
-}
-
-func (m *ConvertAllToBasicGroupsMetadata) SetSubjectContainerId(v string) {
-	m.SubjectContainerId = v
 }
 
 func (m *DeleteGroupRequest) SetGroupId(v string) {

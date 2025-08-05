@@ -369,10 +369,8 @@ type GenSearchResponse struct {
 	IsAnswerRejected bool `protobuf:"varint,5,opt,name=is_answer_rejected,json=isAnswerRejected,proto3" json:"is_answer_rejected,omitempty"`
 	// A bullet answer in case the model cannot give a proper response and returns a set of bullets with various data.
 	IsBulletAnswer bool `protobuf:"varint,6,opt,name=is_bullet_answer,json=isBulletAnswer,proto3" json:"is_bullet_answer,omitempty"`
-	// Search hints
-	Hints         []string `protobuf:"bytes,7,rep,name=hints,proto3" json:"hints,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GenSearchResponse) Reset() {
@@ -445,13 +443,6 @@ func (x *GenSearchResponse) GetIsBulletAnswer() bool {
 		return x.IsBulletAnswer
 	}
 	return false
-}
-
-func (x *GenSearchResponse) GetHints() []string {
-	if x != nil {
-		return x.Hints
-	}
-	return nil
 }
 
 type GenSearchRequest_SiteOption struct {
@@ -852,15 +843,14 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\x0eDOC_FORMAT_DOC\x10\n" +
 	"B\x10\n" +
 	"\x0efilter_optionsB\x0e\n" +
-	"\fsite_options\"\xaa\x04\n" +
+	"\fsite_options\"\x94\x04\n" +
 	"\x11GenSearchResponse\x12E\n" +
 	"\amessage\x18\x01 \x01(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageR\amessage\x12M\n" +
 	"\asources\x18\x02 \x03(\v23.yandex.cloud.searchapi.v2.GenSearchResponse.SourceR\asources\x12_\n" +
 	"\x0esearch_queries\x18\x03 \x03(\v28.yandex.cloud.searchapi.v2.GenSearchResponse.SearchQueryR\rsearchQueries\x120\n" +
 	"\x14fixed_misspell_query\x18\x04 \x01(\tR\x12fixedMisspellQuery\x12,\n" +
 	"\x12is_answer_rejected\x18\x05 \x01(\bR\x10isAnswerRejected\x12(\n" +
-	"\x10is_bullet_answer\x18\x06 \x01(\bR\x0eisBulletAnswer\x12\x14\n" +
-	"\x05hints\x18\a \x03(\tR\x05hints\x1aD\n" +
+	"\x10is_bullet_answer\x18\x06 \x01(\bR\x0eisBulletAnswer\x1aD\n" +
 	"\x06Source\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +

@@ -75,7 +75,7 @@ func (x MemberDelta_MemberAction) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MemberDelta_MemberAction.Descriptor instead.
 func (MemberDelta_MemberAction) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{25, 0}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{16, 0}
 }
 
 type GetGroupRequest struct {
@@ -124,62 +124,6 @@ func (x *GetGroupRequest) GetGroupId() string {
 	return ""
 }
 
-type ResolveExternalGroupRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Id of the subject container that external group belongs to
-	// To get subject container, use a [yandex.cloud.organizationmanager.v1.saml.FederationService.List] request
-	// or [yandex.cloud.organizationmanager.v1.idp.UserpoolService.List] request.
-	SubjectContainerId string `protobuf:"bytes,1,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// Id of the group from external system
-	ExternalId    string `protobuf:"bytes,2,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ResolveExternalGroupRequest) Reset() {
-	*x = ResolveExternalGroupRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResolveExternalGroupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResolveExternalGroupRequest) ProtoMessage() {}
-
-func (x *ResolveExternalGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResolveExternalGroupRequest.ProtoReflect.Descriptor instead.
-func (*ResolveExternalGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ResolveExternalGroupRequest) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *ResolveExternalGroupRequest) GetExternalId() string {
-	if x != nil {
-		return x.ExternalId
-	}
-	return ""
-}
-
 type ListGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the organization to list groups in.
@@ -207,7 +151,7 @@ type ListGroupsRequest struct {
 
 func (x *ListGroupsRequest) Reset() {
 	*x = ListGroupsRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -219,7 +163,7 @@ func (x *ListGroupsRequest) String() string {
 func (*ListGroupsRequest) ProtoMessage() {}
 
 func (x *ListGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +176,7 @@ func (x *ListGroupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListGroupsRequest) GetOrganizationId() string {
@@ -280,7 +224,7 @@ type ListGroupsResponse struct {
 
 func (x *ListGroupsResponse) Reset() {
 	*x = ListGroupsResponse{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -292,7 +236,7 @@ func (x *ListGroupsResponse) String() string {
 func (*ListGroupsResponse) ProtoMessage() {}
 
 func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -305,7 +249,7 @@ func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListGroupsResponse) GetGroups() []*Group {
@@ -316,149 +260,6 @@ func (x *ListGroupsResponse) GetGroups() []*Group {
 }
 
 func (x *ListGroupsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
-type ListExternalGroupsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Id of the subject container that external group belongs to.
-	// To get subject container, use a [yandex.cloud.organizationmanager.v1.saml.FederationService.List] request
-	// or [yandex.cloud.organizationmanager.v1.idp.UserpoolService.List] request.
-	SubjectContainerId string `protobuf:"bytes,1,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size],
-	// the service returns a [ListExternalGroupsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	// Default value: 100.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. Set [page_token]
-	// to the [ListExternalGroupsResponse.next_page_token]
-	// returned by a previous list external request to get the next page of results.
-	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// A filter expression that filters resources listed in the response.
-	// The expression must specify:
-	// 1. The fields name or id. Currently you can use filtering only on the [Group.name] or [Group.id] fields.
-	// 2. An `=` operator.
-	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListExternalGroupsRequest) Reset() {
-	*x = ListExternalGroupsRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListExternalGroupsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListExternalGroupsRequest) ProtoMessage() {}
-
-func (x *ListExternalGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListExternalGroupsRequest.ProtoReflect.Descriptor instead.
-func (*ListExternalGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ListExternalGroupsRequest) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *ListExternalGroupsRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListExternalGroupsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-func (x *ListExternalGroupsRequest) GetFilter() string {
-	if x != nil {
-		return x.Filter
-	}
-	return ""
-}
-
-type ListExternalGroupsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of External group resources.
-	Groups []*Group `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListExternalGroupsRequest.page_size], use
-	// the [next_page_token] as the value
-	// for the [ListExternalGroupsRequest.page_token] query parameter
-	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListExternalGroupsResponse) Reset() {
-	*x = ListExternalGroupsResponse{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListExternalGroupsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListExternalGroupsResponse) ProtoMessage() {}
-
-func (x *ListExternalGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListExternalGroupsResponse.ProtoReflect.Descriptor instead.
-func (*ListExternalGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *ListExternalGroupsResponse) GetGroups() []*Group {
-	if x != nil {
-		return x.Groups
-	}
-	return nil
-}
-
-func (x *ListExternalGroupsResponse) GetNextPageToken() string {
 	if x != nil {
 		return x.NextPageToken
 	}
@@ -481,7 +282,7 @@ type CreateGroupRequest struct {
 
 func (x *CreateGroupRequest) Reset() {
 	*x = CreateGroupRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -493,7 +294,7 @@ func (x *CreateGroupRequest) String() string {
 func (*CreateGroupRequest) ProtoMessage() {}
 
 func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +307,7 @@ func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGroupRequest.ProtoReflect.Descriptor instead.
 func (*CreateGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateGroupRequest) GetOrganizationId() string {
@@ -540,7 +341,7 @@ type CreateGroupMetadata struct {
 
 func (x *CreateGroupMetadata) Reset() {
 	*x = CreateGroupMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -552,7 +353,7 @@ func (x *CreateGroupMetadata) String() string {
 func (*CreateGroupMetadata) ProtoMessage() {}
 
 func (x *CreateGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -565,7 +366,7 @@ func (x *CreateGroupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGroupMetadata.ProtoReflect.Descriptor instead.
 func (*CreateGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateGroupMetadata) GetGroupId() string {
@@ -573,192 +374,6 @@ func (x *CreateGroupMetadata) GetGroupId() string {
 		return x.GroupId
 	}
 	return ""
-}
-
-type CreateExternalGroupRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the organization to create a group in.
-	// To get the organization ID, use a [yandex.cloud.organizationmanager.v1.OrganizationService.List] request.
-	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Name of the group.
-	// The name must be unique within the organization.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the group.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Id of the subject container that external group belongs to.
-	// Combination of subject_container_id and external_id must be unique.
-	// To get subject container, use a [yandex.cloud.organizationmanager.v1.saml.FederationService.List] request
-	// or [yandex.cloud.organizationmanager.v1.idp.UserpoolService.List] request.
-	SubjectContainerId string `protobuf:"bytes,4,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// Id of the group from external system.
-	// Combination of subject_container_id and external_id must be unique
-	ExternalId string `protobuf:"bytes,5,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	// If true, then creator of group will be assigned to role that allows modification of group as external group.
-	MakeEditor    bool `protobuf:"varint,6,opt,name=make_editor,json=makeEditor,proto3" json:"make_editor,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateExternalGroupRequest) Reset() {
-	*x = CreateExternalGroupRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateExternalGroupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateExternalGroupRequest) ProtoMessage() {}
-
-func (x *CreateExternalGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateExternalGroupRequest.ProtoReflect.Descriptor instead.
-func (*CreateExternalGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *CreateExternalGroupRequest) GetOrganizationId() string {
-	if x != nil {
-		return x.OrganizationId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupRequest) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupRequest) GetExternalId() string {
-	if x != nil {
-		return x.ExternalId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupRequest) GetMakeEditor() bool {
-	if x != nil {
-		return x.MakeEditor
-	}
-	return false
-}
-
-type CreateExternalGroupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the group that is being created.
-	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	// ID of the organization that the group belongs to.
-	OrganizationId string `protobuf:"bytes,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Name of the group.
-	GroupName string `protobuf:"bytes,3,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
-	// Id of the subject container that created external group belongs to.
-	SubjectContainerId string `protobuf:"bytes,4,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// Id of the created group from external system.
-	ExternalId string `protobuf:"bytes,5,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	// If true, then creator of group was assigned to role that allows modification of group as external group.
-	MakeEditor    bool `protobuf:"varint,6,opt,name=make_editor,json=makeEditor,proto3" json:"make_editor,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateExternalGroupMetadata) Reset() {
-	*x = CreateExternalGroupMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateExternalGroupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateExternalGroupMetadata) ProtoMessage() {}
-
-func (x *CreateExternalGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateExternalGroupMetadata.ProtoReflect.Descriptor instead.
-func (*CreateExternalGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *CreateExternalGroupMetadata) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupMetadata) GetOrganizationId() string {
-	if x != nil {
-		return x.OrganizationId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupMetadata) GetGroupName() string {
-	if x != nil {
-		return x.GroupName
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupMetadata) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupMetadata) GetExternalId() string {
-	if x != nil {
-		return x.ExternalId
-	}
-	return ""
-}
-
-func (x *CreateExternalGroupMetadata) GetMakeEditor() bool {
-	if x != nil {
-		return x.MakeEditor
-	}
-	return false
 }
 
 type UpdateGroupRequest struct {
@@ -779,7 +394,7 @@ type UpdateGroupRequest struct {
 
 func (x *UpdateGroupRequest) Reset() {
 	*x = UpdateGroupRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +406,7 @@ func (x *UpdateGroupRequest) String() string {
 func (*UpdateGroupRequest) ProtoMessage() {}
 
 func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +419,7 @@ func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateGroupRequest) GetGroupId() string {
@@ -845,7 +460,7 @@ type UpdateGroupMetadata struct {
 
 func (x *UpdateGroupMetadata) Reset() {
 	*x = UpdateGroupMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -857,7 +472,7 @@ func (x *UpdateGroupMetadata) String() string {
 func (*UpdateGroupMetadata) ProtoMessage() {}
 
 func (x *UpdateGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -870,253 +485,12 @@ func (x *UpdateGroupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGroupMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateGroupMetadata) GetGroupId() string {
 	if x != nil {
 		return x.GroupId
-	}
-	return ""
-}
-
-type ConvertToExternalGroupRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Group resource to convert to external.
-	// To get the group ID, use a [GroupService.List] request.
-	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	// Id of the subject container that external group belongs to.
-	// Combination of subject_container_id and external_id must be unique.
-	// To get subject container, use a [yandex.cloud.organizationmanager.v1.saml.FederationService.List] request
-	// or [yandex.cloud.organizationmanager.v1.idp.UserpoolService.List] request.
-	SubjectContainerId string `protobuf:"bytes,2,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// Id of the group from external system.
-	// Combination of subject_container_id and external_id must be unique
-	ExternalId string `protobuf:"bytes,3,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	// If true, then subject that performs conversion of group will be assigned to role that allows modification of group as external group.
-	MakeEditor    bool `protobuf:"varint,4,opt,name=make_editor,json=makeEditor,proto3" json:"make_editor,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ConvertToExternalGroupRequest) Reset() {
-	*x = ConvertToExternalGroupRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConvertToExternalGroupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConvertToExternalGroupRequest) ProtoMessage() {}
-
-func (x *ConvertToExternalGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConvertToExternalGroupRequest.ProtoReflect.Descriptor instead.
-func (*ConvertToExternalGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *ConvertToExternalGroupRequest) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *ConvertToExternalGroupRequest) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *ConvertToExternalGroupRequest) GetExternalId() string {
-	if x != nil {
-		return x.ExternalId
-	}
-	return ""
-}
-
-func (x *ConvertToExternalGroupRequest) GetMakeEditor() bool {
-	if x != nil {
-		return x.MakeEditor
-	}
-	return false
-}
-
-type ConvertToExternalGroupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Group resource that is being converted to external.
-	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	// Id of the subject container that created external group belongs to.
-	SubjectContainerId string `protobuf:"bytes,2,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// Id of the created group from external system.
-	ExternalId string `protobuf:"bytes,3,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	// If true, then subject that performed conversion of group was assigned to role that allows modification of group as external group.
-	MakeEditor    bool `protobuf:"varint,4,opt,name=make_editor,json=makeEditor,proto3" json:"make_editor,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ConvertToExternalGroupMetadata) Reset() {
-	*x = ConvertToExternalGroupMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConvertToExternalGroupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConvertToExternalGroupMetadata) ProtoMessage() {}
-
-func (x *ConvertToExternalGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConvertToExternalGroupMetadata.ProtoReflect.Descriptor instead.
-func (*ConvertToExternalGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *ConvertToExternalGroupMetadata) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *ConvertToExternalGroupMetadata) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *ConvertToExternalGroupMetadata) GetExternalId() string {
-	if x != nil {
-		return x.ExternalId
-	}
-	return ""
-}
-
-func (x *ConvertToExternalGroupMetadata) GetMakeEditor() bool {
-	if x != nil {
-		return x.MakeEditor
-	}
-	return false
-}
-
-type ConvertAllToBasicGroupsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Id of the subject container for which all external groups will be converted to basic (not external) groups.
-	// To get subject container, use a [yandex.cloud.organizationmanager.v1.saml.FederationService.List] request
-	// or [yandex.cloud.organizationmanager.v1.idp.UserpoolService.List] request.
-	SubjectContainerId string `protobuf:"bytes,1,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *ConvertAllToBasicGroupsRequest) Reset() {
-	*x = ConvertAllToBasicGroupsRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConvertAllToBasicGroupsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConvertAllToBasicGroupsRequest) ProtoMessage() {}
-
-func (x *ConvertAllToBasicGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConvertAllToBasicGroupsRequest.ProtoReflect.Descriptor instead.
-func (*ConvertAllToBasicGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *ConvertAllToBasicGroupsRequest) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-type ConvertAllToBasicGroupsMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Id of the subject container for which all external groups were converted to basic (not external) groups
-	SubjectContainerId string `protobuf:"bytes,1,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *ConvertAllToBasicGroupsMetadata) Reset() {
-	*x = ConvertAllToBasicGroupsMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConvertAllToBasicGroupsMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConvertAllToBasicGroupsMetadata) ProtoMessage() {}
-
-func (x *ConvertAllToBasicGroupsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConvertAllToBasicGroupsMetadata.ProtoReflect.Descriptor instead.
-func (*ConvertAllToBasicGroupsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *ConvertAllToBasicGroupsMetadata) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
 	}
 	return ""
 }
@@ -1132,7 +506,7 @@ type DeleteGroupRequest struct {
 
 func (x *DeleteGroupRequest) Reset() {
 	*x = DeleteGroupRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1144,7 +518,7 @@ func (x *DeleteGroupRequest) String() string {
 func (*DeleteGroupRequest) ProtoMessage() {}
 
 func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1157,7 +531,7 @@ func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupRequest.ProtoReflect.Descriptor instead.
 func (*DeleteGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteGroupRequest) GetGroupId() string {
@@ -1177,7 +551,7 @@ type DeleteGroupMetadata struct {
 
 func (x *DeleteGroupMetadata) Reset() {
 	*x = DeleteGroupMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1189,7 +563,7 @@ func (x *DeleteGroupMetadata) String() string {
 func (*DeleteGroupMetadata) ProtoMessage() {}
 
 func (x *DeleteGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,7 +576,7 @@ func (x *DeleteGroupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteGroupMetadata) GetGroupId() string {
@@ -1231,7 +605,7 @@ type ListGroupOperationsRequest struct {
 
 func (x *ListGroupOperationsRequest) Reset() {
 	*x = ListGroupOperationsRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1243,7 +617,7 @@ func (x *ListGroupOperationsRequest) String() string {
 func (*ListGroupOperationsRequest) ProtoMessage() {}
 
 func (x *ListGroupOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1256,7 +630,7 @@ func (x *ListGroupOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListGroupOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListGroupOperationsRequest) GetGroupId() string {
@@ -1295,7 +669,7 @@ type ListGroupOperationsResponse struct {
 
 func (x *ListGroupOperationsResponse) Reset() {
 	*x = ListGroupOperationsResponse{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1307,7 +681,7 @@ func (x *ListGroupOperationsResponse) String() string {
 func (*ListGroupOperationsResponse) ProtoMessage() {}
 
 func (x *ListGroupOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1320,7 +694,7 @@ func (x *ListGroupOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListGroupOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListGroupOperationsResponse) GetOperations() []*operation.Operation {
@@ -1356,7 +730,7 @@ type ListGroupMembersRequest struct {
 
 func (x *ListGroupMembersRequest) Reset() {
 	*x = ListGroupMembersRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1368,7 +742,7 @@ func (x *ListGroupMembersRequest) String() string {
 func (*ListGroupMembersRequest) ProtoMessage() {}
 
 func (x *ListGroupMembersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1381,7 +755,7 @@ func (x *ListGroupMembersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupMembersRequest.ProtoReflect.Descriptor instead.
 func (*ListGroupMembersRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListGroupMembersRequest) GetGroupId() string {
@@ -1420,7 +794,7 @@ type ListGroupMembersResponse struct {
 
 func (x *ListGroupMembersResponse) Reset() {
 	*x = ListGroupMembersResponse{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1432,7 +806,7 @@ func (x *ListGroupMembersResponse) String() string {
 func (*ListGroupMembersResponse) ProtoMessage() {}
 
 func (x *ListGroupMembersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1445,7 +819,7 @@ func (x *ListGroupMembersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupMembersResponse.ProtoReflect.Descriptor instead.
 func (*ListGroupMembersResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListGroupMembersResponse) GetMembers() []*GroupMember {
@@ -1478,7 +852,7 @@ type GroupMember struct {
 
 func (x *GroupMember) Reset() {
 	*x = GroupMember{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1490,7 +864,7 @@ func (x *GroupMember) String() string {
 func (*GroupMember) ProtoMessage() {}
 
 func (x *GroupMember) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1503,7 +877,7 @@ func (x *GroupMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupMember.ProtoReflect.Descriptor instead.
 func (*GroupMember) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GroupMember) GetSubjectId() string {
@@ -1533,7 +907,7 @@ type UpdateGroupMembersRequest struct {
 
 func (x *UpdateGroupMembersRequest) Reset() {
 	*x = UpdateGroupMembersRequest{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1545,7 +919,7 @@ func (x *UpdateGroupMembersRequest) String() string {
 func (*UpdateGroupMembersRequest) ProtoMessage() {}
 
 func (x *UpdateGroupMembersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1558,7 +932,7 @@ func (x *UpdateGroupMembersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGroupMembersRequest.ProtoReflect.Descriptor instead.
 func (*UpdateGroupMembersRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateGroupMembersRequest) GetGroupId() string {
@@ -1585,7 +959,7 @@ type UpdateGroupMembersMetadata struct {
 
 func (x *UpdateGroupMembersMetadata) Reset() {
 	*x = UpdateGroupMembersMetadata{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1597,7 +971,7 @@ func (x *UpdateGroupMembersMetadata) String() string {
 func (*UpdateGroupMembersMetadata) ProtoMessage() {}
 
 func (x *UpdateGroupMembersMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1610,7 +984,7 @@ func (x *UpdateGroupMembersMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGroupMembersMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateGroupMembersMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateGroupMembersMetadata) GetGroupId() string {
@@ -1636,7 +1010,7 @@ type MemberDelta struct {
 
 func (x *MemberDelta) Reset() {
 	*x = MemberDelta{}
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1648,7 +1022,7 @@ func (x *MemberDelta) String() string {
 func (*MemberDelta) ProtoMessage() {}
 
 func (x *MemberDelta) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1661,7 +1035,7 @@ func (x *MemberDelta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberDelta.ProtoReflect.Descriptor instead.
 func (*MemberDelta) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *MemberDelta) GetAction() MemberDelta_MemberAction {
@@ -1684,11 +1058,7 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\n" +
 	"7yandex/cloud/organizationmanager/v1/group_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/organizationmanager/v1/group.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
 	"\x0fGetGroupRequest\x12'\n" +
-	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\"\x84\x01\n" +
-	"\x1bResolveExternalGroupRequest\x12>\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
-	"\vexternal_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"externalId\"\xc2\x01\n" +
+	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\"\xc2\x01\n" +
 	"\x11ListGroupsRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -1700,44 +1070,13 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x8a\xc81\x06<=1000R\x06filter\"\x80\x01\n" +
 	"\x12ListGroupsResponse\x12B\n" +
 	"\x06groups\x18\x01 \x03(\v2*.yandex.cloud.organizationmanager.v1.GroupR\x06groups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd3\x01\n" +
-	"\x19ListExternalGroupsRequest\x12>\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x88\x01\n" +
-	"\x1aListExternalGroupsResponse\x12B\n" +
-	"\x06groups\x18\x01 \x03(\v2*.yandex.cloud.organizationmanager.v1.GroupR\x06groups\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb5\x01\n" +
 	"\x12CreateGroupRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12;\n" +
 	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\"0\n" +
 	"\x13CreateGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xc5\x02\n" +
-	"\x1aCreateExternalGroupRequest\x125\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12;\n" +
-	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12>\n" +
-	"\x14subject_container_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
-	"\vexternal_id\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"externalId\x12\x1f\n" +
-	"\vmake_editor\x18\x06 \x01(\bR\n" +
-	"makeEditor\"\xf4\x01\n" +
-	"\x1bCreateExternalGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12'\n" +
-	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x12\x1d\n" +
-	"\n" +
-	"group_name\x18\x03 \x01(\tR\tgroupName\x120\n" +
-	"\x14subject_container_id\x18\x04 \x01(\tR\x12subjectContainerId\x12\x1f\n" +
-	"\vexternal_id\x18\x05 \x01(\tR\n" +
-	"externalId\x12\x1f\n" +
-	"\vmake_editor\x18\x06 \x01(\bR\n" +
-	"makeEditor\"\xe1\x01\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xe1\x01\n" +
 	"\x12UpdateGroupRequest\x12'\n" +
 	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1745,25 +1084,7 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\"0\n" +
 	"\x13UpdateGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xd0\x01\n" +
-	"\x1dConvertToExternalGroupRequest\x12'\n" +
-	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\x12>\n" +
-	"\x14subject_container_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
-	"\vexternal_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"externalId\x12\x1f\n" +
-	"\vmake_editor\x18\x04 \x01(\bR\n" +
-	"makeEditor\"\xaf\x01\n" +
-	"\x1eConvertToExternalGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x120\n" +
-	"\x14subject_container_id\x18\x02 \x01(\tR\x12subjectContainerId\x12\x1f\n" +
-	"\vexternal_id\x18\x03 \x01(\tR\n" +
-	"externalId\x12\x1f\n" +
-	"\vmake_editor\x18\x04 \x01(\bR\n" +
-	"makeEditor\"`\n" +
-	"\x1eConvertAllToBasicGroupsRequest\x12>\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\"S\n" +
-	"\x1fConvertAllToBasicGroupsMetadata\x120\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\"=\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"=\n" +
 	"\x12DeleteGroupRequest\x12'\n" +
 	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\"0\n" +
 	"\x13DeleteGroupMetadata\x12\x19\n" +
@@ -1808,22 +1129,14 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x19MEMBER_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
 	"\n" +
-	"\x06REMOVE\x10\x022\xd2\x1a\n" +
+	"\x06REMOVE\x10\x022\xee\x11\n" +
 	"\fGroupService\x12\x9b\x01\n" +
-	"\x03Get\x124.yandex.cloud.organizationmanager.v1.GetGroupRequest\x1a*.yandex.cloud.organizationmanager.v1.Group\"2\x82\xd3\xe4\x93\x02,\x12*/organization-manager/v1/groups/{group_id}\x12\xd6\x01\n" +
-	"\x0fResolveExternal\x12@.yandex.cloud.organizationmanager.v1.ResolveExternalGroupRequest\x1a*.yandex.cloud.organizationmanager.v1.Group\"U\x82\xd3\xe4\x93\x02O\x12M/organization-manager/v1/external_groups/{subject_container_id}/{external_id}\x12\xa0\x01\n" +
-	"\x04List\x126.yandex.cloud.organizationmanager.v1.ListGroupsRequest\x1a7.yandex.cloud.organizationmanager.v1.ListGroupsResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/organization-manager/v1/groups\x12\xc1\x01\n" +
-	"\fListExternal\x12>.yandex.cloud.organizationmanager.v1.ListExternalGroupsRequest\x1a?.yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/organization-manager/v1/external_groups\x12\xb0\x01\n" +
+	"\x03Get\x124.yandex.cloud.organizationmanager.v1.GetGroupRequest\x1a*.yandex.cloud.organizationmanager.v1.Group\"2\x82\xd3\xe4\x93\x02,\x12*/organization-manager/v1/groups/{group_id}\x12\xa0\x01\n" +
+	"\x04List\x126.yandex.cloud.organizationmanager.v1.ListGroupsRequest\x1a7.yandex.cloud.organizationmanager.v1.ListGroupsResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/organization-manager/v1/groups\x12\xb0\x01\n" +
 	"\x06Create\x127.yandex.cloud.organizationmanager.v1.CreateGroupRequest\x1a!.yandex.cloud.operation.Operation\"J\xb2\xd2*\x1c\n" +
-	"\x13CreateGroupMetadata\x12\x05Group\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/organization-manager/v1/groups\x12\xd1\x01\n" +
-	"\x0eCreateExternal\x12?.yandex.cloud.organizationmanager.v1.CreateExternalGroupRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2*$\n" +
-	"\x1bCreateExternalGroupMetadata\x12\x05Group\x82\xd3\xe4\x93\x02-:\x01*\"(/organization-manager/v1/external_groups\x12\xbb\x01\n" +
+	"\x13CreateGroupMetadata\x12\x05Group\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/organization-manager/v1/groups\x12\xbb\x01\n" +
 	"\x06Update\x127.yandex.cloud.organizationmanager.v1.UpdateGroupRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2*\x1c\n" +
-	"\x13UpdateGroupMetadata\x12\x05Group\x82\xd3\xe4\x93\x02/:\x01*2*/organization-manager/v1/groups/{group_id}\x12\xee\x01\n" +
-	"\x11ConvertToExternal\x12B.yandex.cloud.organizationmanager.v1.ConvertToExternalGroupRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*'\n" +
-	"\x1eConvertToExternalGroupMetadata\x12\x05Group\x82\xd3\xe4\x93\x02A:\x01*\"</organization-manager/v1/groups/{group_id}:convertToExternal\x12\xff\x01\n" +
-	"\x11ConvertAllToBasic\x12C.yandex.cloud.organizationmanager.v1.ConvertAllToBasicGroupsRequest\x1a!.yandex.cloud.operation.Operation\"\x81\x01\xb2\xd2*8\n" +
-	"\x1fConvertAllToBasicGroupsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02?:\x01*\":/organization-manager/v1/external_groups:convertAllToBasic\x12\xc8\x01\n" +
+	"\x13UpdateGroupMetadata\x12\x05Group\x82\xd3\xe4\x93\x02/:\x01*2*/organization-manager/v1/groups/{group_id}\x12\xc8\x01\n" +
 	"\x06Delete\x127.yandex.cloud.organizationmanager.v1.DeleteGroupRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2*,\n" +
 	"\x13DeleteGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02,**/organization-manager/v1/groups/{group_id}\x12\xd2\x01\n" +
 	"\x0eListOperations\x12?.yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest\x1a@.yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse\"=\x82\xd3\xe4\x93\x027\x125/organization-manager/v1/groups/{group_id}/operations\x12\xca\x01\n" +
@@ -1850,88 +1163,68 @@ func file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP() 
 }
 
 var file_yandex_cloud_organizationmanager_v1_group_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_organizationmanager_v1_group_service_proto_goTypes = []any{
 	(MemberDelta_MemberAction)(0),              // 0: yandex.cloud.organizationmanager.v1.MemberDelta.MemberAction
 	(*GetGroupRequest)(nil),                    // 1: yandex.cloud.organizationmanager.v1.GetGroupRequest
-	(*ResolveExternalGroupRequest)(nil),        // 2: yandex.cloud.organizationmanager.v1.ResolveExternalGroupRequest
-	(*ListGroupsRequest)(nil),                  // 3: yandex.cloud.organizationmanager.v1.ListGroupsRequest
-	(*ListGroupsResponse)(nil),                 // 4: yandex.cloud.organizationmanager.v1.ListGroupsResponse
-	(*ListExternalGroupsRequest)(nil),          // 5: yandex.cloud.organizationmanager.v1.ListExternalGroupsRequest
-	(*ListExternalGroupsResponse)(nil),         // 6: yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse
-	(*CreateGroupRequest)(nil),                 // 7: yandex.cloud.organizationmanager.v1.CreateGroupRequest
-	(*CreateGroupMetadata)(nil),                // 8: yandex.cloud.organizationmanager.v1.CreateGroupMetadata
-	(*CreateExternalGroupRequest)(nil),         // 9: yandex.cloud.organizationmanager.v1.CreateExternalGroupRequest
-	(*CreateExternalGroupMetadata)(nil),        // 10: yandex.cloud.organizationmanager.v1.CreateExternalGroupMetadata
-	(*UpdateGroupRequest)(nil),                 // 11: yandex.cloud.organizationmanager.v1.UpdateGroupRequest
-	(*UpdateGroupMetadata)(nil),                // 12: yandex.cloud.organizationmanager.v1.UpdateGroupMetadata
-	(*ConvertToExternalGroupRequest)(nil),      // 13: yandex.cloud.organizationmanager.v1.ConvertToExternalGroupRequest
-	(*ConvertToExternalGroupMetadata)(nil),     // 14: yandex.cloud.organizationmanager.v1.ConvertToExternalGroupMetadata
-	(*ConvertAllToBasicGroupsRequest)(nil),     // 15: yandex.cloud.organizationmanager.v1.ConvertAllToBasicGroupsRequest
-	(*ConvertAllToBasicGroupsMetadata)(nil),    // 16: yandex.cloud.organizationmanager.v1.ConvertAllToBasicGroupsMetadata
-	(*DeleteGroupRequest)(nil),                 // 17: yandex.cloud.organizationmanager.v1.DeleteGroupRequest
-	(*DeleteGroupMetadata)(nil),                // 18: yandex.cloud.organizationmanager.v1.DeleteGroupMetadata
-	(*ListGroupOperationsRequest)(nil),         // 19: yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest
-	(*ListGroupOperationsResponse)(nil),        // 20: yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse
-	(*ListGroupMembersRequest)(nil),            // 21: yandex.cloud.organizationmanager.v1.ListGroupMembersRequest
-	(*ListGroupMembersResponse)(nil),           // 22: yandex.cloud.organizationmanager.v1.ListGroupMembersResponse
-	(*GroupMember)(nil),                        // 23: yandex.cloud.organizationmanager.v1.GroupMember
-	(*UpdateGroupMembersRequest)(nil),          // 24: yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
-	(*UpdateGroupMembersMetadata)(nil),         // 25: yandex.cloud.organizationmanager.v1.UpdateGroupMembersMetadata
-	(*MemberDelta)(nil),                        // 26: yandex.cloud.organizationmanager.v1.MemberDelta
-	(*Group)(nil),                              // 27: yandex.cloud.organizationmanager.v1.Group
-	(*fieldmaskpb.FieldMask)(nil),              // 28: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                // 29: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 30: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 31: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 32: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 33: yandex.cloud.access.ListAccessBindingsResponse
+	(*ListGroupsRequest)(nil),                  // 2: yandex.cloud.organizationmanager.v1.ListGroupsRequest
+	(*ListGroupsResponse)(nil),                 // 3: yandex.cloud.organizationmanager.v1.ListGroupsResponse
+	(*CreateGroupRequest)(nil),                 // 4: yandex.cloud.organizationmanager.v1.CreateGroupRequest
+	(*CreateGroupMetadata)(nil),                // 5: yandex.cloud.organizationmanager.v1.CreateGroupMetadata
+	(*UpdateGroupRequest)(nil),                 // 6: yandex.cloud.organizationmanager.v1.UpdateGroupRequest
+	(*UpdateGroupMetadata)(nil),                // 7: yandex.cloud.organizationmanager.v1.UpdateGroupMetadata
+	(*DeleteGroupRequest)(nil),                 // 8: yandex.cloud.organizationmanager.v1.DeleteGroupRequest
+	(*DeleteGroupMetadata)(nil),                // 9: yandex.cloud.organizationmanager.v1.DeleteGroupMetadata
+	(*ListGroupOperationsRequest)(nil),         // 10: yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest
+	(*ListGroupOperationsResponse)(nil),        // 11: yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse
+	(*ListGroupMembersRequest)(nil),            // 12: yandex.cloud.organizationmanager.v1.ListGroupMembersRequest
+	(*ListGroupMembersResponse)(nil),           // 13: yandex.cloud.organizationmanager.v1.ListGroupMembersResponse
+	(*GroupMember)(nil),                        // 14: yandex.cloud.organizationmanager.v1.GroupMember
+	(*UpdateGroupMembersRequest)(nil),          // 15: yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
+	(*UpdateGroupMembersMetadata)(nil),         // 16: yandex.cloud.organizationmanager.v1.UpdateGroupMembersMetadata
+	(*MemberDelta)(nil),                        // 17: yandex.cloud.organizationmanager.v1.MemberDelta
+	(*Group)(nil),                              // 18: yandex.cloud.organizationmanager.v1.Group
+	(*fieldmaskpb.FieldMask)(nil),              // 19: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 20: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 21: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 22: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 23: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 24: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_organizationmanager_v1_group_service_proto_depIdxs = []int32{
-	27, // 0: yandex.cloud.organizationmanager.v1.ListGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
-	27, // 1: yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
-	28, // 2: yandex.cloud.organizationmanager.v1.UpdateGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	29, // 3: yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	23, // 4: yandex.cloud.organizationmanager.v1.ListGroupMembersResponse.members:type_name -> yandex.cloud.organizationmanager.v1.GroupMember
-	26, // 5: yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest.member_deltas:type_name -> yandex.cloud.organizationmanager.v1.MemberDelta
-	0,  // 6: yandex.cloud.organizationmanager.v1.MemberDelta.action:type_name -> yandex.cloud.organizationmanager.v1.MemberDelta.MemberAction
-	1,  // 7: yandex.cloud.organizationmanager.v1.GroupService.Get:input_type -> yandex.cloud.organizationmanager.v1.GetGroupRequest
-	2,  // 8: yandex.cloud.organizationmanager.v1.GroupService.ResolveExternal:input_type -> yandex.cloud.organizationmanager.v1.ResolveExternalGroupRequest
-	3,  // 9: yandex.cloud.organizationmanager.v1.GroupService.List:input_type -> yandex.cloud.organizationmanager.v1.ListGroupsRequest
-	5,  // 10: yandex.cloud.organizationmanager.v1.GroupService.ListExternal:input_type -> yandex.cloud.organizationmanager.v1.ListExternalGroupsRequest
-	7,  // 11: yandex.cloud.organizationmanager.v1.GroupService.Create:input_type -> yandex.cloud.organizationmanager.v1.CreateGroupRequest
-	9,  // 12: yandex.cloud.organizationmanager.v1.GroupService.CreateExternal:input_type -> yandex.cloud.organizationmanager.v1.CreateExternalGroupRequest
-	11, // 13: yandex.cloud.organizationmanager.v1.GroupService.Update:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupRequest
-	13, // 14: yandex.cloud.organizationmanager.v1.GroupService.ConvertToExternal:input_type -> yandex.cloud.organizationmanager.v1.ConvertToExternalGroupRequest
-	15, // 15: yandex.cloud.organizationmanager.v1.GroupService.ConvertAllToBasic:input_type -> yandex.cloud.organizationmanager.v1.ConvertAllToBasicGroupsRequest
-	17, // 16: yandex.cloud.organizationmanager.v1.GroupService.Delete:input_type -> yandex.cloud.organizationmanager.v1.DeleteGroupRequest
-	19, // 17: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest
-	21, // 18: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:input_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersRequest
-	24, // 19: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
-	30, // 20: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	31, // 21: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	32, // 22: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	27, // 23: yandex.cloud.organizationmanager.v1.GroupService.Get:output_type -> yandex.cloud.organizationmanager.v1.Group
-	27, // 24: yandex.cloud.organizationmanager.v1.GroupService.ResolveExternal:output_type -> yandex.cloud.organizationmanager.v1.Group
-	4,  // 25: yandex.cloud.organizationmanager.v1.GroupService.List:output_type -> yandex.cloud.organizationmanager.v1.ListGroupsResponse
-	6,  // 26: yandex.cloud.organizationmanager.v1.GroupService.ListExternal:output_type -> yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse
-	29, // 27: yandex.cloud.organizationmanager.v1.GroupService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 28: yandex.cloud.organizationmanager.v1.GroupService.CreateExternal:output_type -> yandex.cloud.operation.Operation
-	29, // 29: yandex.cloud.organizationmanager.v1.GroupService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 30: yandex.cloud.organizationmanager.v1.GroupService.ConvertToExternal:output_type -> yandex.cloud.operation.Operation
-	29, // 31: yandex.cloud.organizationmanager.v1.GroupService.ConvertAllToBasic:output_type -> yandex.cloud.operation.Operation
-	29, // 32: yandex.cloud.organizationmanager.v1.GroupService.Delete:output_type -> yandex.cloud.operation.Operation
-	20, // 33: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse
-	22, // 34: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:output_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersResponse
-	29, // 35: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:output_type -> yandex.cloud.operation.Operation
-	33, // 36: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	29, // 37: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	29, // 38: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	23, // [23:39] is the sub-list for method output_type
-	7,  // [7:23] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	18, // 0: yandex.cloud.organizationmanager.v1.ListGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
+	19, // 1: yandex.cloud.organizationmanager.v1.UpdateGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	20, // 2: yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	14, // 3: yandex.cloud.organizationmanager.v1.ListGroupMembersResponse.members:type_name -> yandex.cloud.organizationmanager.v1.GroupMember
+	17, // 4: yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest.member_deltas:type_name -> yandex.cloud.organizationmanager.v1.MemberDelta
+	0,  // 5: yandex.cloud.organizationmanager.v1.MemberDelta.action:type_name -> yandex.cloud.organizationmanager.v1.MemberDelta.MemberAction
+	1,  // 6: yandex.cloud.organizationmanager.v1.GroupService.Get:input_type -> yandex.cloud.organizationmanager.v1.GetGroupRequest
+	2,  // 7: yandex.cloud.organizationmanager.v1.GroupService.List:input_type -> yandex.cloud.organizationmanager.v1.ListGroupsRequest
+	4,  // 8: yandex.cloud.organizationmanager.v1.GroupService.Create:input_type -> yandex.cloud.organizationmanager.v1.CreateGroupRequest
+	6,  // 9: yandex.cloud.organizationmanager.v1.GroupService.Update:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupRequest
+	8,  // 10: yandex.cloud.organizationmanager.v1.GroupService.Delete:input_type -> yandex.cloud.organizationmanager.v1.DeleteGroupRequest
+	10, // 11: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest
+	12, // 12: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:input_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersRequest
+	15, // 13: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
+	21, // 14: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	22, // 15: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	23, // 16: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	18, // 17: yandex.cloud.organizationmanager.v1.GroupService.Get:output_type -> yandex.cloud.organizationmanager.v1.Group
+	3,  // 18: yandex.cloud.organizationmanager.v1.GroupService.List:output_type -> yandex.cloud.organizationmanager.v1.ListGroupsResponse
+	20, // 19: yandex.cloud.organizationmanager.v1.GroupService.Create:output_type -> yandex.cloud.operation.Operation
+	20, // 20: yandex.cloud.organizationmanager.v1.GroupService.Update:output_type -> yandex.cloud.operation.Operation
+	20, // 21: yandex.cloud.organizationmanager.v1.GroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // 22: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse
+	13, // 23: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:output_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersResponse
+	20, // 24: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:output_type -> yandex.cloud.operation.Operation
+	24, // 25: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	20, // 26: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	20, // 27: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	17, // [17:28] is the sub-list for method output_type
+	6,  // [6:17] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_group_service_proto_init() }
@@ -1946,7 +1239,7 @@ func file_yandex_cloud_organizationmanager_v1_group_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   26,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

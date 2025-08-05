@@ -2106,10 +2106,10 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"2yandex/cloud/iot/devices/v1/registry_service.proto\x12\x1byandex.cloud.iot.devices.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/iot/devices/v1/registry.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetRegistryRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"registryId\"\x8a\x01\n" +
+	"registryId\"\x83\x01\n" +
 	"\x18GetByNameRegistryRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12C\n" +
-	"\rregistry_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\fregistryName\"\x95\x01\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12<\n" +
+	"\rregistry_name\x18\x02 \x01(\tB\x17\xf2\xc71\x13[a-zA-Z0-9_-]{0,63}R\fregistryName\"\x95\x01\n" +
 	"\x15ListRegistriesRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -2120,10 +2120,10 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\n" +
 	"registries\x18\x01 \x03(\v2%.yandex.cloud.iot.devices.v1.RegistryR\n" +
 	"registries\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf8\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfe\x04\n" +
 	"\x15CreateRegistryRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
-	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12+\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
+	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x93\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2>.yandex.cloud.iot.devices.v1.CreateRegistryRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12b\n" +
 	"\fcertificates\x18\x05 \x03(\v2>.yandex.cloud.iot.devices.v1.CreateRegistryRequest.CertificateR\fcertificates\x12\x1a\n" +
@@ -2137,13 +2137,13 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\"9\n" +
 	"\x16CreateRegistryMetadata\x12\x1f\n" +
 	"\vregistry_id\x18\x01 \x01(\tR\n" +
-	"registryId\"\xfb\x03\n" +
+	"registryId\"\x85\x04\n" +
 	"\x15UpdateRegistryRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12.\n" +
-	"\x04name\x18\x03 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12+\n" +
+	"updateMask\x128\n" +
+	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x93\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2>.yandex.cloud.iot.devices.v1.UpdateRegistryRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12H\n" +
 	"\vlog_options\x18\x06 \x01(\v2'.yandex.cloud.iot.devices.v1.LogOptionsR\n" +
@@ -2228,9 +2228,9 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc7\x02\n" +
-	"\x1aAddDataStreamExportRequest\x12.\n" +
-	"\x04name\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12-\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd1\x02\n" +
+	"\x1aAddDataStreamExportRequest\x128\n" +
+	"\x04name\x18\x01 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12-\n" +
 	"\vregistry_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x126\n" +
 	"\x11mqtt_topic_filter\x18\x04 \x01(\tB\n" +

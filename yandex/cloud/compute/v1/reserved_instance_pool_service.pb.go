@@ -255,13 +255,9 @@ type CreateReservedInstancePoolRequest struct {
 	// Network settings.
 	NetworkSettings *NetworkSettings `protobuf:"bytes,10,opt,name=network_settings,json=networkSettings,proto3" json:"network_settings,omitempty"`
 	// Desired size of the pool (number of slots for instances in this pool).
-	Size int64 `protobuf:"varint,11,opt,name=size,proto3" json:"size,omitempty"`
-	// Allows the pool to contain more linked instances than the number of available slots (size without pending or unavailable slots).
-	// While running instances are still limited by available slots, stopped instances can exceed this limit.
-	// Warning: When this option is enabled, attempting to start more instances than the number of available slots will result in a "Not Enough Resources" error.
-	AllowOversubscription bool `protobuf:"varint,12,opt,name=allow_oversubscription,json=allowOversubscription,proto3" json:"allow_oversubscription,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	Size          int64 `protobuf:"varint,11,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateReservedInstancePoolRequest) Reset() {
@@ -371,13 +367,6 @@ func (x *CreateReservedInstancePoolRequest) GetSize() int64 {
 	return 0
 }
 
-func (x *CreateReservedInstancePoolRequest) GetAllowOversubscription() bool {
-	if x != nil {
-		return x.AllowOversubscription
-	}
-	return false
-}
-
 type CreateReservedInstancePoolMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the reserved instance pool that is being created.
@@ -439,17 +428,9 @@ type UpdateReservedInstancePoolRequest struct {
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Desired size of the pool.
-	Size int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
-	// Allows the pool to contain more linked instances than the number of available slots (size without pending or unavailable slots).
-	// While running instances are still limited by available slots, stopped instances can exceed this limit.
-	// Warning: When this option is enabled, attempting to start more instances than the number of available slots will result in a "Not Enough Resources" error.
-	AllowOversubscription bool `protobuf:"varint,7,opt,name=allow_oversubscription,json=allowOversubscription,proto3" json:"allow_oversubscription,omitempty"`
-	// This field affects only the current request and allows size-increasing operation to complete successfully even when there are not enough resources.
-	// In such cases, some of the new pool slots become "pending", meaning they cannot be used until resources become available.
-	// Pending slots automatically convert to normal slots when sufficient resources are available.
-	AllowPendingSlots bool `protobuf:"varint,8,opt,name=allow_pending_slots,json=allowPendingSlots,proto3" json:"allow_pending_slots,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	Size          int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateReservedInstancePoolRequest) Reset() {
@@ -522,20 +503,6 @@ func (x *UpdateReservedInstancePoolRequest) GetSize() int64 {
 		return x.Size
 	}
 	return 0
-}
-
-func (x *UpdateReservedInstancePoolRequest) GetAllowOversubscription() bool {
-	if x != nil {
-		return x.AllowOversubscription
-	}
-	return false
-}
-
-func (x *UpdateReservedInstancePoolRequest) GetAllowPendingSlots() bool {
-	if x != nil {
-		return x.AllowPendingSlots
-	}
-	return false
 }
 
 type UpdateReservedInstancePoolMetadata struct {
@@ -710,256 +677,6 @@ func (*DeleteReservedInstancePoolResponse) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescGZIP(), []int{9}
 }
 
-type ListReservedInstancePoolOperationsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the reserved instance pool to list operations for.
-	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListReservedInstancePoolOperationsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListReservedInstancePoolOperationsResponse.next_page_token] returned by a previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListReservedInstancePoolOperationsRequest) Reset() {
-	*x = ListReservedInstancePoolOperationsRequest{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListReservedInstancePoolOperationsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListReservedInstancePoolOperationsRequest) ProtoMessage() {}
-
-func (x *ListReservedInstancePoolOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListReservedInstancePoolOperationsRequest.ProtoReflect.Descriptor instead.
-func (*ListReservedInstancePoolOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *ListReservedInstancePoolOperationsRequest) GetReservedInstancePoolId() string {
-	if x != nil {
-		return x.ReservedInstancePoolId
-	}
-	return ""
-}
-
-func (x *ListReservedInstancePoolOperationsRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListReservedInstancePoolOperationsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListReservedInstancePoolOperationsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of operations for the specified reserved instance pool.
-	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListReservedInstancePoolOperationsRequest.page_size], use the [next_page_token] as the value
-	// for the [ListReservedInstancePoolOperationsRequest.page_token] query parameter in the next list request.
-	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListReservedInstancePoolOperationsResponse) Reset() {
-	*x = ListReservedInstancePoolOperationsResponse{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListReservedInstancePoolOperationsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListReservedInstancePoolOperationsResponse) ProtoMessage() {}
-
-func (x *ListReservedInstancePoolOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListReservedInstancePoolOperationsResponse.ProtoReflect.Descriptor instead.
-func (*ListReservedInstancePoolOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *ListReservedInstancePoolOperationsResponse) GetOperations() []*operation.Operation {
-	if x != nil {
-		return x.Operations
-	}
-	return nil
-}
-
-func (x *ListReservedInstancePoolOperationsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
-type ListReservedInstancePoolInstancesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the reserved instance pool to list instances for.
-	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size],
-	// the service returns a [ListReservedInstancePoolInstancesResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results,
-	// set [page_token] to the [ListReservedInstancePoolInstancesResponse.next_page_token]
-	// returned by a previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListReservedInstancePoolInstancesRequest) Reset() {
-	*x = ListReservedInstancePoolInstancesRequest{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListReservedInstancePoolInstancesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListReservedInstancePoolInstancesRequest) ProtoMessage() {}
-
-func (x *ListReservedInstancePoolInstancesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListReservedInstancePoolInstancesRequest.ProtoReflect.Descriptor instead.
-func (*ListReservedInstancePoolInstancesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *ListReservedInstancePoolInstancesRequest) GetReservedInstancePoolId() string {
-	if x != nil {
-		return x.ReservedInstancePoolId
-	}
-	return ""
-}
-
-func (x *ListReservedInstancePoolInstancesRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListReservedInstancePoolInstancesRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListReservedInstancePoolInstancesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of reserved instance pool instances.
-	Instances []*Instance `protobuf:"bytes,1,rep,name=instances,proto3" json:"instances,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListReservedInstancePoolInstancesRequest.page_size], use
-	// the [next_page_token] as the value
-	// for the [ListReservedInstancePoolInstancesRequest.page_token] query parameter
-	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListReservedInstancePoolInstancesResponse) Reset() {
-	*x = ListReservedInstancePoolInstancesResponse{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListReservedInstancePoolInstancesResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListReservedInstancePoolInstancesResponse) ProtoMessage() {}
-
-func (x *ListReservedInstancePoolInstancesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListReservedInstancePoolInstancesResponse.ProtoReflect.Descriptor instead.
-func (*ListReservedInstancePoolInstancesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *ListReservedInstancePoolInstancesResponse) GetInstances() []*Instance {
-	if x != nil {
-		return x.Instances
-	}
-	return nil
-}
-
-func (x *ListReservedInstancePoolInstancesResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
 var File_yandex_cloud_compute_v1_reserved_instance_pool_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc = "" +
@@ -978,7 +695,7 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc 
 	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\xb2\x01\n" +
 	"!ListReservedInstancePoolsResponse\x12e\n" +
 	"\x17reserved_instance_pools\x18\x01 \x03(\v2-.yandex.cloud.compute.v1.ReservedInstancePoolR\x15reservedInstancePools\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xff\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc8\x06\n" +
 	"!CreateReservedInstancePoolRequest\x129\n" +
 	"\x04name\x18\x01 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
@@ -992,13 +709,12 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc 
 	"\x0eboot_disk_spec\x18\t \x01(\v2%.yandex.cloud.compute.v1.BootDiskSpecR\fbootDiskSpec\x12S\n" +
 	"\x10network_settings\x18\n" +
 	" \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12!\n" +
-	"\x04size\x18\v \x01(\x03B\r\xfa\xc71\t0-1048576R\x04size\x125\n" +
-	"\x16allow_oversubscription\x18\f \x01(\bR\x15allowOversubscription\x1a9\n" +
+	"\x04size\x18\v \x01(\x03B\r\xfa\xc71\t0-1048576R\x04size\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
 	"\"CreateReservedInstancePoolMetadata\x129\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"\xfc\x04\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"\x95\x04\n" +
 	"!UpdateReservedInstancePoolRequest\x12G\n" +
 	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1006,9 +722,7 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc 
 	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12!\n" +
-	"\x04size\x18\x06 \x01(\x03B\r\xfa\xc71\t0-1048576R\x04size\x125\n" +
-	"\x16allow_oversubscription\x18\a \x01(\bR\x15allowOversubscription\x12.\n" +
-	"\x13allow_pending_slots\x18\b \x01(\bR\x11allowPendingSlots\x1a9\n" +
+	"\x04size\x18\x06 \x01(\x03B\r\xfa\xc71\t0-1048576R\x04size\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
@@ -1018,27 +732,7 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc 
 	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\"_\n" +
 	"\"DeleteReservedInstancePoolMetadata\x129\n" +
 	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"$\n" +
-	"\"DeleteReservedInstancePoolResponse\"\xc7\x01\n" +
-	")ListReservedInstancePoolOperationsRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x97\x01\n" +
-	"*ListReservedInstancePoolOperationsResponse\x12A\n" +
-	"\n" +
-	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
-	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc6\x01\n" +
-	"(ListReservedInstancePoolInstancesRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x94\x01\n" +
-	")ListReservedInstancePoolInstancesResponse\x12?\n" +
-	"\tinstances\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.InstanceR\tinstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x9e\f\n" +
+	"\"DeleteReservedInstancePoolResponse2\xc6\b\n" +
 	"\x1bReservedInstancePoolService\x12\xb4\x01\n" +
 	"\x03Get\x127.yandex.cloud.compute.v1.GetReservedInstancePoolRequest\x1a-.yandex.cloud.compute.v1.ReservedInstancePool\"E\x82\xd3\xe4\x93\x02?\x12=/compute/v1/reservedInstancePools/{reserved_instance_pool_id}\x12\xa8\x01\n" +
 	"\x04List\x129.yandex.cloud.compute.v1.ListReservedInstancePoolsRequest\x1a:.yandex.cloud.compute.v1.ListReservedInstancePoolsResponse\")\x82\xd3\xe4\x93\x02#\x12!/compute/v1/reservedInstancePools\x12\xd3\x01\n" +
@@ -1047,9 +741,7 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc 
 	"\x06Update\x12:.yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2*:\n" +
 	"\"UpdateReservedInstancePoolMetadata\x12\x14ReservedInstancePool\x82\xd3\xe4\x93\x02B:\x01*2=/compute/v1/reservedInstancePools/{reserved_instance_pool_id}\x12\xfb\x01\n" +
 	"\x06Delete\x12:.yandex.cloud.compute.v1.DeleteReservedInstancePoolRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*H\n" +
-	"\"DeleteReservedInstancePoolMetadata\x12\"DeleteReservedInstancePoolResponse\x82\xd3\xe4\x93\x02?*=/compute/v1/reservedInstancePools/{reserved_instance_pool_id}\x12\xeb\x01\n" +
-	"\x0eListOperations\x12B.yandex.cloud.compute.v1.ListReservedInstancePoolOperationsRequest\x1aC.yandex.cloud.compute.v1.ListReservedInstancePoolOperationsResponse\"P\x82\xd3\xe4\x93\x02J\x12H/compute/v1/reservedInstancePools/{reserved_instance_pool_id}/operations\x12\xe7\x01\n" +
-	"\rListInstances\x12A.yandex.cloud.compute.v1.ListReservedInstancePoolInstancesRequest\x1aB.yandex.cloud.compute.v1.ListReservedInstancePoolInstancesResponse\"O\x82\xd3\xe4\x93\x02I\x12G/compute/v1/reservedInstancePools/{reserved_instance_pool_id}/instancesBb\n" +
+	"\"DeleteReservedInstancePoolMetadata\x12\"DeleteReservedInstancePoolResponse\x82\xd3\xe4\x93\x02?*=/compute/v1/reservedInstancePools/{reserved_instance_pool_id}Bb\n" +
 	"\x1byandex.cloud.api.compute.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1;computeb\x06proto3"
 
 var (
@@ -1064,63 +756,52 @@ func file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescGZ
 	return file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDescData
 }
 
-var file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_goTypes = []any{
-	(*GetReservedInstancePoolRequest)(nil),             // 0: yandex.cloud.compute.v1.GetReservedInstancePoolRequest
-	(*ListReservedInstancePoolsRequest)(nil),           // 1: yandex.cloud.compute.v1.ListReservedInstancePoolsRequest
-	(*ListReservedInstancePoolsResponse)(nil),          // 2: yandex.cloud.compute.v1.ListReservedInstancePoolsResponse
-	(*CreateReservedInstancePoolRequest)(nil),          // 3: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest
-	(*CreateReservedInstancePoolMetadata)(nil),         // 4: yandex.cloud.compute.v1.CreateReservedInstancePoolMetadata
-	(*UpdateReservedInstancePoolRequest)(nil),          // 5: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest
-	(*UpdateReservedInstancePoolMetadata)(nil),         // 6: yandex.cloud.compute.v1.UpdateReservedInstancePoolMetadata
-	(*DeleteReservedInstancePoolRequest)(nil),          // 7: yandex.cloud.compute.v1.DeleteReservedInstancePoolRequest
-	(*DeleteReservedInstancePoolMetadata)(nil),         // 8: yandex.cloud.compute.v1.DeleteReservedInstancePoolMetadata
-	(*DeleteReservedInstancePoolResponse)(nil),         // 9: yandex.cloud.compute.v1.DeleteReservedInstancePoolResponse
-	(*ListReservedInstancePoolOperationsRequest)(nil),  // 10: yandex.cloud.compute.v1.ListReservedInstancePoolOperationsRequest
-	(*ListReservedInstancePoolOperationsResponse)(nil), // 11: yandex.cloud.compute.v1.ListReservedInstancePoolOperationsResponse
-	(*ListReservedInstancePoolInstancesRequest)(nil),   // 12: yandex.cloud.compute.v1.ListReservedInstancePoolInstancesRequest
-	(*ListReservedInstancePoolInstancesResponse)(nil),  // 13: yandex.cloud.compute.v1.ListReservedInstancePoolInstancesResponse
-	nil,                           // 14: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.LabelsEntry
-	nil,                           // 15: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntry
-	(*ReservedInstancePool)(nil),  // 16: yandex.cloud.compute.v1.ReservedInstancePool
-	(*ResourcesSpec)(nil),         // 17: yandex.cloud.compute.v1.ResourcesSpec
-	(*GpuSettings)(nil),           // 18: yandex.cloud.compute.v1.GpuSettings
-	(*BootDiskSpec)(nil),          // 19: yandex.cloud.compute.v1.BootDiskSpec
-	(*NetworkSettings)(nil),       // 20: yandex.cloud.compute.v1.NetworkSettings
-	(*fieldmaskpb.FieldMask)(nil), // 21: google.protobuf.FieldMask
-	(*operation.Operation)(nil),   // 22: yandex.cloud.operation.Operation
-	(*Instance)(nil),              // 23: yandex.cloud.compute.v1.Instance
+	(*GetReservedInstancePoolRequest)(nil),     // 0: yandex.cloud.compute.v1.GetReservedInstancePoolRequest
+	(*ListReservedInstancePoolsRequest)(nil),   // 1: yandex.cloud.compute.v1.ListReservedInstancePoolsRequest
+	(*ListReservedInstancePoolsResponse)(nil),  // 2: yandex.cloud.compute.v1.ListReservedInstancePoolsResponse
+	(*CreateReservedInstancePoolRequest)(nil),  // 3: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest
+	(*CreateReservedInstancePoolMetadata)(nil), // 4: yandex.cloud.compute.v1.CreateReservedInstancePoolMetadata
+	(*UpdateReservedInstancePoolRequest)(nil),  // 5: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest
+	(*UpdateReservedInstancePoolMetadata)(nil), // 6: yandex.cloud.compute.v1.UpdateReservedInstancePoolMetadata
+	(*DeleteReservedInstancePoolRequest)(nil),  // 7: yandex.cloud.compute.v1.DeleteReservedInstancePoolRequest
+	(*DeleteReservedInstancePoolMetadata)(nil), // 8: yandex.cloud.compute.v1.DeleteReservedInstancePoolMetadata
+	(*DeleteReservedInstancePoolResponse)(nil), // 9: yandex.cloud.compute.v1.DeleteReservedInstancePoolResponse
+	nil,                           // 10: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.LabelsEntry
+	nil,                           // 11: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntry
+	(*ReservedInstancePool)(nil),  // 12: yandex.cloud.compute.v1.ReservedInstancePool
+	(*ResourcesSpec)(nil),         // 13: yandex.cloud.compute.v1.ResourcesSpec
+	(*GpuSettings)(nil),           // 14: yandex.cloud.compute.v1.GpuSettings
+	(*BootDiskSpec)(nil),          // 15: yandex.cloud.compute.v1.BootDiskSpec
+	(*NetworkSettings)(nil),       // 16: yandex.cloud.compute.v1.NetworkSettings
+	(*fieldmaskpb.FieldMask)(nil), // 17: google.protobuf.FieldMask
+	(*operation.Operation)(nil),   // 18: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_depIdxs = []int32{
-	16, // 0: yandex.cloud.compute.v1.ListReservedInstancePoolsResponse.reserved_instance_pools:type_name -> yandex.cloud.compute.v1.ReservedInstancePool
-	14, // 1: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.labels:type_name -> yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.LabelsEntry
-	17, // 2: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
-	18, // 3: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
-	19, // 4: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.boot_disk_spec:type_name -> yandex.cloud.compute.v1.BootDiskSpec
-	20, // 5: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	21, // 6: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.update_mask:type_name -> google.protobuf.FieldMask
-	15, // 7: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.labels:type_name -> yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntry
-	22, // 8: yandex.cloud.compute.v1.ListReservedInstancePoolOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	23, // 9: yandex.cloud.compute.v1.ListReservedInstancePoolInstancesResponse.instances:type_name -> yandex.cloud.compute.v1.Instance
-	0,  // 10: yandex.cloud.compute.v1.ReservedInstancePoolService.Get:input_type -> yandex.cloud.compute.v1.GetReservedInstancePoolRequest
-	1,  // 11: yandex.cloud.compute.v1.ReservedInstancePoolService.List:input_type -> yandex.cloud.compute.v1.ListReservedInstancePoolsRequest
-	3,  // 12: yandex.cloud.compute.v1.ReservedInstancePoolService.Create:input_type -> yandex.cloud.compute.v1.CreateReservedInstancePoolRequest
-	5,  // 13: yandex.cloud.compute.v1.ReservedInstancePoolService.Update:input_type -> yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest
-	7,  // 14: yandex.cloud.compute.v1.ReservedInstancePoolService.Delete:input_type -> yandex.cloud.compute.v1.DeleteReservedInstancePoolRequest
-	10, // 15: yandex.cloud.compute.v1.ReservedInstancePoolService.ListOperations:input_type -> yandex.cloud.compute.v1.ListReservedInstancePoolOperationsRequest
-	12, // 16: yandex.cloud.compute.v1.ReservedInstancePoolService.ListInstances:input_type -> yandex.cloud.compute.v1.ListReservedInstancePoolInstancesRequest
-	16, // 17: yandex.cloud.compute.v1.ReservedInstancePoolService.Get:output_type -> yandex.cloud.compute.v1.ReservedInstancePool
-	2,  // 18: yandex.cloud.compute.v1.ReservedInstancePoolService.List:output_type -> yandex.cloud.compute.v1.ListReservedInstancePoolsResponse
-	22, // 19: yandex.cloud.compute.v1.ReservedInstancePoolService.Create:output_type -> yandex.cloud.operation.Operation
-	22, // 20: yandex.cloud.compute.v1.ReservedInstancePoolService.Update:output_type -> yandex.cloud.operation.Operation
-	22, // 21: yandex.cloud.compute.v1.ReservedInstancePoolService.Delete:output_type -> yandex.cloud.operation.Operation
-	11, // 22: yandex.cloud.compute.v1.ReservedInstancePoolService.ListOperations:output_type -> yandex.cloud.compute.v1.ListReservedInstancePoolOperationsResponse
-	13, // 23: yandex.cloud.compute.v1.ReservedInstancePoolService.ListInstances:output_type -> yandex.cloud.compute.v1.ListReservedInstancePoolInstancesResponse
-	17, // [17:24] is the sub-list for method output_type
-	10, // [10:17] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	12, // 0: yandex.cloud.compute.v1.ListReservedInstancePoolsResponse.reserved_instance_pools:type_name -> yandex.cloud.compute.v1.ReservedInstancePool
+	10, // 1: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.labels:type_name -> yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.LabelsEntry
+	13, // 2: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
+	14, // 3: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
+	15, // 4: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.boot_disk_spec:type_name -> yandex.cloud.compute.v1.BootDiskSpec
+	16, // 5: yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	17, // 6: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.update_mask:type_name -> google.protobuf.FieldMask
+	11, // 7: yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.labels:type_name -> yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntry
+	0,  // 8: yandex.cloud.compute.v1.ReservedInstancePoolService.Get:input_type -> yandex.cloud.compute.v1.GetReservedInstancePoolRequest
+	1,  // 9: yandex.cloud.compute.v1.ReservedInstancePoolService.List:input_type -> yandex.cloud.compute.v1.ListReservedInstancePoolsRequest
+	3,  // 10: yandex.cloud.compute.v1.ReservedInstancePoolService.Create:input_type -> yandex.cloud.compute.v1.CreateReservedInstancePoolRequest
+	5,  // 11: yandex.cloud.compute.v1.ReservedInstancePoolService.Update:input_type -> yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest
+	7,  // 12: yandex.cloud.compute.v1.ReservedInstancePoolService.Delete:input_type -> yandex.cloud.compute.v1.DeleteReservedInstancePoolRequest
+	12, // 13: yandex.cloud.compute.v1.ReservedInstancePoolService.Get:output_type -> yandex.cloud.compute.v1.ReservedInstancePool
+	2,  // 14: yandex.cloud.compute.v1.ReservedInstancePoolService.List:output_type -> yandex.cloud.compute.v1.ListReservedInstancePoolsResponse
+	18, // 15: yandex.cloud.compute.v1.ReservedInstancePoolService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 16: yandex.cloud.compute.v1.ReservedInstancePoolService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 17: yandex.cloud.compute.v1.ReservedInstancePoolService.Delete:output_type -> yandex.cloud.operation.Operation
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_init() }
@@ -1137,7 +818,7 @@ func file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc), len(file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

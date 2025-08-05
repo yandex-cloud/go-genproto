@@ -20,13 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ReservedInstancePoolService_Get_FullMethodName            = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Get"
-	ReservedInstancePoolService_List_FullMethodName           = "/yandex.cloud.compute.v1.ReservedInstancePoolService/List"
-	ReservedInstancePoolService_Create_FullMethodName         = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Create"
-	ReservedInstancePoolService_Update_FullMethodName         = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Update"
-	ReservedInstancePoolService_Delete_FullMethodName         = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Delete"
-	ReservedInstancePoolService_ListOperations_FullMethodName = "/yandex.cloud.compute.v1.ReservedInstancePoolService/ListOperations"
-	ReservedInstancePoolService_ListInstances_FullMethodName  = "/yandex.cloud.compute.v1.ReservedInstancePoolService/ListInstances"
+	ReservedInstancePoolService_Get_FullMethodName    = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Get"
+	ReservedInstancePoolService_List_FullMethodName   = "/yandex.cloud.compute.v1.ReservedInstancePoolService/List"
+	ReservedInstancePoolService_Create_FullMethodName = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Create"
+	ReservedInstancePoolService_Update_FullMethodName = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Update"
+	ReservedInstancePoolService_Delete_FullMethodName = "/yandex.cloud.compute.v1.ReservedInstancePoolService/Delete"
 )
 
 // ReservedInstancePoolServiceClient is the client API for ReservedInstancePoolService service.
@@ -48,10 +46,6 @@ type ReservedInstancePoolServiceClient interface {
 	Update(ctx context.Context, in *UpdateReservedInstancePoolRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified reserved instance pool.
 	Delete(ctx context.Context, in *DeleteReservedInstancePoolRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Lists operations for the specified reserved instance pool.
-	ListOperations(ctx context.Context, in *ListReservedInstancePoolOperationsRequest, opts ...grpc.CallOption) (*ListReservedInstancePoolOperationsResponse, error)
-	// Retrieves the list of instances, using the specified reserved instance pool.
-	ListInstances(ctx context.Context, in *ListReservedInstancePoolInstancesRequest, opts ...grpc.CallOption) (*ListReservedInstancePoolInstancesResponse, error)
 }
 
 type reservedInstancePoolServiceClient struct {
@@ -112,26 +106,6 @@ func (c *reservedInstancePoolServiceClient) Delete(ctx context.Context, in *Dele
 	return out, nil
 }
 
-func (c *reservedInstancePoolServiceClient) ListOperations(ctx context.Context, in *ListReservedInstancePoolOperationsRequest, opts ...grpc.CallOption) (*ListReservedInstancePoolOperationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReservedInstancePoolOperationsResponse)
-	err := c.cc.Invoke(ctx, ReservedInstancePoolService_ListOperations_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *reservedInstancePoolServiceClient) ListInstances(ctx context.Context, in *ListReservedInstancePoolInstancesRequest, opts ...grpc.CallOption) (*ListReservedInstancePoolInstancesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReservedInstancePoolInstancesResponse)
-	err := c.cc.Invoke(ctx, ReservedInstancePoolService_ListInstances_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ReservedInstancePoolServiceServer is the server API for ReservedInstancePoolService service.
 // All implementations should embed UnimplementedReservedInstancePoolServiceServer
 // for forward compatibility.
@@ -151,10 +125,6 @@ type ReservedInstancePoolServiceServer interface {
 	Update(context.Context, *UpdateReservedInstancePoolRequest) (*operation.Operation, error)
 	// Deletes the specified reserved instance pool.
 	Delete(context.Context, *DeleteReservedInstancePoolRequest) (*operation.Operation, error)
-	// Lists operations for the specified reserved instance pool.
-	ListOperations(context.Context, *ListReservedInstancePoolOperationsRequest) (*ListReservedInstancePoolOperationsResponse, error)
-	// Retrieves the list of instances, using the specified reserved instance pool.
-	ListInstances(context.Context, *ListReservedInstancePoolInstancesRequest) (*ListReservedInstancePoolInstancesResponse, error)
 }
 
 // UnimplementedReservedInstancePoolServiceServer should be embedded to have
@@ -178,12 +148,6 @@ func (UnimplementedReservedInstancePoolServiceServer) Update(context.Context, *U
 }
 func (UnimplementedReservedInstancePoolServiceServer) Delete(context.Context, *DeleteReservedInstancePoolRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
-}
-func (UnimplementedReservedInstancePoolServiceServer) ListOperations(context.Context, *ListReservedInstancePoolOperationsRequest) (*ListReservedInstancePoolOperationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
-}
-func (UnimplementedReservedInstancePoolServiceServer) ListInstances(context.Context, *ListReservedInstancePoolInstancesRequest) (*ListReservedInstancePoolInstancesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListInstances not implemented")
 }
 func (UnimplementedReservedInstancePoolServiceServer) testEmbeddedByValue() {}
 
@@ -295,42 +259,6 @@ func _ReservedInstancePoolService_Delete_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReservedInstancePoolService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReservedInstancePoolOperationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ReservedInstancePoolServiceServer).ListOperations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ReservedInstancePoolService_ListOperations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReservedInstancePoolServiceServer).ListOperations(ctx, req.(*ListReservedInstancePoolOperationsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ReservedInstancePoolService_ListInstances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReservedInstancePoolInstancesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ReservedInstancePoolServiceServer).ListInstances(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ReservedInstancePoolService_ListInstances_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReservedInstancePoolServiceServer).ListInstances(ctx, req.(*ListReservedInstancePoolInstancesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ReservedInstancePoolService_ServiceDesc is the grpc.ServiceDesc for ReservedInstancePoolService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -357,14 +285,6 @@ var ReservedInstancePoolService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ReservedInstancePoolService_Delete_Handler,
-		},
-		{
-			MethodName: "ListOperations",
-			Handler:    _ReservedInstancePoolService_ListOperations_Handler,
-		},
-		{
-			MethodName: "ListInstances",
-			Handler:    _ReservedInstancePoolService_ListInstances_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

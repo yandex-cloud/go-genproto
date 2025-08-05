@@ -118,10 +118,6 @@ func (m *GenSearchResponse) SetIsBulletAnswer(v bool) {
 	m.IsBulletAnswer = v
 }
 
-func (m *GenSearchResponse) SetHints(v []string) {
-	m.Hints = v
-}
-
 func (m *GenSearchResponse_Source) SetUrl(v string) {
 	m.Url = v
 }

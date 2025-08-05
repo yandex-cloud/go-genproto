@@ -916,15 +916,11 @@ func (x *S3Config) GetBucket() string {
 }
 
 type GitSyncConfig struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Git repository URL.
-	Repo string `protobuf:"bytes,1,opt,name=repo,proto3" json:"repo,omitempty"`
-	// Git branch name to sync from.
-	Branch string `protobuf:"bytes,2,opt,name=branch,proto3" json:"branch,omitempty"`
-	// Subdirectory path within the repository containing DAG files.
-	SubPath string `protobuf:"bytes,3,opt,name=sub_path,json=subPath,proto3" json:"sub_path,omitempty"`
-	// SSH private key for repository authentication.
-	SshKey        string `protobuf:"bytes,4,opt,name=ssh_key,json=sshKey,proto3" json:"ssh_key,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Repo          string                 `protobuf:"bytes,1,opt,name=repo,proto3" json:"repo,omitempty"`
+	Branch        string                 `protobuf:"bytes,2,opt,name=branch,proto3" json:"branch,omitempty"`
+	SubPath       string                 `protobuf:"bytes,3,opt,name=sub_path,json=subPath,proto3" json:"sub_path,omitempty"`
+	SshKey        string                 `protobuf:"bytes,4,opt,name=ssh_key,json=sshKey,proto3" json:"ssh_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1304,10 +1300,10 @@ const file_yandex_cloud_airflow_v1_cluster_proto_rawDesc = "" +
 	"subnet_ids\x18\x01 \x03(\tR\tsubnetIds\x12,\n" +
 	"\x12security_group_ids\x18\x02 \x03(\tR\x10securityGroupIds\"\"\n" +
 	"\bS3Config\x12\x16\n" +
-	"\x06bucket\x18\x03 \x01(\tR\x06bucket\"{\n" +
-	"\rGitSyncConfig\x12\x18\n" +
-	"\x04repo\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04repo\x12\x1c\n" +
-	"\x06branch\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06branch\x12\x19\n" +
+	"\x06bucket\x18\x03 \x01(\tR\x06bucket\"o\n" +
+	"\rGitSyncConfig\x12\x12\n" +
+	"\x04repo\x18\x01 \x01(\tR\x04repo\x12\x16\n" +
+	"\x06branch\x18\x02 \x01(\tR\x06branch\x12\x19\n" +
 	"\bsub_path\x18\x03 \x01(\tR\asubPath\x12\x17\n" +
 	"\assh_key\x18\x04 \x01(\tR\x06sshKey\"\x9a\x01\n" +
 	"\x0eCodeSyncConfig\x123\n" +

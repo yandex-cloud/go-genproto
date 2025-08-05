@@ -35,11 +35,7 @@ type Group struct {
 	// Name of the group.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the group.
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Id of the subject container that external group belongs to. It is set if group is external.
-	SubjectContainerId string `protobuf:"bytes,6,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
-	// Id of the group from external system. It is set if group is external.
-	ExternalId    string `protobuf:"bytes,7,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	Description   string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -109,35 +105,18 @@ func (x *Group) GetDescription() string {
 	return ""
 }
 
-func (x *Group) GetSubjectContainerId() string {
-	if x != nil {
-		return x.SubjectContainerId
-	}
-	return ""
-}
-
-func (x *Group) GetExternalId() string {
-	if x != nil {
-		return x.ExternalId
-	}
-	return ""
-}
-
 var File_yandex_cloud_organizationmanager_v1_group_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_group_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/organizationmanager/v1/group.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x84\x02\n" +
+	"/yandex/cloud/organizationmanager/v1/group.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb1\x01\n" +
 	"\x05Group\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x120\n" +
-	"\x14subject_container_id\x18\x06 \x01(\tR\x12subjectContainerId\x12\x1f\n" +
-	"\vexternal_id\x18\a \x01(\tR\n" +
-	"externalIdB\x86\x01\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescriptionB\x86\x01\n" +
 	"'yandex.cloud.api.organizationmanager.v1Z[github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1;organizationmanagerb\x06proto3"
 
 var (

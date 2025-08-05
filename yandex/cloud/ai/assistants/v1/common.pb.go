@@ -24,79 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GenSearchOptions_SearchFilter_DocFormat int32
-
-const (
-	GenSearchOptions_SearchFilter_DOC_FORMAT_UNSPECIFIED GenSearchOptions_SearchFilter_DocFormat = 0
-	GenSearchOptions_SearchFilter_DOC_FORMAT_PDF         GenSearchOptions_SearchFilter_DocFormat = 1
-	GenSearchOptions_SearchFilter_DOC_FORMAT_XLS         GenSearchOptions_SearchFilter_DocFormat = 2
-	GenSearchOptions_SearchFilter_DOC_FORMAT_ODS         GenSearchOptions_SearchFilter_DocFormat = 3
-	GenSearchOptions_SearchFilter_DOC_FORMAT_RTF         GenSearchOptions_SearchFilter_DocFormat = 4
-	GenSearchOptions_SearchFilter_DOC_FORMAT_PPT         GenSearchOptions_SearchFilter_DocFormat = 5
-	GenSearchOptions_SearchFilter_DOC_FORMAT_ODP         GenSearchOptions_SearchFilter_DocFormat = 6
-	GenSearchOptions_SearchFilter_DOC_FORMAT_SWF         GenSearchOptions_SearchFilter_DocFormat = 7
-	GenSearchOptions_SearchFilter_DOC_FORMAT_ODT         GenSearchOptions_SearchFilter_DocFormat = 8
-	GenSearchOptions_SearchFilter_DOC_FORMAT_ODG         GenSearchOptions_SearchFilter_DocFormat = 9
-	GenSearchOptions_SearchFilter_DOC_FORMAT_DOC         GenSearchOptions_SearchFilter_DocFormat = 10
-)
-
-// Enum value maps for GenSearchOptions_SearchFilter_DocFormat.
-var (
-	GenSearchOptions_SearchFilter_DocFormat_name = map[int32]string{
-		0:  "DOC_FORMAT_UNSPECIFIED",
-		1:  "DOC_FORMAT_PDF",
-		2:  "DOC_FORMAT_XLS",
-		3:  "DOC_FORMAT_ODS",
-		4:  "DOC_FORMAT_RTF",
-		5:  "DOC_FORMAT_PPT",
-		6:  "DOC_FORMAT_ODP",
-		7:  "DOC_FORMAT_SWF",
-		8:  "DOC_FORMAT_ODT",
-		9:  "DOC_FORMAT_ODG",
-		10: "DOC_FORMAT_DOC",
-	}
-	GenSearchOptions_SearchFilter_DocFormat_value = map[string]int32{
-		"DOC_FORMAT_UNSPECIFIED": 0,
-		"DOC_FORMAT_PDF":         1,
-		"DOC_FORMAT_XLS":         2,
-		"DOC_FORMAT_ODS":         3,
-		"DOC_FORMAT_RTF":         4,
-		"DOC_FORMAT_PPT":         5,
-		"DOC_FORMAT_ODP":         6,
-		"DOC_FORMAT_SWF":         7,
-		"DOC_FORMAT_ODT":         8,
-		"DOC_FORMAT_ODG":         9,
-		"DOC_FORMAT_DOC":         10,
-	}
-)
-
-func (x GenSearchOptions_SearchFilter_DocFormat) Enum() *GenSearchOptions_SearchFilter_DocFormat {
-	p := new(GenSearchOptions_SearchFilter_DocFormat)
-	*p = x
-	return p
-}
-
-func (x GenSearchOptions_SearchFilter_DocFormat) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (GenSearchOptions_SearchFilter_DocFormat) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_enumTypes[0].Descriptor()
-}
-
-func (GenSearchOptions_SearchFilter_DocFormat) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_ai_assistants_v1_common_proto_enumTypes[0]
-}
-
-func (x GenSearchOptions_SearchFilter_DocFormat) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use GenSearchOptions_SearchFilter_DocFormat.Descriptor instead.
-func (GenSearchOptions_SearchFilter_DocFormat) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{16, 3, 0}
-}
-
 // Defines the options for truncating thread messages within a prompt.
 type PromptTruncationOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -261,7 +188,6 @@ type Tool struct {
 	//
 	//	*Tool_SearchIndex
 	//	*Tool_Function
-	//	*Tool_GenSearch
 	ToolType      isTool_ToolType `protobuf_oneof:"ToolType"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -322,15 +248,6 @@ func (x *Tool) GetFunction() *FunctionTool {
 	return nil
 }
 
-func (x *Tool) GetGenSearch() *GenSearchTool {
-	if x != nil {
-		if x, ok := x.ToolType.(*Tool_GenSearch); ok {
-			return x.GenSearch
-		}
-	}
-	return nil
-}
-
 type isTool_ToolType interface {
 	isTool_ToolType()
 }
@@ -345,16 +262,9 @@ type Tool_Function struct {
 	Function *FunctionTool `protobuf:"bytes,2,opt,name=function,proto3,oneof"`
 }
 
-type Tool_GenSearch struct {
-	// Performs web retrieval and generative synthesis.
-	GenSearch *GenSearchTool `protobuf:"bytes,3,opt,name=gen_search,json=genSearch,proto3,oneof"`
-}
-
 func (*Tool_SearchIndex) isTool_ToolType() {}
 
 func (*Tool_Function) isTool_ToolType() {}
-
-func (*Tool_GenSearch) isTool_ToolType() {}
 
 // Represents a call to a tool.
 type ToolCall struct {
@@ -1127,179 +1037,6 @@ func (*ResponseFormat_JsonObject) isResponseFormat_ResponseFormat() {}
 
 func (*ResponseFormat_JsonSchema) isResponseFormat_ResponseFormat() {}
 
-type GenSearchTool struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Scoping and filtering rules for the search query
-	Options *GenSearchOptions `protobuf:"bytes,1,opt,name=options,proto3" json:"options,omitempty"`
-	// description of the purpose
-	Description   string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenSearchTool) Reset() {
-	*x = GenSearchTool{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenSearchTool) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenSearchTool) ProtoMessage() {}
-
-func (x *GenSearchTool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenSearchTool.ProtoReflect.Descriptor instead.
-func (*GenSearchTool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *GenSearchTool) GetOptions() *GenSearchOptions {
-	if x != nil {
-		return x.Options
-	}
-	return nil
-}
-
-func (x *GenSearchTool) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type GenSearchOptions struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Restricts the search to the specific websites, hosts or pages.
-	// Includes only one of the fields site, host, url.
-	//
-	// Types that are valid to be assigned to SiteOptions:
-	//
-	//	*GenSearchOptions_Site
-	//	*GenSearchOptions_Host
-	//	*GenSearchOptions_Url
-	SiteOptions isGenSearchOptions_SiteOptions `protobuf_oneof:"site_options"`
-	// Use the documents inaccessible from the front page.
-	EnableNrfmDocs bool `protobuf:"varint,4,opt,name=enable_nrfm_docs,json=enableNrfmDocs,proto3" json:"enable_nrfm_docs,omitempty"`
-	// Restricts the search by date, document formats or language.
-	SearchFilters []*GenSearchOptions_SearchFilter `protobuf:"bytes,5,rep,name=search_filters,json=searchFilters,proto3" json:"search_filters,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenSearchOptions) Reset() {
-	*x = GenSearchOptions{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenSearchOptions) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenSearchOptions) ProtoMessage() {}
-
-func (x *GenSearchOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenSearchOptions.ProtoReflect.Descriptor instead.
-func (*GenSearchOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *GenSearchOptions) GetSiteOptions() isGenSearchOptions_SiteOptions {
-	if x != nil {
-		return x.SiteOptions
-	}
-	return nil
-}
-
-func (x *GenSearchOptions) GetSite() *GenSearchOptions_SiteOption {
-	if x != nil {
-		if x, ok := x.SiteOptions.(*GenSearchOptions_Site); ok {
-			return x.Site
-		}
-	}
-	return nil
-}
-
-func (x *GenSearchOptions) GetHost() *GenSearchOptions_HostOption {
-	if x != nil {
-		if x, ok := x.SiteOptions.(*GenSearchOptions_Host); ok {
-			return x.Host
-		}
-	}
-	return nil
-}
-
-func (x *GenSearchOptions) GetUrl() *GenSearchOptions_UrlOption {
-	if x != nil {
-		if x, ok := x.SiteOptions.(*GenSearchOptions_Url); ok {
-			return x.Url
-		}
-	}
-	return nil
-}
-
-func (x *GenSearchOptions) GetEnableNrfmDocs() bool {
-	if x != nil {
-		return x.EnableNrfmDocs
-	}
-	return false
-}
-
-func (x *GenSearchOptions) GetSearchFilters() []*GenSearchOptions_SearchFilter {
-	if x != nil {
-		return x.SearchFilters
-	}
-	return nil
-}
-
-type isGenSearchOptions_SiteOptions interface {
-	isGenSearchOptions_SiteOptions()
-}
-
-type GenSearchOptions_Site struct {
-	Site *GenSearchOptions_SiteOption `protobuf:"bytes,1,opt,name=site,proto3,oneof"`
-}
-
-type GenSearchOptions_Host struct {
-	Host *GenSearchOptions_HostOption `protobuf:"bytes,2,opt,name=host,proto3,oneof"`
-}
-
-type GenSearchOptions_Url struct {
-	Url *GenSearchOptions_UrlOption `protobuf:"bytes,3,opt,name=url,proto3,oneof"`
-}
-
-func (*GenSearchOptions_Site) isGenSearchOptions_SiteOptions() {}
-
-func (*GenSearchOptions_Host) isGenSearchOptions_SiteOptions() {}
-
-func (*GenSearchOptions_Url) isGenSearchOptions_SiteOptions() {}
-
 // Auto truncation strategy.
 type PromptTruncationOptions_AutoStrategy struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1309,7 +1046,7 @@ type PromptTruncationOptions_AutoStrategy struct {
 
 func (x *PromptTruncationOptions_AutoStrategy) Reset() {
 	*x = PromptTruncationOptions_AutoStrategy{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1321,7 +1058,7 @@ func (x *PromptTruncationOptions_AutoStrategy) String() string {
 func (*PromptTruncationOptions_AutoStrategy) ProtoMessage() {}
 
 func (x *PromptTruncationOptions_AutoStrategy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1349,7 +1086,7 @@ type PromptTruncationOptions_LastMessagesStrategy struct {
 
 func (x *PromptTruncationOptions_LastMessagesStrategy) Reset() {
 	*x = PromptTruncationOptions_LastMessagesStrategy{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1361,7 +1098,7 @@ func (x *PromptTruncationOptions_LastMessagesStrategy) String() string {
 func (*PromptTruncationOptions_LastMessagesStrategy) ProtoMessage() {}
 
 func (x *PromptTruncationOptions_LastMessagesStrategy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1393,7 +1130,7 @@ type CallStrategy_AlwaysCall struct {
 
 func (x *CallStrategy_AlwaysCall) Reset() {
 	*x = CallStrategy_AlwaysCall{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1405,7 +1142,7 @@ func (x *CallStrategy_AlwaysCall) String() string {
 func (*CallStrategy_AlwaysCall) ProtoMessage() {}
 
 func (x *CallStrategy_AlwaysCall) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1172,7 @@ type CallStrategy_AutoCall struct {
 
 func (x *CallStrategy_AutoCall) Reset() {
 	*x = CallStrategy_AutoCall{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1447,7 +1184,7 @@ func (x *CallStrategy_AutoCall) String() string {
 func (*CallStrategy_AutoCall) ProtoMessage() {}
 
 func (x *CallStrategy_AutoCall) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1477,244 +1214,6 @@ func (x *CallStrategy_AutoCall) GetInstruction() string {
 	return ""
 }
 
-// Restricts the search to the specific websites.
-type GenSearchOptions_SiteOption struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Site          []string               `protobuf:"bytes,1,rep,name=site,proto3" json:"site,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenSearchOptions_SiteOption) Reset() {
-	*x = GenSearchOptions_SiteOption{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenSearchOptions_SiteOption) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenSearchOptions_SiteOption) ProtoMessage() {}
-
-func (x *GenSearchOptions_SiteOption) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenSearchOptions_SiteOption.ProtoReflect.Descriptor instead.
-func (*GenSearchOptions_SiteOption) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{16, 0}
-}
-
-func (x *GenSearchOptions_SiteOption) GetSite() []string {
-	if x != nil {
-		return x.Site
-	}
-	return nil
-}
-
-// Restricts the search to the specific pages.
-type GenSearchOptions_UrlOption struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           []string               `protobuf:"bytes,1,rep,name=url,proto3" json:"url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenSearchOptions_UrlOption) Reset() {
-	*x = GenSearchOptions_UrlOption{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenSearchOptions_UrlOption) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenSearchOptions_UrlOption) ProtoMessage() {}
-
-func (x *GenSearchOptions_UrlOption) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenSearchOptions_UrlOption.ProtoReflect.Descriptor instead.
-func (*GenSearchOptions_UrlOption) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{16, 1}
-}
-
-func (x *GenSearchOptions_UrlOption) GetUrl() []string {
-	if x != nil {
-		return x.Url
-	}
-	return nil
-}
-
-// Restricts the search to the specific hosts.
-type GenSearchOptions_HostOption struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Host          []string               `protobuf:"bytes,1,rep,name=host,proto3" json:"host,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenSearchOptions_HostOption) Reset() {
-	*x = GenSearchOptions_HostOption{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenSearchOptions_HostOption) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenSearchOptions_HostOption) ProtoMessage() {}
-
-func (x *GenSearchOptions_HostOption) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenSearchOptions_HostOption.ProtoReflect.Descriptor instead.
-func (*GenSearchOptions_HostOption) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{16, 2}
-}
-
-func (x *GenSearchOptions_HostOption) GetHost() []string {
-	if x != nil {
-		return x.Host
-	}
-	return nil
-}
-
-type GenSearchOptions_SearchFilter struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Includes only one of the fields date, lang, format.
-	//
-	// Types that are valid to be assigned to FilterOptions:
-	//
-	//	*GenSearchOptions_SearchFilter_Date
-	//	*GenSearchOptions_SearchFilter_Lang
-	//	*GenSearchOptions_SearchFilter_Format
-	FilterOptions isGenSearchOptions_SearchFilter_FilterOptions `protobuf_oneof:"filter_options"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenSearchOptions_SearchFilter) Reset() {
-	*x = GenSearchOptions_SearchFilter{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenSearchOptions_SearchFilter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenSearchOptions_SearchFilter) ProtoMessage() {}
-
-func (x *GenSearchOptions_SearchFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenSearchOptions_SearchFilter.ProtoReflect.Descriptor instead.
-func (*GenSearchOptions_SearchFilter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{16, 3}
-}
-
-func (x *GenSearchOptions_SearchFilter) GetFilterOptions() isGenSearchOptions_SearchFilter_FilterOptions {
-	if x != nil {
-		return x.FilterOptions
-	}
-	return nil
-}
-
-func (x *GenSearchOptions_SearchFilter) GetDate() string {
-	if x != nil {
-		if x, ok := x.FilterOptions.(*GenSearchOptions_SearchFilter_Date); ok {
-			return x.Date
-		}
-	}
-	return ""
-}
-
-func (x *GenSearchOptions_SearchFilter) GetLang() string {
-	if x != nil {
-		if x, ok := x.FilterOptions.(*GenSearchOptions_SearchFilter_Lang); ok {
-			return x.Lang
-		}
-	}
-	return ""
-}
-
-func (x *GenSearchOptions_SearchFilter) GetFormat() GenSearchOptions_SearchFilter_DocFormat {
-	if x != nil {
-		if x, ok := x.FilterOptions.(*GenSearchOptions_SearchFilter_Format); ok {
-			return x.Format
-		}
-	}
-	return GenSearchOptions_SearchFilter_DOC_FORMAT_UNSPECIFIED
-}
-
-type isGenSearchOptions_SearchFilter_FilterOptions interface {
-	isGenSearchOptions_SearchFilter_FilterOptions()
-}
-
-type GenSearchOptions_SearchFilter_Date struct {
-	// Restrict by document date
-	Date string `protobuf:"bytes,1,opt,name=date,proto3,oneof"`
-}
-
-type GenSearchOptions_SearchFilter_Lang struct {
-	// Restrict by document language. Use ISO 639-1 language codes.
-	Lang string `protobuf:"bytes,2,opt,name=lang,proto3,oneof"`
-}
-
-type GenSearchOptions_SearchFilter_Format struct {
-	// Restrict by document format.
-	Format GenSearchOptions_SearchFilter_DocFormat `protobuf:"varint,3,opt,name=format,proto3,enum=yandex.cloud.ai.assistants.v1.GenSearchOptions_SearchFilter_DocFormat,oneof"`
-}
-
-func (*GenSearchOptions_SearchFilter_Date) isGenSearchOptions_SearchFilter_FilterOptions() {}
-
-func (*GenSearchOptions_SearchFilter_Lang) isGenSearchOptions_SearchFilter_FilterOptions() {}
-
-func (*GenSearchOptions_SearchFilter_Format) isGenSearchOptions_SearchFilter_FilterOptions() {}
-
 var File_yandex_cloud_ai_assistants_v1_common_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = "" +
@@ -1731,12 +1230,10 @@ const file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = "" +
 	"\x11CompletionOptions\x12:\n" +
 	"\n" +
 	"max_tokens\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\tmaxTokens\x12>\n" +
-	"\vtemperature\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\vtemperature\"\x81\x02\n" +
+	"\vtemperature\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\vtemperature\"\xb2\x01\n" +
 	"\x04Tool\x12S\n" +
 	"\fsearch_index\x18\x01 \x01(\v2..yandex.cloud.ai.assistants.v1.SearchIndexToolH\x00R\vsearchIndex\x12I\n" +
-	"\bfunction\x18\x02 \x01(\v2+.yandex.cloud.ai.assistants.v1.FunctionToolH\x00R\bfunction\x12M\n" +
-	"\n" +
-	"gen_search\x18\x03 \x01(\v2,.yandex.cloud.ai.assistants.v1.GenSearchToolH\x00R\tgenSearchB\n" +
+	"\bfunction\x18\x02 \x01(\v2+.yandex.cloud.ai.assistants.v1.FunctionToolH\x00R\bfunctionB\n" +
 	"\n" +
 	"\bToolType\"n\n" +
 	"\bToolCall\x12R\n" +
@@ -1790,43 +1287,7 @@ const file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = "" +
 	"jsonObject\x12L\n" +
 	"\vjson_schema\x18\x02 \x01(\v2).yandex.cloud.ai.assistants.v1.JsonSchemaH\x00R\n" +
 	"jsonSchemaB\x10\n" +
-	"\x0eResponseFormat\"\x82\x01\n" +
-	"\rGenSearchTool\x12I\n" +
-	"\aoptions\x18\x01 \x01(\v2/.yandex.cloud.ai.assistants.v1.GenSearchOptionsR\aoptions\x12&\n" +
-	"\vdescription\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\vdescription\"\x84\b\n" +
-	"\x10GenSearchOptions\x12P\n" +
-	"\x04site\x18\x01 \x01(\v2:.yandex.cloud.ai.assistants.v1.GenSearchOptions.SiteOptionH\x00R\x04site\x12P\n" +
-	"\x04host\x18\x02 \x01(\v2:.yandex.cloud.ai.assistants.v1.GenSearchOptions.HostOptionH\x00R\x04host\x12M\n" +
-	"\x03url\x18\x03 \x01(\v29.yandex.cloud.ai.assistants.v1.GenSearchOptions.UrlOptionH\x00R\x03url\x12(\n" +
-	"\x10enable_nrfm_docs\x18\x04 \x01(\bR\x0eenableNrfmDocs\x12m\n" +
-	"\x0esearch_filters\x18\x05 \x03(\v2<.yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilterB\b\x82\xc81\x04<=10R\rsearchFilters\x1a5\n" +
-	"\n" +
-	"SiteOption\x12'\n" +
-	"\x04site\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04site\x1a2\n" +
-	"\tUrlOption\x12%\n" +
-	"\x03url\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x03url\x1a5\n" +
-	"\n" +
-	"HostOption\x12'\n" +
-	"\x04host\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04host\x1a\xb1\x03\n" +
-	"\fSearchFilter\x12\x1e\n" +
-	"\x04date\x18\x01 \x01(\tB\b\x8a\xc81\x04<=25H\x00R\x04date\x12\x1b\n" +
-	"\x04lang\x18\x02 \x01(\tB\x05\x8a\xc81\x012H\x00R\x04lang\x12`\n" +
-	"\x06format\x18\x03 \x01(\x0e2F.yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilter.DocFormatH\x00R\x06format\"\xef\x01\n" +
-	"\tDocFormat\x12\x1a\n" +
-	"\x16DOC_FORMAT_UNSPECIFIED\x10\x00\x12\x12\n" +
-	"\x0eDOC_FORMAT_PDF\x10\x01\x12\x12\n" +
-	"\x0eDOC_FORMAT_XLS\x10\x02\x12\x12\n" +
-	"\x0eDOC_FORMAT_ODS\x10\x03\x12\x12\n" +
-	"\x0eDOC_FORMAT_RTF\x10\x04\x12\x12\n" +
-	"\x0eDOC_FORMAT_PPT\x10\x05\x12\x12\n" +
-	"\x0eDOC_FORMAT_ODP\x10\x06\x12\x12\n" +
-	"\x0eDOC_FORMAT_SWF\x10\a\x12\x12\n" +
-	"\x0eDOC_FORMAT_ODT\x10\b\x12\x12\n" +
-	"\x0eDOC_FORMAT_ODG\x10\t\x12\x12\n" +
-	"\x0eDOC_FORMAT_DOC\x10\n" +
-	"B\x10\n" +
-	"\x0efilter_optionsB\x0e\n" +
-	"\fsite_optionsBq\n" +
+	"\x0eResponseFormatBq\n" +
 	"!yandex.cloud.api.ai.assistants.v1ZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/assistants/v1;assistantsb\x06proto3"
 
 var (
@@ -1841,72 +1302,57 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_assistants_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_yandex_cloud_ai_assistants_v1_common_proto_goTypes = []any{
-	(GenSearchOptions_SearchFilter_DocFormat)(0),         // 0: yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilter.DocFormat
-	(*PromptTruncationOptions)(nil),                      // 1: yandex.cloud.ai.assistants.v1.PromptTruncationOptions
-	(*CompletionOptions)(nil),                            // 2: yandex.cloud.ai.assistants.v1.CompletionOptions
-	(*Tool)(nil),                                         // 3: yandex.cloud.ai.assistants.v1.Tool
-	(*ToolCall)(nil),                                     // 4: yandex.cloud.ai.assistants.v1.ToolCall
-	(*ToolCallList)(nil),                                 // 5: yandex.cloud.ai.assistants.v1.ToolCallList
-	(*ToolResult)(nil),                                   // 6: yandex.cloud.ai.assistants.v1.ToolResult
-	(*ToolResultList)(nil),                               // 7: yandex.cloud.ai.assistants.v1.ToolResultList
-	(*SearchIndexTool)(nil),                              // 8: yandex.cloud.ai.assistants.v1.SearchIndexTool
-	(*CallStrategy)(nil),                                 // 9: yandex.cloud.ai.assistants.v1.CallStrategy
-	(*FunctionTool)(nil),                                 // 10: yandex.cloud.ai.assistants.v1.FunctionTool
-	(*FunctionCall)(nil),                                 // 11: yandex.cloud.ai.assistants.v1.FunctionCall
-	(*FunctionResult)(nil),                               // 12: yandex.cloud.ai.assistants.v1.FunctionResult
-	(*RephraserOptions)(nil),                             // 13: yandex.cloud.ai.assistants.v1.RephraserOptions
-	(*JsonSchema)(nil),                                   // 14: yandex.cloud.ai.assistants.v1.JsonSchema
-	(*ResponseFormat)(nil),                               // 15: yandex.cloud.ai.assistants.v1.ResponseFormat
-	(*GenSearchTool)(nil),                                // 16: yandex.cloud.ai.assistants.v1.GenSearchTool
-	(*GenSearchOptions)(nil),                             // 17: yandex.cloud.ai.assistants.v1.GenSearchOptions
-	(*PromptTruncationOptions_AutoStrategy)(nil),         // 18: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
-	(*PromptTruncationOptions_LastMessagesStrategy)(nil), // 19: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
-	(*CallStrategy_AlwaysCall)(nil),                      // 20: yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
-	(*CallStrategy_AutoCall)(nil),                        // 21: yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
-	(*GenSearchOptions_SiteOption)(nil),                  // 22: yandex.cloud.ai.assistants.v1.GenSearchOptions.SiteOption
-	(*GenSearchOptions_UrlOption)(nil),                   // 23: yandex.cloud.ai.assistants.v1.GenSearchOptions.UrlOption
-	(*GenSearchOptions_HostOption)(nil),                  // 24: yandex.cloud.ai.assistants.v1.GenSearchOptions.HostOption
-	(*GenSearchOptions_SearchFilter)(nil),                // 25: yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilter
-	(*wrapperspb.Int64Value)(nil),                        // 26: google.protobuf.Int64Value
-	(*wrapperspb.DoubleValue)(nil),                       // 27: google.protobuf.DoubleValue
-	(*structpb.Struct)(nil),                              // 28: google.protobuf.Struct
+	(*PromptTruncationOptions)(nil),                      // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions
+	(*CompletionOptions)(nil),                            // 1: yandex.cloud.ai.assistants.v1.CompletionOptions
+	(*Tool)(nil),                                         // 2: yandex.cloud.ai.assistants.v1.Tool
+	(*ToolCall)(nil),                                     // 3: yandex.cloud.ai.assistants.v1.ToolCall
+	(*ToolCallList)(nil),                                 // 4: yandex.cloud.ai.assistants.v1.ToolCallList
+	(*ToolResult)(nil),                                   // 5: yandex.cloud.ai.assistants.v1.ToolResult
+	(*ToolResultList)(nil),                               // 6: yandex.cloud.ai.assistants.v1.ToolResultList
+	(*SearchIndexTool)(nil),                              // 7: yandex.cloud.ai.assistants.v1.SearchIndexTool
+	(*CallStrategy)(nil),                                 // 8: yandex.cloud.ai.assistants.v1.CallStrategy
+	(*FunctionTool)(nil),                                 // 9: yandex.cloud.ai.assistants.v1.FunctionTool
+	(*FunctionCall)(nil),                                 // 10: yandex.cloud.ai.assistants.v1.FunctionCall
+	(*FunctionResult)(nil),                               // 11: yandex.cloud.ai.assistants.v1.FunctionResult
+	(*RephraserOptions)(nil),                             // 12: yandex.cloud.ai.assistants.v1.RephraserOptions
+	(*JsonSchema)(nil),                                   // 13: yandex.cloud.ai.assistants.v1.JsonSchema
+	(*ResponseFormat)(nil),                               // 14: yandex.cloud.ai.assistants.v1.ResponseFormat
+	(*PromptTruncationOptions_AutoStrategy)(nil),         // 15: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
+	(*PromptTruncationOptions_LastMessagesStrategy)(nil), // 16: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
+	(*CallStrategy_AlwaysCall)(nil),                      // 17: yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
+	(*CallStrategy_AutoCall)(nil),                        // 18: yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
+	(*wrapperspb.Int64Value)(nil),                        // 19: google.protobuf.Int64Value
+	(*wrapperspb.DoubleValue)(nil),                       // 20: google.protobuf.DoubleValue
+	(*structpb.Struct)(nil),                              // 21: google.protobuf.Struct
 }
 var file_yandex_cloud_ai_assistants_v1_common_proto_depIdxs = []int32{
-	26, // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.max_prompt_tokens:type_name -> google.protobuf.Int64Value
-	18, // 1: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.auto_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
-	19, // 2: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.last_messages_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
-	26, // 3: yandex.cloud.ai.assistants.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
-	27, // 4: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
-	8,  // 5: yandex.cloud.ai.assistants.v1.Tool.search_index:type_name -> yandex.cloud.ai.assistants.v1.SearchIndexTool
-	10, // 6: yandex.cloud.ai.assistants.v1.Tool.function:type_name -> yandex.cloud.ai.assistants.v1.FunctionTool
-	16, // 7: yandex.cloud.ai.assistants.v1.Tool.gen_search:type_name -> yandex.cloud.ai.assistants.v1.GenSearchTool
-	11, // 8: yandex.cloud.ai.assistants.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.assistants.v1.FunctionCall
-	4,  // 9: yandex.cloud.ai.assistants.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.assistants.v1.ToolCall
-	12, // 10: yandex.cloud.ai.assistants.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.assistants.v1.FunctionResult
-	6,  // 11: yandex.cloud.ai.assistants.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.assistants.v1.ToolResult
-	26, // 12: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
-	13, // 13: yandex.cloud.ai.assistants.v1.SearchIndexTool.rephraser_options:type_name -> yandex.cloud.ai.assistants.v1.RephraserOptions
-	9,  // 14: yandex.cloud.ai.assistants.v1.SearchIndexTool.call_strategy:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy
-	20, // 15: yandex.cloud.ai.assistants.v1.CallStrategy.always_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
-	21, // 16: yandex.cloud.ai.assistants.v1.CallStrategy.auto_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
-	28, // 17: yandex.cloud.ai.assistants.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
-	28, // 18: yandex.cloud.ai.assistants.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
-	28, // 19: yandex.cloud.ai.assistants.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
-	14, // 20: yandex.cloud.ai.assistants.v1.ResponseFormat.json_schema:type_name -> yandex.cloud.ai.assistants.v1.JsonSchema
-	17, // 21: yandex.cloud.ai.assistants.v1.GenSearchTool.options:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions
-	22, // 22: yandex.cloud.ai.assistants.v1.GenSearchOptions.site:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.SiteOption
-	24, // 23: yandex.cloud.ai.assistants.v1.GenSearchOptions.host:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.HostOption
-	23, // 24: yandex.cloud.ai.assistants.v1.GenSearchOptions.url:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.UrlOption
-	25, // 25: yandex.cloud.ai.assistants.v1.GenSearchOptions.search_filters:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilter
-	0,  // 26: yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilter.format:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.SearchFilter.DocFormat
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	19, // 0: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.max_prompt_tokens:type_name -> google.protobuf.Int64Value
+	15, // 1: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.auto_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
+	16, // 2: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.last_messages_strategy:type_name -> yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
+	19, // 3: yandex.cloud.ai.assistants.v1.CompletionOptions.max_tokens:type_name -> google.protobuf.Int64Value
+	20, // 4: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
+	7,  // 5: yandex.cloud.ai.assistants.v1.Tool.search_index:type_name -> yandex.cloud.ai.assistants.v1.SearchIndexTool
+	9,  // 6: yandex.cloud.ai.assistants.v1.Tool.function:type_name -> yandex.cloud.ai.assistants.v1.FunctionTool
+	10, // 7: yandex.cloud.ai.assistants.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.assistants.v1.FunctionCall
+	3,  // 8: yandex.cloud.ai.assistants.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.assistants.v1.ToolCall
+	11, // 9: yandex.cloud.ai.assistants.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.assistants.v1.FunctionResult
+	5,  // 10: yandex.cloud.ai.assistants.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.assistants.v1.ToolResult
+	19, // 11: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
+	12, // 12: yandex.cloud.ai.assistants.v1.SearchIndexTool.rephraser_options:type_name -> yandex.cloud.ai.assistants.v1.RephraserOptions
+	8,  // 13: yandex.cloud.ai.assistants.v1.SearchIndexTool.call_strategy:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy
+	17, // 14: yandex.cloud.ai.assistants.v1.CallStrategy.always_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
+	18, // 15: yandex.cloud.ai.assistants.v1.CallStrategy.auto_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
+	21, // 16: yandex.cloud.ai.assistants.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
+	21, // 17: yandex.cloud.ai.assistants.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
+	21, // 18: yandex.cloud.ai.assistants.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
+	13, // 19: yandex.cloud.ai.assistants.v1.ResponseFormat.json_schema:type_name -> yandex.cloud.ai.assistants.v1.JsonSchema
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_assistants_v1_common_proto_init() }
@@ -1921,7 +1367,6 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[2].OneofWrappers = []any{
 		(*Tool_SearchIndex)(nil),
 		(*Tool_Function)(nil),
-		(*Tool_GenSearch)(nil),
 	}
 	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[3].OneofWrappers = []any{
 		(*ToolCall_FunctionCall)(nil),
@@ -1940,29 +1385,18 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 		(*ResponseFormat_JsonObject)(nil),
 		(*ResponseFormat_JsonSchema)(nil),
 	}
-	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[16].OneofWrappers = []any{
-		(*GenSearchOptions_Site)(nil),
-		(*GenSearchOptions_Host)(nil),
-		(*GenSearchOptions_Url)(nil),
-	}
-	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[24].OneofWrappers = []any{
-		(*GenSearchOptions_SearchFilter_Date)(nil),
-		(*GenSearchOptions_SearchFilter_Lang)(nil),
-		(*GenSearchOptions_SearchFilter_Format)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc), len(file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   25,
+			NumEnums:      0,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_ai_assistants_v1_common_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_ai_assistants_v1_common_proto_depIdxs,
-		EnumInfos:         file_yandex_cloud_ai_assistants_v1_common_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_ai_assistants_v1_common_proto = out.File

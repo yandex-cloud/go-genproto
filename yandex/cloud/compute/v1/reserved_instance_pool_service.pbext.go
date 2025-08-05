@@ -3,7 +3,6 @@
 package compute
 
 import (
-	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -83,10 +82,6 @@ func (m *CreateReservedInstancePoolRequest) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *CreateReservedInstancePoolRequest) SetAllowOversubscription(v bool) {
-	m.AllowOversubscription = v
-}
-
 func (m *CreateReservedInstancePoolMetadata) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
 }
@@ -115,14 +110,6 @@ func (m *UpdateReservedInstancePoolRequest) SetSize(v int64) {
 	m.Size = v
 }
 
-func (m *UpdateReservedInstancePoolRequest) SetAllowOversubscription(v bool) {
-	m.AllowOversubscription = v
-}
-
-func (m *UpdateReservedInstancePoolRequest) SetAllowPendingSlots(v bool) {
-	m.AllowPendingSlots = v
-}
-
 func (m *UpdateReservedInstancePoolMetadata) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
 }
@@ -133,44 +120,4 @@ func (m *DeleteReservedInstancePoolRequest) SetReservedInstancePoolId(v string) 
 
 func (m *DeleteReservedInstancePoolMetadata) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
-}
-
-func (m *ListReservedInstancePoolOperationsRequest) SetReservedInstancePoolId(v string) {
-	m.ReservedInstancePoolId = v
-}
-
-func (m *ListReservedInstancePoolOperationsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListReservedInstancePoolOperationsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListReservedInstancePoolOperationsResponse) SetOperations(v []*operation.Operation) {
-	m.Operations = v
-}
-
-func (m *ListReservedInstancePoolOperationsResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
-}
-
-func (m *ListReservedInstancePoolInstancesRequest) SetReservedInstancePoolId(v string) {
-	m.ReservedInstancePoolId = v
-}
-
-func (m *ListReservedInstancePoolInstancesRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListReservedInstancePoolInstancesRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListReservedInstancePoolInstancesResponse) SetInstances(v []*Instance) {
-	m.Instances = v
-}
-
-func (m *ListReservedInstancePoolInstancesResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
 }

@@ -219,17 +219,7 @@ type ReservedInstancePool struct {
 	// Network Settings.
 	NetworkSettings *NetworkSettings `protobuf:"bytes,13,opt,name=network_settings,json=networkSettings,proto3" json:"network_settings,omitempty"`
 	// Desired size of the pool (number of slots for instances in this pool).
-	Size int64 `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
-	// Equals to the size field except when updates occur with allow_pending=true. In those cases, committed_size equals only the number of non-pending slots.
-	CommittedSize int64 `protobuf:"varint,15,opt,name=committed_size,json=committedSize,proto3" json:"committed_size,omitempty"`
-	// Allows the pool to contain more linked instances than the number of available slots (size without pending or unavailable slots).
-	// While running instances are still limited by available slots, stopped instances can exceed this limit.
-	// Warning: When this option is enabled, attempting to start more instances than the number of available slots will result in a "Not Enough Resources" error.
-	AllowOversubscription bool `protobuf:"varint,16,opt,name=allow_oversubscription,json=allowOversubscription,proto3" json:"allow_oversubscription,omitempty"`
-	// Statuses of the pool slots
-	SlotStats *ReservedInstancePool_SlotStats `protobuf:"bytes,17,opt,name=slot_stats,json=slotStats,proto3" json:"slot_stats,omitempty"`
-	// Stats for instances of the pool
-	InstanceStats *ReservedInstancePool_InstanceStats `protobuf:"bytes,18,opt,name=instance_stats,json=instanceStats,proto3" json:"instance_stats,omitempty"`
+	Size          int64 `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -362,160 +352,6 @@ func (x *ReservedInstancePool) GetSize() int64 {
 	return 0
 }
 
-func (x *ReservedInstancePool) GetCommittedSize() int64 {
-	if x != nil {
-		return x.CommittedSize
-	}
-	return 0
-}
-
-func (x *ReservedInstancePool) GetAllowOversubscription() bool {
-	if x != nil {
-		return x.AllowOversubscription
-	}
-	return false
-}
-
-func (x *ReservedInstancePool) GetSlotStats() *ReservedInstancePool_SlotStats {
-	if x != nil {
-		return x.SlotStats
-	}
-	return nil
-}
-
-func (x *ReservedInstancePool) GetInstanceStats() *ReservedInstancePool_InstanceStats {
-	if x != nil {
-		return x.InstanceStats
-	}
-	return nil
-}
-
-type ReservedInstancePool_SlotStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Equals to pool size (and equals to the sum of the following fields)
-	Total int64 `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
-	// Number of slots used by running instances
-	Used int64 `protobuf:"varint,2,opt,name=used,proto3" json:"used,omitempty"`
-	// Number of slots available for instances (but not currently used)
-	Available int64 `protobuf:"varint,3,opt,name=available,proto3" json:"available,omitempty"`
-	// Number of slots unavailable for some reason (for example because of underlying host failure)
-	Unavailable int64 `protobuf:"varint,4,opt,name=unavailable,proto3" json:"unavailable,omitempty"`
-	// Number of slots requested for async update, but still waiting for resources and not yet available for usage
-	Pending       int64 `protobuf:"varint,5,opt,name=pending,proto3" json:"pending,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ReservedInstancePool_SlotStats) Reset() {
-	*x = ReservedInstancePool_SlotStats{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ReservedInstancePool_SlotStats) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReservedInstancePool_SlotStats) ProtoMessage() {}
-
-func (x *ReservedInstancePool_SlotStats) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReservedInstancePool_SlotStats.ProtoReflect.Descriptor instead.
-func (*ReservedInstancePool_SlotStats) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{2, 0}
-}
-
-func (x *ReservedInstancePool_SlotStats) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-func (x *ReservedInstancePool_SlotStats) GetUsed() int64 {
-	if x != nil {
-		return x.Used
-	}
-	return 0
-}
-
-func (x *ReservedInstancePool_SlotStats) GetAvailable() int64 {
-	if x != nil {
-		return x.Available
-	}
-	return 0
-}
-
-func (x *ReservedInstancePool_SlotStats) GetUnavailable() int64 {
-	if x != nil {
-		return x.Unavailable
-	}
-	return 0
-}
-
-func (x *ReservedInstancePool_SlotStats) GetPending() int64 {
-	if x != nil {
-		return x.Pending
-	}
-	return 0
-}
-
-type ReservedInstancePool_InstanceStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Total number of instances linked to the pool
-	Total         int64 `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ReservedInstancePool_InstanceStats) Reset() {
-	*x = ReservedInstancePool_InstanceStats{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ReservedInstancePool_InstanceStats) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReservedInstancePool_InstanceStats) ProtoMessage() {}
-
-func (x *ReservedInstancePool_InstanceStats) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReservedInstancePool_InstanceStats.ProtoReflect.Descriptor instead.
-func (*ReservedInstancePool_InstanceStats) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{2, 1}
-}
-
-func (x *ReservedInstancePool_InstanceStats) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
 var File_yandex_cloud_compute_v1_reserved_instance_pool_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc = "" +
@@ -532,7 +368,7 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc = "" +
 	"snapshotId\x12F\n" +
 	"\vproduct_ids\x18\x04 \x01(\v2#.yandex.cloud.compute.v1.ProductIDsH\x00R\n" +
 	"productIdsB\x13\n" +
-	"\vboot_source\x12\x04\xc0\xc11\x01\"\x8c\t\n" +
+	"\vboot_source\x12\x04\xc0\xc11\x01\"\xb9\x05\n" +
 	"\x14ReservedInstancePool\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\azone_id\x18\x02 \x01(\tR\x06zoneId\x12\x19\n" +
@@ -551,20 +387,7 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc = "" +
 	"\vproduct_ids\x18\f \x03(\tR\n" +
 	"productIds\x12S\n" +
 	"\x10network_settings\x18\r \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12\x12\n" +
-	"\x04size\x18\x0e \x01(\x03R\x04size\x12%\n" +
-	"\x0ecommitted_size\x18\x0f \x01(\x03R\rcommittedSize\x125\n" +
-	"\x16allow_oversubscription\x18\x10 \x01(\bR\x15allowOversubscription\x12V\n" +
-	"\n" +
-	"slot_stats\x18\x11 \x01(\v27.yandex.cloud.compute.v1.ReservedInstancePool.SlotStatsR\tslotStats\x12b\n" +
-	"\x0einstance_stats\x18\x12 \x01(\v2;.yandex.cloud.compute.v1.ReservedInstancePool.InstanceStatsR\rinstanceStats\x1a\x8f\x01\n" +
-	"\tSlotStats\x12\x14\n" +
-	"\x05total\x18\x01 \x01(\x03R\x05total\x12\x12\n" +
-	"\x04used\x18\x02 \x01(\x03R\x04used\x12\x1c\n" +
-	"\tavailable\x18\x03 \x01(\x03R\tavailable\x12 \n" +
-	"\vunavailable\x18\x04 \x01(\x03R\vunavailable\x12\x18\n" +
-	"\apending\x18\x05 \x01(\x03R\apending\x1a%\n" +
-	"\rInstanceStats\x12\x14\n" +
-	"\x05total\x18\x01 \x01(\x03R\x05total\x1a9\n" +
+	"\x04size\x18\x0e \x01(\x03R\x04size\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01Bb\n" +
@@ -582,33 +405,29 @@ func file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP() []b
 	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescData
 }
 
-var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_goTypes = []any{
-	(*ProductIDs)(nil),                         // 0: yandex.cloud.compute.v1.ProductIDs
-	(*BootDiskSpec)(nil),                       // 1: yandex.cloud.compute.v1.BootDiskSpec
-	(*ReservedInstancePool)(nil),               // 2: yandex.cloud.compute.v1.ReservedInstancePool
-	(*ReservedInstancePool_SlotStats)(nil),     // 3: yandex.cloud.compute.v1.ReservedInstancePool.SlotStats
-	(*ReservedInstancePool_InstanceStats)(nil), // 4: yandex.cloud.compute.v1.ReservedInstancePool.InstanceStats
-	nil,                           // 5: yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
-	(*ResourcesSpec)(nil),         // 7: yandex.cloud.compute.v1.ResourcesSpec
-	(*GpuSettings)(nil),           // 8: yandex.cloud.compute.v1.GpuSettings
-	(*NetworkSettings)(nil),       // 9: yandex.cloud.compute.v1.NetworkSettings
+	(*ProductIDs)(nil),            // 0: yandex.cloud.compute.v1.ProductIDs
+	(*BootDiskSpec)(nil),          // 1: yandex.cloud.compute.v1.BootDiskSpec
+	(*ReservedInstancePool)(nil),  // 2: yandex.cloud.compute.v1.ReservedInstancePool
+	nil,                           // 3: yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*ResourcesSpec)(nil),         // 5: yandex.cloud.compute.v1.ResourcesSpec
+	(*GpuSettings)(nil),           // 6: yandex.cloud.compute.v1.GpuSettings
+	(*NetworkSettings)(nil),       // 7: yandex.cloud.compute.v1.NetworkSettings
 }
 var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.compute.v1.BootDiskSpec.product_ids:type_name -> yandex.cloud.compute.v1.ProductIDs
-	5, // 1: yandex.cloud.compute.v1.ReservedInstancePool.labels:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
-	6, // 2: yandex.cloud.compute.v1.ReservedInstancePool.created_at:type_name -> google.protobuf.Timestamp
-	7, // 3: yandex.cloud.compute.v1.ReservedInstancePool.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
-	8, // 4: yandex.cloud.compute.v1.ReservedInstancePool.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
-	9, // 5: yandex.cloud.compute.v1.ReservedInstancePool.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	3, // 6: yandex.cloud.compute.v1.ReservedInstancePool.slot_stats:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.SlotStats
-	4, // 7: yandex.cloud.compute.v1.ReservedInstancePool.instance_stats:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.InstanceStats
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	3, // 1: yandex.cloud.compute.v1.ReservedInstancePool.labels:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
+	4, // 2: yandex.cloud.compute.v1.ReservedInstancePool.created_at:type_name -> google.protobuf.Timestamp
+	5, // 3: yandex.cloud.compute.v1.ReservedInstancePool.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
+	6, // 4: yandex.cloud.compute.v1.ReservedInstancePool.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
+	7, // 5: yandex.cloud.compute.v1.ReservedInstancePool.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_reserved_instance_pool_proto_init() }
@@ -630,7 +449,7 @@ func file_yandex_cloud_compute_v1_reserved_instance_pool_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc), len(file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -27,12 +27,10 @@ type DiskDriveType int32
 const (
 	// Unspecified disk drive type.
 	DiskDriveType_DISK_DRIVE_TYPE_UNSPECIFIED DiskDriveType = 0
-	// Hard disk drive (magnetic storage).
+	// Hard disk drive.
 	DiskDriveType_HDD DiskDriveType = 1
-	// Solid state drive with SATA/SAS interface.
+	// Solid state drive.
 	DiskDriveType_SSD DiskDriveType = 2
-	// Solid state drive with NVMe interface.
-	DiskDriveType_NVME DiskDriveType = 3
 )
 
 // Enum value maps for DiskDriveType.
@@ -41,13 +39,11 @@ var (
 		0: "DISK_DRIVE_TYPE_UNSPECIFIED",
 		1: "HDD",
 		2: "SSD",
-		3: "NVME",
 	}
 	DiskDriveType_value = map[string]int32{
 		"DISK_DRIVE_TYPE_UNSPECIFIED": 0,
 		"HDD":                         1,
 		"SSD":                         2,
-		"NVME":                        3,
 	}
 )
 
@@ -150,12 +146,11 @@ const file_yandex_cloud_baremetal_v1alpha_disk_proto_rawDesc = "" +
 	"\x04Disk\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12A\n" +
 	"\x04type\x18\x02 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x19\n" +
-	"\bsize_gib\x18\x03 \x01(\x03R\asizeGib*L\n" +
+	"\bsize_gib\x18\x03 \x01(\x03R\asizeGib*B\n" +
 	"\rDiskDriveType\x12\x1f\n" +
 	"\x1bDISK_DRIVE_TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03HDD\x10\x01\x12\a\n" +
-	"\x03SSD\x10\x02\x12\b\n" +
-	"\x04NVME\x10\x03Br\n" +
+	"\x03SSD\x10\x02Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

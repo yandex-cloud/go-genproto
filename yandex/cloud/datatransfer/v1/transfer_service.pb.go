@@ -44,7 +44,8 @@ type CreateTransferRequest struct {
 	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	// Transfer labels as `key:value` pairs.
 	//
-	// For details about the concept, see [documentation]({{ api-url-prefix }}/resource-manager/concepts/labels).
+	// For details about the concept, see [documentation]({{ api-url-prefix
+	// }}/resource-manager/concepts/labels).
 	Labels         map[string]string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Transformation *Transformation   `protobuf:"bytes,10,opt,name=transformation,proto3" json:"transformation,omitempty"`
 	DataObjects    *DataObjects      `protobuf:"bytes,12,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
@@ -213,7 +214,8 @@ type UpdateTransferRequest struct {
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,5,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Transfer labels as `key:value` pairs.
 	//
-	// For details about the concept, see [documentation]({{ api-url-prefix }}/resource-manager/concepts/labels).
+	// For details about the concept, see [documentation]({{ api-url-prefix
+	// }}/resource-manager/concepts/labels).
 	Labels         map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Transformation *Transformation   `protobuf:"bytes,8,opt,name=transformation,proto3" json:"transformation,omitempty"`
 	DataObjects    *DataObjects      `protobuf:"bytes,10,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
