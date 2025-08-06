@@ -34,34 +34,6 @@ func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
 
-func (m *ConnectionManager) SetConnectionId(v string) {
-	m.ConnectionId = v
-}
-
-func (m *UserSpec) SetName(v string) {
-	m.Name = v
-}
-
-func (m *UserSpec) SetPassword(v string) {
-	m.Password = v
-}
-
-func (m *UserSpec) SetPermissions(v []*Permission) {
-	m.Permissions = v
-}
-
-func (m *UserSpec) SetSettings(v *UserSettings) {
-	m.Settings = v
-}
-
-func (m *UserSpec) SetQuotas(v []*UserQuota) {
-	m.Quotas = v
-}
-
-func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
-	m.GeneratePassword = v
-}
-
 func (m *UserSettings) SetReadonly(v *wrapperspb.Int64Value) {
 	m.Readonly = v
 }
@@ -90,6 +62,10 @@ func (m *UserSettings) SetSendTimeout(v *wrapperspb.Int64Value) {
 	m.SendTimeout = v
 }
 
+func (m *UserSettings) SetIdleConnectionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleConnectionTimeout = v
+}
+
 func (m *UserSettings) SetTimeoutBeforeCheckingExecutionSpeed(v *wrapperspb.Int64Value) {
 	m.TimeoutBeforeCheckingExecutionSpeed = v
 }
@@ -106,16 +82,8 @@ func (m *UserSettings) SetInsertQuorumParallel(v *wrapperspb.BoolValue) {
 	m.InsertQuorumParallel = v
 }
 
-func (m *UserSettings) SetInsertNullAsDefault(v *wrapperspb.BoolValue) {
-	m.InsertNullAsDefault = v
-}
-
 func (m *UserSettings) SetSelectSequentialConsistency(v *wrapperspb.BoolValue) {
 	m.SelectSequentialConsistency = v
-}
-
-func (m *UserSettings) SetDeduplicateBlocksInDependentMaterializedViews(v *wrapperspb.BoolValue) {
-	m.DeduplicateBlocksInDependentMaterializedViews = v
 }
 
 func (m *UserSettings) SetReplicationAlterPartitionsSync(v *wrapperspb.Int64Value) {
@@ -142,8 +110,28 @@ func (m *UserSettings) SetDistributedDdlTaskTimeout(v *wrapperspb.Int64Value) {
 	m.DistributedDdlTaskTimeout = v
 }
 
+func (m *UserSettings) SetDistributedDdlOutputMode(v UserSettings_DistributedDdlOutputMode) {
+	m.DistributedDdlOutputMode = v
+}
+
 func (m *UserSettings) SetSkipUnavailableShards(v *wrapperspb.BoolValue) {
 	m.SkipUnavailableShards = v
+}
+
+func (m *UserSettings) SetUseHedgedRequests(v *wrapperspb.BoolValue) {
+	m.UseHedgedRequests = v
+}
+
+func (m *UserSettings) SetHedgedConnectionTimeoutMs(v *wrapperspb.Int64Value) {
+	m.HedgedConnectionTimeoutMs = v
+}
+
+func (m *UserSettings) SetLoadBalancing(v UserSettings_LoadBalancing) {
+	m.LoadBalancing = v
+}
+
+func (m *UserSettings) SetPreferLocalhostReplica(v *wrapperspb.BoolValue) {
+	m.PreferLocalhostReplica = v
 }
 
 func (m *UserSettings) SetCompileExpressions(v *wrapperspb.BoolValue) {
@@ -168,6 +156,10 @@ func (m *UserSettings) SetMinInsertBlockSizeBytes(v *wrapperspb.Int64Value) {
 
 func (m *UserSettings) SetMaxInsertBlockSize(v *wrapperspb.Int64Value) {
 	m.MaxInsertBlockSize = v
+}
+
+func (m *UserSettings) SetMaxPartitionsPerInsertBlock(v *wrapperspb.Int64Value) {
+	m.MaxPartitionsPerInsertBlock = v
 }
 
 func (m *UserSettings) SetMinBytesToUseDirectIo(v *wrapperspb.Int64Value) {
@@ -210,12 +202,28 @@ func (m *UserSettings) SetGroupByTwoLevelThresholdBytes(v *wrapperspb.Int64Value
 	m.GroupByTwoLevelThresholdBytes = v
 }
 
+func (m *UserSettings) SetDeduplicateBlocksInDependentMaterializedViews(v *wrapperspb.BoolValue) {
+	m.DeduplicateBlocksInDependentMaterializedViews = v
+}
+
+func (m *UserSettings) SetLocalFilesystemReadMethod(v UserSettings_LocalFilesystemReadMethod) {
+	m.LocalFilesystemReadMethod = v
+}
+
+func (m *UserSettings) SetRemoteFilesystemReadMethod(v UserSettings_RemoteFilesystemReadMethod) {
+	m.RemoteFilesystemReadMethod = v
+}
+
 func (m *UserSettings) SetPriority(v *wrapperspb.Int64Value) {
 	m.Priority = v
 }
 
 func (m *UserSettings) SetMaxThreads(v *wrapperspb.Int64Value) {
 	m.MaxThreads = v
+}
+
+func (m *UserSettings) SetMaxInsertThreads(v *wrapperspb.Int64Value) {
+	m.MaxInsertThreads = v
 }
 
 func (m *UserSettings) SetMaxMemoryUsage(v *wrapperspb.Int64Value) {
@@ -226,6 +234,18 @@ func (m *UserSettings) SetMaxMemoryUsageForUser(v *wrapperspb.Int64Value) {
 	m.MaxMemoryUsageForUser = v
 }
 
+func (m *UserSettings) SetMemoryOvercommitRatioDenominator(v *wrapperspb.Int64Value) {
+	m.MemoryOvercommitRatioDenominator = v
+}
+
+func (m *UserSettings) SetMemoryOvercommitRatioDenominatorForUser(v *wrapperspb.Int64Value) {
+	m.MemoryOvercommitRatioDenominatorForUser = v
+}
+
+func (m *UserSettings) SetMemoryUsageOvercommitMaxWaitMicroseconds(v *wrapperspb.Int64Value) {
+	m.MemoryUsageOvercommitMaxWaitMicroseconds = v
+}
+
 func (m *UserSettings) SetMaxNetworkBandwidth(v *wrapperspb.Int64Value) {
 	m.MaxNetworkBandwidth = v
 }
@@ -234,8 +254,12 @@ func (m *UserSettings) SetMaxNetworkBandwidthForUser(v *wrapperspb.Int64Value) {
 	m.MaxNetworkBandwidthForUser = v
 }
 
-func (m *UserSettings) SetMaxPartitionsPerInsertBlock(v *wrapperspb.Int64Value) {
-	m.MaxPartitionsPerInsertBlock = v
+func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForQuery(v *wrapperspb.Int64Value) {
+	m.MaxTemporaryDataOnDiskSizeForQuery = v
+}
+
+func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForUser(v *wrapperspb.Int64Value) {
+	m.MaxTemporaryDataOnDiskSizeForUser = v
 }
 
 func (m *UserSettings) SetMaxConcurrentQueriesForUser(v *wrapperspb.Int64Value) {
@@ -350,14 +374,6 @@ func (m *UserSettings) SetJoinOverflowMode(v UserSettings_OverflowMode) {
 	m.JoinOverflowMode = v
 }
 
-func (m *UserSettings) SetJoinAlgorithm(v []UserSettings_JoinAlgorithm) {
-	m.JoinAlgorithm = v
-}
-
-func (m *UserSettings) SetAnyJoinDistinctRightTableKeys(v *wrapperspb.BoolValue) {
-	m.AnyJoinDistinctRightTableKeys = v
-}
-
 func (m *UserSettings) SetMaxColumnsToRead(v *wrapperspb.Int64Value) {
 	m.MaxColumnsToRead = v
 }
@@ -386,16 +402,16 @@ func (m *UserSettings) SetMaxExpandedAstElements(v *wrapperspb.Int64Value) {
 	m.MaxExpandedAstElements = v
 }
 
+func (m *UserSettings) SetMaxParserDepth(v *wrapperspb.Int64Value) {
+	m.MaxParserDepth = v
+}
+
 func (m *UserSettings) SetMinExecutionSpeed(v *wrapperspb.Int64Value) {
 	m.MinExecutionSpeed = v
 }
 
 func (m *UserSettings) SetMinExecutionSpeedBytes(v *wrapperspb.Int64Value) {
 	m.MinExecutionSpeedBytes = v
-}
-
-func (m *UserSettings) SetCountDistinctImplementation(v UserSettings_CountDistinctImplementation) {
-	m.CountDistinctImplementation = v
 }
 
 func (m *UserSettings) SetInputFormatValuesInterpretExpressions(v *wrapperspb.BoolValue) {
@@ -410,10 +426,6 @@ func (m *UserSettings) SetInputFormatNullAsDefault(v *wrapperspb.BoolValue) {
 	m.InputFormatNullAsDefault = v
 }
 
-func (m *UserSettings) SetDateTimeInputFormat(v UserSettings_DateTimeInputFormat) {
-	m.DateTimeInputFormat = v
-}
-
 func (m *UserSettings) SetInputFormatWithNamesUseHeader(v *wrapperspb.BoolValue) {
 	m.InputFormatWithNamesUseHeader = v
 }
@@ -426,6 +438,10 @@ func (m *UserSettings) SetOutputFormatJsonQuoteDenormals(v *wrapperspb.BoolValue
 	m.OutputFormatJsonQuoteDenormals = v
 }
 
+func (m *UserSettings) SetDateTimeInputFormat(v UserSettings_DateTimeInputFormat) {
+	m.DateTimeInputFormat = v
+}
+
 func (m *UserSettings) SetDateTimeOutputFormat(v UserSettings_DateTimeOutputFormat) {
 	m.DateTimeOutputFormat = v
 }
@@ -434,12 +450,36 @@ func (m *UserSettings) SetLowCardinalityAllowInNativeFormat(v *wrapperspb.BoolVa
 	m.LowCardinalityAllowInNativeFormat = v
 }
 
-func (m *UserSettings) SetAllowSuspiciousLowCardinalityTypes(v *wrapperspb.BoolValue) {
-	m.AllowSuspiciousLowCardinalityTypes = v
-}
-
 func (m *UserSettings) SetEmptyResultForAggregationByEmptySet(v *wrapperspb.BoolValue) {
 	m.EmptyResultForAggregationByEmptySet = v
+}
+
+func (m *UserSettings) SetFormatRegexp(v string) {
+	m.FormatRegexp = v
+}
+
+func (m *UserSettings) SetFormatRegexpEscapingRule(v UserSettings_FormatRegexpEscapingRule) {
+	m.FormatRegexpEscapingRule = v
+}
+
+func (m *UserSettings) SetFormatRegexpSkipUnmatched(v *wrapperspb.BoolValue) {
+	m.FormatRegexpSkipUnmatched = v
+}
+
+func (m *UserSettings) SetInputFormatParallelParsing(v *wrapperspb.BoolValue) {
+	m.InputFormatParallelParsing = v
+}
+
+func (m *UserSettings) SetInputFormatImportNestedJson(v *wrapperspb.BoolValue) {
+	m.InputFormatImportNestedJson = v
+}
+
+func (m *UserSettings) SetFormatAvroSchemaRegistryUrl(v string) {
+	m.FormatAvroSchemaRegistryUrl = v
+}
+
+func (m *UserSettings) SetDataTypeDefaultNullable(v *wrapperspb.BoolValue) {
+	m.DataTypeDefaultNullable = v
 }
 
 func (m *UserSettings) SetHttpConnectionTimeout(v *wrapperspb.Int64Value) {
@@ -486,44 +526,12 @@ func (m *UserSettings) SetHttpMaxFieldValueSize(v *wrapperspb.Int64Value) {
 	m.HttpMaxFieldValueSize = v
 }
 
-func (m *UserSettings) SetJoinedSubqueryRequiresAlias(v *wrapperspb.BoolValue) {
-	m.JoinedSubqueryRequiresAlias = v
-}
-
-func (m *UserSettings) SetJoinUseNulls(v *wrapperspb.BoolValue) {
-	m.JoinUseNulls = v
-}
-
-func (m *UserSettings) SetTransformNullIn(v *wrapperspb.BoolValue) {
-	m.TransformNullIn = v
-}
-
 func (m *UserSettings) SetQuotaMode(v UserSettings_QuotaMode) {
 	m.QuotaMode = v
 }
 
-func (m *UserSettings) SetFlattenNested(v *wrapperspb.BoolValue) {
-	m.FlattenNested = v
-}
-
-func (m *UserSettings) SetFormatRegexp(v string) {
-	m.FormatRegexp = v
-}
-
-func (m *UserSettings) SetFormatRegexpEscapingRule(v UserSettings_FormatRegexpEscapingRule) {
-	m.FormatRegexpEscapingRule = v
-}
-
-func (m *UserSettings) SetFormatRegexpSkipUnmatched(v *wrapperspb.BoolValue) {
-	m.FormatRegexpSkipUnmatched = v
-}
-
 func (m *UserSettings) SetAsyncInsert(v *wrapperspb.BoolValue) {
 	m.AsyncInsert = v
-}
-
-func (m *UserSettings) SetAsyncInsertThreads(v *wrapperspb.Int64Value) {
-	m.AsyncInsertThreads = v
 }
 
 func (m *UserSettings) SetWaitForAsyncInsert(v *wrapperspb.BoolValue) {
@@ -544,74 +552,6 @@ func (m *UserSettings) SetAsyncInsertBusyTimeout(v *wrapperspb.Int64Value) {
 
 func (m *UserSettings) SetAsyncInsertUseAdaptiveBusyTimeout(v *wrapperspb.BoolValue) {
 	m.AsyncInsertUseAdaptiveBusyTimeout = v
-}
-
-func (m *UserSettings) SetMemoryProfilerStep(v *wrapperspb.Int64Value) {
-	m.MemoryProfilerStep = v
-}
-
-func (m *UserSettings) SetMemoryProfilerSampleProbability(v *wrapperspb.DoubleValue) {
-	m.MemoryProfilerSampleProbability = v
-}
-
-func (m *UserSettings) SetMaxFinalThreads(v *wrapperspb.Int64Value) {
-	m.MaxFinalThreads = v
-}
-
-func (m *UserSettings) SetInputFormatParallelParsing(v *wrapperspb.BoolValue) {
-	m.InputFormatParallelParsing = v
-}
-
-func (m *UserSettings) SetInputFormatImportNestedJson(v *wrapperspb.BoolValue) {
-	m.InputFormatImportNestedJson = v
-}
-
-func (m *UserSettings) SetFormatAvroSchemaRegistryUrl(v string) {
-	m.FormatAvroSchemaRegistryUrl = v
-}
-
-func (m *UserSettings) SetDataTypeDefaultNullable(v *wrapperspb.BoolValue) {
-	m.DataTypeDefaultNullable = v
-}
-
-func (m *UserSettings) SetLocalFilesystemReadMethod(v UserSettings_LocalFilesystemReadMethod) {
-	m.LocalFilesystemReadMethod = v
-}
-
-func (m *UserSettings) SetMaxReadBufferSize(v *wrapperspb.Int64Value) {
-	m.MaxReadBufferSize = v
-}
-
-func (m *UserSettings) SetInsertKeeperMaxRetries(v *wrapperspb.Int64Value) {
-	m.InsertKeeperMaxRetries = v
-}
-
-func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForUser(v *wrapperspb.Int64Value) {
-	m.MaxTemporaryDataOnDiskSizeForUser = v
-}
-
-func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForQuery(v *wrapperspb.Int64Value) {
-	m.MaxTemporaryDataOnDiskSizeForQuery = v
-}
-
-func (m *UserSettings) SetMaxParserDepth(v *wrapperspb.Int64Value) {
-	m.MaxParserDepth = v
-}
-
-func (m *UserSettings) SetRemoteFilesystemReadMethod(v UserSettings_RemoteFilesystemReadMethod) {
-	m.RemoteFilesystemReadMethod = v
-}
-
-func (m *UserSettings) SetMemoryOvercommitRatioDenominator(v *wrapperspb.Int64Value) {
-	m.MemoryOvercommitRatioDenominator = v
-}
-
-func (m *UserSettings) SetMemoryOvercommitRatioDenominatorForUser(v *wrapperspb.Int64Value) {
-	m.MemoryOvercommitRatioDenominatorForUser = v
-}
-
-func (m *UserSettings) SetMemoryUsageOvercommitMaxWaitMicroseconds(v *wrapperspb.Int64Value) {
-	m.MemoryUsageOvercommitMaxWaitMicroseconds = v
 }
 
 func (m *UserSettings) SetLogQueryThreads(v *wrapperspb.BoolValue) {
@@ -678,28 +618,60 @@ func (m *UserSettings) SetQueryCacheSystemTableHandling(v UserSettings_QueryCach
 	m.QueryCacheSystemTableHandling = v
 }
 
-func (m *UserSettings) SetMaxInsertThreads(v *wrapperspb.Int64Value) {
-	m.MaxInsertThreads = v
+func (m *UserSettings) SetCountDistinctImplementation(v UserSettings_CountDistinctImplementation) {
+	m.CountDistinctImplementation = v
 }
 
-func (m *UserSettings) SetUseHedgedRequests(v *wrapperspb.BoolValue) {
-	m.UseHedgedRequests = v
+func (m *UserSettings) SetJoinedSubqueryRequiresAlias(v *wrapperspb.BoolValue) {
+	m.JoinedSubqueryRequiresAlias = v
 }
 
-func (m *UserSettings) SetIdleConnectionTimeout(v *wrapperspb.Int64Value) {
-	m.IdleConnectionTimeout = v
+func (m *UserSettings) SetJoinUseNulls(v *wrapperspb.BoolValue) {
+	m.JoinUseNulls = v
 }
 
-func (m *UserSettings) SetHedgedConnectionTimeoutMs(v *wrapperspb.Int64Value) {
-	m.HedgedConnectionTimeoutMs = v
+func (m *UserSettings) SetTransformNullIn(v *wrapperspb.BoolValue) {
+	m.TransformNullIn = v
 }
 
-func (m *UserSettings) SetLoadBalancing(v UserSettings_LoadBalancing) {
-	m.LoadBalancing = v
+func (m *UserSettings) SetInsertNullAsDefault(v *wrapperspb.BoolValue) {
+	m.InsertNullAsDefault = v
 }
 
-func (m *UserSettings) SetPreferLocalhostReplica(v *wrapperspb.BoolValue) {
-	m.PreferLocalhostReplica = v
+func (m *UserSettings) SetJoinAlgorithm(v []UserSettings_JoinAlgorithm) {
+	m.JoinAlgorithm = v
+}
+
+func (m *UserSettings) SetAnyJoinDistinctRightTableKeys(v *wrapperspb.BoolValue) {
+	m.AnyJoinDistinctRightTableKeys = v
+}
+
+func (m *UserSettings) SetAllowSuspiciousLowCardinalityTypes(v *wrapperspb.BoolValue) {
+	m.AllowSuspiciousLowCardinalityTypes = v
+}
+
+func (m *UserSettings) SetFlattenNested(v *wrapperspb.BoolValue) {
+	m.FlattenNested = v
+}
+
+func (m *UserSettings) SetMemoryProfilerStep(v *wrapperspb.Int64Value) {
+	m.MemoryProfilerStep = v
+}
+
+func (m *UserSettings) SetMemoryProfilerSampleProbability(v *wrapperspb.DoubleValue) {
+	m.MemoryProfilerSampleProbability = v
+}
+
+func (m *UserSettings) SetMaxFinalThreads(v *wrapperspb.Int64Value) {
+	m.MaxFinalThreads = v
+}
+
+func (m *UserSettings) SetMaxReadBufferSize(v *wrapperspb.Int64Value) {
+	m.MaxReadBufferSize = v
+}
+
+func (m *UserSettings) SetInsertKeeperMaxRetries(v *wrapperspb.Int64Value) {
+	m.InsertKeeperMaxRetries = v
 }
 
 func (m *UserSettings) SetDoNotMergeAcrossPartitionsSelectFinal(v *wrapperspb.BoolValue) {
@@ -714,12 +686,20 @@ func (m *UserSettings) SetEnableAnalyzer(v *wrapperspb.BoolValue) {
 	m.EnableAnalyzer = v
 }
 
+func (m *UserSettings) SetS3UseAdaptiveTimeouts(v *wrapperspb.BoolValue) {
+	m.S3UseAdaptiveTimeouts = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }
 
 func (m *UserSettings) SetMinCountToCompile(v *wrapperspb.Int64Value) {
 	m.MinCountToCompile = v
+}
+
+func (m *UserSettings) SetAsyncInsertThreads(v *wrapperspb.Int64Value) {
+	m.AsyncInsertThreads = v
 }
 
 func (m *UserSettings) SetAsyncInsertStaleTimeout(v *wrapperspb.Int64Value) {
@@ -748,4 +728,32 @@ func (m *UserQuota) SetReadRows(v *wrapperspb.Int64Value) {
 
 func (m *UserQuota) SetExecutionTime(v *wrapperspb.Int64Value) {
 	m.ExecutionTime = v
+}
+
+func (m *ConnectionManager) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
+func (m *UserSpec) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UserSpec) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
+}
+
+func (m *UserSpec) SetPermissions(v []*Permission) {
+	m.Permissions = v
+}
+
+func (m *UserSpec) SetSettings(v *UserSettings) {
+	m.Settings = v
+}
+
+func (m *UserSpec) SetQuotas(v []*UserQuota) {
+	m.Quotas = v
 }

@@ -76,6 +76,170 @@ func (WafProfile_AnalyzeRequestBody_Action) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 2, 0}
 }
 
+// Types on actions on rule set match.
+type WafProfile_WafProfileRuleSet_RuleSetAction int32
+
+const (
+	WafProfile_WafProfileRuleSet_RULE_SET_ACTION_UNSPECIFIED WafProfile_WafProfileRuleSet_RuleSetAction = 0
+	// Deny request.
+	WafProfile_WafProfileRuleSet_DENY WafProfile_WafProfileRuleSet_RuleSetAction = 1
+	// Show captcha.
+	WafProfile_WafProfileRuleSet_CAPTCHA WafProfile_WafProfileRuleSet_RuleSetAction = 2
+)
+
+// Enum value maps for WafProfile_WafProfileRuleSet_RuleSetAction.
+var (
+	WafProfile_WafProfileRuleSet_RuleSetAction_name = map[int32]string{
+		0: "RULE_SET_ACTION_UNSPECIFIED",
+		1: "DENY",
+		2: "CAPTCHA",
+	}
+	WafProfile_WafProfileRuleSet_RuleSetAction_value = map[string]int32{
+		"RULE_SET_ACTION_UNSPECIFIED": 0,
+		"DENY":                        1,
+		"CAPTCHA":                     2,
+	}
+)
+
+func (x WafProfile_WafProfileRuleSet_RuleSetAction) Enum() *WafProfile_WafProfileRuleSet_RuleSetAction {
+	p := new(WafProfile_WafProfileRuleSet_RuleSetAction)
+	*p = x
+	return p
+}
+
+func (x WafProfile_WafProfileRuleSet_RuleSetAction) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (WafProfile_WafProfileRuleSet_RuleSetAction) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes[1].Descriptor()
+}
+
+func (WafProfile_WafProfileRuleSet_RuleSetAction) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes[1]
+}
+
+func (x WafProfile_WafProfileRuleSet_RuleSetAction) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet_RuleSetAction.Descriptor instead.
+func (WafProfile_WafProfileRuleSet_RuleSetAction) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3, 0}
+}
+
+// Types on actions on rule group match.
+type WafProfile_WafProfileRuleSet_RuleGroup_Action int32
+
+const (
+	WafProfile_WafProfileRuleSet_RuleGroup_ACTION_UNSPECIFIED WafProfile_WafProfileRuleSet_RuleGroup_Action = 0
+	// Deny request.
+	WafProfile_WafProfileRuleSet_RuleGroup_DENY WafProfile_WafProfileRuleSet_RuleGroup_Action = 1
+	// Log request.
+	WafProfile_WafProfileRuleSet_RuleGroup_LOG WafProfile_WafProfileRuleSet_RuleGroup_Action = 2
+	// Ignore request.
+	WafProfile_WafProfileRuleSet_RuleGroup_IGNORE WafProfile_WafProfileRuleSet_RuleGroup_Action = 3
+)
+
+// Enum value maps for WafProfile_WafProfileRuleSet_RuleGroup_Action.
+var (
+	WafProfile_WafProfileRuleSet_RuleGroup_Action_name = map[int32]string{
+		0: "ACTION_UNSPECIFIED",
+		1: "DENY",
+		2: "LOG",
+		3: "IGNORE",
+	}
+	WafProfile_WafProfileRuleSet_RuleGroup_Action_value = map[string]int32{
+		"ACTION_UNSPECIFIED": 0,
+		"DENY":               1,
+		"LOG":                2,
+		"IGNORE":             3,
+	}
+)
+
+func (x WafProfile_WafProfileRuleSet_RuleGroup_Action) Enum() *WafProfile_WafProfileRuleSet_RuleGroup_Action {
+	p := new(WafProfile_WafProfileRuleSet_RuleGroup_Action)
+	*p = x
+	return p
+}
+
+func (x WafProfile_WafProfileRuleSet_RuleGroup_Action) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (WafProfile_WafProfileRuleSet_RuleGroup_Action) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes[2].Descriptor()
+}
+
+func (WafProfile_WafProfileRuleSet_RuleGroup_Action) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes[2]
+}
+
+func (x WafProfile_WafProfileRuleSet_RuleGroup_Action) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet_RuleGroup_Action.Descriptor instead.
+func (WafProfile_WafProfileRuleSet_RuleGroup_Action) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3, 0, 0}
+}
+
+// Type of rule set.
+type RuleSet_RuleSetType int32
+
+const (
+	RuleSet_RULE_SET_TYPE_UNSPECIFIED RuleSet_RuleSetType = 0
+	// Core rule set.
+	RuleSet_CORE RuleSet_RuleSetType = 1
+	// Yandex rule set.
+	RuleSet_YA RuleSet_RuleSetType = 2
+	// Yandex machine learning rule set.
+	RuleSet_ML RuleSet_RuleSetType = 3
+)
+
+// Enum value maps for RuleSet_RuleSetType.
+var (
+	RuleSet_RuleSetType_name = map[int32]string{
+		0: "RULE_SET_TYPE_UNSPECIFIED",
+		1: "CORE",
+		2: "YA",
+		3: "ML",
+	}
+	RuleSet_RuleSetType_value = map[string]int32{
+		"RULE_SET_TYPE_UNSPECIFIED": 0,
+		"CORE":                      1,
+		"YA":                        2,
+		"ML":                        3,
+	}
+)
+
+func (x RuleSet_RuleSetType) Enum() *RuleSet_RuleSetType {
+	p := new(RuleSet_RuleSetType)
+	*p = x
+	return p
+}
+
+func (x RuleSet_RuleSetType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RuleSet_RuleSetType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes[3].Descriptor()
+}
+
+func (RuleSet_RuleSetType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes[3]
+}
+
+func (x RuleSet_RuleSetType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RuleSet_RuleSetType.Descriptor instead.
+func (RuleSet_RuleSetType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{3, 0}
+}
+
 type WafProfile struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the WAF profile.
@@ -104,8 +268,12 @@ type WafProfile struct {
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto.
 	AnalyzeRequestBody *WafProfile_AnalyzeRequestBody `protobuf:"bytes,12,opt,name=analyze_request_body,json=analyzeRequestBody,proto3" json:"analyze_request_body,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// List of rule sets.
+	RuleSets []*WafProfile_WafProfileRuleSet `protobuf:"bytes,13,rep,name=rule_sets,json=ruleSets,proto3" json:"rule_sets,omitempty"`
+	// Determines
+	MatchAllRuleSets bool `protobuf:"varint,14,opt,name=match_all_rule_sets,json=matchAllRuleSets,proto3" json:"match_all_rule_sets,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *WafProfile) Reset() {
@@ -223,6 +391,20 @@ func (x *WafProfile) GetAnalyzeRequestBody() *WafProfile_AnalyzeRequestBody {
 		return x.AnalyzeRequestBody
 	}
 	return nil
+}
+
+func (x *WafProfile) GetRuleSets() []*WafProfile_WafProfileRuleSet {
+	if x != nil {
+		return x.RuleSets
+	}
+	return nil
+}
+
+func (x *WafProfile) GetMatchAllRuleSets() bool {
+	if x != nil {
+		return x.MatchAllRuleSets
+	}
+	return false
 }
 
 type isWafProfile_RuleSet interface {
@@ -388,7 +570,11 @@ type RuleSet struct {
 	// Name of rule set.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Version of rule set.
-	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	// Type of rule set.
+	Type RuleSet_RuleSetType `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.smartwebsecurity.v1.waf.RuleSet_RuleSetType" json:"type,omitempty"`
+	// ID of rule set.
+	Id            string `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -433,6 +619,20 @@ func (x *RuleSet) GetName() string {
 func (x *RuleSet) GetVersion() string {
 	if x != nil {
 		return x.Version
+	}
+	return ""
+}
+
+func (x *RuleSet) GetType() RuleSet_RuleSetType {
+	if x != nil {
+		return x.Type
+	}
+	return RuleSet_RULE_SET_TYPE_UNSPECIFIED
+}
+
+func (x *RuleSet) GetId() string {
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
@@ -572,6 +772,386 @@ func (x *WafProfile_AnalyzeRequestBody) GetSizeLimitAction() WafProfile_AnalyzeR
 	return WafProfile_AnalyzeRequestBody_ACTION_UNSPECIFIED
 }
 
+type WafProfile_WafProfileRuleSet struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to RuleSet:
+	//
+	//	*WafProfile_WafProfileRuleSet_CoreRuleSet
+	//	*WafProfile_WafProfileRuleSet_YaRuleSet
+	//	*WafProfile_WafProfileRuleSet_MlRuleSet
+	RuleSet isWafProfile_WafProfileRuleSet_RuleSet `protobuf_oneof:"rule_set"`
+	// Priority of rule set.
+	Priority int64 `protobuf:"varint,4,opt,name=priority,proto3" json:"priority,omitempty"`
+	// Determines is it rule set enabled or not.
+	IsEnabled bool `protobuf:"varint,5,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	// Action to perfome on rule set match.
+	Action        WafProfile_WafProfileRuleSet_RuleSetAction `protobuf:"varint,6,opt,name=action,proto3,enum=yandex.cloud.smartwebsecurity.v1.waf.WafProfile_WafProfileRuleSet_RuleSetAction" json:"action,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WafProfile_WafProfileRuleSet) Reset() {
+	*x = WafProfile_WafProfileRuleSet{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WafProfile_WafProfileRuleSet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WafProfile_WafProfileRuleSet) ProtoMessage() {}
+
+func (x *WafProfile_WafProfileRuleSet) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet.ProtoReflect.Descriptor instead.
+func (*WafProfile_WafProfileRuleSet) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3}
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetRuleSet() isWafProfile_WafProfileRuleSet_RuleSet {
+	if x != nil {
+		return x.RuleSet
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetCoreRuleSet() *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet {
+	if x != nil {
+		if x, ok := x.RuleSet.(*WafProfile_WafProfileRuleSet_CoreRuleSet); ok {
+			return x.CoreRuleSet
+		}
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetYaRuleSet() *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet {
+	if x != nil {
+		if x, ok := x.RuleSet.(*WafProfile_WafProfileRuleSet_YaRuleSet); ok {
+			return x.YaRuleSet
+		}
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetMlRuleSet() *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet {
+	if x != nil {
+		if x, ok := x.RuleSet.(*WafProfile_WafProfileRuleSet_MlRuleSet); ok {
+			return x.MlRuleSet
+		}
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetPriority() int64 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+func (x *WafProfile_WafProfileRuleSet) GetAction() WafProfile_WafProfileRuleSet_RuleSetAction {
+	if x != nil {
+		return x.Action
+	}
+	return WafProfile_WafProfileRuleSet_RULE_SET_ACTION_UNSPECIFIED
+}
+
+type isWafProfile_WafProfileRuleSet_RuleSet interface {
+	isWafProfile_WafProfileRuleSet_RuleSet()
+}
+
+type WafProfile_WafProfileRuleSet_CoreRuleSet struct {
+	// Core rule set settings. See [Basic rule set](/docs/smartwebsecurity/concepts/waf#rules-set) for details.
+	CoreRuleSet *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet `protobuf:"bytes,1,opt,name=core_rule_set,json=coreRuleSet,proto3,oneof"`
+}
+
+type WafProfile_WafProfileRuleSet_YaRuleSet struct {
+	// Yandex rule set settings.
+	YaRuleSet *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet `protobuf:"bytes,2,opt,name=ya_rule_set,json=yaRuleSet,proto3,oneof"`
+}
+
+type WafProfile_WafProfileRuleSet_MlRuleSet struct {
+	// Yandex Machine learning rule set settings.
+	MlRuleSet *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet `protobuf:"bytes,3,opt,name=ml_rule_set,json=mlRuleSet,proto3,oneof"`
+}
+
+func (*WafProfile_WafProfileRuleSet_CoreRuleSet) isWafProfile_WafProfileRuleSet_RuleSet() {}
+
+func (*WafProfile_WafProfileRuleSet_YaRuleSet) isWafProfile_WafProfileRuleSet_RuleSet() {}
+
+func (*WafProfile_WafProfileRuleSet_MlRuleSet) isWafProfile_WafProfileRuleSet_RuleSet() {}
+
+type WafProfile_WafProfileRuleSet_RuleGroup struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the rule group.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Action to perfome on rule group match.
+	Action WafProfile_WafProfileRuleSet_RuleGroup_Action `protobuf:"varint,2,opt,name=action,proto3,enum=yandex.cloud.smartwebsecurity.v1.waf.WafProfile_WafProfileRuleSet_RuleGroup_Action" json:"action,omitempty"`
+	// Anomaly score.
+	InboundAnomalyScore int64 `protobuf:"varint,3,opt,name=inbound_anomaly_score,json=inboundAnomalyScore,proto3" json:"inbound_anomaly_score,omitempty"`
+	// Determines is it rule group enabled or not.
+	IsEnabled     bool `protobuf:"varint,4,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) Reset() {
+	*x = WafProfile_WafProfileRuleSet_RuleGroup{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WafProfile_WafProfileRuleSet_RuleGroup) ProtoMessage() {}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet_RuleGroup.ProtoReflect.Descriptor instead.
+func (*WafProfile_WafProfileRuleSet_RuleGroup) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3, 0}
+}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) GetAction() WafProfile_WafProfileRuleSet_RuleGroup_Action {
+	if x != nil {
+		return x.Action
+	}
+	return WafProfile_WafProfileRuleSet_RuleGroup_ACTION_UNSPECIFIED
+}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) GetInboundAnomalyScore() int64 {
+	if x != nil {
+		return x.InboundAnomalyScore
+	}
+	return 0
+}
+
+func (x *WafProfile_WafProfileRuleSet_RuleGroup) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+type WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Rule set.
+	RuleSet *RuleSet `protobuf:"bytes,1,opt,name=rule_set,json=ruleSet,proto3" json:"rule_set,omitempty"`
+	// Anomaly score.
+	// Enter an integer within the range of 2 and 10000.
+	// The higher this value, the more likely it is that the request that satisfies the rule is an attack.
+	// See [Rules](/docs/smartwebsecurity/concepts/waf#anomaly) for more details.
+	InboundAnomalyScore int64 `protobuf:"varint,2,opt,name=inbound_anomaly_score,json=inboundAnomalyScore,proto3" json:"inbound_anomaly_score,omitempty"`
+	// Paranoia level.
+	// Enter an integer within the range of 1 and 4.
+	// Paranoia level classifies rules according to their aggression. The higher the paranoia level, the better your protection,
+	// but also the higher the probability of WAF false positives.
+	// See [Rules](/docs/smartwebsecurity/concepts/waf#paranoia) for more details.
+	// NOTE: this option has no effect on enabling or disabling rules.
+	// it is used only as recommendation for user to enable all rules with paranoia_level <= this value.
+	ParanoiaLevel int64 `protobuf:"varint,3,opt,name=paranoia_level,json=paranoiaLevel,proto3" json:"paranoia_level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) Reset() {
+	*x = WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) ProtoMessage() {}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet.ProtoReflect.Descriptor instead.
+func (*WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3, 1}
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) GetRuleSet() *RuleSet {
+	if x != nil {
+		return x.RuleSet
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) GetInboundAnomalyScore() int64 {
+	if x != nil {
+		return x.InboundAnomalyScore
+	}
+	return 0
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) GetParanoiaLevel() int64 {
+	if x != nil {
+		return x.ParanoiaLevel
+	}
+	return 0
+}
+
+type WafProfile_WafProfileRuleSet_WafProfileYaRuleSet struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Rule set.
+	RuleSet *RuleSet `protobuf:"bytes,1,opt,name=rule_set,json=ruleSet,proto3" json:"rule_set,omitempty"`
+	// List of rule groups.
+	RuleGroups    []*WafProfile_WafProfileRuleSet_RuleGroup `protobuf:"bytes,2,rep,name=rule_groups,json=ruleGroups,proto3" json:"rule_groups,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) Reset() {
+	*x = WafProfile_WafProfileRuleSet_WafProfileYaRuleSet{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) ProtoMessage() {}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet_WafProfileYaRuleSet.ProtoReflect.Descriptor instead.
+func (*WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3, 2}
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) GetRuleSet() *RuleSet {
+	if x != nil {
+		return x.RuleSet
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) GetRuleGroups() []*WafProfile_WafProfileRuleSet_RuleGroup {
+	if x != nil {
+		return x.RuleGroups
+	}
+	return nil
+}
+
+type WafProfile_WafProfileRuleSet_WafProfileMlRuleSet struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Rule set.
+	RuleSet *RuleSet `protobuf:"bytes,1,opt,name=rule_set,json=ruleSet,proto3" json:"rule_set,omitempty"`
+	// List of rule groups.
+	RuleGroups    []*WafProfile_WafProfileRuleSet_RuleGroup `protobuf:"bytes,2,rep,name=rule_groups,json=ruleGroups,proto3" json:"rule_groups,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) Reset() {
+	*x = WafProfile_WafProfileRuleSet_WafProfileMlRuleSet{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) ProtoMessage() {}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WafProfile_WafProfileRuleSet_WafProfileMlRuleSet.ProtoReflect.Descriptor instead.
+func (*WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{0, 3, 3}
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) GetRuleSet() *RuleSet {
+	if x != nil {
+		return x.RuleSet
+	}
+	return nil
+}
+
+func (x *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) GetRuleGroups() []*WafProfile_WafProfileRuleSet_RuleGroup {
+	if x != nil {
+		return x.RuleGroups
+	}
+	return nil
+}
+
 // Determines list of excluded rules.
 type WafProfileExclusionRule_ExcludeRules struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -585,7 +1165,7 @@ type WafProfileExclusionRule_ExcludeRules struct {
 
 func (x *WafProfileExclusionRule_ExcludeRules) Reset() {
 	*x = WafProfileExclusionRule_ExcludeRules{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -597,7 +1177,7 @@ func (x *WafProfileExclusionRule_ExcludeRules) String() string {
 func (*WafProfileExclusionRule_ExcludeRules) ProtoMessage() {}
 
 func (x *WafProfileExclusionRule_ExcludeRules) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,7 +1211,7 @@ var File_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto protoreflect.Fil
 
 const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\"\x80\v\n" +
+	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\"\xe1\x18\n" +
 	"\n" +
 	"WafProfile\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
@@ -646,7 +1226,9 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\x0fexclusion_rules\x18\n" +
 	" \x03(\v2=.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRuleR\x0eexclusionRules\x12b\n" +
 	"\rcore_rule_set\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetH\x00R\vcoreRuleSet\x12y\n" +
-	"\x14analyze_request_body\x18\f \x01(\v2C.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBodyB\x02\x18\x01R\x12analyzeRequestBody\x1a9\n" +
+	"\x14analyze_request_body\x18\f \x01(\v2C.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBodyB\x02\x18\x01R\x12analyzeRequestBody\x12_\n" +
+	"\trule_sets\x18\r \x03(\v2B.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSetR\bruleSets\x12-\n" +
+	"\x13match_all_rule_sets\x18\x0e \x01(\bR\x10matchAllRuleSets\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xd2\x01\n" +
@@ -664,7 +1246,44 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06IGNORE\x10\x01\x12\b\n" +
-	"\x04DENY\x10\x02B\x10\n" +
+	"\x04DENY\x10\x02\x1a\xce\f\n" +
+	"\x11WafProfileRuleSet\x12~\n" +
+	"\rcore_rule_set\x18\x01 \x01(\v2X.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSetH\x00R\vcoreRuleSet\x12x\n" +
+	"\vya_rule_set\x18\x02 \x01(\v2V.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSetH\x00R\tyaRuleSet\x12x\n" +
+	"\vml_rule_set\x18\x03 \x01(\v2V.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSetH\x00R\tmlRuleSet\x12(\n" +
+	"\bpriority\x18\x04 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\x05 \x01(\bR\tisEnabled\x12h\n" +
+	"\x06action\x18\x06 \x01(\x0e2P.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleSetActionR\x06action\x1a\xa9\x02\n" +
+	"\tRuleGroup\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12k\n" +
+	"\x06action\x18\x02 \x01(\x0e2S.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.ActionR\x06action\x12?\n" +
+	"\x15inbound_anomaly_score\x18\x03 \x01(\x03B\v\xfa\xc71\a1-10000R\x13inboundAnomalyScore\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\x04 \x01(\bR\tisEnabled\"?\n" +
+	"\x06Action\x12\x16\n" +
+	"\x12ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04DENY\x10\x01\x12\a\n" +
+	"\x03LOG\x10\x02\x12\n" +
+	"\n" +
+	"\x06IGNORE\x10\x03\x1a\xdc\x01\n" +
+	"\x15WafProfileCoreRuleSet\x12N\n" +
+	"\brule_set\x18\x01 \x01(\v2-.yandex.cloud.smartwebsecurity.v1.waf.RuleSetB\x04\xe8\xc71\x01R\aruleSet\x12?\n" +
+	"\x15inbound_anomaly_score\x18\x02 \x01(\x03B\v\xfa\xc71\a2-10000R\x13inboundAnomalyScore\x122\n" +
+	"\x0eparanoia_level\x18\x03 \x01(\x03B\v\xfa\xc71\a1,2,3,4R\rparanoiaLevel\x1a\xd4\x01\n" +
+	"\x13WafProfileYaRuleSet\x12N\n" +
+	"\brule_set\x18\x01 \x01(\v2-.yandex.cloud.smartwebsecurity.v1.waf.RuleSetB\x04\xe8\xc71\x01R\aruleSet\x12m\n" +
+	"\vrule_groups\x18\x02 \x03(\v2L.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroupR\n" +
+	"ruleGroups\x1a\xd4\x01\n" +
+	"\x13WafProfileMlRuleSet\x12N\n" +
+	"\brule_set\x18\x01 \x01(\v2-.yandex.cloud.smartwebsecurity.v1.waf.RuleSetB\x04\xe8\xc71\x01R\aruleSet\x12m\n" +
+	"\vrule_groups\x18\x02 \x03(\v2L.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroupR\n" +
+	"ruleGroups\"G\n" +
+	"\rRuleSetAction\x12\x1f\n" +
+	"\x1bRULE_SET_ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04DENY\x10\x01\x12\v\n" +
+	"\aCAPTCHA\x10\x02B\x10\n" +
+	"\brule_set\x12\x04\xc0\xc11\x01B\x10\n" +
 	"\brule_set\x12\x04\xc0\xc11\x01J\x04\b\b\x10\t\"o\n" +
 	"\x0eWafProfileRule\x12\x1d\n" +
 	"\arule_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06ruleId\x12\x1d\n" +
@@ -681,10 +1300,17 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\fExcludeRules\x12\x1f\n" +
 	"\vexclude_all\x18\x01 \x01(\bR\n" +
 	"excludeAll\x12\x19\n" +
-	"\brule_ids\x18\x02 \x03(\tR\aruleIds\"C\n" +
+	"\brule_ids\x18\x02 \x03(\tR\aruleIds\"\xea\x01\n" +
 	"\aRuleSet\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1e\n" +
-	"\aversion\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aversionB\x85\x01\n" +
+	"\aversion\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aversion\x12M\n" +
+	"\x04type\x18\x03 \x01(\x0e29.yandex.cloud.smartwebsecurity.v1.waf.RuleSet.RuleSetTypeR\x04type\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\"F\n" +
+	"\vRuleSetType\x12\x1d\n" +
+	"\x19RULE_SET_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04CORE\x10\x01\x12\x06\n" +
+	"\x02YA\x10\x02\x12\x06\n" +
+	"\x02ML\x10\x03B\x85\x01\n" +
 	"(yandex.cloud.api.smartwebsecurity.v1.wafZYgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartwebsecurity/v1/waf;smartwebsecurityb\x06proto3"
 
 var (
@@ -699,37 +1325,57 @@ func file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP() [
 	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescData
 }
 
-var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_goTypes = []any{
-	(WafProfile_AnalyzeRequestBody_Action)(0),    // 0: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.Action
-	(*WafProfile)(nil),                           // 1: yandex.cloud.smartwebsecurity.v1.waf.WafProfile
-	(*WafProfileRule)(nil),                       // 2: yandex.cloud.smartwebsecurity.v1.waf.WafProfileRule
-	(*WafProfileExclusionRule)(nil),              // 3: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule
-	(*RuleSet)(nil),                              // 4: yandex.cloud.smartwebsecurity.v1.waf.RuleSet
-	nil,                                          // 5: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.LabelsEntry
-	(*WafProfile_CoreRuleSet)(nil),               // 6: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet
-	(*WafProfile_AnalyzeRequestBody)(nil),        // 7: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody
-	(*WafProfileExclusionRule_ExcludeRules)(nil), // 8: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.ExcludeRules
-	(*timestamppb.Timestamp)(nil),                // 9: google.protobuf.Timestamp
-	(*v1.Condition)(nil),                         // 10: yandex.cloud.smartwebsecurity.v1.Condition
+	(WafProfile_AnalyzeRequestBody_Action)(0),                  // 0: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.Action
+	(WafProfile_WafProfileRuleSet_RuleSetAction)(0),            // 1: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleSetAction
+	(WafProfile_WafProfileRuleSet_RuleGroup_Action)(0),         // 2: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.Action
+	(RuleSet_RuleSetType)(0),                                   // 3: yandex.cloud.smartwebsecurity.v1.waf.RuleSet.RuleSetType
+	(*WafProfile)(nil),                                         // 4: yandex.cloud.smartwebsecurity.v1.waf.WafProfile
+	(*WafProfileRule)(nil),                                     // 5: yandex.cloud.smartwebsecurity.v1.waf.WafProfileRule
+	(*WafProfileExclusionRule)(nil),                            // 6: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule
+	(*RuleSet)(nil),                                            // 7: yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	nil,                                                        // 8: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.LabelsEntry
+	(*WafProfile_CoreRuleSet)(nil),                             // 9: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet
+	(*WafProfile_AnalyzeRequestBody)(nil),                      // 10: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody
+	(*WafProfile_WafProfileRuleSet)(nil),                       // 11: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet
+	(*WafProfile_WafProfileRuleSet_RuleGroup)(nil),             // 12: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
+	(*WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet)(nil), // 13: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet
+	(*WafProfile_WafProfileRuleSet_WafProfileYaRuleSet)(nil),   // 14: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet
+	(*WafProfile_WafProfileRuleSet_WafProfileMlRuleSet)(nil),   // 15: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet
+	(*WafProfileExclusionRule_ExcludeRules)(nil),               // 16: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.ExcludeRules
+	(*timestamppb.Timestamp)(nil),                              // 17: google.protobuf.Timestamp
+	(*v1.Condition)(nil),                                       // 18: yandex.cloud.smartwebsecurity.v1.Condition
 }
 var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_depIdxs = []int32{
-	5,  // 0: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.labels:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.LabelsEntry
-	9,  // 1: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 2: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileRule
-	3,  // 3: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.exclusion_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule
-	6,  // 4: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.core_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet
-	7,  // 5: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody
-	10, // 6: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	8,  // 7: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.exclude_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.ExcludeRules
-	4,  // 8: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
-	0,  // 9: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.size_limit_action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.Action
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	8,  // 0: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.labels:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.LabelsEntry
+	17, // 1: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 2: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileRule
+	6,  // 3: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.exclusion_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule
+	9,  // 4: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.core_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet
+	10, // 5: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody
+	11, // 6: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rule_sets:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet
+	18, // 7: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	16, // 8: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.exclude_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.ExcludeRules
+	3,  // 9: yandex.cloud.smartwebsecurity.v1.waf.RuleSet.type:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet.RuleSetType
+	7,  // 10: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	0,  // 11: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.size_limit_action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.Action
+	13, // 12: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.core_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet
+	14, // 13: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.ya_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet
+	15, // 14: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.ml_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet
+	1,  // 15: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleSetAction
+	2,  // 16: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.Action
+	7,  // 17: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	7,  // 18: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	12, // 19: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet.rule_groups:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
+	7,  // 20: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	12, // 21: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet.rule_groups:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_init() }
@@ -740,13 +1386,18 @@ func file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_init() {
 	file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[0].OneofWrappers = []any{
 		(*WafProfile_CoreRuleSet_)(nil),
 	}
+	file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_msgTypes[7].OneofWrappers = []any{
+		(*WafProfile_WafProfileRuleSet_CoreRuleSet)(nil),
+		(*WafProfile_WafProfileRuleSet_YaRuleSet)(nil),
+		(*WafProfile_WafProfileRuleSet_MlRuleSet)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc), len(file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   8,
+			NumEnums:      4,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

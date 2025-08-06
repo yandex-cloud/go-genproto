@@ -81,6 +81,8 @@ func (ClickhouseConfig_LogLevel) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 0}
 }
 
+// Determines the behavior of background merges for MergeTree tables with projections.
+// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#deduplicate_merge_projection_mode).
 type ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode int32
 
 const (
@@ -133,9 +135,10 @@ func (x ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode) Number() prot
 
 // Deprecated: Use ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode.Descriptor instead.
 func (ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 0, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1, 0}
 }
 
+// Determines the behavior of lightweight deletes for MergeTree tables with projections.
 type ClickhouseConfig_MergeTree_LightweightMutationProjectionMode int32
 
 const (
@@ -185,7 +188,233 @@ func (x ClickhouseConfig_MergeTree_LightweightMutationProjectionMode) Number() p
 
 // Deprecated: Use ClickhouseConfig_MergeTree_LightweightMutationProjectionMode.Descriptor instead.
 func (ClickhouseConfig_MergeTree_LightweightMutationProjectionMode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 0, 1}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1, 1}
+}
+
+type ClickhouseConfig_Compression_Method int32
+
+const (
+	ClickhouseConfig_Compression_METHOD_UNSPECIFIED ClickhouseConfig_Compression_Method = 0
+	// [LZ4 compression algorithm](https://lz4.github.io/lz4).
+	ClickhouseConfig_Compression_LZ4 ClickhouseConfig_Compression_Method = 1
+	// [ZSTD compression algorithm](https://facebook.github.io/zstd).
+	ClickhouseConfig_Compression_ZSTD ClickhouseConfig_Compression_Method = 2
+	// [LZ4 HC (high compression) algorithm](https://clickhouse.com/docs/sql-reference/statements/create/table#lz4hc).
+	ClickhouseConfig_Compression_LZ4HC ClickhouseConfig_Compression_Method = 3
+)
+
+// Enum value maps for ClickhouseConfig_Compression_Method.
+var (
+	ClickhouseConfig_Compression_Method_name = map[int32]string{
+		0: "METHOD_UNSPECIFIED",
+		1: "LZ4",
+		2: "ZSTD",
+		3: "LZ4HC",
+	}
+	ClickhouseConfig_Compression_Method_value = map[string]int32{
+		"METHOD_UNSPECIFIED": 0,
+		"LZ4":                1,
+		"ZSTD":               2,
+		"LZ4HC":              3,
+	}
+)
+
+func (x ClickhouseConfig_Compression_Method) Enum() *ClickhouseConfig_Compression_Method {
+	p := new(ClickhouseConfig_Compression_Method)
+	*p = x
+	return p
+}
+
+func (x ClickhouseConfig_Compression_Method) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ClickhouseConfig_Compression_Method) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[3].Descriptor()
+}
+
+func (ClickhouseConfig_Compression_Method) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[3]
+}
+
+func (x ClickhouseConfig_Compression_Method) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ClickhouseConfig_Compression_Method.Descriptor instead.
+func (ClickhouseConfig_Compression_Method) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 2, 0}
+}
+
+// Layout type.
+// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/sql-reference/dictionaries#ways-to-store-dictionaries-in-memory).
+type ClickhouseConfig_ExternalDictionary_Layout_Type int32
+
+const (
+	ClickhouseConfig_ExternalDictionary_Layout_TYPE_UNSPECIFIED ClickhouseConfig_ExternalDictionary_Layout_Type = 0
+	// The dictionary is completely stored in memory in the form of flat arrays.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_FLAT ClickhouseConfig_ExternalDictionary_Layout_Type = 1
+	// The dictionary is completely stored in memory in the form of a hash table.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 2
+	// The dictionary is completely stored in memory in the form of a hash table.
+	// Applicable for dictionaries with composite keys of arbitrary type.
+	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 3
+	// The dictionary is stored in memory in the form of a hash table with an ordered array of ranges and their corresponding values.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_RANGE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 4
+	// The dictionary is stored in a cache that has a fixed number of cells. These cells contain frequently used elements.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_CACHE ClickhouseConfig_ExternalDictionary_Layout_Type = 5
+	// The dictionary is stored in a cache that has a fixed number of cells. These cells contain frequently used elements.
+	// Applicable for dictionaries with composite keys of arbitrary type.
+	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_CACHE ClickhouseConfig_ExternalDictionary_Layout_Type = 6
+	// The dictionary is completely stored in memory in the form of a hash table.
+	// It's similar to HASHED layout type but uses less memory in favor of more CPU usage.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_SPARSE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 7
+	// The dictionary is completely stored in memory in the form of a hash table.
+	// It's similar to COMPLEX_KEY_HASHED layout type but uses less memory in favor of more CPU usage.
+	// Applicable for dictionaries with composite keys of arbitrary type.
+	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_SPARSE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 8
+	// The dictionary is stored in memory in the form of a hash table with an ordered array of ranges and their corresponding values.
+	// Applicable for dictionaries with composite keys of arbitrary type.
+	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_RANGE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 9
+	// The dictionary is not stored in memory and directly goes to the source during the processing of a request.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_DIRECT ClickhouseConfig_ExternalDictionary_Layout_Type = 10
+	// The dictionary is not stored in memory and directly goes to the source during the processing of a request.
+	// Applicable for dictionaries with composite keys of arbitrary type.
+	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_DIRECT ClickhouseConfig_ExternalDictionary_Layout_Type = 11
+	// The specialized layout type for mapping network prefixes (IP addresses) to metadata such as ASN.
+	ClickhouseConfig_ExternalDictionary_Layout_IP_TRIE ClickhouseConfig_ExternalDictionary_Layout_Type = 12
+)
+
+// Enum value maps for ClickhouseConfig_ExternalDictionary_Layout_Type.
+var (
+	ClickhouseConfig_ExternalDictionary_Layout_Type_name = map[int32]string{
+		0:  "TYPE_UNSPECIFIED",
+		1:  "FLAT",
+		2:  "HASHED",
+		3:  "COMPLEX_KEY_HASHED",
+		4:  "RANGE_HASHED",
+		5:  "CACHE",
+		6:  "COMPLEX_KEY_CACHE",
+		7:  "SPARSE_HASHED",
+		8:  "COMPLEX_KEY_SPARSE_HASHED",
+		9:  "COMPLEX_KEY_RANGE_HASHED",
+		10: "DIRECT",
+		11: "COMPLEX_KEY_DIRECT",
+		12: "IP_TRIE",
+	}
+	ClickhouseConfig_ExternalDictionary_Layout_Type_value = map[string]int32{
+		"TYPE_UNSPECIFIED":          0,
+		"FLAT":                      1,
+		"HASHED":                    2,
+		"COMPLEX_KEY_HASHED":        3,
+		"RANGE_HASHED":              4,
+		"CACHE":                     5,
+		"COMPLEX_KEY_CACHE":         6,
+		"SPARSE_HASHED":             7,
+		"COMPLEX_KEY_SPARSE_HASHED": 8,
+		"COMPLEX_KEY_RANGE_HASHED":  9,
+		"DIRECT":                    10,
+		"COMPLEX_KEY_DIRECT":        11,
+		"IP_TRIE":                   12,
+	}
+)
+
+func (x ClickhouseConfig_ExternalDictionary_Layout_Type) Enum() *ClickhouseConfig_ExternalDictionary_Layout_Type {
+	p := new(ClickhouseConfig_ExternalDictionary_Layout_Type)
+	*p = x
+	return p
+}
+
+func (x ClickhouseConfig_ExternalDictionary_Layout_Type) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ClickhouseConfig_ExternalDictionary_Layout_Type) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[4].Descriptor()
+}
+
+func (ClickhouseConfig_ExternalDictionary_Layout_Type) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[4]
+}
+
+func (x ClickhouseConfig_ExternalDictionary_Layout_Type) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_Layout_Type.Descriptor instead.
+func (ClickhouseConfig_ExternalDictionary_Layout_Type) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 1, 0}
+}
+
+// Mode of SSL TCP/IP connection to a PostgreSQL host.
+// For details, see [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html).
+type ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode int32
+
+const (
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_SSL_MODE_UNSPECIFIED ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 0
+	// Only try a non-SSL connection.
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_DISABLE ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 1
+	// First try a non-SSL connection; if that fails, try an SSL connection.
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_ALLOW ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 2
+	// First try an SSL connection; if that fails, try a non-SSL connection.
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_PREFER ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 3
+	// Only try an SSL connection, and verify that the server certificate is issued by a trusted certificate authority (CA).
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_VERIFY_CA ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 4
+	// Only try an SSL connection, verify that the server certificate is issued by a trusted CA and that the requested server host name matches that in the certificate.
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_VERIFY_FULL ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 5
+)
+
+// Enum value maps for ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode.
+var (
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode_name = map[int32]string{
+		0: "SSL_MODE_UNSPECIFIED",
+		1: "DISABLE",
+		2: "ALLOW",
+		3: "PREFER",
+		4: "VERIFY_CA",
+		5: "VERIFY_FULL",
+	}
+	ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode_value = map[string]int32{
+		"SSL_MODE_UNSPECIFIED": 0,
+		"DISABLE":              1,
+		"ALLOW":                2,
+		"PREFER":               3,
+		"VERIFY_CA":            4,
+		"VERIFY_FULL":          5,
+	}
+)
+
+func (x ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Enum() *ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode {
+	p := new(ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode)
+	*p = x
+	return p
+}
+
+func (x ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[5].Descriptor()
+}
+
+func (ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[5]
+}
+
+func (x ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode.Descriptor instead.
+func (ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 7, 0}
 }
 
 type ClickhouseConfig_Kafka_SecurityProtocol int32
@@ -227,11 +456,11 @@ func (x ClickhouseConfig_Kafka_SecurityProtocol) String() string {
 }
 
 func (ClickhouseConfig_Kafka_SecurityProtocol) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[6].Descriptor()
 }
 
 func (ClickhouseConfig_Kafka_SecurityProtocol) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[3]
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[6]
 }
 
 func (x ClickhouseConfig_Kafka_SecurityProtocol) Number() protoreflect.EnumNumber {
@@ -240,7 +469,7 @@ func (x ClickhouseConfig_Kafka_SecurityProtocol) Number() protoreflect.EnumNumbe
 
 // Deprecated: Use ClickhouseConfig_Kafka_SecurityProtocol.Descriptor instead.
 func (ClickhouseConfig_Kafka_SecurityProtocol) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 0}
 }
 
 type ClickhouseConfig_Kafka_SaslMechanism int32
@@ -282,11 +511,11 @@ func (x ClickhouseConfig_Kafka_SaslMechanism) String() string {
 }
 
 func (ClickhouseConfig_Kafka_SaslMechanism) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[7].Descriptor()
 }
 
 func (ClickhouseConfig_Kafka_SaslMechanism) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[4]
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[7]
 }
 
 func (x ClickhouseConfig_Kafka_SaslMechanism) Number() protoreflect.EnumNumber {
@@ -295,7 +524,7 @@ func (x ClickhouseConfig_Kafka_SaslMechanism) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClickhouseConfig_Kafka_SaslMechanism.Descriptor instead.
 func (ClickhouseConfig_Kafka_SaslMechanism) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1, 1}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 1}
 }
 
 type ClickhouseConfig_Kafka_Debug int32
@@ -388,11 +617,11 @@ func (x ClickhouseConfig_Kafka_Debug) String() string {
 }
 
 func (ClickhouseConfig_Kafka_Debug) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[5].Descriptor()
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[8].Descriptor()
 }
 
 func (ClickhouseConfig_Kafka_Debug) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[5]
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[8]
 }
 
 func (x ClickhouseConfig_Kafka_Debug) Number() protoreflect.EnumNumber {
@@ -401,7 +630,7 @@ func (x ClickhouseConfig_Kafka_Debug) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ClickhouseConfig_Kafka_Debug.Descriptor instead.
 func (ClickhouseConfig_Kafka_Debug) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1, 2}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 2}
 }
 
 type ClickhouseConfig_Kafka_AutoOffsetReset int32
@@ -452,11 +681,11 @@ func (x ClickhouseConfig_Kafka_AutoOffsetReset) String() string {
 }
 
 func (ClickhouseConfig_Kafka_AutoOffsetReset) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[6].Descriptor()
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[9].Descriptor()
 }
 
 func (ClickhouseConfig_Kafka_AutoOffsetReset) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[6]
+	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[9]
 }
 
 func (x ClickhouseConfig_Kafka_AutoOffsetReset) Number() protoreflect.EnumNumber {
@@ -465,425 +694,518 @@ func (x ClickhouseConfig_Kafka_AutoOffsetReset) Number() protoreflect.EnumNumber
 
 // Deprecated: Use ClickhouseConfig_Kafka_AutoOffsetReset.Descriptor instead.
 func (ClickhouseConfig_Kafka_AutoOffsetReset) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1, 3}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 3}
 }
 
-type ClickhouseConfig_Compression_Method int32
-
-const (
-	ClickhouseConfig_Compression_METHOD_UNSPECIFIED ClickhouseConfig_Compression_Method = 0
-	// [LZ4 compression algorithm](https://lz4.github.io/lz4/).
-	ClickhouseConfig_Compression_LZ4 ClickhouseConfig_Compression_Method = 1
-	// [Zstandard compression algorithm](https://facebook.github.io/zstd/).
-	ClickhouseConfig_Compression_ZSTD ClickhouseConfig_Compression_Method = 2
-)
-
-// Enum value maps for ClickhouseConfig_Compression_Method.
-var (
-	ClickhouseConfig_Compression_Method_name = map[int32]string{
-		0: "METHOD_UNSPECIFIED",
-		1: "LZ4",
-		2: "ZSTD",
-	}
-	ClickhouseConfig_Compression_Method_value = map[string]int32{
-		"METHOD_UNSPECIFIED": 0,
-		"LZ4":                1,
-		"ZSTD":               2,
-	}
-)
-
-func (x ClickhouseConfig_Compression_Method) Enum() *ClickhouseConfig_Compression_Method {
-	p := new(ClickhouseConfig_Compression_Method)
-	*p = x
-	return p
-}
-
-func (x ClickhouseConfig_Compression_Method) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ClickhouseConfig_Compression_Method) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[7].Descriptor()
-}
-
-func (ClickhouseConfig_Compression_Method) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[7]
-}
-
-func (x ClickhouseConfig_Compression_Method) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ClickhouseConfig_Compression_Method.Descriptor instead.
-func (ClickhouseConfig_Compression_Method) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 4, 0}
-}
-
-type ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode int32
-
-const (
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_SSL_MODE_UNSPECIFIED ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 0
-	// Only try a non-SSL connection.
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_DISABLE ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 1
-	// First try a non-SSL connection; if that fails, try an SSL connection.
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_ALLOW ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 2
-	// First try an SSL connection; if that fails, try a non-SSL connection.
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_PREFER ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 3
-	// Only try an SSL connection, and verify that the server certificate is issued by a trusted certificate authority (CA).
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_VERIFY_CA ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 4
-	// Only try an SSL connection, verify that the server certificate is issued by a trusted CA and that the requested server host name matches that in the certificate.
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_VERIFY_FULL ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode = 5
-)
-
-// Enum value maps for ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode.
-var (
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode_name = map[int32]string{
-		0: "SSL_MODE_UNSPECIFIED",
-		1: "DISABLE",
-		2: "ALLOW",
-		3: "PREFER",
-		4: "VERIFY_CA",
-		5: "VERIFY_FULL",
-	}
-	ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode_value = map[string]int32{
-		"SSL_MODE_UNSPECIFIED": 0,
-		"DISABLE":              1,
-		"ALLOW":                2,
-		"PREFER":               3,
-		"VERIFY_CA":            4,
-		"VERIFY_FULL":          5,
-	}
-)
-
-func (x ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Enum() *ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode {
-	p := new(ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode)
-	*p = x
-	return p
-}
-
-func (x ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[8].Descriptor()
-}
-
-func (ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[8]
-}
-
-func (x ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode.Descriptor instead.
-func (ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 4, 0}
-}
-
-type ClickhouseConfig_ExternalDictionary_Layout_Type int32
-
-const (
-	ClickhouseConfig_ExternalDictionary_Layout_TYPE_UNSPECIFIED ClickhouseConfig_ExternalDictionary_Layout_Type = 0
-	// The entire dictionary is stored in memory in the form of flat arrays.
-	// Available for all dictionary sources.
-	ClickhouseConfig_ExternalDictionary_Layout_FLAT ClickhouseConfig_ExternalDictionary_Layout_Type = 1
-	// The entire dictionary is stored in memory in the form of a hash table.
-	// Available for all dictionary sources.
-	ClickhouseConfig_ExternalDictionary_Layout_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 2
-	// Similar to HASHED, to be used with composite keys.
-	// Available for all dictionary sources.
-	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 3
-	// The entire dictionary is stored in memory in the form of a hash table,
-	// with an ordered array of ranges and their corresponding values.
-	// Available for all dictionary sources.
-	ClickhouseConfig_ExternalDictionary_Layout_RANGE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 4
-	// The dictionary is stored in a cache with a set number of cells.
-	// Available for MySQL, ClickHouse and HTTP dictionary sources.
-	ClickhouseConfig_ExternalDictionary_Layout_CACHE ClickhouseConfig_ExternalDictionary_Layout_Type = 5
-	// Similar to CACHE, to be used with composite keys.
-	// Available for MySQL, ClickHouse and HTTP dictionary sources.
-	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_CACHE ClickhouseConfig_ExternalDictionary_Layout_Type = 6
-	// Similar to HASHED, but uses less memory in favor of more CPU usage.
-	ClickhouseConfig_ExternalDictionary_Layout_SPARSE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 7
-	// Similar to SPARSE_HASHED, to be used with composite keys.
-	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_SPARSE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 8
-	// Similar to RANGE_HASHED, to be used with composite keys.
-	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_RANGE_HASHED ClickhouseConfig_ExternalDictionary_Layout_Type = 9
-	// The dictionary is not stored in memory and directly goes to the source during the processing of a request.
-	ClickhouseConfig_ExternalDictionary_Layout_DIRECT ClickhouseConfig_ExternalDictionary_Layout_Type = 10
-	// Similar to DIRECT, to be used with composite keys.
-	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_DIRECT ClickhouseConfig_ExternalDictionary_Layout_Type = 11
-	// The specialized layout type for mapping network prefixes (IP addresses) to metadata such as ASN.
-	ClickhouseConfig_ExternalDictionary_Layout_IP_TRIE ClickhouseConfig_ExternalDictionary_Layout_Type = 12
-)
-
-// Enum value maps for ClickhouseConfig_ExternalDictionary_Layout_Type.
-var (
-	ClickhouseConfig_ExternalDictionary_Layout_Type_name = map[int32]string{
-		0:  "TYPE_UNSPECIFIED",
-		1:  "FLAT",
-		2:  "HASHED",
-		3:  "COMPLEX_KEY_HASHED",
-		4:  "RANGE_HASHED",
-		5:  "CACHE",
-		6:  "COMPLEX_KEY_CACHE",
-		7:  "SPARSE_HASHED",
-		8:  "COMPLEX_KEY_SPARSE_HASHED",
-		9:  "COMPLEX_KEY_RANGE_HASHED",
-		10: "DIRECT",
-		11: "COMPLEX_KEY_DIRECT",
-		12: "IP_TRIE",
-	}
-	ClickhouseConfig_ExternalDictionary_Layout_Type_value = map[string]int32{
-		"TYPE_UNSPECIFIED":          0,
-		"FLAT":                      1,
-		"HASHED":                    2,
-		"COMPLEX_KEY_HASHED":        3,
-		"RANGE_HASHED":              4,
-		"CACHE":                     5,
-		"COMPLEX_KEY_CACHE":         6,
-		"SPARSE_HASHED":             7,
-		"COMPLEX_KEY_SPARSE_HASHED": 8,
-		"COMPLEX_KEY_RANGE_HASHED":  9,
-		"DIRECT":                    10,
-		"COMPLEX_KEY_DIRECT":        11,
-		"IP_TRIE":                   12,
-	}
-)
-
-func (x ClickhouseConfig_ExternalDictionary_Layout_Type) Enum() *ClickhouseConfig_ExternalDictionary_Layout_Type {
-	p := new(ClickhouseConfig_ExternalDictionary_Layout_Type)
-	*p = x
-	return p
-}
-
-func (x ClickhouseConfig_ExternalDictionary_Layout_Type) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ClickhouseConfig_ExternalDictionary_Layout_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[9].Descriptor()
-}
-
-func (ClickhouseConfig_ExternalDictionary_Layout_Type) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes[9]
-}
-
-func (x ClickhouseConfig_ExternalDictionary_Layout_Type) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_Layout_Type.Descriptor instead.
-func (ClickhouseConfig_ExternalDictionary_Layout_Type) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 6, 0}
-}
-
-// ClickHouse configuration options. Detailed description for each set of options
-// is available in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server_settings/settings/).
-//
-// Any options not listed here are not supported.
+// ClickHouse configuration settings. Supported settings are a subset of settings described
+// in [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings).
 type ClickhouseConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Logging level for the ClickHouse cluster. Possible values: TRACE, DEBUG, INFORMATION, WARNING, ERROR.
-	LogLevel ClickhouseConfig_LogLevel `protobuf:"varint,1,opt,name=log_level,json=logLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"log_level,omitempty"`
-	// Settings for the MergeTree engine.
-	// See description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server_settings/settings/#merge_tree).
-	MergeTree *ClickhouseConfig_MergeTree `protobuf:"bytes,2,opt,name=merge_tree,json=mergeTree,proto3" json:"merge_tree,omitempty"`
-	// Compression settings for the ClickHouse cluster.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server_settings/settings/#compression).
-	Compression []*ClickhouseConfig_Compression `protobuf:"bytes,3,rep,name=compression,proto3" json:"compression,omitempty"`
-	// Configuration of external dictionaries to be used by the ClickHouse cluster.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts/).
-	Dictionaries []*ClickhouseConfig_ExternalDictionary `protobuf:"bytes,4,rep,name=dictionaries,proto3" json:"dictionaries,omitempty"`
-	// Settings for thinning Graphite data.
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server_settings/settings/#server_settings-graphite_rollup).
-	GraphiteRollup []*ClickhouseConfig_GraphiteRollup `protobuf:"bytes,5,rep,name=graphite_rollup,json=graphiteRollup,proto3" json:"graphite_rollup,omitempty"`
-	Kafka          *ClickhouseConfig_Kafka            `protobuf:"bytes,35,opt,name=kafka,proto3" json:"kafka,omitempty"`
-	KafkaTopics    []*ClickhouseConfig_KafkaTopic     `protobuf:"bytes,36,rep,name=kafka_topics,json=kafkaTopics,proto3" json:"kafka_topics,omitempty"`
-	Rabbitmq       *ClickhouseConfig_Rabbitmq         `protobuf:"bytes,37,opt,name=rabbitmq,proto3" json:"rabbitmq,omitempty"`
-	// Maximum number of inbound connections.
-	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
-	// Maximum number of simultaneously processed requests.
-	MaxConcurrentQueries *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_concurrent_queries,json=maxConcurrentQueries,proto3" json:"max_concurrent_queries,omitempty"`
-	// Number of milliseconds that ClickHouse waits for incoming requests before closing the connection.
-	KeepAliveTimeout *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=keep_alive_timeout,json=keepAliveTimeout,proto3" json:"keep_alive_timeout,omitempty"`
-	// Cache size (in bytes) for uncompressed data used by MergeTree tables.
-	UncompressedCacheSize *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=uncompressed_cache_size,json=uncompressedCacheSize,proto3" json:"uncompressed_cache_size,omitempty"`
-	// Approximate size (in bytes) of the cache of "marks" used by MergeTree tables.
-	MarkCacheSize *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=mark_cache_size,json=markCacheSize,proto3" json:"mark_cache_size,omitempty"`
-	// Maximum size of the table that can be deleted using a DROP query.
-	MaxTableSizeToDrop *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=max_table_size_to_drop,json=maxTableSizeToDrop,proto3" json:"max_table_size_to_drop,omitempty"`
-	// Maximum size of the partition that can be deleted using a DROP query.
-	MaxPartitionSizeToDrop *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=max_partition_size_to_drop,json=maxPartitionSizeToDrop,proto3" json:"max_partition_size_to_drop,omitempty"`
-	// The setting is deprecated and has no effect.
+	// Sets the number of threads performing background merges and mutations for MergeTree-engine tables.
 	//
-	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
-	BuiltinDictionariesReloadInterval *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=builtin_dictionaries_reload_interval,json=builtinDictionariesReloadInterval,proto3" json:"builtin_dictionaries_reload_interval,omitempty"`
-	// The server's time zone to be used in DateTime fields conversions. Specified as an IANA identifier.
-	Timezone string `protobuf:"bytes,14,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	// Enable or disable geobase.
-	GeobaseEnabled *wrapperspb.BoolValue `protobuf:"bytes,66,opt,name=geobase_enabled,json=geobaseEnabled,proto3" json:"geobase_enabled,omitempty"`
-	// Address of the archive with the user geobase in Object Storage.
-	GeobaseUri string `protobuf:"bytes,15,opt,name=geobase_uri,json=geobaseUri,proto3" json:"geobase_uri,omitempty"`
-	// The maximum size that query_log can grow to before old data will be removed. If set to 0, automatic removal of
-	// query_log data based on size is disabled.
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_pool_size).
+	BackgroundPoolSize *wrapperspb.Int64Value `protobuf:"bytes,33,opt,name=background_pool_size,json=backgroundPoolSize,proto3" json:"background_pool_size,omitempty"`
+	// Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently.
+	//
+	// For example, if the ratio equals to **2** and **background_pool_size** is set to **16** then ClickHouse can execute **32** background merges concurrently.
+	// This is possible, because background operations could be suspended and postponed. This is needed to give small merges more execution priority.
+	//
+	// Default value: **2**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_merges_mutations_concurrency_ratio).
+	BackgroundMergesMutationsConcurrencyRatio *wrapperspb.Int64Value `protobuf:"bytes,48,opt,name=background_merges_mutations_concurrency_ratio,json=backgroundMergesMutationsConcurrencyRatio,proto3" json:"background_merges_mutations_concurrency_ratio,omitempty"`
+	// The maximum number of threads that will be used for constantly executing some lightweight periodic operations
+	// for replicated tables, Kafka streaming, and DNS cache updates.
+	//
+	// Default value: **512**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_schedule_pool_size).
+	BackgroundSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,34,opt,name=background_schedule_pool_size,json=backgroundSchedulePoolSize,proto3" json:"background_schedule_pool_size,omitempty"`
+	// The maximum number of threads that will be used for fetching data parts from another replica for MergeTree-engine tables in a background.
+	//
+	// Default value: **32** for versions 25.1 and higher, **16** for versions 24.12 and lower.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_fetches_pool_size).
+	BackgroundFetchesPoolSize *wrapperspb.Int64Value `protobuf:"bytes,38,opt,name=background_fetches_pool_size,json=backgroundFetchesPoolSize,proto3" json:"background_fetches_pool_size,omitempty"`
+	// The maximum number of threads that will be used for moving data parts to another disk or volume for MergeTree-engine tables in a background.
+	//
+	// Default value: **8**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_move_pool_size).
+	BackgroundMovePoolSize *wrapperspb.Int64Value `protobuf:"bytes,39,opt,name=background_move_pool_size,json=backgroundMovePoolSize,proto3" json:"background_move_pool_size,omitempty"`
+	// The maximum number of threads that will be used for executing distributed sends.
+	//
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_distributed_schedule_pool_size).
+	BackgroundDistributedSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,40,opt,name=background_distributed_schedule_pool_size,json=backgroundDistributedSchedulePoolSize,proto3" json:"background_distributed_schedule_pool_size,omitempty"`
+	// The maximum number of threads that will be used for performing flush operations for Buffer-engine tables in the background.
+	//
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_buffer_flush_schedule_pool_size).
+	BackgroundBufferFlushSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,41,opt,name=background_buffer_flush_schedule_pool_size,json=backgroundBufferFlushSchedulePoolSize,proto3" json:"background_buffer_flush_schedule_pool_size,omitempty"`
+	// The maximum number of threads that will be used for executing background operations for message streaming.
+	//
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_message_broker_schedule_pool_size).
+	BackgroundMessageBrokerSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,46,opt,name=background_message_broker_schedule_pool_size,json=backgroundMessageBrokerSchedulePoolSize,proto3" json:"background_message_broker_schedule_pool_size,omitempty"`
+	// The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for MergeTree-engine tables in a background.
+	//
+	// Default value: **8**.
+	//
+	// Change of the setting is applied with restart on value decrease and without restart on value increase.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_common_pool_size).
+	BackgroundCommonPoolSize *wrapperspb.Int64Value `protobuf:"bytes,47,opt,name=background_common_pool_size,json=backgroundCommonPoolSize,proto3" json:"background_common_pool_size,omitempty"`
+	// Lazy loading of dictionaries. If enabled, then each dictionary is loaded on the first use. Otherwise, the server loads all dictionaries at startup.
+	//
+	// Default value: **true** for versions 25.1 and higher, **false** for versions 24.12 and lower.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#dictionaries_lazy_load).
+	DictionariesLazyLoad *wrapperspb.BoolValue `protobuf:"bytes,68,opt,name=dictionaries_lazy_load,json=dictionariesLazyLoad,proto3" json:"dictionaries_lazy_load,omitempty"`
+	// Logging level.
+	LogLevel ClickhouseConfig_LogLevel `protobuf:"varint,1,opt,name=log_level,json=logLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"log_level,omitempty"`
+	// The maximum size that query_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of query_log data based on size is disabled.
+	//
+	// Default value: **1073741824** (1 GiB).
 	QueryLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,16,opt,name=query_log_retention_size,json=queryLogRetentionSize,proto3" json:"query_log_retention_size,omitempty"`
-	// The maximum time that query_log records will be retained before removal. If set to 0, automatic removal of
-	// query_log data based on time is disabled.
+	// The maximum time that query_log records will be retained before removal. If set to **0**, automatic removal of query_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	QueryLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=query_log_retention_time,json=queryLogRetentionTime,proto3" json:"query_log_retention_time,omitempty"`
-	// Whether query_thread_log system table is enabled.
+	// Enables or disables query_thread_log system table.
+	//
+	// Default value: **true**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_thread_log).
 	QueryThreadLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,18,opt,name=query_thread_log_enabled,json=queryThreadLogEnabled,proto3" json:"query_thread_log_enabled,omitempty"`
-	// The maximum size that query_thread_log can grow to before old data will be removed. If set to 0, automatic removal of
-	// query_thread_log data based on size is disabled.
+	// The maximum size that query_thread_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of query_thread_log data based on size is disabled.
+	//
+	// Default value: **536870912** (512 MiB).
 	QueryThreadLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=query_thread_log_retention_size,json=queryThreadLogRetentionSize,proto3" json:"query_thread_log_retention_size,omitempty"`
-	// The maximum time that query_thread_log records will be retained before removal. If set to 0, automatic removal of
-	// query_thread_log data based on time is disabled.
+	// The maximum time that query_thread_log records will be retained before removal. If set to **0**,
+	// automatic removal of query_thread_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	QueryThreadLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,20,opt,name=query_thread_log_retention_time,json=queryThreadLogRetentionTime,proto3" json:"query_thread_log_retention_time,omitempty"`
-	// The maximum size that part_log can grow to before old data will be removed. If set to 0, automatic removal of
-	// part_log data based on size is disabled.
+	// The maximum size that part_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of part_log data based on size is disabled.
+	//
+	// Default value: **536870912** (512 MiB).
 	PartLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,21,opt,name=part_log_retention_size,json=partLogRetentionSize,proto3" json:"part_log_retention_size,omitempty"`
-	// The maximum time that part_log records will be retained before removal. If set to 0, automatic removal of
-	// part_log data based on time is disabled.
+	// The maximum time that part_log records will be retained before removal. If set to **0**,
+	// automatic removal of part_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	PartLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,22,opt,name=part_log_retention_time,json=partLogRetentionTime,proto3" json:"part_log_retention_time,omitempty"`
-	// Whether metric_log system table is enabled.
+	// Enables or disables metric_log system table.
+	//
+	// Default value: **false** for versions 25.1 and higher, **true** for versions 24.12 and lower.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/metric_log).
 	MetricLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,23,opt,name=metric_log_enabled,json=metricLogEnabled,proto3" json:"metric_log_enabled,omitempty"`
-	// The maximum size that metric_log can grow to before old data will be removed. If set to 0, automatic removal of
-	// metric_log data based on size is disabled.
+	// The maximum size that metric_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of metric_log data based on size is disabled.
+	//
+	// Default value: **536870912** (512 MiB).
 	MetricLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=metric_log_retention_size,json=metricLogRetentionSize,proto3" json:"metric_log_retention_size,omitempty"`
-	// The maximum time that metric_log records will be retained before removal. If set to 0, automatic removal of
-	// metric_log data based on time is disabled.
+	// The maximum time that metric_log records will be retained before removal. If set to **0**,
+	// automatic removal of metric_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	MetricLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=metric_log_retention_time,json=metricLogRetentionTime,proto3" json:"metric_log_retention_time,omitempty"`
-	// Whether trace_log system table is enabled.
+	// Enables or disables trace_log system table.
+	//
+	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/trace_log).
 	TraceLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,26,opt,name=trace_log_enabled,json=traceLogEnabled,proto3" json:"trace_log_enabled,omitempty"`
-	// The maximum size that trace_log can grow to before old data will be removed. If set to 0, automatic removal of
-	// trace_log data based on size is disabled.
+	// The maximum size that trace_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of trace_log data based on size is disabled.
+	//
+	// Default value: **536870912** (512 MiB).
 	TraceLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=trace_log_retention_size,json=traceLogRetentionSize,proto3" json:"trace_log_retention_size,omitempty"`
-	// The maximum time that trace_log records will be retained before removal. If set to 0, automatic removal of
-	// trace_log data based on time is disabled.
+	// The maximum time that trace_log records will be retained before removal. If set to **0**,
+	// automatic removal of trace_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	TraceLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=trace_log_retention_time,json=traceLogRetentionTime,proto3" json:"trace_log_retention_time,omitempty"`
-	// Whether text_log system table is enabled.
+	// Enables or disables text_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/text_log).
 	TextLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,29,opt,name=text_log_enabled,json=textLogEnabled,proto3" json:"text_log_enabled,omitempty"`
-	// The maximum size that text_log can grow to before old data will be removed. If set to 0, automatic removal of
-	// text_log data based on size is disabled.
+	// The maximum size that text_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of text_log data based on size is disabled.
+	//
+	// Default value: **536870912** (512 MiB).
 	TextLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,30,opt,name=text_log_retention_size,json=textLogRetentionSize,proto3" json:"text_log_retention_size,omitempty"`
-	// The maximum time that text_log records will be retained before removal. If set to 0, automatic removal of
-	// text_log data based on time is disabled.
+	// The maximum time that text_log records will be retained before removal. If set to **0**,
+	// automatic removal of text_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	TextLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=text_log_retention_time,json=textLogRetentionTime,proto3" json:"text_log_retention_time,omitempty"`
-	// Logging level for text_log system table. Possible values: TRACE, DEBUG, INFORMATION, WARNING, ERROR.
+	// Logging level for text_log system table.
+	//
+	// Default value: **TRACE**.
+	//
+	// Change of the setting is applied with restart.
 	TextLogLevel ClickhouseConfig_LogLevel `protobuf:"varint,32,opt,name=text_log_level,json=textLogLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"text_log_level,omitempty"`
-	// Enable or disable opentelemetry_span_log system table. Default value: false.
+	// Enables or disables opentelemetry_span_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/opentelemetry_span_log).
 	OpentelemetrySpanLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,42,opt,name=opentelemetry_span_log_enabled,json=opentelemetrySpanLogEnabled,proto3" json:"opentelemetry_span_log_enabled,omitempty"`
-	// The maximum size that opentelemetry_span_log can grow to before old data will be removed. If set to 0 (default),
+	// The maximum size that opentelemetry_span_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of opentelemetry_span_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	OpentelemetrySpanLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,55,opt,name=opentelemetry_span_log_retention_size,json=opentelemetrySpanLogRetentionSize,proto3" json:"opentelemetry_span_log_retention_size,omitempty"`
-	// The maximum time that opentelemetry_span_log records will be retained before removal. If set to 0,
+	// The maximum time that opentelemetry_span_log records will be retained before removal. If set to **0**,
 	// automatic removal of opentelemetry_span_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	OpentelemetrySpanLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,56,opt,name=opentelemetry_span_log_retention_time,json=opentelemetrySpanLogRetentionTime,proto3" json:"opentelemetry_span_log_retention_time,omitempty"`
-	// Enable or disable query_views_log system table. Default value: false.
+	// Enables or disables query_views_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_views_log).
 	QueryViewsLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,49,opt,name=query_views_log_enabled,json=queryViewsLogEnabled,proto3" json:"query_views_log_enabled,omitempty"`
-	// The maximum size that query_views_log can grow to before old data will be removed. If set to 0 (default),
+	// The maximum size that query_views_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of query_views_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	QueryViewsLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,50,opt,name=query_views_log_retention_size,json=queryViewsLogRetentionSize,proto3" json:"query_views_log_retention_size,omitempty"`
-	// The maximum time that query_views_log records will be retained before removal. If set to 0,
+	// The maximum time that query_views_log records will be retained before removal. If set to **0**,
 	// automatic removal of query_views_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	QueryViewsLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,51,opt,name=query_views_log_retention_time,json=queryViewsLogRetentionTime,proto3" json:"query_views_log_retention_time,omitempty"`
-	// Enable or disable asynchronous_metric_log system table. Default value: false.
+	// Enables or disables asynchronous_metric_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/asynchronous_metric_log).
 	AsynchronousMetricLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,52,opt,name=asynchronous_metric_log_enabled,json=asynchronousMetricLogEnabled,proto3" json:"asynchronous_metric_log_enabled,omitempty"`
-	// The maximum size that asynchronous_metric_log can grow to before old data will be removed. If set to 0 (default),
+	// The maximum size that asynchronous_metric_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of asynchronous_metric_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	AsynchronousMetricLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,53,opt,name=asynchronous_metric_log_retention_size,json=asynchronousMetricLogRetentionSize,proto3" json:"asynchronous_metric_log_retention_size,omitempty"`
-	// The maximum time that asynchronous_metric_log records will be retained before removal. If set to 0,
+	// The maximum time that asynchronous_metric_log records will be retained before removal. If set to **0**,
 	// automatic removal of asynchronous_metric_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	AsynchronousMetricLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,54,opt,name=asynchronous_metric_log_retention_time,json=asynchronousMetricLogRetentionTime,proto3" json:"asynchronous_metric_log_retention_time,omitempty"`
-	// Enable or disable session_log system table. Default value: false.
+	// Enables or disables session_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/session_log).
 	SessionLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,57,opt,name=session_log_enabled,json=sessionLogEnabled,proto3" json:"session_log_enabled,omitempty"`
-	// The maximum size that session_log can grow to before old data will be removed. If set to 0 (default),
+	// The maximum size that session_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of session_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	SessionLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,58,opt,name=session_log_retention_size,json=sessionLogRetentionSize,proto3" json:"session_log_retention_size,omitempty"`
-	// The maximum time that session_log records will be retained before removal. If set to 0,
+	// The maximum time that session_log records will be retained before removal. If set to **0**,
 	// automatic removal of session_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	SessionLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,59,opt,name=session_log_retention_time,json=sessionLogRetentionTime,proto3" json:"session_log_retention_time,omitempty"`
-	// Enable or disable zookeeper_log system table. Default value: false.
+	// Enables or disables zookeeper_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/zookeeper_log).
 	ZookeeperLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,60,opt,name=zookeeper_log_enabled,json=zookeeperLogEnabled,proto3" json:"zookeeper_log_enabled,omitempty"`
-	// The maximum size that zookeeper_log can grow to before old data will be removed. If set to 0 (default),
+	// The maximum size that zookeeper_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of zookeeper_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	ZookeeperLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,61,opt,name=zookeeper_log_retention_size,json=zookeeperLogRetentionSize,proto3" json:"zookeeper_log_retention_size,omitempty"`
-	// The maximum time that zookeeper_log records will be retained before removal. If set to 0,
+	// The maximum time that zookeeper_log records will be retained before removal. If set to **0**,
 	// automatic removal of zookeeper_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	ZookeeperLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,62,opt,name=zookeeper_log_retention_time,json=zookeeperLogRetentionTime,proto3" json:"zookeeper_log_retention_time,omitempty"`
-	// Enable or disable asynchronous_insert_log system table. Default value: false.
-	// Minimal required ClickHouse version: 22.10.
+	// Enables or disables asynchronous_insert_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/asynchronous_insert_log).
 	AsynchronousInsertLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,63,opt,name=asynchronous_insert_log_enabled,json=asynchronousInsertLogEnabled,proto3" json:"asynchronous_insert_log_enabled,omitempty"`
-	// The maximum size that asynchronous_insert_log can grow to before old data will be removed. If set to 0 (default),
+	// The maximum size that asynchronous_insert_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of asynchronous_insert_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	AsynchronousInsertLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,64,opt,name=asynchronous_insert_log_retention_size,json=asynchronousInsertLogRetentionSize,proto3" json:"asynchronous_insert_log_retention_size,omitempty"`
-	// The maximum time that asynchronous_insert_log records will be retained before removal. If set to 0,
+	// The maximum time that asynchronous_insert_log records will be retained before removal. If set to **0**,
 	// automatic removal of asynchronous_insert_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	AsynchronousInsertLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,65,opt,name=asynchronous_insert_log_retention_time,json=asynchronousInsertLogRetentionTime,proto3" json:"asynchronous_insert_log_retention_time,omitempty"`
-	// Enable or disable processors_profile_log system table.
+	// Enables or disables processors_profile_log system table.
+	//
+	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/processors_profile_log).
 	ProcessorsProfileLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,71,opt,name=processors_profile_log_enabled,json=processorsProfileLogEnabled,proto3" json:"processors_profile_log_enabled,omitempty"`
-	// The maximum size that processors_profile_log can grow to before old data will be removed.
-	// If set to 0 (default), automatic removal of processors_profile_log data based on size is disabled.
+	// The maximum size that processors_profile_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of processors_profile_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	ProcessorsProfileLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,72,opt,name=processors_profile_log_retention_size,json=processorsProfileLogRetentionSize,proto3" json:"processors_profile_log_retention_size,omitempty"`
-	// The maximum time that processors_profile_log records will be retained before removal.
-	// If set to 0, automatic removal of processors_profile_log data based on time is disabled.
+	// The maximum time that processors_profile_log records will be retained before removal. If set to **0**,
+	// automatic removal of processors_profile_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	ProcessorsProfileLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,73,opt,name=processors_profile_log_retention_time,json=processorsProfileLogRetentionTime,proto3" json:"processors_profile_log_retention_time,omitempty"`
-	// Enable or disable error_log system table.
+	// Enables or disables error_log system table.
+	//
+	// Default value: **false**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/error_log).
 	ErrorLogEnabled *wrapperspb.BoolValue `protobuf:"bytes,75,opt,name=error_log_enabled,json=errorLogEnabled,proto3" json:"error_log_enabled,omitempty"`
-	// The maximum size that error_log can grow to before old data will be removed.
-	// If set to 0 (default), automatic removal of error_log data based on size is disabled.
+	// The maximum size that error_log can grow to before old data will be removed. If set to **0**,
+	// automatic removal of error_log data based on size is disabled.
+	//
+	// Default value: **0**.
 	ErrorLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,76,opt,name=error_log_retention_size,json=errorLogRetentionSize,proto3" json:"error_log_retention_size,omitempty"`
-	// The maximum time that error_log records will be retained before removal.
-	// If set to 0, automatic removal of error_log data based on time is disabled.
+	// The maximum time that error_log records will be retained before removal. If set to **0**,
+	// automatic removal of error_log data based on time is disabled.
+	//
+	// Default value: **2592000000** (30 days).
 	ErrorLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,77,opt,name=error_log_retention_time,json=errorLogRetentionTime,proto3" json:"error_log_retention_time,omitempty"`
 	// Access control settings.
 	AccessControlImprovements *ClickhouseConfig_AccessControlImprovements `protobuf:"bytes,74,opt,name=access_control_improvements,json=accessControlImprovements,proto3" json:"access_control_improvements,omitempty"`
-	BackgroundPoolSize        *wrapperspb.Int64Value                      `protobuf:"bytes,33,opt,name=background_pool_size,json=backgroundPoolSize,proto3" json:"background_pool_size,omitempty"`
-	// Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently. For example, if the ratio equals to 2 and background_pool_size is set to 16 then ClickHouse can execute 32 background merges concurrently. This is possible, because background operations could be suspended and postponed. This is needed to give small merges more execution priority. You can only increase this ratio at runtime. To lower it you have to restart the server. The same as for background_pool_size setting background_merges_mutations_concurrency_ratio could be applied from the default profile for backward compatibility.
-	// Default: 2
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#background_merges_mutations_concurrency_ratio)
-	BackgroundMergesMutationsConcurrencyRatio *wrapperspb.Int64Value `protobuf:"bytes,48,opt,name=background_merges_mutations_concurrency_ratio,json=backgroundMergesMutationsConcurrencyRatio,proto3" json:"background_merges_mutations_concurrency_ratio,omitempty"`
-	BackgroundSchedulePoolSize                *wrapperspb.Int64Value `protobuf:"bytes,34,opt,name=background_schedule_pool_size,json=backgroundSchedulePoolSize,proto3" json:"background_schedule_pool_size,omitempty"`
-	// Sets the number of threads performing background fetches for tables with **ReplicatedMergeTree** engines. Default value: 8.
+	// Maximum number of inbound connections.
 	//
-	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings/#background_fetches_pool_size).
-	BackgroundFetchesPoolSize               *wrapperspb.Int64Value `protobuf:"bytes,38,opt,name=background_fetches_pool_size,json=backgroundFetchesPoolSize,proto3" json:"background_fetches_pool_size,omitempty"`
-	BackgroundMovePoolSize                  *wrapperspb.Int64Value `protobuf:"bytes,39,opt,name=background_move_pool_size,json=backgroundMovePoolSize,proto3" json:"background_move_pool_size,omitempty"`
-	BackgroundDistributedSchedulePoolSize   *wrapperspb.Int64Value `protobuf:"bytes,40,opt,name=background_distributed_schedule_pool_size,json=backgroundDistributedSchedulePoolSize,proto3" json:"background_distributed_schedule_pool_size,omitempty"`
-	BackgroundBufferFlushSchedulePoolSize   *wrapperspb.Int64Value `protobuf:"bytes,41,opt,name=background_buffer_flush_schedule_pool_size,json=backgroundBufferFlushSchedulePoolSize,proto3" json:"background_buffer_flush_schedule_pool_size,omitempty"`
-	BackgroundMessageBrokerSchedulePoolSize *wrapperspb.Int64Value `protobuf:"bytes,46,opt,name=background_message_broker_schedule_pool_size,json=backgroundMessageBrokerSchedulePoolSize,proto3" json:"background_message_broker_schedule_pool_size,omitempty"`
-	// The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for *MergeTree-engine tables in a background.
-	// Default: 8
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#background_common_pool_size)
-	BackgroundCommonPoolSize *wrapperspb.Int64Value `protobuf:"bytes,47,opt,name=background_common_pool_size,json=backgroundCommonPoolSize,proto3" json:"background_common_pool_size,omitempty"`
+	// Default value: **4096**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_connections).
+	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
+	// Maximum number of concurrently executed queries.
+	//
+	// Default value: **500**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_concurrent_queries).
+	MaxConcurrentQueries *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_concurrent_queries,json=maxConcurrentQueries,proto3" json:"max_concurrent_queries,omitempty"`
+	// Maximum size of the table that can be deleted using **DROP** or **TRUNCATE** query.
+	//
+	// Default value: **50000000000** (48828125 KiB).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_table_size_to_drop).
+	MaxTableSizeToDrop *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=max_table_size_to_drop,json=maxTableSizeToDrop,proto3" json:"max_table_size_to_drop,omitempty"`
+	// Maximum size of the partition that can be deleted using **DROP** or **TRUNCATE** query.
+	//
+	// Default value: **50000000000** (48828125 KiB).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_partition_size_to_drop).
+	MaxPartitionSizeToDrop *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=max_partition_size_to_drop,json=maxPartitionSizeToDrop,proto3" json:"max_partition_size_to_drop,omitempty"`
+	// The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
+	//
+	// Default value: **30**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#keep_alive_timeout).
+	KeepAliveTimeout *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=keep_alive_timeout,json=keepAliveTimeout,proto3" json:"keep_alive_timeout,omitempty"`
+	// Cache size (in bytes) for uncompressed data used by table engines from the MergeTree family. **0** means disabled.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#uncompressed_cache_size).
+	UncompressedCacheSize *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=uncompressed_cache_size,json=uncompressedCacheSize,proto3" json:"uncompressed_cache_size,omitempty"`
+	// Maximum size (in bytes) of the cache of "marks" used by MergeTree tables.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#mark_cache_size).
+	MarkCacheSize *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=mark_cache_size,json=markCacheSize,proto3" json:"mark_cache_size,omitempty"`
+	// The server's time zone to be used in DateTime fields conversions. Specified as an IANA identifier.
+	//
+	// Default value: **Europe/Moscow**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#timezone).
+	Timezone string `protobuf:"bytes,14,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	// Enables or disables geobase.
+	//
+	// Change of the setting is applied with restart.
+	GeobaseEnabled *wrapperspb.BoolValue `protobuf:"bytes,66,opt,name=geobase_enabled,json=geobaseEnabled,proto3" json:"geobase_enabled,omitempty"`
+	// Address of the archive with the user geobase in Object Storage.
+	//
+	// Change of the setting is applied with restart.
+	GeobaseUri string `protobuf:"bytes,15,opt,name=geobase_uri,json=geobaseUri,proto3" json:"geobase_uri,omitempty"`
 	// The default database.
 	//
-	// To get a list of cluster databases, see [Yandex Managed ClickHouse documentation](/docs/managed-clickhouse/operations/databases#list-db).
-	DefaultDatabase *wrapperspb.StringValue `protobuf:"bytes,43,opt,name=default_database,json=defaultDatabase,proto3" json:"default_database,omitempty"`
-	// Sets the memory size (in bytes) for a stack trace at every peak allocation step. Default value: **4194304**.
+	// Default value: **default**.
 	//
-	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings/#total-memory-profiler-step).
-	TotalMemoryProfilerStep             *wrapperspb.Int64Value  `protobuf:"bytes,44,opt,name=total_memory_profiler_step,json=totalMemoryProfilerStep,proto3" json:"total_memory_profiler_step,omitempty"`
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#default_database).
+	DefaultDatabase *wrapperspb.StringValue `protobuf:"bytes,43,opt,name=default_database,json=defaultDatabase,proto3" json:"default_database,omitempty"`
+	// Whenever server memory usage becomes larger than every next step in number of bytes the memory profiler will collect
+	// the allocating stack trace. **0** means disabled memory profiler.
+	//
+	// Default value: **0**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#total_memory_profiler_step).
+	TotalMemoryProfilerStep *wrapperspb.Int64Value `protobuf:"bytes,44,opt,name=total_memory_profiler_step,json=totalMemoryProfilerStep,proto3" json:"total_memory_profiler_step,omitempty"`
+	// Allows to collect random allocations and de-allocations and writes them in the system.trace_log system table
+	// with trace_type equal to a MemorySample with the specified probability.
+	//
+	// Default value: **0**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#total_memory_tracker_sample_probability).
 	TotalMemoryTrackerSampleProbability *wrapperspb.DoubleValue `protobuf:"bytes,45,opt,name=total_memory_tracker_sample_probability,json=totalMemoryTrackerSampleProbability,proto3" json:"total_memory_tracker_sample_probability,omitempty"`
-	// Regexp-based rules, which will be applied to queries as well as all log messages before storing them in server logs, system.query_log, system.text_log, system.processes tables, and in logs sent to the client. That allows preventing sensitive data leakage from SQL queries (like names, emails, personal identifiers or credit card numbers) to logs.
-	// Change of these settings is applied with ClickHouse restart
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#query-masking-rules)
+	// Maximum number of threads to parse and insert data in background. If set to **0**, asynchronous mode is disabled.
+	//
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#async_insert_threads).
+	AsyncInsertThreads *wrapperspb.Int64Value `protobuf:"bytes,79,opt,name=async_insert_threads,json=asyncInsertThreads,proto3" json:"async_insert_threads,omitempty"`
+	// The maximum number of threads to execute **BACKUP** requests.
+	//
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#backup_threads).
+	BackupThreads *wrapperspb.Int64Value `protobuf:"bytes,80,opt,name=backup_threads,json=backupThreads,proto3" json:"backup_threads,omitempty"`
+	// The maximum number of threads to execute **RESTORE** requests.
+	//
+	// Default value: **16**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#restore_threads).
+	RestoreThreads *wrapperspb.Int64Value `protobuf:"bytes,81,opt,name=restore_threads,json=restoreThreads,proto3" json:"restore_threads,omitempty"`
+	// Settings for the MergeTree table engine family.
+	//
+	// Change of the settings of **merge_tree** is applied with restart.
+	MergeTree *ClickhouseConfig_MergeTree `protobuf:"bytes,2,opt,name=merge_tree,json=mergeTree,proto3" json:"merge_tree,omitempty"`
+	// Data compression settings for MergeTree engine tables.
+	//
+	// Change of the settings of **compression** is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#compression).
+	Compression []*ClickhouseConfig_Compression `protobuf:"bytes,3,rep,name=compression,proto3" json:"compression,omitempty"`
+	// Configuration of external dictionaries.
+	//
+	// Change of the settings of **dictionaries** is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries).
+	Dictionaries []*ClickhouseConfig_ExternalDictionary `protobuf:"bytes,4,rep,name=dictionaries,proto3" json:"dictionaries,omitempty"`
+	// Rollup settings for the GraphiteMergeTree engine tables.
+	//
+	// Change of the settings of **graphite_rollup** is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#graphite_rollup).
+	GraphiteRollup []*ClickhouseConfig_GraphiteRollup `protobuf:"bytes,5,rep,name=graphite_rollup,json=graphiteRollup,proto3" json:"graphite_rollup,omitempty"`
+	// Kafka integration settings.
+	//
+	// Change of the settings of **kafka** is applied with restart.
+	Kafka *ClickhouseConfig_Kafka `protobuf:"bytes,35,opt,name=kafka,proto3" json:"kafka,omitempty"`
+	// Per-topic Kafka integration settings.
+	//
+	// Change of the settings of **kafka_topics** is applied with restart.
+	KafkaTopics []*ClickhouseConfig_KafkaTopic `protobuf:"bytes,36,rep,name=kafka_topics,json=kafkaTopics,proto3" json:"kafka_topics,omitempty"`
+	// RabbitMQ integration settings.
+	//
+	// Change of the settings of **rabbitmq** is applied with restart.
+	Rabbitmq *ClickhouseConfig_Rabbitmq `protobuf:"bytes,37,opt,name=rabbitmq,proto3" json:"rabbitmq,omitempty"`
+	// Regexp-based rules, which will be applied to queries as well as all log messages before storing them in server logs,
+	// system.query_log, system.text_log, system.processes tables, and in logs sent to the client. That allows preventing
+	// sensitive data leakage from SQL queries (like names, emails, personal identifiers or credit card numbers) to logs.
+	//
+	// Change of the settings of **query_masking_rules** is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#query_masking_rules).
 	QueryMaskingRules []*ClickhouseConfig_QueryMaskingRule `protobuf:"bytes,67,rep,name=query_masking_rules,json=queryMaskingRules,proto3" json:"query_masking_rules,omitempty"`
-	// Lazy loading of dictionaries.
-	// Default: true
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#dictionaries_lazy_load)
-	DictionariesLazyLoad *wrapperspb.BoolValue `protobuf:"bytes,68,opt,name=dictionaries_lazy_load,json=dictionariesLazyLoad,proto3" json:"dictionaries_lazy_load,omitempty"`
-	// [Query cache](https://clickhouse.com/docs/en/operations/query-cache) configuration.
-	// Min version: 23.5
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#query_cache)
+	// [Query cache](https://clickhouse.com/docs/operations/query-cache) configuration.
+	//
+	// Change of the settings of **query_cache** is applied with restart.
 	QueryCache *ClickhouseConfig_QueryCache `protobuf:"bytes,69,opt,name=query_cache,json=queryCache,proto3" json:"query_cache,omitempty"`
-	// JDBC bridge for queries to external databases.
-	// https://clickhouse.com/docs/en/integrations/jdbc/jdbc-with-clickhouse
-	JdbcBridge    *ClickhouseConfig_JdbcBridge `protobuf:"bytes,70,opt,name=jdbc_bridge,json=jdbcBridge,proto3" json:"jdbc_bridge,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// JDBC bridge configuration for queries to external databases.
+	//
+	// Change of the settings of **jdbc_bridge** is applied with restart.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/integrations/jdbc/jdbc-with-clickhouse).
+	JdbcBridge *ClickhouseConfig_JdbcBridge `protobuf:"bytes,70,opt,name=jdbc_bridge,json=jdbcBridge,proto3" json:"jdbc_bridge,omitempty"`
+	// Enables or disables MySQL interface on ClickHouse server
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/interfaces/mysql).
+	MysqlProtocol *wrapperspb.BoolValue `protobuf:"bytes,78,opt,name=mysql_protocol,json=mysqlProtocol,proto3" json:"mysql_protocol,omitempty"`
+	// The interval in seconds before reloading built-in dictionaries.
+	//
+	// Default value: **3600**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#builtin_dictionaries_reload_interval).
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
+	BuiltinDictionariesReloadInterval *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=builtin_dictionaries_reload_interval,json=builtinDictionariesReloadInterval,proto3" json:"builtin_dictionaries_reload_interval,omitempty"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *ClickhouseConfig) Reset() {
@@ -916,138 +1238,81 @@ func (*ClickhouseConfig) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *ClickhouseConfig) GetBackgroundPoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundPoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundMergesMutationsConcurrencyRatio() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundMergesMutationsConcurrencyRatio
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundSchedulePoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundSchedulePoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundFetchesPoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundFetchesPoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundMovePoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundMovePoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundDistributedSchedulePoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundDistributedSchedulePoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundBufferFlushSchedulePoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundBufferFlushSchedulePoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundMessageBrokerSchedulePoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundMessageBrokerSchedulePoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetBackgroundCommonPoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackgroundCommonPoolSize
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetDictionariesLazyLoad() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DictionariesLazyLoad
+	}
+	return nil
+}
+
 func (x *ClickhouseConfig) GetLogLevel() ClickhouseConfig_LogLevel {
 	if x != nil {
 		return x.LogLevel
 	}
 	return ClickhouseConfig_LOG_LEVEL_UNSPECIFIED
-}
-
-func (x *ClickhouseConfig) GetMergeTree() *ClickhouseConfig_MergeTree {
-	if x != nil {
-		return x.MergeTree
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetCompression() []*ClickhouseConfig_Compression {
-	if x != nil {
-		return x.Compression
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetDictionaries() []*ClickhouseConfig_ExternalDictionary {
-	if x != nil {
-		return x.Dictionaries
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetGraphiteRollup() []*ClickhouseConfig_GraphiteRollup {
-	if x != nil {
-		return x.GraphiteRollup
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetKafka() *ClickhouseConfig_Kafka {
-	if x != nil {
-		return x.Kafka
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetKafkaTopics() []*ClickhouseConfig_KafkaTopic {
-	if x != nil {
-		return x.KafkaTopics
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetRabbitmq() *ClickhouseConfig_Rabbitmq {
-	if x != nil {
-		return x.Rabbitmq
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetMaxConnections() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxConnections
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetMaxConcurrentQueries() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxConcurrentQueries
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetKeepAliveTimeout() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.KeepAliveTimeout
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetUncompressedCacheSize() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.UncompressedCacheSize
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetMarkCacheSize() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MarkCacheSize
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetMaxTableSizeToDrop() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxTableSizeToDrop
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetMaxPartitionSizeToDrop() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxPartitionSizeToDrop
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
-func (x *ClickhouseConfig) GetBuiltinDictionariesReloadInterval() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.BuiltinDictionariesReloadInterval
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetTimezone() string {
-	if x != nil {
-		return x.Timezone
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig) GetGeobaseEnabled() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.GeobaseEnabled
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig) GetGeobaseUri() string {
-	if x != nil {
-		return x.GeobaseUri
-	}
-	return ""
 }
 
 func (x *ClickhouseConfig) GetQueryLogRetentionSize() *wrapperspb.Int64Value {
@@ -1344,67 +1609,74 @@ func (x *ClickhouseConfig) GetAccessControlImprovements() *ClickhouseConfig_Acce
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundPoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetMaxConnections() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundPoolSize
+		return x.MaxConnections
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundMergesMutationsConcurrencyRatio() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetMaxConcurrentQueries() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundMergesMutationsConcurrencyRatio
+		return x.MaxConcurrentQueries
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundSchedulePoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetMaxTableSizeToDrop() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundSchedulePoolSize
+		return x.MaxTableSizeToDrop
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundFetchesPoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetMaxPartitionSizeToDrop() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundFetchesPoolSize
+		return x.MaxPartitionSizeToDrop
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundMovePoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetKeepAliveTimeout() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundMovePoolSize
+		return x.KeepAliveTimeout
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundDistributedSchedulePoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetUncompressedCacheSize() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundDistributedSchedulePoolSize
+		return x.UncompressedCacheSize
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundBufferFlushSchedulePoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetMarkCacheSize() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.BackgroundBufferFlushSchedulePoolSize
+		return x.MarkCacheSize
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundMessageBrokerSchedulePoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetTimezone() string {
 	if x != nil {
-		return x.BackgroundMessageBrokerSchedulePoolSize
+		return x.Timezone
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig) GetGeobaseEnabled() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.GeobaseEnabled
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetBackgroundCommonPoolSize() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig) GetGeobaseUri() string {
 	if x != nil {
-		return x.BackgroundCommonPoolSize
+		return x.GeobaseUri
 	}
-	return nil
+	return ""
 }
 
 func (x *ClickhouseConfig) GetDefaultDatabase() *wrapperspb.StringValue {
@@ -1428,16 +1700,79 @@ func (x *ClickhouseConfig) GetTotalMemoryTrackerSampleProbability() *wrapperspb.
 	return nil
 }
 
-func (x *ClickhouseConfig) GetQueryMaskingRules() []*ClickhouseConfig_QueryMaskingRule {
+func (x *ClickhouseConfig) GetAsyncInsertThreads() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.QueryMaskingRules
+		return x.AsyncInsertThreads
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig) GetDictionariesLazyLoad() *wrapperspb.BoolValue {
+func (x *ClickhouseConfig) GetBackupThreads() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.DictionariesLazyLoad
+		return x.BackupThreads
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetRestoreThreads() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.RestoreThreads
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetMergeTree() *ClickhouseConfig_MergeTree {
+	if x != nil {
+		return x.MergeTree
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetCompression() []*ClickhouseConfig_Compression {
+	if x != nil {
+		return x.Compression
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetDictionaries() []*ClickhouseConfig_ExternalDictionary {
+	if x != nil {
+		return x.Dictionaries
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetGraphiteRollup() []*ClickhouseConfig_GraphiteRollup {
+	if x != nil {
+		return x.GraphiteRollup
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetKafka() *ClickhouseConfig_Kafka {
+	if x != nil {
+		return x.Kafka
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetKafkaTopics() []*ClickhouseConfig_KafkaTopic {
+	if x != nil {
+		return x.KafkaTopics
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetRabbitmq() *ClickhouseConfig_Rabbitmq {
+	if x != nil {
+		return x.Rabbitmq
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig) GetQueryMaskingRules() []*ClickhouseConfig_QueryMaskingRule {
+	if x != nil {
+		return x.QueryMaskingRules
 	}
 	return nil
 }
@@ -1456,14 +1791,28 @@ func (x *ClickhouseConfig) GetJdbcBridge() *ClickhouseConfig_JdbcBridge {
 	return nil
 }
 
+func (x *ClickhouseConfig) GetMysqlProtocol() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.MysqlProtocol
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
+func (x *ClickhouseConfig) GetBuiltinDictionariesReloadInterval() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BuiltinDictionariesReloadInterval
+	}
+	return nil
+}
+
 type ClickhouseConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective settings for a ClickHouse cluster (a combination of settings defined
-	// in [user_config] and [default_config]).
+	// Effective configuration (a combination of user-defined configuration and default configuration).
 	EffectiveConfig *ClickhouseConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a ClickHouse cluster.
+	// User-defined configuration.
 	UserConfig *ClickhouseConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a ClickHouse cluster.
+	// Default configuration.
 	DefaultConfig *ClickhouseConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1520,109 +1869,308 @@ func (x *ClickhouseConfigSet) GetDefaultConfig() *ClickhouseConfig {
 	return nil
 }
 
-// Options specific to the MergeTree table engine.
+// Access control settings.
+// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#access_control_improvements).
+type ClickhouseConfig_AccessControlImprovements struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Sets whether **SELECT * FROM system.<table>** requires any grants and can be executed by any user.
+	// If set to true then this query requires **GRANT SELECT ON system.<table>** just as for non-system tables.
+	//
+	// Default value: **false**.
+	SelectFromSystemDbRequiresGrant *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=select_from_system_db_requires_grant,json=selectFromSystemDbRequiresGrant,proto3" json:"select_from_system_db_requires_grant,omitempty"`
+	// Sets whether **SELECT * FROM information_schema.<table>** requires any grants and can be executed by any user.
+	// If set to true, then this query requires **GRANT SELECT ON information_schema.<table>**, just as for ordinary tables.
+	//
+	// Default value: **false**.
+	SelectFromInformationSchemaRequiresGrant *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=select_from_information_schema_requires_grant,json=selectFromInformationSchemaRequiresGrant,proto3" json:"select_from_information_schema_requires_grant,omitempty"`
+	unknownFields                            protoimpl.UnknownFields
+	sizeCache                                protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_AccessControlImprovements) Reset() {
+	*x = ClickhouseConfig_AccessControlImprovements{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_AccessControlImprovements) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_AccessControlImprovements) ProtoMessage() {}
+
+func (x *ClickhouseConfig_AccessControlImprovements) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_AccessControlImprovements.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_AccessControlImprovements) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *ClickhouseConfig_AccessControlImprovements) GetSelectFromSystemDbRequiresGrant() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.SelectFromSystemDbRequiresGrant
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_AccessControlImprovements) GetSelectFromInformationSchemaRequiresGrant() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.SelectFromInformationSchemaRequiresGrant
+	}
+	return nil
+}
+
+// Settings for the MergeTree table engine family.
 type ClickhouseConfig_MergeTree struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Number of blocks of hashes to keep in ZooKeeper.
-	ReplicatedDeduplicationWindow *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=replicated_deduplication_window,json=replicatedDeduplicationWindow,proto3" json:"replicated_deduplication_window,omitempty"`
-	// Period of time to keep blocks of hashes for.
-	ReplicatedDeduplicationWindowSeconds *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=replicated_deduplication_window_seconds,json=replicatedDeduplicationWindowSeconds,proto3" json:"replicated_deduplication_window_seconds,omitempty"`
-	// If table contains at least that many active parts in single partition, artificially slow down insert into table.
+	// If the number of active parts in a single partition exceeds the **parts_to_delay_insert** value, an **INSERT** artificially slows down.
+	//
+	// Default value: **1000** for versions 25.1 and higher, **150** for versions 24.12 and lower.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#parts_to_delay_insert).
 	PartsToDelayInsert *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=parts_to_delay_insert,json=partsToDelayInsert,proto3" json:"parts_to_delay_insert,omitempty"`
-	// If more than this number active parts in single partition, throw 'Too many parts ...' exception.
-	PartsToThrowInsert         *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=parts_to_throw_insert,json=partsToThrowInsert,proto3" json:"parts_to_throw_insert,omitempty"`
+	// If the number of active parts in a single partition exceeds the **parts_to_throw_insert** value, an **INSERT**
+	// is interrupted with the error "Too many parts (N). Merges are processing significantly slower than inserts".
+	//
+	// Default value: **3000** for versions 25.1 and higher, **300** for versions 24.12 and lower.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#parts_to_throw_insert).
+	PartsToThrowInsert *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=parts_to_throw_insert,json=partsToThrowInsert,proto3" json:"parts_to_throw_insert,omitempty"`
+	// If the number of inactive parts in a single partition in the table exceeds the **inactive_parts_to_delay_insert** value,
+	// an **INSERT** is artificially slowed down.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#inactive_parts_to_delay_insert).
 	InactivePartsToDelayInsert *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=inactive_parts_to_delay_insert,json=inactivePartsToDelayInsert,proto3" json:"inactive_parts_to_delay_insert,omitempty"`
+	// If the number of inactive parts in a single partition more than the **inactive_parts_to_throw_insert** value,
+	// **INSERT** is interrupted with an error.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#inactive_parts_to_throw_insert).
 	InactivePartsToThrowInsert *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=inactive_parts_to_throw_insert,json=inactivePartsToThrowInsert,proto3" json:"inactive_parts_to_throw_insert,omitempty"`
-	// How many tasks of merging and mutating parts are allowed simultaneously in ReplicatedMergeTree queue.
-	MaxReplicatedMergesInQueue *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=max_replicated_merges_in_queue,json=maxReplicatedMergesInQueue,proto3" json:"max_replicated_merges_in_queue,omitempty"`
-	// If there is less than specified number of free entries in background pool (or replicated queue), start to lower
-	// maximum size of merge to process.
-	NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=number_of_free_entries_in_pool_to_lower_max_size_of_merge,json=numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge,proto3" json:"number_of_free_entries_in_pool_to_lower_max_size_of_merge,omitempty"`
-	// Maximum in total size of parts to merge, when there are minimum free threads in background pool (or entries
-	// in replication queue).
-	MaxBytesToMergeAtMinSpaceInPool *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_bytes_to_merge_at_min_space_in_pool,json=maxBytesToMergeAtMinSpaceInPool,proto3" json:"max_bytes_to_merge_at_min_space_in_pool,omitempty"`
-	MaxBytesToMergeAtMaxSpaceInPool *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_bytes_to_merge_at_max_space_in_pool,json=maxBytesToMergeAtMaxSpaceInPool,proto3" json:"max_bytes_to_merge_at_max_space_in_pool,omitempty"`
-	// Minimum number of bytes in a data part that can be stored in **Wide** format.
+	// The "Too many parts" check according to **parts_to_delay_insert** and **parts_to_throw_insert** will be active only if the average
+	// part size (in the relevant partition) is not larger than the specified threshold. If it is larger than the specified threshold,
+	// **INSERT** queries will be neither delayed or rejected. This allows to have hundreds of terabytes in a single table on a single server
+	// if the parts are successfully merged to larger parts. This does not affect the thresholds on inactive parts or total parts.
 	//
-	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/#min_bytes_for_wide_part).
-	MinBytesForWidePart *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_bytes_for_wide_part,json=minBytesForWidePart,proto3" json:"min_bytes_for_wide_part,omitempty"`
-	// Minimum number of rows in a data part that can be stored in **Wide** format.
+	// Default value: **1073741824** (1 GiB).
 	//
-	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/#min_bytes_for_wide_part).
-	MinRowsForWidePart *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=min_rows_for_wide_part,json=minRowsForWidePart,proto3" json:"min_rows_for_wide_part,omitempty"`
-	// Enables or disables complete dropping of data parts where all rows are expired in MergeTree tables.
-	//
-	// More info see in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings/#ttl_only_drop_parts).
-	TtlOnlyDropParts                           *wrapperspb.BoolValue  `protobuf:"bytes,13,opt,name=ttl_only_drop_parts,json=ttlOnlyDropParts,proto3" json:"ttl_only_drop_parts,omitempty"`
-	AllowRemoteFsZeroCopyReplication           *wrapperspb.BoolValue  `protobuf:"bytes,14,opt,name=allow_remote_fs_zero_copy_replication,json=allowRemoteFsZeroCopyReplication,proto3" json:"allow_remote_fs_zero_copy_replication,omitempty"`
-	MergeWithTtlTimeout                        *wrapperspb.Int64Value `protobuf:"bytes,15,opt,name=merge_with_ttl_timeout,json=mergeWithTtlTimeout,proto3" json:"merge_with_ttl_timeout,omitempty"`
-	MergeWithRecompressionTtlTimeout           *wrapperspb.Int64Value `protobuf:"bytes,16,opt,name=merge_with_recompression_ttl_timeout,json=mergeWithRecompressionTtlTimeout,proto3" json:"merge_with_recompression_ttl_timeout,omitempty"`
-	MaxPartsInTotal                            *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=max_parts_in_total,json=maxPartsInTotal,proto3" json:"max_parts_in_total,omitempty"`
-	MaxNumberOfMergesWithTtlInPool             *wrapperspb.Int64Value `protobuf:"bytes,18,opt,name=max_number_of_merges_with_ttl_in_pool,json=maxNumberOfMergesWithTtlInPool,proto3" json:"max_number_of_merges_with_ttl_in_pool,omitempty"`
-	CleanupDelayPeriod                         *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=cleanup_delay_period,json=cleanupDelayPeriod,proto3" json:"cleanup_delay_period,omitempty"`
-	NumberOfFreeEntriesInPoolToExecuteMutation *wrapperspb.Int64Value `protobuf:"bytes,20,opt,name=number_of_free_entries_in_pool_to_execute_mutation,json=numberOfFreeEntriesInPoolToExecuteMutation,proto3" json:"number_of_free_entries_in_pool_to_execute_mutation,omitempty"`
-	// The 'too many parts' check according to 'parts_to_delay_insert' and 'parts_to_throw_insert' will be active only if the average part size (in the relevant partition) is not larger than the specified threshold. If it is larger than the specified threshold, the INSERTs will be neither delayed or rejected. This allows to have hundreds of terabytes in a single table on a single server if the parts are successfully merged to larger parts. This does not affect the thresholds on inactive parts or total parts.
-	// Default: 1 GiB
-	// Min version: 22.10
-	// See in-depth description in [ClickHouse GitHub](https://github.com/ClickHouse/ClickHouse/blob/f9558345e886876b9132d9c018e357f7fa9b22a3/src/Storages/MergeTree/MergeTreeSettings.h#L80)
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_avg_part_size_for_too_many_parts).
 	MaxAvgPartSizeForTooManyParts *wrapperspb.Int64Value `protobuf:"bytes,21,opt,name=max_avg_part_size_for_too_many_parts,json=maxAvgPartSizeForTooManyParts,proto3" json:"max_avg_part_size_for_too_many_parts,omitempty"`
-	// Merge parts if every part in the range is older than the value of min_age_to_force_merge_seconds.
-	// Default: 0 - disabled
-	// Min_version: 22.10
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings#min_age_to_force_merge_seconds)
-	MinAgeToForceMergeSeconds *wrapperspb.Int64Value `protobuf:"bytes,22,opt,name=min_age_to_force_merge_seconds,json=minAgeToForceMergeSeconds,proto3" json:"min_age_to_force_merge_seconds,omitempty"`
-	// Whether min_age_to_force_merge_seconds should be applied only on the entire partition and not on subset.
-	// Default: false
-	// Min_version: 22.11
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings#min_age_to_force_merge_seconds)
-	MinAgeToForceMergeOnPartitionOnly *wrapperspb.BoolValue `protobuf:"bytes,23,opt,name=min_age_to_force_merge_on_partition_only,json=minAgeToForceMergeOnPartitionOnly,proto3" json:"min_age_to_force_merge_on_partition_only,omitempty"`
-	// Sleep time for merge selecting when no part is selected. A lower setting triggers selecting tasks in background_schedule_pool frequently, which results in a large number of requests to ClickHouse Keeper in large-scale clusters.
-	// Default: 5000
-	// Min_version: 21.10
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings#merge_selecting_sleep_ms)
-	MergeSelectingSleepMs *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=merge_selecting_sleep_ms,json=mergeSelectingSleepMs,proto3" json:"merge_selecting_sleep_ms,omitempty"`
-	// The number of rows that are read from the merged parts into memory.
-	// Default: 8192
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/settings#merge_max_block_size)
-	MergeMaxBlockSize *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=merge_max_block_size,json=mergeMaxBlockSize,proto3" json:"merge_max_block_size,omitempty"`
-	// Enables the check at table creation, that the data type of a column for sampling or sampling expression is correct. The data type must be one of unsigned [integer types](https://clickhouse.com/docs/en/sql-reference/data-types/int-uint): UInt8, UInt16, UInt32, UInt64.
-	// Default: true
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings#check_sample_column_is_correct)
-	CheckSampleColumnIsCorrect *wrapperspb.BoolValue `protobuf:"bytes,26,opt,name=check_sample_column_is_correct,json=checkSampleColumnIsCorrect,proto3" json:"check_sample_column_is_correct,omitempty"`
-	// Maximum sleep time for merge selecting, a lower setting will trigger selecting tasks in background_schedule_pool frequently which result in large amount of requests to zookeeper in large-scale clusters.
-	// Default: 60000
-	// Min_version: 23.6
-	// See in-depth description in [ClickHouse GitHub](https://github.com/ClickHouse/ClickHouse/blob/4add9db84859bff7410cf934a3904b0414e36e51/src/Storages/MergeTree/MergeTreeSettings.h#L71)
-	MaxMergeSelectingSleepMs *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=max_merge_selecting_sleep_ms,json=maxMergeSelectingSleepMs,proto3" json:"max_merge_selecting_sleep_ms,omitempty"`
+	// If the total number of active parts in all partitions of a table exceeds the **max_parts_in_total** value,
+	// an **INSERT** is interrupted with the error "Too many parts (N)".
+	//
+	// Default value: **20000** for versions 25.2 and higher, **100000** for versions 25.1 and lower.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_parts_in_total).
+	MaxPartsInTotal *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=max_parts_in_total,json=maxPartsInTotal,proto3" json:"max_parts_in_total,omitempty"`
+	// How many tasks of merging and mutating parts are allowed simultaneously in ReplicatedMergeTree queue.
+	//
+	// Default value: **16**.
+	MaxReplicatedMergesInQueue *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=max_replicated_merges_in_queue,json=maxReplicatedMergesInQueue,proto3" json:"max_replicated_merges_in_queue,omitempty"`
+	// When there is less than the specified number of free entries in pool (or replicated queue), start to lower maximum size of
+	// merge to process (or to put in queue). This is to allow small merges to process - not filling the pool with long running merges.
+	//
+	// Default value: **8**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#number_of_free_entries_in_pool_to_lower_max_size_of_merge).
+	NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=number_of_free_entries_in_pool_to_lower_max_size_of_merge,json=numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge,proto3" json:"number_of_free_entries_in_pool_to_lower_max_size_of_merge,omitempty"`
+	// When there is less than specified number of free entries in pool, do not execute part mutations.
+	// This is to leave free threads for regular merges and to avoid "Too many parts" errors.
+	//
+	// Default value: **20**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#number_of_free_entries_in_pool_to_execute_mutation).
+	NumberOfFreeEntriesInPoolToExecuteMutation *wrapperspb.Int64Value `protobuf:"bytes,20,opt,name=number_of_free_entries_in_pool_to_execute_mutation,json=numberOfFreeEntriesInPoolToExecuteMutation,proto3" json:"number_of_free_entries_in_pool_to_execute_mutation,omitempty"`
+	// The maximum total part size (in bytes) to be merged into one part, with the minimum available resources in the background pool.
+	//
+	// Default value: **1048576** (1 MiB).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_bytes_to_merge_at_min_space_in_pool).
+	MaxBytesToMergeAtMinSpaceInPool *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_bytes_to_merge_at_min_space_in_pool,json=maxBytesToMergeAtMinSpaceInPool,proto3" json:"max_bytes_to_merge_at_min_space_in_pool,omitempty"`
+	// The maximum total parts size (in bytes) to be merged into one part, if there are enough resources available.
+	// Corresponds roughly to the maximum possible part size created by an automatic background merge. **0** means merges will be disabled.
+	//
+	// Default value: **161061273600** (150 GiB).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_bytes_to_merge_at_max_space_in_pool).
+	MaxBytesToMergeAtMaxSpaceInPool *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_bytes_to_merge_at_max_space_in_pool,json=maxBytesToMergeAtMaxSpaceInPool,proto3" json:"max_bytes_to_merge_at_max_space_in_pool,omitempty"`
+	// Minimum number of bytes in a data part that can be stored in Wide format.
+	//
+	// Default value: **10485760** (10 MiB).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_bytes_for_wide_part).
+	MinBytesForWidePart *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_bytes_for_wide_part,json=minBytesForWidePart,proto3" json:"min_bytes_for_wide_part,omitempty"`
+	// Minimum number of rows in a data part that can be stored in Wide format.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_rows_for_wide_part).
+	MinRowsForWidePart *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=min_rows_for_wide_part,json=minRowsForWidePart,proto3" json:"min_rows_for_wide_part,omitempty"`
+	// Minimum period to clean old queue logs, blocks hashes and parts.
+	//
+	// Default value: **30**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#cleanup_delay_period).
+	CleanupDelayPeriod *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=cleanup_delay_period,json=cleanupDelayPeriod,proto3" json:"cleanup_delay_period,omitempty"`
 	// Maximum period to clean old queue logs, blocks hashes and parts.
-	// Default: 300
-	// Min_version: 23.6
-	// See in-depth description in [ClickHouse GitHub](https://github.com/ClickHouse/ClickHouse/blob/4add9db84859bff7410cf934a3904b0414e36e51/src/Storages/MergeTree/MergeTreeSettings.h#L142)
+	//
+	// Default value: **300** (5 minutes).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_cleanup_delay_period).
 	MaxCleanupDelayPeriod *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=max_cleanup_delay_period,json=maxCleanupDelayPeriod,proto3" json:"max_cleanup_delay_period,omitempty"`
+	// Minimum time to wait before trying to select parts to merge again after no parts were selected. A lower setting value will trigger
+	// selecting tasks in background_schedule_pool frequently which result in large amount of requests to Keeper in large-scale clusters.
+	//
+	// Default value: **5000** (5 seconds).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#merge_selecting_sleep_ms).
+	MergeSelectingSleepMs *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=merge_selecting_sleep_ms,json=mergeSelectingSleepMs,proto3" json:"merge_selecting_sleep_ms,omitempty"`
+	// Maximum time to wait before trying to select parts to merge again after no parts were selected. A lower setting value will trigger
+	// selecting tasks in background_schedule_pool frequently which result in large amount of requests to Keeper in large-scale clusters.
+	//
+	// Default value: **60000** (1 minute).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_merge_selecting_sleep_ms).
+	MaxMergeSelectingSleepMs *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=max_merge_selecting_sleep_ms,json=maxMergeSelectingSleepMs,proto3" json:"max_merge_selecting_sleep_ms,omitempty"`
+	// Merge parts if every part in the range is older than the specified value. **0** means disabled.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_age_to_force_merge_seconds).
+	MinAgeToForceMergeSeconds *wrapperspb.Int64Value `protobuf:"bytes,22,opt,name=min_age_to_force_merge_seconds,json=minAgeToForceMergeSeconds,proto3" json:"min_age_to_force_merge_seconds,omitempty"`
+	// Whether **min_age_to_force_merge_seconds** should be applied only on the entire partition and not on subset.
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_age_to_force_merge_on_partition_only).
+	MinAgeToForceMergeOnPartitionOnly *wrapperspb.BoolValue `protobuf:"bytes,23,opt,name=min_age_to_force_merge_on_partition_only,json=minAgeToForceMergeOnPartitionOnly,proto3" json:"min_age_to_force_merge_on_partition_only,omitempty"`
+	// The number of rows that are read from the merged parts into memory.
+	//
+	// Default value: **8192**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#merge_max_block_size).
+	MergeMaxBlockSize *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=merge_max_block_size,json=mergeMaxBlockSize,proto3" json:"merge_max_block_size,omitempty"`
 	// Determines the behavior of background merges for MergeTree tables with projections.
-	// https://clickhouse.com/docs/en/operations/settings/merge-tree-settings#deduplicate_merge_projection_mode
+	//
+	// Default value: **DEDUPLICATE_MERGE_PROJECTION_MODE_THROW**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#deduplicate_merge_projection_mode).
 	DeduplicateMergeProjectionMode ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode `protobuf:"varint,29,opt,name=deduplicate_merge_projection_mode,json=deduplicateMergeProjectionMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode" json:"deduplicate_merge_projection_mode,omitempty"`
 	// Determines the behavior of lightweight deletes for MergeTree tables with projections.
+	//
+	// Default value: **LIGHTWEIGHT_MUTATION_PROJECTION_MODE_THROW**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#lightweight_mutation_projection_mode).
 	LightweightMutationProjectionMode ClickhouseConfig_MergeTree_LightweightMutationProjectionMode `protobuf:"varint,30,opt,name=lightweight_mutation_projection_mode,json=lightweightMutationProjectionMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_MergeTree_LightweightMutationProjectionMode" json:"lightweight_mutation_projection_mode,omitempty"`
-	// Only recalculate ttl info when MATERIALIZE TTL.
-	MaterializeTtlRecalculateOnly *wrapperspb.BoolValue `protobuf:"bytes,31,opt,name=materialize_ttl_recalculate_only,json=materializeTtlRecalculateOnly,proto3" json:"materialize_ttl_recalculate_only,omitempty"`
+	// The number of most recently inserted blocks for which ClickHouse Keeper stores hash sums to check for duplicates.
+	//
+	// Default value: **1000** for versions 23.11 and higher, **100** for versions 23.10 and lower.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#replicated_deduplication_window).
+	ReplicatedDeduplicationWindow *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=replicated_deduplication_window,json=replicatedDeduplicationWindow,proto3" json:"replicated_deduplication_window,omitempty"`
+	// The number of seconds after which the hash sums of the inserted blocks are removed from ClickHouse Keeper.
+	//
+	// Default value: **604800** (7 days).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#replicated_deduplication_window_seconds).
+	ReplicatedDeduplicationWindowSeconds *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=replicated_deduplication_window_seconds,json=replicatedDeduplicationWindowSeconds,proto3" json:"replicated_deduplication_window_seconds,omitempty"`
 	// Do fsync for every inserted part. Significantly decreases performance of inserts, not recommended to use with wide parts.
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#fsync_after_insert).
 	FsyncAfterInsert *wrapperspb.BoolValue `protobuf:"bytes,32,opt,name=fsync_after_insert,json=fsyncAfterInsert,proto3" json:"fsync_after_insert,omitempty"`
 	// Do fsync for part directory after all part operations (writes, renames, etc.).
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#fsync_part_directory).
 	FsyncPartDirectory *wrapperspb.BoolValue `protobuf:"bytes,33,opt,name=fsync_part_directory,json=fsyncPartDirectory,proto3" json:"fsync_part_directory,omitempty"`
-	// Minimal number of compressed bytes to do fsync for part after fetch. 0 - disabled.
+	// Minimal number of compressed bytes to do fsync for part after fetch. **0** means disabled.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_compressed_bytes_to_fsync_after_fetch).
 	MinCompressedBytesToFsyncAfterFetch *wrapperspb.Int64Value `protobuf:"bytes,34,opt,name=min_compressed_bytes_to_fsync_after_fetch,json=minCompressedBytesToFsyncAfterFetch,proto3" json:"min_compressed_bytes_to_fsync_after_fetch,omitempty"`
-	// Minimal number of compressed bytes to do fsync for part after merge. 0 - disabled.
+	// Minimal number of compressed bytes to do fsync for part after merge. **0** means disabled.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_compressed_bytes_to_fsync_after_merge).
 	MinCompressedBytesToFsyncAfterMerge *wrapperspb.Int64Value `protobuf:"bytes,35,opt,name=min_compressed_bytes_to_fsync_after_merge,json=minCompressedBytesToFsyncAfterMerge,proto3" json:"min_compressed_bytes_to_fsync_after_merge,omitempty"`
-	// Minimal number of rows to do fsync for part after merge. 0 - disabled.
+	// Minimal number of rows to do fsync for part after merge. **0** means disabled.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#min_rows_to_fsync_after_merge).
 	MinRowsToFsyncAfterMerge *wrapperspb.Int64Value `protobuf:"bytes,36,opt,name=min_rows_to_fsync_after_merge,json=minRowsToFsyncAfterMerge,proto3" json:"min_rows_to_fsync_after_merge,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Controls whether data parts are fully dropped in MergeTree tables when all rows in that part have expired according to their **TTL** settings.
+	// * **true** - the entire part is dropped if all rows in that part have expired according to their **TTL** settings.
+	// * **false** - only the rows that have expired based on their **TTL** settings are removed.
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#ttl_only_drop_parts).
+	TtlOnlyDropParts *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=ttl_only_drop_parts,json=ttlOnlyDropParts,proto3" json:"ttl_only_drop_parts,omitempty"`
+	// Minimum delay in seconds before repeating a merge with delete TTL.
+	//
+	// Default value: **14400** (4 hours).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#merge_with_ttl_timeout).
+	MergeWithTtlTimeout *wrapperspb.Int64Value `protobuf:"bytes,15,opt,name=merge_with_ttl_timeout,json=mergeWithTtlTimeout,proto3" json:"merge_with_ttl_timeout,omitempty"`
+	// Minimum delay in seconds before repeating a merge with recompression TTL.
+	//
+	// Default value: **14400** (4 hours).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#merge_with_recompression_ttl_timeout).
+	MergeWithRecompressionTtlTimeout *wrapperspb.Int64Value `protobuf:"bytes,16,opt,name=merge_with_recompression_ttl_timeout,json=mergeWithRecompressionTtlTimeout,proto3" json:"merge_with_recompression_ttl_timeout,omitempty"`
+	// When there is more than specified number of merges with TTL entries in pool, do not assign new merge with TTL.
+	// This is to leave free threads for regular merges and avoid "Too many parts" errors.
+	//
+	// Default value: **2**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_number_of_merges_with_ttl_in_pool).
+	MaxNumberOfMergesWithTtlInPool *wrapperspb.Int64Value `protobuf:"bytes,18,opt,name=max_number_of_merges_with_ttl_in_pool,json=maxNumberOfMergesWithTtlInPool,proto3" json:"max_number_of_merges_with_ttl_in_pool,omitempty"`
+	// Only recalculate ttl info when **MATERIALIZE TTL**.
+	//
+	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#materialize_ttl_recalculate_only).
+	MaterializeTtlRecalculateOnly *wrapperspb.BoolValue `protobuf:"bytes,31,opt,name=materialize_ttl_recalculate_only,json=materializeTtlRecalculateOnly,proto3" json:"materialize_ttl_recalculate_only,omitempty"`
+	// Enables the check at table creation, that the data type of a column for sampling or sampling expression is correct.
+	// The data type must be one of unsigned integer types: UInt8, UInt16, UInt32, UInt64.
+	//
+	// Default value: **true**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#check_sample_column_is_correct).
+	CheckSampleColumnIsCorrect *wrapperspb.BoolValue `protobuf:"bytes,26,opt,name=check_sample_column_is_correct,json=checkSampleColumnIsCorrect,proto3" json:"check_sample_column_is_correct,omitempty"`
+	// Setting is automatically enabled if cloud storage is enabled, disabled otherwise.
+	//
+	// Default value: **true**.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
+	AllowRemoteFsZeroCopyReplication *wrapperspb.BoolValue `protobuf:"bytes,14,opt,name=allow_remote_fs_zero_copy_replication,json=allowRemoteFsZeroCopyReplication,proto3" json:"allow_remote_fs_zero_copy_replication,omitempty"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *ClickhouseConfig_MergeTree) Reset() {
 	*x = ClickhouseConfig_MergeTree{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1634,7 +2182,7 @@ func (x *ClickhouseConfig_MergeTree) String() string {
 func (*ClickhouseConfig_MergeTree) ProtoMessage() {}
 
 func (x *ClickhouseConfig_MergeTree) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1647,21 +2195,7 @@ func (x *ClickhouseConfig_MergeTree) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClickhouseConfig_MergeTree.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_MergeTree) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 0}
-}
-
-func (x *ClickhouseConfig_MergeTree) GetReplicatedDeduplicationWindow() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.ReplicatedDeduplicationWindow
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetReplicatedDeduplicationWindowSeconds() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.ReplicatedDeduplicationWindowSeconds
-	}
-	return nil
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1}
 }
 
 func (x *ClickhouseConfig_MergeTree) GetPartsToDelayInsert() *wrapperspb.Int64Value {
@@ -1692,6 +2226,20 @@ func (x *ClickhouseConfig_MergeTree) GetInactivePartsToThrowInsert() *wrapperspb
 	return nil
 }
 
+func (x *ClickhouseConfig_MergeTree) GetMaxAvgPartSizeForTooManyParts() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxAvgPartSizeForTooManyParts
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_MergeTree) GetMaxPartsInTotal() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxPartsInTotal
+	}
+	return nil
+}
+
 func (x *ClickhouseConfig_MergeTree) GetMaxReplicatedMergesInQueue() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.MaxReplicatedMergesInQueue
@@ -1702,6 +2250,13 @@ func (x *ClickhouseConfig_MergeTree) GetMaxReplicatedMergesInQueue() *wrapperspb
 func (x *ClickhouseConfig_MergeTree) GetNumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_MergeTree) GetNumberOfFreeEntriesInPoolToExecuteMutation() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.NumberOfFreeEntriesInPoolToExecuteMutation
 	}
 	return nil
 }
@@ -1734,48 +2289,6 @@ func (x *ClickhouseConfig_MergeTree) GetMinRowsForWidePart() *wrapperspb.Int64Va
 	return nil
 }
 
-func (x *ClickhouseConfig_MergeTree) GetTtlOnlyDropParts() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.TtlOnlyDropParts
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetAllowRemoteFsZeroCopyReplication() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.AllowRemoteFsZeroCopyReplication
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetMergeWithTtlTimeout() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MergeWithTtlTimeout
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetMergeWithRecompressionTtlTimeout() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MergeWithRecompressionTtlTimeout
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetMaxPartsInTotal() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxPartsInTotal
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetMaxNumberOfMergesWithTtlInPool() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxNumberOfMergesWithTtlInPool
-	}
-	return nil
-}
-
 func (x *ClickhouseConfig_MergeTree) GetCleanupDelayPeriod() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.CleanupDelayPeriod
@@ -1783,16 +2296,23 @@ func (x *ClickhouseConfig_MergeTree) GetCleanupDelayPeriod() *wrapperspb.Int64Va
 	return nil
 }
 
-func (x *ClickhouseConfig_MergeTree) GetNumberOfFreeEntriesInPoolToExecuteMutation() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig_MergeTree) GetMaxCleanupDelayPeriod() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.NumberOfFreeEntriesInPoolToExecuteMutation
+		return x.MaxCleanupDelayPeriod
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig_MergeTree) GetMaxAvgPartSizeForTooManyParts() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig_MergeTree) GetMergeSelectingSleepMs() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.MaxAvgPartSizeForTooManyParts
+		return x.MergeSelectingSleepMs
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_MergeTree) GetMaxMergeSelectingSleepMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxMergeSelectingSleepMs
 	}
 	return nil
 }
@@ -1811,37 +2331,9 @@ func (x *ClickhouseConfig_MergeTree) GetMinAgeToForceMergeOnPartitionOnly() *wra
 	return nil
 }
 
-func (x *ClickhouseConfig_MergeTree) GetMergeSelectingSleepMs() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MergeSelectingSleepMs
-	}
-	return nil
-}
-
 func (x *ClickhouseConfig_MergeTree) GetMergeMaxBlockSize() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.MergeMaxBlockSize
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetCheckSampleColumnIsCorrect() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.CheckSampleColumnIsCorrect
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetMaxMergeSelectingSleepMs() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxMergeSelectingSleepMs
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_MergeTree) GetMaxCleanupDelayPeriod() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxCleanupDelayPeriod
 	}
 	return nil
 }
@@ -1860,9 +2352,16 @@ func (x *ClickhouseConfig_MergeTree) GetLightweightMutationProjectionMode() Clic
 	return ClickhouseConfig_MergeTree_LIGHTWEIGHT_MUTATION_PROJECTION_MODE_UNSPECIFIED
 }
 
-func (x *ClickhouseConfig_MergeTree) GetMaterializeTtlRecalculateOnly() *wrapperspb.BoolValue {
+func (x *ClickhouseConfig_MergeTree) GetReplicatedDeduplicationWindow() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.MaterializeTtlRecalculateOnly
+		return x.ReplicatedDeduplicationWindow
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_MergeTree) GetReplicatedDeduplicationWindowSeconds() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ReplicatedDeduplicationWindowSeconds
 	}
 	return nil
 }
@@ -1902,245 +2401,75 @@ func (x *ClickhouseConfig_MergeTree) GetMinRowsToFsyncAfterMerge() *wrapperspb.I
 	return nil
 }
 
-type ClickhouseConfig_Kafka struct {
-	state                            protoimpl.MessageState                  `protogen:"open.v1"`
-	SecurityProtocol                 ClickhouseConfig_Kafka_SecurityProtocol `protobuf:"varint,1,opt,name=security_protocol,json=securityProtocol,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_SecurityProtocol" json:"security_protocol,omitempty"`
-	SaslMechanism                    ClickhouseConfig_Kafka_SaslMechanism    `protobuf:"varint,2,opt,name=sasl_mechanism,json=saslMechanism,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_SaslMechanism" json:"sasl_mechanism,omitempty"`
-	SaslUsername                     string                                  `protobuf:"bytes,3,opt,name=sasl_username,json=saslUsername,proto3" json:"sasl_username,omitempty"`
-	SaslPassword                     string                                  `protobuf:"bytes,4,opt,name=sasl_password,json=saslPassword,proto3" json:"sasl_password,omitempty"`
-	EnableSslCertificateVerification *wrapperspb.BoolValue                   `protobuf:"bytes,5,opt,name=enable_ssl_certificate_verification,json=enableSslCertificateVerification,proto3" json:"enable_ssl_certificate_verification,omitempty"`
-	MaxPollIntervalMs                *wrapperspb.Int64Value                  `protobuf:"bytes,6,opt,name=max_poll_interval_ms,json=maxPollIntervalMs,proto3" json:"max_poll_interval_ms,omitempty"`
-	SessionTimeoutMs                 *wrapperspb.Int64Value                  `protobuf:"bytes,7,opt,name=session_timeout_ms,json=sessionTimeoutMs,proto3" json:"session_timeout_ms,omitempty"`
-	Debug                            ClickhouseConfig_Kafka_Debug            `protobuf:"varint,8,opt,name=debug,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_Debug" json:"debug,omitempty"`
-	AutoOffsetReset                  ClickhouseConfig_Kafka_AutoOffsetReset  `protobuf:"varint,9,opt,name=auto_offset_reset,json=autoOffsetReset,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_AutoOffsetReset" json:"auto_offset_reset,omitempty"`
-	unknownFields                    protoimpl.UnknownFields
-	sizeCache                        protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_Kafka) Reset() {
-	*x = ClickhouseConfig_Kafka{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_Kafka) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_Kafka) ProtoMessage() {}
-
-func (x *ClickhouseConfig_Kafka) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[3]
+func (x *ClickhouseConfig_MergeTree) GetTtlOnlyDropParts() *wrapperspb.BoolValue {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_Kafka.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_Kafka) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 1}
-}
-
-func (x *ClickhouseConfig_Kafka) GetSecurityProtocol() ClickhouseConfig_Kafka_SecurityProtocol {
-	if x != nil {
-		return x.SecurityProtocol
-	}
-	return ClickhouseConfig_Kafka_SECURITY_PROTOCOL_UNSPECIFIED
-}
-
-func (x *ClickhouseConfig_Kafka) GetSaslMechanism() ClickhouseConfig_Kafka_SaslMechanism {
-	if x != nil {
-		return x.SaslMechanism
-	}
-	return ClickhouseConfig_Kafka_SASL_MECHANISM_UNSPECIFIED
-}
-
-func (x *ClickhouseConfig_Kafka) GetSaslUsername() string {
-	if x != nil {
-		return x.SaslUsername
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_Kafka) GetSaslPassword() string {
-	if x != nil {
-		return x.SaslPassword
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_Kafka) GetEnableSslCertificateVerification() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.EnableSslCertificateVerification
+		return x.TtlOnlyDropParts
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig_Kafka) GetMaxPollIntervalMs() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig_MergeTree) GetMergeWithTtlTimeout() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.MaxPollIntervalMs
+		return x.MergeWithTtlTimeout
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig_Kafka) GetSessionTimeoutMs() *wrapperspb.Int64Value {
+func (x *ClickhouseConfig_MergeTree) GetMergeWithRecompressionTtlTimeout() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.SessionTimeoutMs
+		return x.MergeWithRecompressionTtlTimeout
 	}
 	return nil
 }
 
-func (x *ClickhouseConfig_Kafka) GetDebug() ClickhouseConfig_Kafka_Debug {
+func (x *ClickhouseConfig_MergeTree) GetMaxNumberOfMergesWithTtlInPool() *wrapperspb.Int64Value {
 	if x != nil {
-		return x.Debug
-	}
-	return ClickhouseConfig_Kafka_DEBUG_UNSPECIFIED
-}
-
-func (x *ClickhouseConfig_Kafka) GetAutoOffsetReset() ClickhouseConfig_Kafka_AutoOffsetReset {
-	if x != nil {
-		return x.AutoOffsetReset
-	}
-	return ClickhouseConfig_Kafka_AUTO_OFFSET_RESET_UNSPECIFIED
-}
-
-type ClickhouseConfig_KafkaTopic struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Name          string                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Settings      *ClickhouseConfig_Kafka `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_KafkaTopic) Reset() {
-	*x = ClickhouseConfig_KafkaTopic{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_KafkaTopic) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_KafkaTopic) ProtoMessage() {}
-
-func (x *ClickhouseConfig_KafkaTopic) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_KafkaTopic.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_KafkaTopic) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 2}
-}
-
-func (x *ClickhouseConfig_KafkaTopic) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_KafkaTopic) GetSettings() *ClickhouseConfig_Kafka {
-	if x != nil {
-		return x.Settings
+		return x.MaxNumberOfMergesWithTtlInPool
 	}
 	return nil
 }
 
-type ClickhouseConfig_Rabbitmq struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// [RabbitMQ](https://clickhouse.com/docs/en/engines/table-engines/integrations/rabbitmq/) username
-	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	// [RabbitMQ](https://clickhouse.com/docs/en/engines/table-engines/integrations/rabbitmq/) password
-	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	// [RabbitMQ](https://clickhouse.com/docs/en/engines/table-engines/integrations/rabbitmq/) virtual host
-	Vhost         string `protobuf:"bytes,3,opt,name=vhost,proto3" json:"vhost,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_Rabbitmq) Reset() {
-	*x = ClickhouseConfig_Rabbitmq{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_Rabbitmq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_Rabbitmq) ProtoMessage() {}
-
-func (x *ClickhouseConfig_Rabbitmq) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[5]
+func (x *ClickhouseConfig_MergeTree) GetMaterializeTtlRecalculateOnly() *wrapperspb.BoolValue {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+		return x.MaterializeTtlRecalculateOnly
 	}
-	return mi.MessageOf(x)
+	return nil
 }
 
-// Deprecated: Use ClickhouseConfig_Rabbitmq.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_Rabbitmq) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3}
-}
-
-func (x *ClickhouseConfig_Rabbitmq) GetUsername() string {
+func (x *ClickhouseConfig_MergeTree) GetCheckSampleColumnIsCorrect() *wrapperspb.BoolValue {
 	if x != nil {
-		return x.Username
+		return x.CheckSampleColumnIsCorrect
 	}
-	return ""
+	return nil
 }
 
-func (x *ClickhouseConfig_Rabbitmq) GetPassword() string {
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
+func (x *ClickhouseConfig_MergeTree) GetAllowRemoteFsZeroCopyReplication() *wrapperspb.BoolValue {
 	if x != nil {
-		return x.Password
+		return x.AllowRemoteFsZeroCopyReplication
 	}
-	return ""
+	return nil
 }
 
-func (x *ClickhouseConfig_Rabbitmq) GetVhost() string {
-	if x != nil {
-		return x.Vhost
-	}
-	return ""
-}
-
+// Compression settings.
+// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#compression).
 type ClickhouseConfig_Compression struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Compression method to use for the specified combination of [min_part_size] and [min_part_size_ratio].
+	// Compression method to use for the specified combination of **min_part_size** and **min_part_size_ratio**.
 	Method ClickhouseConfig_Compression_Method `protobuf:"varint,1,opt,name=method,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Compression_Method" json:"method,omitempty"`
-	// Minimum size of a part of a table.
+	// The minimum size of a data part.
 	MinPartSize int64 `protobuf:"varint,2,opt,name=min_part_size,json=minPartSize,proto3" json:"min_part_size,omitempty"`
-	// Minimum ratio of a part relative to the size of all the data in the table.
-	MinPartSizeRatio float64                `protobuf:"fixed64,3,opt,name=min_part_size_ratio,json=minPartSizeRatio,proto3" json:"min_part_size_ratio,omitempty"`
-	Level            *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=level,proto3" json:"level,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// The ratio of the data part size to the table size.
+	MinPartSizeRatio float64 `protobuf:"fixed64,3,opt,name=min_part_size_ratio,json=minPartSizeRatio,proto3" json:"min_part_size_ratio,omitempty"`
+	// Compression level.
+	Level         *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=level,proto3" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClickhouseConfig_Compression) Reset() {
 	*x = ClickhouseConfig_Compression{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2152,7 +2481,7 @@ func (x *ClickhouseConfig_Compression) String() string {
 func (*ClickhouseConfig_Compression) ProtoMessage() {}
 
 func (x *ClickhouseConfig_Compression) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2165,7 +2494,7 @@ func (x *ClickhouseConfig_Compression) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClickhouseConfig_Compression.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_Compression) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 4}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 2}
 }
 
 func (x *ClickhouseConfig_Compression) GetMethod() ClickhouseConfig_Compression_Method {
@@ -2196,26 +2525,22 @@ func (x *ClickhouseConfig_Compression) GetLevel() *wrapperspb.Int64Value {
 	return nil
 }
 
+// External dictionary configuration.
 type ClickhouseConfig_ExternalDictionary struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the external dictionary.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Set of attributes for the external dictionary.
-	// For in-depth description, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_structure/).
+	// Structure of the external dictionary.
 	Structure *ClickhouseConfig_ExternalDictionary_Structure `protobuf:"bytes,2,opt,name=structure,proto3" json:"structure,omitempty"`
-	// Layout for storing the dictionary in memory.
-	// For in-depth description, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_layout/).
-	Layout *ClickhouseConfig_ExternalDictionary_Layout `protobuf:"bytes,3,opt,name=layout,proto3" json:"layout,omitempty"`
-	// Setting for the period of time between dictionary updates.
-	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_lifetime/).
+	// Layout determining how to store the dictionary in memory.
 	//
+	// For details, see https://clickhouse.com/docs/sql-reference/dictionaries#ways-to-store-dictionaries-in-memory.
+	Layout *ClickhouseConfig_ExternalDictionary_Layout `protobuf:"bytes,3,opt,name=layout,proto3" json:"layout,omitempty"`
 	// Types that are valid to be assigned to Lifetime:
 	//
 	//	*ClickhouseConfig_ExternalDictionary_FixedLifetime
 	//	*ClickhouseConfig_ExternalDictionary_LifetimeRange
 	Lifetime isClickhouseConfig_ExternalDictionary_Lifetime `protobuf_oneof:"lifetime"`
-	// Description of the source for the external dictionary.
-	//
 	// Types that are valid to be assigned to Source:
 	//
 	//	*ClickhouseConfig_ExternalDictionary_HttpSource_
@@ -2230,7 +2555,7 @@ type ClickhouseConfig_ExternalDictionary struct {
 
 func (x *ClickhouseConfig_ExternalDictionary) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2242,7 +2567,7 @@ func (x *ClickhouseConfig_ExternalDictionary) String() string {
 func (*ClickhouseConfig_ExternalDictionary) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2255,7 +2580,7 @@ func (x *ClickhouseConfig_ExternalDictionary) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ClickhouseConfig_ExternalDictionary.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_ExternalDictionary) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3}
 }
 
 func (x *ClickhouseConfig_ExternalDictionary) GetName() string {
@@ -2421,6 +2746,7 @@ func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource_) isClickhouseConfig
 }
 
 // Rollup settings for the GraphiteMergeTree table engine.
+// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#graphite-rollup).
 type ClickhouseConfig_GraphiteRollup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name for the specified combination of settings for Graphite rollup.
@@ -2428,20 +2754,20 @@ type ClickhouseConfig_GraphiteRollup struct {
 	// Pattern to use for the rollup.
 	Patterns []*ClickhouseConfig_GraphiteRollup_Pattern `protobuf:"bytes,2,rep,name=patterns,proto3" json:"patterns,omitempty"`
 	// The name of the column storing the metric name (Graphite sensor).
-	// Default: Path
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/ru/engines/table-engines/mergetree-family/graphitemergetree#required-columns)
+	//
+	// Default value: **Path**.
 	PathColumnName string `protobuf:"bytes,3,opt,name=path_column_name,json=pathColumnName,proto3" json:"path_column_name,omitempty"`
 	// The name of the column storing the time of measuring the metric.
-	// Default: Time
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/ru/engines/table-engines/mergetree-family/graphitemergetree#required-columns)
+	//
+	// Default value: **Time**.
 	TimeColumnName string `protobuf:"bytes,4,opt,name=time_column_name,json=timeColumnName,proto3" json:"time_column_name,omitempty"`
-	// The name of the column storing the value of the metric at the time set in time_column_name.
-	// Default: Value
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/ru/engines/table-engines/mergetree-family/graphitemergetree#required-columns)
+	// The name of the column storing the value of the metric at the time set in **time_column_name**.
+	//
+	// Default value: **Value**.
 	ValueColumnName string `protobuf:"bytes,5,opt,name=value_column_name,json=valueColumnName,proto3" json:"value_column_name,omitempty"`
 	// The name of the column storing the version of the metric.
-	// Default: Timestamp
-	// See in-depth description in [ClickHouse documentation](https://clickhouse.com/docs/ru/engines/table-engines/mergetree-family/graphitemergetree#required-columns)
+	//
+	// Default value: **Timestamp**.
 	VersionColumnName string `protobuf:"bytes,6,opt,name=version_column_name,json=versionColumnName,proto3" json:"version_column_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -2449,7 +2775,7 @@ type ClickhouseConfig_GraphiteRollup struct {
 
 func (x *ClickhouseConfig_GraphiteRollup) Reset() {
 	*x = ClickhouseConfig_GraphiteRollup{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2461,7 +2787,7 @@ func (x *ClickhouseConfig_GraphiteRollup) String() string {
 func (*ClickhouseConfig_GraphiteRollup) ProtoMessage() {}
 
 func (x *ClickhouseConfig_GraphiteRollup) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2474,7 +2800,7 @@ func (x *ClickhouseConfig_GraphiteRollup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClickhouseConfig_GraphiteRollup.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_GraphiteRollup) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 6}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 4}
 }
 
 func (x *ClickhouseConfig_GraphiteRollup) GetName() string {
@@ -2519,15 +2845,269 @@ func (x *ClickhouseConfig_GraphiteRollup) GetVersionColumnName() string {
 	return ""
 }
 
+// Kafka configuration settings.
+// For details, see [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
+type ClickhouseConfig_Kafka struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Protocol used to communicate with brokers.
+	//
+	// Default value: **SECURITY_PROTOCOL_PLAINTEXT**.
+	SecurityProtocol ClickhouseConfig_Kafka_SecurityProtocol `protobuf:"varint,1,opt,name=security_protocol,json=securityProtocol,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_SecurityProtocol" json:"security_protocol,omitempty"`
+	// SASL mechanism to use for authentication.
+	//
+	// Default value: **SASL_MECHANISM_GSSAPI**.
+	SaslMechanism ClickhouseConfig_Kafka_SaslMechanism `protobuf:"varint,2,opt,name=sasl_mechanism,json=saslMechanism,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_SaslMechanism" json:"sasl_mechanism,omitempty"`
+	// SASL username for use with the PLAIN and SASL-SCRAM mechanisms.
+	SaslUsername string `protobuf:"bytes,3,opt,name=sasl_username,json=saslUsername,proto3" json:"sasl_username,omitempty"`
+	// SASL password for use with the PLAIN and SASL-SCRAM mechanisms.
+	SaslPassword string `protobuf:"bytes,4,opt,name=sasl_password,json=saslPassword,proto3" json:"sasl_password,omitempty"`
+	// Enable OpenSSL's builtin broker (server) certificate verification.
+	//
+	// Default value: **true**.
+	EnableSslCertificateVerification *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=enable_ssl_certificate_verification,json=enableSslCertificateVerification,proto3" json:"enable_ssl_certificate_verification,omitempty"`
+	// Maximum allowed time between calls to consume messages for high-level consumers.
+	// If this interval is exceeded the consumer is considered failed and the group will
+	// rebalance in order to reassign the partitions to another consumer group member.
+	//
+	// Default value: **300000** (5 minutes).
+	MaxPollIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_poll_interval_ms,json=maxPollIntervalMs,proto3" json:"max_poll_interval_ms,omitempty"`
+	// Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms)
+	// to indicate its liveness to the broker. If no hearts are received by the broker for a group member within
+	// the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+	//
+	// Default value: **45000** (45 seconds).
+	SessionTimeoutMs *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=session_timeout_ms,json=sessionTimeoutMs,proto3" json:"session_timeout_ms,omitempty"`
+	// Debug context to enable.
+	Debug ClickhouseConfig_Kafka_Debug `protobuf:"varint,8,opt,name=debug,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_Debug" json:"debug,omitempty"`
+	// Action to take when there is no initial offset in offset store or the desired offset is out of range.
+	//
+	// Default value: **AUTO_OFFSET_RESET_LARGEST**.
+	AutoOffsetReset ClickhouseConfig_Kafka_AutoOffsetReset `protobuf:"varint,9,opt,name=auto_offset_reset,json=autoOffsetReset,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_AutoOffsetReset" json:"auto_offset_reset,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_Kafka) Reset() {
+	*x = ClickhouseConfig_Kafka{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_Kafka) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_Kafka) ProtoMessage() {}
+
+func (x *ClickhouseConfig_Kafka) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_Kafka.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_Kafka) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5}
+}
+
+func (x *ClickhouseConfig_Kafka) GetSecurityProtocol() ClickhouseConfig_Kafka_SecurityProtocol {
+	if x != nil {
+		return x.SecurityProtocol
+	}
+	return ClickhouseConfig_Kafka_SECURITY_PROTOCOL_UNSPECIFIED
+}
+
+func (x *ClickhouseConfig_Kafka) GetSaslMechanism() ClickhouseConfig_Kafka_SaslMechanism {
+	if x != nil {
+		return x.SaslMechanism
+	}
+	return ClickhouseConfig_Kafka_SASL_MECHANISM_UNSPECIFIED
+}
+
+func (x *ClickhouseConfig_Kafka) GetSaslUsername() string {
+	if x != nil {
+		return x.SaslUsername
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_Kafka) GetSaslPassword() string {
+	if x != nil {
+		return x.SaslPassword
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_Kafka) GetEnableSslCertificateVerification() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.EnableSslCertificateVerification
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_Kafka) GetMaxPollIntervalMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxPollIntervalMs
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_Kafka) GetSessionTimeoutMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.SessionTimeoutMs
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_Kafka) GetDebug() ClickhouseConfig_Kafka_Debug {
+	if x != nil {
+		return x.Debug
+	}
+	return ClickhouseConfig_Kafka_DEBUG_UNSPECIFIED
+}
+
+func (x *ClickhouseConfig_Kafka) GetAutoOffsetReset() ClickhouseConfig_Kafka_AutoOffsetReset {
+	if x != nil {
+		return x.AutoOffsetReset
+	}
+	return ClickhouseConfig_Kafka_AUTO_OFFSET_RESET_UNSPECIFIED
+}
+
+type ClickhouseConfig_KafkaTopic struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Kafka topic name.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Kafka topic settings.
+	Settings      *ClickhouseConfig_Kafka `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_KafkaTopic) Reset() {
+	*x = ClickhouseConfig_KafkaTopic{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_KafkaTopic) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_KafkaTopic) ProtoMessage() {}
+
+func (x *ClickhouseConfig_KafkaTopic) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_KafkaTopic.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_KafkaTopic) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 6}
+}
+
+func (x *ClickhouseConfig_KafkaTopic) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_KafkaTopic) GetSettings() *ClickhouseConfig_Kafka {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+// RabbitMQ integration settings.
+// For details, see [ClickHouse documentation](https://clickhouse.com/docs/engines/table-engines/integrations/rabbitmq).
+type ClickhouseConfig_Rabbitmq struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// RabbitMQ username.
+	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	// RabbitMQ password.
+	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	// RabbitMQ virtual host.
+	Vhost         string `protobuf:"bytes,3,opt,name=vhost,proto3" json:"vhost,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_Rabbitmq) Reset() {
+	*x = ClickhouseConfig_Rabbitmq{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_Rabbitmq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_Rabbitmq) ProtoMessage() {}
+
+func (x *ClickhouseConfig_Rabbitmq) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_Rabbitmq.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_Rabbitmq) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 7}
+}
+
+func (x *ClickhouseConfig_Rabbitmq) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_Rabbitmq) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_Rabbitmq) GetVhost() string {
+	if x != nil {
+		return x.Vhost
+	}
+	return ""
+}
+
 type ClickhouseConfig_QueryMaskingRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name for the rule.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// RE2 compatible regular expression.
-	// Required.
 	Regexp string `protobuf:"bytes,2,opt,name=regexp,proto3" json:"regexp,omitempty"`
 	// Substitution string for sensitive data.
-	// Default: six asterisks
+	//
+	// Default value: six asterisks.
 	Replace       string `protobuf:"bytes,3,opt,name=replace,proto3" json:"replace,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2535,7 +3115,7 @@ type ClickhouseConfig_QueryMaskingRule struct {
 
 func (x *ClickhouseConfig_QueryMaskingRule) Reset() {
 	*x = ClickhouseConfig_QueryMaskingRule{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2547,7 +3127,7 @@ func (x *ClickhouseConfig_QueryMaskingRule) String() string {
 func (*ClickhouseConfig_QueryMaskingRule) ProtoMessage() {}
 
 func (x *ClickhouseConfig_QueryMaskingRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2560,7 +3140,7 @@ func (x *ClickhouseConfig_QueryMaskingRule) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ClickhouseConfig_QueryMaskingRule.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_QueryMaskingRule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 7}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 8}
 }
 
 func (x *ClickhouseConfig_QueryMaskingRule) GetName() string {
@@ -2584,19 +3164,24 @@ func (x *ClickhouseConfig_QueryMaskingRule) GetReplace() string {
 	return ""
 }
 
+// Query cache configuration.
 type ClickhouseConfig_QueryCache struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum cache size in bytes.
-	// Default: 1073741824 (1 GiB)
+	//
+	// Default value: **1073741824** (1 GiB).
 	MaxSizeInBytes *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_size_in_bytes,json=maxSizeInBytes,proto3" json:"max_size_in_bytes,omitempty"`
-	// The maximum number of SELECT query results stored in the cache.
-	// Default: 1024
+	// The maximum number of **SELECT** query results stored in the cache.
+	//
+	// Default value: **1024**.
 	MaxEntries *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_entries,json=maxEntries,proto3" json:"max_entries,omitempty"`
-	// The maximum size in bytes SELECT query results may have to be saved in the cache.
-	// Dafault: 1048576 (1 MiB)
+	// The maximum size in bytes **SELECT** query results may have to be saved in the cache.
+	//
+	// Default value: **1048576** (1 MiB).
 	MaxEntrySizeInBytes *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_entry_size_in_bytes,json=maxEntrySizeInBytes,proto3" json:"max_entry_size_in_bytes,omitempty"`
-	// The maximum number of rows SELECT query results may have to be saved in the cache.
-	// Default: 30000000 (30 mil)
+	// The maximum number of rows **SELECT** query results may have to be saved in the cache.
+	//
+	// Default value: **30000000**.
 	MaxEntrySizeInRows *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=max_entry_size_in_rows,json=maxEntrySizeInRows,proto3" json:"max_entry_size_in_rows,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -2604,7 +3189,7 @@ type ClickhouseConfig_QueryCache struct {
 
 func (x *ClickhouseConfig_QueryCache) Reset() {
 	*x = ClickhouseConfig_QueryCache{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2616,7 +3201,7 @@ func (x *ClickhouseConfig_QueryCache) String() string {
 func (*ClickhouseConfig_QueryCache) ProtoMessage() {}
 
 func (x *ClickhouseConfig_QueryCache) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2629,7 +3214,7 @@ func (x *ClickhouseConfig_QueryCache) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClickhouseConfig_QueryCache.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_QueryCache) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 8}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 9}
 }
 
 func (x *ClickhouseConfig_QueryCache) GetMaxSizeInBytes() *wrapperspb.Int64Value {
@@ -2660,12 +3245,14 @@ func (x *ClickhouseConfig_QueryCache) GetMaxEntrySizeInRows() *wrapperspb.Int64V
 	return nil
 }
 
-// JDBC bridge for queries to external databases.
+// JDBC bridge configuration for queries to external databases.
 type ClickhouseConfig_JdbcBridge struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Host of jdbc bridge.
 	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
 	// Port of jdbc bridge.
+	//
+	// Default value: **9019**.
 	Port          *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=port,proto3" json:"port,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2673,7 +3260,7 @@ type ClickhouseConfig_JdbcBridge struct {
 
 func (x *ClickhouseConfig_JdbcBridge) Reset() {
 	*x = ClickhouseConfig_JdbcBridge{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2685,7 +3272,7 @@ func (x *ClickhouseConfig_JdbcBridge) String() string {
 func (*ClickhouseConfig_JdbcBridge) ProtoMessage() {}
 
 func (x *ClickhouseConfig_JdbcBridge) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2698,7 +3285,7 @@ func (x *ClickhouseConfig_JdbcBridge) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClickhouseConfig_JdbcBridge.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_JdbcBridge) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 9}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 10}
 }
 
 func (x *ClickhouseConfig_JdbcBridge) GetHost() string {
@@ -2715,583 +3302,25 @@ func (x *ClickhouseConfig_JdbcBridge) GetPort() *wrapperspb.Int64Value {
 	return nil
 }
 
-// Access control settings.
-type ClickhouseConfig_AccessControlImprovements struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Sets whether SELECT * FROM system.<table> requires any grants and can be executed by any user.
-	// If set to true then this query requires GRANT SELECT ON system.<table> just as for non-system tables.
-	SelectFromSystemDbRequiresGrant *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=select_from_system_db_requires_grant,json=selectFromSystemDbRequiresGrant,proto3" json:"select_from_system_db_requires_grant,omitempty"`
-	// Sets whether SELECT * FROM information_schema.<table> requires any grants and can be executed by any user.
-	// If set to true, then this query requires GRANT SELECT ON information_schema.<table>, just as for ordinary tables.
-	SelectFromInformationSchemaRequiresGrant *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=select_from_information_schema_requires_grant,json=selectFromInformationSchemaRequiresGrant,proto3" json:"select_from_information_schema_requires_grant,omitempty"`
-	unknownFields                            protoimpl.UnknownFields
-	sizeCache                                protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_AccessControlImprovements) Reset() {
-	*x = ClickhouseConfig_AccessControlImprovements{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_AccessControlImprovements) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_AccessControlImprovements) ProtoMessage() {}
-
-func (x *ClickhouseConfig_AccessControlImprovements) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_AccessControlImprovements.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_AccessControlImprovements) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 10}
-}
-
-func (x *ClickhouseConfig_AccessControlImprovements) GetSelectFromSystemDbRequiresGrant() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.SelectFromSystemDbRequiresGrant
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_AccessControlImprovements) GetSelectFromInformationSchemaRequiresGrant() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.SelectFromInformationSchemaRequiresGrant
-	}
-	return nil
-}
-
-type ClickhouseConfig_ExternalDictionary_HttpSource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// URL of the source dictionary available over HTTP.
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	// The data format. Valid values are all formats supported by ClickHouse SQL dialect.
-	Format string `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
-	// HTTP headers.
-	Headers       []*ClickhouseConfig_ExternalDictionary_HttpSource_Header `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_HttpSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_ExternalDictionary_HttpSource) ProtoMessage() {}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_HttpSource.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_HttpSource) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 0}
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource) GetFormat() string {
-	if x != nil {
-		return x.Format
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource) GetHeaders() []*ClickhouseConfig_ExternalDictionary_HttpSource_Header {
-	if x != nil {
-		return x.Headers
-	}
-	return nil
-}
-
-type ClickhouseConfig_ExternalDictionary_MysqlSource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the MySQL database to connect to.
-	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
-	// Name of the database table to use as a ClickHouse dictionary.
-	Table string `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
-	// Default port to use when connecting to a replica of the dictionary source.
-	Port int64 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// Name of the default user for replicas of the dictionary source.
-	User string `protobuf:"bytes,4,opt,name=user,proto3" json:"user,omitempty"`
-	// Password of the default user for replicas of the dictionary source.
-	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
-	// List of MySQL replicas of the database used as dictionary source.
-	Replicas []*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica `protobuf:"bytes,6,rep,name=replicas,proto3" json:"replicas,omitempty"`
-	// Selection criteria for the data in the specified MySQL table.
-	Where string `protobuf:"bytes,7,opt,name=where,proto3" json:"where,omitempty"`
-	// Query for checking the dictionary status, to pull only updated data.
-	// For more details, see [ClickHouse documentation on dictionaries](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_lifetime/).
-	InvalidateQuery string `protobuf:"bytes,8,opt,name=invalidate_query,json=invalidateQuery,proto3" json:"invalidate_query,omitempty"`
-	// Should the connection be closed after each request.
-	CloseConnection *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=close_connection,json=closeConnection,proto3" json:"close_connection,omitempty"`
-	// Should a connection be shared for some requests.
-	ShareConnection *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=share_connection,json=shareConnection,proto3" json:"share_connection,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_MysqlSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoMessage() {}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_MysqlSource.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_MysqlSource) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 1}
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetDb() string {
-	if x != nil {
-		return x.Db
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetTable() string {
-	if x != nil {
-		return x.Table
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetUser() string {
-	if x != nil {
-		return x.User
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetReplicas() []*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica {
-	if x != nil {
-		return x.Replicas
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetWhere() string {
-	if x != nil {
-		return x.Where
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetInvalidateQuery() string {
-	if x != nil {
-		return x.InvalidateQuery
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetCloseConnection() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.CloseConnection
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetShareConnection() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.ShareConnection
-	}
-	return nil
-}
-
-type ClickhouseConfig_ExternalDictionary_ClickhouseSource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the ClickHouse database.
-	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
-	// Name of the table in the specified database to be used as the dictionary source.
-	Table string `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
-	// ClickHouse host of the specified database.
-	Host string `protobuf:"bytes,3,opt,name=host,proto3" json:"host,omitempty"`
-	// Port to use when connecting to the host.
-	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// Name of the ClickHouse database user.
-	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
-	// Password of the ClickHouse database user.
-	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
-	// Selection criteria for the data in the specified ClickHouse table.
-	Where string `protobuf:"bytes,7,opt,name=where,proto3" json:"where,omitempty"`
-	// Use ssl for connection.
-	Secure        *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=secure,proto3" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_ClickhouseSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoMessage() {}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_ClickhouseSource.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 2}
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetDb() string {
-	if x != nil {
-		return x.Db
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetTable() string {
-	if x != nil {
-		return x.Table
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetHost() string {
-	if x != nil {
-		return x.Host
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetUser() string {
-	if x != nil {
-		return x.User
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetWhere() string {
-	if x != nil {
-		return x.Where
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetSecure() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.Secure
-	}
-	return nil
-}
-
-type ClickhouseConfig_ExternalDictionary_MongodbSource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the MongoDB database.
-	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
-	// Name of the collection in the specified database to be used as the dictionary source.
-	Collection string `protobuf:"bytes,2,opt,name=collection,proto3" json:"collection,omitempty"`
-	// MongoDB host of the specified database.
-	Host string `protobuf:"bytes,3,opt,name=host,proto3" json:"host,omitempty"`
-	// Port to use when connecting to the host.
-	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// Name of the MongoDB database user.
-	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
-	// Password of the MongoDB database user.
-	Password      string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
-	Options       string `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_MongodbSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoMessage() {}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_MongodbSource.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_MongodbSource) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 3}
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetDb() string {
-	if x != nil {
-		return x.Db
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetCollection() string {
-	if x != nil {
-		return x.Collection
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetHost() string {
-	if x != nil {
-		return x.Host
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetUser() string {
-	if x != nil {
-		return x.User
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetOptions() string {
-	if x != nil {
-		return x.Options
-	}
-	return ""
-}
-
-type ClickhouseConfig_ExternalDictionary_PostgresqlSource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the PostrgreSQL database.
-	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
-	// Name of the table in the specified database to be used as the dictionary source.
-	Table string `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
-	// Name of the PostrgreSQL host
-	Hosts []string `protobuf:"bytes,3,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	// Port to use when connecting to the host.
-	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// Name of the PostrgreSQL database user.
-	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
-	// Password of the PostrgreSQL database user.
-	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
-	// Query for checking the dictionary status, to pull only updated data.
-	// For more details, see [ClickHouse documentation on dictionaries](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_lifetime/).
-	InvalidateQuery string `protobuf:"bytes,7,opt,name=invalidate_query,json=invalidateQuery,proto3" json:"invalidate_query,omitempty"`
-	// Mode of SSL TCP/IP connection to the PostgreSQL host.
-	// For more details, see [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html).
-	SslMode       ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode `protobuf:"varint,8,opt,name=ssl_mode,json=sslMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode" json:"ssl_mode,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_PostgresqlSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource) ProtoMessage() {}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_PostgresqlSource.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 4}
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetDb() string {
-	if x != nil {
-		return x.Db
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetTable() string {
-	if x != nil {
-		return x.Table
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetHosts() []string {
-	if x != nil {
-		return x.Hosts
-	}
-	return nil
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetUser() string {
-	if x != nil {
-		return x.User
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetInvalidateQuery() string {
-	if x != nil {
-		return x.InvalidateQuery
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetSslMode() ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode {
-	if x != nil {
-		return x.SslMode
-	}
-	return ClickhouseConfig_ExternalDictionary_PostgresqlSource_SSL_MODE_UNSPECIFIED
-}
-
+// Configuration of external dictionary structure.
 type ClickhouseConfig_ExternalDictionary_Structure struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Single numeric key column for the dictionary.
 	Id *ClickhouseConfig_ExternalDictionary_Structure_Id `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Composite key for the dictionary, containing of one or more key columns.
+	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_structure/#composite-key).
 	Key *ClickhouseConfig_ExternalDictionary_Structure_Key `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
-	// Field holding the beginning of the range for dictionaries with `RANGE_HASHED` layout.
+	// Field holding the beginning of the range for dictionaries with **RANGE_HASHED** layout.
+	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_layout/#range-hashed).
 	RangeMin *ClickhouseConfig_ExternalDictionary_Structure_Attribute `protobuf:"bytes,4,opt,name=range_min,json=rangeMin,proto3" json:"range_min,omitempty"`
-	// Field holding the end of the range for dictionaries with `RANGE_HASHED` layout.
+	// Field holding the end of the range for dictionaries with **RANGE_HASHED** layout.
+	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_layout/#range-hashed).
 	RangeMax *ClickhouseConfig_ExternalDictionary_Structure_Attribute `protobuf:"bytes,5,opt,name=range_max,json=rangeMax,proto3" json:"range_max,omitempty"`
 	// Description of the fields available for database queries.
+	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/query_language/dicts/external_dicts_dict_structure/#attributes).
 	Attributes    []*ClickhouseConfig_ExternalDictionary_Structure_Attribute `protobuf:"bytes,2,rep,name=attributes,proto3" json:"attributes,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3300,7 +3329,7 @@ type ClickhouseConfig_ExternalDictionary_Structure struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Structure{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3312,7 +3341,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Structure) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3325,7 +3354,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure) ProtoReflect() protorefl
 
 // Deprecated: Use ClickhouseConfig_ExternalDictionary_Structure.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_ExternalDictionary_Structure) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 5}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 0}
 }
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure) GetId() *ClickhouseConfig_ExternalDictionary_Structure_Id {
@@ -3363,38 +3392,73 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure) GetAttributes() []*Click
 	return nil
 }
 
-// Layout determining how to store the dictionary in memory.
 type ClickhouseConfig_ExternalDictionary_Layout struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Layout type for an external dictionary.
+	// Layout type.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#ways-to-store-dictionaries-in-memory).
 	Type ClickhouseConfig_ExternalDictionary_Layout_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_ExternalDictionary_Layout_Type" json:"type,omitempty"`
 	// Number of cells in the cache. Rounded up to a power of two.
-	// Applicable only for CACHE and COMPLEX_KEY_CACHE layout types.
+	// Applicable only for **CACHE** and **COMPLEX_KEY_CACHE** layout types.
+	//
+	// Default value: **1000000000**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#cache).
 	SizeInCells int64 `protobuf:"varint,2,opt,name=size_in_cells,json=sizeInCells,proto3" json:"size_in_cells,omitempty"`
 	// Allows to read expired keys.
-	// Applicable only for CACHE and COMPLEX_KEY_CACHE layout types.
+	// Applicable only for **CACHE** and **COMPLEX_KEY_CACHE** layout types.
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#cache).
 	AllowReadExpiredKeys *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=allow_read_expired_keys,json=allowReadExpiredKeys,proto3" json:"allow_read_expired_keys,omitempty"`
 	// Max size of update queue.
-	// Applicable only for CACHE and COMPLEX_KEY_CACHE layout types.
+	// Applicable only for **CACHE** and **COMPLEX_KEY_CACHE** layout types.
+	//
+	// Default value: **100000**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#cache).
 	MaxUpdateQueueSize int64 `protobuf:"varint,6,opt,name=max_update_queue_size,json=maxUpdateQueueSize,proto3" json:"max_update_queue_size,omitempty"`
 	// Max timeout in milliseconds for push update task into queue.
-	// Applicable only for CACHE and COMPLEX_KEY_CACHE layout types.
+	// Applicable only for **CACHE** and **COMPLEX_KEY_CACHE** layout types.
+	//
+	// Default value: **10**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#cache).
 	UpdateQueuePushTimeoutMilliseconds int64 `protobuf:"varint,7,opt,name=update_queue_push_timeout_milliseconds,json=updateQueuePushTimeoutMilliseconds,proto3" json:"update_queue_push_timeout_milliseconds,omitempty"`
 	// Max wait timeout in milliseconds for update task to complete.
-	// Applicable only for CACHE and COMPLEX_KEY_CACHE layout types.
+	// Applicable only for **CACHE** and **COMPLEX_KEY_CACHE** layout types.
+	//
+	// Default value: **60000** (1 minute).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#cache).
 	QueryWaitTimeoutMilliseconds int64 `protobuf:"varint,8,opt,name=query_wait_timeout_milliseconds,json=queryWaitTimeoutMilliseconds,proto3" json:"query_wait_timeout_milliseconds,omitempty"`
 	// Max threads for cache dictionary update.
-	// Applicable only for CACHE and COMPLEX_KEY_CACHE layout types.
+	// Applicable only for **CACHE** and **COMPLEX_KEY_CACHE** layout types.
+	//
+	// Default value: **4**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#cache).
 	MaxThreadsForUpdates int64 `protobuf:"varint,9,opt,name=max_threads_for_updates,json=maxThreadsForUpdates,proto3" json:"max_threads_for_updates,omitempty"`
 	// Initial dictionary key size.
-	// Applicable only for FLAT layout type.
+	// Applicable only for **FLAT** layout type.
+	//
+	// Default value: **1024**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#flat).
 	InitialArraySize int64 `protobuf:"varint,10,opt,name=initial_array_size,json=initialArraySize,proto3" json:"initial_array_size,omitempty"`
 	// Maximum dictionary key size.
-	// Applicable only for FLAT layout type.
+	// Applicable only for **FLAT** layout type.
+	//
+	// Default value: **500000**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#flat).
 	MaxArraySize int64 `protobuf:"varint,3,opt,name=max_array_size,json=maxArraySize,proto3" json:"max_array_size,omitempty"`
-	// Allows to retrieve key attribute using dictGetString function.
+	// Allows to retrieve key attribute using **dictGetString** function.
 	// Enabling this option increases memory usage.
-	// Applicable only for IP_TRIE layout type.
+	// Applicable only for **IP_TRIE** layout type.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#ip_trie).
 	AccessToKeyFromAttributes *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=access_to_key_from_attributes,json=accessToKeyFromAttributes,proto3" json:"access_to_key_from_attributes,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
@@ -3402,7 +3466,7 @@ type ClickhouseConfig_ExternalDictionary_Layout struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Layout) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Layout{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3414,7 +3478,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Layout) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Layout) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Layout) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3427,7 +3491,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Layout) ProtoReflect() protoreflect
 
 // Deprecated: Use ClickhouseConfig_ExternalDictionary_Layout.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_ExternalDictionary_Layout) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 6}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 1}
 }
 
 func (x *ClickhouseConfig_ExternalDictionary_Layout) GetType() ClickhouseConfig_ExternalDictionary_Layout_Type {
@@ -3512,7 +3576,7 @@ type ClickhouseConfig_ExternalDictionary_Range struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Range) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Range{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3524,7 +3588,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Range) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Range) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Range) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3537,7 +3601,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Range) ProtoReflect() protoreflect.
 
 // Deprecated: Use ClickhouseConfig_ExternalDictionary_Range.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_ExternalDictionary_Range) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 7}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 2}
 }
 
 func (x *ClickhouseConfig_ExternalDictionary_Range) GetMin() int64 {
@@ -3554,91 +3618,33 @@ func (x *ClickhouseConfig_ExternalDictionary_Range) GetMax() int64 {
 	return 0
 }
 
-type ClickhouseConfig_ExternalDictionary_HttpSource_Header struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_HttpSource_Header{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClickhouseConfig_ExternalDictionary_HttpSource_Header) ProtoMessage() {}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_HttpSource_Header.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_HttpSource_Header) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 0, 0}
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
-type ClickhouseConfig_ExternalDictionary_MysqlSource_Replica struct {
+type ClickhouseConfig_ExternalDictionary_HttpSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// MySQL host of the replica.
-	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	// The priority of the replica that ClickHouse takes into account when connecting.
-	// Replica with the highest priority should have this field set to the lowest number.
-	Priority int64 `protobuf:"varint,2,opt,name=priority,proto3" json:"priority,omitempty"`
-	// Port to use when connecting to the replica.
-	// If a port is not specified for a replica, ClickHouse uses the port specified for the source.
-	Port int64 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// Name of the MySQL database user.
-	User string `protobuf:"bytes,4,opt,name=user,proto3" json:"user,omitempty"`
-	// Password of the MySQL database user.
-	Password      string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
+	// URL of the source dictionary available over HTTP.
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// The data format. Valid values are all formats [supported by ClickHouse SQL dialect](https://clickhouse.com/docs/en/interfaces/formats/).
+	Format string `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
+	// HTTP headers.
+	Headers       []*ClickhouseConfig_ExternalDictionary_HttpSource_Header `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_MysqlSource_Replica{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_HttpSource{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) String() string {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoMessage() {}
+func (*ClickhouseConfig_ExternalDictionary_HttpSource) ProtoMessage() {}
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3649,44 +3655,563 @@ func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoReflect()
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_MysqlSource_Replica.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 1, 0}
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_HttpSource.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_HttpSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 3}
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetHost() string {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource) GetUrl() string {
 	if x != nil {
-		return x.Host
+		return x.Url
 	}
 	return ""
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetPriority() int64 {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource) GetFormat() string {
 	if x != nil {
-		return x.Priority
+		return x.Format
 	}
-	return 0
+	return ""
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetPort() int64 {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource) GetHeaders() []*ClickhouseConfig_ExternalDictionary_HttpSource_Header {
+	if x != nil {
+		return x.Headers
+	}
+	return nil
+}
+
+type ClickhouseConfig_ExternalDictionary_MysqlSource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Database name.
+	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
+	// Table name.
+	Table string `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
+	// Port to use when connecting to a replica of the dictionary source.
+	Port int64 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	// Name of the user for replicas of the dictionary source.
+	User string `protobuf:"bytes,4,opt,name=user,proto3" json:"user,omitempty"`
+	// Password of the user for replicas of the dictionary source.
+	Password string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
+	// List of MySQL replicas of the database used as dictionary source.
+	Replicas []*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica `protobuf:"bytes,6,rep,name=replicas,proto3" json:"replicas,omitempty"`
+	// Selection criteria for the data in the specified MySQL table.
+	Where string `protobuf:"bytes,7,opt,name=where,proto3" json:"where,omitempty"`
+	// Query for checking the dictionary status, to pull only updated data.
+	InvalidateQuery string `protobuf:"bytes,8,opt,name=invalidate_query,json=invalidateQuery,proto3" json:"invalidate_query,omitempty"`
+	// Should a connection be closed after each request.
+	CloseConnection *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=close_connection,json=closeConnection,proto3" json:"close_connection,omitempty"`
+	// Should a connection be shared for some requests.
+	ShareConnection *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=share_connection,json=shareConnection,proto3" json:"share_connection,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_MysqlSource{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoMessage() {}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_MysqlSource.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_MysqlSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 4}
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetDb() string {
+	if x != nil {
+		return x.Db
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetTable() string {
+	if x != nil {
+		return x.Table
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetPort() int64 {
 	if x != nil {
 		return x.Port
 	}
 	return 0
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetUser() string {
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetUser() string {
 	if x != nil {
 		return x.User
 	}
 	return ""
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetPassword() string {
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetPassword() string {
 	if x != nil {
 		return x.Password
 	}
 	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetReplicas() []*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica {
+	if x != nil {
+		return x.Replicas
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetWhere() string {
+	if x != nil {
+		return x.Where
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetInvalidateQuery() string {
+	if x != nil {
+		return x.InvalidateQuery
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetCloseConnection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.CloseConnection
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) GetShareConnection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ShareConnection
+	}
+	return nil
+}
+
+type ClickhouseConfig_ExternalDictionary_ClickhouseSource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Database name.
+	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
+	// Table name.
+	Table string `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
+	// ClickHouse host.
+	Host string `protobuf:"bytes,3,opt,name=host,proto3" json:"host,omitempty"`
+	// Port to use when connecting to the host.
+	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Name of the ClickHouse database user.
+	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
+	// Password of the ClickHouse database user.
+	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
+	// Selection criteria for the data in the specified ClickHouse table.
+	Where string `protobuf:"bytes,7,opt,name=where,proto3" json:"where,omitempty"`
+	// Determines whether to use TLS for connection.
+	Secure        *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=secure,proto3" json:"secure,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_ClickhouseSource{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoMessage() {}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_ClickhouseSource.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 5}
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetDb() string {
+	if x != nil {
+		return x.Db
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetTable() string {
+	if x != nil {
+		return x.Table
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetUser() string {
+	if x != nil {
+		return x.User
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetWhere() string {
+	if x != nil {
+		return x.Where
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) GetSecure() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.Secure
+	}
+	return nil
+}
+
+type ClickhouseConfig_ExternalDictionary_MongodbSource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Database name.
+	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
+	// Collection name.
+	Collection string `protobuf:"bytes,2,opt,name=collection,proto3" json:"collection,omitempty"`
+	// MongoDB host.
+	Host string `protobuf:"bytes,3,opt,name=host,proto3" json:"host,omitempty"`
+	// Port to use when connecting to the host.
+	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Name of the MongoDB database user.
+	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
+	// Password of the MongoDB database user.
+	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
+	// Dictionary source options.
+	Options       string `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_MongodbSource{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoMessage() {}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_MongodbSource.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_MongodbSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 6}
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetDb() string {
+	if x != nil {
+		return x.Db
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetCollection() string {
+	if x != nil {
+		return x.Collection
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetUser() string {
+	if x != nil {
+		return x.User
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) GetOptions() string {
+	if x != nil {
+		return x.Options
+	}
+	return ""
+}
+
+type ClickhouseConfig_ExternalDictionary_PostgresqlSource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Database name.
+	Db string `protobuf:"bytes,1,opt,name=db,proto3" json:"db,omitempty"`
+	// Table name.
+	Table string `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
+	// PostgreSQL hosts.
+	Hosts []string `protobuf:"bytes,3,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	// Port to use when connecting to the PostgreSQL hosts.
+	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Name of the PostrgreSQL database user.
+	User string `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
+	// Password of the PostrgreSQL database user.
+	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
+	// Query for checking the dictionary status, to pull only updated data.
+	InvalidateQuery string `protobuf:"bytes,7,opt,name=invalidate_query,json=invalidateQuery,proto3" json:"invalidate_query,omitempty"`
+	// Mode of SSL TCP/IP connection to the PostgreSQL host.
+	SslMode       ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode `protobuf:"varint,8,opt,name=ssl_mode,json=sslMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode" json:"ssl_mode,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_PostgresqlSource{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource) ProtoMessage() {}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_PostgresqlSource.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 7}
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetDb() string {
+	if x != nil {
+		return x.Db
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetTable() string {
+	if x != nil {
+		return x.Table
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetHosts() []string {
+	if x != nil {
+		return x.Hosts
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetUser() string {
+	if x != nil {
+		return x.User
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetInvalidateQuery() string {
+	if x != nil {
+		return x.InvalidateQuery
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) GetSslMode() ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode {
+	if x != nil {
+		return x.SslMode
+	}
+	return ClickhouseConfig_ExternalDictionary_PostgresqlSource_SSL_MODE_UNSPECIFIED
+}
+
+// Numeric key.
+type ClickhouseConfig_ExternalDictionary_Structure_Id struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the numeric key.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_Structure_Id{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoMessage() {}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_Structure_Id.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_Structure_Id) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 0, 0}
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// Complex key.
+type ClickhouseConfig_ExternalDictionary_Structure_Key struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Attributes of a complex key.
+	Attributes    []*ClickhouseConfig_ExternalDictionary_Structure_Attribute `protobuf:"bytes,1,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_Structure_Key{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoMessage() {}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_Structure_Key.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_Structure_Key) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 0, 1}
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) GetAttributes() []*ClickhouseConfig_ExternalDictionary_Structure_Attribute {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
 }
 
 type ClickhouseConfig_ExternalDictionary_Structure_Attribute struct {
@@ -3700,10 +4225,12 @@ type ClickhouseConfig_ExternalDictionary_Structure_Attribute struct {
 	// Expression, describing the attribute, if applicable.
 	Expression string `protobuf:"bytes,4,opt,name=expression,proto3" json:"expression,omitempty"`
 	// Indication of hierarchy support.
-	// Default value: `false`.
+	//
+	// Default value: **false**.
 	Hierarchical bool `protobuf:"varint,5,opt,name=hierarchical,proto3" json:"hierarchical,omitempty"`
 	// Indication of injective mapping "id -> attribute".
-	// Default value: `false`.
+	//
+	// Default value: **false**.
 	Injective     bool `protobuf:"varint,6,opt,name=injective,proto3" json:"injective,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3736,7 +4263,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Attribute) ProtoReflect()
 
 // Deprecated: Use ClickhouseConfig_ExternalDictionary_Structure_Attribute.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_ExternalDictionary_Structure_Attribute) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 5, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 0, 2}
 }
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Attribute) GetName() string {
@@ -3781,29 +4308,30 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Attribute) GetInjective()
 	return false
 }
 
-// Numeric key.
-type ClickhouseConfig_ExternalDictionary_Structure_Id struct {
+type ClickhouseConfig_ExternalDictionary_HttpSource_Header struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the numeric key.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Header name.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Header value.
+	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_Structure_Id{}
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_HttpSource_Header{}
 	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) String() string {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoMessage() {}
+func (*ClickhouseConfig_ExternalDictionary_HttpSource_Header) ProtoMessage() {}
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoReflect() protoreflect.Message {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3815,41 +4343,59 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoReflect() protor
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_Structure_Id.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_Structure_Id) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 5, 1}
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_HttpSource_Header.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_HttpSource_Header) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 3, 0}
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) GetName() string {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-// Complex key.
-type ClickhouseConfig_ExternalDictionary_Structure_Key struct {
+func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type ClickhouseConfig_ExternalDictionary_MysqlSource_Replica struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Attributes of a complex key.
-	Attributes    []*ClickhouseConfig_ExternalDictionary_Structure_Attribute `protobuf:"bytes,1,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	// MySQL host of the replica.
+	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	// The priority of the replica that ClickHouse takes into account when connecting.
+	// Replica with the highest priority should have this field set to the lowest number.
+	Priority int64 `protobuf:"varint,2,opt,name=priority,proto3" json:"priority,omitempty"`
+	// Port to use when connecting to the replica.
+	// If a port is not specified for a replica, ClickHouse uses the port specified for the source.
+	Port int64 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	// Name of the MySQL database user.
+	// If a user is not specified for a replica, ClickHouse uses the user specified for the source.
+	User string `protobuf:"bytes,4,opt,name=user,proto3" json:"user,omitempty"`
+	// Password of the MySQL database user.
+	// If a password is not specified for a replica, ClickHouse uses the password specified for the source.
+	Password      string `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) Reset() {
-	*x = ClickhouseConfig_ExternalDictionary_Structure_Key{}
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) Reset() {
+	*x = ClickhouseConfig_ExternalDictionary_MysqlSource_Replica{}
 	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) String() string {
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoMessage() {}
+func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoMessage() {}
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoReflect() protoreflect.Message {
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3861,25 +4407,54 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoReflect() proto
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClickhouseConfig_ExternalDictionary_Structure_Key.ProtoReflect.Descriptor instead.
-func (*ClickhouseConfig_ExternalDictionary_Structure_Key) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 5, 5, 2}
+// Deprecated: Use ClickhouseConfig_ExternalDictionary_MysqlSource_Replica.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 3, 4, 0}
 }
 
-func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) GetAttributes() []*ClickhouseConfig_ExternalDictionary_Structure_Attribute {
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetHost() string {
 	if x != nil {
-		return x.Attributes
+		return x.Host
 	}
-	return nil
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetPriority() int64 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetUser() string {
+	if x != nil {
+		return x.User
+	}
+	return ""
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
 }
 
 type ClickhouseConfig_GraphiteRollup_Pattern struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Pattern for metric names.
+	// A pattern for the metric name (a regular or DSL).
 	Regexp string `protobuf:"bytes,1,opt,name=regexp,proto3" json:"regexp,omitempty"`
-	// Name of the aggregating function to apply to data of the age specified in [retention].
+	// The name of the aggregating function to apply to data whose age falls within the range [age, age + precision].
+	// Accepted functions: **min**, **max**, **any**, **avg**. The average is calculated imprecisely, like the average of the averages.
 	Function string `protobuf:"bytes,2,opt,name=function,proto3" json:"function,omitempty"`
-	// Age of data to use for thinning.
+	// Retention rules.
 	Retention     []*ClickhouseConfig_GraphiteRollup_Pattern_Retention `protobuf:"bytes,3,rep,name=retention,proto3" json:"retention,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3912,7 +4487,7 @@ func (x *ClickhouseConfig_GraphiteRollup_Pattern) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ClickhouseConfig_GraphiteRollup_Pattern.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_GraphiteRollup_Pattern) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 6, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 4, 0}
 }
 
 func (x *ClickhouseConfig_GraphiteRollup_Pattern) GetRegexp() string {
@@ -3938,9 +4513,9 @@ func (x *ClickhouseConfig_GraphiteRollup_Pattern) GetRetention() []*ClickhouseCo
 
 type ClickhouseConfig_GraphiteRollup_Pattern_Retention struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Minimum age of the data in seconds.
+	// The minimum age of the data in seconds.
 	Age int64 `protobuf:"varint,1,opt,name=age,proto3" json:"age,omitempty"`
-	// Precision of determining the age of the data, in seconds.
+	// Precision of determining the age of the data, in seconds. Should be a divisor for 86400 (seconds in a day).
 	Precision     int64 `protobuf:"varint,2,opt,name=precision,proto3" json:"precision,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3973,7 +4548,7 @@ func (x *ClickhouseConfig_GraphiteRollup_Pattern_Retention) ProtoReflect() proto
 
 // Deprecated: Use ClickhouseConfig_GraphiteRollup_Pattern_Retention.ProtoReflect.Descriptor instead.
 func (*ClickhouseConfig_GraphiteRollup_Pattern_Retention) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 6, 0, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 4, 0, 0}
 }
 
 func (x *ClickhouseConfig_GraphiteRollup_Pattern_Retention) GetAge() int64 {
@@ -3994,40 +4569,29 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa7\xa0\x01\n" +
-	"\x10ClickhouseConfig\x12]\n" +
-	"\tlog_level\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevelR\blogLevel\x12`\n" +
-	"\n" +
-	"merge_tree\x18\x02 \x01(\v2A.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTreeR\tmergeTree\x12e\n" +
-	"\vcompression\x18\x03 \x03(\v2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.CompressionR\vcompression\x12n\n" +
-	"\fdictionaries\x18\x04 \x03(\v2J.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionaryR\fdictionaries\x12o\n" +
-	"\x0fgraphite_rollup\x18\x05 \x03(\v2F.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollupR\x0egraphiteRollup\x12S\n" +
-	"\x05kafka\x18# \x01(\v2=.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaR\x05kafka\x12e\n" +
-	"\fkafka_topics\x18$ \x03(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopicR\vkafkaTopics\x12\\\n" +
-	"\brabbitmq\x18% \x01(\v2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.RabbitmqR\brabbitmq\x12N\n" +
-	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x0emaxConnections\x12[\n" +
-	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x14maxConcurrentQueries\x12I\n" +
-	"\x12keep_alive_timeout\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x10keepAliveTimeout\x12S\n" +
-	"\x17uncompressed_cache_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x15uncompressedCacheSize\x12K\n" +
-	"\x0fmark_cache_size\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\rmarkCacheSize\x12O\n" +
-	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxTableSizeToDrop\x12W\n" +
-	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16maxPartitionSizeToDrop\x12p\n" +
-	"$builtin_dictionaries_reload_interval\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R!builtinDictionariesReloadInterval\x12\x1a\n" +
-	"\btimezone\x18\x0e \x01(\tR\btimezone\x12C\n" +
-	"\x0fgeobase_enabled\x18B \x01(\v2\x1a.google.protobuf.BoolValueR\x0egeobaseEnabled\x12\x1f\n" +
-	"\vgeobase_uri\x18\x0f \x01(\tR\n" +
-	"geobaseUri\x12T\n" +
-	"\x18query_log_retention_size\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15queryLogRetentionSize\x12T\n" +
-	"\x18query_log_retention_time\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15queryLogRetentionTime\x12S\n" +
-	"\x18query_thread_log_enabled\x18\x12 \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryThreadLogEnabled\x12a\n" +
-	"\x1fquery_thread_log_retention_size\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryThreadLogRetentionSize\x12a\n" +
-	"\x1fquery_thread_log_retention_time\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryThreadLogRetentionTime\x12R\n" +
-	"\x17part_log_retention_size\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14partLogRetentionSize\x12R\n" +
-	"\x17part_log_retention_time\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14partLogRetentionTime\x12H\n" +
-	"\x12metric_log_enabled\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR\x10metricLogEnabled\x12V\n" +
-	"\x19metric_log_retention_size\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueR\x16metricLogRetentionSize\x12V\n" +
-	"\x19metric_log_retention_time\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueR\x16metricLogRetentionTime\x12F\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\xa3\x01\n" +
+	"\x10ClickhouseConfig\x12V\n" +
+	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x12backgroundPoolSize\x12}\n" +
+	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12g\n" +
+	"\x1dbackground_schedule_pool_size\x18\" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x1abackgroundSchedulePoolSize\x12e\n" +
+	"\x1cbackground_fetches_pool_size\x18& \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x19backgroundFetchesPoolSize\x12_\n" +
+	"\x19background_move_pool_size\x18' \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x16backgroundMovePoolSize\x12~\n" +
+	")background_distributed_schedule_pool_size\x18( \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R%backgroundDistributedSchedulePoolSize\x12\x7f\n" +
+	"*background_buffer_flush_schedule_pool_size\x18) \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R%backgroundBufferFlushSchedulePoolSize\x12\x83\x01\n" +
+	",background_message_broker_schedule_pool_size\x18. \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R'backgroundMessageBrokerSchedulePoolSize\x12c\n" +
+	"\x1bbackground_common_pool_size\x18/ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x18backgroundCommonPoolSize\x12P\n" +
+	"\x16dictionaries_lazy_load\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x14dictionariesLazyLoad\x12]\n" +
+	"\tlog_level\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevelR\blogLevel\x12]\n" +
+	"\x18query_log_retention_size\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15queryLogRetentionSize\x12]\n" +
+	"\x18query_log_retention_time\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15queryLogRetentionTime\x12S\n" +
+	"\x18query_thread_log_enabled\x18\x12 \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryThreadLogEnabled\x12j\n" +
+	"\x1fquery_thread_log_retention_size\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryThreadLogRetentionSize\x12j\n" +
+	"\x1fquery_thread_log_retention_time\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryThreadLogRetentionTime\x12[\n" +
+	"\x17part_log_retention_size\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x14partLogRetentionSize\x12[\n" +
+	"\x17part_log_retention_time\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x14partLogRetentionTime\x12H\n" +
+	"\x12metric_log_enabled\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR\x10metricLogEnabled\x12_\n" +
+	"\x19metric_log_retention_size\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16metricLogRetentionSize\x12_\n" +
+	"\x19metric_log_retention_time\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16metricLogRetentionTime\x12F\n" +
 	"\x11trace_log_enabled\x18\x1a \x01(\v2\x1a.google.protobuf.BoolValueR\x0ftraceLogEnabled\x12T\n" +
 	"\x18trace_log_retention_size\x18\x1b \x01(\v2\x1b.google.protobuf.Int64ValueR\x15traceLogRetentionSize\x12T\n" +
 	"\x18trace_log_retention_time\x18\x1c \x01(\v2\x1b.google.protobuf.Int64ValueR\x15traceLogRetentionTime\x12D\n" +
@@ -4053,69 +4617,87 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x1fasynchronous_insert_log_enabled\x18? \x01(\v2\x1a.google.protobuf.BoolValueR\x1casynchronousInsertLogEnabled\x12x\n" +
 	"&asynchronous_insert_log_retention_size\x18@ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\"asynchronousInsertLogRetentionSize\x12x\n" +
 	"&asynchronous_insert_log_retention_time\x18A \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\"asynchronousInsertLogRetentionTime\x12_\n" +
-	"\x1eprocessors_profile_log_enabled\x18G \x01(\v2\x1a.google.protobuf.BoolValueR\x1bprocessorsProfileLogEnabled\x12m\n" +
-	"%processors_profile_log_retention_size\x18H \x01(\v2\x1b.google.protobuf.Int64ValueR!processorsProfileLogRetentionSize\x12m\n" +
-	"%processors_profile_log_retention_time\x18I \x01(\v2\x1b.google.protobuf.Int64ValueR!processorsProfileLogRetentionTime\x12F\n" +
-	"\x11error_log_enabled\x18K \x01(\v2\x1a.google.protobuf.BoolValueR\x0ferrorLogEnabled\x12T\n" +
-	"\x18error_log_retention_size\x18L \x01(\v2\x1b.google.protobuf.Int64ValueR\x15errorLogRetentionSize\x12T\n" +
-	"\x18error_log_retention_time\x18M \x01(\v2\x1b.google.protobuf.Int64ValueR\x15errorLogRetentionTime\x12\x91\x01\n" +
-	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12U\n" +
-	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x12backgroundPoolSize\x12\x85\x01\n" +
-	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R)backgroundMergesMutationsConcurrencyRatio\x12f\n" +
-	"\x1dbackground_schedule_pool_size\x18\" \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x1abackgroundSchedulePoolSize\x12d\n" +
-	"\x1cbackground_fetches_pool_size\x18& \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x19backgroundFetchesPoolSize\x12^\n" +
-	"\x19background_move_pool_size\x18' \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x16backgroundMovePoolSize\x12}\n" +
-	")background_distributed_schedule_pool_size\x18( \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R%backgroundDistributedSchedulePoolSize\x12~\n" +
-	"*background_buffer_flush_schedule_pool_size\x18) \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R%backgroundBufferFlushSchedulePoolSize\x12\x82\x01\n" +
-	",background_message_broker_schedule_pool_size\x18. \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R'backgroundMessageBrokerSchedulePoolSize\x12b\n" +
-	"\x1bbackground_common_pool_size\x18/ \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x18backgroundCommonPoolSize\x12G\n" +
+	"\x1eprocessors_profile_log_enabled\x18G \x01(\v2\x1a.google.protobuf.BoolValueR\x1bprocessorsProfileLogEnabled\x12v\n" +
+	"%processors_profile_log_retention_size\x18H \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!processorsProfileLogRetentionSize\x12v\n" +
+	"%processors_profile_log_retention_time\x18I \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!processorsProfileLogRetentionTime\x12F\n" +
+	"\x11error_log_enabled\x18K \x01(\v2\x1a.google.protobuf.BoolValueR\x0ferrorLogEnabled\x12]\n" +
+	"\x18error_log_retention_size\x18L \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15errorLogRetentionSize\x12]\n" +
+	"\x18error_log_retention_time\x18M \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15errorLogRetentionTime\x12\x91\x01\n" +
+	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12N\n" +
+	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x0emaxConnections\x12[\n" +
+	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=50R\x14maxConcurrentQueries\x12X\n" +
+	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxTableSizeToDrop\x12`\n" +
+	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16maxPartitionSizeToDrop\x12I\n" +
+	"\x12keep_alive_timeout\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x10keepAliveTimeout\x12S\n" +
+	"\x17uncompressed_cache_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x15uncompressedCacheSize\x12C\n" +
+	"\x0fmark_cache_size\x18\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueR\rmarkCacheSize\x12\x1a\n" +
+	"\btimezone\x18\x0e \x01(\tR\btimezone\x12C\n" +
+	"\x0fgeobase_enabled\x18B \x01(\v2\x1a.google.protobuf.BoolValueR\x0egeobaseEnabled\x12\x1f\n" +
+	"\vgeobase_uri\x18\x0f \x01(\tR\n" +
+	"geobaseUri\x12G\n" +
 	"\x10default_database\x18+ \x01(\v2\x1c.google.protobuf.StringValueR\x0fdefaultDatabase\x12X\n" +
 	"\x1atotal_memory_profiler_step\x18, \x01(\v2\x1b.google.protobuf.Int64ValueR\x17totalMemoryProfilerStep\x12r\n" +
-	"'total_memory_tracker_sample_probability\x18- \x01(\v2\x1c.google.protobuf.DoubleValueR#totalMemoryTrackerSampleProbability\x12\x80\x01\n" +
-	"\x13query_masking_rules\x18C \x03(\v2H.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRuleB\x06\x82\xc81\x02>0R\x11queryMaskingRules\x12P\n" +
-	"\x16dictionaries_lazy_load\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x14dictionariesLazyLoad\x12c\n" +
+	"'total_memory_tracker_sample_probability\x18- \x01(\v2\x1c.google.protobuf.DoubleValueR#totalMemoryTrackerSampleProbability\x12V\n" +
+	"\x14async_insert_threads\x18O \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12asyncInsertThreads\x12B\n" +
+	"\x0ebackup_threads\x18P \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackupThreads\x12D\n" +
+	"\x0frestore_threads\x18Q \x01(\v2\x1b.google.protobuf.Int64ValueR\x0erestoreThreads\x12`\n" +
+	"\n" +
+	"merge_tree\x18\x02 \x01(\v2A.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTreeR\tmergeTree\x12e\n" +
+	"\vcompression\x18\x03 \x03(\v2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.CompressionR\vcompression\x12n\n" +
+	"\fdictionaries\x18\x04 \x03(\v2J.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionaryR\fdictionaries\x12o\n" +
+	"\x0fgraphite_rollup\x18\x05 \x03(\v2F.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollupR\x0egraphiteRollup\x12S\n" +
+	"\x05kafka\x18# \x01(\v2=.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaR\x05kafka\x12e\n" +
+	"\fkafka_topics\x18$ \x03(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopicR\vkafkaTopics\x12\\\n" +
+	"\brabbitmq\x18% \x01(\v2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.RabbitmqR\brabbitmq\x12x\n" +
+	"\x13query_masking_rules\x18C \x03(\v2H.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRuleR\x11queryMaskingRules\x12c\n" +
 	"\vquery_cache\x18E \x01(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCacheR\n" +
 	"queryCache\x12c\n" +
 	"\vjdbc_bridge\x18F \x01(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridgeR\n" +
-	"jdbcBridge\x1a\x85!\n" +
-	"\tMergeTree\x12c\n" +
-	"\x1freplicated_deduplication_window\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1dreplicatedDeduplicationWindow\x12r\n" +
-	"'replicated_deduplication_window_seconds\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR$replicatedDeduplicationWindowSeconds\x12N\n" +
+	"jdbcBridge\x12A\n" +
+	"\x0emysql_protocol\x18N \x01(\v2\x1a.google.protobuf.BoolValueR\rmysqlProtocol\x12p\n" +
+	"$builtin_dictionaries_reload_interval\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R!builtinDictionariesReloadInterval\x1a\x83\x02\n" +
+	"\x19AccessControlImprovements\x12i\n" +
+	"$select_from_system_db_requires_grant\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1fselectFromSystemDbRequiresGrant\x12{\n" +
+	"-select_from_information_schema_requires_grant\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR(selectFromInformationSchemaRequiresGrant\x1a\xa6!\n" +
+	"\tMergeTree\x12N\n" +
 	"\x15parts_to_delay_insert\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12partsToDelayInsert\x12N\n" +
-	"\x15parts_to_throw_insert\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12partsToThrowInsert\x12_\n" +
-	"\x1einactive_parts_to_delay_insert\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x1ainactivePartsToDelayInsert\x12_\n" +
+	"\x15parts_to_throw_insert\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12partsToThrowInsert\x12h\n" +
+	"\x1einactive_parts_to_delay_insert\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1ainactivePartsToDelayInsert\x12h\n" +
 	"\x1einactive_parts_to_throw_insert\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x1ainactivePartsToThrowInsert\x12_\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1ainactivePartsToThrowInsert\x12q\n" +
+	"$max_avg_part_size_for_too_many_parts\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1dmaxAvgPartSizeForTooManyParts\x12H\n" +
+	"\x12max_parts_in_total\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxPartsInTotal\x12_\n" +
 	"\x1emax_replicated_merges_in_queue\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1amaxReplicatedMergesInQueue\x12\x8e\x01\n" +
-	"9number_of_free_entries_in_pool_to_lower_max_size_of_merge\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR.numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge\x12m\n" +
-	"'max_bytes_to_merge_at_min_space_in_pool\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fmaxBytesToMergeAtMinSpaceInPool\x12m\n" +
-	"'max_bytes_to_merge_at_max_space_in_pool\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fmaxBytesToMergeAtMaxSpaceInPool\x12Q\n" +
+	"9number_of_free_entries_in_pool_to_lower_max_size_of_merge\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR.numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge\x12\x83\x01\n" +
+	"2number_of_free_entries_in_pool_to_execute_mutation\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueR*numberOfFreeEntriesInPoolToExecuteMutation\x12m\n" +
+	"'max_bytes_to_merge_at_min_space_in_pool\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fmaxBytesToMergeAtMinSpaceInPool\x12v\n" +
+	"'max_bytes_to_merge_at_max_space_in_pool\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1fmaxBytesToMergeAtMaxSpaceInPool\x12Q\n" +
 	"\x17min_bytes_for_wide_part\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x13minBytesForWidePart\x12O\n" +
-	"\x16min_rows_for_wide_part\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\x12minRowsForWidePart\x12I\n" +
-	"\x13ttl_only_drop_parts\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\x10ttlOnlyDropParts\x12k\n" +
-	"%allow_remote_fs_zero_copy_replication\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueR allowRemoteFsZeroCopyReplication\x12P\n" +
-	"\x16merge_with_ttl_timeout\x18\x0f \x01(\v2\x1b.google.protobuf.Int64ValueR\x13mergeWithTtlTimeout\x12k\n" +
-	"$merge_with_recompression_ttl_timeout\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueR mergeWithRecompressionTtlTimeout\x12H\n" +
-	"\x12max_parts_in_total\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxPartsInTotal\x12j\n" +
-	"%max_number_of_merges_with_ttl_in_pool\x18\x12 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1emaxNumberOfMergesWithTtlInPool\x12M\n" +
-	"\x14cleanup_delay_period\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12cleanupDelayPeriod\x12\x83\x01\n" +
-	"2number_of_free_entries_in_pool_to_execute_mutation\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueR*numberOfFreeEntriesInPoolToExecuteMutation\x12q\n" +
-	"$max_avg_part_size_for_too_many_parts\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1dmaxAvgPartSizeForTooManyParts\x12g\n" +
+	"\x16min_rows_for_wide_part\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\x12minRowsForWidePart\x12V\n" +
+	"\x14cleanup_delay_period\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12cleanupDelayPeriod\x12]\n" +
+	"\x18max_cleanup_delay_period\x18\x1c \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15maxCleanupDelayPeriod\x12]\n" +
+	"\x18merge_selecting_sleep_ms\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15mergeSelectingSleepMs\x12d\n" +
+	"\x1cmax_merge_selecting_sleep_ms\x18\x1b \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x18maxMergeSelectingSleepMs\x12g\n" +
 	"\x1emin_age_to_force_merge_seconds\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x19minAgeToForceMergeSeconds\x12o\n" +
-	"(min_age_to_force_merge_on_partition_only\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR!minAgeToForceMergeOnPartitionOnly\x12\\\n" +
-	"\x18merge_selecting_sleep_ms\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x15mergeSelectingSleepMs\x12T\n" +
-	"\x14merge_max_block_size\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x11mergeMaxBlockSize\x12^\n" +
-	"\x1echeck_sample_column_is_correct\x18\x1a \x01(\v2\x1a.google.protobuf.BoolValueR\x1acheckSampleColumnIsCorrect\x12d\n" +
-	"\x1cmax_merge_selecting_sleep_ms\x18\x1b \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x18maxMergeSelectingSleepMs\x12]\n" +
-	"\x18max_cleanup_delay_period\x18\x1c \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15maxCleanupDelayPeriod\x12\xab\x01\n" +
+	"(min_age_to_force_merge_on_partition_only\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR!minAgeToForceMergeOnPartitionOnly\x12L\n" +
+	"\x14merge_max_block_size\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11mergeMaxBlockSize\x12\xab\x01\n" +
 	"!deduplicate_merge_projection_mode\x18\x1d \x01(\x0e2`.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionModeR\x1ededuplicateMergeProjectionMode\x12\xb4\x01\n" +
 	"$lightweight_mutation_projection_mode\x18\x1e \x01(\x0e2c.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.LightweightMutationProjectionModeR!lightweightMutationProjectionMode\x12c\n" +
-	" materialize_ttl_recalculate_only\x18\x1f \x01(\v2\x1a.google.protobuf.BoolValueR\x1dmaterializeTtlRecalculateOnly\x12H\n" +
+	"\x1freplicated_deduplication_window\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1dreplicatedDeduplicationWindow\x12r\n" +
+	"'replicated_deduplication_window_seconds\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR$replicatedDeduplicationWindowSeconds\x12H\n" +
 	"\x12fsync_after_insert\x18  \x01(\v2\x1a.google.protobuf.BoolValueR\x10fsyncAfterInsert\x12L\n" +
 	"\x14fsync_part_directory\x18! \x01(\v2\x1a.google.protobuf.BoolValueR\x12fsyncPartDirectory\x12s\n" +
 	")min_compressed_bytes_to_fsync_after_fetch\x18\" \x01(\v2\x1b.google.protobuf.Int64ValueR#minCompressedBytesToFsyncAfterFetch\x12s\n" +
 	")min_compressed_bytes_to_fsync_after_merge\x18# \x01(\v2\x1b.google.protobuf.Int64ValueR#minCompressedBytesToFsyncAfterMerge\x12\\\n" +
-	"\x1dmin_rows_to_fsync_after_merge\x18$ \x01(\v2\x1b.google.protobuf.Int64ValueR\x18minRowsToFsyncAfterMerge\"\x89\x02\n" +
+	"\x1dmin_rows_to_fsync_after_merge\x18$ \x01(\v2\x1b.google.protobuf.Int64ValueR\x18minRowsToFsyncAfterMerge\x12I\n" +
+	"\x13ttl_only_drop_parts\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\x10ttlOnlyDropParts\x12P\n" +
+	"\x16merge_with_ttl_timeout\x18\x0f \x01(\v2\x1b.google.protobuf.Int64ValueR\x13mergeWithTtlTimeout\x12k\n" +
+	"$merge_with_recompression_ttl_timeout\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueR mergeWithRecompressionTtlTimeout\x12j\n" +
+	"%max_number_of_merges_with_ttl_in_pool\x18\x12 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1emaxNumberOfMergesWithTtlInPool\x12c\n" +
+	" materialize_ttl_recalculate_only\x18\x1f \x01(\v2\x1a.google.protobuf.BoolValueR\x1dmaterializeTtlRecalculateOnly\x12^\n" +
+	"\x1echeck_sample_column_is_correct\x18\x1a \x01(\v2\x1a.google.protobuf.BoolValueR\x1acheckSampleColumnIsCorrect\x12o\n" +
+	"%allow_remote_fs_zero_copy_replication\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R allowRemoteFsZeroCopyReplication\"\x89\x02\n" +
 	"\x1eDeduplicateMergeProjectionMode\x121\n" +
 	"-DEDUPLICATE_MERGE_PROJECTION_MODE_UNSPECIFIED\x10\x00\x12,\n" +
 	"(DEDUPLICATE_MERGE_PROJECTION_MODE_IGNORE\x10\x01\x12+\n" +
@@ -4126,7 +4708,164 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"0LIGHTWEIGHT_MUTATION_PROJECTION_MODE_UNSPECIFIED\x10\x00\x12.\n" +
 	"*LIGHTWEIGHT_MUTATION_PROJECTION_MODE_THROW\x10\x01\x12-\n" +
 	")LIGHTWEIGHT_MUTATION_PROJECTION_MODE_DROP\x10\x02\x120\n" +
-	",LIGHTWEIGHT_MUTATION_PROJECTION_MODE_REBUILD\x10\x03\x1a\xbc\x0e\n" +
+	",LIGHTWEIGHT_MUTATION_PROJECTION_MODE_REBUILD\x10\x03\x1a\xbd\x02\n" +
+	"\vCompression\x12h\n" +
+	"\x06method\x18\x01 \x01(\x0e2J.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.MethodB\x04\xe8\xc71\x01R\x06method\x12\"\n" +
+	"\rmin_part_size\x18\x02 \x01(\x03R\vminPartSize\x12-\n" +
+	"\x13min_part_size_ratio\x18\x03 \x01(\x01R\x10minPartSizeRatio\x121\n" +
+	"\x05level\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x05level\">\n" +
+	"\x06Method\x12\x16\n" +
+	"\x12METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
+	"\x03LZ4\x10\x01\x12\b\n" +
+	"\x04ZSTD\x10\x02\x12\t\n" +
+	"\x05LZ4HC\x10\x03\x1a\x9e'\n" +
+	"\x12ExternalDictionary\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12x\n" +
+	"\tstructure\x18\x02 \x01(\v2T.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.StructureB\x04\xe8\xc71\x01R\tstructure\x12o\n" +
+	"\x06layout\x18\x03 \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.LayoutB\x04\xe8\xc71\x01R\x06layout\x12'\n" +
+	"\x0efixed_lifetime\x18\x04 \x01(\x03H\x00R\rfixedLifetime\x12y\n" +
+	"\x0elifetime_range\x18\x05 \x01(\v2P.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.RangeH\x00R\rlifetimeRange\x12x\n" +
+	"\vhttp_source\x18\x06 \x01(\v2U.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSourceH\x01R\n" +
+	"httpSource\x12{\n" +
+	"\fmysql_source\x18\a \x01(\v2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSourceH\x01R\vmysqlSource\x12\x8a\x01\n" +
+	"\x11clickhouse_source\x18\b \x01(\v2[.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSourceH\x01R\x10clickhouseSource\x12\x81\x01\n" +
+	"\x0emongodb_source\x18\t \x01(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSourceH\x01R\rmongodbSource\x12\x8a\x01\n" +
+	"\x11postgresql_source\x18\n" +
+	" \x01(\v2[.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSourceH\x01R\x10postgresqlSource\x1a\xd7\a\n" +
+	"\tStructure\x12g\n" +
+	"\x02id\x18\x01 \x01(\v2W.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.IdR\x02id\x12j\n" +
+	"\x03key\x18\x03 \x01(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.KeyR\x03key\x12{\n" +
+	"\trange_min\x18\x04 \x01(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeR\brangeMin\x12{\n" +
+	"\trange_max\x18\x05 \x01(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeR\brangeMax\x12\x86\x01\n" +
+	"\n" +
+	"attributes\x18\x02 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeB\x06\x82\xc81\x02>0R\n" +
+	"attributes\x1a\x1e\n" +
+	"\x02Id\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x1a\x8e\x01\n" +
+	"\x03Key\x12\x86\x01\n" +
+	"\n" +
+	"attributes\x18\x01 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeB\x06\x82\xc81\x02>0R\n" +
+	"attributes\x1a\xc0\x01\n" +
+	"\tAttribute\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x18\n" +
+	"\x04type\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04type\x12\x1d\n" +
+	"\n" +
+	"null_value\x18\x03 \x01(\tR\tnullValue\x12\x1e\n" +
+	"\n" +
+	"expression\x18\x04 \x01(\tR\n" +
+	"expression\x12\"\n" +
+	"\fhierarchical\x18\x05 \x01(\bR\fhierarchical\x12\x1c\n" +
+	"\tinjective\x18\x06 \x01(\bR\tinjective\x1a\xe9\a\n" +
+	"\x06Layout\x12p\n" +
+	"\x04type\x18\x01 \x01(\x0e2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.TypeB\x04\xe8\xc71\x01R\x04type\x12+\n" +
+	"\rsize_in_cells\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\vsizeInCells\x12Q\n" +
+	"\x17allow_read_expired_keys\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x14allowReadExpiredKeys\x12:\n" +
+	"\x15max_update_queue_size\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\x12maxUpdateQueueSize\x12[\n" +
+	"&update_queue_push_timeout_milliseconds\x18\a \x01(\x03B\a\xfa\xc71\x03>=0R\"updateQueuePushTimeoutMilliseconds\x12N\n" +
+	"\x1fquery_wait_timeout_milliseconds\x18\b \x01(\x03B\a\xfa\xc71\x03>=0R\x1cqueryWaitTimeoutMilliseconds\x12>\n" +
+	"\x17max_threads_for_updates\x18\t \x01(\x03B\a\xfa\xc71\x03>=0R\x14maxThreadsForUpdates\x125\n" +
+	"\x12initial_array_size\x18\n" +
+	" \x01(\x03B\a\xfa\xc71\x03>=0R\x10initialArraySize\x12-\n" +
+	"\x0emax_array_size\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\fmaxArraySize\x12\\\n" +
+	"\x1daccess_to_key_from_attributes\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x19accessToKeyFromAttributes\"\xff\x01\n" +
+	"\x04Type\x12\x14\n" +
+	"\x10TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04FLAT\x10\x01\x12\n" +
+	"\n" +
+	"\x06HASHED\x10\x02\x12\x16\n" +
+	"\x12COMPLEX_KEY_HASHED\x10\x03\x12\x10\n" +
+	"\fRANGE_HASHED\x10\x04\x12\t\n" +
+	"\x05CACHE\x10\x05\x12\x15\n" +
+	"\x11COMPLEX_KEY_CACHE\x10\x06\x12\x11\n" +
+	"\rSPARSE_HASHED\x10\a\x12\x1d\n" +
+	"\x19COMPLEX_KEY_SPARSE_HASHED\x10\b\x12\x1c\n" +
+	"\x18COMPLEX_KEY_RANGE_HASHED\x10\t\x12\n" +
+	"\n" +
+	"\x06DIRECT\x10\n" +
+	"\x12\x16\n" +
+	"\x12COMPLEX_KEY_DIRECT\x10\v\x12\v\n" +
+	"\aIP_TRIE\x10\f\x1a+\n" +
+	"\x05Range\x12\x10\n" +
+	"\x03min\x18\x01 \x01(\x03R\x03min\x12\x10\n" +
+	"\x03max\x18\x02 \x01(\x03R\x03max\x1a\xfa\x01\n" +
+	"\n" +
+	"HttpSource\x12\x16\n" +
+	"\x03url\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x03url\x12\x1c\n" +
+	"\x06format\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06format\x12v\n" +
+	"\aheaders\x18\x03 \x03(\v2\\.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.HeaderR\aheaders\x1a>\n" +
+	"\x06Header\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
+	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\x1a\x86\x05\n" +
+	"\vMysqlSource\x12\x14\n" +
+	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
+	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1f\n" +
+	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x04user\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
+	"\bpassword\x18\x05 \x01(\tR\bpassword\x12z\n" +
+	"\breplicas\x18\x06 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.ReplicaR\breplicas\x12\x14\n" +
+	"\x05where\x18\a \x01(\tR\x05where\x12)\n" +
+	"\x10invalidate_query\x18\b \x01(\tR\x0finvalidateQuery\x12E\n" +
+	"\x10close_connection\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x0fcloseConnection\x12E\n" +
+	"\x10share_connection\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0fshareConnection\x1a\xa2\x01\n" +
+	"\aReplica\x12!\n" +
+	"\x04host\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12#\n" +
+	"\bpriority\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\bpriority\x12\x1f\n" +
+	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x12\n" +
+	"\x04user\x18\x04 \x01(\tR\x04user\x12\x1a\n" +
+	"\bpassword\x18\x05 \x01(\tR\bpassword\x1a\x84\x02\n" +
+	"\x10ClickhouseSource\x12\x14\n" +
+	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
+	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1d\n" +
+	"\x04host\x18\x03 \x01(\tB\t\x8a\xc81\x05<=253R\x04host\x12\x1f\n" +
+	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
+	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x14\n" +
+	"\x05where\x18\a \x01(\tR\x05where\x122\n" +
+	"\x06secure\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x06secure\x1a\xdf\x01\n" +
+	"\rMongodbSource\x12\x14\n" +
+	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12$\n" +
+	"\n" +
+	"collection\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
+	"collection\x12!\n" +
+	"\x04host\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12\x1f\n" +
+	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
+	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x18\n" +
+	"\aoptions\x18\a \x01(\tR\aoptions\x1a\xc5\x03\n" +
+	"\x10PostgresqlSource\x12\x14\n" +
+	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
+	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x14\n" +
+	"\x05hosts\x18\x03 \x03(\tR\x05hosts\x12\x1f\n" +
+	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
+	"\bpassword\x18\x06 \x01(\tR\bpassword\x12)\n" +
+	"\x10invalidate_query\x18\a \x01(\tR\x0finvalidateQuery\x12~\n" +
+	"\bssl_mode\x18\b \x01(\x0e2c.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslModeR\asslMode\"g\n" +
+	"\aSslMode\x12\x18\n" +
+	"\x14SSL_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aDISABLE\x10\x01\x12\t\n" +
+	"\x05ALLOW\x10\x02\x12\n" +
+	"\n" +
+	"\x06PREFER\x10\x03\x12\r\n" +
+	"\tVERIFY_CA\x10\x04\x12\x0f\n" +
+	"\vVERIFY_FULL\x10\x05B\x10\n" +
+	"\blifetime\x12\x04\xc0\xc11\x01B\x0e\n" +
+	"\x06source\x12\x04\xc0\xc11\x01\x1a\xc3\x04\n" +
+	"\x0eGraphiteRollup\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12r\n" +
+	"\bpatterns\x18\x02 \x03(\v2N.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.PatternB\x06\x82\xc81\x02>0R\bpatterns\x12(\n" +
+	"\x10path_column_name\x18\x03 \x01(\tR\x0epathColumnName\x12(\n" +
+	"\x10time_column_name\x18\x04 \x01(\tR\x0etimeColumnName\x12*\n" +
+	"\x11value_column_name\x18\x05 \x01(\tR\x0fvalueColumnName\x12.\n" +
+	"\x13version_column_name\x18\x06 \x01(\tR\x11versionColumnName\x1a\xf2\x01\n" +
+	"\aPattern\x12\x16\n" +
+	"\x06regexp\x18\x01 \x01(\tR\x06regexp\x12\x1a\n" +
+	"\bfunction\x18\x02 \x01(\tR\bfunction\x12v\n" +
+	"\tretention\x18\x03 \x03(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.RetentionR\tretention\x1a;\n" +
+	"\tRetention\x12\x10\n" +
+	"\x03age\x18\x01 \x01(\x03R\x03age\x12\x1c\n" +
+	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xbc\x0e\n" +
 	"\x05Kafka\x12{\n" +
 	"\x11security_protocol\x18\x01 \x01(\x0e2N.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocolR\x10securityProtocol\x12r\n" +
 	"\x0esasl_mechanism\x18\x02 \x01(\x0e2K.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanismR\rsaslMechanism\x12#\n" +
@@ -4192,164 +4931,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\bRabbitmq\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
-	"\x05vhost\x18\x03 \x01(\tR\x05vhost\x1a\xbe\x02\n" +
-	"\vCompression\x12b\n" +
-	"\x06method\x18\x01 \x01(\x0e2J.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.MethodR\x06method\x12+\n" +
-	"\rmin_part_size\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\vminPartSize\x12-\n" +
-	"\x13min_part_size_ratio\x18\x03 \x01(\x01R\x10minPartSizeRatio\x12:\n" +
-	"\x05level\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x05level\"3\n" +
-	"\x06Method\x12\x16\n" +
-	"\x12METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
-	"\x03LZ4\x10\x01\x12\b\n" +
-	"\x04ZSTD\x10\x02\x1a\xe9&\n" +
-	"\x12ExternalDictionary\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12x\n" +
-	"\tstructure\x18\x02 \x01(\v2T.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.StructureB\x04\xe8\xc71\x01R\tstructure\x12o\n" +
-	"\x06layout\x18\x03 \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.LayoutB\x04\xe8\xc71\x01R\x06layout\x12'\n" +
-	"\x0efixed_lifetime\x18\x04 \x01(\x03H\x00R\rfixedLifetime\x12y\n" +
-	"\x0elifetime_range\x18\x05 \x01(\v2P.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.RangeH\x00R\rlifetimeRange\x12x\n" +
-	"\vhttp_source\x18\x06 \x01(\v2U.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSourceH\x01R\n" +
-	"httpSource\x12{\n" +
-	"\fmysql_source\x18\a \x01(\v2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSourceH\x01R\vmysqlSource\x12\x8a\x01\n" +
-	"\x11clickhouse_source\x18\b \x01(\v2[.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSourceH\x01R\x10clickhouseSource\x12\x81\x01\n" +
-	"\x0emongodb_source\x18\t \x01(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSourceH\x01R\rmongodbSource\x12\x8a\x01\n" +
-	"\x11postgresql_source\x18\n" +
-	" \x01(\v2[.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSourceH\x01R\x10postgresqlSource\x1a\xfa\x01\n" +
-	"\n" +
-	"HttpSource\x12\x16\n" +
-	"\x03url\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x03url\x12\x1c\n" +
-	"\x06format\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06format\x12v\n" +
-	"\aheaders\x18\x03 \x03(\v2\\.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.HeaderR\aheaders\x1a>\n" +
-	"\x06Header\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
-	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\x1a\x8c\x05\n" +
-	"\vMysqlSource\x12\x14\n" +
-	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
-	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1f\n" +
-	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x12\n" +
-	"\x04user\x18\x04 \x01(\tR\x04user\x12\x1a\n" +
-	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x82\x01\n" +
-	"\breplicas\x18\x06 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.ReplicaB\x06\x82\xc81\x02>0R\breplicas\x12\x14\n" +
-	"\x05where\x18\a \x01(\tR\x05where\x12)\n" +
-	"\x10invalidate_query\x18\b \x01(\tR\x0finvalidateQuery\x12E\n" +
-	"\x10close_connection\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x0fcloseConnection\x12E\n" +
-	"\x10share_connection\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0fshareConnection\x1a\xa5\x01\n" +
-	"\aReplica\x12!\n" +
-	"\x04host\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12&\n" +
-	"\bpriority\x18\x02 \x01(\x03B\n" +
-	"\xe8\xc71\x01\xfa\xc71\x02>0R\bpriority\x12\x1f\n" +
-	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x12\n" +
-	"\x04user\x18\x04 \x01(\tR\x04user\x12\x1a\n" +
-	"\bpassword\x18\x05 \x01(\tR\bpassword\x1a\x84\x02\n" +
-	"\x10ClickhouseSource\x12\x14\n" +
-	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
-	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1d\n" +
-	"\x04host\x18\x03 \x01(\tB\t\x8a\xc81\x05<=253R\x04host\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
-	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
-	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x14\n" +
-	"\x05where\x18\a \x01(\tR\x05where\x122\n" +
-	"\x06secure\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x06secure\x1a\xdb\x01\n" +
-	"\rMongodbSource\x12\x14\n" +
-	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12$\n" +
-	"\n" +
-	"collection\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"collection\x12\x1d\n" +
-	"\x04host\x18\x03 \x01(\tB\t\x8a\xc81\x05<=253R\x04host\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
-	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
-	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x18\n" +
-	"\aoptions\x18\a \x01(\tR\aoptions\x1a\xcd\x03\n" +
-	"\x10PostgresqlSource\x12\x14\n" +
-	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
-	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1c\n" +
-	"\x05hosts\x18\x03 \x03(\tB\x06\x82\xc81\x02>0R\x05hosts\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
-	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
-	"\bpassword\x18\x06 \x01(\tR\bpassword\x12)\n" +
-	"\x10invalidate_query\x18\a \x01(\tR\x0finvalidateQuery\x12~\n" +
-	"\bssl_mode\x18\b \x01(\x0e2c.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslModeR\asslMode\"g\n" +
-	"\aSslMode\x12\x18\n" +
-	"\x14SSL_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
-	"\aDISABLE\x10\x01\x12\t\n" +
-	"\x05ALLOW\x10\x02\x12\n" +
-	"\n" +
-	"\x06PREFER\x10\x03\x12\r\n" +
-	"\tVERIFY_CA\x10\x04\x12\x0f\n" +
-	"\vVERIFY_FULL\x10\x05\x1a\xd7\a\n" +
-	"\tStructure\x12g\n" +
-	"\x02id\x18\x01 \x01(\v2W.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.IdR\x02id\x12j\n" +
-	"\x03key\x18\x03 \x01(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.KeyR\x03key\x12{\n" +
-	"\trange_min\x18\x04 \x01(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeR\brangeMin\x12{\n" +
-	"\trange_max\x18\x05 \x01(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeR\brangeMax\x12\x86\x01\n" +
-	"\n" +
-	"attributes\x18\x02 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeB\x06\x82\xc81\x02>0R\n" +
-	"attributes\x1a\xc0\x01\n" +
-	"\tAttribute\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x18\n" +
-	"\x04type\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04type\x12\x1d\n" +
-	"\n" +
-	"null_value\x18\x03 \x01(\tR\tnullValue\x12\x1e\n" +
-	"\n" +
-	"expression\x18\x04 \x01(\tR\n" +
-	"expression\x12\"\n" +
-	"\fhierarchical\x18\x05 \x01(\bR\fhierarchical\x12\x1c\n" +
-	"\tinjective\x18\x06 \x01(\bR\tinjective\x1a\x1e\n" +
-	"\x02Id\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x1a\x8e\x01\n" +
-	"\x03Key\x12\x86\x01\n" +
-	"\n" +
-	"attributes\x18\x01 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.AttributeB\x06\x82\xc81\x02>0R\n" +
-	"attributes\x1a\xaa\a\n" +
-	"\x06Layout\x12p\n" +
-	"\x04type\x18\x01 \x01(\x0e2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.TypeB\x04\xe8\xc71\x01R\x04type\x12\"\n" +
-	"\rsize_in_cells\x18\x02 \x01(\x03R\vsizeInCells\x12Q\n" +
-	"\x17allow_read_expired_keys\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x14allowReadExpiredKeys\x121\n" +
-	"\x15max_update_queue_size\x18\x06 \x01(\x03R\x12maxUpdateQueueSize\x12R\n" +
-	"&update_queue_push_timeout_milliseconds\x18\a \x01(\x03R\"updateQueuePushTimeoutMilliseconds\x12E\n" +
-	"\x1fquery_wait_timeout_milliseconds\x18\b \x01(\x03R\x1cqueryWaitTimeoutMilliseconds\x125\n" +
-	"\x17max_threads_for_updates\x18\t \x01(\x03R\x14maxThreadsForUpdates\x12,\n" +
-	"\x12initial_array_size\x18\n" +
-	" \x01(\x03R\x10initialArraySize\x12$\n" +
-	"\x0emax_array_size\x18\x03 \x01(\x03R\fmaxArraySize\x12\\\n" +
-	"\x1daccess_to_key_from_attributes\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x19accessToKeyFromAttributes\"\xff\x01\n" +
-	"\x04Type\x12\x14\n" +
-	"\x10TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04FLAT\x10\x01\x12\n" +
-	"\n" +
-	"\x06HASHED\x10\x02\x12\x16\n" +
-	"\x12COMPLEX_KEY_HASHED\x10\x03\x12\x10\n" +
-	"\fRANGE_HASHED\x10\x04\x12\t\n" +
-	"\x05CACHE\x10\x05\x12\x15\n" +
-	"\x11COMPLEX_KEY_CACHE\x10\x06\x12\x11\n" +
-	"\rSPARSE_HASHED\x10\a\x12\x1d\n" +
-	"\x19COMPLEX_KEY_SPARSE_HASHED\x10\b\x12\x1c\n" +
-	"\x18COMPLEX_KEY_RANGE_HASHED\x10\t\x12\n" +
-	"\n" +
-	"\x06DIRECT\x10\n" +
-	"\x12\x16\n" +
-	"\x12COMPLEX_KEY_DIRECT\x10\v\x12\v\n" +
-	"\aIP_TRIE\x10\f\x1a+\n" +
-	"\x05Range\x12\x10\n" +
-	"\x03min\x18\x01 \x01(\x03R\x03min\x12\x10\n" +
-	"\x03max\x18\x02 \x01(\x03R\x03maxB\x10\n" +
-	"\blifetime\x12\x04\xc0\xc11\x01B\x0e\n" +
-	"\x06source\x12\x04\xc0\xc11\x01\x1a\xe2\x04\n" +
-	"\x0eGraphiteRollup\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12r\n" +
-	"\bpatterns\x18\x02 \x03(\v2N.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.PatternB\x06\x82\xc81\x02>0R\bpatterns\x12(\n" +
-	"\x10path_column_name\x18\x03 \x01(\tR\x0epathColumnName\x12(\n" +
-	"\x10time_column_name\x18\x04 \x01(\tR\x0etimeColumnName\x12*\n" +
-	"\x11value_column_name\x18\x05 \x01(\tR\x0fvalueColumnName\x12.\n" +
-	"\x13version_column_name\x18\x06 \x01(\tR\x11versionColumnName\x1a\x91\x02\n" +
-	"\aPattern\x12\x16\n" +
-	"\x06regexp\x18\x01 \x01(\tR\x06regexp\x12 \n" +
-	"\bfunction\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfunction\x12~\n" +
-	"\tretention\x18\x03 \x03(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.RetentionB\x06\x82\xc81\x02>0R\tretention\x1aL\n" +
-	"\tRetention\x12\x19\n" +
-	"\x03age\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\x03age\x12$\n" +
-	"\tprecision\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\tprecision\x1a^\n" +
+	"\x05vhost\x18\x03 \x01(\tR\x05vhost\x1a^\n" +
 	"\x10QueryMaskingRule\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n" +
 	"\x06regexp\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06regexp\x12\x18\n" +
@@ -4360,26 +4942,23 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\vmax_entries\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\n" +
 	"maxEntries\x12Z\n" +
 	"\x17max_entry_size_in_bytes\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x13maxEntrySizeInBytes\x12X\n" +
-	"\x16max_entry_size_in_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxEntrySizeInRows\x1aW\n" +
+	"\x16max_entry_size_in_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxEntrySizeInRows\x1ad\n" +
 	"\n" +
 	"JdbcBridge\x12\x18\n" +
-	"\x04host\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04host\x12/\n" +
-	"\x04port\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x04port\x1a\x83\x02\n" +
-	"\x19AccessControlImprovements\x12i\n" +
-	"$select_from_system_db_requires_grant\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1fselectFromSystemDbRequiresGrant\x12{\n" +
-	"-select_from_information_schema_requires_grant\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR(selectFromInformationSchemaRequiresGrant\"d\n" +
+	"\x04host\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04host\x12<\n" +
+	"\x04port\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a0-65535R\x04port\"d\n" +
 	"\bLogLevel\x12\x19\n" +
 	"\x15LOG_LEVEL_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05TRACE\x10\x01\x12\t\n" +
 	"\x05DEBUG\x10\x02\x12\x0f\n" +
 	"\vINFORMATION\x10\x03\x12\v\n" +
 	"\aWARNING\x10\x04\x12\t\n" +
-	"\x05ERROR\x10\x05\"\xb9\x02\n" +
+	"\x05ERROR\x10\x05\"\xc5\x02\n" +
 	"\x13ClickhouseConfigSet\x12h\n" +
-	"\x10effective_config\x18\x01 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigB\x04\xe8\xc71\x01R\x0feffectiveConfig\x12X\n" +
-	"\vuser_config\x18\x02 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigR\n" +
-	"userConfig\x12^\n" +
-	"\x0edefault_config\x18\x03 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigR\rdefaultConfigB\x81\x01\n" +
+	"\x10effective_config\x18\x01 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigB\x04\xe8\xc71\x01R\x0feffectiveConfig\x12^\n" +
+	"\vuser_config\x18\x02 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigB\x04\xe8\xc71\x01R\n" +
+	"userConfig\x12d\n" +
+	"\x0edefault_config\x18\x03 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigB\x04\xe8\xc71\x01R\rdefaultConfigB\x81\x01\n" +
 	")yandex.cloud.api.mdb.clickhouse.v1.configZTgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/clickhouse/v1/config;clickhouseb\x06proto3"
 
 var (
@@ -4400,39 +4979,39 @@ var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_goTypes = []any{
 	(ClickhouseConfig_LogLevel)(0),                                    // 0: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
 	(ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode)(0),    // 1: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionMode
 	(ClickhouseConfig_MergeTree_LightweightMutationProjectionMode)(0), // 2: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.LightweightMutationProjectionMode
-	(ClickhouseConfig_Kafka_SecurityProtocol)(0),                      // 3: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocol
-	(ClickhouseConfig_Kafka_SaslMechanism)(0),                         // 4: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanism
-	(ClickhouseConfig_Kafka_Debug)(0),                                 // 5: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
-	(ClickhouseConfig_Kafka_AutoOffsetReset)(0),                       // 6: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
-	(ClickhouseConfig_Compression_Method)(0),                          // 7: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.Method
-	(ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode)(0), // 8: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
-	(ClickhouseConfig_ExternalDictionary_Layout_Type)(0),              // 9: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
+	(ClickhouseConfig_Compression_Method)(0),                          // 3: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.Method
+	(ClickhouseConfig_ExternalDictionary_Layout_Type)(0),              // 4: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
+	(ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode)(0), // 5: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
+	(ClickhouseConfig_Kafka_SecurityProtocol)(0),                      // 6: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocol
+	(ClickhouseConfig_Kafka_SaslMechanism)(0),                         // 7: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanism
+	(ClickhouseConfig_Kafka_Debug)(0),                                 // 8: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
+	(ClickhouseConfig_Kafka_AutoOffsetReset)(0),                       // 9: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
 	(*ClickhouseConfig)(nil),                                          // 10: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
 	(*ClickhouseConfigSet)(nil),                                       // 11: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet
-	(*ClickhouseConfig_MergeTree)(nil),                                // 12: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree
-	(*ClickhouseConfig_Kafka)(nil),                                    // 13: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
-	(*ClickhouseConfig_KafkaTopic)(nil),                               // 14: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic
-	(*ClickhouseConfig_Rabbitmq)(nil),                                 // 15: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Rabbitmq
-	(*ClickhouseConfig_Compression)(nil),                              // 16: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression
-	(*ClickhouseConfig_ExternalDictionary)(nil),                       // 17: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
-	(*ClickhouseConfig_GraphiteRollup)(nil),                           // 18: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup
-	(*ClickhouseConfig_QueryMaskingRule)(nil),                         // 19: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRule
-	(*ClickhouseConfig_QueryCache)(nil),                               // 20: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache
-	(*ClickhouseConfig_JdbcBridge)(nil),                               // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge
-	(*ClickhouseConfig_AccessControlImprovements)(nil),                // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements
-	(*ClickhouseConfig_ExternalDictionary_HttpSource)(nil),            // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
-	(*ClickhouseConfig_ExternalDictionary_MysqlSource)(nil),           // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
-	(*ClickhouseConfig_ExternalDictionary_ClickhouseSource)(nil),      // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
-	(*ClickhouseConfig_ExternalDictionary_MongodbSource)(nil),         // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
-	(*ClickhouseConfig_ExternalDictionary_PostgresqlSource)(nil),      // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
-	(*ClickhouseConfig_ExternalDictionary_Structure)(nil),             // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
-	(*ClickhouseConfig_ExternalDictionary_Layout)(nil),                // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
-	(*ClickhouseConfig_ExternalDictionary_Range)(nil),                 // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
-	(*ClickhouseConfig_ExternalDictionary_HttpSource_Header)(nil),     // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
-	(*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica)(nil),   // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
+	(*ClickhouseConfig_AccessControlImprovements)(nil),                // 12: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements
+	(*ClickhouseConfig_MergeTree)(nil),                                // 13: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree
+	(*ClickhouseConfig_Compression)(nil),                              // 14: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression
+	(*ClickhouseConfig_ExternalDictionary)(nil),                       // 15: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
+	(*ClickhouseConfig_GraphiteRollup)(nil),                           // 16: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup
+	(*ClickhouseConfig_Kafka)(nil),                                    // 17: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
+	(*ClickhouseConfig_KafkaTopic)(nil),                               // 18: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic
+	(*ClickhouseConfig_Rabbitmq)(nil),                                 // 19: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Rabbitmq
+	(*ClickhouseConfig_QueryMaskingRule)(nil),                         // 20: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRule
+	(*ClickhouseConfig_QueryCache)(nil),                               // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache
+	(*ClickhouseConfig_JdbcBridge)(nil),                               // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge
+	(*ClickhouseConfig_ExternalDictionary_Structure)(nil),             // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
+	(*ClickhouseConfig_ExternalDictionary_Layout)(nil),                // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
+	(*ClickhouseConfig_ExternalDictionary_Range)(nil),                 // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
+	(*ClickhouseConfig_ExternalDictionary_HttpSource)(nil),            // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
+	(*ClickhouseConfig_ExternalDictionary_MysqlSource)(nil),           // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
+	(*ClickhouseConfig_ExternalDictionary_ClickhouseSource)(nil),      // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
+	(*ClickhouseConfig_ExternalDictionary_MongodbSource)(nil),         // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
+	(*ClickhouseConfig_ExternalDictionary_PostgresqlSource)(nil),      // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
+	(*ClickhouseConfig_ExternalDictionary_Structure_Id)(nil),          // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
+	(*ClickhouseConfig_ExternalDictionary_Structure_Key)(nil),         // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
 	(*ClickhouseConfig_ExternalDictionary_Structure_Attribute)(nil),   // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	(*ClickhouseConfig_ExternalDictionary_Structure_Id)(nil),          // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
-	(*ClickhouseConfig_ExternalDictionary_Structure_Key)(nil),         // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
+	(*ClickhouseConfig_ExternalDictionary_HttpSource_Header)(nil),     // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
+	(*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica)(nil),   // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
 	(*ClickhouseConfig_GraphiteRollup_Pattern)(nil),                   // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
 	(*ClickhouseConfig_GraphiteRollup_Pattern_Retention)(nil),         // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
 	(*wrapperspb.Int64Value)(nil),                                     // 38: google.protobuf.Int64Value
@@ -4441,167 +5020,171 @@ var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_goTypes = []any{
 	(*wrapperspb.DoubleValue)(nil),                                    // 41: google.protobuf.DoubleValue
 }
 var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_depIdxs = []int32{
-	0,   // 0: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.log_level:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
-	12,  // 1: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.merge_tree:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree
-	16,  // 2: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.compression:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression
-	17,  // 3: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
-	18,  // 4: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.graphite_rollup:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup
-	13,  // 5: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.kafka:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
-	14,  // 6: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.kafka_topics:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic
-	15,  // 7: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.rabbitmq:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Rabbitmq
-	38,  // 8: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_connections:type_name -> google.protobuf.Int64Value
-	38,  // 9: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_concurrent_queries:type_name -> google.protobuf.Int64Value
-	38,  // 10: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.keep_alive_timeout:type_name -> google.protobuf.Int64Value
-	38,  // 11: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.uncompressed_cache_size:type_name -> google.protobuf.Int64Value
-	38,  // 12: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mark_cache_size:type_name -> google.protobuf.Int64Value
-	38,  // 13: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_table_size_to_drop:type_name -> google.protobuf.Int64Value
-	38,  // 14: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_partition_size_to_drop:type_name -> google.protobuf.Int64Value
-	38,  // 15: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.builtin_dictionaries_reload_interval:type_name -> google.protobuf.Int64Value
-	39,  // 16: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.geobase_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 17: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 18: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 19: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 20: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_time:type_name -> google.protobuf.Int64Value
-	38,  // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_time:type_name -> google.protobuf.Int64Value
-	0,   // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_level:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
-	39,  // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 38: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 39: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 40: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 41: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 42: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 43: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 44: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 45: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 46: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 47: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 48: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 49: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 50: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 51: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 52: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 53: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 54: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 55: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_enabled:type_name -> google.protobuf.BoolValue
-	38,  // 56: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_size:type_name -> google.protobuf.Int64Value
-	38,  // 57: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_time:type_name -> google.protobuf.Int64Value
-	22,  // 58: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.access_control_improvements:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements
-	38,  // 59: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 60: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_merges_mutations_concurrency_ratio:type_name -> google.protobuf.Int64Value
-	38,  // 61: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 62: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_fetches_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 63: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_move_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 64: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_distributed_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 65: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_buffer_flush_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 66: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_message_broker_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	38,  // 67: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_common_pool_size:type_name -> google.protobuf.Int64Value
-	40,  // 68: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.default_database:type_name -> google.protobuf.StringValue
-	38,  // 69: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_profiler_step:type_name -> google.protobuf.Int64Value
-	41,  // 70: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_tracker_sample_probability:type_name -> google.protobuf.DoubleValue
-	19,  // 71: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_masking_rules:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRule
-	39,  // 72: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries_lazy_load:type_name -> google.protobuf.BoolValue
-	20,  // 73: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_cache:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache
-	21,  // 74: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.jdbc_bridge:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge
-	10,  // 75: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.effective_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	10,  // 76: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.user_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	10,  // 77: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.default_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	38,  // 78: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window:type_name -> google.protobuf.Int64Value
-	38,  // 79: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window_seconds:type_name -> google.protobuf.Int64Value
-	38,  // 80: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_delay_insert:type_name -> google.protobuf.Int64Value
-	38,  // 81: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_throw_insert:type_name -> google.protobuf.Int64Value
-	38,  // 82: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_delay_insert:type_name -> google.protobuf.Int64Value
-	38,  // 83: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_throw_insert:type_name -> google.protobuf.Int64Value
-	38,  // 84: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_replicated_merges_in_queue:type_name -> google.protobuf.Int64Value
-	38,  // 85: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_lower_max_size_of_merge:type_name -> google.protobuf.Int64Value
-	38,  // 86: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_min_space_in_pool:type_name -> google.protobuf.Int64Value
-	38,  // 87: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_max_space_in_pool:type_name -> google.protobuf.Int64Value
-	38,  // 88: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_bytes_for_wide_part:type_name -> google.protobuf.Int64Value
-	38,  // 89: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_for_wide_part:type_name -> google.protobuf.Int64Value
-	39,  // 90: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.ttl_only_drop_parts:type_name -> google.protobuf.BoolValue
-	39,  // 91: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.allow_remote_fs_zero_copy_replication:type_name -> google.protobuf.BoolValue
-	38,  // 92: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_ttl_timeout:type_name -> google.protobuf.Int64Value
-	38,  // 93: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_recompression_ttl_timeout:type_name -> google.protobuf.Int64Value
-	38,  // 94: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_parts_in_total:type_name -> google.protobuf.Int64Value
-	38,  // 95: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_number_of_merges_with_ttl_in_pool:type_name -> google.protobuf.Int64Value
-	38,  // 96: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.cleanup_delay_period:type_name -> google.protobuf.Int64Value
-	38,  // 97: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_execute_mutation:type_name -> google.protobuf.Int64Value
-	38,  // 98: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_avg_part_size_for_too_many_parts:type_name -> google.protobuf.Int64Value
-	38,  // 99: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_seconds:type_name -> google.protobuf.Int64Value
-	39,  // 100: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_on_partition_only:type_name -> google.protobuf.BoolValue
-	38,  // 101: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
-	38,  // 102: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_max_block_size:type_name -> google.protobuf.Int64Value
-	39,  // 103: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.check_sample_column_is_correct:type_name -> google.protobuf.BoolValue
-	38,  // 104: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
-	38,  // 105: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_cleanup_delay_period:type_name -> google.protobuf.Int64Value
-	1,   // 106: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.deduplicate_merge_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionMode
-	2,   // 107: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.lightweight_mutation_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.LightweightMutationProjectionMode
-	39,  // 108: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.materialize_ttl_recalculate_only:type_name -> google.protobuf.BoolValue
-	39,  // 109: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_after_insert:type_name -> google.protobuf.BoolValue
-	39,  // 110: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_part_directory:type_name -> google.protobuf.BoolValue
-	38,  // 111: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_fetch:type_name -> google.protobuf.Int64Value
-	38,  // 112: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
-	38,  // 113: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
-	3,   // 114: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.security_protocol:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocol
-	4,   // 115: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.sasl_mechanism:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanism
-	39,  // 116: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.enable_ssl_certificate_verification:type_name -> google.protobuf.BoolValue
-	38,  // 117: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.max_poll_interval_ms:type_name -> google.protobuf.Int64Value
-	38,  // 118: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.session_timeout_ms:type_name -> google.protobuf.Int64Value
-	5,   // 119: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.debug:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
-	6,   // 120: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.auto_offset_reset:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
-	13,  // 121: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
-	7,   // 122: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.method:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.Method
-	38,  // 123: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.level:type_name -> google.protobuf.Int64Value
-	28,  // 124: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.structure:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
-	29,  // 125: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.layout:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
-	30,  // 126: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.lifetime_range:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
-	23,  // 127: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.http_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
-	24,  // 128: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mysql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
-	25,  // 129: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.clickhouse_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
-	26,  // 130: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mongodb_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
-	27,  // 131: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.postgresql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
-	36,  // 132: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.patterns:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
-	38,  // 133: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_size_in_bytes:type_name -> google.protobuf.Int64Value
-	38,  // 134: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entries:type_name -> google.protobuf.Int64Value
-	38,  // 135: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_bytes:type_name -> google.protobuf.Int64Value
-	38,  // 136: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_rows:type_name -> google.protobuf.Int64Value
-	38,  // 137: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge.port:type_name -> google.protobuf.Int64Value
-	39,  // 138: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_system_db_requires_grant:type_name -> google.protobuf.BoolValue
-	39,  // 139: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_information_schema_requires_grant:type_name -> google.protobuf.BoolValue
-	31,  // 140: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.headers:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
-	32,  // 141: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.replicas:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
-	39,  // 142: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.close_connection:type_name -> google.protobuf.BoolValue
-	39,  // 143: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.share_connection:type_name -> google.protobuf.BoolValue
-	39,  // 144: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource.secure:type_name -> google.protobuf.BoolValue
-	8,   // 145: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.ssl_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
-	34,  // 146: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.id:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
-	35,  // 147: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.key:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
-	33,  // 148: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_min:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	33,  // 149: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_max:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	33,  // 150: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	9,   // 151: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.type:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
-	39,  // 152: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.allow_read_expired_keys:type_name -> google.protobuf.BoolValue
-	39,  // 153: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.access_to_key_from_attributes:type_name -> google.protobuf.BoolValue
-	33,  // 154: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	37,  // 155: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.retention:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
-	156, // [156:156] is the sub-list for method output_type
-	156, // [156:156] is the sub-list for method input_type
-	156, // [156:156] is the sub-list for extension type_name
-	156, // [156:156] is the sub-list for extension extendee
-	0,   // [0:156] is the sub-list for field type_name
+	38,  // 0: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 1: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_merges_mutations_concurrency_ratio:type_name -> google.protobuf.Int64Value
+	38,  // 2: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 3: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_fetches_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 4: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_move_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 5: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_distributed_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 6: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_buffer_flush_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 7: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_message_broker_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	38,  // 8: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_common_pool_size:type_name -> google.protobuf.Int64Value
+	39,  // 9: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries_lazy_load:type_name -> google.protobuf.BoolValue
+	0,   // 10: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.log_level:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
+	38,  // 11: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 12: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 13: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 14: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 15: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_time:type_name -> google.protobuf.Int64Value
+	38,  // 16: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 17: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 18: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 19: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 20: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_time:type_name -> google.protobuf.Int64Value
+	0,   // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_level:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
+	39,  // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 38: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 39: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 40: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 41: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 42: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 43: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 44: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 45: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 46: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 47: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 48: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_time:type_name -> google.protobuf.Int64Value
+	39,  // 49: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_enabled:type_name -> google.protobuf.BoolValue
+	38,  // 50: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_size:type_name -> google.protobuf.Int64Value
+	38,  // 51: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_time:type_name -> google.protobuf.Int64Value
+	12,  // 52: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.access_control_improvements:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements
+	38,  // 53: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_connections:type_name -> google.protobuf.Int64Value
+	38,  // 54: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_concurrent_queries:type_name -> google.protobuf.Int64Value
+	38,  // 55: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_table_size_to_drop:type_name -> google.protobuf.Int64Value
+	38,  // 56: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_partition_size_to_drop:type_name -> google.protobuf.Int64Value
+	38,  // 57: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.keep_alive_timeout:type_name -> google.protobuf.Int64Value
+	38,  // 58: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.uncompressed_cache_size:type_name -> google.protobuf.Int64Value
+	38,  // 59: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mark_cache_size:type_name -> google.protobuf.Int64Value
+	39,  // 60: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.geobase_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 61: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.default_database:type_name -> google.protobuf.StringValue
+	38,  // 62: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_profiler_step:type_name -> google.protobuf.Int64Value
+	41,  // 63: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_tracker_sample_probability:type_name -> google.protobuf.DoubleValue
+	38,  // 64: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.async_insert_threads:type_name -> google.protobuf.Int64Value
+	38,  // 65: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.backup_threads:type_name -> google.protobuf.Int64Value
+	38,  // 66: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.restore_threads:type_name -> google.protobuf.Int64Value
+	13,  // 67: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.merge_tree:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree
+	14,  // 68: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.compression:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression
+	15,  // 69: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
+	16,  // 70: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.graphite_rollup:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup
+	17,  // 71: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.kafka:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
+	18,  // 72: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.kafka_topics:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic
+	19,  // 73: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.rabbitmq:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Rabbitmq
+	20,  // 74: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_masking_rules:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRule
+	21,  // 75: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_cache:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache
+	22,  // 76: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.jdbc_bridge:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge
+	39,  // 77: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mysql_protocol:type_name -> google.protobuf.BoolValue
+	38,  // 78: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.builtin_dictionaries_reload_interval:type_name -> google.protobuf.Int64Value
+	10,  // 79: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.effective_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	10,  // 80: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.user_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	10,  // 81: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.default_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	39,  // 82: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_system_db_requires_grant:type_name -> google.protobuf.BoolValue
+	39,  // 83: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_information_schema_requires_grant:type_name -> google.protobuf.BoolValue
+	38,  // 84: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_delay_insert:type_name -> google.protobuf.Int64Value
+	38,  // 85: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_throw_insert:type_name -> google.protobuf.Int64Value
+	38,  // 86: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_delay_insert:type_name -> google.protobuf.Int64Value
+	38,  // 87: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_throw_insert:type_name -> google.protobuf.Int64Value
+	38,  // 88: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_avg_part_size_for_too_many_parts:type_name -> google.protobuf.Int64Value
+	38,  // 89: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_parts_in_total:type_name -> google.protobuf.Int64Value
+	38,  // 90: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_replicated_merges_in_queue:type_name -> google.protobuf.Int64Value
+	38,  // 91: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_lower_max_size_of_merge:type_name -> google.protobuf.Int64Value
+	38,  // 92: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_execute_mutation:type_name -> google.protobuf.Int64Value
+	38,  // 93: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_min_space_in_pool:type_name -> google.protobuf.Int64Value
+	38,  // 94: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_max_space_in_pool:type_name -> google.protobuf.Int64Value
+	38,  // 95: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_bytes_for_wide_part:type_name -> google.protobuf.Int64Value
+	38,  // 96: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_for_wide_part:type_name -> google.protobuf.Int64Value
+	38,  // 97: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.cleanup_delay_period:type_name -> google.protobuf.Int64Value
+	38,  // 98: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_cleanup_delay_period:type_name -> google.protobuf.Int64Value
+	38,  // 99: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
+	38,  // 100: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
+	38,  // 101: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_seconds:type_name -> google.protobuf.Int64Value
+	39,  // 102: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_on_partition_only:type_name -> google.protobuf.BoolValue
+	38,  // 103: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_max_block_size:type_name -> google.protobuf.Int64Value
+	1,   // 104: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.deduplicate_merge_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionMode
+	2,   // 105: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.lightweight_mutation_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.LightweightMutationProjectionMode
+	38,  // 106: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window:type_name -> google.protobuf.Int64Value
+	38,  // 107: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window_seconds:type_name -> google.protobuf.Int64Value
+	39,  // 108: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_after_insert:type_name -> google.protobuf.BoolValue
+	39,  // 109: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_part_directory:type_name -> google.protobuf.BoolValue
+	38,  // 110: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_fetch:type_name -> google.protobuf.Int64Value
+	38,  // 111: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
+	38,  // 112: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
+	39,  // 113: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.ttl_only_drop_parts:type_name -> google.protobuf.BoolValue
+	38,  // 114: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_ttl_timeout:type_name -> google.protobuf.Int64Value
+	38,  // 115: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_recompression_ttl_timeout:type_name -> google.protobuf.Int64Value
+	38,  // 116: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_number_of_merges_with_ttl_in_pool:type_name -> google.protobuf.Int64Value
+	39,  // 117: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.materialize_ttl_recalculate_only:type_name -> google.protobuf.BoolValue
+	39,  // 118: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.check_sample_column_is_correct:type_name -> google.protobuf.BoolValue
+	39,  // 119: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.allow_remote_fs_zero_copy_replication:type_name -> google.protobuf.BoolValue
+	3,   // 120: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.method:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.Method
+	38,  // 121: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.level:type_name -> google.protobuf.Int64Value
+	23,  // 122: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.structure:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
+	24,  // 123: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.layout:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
+	25,  // 124: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.lifetime_range:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
+	26,  // 125: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.http_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
+	27,  // 126: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mysql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
+	28,  // 127: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.clickhouse_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
+	29,  // 128: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mongodb_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
+	30,  // 129: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.postgresql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
+	36,  // 130: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.patterns:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
+	6,   // 131: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.security_protocol:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocol
+	7,   // 132: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.sasl_mechanism:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanism
+	39,  // 133: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.enable_ssl_certificate_verification:type_name -> google.protobuf.BoolValue
+	38,  // 134: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.max_poll_interval_ms:type_name -> google.protobuf.Int64Value
+	38,  // 135: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.session_timeout_ms:type_name -> google.protobuf.Int64Value
+	8,   // 136: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.debug:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
+	9,   // 137: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.auto_offset_reset:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
+	17,  // 138: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
+	38,  // 139: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_size_in_bytes:type_name -> google.protobuf.Int64Value
+	38,  // 140: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entries:type_name -> google.protobuf.Int64Value
+	38,  // 141: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_bytes:type_name -> google.protobuf.Int64Value
+	38,  // 142: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_rows:type_name -> google.protobuf.Int64Value
+	38,  // 143: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge.port:type_name -> google.protobuf.Int64Value
+	31,  // 144: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.id:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
+	32,  // 145: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.key:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
+	33,  // 146: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_min:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	33,  // 147: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_max:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	33,  // 148: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	4,   // 149: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.type:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
+	39,  // 150: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.allow_read_expired_keys:type_name -> google.protobuf.BoolValue
+	39,  // 151: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.access_to_key_from_attributes:type_name -> google.protobuf.BoolValue
+	34,  // 152: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.headers:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
+	35,  // 153: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.replicas:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
+	39,  // 154: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.close_connection:type_name -> google.protobuf.BoolValue
+	39,  // 155: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.share_connection:type_name -> google.protobuf.BoolValue
+	39,  // 156: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource.secure:type_name -> google.protobuf.BoolValue
+	5,   // 157: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.ssl_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
+	33,  // 158: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	37,  // 159: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.retention:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
+	160, // [160:160] is the sub-list for method output_type
+	160, // [160:160] is the sub-list for method input_type
+	160, // [160:160] is the sub-list for extension type_name
+	160, // [160:160] is the sub-list for extension extendee
+	0,   // [0:160] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_init() }
@@ -4609,7 +5192,7 @@ func file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_init() {
 	if File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto != nil {
 		return
 	}
-	file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[7].OneofWrappers = []any{
+	file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[5].OneofWrappers = []any{
 		(*ClickhouseConfig_ExternalDictionary_FixedLifetime)(nil),
 		(*ClickhouseConfig_ExternalDictionary_LifetimeRange)(nil),
 		(*ClickhouseConfig_ExternalDictionary_HttpSource_)(nil),

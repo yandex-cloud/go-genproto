@@ -43,6 +43,18 @@ func (m *Backup) SetIndicesTotal(v int64) {
 	m.IndicesTotal = v
 }
 
+func (m *Backup) SetIncrementalSizeBytes(v int64) {
+	m.IncrementalSizeBytes = v
+}
+
+func (m *Backup) SetTotalSizeBytes(v int64) {
+	m.TotalSizeBytes = v
+}
+
+func (m *Backup) SetFreeSpaceRequiredBytes(v int64) {
+	m.FreeSpaceRequiredBytes = v
+}
+
 func (m *SnapshotManagement) SetSnapshotSchedule(v *SnapshotSchedule) {
 	m.SnapshotSchedule = v
 }

@@ -108,9 +108,15 @@ type Backup struct {
 	// Size of the backup in bytes.
 	SizeBytes int64 `protobuf:"varint,8,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
 	// The number of indices in the backup.
-	IndicesTotal  int64 `protobuf:"varint,9,opt,name=indices_total,json=indicesTotal,proto3" json:"indices_total,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	IndicesTotal int64 `protobuf:"varint,9,opt,name=indices_total,json=indicesTotal,proto3" json:"indices_total,omitempty"`
+	// Size of files which were copied as part of the incremental snapshot.
+	IncrementalSizeBytes int64 `protobuf:"varint,10,opt,name=incremental_size_bytes,json=incrementalSizeBytes,proto3" json:"incremental_size_bytes,omitempty"`
+	// Size of files that are referenced by the snapshot.
+	TotalSizeBytes int64 `protobuf:"varint,11,opt,name=total_size_bytes,json=totalSizeBytes,proto3" json:"total_size_bytes,omitempty"`
+	// The space amount required to restore from this backup.
+	FreeSpaceRequiredBytes int64 `protobuf:"varint,12,opt,name=free_space_required_bytes,json=freeSpaceRequiredBytes,proto3" json:"free_space_required_bytes,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Backup) Reset() {
@@ -202,6 +208,27 @@ func (x *Backup) GetSizeBytes() int64 {
 func (x *Backup) GetIndicesTotal() int64 {
 	if x != nil {
 		return x.IndicesTotal
+	}
+	return 0
+}
+
+func (x *Backup) GetIncrementalSizeBytes() int64 {
+	if x != nil {
+		return x.IncrementalSizeBytes
+	}
+	return 0
+}
+
+func (x *Backup) GetTotalSizeBytes() int64 {
+	if x != nil {
+		return x.TotalSizeBytes
+	}
+	return 0
+}
+
+func (x *Backup) GetFreeSpaceRequiredBytes() int64 {
+	if x != nil {
+		return x.FreeSpaceRequiredBytes
 	}
 	return 0
 }
@@ -532,7 +559,7 @@ var File_yandex_cloud_mdb_opensearch_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_opensearch_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/mdb/opensearch/v1/backup.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xef\x02\n" +
+	"+yandex/cloud/mdb/opensearch/v1/backup.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8a\x04\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12*\n" +
@@ -545,7 +572,11 @@ const file_yandex_cloud_mdb_opensearch_v1_backup_proto_rawDesc = "" +
 	"\x12opensearch_version\x18\a \x01(\tR\x11opensearchVersion\x12\x1d\n" +
 	"\n" +
 	"size_bytes\x18\b \x01(\x03R\tsizeBytes\x12#\n" +
-	"\rindices_total\x18\t \x01(\x03R\findicesTotal\"\xcc\x01\n" +
+	"\rindices_total\x18\t \x01(\x03R\findicesTotal\x124\n" +
+	"\x16incremental_size_bytes\x18\n" +
+	" \x01(\x03R\x14incrementalSizeBytes\x12(\n" +
+	"\x10total_size_bytes\x18\v \x01(\x03R\x0etotalSizeBytes\x129\n" +
+	"\x19free_space_required_bytes\x18\f \x01(\x03R\x16freeSpaceRequiredBytes\"\xcc\x01\n" +
 	"\x12SnapshotManagement\x12]\n" +
 	"\x11snapshot_schedule\x18\x01 \x01(\v20.yandex.cloud.mdb.opensearch.v1.SnapshotScheduleR\x10snapshotSchedule\x12W\n" +
 	"\x15snapshot_max_age_days\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=7R\x12snapshotMaxAgeDays\"\xfd\x02\n" +

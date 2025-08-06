@@ -58,6 +58,14 @@ func (m *CreateWafProfileRequest) SetAnalyzeRequestBody(v *WafProfile_AnalyzeReq
 	m.AnalyzeRequestBody = v
 }
 
+func (m *CreateWafProfileRequest) SetRuleSets(v []*WafProfile_WafProfileRuleSet) {
+	m.RuleSets = v
+}
+
+func (m *CreateWafProfileRequest) SetMatchAllRuleSets(v bool) {
+	m.MatchAllRuleSets = v
+}
+
 func (m *CreateWafProfileMetadata) SetWafProfileId(v string) {
 	m.WafProfileId = v
 }
@@ -104,6 +112,14 @@ func (m *UpdateWafProfileRequest) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
 
 func (m *UpdateWafProfileRequest) SetAnalyzeRequestBody(v *WafProfile_AnalyzeRequestBody) {
 	m.AnalyzeRequestBody = v
+}
+
+func (m *UpdateWafProfileRequest) SetRuleSets(v []*WafProfile_WafProfileRuleSet) {
+	m.RuleSets = v
+}
+
+func (m *UpdateWafProfileRequest) SetMatchAllRuleSets(v bool) {
+	m.MatchAllRuleSets = v
 }
 
 func (m *UpdateWafProfileMetadata) SetWafProfileId(v string) {

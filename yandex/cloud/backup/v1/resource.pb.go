@@ -30,6 +30,10 @@ const (
 	ResourceType_COMPUTE ResourceType = 1
 	// Resource is baremetal server
 	ResourceType_BMS ResourceType = 2
+	// Resource is VM
+	ResourceType_EXTERNAL_VM ResourceType = 3
+	// Resource is server
+	ResourceType_EXTERNAL_SERVER ResourceType = 4
 )
 
 // Enum value maps for ResourceType.
@@ -38,11 +42,15 @@ var (
 		0: "RESOURCE_TYPE_UNSPECIFIED",
 		1: "COMPUTE",
 		2: "BMS",
+		3: "EXTERNAL_VM",
+		4: "EXTERNAL_SERVER",
 	}
 	ResourceType_value = map[string]int32{
 		"RESOURCE_TYPE_UNSPECIFIED": 0,
 		"COMPUTE":                   1,
 		"BMS":                       2,
+		"EXTERNAL_VM":               3,
+		"EXTERNAL_SERVER":           4,
 	}
 )
 
@@ -991,11 +999,13 @@ const file_yandex_cloud_backup_v1_resource_proto_rawDesc = "" +
 	"\aWARNING\x10\x03\x12\r\n" +
 	"\tCANCELLED\x10\x04\x12\r\n" +
 	"\tABANDONED\x10\x05\x12\f\n" +
-	"\bTIMEDOUT\x10\x06*C\n" +
+	"\bTIMEDOUT\x10\x06*i\n" +
 	"\fResourceType\x12\x1d\n" +
 	"\x19RESOURCE_TYPE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aCOMPUTE\x10\x01\x12\a\n" +
-	"\x03BMS\x10\x02B_\n" +
+	"\x03BMS\x10\x02\x12\x0f\n" +
+	"\vEXTERNAL_VM\x10\x03\x12\x13\n" +
+	"\x0fEXTERNAL_SERVER\x10\x04B_\n" +
 	"\x1ayandex.cloud.api.backup.v1ZAgithub.com/yandex-cloud/go-genproto/yandex/cloud/backup/v1;backupb\x06proto3"
 
 var (

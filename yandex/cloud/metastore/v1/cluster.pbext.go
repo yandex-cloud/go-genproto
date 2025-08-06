@@ -31,6 +31,10 @@ func (m *Cluster) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *Cluster) SetMonitoring(v []*Monitoring) {
+	m.Monitoring = v
+}
+
 func (m *Cluster) SetHealth(v Cluster_Health) {
 	m.Health = v
 }
@@ -77,6 +81,18 @@ func (m *Cluster) SetMaintenanceWindow(v *MaintenanceWindow) {
 
 func (m *Cluster) SetPlannedOperation(v *MaintenanceOperation) {
 	m.PlannedOperation = v
+}
+
+func (m *Monitoring) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Monitoring) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *Monitoring) SetLink(v string) {
+	m.Link = v
 }
 
 func (m *ClusterConfig) SetResources(v *Resources) {

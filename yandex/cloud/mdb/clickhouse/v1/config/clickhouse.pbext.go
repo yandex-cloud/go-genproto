@@ -6,80 +6,48 @@ import (
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
+func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMergesMutationsConcurrencyRatio(v *wrapperspb.Int64Value) {
+	m.BackgroundMergesMutationsConcurrencyRatio = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundFetchesPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundFetchesPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMovePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundMovePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundDistributedSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundDistributedSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundBufferFlushSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundBufferFlushSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundMessageBrokerSchedulePoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundMessageBrokerSchedulePoolSize = v
+}
+
+func (m *ClickhouseConfig) SetBackgroundCommonPoolSize(v *wrapperspb.Int64Value) {
+	m.BackgroundCommonPoolSize = v
+}
+
+func (m *ClickhouseConfig) SetDictionariesLazyLoad(v *wrapperspb.BoolValue) {
+	m.DictionariesLazyLoad = v
+}
+
 func (m *ClickhouseConfig) SetLogLevel(v ClickhouseConfig_LogLevel) {
 	m.LogLevel = v
-}
-
-func (m *ClickhouseConfig) SetMergeTree(v *ClickhouseConfig_MergeTree) {
-	m.MergeTree = v
-}
-
-func (m *ClickhouseConfig) SetCompression(v []*ClickhouseConfig_Compression) {
-	m.Compression = v
-}
-
-func (m *ClickhouseConfig) SetDictionaries(v []*ClickhouseConfig_ExternalDictionary) {
-	m.Dictionaries = v
-}
-
-func (m *ClickhouseConfig) SetGraphiteRollup(v []*ClickhouseConfig_GraphiteRollup) {
-	m.GraphiteRollup = v
-}
-
-func (m *ClickhouseConfig) SetKafka(v *ClickhouseConfig_Kafka) {
-	m.Kafka = v
-}
-
-func (m *ClickhouseConfig) SetKafkaTopics(v []*ClickhouseConfig_KafkaTopic) {
-	m.KafkaTopics = v
-}
-
-func (m *ClickhouseConfig) SetRabbitmq(v *ClickhouseConfig_Rabbitmq) {
-	m.Rabbitmq = v
-}
-
-func (m *ClickhouseConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
-	m.MaxConnections = v
-}
-
-func (m *ClickhouseConfig) SetMaxConcurrentQueries(v *wrapperspb.Int64Value) {
-	m.MaxConcurrentQueries = v
-}
-
-func (m *ClickhouseConfig) SetKeepAliveTimeout(v *wrapperspb.Int64Value) {
-	m.KeepAliveTimeout = v
-}
-
-func (m *ClickhouseConfig) SetUncompressedCacheSize(v *wrapperspb.Int64Value) {
-	m.UncompressedCacheSize = v
-}
-
-func (m *ClickhouseConfig) SetMarkCacheSize(v *wrapperspb.Int64Value) {
-	m.MarkCacheSize = v
-}
-
-func (m *ClickhouseConfig) SetMaxTableSizeToDrop(v *wrapperspb.Int64Value) {
-	m.MaxTableSizeToDrop = v
-}
-
-func (m *ClickhouseConfig) SetMaxPartitionSizeToDrop(v *wrapperspb.Int64Value) {
-	m.MaxPartitionSizeToDrop = v
-}
-
-func (m *ClickhouseConfig) SetBuiltinDictionariesReloadInterval(v *wrapperspb.Int64Value) {
-	m.BuiltinDictionariesReloadInterval = v
-}
-
-func (m *ClickhouseConfig) SetTimezone(v string) {
-	m.Timezone = v
-}
-
-func (m *ClickhouseConfig) SetGeobaseEnabled(v *wrapperspb.BoolValue) {
-	m.GeobaseEnabled = v
-}
-
-func (m *ClickhouseConfig) SetGeobaseUri(v string) {
-	m.GeobaseUri = v
 }
 
 func (m *ClickhouseConfig) SetQueryLogRetentionSize(v *wrapperspb.Int64Value) {
@@ -250,40 +218,44 @@ func (m *ClickhouseConfig) SetAccessControlImprovements(v *ClickhouseConfig_Acce
 	m.AccessControlImprovements = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundPoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundPoolSize = v
+func (m *ClickhouseConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
+	m.MaxConnections = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundMergesMutationsConcurrencyRatio(v *wrapperspb.Int64Value) {
-	m.BackgroundMergesMutationsConcurrencyRatio = v
+func (m *ClickhouseConfig) SetMaxConcurrentQueries(v *wrapperspb.Int64Value) {
+	m.MaxConcurrentQueries = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundSchedulePoolSize = v
+func (m *ClickhouseConfig) SetMaxTableSizeToDrop(v *wrapperspb.Int64Value) {
+	m.MaxTableSizeToDrop = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundFetchesPoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundFetchesPoolSize = v
+func (m *ClickhouseConfig) SetMaxPartitionSizeToDrop(v *wrapperspb.Int64Value) {
+	m.MaxPartitionSizeToDrop = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundMovePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundMovePoolSize = v
+func (m *ClickhouseConfig) SetKeepAliveTimeout(v *wrapperspb.Int64Value) {
+	m.KeepAliveTimeout = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundDistributedSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundDistributedSchedulePoolSize = v
+func (m *ClickhouseConfig) SetUncompressedCacheSize(v *wrapperspb.Int64Value) {
+	m.UncompressedCacheSize = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundBufferFlushSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundBufferFlushSchedulePoolSize = v
+func (m *ClickhouseConfig) SetMarkCacheSize(v *wrapperspb.Int64Value) {
+	m.MarkCacheSize = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundMessageBrokerSchedulePoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundMessageBrokerSchedulePoolSize = v
+func (m *ClickhouseConfig) SetTimezone(v string) {
+	m.Timezone = v
 }
 
-func (m *ClickhouseConfig) SetBackgroundCommonPoolSize(v *wrapperspb.Int64Value) {
-	m.BackgroundCommonPoolSize = v
+func (m *ClickhouseConfig) SetGeobaseEnabled(v *wrapperspb.BoolValue) {
+	m.GeobaseEnabled = v
+}
+
+func (m *ClickhouseConfig) SetGeobaseUri(v string) {
+	m.GeobaseUri = v
 }
 
 func (m *ClickhouseConfig) SetDefaultDatabase(v *wrapperspb.StringValue) {
@@ -298,12 +270,48 @@ func (m *ClickhouseConfig) SetTotalMemoryTrackerSampleProbability(v *wrapperspb.
 	m.TotalMemoryTrackerSampleProbability = v
 }
 
-func (m *ClickhouseConfig) SetQueryMaskingRules(v []*ClickhouseConfig_QueryMaskingRule) {
-	m.QueryMaskingRules = v
+func (m *ClickhouseConfig) SetAsyncInsertThreads(v *wrapperspb.Int64Value) {
+	m.AsyncInsertThreads = v
 }
 
-func (m *ClickhouseConfig) SetDictionariesLazyLoad(v *wrapperspb.BoolValue) {
-	m.DictionariesLazyLoad = v
+func (m *ClickhouseConfig) SetBackupThreads(v *wrapperspb.Int64Value) {
+	m.BackupThreads = v
+}
+
+func (m *ClickhouseConfig) SetRestoreThreads(v *wrapperspb.Int64Value) {
+	m.RestoreThreads = v
+}
+
+func (m *ClickhouseConfig) SetMergeTree(v *ClickhouseConfig_MergeTree) {
+	m.MergeTree = v
+}
+
+func (m *ClickhouseConfig) SetCompression(v []*ClickhouseConfig_Compression) {
+	m.Compression = v
+}
+
+func (m *ClickhouseConfig) SetDictionaries(v []*ClickhouseConfig_ExternalDictionary) {
+	m.Dictionaries = v
+}
+
+func (m *ClickhouseConfig) SetGraphiteRollup(v []*ClickhouseConfig_GraphiteRollup) {
+	m.GraphiteRollup = v
+}
+
+func (m *ClickhouseConfig) SetKafka(v *ClickhouseConfig_Kafka) {
+	m.Kafka = v
+}
+
+func (m *ClickhouseConfig) SetKafkaTopics(v []*ClickhouseConfig_KafkaTopic) {
+	m.KafkaTopics = v
+}
+
+func (m *ClickhouseConfig) SetRabbitmq(v *ClickhouseConfig_Rabbitmq) {
+	m.Rabbitmq = v
+}
+
+func (m *ClickhouseConfig) SetQueryMaskingRules(v []*ClickhouseConfig_QueryMaskingRule) {
+	m.QueryMaskingRules = v
 }
 
 func (m *ClickhouseConfig) SetQueryCache(v *ClickhouseConfig_QueryCache) {
@@ -314,12 +322,20 @@ func (m *ClickhouseConfig) SetJdbcBridge(v *ClickhouseConfig_JdbcBridge) {
 	m.JdbcBridge = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
-	m.ReplicatedDeduplicationWindow = v
+func (m *ClickhouseConfig) SetMysqlProtocol(v *wrapperspb.BoolValue) {
+	m.MysqlProtocol = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowSeconds(v *wrapperspb.Int64Value) {
-	m.ReplicatedDeduplicationWindowSeconds = v
+func (m *ClickhouseConfig) SetBuiltinDictionariesReloadInterval(v *wrapperspb.Int64Value) {
+	m.BuiltinDictionariesReloadInterval = v
+}
+
+func (m *ClickhouseConfig_AccessControlImprovements) SetSelectFromSystemDbRequiresGrant(v *wrapperspb.BoolValue) {
+	m.SelectFromSystemDbRequiresGrant = v
+}
+
+func (m *ClickhouseConfig_AccessControlImprovements) SetSelectFromInformationSchemaRequiresGrant(v *wrapperspb.BoolValue) {
+	m.SelectFromInformationSchemaRequiresGrant = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetPartsToDelayInsert(v *wrapperspb.Int64Value) {
@@ -338,12 +354,24 @@ func (m *ClickhouseConfig_MergeTree) SetInactivePartsToThrowInsert(v *wrapperspb
 	m.InactivePartsToThrowInsert = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetMaxAvgPartSizeForTooManyParts(v *wrapperspb.Int64Value) {
+	m.MaxAvgPartSizeForTooManyParts = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaxPartsInTotal(v *wrapperspb.Int64Value) {
+	m.MaxPartsInTotal = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetMaxReplicatedMergesInQueue(v *wrapperspb.Int64Value) {
 	m.MaxReplicatedMergesInQueue = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge(v *wrapperspb.Int64Value) {
 	m.NumberOfFreeEntriesInPoolToLowerMaxSizeOfMerge = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToExecuteMutation(v *wrapperspb.Int64Value) {
+	m.NumberOfFreeEntriesInPoolToExecuteMutation = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMinSpaceInPool(v *wrapperspb.Int64Value) {
@@ -362,40 +390,20 @@ func (m *ClickhouseConfig_MergeTree) SetMinRowsForWidePart(v *wrapperspb.Int64Va
 	m.MinRowsForWidePart = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetTtlOnlyDropParts(v *wrapperspb.BoolValue) {
-	m.TtlOnlyDropParts = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetAllowRemoteFsZeroCopyReplication(v *wrapperspb.BoolValue) {
-	m.AllowRemoteFsZeroCopyReplication = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetMergeWithTtlTimeout(v *wrapperspb.Int64Value) {
-	m.MergeWithTtlTimeout = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetMergeWithRecompressionTtlTimeout(v *wrapperspb.Int64Value) {
-	m.MergeWithRecompressionTtlTimeout = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetMaxPartsInTotal(v *wrapperspb.Int64Value) {
-	m.MaxPartsInTotal = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetMaxNumberOfMergesWithTtlInPool(v *wrapperspb.Int64Value) {
-	m.MaxNumberOfMergesWithTtlInPool = v
-}
-
 func (m *ClickhouseConfig_MergeTree) SetCleanupDelayPeriod(v *wrapperspb.Int64Value) {
 	m.CleanupDelayPeriod = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToExecuteMutation(v *wrapperspb.Int64Value) {
-	m.NumberOfFreeEntriesInPoolToExecuteMutation = v
+func (m *ClickhouseConfig_MergeTree) SetMaxCleanupDelayPeriod(v *wrapperspb.Int64Value) {
+	m.MaxCleanupDelayPeriod = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetMaxAvgPartSizeForTooManyParts(v *wrapperspb.Int64Value) {
-	m.MaxAvgPartSizeForTooManyParts = v
+func (m *ClickhouseConfig_MergeTree) SetMergeSelectingSleepMs(v *wrapperspb.Int64Value) {
+	m.MergeSelectingSleepMs = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetMaxMergeSelectingSleepMs(v *wrapperspb.Int64Value) {
+	m.MaxMergeSelectingSleepMs = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetMinAgeToForceMergeSeconds(v *wrapperspb.Int64Value) {
@@ -406,24 +414,8 @@ func (m *ClickhouseConfig_MergeTree) SetMinAgeToForceMergeOnPartitionOnly(v *wra
 	m.MinAgeToForceMergeOnPartitionOnly = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetMergeSelectingSleepMs(v *wrapperspb.Int64Value) {
-	m.MergeSelectingSleepMs = v
-}
-
 func (m *ClickhouseConfig_MergeTree) SetMergeMaxBlockSize(v *wrapperspb.Int64Value) {
 	m.MergeMaxBlockSize = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetCheckSampleColumnIsCorrect(v *wrapperspb.BoolValue) {
-	m.CheckSampleColumnIsCorrect = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetMaxMergeSelectingSleepMs(v *wrapperspb.Int64Value) {
-	m.MaxMergeSelectingSleepMs = v
-}
-
-func (m *ClickhouseConfig_MergeTree) SetMaxCleanupDelayPeriod(v *wrapperspb.Int64Value) {
-	m.MaxCleanupDelayPeriod = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetDeduplicateMergeProjectionMode(v ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode) {
@@ -434,8 +426,12 @@ func (m *ClickhouseConfig_MergeTree) SetLightweightMutationProjectionMode(v Clic
 	m.LightweightMutationProjectionMode = v
 }
 
-func (m *ClickhouseConfig_MergeTree) SetMaterializeTtlRecalculateOnly(v *wrapperspb.BoolValue) {
-	m.MaterializeTtlRecalculateOnly = v
+func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindow(v *wrapperspb.Int64Value) {
+	m.ReplicatedDeduplicationWindow = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowSeconds(v *wrapperspb.Int64Value) {
+	m.ReplicatedDeduplicationWindowSeconds = v
 }
 
 func (m *ClickhouseConfig_MergeTree) SetFsyncAfterInsert(v *wrapperspb.BoolValue) {
@@ -458,60 +454,32 @@ func (m *ClickhouseConfig_MergeTree) SetMinRowsToFsyncAfterMerge(v *wrapperspb.I
 	m.MinRowsToFsyncAfterMerge = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
-	m.SecurityProtocol = v
+func (m *ClickhouseConfig_MergeTree) SetTtlOnlyDropParts(v *wrapperspb.BoolValue) {
+	m.TtlOnlyDropParts = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetSaslMechanism(v ClickhouseConfig_Kafka_SaslMechanism) {
-	m.SaslMechanism = v
+func (m *ClickhouseConfig_MergeTree) SetMergeWithTtlTimeout(v *wrapperspb.Int64Value) {
+	m.MergeWithTtlTimeout = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetSaslUsername(v string) {
-	m.SaslUsername = v
+func (m *ClickhouseConfig_MergeTree) SetMergeWithRecompressionTtlTimeout(v *wrapperspb.Int64Value) {
+	m.MergeWithRecompressionTtlTimeout = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetSaslPassword(v string) {
-	m.SaslPassword = v
+func (m *ClickhouseConfig_MergeTree) SetMaxNumberOfMergesWithTtlInPool(v *wrapperspb.Int64Value) {
+	m.MaxNumberOfMergesWithTtlInPool = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetEnableSslCertificateVerification(v *wrapperspb.BoolValue) {
-	m.EnableSslCertificateVerification = v
+func (m *ClickhouseConfig_MergeTree) SetMaterializeTtlRecalculateOnly(v *wrapperspb.BoolValue) {
+	m.MaterializeTtlRecalculateOnly = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetMaxPollIntervalMs(v *wrapperspb.Int64Value) {
-	m.MaxPollIntervalMs = v
+func (m *ClickhouseConfig_MergeTree) SetCheckSampleColumnIsCorrect(v *wrapperspb.BoolValue) {
+	m.CheckSampleColumnIsCorrect = v
 }
 
-func (m *ClickhouseConfig_Kafka) SetSessionTimeoutMs(v *wrapperspb.Int64Value) {
-	m.SessionTimeoutMs = v
-}
-
-func (m *ClickhouseConfig_Kafka) SetDebug(v ClickhouseConfig_Kafka_Debug) {
-	m.Debug = v
-}
-
-func (m *ClickhouseConfig_Kafka) SetAutoOffsetReset(v ClickhouseConfig_Kafka_AutoOffsetReset) {
-	m.AutoOffsetReset = v
-}
-
-func (m *ClickhouseConfig_KafkaTopic) SetName(v string) {
-	m.Name = v
-}
-
-func (m *ClickhouseConfig_KafkaTopic) SetSettings(v *ClickhouseConfig_Kafka) {
-	m.Settings = v
-}
-
-func (m *ClickhouseConfig_Rabbitmq) SetUsername(v string) {
-	m.Username = v
-}
-
-func (m *ClickhouseConfig_Rabbitmq) SetPassword(v string) {
-	m.Password = v
-}
-
-func (m *ClickhouseConfig_Rabbitmq) SetVhost(v string) {
-	m.Vhost = v
+func (m *ClickhouseConfig_MergeTree) SetAllowRemoteFsZeroCopyReplication(v *wrapperspb.BoolValue) {
+	m.AllowRemoteFsZeroCopyReplication = v
 }
 
 func (m *ClickhouseConfig_Compression) SetMethod(v ClickhouseConfig_Compression_Method) {
@@ -594,6 +562,106 @@ func (m *ClickhouseConfig_ExternalDictionary) SetPostgresqlSource(v *ClickhouseC
 	m.Source = &ClickhouseConfig_ExternalDictionary_PostgresqlSource_{
 		PostgresqlSource: v,
 	}
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure) SetId(v *ClickhouseConfig_ExternalDictionary_Structure_Id) {
+	m.Id = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure) SetKey(v *ClickhouseConfig_ExternalDictionary_Structure_Key) {
+	m.Key = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure) SetRangeMin(v *ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
+	m.RangeMin = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure) SetRangeMax(v *ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
+	m.RangeMax = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure) SetAttributes(v []*ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
+	m.Attributes = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Id) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Key) SetAttributes(v []*ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
+	m.Attributes = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetType(v string) {
+	m.Type = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetNullValue(v string) {
+	m.NullValue = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetExpression(v string) {
+	m.Expression = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetHierarchical(v bool) {
+	m.Hierarchical = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetInjective(v bool) {
+	m.Injective = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetType(v ClickhouseConfig_ExternalDictionary_Layout_Type) {
+	m.Type = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetSizeInCells(v int64) {
+	m.SizeInCells = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAllowReadExpiredKeys(v *wrapperspb.BoolValue) {
+	m.AllowReadExpiredKeys = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxUpdateQueueSize(v int64) {
+	m.MaxUpdateQueueSize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetUpdateQueuePushTimeoutMilliseconds(v int64) {
+	m.UpdateQueuePushTimeoutMilliseconds = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetQueryWaitTimeoutMilliseconds(v int64) {
+	m.QueryWaitTimeoutMilliseconds = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxThreadsForUpdates(v int64) {
+	m.MaxThreadsForUpdates = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetInitialArraySize(v int64) {
+	m.InitialArraySize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxArraySize(v int64) {
+	m.MaxArraySize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAccessToKeyFromAttributes(v *wrapperspb.BoolValue) {
+	m.AccessToKeyFromAttributes = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Range) SetMin(v int64) {
+	m.Min = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Range) SetMax(v int64) {
+	m.Max = v
 }
 
 func (m *ClickhouseConfig_ExternalDictionary_HttpSource) SetUrl(v string) {
@@ -768,106 +836,6 @@ func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSource) SetSslMode(v Clic
 	m.SslMode = v
 }
 
-func (m *ClickhouseConfig_ExternalDictionary_Structure) SetId(v *ClickhouseConfig_ExternalDictionary_Structure_Id) {
-	m.Id = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure) SetKey(v *ClickhouseConfig_ExternalDictionary_Structure_Key) {
-	m.Key = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure) SetRangeMin(v *ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
-	m.RangeMin = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure) SetRangeMax(v *ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
-	m.RangeMax = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure) SetAttributes(v []*ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
-	m.Attributes = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetName(v string) {
-	m.Name = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetType(v string) {
-	m.Type = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetNullValue(v string) {
-	m.NullValue = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetExpression(v string) {
-	m.Expression = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetHierarchical(v bool) {
-	m.Hierarchical = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Attribute) SetInjective(v bool) {
-	m.Injective = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Id) SetName(v string) {
-	m.Name = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Structure_Key) SetAttributes(v []*ClickhouseConfig_ExternalDictionary_Structure_Attribute) {
-	m.Attributes = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetType(v ClickhouseConfig_ExternalDictionary_Layout_Type) {
-	m.Type = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetSizeInCells(v int64) {
-	m.SizeInCells = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAllowReadExpiredKeys(v *wrapperspb.BoolValue) {
-	m.AllowReadExpiredKeys = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxUpdateQueueSize(v int64) {
-	m.MaxUpdateQueueSize = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetUpdateQueuePushTimeoutMilliseconds(v int64) {
-	m.UpdateQueuePushTimeoutMilliseconds = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetQueryWaitTimeoutMilliseconds(v int64) {
-	m.QueryWaitTimeoutMilliseconds = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxThreadsForUpdates(v int64) {
-	m.MaxThreadsForUpdates = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetInitialArraySize(v int64) {
-	m.InitialArraySize = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetMaxArraySize(v int64) {
-	m.MaxArraySize = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAccessToKeyFromAttributes(v *wrapperspb.BoolValue) {
-	m.AccessToKeyFromAttributes = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Range) SetMin(v int64) {
-	m.Min = v
-}
-
-func (m *ClickhouseConfig_ExternalDictionary_Range) SetMax(v int64) {
-	m.Max = v
-}
-
 func (m *ClickhouseConfig_GraphiteRollup) SetName(v string) {
 	m.Name = v
 }
@@ -912,6 +880,62 @@ func (m *ClickhouseConfig_GraphiteRollup_Pattern_Retention) SetPrecision(v int64
 	m.Precision = v
 }
 
+func (m *ClickhouseConfig_Kafka) SetSecurityProtocol(v ClickhouseConfig_Kafka_SecurityProtocol) {
+	m.SecurityProtocol = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetSaslMechanism(v ClickhouseConfig_Kafka_SaslMechanism) {
+	m.SaslMechanism = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetSaslUsername(v string) {
+	m.SaslUsername = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetSaslPassword(v string) {
+	m.SaslPassword = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetEnableSslCertificateVerification(v *wrapperspb.BoolValue) {
+	m.EnableSslCertificateVerification = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetMaxPollIntervalMs(v *wrapperspb.Int64Value) {
+	m.MaxPollIntervalMs = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetSessionTimeoutMs(v *wrapperspb.Int64Value) {
+	m.SessionTimeoutMs = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetDebug(v ClickhouseConfig_Kafka_Debug) {
+	m.Debug = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetAutoOffsetReset(v ClickhouseConfig_Kafka_AutoOffsetReset) {
+	m.AutoOffsetReset = v
+}
+
+func (m *ClickhouseConfig_KafkaTopic) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickhouseConfig_KafkaTopic) SetSettings(v *ClickhouseConfig_Kafka) {
+	m.Settings = v
+}
+
+func (m *ClickhouseConfig_Rabbitmq) SetUsername(v string) {
+	m.Username = v
+}
+
+func (m *ClickhouseConfig_Rabbitmq) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *ClickhouseConfig_Rabbitmq) SetVhost(v string) {
+	m.Vhost = v
+}
+
 func (m *ClickhouseConfig_QueryMaskingRule) SetName(v string) {
 	m.Name = v
 }
@@ -946,14 +970,6 @@ func (m *ClickhouseConfig_JdbcBridge) SetHost(v string) {
 
 func (m *ClickhouseConfig_JdbcBridge) SetPort(v *wrapperspb.Int64Value) {
 	m.Port = v
-}
-
-func (m *ClickhouseConfig_AccessControlImprovements) SetSelectFromSystemDbRequiresGrant(v *wrapperspb.BoolValue) {
-	m.SelectFromSystemDbRequiresGrant = v
-}
-
-func (m *ClickhouseConfig_AccessControlImprovements) SetSelectFromInformationSchemaRequiresGrant(v *wrapperspb.BoolValue) {
-	m.SelectFromInformationSchemaRequiresGrant = v
 }
 
 func (m *ClickhouseConfigSet) SetEffectiveConfig(v *ClickhouseConfig) {

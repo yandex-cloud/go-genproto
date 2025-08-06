@@ -6,6 +6,10 @@ func (m *GetConfigurationRequest) SetConfigurationId(v string) {
 	m.ConfigurationId = v
 }
 
+func (m *GetConfigurationRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
 func (m *ListConfigurationsRequest) SetPageSize(v int64) {
 	m.PageSize = v
 }
@@ -20,6 +24,10 @@ func (m *ListConfigurationsRequest) SetOrderBy(v string) {
 
 func (m *ListConfigurationsRequest) SetFilter(v string) {
 	m.Filter = v
+}
+
+func (m *ListConfigurationsRequest) SetFolderId(v string) {
+	m.FolderId = v
 }
 
 func (m *ListConfigurationsResponse) SetConfigurations(v []*Configuration) {

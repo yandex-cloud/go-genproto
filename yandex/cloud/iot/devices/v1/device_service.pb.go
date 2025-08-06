@@ -1527,11 +1527,11 @@ const file_yandex_cloud_iot_devices_v1_device_service_proto_rawDesc = "" +
 	"\x10GetDeviceRequest\x12)\n" +
 	"\tdevice_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bdeviceId\x12H\n" +
 	"\vdevice_view\x18\x02 \x01(\x0e2'.yandex.cloud.iot.devices.v1.DeviceViewR\n" +
-	"deviceView\"\xcb\x01\n" +
+	"deviceView\"\xd2\x01\n" +
 	"\x16GetByNameDeviceRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"registryId\x128\n" +
-	"\vdevice_name\x18\x02 \x01(\tB\x17\xf2\xc71\x13[a-zA-Z0-9_-]{0,63}R\n" +
+	"registryId\x12?\n" +
+	"\vdevice_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\n" +
 	"deviceName\x12H\n" +
 	"\vdevice_view\x18\x03 \x01(\x0e2'.yandex.cloud.iot.devices.v1.DeviceViewR\n" +
 	"deviceView\"\x94\x02\n" +
@@ -1548,11 +1548,11 @@ const file_yandex_cloud_iot_devices_v1_device_service_proto_rawDesc = "" +
 	"\x02id\x12\x04\xc0\xc11\x01\"|\n" +
 	"\x13ListDevicesResponse\x12=\n" +
 	"\adevices\x18\x01 \x03(\v2#.yandex.cloud.iot.devices.v1.DeviceR\adevices\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xdc\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd6\x05\n" +
 	"\x13CreateDeviceRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"registryId\x128\n" +
-	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"registryId\x122\n" +
+	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12`\n" +
 	"\fcertificates\x18\x04 \x03(\v2<.yandex.cloud.iot.devices.v1.CreateDeviceRequest.CertificateR\fcertificates\x12g\n" +
 	"\rtopic_aliases\x18\x05 \x03(\v2B.yandex.cloud.iot.devices.v1.CreateDeviceRequest.TopicAliasesEntryR\ftopicAliases\x12\x1a\n" +
@@ -1567,12 +1567,12 @@ const file_yandex_cloud_iot_devices_v1_device_service_proto_rawDesc = "" +
 	"\vCertificate\x12)\n" +
 	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\"3\n" +
 	"\x14CreateDeviceMetadata\x12\x1b\n" +
-	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\"\xdd\x04\n" +
+	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\"\xd3\x04\n" +
 	"\x13UpdateDeviceRequest\x12)\n" +
 	"\tdevice_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bdeviceId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"updateMask\x12.\n" +
+	"\x04name\x18\x03 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12g\n" +
 	"\rtopic_aliases\x18\x05 \x03(\v2B.yandex.cloud.iot.devices.v1.UpdateDeviceRequest.TopicAliasesEntryR\ftopicAliases\x12\x91\x01\n" +
 	"\x06labels\x18\x06 \x03(\v2<.yandex.cloud.iot.devices.v1.UpdateDeviceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a?\n" +

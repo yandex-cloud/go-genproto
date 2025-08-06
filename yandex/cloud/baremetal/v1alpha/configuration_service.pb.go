@@ -28,8 +28,12 @@ type GetConfigurationRequest struct {
 	//
 	// To get the configuration ID, use a [ConfigurationService.List] request.
 	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// ID of the folder to return a Configuration resource for.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId      string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetConfigurationRequest) Reset() {
@@ -69,6 +73,13 @@ func (x *GetConfigurationRequest) GetConfigurationId() string {
 	return ""
 }
 
+func (x *GetConfigurationRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
 type ListConfigurationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum number of results per page to return. If the number of available
@@ -97,7 +108,11 @@ type ListConfigurationsRequest struct {
 	// Supported operators: ["AND"].
 	// Supported fields: ["id", "name"].
 	// Both snake_case and camelCase are supported for fields.
-	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
+	Filter string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
+	// ID of the folder to return a Configuration resource for.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId      string `protobuf:"bytes,104,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -156,6 +171,13 @@ func (x *ListConfigurationsRequest) GetOrderBy() string {
 func (x *ListConfigurationsRequest) GetFilter() string {
 	if x != nil {
 		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListConfigurationsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
 	}
 	return ""
 }
@@ -222,15 +244,17 @@ var File_yandex_cloud_baremetal_v1alpha_configuration_service_proto protoreflect
 
 const file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/baremetal/v1alpha/configuration_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a\x1dyandex/cloud/validation.proto\"^\n" +
+	":yandex/cloud/baremetal/v1alpha/configuration_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x99\x01\n" +
 	"\x17GetConfigurationRequest\x12C\n" +
-	"\x10configuration_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\"\x9b\x01\n" +
+	"\x10configuration_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x129\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\"\xd6\x01\n" +
 	"\x19ListConfigurationsRequest\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
-	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x01\x10d\"\xa1\x01\n" +
+	"\x06filter\x18g \x01(\tR\x06filter\x129\n" +
+	"\tfolder_id\x18h \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderIdJ\x04\b\x01\x10d\"\xa1\x01\n" +
 	"\x1aListConfigurationsResponse\x12U\n" +
 	"\x0econfigurations\x18\x01 \x03(\v2-.yandex.cloud.baremetal.v1alpha.ConfigurationR\x0econfigurations\x12&\n" +
 	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\x88\x02\n" +

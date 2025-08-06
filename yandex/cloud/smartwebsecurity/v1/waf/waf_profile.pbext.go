@@ -59,6 +59,14 @@ func (m *WafProfile) SetAnalyzeRequestBody(v *WafProfile_AnalyzeRequestBody) {
 	m.AnalyzeRequestBody = v
 }
 
+func (m *WafProfile) SetRuleSets(v []*WafProfile_WafProfileRuleSet) {
+	m.RuleSets = v
+}
+
+func (m *WafProfile) SetMatchAllRuleSets(v bool) {
+	m.MatchAllRuleSets = v
+}
+
 func (m *WafProfile_CoreRuleSet) SetInboundAnomalyScore(v int64) {
 	m.InboundAnomalyScore = v
 }
@@ -81,6 +89,86 @@ func (m *WafProfile_AnalyzeRequestBody) SetSizeLimit(v int64) {
 
 func (m *WafProfile_AnalyzeRequestBody) SetSizeLimitAction(v WafProfile_AnalyzeRequestBody_Action) {
 	m.SizeLimitAction = v
+}
+
+type WafProfile_WafProfileRuleSet_RuleSet = isWafProfile_WafProfileRuleSet_RuleSet
+
+func (m *WafProfile_WafProfileRuleSet) SetRuleSet(v WafProfile_WafProfileRuleSet_RuleSet) {
+	m.RuleSet = v
+}
+
+func (m *WafProfile_WafProfileRuleSet) SetCoreRuleSet(v *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) {
+	m.RuleSet = &WafProfile_WafProfileRuleSet_CoreRuleSet{
+		CoreRuleSet: v,
+	}
+}
+
+func (m *WafProfile_WafProfileRuleSet) SetYaRuleSet(v *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) {
+	m.RuleSet = &WafProfile_WafProfileRuleSet_YaRuleSet{
+		YaRuleSet: v,
+	}
+}
+
+func (m *WafProfile_WafProfileRuleSet) SetMlRuleSet(v *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) {
+	m.RuleSet = &WafProfile_WafProfileRuleSet_MlRuleSet{
+		MlRuleSet: v,
+	}
+}
+
+func (m *WafProfile_WafProfileRuleSet) SetPriority(v int64) {
+	m.Priority = v
+}
+
+func (m *WafProfile_WafProfileRuleSet) SetIsEnabled(v bool) {
+	m.IsEnabled = v
+}
+
+func (m *WafProfile_WafProfileRuleSet) SetAction(v WafProfile_WafProfileRuleSet_RuleSetAction) {
+	m.Action = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_RuleGroup) SetId(v string) {
+	m.Id = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_RuleGroup) SetAction(v WafProfile_WafProfileRuleSet_RuleGroup_Action) {
+	m.Action = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_RuleGroup) SetInboundAnomalyScore(v int64) {
+	m.InboundAnomalyScore = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_RuleGroup) SetIsEnabled(v bool) {
+	m.IsEnabled = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) SetRuleSet(v *RuleSet) {
+	m.RuleSet = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) SetInboundAnomalyScore(v int64) {
+	m.InboundAnomalyScore = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileCoreRuleSet) SetParanoiaLevel(v int64) {
+	m.ParanoiaLevel = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) SetRuleSet(v *RuleSet) {
+	m.RuleSet = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileYaRuleSet) SetRuleGroups(v []*WafProfile_WafProfileRuleSet_RuleGroup) {
+	m.RuleGroups = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) SetRuleSet(v *RuleSet) {
+	m.RuleSet = v
+}
+
+func (m *WafProfile_WafProfileRuleSet_WafProfileMlRuleSet) SetRuleGroups(v []*WafProfile_WafProfileRuleSet_RuleGroup) {
+	m.RuleGroups = v
 }
 
 func (m *WafProfileRule) SetRuleId(v string) {
@@ -129,4 +217,12 @@ func (m *RuleSet) SetName(v string) {
 
 func (m *RuleSet) SetVersion(v string) {
 	m.Version = v
+}
+
+func (m *RuleSet) SetType(v RuleSet_RuleSetType) {
+	m.Type = v
+}
+
+func (m *RuleSet) SetId(v string) {
+	m.Id = v
 }
