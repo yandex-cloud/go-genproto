@@ -91,6 +91,10 @@ func (m *TrinoConfigSpec) SetRetryPolicy(v *RetryPolicyConfig) {
 	m.RetryPolicy = v
 }
 
+func (m *TrinoConfigSpec) SetVersion(v string) {
+	m.Version = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -131,6 +135,10 @@ func (m *UpdateTrinoConfigSpec) SetCoordinatorConfig(v *UpdateCoordinatorConfig)
 
 func (m *UpdateTrinoConfigSpec) SetWorkerConfig(v *UpdateWorkerConfig) {
 	m.WorkerConfig = v
+}
+
+func (m *UpdateTrinoConfigSpec) SetVersion(v string) {
+	m.Version = v
 }
 
 func (m *UpdateTrinoConfigSpec) SetRetryPolicy(v *RetryPolicyConfig) {

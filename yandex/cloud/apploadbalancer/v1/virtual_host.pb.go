@@ -752,10 +752,12 @@ type Route struct {
 	//
 	//	*Route_Http
 	//	*Route_Grpc
-	Route         isRoute_Route `protobuf_oneof:"route"`
-	RouteOptions  *RouteOptions `protobuf:"bytes,4,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Route        isRoute_Route `protobuf_oneof:"route"`
+	RouteOptions *RouteOptions `protobuf:"bytes,4,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
+	// Whether set to 'true' disables security profile for the route.
+	DisableSecurityProfile bool `protobuf:"varint,5,opt,name=disable_security_profile,json=disableSecurityProfile,proto3" json:"disable_security_profile,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Route) Reset() {
@@ -825,6 +827,13 @@ func (x *Route) GetRouteOptions() *RouteOptions {
 		return x.RouteOptions
 	}
 	return nil
+}
+
+func (x *Route) GetDisableSecurityProfile() bool {
+	if x != nil {
+		return x.DisableSecurityProfile
+	}
+	return false
 }
 
 type isRoute_Route interface {
@@ -2130,12 +2139,13 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc = "" +
 	"\areplace\x18\x03 \x01(\tH\x00R\areplace\x12\x18\n" +
 	"\x06remove\x18\x04 \x01(\bH\x00R\x06remove\x12\x18\n" +
 	"\x06rename\x18\x05 \x01(\tH\x00R\x06renameB\v\n" +
-	"\toperation\"\x88\x02\n" +
+	"\toperation\"\xc2\x02\n" +
 	"\x05Route\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12@\n" +
 	"\x04http\x18\x02 \x01(\v2*.yandex.cloud.apploadbalancer.v1.HttpRouteH\x00R\x04http\x12@\n" +
 	"\x04grpc\x18\x03 \x01(\v2*.yandex.cloud.apploadbalancer.v1.GrpcRouteH\x00R\x04grpc\x12R\n" +
-	"\rroute_options\x18\x04 \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptionsB\r\n" +
+	"\rroute_options\x18\x04 \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x128\n" +
+	"\x18disable_security_profile\x18\x05 \x01(\bR\x16disableSecurityProfileB\r\n" +
 	"\x05route\x12\x04\xc0\xc11\x01\"\xdd\x02\n" +
 	"\tHttpRoute\x12E\n" +
 	"\x05match\x18\x01 \x01(\v2/.yandex.cloud.apploadbalancer.v1.HttpRouteMatchR\x05match\x12H\n" +

@@ -154,6 +154,10 @@ func (m *Route) SetRouteOptions(v *RouteOptions) {
 	m.RouteOptions = v
 }
 
+func (m *Route) SetDisableSecurityProfile(v bool) {
+	m.DisableSecurityProfile = v
+}
+
 type HttpRoute_Action = isHttpRoute_Action
 
 func (m *HttpRoute) SetAction(v HttpRoute_Action) {

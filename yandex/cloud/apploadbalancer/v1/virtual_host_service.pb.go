@@ -868,9 +868,11 @@ type UpdateRouteRequest struct {
 	//	*UpdateRouteRequest_Grpc
 	Route isUpdateRouteRequest_Route `protobuf_oneof:"route"`
 	// New route options for the route.
-	RouteOptions  *RouteOptions `protobuf:"bytes,7,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RouteOptions *RouteOptions `protobuf:"bytes,7,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
+	// Whether set to 'true' disable security profile for the route.
+	DisableSecurityProfile bool `protobuf:"varint,8,opt,name=disable_security_profile,json=disableSecurityProfile,proto3" json:"disable_security_profile,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UpdateRouteRequest) Reset() {
@@ -961,6 +963,13 @@ func (x *UpdateRouteRequest) GetRouteOptions() *RouteOptions {
 		return x.RouteOptions
 	}
 	return nil
+}
+
+func (x *UpdateRouteRequest) GetDisableSecurityProfile() bool {
+	if x != nil {
+		return x.DisableSecurityProfile
+	}
+	return false
 }
 
 type isUpdateRouteRequest_Route interface {
@@ -1105,7 +1114,7 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12*\n" +
 	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\x12\x1d\n" +
 	"\n" +
-	"route_name\x18\x03 \x01(\tR\trouteName\"\xbb\x03\n" +
+	"route_name\x18\x03 \x01(\tR\trouteName\"\xf5\x03\n" +
 	"\x12UpdateRouteRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x120\n" +
 	"\x11virtual_host_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x0fvirtualHostName\x12#\n" +
@@ -1115,7 +1124,8 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"updateMask\x12@\n" +
 	"\x04http\x18\x05 \x01(\v2*.yandex.cloud.apploadbalancer.v1.HttpRouteH\x00R\x04http\x12@\n" +
 	"\x04grpc\x18\x06 \x01(\v2*.yandex.cloud.apploadbalancer.v1.GrpcRouteH\x00R\x04grpc\x12R\n" +
-	"\rroute_options\x18\a \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptionsB\r\n" +
+	"\rroute_options\x18\a \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x128\n" +
+	"\x18disable_security_profile\x18\b \x01(\bR\x16disableSecurityProfileB\r\n" +
 	"\x05route\x12\x04\xc0\xc11\x01\"\x86\x01\n" +
 	"\x13UpdateRouteMetadata\x12$\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12*\n" +

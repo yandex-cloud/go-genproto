@@ -344,7 +344,10 @@ type TrinoConfigSpec struct {
 	// Configuration for worker nodes, including scaling policy and computational resources.
 	WorkerConfig *WorkerConfig `protobuf:"bytes,3,opt,name=worker_config,json=workerConfig,proto3" json:"worker_config,omitempty"`
 	// Configuration for retry policy, specifying the spooling storage destination and other settings.
-	RetryPolicy   *RetryPolicyConfig `protobuf:"bytes,4,opt,name=retry_policy,json=retryPolicy,proto3" json:"retry_policy,omitempty"`
+	RetryPolicy *RetryPolicyConfig `protobuf:"bytes,4,opt,name=retry_policy,json=retryPolicy,proto3" json:"retry_policy,omitempty"`
+	// Trino version.
+	// Format: "Number".
+	Version       string `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -405,6 +408,13 @@ func (x *TrinoConfigSpec) GetRetryPolicy() *RetryPolicyConfig {
 		return x.RetryPolicy
 	}
 	return nil
+}
+
+func (x *TrinoConfigSpec) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
 }
 
 type CreateClusterMetadata struct {
@@ -557,6 +567,9 @@ type UpdateTrinoConfigSpec struct {
 	CoordinatorConfig *UpdateCoordinatorConfig `protobuf:"bytes,1,opt,name=coordinator_config,json=coordinatorConfig,proto3" json:"coordinator_config,omitempty"`
 	// Configuration for worker nodes, including scaling policy and computational resources.
 	WorkerConfig *UpdateWorkerConfig `protobuf:"bytes,2,opt,name=worker_config,json=workerConfig,proto3" json:"worker_config,omitempty"`
+	// Trino version.
+	// Format: "Number".
+	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
 	// Configuration for retry policy, specifying the spooling storage destination and other settings.
 	RetryPolicy   *RetryPolicyConfig `protobuf:"bytes,4,opt,name=retry_policy,json=retryPolicy,proto3" json:"retry_policy,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -605,6 +618,13 @@ func (x *UpdateTrinoConfigSpec) GetWorkerConfig() *UpdateWorkerConfig {
 		return x.WorkerConfig
 	}
 	return nil
+}
+
+func (x *UpdateTrinoConfigSpec) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
 }
 
 func (x *UpdateTrinoConfigSpec) GetRetryPolicy() *RetryPolicyConfig {
@@ -1356,12 +1376,13 @@ const file_yandex_cloud_trino_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v2(.yandex.cloud.trino.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xed\x02\n" +
 	"\x0fTrinoConfigSpec\x12>\n" +
 	"\bcatalogs\x18\x01 \x03(\v2\".yandex.cloud.trino.v1.CatalogSpecR\bcatalogs\x12]\n" +
 	"\x12coordinator_config\x18\x02 \x01(\v2(.yandex.cloud.trino.v1.CoordinatorConfigB\x04\xe8\xc71\x01R\x11coordinatorConfig\x12N\n" +
 	"\rworker_config\x18\x03 \x01(\v2#.yandex.cloud.trino.v1.WorkerConfigB\x04\xe8\xc71\x01R\fworkerConfig\x12K\n" +
-	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicyJ\x04\b\x05\x10\x06\"6\n" +
+	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicy\x12\x18\n" +
+	"\aversion\x18\x06 \x01(\tR\aversionJ\x04\b\x05\x10\x06\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"Y\n" +
@@ -1376,11 +1397,12 @@ const file_yandex_cloud_trino_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"auto_scale\x18\x02 \x01(\v2&.yandex.cloud.trino.v1.AutoScalePolicyH\x00R\tautoScaleB\x12\n" +
 	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01\"\x99\x02\n" +
+	"scale_type\x12\x04\xc0\xc11\x01\"\xad\x02\n" +
 	"\x15UpdateTrinoConfigSpec\x12]\n" +
 	"\x12coordinator_config\x18\x01 \x01(\v2..yandex.cloud.trino.v1.UpdateCoordinatorConfigR\x11coordinatorConfig\x12N\n" +
-	"\rworker_config\x18\x02 \x01(\v2).yandex.cloud.trino.v1.UpdateWorkerConfigR\fworkerConfig\x12K\n" +
-	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicyJ\x04\b\x03\x10\x04\"G\n" +
+	"\rworker_config\x18\x02 \x01(\v2).yandex.cloud.trino.v1.UpdateWorkerConfigR\fworkerConfig\x12\x18\n" +
+	"\aversion\x18\x03 \x01(\tR\aversion\x12K\n" +
+	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicy\"G\n" +
 	"\x17UpdateNetworkConfigSpec\x12,\n" +
 	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds\"\xc0\x06\n" +
 	"\x14UpdateClusterRequest\x12+\n" +

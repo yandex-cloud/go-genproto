@@ -196,6 +196,10 @@ func (m *UpdateRouteRequest) SetRouteOptions(v *RouteOptions) {
 	m.RouteOptions = v
 }
 
+func (m *UpdateRouteRequest) SetDisableSecurityProfile(v bool) {
+	m.DisableSecurityProfile = v
+}
+
 func (m *UpdateRouteMetadata) SetHttpRouterId(v string) {
 	m.HttpRouterId = v
 }
