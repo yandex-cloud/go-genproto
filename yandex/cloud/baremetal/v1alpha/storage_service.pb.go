@@ -8,6 +8,7 @@ package baremetal
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -217,7 +218,7 @@ var File_yandex_cloud_baremetal_v1alpha_storage_service_proto protoreflect.FileD
 
 const file_yandex_cloud_baremetal_v1alpha_storage_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/baremetal/v1alpha/storage_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\x80\x01\n" +
+	"4yandex/cloud/baremetal/v1alpha/storage_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\x80\x01\n" +
 	"\x0eDefaultStorage\x12)\n" +
 	"\x10configuration_id\x18\x01 \x01(\tR\x0fconfigurationId\x12C\n" +
 	"\bstorages\x18\x02 \x03(\v2'.yandex.cloud.baremetal.v1alpha.StorageR\bstorages\"_\n" +
@@ -226,11 +227,11 @@ const file_yandex_cloud_baremetal_v1alpha_storage_service_proto_rawDesc = "" +
 	"\x1eBatchGetDefaultStoragesRequest\x12R\n" +
 	"\x11configuration_ids\x18\x01 \x03(\tB%\xf2\xc71\x0e[a-z][a-z0-9]*\x82\xc81\x051-100\x8a\xc81\x0220\x90\xc81\x01R\x10configurationIds\"|\n" +
 	"\x1fBatchGetDefaultStoragesResponse\x12Y\n" +
-	"\x10default_storages\x18\x01 \x03(\v2..yandex.cloud.baremetal.v1alpha.DefaultStorageR\x0fdefaultStorages2\xa1\x02\n" +
-	"\x0eStorageService\x12x\n" +
+	"\x10default_storages\x18\x01 \x03(\v2..yandex.cloud.baremetal.v1alpha.DefaultStorageR\x0fdefaultStorages2\x97\x03\n" +
+	"\x0eStorageService\x12\xb6\x01\n" +
 	"\n" +
-	"GetDefault\x128.yandex.cloud.baremetal.v1alpha.GetDefaultStorageRequest\x1a..yandex.cloud.baremetal.v1alpha.DefaultStorage\"\x00\x12\x94\x01\n" +
-	"\x0fBatchGetDefault\x12>.yandex.cloud.baremetal.v1alpha.BatchGetDefaultStoragesRequest\x1a?.yandex.cloud.baremetal.v1alpha.BatchGetDefaultStoragesResponse\"\x00Br\n" +
+	"GetDefault\x128.yandex.cloud.baremetal.v1alpha.GetDefaultStorageRequest\x1a..yandex.cloud.baremetal.v1alpha.DefaultStorage\">\x82\xd3\xe4\x93\x028\x126/baremetal/v1alpha/storages/default/{configuration_id}\x12\xcb\x01\n" +
+	"\x0fBatchGetDefault\x12>.yandex.cloud.baremetal.v1alpha.BatchGetDefaultStoragesRequest\x1a?.yandex.cloud.baremetal.v1alpha.BatchGetDefaultStoragesResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/baremetal/v1alpha/storages/default:batchGetBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

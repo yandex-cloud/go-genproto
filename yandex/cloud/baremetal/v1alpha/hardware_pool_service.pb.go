@@ -8,6 +8,7 @@ package baremetal
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -190,7 +191,7 @@ var File_yandex_cloud_baremetal_v1alpha_hardware_pool_service_proto protoreflect
 
 const file_yandex_cloud_baremetal_v1alpha_hardware_pool_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/baremetal/v1alpha/hardware_pool_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a2yandex/cloud/baremetal/v1alpha/hardware_pool.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
+	":yandex/cloud/baremetal/v1alpha/hardware_pool_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/hardware_pool.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
 	"\x16GetHardwarePoolRequest\x122\n" +
 	"\x10hardware_pool_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x0ehardwarePoolId\"g\n" +
 	"\x18ListHardwarePoolsRequest\x12&\n" +
@@ -199,10 +200,10 @@ const file_yandex_cloud_baremetal_v1alpha_hardware_pool_service_proto_rawDesc = 
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x01\x10d\"\x9e\x01\n" +
 	"\x19ListHardwarePoolsResponse\x12S\n" +
 	"\x0ehardware_pools\x18\x01 \x03(\v2,.yandex.cloud.baremetal.v1alpha.HardwarePoolR\rhardwarePools\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\x83\x02\n" +
-	"\x13HardwarePoolService\x12m\n" +
-	"\x03Get\x126.yandex.cloud.baremetal.v1alpha.GetHardwarePoolRequest\x1a,.yandex.cloud.baremetal.v1alpha.HardwarePool\"\x00\x12}\n" +
-	"\x04List\x128.yandex.cloud.baremetal.v1alpha.ListHardwarePoolsRequest\x1a9.yandex.cloud.baremetal.v1alpha.ListHardwarePoolsResponse\"\x00Br\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xe8\x02\n" +
+	"\x13HardwarePoolService\x12\xa8\x01\n" +
+	"\x03Get\x126.yandex.cloud.baremetal.v1alpha.GetHardwarePoolRequest\x1a,.yandex.cloud.baremetal.v1alpha.HardwarePool\";\x82\xd3\xe4\x93\x025\x123/baremetal/v1alpha/hardwarePools/{hardware_pool_id}\x12\xa5\x01\n" +
+	"\x04List\x128.yandex.cloud.baremetal.v1alpha.ListHardwarePoolsRequest\x1a9.yandex.cloud.baremetal.v1alpha.ListHardwarePoolsResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /baremetal/v1alpha/hardwarePoolsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

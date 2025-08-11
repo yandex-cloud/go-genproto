@@ -326,6 +326,10 @@ func (m *ClickhouseConfig) SetMysqlProtocol(v *wrapperspb.BoolValue) {
 	m.MysqlProtocol = v
 }
 
+func (m *ClickhouseConfig) SetCustomMacros(v []*ClickhouseConfig_Macro) {
+	m.CustomMacros = v
+}
+
 func (m *ClickhouseConfig) SetBuiltinDictionariesReloadInterval(v *wrapperspb.Int64Value) {
 	m.BuiltinDictionariesReloadInterval = v
 }
@@ -970,6 +974,14 @@ func (m *ClickhouseConfig_JdbcBridge) SetHost(v string) {
 
 func (m *ClickhouseConfig_JdbcBridge) SetPort(v *wrapperspb.Int64Value) {
 	m.Port = v
+}
+
+func (m *ClickhouseConfig_Macro) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickhouseConfig_Macro) SetValue(v string) {
+	m.Value = v
 }
 
 func (m *ClickhouseConfigSet) SetEffectiveConfig(v *ClickhouseConfig) {

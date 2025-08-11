@@ -8,6 +8,7 @@ package baremetal
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -244,7 +245,7 @@ var File_yandex_cloud_baremetal_v1alpha_configuration_service_proto protoreflect
 
 const file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/baremetal/v1alpha/configuration_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x99\x01\n" +
+	":yandex/cloud/baremetal/v1alpha/configuration_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x99\x01\n" +
 	"\x17GetConfigurationRequest\x12C\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x129\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\"\xd6\x01\n" +
@@ -257,10 +258,10 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc = 
 	"\tfolder_id\x18h \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderIdJ\x04\b\x01\x10d\"\xa1\x01\n" +
 	"\x1aListConfigurationsResponse\x12U\n" +
 	"\x0econfigurations\x18\x01 \x03(\v2-.yandex.cloud.baremetal.v1alpha.ConfigurationR\x0econfigurations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\x88\x02\n" +
-	"\x14ConfigurationService\x12o\n" +
-	"\x03Get\x127.yandex.cloud.baremetal.v1alpha.GetConfigurationRequest\x1a-.yandex.cloud.baremetal.v1alpha.Configuration\"\x00\x12\x7f\n" +
-	"\x04List\x129.yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest\x1a:.yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse\"\x00Br\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xef\x02\n" +
+	"\x14ConfigurationService\x12\xab\x01\n" +
+	"\x03Get\x127.yandex.cloud.baremetal.v1alpha.GetConfigurationRequest\x1a-.yandex.cloud.baremetal.v1alpha.Configuration\"<\x82\xd3\xe4\x93\x026\x124/baremetal/v1alpha/configurations/{configuration_id}\x12\xa8\x01\n" +
+	"\x04List\x129.yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest\x1a:.yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/baremetal/v1alpha/configurationsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

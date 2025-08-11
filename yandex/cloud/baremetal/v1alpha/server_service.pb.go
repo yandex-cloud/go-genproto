@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -1870,7 +1871,7 @@ var File_yandex_cloud_baremetal_v1alpha_server_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/baremetal/v1alpha/server_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/baremetal/v1alpha/server.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
+	"3yandex/cloud/baremetal/v1alpha/server_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/baremetal/v1alpha/server.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
 	"\x10GetServerRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"\xce\x01\n" +
 	"\x11ListServerRequest\x129\n" +
@@ -1992,29 +1993,29 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\tsecret_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bsecretId\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x02 \x01(\tR\tversionId\x12\x16\n" +
-	"\x03key\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x03key2\xd5\r\n" +
-	"\rServerService\x12a\n" +
-	"\x03Get\x120.yandex.cloud.baremetal.v1alpha.GetServerRequest\x1a&.yandex.cloud.baremetal.v1alpha.Server\"\x00\x12o\n" +
-	"\x04List\x121.yandex.cloud.baremetal.v1alpha.ListServerRequest\x1a2.yandex.cloud.baremetal.v1alpha.ListServerResponse\"\x00\x12\x84\x01\n" +
-	"\x06Create\x123.yandex.cloud.baremetal.v1alpha.CreateServerRequest\x1a!.yandex.cloud.operation.Operation\"\"\xb2\xd2*\x1e\n" +
-	"\x14CreateServerMetadata\x12\x06Server\x12\xa9\x01\n" +
-	"\vBatchCreate\x129.yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest\x1a!.yandex.cloud.operation.Operation\"<\xb2\xd2*8\n" +
-	"\x1aBatchCreateServersMetadata\x12\x1aBatchCreateServersResponse\x12\x84\x01\n" +
-	"\x06Update\x123.yandex.cloud.baremetal.v1alpha.UpdateServerRequest\x1a!.yandex.cloud.operation.Operation\"\"\xb2\xd2*\x1e\n" +
-	"\x14UpdateServerMetadata\x12\x06Server\x12\x99\x01\n" +
-	"\bPowerOff\x125.yandex.cloud.baremetal.v1alpha.PowerOffServerRequest\x1a!.yandex.cloud.operation.Operation\"3\xb2\xd2*/\n" +
-	"\x16PowerOffServerMetadata\x12\x15google.protobuf.Empty\x12\x96\x01\n" +
-	"\aPowerOn\x124.yandex.cloud.baremetal.v1alpha.PowerOnServerRequest\x1a!.yandex.cloud.operation.Operation\"2\xb2\xd2*.\n" +
-	"\x15PowerOnServerMetadata\x12\x15google.protobuf.Empty\x12\x93\x01\n" +
-	"\x06Reboot\x123.yandex.cloud.baremetal.v1alpha.RebootServerRequest\x1a!.yandex.cloud.operation.Operation\"1\xb2\xd2*-\n" +
-	"\x14RebootServerMetadata\x12\x15google.protobuf.Empty\x12\x9c\x01\n" +
-	"\tReinstall\x126.yandex.cloud.baremetal.v1alpha.ReinstallServerRequest\x1a!.yandex.cloud.operation.Operation\"4\xb2\xd2*0\n" +
-	"\x17ReinstallServerMetadata\x12\x15google.protobuf.Empty\x12\x9d\x01\n" +
-	"\x11StartProlongation\x128.yandex.cloud.baremetal.v1alpha.StartProlongationRequest\x1a!.yandex.cloud.operation.Operation\"+\xb2\xd2*'\n" +
-	"\x1dServerSetProlongationMetadata\x12\x06Server\x12\x9b\x01\n" +
-	"\x10StopProlongation\x127.yandex.cloud.baremetal.v1alpha.StopProlongationRequest\x1a!.yandex.cloud.operation.Operation\"+\xb2\xd2*'\n" +
-	"\x1dServerSetProlongationMetadata\x12\x06Server\x12\x8d\x01\n" +
-	"\x0eListOperations\x12;.yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse\"\x00Br\n" +
+	"\x03key\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x03key2\xd2\x12\n" +
+	"\rServerService\x12\x8f\x01\n" +
+	"\x03Get\x120.yandex.cloud.baremetal.v1alpha.GetServerRequest\x1a&.yandex.cloud.baremetal.v1alpha.Server\".\x82\xd3\xe4\x93\x02(\x12&/baremetal/v1alpha/servers/{server_id}\x12\x91\x01\n" +
+	"\x04List\x121.yandex.cloud.baremetal.v1alpha.ListServerRequest\x1a2.yandex.cloud.baremetal.v1alpha.ListServerResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/baremetal/v1alpha/servers\x12\xa9\x01\n" +
+	"\x06Create\x123.yandex.cloud.baremetal.v1alpha.CreateServerRequest\x1a!.yandex.cloud.operation.Operation\"G\xb2\xd2*\x1e\n" +
+	"\x14CreateServerMetadata\x12\x06Server\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/baremetal/v1alpha/servers\x12\xda\x01\n" +
+	"\vBatchCreate\x129.yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest\x1a!.yandex.cloud.operation.Operation\"m\xb2\xd2*8\n" +
+	"\x1aBatchCreateServersMetadata\x12\x1aBatchCreateServersResponse\x82\xd3\xe4\x93\x02+:\x01*\"&/baremetal/v1alpha/servers:batchCreate\x12\xb5\x01\n" +
+	"\x06Update\x123.yandex.cloud.baremetal.v1alpha.UpdateServerRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2*\x1e\n" +
+	"\x14UpdateServerMetadata\x12\x06Server\x82\xd3\xe4\x93\x02+:\x01*2&/baremetal/v1alpha/servers/{server_id}\x12\xd3\x01\n" +
+	"\bPowerOff\x125.yandex.cloud.baremetal.v1alpha.PowerOffServerRequest\x1a!.yandex.cloud.operation.Operation\"m\xb2\xd2*/\n" +
+	"\x16PowerOffServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x024:\x01*\"//baremetal/v1alpha/servers/{server_id}:powerOff\x12\xcf\x01\n" +
+	"\aPowerOn\x124.yandex.cloud.baremetal.v1alpha.PowerOnServerRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2*.\n" +
+	"\x15PowerOnServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x023:\x01*\"./baremetal/v1alpha/servers/{server_id}:powerOn\x12\xcb\x01\n" +
+	"\x06Reboot\x123.yandex.cloud.baremetal.v1alpha.RebootServerRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*-\n" +
+	"\x14RebootServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x022:\x01*\"-/baremetal/v1alpha/servers/{server_id}:reboot\x12\xd7\x01\n" +
+	"\tReinstall\x126.yandex.cloud.baremetal.v1alpha.ReinstallServerRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2*0\n" +
+	"\x17ReinstallServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x025:\x01*\"0/baremetal/v1alpha/servers/{server_id}:reinstall\x12\xe0\x01\n" +
+	"\x11StartProlongation\x128.yandex.cloud.baremetal.v1alpha.StartProlongationRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*'\n" +
+	"\x1dServerSetProlongationMetadata\x12\x06Server\x82\xd3\xe4\x93\x02=:\x01*\"8/baremetal/v1alpha/servers/{server_id}:startProlongation\x12\xdd\x01\n" +
+	"\x10StopProlongation\x127.yandex.cloud.baremetal.v1alpha.StopProlongationRequest\x1a!.yandex.cloud.operation.Operation\"m\xb2\xd2*'\n" +
+	"\x1dServerSetProlongationMetadata\x12\x06Server\x82\xd3\xe4\x93\x02<:\x01*\"7/baremetal/v1alpha/servers/{server_id}:stopProlongation\x12\xc6\x01\n" +
+	"\x0eListOperations\x12;.yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse\"9\x82\xd3\xe4\x93\x023\x121/baremetal/v1alpha/servers/{server_id}/operationsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

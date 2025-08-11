@@ -8,6 +8,7 @@ package baremetal
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -190,7 +191,7 @@ var File_yandex_cloud_baremetal_v1alpha_zone_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_baremetal_v1alpha_zone_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/baremetal/v1alpha/zone_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/zone.proto\x1a\x1dyandex/cloud/validation.proto\"3\n" +
+	"1yandex/cloud/baremetal/v1alpha/zone_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a)yandex/cloud/baremetal/v1alpha/zone.proto\x1a\x1dyandex/cloud/validation.proto\"3\n" +
 	"\x0eGetZoneRequest\x12!\n" +
 	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x06zoneId\"_\n" +
 	"\x10ListZonesRequest\x12&\n" +
@@ -199,10 +200,10 @@ const file_yandex_cloud_baremetal_v1alpha_zone_service_proto_rawDesc = "" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x01\x10d\"}\n" +
 	"\x11ListZonesResponse\x12:\n" +
 	"\x05zones\x18\x01 \x03(\v2$.yandex.cloud.baremetal.v1alpha.ZoneR\x05zones\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xdb\x01\n" +
-	"\vZoneService\x12]\n" +
-	"\x03Get\x12..yandex.cloud.baremetal.v1alpha.GetZoneRequest\x1a$.yandex.cloud.baremetal.v1alpha.Zone\"\x00\x12m\n" +
-	"\x04List\x120.yandex.cloud.baremetal.v1alpha.ListZonesRequest\x1a1.yandex.cloud.baremetal.v1alpha.ListZonesResponse\"\x00Br\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xa7\x02\n" +
+	"\vZoneService\x12\x87\x01\n" +
+	"\x03Get\x12..yandex.cloud.baremetal.v1alpha.GetZoneRequest\x1a$.yandex.cloud.baremetal.v1alpha.Zone\"*\x82\xd3\xe4\x93\x02$\x12\"/baremetal/v1alpha/zones/{zone_id}\x12\x8d\x01\n" +
+	"\x04List\x120.yandex.cloud.baremetal.v1alpha.ListZonesRequest\x1a1.yandex.cloud.baremetal.v1alpha.ListZonesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/baremetal/v1alpha/zonesBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -539,7 +540,7 @@ var File_yandex_cloud_baremetal_v1alpha_private_cloud_connection_service_proto p
 
 const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"Eyandex/cloud/baremetal/v1alpha/private_cloud_connection_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\"\x7f\n" +
+	"Eyandex/cloud/baremetal/v1alpha/private_cloud_connection_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\"\x7f\n" +
 	" GetPrivateCloudConnectionRequest\x12[\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"\xde\x01\n" +
 	"!ListPrivateCloudConnectionRequest\x129\n" +
@@ -567,16 +568,16 @@ const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_service_proto
 	"#DeletePrivateCloudConnectionRequest\x12[\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"e\n" +
 	"$DeletePrivateCloudConnectionMetadata\x12=\n" +
-	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId2\xd9\x06\n" +
-	"\x1dPrivateCloudConnectionService\x12\x81\x01\n" +
-	"\x03Get\x12@.yandex.cloud.baremetal.v1alpha.GetPrivateCloudConnectionRequest\x1a6.yandex.cloud.baremetal.v1alpha.PrivateCloudConnection\"\x00\x12\x8f\x01\n" +
-	"\x04List\x12A.yandex.cloud.baremetal.v1alpha.ListPrivateCloudConnectionRequest\x1aB.yandex.cloud.baremetal.v1alpha.ListPrivateCloudConnectionResponse\"\x00\x12\xb4\x01\n" +
-	"\x06Create\x12C.yandex.cloud.baremetal.v1alpha.CreatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"B\xb2\xd2*>\n" +
-	"$CreatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x12\xb4\x01\n" +
-	"\x06Update\x12C.yandex.cloud.baremetal.v1alpha.UpdatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"B\xb2\xd2*>\n" +
-	"$UpdatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x12\xb3\x01\n" +
-	"\x06Delete\x12C.yandex.cloud.baremetal.v1alpha.DeletePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"A\xb2\xd2*=\n" +
-	"$DeletePrivateCloudConnectionMetadata\x12\x15google.protobuf.EmptyBr\n" +
+	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId2\xb5\t\n" +
+	"\x1dPrivateCloudConnectionService\x12\xd1\x01\n" +
+	"\x03Get\x12@.yandex.cloud.baremetal.v1alpha.GetPrivateCloudConnectionRequest\x1a6.yandex.cloud.baremetal.v1alpha.PrivateCloudConnection\"P\x82\xd3\xe4\x93\x02J\x12H/baremetal/v1alpha/privateCloudConnections/{private_cloud_connection_id}\x12\xc1\x01\n" +
+	"\x04List\x12A.yandex.cloud.baremetal.v1alpha.ListPrivateCloudConnectionRequest\x1aB.yandex.cloud.baremetal.v1alpha.ListPrivateCloudConnectionResponse\"2\x82\xd3\xe4\x93\x02,\x12*/baremetal/v1alpha/privateCloudConnections\x12\xe9\x01\n" +
+	"\x06Create\x12C.yandex.cloud.baremetal.v1alpha.CreatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"w\xb2\xd2*>\n" +
+	"$CreatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x82\xd3\xe4\x93\x02/:\x01*\"*/baremetal/v1alpha/privateCloudConnections\x12\x88\x02\n" +
+	"\x06Update\x12C.yandex.cloud.baremetal.v1alpha.UpdatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\x95\x01\xb2\xd2*>\n" +
+	"$UpdatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x82\xd3\xe4\x93\x02M:\x01*2H/baremetal/v1alpha/privateCloudConnections/{private_cloud_connection_id}\x12\x84\x02\n" +
+	"\x06Delete\x12C.yandex.cloud.baremetal.v1alpha.DeletePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*=\n" +
+	"$DeletePrivateCloudConnectionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J*H/baremetal/v1alpha/privateCloudConnections/{private_cloud_connection_id}Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

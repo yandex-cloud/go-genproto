@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -716,7 +717,7 @@ var File_yandex_cloud_baremetal_v1alpha_image_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v1alpha_image_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v1alpha/image_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/baremetal/v1alpha/image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"F\n" +
+	"2yandex/cloud/baremetal/v1alpha/image_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/baremetal/v1alpha/image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"F\n" +
 	"\x0fGetImageRequest\x123\n" +
 	"\bimage_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\aimageId\"\xce\x01\n" +
 	"\x11ListImagesRequest\x129\n" +
@@ -767,17 +768,17 @@ const file_yandex_cloud_baremetal_v1alpha_image_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\x8a\x06\n" +
-	"\fImageService\x12_\n" +
-	"\x03Get\x12/.yandex.cloud.baremetal.v1alpha.GetImageRequest\x1a%.yandex.cloud.baremetal.v1alpha.Image\"\x00\x12o\n" +
-	"\x04List\x121.yandex.cloud.baremetal.v1alpha.ListImagesRequest\x1a2.yandex.cloud.baremetal.v1alpha.ListImagesResponse\"\x00\x12\x81\x01\n" +
-	"\x06Create\x122.yandex.cloud.baremetal.v1alpha.CreateImageRequest\x1a!.yandex.cloud.operation.Operation\" \xb2\xd2*\x1c\n" +
-	"\x13CreateImageMetadata\x12\x05Image\x12\x81\x01\n" +
-	"\x06Update\x122.yandex.cloud.baremetal.v1alpha.UpdateImageRequest\x1a!.yandex.cloud.operation.Operation\" \xb2\xd2*\x1c\n" +
-	"\x13UpdateImageMetadata\x12\x05Image\x12\x91\x01\n" +
-	"\x06Delete\x122.yandex.cloud.baremetal.v1alpha.DeleteImageRequest\x1a!.yandex.cloud.operation.Operation\"0\xb2\xd2*,\n" +
-	"\x13DeleteImageMetadata\x12\x15google.protobuf.Empty\x12\x8b\x01\n" +
-	"\x0eListOperations\x12:.yandex.cloud.baremetal.v1alpha.ListImageOperationsRequest\x1a;.yandex.cloud.baremetal.v1alpha.ListImageOperationsResponse\"\x00Br\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\x8f\b\n" +
+	"\fImageService\x12\x8b\x01\n" +
+	"\x03Get\x12/.yandex.cloud.baremetal.v1alpha.GetImageRequest\x1a%.yandex.cloud.baremetal.v1alpha.Image\",\x82\xd3\xe4\x93\x02&\x12$/baremetal/v1alpha/images/{image_id}\x12\x90\x01\n" +
+	"\x04List\x121.yandex.cloud.baremetal.v1alpha.ListImagesRequest\x1a2.yandex.cloud.baremetal.v1alpha.ListImagesResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/baremetal/v1alpha/images\x12\xa5\x01\n" +
+	"\x06Create\x122.yandex.cloud.baremetal.v1alpha.CreateImageRequest\x1a!.yandex.cloud.operation.Operation\"D\xb2\xd2*\x1c\n" +
+	"\x13CreateImageMetadata\x12\x05Image\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/baremetal/v1alpha/images\x12\xb0\x01\n" +
+	"\x06Update\x122.yandex.cloud.baremetal.v1alpha.UpdateImageRequest\x1a!.yandex.cloud.operation.Operation\"O\xb2\xd2*\x1c\n" +
+	"\x13UpdateImageMetadata\x12\x05Image\x82\xd3\xe4\x93\x02):\x01*2$/baremetal/v1alpha/images/{image_id}\x12\xbd\x01\n" +
+	"\x06Delete\x122.yandex.cloud.baremetal.v1alpha.DeleteImageRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2*,\n" +
+	"\x13DeleteImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02&*$/baremetal/v1alpha/images/{image_id}\x12\xc2\x01\n" +
+	"\x0eListOperations\x12:.yandex.cloud.baremetal.v1alpha.ListImageOperationsRequest\x1a;.yandex.cloud.baremetal.v1alpha.ListImageOperationsResponse\"7\x82\xd3\xe4\x93\x021\x12//baremetal/v1alpha/images/{image_id}/operationsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

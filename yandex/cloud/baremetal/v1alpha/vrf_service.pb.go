@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -705,7 +706,7 @@ var File_yandex_cloud_baremetal_v1alpha_vrf_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/baremetal/v1alpha/vrf_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/baremetal/v1alpha/vrf.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"0yandex/cloud/baremetal/v1alpha/vrf_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/baremetal/v1alpha/vrf.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\rGetVrfRequest\x12/\n" +
 	"\x06vrf_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x05vrfId\"\xcb\x01\n" +
 	"\x0eListVrfRequest\x129\n" +
@@ -755,18 +756,18 @@ const file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xe8\x05\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xdb\a\n" +
 	"\n" +
-	"VrfService\x12[\n" +
-	"\x03Get\x12-.yandex.cloud.baremetal.v1alpha.GetVrfRequest\x1a#.yandex.cloud.baremetal.v1alpha.Vrf\"\x00\x12i\n" +
-	"\x04List\x12..yandex.cloud.baremetal.v1alpha.ListVrfRequest\x1a/.yandex.cloud.baremetal.v1alpha.ListVrfResponse\"\x00\x12{\n" +
-	"\x06Create\x120.yandex.cloud.baremetal.v1alpha.CreateVrfRequest\x1a!.yandex.cloud.operation.Operation\"\x1c\xb2\xd2*\x18\n" +
-	"\x11CreateVrfMetadata\x12\x03Vrf\x12{\n" +
-	"\x06Update\x120.yandex.cloud.baremetal.v1alpha.UpdateVrfRequest\x1a!.yandex.cloud.operation.Operation\"\x1c\xb2\xd2*\x18\n" +
-	"\x11UpdateVrfMetadata\x12\x03Vrf\x12\x8d\x01\n" +
-	"\x06Delete\x120.yandex.cloud.baremetal.v1alpha.DeleteVrfRequest\x1a!.yandex.cloud.operation.Operation\".\xb2\xd2**\n" +
-	"\x11DeleteVrfMetadata\x12\x15google.protobuf.Empty\x12\x87\x01\n" +
-	"\x0eListOperations\x128.yandex.cloud.baremetal.v1alpha.ListVrfOperationsRequest\x1a9.yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse\"\x00Br\n" +
+	"VrfService\x12\x83\x01\n" +
+	"\x03Get\x12-.yandex.cloud.baremetal.v1alpha.GetVrfRequest\x1a#.yandex.cloud.baremetal.v1alpha.Vrf\"(\x82\xd3\xe4\x93\x02\"\x12 /baremetal/v1alpha/vrfs/{vrf_id}\x12\x88\x01\n" +
+	"\x04List\x12..yandex.cloud.baremetal.v1alpha.ListVrfRequest\x1a/.yandex.cloud.baremetal.v1alpha.ListVrfResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/baremetal/v1alpha/vrfs\x12\x9d\x01\n" +
+	"\x06Create\x120.yandex.cloud.baremetal.v1alpha.CreateVrfRequest\x1a!.yandex.cloud.operation.Operation\">\xb2\xd2*\x18\n" +
+	"\x11CreateVrfMetadata\x12\x03Vrf\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/baremetal/v1alpha/vrfs\x12\xa6\x01\n" +
+	"\x06Update\x120.yandex.cloud.baremetal.v1alpha.UpdateVrfRequest\x1a!.yandex.cloud.operation.Operation\"G\xb2\xd2*\x18\n" +
+	"\x11UpdateVrfMetadata\x12\x03Vrf\x82\xd3\xe4\x93\x02%:\x01*2 /baremetal/v1alpha/vrfs/{vrf_id}\x12\xb5\x01\n" +
+	"\x06Delete\x120.yandex.cloud.baremetal.v1alpha.DeleteVrfRequest\x1a!.yandex.cloud.operation.Operation\"V\xb2\xd2**\n" +
+	"\x11DeleteVrfMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\"* /baremetal/v1alpha/vrfs/{vrf_id}\x12\xba\x01\n" +
+	"\x0eListOperations\x128.yandex.cloud.baremetal.v1alpha.ListVrfOperationsRequest\x1a9.yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse\"3\x82\xd3\xe4\x93\x02-\x12+/baremetal/v1alpha/vrfs/{vrf_id}/operationsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

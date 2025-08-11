@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -97,12 +98,13 @@ type ListPublicSubnetRequest struct {
 	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
-	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
+	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring), `@>` (contains).
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
 	// Example: "key1='value' AND key2='value'"
 	// Supported operators: ["AND"].
-	// Supported fields: ["id", "name", "zoneId", "hardwarePoolId"].
+	// Supported fields: ["id", "name", "zoneId", "hardwarePoolIds"].
+	// Deprecated fields: ["hardwarePoolId"].
 	// Both snake_case and camelCase are supported for fields.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -744,7 +746,7 @@ var File_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto protoreflect
 
 const file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/baremetal/v1alpha/public_subnet_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/baremetal/v1alpha/public_subnet.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
+	":yandex/cloud/baremetal/v1alpha/public_subnet_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/baremetal/v1alpha/public_subnet.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
 	"\x16GetPublicSubnetRequest\x12.\n" +
 	"\x10public_subnet_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0epublicSubnetId\"\xd4\x01\n" +
 	"\x17ListPublicSubnetRequest\x129\n" +
@@ -798,17 +800,17 @@ const file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc = 
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xf1\x06\n" +
-	"\x13PublicSubnetService\x12m\n" +
-	"\x03Get\x126.yandex.cloud.baremetal.v1alpha.GetPublicSubnetRequest\x1a,.yandex.cloud.baremetal.v1alpha.PublicSubnet\"\x00\x12{\n" +
-	"\x04List\x127.yandex.cloud.baremetal.v1alpha.ListPublicSubnetRequest\x1a8.yandex.cloud.baremetal.v1alpha.ListPublicSubnetResponse\"\x00\x12\x96\x01\n" +
-	"\x06Create\x129.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest\x1a!.yandex.cloud.operation.Operation\".\xb2\xd2**\n" +
-	"\x1aCreatePublicSubnetMetadata\x12\fPublicSubnet\x12\x96\x01\n" +
-	"\x06Update\x129.yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest\x1a!.yandex.cloud.operation.Operation\".\xb2\xd2**\n" +
-	"\x1aUpdatePublicSubnetMetadata\x12\fPublicSubnet\x12\x9f\x01\n" +
-	"\x06Delete\x129.yandex.cloud.baremetal.v1alpha.DeletePublicSubnetRequest\x1a!.yandex.cloud.operation.Operation\"7\xb2\xd2*3\n" +
-	"\x1aDeletePublicSubnetMetadata\x12\x15google.protobuf.Empty\x12\x99\x01\n" +
-	"\x0eListOperations\x12A.yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsRequest\x1aB.yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse\"\x00Br\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xc0\t\n" +
+	"\x13PublicSubnetService\x12\xa8\x01\n" +
+	"\x03Get\x126.yandex.cloud.baremetal.v1alpha.GetPublicSubnetRequest\x1a,.yandex.cloud.baremetal.v1alpha.PublicSubnet\";\x82\xd3\xe4\x93\x025\x123/baremetal/v1alpha/publicSubnets/{public_subnet_id}\x12\xa3\x01\n" +
+	"\x04List\x127.yandex.cloud.baremetal.v1alpha.ListPublicSubnetRequest\x1a8.yandex.cloud.baremetal.v1alpha.ListPublicSubnetResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /baremetal/v1alpha/publicSubnets\x12\xc1\x01\n" +
+	"\x06Create\x129.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest\x1a!.yandex.cloud.operation.Operation\"Y\xb2\xd2**\n" +
+	"\x1aCreatePublicSubnetMetadata\x12\fPublicSubnet\x82\xd3\xe4\x93\x02%:\x01*\" /baremetal/v1alpha/publicSubnets\x12\xd4\x01\n" +
+	"\x06Update\x129.yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest\x1a!.yandex.cloud.operation.Operation\"l\xb2\xd2**\n" +
+	"\x1aUpdatePublicSubnetMetadata\x12\fPublicSubnet\x82\xd3\xe4\x93\x028:\x01*23/baremetal/v1alpha/publicSubnets/{public_subnet_id}\x12\xda\x01\n" +
+	"\x06Delete\x129.yandex.cloud.baremetal.v1alpha.DeletePublicSubnetRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*3\n" +
+	"\x1aDeletePublicSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x025*3/baremetal/v1alpha/publicSubnets/{public_subnet_id}\x12\xdf\x01\n" +
+	"\x0eListOperations\x12A.yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsRequest\x1aB.yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse\"F\x82\xd3\xe4\x93\x02@\x12>/baremetal/v1alpha/publicSubnets/{public_subnet_id}/operationsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

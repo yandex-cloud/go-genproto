@@ -92,6 +92,7 @@ const (
 	ListClusterLogsRequest_POSTGRESQL  ListClusterLogsRequest_ServiceType = 1
 	ListClusterLogsRequest_ROUTER      ListClusterLogsRequest_ServiceType = 2
 	ListClusterLogsRequest_COORDINATOR ListClusterLogsRequest_ServiceType = 3
+	ListClusterLogsRequest_INFRA       ListClusterLogsRequest_ServiceType = 4
 )
 
 // Enum value maps for ListClusterLogsRequest_ServiceType.
@@ -101,12 +102,14 @@ var (
 		1: "POSTGRESQL",
 		2: "ROUTER",
 		3: "COORDINATOR",
+		4: "INFRA",
 	}
 	ListClusterLogsRequest_ServiceType_value = map[string]int32{
 		"SERVICE_TYPE_UNSPECIFIED": 0,
 		"POSTGRESQL":               1,
 		"ROUTER":                   2,
 		"COORDINATOR":              3,
+		"INFRA":                    4,
 	}
 )
 
@@ -145,6 +148,7 @@ const (
 	StreamClusterLogsRequest_POSTGRESQL  StreamClusterLogsRequest_ServiceType = 1
 	StreamClusterLogsRequest_ROUTER      StreamClusterLogsRequest_ServiceType = 2
 	StreamClusterLogsRequest_COORDINATOR StreamClusterLogsRequest_ServiceType = 3
+	StreamClusterLogsRequest_INFRA       StreamClusterLogsRequest_ServiceType = 4
 )
 
 // Enum value maps for StreamClusterLogsRequest_ServiceType.
@@ -154,12 +158,14 @@ var (
 		1: "POSTGRESQL",
 		2: "ROUTER",
 		3: "COORDINATOR",
+		4: "INFRA",
 	}
 	StreamClusterLogsRequest_ServiceType_value = map[string]int32{
 		"SERVICE_TYPE_UNSPECIFIED": 0,
 		"POSTGRESQL":               1,
 		"ROUTER":                   2,
 		"COORDINATOR":              3,
+		"INFRA":                    4,
 	}
 )
 
@@ -4141,7 +4147,7 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x03(\v20.yandex.cloud.mdb.spqr.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
 	"\fMessageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xda\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe5\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -4157,20 +4163,21 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\x06filter\x18\t \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
 	"\border_by\x18\n" +
-	" \x01(\tR\aorderBy\"X\n" +
+	" \x01(\tR\aorderBy\"c\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"POSTGRESQL\x10\x01\x12\n" +
 	"\n" +
 	"\x06ROUTER\x10\x02\x12\x0f\n" +
-	"\vCOORDINATOR\x10\x03\"z\n" +
+	"\vCOORDINATOR\x10\x03\x12\t\n" +
+	"\x05INFRA\x10\x04\"z\n" +
 	"\x17ListClusterLogsResponse\x127\n" +
 	"\x04logs\x18\x01 \x03(\v2#.yandex.cloud.mdb.spqr.v1.LogRecordR\x04logs\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"z\n" +
 	"\x0fStreamLogRecord\x12;\n" +
 	"\x06record\x18\x01 \x01(\v2#.yandex.cloud.mdb.spqr.v1.LogRecordR\x06record\x12*\n" +
-	"\x11next_record_token\x18\x02 \x01(\tR\x0fnextRecordToken\"\xe9\x03\n" +
+	"\x11next_record_token\x18\x02 \x01(\tR\x0fnextRecordToken\"\xf4\x03\n" +
 	"\x18StreamClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -4180,14 +4187,15 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12,\n" +
 	"\frecord_token\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\vrecordToken\x12\"\n" +
 	"\x06filter\x18\a \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"X\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"c\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"POSTGRESQL\x10\x01\x12\n" +
 	"\n" +
 	"\x06ROUTER\x10\x02\x12\x0f\n" +
-	"\vCOORDINATOR\x10\x03\"\x9e\x01\n" +
+	"\vCOORDINATOR\x10\x03\x12\t\n" +
+	"\x05INFRA\x10\x04\"\x9e\x01\n" +
 	"\x1cListClusterOperationsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +

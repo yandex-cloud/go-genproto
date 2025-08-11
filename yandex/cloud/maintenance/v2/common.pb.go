@@ -318,7 +318,7 @@ type ListMaintenancesRequest struct {
 	PageToken string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// By which field the listing should be ordered and in which direction,
 	// format is "created_at desc". The default sorting order is ascending.
-	// Supported fields: ["created_at", "planned_at", "started_at"].
+	// Supported fields: ["created_at", "start_scheduled_at", "started_at"].
 	OrderBy string `protobuf:"bytes,6,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// Filter list by various fields.
 	// Supported fields: ["status", "resource_type", "resource_id"]
@@ -760,7 +760,7 @@ const file_yandex_cloud_maintenance_v2_common_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12$\n" +
+	"page_token\x18\x05 \x01(\tB\t\x8a\xc81\x05<=500R\tpageToken\x12$\n" +
 	"\border_by\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\x12!\n" +
 	"\x06filter\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\x06filterB\v\n" +
 	"\tcontainer\"\x90\x01\n" +
