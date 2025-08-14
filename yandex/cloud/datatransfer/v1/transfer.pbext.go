@@ -58,6 +58,10 @@ func (m *Transfer) SetPrestable(v bool) {
 	m.Prestable = v
 }
 
+func (m *Transfer) SetReplicationRuntime(v *Runtime) {
+	m.ReplicationRuntime = v
+}
+
 type Runtime_Runtime = isRuntime_Runtime
 
 func (m *Runtime) SetRuntime(v Runtime_Runtime) {
@@ -174,12 +178,26 @@ func (m *ToStringTransformer) SetColumns(v *ColumnsFilter) {
 	m.Columns = v
 }
 
+type SharderTransformer_SharderTransformerType = isSharderTransformer_SharderTransformerType
+
+func (m *SharderTransformer) SetSharderTransformerType(v SharderTransformer_SharderTransformerType) {
+	m.SharderTransformerType = v
+}
+
 func (m *SharderTransformer) SetTables(v *TablesFilter) {
 	m.Tables = v
 }
 
 func (m *SharderTransformer) SetColumns(v *ColumnsFilter) {
-	m.Columns = v
+	m.SharderTransformerType = &SharderTransformer_Columns{
+		Columns: v,
+	}
+}
+
+func (m *SharderTransformer) SetRandom(v *SharderTransformerTypeRandom) {
+	m.SharderTransformerType = &SharderTransformer_Random{
+		Random: v,
+	}
 }
 
 func (m *SharderTransformer) SetShardsCount(v int64) {

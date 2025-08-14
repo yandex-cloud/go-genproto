@@ -347,7 +347,9 @@ type TrinoConfigSpec struct {
 	RetryPolicy *RetryPolicyConfig `protobuf:"bytes,4,opt,name=retry_policy,json=retryPolicy,proto3" json:"retry_policy,omitempty"`
 	// Trino version.
 	// Format: "Number".
-	Version       string `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"`
+	Version string `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"`
+	// Configuration for access control, specifying the fine-grained access rules.
+	AccessControl *AccessControlConfig `protobuf:"bytes,7,opt,name=access_control,json=accessControl,proto3" json:"access_control,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -415,6 +417,13 @@ func (x *TrinoConfigSpec) GetVersion() string {
 		return x.Version
 	}
 	return ""
+}
+
+func (x *TrinoConfigSpec) GetAccessControl() *AccessControlConfig {
+	if x != nil {
+		return x.AccessControl
+	}
+	return nil
 }
 
 type CreateClusterMetadata struct {
@@ -571,7 +580,9 @@ type UpdateTrinoConfigSpec struct {
 	// Format: "Number".
 	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
 	// Configuration for retry policy, specifying the spooling storage destination and other settings.
-	RetryPolicy   *RetryPolicyConfig `protobuf:"bytes,4,opt,name=retry_policy,json=retryPolicy,proto3" json:"retry_policy,omitempty"`
+	RetryPolicy *RetryPolicyConfig `protobuf:"bytes,4,opt,name=retry_policy,json=retryPolicy,proto3" json:"retry_policy,omitempty"`
+	// Configuration for access control, specifying the fine-grained access rules.
+	AccessControl *AccessControlConfig `protobuf:"bytes,5,opt,name=access_control,json=accessControl,proto3" json:"access_control,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -630,6 +641,13 @@ func (x *UpdateTrinoConfigSpec) GetVersion() string {
 func (x *UpdateTrinoConfigSpec) GetRetryPolicy() *RetryPolicyConfig {
 	if x != nil {
 		return x.RetryPolicy
+	}
+	return nil
+}
+
+func (x *UpdateTrinoConfigSpec) GetAccessControl() *AccessControlConfig {
+	if x != nil {
+		return x.AccessControl
 	}
 	return nil
 }
@@ -1347,7 +1365,7 @@ var File_yandex_cloud_trino_v1_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_trino_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/trino/v1/cluster_service.proto\x12\x15yandex.cloud.trino.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a#yandex/cloud/trino/v1/catalog.proto\x1a#yandex/cloud/trino/v1/cluster.proto\x1a'yandex/cloud/trino/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"+yandex/cloud/trino/v1/cluster_service.proto\x12\x15yandex.cloud.trino.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a*yandex/cloud/trino/v1/access_control.proto\x1a#yandex/cloud/trino/v1/catalog.proto\x1a#yandex/cloud/trino/v1/cluster.proto\x1a'yandex/cloud/trino/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -1376,13 +1394,14 @@ const file_yandex_cloud_trino_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v2(.yandex.cloud.trino.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xed\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc0\x03\n" +
 	"\x0fTrinoConfigSpec\x12>\n" +
 	"\bcatalogs\x18\x01 \x03(\v2\".yandex.cloud.trino.v1.CatalogSpecR\bcatalogs\x12]\n" +
 	"\x12coordinator_config\x18\x02 \x01(\v2(.yandex.cloud.trino.v1.CoordinatorConfigB\x04\xe8\xc71\x01R\x11coordinatorConfig\x12N\n" +
 	"\rworker_config\x18\x03 \x01(\v2#.yandex.cloud.trino.v1.WorkerConfigB\x04\xe8\xc71\x01R\fworkerConfig\x12K\n" +
 	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicy\x12\x18\n" +
-	"\aversion\x18\x06 \x01(\tR\aversionJ\x04\b\x05\x10\x06\"6\n" +
+	"\aversion\x18\x06 \x01(\tR\aversion\x12Q\n" +
+	"\x0eaccess_control\x18\a \x01(\v2*.yandex.cloud.trino.v1.AccessControlConfigR\raccessControlJ\x04\b\x05\x10\x06\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"Y\n" +
@@ -1397,12 +1416,13 @@ const file_yandex_cloud_trino_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"auto_scale\x18\x02 \x01(\v2&.yandex.cloud.trino.v1.AutoScalePolicyH\x00R\tautoScaleB\x12\n" +
 	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01\"\xad\x02\n" +
+	"scale_type\x12\x04\xc0\xc11\x01\"\x80\x03\n" +
 	"\x15UpdateTrinoConfigSpec\x12]\n" +
 	"\x12coordinator_config\x18\x01 \x01(\v2..yandex.cloud.trino.v1.UpdateCoordinatorConfigR\x11coordinatorConfig\x12N\n" +
 	"\rworker_config\x18\x02 \x01(\v2).yandex.cloud.trino.v1.UpdateWorkerConfigR\fworkerConfig\x12\x18\n" +
 	"\aversion\x18\x03 \x01(\tR\aversion\x12K\n" +
-	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicy\"G\n" +
+	"\fretry_policy\x18\x04 \x01(\v2(.yandex.cloud.trino.v1.RetryPolicyConfigR\vretryPolicy\x12Q\n" +
+	"\x0eaccess_control\x18\x05 \x01(\v2*.yandex.cloud.trino.v1.AccessControlConfigR\raccessControl\"G\n" +
 	"\x17UpdateNetworkConfigSpec\x12,\n" +
 	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds\"\xc0\x06\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
@@ -1518,11 +1538,12 @@ var file_yandex_cloud_trino_v1_cluster_service_proto_goTypes = []any{
 	(*CoordinatorConfig)(nil),     // 28: yandex.cloud.trino.v1.CoordinatorConfig
 	(*WorkerConfig)(nil),          // 29: yandex.cloud.trino.v1.WorkerConfig
 	(*RetryPolicyConfig)(nil),     // 30: yandex.cloud.trino.v1.RetryPolicyConfig
-	(*Resources)(nil),             // 31: yandex.cloud.trino.v1.Resources
-	(*fieldmaskpb.FieldMask)(nil), // 32: google.protobuf.FieldMask
-	(*operation.Operation)(nil),   // 33: yandex.cloud.operation.Operation
-	(*FixedScalePolicy)(nil),      // 34: yandex.cloud.trino.v1.FixedScalePolicy
-	(*AutoScalePolicy)(nil),       // 35: yandex.cloud.trino.v1.AutoScalePolicy
+	(*AccessControlConfig)(nil),   // 31: yandex.cloud.trino.v1.AccessControlConfig
+	(*Resources)(nil),             // 32: yandex.cloud.trino.v1.Resources
+	(*fieldmaskpb.FieldMask)(nil), // 33: google.protobuf.FieldMask
+	(*operation.Operation)(nil),   // 34: yandex.cloud.operation.Operation
+	(*FixedScalePolicy)(nil),      // 35: yandex.cloud.trino.v1.FixedScalePolicy
+	(*AutoScalePolicy)(nil),       // 36: yandex.cloud.trino.v1.AutoScalePolicy
 }
 var file_yandex_cloud_trino_v1_cluster_service_proto_depIdxs = []int32{
 	23, // 0: yandex.cloud.trino.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.trino.v1.Cluster
@@ -1535,42 +1556,44 @@ var file_yandex_cloud_trino_v1_cluster_service_proto_depIdxs = []int32{
 	28, // 7: yandex.cloud.trino.v1.TrinoConfigSpec.coordinator_config:type_name -> yandex.cloud.trino.v1.CoordinatorConfig
 	29, // 8: yandex.cloud.trino.v1.TrinoConfigSpec.worker_config:type_name -> yandex.cloud.trino.v1.WorkerConfig
 	30, // 9: yandex.cloud.trino.v1.TrinoConfigSpec.retry_policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig
-	31, // 10: yandex.cloud.trino.v1.UpdateCoordinatorConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
-	31, // 11: yandex.cloud.trino.v1.UpdateWorkerConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
-	21, // 12: yandex.cloud.trino.v1.UpdateWorkerConfig.scale_policy:type_name -> yandex.cloud.trino.v1.UpdateWorkerConfig.WorkerScalePolicy
-	6,  // 13: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.coordinator_config:type_name -> yandex.cloud.trino.v1.UpdateCoordinatorConfig
-	7,  // 14: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.worker_config:type_name -> yandex.cloud.trino.v1.UpdateWorkerConfig
-	30, // 15: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.retry_policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig
-	32, // 16: yandex.cloud.trino.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	22, // 17: yandex.cloud.trino.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.trino.v1.UpdateClusterRequest.LabelsEntry
-	8,  // 18: yandex.cloud.trino.v1.UpdateClusterRequest.trino:type_name -> yandex.cloud.trino.v1.UpdateTrinoConfigSpec
-	9,  // 19: yandex.cloud.trino.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.trino.v1.UpdateNetworkConfigSpec
-	25, // 20: yandex.cloud.trino.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.trino.v1.LoggingConfig
-	26, // 21: yandex.cloud.trino.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.trino.v1.MaintenanceWindow
-	33, // 22: yandex.cloud.trino.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	34, // 23: yandex.cloud.trino.v1.UpdateWorkerConfig.WorkerScalePolicy.fixed_scale:type_name -> yandex.cloud.trino.v1.FixedScalePolicy
-	35, // 24: yandex.cloud.trino.v1.UpdateWorkerConfig.WorkerScalePolicy.auto_scale:type_name -> yandex.cloud.trino.v1.AutoScalePolicy
-	0,  // 25: yandex.cloud.trino.v1.ClusterService.Get:input_type -> yandex.cloud.trino.v1.GetClusterRequest
-	1,  // 26: yandex.cloud.trino.v1.ClusterService.List:input_type -> yandex.cloud.trino.v1.ListClustersRequest
-	3,  // 27: yandex.cloud.trino.v1.ClusterService.Create:input_type -> yandex.cloud.trino.v1.CreateClusterRequest
-	10, // 28: yandex.cloud.trino.v1.ClusterService.Update:input_type -> yandex.cloud.trino.v1.UpdateClusterRequest
-	12, // 29: yandex.cloud.trino.v1.ClusterService.Delete:input_type -> yandex.cloud.trino.v1.DeleteClusterRequest
-	14, // 30: yandex.cloud.trino.v1.ClusterService.Start:input_type -> yandex.cloud.trino.v1.StartClusterRequest
-	16, // 31: yandex.cloud.trino.v1.ClusterService.Stop:input_type -> yandex.cloud.trino.v1.StopClusterRequest
-	18, // 32: yandex.cloud.trino.v1.ClusterService.ListOperations:input_type -> yandex.cloud.trino.v1.ListClusterOperationsRequest
-	23, // 33: yandex.cloud.trino.v1.ClusterService.Get:output_type -> yandex.cloud.trino.v1.Cluster
-	2,  // 34: yandex.cloud.trino.v1.ClusterService.List:output_type -> yandex.cloud.trino.v1.ListClustersResponse
-	33, // 35: yandex.cloud.trino.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	33, // 36: yandex.cloud.trino.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	33, // 37: yandex.cloud.trino.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	33, // 38: yandex.cloud.trino.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	33, // 39: yandex.cloud.trino.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	19, // 40: yandex.cloud.trino.v1.ClusterService.ListOperations:output_type -> yandex.cloud.trino.v1.ListClusterOperationsResponse
-	33, // [33:41] is the sub-list for method output_type
-	25, // [25:33] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	31, // 10: yandex.cloud.trino.v1.TrinoConfigSpec.access_control:type_name -> yandex.cloud.trino.v1.AccessControlConfig
+	32, // 11: yandex.cloud.trino.v1.UpdateCoordinatorConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
+	32, // 12: yandex.cloud.trino.v1.UpdateWorkerConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
+	21, // 13: yandex.cloud.trino.v1.UpdateWorkerConfig.scale_policy:type_name -> yandex.cloud.trino.v1.UpdateWorkerConfig.WorkerScalePolicy
+	6,  // 14: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.coordinator_config:type_name -> yandex.cloud.trino.v1.UpdateCoordinatorConfig
+	7,  // 15: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.worker_config:type_name -> yandex.cloud.trino.v1.UpdateWorkerConfig
+	30, // 16: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.retry_policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig
+	31, // 17: yandex.cloud.trino.v1.UpdateTrinoConfigSpec.access_control:type_name -> yandex.cloud.trino.v1.AccessControlConfig
+	33, // 18: yandex.cloud.trino.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	22, // 19: yandex.cloud.trino.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.trino.v1.UpdateClusterRequest.LabelsEntry
+	8,  // 20: yandex.cloud.trino.v1.UpdateClusterRequest.trino:type_name -> yandex.cloud.trino.v1.UpdateTrinoConfigSpec
+	9,  // 21: yandex.cloud.trino.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.trino.v1.UpdateNetworkConfigSpec
+	25, // 22: yandex.cloud.trino.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.trino.v1.LoggingConfig
+	26, // 23: yandex.cloud.trino.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.trino.v1.MaintenanceWindow
+	34, // 24: yandex.cloud.trino.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	35, // 25: yandex.cloud.trino.v1.UpdateWorkerConfig.WorkerScalePolicy.fixed_scale:type_name -> yandex.cloud.trino.v1.FixedScalePolicy
+	36, // 26: yandex.cloud.trino.v1.UpdateWorkerConfig.WorkerScalePolicy.auto_scale:type_name -> yandex.cloud.trino.v1.AutoScalePolicy
+	0,  // 27: yandex.cloud.trino.v1.ClusterService.Get:input_type -> yandex.cloud.trino.v1.GetClusterRequest
+	1,  // 28: yandex.cloud.trino.v1.ClusterService.List:input_type -> yandex.cloud.trino.v1.ListClustersRequest
+	3,  // 29: yandex.cloud.trino.v1.ClusterService.Create:input_type -> yandex.cloud.trino.v1.CreateClusterRequest
+	10, // 30: yandex.cloud.trino.v1.ClusterService.Update:input_type -> yandex.cloud.trino.v1.UpdateClusterRequest
+	12, // 31: yandex.cloud.trino.v1.ClusterService.Delete:input_type -> yandex.cloud.trino.v1.DeleteClusterRequest
+	14, // 32: yandex.cloud.trino.v1.ClusterService.Start:input_type -> yandex.cloud.trino.v1.StartClusterRequest
+	16, // 33: yandex.cloud.trino.v1.ClusterService.Stop:input_type -> yandex.cloud.trino.v1.StopClusterRequest
+	18, // 34: yandex.cloud.trino.v1.ClusterService.ListOperations:input_type -> yandex.cloud.trino.v1.ListClusterOperationsRequest
+	23, // 35: yandex.cloud.trino.v1.ClusterService.Get:output_type -> yandex.cloud.trino.v1.Cluster
+	2,  // 36: yandex.cloud.trino.v1.ClusterService.List:output_type -> yandex.cloud.trino.v1.ListClustersResponse
+	34, // 37: yandex.cloud.trino.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	34, // 38: yandex.cloud.trino.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	34, // 39: yandex.cloud.trino.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	34, // 40: yandex.cloud.trino.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	34, // 41: yandex.cloud.trino.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	19, // 42: yandex.cloud.trino.v1.ClusterService.ListOperations:output_type -> yandex.cloud.trino.v1.ListClusterOperationsResponse
+	35, // [35:43] is the sub-list for method output_type
+	27, // [27:35] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_trino_v1_cluster_service_proto_init() }
@@ -1578,6 +1601,7 @@ func file_yandex_cloud_trino_v1_cluster_service_proto_init() {
 	if File_yandex_cloud_trino_v1_cluster_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_trino_v1_access_control_proto_init()
 	file_yandex_cloud_trino_v1_catalog_proto_init()
 	file_yandex_cloud_trino_v1_cluster_proto_init()
 	file_yandex_cloud_trino_v1_maintenance_proto_init()

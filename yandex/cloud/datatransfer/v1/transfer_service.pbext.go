@@ -46,6 +46,10 @@ func (m *CreateTransferRequest) SetDataObjects(v *DataObjects) {
 	m.DataObjects = v
 }
 
+func (m *CreateTransferRequest) SetReplicationRuntime(v *Runtime) {
+	m.ReplicationRuntime = v
+}
+
 func (m *CreateTransferMetadata) SetTransferId(v string) {
 	m.TransferId = v
 }
@@ -80,6 +84,10 @@ func (m *UpdateTransferRequest) SetTransformation(v *Transformation) {
 
 func (m *UpdateTransferRequest) SetDataObjects(v *DataObjects) {
 	m.DataObjects = v
+}
+
+func (m *UpdateTransferRequest) SetReplicationRuntime(v *Runtime) {
+	m.ReplicationRuntime = v
 }
 
 func (m *UpdateTransferMetadata) SetTransferId(v string) {

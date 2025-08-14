@@ -58,6 +58,10 @@ func (m *GenSearchRequest) SetSearchType(v SearchQuery_SearchType) {
 	m.SearchType = v
 }
 
+func (m *GenSearchRequest) SetGetPartialResults(v bool) {
+	m.GetPartialResults = v
+}
+
 func (m *GenSearchRequest_SiteOption) SetSite(v []string) {
 	m.Site = v
 }

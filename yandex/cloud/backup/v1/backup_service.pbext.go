@@ -66,6 +66,12 @@ func (m *ListBackupsRequest) SetPolicyId(v string) {
 	}
 }
 
+func (m *ListBackupsRequest) SetBackup(v *ListBackupsRequest_BackupParameters) {
+	m.Id = &ListBackupsRequest_Backup{
+		Backup: v,
+	}
+}
+
 func (m *ListBackupsRequest) SetOrderBy(v string) {
 	m.OrderBy = v
 }
@@ -100,6 +106,14 @@ func (m *ListBackupsRequest_InstancePolicy) SetComputeInstanceId(v string) {
 
 func (m *ListBackupsRequest_InstancePolicy) SetPolicyId(v string) {
 	m.PolicyId = v
+}
+
+func (m *ListBackupsRequest_BackupParameters) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *ListBackupsRequest_BackupParameters) SetFolderId(v string) {
+	m.FolderId = v
 }
 
 func (m *ListBackupsResponse) SetBackups(v []*Backup) {

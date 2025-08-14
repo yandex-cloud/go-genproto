@@ -222,9 +222,11 @@ type GenSearchRequest struct {
 	// Restricts the search by date, document formats or language.
 	SearchFilters []*GenSearchRequest_SearchFilter `protobuf:"bytes,8,rep,name=search_filters,json=searchFilters,proto3" json:"search_filters,omitempty"`
 	// Search type that determines the domain name that will be used for the search queries.
-	SearchType    SearchQuery_SearchType `protobuf:"varint,9,opt,name=search_type,json=searchType,proto3,enum=yandex.cloud.searchapi.v2.SearchQuery_SearchType" json:"search_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	SearchType SearchQuery_SearchType `protobuf:"varint,9,opt,name=search_type,json=searchType,proto3,enum=yandex.cloud.searchapi.v2.SearchQuery_SearchType" json:"search_type,omitempty"`
+	// Get partial results
+	GetPartialResults bool `protobuf:"varint,10,opt,name=get_partial_results,json=getPartialResults,proto3" json:"get_partial_results,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GenSearchRequest) Reset() {
@@ -331,6 +333,13 @@ func (x *GenSearchRequest) GetSearchType() SearchQuery_SearchType {
 		return x.SearchType
 	}
 	return SearchQuery_SEARCH_TYPE_UNSPECIFIED
+}
+
+func (x *GenSearchRequest) GetGetPartialResults() bool {
+	if x != nil {
+		return x.GetPartialResults
+	}
+	return false
 }
 
 type isGenSearchRequest_SiteOptions interface {
@@ -814,7 +823,8 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"x\n" +
 	"\x10GenSearchMessage\x12)\n" +
 	"\acontent\x18\x01 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=16384R\acontent\x129\n" +
-	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xe6\t\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\x96\n" +
+	"\n" +
 	"\x10GenSearchRequest\x12R\n" +
 	"\bmessages\x18\x01 \x03(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageB\t\x82\xc81\x051-100R\bmessages\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12L\n" +
@@ -825,7 +835,9 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\x10enable_nrfm_docs\x18\a \x01(\bR\x0eenableNrfmDocs\x12i\n" +
 	"\x0esearch_filters\x18\b \x03(\v28.yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilterB\b\x82\xc81\x04<=10R\rsearchFilters\x12R\n" +
 	"\vsearch_type\x18\t \x01(\x0e21.yandex.cloud.searchapi.v2.SearchQuery.SearchTypeR\n" +
-	"searchType\x1a5\n" +
+	"searchType\x12.\n" +
+	"\x13get_partial_results\x18\n" +
+	" \x01(\bR\x11getPartialResults\x1a5\n" +
 	"\n" +
 	"SiteOption\x12'\n" +
 	"\x04site\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04site\x1a2\n" +

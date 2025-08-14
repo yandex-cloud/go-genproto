@@ -3,6 +3,7 @@
 package ytsaurus
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -86,14 +87,6 @@ func (m *Cluster_Endpoints) SetInternalRpcProxyAlias(v string) {
 	m.InternalRpcProxyAlias = v
 }
 
-func (m *Cluster_Endpoints) SetInternalHttpProxies(v []string) {
-	m.InternalHttpProxies = v
-}
-
-func (m *Cluster_Endpoints) SetInternalRpcProxies(v []string) {
-	m.InternalRpcProxies = v
-}
-
 func (m *StorageSpec) SetHdd(v *StorageSpec_HddSpec) {
 	m.Hdd = v
 }
@@ -132,6 +125,10 @@ func (m *ComputeSpec) SetDisks(v []*ComputeSpec_DiskSpec) {
 
 func (m *ComputeSpec) SetScalePolicy(v *ComputeSpec_ScalePolicy) {
 	m.ScalePolicy = v
+}
+
+func (m *ComputeSpec) SetName(v string) {
+	m.Name = v
 }
 
 func (m *ComputeSpec_DiskSpec) SetType(v string) {
@@ -200,6 +197,10 @@ func (m *ProxySpec) SetRpc(v *RpcProxySpec) {
 	m.Rpc = v
 }
 
+func (m *OdinSpec) SetChecksTtl(v *durationpb.Duration) {
+	m.ChecksTtl = v
+}
+
 func (m *ClusterSpec) SetStorage(v *StorageSpec) {
 	m.Storage = v
 }
@@ -214,4 +215,8 @@ func (m *ClusterSpec) SetTablet(v *TabletSpec) {
 
 func (m *ClusterSpec) SetProxy(v *ProxySpec) {
 	m.Proxy = v
+}
+
+func (m *ClusterSpec) SetOdin(v *OdinSpec) {
+	m.Odin = v
 }

@@ -137,6 +137,10 @@ func (m *TrinoConfig) SetRetryPolicy(v *RetryPolicyConfig) {
 	m.RetryPolicy = v
 }
 
+func (m *TrinoConfig) SetAccessControl(v *AccessControlConfig) {
+	m.AccessControl = v
+}
+
 func (m *CoordinatorConfig) SetResources(v *Resources) {
 	m.Resources = v
 }

@@ -95,6 +95,10 @@ func (m *TrinoConfigSpec) SetVersion(v string) {
 	m.Version = v
 }
 
+func (m *TrinoConfigSpec) SetAccessControl(v *AccessControlConfig) {
+	m.AccessControl = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -143,6 +147,10 @@ func (m *UpdateTrinoConfigSpec) SetVersion(v string) {
 
 func (m *UpdateTrinoConfigSpec) SetRetryPolicy(v *RetryPolicyConfig) {
 	m.RetryPolicy = v
+}
+
+func (m *UpdateTrinoConfigSpec) SetAccessControl(v *AccessControlConfig) {
+	m.AccessControl = v
 }
 
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {

@@ -219,6 +219,7 @@ type ListBackupsRequest struct {
 	//	*ListBackupsRequest_InstancePolicy_
 	//	*ListBackupsRequest_ResourceId
 	//	*ListBackupsRequest_PolicyId
+	//	*ListBackupsRequest_Backup
 	Id isListBackupsRequest_Id `protobuf_oneof:"id"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "createdAt desc" if omitted.
@@ -331,6 +332,15 @@ func (x *ListBackupsRequest) GetPolicyId() string {
 	return ""
 }
 
+func (x *ListBackupsRequest) GetBackup() *ListBackupsRequest_BackupParameters {
+	if x != nil {
+		if x, ok := x.Id.(*ListBackupsRequest_Backup); ok {
+			return x.Backup
+		}
+	}
+	return nil
+}
+
 func (x *ListBackupsRequest) GetOrderBy() string {
 	if x != nil {
 		return x.OrderBy
@@ -400,6 +410,11 @@ type ListBackupsRequest_PolicyId struct {
 	PolicyId string `protobuf:"bytes,7,opt,name=policy_id,json=policyId,proto3,oneof"`
 }
 
+type ListBackupsRequest_Backup struct {
+	// List backups by specific backup ID.
+	Backup *ListBackupsRequest_BackupParameters `protobuf:"bytes,12,opt,name=backup,proto3,oneof"`
+}
+
 func (*ListBackupsRequest_ComputeInstanceId) isListBackupsRequest_Id() {}
 
 func (*ListBackupsRequest_Archive) isListBackupsRequest_Id() {}
@@ -411,6 +426,8 @@ func (*ListBackupsRequest_InstancePolicy_) isListBackupsRequest_Id() {}
 func (*ListBackupsRequest_ResourceId) isListBackupsRequest_Id() {}
 
 func (*ListBackupsRequest_PolicyId) isListBackupsRequest_Id() {}
+
+func (*ListBackupsRequest_Backup) isListBackupsRequest_Id() {}
 
 type ListBackupsResponse struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
@@ -1410,6 +1427,58 @@ func (x *ListBackupsRequest_InstancePolicy) GetPolicyId() string {
 	return ""
 }
 
+type ListBackupsRequest_BackupParameters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BackupId      string                 `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	FolderId      string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBackupsRequest_BackupParameters) Reset() {
+	*x = ListBackupsRequest_BackupParameters{}
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBackupsRequest_BackupParameters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBackupsRequest_BackupParameters) ProtoMessage() {}
+
+func (x *ListBackupsRequest_BackupParameters) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBackupsRequest_BackupParameters.ProtoReflect.Descriptor instead.
+func (*ListBackupsRequest_BackupParameters) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{2, 2}
+}
+
+func (x *ListBackupsRequest_BackupParameters) GetBackupId() string {
+	if x != nil {
+		return x.BackupId
+	}
+	return ""
+}
+
+func (x *ListBackupsRequest_BackupParameters) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
 var File_yandex_cloud_backup_v1_backup_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
@@ -1421,7 +1490,7 @@ const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
 	"\x02id\x12\x04\xc0\xc11\x01\"S\n" +
 	"\x14ListArchivesResponse\x12;\n" +
-	"\barchives\x18\x01 \x03(\v2\x1f.yandex.cloud.backup.v1.ArchiveR\barchives\"\xef\x05\n" +
+	"\barchives\x18\x01 \x03(\v2\x1f.yandex.cloud.backup.v1.ArchiveR\barchives\"\xa0\a\n" +
 	"\x12ListBackupsRequest\x120\n" +
 	"\x13compute_instance_id\x18\x01 \x01(\tH\x00R\x11computeInstanceId\x12X\n" +
 	"\aarchive\x18\x02 \x01(\v2<.yandex.cloud.backup.v1.ListBackupsRequest.ArchiveParametersH\x00R\aarchive\x12\x1d\n" +
@@ -1429,7 +1498,8 @@ const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
 	"\x0finstance_policy\x18\x04 \x01(\v29.yandex.cloud.backup.v1.ListBackupsRequest.InstancePolicyH\x00R\x0einstancePolicy\x12!\n" +
 	"\vresource_id\x18\x06 \x01(\tH\x00R\n" +
 	"resourceId\x12\x1d\n" +
-	"\tpolicy_id\x18\a \x01(\tH\x00R\bpolicyId\x12\x19\n" +
+	"\tpolicy_id\x18\a \x01(\tH\x00R\bpolicyId\x12U\n" +
+	"\x06backup\x18\f \x01(\v2;.yandex.cloud.backup.v1.ListBackupsRequest.BackupParametersH\x00R\x06backup\x12\x19\n" +
 	"\border_by\x18\x05 \x01(\tR\aorderBy\x12\x16\n" +
 	"\x06filter\x18\b \x01(\tR\x06filter\x128\n" +
 	"\x04type\x18\t \x01(\x0e2$.yandex.cloud.backup.v1.ResourceTypeR\x04type\x12'\n" +
@@ -1444,7 +1514,10 @@ const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x1a]\n" +
 	"\x0eInstancePolicy\x12.\n" +
 	"\x13compute_instance_id\x18\x01 \x01(\tR\x11computeInstanceId\x12\x1b\n" +
-	"\tpolicy_id\x18\x02 \x01(\tR\bpolicyIdB\n" +
+	"\tpolicy_id\x18\x02 \x01(\tR\bpolicyId\x1aX\n" +
+	"\x10BackupParameters\x12!\n" +
+	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12!\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderIdB\n" +
 	"\n" +
 	"\x02id\x12\x04\xc0\xc11\x01\"w\n" +
 	"\x13ListBackupsResponse\x128\n" +
@@ -1538,7 +1611,7 @@ func file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_backup_v1_backup_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_backup_v1_backup_service_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_yandex_cloud_backup_v1_backup_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_yandex_cloud_backup_v1_backup_service_proto_goTypes = []any{
 	(FilesRecoveryOptions_Overwrite)(0),          // 0: yandex.cloud.backup.v1.FilesRecoveryOptions.Overwrite
 	(*ListArchivesRequest)(nil),                  // 1: yandex.cloud.backup.v1.ListArchivesRequest
@@ -1561,44 +1634,46 @@ var file_yandex_cloud_backup_v1_backup_service_proto_goTypes = []any{
 	(*DeleteArchiveMetadata)(nil),                // 18: yandex.cloud.backup.v1.DeleteArchiveMetadata
 	(*ListBackupsRequest_ArchiveParameters)(nil), // 19: yandex.cloud.backup.v1.ListBackupsRequest.ArchiveParameters
 	(*ListBackupsRequest_InstancePolicy)(nil),    // 20: yandex.cloud.backup.v1.ListBackupsRequest.InstancePolicy
-	(*Archive)(nil),                              // 21: yandex.cloud.backup.v1.Archive
-	(ResourceType)(0),                            // 22: yandex.cloud.backup.v1.ResourceType
-	(*Backup)(nil),                               // 23: yandex.cloud.backup.v1.Backup
-	(*BackupFile)(nil),                           // 24: yandex.cloud.backup.v1.BackupFile
-	(*operation.Operation)(nil),                  // 25: yandex.cloud.operation.Operation
+	(*ListBackupsRequest_BackupParameters)(nil),  // 21: yandex.cloud.backup.v1.ListBackupsRequest.BackupParameters
+	(*Archive)(nil),                              // 22: yandex.cloud.backup.v1.Archive
+	(ResourceType)(0),                            // 23: yandex.cloud.backup.v1.ResourceType
+	(*Backup)(nil),                               // 24: yandex.cloud.backup.v1.Backup
+	(*BackupFile)(nil),                           // 25: yandex.cloud.backup.v1.BackupFile
+	(*operation.Operation)(nil),                  // 26: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_backup_v1_backup_service_proto_depIdxs = []int32{
-	21, // 0: yandex.cloud.backup.v1.ListArchivesResponse.archives:type_name -> yandex.cloud.backup.v1.Archive
+	22, // 0: yandex.cloud.backup.v1.ListArchivesResponse.archives:type_name -> yandex.cloud.backup.v1.Archive
 	19, // 1: yandex.cloud.backup.v1.ListBackupsRequest.archive:type_name -> yandex.cloud.backup.v1.ListBackupsRequest.ArchiveParameters
 	20, // 2: yandex.cloud.backup.v1.ListBackupsRequest.instance_policy:type_name -> yandex.cloud.backup.v1.ListBackupsRequest.InstancePolicy
-	22, // 3: yandex.cloud.backup.v1.ListBackupsRequest.type:type_name -> yandex.cloud.backup.v1.ResourceType
-	23, // 4: yandex.cloud.backup.v1.ListBackupsResponse.backups:type_name -> yandex.cloud.backup.v1.Backup
-	24, // 5: yandex.cloud.backup.v1.ListFilesResponse.files:type_name -> yandex.cloud.backup.v1.BackupFile
-	0,  // 6: yandex.cloud.backup.v1.FilesRecoveryOptions.overwrite:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions.Overwrite
-	10, // 7: yandex.cloud.backup.v1.FilesRecoveryOptions.original:type_name -> yandex.cloud.backup.v1.TargetPathOriginal
-	11, // 8: yandex.cloud.backup.v1.FilesRecoveryOptions.custom:type_name -> yandex.cloud.backup.v1.TargetPathCustom
-	12, // 9: yandex.cloud.backup.v1.StartFilesRecoveryRequest.opts:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions
-	3,  // 10: yandex.cloud.backup.v1.BackupService.List:input_type -> yandex.cloud.backup.v1.ListBackupsRequest
-	1,  // 11: yandex.cloud.backup.v1.BackupService.ListArchives:input_type -> yandex.cloud.backup.v1.ListArchivesRequest
-	5,  // 12: yandex.cloud.backup.v1.BackupService.ListFiles:input_type -> yandex.cloud.backup.v1.ListFilesRequest
-	7,  // 13: yandex.cloud.backup.v1.BackupService.Get:input_type -> yandex.cloud.backup.v1.GetBackupRequest
-	8,  // 14: yandex.cloud.backup.v1.BackupService.StartRecovery:input_type -> yandex.cloud.backup.v1.StartRecoveryRequest
-	13, // 15: yandex.cloud.backup.v1.BackupService.StartFilesRecovery:input_type -> yandex.cloud.backup.v1.StartFilesRecoveryRequest
-	15, // 16: yandex.cloud.backup.v1.BackupService.Delete:input_type -> yandex.cloud.backup.v1.DeleteBackupRequest
-	17, // 17: yandex.cloud.backup.v1.BackupService.DeleteArchive:input_type -> yandex.cloud.backup.v1.DeleteArchiveRequest
-	4,  // 18: yandex.cloud.backup.v1.BackupService.List:output_type -> yandex.cloud.backup.v1.ListBackupsResponse
-	2,  // 19: yandex.cloud.backup.v1.BackupService.ListArchives:output_type -> yandex.cloud.backup.v1.ListArchivesResponse
-	6,  // 20: yandex.cloud.backup.v1.BackupService.ListFiles:output_type -> yandex.cloud.backup.v1.ListFilesResponse
-	23, // 21: yandex.cloud.backup.v1.BackupService.Get:output_type -> yandex.cloud.backup.v1.Backup
-	25, // 22: yandex.cloud.backup.v1.BackupService.StartRecovery:output_type -> yandex.cloud.operation.Operation
-	25, // 23: yandex.cloud.backup.v1.BackupService.StartFilesRecovery:output_type -> yandex.cloud.operation.Operation
-	25, // 24: yandex.cloud.backup.v1.BackupService.Delete:output_type -> yandex.cloud.operation.Operation
-	25, // 25: yandex.cloud.backup.v1.BackupService.DeleteArchive:output_type -> yandex.cloud.operation.Operation
-	18, // [18:26] is the sub-list for method output_type
-	10, // [10:18] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	21, // 3: yandex.cloud.backup.v1.ListBackupsRequest.backup:type_name -> yandex.cloud.backup.v1.ListBackupsRequest.BackupParameters
+	23, // 4: yandex.cloud.backup.v1.ListBackupsRequest.type:type_name -> yandex.cloud.backup.v1.ResourceType
+	24, // 5: yandex.cloud.backup.v1.ListBackupsResponse.backups:type_name -> yandex.cloud.backup.v1.Backup
+	25, // 6: yandex.cloud.backup.v1.ListFilesResponse.files:type_name -> yandex.cloud.backup.v1.BackupFile
+	0,  // 7: yandex.cloud.backup.v1.FilesRecoveryOptions.overwrite:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions.Overwrite
+	10, // 8: yandex.cloud.backup.v1.FilesRecoveryOptions.original:type_name -> yandex.cloud.backup.v1.TargetPathOriginal
+	11, // 9: yandex.cloud.backup.v1.FilesRecoveryOptions.custom:type_name -> yandex.cloud.backup.v1.TargetPathCustom
+	12, // 10: yandex.cloud.backup.v1.StartFilesRecoveryRequest.opts:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions
+	3,  // 11: yandex.cloud.backup.v1.BackupService.List:input_type -> yandex.cloud.backup.v1.ListBackupsRequest
+	1,  // 12: yandex.cloud.backup.v1.BackupService.ListArchives:input_type -> yandex.cloud.backup.v1.ListArchivesRequest
+	5,  // 13: yandex.cloud.backup.v1.BackupService.ListFiles:input_type -> yandex.cloud.backup.v1.ListFilesRequest
+	7,  // 14: yandex.cloud.backup.v1.BackupService.Get:input_type -> yandex.cloud.backup.v1.GetBackupRequest
+	8,  // 15: yandex.cloud.backup.v1.BackupService.StartRecovery:input_type -> yandex.cloud.backup.v1.StartRecoveryRequest
+	13, // 16: yandex.cloud.backup.v1.BackupService.StartFilesRecovery:input_type -> yandex.cloud.backup.v1.StartFilesRecoveryRequest
+	15, // 17: yandex.cloud.backup.v1.BackupService.Delete:input_type -> yandex.cloud.backup.v1.DeleteBackupRequest
+	17, // 18: yandex.cloud.backup.v1.BackupService.DeleteArchive:input_type -> yandex.cloud.backup.v1.DeleteArchiveRequest
+	4,  // 19: yandex.cloud.backup.v1.BackupService.List:output_type -> yandex.cloud.backup.v1.ListBackupsResponse
+	2,  // 20: yandex.cloud.backup.v1.BackupService.ListArchives:output_type -> yandex.cloud.backup.v1.ListArchivesResponse
+	6,  // 21: yandex.cloud.backup.v1.BackupService.ListFiles:output_type -> yandex.cloud.backup.v1.ListFilesResponse
+	24, // 22: yandex.cloud.backup.v1.BackupService.Get:output_type -> yandex.cloud.backup.v1.Backup
+	26, // 23: yandex.cloud.backup.v1.BackupService.StartRecovery:output_type -> yandex.cloud.operation.Operation
+	26, // 24: yandex.cloud.backup.v1.BackupService.StartFilesRecovery:output_type -> yandex.cloud.operation.Operation
+	26, // 25: yandex.cloud.backup.v1.BackupService.Delete:output_type -> yandex.cloud.operation.Operation
+	26, // 26: yandex.cloud.backup.v1.BackupService.DeleteArchive:output_type -> yandex.cloud.operation.Operation
+	19, // [19:27] is the sub-list for method output_type
+	11, // [11:19] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_backup_v1_backup_service_proto_init() }
@@ -1619,6 +1694,7 @@ func file_yandex_cloud_backup_v1_backup_service_proto_init() {
 		(*ListBackupsRequest_InstancePolicy_)(nil),
 		(*ListBackupsRequest_ResourceId)(nil),
 		(*ListBackupsRequest_PolicyId)(nil),
+		(*ListBackupsRequest_Backup)(nil),
 	}
 	file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[11].OneofWrappers = []any{
 		(*FilesRecoveryOptions_Original)(nil),
@@ -1630,7 +1706,7 @@ func file_yandex_cloud_backup_v1_backup_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_backup_v1_backup_service_proto_rawDesc), len(file_yandex_cloud_backup_v1_backup_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   20,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

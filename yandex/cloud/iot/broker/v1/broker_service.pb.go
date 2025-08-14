@@ -1403,10 +1403,10 @@ const file_yandex_cloud_iot_broker_v1_broker_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"{\n" +
 	"\x13ListBrokersResponse\x12<\n" +
 	"\abrokers\x18\x01 \x03(\v2\".yandex.cloud.iot.broker.v1.BrokerR\abrokers\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xef\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xeb\x04\n" +
 	"\x13CreateBrokerRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
-	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12+\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12.\n" +
+	"\x04name\x18\x02 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.iot.broker.v1.CreateBrokerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12_\n" +
 	"\fcertificates\x18\x05 \x03(\v2;.yandex.cloud.iot.broker.v1.CreateBrokerRequest.CertificateR\fcertificates\x12\x1a\n" +

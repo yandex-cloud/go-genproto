@@ -218,7 +218,8 @@ type CreateEndpointRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Endpoint labels as `key:value` pairs.
 	//
-	// For details about the concept, see [documentation]({{ api-url-prefix }}/resource-manager/concepts/labels).
+	// For details about the concept, see [documentation]({{ api-url-prefix
+	// }}/resource-manager/concepts/labels).
 	Labels        map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Settings      *EndpointSettings `protobuf:"bytes,52,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -344,7 +345,8 @@ type UpdateEndpointRequest struct {
 	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
 	// Endpoint labels as `key:value` pairs.
 	//
-	// For details about the concept, see [documentation]({{ api-url-prefix }}/resource-manager/concepts/labels).
+	// For details about the concept, see [documentation]({{ api-url-prefix
+	// }}/resource-manager/concepts/labels).
 	Labels map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// The new endpoint settings.
 	Settings *EndpointSettings `protobuf:"bytes,52,opt,name=settings,proto3" json:"settings,omitempty"`

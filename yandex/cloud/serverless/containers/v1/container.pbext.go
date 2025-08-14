@@ -116,6 +116,10 @@ func (m *Revision) SetMetadataOptions(v *MetadataOptions) {
 	m.MetadataOptions = v
 }
 
+func (m *Revision) SetAsyncInvocationConfig(v *AsyncInvocationConfig) {
+	m.AsyncInvocationConfig = v
+}
+
 func (m *Image) SetImageUrl(v string) {
 	m.ImageUrl = v
 }
@@ -312,4 +316,8 @@ func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {
 
 func (m *MetadataOptions) SetAwsV1HttpEndpoint(v MetadataOption) {
 	m.AwsV1HttpEndpoint = v
+}
+
+func (m *AsyncInvocationConfig) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }

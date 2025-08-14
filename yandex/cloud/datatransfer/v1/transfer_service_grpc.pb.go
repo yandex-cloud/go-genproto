@@ -32,8 +32,6 @@ const (
 // TransferServiceClient is the client API for TransferService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// A set of methods for managing [transfers]({{ api-url-prefix }}/data-transfer/concepts/#transfer).
 type TransferServiceClient interface {
 	// Creates a transfer in the specified folder.
 	Create(ctx context.Context, in *CreateTransferRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -138,8 +136,6 @@ func (c *transferServiceClient) Activate(ctx context.Context, in *ActivateTransf
 // TransferServiceServer is the server API for TransferService service.
 // All implementations should embed UnimplementedTransferServiceServer
 // for forward compatibility.
-//
-// A set of methods for managing [transfers]({{ api-url-prefix }}/data-transfer/concepts/#transfer).
 type TransferServiceServer interface {
 	// Creates a transfer in the specified folder.
 	Create(context.Context, *CreateTransferRequest) (*operation.Operation, error)

@@ -161,23 +161,24 @@ func (TransferStatus) EnumDescriptor() ([]byte, []int) {
 
 // Transfer core entity
 type Transfer struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId       string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name           string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description    string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels         map[string]string      `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Source         *Endpoint              `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
-	Target         *Endpoint              `protobuf:"bytes,8,opt,name=target,proto3" json:"target,omitempty"`
-	Runtime        *Runtime               `protobuf:"bytes,9,opt,name=runtime,proto3" json:"runtime,omitempty"`
-	Status         TransferStatus         `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.datatransfer.v1.TransferStatus" json:"status,omitempty"`
-	Type           TransferType           `protobuf:"varint,12,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.TransferType" json:"type,omitempty"`
-	Warning        string                 `protobuf:"bytes,15,opt,name=warning,proto3" json:"warning,omitempty"`
-	Transformation *Transformation        `protobuf:"bytes,17,opt,name=transformation,proto3" json:"transformation,omitempty"`
-	DataObjects    *DataObjects           `protobuf:"bytes,19,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
-	Prestable      bool                   `protobuf:"varint,22,opt,name=prestable,proto3" json:"prestable,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Id                 string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	FolderId           string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	Name               string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Description        string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Labels             map[string]string      `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Source             *Endpoint              `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
+	Target             *Endpoint              `protobuf:"bytes,8,opt,name=target,proto3" json:"target,omitempty"`
+	Runtime            *Runtime               `protobuf:"bytes,9,opt,name=runtime,proto3" json:"runtime,omitempty"`
+	Status             TransferStatus         `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.datatransfer.v1.TransferStatus" json:"status,omitempty"`
+	Type               TransferType           `protobuf:"varint,12,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.TransferType" json:"type,omitempty"`
+	Warning            string                 `protobuf:"bytes,15,opt,name=warning,proto3" json:"warning,omitempty"`
+	Transformation     *Transformation        `protobuf:"bytes,17,opt,name=transformation,proto3" json:"transformation,omitempty"`
+	DataObjects        *DataObjects           `protobuf:"bytes,19,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
+	Prestable          bool                   `protobuf:"varint,22,opt,name=prestable,proto3" json:"prestable,omitempty"`
+	ReplicationRuntime *Runtime               `protobuf:"bytes,24,opt,name=replication_runtime,json=replicationRuntime,proto3" json:"replication_runtime,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Transfer) Reset() {
@@ -306,6 +307,13 @@ func (x *Transfer) GetPrestable() bool {
 		return x.Prestable
 	}
 	return false
+}
+
+func (x *Transfer) GetReplicationRuntime() *Runtime {
+	if x != nil {
+		return x.ReplicationRuntime
+	}
+	return nil
 }
 
 type Runtime struct {
@@ -1090,14 +1098,53 @@ func (x *ToStringTransformer) GetColumns() *ColumnsFilter {
 	return nil
 }
 
+type SharderTransformerTypeRandom struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SharderTransformerTypeRandom) Reset() {
+	*x = SharderTransformerTypeRandom{}
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SharderTransformerTypeRandom) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SharderTransformerTypeRandom) ProtoMessage() {}
+
+func (x *SharderTransformerTypeRandom) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SharderTransformerTypeRandom.ProtoReflect.Descriptor instead.
+func (*SharderTransformerTypeRandom) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{15}
+}
+
 // Set the number of shards for particular tables and a list of columns whose
 // values will be used for calculating a hash to determine a shard.
 type SharderTransformer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of included and excluded tables
 	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
-	// List of included and excluded columns
-	Columns *ColumnsFilter `protobuf:"bytes,2,opt,name=columns,proto3" json:"columns,omitempty"`
+	// Types that are valid to be assigned to SharderTransformerType:
+	//
+	//	*SharderTransformer_Columns
+	//	*SharderTransformer_Random
+	SharderTransformerType isSharderTransformer_SharderTransformerType `protobuf_oneof:"sharderTransformerType"`
 	// Number of shards
 	ShardsCount   int64 `protobuf:"varint,3,opt,name=shards_count,json=shardsCount,proto3" json:"shards_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1106,7 +1153,7 @@ type SharderTransformer struct {
 
 func (x *SharderTransformer) Reset() {
 	*x = SharderTransformer{}
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[15]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1118,7 +1165,7 @@ func (x *SharderTransformer) String() string {
 func (*SharderTransformer) ProtoMessage() {}
 
 func (x *SharderTransformer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[15]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1131,7 +1178,7 @@ func (x *SharderTransformer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SharderTransformer.ProtoReflect.Descriptor instead.
 func (*SharderTransformer) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SharderTransformer) GetTables() *TablesFilter {
@@ -1141,9 +1188,27 @@ func (x *SharderTransformer) GetTables() *TablesFilter {
 	return nil
 }
 
+func (x *SharderTransformer) GetSharderTransformerType() isSharderTransformer_SharderTransformerType {
+	if x != nil {
+		return x.SharderTransformerType
+	}
+	return nil
+}
+
 func (x *SharderTransformer) GetColumns() *ColumnsFilter {
 	if x != nil {
-		return x.Columns
+		if x, ok := x.SharderTransformerType.(*SharderTransformer_Columns); ok {
+			return x.Columns
+		}
+	}
+	return nil
+}
+
+func (x *SharderTransformer) GetRandom() *SharderTransformerTypeRandom {
+	if x != nil {
+		if x, ok := x.SharderTransformerType.(*SharderTransformer_Random); ok {
+			return x.Random
+		}
 	}
 	return nil
 }
@@ -1154,6 +1219,23 @@ func (x *SharderTransformer) GetShardsCount() int64 {
 	}
 	return 0
 }
+
+type isSharderTransformer_SharderTransformerType interface {
+	isSharderTransformer_SharderTransformerType()
+}
+
+type SharderTransformer_Columns struct {
+	// List of included and excluded columns
+	Columns *ColumnsFilter `protobuf:"bytes,2,opt,name=columns,proto3,oneof"`
+}
+
+type SharderTransformer_Random struct {
+	Random *SharderTransformerTypeRandom `protobuf:"bytes,4,opt,name=random,proto3,oneof"`
+}
+
+func (*SharderTransformer_Columns) isSharderTransformer_SharderTransformerType() {}
+
+func (*SharderTransformer_Random) isSharderTransformer_SharderTransformerType() {}
 
 // A transfer splits the X table into multiple tables (X_1, X_2, ..., X_n) based on
 // data.
@@ -1180,7 +1262,7 @@ type TableSplitterTransformer struct {
 
 func (x *TableSplitterTransformer) Reset() {
 	*x = TableSplitterTransformer{}
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[16]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1192,7 +1274,7 @@ func (x *TableSplitterTransformer) String() string {
 func (*TableSplitterTransformer) ProtoMessage() {}
 
 func (x *TableSplitterTransformer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[16]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1205,7 +1287,7 @@ func (x *TableSplitterTransformer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TableSplitterTransformer.ProtoReflect.Descriptor instead.
 func (*TableSplitterTransformer) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *TableSplitterTransformer) GetTables() *TablesFilter {
@@ -1260,7 +1342,7 @@ type FilterRowsTransformer struct {
 
 func (x *FilterRowsTransformer) Reset() {
 	*x = FilterRowsTransformer{}
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[17]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1272,7 +1354,7 @@ func (x *FilterRowsTransformer) String() string {
 func (*FilterRowsTransformer) ProtoMessage() {}
 
 func (x *FilterRowsTransformer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[17]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1285,7 +1367,7 @@ func (x *FilterRowsTransformer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterRowsTransformer.ProtoReflect.Descriptor instead.
 func (*FilterRowsTransformer) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *FilterRowsTransformer) GetTables() *TablesFilter {
@@ -1331,7 +1413,7 @@ type Transformer struct {
 
 func (x *Transformer) Reset() {
 	*x = Transformer{}
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[18]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1343,7 +1425,7 @@ func (x *Transformer) String() string {
 func (*Transformer) ProtoMessage() {}
 
 func (x *Transformer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[18]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1356,7 +1438,7 @@ func (x *Transformer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transformer.ProtoReflect.Descriptor instead.
 func (*Transformer) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *Transformer) GetTransformer() isTransformer_Transformer {
@@ -1508,7 +1590,7 @@ type Transformation struct {
 
 func (x *Transformation) Reset() {
 	*x = Transformation{}
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[19]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1520,7 +1602,7 @@ func (x *Transformation) String() string {
 func (*Transformation) ProtoMessage() {}
 
 func (x *Transformation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[19]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1533,7 +1615,7 @@ func (x *Transformation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transformation.ProtoReflect.Descriptor instead.
 func (*Transformation) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Transformation) GetTransformers() []*Transformer {
@@ -1552,7 +1634,7 @@ type DataObjects struct {
 
 func (x *DataObjects) Reset() {
 	*x = DataObjects{}
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[20]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1564,7 +1646,7 @@ func (x *DataObjects) String() string {
 func (*DataObjects) ProtoMessage() {}
 
 func (x *DataObjects) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[20]
+	mi := &file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1577,7 +1659,7 @@ func (x *DataObjects) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataObjects.ProtoReflect.Descriptor instead.
 func (*DataObjects) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DataObjects) GetIncludeObjects() []string {
@@ -1591,7 +1673,7 @@ var File_yandex_cloud_datatransfer_v1_transfer_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/datatransfer/v1/transfer.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a+yandex/cloud/datatransfer/v1/endpoint.proto\"\xbb\x06\n" +
+	"+yandex/cloud/datatransfer/v1/transfer.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a+yandex/cloud/datatransfer/v1/endpoint.proto\"\x99\a\n" +
 	"\bTransfer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
@@ -1607,10 +1689,11 @@ const file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc = "" +
 	"\awarning\x18\x0f \x01(\tR\awarning\x12T\n" +
 	"\x0etransformation\x18\x11 \x01(\v2,.yandex.cloud.datatransfer.v1.TransformationR\x0etransformation\x12L\n" +
 	"\fdata_objects\x18\x13 \x01(\v2).yandex.cloud.datatransfer.v1.DataObjectsR\vdataObjects\x12\x1c\n" +
-	"\tprestable\x18\x16 \x01(\bR\tprestable\x1a9\n" +
+	"\tprestable\x18\x16 \x01(\bR\tprestable\x12V\n" +
+	"\x13replication_runtime\x18\x18 \x01(\v2%.yandex.cloud.datatransfer.v1.RuntimeR\x12replicationRuntime\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\v\x10\fJ\x04\b\r\x10\x0fJ\x04\b\x10\x10\x11J\x04\b\x12\x10\x13J\x04\b\x14\x10\x16\"d\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\v\x10\fJ\x04\b\r\x10\x0fJ\x04\b\x10\x10\x11J\x04\b\x12\x10\x13J\x04\b\x14\x10\x16J\x04\b\x17\x10\x18\"d\n" +
 	"\aRuntime\x12H\n" +
 	"\n" +
 	"yc_runtime\x18\x04 \x01(\v2'.yandex.cloud.datatransfer.v1.YcRuntimeH\x00R\tycRuntimeB\t\n" +
@@ -1653,11 +1736,14 @@ const file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc = "" +
 	"\x04keys\x18\x02 \x03(\tR\x04keys\"\xa0\x01\n" +
 	"\x13ToStringTransformer\x12B\n" +
 	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12E\n" +
-	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterR\acolumns\"\xc2\x01\n" +
+	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterR\acolumns\"\x1e\n" +
+	"\x1cSharderTransformerTypeRandom\"\xb4\x02\n" +
 	"\x12SharderTransformer\x12B\n" +
-	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12E\n" +
-	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterR\acolumns\x12!\n" +
-	"\fshards_count\x18\x03 \x01(\x03R\vshardsCount\"\x94\x01\n" +
+	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12G\n" +
+	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterH\x00R\acolumns\x12T\n" +
+	"\x06random\x18\x04 \x01(\v2:.yandex.cloud.datatransfer.v1.SharderTransformerTypeRandomH\x00R\x06random\x12!\n" +
+	"\fshards_count\x18\x03 \x01(\x03R\vshardsCountB\x18\n" +
+	"\x16sharderTransformerType\"\x94\x01\n" +
 	"\x18TableSplitterTransformer\x12B\n" +
 	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12\x18\n" +
 	"\acolumns\x18\x02 \x03(\tR\acolumns\x12\x1a\n" +
@@ -1717,7 +1803,7 @@ func file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_datatransfer_v1_transfer_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_yandex_cloud_datatransfer_v1_transfer_proto_goTypes = []any{
 	(TransferType)(0),                    // 0: yandex.cloud.datatransfer.v1.TransferType
 	(TransferStatus)(0),                  // 1: yandex.cloud.datatransfer.v1.TransferStatus
@@ -1736,55 +1822,58 @@ var file_yandex_cloud_datatransfer_v1_transfer_proto_goTypes = []any{
 	(*RenameTablesTransformer)(nil),      // 14: yandex.cloud.datatransfer.v1.RenameTablesTransformer
 	(*ReplacePrimaryKeyTransformer)(nil), // 15: yandex.cloud.datatransfer.v1.ReplacePrimaryKeyTransformer
 	(*ToStringTransformer)(nil),          // 16: yandex.cloud.datatransfer.v1.ToStringTransformer
-	(*SharderTransformer)(nil),           // 17: yandex.cloud.datatransfer.v1.SharderTransformer
-	(*TableSplitterTransformer)(nil),     // 18: yandex.cloud.datatransfer.v1.TableSplitterTransformer
-	(*FilterRowsTransformer)(nil),        // 19: yandex.cloud.datatransfer.v1.FilterRowsTransformer
-	(*Transformer)(nil),                  // 20: yandex.cloud.datatransfer.v1.Transformer
-	(*Transformation)(nil),               // 21: yandex.cloud.datatransfer.v1.Transformation
-	(*DataObjects)(nil),                  // 22: yandex.cloud.datatransfer.v1.DataObjects
-	nil,                                  // 23: yandex.cloud.datatransfer.v1.Transfer.LabelsEntry
-	(*Endpoint)(nil),                     // 24: yandex.cloud.datatransfer.v1.Endpoint
+	(*SharderTransformerTypeRandom)(nil), // 17: yandex.cloud.datatransfer.v1.SharderTransformerTypeRandom
+	(*SharderTransformer)(nil),           // 18: yandex.cloud.datatransfer.v1.SharderTransformer
+	(*TableSplitterTransformer)(nil),     // 19: yandex.cloud.datatransfer.v1.TableSplitterTransformer
+	(*FilterRowsTransformer)(nil),        // 20: yandex.cloud.datatransfer.v1.FilterRowsTransformer
+	(*Transformer)(nil),                  // 21: yandex.cloud.datatransfer.v1.Transformer
+	(*Transformation)(nil),               // 22: yandex.cloud.datatransfer.v1.Transformation
+	(*DataObjects)(nil),                  // 23: yandex.cloud.datatransfer.v1.DataObjects
+	nil,                                  // 24: yandex.cloud.datatransfer.v1.Transfer.LabelsEntry
+	(*Endpoint)(nil),                     // 25: yandex.cloud.datatransfer.v1.Endpoint
 }
 var file_yandex_cloud_datatransfer_v1_transfer_proto_depIdxs = []int32{
-	23, // 0: yandex.cloud.datatransfer.v1.Transfer.labels:type_name -> yandex.cloud.datatransfer.v1.Transfer.LabelsEntry
-	24, // 1: yandex.cloud.datatransfer.v1.Transfer.source:type_name -> yandex.cloud.datatransfer.v1.Endpoint
-	24, // 2: yandex.cloud.datatransfer.v1.Transfer.target:type_name -> yandex.cloud.datatransfer.v1.Endpoint
+	24, // 0: yandex.cloud.datatransfer.v1.Transfer.labels:type_name -> yandex.cloud.datatransfer.v1.Transfer.LabelsEntry
+	25, // 1: yandex.cloud.datatransfer.v1.Transfer.source:type_name -> yandex.cloud.datatransfer.v1.Endpoint
+	25, // 2: yandex.cloud.datatransfer.v1.Transfer.target:type_name -> yandex.cloud.datatransfer.v1.Endpoint
 	3,  // 3: yandex.cloud.datatransfer.v1.Transfer.runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
 	1,  // 4: yandex.cloud.datatransfer.v1.Transfer.status:type_name -> yandex.cloud.datatransfer.v1.TransferStatus
 	0,  // 5: yandex.cloud.datatransfer.v1.Transfer.type:type_name -> yandex.cloud.datatransfer.v1.TransferType
-	21, // 6: yandex.cloud.datatransfer.v1.Transfer.transformation:type_name -> yandex.cloud.datatransfer.v1.Transformation
-	22, // 7: yandex.cloud.datatransfer.v1.Transfer.data_objects:type_name -> yandex.cloud.datatransfer.v1.DataObjects
-	5,  // 8: yandex.cloud.datatransfer.v1.Runtime.yc_runtime:type_name -> yandex.cloud.datatransfer.v1.YcRuntime
-	4,  // 9: yandex.cloud.datatransfer.v1.YcRuntime.upload_shard_params:type_name -> yandex.cloud.datatransfer.v1.ShardingUploadParams
-	7,  // 10: yandex.cloud.datatransfer.v1.MaskFunction.mask_function_hash:type_name -> yandex.cloud.datatransfer.v1.MaskFunctionHash
-	8,  // 11: yandex.cloud.datatransfer.v1.MaskFieldTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	6,  // 12: yandex.cloud.datatransfer.v1.MaskFieldTransformer.function:type_name -> yandex.cloud.datatransfer.v1.MaskFunction
-	8,  // 13: yandex.cloud.datatransfer.v1.FilterColumnsTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	9,  // 14: yandex.cloud.datatransfer.v1.FilterColumnsTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
-	12, // 15: yandex.cloud.datatransfer.v1.RenameTable.original_name:type_name -> yandex.cloud.datatransfer.v1.Table
-	12, // 16: yandex.cloud.datatransfer.v1.RenameTable.new_name:type_name -> yandex.cloud.datatransfer.v1.Table
-	13, // 17: yandex.cloud.datatransfer.v1.RenameTablesTransformer.rename_tables:type_name -> yandex.cloud.datatransfer.v1.RenameTable
-	8,  // 18: yandex.cloud.datatransfer.v1.ReplacePrimaryKeyTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	8,  // 19: yandex.cloud.datatransfer.v1.ToStringTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	9,  // 20: yandex.cloud.datatransfer.v1.ToStringTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
-	8,  // 21: yandex.cloud.datatransfer.v1.SharderTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	9,  // 22: yandex.cloud.datatransfer.v1.SharderTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
-	8,  // 23: yandex.cloud.datatransfer.v1.TableSplitterTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	8,  // 24: yandex.cloud.datatransfer.v1.FilterRowsTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	10, // 25: yandex.cloud.datatransfer.v1.Transformer.mask_field:type_name -> yandex.cloud.datatransfer.v1.MaskFieldTransformer
-	11, // 26: yandex.cloud.datatransfer.v1.Transformer.filter_columns:type_name -> yandex.cloud.datatransfer.v1.FilterColumnsTransformer
-	14, // 27: yandex.cloud.datatransfer.v1.Transformer.rename_tables:type_name -> yandex.cloud.datatransfer.v1.RenameTablesTransformer
-	15, // 28: yandex.cloud.datatransfer.v1.Transformer.replace_primary_key:type_name -> yandex.cloud.datatransfer.v1.ReplacePrimaryKeyTransformer
-	16, // 29: yandex.cloud.datatransfer.v1.Transformer.convert_to_string:type_name -> yandex.cloud.datatransfer.v1.ToStringTransformer
-	17, // 30: yandex.cloud.datatransfer.v1.Transformer.sharder_transformer:type_name -> yandex.cloud.datatransfer.v1.SharderTransformer
-	18, // 31: yandex.cloud.datatransfer.v1.Transformer.table_splitter_transformer:type_name -> yandex.cloud.datatransfer.v1.TableSplitterTransformer
-	19, // 32: yandex.cloud.datatransfer.v1.Transformer.filter_rows:type_name -> yandex.cloud.datatransfer.v1.FilterRowsTransformer
-	20, // 33: yandex.cloud.datatransfer.v1.Transformation.transformers:type_name -> yandex.cloud.datatransfer.v1.Transformer
-	34, // [34:34] is the sub-list for method output_type
-	34, // [34:34] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	22, // 6: yandex.cloud.datatransfer.v1.Transfer.transformation:type_name -> yandex.cloud.datatransfer.v1.Transformation
+	23, // 7: yandex.cloud.datatransfer.v1.Transfer.data_objects:type_name -> yandex.cloud.datatransfer.v1.DataObjects
+	3,  // 8: yandex.cloud.datatransfer.v1.Transfer.replication_runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
+	5,  // 9: yandex.cloud.datatransfer.v1.Runtime.yc_runtime:type_name -> yandex.cloud.datatransfer.v1.YcRuntime
+	4,  // 10: yandex.cloud.datatransfer.v1.YcRuntime.upload_shard_params:type_name -> yandex.cloud.datatransfer.v1.ShardingUploadParams
+	7,  // 11: yandex.cloud.datatransfer.v1.MaskFunction.mask_function_hash:type_name -> yandex.cloud.datatransfer.v1.MaskFunctionHash
+	8,  // 12: yandex.cloud.datatransfer.v1.MaskFieldTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	6,  // 13: yandex.cloud.datatransfer.v1.MaskFieldTransformer.function:type_name -> yandex.cloud.datatransfer.v1.MaskFunction
+	8,  // 14: yandex.cloud.datatransfer.v1.FilterColumnsTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	9,  // 15: yandex.cloud.datatransfer.v1.FilterColumnsTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
+	12, // 16: yandex.cloud.datatransfer.v1.RenameTable.original_name:type_name -> yandex.cloud.datatransfer.v1.Table
+	12, // 17: yandex.cloud.datatransfer.v1.RenameTable.new_name:type_name -> yandex.cloud.datatransfer.v1.Table
+	13, // 18: yandex.cloud.datatransfer.v1.RenameTablesTransformer.rename_tables:type_name -> yandex.cloud.datatransfer.v1.RenameTable
+	8,  // 19: yandex.cloud.datatransfer.v1.ReplacePrimaryKeyTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	8,  // 20: yandex.cloud.datatransfer.v1.ToStringTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	9,  // 21: yandex.cloud.datatransfer.v1.ToStringTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
+	8,  // 22: yandex.cloud.datatransfer.v1.SharderTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	9,  // 23: yandex.cloud.datatransfer.v1.SharderTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
+	17, // 24: yandex.cloud.datatransfer.v1.SharderTransformer.random:type_name -> yandex.cloud.datatransfer.v1.SharderTransformerTypeRandom
+	8,  // 25: yandex.cloud.datatransfer.v1.TableSplitterTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	8,  // 26: yandex.cloud.datatransfer.v1.FilterRowsTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
+	10, // 27: yandex.cloud.datatransfer.v1.Transformer.mask_field:type_name -> yandex.cloud.datatransfer.v1.MaskFieldTransformer
+	11, // 28: yandex.cloud.datatransfer.v1.Transformer.filter_columns:type_name -> yandex.cloud.datatransfer.v1.FilterColumnsTransformer
+	14, // 29: yandex.cloud.datatransfer.v1.Transformer.rename_tables:type_name -> yandex.cloud.datatransfer.v1.RenameTablesTransformer
+	15, // 30: yandex.cloud.datatransfer.v1.Transformer.replace_primary_key:type_name -> yandex.cloud.datatransfer.v1.ReplacePrimaryKeyTransformer
+	16, // 31: yandex.cloud.datatransfer.v1.Transformer.convert_to_string:type_name -> yandex.cloud.datatransfer.v1.ToStringTransformer
+	18, // 32: yandex.cloud.datatransfer.v1.Transformer.sharder_transformer:type_name -> yandex.cloud.datatransfer.v1.SharderTransformer
+	19, // 33: yandex.cloud.datatransfer.v1.Transformer.table_splitter_transformer:type_name -> yandex.cloud.datatransfer.v1.TableSplitterTransformer
+	20, // 34: yandex.cloud.datatransfer.v1.Transformer.filter_rows:type_name -> yandex.cloud.datatransfer.v1.FilterRowsTransformer
+	21, // 35: yandex.cloud.datatransfer.v1.Transformation.transformers:type_name -> yandex.cloud.datatransfer.v1.Transformer
+	36, // [36:36] is the sub-list for method output_type
+	36, // [36:36] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_datatransfer_v1_transfer_proto_init() }
@@ -1799,7 +1888,11 @@ func file_yandex_cloud_datatransfer_v1_transfer_proto_init() {
 	file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[4].OneofWrappers = []any{
 		(*MaskFunction_MaskFunctionHash)(nil),
 	}
-	file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[18].OneofWrappers = []any{
+	file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[16].OneofWrappers = []any{
+		(*SharderTransformer_Columns)(nil),
+		(*SharderTransformer_Random)(nil),
+	}
+	file_yandex_cloud_datatransfer_v1_transfer_proto_msgTypes[19].OneofWrappers = []any{
 		(*Transformer_MaskField)(nil),
 		(*Transformer_FilterColumns)(nil),
 		(*Transformer_RenameTables)(nil),
@@ -1815,7 +1908,7 @@ func file_yandex_cloud_datatransfer_v1_transfer_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc), len(file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
