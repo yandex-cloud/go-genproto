@@ -1523,6 +1523,8 @@ type RestoreClusterRequest struct {
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,15,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Allows to use ACL users to auth in sentinel
 	AuthSentinel bool `protobuf:"varint,16,opt,name=auth_sentinel,json=authSentinel,proto3" json:"auth_sentinel,omitempty"`
+	// Redis cluster mode on/off.
+	Sharded bool `protobuf:"varint,17,opt,name=sharded,proto3" json:"sharded,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,18,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -1667,6 +1669,13 @@ func (x *RestoreClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 func (x *RestoreClusterRequest) GetAuthSentinel() bool {
 	if x != nil {
 		return x.AuthSentinel
+	}
+	return false
+}
+
+func (x *RestoreClusterRequest) GetSharded() bool {
+	if x != nil {
+		return x.Sharded
 	}
 	return false
 }
@@ -3897,7 +3906,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xb5\t\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xc1\t\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -3905,9 +3914,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.mdb.redis.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12L\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
-	"configSpec\x12J\n" +
+	"configSpec\x12B\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12+\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12+\n" +
 	"\n" +
 	"network_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
 	"\tfolder_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12,\n" +
@@ -3919,11 +3928,12 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\r \x01(\bR\x12deletionProtection\x12-\n" +
 	"\x12announce_hostnames\x18\x0e \x01(\bR\x11announceHostnames\x12[\n" +
 	"\x12maintenance_window\x18\x0f \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowR\x11maintenanceWindow\x12#\n" +
-	"\rauth_sentinel\x18\x10 \x01(\bR\fauthSentinel\x12Q\n" +
+	"\rauth_sentinel\x18\x10 \x01(\bR\fauthSentinel\x12\x18\n" +
+	"\asharded\x18\x11 \x01(\bR\asharded\x12Q\n" +
 	"\x16disk_encryption_key_id\x18\x12 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x11\x10\x12\"T\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"T\n" +
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +

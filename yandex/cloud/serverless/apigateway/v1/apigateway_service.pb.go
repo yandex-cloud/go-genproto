@@ -1274,7 +1274,7 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDes
 	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x96\x01\n" +
 	"\x16ListApiGatewayResponse\x12T\n" +
 	"\fapi_gateways\x18\x01 \x03(\v21.yandex.cloud.serverless.apigateway.v1.ApiGatewayR\vapiGateways\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe4\a\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe5\a\n" +
 	"\x17CreateApiGatewayRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x128\n" +
 	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -1285,17 +1285,16 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDes
 	"\vlog_options\x18\a \x01(\v21.yandex.cloud.serverless.apigateway.v1.LogOptionsR\n" +
 	"logOptions\x12k\n" +
 	"\tvariables\x18\b \x03(\v2M.yandex.cloud.serverless.apigateway.v1.CreateApiGatewayRequest.VariablesEntryR\tvariables\x12E\n" +
-	"\x06canary\x18\t \x01(\v2-.yandex.cloud.serverless.apigateway.v1.CanaryR\x06canary\x12R\n" +
+	"\x06canary\x18\t \x01(\v2-.yandex.cloud.serverless.apigateway.v1.CanaryR\x06canary\x12S\n" +
 	"\x11execution_timeout\x18\n" +
-	" \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x06<=600sR\x10executionTimeout\x1a9\n" +
+	" \x01(\v2\x19.google.protobuf.DurationB\v\xfa\xc71\a0s-600sR\x10executionTimeout\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1ar\n" +
 	"\x0eVariablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12J\n" +
 	"\x05value\x18\x02 \x01(\v24.yandex.cloud.serverless.apigateway.v1.VariableInputR\x05value:\x028\x01B\f\n" +
-	"\x04spec\x12\x04\xc0\xc11\x01\"\xaa\b\n" +
+	"\x04spec\x12\x04\xc0\xc11\x01\"\xab\b\n" +
 	"\x17UpdateApiGatewayRequest\x12*\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1309,9 +1308,8 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDes
 	"logOptions\x12k\n" +
 	"\tvariables\x18\t \x03(\v2M.yandex.cloud.serverless.apigateway.v1.UpdateApiGatewayRequest.VariablesEntryR\tvariables\x12E\n" +
 	"\x06canary\x18\n" +
-	" \x01(\v2-.yandex.cloud.serverless.apigateway.v1.CanaryR\x06canary\x12R\n" +
-	"\x11execution_timeout\x18\v \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x06<=600sR\x10executionTimeout\x1a9\n" +
+	" \x01(\v2-.yandex.cloud.serverless.apigateway.v1.CanaryR\x06canary\x12S\n" +
+	"\x11execution_timeout\x18\v \x01(\v2\x19.google.protobuf.DurationB\v\xfa\xc71\a0s-600sR\x10executionTimeout\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1ar\n" +

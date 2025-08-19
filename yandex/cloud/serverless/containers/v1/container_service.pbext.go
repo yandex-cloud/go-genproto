@@ -194,6 +194,10 @@ func (m *DeployContainerRevisionRequest) SetMetadataOptions(v *MetadataOptions) 
 	m.MetadataOptions = v
 }
 
+func (m *DeployContainerRevisionRequest) SetAsyncInvocationConfig(v *AsyncInvocationConfig) {
+	m.AsyncInvocationConfig = v
+}
+
 func (m *ImageSpec) SetImageUrl(v string) {
 	m.ImageUrl = v
 }

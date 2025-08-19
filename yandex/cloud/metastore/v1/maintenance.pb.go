@@ -26,14 +26,22 @@ const (
 type WeeklyMaintenanceWindow_WeekDay int32
 
 const (
+	// Day of the week is not specified.
 	WeeklyMaintenanceWindow_WEEK_DAY_UNSPECIFIED WeeklyMaintenanceWindow_WeekDay = 0
-	WeeklyMaintenanceWindow_MON                  WeeklyMaintenanceWindow_WeekDay = 1
-	WeeklyMaintenanceWindow_TUE                  WeeklyMaintenanceWindow_WeekDay = 2
-	WeeklyMaintenanceWindow_WED                  WeeklyMaintenanceWindow_WeekDay = 3
-	WeeklyMaintenanceWindow_THU                  WeeklyMaintenanceWindow_WeekDay = 4
-	WeeklyMaintenanceWindow_FRI                  WeeklyMaintenanceWindow_WeekDay = 5
-	WeeklyMaintenanceWindow_SAT                  WeeklyMaintenanceWindow_WeekDay = 6
-	WeeklyMaintenanceWindow_SUN                  WeeklyMaintenanceWindow_WeekDay = 7
+	// Monday.
+	WeeklyMaintenanceWindow_MON WeeklyMaintenanceWindow_WeekDay = 1
+	// Tuesday.
+	WeeklyMaintenanceWindow_TUE WeeklyMaintenanceWindow_WeekDay = 2
+	// Wednesday.
+	WeeklyMaintenanceWindow_WED WeeklyMaintenanceWindow_WeekDay = 3
+	// Thursday.
+	WeeklyMaintenanceWindow_THU WeeklyMaintenanceWindow_WeekDay = 4
+	// Friday.
+	WeeklyMaintenanceWindow_FRI WeeklyMaintenanceWindow_WeekDay = 5
+	// Saturday.
+	WeeklyMaintenanceWindow_SAT WeeklyMaintenanceWindow_WeekDay = 6
+	// Sunday.
+	WeeklyMaintenanceWindow_SUN WeeklyMaintenanceWindow_WeekDay = 7
 )
 
 // Enum value maps for WeeklyMaintenanceWindow_WeekDay.
@@ -158,10 +166,12 @@ type isMaintenanceWindow_Policy interface {
 }
 
 type MaintenanceWindow_Anytime struct {
+	// The cluster may be restarted for maintenance at any time.
 	Anytime *AnytimeMaintenanceWindow `protobuf:"bytes,1,opt,name=anytime,proto3,oneof"`
 }
 
 type MaintenanceWindow_WeeklyMaintenanceWindow struct {
+	// Maintenance is allowed only within the specified weekly window.
 	WeeklyMaintenanceWindow *WeeklyMaintenanceWindow `protobuf:"bytes,2,opt,name=weekly_maintenance_window,json=weeklyMaintenanceWindow,proto3,oneof"`
 }
 
@@ -206,9 +216,10 @@ func (*AnytimeMaintenanceWindow) Descriptor() ([]byte, []int) {
 }
 
 type WeeklyMaintenanceWindow struct {
-	state protoimpl.MessageState          `protogen:"open.v1"`
-	Day   WeeklyMaintenanceWindow_WeekDay `protobuf:"varint,1,opt,name=day,proto3,enum=yandex.cloud.metastore.v1.WeeklyMaintenanceWindow_WeekDay" json:"day,omitempty"`
-	// Hour of the day in UTC.
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Day of the week when maintenance can occur.
+	Day WeeklyMaintenanceWindow_WeekDay `protobuf:"varint,1,opt,name=day,proto3,enum=yandex.cloud.metastore.v1.WeeklyMaintenanceWindow_WeekDay" json:"day,omitempty"`
+	// Hour of the day in UTC when the maintenance window starts.
 	Hour          int64 `protobuf:"varint,2,opt,name=hour,proto3" json:"hour,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -259,10 +270,14 @@ func (x *WeeklyMaintenanceWindow) GetHour() int64 {
 }
 
 type MaintenanceOperation struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	Info                      string                 `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
-	DelayedUntil              *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
-	LatestMaintenanceTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=latest_maintenance_time,json=latestMaintenanceTime,proto3" json:"latest_maintenance_time,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Information about the maintenance operation.
+	Info string `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
+	// Maintenance is postponed until the specified timestamp.
+	DelayedUntil *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
+	// Timestamp of the latest successfully completed maintenance.
+	LatestMaintenanceTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=latest_maintenance_time,json=latestMaintenanceTime,proto3" json:"latest_maintenance_time,omitempty"`
+	// Timestamp of the next scheduled maintenance window.
 	NextMaintenanceWindowTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=next_maintenance_window_time,json=nextMaintenanceWindowTime,proto3" json:"next_maintenance_window_time,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache

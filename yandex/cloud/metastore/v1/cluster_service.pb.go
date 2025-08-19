@@ -1342,7 +1342,7 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.metastore.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa6\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xaa\x06\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -1351,8 +1351,8 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\v \x01(\bR\x12deletionProtection\x12\x18\n" +
 	"\aversion\x18\f \x01(\tR\aversion\x12F\n" +
 	"\vconfig_spec\x18\r \x01(\v2%.yandex.cloud.metastore.v1.ConfigSpecR\n" +
-	"configSpec\x126\n" +
-	"\x12service_account_id\x18\x0e \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12B\n" +
+	"configSpec\x12:\n" +
+	"\x12service_account_id\x18\x0e \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12B\n" +
 	"\alogging\x18\x0f \x01(\v2(.yandex.cloud.metastore.v1.LoggingConfigR\alogging\x12B\n" +
 	"\anetwork\x18\x10 \x01(\v2(.yandex.cloud.metastore.v1.NetworkConfigR\anetwork\x12[\n" +
 	"\x12maintenance_window\x18\x11 \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +

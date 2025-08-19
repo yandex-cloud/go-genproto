@@ -828,12 +828,14 @@ type DeployContainerRevisionRequest struct {
 	StorageMounts []*StorageMount `protobuf:"bytes,15,rep,name=storage_mounts,json=storageMounts,proto3" json:"storage_mounts,omitempty"`
 	// Mounts to be used by the revision.
 	Mounts []*Mount `protobuf:"bytes,16,rep,name=mounts,proto3" json:"mounts,omitempty"`
-	// The container's execution mode
+	// The container's execution mode.
 	Runtime *Runtime `protobuf:"bytes,17,opt,name=runtime,proto3" json:"runtime,omitempty"`
 	// Metadata options for the revision.
 	MetadataOptions *MetadataOptions `protobuf:"bytes,18,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Config for asynchronous invocations of the revision.
+	AsyncInvocationConfig *AsyncInvocationConfig `protobuf:"bytes,19,opt,name=async_invocation_config,json=asyncInvocationConfig,proto3" json:"async_invocation_config,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DeployContainerRevisionRequest) Reset() {
@@ -974,6 +976,13 @@ func (x *DeployContainerRevisionRequest) GetRuntime() *Runtime {
 func (x *DeployContainerRevisionRequest) GetMetadataOptions() *MetadataOptions {
 	if x != nil {
 		return x.MetadataOptions
+	}
+	return nil
+}
+
+func (x *DeployContainerRevisionRequest) GetAsyncInvocationConfig() *AsyncInvocationConfig {
+	if x != nil {
+		return x.AsyncInvocationConfig
 	}
 	return nil
 }
@@ -1417,7 +1426,8 @@ const file_yandex_cloud_serverless_containers_v1_container_service_proto_rawDesc
 	"\x02id\x12\x04\xc0\xc11\x01\"\x98\x01\n" +
 	"\x1fListContainersRevisionsResponse\x12M\n" +
 	"\trevisions\x18\x01 \x03(\v2/.yandex.cloud.serverless.containers.v1.RevisionR\trevisions\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xcf\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc5\n" +
+	"\n" +
 	"\x1eDeployContainerRevisionRequest\x12'\n" +
 	"\fcontainer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vcontainerId\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12T\n" +
@@ -1437,7 +1447,8 @@ const file_yandex_cloud_serverless_containers_v1_container_service_proto_rawDesc
 	"\x0estorage_mounts\x18\x0f \x03(\v23.yandex.cloud.serverless.containers.v1.StorageMountR\rstorageMounts\x12D\n" +
 	"\x06mounts\x18\x10 \x03(\v2,.yandex.cloud.serverless.containers.v1.MountR\x06mounts\x12H\n" +
 	"\aruntime\x18\x11 \x01(\v2..yandex.cloud.serverless.containers.v1.RuntimeR\aruntime\x12a\n" +
-	"\x10metadata_options\x18\x12 \x01(\v26.yandex.cloud.serverless.containers.v1.MetadataOptionsR\x0fmetadataOptionsJ\x04\b\x04\x10\x05J\x04\b\x02\x10\x03\"\xa7\x03\n" +
+	"\x10metadata_options\x18\x12 \x01(\v26.yandex.cloud.serverless.containers.v1.MetadataOptionsR\x0fmetadataOptions\x12t\n" +
+	"\x17async_invocation_config\x18\x13 \x01(\v2<.yandex.cloud.serverless.containers.v1.AsyncInvocationConfigR\x15asyncInvocationConfigJ\x04\b\x04\x10\x05J\x04\b\x02\x10\x03\"\xa7\x03\n" +
 	"\tImageSpec\x12!\n" +
 	"\timage_url\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bimageUrl\x12H\n" +
 	"\acommand\x18\x02 \x01(\v2..yandex.cloud.serverless.containers.v1.CommandR\acommand\x12?\n" +
@@ -1544,13 +1555,14 @@ var file_yandex_cloud_serverless_containers_v1_container_service_proto_goTypes =
 	(*Mount)(nil),                              // 33: yandex.cloud.serverless.containers.v1.Mount
 	(*Runtime)(nil),                            // 34: yandex.cloud.serverless.containers.v1.Runtime
 	(*MetadataOptions)(nil),                    // 35: yandex.cloud.serverless.containers.v1.MetadataOptions
-	(*Command)(nil),                            // 36: yandex.cloud.serverless.containers.v1.Command
-	(*Args)(nil),                               // 37: yandex.cloud.serverless.containers.v1.Args
-	(*operation.Operation)(nil),                // 38: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 39: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 40: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 41: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 42: yandex.cloud.access.ListAccessBindingsResponse
+	(*AsyncInvocationConfig)(nil),              // 36: yandex.cloud.serverless.containers.v1.AsyncInvocationConfig
+	(*Command)(nil),                            // 37: yandex.cloud.serverless.containers.v1.Command
+	(*Args)(nil),                               // 38: yandex.cloud.serverless.containers.v1.Args
+	(*operation.Operation)(nil),                // 39: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 40: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 41: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 42: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 43: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_serverless_containers_v1_container_service_proto_depIdxs = []int32{
 	22, // 0: yandex.cloud.serverless.containers.v1.ListContainersResponse.containers:type_name -> yandex.cloud.serverless.containers.v1.Container
@@ -1570,41 +1582,42 @@ var file_yandex_cloud_serverless_containers_v1_container_service_proto_depIdxs =
 	33, // 14: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.mounts:type_name -> yandex.cloud.serverless.containers.v1.Mount
 	34, // 15: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.runtime:type_name -> yandex.cloud.serverless.containers.v1.Runtime
 	35, // 16: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.metadata_options:type_name -> yandex.cloud.serverless.containers.v1.MetadataOptions
-	36, // 17: yandex.cloud.serverless.containers.v1.ImageSpec.command:type_name -> yandex.cloud.serverless.containers.v1.Command
-	37, // 18: yandex.cloud.serverless.containers.v1.ImageSpec.args:type_name -> yandex.cloud.serverless.containers.v1.Args
-	21, // 19: yandex.cloud.serverless.containers.v1.ImageSpec.environment:type_name -> yandex.cloud.serverless.containers.v1.ImageSpec.EnvironmentEntry
-	38, // 20: yandex.cloud.serverless.containers.v1.ListContainerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 21: yandex.cloud.serverless.containers.v1.ContainerService.Get:input_type -> yandex.cloud.serverless.containers.v1.GetContainerRequest
-	1,  // 22: yandex.cloud.serverless.containers.v1.ContainerService.List:input_type -> yandex.cloud.serverless.containers.v1.ListContainersRequest
-	3,  // 23: yandex.cloud.serverless.containers.v1.ContainerService.Create:input_type -> yandex.cloud.serverless.containers.v1.CreateContainerRequest
-	5,  // 24: yandex.cloud.serverless.containers.v1.ContainerService.Update:input_type -> yandex.cloud.serverless.containers.v1.UpdateContainerRequest
-	7,  // 25: yandex.cloud.serverless.containers.v1.ContainerService.Delete:input_type -> yandex.cloud.serverless.containers.v1.DeleteContainerRequest
-	12, // 26: yandex.cloud.serverless.containers.v1.ContainerService.DeployRevision:input_type -> yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest
-	15, // 27: yandex.cloud.serverless.containers.v1.ContainerService.Rollback:input_type -> yandex.cloud.serverless.containers.v1.RollbackContainerRequest
-	9,  // 28: yandex.cloud.serverless.containers.v1.ContainerService.GetRevision:input_type -> yandex.cloud.serverless.containers.v1.GetContainerRevisionRequest
-	10, // 29: yandex.cloud.serverless.containers.v1.ContainerService.ListRevisions:input_type -> yandex.cloud.serverless.containers.v1.ListContainersRevisionsRequest
-	17, // 30: yandex.cloud.serverless.containers.v1.ContainerService.ListOperations:input_type -> yandex.cloud.serverless.containers.v1.ListContainerOperationsRequest
-	39, // 31: yandex.cloud.serverless.containers.v1.ContainerService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	40, // 32: yandex.cloud.serverless.containers.v1.ContainerService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	41, // 33: yandex.cloud.serverless.containers.v1.ContainerService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	22, // 34: yandex.cloud.serverless.containers.v1.ContainerService.Get:output_type -> yandex.cloud.serverless.containers.v1.Container
-	2,  // 35: yandex.cloud.serverless.containers.v1.ContainerService.List:output_type -> yandex.cloud.serverless.containers.v1.ListContainersResponse
-	38, // 36: yandex.cloud.serverless.containers.v1.ContainerService.Create:output_type -> yandex.cloud.operation.Operation
-	38, // 37: yandex.cloud.serverless.containers.v1.ContainerService.Update:output_type -> yandex.cloud.operation.Operation
-	38, // 38: yandex.cloud.serverless.containers.v1.ContainerService.Delete:output_type -> yandex.cloud.operation.Operation
-	38, // 39: yandex.cloud.serverless.containers.v1.ContainerService.DeployRevision:output_type -> yandex.cloud.operation.Operation
-	38, // 40: yandex.cloud.serverless.containers.v1.ContainerService.Rollback:output_type -> yandex.cloud.operation.Operation
-	24, // 41: yandex.cloud.serverless.containers.v1.ContainerService.GetRevision:output_type -> yandex.cloud.serverless.containers.v1.Revision
-	11, // 42: yandex.cloud.serverless.containers.v1.ContainerService.ListRevisions:output_type -> yandex.cloud.serverless.containers.v1.ListContainersRevisionsResponse
-	18, // 43: yandex.cloud.serverless.containers.v1.ContainerService.ListOperations:output_type -> yandex.cloud.serverless.containers.v1.ListContainerOperationsResponse
-	42, // 44: yandex.cloud.serverless.containers.v1.ContainerService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	38, // 45: yandex.cloud.serverless.containers.v1.ContainerService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	38, // 46: yandex.cloud.serverless.containers.v1.ContainerService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	34, // [34:47] is the sub-list for method output_type
-	21, // [21:34] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	36, // 17: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.async_invocation_config:type_name -> yandex.cloud.serverless.containers.v1.AsyncInvocationConfig
+	37, // 18: yandex.cloud.serverless.containers.v1.ImageSpec.command:type_name -> yandex.cloud.serverless.containers.v1.Command
+	38, // 19: yandex.cloud.serverless.containers.v1.ImageSpec.args:type_name -> yandex.cloud.serverless.containers.v1.Args
+	21, // 20: yandex.cloud.serverless.containers.v1.ImageSpec.environment:type_name -> yandex.cloud.serverless.containers.v1.ImageSpec.EnvironmentEntry
+	39, // 21: yandex.cloud.serverless.containers.v1.ListContainerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 22: yandex.cloud.serverless.containers.v1.ContainerService.Get:input_type -> yandex.cloud.serverless.containers.v1.GetContainerRequest
+	1,  // 23: yandex.cloud.serverless.containers.v1.ContainerService.List:input_type -> yandex.cloud.serverless.containers.v1.ListContainersRequest
+	3,  // 24: yandex.cloud.serverless.containers.v1.ContainerService.Create:input_type -> yandex.cloud.serverless.containers.v1.CreateContainerRequest
+	5,  // 25: yandex.cloud.serverless.containers.v1.ContainerService.Update:input_type -> yandex.cloud.serverless.containers.v1.UpdateContainerRequest
+	7,  // 26: yandex.cloud.serverless.containers.v1.ContainerService.Delete:input_type -> yandex.cloud.serverless.containers.v1.DeleteContainerRequest
+	12, // 27: yandex.cloud.serverless.containers.v1.ContainerService.DeployRevision:input_type -> yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest
+	15, // 28: yandex.cloud.serverless.containers.v1.ContainerService.Rollback:input_type -> yandex.cloud.serverless.containers.v1.RollbackContainerRequest
+	9,  // 29: yandex.cloud.serverless.containers.v1.ContainerService.GetRevision:input_type -> yandex.cloud.serverless.containers.v1.GetContainerRevisionRequest
+	10, // 30: yandex.cloud.serverless.containers.v1.ContainerService.ListRevisions:input_type -> yandex.cloud.serverless.containers.v1.ListContainersRevisionsRequest
+	17, // 31: yandex.cloud.serverless.containers.v1.ContainerService.ListOperations:input_type -> yandex.cloud.serverless.containers.v1.ListContainerOperationsRequest
+	40, // 32: yandex.cloud.serverless.containers.v1.ContainerService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	41, // 33: yandex.cloud.serverless.containers.v1.ContainerService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	42, // 34: yandex.cloud.serverless.containers.v1.ContainerService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	22, // 35: yandex.cloud.serverless.containers.v1.ContainerService.Get:output_type -> yandex.cloud.serverless.containers.v1.Container
+	2,  // 36: yandex.cloud.serverless.containers.v1.ContainerService.List:output_type -> yandex.cloud.serverless.containers.v1.ListContainersResponse
+	39, // 37: yandex.cloud.serverless.containers.v1.ContainerService.Create:output_type -> yandex.cloud.operation.Operation
+	39, // 38: yandex.cloud.serverless.containers.v1.ContainerService.Update:output_type -> yandex.cloud.operation.Operation
+	39, // 39: yandex.cloud.serverless.containers.v1.ContainerService.Delete:output_type -> yandex.cloud.operation.Operation
+	39, // 40: yandex.cloud.serverless.containers.v1.ContainerService.DeployRevision:output_type -> yandex.cloud.operation.Operation
+	39, // 41: yandex.cloud.serverless.containers.v1.ContainerService.Rollback:output_type -> yandex.cloud.operation.Operation
+	24, // 42: yandex.cloud.serverless.containers.v1.ContainerService.GetRevision:output_type -> yandex.cloud.serverless.containers.v1.Revision
+	11, // 43: yandex.cloud.serverless.containers.v1.ContainerService.ListRevisions:output_type -> yandex.cloud.serverless.containers.v1.ListContainersRevisionsResponse
+	18, // 44: yandex.cloud.serverless.containers.v1.ContainerService.ListOperations:output_type -> yandex.cloud.serverless.containers.v1.ListContainerOperationsResponse
+	43, // 45: yandex.cloud.serverless.containers.v1.ContainerService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	39, // 46: yandex.cloud.serverless.containers.v1.ContainerService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	39, // 47: yandex.cloud.serverless.containers.v1.ContainerService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	35, // [35:48] is the sub-list for method output_type
+	22, // [22:35] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_containers_v1_container_service_proto_init() }
