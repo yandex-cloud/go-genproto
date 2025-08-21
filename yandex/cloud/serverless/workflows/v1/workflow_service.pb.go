@@ -46,7 +46,9 @@ type CreateWorkflowRequest struct {
 	// ID of the Service Account which will be used for resources access in Workflow execution.
 	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Express execution mode.
-	Express       bool `protobuf:"varint,9,opt,name=express,proto3" json:"express,omitempty"`
+	Express bool `protobuf:"varint,9,opt,name=express,proto3" json:"express,omitempty"`
+	// Workflow schedule settings.
+	Schedule      *WorkflowSchedule `protobuf:"bytes,10,opt,name=schedule,proto3" json:"schedule,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -144,6 +146,13 @@ func (x *CreateWorkflowRequest) GetExpress() bool {
 	return false
 }
 
+func (x *CreateWorkflowRequest) GetSchedule() *WorkflowSchedule {
+	if x != nil {
+		return x.Schedule
+	}
+	return nil
+}
+
 type CreateWorkflowMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Workflow.
@@ -210,7 +219,9 @@ type UpdateWorkflowRequest struct {
 	// Field mask that specifies which fields of the Workflow should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,9,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Express execution mode.
-	Express       bool `protobuf:"varint,10,opt,name=express,proto3" json:"express,omitempty"`
+	Express bool `protobuf:"varint,10,opt,name=express,proto3" json:"express,omitempty"`
+	// Workflow schedule settings.
+	Schedule      *WorkflowSchedule `protobuf:"bytes,11,opt,name=schedule,proto3" json:"schedule,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -313,6 +324,13 @@ func (x *UpdateWorkflowRequest) GetExpress() bool {
 		return x.Express
 	}
 	return false
+}
+
+func (x *UpdateWorkflowRequest) GetSchedule() *WorkflowSchedule {
+	if x != nil {
+		return x.Schedule
+	}
+	return nil
 }
 
 type UpdateWorkflowMetadata struct {
@@ -826,7 +844,7 @@ var File_yandex_cloud_serverless_workflows_v1_workflow_service_proto protoreflec
 
 const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/serverless/workflows/v1/workflow_service.proto\x12$yandex.cloud.serverless.workflows.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/serverless/workflows/v1/workflow.proto\x1a\x1dyandex/cloud/validation.proto\"\xaa\x05\n" +
+	";yandex/cloud/serverless/workflows/v1/workflow_service.proto\x12$yandex.cloud.serverless.workflows.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/serverless/workflows/v1/workflow.proto\x1a\x1dyandex/cloud/validation.proto\"\xfe\x05\n" +
 	"\x15CreateWorkflowRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12<\n" +
 	"\x04name\x18\x02 \x01(\tB(\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -838,13 +856,15 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc =
 	"\n" +
 	"network_id\x18\a \x01(\tR\tnetworkId\x12,\n" +
 	"\x12service_account_id\x18\b \x01(\tR\x10serviceAccountId\x12\x18\n" +
-	"\aexpress\x18\t \x01(\bR\aexpress\x1a9\n" +
+	"\aexpress\x18\t \x01(\bR\aexpress\x12R\n" +
+	"\bschedule\x18\n" +
+	" \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
 	"\x16CreateWorkflowMetadata\x12%\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"workflowId\"\xe1\x05\n" +
+	"workflowId\"\xb5\x06\n" +
 	"\x15UpdateWorkflowRequest\x12%\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"workflowId\x128\n" +
@@ -860,7 +880,8 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc =
 	"\vupdate_mask\x18\t \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x18\n" +
 	"\aexpress\x18\n" +
-	" \x01(\bR\aexpress\x1a9\n" +
+	" \x01(\bR\aexpress\x12R\n" +
+	"\bschedule\x18\v \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
@@ -943,39 +964,42 @@ var file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_goTypes = [
 	nil,                            // 13: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.LabelsEntry
 	(*WorkflowSpecification)(nil),  // 14: yandex.cloud.serverless.workflows.v1.WorkflowSpecification
 	(*LogOptions)(nil),             // 15: yandex.cloud.serverless.workflows.v1.LogOptions
-	(*fieldmaskpb.FieldMask)(nil),  // 16: google.protobuf.FieldMask
-	(*Workflow)(nil),               // 17: yandex.cloud.serverless.workflows.v1.Workflow
-	(*WorkflowPreview)(nil),        // 18: yandex.cloud.serverless.workflows.v1.WorkflowPreview
-	(*operation.Operation)(nil),    // 19: yandex.cloud.operation.Operation
+	(*WorkflowSchedule)(nil),       // 16: yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	(*fieldmaskpb.FieldMask)(nil),  // 17: google.protobuf.FieldMask
+	(*Workflow)(nil),               // 18: yandex.cloud.serverless.workflows.v1.Workflow
+	(*WorkflowPreview)(nil),        // 19: yandex.cloud.serverless.workflows.v1.WorkflowPreview
+	(*operation.Operation)(nil),    // 20: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_depIdxs = []int32{
 	12, // 0: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.labels:type_name -> yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.LabelsEntry
 	14, // 1: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.specification:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSpecification
 	15, // 2: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
-	13, // 3: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.labels:type_name -> yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.LabelsEntry
-	14, // 4: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.specification:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSpecification
-	15, // 5: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
-	16, // 6: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.update_mask:type_name -> google.protobuf.FieldMask
-	17, // 7: yandex.cloud.serverless.workflows.v1.GetWorkflowResponse.workflow:type_name -> yandex.cloud.serverless.workflows.v1.Workflow
-	18, // 8: yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse.workflows:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowPreview
-	19, // 9: yandex.cloud.serverless.workflows.v1.ListOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 10: yandex.cloud.serverless.workflows.v1.WorkflowService.Create:input_type -> yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest
-	2,  // 11: yandex.cloud.serverless.workflows.v1.WorkflowService.Update:input_type -> yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest
-	4,  // 12: yandex.cloud.serverless.workflows.v1.WorkflowService.Get:input_type -> yandex.cloud.serverless.workflows.v1.GetWorkflowRequest
-	6,  // 13: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:input_type -> yandex.cloud.serverless.workflows.v1.DeleteWorkflowRequest
-	8,  // 14: yandex.cloud.serverless.workflows.v1.WorkflowService.List:input_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsRequest
-	10, // 15: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:input_type -> yandex.cloud.serverless.workflows.v1.ListOperationsRequest
-	19, // 16: yandex.cloud.serverless.workflows.v1.WorkflowService.Create:output_type -> yandex.cloud.operation.Operation
-	19, // 17: yandex.cloud.serverless.workflows.v1.WorkflowService.Update:output_type -> yandex.cloud.operation.Operation
-	5,  // 18: yandex.cloud.serverless.workflows.v1.WorkflowService.Get:output_type -> yandex.cloud.serverless.workflows.v1.GetWorkflowResponse
-	19, // 19: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:output_type -> yandex.cloud.operation.Operation
-	9,  // 20: yandex.cloud.serverless.workflows.v1.WorkflowService.List:output_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse
-	11, // 21: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:output_type -> yandex.cloud.serverless.workflows.v1.ListOperationsResponse
-	16, // [16:22] is the sub-list for method output_type
-	10, // [10:16] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	16, // 3: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.schedule:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	13, // 4: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.labels:type_name -> yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.LabelsEntry
+	14, // 5: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.specification:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSpecification
+	15, // 6: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
+	17, // 7: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.update_mask:type_name -> google.protobuf.FieldMask
+	16, // 8: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.schedule:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	18, // 9: yandex.cloud.serverless.workflows.v1.GetWorkflowResponse.workflow:type_name -> yandex.cloud.serverless.workflows.v1.Workflow
+	19, // 10: yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse.workflows:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowPreview
+	20, // 11: yandex.cloud.serverless.workflows.v1.ListOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 12: yandex.cloud.serverless.workflows.v1.WorkflowService.Create:input_type -> yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest
+	2,  // 13: yandex.cloud.serverless.workflows.v1.WorkflowService.Update:input_type -> yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest
+	4,  // 14: yandex.cloud.serverless.workflows.v1.WorkflowService.Get:input_type -> yandex.cloud.serverless.workflows.v1.GetWorkflowRequest
+	6,  // 15: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:input_type -> yandex.cloud.serverless.workflows.v1.DeleteWorkflowRequest
+	8,  // 16: yandex.cloud.serverless.workflows.v1.WorkflowService.List:input_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsRequest
+	10, // 17: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:input_type -> yandex.cloud.serverless.workflows.v1.ListOperationsRequest
+	20, // 18: yandex.cloud.serverless.workflows.v1.WorkflowService.Create:output_type -> yandex.cloud.operation.Operation
+	20, // 19: yandex.cloud.serverless.workflows.v1.WorkflowService.Update:output_type -> yandex.cloud.operation.Operation
+	5,  // 20: yandex.cloud.serverless.workflows.v1.WorkflowService.Get:output_type -> yandex.cloud.serverless.workflows.v1.GetWorkflowResponse
+	20, // 21: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:output_type -> yandex.cloud.operation.Operation
+	9,  // 22: yandex.cloud.serverless.workflows.v1.WorkflowService.List:output_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse
+	11, // 23: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:output_type -> yandex.cloud.serverless.workflows.v1.ListOperationsResponse
+	18, // [18:24] is the sub-list for method output_type
+	12, // [12:18] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_init() }
