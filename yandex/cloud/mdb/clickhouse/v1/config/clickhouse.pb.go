@@ -1082,6 +1082,8 @@ type ClickhouseConfig struct {
 	Timezone string `protobuf:"bytes,14,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	// Enables or disables geobase.
 	//
+	// Default value: **false** for versions 25.8 and higher, **true** for versions 25.7 and lower.
+	//
 	// Change of the setting is applied with restart.
 	GeobaseEnabled *wrapperspb.BoolValue `protobuf:"bytes,66,opt,name=geobase_enabled,json=geobaseEnabled,proto3" json:"geobase_enabled,omitempty"`
 	// Address of the archive with the user geobase in Object Storage.

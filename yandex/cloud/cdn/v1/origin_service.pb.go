@@ -203,7 +203,14 @@ type CreateOriginRequest struct {
 	Backup *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up origin of the content.
 	Meta *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
-	// RESERVED: This field is reserved for future use and should not be used at this time.
+	// Set up origin provider
+	//
+	// It has two possible values:
+	//
+	// ourcdn - Based on Yandex technologies
+	// gcore - Based on an external partner infrastructure
+	//
+	// Default value: ourcdn
 	ProviderType  string `protobuf:"bytes,7,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

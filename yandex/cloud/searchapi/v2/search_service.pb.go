@@ -612,7 +612,7 @@ const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\a \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12[\n" +
 	"\x0fresponse_format\x18\b \x01(\x0e22.yandex.cloud.searchapi.v2.WebSearchRequest.FormatR\x0eresponseFormat\x12(\n" +
 	"\n" +
-	"user_agent\x18\t \x01(\tB\t\x8a\xc81\x05<=200R\tuserAgent\"\xaa\x01\n" +
+	"user_agent\x18\t \x01(\tB\t\x8a\xc81\x05<=300R\tuserAgent\"\xaa\x01\n" +
 	"\fLocalization\x12\x1c\n" +
 	"\x18LOCALIZATION_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fLOCALIZATION_RU\x10\x01\x12\x13\n" +

@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -859,6 +860,114 @@ func (x *ListResourceOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type GetInstanceRegistrationTokenRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Folder ID.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Type of resource. Could be compute VM or baremetal server.
+	Type          ResourceType `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.backup.v1.ResourceType" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInstanceRegistrationTokenRequest) Reset() {
+	*x = GetInstanceRegistrationTokenRequest{}
+	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInstanceRegistrationTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInstanceRegistrationTokenRequest) ProtoMessage() {}
+
+func (x *GetInstanceRegistrationTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInstanceRegistrationTokenRequest.ProtoReflect.Descriptor instead.
+func (*GetInstanceRegistrationTokenRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_resource_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetInstanceRegistrationTokenRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *GetInstanceRegistrationTokenRequest) GetType() ResourceType {
+	if x != nil {
+		return x.Type
+	}
+	return ResourceType_RESOURCE_TYPE_UNSPECIFIED
+}
+
+type GetInstanceRegistrationTokenResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Instance registration token id for instance registration.
+	InstanceRegistrationId string `protobuf:"bytes,1,opt,name=instance_registration_id,json=instanceRegistrationId,proto3" json:"instance_registration_id,omitempty"`
+	// Token expiration timestamp.
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInstanceRegistrationTokenResponse) Reset() {
+	*x = GetInstanceRegistrationTokenResponse{}
+	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInstanceRegistrationTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInstanceRegistrationTokenResponse) ProtoMessage() {}
+
+func (x *GetInstanceRegistrationTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInstanceRegistrationTokenResponse.ProtoReflect.Descriptor instead.
+func (*GetInstanceRegistrationTokenResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_resource_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetInstanceRegistrationTokenResponse) GetInstanceRegistrationId() string {
+	if x != nil {
+		return x.InstanceRegistrationId
+	}
+	return ""
+}
+
+func (x *GetInstanceRegistrationTokenResponse) GetExpiredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiredAt
+	}
+	return nil
+}
+
 type ListDirectoryResponse_FilesystemItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Item name.
@@ -874,7 +983,7 @@ type ListDirectoryResponse_FilesystemItem struct {
 
 func (x *ListDirectoryResponse_FilesystemItem) Reset() {
 	*x = ListDirectoryResponse_FilesystemItem{}
-	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -886,7 +995,7 @@ func (x *ListDirectoryResponse_FilesystemItem) String() string {
 func (*ListDirectoryResponse_FilesystemItem) ProtoMessage() {}
 
 func (x *ListDirectoryResponse_FilesystemItem) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_backup_v1_resource_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -934,7 +1043,7 @@ var File_yandex_cloud_backup_v1_resource_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_backup_v1_resource_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/backup/v1/resource_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/backup/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xce\x01\n" +
+	"-yandex/cloud/backup/v1/resource_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/backup/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xce\x01\n" +
 	"\x14ListResourcesRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -999,7 +1108,14 @@ const file_yandex_cloud_backup_v1_resource_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x97\b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8a\x01\n" +
+	"#GetInstanceRegistrationTokenRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
+	"\x04type\x18\x02 \x01(\x0e2$.yandex.cloud.backup.v1.ResourceTypeR\x04type\"\x9b\x01\n" +
+	"$GetInstanceRegistrationTokenResponse\x128\n" +
+	"\x18instance_registration_id\x18\x01 \x01(\tR\x16instanceRegistrationId\x129\n" +
+	"\n" +
+	"expired_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt2\xb3\t\n" +
 	"\x0fResourceService\x12\x81\x01\n" +
 	"\x04List\x12,.yandex.cloud.backup.v1.ListResourcesRequest\x1a-.yandex.cloud.backup.v1.ListResourcesResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/backup/v1/resources\x12\x92\x01\n" +
 	"\x03Get\x12*.yandex.cloud.backup.v1.GetResourceRequest\x1a+.yandex.cloud.backup.v1.GetResourceResponse\"2\x82\xd3\xe4\x93\x02,\x12*/backup/v1/resources/{compute_instance_id}\x12\xc1\x01\n" +
@@ -1009,7 +1125,8 @@ const file_yandex_cloud_backup_v1_resource_service_proto_rawDesc = "" +
 	"\rListDirectory\x12,.yandex.cloud.backup.v1.ListDirectoryRequest\x1a-.yandex.cloud.backup.v1.ListDirectoryResponse\x12\x9a\x01\n" +
 	"\x0fCreateDirectory\x12..yandex.cloud.backup.v1.CreateDirectoryRequest\x1a!.yandex.cloud.operation.Operation\"4\xb2\xd2*0\n" +
 	"\x17CreateDirectoryMetadata\x12\x15google.protobuf.Empty\x12\x7f\n" +
-	"\x0eListOperations\x125.yandex.cloud.backup.v1.ListResourceOperationsRequest\x1a6.yandex.cloud.backup.v1.ListResourceOperationsResponseB_\n" +
+	"\x0eListOperations\x125.yandex.cloud.backup.v1.ListResourceOperationsRequest\x1a6.yandex.cloud.backup.v1.ListResourceOperationsResponse\x12\x99\x01\n" +
+	"\x1cGetInstanceRegistrationToken\x12;.yandex.cloud.backup.v1.GetInstanceRegistrationTokenRequest\x1a<.yandex.cloud.backup.v1.GetInstanceRegistrationTokenResponseB_\n" +
 	"\x1ayandex.cloud.api.backup.v1ZAgithub.com/yandex-cloud/go-genproto/yandex/cloud/backup/v1;backupb\x06proto3"
 
 var (
@@ -1025,7 +1142,7 @@ func file_yandex_cloud_backup_v1_resource_service_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_backup_v1_resource_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_backup_v1_resource_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_yandex_cloud_backup_v1_resource_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_backup_v1_resource_service_proto_goTypes = []any{
 	(ListDirectoryResponse_FilesystemItem_Type)(0), // 0: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.Type
 	(*ListResourcesRequest)(nil),                   // 1: yandex.cloud.backup.v1.ListResourcesRequest
@@ -1042,40 +1159,47 @@ var file_yandex_cloud_backup_v1_resource_service_proto_goTypes = []any{
 	(*CreateDirectoryMetadata)(nil),                // 12: yandex.cloud.backup.v1.CreateDirectoryMetadata
 	(*ListResourceOperationsRequest)(nil),          // 13: yandex.cloud.backup.v1.ListResourceOperationsRequest
 	(*ListResourceOperationsResponse)(nil),         // 14: yandex.cloud.backup.v1.ListResourceOperationsResponse
-	(*ListDirectoryResponse_FilesystemItem)(nil),   // 15: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem
-	(ResourceType)(0),                              // 16: yandex.cloud.backup.v1.ResourceType
-	(*Resource)(nil),                               // 17: yandex.cloud.backup.v1.Resource
-	(*Task)(nil),                                   // 18: yandex.cloud.backup.v1.Task
-	(*operation.Operation)(nil),                    // 19: yandex.cloud.operation.Operation
+	(*GetInstanceRegistrationTokenRequest)(nil),    // 15: yandex.cloud.backup.v1.GetInstanceRegistrationTokenRequest
+	(*GetInstanceRegistrationTokenResponse)(nil),   // 16: yandex.cloud.backup.v1.GetInstanceRegistrationTokenResponse
+	(*ListDirectoryResponse_FilesystemItem)(nil),   // 17: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem
+	(ResourceType)(0),                              // 18: yandex.cloud.backup.v1.ResourceType
+	(*Resource)(nil),                               // 19: yandex.cloud.backup.v1.Resource
+	(*Task)(nil),                                   // 20: yandex.cloud.backup.v1.Task
+	(*operation.Operation)(nil),                    // 21: yandex.cloud.operation.Operation
+	(*timestamppb.Timestamp)(nil),                  // 22: google.protobuf.Timestamp
 }
 var file_yandex_cloud_backup_v1_resource_service_proto_depIdxs = []int32{
-	16, // 0: yandex.cloud.backup.v1.ListResourcesRequest.type:type_name -> yandex.cloud.backup.v1.ResourceType
-	17, // 1: yandex.cloud.backup.v1.ListResourcesResponse.resources:type_name -> yandex.cloud.backup.v1.Resource
-	17, // 2: yandex.cloud.backup.v1.GetResourceResponse.resource:type_name -> yandex.cloud.backup.v1.Resource
-	18, // 3: yandex.cloud.backup.v1.ListTasksResponse.tasks:type_name -> yandex.cloud.backup.v1.Task
-	15, // 4: yandex.cloud.backup.v1.ListDirectoryResponse.items:type_name -> yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem
-	19, // 5: yandex.cloud.backup.v1.ListResourceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 6: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.type:type_name -> yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.Type
-	0,  // 7: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.file_type:type_name -> yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.Type
-	1,  // 8: yandex.cloud.backup.v1.ResourceService.List:input_type -> yandex.cloud.backup.v1.ListResourcesRequest
-	3,  // 9: yandex.cloud.backup.v1.ResourceService.Get:input_type -> yandex.cloud.backup.v1.GetResourceRequest
-	5,  // 10: yandex.cloud.backup.v1.ResourceService.Delete:input_type -> yandex.cloud.backup.v1.DeleteResourceRequest
-	7,  // 11: yandex.cloud.backup.v1.ResourceService.ListTasks:input_type -> yandex.cloud.backup.v1.ListTasksRequest
-	9,  // 12: yandex.cloud.backup.v1.ResourceService.ListDirectory:input_type -> yandex.cloud.backup.v1.ListDirectoryRequest
-	11, // 13: yandex.cloud.backup.v1.ResourceService.CreateDirectory:input_type -> yandex.cloud.backup.v1.CreateDirectoryRequest
-	13, // 14: yandex.cloud.backup.v1.ResourceService.ListOperations:input_type -> yandex.cloud.backup.v1.ListResourceOperationsRequest
-	2,  // 15: yandex.cloud.backup.v1.ResourceService.List:output_type -> yandex.cloud.backup.v1.ListResourcesResponse
-	4,  // 16: yandex.cloud.backup.v1.ResourceService.Get:output_type -> yandex.cloud.backup.v1.GetResourceResponse
-	19, // 17: yandex.cloud.backup.v1.ResourceService.Delete:output_type -> yandex.cloud.operation.Operation
-	8,  // 18: yandex.cloud.backup.v1.ResourceService.ListTasks:output_type -> yandex.cloud.backup.v1.ListTasksResponse
-	10, // 19: yandex.cloud.backup.v1.ResourceService.ListDirectory:output_type -> yandex.cloud.backup.v1.ListDirectoryResponse
-	19, // 20: yandex.cloud.backup.v1.ResourceService.CreateDirectory:output_type -> yandex.cloud.operation.Operation
-	14, // 21: yandex.cloud.backup.v1.ResourceService.ListOperations:output_type -> yandex.cloud.backup.v1.ListResourceOperationsResponse
-	15, // [15:22] is the sub-list for method output_type
-	8,  // [8:15] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	18, // 0: yandex.cloud.backup.v1.ListResourcesRequest.type:type_name -> yandex.cloud.backup.v1.ResourceType
+	19, // 1: yandex.cloud.backup.v1.ListResourcesResponse.resources:type_name -> yandex.cloud.backup.v1.Resource
+	19, // 2: yandex.cloud.backup.v1.GetResourceResponse.resource:type_name -> yandex.cloud.backup.v1.Resource
+	20, // 3: yandex.cloud.backup.v1.ListTasksResponse.tasks:type_name -> yandex.cloud.backup.v1.Task
+	17, // 4: yandex.cloud.backup.v1.ListDirectoryResponse.items:type_name -> yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem
+	21, // 5: yandex.cloud.backup.v1.ListResourceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	18, // 6: yandex.cloud.backup.v1.GetInstanceRegistrationTokenRequest.type:type_name -> yandex.cloud.backup.v1.ResourceType
+	22, // 7: yandex.cloud.backup.v1.GetInstanceRegistrationTokenResponse.expired_at:type_name -> google.protobuf.Timestamp
+	0,  // 8: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.type:type_name -> yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.Type
+	0,  // 9: yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.file_type:type_name -> yandex.cloud.backup.v1.ListDirectoryResponse.FilesystemItem.Type
+	1,  // 10: yandex.cloud.backup.v1.ResourceService.List:input_type -> yandex.cloud.backup.v1.ListResourcesRequest
+	3,  // 11: yandex.cloud.backup.v1.ResourceService.Get:input_type -> yandex.cloud.backup.v1.GetResourceRequest
+	5,  // 12: yandex.cloud.backup.v1.ResourceService.Delete:input_type -> yandex.cloud.backup.v1.DeleteResourceRequest
+	7,  // 13: yandex.cloud.backup.v1.ResourceService.ListTasks:input_type -> yandex.cloud.backup.v1.ListTasksRequest
+	9,  // 14: yandex.cloud.backup.v1.ResourceService.ListDirectory:input_type -> yandex.cloud.backup.v1.ListDirectoryRequest
+	11, // 15: yandex.cloud.backup.v1.ResourceService.CreateDirectory:input_type -> yandex.cloud.backup.v1.CreateDirectoryRequest
+	13, // 16: yandex.cloud.backup.v1.ResourceService.ListOperations:input_type -> yandex.cloud.backup.v1.ListResourceOperationsRequest
+	15, // 17: yandex.cloud.backup.v1.ResourceService.GetInstanceRegistrationToken:input_type -> yandex.cloud.backup.v1.GetInstanceRegistrationTokenRequest
+	2,  // 18: yandex.cloud.backup.v1.ResourceService.List:output_type -> yandex.cloud.backup.v1.ListResourcesResponse
+	4,  // 19: yandex.cloud.backup.v1.ResourceService.Get:output_type -> yandex.cloud.backup.v1.GetResourceResponse
+	21, // 20: yandex.cloud.backup.v1.ResourceService.Delete:output_type -> yandex.cloud.operation.Operation
+	8,  // 21: yandex.cloud.backup.v1.ResourceService.ListTasks:output_type -> yandex.cloud.backup.v1.ListTasksResponse
+	10, // 22: yandex.cloud.backup.v1.ResourceService.ListDirectory:output_type -> yandex.cloud.backup.v1.ListDirectoryResponse
+	21, // 23: yandex.cloud.backup.v1.ResourceService.CreateDirectory:output_type -> yandex.cloud.operation.Operation
+	14, // 24: yandex.cloud.backup.v1.ResourceService.ListOperations:output_type -> yandex.cloud.backup.v1.ListResourceOperationsResponse
+	16, // 25: yandex.cloud.backup.v1.ResourceService.GetInstanceRegistrationToken:output_type -> yandex.cloud.backup.v1.GetInstanceRegistrationTokenResponse
+	18, // [18:26] is the sub-list for method output_type
+	10, // [10:18] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_backup_v1_resource_service_proto_init() }
@@ -1090,7 +1214,7 @@ func file_yandex_cloud_backup_v1_resource_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_backup_v1_resource_service_proto_rawDesc), len(file_yandex_cloud_backup_v1_resource_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   15,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

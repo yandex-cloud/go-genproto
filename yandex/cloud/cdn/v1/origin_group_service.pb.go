@@ -225,7 +225,14 @@ type CreateOriginGroupRequest struct {
 	// List of origins: IP addresses or Domain names of your origins and the port
 	// (if custom).
 	Origins []*OriginParams `protobuf:"bytes,4,rep,name=origins,proto3" json:"origins,omitempty"`
-	// RESERVED: This field is reserved for future use and should not be used at this time.
+	// Set up origin group provider
+	//
+	// It has two possible values:
+	//
+	// ourcdn - Based on Yandex technologies
+	// gcore - Based on an external partner infrastructure
+	//
+	// Default value: ourcdn
 	ProviderType  string `protobuf:"bytes,5,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

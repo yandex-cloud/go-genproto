@@ -20,13 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ResourceService_List_FullMethodName            = "/yandex.cloud.backup.v1.ResourceService/List"
-	ResourceService_Get_FullMethodName             = "/yandex.cloud.backup.v1.ResourceService/Get"
-	ResourceService_Delete_FullMethodName          = "/yandex.cloud.backup.v1.ResourceService/Delete"
-	ResourceService_ListTasks_FullMethodName       = "/yandex.cloud.backup.v1.ResourceService/ListTasks"
-	ResourceService_ListDirectory_FullMethodName   = "/yandex.cloud.backup.v1.ResourceService/ListDirectory"
-	ResourceService_CreateDirectory_FullMethodName = "/yandex.cloud.backup.v1.ResourceService/CreateDirectory"
-	ResourceService_ListOperations_FullMethodName  = "/yandex.cloud.backup.v1.ResourceService/ListOperations"
+	ResourceService_List_FullMethodName                         = "/yandex.cloud.backup.v1.ResourceService/List"
+	ResourceService_Get_FullMethodName                          = "/yandex.cloud.backup.v1.ResourceService/Get"
+	ResourceService_Delete_FullMethodName                       = "/yandex.cloud.backup.v1.ResourceService/Delete"
+	ResourceService_ListTasks_FullMethodName                    = "/yandex.cloud.backup.v1.ResourceService/ListTasks"
+	ResourceService_ListDirectory_FullMethodName                = "/yandex.cloud.backup.v1.ResourceService/ListDirectory"
+	ResourceService_CreateDirectory_FullMethodName              = "/yandex.cloud.backup.v1.ResourceService/CreateDirectory"
+	ResourceService_ListOperations_FullMethodName               = "/yandex.cloud.backup.v1.ResourceService/ListOperations"
+	ResourceService_GetInstanceRegistrationToken_FullMethodName = "/yandex.cloud.backup.v1.ResourceService/GetInstanceRegistrationToken"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -51,6 +52,8 @@ type ResourceServiceClient interface {
 	CreateDirectory(ctx context.Context, in *CreateDirectoryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// ListOperations return all operations in backup service for given instance
 	ListOperations(ctx context.Context, in *ListResourceOperationsRequest, opts ...grpc.CallOption) (*ListResourceOperationsResponse, error)
+	// Get instance registration token to install backup agent withot SA attached to instance
+	GetInstanceRegistrationToken(ctx context.Context, in *GetInstanceRegistrationTokenRequest, opts ...grpc.CallOption) (*GetInstanceRegistrationTokenResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -131,6 +134,16 @@ func (c *resourceServiceClient) ListOperations(ctx context.Context, in *ListReso
 	return out, nil
 }
 
+func (c *resourceServiceClient) GetInstanceRegistrationToken(ctx context.Context, in *GetInstanceRegistrationTokenRequest, opts ...grpc.CallOption) (*GetInstanceRegistrationTokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInstanceRegistrationTokenResponse)
+	err := c.cc.Invoke(ctx, ResourceService_GetInstanceRegistrationToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations should embed UnimplementedResourceServiceServer
 // for forward compatibility.
@@ -153,6 +166,8 @@ type ResourceServiceServer interface {
 	CreateDirectory(context.Context, *CreateDirectoryRequest) (*operation.Operation, error)
 	// ListOperations return all operations in backup service for given instance
 	ListOperations(context.Context, *ListResourceOperationsRequest) (*ListResourceOperationsResponse, error)
+	// Get instance registration token to install backup agent withot SA attached to instance
+	GetInstanceRegistrationToken(context.Context, *GetInstanceRegistrationTokenRequest) (*GetInstanceRegistrationTokenResponse, error)
 }
 
 // UnimplementedResourceServiceServer should be embedded to have
@@ -182,6 +197,9 @@ func (UnimplementedResourceServiceServer) CreateDirectory(context.Context, *Crea
 }
 func (UnimplementedResourceServiceServer) ListOperations(context.Context, *ListResourceOperationsRequest) (*ListResourceOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedResourceServiceServer) GetInstanceRegistrationToken(context.Context, *GetInstanceRegistrationTokenRequest) (*GetInstanceRegistrationTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInstanceRegistrationToken not implemented")
 }
 func (UnimplementedResourceServiceServer) testEmbeddedByValue() {}
 
@@ -329,6 +347,24 @@ func _ResourceService_ListOperations_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ResourceService_GetInstanceRegistrationToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstanceRegistrationTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).GetInstanceRegistrationToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_GetInstanceRegistrationToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).GetInstanceRegistrationToken(ctx, req.(*GetInstanceRegistrationTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ResourceService_ServiceDesc is the grpc.ServiceDesc for ResourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -363,6 +399,10 @@ var ResourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _ResourceService_ListOperations_Handler,
+		},
+		{
+			MethodName: "GetInstanceRegistrationToken",
+			Handler:    _ResourceService_GetInstanceRegistrationToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

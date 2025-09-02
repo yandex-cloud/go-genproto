@@ -30,7 +30,7 @@ const (
 //
 // A set of methods for managing Provider Service resources.
 type ProviderServiceClient interface {
-	// Activate provider for specified client.
+	// Deprecated: This functionality is no longer supported - provider activation happens automatically.
 	Activate(ctx context.Context, in *ActivateProviderRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// List activated providers for specified client.
 	ListActivated(ctx context.Context, in *ListActivatedProvidersRequest, opts ...grpc.CallOption) (*ListActivatedProvidersResponse, error)
@@ -70,7 +70,7 @@ func (c *providerServiceClient) ListActivated(ctx context.Context, in *ListActiv
 //
 // A set of methods for managing Provider Service resources.
 type ProviderServiceServer interface {
-	// Activate provider for specified client.
+	// Deprecated: This functionality is no longer supported - provider activation happens automatically.
 	Activate(context.Context, *ActivateProviderRequest) (*operation.Operation, error)
 	// List activated providers for specified client.
 	ListActivated(context.Context, *ListActivatedProvidersRequest) (*ListActivatedProvidersResponse, error)

@@ -51,8 +51,7 @@ type ResourceServiceClient interface {
 	Update(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes client's CDN resource.
 	Delete(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Get Provider's CNAME (edge endpoint) bind to specified folder id.
-	// Returns UNIMPLEMENTED error, if provider doesn't support CNAME request.
+	// Deprecated: Provider-specific CNAME is now available in the `provider_cname` field of each Resource message.
 	GetProviderCName(ctx context.Context, in *GetProviderCNameRequest, opts ...grpc.CallOption) (*GetProviderCNameResponse, error)
 }
 
@@ -147,8 +146,7 @@ type ResourceServiceServer interface {
 	Update(context.Context, *UpdateResourceRequest) (*operation.Operation, error)
 	// Deletes client's CDN resource.
 	Delete(context.Context, *DeleteResourceRequest) (*operation.Operation, error)
-	// Get Provider's CNAME (edge endpoint) bind to specified folder id.
-	// Returns UNIMPLEMENTED error, if provider doesn't support CNAME request.
+	// Deprecated: Provider-specific CNAME is now available in the `provider_cname` field of each Resource message.
 	GetProviderCName(context.Context, *GetProviderCNameRequest) (*GetProviderCNameResponse, error)
 }
 

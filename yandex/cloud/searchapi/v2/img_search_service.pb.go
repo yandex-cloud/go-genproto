@@ -863,7 +863,7 @@ const file_yandex_cloud_searchapi_v2_img_search_service_proto_rawDesc = "" +
 	"docsOnPage\x12%\n" +
 	"\tfolder_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12(\n" +
 	"\n" +
-	"user_agent\x18\x06 \x01(\tB\t\x8a\xc81\x05<=200R\tuserAgent\"6\n" +
+	"user_agent\x18\x06 \x01(\tB\t\x8a\xc81\x05<=300R\tuserAgent\"6\n" +
 	"\x13ImageSearchResponse\x12\x1f\n" +
 	"\braw_data\x18\x01 \x01(\fB\x04\xe8\xc71\x01R\arawData\"\xcb\x02\n" +
 	"\x19ImageSearchByImageRequest\x12\x1e\n" +

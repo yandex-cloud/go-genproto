@@ -4,6 +4,7 @@ package backup
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *ListResourcesRequest) SetFolderId(v string) {
@@ -144,4 +145,20 @@ func (m *ListResourceOperationsResponse) SetOperations(v []*operation.Operation)
 
 func (m *ListResourceOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *GetInstanceRegistrationTokenRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *GetInstanceRegistrationTokenRequest) SetType(v ResourceType) {
+	m.Type = v
+}
+
+func (m *GetInstanceRegistrationTokenResponse) SetInstanceRegistrationId(v string) {
+	m.InstanceRegistrationId = v
+}
+
+func (m *GetInstanceRegistrationTokenResponse) SetExpiredAt(v *timestamppb.Timestamp) {
+	m.ExpiredAt = v
 }

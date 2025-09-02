@@ -37,6 +37,12 @@ func (m *ConnectionParams) SetClickhouse(v *ClickHouseConnection) {
 	}
 }
 
+func (m *ConnectionParams) SetKafka(v *KafkaConnection) {
+	m.Type = &ConnectionParams_Kafka{
+		Kafka: v,
+	}
+}
+
 func (m *ConnectionParams) SetRedis(v *RedisConnection) {
 	m.Type = &ConnectionParams_Redis{
 		Redis: v,

@@ -25,3 +25,15 @@ func (m *OriginGroup) SetOrigins(v []*Origin) {
 func (m *OriginGroup) SetProviderType(v string) {
 	m.ProviderType = v
 }
+
+func (m *OriginGroup) SetResourcesMetadata(v []*ResourceMetadata) {
+	m.ResourcesMetadata = v
+}
+
+func (m *ResourceMetadata) SetId(v string) {
+	m.Id = v
+}
+
+func (m *ResourceMetadata) SetCname(v string) {
+	m.Cname = v
+}

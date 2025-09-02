@@ -1712,16 +1712,16 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x8a\xc81\x06<=1000R\x06filter\"\x88\x01\n" +
 	"\x1aListExternalGroupsResponse\x12B\n" +
 	"\x06groups\x18\x01 \x03(\v2*.yandex.cloud.organizationmanager.v1.GroupR\x06groups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb5\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc1\x01\n" +
 	"\x12CreateGroupRequest\x125\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12;\n" +
-	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12G\n" +
+	"\x04name\x18\x02 \x01(\tB3\xe8\xc71\x01\xf2\xc71+[a-zA-Z]([-a-zA-Z0-9._-]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\"0\n" +
 	"\x13CreateGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xc5\x02\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xd1\x02\n" +
 	"\x1aCreateExternalGroupRequest\x125\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12;\n" +
-	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12G\n" +
+	"\x04name\x18\x02 \x01(\tB3\xe8\xc71\x01\xf2\xc71+[a-zA-Z]([-a-zA-Z0-9._-]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12>\n" +
 	"\x14subject_container_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
 	"\vexternal_id\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\n" +
@@ -1737,12 +1737,12 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\vexternal_id\x18\x05 \x01(\tR\n" +
 	"externalId\x12\x1f\n" +
 	"\vmake_editor\x18\x06 \x01(\bR\n" +
-	"makeEditor\"\xe1\x01\n" +
+	"makeEditor\"\xed\x01\n" +
 	"\x12UpdateGroupRequest\x12'\n" +
 	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"updateMask\x12D\n" +
+	"\x04name\x18\x03 \x01(\tB0\xf2\xc71,|[a-zA-Z]([-a-zA-Z0-9._-]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\"0\n" +
 	"\x13UpdateGroupMetadata\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xd0\x01\n" +

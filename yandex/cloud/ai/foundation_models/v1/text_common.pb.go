@@ -326,7 +326,7 @@ func (x *ReasoningOptions) GetMode() ReasoningOptions_ReasoningMode {
 type Message struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the message sender. Supported roles:
-	// * `system`: Special role used to define the behaviour of the completion model.
+	// * `system`: Special role used to define the behavior of the completion model.
 	// * `assistant`: A role used by the model to generate responses.
 	// * `user`: A role used by the user to describe requests to the model.
 	Role string `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`

@@ -140,9 +140,10 @@ type ClickHouseAuth_UserPassword struct {
 func (*ClickHouseAuth_UserPassword) isClickHouseAuth_Security() {}
 
 type ClickHouseCluster struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Hosts         []*ClickHouseCluster_Host `protobuf:"bytes,6,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	TlsParams     *TLSParams                `protobuf:"bytes,4,opt,name=tls_params,json=tlsParams,proto3" json:"tls_params,omitempty"`
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	TlsParams     *TLSParams                      `protobuf:"bytes,4,opt,name=tls_params,json=tlsParams,proto3" json:"tls_params,omitempty"`
+	Hosts         []*ClickHouseCluster_Host       `protobuf:"bytes,6,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	ShardGroups   []*ClickHouseCluster_ShardGroup `protobuf:"bytes,7,rep,name=shard_groups,json=shardGroups,proto3" json:"shard_groups,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -177,6 +178,13 @@ func (*ClickHouseCluster) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *ClickHouseCluster) GetTlsParams() *TLSParams {
+	if x != nil {
+		return x.TlsParams
+	}
+	return nil
+}
+
 func (x *ClickHouseCluster) GetHosts() []*ClickHouseCluster_Host {
 	if x != nil {
 		return x.Hosts
@@ -184,9 +192,9 @@ func (x *ClickHouseCluster) GetHosts() []*ClickHouseCluster_Host {
 	return nil
 }
 
-func (x *ClickHouseCluster) GetTlsParams() *TLSParams {
+func (x *ClickHouseCluster) GetShardGroups() []*ClickHouseCluster_ShardGroup {
 	if x != nil {
-		return x.TlsParams
+		return x.ShardGroups
 	}
 	return nil
 }
@@ -340,6 +348,58 @@ func (x *ClickHouseCluster_Host) GetHealth() ClickHouseCluster_Host_Health {
 	return ClickHouseCluster_Host_HEALTH_UNKNOWN
 }
 
+type ClickHouseCluster_ShardGroup struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ShardNames    []string               `protobuf:"bytes,2,rep,name=shard_names,json=shardNames,proto3" json:"shard_names,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClickHouseCluster_ShardGroup) Reset() {
+	*x = ClickHouseCluster_ShardGroup{}
+	mi := &file_yandex_cloud_connectionmanager_v1_clickhouse_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickHouseCluster_ShardGroup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickHouseCluster_ShardGroup) ProtoMessage() {}
+
+func (x *ClickHouseCluster_ShardGroup) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_connectionmanager_v1_clickhouse_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickHouseCluster_ShardGroup.ProtoReflect.Descriptor instead.
+func (*ClickHouseCluster_ShardGroup) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDescGZIP(), []int{1, 1}
+}
+
+func (x *ClickHouseCluster_ShardGroup) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ClickHouseCluster_ShardGroup) GetShardNames() []string {
+	if x != nil {
+		return x.ShardNames
+	}
+	return nil
+}
+
 var File_yandex_cloud_connectionmanager_v1_clickhouse_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDesc = "" +
@@ -348,11 +408,12 @@ const file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDesc = "" +
 	"\x0eClickHouseAuth\x12Z\n" +
 	"\ruser_password\x18\x01 \x01(\v23.yandex.cloud.connectionmanager.v1.UserPasswordAuthH\x00R\fuserPasswordB\n" +
 	"\n" +
-	"\bsecurity\"\xcc\x03\n" +
-	"\x11ClickHouseCluster\x12O\n" +
-	"\x05hosts\x18\x06 \x03(\v29.yandex.cloud.connectionmanager.v1.ClickHouseCluster.HostR\x05hosts\x12K\n" +
+	"\bsecurity\"\xf3\x04\n" +
+	"\x11ClickHouseCluster\x12K\n" +
 	"\n" +
-	"tls_params\x18\x04 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x1a\x8c\x02\n" +
+	"tls_params\x18\x04 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x12O\n" +
+	"\x05hosts\x18\x06 \x03(\v29.yandex.cloud.connectionmanager.v1.ClickHouseCluster.HostR\x05hosts\x12b\n" +
+	"\fshard_groups\x18\a \x03(\v2?.yandex.cloud.connectionmanager.v1.ClickHouseCluster.ShardGroupR\vshardGroups\x1a\x8c\x02\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04host\x18\x01 \x01(\tR\x04host\x12\x1b\n" +
 	"\thttp_port\x18\x02 \x01(\x03R\bhttpPort\x12\x19\n" +
@@ -364,7 +425,12 @@ const file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDesc = "" +
 	"\x0eHEALTH_UNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
-	"\bDEGRADED\x10\x03J\x04\b\x01\x10\x04J\x04\b\x05\x10\x06\"\xf9\x01\n" +
+	"\bDEGRADED\x10\x03\x1aA\n" +
+	"\n" +
+	"ShardGroup\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1f\n" +
+	"\vshard_names\x18\x02 \x03(\tR\n" +
+	"shardNamesJ\x04\b\x01\x10\x04J\x04\b\x05\x10\x06\"\xf9\x01\n" +
 	"\x14ClickHouseConnection\x12N\n" +
 	"\acluster\x18\x01 \x01(\v24.yandex.cloud.connectionmanager.v1.ClickHouseClusterR\acluster\x12,\n" +
 	"\x12managed_cluster_id\x18\x02 \x01(\tR\x10managedClusterId\x12E\n" +
@@ -385,28 +451,30 @@ func file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDescGZIP() []byt
 }
 
 var file_yandex_cloud_connectionmanager_v1_clickhouse_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_connectionmanager_v1_clickhouse_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_connectionmanager_v1_clickhouse_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_connectionmanager_v1_clickhouse_proto_goTypes = []any{
-	(ClickHouseCluster_Host_Health)(0), // 0: yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host.Health
-	(*ClickHouseAuth)(nil),             // 1: yandex.cloud.connectionmanager.v1.ClickHouseAuth
-	(*ClickHouseCluster)(nil),          // 2: yandex.cloud.connectionmanager.v1.ClickHouseCluster
-	(*ClickHouseConnection)(nil),       // 3: yandex.cloud.connectionmanager.v1.ClickHouseConnection
-	(*ClickHouseCluster_Host)(nil),     // 4: yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host
-	(*UserPasswordAuth)(nil),           // 5: yandex.cloud.connectionmanager.v1.UserPasswordAuth
-	(*TLSParams)(nil),                  // 6: yandex.cloud.connectionmanager.v1.TLSParams
+	(ClickHouseCluster_Host_Health)(0),   // 0: yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host.Health
+	(*ClickHouseAuth)(nil),               // 1: yandex.cloud.connectionmanager.v1.ClickHouseAuth
+	(*ClickHouseCluster)(nil),            // 2: yandex.cloud.connectionmanager.v1.ClickHouseCluster
+	(*ClickHouseConnection)(nil),         // 3: yandex.cloud.connectionmanager.v1.ClickHouseConnection
+	(*ClickHouseCluster_Host)(nil),       // 4: yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host
+	(*ClickHouseCluster_ShardGroup)(nil), // 5: yandex.cloud.connectionmanager.v1.ClickHouseCluster.ShardGroup
+	(*UserPasswordAuth)(nil),             // 6: yandex.cloud.connectionmanager.v1.UserPasswordAuth
+	(*TLSParams)(nil),                    // 7: yandex.cloud.connectionmanager.v1.TLSParams
 }
 var file_yandex_cloud_connectionmanager_v1_clickhouse_proto_depIdxs = []int32{
-	5, // 0: yandex.cloud.connectionmanager.v1.ClickHouseAuth.user_password:type_name -> yandex.cloud.connectionmanager.v1.UserPasswordAuth
-	4, // 1: yandex.cloud.connectionmanager.v1.ClickHouseCluster.hosts:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host
-	6, // 2: yandex.cloud.connectionmanager.v1.ClickHouseCluster.tls_params:type_name -> yandex.cloud.connectionmanager.v1.TLSParams
-	2, // 3: yandex.cloud.connectionmanager.v1.ClickHouseConnection.cluster:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster
-	1, // 4: yandex.cloud.connectionmanager.v1.ClickHouseConnection.auth:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseAuth
-	0, // 5: yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host.health:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host.Health
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	6, // 0: yandex.cloud.connectionmanager.v1.ClickHouseAuth.user_password:type_name -> yandex.cloud.connectionmanager.v1.UserPasswordAuth
+	7, // 1: yandex.cloud.connectionmanager.v1.ClickHouseCluster.tls_params:type_name -> yandex.cloud.connectionmanager.v1.TLSParams
+	4, // 2: yandex.cloud.connectionmanager.v1.ClickHouseCluster.hosts:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host
+	5, // 3: yandex.cloud.connectionmanager.v1.ClickHouseCluster.shard_groups:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster.ShardGroup
+	2, // 4: yandex.cloud.connectionmanager.v1.ClickHouseConnection.cluster:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster
+	1, // 5: yandex.cloud.connectionmanager.v1.ClickHouseConnection.auth:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseAuth
+	0, // 6: yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host.health:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseCluster.Host.Health
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_connectionmanager_v1_clickhouse_proto_init() }
@@ -424,7 +492,7 @@ func file_yandex_cloud_connectionmanager_v1_clickhouse_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDesc), len(file_yandex_cloud_connectionmanager_v1_clickhouse_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

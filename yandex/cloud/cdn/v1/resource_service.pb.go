@@ -220,7 +220,14 @@ type CreateResourceRequest struct {
 	SslCertificate *SSLTargetCertificate `protobuf:"bytes,8,opt,name=ssl_certificate,json=sslCertificate,proto3" json:"ssl_certificate,omitempty"`
 	// Labels of the resource.
 	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// RESERVED: This field is reserved for future use and should not be used at this time.
+	// Set up resource provider
+	//
+	// It has two possible values:
+	//
+	// ourcdn - Based on Yandex technologies
+	// gcore - Based on an external partner infrastructure
+	//
+	// Default value: ourcdn
 	ProviderType  string `protobuf:"bytes,10,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

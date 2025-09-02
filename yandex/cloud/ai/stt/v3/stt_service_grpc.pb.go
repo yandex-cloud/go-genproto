@@ -28,9 +28,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for voice recognition.
+// A set of methods for streaming speech recognition.
 type RecognizerClient interface {
-	// Expects audio in real-time
+	// Performs bidirectional streaming speech recognition receiving results while sending audio.
 	RecognizeStreaming(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamingRequest, StreamingResponse], error)
 }
 
@@ -59,9 +59,9 @@ type Recognizer_RecognizeStreamingClient = grpc.BidiStreamingClient[StreamingReq
 // All implementations should embed UnimplementedRecognizerServer
 // for forward compatibility.
 //
-// A set of methods for voice recognition.
+// A set of methods for streaming speech recognition.
 type RecognizerServer interface {
-	// Expects audio in real-time
+	// Performs bidirectional streaming speech recognition receiving results while sending audio.
 	RecognizeStreaming(grpc.BidiStreamingServer[StreamingRequest, StreamingResponse]) error
 }
 
@@ -130,10 +130,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for async voice recognition.
+// A set of methods for asynchronous speech recognition: recognize pre-recorded audio and receive results by request.
 type AsyncRecognizerClient interface {
+	// Performs asynchronous speech recognition.
 	RecognizeFile(ctx context.Context, in *RecognizeFileRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Gets results of asynchronous recognition after finishing the operation.
 	GetRecognition(ctx context.Context, in *GetRecognitionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamingResponse], error)
+	// Deletes results of asynchronous recognition by operation ID.
 	DeleteRecognition(ctx context.Context, in *DeleteRecognitionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -188,10 +191,13 @@ func (c *asyncRecognizerClient) DeleteRecognition(ctx context.Context, in *Delet
 // All implementations should embed UnimplementedAsyncRecognizerServer
 // for forward compatibility.
 //
-// A set of methods for async voice recognition.
+// A set of methods for asynchronous speech recognition: recognize pre-recorded audio and receive results by request.
 type AsyncRecognizerServer interface {
+	// Performs asynchronous speech recognition.
 	RecognizeFile(context.Context, *RecognizeFileRequest) (*operation.Operation, error)
+	// Gets results of asynchronous recognition after finishing the operation.
 	GetRecognition(*GetRecognitionRequest, grpc.ServerStreamingServer[StreamingResponse]) error
+	// Deletes results of asynchronous recognition by operation ID.
 	DeleteRecognition(context.Context, *DeleteRecognitionRequest) (*emptypb.Empty, error)
 }
 

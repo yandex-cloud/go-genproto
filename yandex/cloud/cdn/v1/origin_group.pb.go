@@ -39,10 +39,12 @@ type OriginGroup struct {
 	UseNext bool `protobuf:"varint,4,opt,name=use_next,json=useNext,proto3" json:"use_next,omitempty"`
 	// List of origins.
 	Origins []*Origin `protobuf:"bytes,5,rep,name=origins,proto3" json:"origins,omitempty"`
-	// RESERVED: This field is reserved for future use and should not be used at this time.
-	ProviderType  string `protobuf:"bytes,6,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Type of the CDN provider for this origin group.
+	ProviderType string `protobuf:"bytes,6,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
+	// List of CDN resources currently using this origin group.
+	ResourcesMetadata []*ResourceMetadata `protobuf:"bytes,7,rep,name=resources_metadata,json=resourcesMetadata,proto3" json:"resources_metadata,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *OriginGroup) Reset() {
@@ -117,18 +119,84 @@ func (x *OriginGroup) GetProviderType() string {
 	return ""
 }
 
+func (x *OriginGroup) GetResourcesMetadata() []*ResourceMetadata {
+	if x != nil {
+		return x.ResourcesMetadata
+	}
+	return nil
+}
+
+// Metadata of a CDN resource referencing an origin group.
+type ResourceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the CDN resource using the origin group.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// CNAME of the CDN resource using the origin group.
+	Cname         string `protobuf:"bytes,2,opt,name=cname,proto3" json:"cname,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceMetadata) Reset() {
+	*x = ResourceMetadata{}
+	mi := &file_yandex_cloud_cdn_v1_origin_group_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceMetadata) ProtoMessage() {}
+
+func (x *ResourceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cdn_v1_origin_group_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceMetadata.ProtoReflect.Descriptor instead.
+func (*ResourceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cdn_v1_origin_group_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ResourceMetadata) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ResourceMetadata) GetCname() string {
+	if x != nil {
+		return x.Cname
+	}
+	return ""
+}
+
 var File_yandex_cloud_cdn_v1_origin_group_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_origin_group_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/cdn/v1/origin_group.proto\x12\x13yandex.cloud.cdn.v1\x1a yandex/cloud/cdn/v1/origin.proto\"\xc5\x01\n" +
+	"&yandex/cloud/cdn/v1/origin_group.proto\x12\x13yandex.cloud.cdn.v1\x1a yandex/cloud/cdn/v1/origin.proto\"\x9b\x02\n" +
 	"\vOriginGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x19\n" +
 	"\buse_next\x18\x04 \x01(\bR\auseNext\x125\n" +
 	"\aorigins\x18\x05 \x03(\v2\x1b.yandex.cloud.cdn.v1.OriginR\aorigins\x12#\n" +
-	"\rprovider_type\x18\x06 \x01(\tR\fproviderTypeBV\n" +
+	"\rprovider_type\x18\x06 \x01(\tR\fproviderType\x12T\n" +
+	"\x12resources_metadata\x18\a \x03(\v2%.yandex.cloud.cdn.v1.ResourceMetadataR\x11resourcesMetadata\"8\n" +
+	"\x10ResourceMetadata\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05cname\x18\x02 \x01(\tR\x05cnameBV\n" +
 	"\x17yandex.cloud.api.cdn.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cdn/v1;cdnb\x06proto3"
 
 var (
@@ -143,18 +211,20 @@ func file_yandex_cloud_cdn_v1_origin_group_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_cdn_v1_origin_group_proto_rawDescData
 }
 
-var file_yandex_cloud_cdn_v1_origin_group_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_cdn_v1_origin_group_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_cdn_v1_origin_group_proto_goTypes = []any{
-	(*OriginGroup)(nil), // 0: yandex.cloud.cdn.v1.OriginGroup
-	(*Origin)(nil),      // 1: yandex.cloud.cdn.v1.Origin
+	(*OriginGroup)(nil),      // 0: yandex.cloud.cdn.v1.OriginGroup
+	(*ResourceMetadata)(nil), // 1: yandex.cloud.cdn.v1.ResourceMetadata
+	(*Origin)(nil),           // 2: yandex.cloud.cdn.v1.Origin
 }
 var file_yandex_cloud_cdn_v1_origin_group_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.cdn.v1.OriginGroup.origins:type_name -> yandex.cloud.cdn.v1.Origin
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: yandex.cloud.cdn.v1.OriginGroup.origins:type_name -> yandex.cloud.cdn.v1.Origin
+	1, // 1: yandex.cloud.cdn.v1.OriginGroup.resources_metadata:type_name -> yandex.cloud.cdn.v1.ResourceMetadata
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cdn_v1_origin_group_proto_init() }
@@ -169,7 +239,7 @@ func file_yandex_cloud_cdn_v1_origin_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cdn_v1_origin_group_proto_rawDesc), len(file_yandex_cloud_cdn_v1_origin_group_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

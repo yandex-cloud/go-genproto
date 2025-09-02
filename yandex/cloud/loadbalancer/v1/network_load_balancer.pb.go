@@ -699,7 +699,9 @@ type TargetState struct {
 	// IP address of the target.
 	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	// Status of the target.
-	Status        TargetState_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.loadbalancer.v1.TargetState_Status" json:"status,omitempty"`
+	Status TargetState_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.loadbalancer.v1.TargetState_Status" json:"status,omitempty"`
+	// Zone shifted status.
+	ZoneShifted   bool `protobuf:"varint,4,opt,name=zone_shifted,json=zoneShifted,proto3" json:"zone_shifted,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -753,6 +755,13 @@ func (x *TargetState) GetStatus() TargetState_Status {
 		return x.Status
 	}
 	return TargetState_STATUS_UNSPECIFIED
+}
+
+func (x *TargetState) GetZoneShifted() bool {
+	if x != nil {
+		return x.ZoneShifted
+	}
+	return false
 }
 
 // Status of the disabled zone.
@@ -870,11 +879,12 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = ""
 	"\bProtocol\x12\x18\n" +
 	"\x14PROTOCOL_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03TCP\x10\x01\x12\a\n" +
-	"\x03UDP\x10\x02\"\xf5\x01\n" +
+	"\x03UDP\x10\x02\"\x98\x02\n" +
 	"\vTargetState\x12\x1b\n" +
 	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12H\n" +
-	"\x06status\x18\x03 \x01(\x0e20.yandex.cloud.loadbalancer.v1.TargetState.StatusR\x06status\"e\n" +
+	"\x06status\x18\x03 \x01(\x0e20.yandex.cloud.loadbalancer.v1.TargetState.StatusR\x06status\x12!\n" +
+	"\fzone_shifted\x18\x04 \x01(\bR\vzoneShifted\"e\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aINITIAL\x10\x01\x12\v\n" +

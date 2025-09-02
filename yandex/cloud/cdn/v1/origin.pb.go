@@ -44,7 +44,7 @@ type Origin struct {
 	Backup bool `protobuf:"varint,5,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up origin of the content.
 	Meta *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
-	// RESERVED: This field is reserved for future use and should not be used at this time.
+	// Type of the CDN provider for this origin group.
 	ProviderType  string `protobuf:"bytes,7,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -31,6 +31,7 @@ const (
 	DBType_MYSQL               DBType = 2
 	DBType_CLICKHOUSE          DBType = 3
 	DBType_MONGODB             DBType = 4
+	DBType_KAFKA               DBType = 5
 	DBType_REDIS               DBType = 6
 	DBType_OPENSEARCH          DBType = 7
 	DBType_TRINO               DBType = 8
@@ -46,6 +47,7 @@ var (
 		2:  "MYSQL",
 		3:  "CLICKHOUSE",
 		4:  "MONGODB",
+		5:  "KAFKA",
 		6:  "REDIS",
 		7:  "OPENSEARCH",
 		8:  "TRINO",
@@ -58,6 +60,7 @@ var (
 		"MYSQL":               2,
 		"CLICKHOUSE":          3,
 		"MONGODB":             4,
+		"KAFKA":               5,
 		"REDIS":               6,
 		"OPENSEARCH":          7,
 		"TRINO":               8,
@@ -101,6 +104,7 @@ type ConnectionParams struct {
 	//	*ConnectionParams_Mysql
 	//	*ConnectionParams_Mongodb
 	//	*ConnectionParams_Clickhouse
+	//	*ConnectionParams_Kafka
 	//	*ConnectionParams_Redis
 	//	*ConnectionParams_Opensearch
 	//	*ConnectionParams_Trino
@@ -184,6 +188,15 @@ func (x *ConnectionParams) GetClickhouse() *ClickHouseConnection {
 	return nil
 }
 
+func (x *ConnectionParams) GetKafka() *KafkaConnection {
+	if x != nil {
+		if x, ok := x.Type.(*ConnectionParams_Kafka); ok {
+			return x.Kafka
+		}
+	}
+	return nil
+}
+
 func (x *ConnectionParams) GetRedis() *RedisConnection {
 	if x != nil {
 		if x, ok := x.Type.(*ConnectionParams_Redis); ok {
@@ -249,6 +262,10 @@ type ConnectionParams_Clickhouse struct {
 	Clickhouse *ClickHouseConnection `protobuf:"bytes,4,opt,name=clickhouse,proto3,oneof"`
 }
 
+type ConnectionParams_Kafka struct {
+	Kafka *KafkaConnection `protobuf:"bytes,5,opt,name=kafka,proto3,oneof"`
+}
+
 type ConnectionParams_Redis struct {
 	Redis *RedisConnection `protobuf:"bytes,6,opt,name=redis,proto3,oneof"`
 }
@@ -276,6 +293,8 @@ func (*ConnectionParams_Mysql) isConnectionParams_Type() {}
 func (*ConnectionParams_Mongodb) isConnectionParams_Type() {}
 
 func (*ConnectionParams_Clickhouse) isConnectionParams_Type() {}
+
+func (*ConnectionParams_Kafka) isConnectionParams_Type() {}
 
 func (*ConnectionParams_Redis) isConnectionParams_Type() {}
 
@@ -505,7 +524,7 @@ var File_yandex_cloud_connectionmanager_v1_connection_proto protoreflect.FileDes
 
 const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/connectionmanager/v1/connection.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/connectionmanager/v1/mysql.proto\x1a2yandex/cloud/connectionmanager/v1/postgresql.proto\x1a/yandex/cloud/connectionmanager/v1/mongodb.proto\x1a2yandex/cloud/connectionmanager/v1/clickhouse.proto\x1a-yandex/cloud/connectionmanager/v1/redis.proto\x1a-yandex/cloud/connectionmanager/v1/trino.proto\x1a.yandex/cloud/connectionmanager/v1/valkey.proto\x1a2yandex/cloud/connectionmanager/v1/opensearch.proto\x1a1yandex/cloud/connectionmanager/v1/greenplum.proto\"\x8e\x06\n" +
+	"2yandex/cloud/connectionmanager/v1/connection.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/connectionmanager/v1/mysql.proto\x1a2yandex/cloud/connectionmanager/v1/postgresql.proto\x1a/yandex/cloud/connectionmanager/v1/mongodb.proto\x1a2yandex/cloud/connectionmanager/v1/clickhouse.proto\x1a-yandex/cloud/connectionmanager/v1/redis.proto\x1a-yandex/cloud/connectionmanager/v1/trino.proto\x1a.yandex/cloud/connectionmanager/v1/valkey.proto\x1a2yandex/cloud/connectionmanager/v1/opensearch.proto\x1a1yandex/cloud/connectionmanager/v1/greenplum.proto\x1a-yandex/cloud/connectionmanager/v1/kafka.proto\"\xd4\x06\n" +
 	"\x10ConnectionParams\x12Y\n" +
 	"\n" +
 	"postgresql\x18\x01 \x01(\v27.yandex.cloud.connectionmanager.v1.PostgreSQLConnectionH\x00R\n" +
@@ -515,6 +534,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\n" +
 	"clickhouse\x18\x04 \x01(\v27.yandex.cloud.connectionmanager.v1.ClickHouseConnectionH\x00R\n" +
 	"clickhouse\x12J\n" +
+	"\x05kafka\x18\x05 \x01(\v22.yandex.cloud.connectionmanager.v1.KafkaConnectionH\x00R\x05kafka\x12J\n" +
 	"\x05redis\x18\x06 \x01(\v22.yandex.cloud.connectionmanager.v1.RedisConnectionH\x00R\x05redis\x12Y\n" +
 	"\n" +
 	"opensearch\x18\a \x01(\v27.yandex.cloud.connectionmanager.v1.OpenSearchConnectionH\x00R\n" +
@@ -523,7 +543,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\x06valkey\x18\t \x01(\v23.yandex.cloud.connectionmanager.v1.ValkeyConnectionH\x00R\x06valkey\x12V\n" +
 	"\tgreenplum\x18\n" +
 	" \x01(\v26.yandex.cloud.connectionmanager.v1.GreenplumConnectionH\x00R\tgreenplumB\x06\n" +
-	"\x04typeJ\x04\b\x05\x10\x06\"`\n" +
+	"\x04type\"`\n" +
 	"\rLockboxSecret\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12%\n" +
@@ -550,7 +570,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06secretJ\x04\b\v\x10\f*\xa0\x01\n" +
+	"\x06secretJ\x04\b\v\x10\f*\xa5\x01\n" +
 	"\x06DBType\x12\x17\n" +
 	"\x13DB_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -559,6 +579,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\n" +
 	"CLICKHOUSE\x10\x03\x12\v\n" +
 	"\aMONGODB\x10\x04\x12\t\n" +
+	"\x05KAFKA\x10\x05\x12\t\n" +
 	"\x05REDIS\x10\x06\x12\x0e\n" +
 	"\n" +
 	"OPENSEARCH\x10\a\x12\t\n" +
@@ -566,7 +587,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\n" +
 	"\x06VALKEY\x10\t\x12\r\n" +
 	"\tGREENPLUM\x10\n" +
-	"\"\x04\b\x05\x10\x05B\x80\x01\n" +
+	"B\x80\x01\n" +
 	"%yandex.cloud.api.connectionmanager.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/connectionmanager/v1;connectionmanagerb\x06proto3"
 
 var (
@@ -593,35 +614,37 @@ var file_yandex_cloud_connectionmanager_v1_connection_proto_goTypes = []any{
 	(*MySQLConnection)(nil),       // 6: yandex.cloud.connectionmanager.v1.MySQLConnection
 	(*MongoDBConnection)(nil),     // 7: yandex.cloud.connectionmanager.v1.MongoDBConnection
 	(*ClickHouseConnection)(nil),  // 8: yandex.cloud.connectionmanager.v1.ClickHouseConnection
-	(*RedisConnection)(nil),       // 9: yandex.cloud.connectionmanager.v1.RedisConnection
-	(*OpenSearchConnection)(nil),  // 10: yandex.cloud.connectionmanager.v1.OpenSearchConnection
-	(*TrinoConnection)(nil),       // 11: yandex.cloud.connectionmanager.v1.TrinoConnection
-	(*ValkeyConnection)(nil),      // 12: yandex.cloud.connectionmanager.v1.ValkeyConnection
-	(*GreenplumConnection)(nil),   // 13: yandex.cloud.connectionmanager.v1.GreenplumConnection
-	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 15: google.protobuf.BoolValue
+	(*KafkaConnection)(nil),       // 9: yandex.cloud.connectionmanager.v1.KafkaConnection
+	(*RedisConnection)(nil),       // 10: yandex.cloud.connectionmanager.v1.RedisConnection
+	(*OpenSearchConnection)(nil),  // 11: yandex.cloud.connectionmanager.v1.OpenSearchConnection
+	(*TrinoConnection)(nil),       // 12: yandex.cloud.connectionmanager.v1.TrinoConnection
+	(*ValkeyConnection)(nil),      // 13: yandex.cloud.connectionmanager.v1.ValkeyConnection
+	(*GreenplumConnection)(nil),   // 14: yandex.cloud.connectionmanager.v1.GreenplumConnection
+	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 16: google.protobuf.BoolValue
 }
 var file_yandex_cloud_connectionmanager_v1_connection_proto_depIdxs = []int32{
 	5,  // 0: yandex.cloud.connectionmanager.v1.ConnectionParams.postgresql:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLConnection
 	6,  // 1: yandex.cloud.connectionmanager.v1.ConnectionParams.mysql:type_name -> yandex.cloud.connectionmanager.v1.MySQLConnection
 	7,  // 2: yandex.cloud.connectionmanager.v1.ConnectionParams.mongodb:type_name -> yandex.cloud.connectionmanager.v1.MongoDBConnection
 	8,  // 3: yandex.cloud.connectionmanager.v1.ConnectionParams.clickhouse:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseConnection
-	9,  // 4: yandex.cloud.connectionmanager.v1.ConnectionParams.redis:type_name -> yandex.cloud.connectionmanager.v1.RedisConnection
-	10, // 5: yandex.cloud.connectionmanager.v1.ConnectionParams.opensearch:type_name -> yandex.cloud.connectionmanager.v1.OpenSearchConnection
-	11, // 6: yandex.cloud.connectionmanager.v1.ConnectionParams.trino:type_name -> yandex.cloud.connectionmanager.v1.TrinoConnection
-	12, // 7: yandex.cloud.connectionmanager.v1.ConnectionParams.valkey:type_name -> yandex.cloud.connectionmanager.v1.ValkeyConnection
-	13, // 8: yandex.cloud.connectionmanager.v1.ConnectionParams.greenplum:type_name -> yandex.cloud.connectionmanager.v1.GreenplumConnection
-	14, // 9: yandex.cloud.connectionmanager.v1.Connection.created_at:type_name -> google.protobuf.Timestamp
-	14, // 10: yandex.cloud.connectionmanager.v1.Connection.updated_at:type_name -> google.protobuf.Timestamp
-	4,  // 11: yandex.cloud.connectionmanager.v1.Connection.labels:type_name -> yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
-	1,  // 12: yandex.cloud.connectionmanager.v1.Connection.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
-	2,  // 13: yandex.cloud.connectionmanager.v1.Connection.lockbox_secret:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecret
-	15, // 14: yandex.cloud.connectionmanager.v1.Connection.can_use:type_name -> google.protobuf.BoolValue
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	9,  // 4: yandex.cloud.connectionmanager.v1.ConnectionParams.kafka:type_name -> yandex.cloud.connectionmanager.v1.KafkaConnection
+	10, // 5: yandex.cloud.connectionmanager.v1.ConnectionParams.redis:type_name -> yandex.cloud.connectionmanager.v1.RedisConnection
+	11, // 6: yandex.cloud.connectionmanager.v1.ConnectionParams.opensearch:type_name -> yandex.cloud.connectionmanager.v1.OpenSearchConnection
+	12, // 7: yandex.cloud.connectionmanager.v1.ConnectionParams.trino:type_name -> yandex.cloud.connectionmanager.v1.TrinoConnection
+	13, // 8: yandex.cloud.connectionmanager.v1.ConnectionParams.valkey:type_name -> yandex.cloud.connectionmanager.v1.ValkeyConnection
+	14, // 9: yandex.cloud.connectionmanager.v1.ConnectionParams.greenplum:type_name -> yandex.cloud.connectionmanager.v1.GreenplumConnection
+	15, // 10: yandex.cloud.connectionmanager.v1.Connection.created_at:type_name -> google.protobuf.Timestamp
+	15, // 11: yandex.cloud.connectionmanager.v1.Connection.updated_at:type_name -> google.protobuf.Timestamp
+	4,  // 12: yandex.cloud.connectionmanager.v1.Connection.labels:type_name -> yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
+	1,  // 13: yandex.cloud.connectionmanager.v1.Connection.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
+	2,  // 14: yandex.cloud.connectionmanager.v1.Connection.lockbox_secret:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecret
+	16, // 15: yandex.cloud.connectionmanager.v1.Connection.can_use:type_name -> google.protobuf.BoolValue
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_connectionmanager_v1_connection_proto_init() }
@@ -638,11 +661,13 @@ func file_yandex_cloud_connectionmanager_v1_connection_proto_init() {
 	file_yandex_cloud_connectionmanager_v1_valkey_proto_init()
 	file_yandex_cloud_connectionmanager_v1_opensearch_proto_init()
 	file_yandex_cloud_connectionmanager_v1_greenplum_proto_init()
+	file_yandex_cloud_connectionmanager_v1_kafka_proto_init()
 	file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[0].OneofWrappers = []any{
 		(*ConnectionParams_Postgresql)(nil),
 		(*ConnectionParams_Mysql)(nil),
 		(*ConnectionParams_Mongodb)(nil),
 		(*ConnectionParams_Clickhouse)(nil),
+		(*ConnectionParams_Kafka)(nil),
 		(*ConnectionParams_Redis)(nil),
 		(*ConnectionParams_Opensearch)(nil),
 		(*ConnectionParams_Trino)(nil),

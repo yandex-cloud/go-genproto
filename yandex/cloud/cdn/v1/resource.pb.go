@@ -438,9 +438,9 @@ type Resource struct {
 	SslCertificate *SSLCertificate `protobuf:"bytes,12,opt,name=ssl_certificate,json=sslCertificate,proto3" json:"ssl_certificate,omitempty"`
 	// Labels of the resource.
 	Labels map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// RESERVED: This field is reserved for future use and should not be used at this time.
+	// Type of the CDN provider for this resource.
 	ProviderType string `protobuf:"bytes,14,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
-	// RESERVED: Provider CNAME.
+	// CNAME provided by the CDN provider for this resource.
 	ProviderCname string `protobuf:"bytes,15,opt,name=provider_cname,json=providerCname,proto3" json:"provider_cname,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

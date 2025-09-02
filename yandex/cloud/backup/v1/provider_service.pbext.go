@@ -14,12 +14,20 @@ func (m *ActivateProviderRequest) SetSkipDefaultPolicy(v bool) {
 	m.SkipDefaultPolicy = v
 }
 
+func (m *ActivateProviderRequest) SetInstanceRegistrationId(v string) {
+	m.InstanceRegistrationId = v
+}
+
 func (m *ActivateProviderMetadata) SetFolderId(v string) {
 	m.FolderId = v
 }
 
 func (m *ListActivatedProvidersRequest) SetFolderId(v string) {
 	m.FolderId = v
+}
+
+func (m *ListActivatedProvidersRequest) SetInstanceRegistrationId(v string) {
+	m.InstanceRegistrationId = v
 }
 
 func (m *ListActivatedProvidersResponse) SetFolderId(v string) {

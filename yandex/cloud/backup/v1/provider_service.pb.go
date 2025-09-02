@@ -35,8 +35,10 @@ type ActivateProviderRequest struct {
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Don't create default policies while activating the provider.
 	SkipDefaultPolicy bool `protobuf:"varint,4,opt,name=skip_default_policy,json=skipDefaultPolicy,proto3" json:"skip_default_policy,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// instance registration token for authorization
+	InstanceRegistrationId string `protobuf:"bytes,5,opt,name=instance_registration_id,json=instanceRegistrationId,proto3" json:"instance_registration_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ActivateProviderRequest) Reset() {
@@ -90,6 +92,13 @@ func (x *ActivateProviderRequest) GetSkipDefaultPolicy() bool {
 	return false
 }
 
+func (x *ActivateProviderRequest) GetInstanceRegistrationId() string {
+	if x != nil {
+		return x.InstanceRegistrationId
+	}
+	return ""
+}
+
 type ActivateProviderMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Activate provider for folder specified by ID.
@@ -138,9 +147,11 @@ func (x *ActivateProviderMetadata) GetFolderId() string {
 type ListActivatedProvidersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to find out the backup provider.
-	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// instance registration token for authorization
+	InstanceRegistrationId string `protobuf:"bytes,2,opt,name=instance_registration_id,json=instanceRegistrationId,proto3" json:"instance_registration_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListActivatedProvidersRequest) Reset() {
@@ -176,6 +187,13 @@ func (*ListActivatedProvidersRequest) Descriptor() ([]byte, []int) {
 func (x *ListActivatedProvidersRequest) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListActivatedProvidersRequest) GetInstanceRegistrationId() string {
+	if x != nil {
+		return x.InstanceRegistrationId
 	}
 	return ""
 }
@@ -238,15 +256,17 @@ var File_yandex_cloud_backup_v1_provider_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_backup_v1_provider_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/backup/v1/provider_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x9a\x01\n" +
+	"-yandex/cloud/backup/v1/provider_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xd4\x01\n" +
 	"\x17ActivateProviderRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x18\n" +
 	"\x04name\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x04name\x124\n" +
-	"\x13skip_default_policy\x18\x04 \x01(\bB\x04\xe8\xc71\x00R\x11skipDefaultPolicyJ\x04\b\x02\x10\x03\"E\n" +
+	"\x13skip_default_policy\x18\x04 \x01(\bB\x04\xe8\xc71\x00R\x11skipDefaultPolicy\x128\n" +
+	"\x18instance_registration_id\x18\x05 \x01(\tR\x16instanceRegistrationIdJ\x04\b\x02\x10\x03\"E\n" +
 	"\x18ActivateProviderMetadata\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"J\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"\x84\x01\n" +
 	"\x1dListActivatedProvidersRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"Y\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
+	"\x18instance_registration_id\x18\x02 \x01(\tR\x16instanceRegistrationId\"Y\n" +
 	"\x1eListActivatedProvidersResponse\x12\x1b\n" +
 	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x14\n" +
 	"\x05names\x18\x03 \x03(\tR\x05namesJ\x04\b\x02\x10\x032\xf7\x02\n" +

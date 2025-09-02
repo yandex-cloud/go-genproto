@@ -14,12 +14,16 @@ func (m *ClickHouseAuth) SetUserPassword(v *UserPasswordAuth) {
 	}
 }
 
+func (m *ClickHouseCluster) SetTlsParams(v *TLSParams) {
+	m.TlsParams = v
+}
+
 func (m *ClickHouseCluster) SetHosts(v []*ClickHouseCluster_Host) {
 	m.Hosts = v
 }
 
-func (m *ClickHouseCluster) SetTlsParams(v *TLSParams) {
-	m.TlsParams = v
+func (m *ClickHouseCluster) SetShardGroups(v []*ClickHouseCluster_ShardGroup) {
+	m.ShardGroups = v
 }
 
 func (m *ClickHouseCluster_Host) SetHost(v string) {
@@ -40,6 +44,14 @@ func (m *ClickHouseCluster_Host) SetShardName(v string) {
 
 func (m *ClickHouseCluster_Host) SetHealth(v ClickHouseCluster_Host_Health) {
 	m.Health = v
+}
+
+func (m *ClickHouseCluster_ShardGroup) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ClickHouseCluster_ShardGroup) SetShardNames(v []string) {
+	m.ShardNames = v
 }
 
 func (m *ClickHouseConnection) SetCluster(v *ClickHouseCluster) {

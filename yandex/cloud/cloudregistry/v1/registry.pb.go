@@ -93,6 +93,8 @@ const (
 	Registry_DEBIAN Registry_Kind = 5
 	// Registry kind is pypi.
 	Registry_PYPI Registry_Kind = 6
+	// Regisrty kind is binary.
+	Registry_BINARY Registry_Kind = 7
 )
 
 // Enum value maps for Registry_Kind.
@@ -105,6 +107,7 @@ var (
 		4: "NUGET",
 		5: "DEBIAN",
 		6: "PYPI",
+		7: "BINARY",
 	}
 	Registry_Kind_value = map[string]int32{
 		"KIND_UNSPECIFIED": 0,
@@ -114,6 +117,7 @@ var (
 		"NUGET":            4,
 		"DEBIAN":           5,
 		"PYPI":             6,
+		"BINARY":           7,
 	}
 )
 
@@ -337,7 +341,7 @@ var File_yandex_cloud_cloudregistry_v1_registry_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cloudregistry/v1/registry.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbc\a\n" +
+	",yandex/cloud/cloudregistry/v1/registry.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\a\n" +
 	"\bRegistry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
@@ -366,7 +370,7 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03\"]\n" +
+	"\bDELETING\x10\x03\"i\n" +
 	"\x04Kind\x12\x14\n" +
 	"\x10KIND_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05MAVEN\x10\x01\x12\a\n" +
@@ -376,7 +380,9 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\x05NUGET\x10\x04\x12\n" +
 	"\n" +
 	"\x06DEBIAN\x10\x05\x12\b\n" +
-	"\x04PYPI\x10\x06\"@\n" +
+	"\x04PYPI\x10\x06\x12\n" +
+	"\n" +
+	"\x06BINARY\x10\a\"@\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05LOCAL\x10\x01\x12\n" +

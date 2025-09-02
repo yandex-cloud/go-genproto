@@ -29,7 +29,7 @@ const (
 	CodeType_CODE_TYPE_UNSPECIFIED CodeType = 0
 	// All good.
 	CodeType_WORKING CodeType = 1
-	// For example, if speech is sent not in real time or context is unknown and we've made fallback.
+	// For example, if speech is sent not in real-time or context is unknown and we've made fallback.
 	CodeType_WARNING CodeType = 2
 	// After session was closed.
 	CodeType_CLOSED CodeType = 3
@@ -78,14 +78,14 @@ func (CodeType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{0}
 }
 
-// Normalization
+// Base-level normalization.
 type TextNormalizationOptions_TextNormalization int32
 
 const (
 	TextNormalizationOptions_TEXT_NORMALIZATION_UNSPECIFIED TextNormalizationOptions_TextNormalization = 0
-	// Enable normalization
+	// Enable converting numbers, dates and time from text to numeric format.
 	TextNormalizationOptions_TEXT_NORMALIZATION_ENABLED TextNormalizationOptions_TextNormalization = 1
-	// Disable normalization
+	// Disable all normalization. Default value.
 	TextNormalizationOptions_TEXT_NORMALIZATION_DISABLED TextNormalizationOptions_TextNormalization = 2
 )
 
@@ -181,8 +181,10 @@ type DefaultEouClassifier_EouSensitivity int32
 
 const (
 	DefaultEouClassifier_EOU_SENSITIVITY_UNSPECIFIED DefaultEouClassifier_EouSensitivity = 0
-	DefaultEouClassifier_DEFAULT                     DefaultEouClassifier_EouSensitivity = 1
-	DefaultEouClassifier_HIGH                        DefaultEouClassifier_EouSensitivity = 2
+	// Default and more conservative EOU detector.
+	DefaultEouClassifier_DEFAULT DefaultEouClassifier_EouSensitivity = 1
+	// A high-sensitive and fast EOU detector, which may produce more false positives.
+	DefaultEouClassifier_HIGH DefaultEouClassifier_EouSensitivity = 2
 )
 
 // Enum value maps for DefaultEouClassifier_EouSensitivity.
@@ -232,11 +234,11 @@ type RecognitionClassifier_TriggerType int32
 const (
 	// Deprecated: Marked as deprecated in yandex/cloud/ai/stt/v3/stt.proto.
 	RecognitionClassifier_TRIGGER_TYPE_UNSPECIFIED RecognitionClassifier_TriggerType = 0
-	// Apply classifier to utterance responses
+	// Apply classifier to utterance responses.
 	RecognitionClassifier_ON_UTTERANCE RecognitionClassifier_TriggerType = 1
-	// Apply classifier to final responses
+	// Apply classifier to final responses.
 	RecognitionClassifier_ON_FINAL RecognitionClassifier_TriggerType = 2
-	// Apply classifier to partial responses
+	// Apply classifier to partial responses.
 	RecognitionClassifier_ON_PARTIAL RecognitionClassifier_TriggerType = 3
 )
 
@@ -389,9 +391,9 @@ type LanguageRestrictionOptions_LanguageRestrictionType int32
 
 const (
 	LanguageRestrictionOptions_LANGUAGE_RESTRICTION_TYPE_UNSPECIFIED LanguageRestrictionOptions_LanguageRestrictionType = 0
-	// The allowing list. The incoming audio can contain only the listed languages.
+	// The list of most possible languages in the incoming audio.
 	LanguageRestrictionOptions_WHITELIST LanguageRestrictionOptions_LanguageRestrictionType = 1
-	// The forbidding list. The incoming audio cannot contain the listed languages.
+	// The list of languages that are likely not to be included in the incoming audio.
 	LanguageRestrictionOptions_BLACKLIST LanguageRestrictionOptions_LanguageRestrictionType = 2
 )
 
@@ -440,9 +442,9 @@ type RecognitionModelOptions_AudioProcessingType int32
 
 const (
 	RecognitionModelOptions_AUDIO_PROCESSING_TYPE_UNSPECIFIED RecognitionModelOptions_AudioProcessingType = 0
-	// Process audio in mode optimized for real-time recognition, i.e. send partials and final responses as soon as possible
+	// Process audio in mode optimized for real-time recognition, i.e. send partials and final responses as soon as possible.
 	RecognitionModelOptions_REAL_TIME RecognitionModelOptions_AudioProcessingType = 1
-	// Process audio after all data was received
+	// Process audio after all data was received.
 	RecognitionModelOptions_FULL_DATA RecognitionModelOptions_AudioProcessingType = 2
 )
 
@@ -491,9 +493,9 @@ type SpeakerLabelingOptions_SpeakerLabeling int32
 
 const (
 	SpeakerLabelingOptions_SPEAKER_LABELING_UNSPECIFIED SpeakerLabelingOptions_SpeakerLabeling = 0
-	// Enable speaker labeling
+	// Enable speaker labeling.
 	SpeakerLabelingOptions_SPEAKER_LABELING_ENABLED SpeakerLabelingOptions_SpeakerLabeling = 1
-	// Disable speaker labeling
+	// Disable speaker labeling. Default value.
 	SpeakerLabelingOptions_SPEAKER_LABELING_DISABLED SpeakerLabelingOptions_SpeakerLabeling = 2
 )
 
@@ -543,11 +545,11 @@ type RecognitionClassifierUpdate_WindowType int32
 const (
 	// Deprecated: Marked as deprecated in yandex/cloud/ai/stt/v3/stt.proto.
 	RecognitionClassifierUpdate_WINDOW_TYPE_UNSPECIFIED RecognitionClassifierUpdate_WindowType = 0
-	// The result of applying the classifier to the last utterance response
+	// The result of applying the classifier to the last utterance response.
 	RecognitionClassifierUpdate_LAST_UTTERANCE RecognitionClassifierUpdate_WindowType = 1
-	// The result of applying the classifier to the last final response
+	// The result of applying the classifier to the last final response.
 	RecognitionClassifierUpdate_LAST_FINAL RecognitionClassifierUpdate_WindowType = 2
-	// The result of applying the classifier to the last partial response
+	// The result of applying the classifier to the last partial response.
 	RecognitionClassifierUpdate_LAST_PARTIAL RecognitionClassifierUpdate_WindowType = 3
 )
 
@@ -646,7 +648,8 @@ func (SpeakerAnalysis_WindowType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{38, 0}
 }
 
-// Options
+// Options for post-processing text results. The normalization levels depend on the settings and the language.
+// For detailed information, see [documentation](/docs/speechkit/stt/normalization).
 type TextNormalizationOptions struct {
 	state             protoimpl.MessageState                     `protogen:"open.v1"`
 	TextNormalization TextNormalizationOptions_TextNormalization `protobuf:"varint,1,opt,name=text_normalization,json=textNormalization,proto3,enum=speechkit.stt.v3.TextNormalizationOptions_TextNormalization" json:"text_normalization,omitempty"`
@@ -720,9 +723,11 @@ func (x *TextNormalizationOptions) GetPhoneFormattingMode() TextNormalizationOpt
 
 type DefaultEouClassifier struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// EOU sensitivity. Currently two levels, faster with more error and more conservative (our default).
+	// EOU sensitivity.
 	Type DefaultEouClassifier_EouSensitivity `protobuf:"varint,1,opt,name=type,proto3,enum=speechkit.stt.v3.DefaultEouClassifier_EouSensitivity" json:"type,omitempty"`
-	// Hint for max pause between words. Our EOU detector could use this information to distinguish between end of utterance and slow speech (like one <long pause> two <long pause> three, etc).
+	// Hint for max pause between words. SpeechKit EOU detector could use this information to adjust the speed of the EOU detection.
+	// For example, a long pause between words will help distinguish between the end of utterance from slow speech like `One <long pause> two <long pause> three`.
+	// A short pause can be helpful if the speaker is speaking quickly and does not emphasize pauses between sentences.
 	MaxPauseBetweenWordsHintMs int64 `protobuf:"varint,2,opt,name=max_pause_between_words_hint_ms,json=maxPauseBetweenWordsHintMs,proto3" json:"max_pause_between_words_hint_ms,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
@@ -772,7 +777,7 @@ func (x *DefaultEouClassifier) GetMaxPauseBetweenWordsHintMs() int64 {
 	return 0
 }
 
-// Use EOU provided by user
+// Use EOU provided by user.
 type ExternalEouClassifier struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -811,8 +816,6 @@ func (*ExternalEouClassifier) Descriptor() ([]byte, []int) {
 
 type EouClassifierOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Type of EOU classifier.
-	//
 	// Types that are valid to be assigned to Classifier:
 	//
 	//	*EouClassifierOptions_DefaultClassifier
@@ -882,12 +885,12 @@ type isEouClassifierOptions_Classifier interface {
 }
 
 type EouClassifierOptions_DefaultClassifier struct {
-	// EOU classifier provided by SpeechKit. Default.
+	// Default EOU classifier provided by SpeechKit.
 	DefaultClassifier *DefaultEouClassifier `protobuf:"bytes,1,opt,name=default_classifier,json=defaultClassifier,proto3,oneof"`
 }
 
 type EouClassifierOptions_ExternalClassifier struct {
-	// EOU is enforced by external messages from user.
+	// EOU classifier enforced by external messages from user.
 	ExternalClassifier *ExternalEouClassifier `protobuf:"bytes,2,opt,name=external_classifier,json=externalClassifier,proto3,oneof"`
 }
 
@@ -899,7 +902,7 @@ type RecognitionClassifier struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Classifier name
 	Classifier string `protobuf:"bytes,1,opt,name=classifier,proto3" json:"classifier,omitempty"`
-	// Describes the types of responses to which the classification results will come
+	// Describes the types of responses to which the classification results will come. Classification responses will follow the responses of the specified types.
 	Triggers      []RecognitionClassifier_TriggerType `protobuf:"varint,2,rep,packed,name=triggers,proto3,enum=speechkit.stt.v3.RecognitionClassifier_TriggerType" json:"triggers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -951,7 +954,7 @@ func (x *RecognitionClassifier) GetTriggers() []RecognitionClassifier_TriggerTyp
 
 type RecognitionClassifierOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of classifiers to use
+	// List of classifiers to use. For detailed information and usage example, see [documentation](/docs/speechkit/stt/analysis).
 	Classifiers   []*RecognitionClassifier `protobuf:"bytes,1,rep,name=classifiers,proto3" json:"classifiers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1060,9 +1063,9 @@ func (x *SpeechAnalysisOptions) GetDescriptiveStatisticsQuantiles() []float64 {
 // RAW Audio format spec (no container to infer type). Used in AudioFormat options.
 type RawAudio struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Type of audio encoding
+	// Type of audio encoding.
 	AudioEncoding RawAudio_AudioEncoding `protobuf:"varint,1,opt,name=audio_encoding,json=audioEncoding,proto3,enum=speechkit.stt.v3.RawAudio_AudioEncoding" json:"audio_encoding,omitempty"`
-	// PCM sample rate
+	// PCM sample rate.
 	SampleRateHertz int64 `protobuf:"varint,2,opt,name=sample_rate_hertz,json=sampleRateHertz,proto3" json:"sample_rate_hertz,omitempty"`
 	// PCM channel count. Currently only single channel audio is supported in real-time recognition.
 	AudioChannelCount int64 `protobuf:"varint,3,opt,name=audio_channel_count,json=audioChannelCount,proto3" json:"audio_channel_count,omitempty"`
@@ -1239,7 +1242,7 @@ type isAudioFormatOptions_AudioFormat interface {
 }
 
 type AudioFormatOptions_RawAudio struct {
-	// Audio without container.
+	// RAW audio without container.
 	RawAudio *RawAudio `protobuf:"bytes,1,opt,name=raw_audio,json=rawAudio,proto3,oneof"`
 }
 
@@ -1252,12 +1255,14 @@ func (*AudioFormatOptions_RawAudio) isAudioFormatOptions_AudioFormat() {}
 
 func (*AudioFormatOptions_ContainerAudio) isAudioFormatOptions_AudioFormat() {}
 
-// Type of restriction for the list of languages expected in the incoming speech stream.
+// Type of restriction for the list of languages expected in the incoming audio.
 type LanguageRestrictionOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Language restriction type
+	// Language restriction type.
+	// All of these restrictions are used by the model as guidelines, not as strict rules.
+	// The language is recognized for each sentence. If a sentence has phrases in different languages, all of them will be transcribed in the most probable language.
 	RestrictionType LanguageRestrictionOptions_LanguageRestrictionType `protobuf:"varint,1,opt,name=restriction_type,json=restrictionType,proto3,enum=speechkit.stt.v3.LanguageRestrictionOptions_LanguageRestrictionType" json:"restriction_type,omitempty"`
-	// The list of language codes to restrict recognition in the case of an auto model
+	// The list of [language codes](/docs/speechkit/stt/models) to restrict recognition in the case of an auto model.
 	LanguageCode  []string `protobuf:"bytes,2,rep,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1436,9 +1441,9 @@ type isSummarizationProperty_ResponseFormat interface {
 }
 
 type SummarizationProperty_JsonObject struct {
-	// When set to true, the model will respond with a valid JSON object.
-	// Be sure to explicitly ask the model for JSON.
-	// Otherwise, it may generate excessive whitespace and run indefinitely until it reaches the token limit.
+	// When set to true, the model will return a valid JSON object.
+	// Be sure to ask the model explicitly for JSON.
+	// Otherwise, it may produce excessive whitespace and run indefinitely until it reaches the token limit.
 	JsonObject bool `protobuf:"varint,2,opt,name=json_object,json=jsonObject,proto3,oneof"`
 }
 
@@ -1554,7 +1559,9 @@ func (x *SummarizationPropertyResult) GetResponse() string {
 
 type RecognitionModelOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Sets the recognition model for the cloud version of SpeechKit. Possible values: 'general', 'general:rc', 'general:deprecated'.
+	// Sets the recognition model for the cloud version of SpeechKit.
+	// For `Recognizer.RecognizeStreaming`, possible values are `general`, `general:rc`, `general:deprecated`.
+	// For `AsyncRecognizer.RecognizeFile`, possible values are `general`, `general:rc`, `general:deprecated`, `deferred-general`, `deferred-general:rc`, and `deferred-general:deprecated`.
 	// The model is ignored for SpeechKit Hybrid.
 	Model string `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
 	// Specified input audio.
@@ -1563,7 +1570,8 @@ type RecognitionModelOptions struct {
 	TextNormalization *TextNormalizationOptions `protobuf:"bytes,3,opt,name=text_normalization,json=textNormalization,proto3" json:"text_normalization,omitempty"`
 	// Possible languages in audio.
 	LanguageRestriction *LanguageRestrictionOptions `protobuf:"bytes,4,opt,name=language_restriction,json=languageRestriction,proto3" json:"language_restriction,omitempty"`
-	// How to deal with audio data (in real time, after all data is received, etc). Default is REAL_TIME.
+	// For `Recognizer.RecognizeStreaming`, defines the audio data processing mode. Default is `REAL_TIME`.
+	// For `AsyncRecognizer.RecognizeFile`, this field is ignored.
 	AudioProcessingType RecognitionModelOptions_AudioProcessingType `protobuf:"varint,5,opt,name=audio_processing_type,json=audioProcessingType,proto3,enum=speechkit.stt.v3.RecognitionModelOptions_AudioProcessingType" json:"audio_processing_type,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1636,7 +1644,7 @@ func (x *RecognitionModelOptions) GetAudioProcessingType() RecognitionModelOptio
 
 type SpeakerLabelingOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the execution of speaker labeling. Default is SPEAKER_LABELING_DISABLED.
+	// Specifies the execution of speaker labeling.
 	SpeakerLabeling SpeakerLabelingOptions_SpeakerLabeling `protobuf:"varint,1,opt,name=speaker_labeling,json=speakerLabeling,proto3,enum=speechkit.stt.v3.SpeakerLabelingOptions_SpeakerLabeling" json:"speaker_labeling,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1683,15 +1691,15 @@ type StreamingOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration for speech recognition model.
 	RecognitionModel *RecognitionModelOptions `protobuf:"bytes,1,opt,name=recognition_model,json=recognitionModel,proto3" json:"recognition_model,omitempty"`
-	// Configuration for end of utterance detection model.
+	// Configuration for an end of utterance detection model.
 	EouClassifier *EouClassifierOptions `protobuf:"bytes,2,opt,name=eou_classifier,json=eouClassifier,proto3" json:"eou_classifier,omitempty"`
 	// Configuration for classifiers over speech recognition.
 	RecognitionClassifier *RecognitionClassifierOptions `protobuf:"bytes,3,opt,name=recognition_classifier,json=recognitionClassifier,proto3" json:"recognition_classifier,omitempty"`
 	// Configuration for speech analysis over speech recognition.
 	SpeechAnalysis *SpeechAnalysisOptions `protobuf:"bytes,4,opt,name=speech_analysis,json=speechAnalysis,proto3" json:"speech_analysis,omitempty"`
-	// Configuration for speaker labeling
+	// Configuration for speaker labeling.
 	SpeakerLabeling *SpeakerLabelingOptions `protobuf:"bytes,5,opt,name=speaker_labeling,json=speakerLabeling,proto3" json:"speaker_labeling,omitempty"`
-	// Summarization options
+	// Summarization options.
 	Summarization *SummarizationOptions `protobuf:"bytes,6,opt,name=summarization,proto3" json:"summarization,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1861,7 +1869,7 @@ func (x *SilenceChunk) GetDurationMs() int64 {
 	return 0
 }
 
-// Force EOU
+// Force EOU.
 type Eou struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1898,10 +1906,8 @@ func (*Eou) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{20}
 }
 
-// Streaming audio request
-// Events are control messages from user.
-// First message should be session options.
-// The next messages are audio data chunks or control messages.
+// Streaming audio request.
+// Events are control messages from user. First message should be session options. The next messages are audio data chunks or control messages.
 type StreamingRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Event:
@@ -2141,7 +2147,7 @@ type RecognizeFileRequest_Content struct {
 }
 
 type RecognizeFileRequest_Uri struct {
-	// S3 data url
+	// S3 data URL
 	Uri string `protobuf:"bytes,2,opt,name=uri,proto3,oneof"`
 }
 
@@ -2468,16 +2474,16 @@ type AudioCursors struct {
 	ReceivedDataMs int64 `protobuf:"varint,1,opt,name=received_data_ms,json=receivedDataMs,proto3" json:"received_data_ms,omitempty"`
 	// Input stream reset data.
 	ResetTimeMs int64 `protobuf:"varint,2,opt,name=reset_time_ms,json=resetTimeMs,proto3" json:"reset_time_ms,omitempty"`
-	// How much audio was processed. This time includes trimming silences as well. This cursor is moved after server received enough data
-	// to update recognition results (includes silence as well).
+	// How much audio was processed. This time includes trimming silences as well.
+	// This cursor is moved after server received enough data to update recognition results (includes silence as well).
 	PartialTimeMs int64 `protobuf:"varint,3,opt,name=partial_time_ms,json=partialTimeMs,proto3" json:"partial_time_ms,omitempty"`
-	// Time of last final. This cursor is moved when server decides that recognition from start of audio until final_time_ms will not change anymore
-	// usually this even is followed by EOU detection (but this could change in future).
+	// Time of last final. This cursor is moved when server decides that recognition from start of audio until `final_time_ms` will not change anymore
+	// usually this event is followed by EOU detection. This behavior could change in future.
 	FinalTimeMs int64 `protobuf:"varint,4,opt,name=final_time_ms,json=finalTimeMs,proto3" json:"final_time_ms,omitempty"`
 	// This is index of last final server send. Incremented after each new final.
 	FinalIndex int64 `protobuf:"varint,5,opt,name=final_index,json=finalIndex,proto3" json:"final_index,omitempty"`
 	// Estimated time of EOU. Cursor is updated after each new EOU is sent.
-	// For external classifier this equals to received_data_ms at the moment EOU event arrives.
+	// For external classifier this equals to [received_data_ms] at the moment EOU event arrives.
 	// For internal classifier this is estimation of time. The time is not exact and has the same guarantees as word timings.
 	EouTimeMs     int64 `protobuf:"varint,6,opt,name=eou_time_ms,json=eouTimeMs,proto3" json:"eou_time_ms,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2635,7 +2641,7 @@ type FinalRefinement_NormalizedText struct {
 
 func (*FinalRefinement_NormalizedText) isFinalRefinement_Type() {}
 
-// Status message
+// Status message.
 type StatusCode struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Code type.
@@ -2747,11 +2753,11 @@ func (x *SessionUuid) GetUserRequestId() string {
 
 type PhraseHighlight struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Text transcription of the highlighted audio segment
+	// Text transcription of the highlighted audio segment.
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
-	// Start time of the highlighted audio segment
+	// Start time of the highlighted audio segment.
 	StartTimeMs int64 `protobuf:"varint,2,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
-	// End time of the highlighted audio segment
+	// End time of the highlighted audio segment.
 	EndTimeMs     int64 `protobuf:"varint,3,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2810,9 +2816,9 @@ func (x *PhraseHighlight) GetEndTimeMs() int64 {
 
 type RecognitionClassifierLabel struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The label of the class predicted by the classifier
+	// The label of the class predicted by the classifier.
 	Label string `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
-	// The prediction confidence
+	// The prediction confidence.
 	Confidence    float64 `protobuf:"fixed64,2,opt,name=confidence,proto3" json:"confidence,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2864,11 +2870,11 @@ func (x *RecognitionClassifierLabel) GetConfidence() float64 {
 
 type RecognitionClassifierResult struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the triggered classifier
+	// Name of the triggered classifier.
 	Classifier string `protobuf:"bytes,1,opt,name=classifier,proto3" json:"classifier,omitempty"`
-	// List of highlights, i.e. parts of phrase that determine the result of the classification
+	// List of highlights, i.e. parts of phrase that determine the result of the classification.
 	Highlights []*PhraseHighlight `protobuf:"bytes,2,rep,name=highlights,proto3" json:"highlights,omitempty"`
-	// Classifier predictions
+	// Classifier predictions.
 	Labels        []*RecognitionClassifierLabel `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2927,13 +2933,13 @@ func (x *RecognitionClassifierResult) GetLabels() []*RecognitionClassifierLabel 
 
 type RecognitionClassifierUpdate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Response window type
+	// Response window type.
 	WindowType RecognitionClassifierUpdate_WindowType `protobuf:"varint,1,opt,name=window_type,json=windowType,proto3,enum=speechkit.stt.v3.RecognitionClassifierUpdate_WindowType" json:"window_type,omitempty"`
-	// Start time of the audio segment used for classification
+	// Start time of the audio segment used for classification.
 	StartTimeMs int64 `protobuf:"varint,2,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
-	// End time of the audio segment used for classification
+	// End time of the audio segment used for classification.
 	EndTimeMs int64 `protobuf:"varint,3,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
-	// Result for dictionary-based classifier
+	// Result for dictionary-based classifier.
 	ClassifierResult *RecognitionClassifierResult `protobuf:"bytes,4,opt,name=classifier_result,json=classifierResult,proto3" json:"classifier_result,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -2999,15 +3005,15 @@ func (x *RecognitionClassifierUpdate) GetClassifierResult() *RecognitionClassifi
 
 type DescriptiveStatistics struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Minimum observed value
+	// Minimum observed value.
 	Min float64 `protobuf:"fixed64,1,opt,name=min,proto3" json:"min,omitempty"`
-	// Maximum observed value
+	// Maximum observed value.
 	Max float64 `protobuf:"fixed64,2,opt,name=max,proto3" json:"max,omitempty"`
-	// Estimated mean of distribution
+	// Estimated mean of distribution.
 	Mean float64 `protobuf:"fixed64,3,opt,name=mean,proto3" json:"mean,omitempty"`
-	// Estimated standard deviation of distribution
+	// Estimated standard deviation of distribution.
 	Std float64 `protobuf:"fixed64,4,opt,name=std,proto3" json:"std,omitempty"`
-	// List of evaluated quantiles
+	// List of evaluated quantiles.
 	Quantiles     []*DescriptiveStatistics_Quantile `protobuf:"bytes,5,rep,name=quantiles,proto3" json:"quantiles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3080,9 +3086,9 @@ func (x *DescriptiveStatistics) GetQuantiles() []*DescriptiveStatistics_Quantile
 
 type AudioSegmentBoundaries struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Audio segment start time
+	// Audio segment start time.
 	StartTimeMs int64 `protobuf:"varint,1,opt,name=start_time_ms,json=startTimeMs,proto3" json:"start_time_ms,omitempty"`
-	// Audio segment end time
+	// Audio segment end time.
 	EndTimeMs     int64 `protobuf:"varint,2,opt,name=end_time_ms,json=endTimeMs,proto3" json:"end_time_ms,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3134,31 +3140,31 @@ func (x *AudioSegmentBoundaries) GetEndTimeMs() int64 {
 
 type SpeakerAnalysis struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Speaker tag
+	// Speaker tag.
 	SpeakerTag string `protobuf:"bytes,1,opt,name=speaker_tag,json=speakerTag,proto3" json:"speaker_tag,omitempty"`
-	// Response window type
+	// Response window type.
 	WindowType SpeakerAnalysis_WindowType `protobuf:"varint,2,opt,name=window_type,json=windowType,proto3,enum=speechkit.stt.v3.SpeakerAnalysis_WindowType" json:"window_type,omitempty"`
-	// Audio segment boundaries
+	// Audio segment boundaries.
 	SpeechBoundaries *AudioSegmentBoundaries `protobuf:"bytes,3,opt,name=speech_boundaries,json=speechBoundaries,proto3" json:"speech_boundaries,omitempty"`
-	// Total speech duration
+	// Total speech duration.
 	TotalSpeechMs int64 `protobuf:"varint,4,opt,name=total_speech_ms,json=totalSpeechMs,proto3" json:"total_speech_ms,omitempty"`
-	// Speech ratio within audio segment
+	// Speech ratio within audio segment.
 	SpeechRatio float64 `protobuf:"fixed64,5,opt,name=speech_ratio,json=speechRatio,proto3" json:"speech_ratio,omitempty"`
-	// Total silence duration
+	// Total duration of silence.
 	TotalSilenceMs int64 `protobuf:"varint,6,opt,name=total_silence_ms,json=totalSilenceMs,proto3" json:"total_silence_ms,omitempty"`
-	// Silence ratio within audio segment
+	// Silence ratio within audio segment.
 	SilenceRatio float64 `protobuf:"fixed64,7,opt,name=silence_ratio,json=silenceRatio,proto3" json:"silence_ratio,omitempty"`
-	// Number of words in recognized speech
+	// Number of words in recognized speech.
 	WordsCount int64 `protobuf:"varint,8,opt,name=words_count,json=wordsCount,proto3" json:"words_count,omitempty"`
-	// Number of letters in recognized speech
+	// Number of letters in recognized speech.
 	LettersCount int64 `protobuf:"varint,9,opt,name=letters_count,json=lettersCount,proto3" json:"letters_count,omitempty"`
-	// Descriptive statistics for words per second distribution
+	// Descriptive statistics for words per second distribution.
 	WordsPerSecond *DescriptiveStatistics `protobuf:"bytes,10,opt,name=words_per_second,json=wordsPerSecond,proto3" json:"words_per_second,omitempty"`
-	// Descriptive statistics for letters per second distribution
+	// Descriptive statistics for letters per second distribution.
 	LettersPerSecond *DescriptiveStatistics `protobuf:"bytes,11,opt,name=letters_per_second,json=lettersPerSecond,proto3" json:"letters_per_second,omitempty"`
-	// Descriptive statistics for words per utterance distribution
+	// Descriptive statistics for words per utterance distribution.
 	WordsPerUtterance *DescriptiveStatistics `protobuf:"bytes,12,opt,name=words_per_utterance,json=wordsPerUtterance,proto3" json:"words_per_utterance,omitempty"`
-	// Descriptive statistics for letters per utterance distribution
+	// Descriptive statistics for letters per utterance distribution.
 	LettersPerUtterance *DescriptiveStatistics `protobuf:"bytes,13,opt,name=letters_per_utterance,json=lettersPerUtterance,proto3" json:"letters_per_utterance,omitempty"`
 	// Number of utterances
 	UtteranceCount int64 `protobuf:"varint,14,opt,name=utterance_count,json=utteranceCount,proto3" json:"utterance_count,omitempty"`
@@ -3305,25 +3311,25 @@ func (x *SpeakerAnalysis) GetUtteranceDurationEstimation() *DescriptiveStatistic
 
 type ConversationAnalysis struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Audio segment boundaries
+	// Audio segment boundaries.
 	ConversationBoundaries *AudioSegmentBoundaries `protobuf:"bytes,1,opt,name=conversation_boundaries,json=conversationBoundaries,proto3" json:"conversation_boundaries,omitempty"`
-	// Total simultaneous silence duration
+	// Total simultaneous silence duration.
 	TotalSimultaneousSilenceDurationMs int64 `protobuf:"varint,2,opt,name=total_simultaneous_silence_duration_ms,json=totalSimultaneousSilenceDurationMs,proto3" json:"total_simultaneous_silence_duration_ms,omitempty"`
-	// Simultaneous silence ratio within audio segment
+	// Simultaneous silence ratio within audio segment.
 	TotalSimultaneousSilenceRatio float64 `protobuf:"fixed64,3,opt,name=total_simultaneous_silence_ratio,json=totalSimultaneousSilenceRatio,proto3" json:"total_simultaneous_silence_ratio,omitempty"`
-	// Descriptive statistics for simultaneous silence duration distribution
+	// Descriptive statistics for simultaneous silence duration distribution.
 	SimultaneousSilenceDurationEstimation *DescriptiveStatistics `protobuf:"bytes,4,opt,name=simultaneous_silence_duration_estimation,json=simultaneousSilenceDurationEstimation,proto3" json:"simultaneous_silence_duration_estimation,omitempty"`
-	// Total simultaneous speech duration
+	// Total simultaneous speech duration.
 	TotalSimultaneousSpeechDurationMs int64 `protobuf:"varint,5,opt,name=total_simultaneous_speech_duration_ms,json=totalSimultaneousSpeechDurationMs,proto3" json:"total_simultaneous_speech_duration_ms,omitempty"`
-	// Simultaneous speech ratio within audio segment
+	// Simultaneous speech ratio within audio segment.
 	TotalSimultaneousSpeechRatio float64 `protobuf:"fixed64,6,opt,name=total_simultaneous_speech_ratio,json=totalSimultaneousSpeechRatio,proto3" json:"total_simultaneous_speech_ratio,omitempty"`
-	// Descriptive statistics for simultaneous speech duration distribution
+	// Descriptive statistics for simultaneous speech duration distribution.
 	SimultaneousSpeechDurationEstimation *DescriptiveStatistics `protobuf:"bytes,7,opt,name=simultaneous_speech_duration_estimation,json=simultaneousSpeechDurationEstimation,proto3" json:"simultaneous_speech_duration_estimation,omitempty"`
-	// Interrupts description for every speaker
+	// Interrupts description for every speaker.
 	SpeakerInterrupts []*ConversationAnalysis_InterruptsEvaluation `protobuf:"bytes,8,rep,name=speaker_interrupts,json=speakerInterrupts,proto3" json:"speaker_interrupts,omitempty"`
-	// Total speech duration, including both simultaneous and separate speech
+	// Total speech duration, including both simultaneous and separate speech.
 	TotalSpeechDurationMs int64 `protobuf:"varint,9,opt,name=total_speech_duration_ms,json=totalSpeechDurationMs,proto3" json:"total_speech_duration_ms,omitempty"`
-	// Total speech ratio within audio segment
+	// Total speech ratio within audio segment.
 	TotalSpeechRatio float64 `protobuf:"fixed64,10,opt,name=total_speech_ratio,json=totalSpeechRatio,proto3" json:"total_speech_ratio,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -3548,16 +3554,14 @@ func (x *Summarization) GetContentUsage() *ContentUsage {
 }
 
 // Responses from server.
-// Each response contains session uuid
-// AudioCursors
-// plus specific event
+// Each response contains session UUID, AudioCursors, and specific event.
 type StreamingResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
+	// Session identifier.
 	SessionUuid *SessionUuid `protobuf:"bytes,1,opt,name=session_uuid,json=sessionUuid,proto3" json:"session_uuid,omitempty"`
 	// Progress bar for stream session recognition: how many data we obtained; final and partial times; etc.
 	AudioCursors *AudioCursors `protobuf:"bytes,2,opt,name=audio_cursors,json=audioCursors,proto3" json:"audio_cursors,omitempty"`
-	// Wall clock on server side. This is time when server wrote results to stream
+	// Wall clock on server side. This is time when server wrote results to stream.
 	ResponseWallTimeMs int64 `protobuf:"varint,3,opt,name=response_wall_time_ms,json=responseWallTimeMs,proto3" json:"response_wall_time_ms,omitempty"`
 	// Types that are valid to be assigned to Event:
 	//
@@ -3728,13 +3732,13 @@ type isStreamingResponse_Event interface {
 }
 
 type StreamingResponse_Partial struct {
-	// Partial results, server will send them regularly after enough audio data was received from user. This are current text estimation
-	// from final_time_ms to partial_time_ms. Could change after new data will arrive.
+	// Partial results, server will send them regularly after enough audio data was received from user.
+	// This is the current text estimation from `final_time_ms` to `partial_time_ms`. Could change after new data will arrive.
 	Partial *AlternativeUpdate `protobuf:"bytes,4,opt,name=partial,proto3,oneof"`
 }
 
 type StreamingResponse_Final struct {
-	// Final results, the recognition is now fixed until final_time_ms. For now, final is sent only if the EOU event was triggered. This could be change in future releases.
+	// Final results, the recognition is now fixed until `final_time_ms`. For now, final is sent only if the EOU event was triggered. This behavior could be changed in future releases.
 	Final *AlternativeUpdate `protobuf:"bytes,5,opt,name=final,proto3,oneof"`
 }
 
@@ -3756,22 +3760,22 @@ type StreamingResponse_StatusCode struct {
 }
 
 type StreamingResponse_ClassifierUpdate struct {
-	// Result of the triggered classifier
+	// Result of the triggered classifier.
 	ClassifierUpdate *RecognitionClassifierUpdate `protobuf:"bytes,10,opt,name=classifier_update,json=classifierUpdate,proto3,oneof"`
 }
 
 type StreamingResponse_SpeakerAnalysis struct {
-	// Speech statistics for every speaker
+	// Speech statistics for every speaker.
 	SpeakerAnalysis *SpeakerAnalysis `protobuf:"bytes,11,opt,name=speaker_analysis,json=speakerAnalysis,proto3,oneof"`
 }
 
 type StreamingResponse_ConversationAnalysis struct {
-	// Conversation statistics
+	// Conversation statistics.
 	ConversationAnalysis *ConversationAnalysis `protobuf:"bytes,12,opt,name=conversation_analysis,json=conversationAnalysis,proto3,oneof"`
 }
 
 type StreamingResponse_Summarization struct {
-	// Summary
+	// Summary.
 	Summarization *Summarization `protobuf:"bytes,13,opt,name=summarization,proto3,oneof"`
 }
 
@@ -3883,9 +3887,9 @@ func (x *StreamingResponseList) GetStreamingResponses() []*StreamingResponse {
 
 type DescriptiveStatistics_Quantile struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Quantile level in range (0, 1)
+	// Quantile level in range (0, 1).
 	Level float64 `protobuf:"fixed64,1,opt,name=level,proto3" json:"level,omitempty"`
-	// Quantile value
+	// Quantile value.
 	Value         float64 `protobuf:"fixed64,2,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3937,13 +3941,13 @@ func (x *DescriptiveStatistics_Quantile) GetValue() float64 {
 
 type ConversationAnalysis_InterruptsEvaluation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Speaker tag
+	// Speaker tag.
 	SpeakerTag string `protobuf:"bytes,1,opt,name=speaker_tag,json=speakerTag,proto3" json:"speaker_tag,omitempty"`
-	// Number of interrupts made by the speaker
+	// Number of interrupts made by the speaker.
 	InterruptsCount int64 `protobuf:"varint,2,opt,name=interrupts_count,json=interruptsCount,proto3" json:"interrupts_count,omitempty"`
-	// Total duration of all interrupts
+	// Total duration of all interrupts.
 	InterruptsDurationMs int64 `protobuf:"varint,3,opt,name=interrupts_duration_ms,json=interruptsDurationMs,proto3" json:"interrupts_duration_ms,omitempty"`
-	// Boundaries for every interrupt
+	// Boundaries for every interrupt.
 	Interrupts    []*AudioSegmentBoundaries `protobuf:"bytes,4,rep,name=interrupts,proto3" json:"interrupts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

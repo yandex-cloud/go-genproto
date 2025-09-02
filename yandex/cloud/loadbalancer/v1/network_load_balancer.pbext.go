@@ -114,6 +114,10 @@ func (m *TargetState) SetStatus(v TargetState_Status) {
 	m.Status = v
 }
 
+func (m *TargetState) SetZoneShifted(v bool) {
+	m.ZoneShifted = v
+}
+
 func (m *DisableZoneStatus) SetZoneId(v string) {
 	m.ZoneId = v
 }
