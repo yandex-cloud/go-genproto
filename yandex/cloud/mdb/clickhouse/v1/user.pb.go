@@ -2167,6 +2167,13 @@ type UserSettings struct {
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#s3_use_adaptive_timeouts).
 	S3UseAdaptiveTimeouts *wrapperspb.BoolValue `protobuf:"bytes,170,opt,name=s3_use_adaptive_timeouts,json=s3UseAdaptiveTimeouts,proto3" json:"s3_use_adaptive_timeouts,omitempty"`
+	// If enabled, automatically applies **FINAL** modifier to all tables in a query, to tables where **FINAL** is applicable,
+	// including joined tables and tables in sub-queries, and distributed tables.
+	//
+	// Default value: **false**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#final).
+	Final *wrapperspb.BoolValue `protobuf:"bytes,171,opt,name=final,proto3" json:"final,omitempty"`
 	// The setting is deprecated and has no effect.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
@@ -3365,6 +3372,13 @@ func (x *UserSettings) GetS3UseAdaptiveTimeouts() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *UserSettings) GetFinal() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.Final
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
 func (x *UserSettings) GetCompile() *wrapperspb.BoolValue {
 	if x != nil {
@@ -3642,7 +3656,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"\x12connection_manager\x18\x06 \x01(\v21.yandex.cloud.mdb.clickhouse.v1.ConnectionManagerR\x11connectionManager\"7\n" +
 	"\n" +
 	"Permission\x12#\n" +
-	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseNameJ\x04\b\x02\x10\x03\"\x80\x98\x01\n" +
+	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseNameJ\x04\b\x02\x10\x03\"\xb3\x98\x01\n" +
 	"\fUserSettings\x12@\n" +
 	"\breadonly\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-2R\breadonly\x127\n" +
 	"\tallow_ddl\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\ballowDdl\x12^\n" +
@@ -3810,7 +3824,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"+do_not_merge_across_partitions_select_final\x18\x93\x01 \x01(\v2\x1a.google.protobuf.BoolValueR%doNotMergeAcrossPartitionsSelectFinal\x12\x87\x01\n" +
 	"3ignore_materialized_views_with_dropped_target_table\x18\xa6\x01 \x01(\v2\x1a.google.protobuf.BoolValueR-ignoreMaterializedViewsWithDroppedTargetTable\x12D\n" +
 	"\x0fenable_analyzer\x18\xa7\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x0eenableAnalyzer\x12T\n" +
-	"\x18s3_use_adaptive_timeouts\x18\xaa\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x15s3UseAdaptiveTimeouts\x128\n" +
+	"\x18s3_use_adaptive_timeouts\x18\xaa\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x15s3UseAdaptiveTimeouts\x121\n" +
+	"\x05final\x18\xab\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x05final\x128\n" +
 	"\acompile\x18, \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\acompile\x12P\n" +
 	"\x14min_count_to_compile\x18- \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R\x11minCountToCompile\x12Q\n" +
 	"\x14async_insert_threads\x18v \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R\x12asyncInsertThreads\x12\\\n" +
@@ -4132,25 +4147,26 @@ var file_yandex_cloud_mdb_clickhouse_v1_user_proto_depIdxs = []int32{
 	22,  // 162: yandex.cloud.mdb.clickhouse.v1.UserSettings.ignore_materialized_views_with_dropped_target_table:type_name -> google.protobuf.BoolValue
 	22,  // 163: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_analyzer:type_name -> google.protobuf.BoolValue
 	22,  // 164: yandex.cloud.mdb.clickhouse.v1.UserSettings.s3_use_adaptive_timeouts:type_name -> google.protobuf.BoolValue
-	22,  // 165: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile:type_name -> google.protobuf.BoolValue
-	21,  // 166: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile:type_name -> google.protobuf.Int64Value
-	21,  // 167: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_threads:type_name -> google.protobuf.Int64Value
-	21,  // 168: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_stale_timeout:type_name -> google.protobuf.Int64Value
-	21,  // 169: yandex.cloud.mdb.clickhouse.v1.UserQuota.interval_duration:type_name -> google.protobuf.Int64Value
-	21,  // 170: yandex.cloud.mdb.clickhouse.v1.UserQuota.queries:type_name -> google.protobuf.Int64Value
-	21,  // 171: yandex.cloud.mdb.clickhouse.v1.UserQuota.errors:type_name -> google.protobuf.Int64Value
-	21,  // 172: yandex.cloud.mdb.clickhouse.v1.UserQuota.result_rows:type_name -> google.protobuf.Int64Value
-	21,  // 173: yandex.cloud.mdb.clickhouse.v1.UserQuota.read_rows:type_name -> google.protobuf.Int64Value
-	21,  // 174: yandex.cloud.mdb.clickhouse.v1.UserQuota.execution_time:type_name -> google.protobuf.Int64Value
-	22,  // 175: yandex.cloud.mdb.clickhouse.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
-	16,  // 176: yandex.cloud.mdb.clickhouse.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
-	17,  // 177: yandex.cloud.mdb.clickhouse.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings
-	18,  // 178: yandex.cloud.mdb.clickhouse.v1.UserSpec.quotas:type_name -> yandex.cloud.mdb.clickhouse.v1.UserQuota
-	179, // [179:179] is the sub-list for method output_type
-	179, // [179:179] is the sub-list for method input_type
-	179, // [179:179] is the sub-list for extension type_name
-	179, // [179:179] is the sub-list for extension extendee
-	0,   // [0:179] is the sub-list for field type_name
+	22,  // 165: yandex.cloud.mdb.clickhouse.v1.UserSettings.final:type_name -> google.protobuf.BoolValue
+	22,  // 166: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile:type_name -> google.protobuf.BoolValue
+	21,  // 167: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile:type_name -> google.protobuf.Int64Value
+	21,  // 168: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_threads:type_name -> google.protobuf.Int64Value
+	21,  // 169: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_stale_timeout:type_name -> google.protobuf.Int64Value
+	21,  // 170: yandex.cloud.mdb.clickhouse.v1.UserQuota.interval_duration:type_name -> google.protobuf.Int64Value
+	21,  // 171: yandex.cloud.mdb.clickhouse.v1.UserQuota.queries:type_name -> google.protobuf.Int64Value
+	21,  // 172: yandex.cloud.mdb.clickhouse.v1.UserQuota.errors:type_name -> google.protobuf.Int64Value
+	21,  // 173: yandex.cloud.mdb.clickhouse.v1.UserQuota.result_rows:type_name -> google.protobuf.Int64Value
+	21,  // 174: yandex.cloud.mdb.clickhouse.v1.UserQuota.read_rows:type_name -> google.protobuf.Int64Value
+	21,  // 175: yandex.cloud.mdb.clickhouse.v1.UserQuota.execution_time:type_name -> google.protobuf.Int64Value
+	22,  // 176: yandex.cloud.mdb.clickhouse.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
+	16,  // 177: yandex.cloud.mdb.clickhouse.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
+	17,  // 178: yandex.cloud.mdb.clickhouse.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings
+	18,  // 179: yandex.cloud.mdb.clickhouse.v1.UserSpec.quotas:type_name -> yandex.cloud.mdb.clickhouse.v1.UserQuota
+	180, // [180:180] is the sub-list for method output_type
+	180, // [180:180] is the sub-list for method input_type
+	180, // [180:180] is the sub-list for extension type_name
+	180, // [180:180] is the sub-list for extension extendee
+	0,   // [0:180] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_user_proto_init() }

@@ -690,6 +690,10 @@ func (m *UserSettings) SetS3UseAdaptiveTimeouts(v *wrapperspb.BoolValue) {
 	m.S3UseAdaptiveTimeouts = v
 }
 
+func (m *UserSettings) SetFinal(v *wrapperspb.BoolValue) {
+	m.Final = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

@@ -225,8 +225,10 @@ type GenSearchRequest struct {
 	SearchType SearchQuery_SearchType `protobuf:"varint,9,opt,name=search_type,json=searchType,proto3,enum=yandex.cloud.searchapi.v2.SearchQuery_SearchType" json:"search_type,omitempty"`
 	// Get partial results
 	GetPartialResults bool `protobuf:"varint,10,opt,name=get_partial_results,json=getPartialResults,proto3" json:"get_partial_results,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Search flags
+	Metadata      *SearchMetadata `protobuf:"bytes,11,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GenSearchRequest) Reset() {
@@ -340,6 +342,13 @@ func (x *GenSearchRequest) GetGetPartialResults() bool {
 		return x.GetPartialResults
 	}
 	return false
+}
+
+func (x *GenSearchRequest) GetMetadata() *SearchMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
 }
 
 type isGenSearchRequest_SiteOptions interface {
@@ -823,7 +832,7 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"x\n" +
 	"\x10GenSearchMessage\x12)\n" +
 	"\acontent\x18\x01 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=16384R\acontent\x129\n" +
-	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\x96\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xdd\n" +
 	"\n" +
 	"\x10GenSearchRequest\x12R\n" +
 	"\bmessages\x18\x01 \x03(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageB\t\x82\xc81\x051-100R\bmessages\x12)\n" +
@@ -837,7 +846,8 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\vsearch_type\x18\t \x01(\x0e21.yandex.cloud.searchapi.v2.SearchQuery.SearchTypeR\n" +
 	"searchType\x12.\n" +
 	"\x13get_partial_results\x18\n" +
-	" \x01(\bR\x11getPartialResults\x1a5\n" +
+	" \x01(\bR\x11getPartialResults\x12E\n" +
+	"\bmetadata\x18\v \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\x1a5\n" +
 	"\n" +
 	"SiteOption\x12'\n" +
 	"\x04site\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04site\x1a2\n" +
@@ -915,6 +925,7 @@ var file_yandex_cloud_searchapi_v2_gen_search_service_proto_goTypes = []any{
 	(*GenSearchResponse_Source)(nil),             // 9: yandex.cloud.searchapi.v2.GenSearchResponse.Source
 	(*GenSearchResponse_SearchQuery)(nil),        // 10: yandex.cloud.searchapi.v2.GenSearchResponse.SearchQuery
 	(SearchQuery_SearchType)(0),                  // 11: yandex.cloud.searchapi.v2.SearchQuery.SearchType
+	(*SearchMetadata)(nil),                       // 12: yandex.cloud.searchapi.v2.SearchMetadata
 }
 var file_yandex_cloud_searchapi_v2_gen_search_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.searchapi.v2.GenSearchMessage.role:type_name -> yandex.cloud.searchapi.v2.Role
@@ -924,17 +935,18 @@ var file_yandex_cloud_searchapi_v2_gen_search_service_proto_depIdxs = []int32{
 	6,  // 4: yandex.cloud.searchapi.v2.GenSearchRequest.url:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.UrlOption
 	8,  // 5: yandex.cloud.searchapi.v2.GenSearchRequest.search_filters:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter
 	11, // 6: yandex.cloud.searchapi.v2.GenSearchRequest.search_type:type_name -> yandex.cloud.searchapi.v2.SearchQuery.SearchType
-	2,  // 7: yandex.cloud.searchapi.v2.GenSearchResponse.message:type_name -> yandex.cloud.searchapi.v2.GenSearchMessage
-	9,  // 8: yandex.cloud.searchapi.v2.GenSearchResponse.sources:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.Source
-	10, // 9: yandex.cloud.searchapi.v2.GenSearchResponse.search_queries:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.SearchQuery
-	1,  // 10: yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.format:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.DocFormat
-	3,  // 11: yandex.cloud.searchapi.v2.GenSearchService.Search:input_type -> yandex.cloud.searchapi.v2.GenSearchRequest
-	4,  // 12: yandex.cloud.searchapi.v2.GenSearchService.Search:output_type -> yandex.cloud.searchapi.v2.GenSearchResponse
-	12, // [12:13] is the sub-list for method output_type
-	11, // [11:12] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	12, // 7: yandex.cloud.searchapi.v2.GenSearchRequest.metadata:type_name -> yandex.cloud.searchapi.v2.SearchMetadata
+	2,  // 8: yandex.cloud.searchapi.v2.GenSearchResponse.message:type_name -> yandex.cloud.searchapi.v2.GenSearchMessage
+	9,  // 9: yandex.cloud.searchapi.v2.GenSearchResponse.sources:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.Source
+	10, // 10: yandex.cloud.searchapi.v2.GenSearchResponse.search_queries:type_name -> yandex.cloud.searchapi.v2.GenSearchResponse.SearchQuery
+	1,  // 11: yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.format:type_name -> yandex.cloud.searchapi.v2.GenSearchRequest.SearchFilter.DocFormat
+	3,  // 12: yandex.cloud.searchapi.v2.GenSearchService.Search:input_type -> yandex.cloud.searchapi.v2.GenSearchRequest
+	4,  // 13: yandex.cloud.searchapi.v2.GenSearchService.Search:output_type -> yandex.cloud.searchapi.v2.GenSearchResponse
+	13, // [13:14] is the sub-list for method output_type
+	12, // [12:13] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_gen_search_service_proto_init() }

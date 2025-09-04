@@ -514,11 +514,12 @@ type UpdateClusterRequest struct {
 	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Service account to be used by the worker nodes of the Kubernetes cluster to access Container Registry
 	// or to push node logs and metrics.
-	NodeServiceAccountId string              `protobuf:"bytes,8,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
-	NetworkPolicy        *NetworkPolicy      `protobuf:"bytes,10,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
-	IpAllocationPolicy   *IPAllocationPolicy `protobuf:"bytes,11,opt,name=ip_allocation_policy,json=ipAllocationPolicy,proto3" json:"ip_allocation_policy,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	NodeServiceAccountId       string                          `protobuf:"bytes,8,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
+	NetworkPolicy              *NetworkPolicy                  `protobuf:"bytes,10,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
+	IpAllocationPolicy         *IPAllocationPolicy             `protobuf:"bytes,11,opt,name=ip_allocation_policy,json=ipAllocationPolicy,proto3" json:"ip_allocation_policy,omitempty"`
+	WorkloadIdentityFederation *WorkloadIdentityFederationSpec `protobuf:"bytes,12,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *UpdateClusterRequest) Reset() {
@@ -633,6 +634,13 @@ func (x *UpdateClusterRequest) GetNetworkPolicy() *NetworkPolicy {
 func (x *UpdateClusterRequest) GetIpAllocationPolicy() *IPAllocationPolicy {
 	if x != nil {
 		return x.IpAllocationPolicy
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetWorkloadIdentityFederation() *WorkloadIdentityFederationSpec {
+	if x != nil {
+		return x.WorkloadIdentityFederation
 	}
 	return nil
 }
@@ -828,9 +836,10 @@ type CreateClusterRequest struct {
 	// Types that are valid to be assigned to NetworkImplementation:
 	//
 	//	*CreateClusterRequest_Cilium
-	NetworkImplementation isCreateClusterRequest_NetworkImplementation `protobuf_oneof:"network_implementation"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	NetworkImplementation      isCreateClusterRequest_NetworkImplementation `protobuf_oneof:"network_implementation"`
+	WorkloadIdentityFederation *WorkloadIdentityFederationSpec              `protobuf:"bytes,15,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateClusterRequest) Reset() {
@@ -975,6 +984,13 @@ func (x *CreateClusterRequest) GetCilium() *Cilium {
 		if x, ok := x.NetworkImplementation.(*CreateClusterRequest_Cilium); ok {
 			return x.Cilium
 		}
+	}
+	return nil
+}
+
+func (x *CreateClusterRequest) GetWorkloadIdentityFederation() *WorkloadIdentityFederationSpec {
+	if x != nil {
+		return x.WorkloadIdentityFederation
 	}
 	return nil
 }
@@ -2161,6 +2177,51 @@ type MasterScalePolicySpec_AutoScale_ struct {
 
 func (*MasterScalePolicySpec_AutoScale_) isMasterScalePolicySpec_ScaleType() {}
 
+type WorkloadIdentityFederationSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Identifies whether Workload Identity Federation is enabled.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WorkloadIdentityFederationSpec) Reset() {
+	*x = WorkloadIdentityFederationSpec{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkloadIdentityFederationSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkloadIdentityFederationSpec) ProtoMessage() {}
+
+func (x *WorkloadIdentityFederationSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkloadIdentityFederationSpec.ProtoReflect.Descriptor instead.
+func (*WorkloadIdentityFederationSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *WorkloadIdentityFederationSpec) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 // Scalable master instance resources.
 type MasterScalePolicySpec_AutoScale struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2172,7 +2233,7 @@ type MasterScalePolicySpec_AutoScale struct {
 
 func (x *MasterScalePolicySpec_AutoScale) Reset() {
 	*x = MasterScalePolicySpec_AutoScale{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2184,7 +2245,7 @@ func (x *MasterScalePolicySpec_AutoScale) String() string {
 func (*MasterScalePolicySpec_AutoScale) ProtoMessage() {}
 
 func (x *MasterScalePolicySpec_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2243,7 +2304,7 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"5\n" +
 	"\x14StartClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xd4\x06\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xcb\a\n" +
 	"\x14UpdateClusterRequest\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12;\n" +
@@ -2259,7 +2320,8 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\x17node_service_account_id\x18\b \x01(\tR\x14nodeServiceAccountId\x12I\n" +
 	"\x0enetwork_policy\x18\n" +
 	" \x01(\v2\".yandex.cloud.k8s.v1.NetworkPolicyR\rnetworkPolicy\x12Y\n" +
-	"\x14ip_allocation_policy\x18\v \x01(\v2'.yandex.cloud.k8s.v1.IPAllocationPolicyR\x12ipAllocationPolicy\x1a9\n" +
+	"\x14ip_allocation_policy\x18\v \x01(\v2'.yandex.cloud.k8s.v1.IPAllocationPolicyR\x12ipAllocationPolicy\x12u\n" +
+	"\x1cworkload_identity_federation\x18\f \x01(\v23.yandex.cloud.k8s.v1.WorkloadIdentityFederationSpecR\x1aworkloadIdentityFederation\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x12\n" +
@@ -2274,7 +2336,7 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\fscale_policy\x18\a \x01(\v2*.yandex.cloud.k8s.v1.MasterScalePolicySpecR\vscalePolicy\"6\n" +
 	"\x15UpdateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xa0\b\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x97\t\n" +
 	"\x14CreateClusterRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x128\n" +
 	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -2292,7 +2354,8 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\x0frelease_channel\x18\v \x01(\x0e2#.yandex.cloud.k8s.v1.ReleaseChannelR\x0ereleaseChannel\x12I\n" +
 	"\x0enetwork_policy\x18\f \x01(\v2\".yandex.cloud.k8s.v1.NetworkPolicyR\rnetworkPolicy\x12C\n" +
 	"\fkms_provider\x18\r \x01(\v2 .yandex.cloud.k8s.v1.KMSProviderR\vkmsProvider\x125\n" +
-	"\x06cilium\x18\x0e \x01(\v2\x1b.yandex.cloud.k8s.v1.CiliumH\x01R\x06cilium\x1a9\n" +
+	"\x06cilium\x18\x0e \x01(\v2\x1b.yandex.cloud.k8s.v1.CiliumH\x01R\x06cilium\x12u\n" +
+	"\x1cworkload_identity_federation\x18\x0f \x01(\v23.yandex.cloud.k8s.v1.WorkloadIdentityFederationSpecR\x1aworkloadIdentityFederation\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x12\n" +
@@ -2388,7 +2451,9 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\tAutoScale\x129\n" +
 	"\x16min_resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x13minResourcePresetIdB\x12\n" +
 	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x022\x91\x15\n" +
+	"scale_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02\":\n" +
+	"\x1eWorkloadIdentityFederationSpec\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled2\x91\x15\n" +
 	"\x0eClusterService\x12\x81\x01\n" +
 	"\x03Get\x12&.yandex.cloud.k8s.v1.GetClusterRequest\x1a\x1c.yandex.cloud.k8s.v1.Cluster\"4\x82\xd3\xe4\x93\x02.\x12,/managed-kubernetes/v1/clusters/{cluster_id}\x12\x84\x01\n" +
 	"\x04List\x12(.yandex.cloud.k8s.v1.ListClustersRequest\x1a).yandex.cloud.k8s.v1.ListClustersResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/managed-kubernetes/v1/clusters\x12\xa6\x01\n" +
@@ -2426,7 +2491,7 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescData
 }
 
-var file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_yandex_cloud_k8s_v1_cluster_service_proto_goTypes = []any{
 	(*GetClusterRequest)(nil),                  // 0: yandex.cloud.k8s.v1.GetClusterRequest
 	(*ListClustersRequest)(nil),                // 1: yandex.cloud.k8s.v1.ListClustersRequest
@@ -2459,100 +2524,103 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_goTypes = []any{
 	(*RescheduleMaintenanceRequest)(nil),       // 28: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
 	(*RescheduleMaintenanceMetadata)(nil),      // 29: yandex.cloud.k8s.v1.RescheduleMaintenanceMetadata
 	(*MasterScalePolicySpec)(nil),              // 30: yandex.cloud.k8s.v1.MasterScalePolicySpec
-	nil,                                        // 31: yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
-	nil,                                        // 32: yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
-	(*MasterScalePolicySpec_AutoScale)(nil),    // 33: yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
-	(*Cluster)(nil),                            // 34: yandex.cloud.k8s.v1.Cluster
-	(*fieldmaskpb.FieldMask)(nil),              // 35: google.protobuf.FieldMask
-	(*NetworkPolicy)(nil),                      // 36: yandex.cloud.k8s.v1.NetworkPolicy
-	(*IPAllocationPolicy)(nil),                 // 37: yandex.cloud.k8s.v1.IPAllocationPolicy
-	(*UpdateVersionSpec)(nil),                  // 38: yandex.cloud.k8s.v1.UpdateVersionSpec
-	(*MasterMaintenancePolicy)(nil),            // 39: yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	(*MasterLogging)(nil),                      // 40: yandex.cloud.k8s.v1.MasterLogging
-	(ReleaseChannel)(0),                        // 41: yandex.cloud.k8s.v1.ReleaseChannel
-	(*KMSProvider)(nil),                        // 42: yandex.cloud.k8s.v1.KMSProvider
-	(*Cilium)(nil),                             // 43: yandex.cloud.k8s.v1.Cilium
-	(*operation.Operation)(nil),                // 44: yandex.cloud.operation.Operation
-	(*NodeGroup)(nil),                          // 45: yandex.cloud.k8s.v1.NodeGroup
-	(*Node)(nil),                               // 46: yandex.cloud.k8s.v1.Node
-	(*timestamppb.Timestamp)(nil),              // 47: google.protobuf.Timestamp
-	(*access.ListAccessBindingsRequest)(nil),   // 48: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 49: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 50: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 51: yandex.cloud.access.ListAccessBindingsResponse
+	(*WorkloadIdentityFederationSpec)(nil),     // 31: yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
+	nil,                                        // 32: yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
+	nil,                                        // 33: yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
+	(*MasterScalePolicySpec_AutoScale)(nil),    // 34: yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
+	(*Cluster)(nil),                            // 35: yandex.cloud.k8s.v1.Cluster
+	(*fieldmaskpb.FieldMask)(nil),              // 36: google.protobuf.FieldMask
+	(*NetworkPolicy)(nil),                      // 37: yandex.cloud.k8s.v1.NetworkPolicy
+	(*IPAllocationPolicy)(nil),                 // 38: yandex.cloud.k8s.v1.IPAllocationPolicy
+	(*UpdateVersionSpec)(nil),                  // 39: yandex.cloud.k8s.v1.UpdateVersionSpec
+	(*MasterMaintenancePolicy)(nil),            // 40: yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	(*MasterLogging)(nil),                      // 41: yandex.cloud.k8s.v1.MasterLogging
+	(ReleaseChannel)(0),                        // 42: yandex.cloud.k8s.v1.ReleaseChannel
+	(*KMSProvider)(nil),                        // 43: yandex.cloud.k8s.v1.KMSProvider
+	(*Cilium)(nil),                             // 44: yandex.cloud.k8s.v1.Cilium
+	(*operation.Operation)(nil),                // 45: yandex.cloud.operation.Operation
+	(*NodeGroup)(nil),                          // 46: yandex.cloud.k8s.v1.NodeGroup
+	(*Node)(nil),                               // 47: yandex.cloud.k8s.v1.Node
+	(*timestamppb.Timestamp)(nil),              // 48: google.protobuf.Timestamp
+	(*access.ListAccessBindingsRequest)(nil),   // 49: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 50: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 51: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 52: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_k8s_v1_cluster_service_proto_depIdxs = []int32{
-	34, // 0: yandex.cloud.k8s.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.k8s.v1.Cluster
-	35, // 1: yandex.cloud.k8s.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	31, // 2: yandex.cloud.k8s.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
+	35, // 0: yandex.cloud.k8s.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.k8s.v1.Cluster
+	36, // 1: yandex.cloud.k8s.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	32, // 2: yandex.cloud.k8s.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
 	10, // 3: yandex.cloud.k8s.v1.UpdateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterUpdateSpec
-	36, // 4: yandex.cloud.k8s.v1.UpdateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
-	37, // 5: yandex.cloud.k8s.v1.UpdateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
-	38, // 6: yandex.cloud.k8s.v1.MasterUpdateSpec.version:type_name -> yandex.cloud.k8s.v1.UpdateVersionSpec
-	39, // 7: yandex.cloud.k8s.v1.MasterUpdateSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	40, // 8: yandex.cloud.k8s.v1.MasterUpdateSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	27, // 9: yandex.cloud.k8s.v1.MasterUpdateSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
-	25, // 10: yandex.cloud.k8s.v1.MasterUpdateSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	30, // 11: yandex.cloud.k8s.v1.MasterUpdateSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
-	32, // 12: yandex.cloud.k8s.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
-	21, // 13: yandex.cloud.k8s.v1.CreateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterSpec
-	37, // 14: yandex.cloud.k8s.v1.CreateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
-	41, // 15: yandex.cloud.k8s.v1.CreateClusterRequest.release_channel:type_name -> yandex.cloud.k8s.v1.ReleaseChannel
-	36, // 16: yandex.cloud.k8s.v1.CreateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
-	42, // 17: yandex.cloud.k8s.v1.CreateClusterRequest.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
-	43, // 18: yandex.cloud.k8s.v1.CreateClusterRequest.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
-	44, // 19: yandex.cloud.k8s.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	45, // 20: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse.node_groups:type_name -> yandex.cloud.k8s.v1.NodeGroup
-	46, // 21: yandex.cloud.k8s.v1.ListClusterNodesResponse.nodes:type_name -> yandex.cloud.k8s.v1.Node
-	22, // 22: yandex.cloud.k8s.v1.MasterSpec.zonal_master_spec:type_name -> yandex.cloud.k8s.v1.ZonalMasterSpec
-	23, // 23: yandex.cloud.k8s.v1.MasterSpec.regional_master_spec:type_name -> yandex.cloud.k8s.v1.RegionalMasterSpec
-	27, // 24: yandex.cloud.k8s.v1.MasterSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
-	25, // 25: yandex.cloud.k8s.v1.MasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	25, // 26: yandex.cloud.k8s.v1.MasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	39, // 27: yandex.cloud.k8s.v1.MasterSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	40, // 28: yandex.cloud.k8s.v1.MasterSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	30, // 29: yandex.cloud.k8s.v1.MasterSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
-	24, // 30: yandex.cloud.k8s.v1.ZonalMasterSpec.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
-	25, // 31: yandex.cloud.k8s.v1.ZonalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	26, // 32: yandex.cloud.k8s.v1.RegionalMasterSpec.locations:type_name -> yandex.cloud.k8s.v1.MasterLocation
-	25, // 33: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	25, // 34: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	24, // 35: yandex.cloud.k8s.v1.MasterLocation.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
-	47, // 36: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	33, // 37: yandex.cloud.k8s.v1.MasterScalePolicySpec.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
-	0,  // 38: yandex.cloud.k8s.v1.ClusterService.Get:input_type -> yandex.cloud.k8s.v1.GetClusterRequest
-	1,  // 39: yandex.cloud.k8s.v1.ClusterService.List:input_type -> yandex.cloud.k8s.v1.ListClustersRequest
-	12, // 40: yandex.cloud.k8s.v1.ClusterService.Create:input_type -> yandex.cloud.k8s.v1.CreateClusterRequest
-	9,  // 41: yandex.cloud.k8s.v1.ClusterService.Update:input_type -> yandex.cloud.k8s.v1.UpdateClusterRequest
-	3,  // 42: yandex.cloud.k8s.v1.ClusterService.Delete:input_type -> yandex.cloud.k8s.v1.DeleteClusterRequest
-	5,  // 43: yandex.cloud.k8s.v1.ClusterService.Stop:input_type -> yandex.cloud.k8s.v1.StopClusterRequest
-	7,  // 44: yandex.cloud.k8s.v1.ClusterService.Start:input_type -> yandex.cloud.k8s.v1.StartClusterRequest
-	28, // 45: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
-	17, // 46: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:input_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
-	15, // 47: yandex.cloud.k8s.v1.ClusterService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListClusterOperationsRequest
-	19, // 48: yandex.cloud.k8s.v1.ClusterService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListClusterNodesRequest
-	48, // 49: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	49, // 50: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	50, // 51: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	34, // 52: yandex.cloud.k8s.v1.ClusterService.Get:output_type -> yandex.cloud.k8s.v1.Cluster
-	2,  // 53: yandex.cloud.k8s.v1.ClusterService.List:output_type -> yandex.cloud.k8s.v1.ListClustersResponse
-	44, // 54: yandex.cloud.k8s.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	44, // 55: yandex.cloud.k8s.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	44, // 56: yandex.cloud.k8s.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	44, // 57: yandex.cloud.k8s.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	44, // 58: yandex.cloud.k8s.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	44, // 59: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	18, // 60: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:output_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
-	16, // 61: yandex.cloud.k8s.v1.ClusterService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListClusterOperationsResponse
-	20, // 62: yandex.cloud.k8s.v1.ClusterService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListClusterNodesResponse
-	51, // 63: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	44, // 64: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	44, // 65: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	52, // [52:66] is the sub-list for method output_type
-	38, // [38:52] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	37, // 4: yandex.cloud.k8s.v1.UpdateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
+	38, // 5: yandex.cloud.k8s.v1.UpdateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
+	31, // 6: yandex.cloud.k8s.v1.UpdateClusterRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
+	39, // 7: yandex.cloud.k8s.v1.MasterUpdateSpec.version:type_name -> yandex.cloud.k8s.v1.UpdateVersionSpec
+	40, // 8: yandex.cloud.k8s.v1.MasterUpdateSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	41, // 9: yandex.cloud.k8s.v1.MasterUpdateSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	27, // 10: yandex.cloud.k8s.v1.MasterUpdateSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
+	25, // 11: yandex.cloud.k8s.v1.MasterUpdateSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	30, // 12: yandex.cloud.k8s.v1.MasterUpdateSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
+	33, // 13: yandex.cloud.k8s.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
+	21, // 14: yandex.cloud.k8s.v1.CreateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterSpec
+	38, // 15: yandex.cloud.k8s.v1.CreateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
+	42, // 16: yandex.cloud.k8s.v1.CreateClusterRequest.release_channel:type_name -> yandex.cloud.k8s.v1.ReleaseChannel
+	37, // 17: yandex.cloud.k8s.v1.CreateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
+	43, // 18: yandex.cloud.k8s.v1.CreateClusterRequest.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
+	44, // 19: yandex.cloud.k8s.v1.CreateClusterRequest.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
+	31, // 20: yandex.cloud.k8s.v1.CreateClusterRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
+	45, // 21: yandex.cloud.k8s.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	46, // 22: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse.node_groups:type_name -> yandex.cloud.k8s.v1.NodeGroup
+	47, // 23: yandex.cloud.k8s.v1.ListClusterNodesResponse.nodes:type_name -> yandex.cloud.k8s.v1.Node
+	22, // 24: yandex.cloud.k8s.v1.MasterSpec.zonal_master_spec:type_name -> yandex.cloud.k8s.v1.ZonalMasterSpec
+	23, // 25: yandex.cloud.k8s.v1.MasterSpec.regional_master_spec:type_name -> yandex.cloud.k8s.v1.RegionalMasterSpec
+	27, // 26: yandex.cloud.k8s.v1.MasterSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
+	25, // 27: yandex.cloud.k8s.v1.MasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	25, // 28: yandex.cloud.k8s.v1.MasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	40, // 29: yandex.cloud.k8s.v1.MasterSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	41, // 30: yandex.cloud.k8s.v1.MasterSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	30, // 31: yandex.cloud.k8s.v1.MasterSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
+	24, // 32: yandex.cloud.k8s.v1.ZonalMasterSpec.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
+	25, // 33: yandex.cloud.k8s.v1.ZonalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	26, // 34: yandex.cloud.k8s.v1.RegionalMasterSpec.locations:type_name -> yandex.cloud.k8s.v1.MasterLocation
+	25, // 35: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	25, // 36: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	24, // 37: yandex.cloud.k8s.v1.MasterLocation.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
+	48, // 38: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	34, // 39: yandex.cloud.k8s.v1.MasterScalePolicySpec.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
+	0,  // 40: yandex.cloud.k8s.v1.ClusterService.Get:input_type -> yandex.cloud.k8s.v1.GetClusterRequest
+	1,  // 41: yandex.cloud.k8s.v1.ClusterService.List:input_type -> yandex.cloud.k8s.v1.ListClustersRequest
+	12, // 42: yandex.cloud.k8s.v1.ClusterService.Create:input_type -> yandex.cloud.k8s.v1.CreateClusterRequest
+	9,  // 43: yandex.cloud.k8s.v1.ClusterService.Update:input_type -> yandex.cloud.k8s.v1.UpdateClusterRequest
+	3,  // 44: yandex.cloud.k8s.v1.ClusterService.Delete:input_type -> yandex.cloud.k8s.v1.DeleteClusterRequest
+	5,  // 45: yandex.cloud.k8s.v1.ClusterService.Stop:input_type -> yandex.cloud.k8s.v1.StopClusterRequest
+	7,  // 46: yandex.cloud.k8s.v1.ClusterService.Start:input_type -> yandex.cloud.k8s.v1.StartClusterRequest
+	28, // 47: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
+	17, // 48: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:input_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
+	15, // 49: yandex.cloud.k8s.v1.ClusterService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListClusterOperationsRequest
+	19, // 50: yandex.cloud.k8s.v1.ClusterService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListClusterNodesRequest
+	49, // 51: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	50, // 52: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	51, // 53: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	35, // 54: yandex.cloud.k8s.v1.ClusterService.Get:output_type -> yandex.cloud.k8s.v1.Cluster
+	2,  // 55: yandex.cloud.k8s.v1.ClusterService.List:output_type -> yandex.cloud.k8s.v1.ListClustersResponse
+	45, // 56: yandex.cloud.k8s.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	45, // 57: yandex.cloud.k8s.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	45, // 58: yandex.cloud.k8s.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	45, // 59: yandex.cloud.k8s.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	45, // 60: yandex.cloud.k8s.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	45, // 61: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	18, // 62: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:output_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
+	16, // 63: yandex.cloud.k8s.v1.ClusterService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListClusterOperationsResponse
+	20, // 64: yandex.cloud.k8s.v1.ClusterService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListClusterNodesResponse
+	52, // 65: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	45, // 66: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	45, // 67: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	54, // [54:68] is the sub-list for method output_type
+	40, // [40:54] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_k8s_v1_cluster_service_proto_init() }
@@ -2584,7 +2652,7 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc), len(file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   34,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

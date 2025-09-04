@@ -278,6 +278,56 @@ func (x *SearchQuery) GetFixTypoMode() SearchQuery_FixTypoMode {
 	return SearchQuery_FIX_TYPO_MODE_UNSPECIFIED
 }
 
+type SearchMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Search flags, `key:value` pairs.
+	// No more than 64.
+	// The maximum string length in characters for each value is 63.
+	// Each value must match the regular expression `[-_0-9a-z]*`.
+	// The string length in characters for each key must be 1-63.
+	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
+	Fields        map[string]string `protobuf:"bytes,1,rep,name=fields,proto3" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchMetadata) Reset() {
+	*x = SearchMetadata{}
+	mi := &file_yandex_cloud_searchapi_v2_search_query_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchMetadata) ProtoMessage() {}
+
+func (x *SearchMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_searchapi_v2_search_query_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchMetadata.ProtoReflect.Descriptor instead.
+func (*SearchMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_searchapi_v2_search_query_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SearchMetadata) GetFields() map[string]string {
+	if x != nil {
+		return x.Fields
+	}
+	return nil
+}
+
 var File_yandex_cloud_searchapi_v2_search_query_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_searchapi_v2_search_query_proto_rawDesc = "" +
@@ -310,7 +360,12 @@ const file_yandex_cloud_searchapi_v2_search_query_proto_rawDesc = "" +
 	"\vFixTypoMode\x12\x1d\n" +
 	"\x19FIX_TYPO_MODE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10FIX_TYPO_MODE_ON\x10\x01\x12\x15\n" +
-	"\x11FIX_TYPO_MODE_OFF\x10\x02Be\n" +
+	"\x11FIX_TYPO_MODE_OFF\x10\x02\"\xd8\x01\n" +
+	"\x0eSearchMetadata\x12\x8a\x01\n" +
+	"\x06fields\x18\x01 \x03(\v25.yandex.cloud.searchapi.v2.SearchMetadata.FieldsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06fields\x1a9\n" +
+	"\vFieldsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01Be\n" +
 	"\x1ayandex.cloud.api.search.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/searchapi/v2;searchapib\x06proto3"
 
 var (
@@ -326,22 +381,25 @@ func file_yandex_cloud_searchapi_v2_search_query_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_searchapi_v2_search_query_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_searchapi_v2_search_query_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_searchapi_v2_search_query_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_searchapi_v2_search_query_proto_goTypes = []any{
 	(SearchQuery_SearchType)(0),  // 0: yandex.cloud.searchapi.v2.SearchQuery.SearchType
 	(SearchQuery_FamilyMode)(0),  // 1: yandex.cloud.searchapi.v2.SearchQuery.FamilyMode
 	(SearchQuery_FixTypoMode)(0), // 2: yandex.cloud.searchapi.v2.SearchQuery.FixTypoMode
 	(*SearchQuery)(nil),          // 3: yandex.cloud.searchapi.v2.SearchQuery
+	(*SearchMetadata)(nil),       // 4: yandex.cloud.searchapi.v2.SearchMetadata
+	nil,                          // 5: yandex.cloud.searchapi.v2.SearchMetadata.FieldsEntry
 }
 var file_yandex_cloud_searchapi_v2_search_query_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.searchapi.v2.SearchQuery.search_type:type_name -> yandex.cloud.searchapi.v2.SearchQuery.SearchType
 	1, // 1: yandex.cloud.searchapi.v2.SearchQuery.family_mode:type_name -> yandex.cloud.searchapi.v2.SearchQuery.FamilyMode
 	2, // 2: yandex.cloud.searchapi.v2.SearchQuery.fix_typo_mode:type_name -> yandex.cloud.searchapi.v2.SearchQuery.FixTypoMode
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	5, // 3: yandex.cloud.searchapi.v2.SearchMetadata.fields:type_name -> yandex.cloud.searchapi.v2.SearchMetadata.FieldsEntry
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_search_query_proto_init() }
@@ -355,7 +413,7 @@ func file_yandex_cloud_searchapi_v2_search_query_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_searchapi_v2_search_query_proto_rawDesc), len(file_yandex_cloud_searchapi_v2_search_query_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

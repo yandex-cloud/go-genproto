@@ -2468,17 +2468,14 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xa5\x01\n" +
 	"\x1bListScalingPoliciesResponse\x12^\n" +
 	"\x10scaling_policies\x18\x01 \x03(\v23.yandex.cloud.serverless.functions.v1.ScalingPolicyR\x0fscalingPolicies\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc2\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb9\x02\n" +
 	"\x17SetScalingPolicyRequest\x12%\n" +
 	"\vfunction_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"functionId\x124\n" +
-	"\x03tag\x18\x02 \x01(\tB\"\xe8\xc71\x01\xf2\xc71\x1a[a-z][-_0-9a-z]*|[$]latestR\x03tag\x12J\n" +
-	"\x1bprovisioned_instances_count\x18\x04 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\x19provisionedInstancesCount\x12<\n" +
-	"\x14zone_instances_limit\x18\x05 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\x12zoneInstancesLimit\x12:\n" +
-	"\x13zone_requests_limit\x18\x06 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\x11zoneRequestsLimitJ\x04\b\x03\x10\x04\";\n" +
+	"\x03tag\x18\x02 \x01(\tB\"\xe8\xc71\x01\xf2\xc71\x1a[a-z][-_0-9a-z]*|[$]latestR\x03tag\x12G\n" +
+	"\x1bprovisioned_instances_count\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\x19provisionedInstancesCount\x129\n" +
+	"\x14zone_instances_limit\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\x12zoneInstancesLimit\x127\n" +
+	"\x13zone_requests_limit\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\x11zoneRequestsLimitJ\x04\b\x03\x10\x04\";\n" +
 	"\x18SetScalingPolicyMetadata\x12\x1f\n" +
 	"\vfunction_id\x18\x01 \x01(\tR\n" +
 	"functionId\"y\n" +

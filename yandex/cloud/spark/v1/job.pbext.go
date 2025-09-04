@@ -56,8 +56,22 @@ func (m *Job) SetPysparkJob(v *PysparkJob) {
 	}
 }
 
+func (m *Job) SetSparkConnectJob(v *SparkConnectJob) {
+	m.JobSpec = &Job_SparkConnectJob{
+		SparkConnectJob: v,
+	}
+}
+
 func (m *Job) SetUiUrl(v string) {
 	m.UiUrl = v
+}
+
+func (m *Job) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *Job) SetConnectUrl(v string) {
+	m.ConnectUrl = v
 }
 
 func (m *SparkJob) SetArgs(v []string) {
@@ -97,6 +111,34 @@ func (m *SparkJob) SetRepositories(v []string) {
 }
 
 func (m *SparkJob) SetExcludePackages(v []string) {
+	m.ExcludePackages = v
+}
+
+func (m *SparkConnectJob) SetJarFileUris(v []string) {
+	m.JarFileUris = v
+}
+
+func (m *SparkConnectJob) SetFileUris(v []string) {
+	m.FileUris = v
+}
+
+func (m *SparkConnectJob) SetArchiveUris(v []string) {
+	m.ArchiveUris = v
+}
+
+func (m *SparkConnectJob) SetProperties(v map[string]string) {
+	m.Properties = v
+}
+
+func (m *SparkConnectJob) SetPackages(v []string) {
+	m.Packages = v
+}
+
+func (m *SparkConnectJob) SetRepositories(v []string) {
+	m.Repositories = v
+}
+
+func (m *SparkConnectJob) SetExcludePackages(v []string) {
 	m.ExcludePackages = v
 }
 

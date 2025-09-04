@@ -21,3 +21,7 @@ func (m *SearchQuery) SetPage(v int64) {
 func (m *SearchQuery) SetFixTypoMode(v SearchQuery_FixTypoMode) {
 	m.FixTypoMode = v
 }
+
+func (m *SearchMetadata) SetFields(v map[string]string) {
+	m.Fields = v
+}

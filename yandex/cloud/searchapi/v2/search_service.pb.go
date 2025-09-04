@@ -432,7 +432,9 @@ type WebSearchRequest struct {
 	// Search results format.
 	ResponseFormat WebSearchRequest_Format `protobuf:"varint,8,opt,name=response_format,json=responseFormat,proto3,enum=yandex.cloud.searchapi.v2.WebSearchRequest_Format" json:"response_format,omitempty"`
 	// User-Agent request header value.
-	UserAgent     string `protobuf:"bytes,9,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
+	UserAgent string `protobuf:"bytes,9,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
+	// Search flags
+	Metadata      *SearchMetadata `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -530,6 +532,13 @@ func (x *WebSearchRequest) GetUserAgent() string {
 	return ""
 }
 
+func (x *WebSearchRequest) GetMetadata() *SearchMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
 type WebSearchResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Search results, either in XML or HTML format depending on the request settings.
@@ -600,7 +609,7 @@ const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\tGroupMode\x12\x1a\n" +
 	"\x16GROUP_MODE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fGROUP_MODE_FLAT\x10\x01\x12\x13\n" +
-	"\x0fGROUP_MODE_DEEP\x10\x02\"\x98\x06\n" +
+	"\x0fGROUP_MODE_DEEP\x10\x02\"\xdf\x06\n" +
 	"\x10WebSearchRequest\x12B\n" +
 	"\x05query\x18\x01 \x01(\v2&.yandex.cloud.searchapi.v2.SearchQueryB\x04\xe8\xc71\x01R\x05query\x12@\n" +
 	"\tsort_spec\x18\x02 \x01(\v2#.yandex.cloud.searchapi.v2.SortSpecR\bsortSpec\x12C\n" +
@@ -612,7 +621,9 @@ const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\a \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12[\n" +
 	"\x0fresponse_format\x18\b \x01(\x0e22.yandex.cloud.searchapi.v2.WebSearchRequest.FormatR\x0eresponseFormat\x12(\n" +
 	"\n" +
-	"user_agent\x18\t \x01(\tB\t\x8a\xc81\x05<=300R\tuserAgent\"\xaa\x01\n" +
+	"user_agent\x18\t \x01(\tB\t\x8a\xc81\x05<=300R\tuserAgent\x12E\n" +
+	"\bmetadata\x18\n" +
+	" \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\"\xaa\x01\n" +
 	"\fLocalization\x12\x1c\n" +
 	"\x18LOCALIZATION_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fLOCALIZATION_RU\x10\x01\x12\x13\n" +
@@ -659,7 +670,8 @@ var file_yandex_cloud_searchapi_v2_search_service_proto_goTypes = []any{
 	(*WebSearchRequest)(nil),           // 7: yandex.cloud.searchapi.v2.WebSearchRequest
 	(*WebSearchResponse)(nil),          // 8: yandex.cloud.searchapi.v2.WebSearchResponse
 	(*SearchQuery)(nil),                // 9: yandex.cloud.searchapi.v2.SearchQuery
-	(*operation.Operation)(nil),        // 10: yandex.cloud.operation.Operation
+	(*SearchMetadata)(nil),             // 10: yandex.cloud.searchapi.v2.SearchMetadata
+	(*operation.Operation)(nil),        // 11: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_searchapi_v2_search_service_proto_depIdxs = []int32{
 	1,  // 0: yandex.cloud.searchapi.v2.SortSpec.sort_mode:type_name -> yandex.cloud.searchapi.v2.SortSpec.SortMode
@@ -670,15 +682,16 @@ var file_yandex_cloud_searchapi_v2_search_service_proto_depIdxs = []int32{
 	6,  // 5: yandex.cloud.searchapi.v2.WebSearchRequest.group_spec:type_name -> yandex.cloud.searchapi.v2.GroupSpec
 	3,  // 6: yandex.cloud.searchapi.v2.WebSearchRequest.l10n:type_name -> yandex.cloud.searchapi.v2.WebSearchRequest.Localization
 	4,  // 7: yandex.cloud.searchapi.v2.WebSearchRequest.response_format:type_name -> yandex.cloud.searchapi.v2.WebSearchRequest.Format
-	7,  // 8: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
-	7,  // 9: yandex.cloud.searchapi.v2.WebSearchService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
-	10, // 10: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:output_type -> yandex.cloud.operation.Operation
-	8,  // 11: yandex.cloud.searchapi.v2.WebSearchService.Search:output_type -> yandex.cloud.searchapi.v2.WebSearchResponse
-	10, // [10:12] is the sub-list for method output_type
-	8,  // [8:10] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	10, // 8: yandex.cloud.searchapi.v2.WebSearchRequest.metadata:type_name -> yandex.cloud.searchapi.v2.SearchMetadata
+	7,  // 9: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
+	7,  // 10: yandex.cloud.searchapi.v2.WebSearchService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
+	11, // 11: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:output_type -> yandex.cloud.operation.Operation
+	8,  // 12: yandex.cloud.searchapi.v2.WebSearchService.Search:output_type -> yandex.cloud.searchapi.v2.WebSearchResponse
+	11, // [11:13] is the sub-list for method output_type
+	9,  // [9:11] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_search_service_proto_init() }

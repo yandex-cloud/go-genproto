@@ -339,10 +339,11 @@ type Cluster struct {
 	// Types that are valid to be assigned to NetworkImplementation:
 	//
 	//	*Cluster_Cilium
-	NetworkImplementation isCluster_NetworkImplementation `protobuf_oneof:"network_implementation"`
-	ScheduledMaintenance  *ScheduledMaintenance           `protobuf:"bytes,20,opt,name=scheduled_maintenance,json=scheduledMaintenance,proto3" json:"scheduled_maintenance,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	NetworkImplementation      isCluster_NetworkImplementation `protobuf_oneof:"network_implementation"`
+	ScheduledMaintenance       *ScheduledMaintenance           `protobuf:"bytes,20,opt,name=scheduled_maintenance,json=scheduledMaintenance,proto3" json:"scheduled_maintenance,omitempty"`
+	WorkloadIdentityFederation *WorkloadIdentityFederation     `protobuf:"bytes,21,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *Cluster) Reset() {
@@ -529,6 +530,13 @@ func (x *Cluster) GetCilium() *Cilium {
 func (x *Cluster) GetScheduledMaintenance() *ScheduledMaintenance {
 	if x != nil {
 		return x.ScheduledMaintenance
+	}
+	return nil
+}
+
+func (x *Cluster) GetWorkloadIdentityFederation() *WorkloadIdentityFederation {
+	if x != nil {
+		return x.WorkloadIdentityFederation
 	}
 	return nil
 }
@@ -1590,6 +1598,70 @@ func (*MasterScalePolicy_FixedScale_) isMasterScalePolicy_ScaleType() {}
 
 func (*MasterScalePolicy_AutoScale_) isMasterScalePolicy_ScaleType() {}
 
+// WorkloadIdentityFederation contains configuration for workload identity federation.
+type WorkloadIdentityFederation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Identifies whether Workload Identity Federation is enabled.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Issuer URI for Kubernetes service account tokens.
+	Issuer string `protobuf:"bytes,2,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	// JSON Web Key Set URI used to verify token signatures.
+	JwksUri       string `protobuf:"bytes,3,opt,name=jwks_uri,json=jwksUri,proto3" json:"jwks_uri,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WorkloadIdentityFederation) Reset() {
+	*x = WorkloadIdentityFederation{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkloadIdentityFederation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkloadIdentityFederation) ProtoMessage() {}
+
+func (x *WorkloadIdentityFederation) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkloadIdentityFederation.ProtoReflect.Descriptor instead.
+func (*WorkloadIdentityFederation) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *WorkloadIdentityFederation) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *WorkloadIdentityFederation) GetIssuer() string {
+	if x != nil {
+		return x.Issuer
+	}
+	return ""
+}
+
+func (x *WorkloadIdentityFederation) GetJwksUri() string {
+	if x != nil {
+		return x.JwksUri
+	}
+	return ""
+}
+
 // Fixed master instance resources.
 type MasterScalePolicy_FixedScale struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1601,7 +1673,7 @@ type MasterScalePolicy_FixedScale struct {
 
 func (x *MasterScalePolicy_FixedScale) Reset() {
 	*x = MasterScalePolicy_FixedScale{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[16]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1613,7 +1685,7 @@ func (x *MasterScalePolicy_FixedScale) String() string {
 func (*MasterScalePolicy_FixedScale) ProtoMessage() {}
 
 func (x *MasterScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[16]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1647,7 +1719,7 @@ type MasterScalePolicy_AutoScale struct {
 
 func (x *MasterScalePolicy_AutoScale) Reset() {
 	*x = MasterScalePolicy_AutoScale{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[17]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1659,7 +1731,7 @@ func (x *MasterScalePolicy_AutoScale) String() string {
 func (*MasterScalePolicy_AutoScale) ProtoMessage() {}
 
 func (x *MasterScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[17]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1686,8 +1758,7 @@ var File_yandex_cloud_k8s_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/k8s/v1/cluster.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/k8s/v1/maintenance.proto\x1a!yandex/cloud/k8s/v1/version.proto\x1a\x1dyandex/cloud/validation.proto\"\xfd\n" +
-	"\n" +
+	"!yandex/cloud/k8s/v1/cluster.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/k8s/v1/maintenance.proto\x1a!yandex/cloud/k8s/v1/version.proto\x1a\x1dyandex/cloud/validation.proto\"\xf0\v\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -1712,7 +1783,8 @@ const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\flog_group_id\x18\x12 \x01(\tR\n" +
 	"logGroupId\x125\n" +
 	"\x06cilium\x18\x13 \x01(\v2\x1b.yandex.cloud.k8s.v1.CiliumH\x01R\x06cilium\x12^\n" +
-	"\x15scheduled_maintenance\x18\x14 \x01(\v2).yandex.cloud.k8s.v1.ScheduledMaintenanceR\x14scheduledMaintenance\x1a9\n" +
+	"\x15scheduled_maintenance\x18\x14 \x01(\v2).yandex.cloud.k8s.v1.ScheduledMaintenanceR\x14scheduledMaintenance\x12q\n" +
+	"\x1cworkload_identity_federation\x18\x15 \x01(\v2/.yandex.cloud.k8s.v1.WorkloadIdentityFederationR\x1aworkloadIdentityFederation\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x87\x01\n" +
@@ -1815,7 +1887,11 @@ const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\tAutoScale\x123\n" +
 	"\x16min_resource_preset_id\x18\x01 \x01(\tR\x13minResourcePresetIdB\x12\n" +
 	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01*U\n" +
+	"scale_type\x12\x04\xc0\xc11\x01\"i\n" +
+	"\x1aWorkloadIdentityFederation\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x16\n" +
+	"\x06issuer\x18\x02 \x01(\tR\x06issuer\x12\x19\n" +
+	"\bjwks_uri\x18\x03 \x01(\tR\ajwksUri*U\n" +
 	"\x0eReleaseChannel\x12\x1f\n" +
 	"\x1bRELEASE_CHANNEL_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05RAPID\x10\x01\x12\v\n" +
@@ -1837,7 +1913,7 @@ func file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_k8s_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_k8s_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_yandex_cloud_k8s_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_yandex_cloud_k8s_v1_cluster_proto_goTypes = []any{
 	(ReleaseChannel)(0),                  // 0: yandex.cloud.k8s.v1.ReleaseChannel
 	(Cluster_Status)(0),                  // 1: yandex.cloud.k8s.v1.Cluster.Status
@@ -1859,17 +1935,18 @@ var file_yandex_cloud_k8s_v1_cluster_proto_goTypes = []any{
 	(*Cilium)(nil),                       // 17: yandex.cloud.k8s.v1.Cilium
 	(*MasterResources)(nil),              // 18: yandex.cloud.k8s.v1.MasterResources
 	(*MasterScalePolicy)(nil),            // 19: yandex.cloud.k8s.v1.MasterScalePolicy
-	nil,                                  // 20: yandex.cloud.k8s.v1.Cluster.LabelsEntry
-	(*MasterScalePolicy_FixedScale)(nil), // 21: yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
-	(*MasterScalePolicy_AutoScale)(nil),  // 22: yandex.cloud.k8s.v1.MasterScalePolicy.AutoScale
-	(*timestamppb.Timestamp)(nil),        // 23: google.protobuf.Timestamp
-	(*ScheduledMaintenance)(nil),         // 24: yandex.cloud.k8s.v1.ScheduledMaintenance
-	(*VersionInfo)(nil),                  // 25: yandex.cloud.k8s.v1.VersionInfo
-	(*MaintenanceWindow)(nil),            // 26: yandex.cloud.k8s.v1.MaintenanceWindow
+	(*WorkloadIdentityFederation)(nil),   // 20: yandex.cloud.k8s.v1.WorkloadIdentityFederation
+	nil,                                  // 21: yandex.cloud.k8s.v1.Cluster.LabelsEntry
+	(*MasterScalePolicy_FixedScale)(nil), // 22: yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
+	(*MasterScalePolicy_AutoScale)(nil),  // 23: yandex.cloud.k8s.v1.MasterScalePolicy.AutoScale
+	(*timestamppb.Timestamp)(nil),        // 24: google.protobuf.Timestamp
+	(*ScheduledMaintenance)(nil),         // 25: yandex.cloud.k8s.v1.ScheduledMaintenance
+	(*VersionInfo)(nil),                  // 26: yandex.cloud.k8s.v1.VersionInfo
+	(*MaintenanceWindow)(nil),            // 27: yandex.cloud.k8s.v1.MaintenanceWindow
 }
 var file_yandex_cloud_k8s_v1_cluster_proto_depIdxs = []int32{
-	23, // 0: yandex.cloud.k8s.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	20, // 1: yandex.cloud.k8s.v1.Cluster.labels:type_name -> yandex.cloud.k8s.v1.Cluster.LabelsEntry
+	24, // 0: yandex.cloud.k8s.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	21, // 1: yandex.cloud.k8s.v1.Cluster.labels:type_name -> yandex.cloud.k8s.v1.Cluster.LabelsEntry
 	1,  // 2: yandex.cloud.k8s.v1.Cluster.status:type_name -> yandex.cloud.k8s.v1.Cluster.Status
 	2,  // 3: yandex.cloud.k8s.v1.Cluster.health:type_name -> yandex.cloud.k8s.v1.Cluster.Health
 	6,  // 4: yandex.cloud.k8s.v1.Cluster.master:type_name -> yandex.cloud.k8s.v1.Master
@@ -1878,27 +1955,28 @@ var file_yandex_cloud_k8s_v1_cluster_proto_depIdxs = []int32{
 	15, // 7: yandex.cloud.k8s.v1.Cluster.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
 	16, // 8: yandex.cloud.k8s.v1.Cluster.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
 	17, // 9: yandex.cloud.k8s.v1.Cluster.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
-	24, // 10: yandex.cloud.k8s.v1.Cluster.scheduled_maintenance:type_name -> yandex.cloud.k8s.v1.ScheduledMaintenance
-	8,  // 11: yandex.cloud.k8s.v1.Master.zonal_master:type_name -> yandex.cloud.k8s.v1.ZonalMaster
-	9,  // 12: yandex.cloud.k8s.v1.Master.regional_master:type_name -> yandex.cloud.k8s.v1.RegionalMaster
-	10, // 13: yandex.cloud.k8s.v1.Master.locations:type_name -> yandex.cloud.k8s.v1.Location
-	11, // 14: yandex.cloud.k8s.v1.Master.endpoints:type_name -> yandex.cloud.k8s.v1.MasterEndpoints
-	7,  // 15: yandex.cloud.k8s.v1.Master.master_auth:type_name -> yandex.cloud.k8s.v1.MasterAuth
-	25, // 16: yandex.cloud.k8s.v1.Master.version_info:type_name -> yandex.cloud.k8s.v1.VersionInfo
-	13, // 17: yandex.cloud.k8s.v1.Master.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	14, // 18: yandex.cloud.k8s.v1.Master.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	18, // 19: yandex.cloud.k8s.v1.Master.resources:type_name -> yandex.cloud.k8s.v1.MasterResources
-	19, // 20: yandex.cloud.k8s.v1.Master.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy
-	26, // 21: yandex.cloud.k8s.v1.MasterMaintenancePolicy.maintenance_window:type_name -> yandex.cloud.k8s.v1.MaintenanceWindow
-	3,  // 22: yandex.cloud.k8s.v1.NetworkPolicy.provider:type_name -> yandex.cloud.k8s.v1.NetworkPolicy.Provider
-	4,  // 23: yandex.cloud.k8s.v1.Cilium.routing_mode:type_name -> yandex.cloud.k8s.v1.Cilium.RoutingMode
-	21, // 24: yandex.cloud.k8s.v1.MasterScalePolicy.fixed_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
-	22, // 25: yandex.cloud.k8s.v1.MasterScalePolicy.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.AutoScale
-	26, // [26:26] is the sub-list for method output_type
-	26, // [26:26] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	25, // 10: yandex.cloud.k8s.v1.Cluster.scheduled_maintenance:type_name -> yandex.cloud.k8s.v1.ScheduledMaintenance
+	20, // 11: yandex.cloud.k8s.v1.Cluster.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederation
+	8,  // 12: yandex.cloud.k8s.v1.Master.zonal_master:type_name -> yandex.cloud.k8s.v1.ZonalMaster
+	9,  // 13: yandex.cloud.k8s.v1.Master.regional_master:type_name -> yandex.cloud.k8s.v1.RegionalMaster
+	10, // 14: yandex.cloud.k8s.v1.Master.locations:type_name -> yandex.cloud.k8s.v1.Location
+	11, // 15: yandex.cloud.k8s.v1.Master.endpoints:type_name -> yandex.cloud.k8s.v1.MasterEndpoints
+	7,  // 16: yandex.cloud.k8s.v1.Master.master_auth:type_name -> yandex.cloud.k8s.v1.MasterAuth
+	26, // 17: yandex.cloud.k8s.v1.Master.version_info:type_name -> yandex.cloud.k8s.v1.VersionInfo
+	13, // 18: yandex.cloud.k8s.v1.Master.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	14, // 19: yandex.cloud.k8s.v1.Master.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	18, // 20: yandex.cloud.k8s.v1.Master.resources:type_name -> yandex.cloud.k8s.v1.MasterResources
+	19, // 21: yandex.cloud.k8s.v1.Master.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy
+	27, // 22: yandex.cloud.k8s.v1.MasterMaintenancePolicy.maintenance_window:type_name -> yandex.cloud.k8s.v1.MaintenanceWindow
+	3,  // 23: yandex.cloud.k8s.v1.NetworkPolicy.provider:type_name -> yandex.cloud.k8s.v1.NetworkPolicy.Provider
+	4,  // 24: yandex.cloud.k8s.v1.Cilium.routing_mode:type_name -> yandex.cloud.k8s.v1.Cilium.RoutingMode
+	22, // 25: yandex.cloud.k8s.v1.MasterScalePolicy.fixed_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
+	23, // 26: yandex.cloud.k8s.v1.MasterScalePolicy.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.AutoScale
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_k8s_v1_cluster_proto_init() }
@@ -1930,7 +2008,7 @@ func file_yandex_cloud_k8s_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_k8s_v1_cluster_proto_rawDesc), len(file_yandex_cloud_k8s_v1_cluster_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   18,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

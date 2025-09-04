@@ -62,6 +62,10 @@ func (m *GenSearchRequest) SetGetPartialResults(v bool) {
 	m.GetPartialResults = v
 }
 
+func (m *GenSearchRequest) SetMetadata(v *SearchMetadata) {
+	m.Metadata = v
+}
+
 func (m *GenSearchRequest_SiteOption) SetSite(v []string) {
 	m.Site = v
 }

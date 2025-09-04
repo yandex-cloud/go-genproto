@@ -24,7 +24,7 @@ const (
 // PresignObjectRequest represents a single object presign request
 type PresignObjectRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Expiration time in seconds (1-604800, max 7 days)
+	// Expiration time in seconds
 	Expires int64 `protobuf:"varint,1,opt,name=expires,proto3" json:"expires,omitempty"`
 	// Object name/key
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`

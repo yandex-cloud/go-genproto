@@ -60,6 +60,16 @@ func (m *CreateJobRequest) SetPysparkJob(v *PysparkJob) {
 	}
 }
 
+func (m *CreateJobRequest) SetSparkConnectJob(v *SparkConnectJob) {
+	m.JobSpec = &CreateJobRequest_SparkConnectJob{
+		SparkConnectJob: v,
+	}
+}
+
+func (m *CreateJobRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 func (m *CreateJobMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

@@ -119,9 +119,14 @@ type Job struct {
 	//
 	//	*Job_SparkJob
 	//	*Job_PysparkJob
+	//	*Job_SparkConnectJob
 	JobSpec isJob_JobSpec `protobuf_oneof:"job_spec"`
 	// Spark UI Url.
-	UiUrl         string `protobuf:"bytes,12,opt,name=ui_url,json=uiUrl,proto3" json:"ui_url,omitempty"`
+	UiUrl string `protobuf:"bytes,12,opt,name=ui_url,json=uiUrl,proto3" json:"ui_url,omitempty"`
+	// Service account used to access Cloud resources.
+	ServiceAccountId string `protobuf:"bytes,13,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Spark Connect Url.
+	ConnectUrl    string `protobuf:"bytes,14,opt,name=connect_url,json=connectUrl,proto3" json:"connect_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -237,9 +242,32 @@ func (x *Job) GetPysparkJob() *PysparkJob {
 	return nil
 }
 
+func (x *Job) GetSparkConnectJob() *SparkConnectJob {
+	if x != nil {
+		if x, ok := x.JobSpec.(*Job_SparkConnectJob); ok {
+			return x.SparkConnectJob
+		}
+	}
+	return nil
+}
+
 func (x *Job) GetUiUrl() string {
 	if x != nil {
 		return x.UiUrl
+	}
+	return ""
+}
+
+func (x *Job) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+func (x *Job) GetConnectUrl() string {
+	if x != nil {
+		return x.ConnectUrl
 	}
 	return ""
 }
@@ -256,9 +284,15 @@ type Job_PysparkJob struct {
 	PysparkJob *PysparkJob `protobuf:"bytes,10,opt,name=pyspark_job,json=pysparkJob,proto3,oneof"`
 }
 
+type Job_SparkConnectJob struct {
+	SparkConnectJob *SparkConnectJob `protobuf:"bytes,20,opt,name=spark_connect_job,json=sparkConnectJob,proto3,oneof"`
+}
+
 func (*Job_SparkJob) isJob_JobSpec() {}
 
 func (*Job_PysparkJob) isJob_JobSpec() {}
+
+func (*Job_SparkConnectJob) isJob_JobSpec() {}
 
 type SparkJob struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -386,6 +420,105 @@ func (x *SparkJob) GetExcludePackages() []string {
 	return nil
 }
 
+type SparkConnectJob struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Jar file URIs to add to the CLASSPATHs of the Spark driver and tasks.
+	JarFileUris []string `protobuf:"bytes,1,rep,name=jar_file_uris,json=jarFileUris,proto3" json:"jar_file_uris,omitempty"`
+	// URIs of files to be copied to the working directory of Spark drivers and distributed tasks.
+	FileUris []string `protobuf:"bytes,2,rep,name=file_uris,json=fileUris,proto3" json:"file_uris,omitempty"`
+	// URIs of archives to be extracted in the working directory of Spark drivers and tasks.
+	ArchiveUris []string `protobuf:"bytes,3,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
+	// A mapping of property names to values, used to configure Spark.
+	Properties map[string]string `protobuf:"bytes,4,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// List of maven coordinates of jars to include on the driver and executor classpaths.
+	Packages []string `protobuf:"bytes,5,rep,name=packages,proto3" json:"packages,omitempty"`
+	// List of additional remote repositories to search for the maven coordinates given with --packages.
+	Repositories []string `protobuf:"bytes,6,rep,name=repositories,proto3" json:"repositories,omitempty"`
+	// List of groupId:artifactId, to exclude while resolving the dependencies provided in --packages to avoid dependency conflicts.
+	ExcludePackages []string `protobuf:"bytes,7,rep,name=exclude_packages,json=excludePackages,proto3" json:"exclude_packages,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SparkConnectJob) Reset() {
+	*x = SparkConnectJob{}
+	mi := &file_yandex_cloud_spark_v1_job_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SparkConnectJob) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SparkConnectJob) ProtoMessage() {}
+
+func (x *SparkConnectJob) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_spark_v1_job_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SparkConnectJob.ProtoReflect.Descriptor instead.
+func (*SparkConnectJob) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_job_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SparkConnectJob) GetJarFileUris() []string {
+	if x != nil {
+		return x.JarFileUris
+	}
+	return nil
+}
+
+func (x *SparkConnectJob) GetFileUris() []string {
+	if x != nil {
+		return x.FileUris
+	}
+	return nil
+}
+
+func (x *SparkConnectJob) GetArchiveUris() []string {
+	if x != nil {
+		return x.ArchiveUris
+	}
+	return nil
+}
+
+func (x *SparkConnectJob) GetProperties() map[string]string {
+	if x != nil {
+		return x.Properties
+	}
+	return nil
+}
+
+func (x *SparkConnectJob) GetPackages() []string {
+	if x != nil {
+		return x.Packages
+	}
+	return nil
+}
+
+func (x *SparkConnectJob) GetRepositories() []string {
+	if x != nil {
+		return x.Repositories
+	}
+	return nil
+}
+
+func (x *SparkConnectJob) GetExcludePackages() []string {
+	if x != nil {
+		return x.ExcludePackages
+	}
+	return nil
+}
+
 type PysparkJob struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional arguments to pass to the driver.
@@ -414,7 +547,7 @@ type PysparkJob struct {
 
 func (x *PysparkJob) Reset() {
 	*x = PysparkJob{}
-	mi := &file_yandex_cloud_spark_v1_job_proto_msgTypes[2]
+	mi := &file_yandex_cloud_spark_v1_job_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -426,7 +559,7 @@ func (x *PysparkJob) String() string {
 func (*PysparkJob) ProtoMessage() {}
 
 func (x *PysparkJob) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_job_proto_msgTypes[2]
+	mi := &file_yandex_cloud_spark_v1_job_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -439,7 +572,7 @@ func (x *PysparkJob) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PysparkJob.ProtoReflect.Descriptor instead.
 func (*PysparkJob) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_job_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_spark_v1_job_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PysparkJob) GetArgs() []string {
@@ -516,7 +649,7 @@ var File_yandex_cloud_spark_v1_job_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x1fyandex/cloud/spark/v1/job.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x87\x05\n" +
+	"\x1fyandex/cloud/spark/v1/job.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x06\n" +
 	"\x03Job\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -534,8 +667,12 @@ const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\tspark_job\x18\t \x01(\v2\x1f.yandex.cloud.spark.v1.SparkJobH\x00R\bsparkJob\x12D\n" +
 	"\vpyspark_job\x18\n" +
 	" \x01(\v2!.yandex.cloud.spark.v1.PysparkJobH\x00R\n" +
-	"pysparkJob\x12\x15\n" +
-	"\x06ui_url\x18\f \x01(\tR\x05uiUrl\"\x80\x01\n" +
+	"pysparkJob\x12T\n" +
+	"\x11spark_connect_job\x18\x14 \x01(\v2&.yandex.cloud.spark.v1.SparkConnectJobH\x00R\x0fsparkConnectJob\x12\x15\n" +
+	"\x06ui_url\x18\f \x01(\tR\x05uiUrl\x12,\n" +
+	"\x12service_account_id\x18\r \x01(\tR\x10serviceAccountId\x12\x1f\n" +
+	"\vconnect_url\x18\x0e \x01(\tR\n" +
+	"connectUrl\"\x80\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROVISIONING\x10\x01\x12\v\n" +
@@ -547,7 +684,7 @@ const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\n" +
 	"CANCELLING\x10\aB\n" +
 	"\n" +
-	"\bjob_specJ\x04\b\v\x10\f\"\xc7\x03\n" +
+	"\bjob_specJ\x04\b\v\x10\fJ\x04\b\x0f\x10\x14\"\xc7\x03\n" +
 	"\bSparkJob\x12\x12\n" +
 	"\x04args\x18\x01 \x03(\tR\x04args\x12\"\n" +
 	"\rjar_file_uris\x18\x02 \x03(\tR\vjarFileUris\x12\x1b\n" +
@@ -563,6 +700,19 @@ const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\frepositories\x18\t \x03(\tR\frepositories\x12)\n" +
 	"\x10exclude_packages\x18\n" +
 	" \x03(\tR\x0fexcludePackages\x1a=\n" +
+	"\x0fPropertiesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf7\x02\n" +
+	"\x0fSparkConnectJob\x12\"\n" +
+	"\rjar_file_uris\x18\x01 \x03(\tR\vjarFileUris\x12\x1b\n" +
+	"\tfile_uris\x18\x02 \x03(\tR\bfileUris\x12!\n" +
+	"\farchive_uris\x18\x03 \x03(\tR\varchiveUris\x12V\n" +
+	"\n" +
+	"properties\x18\x04 \x03(\v26.yandex.cloud.spark.v1.SparkConnectJob.PropertiesEntryR\n" +
+	"properties\x12\x1a\n" +
+	"\bpackages\x18\x05 \x03(\tR\bpackages\x12\"\n" +
+	"\frepositories\x18\x06 \x03(\tR\frepositories\x12)\n" +
+	"\x10exclude_packages\x18\a \x03(\tR\x0fexcludePackages\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xdc\x03\n" +
@@ -599,30 +749,34 @@ func file_yandex_cloud_spark_v1_job_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_spark_v1_job_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_spark_v1_job_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_spark_v1_job_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_spark_v1_job_proto_goTypes = []any{
 	(Job_Status)(0),               // 0: yandex.cloud.spark.v1.Job.Status
 	(*Job)(nil),                   // 1: yandex.cloud.spark.v1.Job
 	(*SparkJob)(nil),              // 2: yandex.cloud.spark.v1.SparkJob
-	(*PysparkJob)(nil),            // 3: yandex.cloud.spark.v1.PysparkJob
-	nil,                           // 4: yandex.cloud.spark.v1.SparkJob.PropertiesEntry
-	nil,                           // 5: yandex.cloud.spark.v1.PysparkJob.PropertiesEntry
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*SparkConnectJob)(nil),       // 3: yandex.cloud.spark.v1.SparkConnectJob
+	(*PysparkJob)(nil),            // 4: yandex.cloud.spark.v1.PysparkJob
+	nil,                           // 5: yandex.cloud.spark.v1.SparkJob.PropertiesEntry
+	nil,                           // 6: yandex.cloud.spark.v1.SparkConnectJob.PropertiesEntry
+	nil,                           // 7: yandex.cloud.spark.v1.PysparkJob.PropertiesEntry
+	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
 }
 var file_yandex_cloud_spark_v1_job_proto_depIdxs = []int32{
-	6, // 0: yandex.cloud.spark.v1.Job.created_at:type_name -> google.protobuf.Timestamp
-	6, // 1: yandex.cloud.spark.v1.Job.started_at:type_name -> google.protobuf.Timestamp
-	6, // 2: yandex.cloud.spark.v1.Job.finished_at:type_name -> google.protobuf.Timestamp
-	0, // 3: yandex.cloud.spark.v1.Job.status:type_name -> yandex.cloud.spark.v1.Job.Status
-	2, // 4: yandex.cloud.spark.v1.Job.spark_job:type_name -> yandex.cloud.spark.v1.SparkJob
-	3, // 5: yandex.cloud.spark.v1.Job.pyspark_job:type_name -> yandex.cloud.spark.v1.PysparkJob
-	4, // 6: yandex.cloud.spark.v1.SparkJob.properties:type_name -> yandex.cloud.spark.v1.SparkJob.PropertiesEntry
-	5, // 7: yandex.cloud.spark.v1.PysparkJob.properties:type_name -> yandex.cloud.spark.v1.PysparkJob.PropertiesEntry
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	8,  // 0: yandex.cloud.spark.v1.Job.created_at:type_name -> google.protobuf.Timestamp
+	8,  // 1: yandex.cloud.spark.v1.Job.started_at:type_name -> google.protobuf.Timestamp
+	8,  // 2: yandex.cloud.spark.v1.Job.finished_at:type_name -> google.protobuf.Timestamp
+	0,  // 3: yandex.cloud.spark.v1.Job.status:type_name -> yandex.cloud.spark.v1.Job.Status
+	2,  // 4: yandex.cloud.spark.v1.Job.spark_job:type_name -> yandex.cloud.spark.v1.SparkJob
+	4,  // 5: yandex.cloud.spark.v1.Job.pyspark_job:type_name -> yandex.cloud.spark.v1.PysparkJob
+	3,  // 6: yandex.cloud.spark.v1.Job.spark_connect_job:type_name -> yandex.cloud.spark.v1.SparkConnectJob
+	5,  // 7: yandex.cloud.spark.v1.SparkJob.properties:type_name -> yandex.cloud.spark.v1.SparkJob.PropertiesEntry
+	6,  // 8: yandex.cloud.spark.v1.SparkConnectJob.properties:type_name -> yandex.cloud.spark.v1.SparkConnectJob.PropertiesEntry
+	7,  // 9: yandex.cloud.spark.v1.PysparkJob.properties:type_name -> yandex.cloud.spark.v1.PysparkJob.PropertiesEntry
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_spark_v1_job_proto_init() }
@@ -633,6 +787,7 @@ func file_yandex_cloud_spark_v1_job_proto_init() {
 	file_yandex_cloud_spark_v1_job_proto_msgTypes[0].OneofWrappers = []any{
 		(*Job_SparkJob)(nil),
 		(*Job_PysparkJob)(nil),
+		(*Job_SparkConnectJob)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -640,7 +795,7 @@ func file_yandex_cloud_spark_v1_job_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_spark_v1_job_proto_rawDesc), len(file_yandex_cloud_spark_v1_job_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -112,6 +112,10 @@ func (m *UpdateClusterRequest) SetIpAllocationPolicy(v *IPAllocationPolicy) {
 	m.IpAllocationPolicy = v
 }
 
+func (m *UpdateClusterRequest) SetWorkloadIdentityFederation(v *WorkloadIdentityFederationSpec) {
+	m.WorkloadIdentityFederation = v
+}
+
 func (m *MasterUpdateSpec) SetVersion(v *UpdateVersionSpec) {
 	m.Version = v
 }
@@ -214,6 +218,10 @@ func (m *CreateClusterRequest) SetCilium(v *Cilium) {
 	m.NetworkImplementation = &CreateClusterRequest_Cilium{
 		Cilium: v,
 	}
+}
+
+func (m *CreateClusterRequest) SetWorkloadIdentityFederation(v *WorkloadIdentityFederationSpec) {
+	m.WorkloadIdentityFederation = v
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {
@@ -424,4 +432,8 @@ func (m *MasterScalePolicySpec) SetAutoScale(v *MasterScalePolicySpec_AutoScale)
 
 func (m *MasterScalePolicySpec_AutoScale) SetMinResourcePresetId(v string) {
 	m.MinResourcePresetId = v
+}
+
+func (m *WorkloadIdentityFederationSpec) SetEnabled(v bool) {
+	m.Enabled = v
 }

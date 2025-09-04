@@ -58,6 +58,10 @@ func (m *WebSearchRequest) SetUserAgent(v string) {
 	m.UserAgent = v
 }
 
+func (m *WebSearchRequest) SetMetadata(v *SearchMetadata) {
+	m.Metadata = v
+}
+
 func (m *WebSearchResponse) SetRawData(v []byte) {
 	m.RawData = v
 }

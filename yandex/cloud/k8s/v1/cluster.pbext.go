@@ -102,6 +102,10 @@ func (m *Cluster) SetScheduledMaintenance(v *ScheduledMaintenance) {
 	m.ScheduledMaintenance = v
 }
 
+func (m *Cluster) SetWorkloadIdentityFederation(v *WorkloadIdentityFederation) {
+	m.WorkloadIdentityFederation = v
+}
+
 type Master_MasterType = isMaster_MasterType
 
 func (m *Master) SetMasterType(v Master_MasterType) {
@@ -330,4 +334,16 @@ func (m *MasterScalePolicy_FixedScale) SetResourcePresetId(v string) {
 
 func (m *MasterScalePolicy_AutoScale) SetMinResourcePresetId(v string) {
 	m.MinResourcePresetId = v
+}
+
+func (m *WorkloadIdentityFederation) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *WorkloadIdentityFederation) SetIssuer(v string) {
+	m.Issuer = v
+}
+
+func (m *WorkloadIdentityFederation) SetJwksUri(v string) {
+	m.JwksUri = v
 }

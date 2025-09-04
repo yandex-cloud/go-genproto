@@ -222,9 +222,12 @@ type CreateJobRequest struct {
 	//
 	//	*CreateJobRequest_SparkJob
 	//	*CreateJobRequest_PysparkJob
-	JobSpec       isCreateJobRequest_JobSpec `protobuf_oneof:"job_spec"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	//	*CreateJobRequest_SparkConnectJob
+	JobSpec isCreateJobRequest_JobSpec `protobuf_oneof:"job_spec"`
+	// Service account used to access Cloud resources.
+	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *CreateJobRequest) Reset() {
@@ -296,6 +299,22 @@ func (x *CreateJobRequest) GetPysparkJob() *PysparkJob {
 	return nil
 }
 
+func (x *CreateJobRequest) GetSparkConnectJob() *SparkConnectJob {
+	if x != nil {
+		if x, ok := x.JobSpec.(*CreateJobRequest_SparkConnectJob); ok {
+			return x.SparkConnectJob
+		}
+	}
+	return nil
+}
+
+func (x *CreateJobRequest) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
 type isCreateJobRequest_JobSpec interface {
 	isCreateJobRequest_JobSpec()
 }
@@ -308,9 +327,15 @@ type CreateJobRequest_PysparkJob struct {
 	PysparkJob *PysparkJob `protobuf:"bytes,4,opt,name=pyspark_job,json=pysparkJob,proto3,oneof"`
 }
 
+type CreateJobRequest_SparkConnectJob struct {
+	SparkConnectJob *SparkConnectJob `protobuf:"bytes,5,opt,name=spark_connect_job,json=sparkConnectJob,proto3,oneof"`
+}
+
 func (*CreateJobRequest_SparkJob) isCreateJobRequest_JobSpec() {}
 
 func (*CreateJobRequest_PysparkJob) isCreateJobRequest_JobSpec() {}
+
+func (*CreateJobRequest_SparkConnectJob) isCreateJobRequest_JobSpec() {}
 
 type CreateJobMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -574,16 +599,18 @@ const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"u\n" +
 	"\x10ListJobsResponse\x12.\n" +
 	"\x04jobs\x18\x01 \x03(\v2\x1a.yandex.cloud.spark.v1.JobR\x04jobs\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\x88\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xa2\x03\n" +
 	"\x10CreateJobRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12>\n" +
 	"\tspark_job\x18\x03 \x01(\v2\x1f.yandex.cloud.spark.v1.SparkJobH\x00R\bsparkJob\x12D\n" +
 	"\vpyspark_job\x18\x04 \x01(\v2!.yandex.cloud.spark.v1.PysparkJobH\x00R\n" +
-	"pysparkJobB\n" +
+	"pysparkJob\x12T\n" +
+	"\x11spark_connect_job\x18\x05 \x01(\v2&.yandex.cloud.spark.v1.SparkConnectJobH\x00R\x0fsparkConnectJob\x126\n" +
+	"\x12service_account_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountIdB\n" +
 	"\n" +
-	"\bjob_spec\"a\n" +
+	"\bjob_specJ\x04\b\x06\x10\aJ\x04\b\a\x10\b\"a\n" +
 	"\x11CreateJobMetadata\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\x1f\n" +
@@ -638,27 +665,29 @@ var file_yandex_cloud_spark_v1_job_service_proto_goTypes = []any{
 	(*Job)(nil),                 // 8: yandex.cloud.spark.v1.Job
 	(*SparkJob)(nil),            // 9: yandex.cloud.spark.v1.SparkJob
 	(*PysparkJob)(nil),          // 10: yandex.cloud.spark.v1.PysparkJob
-	(*operation.Operation)(nil), // 11: yandex.cloud.operation.Operation
+	(*SparkConnectJob)(nil),     // 11: yandex.cloud.spark.v1.SparkConnectJob
+	(*operation.Operation)(nil), // 12: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_spark_v1_job_service_proto_depIdxs = []int32{
 	8,  // 0: yandex.cloud.spark.v1.ListJobsResponse.jobs:type_name -> yandex.cloud.spark.v1.Job
 	9,  // 1: yandex.cloud.spark.v1.CreateJobRequest.spark_job:type_name -> yandex.cloud.spark.v1.SparkJob
 	10, // 2: yandex.cloud.spark.v1.CreateJobRequest.pyspark_job:type_name -> yandex.cloud.spark.v1.PysparkJob
-	1,  // 3: yandex.cloud.spark.v1.JobService.List:input_type -> yandex.cloud.spark.v1.ListJobsRequest
-	3,  // 4: yandex.cloud.spark.v1.JobService.Create:input_type -> yandex.cloud.spark.v1.CreateJobRequest
-	0,  // 5: yandex.cloud.spark.v1.JobService.Get:input_type -> yandex.cloud.spark.v1.GetJobRequest
-	6,  // 6: yandex.cloud.spark.v1.JobService.ListLog:input_type -> yandex.cloud.spark.v1.ListJobLogRequest
-	5,  // 7: yandex.cloud.spark.v1.JobService.Cancel:input_type -> yandex.cloud.spark.v1.CancelJobRequest
-	2,  // 8: yandex.cloud.spark.v1.JobService.List:output_type -> yandex.cloud.spark.v1.ListJobsResponse
-	11, // 9: yandex.cloud.spark.v1.JobService.Create:output_type -> yandex.cloud.operation.Operation
-	8,  // 10: yandex.cloud.spark.v1.JobService.Get:output_type -> yandex.cloud.spark.v1.Job
-	7,  // 11: yandex.cloud.spark.v1.JobService.ListLog:output_type -> yandex.cloud.spark.v1.ListJobLogResponse
-	11, // 12: yandex.cloud.spark.v1.JobService.Cancel:output_type -> yandex.cloud.operation.Operation
-	8,  // [8:13] is the sub-list for method output_type
-	3,  // [3:8] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	11, // 3: yandex.cloud.spark.v1.CreateJobRequest.spark_connect_job:type_name -> yandex.cloud.spark.v1.SparkConnectJob
+	1,  // 4: yandex.cloud.spark.v1.JobService.List:input_type -> yandex.cloud.spark.v1.ListJobsRequest
+	3,  // 5: yandex.cloud.spark.v1.JobService.Create:input_type -> yandex.cloud.spark.v1.CreateJobRequest
+	0,  // 6: yandex.cloud.spark.v1.JobService.Get:input_type -> yandex.cloud.spark.v1.GetJobRequest
+	6,  // 7: yandex.cloud.spark.v1.JobService.ListLog:input_type -> yandex.cloud.spark.v1.ListJobLogRequest
+	5,  // 8: yandex.cloud.spark.v1.JobService.Cancel:input_type -> yandex.cloud.spark.v1.CancelJobRequest
+	2,  // 9: yandex.cloud.spark.v1.JobService.List:output_type -> yandex.cloud.spark.v1.ListJobsResponse
+	12, // 10: yandex.cloud.spark.v1.JobService.Create:output_type -> yandex.cloud.operation.Operation
+	8,  // 11: yandex.cloud.spark.v1.JobService.Get:output_type -> yandex.cloud.spark.v1.Job
+	7,  // 12: yandex.cloud.spark.v1.JobService.ListLog:output_type -> yandex.cloud.spark.v1.ListJobLogResponse
+	12, // 13: yandex.cloud.spark.v1.JobService.Cancel:output_type -> yandex.cloud.operation.Operation
+	9,  // [9:14] is the sub-list for method output_type
+	4,  // [4:9] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_spark_v1_job_service_proto_init() }
@@ -670,6 +699,7 @@ func file_yandex_cloud_spark_v1_job_service_proto_init() {
 	file_yandex_cloud_spark_v1_job_service_proto_msgTypes[3].OneofWrappers = []any{
 		(*CreateJobRequest_SparkJob)(nil),
 		(*CreateJobRequest_PysparkJob)(nil),
+		(*CreateJobRequest_SparkConnectJob)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
