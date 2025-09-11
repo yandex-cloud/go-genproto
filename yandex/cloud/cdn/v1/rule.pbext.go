@@ -17,3 +17,7 @@ func (m *Rule) SetRulePattern(v string) {
 func (m *Rule) SetOptions(v *ResourceOptions) {
 	m.Options = v
 }
+
+func (m *Rule) SetWeight(v int64) {
+	m.Weight = v
+}

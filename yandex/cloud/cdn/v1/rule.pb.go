@@ -31,8 +31,11 @@ type Rule struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Rule pattern.
 	// Must be a valid regular expression.
-	RulePattern   string           `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options       *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
+	RulePattern string           `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	Options     *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
+	// Rules are ordered by weight in ascending order (lower weights execute first)
+	// Weight must be between 0 and 9999 inclusive
+	Weight        int64 `protobuf:"varint,5,opt,name=weight,proto3" json:"weight,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -95,16 +98,24 @@ func (x *Rule) GetOptions() *ResourceOptions {
 	return nil
 }
 
+func (x *Rule) GetWeight() int64 {
+	if x != nil {
+		return x.Weight
+	}
+	return 0
+}
+
 var File_yandex_cloud_cdn_v1_rule_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_rule_proto_rawDesc = "" +
 	"\n" +
-	"\x1eyandex/cloud/cdn/v1/rule.proto\x12\x13yandex.cloud.cdn.v1\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xb2\x01\n" +
+	"\x1eyandex/cloud/cdn/v1/rule.proto\x12\x13yandex.cloud.cdn.v1\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xca\x01\n" +
 	"\x04Rule\x12\x16\n" +
 	"\x02id\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0R\x02id\x12 \n" +
 	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x120\n" +
 	"\frule_pattern\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
-	"\aoptions\x18\x04 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptionsBV\n" +
+	"\aoptions\x18\x04 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12\x16\n" +
+	"\x06weight\x18\x05 \x01(\x03R\x06weightBV\n" +
 	"\x17yandex.cloud.api.cdn.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cdn/v1;cdnb\x06proto3"
 
 var (

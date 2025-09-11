@@ -34,6 +34,7 @@ type Widget struct {
 	//	*Widget_Title
 	//	*Widget_Chart
 	//	*Widget_MultiSourceChart
+	//	*Widget_Group
 	Widget        isWidget_Widget `protobuf_oneof:"widget"`
 	Links         []*LinkItem     `protobuf:"bytes,12,rep,name=links,proto3" json:"links,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -120,6 +121,15 @@ func (x *Widget) GetMultiSourceChart() *MultiSourceChartWidget {
 	return nil
 }
 
+func (x *Widget) GetGroup() *GroupWidget {
+	if x != nil {
+		if x, ok := x.Widget.(*Widget_Group); ok {
+			return x.Group
+		}
+	}
+	return nil
+}
+
 func (x *Widget) GetLinks() []*LinkItem {
 	if x != nil {
 		return x.Links
@@ -151,6 +161,11 @@ type Widget_MultiSourceChart struct {
 	MultiSourceChart *MultiSourceChartWidget `protobuf:"bytes,10,opt,name=multi_source_chart,json=multiSourceChart,proto3,oneof"`
 }
 
+type Widget_Group struct {
+	// Group widget.
+	Group *GroupWidget `protobuf:"bytes,11,opt,name=group,proto3,oneof"`
+}
+
 func (*Widget_Text) isWidget_Widget() {}
 
 func (*Widget_Title) isWidget_Widget() {}
@@ -158,6 +173,8 @@ func (*Widget_Title) isWidget_Widget() {}
 func (*Widget_Chart) isWidget_Widget() {}
 
 func (*Widget_MultiSourceChart) isWidget_Widget() {}
+
+func (*Widget_Group) isWidget_Widget() {}
 
 // Layout item for widget item positioning.
 type Widget_LayoutPosition struct {
@@ -236,14 +253,15 @@ var File_yandex_cloud_monitoring_v3_widget_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_widget_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/monitoring/v3/widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a-yandex/cloud/monitoring/v3/chart_widget.proto\x1a,yandex/cloud/monitoring/v3/text_widget.proto\x1a-yandex/cloud/monitoring/v3/title_widget.proto\x1a:yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\"\x9d\x04\n" +
+	"'yandex/cloud/monitoring/v3/widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a-yandex/cloud/monitoring/v3/chart_widget.proto\x1a,yandex/cloud/monitoring/v3/text_widget.proto\x1a-yandex/cloud/monitoring/v3/title_widget.proto\x1a:yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a-yandex/cloud/monitoring/v3/group_widget.proto\"\xd8\x04\n" +
 	"\x06Widget\x12M\n" +
 	"\bposition\x18\x01 \x01(\v21.yandex.cloud.monitoring.v3.Widget.LayoutPositionR\bposition\x12<\n" +
 	"\x04text\x18\x02 \x01(\v2&.yandex.cloud.monitoring.v3.TextWidgetH\x00R\x04text\x12?\n" +
 	"\x05title\x18\x03 \x01(\v2'.yandex.cloud.monitoring.v3.TitleWidgetH\x00R\x05title\x12?\n" +
 	"\x05chart\x18\x05 \x01(\v2'.yandex.cloud.monitoring.v3.ChartWidgetH\x00R\x05chart\x12b\n" +
 	"\x12multi_source_chart\x18\n" +
-	" \x01(\v22.yandex.cloud.monitoring.v3.MultiSourceChartWidgetH\x00R\x10multiSourceChart\x12:\n" +
+	" \x01(\v22.yandex.cloud.monitoring.v3.MultiSourceChartWidgetH\x00R\x10multiSourceChart\x12?\n" +
+	"\x05group\x18\v \x01(\v2'.yandex.cloud.monitoring.v3.GroupWidgetH\x00R\x05group\x12:\n" +
 	"\x05links\x18\f \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x1aH\n" +
 	"\x0eLayoutPosition\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x03R\x01x\x12\f\n" +
@@ -251,7 +269,7 @@ const file_yandex_cloud_monitoring_v3_widget_proto_rawDesc = "" +
 	"\x01w\x18\x03 \x01(\x03R\x01w\x12\f\n" +
 	"\x01h\x18\x04 \x01(\x03R\x01hB\b\n" +
 	"\x06widgetJ\x04\b\x04\x10\x05J\x04\b\x06\x10\n" +
-	"J\x04\b\v\x10\fBk\n" +
+	"Bk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
 var (
@@ -274,7 +292,8 @@ var file_yandex_cloud_monitoring_v3_widget_proto_goTypes = []any{
 	(*TitleWidget)(nil),            // 3: yandex.cloud.monitoring.v3.TitleWidget
 	(*ChartWidget)(nil),            // 4: yandex.cloud.monitoring.v3.ChartWidget
 	(*MultiSourceChartWidget)(nil), // 5: yandex.cloud.monitoring.v3.MultiSourceChartWidget
-	(*LinkItem)(nil),               // 6: yandex.cloud.monitoring.v3.LinkItem
+	(*GroupWidget)(nil),            // 6: yandex.cloud.monitoring.v3.GroupWidget
+	(*LinkItem)(nil),               // 7: yandex.cloud.monitoring.v3.LinkItem
 }
 var file_yandex_cloud_monitoring_v3_widget_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.monitoring.v3.Widget.position:type_name -> yandex.cloud.monitoring.v3.Widget.LayoutPosition
@@ -282,12 +301,13 @@ var file_yandex_cloud_monitoring_v3_widget_proto_depIdxs = []int32{
 	3, // 2: yandex.cloud.monitoring.v3.Widget.title:type_name -> yandex.cloud.monitoring.v3.TitleWidget
 	4, // 3: yandex.cloud.monitoring.v3.Widget.chart:type_name -> yandex.cloud.monitoring.v3.ChartWidget
 	5, // 4: yandex.cloud.monitoring.v3.Widget.multi_source_chart:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget
-	6, // 5: yandex.cloud.monitoring.v3.Widget.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	6, // 5: yandex.cloud.monitoring.v3.Widget.group:type_name -> yandex.cloud.monitoring.v3.GroupWidget
+	7, // 6: yandex.cloud.monitoring.v3.Widget.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_widget_proto_init() }
@@ -300,11 +320,13 @@ func file_yandex_cloud_monitoring_v3_widget_proto_init() {
 	file_yandex_cloud_monitoring_v3_title_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_link_item_proto_init()
+	file_yandex_cloud_monitoring_v3_group_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_widget_proto_msgTypes[0].OneofWrappers = []any{
 		(*Widget_Text)(nil),
 		(*Widget_Title)(nil),
 		(*Widget_Chart)(nil),
 		(*Widget_MultiSourceChart)(nil),
+		(*Widget_Group)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

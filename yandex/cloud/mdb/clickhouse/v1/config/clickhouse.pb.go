@@ -1990,7 +1990,9 @@ type ClickhouseConfig_MergeTree struct {
 	MaxPartsInTotal *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=max_parts_in_total,json=maxPartsInTotal,proto3" json:"max_parts_in_total,omitempty"`
 	// How many tasks of merging and mutating parts are allowed simultaneously in ReplicatedMergeTree queue.
 	//
-	// Default value: **16**.
+	// Default value: **32** for versions 25.8 and higher, **16** for versions 25.7 and lower.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#max_replicated_merges_in_queue).
 	MaxReplicatedMergesInQueue *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=max_replicated_merges_in_queue,json=maxReplicatedMergesInQueue,proto3" json:"max_replicated_merges_in_queue,omitempty"`
 	// When there is less than the specified number of free entries in pool (or replicated queue), start to lower maximum size of
 	// merge to process (or to put in queue). This is to allow small merges to process - not filling the pool with long running merges.

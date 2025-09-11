@@ -36,6 +36,12 @@ func (m *Widget) SetMultiSourceChart(v *MultiSourceChartWidget) {
 	}
 }
 
+func (m *Widget) SetGroup(v *GroupWidget) {
+	m.Widget = &Widget_Group{
+		Group: v,
+	}
+}
+
 func (m *Widget) SetLinks(v []*LinkItem) {
 	m.Links = v
 }

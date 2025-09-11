@@ -26,6 +26,10 @@ func (m *CreateResourceRuleRequest) SetOptions(v *ResourceOptions) {
 	m.Options = v
 }
 
+func (m *CreateResourceRuleRequest) SetWeight(v int64) {
+	m.Weight = v
+}
+
 func (m *CreateResourceRuleMetadata) SetResourceId(v string) {
 	m.ResourceId = v
 }
@@ -60,6 +64,10 @@ func (m *UpdateResourceRuleRequest) SetRulePattern(v string) {
 
 func (m *UpdateResourceRuleRequest) SetOptions(v *ResourceOptions) {
 	m.Options = v
+}
+
+func (m *UpdateResourceRuleRequest) SetWeight(v *int64) {
+	m.Weight = v
 }
 
 func (m *UpdateResourceRuleMetadata) SetResourceId(v string) {

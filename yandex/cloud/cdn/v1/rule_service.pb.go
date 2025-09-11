@@ -122,8 +122,11 @@ type CreateResourceRuleRequest struct {
 	// Name of created resource rule.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource rule pattern.
-	RulePattern   string           `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options       *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
+	RulePattern string           `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	Options     *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
+	// Rules are ordered by weight in ascending order (lower weights execute first)
+	// Weight must be between 0 and 9999 inclusive
+	Weight        int64 `protobuf:"varint,5,opt,name=weight,proto3" json:"weight,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -184,6 +187,13 @@ func (x *CreateResourceRuleRequest) GetOptions() *ResourceOptions {
 		return x.Options
 	}
 	return nil
+}
+
+func (x *CreateResourceRuleRequest) GetWeight() int64 {
+	if x != nil {
+		return x.Weight
+	}
+	return 0
 }
 
 type CreateResourceRuleMetadata struct {
@@ -303,8 +313,11 @@ type UpdateResourceRuleRequest struct {
 	// Name of updated resource rule.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource rule pattern.
-	RulePattern   string           `protobuf:"bytes,4,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options       *ResourceOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
+	RulePattern string           `protobuf:"bytes,4,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	Options     *ResourceOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
+	// Rules are ordered by weight in ascending order (lower weights execute first)
+	// Weight must be between 0 and 9999 inclusive
+	Weight        *int64 `protobuf:"varint,6,opt,name=weight,proto3,oneof" json:"weight,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -372,6 +385,13 @@ func (x *UpdateResourceRuleRequest) GetOptions() *ResourceOptions {
 		return x.Options
 	}
 	return nil
+}
+
+func (x *UpdateResourceRuleRequest) GetWeight() int64 {
+	if x != nil && x.Weight != nil {
+		return *x.Weight
+	}
+	return 0
 }
 
 type UpdateResourceRuleMetadata struct {
@@ -545,13 +565,14 @@ const file_yandex_cloud_cdn_v1_rule_service_proto_rawDesc = "" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\"L\n" +
 	"\x19ListResourceRulesResponse\x12/\n" +
-	"\x05rules\x18\x01 \x03(\v2\x19.yandex.cloud.cdn.v1.RuleR\x05rules\"\xde\x01\n" +
+	"\x05rules\x18\x01 \x03(\v2\x19.yandex.cloud.cdn.v1.RuleR\x05rules\"\xf6\x01\n" +
 	"\x19CreateResourceRuleRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12 \n" +
 	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x120\n" +
 	"\frule_pattern\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
-	"\aoptions\x18\x04 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\"l\n" +
+	"\aoptions\x18\x04 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12\x16\n" +
+	"\x06weight\x18\x05 \x01(\x03R\x06weight\"l\n" +
 	"\x1aCreateResourceRuleMetadata\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
@@ -559,14 +580,16 @@ const file_yandex_cloud_cdn_v1_rule_service_proto_rawDesc = "" +
 	"\x16GetResourceRuleRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
-	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\"\xf7\x01\n" +
+	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\"\x9f\x02\n" +
 	"\x19UpdateResourceRuleRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
 	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\x12\x1c\n" +
 	"\x04name\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12,\n" +
 	"\frule_pattern\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
-	"\aoptions\x18\x05 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\"l\n" +
+	"\aoptions\x18\x05 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12\x1b\n" +
+	"\x06weight\x18\x06 \x01(\x03H\x00R\x06weight\x88\x01\x01B\t\n" +
+	"\a_weight\"l\n" +
 	"\x1aUpdateResourceRuleMetadata\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
@@ -645,6 +668,7 @@ func file_yandex_cloud_cdn_v1_rule_service_proto_init() {
 	}
 	file_yandex_cloud_cdn_v1_resource_proto_init()
 	file_yandex_cloud_cdn_v1_rule_proto_init()
+	file_yandex_cloud_cdn_v1_rule_service_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
