@@ -86,6 +86,12 @@ func (m *Trail_Destination) SetDataStream(v *Trail_DataStream) {
 	}
 }
 
+func (m *Trail_Destination) SetEventrouter(v *Trail_EventRouter) {
+	m.Destination = &Trail_Destination_Eventrouter{
+		Eventrouter: v,
+	}
+}
+
 func (m *Trail_ObjectStorage) SetBucketId(v string) {
 	m.BucketId = v
 }
@@ -112,6 +118,10 @@ func (m *Trail_DataStream) SetDatabaseId(v string) {
 
 func (m *Trail_DataStream) SetStreamName(v string) {
 	m.StreamName = v
+}
+
+func (m *Trail_EventRouter) SetEventrouterConnectorId(v string) {
+	m.EventrouterConnectorId = v
 }
 
 func (m *Trail_Filter) SetPathFilter(v *Trail_PathFilter) {

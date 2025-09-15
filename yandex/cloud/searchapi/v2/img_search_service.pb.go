@@ -637,7 +637,7 @@ type ImageSearchByImageResponse struct {
 	Images []*ImageSearchByImageResponse_ImageInfo `protobuf:"bytes,1,rep,name=images,proto3" json:"images,omitempty"`
 	// The number of the page with search results.
 	Page int64 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	// The number of the last page with search results.
+	// Deprecated: Marked as deprecated in yandex/cloud/searchapi/v2/img_search_service.proto.
 	MaxPage int64 `protobuf:"varint,3,opt,name=max_page,json=maxPage,proto3" json:"max_page,omitempty"`
 	// CBIR ID of the image used for the search.
 	Id            string `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
@@ -689,6 +689,7 @@ func (x *ImageSearchByImageResponse) GetPage() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/searchapi/v2/img_search_service.proto.
 func (x *ImageSearchByImageResponse) GetMaxPage() int64 {
 	if x != nil {
 		return x.MaxPage
@@ -876,11 +877,11 @@ const file_yandex_cloud_searchapi_v2_img_search_service_proto_rawDesc = "" +
 	"\x04page\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\x04page\x12R\n" +
 	"\vfamily_mode\x18\a \x01(\x0e21.yandex.cloud.searchapi.v2.SearchQuery.FamilyModeR\n" +
 	"familyModeB\a\n" +
-	"\x05image\"\xb4\x03\n" +
+	"\x05image\"\xb8\x03\n" +
 	"\x1aImageSearchByImageResponse\x12W\n" +
 	"\x06images\x18\x01 \x03(\v2?.yandex.cloud.searchapi.v2.ImageSearchByImageResponse.ImageInfoR\x06images\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x19\n" +
-	"\bmax_page\x18\x03 \x01(\x03R\amaxPage\x12\x0e\n" +
+	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1d\n" +
+	"\bmax_page\x18\x03 \x01(\x03B\x02\x18\x01R\amaxPage\x12\x0e\n" +
 	"\x02id\x18\x04 \x01(\tR\x02id\x1a\xfd\x01\n" +
 	"\tImageInfo\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12H\n" +

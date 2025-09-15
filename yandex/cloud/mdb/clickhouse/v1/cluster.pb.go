@@ -270,6 +270,10 @@ const (
 	Host_DEAD Host_Health = 2
 	// The host is degraded, and can perform only some of its essential functions.
 	Host_DEGRADED Host_Health = 3
+	// The host is read-only and cannot perform write requests.
+	Host_READONLY Host_Health = 4
+	// The host is restoring from backup or syncronzing from other replica.
+	Host_RESTORING Host_Health = 5
 )
 
 // Enum value maps for Host_Health.
@@ -279,12 +283,16 @@ var (
 		1: "ALIVE",
 		2: "DEAD",
 		3: "DEGRADED",
+		4: "READONLY",
+		5: "RESTORING",
 	}
 	Host_Health_value = map[string]int32{
-		"UNKNOWN":  0,
-		"ALIVE":    1,
-		"DEAD":     2,
-		"DEGRADED": 3,
+		"UNKNOWN":   0,
+		"ALIVE":     1,
+		"DEAD":      2,
+		"DEGRADED":  3,
+		"READONLY":  4,
+		"RESTORING": 5,
 	}
 )
 
@@ -376,6 +384,10 @@ const (
 	Service_ALIVE Service_Health = 1
 	// The server is dead or unresponsive.
 	Service_DEAD Service_Health = 2
+	// The service is read-only.
+	Service_READONLY Service_Health = 3
+	// The service is restoring from backup or syncronzing from other replica.
+	Service_RESTORING Service_Health = 4
 )
 
 // Enum value maps for Service_Health.
@@ -384,11 +396,15 @@ var (
 		0: "UNKNOWN",
 		1: "ALIVE",
 		2: "DEAD",
+		3: "READONLY",
+		4: "RESTORING",
 	}
 	Service_Health_value = map[string]int32{
-		"UNKNOWN": 0,
-		"ALIVE":   1,
-		"DEAD":    2,
+		"UNKNOWN":   0,
+		"ALIVE":     1,
+		"DEAD":      2,
+		"READONLY":  3,
+		"RESTORING": 4,
 	}
 )
 
@@ -1811,7 +1827,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x06config\x18\x01 \x01(\v2:.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSetR\x06config\x12G\n" +
 	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x123\n" +
 	"\x06weight\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x06weight\x12g\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc1\x04\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xde\x04\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -1830,12 +1846,14 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"CLICKHOUSE\x10\x01\x12\r\n" +
-	"\tZOOKEEPER\x10\x02\"8\n" +
+	"\tZOOKEEPER\x10\x02\"U\n" +
 	"\x06Health\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
-	"\bDEGRADED\x10\x03\"\xfc\x01\n" +
+	"\bDEGRADED\x10\x03\x12\f\n" +
+	"\bREADONLY\x10\x04\x12\r\n" +
+	"\tRESTORING\x10\x05\"\x99\x02\n" +
 	"\aService\x12@\n" +
 	"\x04type\x18\x01 \x01(\x0e2,.yandex.cloud.mdb.clickhouse.v1.Service.TypeR\x04type\x12F\n" +
 	"\x06health\x18\x02 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.Service.HealthR\x06health\";\n" +
@@ -1843,11 +1861,13 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"CLICKHOUSE\x10\x01\x12\r\n" +
-	"\tZOOKEEPER\x10\x02\"*\n" +
+	"\tZOOKEEPER\x10\x02\"G\n" +
 	"\x06Health\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
-	"\x04DEAD\x10\x02\"x\n" +
+	"\x04DEAD\x10\x02\x12\f\n" +
+	"\bREADONLY\x10\x03\x12\r\n" +
+	"\tRESTORING\x10\x04\"x\n" +
 	"\tResources\x12,\n" +
 	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
