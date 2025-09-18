@@ -28,6 +28,7 @@ const (
 	RoutingInstanceService_Update_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Update"
 	RoutingInstanceService_UpsertPrefixes_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpsertPrefixes"
 	RoutingInstanceService_RemovePrefixes_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/RemovePrefixes"
+	RoutingInstanceService_UpdateNetworks_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpdateNetworks"
 	RoutingInstanceService_MovePrefix_FullMethodName                  = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/MovePrefix"
 	RoutingInstanceService_UpdatePrefixMask_FullMethodName            = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpdatePrefixMask"
 	RoutingInstanceService_AddPrivateConnection_FullMethodName        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/AddPrivateConnection"
@@ -68,6 +69,9 @@ type RoutingInstanceServiceClient interface {
 	// Removes specified prefixes from a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemovePrefixes(ctx context.Context, in *RemovePrefixesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates multiple vpc using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpdateNetworks(ctx context.Context, in *UpdateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves the specified prefix between availability zones of the RoutingInstance.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	MovePrefix(ctx context.Context, in *MovePrefixRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -175,6 +179,16 @@ func (c *routingInstanceServiceClient) RemovePrefixes(ctx context.Context, in *R
 	return out, nil
 }
 
+func (c *routingInstanceServiceClient) UpdateNetworks(ctx context.Context, in *UpdateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_UpdateNetworks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *routingInstanceServiceClient) MovePrefix(ctx context.Context, in *MovePrefixRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -267,6 +281,9 @@ type RoutingInstanceServiceServer interface {
 	// Removes specified prefixes from a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemovePrefixes(context.Context, *RemovePrefixesRequest) (*operation.Operation, error)
+	// Updates multiple vpc using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpdateNetworks(context.Context, *UpdateNetworksRequest) (*operation.Operation, error)
 	// Moves the specified prefix between availability zones of the RoutingInstance.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	MovePrefix(context.Context, *MovePrefixRequest) (*operation.Operation, error)
@@ -316,6 +333,9 @@ func (UnimplementedRoutingInstanceServiceServer) UpsertPrefixes(context.Context,
 }
 func (UnimplementedRoutingInstanceServiceServer) RemovePrefixes(context.Context, *RemovePrefixesRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePrefixes not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) UpdateNetworks(context.Context, *UpdateNetworksRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNetworks not implemented")
 }
 func (UnimplementedRoutingInstanceServiceServer) MovePrefix(context.Context, *MovePrefixRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MovePrefix not implemented")
@@ -499,6 +519,24 @@ func _RoutingInstanceService_RemovePrefixes_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RoutingInstanceService_UpdateNetworks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNetworksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).UpdateNetworks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_UpdateNetworks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).UpdateNetworks(ctx, req.(*UpdateNetworksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RoutingInstanceService_MovePrefix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MovePrefixRequest)
 	if err := dec(in); err != nil {
@@ -645,6 +683,10 @@ var RoutingInstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemovePrefixes",
 			Handler:    _RoutingInstanceService_RemovePrefixes_Handler,
+		},
+		{
+			MethodName: "UpdateNetworks",
+			Handler:    _RoutingInstanceService_UpdateNetworks_Handler,
 		},
 		{
 			MethodName: "MovePrefix",

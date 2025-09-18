@@ -135,6 +135,34 @@ func (m *RemovePrefixesRequest) SetVpcAzInfoPrefixes(v []*VpcAzInfoPrefixes) {
 	m.VpcAzInfoPrefixes = v
 }
 
+func (m *UpdateNetworksRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *UpdateNetworksRequest) SetAddedVpcNetworks(v []*VpcInfo) {
+	m.AddedVpcNetworks = v
+}
+
+func (m *UpdateNetworksRequest) SetUpdatedVpcNetworks(v []*VpcInfo) {
+	m.UpdatedVpcNetworks = v
+}
+
+func (m *UpdateNetworksRequest) SetDeletedVpcNetworkIds(v []string) {
+	m.DeletedVpcNetworkIds = v
+}
+
+func (m *UpdateNetworksRequest) SetStrictRemove(v bool) {
+	m.StrictRemove = v
+}
+
+func (m *VpcInfo) SetVpcNetworkId(v string) {
+	m.VpcNetworkId = v
+}
+
+func (m *VpcInfo) SetVpcAzInfoPrefixes(v []*VpcAzInfoPrefixes) {
+	m.VpcAzInfoPrefixes = v
+}
+
 func (m *VpcAzInfoPrefixes) SetAzId(v string) {
 	m.AzId = v
 }

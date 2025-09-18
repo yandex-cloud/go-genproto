@@ -131,6 +131,10 @@ func (m *ClusterConfig) SetPythonVersion(v string) {
 	m.PythonVersion = v
 }
 
+func (m *ClusterConfig) SetDagProcessor(v *DagProcessorConfig) {
+	m.DagProcessor = v
+}
+
 func (m *AirflowConfig) SetConfig(v map[string]string) {
 	m.Config = v
 }
@@ -148,6 +152,14 @@ func (m *SchedulerConfig) SetCount(v int64) {
 }
 
 func (m *SchedulerConfig) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *DagProcessorConfig) SetCount(v int64) {
+	m.Count = v
+}
+
+func (m *DagProcessorConfig) SetResources(v *Resources) {
 	m.Resources = v
 }
 

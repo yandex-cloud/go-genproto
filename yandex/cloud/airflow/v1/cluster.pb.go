@@ -387,6 +387,8 @@ type ClusterConfig struct {
 	AirflowVersion string `protobuf:"bytes,9,opt,name=airflow_version,json=airflowVersion,proto3" json:"airflow_version,omitempty"`
 	// Python version. Format: "Major.Minor"
 	PythonVersion string `protobuf:"bytes,10,opt,name=python_version,json=pythonVersion,proto3" json:"python_version,omitempty"`
+	// Configuration of dag-processor instances.
+	DagProcessor  *DagProcessorConfig `protobuf:"bytes,11,opt,name=dag_processor,json=dagProcessor,proto3" json:"dag_processor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -490,6 +492,13 @@ func (x *ClusterConfig) GetPythonVersion() string {
 		return x.PythonVersion
 	}
 	return ""
+}
+
+func (x *ClusterConfig) GetDagProcessor() *DagProcessorConfig {
+	if x != nil {
+		return x.DagProcessor
+	}
+	return nil
 }
 
 type AirflowConfig struct {
@@ -645,6 +654,60 @@ func (x *SchedulerConfig) GetResources() *Resources {
 	return nil
 }
 
+type DagProcessorConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The number of dag-processor instances in the cluster.
+	Count int64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	// Resources allocated to dag-processor instances.
+	Resources     *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DagProcessorConfig) Reset() {
+	*x = DagProcessorConfig{}
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DagProcessorConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DagProcessorConfig) ProtoMessage() {}
+
+func (x *DagProcessorConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DagProcessorConfig.ProtoReflect.Descriptor instead.
+func (*DagProcessorConfig) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DagProcessorConfig) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *DagProcessorConfig) GetResources() *Resources {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
 type TriggererConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The number of triggerer instances in the cluster.
@@ -657,7 +720,7 @@ type TriggererConfig struct {
 
 func (x *TriggererConfig) Reset() {
 	*x = TriggererConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -669,7 +732,7 @@ func (x *TriggererConfig) String() string {
 func (*TriggererConfig) ProtoMessage() {}
 
 func (x *TriggererConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -682,7 +745,7 @@ func (x *TriggererConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriggererConfig.ProtoReflect.Descriptor instead.
 func (*TriggererConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TriggererConfig) GetCount() int64 {
@@ -713,7 +776,7 @@ type WorkerConfig struct {
 
 func (x *WorkerConfig) Reset() {
 	*x = WorkerConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[7]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -725,7 +788,7 @@ func (x *WorkerConfig) String() string {
 func (*WorkerConfig) ProtoMessage() {}
 
 func (x *WorkerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[7]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -738,7 +801,7 @@ func (x *WorkerConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkerConfig.ProtoReflect.Descriptor instead.
 func (*WorkerConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *WorkerConfig) GetMinCount() int64 {
@@ -774,7 +837,7 @@ type Dependencies struct {
 
 func (x *Dependencies) Reset() {
 	*x = Dependencies{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +849,7 @@ func (x *Dependencies) String() string {
 func (*Dependencies) ProtoMessage() {}
 
 func (x *Dependencies) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +862,7 @@ func (x *Dependencies) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dependencies.ProtoReflect.Descriptor instead.
 func (*Dependencies) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Dependencies) GetPipPackages() []string {
@@ -828,7 +891,7 @@ type NetworkConfig struct {
 
 func (x *NetworkConfig) Reset() {
 	*x = NetworkConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -840,7 +903,7 @@ func (x *NetworkConfig) String() string {
 func (*NetworkConfig) ProtoMessage() {}
 
 func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -853,7 +916,7 @@ func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkConfig.ProtoReflect.Descriptor instead.
 func (*NetworkConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *NetworkConfig) GetSubnetIds() []string {
@@ -880,7 +943,7 @@ type S3Config struct {
 
 func (x *S3Config) Reset() {
 	*x = S3Config{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -892,7 +955,7 @@ func (x *S3Config) String() string {
 func (*S3Config) ProtoMessage() {}
 
 func (x *S3Config) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -905,7 +968,7 @@ func (x *S3Config) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use S3Config.ProtoReflect.Descriptor instead.
 func (*S3Config) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *S3Config) GetBucket() string {
@@ -931,7 +994,7 @@ type GitSyncConfig struct {
 
 func (x *GitSyncConfig) Reset() {
 	*x = GitSyncConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -943,7 +1006,7 @@ func (x *GitSyncConfig) String() string {
 func (*GitSyncConfig) ProtoMessage() {}
 
 func (x *GitSyncConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -956,7 +1019,7 @@ func (x *GitSyncConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GitSyncConfig.ProtoReflect.Descriptor instead.
 func (*GitSyncConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GitSyncConfig) GetRepo() string {
@@ -1000,7 +1063,7 @@ type CodeSyncConfig struct {
 
 func (x *CodeSyncConfig) Reset() {
 	*x = CodeSyncConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1012,7 +1075,7 @@ func (x *CodeSyncConfig) String() string {
 func (*CodeSyncConfig) ProtoMessage() {}
 
 func (x *CodeSyncConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1025,7 +1088,7 @@ func (x *CodeSyncConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodeSyncConfig.ProtoReflect.Descriptor instead.
 func (*CodeSyncConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CodeSyncConfig) GetSource() isCodeSyncConfig_Source {
@@ -1090,7 +1153,7 @@ type LoggingConfig struct {
 
 func (x *LoggingConfig) Reset() {
 	*x = LoggingConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1102,7 +1165,7 @@ func (x *LoggingConfig) String() string {
 func (*LoggingConfig) ProtoMessage() {}
 
 func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1115,7 +1178,7 @@ func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoggingConfig.ProtoReflect.Descriptor instead.
 func (*LoggingConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *LoggingConfig) GetEnabled() bool {
@@ -1185,7 +1248,7 @@ type LockboxConfig struct {
 
 func (x *LockboxConfig) Reset() {
 	*x = LockboxConfig{}
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1197,7 +1260,7 @@ func (x *LockboxConfig) String() string {
 func (*LockboxConfig) ProtoMessage() {}
 
 func (x *LockboxConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14]
+	mi := &file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1210,7 +1273,7 @@ func (x *LockboxConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LockboxConfig.ProtoReflect.Descriptor instead.
 func (*LockboxConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *LockboxConfig) GetEnabled() bool {
@@ -1264,7 +1327,7 @@ const file_yandex_cloud_airflow_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xfa\x04\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xcc\x05\n" +
 	"\rClusterConfig\x12!\n" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tB\x02\x18\x01R\tversionId\x12@\n" +
@@ -1277,7 +1340,8 @@ const file_yandex_cloud_airflow_v1_cluster_proto_rawDesc = "" +
 	"\alockbox\x18\b \x01(\v2&.yandex.cloud.airflow.v1.LockboxConfigR\alockbox\x12'\n" +
 	"\x0fairflow_version\x18\t \x01(\tR\x0eairflowVersion\x12%\n" +
 	"\x0epython_version\x18\n" +
-	" \x01(\tR\rpythonVersion\"\x96\x01\n" +
+	" \x01(\tR\rpythonVersion\x12P\n" +
+	"\rdag_processor\x18\v \x01(\v2+.yandex.cloud.airflow.v1.DagProcessorConfigR\fdagProcessor\"\x96\x01\n" +
 	"\rAirflowConfig\x12J\n" +
 	"\x06config\x18\x01 \x03(\v22.yandex.cloud.airflow.v1.AirflowConfig.ConfigEntryR\x06config\x1a9\n" +
 	"\vConfigEntry\x12\x10\n" +
@@ -1287,6 +1351,9 @@ const file_yandex_cloud_airflow_v1_cluster_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x03B\t\xfa\xc71\x051-512R\x05count\x12@\n" +
 	"\tresources\x18\x02 \x01(\v2\".yandex.cloud.airflow.v1.ResourcesR\tresources\"t\n" +
 	"\x0fSchedulerConfig\x12\x1f\n" +
+	"\x05count\x18\x01 \x01(\x03B\t\xfa\xc71\x051-512R\x05count\x12@\n" +
+	"\tresources\x18\x02 \x01(\v2\".yandex.cloud.airflow.v1.ResourcesR\tresources\"w\n" +
+	"\x12DagProcessorConfig\x12\x1f\n" +
 	"\x05count\x18\x01 \x01(\x03B\t\xfa\xc71\x051-512R\x05count\x12@\n" +
 	"\tresources\x18\x02 \x01(\v2\".yandex.cloud.airflow.v1.ResourcesR\tresources\"t\n" +
 	"\x0fTriggererConfig\x12\x1f\n" +
@@ -1338,7 +1405,7 @@ func file_yandex_cloud_airflow_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_airflow_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_airflow_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_yandex_cloud_airflow_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_yandex_cloud_airflow_v1_cluster_proto_goTypes = []any{
 	(Cluster_Status)(0),           // 0: yandex.cloud.airflow.v1.Cluster.Status
 	(*Cluster)(nil),               // 1: yandex.cloud.airflow.v1.Cluster
@@ -1347,56 +1414,59 @@ var file_yandex_cloud_airflow_v1_cluster_proto_goTypes = []any{
 	(*AirflowConfig)(nil),         // 4: yandex.cloud.airflow.v1.AirflowConfig
 	(*WebserverConfig)(nil),       // 5: yandex.cloud.airflow.v1.WebserverConfig
 	(*SchedulerConfig)(nil),       // 6: yandex.cloud.airflow.v1.SchedulerConfig
-	(*TriggererConfig)(nil),       // 7: yandex.cloud.airflow.v1.TriggererConfig
-	(*WorkerConfig)(nil),          // 8: yandex.cloud.airflow.v1.WorkerConfig
-	(*Dependencies)(nil),          // 9: yandex.cloud.airflow.v1.Dependencies
-	(*NetworkConfig)(nil),         // 10: yandex.cloud.airflow.v1.NetworkConfig
-	(*S3Config)(nil),              // 11: yandex.cloud.airflow.v1.S3Config
-	(*GitSyncConfig)(nil),         // 12: yandex.cloud.airflow.v1.GitSyncConfig
-	(*CodeSyncConfig)(nil),        // 13: yandex.cloud.airflow.v1.CodeSyncConfig
-	(*LoggingConfig)(nil),         // 14: yandex.cloud.airflow.v1.LoggingConfig
-	(*LockboxConfig)(nil),         // 15: yandex.cloud.airflow.v1.LockboxConfig
-	nil,                           // 16: yandex.cloud.airflow.v1.Cluster.LabelsEntry
-	nil,                           // 17: yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
-	(*timestamppb.Timestamp)(nil), // 18: google.protobuf.Timestamp
-	(Health)(0),                   // 19: yandex.cloud.airflow.v1.Health
-	(*MaintenanceWindow)(nil),     // 20: yandex.cloud.airflow.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),  // 21: yandex.cloud.airflow.v1.MaintenanceOperation
-	(*Resources)(nil),             // 22: yandex.cloud.airflow.v1.Resources
-	(v1.LogLevel_Level)(0),        // 23: yandex.cloud.logging.v1.LogLevel.Level
+	(*DagProcessorConfig)(nil),    // 7: yandex.cloud.airflow.v1.DagProcessorConfig
+	(*TriggererConfig)(nil),       // 8: yandex.cloud.airflow.v1.TriggererConfig
+	(*WorkerConfig)(nil),          // 9: yandex.cloud.airflow.v1.WorkerConfig
+	(*Dependencies)(nil),          // 10: yandex.cloud.airflow.v1.Dependencies
+	(*NetworkConfig)(nil),         // 11: yandex.cloud.airflow.v1.NetworkConfig
+	(*S3Config)(nil),              // 12: yandex.cloud.airflow.v1.S3Config
+	(*GitSyncConfig)(nil),         // 13: yandex.cloud.airflow.v1.GitSyncConfig
+	(*CodeSyncConfig)(nil),        // 14: yandex.cloud.airflow.v1.CodeSyncConfig
+	(*LoggingConfig)(nil),         // 15: yandex.cloud.airflow.v1.LoggingConfig
+	(*LockboxConfig)(nil),         // 16: yandex.cloud.airflow.v1.LockboxConfig
+	nil,                           // 17: yandex.cloud.airflow.v1.Cluster.LabelsEntry
+	nil,                           // 18: yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
+	(*timestamppb.Timestamp)(nil), // 19: google.protobuf.Timestamp
+	(Health)(0),                   // 20: yandex.cloud.airflow.v1.Health
+	(*MaintenanceWindow)(nil),     // 21: yandex.cloud.airflow.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),  // 22: yandex.cloud.airflow.v1.MaintenanceOperation
+	(*Resources)(nil),             // 23: yandex.cloud.airflow.v1.Resources
+	(v1.LogLevel_Level)(0),        // 24: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_airflow_v1_cluster_proto_depIdxs = []int32{
-	18, // 0: yandex.cloud.airflow.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	16, // 1: yandex.cloud.airflow.v1.Cluster.labels:type_name -> yandex.cloud.airflow.v1.Cluster.LabelsEntry
+	19, // 0: yandex.cloud.airflow.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	17, // 1: yandex.cloud.airflow.v1.Cluster.labels:type_name -> yandex.cloud.airflow.v1.Cluster.LabelsEntry
 	2,  // 2: yandex.cloud.airflow.v1.Cluster.monitoring:type_name -> yandex.cloud.airflow.v1.Monitoring
 	3,  // 3: yandex.cloud.airflow.v1.Cluster.config:type_name -> yandex.cloud.airflow.v1.ClusterConfig
-	19, // 4: yandex.cloud.airflow.v1.Cluster.health:type_name -> yandex.cloud.airflow.v1.Health
+	20, // 4: yandex.cloud.airflow.v1.Cluster.health:type_name -> yandex.cloud.airflow.v1.Health
 	0,  // 5: yandex.cloud.airflow.v1.Cluster.status:type_name -> yandex.cloud.airflow.v1.Cluster.Status
-	10, // 6: yandex.cloud.airflow.v1.Cluster.network:type_name -> yandex.cloud.airflow.v1.NetworkConfig
-	13, // 7: yandex.cloud.airflow.v1.Cluster.code_sync:type_name -> yandex.cloud.airflow.v1.CodeSyncConfig
-	14, // 8: yandex.cloud.airflow.v1.Cluster.logging:type_name -> yandex.cloud.airflow.v1.LoggingConfig
-	20, // 9: yandex.cloud.airflow.v1.Cluster.maintenance_window:type_name -> yandex.cloud.airflow.v1.MaintenanceWindow
-	21, // 10: yandex.cloud.airflow.v1.Cluster.planned_operation:type_name -> yandex.cloud.airflow.v1.MaintenanceOperation
+	11, // 6: yandex.cloud.airflow.v1.Cluster.network:type_name -> yandex.cloud.airflow.v1.NetworkConfig
+	14, // 7: yandex.cloud.airflow.v1.Cluster.code_sync:type_name -> yandex.cloud.airflow.v1.CodeSyncConfig
+	15, // 8: yandex.cloud.airflow.v1.Cluster.logging:type_name -> yandex.cloud.airflow.v1.LoggingConfig
+	21, // 9: yandex.cloud.airflow.v1.Cluster.maintenance_window:type_name -> yandex.cloud.airflow.v1.MaintenanceWindow
+	22, // 10: yandex.cloud.airflow.v1.Cluster.planned_operation:type_name -> yandex.cloud.airflow.v1.MaintenanceOperation
 	4,  // 11: yandex.cloud.airflow.v1.ClusterConfig.airflow:type_name -> yandex.cloud.airflow.v1.AirflowConfig
 	5,  // 12: yandex.cloud.airflow.v1.ClusterConfig.webserver:type_name -> yandex.cloud.airflow.v1.WebserverConfig
 	6,  // 13: yandex.cloud.airflow.v1.ClusterConfig.scheduler:type_name -> yandex.cloud.airflow.v1.SchedulerConfig
-	7,  // 14: yandex.cloud.airflow.v1.ClusterConfig.triggerer:type_name -> yandex.cloud.airflow.v1.TriggererConfig
-	8,  // 15: yandex.cloud.airflow.v1.ClusterConfig.worker:type_name -> yandex.cloud.airflow.v1.WorkerConfig
-	9,  // 16: yandex.cloud.airflow.v1.ClusterConfig.dependencies:type_name -> yandex.cloud.airflow.v1.Dependencies
-	15, // 17: yandex.cloud.airflow.v1.ClusterConfig.lockbox:type_name -> yandex.cloud.airflow.v1.LockboxConfig
-	17, // 18: yandex.cloud.airflow.v1.AirflowConfig.config:type_name -> yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
-	22, // 19: yandex.cloud.airflow.v1.WebserverConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	22, // 20: yandex.cloud.airflow.v1.SchedulerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	22, // 21: yandex.cloud.airflow.v1.TriggererConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	22, // 22: yandex.cloud.airflow.v1.WorkerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
-	11, // 23: yandex.cloud.airflow.v1.CodeSyncConfig.s3:type_name -> yandex.cloud.airflow.v1.S3Config
-	12, // 24: yandex.cloud.airflow.v1.CodeSyncConfig.git_sync:type_name -> yandex.cloud.airflow.v1.GitSyncConfig
-	23, // 25: yandex.cloud.airflow.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	26, // [26:26] is the sub-list for method output_type
-	26, // [26:26] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	8,  // 14: yandex.cloud.airflow.v1.ClusterConfig.triggerer:type_name -> yandex.cloud.airflow.v1.TriggererConfig
+	9,  // 15: yandex.cloud.airflow.v1.ClusterConfig.worker:type_name -> yandex.cloud.airflow.v1.WorkerConfig
+	10, // 16: yandex.cloud.airflow.v1.ClusterConfig.dependencies:type_name -> yandex.cloud.airflow.v1.Dependencies
+	16, // 17: yandex.cloud.airflow.v1.ClusterConfig.lockbox:type_name -> yandex.cloud.airflow.v1.LockboxConfig
+	7,  // 18: yandex.cloud.airflow.v1.ClusterConfig.dag_processor:type_name -> yandex.cloud.airflow.v1.DagProcessorConfig
+	18, // 19: yandex.cloud.airflow.v1.AirflowConfig.config:type_name -> yandex.cloud.airflow.v1.AirflowConfig.ConfigEntry
+	23, // 20: yandex.cloud.airflow.v1.WebserverConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	23, // 21: yandex.cloud.airflow.v1.SchedulerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	23, // 22: yandex.cloud.airflow.v1.DagProcessorConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	23, // 23: yandex.cloud.airflow.v1.TriggererConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	23, // 24: yandex.cloud.airflow.v1.WorkerConfig.resources:type_name -> yandex.cloud.airflow.v1.Resources
+	12, // 25: yandex.cloud.airflow.v1.CodeSyncConfig.s3:type_name -> yandex.cloud.airflow.v1.S3Config
+	13, // 26: yandex.cloud.airflow.v1.CodeSyncConfig.git_sync:type_name -> yandex.cloud.airflow.v1.GitSyncConfig
+	24, // 27: yandex.cloud.airflow.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_airflow_v1_cluster_proto_init() }
@@ -1406,11 +1476,11 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 	}
 	file_yandex_cloud_airflow_v1_common_proto_init()
 	file_yandex_cloud_airflow_v1_maintenance_proto_init()
-	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[12].OneofWrappers = []any{
+	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13].OneofWrappers = []any{
 		(*CodeSyncConfig_S3)(nil),
 		(*CodeSyncConfig_GitSync)(nil),
 	}
-	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[13].OneofWrappers = []any{
+	file_yandex_cloud_airflow_v1_cluster_proto_msgTypes[14].OneofWrappers = []any{
 		(*LoggingConfig_FolderId)(nil),
 		(*LoggingConfig_LogGroupId)(nil),
 	}
@@ -1420,7 +1490,7 @@ func file_yandex_cloud_airflow_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_airflow_v1_cluster_proto_rawDesc), len(file_yandex_cloud_airflow_v1_cluster_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

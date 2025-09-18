@@ -180,6 +180,7 @@ type MongoDBAuth struct {
 	//
 	//	*MongoDBAuth_UserPassword
 	Security      isMongoDBAuth_Security `protobuf_oneof:"security"`
+	AuthSource    string                 `protobuf:"bytes,2,opt,name=auth_source,json=authSource,proto3" json:"auth_source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -228,6 +229,13 @@ func (x *MongoDBAuth) GetUserPassword() *UserPasswordAuth {
 		}
 	}
 	return nil
+}
+
+func (x *MongoDBAuth) GetAuthSource() string {
+	if x != nil {
+		return x.AuthSource
+	}
+	return ""
 }
 
 type isMongoDBAuth_Security interface {
@@ -444,9 +452,11 @@ var File_yandex_cloud_connectionmanager_v1_mongodb_proto protoreflect.FileDescri
 
 const file_yandex_cloud_connectionmanager_v1_mongodb_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/connectionmanager/v1/mongodb.proto\x12!yandex.cloud.connectionmanager.v1\x1a.yandex/cloud/connectionmanager/v1/common.proto\"u\n" +
+	"/yandex/cloud/connectionmanager/v1/mongodb.proto\x12!yandex.cloud.connectionmanager.v1\x1a.yandex/cloud/connectionmanager/v1/common.proto\"\x96\x01\n" +
 	"\vMongoDBAuth\x12Z\n" +
-	"\ruser_password\x18\x01 \x01(\v23.yandex.cloud.connectionmanager.v1.UserPasswordAuthH\x00R\fuserPasswordB\n" +
+	"\ruser_password\x18\x01 \x01(\v23.yandex.cloud.connectionmanager.v1.UserPasswordAuthH\x00R\fuserPassword\x12\x1f\n" +
+	"\vauth_source\x18\x02 \x01(\tR\n" +
+	"authSourceB\n" +
 	"\n" +
 	"\bsecurity\"\x9a\x05\n" +
 	"\x0eMongoDBCluster\x12L\n" +

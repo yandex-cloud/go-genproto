@@ -150,6 +150,7 @@ const (
 	Algorithm_ALGORITHM_SUMMARIZATION Algorithm = 4
 	Algorithm_ALGORITHM_EMBEDDING     Algorithm = 5
 	Algorithm_ALGORITHM_STATISTICS    Algorithm = 6
+	Algorithm_ALGORITHM_ASSISTANT     Algorithm = 7
 )
 
 // Enum value maps for Algorithm.
@@ -162,6 +163,7 @@ var (
 		4: "ALGORITHM_SUMMARIZATION",
 		5: "ALGORITHM_EMBEDDING",
 		6: "ALGORITHM_STATISTICS",
+		7: "ALGORITHM_ASSISTANT",
 	}
 	Algorithm_value = map[string]int32{
 		"ALGORITHM_UNSPECIFIED":   0,
@@ -171,6 +173,7 @@ var (
 		"ALGORITHM_SUMMARIZATION": 4,
 		"ALGORITHM_EMBEDDING":     5,
 		"ALGORITHM_STATISTICS":    6,
+		"ALGORITHM_ASSISTANT":     7,
 	}
 )
 
@@ -225,6 +228,7 @@ type Talk struct {
 	Points                 *analysis.Points                 `protobuf:"bytes,16,opt,name=points,proto3" json:"points,omitempty"`
 	TextClassifiers        *analysis.TextClassifiers        `protobuf:"bytes,17,opt,name=text_classifiers,json=textClassifiers,proto3" json:"text_classifiers,omitempty"`
 	Summarization          *analysis.Summarization          `protobuf:"bytes,18,opt,name=summarization,proto3" json:"summarization,omitempty"`
+	Assistants             *analysis.Assistants             `protobuf:"bytes,20,opt,name=assistants,proto3" json:"assistants,omitempty"`
 	TalkState              *TalkState                       `protobuf:"bytes,19,opt,name=talk_state,json=talkState,proto3" json:"talk_state,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -382,6 +386,13 @@ func (x *Talk) GetTextClassifiers() *analysis.TextClassifiers {
 func (x *Talk) GetSummarization() *analysis.Summarization {
 	if x != nil {
 		return x.Summarization
+	}
+	return nil
+}
+
+func (x *Talk) GetAssistants() *analysis.Assistants {
+	if x != nil {
+		return x.Assistants
 	}
 	return nil
 }
@@ -565,7 +576,8 @@ var File_yandex_cloud_speechsense_v1_talk_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_speechsense_v1_talk_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/speechsense/v1/talk.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1aByandex/cloud/speechsense/v1/analysis/conversation_statistics.proto\x1a@yandex/cloud/speechsense/v1/analysis/interrupts_statistics.proto\x1a=yandex/cloud/speechsense/v1/analysis/silence_statistics.proto\x1a<yandex/cloud/speechsense/v1/analysis/speech_statistics.proto\x1a8yandex/cloud/speechsense/v1/analysis/summarization.proto\x1a8yandex/cloud/speechsense/v1/analysis/transcription.proto\x1a;yandex/cloud/speechsense/v1/analysis/text_classifiers.proto\x1a1yandex/cloud/speechsense/v1/analysis/points.proto\"\xf7\t\n" +
+	"&yandex/cloud/speechsense/v1/talk.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a5yandex/cloud/speechsense/v1/analysis/assistants.proto\x1aByandex/cloud/speechsense/v1/analysis/conversation_statistics.proto\x1a@yandex/cloud/speechsense/v1/analysis/interrupts_statistics.proto\x1a=yandex/cloud/speechsense/v1/analysis/silence_statistics.proto\x1a<yandex/cloud/speechsense/v1/analysis/speech_statistics.proto\x1a8yandex/cloud/speechsense/v1/analysis/summarization.proto\x1a8yandex/cloud/speechsense/v1/analysis/transcription.proto\x1a;yandex/cloud/speechsense/v1/analysis/text_classifiers.proto\x1a1yandex/cloud/speechsense/v1/analysis/points.proto\"\xc9\n" +
+	"\n" +
 	"\x04Talk\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x12\x19\n" +
@@ -591,7 +603,10 @@ const file_yandex_cloud_speechsense_v1_talk_proto_rawDesc = "" +
 	"\x17conversation_statistics\x18\x0f \x01(\v2<.yandex.cloud.speechsense.v1.analysis.ConversationStatisticsR\x16conversationStatistics\x12D\n" +
 	"\x06points\x18\x10 \x01(\v2,.yandex.cloud.speechsense.v1.analysis.PointsR\x06points\x12`\n" +
 	"\x10text_classifiers\x18\x11 \x01(\v25.yandex.cloud.speechsense.v1.analysis.TextClassifiersR\x0ftextClassifiers\x12Y\n" +
-	"\rsummarization\x18\x12 \x01(\v23.yandex.cloud.speechsense.v1.analysis.SummarizationR\rsummarization\x12E\n" +
+	"\rsummarization\x18\x12 \x01(\v23.yandex.cloud.speechsense.v1.analysis.SummarizationR\rsummarization\x12P\n" +
+	"\n" +
+	"assistants\x18\x14 \x01(\v20.yandex.cloud.speechsense.v1.analysis.AssistantsR\n" +
+	"assistants\x12E\n" +
 	"\n" +
 	"talk_state\x18\x13 \x01(\v2&.yandex.cloud.speechsense.v1.TalkStateR\ttalkState\"\xd8\x01\n" +
 	"\tTalkState\x12W\n" +
@@ -617,7 +632,7 @@ const file_yandex_cloud_speechsense_v1_talk_proto_rawDesc = "" +
 	"\x1cPROCESSING_STATE_NOT_STARTED\x10\x01\x12\x1f\n" +
 	"\x1bPROCESSING_STATE_PROCESSING\x10\x02\x12\x1c\n" +
 	"\x18PROCESSING_STATE_SUCCESS\x10\x03\x12\x1b\n" +
-	"\x17PROCESSING_STATE_FAILED\x10\x04*\xbd\x01\n" +
+	"\x17PROCESSING_STATE_FAILED\x10\x04*\xd6\x01\n" +
 	"\tAlgorithm\x12\x19\n" +
 	"\x15ALGORITHM_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13ALGORITHM_SPEECHKIT\x10\x01\x12\x12\n" +
@@ -625,7 +640,8 @@ const file_yandex_cloud_speechsense_v1_talk_proto_rawDesc = "" +
 	"\x14ALGORITHM_CLASSIFIER\x10\x03\x12\x1b\n" +
 	"\x17ALGORITHM_SUMMARIZATION\x10\x04\x12\x17\n" +
 	"\x13ALGORITHM_EMBEDDING\x10\x05\x12\x18\n" +
-	"\x14ALGORITHM_STATISTICS\x10\x06By\n" +
+	"\x14ALGORITHM_STATISTICS\x10\x06\x12\x17\n" +
+	"\x13ALGORITHM_ASSISTANT\x10\aBy\n" +
 	"\x1fyandex.cloud.api.speechsense.v1B\tTalkProtoZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/speechsense/v1;speechsenseb\x06proto3"
 
 var (
@@ -659,6 +675,7 @@ var file_yandex_cloud_speechsense_v1_talk_proto_goTypes = []any{
 	(*analysis.Points)(nil),                 // 13: yandex.cloud.speechsense.v1.analysis.Points
 	(*analysis.TextClassifiers)(nil),        // 14: yandex.cloud.speechsense.v1.analysis.TextClassifiers
 	(*analysis.Summarization)(nil),          // 15: yandex.cloud.speechsense.v1.analysis.Summarization
+	(*analysis.Assistants)(nil),             // 16: yandex.cloud.speechsense.v1.analysis.Assistants
 }
 var file_yandex_cloud_speechsense_v1_talk_proto_depIdxs = []int32{
 	7,  // 0: yandex.cloud.speechsense.v1.Talk.created_at:type_name -> google.protobuf.Timestamp
@@ -672,17 +689,18 @@ var file_yandex_cloud_speechsense_v1_talk_proto_depIdxs = []int32{
 	13, // 8: yandex.cloud.speechsense.v1.Talk.points:type_name -> yandex.cloud.speechsense.v1.analysis.Points
 	14, // 9: yandex.cloud.speechsense.v1.Talk.text_classifiers:type_name -> yandex.cloud.speechsense.v1.analysis.TextClassifiers
 	15, // 10: yandex.cloud.speechsense.v1.Talk.summarization:type_name -> yandex.cloud.speechsense.v1.analysis.Summarization
-	4,  // 11: yandex.cloud.speechsense.v1.Talk.talk_state:type_name -> yandex.cloud.speechsense.v1.TalkState
-	1,  // 12: yandex.cloud.speechsense.v1.TalkState.processing_state:type_name -> yandex.cloud.speechsense.v1.ProcessingState
-	6,  // 13: yandex.cloud.speechsense.v1.TalkState.algorithm_processing_infos:type_name -> yandex.cloud.speechsense.v1.AlgorithmProcessingInfo
-	0,  // 14: yandex.cloud.speechsense.v1.Field.type:type_name -> yandex.cloud.speechsense.v1.FieldType
-	2,  // 15: yandex.cloud.speechsense.v1.AlgorithmProcessingInfo.algorithm:type_name -> yandex.cloud.speechsense.v1.Algorithm
-	1,  // 16: yandex.cloud.speechsense.v1.AlgorithmProcessingInfo.processing_state:type_name -> yandex.cloud.speechsense.v1.ProcessingState
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	16, // 11: yandex.cloud.speechsense.v1.Talk.assistants:type_name -> yandex.cloud.speechsense.v1.analysis.Assistants
+	4,  // 12: yandex.cloud.speechsense.v1.Talk.talk_state:type_name -> yandex.cloud.speechsense.v1.TalkState
+	1,  // 13: yandex.cloud.speechsense.v1.TalkState.processing_state:type_name -> yandex.cloud.speechsense.v1.ProcessingState
+	6,  // 14: yandex.cloud.speechsense.v1.TalkState.algorithm_processing_infos:type_name -> yandex.cloud.speechsense.v1.AlgorithmProcessingInfo
+	0,  // 15: yandex.cloud.speechsense.v1.Field.type:type_name -> yandex.cloud.speechsense.v1.FieldType
+	2,  // 16: yandex.cloud.speechsense.v1.AlgorithmProcessingInfo.algorithm:type_name -> yandex.cloud.speechsense.v1.Algorithm
+	1,  // 17: yandex.cloud.speechsense.v1.AlgorithmProcessingInfo.processing_state:type_name -> yandex.cloud.speechsense.v1.ProcessingState
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_speechsense_v1_talk_proto_init() }

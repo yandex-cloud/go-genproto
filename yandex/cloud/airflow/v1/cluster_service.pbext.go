@@ -123,6 +123,10 @@ func (m *UpdateClusterConfigSpec) SetPythonVersion(v string) {
 	m.PythonVersion = v
 }
 
+func (m *UpdateClusterConfigSpec) SetDagProcessor(v *DagProcessorConfig) {
+	m.DagProcessor = v
+}
+
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }

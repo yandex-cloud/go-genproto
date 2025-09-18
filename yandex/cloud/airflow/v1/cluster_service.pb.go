@@ -417,6 +417,8 @@ type UpdateClusterConfigSpec struct {
 	AirflowVersion string `protobuf:"bytes,9,opt,name=airflow_version,json=airflowVersion,proto3" json:"airflow_version,omitempty"`
 	// Python version. Format: "Major.Minor"
 	PythonVersion string `protobuf:"bytes,10,opt,name=python_version,json=pythonVersion,proto3" json:"python_version,omitempty"`
+	// Configuration of dag-processor instances.
+	DagProcessor  *DagProcessorConfig `protobuf:"bytes,11,opt,name=dag_processor,json=dagProcessor,proto3" json:"dag_processor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -512,6 +514,13 @@ func (x *UpdateClusterConfigSpec) GetPythonVersion() string {
 		return x.PythonVersion
 	}
 	return ""
+}
+
+func (x *UpdateClusterConfigSpec) GetDagProcessor() *DagProcessorConfig {
+	if x != nil {
+		return x.DagProcessor
+	}
+	return nil
 }
 
 type UpdateNetworkConfigSpec struct {
@@ -1183,7 +1192,7 @@ const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xd5\x04\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xa7\x05\n" +
 	"\x17UpdateClusterConfigSpec\x12@\n" +
 	"\aairflow\x18\x02 \x01(\v2&.yandex.cloud.airflow.v1.AirflowConfigR\aairflow\x12F\n" +
 	"\twebserver\x18\x03 \x01(\v2(.yandex.cloud.airflow.v1.WebserverConfigR\twebserver\x12F\n" +
@@ -1194,7 +1203,8 @@ const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\alockbox\x18\b \x01(\v2&.yandex.cloud.airflow.v1.LockboxConfigR\alockbox\x12'\n" +
 	"\x0fairflow_version\x18\t \x01(\tR\x0eairflowVersion\x12%\n" +
 	"\x0epython_version\x18\n" +
-	" \x01(\tR\rpythonVersionJ\x04\b\x01\x10\x02\"G\n" +
+	" \x01(\tR\rpythonVersion\x12P\n" +
+	"\rdag_processor\x18\v \x01(\v2+.yandex.cloud.airflow.v1.DagProcessorConfigR\fdagProcessorJ\x04\b\x01\x10\x02\"G\n" +
 	"\x17UpdateNetworkConfigSpec\x12,\n" +
 	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds\"\xa4\a\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
@@ -1313,8 +1323,9 @@ var file_yandex_cloud_airflow_v1_cluster_service_proto_goTypes = []any{
 	(*WorkerConfig)(nil),                  // 29: yandex.cloud.airflow.v1.WorkerConfig
 	(*Dependencies)(nil),                  // 30: yandex.cloud.airflow.v1.Dependencies
 	(*LockboxConfig)(nil),                 // 31: yandex.cloud.airflow.v1.LockboxConfig
-	(*fieldmaskpb.FieldMask)(nil),         // 32: google.protobuf.FieldMask
-	(*operation.Operation)(nil),           // 33: yandex.cloud.operation.Operation
+	(*DagProcessorConfig)(nil),            // 32: yandex.cloud.airflow.v1.DagProcessorConfig
+	(*fieldmaskpb.FieldMask)(nil),         // 33: google.protobuf.FieldMask
+	(*operation.Operation)(nil),           // 34: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_airflow_v1_cluster_service_proto_depIdxs = []int32{
 	19, // 0: yandex.cloud.airflow.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.airflow.v1.Cluster
@@ -1331,35 +1342,36 @@ var file_yandex_cloud_airflow_v1_cluster_service_proto_depIdxs = []int32{
 	29, // 11: yandex.cloud.airflow.v1.UpdateClusterConfigSpec.worker:type_name -> yandex.cloud.airflow.v1.WorkerConfig
 	30, // 12: yandex.cloud.airflow.v1.UpdateClusterConfigSpec.dependencies:type_name -> yandex.cloud.airflow.v1.Dependencies
 	31, // 13: yandex.cloud.airflow.v1.UpdateClusterConfigSpec.lockbox:type_name -> yandex.cloud.airflow.v1.LockboxConfig
-	32, // 14: yandex.cloud.airflow.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	18, // 15: yandex.cloud.airflow.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.airflow.v1.UpdateClusterRequest.LabelsEntry
-	5,  // 16: yandex.cloud.airflow.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.airflow.v1.UpdateClusterConfigSpec
-	22, // 17: yandex.cloud.airflow.v1.UpdateClusterRequest.code_sync:type_name -> yandex.cloud.airflow.v1.CodeSyncConfig
-	6,  // 18: yandex.cloud.airflow.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.airflow.v1.UpdateNetworkConfigSpec
-	23, // 19: yandex.cloud.airflow.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.airflow.v1.LoggingConfig
-	24, // 20: yandex.cloud.airflow.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.airflow.v1.MaintenanceWindow
-	33, // 21: yandex.cloud.airflow.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 22: yandex.cloud.airflow.v1.ClusterService.Get:input_type -> yandex.cloud.airflow.v1.GetClusterRequest
-	1,  // 23: yandex.cloud.airflow.v1.ClusterService.List:input_type -> yandex.cloud.airflow.v1.ListClustersRequest
-	3,  // 24: yandex.cloud.airflow.v1.ClusterService.Create:input_type -> yandex.cloud.airflow.v1.CreateClusterRequest
-	7,  // 25: yandex.cloud.airflow.v1.ClusterService.Update:input_type -> yandex.cloud.airflow.v1.UpdateClusterRequest
-	9,  // 26: yandex.cloud.airflow.v1.ClusterService.Delete:input_type -> yandex.cloud.airflow.v1.DeleteClusterRequest
-	11, // 27: yandex.cloud.airflow.v1.ClusterService.Start:input_type -> yandex.cloud.airflow.v1.StartClusterRequest
-	13, // 28: yandex.cloud.airflow.v1.ClusterService.Stop:input_type -> yandex.cloud.airflow.v1.StopClusterRequest
-	15, // 29: yandex.cloud.airflow.v1.ClusterService.ListOperations:input_type -> yandex.cloud.airflow.v1.ListClusterOperationsRequest
-	19, // 30: yandex.cloud.airflow.v1.ClusterService.Get:output_type -> yandex.cloud.airflow.v1.Cluster
-	2,  // 31: yandex.cloud.airflow.v1.ClusterService.List:output_type -> yandex.cloud.airflow.v1.ListClustersResponse
-	33, // 32: yandex.cloud.airflow.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	33, // 33: yandex.cloud.airflow.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	33, // 34: yandex.cloud.airflow.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	33, // 35: yandex.cloud.airflow.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	33, // 36: yandex.cloud.airflow.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	16, // 37: yandex.cloud.airflow.v1.ClusterService.ListOperations:output_type -> yandex.cloud.airflow.v1.ListClusterOperationsResponse
-	30, // [30:38] is the sub-list for method output_type
-	22, // [22:30] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	32, // 14: yandex.cloud.airflow.v1.UpdateClusterConfigSpec.dag_processor:type_name -> yandex.cloud.airflow.v1.DagProcessorConfig
+	33, // 15: yandex.cloud.airflow.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	18, // 16: yandex.cloud.airflow.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.airflow.v1.UpdateClusterRequest.LabelsEntry
+	5,  // 17: yandex.cloud.airflow.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.airflow.v1.UpdateClusterConfigSpec
+	22, // 18: yandex.cloud.airflow.v1.UpdateClusterRequest.code_sync:type_name -> yandex.cloud.airflow.v1.CodeSyncConfig
+	6,  // 19: yandex.cloud.airflow.v1.UpdateClusterRequest.network_spec:type_name -> yandex.cloud.airflow.v1.UpdateNetworkConfigSpec
+	23, // 20: yandex.cloud.airflow.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.airflow.v1.LoggingConfig
+	24, // 21: yandex.cloud.airflow.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.airflow.v1.MaintenanceWindow
+	34, // 22: yandex.cloud.airflow.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 23: yandex.cloud.airflow.v1.ClusterService.Get:input_type -> yandex.cloud.airflow.v1.GetClusterRequest
+	1,  // 24: yandex.cloud.airflow.v1.ClusterService.List:input_type -> yandex.cloud.airflow.v1.ListClustersRequest
+	3,  // 25: yandex.cloud.airflow.v1.ClusterService.Create:input_type -> yandex.cloud.airflow.v1.CreateClusterRequest
+	7,  // 26: yandex.cloud.airflow.v1.ClusterService.Update:input_type -> yandex.cloud.airflow.v1.UpdateClusterRequest
+	9,  // 27: yandex.cloud.airflow.v1.ClusterService.Delete:input_type -> yandex.cloud.airflow.v1.DeleteClusterRequest
+	11, // 28: yandex.cloud.airflow.v1.ClusterService.Start:input_type -> yandex.cloud.airflow.v1.StartClusterRequest
+	13, // 29: yandex.cloud.airflow.v1.ClusterService.Stop:input_type -> yandex.cloud.airflow.v1.StopClusterRequest
+	15, // 30: yandex.cloud.airflow.v1.ClusterService.ListOperations:input_type -> yandex.cloud.airflow.v1.ListClusterOperationsRequest
+	19, // 31: yandex.cloud.airflow.v1.ClusterService.Get:output_type -> yandex.cloud.airflow.v1.Cluster
+	2,  // 32: yandex.cloud.airflow.v1.ClusterService.List:output_type -> yandex.cloud.airflow.v1.ListClustersResponse
+	34, // 33: yandex.cloud.airflow.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	34, // 34: yandex.cloud.airflow.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	34, // 35: yandex.cloud.airflow.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	34, // 36: yandex.cloud.airflow.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	34, // 37: yandex.cloud.airflow.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	16, // 38: yandex.cloud.airflow.v1.ClusterService.ListOperations:output_type -> yandex.cloud.airflow.v1.ListClusterOperationsResponse
+	31, // [31:39] is the sub-list for method output_type
+	23, // [23:31] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_airflow_v1_cluster_service_proto_init() }

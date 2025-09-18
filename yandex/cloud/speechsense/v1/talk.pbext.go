@@ -79,6 +79,10 @@ func (m *Talk) SetSummarization(v *analysis.Summarization) {
 	m.Summarization = v
 }
 
+func (m *Talk) SetAssistants(v *analysis.Assistants) {
+	m.Assistants = v
+}
+
 func (m *Talk) SetTalkState(v *TalkState) {
 	m.TalkState = v
 }

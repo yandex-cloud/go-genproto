@@ -14,6 +14,10 @@ func (m *MongoDBAuth) SetUserPassword(v *UserPasswordAuth) {
 	}
 }
 
+func (m *MongoDBAuth) SetAuthSource(v string) {
+	m.AuthSource = v
+}
+
 func (m *MongoDBCluster) SetHosts(v []*MongoDBCluster_Host) {
 	m.Hosts = v
 }
