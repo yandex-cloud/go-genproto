@@ -940,7 +940,7 @@ type ClickhouseConfig struct {
 	AsynchronousMetricLogRetentionTime *wrapperspb.Int64Value `protobuf:"bytes,54,opt,name=asynchronous_metric_log_retention_time,json=asynchronousMetricLogRetentionTime,proto3" json:"asynchronous_metric_log_retention_time,omitempty"`
 	// Enables or disables session_log system table.
 	//
-	// Default value: **true** for versions 25.8 and higher, **false** for versions 25.7 and lower.
+	// Default value: **true** for versions 25.3 and higher, **false** for versions 25.2 and lower.
 	//
 	// Change of the setting is applied with restart.
 	//
@@ -949,7 +949,7 @@ type ClickhouseConfig struct {
 	// The maximum size that session_log can grow to before old data will be removed. If set to **0**,
 	// automatic removal of session_log data based on size is disabled.
 	//
-	// Default value: **536870912** (512 MiB) for versions 25.8 and higher, **0** for versions 25.7 and lower.
+	// Default value: **536870912** (512 MiB) for versions 25.3 and higher, **0** for versions 25.2 and lower.
 	SessionLogRetentionSize *wrapperspb.Int64Value `protobuf:"bytes,58,opt,name=session_log_retention_size,json=sessionLogRetentionSize,proto3" json:"session_log_retention_size,omitempty"`
 	// The maximum time that session_log records will be retained before removal. If set to **0**,
 	// automatic removal of session_log data based on time is disabled.

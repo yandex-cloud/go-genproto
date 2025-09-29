@@ -700,3 +700,7 @@ func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
 }
+
+func (m *ConfigSpec) SetModules(v *ValkeyModules) {
+	m.Modules = v
+}

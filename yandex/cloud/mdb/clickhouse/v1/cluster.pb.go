@@ -216,6 +216,8 @@ const (
 	Host_CLICKHOUSE Host_Type = 1
 	// ZooKeeper host.
 	Host_ZOOKEEPER Host_Type = 2
+	// ClickHouse Keeper host.
+	Host_KEEPER Host_Type = 3
 )
 
 // Enum value maps for Host_Type.
@@ -224,11 +226,13 @@ var (
 		0: "TYPE_UNSPECIFIED",
 		1: "CLICKHOUSE",
 		2: "ZOOKEEPER",
+		3: "KEEPER",
 	}
 	Host_Type_value = map[string]int32{
 		"TYPE_UNSPECIFIED": 0,
 		"CLICKHOUSE":       1,
 		"ZOOKEEPER":        2,
+		"KEEPER":           3,
 	}
 )
 
@@ -332,6 +336,8 @@ const (
 	Service_CLICKHOUSE Service_Type = 1
 	// The host is a ZooKeeper server.
 	Service_ZOOKEEPER Service_Type = 2
+	// The host is a ClickHouse Keeper server.
+	Service_KEEPER Service_Type = 3
 )
 
 // Enum value maps for Service_Type.
@@ -340,11 +346,13 @@ var (
 		0: "TYPE_UNSPECIFIED",
 		1: "CLICKHOUSE",
 		2: "ZOOKEEPER",
+		3: "KEEPER",
 	}
 	Service_Type_value = map[string]int32{
 		"TYPE_UNSPECIFIED": 0,
 		"CLICKHOUSE":       1,
 		"ZOOKEEPER":        2,
+		"KEEPER":           3,
 	}
 )
 
@@ -1827,7 +1835,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x06config\x18\x01 \x01(\v2:.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSetR\x06config\x12G\n" +
 	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x123\n" +
 	"\x06weight\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x06weight\x12g\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xde\x04\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xea\x04\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -1841,27 +1849,31 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x10assign_public_ip\x18\t \x01(\bR\x0eassignPublicIp\x12\x1d\n" +
 	"\n" +
 	"shard_name\x18\n" +
-	" \x01(\tR\tshardName\";\n" +
+	" \x01(\tR\tshardName\"G\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"CLICKHOUSE\x10\x01\x12\r\n" +
-	"\tZOOKEEPER\x10\x02\"U\n" +
+	"\tZOOKEEPER\x10\x02\x12\n" +
+	"\n" +
+	"\x06KEEPER\x10\x03\"U\n" +
 	"\x06Health\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
 	"\bDEGRADED\x10\x03\x12\f\n" +
 	"\bREADONLY\x10\x04\x12\r\n" +
-	"\tRESTORING\x10\x05\"\x99\x02\n" +
+	"\tRESTORING\x10\x05\"\xa5\x02\n" +
 	"\aService\x12@\n" +
 	"\x04type\x18\x01 \x01(\x0e2,.yandex.cloud.mdb.clickhouse.v1.Service.TypeR\x04type\x12F\n" +
-	"\x06health\x18\x02 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.Service.HealthR\x06health\";\n" +
+	"\x06health\x18\x02 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.Service.HealthR\x06health\"G\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"CLICKHOUSE\x10\x01\x12\r\n" +
-	"\tZOOKEEPER\x10\x02\"G\n" +
+	"\tZOOKEEPER\x10\x02\x12\n" +
+	"\n" +
+	"\x06KEEPER\x10\x03\"G\n" +
 	"\x06Health\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +

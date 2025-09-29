@@ -62,6 +62,12 @@ func (m *Connector) SetSqlserver(v *SQLServerConnector) {
 	}
 }
 
+func (m *Connector) SetHudi(v *HudiConnector) {
+	m.Type = &Connector_Hudi{
+		Hudi: v,
+	}
+}
+
 func (m *Catalog) SetId(v string) {
 	m.Id = v
 }
@@ -205,6 +211,18 @@ func (m *DeltaLakeConnector) SetFilesystem(v *FileSystem) {
 }
 
 func (m *DeltaLakeConnector) SetAdditionalProperties(v map[string]string) {
+	m.AdditionalProperties = v
+}
+
+func (m *HudiConnector) SetMetastore(v *Metastore) {
+	m.Metastore = v
+}
+
+func (m *HudiConnector) SetFilesystem(v *FileSystem) {
+	m.Filesystem = v
+}
+
+func (m *HudiConnector) SetAdditionalProperties(v map[string]string) {
 	m.AdditionalProperties = v
 }
 

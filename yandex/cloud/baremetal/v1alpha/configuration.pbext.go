@@ -14,6 +14,14 @@ func (m *CPU) SetCores(v int64) {
 	m.Cores = v
 }
 
+func (m *CPU) SetPhysicalCores(v int64) {
+	m.PhysicalCores = v
+}
+
+func (m *CPU) SetFrequencyMhz(v int64) {
+	m.FrequencyMhz = v
+}
+
 func (m *DiskDriveConfiguration) SetType(v DiskDriveType) {
 	m.Type = v
 }

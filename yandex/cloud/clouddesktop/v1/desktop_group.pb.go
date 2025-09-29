@@ -34,6 +34,8 @@ const (
 	DesktopGroup_ACTIVE DesktopGroup_Status = 2
 	// Desktop group is being deleted.
 	DesktopGroup_DELETING DesktopGroup_Status = 3
+	// Desktop group is updating.
+	DesktopGroup_UPDATING DesktopGroup_Status = 4
 )
 
 // Enum value maps for DesktopGroup_Status.
@@ -43,12 +45,14 @@ var (
 		1: "CREATING",
 		2: "ACTIVE",
 		3: "DELETING",
+		4: "UPDATING",
 	}
 	DesktopGroup_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
 		"CREATING":           1,
 		"ACTIVE":             2,
 		"DELETING":           3,
+		"UPDATING":           4,
 	}
 )
 
@@ -587,7 +591,7 @@ var File_yandex_cloud_clouddesktop_v1_desktop_group_proto protoreflect.FileDescr
 
 const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/clouddesktop/v1/desktop_group.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/clouddesktop/v1/disk.proto\"\x8f\t\n" +
+	"0yandex/cloud/clouddesktop/v1/desktop_group.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/clouddesktop/v1/disk.proto\"\x9d\t\n" +
 	"\fDesktopGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -606,13 +610,14 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\x14manual_update_policy\x18\x1c \x01(\v24.yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicyH\x00R\x12manualUpdatePolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"H\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"V\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03B\x15\n" +
+	"\bDELETING\x10\x03\x12\f\n" +
+	"\bUPDATING\x10\x04B\x15\n" +
 	"\rupdate_policy\x12\x04\xc0\xc11\x01J\x04\b\r\x10\x15J\x04\b\x05\x10\v\"\x8e\x03\n" +
 	"\x19DesktopGroupConfiguration\x127\n" +
 	"\x12min_ready_desktops\x18\x01 \x01(\x03B\t\xfa\xc71\x051-512R\x10minReadyDesktops\x129\n" +

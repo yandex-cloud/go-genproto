@@ -28,8 +28,14 @@ type CPU struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Vendor of the CPU.
 	Vendor string `protobuf:"bytes,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Number of cores.
-	Cores         int64 `protobuf:"varint,3,opt,name=cores,proto3" json:"cores,omitempty"`
+	// @deprecated. Number of cores.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
+	Cores int64 `protobuf:"varint,3,opt,name=cores,proto3" json:"cores,omitempty"`
+	// Number of physical cores per CPU (socket).
+	PhysicalCores int64 `protobuf:"varint,4,opt,name=physical_cores,json=physicalCores,proto3" json:"physical_cores,omitempty"`
+	// Frequency of the CPU in megahertz (MHz).
+	FrequencyMhz  int64 `protobuf:"varint,5,opt,name=frequency_mhz,json=frequencyMhz,proto3" json:"frequency_mhz,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -78,9 +84,24 @@ func (x *CPU) GetVendor() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
 func (x *CPU) GetCores() int64 {
 	if x != nil {
 		return x.Cores
+	}
+	return 0
+}
+
+func (x *CPU) GetPhysicalCores() int64 {
+	if x != nil {
+		return x.PhysicalCores
+	}
+	return 0
+}
+
+func (x *CPU) GetFrequencyMhz() int64 {
+	if x != nil {
+		return x.FrequencyMhz
 	}
 	return 0
 }
@@ -161,6 +182,8 @@ type Configuration struct {
 	// Array of disk drive configurations.
 	DiskDrives []*DiskDriveConfiguration `protobuf:"bytes,5,rep,name=disk_drives,json=diskDrives,proto3" json:"disk_drives,omitempty"`
 	// Network capacity or bandwidth in gigabits per second.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
 	NetworkCapacityGbps int64 `protobuf:"varint,6,opt,name=network_capacity_gbps,json=networkCapacityGbps,proto3" json:"network_capacity_gbps,omitempty"`
 	// Number of cpu.
 	CpuNum        int64 `protobuf:"varint,8,opt,name=cpu_num,json=cpuNum,proto3" json:"cpu_num,omitempty"`
@@ -233,6 +256,7 @@ func (x *Configuration) GetDiskDrives() []*DiskDriveConfiguration {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
 func (x *Configuration) GetNetworkCapacityGbps() int64 {
 	if x != nil {
 		return x.NetworkCapacityGbps
@@ -251,16 +275,18 @@ var File_yandex_cloud_baremetal_v1alpha_configuration_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v1alpha/configuration.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\"G\n" +
+	"2yandex/cloud/baremetal/v1alpha/configuration.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\"\x97\x01\n" +
 	"\x03CPU\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
-	"\x06vendor\x18\x02 \x01(\tR\x06vendor\x12\x14\n" +
-	"\x05cores\x18\x03 \x01(\x03R\x05cores\"\x9e\x01\n" +
+	"\x06vendor\x18\x02 \x01(\tR\x06vendor\x12\x18\n" +
+	"\x05cores\x18\x03 \x01(\x03B\x02\x18\x01R\x05cores\x12%\n" +
+	"\x0ephysical_cores\x18\x04 \x01(\x03R\rphysicalCores\x12#\n" +
+	"\rfrequency_mhz\x18\x05 \x01(\x03R\ffrequencyMhz\"\x9e\x01\n" +
 	"\x16DiskDriveConfiguration\x12A\n" +
 	"\x04type\x18\x01 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x1d\n" +
 	"\n" +
 	"disk_count\x18\x02 \x01(\x03R\tdiskCount\x12\"\n" +
-	"\rdisk_size_gib\x18\x03 \x01(\x03R\vdiskSizeGib\"\xb5\x02\n" +
+	"\rdisk_size_gib\x18\x03 \x01(\x03R\vdiskSizeGib\"\xb9\x02\n" +
 	"\rConfiguration\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -268,8 +294,8 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
 	"memory_gib\x18\x03 \x01(\x03R\tmemoryGib\x125\n" +
 	"\x03cpu\x18\x04 \x01(\v2#.yandex.cloud.baremetal.v1alpha.CPUR\x03cpu\x12W\n" +
 	"\vdisk_drives\x18\x05 \x03(\v26.yandex.cloud.baremetal.v1alpha.DiskDriveConfigurationR\n" +
-	"diskDrives\x122\n" +
-	"\x15network_capacity_gbps\x18\x06 \x01(\x03R\x13networkCapacityGbps\x12\x17\n" +
+	"diskDrives\x126\n" +
+	"\x15network_capacity_gbps\x18\x06 \x01(\x03B\x02\x18\x01R\x13networkCapacityGbps\x12\x17\n" +
 	"\acpu_num\x18\b \x01(\x03R\x06cpuNumJ\x04\b\a\x10\bBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 

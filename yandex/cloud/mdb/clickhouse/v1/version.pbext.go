@@ -17,3 +17,7 @@ func (m *Version) SetDeprecated(v bool) {
 func (m *Version) SetUpdatableTo(v []string) {
 	m.UpdatableTo = v
 }
+
+func (m *Version) SetLts(v bool) {
+	m.Lts = v
+}

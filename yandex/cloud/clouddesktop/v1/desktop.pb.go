@@ -47,6 +47,8 @@ const (
 	Desktop_ERROR Desktop_Status = 9
 	// Desktop did not manage to get created or updated.
 	Desktop_CREATION_FAILED Desktop_Status = 10
+	// Desktop in the process of health check.
+	Desktop_HEALTH_CHECK Desktop_Status = 11
 )
 
 // Enum value maps for Desktop_Status.
@@ -63,6 +65,7 @@ var (
 		8:  "STOPPED",
 		9:  "ERROR",
 		10: "CREATION_FAILED",
+		11: "HEALTH_CHECK",
 	}
 	Desktop_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
@@ -76,6 +79,7 @@ var (
 		"STOPPED":            8,
 		"ERROR":              9,
 		"CREATION_FAILED":    10,
+		"HEALTH_CHECK":       11,
 	}
 )
 
@@ -401,7 +405,7 @@ var File_yandex_cloud_clouddesktop_v1_desktop_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/clouddesktop/v1/desktop.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xad\x06\n" +
+	"*yandex/cloud/clouddesktop/v1/desktop.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xbf\x06\n" +
 	"\aDesktop\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12(\n" +
@@ -416,7 +420,7 @@ const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\x06labels\x18\x18 \x03(\v25.yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xaf\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc1\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\n" +
@@ -431,7 +435,8 @@ const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\aSTOPPED\x10\b\x12\t\n" +
 	"\x05ERROR\x10\t\x12\x13\n" +
 	"\x0fCREATION_FAILED\x10\n" +
-	"J\x04\b\f\x10\x15J\x04\b\x06\x10\v\"{\n" +
+	"\x12\x10\n" +
+	"\fHEALTH_CHECK\x10\vJ\x04\b\f\x10\x15J\x04\b\x06\x10\v\"{\n" +
 	"\tResources\x12\x1f\n" +
 	"\x06memory\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\x06memory\x12\x1d\n" +
 	"\x05cores\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\x05cores\x12.\n" +

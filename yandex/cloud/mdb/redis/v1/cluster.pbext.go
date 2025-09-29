@@ -167,6 +167,10 @@ func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
 }
 
+func (m *ClusterConfig) SetModules(v *ValkeyModules) {
+	m.Modules = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }
@@ -257,4 +261,36 @@ func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v *wrapperspb.Int64Valu
 
 func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v *wrapperspb.Int64Value) {
 	m.DiskSizeLimit = v
+}
+
+func (m *ValkeyModules) SetValkeySearch(v *ValkeySearch) {
+	m.ValkeySearch = v
+}
+
+func (m *ValkeyModules) SetValkeyJson(v *ValkeyJson) {
+	m.ValkeyJson = v
+}
+
+func (m *ValkeyModules) SetValkeyBloom(v *ValkeyBloom) {
+	m.ValkeyBloom = v
+}
+
+func (m *ValkeySearch) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ValkeySearch) SetReaderThreads(v *wrapperspb.Int64Value) {
+	m.ReaderThreads = v
+}
+
+func (m *ValkeySearch) SetWriterThreads(v *wrapperspb.Int64Value) {
+	m.WriterThreads = v
+}
+
+func (m *ValkeyJson) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ValkeyBloom) SetEnabled(v bool) {
+	m.Enabled = v
 }

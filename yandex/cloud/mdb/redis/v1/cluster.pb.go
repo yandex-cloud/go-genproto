@@ -798,8 +798,10 @@ type ClusterConfig struct {
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,10,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
 	// Retain period of automatically created backup in days
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Valkey modules settings
+	Modules       *ValkeyModules `protobuf:"bytes,14,opt,name=modules,proto3" json:"modules,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfig) Reset() {
@@ -920,6 +922,13 @@ func (x *ClusterConfig) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
 func (x *ClusterConfig) GetBackupRetainPeriodDays() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.BackupRetainPeriodDays
+	}
+	return nil
+}
+
+func (x *ClusterConfig) GetModules() *ValkeyModules {
+	if x != nil {
+		return x.Modules
 	}
 	return nil
 }
@@ -1388,6 +1397,222 @@ func (x *DiskSizeAutoscaling) GetDiskSizeLimit() *wrapperspb.Int64Value {
 	return nil
 }
 
+type ValkeyModules struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// valkey-search module settings
+	ValkeySearch *ValkeySearch `protobuf:"bytes,1,opt,name=valkey_search,json=valkeySearch,proto3" json:"valkey_search,omitempty"`
+	// valkey-json module settings
+	ValkeyJson *ValkeyJson `protobuf:"bytes,2,opt,name=valkey_json,json=valkeyJson,proto3" json:"valkey_json,omitempty"`
+	// valkey-bloom module settings
+	ValkeyBloom   *ValkeyBloom `protobuf:"bytes,3,opt,name=valkey_bloom,json=valkeyBloom,proto3" json:"valkey_bloom,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValkeyModules) Reset() {
+	*x = ValkeyModules{}
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValkeyModules) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValkeyModules) ProtoMessage() {}
+
+func (x *ValkeyModules) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValkeyModules.ProtoReflect.Descriptor instead.
+func (*ValkeyModules) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ValkeyModules) GetValkeySearch() *ValkeySearch {
+	if x != nil {
+		return x.ValkeySearch
+	}
+	return nil
+}
+
+func (x *ValkeyModules) GetValkeyJson() *ValkeyJson {
+	if x != nil {
+		return x.ValkeyJson
+	}
+	return nil
+}
+
+func (x *ValkeyModules) GetValkeyBloom() *ValkeyBloom {
+	if x != nil {
+		return x.ValkeyBloom
+	}
+	return nil
+}
+
+type ValkeySearch struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable valkey-search module
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Controls the amount of threads executing queries
+	ReaderThreads *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=reader_threads,json=readerThreads,proto3" json:"reader_threads,omitempty"`
+	// Controls the amount of threads processing index mutations
+	WriterThreads *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=writer_threads,json=writerThreads,proto3" json:"writer_threads,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValkeySearch) Reset() {
+	*x = ValkeySearch{}
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValkeySearch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValkeySearch) ProtoMessage() {}
+
+func (x *ValkeySearch) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValkeySearch.ProtoReflect.Descriptor instead.
+func (*ValkeySearch) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ValkeySearch) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *ValkeySearch) GetReaderThreads() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ReaderThreads
+	}
+	return nil
+}
+
+func (x *ValkeySearch) GetWriterThreads() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.WriterThreads
+	}
+	return nil
+}
+
+type ValkeyJson struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable valkey-json module
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValkeyJson) Reset() {
+	*x = ValkeyJson{}
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValkeyJson) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValkeyJson) ProtoMessage() {}
+
+func (x *ValkeyJson) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValkeyJson.ProtoReflect.Descriptor instead.
+func (*ValkeyJson) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ValkeyJson) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+type ValkeyBloom struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable valkey-bloom module
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValkeyBloom) Reset() {
+	*x = ValkeyBloom{}
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValkeyBloom) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValkeyBloom) ProtoMessage() {}
+
+func (x *ValkeyBloom) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValkeyBloom.ProtoReflect.Descriptor instead.
+func (*ValkeyBloom) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ValkeyBloom) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 var File_yandex_cloud_mdb_redis_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
@@ -1452,7 +1677,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\x98\a\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xdc\a\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12`\n" +
 	"\x10redis_config_5_0\x18\x02 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0H\x00R\x0fredisConfig_5_0\x12`\n" +
@@ -1465,7 +1690,8 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x05redis\x18\t \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfigSetR\x05redis\x12b\n" +
 	"\x15disk_size_autoscaling\x18\n" +
 	" \x01(\v2..yandex.cloud.mdb.redis.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12V\n" +
-	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDaysB\x0e\n" +
+	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12B\n" +
+	"\amodules\x18\x0e \x01(\v2(.yandex.cloud.mdb.redis.v1.ValkeyModulesR\amodulesB\x0e\n" +
 	"\fredis_configJ\x04\b\v\x10\fJ\x04\b\f\x10\r\":\n" +
 	"\x05Shard\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
@@ -1519,7 +1745,21 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x13DiskSizeAutoscaling\x12b\n" +
 	"\x17planned_usage_threshold\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xe8\xc71\x00\xfa\xc71\x050-100R\x15plannedUsageThreshold\x12f\n" +
 	"\x19emergency_usage_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xe8\xc71\x00\xfa\xc71\x050-100R\x17emergencyUsageThreshold\x12C\n" +
-	"\x0fdisk_size_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\rdiskSizeLimitBd\n" +
+	"\x0fdisk_size_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\rdiskSizeLimit\"\xf0\x01\n" +
+	"\rValkeyModules\x12L\n" +
+	"\rvalkey_search\x18\x01 \x01(\v2'.yandex.cloud.mdb.redis.v1.ValkeySearchR\fvalkeySearch\x12F\n" +
+	"\vvalkey_json\x18\x02 \x01(\v2%.yandex.cloud.mdb.redis.v1.ValkeyJsonR\n" +
+	"valkeyJson\x12I\n" +
+	"\fvalkey_bloom\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.ValkeyBloomR\vvalkeyBloom\"\xca\x01\n" +
+	"\fValkeySearch\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12O\n" +
+	"\x0ereader_threads\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xe8\xc71\x00\xfa\xc71\x03>=0R\rreaderThreads\x12O\n" +
+	"\x0ewriter_threads\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xe8\xc71\x00\xfa\xc71\x03>=0R\rwriterThreads\"&\n" +
+	"\n" +
+	"ValkeyJson\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"'\n" +
+	"\vValkeyBloom\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabledBd\n" +
 	"\x1dyandex.cloud.api.mdb.redis.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1;redisb\x06proto3"
 
 var (
@@ -1535,7 +1775,7 @@ func file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_mdb_redis_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_yandex_cloud_mdb_redis_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_yandex_cloud_mdb_redis_v1_cluster_proto_goTypes = []any{
 	(Cluster_Environment)(0),         // 0: yandex.cloud.mdb.redis.v1.Cluster.Environment
 	(Cluster_Health)(0),              // 1: yandex.cloud.mdb.redis.v1.Cluster.Health
@@ -1554,56 +1794,66 @@ var file_yandex_cloud_mdb_redis_v1_cluster_proto_goTypes = []any{
 	(*Resources)(nil),                // 14: yandex.cloud.mdb.redis.v1.Resources
 	(*Access)(nil),                   // 15: yandex.cloud.mdb.redis.v1.Access
 	(*DiskSizeAutoscaling)(nil),      // 16: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling
-	nil,                              // 17: yandex.cloud.mdb.redis.v1.Cluster.LabelsEntry
-	(*timestamppb.Timestamp)(nil),    // 18: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),        // 19: yandex.cloud.mdb.redis.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),     // 20: yandex.cloud.mdb.redis.v1.MaintenanceOperation
-	(*wrapperspb.StringValue)(nil),   // 21: google.protobuf.StringValue
-	(*config.RedisConfigSet5_0)(nil), // 22: yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0
-	(*config.RedisConfigSet6_0)(nil), // 23: yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0
-	(*config.RedisConfigSet6_2)(nil), // 24: yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2
-	(*config.RedisConfigSet7_0)(nil), // 25: yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0
-	(*timeofday.TimeOfDay)(nil),      // 26: google.type.TimeOfDay
-	(*config.RedisConfigSet)(nil),    // 27: yandex.cloud.mdb.redis.v1.config.RedisConfigSet
-	(*wrapperspb.Int64Value)(nil),    // 28: google.protobuf.Int64Value
+	(*ValkeyModules)(nil),            // 17: yandex.cloud.mdb.redis.v1.ValkeyModules
+	(*ValkeySearch)(nil),             // 18: yandex.cloud.mdb.redis.v1.ValkeySearch
+	(*ValkeyJson)(nil),               // 19: yandex.cloud.mdb.redis.v1.ValkeyJson
+	(*ValkeyBloom)(nil),              // 20: yandex.cloud.mdb.redis.v1.ValkeyBloom
+	nil,                              // 21: yandex.cloud.mdb.redis.v1.Cluster.LabelsEntry
+	(*timestamppb.Timestamp)(nil),    // 22: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),        // 23: yandex.cloud.mdb.redis.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),     // 24: yandex.cloud.mdb.redis.v1.MaintenanceOperation
+	(*wrapperspb.StringValue)(nil),   // 25: google.protobuf.StringValue
+	(*config.RedisConfigSet5_0)(nil), // 26: yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0
+	(*config.RedisConfigSet6_0)(nil), // 27: yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0
+	(*config.RedisConfigSet6_2)(nil), // 28: yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2
+	(*config.RedisConfigSet7_0)(nil), // 29: yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0
+	(*timeofday.TimeOfDay)(nil),      // 30: google.type.TimeOfDay
+	(*config.RedisConfigSet)(nil),    // 31: yandex.cloud.mdb.redis.v1.config.RedisConfigSet
+	(*wrapperspb.Int64Value)(nil),    // 32: google.protobuf.Int64Value
 }
 var file_yandex_cloud_mdb_redis_v1_cluster_proto_depIdxs = []int32{
-	18, // 0: yandex.cloud.mdb.redis.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	17, // 1: yandex.cloud.mdb.redis.v1.Cluster.labels:type_name -> yandex.cloud.mdb.redis.v1.Cluster.LabelsEntry
+	22, // 0: yandex.cloud.mdb.redis.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	21, // 1: yandex.cloud.mdb.redis.v1.Cluster.labels:type_name -> yandex.cloud.mdb.redis.v1.Cluster.LabelsEntry
 	0,  // 2: yandex.cloud.mdb.redis.v1.Cluster.environment:type_name -> yandex.cloud.mdb.redis.v1.Cluster.Environment
 	9,  // 3: yandex.cloud.mdb.redis.v1.Cluster.monitoring:type_name -> yandex.cloud.mdb.redis.v1.Monitoring
 	10, // 4: yandex.cloud.mdb.redis.v1.Cluster.config:type_name -> yandex.cloud.mdb.redis.v1.ClusterConfig
 	1,  // 5: yandex.cloud.mdb.redis.v1.Cluster.health:type_name -> yandex.cloud.mdb.redis.v1.Cluster.Health
 	2,  // 6: yandex.cloud.mdb.redis.v1.Cluster.status:type_name -> yandex.cloud.mdb.redis.v1.Cluster.Status
-	19, // 7: yandex.cloud.mdb.redis.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.redis.v1.MaintenanceWindow
-	20, // 8: yandex.cloud.mdb.redis.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.redis.v1.MaintenanceOperation
+	23, // 7: yandex.cloud.mdb.redis.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.redis.v1.MaintenanceWindow
+	24, // 8: yandex.cloud.mdb.redis.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.redis.v1.MaintenanceOperation
 	3,  // 9: yandex.cloud.mdb.redis.v1.Cluster.persistence_mode:type_name -> yandex.cloud.mdb.redis.v1.Cluster.PersistenceMode
-	21, // 10: yandex.cloud.mdb.redis.v1.Cluster.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	22, // 11: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_5_0:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0
-	23, // 12: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_6_0:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0
-	24, // 13: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_6_2:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2
-	25, // 14: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_7_0:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0
+	25, // 10: yandex.cloud.mdb.redis.v1.Cluster.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	26, // 11: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_5_0:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0
+	27, // 12: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_6_0:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0
+	28, // 13: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_6_2:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2
+	29, // 14: yandex.cloud.mdb.redis.v1.ClusterConfig.redis_config_7_0:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0
 	14, // 15: yandex.cloud.mdb.redis.v1.ClusterConfig.resources:type_name -> yandex.cloud.mdb.redis.v1.Resources
-	26, // 16: yandex.cloud.mdb.redis.v1.ClusterConfig.backup_window_start:type_name -> google.type.TimeOfDay
+	30, // 16: yandex.cloud.mdb.redis.v1.ClusterConfig.backup_window_start:type_name -> google.type.TimeOfDay
 	15, // 17: yandex.cloud.mdb.redis.v1.ClusterConfig.access:type_name -> yandex.cloud.mdb.redis.v1.Access
-	27, // 18: yandex.cloud.mdb.redis.v1.ClusterConfig.redis:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet
+	31, // 18: yandex.cloud.mdb.redis.v1.ClusterConfig.redis:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfigSet
 	16, // 19: yandex.cloud.mdb.redis.v1.ClusterConfig.disk_size_autoscaling:type_name -> yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling
-	28, // 20: yandex.cloud.mdb.redis.v1.ClusterConfig.backup_retain_period_days:type_name -> google.protobuf.Int64Value
-	14, // 21: yandex.cloud.mdb.redis.v1.Host.resources:type_name -> yandex.cloud.mdb.redis.v1.Resources
-	4,  // 22: yandex.cloud.mdb.redis.v1.Host.role:type_name -> yandex.cloud.mdb.redis.v1.Host.Role
-	5,  // 23: yandex.cloud.mdb.redis.v1.Host.health:type_name -> yandex.cloud.mdb.redis.v1.Host.Health
-	13, // 24: yandex.cloud.mdb.redis.v1.Host.services:type_name -> yandex.cloud.mdb.redis.v1.Service
-	28, // 25: yandex.cloud.mdb.redis.v1.Host.replica_priority:type_name -> google.protobuf.Int64Value
-	6,  // 26: yandex.cloud.mdb.redis.v1.Service.type:type_name -> yandex.cloud.mdb.redis.v1.Service.Type
-	7,  // 27: yandex.cloud.mdb.redis.v1.Service.health:type_name -> yandex.cloud.mdb.redis.v1.Service.Health
-	28, // 28: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling.planned_usage_threshold:type_name -> google.protobuf.Int64Value
-	28, // 29: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling.emergency_usage_threshold:type_name -> google.protobuf.Int64Value
-	28, // 30: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling.disk_size_limit:type_name -> google.protobuf.Int64Value
-	31, // [31:31] is the sub-list for method output_type
-	31, // [31:31] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	32, // 20: yandex.cloud.mdb.redis.v1.ClusterConfig.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	17, // 21: yandex.cloud.mdb.redis.v1.ClusterConfig.modules:type_name -> yandex.cloud.mdb.redis.v1.ValkeyModules
+	14, // 22: yandex.cloud.mdb.redis.v1.Host.resources:type_name -> yandex.cloud.mdb.redis.v1.Resources
+	4,  // 23: yandex.cloud.mdb.redis.v1.Host.role:type_name -> yandex.cloud.mdb.redis.v1.Host.Role
+	5,  // 24: yandex.cloud.mdb.redis.v1.Host.health:type_name -> yandex.cloud.mdb.redis.v1.Host.Health
+	13, // 25: yandex.cloud.mdb.redis.v1.Host.services:type_name -> yandex.cloud.mdb.redis.v1.Service
+	32, // 26: yandex.cloud.mdb.redis.v1.Host.replica_priority:type_name -> google.protobuf.Int64Value
+	6,  // 27: yandex.cloud.mdb.redis.v1.Service.type:type_name -> yandex.cloud.mdb.redis.v1.Service.Type
+	7,  // 28: yandex.cloud.mdb.redis.v1.Service.health:type_name -> yandex.cloud.mdb.redis.v1.Service.Health
+	32, // 29: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling.planned_usage_threshold:type_name -> google.protobuf.Int64Value
+	32, // 30: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling.emergency_usage_threshold:type_name -> google.protobuf.Int64Value
+	32, // 31: yandex.cloud.mdb.redis.v1.DiskSizeAutoscaling.disk_size_limit:type_name -> google.protobuf.Int64Value
+	18, // 32: yandex.cloud.mdb.redis.v1.ValkeyModules.valkey_search:type_name -> yandex.cloud.mdb.redis.v1.ValkeySearch
+	19, // 33: yandex.cloud.mdb.redis.v1.ValkeyModules.valkey_json:type_name -> yandex.cloud.mdb.redis.v1.ValkeyJson
+	20, // 34: yandex.cloud.mdb.redis.v1.ValkeyModules.valkey_bloom:type_name -> yandex.cloud.mdb.redis.v1.ValkeyBloom
+	32, // 35: yandex.cloud.mdb.redis.v1.ValkeySearch.reader_threads:type_name -> google.protobuf.Int64Value
+	32, // 36: yandex.cloud.mdb.redis.v1.ValkeySearch.writer_threads:type_name -> google.protobuf.Int64Value
+	37, // [37:37] is the sub-list for method output_type
+	37, // [37:37] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_redis_v1_cluster_proto_init() }
@@ -1624,7 +1874,7 @@ func file_yandex_cloud_mdb_redis_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc), len(file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   10,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

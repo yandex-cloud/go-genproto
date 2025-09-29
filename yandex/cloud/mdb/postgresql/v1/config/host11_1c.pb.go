@@ -1146,7 +1146,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_host11_1c_proto protoreflect.File
 
 const file_yandex_cloud_mdb_postgresql_v1_config_host11_1c_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/postgresql/v1/config/host11_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe38\n" +
+	"5yandex/cloud/mdb/postgresql/v1/config/host11_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf58\n" +
 	"\x19PostgresqlHostConfig11_1C\x12T\n" +
 	"\x18recovery_min_apply_delay\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15recoveryMinApplyDelay\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -1185,8 +1185,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_host11_1c_proto_rawDesc = "" +
 	"\fbytea_output\x18  \x01(\x0e2L.yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11_1C.ByteaOutputR\vbyteaOutput\x12h\n" +
 	"\txmlbinary\x18! \x01(\x0e2J.yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11_1C.XmlBinaryR\txmlbinary\x12h\n" +
 	"\txmloption\x18\" \x01(\x0e2J.yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11_1C.XmlOptionR\txmloption\x12P\n" +
-	"\x16gin_pending_list_limit\x18# \x01(\v2\x1b.google.protobuf.Int64ValueR\x13ginPendingListLimit\x12F\n" +
-	"\x10deadlock_timeout\x18$ \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fdeadlockTimeout\x12V\n" +
+	"\x16gin_pending_list_limit\x18# \x01(\v2\x1b.google.protobuf.Int64ValueR\x13ginPendingListLimit\x12X\n" +
+	"\x10deadlock_timeout\x18$ \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x0fdeadlockTimeout\x12V\n" +
 	"\x19max_locks_per_transaction\x18% \x01(\v2\x1b.google.protobuf.Int64ValueR\x16maxLocksPerTransaction\x12_\n" +
 	"\x1emax_pred_locks_per_transaction\x18& \x01(\v2\x1b.google.protobuf.Int64ValueR\x1amaxPredLocksPerTransaction\x12;\n" +
 	"\varray_nulls\x18' \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
