@@ -20,12 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_Get_FullMethodName            = "/yandex.cloud.mdb.spqr.v1.UserService/Get"
-	UserService_List_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.UserService/List"
-	UserService_ListAtRevision_FullMethodName = "/yandex.cloud.mdb.spqr.v1.UserService/ListAtRevision"
-	UserService_Create_FullMethodName         = "/yandex.cloud.mdb.spqr.v1.UserService/Create"
-	UserService_Update_FullMethodName         = "/yandex.cloud.mdb.spqr.v1.UserService/Update"
-	UserService_Delete_FullMethodName         = "/yandex.cloud.mdb.spqr.v1.UserService/Delete"
+	UserService_Get_FullMethodName    = "/yandex.cloud.mdb.spqr.v1.UserService/Get"
+	UserService_List_FullMethodName   = "/yandex.cloud.mdb.spqr.v1.UserService/List"
+	UserService_Create_FullMethodName = "/yandex.cloud.mdb.spqr.v1.UserService/Create"
+	UserService_Update_FullMethodName = "/yandex.cloud.mdb.spqr.v1.UserService/Update"
+	UserService_Delete_FullMethodName = "/yandex.cloud.mdb.spqr.v1.UserService/Delete"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -40,8 +39,6 @@ type UserServiceClient interface {
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves the list of SPQR User resources in the specified cluster.
 	List(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Retrieves the list of SPQR User resources in the specified cluster at revision.
-	ListAtRevision(ctx context.Context, in *ListUsersAtRevisionRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	// Creates a SPQR user in the specified cluster.
 	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified SPQR user.
@@ -72,16 +69,6 @@ func (c *userServiceClient) List(ctx context.Context, in *ListUsersRequest, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
 	err := c.cc.Invoke(ctx, UserService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) ListAtRevision(ctx context.Context, in *ListUsersAtRevisionRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListUsersResponse)
-	err := c.cc.Invoke(ctx, UserService_ListAtRevision_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -130,8 +117,6 @@ type UserServiceServer interface {
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves the list of SPQR User resources in the specified cluster.
 	List(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Retrieves the list of SPQR User resources in the specified cluster at revision.
-	ListAtRevision(context.Context, *ListUsersAtRevisionRequest) (*ListUsersResponse, error)
 	// Creates a SPQR user in the specified cluster.
 	Create(context.Context, *CreateUserRequest) (*operation.Operation, error)
 	// Updates the specified SPQR user.
@@ -152,9 +137,6 @@ func (UnimplementedUserServiceServer) Get(context.Context, *GetUserRequest) (*Us
 }
 func (UnimplementedUserServiceServer) List(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
-}
-func (UnimplementedUserServiceServer) ListAtRevision(context.Context, *ListUsersAtRevisionRequest) (*ListUsersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAtRevision not implemented")
 }
 func (UnimplementedUserServiceServer) Create(context.Context, *CreateUserRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -217,24 +199,6 @@ func _UserService_List_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).List(ctx, req.(*ListUsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_ListAtRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListUsersAtRevisionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).ListAtRevision(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_ListAtRevision_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).ListAtRevision(ctx, req.(*ListUsersAtRevisionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -307,10 +271,6 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _UserService_List_Handler,
-		},
-		{
-			MethodName: "ListAtRevision",
-			Handler:    _UserService_ListAtRevision_Handler,
 		},
 		{
 			MethodName: "Create",

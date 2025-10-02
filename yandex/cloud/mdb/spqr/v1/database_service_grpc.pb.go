@@ -20,11 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DatabaseService_Get_FullMethodName            = "/yandex.cloud.mdb.spqr.v1.DatabaseService/Get"
-	DatabaseService_List_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.DatabaseService/List"
-	DatabaseService_ListAtRevision_FullMethodName = "/yandex.cloud.mdb.spqr.v1.DatabaseService/ListAtRevision"
-	DatabaseService_Create_FullMethodName         = "/yandex.cloud.mdb.spqr.v1.DatabaseService/Create"
-	DatabaseService_Delete_FullMethodName         = "/yandex.cloud.mdb.spqr.v1.DatabaseService/Delete"
+	DatabaseService_Get_FullMethodName    = "/yandex.cloud.mdb.spqr.v1.DatabaseService/Get"
+	DatabaseService_List_FullMethodName   = "/yandex.cloud.mdb.spqr.v1.DatabaseService/List"
+	DatabaseService_Create_FullMethodName = "/yandex.cloud.mdb.spqr.v1.DatabaseService/Create"
+	DatabaseService_Delete_FullMethodName = "/yandex.cloud.mdb.spqr.v1.DatabaseService/Delete"
 )
 
 // DatabaseServiceClient is the client API for DatabaseService service.
@@ -39,8 +38,6 @@ type DatabaseServiceClient interface {
 	Get(ctx context.Context, in *GetDatabaseRequest, opts ...grpc.CallOption) (*Database, error)
 	// Retrieves the list of SPQR Database resources in the specified cluster.
 	List(ctx context.Context, in *ListDatabasesRequest, opts ...grpc.CallOption) (*ListDatabasesResponse, error)
-	// Retrieves the list of SPQR Database resources in the specified cluster at the specified revision.
-	ListAtRevision(ctx context.Context, in *ListDatabasesAtRevisionRequest, opts ...grpc.CallOption) (*ListDatabasesResponse, error)
 	// Creates a new SPQR database in the specified cluster.
 	Create(ctx context.Context, in *CreateDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified SPQR database.
@@ -69,16 +66,6 @@ func (c *databaseServiceClient) List(ctx context.Context, in *ListDatabasesReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDatabasesResponse)
 	err := c.cc.Invoke(ctx, DatabaseService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *databaseServiceClient) ListAtRevision(ctx context.Context, in *ListDatabasesAtRevisionRequest, opts ...grpc.CallOption) (*ListDatabasesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListDatabasesResponse)
-	err := c.cc.Invoke(ctx, DatabaseService_ListAtRevision_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -117,8 +104,6 @@ type DatabaseServiceServer interface {
 	Get(context.Context, *GetDatabaseRequest) (*Database, error)
 	// Retrieves the list of SPQR Database resources in the specified cluster.
 	List(context.Context, *ListDatabasesRequest) (*ListDatabasesResponse, error)
-	// Retrieves the list of SPQR Database resources in the specified cluster at the specified revision.
-	ListAtRevision(context.Context, *ListDatabasesAtRevisionRequest) (*ListDatabasesResponse, error)
 	// Creates a new SPQR database in the specified cluster.
 	Create(context.Context, *CreateDatabaseRequest) (*operation.Operation, error)
 	// Deletes the specified SPQR database.
@@ -137,9 +122,6 @@ func (UnimplementedDatabaseServiceServer) Get(context.Context, *GetDatabaseReque
 }
 func (UnimplementedDatabaseServiceServer) List(context.Context, *ListDatabasesRequest) (*ListDatabasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
-}
-func (UnimplementedDatabaseServiceServer) ListAtRevision(context.Context, *ListDatabasesAtRevisionRequest) (*ListDatabasesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAtRevision not implemented")
 }
 func (UnimplementedDatabaseServiceServer) Create(context.Context, *CreateDatabaseRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -203,24 +185,6 @@ func _DatabaseService_List_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DatabaseService_ListAtRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListDatabasesAtRevisionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DatabaseServiceServer).ListAtRevision(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DatabaseService_ListAtRevision_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DatabaseServiceServer).ListAtRevision(ctx, req.(*ListDatabasesAtRevisionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _DatabaseService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateDatabaseRequest)
 	if err := dec(in); err != nil {
@@ -271,10 +235,6 @@ var DatabaseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _DatabaseService_List_Handler,
-		},
-		{
-			MethodName: "ListAtRevision",
-			Handler:    _DatabaseService_ListAtRevision_Handler,
 		},
 		{
 			MethodName: "Create",

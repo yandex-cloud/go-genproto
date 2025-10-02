@@ -22,22 +22,6 @@ func (m *ListDatabasesRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
-func (m *ListDatabasesAtRevisionRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *ListDatabasesAtRevisionRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListDatabasesAtRevisionRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListDatabasesAtRevisionRequest) SetRevision(v int64) {
-	m.Revision = v
-}
-
 func (m *ListDatabasesResponse) SetDatabases(v []*Database) {
 	m.Databases = v
 }

@@ -2155,7 +2155,7 @@ type UserSettings struct {
 	IgnoreMaterializedViewsWithDroppedTargetTable *wrapperspb.BoolValue `protobuf:"bytes,166,opt,name=ignore_materialized_views_with_dropped_target_table,json=ignoreMaterializedViewsWithDroppedTargetTable,proto3" json:"ignore_materialized_views_with_dropped_target_table,omitempty"`
 	// Enables or disables new query analyzer.
 	//
-	// Default value: **true** for versions 25.5 and higher, **false** for versions 25.4 and lower.
+	// Default value: **true** for versions 25.9 and higher, **false** for version 25.8, **true** for versions from 25.5 to 25.7, **false** for versions 25.4 and lower.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/guides/developer/understanding-query-execution-with-the-analyzer#analyzer).
 	EnableAnalyzer *wrapperspb.BoolValue `protobuf:"bytes,167,opt,name=enable_analyzer,json=enableAnalyzer,proto3" json:"enable_analyzer,omitempty"`

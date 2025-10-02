@@ -2382,9 +2382,9 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\x10\vJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\t\x10\n" +
 	"J\x05\b\v\x10\xc8\x01J\x06\b\xc9\x01\x10\xd0\x0f\"0\n" +
 	"\x13UpdateVideoMetadata\x12\x19\n" +
-	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xe4\x02\n" +
-	"\x15TranscodeVideoRequest\x12\x19\n" +
-	"\bvideo_id\x18\x01 \x01(\tR\avideoId\x12?\n" +
+	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xf2\x02\n" +
+	"\x15TranscodeVideoRequest\x12'\n" +
+	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\x12?\n" +
 	"\n" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12!\n" +
 	"\fsubtitle_ids\x18\x03 \x03(\tR\vsubtitleIds\x12b\n" +

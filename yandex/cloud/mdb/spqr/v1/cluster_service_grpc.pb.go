@@ -21,7 +21,6 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ClusterService_Get_FullMethodName                   = "/yandex.cloud.mdb.spqr.v1.ClusterService/Get"
-	ClusterService_GetAtRevision_FullMethodName         = "/yandex.cloud.mdb.spqr.v1.ClusterService/GetAtRevision"
 	ClusterService_List_FullMethodName                  = "/yandex.cloud.mdb.spqr.v1.ClusterService/List"
 	ClusterService_Create_FullMethodName                = "/yandex.cloud.mdb.spqr.v1.ClusterService/Create"
 	ClusterService_Update_FullMethodName                = "/yandex.cloud.mdb.spqr.v1.ClusterService/Update"
@@ -38,14 +37,12 @@ const (
 	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListOperations"
 	ClusterService_ListBackups_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListBackups"
 	ClusterService_ListHosts_FullMethodName             = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListHosts"
-	ClusterService_ListHostsAtRevision_FullMethodName   = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListHostsAtRevision"
 	ClusterService_AddHosts_FullMethodName              = "/yandex.cloud.mdb.spqr.v1.ClusterService/AddHosts"
 	ClusterService_UpdateHosts_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.ClusterService/UpdateHosts"
 	ClusterService_DeleteHosts_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.ClusterService/DeleteHosts"
 	ClusterService_ResetupHosts_FullMethodName          = "/yandex.cloud.mdb.spqr.v1.ClusterService/ResetupHosts"
 	ClusterService_GetShard_FullMethodName              = "/yandex.cloud.mdb.spqr.v1.ClusterService/GetShard"
 	ClusterService_ListShards_FullMethodName            = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListShards"
-	ClusterService_ListShardsAtRevision_FullMethodName  = "/yandex.cloud.mdb.spqr.v1.ClusterService/ListShardsAtRevision"
 	ClusterService_AddShard_FullMethodName              = "/yandex.cloud.mdb.spqr.v1.ClusterService/AddShard"
 	ClusterService_DeleteShard_FullMethodName           = "/yandex.cloud.mdb.spqr.v1.ClusterService/DeleteShard"
 )
@@ -60,7 +57,6 @@ type ClusterServiceClient interface {
 	//
 	// To get the list of available SPQR Cluster resources, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	GetAtRevision(ctx context.Context, in *GetClusterAtRevisionRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of SPQR Cluster resources that belong
 	// to the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
@@ -94,8 +90,6 @@ type ClusterServiceClient interface {
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
-	// Retrieves a list of hosts for the specified cluster.
-	ListHostsAtRevision(ctx context.Context, in *ListClusterHostsAtRevisionRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Creates new hosts for a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified hosts.
@@ -108,8 +102,6 @@ type ClusterServiceClient interface {
 	GetShard(ctx context.Context, in *GetClusterShardRequest, opts ...grpc.CallOption) (*Shard, error)
 	// Retrieves a list of shards.
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
-	// Retrieves a list of shards.
-	ListShardsAtRevision(ctx context.Context, in *ListClusterShardsAtRevisionRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
@@ -128,16 +120,6 @@ func (c *clusterServiceClient) Get(ctx context.Context, in *GetClusterRequest, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Cluster)
 	err := c.cc.Invoke(ctx, ClusterService_Get_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) GetAtRevision(ctx context.Context, in *GetClusterAtRevisionRequest, opts ...grpc.CallOption) (*Cluster, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Cluster)
-	err := c.cc.Invoke(ctx, ClusterService_GetAtRevision_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -313,16 +295,6 @@ func (c *clusterServiceClient) ListHosts(ctx context.Context, in *ListClusterHos
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListHostsAtRevision(ctx context.Context, in *ListClusterHostsAtRevisionRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterHostsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListHostsAtRevision_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *clusterServiceClient) AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -383,16 +355,6 @@ func (c *clusterServiceClient) ListShards(ctx context.Context, in *ListClusterSh
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListShardsAtRevision(ctx context.Context, in *ListClusterShardsAtRevisionRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterShardsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListShardsAtRevision_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *clusterServiceClient) AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -423,7 +385,6 @@ type ClusterServiceServer interface {
 	//
 	// To get the list of available SPQR Cluster resources, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	GetAtRevision(context.Context, *GetClusterAtRevisionRequest) (*Cluster, error)
 	// Retrieves the list of SPQR Cluster resources that belong
 	// to the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
@@ -457,8 +418,6 @@ type ClusterServiceServer interface {
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
-	// Retrieves a list of hosts for the specified cluster.
-	ListHostsAtRevision(context.Context, *ListClusterHostsAtRevisionRequest) (*ListClusterHostsResponse, error)
 	// Creates new hosts for a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified hosts.
@@ -471,8 +430,6 @@ type ClusterServiceServer interface {
 	GetShard(context.Context, *GetClusterShardRequest) (*Shard, error)
 	// Retrieves a list of shards.
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
-	// Retrieves a list of shards.
-	ListShardsAtRevision(context.Context, *ListClusterShardsAtRevisionRequest) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
@@ -488,9 +445,6 @@ type UnimplementedClusterServiceServer struct{}
 
 func (UnimplementedClusterServiceServer) Get(context.Context, *GetClusterRequest) (*Cluster, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (UnimplementedClusterServiceServer) GetAtRevision(context.Context, *GetClusterAtRevisionRequest) (*Cluster, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAtRevision not implemented")
 }
 func (UnimplementedClusterServiceServer) List(context.Context, *ListClustersRequest) (*ListClustersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -540,9 +494,6 @@ func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClust
 func (UnimplementedClusterServiceServer) ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListHosts not implemented")
 }
-func (UnimplementedClusterServiceServer) ListHostsAtRevision(context.Context, *ListClusterHostsAtRevisionRequest) (*ListClusterHostsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListHostsAtRevision not implemented")
-}
 func (UnimplementedClusterServiceServer) AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddHosts not implemented")
 }
@@ -560,9 +511,6 @@ func (UnimplementedClusterServiceServer) GetShard(context.Context, *GetClusterSh
 }
 func (UnimplementedClusterServiceServer) ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListShards not implemented")
-}
-func (UnimplementedClusterServiceServer) ListShardsAtRevision(context.Context, *ListClusterShardsAtRevisionRequest) (*ListClusterShardsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListShardsAtRevision not implemented")
 }
 func (UnimplementedClusterServiceServer) AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddShard not implemented")
@@ -604,24 +552,6 @@ func _ClusterService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Get(ctx, req.(*GetClusterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_GetAtRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetClusterAtRevisionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).GetAtRevision(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_GetAtRevision_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).GetAtRevision(ctx, req.(*GetClusterAtRevisionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -907,24 +837,6 @@ func _ClusterService_ListHosts_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_ListHostsAtRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterHostsAtRevisionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListHostsAtRevision(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListHostsAtRevision_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListHostsAtRevision(ctx, req.(*ListClusterHostsAtRevisionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ClusterService_AddHosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddClusterHostsRequest)
 	if err := dec(in); err != nil {
@@ -1033,24 +945,6 @@ func _ClusterService_ListShards_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_ListShardsAtRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterShardsAtRevisionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListShardsAtRevision(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListShardsAtRevision_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListShardsAtRevision(ctx, req.(*ListClusterShardsAtRevisionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ClusterService_AddShard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddClusterShardRequest)
 	if err := dec(in); err != nil {
@@ -1097,10 +991,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _ClusterService_Get_Handler,
-		},
-		{
-			MethodName: "GetAtRevision",
-			Handler:    _ClusterService_GetAtRevision_Handler,
 		},
 		{
 			MethodName: "List",
@@ -1163,10 +1053,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_ListHosts_Handler,
 		},
 		{
-			MethodName: "ListHostsAtRevision",
-			Handler:    _ClusterService_ListHostsAtRevision_Handler,
-		},
-		{
 			MethodName: "AddHosts",
 			Handler:    _ClusterService_AddHosts_Handler,
 		},
@@ -1189,10 +1075,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListShards",
 			Handler:    _ClusterService_ListShards_Handler,
-		},
-		{
-			MethodName: "ListShardsAtRevision",
-			Handler:    _ClusterService_ListShardsAtRevision_Handler,
 		},
 		{
 			MethodName: "AddShard",

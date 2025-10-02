@@ -26,22 +26,6 @@ func (m *ListUsersRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
-func (m *ListUsersAtRevisionRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *ListUsersAtRevisionRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListUsersAtRevisionRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListUsersAtRevisionRequest) SetRevision(v int64) {
-	m.Revision = v
-}
-
 func (m *ListUsersResponse) SetUsers(v []*User) {
 	m.Users = v
 }

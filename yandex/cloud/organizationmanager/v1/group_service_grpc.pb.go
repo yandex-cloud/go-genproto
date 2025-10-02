@@ -37,6 +37,7 @@ const (
 	GroupService_ListAccessBindings_FullMethodName   = "/yandex.cloud.organizationmanager.v1.GroupService/ListAccessBindings"
 	GroupService_SetAccessBindings_FullMethodName    = "/yandex.cloud.organizationmanager.v1.GroupService/SetAccessBindings"
 	GroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.organizationmanager.v1.GroupService/UpdateAccessBindings"
+	GroupService_ListEffective_FullMethodName        = "/yandex.cloud.organizationmanager.v1.GroupService/ListEffective"
 )
 
 // GroupServiceClient is the client API for GroupService service.
@@ -79,6 +80,8 @@ type GroupServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified group.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns groups that the subject belongs to within a specific organization.
+	ListEffective(ctx context.Context, in *ListEffectiveRequest, opts ...grpc.CallOption) (*ListEffectiveResponse, error)
 }
 
 type groupServiceClient struct {
@@ -249,6 +252,16 @@ func (c *groupServiceClient) UpdateAccessBindings(ctx context.Context, in *acces
 	return out, nil
 }
 
+func (c *groupServiceClient) ListEffective(ctx context.Context, in *ListEffectiveRequest, opts ...grpc.CallOption) (*ListEffectiveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListEffectiveResponse)
+	err := c.cc.Invoke(ctx, GroupService_ListEffective_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GroupServiceServer is the server API for GroupService service.
 // All implementations should embed UnimplementedGroupServiceServer
 // for forward compatibility.
@@ -289,6 +302,8 @@ type GroupServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified group.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Returns groups that the subject belongs to within a specific organization.
+	ListEffective(context.Context, *ListEffectiveRequest) (*ListEffectiveResponse, error)
 }
 
 // UnimplementedGroupServiceServer should be embedded to have
@@ -345,6 +360,9 @@ func (UnimplementedGroupServiceServer) SetAccessBindings(context.Context, *acces
 }
 func (UnimplementedGroupServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedGroupServiceServer) ListEffective(context.Context, *ListEffectiveRequest) (*ListEffectiveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEffective not implemented")
 }
 func (UnimplementedGroupServiceServer) testEmbeddedByValue() {}
 
@@ -654,6 +672,24 @@ func _GroupService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_ListEffective_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEffectiveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).ListEffective(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_ListEffective_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).ListEffective(ctx, req.(*ListEffectiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GroupService_ServiceDesc is the grpc.ServiceDesc for GroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -724,6 +760,10 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _GroupService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "ListEffective",
+			Handler:    _GroupService_ListEffective_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

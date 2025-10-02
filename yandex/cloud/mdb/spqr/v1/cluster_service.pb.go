@@ -81,7 +81,7 @@ func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumN
 
 // Deprecated: Use RescheduleMaintenanceRequest_RescheduleType.Descriptor instead.
 func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{20, 0}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{19, 0}
 }
 
 type ListClusterLogsRequest_ServiceType int32
@@ -137,7 +137,7 @@ func (x ListClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ListClusterLogsRequest_ServiceType.Descriptor instead.
 func (ListClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{23, 0}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{22, 0}
 }
 
 type StreamClusterLogsRequest_ServiceType int32
@@ -193,7 +193,7 @@ func (x StreamClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StreamClusterLogsRequest_ServiceType.Descriptor instead.
 func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{26, 0}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{25, 0}
 }
 
 type GetClusterRequest struct {
@@ -242,61 +242,6 @@ func (x *GetClusterRequest) GetClusterId() string {
 	return ""
 }
 
-type GetClusterAtRevisionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the SPQR Cluster resource to return.
-	// To get the cluster ID, use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Cluster revision
-	Revision      int64 `protobuf:"varint,2,opt,name=revision,proto3" json:"revision,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetClusterAtRevisionRequest) Reset() {
-	*x = GetClusterAtRevisionRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetClusterAtRevisionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetClusterAtRevisionRequest) ProtoMessage() {}
-
-func (x *GetClusterAtRevisionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetClusterAtRevisionRequest.ProtoReflect.Descriptor instead.
-func (*GetClusterAtRevisionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *GetClusterAtRevisionRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *GetClusterAtRevisionRequest) GetRevision() int64 {
-	if x != nil {
-		return x.Revision
-	}
-	return 0
-}
-
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list SPQR clusters in.
@@ -322,7 +267,7 @@ type ListClustersRequest struct {
 
 func (x *ListClustersRequest) Reset() {
 	*x = ListClustersRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -334,7 +279,7 @@ func (x *ListClustersRequest) String() string {
 func (*ListClustersRequest) ProtoMessage() {}
 
 func (x *ListClustersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -347,7 +292,7 @@ func (x *ListClustersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClustersRequest.ProtoReflect.Descriptor instead.
 func (*ListClustersRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListClustersRequest) GetFolderId() string {
@@ -393,7 +338,7 @@ type ListClustersResponse struct {
 
 func (x *ListClustersResponse) Reset() {
 	*x = ListClustersResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -405,7 +350,7 @@ func (x *ListClustersResponse) String() string {
 func (*ListClustersResponse) ProtoMessage() {}
 
 func (x *ListClustersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -418,7 +363,7 @@ func (x *ListClustersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClustersResponse.ProtoReflect.Descriptor instead.
 func (*ListClustersResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListClustersResponse) GetClusters() []*Cluster {
@@ -472,7 +417,7 @@ type CreateClusterRequest struct {
 
 func (x *CreateClusterRequest) Reset() {
 	*x = CreateClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -484,7 +429,7 @@ func (x *CreateClusterRequest) String() string {
 func (*CreateClusterRequest) ProtoMessage() {}
 
 func (x *CreateClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -497,7 +442,7 @@ func (x *CreateClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterRequest.ProtoReflect.Descriptor instead.
 func (*CreateClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateClusterRequest) GetFolderId() string {
@@ -608,7 +553,7 @@ type CreateClusterMetadata struct {
 
 func (x *CreateClusterMetadata) Reset() {
 	*x = CreateClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -620,7 +565,7 @@ func (x *CreateClusterMetadata) String() string {
 func (*CreateClusterMetadata) ProtoMessage() {}
 
 func (x *CreateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -633,7 +578,7 @@ func (x *CreateClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterMetadata.ProtoReflect.Descriptor instead.
 func (*CreateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateClusterMetadata) GetClusterId() string {
@@ -676,7 +621,7 @@ type UpdateClusterRequest struct {
 
 func (x *UpdateClusterRequest) Reset() {
 	*x = UpdateClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -688,7 +633,7 @@ func (x *UpdateClusterRequest) String() string {
 func (*UpdateClusterRequest) ProtoMessage() {}
 
 func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -701,7 +646,7 @@ func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateClusterRequest) GetClusterId() string {
@@ -784,7 +729,7 @@ type UpdateClusterMetadata struct {
 
 func (x *UpdateClusterMetadata) Reset() {
 	*x = UpdateClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -796,7 +741,7 @@ func (x *UpdateClusterMetadata) String() string {
 func (*UpdateClusterMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -809,7 +754,7 @@ func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateClusterMetadata) GetClusterId() string {
@@ -830,7 +775,7 @@ type DeleteClusterRequest struct {
 
 func (x *DeleteClusterRequest) Reset() {
 	*x = DeleteClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -842,7 +787,7 @@ func (x *DeleteClusterRequest) String() string {
 func (*DeleteClusterRequest) ProtoMessage() {}
 
 func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +800,7 @@ func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteClusterRequest) GetClusterId() string {
@@ -875,7 +820,7 @@ type DeleteClusterMetadata struct {
 
 func (x *DeleteClusterMetadata) Reset() {
 	*x = DeleteClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -887,7 +832,7 @@ func (x *DeleteClusterMetadata) String() string {
 func (*DeleteClusterMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -900,7 +845,7 @@ func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteClusterMetadata) GetClusterId() string {
@@ -920,7 +865,7 @@ type StartClusterRequest struct {
 
 func (x *StartClusterRequest) Reset() {
 	*x = StartClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -932,7 +877,7 @@ func (x *StartClusterRequest) String() string {
 func (*StartClusterRequest) ProtoMessage() {}
 
 func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +890,7 @@ func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
 func (*StartClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StartClusterRequest) GetClusterId() string {
@@ -965,7 +910,7 @@ type StartClusterMetadata struct {
 
 func (x *StartClusterMetadata) Reset() {
 	*x = StartClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -977,7 +922,7 @@ func (x *StartClusterMetadata) String() string {
 func (*StartClusterMetadata) ProtoMessage() {}
 
 func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -990,7 +935,7 @@ func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StartClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StartClusterMetadata) GetClusterId() string {
@@ -1010,7 +955,7 @@ type StopClusterRequest struct {
 
 func (x *StopClusterRequest) Reset() {
 	*x = StopClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1022,7 +967,7 @@ func (x *StopClusterRequest) String() string {
 func (*StopClusterRequest) ProtoMessage() {}
 
 func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1035,7 +980,7 @@ func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
 func (*StopClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StopClusterRequest) GetClusterId() string {
@@ -1055,7 +1000,7 @@ type StopClusterMetadata struct {
 
 func (x *StopClusterMetadata) Reset() {
 	*x = StopClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1067,7 +1012,7 @@ func (x *StopClusterMetadata) String() string {
 func (*StopClusterMetadata) ProtoMessage() {}
 
 func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1080,7 +1025,7 @@ func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StopClusterMetadata) GetClusterId() string {
@@ -1102,7 +1047,7 @@ type MoveClusterRequest struct {
 
 func (x *MoveClusterRequest) Reset() {
 	*x = MoveClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1114,7 +1059,7 @@ func (x *MoveClusterRequest) String() string {
 func (*MoveClusterRequest) ProtoMessage() {}
 
 func (x *MoveClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1127,7 +1072,7 @@ func (x *MoveClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveClusterRequest.ProtoReflect.Descriptor instead.
 func (*MoveClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *MoveClusterRequest) GetClusterId() string {
@@ -1158,7 +1103,7 @@ type MoveClusterMetadata struct {
 
 func (x *MoveClusterMetadata) Reset() {
 	*x = MoveClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1170,7 +1115,7 @@ func (x *MoveClusterMetadata) String() string {
 func (*MoveClusterMetadata) ProtoMessage() {}
 
 func (x *MoveClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1183,7 +1128,7 @@ func (x *MoveClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveClusterMetadata.ProtoReflect.Descriptor instead.
 func (*MoveClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *MoveClusterMetadata) GetClusterId() string {
@@ -1218,7 +1163,7 @@ type BackupClusterRequest struct {
 
 func (x *BackupClusterRequest) Reset() {
 	*x = BackupClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1230,7 +1175,7 @@ func (x *BackupClusterRequest) String() string {
 func (*BackupClusterRequest) ProtoMessage() {}
 
 func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1243,7 +1188,7 @@ func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupClusterRequest.ProtoReflect.Descriptor instead.
 func (*BackupClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BackupClusterRequest) GetClusterId() string {
@@ -1263,7 +1208,7 @@ type BackupClusterMetadata struct {
 
 func (x *BackupClusterMetadata) Reset() {
 	*x = BackupClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1220,7 @@ func (x *BackupClusterMetadata) String() string {
 func (*BackupClusterMetadata) ProtoMessage() {}
 
 func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1233,7 @@ func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupClusterMetadata.ProtoReflect.Descriptor instead.
 func (*BackupClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *BackupClusterMetadata) GetClusterId() string {
@@ -1341,7 +1286,7 @@ type RestoreClusterRequest struct {
 
 func (x *RestoreClusterRequest) Reset() {
 	*x = RestoreClusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1353,7 +1298,7 @@ func (x *RestoreClusterRequest) String() string {
 func (*RestoreClusterRequest) ProtoMessage() {}
 
 func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1366,7 +1311,7 @@ func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreClusterRequest.ProtoReflect.Descriptor instead.
 func (*RestoreClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RestoreClusterRequest) GetBackupId() string {
@@ -1472,7 +1417,7 @@ type RestoreClusterMetadata struct {
 
 func (x *RestoreClusterMetadata) Reset() {
 	*x = RestoreClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1484,7 +1429,7 @@ func (x *RestoreClusterMetadata) String() string {
 func (*RestoreClusterMetadata) ProtoMessage() {}
 
 func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1497,7 +1442,7 @@ func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreClusterMetadata.ProtoReflect.Descriptor instead.
 func (*RestoreClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RestoreClusterMetadata) GetClusterId() string {
@@ -1528,7 +1473,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1540,7 +1485,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1553,7 +1498,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -1591,7 +1536,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1603,7 +1548,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1616,7 +1561,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -1645,7 +1590,7 @@ type LogRecord struct {
 
 func (x *LogRecord) Reset() {
 	*x = LogRecord{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1657,7 +1602,7 @@ func (x *LogRecord) String() string {
 func (*LogRecord) ProtoMessage() {}
 
 func (x *LogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1670,7 +1615,7 @@ func (x *LogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogRecord.ProtoReflect.Descriptor instead.
 func (*LogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *LogRecord) GetTimestamp() *timestamppb.Timestamp {
@@ -1725,7 +1670,7 @@ type ListClusterLogsRequest struct {
 
 func (x *ListClusterLogsRequest) Reset() {
 	*x = ListClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1737,7 +1682,7 @@ func (x *ListClusterLogsRequest) String() string {
 func (*ListClusterLogsRequest) ProtoMessage() {}
 
 func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1750,7 +1695,7 @@ func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListClusterLogsRequest) GetClusterId() string {
@@ -1839,7 +1784,7 @@ type ListClusterLogsResponse struct {
 
 func (x *ListClusterLogsResponse) Reset() {
 	*x = ListClusterLogsResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1851,7 +1796,7 @@ func (x *ListClusterLogsResponse) String() string {
 func (*ListClusterLogsResponse) ProtoMessage() {}
 
 func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1864,7 +1809,7 @@ func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListClusterLogsResponse) GetLogs() []*LogRecord {
@@ -1896,7 +1841,7 @@ type StreamLogRecord struct {
 
 func (x *StreamLogRecord) Reset() {
 	*x = StreamLogRecord{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1908,7 +1853,7 @@ func (x *StreamLogRecord) String() string {
 func (*StreamLogRecord) ProtoMessage() {}
 
 func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1921,7 +1866,7 @@ func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLogRecord.ProtoReflect.Descriptor instead.
 func (*StreamLogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *StreamLogRecord) GetRecord() *LogRecord {
@@ -1967,7 +1912,7 @@ type StreamClusterLogsRequest struct {
 
 func (x *StreamClusterLogsRequest) Reset() {
 	*x = StreamClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1979,7 +1924,7 @@ func (x *StreamClusterLogsRequest) String() string {
 func (*StreamClusterLogsRequest) ProtoMessage() {}
 
 func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1992,7 +1937,7 @@ func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*StreamClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *StreamClusterLogsRequest) GetClusterId() string {
@@ -2062,7 +2007,7 @@ type ListClusterOperationsRequest struct {
 
 func (x *ListClusterOperationsRequest) Reset() {
 	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2074,7 +2019,7 @@ func (x *ListClusterOperationsRequest) String() string {
 func (*ListClusterOperationsRequest) ProtoMessage() {}
 
 func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2087,7 +2032,7 @@ func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListClusterOperationsRequest) GetClusterId() string {
@@ -2126,7 +2071,7 @@ type ListClusterOperationsResponse struct {
 
 func (x *ListClusterOperationsResponse) Reset() {
 	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2138,7 +2083,7 @@ func (x *ListClusterOperationsResponse) String() string {
 func (*ListClusterOperationsResponse) ProtoMessage() {}
 
 func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2151,7 +2096,7 @@ func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
@@ -2182,7 +2127,7 @@ type BackupListFilter struct {
 
 func (x *BackupListFilter) Reset() {
 	*x = BackupListFilter{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2194,7 +2139,7 @@ func (x *BackupListFilter) String() string {
 func (*BackupListFilter) ProtoMessage() {}
 
 func (x *BackupListFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2207,7 +2152,7 @@ func (x *BackupListFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupListFilter.ProtoReflect.Descriptor instead.
 func (*BackupListFilter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *BackupListFilter) GetStartTime() *timestamppb.Timestamp {
@@ -2250,7 +2195,7 @@ type ListClusterBackupsRequest struct {
 
 func (x *ListClusterBackupsRequest) Reset() {
 	*x = ListClusterBackupsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2262,7 +2207,7 @@ func (x *ListClusterBackupsRequest) String() string {
 func (*ListClusterBackupsRequest) ProtoMessage() {}
 
 func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2275,7 +2220,7 @@ func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterBackupsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterBackupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListClusterBackupsRequest) GetClusterId() string {
@@ -2314,7 +2259,7 @@ type ListClusterBackupsResponse struct {
 
 func (x *ListClusterBackupsResponse) Reset() {
 	*x = ListClusterBackupsResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2326,7 +2271,7 @@ func (x *ListClusterBackupsResponse) String() string {
 func (*ListClusterBackupsResponse) ProtoMessage() {}
 
 func (x *ListClusterBackupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2339,7 +2284,7 @@ func (x *ListClusterBackupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterBackupsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterBackupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ListClusterBackupsResponse) GetBackups() []*Backup {
@@ -2377,7 +2322,7 @@ type SpqrSpec struct {
 
 func (x *SpqrSpec) Reset() {
 	*x = SpqrSpec{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2389,7 +2334,7 @@ func (x *SpqrSpec) String() string {
 func (*SpqrSpec) ProtoMessage() {}
 
 func (x *SpqrSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2402,7 +2347,7 @@ func (x *SpqrSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpqrSpec.ProtoReflect.Descriptor instead.
 func (*SpqrSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *SpqrSpec) GetRouter() *SpqrSpec_Router {
@@ -2471,7 +2416,7 @@ type ConfigSpec struct {
 
 func (x *ConfigSpec) Reset() {
 	*x = ConfigSpec{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2483,7 +2428,7 @@ func (x *ConfigSpec) String() string {
 func (*ConfigSpec) ProtoMessage() {}
 
 func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2496,7 +2441,7 @@ func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigSpec.ProtoReflect.Descriptor instead.
 func (*ConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{33}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ConfigSpec) GetSpqrSpec() *SpqrSpec {
@@ -2553,7 +2498,7 @@ type ListClusterHostsRequest struct {
 
 func (x *ListClusterHostsRequest) Reset() {
 	*x = ListClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2565,7 +2510,7 @@ func (x *ListClusterHostsRequest) String() string {
 func (*ListClusterHostsRequest) ProtoMessage() {}
 
 func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2578,7 +2523,7 @@ func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{34}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListClusterHostsRequest) GetClusterId() string {
@@ -2602,83 +2547,6 @@ func (x *ListClusterHostsRequest) GetPageToken() string {
 	return ""
 }
 
-type ListClusterHostsAtRevisionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the SPQR cluster.
-	// To get the SPQR cluster ID, use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListClusterHostsResponse.next_page_token] returned by the previous list request.
-	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Cluster revision
-	Revision      int64 `protobuf:"varint,4,opt,name=revision,proto3" json:"revision,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterHostsAtRevisionRequest) Reset() {
-	*x = ListClusterHostsAtRevisionRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[35]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterHostsAtRevisionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterHostsAtRevisionRequest) ProtoMessage() {}
-
-func (x *ListClusterHostsAtRevisionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[35]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterHostsAtRevisionRequest.ProtoReflect.Descriptor instead.
-func (*ListClusterHostsAtRevisionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{35}
-}
-
-func (x *ListClusterHostsAtRevisionRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *ListClusterHostsAtRevisionRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListClusterHostsAtRevisionRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-func (x *ListClusterHostsAtRevisionRequest) GetRevision() int64 {
-	if x != nil {
-		return x.Revision
-	}
-	return 0
-}
-
 type ListClusterHostsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of Host resources.
@@ -2694,7 +2562,7 @@ type ListClusterHostsResponse struct {
 
 func (x *ListClusterHostsResponse) Reset() {
 	*x = ListClusterHostsResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2706,7 +2574,7 @@ func (x *ListClusterHostsResponse) String() string {
 func (*ListClusterHostsResponse) ProtoMessage() {}
 
 func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2719,7 +2587,7 @@ func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterHostsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterHostsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{36}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListClusterHostsResponse) GetHosts() []*Host {
@@ -2749,7 +2617,7 @@ type AddClusterHostsRequest struct {
 
 func (x *AddClusterHostsRequest) Reset() {
 	*x = AddClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2761,7 +2629,7 @@ func (x *AddClusterHostsRequest) String() string {
 func (*AddClusterHostsRequest) ProtoMessage() {}
 
 func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2774,7 +2642,7 @@ func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{37}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *AddClusterHostsRequest) GetClusterId() string {
@@ -2803,7 +2671,7 @@ type AddClusterHostsMetadata struct {
 
 func (x *AddClusterHostsMetadata) Reset() {
 	*x = AddClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2815,7 +2683,7 @@ func (x *AddClusterHostsMetadata) String() string {
 func (*AddClusterHostsMetadata) ProtoMessage() {}
 
 func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2828,7 +2696,7 @@ func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{38}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *AddClusterHostsMetadata) GetClusterId() string {
@@ -2858,7 +2726,7 @@ type UpdateClusterHostsRequest struct {
 
 func (x *UpdateClusterHostsRequest) Reset() {
 	*x = UpdateClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2870,7 +2738,7 @@ func (x *UpdateClusterHostsRequest) String() string {
 func (*UpdateClusterHostsRequest) ProtoMessage() {}
 
 func (x *UpdateClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2883,7 +2751,7 @@ func (x *UpdateClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{39}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *UpdateClusterHostsRequest) GetClusterId() string {
@@ -2912,7 +2780,7 @@ type UpdateClusterHostsMetadata struct {
 
 func (x *UpdateClusterHostsMetadata) Reset() {
 	*x = UpdateClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2924,7 +2792,7 @@ func (x *UpdateClusterHostsMetadata) String() string {
 func (*UpdateClusterHostsMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2937,7 +2805,7 @@ func (x *UpdateClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{40}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *UpdateClusterHostsMetadata) GetClusterId() string {
@@ -2969,7 +2837,7 @@ type UpdateHostSpec struct {
 
 func (x *UpdateHostSpec) Reset() {
 	*x = UpdateHostSpec{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2981,7 +2849,7 @@ func (x *UpdateHostSpec) String() string {
 func (*UpdateHostSpec) ProtoMessage() {}
 
 func (x *UpdateHostSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2994,7 +2862,7 @@ func (x *UpdateHostSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateHostSpec.ProtoReflect.Descriptor instead.
 func (*UpdateHostSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{41}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UpdateHostSpec) GetHostName() string {
@@ -3031,7 +2899,7 @@ type DeleteClusterHostsRequest struct {
 
 func (x *DeleteClusterHostsRequest) Reset() {
 	*x = DeleteClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3043,7 +2911,7 @@ func (x *DeleteClusterHostsRequest) String() string {
 func (*DeleteClusterHostsRequest) ProtoMessage() {}
 
 func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3056,7 +2924,7 @@ func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{42}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *DeleteClusterHostsRequest) GetClusterId() string {
@@ -3085,7 +2953,7 @@ type DeleteClusterHostsMetadata struct {
 
 func (x *DeleteClusterHostsMetadata) Reset() {
 	*x = DeleteClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3097,7 +2965,7 @@ func (x *DeleteClusterHostsMetadata) String() string {
 func (*DeleteClusterHostsMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3110,7 +2978,7 @@ func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{43}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *DeleteClusterHostsMetadata) GetClusterId() string {
@@ -3139,7 +3007,7 @@ type ResetupHostsRequest struct {
 
 func (x *ResetupHostsRequest) Reset() {
 	*x = ResetupHostsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3151,7 +3019,7 @@ func (x *ResetupHostsRequest) String() string {
 func (*ResetupHostsRequest) ProtoMessage() {}
 
 func (x *ResetupHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3164,7 +3032,7 @@ func (x *ResetupHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetupHostsRequest.ProtoReflect.Descriptor instead.
 func (*ResetupHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{44}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ResetupHostsRequest) GetClusterId() string {
@@ -3193,7 +3061,7 @@ type ResetupHostsMetadata struct {
 
 func (x *ResetupHostsMetadata) Reset() {
 	*x = ResetupHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[45]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3205,7 +3073,7 @@ func (x *ResetupHostsMetadata) String() string {
 func (*ResetupHostsMetadata) ProtoMessage() {}
 
 func (x *ResetupHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[45]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3218,7 +3086,7 @@ func (x *ResetupHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetupHostsMetadata.ProtoReflect.Descriptor instead.
 func (*ResetupHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{45}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ResetupHostsMetadata) GetClusterId() string {
@@ -3249,7 +3117,7 @@ type GetClusterShardRequest struct {
 
 func (x *GetClusterShardRequest) Reset() {
 	*x = GetClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[46]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3261,7 +3129,7 @@ func (x *GetClusterShardRequest) String() string {
 func (*GetClusterShardRequest) ProtoMessage() {}
 
 func (x *GetClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[46]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3274,7 +3142,7 @@ func (x *GetClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*GetClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{46}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *GetClusterShardRequest) GetClusterId() string {
@@ -3309,7 +3177,7 @@ type ListClusterShardsRequest struct {
 
 func (x *ListClusterShardsRequest) Reset() {
 	*x = ListClusterShardsRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[47]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3321,7 +3189,7 @@ func (x *ListClusterShardsRequest) String() string {
 func (*ListClusterShardsRequest) ProtoMessage() {}
 
 func (x *ListClusterShardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[47]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3334,7 +3202,7 @@ func (x *ListClusterShardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterShardsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterShardsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{47}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ListClusterShardsRequest) GetClusterId() string {
@@ -3358,82 +3226,6 @@ func (x *ListClusterShardsRequest) GetPageToken() string {
 	return ""
 }
 
-type ListClusterShardsAtRevisionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the SPQR cluster to list databases in.
-	// To get the cluster ID, use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListClusterShardsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListClusterShardsResponse.next_page_token] returned by the previous list request.
-	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Cluster revision
-	Revision      int64 `protobuf:"varint,4,opt,name=revision,proto3" json:"revision,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterShardsAtRevisionRequest) Reset() {
-	*x = ListClusterShardsAtRevisionRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[48]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterShardsAtRevisionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterShardsAtRevisionRequest) ProtoMessage() {}
-
-func (x *ListClusterShardsAtRevisionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[48]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterShardsAtRevisionRequest.ProtoReflect.Descriptor instead.
-func (*ListClusterShardsAtRevisionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{48}
-}
-
-func (x *ListClusterShardsAtRevisionRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *ListClusterShardsAtRevisionRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListClusterShardsAtRevisionRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-func (x *ListClusterShardsAtRevisionRequest) GetRevision() int64 {
-	if x != nil {
-		return x.Revision
-	}
-	return 0
-}
-
 type ListClusterShardsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of SPQR shards.
@@ -3449,7 +3241,7 @@ type ListClusterShardsResponse struct {
 
 func (x *ListClusterShardsResponse) Reset() {
 	*x = ListClusterShardsResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[49]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3461,7 +3253,7 @@ func (x *ListClusterShardsResponse) String() string {
 func (*ListClusterShardsResponse) ProtoMessage() {}
 
 func (x *ListClusterShardsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[49]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3474,7 +3266,7 @@ func (x *ListClusterShardsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterShardsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterShardsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{49}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListClusterShardsResponse) GetShards() []*Shard {
@@ -3504,7 +3296,7 @@ type AddClusterShardRequest struct {
 
 func (x *AddClusterShardRequest) Reset() {
 	*x = AddClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[50]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3516,7 +3308,7 @@ func (x *AddClusterShardRequest) String() string {
 func (*AddClusterShardRequest) ProtoMessage() {}
 
 func (x *AddClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[50]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3529,7 +3321,7 @@ func (x *AddClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*AddClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{50}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *AddClusterShardRequest) GetClusterId() string {
@@ -3558,7 +3350,7 @@ type AddClusterShardMetadata struct {
 
 func (x *AddClusterShardMetadata) Reset() {
 	*x = AddClusterShardMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[51]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3570,7 +3362,7 @@ func (x *AddClusterShardMetadata) String() string {
 func (*AddClusterShardMetadata) ProtoMessage() {}
 
 func (x *AddClusterShardMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[51]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3583,7 +3375,7 @@ func (x *AddClusterShardMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterShardMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterShardMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{51}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *AddClusterShardMetadata) GetClusterId() string {
@@ -3614,7 +3406,7 @@ type DeleteClusterShardRequest struct {
 
 func (x *DeleteClusterShardRequest) Reset() {
 	*x = DeleteClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[52]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3626,7 +3418,7 @@ func (x *DeleteClusterShardRequest) String() string {
 func (*DeleteClusterShardRequest) ProtoMessage() {}
 
 func (x *DeleteClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[52]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3639,7 +3431,7 @@ func (x *DeleteClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{52}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *DeleteClusterShardRequest) GetClusterId() string {
@@ -3668,7 +3460,7 @@ type DeleteClusterShardMetadata struct {
 
 func (x *DeleteClusterShardMetadata) Reset() {
 	*x = DeleteClusterShardMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[53]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3680,7 +3472,7 @@ func (x *DeleteClusterShardMetadata) String() string {
 func (*DeleteClusterShardMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterShardMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[53]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3693,7 +3485,7 @@ func (x *DeleteClusterShardMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{53}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *DeleteClusterShardMetadata) GetClusterId() string {
@@ -3724,7 +3516,7 @@ type AddSubclusterRequest struct {
 
 func (x *AddSubclusterRequest) Reset() {
 	*x = AddSubclusterRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[54]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3736,7 +3528,7 @@ func (x *AddSubclusterRequest) String() string {
 func (*AddSubclusterRequest) ProtoMessage() {}
 
 func (x *AddSubclusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[54]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3749,7 +3541,7 @@ func (x *AddSubclusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSubclusterRequest.ProtoReflect.Descriptor instead.
 func (*AddSubclusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{54}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *AddSubclusterRequest) GetClusterId() string {
@@ -3785,7 +3577,7 @@ type SpqrSpec_Router struct {
 
 func (x *SpqrSpec_Router) Reset() {
 	*x = SpqrSpec_Router{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[59]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3797,7 +3589,7 @@ func (x *SpqrSpec_Router) String() string {
 func (*SpqrSpec_Router) ProtoMessage() {}
 
 func (x *SpqrSpec_Router) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[59]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3810,7 +3602,7 @@ func (x *SpqrSpec_Router) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpqrSpec_Router.ProtoReflect.Descriptor instead.
 func (*SpqrSpec_Router) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{32, 0}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{31, 0}
 }
 
 func (x *SpqrSpec_Router) GetConfig() *RouterSettings {
@@ -3839,7 +3631,7 @@ type SpqrSpec_Coordinator struct {
 
 func (x *SpqrSpec_Coordinator) Reset() {
 	*x = SpqrSpec_Coordinator{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[60]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3851,7 +3643,7 @@ func (x *SpqrSpec_Coordinator) String() string {
 func (*SpqrSpec_Coordinator) ProtoMessage() {}
 
 func (x *SpqrSpec_Coordinator) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[60]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3864,7 +3656,7 @@ func (x *SpqrSpec_Coordinator) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpqrSpec_Coordinator.ProtoReflect.Descriptor instead.
 func (*SpqrSpec_Coordinator) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{32, 1}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{31, 1}
 }
 
 func (x *SpqrSpec_Coordinator) GetConfig() *CoordinatorSettings {
@@ -3893,7 +3685,7 @@ type SpqrSpec_PostgreSQL struct {
 
 func (x *SpqrSpec_PostgreSQL) Reset() {
 	*x = SpqrSpec_PostgreSQL{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[61]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3905,7 +3697,7 @@ func (x *SpqrSpec_PostgreSQL) String() string {
 func (*SpqrSpec_PostgreSQL) ProtoMessage() {}
 
 func (x *SpqrSpec_PostgreSQL) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[61]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3918,7 +3710,7 @@ func (x *SpqrSpec_PostgreSQL) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpqrSpec_PostgreSQL.ProtoReflect.Descriptor instead.
 func (*SpqrSpec_PostgreSQL) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{32, 2}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{31, 2}
 }
 
 func (x *SpqrSpec_PostgreSQL) GetConfig() *PostgreSQLSettings {
@@ -3949,7 +3741,7 @@ type SpqrSpec_Infra struct {
 
 func (x *SpqrSpec_Infra) Reset() {
 	*x = SpqrSpec_Infra{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[62]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3961,7 +3753,7 @@ func (x *SpqrSpec_Infra) String() string {
 func (*SpqrSpec_Infra) ProtoMessage() {}
 
 func (x *SpqrSpec_Infra) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[62]
+	mi := &file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3974,7 +3766,7 @@ func (x *SpqrSpec_Infra) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpqrSpec_Infra.ProtoReflect.Descriptor instead.
 func (*SpqrSpec_Infra) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{32, 3}
+	return file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP(), []int{31, 3}
 }
 
 func (x *SpqrSpec_Infra) GetResources() *Resources {
@@ -4005,11 +3797,7 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	".yandex/cloud/mdb/spqr/v1/cluster_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/mdb/spqr/v1/backup.proto\x1a&yandex/cloud/mdb/spqr/v1/cluster.proto\x1a%yandex/cloud/mdb/spqr/v1/config.proto\x1a'yandex/cloud/mdb/spqr/v1/database.proto\x1a#yandex/cloud/mdb/spqr/v1/host.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\x1a*yandex/cloud/mdb/spqr/v1/maintenance.proto\x1a$yandex/cloud/mdb/spqr/v1/shard.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"n\n" +
-	"\x1bGetClusterAtRevisionRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\"\n" +
-	"\brevision\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\brevision\"\xb7\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
 	"\x13ListClustersRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -4260,15 +4048,7 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xc7\x01\n" +
-	"!ListClusterHostsAtRevisionRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\brevision\x18\x04 \x01(\x03B\x06\xfa\xc71\x02>0R\brevision\"x\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"x\n" +
 	"\x18ListClusterHostsResponse\x124\n" +
 	"\x05hosts\x18\x01 \x03(\v2\x1e.yandex.cloud.mdb.spqr.v1.HostR\x05hosts\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8f\x01\n" +
@@ -4327,15 +4107,7 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xc8\x01\n" +
-	"\"ListClusterShardsAtRevisionRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\brevision\x18\x04 \x01(\x03B\x06\xfa\xc71\x02>0R\brevision\"|\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"|\n" +
 	"\x19ListClusterShardsResponse\x127\n" +
 	"\x06shards\x18\x01 \x03(\v2\x1f.yandex.cloud.mdb.spqr.v1.ShardR\x06shards\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9b\x01\n" +
@@ -4364,10 +4136,9 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12H\n" +
 	"\n" +
 	"host_specs\x18\x02 \x03(\v2\".yandex.cloud.mdb.spqr.v1.HostSpecB\x05\x82\xc81\x011R\thostSpecs\x12G\n" +
-	"\tresources\x18\x03 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesB\x04\xe8\xc71\x01R\tresources2\xf8(\n" +
+	"\tresources\x18\x03 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesB\x04\xe8\xc71\x01R\tresources2\xcf$\n" +
 	"\x0eClusterService\x12\x85\x01\n" +
-	"\x03Get\x12+.yandex.cloud.mdb.spqr.v1.GetClusterRequest\x1a!.yandex.cloud.mdb.spqr.v1.Cluster\".\x82\xd3\xe4\x93\x02(\x12&/managed-spqr/v1/clusters/{cluster_id}\x12\xa4\x01\n" +
-	"\rGetAtRevision\x125.yandex.cloud.mdb.spqr.v1.GetClusterAtRevisionRequest\x1a!.yandex.cloud.mdb.spqr.v1.Cluster\"9\x82\xd3\xe4\x93\x023\x121/managed-spqr/v1/clusters/{cluster_id}:atRevision\x12\x88\x01\n" +
+	"\x03Get\x12+.yandex.cloud.mdb.spqr.v1.GetClusterRequest\x1a!.yandex.cloud.mdb.spqr.v1.Cluster\".\x82\xd3\xe4\x93\x02(\x12&/managed-spqr/v1/clusters/{cluster_id}\x12\x88\x01\n" +
 	"\x04List\x12-.yandex.cloud.mdb.spqr.v1.ListClustersRequest\x1a..yandex.cloud.mdb.spqr.v1.ListClustersResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/managed-spqr/v1/clusters\x12\xa5\x01\n" +
 	"\x06Create\x12..yandex.cloud.mdb.spqr.v1.CreateClusterRequest\x1a!.yandex.cloud.operation.Operation\"H\xb2\xd2* \n" +
 	"\x15CreateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/managed-spqr/v1/clusters\x12\xb2\x01\n" +
@@ -4394,8 +4165,7 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"StreamLogs\x122.yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest\x1a).yandex.cloud.mdb.spqr.v1.StreamLogRecord\":\x82\xd3\xe4\x93\x024\x122/managed-spqr/v1/clusters/{cluster_id}:stream_logs0\x01\x12\xbc\x01\n" +
 	"\x0eListOperations\x126.yandex.cloud.mdb.spqr.v1.ListClusterOperationsRequest\x1a7.yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse\"9\x82\xd3\xe4\x93\x023\x121/managed-spqr/v1/clusters/{cluster_id}/operations\x12\xb0\x01\n" +
 	"\vListBackups\x123.yandex.cloud.mdb.spqr.v1.ListClusterBackupsRequest\x1a4.yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse\"6\x82\xd3\xe4\x93\x020\x12./managed-spqr/v1/clusters/{cluster_id}/backups\x12\xa8\x01\n" +
-	"\tListHosts\x121.yandex.cloud.mdb.spqr.v1.ListClusterHostsRequest\x1a2.yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse\"4\x82\xd3\xe4\x93\x02.\x12,/managed-spqr/v1/clusters/{cluster_id}/hosts\x12\xbc\x01\n" +
-	"\x13ListHostsAtRevision\x12;.yandex.cloud.mdb.spqr.v1.ListClusterHostsAtRevisionRequest\x1a2.yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse\"4\x82\xd3\xe4\x93\x02.\x12,/managed-spqr/v1/clusters/{cluster_id}/hosts\x12\xd8\x01\n" +
+	"\tListHosts\x121.yandex.cloud.mdb.spqr.v1.ListClusterHostsRequest\x1a2.yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse\"4\x82\xd3\xe4\x93\x02.\x12,/managed-spqr/v1/clusters/{cluster_id}/hosts\x12\xd8\x01\n" +
 	"\bAddHosts\x120.yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"w\xb2\xd2*0\n" +
 	"\x17AddClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02=:\x01*\"8/managed-spqr/v1/clusters/{cluster_id}/hosts:batchCreate\x12\xe1\x01\n" +
 	"\vUpdateHosts\x123.yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"z\xb2\xd2*3\n" +
@@ -4406,8 +4176,7 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\x14ResetupHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x028:\x01*\"3/managed-spqr/v1/clusters/{cluster_id}:resetupHosts\x12\xa1\x01\n" +
 	"\bGetShard\x120.yandex.cloud.mdb.spqr.v1.GetClusterShardRequest\x1a\x1f.yandex.cloud.mdb.spqr.v1.Shard\"B\x82\xd3\xe4\x93\x02<\x12:/managed-spqr/v1/clusters/{cluster_id}/shards/{shard_name}\x12\xac\x01\n" +
 	"\n" +
-	"ListShards\x122.yandex.cloud.mdb.spqr.v1.ListClusterShardsRequest\x1a3.yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse\"5\x82\xd3\xe4\x93\x02/\x12-/managed-spqr/v1/clusters/{cluster_id}/shards\x12\xc0\x01\n" +
-	"\x14ListShardsAtRevision\x12<.yandex.cloud.mdb.spqr.v1.ListClusterShardsAtRevisionRequest\x1a3.yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse\"5\x82\xd3\xe4\x93\x02/\x12-/managed-spqr/v1/clusters/{cluster_id}/shards\x12\xbd\x01\n" +
+	"ListShards\x122.yandex.cloud.mdb.spqr.v1.ListClusterShardsRequest\x1a3.yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse\"5\x82\xd3\xe4\x93\x02/\x12-/managed-spqr/v1/clusters/{cluster_id}/shards\x12\xbd\x01\n" +
 	"\bAddShard\x120.yandex.cloud.mdb.spqr.v1.AddClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2* \n" +
 	"\x17AddClusterShardMetadata\x12\x05Shard\x82\xd3\xe4\x93\x022:\x01*\"-/managed-spqr/v1/clusters/{cluster_id}/shards\x12\xe0\x01\n" +
 	"\vDeleteShard\x123.yandex.cloud.mdb.spqr.v1.DeleteClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"y\xb2\xd2*3\n" +
@@ -4427,220 +4196,211 @@ func file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
+var file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_goTypes = []any{
 	(RescheduleMaintenanceRequest_RescheduleType)(0), // 0: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest.RescheduleType
 	(ListClusterLogsRequest_ServiceType)(0),          // 1: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.ServiceType
 	(StreamClusterLogsRequest_ServiceType)(0),        // 2: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.ServiceType
 	(*GetClusterRequest)(nil),                        // 3: yandex.cloud.mdb.spqr.v1.GetClusterRequest
-	(*GetClusterAtRevisionRequest)(nil),              // 4: yandex.cloud.mdb.spqr.v1.GetClusterAtRevisionRequest
-	(*ListClustersRequest)(nil),                      // 5: yandex.cloud.mdb.spqr.v1.ListClustersRequest
-	(*ListClustersResponse)(nil),                     // 6: yandex.cloud.mdb.spqr.v1.ListClustersResponse
-	(*CreateClusterRequest)(nil),                     // 7: yandex.cloud.mdb.spqr.v1.CreateClusterRequest
-	(*CreateClusterMetadata)(nil),                    // 8: yandex.cloud.mdb.spqr.v1.CreateClusterMetadata
-	(*UpdateClusterRequest)(nil),                     // 9: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest
-	(*UpdateClusterMetadata)(nil),                    // 10: yandex.cloud.mdb.spqr.v1.UpdateClusterMetadata
-	(*DeleteClusterRequest)(nil),                     // 11: yandex.cloud.mdb.spqr.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),                    // 12: yandex.cloud.mdb.spqr.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),                      // 13: yandex.cloud.mdb.spqr.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),                     // 14: yandex.cloud.mdb.spqr.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),                       // 15: yandex.cloud.mdb.spqr.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),                      // 16: yandex.cloud.mdb.spqr.v1.StopClusterMetadata
-	(*MoveClusterRequest)(nil),                       // 17: yandex.cloud.mdb.spqr.v1.MoveClusterRequest
-	(*MoveClusterMetadata)(nil),                      // 18: yandex.cloud.mdb.spqr.v1.MoveClusterMetadata
-	(*BackupClusterRequest)(nil),                     // 19: yandex.cloud.mdb.spqr.v1.BackupClusterRequest
-	(*BackupClusterMetadata)(nil),                    // 20: yandex.cloud.mdb.spqr.v1.BackupClusterMetadata
-	(*RestoreClusterRequest)(nil),                    // 21: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest
-	(*RestoreClusterMetadata)(nil),                   // 22: yandex.cloud.mdb.spqr.v1.RestoreClusterMetadata
-	(*RescheduleMaintenanceRequest)(nil),             // 23: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),            // 24: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceMetadata
-	(*LogRecord)(nil),                                // 25: yandex.cloud.mdb.spqr.v1.LogRecord
-	(*ListClusterLogsRequest)(nil),                   // 26: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest
-	(*ListClusterLogsResponse)(nil),                  // 27: yandex.cloud.mdb.spqr.v1.ListClusterLogsResponse
-	(*StreamLogRecord)(nil),                          // 28: yandex.cloud.mdb.spqr.v1.StreamLogRecord
-	(*StreamClusterLogsRequest)(nil),                 // 29: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest
-	(*ListClusterOperationsRequest)(nil),             // 30: yandex.cloud.mdb.spqr.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil),            // 31: yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse
-	(*BackupListFilter)(nil),                         // 32: yandex.cloud.mdb.spqr.v1.BackupListFilter
-	(*ListClusterBackupsRequest)(nil),                // 33: yandex.cloud.mdb.spqr.v1.ListClusterBackupsRequest
-	(*ListClusterBackupsResponse)(nil),               // 34: yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse
-	(*SpqrSpec)(nil),                                 // 35: yandex.cloud.mdb.spqr.v1.SpqrSpec
-	(*ConfigSpec)(nil),                               // 36: yandex.cloud.mdb.spqr.v1.ConfigSpec
-	(*ListClusterHostsRequest)(nil),                  // 37: yandex.cloud.mdb.spqr.v1.ListClusterHostsRequest
-	(*ListClusterHostsAtRevisionRequest)(nil),        // 38: yandex.cloud.mdb.spqr.v1.ListClusterHostsAtRevisionRequest
-	(*ListClusterHostsResponse)(nil),                 // 39: yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse
-	(*AddClusterHostsRequest)(nil),                   // 40: yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest
-	(*AddClusterHostsMetadata)(nil),                  // 41: yandex.cloud.mdb.spqr.v1.AddClusterHostsMetadata
-	(*UpdateClusterHostsRequest)(nil),                // 42: yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest
-	(*UpdateClusterHostsMetadata)(nil),               // 43: yandex.cloud.mdb.spqr.v1.UpdateClusterHostsMetadata
-	(*UpdateHostSpec)(nil),                           // 44: yandex.cloud.mdb.spqr.v1.UpdateHostSpec
-	(*DeleteClusterHostsRequest)(nil),                // 45: yandex.cloud.mdb.spqr.v1.DeleteClusterHostsRequest
-	(*DeleteClusterHostsMetadata)(nil),               // 46: yandex.cloud.mdb.spqr.v1.DeleteClusterHostsMetadata
-	(*ResetupHostsRequest)(nil),                      // 47: yandex.cloud.mdb.spqr.v1.ResetupHostsRequest
-	(*ResetupHostsMetadata)(nil),                     // 48: yandex.cloud.mdb.spqr.v1.ResetupHostsMetadata
-	(*GetClusterShardRequest)(nil),                   // 49: yandex.cloud.mdb.spqr.v1.GetClusterShardRequest
-	(*ListClusterShardsRequest)(nil),                 // 50: yandex.cloud.mdb.spqr.v1.ListClusterShardsRequest
-	(*ListClusterShardsAtRevisionRequest)(nil),       // 51: yandex.cloud.mdb.spqr.v1.ListClusterShardsAtRevisionRequest
-	(*ListClusterShardsResponse)(nil),                // 52: yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse
-	(*AddClusterShardRequest)(nil),                   // 53: yandex.cloud.mdb.spqr.v1.AddClusterShardRequest
-	(*AddClusterShardMetadata)(nil),                  // 54: yandex.cloud.mdb.spqr.v1.AddClusterShardMetadata
-	(*DeleteClusterShardRequest)(nil),                // 55: yandex.cloud.mdb.spqr.v1.DeleteClusterShardRequest
-	(*DeleteClusterShardMetadata)(nil),               // 56: yandex.cloud.mdb.spqr.v1.DeleteClusterShardMetadata
-	(*AddSubclusterRequest)(nil),                     // 57: yandex.cloud.mdb.spqr.v1.AddSubclusterRequest
-	nil,                                              // 58: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.LabelsEntry
-	nil,                                              // 59: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.LabelsEntry
-	nil,                                              // 60: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.LabelsEntry
-	nil,                                              // 61: yandex.cloud.mdb.spqr.v1.LogRecord.MessageEntry
-	(*SpqrSpec_Router)(nil),                          // 62: yandex.cloud.mdb.spqr.v1.SpqrSpec.Router
-	(*SpqrSpec_Coordinator)(nil),                     // 63: yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator
-	(*SpqrSpec_PostgreSQL)(nil),                      // 64: yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL
-	(*SpqrSpec_Infra)(nil),                           // 65: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra
-	(*Cluster)(nil),                                  // 66: yandex.cloud.mdb.spqr.v1.Cluster
-	(Cluster_Environment)(0),                         // 67: yandex.cloud.mdb.spqr.v1.Cluster.Environment
-	(*DatabaseSpec)(nil),                             // 68: yandex.cloud.mdb.spqr.v1.DatabaseSpec
-	(*UserSpec)(nil),                                 // 69: yandex.cloud.mdb.spqr.v1.UserSpec
-	(*HostSpec)(nil),                                 // 70: yandex.cloud.mdb.spqr.v1.HostSpec
-	(*MaintenanceWindow)(nil),                        // 71: yandex.cloud.mdb.spqr.v1.MaintenanceWindow
-	(*ShardSpec)(nil),                                // 72: yandex.cloud.mdb.spqr.v1.ShardSpec
-	(*fieldmaskpb.FieldMask)(nil),                    // 73: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),                    // 74: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                      // 75: yandex.cloud.operation.Operation
-	(*Backup)(nil),                                   // 76: yandex.cloud.mdb.spqr.v1.Backup
-	(LogLevel)(0),                                    // 77: yandex.cloud.mdb.spqr.v1.LogLevel
-	(*BalancerSettings)(nil),                         // 78: yandex.cloud.mdb.spqr.v1.BalancerSettings
-	(*timeofday.TimeOfDay)(nil),                      // 79: google.type.TimeOfDay
-	(*wrapperspb.Int64Value)(nil),                    // 80: google.protobuf.Int64Value
-	(*Access)(nil),                                   // 81: yandex.cloud.mdb.spqr.v1.Access
-	(*wrapperspb.BoolValue)(nil),                     // 82: google.protobuf.BoolValue
-	(*Host)(nil),                                     // 83: yandex.cloud.mdb.spqr.v1.Host
-	(*Shard)(nil),                                    // 84: yandex.cloud.mdb.spqr.v1.Shard
-	(*Resources)(nil),                                // 85: yandex.cloud.mdb.spqr.v1.Resources
-	(*RouterSettings)(nil),                           // 86: yandex.cloud.mdb.spqr.v1.RouterSettings
-	(*CoordinatorSettings)(nil),                      // 87: yandex.cloud.mdb.spqr.v1.CoordinatorSettings
-	(*PostgreSQLSettings)(nil),                       // 88: yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
+	(*ListClustersRequest)(nil),                      // 4: yandex.cloud.mdb.spqr.v1.ListClustersRequest
+	(*ListClustersResponse)(nil),                     // 5: yandex.cloud.mdb.spqr.v1.ListClustersResponse
+	(*CreateClusterRequest)(nil),                     // 6: yandex.cloud.mdb.spqr.v1.CreateClusterRequest
+	(*CreateClusterMetadata)(nil),                    // 7: yandex.cloud.mdb.spqr.v1.CreateClusterMetadata
+	(*UpdateClusterRequest)(nil),                     // 8: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),                    // 9: yandex.cloud.mdb.spqr.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),                     // 10: yandex.cloud.mdb.spqr.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),                    // 11: yandex.cloud.mdb.spqr.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),                      // 12: yandex.cloud.mdb.spqr.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),                     // 13: yandex.cloud.mdb.spqr.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),                       // 14: yandex.cloud.mdb.spqr.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),                      // 15: yandex.cloud.mdb.spqr.v1.StopClusterMetadata
+	(*MoveClusterRequest)(nil),                       // 16: yandex.cloud.mdb.spqr.v1.MoveClusterRequest
+	(*MoveClusterMetadata)(nil),                      // 17: yandex.cloud.mdb.spqr.v1.MoveClusterMetadata
+	(*BackupClusterRequest)(nil),                     // 18: yandex.cloud.mdb.spqr.v1.BackupClusterRequest
+	(*BackupClusterMetadata)(nil),                    // 19: yandex.cloud.mdb.spqr.v1.BackupClusterMetadata
+	(*RestoreClusterRequest)(nil),                    // 20: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest
+	(*RestoreClusterMetadata)(nil),                   // 21: yandex.cloud.mdb.spqr.v1.RestoreClusterMetadata
+	(*RescheduleMaintenanceRequest)(nil),             // 22: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),            // 23: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceMetadata
+	(*LogRecord)(nil),                                // 24: yandex.cloud.mdb.spqr.v1.LogRecord
+	(*ListClusterLogsRequest)(nil),                   // 25: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest
+	(*ListClusterLogsResponse)(nil),                  // 26: yandex.cloud.mdb.spqr.v1.ListClusterLogsResponse
+	(*StreamLogRecord)(nil),                          // 27: yandex.cloud.mdb.spqr.v1.StreamLogRecord
+	(*StreamClusterLogsRequest)(nil),                 // 28: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest
+	(*ListClusterOperationsRequest)(nil),             // 29: yandex.cloud.mdb.spqr.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),            // 30: yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse
+	(*BackupListFilter)(nil),                         // 31: yandex.cloud.mdb.spqr.v1.BackupListFilter
+	(*ListClusterBackupsRequest)(nil),                // 32: yandex.cloud.mdb.spqr.v1.ListClusterBackupsRequest
+	(*ListClusterBackupsResponse)(nil),               // 33: yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse
+	(*SpqrSpec)(nil),                                 // 34: yandex.cloud.mdb.spqr.v1.SpqrSpec
+	(*ConfigSpec)(nil),                               // 35: yandex.cloud.mdb.spqr.v1.ConfigSpec
+	(*ListClusterHostsRequest)(nil),                  // 36: yandex.cloud.mdb.spqr.v1.ListClusterHostsRequest
+	(*ListClusterHostsResponse)(nil),                 // 37: yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse
+	(*AddClusterHostsRequest)(nil),                   // 38: yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest
+	(*AddClusterHostsMetadata)(nil),                  // 39: yandex.cloud.mdb.spqr.v1.AddClusterHostsMetadata
+	(*UpdateClusterHostsRequest)(nil),                // 40: yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest
+	(*UpdateClusterHostsMetadata)(nil),               // 41: yandex.cloud.mdb.spqr.v1.UpdateClusterHostsMetadata
+	(*UpdateHostSpec)(nil),                           // 42: yandex.cloud.mdb.spqr.v1.UpdateHostSpec
+	(*DeleteClusterHostsRequest)(nil),                // 43: yandex.cloud.mdb.spqr.v1.DeleteClusterHostsRequest
+	(*DeleteClusterHostsMetadata)(nil),               // 44: yandex.cloud.mdb.spqr.v1.DeleteClusterHostsMetadata
+	(*ResetupHostsRequest)(nil),                      // 45: yandex.cloud.mdb.spqr.v1.ResetupHostsRequest
+	(*ResetupHostsMetadata)(nil),                     // 46: yandex.cloud.mdb.spqr.v1.ResetupHostsMetadata
+	(*GetClusterShardRequest)(nil),                   // 47: yandex.cloud.mdb.spqr.v1.GetClusterShardRequest
+	(*ListClusterShardsRequest)(nil),                 // 48: yandex.cloud.mdb.spqr.v1.ListClusterShardsRequest
+	(*ListClusterShardsResponse)(nil),                // 49: yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse
+	(*AddClusterShardRequest)(nil),                   // 50: yandex.cloud.mdb.spqr.v1.AddClusterShardRequest
+	(*AddClusterShardMetadata)(nil),                  // 51: yandex.cloud.mdb.spqr.v1.AddClusterShardMetadata
+	(*DeleteClusterShardRequest)(nil),                // 52: yandex.cloud.mdb.spqr.v1.DeleteClusterShardRequest
+	(*DeleteClusterShardMetadata)(nil),               // 53: yandex.cloud.mdb.spqr.v1.DeleteClusterShardMetadata
+	(*AddSubclusterRequest)(nil),                     // 54: yandex.cloud.mdb.spqr.v1.AddSubclusterRequest
+	nil,                                              // 55: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.LabelsEntry
+	nil,                                              // 56: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.LabelsEntry
+	nil,                                              // 57: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.LabelsEntry
+	nil,                                              // 58: yandex.cloud.mdb.spqr.v1.LogRecord.MessageEntry
+	(*SpqrSpec_Router)(nil),                          // 59: yandex.cloud.mdb.spqr.v1.SpqrSpec.Router
+	(*SpqrSpec_Coordinator)(nil),                     // 60: yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator
+	(*SpqrSpec_PostgreSQL)(nil),                      // 61: yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL
+	(*SpqrSpec_Infra)(nil),                           // 62: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra
+	(*Cluster)(nil),                                  // 63: yandex.cloud.mdb.spqr.v1.Cluster
+	(Cluster_Environment)(0),                         // 64: yandex.cloud.mdb.spqr.v1.Cluster.Environment
+	(*DatabaseSpec)(nil),                             // 65: yandex.cloud.mdb.spqr.v1.DatabaseSpec
+	(*UserSpec)(nil),                                 // 66: yandex.cloud.mdb.spqr.v1.UserSpec
+	(*HostSpec)(nil),                                 // 67: yandex.cloud.mdb.spqr.v1.HostSpec
+	(*MaintenanceWindow)(nil),                        // 68: yandex.cloud.mdb.spqr.v1.MaintenanceWindow
+	(*ShardSpec)(nil),                                // 69: yandex.cloud.mdb.spqr.v1.ShardSpec
+	(*fieldmaskpb.FieldMask)(nil),                    // 70: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                    // 71: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                      // 72: yandex.cloud.operation.Operation
+	(*Backup)(nil),                                   // 73: yandex.cloud.mdb.spqr.v1.Backup
+	(LogLevel)(0),                                    // 74: yandex.cloud.mdb.spqr.v1.LogLevel
+	(*BalancerSettings)(nil),                         // 75: yandex.cloud.mdb.spqr.v1.BalancerSettings
+	(*timeofday.TimeOfDay)(nil),                      // 76: google.type.TimeOfDay
+	(*wrapperspb.Int64Value)(nil),                    // 77: google.protobuf.Int64Value
+	(*Access)(nil),                                   // 78: yandex.cloud.mdb.spqr.v1.Access
+	(*wrapperspb.BoolValue)(nil),                     // 79: google.protobuf.BoolValue
+	(*Host)(nil),                                     // 80: yandex.cloud.mdb.spqr.v1.Host
+	(*Shard)(nil),                                    // 81: yandex.cloud.mdb.spqr.v1.Shard
+	(*Resources)(nil),                                // 82: yandex.cloud.mdb.spqr.v1.Resources
+	(*RouterSettings)(nil),                           // 83: yandex.cloud.mdb.spqr.v1.RouterSettings
+	(*CoordinatorSettings)(nil),                      // 84: yandex.cloud.mdb.spqr.v1.CoordinatorSettings
+	(*PostgreSQLSettings)(nil),                       // 85: yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
 }
 var file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_depIdxs = []int32{
-	66, // 0: yandex.cloud.mdb.spqr.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.spqr.v1.Cluster
-	58, // 1: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.spqr.v1.CreateClusterRequest.LabelsEntry
-	67, // 2: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.spqr.v1.Cluster.Environment
-	36, // 3: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.spqr.v1.ConfigSpec
-	68, // 4: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.database_specs:type_name -> yandex.cloud.mdb.spqr.v1.DatabaseSpec
-	69, // 5: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.user_specs:type_name -> yandex.cloud.mdb.spqr.v1.UserSpec
-	70, // 6: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
-	71, // 7: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.spqr.v1.MaintenanceWindow
-	72, // 8: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.shard_specs:type_name -> yandex.cloud.mdb.spqr.v1.ShardSpec
-	73, // 9: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	59, // 10: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.LabelsEntry
-	36, // 11: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.spqr.v1.ConfigSpec
-	71, // 12: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.spqr.v1.MaintenanceWindow
-	60, // 13: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.LabelsEntry
-	67, // 14: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.spqr.v1.Cluster.Environment
-	36, // 15: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.spqr.v1.ConfigSpec
-	70, // 16: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
-	74, // 17: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
+	63, // 0: yandex.cloud.mdb.spqr.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.spqr.v1.Cluster
+	55, // 1: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.spqr.v1.CreateClusterRequest.LabelsEntry
+	64, // 2: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.spqr.v1.Cluster.Environment
+	35, // 3: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.spqr.v1.ConfigSpec
+	65, // 4: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.database_specs:type_name -> yandex.cloud.mdb.spqr.v1.DatabaseSpec
+	66, // 5: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.user_specs:type_name -> yandex.cloud.mdb.spqr.v1.UserSpec
+	67, // 6: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
+	68, // 7: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.spqr.v1.MaintenanceWindow
+	69, // 8: yandex.cloud.mdb.spqr.v1.CreateClusterRequest.shard_specs:type_name -> yandex.cloud.mdb.spqr.v1.ShardSpec
+	70, // 9: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	56, // 10: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.LabelsEntry
+	35, // 11: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.spqr.v1.ConfigSpec
+	68, // 12: yandex.cloud.mdb.spqr.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.spqr.v1.MaintenanceWindow
+	57, // 13: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.LabelsEntry
+	64, // 14: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.spqr.v1.Cluster.Environment
+	35, // 15: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.spqr.v1.ConfigSpec
+	67, // 16: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
+	71, // 17: yandex.cloud.mdb.spqr.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
 	0,  // 18: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest.RescheduleType
-	74, // 19: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	74, // 20: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	74, // 21: yandex.cloud.mdb.spqr.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	61, // 22: yandex.cloud.mdb.spqr.v1.LogRecord.message:type_name -> yandex.cloud.mdb.spqr.v1.LogRecord.MessageEntry
+	71, // 19: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	71, // 20: yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	71, // 21: yandex.cloud.mdb.spqr.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	58, // 22: yandex.cloud.mdb.spqr.v1.LogRecord.message:type_name -> yandex.cloud.mdb.spqr.v1.LogRecord.MessageEntry
 	1,  // 23: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.ServiceType
-	74, // 24: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	74, // 25: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	25, // 26: yandex.cloud.mdb.spqr.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.spqr.v1.LogRecord
-	25, // 27: yandex.cloud.mdb.spqr.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.spqr.v1.LogRecord
+	71, // 24: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	71, // 25: yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	24, // 26: yandex.cloud.mdb.spqr.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.spqr.v1.LogRecord
+	24, // 27: yandex.cloud.mdb.spqr.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.spqr.v1.LogRecord
 	2,  // 28: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.ServiceType
-	74, // 29: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	74, // 30: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	75, // 31: yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	74, // 32: yandex.cloud.mdb.spqr.v1.BackupListFilter.start_time:type_name -> google.protobuf.Timestamp
-	74, // 33: yandex.cloud.mdb.spqr.v1.BackupListFilter.end_time:type_name -> google.protobuf.Timestamp
-	76, // 34: yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.spqr.v1.Backup
-	62, // 35: yandex.cloud.mdb.spqr.v1.SpqrSpec.router:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.Router
-	63, // 36: yandex.cloud.mdb.spqr.v1.SpqrSpec.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator
-	64, // 37: yandex.cloud.mdb.spqr.v1.SpqrSpec.postgresql:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL
-	65, // 38: yandex.cloud.mdb.spqr.v1.SpqrSpec.infra:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra
-	77, // 39: yandex.cloud.mdb.spqr.v1.SpqrSpec.log_level:type_name -> yandex.cloud.mdb.spqr.v1.LogLevel
-	78, // 40: yandex.cloud.mdb.spqr.v1.SpqrSpec.balancer:type_name -> yandex.cloud.mdb.spqr.v1.BalancerSettings
-	35, // 41: yandex.cloud.mdb.spqr.v1.ConfigSpec.spqr_spec:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec
-	79, // 42: yandex.cloud.mdb.spqr.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
-	80, // 43: yandex.cloud.mdb.spqr.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
-	81, // 44: yandex.cloud.mdb.spqr.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.spqr.v1.Access
-	82, // 45: yandex.cloud.mdb.spqr.v1.ConfigSpec.sox_audit:type_name -> google.protobuf.BoolValue
-	83, // 46: yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.spqr.v1.Host
-	70, // 47: yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
-	44, // 48: yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.spqr.v1.UpdateHostSpec
-	73, // 49: yandex.cloud.mdb.spqr.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
-	84, // 50: yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse.shards:type_name -> yandex.cloud.mdb.spqr.v1.Shard
-	72, // 51: yandex.cloud.mdb.spqr.v1.AddClusterShardRequest.shard_spec:type_name -> yandex.cloud.mdb.spqr.v1.ShardSpec
-	70, // 52: yandex.cloud.mdb.spqr.v1.AddSubclusterRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
-	85, // 53: yandex.cloud.mdb.spqr.v1.AddSubclusterRequest.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	86, // 54: yandex.cloud.mdb.spqr.v1.SpqrSpec.Router.config:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
-	85, // 55: yandex.cloud.mdb.spqr.v1.SpqrSpec.Router.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	87, // 56: yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator.config:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
-	85, // 57: yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	88, // 58: yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL.config:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
-	85, // 59: yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	85, // 60: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	86, // 61: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra.router:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
-	87, // 62: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
+	71, // 29: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	71, // 30: yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	72, // 31: yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	71, // 32: yandex.cloud.mdb.spqr.v1.BackupListFilter.start_time:type_name -> google.protobuf.Timestamp
+	71, // 33: yandex.cloud.mdb.spqr.v1.BackupListFilter.end_time:type_name -> google.protobuf.Timestamp
+	73, // 34: yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.spqr.v1.Backup
+	59, // 35: yandex.cloud.mdb.spqr.v1.SpqrSpec.router:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.Router
+	60, // 36: yandex.cloud.mdb.spqr.v1.SpqrSpec.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator
+	61, // 37: yandex.cloud.mdb.spqr.v1.SpqrSpec.postgresql:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL
+	62, // 38: yandex.cloud.mdb.spqr.v1.SpqrSpec.infra:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra
+	74, // 39: yandex.cloud.mdb.spqr.v1.SpqrSpec.log_level:type_name -> yandex.cloud.mdb.spqr.v1.LogLevel
+	75, // 40: yandex.cloud.mdb.spqr.v1.SpqrSpec.balancer:type_name -> yandex.cloud.mdb.spqr.v1.BalancerSettings
+	34, // 41: yandex.cloud.mdb.spqr.v1.ConfigSpec.spqr_spec:type_name -> yandex.cloud.mdb.spqr.v1.SpqrSpec
+	76, // 42: yandex.cloud.mdb.spqr.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
+	77, // 43: yandex.cloud.mdb.spqr.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	78, // 44: yandex.cloud.mdb.spqr.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.spqr.v1.Access
+	79, // 45: yandex.cloud.mdb.spqr.v1.ConfigSpec.sox_audit:type_name -> google.protobuf.BoolValue
+	80, // 46: yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.spqr.v1.Host
+	67, // 47: yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
+	42, // 48: yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.spqr.v1.UpdateHostSpec
+	70, // 49: yandex.cloud.mdb.spqr.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
+	81, // 50: yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse.shards:type_name -> yandex.cloud.mdb.spqr.v1.Shard
+	69, // 51: yandex.cloud.mdb.spqr.v1.AddClusterShardRequest.shard_spec:type_name -> yandex.cloud.mdb.spqr.v1.ShardSpec
+	67, // 52: yandex.cloud.mdb.spqr.v1.AddSubclusterRequest.host_specs:type_name -> yandex.cloud.mdb.spqr.v1.HostSpec
+	82, // 53: yandex.cloud.mdb.spqr.v1.AddSubclusterRequest.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	83, // 54: yandex.cloud.mdb.spqr.v1.SpqrSpec.Router.config:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
+	82, // 55: yandex.cloud.mdb.spqr.v1.SpqrSpec.Router.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	84, // 56: yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator.config:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
+	82, // 57: yandex.cloud.mdb.spqr.v1.SpqrSpec.Coordinator.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	85, // 58: yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL.config:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
+	82, // 59: yandex.cloud.mdb.spqr.v1.SpqrSpec.PostgreSQL.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	82, // 60: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	83, // 61: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra.router:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
+	84, // 62: yandex.cloud.mdb.spqr.v1.SpqrSpec.Infra.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
 	3,  // 63: yandex.cloud.mdb.spqr.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.spqr.v1.GetClusterRequest
-	4,  // 64: yandex.cloud.mdb.spqr.v1.ClusterService.GetAtRevision:input_type -> yandex.cloud.mdb.spqr.v1.GetClusterAtRevisionRequest
-	5,  // 65: yandex.cloud.mdb.spqr.v1.ClusterService.List:input_type -> yandex.cloud.mdb.spqr.v1.ListClustersRequest
-	7,  // 66: yandex.cloud.mdb.spqr.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.spqr.v1.CreateClusterRequest
-	9,  // 67: yandex.cloud.mdb.spqr.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.spqr.v1.UpdateClusterRequest
-	11, // 68: yandex.cloud.mdb.spqr.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.spqr.v1.DeleteClusterRequest
-	57, // 69: yandex.cloud.mdb.spqr.v1.ClusterService.AddSubcluster:input_type -> yandex.cloud.mdb.spqr.v1.AddSubclusterRequest
-	13, // 70: yandex.cloud.mdb.spqr.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.spqr.v1.StartClusterRequest
-	15, // 71: yandex.cloud.mdb.spqr.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.spqr.v1.StopClusterRequest
-	17, // 72: yandex.cloud.mdb.spqr.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.spqr.v1.MoveClusterRequest
-	19, // 73: yandex.cloud.mdb.spqr.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.spqr.v1.BackupClusterRequest
-	21, // 74: yandex.cloud.mdb.spqr.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.spqr.v1.RestoreClusterRequest
-	23, // 75: yandex.cloud.mdb.spqr.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest
-	26, // 76: yandex.cloud.mdb.spqr.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest
-	29, // 77: yandex.cloud.mdb.spqr.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest
-	30, // 78: yandex.cloud.mdb.spqr.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterOperationsRequest
-	33, // 79: yandex.cloud.mdb.spqr.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterBackupsRequest
-	37, // 80: yandex.cloud.mdb.spqr.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterHostsRequest
-	38, // 81: yandex.cloud.mdb.spqr.v1.ClusterService.ListHostsAtRevision:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterHostsAtRevisionRequest
-	40, // 82: yandex.cloud.mdb.spqr.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest
-	42, // 83: yandex.cloud.mdb.spqr.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest
-	45, // 84: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.spqr.v1.DeleteClusterHostsRequest
-	47, // 85: yandex.cloud.mdb.spqr.v1.ClusterService.ResetupHosts:input_type -> yandex.cloud.mdb.spqr.v1.ResetupHostsRequest
-	49, // 86: yandex.cloud.mdb.spqr.v1.ClusterService.GetShard:input_type -> yandex.cloud.mdb.spqr.v1.GetClusterShardRequest
-	50, // 87: yandex.cloud.mdb.spqr.v1.ClusterService.ListShards:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterShardsRequest
-	51, // 88: yandex.cloud.mdb.spqr.v1.ClusterService.ListShardsAtRevision:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterShardsAtRevisionRequest
-	53, // 89: yandex.cloud.mdb.spqr.v1.ClusterService.AddShard:input_type -> yandex.cloud.mdb.spqr.v1.AddClusterShardRequest
-	55, // 90: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteShard:input_type -> yandex.cloud.mdb.spqr.v1.DeleteClusterShardRequest
-	66, // 91: yandex.cloud.mdb.spqr.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.spqr.v1.Cluster
-	66, // 92: yandex.cloud.mdb.spqr.v1.ClusterService.GetAtRevision:output_type -> yandex.cloud.mdb.spqr.v1.Cluster
-	6,  // 93: yandex.cloud.mdb.spqr.v1.ClusterService.List:output_type -> yandex.cloud.mdb.spqr.v1.ListClustersResponse
-	75, // 94: yandex.cloud.mdb.spqr.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	75, // 95: yandex.cloud.mdb.spqr.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	75, // 96: yandex.cloud.mdb.spqr.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	75, // 97: yandex.cloud.mdb.spqr.v1.ClusterService.AddSubcluster:output_type -> yandex.cloud.operation.Operation
-	75, // 98: yandex.cloud.mdb.spqr.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	75, // 99: yandex.cloud.mdb.spqr.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	75, // 100: yandex.cloud.mdb.spqr.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	75, // 101: yandex.cloud.mdb.spqr.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	75, // 102: yandex.cloud.mdb.spqr.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	75, // 103: yandex.cloud.mdb.spqr.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	27, // 104: yandex.cloud.mdb.spqr.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterLogsResponse
-	28, // 105: yandex.cloud.mdb.spqr.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.spqr.v1.StreamLogRecord
-	31, // 106: yandex.cloud.mdb.spqr.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse
-	34, // 107: yandex.cloud.mdb.spqr.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse
-	39, // 108: yandex.cloud.mdb.spqr.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse
-	39, // 109: yandex.cloud.mdb.spqr.v1.ClusterService.ListHostsAtRevision:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse
-	75, // 110: yandex.cloud.mdb.spqr.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	75, // 111: yandex.cloud.mdb.spqr.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
-	75, // 112: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	75, // 113: yandex.cloud.mdb.spqr.v1.ClusterService.ResetupHosts:output_type -> yandex.cloud.operation.Operation
-	84, // 114: yandex.cloud.mdb.spqr.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.spqr.v1.Shard
-	52, // 115: yandex.cloud.mdb.spqr.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse
-	52, // 116: yandex.cloud.mdb.spqr.v1.ClusterService.ListShardsAtRevision:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse
-	75, // 117: yandex.cloud.mdb.spqr.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
-	75, // 118: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
-	91, // [91:119] is the sub-list for method output_type
-	63, // [63:91] is the sub-list for method input_type
+	4,  // 64: yandex.cloud.mdb.spqr.v1.ClusterService.List:input_type -> yandex.cloud.mdb.spqr.v1.ListClustersRequest
+	6,  // 65: yandex.cloud.mdb.spqr.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.spqr.v1.CreateClusterRequest
+	8,  // 66: yandex.cloud.mdb.spqr.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.spqr.v1.UpdateClusterRequest
+	10, // 67: yandex.cloud.mdb.spqr.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.spqr.v1.DeleteClusterRequest
+	54, // 68: yandex.cloud.mdb.spqr.v1.ClusterService.AddSubcluster:input_type -> yandex.cloud.mdb.spqr.v1.AddSubclusterRequest
+	12, // 69: yandex.cloud.mdb.spqr.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.spqr.v1.StartClusterRequest
+	14, // 70: yandex.cloud.mdb.spqr.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.spqr.v1.StopClusterRequest
+	16, // 71: yandex.cloud.mdb.spqr.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.spqr.v1.MoveClusterRequest
+	18, // 72: yandex.cloud.mdb.spqr.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.spqr.v1.BackupClusterRequest
+	20, // 73: yandex.cloud.mdb.spqr.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.spqr.v1.RestoreClusterRequest
+	22, // 74: yandex.cloud.mdb.spqr.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.spqr.v1.RescheduleMaintenanceRequest
+	25, // 75: yandex.cloud.mdb.spqr.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterLogsRequest
+	28, // 76: yandex.cloud.mdb.spqr.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.spqr.v1.StreamClusterLogsRequest
+	29, // 77: yandex.cloud.mdb.spqr.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterOperationsRequest
+	32, // 78: yandex.cloud.mdb.spqr.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterBackupsRequest
+	36, // 79: yandex.cloud.mdb.spqr.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterHostsRequest
+	38, // 80: yandex.cloud.mdb.spqr.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.spqr.v1.AddClusterHostsRequest
+	40, // 81: yandex.cloud.mdb.spqr.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.spqr.v1.UpdateClusterHostsRequest
+	43, // 82: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.spqr.v1.DeleteClusterHostsRequest
+	45, // 83: yandex.cloud.mdb.spqr.v1.ClusterService.ResetupHosts:input_type -> yandex.cloud.mdb.spqr.v1.ResetupHostsRequest
+	47, // 84: yandex.cloud.mdb.spqr.v1.ClusterService.GetShard:input_type -> yandex.cloud.mdb.spqr.v1.GetClusterShardRequest
+	48, // 85: yandex.cloud.mdb.spqr.v1.ClusterService.ListShards:input_type -> yandex.cloud.mdb.spqr.v1.ListClusterShardsRequest
+	50, // 86: yandex.cloud.mdb.spqr.v1.ClusterService.AddShard:input_type -> yandex.cloud.mdb.spqr.v1.AddClusterShardRequest
+	52, // 87: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteShard:input_type -> yandex.cloud.mdb.spqr.v1.DeleteClusterShardRequest
+	63, // 88: yandex.cloud.mdb.spqr.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.spqr.v1.Cluster
+	5,  // 89: yandex.cloud.mdb.spqr.v1.ClusterService.List:output_type -> yandex.cloud.mdb.spqr.v1.ListClustersResponse
+	72, // 90: yandex.cloud.mdb.spqr.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	72, // 91: yandex.cloud.mdb.spqr.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	72, // 92: yandex.cloud.mdb.spqr.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	72, // 93: yandex.cloud.mdb.spqr.v1.ClusterService.AddSubcluster:output_type -> yandex.cloud.operation.Operation
+	72, // 94: yandex.cloud.mdb.spqr.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	72, // 95: yandex.cloud.mdb.spqr.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	72, // 96: yandex.cloud.mdb.spqr.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	72, // 97: yandex.cloud.mdb.spqr.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	72, // 98: yandex.cloud.mdb.spqr.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	72, // 99: yandex.cloud.mdb.spqr.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	26, // 100: yandex.cloud.mdb.spqr.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterLogsResponse
+	27, // 101: yandex.cloud.mdb.spqr.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.spqr.v1.StreamLogRecord
+	30, // 102: yandex.cloud.mdb.spqr.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterOperationsResponse
+	33, // 103: yandex.cloud.mdb.spqr.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterBackupsResponse
+	37, // 104: yandex.cloud.mdb.spqr.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterHostsResponse
+	72, // 105: yandex.cloud.mdb.spqr.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	72, // 106: yandex.cloud.mdb.spqr.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
+	72, // 107: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
+	72, // 108: yandex.cloud.mdb.spqr.v1.ClusterService.ResetupHosts:output_type -> yandex.cloud.operation.Operation
+	81, // 109: yandex.cloud.mdb.spqr.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.spqr.v1.Shard
+	49, // 110: yandex.cloud.mdb.spqr.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.spqr.v1.ListClusterShardsResponse
+	72, // 111: yandex.cloud.mdb.spqr.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
+	72, // 112: yandex.cloud.mdb.spqr.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
+	88, // [88:113] is the sub-list for method output_type
+	63, // [63:88] is the sub-list for method input_type
 	63, // [63:63] is the sub-list for extension type_name
 	63, // [63:63] is the sub-list for extension extendee
 	0,  // [0:63] is the sub-list for field type_name
@@ -4665,7 +4425,7 @@ func file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc), len(file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   63,
+			NumMessages:   60,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

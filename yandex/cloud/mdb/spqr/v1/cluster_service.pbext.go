@@ -14,14 +14,6 @@ func (m *GetClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *GetClusterAtRevisionRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *GetClusterAtRevisionRequest) SetRevision(v int64) {
-	m.Revision = v
-}
-
 func (m *ListClustersRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -522,22 +514,6 @@ func (m *ListClusterHostsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
-func (m *ListClusterHostsAtRevisionRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *ListClusterHostsAtRevisionRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListClusterHostsAtRevisionRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListClusterHostsAtRevisionRequest) SetRevision(v int64) {
-	m.Revision = v
-}
-
 func (m *ListClusterHostsResponse) SetHosts(v []*Host) {
 	m.Hosts = v
 }
@@ -640,22 +616,6 @@ func (m *ListClusterShardsRequest) SetPageSize(v int64) {
 
 func (m *ListClusterShardsRequest) SetPageToken(v string) {
 	m.PageToken = v
-}
-
-func (m *ListClusterShardsAtRevisionRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *ListClusterShardsAtRevisionRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListClusterShardsAtRevisionRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListClusterShardsAtRevisionRequest) SetRevision(v int64) {
-	m.Revision = v
 }
 
 func (m *ListClusterShardsResponse) SetShards(v []*Shard) {

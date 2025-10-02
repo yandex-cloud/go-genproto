@@ -1678,6 +1678,217 @@ func (x *MemberDelta) GetSubjectId() string {
 	return ""
 }
 
+type ListEffectiveRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the subject to list groups for.
+	SubjectId string `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	// The ID of the organization to scope the group search to.
+	// If omitted and the subject belongs to a single organization,
+	// that organization's ID will be used automatically.
+	OrganizationId string `protobuf:"bytes,4,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size], the service returns a [ListEffectiveResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. Set [page_token]
+	// to the [ListEffectiveResponse.next_page_token]
+	// returned by a previous list request to get the next page of results.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	// The expression supports the following operations:
+	// - `=` for exact match: `name = 'example-name'`
+	// - `IN` for multiple values: `id IN ('id1', 'id2')`
+	// - `contains` for domain substring search: `name contains 'example'`
+	// - `AND` for combining conditions: `name contains 'my-group' AND name contains 'name'`
+	//
+	// Available fields for filtering:
+	// - `id` - group ID
+	// - `name` - group name
+	//
+	// Must be 1-1000 characters long.
+	Filter        string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListEffectiveRequest) Reset() {
+	*x = ListEffectiveRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListEffectiveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListEffectiveRequest) ProtoMessage() {}
+
+func (x *ListEffectiveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListEffectiveRequest.ProtoReflect.Descriptor instead.
+func (*ListEffectiveRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ListEffectiveRequest) GetSubjectId() string {
+	if x != nil {
+		return x.SubjectId
+	}
+	return ""
+}
+
+func (x *ListEffectiveRequest) GetOrganizationId() string {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return ""
+}
+
+func (x *ListEffectiveRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListEffectiveRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListEffectiveRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+type GroupMembershipInfo struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the group the subject is a member of.
+	GroupId string `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	// Name of the group the subject is a member of.
+	GroupName     string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GroupMembershipInfo) Reset() {
+	*x = GroupMembershipInfo{}
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GroupMembershipInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GroupMembershipInfo) ProtoMessage() {}
+
+func (x *GroupMembershipInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GroupMembershipInfo.ProtoReflect.Descriptor instead.
+func (*GroupMembershipInfo) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GroupMembershipInfo) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
+func (x *GroupMembershipInfo) GetGroupName() string {
+	if x != nil {
+		return x.GroupName
+	}
+	return ""
+}
+
+type ListEffectiveResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of group membership information.
+	// Contains groups where the specified subject is a member.
+	GroupMembershipInfo []*GroupMembershipInfo `protobuf:"bytes,1,rep,name=group_membership_info,json=groupMembershipInfo,proto3" json:"group_membership_info,omitempty"`
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListEffectiveRequest.page_size], use the [next_page_token] as the value
+	// for the [ListEffectiveRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListEffectiveResponse) Reset() {
+	*x = ListEffectiveResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListEffectiveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListEffectiveResponse) ProtoMessage() {}
+
+func (x *ListEffectiveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListEffectiveResponse.ProtoReflect.Descriptor instead.
+func (*ListEffectiveResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ListEffectiveResponse) GetGroupMembershipInfo() []*GroupMembershipInfo {
+	if x != nil {
+		return x.GroupMembershipInfo
+	}
+	return nil
+}
+
+func (x *ListEffectiveResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_organizationmanager_v1_group_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" +
@@ -1808,7 +2019,25 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x19MEMBER_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
 	"\n" +
-	"\x06REMOVE\x10\x022\xd2\x1a\n" +
+	"\x06REMOVE\x10\x02\"\xee\x01\n" +
+	"\x14ListEffectiveRequest\x12+\n" +
+	"\n" +
+	"subject_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tsubjectId\x121\n" +
+	"\x0forganization_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\x0eorganizationId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
+	"\x06filter\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"O\n" +
+	"\x13GroupMembershipInfo\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x1d\n" +
+	"\n" +
+	"group_name\x18\x02 \x01(\tR\tgroupName\"\xad\x01\n" +
+	"\x15ListEffectiveResponse\x12l\n" +
+	"\x15group_membership_info\x18\x01 \x03(\v28.yandex.cloud.organizationmanager.v1.GroupMembershipInfoR\x13groupMembershipInfo\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x92\x1c\n" +
 	"\fGroupService\x12\x9b\x01\n" +
 	"\x03Get\x124.yandex.cloud.organizationmanager.v1.GetGroupRequest\x1a*.yandex.cloud.organizationmanager.v1.Group\"2\x82\xd3\xe4\x93\x02,\x12*/organization-manager/v1/groups/{group_id}\x12\xd6\x01\n" +
 	"\x0fResolveExternal\x12@.yandex.cloud.organizationmanager.v1.ResolveExternalGroupRequest\x1a*.yandex.cloud.organizationmanager.v1.Group\"U\x82\xd3\xe4\x93\x02O\x12M/organization-manager/v1/external_groups/{subject_container_id}/{external_id}\x12\xa0\x01\n" +
@@ -1834,7 +2063,8 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x96\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02D:\x01*\"?/organization-manager/v1/groups/{resource_id}:setAccessBindings\x12\x8a\x02\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x9c\x01\xb2\xd2*K\n" +
-	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02G:\x01*\"B/organization-manager/v1/groups/{resource_id}:updateAccessBindingsB\x86\x01\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02G:\x01*\"B/organization-manager/v1/groups/{resource_id}:updateAccessBindings\x12\xbd\x01\n" +
+	"\rListEffective\x129.yandex.cloud.organizationmanager.v1.ListEffectiveRequest\x1a:.yandex.cloud.organizationmanager.v1.ListEffectiveResponse\"5\x82\xd3\xe4\x93\x02/\x12-/organization-manager/v1/groups:listEffectiveB\x86\x01\n" +
 	"'yandex.cloud.api.organizationmanager.v1Z[github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1;organizationmanagerb\x06proto3"
 
 var (
@@ -1850,7 +2080,7 @@ func file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDescGZIP() 
 }
 
 var file_yandex_cloud_organizationmanager_v1_group_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_yandex_cloud_organizationmanager_v1_group_service_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_yandex_cloud_organizationmanager_v1_group_service_proto_goTypes = []any{
 	(MemberDelta_MemberAction)(0),              // 0: yandex.cloud.organizationmanager.v1.MemberDelta.MemberAction
 	(*GetGroupRequest)(nil),                    // 1: yandex.cloud.organizationmanager.v1.GetGroupRequest
@@ -1879,59 +2109,65 @@ var file_yandex_cloud_organizationmanager_v1_group_service_proto_goTypes = []any
 	(*UpdateGroupMembersRequest)(nil),          // 24: yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
 	(*UpdateGroupMembersMetadata)(nil),         // 25: yandex.cloud.organizationmanager.v1.UpdateGroupMembersMetadata
 	(*MemberDelta)(nil),                        // 26: yandex.cloud.organizationmanager.v1.MemberDelta
-	(*Group)(nil),                              // 27: yandex.cloud.organizationmanager.v1.Group
-	(*fieldmaskpb.FieldMask)(nil),              // 28: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                // 29: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 30: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 31: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 32: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 33: yandex.cloud.access.ListAccessBindingsResponse
+	(*ListEffectiveRequest)(nil),               // 27: yandex.cloud.organizationmanager.v1.ListEffectiveRequest
+	(*GroupMembershipInfo)(nil),                // 28: yandex.cloud.organizationmanager.v1.GroupMembershipInfo
+	(*ListEffectiveResponse)(nil),              // 29: yandex.cloud.organizationmanager.v1.ListEffectiveResponse
+	(*Group)(nil),                              // 30: yandex.cloud.organizationmanager.v1.Group
+	(*fieldmaskpb.FieldMask)(nil),              // 31: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 32: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 33: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 34: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 35: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 36: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_organizationmanager_v1_group_service_proto_depIdxs = []int32{
-	27, // 0: yandex.cloud.organizationmanager.v1.ListGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
-	27, // 1: yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
-	28, // 2: yandex.cloud.organizationmanager.v1.UpdateGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	29, // 3: yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	30, // 0: yandex.cloud.organizationmanager.v1.ListGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
+	30, // 1: yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse.groups:type_name -> yandex.cloud.organizationmanager.v1.Group
+	31, // 2: yandex.cloud.organizationmanager.v1.UpdateGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	32, // 3: yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	23, // 4: yandex.cloud.organizationmanager.v1.ListGroupMembersResponse.members:type_name -> yandex.cloud.organizationmanager.v1.GroupMember
 	26, // 5: yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest.member_deltas:type_name -> yandex.cloud.organizationmanager.v1.MemberDelta
 	0,  // 6: yandex.cloud.organizationmanager.v1.MemberDelta.action:type_name -> yandex.cloud.organizationmanager.v1.MemberDelta.MemberAction
-	1,  // 7: yandex.cloud.organizationmanager.v1.GroupService.Get:input_type -> yandex.cloud.organizationmanager.v1.GetGroupRequest
-	2,  // 8: yandex.cloud.organizationmanager.v1.GroupService.ResolveExternal:input_type -> yandex.cloud.organizationmanager.v1.ResolveExternalGroupRequest
-	3,  // 9: yandex.cloud.organizationmanager.v1.GroupService.List:input_type -> yandex.cloud.organizationmanager.v1.ListGroupsRequest
-	5,  // 10: yandex.cloud.organizationmanager.v1.GroupService.ListExternal:input_type -> yandex.cloud.organizationmanager.v1.ListExternalGroupsRequest
-	7,  // 11: yandex.cloud.organizationmanager.v1.GroupService.Create:input_type -> yandex.cloud.organizationmanager.v1.CreateGroupRequest
-	9,  // 12: yandex.cloud.organizationmanager.v1.GroupService.CreateExternal:input_type -> yandex.cloud.organizationmanager.v1.CreateExternalGroupRequest
-	11, // 13: yandex.cloud.organizationmanager.v1.GroupService.Update:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupRequest
-	13, // 14: yandex.cloud.organizationmanager.v1.GroupService.ConvertToExternal:input_type -> yandex.cloud.organizationmanager.v1.ConvertToExternalGroupRequest
-	15, // 15: yandex.cloud.organizationmanager.v1.GroupService.ConvertAllToBasic:input_type -> yandex.cloud.organizationmanager.v1.ConvertAllToBasicGroupsRequest
-	17, // 16: yandex.cloud.organizationmanager.v1.GroupService.Delete:input_type -> yandex.cloud.organizationmanager.v1.DeleteGroupRequest
-	19, // 17: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest
-	21, // 18: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:input_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersRequest
-	24, // 19: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
-	30, // 20: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	31, // 21: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	32, // 22: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	27, // 23: yandex.cloud.organizationmanager.v1.GroupService.Get:output_type -> yandex.cloud.organizationmanager.v1.Group
-	27, // 24: yandex.cloud.organizationmanager.v1.GroupService.ResolveExternal:output_type -> yandex.cloud.organizationmanager.v1.Group
-	4,  // 25: yandex.cloud.organizationmanager.v1.GroupService.List:output_type -> yandex.cloud.organizationmanager.v1.ListGroupsResponse
-	6,  // 26: yandex.cloud.organizationmanager.v1.GroupService.ListExternal:output_type -> yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse
-	29, // 27: yandex.cloud.organizationmanager.v1.GroupService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 28: yandex.cloud.organizationmanager.v1.GroupService.CreateExternal:output_type -> yandex.cloud.operation.Operation
-	29, // 29: yandex.cloud.organizationmanager.v1.GroupService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 30: yandex.cloud.organizationmanager.v1.GroupService.ConvertToExternal:output_type -> yandex.cloud.operation.Operation
-	29, // 31: yandex.cloud.organizationmanager.v1.GroupService.ConvertAllToBasic:output_type -> yandex.cloud.operation.Operation
-	29, // 32: yandex.cloud.organizationmanager.v1.GroupService.Delete:output_type -> yandex.cloud.operation.Operation
-	20, // 33: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse
-	22, // 34: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:output_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersResponse
-	29, // 35: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:output_type -> yandex.cloud.operation.Operation
-	33, // 36: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	29, // 37: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	29, // 38: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	23, // [23:39] is the sub-list for method output_type
-	7,  // [7:23] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	28, // 7: yandex.cloud.organizationmanager.v1.ListEffectiveResponse.group_membership_info:type_name -> yandex.cloud.organizationmanager.v1.GroupMembershipInfo
+	1,  // 8: yandex.cloud.organizationmanager.v1.GroupService.Get:input_type -> yandex.cloud.organizationmanager.v1.GetGroupRequest
+	2,  // 9: yandex.cloud.organizationmanager.v1.GroupService.ResolveExternal:input_type -> yandex.cloud.organizationmanager.v1.ResolveExternalGroupRequest
+	3,  // 10: yandex.cloud.organizationmanager.v1.GroupService.List:input_type -> yandex.cloud.organizationmanager.v1.ListGroupsRequest
+	5,  // 11: yandex.cloud.organizationmanager.v1.GroupService.ListExternal:input_type -> yandex.cloud.organizationmanager.v1.ListExternalGroupsRequest
+	7,  // 12: yandex.cloud.organizationmanager.v1.GroupService.Create:input_type -> yandex.cloud.organizationmanager.v1.CreateGroupRequest
+	9,  // 13: yandex.cloud.organizationmanager.v1.GroupService.CreateExternal:input_type -> yandex.cloud.organizationmanager.v1.CreateExternalGroupRequest
+	11, // 14: yandex.cloud.organizationmanager.v1.GroupService.Update:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupRequest
+	13, // 15: yandex.cloud.organizationmanager.v1.GroupService.ConvertToExternal:input_type -> yandex.cloud.organizationmanager.v1.ConvertToExternalGroupRequest
+	15, // 16: yandex.cloud.organizationmanager.v1.GroupService.ConvertAllToBasic:input_type -> yandex.cloud.organizationmanager.v1.ConvertAllToBasicGroupsRequest
+	17, // 17: yandex.cloud.organizationmanager.v1.GroupService.Delete:input_type -> yandex.cloud.organizationmanager.v1.DeleteGroupRequest
+	19, // 18: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsRequest
+	21, // 19: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:input_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersRequest
+	24, // 20: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:input_type -> yandex.cloud.organizationmanager.v1.UpdateGroupMembersRequest
+	33, // 21: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	34, // 22: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	35, // 23: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	27, // 24: yandex.cloud.organizationmanager.v1.GroupService.ListEffective:input_type -> yandex.cloud.organizationmanager.v1.ListEffectiveRequest
+	30, // 25: yandex.cloud.organizationmanager.v1.GroupService.Get:output_type -> yandex.cloud.organizationmanager.v1.Group
+	30, // 26: yandex.cloud.organizationmanager.v1.GroupService.ResolveExternal:output_type -> yandex.cloud.organizationmanager.v1.Group
+	4,  // 27: yandex.cloud.organizationmanager.v1.GroupService.List:output_type -> yandex.cloud.organizationmanager.v1.ListGroupsResponse
+	6,  // 28: yandex.cloud.organizationmanager.v1.GroupService.ListExternal:output_type -> yandex.cloud.organizationmanager.v1.ListExternalGroupsResponse
+	32, // 29: yandex.cloud.organizationmanager.v1.GroupService.Create:output_type -> yandex.cloud.operation.Operation
+	32, // 30: yandex.cloud.organizationmanager.v1.GroupService.CreateExternal:output_type -> yandex.cloud.operation.Operation
+	32, // 31: yandex.cloud.organizationmanager.v1.GroupService.Update:output_type -> yandex.cloud.operation.Operation
+	32, // 32: yandex.cloud.organizationmanager.v1.GroupService.ConvertToExternal:output_type -> yandex.cloud.operation.Operation
+	32, // 33: yandex.cloud.organizationmanager.v1.GroupService.ConvertAllToBasic:output_type -> yandex.cloud.operation.Operation
+	32, // 34: yandex.cloud.organizationmanager.v1.GroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	20, // 35: yandex.cloud.organizationmanager.v1.GroupService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.ListGroupOperationsResponse
+	22, // 36: yandex.cloud.organizationmanager.v1.GroupService.ListMembers:output_type -> yandex.cloud.organizationmanager.v1.ListGroupMembersResponse
+	32, // 37: yandex.cloud.organizationmanager.v1.GroupService.UpdateMembers:output_type -> yandex.cloud.operation.Operation
+	36, // 38: yandex.cloud.organizationmanager.v1.GroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	32, // 39: yandex.cloud.organizationmanager.v1.GroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	32, // 40: yandex.cloud.organizationmanager.v1.GroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	29, // 41: yandex.cloud.organizationmanager.v1.GroupService.ListEffective:output_type -> yandex.cloud.organizationmanager.v1.ListEffectiveResponse
+	25, // [25:42] is the sub-list for method output_type
+	8,  // [8:25] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_group_service_proto_init() }
@@ -1946,7 +2182,7 @@ func file_yandex_cloud_organizationmanager_v1_group_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   26,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

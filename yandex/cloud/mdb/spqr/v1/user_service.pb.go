@@ -149,82 +149,6 @@ func (x *ListUsersRequest) GetPageToken() string {
 	return ""
 }
 
-type ListUsersAtRevisionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the cluster to list SPQR users in.
-	// To get the cluster ID, use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size], the service returns a [ListUsersResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the
-	// [ListUsersResponse.next_page_token] returned by the previous list request.
-	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	// Cluster revision
-	Revision      int64 `protobuf:"varint,4,opt,name=revision,proto3" json:"revision,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListUsersAtRevisionRequest) Reset() {
-	*x = ListUsersAtRevisionRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListUsersAtRevisionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListUsersAtRevisionRequest) ProtoMessage() {}
-
-func (x *ListUsersAtRevisionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListUsersAtRevisionRequest.ProtoReflect.Descriptor instead.
-func (*ListUsersAtRevisionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ListUsersAtRevisionRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *ListUsersAtRevisionRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListUsersAtRevisionRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-func (x *ListUsersAtRevisionRequest) GetRevision() int64 {
-	if x != nil {
-		return x.Revision
-	}
-	return 0
-}
-
 type ListUsersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of SPQR User resources.
@@ -240,7 +164,7 @@ type ListUsersResponse struct {
 
 func (x *ListUsersResponse) Reset() {
 	*x = ListUsersResponse{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -252,7 +176,7 @@ func (x *ListUsersResponse) String() string {
 func (*ListUsersResponse) ProtoMessage() {}
 
 func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -265,7 +189,7 @@ func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
 func (*ListUsersResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListUsersResponse) GetUsers() []*User {
@@ -295,7 +219,7 @@ type CreateUserRequest struct {
 
 func (x *CreateUserRequest) Reset() {
 	*x = CreateUserRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -307,7 +231,7 @@ func (x *CreateUserRequest) String() string {
 func (*CreateUserRequest) ProtoMessage() {}
 
 func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -320,7 +244,7 @@ func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateUserRequest) GetClusterId() string {
@@ -349,7 +273,7 @@ type CreateUserMetadata struct {
 
 func (x *CreateUserMetadata) Reset() {
 	*x = CreateUserMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -361,7 +285,7 @@ func (x *CreateUserMetadata) String() string {
 func (*CreateUserMetadata) ProtoMessage() {}
 
 func (x *CreateUserMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -374,7 +298,7 @@ func (x *CreateUserMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserMetadata.ProtoReflect.Descriptor instead.
 func (*CreateUserMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateUserMetadata) GetClusterId() string {
@@ -415,7 +339,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +351,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +364,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateUserRequest) GetClusterId() string {
@@ -504,7 +428,7 @@ type UpdateUserMetadata struct {
 
 func (x *UpdateUserMetadata) Reset() {
 	*x = UpdateUserMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -516,7 +440,7 @@ func (x *UpdateUserMetadata) String() string {
 func (*UpdateUserMetadata) ProtoMessage() {}
 
 func (x *UpdateUserMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -529,7 +453,7 @@ func (x *UpdateUserMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateUserMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateUserMetadata) GetClusterId() string {
@@ -560,7 +484,7 @@ type DeleteUserRequest struct {
 
 func (x *DeleteUserRequest) Reset() {
 	*x = DeleteUserRequest{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -572,7 +496,7 @@ func (x *DeleteUserRequest) String() string {
 func (*DeleteUserRequest) ProtoMessage() {}
 
 func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -585,7 +509,7 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteUserRequest) GetClusterId() string {
@@ -614,7 +538,7 @@ type DeleteUserMetadata struct {
 
 func (x *DeleteUserMetadata) Reset() {
 	*x = DeleteUserMetadata{}
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -626,7 +550,7 @@ func (x *DeleteUserMetadata) String() string {
 func (*DeleteUserMetadata) ProtoMessage() {}
 
 func (x *DeleteUserMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +563,7 @@ func (x *DeleteUserMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteUserMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteUserMetadata) GetClusterId() string {
@@ -671,15 +595,7 @@ const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xc0\x01\n" +
-	"\x1aListUsersAtRevisionRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\brevision\x18\x04 \x01(\x03B\x06\xfa\xc71\x02>0R\brevision\"q\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"q\n" +
 	"\x11ListUsersResponse\x124\n" +
 	"\x05users\x18\x01 \x03(\v2\x1e.yandex.cloud.mdb.spqr.v1.UserR\x05users\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x81\x01\n" +
@@ -712,11 +628,10 @@ const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\x12DeleteUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName2\xa1\b\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName2\xf5\x06\n" +
 	"\vUserService\x12\x91\x01\n" +
 	"\x03Get\x12(.yandex.cloud.mdb.spqr.v1.GetUserRequest\x1a\x1e.yandex.cloud.mdb.spqr.v1.User\"@\x82\xd3\xe4\x93\x02:\x128/managed-spqr/v1/clusters/{cluster_id}/users/{user_name}\x12\x95\x01\n" +
-	"\x04List\x12*.yandex.cloud.mdb.spqr.v1.ListUsersRequest\x1a+.yandex.cloud.mdb.spqr.v1.ListUsersResponse\"4\x82\xd3\xe4\x93\x02.\x12,/managed-spqr/v1/clusters/{cluster_id}/users\x12\xa9\x01\n" +
-	"\x0eListAtRevision\x124.yandex.cloud.mdb.spqr.v1.ListUsersAtRevisionRequest\x1a+.yandex.cloud.mdb.spqr.v1.ListUsersResponse\"4\x82\xd3\xe4\x93\x02.\x12,/managed-spqr/v1/clusters/{cluster_id}/users\x12\xaf\x01\n" +
+	"\x04List\x12*.yandex.cloud.mdb.spqr.v1.ListUsersRequest\x1a+.yandex.cloud.mdb.spqr.v1.ListUsersResponse\"4\x82\xd3\xe4\x93\x02.\x12,/managed-spqr/v1/clusters/{cluster_id}/users\x12\xaf\x01\n" +
 	"\x06Create\x12+.yandex.cloud.mdb.spqr.v1.CreateUserRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2*\x1a\n" +
 	"\x12CreateUserMetadata\x12\x04User\x82\xd3\xe4\x93\x021:\x01*\",/managed-spqr/v1/clusters/{cluster_id}/users\x12\xbb\x01\n" +
 	"\x06Update\x12+.yandex.cloud.mdb.spqr.v1.UpdateUserRequest\x1a!.yandex.cloud.operation.Operation\"a\xb2\xd2*\x1a\n" +
@@ -737,45 +652,42 @@ func file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_yandex_cloud_mdb_spqr_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_mdb_spqr_v1_user_service_proto_goTypes = []any{
-	(*GetUserRequest)(nil),             // 0: yandex.cloud.mdb.spqr.v1.GetUserRequest
-	(*ListUsersRequest)(nil),           // 1: yandex.cloud.mdb.spqr.v1.ListUsersRequest
-	(*ListUsersAtRevisionRequest)(nil), // 2: yandex.cloud.mdb.spqr.v1.ListUsersAtRevisionRequest
-	(*ListUsersResponse)(nil),          // 3: yandex.cloud.mdb.spqr.v1.ListUsersResponse
-	(*CreateUserRequest)(nil),          // 4: yandex.cloud.mdb.spqr.v1.CreateUserRequest
-	(*CreateUserMetadata)(nil),         // 5: yandex.cloud.mdb.spqr.v1.CreateUserMetadata
-	(*UpdateUserRequest)(nil),          // 6: yandex.cloud.mdb.spqr.v1.UpdateUserRequest
-	(*UpdateUserMetadata)(nil),         // 7: yandex.cloud.mdb.spqr.v1.UpdateUserMetadata
-	(*DeleteUserRequest)(nil),          // 8: yandex.cloud.mdb.spqr.v1.DeleteUserRequest
-	(*DeleteUserMetadata)(nil),         // 9: yandex.cloud.mdb.spqr.v1.DeleteUserMetadata
-	(*User)(nil),                       // 10: yandex.cloud.mdb.spqr.v1.User
-	(*UserSpec)(nil),                   // 11: yandex.cloud.mdb.spqr.v1.UserSpec
-	(*fieldmaskpb.FieldMask)(nil),      // 12: google.protobuf.FieldMask
-	(*Permission)(nil),                 // 13: yandex.cloud.mdb.spqr.v1.Permission
-	(*UserSettings)(nil),               // 14: yandex.cloud.mdb.spqr.v1.UserSettings
-	(*operation.Operation)(nil),        // 15: yandex.cloud.operation.Operation
+	(*GetUserRequest)(nil),        // 0: yandex.cloud.mdb.spqr.v1.GetUserRequest
+	(*ListUsersRequest)(nil),      // 1: yandex.cloud.mdb.spqr.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),     // 2: yandex.cloud.mdb.spqr.v1.ListUsersResponse
+	(*CreateUserRequest)(nil),     // 3: yandex.cloud.mdb.spqr.v1.CreateUserRequest
+	(*CreateUserMetadata)(nil),    // 4: yandex.cloud.mdb.spqr.v1.CreateUserMetadata
+	(*UpdateUserRequest)(nil),     // 5: yandex.cloud.mdb.spqr.v1.UpdateUserRequest
+	(*UpdateUserMetadata)(nil),    // 6: yandex.cloud.mdb.spqr.v1.UpdateUserMetadata
+	(*DeleteUserRequest)(nil),     // 7: yandex.cloud.mdb.spqr.v1.DeleteUserRequest
+	(*DeleteUserMetadata)(nil),    // 8: yandex.cloud.mdb.spqr.v1.DeleteUserMetadata
+	(*User)(nil),                  // 9: yandex.cloud.mdb.spqr.v1.User
+	(*UserSpec)(nil),              // 10: yandex.cloud.mdb.spqr.v1.UserSpec
+	(*fieldmaskpb.FieldMask)(nil), // 11: google.protobuf.FieldMask
+	(*Permission)(nil),            // 12: yandex.cloud.mdb.spqr.v1.Permission
+	(*UserSettings)(nil),          // 13: yandex.cloud.mdb.spqr.v1.UserSettings
+	(*operation.Operation)(nil),   // 14: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_spqr_v1_user_service_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.mdb.spqr.v1.ListUsersResponse.users:type_name -> yandex.cloud.mdb.spqr.v1.User
-	11, // 1: yandex.cloud.mdb.spqr.v1.CreateUserRequest.user_spec:type_name -> yandex.cloud.mdb.spqr.v1.UserSpec
-	12, // 2: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
-	13, // 3: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.permissions:type_name -> yandex.cloud.mdb.spqr.v1.Permission
-	14, // 4: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.settings:type_name -> yandex.cloud.mdb.spqr.v1.UserSettings
+	9,  // 0: yandex.cloud.mdb.spqr.v1.ListUsersResponse.users:type_name -> yandex.cloud.mdb.spqr.v1.User
+	10, // 1: yandex.cloud.mdb.spqr.v1.CreateUserRequest.user_spec:type_name -> yandex.cloud.mdb.spqr.v1.UserSpec
+	11, // 2: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	12, // 3: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.permissions:type_name -> yandex.cloud.mdb.spqr.v1.Permission
+	13, // 4: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.settings:type_name -> yandex.cloud.mdb.spqr.v1.UserSettings
 	0,  // 5: yandex.cloud.mdb.spqr.v1.UserService.Get:input_type -> yandex.cloud.mdb.spqr.v1.GetUserRequest
 	1,  // 6: yandex.cloud.mdb.spqr.v1.UserService.List:input_type -> yandex.cloud.mdb.spqr.v1.ListUsersRequest
-	2,  // 7: yandex.cloud.mdb.spqr.v1.UserService.ListAtRevision:input_type -> yandex.cloud.mdb.spqr.v1.ListUsersAtRevisionRequest
-	4,  // 8: yandex.cloud.mdb.spqr.v1.UserService.Create:input_type -> yandex.cloud.mdb.spqr.v1.CreateUserRequest
-	6,  // 9: yandex.cloud.mdb.spqr.v1.UserService.Update:input_type -> yandex.cloud.mdb.spqr.v1.UpdateUserRequest
-	8,  // 10: yandex.cloud.mdb.spqr.v1.UserService.Delete:input_type -> yandex.cloud.mdb.spqr.v1.DeleteUserRequest
-	10, // 11: yandex.cloud.mdb.spqr.v1.UserService.Get:output_type -> yandex.cloud.mdb.spqr.v1.User
-	3,  // 12: yandex.cloud.mdb.spqr.v1.UserService.List:output_type -> yandex.cloud.mdb.spqr.v1.ListUsersResponse
-	3,  // 13: yandex.cloud.mdb.spqr.v1.UserService.ListAtRevision:output_type -> yandex.cloud.mdb.spqr.v1.ListUsersResponse
-	15, // 14: yandex.cloud.mdb.spqr.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
-	15, // 15: yandex.cloud.mdb.spqr.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
-	15, // 16: yandex.cloud.mdb.spqr.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
+	3,  // 7: yandex.cloud.mdb.spqr.v1.UserService.Create:input_type -> yandex.cloud.mdb.spqr.v1.CreateUserRequest
+	5,  // 8: yandex.cloud.mdb.spqr.v1.UserService.Update:input_type -> yandex.cloud.mdb.spqr.v1.UpdateUserRequest
+	7,  // 9: yandex.cloud.mdb.spqr.v1.UserService.Delete:input_type -> yandex.cloud.mdb.spqr.v1.DeleteUserRequest
+	9,  // 10: yandex.cloud.mdb.spqr.v1.UserService.Get:output_type -> yandex.cloud.mdb.spqr.v1.User
+	2,  // 11: yandex.cloud.mdb.spqr.v1.UserService.List:output_type -> yandex.cloud.mdb.spqr.v1.ListUsersResponse
+	14, // 12: yandex.cloud.mdb.spqr.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
+	14, // 13: yandex.cloud.mdb.spqr.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
+	14, // 14: yandex.cloud.mdb.spqr.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -793,7 +705,7 @@ func file_yandex_cloud_mdb_spqr_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc), len(file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

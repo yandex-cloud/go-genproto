@@ -266,3 +266,39 @@ func (m *MemberDelta) SetAction(v MemberDelta_MemberAction) {
 func (m *MemberDelta) SetSubjectId(v string) {
 	m.SubjectId = v
 }
+
+func (m *ListEffectiveRequest) SetSubjectId(v string) {
+	m.SubjectId = v
+}
+
+func (m *ListEffectiveRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
+func (m *ListEffectiveRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListEffectiveRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListEffectiveRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *GroupMembershipInfo) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *GroupMembershipInfo) SetGroupName(v string) {
+	m.GroupName = v
+}
+
+func (m *ListEffectiveResponse) SetGroupMembershipInfo(v []*GroupMembershipInfo) {
+	m.GroupMembershipInfo = v
+}
+
+func (m *ListEffectiveResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
