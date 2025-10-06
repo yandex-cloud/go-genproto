@@ -466,8 +466,10 @@ type CreateInstanceRequest struct {
 	// Instance will be created using resources from the reserved instance pool.
 	// Reserved instance pool resource configuration must match the resource configuration of the instance.
 	ReservedInstancePoolId string `protobuf:"bytes,24,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Instance application settings.
+	Application   *Application `protobuf:"bytes,25,opt,name=application,proto3" json:"application,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateInstanceRequest) Reset() {
@@ -668,6 +670,13 @@ func (x *CreateInstanceRequest) GetReservedInstancePoolId() string {
 	return ""
 }
 
+func (x *CreateInstanceRequest) GetApplication() *Application {
+	if x != nil {
+		return x.Application
+	}
+	return nil
+}
+
 type CreateInstanceMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance that is being created.
@@ -771,8 +780,10 @@ type UpdateInstanceRequest struct {
 	// Attaching/detaching stopped instance will leave the size of the reserved instance pool unchanged. Starting such attached instance will use resources from the reserved instance pool.
 	// Reserved instance pool resource configuration must match the resource configuration of the instance.
 	ReservedInstancePoolId string `protobuf:"bytes,17,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Instance application settings.
+	Application   *Application `protobuf:"bytes,18,opt,name=application,proto3" json:"application,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateInstanceRequest) Reset() {
@@ -922,6 +933,13 @@ func (x *UpdateInstanceRequest) GetReservedInstancePoolId() string {
 		return x.ReservedInstancePoolId
 	}
 	return ""
+}
+
+func (x *UpdateInstanceRequest) GetApplication() *Application {
+	if x != nil {
+		return x.Application
+	}
+	return nil
 }
 
 type UpdateInstanceMetadata struct {
@@ -4033,7 +4051,7 @@ var File_yandex_cloud_compute_v1_instance_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/compute/v1/instance_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"~\n" +
+	".yandex/cloud/compute/v1/instance_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"~\n" +
 	"\x12GetInstanceRequest\x12-\n" +
 	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"instanceId\x129\n" +
@@ -4049,7 +4067,7 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x80\x01\n" +
 	"\x15ListInstancesResponse\x12?\n" +
 	"\tinstances\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.InstanceR\tinstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8a\x10\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd2\x10\n" +
 	"\x15CreateInstanceRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
 	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -4077,7 +4095,8 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x18maintenance_grace_period\x18\x16 \x01(\v2\x19.google.protobuf.DurationB\n" +
 	"\xfa\xc71\x061s-24hR\x16maintenanceGracePeriod\x12]\n" +
 	"\x14serial_port_settings\x18\x17 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12C\n" +
-	"\x19reserved_instance_pool_id\x18\x18 \x01(\tB\b\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x1a9\n" +
+	"\x19reserved_instance_pool_id\x18\x18 \x01(\tB\b\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12F\n" +
+	"\vapplication\x18\x19 \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
@@ -4086,7 +4105,7 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x16CreateInstanceMetadata\x12)\n" +
 	"\vinstance_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
-	"instanceId\"\xac\v\n" +
+	"instanceId\"\xf4\v\n" +
 	"\x15UpdateInstanceRequest\x12-\n" +
 	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"instanceId\x12;\n" +
@@ -4109,7 +4128,8 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x18maintenance_grace_period\x18\x0f \x01(\v2\x19.google.protobuf.DurationB\n" +
 	"\xfa\xc71\x061s-24hR\x16maintenanceGracePeriod\x12]\n" +
 	"\x14serial_port_settings\x18\x10 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12C\n" +
-	"\x19reserved_instance_pool_id\x18\x11 \x01(\tB\b\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x1a9\n" +
+	"\x19reserved_instance_pool_id\x18\x11 \x01(\tB\b\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12F\n" +
+	"\vapplication\x18\x12 \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
@@ -4506,15 +4526,16 @@ var file_yandex_cloud_compute_v1_instance_service_proto_goTypes = []any{
 	(MaintenancePolicy)(0),                           // 71: yandex.cloud.compute.v1.MaintenancePolicy
 	(*durationpb.Duration)(nil),                      // 72: google.protobuf.Duration
 	(*SerialPortSettings)(nil),                       // 73: yandex.cloud.compute.v1.SerialPortSettings
-	(*fieldmaskpb.FieldMask)(nil),                    // 74: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                      // 75: yandex.cloud.operation.Operation
-	(IpVersion)(0),                                   // 76: yandex.cloud.compute.v1.IpVersion
-	(*DiskPlacementPolicy)(nil),                      // 77: yandex.cloud.compute.v1.DiskPlacementPolicy
-	(*DiskPlacementPolicyChange)(nil),                // 78: yandex.cloud.compute.v1.DiskPlacementPolicyChange
-	(*access.ListAccessBindingsRequest)(nil),         // 79: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),          // 80: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),       // 81: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),        // 82: yandex.cloud.access.ListAccessBindingsResponse
+	(*Application)(nil),                              // 74: yandex.cloud.compute.v1.Application
+	(*fieldmaskpb.FieldMask)(nil),                    // 75: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                      // 76: yandex.cloud.operation.Operation
+	(IpVersion)(0),                                   // 77: yandex.cloud.compute.v1.IpVersion
+	(*DiskPlacementPolicy)(nil),                      // 78: yandex.cloud.compute.v1.DiskPlacementPolicy
+	(*DiskPlacementPolicyChange)(nil),                // 79: yandex.cloud.compute.v1.DiskPlacementPolicyChange
+	(*access.ListAccessBindingsRequest)(nil),         // 80: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),          // 81: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),       // 82: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),        // 83: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_compute_v1_instance_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.compute.v1.GetInstanceRequest.view:type_name -> yandex.cloud.compute.v1.InstanceView
@@ -4535,96 +4556,98 @@ var file_yandex_cloud_compute_v1_instance_service_proto_depIdxs = []int32{
 	71, // 15: yandex.cloud.compute.v1.CreateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
 	72, // 16: yandex.cloud.compute.v1.CreateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
 	73, // 17: yandex.cloud.compute.v1.CreateInstanceRequest.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
-	74, // 18: yandex.cloud.compute.v1.UpdateInstanceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	61, // 19: yandex.cloud.compute.v1.UpdateInstanceRequest.labels:type_name -> yandex.cloud.compute.v1.UpdateInstanceRequest.LabelsEntry
-	44, // 20: yandex.cloud.compute.v1.UpdateInstanceRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
-	62, // 21: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata:type_name -> yandex.cloud.compute.v1.UpdateInstanceRequest.MetadataEntry
-	66, // 22: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
-	68, // 23: yandex.cloud.compute.v1.UpdateInstanceRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	69, // 24: yandex.cloud.compute.v1.UpdateInstanceRequest.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
-	67, // 25: yandex.cloud.compute.v1.UpdateInstanceRequest.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
-	71, // 26: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
-	72, // 27: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
-	73, // 28: yandex.cloud.compute.v1.UpdateInstanceRequest.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
-	63, // 29: yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.upsert:type_name -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.UpsertEntry
-	45, // 30: yandex.cloud.compute.v1.AttachInstanceDiskRequest.attached_disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
-	47, // 31: yandex.cloud.compute.v1.AttachInstanceFilesystemRequest.attached_filesystem_spec:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec
-	49, // 32: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	50, // 33: yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
-	74, // 34: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	49, // 35: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	49, // 36: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	75, // 37: yandex.cloud.compute.v1.ListInstanceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	1,  // 38: yandex.cloud.compute.v1.AttachedDiskSpec.mode:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec.Mode
-	64, // 39: yandex.cloud.compute.v1.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec
-	2,  // 40: yandex.cloud.compute.v1.AttachedFilesystemSpec.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec.Mode
-	49, // 41: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	49, // 42: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	50, // 43: yandex.cloud.compute.v1.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
-	51, // 44: yandex.cloud.compute.v1.PrimaryAddressSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
-	76, // 45: yandex.cloud.compute.v1.OneToOneNatSpec.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
-	51, // 46: yandex.cloud.compute.v1.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
-	48, // 47: yandex.cloud.compute.v1.RelocateInstanceRequest.network_interface_specs:type_name -> yandex.cloud.compute.v1.NetworkInterfaceSpec
-	77, // 48: yandex.cloud.compute.v1.RelocateInstanceRequest.boot_disk_placement:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicy
-	78, // 49: yandex.cloud.compute.v1.RelocateInstanceRequest.secondary_disk_placements:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicyChange
-	77, // 50: yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec.disk_placement_policy:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicy
-	3,  // 51: yandex.cloud.compute.v1.InstanceService.Get:input_type -> yandex.cloud.compute.v1.GetInstanceRequest
-	4,  // 52: yandex.cloud.compute.v1.InstanceService.List:input_type -> yandex.cloud.compute.v1.ListInstancesRequest
-	6,  // 53: yandex.cloud.compute.v1.InstanceService.Create:input_type -> yandex.cloud.compute.v1.CreateInstanceRequest
-	8,  // 54: yandex.cloud.compute.v1.InstanceService.Update:input_type -> yandex.cloud.compute.v1.UpdateInstanceRequest
-	10, // 55: yandex.cloud.compute.v1.InstanceService.Delete:input_type -> yandex.cloud.compute.v1.DeleteInstanceRequest
-	12, // 56: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:input_type -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest
-	14, // 57: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:input_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest
-	16, // 58: yandex.cloud.compute.v1.InstanceService.Stop:input_type -> yandex.cloud.compute.v1.StopInstanceRequest
-	18, // 59: yandex.cloud.compute.v1.InstanceService.Start:input_type -> yandex.cloud.compute.v1.StartInstanceRequest
-	20, // 60: yandex.cloud.compute.v1.InstanceService.Restart:input_type -> yandex.cloud.compute.v1.RestartInstanceRequest
-	22, // 61: yandex.cloud.compute.v1.InstanceService.AttachDisk:input_type -> yandex.cloud.compute.v1.AttachInstanceDiskRequest
-	24, // 62: yandex.cloud.compute.v1.InstanceService.DetachDisk:input_type -> yandex.cloud.compute.v1.DetachInstanceDiskRequest
-	26, // 63: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:input_type -> yandex.cloud.compute.v1.AttachInstanceFilesystemRequest
-	28, // 64: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:input_type -> yandex.cloud.compute.v1.DetachInstanceFilesystemRequest
-	30, // 65: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:input_type -> yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest
-	32, // 66: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:input_type -> yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest
-	34, // 67: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:input_type -> yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest
-	36, // 68: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:input_type -> yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest
-	38, // 69: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:input_type -> yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest
-	42, // 70: yandex.cloud.compute.v1.InstanceService.ListOperations:input_type -> yandex.cloud.compute.v1.ListInstanceOperationsRequest
-	52, // 71: yandex.cloud.compute.v1.InstanceService.Move:input_type -> yandex.cloud.compute.v1.MoveInstanceRequest
-	54, // 72: yandex.cloud.compute.v1.InstanceService.Relocate:input_type -> yandex.cloud.compute.v1.RelocateInstanceRequest
-	40, // 73: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:input_type -> yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest
-	79, // 74: yandex.cloud.compute.v1.InstanceService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	80, // 75: yandex.cloud.compute.v1.InstanceService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	81, // 76: yandex.cloud.compute.v1.InstanceService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	65, // 77: yandex.cloud.compute.v1.InstanceService.Get:output_type -> yandex.cloud.compute.v1.Instance
-	5,  // 78: yandex.cloud.compute.v1.InstanceService.List:output_type -> yandex.cloud.compute.v1.ListInstancesResponse
-	75, // 79: yandex.cloud.compute.v1.InstanceService.Create:output_type -> yandex.cloud.operation.Operation
-	75, // 80: yandex.cloud.compute.v1.InstanceService.Update:output_type -> yandex.cloud.operation.Operation
-	75, // 81: yandex.cloud.compute.v1.InstanceService.Delete:output_type -> yandex.cloud.operation.Operation
-	75, // 82: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:output_type -> yandex.cloud.operation.Operation
-	15, // 83: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:output_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse
-	75, // 84: yandex.cloud.compute.v1.InstanceService.Stop:output_type -> yandex.cloud.operation.Operation
-	75, // 85: yandex.cloud.compute.v1.InstanceService.Start:output_type -> yandex.cloud.operation.Operation
-	75, // 86: yandex.cloud.compute.v1.InstanceService.Restart:output_type -> yandex.cloud.operation.Operation
-	75, // 87: yandex.cloud.compute.v1.InstanceService.AttachDisk:output_type -> yandex.cloud.operation.Operation
-	75, // 88: yandex.cloud.compute.v1.InstanceService.DetachDisk:output_type -> yandex.cloud.operation.Operation
-	75, // 89: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:output_type -> yandex.cloud.operation.Operation
-	75, // 90: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:output_type -> yandex.cloud.operation.Operation
-	75, // 91: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:output_type -> yandex.cloud.operation.Operation
-	75, // 92: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:output_type -> yandex.cloud.operation.Operation
-	75, // 93: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:output_type -> yandex.cloud.operation.Operation
-	75, // 94: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:output_type -> yandex.cloud.operation.Operation
-	75, // 95: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:output_type -> yandex.cloud.operation.Operation
-	43, // 96: yandex.cloud.compute.v1.InstanceService.ListOperations:output_type -> yandex.cloud.compute.v1.ListInstanceOperationsResponse
-	75, // 97: yandex.cloud.compute.v1.InstanceService.Move:output_type -> yandex.cloud.operation.Operation
-	75, // 98: yandex.cloud.compute.v1.InstanceService.Relocate:output_type -> yandex.cloud.operation.Operation
-	75, // 99: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:output_type -> yandex.cloud.operation.Operation
-	82, // 100: yandex.cloud.compute.v1.InstanceService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	75, // 101: yandex.cloud.compute.v1.InstanceService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	75, // 102: yandex.cloud.compute.v1.InstanceService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	77, // [77:103] is the sub-list for method output_type
-	51, // [51:77] is the sub-list for method input_type
-	51, // [51:51] is the sub-list for extension type_name
-	51, // [51:51] is the sub-list for extension extendee
-	0,  // [0:51] is the sub-list for field type_name
+	74, // 18: yandex.cloud.compute.v1.CreateInstanceRequest.application:type_name -> yandex.cloud.compute.v1.Application
+	75, // 19: yandex.cloud.compute.v1.UpdateInstanceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	61, // 20: yandex.cloud.compute.v1.UpdateInstanceRequest.labels:type_name -> yandex.cloud.compute.v1.UpdateInstanceRequest.LabelsEntry
+	44, // 21: yandex.cloud.compute.v1.UpdateInstanceRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
+	62, // 22: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata:type_name -> yandex.cloud.compute.v1.UpdateInstanceRequest.MetadataEntry
+	66, // 23: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
+	68, // 24: yandex.cloud.compute.v1.UpdateInstanceRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	69, // 25: yandex.cloud.compute.v1.UpdateInstanceRequest.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
+	67, // 26: yandex.cloud.compute.v1.UpdateInstanceRequest.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
+	71, // 27: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
+	72, // 28: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
+	73, // 29: yandex.cloud.compute.v1.UpdateInstanceRequest.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
+	74, // 30: yandex.cloud.compute.v1.UpdateInstanceRequest.application:type_name -> yandex.cloud.compute.v1.Application
+	63, // 31: yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.upsert:type_name -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.UpsertEntry
+	45, // 32: yandex.cloud.compute.v1.AttachInstanceDiskRequest.attached_disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
+	47, // 33: yandex.cloud.compute.v1.AttachInstanceFilesystemRequest.attached_filesystem_spec:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec
+	49, // 34: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	50, // 35: yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
+	75, // 36: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	49, // 37: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	49, // 38: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	76, // 39: yandex.cloud.compute.v1.ListInstanceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	1,  // 40: yandex.cloud.compute.v1.AttachedDiskSpec.mode:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec.Mode
+	64, // 41: yandex.cloud.compute.v1.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec
+	2,  // 42: yandex.cloud.compute.v1.AttachedFilesystemSpec.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec.Mode
+	49, // 43: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	49, // 44: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	50, // 45: yandex.cloud.compute.v1.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
+	51, // 46: yandex.cloud.compute.v1.PrimaryAddressSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
+	77, // 47: yandex.cloud.compute.v1.OneToOneNatSpec.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
+	51, // 48: yandex.cloud.compute.v1.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
+	48, // 49: yandex.cloud.compute.v1.RelocateInstanceRequest.network_interface_specs:type_name -> yandex.cloud.compute.v1.NetworkInterfaceSpec
+	78, // 50: yandex.cloud.compute.v1.RelocateInstanceRequest.boot_disk_placement:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicy
+	79, // 51: yandex.cloud.compute.v1.RelocateInstanceRequest.secondary_disk_placements:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicyChange
+	78, // 52: yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec.disk_placement_policy:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicy
+	3,  // 53: yandex.cloud.compute.v1.InstanceService.Get:input_type -> yandex.cloud.compute.v1.GetInstanceRequest
+	4,  // 54: yandex.cloud.compute.v1.InstanceService.List:input_type -> yandex.cloud.compute.v1.ListInstancesRequest
+	6,  // 55: yandex.cloud.compute.v1.InstanceService.Create:input_type -> yandex.cloud.compute.v1.CreateInstanceRequest
+	8,  // 56: yandex.cloud.compute.v1.InstanceService.Update:input_type -> yandex.cloud.compute.v1.UpdateInstanceRequest
+	10, // 57: yandex.cloud.compute.v1.InstanceService.Delete:input_type -> yandex.cloud.compute.v1.DeleteInstanceRequest
+	12, // 58: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:input_type -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest
+	14, // 59: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:input_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest
+	16, // 60: yandex.cloud.compute.v1.InstanceService.Stop:input_type -> yandex.cloud.compute.v1.StopInstanceRequest
+	18, // 61: yandex.cloud.compute.v1.InstanceService.Start:input_type -> yandex.cloud.compute.v1.StartInstanceRequest
+	20, // 62: yandex.cloud.compute.v1.InstanceService.Restart:input_type -> yandex.cloud.compute.v1.RestartInstanceRequest
+	22, // 63: yandex.cloud.compute.v1.InstanceService.AttachDisk:input_type -> yandex.cloud.compute.v1.AttachInstanceDiskRequest
+	24, // 64: yandex.cloud.compute.v1.InstanceService.DetachDisk:input_type -> yandex.cloud.compute.v1.DetachInstanceDiskRequest
+	26, // 65: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:input_type -> yandex.cloud.compute.v1.AttachInstanceFilesystemRequest
+	28, // 66: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:input_type -> yandex.cloud.compute.v1.DetachInstanceFilesystemRequest
+	30, // 67: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:input_type -> yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest
+	32, // 68: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:input_type -> yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest
+	34, // 69: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:input_type -> yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest
+	36, // 70: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:input_type -> yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest
+	38, // 71: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:input_type -> yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest
+	42, // 72: yandex.cloud.compute.v1.InstanceService.ListOperations:input_type -> yandex.cloud.compute.v1.ListInstanceOperationsRequest
+	52, // 73: yandex.cloud.compute.v1.InstanceService.Move:input_type -> yandex.cloud.compute.v1.MoveInstanceRequest
+	54, // 74: yandex.cloud.compute.v1.InstanceService.Relocate:input_type -> yandex.cloud.compute.v1.RelocateInstanceRequest
+	40, // 75: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:input_type -> yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest
+	80, // 76: yandex.cloud.compute.v1.InstanceService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	81, // 77: yandex.cloud.compute.v1.InstanceService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	82, // 78: yandex.cloud.compute.v1.InstanceService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	65, // 79: yandex.cloud.compute.v1.InstanceService.Get:output_type -> yandex.cloud.compute.v1.Instance
+	5,  // 80: yandex.cloud.compute.v1.InstanceService.List:output_type -> yandex.cloud.compute.v1.ListInstancesResponse
+	76, // 81: yandex.cloud.compute.v1.InstanceService.Create:output_type -> yandex.cloud.operation.Operation
+	76, // 82: yandex.cloud.compute.v1.InstanceService.Update:output_type -> yandex.cloud.operation.Operation
+	76, // 83: yandex.cloud.compute.v1.InstanceService.Delete:output_type -> yandex.cloud.operation.Operation
+	76, // 84: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:output_type -> yandex.cloud.operation.Operation
+	15, // 85: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:output_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse
+	76, // 86: yandex.cloud.compute.v1.InstanceService.Stop:output_type -> yandex.cloud.operation.Operation
+	76, // 87: yandex.cloud.compute.v1.InstanceService.Start:output_type -> yandex.cloud.operation.Operation
+	76, // 88: yandex.cloud.compute.v1.InstanceService.Restart:output_type -> yandex.cloud.operation.Operation
+	76, // 89: yandex.cloud.compute.v1.InstanceService.AttachDisk:output_type -> yandex.cloud.operation.Operation
+	76, // 90: yandex.cloud.compute.v1.InstanceService.DetachDisk:output_type -> yandex.cloud.operation.Operation
+	76, // 91: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:output_type -> yandex.cloud.operation.Operation
+	76, // 92: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:output_type -> yandex.cloud.operation.Operation
+	76, // 93: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:output_type -> yandex.cloud.operation.Operation
+	76, // 94: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:output_type -> yandex.cloud.operation.Operation
+	76, // 95: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:output_type -> yandex.cloud.operation.Operation
+	76, // 96: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:output_type -> yandex.cloud.operation.Operation
+	76, // 97: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:output_type -> yandex.cloud.operation.Operation
+	43, // 98: yandex.cloud.compute.v1.InstanceService.ListOperations:output_type -> yandex.cloud.compute.v1.ListInstanceOperationsResponse
+	76, // 99: yandex.cloud.compute.v1.InstanceService.Move:output_type -> yandex.cloud.operation.Operation
+	76, // 100: yandex.cloud.compute.v1.InstanceService.Relocate:output_type -> yandex.cloud.operation.Operation
+	76, // 101: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:output_type -> yandex.cloud.operation.Operation
+	83, // 102: yandex.cloud.compute.v1.InstanceService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	76, // 103: yandex.cloud.compute.v1.InstanceService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	76, // 104: yandex.cloud.compute.v1.InstanceService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	79, // [79:105] is the sub-list for method output_type
+	53, // [53:79] is the sub-list for method input_type
+	53, // [53:53] is the sub-list for extension type_name
+	53, // [53:53] is the sub-list for extension extendee
+	0,  // [0:53] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instance_service_proto_init() }
@@ -4632,6 +4655,7 @@ func file_yandex_cloud_compute_v1_instance_service_proto_init() {
 	if File_yandex_cloud_compute_v1_instance_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_compute_v1_application_proto_init()
 	file_yandex_cloud_compute_v1_disk_proto_init()
 	file_yandex_cloud_compute_v1_instance_proto_init()
 	file_yandex_cloud_compute_v1_maintenance_proto_init()

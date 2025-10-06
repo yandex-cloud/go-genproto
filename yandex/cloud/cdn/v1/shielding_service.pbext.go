@@ -50,6 +50,10 @@ func (m *ListShieldingLocationsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListShieldingLocationsRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
 func (m *ListShieldingLocationsResponse) SetShieldingLocations(v []*ShieldingDetails) {
 	m.ShieldingLocations = v
 }

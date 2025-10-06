@@ -374,7 +374,9 @@ type ListShieldingLocationsRequest struct {
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListShieldingLocationsResponse.next_page_token]
 	// returned by a previous list response.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// ID of the resource for which to request a list of locations where shielding can be activated.
+	ResourceId    string `protobuf:"bytes,4,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -426,6 +428,13 @@ func (x *ListShieldingLocationsRequest) GetPageSize() int64 {
 func (x *ListShieldingLocationsRequest) GetPageToken() string {
 	if x != nil {
 		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListShieldingLocationsRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
 	}
 	return ""
 }
@@ -514,13 +523,15 @@ const file_yandex_cloud_cdn_v1_shielding_service_proto_rawDesc = "" +
 	"locationId\"H\n" +
 	"\x17UpdateShieldingMetadata\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"resourceId\"\x9d\x01\n" +
+	"resourceId\"\xcc\x01\n" +
 	"\x1dListShieldingLocationsRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xa0\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12-\n" +
+	"\vresource_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"resourceId\"\xa0\x01\n" +
 	"\x1eListShieldingLocationsResponse\x12V\n" +
 	"\x13shielding_locations\x18\x01 \x03(\v2%.yandex.cloud.cdn.v1.ShieldingDetailsR\x12shieldingLocations\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xb0\x05\n" +

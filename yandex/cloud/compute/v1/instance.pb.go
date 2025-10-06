@@ -533,8 +533,10 @@ type Instance struct {
 	HardwareGeneration *HardwareGeneration `protobuf:"bytes,31,opt,name=hardware_generation,json=hardwareGeneration,proto3" json:"hardware_generation,omitempty"`
 	// ID of the reserved instance pool that the instance belongs to.
 	ReservedInstancePoolId string `protobuf:"bytes,32,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Instance application settings.
+	Application   *Application `protobuf:"bytes,33,opt,name=application,proto3" json:"application,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Instance) Reset() {
@@ -775,6 +777,13 @@ func (x *Instance) GetReservedInstancePoolId() string {
 		return x.ReservedInstancePoolId
 	}
 	return ""
+}
+
+func (x *Instance) GetApplication() *Application {
+	if x != nil {
+		return x.Application
+	}
+	return nil
 }
 
 type Resources struct {
@@ -1720,7 +1729,7 @@ var File_yandex_cloud_compute_v1_instance_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/compute/v1/instance.proto\x12\x17yandex.cloud.compute.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\"\xfe\x10\n" +
+	"&yandex/cloud/compute/v1/instance.proto\x12\x17yandex.cloud.compute.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\"\xc6\x11\n" +
 	"\bInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -1755,7 +1764,8 @@ const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\x12maintenance_policy\x18\x1d \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12S\n" +
 	"\x18maintenance_grace_period\x18\x1e \x01(\v2\x19.google.protobuf.DurationR\x16maintenanceGracePeriod\x12\\\n" +
 	"\x13hardware_generation\x18\x1f \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x129\n" +
-	"\x19reserved_instance_pool_id\x18  \x01(\tR\x16reservedInstancePoolId\x1a9\n" +
+	"\x19reserved_instance_pool_id\x18  \x01(\tR\x16reservedInstancePoolId\x12F\n" +
+	"\vapplication\x18! \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
@@ -1921,6 +1931,7 @@ var file_yandex_cloud_compute_v1_instance_proto_goTypes = []any{
 	(MaintenancePolicy)(0),                         // 27: yandex.cloud.compute.v1.MaintenancePolicy
 	(*durationpb.Duration)(nil),                    // 28: google.protobuf.Duration
 	(*HardwareGeneration)(nil),                     // 29: yandex.cloud.compute.v1.HardwareGeneration
+	(*Application)(nil),                            // 30: yandex.cloud.compute.v1.Application
 }
 var file_yandex_cloud_compute_v1_instance_proto_depIdxs = []int32{
 	26, // 0: yandex.cloud.compute.v1.Instance.created_at:type_name -> google.protobuf.Timestamp
@@ -1942,27 +1953,28 @@ var file_yandex_cloud_compute_v1_instance_proto_depIdxs = []int32{
 	27, // 16: yandex.cloud.compute.v1.Instance.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
 	28, // 17: yandex.cloud.compute.v1.Instance.maintenance_grace_period:type_name -> google.protobuf.Duration
 	29, // 18: yandex.cloud.compute.v1.Instance.hardware_generation:type_name -> yandex.cloud.compute.v1.HardwareGeneration
-	3,  // 19: yandex.cloud.compute.v1.AttachedDisk.mode:type_name -> yandex.cloud.compute.v1.AttachedDisk.Mode
-	4,  // 20: yandex.cloud.compute.v1.AttachedFilesystem.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystem.Mode
-	14, // 21: yandex.cloud.compute.v1.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
-	14, // 22: yandex.cloud.compute.v1.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
-	15, // 23: yandex.cloud.compute.v1.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.OneToOneNat
-	16, // 24: yandex.cloud.compute.v1.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
-	0,  // 25: yandex.cloud.compute.v1.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
-	16, // 26: yandex.cloud.compute.v1.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
-	5,  // 27: yandex.cloud.compute.v1.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.NetworkSettings.Type
-	25, // 28: yandex.cloud.compute.v1.PlacementPolicy.host_affinity_rules:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule
-	1,  // 29: yandex.cloud.compute.v1.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
-	1,  // 30: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
-	1,  // 31: yandex.cloud.compute.v1.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
-	1,  // 32: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
-	7,  // 33: yandex.cloud.compute.v1.SerialPortSettings.ssh_authorization:type_name -> yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorization
-	6,  // 34: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.Operator
-	35, // [35:35] is the sub-list for method output_type
-	35, // [35:35] is the sub-list for method input_type
-	35, // [35:35] is the sub-list for extension type_name
-	35, // [35:35] is the sub-list for extension extendee
-	0,  // [0:35] is the sub-list for field type_name
+	30, // 19: yandex.cloud.compute.v1.Instance.application:type_name -> yandex.cloud.compute.v1.Application
+	3,  // 20: yandex.cloud.compute.v1.AttachedDisk.mode:type_name -> yandex.cloud.compute.v1.AttachedDisk.Mode
+	4,  // 21: yandex.cloud.compute.v1.AttachedFilesystem.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystem.Mode
+	14, // 22: yandex.cloud.compute.v1.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
+	14, // 23: yandex.cloud.compute.v1.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
+	15, // 24: yandex.cloud.compute.v1.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.OneToOneNat
+	16, // 25: yandex.cloud.compute.v1.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
+	0,  // 26: yandex.cloud.compute.v1.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
+	16, // 27: yandex.cloud.compute.v1.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
+	5,  // 28: yandex.cloud.compute.v1.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.NetworkSettings.Type
+	25, // 29: yandex.cloud.compute.v1.PlacementPolicy.host_affinity_rules:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule
+	1,  // 30: yandex.cloud.compute.v1.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 31: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 32: yandex.cloud.compute.v1.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 33: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
+	7,  // 34: yandex.cloud.compute.v1.SerialPortSettings.ssh_authorization:type_name -> yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorization
+	6,  // 35: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.Operator
+	36, // [36:36] is the sub-list for method output_type
+	36, // [36:36] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instance_proto_init() }
@@ -1970,6 +1982,7 @@ func file_yandex_cloud_compute_v1_instance_proto_init() {
 	if File_yandex_cloud_compute_v1_instance_proto != nil {
 		return
 	}
+	file_yandex_cloud_compute_v1_application_proto_init()
 	file_yandex_cloud_compute_v1_hardware_generation_proto_init()
 	file_yandex_cloud_compute_v1_maintenance_proto_init()
 	type x struct{}

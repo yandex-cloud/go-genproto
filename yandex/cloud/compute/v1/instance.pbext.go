@@ -127,6 +127,10 @@ func (m *Instance) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
 }
 
+func (m *Instance) SetApplication(v *Application) {
+	m.Application = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

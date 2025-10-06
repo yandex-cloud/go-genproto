@@ -115,6 +115,12 @@ func (m *ClusterConfig) SetMysqlConfig_8_0(v *config.MysqlConfigSet8_0) {
 	}
 }
 
+func (m *ClusterConfig) SetMysqlConfig_8_4(v *config.MysqlConfigSet8_4) {
+	m.MysqlConfig = &ClusterConfig_MysqlConfig_8_4{
+		MysqlConfig_8_4: v,
+	}
+}
+
 func (m *ClusterConfig) SetResources(v *Resources) {
 	m.Resources = v
 }

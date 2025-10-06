@@ -140,6 +140,10 @@ func (m *CreateInstanceRequest) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
 }
 
+func (m *CreateInstanceRequest) SetApplication(v *Application) {
+	m.Application = v
+}
+
 func (m *CreateInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }
@@ -210,6 +214,10 @@ func (m *UpdateInstanceRequest) SetSerialPortSettings(v *SerialPortSettings) {
 
 func (m *UpdateInstanceRequest) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
+}
+
+func (m *UpdateInstanceRequest) SetApplication(v *Application) {
+	m.Application = v
 }
 
 func (m *UpdateInstanceMetadata) SetInstanceId(v string) {
