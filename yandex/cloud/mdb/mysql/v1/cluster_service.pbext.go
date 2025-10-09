@@ -565,6 +565,12 @@ func (m *ConfigSpec) SetMysqlConfig_8_0(v *config.MysqlConfig8_0) {
 	}
 }
 
+func (m *ConfigSpec) SetMysqlConfig_8_4(v *config.MysqlConfig8_4) {
+	m.MysqlConfig = &ConfigSpec_MysqlConfig_8_4{
+		MysqlConfig_8_4: v,
+	}
+}
+
 func (m *ConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }

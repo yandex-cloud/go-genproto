@@ -1169,6 +1169,8 @@ type ClickhouseConfig struct {
 	// Per-topic Kafka integration settings.
 	//
 	// Change of the settings of **kafka_topics** is applied with restart.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
 	KafkaTopics []*ClickhouseConfig_KafkaTopic `protobuf:"bytes,36,rep,name=kafka_topics,json=kafkaTopics,proto3" json:"kafka_topics,omitempty"`
 	// RabbitMQ integration settings.
 	//
@@ -1760,6 +1762,7 @@ func (x *ClickhouseConfig) GetKafka() *ClickhouseConfig_Kafka {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
 func (x *ClickhouseConfig) GetKafkaTopics() []*ClickhouseConfig_KafkaTopic {
 	if x != nil {
 		return x.KafkaTopics
@@ -2091,7 +2094,7 @@ type ClickhouseConfig_MergeTree struct {
 	LightweightMutationProjectionMode ClickhouseConfig_MergeTree_LightweightMutationProjectionMode `protobuf:"varint,30,opt,name=lightweight_mutation_projection_mode,json=lightweightMutationProjectionMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_MergeTree_LightweightMutationProjectionMode" json:"lightweight_mutation_projection_mode,omitempty"`
 	// The number of most recently inserted blocks for which ClickHouse Keeper stores hash sums to check for duplicates.
 	//
-	// Default value: **1000** for versions 23.11 and higher, **100** for versions 23.10 and lower.
+	// Default value: **10000** for versions 25.9 and higher, **1000** for versions from 23.11 to 25.8, **100** for versions 23.10 and lower.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#replicated_deduplication_window).
 	ReplicatedDeduplicationWindow *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=replicated_deduplication_window,json=replicatedDeduplicationWindow,proto3" json:"replicated_deduplication_window,omitempty"`
@@ -4637,7 +4640,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe5\xa5\x01\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xea\xa5\x01\n" +
 	"\x10ClickhouseConfig\x12V\n" +
 	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x12backgroundPoolSize\x12}\n" +
 	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12g\n" +
@@ -4692,8 +4695,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x18error_log_retention_size\x18L \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15errorLogRetentionSize\x12]\n" +
 	"\x18error_log_retention_time\x18M \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15errorLogRetentionTime\x12\x91\x01\n" +
 	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12N\n" +
-	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x0emaxConnections\x12[\n" +
-	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=50R\x14maxConcurrentQueries\x12X\n" +
+	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x0emaxConnections\x12\\\n" +
+	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x05>=100R\x14maxConcurrentQueries\x12X\n" +
 	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxTableSizeToDrop\x12`\n" +
 	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16maxPartitionSizeToDrop\x12I\n" +
 	"\x12keep_alive_timeout\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x10keepAliveTimeout\x12S\n" +
@@ -4715,8 +4718,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\vcompression\x18\x03 \x03(\v2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.CompressionR\vcompression\x12n\n" +
 	"\fdictionaries\x18\x04 \x03(\v2J.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionaryR\fdictionaries\x12o\n" +
 	"\x0fgraphite_rollup\x18\x05 \x03(\v2F.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollupR\x0egraphiteRollup\x12S\n" +
-	"\x05kafka\x18# \x01(\v2=.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaR\x05kafka\x12e\n" +
-	"\fkafka_topics\x18$ \x03(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopicR\vkafkaTopics\x12\\\n" +
+	"\x05kafka\x18# \x01(\v2=.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaR\x05kafka\x12i\n" +
+	"\fkafka_topics\x18$ \x03(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopicB\x02\x18\x01R\vkafkaTopics\x12\\\n" +
 	"\brabbitmq\x18% \x01(\v2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.RabbitmqR\brabbitmq\x12x\n" +
 	"\x13query_masking_rules\x18C \x03(\v2H.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRuleR\x11queryMaskingRules\x12c\n" +
 	"\vquery_cache\x18E \x01(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCacheR\n" +

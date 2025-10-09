@@ -99,6 +99,10 @@ func (m *TrinoConfigSpec) SetAccessControl(v *AccessControlConfig) {
 	m.AccessControl = v
 }
 
+func (m *TrinoConfigSpec) SetTls(v *TLSConfig) {
+	m.Tls = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -151,6 +155,10 @@ func (m *UpdateTrinoConfigSpec) SetRetryPolicy(v *RetryPolicyConfig) {
 
 func (m *UpdateTrinoConfigSpec) SetAccessControl(v *AccessControlConfig) {
 	m.AccessControl = v
+}
+
+func (m *UpdateTrinoConfigSpec) SetTls(v *TLSConfig) {
+	m.Tls = v
 }
 
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {

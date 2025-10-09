@@ -918,7 +918,7 @@ type MysqlConfig8_4 struct {
 	// Permit some pending read lock requests interval
 	// P.S. Should be UInt64, but java fails to handle UInt64 limits
 	//
-	// For details, see [Percona documentation for the variable](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_write_lock_count).
+	// For details, see [Percona documentation for the variable](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_max_write_lock_count).
 	MaxWriteLockCount *wrapperspb.Int64Value `protobuf:"bytes,91,opt,name=max_write_lock_count,json=maxWriteLockCount,proto3" json:"max_write_lock_count,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache

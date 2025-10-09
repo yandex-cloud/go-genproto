@@ -141,6 +141,10 @@ func (m *TrinoConfig) SetAccessControl(v *AccessControlConfig) {
 	m.AccessControl = v
 }
 
+func (m *TrinoConfig) SetTls(v *TLSConfig) {
+	m.Tls = v
+}
+
 func (m *CoordinatorConfig) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -181,6 +185,10 @@ func (m *RetryPolicyConfig) SetExchangeManager(v *ExchangeManagerConfig) {
 
 func (m *RetryPolicyConfig) SetAdditionalProperties(v map[string]string) {
 	m.AdditionalProperties = v
+}
+
+func (m *TLSConfig) SetTrustedCertificates(v []string) {
+	m.TrustedCertificates = v
 }
 
 type ExchangeManagerStorage_Type = isExchangeManagerStorage_Type
