@@ -253,6 +253,8 @@ type CreateServerRequest struct {
 	// To get the configuration ID, use a [ConfigurationService.List] request.
 	ConfigurationId string `protobuf:"bytes,5,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// A period of time for which the server is rented.
+	//
+	// To get the rental period ID, use a [RentalPeriodService.List] request.
 	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
 	// Network configuration for the server. Specifies how the network interface is configured
 	// to interact with other servers on the internal network and on the internet.
@@ -1257,6 +1259,8 @@ type BatchCreateServersRequest struct {
 	// To get the configuration ID, use a [ConfigurationService.List] request.
 	ConfigurationId string `protobuf:"bytes,5,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// A period of time for which the server is rented.
+	//
+	// To get the rental period ID, use a [RentalPeriodService.List] request.
 	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
 	// Network configuration for the server. Specifies how the network interface is configured
 	// to interact with other servers on the internal network and on the internet.
