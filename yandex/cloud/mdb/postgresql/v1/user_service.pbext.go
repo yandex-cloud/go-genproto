@@ -99,6 +99,10 @@ func (m *UpdateUserRequest) SetGeneratePassword(v *wrapperspb.BoolValue) {
 	m.GeneratePassword = v
 }
 
+func (m *UpdateUserRequest) SetAuthMethod(v AuthMethod) {
+	m.AuthMethod = v
+}
+
 func (m *UpdateUserMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

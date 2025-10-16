@@ -220,3 +220,7 @@ func (m *ClusterSpec) SetProxy(v *ProxySpec) {
 func (m *ClusterSpec) SetOdin(v *OdinSpec) {
 	m.Odin = v
 }
+
+func (m *ClusterSpec) SetFlavor(v ClusterSpec_Flavor) {
+	m.Flavor = v
+}

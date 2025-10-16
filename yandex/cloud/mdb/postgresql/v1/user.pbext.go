@@ -46,6 +46,10 @@ func (m *User) SetConnectionManager(v *ConnectionManager) {
 	m.ConnectionManager = v
 }
 
+func (m *User) SetAuthMethod(v AuthMethod) {
+	m.AuthMethod = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -92,6 +96,10 @@ func (m *UserSpec) SetUserPasswordEncryption(v UserPasswordEncryption) {
 
 func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
 	m.GeneratePassword = v
+}
+
+func (m *UserSpec) SetAuthMethod(v AuthMethod) {
+	m.AuthMethod = v
 }
 
 func (m *PGAuditSettings) SetLog(v []PGAuditSettings_PGAuditSettingsLog) {

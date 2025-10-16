@@ -154,6 +154,53 @@ func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP(), []int{0, 1}
 }
 
+type ClusterSpec_Flavor int32
+
+const (
+	ClusterSpec_FLAVOR_UNSPECIFIED ClusterSpec_Flavor = 0
+	// Demo cluster configuration with minimal system resources. Not fault-tolerant, not for production use.
+	ClusterSpec_DEMO ClusterSpec_Flavor = 1
+)
+
+// Enum value maps for ClusterSpec_Flavor.
+var (
+	ClusterSpec_Flavor_name = map[int32]string{
+		0: "FLAVOR_UNSPECIFIED",
+		1: "DEMO",
+	}
+	ClusterSpec_Flavor_value = map[string]int32{
+		"FLAVOR_UNSPECIFIED": 0,
+		"DEMO":               1,
+	}
+)
+
+func (x ClusterSpec_Flavor) Enum() *ClusterSpec_Flavor {
+	p := new(ClusterSpec_Flavor)
+	*p = x
+	return p
+}
+
+func (x ClusterSpec_Flavor) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ClusterSpec_Flavor) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ytsaurus_v1_cluster_proto_enumTypes[2].Descriptor()
+}
+
+func (ClusterSpec_Flavor) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ytsaurus_v1_cluster_proto_enumTypes[2]
+}
+
+func (x ClusterSpec_Flavor) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ClusterSpec_Flavor.Descriptor instead.
+func (ClusterSpec_Flavor) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP(), []int{8, 0}
+}
+
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster. Generated at creation time.
@@ -699,6 +746,7 @@ type ClusterSpec struct {
 	Tablet        *TabletSpec            `protobuf:"bytes,3,opt,name=tablet,proto3" json:"tablet,omitempty"`
 	Proxy         *ProxySpec             `protobuf:"bytes,4,opt,name=proxy,proto3" json:"proxy,omitempty"`
 	Odin          *OdinSpec              `protobuf:"bytes,5,opt,name=odin,proto3" json:"odin,omitempty"`
+	Flavor        ClusterSpec_Flavor     `protobuf:"varint,6,opt,name=flavor,proto3,enum=yandex.cloud.ytsaurus.v1.ClusterSpec_Flavor" json:"flavor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -766,6 +814,13 @@ func (x *ClusterSpec) GetOdin() *OdinSpec {
 		return x.Odin
 	}
 	return nil
+}
+
+func (x *ClusterSpec) GetFlavor() ClusterSpec_Flavor {
+	if x != nil {
+		return x.Flavor
+	}
+	return ClusterSpec_FLAVOR_UNSPECIFIED
 }
 
 type Cluster_Endpoints struct {
@@ -1278,13 +1333,17 @@ const file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc = "" +
 	"\x03rpc\x18\x02 \x01(\v2&.yandex.cloud.ytsaurus.v1.RpcProxySpecR\x03rpc\"D\n" +
 	"\bOdinSpec\x128\n" +
 	"\n" +
-	"checks_ttl\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\tchecksTtl\"\xc0\x02\n" +
+	"checks_ttl\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\tchecksTtl\"\xb2\x03\n" +
 	"\vClusterSpec\x12?\n" +
 	"\astorage\x18\x01 \x01(\v2%.yandex.cloud.ytsaurus.v1.StorageSpecR\astorage\x12?\n" +
 	"\acompute\x18\x02 \x03(\v2%.yandex.cloud.ytsaurus.v1.ComputeSpecR\acompute\x12<\n" +
 	"\x06tablet\x18\x03 \x01(\v2$.yandex.cloud.ytsaurus.v1.TabletSpecR\x06tablet\x129\n" +
 	"\x05proxy\x18\x04 \x01(\v2#.yandex.cloud.ytsaurus.v1.ProxySpecR\x05proxy\x126\n" +
-	"\x04odin\x18\x05 \x01(\v2\".yandex.cloud.ytsaurus.v1.OdinSpecR\x04odinBe\n" +
+	"\x04odin\x18\x05 \x01(\v2\".yandex.cloud.ytsaurus.v1.OdinSpecR\x04odin\x12D\n" +
+	"\x06flavor\x18\x06 \x01(\x0e2,.yandex.cloud.ytsaurus.v1.ClusterSpec.FlavorR\x06flavor\"*\n" +
+	"\x06Flavor\x12\x16\n" +
+	"\x12FLAVOR_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04DEMO\x10\x01Be\n" +
 	"\x1cyandex.cloud.api.ytsaurus.v1ZEgithub.com/yandex-cloud/go-genproto/yandex/cloud/ytsaurus/v1;ytsaurusb\x06proto3"
 
 var (
@@ -1299,58 +1358,60 @@ func file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescData
 }
 
-var file_yandex_cloud_ytsaurus_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_ytsaurus_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_goTypes = []any{
 	(Cluster_Status)(0),                        // 0: yandex.cloud.ytsaurus.v1.Cluster.Status
 	(Cluster_Health)(0),                        // 1: yandex.cloud.ytsaurus.v1.Cluster.Health
-	(*Cluster)(nil),                            // 2: yandex.cloud.ytsaurus.v1.Cluster
-	(*StorageSpec)(nil),                        // 3: yandex.cloud.ytsaurus.v1.StorageSpec
-	(*ComputeSpec)(nil),                        // 4: yandex.cloud.ytsaurus.v1.ComputeSpec
-	(*HttpProxySpec)(nil),                      // 5: yandex.cloud.ytsaurus.v1.HttpProxySpec
-	(*RpcProxySpec)(nil),                       // 6: yandex.cloud.ytsaurus.v1.RpcProxySpec
-	(*TabletSpec)(nil),                         // 7: yandex.cloud.ytsaurus.v1.TabletSpec
-	(*ProxySpec)(nil),                          // 8: yandex.cloud.ytsaurus.v1.ProxySpec
-	(*OdinSpec)(nil),                           // 9: yandex.cloud.ytsaurus.v1.OdinSpec
-	(*ClusterSpec)(nil),                        // 10: yandex.cloud.ytsaurus.v1.ClusterSpec
-	nil,                                        // 11: yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
-	(*Cluster_Endpoints)(nil),                  // 12: yandex.cloud.ytsaurus.v1.Cluster.Endpoints
-	(*StorageSpec_HddSpec)(nil),                // 13: yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
-	(*StorageSpec_SsdSpec)(nil),                // 14: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
-	(*ComputeSpec_DiskSpec)(nil),               // 15: yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
-	(*ComputeSpec_ScalePolicy)(nil),            // 16: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
-	(*ComputeSpec_ScalePolicy_FixedScale)(nil), // 17: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
-	(*ComputeSpec_ScalePolicy_AutoScale)(nil),  // 18: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
-	(*timestamppb.Timestamp)(nil),              // 19: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),                // 20: google.protobuf.Duration
+	(ClusterSpec_Flavor)(0),                    // 2: yandex.cloud.ytsaurus.v1.ClusterSpec.Flavor
+	(*Cluster)(nil),                            // 3: yandex.cloud.ytsaurus.v1.Cluster
+	(*StorageSpec)(nil),                        // 4: yandex.cloud.ytsaurus.v1.StorageSpec
+	(*ComputeSpec)(nil),                        // 5: yandex.cloud.ytsaurus.v1.ComputeSpec
+	(*HttpProxySpec)(nil),                      // 6: yandex.cloud.ytsaurus.v1.HttpProxySpec
+	(*RpcProxySpec)(nil),                       // 7: yandex.cloud.ytsaurus.v1.RpcProxySpec
+	(*TabletSpec)(nil),                         // 8: yandex.cloud.ytsaurus.v1.TabletSpec
+	(*ProxySpec)(nil),                          // 9: yandex.cloud.ytsaurus.v1.ProxySpec
+	(*OdinSpec)(nil),                           // 10: yandex.cloud.ytsaurus.v1.OdinSpec
+	(*ClusterSpec)(nil),                        // 11: yandex.cloud.ytsaurus.v1.ClusterSpec
+	nil,                                        // 12: yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
+	(*Cluster_Endpoints)(nil),                  // 13: yandex.cloud.ytsaurus.v1.Cluster.Endpoints
+	(*StorageSpec_HddSpec)(nil),                // 14: yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
+	(*StorageSpec_SsdSpec)(nil),                // 15: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
+	(*ComputeSpec_DiskSpec)(nil),               // 16: yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
+	(*ComputeSpec_ScalePolicy)(nil),            // 17: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
+	(*ComputeSpec_ScalePolicy_FixedScale)(nil), // 18: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
+	(*ComputeSpec_ScalePolicy_AutoScale)(nil),  // 19: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
+	(*timestamppb.Timestamp)(nil),              // 20: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                // 21: google.protobuf.Duration
 }
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_depIdxs = []int32{
-	11, // 0: yandex.cloud.ytsaurus.v1.Cluster.labels:type_name -> yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
-	10, // 1: yandex.cloud.ytsaurus.v1.Cluster.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
-	19, // 2: yandex.cloud.ytsaurus.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	19, // 3: yandex.cloud.ytsaurus.v1.Cluster.updated_at:type_name -> google.protobuf.Timestamp
+	12, // 0: yandex.cloud.ytsaurus.v1.Cluster.labels:type_name -> yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
+	11, // 1: yandex.cloud.ytsaurus.v1.Cluster.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
+	20, // 2: yandex.cloud.ytsaurus.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	20, // 3: yandex.cloud.ytsaurus.v1.Cluster.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 4: yandex.cloud.ytsaurus.v1.Cluster.status:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Status
 	1,  // 5: yandex.cloud.ytsaurus.v1.Cluster.health:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Health
-	12, // 6: yandex.cloud.ytsaurus.v1.Cluster.endpoints:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Endpoints
-	13, // 7: yandex.cloud.ytsaurus.v1.StorageSpec.hdd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
-	14, // 8: yandex.cloud.ytsaurus.v1.StorageSpec.ssd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
-	15, // 9: yandex.cloud.ytsaurus.v1.ComputeSpec.disks:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
-	16, // 10: yandex.cloud.ytsaurus.v1.ComputeSpec.scale_policy:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
-	5,  // 11: yandex.cloud.ytsaurus.v1.ProxySpec.http:type_name -> yandex.cloud.ytsaurus.v1.HttpProxySpec
-	6,  // 12: yandex.cloud.ytsaurus.v1.ProxySpec.rpc:type_name -> yandex.cloud.ytsaurus.v1.RpcProxySpec
-	20, // 13: yandex.cloud.ytsaurus.v1.OdinSpec.checks_ttl:type_name -> google.protobuf.Duration
-	3,  // 14: yandex.cloud.ytsaurus.v1.ClusterSpec.storage:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec
-	4,  // 15: yandex.cloud.ytsaurus.v1.ClusterSpec.compute:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec
-	7,  // 16: yandex.cloud.ytsaurus.v1.ClusterSpec.tablet:type_name -> yandex.cloud.ytsaurus.v1.TabletSpec
-	8,  // 17: yandex.cloud.ytsaurus.v1.ClusterSpec.proxy:type_name -> yandex.cloud.ytsaurus.v1.ProxySpec
-	9,  // 18: yandex.cloud.ytsaurus.v1.ClusterSpec.odin:type_name -> yandex.cloud.ytsaurus.v1.OdinSpec
-	17, // 19: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.fixed:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
-	18, // 20: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.auto:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	13, // 6: yandex.cloud.ytsaurus.v1.Cluster.endpoints:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Endpoints
+	14, // 7: yandex.cloud.ytsaurus.v1.StorageSpec.hdd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
+	15, // 8: yandex.cloud.ytsaurus.v1.StorageSpec.ssd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
+	16, // 9: yandex.cloud.ytsaurus.v1.ComputeSpec.disks:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
+	17, // 10: yandex.cloud.ytsaurus.v1.ComputeSpec.scale_policy:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
+	6,  // 11: yandex.cloud.ytsaurus.v1.ProxySpec.http:type_name -> yandex.cloud.ytsaurus.v1.HttpProxySpec
+	7,  // 12: yandex.cloud.ytsaurus.v1.ProxySpec.rpc:type_name -> yandex.cloud.ytsaurus.v1.RpcProxySpec
+	21, // 13: yandex.cloud.ytsaurus.v1.OdinSpec.checks_ttl:type_name -> google.protobuf.Duration
+	4,  // 14: yandex.cloud.ytsaurus.v1.ClusterSpec.storage:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec
+	5,  // 15: yandex.cloud.ytsaurus.v1.ClusterSpec.compute:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec
+	8,  // 16: yandex.cloud.ytsaurus.v1.ClusterSpec.tablet:type_name -> yandex.cloud.ytsaurus.v1.TabletSpec
+	9,  // 17: yandex.cloud.ytsaurus.v1.ClusterSpec.proxy:type_name -> yandex.cloud.ytsaurus.v1.ProxySpec
+	10, // 18: yandex.cloud.ytsaurus.v1.ClusterSpec.odin:type_name -> yandex.cloud.ytsaurus.v1.OdinSpec
+	2,  // 19: yandex.cloud.ytsaurus.v1.ClusterSpec.flavor:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec.Flavor
+	18, // 20: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.fixed:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
+	19, // 21: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.auto:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ytsaurus_v1_cluster_proto_init() }
@@ -1367,7 +1428,7 @@ func file_yandex_cloud_ytsaurus_v1_cluster_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc), len(file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
