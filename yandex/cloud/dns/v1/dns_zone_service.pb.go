@@ -643,6 +643,109 @@ func (x *UpdateDnsZoneMetadata) GetDnsZoneId() string {
 	return ""
 }
 
+type MoveDnsZoneRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the DNS zone to move.
+	//
+	// To get the DNS zone ID, make a [DnsZoneService.List] request.
+	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	// ID of the folder to move the zone to.
+	//
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *MoveDnsZoneRequest) Reset() {
+	*x = MoveDnsZoneRequest{}
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveDnsZoneRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveDnsZoneRequest) ProtoMessage() {}
+
+func (x *MoveDnsZoneRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveDnsZoneRequest.ProtoReflect.Descriptor instead.
+func (*MoveDnsZoneRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *MoveDnsZoneRequest) GetDnsZoneId() string {
+	if x != nil {
+		return x.DnsZoneId
+	}
+	return ""
+}
+
+func (x *MoveDnsZoneRequest) GetDestinationFolderId() string {
+	if x != nil {
+		return x.DestinationFolderId
+	}
+	return ""
+}
+
+type MoveDnsZoneMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the DNS zone that is being moved.
+	DnsZoneId     string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MoveDnsZoneMetadata) Reset() {
+	*x = MoveDnsZoneMetadata{}
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveDnsZoneMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveDnsZoneMetadata) ProtoMessage() {}
+
+func (x *MoveDnsZoneMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveDnsZoneMetadata.ProtoReflect.Descriptor instead.
+func (*MoveDnsZoneMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *MoveDnsZoneMetadata) GetDnsZoneId() string {
+	if x != nil {
+		return x.DnsZoneId
+	}
+	return ""
+}
+
 type DeleteDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to delete.
@@ -655,7 +758,7 @@ type DeleteDnsZoneRequest struct {
 
 func (x *DeleteDnsZoneRequest) Reset() {
 	*x = DeleteDnsZoneRequest{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -667,7 +770,7 @@ func (x *DeleteDnsZoneRequest) String() string {
 func (*DeleteDnsZoneRequest) ProtoMessage() {}
 
 func (x *DeleteDnsZoneRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -680,7 +783,7 @@ func (x *DeleteDnsZoneRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDnsZoneRequest.ProtoReflect.Descriptor instead.
 func (*DeleteDnsZoneRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteDnsZoneRequest) GetDnsZoneId() string {
@@ -700,7 +803,7 @@ type DeleteDnsZoneMetadata struct {
 
 func (x *DeleteDnsZoneMetadata) Reset() {
 	*x = DeleteDnsZoneMetadata{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -712,7 +815,7 @@ func (x *DeleteDnsZoneMetadata) String() string {
 func (*DeleteDnsZoneMetadata) ProtoMessage() {}
 
 func (x *DeleteDnsZoneMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -725,7 +828,7 @@ func (x *DeleteDnsZoneMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDnsZoneMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteDnsZoneMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *DeleteDnsZoneMetadata) GetDnsZoneId() string {
@@ -751,7 +854,7 @@ type GetDnsZoneRecordSetRequest struct {
 
 func (x *GetDnsZoneRecordSetRequest) Reset() {
 	*x = GetDnsZoneRecordSetRequest{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -763,7 +866,7 @@ func (x *GetDnsZoneRecordSetRequest) String() string {
 func (*GetDnsZoneRecordSetRequest) ProtoMessage() {}
 
 func (x *GetDnsZoneRecordSetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -776,7 +879,7 @@ func (x *GetDnsZoneRecordSetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDnsZoneRecordSetRequest.ProtoReflect.Descriptor instead.
 func (*GetDnsZoneRecordSetRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetDnsZoneRecordSetRequest) GetDnsZoneId() string {
@@ -830,7 +933,7 @@ type ListDnsZoneRecordSetsRequest struct {
 
 func (x *ListDnsZoneRecordSetsRequest) Reset() {
 	*x = ListDnsZoneRecordSetsRequest{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -842,7 +945,7 @@ func (x *ListDnsZoneRecordSetsRequest) String() string {
 func (*ListDnsZoneRecordSetsRequest) ProtoMessage() {}
 
 func (x *ListDnsZoneRecordSetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +958,7 @@ func (x *ListDnsZoneRecordSetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDnsZoneRecordSetsRequest.ProtoReflect.Descriptor instead.
 func (*ListDnsZoneRecordSetsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListDnsZoneRecordSetsRequest) GetDnsZoneId() string {
@@ -902,7 +1005,7 @@ type ListDnsZoneRecordSetsResponse struct {
 
 func (x *ListDnsZoneRecordSetsResponse) Reset() {
 	*x = ListDnsZoneRecordSetsResponse{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -914,7 +1017,7 @@ func (x *ListDnsZoneRecordSetsResponse) String() string {
 func (*ListDnsZoneRecordSetsResponse) ProtoMessage() {}
 
 func (x *ListDnsZoneRecordSetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -927,7 +1030,7 @@ func (x *ListDnsZoneRecordSetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDnsZoneRecordSetsResponse.ProtoReflect.Descriptor instead.
 func (*ListDnsZoneRecordSetsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListDnsZoneRecordSetsResponse) GetRecordSets() []*RecordSet {
@@ -960,7 +1063,7 @@ type UpdateRecordSetsRequest struct {
 
 func (x *UpdateRecordSetsRequest) Reset() {
 	*x = UpdateRecordSetsRequest{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -972,7 +1075,7 @@ func (x *UpdateRecordSetsRequest) String() string {
 func (*UpdateRecordSetsRequest) ProtoMessage() {}
 
 func (x *UpdateRecordSetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -985,7 +1088,7 @@ func (x *UpdateRecordSetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRecordSetsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRecordSetsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UpdateRecordSetsRequest) GetDnsZoneId() string {
@@ -1017,7 +1120,7 @@ type UpdateRecordSetsMetadata struct {
 
 func (x *UpdateRecordSetsMetadata) Reset() {
 	*x = UpdateRecordSetsMetadata{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1029,7 +1132,7 @@ func (x *UpdateRecordSetsMetadata) String() string {
 func (*UpdateRecordSetsMetadata) ProtoMessage() {}
 
 func (x *UpdateRecordSetsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1042,7 +1145,7 @@ func (x *UpdateRecordSetsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRecordSetsMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateRecordSetsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{17}
 }
 
 type UpsertRecordSetsRequest struct {
@@ -1063,7 +1166,7 @@ type UpsertRecordSetsRequest struct {
 
 func (x *UpsertRecordSetsRequest) Reset() {
 	*x = UpsertRecordSetsRequest{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1075,7 +1178,7 @@ func (x *UpsertRecordSetsRequest) String() string {
 func (*UpsertRecordSetsRequest) ProtoMessage() {}
 
 func (x *UpsertRecordSetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1088,7 +1191,7 @@ func (x *UpsertRecordSetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpsertRecordSetsRequest.ProtoReflect.Descriptor instead.
 func (*UpsertRecordSetsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UpsertRecordSetsRequest) GetDnsZoneId() string {
@@ -1127,7 +1230,7 @@ type UpsertRecordSetsMetadata struct {
 
 func (x *UpsertRecordSetsMetadata) Reset() {
 	*x = UpsertRecordSetsMetadata{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1139,7 +1242,7 @@ func (x *UpsertRecordSetsMetadata) String() string {
 func (*UpsertRecordSetsMetadata) ProtoMessage() {}
 
 func (x *UpsertRecordSetsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1255,7 @@ func (x *UpsertRecordSetsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpsertRecordSetsMetadata.ProtoReflect.Descriptor instead.
 func (*UpsertRecordSetsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{19}
 }
 
 type RecordSetDiff struct {
@@ -1167,7 +1270,7 @@ type RecordSetDiff struct {
 
 func (x *RecordSetDiff) Reset() {
 	*x = RecordSetDiff{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1179,7 +1282,7 @@ func (x *RecordSetDiff) String() string {
 func (*RecordSetDiff) ProtoMessage() {}
 
 func (x *RecordSetDiff) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1192,7 +1295,7 @@ func (x *RecordSetDiff) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordSetDiff.ProtoReflect.Descriptor instead.
 func (*RecordSetDiff) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RecordSetDiff) GetAdditions() []*RecordSet {
@@ -1236,7 +1339,7 @@ type ListDnsZoneOperationsRequest struct {
 
 func (x *ListDnsZoneOperationsRequest) Reset() {
 	*x = ListDnsZoneOperationsRequest{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1248,7 +1351,7 @@ func (x *ListDnsZoneOperationsRequest) String() string {
 func (*ListDnsZoneOperationsRequest) ProtoMessage() {}
 
 func (x *ListDnsZoneOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1261,7 +1364,7 @@ func (x *ListDnsZoneOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDnsZoneOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListDnsZoneOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListDnsZoneOperationsRequest) GetDnsZoneId() string {
@@ -1308,7 +1411,7 @@ type ListDnsZoneOperationsResponse struct {
 
 func (x *ListDnsZoneOperationsResponse) Reset() {
 	*x = ListDnsZoneOperationsResponse{}
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1320,7 +1423,7 @@ func (x *ListDnsZoneOperationsResponse) String() string {
 func (*ListDnsZoneOperationsResponse) ProtoMessage() {}
 
 func (x *ListDnsZoneOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1333,7 +1436,7 @@ func (x *ListDnsZoneOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDnsZoneOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListDnsZoneOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListDnsZoneOperationsResponse) GetOperations() []*operation.Operation {
@@ -1403,6 +1506,12 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +
 	"\x15UpdateDnsZoneMetadata\x12\x1e\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x82\x01\n" +
+	"\x12MoveDnsZoneRequest\x12*\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\n" +
+	"\xe8\xc71\x01\x8a\xc81\x0220R\tdnsZoneId\x12@\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"5\n" +
+	"\x13MoveDnsZoneMetadata\x12\x1e\n" +
 	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\">\n" +
 	"\x14DeleteDnsZoneRequest\x12&\n" +
 	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\"7\n" +
@@ -1457,14 +1566,16 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xc8\x13\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xec\x14\n" +
 	"\x0eDnsZoneService\x12p\n" +
 	"\x03Get\x12&.yandex.cloud.dns.v1.GetDnsZoneRequest\x1a\x1c.yandex.cloud.dns.v1.DnsZone\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/dns/v1/zones/{dns_zone_id}\x12r\n" +
 	"\x04List\x12(.yandex.cloud.dns.v1.ListDnsZonesRequest\x1a).yandex.cloud.dns.v1.ListDnsZonesResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/dns/v1/zones\x12\x94\x01\n" +
 	"\x06Create\x12).yandex.cloud.dns.v1.CreateDnsZoneRequest\x1a!.yandex.cloud.operation.Operation\"<\xb2\xd2* \n" +
 	"\x15CreateDnsZoneMetadata\x12\aDnsZone\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/dns/v1/zones\x12\xa2\x01\n" +
 	"\x06Update\x12).yandex.cloud.dns.v1.UpdateDnsZoneRequest\x1a!.yandex.cloud.operation.Operation\"J\xb2\xd2* \n" +
-	"\x15UpdateDnsZoneMetadata\x12\aDnsZone\x82\xd3\xe4\x93\x02 :\x01*2\x1b/dns/v1/zones/{dns_zone_id}\x12\xad\x01\n" +
+	"\x15UpdateDnsZoneMetadata\x12\aDnsZone\x82\xd3\xe4\x93\x02 :\x01*2\x1b/dns/v1/zones/{dns_zone_id}\x12\xa1\x01\n" +
+	"\x04Move\x12'.yandex.cloud.dns.v1.MoveDnsZoneRequest\x1a!.yandex.cloud.operation.Operation\"M\xb2\xd2*\x1e\n" +
+	"\x13MoveDnsZoneMetadata\x12\aDnsZone\x82\xd3\xe4\x93\x02%:\x01*\" /dns/v1/zones/{dns_zone_id}:move\x12\xad\x01\n" +
 	"\x06Delete\x12).yandex.cloud.dns.v1.DeleteDnsZoneRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2*.\n" +
 	"\x15DeleteDnsZoneMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1d*\x1b/dns/v1/zones/{dns_zone_id}\x12\x91\x01\n" +
 	"\fGetRecordSet\x12/.yandex.cloud.dns.v1.GetDnsZoneRecordSetRequest\x1a\x1e.yandex.cloud.dns.v1.RecordSet\"0\x82\xd3\xe4\x93\x02*\x12(/dns/v1/zones/{dns_zone_id}:getRecordSet\x12\xab\x01\n" +
@@ -1495,7 +1606,7 @@ func file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDescData
 }
 
-var file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_yandex_cloud_dns_v1_dns_zone_service_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_yandex_cloud_dns_v1_dns_zone_service_proto_goTypes = []any{
 	(*UpdateDnsZonePrivateNetworksRequest)(nil),  // 0: yandex.cloud.dns.v1.UpdateDnsZonePrivateNetworksRequest
 	(*UpdateDnsZonePrivateNetworksMetadata)(nil), // 1: yandex.cloud.dns.v1.UpdateDnsZonePrivateNetworksMetadata
@@ -1506,79 +1617,83 @@ var file_yandex_cloud_dns_v1_dns_zone_service_proto_goTypes = []any{
 	(*CreateDnsZoneMetadata)(nil),                // 6: yandex.cloud.dns.v1.CreateDnsZoneMetadata
 	(*UpdateDnsZoneRequest)(nil),                 // 7: yandex.cloud.dns.v1.UpdateDnsZoneRequest
 	(*UpdateDnsZoneMetadata)(nil),                // 8: yandex.cloud.dns.v1.UpdateDnsZoneMetadata
-	(*DeleteDnsZoneRequest)(nil),                 // 9: yandex.cloud.dns.v1.DeleteDnsZoneRequest
-	(*DeleteDnsZoneMetadata)(nil),                // 10: yandex.cloud.dns.v1.DeleteDnsZoneMetadata
-	(*GetDnsZoneRecordSetRequest)(nil),           // 11: yandex.cloud.dns.v1.GetDnsZoneRecordSetRequest
-	(*ListDnsZoneRecordSetsRequest)(nil),         // 12: yandex.cloud.dns.v1.ListDnsZoneRecordSetsRequest
-	(*ListDnsZoneRecordSetsResponse)(nil),        // 13: yandex.cloud.dns.v1.ListDnsZoneRecordSetsResponse
-	(*UpdateRecordSetsRequest)(nil),              // 14: yandex.cloud.dns.v1.UpdateRecordSetsRequest
-	(*UpdateRecordSetsMetadata)(nil),             // 15: yandex.cloud.dns.v1.UpdateRecordSetsMetadata
-	(*UpsertRecordSetsRequest)(nil),              // 16: yandex.cloud.dns.v1.UpsertRecordSetsRequest
-	(*UpsertRecordSetsMetadata)(nil),             // 17: yandex.cloud.dns.v1.UpsertRecordSetsMetadata
-	(*RecordSetDiff)(nil),                        // 18: yandex.cloud.dns.v1.RecordSetDiff
-	(*ListDnsZoneOperationsRequest)(nil),         // 19: yandex.cloud.dns.v1.ListDnsZoneOperationsRequest
-	(*ListDnsZoneOperationsResponse)(nil),        // 20: yandex.cloud.dns.v1.ListDnsZoneOperationsResponse
-	nil,                                          // 21: yandex.cloud.dns.v1.CreateDnsZoneRequest.LabelsEntry
-	nil,                                          // 22: yandex.cloud.dns.v1.UpdateDnsZoneRequest.LabelsEntry
-	(*DnsZone)(nil),                              // 23: yandex.cloud.dns.v1.DnsZone
-	(*PrivateVisibility)(nil),                    // 24: yandex.cloud.dns.v1.PrivateVisibility
-	(*PublicVisibility)(nil),                     // 25: yandex.cloud.dns.v1.PublicVisibility
-	(*fieldmaskpb.FieldMask)(nil),                // 26: google.protobuf.FieldMask
-	(*RecordSet)(nil),                            // 27: yandex.cloud.dns.v1.RecordSet
-	(*operation.Operation)(nil),                  // 28: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),     // 29: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),      // 30: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),   // 31: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),    // 32: yandex.cloud.access.ListAccessBindingsResponse
+	(*MoveDnsZoneRequest)(nil),                   // 9: yandex.cloud.dns.v1.MoveDnsZoneRequest
+	(*MoveDnsZoneMetadata)(nil),                  // 10: yandex.cloud.dns.v1.MoveDnsZoneMetadata
+	(*DeleteDnsZoneRequest)(nil),                 // 11: yandex.cloud.dns.v1.DeleteDnsZoneRequest
+	(*DeleteDnsZoneMetadata)(nil),                // 12: yandex.cloud.dns.v1.DeleteDnsZoneMetadata
+	(*GetDnsZoneRecordSetRequest)(nil),           // 13: yandex.cloud.dns.v1.GetDnsZoneRecordSetRequest
+	(*ListDnsZoneRecordSetsRequest)(nil),         // 14: yandex.cloud.dns.v1.ListDnsZoneRecordSetsRequest
+	(*ListDnsZoneRecordSetsResponse)(nil),        // 15: yandex.cloud.dns.v1.ListDnsZoneRecordSetsResponse
+	(*UpdateRecordSetsRequest)(nil),              // 16: yandex.cloud.dns.v1.UpdateRecordSetsRequest
+	(*UpdateRecordSetsMetadata)(nil),             // 17: yandex.cloud.dns.v1.UpdateRecordSetsMetadata
+	(*UpsertRecordSetsRequest)(nil),              // 18: yandex.cloud.dns.v1.UpsertRecordSetsRequest
+	(*UpsertRecordSetsMetadata)(nil),             // 19: yandex.cloud.dns.v1.UpsertRecordSetsMetadata
+	(*RecordSetDiff)(nil),                        // 20: yandex.cloud.dns.v1.RecordSetDiff
+	(*ListDnsZoneOperationsRequest)(nil),         // 21: yandex.cloud.dns.v1.ListDnsZoneOperationsRequest
+	(*ListDnsZoneOperationsResponse)(nil),        // 22: yandex.cloud.dns.v1.ListDnsZoneOperationsResponse
+	nil,                                          // 23: yandex.cloud.dns.v1.CreateDnsZoneRequest.LabelsEntry
+	nil,                                          // 24: yandex.cloud.dns.v1.UpdateDnsZoneRequest.LabelsEntry
+	(*DnsZone)(nil),                              // 25: yandex.cloud.dns.v1.DnsZone
+	(*PrivateVisibility)(nil),                    // 26: yandex.cloud.dns.v1.PrivateVisibility
+	(*PublicVisibility)(nil),                     // 27: yandex.cloud.dns.v1.PublicVisibility
+	(*fieldmaskpb.FieldMask)(nil),                // 28: google.protobuf.FieldMask
+	(*RecordSet)(nil),                            // 29: yandex.cloud.dns.v1.RecordSet
+	(*operation.Operation)(nil),                  // 30: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),     // 31: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),      // 32: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),   // 33: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),    // 34: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_dns_v1_dns_zone_service_proto_depIdxs = []int32{
-	23, // 0: yandex.cloud.dns.v1.ListDnsZonesResponse.dns_zones:type_name -> yandex.cloud.dns.v1.DnsZone
-	21, // 1: yandex.cloud.dns.v1.CreateDnsZoneRequest.labels:type_name -> yandex.cloud.dns.v1.CreateDnsZoneRequest.LabelsEntry
-	24, // 2: yandex.cloud.dns.v1.CreateDnsZoneRequest.private_visibility:type_name -> yandex.cloud.dns.v1.PrivateVisibility
-	25, // 3: yandex.cloud.dns.v1.CreateDnsZoneRequest.public_visibility:type_name -> yandex.cloud.dns.v1.PublicVisibility
-	26, // 4: yandex.cloud.dns.v1.UpdateDnsZoneRequest.update_mask:type_name -> google.protobuf.FieldMask
-	22, // 5: yandex.cloud.dns.v1.UpdateDnsZoneRequest.labels:type_name -> yandex.cloud.dns.v1.UpdateDnsZoneRequest.LabelsEntry
-	24, // 6: yandex.cloud.dns.v1.UpdateDnsZoneRequest.private_visibility:type_name -> yandex.cloud.dns.v1.PrivateVisibility
-	25, // 7: yandex.cloud.dns.v1.UpdateDnsZoneRequest.public_visibility:type_name -> yandex.cloud.dns.v1.PublicVisibility
-	27, // 8: yandex.cloud.dns.v1.ListDnsZoneRecordSetsResponse.record_sets:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 9: yandex.cloud.dns.v1.UpdateRecordSetsRequest.deletions:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 10: yandex.cloud.dns.v1.UpdateRecordSetsRequest.additions:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 11: yandex.cloud.dns.v1.UpsertRecordSetsRequest.deletions:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 12: yandex.cloud.dns.v1.UpsertRecordSetsRequest.replacements:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 13: yandex.cloud.dns.v1.UpsertRecordSetsRequest.merges:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 14: yandex.cloud.dns.v1.RecordSetDiff.additions:type_name -> yandex.cloud.dns.v1.RecordSet
-	27, // 15: yandex.cloud.dns.v1.RecordSetDiff.deletions:type_name -> yandex.cloud.dns.v1.RecordSet
-	28, // 16: yandex.cloud.dns.v1.ListDnsZoneOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	25, // 0: yandex.cloud.dns.v1.ListDnsZonesResponse.dns_zones:type_name -> yandex.cloud.dns.v1.DnsZone
+	23, // 1: yandex.cloud.dns.v1.CreateDnsZoneRequest.labels:type_name -> yandex.cloud.dns.v1.CreateDnsZoneRequest.LabelsEntry
+	26, // 2: yandex.cloud.dns.v1.CreateDnsZoneRequest.private_visibility:type_name -> yandex.cloud.dns.v1.PrivateVisibility
+	27, // 3: yandex.cloud.dns.v1.CreateDnsZoneRequest.public_visibility:type_name -> yandex.cloud.dns.v1.PublicVisibility
+	28, // 4: yandex.cloud.dns.v1.UpdateDnsZoneRequest.update_mask:type_name -> google.protobuf.FieldMask
+	24, // 5: yandex.cloud.dns.v1.UpdateDnsZoneRequest.labels:type_name -> yandex.cloud.dns.v1.UpdateDnsZoneRequest.LabelsEntry
+	26, // 6: yandex.cloud.dns.v1.UpdateDnsZoneRequest.private_visibility:type_name -> yandex.cloud.dns.v1.PrivateVisibility
+	27, // 7: yandex.cloud.dns.v1.UpdateDnsZoneRequest.public_visibility:type_name -> yandex.cloud.dns.v1.PublicVisibility
+	29, // 8: yandex.cloud.dns.v1.ListDnsZoneRecordSetsResponse.record_sets:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 9: yandex.cloud.dns.v1.UpdateRecordSetsRequest.deletions:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 10: yandex.cloud.dns.v1.UpdateRecordSetsRequest.additions:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 11: yandex.cloud.dns.v1.UpsertRecordSetsRequest.deletions:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 12: yandex.cloud.dns.v1.UpsertRecordSetsRequest.replacements:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 13: yandex.cloud.dns.v1.UpsertRecordSetsRequest.merges:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 14: yandex.cloud.dns.v1.RecordSetDiff.additions:type_name -> yandex.cloud.dns.v1.RecordSet
+	29, // 15: yandex.cloud.dns.v1.RecordSetDiff.deletions:type_name -> yandex.cloud.dns.v1.RecordSet
+	30, // 16: yandex.cloud.dns.v1.ListDnsZoneOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	2,  // 17: yandex.cloud.dns.v1.DnsZoneService.Get:input_type -> yandex.cloud.dns.v1.GetDnsZoneRequest
 	3,  // 18: yandex.cloud.dns.v1.DnsZoneService.List:input_type -> yandex.cloud.dns.v1.ListDnsZonesRequest
 	5,  // 19: yandex.cloud.dns.v1.DnsZoneService.Create:input_type -> yandex.cloud.dns.v1.CreateDnsZoneRequest
 	7,  // 20: yandex.cloud.dns.v1.DnsZoneService.Update:input_type -> yandex.cloud.dns.v1.UpdateDnsZoneRequest
-	9,  // 21: yandex.cloud.dns.v1.DnsZoneService.Delete:input_type -> yandex.cloud.dns.v1.DeleteDnsZoneRequest
-	11, // 22: yandex.cloud.dns.v1.DnsZoneService.GetRecordSet:input_type -> yandex.cloud.dns.v1.GetDnsZoneRecordSetRequest
-	12, // 23: yandex.cloud.dns.v1.DnsZoneService.ListRecordSets:input_type -> yandex.cloud.dns.v1.ListDnsZoneRecordSetsRequest
-	14, // 24: yandex.cloud.dns.v1.DnsZoneService.UpdateRecordSets:input_type -> yandex.cloud.dns.v1.UpdateRecordSetsRequest
-	16, // 25: yandex.cloud.dns.v1.DnsZoneService.UpsertRecordSets:input_type -> yandex.cloud.dns.v1.UpsertRecordSetsRequest
-	19, // 26: yandex.cloud.dns.v1.DnsZoneService.ListOperations:input_type -> yandex.cloud.dns.v1.ListDnsZoneOperationsRequest
-	29, // 27: yandex.cloud.dns.v1.DnsZoneService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	30, // 28: yandex.cloud.dns.v1.DnsZoneService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	31, // 29: yandex.cloud.dns.v1.DnsZoneService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	0,  // 30: yandex.cloud.dns.v1.DnsZoneService.UpdatePrivateNetworks:input_type -> yandex.cloud.dns.v1.UpdateDnsZonePrivateNetworksRequest
-	23, // 31: yandex.cloud.dns.v1.DnsZoneService.Get:output_type -> yandex.cloud.dns.v1.DnsZone
-	4,  // 32: yandex.cloud.dns.v1.DnsZoneService.List:output_type -> yandex.cloud.dns.v1.ListDnsZonesResponse
-	28, // 33: yandex.cloud.dns.v1.DnsZoneService.Create:output_type -> yandex.cloud.operation.Operation
-	28, // 34: yandex.cloud.dns.v1.DnsZoneService.Update:output_type -> yandex.cloud.operation.Operation
-	28, // 35: yandex.cloud.dns.v1.DnsZoneService.Delete:output_type -> yandex.cloud.operation.Operation
-	27, // 36: yandex.cloud.dns.v1.DnsZoneService.GetRecordSet:output_type -> yandex.cloud.dns.v1.RecordSet
-	13, // 37: yandex.cloud.dns.v1.DnsZoneService.ListRecordSets:output_type -> yandex.cloud.dns.v1.ListDnsZoneRecordSetsResponse
-	28, // 38: yandex.cloud.dns.v1.DnsZoneService.UpdateRecordSets:output_type -> yandex.cloud.operation.Operation
-	28, // 39: yandex.cloud.dns.v1.DnsZoneService.UpsertRecordSets:output_type -> yandex.cloud.operation.Operation
-	20, // 40: yandex.cloud.dns.v1.DnsZoneService.ListOperations:output_type -> yandex.cloud.dns.v1.ListDnsZoneOperationsResponse
-	32, // 41: yandex.cloud.dns.v1.DnsZoneService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	28, // 42: yandex.cloud.dns.v1.DnsZoneService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	28, // 43: yandex.cloud.dns.v1.DnsZoneService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	28, // 44: yandex.cloud.dns.v1.DnsZoneService.UpdatePrivateNetworks:output_type -> yandex.cloud.operation.Operation
-	31, // [31:45] is the sub-list for method output_type
-	17, // [17:31] is the sub-list for method input_type
+	9,  // 21: yandex.cloud.dns.v1.DnsZoneService.Move:input_type -> yandex.cloud.dns.v1.MoveDnsZoneRequest
+	11, // 22: yandex.cloud.dns.v1.DnsZoneService.Delete:input_type -> yandex.cloud.dns.v1.DeleteDnsZoneRequest
+	13, // 23: yandex.cloud.dns.v1.DnsZoneService.GetRecordSet:input_type -> yandex.cloud.dns.v1.GetDnsZoneRecordSetRequest
+	14, // 24: yandex.cloud.dns.v1.DnsZoneService.ListRecordSets:input_type -> yandex.cloud.dns.v1.ListDnsZoneRecordSetsRequest
+	16, // 25: yandex.cloud.dns.v1.DnsZoneService.UpdateRecordSets:input_type -> yandex.cloud.dns.v1.UpdateRecordSetsRequest
+	18, // 26: yandex.cloud.dns.v1.DnsZoneService.UpsertRecordSets:input_type -> yandex.cloud.dns.v1.UpsertRecordSetsRequest
+	21, // 27: yandex.cloud.dns.v1.DnsZoneService.ListOperations:input_type -> yandex.cloud.dns.v1.ListDnsZoneOperationsRequest
+	31, // 28: yandex.cloud.dns.v1.DnsZoneService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	32, // 29: yandex.cloud.dns.v1.DnsZoneService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	33, // 30: yandex.cloud.dns.v1.DnsZoneService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	0,  // 31: yandex.cloud.dns.v1.DnsZoneService.UpdatePrivateNetworks:input_type -> yandex.cloud.dns.v1.UpdateDnsZonePrivateNetworksRequest
+	25, // 32: yandex.cloud.dns.v1.DnsZoneService.Get:output_type -> yandex.cloud.dns.v1.DnsZone
+	4,  // 33: yandex.cloud.dns.v1.DnsZoneService.List:output_type -> yandex.cloud.dns.v1.ListDnsZonesResponse
+	30, // 34: yandex.cloud.dns.v1.DnsZoneService.Create:output_type -> yandex.cloud.operation.Operation
+	30, // 35: yandex.cloud.dns.v1.DnsZoneService.Update:output_type -> yandex.cloud.operation.Operation
+	30, // 36: yandex.cloud.dns.v1.DnsZoneService.Move:output_type -> yandex.cloud.operation.Operation
+	30, // 37: yandex.cloud.dns.v1.DnsZoneService.Delete:output_type -> yandex.cloud.operation.Operation
+	29, // 38: yandex.cloud.dns.v1.DnsZoneService.GetRecordSet:output_type -> yandex.cloud.dns.v1.RecordSet
+	15, // 39: yandex.cloud.dns.v1.DnsZoneService.ListRecordSets:output_type -> yandex.cloud.dns.v1.ListDnsZoneRecordSetsResponse
+	30, // 40: yandex.cloud.dns.v1.DnsZoneService.UpdateRecordSets:output_type -> yandex.cloud.operation.Operation
+	30, // 41: yandex.cloud.dns.v1.DnsZoneService.UpsertRecordSets:output_type -> yandex.cloud.operation.Operation
+	22, // 42: yandex.cloud.dns.v1.DnsZoneService.ListOperations:output_type -> yandex.cloud.dns.v1.ListDnsZoneOperationsResponse
+	34, // 43: yandex.cloud.dns.v1.DnsZoneService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	30, // 44: yandex.cloud.dns.v1.DnsZoneService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	30, // 45: yandex.cloud.dns.v1.DnsZoneService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	30, // 46: yandex.cloud.dns.v1.DnsZoneService.UpdatePrivateNetworks:output_type -> yandex.cloud.operation.Operation
+	32, // [32:47] is the sub-list for method output_type
+	17, // [17:32] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name
 	17, // [17:17] is the sub-list for extension extendee
 	0,  // [0:17] is the sub-list for field type_name
@@ -1596,7 +1711,7 @@ func file_yandex_cloud_dns_v1_dns_zone_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc), len(file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -25,6 +25,7 @@ const (
 	DnsZoneService_List_FullMethodName                  = "/yandex.cloud.dns.v1.DnsZoneService/List"
 	DnsZoneService_Create_FullMethodName                = "/yandex.cloud.dns.v1.DnsZoneService/Create"
 	DnsZoneService_Update_FullMethodName                = "/yandex.cloud.dns.v1.DnsZoneService/Update"
+	DnsZoneService_Move_FullMethodName                  = "/yandex.cloud.dns.v1.DnsZoneService/Move"
 	DnsZoneService_Delete_FullMethodName                = "/yandex.cloud.dns.v1.DnsZoneService/Delete"
 	DnsZoneService_GetRecordSet_FullMethodName          = "/yandex.cloud.dns.v1.DnsZoneService/GetRecordSet"
 	DnsZoneService_ListRecordSets_FullMethodName        = "/yandex.cloud.dns.v1.DnsZoneService/ListRecordSets"
@@ -53,6 +54,8 @@ type DnsZoneServiceClient interface {
 	Create(ctx context.Context, in *CreateDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified DNS zone.
 	Update(ctx context.Context, in *UpdateDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves the specified DNS zone to another folder.
+	Move(ctx context.Context, in *MoveDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified DNS zone.
 	Delete(ctx context.Context, in *DeleteDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified record set.
@@ -123,6 +126,16 @@ func (c *dnsZoneServiceClient) Update(ctx context.Context, in *UpdateDnsZoneRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, DnsZoneService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dnsZoneServiceClient) Move(ctx context.Context, in *MoveDnsZoneRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DnsZoneService_Move_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -245,6 +258,8 @@ type DnsZoneServiceServer interface {
 	Create(context.Context, *CreateDnsZoneRequest) (*operation.Operation, error)
 	// Updates the specified DNS zone.
 	Update(context.Context, *UpdateDnsZoneRequest) (*operation.Operation, error)
+	// Moves the specified DNS zone to another folder.
+	Move(context.Context, *MoveDnsZoneRequest) (*operation.Operation, error)
 	// Deletes the specified DNS zone.
 	Delete(context.Context, *DeleteDnsZoneRequest) (*operation.Operation, error)
 	// Returns the specified record set.
@@ -291,6 +306,9 @@ func (UnimplementedDnsZoneServiceServer) Create(context.Context, *CreateDnsZoneR
 }
 func (UnimplementedDnsZoneServiceServer) Update(context.Context, *UpdateDnsZoneRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedDnsZoneServiceServer) Move(context.Context, *MoveDnsZoneRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedDnsZoneServiceServer) Delete(context.Context, *DeleteDnsZoneRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -410,6 +428,24 @@ func _DnsZoneService_Update_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DnsZoneServiceServer).Update(ctx, req.(*UpdateDnsZoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DnsZoneService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveDnsZoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsZoneServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DnsZoneService_Move_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsZoneServiceServer).Move(ctx, req.(*MoveDnsZoneRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -616,6 +652,10 @@ var DnsZoneService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _DnsZoneService_Update_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _DnsZoneService_Move_Handler,
 		},
 		{
 			MethodName: "Delete",

@@ -123,6 +123,18 @@ func (m *UpdateDnsZoneMetadata) SetDnsZoneId(v string) {
 	m.DnsZoneId = v
 }
 
+func (m *MoveDnsZoneRequest) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *MoveDnsZoneRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveDnsZoneMetadata) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
 func (m *DeleteDnsZoneRequest) SetDnsZoneId(v string) {
 	m.DnsZoneId = v
 }
