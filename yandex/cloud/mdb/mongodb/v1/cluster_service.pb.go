@@ -8,6 +8,7 @@ package mongodb
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config"
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
@@ -7549,7 +7550,7 @@ var File_yandex_cloud_mdb_mongodb_v1_cluster_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/mongodb/v1/cluster_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a(yandex/cloud/mdb/mongodb/v1/backup.proto\x1a)yandex/cloud/mdb/mongodb/v1/cluster.proto\x1a0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb4_0.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb4_2.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb4_4.proto\x1a>yandex/cloud/mdb/mongodb/v1/config/mongodb4_4_enterprise.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto\x1a>yandex/cloud/mdb/mongodb/v1/config/mongodb5_0_enterprise.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb6_0.proto\x1a>yandex/cloud/mdb/mongodb/v1/config/mongodb6_0_enterprise.proto\x1a*yandex/cloud/mdb/mongodb/v1/database.proto\x1a-yandex/cloud/mdb/mongodb/v1/maintenance.proto\x1a&yandex/cloud/mdb/mongodb/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"1yandex/cloud/mdb/mongodb/v1/cluster_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a(yandex/cloud/mdb/mongodb/v1/backup.proto\x1a)yandex/cloud/mdb/mongodb/v1/cluster.proto\x1a0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb4_0.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb4_2.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb4_4.proto\x1a>yandex/cloud/mdb/mongodb/v1/config/mongodb4_4_enterprise.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto\x1a>yandex/cloud/mdb/mongodb/v1/config/mongodb5_0_enterprise.proto\x1a3yandex/cloud/mdb/mongodb/v1/config/mongodb6_0.proto\x1a>yandex/cloud/mdb/mongodb/v1/config/mongodb6_0_enterprise.proto\x1a*yandex/cloud/mdb/mongodb/v1/database.proto\x1a-yandex/cloud/mdb/mongodb/v1/maintenance.proto\x1a&yandex/cloud/mdb/mongodb/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -8181,7 +8182,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\x17performance_diagnostics\x18\r \x01(\v29.yandex.cloud.mdb.mongodb.v1.PerformanceDiagnosticsConfigR\x16performanceDiagnostics\x12;\n" +
 	"\x06access\x18\x06 \x01(\v2#.yandex.cloud.mdb.mongodb.v1.AccessR\x06access\x12B\n" +
 	"\amongodb\x18\x14 \x01(\v2(.yandex.cloud.mdb.mongodb.v1.MongodbSpecR\amongodbB\x0e\n" +
-	"\fmongodb_specJ\x04\b\x10\x10\x142\xe0)\n" +
+	"\fmongodb_specJ\x04\b\x10\x10\x142\xa7/\n" +
 	"\x0eClusterService\x12\x8e\x01\n" +
 	"\x03Get\x12..yandex.cloud.mdb.mongodb.v1.GetClusterRequest\x1a$.yandex.cloud.mdb.mongodb.v1.Cluster\"1\x82\xd3\xe4\x93\x02+\x12)/managed-mongodb/v1/clusters/{cluster_id}\x12\x91\x01\n" +
 	"\x04List\x120.yandex.cloud.mdb.mongodb.v1.ListClustersRequest\x1a1.yandex.cloud.mdb.mongodb.v1.ListClustersResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/managed-mongodb/v1/clusters\x12\xab\x01\n" +
@@ -8229,7 +8230,12 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\fRestartHosts\x120.yandex.cloud.mdb.mongodb.v1.RestartHostsRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*-\n" +
 	"\x14RestartHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02;:\x01*\"6/managed-mongodb/v1/clusters/{cluster_id}:restartHosts\x12\xdb\x01\n" +
 	"\rStepdownHosts\x121.yandex.cloud.mdb.mongodb.v1.StepdownHostsRequest\x1a!.yandex.cloud.operation.Operation\"t\xb2\xd2*.\n" +
-	"\x15StepdownHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02<:\x01*\"7/managed-mongodb/v1/clusters/{cluster_id}:stepdownHostsBj\n" +
+	"\x15StepdownHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02<:\x01*\"7/managed-mongodb/v1/clusters/{cluster_id}:stepdownHosts\x12\xbc\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/managed-mongodb/v1/clusters/{resource_id}:listAccessBindings\x12\xfb\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x93\x01\xb2\xd2*H\n" +
+	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02A:\x01*\"</managed-mongodb/v1/clusters/{resource_id}:setAccessBindings\x12\x87\x02\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x99\x01\xb2\xd2*K\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02D:\x01*2?/managed-mongodb/v1/clusters/{resource_id}:updateAccessBindingsBj\n" +
 	"\x1fyandex.cloud.api.mdb.mongodb.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1;mongodbb\x06proto3"
 
 var (
@@ -8418,6 +8424,10 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_goTypes = []any{
 	(*config.MongodConfig)(nil),                 // 168: yandex.cloud.mdb.mongodb.v1.config.MongodConfig
 	(*config.MongoCfgConfig)(nil),               // 169: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
 	(*config.MongosConfig)(nil),                 // 170: yandex.cloud.mdb.mongodb.v1.config.MongosConfig
+	(*access.ListAccessBindingsRequest)(nil),    // 171: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),     // 172: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),  // 173: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),   // 174: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_depIdxs = []int32{
 	119, // 0: yandex.cloud.mdb.mongodb.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.mongodb.v1.Cluster
@@ -8690,35 +8700,41 @@ var file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_depIdxs = []int32{
 	51,  // 267: yandex.cloud.mdb.mongodb.v1.ClusterService.ResetupHosts:input_type -> yandex.cloud.mdb.mongodb.v1.ResetupHostsRequest
 	53,  // 268: yandex.cloud.mdb.mongodb.v1.ClusterService.RestartHosts:input_type -> yandex.cloud.mdb.mongodb.v1.RestartHostsRequest
 	55,  // 269: yandex.cloud.mdb.mongodb.v1.ClusterService.StepdownHosts:input_type -> yandex.cloud.mdb.mongodb.v1.StepdownHostsRequest
-	119, // 270: yandex.cloud.mdb.mongodb.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.mongodb.v1.Cluster
-	5,   // 271: yandex.cloud.mdb.mongodb.v1.ClusterService.List:output_type -> yandex.cloud.mdb.mongodb.v1.ListClustersResponse
-	128, // 272: yandex.cloud.mdb.mongodb.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	128, // 273: yandex.cloud.mdb.mongodb.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	128, // 274: yandex.cloud.mdb.mongodb.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	128, // 275: yandex.cloud.mdb.mongodb.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	128, // 276: yandex.cloud.mdb.mongodb.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	128, // 277: yandex.cloud.mdb.mongodb.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	128, // 278: yandex.cloud.mdb.mongodb.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	128, // 279: yandex.cloud.mdb.mongodb.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	128, // 280: yandex.cloud.mdb.mongodb.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	26,  // 281: yandex.cloud.mdb.mongodb.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterLogsResponse
-	27,  // 282: yandex.cloud.mdb.mongodb.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.mongodb.v1.StreamLogRecord
-	30,  // 283: yandex.cloud.mdb.mongodb.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterOperationsResponse
-	32,  // 284: yandex.cloud.mdb.mongodb.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterBackupsResponse
-	34,  // 285: yandex.cloud.mdb.mongodb.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterHostsResponse
-	128, // 286: yandex.cloud.mdb.mongodb.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	128, // 287: yandex.cloud.mdb.mongodb.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	128, // 288: yandex.cloud.mdb.mongodb.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
-	128, // 289: yandex.cloud.mdb.mongodb.v1.ClusterService.EnableSharding:output_type -> yandex.cloud.operation.Operation
-	134, // 290: yandex.cloud.mdb.mongodb.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.mongodb.v1.Shard
-	46,  // 291: yandex.cloud.mdb.mongodb.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterShardsResponse
-	128, // 292: yandex.cloud.mdb.mongodb.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
-	128, // 293: yandex.cloud.mdb.mongodb.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
-	128, // 294: yandex.cloud.mdb.mongodb.v1.ClusterService.ResetupHosts:output_type -> yandex.cloud.operation.Operation
-	128, // 295: yandex.cloud.mdb.mongodb.v1.ClusterService.RestartHosts:output_type -> yandex.cloud.operation.Operation
-	128, // 296: yandex.cloud.mdb.mongodb.v1.ClusterService.StepdownHosts:output_type -> yandex.cloud.operation.Operation
-	270, // [270:297] is the sub-list for method output_type
-	243, // [243:270] is the sub-list for method input_type
+	171, // 270: yandex.cloud.mdb.mongodb.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	172, // 271: yandex.cloud.mdb.mongodb.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	173, // 272: yandex.cloud.mdb.mongodb.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	119, // 273: yandex.cloud.mdb.mongodb.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.mongodb.v1.Cluster
+	5,   // 274: yandex.cloud.mdb.mongodb.v1.ClusterService.List:output_type -> yandex.cloud.mdb.mongodb.v1.ListClustersResponse
+	128, // 275: yandex.cloud.mdb.mongodb.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	128, // 276: yandex.cloud.mdb.mongodb.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	128, // 277: yandex.cloud.mdb.mongodb.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	128, // 278: yandex.cloud.mdb.mongodb.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	128, // 279: yandex.cloud.mdb.mongodb.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	128, // 280: yandex.cloud.mdb.mongodb.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	128, // 281: yandex.cloud.mdb.mongodb.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	128, // 282: yandex.cloud.mdb.mongodb.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	128, // 283: yandex.cloud.mdb.mongodb.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	26,  // 284: yandex.cloud.mdb.mongodb.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterLogsResponse
+	27,  // 285: yandex.cloud.mdb.mongodb.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.mongodb.v1.StreamLogRecord
+	30,  // 286: yandex.cloud.mdb.mongodb.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterOperationsResponse
+	32,  // 287: yandex.cloud.mdb.mongodb.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterBackupsResponse
+	34,  // 288: yandex.cloud.mdb.mongodb.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterHostsResponse
+	128, // 289: yandex.cloud.mdb.mongodb.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	128, // 290: yandex.cloud.mdb.mongodb.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
+	128, // 291: yandex.cloud.mdb.mongodb.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
+	128, // 292: yandex.cloud.mdb.mongodb.v1.ClusterService.EnableSharding:output_type -> yandex.cloud.operation.Operation
+	134, // 293: yandex.cloud.mdb.mongodb.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.mongodb.v1.Shard
+	46,  // 294: yandex.cloud.mdb.mongodb.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.mongodb.v1.ListClusterShardsResponse
+	128, // 295: yandex.cloud.mdb.mongodb.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
+	128, // 296: yandex.cloud.mdb.mongodb.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
+	128, // 297: yandex.cloud.mdb.mongodb.v1.ClusterService.ResetupHosts:output_type -> yandex.cloud.operation.Operation
+	128, // 298: yandex.cloud.mdb.mongodb.v1.ClusterService.RestartHosts:output_type -> yandex.cloud.operation.Operation
+	128, // 299: yandex.cloud.mdb.mongodb.v1.ClusterService.StepdownHosts:output_type -> yandex.cloud.operation.Operation
+	174, // 300: yandex.cloud.mdb.mongodb.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	128, // 301: yandex.cloud.mdb.mongodb.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	128, // 302: yandex.cloud.mdb.mongodb.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	273, // [273:303] is the sub-list for method output_type
+	243, // [243:273] is the sub-list for method input_type
 	243, // [243:243] is the sub-list for extension type_name
 	243, // [243:243] is the sub-list for extension extendee
 	0,   // [0:243] is the sub-list for field type_name
