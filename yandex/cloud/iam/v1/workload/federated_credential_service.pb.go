@@ -416,11 +416,11 @@ const file_yandex_cloud_iam_v1_workload_federated_credential_service_proto_rawDe
 	"\x8a\xc81\x06<=2000R\tpageToken\"\xb2\x01\n" +
 	" ListFederatedCredentialsResponse\x12f\n" +
 	"\x15federated_credentials\x18\x01 \x03(\v21.yandex.cloud.iam.v1.workload.FederatedCredentialR\x14federatedCredentials\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xcf\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd1\x01\n" +
 	" CreateFederatedCredentialRequest\x12:\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x121\n" +
-	"\rfederation_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12<\n" +
-	"\x13external_subject_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11externalSubjectId\"[\n" +
+	"\rfederation_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12>\n" +
+	"\x13external_subject_id\x18\x03 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1000R\x11externalSubjectId\"[\n" +
 	"!CreateFederatedCredentialMetadata\x126\n" +
 	"\x17federated_credential_id\x18\x01 \x01(\tR\x15federatedCredentialId\"h\n" +
 	" DeleteFederatedCredentialRequest\x12D\n" +
