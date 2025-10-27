@@ -1800,6 +1800,330 @@ func (x *DeleteFederationDomainMetadata) GetDomain() string {
 	return ""
 }
 
+type SuspendFederatedUserAccountsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to suspend users of.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// List of subjects to suspend.
+	SubjectIds []string `protobuf:"bytes,2,rep,name=subject_ids,json=subjectIds,proto3" json:"subject_ids,omitempty"`
+	// Reason of the suspension
+	Reason        string `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuspendFederatedUserAccountsRequest) Reset() {
+	*x = SuspendFederatedUserAccountsRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuspendFederatedUserAccountsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuspendFederatedUserAccountsRequest) ProtoMessage() {}
+
+func (x *SuspendFederatedUserAccountsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuspendFederatedUserAccountsRequest.ProtoReflect.Descriptor instead.
+func (*SuspendFederatedUserAccountsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *SuspendFederatedUserAccountsRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *SuspendFederatedUserAccountsRequest) GetSubjectIds() []string {
+	if x != nil {
+		return x.SubjectIds
+	}
+	return nil
+}
+
+func (x *SuspendFederatedUserAccountsRequest) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+type SuspendFederatedUserAccountsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to suspend subjects of.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// List of subjects to suspend.
+	SubjectIds []string `protobuf:"bytes,2,rep,name=subject_ids,json=subjectIds,proto3" json:"subject_ids,omitempty"`
+	// Reason of the suspension.
+	Reason        string `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuspendFederatedUserAccountsMetadata) Reset() {
+	*x = SuspendFederatedUserAccountsMetadata{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuspendFederatedUserAccountsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuspendFederatedUserAccountsMetadata) ProtoMessage() {}
+
+func (x *SuspendFederatedUserAccountsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuspendFederatedUserAccountsMetadata.ProtoReflect.Descriptor instead.
+func (*SuspendFederatedUserAccountsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *SuspendFederatedUserAccountsMetadata) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *SuspendFederatedUserAccountsMetadata) GetSubjectIds() []string {
+	if x != nil {
+		return x.SubjectIds
+	}
+	return nil
+}
+
+func (x *SuspendFederatedUserAccountsMetadata) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+type SuspendFederatedUserAccountsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Subjects that were actually suspended.
+	SubjectIds    []string `protobuf:"bytes,1,rep,name=subject_ids,json=subjectIds,proto3" json:"subject_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuspendFederatedUserAccountsResponse) Reset() {
+	*x = SuspendFederatedUserAccountsResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuspendFederatedUserAccountsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuspendFederatedUserAccountsResponse) ProtoMessage() {}
+
+func (x *SuspendFederatedUserAccountsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuspendFederatedUserAccountsResponse.ProtoReflect.Descriptor instead.
+func (*SuspendFederatedUserAccountsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *SuspendFederatedUserAccountsResponse) GetSubjectIds() []string {
+	if x != nil {
+		return x.SubjectIds
+	}
+	return nil
+}
+
+type ReactivateFederatedUserAccountsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to reactivate subjects of.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// List of subjects to reactivate.
+	SubjectIds    []string `protobuf:"bytes,2,rep,name=subject_ids,json=subjectIds,proto3" json:"subject_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReactivateFederatedUserAccountsRequest) Reset() {
+	*x = ReactivateFederatedUserAccountsRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactivateFederatedUserAccountsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactivateFederatedUserAccountsRequest) ProtoMessage() {}
+
+func (x *ReactivateFederatedUserAccountsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactivateFederatedUserAccountsRequest.ProtoReflect.Descriptor instead.
+func (*ReactivateFederatedUserAccountsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ReactivateFederatedUserAccountsRequest) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *ReactivateFederatedUserAccountsRequest) GetSubjectIds() []string {
+	if x != nil {
+		return x.SubjectIds
+	}
+	return nil
+}
+
+type ReactivateFederatedUserAccountsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the federation to reactivate subjects of.
+	FederationId string `protobuf:"bytes,1,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
+	// List of subjects to reactivate.
+	SubjectIds    []string `protobuf:"bytes,2,rep,name=subject_ids,json=subjectIds,proto3" json:"subject_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReactivateFederatedUserAccountsMetadata) Reset() {
+	*x = ReactivateFederatedUserAccountsMetadata{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactivateFederatedUserAccountsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactivateFederatedUserAccountsMetadata) ProtoMessage() {}
+
+func (x *ReactivateFederatedUserAccountsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactivateFederatedUserAccountsMetadata.ProtoReflect.Descriptor instead.
+func (*ReactivateFederatedUserAccountsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ReactivateFederatedUserAccountsMetadata) GetFederationId() string {
+	if x != nil {
+		return x.FederationId
+	}
+	return ""
+}
+
+func (x *ReactivateFederatedUserAccountsMetadata) GetSubjectIds() []string {
+	if x != nil {
+		return x.SubjectIds
+	}
+	return nil
+}
+
+type ReactivateFederatedUserAccountsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Subjects that were actually reactivated.
+	SubjectIds    []string `protobuf:"bytes,1,rep,name=subject_ids,json=subjectIds,proto3" json:"subject_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReactivateFederatedUserAccountsResponse) Reset() {
+	*x = ReactivateFederatedUserAccountsResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactivateFederatedUserAccountsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactivateFederatedUserAccountsResponse) ProtoMessage() {}
+
+func (x *ReactivateFederatedUserAccountsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactivateFederatedUserAccountsResponse.ProtoReflect.Descriptor instead.
+func (*ReactivateFederatedUserAccountsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ReactivateFederatedUserAccountsResponse) GetSubjectIds() []string {
+	if x != nil {
+		return x.SubjectIds
+	}
+	return nil
+}
+
 var File_yandex_cloud_organizationmanager_v1_saml_federation_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc = "" +
@@ -1936,7 +2260,31 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"]\n" +
 	"\x1eDeleteFederationDomainMetadata\x12#\n" +
 	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain2\xcc\x1a\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"\xb0\x01\n" +
+	"#SuspendFederatedUserAccountsRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x123\n" +
+	"\vsubject_ids\x18\x02 \x03(\tB\x12\x82\xc81\x061-1000\x8a\xc81\x041-50R\n" +
+	"subjectIds\x12!\n" +
+	"\x06reason\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\x06reason\"\x84\x01\n" +
+	"$SuspendFederatedUserAccountsMetadata\x12#\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\x12\x1f\n" +
+	"\vsubject_ids\x18\x02 \x03(\tR\n" +
+	"subjectIds\x12\x16\n" +
+	"\x06reason\x18\x03 \x01(\tR\x06reason\"G\n" +
+	"$SuspendFederatedUserAccountsResponse\x12\x1f\n" +
+	"\vsubject_ids\x18\x01 \x03(\tR\n" +
+	"subjectIds\"\x90\x01\n" +
+	"&ReactivateFederatedUserAccountsRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x123\n" +
+	"\vsubject_ids\x18\x02 \x03(\tB\x12\x82\xc81\x061-1000\x8a\xc81\x041-50R\n" +
+	"subjectIds\"o\n" +
+	"'ReactivateFederatedUserAccountsMetadata\x12#\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\x12\x1f\n" +
+	"\vsubject_ids\x18\x02 \x03(\tR\n" +
+	"subjectIds\"J\n" +
+	"'ReactivateFederatedUserAccountsResponse\x12\x1f\n" +
+	"\vsubject_ids\x18\x01 \x03(\tR\n" +
+	"subjectIds2\xc5\x1f\n" +
 	"\x11FederationService\x12\xbe\x01\n" +
 	"\x03Get\x12>.yandex.cloud.organizationmanager.v1.saml.GetFederationRequest\x1a4.yandex.cloud.organizationmanager.v1.saml.Federation\"A\x82\xd3\xe4\x93\x02;\x129/organization-manager/v1/saml/federations/{federation_id}\x12\xbe\x01\n" +
 	"\x04List\x12@.yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest\x1aA.yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse\"1\x82\xd3\xe4\x93\x02+\x12)/organization-manager/v1/saml/federations\x12\xce\x01\n" +
@@ -1961,7 +2309,11 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\x0eValidateDomain\x12I.yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2**\n" +
 	" ValidateFederationDomainMetadata\x12\x06Domain\x82\xd3\xe4\x93\x02X:\x01*\"S/organization-manager/v1/saml/federations/{federation_id}/domains/{domain}:validate\x12\x8a\x02\n" +
 	"\fDeleteDomain\x12G.yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest\x1a!.yandex.cloud.operation.Operation\"\x8d\x01\xb2\xd2*7\n" +
-	"\x1eDeleteFederationDomainMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02L*J/organization-manager/v1/saml/federations/{federation_id}/domains/{domain}B\x81\x01\n" +
+	"\x1eDeleteFederationDomainMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02L*J/organization-manager/v1/saml/federations/{federation_id}/domains/{domain}\x12\xb2\x02\n" +
+	"\x13SuspendUserAccounts\x12M.yandex.cloud.organizationmanager.v1.saml.SuspendFederatedUserAccountsRequest\x1a!.yandex.cloud.operation.Operation\"\xa8\x01\xb2\xd2*L\n" +
+	"$SuspendFederatedUserAccountsMetadata\x12$SuspendFederatedUserAccountsResponse\x82\xd3\xe4\x93\x02R:\x01*\"M/organization-manager/v1/saml/federations/{federation_id}:suspendUserAccounts\x12\xc1\x02\n" +
+	"\x16ReactivateUserAccounts\x12P.yandex.cloud.organizationmanager.v1.saml.ReactivateFederatedUserAccountsRequest\x1a!.yandex.cloud.operation.Operation\"\xb1\x01\xb2\xd2*R\n" +
+	"'ReactivateFederatedUserAccountsMetadata\x12'ReactivateFederatedUserAccountsResponse\x82\xd3\xe4\x93\x02U:\x01*\"P/organization-manager/v1/saml/federations/{federation_id}:reactivateUserAccountsB\x81\x01\n" +
 	",yandex.cloud.api.organizationmanager.v1.samlZQgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/saml;samlb\x06proto3"
 
 var (
@@ -1976,62 +2328,68 @@ func file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawD
 	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_goTypes = []any{
-	(*GetFederationRequest)(nil),                // 0: yandex.cloud.organizationmanager.v1.saml.GetFederationRequest
-	(*ListFederationsRequest)(nil),              // 1: yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest
-	(*ListFederationsResponse)(nil),             // 2: yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse
-	(*CreateFederationRequest)(nil),             // 3: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest
-	(*CreateFederationMetadata)(nil),            // 4: yandex.cloud.organizationmanager.v1.saml.CreateFederationMetadata
-	(*UpdateFederationRequest)(nil),             // 5: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest
-	(*UpdateFederationMetadata)(nil),            // 6: yandex.cloud.organizationmanager.v1.saml.UpdateFederationMetadata
-	(*DeleteFederationRequest)(nil),             // 7: yandex.cloud.organizationmanager.v1.saml.DeleteFederationRequest
-	(*DeleteFederationMetadata)(nil),            // 8: yandex.cloud.organizationmanager.v1.saml.DeleteFederationMetadata
-	(*AddFederatedUserAccountsRequest)(nil),     // 9: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsRequest
-	(*AddFederatedUserAccountsMetadata)(nil),    // 10: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsMetadata
-	(*AddFederatedUserAccountsResponse)(nil),    // 11: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsResponse
-	(*DeleteFederatedUserAccountsRequest)(nil),  // 12: yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsRequest
-	(*DeleteFederatedUserAccountsMetadata)(nil), // 13: yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsMetadata
-	(*DeleteFederatedUserAccountsResponse)(nil), // 14: yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsResponse
-	(*ListFederatedUserAccountsRequest)(nil),    // 15: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsRequest
-	(*ListFederatedUserAccountsResponse)(nil),   // 16: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
-	(*ListFederationOperationsRequest)(nil),     // 17: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest
-	(*ListFederationOperationsResponse)(nil),    // 18: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
-	(*GetFederationDomainRequest)(nil),          // 19: yandex.cloud.organizationmanager.v1.saml.GetFederationDomainRequest
-	(*ListFederationDomainsRequest)(nil),        // 20: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsRequest
-	(*ListFederationDomainsResponse)(nil),       // 21: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse
-	(*AddFederationDomainRequest)(nil),          // 22: yandex.cloud.organizationmanager.v1.saml.AddFederationDomainRequest
-	(*AddFederationDomainMetadata)(nil),         // 23: yandex.cloud.organizationmanager.v1.saml.AddFederationDomainMetadata
-	(*ValidateFederationDomainRequest)(nil),     // 24: yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest
-	(*ValidateFederationDomainMetadata)(nil),    // 25: yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainMetadata
-	(*DeleteFederationDomainRequest)(nil),       // 26: yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest
-	(*DeleteFederationDomainMetadata)(nil),      // 27: yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainMetadata
-	nil,                                         // 28: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
-	nil,                                         // 29: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
-	(*Federation)(nil),                          // 30: yandex.cloud.organizationmanager.v1.saml.Federation
-	(*durationpb.Duration)(nil),                 // 31: google.protobuf.Duration
-	(BindingType)(0),                            // 32: yandex.cloud.organizationmanager.v1.saml.BindingType
-	(*FederationSecuritySettings)(nil),          // 33: yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	(*fieldmaskpb.FieldMask)(nil),               // 34: google.protobuf.FieldMask
-	(*v1.UserAccount)(nil),                      // 35: yandex.cloud.organizationmanager.v1.UserAccount
-	(*operation.Operation)(nil),                 // 36: yandex.cloud.operation.Operation
-	(*Domain)(nil),                              // 37: yandex.cloud.organizationmanager.v1.saml.Domain
+	(*GetFederationRequest)(nil),                    // 0: yandex.cloud.organizationmanager.v1.saml.GetFederationRequest
+	(*ListFederationsRequest)(nil),                  // 1: yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest
+	(*ListFederationsResponse)(nil),                 // 2: yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse
+	(*CreateFederationRequest)(nil),                 // 3: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest
+	(*CreateFederationMetadata)(nil),                // 4: yandex.cloud.organizationmanager.v1.saml.CreateFederationMetadata
+	(*UpdateFederationRequest)(nil),                 // 5: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest
+	(*UpdateFederationMetadata)(nil),                // 6: yandex.cloud.organizationmanager.v1.saml.UpdateFederationMetadata
+	(*DeleteFederationRequest)(nil),                 // 7: yandex.cloud.organizationmanager.v1.saml.DeleteFederationRequest
+	(*DeleteFederationMetadata)(nil),                // 8: yandex.cloud.organizationmanager.v1.saml.DeleteFederationMetadata
+	(*AddFederatedUserAccountsRequest)(nil),         // 9: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsRequest
+	(*AddFederatedUserAccountsMetadata)(nil),        // 10: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsMetadata
+	(*AddFederatedUserAccountsResponse)(nil),        // 11: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsResponse
+	(*DeleteFederatedUserAccountsRequest)(nil),      // 12: yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsRequest
+	(*DeleteFederatedUserAccountsMetadata)(nil),     // 13: yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsMetadata
+	(*DeleteFederatedUserAccountsResponse)(nil),     // 14: yandex.cloud.organizationmanager.v1.saml.DeleteFederatedUserAccountsResponse
+	(*ListFederatedUserAccountsRequest)(nil),        // 15: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsRequest
+	(*ListFederatedUserAccountsResponse)(nil),       // 16: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
+	(*ListFederationOperationsRequest)(nil),         // 17: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsRequest
+	(*ListFederationOperationsResponse)(nil),        // 18: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
+	(*GetFederationDomainRequest)(nil),              // 19: yandex.cloud.organizationmanager.v1.saml.GetFederationDomainRequest
+	(*ListFederationDomainsRequest)(nil),            // 20: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsRequest
+	(*ListFederationDomainsResponse)(nil),           // 21: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse
+	(*AddFederationDomainRequest)(nil),              // 22: yandex.cloud.organizationmanager.v1.saml.AddFederationDomainRequest
+	(*AddFederationDomainMetadata)(nil),             // 23: yandex.cloud.organizationmanager.v1.saml.AddFederationDomainMetadata
+	(*ValidateFederationDomainRequest)(nil),         // 24: yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest
+	(*ValidateFederationDomainMetadata)(nil),        // 25: yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainMetadata
+	(*DeleteFederationDomainRequest)(nil),           // 26: yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest
+	(*DeleteFederationDomainMetadata)(nil),          // 27: yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainMetadata
+	(*SuspendFederatedUserAccountsRequest)(nil),     // 28: yandex.cloud.organizationmanager.v1.saml.SuspendFederatedUserAccountsRequest
+	(*SuspendFederatedUserAccountsMetadata)(nil),    // 29: yandex.cloud.organizationmanager.v1.saml.SuspendFederatedUserAccountsMetadata
+	(*SuspendFederatedUserAccountsResponse)(nil),    // 30: yandex.cloud.organizationmanager.v1.saml.SuspendFederatedUserAccountsResponse
+	(*ReactivateFederatedUserAccountsRequest)(nil),  // 31: yandex.cloud.organizationmanager.v1.saml.ReactivateFederatedUserAccountsRequest
+	(*ReactivateFederatedUserAccountsMetadata)(nil), // 32: yandex.cloud.organizationmanager.v1.saml.ReactivateFederatedUserAccountsMetadata
+	(*ReactivateFederatedUserAccountsResponse)(nil), // 33: yandex.cloud.organizationmanager.v1.saml.ReactivateFederatedUserAccountsResponse
+	nil,                                // 34: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
+	nil,                                // 35: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
+	(*Federation)(nil),                 // 36: yandex.cloud.organizationmanager.v1.saml.Federation
+	(*durationpb.Duration)(nil),        // 37: google.protobuf.Duration
+	(BindingType)(0),                   // 38: yandex.cloud.organizationmanager.v1.saml.BindingType
+	(*FederationSecuritySettings)(nil), // 39: yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	(*fieldmaskpb.FieldMask)(nil),      // 40: google.protobuf.FieldMask
+	(*v1.UserAccount)(nil),             // 41: yandex.cloud.organizationmanager.v1.UserAccount
+	(*operation.Operation)(nil),        // 42: yandex.cloud.operation.Operation
+	(*Domain)(nil),                     // 43: yandex.cloud.organizationmanager.v1.saml.Domain
 }
 var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_depIdxs = []int32{
-	30, // 0: yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse.federations:type_name -> yandex.cloud.organizationmanager.v1.saml.Federation
-	31, // 1: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
-	32, // 2: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
-	33, // 3: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	28, // 4: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
-	34, // 5: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.update_mask:type_name -> google.protobuf.FieldMask
-	31, // 6: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
-	32, // 7: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
-	33, // 8: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
-	29, // 9: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
-	35, // 10: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
-	35, // 11: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
-	36, // 12: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	37, // 13: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse.domains:type_name -> yandex.cloud.organizationmanager.v1.saml.Domain
+	36, // 0: yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse.federations:type_name -> yandex.cloud.organizationmanager.v1.saml.Federation
+	37, // 1: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
+	38, // 2: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
+	39, // 3: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	34, // 4: yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest.LabelsEntry
+	40, // 5: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.update_mask:type_name -> google.protobuf.FieldMask
+	37, // 6: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.cookie_max_age:type_name -> google.protobuf.Duration
+	38, // 7: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.sso_binding:type_name -> yandex.cloud.organizationmanager.v1.saml.BindingType
+	39, // 8: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.security_settings:type_name -> yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettings
+	35, // 9: yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.saml.UpdateFederationRequest.LabelsEntry
+	41, // 10: yandex.cloud.organizationmanager.v1.saml.AddFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
+	41, // 11: yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse.user_accounts:type_name -> yandex.cloud.organizationmanager.v1.UserAccount
+	42, // 12: yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	43, // 13: yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse.domains:type_name -> yandex.cloud.organizationmanager.v1.saml.Domain
 	0,  // 14: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:input_type -> yandex.cloud.organizationmanager.v1.saml.GetFederationRequest
 	1,  // 15: yandex.cloud.organizationmanager.v1.saml.FederationService.List:input_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsRequest
 	3,  // 16: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:input_type -> yandex.cloud.organizationmanager.v1.saml.CreateFederationRequest
@@ -2046,22 +2404,26 @@ var file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_depId
 	22, // 25: yandex.cloud.organizationmanager.v1.saml.FederationService.AddDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.AddFederationDomainRequest
 	24, // 26: yandex.cloud.organizationmanager.v1.saml.FederationService.ValidateDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.ValidateFederationDomainRequest
 	26, // 27: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteDomain:input_type -> yandex.cloud.organizationmanager.v1.saml.DeleteFederationDomainRequest
-	30, // 28: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:output_type -> yandex.cloud.organizationmanager.v1.saml.Federation
-	2,  // 29: yandex.cloud.organizationmanager.v1.saml.FederationService.List:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse
-	36, // 30: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:output_type -> yandex.cloud.operation.Operation
-	36, // 31: yandex.cloud.organizationmanager.v1.saml.FederationService.Update:output_type -> yandex.cloud.operation.Operation
-	36, // 32: yandex.cloud.organizationmanager.v1.saml.FederationService.Delete:output_type -> yandex.cloud.operation.Operation
-	36, // 33: yandex.cloud.organizationmanager.v1.saml.FederationService.AddUserAccounts:output_type -> yandex.cloud.operation.Operation
-	36, // 34: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteUserAccounts:output_type -> yandex.cloud.operation.Operation
-	16, // 35: yandex.cloud.organizationmanager.v1.saml.FederationService.ListUserAccounts:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
-	18, // 36: yandex.cloud.organizationmanager.v1.saml.FederationService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
-	37, // 37: yandex.cloud.organizationmanager.v1.saml.FederationService.GetDomain:output_type -> yandex.cloud.organizationmanager.v1.saml.Domain
-	21, // 38: yandex.cloud.organizationmanager.v1.saml.FederationService.ListDomains:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse
-	36, // 39: yandex.cloud.organizationmanager.v1.saml.FederationService.AddDomain:output_type -> yandex.cloud.operation.Operation
-	36, // 40: yandex.cloud.organizationmanager.v1.saml.FederationService.ValidateDomain:output_type -> yandex.cloud.operation.Operation
-	36, // 41: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteDomain:output_type -> yandex.cloud.operation.Operation
-	28, // [28:42] is the sub-list for method output_type
-	14, // [14:28] is the sub-list for method input_type
+	28, // 28: yandex.cloud.organizationmanager.v1.saml.FederationService.SuspendUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.SuspendFederatedUserAccountsRequest
+	31, // 29: yandex.cloud.organizationmanager.v1.saml.FederationService.ReactivateUserAccounts:input_type -> yandex.cloud.organizationmanager.v1.saml.ReactivateFederatedUserAccountsRequest
+	36, // 30: yandex.cloud.organizationmanager.v1.saml.FederationService.Get:output_type -> yandex.cloud.organizationmanager.v1.saml.Federation
+	2,  // 31: yandex.cloud.organizationmanager.v1.saml.FederationService.List:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationsResponse
+	42, // 32: yandex.cloud.organizationmanager.v1.saml.FederationService.Create:output_type -> yandex.cloud.operation.Operation
+	42, // 33: yandex.cloud.organizationmanager.v1.saml.FederationService.Update:output_type -> yandex.cloud.operation.Operation
+	42, // 34: yandex.cloud.organizationmanager.v1.saml.FederationService.Delete:output_type -> yandex.cloud.operation.Operation
+	42, // 35: yandex.cloud.organizationmanager.v1.saml.FederationService.AddUserAccounts:output_type -> yandex.cloud.operation.Operation
+	42, // 36: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteUserAccounts:output_type -> yandex.cloud.operation.Operation
+	16, // 37: yandex.cloud.organizationmanager.v1.saml.FederationService.ListUserAccounts:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederatedUserAccountsResponse
+	18, // 38: yandex.cloud.organizationmanager.v1.saml.FederationService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationOperationsResponse
+	43, // 39: yandex.cloud.organizationmanager.v1.saml.FederationService.GetDomain:output_type -> yandex.cloud.organizationmanager.v1.saml.Domain
+	21, // 40: yandex.cloud.organizationmanager.v1.saml.FederationService.ListDomains:output_type -> yandex.cloud.organizationmanager.v1.saml.ListFederationDomainsResponse
+	42, // 41: yandex.cloud.organizationmanager.v1.saml.FederationService.AddDomain:output_type -> yandex.cloud.operation.Operation
+	42, // 42: yandex.cloud.organizationmanager.v1.saml.FederationService.ValidateDomain:output_type -> yandex.cloud.operation.Operation
+	42, // 43: yandex.cloud.organizationmanager.v1.saml.FederationService.DeleteDomain:output_type -> yandex.cloud.operation.Operation
+	42, // 44: yandex.cloud.organizationmanager.v1.saml.FederationService.SuspendUserAccounts:output_type -> yandex.cloud.operation.Operation
+	42, // 45: yandex.cloud.organizationmanager.v1.saml.FederationService.ReactivateUserAccounts:output_type -> yandex.cloud.operation.Operation
+	30, // [30:46] is the sub-list for method output_type
+	14, // [14:30] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name
@@ -2079,7 +2441,7 @@ func file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_init
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   30,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

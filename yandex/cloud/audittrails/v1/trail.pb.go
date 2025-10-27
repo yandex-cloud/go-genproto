@@ -1474,10 +1474,6 @@ func (x *Trail_FilteringPolicy) GetDataEventsFilters() []*Trail_DataEventsFilter
 
 type Trail_DnsDataEventsFilter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// deprecated: use all_dns_queries instead
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/audittrails/v1/trail.proto.
-	OnlyRecursiveQueries bool `protobuf:"varint,1,opt,name=only_recursive_queries,json=onlyRecursiveQueries,proto3" json:"only_recursive_queries,omitempty"`
 	// Not only recursive queries will be delivered
 	IncludeNonrecursiveQueries bool `protobuf:"varint,2,opt,name=include_nonrecursive_queries,json=includeNonrecursiveQueries,proto3" json:"include_nonrecursive_queries,omitempty"`
 	unknownFields              protoimpl.UnknownFields
@@ -1514,14 +1510,6 @@ func (*Trail_DnsDataEventsFilter) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 19}
 }
 
-// Deprecated: Marked as deprecated in yandex/cloud/audittrails/v1/trail.proto.
-func (x *Trail_DnsDataEventsFilter) GetOnlyRecursiveQueries() bool {
-	if x != nil {
-		return x.OnlyRecursiveQueries
-	}
-	return false
-}
-
 func (x *Trail_DnsDataEventsFilter) GetIncludeNonrecursiveQueries() bool {
 	if x != nil {
 		return x.IncludeNonrecursiveQueries
@@ -1533,7 +1521,7 @@ var File_yandex_cloud_audittrails_v1_trail_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_audittrails_v1_trail_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/audittrails/v1/trail.proto\x12\x1byandex.cloud.audittrails.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd8\"\n" +
+	"'yandex/cloud/audittrails/v1/trail.proto\x12\x1byandex.cloud.audittrails.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xa3\"\n" +
 	"\x05Trail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12?\n" +
@@ -1631,10 +1619,9 @@ const file_yandex_cloud_audittrails_v1_trail_proto_rawDesc = "" +
 	"\x82\xc81\x061-1024R\x0eresourceScopes\x1a\x81\x02\n" +
 	"\x0fFilteringPolicy\x12|\n" +
 	"\x18management_events_filter\x18\x01 \x01(\v2<.yandex.cloud.audittrails.v1.Trail.ManagementEventsFilteringB\x04\xe8\xc71\x00R\x16managementEventsFilter\x12p\n" +
-	"\x13data_events_filters\x18\x02 \x03(\v26.yandex.cloud.audittrails.v1.Trail.DataEventsFilteringB\b\x82\xc81\x04<128R\x11dataEventsFilters\x1a\x91\x01\n" +
-	"\x13DnsDataEventsFilter\x128\n" +
-	"\x16only_recursive_queries\x18\x01 \x01(\bB\x02\x18\x01R\x14onlyRecursiveQueries\x12@\n" +
-	"\x1cinclude_nonrecursive_queries\x18\x02 \x01(\bR\x1aincludeNonrecursiveQueries\"D\n" +
+	"\x13data_events_filters\x18\x02 \x03(\v26.yandex.cloud.audittrails.v1.Trail.DataEventsFilteringB\b\x82\xc81\x04<128R\x11dataEventsFilters\x1a]\n" +
+	"\x13DnsDataEventsFilter\x12@\n" +
+	"\x1cinclude_nonrecursive_queries\x18\x02 \x01(\bR\x1aincludeNonrecursiveQueriesJ\x04\b\x01\x10\x02\"D\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +

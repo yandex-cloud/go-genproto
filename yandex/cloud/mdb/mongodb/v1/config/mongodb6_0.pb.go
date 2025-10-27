@@ -1593,7 +1593,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1a\xc0\x03\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x16maxIncomingConnections\x12i\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\x12i\n" +
 	"\vcompression\x18\x02 \x01(\v2G.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.Network.CompressionR\vcompression\x1a\xe4\x01\n" +
 	"\vCompression\x12}\n" +
 	"\vcompressors\x18\x01 \x03(\x0e2R.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.Network.Compression.CompressorB\a\x82\xc81\x031-3R\vcompressors\"V\n" +
@@ -1629,11 +1629,11 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x16maxIncomingConnections\"\xa3\x04\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xa3\x04\n" +
 	"\x0fMongosConfig6_0\x12M\n" +
 	"\x03net\x18\x03 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongosConfig6_0.NetworkR\x03net\x1a\xc0\x03\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x16maxIncomingConnections\x12i\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\x12i\n" +
 	"\vcompression\x18\x02 \x01(\v2G.yandex.cloud.mdb.mongodb.v1.config.MongosConfig6_0.Network.CompressionR\vcompression\x1a\xe4\x01\n" +
 	"\vCompression\x12}\n" +
 	"\vcompressors\x18\x01 \x03(\x0e2R.yandex.cloud.mdb.mongodb.v1.config.MongosConfig6_0.Network.Compression.CompressorB\a\x82\xc81\x031-3R\vcompressors\"V\n" +

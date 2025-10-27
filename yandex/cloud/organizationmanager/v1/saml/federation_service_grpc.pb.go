@@ -20,20 +20,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FederationService_Get_FullMethodName                = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Get"
-	FederationService_List_FullMethodName               = "/yandex.cloud.organizationmanager.v1.saml.FederationService/List"
-	FederationService_Create_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Create"
-	FederationService_Update_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Update"
-	FederationService_Delete_FullMethodName             = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Delete"
-	FederationService_AddUserAccounts_FullMethodName    = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddUserAccounts"
-	FederationService_DeleteUserAccounts_FullMethodName = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteUserAccounts"
-	FederationService_ListUserAccounts_FullMethodName   = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListUserAccounts"
-	FederationService_ListOperations_FullMethodName     = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListOperations"
-	FederationService_GetDomain_FullMethodName          = "/yandex.cloud.organizationmanager.v1.saml.FederationService/GetDomain"
-	FederationService_ListDomains_FullMethodName        = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListDomains"
-	FederationService_AddDomain_FullMethodName          = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddDomain"
-	FederationService_ValidateDomain_FullMethodName     = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ValidateDomain"
-	FederationService_DeleteDomain_FullMethodName       = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteDomain"
+	FederationService_Get_FullMethodName                    = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Get"
+	FederationService_List_FullMethodName                   = "/yandex.cloud.organizationmanager.v1.saml.FederationService/List"
+	FederationService_Create_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Create"
+	FederationService_Update_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Update"
+	FederationService_Delete_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.saml.FederationService/Delete"
+	FederationService_AddUserAccounts_FullMethodName        = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddUserAccounts"
+	FederationService_DeleteUserAccounts_FullMethodName     = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteUserAccounts"
+	FederationService_ListUserAccounts_FullMethodName       = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListUserAccounts"
+	FederationService_ListOperations_FullMethodName         = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListOperations"
+	FederationService_GetDomain_FullMethodName              = "/yandex.cloud.organizationmanager.v1.saml.FederationService/GetDomain"
+	FederationService_ListDomains_FullMethodName            = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ListDomains"
+	FederationService_AddDomain_FullMethodName              = "/yandex.cloud.organizationmanager.v1.saml.FederationService/AddDomain"
+	FederationService_ValidateDomain_FullMethodName         = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ValidateDomain"
+	FederationService_DeleteDomain_FullMethodName           = "/yandex.cloud.organizationmanager.v1.saml.FederationService/DeleteDomain"
+	FederationService_SuspendUserAccounts_FullMethodName    = "/yandex.cloud.organizationmanager.v1.saml.FederationService/SuspendUserAccounts"
+	FederationService_ReactivateUserAccounts_FullMethodName = "/yandex.cloud.organizationmanager.v1.saml.FederationService/ReactivateUserAccounts"
 )
 
 // FederationServiceClient is the client API for FederationService service.
@@ -74,6 +76,12 @@ type FederationServiceClient interface {
 	ValidateDomain(ctx context.Context, in *ValidateFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified domain from the federation.
 	DeleteDomain(ctx context.Context, in *DeleteFederationDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Suspend federated user accounts.
+	// Method skips non-existent federated user accounts and returns ones that were actually suspended.
+	SuspendUserAccounts(ctx context.Context, in *SuspendFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Reactivate federated user accounts.
+	// Method skips non-existent federated user accounts and returns ones that were actually reactivated.
+	ReactivateUserAccounts(ctx context.Context, in *ReactivateFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type federationServiceClient struct {
@@ -224,6 +232,26 @@ func (c *federationServiceClient) DeleteDomain(ctx context.Context, in *DeleteFe
 	return out, nil
 }
 
+func (c *federationServiceClient) SuspendUserAccounts(ctx context.Context, in *SuspendFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FederationService_SuspendUserAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *federationServiceClient) ReactivateUserAccounts(ctx context.Context, in *ReactivateFederatedUserAccountsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FederationService_ReactivateUserAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FederationServiceServer is the server API for FederationService service.
 // All implementations should embed UnimplementedFederationServiceServer
 // for forward compatibility.
@@ -262,6 +290,12 @@ type FederationServiceServer interface {
 	ValidateDomain(context.Context, *ValidateFederationDomainRequest) (*operation.Operation, error)
 	// Deletes the specified domain from the federation.
 	DeleteDomain(context.Context, *DeleteFederationDomainRequest) (*operation.Operation, error)
+	// Suspend federated user accounts.
+	// Method skips non-existent federated user accounts and returns ones that were actually suspended.
+	SuspendUserAccounts(context.Context, *SuspendFederatedUserAccountsRequest) (*operation.Operation, error)
+	// Reactivate federated user accounts.
+	// Method skips non-existent federated user accounts and returns ones that were actually reactivated.
+	ReactivateUserAccounts(context.Context, *ReactivateFederatedUserAccountsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedFederationServiceServer should be embedded to have
@@ -312,6 +346,12 @@ func (UnimplementedFederationServiceServer) ValidateDomain(context.Context, *Val
 }
 func (UnimplementedFederationServiceServer) DeleteDomain(context.Context, *DeleteFederationDomainRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDomain not implemented")
+}
+func (UnimplementedFederationServiceServer) SuspendUserAccounts(context.Context, *SuspendFederatedUserAccountsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SuspendUserAccounts not implemented")
+}
+func (UnimplementedFederationServiceServer) ReactivateUserAccounts(context.Context, *ReactivateFederatedUserAccountsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReactivateUserAccounts not implemented")
 }
 func (UnimplementedFederationServiceServer) testEmbeddedByValue() {}
 
@@ -585,6 +625,42 @@ func _FederationService_DeleteDomain_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FederationService_SuspendUserAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuspendFederatedUserAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).SuspendUserAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_SuspendUserAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).SuspendUserAccounts(ctx, req.(*SuspendFederatedUserAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FederationService_ReactivateUserAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReactivateFederatedUserAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).ReactivateUserAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_ReactivateUserAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).ReactivateUserAccounts(ctx, req.(*ReactivateFederatedUserAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FederationService_ServiceDesc is the grpc.ServiceDesc for FederationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -647,6 +723,14 @@ var FederationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteDomain",
 			Handler:    _FederationService_DeleteDomain_Handler,
+		},
+		{
+			MethodName: "SuspendUserAccounts",
+			Handler:    _FederationService_SuspendUserAccounts_Handler,
+		},
+		{
+			MethodName: "ReactivateUserAccounts",
+			Handler:    _FederationService_ReactivateUserAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

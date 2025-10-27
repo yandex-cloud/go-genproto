@@ -140,6 +140,10 @@ func (m *CookieSessionAffinity) SetTtl(v *durationpb.Duration) {
 	m.Ttl = v
 }
 
+func (m *CookieSessionAffinity) SetPath(v string) {
+	m.Path = v
+}
+
 func (m *ConnectionSessionAffinity) SetSourceIp(v bool) {
 	m.SourceIp = v
 }

@@ -653,7 +653,12 @@ type CookieSessionAffinity struct {
 	// on client restarts.
 	//
 	// If not set, the balancer does not generate cookies and only uses incoming ones for establishing session affinity.
-	Ttl           *durationpb.Duration `protobuf:"bytes,2,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	Ttl *durationpb.Duration `protobuf:"bytes,2,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	// Path of cookie.
+	// This will be used to set the path of a new cookie when it is generated.
+	//
+	// If path is unspecified or empty, no path will be set for the cookie.
+	Path          string `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -700,6 +705,13 @@ func (x *CookieSessionAffinity) GetTtl() *durationpb.Duration {
 		return x.Ttl
 	}
 	return nil
+}
+
+func (x *CookieSessionAffinity) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
 }
 
 // A resource for connection-based session affinity configuration.
@@ -2017,10 +2029,11 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = "" +
 	"\x10session_affinity\"C\n" +
 	"\x15HeaderSessionAffinity\x12*\n" +
 	"\vheader_name\x18\x01 \x01(\tB\t\x8a\xc81\x051-256R\n" +
-	"headerName\"c\n" +
+	"headerName\"\x82\x01\n" +
 	"\x15CookieSessionAffinity\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\x8a\xc81\x051-256R\x04name\x12+\n" +
-	"\x03ttl\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x03ttl\"8\n" +
+	"\x03ttl\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x03ttl\x12\x1d\n" +
+	"\x04path\x18\x03 \x01(\tB\t\x8a\xc81\x050-256R\x04path\"8\n" +
 	"\x19ConnectionSessionAffinity\x12\x1b\n" +
 	"\tsource_ip\x18\x01 \x01(\bR\bsourceIp\"\x8a\x02\n" +
 	"\x13LoadBalancingConfig\x122\n" +

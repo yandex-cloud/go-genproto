@@ -633,6 +633,69 @@ func (x *AccessBindingsOperationResult) GetEffectiveDeltas() []*AccessBindingDel
 	return nil
 }
 
+type AccessPolicy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the access policy template.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Name of the access policy template.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the access policy template.
+	Description   string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccessPolicy) Reset() {
+	*x = AccessPolicy{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccessPolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccessPolicy) ProtoMessage() {}
+
+func (x *AccessPolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccessPolicy.ProtoReflect.Descriptor instead.
+func (*AccessPolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AccessPolicy) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AccessPolicy) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AccessPolicy) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 var File_yandex_cloud_access_access_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_access_access_proto_rawDesc = "" +
@@ -674,7 +737,11 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x06action\x18\x01 \x01(\x0e2(.yandex.cloud.access.AccessBindingActionB\x04\xe8\xc71\x01R\x06action\x12O\n" +
 	"\x0eaccess_binding\x18\x02 \x01(\v2\".yandex.cloud.access.AccessBindingB\x04\xe8\xc71\x01R\raccessBinding\"s\n" +
 	"\x1dAccessBindingsOperationResult\x12R\n" +
-	"\x10effective_deltas\x18\x01 \x03(\v2'.yandex.cloud.access.AccessBindingDeltaR\x0feffectiveDeltas*Q\n" +
+	"\x10effective_deltas\x18\x01 \x03(\v2'.yandex.cloud.access.AccessBindingDeltaR\x0feffectiveDeltas\"T\n" +
+	"\fAccessPolicy\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription*Q\n" +
 	"\x13AccessBindingAction\x12%\n" +
 	"!ACCESS_BINDING_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
@@ -695,7 +762,7 @@ func file_yandex_cloud_access_access_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_access_access_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_access_access_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_yandex_cloud_access_access_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_access_access_proto_goTypes = []any{
 	(AccessBindingAction)(0),              // 0: yandex.cloud.access.AccessBindingAction
 	(*Subject)(nil),                       // 1: yandex.cloud.access.Subject
@@ -708,6 +775,7 @@ var file_yandex_cloud_access_access_proto_goTypes = []any{
 	(*UpdateAccessBindingsMetadata)(nil),  // 8: yandex.cloud.access.UpdateAccessBindingsMetadata
 	(*AccessBindingDelta)(nil),            // 9: yandex.cloud.access.AccessBindingDelta
 	(*AccessBindingsOperationResult)(nil), // 10: yandex.cloud.access.AccessBindingsOperationResult
+	(*AccessPolicy)(nil),                  // 11: yandex.cloud.access.AccessPolicy
 }
 var file_yandex_cloud_access_access_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.access.AccessBinding.subject:type_name -> yandex.cloud.access.Subject
@@ -735,7 +803,7 @@ func file_yandex_cloud_access_access_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_access_access_proto_rawDesc), len(file_yandex_cloud_access_access_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

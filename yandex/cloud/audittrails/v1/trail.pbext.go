@@ -252,10 +252,6 @@ func (m *Trail_FilteringPolicy) SetDataEventsFilters(v []*Trail_DataEventsFilter
 	m.DataEventsFilters = v
 }
 
-func (m *Trail_DnsDataEventsFilter) SetOnlyRecursiveQueries(v bool) {
-	m.OnlyRecursiveQueries = v
-}
-
 func (m *Trail_DnsDataEventsFilter) SetIncludeNonrecursiveQueries(v bool) {
 	m.IncludeNonrecursiveQueries = v
 }

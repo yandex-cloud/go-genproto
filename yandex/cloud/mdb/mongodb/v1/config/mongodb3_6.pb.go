@@ -1234,7 +1234,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb3_6_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x16maxIncomingConnections\"\x84\b\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\x84\b\n" +
 	"\x11MongoCfgConfig3_6\x12W\n" +
 	"\astorage\x18\x01 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6.StorageR\astorage\x12y\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2H.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6.OperationProfilingR\x12operationProfiling\x12O\n" +
@@ -1256,11 +1256,11 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb3_6_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x16maxIncomingConnections\"\xd0\x01\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xd0\x01\n" +
 	"\x0fMongosConfig3_6\x12M\n" +
 	"\x03net\x18\x01 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6.NetworkR\x03net\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x16maxIncomingConnections\"\xa6\x02\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xa6\x02\n" +
 	"\x12MongodConfigSet3_6\x12^\n" +
 	"\x10effective_config\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6R\x0feffectiveConfig\x12T\n" +
 	"\vuser_config\x18\x02 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6R\n" +

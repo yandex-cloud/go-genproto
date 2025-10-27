@@ -304,3 +304,51 @@ func (m *DeleteFederationDomainMetadata) SetFederationId(v string) {
 func (m *DeleteFederationDomainMetadata) SetDomain(v string) {
 	m.Domain = v
 }
+
+func (m *SuspendFederatedUserAccountsRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *SuspendFederatedUserAccountsRequest) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
+
+func (m *SuspendFederatedUserAccountsRequest) SetReason(v string) {
+	m.Reason = v
+}
+
+func (m *SuspendFederatedUserAccountsMetadata) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *SuspendFederatedUserAccountsMetadata) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
+
+func (m *SuspendFederatedUserAccountsMetadata) SetReason(v string) {
+	m.Reason = v
+}
+
+func (m *SuspendFederatedUserAccountsResponse) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
+
+func (m *ReactivateFederatedUserAccountsRequest) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *ReactivateFederatedUserAccountsRequest) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
+
+func (m *ReactivateFederatedUserAccountsMetadata) SetFederationId(v string) {
+	m.FederationId = v
+}
+
+func (m *ReactivateFederatedUserAccountsMetadata) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
+
+func (m *ReactivateFederatedUserAccountsResponse) SetSubjectIds(v []string) {
+	m.SubjectIds = v
+}
