@@ -147,6 +147,10 @@ func (m *ConfigSpec) SetKafkaUiConfig(v *ConfigSpec_KafkaUIConfig) {
 	m.KafkaUiConfig = v
 }
 
+func (m *ConfigSpec) SetPatchVersion(v string) {
+	m.PatchVersion = v
+}
+
 type ConfigSpec_Kafka_KafkaConfig = isConfigSpec_Kafka_KafkaConfig
 
 func (m *ConfigSpec_Kafka) SetKafkaConfig(v ConfigSpec_Kafka_KafkaConfig) {

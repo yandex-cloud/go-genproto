@@ -130,24 +130,6 @@ func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig
 	m.GreenplumConfig = v
 }
 
-func (m *ClusterConfigSet) SetGreenplumConfigSet_6_17(v *GreenplumConfigSet6_17) {
-	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_17{
-		GreenplumConfigSet_6_17: v,
-	}
-}
-
-func (m *ClusterConfigSet) SetGreenplumConfigSet_6_19(v *GreenplumConfigSet6_19) {
-	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_19{
-		GreenplumConfigSet_6_19: v,
-	}
-}
-
-func (m *ClusterConfigSet) SetGreenplumConfigSet_6_21(v *GreenplumConfigSet6_21) {
-	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_21{
-		GreenplumConfigSet_6_21: v,
-	}
-}
-
 func (m *ClusterConfigSet) SetGreenplumConfigSet_6_22(v *GreenplumConfigSet6_22) {
 	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_22{
 		GreenplumConfigSet_6_22: v,

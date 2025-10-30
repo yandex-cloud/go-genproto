@@ -73,6 +73,12 @@ func (m *ConnectionParams) SetGreenplum(v *GreenplumConnection) {
 	}
 }
 
+func (m *ConnectionParams) SetStoredoc(v *StoreDocConnection) {
+	m.Type = &ConnectionParams_Storedoc{
+		Storedoc: v,
+	}
+}
+
 func (m *LockboxSecret) SetId(v string) {
 	m.Id = v
 }

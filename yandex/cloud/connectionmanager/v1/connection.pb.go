@@ -37,6 +37,7 @@ const (
 	DBType_TRINO               DBType = 8
 	DBType_VALKEY              DBType = 9
 	DBType_GREENPLUM           DBType = 10
+	DBType_STOREDOC            DBType = 11
 )
 
 // Enum value maps for DBType.
@@ -53,6 +54,7 @@ var (
 		8:  "TRINO",
 		9:  "VALKEY",
 		10: "GREENPLUM",
+		11: "STOREDOC",
 	}
 	DBType_value = map[string]int32{
 		"DB_TYPE_UNSPECIFIED": 0,
@@ -66,6 +68,7 @@ var (
 		"TRINO":               8,
 		"VALKEY":              9,
 		"GREENPLUM":           10,
+		"STOREDOC":            11,
 	}
 )
 
@@ -110,6 +113,7 @@ type ConnectionParams struct {
 	//	*ConnectionParams_Trino
 	//	*ConnectionParams_Valkey
 	//	*ConnectionParams_Greenplum
+	//	*ConnectionParams_Storedoc
 	Type          isConnectionParams_Type `protobuf_oneof:"type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -242,6 +246,15 @@ func (x *ConnectionParams) GetGreenplum() *GreenplumConnection {
 	return nil
 }
 
+func (x *ConnectionParams) GetStoredoc() *StoreDocConnection {
+	if x != nil {
+		if x, ok := x.Type.(*ConnectionParams_Storedoc); ok {
+			return x.Storedoc
+		}
+	}
+	return nil
+}
+
 type isConnectionParams_Type interface {
 	isConnectionParams_Type()
 }
@@ -286,6 +299,10 @@ type ConnectionParams_Greenplum struct {
 	Greenplum *GreenplumConnection `protobuf:"bytes,10,opt,name=greenplum,proto3,oneof"`
 }
 
+type ConnectionParams_Storedoc struct {
+	Storedoc *StoreDocConnection `protobuf:"bytes,11,opt,name=storedoc,proto3,oneof"`
+}
+
 func (*ConnectionParams_Postgresql) isConnectionParams_Type() {}
 
 func (*ConnectionParams_Mysql) isConnectionParams_Type() {}
@@ -305,6 +322,8 @@ func (*ConnectionParams_Trino) isConnectionParams_Type() {}
 func (*ConnectionParams_Valkey) isConnectionParams_Type() {}
 
 func (*ConnectionParams_Greenplum) isConnectionParams_Type() {}
+
+func (*ConnectionParams_Storedoc) isConnectionParams_Type() {}
 
 type LockboxSecret struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -524,7 +543,7 @@ var File_yandex_cloud_connectionmanager_v1_connection_proto protoreflect.FileDes
 
 const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/connectionmanager/v1/connection.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/connectionmanager/v1/mysql.proto\x1a2yandex/cloud/connectionmanager/v1/postgresql.proto\x1a/yandex/cloud/connectionmanager/v1/mongodb.proto\x1a2yandex/cloud/connectionmanager/v1/clickhouse.proto\x1a-yandex/cloud/connectionmanager/v1/redis.proto\x1a-yandex/cloud/connectionmanager/v1/trino.proto\x1a.yandex/cloud/connectionmanager/v1/valkey.proto\x1a2yandex/cloud/connectionmanager/v1/opensearch.proto\x1a1yandex/cloud/connectionmanager/v1/greenplum.proto\x1a-yandex/cloud/connectionmanager/v1/kafka.proto\"\xd4\x06\n" +
+	"2yandex/cloud/connectionmanager/v1/connection.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/connectionmanager/v1/mysql.proto\x1a2yandex/cloud/connectionmanager/v1/postgresql.proto\x1a/yandex/cloud/connectionmanager/v1/mongodb.proto\x1a2yandex/cloud/connectionmanager/v1/clickhouse.proto\x1a-yandex/cloud/connectionmanager/v1/redis.proto\x1a-yandex/cloud/connectionmanager/v1/trino.proto\x1a.yandex/cloud/connectionmanager/v1/valkey.proto\x1a2yandex/cloud/connectionmanager/v1/opensearch.proto\x1a1yandex/cloud/connectionmanager/v1/greenplum.proto\x1a-yandex/cloud/connectionmanager/v1/kafka.proto\x1a0yandex/cloud/connectionmanager/v1/storedoc.proto\"\xa9\a\n" +
 	"\x10ConnectionParams\x12Y\n" +
 	"\n" +
 	"postgresql\x18\x01 \x01(\v27.yandex.cloud.connectionmanager.v1.PostgreSQLConnectionH\x00R\n" +
@@ -542,7 +561,8 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\x05trino\x18\b \x01(\v22.yandex.cloud.connectionmanager.v1.TrinoConnectionH\x00R\x05trino\x12M\n" +
 	"\x06valkey\x18\t \x01(\v23.yandex.cloud.connectionmanager.v1.ValkeyConnectionH\x00R\x06valkey\x12V\n" +
 	"\tgreenplum\x18\n" +
-	" \x01(\v26.yandex.cloud.connectionmanager.v1.GreenplumConnectionH\x00R\tgreenplumB\x06\n" +
+	" \x01(\v26.yandex.cloud.connectionmanager.v1.GreenplumConnectionH\x00R\tgreenplum\x12S\n" +
+	"\bstoredoc\x18\v \x01(\v25.yandex.cloud.connectionmanager.v1.StoreDocConnectionH\x00R\bstoredocB\x06\n" +
 	"\x04type\"`\n" +
 	"\rLockboxSecret\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
@@ -570,7 +590,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06secretJ\x04\b\v\x10\f*\xa5\x01\n" +
+	"\x06secretJ\x04\b\v\x10\f*\xb3\x01\n" +
 	"\x06DBType\x12\x17\n" +
 	"\x13DB_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -587,7 +607,8 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\n" +
 	"\x06VALKEY\x10\t\x12\r\n" +
 	"\tGREENPLUM\x10\n" +
-	"B\x80\x01\n" +
+	"\x12\f\n" +
+	"\bSTOREDOC\x10\vB\x80\x01\n" +
 	"%yandex.cloud.api.connectionmanager.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/connectionmanager/v1;connectionmanagerb\x06proto3"
 
 var (
@@ -620,8 +641,9 @@ var file_yandex_cloud_connectionmanager_v1_connection_proto_goTypes = []any{
 	(*TrinoConnection)(nil),       // 12: yandex.cloud.connectionmanager.v1.TrinoConnection
 	(*ValkeyConnection)(nil),      // 13: yandex.cloud.connectionmanager.v1.ValkeyConnection
 	(*GreenplumConnection)(nil),   // 14: yandex.cloud.connectionmanager.v1.GreenplumConnection
-	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 16: google.protobuf.BoolValue
+	(*StoreDocConnection)(nil),    // 15: yandex.cloud.connectionmanager.v1.StoreDocConnection
+	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 17: google.protobuf.BoolValue
 }
 var file_yandex_cloud_connectionmanager_v1_connection_proto_depIdxs = []int32{
 	5,  // 0: yandex.cloud.connectionmanager.v1.ConnectionParams.postgresql:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLConnection
@@ -634,17 +656,18 @@ var file_yandex_cloud_connectionmanager_v1_connection_proto_depIdxs = []int32{
 	12, // 7: yandex.cloud.connectionmanager.v1.ConnectionParams.trino:type_name -> yandex.cloud.connectionmanager.v1.TrinoConnection
 	13, // 8: yandex.cloud.connectionmanager.v1.ConnectionParams.valkey:type_name -> yandex.cloud.connectionmanager.v1.ValkeyConnection
 	14, // 9: yandex.cloud.connectionmanager.v1.ConnectionParams.greenplum:type_name -> yandex.cloud.connectionmanager.v1.GreenplumConnection
-	15, // 10: yandex.cloud.connectionmanager.v1.Connection.created_at:type_name -> google.protobuf.Timestamp
-	15, // 11: yandex.cloud.connectionmanager.v1.Connection.updated_at:type_name -> google.protobuf.Timestamp
-	4,  // 12: yandex.cloud.connectionmanager.v1.Connection.labels:type_name -> yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
-	1,  // 13: yandex.cloud.connectionmanager.v1.Connection.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
-	2,  // 14: yandex.cloud.connectionmanager.v1.Connection.lockbox_secret:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecret
-	16, // 15: yandex.cloud.connectionmanager.v1.Connection.can_use:type_name -> google.protobuf.BoolValue
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	15, // 10: yandex.cloud.connectionmanager.v1.ConnectionParams.storedoc:type_name -> yandex.cloud.connectionmanager.v1.StoreDocConnection
+	16, // 11: yandex.cloud.connectionmanager.v1.Connection.created_at:type_name -> google.protobuf.Timestamp
+	16, // 12: yandex.cloud.connectionmanager.v1.Connection.updated_at:type_name -> google.protobuf.Timestamp
+	4,  // 13: yandex.cloud.connectionmanager.v1.Connection.labels:type_name -> yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
+	1,  // 14: yandex.cloud.connectionmanager.v1.Connection.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
+	2,  // 15: yandex.cloud.connectionmanager.v1.Connection.lockbox_secret:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecret
+	17, // 16: yandex.cloud.connectionmanager.v1.Connection.can_use:type_name -> google.protobuf.BoolValue
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_connectionmanager_v1_connection_proto_init() }
@@ -662,6 +685,7 @@ func file_yandex_cloud_connectionmanager_v1_connection_proto_init() {
 	file_yandex_cloud_connectionmanager_v1_opensearch_proto_init()
 	file_yandex_cloud_connectionmanager_v1_greenplum_proto_init()
 	file_yandex_cloud_connectionmanager_v1_kafka_proto_init()
+	file_yandex_cloud_connectionmanager_v1_storedoc_proto_init()
 	file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[0].OneofWrappers = []any{
 		(*ConnectionParams_Postgresql)(nil),
 		(*ConnectionParams_Mysql)(nil),
@@ -673,6 +697,7 @@ func file_yandex_cloud_connectionmanager_v1_connection_proto_init() {
 		(*ConnectionParams_Trino)(nil),
 		(*ConnectionParams_Valkey)(nil),
 		(*ConnectionParams_Greenplum)(nil),
+		(*ConnectionParams_Storedoc)(nil),
 	}
 	file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[2].OneofWrappers = []any{
 		(*Connection_LockboxSecret)(nil),

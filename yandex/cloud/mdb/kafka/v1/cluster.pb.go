@@ -617,6 +617,8 @@ type ConfigSpec struct {
 	Kraft *ConfigSpec_KRaft `protobuf:"bytes,12,opt,name=kraft,proto3" json:"kraft,omitempty"`
 	// Configuration of Kafka UI.
 	KafkaUiConfig *ConfigSpec_KafkaUIConfig `protobuf:"bytes,13,opt,name=kafka_ui_config,json=kafkaUiConfig,proto3" json:"kafka_ui_config,omitempty"`
+	// Patch or release version ex. 3.9.1, 4.0.1 etc
+	PatchVersion  string `protobuf:"bytes,14,opt,name=patch_version,json=patchVersion,proto3" json:"patch_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -741,6 +743,13 @@ func (x *ConfigSpec) GetKafkaUiConfig() *ConfigSpec_KafkaUIConfig {
 		return x.KafkaUiConfig
 	}
 	return nil
+}
+
+func (x *ConfigSpec) GetPatchVersion() string {
+	if x != nil {
+		return x.PatchVersion
+	}
+	return ""
 }
 
 type Resources struct {
@@ -1882,7 +1891,7 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xb3\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xd8\n" +
 	"\n" +
 	"\n" +
 	"ConfigSpec\x12\x18\n" +
@@ -1899,7 +1908,8 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	" \x01(\v23.yandex.cloud.mdb.kafka.v1.ConfigSpec.RestAPIConfigR\rrestApiConfig\x12b\n" +
 	"\x15disk_size_autoscaling\x18\v \x01(\v2..yandex.cloud.mdb.kafka.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12A\n" +
 	"\x05kraft\x18\f \x01(\v2+.yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaftR\x05kraft\x12[\n" +
-	"\x0fkafka_ui_config\x18\r \x01(\v23.yandex.cloud.mdb.kafka.v1.ConfigSpec.KafkaUIConfigR\rkafkaUiConfig\x1a\x8b\x02\n" +
+	"\x0fkafka_ui_config\x18\r \x01(\v23.yandex.cloud.mdb.kafka.v1.ConfigSpec.KafkaUIConfigR\rkafkaUiConfig\x12#\n" +
+	"\rpatch_version\x18\x0e \x01(\tR\fpatchVersion\x1a\x8b\x02\n" +
 	"\x05Kafka\x12B\n" +
 	"\tresources\x18\x01 \x01(\v2$.yandex.cloud.mdb.kafka.v1.ResourcesR\tresources\x12V\n" +
 	"\x10kafka_config_2_8\x18\x04 \x01(\v2).yandex.cloud.mdb.kafka.v1.KafkaConfig2_8H\x00R\x0fkafkaConfig_2_8\x12P\n" +
