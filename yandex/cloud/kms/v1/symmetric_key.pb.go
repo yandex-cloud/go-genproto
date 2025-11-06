@@ -36,6 +36,8 @@ const (
 	SymmetricAlgorithm_AES_256 SymmetricAlgorithm = 3
 	// AES algorithm with 256-bit keys hosted by HSM
 	SymmetricAlgorithm_AES_256_HSM SymmetricAlgorithm = 4
+	// GOST R 34.12-2015 Kuznyechik algorithm
+	SymmetricAlgorithm_GOST_R_3412_2015_K SymmetricAlgorithm = 5
 )
 
 // Enum value maps for SymmetricAlgorithm.
@@ -46,6 +48,7 @@ var (
 		2: "AES_192",
 		3: "AES_256",
 		4: "AES_256_HSM",
+		5: "GOST_R_3412_2015_K",
 	}
 	SymmetricAlgorithm_value = map[string]int32{
 		"SYMMETRIC_ALGORITHM_UNSPECIFIED": 0,
@@ -53,6 +56,7 @@ var (
 		"AES_192":                         2,
 		"AES_256":                         3,
 		"AES_256_HSM":                     4,
+		"GOST_R_3412_2015_K":              5,
 	}
 )
 
@@ -501,13 +505,14 @@ const file_yandex_cloud_kms_v1_symmetric_key_proto_rawDesc = "" +
 	"\n" +
 	"\x06ACTIVE\x10\x01\x12\x1d\n" +
 	"\x19SCHEDULED_FOR_DESTRUCTION\x10\x02\x12\r\n" +
-	"\tDESTROYED\x10\x03*q\n" +
+	"\tDESTROYED\x10\x03*\x89\x01\n" +
 	"\x12SymmetricAlgorithm\x12#\n" +
 	"\x1fSYMMETRIC_ALGORITHM_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aAES_128\x10\x01\x12\v\n" +
 	"\aAES_192\x10\x02\x12\v\n" +
 	"\aAES_256\x10\x03\x12\x0f\n" +
-	"\vAES_256_HSM\x10\x04BV\n" +
+	"\vAES_256_HSM\x10\x04\x12\x16\n" +
+	"\x12GOST_R_3412_2015_K\x10\x05BV\n" +
 	"\x17yandex.cloud.api.kms.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/kms/v1;kmsb\x06proto3"
 
 var (

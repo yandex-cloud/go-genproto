@@ -99,6 +99,10 @@ func (m *TrinoConfigSpec) SetAccessControl(v *AccessControlConfig) {
 	m.AccessControl = v
 }
 
+func (m *TrinoConfigSpec) SetResourceManagement(v *ResourceManagementConfig) {
+	m.ResourceManagement = v
+}
+
 func (m *TrinoConfigSpec) SetTls(v *TLSConfig) {
 	m.Tls = v
 }
@@ -155,6 +159,10 @@ func (m *UpdateTrinoConfigSpec) SetRetryPolicy(v *RetryPolicyConfig) {
 
 func (m *UpdateTrinoConfigSpec) SetAccessControl(v *AccessControlConfig) {
 	m.AccessControl = v
+}
+
+func (m *UpdateTrinoConfigSpec) SetResourceManagement(v *ResourceManagementConfig) {
+	m.ResourceManagement = v
 }
 
 func (m *UpdateTrinoConfigSpec) SetTls(v *TLSConfig) {

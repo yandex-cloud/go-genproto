@@ -797,45 +797,45 @@ const file_yandex_cloud_video_v1_style_preset_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filterJ\x04\b\x02\x10d\"\x91\x01\n" +
 	"\x18ListStylePresetsResponse\x12G\n" +
 	"\rstyle_presets\x18\x01 \x03(\v2\".yandex.cloud.video.v1.StylePresetR\fstylePresets\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xce\t\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xbc\t\n" +
 	"\x18CreateStylePresetRequest\x12+\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x125\n" +
-	"\x05title\x18\x02 \x01(\tB\x1f\xe8\xc71\x01\xf2\xc71\x0f[a-zA-Z0-9-_ ]+\x8a\xc81\x04<=50R\x05title\x12H\n" +
+	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12\"\n" +
+	"\x05title\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05title\x12H\n" +
 	"\x10background_color\x18\x03 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R\x0fbackgroundColor\x12X\n" +
 	"\x19widget_text_color_primary\x18\x04 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R\x16widgetTextColorPrimary\x12\\\n" +
 	"\x1bwidget_text_color_secondary\x18\x05 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R\x18widgetTextColorSecondary\x12M\n" +
 	"\x13widget_accent_color\x18\x06 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R\x11widgetAccentColor\x122\n" +
-	"\x10widget_block_gap\x18\a \x01(\x03B\b\xfa\xc71\x040-10R\x0ewidgetBlockGap\x12^\n" +
+	"\x10widget_block_gap\x18\a \x01(\x03B\b\xfa\xc71\x040-50R\x0ewidgetBlockGap\x12^\n" +
 	"\x1cwidget_block_separator_color\x18\b \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R\x19widgetBlockSeparatorColor\x129\n" +
 	"\x14player_border_radius\x18\r \x01(\x03B\a\xfa\xc71\x03>=0R\x12playerBorderRadius\x12@\n" +
 	"\fplayer_color\x18\x0e \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R\vplayerColor\x12s\n" +
 	"'playlist_selected_item_background_color\x18\x0f \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[#a-zA-Z0-9]+\x8a\xc81\x04<=50R#playlistSelectedItemBackgroundColor\x12F\n" +
-	"\x1bplaylist_item_border_radius\x18\x10 \x01(\x03B\a\xfa\xc71\x03>=0R\x18playlistItemBorderRadius\x123\n" +
-	"\x11playlist_item_gap\x18\x11 \x01(\x03B\a\xfa\xc71\x03>=0R\x0fplaylistItemGap\x12d\n" +
+	"\x1bplaylist_item_border_radius\x18\x10 \x01(\x03B\a\xfa\xc71\x03>=0R\x18playlistItemBorderRadius\x124\n" +
+	"\x11playlist_item_gap\x18\x11 \x01(\x03B\b\xfa\xc71\x040-50R\x0fplaylistItemGap\x12d\n" +
 	"\x11playlist_location\x18\x12 \x01(\x0e21.yandex.cloud.video.v1.StylePreset.WidgetLocationB\x04\xe8\xc71\x01R\x10playlistLocation\x12B\n" +
 	"\rright_widgets\x18\v \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\frightWidgets\x12D\n" +
 	"\x0ebottom_widgets\x18\f \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\rbottomWidgetsJ\x04\b\t\x10\n" +
 	"J\x04\b\n" +
 	"\x10\v\"C\n" +
 	"\x19CreateStylePresetMetadata\x12&\n" +
-	"\x0fstyle_preset_id\x18\x01 \x01(\tR\rstylePresetId\"\xf7\t\n" +
+	"\x0fstyle_preset_id\x18\x01 \x01(\tR\rstylePresetId\"\xe5\t\n" +
 	"\x18UpdateStylePresetRequest\x124\n" +
 	"\x0fstyle_preset_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rstylePresetId\x12?\n" +
 	"\n" +
-	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x121\n" +
-	"\x05title\x18\x03 \x01(\tB\x1b\xf2\xc71\x0f[a-zA-Z0-9-_ ]*\x8a\xc81\x04<=50R\x05title\x12E\n" +
+	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1e\n" +
+	"\x05title\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x05title\x12E\n" +
 	"\x10background_color\x18\x04 \x01(\tB\x1a\xf2\xc71\x0e[#a-zA-Z0-9-]*\x8a\xc81\x04<=50R\x0fbackgroundColor\x12U\n" +
 	"\x19widget_text_color_primary\x18\x05 \x01(\tB\x1a\xf2\xc71\x0e[#a-zA-Z0-9-]*\x8a\xc81\x04<=50R\x16widgetTextColorPrimary\x12Y\n" +
 	"\x1bwidget_text_color_secondary\x18\x06 \x01(\tB\x1a\xf2\xc71\x0e[#a-zA-Z0-9-]*\x8a\xc81\x04<=50R\x18widgetTextColorSecondary\x12J\n" +
 	"\x13widget_accent_color\x18\a \x01(\tB\x1a\xf2\xc71\x0e[#a-zA-Z0-9-]*\x8a\xc81\x04<=50R\x11widgetAccentColor\x122\n" +
-	"\x10widget_block_gap\x18\b \x01(\x03B\b\xfa\xc71\x040-10R\x0ewidgetBlockGap\x12[\n" +
+	"\x10widget_block_gap\x18\b \x01(\x03B\b\xfa\xc71\x040-50R\x0ewidgetBlockGap\x12[\n" +
 	"\x1cwidget_block_separator_color\x18\t \x01(\tB\x1a\xf2\xc71\x0e[#a-zA-Z0-9-]*\x8a\xc81\x04<=50R\x19widgetBlockSeparatorColor\x129\n" +
 	"\x14player_border_radius\x18\x0e \x01(\x03B\a\xfa\xc71\x03>=0R\x12playerBorderRadius\x12<\n" +
 	"\fplayer_color\x18\x0f \x01(\tB\x19\xf2\xc71\r[#a-zA-Z0-9]*\x8a\xc81\x04<=50R\vplayerColor\x12o\n" +
 	"'playlist_selected_item_background_color\x18\x10 \x01(\tB\x19\xf2\xc71\r[#a-zA-Z0-9]*\x8a\xc81\x04<=50R#playlistSelectedItemBackgroundColor\x12F\n" +
-	"\x1bplaylist_item_border_radius\x18\x11 \x01(\x03B\a\xfa\xc71\x03>=0R\x18playlistItemBorderRadius\x123\n" +
-	"\x11playlist_item_gap\x18\x12 \x01(\x03B\a\xfa\xc71\x03>=0R\x0fplaylistItemGap\x12^\n" +
+	"\x1bplaylist_item_border_radius\x18\x11 \x01(\x03B\a\xfa\xc71\x03>=0R\x18playlistItemBorderRadius\x124\n" +
+	"\x11playlist_item_gap\x18\x12 \x01(\x03B\b\xfa\xc71\x040-50R\x0fplaylistItemGap\x12^\n" +
 	"\x11playlist_location\x18\x13 \x01(\x0e21.yandex.cloud.video.v1.StylePreset.WidgetLocationR\x10playlistLocation\x12B\n" +
 	"\rright_widgets\x18\f \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\frightWidgets\x12D\n" +
 	"\x0ebottom_widgets\x18\r \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\rbottomWidgetsJ\x04\b\n" +

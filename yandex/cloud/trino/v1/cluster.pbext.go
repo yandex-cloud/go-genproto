@@ -141,6 +141,10 @@ func (m *TrinoConfig) SetAccessControl(v *AccessControlConfig) {
 	m.AccessControl = v
 }
 
+func (m *TrinoConfig) SetResourceManagement(v *ResourceManagementConfig) {
+	m.ResourceManagement = v
+}
+
 func (m *TrinoConfig) SetTls(v *TLSConfig) {
 	m.Tls = v
 }

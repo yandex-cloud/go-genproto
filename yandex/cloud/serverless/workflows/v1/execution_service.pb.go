@@ -671,9 +671,9 @@ const file_yandex_cloud_serverless_workflows_v1_execution_service_proto_rawDesc 
 	"\n" +
 	"executions\x18\x01 \x03(\v26.yandex.cloud.serverless.workflows.v1.ExecutionPreviewR\n" +
 	"executions\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xe3\b\n" +
-	"\x10ExecutionService\x12\xac\x01\n" +
-	"\x05Start\x12;.yandex.cloud.serverless.workflows.v1.StartExecutionRequest\x1a<.yandex.cloud.serverless.workflows.v1.StartExecutionResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/workflows/v1/execution/start\x12\xb4\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xa4\t\n" +
+	"\x10ExecutionService\x12\xed\x01\n" +
+	"\x05Start\x12;.yandex.cloud.serverless.workflows.v1.StartExecutionRequest\x1a<.yandex.cloud.serverless.workflows.v1.StartExecutionResponse\"i\x82\xd3\xe4\x93\x02c:\x01*Z?:\x10input.input_json\"+/workflows/v1/execution/{workflow_id}/start\"\x1d/workflows/v1/execution/start\x12\xb4\x01\n" +
 	"\x04Stop\x12:.yandex.cloud.serverless.workflows.v1.StopExecutionRequest\x1a;.yandex.cloud.serverless.workflows.v1.StopExecutionResponse\"3\x82\xd3\xe4\x93\x02-\"+/workflows/v1/execution/{execution_id}/stop\x12\xc8\x01\n" +
 	"\tTerminate\x12?.yandex.cloud.serverless.workflows.v1.TerminateExecutionRequest\x1a@.yandex.cloud.serverless.workflows.v1.TerminateExecutionResponse\"8\x82\xd3\xe4\x93\x022\"0/workflows/v1/execution/{execution_id}/terminate\x12\xac\x01\n" +
 	"\x03Get\x129.yandex.cloud.serverless.workflows.v1.GetExecutionRequest\x1a:.yandex.cloud.serverless.workflows.v1.GetExecutionResponse\".\x82\xd3\xe4\x93\x02(\x12&/workflows/v1/execution/{execution_id}\x12\xc9\x01\n" +

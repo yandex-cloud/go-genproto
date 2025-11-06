@@ -22,6 +22,10 @@ func (m *GetTopRequest) SetDevices(v []Device) {
 	m.Devices = v
 }
 
+func (m *GetTopRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
 func (m *GetTopResponse) SetTotalCount(v int64) {
 	m.TotalCount = v
 }
@@ -66,6 +70,10 @@ func (m *GetDynamicsRequest) SetDevices(v []Device) {
 	m.Devices = v
 }
 
+func (m *GetDynamicsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
 func (m *GetDynamicsResponse) SetResults(v []*GetDynamicsResponse_DynamicsInfo) {
 	m.Results = v
 }
@@ -92,6 +100,10 @@ func (m *GetRegionsDistributionRequest) SetRegion(v GetRegionsDistributionReques
 
 func (m *GetRegionsDistributionRequest) SetDevices(v []Device) {
 	m.Devices = v
+}
+
+func (m *GetRegionsDistributionRequest) SetFolderId(v string) {
+	m.FolderId = v
 }
 
 func (m *GetRegionsDistributionResponse) SetResults(v []*GetRegionsDistributionResponse_RegionInfo) {

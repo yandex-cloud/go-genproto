@@ -388,9 +388,11 @@ type GenSearchResponse struct {
 	// A bullet answer in case the model cannot give a proper response and returns a set of bullets with various data.
 	IsBulletAnswer bool `protobuf:"varint,6,opt,name=is_bullet_answer,json=isBulletAnswer,proto3" json:"is_bullet_answer,omitempty"`
 	// Search hints
-	Hints         []string `protobuf:"bytes,7,rep,name=hints,proto3" json:"hints,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Hints []string `protobuf:"bytes,7,rep,name=hints,proto3" json:"hints,omitempty"`
+	// The answer may contain inappropriate content
+	ProblematicAnswer bool `protobuf:"varint,8,opt,name=problematic_answer,json=problematicAnswer,proto3" json:"problematic_answer,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GenSearchResponse) Reset() {
@@ -470,6 +472,13 @@ func (x *GenSearchResponse) GetHints() []string {
 		return x.Hints
 	}
 	return nil
+}
+
+func (x *GenSearchResponse) GetProblematicAnswer() bool {
+	if x != nil {
+		return x.ProblematicAnswer
+	}
+	return false
 }
 
 type GenSearchRequest_SiteOption struct {
@@ -874,7 +883,7 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\x0eDOC_FORMAT_DOC\x10\n" +
 	"B\x10\n" +
 	"\x0efilter_optionsB\x0e\n" +
-	"\fsite_options\"\xaa\x04\n" +
+	"\fsite_options\"\xd9\x04\n" +
 	"\x11GenSearchResponse\x12E\n" +
 	"\amessage\x18\x01 \x01(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageR\amessage\x12M\n" +
 	"\asources\x18\x02 \x03(\v23.yandex.cloud.searchapi.v2.GenSearchResponse.SourceR\asources\x12_\n" +
@@ -882,7 +891,8 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\x14fixed_misspell_query\x18\x04 \x01(\tR\x12fixedMisspellQuery\x12,\n" +
 	"\x12is_answer_rejected\x18\x05 \x01(\bR\x10isAnswerRejected\x12(\n" +
 	"\x10is_bullet_answer\x18\x06 \x01(\bR\x0eisBulletAnswer\x12\x14\n" +
-	"\x05hints\x18\a \x03(\tR\x05hints\x1aD\n" +
+	"\x05hints\x18\a \x03(\tR\x05hints\x12-\n" +
+	"\x12problematic_answer\x18\b \x01(\bR\x11problematicAnswer\x1aD\n" +
 	"\x06Source\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +

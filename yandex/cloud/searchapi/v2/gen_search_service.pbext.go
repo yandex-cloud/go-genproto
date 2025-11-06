@@ -130,6 +130,10 @@ func (m *GenSearchResponse) SetHints(v []string) {
 	m.Hints = v
 }
 
+func (m *GenSearchResponse) SetProblematicAnswer(v bool) {
+	m.ProblematicAnswer = v
+}
+
 func (m *GenSearchResponse_Source) SetUrl(v string) {
 	m.Url = v
 }

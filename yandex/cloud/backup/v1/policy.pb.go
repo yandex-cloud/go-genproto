@@ -318,6 +318,10 @@ const (
 	PolicySettings_PRE_COMMAND PolicySettings_CommandType = 1
 	// Launch command after backup execution
 	PolicySettings_POST_COMMAND PolicySettings_CommandType = 2
+	// Launch command before data capture (snapshot execution)
+	PolicySettings_PRE_DATA_COMMAND PolicySettings_CommandType = 3
+	// Launch command after data capture (snapshot execution)
+	PolicySettings_POST_DATA_COMMAND PolicySettings_CommandType = 4
 )
 
 // Enum value maps for PolicySettings_CommandType.
@@ -326,11 +330,15 @@ var (
 		0: "COMMAND_TYPE_UNSPECIFIED",
 		1: "PRE_COMMAND",
 		2: "POST_COMMAND",
+		3: "PRE_DATA_COMMAND",
+		4: "POST_DATA_COMMAND",
 	}
 	PolicySettings_CommandType_value = map[string]int32{
 		"COMMAND_TYPE_UNSPECIFIED": 0,
 		"PRE_COMMAND":              1,
 		"POST_COMMAND":             2,
+		"PRE_DATA_COMMAND":         3,
+		"POST_DATA_COMMAND":        4,
 	}
 )
 
@@ -2118,7 +2126,7 @@ const file_yandex_cloud_backup_v1_policy_proto_rawDesc = "" +
 	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x18\n" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\x12B\n" +
 	"\bsettings\x18\x06 \x01(\v2&.yandex.cloud.backup.v1.PolicySettingsR\bsettings\x12\x1b\n" +
-	"\tfolder_id\x18\a \x01(\tR\bfolderId\"\x8d,\n" +
+	"\tfolder_id\x18\a \x01(\tR\bfolderId\"\xba,\n" +
 	"\x0ePolicySettings\x12Z\n" +
 	"\vcompression\x18\x01 \x01(\x0e22.yandex.cloud.backup.v1.PolicySettings.CompressionB\x04\xe8\xc71\x01R\vcompression\x12<\n" +
 	"\x06format\x18\x02 \x01(\x0e2\x1e.yandex.cloud.backup.v1.FormatB\x04\xe8\xc71\x01R\x06format\x12I\n" +
@@ -2277,11 +2285,13 @@ const file_yandex_cloud_backup_v1_policy_proto_rawDesc = "" +
 	"\x0eUSE_IF_ENABLED\x10\x01\x12\x12\n" +
 	"\x0eENABLE_AND_USE\x10\x02\x12\x0e\n" +
 	"\n" +
-	"DO_NOT_USE\x10\x03\"N\n" +
+	"DO_NOT_USE\x10\x03\"{\n" +
 	"\vCommandType\x12\x1c\n" +
 	"\x18COMMAND_TYPE_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vPRE_COMMAND\x10\x01\x12\x10\n" +
-	"\fPOST_COMMAND\x10\x02J\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0f\"\xe9\x02\n" +
+	"\fPOST_COMMAND\x10\x02\x12\x14\n" +
+	"\x10PRE_DATA_COMMAND\x10\x03\x12\x15\n" +
+	"\x11POST_DATA_COMMAND\x10\x04J\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0f\"\xe9\x02\n" +
 	"\x11PolicyApplication\x12\x1b\n" +
 	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12.\n" +
 	"\x13compute_instance_id\x18\x02 \x01(\tR\x11computeInstanceId\x12\x18\n" +

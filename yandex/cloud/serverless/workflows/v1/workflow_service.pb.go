@@ -8,6 +8,7 @@ package workflows
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -844,7 +845,7 @@ var File_yandex_cloud_serverless_workflows_v1_workflow_service_proto protoreflec
 
 const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/serverless/workflows/v1/workflow_service.proto\x12$yandex.cloud.serverless.workflows.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/serverless/workflows/v1/workflow.proto\x1a\x1dyandex/cloud/validation.proto\"\xfe\x05\n" +
+	";yandex/cloud/serverless/workflows/v1/workflow_service.proto\x12$yandex.cloud.serverless.workflows.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/serverless/workflows/v1/workflow.proto\x1a\x1dyandex/cloud/validation.proto\"\xfe\x05\n" +
 	"\x15CreateWorkflowRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12<\n" +
 	"\x04name\x18\x02 \x01(\tB(\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -921,7 +922,7 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc =
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xe7\b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xfd\r\n" +
 	"\x0fWorkflowService\x12\xb1\x01\n" +
 	"\x06Create\x12;.yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest\x1a!.yandex.cloud.operation.Operation\"G\xb2\xd2*\"\n" +
 	"\x16CreateWorkflowMetadata\x12\bWorkflow\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/workflows/v1/workflow\x12\xbf\x01\n" +
@@ -931,7 +932,12 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc =
 	"\x06Delete\x12;.yandex.cloud.serverless.workflows.v1.DeleteWorkflowRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*/\n" +
 	"\x16DeleteWorkflowMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02&*$/workflows/v1/workflow/{workflow_id}\x12\x9f\x01\n" +
 	"\x04List\x12:.yandex.cloud.serverless.workflows.v1.ListWorkflowsRequest\x1a;.yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/workflows/v1/workflow\x12\xc4\x01\n" +
-	"\x0eListOperations\x12;.yandex.cloud.serverless.workflows.v1.ListOperationsRequest\x1a<.yandex.cloud.serverless.workflows.v1.ListOperationsResponse\"7\x82\xd3\xe4\x93\x021\x12//workflows/v1/workflow/{workflow_id}/operationsB~\n" +
+	"\x0eListOperations\x12;.yandex.cloud.serverless.workflows.v1.ListOperationsRequest\x1a<.yandex.cloud.serverless.workflows.v1.ListOperationsResponse\"7\x82\xd3\xe4\x93\x021\x12//workflows/v1/workflow/{workflow_id}/operations\x12\xb6\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"?\x82\xd3\xe4\x93\x029\x127/workflows/v1/workflow/{resource_id}:listAccessBindings\x12\xe5\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*9\n" +
+	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02;:\x01*\"6/workflows/v1/workflow/{resource_id}:setAccessBindings\x12\xf2\x01\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*<\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02>:\x01*\"9/workflows/v1/workflow/{resource_id}:updateAccessBindingsB~\n" +
 	"(yandex.cloud.api.serverless.workflows.v1ZRgithub.com/yandex-cloud/go-genproto/yandex/cloud/serverless/workflows/v1;workflowsb\x06proto3"
 
 var (
@@ -948,27 +954,31 @@ func file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDescGZI
 
 var file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_goTypes = []any{
-	(*CreateWorkflowRequest)(nil),  // 0: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest
-	(*CreateWorkflowMetadata)(nil), // 1: yandex.cloud.serverless.workflows.v1.CreateWorkflowMetadata
-	(*UpdateWorkflowRequest)(nil),  // 2: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest
-	(*UpdateWorkflowMetadata)(nil), // 3: yandex.cloud.serverless.workflows.v1.UpdateWorkflowMetadata
-	(*GetWorkflowRequest)(nil),     // 4: yandex.cloud.serverless.workflows.v1.GetWorkflowRequest
-	(*GetWorkflowResponse)(nil),    // 5: yandex.cloud.serverless.workflows.v1.GetWorkflowResponse
-	(*DeleteWorkflowRequest)(nil),  // 6: yandex.cloud.serverless.workflows.v1.DeleteWorkflowRequest
-	(*DeleteWorkflowMetadata)(nil), // 7: yandex.cloud.serverless.workflows.v1.DeleteWorkflowMetadata
-	(*ListWorkflowsRequest)(nil),   // 8: yandex.cloud.serverless.workflows.v1.ListWorkflowsRequest
-	(*ListWorkflowsResponse)(nil),  // 9: yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse
-	(*ListOperationsRequest)(nil),  // 10: yandex.cloud.serverless.workflows.v1.ListOperationsRequest
-	(*ListOperationsResponse)(nil), // 11: yandex.cloud.serverless.workflows.v1.ListOperationsResponse
-	nil,                            // 12: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.LabelsEntry
-	nil,                            // 13: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.LabelsEntry
-	(*WorkflowSpecification)(nil),  // 14: yandex.cloud.serverless.workflows.v1.WorkflowSpecification
-	(*LogOptions)(nil),             // 15: yandex.cloud.serverless.workflows.v1.LogOptions
-	(*WorkflowSchedule)(nil),       // 16: yandex.cloud.serverless.workflows.v1.WorkflowSchedule
-	(*fieldmaskpb.FieldMask)(nil),  // 17: google.protobuf.FieldMask
-	(*Workflow)(nil),               // 18: yandex.cloud.serverless.workflows.v1.Workflow
-	(*WorkflowPreview)(nil),        // 19: yandex.cloud.serverless.workflows.v1.WorkflowPreview
-	(*operation.Operation)(nil),    // 20: yandex.cloud.operation.Operation
+	(*CreateWorkflowRequest)(nil),              // 0: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest
+	(*CreateWorkflowMetadata)(nil),             // 1: yandex.cloud.serverless.workflows.v1.CreateWorkflowMetadata
+	(*UpdateWorkflowRequest)(nil),              // 2: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest
+	(*UpdateWorkflowMetadata)(nil),             // 3: yandex.cloud.serverless.workflows.v1.UpdateWorkflowMetadata
+	(*GetWorkflowRequest)(nil),                 // 4: yandex.cloud.serverless.workflows.v1.GetWorkflowRequest
+	(*GetWorkflowResponse)(nil),                // 5: yandex.cloud.serverless.workflows.v1.GetWorkflowResponse
+	(*DeleteWorkflowRequest)(nil),              // 6: yandex.cloud.serverless.workflows.v1.DeleteWorkflowRequest
+	(*DeleteWorkflowMetadata)(nil),             // 7: yandex.cloud.serverless.workflows.v1.DeleteWorkflowMetadata
+	(*ListWorkflowsRequest)(nil),               // 8: yandex.cloud.serverless.workflows.v1.ListWorkflowsRequest
+	(*ListWorkflowsResponse)(nil),              // 9: yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse
+	(*ListOperationsRequest)(nil),              // 10: yandex.cloud.serverless.workflows.v1.ListOperationsRequest
+	(*ListOperationsResponse)(nil),             // 11: yandex.cloud.serverless.workflows.v1.ListOperationsResponse
+	nil,                                        // 12: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.LabelsEntry
+	nil,                                        // 13: yandex.cloud.serverless.workflows.v1.UpdateWorkflowRequest.LabelsEntry
+	(*WorkflowSpecification)(nil),              // 14: yandex.cloud.serverless.workflows.v1.WorkflowSpecification
+	(*LogOptions)(nil),                         // 15: yandex.cloud.serverless.workflows.v1.LogOptions
+	(*WorkflowSchedule)(nil),                   // 16: yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	(*fieldmaskpb.FieldMask)(nil),              // 17: google.protobuf.FieldMask
+	(*Workflow)(nil),                           // 18: yandex.cloud.serverless.workflows.v1.Workflow
+	(*WorkflowPreview)(nil),                    // 19: yandex.cloud.serverless.workflows.v1.WorkflowPreview
+	(*operation.Operation)(nil),                // 20: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 21: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 22: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 23: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 24: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_depIdxs = []int32{
 	12, // 0: yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.labels:type_name -> yandex.cloud.serverless.workflows.v1.CreateWorkflowRequest.LabelsEntry
@@ -989,14 +999,20 @@ var file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_depIdxs = [
 	6,  // 15: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:input_type -> yandex.cloud.serverless.workflows.v1.DeleteWorkflowRequest
 	8,  // 16: yandex.cloud.serverless.workflows.v1.WorkflowService.List:input_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsRequest
 	10, // 17: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:input_type -> yandex.cloud.serverless.workflows.v1.ListOperationsRequest
-	20, // 18: yandex.cloud.serverless.workflows.v1.WorkflowService.Create:output_type -> yandex.cloud.operation.Operation
-	20, // 19: yandex.cloud.serverless.workflows.v1.WorkflowService.Update:output_type -> yandex.cloud.operation.Operation
-	5,  // 20: yandex.cloud.serverless.workflows.v1.WorkflowService.Get:output_type -> yandex.cloud.serverless.workflows.v1.GetWorkflowResponse
-	20, // 21: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:output_type -> yandex.cloud.operation.Operation
-	9,  // 22: yandex.cloud.serverless.workflows.v1.WorkflowService.List:output_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse
-	11, // 23: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:output_type -> yandex.cloud.serverless.workflows.v1.ListOperationsResponse
-	18, // [18:24] is the sub-list for method output_type
-	12, // [12:18] is the sub-list for method input_type
+	21, // 18: yandex.cloud.serverless.workflows.v1.WorkflowService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	22, // 19: yandex.cloud.serverless.workflows.v1.WorkflowService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	23, // 20: yandex.cloud.serverless.workflows.v1.WorkflowService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	20, // 21: yandex.cloud.serverless.workflows.v1.WorkflowService.Create:output_type -> yandex.cloud.operation.Operation
+	20, // 22: yandex.cloud.serverless.workflows.v1.WorkflowService.Update:output_type -> yandex.cloud.operation.Operation
+	5,  // 23: yandex.cloud.serverless.workflows.v1.WorkflowService.Get:output_type -> yandex.cloud.serverless.workflows.v1.GetWorkflowResponse
+	20, // 24: yandex.cloud.serverless.workflows.v1.WorkflowService.Delete:output_type -> yandex.cloud.operation.Operation
+	9,  // 25: yandex.cloud.serverless.workflows.v1.WorkflowService.List:output_type -> yandex.cloud.serverless.workflows.v1.ListWorkflowsResponse
+	11, // 26: yandex.cloud.serverless.workflows.v1.WorkflowService.ListOperations:output_type -> yandex.cloud.serverless.workflows.v1.ListOperationsResponse
+	24, // 27: yandex.cloud.serverless.workflows.v1.WorkflowService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	20, // 28: yandex.cloud.serverless.workflows.v1.WorkflowService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	20, // 29: yandex.cloud.serverless.workflows.v1.WorkflowService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	21, // [21:30] is the sub-list for method output_type
+	12, // [12:21] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name

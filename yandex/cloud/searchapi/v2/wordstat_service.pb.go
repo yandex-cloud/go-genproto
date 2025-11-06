@@ -202,7 +202,9 @@ type GetTopRequest struct {
 	// A list of IDs of the regions a query was made from.
 	Regions []string `protobuf:"bytes,3,rep,name=regions,proto3" json:"regions,omitempty"`
 	// A list of device types a query was made from.
-	Devices       []Device `protobuf:"varint,4,rep,packed,name=devices,proto3,enum=yandex.cloud.searchapi.v2.Device" json:"devices,omitempty"`
+	Devices []Device `protobuf:"varint,4,rep,packed,name=devices,proto3,enum=yandex.cloud.searchapi.v2.Device" json:"devices,omitempty"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -263,6 +265,13 @@ func (x *GetTopRequest) GetDevices() []Device {
 		return x.Devices
 	}
 	return nil
+}
+
+func (x *GetTopRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
 }
 
 type GetTopResponse struct {
@@ -341,7 +350,9 @@ type GetDynamicsRequest struct {
 	// A list of IDs of the regions a query was made from.
 	Regions []string `protobuf:"bytes,5,rep,name=regions,proto3" json:"regions,omitempty"`
 	// A list of device types a query was made from.
-	Devices       []Device `protobuf:"varint,6,rep,packed,name=devices,proto3,enum=yandex.cloud.searchapi.v2.Device" json:"devices,omitempty"`
+	Devices []Device `protobuf:"varint,6,rep,packed,name=devices,proto3,enum=yandex.cloud.searchapi.v2.Device" json:"devices,omitempty"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,7,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -418,6 +429,13 @@ func (x *GetDynamicsRequest) GetDevices() []Device {
 	return nil
 }
 
+func (x *GetDynamicsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
 type GetDynamicsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Results.
@@ -470,7 +488,9 @@ type GetRegionsDistributionRequest struct {
 	// Show query distribution only by city, only by region, or everywhere.
 	Region GetRegionsDistributionRequest_Region `protobuf:"varint,2,opt,name=region,proto3,enum=yandex.cloud.searchapi.v2.GetRegionsDistributionRequest_Region" json:"region,omitempty"`
 	// A list of device types a query was made from.
-	Devices       []Device `protobuf:"varint,3,rep,packed,name=devices,proto3,enum=yandex.cloud.searchapi.v2.Device" json:"devices,omitempty"`
+	Devices []Device `protobuf:"varint,3,rep,packed,name=devices,proto3,enum=yandex.cloud.searchapi.v2.Device" json:"devices,omitempty"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -524,6 +544,13 @@ func (x *GetRegionsDistributionRequest) GetDevices() []Device {
 		return x.Devices
 	}
 	return nil
+}
+
+func (x *GetRegionsDistributionRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
 }
 
 type GetRegionsDistributionResponse struct {
@@ -764,14 +791,15 @@ var File_yandex_cloud_searchapi_v2_wordstat_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/searchapi/v2/wordstat_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xce\x01\n" +
+	"0yandex/cloud/searchapi/v2/wordstat_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf5\x01\n" +
 	"\rGetTopRequest\x12%\n" +
 	"\x06phrase\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=400R\x06phrase\x12+\n" +
 	"\vnum_phrases\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x061-2000R\n" +
 	"numPhrases\x12#\n" +
 	"\aregions\x18\x03 \x03(\tB\t\x82\xc81\x05<=100R\aregions\x12D\n" +
-	"\adevices\x18\x04 \x03(\x0e2!.yandex.cloud.searchapi.v2.DeviceB\a\x82\xc81\x03<=3R\adevices\"\x97\x02\n" +
+	"\adevices\x18\x04 \x03(\x0e2!.yandex.cloud.searchapi.v2.DeviceB\a\x82\xc81\x03<=3R\adevices\x12%\n" +
+	"\tfolder_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"\x97\x02\n" +
 	"\x0eGetTopResponse\x12\x1f\n" +
 	"\vtotal_count\x18\x01 \x01(\x03R\n" +
 	"totalCount\x12N\n" +
@@ -780,14 +808,15 @@ const file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc = "" +
 	"\n" +
 	"PhraseInfo\x12\x16\n" +
 	"\x06phrase\x18\x01 \x01(\tR\x06phrase\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count\"\xc9\x03\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"\xf0\x03\n" +
 	"\x12GetDynamicsRequest\x12%\n" +
 	"\x06phrase\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=400R\x06phrase\x12R\n" +
 	"\x06period\x18\x02 \x01(\x0e24.yandex.cloud.searchapi.v2.GetDynamicsRequest.PeriodB\x04\xe8\xc71\x01R\x06period\x12=\n" +
 	"\tfrom_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\bfromDate\x123\n" +
 	"\ato_date\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x06toDate\x12#\n" +
 	"\aregions\x18\x05 \x03(\tB\t\x82\xc81\x05<=100R\aregions\x12D\n" +
-	"\adevices\x18\x06 \x03(\x0e2!.yandex.cloud.searchapi.v2.DeviceB\a\x82\xc81\x03<=3R\adevices\"Y\n" +
+	"\adevices\x18\x06 \x03(\x0e2!.yandex.cloud.searchapi.v2.DeviceB\a\x82\xc81\x03<=3R\adevices\x12%\n" +
+	"\tfolder_id\x18\a \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"Y\n" +
 	"\x06Period\x12\x16\n" +
 	"\x12PERIOD_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0ePERIOD_MONTHLY\x10\x01\x12\x11\n" +
@@ -798,11 +827,12 @@ const file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc = "" +
 	"\fDynamicsInfo\x12.\n" +
 	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x14\n" +
-	"\x05share\x18\x03 \x01(\x01R\x05share\"\xb5\x02\n" +
+	"\x05share\x18\x03 \x01(\x01R\x05share\"\xdc\x02\n" +
 	"\x1dGetRegionsDistributionRequest\x12%\n" +
 	"\x06phrase\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=400R\x06phrase\x12W\n" +
 	"\x06region\x18\x02 \x01(\x0e2?.yandex.cloud.searchapi.v2.GetRegionsDistributionRequest.RegionR\x06region\x12;\n" +
-	"\adevices\x18\x03 \x03(\x0e2!.yandex.cloud.searchapi.v2.DeviceR\adevices\"W\n" +
+	"\adevices\x18\x03 \x03(\x0e2!.yandex.cloud.searchapi.v2.DeviceR\adevices\x12%\n" +
+	"\tfolder_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"W\n" +
 	"\x06Region\x12\x16\n" +
 	"\x12REGION_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
