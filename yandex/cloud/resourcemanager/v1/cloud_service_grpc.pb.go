@@ -21,15 +21,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CloudService_Get_FullMethodName                  = "/yandex.cloud.resourcemanager.v1.CloudService/Get"
-	CloudService_List_FullMethodName                 = "/yandex.cloud.resourcemanager.v1.CloudService/List"
-	CloudService_Create_FullMethodName               = "/yandex.cloud.resourcemanager.v1.CloudService/Create"
-	CloudService_Update_FullMethodName               = "/yandex.cloud.resourcemanager.v1.CloudService/Update"
-	CloudService_Delete_FullMethodName               = "/yandex.cloud.resourcemanager.v1.CloudService/Delete"
-	CloudService_ListOperations_FullMethodName       = "/yandex.cloud.resourcemanager.v1.CloudService/ListOperations"
-	CloudService_ListAccessBindings_FullMethodName   = "/yandex.cloud.resourcemanager.v1.CloudService/ListAccessBindings"
-	CloudService_SetAccessBindings_FullMethodName    = "/yandex.cloud.resourcemanager.v1.CloudService/SetAccessBindings"
-	CloudService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.resourcemanager.v1.CloudService/UpdateAccessBindings"
+	CloudService_Get_FullMethodName                      = "/yandex.cloud.resourcemanager.v1.CloudService/Get"
+	CloudService_List_FullMethodName                     = "/yandex.cloud.resourcemanager.v1.CloudService/List"
+	CloudService_Create_FullMethodName                   = "/yandex.cloud.resourcemanager.v1.CloudService/Create"
+	CloudService_Update_FullMethodName                   = "/yandex.cloud.resourcemanager.v1.CloudService/Update"
+	CloudService_Delete_FullMethodName                   = "/yandex.cloud.resourcemanager.v1.CloudService/Delete"
+	CloudService_ListOperations_FullMethodName           = "/yandex.cloud.resourcemanager.v1.CloudService/ListOperations"
+	CloudService_ListAccessBindings_FullMethodName       = "/yandex.cloud.resourcemanager.v1.CloudService/ListAccessBindings"
+	CloudService_SetAccessBindings_FullMethodName        = "/yandex.cloud.resourcemanager.v1.CloudService/SetAccessBindings"
+	CloudService_UpdateAccessBindings_FullMethodName     = "/yandex.cloud.resourcemanager.v1.CloudService/UpdateAccessBindings"
+	CloudService_ListAccessPolicyBindings_FullMethodName = "/yandex.cloud.resourcemanager.v1.CloudService/ListAccessPolicyBindings"
+	CloudService_BindAccessPolicy_FullMethodName         = "/yandex.cloud.resourcemanager.v1.CloudService/BindAccessPolicy"
+	CloudService_UnbindAccessPolicy_FullMethodName       = "/yandex.cloud.resourcemanager.v1.CloudService/UnbindAccessPolicy"
 )
 
 // CloudServiceClient is the client API for CloudService service.
@@ -58,6 +61,12 @@ type CloudServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified cloud.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns list of access policy bindings for the cloud.
+	ListAccessPolicyBindings(ctx context.Context, in *access.ListAccessPolicyBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessPolicyBindingsResponse, error)
+	// Binds the access policy template to the cloud.
+	BindAccessPolicy(ctx context.Context, in *access.BindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Unbinds the access policy template from the cloud.
+	UnbindAccessPolicy(ctx context.Context, in *access.UnbindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type cloudServiceClient struct {
@@ -158,6 +167,36 @@ func (c *cloudServiceClient) UpdateAccessBindings(ctx context.Context, in *acces
 	return out, nil
 }
 
+func (c *cloudServiceClient) ListAccessPolicyBindings(ctx context.Context, in *access.ListAccessPolicyBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessPolicyBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(access.ListAccessPolicyBindingsResponse)
+	err := c.cc.Invoke(ctx, CloudService_ListAccessPolicyBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) BindAccessPolicy(ctx context.Context, in *access.BindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, CloudService_BindAccessPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudServiceClient) UnbindAccessPolicy(ctx context.Context, in *access.UnbindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, CloudService_UnbindAccessPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CloudServiceServer is the server API for CloudService service.
 // All implementations should embed UnimplementedCloudServiceServer
 // for forward compatibility.
@@ -184,6 +223,12 @@ type CloudServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified cloud.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Returns list of access policy bindings for the cloud.
+	ListAccessPolicyBindings(context.Context, *access.ListAccessPolicyBindingsRequest) (*access.ListAccessPolicyBindingsResponse, error)
+	// Binds the access policy template to the cloud.
+	BindAccessPolicy(context.Context, *access.BindAccessPolicyRequest) (*operation.Operation, error)
+	// Unbinds the access policy template from the cloud.
+	UnbindAccessPolicy(context.Context, *access.UnbindAccessPolicyRequest) (*operation.Operation, error)
 }
 
 // UnimplementedCloudServiceServer should be embedded to have
@@ -219,6 +264,15 @@ func (UnimplementedCloudServiceServer) SetAccessBindings(context.Context, *acces
 }
 func (UnimplementedCloudServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedCloudServiceServer) ListAccessPolicyBindings(context.Context, *access.ListAccessPolicyBindingsRequest) (*access.ListAccessPolicyBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessPolicyBindings not implemented")
+}
+func (UnimplementedCloudServiceServer) BindAccessPolicy(context.Context, *access.BindAccessPolicyRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BindAccessPolicy not implemented")
+}
+func (UnimplementedCloudServiceServer) UnbindAccessPolicy(context.Context, *access.UnbindAccessPolicyRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnbindAccessPolicy not implemented")
 }
 func (UnimplementedCloudServiceServer) testEmbeddedByValue() {}
 
@@ -402,6 +456,60 @@ func _CloudService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CloudService_ListAccessPolicyBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessPolicyBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).ListAccessPolicyBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_ListAccessPolicyBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).ListAccessPolicyBindings(ctx, req.(*access.ListAccessPolicyBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_BindAccessPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.BindAccessPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).BindAccessPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_BindAccessPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).BindAccessPolicy(ctx, req.(*access.BindAccessPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CloudService_UnbindAccessPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UnbindAccessPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServiceServer).UnbindAccessPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CloudService_UnbindAccessPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServiceServer).UnbindAccessPolicy(ctx, req.(*access.UnbindAccessPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CloudService_ServiceDesc is the grpc.ServiceDesc for CloudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -444,6 +552,18 @@ var CloudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _CloudService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "ListAccessPolicyBindings",
+			Handler:    _CloudService_ListAccessPolicyBindings_Handler,
+		},
+		{
+			MethodName: "BindAccessPolicy",
+			Handler:    _CloudService_BindAccessPolicy_Handler,
+		},
+		{
+			MethodName: "UnbindAccessPolicy",
+			Handler:    _CloudService_UnbindAccessPolicy_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

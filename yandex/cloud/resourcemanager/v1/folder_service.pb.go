@@ -779,7 +779,7 @@ const file_yandex_cloud_resourcemanager_v1_folder_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x84\x0e\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xcf\x13\n" +
 	"\rFolderService\x12\x93\x01\n" +
 	"\x03Get\x121.yandex.cloud.resourcemanager.v1.GetFolderRequest\x1a'.yandex.cloud.resourcemanager.v1.Folder\"0\x82\xd3\xe4\x93\x02*\x12(/resource-manager/v1/folders/{folder_id}\x12\x97\x01\n" +
 	"\x04List\x123.yandex.cloud.resourcemanager.v1.ListFoldersRequest\x1a4.yandex.cloud.resourcemanager.v1.ListFoldersResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/resource-manager/v1/folders\x12\xac\x01\n" +
@@ -794,7 +794,12 @@ const file_yandex_cloud_resourcemanager_v1_folder_service_proto_rawDesc = "" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x93\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02A:\x01*\"</resource-manager/v1/folders/{resource_id}:setAccessBindings\x12\x87\x02\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x99\x01\xb2\xd2*K\n" +
-	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02D:\x01*\"?/resource-manager/v1/folders/{resource_id}:updateAccessBindingsBz\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02D:\x01*\"?/resource-manager/v1/folders/{resource_id}:updateAccessBindings\x12\xd4\x01\n" +
+	"\x18ListAccessPolicyBindings\x124.yandex.cloud.access.ListAccessPolicyBindingsRequest\x1a5.yandex.cloud.access.ListAccessPolicyBindingsResponse\"K\x82\xd3\xe4\x93\x02E\x12C/resource-manager/v1/folders/{resource_id}:listAccessPolicyBindings\x12\xf2\x01\n" +
+	"\x10BindAccessPolicy\x12,.yandex.cloud.access.BindAccessPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*B\n" +
+	"\x1faccess.BindAccessPolicyMetadata\x12\x1faccess.BindAccessPolicyResponse\x82\xd3\xe4\x93\x02@:\x01*\";/resource-manager/v1/folders/{resource_id}:bindAccessPolicy\x12\xfc\x01\n" +
+	"\x12UnbindAccessPolicy\x12..yandex.cloud.access.UnbindAccessPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x92\x01\xb2\xd2*F\n" +
+	"!access.UnbindAccessPolicyMetadata\x12!access.UnbindAccessPolicyResponse\x82\xd3\xe4\x93\x02B:\x01*\"=/resource-manager/v1/folders/{resource_id}:unbindAccessPolicyBz\n" +
 	"#yandex.cloud.api.resourcemanager.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/resourcemanager/v1;resourcemanagerb\x06proto3"
 
 var (
@@ -811,27 +816,31 @@ func file_yandex_cloud_resourcemanager_v1_folder_service_proto_rawDescGZIP() []b
 
 var file_yandex_cloud_resourcemanager_v1_folder_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_resourcemanager_v1_folder_service_proto_goTypes = []any{
-	(*GetFolderRequest)(nil),                   // 0: yandex.cloud.resourcemanager.v1.GetFolderRequest
-	(*ListFoldersRequest)(nil),                 // 1: yandex.cloud.resourcemanager.v1.ListFoldersRequest
-	(*ListFoldersResponse)(nil),                // 2: yandex.cloud.resourcemanager.v1.ListFoldersResponse
-	(*CreateFolderRequest)(nil),                // 3: yandex.cloud.resourcemanager.v1.CreateFolderRequest
-	(*CreateFolderMetadata)(nil),               // 4: yandex.cloud.resourcemanager.v1.CreateFolderMetadata
-	(*UpdateFolderRequest)(nil),                // 5: yandex.cloud.resourcemanager.v1.UpdateFolderRequest
-	(*UpdateFolderMetadata)(nil),               // 6: yandex.cloud.resourcemanager.v1.UpdateFolderMetadata
-	(*DeleteFolderRequest)(nil),                // 7: yandex.cloud.resourcemanager.v1.DeleteFolderRequest
-	(*DeleteFolderMetadata)(nil),               // 8: yandex.cloud.resourcemanager.v1.DeleteFolderMetadata
-	(*ListFolderOperationsRequest)(nil),        // 9: yandex.cloud.resourcemanager.v1.ListFolderOperationsRequest
-	(*ListFolderOperationsResponse)(nil),       // 10: yandex.cloud.resourcemanager.v1.ListFolderOperationsResponse
-	nil,                                        // 11: yandex.cloud.resourcemanager.v1.CreateFolderRequest.LabelsEntry
-	nil,                                        // 12: yandex.cloud.resourcemanager.v1.UpdateFolderRequest.LabelsEntry
-	(*Folder)(nil),                             // 13: yandex.cloud.resourcemanager.v1.Folder
-	(*fieldmaskpb.FieldMask)(nil),              // 14: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),              // 15: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                // 16: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 17: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 18: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 19: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 20: yandex.cloud.access.ListAccessBindingsResponse
+	(*GetFolderRequest)(nil),                        // 0: yandex.cloud.resourcemanager.v1.GetFolderRequest
+	(*ListFoldersRequest)(nil),                      // 1: yandex.cloud.resourcemanager.v1.ListFoldersRequest
+	(*ListFoldersResponse)(nil),                     // 2: yandex.cloud.resourcemanager.v1.ListFoldersResponse
+	(*CreateFolderRequest)(nil),                     // 3: yandex.cloud.resourcemanager.v1.CreateFolderRequest
+	(*CreateFolderMetadata)(nil),                    // 4: yandex.cloud.resourcemanager.v1.CreateFolderMetadata
+	(*UpdateFolderRequest)(nil),                     // 5: yandex.cloud.resourcemanager.v1.UpdateFolderRequest
+	(*UpdateFolderMetadata)(nil),                    // 6: yandex.cloud.resourcemanager.v1.UpdateFolderMetadata
+	(*DeleteFolderRequest)(nil),                     // 7: yandex.cloud.resourcemanager.v1.DeleteFolderRequest
+	(*DeleteFolderMetadata)(nil),                    // 8: yandex.cloud.resourcemanager.v1.DeleteFolderMetadata
+	(*ListFolderOperationsRequest)(nil),             // 9: yandex.cloud.resourcemanager.v1.ListFolderOperationsRequest
+	(*ListFolderOperationsResponse)(nil),            // 10: yandex.cloud.resourcemanager.v1.ListFolderOperationsResponse
+	nil,                                             // 11: yandex.cloud.resourcemanager.v1.CreateFolderRequest.LabelsEntry
+	nil,                                             // 12: yandex.cloud.resourcemanager.v1.UpdateFolderRequest.LabelsEntry
+	(*Folder)(nil),                                  // 13: yandex.cloud.resourcemanager.v1.Folder
+	(*fieldmaskpb.FieldMask)(nil),                   // 14: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                   // 15: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                     // 16: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),        // 17: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),         // 18: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),      // 19: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessPolicyBindingsRequest)(nil),  // 20: yandex.cloud.access.ListAccessPolicyBindingsRequest
+	(*access.BindAccessPolicyRequest)(nil),          // 21: yandex.cloud.access.BindAccessPolicyRequest
+	(*access.UnbindAccessPolicyRequest)(nil),        // 22: yandex.cloud.access.UnbindAccessPolicyRequest
+	(*access.ListAccessBindingsResponse)(nil),       // 23: yandex.cloud.access.ListAccessBindingsResponse
+	(*access.ListAccessPolicyBindingsResponse)(nil), // 24: yandex.cloud.access.ListAccessPolicyBindingsResponse
 }
 var file_yandex_cloud_resourcemanager_v1_folder_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.resourcemanager.v1.ListFoldersResponse.folders:type_name -> yandex.cloud.resourcemanager.v1.Folder
@@ -851,17 +860,23 @@ var file_yandex_cloud_resourcemanager_v1_folder_service_proto_depIdxs = []int32{
 	17, // 14: yandex.cloud.resourcemanager.v1.FolderService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	18, // 15: yandex.cloud.resourcemanager.v1.FolderService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	19, // 16: yandex.cloud.resourcemanager.v1.FolderService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	13, // 17: yandex.cloud.resourcemanager.v1.FolderService.Get:output_type -> yandex.cloud.resourcemanager.v1.Folder
-	2,  // 18: yandex.cloud.resourcemanager.v1.FolderService.List:output_type -> yandex.cloud.resourcemanager.v1.ListFoldersResponse
-	16, // 19: yandex.cloud.resourcemanager.v1.FolderService.Create:output_type -> yandex.cloud.operation.Operation
-	16, // 20: yandex.cloud.resourcemanager.v1.FolderService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 21: yandex.cloud.resourcemanager.v1.FolderService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // 22: yandex.cloud.resourcemanager.v1.FolderService.ListOperations:output_type -> yandex.cloud.resourcemanager.v1.ListFolderOperationsResponse
-	20, // 23: yandex.cloud.resourcemanager.v1.FolderService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	16, // 24: yandex.cloud.resourcemanager.v1.FolderService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	16, // 25: yandex.cloud.resourcemanager.v1.FolderService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	17, // [17:26] is the sub-list for method output_type
-	8,  // [8:17] is the sub-list for method input_type
+	20, // 17: yandex.cloud.resourcemanager.v1.FolderService.ListAccessPolicyBindings:input_type -> yandex.cloud.access.ListAccessPolicyBindingsRequest
+	21, // 18: yandex.cloud.resourcemanager.v1.FolderService.BindAccessPolicy:input_type -> yandex.cloud.access.BindAccessPolicyRequest
+	22, // 19: yandex.cloud.resourcemanager.v1.FolderService.UnbindAccessPolicy:input_type -> yandex.cloud.access.UnbindAccessPolicyRequest
+	13, // 20: yandex.cloud.resourcemanager.v1.FolderService.Get:output_type -> yandex.cloud.resourcemanager.v1.Folder
+	2,  // 21: yandex.cloud.resourcemanager.v1.FolderService.List:output_type -> yandex.cloud.resourcemanager.v1.ListFoldersResponse
+	16, // 22: yandex.cloud.resourcemanager.v1.FolderService.Create:output_type -> yandex.cloud.operation.Operation
+	16, // 23: yandex.cloud.resourcemanager.v1.FolderService.Update:output_type -> yandex.cloud.operation.Operation
+	16, // 24: yandex.cloud.resourcemanager.v1.FolderService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // 25: yandex.cloud.resourcemanager.v1.FolderService.ListOperations:output_type -> yandex.cloud.resourcemanager.v1.ListFolderOperationsResponse
+	23, // 26: yandex.cloud.resourcemanager.v1.FolderService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	16, // 27: yandex.cloud.resourcemanager.v1.FolderService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	16, // 28: yandex.cloud.resourcemanager.v1.FolderService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	24, // 29: yandex.cloud.resourcemanager.v1.FolderService.ListAccessPolicyBindings:output_type -> yandex.cloud.access.ListAccessPolicyBindingsResponse
+	16, // 30: yandex.cloud.resourcemanager.v1.FolderService.BindAccessPolicy:output_type -> yandex.cloud.operation.Operation
+	16, // 31: yandex.cloud.resourcemanager.v1.FolderService.UnbindAccessPolicy:output_type -> yandex.cloud.operation.Operation
+	20, // [20:32] is the sub-list for method output_type
+	8,  // [8:20] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name

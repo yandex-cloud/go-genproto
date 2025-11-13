@@ -28,12 +28,16 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
+// Not implemented.
 // A set of methods for viewing statistics on search queries to Yandex.
 type WordstatServiceClient interface {
+	// Not implemented.
 	// The method returns the last 30 days data about popular queries containing the specified keyword and queries that are similar to the specified one.
 	GetTop(ctx context.Context, in *GetTopRequest, opts ...grpc.CallOption) (*GetTopResponse, error)
+	// Not implemented.
 	// The method returns the frequency of queries over time for a given keyword.
 	GetDynamics(ctx context.Context, in *GetDynamicsRequest, opts ...grpc.CallOption) (*GetDynamicsResponse, error)
+	// Not implemented.
 	// The method returns the distribution of the number of queries containing the given keyword globally by region for the last 30 days.
 	GetRegionsDistribution(ctx context.Context, in *GetRegionsDistributionRequest, opts ...grpc.CallOption) (*GetRegionsDistributionResponse, error)
 }
@@ -80,12 +84,16 @@ func (c *wordstatServiceClient) GetRegionsDistribution(ctx context.Context, in *
 // All implementations should embed UnimplementedWordstatServiceServer
 // for forward compatibility.
 //
+// Not implemented.
 // A set of methods for viewing statistics on search queries to Yandex.
 type WordstatServiceServer interface {
+	// Not implemented.
 	// The method returns the last 30 days data about popular queries containing the specified keyword and queries that are similar to the specified one.
 	GetTop(context.Context, *GetTopRequest) (*GetTopResponse, error)
+	// Not implemented.
 	// The method returns the frequency of queries over time for a given keyword.
 	GetDynamics(context.Context, *GetDynamicsRequest) (*GetDynamicsResponse, error)
+	// Not implemented.
 	// The method returns the distribution of the number of queries containing the given keyword globally by region for the last 30 days.
 	GetRegionsDistribution(context.Context, *GetRegionsDistributionRequest) (*GetRegionsDistributionResponse, error)
 }

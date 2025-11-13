@@ -777,7 +777,7 @@ const file_yandex_cloud_resourcemanager_v1_cloud_service_proto_rawDesc = "" +
 	"\bcloud_id\x18\x01 \x01(\tR\acloudId\x12=\n" +
 	"\fdelete_after\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vdeleteAfter\x12!\n" +
 	"\fcancelled_by\x18\x03 \x01(\tR\vcancelledBy\x12=\n" +
-	"\fcancelled_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcancelledAt2\xe8\r\n" +
+	"\fcancelled_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcancelledAt2\xb0\x13\n" +
 	"\fCloudService\x12\x8f\x01\n" +
 	"\x03Get\x120.yandex.cloud.resourcemanager.v1.GetCloudRequest\x1a&.yandex.cloud.resourcemanager.v1.Cloud\".\x82\xd3\xe4\x93\x02(\x12&/resource-manager/v1/clouds/{cloud_id}\x12\x94\x01\n" +
 	"\x04List\x122.yandex.cloud.resourcemanager.v1.ListCloudsRequest\x1a3.yandex.cloud.resourcemanager.v1.ListCloudsResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/resource-manager/v1/clouds\x12\xa8\x01\n" +
@@ -792,7 +792,12 @@ const file_yandex_cloud_resourcemanager_v1_cloud_service_proto_rawDesc = "" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x92\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02@:\x01*\";/resource-manager/v1/clouds/{resource_id}:setAccessBindings\x12\x86\x02\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x98\x01\xb2\xd2*K\n" +
-	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02C:\x01*\">/resource-manager/v1/clouds/{resource_id}:updateAccessBindingsBz\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02C:\x01*\">/resource-manager/v1/clouds/{resource_id}:updateAccessBindings\x12\xd3\x01\n" +
+	"\x18ListAccessPolicyBindings\x124.yandex.cloud.access.ListAccessPolicyBindingsRequest\x1a5.yandex.cloud.access.ListAccessPolicyBindingsResponse\"J\x82\xd3\xe4\x93\x02D\x12B/resource-manager/v1/clouds/{resource_id}:listAccessPolicyBindings\x12\xf1\x01\n" +
+	"\x10BindAccessPolicy\x12,.yandex.cloud.access.BindAccessPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x8b\x01\xb2\xd2*B\n" +
+	"\x1faccess.BindAccessPolicyMetadata\x12\x1faccess.BindAccessPolicyResponse\x82\xd3\xe4\x93\x02?:\x01*\":/resource-manager/v1/clouds/{resource_id}:bindAccessPolicy\x12\xfb\x01\n" +
+	"\x12UnbindAccessPolicy\x12..yandex.cloud.access.UnbindAccessPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*F\n" +
+	"!access.UnbindAccessPolicyMetadata\x12!access.UnbindAccessPolicyResponse\x82\xd3\xe4\x93\x02A:\x01*\"</resource-manager/v1/clouds/{resource_id}:unbindAccessPolicyBz\n" +
 	"#yandex.cloud.api.resourcemanager.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/resourcemanager/v1;resourcemanagerb\x06proto3"
 
 var (
@@ -809,27 +814,31 @@ func file_yandex_cloud_resourcemanager_v1_cloud_service_proto_rawDescGZIP() []by
 
 var file_yandex_cloud_resourcemanager_v1_cloud_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_resourcemanager_v1_cloud_service_proto_goTypes = []any{
-	(*GetCloudRequest)(nil),                    // 0: yandex.cloud.resourcemanager.v1.GetCloudRequest
-	(*ListCloudsRequest)(nil),                  // 1: yandex.cloud.resourcemanager.v1.ListCloudsRequest
-	(*ListCloudsResponse)(nil),                 // 2: yandex.cloud.resourcemanager.v1.ListCloudsResponse
-	(*CreateCloudRequest)(nil),                 // 3: yandex.cloud.resourcemanager.v1.CreateCloudRequest
-	(*CreateCloudMetadata)(nil),                // 4: yandex.cloud.resourcemanager.v1.CreateCloudMetadata
-	(*ListCloudOperationsRequest)(nil),         // 5: yandex.cloud.resourcemanager.v1.ListCloudOperationsRequest
-	(*ListCloudOperationsResponse)(nil),        // 6: yandex.cloud.resourcemanager.v1.ListCloudOperationsResponse
-	(*UpdateCloudRequest)(nil),                 // 7: yandex.cloud.resourcemanager.v1.UpdateCloudRequest
-	(*UpdateCloudMetadata)(nil),                // 8: yandex.cloud.resourcemanager.v1.UpdateCloudMetadata
-	(*DeleteCloudRequest)(nil),                 // 9: yandex.cloud.resourcemanager.v1.DeleteCloudRequest
-	(*DeleteCloudMetadata)(nil),                // 10: yandex.cloud.resourcemanager.v1.DeleteCloudMetadata
-	nil,                                        // 11: yandex.cloud.resourcemanager.v1.CreateCloudRequest.LabelsEntry
-	nil,                                        // 12: yandex.cloud.resourcemanager.v1.UpdateCloudRequest.LabelsEntry
-	(*Cloud)(nil),                              // 13: yandex.cloud.resourcemanager.v1.Cloud
-	(*operation.Operation)(nil),                // 14: yandex.cloud.operation.Operation
-	(*fieldmaskpb.FieldMask)(nil),              // 15: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),              // 16: google.protobuf.Timestamp
-	(*access.ListAccessBindingsRequest)(nil),   // 17: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 18: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 19: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 20: yandex.cloud.access.ListAccessBindingsResponse
+	(*GetCloudRequest)(nil),                         // 0: yandex.cloud.resourcemanager.v1.GetCloudRequest
+	(*ListCloudsRequest)(nil),                       // 1: yandex.cloud.resourcemanager.v1.ListCloudsRequest
+	(*ListCloudsResponse)(nil),                      // 2: yandex.cloud.resourcemanager.v1.ListCloudsResponse
+	(*CreateCloudRequest)(nil),                      // 3: yandex.cloud.resourcemanager.v1.CreateCloudRequest
+	(*CreateCloudMetadata)(nil),                     // 4: yandex.cloud.resourcemanager.v1.CreateCloudMetadata
+	(*ListCloudOperationsRequest)(nil),              // 5: yandex.cloud.resourcemanager.v1.ListCloudOperationsRequest
+	(*ListCloudOperationsResponse)(nil),             // 6: yandex.cloud.resourcemanager.v1.ListCloudOperationsResponse
+	(*UpdateCloudRequest)(nil),                      // 7: yandex.cloud.resourcemanager.v1.UpdateCloudRequest
+	(*UpdateCloudMetadata)(nil),                     // 8: yandex.cloud.resourcemanager.v1.UpdateCloudMetadata
+	(*DeleteCloudRequest)(nil),                      // 9: yandex.cloud.resourcemanager.v1.DeleteCloudRequest
+	(*DeleteCloudMetadata)(nil),                     // 10: yandex.cloud.resourcemanager.v1.DeleteCloudMetadata
+	nil,                                             // 11: yandex.cloud.resourcemanager.v1.CreateCloudRequest.LabelsEntry
+	nil,                                             // 12: yandex.cloud.resourcemanager.v1.UpdateCloudRequest.LabelsEntry
+	(*Cloud)(nil),                                   // 13: yandex.cloud.resourcemanager.v1.Cloud
+	(*operation.Operation)(nil),                     // 14: yandex.cloud.operation.Operation
+	(*fieldmaskpb.FieldMask)(nil),                   // 15: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                   // 16: google.protobuf.Timestamp
+	(*access.ListAccessBindingsRequest)(nil),        // 17: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),         // 18: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),      // 19: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessPolicyBindingsRequest)(nil),  // 20: yandex.cloud.access.ListAccessPolicyBindingsRequest
+	(*access.BindAccessPolicyRequest)(nil),          // 21: yandex.cloud.access.BindAccessPolicyRequest
+	(*access.UnbindAccessPolicyRequest)(nil),        // 22: yandex.cloud.access.UnbindAccessPolicyRequest
+	(*access.ListAccessBindingsResponse)(nil),       // 23: yandex.cloud.access.ListAccessBindingsResponse
+	(*access.ListAccessPolicyBindingsResponse)(nil), // 24: yandex.cloud.access.ListAccessPolicyBindingsResponse
 }
 var file_yandex_cloud_resourcemanager_v1_cloud_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.resourcemanager.v1.ListCloudsResponse.clouds:type_name -> yandex.cloud.resourcemanager.v1.Cloud
@@ -849,17 +858,23 @@ var file_yandex_cloud_resourcemanager_v1_cloud_service_proto_depIdxs = []int32{
 	17, // 14: yandex.cloud.resourcemanager.v1.CloudService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	18, // 15: yandex.cloud.resourcemanager.v1.CloudService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	19, // 16: yandex.cloud.resourcemanager.v1.CloudService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	13, // 17: yandex.cloud.resourcemanager.v1.CloudService.Get:output_type -> yandex.cloud.resourcemanager.v1.Cloud
-	2,  // 18: yandex.cloud.resourcemanager.v1.CloudService.List:output_type -> yandex.cloud.resourcemanager.v1.ListCloudsResponse
-	14, // 19: yandex.cloud.resourcemanager.v1.CloudService.Create:output_type -> yandex.cloud.operation.Operation
-	14, // 20: yandex.cloud.resourcemanager.v1.CloudService.Update:output_type -> yandex.cloud.operation.Operation
-	14, // 21: yandex.cloud.resourcemanager.v1.CloudService.Delete:output_type -> yandex.cloud.operation.Operation
-	6,  // 22: yandex.cloud.resourcemanager.v1.CloudService.ListOperations:output_type -> yandex.cloud.resourcemanager.v1.ListCloudOperationsResponse
-	20, // 23: yandex.cloud.resourcemanager.v1.CloudService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	14, // 24: yandex.cloud.resourcemanager.v1.CloudService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	14, // 25: yandex.cloud.resourcemanager.v1.CloudService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	17, // [17:26] is the sub-list for method output_type
-	8,  // [8:17] is the sub-list for method input_type
+	20, // 17: yandex.cloud.resourcemanager.v1.CloudService.ListAccessPolicyBindings:input_type -> yandex.cloud.access.ListAccessPolicyBindingsRequest
+	21, // 18: yandex.cloud.resourcemanager.v1.CloudService.BindAccessPolicy:input_type -> yandex.cloud.access.BindAccessPolicyRequest
+	22, // 19: yandex.cloud.resourcemanager.v1.CloudService.UnbindAccessPolicy:input_type -> yandex.cloud.access.UnbindAccessPolicyRequest
+	13, // 20: yandex.cloud.resourcemanager.v1.CloudService.Get:output_type -> yandex.cloud.resourcemanager.v1.Cloud
+	2,  // 21: yandex.cloud.resourcemanager.v1.CloudService.List:output_type -> yandex.cloud.resourcemanager.v1.ListCloudsResponse
+	14, // 22: yandex.cloud.resourcemanager.v1.CloudService.Create:output_type -> yandex.cloud.operation.Operation
+	14, // 23: yandex.cloud.resourcemanager.v1.CloudService.Update:output_type -> yandex.cloud.operation.Operation
+	14, // 24: yandex.cloud.resourcemanager.v1.CloudService.Delete:output_type -> yandex.cloud.operation.Operation
+	6,  // 25: yandex.cloud.resourcemanager.v1.CloudService.ListOperations:output_type -> yandex.cloud.resourcemanager.v1.ListCloudOperationsResponse
+	23, // 26: yandex.cloud.resourcemanager.v1.CloudService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	14, // 27: yandex.cloud.resourcemanager.v1.CloudService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	14, // 28: yandex.cloud.resourcemanager.v1.CloudService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	24, // 29: yandex.cloud.resourcemanager.v1.CloudService.ListAccessPolicyBindings:output_type -> yandex.cloud.access.ListAccessPolicyBindingsResponse
+	14, // 30: yandex.cloud.resourcemanager.v1.CloudService.BindAccessPolicy:output_type -> yandex.cloud.operation.Operation
+	14, // 31: yandex.cloud.resourcemanager.v1.CloudService.UnbindAccessPolicy:output_type -> yandex.cloud.operation.Operation
+	20, // [20:32] is the sub-list for method output_type
+	8,  // [8:20] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name

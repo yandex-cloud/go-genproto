@@ -203,6 +203,258 @@ func (x *AccessBinding) GetSubject() *Subject {
 	return nil
 }
 
+type AccessPolicy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the access policy template.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Name of the access policy template.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the access policy template.
+	Description   string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccessPolicy) Reset() {
+	*x = AccessPolicy{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccessPolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccessPolicy) ProtoMessage() {}
+
+func (x *AccessPolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccessPolicy.ProtoReflect.Descriptor instead.
+func (*AccessPolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AccessPolicy) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AccessPolicy) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AccessPolicy) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type AccessPolicyBinding struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the access policy template being applied.
+	AccessPolicyTemplateId string `protobuf:"bytes,1,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *AccessPolicyBinding) Reset() {
+	*x = AccessPolicyBinding{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccessPolicyBinding) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccessPolicyBinding) ProtoMessage() {}
+
+func (x *AccessPolicyBinding) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccessPolicyBinding.ProtoReflect.Descriptor instead.
+func (*AccessPolicyBinding) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AccessPolicyBinding) GetAccessPolicyTemplateId() string {
+	if x != nil {
+		return x.AccessPolicyTemplateId
+	}
+	return ""
+}
+
+type BindAccessPolicyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource for which access policy bindings are being set.
+	//
+	// To get the resource ID, use a corresponding List request.
+	ResourceId          string               `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	AccessPolicyBinding *AccessPolicyBinding `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *BindAccessPolicyRequest) Reset() {
+	*x = BindAccessPolicyRequest{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BindAccessPolicyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindAccessPolicyRequest) ProtoMessage() {}
+
+func (x *BindAccessPolicyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindAccessPolicyRequest.ProtoReflect.Descriptor instead.
+func (*BindAccessPolicyRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BindAccessPolicyRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *BindAccessPolicyRequest) GetAccessPolicyBinding() *AccessPolicyBinding {
+	if x != nil {
+		return x.AccessPolicyBinding
+	}
+	return nil
+}
+
+type BindAccessPolicyMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource for which access policy bindings are being set.
+	ResourceId          string               `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	AccessPolicyBinding *AccessPolicyBinding `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *BindAccessPolicyMetadata) Reset() {
+	*x = BindAccessPolicyMetadata{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BindAccessPolicyMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindAccessPolicyMetadata) ProtoMessage() {}
+
+func (x *BindAccessPolicyMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindAccessPolicyMetadata.ProtoReflect.Descriptor instead.
+func (*BindAccessPolicyMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *BindAccessPolicyMetadata) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *BindAccessPolicyMetadata) GetAccessPolicyBinding() *AccessPolicyBinding {
+	if x != nil {
+		return x.AccessPolicyBinding
+	}
+	return nil
+}
+
+type BindAccessPolicyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BindAccessPolicyResponse) Reset() {
+	*x = BindAccessPolicyResponse{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BindAccessPolicyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindAccessPolicyResponse) ProtoMessage() {}
+
+func (x *BindAccessPolicyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindAccessPolicyResponse.ProtoReflect.Descriptor instead.
+func (*BindAccessPolicyResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{6}
+}
+
 type ListAccessBindingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource to list access bindings for.
@@ -226,7 +478,7 @@ type ListAccessBindingsRequest struct {
 
 func (x *ListAccessBindingsRequest) Reset() {
 	*x = ListAccessBindingsRequest{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[2]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -238,7 +490,7 @@ func (x *ListAccessBindingsRequest) String() string {
 func (*ListAccessBindingsRequest) ProtoMessage() {}
 
 func (x *ListAccessBindingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[2]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -251,7 +503,7 @@ func (x *ListAccessBindingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccessBindingsRequest.ProtoReflect.Descriptor instead.
 func (*ListAccessBindingsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListAccessBindingsRequest) GetResourceId() string {
@@ -292,7 +544,7 @@ type ListAccessBindingsResponse struct {
 
 func (x *ListAccessBindingsResponse) Reset() {
 	*x = ListAccessBindingsResponse{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[3]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +556,7 @@ func (x *ListAccessBindingsResponse) String() string {
 func (*ListAccessBindingsResponse) ProtoMessage() {}
 
 func (x *ListAccessBindingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[3]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +569,7 @@ func (x *ListAccessBindingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccessBindingsResponse.ProtoReflect.Descriptor instead.
 func (*ListAccessBindingsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListAccessBindingsResponse) GetAccessBindings() []*AccessBinding {
@@ -334,6 +586,284 @@ func (x *ListAccessBindingsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ListAccessPolicyBindingsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource to list access policy bindings for.
+	//
+	// To get the resource ID, use a corresponding List request.
+	// For example, use the [yandex.cloud.resourcemanager.v1.CloudService.List] request to get the Cloud resource ID.
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// The maximum number of results per page that should be returned.
+	// If the number of available results is larger than [page_size], the service returns a
+	// [ListAccessPolicyBindingsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. Set [page_token] to the
+	// [ListAccessPolicyBindingsResponse.next_page_token]
+	// returned by a previous list request to get the next page of results.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAccessPolicyBindingsRequest) Reset() {
+	*x = ListAccessPolicyBindingsRequest{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAccessPolicyBindingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAccessPolicyBindingsRequest) ProtoMessage() {}
+
+func (x *ListAccessPolicyBindingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAccessPolicyBindingsRequest.ProtoReflect.Descriptor instead.
+func (*ListAccessPolicyBindingsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListAccessPolicyBindingsRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *ListAccessPolicyBindingsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAccessPolicyBindingsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListAccessPolicyBindingsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of access policy bindings for the specified resource.
+	AccessPolicyBindings []*AccessPolicyBinding `protobuf:"bytes,1,rep,name=access_policy_bindings,json=accessPolicyBindings,proto3" json:"access_policy_bindings,omitempty"`
+	// This token allows you to get the next page of results for list requests.
+	// If the number of results is larger than
+	// [ListAccessPolicyBindingsRequest.page_size]
+	// , use the [next_page_token] as the value for the
+	// [ListAccessPolicyBindingsRequest.page_token]
+	// query parameter in the next list request. Each subsequent list request will have its own
+	// [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAccessPolicyBindingsResponse) Reset() {
+	*x = ListAccessPolicyBindingsResponse{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAccessPolicyBindingsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAccessPolicyBindingsResponse) ProtoMessage() {}
+
+func (x *ListAccessPolicyBindingsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAccessPolicyBindingsResponse.ProtoReflect.Descriptor instead.
+func (*ListAccessPolicyBindingsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListAccessPolicyBindingsResponse) GetAccessPolicyBindings() []*AccessPolicyBinding {
+	if x != nil {
+		return x.AccessPolicyBindings
+	}
+	return nil
+}
+
+func (x *ListAccessPolicyBindingsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type UnbindAccessPolicyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource for which access policy bindings are being removed.
+	//
+	// To get the resource ID, use a corresponding List request.
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// ID of the access policy.
+	AccessPolicyTemplateId string `protobuf:"bytes,2,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *UnbindAccessPolicyRequest) Reset() {
+	*x = UnbindAccessPolicyRequest{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnbindAccessPolicyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnbindAccessPolicyRequest) ProtoMessage() {}
+
+func (x *UnbindAccessPolicyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnbindAccessPolicyRequest.ProtoReflect.Descriptor instead.
+func (*UnbindAccessPolicyRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UnbindAccessPolicyRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *UnbindAccessPolicyRequest) GetAccessPolicyTemplateId() string {
+	if x != nil {
+		return x.AccessPolicyTemplateId
+	}
+	return ""
+}
+
+type UnbindAccessPolicyMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource for which access policy bindings are being removed.
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// ID of the access policy.
+	AccessPolicyTemplateId string `protobuf:"bytes,2,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *UnbindAccessPolicyMetadata) Reset() {
+	*x = UnbindAccessPolicyMetadata{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnbindAccessPolicyMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnbindAccessPolicyMetadata) ProtoMessage() {}
+
+func (x *UnbindAccessPolicyMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnbindAccessPolicyMetadata.ProtoReflect.Descriptor instead.
+func (*UnbindAccessPolicyMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UnbindAccessPolicyMetadata) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *UnbindAccessPolicyMetadata) GetAccessPolicyTemplateId() string {
+	if x != nil {
+		return x.AccessPolicyTemplateId
+	}
+	return ""
+}
+
+type UnbindAccessPolicyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnbindAccessPolicyResponse) Reset() {
+	*x = UnbindAccessPolicyResponse{}
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnbindAccessPolicyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnbindAccessPolicyResponse) ProtoMessage() {}
+
+func (x *UnbindAccessPolicyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnbindAccessPolicyResponse.ProtoReflect.Descriptor instead.
+func (*UnbindAccessPolicyResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{13}
+}
+
 type SetAccessBindingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource for which access bindings are being set.
@@ -348,7 +878,7 @@ type SetAccessBindingsRequest struct {
 
 func (x *SetAccessBindingsRequest) Reset() {
 	*x = SetAccessBindingsRequest{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[4]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -360,7 +890,7 @@ func (x *SetAccessBindingsRequest) String() string {
 func (*SetAccessBindingsRequest) ProtoMessage() {}
 
 func (x *SetAccessBindingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[4]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -373,7 +903,7 @@ func (x *SetAccessBindingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAccessBindingsRequest.ProtoReflect.Descriptor instead.
 func (*SetAccessBindingsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SetAccessBindingsRequest) GetResourceId() string {
@@ -400,7 +930,7 @@ type SetAccessBindingsMetadata struct {
 
 func (x *SetAccessBindingsMetadata) Reset() {
 	*x = SetAccessBindingsMetadata{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[5]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +942,7 @@ func (x *SetAccessBindingsMetadata) String() string {
 func (*SetAccessBindingsMetadata) ProtoMessage() {}
 
 func (x *SetAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[5]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +955,7 @@ func (x *SetAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAccessBindingsMetadata.ProtoReflect.Descriptor instead.
 func (*SetAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SetAccessBindingsMetadata) GetResourceId() string {
@@ -447,7 +977,7 @@ type UpdateAccessBindingsRequest struct {
 
 func (x *UpdateAccessBindingsRequest) Reset() {
 	*x = UpdateAccessBindingsRequest{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[6]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +989,7 @@ func (x *UpdateAccessBindingsRequest) String() string {
 func (*UpdateAccessBindingsRequest) ProtoMessage() {}
 
 func (x *UpdateAccessBindingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[6]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +1002,7 @@ func (x *UpdateAccessBindingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccessBindingsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAccessBindingsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UpdateAccessBindingsRequest) GetResourceId() string {
@@ -499,7 +1029,7 @@ type UpdateAccessBindingsMetadata struct {
 
 func (x *UpdateAccessBindingsMetadata) Reset() {
 	*x = UpdateAccessBindingsMetadata{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[7]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -511,7 +1041,7 @@ func (x *UpdateAccessBindingsMetadata) String() string {
 func (*UpdateAccessBindingsMetadata) ProtoMessage() {}
 
 func (x *UpdateAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[7]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -524,7 +1054,7 @@ func (x *UpdateAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccessBindingsMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateAccessBindingsMetadata) GetResourceId() string {
@@ -546,7 +1076,7 @@ type AccessBindingDelta struct {
 
 func (x *AccessBindingDelta) Reset() {
 	*x = AccessBindingDelta{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[8]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -558,7 +1088,7 @@ func (x *AccessBindingDelta) String() string {
 func (*AccessBindingDelta) ProtoMessage() {}
 
 func (x *AccessBindingDelta) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[8]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -571,7 +1101,7 @@ func (x *AccessBindingDelta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessBindingDelta.ProtoReflect.Descriptor instead.
 func (*AccessBindingDelta) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *AccessBindingDelta) GetAction() AccessBindingAction {
@@ -598,7 +1128,7 @@ type AccessBindingsOperationResult struct {
 
 func (x *AccessBindingsOperationResult) Reset() {
 	*x = AccessBindingsOperationResult{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[9]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -610,7 +1140,7 @@ func (x *AccessBindingsOperationResult) String() string {
 func (*AccessBindingsOperationResult) ProtoMessage() {}
 
 func (x *AccessBindingsOperationResult) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[9]
+	mi := &file_yandex_cloud_access_access_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -623,7 +1153,7 @@ func (x *AccessBindingsOperationResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessBindingsOperationResult.ProtoReflect.Descriptor instead.
 func (*AccessBindingsOperationResult) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *AccessBindingsOperationResult) GetEffectiveDeltas() []*AccessBindingDelta {
@@ -631,69 +1161,6 @@ func (x *AccessBindingsOperationResult) GetEffectiveDeltas() []*AccessBindingDel
 		return x.EffectiveDeltas
 	}
 	return nil
-}
-
-type AccessPolicy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the access policy template.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Name of the access policy template.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the access policy template.
-	Description   string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AccessPolicy) Reset() {
-	*x = AccessPolicy{}
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AccessPolicy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AccessPolicy) ProtoMessage() {}
-
-func (x *AccessPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_access_access_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AccessPolicy.ProtoReflect.Descriptor instead.
-func (*AccessPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_access_access_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *AccessPolicy) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *AccessPolicy) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *AccessPolicy) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
 }
 
 var File_yandex_cloud_access_access_proto protoreflect.FileDescriptor
@@ -706,7 +1173,22 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x04type\"t\n" +
 	"\rAccessBinding\x12%\n" +
 	"\arole_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06roleId\x12<\n" +
-	"\asubject\x18\x02 \x01(\v2\x1c.yandex.cloud.access.SubjectB\x04\xe8\xc71\x01R\asubject\"\x9d\x01\n" +
+	"\asubject\x18\x02 \x01(\v2\x1c.yandex.cloud.access.SubjectB\x04\xe8\xc71\x01R\asubject\"T\n" +
+	"\fAccessPolicy\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"^\n" +
+	"\x13AccessPolicyBinding\x12G\n" +
+	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16accessPolicyTemplateId\"\xac\x01\n" +
+	"\x17BindAccessPolicyRequest\x12-\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"resourceId\x12b\n" +
+	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingB\x04\xe8\xc71\x01R\x13accessPolicyBinding\"\x99\x01\n" +
+	"\x18BindAccessPolicyMetadata\x12\x1f\n" +
+	"\vresource_id\x18\x01 \x01(\tR\n" +
+	"resourceId\x12\\\n" +
+	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingR\x13accessPolicyBinding\"\x1a\n" +
+	"\x18BindAccessPolicyResponse\"\x9d\x01\n" +
 	"\x19ListAccessBindingsRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12'\n" +
@@ -716,7 +1198,26 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x91\x01\n" +
 	"\x1aListAccessBindingsResponse\x12K\n" +
 	"\x0faccess_bindings\x18\x01 \x03(\v2\".yandex.cloud.access.AccessBindingR\x0eaccessBindings\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa2\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa3\x01\n" +
+	"\x1fListAccessPolicyBindingsRequest\x12-\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"resourceId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xaa\x01\n" +
+	" ListAccessPolicyBindingsResponse\x12^\n" +
+	"\x16access_policy_bindings\x18\x01 \x03(\v2(.yandex.cloud.access.AccessPolicyBindingR\x14accessPolicyBindings\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8b\x01\n" +
+	"\x19UnbindAccessPolicyRequest\x12-\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"resourceId\x12?\n" +
+	"\x19access_policy_template_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x16accessPolicyTemplateId\"x\n" +
+	"\x1aUnbindAccessPolicyMetadata\x12\x1f\n" +
+	"\vresource_id\x18\x01 \x01(\tR\n" +
+	"resourceId\x129\n" +
+	"\x19access_policy_template_id\x18\x02 \x01(\tR\x16accessPolicyTemplateId\"\x1c\n" +
+	"\x1aUnbindAccessPolicyResponse\"\xa2\x01\n" +
 	"\x18SetAccessBindingsRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12W\n" +
@@ -737,11 +1238,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x06action\x18\x01 \x01(\x0e2(.yandex.cloud.access.AccessBindingActionB\x04\xe8\xc71\x01R\x06action\x12O\n" +
 	"\x0eaccess_binding\x18\x02 \x01(\v2\".yandex.cloud.access.AccessBindingB\x04\xe8\xc71\x01R\raccessBinding\"s\n" +
 	"\x1dAccessBindingsOperationResult\x12R\n" +
-	"\x10effective_deltas\x18\x01 \x03(\v2'.yandex.cloud.access.AccessBindingDeltaR\x0feffectiveDeltas\"T\n" +
-	"\fAccessPolicy\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription*Q\n" +
+	"\x10effective_deltas\x18\x01 \x03(\v2'.yandex.cloud.access.AccessBindingDeltaR\x0feffectiveDeltas*Q\n" +
 	"\x13AccessBindingAction\x12%\n" +
 	"!ACCESS_BINDING_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
@@ -762,34 +1259,46 @@ func file_yandex_cloud_access_access_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_access_access_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_access_access_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_yandex_cloud_access_access_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_yandex_cloud_access_access_proto_goTypes = []any{
-	(AccessBindingAction)(0),              // 0: yandex.cloud.access.AccessBindingAction
-	(*Subject)(nil),                       // 1: yandex.cloud.access.Subject
-	(*AccessBinding)(nil),                 // 2: yandex.cloud.access.AccessBinding
-	(*ListAccessBindingsRequest)(nil),     // 3: yandex.cloud.access.ListAccessBindingsRequest
-	(*ListAccessBindingsResponse)(nil),    // 4: yandex.cloud.access.ListAccessBindingsResponse
-	(*SetAccessBindingsRequest)(nil),      // 5: yandex.cloud.access.SetAccessBindingsRequest
-	(*SetAccessBindingsMetadata)(nil),     // 6: yandex.cloud.access.SetAccessBindingsMetadata
-	(*UpdateAccessBindingsRequest)(nil),   // 7: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*UpdateAccessBindingsMetadata)(nil),  // 8: yandex.cloud.access.UpdateAccessBindingsMetadata
-	(*AccessBindingDelta)(nil),            // 9: yandex.cloud.access.AccessBindingDelta
-	(*AccessBindingsOperationResult)(nil), // 10: yandex.cloud.access.AccessBindingsOperationResult
-	(*AccessPolicy)(nil),                  // 11: yandex.cloud.access.AccessPolicy
+	(AccessBindingAction)(0),                 // 0: yandex.cloud.access.AccessBindingAction
+	(*Subject)(nil),                          // 1: yandex.cloud.access.Subject
+	(*AccessBinding)(nil),                    // 2: yandex.cloud.access.AccessBinding
+	(*AccessPolicy)(nil),                     // 3: yandex.cloud.access.AccessPolicy
+	(*AccessPolicyBinding)(nil),              // 4: yandex.cloud.access.AccessPolicyBinding
+	(*BindAccessPolicyRequest)(nil),          // 5: yandex.cloud.access.BindAccessPolicyRequest
+	(*BindAccessPolicyMetadata)(nil),         // 6: yandex.cloud.access.BindAccessPolicyMetadata
+	(*BindAccessPolicyResponse)(nil),         // 7: yandex.cloud.access.BindAccessPolicyResponse
+	(*ListAccessBindingsRequest)(nil),        // 8: yandex.cloud.access.ListAccessBindingsRequest
+	(*ListAccessBindingsResponse)(nil),       // 9: yandex.cloud.access.ListAccessBindingsResponse
+	(*ListAccessPolicyBindingsRequest)(nil),  // 10: yandex.cloud.access.ListAccessPolicyBindingsRequest
+	(*ListAccessPolicyBindingsResponse)(nil), // 11: yandex.cloud.access.ListAccessPolicyBindingsResponse
+	(*UnbindAccessPolicyRequest)(nil),        // 12: yandex.cloud.access.UnbindAccessPolicyRequest
+	(*UnbindAccessPolicyMetadata)(nil),       // 13: yandex.cloud.access.UnbindAccessPolicyMetadata
+	(*UnbindAccessPolicyResponse)(nil),       // 14: yandex.cloud.access.UnbindAccessPolicyResponse
+	(*SetAccessBindingsRequest)(nil),         // 15: yandex.cloud.access.SetAccessBindingsRequest
+	(*SetAccessBindingsMetadata)(nil),        // 16: yandex.cloud.access.SetAccessBindingsMetadata
+	(*UpdateAccessBindingsRequest)(nil),      // 17: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*UpdateAccessBindingsMetadata)(nil),     // 18: yandex.cloud.access.UpdateAccessBindingsMetadata
+	(*AccessBindingDelta)(nil),               // 19: yandex.cloud.access.AccessBindingDelta
+	(*AccessBindingsOperationResult)(nil),    // 20: yandex.cloud.access.AccessBindingsOperationResult
 }
 var file_yandex_cloud_access_access_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.access.AccessBinding.subject:type_name -> yandex.cloud.access.Subject
-	2, // 1: yandex.cloud.access.ListAccessBindingsResponse.access_bindings:type_name -> yandex.cloud.access.AccessBinding
-	2, // 2: yandex.cloud.access.SetAccessBindingsRequest.access_bindings:type_name -> yandex.cloud.access.AccessBinding
-	9, // 3: yandex.cloud.access.UpdateAccessBindingsRequest.access_binding_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
-	0, // 4: yandex.cloud.access.AccessBindingDelta.action:type_name -> yandex.cloud.access.AccessBindingAction
-	2, // 5: yandex.cloud.access.AccessBindingDelta.access_binding:type_name -> yandex.cloud.access.AccessBinding
-	9, // 6: yandex.cloud.access.AccessBindingsOperationResult.effective_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	1,  // 0: yandex.cloud.access.AccessBinding.subject:type_name -> yandex.cloud.access.Subject
+	4,  // 1: yandex.cloud.access.BindAccessPolicyRequest.access_policy_binding:type_name -> yandex.cloud.access.AccessPolicyBinding
+	4,  // 2: yandex.cloud.access.BindAccessPolicyMetadata.access_policy_binding:type_name -> yandex.cloud.access.AccessPolicyBinding
+	2,  // 3: yandex.cloud.access.ListAccessBindingsResponse.access_bindings:type_name -> yandex.cloud.access.AccessBinding
+	4,  // 4: yandex.cloud.access.ListAccessPolicyBindingsResponse.access_policy_bindings:type_name -> yandex.cloud.access.AccessPolicyBinding
+	2,  // 5: yandex.cloud.access.SetAccessBindingsRequest.access_bindings:type_name -> yandex.cloud.access.AccessBinding
+	19, // 6: yandex.cloud.access.UpdateAccessBindingsRequest.access_binding_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
+	0,  // 7: yandex.cloud.access.AccessBindingDelta.action:type_name -> yandex.cloud.access.AccessBindingAction
+	2,  // 8: yandex.cloud.access.AccessBindingDelta.access_binding:type_name -> yandex.cloud.access.AccessBinding
+	19, // 9: yandex.cloud.access.AccessBindingsOperationResult.effective_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_access_access_proto_init() }
@@ -803,7 +1312,7 @@ func file_yandex_cloud_access_access_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_access_access_proto_rawDesc), len(file_yandex_cloud_access_access_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

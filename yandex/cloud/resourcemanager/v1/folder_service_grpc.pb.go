@@ -21,15 +21,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FolderService_Get_FullMethodName                  = "/yandex.cloud.resourcemanager.v1.FolderService/Get"
-	FolderService_List_FullMethodName                 = "/yandex.cloud.resourcemanager.v1.FolderService/List"
-	FolderService_Create_FullMethodName               = "/yandex.cloud.resourcemanager.v1.FolderService/Create"
-	FolderService_Update_FullMethodName               = "/yandex.cloud.resourcemanager.v1.FolderService/Update"
-	FolderService_Delete_FullMethodName               = "/yandex.cloud.resourcemanager.v1.FolderService/Delete"
-	FolderService_ListOperations_FullMethodName       = "/yandex.cloud.resourcemanager.v1.FolderService/ListOperations"
-	FolderService_ListAccessBindings_FullMethodName   = "/yandex.cloud.resourcemanager.v1.FolderService/ListAccessBindings"
-	FolderService_SetAccessBindings_FullMethodName    = "/yandex.cloud.resourcemanager.v1.FolderService/SetAccessBindings"
-	FolderService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.resourcemanager.v1.FolderService/UpdateAccessBindings"
+	FolderService_Get_FullMethodName                      = "/yandex.cloud.resourcemanager.v1.FolderService/Get"
+	FolderService_List_FullMethodName                     = "/yandex.cloud.resourcemanager.v1.FolderService/List"
+	FolderService_Create_FullMethodName                   = "/yandex.cloud.resourcemanager.v1.FolderService/Create"
+	FolderService_Update_FullMethodName                   = "/yandex.cloud.resourcemanager.v1.FolderService/Update"
+	FolderService_Delete_FullMethodName                   = "/yandex.cloud.resourcemanager.v1.FolderService/Delete"
+	FolderService_ListOperations_FullMethodName           = "/yandex.cloud.resourcemanager.v1.FolderService/ListOperations"
+	FolderService_ListAccessBindings_FullMethodName       = "/yandex.cloud.resourcemanager.v1.FolderService/ListAccessBindings"
+	FolderService_SetAccessBindings_FullMethodName        = "/yandex.cloud.resourcemanager.v1.FolderService/SetAccessBindings"
+	FolderService_UpdateAccessBindings_FullMethodName     = "/yandex.cloud.resourcemanager.v1.FolderService/UpdateAccessBindings"
+	FolderService_ListAccessPolicyBindings_FullMethodName = "/yandex.cloud.resourcemanager.v1.FolderService/ListAccessPolicyBindings"
+	FolderService_BindAccessPolicy_FullMethodName         = "/yandex.cloud.resourcemanager.v1.FolderService/BindAccessPolicy"
+	FolderService_UnbindAccessPolicy_FullMethodName       = "/yandex.cloud.resourcemanager.v1.FolderService/UnbindAccessPolicy"
 )
 
 // FolderServiceClient is the client API for FolderService service.
@@ -58,6 +61,12 @@ type FolderServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified folder.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns list of access policy bindings for the folder.
+	ListAccessPolicyBindings(ctx context.Context, in *access.ListAccessPolicyBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessPolicyBindingsResponse, error)
+	// Binds the access policy template to the folder.
+	BindAccessPolicy(ctx context.Context, in *access.BindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Unbinds the access policy template from the folder.
+	UnbindAccessPolicy(ctx context.Context, in *access.UnbindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type folderServiceClient struct {
@@ -158,6 +167,36 @@ func (c *folderServiceClient) UpdateAccessBindings(ctx context.Context, in *acce
 	return out, nil
 }
 
+func (c *folderServiceClient) ListAccessPolicyBindings(ctx context.Context, in *access.ListAccessPolicyBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessPolicyBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(access.ListAccessPolicyBindingsResponse)
+	err := c.cc.Invoke(ctx, FolderService_ListAccessPolicyBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folderServiceClient) BindAccessPolicy(ctx context.Context, in *access.BindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FolderService_BindAccessPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folderServiceClient) UnbindAccessPolicy(ctx context.Context, in *access.UnbindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, FolderService_UnbindAccessPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FolderServiceServer is the server API for FolderService service.
 // All implementations should embed UnimplementedFolderServiceServer
 // for forward compatibility.
@@ -184,6 +223,12 @@ type FolderServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified folder.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Returns list of access policy bindings for the folder.
+	ListAccessPolicyBindings(context.Context, *access.ListAccessPolicyBindingsRequest) (*access.ListAccessPolicyBindingsResponse, error)
+	// Binds the access policy template to the folder.
+	BindAccessPolicy(context.Context, *access.BindAccessPolicyRequest) (*operation.Operation, error)
+	// Unbinds the access policy template from the folder.
+	UnbindAccessPolicy(context.Context, *access.UnbindAccessPolicyRequest) (*operation.Operation, error)
 }
 
 // UnimplementedFolderServiceServer should be embedded to have
@@ -219,6 +264,15 @@ func (UnimplementedFolderServiceServer) SetAccessBindings(context.Context, *acce
 }
 func (UnimplementedFolderServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedFolderServiceServer) ListAccessPolicyBindings(context.Context, *access.ListAccessPolicyBindingsRequest) (*access.ListAccessPolicyBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessPolicyBindings not implemented")
+}
+func (UnimplementedFolderServiceServer) BindAccessPolicy(context.Context, *access.BindAccessPolicyRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BindAccessPolicy not implemented")
+}
+func (UnimplementedFolderServiceServer) UnbindAccessPolicy(context.Context, *access.UnbindAccessPolicyRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnbindAccessPolicy not implemented")
 }
 func (UnimplementedFolderServiceServer) testEmbeddedByValue() {}
 
@@ -402,6 +456,60 @@ func _FolderService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FolderService_ListAccessPolicyBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessPolicyBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolderServiceServer).ListAccessPolicyBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FolderService_ListAccessPolicyBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolderServiceServer).ListAccessPolicyBindings(ctx, req.(*access.ListAccessPolicyBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolderService_BindAccessPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.BindAccessPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolderServiceServer).BindAccessPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FolderService_BindAccessPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolderServiceServer).BindAccessPolicy(ctx, req.(*access.BindAccessPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolderService_UnbindAccessPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UnbindAccessPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolderServiceServer).UnbindAccessPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FolderService_UnbindAccessPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolderServiceServer).UnbindAccessPolicy(ctx, req.(*access.UnbindAccessPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FolderService_ServiceDesc is the grpc.ServiceDesc for FolderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -444,6 +552,18 @@ var FolderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _FolderService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "ListAccessPolicyBindings",
+			Handler:    _FolderService_ListAccessPolicyBindings_Handler,
+		},
+		{
+			MethodName: "BindAccessPolicy",
+			Handler:    _FolderService_BindAccessPolicy_Handler,
+		},
+		{
+			MethodName: "UnbindAccessPolicy",
+			Handler:    _FolderService_UnbindAccessPolicy_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -508,7 +508,7 @@ const file_yandex_cloud_organizationmanager_v1_organization_service_proto_rawDes
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xa0\f\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x89\x12\n" +
 	"\x13OrganizationService\x12\xb7\x01\n" +
 	"\x03Get\x12;.yandex.cloud.organizationmanager.v1.GetOrganizationRequest\x1a1.yandex.cloud.organizationmanager.v1.Organization\"@\x82\xd3\xe4\x93\x02:\x128/organization-manager/v1/organizations/{organization_id}\x12\xb5\x01\n" +
 	"\x04List\x12=.yandex.cloud.organizationmanager.v1.ListOrganizationsRequest\x1a>.yandex.cloud.organizationmanager.v1.ListOrganizationsResponse\".\x82\xd3\xe4\x93\x02(\x12&/organization-manager/v1/organizations\x12\xde\x01\n" +
@@ -519,7 +519,12 @@ const file_yandex_cloud_organizationmanager_v1_organization_service_proto_rawDes
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8e\x01\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02K:\x01*\"F/organization-manager/v1/organizations/{resource_id}:setAccessBindings\x12\x82\x02\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x94\x01\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02N:\x01*\"I/organization-manager/v1/organizations/{resource_id}:updateAccessBindingsB\x86\x01\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02N:\x01*\"I/organization-manager/v1/organizations/{resource_id}:updateAccessBindings\x12\xde\x01\n" +
+	"\x18ListAccessPolicyBindings\x124.yandex.cloud.access.ListAccessPolicyBindingsRequest\x1a5.yandex.cloud.access.ListAccessPolicyBindingsResponse\"U\x82\xd3\xe4\x93\x02O\x12M/organization-manager/v1/organizations/{resource_id}:listAccessPolicyBindings\x12\xfc\x01\n" +
+	"\x10BindAccessPolicy\x12,.yandex.cloud.access.BindAccessPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x96\x01\xb2\xd2*B\n" +
+	"\x1faccess.BindAccessPolicyMetadata\x12\x1faccess.BindAccessPolicyResponse\x82\xd3\xe4\x93\x02J:\x01*\"E/organization-manager/v1/organizations/{resource_id}:bindAccessPolicy\x12\x86\x02\n" +
+	"\x12UnbindAccessPolicy\x12..yandex.cloud.access.UnbindAccessPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x9c\x01\xb2\xd2*F\n" +
+	"!access.UnbindAccessPolicyMetadata\x12!access.UnbindAccessPolicyResponse\x82\xd3\xe4\x93\x02L:\x01*\"G/organization-manager/v1/organizations/{resource_id}:unbindAccessPolicyB\x86\x01\n" +
 	"'yandex.cloud.api.organizationmanager.v1Z[github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1;organizationmanagerb\x06proto3"
 
 var (
@@ -543,14 +548,18 @@ var file_yandex_cloud_organizationmanager_v1_organization_service_proto_goTypes 
 	(*UpdateOrganizationMetadata)(nil),         // 4: yandex.cloud.organizationmanager.v1.UpdateOrganizationMetadata
 	(*ListOrganizationOperationsRequest)(nil),  // 5: yandex.cloud.organizationmanager.v1.ListOrganizationOperationsRequest
 	(*ListOrganizationOperationsResponse)(nil), // 6: yandex.cloud.organizationmanager.v1.ListOrganizationOperationsResponse
-	nil,                                        // 7: yandex.cloud.organizationmanager.v1.UpdateOrganizationRequest.LabelsEntry
-	(*Organization)(nil),                       // 8: yandex.cloud.organizationmanager.v1.Organization
-	(*fieldmaskpb.FieldMask)(nil),              // 9: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                // 10: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 11: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 12: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 13: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 14: yandex.cloud.access.ListAccessBindingsResponse
+	nil,                                             // 7: yandex.cloud.organizationmanager.v1.UpdateOrganizationRequest.LabelsEntry
+	(*Organization)(nil),                            // 8: yandex.cloud.organizationmanager.v1.Organization
+	(*fieldmaskpb.FieldMask)(nil),                   // 9: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                     // 10: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),        // 11: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),         // 12: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),      // 13: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessPolicyBindingsRequest)(nil),  // 14: yandex.cloud.access.ListAccessPolicyBindingsRequest
+	(*access.BindAccessPolicyRequest)(nil),          // 15: yandex.cloud.access.BindAccessPolicyRequest
+	(*access.UnbindAccessPolicyRequest)(nil),        // 16: yandex.cloud.access.UnbindAccessPolicyRequest
+	(*access.ListAccessBindingsResponse)(nil),       // 17: yandex.cloud.access.ListAccessBindingsResponse
+	(*access.ListAccessPolicyBindingsResponse)(nil), // 18: yandex.cloud.access.ListAccessPolicyBindingsResponse
 }
 var file_yandex_cloud_organizationmanager_v1_organization_service_proto_depIdxs = []int32{
 	8,  // 0: yandex.cloud.organizationmanager.v1.ListOrganizationsResponse.organizations:type_name -> yandex.cloud.organizationmanager.v1.Organization
@@ -564,15 +573,21 @@ var file_yandex_cloud_organizationmanager_v1_organization_service_proto_depIdxs 
 	11, // 8: yandex.cloud.organizationmanager.v1.OrganizationService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	12, // 9: yandex.cloud.organizationmanager.v1.OrganizationService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	13, // 10: yandex.cloud.organizationmanager.v1.OrganizationService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	8,  // 11: yandex.cloud.organizationmanager.v1.OrganizationService.Get:output_type -> yandex.cloud.organizationmanager.v1.Organization
-	2,  // 12: yandex.cloud.organizationmanager.v1.OrganizationService.List:output_type -> yandex.cloud.organizationmanager.v1.ListOrganizationsResponse
-	10, // 13: yandex.cloud.organizationmanager.v1.OrganizationService.Update:output_type -> yandex.cloud.operation.Operation
-	6,  // 14: yandex.cloud.organizationmanager.v1.OrganizationService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.ListOrganizationOperationsResponse
-	14, // 15: yandex.cloud.organizationmanager.v1.OrganizationService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	10, // 16: yandex.cloud.organizationmanager.v1.OrganizationService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	10, // 17: yandex.cloud.organizationmanager.v1.OrganizationService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	11, // [11:18] is the sub-list for method output_type
-	4,  // [4:11] is the sub-list for method input_type
+	14, // 11: yandex.cloud.organizationmanager.v1.OrganizationService.ListAccessPolicyBindings:input_type -> yandex.cloud.access.ListAccessPolicyBindingsRequest
+	15, // 12: yandex.cloud.organizationmanager.v1.OrganizationService.BindAccessPolicy:input_type -> yandex.cloud.access.BindAccessPolicyRequest
+	16, // 13: yandex.cloud.organizationmanager.v1.OrganizationService.UnbindAccessPolicy:input_type -> yandex.cloud.access.UnbindAccessPolicyRequest
+	8,  // 14: yandex.cloud.organizationmanager.v1.OrganizationService.Get:output_type -> yandex.cloud.organizationmanager.v1.Organization
+	2,  // 15: yandex.cloud.organizationmanager.v1.OrganizationService.List:output_type -> yandex.cloud.organizationmanager.v1.ListOrganizationsResponse
+	10, // 16: yandex.cloud.organizationmanager.v1.OrganizationService.Update:output_type -> yandex.cloud.operation.Operation
+	6,  // 17: yandex.cloud.organizationmanager.v1.OrganizationService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.ListOrganizationOperationsResponse
+	17, // 18: yandex.cloud.organizationmanager.v1.OrganizationService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	10, // 19: yandex.cloud.organizationmanager.v1.OrganizationService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	10, // 20: yandex.cloud.organizationmanager.v1.OrganizationService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	18, // 21: yandex.cloud.organizationmanager.v1.OrganizationService.ListAccessPolicyBindings:output_type -> yandex.cloud.access.ListAccessPolicyBindingsResponse
+	10, // 22: yandex.cloud.organizationmanager.v1.OrganizationService.BindAccessPolicy:output_type -> yandex.cloud.operation.Operation
+	10, // 23: yandex.cloud.organizationmanager.v1.OrganizationService.UnbindAccessPolicy:output_type -> yandex.cloud.operation.Operation
+	14, // [14:24] is the sub-list for method output_type
+	4,  // [4:14] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name

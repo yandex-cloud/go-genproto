@@ -460,12 +460,12 @@ type isCreateUserRequest_Credentials interface {
 }
 
 type CreateUserRequest_PasswordSpec struct {
-	// Password specification.
+	// Password specification. Credentials type. Exactly one of credentials type must be specified.
 	PasswordSpec *PasswordSpec `protobuf:"bytes,9,opt,name=password_spec,json=passwordSpec,proto3,oneof"`
 }
 
 type CreateUserRequest_PasswordHash struct {
-	// Password hash.
+	// Password hash. Credentials type. Exactly one of credentials type must be specified.
 	PasswordHash *PasswordHash `protobuf:"bytes,11,opt,name=password_hash,json=passwordHash,proto3,oneof"`
 }
 

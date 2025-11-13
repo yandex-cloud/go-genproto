@@ -150,6 +150,138 @@ func (m *GreenplumConfig6) SetGpGlobalDeadlockDetectorPeriod(v *wrapperspb.Int64
 	m.GpGlobalDeadlockDetectorPeriod = v
 }
 
+func (m *GreenplumConfig6) SetGpMaxSlices(v *wrapperspb.Int64Value) {
+	m.GpMaxSlices = v
+}
+
+func (m *GreenplumConfig6) SetGpCachedSegworkersThreshold(v *wrapperspb.Int64Value) {
+	m.GpCachedSegworkersThreshold = v
+}
+
+func (m *GreenplumConfig6) SetLockTimeout(v *wrapperspb.Int64Value) {
+	m.LockTimeout = v
+}
+
+func (m *GreenplumConfig6) SetIdleInTransactionSessionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleInTransactionSessionTimeout = v
+}
+
+func (m *GreenplumConfig6) SetRunawayDetectorActivationPercent(v *wrapperspb.Int64Value) {
+	m.RunawayDetectorActivationPercent = v
+}
+
+func (m *GreenplumConfig6) SetGpVmemProtectSegworkerCacheLimit(v *wrapperspb.Int64Value) {
+	m.GpVmemProtectSegworkerCacheLimit = v
+}
+
+func (m *GreenplumConfig6) SetGpEnableZstdMemoryAccounting(v *wrapperspb.BoolValue) {
+	m.GpEnableZstdMemoryAccounting = v
+}
+
+func (m *GreenplumConfig6) SetGpMaxPlanSize(v *wrapperspb.Int64Value) {
+	m.GpMaxPlanSize = v
+}
+
+func (m *GreenplumConfig6) SetGpAutostatsMode(v GPAutostatsMode) {
+	m.GpAutostatsMode = v
+}
+
+func (m *GreenplumConfig6) SetGpAutostatsOnChangeThreshold(v *wrapperspb.Int64Value) {
+	m.GpAutostatsOnChangeThreshold = v
+}
+
+func (m *GreenplumConfig6) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleValue) {
+	m.GpResourceGroupMemoryLimit = v
+}
+
+func (m *GreenplumConfigCBDB) SetMaxConnections(v *wrapperspb.Int64Value) {
+	m.MaxConnections = v
+}
+
+func (m *GreenplumConfigCBDB) SetMaxSlotWalKeepSize(v *wrapperspb.Int64Value) {
+	m.MaxSlotWalKeepSize = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpWorkfileLimitPerSegment(v *wrapperspb.Int64Value) {
+	m.GpWorkfileLimitPerSegment = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpWorkfileLimitPerQuery(v *wrapperspb.Int64Value) {
+	m.GpWorkfileLimitPerQuery = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpWorkfileLimitFilesPerQuery(v *wrapperspb.Int64Value) {
+	m.GpWorkfileLimitFilesPerQuery = v
+}
+
+func (m *GreenplumConfigCBDB) SetMaxPreparedTransactions(v *wrapperspb.Int64Value) {
+	m.MaxPreparedTransactions = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpWorkfileCompression(v *wrapperspb.BoolValue) {
+	m.GpWorkfileCompression = v
+}
+
+func (m *GreenplumConfigCBDB) SetMaxStatementMem(v *wrapperspb.Int64Value) {
+	m.MaxStatementMem = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogStatement(v LogStatement) {
+	m.LogStatement = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpEnableGlobalDeadlockDetector(v *wrapperspb.BoolValue) {
+	m.GpEnableGlobalDeadlockDetector = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpGlobalDeadlockDetectorPeriod(v *wrapperspb.Int64Value) {
+	m.GpGlobalDeadlockDetectorPeriod = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpMaxSlices(v *wrapperspb.Int64Value) {
+	m.GpMaxSlices = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpCachedSegworkersThreshold(v *wrapperspb.Int64Value) {
+	m.GpCachedSegworkersThreshold = v
+}
+
+func (m *GreenplumConfigCBDB) SetLockTimeout(v *wrapperspb.Int64Value) {
+	m.LockTimeout = v
+}
+
+func (m *GreenplumConfigCBDB) SetIdleInTransactionSessionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleInTransactionSessionTimeout = v
+}
+
+func (m *GreenplumConfigCBDB) SetRunawayDetectorActivationPercent(v *wrapperspb.Int64Value) {
+	m.RunawayDetectorActivationPercent = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpVmemProtectSegworkerCacheLimit(v *wrapperspb.Int64Value) {
+	m.GpVmemProtectSegworkerCacheLimit = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpEnableZstdMemoryAccounting(v *wrapperspb.BoolValue) {
+	m.GpEnableZstdMemoryAccounting = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpMaxPlanSize(v *wrapperspb.Int64Value) {
+	m.GpMaxPlanSize = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpAutostatsMode(v GPAutostatsMode) {
+	m.GpAutostatsMode = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpAutostatsOnChangeThreshold(v *wrapperspb.Int64Value) {
+	m.GpAutostatsOnChangeThreshold = v
+}
+
+func (m *GreenplumConfigCBDB) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleValue) {
+	m.GpResourceGroupMemoryLimit = v
+}
+
 func (m *GreenplumConfig6_22) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
@@ -223,5 +355,17 @@ func (m *ConnectionPoolerConfigSet) SetUserConfig(v *ConnectionPoolerConfig) {
 }
 
 func (m *ConnectionPoolerConfigSet) SetDefaultConfig(v *ConnectionPoolerConfig) {
+	m.DefaultConfig = v
+}
+
+func (m *GreenplumConfigSetCBDB) SetEffectiveConfig(v *GreenplumConfigCBDB) {
+	m.EffectiveConfig = v
+}
+
+func (m *GreenplumConfigSetCBDB) SetUserConfig(v *GreenplumConfigCBDB) {
+	m.UserConfig = v
+}
+
+func (m *GreenplumConfigSetCBDB) SetDefaultConfig(v *GreenplumConfigCBDB) {
 	m.DefaultConfig = v
 }

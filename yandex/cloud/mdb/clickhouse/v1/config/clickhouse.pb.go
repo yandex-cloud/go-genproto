@@ -1058,7 +1058,7 @@ type ClickhouseConfig struct {
 	MaxPartitionSizeToDrop *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=max_partition_size_to_drop,json=maxPartitionSizeToDrop,proto3" json:"max_partition_size_to_drop,omitempty"`
 	// The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
 	//
-	// Default value: **30**.
+	// Default value: **3** for versions 25.10 and higher, **30** for versions 25.9 and lower.
 	//
 	// Change of the setting is applied with restart.
 	//
@@ -2100,7 +2100,7 @@ type ClickhouseConfig_MergeTree struct {
 	ReplicatedDeduplicationWindow *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=replicated_deduplication_window,json=replicatedDeduplicationWindow,proto3" json:"replicated_deduplication_window,omitempty"`
 	// The number of seconds after which the hash sums of the inserted blocks are removed from ClickHouse Keeper.
 	//
-	// Default value: **604800** (7 days).
+	// Default value: **3600** (1 hour) for versions 25.10 and higher, **604800** (7 days) for versions 25.9 and lower.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#replicated_deduplication_window_seconds).
 	ReplicatedDeduplicationWindowSeconds *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=replicated_deduplication_window_seconds,json=replicatedDeduplicationWindowSeconds,proto3" json:"replicated_deduplication_window_seconds,omitempty"`
