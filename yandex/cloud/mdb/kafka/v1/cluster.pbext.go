@@ -79,6 +79,10 @@ func (m *Cluster) SetKafkaUi(v *Cluster_KafkaUI) {
 	m.KafkaUi = v
 }
 
+func (m *Cluster) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *Cluster_KafkaUI) SetUrl(v string) {
 	m.Url = v
 }

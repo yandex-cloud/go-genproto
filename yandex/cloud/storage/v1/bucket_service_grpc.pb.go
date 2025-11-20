@@ -68,9 +68,18 @@ type BucketServiceClient interface {
 	// The updated configuration could take up to 30 minutes to apply to the bucket.
 	SetHTTPSConfig(ctx context.Context, in *SetBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the HTTPS configuration for the specified bucket.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	//
+	//	for compatibility with old format --)
 	DeleteHTTPSConfig(ctx context.Context, in *DeleteBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Sets access bindings for the specified bucket.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified bucket.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	//
+	//	for compatibility with old format --)
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists access bindings for the specified bucket.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 }
 
@@ -235,9 +244,18 @@ type BucketServiceServer interface {
 	// The updated configuration could take up to 30 minutes to apply to the bucket.
 	SetHTTPSConfig(context.Context, *SetBucketHTTPSConfigRequest) (*operation.Operation, error)
 	// Deletes the HTTPS configuration for the specified bucket.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	//
+	//	for compatibility with old format --)
 	DeleteHTTPSConfig(context.Context, *DeleteBucketHTTPSConfigRequest) (*operation.Operation, error)
+	// Sets access bindings for the specified bucket.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified bucket.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	//
+	//	for compatibility with old format --)
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Lists access bindings for the specified bucket.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 }
 

@@ -110,6 +110,10 @@ func (m *ChartWidget_VisualizationSettings) SetShowLabels(v bool) {
 	m.ShowLabels = v
 }
 
+func (m *ChartWidget_VisualizationSettings) SetTilesSettings(v *ChartWidget_VisualizationSettings_TilesSettings) {
+	m.TilesSettings = v
+}
+
 type ChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme = isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme
 
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetScheme(v ChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme) {
@@ -224,6 +228,26 @@ func (m *ChartWidget_VisualizationSettings_YaxisSettings) SetRight(v *ChartWidge
 	m.Right = v
 }
 
+func (m *ChartWidget_VisualizationSettings_TilesSettings) SetSortOrder(v SortOrder) {
+	m.SortOrder = v
+}
+
+func (m *ChartWidget_VisualizationSettings_TilesSettings) SetSortField(v ChartWidget_VisualizationSettings_TilesSettings_SortField) {
+	m.SortField = v
+}
+
+func (m *ChartWidget_VisualizationSettings_TilesSettings) SetShowTitle(v bool) {
+	m.ShowTitle = v
+}
+
+func (m *ChartWidget_VisualizationSettings_TilesSettings) SetShowValue(v bool) {
+	m.ShowValue = v
+}
+
+func (m *ChartWidget_VisualizationSettings_TilesSettings) SetShowSparkline(v bool) {
+	m.ShowSparkline = v
+}
+
 type ChartWidget_SeriesOverrides_Type = isChartWidget_SeriesOverrides_Type
 
 func (m *ChartWidget_SeriesOverrides) SetType(v ChartWidget_SeriesOverrides_Type) {
@@ -284,6 +308,10 @@ func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineWidth(v int6
 
 func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineStyle(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) {
 	m.LineStyle = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingType(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineHidingType) {
+	m.LineHidingType = v
 }
 
 type ChartWidget_OverrideMatcher_Type = isChartWidget_OverrideMatcher_Type

@@ -30,6 +30,14 @@ func (m *MongodConfig) SetSetParameter(v *MongodConfig_SetParameter) {
 	m.SetParameter = v
 }
 
+func (m *MongodConfig) SetOplog(v *MongodConfig_Oplog) {
+	m.Oplog = v
+}
+
+func (m *MongodConfig) SetChainingAllowed(v *wrapperspb.BoolValue) {
+	m.ChainingAllowed = v
+}
+
 func (m *MongodConfig_Storage) SetWiredTiger(v *MongodConfig_Storage_WiredTiger) {
 	m.WiredTiger = v
 }
@@ -52,6 +60,10 @@ func (m *MongodConfig_Storage_WiredTiger) SetIndexConfig(v *MongodConfig_Storage
 
 func (m *MongodConfig_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrapperspb.DoubleValue) {
 	m.CacheSizeGb = v
+}
+
+func (m *MongodConfig_Storage_WiredTiger_EngineConfig) SetCacheSize(v *wrapperspb.DoubleValue) {
+	m.CacheSize = v
 }
 
 func (m *MongodConfig_Storage_WiredTiger_CollectionConfig) SetBlockCompressor(v MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor) {
@@ -138,6 +150,58 @@ func (m *MongodConfig_SetParameter) SetMinSnapshotHistoryWindowInSeconds(v *wrap
 	m.MinSnapshotHistoryWindowInSeconds = v
 }
 
+func (m *MongodConfig_SetParameter) SetFlowControlTargetLagSeconds(v *wrapperspb.Int64Value) {
+	m.FlowControlTargetLagSeconds = v
+}
+
+func (m *MongodConfig_SetParameter) SetFlowControlWarnThresholdSeconds(v *wrapperspb.Int64Value) {
+	m.FlowControlWarnThresholdSeconds = v
+}
+
+func (m *MongodConfig_SetParameter) SetMigrateCloneInsertionBatchDelayMs(v *wrapperspb.Int64Value) {
+	m.MigrateCloneInsertionBatchDelayMs = v
+}
+
+func (m *MongodConfig_SetParameter) SetMigrateCloneInsertionBatchSize(v *wrapperspb.Int64Value) {
+	m.MigrateCloneInsertionBatchSize = v
+}
+
+func (m *MongodConfig_SetParameter) SetOrphanCleanupDelaySecs(v *wrapperspb.Int64Value) {
+	m.OrphanCleanupDelaySecs = v
+}
+
+func (m *MongodConfig_SetParameter) SetPersistedChunkCacheUpdateMaxBatchSize(v *wrapperspb.Int64Value) {
+	m.PersistedChunkCacheUpdateMaxBatchSize = v
+}
+
+func (m *MongodConfig_SetParameter) SetRangeDeleterBatchDelayMs(v *wrapperspb.Int64Value) {
+	m.RangeDeleterBatchDelayMs = v
+}
+
+func (m *MongodConfig_SetParameter) SetRangeDeleterBatchSize(v *wrapperspb.Int64Value) {
+	m.RangeDeleterBatchSize = v
+}
+
+func (m *MongodConfig_SetParameter) SetMirrorReads(v *MongodConfig_SetParameter_MirrorReads) {
+	m.MirrorReads = v
+}
+
+func (m *MongodConfig_SetParameter_MirrorReads) SetSamplingRate(v *wrapperspb.DoubleValue) {
+	m.SamplingRate = v
+}
+
+func (m *MongodConfig_SetParameter_MirrorReads) SetMaxTimeMs(v *wrapperspb.Int64Value) {
+	m.MaxTimeMs = v
+}
+
+func (m *MongodConfig_Oplog) SetMaxSizePercent(v *wrapperspb.Int64Value) {
+	m.MaxSizePercent = v
+}
+
+func (m *MongodConfig_Oplog) SetMinRetentionHours(v *wrapperspb.DoubleValue) {
+	m.MinRetentionHours = v
+}
+
 func (m *MongoCfgConfig) SetStorage(v *MongoCfgConfig_Storage) {
 	m.Storage = v
 }
@@ -148,6 +212,22 @@ func (m *MongoCfgConfig) SetOperationProfiling(v *MongoCfgConfig_OperationProfil
 
 func (m *MongoCfgConfig) SetNet(v *MongoCfgConfig_Network) {
 	m.Net = v
+}
+
+func (m *MongoCfgConfig) SetSetParameter(v *MongoCfgConfig_SetParameter) {
+	m.SetParameter = v
+}
+
+func (m *MongoCfgConfig) SetAuditLog(v *MongoCfgConfig_AuditLog) {
+	m.AuditLog = v
+}
+
+func (m *MongoCfgConfig) SetOplog(v *MongoCfgConfig_Oplog) {
+	m.Oplog = v
+}
+
+func (m *MongoCfgConfig) SetChainingAllowed(v *wrapperspb.BoolValue) {
+	m.ChainingAllowed = v
 }
 
 func (m *MongoCfgConfig_Storage) SetWiredTiger(v *MongoCfgConfig_Storage_WiredTiger) {
@@ -162,6 +242,10 @@ func (m *MongoCfgConfig_Storage_WiredTiger_EngineConfig) SetCacheSizeGb(v *wrapp
 	m.CacheSizeGb = v
 }
 
+func (m *MongoCfgConfig_Storage_WiredTiger_EngineConfig) SetCacheSize(v *wrapperspb.DoubleValue) {
+	m.CacheSize = v
+}
+
 func (m *MongoCfgConfig_OperationProfiling) SetMode(v MongoCfgConfig_OperationProfiling_Mode) {
 	m.Mode = v
 }
@@ -174,8 +258,40 @@ func (m *MongoCfgConfig_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Va
 	m.MaxIncomingConnections = v
 }
 
+func (m *MongoCfgConfig_SetParameter) SetEnableFlowControl(v *wrapperspb.BoolValue) {
+	m.EnableFlowControl = v
+}
+
+func (m *MongoCfgConfig_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
+	m.AuditAuthorizationSuccess = v
+}
+
+func (m *MongoCfgConfig_AuditLog) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *MongoCfgConfig_Oplog) SetMaxSizePercent(v *wrapperspb.Int64Value) {
+	m.MaxSizePercent = v
+}
+
+func (m *MongoCfgConfig_Oplog) SetMinRetentionHours(v *wrapperspb.DoubleValue) {
+	m.MinRetentionHours = v
+}
+
 func (m *MongosConfig) SetNet(v *MongosConfig_Network) {
 	m.Net = v
+}
+
+func (m *MongosConfig) SetSetParameter(v *MongosConfig_SetParameter) {
+	m.SetParameter = v
+}
+
+func (m *MongosConfig) SetAuditLog(v *MongosConfig_AuditLog) {
+	m.AuditLog = v
+}
+
+func (m *MongosConfig) SetChunkSize(v *wrapperspb.Int64Value) {
+	m.ChunkSize = v
 }
 
 func (m *MongosConfig_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
@@ -188,6 +304,62 @@ func (m *MongosConfig_Network) SetCompression(v *MongosConfig_Network_Compressio
 
 func (m *MongosConfig_Network_Compression) SetCompressors(v []MongosConfig_Network_Compression_Compressor) {
 	m.Compressors = v
+}
+
+func (m *MongosConfig_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
+	m.AuditAuthorizationSuccess = v
+}
+
+func (m *MongosConfig_SetParameter) SetReadHedgingMode(v *wrapperspb.StringValue) {
+	m.ReadHedgingMode = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMaxSize(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolMaxSize = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMaxConnecting(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolMaxConnecting = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMinSize(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolMinSize = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolReplicaSetMatching(v *wrapperspb.StringValue) {
+	m.ShardingTaskExecutorPoolReplicaSetMatching = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolHostTimeoutMs(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolHostTimeoutMs = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolRefreshRequirementMs(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolRefreshRequirementMs = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolRefreshTimeoutMs(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolRefreshTimeoutMs = v
+}
+
+func (m *MongosConfig_SetParameter) SetWarmMinConnectionsInShardingTaskExecutorPoolOnStartup(v *wrapperspb.BoolValue) {
+	m.WarmMinConnectionsInShardingTaskExecutorPoolOnStartup = v
+}
+
+func (m *MongosConfig_SetParameter) SetWarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs(v *wrapperspb.Int64Value) {
+	m.WarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMaxSizeForConfigServers(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolMaxSizeForConfigServers = v
+}
+
+func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMinSizeForConfigServers(v *wrapperspb.Int64Value) {
+	m.ShardingTaskExecutorPoolMinSizeForConfigServers = v
+}
+
+func (m *MongosConfig_AuditLog) SetFilter(v string) {
+	m.Filter = v
 }
 
 func (m *MongodConfigSet) SetEffectiveConfig(v *MongodConfig) {

@@ -190,6 +190,10 @@ func (m *MultiSourceChartWidget_VisualizationSettings) SetShowLabels(v bool) {
 	m.ShowLabels = v
 }
 
+func (m *MultiSourceChartWidget_VisualizationSettings) SetTilesSettings(v *MultiSourceChartWidget_VisualizationSettings_TilesSettings) {
+	m.TilesSettings = v
+}
+
 type MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme = isMultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme
 
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetScheme(v MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme) {
@@ -304,6 +308,26 @@ func (m *MultiSourceChartWidget_VisualizationSettings_YaxisSettings) SetRight(v 
 	m.Right = v
 }
 
+func (m *MultiSourceChartWidget_VisualizationSettings_TilesSettings) SetSortOrder(v SortOrder) {
+	m.SortOrder = v
+}
+
+func (m *MultiSourceChartWidget_VisualizationSettings_TilesSettings) SetSortField(v MultiSourceChartWidget_VisualizationSettings_TilesSettings_SortField) {
+	m.SortField = v
+}
+
+func (m *MultiSourceChartWidget_VisualizationSettings_TilesSettings) SetShowTitle(v bool) {
+	m.ShowTitle = v
+}
+
+func (m *MultiSourceChartWidget_VisualizationSettings_TilesSettings) SetShowValue(v bool) {
+	m.ShowValue = v
+}
+
+func (m *MultiSourceChartWidget_VisualizationSettings_TilesSettings) SetShowSparkline(v bool) {
+	m.ShowSparkline = v
+}
+
 type MultiSourceChartWidget_SeriesOverrides_Type = isMultiSourceChartWidget_SeriesOverrides_Type
 
 func (m *MultiSourceChartWidget_SeriesOverrides) SetType(v MultiSourceChartWidget_SeriesOverrides_Type) {
@@ -364,6 +388,10 @@ func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineW
 
 func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineStyle(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) {
 	m.LineStyle = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingType(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineHidingType) {
+	m.LineHidingType = v
 }
 
 type MultiSourceChartWidget_OverrideMatcher_Type = isMultiSourceChartWidget_OverrideMatcher_Type

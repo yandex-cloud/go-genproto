@@ -31,6 +31,7 @@ const (
 type GetBucketRequest_View int32
 
 const (
+	// View unspecified.
 	GetBucketRequest_VIEW_UNSPECIFIED GetBucketRequest_View = 0
 	// Returns basic information about a bucket.
 	//
@@ -276,8 +277,11 @@ type CreateBucketRequest struct {
 	// Configuration for bucket's allowed private endpoints.
 	// requires permission s3:PutBucketAllowedPrivateEndpoints
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,11,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// An option to disable access key auth for a bucket.
+	// requires permission s3:PutBucketAccessKeyAuthSettings
+	DisabledAccesskeyAuth bool `protobuf:"varint,12,opt,name=disabled_accesskey_auth,json=disabledAccesskeyAuth,proto3" json:"disabled_accesskey_auth,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CreateBucketRequest) Reset() {
@@ -380,6 +384,13 @@ func (x *CreateBucketRequest) GetAllowedPrivateEndpoints() *BucketAllowedPrivate
 	return nil
 }
 
+func (x *CreateBucketRequest) GetDisabledAccesskeyAuth() bool {
+	if x != nil {
+		return x.DisabledAccesskeyAuth
+	}
+	return false
+}
+
 type CreateBucketMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the bucket that is being created.
@@ -475,8 +486,11 @@ type UpdateBucketRequest struct {
 	Encryption *Encryption `protobuf:"bytes,14,opt,name=encryption,proto3" json:"encryption,omitempty"`
 	// requires permission s3:PutBucketAllowedPrivateEndpoints
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,15,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// An option to disable access key auth for a bucket.
+	// requires permission s3:PutBucketAccessKeyAuthSettings
+	DisabledAccesskeyAuth bool `protobuf:"varint,16,opt,name=disabled_accesskey_auth,json=disabledAccesskeyAuth,proto3" json:"disabled_accesskey_auth,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateBucketRequest) Reset() {
@@ -612,6 +626,13 @@ func (x *UpdateBucketRequest) GetAllowedPrivateEndpoints() *BucketAllowedPrivate
 		return x.AllowedPrivateEndpoints
 	}
 	return nil
+}
+
+func (x *UpdateBucketRequest) GetDisabledAccesskeyAuth() bool {
+	if x != nil {
+		return x.DisabledAccesskeyAuth
+	}
+	return false
 }
 
 type UpdateBucketMetadata struct {
@@ -1197,7 +1218,7 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"\x12ListBucketsRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"P\n" +
 	"\x13ListBucketsResponse\x129\n" +
-	"\abuckets\x18\x01 \x03(\v2\x1f.yandex.cloud.storage.v1.BucketR\abuckets\"\xf4\x04\n" +
+	"\abuckets\x18\x01 \x03(\v2\x1f.yandex.cloud.storage.v1.BucketR\abuckets\"\xac\x05\n" +
 	"\x13CreateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
@@ -1213,9 +1234,10 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"versioning\x18\n" +
 	" \x01(\x0e2#.yandex.cloud.storage.v1.VersioningR\n" +
 	"versioning\x12r\n" +
-	"\x19allowed_private_endpoints\x18\v \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpointsJ\x04\b\x03\x10\x04\"*\n" +
+	"\x19allowed_private_endpoints\x18\v \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
+	"\x17disabled_accesskey_auth\x18\f \x01(\bR\x15disabledAccesskeyAuthJ\x04\b\x03\x10\x04\"*\n" +
 	"\x14CreateBucketMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xda\a\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x92\b\n" +
 	"\x13UpdateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12A\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\n" +
@@ -1238,7 +1260,8 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"\n" +
 	"encryption\x18\x0e \x01(\v2#.yandex.cloud.storage.v1.EncryptionR\n" +
 	"encryption\x12r\n" +
-	"\x19allowed_private_endpoints\x18\x0f \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\"*\n" +
+	"\x19allowed_private_endpoints\x18\x0f \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
+	"\x17disabled_accesskey_auth\x18\x10 \x01(\bR\x15disabledAccesskeyAuth\"*\n" +
 	"\x14UpdateBucketMetadata\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"/\n" +
 	"\x13DeleteBucketRequest\x12\x18\n" +

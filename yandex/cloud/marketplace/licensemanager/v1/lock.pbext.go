@@ -45,3 +45,7 @@ func (m *Lock) SetTemplateId(v string) {
 func (m *Lock) SetExternalInstance(v *ExternalInstance) {
 	m.ExternalInstance = v
 }
+
+func (m *Lock) SetInstanceProlongation(v bool) {
+	m.InstanceProlongation = v
+}

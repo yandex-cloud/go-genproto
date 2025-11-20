@@ -25,6 +25,7 @@ const (
 type Instance_State int32
 
 const (
+	// Default unspecified state.
 	Instance_STATE_UNSPECIFIED Instance_State = 0
 	// Subscription created but not active yet.
 	Instance_PENDING Instance_State = 1
@@ -101,8 +102,6 @@ type Instance struct {
 	TemplateId string `protobuf:"bytes,4,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
 	// ID of the version of subscription template.
 	TemplateVersionId string `protobuf:"bytes,5,opt,name=template_version_id,json=templateVersionId,proto3" json:"template_version_id,omitempty"`
-	// Description of the subscription instance.
-	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
 	// Timestamp of the start of the subscription.
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// Timestamp of the end of the subscription.
@@ -117,10 +116,14 @@ type Instance struct {
 	Locks []*Lock `protobuf:"bytes,12,rep,name=locks,proto3" json:"locks,omitempty"`
 	// Subscription template.
 	LicenseTemplate *Template `protobuf:"bytes,13,opt,name=license_template,json=licenseTemplate,proto3" json:"license_template,omitempty"`
+	// Description of the subscription instance.
+	Description string `protobuf:"bytes,14,opt,name=description,proto3" json:"description,omitempty"`
 	// External subscription instance (optional).
 	ExternalInstance *ExternalInstance `protobuf:"bytes,49,opt,name=external_instance,json=externalInstance,proto3" json:"external_instance,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Indicates whether the subscription can be automatically prolonged/renewed.
+	Prolongation  bool `protobuf:"varint,50,opt,name=prolongation,proto3" json:"prolongation,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Instance) Reset() {
@@ -188,13 +191,6 @@ func (x *Instance) GetTemplateVersionId() string {
 	return ""
 }
 
-func (x *Instance) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
 func (x *Instance) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartTime
@@ -244,6 +240,13 @@ func (x *Instance) GetLicenseTemplate() *Template {
 	return nil
 }
 
+func (x *Instance) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *Instance) GetExternalInstance() *ExternalInstance {
 	if x != nil {
 		return x.ExternalInstance
@@ -251,19 +254,25 @@ func (x *Instance) GetExternalInstance() *ExternalInstance {
 	return nil
 }
 
+func (x *Instance) GetProlongation() bool {
+	if x != nil {
+		return x.Prolongation
+	}
+	return false
+}
+
 var File_yandex_cloud_marketplace_licensemanager_v1_instance_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_marketplace_licensemanager_v1_instance_proto_rawDesc = "" +
 	"\n" +
-	"9yandex/cloud/marketplace/licensemanager/v1/instance.proto\x12*yandex.cloud.marketplace.licensemanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1aByandex/cloud/marketplace/licensemanager/v1/external_instance.proto\x1a5yandex/cloud/marketplace/licensemanager/v1/lock.proto\x1a9yandex/cloud/marketplace/licensemanager/v1/template.proto\"\x91\a\n" +
+	"9yandex/cloud/marketplace/licensemanager/v1/instance.proto\x12*yandex.cloud.marketplace.licensemanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1aByandex/cloud/marketplace/licensemanager/v1/external_instance.proto\x1a5yandex/cloud/marketplace/licensemanager/v1/lock.proto\x1a9yandex/cloud/marketplace/licensemanager/v1/template.proto\"\xb5\a\n" +
 	"\bInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
 	"\tfolder_id\x18\x03 \x01(\tR\bfolderId\x12\x1f\n" +
 	"\vtemplate_id\x18\x04 \x01(\tR\n" +
 	"templateId\x12.\n" +
-	"\x13template_version_id\x18\x05 \x01(\tR\x11templateVersionId\x12 \n" +
-	"\vdescription\x18\x0e \x01(\tR\vdescription\x129\n" +
+	"\x13template_version_id\x18\x05 \x01(\tR\x11templateVersionId\x129\n" +
 	"\n" +
 	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x129\n" +
@@ -274,8 +283,10 @@ const file_yandex_cloud_marketplace_licensemanager_v1_instance_proto_rawDesc = "
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12P\n" +
 	"\x05state\x18\v \x01(\x0e2:.yandex.cloud.marketplace.licensemanager.v1.Instance.StateR\x05state\x12F\n" +
 	"\x05locks\x18\f \x03(\v20.yandex.cloud.marketplace.licensemanager.v1.LockR\x05locks\x12_\n" +
-	"\x10license_template\x18\r \x01(\v24.yandex.cloud.marketplace.licensemanager.v1.TemplateR\x0flicenseTemplate\x12i\n" +
-	"\x11external_instance\x181 \x01(\v2<.yandex.cloud.marketplace.licensemanager.v1.ExternalInstanceR\x10externalInstance\"p\n" +
+	"\x10license_template\x18\r \x01(\v24.yandex.cloud.marketplace.licensemanager.v1.TemplateR\x0flicenseTemplate\x12 \n" +
+	"\vdescription\x18\x0e \x01(\tR\vdescription\x12i\n" +
+	"\x11external_instance\x181 \x01(\v2<.yandex.cloud.marketplace.licensemanager.v1.ExternalInstanceR\x10externalInstance\x12\"\n" +
+	"\fprolongation\x182 \x01(\bR\fprolongation\"p\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aPENDING\x10\x01\x12\n" +

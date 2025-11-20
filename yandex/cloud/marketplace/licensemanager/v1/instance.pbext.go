@@ -26,10 +26,6 @@ func (m *Instance) SetTemplateVersionId(v string) {
 	m.TemplateVersionId = v
 }
 
-func (m *Instance) SetDescription(v string) {
-	m.Description = v
-}
-
 func (m *Instance) SetStartTime(v *timestamppb.Timestamp) {
 	m.StartTime = v
 }
@@ -58,6 +54,14 @@ func (m *Instance) SetLicenseTemplate(v *Template) {
 	m.LicenseTemplate = v
 }
 
+func (m *Instance) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *Instance) SetExternalInstance(v *ExternalInstance) {
 	m.ExternalInstance = v
+}
+
+func (m *Instance) SetProlongation(v bool) {
+	m.Prolongation = v
 }

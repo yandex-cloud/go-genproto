@@ -28,6 +28,7 @@ const (
 type Versioning int32
 
 const (
+	// Versioning unspecified.
 	Versioning_VERSIONING_UNSPECIFIED Versioning = 0
 	// The bucket is unversioned, i.e. versioning has never been enabled for the bucket, including at its creation.
 	// Objects that are stored in the bucket have a version ID of `null`.
@@ -96,6 +97,7 @@ func (Versioning) EnumDescriptor() ([]byte, []int) {
 type ACL_Grant_Permission int32
 
 const (
+	// Permission unspecified.
 	ACL_Grant_PERMISSION_UNSPECIFIED ACL_Grant_Permission = 0
 	// Allows grantee the `PERMISSION_WRITE`, `PERMISSION_WRITE_ACP`, `PERMISSION_READ`, and `PERMISSION_READ_ACP`
 	// on the bucket.
@@ -176,6 +178,7 @@ func (ACL_Grant_Permission) EnumDescriptor() ([]byte, []int) {
 type ACL_Grant_GrantType int32
 
 const (
+	// Grant type unspecified.
 	ACL_Grant_GRANT_TYPE_UNSPECIFIED ACL_Grant_GrantType = 0
 	// A grantee is an [account on the platform](/docs/iam/concepts/#accounts).
 	//
@@ -252,6 +255,7 @@ func (ACL_Grant_GrantType) EnumDescriptor() ([]byte, []int) {
 type CorsRule_Method int32
 
 const (
+	// Method unspecified.
 	CorsRule_METHOD_UNSPECIFIED CorsRule_Method = 0
 	// HTTP `GET` method.
 	CorsRule_METHOD_GET CorsRule_Method = 1
@@ -315,6 +319,7 @@ func (CorsRule_Method) EnumDescriptor() ([]byte, []int) {
 type WebsiteSettings_Protocol int32
 
 const (
+	// Protocol unspecified.
 	WebsiteSettings_PROTOCOL_UNSPECIFIED WebsiteSettings_Protocol = 0
 	// `http` scheme.
 	WebsiteSettings_PROTOCOL_HTTP WebsiteSettings_Protocol = 1
@@ -367,6 +372,7 @@ func (WebsiteSettings_Protocol) EnumDescriptor() ([]byte, []int) {
 type HTTPSConfig_SourceType int32
 
 const (
+	// Source type unspecified.
 	HTTPSConfig_SOURCE_TYPE_UNSPECIFIED HTTPSConfig_SourceType = 0
 	// Your certificate, uploaded directly.
 	HTTPSConfig_SOURCE_TYPE_SELF_MANAGED HTTPSConfig_SourceType = 1
@@ -419,9 +425,12 @@ func (HTTPSConfig_SourceType) EnumDescriptor() ([]byte, []int) {
 type ObjectLock_ObjectLockStatus int32
 
 const (
+	// Object lock status unspecified.
 	ObjectLock_OBJECT_LOCK_STATUS_UNSPECIFIED ObjectLock_ObjectLockStatus = 0
-	ObjectLock_OBJECT_LOCK_STATUS_DISABLED    ObjectLock_ObjectLockStatus = 1
-	ObjectLock_OBJECT_LOCK_STATUS_ENABLED     ObjectLock_ObjectLockStatus = 2
+	// Object lock status disabled.
+	ObjectLock_OBJECT_LOCK_STATUS_DISABLED ObjectLock_ObjectLockStatus = 1
+	// Object lock status enabled.
+	ObjectLock_OBJECT_LOCK_STATUS_ENABLED ObjectLock_ObjectLockStatus = 2
 )
 
 // Enum value maps for ObjectLock_ObjectLockStatus.
@@ -469,9 +478,12 @@ func (ObjectLock_ObjectLockStatus) EnumDescriptor() ([]byte, []int) {
 type ObjectLock_DefaultRetention_Mode int32
 
 const (
+	// Mode unspecified.
 	ObjectLock_DefaultRetention_MODE_UNSPECIFIED ObjectLock_DefaultRetention_Mode = 0
-	ObjectLock_DefaultRetention_MODE_GOVERNANCE  ObjectLock_DefaultRetention_Mode = 1
-	ObjectLock_DefaultRetention_MODE_COMPLIANCE  ObjectLock_DefaultRetention_Mode = 2
+	// Mode governance.
+	ObjectLock_DefaultRetention_MODE_GOVERNANCE ObjectLock_DefaultRetention_Mode = 1
+	// Mode compliance.
+	ObjectLock_DefaultRetention_MODE_COMPLIANCE ObjectLock_DefaultRetention_Mode = 2
 )
 
 // Enum value maps for ObjectLock_DefaultRetention_Mode.
@@ -570,9 +582,11 @@ type Bucket struct {
 	// Bucket allowed private endpoints.
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,17,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
 	// ID of the Yandex.Cloud entity that owns the bucket.
-	ResourceId    string `protobuf:"bytes,18,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ResourceId string `protobuf:"bytes,18,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// An option to disable access key auth for a bucket.
+	DisabledAccesskeyAuth bool `protobuf:"varint,19,opt,name=disabled_accesskey_auth,json=disabledAccesskeyAuth,proto3" json:"disabled_accesskey_auth,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Bucket) Reset() {
@@ -729,6 +743,13 @@ func (x *Bucket) GetResourceId() string {
 		return x.ResourceId
 	}
 	return ""
+}
+
+func (x *Bucket) GetDisabledAccesskeyAuth() bool {
+	if x != nil {
+		return x.DisabledAccesskeyAuth
+	}
+	return false
 }
 
 type Tag struct {
@@ -1750,8 +1771,10 @@ func (x *HTTPSConfig) GetCertificateId() string {
 // A resource for Object Lock configuration of a bucket.
 // For details about the concept, see [documentation](/docs/storage/concepts/object-lock).
 type ObjectLock struct {
-	state            protoimpl.MessageState       `protogen:"open.v1"`
-	Status           ObjectLock_ObjectLockStatus  `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.storage.v1.ObjectLock_ObjectLockStatus" json:"status,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Status
+	Status ObjectLock_ObjectLockStatus `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.storage.v1.ObjectLock_ObjectLockStatus" json:"status,omitempty"`
+	// Default retention
 	DefaultRetention *ObjectLock_DefaultRetention `protobuf:"bytes,3,opt,name=default_retention,json=defaultRetention,proto3" json:"default_retention,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -1802,7 +1825,8 @@ func (x *ObjectLock) GetDefaultRetention() *ObjectLock_DefaultRetention {
 }
 
 type Encryption struct {
-	state         protoimpl.MessageState       `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Rules
 	Rules         []*Encryption_EncryptionRule `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2653,13 +2677,17 @@ func (x *LifecycleRule_RuleFilter) GetAndOperator() *LifecycleRule_RuleFilter_An
 }
 
 type LifecycleRule_RuleFilter_And struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Prefix                string                 `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Key prefix that the object must have in order for the rule to apply.
+	Prefix string `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	// Size that the object must be greater.
 	ObjectSizeGreaterThan *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=object_size_greater_than,json=objectSizeGreaterThan,proto3" json:"object_size_greater_than,omitempty"`
-	ObjectSizeLessThan    *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=object_size_less_than,json=objectSizeLessThan,proto3" json:"object_size_less_than,omitempty"`
-	Tag                   []*Tag                 `protobuf:"bytes,4,rep,name=tag,proto3" json:"tag,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Size that the object must be less than.
+	ObjectSizeLessThan *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=object_size_less_than,json=objectSizeLessThan,proto3" json:"object_size_less_than,omitempty"`
+	// Tags that the object's tag set must have for the rule to apply.
+	Tag           []*Tag `protobuf:"bytes,4,rep,name=tag,proto3" json:"tag,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *LifecycleRule_RuleFilter_And) Reset() {
@@ -2722,8 +2750,9 @@ func (x *LifecycleRule_RuleFilter_And) GetTag() []*Tag {
 
 // Default lock configuration for added objects
 type ObjectLock_DefaultRetention struct {
-	state protoimpl.MessageState           `protogen:"open.v1"`
-	Mode  ObjectLock_DefaultRetention_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.storage.v1.ObjectLock_DefaultRetention_Mode" json:"mode,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Mode
+	Mode ObjectLock_DefaultRetention_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.storage.v1.ObjectLock_DefaultRetention_Mode" json:"mode,omitempty"`
 	// Types that are valid to be assigned to Period:
 	//
 	//	*ObjectLock_DefaultRetention_Days
@@ -2814,11 +2843,13 @@ func (*ObjectLock_DefaultRetention_Days) isObjectLock_DefaultRetention_Period() 
 func (*ObjectLock_DefaultRetention_Years) isObjectLock_DefaultRetention_Period() {}
 
 type Encryption_EncryptionRule struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	KmsMasterKeyId string                 `protobuf:"bytes,1,opt,name=kms_master_key_id,json=kmsMasterKeyId,proto3" json:"kms_master_key_id,omitempty"`
-	SseAlgorithm   string                 `protobuf:"bytes,2,opt,name=sse_algorithm,json=sseAlgorithm,proto3" json:"sse_algorithm,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// KMS master key ID
+	KmsMasterKeyId string `protobuf:"bytes,1,opt,name=kms_master_key_id,json=kmsMasterKeyId,proto3" json:"kms_master_key_id,omitempty"`
+	// SSE algorithm
+	SseAlgorithm  string `protobuf:"bytes,2,opt,name=sse_algorithm,json=sseAlgorithm,proto3" json:"sse_algorithm,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Encryption_EncryptionRule) Reset() {
@@ -2869,7 +2900,7 @@ var File_yandex_cloud_storage_v1_bucket_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/storage/v1/bucket.proto\x12\x17yandex.cloud.storage.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8d\b\n" +
+	"$yandex/cloud/storage/v1/bucket.proto\x12\x17yandex.cloud.storage.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc5\b\n" +
 	"\x06Bucket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -2896,7 +2927,8 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"encryption\x12r\n" +
 	"\x19allowed_private_endpoints\x18\x11 \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x12\x1f\n" +
 	"\vresource_id\x18\x12 \x01(\tR\n" +
-	"resourceId\"-\n" +
+	"resourceId\x126\n" +
+	"\x17disabled_accesskey_auth\x18\x13 \x01(\bR\x15disabledAccesskeyAuth\"-\n" +
 	"\x03Tag\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\"\xc6\x04\n" +

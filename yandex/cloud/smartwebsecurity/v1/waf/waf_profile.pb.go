@@ -376,6 +376,7 @@ func (x *WafProfile) GetRuleSet() isWafProfile_RuleSet {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto.
 func (x *WafProfile) GetCoreRuleSet() *WafProfile_CoreRuleSet {
 	if x != nil {
 		if x, ok := x.RuleSet.(*WafProfile_CoreRuleSet_); ok {
@@ -412,7 +413,9 @@ type isWafProfile_RuleSet interface {
 }
 
 type WafProfile_CoreRuleSet_ struct {
-	// Core rule set settings. See [Basic rule set](/docs/smartwebsecurity/concepts/waf#rules-set) for details.
+	// The parameter is deprecated. Core rule set settings.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto.
 	CoreRuleSet *WafProfile_CoreRuleSet `protobuf:"bytes,11,opt,name=core_rule_set,json=coreRuleSet,proto3,oneof"`
 }
 
@@ -1211,7 +1214,7 @@ var File_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto protoreflect.Fil
 
 const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\"\xe1\x18\n" +
+	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\"\xe5\x18\n" +
 	"\n" +
 	"WafProfile\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
@@ -1224,8 +1227,8 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12J\n" +
 	"\x05rules\x18\t \x03(\v24.yandex.cloud.smartwebsecurity.v1.waf.WafProfileRuleR\x05rules\x12f\n" +
 	"\x0fexclusion_rules\x18\n" +
-	" \x03(\v2=.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRuleR\x0eexclusionRules\x12b\n" +
-	"\rcore_rule_set\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetH\x00R\vcoreRuleSet\x12y\n" +
+	" \x03(\v2=.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRuleR\x0eexclusionRules\x12f\n" +
+	"\rcore_rule_set\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetB\x02\x18\x01H\x00R\vcoreRuleSet\x12y\n" +
 	"\x14analyze_request_body\x18\f \x01(\v2C.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBodyB\x02\x18\x01R\x12analyzeRequestBody\x12_\n" +
 	"\trule_sets\x18\r \x03(\v2B.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSetR\bruleSets\x12-\n" +
 	"\x13match_all_rule_sets\x18\x0e \x01(\bR\x10matchAllRuleSets\x1a9\n" +

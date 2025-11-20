@@ -8,8 +8,10 @@ package spark
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -945,7 +947,7 @@ var File_yandex_cloud_spark_v1_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/spark/v1/cluster_service.proto\x12\x15yandex.cloud.spark.v1\x1a google/protobuf/field_mask.proto\x1a#yandex/cloud/spark/v1/cluster.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
+	"+yandex/cloud/spark/v1/cluster_service.proto\x12\x15yandex.cloud.spark.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a#yandex/cloud/spark/v1/cluster.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -1029,7 +1031,7 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\xcb\a\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\x8c\r\n" +
 	"\x0eClusterService\x12Q\n" +
 	"\x03Get\x12(.yandex.cloud.spark.v1.GetClusterRequest\x1a\x1e.yandex.cloud.spark.v1.Cluster\"\x00\x12a\n" +
 	"\x04List\x12*.yandex.cloud.spark.v1.ListClustersRequest\x1a+.yandex.cloud.spark.v1.ListClustersResponse\"\x00\x12~\n" +
@@ -1043,7 +1045,12 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\x14StartClusterMetadata\x12\aCluster\x12x\n" +
 	"\x04Stop\x12).yandex.cloud.spark.v1.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"\"\xb2\xd2*\x1e\n" +
 	"\x13StopClusterMetadata\x12\aCluster\x12}\n" +
-	"\x0eListOperations\x123.yandex.cloud.spark.v1.ListClusterOperationsRequest\x1a4.yandex.cloud.spark.v1.ListClusterOperationsResponse\"\x00B\\\n" +
+	"\x0eListOperations\x123.yandex.cloud.spark.v1.ListClusterOperationsRequest\x1a4.yandex.cloud.spark.v1.ListClusterOperationsResponse\"\x00\x12\xba\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/managed-spark/v1/clusters/{resource_id}:listAccessBindings\x12\xf9\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*H\n" +
+	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02?:\x01*\":/managed-spark/v1/clusters/{resource_id}:setAccessBindings\x12\x85\x02\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x97\x01\xb2\xd2*K\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02B:\x01*2=/managed-spark/v1/clusters/{resource_id}:updateAccessBindingsB\\\n" +
 	"\x19yandex.cloud.api.spark.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/spark/v1;sparkb\x06proto3"
 
 var (
@@ -1060,32 +1067,36 @@ func file_yandex_cloud_spark_v1_cluster_service_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_spark_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_spark_v1_cluster_service_proto_goTypes = []any{
-	(*GetClusterRequest)(nil),             // 0: yandex.cloud.spark.v1.GetClusterRequest
-	(*ListClustersRequest)(nil),           // 1: yandex.cloud.spark.v1.ListClustersRequest
-	(*ListClustersResponse)(nil),          // 2: yandex.cloud.spark.v1.ListClustersResponse
-	(*CreateClusterRequest)(nil),          // 3: yandex.cloud.spark.v1.CreateClusterRequest
-	(*CreateClusterMetadata)(nil),         // 4: yandex.cloud.spark.v1.CreateClusterMetadata
-	(*UpdateClusterRequest)(nil),          // 5: yandex.cloud.spark.v1.UpdateClusterRequest
-	(*UpdateClusterMetadata)(nil),         // 6: yandex.cloud.spark.v1.UpdateClusterMetadata
-	(*DeleteClusterRequest)(nil),          // 7: yandex.cloud.spark.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),         // 8: yandex.cloud.spark.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),           // 9: yandex.cloud.spark.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),          // 10: yandex.cloud.spark.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),            // 11: yandex.cloud.spark.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),           // 12: yandex.cloud.spark.v1.StopClusterMetadata
-	(*ListClusterOperationsRequest)(nil),  // 13: yandex.cloud.spark.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil), // 14: yandex.cloud.spark.v1.ListClusterOperationsResponse
-	nil,                                   // 15: yandex.cloud.spark.v1.CreateClusterRequest.LabelsEntry
-	nil,                                   // 16: yandex.cloud.spark.v1.UpdateClusterRequest.LabelsEntry
-	(*Cluster)(nil),                       // 17: yandex.cloud.spark.v1.Cluster
-	(*ClusterConfig)(nil),                 // 18: yandex.cloud.spark.v1.ClusterConfig
-	(*NetworkConfig)(nil),                 // 19: yandex.cloud.spark.v1.NetworkConfig
-	(*LoggingConfig)(nil),                 // 20: yandex.cloud.spark.v1.LoggingConfig
-	(*MaintenanceWindow)(nil),             // 21: yandex.cloud.spark.v1.MaintenanceWindow
-	(*fieldmaskpb.FieldMask)(nil),         // 22: google.protobuf.FieldMask
-	(*UpdateClusterConfigSpec)(nil),       // 23: yandex.cloud.spark.v1.UpdateClusterConfigSpec
-	(*UpdateNetworkConfigSpec)(nil),       // 24: yandex.cloud.spark.v1.UpdateNetworkConfigSpec
-	(*operation.Operation)(nil),           // 25: yandex.cloud.operation.Operation
+	(*GetClusterRequest)(nil),                  // 0: yandex.cloud.spark.v1.GetClusterRequest
+	(*ListClustersRequest)(nil),                // 1: yandex.cloud.spark.v1.ListClustersRequest
+	(*ListClustersResponse)(nil),               // 2: yandex.cloud.spark.v1.ListClustersResponse
+	(*CreateClusterRequest)(nil),               // 3: yandex.cloud.spark.v1.CreateClusterRequest
+	(*CreateClusterMetadata)(nil),              // 4: yandex.cloud.spark.v1.CreateClusterMetadata
+	(*UpdateClusterRequest)(nil),               // 5: yandex.cloud.spark.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),              // 6: yandex.cloud.spark.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),               // 7: yandex.cloud.spark.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),              // 8: yandex.cloud.spark.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),                // 9: yandex.cloud.spark.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),               // 10: yandex.cloud.spark.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),                 // 11: yandex.cloud.spark.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),                // 12: yandex.cloud.spark.v1.StopClusterMetadata
+	(*ListClusterOperationsRequest)(nil),       // 13: yandex.cloud.spark.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),      // 14: yandex.cloud.spark.v1.ListClusterOperationsResponse
+	nil,                                        // 15: yandex.cloud.spark.v1.CreateClusterRequest.LabelsEntry
+	nil,                                        // 16: yandex.cloud.spark.v1.UpdateClusterRequest.LabelsEntry
+	(*Cluster)(nil),                            // 17: yandex.cloud.spark.v1.Cluster
+	(*ClusterConfig)(nil),                      // 18: yandex.cloud.spark.v1.ClusterConfig
+	(*NetworkConfig)(nil),                      // 19: yandex.cloud.spark.v1.NetworkConfig
+	(*LoggingConfig)(nil),                      // 20: yandex.cloud.spark.v1.LoggingConfig
+	(*MaintenanceWindow)(nil),                  // 21: yandex.cloud.spark.v1.MaintenanceWindow
+	(*fieldmaskpb.FieldMask)(nil),              // 22: google.protobuf.FieldMask
+	(*UpdateClusterConfigSpec)(nil),            // 23: yandex.cloud.spark.v1.UpdateClusterConfigSpec
+	(*UpdateNetworkConfigSpec)(nil),            // 24: yandex.cloud.spark.v1.UpdateNetworkConfigSpec
+	(*operation.Operation)(nil),                // 25: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 26: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 27: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 28: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 29: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_spark_v1_cluster_service_proto_depIdxs = []int32{
 	17, // 0: yandex.cloud.spark.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.spark.v1.Cluster
@@ -1109,16 +1120,22 @@ var file_yandex_cloud_spark_v1_cluster_service_proto_depIdxs = []int32{
 	9,  // 18: yandex.cloud.spark.v1.ClusterService.Start:input_type -> yandex.cloud.spark.v1.StartClusterRequest
 	11, // 19: yandex.cloud.spark.v1.ClusterService.Stop:input_type -> yandex.cloud.spark.v1.StopClusterRequest
 	13, // 20: yandex.cloud.spark.v1.ClusterService.ListOperations:input_type -> yandex.cloud.spark.v1.ListClusterOperationsRequest
-	17, // 21: yandex.cloud.spark.v1.ClusterService.Get:output_type -> yandex.cloud.spark.v1.Cluster
-	2,  // 22: yandex.cloud.spark.v1.ClusterService.List:output_type -> yandex.cloud.spark.v1.ListClustersResponse
-	25, // 23: yandex.cloud.spark.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	25, // 24: yandex.cloud.spark.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	25, // 25: yandex.cloud.spark.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	25, // 26: yandex.cloud.spark.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	25, // 27: yandex.cloud.spark.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	14, // 28: yandex.cloud.spark.v1.ClusterService.ListOperations:output_type -> yandex.cloud.spark.v1.ListClusterOperationsResponse
-	21, // [21:29] is the sub-list for method output_type
-	13, // [13:21] is the sub-list for method input_type
+	26, // 21: yandex.cloud.spark.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	27, // 22: yandex.cloud.spark.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	28, // 23: yandex.cloud.spark.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	17, // 24: yandex.cloud.spark.v1.ClusterService.Get:output_type -> yandex.cloud.spark.v1.Cluster
+	2,  // 25: yandex.cloud.spark.v1.ClusterService.List:output_type -> yandex.cloud.spark.v1.ListClustersResponse
+	25, // 26: yandex.cloud.spark.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	25, // 27: yandex.cloud.spark.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	25, // 28: yandex.cloud.spark.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	25, // 29: yandex.cloud.spark.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	25, // 30: yandex.cloud.spark.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	14, // 31: yandex.cloud.spark.v1.ClusterService.ListOperations:output_type -> yandex.cloud.spark.v1.ListClusterOperationsResponse
+	29, // 32: yandex.cloud.spark.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	25, // 33: yandex.cloud.spark.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	25, // 34: yandex.cloud.spark.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	24, // [24:35] is the sub-list for method output_type
+	13, // [13:24] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name

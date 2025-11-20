@@ -8,6 +8,7 @@ package metastore
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,16 +21,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClusterService_Get_FullMethodName            = "/yandex.cloud.metastore.v1.ClusterService/Get"
-	ClusterService_List_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/List"
-	ClusterService_Create_FullMethodName         = "/yandex.cloud.metastore.v1.ClusterService/Create"
-	ClusterService_Update_FullMethodName         = "/yandex.cloud.metastore.v1.ClusterService/Update"
-	ClusterService_Delete_FullMethodName         = "/yandex.cloud.metastore.v1.ClusterService/Delete"
-	ClusterService_Start_FullMethodName          = "/yandex.cloud.metastore.v1.ClusterService/Start"
-	ClusterService_Stop_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/Stop"
-	ClusterService_ImportData_FullMethodName     = "/yandex.cloud.metastore.v1.ClusterService/ImportData"
-	ClusterService_ExportData_FullMethodName     = "/yandex.cloud.metastore.v1.ClusterService/ExportData"
-	ClusterService_ListOperations_FullMethodName = "/yandex.cloud.metastore.v1.ClusterService/ListOperations"
+	ClusterService_Get_FullMethodName                  = "/yandex.cloud.metastore.v1.ClusterService/Get"
+	ClusterService_List_FullMethodName                 = "/yandex.cloud.metastore.v1.ClusterService/List"
+	ClusterService_Create_FullMethodName               = "/yandex.cloud.metastore.v1.ClusterService/Create"
+	ClusterService_Update_FullMethodName               = "/yandex.cloud.metastore.v1.ClusterService/Update"
+	ClusterService_Delete_FullMethodName               = "/yandex.cloud.metastore.v1.ClusterService/Delete"
+	ClusterService_Start_FullMethodName                = "/yandex.cloud.metastore.v1.ClusterService/Start"
+	ClusterService_Stop_FullMethodName                 = "/yandex.cloud.metastore.v1.ClusterService/Stop"
+	ClusterService_ImportData_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/ImportData"
+	ClusterService_ExportData_FullMethodName           = "/yandex.cloud.metastore.v1.ClusterService/ExportData"
+	ClusterService_ListOperations_FullMethodName       = "/yandex.cloud.metastore.v1.ClusterService/ListOperations"
+	ClusterService_ListAccessBindings_FullMethodName   = "/yandex.cloud.metastore.v1.ClusterService/ListAccessBindings"
+	ClusterService_SetAccessBindings_FullMethodName    = "/yandex.cloud.metastore.v1.ClusterService/SetAccessBindings"
+	ClusterService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.metastore.v1.ClusterService/UpdateAccessBindings"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -58,6 +62,12 @@ type ClusterServiceClient interface {
 	ExportData(ctx context.Context, in *ExportDataRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified Hive Metastore Cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
+	// Retrieves a list of access bindings for the specified Metastore cluster.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified Metastore cluster.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified Metastore cluster.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type clusterServiceClient struct {
@@ -168,6 +178,36 @@ func (c *clusterServiceClient) ListOperations(ctx context.Context, in *ListClust
 	return out, nil
 }
 
+func (c *clusterServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, ClusterService_ListAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_SetAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_UpdateAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
@@ -194,6 +234,12 @@ type ClusterServiceServer interface {
 	ExportData(context.Context, *ExportDataRequest) (*operation.Operation, error)
 	// Retrieves the list of Operation resources for the specified Hive Metastore Cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
+	// Retrieves a list of access bindings for the specified Metastore cluster.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified Metastore cluster.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified Metastore cluster.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have
@@ -232,6 +278,15 @@ func (UnimplementedClusterServiceServer) ExportData(context.Context, *ExportData
 }
 func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedClusterServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedClusterServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedClusterServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 func (UnimplementedClusterServiceServer) testEmbeddedByValue() {}
 
@@ -433,6 +488,60 @@ func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -479,6 +588,18 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _ClusterService_ListOperations_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _ClusterService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _ClusterService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _ClusterService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -25,6 +25,7 @@ const (
 type Lock_State int32
 
 const (
+	// Default unspecified state.
 	Lock_STATE_UNSPECIFIED Lock_State = 0
 	// Subscription unlocked.
 	Lock_UNLOCKED Lock_State = 1
@@ -100,8 +101,10 @@ type Lock struct {
 	// External subscription instance (optional), for usage convenience propagated
 	// from parent subscription instance.
 	ExternalInstance *ExternalInstance `protobuf:"bytes,10,opt,name=external_instance,json=externalInstance,proto3" json:"external_instance,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Indicates whether the subscription lock can be automatically prolonged/renewed.
+	InstanceProlongation bool `protobuf:"varint,11,opt,name=instance_prolongation,json=instanceProlongation,proto3" json:"instance_prolongation,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Lock) Reset() {
@@ -204,11 +207,18 @@ func (x *Lock) GetExternalInstance() *ExternalInstance {
 	return nil
 }
 
+func (x *Lock) GetInstanceProlongation() bool {
+	if x != nil {
+		return x.InstanceProlongation
+	}
+	return false
+}
+
 var File_yandex_cloud_marketplace_licensemanager_v1_lock_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_marketplace_licensemanager_v1_lock_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/marketplace/licensemanager/v1/lock.proto\x12*yandex.cloud.marketplace.licensemanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1aByandex/cloud/marketplace/licensemanager/v1/external_instance.proto\"\xe1\x04\n" +
+	"5yandex/cloud/marketplace/licensemanager/v1/lock.proto\x12*yandex.cloud.marketplace.licensemanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1aByandex/cloud/marketplace/licensemanager/v1/external_instance.proto\"\x96\x05\n" +
 	"\x04Lock\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vinstance_id\x18\x02 \x01(\tR\n" +
@@ -226,7 +236,8 @@ const file_yandex_cloud_marketplace_licensemanager_v1_lock_proto_rawDesc = "" +
 	"\vtemplate_id\x18\t \x01(\tR\n" +
 	"templateId\x12i\n" +
 	"\x11external_instance\x18\n" +
-	" \x01(\v2<.yandex.cloud.marketplace.licensemanager.v1.ExternalInstanceR\x10externalInstance\"E\n" +
+	" \x01(\v2<.yandex.cloud.marketplace.licensemanager.v1.ExternalInstanceR\x10externalInstance\x123\n" +
+	"\x15instance_prolongation\x18\v \x01(\bR\x14instanceProlongation\"E\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bUNLOCKED\x10\x01\x12\n" +

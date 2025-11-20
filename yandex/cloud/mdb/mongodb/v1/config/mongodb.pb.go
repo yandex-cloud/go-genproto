@@ -26,6 +26,7 @@ const (
 type MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor int32
 
 const (
+	// Unspecified compression type.
 	MongodConfig_Storage_WiredTiger_CollectionConfig_COMPRESSOR_UNSPECIFIED MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 0
 	// No compression.
 	MongodConfig_Storage_WiredTiger_CollectionConfig_NONE MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 1
@@ -85,6 +86,7 @@ func (MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor) EnumDescripto
 type MongodConfig_OperationProfiling_Mode int32
 
 const (
+	// Mode unspecified.
 	MongodConfig_OperationProfiling_MODE_UNSPECIFIED MongodConfig_OperationProfiling_Mode = 0
 	// The profiler is off and does not collect any data.
 	MongodConfig_OperationProfiling_OFF MongodConfig_OperationProfiling_Mode = 1
@@ -140,6 +142,7 @@ func (MongodConfig_OperationProfiling_Mode) EnumDescriptor() ([]byte, []int) {
 type MongodConfig_Network_Compression_Compressor int32
 
 const (
+	// Unspecified compression type.
 	MongodConfig_Network_Compression_COMPRESSOR_UNSPECIFIED MongodConfig_Network_Compression_Compressor = 0
 	// The [Snappy](https://docs.mongodb.com/v4.2/reference/glossary/#term-snappy) compression.
 	MongodConfig_Network_Compression_SNAPPY MongodConfig_Network_Compression_Compressor = 1
@@ -199,6 +202,7 @@ func (MongodConfig_Network_Compression_Compressor) EnumDescriptor() ([]byte, []i
 type MongoCfgConfig_OperationProfiling_Mode int32
 
 const (
+	// Mode unspecified.
 	MongoCfgConfig_OperationProfiling_MODE_UNSPECIFIED MongoCfgConfig_OperationProfiling_Mode = 0
 	// The profiler is off and does not collect any data.
 	MongoCfgConfig_OperationProfiling_OFF MongoCfgConfig_OperationProfiling_Mode = 1
@@ -254,6 +258,7 @@ func (MongoCfgConfig_OperationProfiling_Mode) EnumDescriptor() ([]byte, []int) {
 type MongosConfig_Network_Compression_Compressor int32
 
 const (
+	// Unspecified compression type.
 	MongosConfig_Network_Compression_COMPRESSOR_UNSPECIFIED MongosConfig_Network_Compression_Compressor = 0
 	// The [Snappy](https://docs.mongodb.com/v4.2/reference/glossary/#term-snappy) compression.
 	MongosConfig_Network_Compression_SNAPPY MongosConfig_Network_Compression_Compressor = 1
@@ -325,9 +330,13 @@ type MongodConfig struct {
 	// `AuditLog` section of mongod configuration.
 	AuditLog *MongodConfig_AuditLog `protobuf:"bytes,5,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	// `SetParameter` section of mongod configuration.
-	SetParameter  *MongodConfig_SetParameter `protobuf:"bytes,6,opt,name=set_parameter,json=setParameter,proto3" json:"set_parameter,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	SetParameter *MongodConfig_SetParameter `protobuf:"bytes,6,opt,name=set_parameter,json=setParameter,proto3" json:"set_parameter,omitempty"`
+	// `Oplog` section of mongod configuration.
+	Oplog *MongodConfig_Oplog `protobuf:"bytes,7,opt,name=oplog,proto3" json:"oplog,omitempty"`
+	// Chained replication setting
+	ChainingAllowed *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=chaining_allowed,json=chainingAllowed,proto3" json:"chaining_allowed,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *MongodConfig) Reset() {
@@ -402,6 +411,20 @@ func (x *MongodConfig) GetSetParameter() *MongodConfig_SetParameter {
 	return nil
 }
 
+func (x *MongodConfig) GetOplog() *MongodConfig_Oplog {
+	if x != nil {
+		return x.Oplog
+	}
+	return nil
+}
+
+func (x *MongodConfig) GetChainingAllowed() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ChainingAllowed
+	}
+	return nil
+}
+
 type MongoCfgConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongocfg configuration.
@@ -409,9 +432,17 @@ type MongoCfgConfig struct {
 	// `operationProfiling` section of mongocfg configuration.
 	OperationProfiling *MongoCfgConfig_OperationProfiling `protobuf:"bytes,2,opt,name=operation_profiling,json=operationProfiling,proto3" json:"operation_profiling,omitempty"`
 	// `net` section of mongocfg configuration.
-	Net           *MongoCfgConfig_Network `protobuf:"bytes,3,opt,name=net,proto3" json:"net,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Net *MongoCfgConfig_Network `protobuf:"bytes,3,opt,name=net,proto3" json:"net,omitempty"`
+	// `setParameter` section of mongocfg configuration.
+	SetParameter *MongoCfgConfig_SetParameter `protobuf:"bytes,4,opt,name=set_parameter,json=setParameter,proto3" json:"set_parameter,omitempty"`
+	// `AuditLog` section of mongocfg configuration.
+	AuditLog *MongoCfgConfig_AuditLog `protobuf:"bytes,5,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// `Oplog` section of mongod configuration.
+	Oplog *MongoCfgConfig_Oplog `protobuf:"bytes,6,opt,name=oplog,proto3" json:"oplog,omitempty"`
+	// Chained replication setting
+	ChainingAllowed *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=chaining_allowed,json=chainingAllowed,proto3" json:"chaining_allowed,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *MongoCfgConfig) Reset() {
@@ -465,10 +496,44 @@ func (x *MongoCfgConfig) GetNet() *MongoCfgConfig_Network {
 	return nil
 }
 
+func (x *MongoCfgConfig) GetSetParameter() *MongoCfgConfig_SetParameter {
+	if x != nil {
+		return x.SetParameter
+	}
+	return nil
+}
+
+func (x *MongoCfgConfig) GetAuditLog() *MongoCfgConfig_AuditLog {
+	if x != nil {
+		return x.AuditLog
+	}
+	return nil
+}
+
+func (x *MongoCfgConfig) GetOplog() *MongoCfgConfig_Oplog {
+	if x != nil {
+		return x.Oplog
+	}
+	return nil
+}
+
+func (x *MongoCfgConfig) GetChainingAllowed() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ChainingAllowed
+	}
+	return nil
+}
+
 type MongosConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Network settings for mongos.
-	Net           *MongosConfig_Network `protobuf:"bytes,3,opt,name=net,proto3" json:"net,omitempty"`
+	Net *MongosConfig_Network `protobuf:"bytes,3,opt,name=net,proto3" json:"net,omitempty"`
+	// `setParameter` section of mongos configuration.
+	SetParameter *MongosConfig_SetParameter `protobuf:"bytes,4,opt,name=set_parameter,json=setParameter,proto3" json:"set_parameter,omitempty"`
+	// `AuditLog` section of mongos configuration.
+	AuditLog *MongosConfig_AuditLog `protobuf:"bytes,5,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// `ChunkSize` parameter of mongos configuration.
+	ChunkSize     *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=chunk_size,json=chunkSize,proto3" json:"chunk_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -506,6 +571,27 @@ func (*MongosConfig) Descriptor() ([]byte, []int) {
 func (x *MongosConfig) GetNet() *MongosConfig_Network {
 	if x != nil {
 		return x.Net
+	}
+	return nil
+}
+
+func (x *MongosConfig) GetSetParameter() *MongosConfig_SetParameter {
+	if x != nil {
+		return x.SetParameter
+	}
+	return nil
+}
+
+func (x *MongosConfig) GetAuditLog() *MongosConfig_AuditLog {
+	if x != nil {
+		return x.AuditLog
+	}
+	return nil
+}
+
+func (x *MongosConfig) GetChunkSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ChunkSize
 	}
 	return nil
 }
@@ -994,8 +1080,26 @@ type MongodConfig_SetParameter struct {
 	EnableFlowControl *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=enable_flow_control,json=enableFlowControl,proto3" json:"enable_flow_control,omitempty"`
 	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
 	MinSnapshotHistoryWindowInSeconds *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=min_snapshot_history_window_in_seconds,json=minSnapshotHistoryWindowInSeconds,proto3" json:"min_snapshot_history_window_in_seconds,omitempty"`
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+	// The target maximum majority committed lag when running with flow control
+	FlowControlTargetLagSeconds *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=flow_control_target_lag_seconds,json=flowControlTargetLagSeconds,proto3" json:"flow_control_target_lag_seconds,omitempty"`
+	// The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved.
+	FlowControlWarnThresholdSeconds *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=flow_control_warn_threshold_seconds,json=flowControlWarnThresholdSeconds,proto3" json:"flow_control_warn_threshold_seconds,omitempty"`
+	// Time in milliseconds to wait between batches of insertions during cloning step of the migration process.
+	MigrateCloneInsertionBatchDelayMs *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=migrate_clone_insertion_batch_delay_ms,json=migrateCloneInsertionBatchDelayMs,proto3" json:"migrate_clone_insertion_batch_delay_ms,omitempty"`
+	// The maximum number of documents to insert in a single batch during the cloning step of the migration process.
+	MigrateCloneInsertionBatchSize *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=migrate_clone_insertion_batch_size,json=migrateCloneInsertionBatchSize,proto3" json:"migrate_clone_insertion_batch_size,omitempty"`
+	// Minimum delay before a migrated chunk is deleted from the source shard.
+	OrphanCleanupDelaySecs *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=orphan_cleanup_delay_secs,json=orphanCleanupDelaySecs,proto3" json:"orphan_cleanup_delay_secs,omitempty"`
+	// Specifies the maximum batch size used for updating the persisted chunk cache.
+	PersistedChunkCacheUpdateMaxBatchSize *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=persisted_chunk_cache_update_max_batch_size,json=persistedChunkCacheUpdateMaxBatchSize,proto3" json:"persisted_chunk_cache_update_max_batch_size,omitempty"`
+	// The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command).
+	RangeDeleterBatchDelayMs *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=range_deleter_batch_delay_ms,json=rangeDeleterBatchDelayMs,proto3" json:"range_deleter_batch_delay_ms,omitempty"`
+	// The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command).
+	RangeDeleterBatchSize *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=range_deleter_batch_size,json=rangeDeleterBatchSize,proto3" json:"range_deleter_batch_size,omitempty"`
+	// Specifies the settings for mirrored reads for the mongod instance
+	MirrorReads   *MongodConfig_SetParameter_MirrorReads `protobuf:"bytes,12,opt,name=mirror_reads,json=mirrorReads,proto3" json:"mirror_reads,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MongodConfig_SetParameter) Reset() {
@@ -1049,6 +1153,123 @@ func (x *MongodConfig_SetParameter) GetMinSnapshotHistoryWindowInSeconds() *wrap
 	return nil
 }
 
+func (x *MongodConfig_SetParameter) GetFlowControlTargetLagSeconds() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.FlowControlTargetLagSeconds
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetFlowControlWarnThresholdSeconds() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.FlowControlWarnThresholdSeconds
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetMigrateCloneInsertionBatchDelayMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MigrateCloneInsertionBatchDelayMs
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetMigrateCloneInsertionBatchSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MigrateCloneInsertionBatchSize
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetOrphanCleanupDelaySecs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.OrphanCleanupDelaySecs
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetPersistedChunkCacheUpdateMaxBatchSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.PersistedChunkCacheUpdateMaxBatchSize
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetRangeDeleterBatchDelayMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.RangeDeleterBatchDelayMs
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetRangeDeleterBatchSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.RangeDeleterBatchSize
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter) GetMirrorReads() *MongodConfig_SetParameter_MirrorReads {
+	if x != nil {
+		return x.MirrorReads
+	}
+	return nil
+}
+
+type MongodConfig_Oplog struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Oplog maxsize in percents.
+	MaxSizePercent *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_size_percent,json=maxSizePercent,proto3" json:"max_size_percent,omitempty"`
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour.
+	MinRetentionHours *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=min_retention_hours,json=minRetentionHours,proto3" json:"min_retention_hours,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *MongodConfig_Oplog) Reset() {
+	*x = MongodConfig_Oplog{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongodConfig_Oplog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongodConfig_Oplog) ProtoMessage() {}
+
+func (x *MongodConfig_Oplog) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongodConfig_Oplog.ProtoReflect.Descriptor instead.
+func (*MongodConfig_Oplog) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{0, 6}
+}
+
+func (x *MongodConfig_Oplog) GetMaxSizePercent() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxSizePercent
+	}
+	return nil
+}
+
+func (x *MongodConfig_Oplog) GetMinRetentionHours() *wrapperspb.DoubleValue {
+	if x != nil {
+		return x.MinRetentionHours
+	}
+	return nil
+}
+
 // Configuration of WiredTiger storage engine.
 type MongodConfig_Storage_WiredTiger struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1064,7 +1285,7 @@ type MongodConfig_Storage_WiredTiger struct {
 
 func (x *MongodConfig_Storage_WiredTiger) Reset() {
 	*x = MongodConfig_Storage_WiredTiger{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1076,7 +1297,7 @@ func (x *MongodConfig_Storage_WiredTiger) String() string {
 func (*MongodConfig_Storage_WiredTiger) ProtoMessage() {}
 
 func (x *MongodConfig_Storage_WiredTiger) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1124,7 +1345,7 @@ type MongodConfig_Storage_Journal struct {
 
 func (x *MongodConfig_Storage_Journal) Reset() {
 	*x = MongodConfig_Storage_Journal{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1136,7 +1357,7 @@ func (x *MongodConfig_Storage_Journal) String() string {
 func (*MongodConfig_Storage_Journal) ProtoMessage() {}
 
 func (x *MongodConfig_Storage_Journal) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1162,14 +1383,16 @@ func (x *MongodConfig_Storage_Journal) GetCommitInterval() *wrapperspb.Int64Valu
 type MongodConfig_Storage_WiredTiger_EngineConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum size of the internal cache that WiredTiger will use for all data.
-	CacheSizeGb   *wrapperspb.DoubleValue `protobuf:"bytes,1,opt,name=cache_size_gb,json=cacheSizeGb,proto3" json:"cache_size_gb,omitempty"`
+	CacheSizeGb *wrapperspb.DoubleValue `protobuf:"bytes,1,opt,name=cache_size_gb,json=cacheSizeGb,proto3" json:"cache_size_gb,omitempty"`
+	// The maximum size of the internal cache that WiredTiger will use for all data in percents.
+	CacheSize     *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=cache_size,json=cacheSize,proto3" json:"cache_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MongodConfig_Storage_WiredTiger_EngineConfig) Reset() {
 	*x = MongodConfig_Storage_WiredTiger_EngineConfig{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1181,7 +1404,7 @@ func (x *MongodConfig_Storage_WiredTiger_EngineConfig) String() string {
 func (*MongodConfig_Storage_WiredTiger_EngineConfig) ProtoMessage() {}
 
 func (x *MongodConfig_Storage_WiredTiger_EngineConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1204,6 +1427,13 @@ func (x *MongodConfig_Storage_WiredTiger_EngineConfig) GetCacheSizeGb() *wrapper
 	return nil
 }
 
+func (x *MongodConfig_Storage_WiredTiger_EngineConfig) GetCacheSize() *wrapperspb.DoubleValue {
+	if x != nil {
+		return x.CacheSize
+	}
+	return nil
+}
+
 type MongodConfig_Storage_WiredTiger_CollectionConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Default type of compression to use for collection data.
@@ -1214,7 +1444,7 @@ type MongodConfig_Storage_WiredTiger_CollectionConfig struct {
 
 func (x *MongodConfig_Storage_WiredTiger_CollectionConfig) Reset() {
 	*x = MongodConfig_Storage_WiredTiger_CollectionConfig{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1226,7 +1456,7 @@ func (x *MongodConfig_Storage_WiredTiger_CollectionConfig) String() string {
 func (*MongodConfig_Storage_WiredTiger_CollectionConfig) ProtoMessage() {}
 
 func (x *MongodConfig_Storage_WiredTiger_CollectionConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1259,7 +1489,7 @@ type MongodConfig_Storage_WiredTiger_IndexConfig struct {
 
 func (x *MongodConfig_Storage_WiredTiger_IndexConfig) Reset() {
 	*x = MongodConfig_Storage_WiredTiger_IndexConfig{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1271,7 +1501,7 @@ func (x *MongodConfig_Storage_WiredTiger_IndexConfig) String() string {
 func (*MongodConfig_Storage_WiredTiger_IndexConfig) ProtoMessage() {}
 
 func (x *MongodConfig_Storage_WiredTiger_IndexConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1538,7 @@ type MongodConfig_Network_Compression struct {
 
 func (x *MongodConfig_Network_Compression) Reset() {
 	*x = MongodConfig_Network_Compression{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1320,7 +1550,7 @@ func (x *MongodConfig_Network_Compression) String() string {
 func (*MongodConfig_Network_Compression) ProtoMessage() {}
 
 func (x *MongodConfig_Network_Compression) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1591,7 @@ type MongodConfig_Security_KMIP struct {
 
 func (x *MongodConfig_Security_KMIP) Reset() {
 	*x = MongodConfig_Security_KMIP{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1373,7 +1603,7 @@ func (x *MongodConfig_Security_KMIP) String() string {
 func (*MongodConfig_Security_KMIP) ProtoMessage() {}
 
 func (x *MongodConfig_Security_KMIP) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1424,6 +1654,60 @@ func (x *MongodConfig_Security_KMIP) GetKeyIdentifier() string {
 	return ""
 }
 
+type MongodConfig_SetParameter_MirrorReads struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The sampling rate used to mirror a subset of operations that support mirroring.
+	SamplingRate *wrapperspb.DoubleValue `protobuf:"bytes,1,opt,name=sampling_rate,json=samplingRate,proto3" json:"sampling_rate,omitempty"`
+	// The maximum time in milliseconds for the mirrored reads.
+	MaxTimeMs     *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_time_ms,json=maxTimeMs,proto3" json:"max_time_ms,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MongodConfig_SetParameter_MirrorReads) Reset() {
+	*x = MongodConfig_SetParameter_MirrorReads{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongodConfig_SetParameter_MirrorReads) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongodConfig_SetParameter_MirrorReads) ProtoMessage() {}
+
+func (x *MongodConfig_SetParameter_MirrorReads) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongodConfig_SetParameter_MirrorReads.ProtoReflect.Descriptor instead.
+func (*MongodConfig_SetParameter_MirrorReads) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{0, 5, 0}
+}
+
+func (x *MongodConfig_SetParameter_MirrorReads) GetSamplingRate() *wrapperspb.DoubleValue {
+	if x != nil {
+		return x.SamplingRate
+	}
+	return nil
+}
+
+func (x *MongodConfig_SetParameter_MirrorReads) GetMaxTimeMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxTimeMs
+	}
+	return nil
+}
+
 type MongoCfgConfig_Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration of the WiredTiger storage engine.
@@ -1434,7 +1718,7 @@ type MongoCfgConfig_Storage struct {
 
 func (x *MongoCfgConfig_Storage) Reset() {
 	*x = MongoCfgConfig_Storage{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1446,7 +1730,7 @@ func (x *MongoCfgConfig_Storage) String() string {
 func (*MongoCfgConfig_Storage) ProtoMessage() {}
 
 func (x *MongoCfgConfig_Storage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1483,7 +1767,7 @@ type MongoCfgConfig_OperationProfiling struct {
 
 func (x *MongoCfgConfig_OperationProfiling) Reset() {
 	*x = MongoCfgConfig_OperationProfiling{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1495,7 +1779,7 @@ func (x *MongoCfgConfig_OperationProfiling) String() string {
 func (*MongoCfgConfig_OperationProfiling) ProtoMessage() {}
 
 func (x *MongoCfgConfig_OperationProfiling) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1535,7 +1819,7 @@ type MongoCfgConfig_Network struct {
 
 func (x *MongoCfgConfig_Network) Reset() {
 	*x = MongoCfgConfig_Network{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1547,7 +1831,7 @@ func (x *MongoCfgConfig_Network) String() string {
 func (*MongoCfgConfig_Network) ProtoMessage() {}
 
 func (x *MongoCfgConfig_Network) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1570,6 +1854,162 @@ func (x *MongoCfgConfig_Network) GetMaxIncomingConnections() *wrapperspb.Int64Va
 	return nil
 }
 
+type MongoCfgConfig_SetParameter struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enables or disables the mechanism that controls the rate at which the primary applies its writes with the
+	// goal of keeping the secondary members [majority committed](https://www.mongodb.com/docs/v4.2/reference/command/replSetGetStatus/#replSetGetStatus.optimes.lastCommittedOpTime)
+	// lag under a configurable maximum value.
+	EnableFlowControl *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=enable_flow_control,json=enableFlowControl,proto3" json:"enable_flow_control,omitempty"`
+	// Enables the auditing of authorization successes
+	// https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess
+	AuditAuthorizationSuccess *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=audit_authorization_success,json=auditAuthorizationSuccess,proto3" json:"audit_authorization_success,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *MongoCfgConfig_SetParameter) Reset() {
+	*x = MongoCfgConfig_SetParameter{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongoCfgConfig_SetParameter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongoCfgConfig_SetParameter) ProtoMessage() {}
+
+func (x *MongoCfgConfig_SetParameter) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongoCfgConfig_SetParameter.ProtoReflect.Descriptor instead.
+func (*MongoCfgConfig_SetParameter) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{1, 3}
+}
+
+func (x *MongoCfgConfig_SetParameter) GetEnableFlowControl() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.EnableFlowControl
+	}
+	return nil
+}
+
+func (x *MongoCfgConfig_SetParameter) GetAuditAuthorizationSuccess() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.AuditAuthorizationSuccess
+	}
+	return nil
+}
+
+type MongoCfgConfig_AuditLog struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Audit filter, should be valid JSON object string
+	Filter        string `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MongoCfgConfig_AuditLog) Reset() {
+	*x = MongoCfgConfig_AuditLog{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongoCfgConfig_AuditLog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongoCfgConfig_AuditLog) ProtoMessage() {}
+
+func (x *MongoCfgConfig_AuditLog) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongoCfgConfig_AuditLog.ProtoReflect.Descriptor instead.
+func (*MongoCfgConfig_AuditLog) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{1, 4}
+}
+
+func (x *MongoCfgConfig_AuditLog) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+type MongoCfgConfig_Oplog struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Oplog maxsize in percents.
+	MaxSizePercent *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_size_percent,json=maxSizePercent,proto3" json:"max_size_percent,omitempty"`
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour.
+	MinRetentionHours *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=min_retention_hours,json=minRetentionHours,proto3" json:"min_retention_hours,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *MongoCfgConfig_Oplog) Reset() {
+	*x = MongoCfgConfig_Oplog{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongoCfgConfig_Oplog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongoCfgConfig_Oplog) ProtoMessage() {}
+
+func (x *MongoCfgConfig_Oplog) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongoCfgConfig_Oplog.ProtoReflect.Descriptor instead.
+func (*MongoCfgConfig_Oplog) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{1, 5}
+}
+
+func (x *MongoCfgConfig_Oplog) GetMaxSizePercent() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxSizePercent
+	}
+	return nil
+}
+
+func (x *MongoCfgConfig_Oplog) GetMinRetentionHours() *wrapperspb.DoubleValue {
+	if x != nil {
+		return x.MinRetentionHours
+	}
+	return nil
+}
+
 // Configuration of WiredTiger storage engine.
 type MongoCfgConfig_Storage_WiredTiger struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1581,7 +2021,7 @@ type MongoCfgConfig_Storage_WiredTiger struct {
 
 func (x *MongoCfgConfig_Storage_WiredTiger) Reset() {
 	*x = MongoCfgConfig_Storage_WiredTiger{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1593,7 +2033,7 @@ func (x *MongoCfgConfig_Storage_WiredTiger) String() string {
 func (*MongoCfgConfig_Storage_WiredTiger) ProtoMessage() {}
 
 func (x *MongoCfgConfig_Storage_WiredTiger) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1619,14 +2059,16 @@ func (x *MongoCfgConfig_Storage_WiredTiger) GetEngineConfig() *MongoCfgConfig_St
 type MongoCfgConfig_Storage_WiredTiger_EngineConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum size of the internal cache that WiredTiger will use for all data.
-	CacheSizeGb   *wrapperspb.DoubleValue `protobuf:"bytes,1,opt,name=cache_size_gb,json=cacheSizeGb,proto3" json:"cache_size_gb,omitempty"`
+	CacheSizeGb *wrapperspb.DoubleValue `protobuf:"bytes,1,opt,name=cache_size_gb,json=cacheSizeGb,proto3" json:"cache_size_gb,omitempty"`
+	// The maximum size of the internal cache that WiredTiger will use for all data in percents.
+	CacheSize     *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=cache_size,json=cacheSize,proto3" json:"cache_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MongoCfgConfig_Storage_WiredTiger_EngineConfig) Reset() {
 	*x = MongoCfgConfig_Storage_WiredTiger_EngineConfig{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1638,7 +2080,7 @@ func (x *MongoCfgConfig_Storage_WiredTiger_EngineConfig) String() string {
 func (*MongoCfgConfig_Storage_WiredTiger_EngineConfig) ProtoMessage() {}
 
 func (x *MongoCfgConfig_Storage_WiredTiger_EngineConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1661,6 +2103,13 @@ func (x *MongoCfgConfig_Storage_WiredTiger_EngineConfig) GetCacheSizeGb() *wrapp
 	return nil
 }
 
+func (x *MongoCfgConfig_Storage_WiredTiger_EngineConfig) GetCacheSize() *wrapperspb.DoubleValue {
+	if x != nil {
+		return x.CacheSize
+	}
+	return nil
+}
+
 type MongosConfig_Network struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum number of simultaneous connections that mongos will accept.
@@ -1673,7 +2122,7 @@ type MongosConfig_Network struct {
 
 func (x *MongosConfig_Network) Reset() {
 	*x = MongosConfig_Network{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1685,7 +2134,7 @@ func (x *MongosConfig_Network) String() string {
 func (*MongosConfig_Network) ProtoMessage() {}
 
 func (x *MongosConfig_Network) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1715,6 +2164,205 @@ func (x *MongosConfig_Network) GetCompression() *MongosConfig_Network_Compressio
 	return nil
 }
 
+type MongosConfig_SetParameter struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enables the auditing of authorization successes
+	// https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess
+	AuditAuthorizationSuccess *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=audit_authorization_success,json=auditAuthorizationSuccess,proto3" json:"audit_authorization_success,omitempty"`
+	// Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option.
+	ReadHedgingMode *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=read_hedging_mode,json=readHedgingMode,proto3" json:"read_hedging_mode,omitempty"`
+	// Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance.
+	ShardingTaskExecutorPoolMaxSize *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=sharding_task_executor_pool_max_size,json=shardingTaskExecutorPoolMaxSize,proto3" json:"sharding_task_executor_pool_max_size,omitempty"`
+	// Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance.
+	ShardingTaskExecutorPoolMaxConnecting *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=sharding_task_executor_pool_max_connecting,json=shardingTaskExecutorPoolMaxConnecting,proto3" json:"sharding_task_executor_pool_max_connecting,omitempty"`
+	// Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance.
+	ShardingTaskExecutorPoolMinSize *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=sharding_task_executor_pool_min_size,json=shardingTaskExecutorPoolMinSize,proto3" json:"sharding_task_executor_pool_min_size,omitempty"`
+	// On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets.
+	ShardingTaskExecutorPoolReplicaSetMatching *wrapperspb.StringValue `protobuf:"bytes,6,opt,name=sharding_task_executor_pool_replica_set_matching,json=shardingTaskExecutorPoolReplicaSetMatching,proto3" json:"sharding_task_executor_pool_replica_set_matching,omitempty"`
+	// Maximum time that mongos goes without communication to a host before mongos drops all connections to the host.
+	ShardingTaskExecutorPoolHostTimeoutMs *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=sharding_task_executor_pool_host_timeout_ms,json=shardingTaskExecutorPoolHostTimeoutMs,proto3" json:"sharding_task_executor_pool_host_timeout_ms,omitempty"`
+	// Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool.
+	ShardingTaskExecutorPoolRefreshRequirementMs *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=sharding_task_executor_pool_refresh_requirement_ms,json=shardingTaskExecutorPoolRefreshRequirementMs,proto3" json:"sharding_task_executor_pool_refresh_requirement_ms,omitempty"`
+	// Maximum time the mongos waits for a heartbeat before timing out the heartbeat.
+	ShardingTaskExecutorPoolRefreshTimeoutMs *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=sharding_task_executor_pool_refresh_timeout_ms,json=shardingTaskExecutorPoolRefreshTimeoutMs,proto3" json:"sharding_task_executor_pool_refresh_timeout_ms,omitempty"`
+	// Configures a mongos instance to prewarm its connection pool on startup.
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartup *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=warm_min_connections_in_sharding_task_executor_pool_on_startup,json=warmMinConnectionsInShardingTaskExecutorPoolOnStartup,proto3" json:"warm_min_connections_in_sharding_task_executor_pool_on_startup,omitempty"`
+	// Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter.
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=warm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms,json=warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs,proto3" json:"warm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms,omitempty"`
+	// Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server.
+	ShardingTaskExecutorPoolMaxSizeForConfigServers *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=sharding_task_executor_pool_max_size_for_config_servers,json=shardingTaskExecutorPoolMaxSizeForConfigServers,proto3" json:"sharding_task_executor_pool_max_size_for_config_servers,omitempty"`
+	// Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server.
+	ShardingTaskExecutorPoolMinSizeForConfigServers *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=sharding_task_executor_pool_min_size_for_config_servers,json=shardingTaskExecutorPoolMinSizeForConfigServers,proto3" json:"sharding_task_executor_pool_min_size_for_config_servers,omitempty"`
+	unknownFields                                   protoimpl.UnknownFields
+	sizeCache                                       protoimpl.SizeCache
+}
+
+func (x *MongosConfig_SetParameter) Reset() {
+	*x = MongosConfig_SetParameter{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongosConfig_SetParameter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongosConfig_SetParameter) ProtoMessage() {}
+
+func (x *MongosConfig_SetParameter) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongosConfig_SetParameter.ProtoReflect.Descriptor instead.
+func (*MongosConfig_SetParameter) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{2, 1}
+}
+
+func (x *MongosConfig_SetParameter) GetAuditAuthorizationSuccess() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.AuditAuthorizationSuccess
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetReadHedgingMode() *wrapperspb.StringValue {
+	if x != nil {
+		return x.ReadHedgingMode
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolMaxSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolMaxSize
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolMaxConnecting() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolMaxConnecting
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolMinSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolMinSize
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolReplicaSetMatching() *wrapperspb.StringValue {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolReplicaSetMatching
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolHostTimeoutMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolHostTimeoutMs
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolRefreshRequirementMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolRefreshRequirementMs
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolRefreshTimeoutMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolRefreshTimeoutMs
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetWarmMinConnectionsInShardingTaskExecutorPoolOnStartup() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.WarmMinConnectionsInShardingTaskExecutorPoolOnStartup
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetWarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.WarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolMaxSizeForConfigServers() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolMaxSizeForConfigServers
+	}
+	return nil
+}
+
+func (x *MongosConfig_SetParameter) GetShardingTaskExecutorPoolMinSizeForConfigServers() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ShardingTaskExecutorPoolMinSizeForConfigServers
+	}
+	return nil
+}
+
+type MongosConfig_AuditLog struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Audit filter, should be valid JSON object string
+	Filter        string `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MongosConfig_AuditLog) Reset() {
+	*x = MongosConfig_AuditLog{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MongosConfig_AuditLog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MongosConfig_AuditLog) ProtoMessage() {}
+
+func (x *MongosConfig_AuditLog) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MongosConfig_AuditLog.ProtoReflect.Descriptor instead.
+func (*MongosConfig_AuditLog) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP(), []int{2, 2}
+}
+
+func (x *MongosConfig_AuditLog) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
 type MongosConfig_Network_Compression struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos instance and:
@@ -1729,7 +2377,7 @@ type MongosConfig_Network_Compression struct {
 
 func (x *MongosConfig_Network_Compression) Reset() {
 	*x = MongosConfig_Network_Compression{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1741,7 +2389,7 @@ func (x *MongosConfig_Network_Compression) String() string {
 func (*MongosConfig_Network_Compression) ProtoMessage() {}
 
 func (x *MongosConfig_Network_Compression) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1768,25 +2416,29 @@ var File_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto protoreflect.FileDescr
 
 const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb6\x19\n" +
+	"0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x86%\n" +
 	"\fMongodConfig\x12R\n" +
 	"\astorage\x18\x01 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.StorageR\astorage\x12t\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfilingR\x12operationProfiling\x12J\n" +
 	"\x03net\x18\x03 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.NetworkR\x03net\x12U\n" +
 	"\bsecurity\x18\x04 \x01(\v29.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SecurityR\bsecurity\x12V\n" +
 	"\taudit_log\x18\x05 \x01(\v29.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.AuditLogR\bauditLog\x12b\n" +
-	"\rset_parameter\x18\x06 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameterR\fsetParameter\x1a\xc7\b\n" +
+	"\rset_parameter\x18\x06 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameterR\fsetParameter\x12L\n" +
+	"\x05oplog\x18\a \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OplogR\x05oplog\x12E\n" +
+	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x1a\x85\t\n" +
 	"\aStorage\x12d\n" +
 	"\vwired_tiger\x18\x01 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTigerR\n" +
 	"wiredTiger\x12Z\n" +
-	"\ajournal\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.JournalR\ajournal\x1a\x9d\x06\n" +
+	"\ajournal\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.JournalR\ajournal\x1a\xdb\x06\n" +
 	"\n" +
 	"WiredTiger\x12u\n" +
 	"\rengine_config\x18\x01 \x01(\v2P.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfigR\fengineConfig\x12\x81\x01\n" +
 	"\x11collection_config\x18\x02 \x01(\v2T.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfigR\x10collectionConfig\x12r\n" +
-	"\findex_config\x18\x03 \x01(\v2O.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfigR\vindexConfig\x1aP\n" +
+	"\findex_config\x18\x03 \x01(\v2O.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfigR\vindexConfig\x1a\x8d\x01\n" +
 	"\fEngineConfig\x12@\n" +
-	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\vcacheSizeGb\x1a\xf3\x01\n" +
+	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\vcacheSizeGb\x12;\n" +
+	"\n" +
+	"cache_size\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\tcacheSize\x1a\xf3\x01\n" +
 	"\x10CollectionConfig\x12\x8a\x01\n" +
 	"\x10block_compressor\x18\x01 \x01(\x0e2_.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.CompressorR\x0fblockCompressor\"R\n" +
 	"\n" +
@@ -1835,23 +2487,45 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x0ekey_identifier\x18\x05 \x01(\tR\rkeyIdentifier\x1as\n" +
 	"\bAuditLog\x12\x16\n" +
 	"\x06filter\x18\x01 \x01(\tR\x06filter\x12O\n" +
-	"\x15runtime_configuration\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x14runtimeConfiguration\x1a\xaf\x02\n" +
+	"\x15runtime_configuration\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x14runtimeConfiguration\x1a\x8d\v\n" +
 	"\fSetParameter\x12Z\n" +
 	"\x1baudit_authorization_success\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x19auditAuthorizationSuccess\x12J\n" +
 	"\x13enable_flow_control\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x11enableFlowControl\x12w\n" +
-	"&min_snapshot_history_window_in_seconds\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!minSnapshotHistoryWindowInSeconds\"\xef\a\n" +
+	"&min_snapshot_history_window_in_seconds\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!minSnapshotHistoryWindowInSeconds\x12i\n" +
+	"\x1fflow_control_target_lag_seconds\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x1bflowControlTargetLagSeconds\x12r\n" +
+	"#flow_control_warn_threshold_seconds\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1fflowControlWarnThresholdSeconds\x12w\n" +
+	"&migrate_clone_insertion_batch_delay_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!migrateCloneInsertionBatchDelayMs\x12p\n" +
+	"\"migrate_clone_insertion_batch_size\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1emigrateCloneInsertionBatchSize\x12V\n" +
+	"\x19orphan_cleanup_delay_secs\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x16orphanCleanupDelaySecs\x12w\n" +
+	"+persisted_chunk_cache_update_max_batch_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR%persistedChunkCacheUpdateMaxBatchSize\x12d\n" +
+	"\x1crange_deleter_batch_delay_ms\x18\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x18rangeDeleterBatchDelayMs\x12]\n" +
+	"\x18range_deleter_batch_size\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15rangeDeleterBatchSize\x12l\n" +
+	"\fmirror_reads\x18\f \x01(\v2I.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.MirrorReadsR\vmirrorReads\x1a\x8d\x01\n" +
+	"\vMirrorReads\x12A\n" +
+	"\rsampling_rate\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\fsamplingRate\x12;\n" +
+	"\vmax_time_ms\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\tmaxTimeMs\x1a\x9c\x01\n" +
+	"\x05Oplog\x12E\n" +
+	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxSizePercent\x12L\n" +
+	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x11minRetentionHours\"\x86\x0e\n" +
 	"\x0eMongoCfgConfig\x12T\n" +
 	"\astorage\x18\x01 \x01(\v2:.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.StorageR\astorage\x12v\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2E.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfilingR\x12operationProfiling\x12L\n" +
-	"\x03net\x18\x03 \x01(\v2:.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.NetworkR\x03net\x1a\xcb\x02\n" +
+	"\x03net\x18\x03 \x01(\v2:.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.NetworkR\x03net\x12d\n" +
+	"\rset_parameter\x18\x04 \x01(\v2?.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.SetParameterR\fsetParameter\x12X\n" +
+	"\taudit_log\x18\x05 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.AuditLogR\bauditLog\x12N\n" +
+	"\x05oplog\x18\x06 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OplogR\x05oplog\x12E\n" +
+	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x1a\x89\x03\n" +
 	"\aStorage\x12f\n" +
 	"\vwired_tiger\x18\x01 \x01(\v2E.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTigerR\n" +
-	"wiredTiger\x1a\xd7\x01\n" +
+	"wiredTiger\x1a\x95\x02\n" +
 	"\n" +
 	"WiredTiger\x12w\n" +
-	"\rengine_config\x18\x01 \x01(\v2R.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfigR\fengineConfig\x1aP\n" +
+	"\rengine_config\x18\x01 \x01(\v2R.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfigR\fengineConfig\x1a\x8d\x01\n" +
 	"\fEngineConfig\x12@\n" +
-	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\vcacheSizeGb\x1a\x82\x02\n" +
+	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\vcacheSizeGb\x12;\n" +
+	"\n" +
+	"cache_size\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\tcacheSize\x1a\x82\x02\n" +
 	"\x12OperationProfiling\x12^\n" +
 	"\x04mode\x18\x01 \x01(\x0e2J.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.ModeR\x04mode\x12O\n" +
 	"\x11slow_op_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x0fslowOpThreshold\";\n" +
@@ -1861,9 +2535,21 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\x97\x04\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\x1a\xb6\x01\n" +
+	"\fSetParameter\x12J\n" +
+	"\x13enable_flow_control\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11enableFlowControl\x12Z\n" +
+	"\x1baudit_authorization_success\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x19auditAuthorizationSuccess\x1a\"\n" +
+	"\bAuditLog\x12\x16\n" +
+	"\x06filter\x18\x01 \x01(\tR\x06filter\x1a\x9c\x01\n" +
+	"\x05Oplog\x12E\n" +
+	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxSizePercent\x12L\n" +
+	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x11minRetentionHoursJ\x04\b\a\x10\b\"\xa6\x13\n" +
 	"\fMongosConfig\x12J\n" +
-	"\x03net\x18\x03 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.NetworkR\x03net\x1a\xba\x03\n" +
+	"\x03net\x18\x03 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.NetworkR\x03net\x12b\n" +
+	"\rset_parameter\x18\x04 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameterR\fsetParameter\x12V\n" +
+	"\taudit_log\x18\x05 \x01(\v29.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.AuditLogR\bauditLog\x12:\n" +
+	"\n" +
+	"chunk_size\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\tchunkSize\x1a\xba\x03\n" +
 	"\aNetwork\x12c\n" +
 	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\x12f\n" +
 	"\vcompression\x18\x02 \x01(\v2D.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.CompressionR\vcompression\x1a\xe1\x01\n" +
@@ -1876,7 +2562,24 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x06SNAPPY\x10\x01\x12\b\n" +
 	"\x04ZLIB\x10\x02\x12\b\n" +
 	"\x04ZSTD\x10\x03\x12\f\n" +
-	"\bDISABLED\x10\x04\"\x9a\x02\n" +
+	"\bDISABLED\x10\x04\x1a\xf0\f\n" +
+	"\fSetParameter\x12Z\n" +
+	"\x1baudit_authorization_success\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x19auditAuthorizationSuccess\x12H\n" +
+	"\x11read_hedging_mode\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x0freadHedgingMode\x12j\n" +
+	"$sharding_task_executor_pool_max_size\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fshardingTaskExecutorPoolMaxSize\x12v\n" +
+	"*sharding_task_executor_pool_max_connecting\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR%shardingTaskExecutorPoolMaxConnecting\x12j\n" +
+	"$sharding_task_executor_pool_min_size\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fshardingTaskExecutorPoolMinSize\x12\x82\x01\n" +
+	"0sharding_task_executor_pool_replica_set_matching\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR*shardingTaskExecutorPoolReplicaSetMatching\x12w\n" +
+	"+sharding_task_executor_pool_host_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR%shardingTaskExecutorPoolHostTimeoutMs\x12\x85\x01\n" +
+	"2sharding_task_executor_pool_refresh_requirement_ms\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR,shardingTaskExecutorPoolRefreshRequirementMs\x12}\n" +
+	".sharding_task_executor_pool_refresh_timeout_ms\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR(shardingTaskExecutorPoolRefreshTimeoutMs\x12\x99\x01\n" +
+	">warm_min_connections_in_sharding_task_executor_pool_on_startup\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueR5warmMinConnectionsInShardingTaskExecutorPoolOnStartup\x12\xa8\x01\n" +
+	"Fwarm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR;warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs\x12\x8d\x01\n" +
+	"7sharding_task_executor_pool_max_size_for_config_servers\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR/shardingTaskExecutorPoolMaxSizeForConfigServers\x12\x8d\x01\n" +
+	"7sharding_task_executor_pool_min_size_for_config_servers\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR/shardingTaskExecutorPoolMinSizeForConfigServers\x1a\"\n" +
+	"\bAuditLog\x12\x16\n" +
+	"\x06filter\x18\x01 \x01(\tR\x06filter\"\x9a\x02\n" +
 	"\x0fMongodConfigSet\x12[\n" +
 	"\x10effective_config\x18\x01 \x01(\v20.yandex.cloud.mdb.mongodb.v1.config.MongodConfigR\x0feffectiveConfig\x12Q\n" +
 	"\vuser_config\x18\x02 \x01(\v20.yandex.cloud.mdb.mongodb.v1.config.MongodConfigR\n" +
@@ -1907,7 +2610,7 @@ func file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDescGZIP() []byte 
 }
 
 var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_goTypes = []any{
 	(MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor)(0), // 0: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.Compressor
 	(MongodConfig_OperationProfiling_Mode)(0),                        // 1: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.Mode
@@ -1926,23 +2629,31 @@ var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_goTypes = []any{
 	(*MongodConfig_Security)(nil),                                    // 14: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security
 	(*MongodConfig_AuditLog)(nil),                                    // 15: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.AuditLog
 	(*MongodConfig_SetParameter)(nil),                                // 16: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter
-	(*MongodConfig_Storage_WiredTiger)(nil),                          // 17: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger
-	(*MongodConfig_Storage_Journal)(nil),                             // 18: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.Journal
-	(*MongodConfig_Storage_WiredTiger_EngineConfig)(nil),             // 19: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig
-	(*MongodConfig_Storage_WiredTiger_CollectionConfig)(nil),         // 20: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig
-	(*MongodConfig_Storage_WiredTiger_IndexConfig)(nil),              // 21: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfig
-	(*MongodConfig_Network_Compression)(nil),                         // 22: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression
-	(*MongodConfig_Security_KMIP)(nil),                               // 23: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.KMIP
-	(*MongoCfgConfig_Storage)(nil),                                   // 24: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage
-	(*MongoCfgConfig_OperationProfiling)(nil),                        // 25: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling
-	(*MongoCfgConfig_Network)(nil),                                   // 26: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Network
-	(*MongoCfgConfig_Storage_WiredTiger)(nil),                        // 27: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger
-	(*MongoCfgConfig_Storage_WiredTiger_EngineConfig)(nil),           // 28: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig
-	(*MongosConfig_Network)(nil),                                     // 29: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network
-	(*MongosConfig_Network_Compression)(nil),                         // 30: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression
-	(*wrapperspb.Int64Value)(nil),                                    // 31: google.protobuf.Int64Value
-	(*wrapperspb.DoubleValue)(nil),                                   // 32: google.protobuf.DoubleValue
-	(*wrapperspb.BoolValue)(nil),                                     // 33: google.protobuf.BoolValue
+	(*MongodConfig_Oplog)(nil),                                       // 17: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Oplog
+	(*MongodConfig_Storage_WiredTiger)(nil),                          // 18: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger
+	(*MongodConfig_Storage_Journal)(nil),                             // 19: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.Journal
+	(*MongodConfig_Storage_WiredTiger_EngineConfig)(nil),             // 20: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig
+	(*MongodConfig_Storage_WiredTiger_CollectionConfig)(nil),         // 21: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig
+	(*MongodConfig_Storage_WiredTiger_IndexConfig)(nil),              // 22: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfig
+	(*MongodConfig_Network_Compression)(nil),                         // 23: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression
+	(*MongodConfig_Security_KMIP)(nil),                               // 24: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.KMIP
+	(*MongodConfig_SetParameter_MirrorReads)(nil),                    // 25: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.MirrorReads
+	(*MongoCfgConfig_Storage)(nil),                                   // 26: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage
+	(*MongoCfgConfig_OperationProfiling)(nil),                        // 27: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling
+	(*MongoCfgConfig_Network)(nil),                                   // 28: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Network
+	(*MongoCfgConfig_SetParameter)(nil),                              // 29: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.SetParameter
+	(*MongoCfgConfig_AuditLog)(nil),                                  // 30: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.AuditLog
+	(*MongoCfgConfig_Oplog)(nil),                                     // 31: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Oplog
+	(*MongoCfgConfig_Storage_WiredTiger)(nil),                        // 32: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger
+	(*MongoCfgConfig_Storage_WiredTiger_EngineConfig)(nil),           // 33: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig
+	(*MongosConfig_Network)(nil),                                     // 34: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network
+	(*MongosConfig_SetParameter)(nil),                                // 35: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter
+	(*MongosConfig_AuditLog)(nil),                                    // 36: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.AuditLog
+	(*MongosConfig_Network_Compression)(nil),                         // 37: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression
+	(*wrapperspb.BoolValue)(nil),                                     // 38: google.protobuf.BoolValue
+	(*wrapperspb.Int64Value)(nil),                                    // 39: google.protobuf.Int64Value
+	(*wrapperspb.DoubleValue)(nil),                                   // 40: google.protobuf.DoubleValue
+	(*wrapperspb.StringValue)(nil),                                   // 41: google.protobuf.StringValue
 }
 var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_depIdxs = []int32{
 	11, // 0: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.storage:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage
@@ -1951,55 +2662,96 @@ var file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_depIdxs = []int32{
 	14, // 3: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.security:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security
 	15, // 4: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.audit_log:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.AuditLog
 	16, // 5: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.set_parameter:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter
-	24, // 6: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.storage:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage
-	25, // 7: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.operation_profiling:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling
-	26, // 8: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.net:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Network
-	29, // 9: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.net:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network
-	5,  // 10: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet.effective_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig
-	5,  // 11: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet.user_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig
-	5,  // 12: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet.default_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig
-	6,  // 13: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet.effective_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
-	6,  // 14: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet.user_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
-	6,  // 15: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet.default_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
-	7,  // 16: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet.effective_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig
-	7,  // 17: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet.user_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig
-	7,  // 18: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet.default_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig
-	17, // 19: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.wired_tiger:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger
-	18, // 20: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.journal:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.Journal
-	1,  // 21: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.mode:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.Mode
-	31, // 22: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.slow_op_threshold:type_name -> google.protobuf.Int64Value
-	32, // 23: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.slow_op_sample_rate:type_name -> google.protobuf.DoubleValue
-	31, // 24: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.max_incoming_connections:type_name -> google.protobuf.Int64Value
-	22, // 25: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.compression:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression
-	33, // 26: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.enable_encryption:type_name -> google.protobuf.BoolValue
-	23, // 27: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.kmip:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.KMIP
-	33, // 28: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.AuditLog.runtime_configuration:type_name -> google.protobuf.BoolValue
-	33, // 29: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.audit_authorization_success:type_name -> google.protobuf.BoolValue
-	33, // 30: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.enable_flow_control:type_name -> google.protobuf.BoolValue
-	31, // 31: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.min_snapshot_history_window_in_seconds:type_name -> google.protobuf.Int64Value
-	19, // 32: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.engine_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig
-	20, // 33: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.collection_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig
-	21, // 34: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.index_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfig
-	31, // 35: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.Journal.commit_interval:type_name -> google.protobuf.Int64Value
-	32, // 36: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig.cache_size_gb:type_name -> google.protobuf.DoubleValue
-	0,  // 37: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.block_compressor:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.Compressor
-	33, // 38: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfig.prefix_compression:type_name -> google.protobuf.BoolValue
-	2,  // 39: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression.compressors:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression.Compressor
-	31, // 40: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.KMIP.port:type_name -> google.protobuf.Int64Value
-	27, // 41: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.wired_tiger:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger
-	3,  // 42: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.mode:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.Mode
-	31, // 43: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.slow_op_threshold:type_name -> google.protobuf.Int64Value
-	31, // 44: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Network.max_incoming_connections:type_name -> google.protobuf.Int64Value
-	28, // 45: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.engine_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig
-	32, // 46: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig.cache_size_gb:type_name -> google.protobuf.DoubleValue
-	31, // 47: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.max_incoming_connections:type_name -> google.protobuf.Int64Value
-	30, // 48: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.compression:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression
-	4,  // 49: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression.compressors:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression.Compressor
-	50, // [50:50] is the sub-list for method output_type
-	50, // [50:50] is the sub-list for method input_type
-	50, // [50:50] is the sub-list for extension type_name
-	50, // [50:50] is the sub-list for extension extendee
-	0,  // [0:50] is the sub-list for field type_name
+	17, // 6: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.oplog:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Oplog
+	38, // 7: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.chaining_allowed:type_name -> google.protobuf.BoolValue
+	26, // 8: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.storage:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage
+	27, // 9: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.operation_profiling:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling
+	28, // 10: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.net:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Network
+	29, // 11: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.set_parameter:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.SetParameter
+	30, // 12: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.audit_log:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.AuditLog
+	31, // 13: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.oplog:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Oplog
+	38, // 14: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.chaining_allowed:type_name -> google.protobuf.BoolValue
+	34, // 15: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.net:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network
+	35, // 16: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.set_parameter:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter
+	36, // 17: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.audit_log:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.AuditLog
+	39, // 18: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.chunk_size:type_name -> google.protobuf.Int64Value
+	5,  // 19: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet.effective_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig
+	5,  // 20: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet.user_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig
+	5,  // 21: yandex.cloud.mdb.mongodb.v1.config.MongodConfigSet.default_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig
+	6,  // 22: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet.effective_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
+	6,  // 23: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet.user_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
+	6,  // 24: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet.default_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig
+	7,  // 25: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet.effective_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig
+	7,  // 26: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet.user_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig
+	7,  // 27: yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet.default_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig
+	18, // 28: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.wired_tiger:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger
+	19, // 29: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.journal:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.Journal
+	1,  // 30: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.mode:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.Mode
+	39, // 31: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.slow_op_threshold:type_name -> google.protobuf.Int64Value
+	40, // 32: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.slow_op_sample_rate:type_name -> google.protobuf.DoubleValue
+	39, // 33: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.max_incoming_connections:type_name -> google.protobuf.Int64Value
+	23, // 34: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.compression:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression
+	38, // 35: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.enable_encryption:type_name -> google.protobuf.BoolValue
+	24, // 36: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.kmip:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.KMIP
+	38, // 37: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.AuditLog.runtime_configuration:type_name -> google.protobuf.BoolValue
+	38, // 38: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.audit_authorization_success:type_name -> google.protobuf.BoolValue
+	38, // 39: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.enable_flow_control:type_name -> google.protobuf.BoolValue
+	39, // 40: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.min_snapshot_history_window_in_seconds:type_name -> google.protobuf.Int64Value
+	39, // 41: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.flow_control_target_lag_seconds:type_name -> google.protobuf.Int64Value
+	39, // 42: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.flow_control_warn_threshold_seconds:type_name -> google.protobuf.Int64Value
+	39, // 43: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.migrate_clone_insertion_batch_delay_ms:type_name -> google.protobuf.Int64Value
+	39, // 44: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.migrate_clone_insertion_batch_size:type_name -> google.protobuf.Int64Value
+	39, // 45: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.orphan_cleanup_delay_secs:type_name -> google.protobuf.Int64Value
+	39, // 46: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.persisted_chunk_cache_update_max_batch_size:type_name -> google.protobuf.Int64Value
+	39, // 47: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.range_deleter_batch_delay_ms:type_name -> google.protobuf.Int64Value
+	39, // 48: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.range_deleter_batch_size:type_name -> google.protobuf.Int64Value
+	25, // 49: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.mirror_reads:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.MirrorReads
+	39, // 50: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Oplog.max_size_percent:type_name -> google.protobuf.Int64Value
+	40, // 51: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Oplog.min_retention_hours:type_name -> google.protobuf.DoubleValue
+	20, // 52: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.engine_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig
+	21, // 53: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.collection_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig
+	22, // 54: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.index_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfig
+	39, // 55: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.Journal.commit_interval:type_name -> google.protobuf.Int64Value
+	40, // 56: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig.cache_size_gb:type_name -> google.protobuf.DoubleValue
+	40, // 57: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfig.cache_size:type_name -> google.protobuf.DoubleValue
+	0,  // 58: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.block_compressor:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.Compressor
+	38, // 59: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfig.prefix_compression:type_name -> google.protobuf.BoolValue
+	2,  // 60: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression.compressors:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Network.Compression.Compressor
+	39, // 61: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Security.KMIP.port:type_name -> google.protobuf.Int64Value
+	40, // 62: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.MirrorReads.sampling_rate:type_name -> google.protobuf.DoubleValue
+	39, // 63: yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.MirrorReads.max_time_ms:type_name -> google.protobuf.Int64Value
+	32, // 64: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.wired_tiger:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger
+	3,  // 65: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.mode:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.Mode
+	39, // 66: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.slow_op_threshold:type_name -> google.protobuf.Int64Value
+	39, // 67: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Network.max_incoming_connections:type_name -> google.protobuf.Int64Value
+	38, // 68: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.SetParameter.enable_flow_control:type_name -> google.protobuf.BoolValue
+	38, // 69: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.SetParameter.audit_authorization_success:type_name -> google.protobuf.BoolValue
+	39, // 70: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Oplog.max_size_percent:type_name -> google.protobuf.Int64Value
+	40, // 71: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Oplog.min_retention_hours:type_name -> google.protobuf.DoubleValue
+	33, // 72: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.engine_config:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig
+	40, // 73: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig.cache_size_gb:type_name -> google.protobuf.DoubleValue
+	40, // 74: yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfig.cache_size:type_name -> google.protobuf.DoubleValue
+	39, // 75: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.max_incoming_connections:type_name -> google.protobuf.Int64Value
+	37, // 76: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.compression:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression
+	38, // 77: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.audit_authorization_success:type_name -> google.protobuf.BoolValue
+	41, // 78: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.read_hedging_mode:type_name -> google.protobuf.StringValue
+	39, // 79: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_max_size:type_name -> google.protobuf.Int64Value
+	39, // 80: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_max_connecting:type_name -> google.protobuf.Int64Value
+	39, // 81: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_min_size:type_name -> google.protobuf.Int64Value
+	41, // 82: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_replica_set_matching:type_name -> google.protobuf.StringValue
+	39, // 83: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_host_timeout_ms:type_name -> google.protobuf.Int64Value
+	39, // 84: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_refresh_requirement_ms:type_name -> google.protobuf.Int64Value
+	39, // 85: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_refresh_timeout_ms:type_name -> google.protobuf.Int64Value
+	38, // 86: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.warm_min_connections_in_sharding_task_executor_pool_on_startup:type_name -> google.protobuf.BoolValue
+	39, // 87: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.warm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms:type_name -> google.protobuf.Int64Value
+	39, // 88: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_max_size_for_config_servers:type_name -> google.protobuf.Int64Value
+	39, // 89: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameter.sharding_task_executor_pool_min_size_for_config_servers:type_name -> google.protobuf.Int64Value
+	4,  // 90: yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression.compressors:type_name -> yandex.cloud.mdb.mongodb.v1.config.MongosConfig.Network.Compression.Compressor
+	91, // [91:91] is the sub-list for method output_type
+	91, // [91:91] is the sub-list for method input_type
+	91, // [91:91] is the sub-list for extension type_name
+	91, // [91:91] is the sub-list for extension extendee
+	0,  // [0:91] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_init() }
@@ -2013,7 +2765,7 @@ func file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc), len(file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   26,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

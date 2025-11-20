@@ -124,6 +124,10 @@ func (m *Parameter) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *Parameter) SetGroupName(v string) {
+	m.GroupName = v
+}
+
 func (m *Parametrization) SetParameters(v []*Parameter) {
 	m.Parameters = v
 }

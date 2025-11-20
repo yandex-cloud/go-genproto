@@ -120,6 +120,10 @@ func (m *Trail_DataStream) SetStreamName(v string) {
 	m.StreamName = v
 }
 
+func (m *Trail_DataStream) SetCodec(v Trail_Codec) {
+	m.Codec = v
+}
+
 func (m *Trail_EventRouter) SetEventrouterConnectorId(v string) {
 	m.EventrouterConnectorId = v
 }

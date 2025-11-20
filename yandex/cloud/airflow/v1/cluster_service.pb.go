@@ -8,6 +8,7 @@ package airflow
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -1158,7 +1159,7 @@ var File_yandex_cloud_airflow_v1_cluster_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/airflow/v1/cluster_service.proto\x12\x17yandex.cloud.airflow.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a%yandex/cloud/airflow/v1/cluster.proto\x1a)yandex/cloud/airflow/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
+	"-yandex/cloud/airflow/v1/cluster_service.proto\x12\x17yandex.cloud.airflow.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a%yandex/cloud/airflow/v1/cluster.proto\x1a)yandex/cloud/airflow/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -1259,8 +1260,7 @@ const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xf2\n" +
-	"\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xb9\x10\n" +
 	"\x0eClusterService\x12\x86\x01\n" +
 	"\x03Get\x12*.yandex.cloud.airflow.v1.GetClusterRequest\x1a .yandex.cloud.airflow.v1.Cluster\"1\x82\xd3\xe4\x93\x02+\x12)/managed-airflow/v1/clusters/{cluster_id}\x12\x89\x01\n" +
 	"\x04List\x12,.yandex.cloud.airflow.v1.ListClustersRequest\x1a-.yandex.cloud.airflow.v1.ListClustersResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/managed-airflow/v1/clusters\x12\xa7\x01\n" +
@@ -1274,7 +1274,12 @@ const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x021\"//managed-airflow/v1/clusters/{cluster_id}:start\x12\xb0\x01\n" +
 	"\x04Stop\x12+.yandex.cloud.airflow.v1.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2*\x1e\n" +
 	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x020\"./managed-airflow/v1/clusters/{cluster_id}:stop\x12\xbd\x01\n" +
-	"\x0eListOperations\x125.yandex.cloud.airflow.v1.ListClusterOperationsRequest\x1a6.yandex.cloud.airflow.v1.ListClusterOperationsResponse\"<\x82\xd3\xe4\x93\x026\x124/managed-airflow/v1/clusters/{cluster_id}/operationsBb\n" +
+	"\x0eListOperations\x125.yandex.cloud.airflow.v1.ListClusterOperationsRequest\x1a6.yandex.cloud.airflow.v1.ListClusterOperationsResponse\"<\x82\xd3\xe4\x93\x026\x124/managed-airflow/v1/clusters/{cluster_id}/operations\x12\xbc\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/managed-airflow/v1/clusters/{resource_id}:listAccessBindings\x12\xfb\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x93\x01\xb2\xd2*H\n" +
+	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02A:\x01*\"</managed-airflow/v1/clusters/{resource_id}:setAccessBindings\x12\x87\x02\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x99\x01\xb2\xd2*K\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02D:\x01*2?/managed-airflow/v1/clusters/{resource_id}:updateAccessBindingsBb\n" +
 	"\x1byandex.cloud.api.airflow.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/airflow/v1;airflowb\x06proto3"
 
 var (
@@ -1291,41 +1296,45 @@ func file_yandex_cloud_airflow_v1_cluster_service_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_airflow_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_yandex_cloud_airflow_v1_cluster_service_proto_goTypes = []any{
-	(*GetClusterRequest)(nil),             // 0: yandex.cloud.airflow.v1.GetClusterRequest
-	(*ListClustersRequest)(nil),           // 1: yandex.cloud.airflow.v1.ListClustersRequest
-	(*ListClustersResponse)(nil),          // 2: yandex.cloud.airflow.v1.ListClustersResponse
-	(*CreateClusterRequest)(nil),          // 3: yandex.cloud.airflow.v1.CreateClusterRequest
-	(*CreateClusterMetadata)(nil),         // 4: yandex.cloud.airflow.v1.CreateClusterMetadata
-	(*UpdateClusterConfigSpec)(nil),       // 5: yandex.cloud.airflow.v1.UpdateClusterConfigSpec
-	(*UpdateNetworkConfigSpec)(nil),       // 6: yandex.cloud.airflow.v1.UpdateNetworkConfigSpec
-	(*UpdateClusterRequest)(nil),          // 7: yandex.cloud.airflow.v1.UpdateClusterRequest
-	(*UpdateClusterMetadata)(nil),         // 8: yandex.cloud.airflow.v1.UpdateClusterMetadata
-	(*DeleteClusterRequest)(nil),          // 9: yandex.cloud.airflow.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),         // 10: yandex.cloud.airflow.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),           // 11: yandex.cloud.airflow.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),          // 12: yandex.cloud.airflow.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),            // 13: yandex.cloud.airflow.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),           // 14: yandex.cloud.airflow.v1.StopClusterMetadata
-	(*ListClusterOperationsRequest)(nil),  // 15: yandex.cloud.airflow.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil), // 16: yandex.cloud.airflow.v1.ListClusterOperationsResponse
-	nil,                                   // 17: yandex.cloud.airflow.v1.CreateClusterRequest.LabelsEntry
-	nil,                                   // 18: yandex.cloud.airflow.v1.UpdateClusterRequest.LabelsEntry
-	(*Cluster)(nil),                       // 19: yandex.cloud.airflow.v1.Cluster
-	(*ClusterConfig)(nil),                 // 20: yandex.cloud.airflow.v1.ClusterConfig
-	(*NetworkConfig)(nil),                 // 21: yandex.cloud.airflow.v1.NetworkConfig
-	(*CodeSyncConfig)(nil),                // 22: yandex.cloud.airflow.v1.CodeSyncConfig
-	(*LoggingConfig)(nil),                 // 23: yandex.cloud.airflow.v1.LoggingConfig
-	(*MaintenanceWindow)(nil),             // 24: yandex.cloud.airflow.v1.MaintenanceWindow
-	(*AirflowConfig)(nil),                 // 25: yandex.cloud.airflow.v1.AirflowConfig
-	(*WebserverConfig)(nil),               // 26: yandex.cloud.airflow.v1.WebserverConfig
-	(*SchedulerConfig)(nil),               // 27: yandex.cloud.airflow.v1.SchedulerConfig
-	(*TriggererConfig)(nil),               // 28: yandex.cloud.airflow.v1.TriggererConfig
-	(*WorkerConfig)(nil),                  // 29: yandex.cloud.airflow.v1.WorkerConfig
-	(*Dependencies)(nil),                  // 30: yandex.cloud.airflow.v1.Dependencies
-	(*LockboxConfig)(nil),                 // 31: yandex.cloud.airflow.v1.LockboxConfig
-	(*DagProcessorConfig)(nil),            // 32: yandex.cloud.airflow.v1.DagProcessorConfig
-	(*fieldmaskpb.FieldMask)(nil),         // 33: google.protobuf.FieldMask
-	(*operation.Operation)(nil),           // 34: yandex.cloud.operation.Operation
+	(*GetClusterRequest)(nil),                  // 0: yandex.cloud.airflow.v1.GetClusterRequest
+	(*ListClustersRequest)(nil),                // 1: yandex.cloud.airflow.v1.ListClustersRequest
+	(*ListClustersResponse)(nil),               // 2: yandex.cloud.airflow.v1.ListClustersResponse
+	(*CreateClusterRequest)(nil),               // 3: yandex.cloud.airflow.v1.CreateClusterRequest
+	(*CreateClusterMetadata)(nil),              // 4: yandex.cloud.airflow.v1.CreateClusterMetadata
+	(*UpdateClusterConfigSpec)(nil),            // 5: yandex.cloud.airflow.v1.UpdateClusterConfigSpec
+	(*UpdateNetworkConfigSpec)(nil),            // 6: yandex.cloud.airflow.v1.UpdateNetworkConfigSpec
+	(*UpdateClusterRequest)(nil),               // 7: yandex.cloud.airflow.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),              // 8: yandex.cloud.airflow.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),               // 9: yandex.cloud.airflow.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),              // 10: yandex.cloud.airflow.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),                // 11: yandex.cloud.airflow.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),               // 12: yandex.cloud.airflow.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),                 // 13: yandex.cloud.airflow.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),                // 14: yandex.cloud.airflow.v1.StopClusterMetadata
+	(*ListClusterOperationsRequest)(nil),       // 15: yandex.cloud.airflow.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),      // 16: yandex.cloud.airflow.v1.ListClusterOperationsResponse
+	nil,                                        // 17: yandex.cloud.airflow.v1.CreateClusterRequest.LabelsEntry
+	nil,                                        // 18: yandex.cloud.airflow.v1.UpdateClusterRequest.LabelsEntry
+	(*Cluster)(nil),                            // 19: yandex.cloud.airflow.v1.Cluster
+	(*ClusterConfig)(nil),                      // 20: yandex.cloud.airflow.v1.ClusterConfig
+	(*NetworkConfig)(nil),                      // 21: yandex.cloud.airflow.v1.NetworkConfig
+	(*CodeSyncConfig)(nil),                     // 22: yandex.cloud.airflow.v1.CodeSyncConfig
+	(*LoggingConfig)(nil),                      // 23: yandex.cloud.airflow.v1.LoggingConfig
+	(*MaintenanceWindow)(nil),                  // 24: yandex.cloud.airflow.v1.MaintenanceWindow
+	(*AirflowConfig)(nil),                      // 25: yandex.cloud.airflow.v1.AirflowConfig
+	(*WebserverConfig)(nil),                    // 26: yandex.cloud.airflow.v1.WebserverConfig
+	(*SchedulerConfig)(nil),                    // 27: yandex.cloud.airflow.v1.SchedulerConfig
+	(*TriggererConfig)(nil),                    // 28: yandex.cloud.airflow.v1.TriggererConfig
+	(*WorkerConfig)(nil),                       // 29: yandex.cloud.airflow.v1.WorkerConfig
+	(*Dependencies)(nil),                       // 30: yandex.cloud.airflow.v1.Dependencies
+	(*LockboxConfig)(nil),                      // 31: yandex.cloud.airflow.v1.LockboxConfig
+	(*DagProcessorConfig)(nil),                 // 32: yandex.cloud.airflow.v1.DagProcessorConfig
+	(*fieldmaskpb.FieldMask)(nil),              // 33: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 34: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 35: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 36: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 37: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 38: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_airflow_v1_cluster_service_proto_depIdxs = []int32{
 	19, // 0: yandex.cloud.airflow.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.airflow.v1.Cluster
@@ -1359,16 +1368,22 @@ var file_yandex_cloud_airflow_v1_cluster_service_proto_depIdxs = []int32{
 	11, // 28: yandex.cloud.airflow.v1.ClusterService.Start:input_type -> yandex.cloud.airflow.v1.StartClusterRequest
 	13, // 29: yandex.cloud.airflow.v1.ClusterService.Stop:input_type -> yandex.cloud.airflow.v1.StopClusterRequest
 	15, // 30: yandex.cloud.airflow.v1.ClusterService.ListOperations:input_type -> yandex.cloud.airflow.v1.ListClusterOperationsRequest
-	19, // 31: yandex.cloud.airflow.v1.ClusterService.Get:output_type -> yandex.cloud.airflow.v1.Cluster
-	2,  // 32: yandex.cloud.airflow.v1.ClusterService.List:output_type -> yandex.cloud.airflow.v1.ListClustersResponse
-	34, // 33: yandex.cloud.airflow.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	34, // 34: yandex.cloud.airflow.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	34, // 35: yandex.cloud.airflow.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	34, // 36: yandex.cloud.airflow.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	34, // 37: yandex.cloud.airflow.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	16, // 38: yandex.cloud.airflow.v1.ClusterService.ListOperations:output_type -> yandex.cloud.airflow.v1.ListClusterOperationsResponse
-	31, // [31:39] is the sub-list for method output_type
-	23, // [23:31] is the sub-list for method input_type
+	35, // 31: yandex.cloud.airflow.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	36, // 32: yandex.cloud.airflow.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	37, // 33: yandex.cloud.airflow.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	19, // 34: yandex.cloud.airflow.v1.ClusterService.Get:output_type -> yandex.cloud.airflow.v1.Cluster
+	2,  // 35: yandex.cloud.airflow.v1.ClusterService.List:output_type -> yandex.cloud.airflow.v1.ListClustersResponse
+	34, // 36: yandex.cloud.airflow.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	34, // 37: yandex.cloud.airflow.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	34, // 38: yandex.cloud.airflow.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	34, // 39: yandex.cloud.airflow.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	34, // 40: yandex.cloud.airflow.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	16, // 41: yandex.cloud.airflow.v1.ClusterService.ListOperations:output_type -> yandex.cloud.airflow.v1.ListClusterOperationsResponse
+	38, // 42: yandex.cloud.airflow.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	34, // 43: yandex.cloud.airflow.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	34, // 44: yandex.cloud.airflow.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	34, // [34:45] is the sub-list for method output_type
+	23, // [23:34] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
 	23, // [23:23] is the sub-list for extension extendee
 	0,  // [0:23] is the sub-list for field type_name
