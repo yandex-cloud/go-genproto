@@ -25,6 +25,7 @@ const (
 	TrunkConnectionService_Create_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/Create"
 	TrunkConnectionService_Update_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/Update"
 	TrunkConnectionService_Delete_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/Delete"
+	TrunkConnectionService_Move_FullMethodName           = "/yandex.cloud.cic.v1.TrunkConnectionService/Move"
 	TrunkConnectionService_ListOperations_FullMethodName = "/yandex.cloud.cic.v1.TrunkConnectionService/ListOperations"
 )
 
@@ -49,6 +50,8 @@ type TrunkConnectionServiceClient interface {
 	// Deletes a TrunkConnection resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Delete(ctx context.Context, in *DeleteTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves the specified TrunkConnection to another folder.
+	Move(ctx context.Context, in *MoveTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified TrunkConnection.
 	ListOperations(ctx context.Context, in *ListTrunkConnectionOperationsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionOperationsResponse, error)
 }
@@ -111,6 +114,16 @@ func (c *trunkConnectionServiceClient) Delete(ctx context.Context, in *DeleteTru
 	return out, nil
 }
 
+func (c *trunkConnectionServiceClient) Move(ctx context.Context, in *MoveTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, TrunkConnectionService_Move_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *trunkConnectionServiceClient) ListOperations(ctx context.Context, in *ListTrunkConnectionOperationsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTrunkConnectionOperationsResponse)
@@ -142,6 +155,8 @@ type TrunkConnectionServiceServer interface {
 	// Deletes a TrunkConnection resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Delete(context.Context, *DeleteTrunkConnectionRequest) (*operation.Operation, error)
+	// Moves the specified TrunkConnection to another folder.
+	Move(context.Context, *MoveTrunkConnectionRequest) (*operation.Operation, error)
 	// Lists operations for the specified TrunkConnection.
 	ListOperations(context.Context, *ListTrunkConnectionOperationsRequest) (*ListTrunkConnectionOperationsResponse, error)
 }
@@ -167,6 +182,9 @@ func (UnimplementedTrunkConnectionServiceServer) Update(context.Context, *Update
 }
 func (UnimplementedTrunkConnectionServiceServer) Delete(context.Context, *DeleteTrunkConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedTrunkConnectionServiceServer) Move(context.Context, *MoveTrunkConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedTrunkConnectionServiceServer) ListOperations(context.Context, *ListTrunkConnectionOperationsRequest) (*ListTrunkConnectionOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
@@ -281,6 +299,24 @@ func _TrunkConnectionService_Delete_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TrunkConnectionService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveTrunkConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TrunkConnectionServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TrunkConnectionService_Move_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TrunkConnectionServiceServer).Move(ctx, req.(*MoveTrunkConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TrunkConnectionService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTrunkConnectionOperationsRequest)
 	if err := dec(in); err != nil {
@@ -325,6 +361,10 @@ var TrunkConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _TrunkConnectionService_Delete_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _TrunkConnectionService_Move_Handler,
 		},
 		{
 			MethodName: "ListOperations",

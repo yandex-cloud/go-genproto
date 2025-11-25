@@ -1646,8 +1646,13 @@ type InstanceTemplate struct {
 	FilesystemSpecs []*AttachedFilesystemSpec `protobuf:"bytes,15,rep,name=filesystem_specs,json=filesystemSpecs,proto3" json:"filesystem_specs,omitempty"`
 	// Metadata options for the instance
 	MetadataOptions *MetadataOptions `protobuf:"bytes,16,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// ID of the reserved instance pool that the instance should belong to.
+	// Attaching/detaching running instance will increase/decrease the size of the reserved instance pool.
+	// Attaching/detaching stopped instance will leave the size of the reserved instance pool unchanged. Starting such attached instance will use resources from the reserved instance pool.
+	// Reserved instance pool resource configuration must match the resource configuration of the instance.
+	ReservedInstancePoolId string `protobuf:"bytes,17,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *InstanceTemplate) Reset() {
@@ -1790,6 +1795,13 @@ func (x *InstanceTemplate) GetMetadataOptions() *MetadataOptions {
 		return x.MetadataOptions
 	}
 	return nil
+}
+
+func (x *InstanceTemplate) GetReservedInstancePoolId() string {
+	if x != nil {
+		return x.ReservedInstancePoolId
+	}
+	return ""
 }
 
 type AttachedFilesystemSpec struct {
@@ -4381,7 +4393,7 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = 
 	"\x05zones\x18\x01 \x03(\v2<.yandex.cloud.compute.v1.instancegroup.AllocationPolicy.ZoneB\a\x82\xc81\x03>=1R\x05zones\x1aa\n" +
 	"\x04Zone\x12\x1d\n" +
 	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12:\n" +
-	"\x12instance_tags_pool\x18\x02 \x03(\tB\f\x8a\xc81\x043-50\x90\xc81\x01R\x10instanceTagsPool\"\xaa\f\n" +
+	"\x12instance_tags_pool\x18\x02 \x03(\tB\f\x8a\xc81\x043-50\x90\xc81\x01R\x10instanceTagsPool\"\xe5\f\n" +
 	"\x10InstanceTemplate\x12+\n" +
 	"\vdescription\x18\x01 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8e\x01\n" +
 	"\x06labels\x18\x02 \x03(\v2C.yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntryB1\x82\xc81\x04<=64\x8a\xc81\x05<=128\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
@@ -4400,7 +4412,8 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = 
 	"\bhostname\x18\r \x01(\tB\t\x8a\xc81\x05<=128R\bhostname\x12a\n" +
 	"\x10placement_policy\x18\x0e \x01(\v26.yandex.cloud.compute.v1.instancegroup.PlacementPolicyR\x0fplacementPolicy\x12h\n" +
 	"\x10filesystem_specs\x18\x0f \x03(\v2=.yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpecR\x0ffilesystemSpecs\x12a\n" +
-	"\x10metadata_options\x18\x10 \x01(\v26.yandex.cloud.compute.v1.instancegroup.MetadataOptionsR\x0fmetadataOptions\x1a9\n" +
+	"\x10metadata_options\x18\x10 \x01(\v26.yandex.cloud.compute.v1.instancegroup.MetadataOptionsR\x0fmetadataOptions\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x11 \x01(\tR\x16reservedInstancePoolId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +

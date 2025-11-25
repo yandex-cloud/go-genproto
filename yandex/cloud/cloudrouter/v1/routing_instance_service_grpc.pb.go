@@ -34,6 +34,7 @@ const (
 	RoutingInstanceService_AddPrivateConnection_FullMethodName        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/AddPrivateConnection"
 	RoutingInstanceService_RemovePrivateConnection_FullMethodName     = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/RemovePrivateConnection"
 	RoutingInstanceService_Delete_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Delete"
+	RoutingInstanceService_Move_FullMethodName                        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Move"
 	RoutingInstanceService_ListOperations_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/ListOperations"
 )
 
@@ -87,6 +88,8 @@ type RoutingInstanceServiceClient interface {
 	// Deletes a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Delete(ctx context.Context, in *DeleteRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Moves the specified RoutingInstance to another folder.
+	Move(ctx context.Context, in *MoveRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified RoutingInstance.
 	ListOperations(ctx context.Context, in *ListRoutingInstanceOperationsRequest, opts ...grpc.CallOption) (*ListRoutingInstanceOperationsResponse, error)
 }
@@ -239,6 +242,16 @@ func (c *routingInstanceServiceClient) Delete(ctx context.Context, in *DeleteRou
 	return out, nil
 }
 
+func (c *routingInstanceServiceClient) Move(ctx context.Context, in *MoveRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_Move_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *routingInstanceServiceClient) ListOperations(ctx context.Context, in *ListRoutingInstanceOperationsRequest, opts ...grpc.CallOption) (*ListRoutingInstanceOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListRoutingInstanceOperationsResponse)
@@ -299,6 +312,8 @@ type RoutingInstanceServiceServer interface {
 	// Deletes a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Delete(context.Context, *DeleteRoutingInstanceRequest) (*operation.Operation, error)
+	// Moves the specified RoutingInstance to another folder.
+	Move(context.Context, *MoveRoutingInstanceRequest) (*operation.Operation, error)
 	// Lists operations for the specified RoutingInstance.
 	ListOperations(context.Context, *ListRoutingInstanceOperationsRequest) (*ListRoutingInstanceOperationsResponse, error)
 }
@@ -351,6 +366,9 @@ func (UnimplementedRoutingInstanceServiceServer) RemovePrivateConnection(context
 }
 func (UnimplementedRoutingInstanceServiceServer) Delete(context.Context, *DeleteRoutingInstanceRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) Move(context.Context, *MoveRoutingInstanceRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedRoutingInstanceServiceServer) ListOperations(context.Context, *ListRoutingInstanceOperationsRequest) (*ListRoutingInstanceOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
@@ -627,6 +645,24 @@ func _RoutingInstanceService_Delete_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RoutingInstanceService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveRoutingInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).Move(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_Move_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).Move(ctx, req.(*MoveRoutingInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RoutingInstanceService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListRoutingInstanceOperationsRequest)
 	if err := dec(in); err != nil {
@@ -707,6 +743,10 @@ var RoutingInstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _RoutingInstanceService_Delete_Handler,
+		},
+		{
+			MethodName: "Move",
+			Handler:    _RoutingInstanceService_Move_Handler,
 		},
 		{
 			MethodName: "ListOperations",

@@ -4,6 +4,7 @@ package monitoring
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 func (m *GetDashboardRequest) SetDashboardId(v string) {
@@ -36,6 +37,10 @@ func (m *ListDashboardsRequest) SetFilter(v string) {
 
 func (m *ListDashboardsRequest) SetSelectors(v string) {
 	m.Selectors = v
+}
+
+func (m *ListDashboardsRequest) SetReadMask(v *fieldmaskpb.FieldMask) {
+	m.ReadMask = v
 }
 
 func (m *ListDashboardsResponse) SetDashboards(v []*Dashboard) {

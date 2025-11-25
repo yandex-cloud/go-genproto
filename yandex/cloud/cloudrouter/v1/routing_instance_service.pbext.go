@@ -243,6 +243,18 @@ func (m *DeleteRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
 	m.RoutingInstanceId = v
 }
 
+func (m *MoveRoutingInstanceRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *MoveRoutingInstanceRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
 func (m *ListRoutingInstanceOperationsRequest) SetRoutingInstanceId(v string) {
 	m.RoutingInstanceId = v
 }

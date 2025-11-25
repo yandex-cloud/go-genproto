@@ -161,6 +161,18 @@ func (m *DeleteTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
 
+func (m *MoveTrunkConnectionRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *MoveTrunkConnectionRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
 func (m *ListTrunkConnectionOperationsRequest) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }

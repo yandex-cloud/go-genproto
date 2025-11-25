@@ -152,6 +152,18 @@ func (m *RemoveStaticRouteMetadata) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }
 
+func (m *MovePrivateConnectionRequest) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
+func (m *MovePrivateConnectionRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MovePrivateConnectionMetadata) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
 func (m *ListPrivateConnectionOperationsRequest) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }

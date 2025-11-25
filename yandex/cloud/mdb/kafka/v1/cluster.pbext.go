@@ -177,6 +177,12 @@ func (m *ConfigSpec_Kafka) SetKafkaConfig_3(v *KafkaConfig3) {
 	}
 }
 
+func (m *ConfigSpec_Kafka) SetKafkaConfig_4(v *KafkaConfig4) {
+	m.KafkaConfig = &ConfigSpec_Kafka_KafkaConfig_4{
+		KafkaConfig_4: v,
+	}
+}
+
 func (m *ConfigSpec_Zookeeper) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -362,6 +368,82 @@ func (m *KafkaConfig3) SetOffsetsRetentionMinutes(v *wrapperspb.Int64Value) {
 }
 
 func (m *KafkaConfig3) SetSaslEnabledMechanisms(v []SaslMechanism) {
+	m.SaslEnabledMechanisms = v
+}
+
+func (m *KafkaConfig4) SetCompressionType(v CompressionType) {
+	m.CompressionType = v
+}
+
+func (m *KafkaConfig4) SetLogFlushIntervalMessages(v *wrapperspb.Int64Value) {
+	m.LogFlushIntervalMessages = v
+}
+
+func (m *KafkaConfig4) SetLogFlushIntervalMs(v *wrapperspb.Int64Value) {
+	m.LogFlushIntervalMs = v
+}
+
+func (m *KafkaConfig4) SetLogFlushSchedulerIntervalMs(v *wrapperspb.Int64Value) {
+	m.LogFlushSchedulerIntervalMs = v
+}
+
+func (m *KafkaConfig4) SetLogRetentionBytes(v *wrapperspb.Int64Value) {
+	m.LogRetentionBytes = v
+}
+
+func (m *KafkaConfig4) SetLogRetentionHours(v *wrapperspb.Int64Value) {
+	m.LogRetentionHours = v
+}
+
+func (m *KafkaConfig4) SetLogRetentionMinutes(v *wrapperspb.Int64Value) {
+	m.LogRetentionMinutes = v
+}
+
+func (m *KafkaConfig4) SetLogRetentionMs(v *wrapperspb.Int64Value) {
+	m.LogRetentionMs = v
+}
+
+func (m *KafkaConfig4) SetLogSegmentBytes(v *wrapperspb.Int64Value) {
+	m.LogSegmentBytes = v
+}
+
+func (m *KafkaConfig4) SetSocketSendBufferBytes(v *wrapperspb.Int64Value) {
+	m.SocketSendBufferBytes = v
+}
+
+func (m *KafkaConfig4) SetSocketReceiveBufferBytes(v *wrapperspb.Int64Value) {
+	m.SocketReceiveBufferBytes = v
+}
+
+func (m *KafkaConfig4) SetAutoCreateTopicsEnable(v *wrapperspb.BoolValue) {
+	m.AutoCreateTopicsEnable = v
+}
+
+func (m *KafkaConfig4) SetNumPartitions(v *wrapperspb.Int64Value) {
+	m.NumPartitions = v
+}
+
+func (m *KafkaConfig4) SetDefaultReplicationFactor(v *wrapperspb.Int64Value) {
+	m.DefaultReplicationFactor = v
+}
+
+func (m *KafkaConfig4) SetMessageMaxBytes(v *wrapperspb.Int64Value) {
+	m.MessageMaxBytes = v
+}
+
+func (m *KafkaConfig4) SetReplicaFetchMaxBytes(v *wrapperspb.Int64Value) {
+	m.ReplicaFetchMaxBytes = v
+}
+
+func (m *KafkaConfig4) SetSslCipherSuites(v []string) {
+	m.SslCipherSuites = v
+}
+
+func (m *KafkaConfig4) SetOffsetsRetentionMinutes(v *wrapperspb.Int64Value) {
+	m.OffsetsRetentionMinutes = v
+}
+
+func (m *KafkaConfig4) SetSaslEnabledMechanisms(v []SaslMechanism) {
 	m.SaslEnabledMechanisms = v
 }
 

@@ -29,3 +29,15 @@ func (m *ListPublicConnectionsResponse) SetPublicConnections(v []*PublicConnecti
 func (m *ListPublicConnectionsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *MovePublicConnectionRequest) SetPublicConnectionId(v string) {
+	m.PublicConnectionId = v
+}
+
+func (m *MovePublicConnectionRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MovePublicConnectionMetadata) SetPublicConnectionId(v string) {
+	m.PublicConnectionId = v
+}

@@ -1103,7 +1103,7 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x86\x01\n" +
 	"\x15ListArtifactsResponse\x12E\n" +
 	"\tartifacts\x18\x01 \x03(\v2'.yandex.cloud.cloudregistry.v1.ArtifactR\tartifacts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xae\x13\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x8b\x15\n" +
 	"\x0fRegistryService\x12\x96\x01\n" +
 	"\x03Get\x121.yandex.cloud.cloudregistry.v1.GetRegistryRequest\x1a'.yandex.cloud.cloudregistry.v1.Registry\"3\x82\xd3\xe4\x93\x02-\x12+/cloud-registry/v1/registries/{registry_id}\x12\x9a\x01\n" +
 	"\x04List\x124.yandex.cloud.cloudregistry.v1.ListRegistriesRequest\x1a5.yandex.cloud.cloudregistry.v1.ListRegistriesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/cloud-registry/v1/registries\x12\xb1\x01\n" +
@@ -1112,7 +1112,9 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\x06Update\x124.yandex.cloud.cloudregistry.v1.UpdateRegistryRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2*\"\n" +
 	"\x16UpdateRegistryMetadata\x12\bRegistry\x82\xd3\xe4\x93\x020:\x01*2+/cloud-registry/v1/registries/{registry_id}\x12\xc9\x01\n" +
 	"\x06Delete\x124.yandex.cloud.cloudregistry.v1.DeleteRegistryRequest\x1a!.yandex.cloud.operation.Operation\"f\xb2\xd2*/\n" +
-	"\x16DeleteRegistryMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02-*+/cloud-registry/v1/registries/{registry_id}\x12\xbd\x01\n" +
+	"\x16DeleteRegistryMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02-*+/cloud-registry/v1/registries/{registry_id}\x12\xda\x01\n" +
+	"\vForceDelete\x124.yandex.cloud.cloudregistry.v1.DeleteRegistryRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*/\n" +
+	"\x16DeleteRegistryMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x029\"7/cloud-registry/v1/registries/{registry_id}:forceDelete\x12\xbd\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"F\x82\xd3\xe4\x93\x02@\x12>/cloud-registry/v1/registries/{resource_id}:listAccessBindings\x12\xed\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x85\x01\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02B:\x01*\"=/cloud-registry/v1/registries/{resource_id}:setAccessBindings\x12\xf9\x01\n" +
@@ -1192,27 +1194,29 @@ var file_yandex_cloud_cloudregistry_v1_registry_service_proto_depIdxs = []int32{
 	3,  // 14: yandex.cloud.cloudregistry.v1.RegistryService.Create:input_type -> yandex.cloud.cloudregistry.v1.CreateRegistryRequest
 	5,  // 15: yandex.cloud.cloudregistry.v1.RegistryService.Update:input_type -> yandex.cloud.cloudregistry.v1.UpdateRegistryRequest
 	7,  // 16: yandex.cloud.cloudregistry.v1.RegistryService.Delete:input_type -> yandex.cloud.cloudregistry.v1.DeleteRegistryRequest
-	28, // 17: yandex.cloud.cloudregistry.v1.RegistryService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	29, // 18: yandex.cloud.cloudregistry.v1.RegistryService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	30, // 19: yandex.cloud.cloudregistry.v1.RegistryService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	11, // 20: yandex.cloud.cloudregistry.v1.RegistryService.ListIpPermissions:input_type -> yandex.cloud.cloudregistry.v1.ListIpPermissionsRequest
-	9,  // 21: yandex.cloud.cloudregistry.v1.RegistryService.SetIpPermissions:input_type -> yandex.cloud.cloudregistry.v1.SetIpPermissionsRequest
-	10, // 22: yandex.cloud.cloudregistry.v1.RegistryService.UpdateIpPermissions:input_type -> yandex.cloud.cloudregistry.v1.UpdateIpPermissionsRequest
-	15, // 23: yandex.cloud.cloudregistry.v1.RegistryService.ListArtifacts:input_type -> yandex.cloud.cloudregistry.v1.ListArtifactsRequest
-	21, // 24: yandex.cloud.cloudregistry.v1.RegistryService.Get:output_type -> yandex.cloud.cloudregistry.v1.Registry
-	2,  // 25: yandex.cloud.cloudregistry.v1.RegistryService.List:output_type -> yandex.cloud.cloudregistry.v1.ListRegistriesResponse
-	31, // 26: yandex.cloud.cloudregistry.v1.RegistryService.Create:output_type -> yandex.cloud.operation.Operation
-	31, // 27: yandex.cloud.cloudregistry.v1.RegistryService.Update:output_type -> yandex.cloud.operation.Operation
-	31, // 28: yandex.cloud.cloudregistry.v1.RegistryService.Delete:output_type -> yandex.cloud.operation.Operation
-	32, // 29: yandex.cloud.cloudregistry.v1.RegistryService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	31, // 30: yandex.cloud.cloudregistry.v1.RegistryService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	31, // 31: yandex.cloud.cloudregistry.v1.RegistryService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	12, // 32: yandex.cloud.cloudregistry.v1.RegistryService.ListIpPermissions:output_type -> yandex.cloud.cloudregistry.v1.ListIpPermissionsResponse
-	31, // 33: yandex.cloud.cloudregistry.v1.RegistryService.SetIpPermissions:output_type -> yandex.cloud.operation.Operation
-	31, // 34: yandex.cloud.cloudregistry.v1.RegistryService.UpdateIpPermissions:output_type -> yandex.cloud.operation.Operation
-	16, // 35: yandex.cloud.cloudregistry.v1.RegistryService.ListArtifacts:output_type -> yandex.cloud.cloudregistry.v1.ListArtifactsResponse
-	24, // [24:36] is the sub-list for method output_type
-	12, // [12:24] is the sub-list for method input_type
+	7,  // 17: yandex.cloud.cloudregistry.v1.RegistryService.ForceDelete:input_type -> yandex.cloud.cloudregistry.v1.DeleteRegistryRequest
+	28, // 18: yandex.cloud.cloudregistry.v1.RegistryService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	29, // 19: yandex.cloud.cloudregistry.v1.RegistryService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	30, // 20: yandex.cloud.cloudregistry.v1.RegistryService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	11, // 21: yandex.cloud.cloudregistry.v1.RegistryService.ListIpPermissions:input_type -> yandex.cloud.cloudregistry.v1.ListIpPermissionsRequest
+	9,  // 22: yandex.cloud.cloudregistry.v1.RegistryService.SetIpPermissions:input_type -> yandex.cloud.cloudregistry.v1.SetIpPermissionsRequest
+	10, // 23: yandex.cloud.cloudregistry.v1.RegistryService.UpdateIpPermissions:input_type -> yandex.cloud.cloudregistry.v1.UpdateIpPermissionsRequest
+	15, // 24: yandex.cloud.cloudregistry.v1.RegistryService.ListArtifacts:input_type -> yandex.cloud.cloudregistry.v1.ListArtifactsRequest
+	21, // 25: yandex.cloud.cloudregistry.v1.RegistryService.Get:output_type -> yandex.cloud.cloudregistry.v1.Registry
+	2,  // 26: yandex.cloud.cloudregistry.v1.RegistryService.List:output_type -> yandex.cloud.cloudregistry.v1.ListRegistriesResponse
+	31, // 27: yandex.cloud.cloudregistry.v1.RegistryService.Create:output_type -> yandex.cloud.operation.Operation
+	31, // 28: yandex.cloud.cloudregistry.v1.RegistryService.Update:output_type -> yandex.cloud.operation.Operation
+	31, // 29: yandex.cloud.cloudregistry.v1.RegistryService.Delete:output_type -> yandex.cloud.operation.Operation
+	31, // 30: yandex.cloud.cloudregistry.v1.RegistryService.ForceDelete:output_type -> yandex.cloud.operation.Operation
+	32, // 31: yandex.cloud.cloudregistry.v1.RegistryService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	31, // 32: yandex.cloud.cloudregistry.v1.RegistryService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	31, // 33: yandex.cloud.cloudregistry.v1.RegistryService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	12, // 34: yandex.cloud.cloudregistry.v1.RegistryService.ListIpPermissions:output_type -> yandex.cloud.cloudregistry.v1.ListIpPermissionsResponse
+	31, // 35: yandex.cloud.cloudregistry.v1.RegistryService.SetIpPermissions:output_type -> yandex.cloud.operation.Operation
+	31, // 36: yandex.cloud.cloudregistry.v1.RegistryService.UpdateIpPermissions:output_type -> yandex.cloud.operation.Operation
+	16, // 37: yandex.cloud.cloudregistry.v1.RegistryService.ListArtifacts:output_type -> yandex.cloud.cloudregistry.v1.ListArtifactsResponse
+	25, // [25:38] is the sub-list for method output_type
+	12, // [12:25] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name

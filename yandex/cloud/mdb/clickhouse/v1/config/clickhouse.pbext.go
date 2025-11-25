@@ -214,6 +214,18 @@ func (m *ClickhouseConfig) SetErrorLogRetentionTime(v *wrapperspb.Int64Value) {
 	m.ErrorLogRetentionTime = v
 }
 
+func (m *ClickhouseConfig) SetQueryMetricLogEnabled(v *wrapperspb.BoolValue) {
+	m.QueryMetricLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetQueryMetricLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.QueryMetricLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetQueryMetricLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.QueryMetricLogRetentionTime = v
+}
+
 func (m *ClickhouseConfig) SetAccessControlImprovements(v *ClickhouseConfig_AccessControlImprovements) {
 	m.AccessControlImprovements = v
 }
@@ -280,6 +292,18 @@ func (m *ClickhouseConfig) SetBackupThreads(v *wrapperspb.Int64Value) {
 
 func (m *ClickhouseConfig) SetRestoreThreads(v *wrapperspb.Int64Value) {
 	m.RestoreThreads = v
+}
+
+func (m *ClickhouseConfig) SetVectorSimilarityIndexCacheSize(v *wrapperspb.Int64Value) {
+	m.VectorSimilarityIndexCacheSize = v
+}
+
+func (m *ClickhouseConfig) SetVectorSimilarityIndexCacheMaxEntries(v *wrapperspb.Int64Value) {
+	m.VectorSimilarityIndexCacheMaxEntries = v
+}
+
+func (m *ClickhouseConfig) SetMaxBuildVectorSimilarityIndexThreadPoolSize(v *wrapperspb.Int64Value) {
+	m.MaxBuildVectorSimilarityIndexThreadPoolSize = v
 }
 
 func (m *ClickhouseConfig) SetMergeTree(v *ClickhouseConfig_MergeTree) {

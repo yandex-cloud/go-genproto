@@ -40,6 +40,12 @@ func (m *Topic) SetTopicConfig_3(v *TopicConfig3) {
 	}
 }
 
+func (m *Topic) SetTopicConfig_4(v *TopicConfig4) {
+	m.TopicConfig = &Topic_TopicConfig_4{
+		TopicConfig_4: v,
+	}
+}
+
 type TopicSpec_TopicConfig = isTopicSpec_TopicConfig
 
 func (m *TopicSpec) SetTopicConfig(v TopicSpec_TopicConfig) {
@@ -67,6 +73,12 @@ func (m *TopicSpec) SetTopicConfig_2_8(v *TopicConfig2_8) {
 func (m *TopicSpec) SetTopicConfig_3(v *TopicConfig3) {
 	m.TopicConfig = &TopicSpec_TopicConfig_3{
 		TopicConfig_3: v,
+	}
+}
+
+func (m *TopicSpec) SetTopicConfig_4(v *TopicConfig4) {
+	m.TopicConfig = &TopicSpec_TopicConfig_4{
+		TopicConfig_4: v,
 	}
 }
 
@@ -171,5 +183,57 @@ func (m *TopicConfig3) SetSegmentBytes(v *wrapperspb.Int64Value) {
 }
 
 func (m *TopicConfig3) SetPreallocate(v *wrapperspb.BoolValue) {
+	m.Preallocate = v
+}
+
+func (m *TopicConfig4) SetCleanupPolicy(v TopicConfig4_CleanupPolicy) {
+	m.CleanupPolicy = v
+}
+
+func (m *TopicConfig4) SetCompressionType(v CompressionType) {
+	m.CompressionType = v
+}
+
+func (m *TopicConfig4) SetDeleteRetentionMs(v *wrapperspb.Int64Value) {
+	m.DeleteRetentionMs = v
+}
+
+func (m *TopicConfig4) SetFileDeleteDelayMs(v *wrapperspb.Int64Value) {
+	m.FileDeleteDelayMs = v
+}
+
+func (m *TopicConfig4) SetFlushMessages(v *wrapperspb.Int64Value) {
+	m.FlushMessages = v
+}
+
+func (m *TopicConfig4) SetFlushMs(v *wrapperspb.Int64Value) {
+	m.FlushMs = v
+}
+
+func (m *TopicConfig4) SetMinCompactionLagMs(v *wrapperspb.Int64Value) {
+	m.MinCompactionLagMs = v
+}
+
+func (m *TopicConfig4) SetRetentionBytes(v *wrapperspb.Int64Value) {
+	m.RetentionBytes = v
+}
+
+func (m *TopicConfig4) SetRetentionMs(v *wrapperspb.Int64Value) {
+	m.RetentionMs = v
+}
+
+func (m *TopicConfig4) SetMaxMessageBytes(v *wrapperspb.Int64Value) {
+	m.MaxMessageBytes = v
+}
+
+func (m *TopicConfig4) SetMinInsyncReplicas(v *wrapperspb.Int64Value) {
+	m.MinInsyncReplicas = v
+}
+
+func (m *TopicConfig4) SetSegmentBytes(v *wrapperspb.Int64Value) {
+	m.SegmentBytes = v
+}
+
+func (m *TopicConfig4) SetPreallocate(v *wrapperspb.BoolValue) {
 	m.Preallocate = v
 }

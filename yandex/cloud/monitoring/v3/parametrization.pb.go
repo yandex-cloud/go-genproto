@@ -415,8 +415,8 @@ type Parameter struct {
 	Hidden bool `protobuf:"varint,6,opt,name=hidden,proto3" json:"hidden,omitempty"`
 	// Parameter description.
 	Description string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
-	// Group name.
-	GroupName     string `protobuf:"bytes,13,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
+	// Is parameter grouped.
+	Grouped       bool `protobuf:"varint,14,opt,name=grouped,proto3" json:"grouped,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -540,11 +540,11 @@ func (x *Parameter) GetDescription() string {
 	return ""
 }
 
-func (x *Parameter) GetGroupName() string {
+func (x *Parameter) GetGrouped() bool {
 	if x != nil {
-		return x.GroupName
+		return x.Grouped
 	}
-	return ""
+	return false
 }
 
 type isParameter_Data interface {
@@ -675,7 +675,7 @@ const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"\vunit_format\x18\x02 \x01(\x0e2&.yandex.cloud.monitoring.v3.UnitFormatR\n" +
 	"unitFormat\"<\n" +
 	"\x13TextValuesParameter\x12%\n" +
-	"\x0edefault_values\x18\x01 \x03(\tR\rdefaultValues\"\x8c\x05\n" +
+	"\x0edefault_values\x18\x01 \x03(\tR\rdefaultValues\"\x81\x05\n" +
 	"\tParameter\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12U\n" +
@@ -688,10 +688,9 @@ const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"textValues\x12\x16\n" +
 	"\x06hidden\x18\x06 \x01(\bR\x06hidden\x12 \n" +
 	"\vdescription\x18\n" +
-	" \x01(\tR\vdescription\x12\x1d\n" +
-	"\n" +
-	"group_name\x18\r \x01(\tR\tgroupNameB\x06\n" +
-	"\x04dataJ\x04\b\v\x10\fJ\x04\b\f\x10\r\"v\n" +
+	" \x01(\tR\vdescription\x12\x18\n" +
+	"\agrouped\x18\x0e \x01(\bR\agroupedB\x06\n" +
+	"\x04dataJ\x04\b\v\x10\x0e\"v\n" +
 	"\x0fParametrization\x12E\n" +
 	"\n" +
 	"parameters\x18\x01 \x03(\v2%.yandex.cloud.monitoring.v3.ParameterR\n" +

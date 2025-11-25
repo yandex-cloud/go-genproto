@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -94,7 +95,9 @@ type ListDashboardsRequest struct {
 	// supports GLOB and regex expressions
 	// dashboard must meet ALL tokens in selector string
 	// example: name = "New", description = "*new*", labels.key != "bad"
-	Selectors     string `protobuf:"bytes,22,opt,name=selectors,proto3" json:"selectors,omitempty"`
+	Selectors string `protobuf:"bytes,22,opt,name=selectors,proto3" json:"selectors,omitempty"`
+	// Control which fields to include in dashboard response.
+	ReadMask      *fieldmaskpb.FieldMask `protobuf:"bytes,23,opt,name=read_mask,json=readMask,proto3" json:"read_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -171,6 +174,13 @@ func (x *ListDashboardsRequest) GetSelectors() string {
 		return x.Selectors
 	}
 	return ""
+}
+
+func (x *ListDashboardsRequest) GetReadMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.ReadMask
+	}
+	return nil
 }
 
 type isListDashboardsRequest_Container interface {
@@ -1116,9 +1126,9 @@ var File_yandex_cloud_monitoring_v3_dashboard_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\"F\n" +
+	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\"F\n" +
 	"\x13GetDashboardRequest\x12/\n" +
-	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xf8\x01\n" +
+	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xb1\x02\n" +
 	"\x15ListDashboardsRequest\x12+\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50H\x00R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x13 \x01(\x03B\n" +
@@ -1128,7 +1138,8 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\x06filter\x18\x15 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\x12(\n" +
 	"\tselectors\x18\x16 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tselectorsB\v\n" +
+	"\x8a\xc81\x06<=1000R\tselectors\x127\n" +
+	"\tread_mask\x18\x17 \x01(\v2\x1a.google.protobuf.FieldMaskR\breadMaskB\v\n" +
 	"\tcontainerJ\x04\b\x03\x10\x13\"\x87\x01\n" +
 	"\x16ListDashboardsResponse\x12E\n" +
 	"\n" +
@@ -1253,43 +1264,45 @@ var file_yandex_cloud_monitoring_v3_dashboard_service_proto_goTypes = []any{
 	(*ListDashboardLabelValuesResponse)(nil), // 14: yandex.cloud.monitoring.v3.ListDashboardLabelValuesResponse
 	nil,                                      // 15: yandex.cloud.monitoring.v3.CreateDashboardRequest.LabelsEntry
 	nil,                                      // 16: yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntry
-	(*Dashboard)(nil),                        // 17: yandex.cloud.monitoring.v3.Dashboard
-	(*Widget)(nil),                           // 18: yandex.cloud.monitoring.v3.Widget
-	(*Parametrization)(nil),                  // 19: yandex.cloud.monitoring.v3.Parametrization
-	(*Timeline)(nil),                         // 20: yandex.cloud.monitoring.v3.Timeline
-	(*LinkItem)(nil),                         // 21: yandex.cloud.monitoring.v3.LinkItem
-	(*operation.Operation)(nil),              // 22: yandex.cloud.operation.Operation
+	(*fieldmaskpb.FieldMask)(nil),            // 17: google.protobuf.FieldMask
+	(*Dashboard)(nil),                        // 18: yandex.cloud.monitoring.v3.Dashboard
+	(*Widget)(nil),                           // 19: yandex.cloud.monitoring.v3.Widget
+	(*Parametrization)(nil),                  // 20: yandex.cloud.monitoring.v3.Parametrization
+	(*Timeline)(nil),                         // 21: yandex.cloud.monitoring.v3.Timeline
+	(*LinkItem)(nil),                         // 22: yandex.cloud.monitoring.v3.LinkItem
+	(*operation.Operation)(nil),              // 23: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_monitoring_v3_dashboard_service_proto_depIdxs = []int32{
-	17, // 0: yandex.cloud.monitoring.v3.ListDashboardsResponse.dashboards:type_name -> yandex.cloud.monitoring.v3.Dashboard
-	15, // 1: yandex.cloud.monitoring.v3.CreateDashboardRequest.labels:type_name -> yandex.cloud.monitoring.v3.CreateDashboardRequest.LabelsEntry
-	18, // 2: yandex.cloud.monitoring.v3.CreateDashboardRequest.widgets:type_name -> yandex.cloud.monitoring.v3.Widget
-	19, // 3: yandex.cloud.monitoring.v3.CreateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
-	20, // 4: yandex.cloud.monitoring.v3.CreateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
-	21, // 5: yandex.cloud.monitoring.v3.CreateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
-	16, // 6: yandex.cloud.monitoring.v3.UpdateDashboardRequest.labels:type_name -> yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntry
-	18, // 7: yandex.cloud.monitoring.v3.UpdateDashboardRequest.widgets:type_name -> yandex.cloud.monitoring.v3.Widget
-	19, // 8: yandex.cloud.monitoring.v3.UpdateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
-	20, // 9: yandex.cloud.monitoring.v3.UpdateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
-	21, // 10: yandex.cloud.monitoring.v3.UpdateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
-	22, // 11: yandex.cloud.monitoring.v3.ListDashboardOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 12: yandex.cloud.monitoring.v3.DashboardService.Get:input_type -> yandex.cloud.monitoring.v3.GetDashboardRequest
-	1,  // 13: yandex.cloud.monitoring.v3.DashboardService.List:input_type -> yandex.cloud.monitoring.v3.ListDashboardsRequest
-	3,  // 14: yandex.cloud.monitoring.v3.DashboardService.Create:input_type -> yandex.cloud.monitoring.v3.CreateDashboardRequest
-	5,  // 15: yandex.cloud.monitoring.v3.DashboardService.Update:input_type -> yandex.cloud.monitoring.v3.UpdateDashboardRequest
-	7,  // 16: yandex.cloud.monitoring.v3.DashboardService.Delete:input_type -> yandex.cloud.monitoring.v3.DeleteDashboardRequest
-	9,  // 17: yandex.cloud.monitoring.v3.DashboardService.ListOperations:input_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsRequest
-	17, // 18: yandex.cloud.monitoring.v3.DashboardService.Get:output_type -> yandex.cloud.monitoring.v3.Dashboard
-	2,  // 19: yandex.cloud.monitoring.v3.DashboardService.List:output_type -> yandex.cloud.monitoring.v3.ListDashboardsResponse
-	22, // 20: yandex.cloud.monitoring.v3.DashboardService.Create:output_type -> yandex.cloud.operation.Operation
-	22, // 21: yandex.cloud.monitoring.v3.DashboardService.Update:output_type -> yandex.cloud.operation.Operation
-	22, // 22: yandex.cloud.monitoring.v3.DashboardService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // 23: yandex.cloud.monitoring.v3.DashboardService.ListOperations:output_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsResponse
-	18, // [18:24] is the sub-list for method output_type
-	12, // [12:18] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	17, // 0: yandex.cloud.monitoring.v3.ListDashboardsRequest.read_mask:type_name -> google.protobuf.FieldMask
+	18, // 1: yandex.cloud.monitoring.v3.ListDashboardsResponse.dashboards:type_name -> yandex.cloud.monitoring.v3.Dashboard
+	15, // 2: yandex.cloud.monitoring.v3.CreateDashboardRequest.labels:type_name -> yandex.cloud.monitoring.v3.CreateDashboardRequest.LabelsEntry
+	19, // 3: yandex.cloud.monitoring.v3.CreateDashboardRequest.widgets:type_name -> yandex.cloud.monitoring.v3.Widget
+	20, // 4: yandex.cloud.monitoring.v3.CreateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
+	21, // 5: yandex.cloud.monitoring.v3.CreateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
+	22, // 6: yandex.cloud.monitoring.v3.CreateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
+	16, // 7: yandex.cloud.monitoring.v3.UpdateDashboardRequest.labels:type_name -> yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntry
+	19, // 8: yandex.cloud.monitoring.v3.UpdateDashboardRequest.widgets:type_name -> yandex.cloud.monitoring.v3.Widget
+	20, // 9: yandex.cloud.monitoring.v3.UpdateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
+	21, // 10: yandex.cloud.monitoring.v3.UpdateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
+	22, // 11: yandex.cloud.monitoring.v3.UpdateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
+	23, // 12: yandex.cloud.monitoring.v3.ListDashboardOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 13: yandex.cloud.monitoring.v3.DashboardService.Get:input_type -> yandex.cloud.monitoring.v3.GetDashboardRequest
+	1,  // 14: yandex.cloud.monitoring.v3.DashboardService.List:input_type -> yandex.cloud.monitoring.v3.ListDashboardsRequest
+	3,  // 15: yandex.cloud.monitoring.v3.DashboardService.Create:input_type -> yandex.cloud.monitoring.v3.CreateDashboardRequest
+	5,  // 16: yandex.cloud.monitoring.v3.DashboardService.Update:input_type -> yandex.cloud.monitoring.v3.UpdateDashboardRequest
+	7,  // 17: yandex.cloud.monitoring.v3.DashboardService.Delete:input_type -> yandex.cloud.monitoring.v3.DeleteDashboardRequest
+	9,  // 18: yandex.cloud.monitoring.v3.DashboardService.ListOperations:input_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsRequest
+	18, // 19: yandex.cloud.monitoring.v3.DashboardService.Get:output_type -> yandex.cloud.monitoring.v3.Dashboard
+	2,  // 20: yandex.cloud.monitoring.v3.DashboardService.List:output_type -> yandex.cloud.monitoring.v3.ListDashboardsResponse
+	23, // 21: yandex.cloud.monitoring.v3.DashboardService.Create:output_type -> yandex.cloud.operation.Operation
+	23, // 22: yandex.cloud.monitoring.v3.DashboardService.Update:output_type -> yandex.cloud.operation.Operation
+	23, // 23: yandex.cloud.monitoring.v3.DashboardService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // 24: yandex.cloud.monitoring.v3.DashboardService.ListOperations:output_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsResponse
+	19, // [19:25] is the sub-list for method output_type
+	13, // [13:19] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_dashboard_service_proto_init() }

@@ -369,6 +369,10 @@ func (m *InstanceTemplate) SetMetadataOptions(v *MetadataOptions) {
 	m.MetadataOptions = v
 }
 
+func (m *InstanceTemplate) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
+}
+
 func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {
 	m.Mode = v
 }

@@ -26,6 +26,7 @@ const (
 	RegistryService_Create_FullMethodName               = "/yandex.cloud.cloudregistry.v1.RegistryService/Create"
 	RegistryService_Update_FullMethodName               = "/yandex.cloud.cloudregistry.v1.RegistryService/Update"
 	RegistryService_Delete_FullMethodName               = "/yandex.cloud.cloudregistry.v1.RegistryService/Delete"
+	RegistryService_ForceDelete_FullMethodName          = "/yandex.cloud.cloudregistry.v1.RegistryService/ForceDelete"
 	RegistryService_ListAccessBindings_FullMethodName   = "/yandex.cloud.cloudregistry.v1.RegistryService/ListAccessBindings"
 	RegistryService_SetAccessBindings_FullMethodName    = "/yandex.cloud.cloudregistry.v1.RegistryService/SetAccessBindings"
 	RegistryService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.cloudregistry.v1.RegistryService/UpdateAccessBindings"
@@ -53,6 +54,8 @@ type RegistryServiceClient interface {
 	Update(ctx context.Context, in *UpdateRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified registry.
 	Delete(ctx context.Context, in *DeleteRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Forcefully deletes the specified registry along with all its repositories and data.
+	ForceDelete(ctx context.Context, in *DeleteRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists access bindings for the specified registry.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the specified registry.
@@ -121,6 +124,16 @@ func (c *registryServiceClient) Delete(ctx context.Context, in *DeleteRegistryRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, RegistryService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *registryServiceClient) ForceDelete(ctx context.Context, in *DeleteRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RegistryService_ForceDelete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -215,6 +228,8 @@ type RegistryServiceServer interface {
 	Update(context.Context, *UpdateRegistryRequest) (*operation.Operation, error)
 	// Deletes the specified registry.
 	Delete(context.Context, *DeleteRegistryRequest) (*operation.Operation, error)
+	// Forcefully deletes the specified registry along with all its repositories and data.
+	ForceDelete(context.Context, *DeleteRegistryRequest) (*operation.Operation, error)
 	// Lists access bindings for the specified registry.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the specified registry.
@@ -252,6 +267,9 @@ func (UnimplementedRegistryServiceServer) Update(context.Context, *UpdateRegistr
 }
 func (UnimplementedRegistryServiceServer) Delete(context.Context, *DeleteRegistryRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedRegistryServiceServer) ForceDelete(context.Context, *DeleteRegistryRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ForceDelete not implemented")
 }
 func (UnimplementedRegistryServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -380,6 +398,24 @@ func _RegistryService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RegistryServiceServer).Delete(ctx, req.(*DeleteRegistryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RegistryService_ForceDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRegistryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).ForceDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RegistryService_ForceDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).ForceDelete(ctx, req.(*DeleteRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -536,6 +572,10 @@ var RegistryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _RegistryService_Delete_Handler,
+		},
+		{
+			MethodName: "ForceDelete",
+			Handler:    _RegistryService_ForceDelete_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

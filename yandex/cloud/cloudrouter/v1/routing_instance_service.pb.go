@@ -1314,6 +1314,107 @@ func (x *DeleteRoutingInstanceMetadata) GetRoutingInstanceId() string {
 	return ""
 }
 
+type MoveRoutingInstanceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the RoutingInstance resource to move.
+	// To get the routingInstance ID use a [RoutingInstanceService.List] request.
+	RoutingInstanceId string `protobuf:"bytes,1,opt,name=routing_instance_id,json=routingInstanceId,proto3" json:"routing_instance_id,omitempty"`
+	// ID of the folder to which routingInstance will be moved.
+	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *MoveRoutingInstanceRequest) Reset() {
+	*x = MoveRoutingInstanceRequest{}
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveRoutingInstanceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveRoutingInstanceRequest) ProtoMessage() {}
+
+func (x *MoveRoutingInstanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveRoutingInstanceRequest.ProtoReflect.Descriptor instead.
+func (*MoveRoutingInstanceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *MoveRoutingInstanceRequest) GetRoutingInstanceId() string {
+	if x != nil {
+		return x.RoutingInstanceId
+	}
+	return ""
+}
+
+func (x *MoveRoutingInstanceRequest) GetDestinationFolderId() string {
+	if x != nil {
+		return x.DestinationFolderId
+	}
+	return ""
+}
+
+type MoveRoutingInstanceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the routingInstance that is being moved.
+	RoutingInstanceId string `protobuf:"bytes,1,opt,name=routing_instance_id,json=routingInstanceId,proto3" json:"routing_instance_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *MoveRoutingInstanceMetadata) Reset() {
+	*x = MoveRoutingInstanceMetadata{}
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveRoutingInstanceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveRoutingInstanceMetadata) ProtoMessage() {}
+
+func (x *MoveRoutingInstanceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveRoutingInstanceMetadata.ProtoReflect.Descriptor instead.
+func (*MoveRoutingInstanceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *MoveRoutingInstanceMetadata) GetRoutingInstanceId() string {
+	if x != nil {
+		return x.RoutingInstanceId
+	}
+	return ""
+}
+
 type ListRoutingInstanceOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the RoutingInstance resource.
@@ -1332,7 +1433,7 @@ type ListRoutingInstanceOperationsRequest struct {
 
 func (x *ListRoutingInstanceOperationsRequest) Reset() {
 	*x = ListRoutingInstanceOperationsRequest{}
-	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1344,7 +1445,7 @@ func (x *ListRoutingInstanceOperationsRequest) String() string {
 func (*ListRoutingInstanceOperationsRequest) ProtoMessage() {}
 
 func (x *ListRoutingInstanceOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1357,7 +1458,7 @@ func (x *ListRoutingInstanceOperationsRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ListRoutingInstanceOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListRoutingInstanceOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListRoutingInstanceOperationsRequest) GetRoutingInstanceId() string {
@@ -1398,7 +1499,7 @@ type ListRoutingInstanceOperationsResponse struct {
 
 func (x *ListRoutingInstanceOperationsResponse) Reset() {
 	*x = ListRoutingInstanceOperationsResponse{}
-	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1410,7 +1511,7 @@ func (x *ListRoutingInstanceOperationsResponse) String() string {
 func (*ListRoutingInstanceOperationsResponse) ProtoMessage() {}
 
 func (x *ListRoutingInstanceOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1423,7 +1524,7 @@ func (x *ListRoutingInstanceOperationsResponse) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListRoutingInstanceOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListRoutingInstanceOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListRoutingInstanceOperationsResponse) GetOperations() []*operation.Operation {
@@ -1534,6 +1635,11 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x1cDeleteRoutingInstanceRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\"O\n" +
 	"\x1dDeleteRoutingInstanceMetadata\x12.\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\x9c\x01\n" +
+	"\x1aMoveRoutingInstanceRequest\x12<\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12@\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"M\n" +
+	"\x1bMoveRoutingInstanceMetadata\x12.\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xa0\x01\n" +
 	"$ListRoutingInstanceOperationsRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12\x1b\n" +
@@ -1544,7 +1650,7 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xbf\x17\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x9e\x19\n" +
 	"\x16RoutingInstanceService\x12\xab\x01\n" +
 	"\x03Get\x126.yandex.cloud.cloudrouter.v1.GetRoutingInstanceRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\">\x82\xd3\xe4\x93\x028\x126/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\x87\x01\n" +
 	"\x11GetByVpcNetworkId\x12D.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByVpcNetworkIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\x12\x9b\x01\n" +
@@ -1570,7 +1676,9 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x17RemovePrivateConnection\x12;.yandex.cloud.cloudrouter.v1.RemovePrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\x8d\x01\xb2\xd2*0\n" +
 	"\x1dUpdateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02S:\x01*\"N/cloudrouter/v1/routingInstances/{routing_instance_id}:removePrivateConnection\x12\xe0\x01\n" +
 	"\x06Delete\x129.yandex.cloud.cloudrouter.v1.DeleteRoutingInstanceRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*6\n" +
-	"\x1dDeleteRoutingInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x028*6/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\xe2\x01\n" +
+	"\x1dDeleteRoutingInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x028*6/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\xdc\x01\n" +
+	"\x04Move\x127.yandex.cloud.cloudrouter.v1.MoveRoutingInstanceRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*.\n" +
+	"\x1bMoveRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02@:\x01*\";/cloudrouter/v1/routingInstances/{routing_instance_id}:move\x12\xe2\x01\n" +
 	"\x0eListOperations\x12A.yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsRequest\x1aB.yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse\"I\x82\xd3\xe4\x93\x02C\x12A/cloudrouter/v1/routingInstances/{routing_instance_id}/operationsBn\n" +
 	"\x1fyandex.cloud.api.cloudrouter.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudrouter/v1;cloudrouterb\x06proto3"
 
@@ -1586,7 +1694,7 @@ func file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescGZIP
 	return file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_goTypes = []any{
 	(*GetRoutingInstanceRequest)(nil),                         // 0: yandex.cloud.cloudrouter.v1.GetRoutingInstanceRequest
 	(*GetRoutingInstanceByCicPrivateConnectionIdRequest)(nil), // 1: yandex.cloud.cloudrouter.v1.GetRoutingInstanceByCicPrivateConnectionIdRequest
@@ -1608,31 +1716,33 @@ var file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_goTypes = []
 	(*RemovePrivateConnectionRequest)(nil),                    // 17: yandex.cloud.cloudrouter.v1.RemovePrivateConnectionRequest
 	(*DeleteRoutingInstanceRequest)(nil),                      // 18: yandex.cloud.cloudrouter.v1.DeleteRoutingInstanceRequest
 	(*DeleteRoutingInstanceMetadata)(nil),                     // 19: yandex.cloud.cloudrouter.v1.DeleteRoutingInstanceMetadata
-	(*ListRoutingInstanceOperationsRequest)(nil),              // 20: yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsRequest
-	(*ListRoutingInstanceOperationsResponse)(nil),             // 21: yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse
-	nil,                             // 22: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntry
-	nil,                             // 23: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntry
-	(*RoutingInstance)(nil),         // 24: yandex.cloud.cloudrouter.v1.RoutingInstance
-	(*RoutingInstance_VpcInfo)(nil), // 25: yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfo
-	(*RoutingInstance_CicPrivateConnectionInfo)(nil), // 26: yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfo
-	(*fieldmaskpb.FieldMask)(nil),                    // 27: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                      // 28: yandex.cloud.operation.Operation
+	(*MoveRoutingInstanceRequest)(nil),                        // 20: yandex.cloud.cloudrouter.v1.MoveRoutingInstanceRequest
+	(*MoveRoutingInstanceMetadata)(nil),                       // 21: yandex.cloud.cloudrouter.v1.MoveRoutingInstanceMetadata
+	(*ListRoutingInstanceOperationsRequest)(nil),              // 22: yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsRequest
+	(*ListRoutingInstanceOperationsResponse)(nil),             // 23: yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse
+	nil,                             // 24: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntry
+	nil,                             // 25: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntry
+	(*RoutingInstance)(nil),         // 26: yandex.cloud.cloudrouter.v1.RoutingInstance
+	(*RoutingInstance_VpcInfo)(nil), // 27: yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfo
+	(*RoutingInstance_CicPrivateConnectionInfo)(nil), // 28: yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfo
+	(*fieldmaskpb.FieldMask)(nil),                    // 29: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                      // 30: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_depIdxs = []int32{
-	24, // 0: yandex.cloud.cloudrouter.v1.ListRoutingInstancesResponse.routing_instances:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance
-	25, // 1: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.vpc_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfo
-	26, // 2: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.cic_private_connection_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfo
-	22, // 3: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.labels:type_name -> yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntry
-	27, // 4: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	25, // 5: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.vpc_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfo
-	26, // 6: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.cic_private_connection_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfo
-	23, // 7: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.labels:type_name -> yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntry
+	26, // 0: yandex.cloud.cloudrouter.v1.ListRoutingInstancesResponse.routing_instances:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance
+	27, // 1: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.vpc_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfo
+	28, // 2: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.cic_private_connection_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfo
+	24, // 3: yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.labels:type_name -> yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntry
+	29, // 4: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	27, // 5: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.vpc_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfo
+	28, // 6: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.cic_private_connection_info:type_name -> yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfo
+	25, // 7: yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.labels:type_name -> yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntry
 	13, // 8: yandex.cloud.cloudrouter.v1.UpsertPrefixesRequest.vpc_az_info_prefixes:type_name -> yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixes
 	13, // 9: yandex.cloud.cloudrouter.v1.RemovePrefixesRequest.vpc_az_info_prefixes:type_name -> yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixes
 	12, // 10: yandex.cloud.cloudrouter.v1.UpdateNetworksRequest.added_vpc_networks:type_name -> yandex.cloud.cloudrouter.v1.VpcInfo
 	12, // 11: yandex.cloud.cloudrouter.v1.UpdateNetworksRequest.updated_vpc_networks:type_name -> yandex.cloud.cloudrouter.v1.VpcInfo
 	13, // 12: yandex.cloud.cloudrouter.v1.VpcInfo.vpc_az_info_prefixes:type_name -> yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixes
-	28, // 13: yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	30, // 13: yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	0,  // 14: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Get:input_type -> yandex.cloud.cloudrouter.v1.GetRoutingInstanceRequest
 	2,  // 15: yandex.cloud.cloudrouter.v1.RoutingInstanceService.GetByVpcNetworkId:input_type -> yandex.cloud.cloudrouter.v1.GetRoutingInstanceByVpcNetworkIdRequest
 	1,  // 16: yandex.cloud.cloudrouter.v1.RoutingInstanceService.GetByCicPrivateConnectionId:input_type -> yandex.cloud.cloudrouter.v1.GetRoutingInstanceByCicPrivateConnectionIdRequest
@@ -1647,24 +1757,26 @@ var file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_depIdxs = []
 	16, // 25: yandex.cloud.cloudrouter.v1.RoutingInstanceService.AddPrivateConnection:input_type -> yandex.cloud.cloudrouter.v1.AddPrivateConnectionRequest
 	17, // 26: yandex.cloud.cloudrouter.v1.RoutingInstanceService.RemovePrivateConnection:input_type -> yandex.cloud.cloudrouter.v1.RemovePrivateConnectionRequest
 	18, // 27: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Delete:input_type -> yandex.cloud.cloudrouter.v1.DeleteRoutingInstanceRequest
-	20, // 28: yandex.cloud.cloudrouter.v1.RoutingInstanceService.ListOperations:input_type -> yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsRequest
-	24, // 29: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Get:output_type -> yandex.cloud.cloudrouter.v1.RoutingInstance
-	24, // 30: yandex.cloud.cloudrouter.v1.RoutingInstanceService.GetByVpcNetworkId:output_type -> yandex.cloud.cloudrouter.v1.RoutingInstance
-	24, // 31: yandex.cloud.cloudrouter.v1.RoutingInstanceService.GetByCicPrivateConnectionId:output_type -> yandex.cloud.cloudrouter.v1.RoutingInstance
-	4,  // 32: yandex.cloud.cloudrouter.v1.RoutingInstanceService.List:output_type -> yandex.cloud.cloudrouter.v1.ListRoutingInstancesResponse
-	28, // 33: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Create:output_type -> yandex.cloud.operation.Operation
-	28, // 34: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Update:output_type -> yandex.cloud.operation.Operation
-	28, // 35: yandex.cloud.cloudrouter.v1.RoutingInstanceService.UpsertPrefixes:output_type -> yandex.cloud.operation.Operation
-	28, // 36: yandex.cloud.cloudrouter.v1.RoutingInstanceService.RemovePrefixes:output_type -> yandex.cloud.operation.Operation
-	28, // 37: yandex.cloud.cloudrouter.v1.RoutingInstanceService.UpdateNetworks:output_type -> yandex.cloud.operation.Operation
-	28, // 38: yandex.cloud.cloudrouter.v1.RoutingInstanceService.MovePrefix:output_type -> yandex.cloud.operation.Operation
-	28, // 39: yandex.cloud.cloudrouter.v1.RoutingInstanceService.UpdatePrefixMask:output_type -> yandex.cloud.operation.Operation
-	28, // 40: yandex.cloud.cloudrouter.v1.RoutingInstanceService.AddPrivateConnection:output_type -> yandex.cloud.operation.Operation
-	28, // 41: yandex.cloud.cloudrouter.v1.RoutingInstanceService.RemovePrivateConnection:output_type -> yandex.cloud.operation.Operation
-	28, // 42: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Delete:output_type -> yandex.cloud.operation.Operation
-	21, // 43: yandex.cloud.cloudrouter.v1.RoutingInstanceService.ListOperations:output_type -> yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse
-	29, // [29:44] is the sub-list for method output_type
-	14, // [14:29] is the sub-list for method input_type
+	20, // 28: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Move:input_type -> yandex.cloud.cloudrouter.v1.MoveRoutingInstanceRequest
+	22, // 29: yandex.cloud.cloudrouter.v1.RoutingInstanceService.ListOperations:input_type -> yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsRequest
+	26, // 30: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Get:output_type -> yandex.cloud.cloudrouter.v1.RoutingInstance
+	26, // 31: yandex.cloud.cloudrouter.v1.RoutingInstanceService.GetByVpcNetworkId:output_type -> yandex.cloud.cloudrouter.v1.RoutingInstance
+	26, // 32: yandex.cloud.cloudrouter.v1.RoutingInstanceService.GetByCicPrivateConnectionId:output_type -> yandex.cloud.cloudrouter.v1.RoutingInstance
+	4,  // 33: yandex.cloud.cloudrouter.v1.RoutingInstanceService.List:output_type -> yandex.cloud.cloudrouter.v1.ListRoutingInstancesResponse
+	30, // 34: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Create:output_type -> yandex.cloud.operation.Operation
+	30, // 35: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Update:output_type -> yandex.cloud.operation.Operation
+	30, // 36: yandex.cloud.cloudrouter.v1.RoutingInstanceService.UpsertPrefixes:output_type -> yandex.cloud.operation.Operation
+	30, // 37: yandex.cloud.cloudrouter.v1.RoutingInstanceService.RemovePrefixes:output_type -> yandex.cloud.operation.Operation
+	30, // 38: yandex.cloud.cloudrouter.v1.RoutingInstanceService.UpdateNetworks:output_type -> yandex.cloud.operation.Operation
+	30, // 39: yandex.cloud.cloudrouter.v1.RoutingInstanceService.MovePrefix:output_type -> yandex.cloud.operation.Operation
+	30, // 40: yandex.cloud.cloudrouter.v1.RoutingInstanceService.UpdatePrefixMask:output_type -> yandex.cloud.operation.Operation
+	30, // 41: yandex.cloud.cloudrouter.v1.RoutingInstanceService.AddPrivateConnection:output_type -> yandex.cloud.operation.Operation
+	30, // 42: yandex.cloud.cloudrouter.v1.RoutingInstanceService.RemovePrivateConnection:output_type -> yandex.cloud.operation.Operation
+	30, // 43: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Delete:output_type -> yandex.cloud.operation.Operation
+	30, // 44: yandex.cloud.cloudrouter.v1.RoutingInstanceService.Move:output_type -> yandex.cloud.operation.Operation
+	23, // 45: yandex.cloud.cloudrouter.v1.RoutingInstanceService.ListOperations:output_type -> yandex.cloud.cloudrouter.v1.ListRoutingInstanceOperationsResponse
+	30, // [30:46] is the sub-list for method output_type
+	14, // [14:30] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name
@@ -1682,7 +1794,7 @@ func file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc), len(file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

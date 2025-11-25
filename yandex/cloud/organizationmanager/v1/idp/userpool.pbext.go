@@ -143,6 +143,12 @@ func (m *DomainChallenge_DnsRecord) SetValue(v string) {
 	m.Value = v
 }
 
+type PasswordQualityPolicy_ComplexityPolicy = isPasswordQualityPolicy_ComplexityPolicy
+
+func (m *PasswordQualityPolicy) SetComplexityPolicy(v PasswordQualityPolicy_ComplexityPolicy) {
+	m.ComplexityPolicy = v
+}
+
 func (m *PasswordQualityPolicy) SetAllowSimilar(v bool) {
 	m.AllowSimilar = v
 }
@@ -165,6 +171,18 @@ func (m *PasswordQualityPolicy) SetRequiredClasses(v *PasswordQualityPolicy_Requ
 
 func (m *PasswordQualityPolicy) SetMinLengthByClassSettings(v *PasswordQualityPolicy_MinLengthByClassSettings) {
 	m.MinLengthByClassSettings = v
+}
+
+func (m *PasswordQualityPolicy) SetFixed(v *PasswordQualityPolicy_Fixed) {
+	m.ComplexityPolicy = &PasswordQualityPolicy_Fixed_{
+		Fixed: v,
+	}
+}
+
+func (m *PasswordQualityPolicy) SetSmart(v *PasswordQualityPolicy_Smart) {
+	m.ComplexityPolicy = &PasswordQualityPolicy_Smart_{
+		Smart: v,
+	}
 }
 
 func (m *PasswordQualityPolicy_RequiredClasses) SetLowers(v bool) {
@@ -193,6 +211,42 @@ func (m *PasswordQualityPolicy_MinLengthByClassSettings) SetTwo(v int64) {
 
 func (m *PasswordQualityPolicy_MinLengthByClassSettings) SetThree(v int64) {
 	m.Three = v
+}
+
+func (m *PasswordQualityPolicy_Fixed) SetLowersRequired(v bool) {
+	m.LowersRequired = v
+}
+
+func (m *PasswordQualityPolicy_Fixed) SetUppersRequired(v bool) {
+	m.UppersRequired = v
+}
+
+func (m *PasswordQualityPolicy_Fixed) SetDigitsRequired(v bool) {
+	m.DigitsRequired = v
+}
+
+func (m *PasswordQualityPolicy_Fixed) SetSpecialsRequired(v bool) {
+	m.SpecialsRequired = v
+}
+
+func (m *PasswordQualityPolicy_Fixed) SetMinLength(v int64) {
+	m.MinLength = v
+}
+
+func (m *PasswordQualityPolicy_Smart) SetOneClass(v int64) {
+	m.OneClass = v
+}
+
+func (m *PasswordQualityPolicy_Smart) SetTwoClasses(v int64) {
+	m.TwoClasses = v
+}
+
+func (m *PasswordQualityPolicy_Smart) SetThreeClasses(v int64) {
+	m.ThreeClasses = v
+}
+
+func (m *PasswordQualityPolicy_Smart) SetFourClasses(v int64) {
+	m.FourClasses = v
 }
 
 func (m *PasswordLifetimePolicy) SetMinDaysCount(v int64) {

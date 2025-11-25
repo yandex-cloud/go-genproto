@@ -754,8 +754,15 @@ type PasswordQualityPolicy struct {
 	// Minimum length requirements based on character class diversity.
 	// If not specified, these checks are disabled.
 	MinLengthByClassSettings *PasswordQualityPolicy_MinLengthByClassSettings `protobuf:"bytes,6,opt,name=min_length_by_class_settings,json=minLengthByClassSettings,proto3" json:"min_length_by_class_settings,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	// Defines password complexity policy.
+	//
+	// Types that are valid to be assigned to ComplexityPolicy:
+	//
+	//	*PasswordQualityPolicy_Fixed_
+	//	*PasswordQualityPolicy_Smart_
+	ComplexityPolicy isPasswordQualityPolicy_ComplexityPolicy `protobuf_oneof:"complexity_policy"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *PasswordQualityPolicy) Reset() {
@@ -829,6 +836,49 @@ func (x *PasswordQualityPolicy) GetMinLengthByClassSettings() *PasswordQualityPo
 	}
 	return nil
 }
+
+func (x *PasswordQualityPolicy) GetComplexityPolicy() isPasswordQualityPolicy_ComplexityPolicy {
+	if x != nil {
+		return x.ComplexityPolicy
+	}
+	return nil
+}
+
+func (x *PasswordQualityPolicy) GetFixed() *PasswordQualityPolicy_Fixed {
+	if x != nil {
+		if x, ok := x.ComplexityPolicy.(*PasswordQualityPolicy_Fixed_); ok {
+			return x.Fixed
+		}
+	}
+	return nil
+}
+
+func (x *PasswordQualityPolicy) GetSmart() *PasswordQualityPolicy_Smart {
+	if x != nil {
+		if x, ok := x.ComplexityPolicy.(*PasswordQualityPolicy_Smart_); ok {
+			return x.Smart
+		}
+	}
+	return nil
+}
+
+type isPasswordQualityPolicy_ComplexityPolicy interface {
+	isPasswordQualityPolicy_ComplexityPolicy()
+}
+
+type PasswordQualityPolicy_Fixed_ struct {
+	// Fixed complexity requirements
+	Fixed *PasswordQualityPolicy_Fixed `protobuf:"bytes,7,opt,name=fixed,proto3,oneof"`
+}
+
+type PasswordQualityPolicy_Smart_ struct {
+	// Smart complexity requirements
+	Smart *PasswordQualityPolicy_Smart `protobuf:"bytes,8,opt,name=smart,proto3,oneof"`
+}
+
+func (*PasswordQualityPolicy_Fixed_) isPasswordQualityPolicy_ComplexityPolicy() {}
+
+func (*PasswordQualityPolicy_Smart_) isPasswordQualityPolicy_ComplexityPolicy() {}
 
 // Policy that defines password lifetime requirements.
 type PasswordLifetimePolicy struct {
@@ -1151,6 +1201,161 @@ func (x *PasswordQualityPolicy_MinLengthByClassSettings) GetThree() int64 {
 	return 0
 }
 
+// Fixed complexity policy enforces uniform password rules with required character classes and minimum length.
+type PasswordQualityPolicy_Fixed struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether lowercase letters are required in the password.
+	LowersRequired bool `protobuf:"varint,1,opt,name=lowers_required,json=lowersRequired,proto3" json:"lowers_required,omitempty"`
+	// Whether uppercase letters are required in the password.
+	UppersRequired bool `protobuf:"varint,2,opt,name=uppers_required,json=uppersRequired,proto3" json:"uppers_required,omitempty"`
+	// Whether digits are required in the password.
+	DigitsRequired bool `protobuf:"varint,3,opt,name=digits_required,json=digitsRequired,proto3" json:"digits_required,omitempty"`
+	// Whether special characters are required in the password.
+	SpecialsRequired bool `protobuf:"varint,4,opt,name=specials_required,json=specialsRequired,proto3" json:"specials_required,omitempty"`
+	// Minimum length required for all passwords.
+	MinLength     int64 `protobuf:"varint,5,opt,name=min_length,json=minLength,proto3" json:"min_length,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordQualityPolicy_Fixed) Reset() {
+	*x = PasswordQualityPolicy_Fixed{}
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordQualityPolicy_Fixed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordQualityPolicy_Fixed) ProtoMessage() {}
+
+func (x *PasswordQualityPolicy_Fixed) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordQualityPolicy_Fixed.ProtoReflect.Descriptor instead.
+func (*PasswordQualityPolicy_Fixed) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDescGZIP(), []int{4, 2}
+}
+
+func (x *PasswordQualityPolicy_Fixed) GetLowersRequired() bool {
+	if x != nil {
+		return x.LowersRequired
+	}
+	return false
+}
+
+func (x *PasswordQualityPolicy_Fixed) GetUppersRequired() bool {
+	if x != nil {
+		return x.UppersRequired
+	}
+	return false
+}
+
+func (x *PasswordQualityPolicy_Fixed) GetDigitsRequired() bool {
+	if x != nil {
+		return x.DigitsRequired
+	}
+	return false
+}
+
+func (x *PasswordQualityPolicy_Fixed) GetSpecialsRequired() bool {
+	if x != nil {
+		return x.SpecialsRequired
+	}
+	return false
+}
+
+func (x *PasswordQualityPolicy_Fixed) GetMinLength() int64 {
+	if x != nil {
+		return x.MinLength
+	}
+	return 0
+}
+
+// Smart complexity policy applies adaptive requirements based on character class diversity.
+type PasswordQualityPolicy_Smart struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// For passwords with one class of characters
+	OneClass int64 `protobuf:"varint,1,opt,name=one_class,json=oneClass,proto3" json:"one_class,omitempty"`
+	// For passwords with two classes of characters
+	TwoClasses int64 `protobuf:"varint,2,opt,name=two_classes,json=twoClasses,proto3" json:"two_classes,omitempty"`
+	// For passwords with three classes of characters
+	ThreeClasses int64 `protobuf:"varint,3,opt,name=three_classes,json=threeClasses,proto3" json:"three_classes,omitempty"`
+	// For passwords with all four classes of characters
+	FourClasses   int64 `protobuf:"varint,4,opt,name=four_classes,json=fourClasses,proto3" json:"four_classes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordQualityPolicy_Smart) Reset() {
+	*x = PasswordQualityPolicy_Smart{}
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordQualityPolicy_Smart) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordQualityPolicy_Smart) ProtoMessage() {}
+
+func (x *PasswordQualityPolicy_Smart) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordQualityPolicy_Smart.ProtoReflect.Descriptor instead.
+func (*PasswordQualityPolicy_Smart) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDescGZIP(), []int{4, 3}
+}
+
+func (x *PasswordQualityPolicy_Smart) GetOneClass() int64 {
+	if x != nil {
+		return x.OneClass
+	}
+	return 0
+}
+
+func (x *PasswordQualityPolicy_Smart) GetTwoClasses() int64 {
+	if x != nil {
+		return x.TwoClasses
+	}
+	return 0
+}
+
+func (x *PasswordQualityPolicy_Smart) GetThreeClasses() int64 {
+	if x != nil {
+		return x.ThreeClasses
+	}
+	return 0
+}
+
+func (x *PasswordQualityPolicy_Smart) GetFourClasses() int64 {
+	if x != nil {
+		return x.FourClasses
+	}
+	return 0
+}
+
 var File_yandex_cloud_organizationmanager_v1_idp_userpool_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
@@ -1232,7 +1437,8 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"PROCESSING\x10\x02\x12\t\n" +
 	"\x05VALID\x10\x03\x12\v\n" +
 	"\aINVALID\x10\x04B\v\n" +
-	"\tchallengeJ\x04\b\x03\x10\x04\"\xb5\x05\n" +
+	"\tchallengeJ\x04\b\x03\x10\x04\"\x94\n" +
+	"\n" +
 	"\x15PasswordQualityPolicy\x12#\n" +
 	"\rallow_similar\x18\x01 \x01(\bR\fallowSimilar\x12&\n" +
 	"\n" +
@@ -1241,7 +1447,9 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"min_length\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\tminLength\x12*\n" +
 	"\fmatch_length\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\vmatchLength\x12y\n" +
 	"\x10required_classes\x18\x05 \x01(\v2N.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClassesR\x0frequiredClasses\x12\x97\x01\n" +
-	"\x1cmin_length_by_class_settings\x18\x06 \x01(\v2W.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettingsR\x18minLengthByClassSettings\x1au\n" +
+	"\x1cmin_length_by_class_settings\x18\x06 \x01(\v2W.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettingsR\x18minLengthByClassSettings\x12\\\n" +
+	"\x05fixed\x18\a \x01(\v2D.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.FixedH\x00R\x05fixed\x12\\\n" +
+	"\x05smart\x18\b \x01(\v2D.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.SmartH\x00R\x05smart\x1au\n" +
 	"\x0fRequiredClasses\x12\x16\n" +
 	"\x06lowers\x18\x01 \x01(\bR\x06lowers\x12\x16\n" +
 	"\x06uppers\x18\x02 \x01(\bR\x06uppers\x12\x16\n" +
@@ -1250,7 +1458,21 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"\x18MinLengthByClassSettings\x12\x19\n" +
 	"\x03one\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\x03one\x12\x19\n" +
 	"\x03two\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\x03two\x12\x1d\n" +
-	"\x05three\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\x05three\"v\n" +
+	"\x05three\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\x05three\x1a\xd7\x01\n" +
+	"\x05Fixed\x12'\n" +
+	"\x0flowers_required\x18\x01 \x01(\bR\x0elowersRequired\x12'\n" +
+	"\x0fuppers_required\x18\x02 \x01(\bR\x0euppersRequired\x12'\n" +
+	"\x0fdigits_required\x18\x03 \x01(\bR\x0edigitsRequired\x12+\n" +
+	"\x11specials_required\x18\x04 \x01(\bR\x10specialsRequired\x12&\n" +
+	"\n" +
+	"min_length\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\tminLength\x1a\xb1\x01\n" +
+	"\x05Smart\x12$\n" +
+	"\tone_class\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\boneClass\x12(\n" +
+	"\vtwo_classes\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\n" +
+	"twoClasses\x12,\n" +
+	"\rthree_classes\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\fthreeClasses\x12*\n" +
+	"\ffour_classes\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\vfourClassesB\x13\n" +
+	"\x11complexity_policy\"v\n" +
 	"\x16PasswordLifetimePolicy\x12-\n" +
 	"\x0emin_days_count\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\fminDaysCount\x12-\n" +
 	"\x0emax_days_count\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\fmaxDaysCount\"\xa4\x01\n" +
@@ -1273,7 +1495,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_goTypes = []any{
 	(Userpool_Status)(0),                                   // 0: yandex.cloud.organizationmanager.v1.idp.Userpool.Status
 	(Domain_Status)(0),                                     // 1: yandex.cloud.organizationmanager.v1.idp.Domain.Status
@@ -1291,37 +1513,41 @@ var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_goTypes = []any{
 	(*DomainChallenge_DnsRecord)(nil),                      // 13: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord
 	(*PasswordQualityPolicy_RequiredClasses)(nil),          // 14: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClasses
 	(*PasswordQualityPolicy_MinLengthByClassSettings)(nil), // 15: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettings
-	(*timestamppb.Timestamp)(nil),                          // 16: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),                            // 17: google.protobuf.Duration
+	(*PasswordQualityPolicy_Fixed)(nil),                    // 16: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Fixed
+	(*PasswordQualityPolicy_Smart)(nil),                    // 17: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Smart
+	(*timestamppb.Timestamp)(nil),                          // 18: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                            // 19: google.protobuf.Duration
 }
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_depIdxs = []int32{
 	12, // 0: yandex.cloud.organizationmanager.v1.idp.Userpool.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.Userpool.LabelsEntry
-	16, // 1: yandex.cloud.organizationmanager.v1.idp.Userpool.created_at:type_name -> google.protobuf.Timestamp
-	16, // 2: yandex.cloud.organizationmanager.v1.idp.Userpool.updated_at:type_name -> google.protobuf.Timestamp
+	18, // 1: yandex.cloud.organizationmanager.v1.idp.Userpool.created_at:type_name -> google.protobuf.Timestamp
+	18, // 2: yandex.cloud.organizationmanager.v1.idp.Userpool.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: yandex.cloud.organizationmanager.v1.idp.Userpool.status:type_name -> yandex.cloud.organizationmanager.v1.idp.Userpool.Status
 	6,  // 4: yandex.cloud.organizationmanager.v1.idp.Userpool.user_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserSettings
 	9,  // 5: yandex.cloud.organizationmanager.v1.idp.Userpool.password_quality_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
 	10, // 6: yandex.cloud.organizationmanager.v1.idp.Userpool.password_lifetime_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
 	11, // 7: yandex.cloud.organizationmanager.v1.idp.Userpool.bruteforce_protection_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
 	1,  // 8: yandex.cloud.organizationmanager.v1.idp.Domain.status:type_name -> yandex.cloud.organizationmanager.v1.idp.Domain.Status
-	16, // 9: yandex.cloud.organizationmanager.v1.idp.Domain.created_at:type_name -> google.protobuf.Timestamp
-	16, // 10: yandex.cloud.organizationmanager.v1.idp.Domain.validated_at:type_name -> google.protobuf.Timestamp
+	18, // 9: yandex.cloud.organizationmanager.v1.idp.Domain.created_at:type_name -> google.protobuf.Timestamp
+	18, // 10: yandex.cloud.organizationmanager.v1.idp.Domain.validated_at:type_name -> google.protobuf.Timestamp
 	8,  // 11: yandex.cloud.organizationmanager.v1.idp.Domain.challenges:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge
-	16, // 12: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.created_at:type_name -> google.protobuf.Timestamp
-	16, // 13: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.updated_at:type_name -> google.protobuf.Timestamp
+	18, // 12: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.created_at:type_name -> google.protobuf.Timestamp
+	18, // 13: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.updated_at:type_name -> google.protobuf.Timestamp
 	2,  // 14: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.Type
 	3,  // 15: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.status:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.Status
 	13, // 16: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.dns_challenge:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord
 	14, // 17: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.required_classes:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClasses
 	15, // 18: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.min_length_by_class_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettings
-	17, // 19: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.window:type_name -> google.protobuf.Duration
-	17, // 20: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.block:type_name -> google.protobuf.Duration
-	4,  // 21: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.Type
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	16, // 19: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.fixed:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Fixed
+	17, // 20: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.smart:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Smart
+	19, // 21: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.window:type_name -> google.protobuf.Duration
+	19, // 22: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.block:type_name -> google.protobuf.Duration
+	4,  // 23: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.Type
+	24, // [24:24] is the sub-list for method output_type
+	24, // [24:24] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_init() }
@@ -1332,13 +1558,17 @@ func file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_init() {
 	file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[3].OneofWrappers = []any{
 		(*DomainChallenge_DnsChallenge)(nil),
 	}
+	file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[4].OneofWrappers = []any{
+		(*PasswordQualityPolicy_Fixed_)(nil),
+		(*PasswordQualityPolicy_Smart_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
