@@ -340,7 +340,9 @@ type ClusterConfig struct {
 	// Container custom environment dependencies
 	Dependencies *Dependencies `protobuf:"bytes,3,opt,name=dependencies,proto3" json:"dependencies,omitempty"`
 	// Metastore Cluster
-	Metastore     *Metastore `protobuf:"bytes,4,opt,name=metastore,proto3" json:"metastore,omitempty"`
+	Metastore *Metastore `protobuf:"bytes,4,opt,name=metastore,proto3" json:"metastore,omitempty"`
+	// Spark version. Format: "Major.Minor"
+	SparkVersion  string `protobuf:"bytes,5,opt,name=spark_version,json=sparkVersion,proto3" json:"spark_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -403,6 +405,13 @@ func (x *ClusterConfig) GetMetastore() *Metastore {
 	return nil
 }
 
+func (x *ClusterConfig) GetSparkVersion() string {
+	if x != nil {
+		return x.SparkVersion
+	}
+	return ""
+}
+
 type UpdateClusterConfigSpec struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ResourcePools *ResourcePools         `protobuf:"bytes,1,opt,name=resource_pools,json=resourcePools,proto3" json:"resource_pools,omitempty"`
@@ -411,7 +420,9 @@ type UpdateClusterConfigSpec struct {
 	// Container custom environment dependencies
 	Dependencies *Dependencies `protobuf:"bytes,3,opt,name=dependencies,proto3" json:"dependencies,omitempty"`
 	// Metastore Cluster
-	Metastore     *Metastore `protobuf:"bytes,4,opt,name=metastore,proto3" json:"metastore,omitempty"`
+	Metastore *Metastore `protobuf:"bytes,4,opt,name=metastore,proto3" json:"metastore,omitempty"`
+	// Spark version. Format: "Major.Minor"
+	SparkVersion  string `protobuf:"bytes,5,opt,name=spark_version,json=sparkVersion,proto3" json:"spark_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -472,6 +483,13 @@ func (x *UpdateClusterConfigSpec) GetMetastore() *Metastore {
 		return x.Metastore
 	}
 	return nil
+}
+
+func (x *UpdateClusterConfigSpec) GetSparkVersion() string {
+	if x != nil {
+		return x.SparkVersion
+	}
+	return ""
 }
 
 type HistoryServerConfig struct {
@@ -1173,17 +1191,19 @@ const file_yandex_cloud_spark_v1_cluster_proto_rawDesc = "" +
 	"\x05ERROR\x10\x04\x12\f\n" +
 	"\bSTOPPING\x10\x05\x12\v\n" +
 	"\aSTOPPED\x10\x06\x12\f\n" +
-	"\bSTARTING\x10\a\"\xbe\x02\n" +
+	"\bSTARTING\x10\a\"\xe3\x02\n" +
 	"\rClusterConfig\x12Q\n" +
 	"\x0eresource_pools\x18\x01 \x01(\v2$.yandex.cloud.spark.v1.ResourcePoolsB\x04\xe8\xc71\x01R\rresourcePools\x12Q\n" +
 	"\x0ehistory_server\x18\x02 \x01(\v2*.yandex.cloud.spark.v1.HistoryServerConfigR\rhistoryServer\x12G\n" +
 	"\fdependencies\x18\x03 \x01(\v2#.yandex.cloud.spark.v1.DependenciesR\fdependencies\x12>\n" +
-	"\tmetastore\x18\x04 \x01(\v2 .yandex.cloud.spark.v1.MetastoreR\tmetastore\"\xc2\x02\n" +
+	"\tmetastore\x18\x04 \x01(\v2 .yandex.cloud.spark.v1.MetastoreR\tmetastore\x12#\n" +
+	"\rspark_version\x18\x05 \x01(\tR\fsparkVersion\"\xe7\x02\n" +
 	"\x17UpdateClusterConfigSpec\x12K\n" +
 	"\x0eresource_pools\x18\x01 \x01(\v2$.yandex.cloud.spark.v1.ResourcePoolsR\rresourcePools\x12Q\n" +
 	"\x0ehistory_server\x18\x02 \x01(\v2*.yandex.cloud.spark.v1.HistoryServerConfigR\rhistoryServer\x12G\n" +
 	"\fdependencies\x18\x03 \x01(\v2#.yandex.cloud.spark.v1.DependenciesR\fdependencies\x12>\n" +
-	"\tmetastore\x18\x04 \x01(\v2 .yandex.cloud.spark.v1.MetastoreR\tmetastore\"/\n" +
+	"\tmetastore\x18\x04 \x01(\v2 .yandex.cloud.spark.v1.MetastoreR\tmetastore\x12#\n" +
+	"\rspark_version\x18\x05 \x01(\tR\fsparkVersion\"/\n" +
 	"\x13HistoryServerConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\"\\\n" +
 	"\rNetworkConfig\x12\x1d\n" +

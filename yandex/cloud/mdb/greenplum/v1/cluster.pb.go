@@ -699,8 +699,10 @@ type GreenplumConfig struct {
 	//
 	// After the cluster has been created, this setting cannot be changed.
 	AssignPublicIp bool `protobuf:"varint,6,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Full version
+	FullVersion   string `protobuf:"bytes,10,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GreenplumConfig) Reset() {
@@ -780,6 +782,13 @@ func (x *GreenplumConfig) GetAssignPublicIp() bool {
 		return x.AssignPublicIp
 	}
 	return false
+}
+
+func (x *GreenplumConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type Access struct {
@@ -1239,7 +1248,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\x8e\x03\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xb1\x03\n" +
 	"\x0fGreenplumConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12F\n" +
 	"\x13backup_window_start\x18\x02 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x12`\n" +
@@ -1247,7 +1256,9 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = "" +
 	"\x06access\x18\x03 \x01(\v2%.yandex.cloud.mdb.greenplum.v1.AccessR\x06access\x12!\n" +
 	"\azone_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
 	"\tsubnet_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
-	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIpJ\x04\b\a\x10\t\"\x8c\x01\n" +
+	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12!\n" +
+	"\ffull_version\x18\n" +
+	" \x01(\tR\vfullVersionJ\x04\b\a\x10\t\"\x8c\x01\n" +
 	"\x06Access\x12\x1b\n" +
 	"\tdata_lens\x18\x01 \x01(\bR\bdataLens\x12\x17\n" +
 	"\aweb_sql\x18\x02 \x01(\bR\x06webSql\x12#\n" +

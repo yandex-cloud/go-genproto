@@ -899,8 +899,10 @@ type InstanceGroup struct {
 	ApplicationLoadBalancerState *ApplicationLoadBalancerState `protobuf:"bytes,21,opt,name=application_load_balancer_state,json=applicationLoadBalancerState,proto3" json:"application_load_balancer_state,omitempty"`
 	// AutoHealingPolicy policy of the instance group.
 	AutoHealingPolicy *AutoHealingPolicy `protobuf:"bytes,22,opt,name=auto_healing_policy,json=autoHealingPolicy,proto3" json:"auto_healing_policy,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// List of disabled zones for the instance group.
+	DisableZoneStatuses []*DisableZoneStatus `protobuf:"bytes,23,rep,name=disable_zone_statuses,json=disableZoneStatuses,proto3" json:"disable_zone_statuses,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *InstanceGroup) Reset() {
@@ -1076,6 +1078,13 @@ func (x *InstanceGroup) GetApplicationLoadBalancerState() *ApplicationLoadBalanc
 func (x *InstanceGroup) GetAutoHealingPolicy() *AutoHealingPolicy {
 	if x != nil {
 		return x.AutoHealingPolicy
+	}
+	return nil
+}
+
+func (x *InstanceGroup) GetDisableZoneStatuses() []*DisableZoneStatus {
+	if x != nil {
+		return x.DisableZoneStatuses
 	}
 	return nil
 }
@@ -3464,6 +3473,62 @@ func (x *MetadataOptions) GetAwsV1HttpToken() MetadataOption {
 	return MetadataOption_METADATA_OPTION_UNSPECIFIED
 }
 
+// Status of the disabled zone.
+type DisableZoneStatus struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of zone.
+	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// Timestamp until which the zone will be disabled.
+	// If not present then zone will be disabled until it is removed through a separate call.
+	DisabledUntil *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=disabled_until,json=disabledUntil,proto3" json:"disabled_until,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableZoneStatus) Reset() {
+	*x = DisableZoneStatus{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableZoneStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableZoneStatus) ProtoMessage() {}
+
+func (x *DisableZoneStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableZoneStatus.ProtoReflect.Descriptor instead.
+func (*DisableZoneStatus) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *DisableZoneStatus) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
+func (x *DisableZoneStatus) GetDisabledUntil() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DisabledUntil
+	}
+	return nil
+}
+
 type ManagedInstancesState_Statuses struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Instance is being created.
@@ -3492,7 +3557,7 @@ type ManagedInstancesState_Statuses struct {
 
 func (x *ManagedInstancesState_Statuses) Reset() {
 	*x = ManagedInstancesState_Statuses{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3504,7 +3569,7 @@ func (x *ManagedInstancesState_Statuses) String() string {
 func (*ManagedInstancesState_Statuses) ProtoMessage() {}
 
 func (x *ManagedInstancesState_Statuses) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[34]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3628,7 +3693,7 @@ type ScalePolicy_AutoScale struct {
 
 func (x *ScalePolicy_AutoScale) Reset() {
 	*x = ScalePolicy_AutoScale{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3640,7 +3705,7 @@ func (x *ScalePolicy_AutoScale) String() string {
 func (*ScalePolicy_AutoScale) ProtoMessage() {}
 
 func (x *ScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[35]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3729,7 +3794,7 @@ type ScalePolicy_CpuUtilizationRule struct {
 
 func (x *ScalePolicy_CpuUtilizationRule) Reset() {
 	*x = ScalePolicy_CpuUtilizationRule{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3741,7 +3806,7 @@ func (x *ScalePolicy_CpuUtilizationRule) String() string {
 func (*ScalePolicy_CpuUtilizationRule) ProtoMessage() {}
 
 func (x *ScalePolicy_CpuUtilizationRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[36]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3787,7 +3852,7 @@ type ScalePolicy_CustomRule struct {
 
 func (x *ScalePolicy_CustomRule) Reset() {
 	*x = ScalePolicy_CustomRule{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3799,7 +3864,7 @@ func (x *ScalePolicy_CustomRule) String() string {
 func (*ScalePolicy_CustomRule) ProtoMessage() {}
 
 func (x *ScalePolicy_CustomRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[37]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3874,7 +3939,7 @@ type ScalePolicy_FixedScale struct {
 
 func (x *ScalePolicy_FixedScale) Reset() {
 	*x = ScalePolicy_FixedScale{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[38]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3886,7 +3951,7 @@ func (x *ScalePolicy_FixedScale) String() string {
 func (*ScalePolicy_FixedScale) ProtoMessage() {}
 
 func (x *ScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[38]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3924,7 +3989,7 @@ type AllocationPolicy_Zone struct {
 
 func (x *AllocationPolicy_Zone) Reset() {
 	*x = AllocationPolicy_Zone{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[40]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3936,7 +4001,7 @@ func (x *AllocationPolicy_Zone) String() string {
 func (*AllocationPolicy_Zone) ProtoMessage() {}
 
 func (x *AllocationPolicy_Zone) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[40]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3981,7 +4046,7 @@ type PlacementPolicy_HostAffinityRule struct {
 
 func (x *PlacementPolicy_HostAffinityRule) Reset() {
 	*x = PlacementPolicy_HostAffinityRule{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3993,7 +4058,7 @@ func (x *PlacementPolicy_HostAffinityRule) String() string {
 func (*PlacementPolicy_HostAffinityRule) ProtoMessage() {}
 
 func (x *PlacementPolicy_HostAffinityRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[43]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4052,7 +4117,7 @@ type AttachedDiskSpec_DiskSpec struct {
 
 func (x *AttachedDiskSpec_DiskSpec) Reset() {
 	*x = AttachedDiskSpec_DiskSpec{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4064,7 +4129,7 @@ func (x *AttachedDiskSpec_DiskSpec) String() string {
 func (*AttachedDiskSpec_DiskSpec) ProtoMessage() {}
 
 func (x *AttachedDiskSpec_DiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4161,7 +4226,7 @@ type HealthCheckSpec_TcpOptions struct {
 
 func (x *HealthCheckSpec_TcpOptions) Reset() {
 	*x = HealthCheckSpec_TcpOptions{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[47]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4173,7 +4238,7 @@ func (x *HealthCheckSpec_TcpOptions) String() string {
 func (*HealthCheckSpec_TcpOptions) ProtoMessage() {}
 
 func (x *HealthCheckSpec_TcpOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[47]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4208,7 +4273,7 @@ type HealthCheckSpec_HttpOptions struct {
 
 func (x *HealthCheckSpec_HttpOptions) Reset() {
 	*x = HealthCheckSpec_HttpOptions{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[48]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4220,7 +4285,7 @@ func (x *HealthCheckSpec_HttpOptions) String() string {
 func (*HealthCheckSpec_HttpOptions) ProtoMessage() {}
 
 func (x *HealthCheckSpec_HttpOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[48]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4254,7 +4319,7 @@ var File_yandex_cloud_compute_v1_instancegroup_instance_group_proto protoreflect
 
 const file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/compute/v1/instancegroup/instance_group.proto\x12%yandex.cloud.compute.v1.instancegroup\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe8\x0e\n" +
+	":yandex/cloud/compute/v1/instancegroup/instance_group.proto\x12%yandex.cloud.compute.v1.instancegroup\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd6\x0f\n" +
 	"\rInstanceGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -4278,7 +4343,8 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = 
 	"\x13deletion_protection\x18\x13 \x01(\bR\x12deletionProtection\x12\x87\x01\n" +
 	"\x1eapplication_load_balancer_spec\x18\x14 \x01(\v2B.yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpecR\x1bapplicationLoadBalancerSpec\x12\x8a\x01\n" +
 	"\x1fapplication_load_balancer_state\x18\x15 \x01(\v2C.yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerStateR\x1capplicationLoadBalancerState\x12h\n" +
-	"\x13auto_healing_policy\x18\x16 \x01(\v28.yandex.cloud.compute.v1.instancegroup.AutoHealingPolicyR\x11autoHealingPolicy\x1a9\n" +
+	"\x13auto_healing_policy\x18\x16 \x01(\v28.yandex.cloud.compute.v1.instancegroup.AutoHealingPolicyR\x11autoHealingPolicy\x12l\n" +
+	"\x15disable_zone_statuses\x18\x17 \x03(\v28.yandex.cloud.compute.v1.instancegroup.DisableZoneStatusR\x13disableZoneStatuses\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"o\n" +
@@ -4607,7 +4673,10 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = 
 	"\x11gce_http_endpoint\x18\x01 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0fgceHttpEndpoint\x12f\n" +
 	"\x14aws_v1_http_endpoint\x18\x02 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x11awsV1HttpEndpoint\x12[\n" +
 	"\x0egce_http_token\x18\x03 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\fgceHttpToken\x12`\n" +
-	"\x11aws_v1_http_token\x18\x04 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0eawsV1HttpToken*;\n" +
+	"\x11aws_v1_http_token\x18\x04 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0eawsV1HttpToken\"o\n" +
+	"\x11DisableZoneStatus\x12\x17\n" +
+	"\azone_id\x18\x01 \x01(\tR\x06zoneId\x12A\n" +
+	"\x0edisabled_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rdisabledUntil*;\n" +
 	"\tIpVersion\x12\x1a\n" +
 	"\x16IP_VERSION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04IPV4\x10\x01\x12\b\n" +
@@ -4631,7 +4700,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDescGZIP
 }
 
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
-var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
+var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_goTypes = []any{
 	(IpVersion)(0),                                 // 0: yandex.cloud.compute.v1.instancegroup.IpVersion
 	(MetadataOption)(0),                            // 1: yandex.cloud.compute.v1.instancegroup.MetadataOption
@@ -4680,28 +4749,29 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_goTypes = []
 	(*LogRecord)(nil),                              // 44: yandex.cloud.compute.v1.instancegroup.LogRecord
 	(*AutoHealingPolicy)(nil),                      // 45: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
 	(*MetadataOptions)(nil),                        // 46: yandex.cloud.compute.v1.instancegroup.MetadataOptions
-	nil,                                            // 47: yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
-	(*ManagedInstancesState_Statuses)(nil),         // 48: yandex.cloud.compute.v1.instancegroup.ManagedInstancesState.Statuses
-	(*ScalePolicy_AutoScale)(nil),                  // 49: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
-	(*ScalePolicy_CpuUtilizationRule)(nil),         // 50: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
-	(*ScalePolicy_CustomRule)(nil),                 // 51: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
-	(*ScalePolicy_FixedScale)(nil),                 // 52: yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
-	nil,                                            // 53: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
-	(*AllocationPolicy_Zone)(nil),                  // 54: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
-	nil,                                            // 55: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
-	nil,                                            // 56: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
-	(*PlacementPolicy_HostAffinityRule)(nil),       // 57: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule
-	(*AttachedDiskSpec_DiskSpec)(nil),              // 58: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
-	nil,                                            // 59: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
-	nil,                                            // 60: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
-	(*HealthCheckSpec_TcpOptions)(nil),             // 61: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
-	(*HealthCheckSpec_HttpOptions)(nil),            // 62: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
-	(*timestamppb.Timestamp)(nil),                  // 63: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),                    // 64: google.protobuf.Duration
+	(*DisableZoneStatus)(nil),                      // 47: yandex.cloud.compute.v1.instancegroup.DisableZoneStatus
+	nil,                                            // 48: yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
+	(*ManagedInstancesState_Statuses)(nil),         // 49: yandex.cloud.compute.v1.instancegroup.ManagedInstancesState.Statuses
+	(*ScalePolicy_AutoScale)(nil),                  // 50: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
+	(*ScalePolicy_CpuUtilizationRule)(nil),         // 51: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
+	(*ScalePolicy_CustomRule)(nil),                 // 52: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
+	(*ScalePolicy_FixedScale)(nil),                 // 53: yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
+	nil,                                            // 54: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
+	(*AllocationPolicy_Zone)(nil),                  // 55: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
+	nil,                                            // 56: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
+	nil,                                            // 57: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
+	(*PlacementPolicy_HostAffinityRule)(nil),       // 58: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule
+	(*AttachedDiskSpec_DiskSpec)(nil),              // 59: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
+	nil,                                            // 60: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
+	nil,                                            // 61: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
+	(*HealthCheckSpec_TcpOptions)(nil),             // 62: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
+	(*HealthCheckSpec_HttpOptions)(nil),            // 63: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
+	(*timestamppb.Timestamp)(nil),                  // 64: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                    // 65: google.protobuf.Duration
 }
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []int32{
-	63, // 0: yandex.cloud.compute.v1.instancegroup.InstanceGroup.created_at:type_name -> google.protobuf.Timestamp
-	47, // 1: yandex.cloud.compute.v1.instancegroup.InstanceGroup.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
+	64, // 0: yandex.cloud.compute.v1.instancegroup.InstanceGroup.created_at:type_name -> google.protobuf.Timestamp
+	48, // 1: yandex.cloud.compute.v1.instancegroup.InstanceGroup.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup.LabelsEntry
 	22, // 2: yandex.cloud.compute.v1.instancegroup.InstanceGroup.instance_template:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate
 	19, // 3: yandex.cloud.compute.v1.instancegroup.InstanceGroup.scale_policy:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy
 	20, // 4: yandex.cloud.compute.v1.instancegroup.InstanceGroup.deploy_policy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy
@@ -4715,77 +4785,79 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []
 	35, // 12: yandex.cloud.compute.v1.instancegroup.InstanceGroup.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
 	15, // 13: yandex.cloud.compute.v1.instancegroup.InstanceGroup.application_load_balancer_state:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerState
 	45, // 14: yandex.cloud.compute.v1.instancegroup.InstanceGroup.auto_healing_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
-	52, // 15: yandex.cloud.compute.v1.instancegroup.ScalePolicy.fixed_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
-	49, // 16: yandex.cloud.compute.v1.instancegroup.ScalePolicy.auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
-	49, // 17: yandex.cloud.compute.v1.instancegroup.ScalePolicy.test_auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
-	64, // 18: yandex.cloud.compute.v1.instancegroup.DeployPolicy.startup_duration:type_name -> google.protobuf.Duration
-	6,  // 19: yandex.cloud.compute.v1.instancegroup.DeployPolicy.strategy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy.Strategy
-	7,  // 20: yandex.cloud.compute.v1.instancegroup.DeployPolicy.minimal_action:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy.MinimalAction
-	54, // 21: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.zones:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
-	55, // 22: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
-	25, // 23: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.resources_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ResourcesSpec
-	56, // 24: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.metadata:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
-	26, // 25: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.boot_disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec
-	26, // 26: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.secondary_disk_specs:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec
-	27, // 27: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.network_interface_specs:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec
-	31, // 28: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.scheduling_policy:type_name -> yandex.cloud.compute.v1.instancegroup.SchedulingPolicy
-	32, // 29: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.network_settings:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkSettings
-	24, // 30: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.placement_policy:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy
-	23, // 31: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.filesystem_specs:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpec
-	46, // 32: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.metadata_options:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOptions
-	8,  // 33: yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpec.mode:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpec.Mode
-	57, // 34: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.host_affinity_rules:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule
-	10, // 35: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.mode:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.Mode
-	58, // 36: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
-	28, // 37: yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec
-	28, // 38: yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec
-	29, // 39: yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec
-	30, // 40: yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecordSpec
-	0,  // 41: yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec.ip_version:type_name -> yandex.cloud.compute.v1.instancegroup.IpVersion
-	30, // 42: yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecordSpec
-	11, // 43: yandex.cloud.compute.v1.instancegroup.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkSettings.Type
-	34, // 44: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.target_group_spec:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec
-	64, // 45: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
-	59, // 46: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
-	36, // 47: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.target_group_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec
-	64, // 48: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
-	60, // 49: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
-	38, // 50: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.health_check_specs:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec
-	64, // 51: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.max_checking_health_duration:type_name -> google.protobuf.Duration
-	64, // 52: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.interval:type_name -> google.protobuf.Duration
-	64, // 53: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.timeout:type_name -> google.protobuf.Duration
-	61, // 54: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.tcp_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
-	62, // 55: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.http_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
-	12, // 56: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance.Status
-	40, // 57: yandex.cloud.compute.v1.instancegroup.ManagedInstance.network_interfaces:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkInterface
-	63, // 58: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status_changed_at:type_name -> google.protobuf.Timestamp
-	41, // 59: yandex.cloud.compute.v1.instancegroup.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddress
-	41, // 60: yandex.cloud.compute.v1.instancegroup.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddress
-	42, // 61: yandex.cloud.compute.v1.instancegroup.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.instancegroup.OneToOneNat
-	43, // 62: yandex.cloud.compute.v1.instancegroup.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecord
-	0,  // 63: yandex.cloud.compute.v1.instancegroup.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.instancegroup.IpVersion
-	43, // 64: yandex.cloud.compute.v1.instancegroup.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecord
-	63, // 65: yandex.cloud.compute.v1.instancegroup.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	13, // 66: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy.auto_healing_action:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy.AutoHealingAction
-	1,  // 67: yandex.cloud.compute.v1.instancegroup.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
-	1,  // 68: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
-	1,  // 69: yandex.cloud.compute.v1.instancegroup.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
-	1,  // 70: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
-	64, // 71: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.measurement_duration:type_name -> google.protobuf.Duration
-	64, // 72: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.warmup_duration:type_name -> google.protobuf.Duration
-	64, // 73: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.stabilization_duration:type_name -> google.protobuf.Duration
-	50, // 74: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.cpu_utilization_rule:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
-	51, // 75: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.custom_rules:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
-	3,  // 76: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.auto_scale_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.AutoScaleType
-	4,  // 77: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.rule_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.RuleType
-	5,  // 78: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.metric_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.MetricType
-	53, // 79: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
-	9,  // 80: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.Operator
-	81, // [81:81] is the sub-list for method output_type
-	81, // [81:81] is the sub-list for method input_type
-	81, // [81:81] is the sub-list for extension type_name
-	81, // [81:81] is the sub-list for extension extendee
-	0,  // [0:81] is the sub-list for field type_name
+	47, // 15: yandex.cloud.compute.v1.instancegroup.InstanceGroup.disable_zone_statuses:type_name -> yandex.cloud.compute.v1.instancegroup.DisableZoneStatus
+	53, // 16: yandex.cloud.compute.v1.instancegroup.ScalePolicy.fixed_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.FixedScale
+	50, // 17: yandex.cloud.compute.v1.instancegroup.ScalePolicy.auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
+	50, // 18: yandex.cloud.compute.v1.instancegroup.ScalePolicy.test_auto_scale:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale
+	65, // 19: yandex.cloud.compute.v1.instancegroup.DeployPolicy.startup_duration:type_name -> google.protobuf.Duration
+	6,  // 20: yandex.cloud.compute.v1.instancegroup.DeployPolicy.strategy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy.Strategy
+	7,  // 21: yandex.cloud.compute.v1.instancegroup.DeployPolicy.minimal_action:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy.MinimalAction
+	55, // 22: yandex.cloud.compute.v1.instancegroup.AllocationPolicy.zones:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy.Zone
+	56, // 23: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.labels:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.LabelsEntry
+	25, // 24: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.resources_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ResourcesSpec
+	57, // 25: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.metadata:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate.MetadataEntry
+	26, // 26: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.boot_disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec
+	26, // 27: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.secondary_disk_specs:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec
+	27, // 28: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.network_interface_specs:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec
+	31, // 29: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.scheduling_policy:type_name -> yandex.cloud.compute.v1.instancegroup.SchedulingPolicy
+	32, // 30: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.network_settings:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkSettings
+	24, // 31: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.placement_policy:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy
+	23, // 32: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.filesystem_specs:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpec
+	46, // 33: yandex.cloud.compute.v1.instancegroup.InstanceTemplate.metadata_options:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOptions
+	8,  // 34: yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpec.mode:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedFilesystemSpec.Mode
+	58, // 35: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.host_affinity_rules:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule
+	10, // 36: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.mode:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.Mode
+	59, // 37: yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.instancegroup.AttachedDiskSpec.DiskSpec
+	28, // 38: yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec
+	28, // 39: yandex.cloud.compute.v1.instancegroup.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec
+	29, // 40: yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec
+	30, // 41: yandex.cloud.compute.v1.instancegroup.PrimaryAddressSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecordSpec
+	0,  // 42: yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec.ip_version:type_name -> yandex.cloud.compute.v1.instancegroup.IpVersion
+	30, // 43: yandex.cloud.compute.v1.instancegroup.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecordSpec
+	11, // 44: yandex.cloud.compute.v1.instancegroup.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkSettings.Type
+	34, // 45: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.target_group_spec:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec
+	65, // 46: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
+	60, // 47: yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.TargetGroupSpec.LabelsEntry
+	36, // 48: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.target_group_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec
+	65, // 49: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec.max_opening_traffic_duration:type_name -> google.protobuf.Duration
+	61, // 50: yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationTargetGroupSpec.LabelsEntry
+	38, // 51: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.health_check_specs:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec
+	65, // 52: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec.max_checking_health_duration:type_name -> google.protobuf.Duration
+	65, // 53: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.interval:type_name -> google.protobuf.Duration
+	65, // 54: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.timeout:type_name -> google.protobuf.Duration
+	62, // 55: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.tcp_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.TcpOptions
+	63, // 56: yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.http_options:type_name -> yandex.cloud.compute.v1.instancegroup.HealthCheckSpec.HttpOptions
+	12, // 57: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance.Status
+	40, // 58: yandex.cloud.compute.v1.instancegroup.ManagedInstance.network_interfaces:type_name -> yandex.cloud.compute.v1.instancegroup.NetworkInterface
+	64, // 59: yandex.cloud.compute.v1.instancegroup.ManagedInstance.status_changed_at:type_name -> google.protobuf.Timestamp
+	41, // 60: yandex.cloud.compute.v1.instancegroup.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddress
+	41, // 61: yandex.cloud.compute.v1.instancegroup.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.instancegroup.PrimaryAddress
+	42, // 62: yandex.cloud.compute.v1.instancegroup.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.instancegroup.OneToOneNat
+	43, // 63: yandex.cloud.compute.v1.instancegroup.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecord
+	0,  // 64: yandex.cloud.compute.v1.instancegroup.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.instancegroup.IpVersion
+	43, // 65: yandex.cloud.compute.v1.instancegroup.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.instancegroup.DnsRecord
+	64, // 66: yandex.cloud.compute.v1.instancegroup.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	13, // 67: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy.auto_healing_action:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy.AutoHealingAction
+	1,  // 68: yandex.cloud.compute.v1.instancegroup.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
+	1,  // 69: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
+	1,  // 70: yandex.cloud.compute.v1.instancegroup.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
+	1,  // 71: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
+	64, // 72: yandex.cloud.compute.v1.instancegroup.DisableZoneStatus.disabled_until:type_name -> google.protobuf.Timestamp
+	65, // 73: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.measurement_duration:type_name -> google.protobuf.Duration
+	65, // 74: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.warmup_duration:type_name -> google.protobuf.Duration
+	65, // 75: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.stabilization_duration:type_name -> google.protobuf.Duration
+	51, // 76: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.cpu_utilization_rule:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
+	52, // 77: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.custom_rules:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
+	3,  // 78: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.auto_scale_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.AutoScaleType
+	4,  // 79: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.rule_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.RuleType
+	5,  // 80: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.metric_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.MetricType
+	54, // 81: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
+	9,  // 82: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.Operator
+	83, // [83:83] is the sub-list for method output_type
+	83, // [83:83] is the sub-list for method input_type
+	83, // [83:83] is the sub-list for extension type_name
+	83, // [83:83] is the sub-list for extension extendee
+	0,  // [0:83] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() }
@@ -4801,7 +4873,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 		(*HealthCheckSpec_TcpOptions_)(nil),
 		(*HealthCheckSpec_HttpOptions_)(nil),
 	}
-	file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[44].OneofWrappers = []any{
+	file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_msgTypes[45].OneofWrappers = []any{
 		(*AttachedDiskSpec_DiskSpec_ImageId)(nil),
 		(*AttachedDiskSpec_DiskSpec_SnapshotId)(nil),
 	}
@@ -4811,7 +4883,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc), len(file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc)),
 			NumEnums:      14,
-			NumMessages:   49,
+			NumMessages:   50,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

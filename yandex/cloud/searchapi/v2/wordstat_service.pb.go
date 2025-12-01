@@ -598,6 +598,96 @@ func (x *GetRegionsDistributionResponse) GetResults() []*GetRegionsDistributionR
 	return nil
 }
 
+type GetRegionsTreeRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRegionsTreeRequest) Reset() {
+	*x = GetRegionsTreeRequest{}
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegionsTreeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegionsTreeRequest) ProtoMessage() {}
+
+func (x *GetRegionsTreeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegionsTreeRequest.ProtoReflect.Descriptor instead.
+func (*GetRegionsTreeRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetRegionsTreeRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+type GetRegionsTreeResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Region tree
+	Regions       []*GetRegionsTreeResponse_RegionInfo `protobuf:"bytes,1,rep,name=regions,proto3" json:"regions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRegionsTreeResponse) Reset() {
+	*x = GetRegionsTreeResponse{}
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegionsTreeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegionsTreeResponse) ProtoMessage() {}
+
+func (x *GetRegionsTreeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegionsTreeResponse.ProtoReflect.Descriptor instead.
+func (*GetRegionsTreeResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetRegionsTreeResponse) GetRegions() []*GetRegionsTreeResponse_RegionInfo {
+	if x != nil {
+		return x.Regions
+	}
+	return nil
+}
+
 type GetTopResponse_PhraseInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Keyword.
@@ -610,7 +700,7 @@ type GetTopResponse_PhraseInfo struct {
 
 func (x *GetTopResponse_PhraseInfo) Reset() {
 	*x = GetTopResponse_PhraseInfo{}
-	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -622,7 +712,7 @@ func (x *GetTopResponse_PhraseInfo) String() string {
 func (*GetTopResponse_PhraseInfo) ProtoMessage() {}
 
 func (x *GetTopResponse_PhraseInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -666,7 +756,7 @@ type GetDynamicsResponse_DynamicsInfo struct {
 
 func (x *GetDynamicsResponse_DynamicsInfo) Reset() {
 	*x = GetDynamicsResponse_DynamicsInfo{}
-	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -678,7 +768,7 @@ func (x *GetDynamicsResponse_DynamicsInfo) String() string {
 func (*GetDynamicsResponse_DynamicsInfo) ProtoMessage() {}
 
 func (x *GetDynamicsResponse_DynamicsInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -717,7 +807,7 @@ func (x *GetDynamicsResponse_DynamicsInfo) GetShare() float64 {
 
 type GetRegionsDistributionResponse_RegionInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// region ID
+	// Region ID
 	Region string `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
 	// Number of queries containing the given keyword.
 	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
@@ -731,7 +821,7 @@ type GetRegionsDistributionResponse_RegionInfo struct {
 
 func (x *GetRegionsDistributionResponse_RegionInfo) Reset() {
 	*x = GetRegionsDistributionResponse_RegionInfo{}
-	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -743,7 +833,7 @@ func (x *GetRegionsDistributionResponse_RegionInfo) String() string {
 func (*GetRegionsDistributionResponse_RegionInfo) ProtoMessage() {}
 
 func (x *GetRegionsDistributionResponse_RegionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -785,6 +875,69 @@ func (x *GetRegionsDistributionResponse_RegionInfo) GetAffinityIndex() float64 {
 		return x.AffinityIndex
 	}
 	return 0
+}
+
+type GetRegionsTreeResponse_RegionInfo struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Region ID.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Region name
+	Label string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	// Child regions.
+	Children      []*GetRegionsTreeResponse_RegionInfo `protobuf:"bytes,3,rep,name=children,proto3" json:"children,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRegionsTreeResponse_RegionInfo) Reset() {
+	*x = GetRegionsTreeResponse_RegionInfo{}
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegionsTreeResponse_RegionInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegionsTreeResponse_RegionInfo) ProtoMessage() {}
+
+func (x *GetRegionsTreeResponse_RegionInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegionsTreeResponse_RegionInfo.ProtoReflect.Descriptor instead.
+func (*GetRegionsTreeResponse_RegionInfo) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDescGZIP(), []int{7, 0}
+}
+
+func (x *GetRegionsTreeResponse_RegionInfo) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *GetRegionsTreeResponse_RegionInfo) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
+func (x *GetRegionsTreeResponse_RegionInfo) GetChildren() []*GetRegionsTreeResponse_RegionInfo {
+	if x != nil {
+		return x.Children
+	}
+	return nil
 }
 
 var File_yandex_cloud_searchapi_v2_wordstat_service_proto protoreflect.FileDescriptor
@@ -846,18 +999,28 @@ const file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc = "" +
 	"\x06region\x18\x01 \x01(\tR\x06region\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x14\n" +
 	"\x05share\x18\x03 \x01(\x01R\x05share\x12%\n" +
-	"\x0eaffinity_index\x18\x04 \x01(\x01R\raffinityIndex*i\n" +
+	"\x0eaffinity_index\x18\x04 \x01(\x01R\raffinityIndex\"4\n" +
+	"\x15GetRegionsTreeRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\"\xff\x01\n" +
+	"\x16GetRegionsTreeResponse\x12V\n" +
+	"\aregions\x18\x01 \x03(\v2<.yandex.cloud.searchapi.v2.GetRegionsTreeResponse.RegionInfoR\aregions\x1a\x8c\x01\n" +
+	"\n" +
+	"RegionInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05label\x18\x02 \x01(\tR\x05label\x12X\n" +
+	"\bchildren\x18\x03 \x03(\v2<.yandex.cloud.searchapi.v2.GetRegionsTreeResponse.RegionInfoR\bchildren*i\n" +
 	"\x06Device\x12\x16\n" +
 	"\x12DEVICE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"DEVICE_ALL\x10\x01\x12\x12\n" +
 	"\x0eDEVICE_DESKTOP\x10\x02\x12\x10\n" +
 	"\fDEVICE_PHONE\x10\x03\x12\x11\n" +
-	"\rDEVICE_TABLET\x10\x042\xd8\x03\n" +
+	"\rDEVICE_TABLET\x10\x042\xf8\x04\n" +
 	"\x0fWordstatService\x12\x82\x01\n" +
 	"\x06GetTop\x12(.yandex.cloud.searchapi.v2.GetTopRequest\x1a).yandex.cloud.searchapi.v2.GetTopResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v2/wordstat/topRequests\x12\x8e\x01\n" +
 	"\vGetDynamics\x12-.yandex.cloud.searchapi.v2.GetDynamicsRequest\x1a..yandex.cloud.searchapi.v2.GetDynamicsResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v2/wordstat/dynamics\x12\xae\x01\n" +
-	"\x16GetRegionsDistribution\x128.yandex.cloud.searchapi.v2.GetRegionsDistributionRequest\x1a9.yandex.cloud.searchapi.v2.GetRegionsDistributionResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v2/wordstat/regionsBe\n" +
+	"\x16GetRegionsDistribution\x128.yandex.cloud.searchapi.v2.GetRegionsDistributionRequest\x1a9.yandex.cloud.searchapi.v2.GetRegionsDistributionResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v2/wordstat/regions\x12\x9d\x01\n" +
+	"\x0eGetRegionsTree\x120.yandex.cloud.searchapi.v2.GetRegionsTreeRequest\x1a1.yandex.cloud.searchapi.v2.GetRegionsTreeResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v2/wordstat/getRegionsTreeBe\n" +
 	"\x1ayandex.cloud.api.search.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/searchapi/v2;searchapib\x06proto3"
 
 var (
@@ -873,7 +1036,7 @@ func file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDescGZIP() []byte 
 }
 
 var file_yandex_cloud_searchapi_v2_wordstat_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_searchapi_v2_wordstat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_searchapi_v2_wordstat_service_proto_goTypes = []any{
 	(Device)(0),                                       // 0: yandex.cloud.searchapi.v2.Device
 	(GetDynamicsRequest_Period)(0),                    // 1: yandex.cloud.searchapi.v2.GetDynamicsRequest.Period
@@ -884,35 +1047,42 @@ var file_yandex_cloud_searchapi_v2_wordstat_service_proto_goTypes = []any{
 	(*GetDynamicsResponse)(nil),                       // 6: yandex.cloud.searchapi.v2.GetDynamicsResponse
 	(*GetRegionsDistributionRequest)(nil),             // 7: yandex.cloud.searchapi.v2.GetRegionsDistributionRequest
 	(*GetRegionsDistributionResponse)(nil),            // 8: yandex.cloud.searchapi.v2.GetRegionsDistributionResponse
-	(*GetTopResponse_PhraseInfo)(nil),                 // 9: yandex.cloud.searchapi.v2.GetTopResponse.PhraseInfo
-	(*GetDynamicsResponse_DynamicsInfo)(nil),          // 10: yandex.cloud.searchapi.v2.GetDynamicsResponse.DynamicsInfo
-	(*GetRegionsDistributionResponse_RegionInfo)(nil), // 11: yandex.cloud.searchapi.v2.GetRegionsDistributionResponse.RegionInfo
-	(*timestamppb.Timestamp)(nil),                     // 12: google.protobuf.Timestamp
+	(*GetRegionsTreeRequest)(nil),                     // 9: yandex.cloud.searchapi.v2.GetRegionsTreeRequest
+	(*GetRegionsTreeResponse)(nil),                    // 10: yandex.cloud.searchapi.v2.GetRegionsTreeResponse
+	(*GetTopResponse_PhraseInfo)(nil),                 // 11: yandex.cloud.searchapi.v2.GetTopResponse.PhraseInfo
+	(*GetDynamicsResponse_DynamicsInfo)(nil),          // 12: yandex.cloud.searchapi.v2.GetDynamicsResponse.DynamicsInfo
+	(*GetRegionsDistributionResponse_RegionInfo)(nil), // 13: yandex.cloud.searchapi.v2.GetRegionsDistributionResponse.RegionInfo
+	(*GetRegionsTreeResponse_RegionInfo)(nil),         // 14: yandex.cloud.searchapi.v2.GetRegionsTreeResponse.RegionInfo
+	(*timestamppb.Timestamp)(nil),                     // 15: google.protobuf.Timestamp
 }
 var file_yandex_cloud_searchapi_v2_wordstat_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.searchapi.v2.GetTopRequest.devices:type_name -> yandex.cloud.searchapi.v2.Device
-	9,  // 1: yandex.cloud.searchapi.v2.GetTopResponse.results:type_name -> yandex.cloud.searchapi.v2.GetTopResponse.PhraseInfo
-	9,  // 2: yandex.cloud.searchapi.v2.GetTopResponse.associations:type_name -> yandex.cloud.searchapi.v2.GetTopResponse.PhraseInfo
+	11, // 1: yandex.cloud.searchapi.v2.GetTopResponse.results:type_name -> yandex.cloud.searchapi.v2.GetTopResponse.PhraseInfo
+	11, // 2: yandex.cloud.searchapi.v2.GetTopResponse.associations:type_name -> yandex.cloud.searchapi.v2.GetTopResponse.PhraseInfo
 	1,  // 3: yandex.cloud.searchapi.v2.GetDynamicsRequest.period:type_name -> yandex.cloud.searchapi.v2.GetDynamicsRequest.Period
-	12, // 4: yandex.cloud.searchapi.v2.GetDynamicsRequest.from_date:type_name -> google.protobuf.Timestamp
-	12, // 5: yandex.cloud.searchapi.v2.GetDynamicsRequest.to_date:type_name -> google.protobuf.Timestamp
+	15, // 4: yandex.cloud.searchapi.v2.GetDynamicsRequest.from_date:type_name -> google.protobuf.Timestamp
+	15, // 5: yandex.cloud.searchapi.v2.GetDynamicsRequest.to_date:type_name -> google.protobuf.Timestamp
 	0,  // 6: yandex.cloud.searchapi.v2.GetDynamicsRequest.devices:type_name -> yandex.cloud.searchapi.v2.Device
-	10, // 7: yandex.cloud.searchapi.v2.GetDynamicsResponse.results:type_name -> yandex.cloud.searchapi.v2.GetDynamicsResponse.DynamicsInfo
+	12, // 7: yandex.cloud.searchapi.v2.GetDynamicsResponse.results:type_name -> yandex.cloud.searchapi.v2.GetDynamicsResponse.DynamicsInfo
 	2,  // 8: yandex.cloud.searchapi.v2.GetRegionsDistributionRequest.region:type_name -> yandex.cloud.searchapi.v2.GetRegionsDistributionRequest.Region
 	0,  // 9: yandex.cloud.searchapi.v2.GetRegionsDistributionRequest.devices:type_name -> yandex.cloud.searchapi.v2.Device
-	11, // 10: yandex.cloud.searchapi.v2.GetRegionsDistributionResponse.results:type_name -> yandex.cloud.searchapi.v2.GetRegionsDistributionResponse.RegionInfo
-	12, // 11: yandex.cloud.searchapi.v2.GetDynamicsResponse.DynamicsInfo.date:type_name -> google.protobuf.Timestamp
-	3,  // 12: yandex.cloud.searchapi.v2.WordstatService.GetTop:input_type -> yandex.cloud.searchapi.v2.GetTopRequest
-	5,  // 13: yandex.cloud.searchapi.v2.WordstatService.GetDynamics:input_type -> yandex.cloud.searchapi.v2.GetDynamicsRequest
-	7,  // 14: yandex.cloud.searchapi.v2.WordstatService.GetRegionsDistribution:input_type -> yandex.cloud.searchapi.v2.GetRegionsDistributionRequest
-	4,  // 15: yandex.cloud.searchapi.v2.WordstatService.GetTop:output_type -> yandex.cloud.searchapi.v2.GetTopResponse
-	6,  // 16: yandex.cloud.searchapi.v2.WordstatService.GetDynamics:output_type -> yandex.cloud.searchapi.v2.GetDynamicsResponse
-	8,  // 17: yandex.cloud.searchapi.v2.WordstatService.GetRegionsDistribution:output_type -> yandex.cloud.searchapi.v2.GetRegionsDistributionResponse
-	15, // [15:18] is the sub-list for method output_type
-	12, // [12:15] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	13, // 10: yandex.cloud.searchapi.v2.GetRegionsDistributionResponse.results:type_name -> yandex.cloud.searchapi.v2.GetRegionsDistributionResponse.RegionInfo
+	14, // 11: yandex.cloud.searchapi.v2.GetRegionsTreeResponse.regions:type_name -> yandex.cloud.searchapi.v2.GetRegionsTreeResponse.RegionInfo
+	15, // 12: yandex.cloud.searchapi.v2.GetDynamicsResponse.DynamicsInfo.date:type_name -> google.protobuf.Timestamp
+	14, // 13: yandex.cloud.searchapi.v2.GetRegionsTreeResponse.RegionInfo.children:type_name -> yandex.cloud.searchapi.v2.GetRegionsTreeResponse.RegionInfo
+	3,  // 14: yandex.cloud.searchapi.v2.WordstatService.GetTop:input_type -> yandex.cloud.searchapi.v2.GetTopRequest
+	5,  // 15: yandex.cloud.searchapi.v2.WordstatService.GetDynamics:input_type -> yandex.cloud.searchapi.v2.GetDynamicsRequest
+	7,  // 16: yandex.cloud.searchapi.v2.WordstatService.GetRegionsDistribution:input_type -> yandex.cloud.searchapi.v2.GetRegionsDistributionRequest
+	9,  // 17: yandex.cloud.searchapi.v2.WordstatService.GetRegionsTree:input_type -> yandex.cloud.searchapi.v2.GetRegionsTreeRequest
+	4,  // 18: yandex.cloud.searchapi.v2.WordstatService.GetTop:output_type -> yandex.cloud.searchapi.v2.GetTopResponse
+	6,  // 19: yandex.cloud.searchapi.v2.WordstatService.GetDynamics:output_type -> yandex.cloud.searchapi.v2.GetDynamicsResponse
+	8,  // 20: yandex.cloud.searchapi.v2.WordstatService.GetRegionsDistribution:output_type -> yandex.cloud.searchapi.v2.GetRegionsDistributionResponse
+	10, // 21: yandex.cloud.searchapi.v2.WordstatService.GetRegionsTree:output_type -> yandex.cloud.searchapi.v2.GetRegionsTreeResponse
+	18, // [18:22] is the sub-list for method output_type
+	14, // [14:18] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_wordstat_service_proto_init() }
@@ -926,7 +1096,7 @@ func file_yandex_cloud_searchapi_v2_wordstat_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc), len(file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   9,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

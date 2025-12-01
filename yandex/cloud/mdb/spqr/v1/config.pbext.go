@@ -110,6 +110,18 @@ func (m *RouterSettings) SetPreferSameAvailabilityZone(v *wrapperspb.BoolValue) 
 	m.PreferSameAvailabilityZone = v
 }
 
+func (m *RouterSettings) SetEnhancedMultishardProcessing(v *wrapperspb.BoolValue) {
+	m.EnhancedMultishardProcessing = v
+}
+
+func (m *RouterSettings) SetDefaultTargetSessionAttrs(v RouterSettings_TargetSessionAttrs) {
+	m.DefaultTargetSessionAttrs = v
+}
+
+func (m *RouterSettings) SetDefaultCommitStrategy(v RouterSettings_CommitStrategy) {
+	m.DefaultCommitStrategy = v
+}
+
 func (m *Resources) SetResourcePresetId(v string) {
 	m.ResourcePresetId = v
 }

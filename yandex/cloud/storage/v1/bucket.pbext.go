@@ -493,3 +493,55 @@ func (m *BucketAllowedPrivateEndpoints) SetEnabled(v bool) {
 func (m *BucketAllowedPrivateEndpoints) SetPrivateEndpoints(v []string) {
 	m.PrivateEndpoints = v
 }
+
+func (m *InventoryConfiguration) SetId(v string) {
+	m.Id = v
+}
+
+func (m *InventoryConfiguration) SetDestination(v *InventoryConfiguration_InventoryDestination) {
+	m.Destination = v
+}
+
+func (m *InventoryConfiguration) SetIncludedObjectVersions(v InventoryConfiguration_IncludedObjectVersions) {
+	m.IncludedObjectVersions = v
+}
+
+func (m *InventoryConfiguration) SetIsEnabled(v bool) {
+	m.IsEnabled = v
+}
+
+func (m *InventoryConfiguration) SetSchedule(v *InventoryConfiguration_InventorySchedule) {
+	m.Schedule = v
+}
+
+func (m *InventoryConfiguration) SetFilter(v *InventoryConfiguration_InventoryFilter) {
+	m.Filter = v
+}
+
+func (m *InventoryConfiguration) SetOptionalFields(v []InventoryConfiguration_OptionalField) {
+	m.OptionalFields = v
+}
+
+func (m *InventoryConfiguration_InventoryBucketDestination) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *InventoryConfiguration_InventoryBucketDestination) SetFormat(v InventoryConfiguration_InventoryBucketDestination_Format) {
+	m.Format = v
+}
+
+func (m *InventoryConfiguration_InventoryBucketDestination) SetPrefix(v *wrapperspb.StringValue) {
+	m.Prefix = v
+}
+
+func (m *InventoryConfiguration_InventoryDestination) SetBucketDestination(v *InventoryConfiguration_InventoryBucketDestination) {
+	m.BucketDestination = v
+}
+
+func (m *InventoryConfiguration_InventorySchedule) SetFrequency(v InventoryConfiguration_InventorySchedule_Frequency) {
+	m.Frequency = v
+}
+
+func (m *InventoryConfiguration_InventoryFilter) SetPrefix(v string) {
+	m.Prefix = v
+}

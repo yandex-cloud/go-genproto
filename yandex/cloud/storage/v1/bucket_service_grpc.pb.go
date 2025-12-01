@@ -21,18 +21,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BucketService_List_FullMethodName                 = "/yandex.cloud.storage.v1.BucketService/List"
-	BucketService_Get_FullMethodName                  = "/yandex.cloud.storage.v1.BucketService/Get"
-	BucketService_Create_FullMethodName               = "/yandex.cloud.storage.v1.BucketService/Create"
-	BucketService_Update_FullMethodName               = "/yandex.cloud.storage.v1.BucketService/Update"
-	BucketService_Delete_FullMethodName               = "/yandex.cloud.storage.v1.BucketService/Delete"
-	BucketService_GetStats_FullMethodName             = "/yandex.cloud.storage.v1.BucketService/GetStats"
-	BucketService_GetHTTPSConfig_FullMethodName       = "/yandex.cloud.storage.v1.BucketService/GetHTTPSConfig"
-	BucketService_SetHTTPSConfig_FullMethodName       = "/yandex.cloud.storage.v1.BucketService/SetHTTPSConfig"
-	BucketService_DeleteHTTPSConfig_FullMethodName    = "/yandex.cloud.storage.v1.BucketService/DeleteHTTPSConfig"
-	BucketService_SetAccessBindings_FullMethodName    = "/yandex.cloud.storage.v1.BucketService/SetAccessBindings"
-	BucketService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.storage.v1.BucketService/UpdateAccessBindings"
-	BucketService_ListAccessBindings_FullMethodName   = "/yandex.cloud.storage.v1.BucketService/ListAccessBindings"
+	BucketService_List_FullMethodName                         = "/yandex.cloud.storage.v1.BucketService/List"
+	BucketService_Get_FullMethodName                          = "/yandex.cloud.storage.v1.BucketService/Get"
+	BucketService_Create_FullMethodName                       = "/yandex.cloud.storage.v1.BucketService/Create"
+	BucketService_Update_FullMethodName                       = "/yandex.cloud.storage.v1.BucketService/Update"
+	BucketService_Delete_FullMethodName                       = "/yandex.cloud.storage.v1.BucketService/Delete"
+	BucketService_GetStats_FullMethodName                     = "/yandex.cloud.storage.v1.BucketService/GetStats"
+	BucketService_GetHTTPSConfig_FullMethodName               = "/yandex.cloud.storage.v1.BucketService/GetHTTPSConfig"
+	BucketService_SetHTTPSConfig_FullMethodName               = "/yandex.cloud.storage.v1.BucketService/SetHTTPSConfig"
+	BucketService_DeleteHTTPSConfig_FullMethodName            = "/yandex.cloud.storage.v1.BucketService/DeleteHTTPSConfig"
+	BucketService_SetAccessBindings_FullMethodName            = "/yandex.cloud.storage.v1.BucketService/SetAccessBindings"
+	BucketService_UpdateAccessBindings_FullMethodName         = "/yandex.cloud.storage.v1.BucketService/UpdateAccessBindings"
+	BucketService_ListAccessBindings_FullMethodName           = "/yandex.cloud.storage.v1.BucketService/ListAccessBindings"
+	BucketService_CreateInventoryConfiguration_FullMethodName = "/yandex.cloud.storage.v1.BucketService/CreateInventoryConfiguration"
+	BucketService_GetInventoryConfiguration_FullMethodName    = "/yandex.cloud.storage.v1.BucketService/GetInventoryConfiguration"
+	BucketService_DeleteInventoryConfiguration_FullMethodName = "/yandex.cloud.storage.v1.BucketService/DeleteInventoryConfiguration"
+	BucketService_ListInventoryConfigurations_FullMethodName  = "/yandex.cloud.storage.v1.BucketService/ListInventoryConfigurations"
 )
 
 // BucketServiceClient is the client API for BucketService service.
@@ -81,6 +85,14 @@ type BucketServiceClient interface {
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists access bindings for the specified bucket.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Create/Update an inventory configuration with the corresponding ID
+	CreateInventoryConfiguration(ctx context.Context, in *CreateBucketInventoryConfigurationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Get an inventory configuration with the corresponding ID
+	GetInventoryConfiguration(ctx context.Context, in *GetBucketInventoryConfigurationRequest, opts ...grpc.CallOption) (*InventoryConfiguration, error)
+	// Delete an inventory configuration with the corresponding ID
+	DeleteInventoryConfiguration(ctx context.Context, in *DeleteBucketInventoryConfigurationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Listing inventory configurations
+	ListInventoryConfigurations(ctx context.Context, in *ListBucketInventoryConfigurationsRequest, opts ...grpc.CallOption) (*ListBucketInventoryConfigurationsResponse, error)
 }
 
 type bucketServiceClient struct {
@@ -211,6 +223,46 @@ func (c *bucketServiceClient) ListAccessBindings(ctx context.Context, in *access
 	return out, nil
 }
 
+func (c *bucketServiceClient) CreateInventoryConfiguration(ctx context.Context, in *CreateBucketInventoryConfigurationRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, BucketService_CreateInventoryConfiguration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bucketServiceClient) GetInventoryConfiguration(ctx context.Context, in *GetBucketInventoryConfigurationRequest, opts ...grpc.CallOption) (*InventoryConfiguration, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InventoryConfiguration)
+	err := c.cc.Invoke(ctx, BucketService_GetInventoryConfiguration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bucketServiceClient) DeleteInventoryConfiguration(ctx context.Context, in *DeleteBucketInventoryConfigurationRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, BucketService_DeleteInventoryConfiguration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bucketServiceClient) ListInventoryConfigurations(ctx context.Context, in *ListBucketInventoryConfigurationsRequest, opts ...grpc.CallOption) (*ListBucketInventoryConfigurationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBucketInventoryConfigurationsResponse)
+	err := c.cc.Invoke(ctx, BucketService_ListInventoryConfigurations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BucketServiceServer is the server API for BucketService service.
 // All implementations should embed UnimplementedBucketServiceServer
 // for forward compatibility.
@@ -257,6 +309,14 @@ type BucketServiceServer interface {
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 	// Lists access bindings for the specified bucket.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Create/Update an inventory configuration with the corresponding ID
+	CreateInventoryConfiguration(context.Context, *CreateBucketInventoryConfigurationRequest) (*operation.Operation, error)
+	// Get an inventory configuration with the corresponding ID
+	GetInventoryConfiguration(context.Context, *GetBucketInventoryConfigurationRequest) (*InventoryConfiguration, error)
+	// Delete an inventory configuration with the corresponding ID
+	DeleteInventoryConfiguration(context.Context, *DeleteBucketInventoryConfigurationRequest) (*operation.Operation, error)
+	// Listing inventory configurations
+	ListInventoryConfigurations(context.Context, *ListBucketInventoryConfigurationsRequest) (*ListBucketInventoryConfigurationsResponse, error)
 }
 
 // UnimplementedBucketServiceServer should be embedded to have
@@ -301,6 +361,18 @@ func (UnimplementedBucketServiceServer) UpdateAccessBindings(context.Context, *a
 }
 func (UnimplementedBucketServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedBucketServiceServer) CreateInventoryConfiguration(context.Context, *CreateBucketInventoryConfigurationRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInventoryConfiguration not implemented")
+}
+func (UnimplementedBucketServiceServer) GetInventoryConfiguration(context.Context, *GetBucketInventoryConfigurationRequest) (*InventoryConfiguration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInventoryConfiguration not implemented")
+}
+func (UnimplementedBucketServiceServer) DeleteInventoryConfiguration(context.Context, *DeleteBucketInventoryConfigurationRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteInventoryConfiguration not implemented")
+}
+func (UnimplementedBucketServiceServer) ListInventoryConfigurations(context.Context, *ListBucketInventoryConfigurationsRequest) (*ListBucketInventoryConfigurationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListInventoryConfigurations not implemented")
 }
 func (UnimplementedBucketServiceServer) testEmbeddedByValue() {}
 
@@ -538,6 +610,78 @@ func _BucketService_ListAccessBindings_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BucketService_CreateInventoryConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBucketInventoryConfigurationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServiceServer).CreateInventoryConfiguration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BucketService_CreateInventoryConfiguration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServiceServer).CreateInventoryConfiguration(ctx, req.(*CreateBucketInventoryConfigurationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BucketService_GetInventoryConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBucketInventoryConfigurationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServiceServer).GetInventoryConfiguration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BucketService_GetInventoryConfiguration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServiceServer).GetInventoryConfiguration(ctx, req.(*GetBucketInventoryConfigurationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BucketService_DeleteInventoryConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBucketInventoryConfigurationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServiceServer).DeleteInventoryConfiguration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BucketService_DeleteInventoryConfiguration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServiceServer).DeleteInventoryConfiguration(ctx, req.(*DeleteBucketInventoryConfigurationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BucketService_ListInventoryConfigurations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBucketInventoryConfigurationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServiceServer).ListInventoryConfigurations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BucketService_ListInventoryConfigurations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServiceServer).ListInventoryConfigurations(ctx, req.(*ListBucketInventoryConfigurationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BucketService_ServiceDesc is the grpc.ServiceDesc for BucketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -592,6 +736,22 @@ var BucketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAccessBindings",
 			Handler:    _BucketService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "CreateInventoryConfiguration",
+			Handler:    _BucketService_CreateInventoryConfiguration_Handler,
+		},
+		{
+			MethodName: "GetInventoryConfiguration",
+			Handler:    _BucketService_GetInventoryConfiguration_Handler,
+		},
+		{
+			MethodName: "DeleteInventoryConfiguration",
+			Handler:    _BucketService_DeleteInventoryConfiguration_Handler,
+		},
+		{
+			MethodName: "ListInventoryConfigurations",
+			Handler:    _BucketService_ListInventoryConfigurations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

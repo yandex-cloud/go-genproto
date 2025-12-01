@@ -294,18 +294,6 @@ func (m *ClickhouseConfig) SetRestoreThreads(v *wrapperspb.Int64Value) {
 	m.RestoreThreads = v
 }
 
-func (m *ClickhouseConfig) SetVectorSimilarityIndexCacheSize(v *wrapperspb.Int64Value) {
-	m.VectorSimilarityIndexCacheSize = v
-}
-
-func (m *ClickhouseConfig) SetVectorSimilarityIndexCacheMaxEntries(v *wrapperspb.Int64Value) {
-	m.VectorSimilarityIndexCacheMaxEntries = v
-}
-
-func (m *ClickhouseConfig) SetMaxBuildVectorSimilarityIndexThreadPoolSize(v *wrapperspb.Int64Value) {
-	m.MaxBuildVectorSimilarityIndexThreadPoolSize = v
-}
-
 func (m *ClickhouseConfig) SetMergeTree(v *ClickhouseConfig_MergeTree) {
 	m.MergeTree = v
 }

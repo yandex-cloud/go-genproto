@@ -42,6 +42,8 @@ const (
 	InstanceGroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/UpdateAccessBindings"
 	InstanceGroupService_ResumeProcesses_FullMethodName      = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ResumeProcesses"
 	InstanceGroupService_PauseProcesses_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/PauseProcesses"
+	InstanceGroupService_DisableZones_FullMethodName         = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/DisableZones"
+	InstanceGroupService_EnableZones_FullMethodName          = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/EnableZones"
 )
 
 // InstanceGroupServiceClient is the client API for InstanceGroupService service.
@@ -102,6 +104,10 @@ type InstanceGroupServiceClient interface {
 	// Pauses all processes regarding management of the specified instance group,
 	// i.e. scaling, checking instances' health, auto-healing and updating them. Running instances are not stopped.
 	PauseProcesses(ctx context.Context, in *PauseInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Disable zones for the specified instance group.
+	DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Enable zones for the specified instance group.
+	EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type instanceGroupServiceClient struct {
@@ -322,6 +328,26 @@ func (c *instanceGroupServiceClient) PauseProcesses(ctx context.Context, in *Pau
 	return out, nil
 }
 
+func (c *instanceGroupServiceClient) DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_DisableZones_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_EnableZones_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InstanceGroupServiceServer is the server API for InstanceGroupService service.
 // All implementations should embed UnimplementedInstanceGroupServiceServer
 // for forward compatibility.
@@ -380,6 +406,10 @@ type InstanceGroupServiceServer interface {
 	// Pauses all processes regarding management of the specified instance group,
 	// i.e. scaling, checking instances' health, auto-healing and updating them. Running instances are not stopped.
 	PauseProcesses(context.Context, *PauseInstanceGroupProcessesRequest) (*operation.Operation, error)
+	// Disable zones for the specified instance group.
+	DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error)
+	// Enable zones for the specified instance group.
+	EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error)
 }
 
 // UnimplementedInstanceGroupServiceServer should be embedded to have
@@ -451,6 +481,12 @@ func (UnimplementedInstanceGroupServiceServer) ResumeProcesses(context.Context, 
 }
 func (UnimplementedInstanceGroupServiceServer) PauseProcesses(context.Context, *PauseInstanceGroupProcessesRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PauseProcesses not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DisableZones not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableZones not implemented")
 }
 func (UnimplementedInstanceGroupServiceServer) testEmbeddedByValue() {}
 
@@ -850,6 +886,42 @@ func _InstanceGroupService_PauseProcesses_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceGroupService_DisableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableZonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).DisableZones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_DisableZones_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).DisableZones(ctx, req.(*DisableZonesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_EnableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableZonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).EnableZones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_EnableZones_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).EnableZones(ctx, req.(*EnableZonesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InstanceGroupService_ServiceDesc is the grpc.ServiceDesc for InstanceGroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -940,6 +1012,14 @@ var InstanceGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PauseProcesses",
 			Handler:    _InstanceGroupService_PauseProcesses_Handler,
+		},
+		{
+			MethodName: "DisableZones",
+			Handler:    _InstanceGroupService_DisableZones_Handler,
+		},
+		{
+			MethodName: "EnableZones",
+			Handler:    _InstanceGroupService_EnableZones_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

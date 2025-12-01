@@ -171,6 +171,10 @@ func (m *ClusterConfig) SetModules(v *ValkeyModules) {
 	m.Modules = v
 }
 
+func (m *ClusterConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }

@@ -22,6 +22,7 @@ const (
 	WordstatService_GetTop_FullMethodName                 = "/yandex.cloud.searchapi.v2.WordstatService/GetTop"
 	WordstatService_GetDynamics_FullMethodName            = "/yandex.cloud.searchapi.v2.WordstatService/GetDynamics"
 	WordstatService_GetRegionsDistribution_FullMethodName = "/yandex.cloud.searchapi.v2.WordstatService/GetRegionsDistribution"
+	WordstatService_GetRegionsTree_FullMethodName         = "/yandex.cloud.searchapi.v2.WordstatService/GetRegionsTree"
 )
 
 // WordstatServiceClient is the client API for WordstatService service.
@@ -40,6 +41,9 @@ type WordstatServiceClient interface {
 	// Not implemented.
 	// The method returns the distribution of the number of queries containing the given keyword globally by region for the last 30 days.
 	GetRegionsDistribution(ctx context.Context, in *GetRegionsDistributionRequest, opts ...grpc.CallOption) (*GetRegionsDistributionResponse, error)
+	// Not implemented.
+	// The method method returns a tree of Wordstat-supported regions.
+	GetRegionsTree(ctx context.Context, in *GetRegionsTreeRequest, opts ...grpc.CallOption) (*GetRegionsTreeResponse, error)
 }
 
 type wordstatServiceClient struct {
@@ -80,6 +84,16 @@ func (c *wordstatServiceClient) GetRegionsDistribution(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *wordstatServiceClient) GetRegionsTree(ctx context.Context, in *GetRegionsTreeRequest, opts ...grpc.CallOption) (*GetRegionsTreeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRegionsTreeResponse)
+	err := c.cc.Invoke(ctx, WordstatService_GetRegionsTree_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WordstatServiceServer is the server API for WordstatService service.
 // All implementations should embed UnimplementedWordstatServiceServer
 // for forward compatibility.
@@ -96,6 +110,9 @@ type WordstatServiceServer interface {
 	// Not implemented.
 	// The method returns the distribution of the number of queries containing the given keyword globally by region for the last 30 days.
 	GetRegionsDistribution(context.Context, *GetRegionsDistributionRequest) (*GetRegionsDistributionResponse, error)
+	// Not implemented.
+	// The method method returns a tree of Wordstat-supported regions.
+	GetRegionsTree(context.Context, *GetRegionsTreeRequest) (*GetRegionsTreeResponse, error)
 }
 
 // UnimplementedWordstatServiceServer should be embedded to have
@@ -113,6 +130,9 @@ func (UnimplementedWordstatServiceServer) GetDynamics(context.Context, *GetDynam
 }
 func (UnimplementedWordstatServiceServer) GetRegionsDistribution(context.Context, *GetRegionsDistributionRequest) (*GetRegionsDistributionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRegionsDistribution not implemented")
+}
+func (UnimplementedWordstatServiceServer) GetRegionsTree(context.Context, *GetRegionsTreeRequest) (*GetRegionsTreeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRegionsTree not implemented")
 }
 func (UnimplementedWordstatServiceServer) testEmbeddedByValue() {}
 
@@ -188,6 +208,24 @@ func _WordstatService_GetRegionsDistribution_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WordstatService_GetRegionsTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRegionsTreeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WordstatServiceServer).GetRegionsTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WordstatService_GetRegionsTree_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WordstatServiceServer).GetRegionsTree(ctx, req.(*GetRegionsTreeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WordstatService_ServiceDesc is the grpc.ServiceDesc for WordstatService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +244,10 @@ var WordstatService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRegionsDistribution",
 			Handler:    _WordstatService_GetRegionsDistribution_Handler,
+		},
+		{
+			MethodName: "GetRegionsTree",
+			Handler:    _WordstatService_GetRegionsTree_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

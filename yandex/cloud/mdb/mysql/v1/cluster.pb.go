@@ -715,8 +715,10 @@ type ClusterConfig struct {
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
 	// Disk size autoscaling
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,9,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Full version
+	FullVersion   string `protobuf:"bytes,11,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfig) Reset() {
@@ -830,6 +832,13 @@ func (x *ClusterConfig) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
 		return x.DiskSizeAutoscaling
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type isClusterConfig_MysqlConfig interface {
@@ -1390,7 +1399,7 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xd8\x06\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xfb\x06\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12`\n" +
 	"\x10mysql_config_5_7\x18\x02 \x01(\v23.yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7H\x00R\x0fmysqlConfig_5_7\x12`\n" +
@@ -1402,7 +1411,8 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_proto_rawDesc = "" +
 	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.mysql.v1.AccessR\x06access\x12j\n" +
 	"\x17performance_diagnostics\x18\a \x01(\v21.yandex.cloud.mdb.mysql.v1.PerformanceDiagnosticsR\x16performanceDiagnostics\x12`\n" +
 	"\x19backup_retain_period_days\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x047-60R\x16backupRetainPeriodDays\x12b\n" +
-	"\x15disk_size_autoscaling\x18\t \x01(\v2..yandex.cloud.mdb.mysql.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingB\x0e\n" +
+	"\x15disk_size_autoscaling\x18\t \x01(\v2..yandex.cloud.mdb.mysql.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12!\n" +
+	"\ffull_version\x18\v \x01(\tR\vfullVersionB\x0e\n" +
 	"\fmysql_config\"\xa3\x05\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +

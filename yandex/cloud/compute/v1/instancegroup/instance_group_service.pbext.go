@@ -4,6 +4,7 @@ package instancegroup
 
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -353,4 +354,32 @@ func (m *ListInstanceGroupLogRecordsResponse) SetLogRecords(v []*LogRecord) {
 
 func (m *ListInstanceGroupLogRecordsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *DisableZonesRequest) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *DisableZonesRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *DisableZonesRequest) SetDuration(v *durationpb.Duration) {
+	m.Duration = v
+}
+
+func (m *DisableZonesMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *EnableZonesRequest) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *EnableZonesRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *EnableZonesMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
 }

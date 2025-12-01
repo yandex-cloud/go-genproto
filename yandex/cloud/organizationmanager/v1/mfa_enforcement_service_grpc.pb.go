@@ -37,14 +37,23 @@ const (
 //
 // a set of methods for managing MFA enforcements
 type MfaEnforcementServiceClient interface {
+	// creates an MFA enforcement in the specified organization
 	Create(ctx context.Context, in *CreateMfaEnforcementRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// updates the specified MFA enforcement
 	Update(ctx context.Context, in *UpdateMfaEnforcementRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// activates the specified MFA enforcement
 	Activate(ctx context.Context, in *ActivateMfaEnforcementRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// deactivates the specified MFA enforcement
 	Deactivate(ctx context.Context, in *DeactivateMfaEnforcementRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// deletes the specified MFA enforcement
 	Delete(ctx context.Context, in *DeleteMfaEnforcementRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// returns the specified MFA enforcement
 	Get(ctx context.Context, in *GetMfaEnforcementRequest, opts ...grpc.CallOption) (*MfaEnforcement, error)
+	// returns MFA enforcements for the specified organization
 	List(ctx context.Context, in *ListMfaEnforcementsRequest, opts ...grpc.CallOption) (*ListMfaEnforcementsResponse, error)
+	// updates specified MFA enforcement's audience
 	UpdateAudience(ctx context.Context, in *UpdateAudienceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// returns specified MFA enforcement's audience
 	ListAudience(ctx context.Context, in *ListAudienceRequest, opts ...grpc.CallOption) (*ListAudienceResponse, error)
 }
 
@@ -152,14 +161,23 @@ func (c *mfaEnforcementServiceClient) ListAudience(ctx context.Context, in *List
 //
 // a set of methods for managing MFA enforcements
 type MfaEnforcementServiceServer interface {
+	// creates an MFA enforcement in the specified organization
 	Create(context.Context, *CreateMfaEnforcementRequest) (*operation.Operation, error)
+	// updates the specified MFA enforcement
 	Update(context.Context, *UpdateMfaEnforcementRequest) (*operation.Operation, error)
+	// activates the specified MFA enforcement
 	Activate(context.Context, *ActivateMfaEnforcementRequest) (*operation.Operation, error)
+	// deactivates the specified MFA enforcement
 	Deactivate(context.Context, *DeactivateMfaEnforcementRequest) (*operation.Operation, error)
+	// deletes the specified MFA enforcement
 	Delete(context.Context, *DeleteMfaEnforcementRequest) (*operation.Operation, error)
+	// returns the specified MFA enforcement
 	Get(context.Context, *GetMfaEnforcementRequest) (*MfaEnforcement, error)
+	// returns MFA enforcements for the specified organization
 	List(context.Context, *ListMfaEnforcementsRequest) (*ListMfaEnforcementsResponse, error)
+	// updates specified MFA enforcement's audience
 	UpdateAudience(context.Context, *UpdateAudienceRequest) (*operation.Operation, error)
+	// returns specified MFA enforcement's audience
 	ListAudience(context.Context, *ListAudienceRequest) (*ListAudienceResponse, error)
 }
 

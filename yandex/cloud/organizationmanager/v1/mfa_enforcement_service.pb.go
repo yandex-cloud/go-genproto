@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
@@ -30,9 +31,12 @@ const (
 type CreateMfaEnforcementRequest_Status int32
 
 const (
+	// status upspecified
 	CreateMfaEnforcementRequest_STATUS_UNSPECIFIED CreateMfaEnforcementRequest_Status = 0
-	CreateMfaEnforcementRequest_STATUS_ACTIVE      CreateMfaEnforcementRequest_Status = 1
-	CreateMfaEnforcementRequest_STATUS_INACTIVE    CreateMfaEnforcementRequest_Status = 2
+	// active
+	CreateMfaEnforcementRequest_STATUS_ACTIVE CreateMfaEnforcementRequest_Status = 1
+	// inactive
+	CreateMfaEnforcementRequest_STATUS_INACTIVE CreateMfaEnforcementRequest_Status = 2
 )
 
 // Enum value maps for CreateMfaEnforcementRequest_Status.
@@ -79,9 +83,12 @@ func (CreateMfaEnforcementRequest_Status) EnumDescriptor() ([]byte, []int) {
 type UpdateMfaEnforcementRequest_Status int32
 
 const (
+	// status upspecified
 	UpdateMfaEnforcementRequest_STATUS_UNSPECIFIED UpdateMfaEnforcementRequest_Status = 0
-	UpdateMfaEnforcementRequest_STATUS_ACTIVE      UpdateMfaEnforcementRequest_Status = 1
-	UpdateMfaEnforcementRequest_STATUS_INACTIVE    UpdateMfaEnforcementRequest_Status = 2
+	// active
+	UpdateMfaEnforcementRequest_STATUS_ACTIVE UpdateMfaEnforcementRequest_Status = 1
+	// inactive
+	UpdateMfaEnforcementRequest_STATUS_INACTIVE UpdateMfaEnforcementRequest_Status = 2
 )
 
 // Enum value maps for UpdateMfaEnforcementRequest_Status.
@@ -128,9 +135,12 @@ func (UpdateMfaEnforcementRequest_Status) EnumDescriptor() ([]byte, []int) {
 type AudienceDelta_Action int32
 
 const (
+	// action unspecified
 	AudienceDelta_ACTION_UNSPECIFIED AudienceDelta_Action = 0
-	AudienceDelta_ACTION_ADD         AudienceDelta_Action = 1
-	AudienceDelta_ACTION_REMOVE      AudienceDelta_Action = 2
+	// add subject to audience
+	AudienceDelta_ACTION_ADD AudienceDelta_Action = 1
+	// remove subject from audience
+	AudienceDelta_ACTION_REMOVE AudienceDelta_Action = 2
 )
 
 // Enum value maps for AudienceDelta_Action.
@@ -175,17 +185,27 @@ func (AudienceDelta_Action) EnumDescriptor() ([]byte, []int) {
 }
 
 type CreateMfaEnforcementRequest struct {
-	state          protoimpl.MessageState             `protogen:"open.v1"`
-	OrganizationId string                             `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	AcrId          string                             `protobuf:"bytes,2,opt,name=acr_id,json=acrId,proto3" json:"acr_id,omitempty"`
-	Ttl            *durationpb.Duration               `protobuf:"bytes,3,opt,name=ttl,proto3" json:"ttl,omitempty"` // max 1 year
-	Status         CreateMfaEnforcementRequest_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest_Status" json:"status,omitempty"`
-	ApplyAt        *timestamppb.Timestamp             `protobuf:"bytes,5,opt,name=apply_at,json=applyAt,proto3" json:"apply_at,omitempty"`
-	EnrollWindow   *durationpb.Duration               `protobuf:"bytes,6,opt,name=enroll_window,json=enrollWindow,proto3" json:"enroll_window,omitempty"`
-	Name           string                             `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
-	Description    string                             `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// organization id of the MFA enforcement
+	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	// acr id for the MFA enforcement. one of 'any-mfa' or 'phr',
+	// specification https://yandex.cloud/en/docs/organization/concepts/mfa?utm_referrer=https%3A%2F%2Fa.yandex-team.ru%2F#mfa-factors
+	AcrId string `protobuf:"bytes,2,opt,name=acr_id,json=acrId,proto3" json:"acr_id,omitempty"`
+	// the period during which the entered MFA factor will be considered valid and the
+	// corresponding acr will be regarded as satisfied
+	Ttl *durationpb.Duration `protobuf:"bytes,3,opt,name=ttl,proto3" json:"ttl,omitempty"` // max 1 year
+	// the MFA enforcement status
+	Status CreateMfaEnforcementRequest_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest_Status" json:"status,omitempty"`
+	// the MFA enforcement application start time
+	ApplyAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=apply_at,json=applyAt,proto3" json:"apply_at,omitempty"`
+	// the MFA enforcement enroll window
+	EnrollWindow *durationpb.Duration `protobuf:"bytes,6,opt,name=enroll_window,json=enrollWindow,proto3" json:"enroll_window,omitempty"`
+	// the MFA enforcement name
+	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	// the MFA enforcement description
+	Description   string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateMfaEnforcementRequest) Reset() {
@@ -275,9 +295,11 @@ func (x *CreateMfaEnforcementRequest) GetDescription() string {
 }
 
 type CreateMfaEnforcementMetadata struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	OrganizationId   string                 `protobuf:"bytes,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	MfaEnforcementId string                 `protobuf:"bytes,3,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// organization id of the MFA enforcement
+	OrganizationId string `protobuf:"bytes,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,3,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -327,18 +349,29 @@ func (x *CreateMfaEnforcementMetadata) GetMfaEnforcementId() string {
 }
 
 type UpdateMfaEnforcementRequest struct {
-	state            protoimpl.MessageState             `protogen:"open.v1"`
-	MfaEnforcementId string                             `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
-	AcrId            string                             `protobuf:"bytes,2,opt,name=acr_id,json=acrId,proto3" json:"acr_id,omitempty"`
-	Ttl              *durationpb.Duration               `protobuf:"bytes,3,opt,name=ttl,proto3" json:"ttl,omitempty"` // max 1 year
-	Status           UpdateMfaEnforcementRequest_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest_Status" json:"status,omitempty"`
-	ApplyAt          *timestamppb.Timestamp             `protobuf:"bytes,5,opt,name=apply_at,json=applyAt,proto3" json:"apply_at,omitempty"`
-	EnrollWindow     *durationpb.Duration               `protobuf:"bytes,6,opt,name=enroll_window,json=enrollWindow,proto3" json:"enroll_window,omitempty"`
-	UpdateMask       *fieldmaskpb.FieldMask             `protobuf:"bytes,7,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name             string                             `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                             `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// acr id for the MFA enforcement. one of 'any-mfa' or 'phr',
+	// specification https://yandex.cloud/en/docs/organization/concepts/mfa?utm_referrer=https%3A%2F%2Fa.yandex-team.ru%2F#mfa-factors
+	AcrId string `protobuf:"bytes,2,opt,name=acr_id,json=acrId,proto3" json:"acr_id,omitempty"`
+	// the period during which the entered MFA factor will be considered valid and the
+	// corresponding acr will be regarded as satisfied
+	Ttl *durationpb.Duration `protobuf:"bytes,3,opt,name=ttl,proto3" json:"ttl,omitempty"` // max 1 year
+	// the MFA enforcement status
+	Status UpdateMfaEnforcementRequest_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest_Status" json:"status,omitempty"`
+	// the MFA enforcement application start time
+	ApplyAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=apply_at,json=applyAt,proto3" json:"apply_at,omitempty"`
+	// the MFA enforcement enroll window
+	EnrollWindow *durationpb.Duration `protobuf:"bytes,6,opt,name=enroll_window,json=enrollWindow,proto3" json:"enroll_window,omitempty"`
+	// field mask to specify which fields of the MFA enforcement resource should be updated
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,7,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// the MFA enforcement name
+	Name string `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	// the MFA enforcement description
+	Description   string `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateMfaEnforcementRequest) Reset() {
@@ -435,8 +468,9 @@ func (x *UpdateMfaEnforcementRequest) GetDescription() string {
 }
 
 type UpdateMfaEnforcementMetadata struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -479,8 +513,9 @@ func (x *UpdateMfaEnforcementMetadata) GetMfaEnforcementId() string {
 }
 
 type ActivateMfaEnforcementRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -523,8 +558,9 @@ func (x *ActivateMfaEnforcementRequest) GetMfaEnforcementId() string {
 }
 
 type ActivateMfaEnforcementMetadata struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -567,8 +603,9 @@ func (x *ActivateMfaEnforcementMetadata) GetMfaEnforcementId() string {
 }
 
 type DeactivateMfaEnforcementRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -611,8 +648,9 @@ func (x *DeactivateMfaEnforcementRequest) GetMfaEnforcementId() string {
 }
 
 type DeactivateMfaEnforcementMetadata struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -655,8 +693,9 @@ func (x *DeactivateMfaEnforcementMetadata) GetMfaEnforcementId() string {
 }
 
 type DeleteMfaEnforcementRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -699,8 +738,9 @@ func (x *DeleteMfaEnforcementRequest) GetMfaEnforcementId() string {
 }
 
 type DeleteMfaEnforcementMetadata struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -743,8 +783,9 @@ func (x *DeleteMfaEnforcementMetadata) GetMfaEnforcementId() string {
 }
 
 type GetMfaEnforcementRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -787,12 +828,15 @@ func (x *GetMfaEnforcementRequest) GetMfaEnforcementId() string {
 }
 
 type ListMfaEnforcementsRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	PageSize       int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken      string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// organization id
+	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	// the maximum number of results per page to return
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// page token
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListMfaEnforcementsRequest) Reset() {
@@ -847,11 +891,13 @@ func (x *ListMfaEnforcementsRequest) GetPageToken() string {
 }
 
 type ListMfaEnforcementsResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcements []*MfaEnforcement      `protobuf:"bytes,1,rep,name=mfa_enforcements,json=mfaEnforcements,proto3" json:"mfa_enforcements,omitempty"`
-	NextPageToken   string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// list of MFA enforcements for the specified organization
+	MfaEnforcements []*MfaEnforcement `protobuf:"bytes,1,rep,name=mfa_enforcements,json=mfaEnforcements,proto3" json:"mfa_enforcements,omitempty"`
+	// token to get the next page of results
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListMfaEnforcementsResponse) Reset() {
@@ -899,11 +945,13 @@ func (x *ListMfaEnforcementsResponse) GetNextPageToken() string {
 }
 
 type UpdateAudienceRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
-	AudienceDeltas   []*AudienceDelta       `protobuf:"bytes,2,rep,name=audience_deltas,json=audienceDeltas,proto3" json:"audience_deltas,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// MFA enforcement's audience to update
+	AudienceDeltas []*AudienceDelta `protobuf:"bytes,2,rep,name=audience_deltas,json=audienceDeltas,proto3" json:"audience_deltas,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UpdateAudienceRequest) Reset() {
@@ -951,11 +999,13 @@ func (x *UpdateAudienceRequest) GetAudienceDeltas() []*AudienceDelta {
 }
 
 type UpdateAudienceResponse struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
-	EffectiveDeltas  []*AudienceDelta       `protobuf:"bytes,2,rep,name=effective_deltas,json=effectiveDeltas,proto3" json:"effective_deltas,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// updated MFA enforcement's audience
+	EffectiveDeltas []*AudienceDelta `protobuf:"bytes,2,rep,name=effective_deltas,json=effectiveDeltas,proto3" json:"effective_deltas,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *UpdateAudienceResponse) Reset() {
@@ -1003,9 +1053,11 @@ func (x *UpdateAudienceResponse) GetEffectiveDeltas() []*AudienceDelta {
 }
 
 type AudienceDelta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Action        AudienceDelta_Action   `protobuf:"varint,1,opt,name=action,proto3,enum=yandex.cloud.organizationmanager.v1.AudienceDelta_Action" json:"action,omitempty"`
-	SubjectId     string                 `protobuf:"bytes,2,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// action to perform
+	Action AudienceDelta_Action `protobuf:"varint,1,opt,name=action,proto3,enum=yandex.cloud.organizationmanager.v1.AudienceDelta_Action" json:"action,omitempty"`
+	// subject id
+	SubjectId     string `protobuf:"bytes,2,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1055,8 +1107,9 @@ func (x *AudienceDelta) GetSubjectId() string {
 }
 
 type UpdateAudienceMetadata struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1099,12 +1152,15 @@ func (x *UpdateAudienceMetadata) GetMfaEnforcementId() string {
 }
 
 type ListAudienceRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	MfaEnforcementId string                 `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
-	PageSize         int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken        string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// the maximum number of results per page to return
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// page token
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAudienceRequest) Reset() {
@@ -1159,9 +1215,11 @@ func (x *ListAudienceRequest) GetPageToken() string {
 }
 
 type ListAudienceResponse struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	Subjects      []*ListAudienceResponse_Subject `protobuf:"bytes,1,rep,name=subjects,proto3" json:"subjects,omitempty"`
-	NextPageToken string                          `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// MFA enforcement's audience
+	Subjects []*ListAudienceResponse_Subject `protobuf:"bytes,1,rep,name=subjects,proto3" json:"subjects,omitempty"`
+	// token to get the next page of results
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1211,9 +1269,11 @@ func (x *ListAudienceResponse) GetNextPageToken() string {
 }
 
 type ListAudienceResponse_Subject struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// subject id
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// subject type
+	Type          string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1266,7 +1326,7 @@ var File_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto proto
 
 const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDesc = "" +
 	"\n" +
-	"Ayandex/cloud/organizationmanager/v1/mfa_enforcement_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a9yandex/cloud/organizationmanager/v1/mfa_enforcement.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x04\n" +
+	"Ayandex/cloud/organizationmanager/v1/mfa_enforcement_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a9yandex/cloud/organizationmanager/v1/mfa_enforcement.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x04\n" +
 	"\x1bCreateMfaEnforcementRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12#\n" +
 	"\x06acr_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05acrId\x12<\n" +
@@ -1354,24 +1414,24 @@ const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_raw
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a-\n" +
 	"\aSubject\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type2\x9f\v\n" +
-	"\x15MfaEnforcementService\x12\xa1\x01\n" +
-	"\x06Create\x12@.yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"2\xb2\xd2*.\n" +
-	"\x1cCreateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x12\xa1\x01\n" +
-	"\x06Update\x12@.yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"2\xb2\xd2*.\n" +
-	"\x1cUpdateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x12\xa7\x01\n" +
-	"\bActivate\x12B.yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"4\xb2\xd2*0\n" +
-	"\x1eActivateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x12\xad\x01\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type2\x9f\x10\n" +
+	"\x15MfaEnforcementService\x12\xd4\x01\n" +
+	"\x06Create\x12@.yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"e\xb2\xd2*.\n" +
+	"\x1cCreateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x82\xd3\xe4\x93\x02-:\x01*\"(/organization-manager/v1/mfaEnforcements\x12\xe9\x01\n" +
+	"\x06Update\x12@.yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"z\xb2\xd2*.\n" +
+	"\x1cUpdateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x82\xd3\xe4\x93\x02B:\x01*2=/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}\x12\xf6\x01\n" +
+	"\bActivate\x12B.yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"\x82\x01\xb2\xd2*0\n" +
+	"\x1eActivateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x82\xd3\xe4\x93\x02H2F/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:activate\x12\xfe\x01\n" +
 	"\n" +
-	"Deactivate\x12D.yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"6\xb2\xd2*2\n" +
-	" DeactivateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x12\xa8\x01\n" +
-	"\x06Delete\x12@.yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"9\xb2\xd2*5\n" +
-	"\x1cDeleteMfaEnforcementMetadata\x12\x15google.protobuf.Empty\x12{\n" +
-	"\x03Get\x12=.yandex.cloud.organizationmanager.v1.GetMfaEnforcementRequest\x1a3.yandex.cloud.organizationmanager.v1.MfaEnforcement\"\x00\x12\x8b\x01\n" +
-	"\x04List\x12?.yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest\x1a@.yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse\"\x00\x12\xa5\x01\n" +
-	"\x0eUpdateAudience\x12:.yandex.cloud.organizationmanager.v1.UpdateAudienceRequest\x1a!.yandex.cloud.operation.Operation\"4\xb2\xd2*0\n" +
-	"\x16UpdateAudienceMetadata\x12\x16UpdateAudienceResponse\x12\x85\x01\n" +
-	"\fListAudience\x128.yandex.cloud.organizationmanager.v1.ListAudienceRequest\x1a9.yandex.cloud.organizationmanager.v1.ListAudienceResponse\"\x00B\x86\x01\n" +
+	"Deactivate\x12D.yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2*2\n" +
+	" DeactivateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x82\xd3\xe4\x93\x02J2H/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:deactivate\x12\xed\x01\n" +
+	"\x06Delete\x12@.yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*5\n" +
+	"\x1cDeleteMfaEnforcementMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02?*=/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}\x12\xc0\x01\n" +
+	"\x03Get\x12=.yandex.cloud.organizationmanager.v1.GetMfaEnforcementRequest\x1a3.yandex.cloud.organizationmanager.v1.MfaEnforcement\"E\x82\xd3\xe4\x93\x02?\x12=/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}\x12\xbb\x01\n" +
+	"\x04List\x12?.yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest\x1a@.yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/organization-manager/v1/mfaEnforcements\x12\xfd\x01\n" +
+	"\x0eUpdateAudience\x12:.yandex.cloud.organizationmanager.v1.UpdateAudienceRequest\x1a!.yandex.cloud.operation.Operation\"\x8b\x01\xb2\xd2*0\n" +
+	"\x16UpdateAudienceMetadata\x12\x16UpdateAudienceResponse\x82\xd3\xe4\x93\x02Q:\x01*2L/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:updateAudience\x12\xd7\x01\n" +
+	"\fListAudience\x128.yandex.cloud.organizationmanager.v1.ListAudienceRequest\x1a9.yandex.cloud.organizationmanager.v1.ListAudienceResponse\"R\x82\xd3\xe4\x93\x02L\x12J/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:listAudienceB\x86\x01\n" +
 	"'yandex.cloud.api.organizationmanager.v1Z[github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1;organizationmanagerb\x06proto3"
 
 var (

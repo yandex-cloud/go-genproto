@@ -643,8 +643,10 @@ type ClusterConfig struct {
 	Access *Access `protobuf:"bytes,4,opt,name=access,proto3" json:"access,omitempty"`
 	// Snapshot management configuration
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,5,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Full version
+	FullVersion   string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfig) Reset() {
@@ -710,6 +712,13 @@ func (x *ClusterConfig) GetSnapshotManagement() *SnapshotManagement {
 		return x.SnapshotManagement
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 // The OpenSearch host group type configuration.
@@ -1685,7 +1694,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xe6\x02\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\x89\x03\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12J\n" +
 	"\n" +
@@ -1695,7 +1704,8 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"dashboards\x18\x03 \x01(\v2*.yandex.cloud.mdb.opensearch.v1.DashboardsR\n" +
 	"dashboards\x12>\n" +
 	"\x06access\x18\x04 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
-	"\x13snapshot_management\x18\x05 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\"\x96\x06\n" +
+	"\x13snapshot_management\x18\x05 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12!\n" +
+	"\ffull_version\x18\x06 \x01(\tR\vfullVersion\"\x96\x06\n" +
 	"\n" +
 	"OpenSearch\x12\x18\n" +
 	"\aplugins\x18\x01 \x03(\tR\aplugins\x12U\n" +

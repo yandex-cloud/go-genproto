@@ -249,6 +249,10 @@ func (m *ClusterConfig) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
 }
 
+func (m *ClusterConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 func (m *ConnectionPoolerConfig) SetPoolingMode(v ConnectionPoolerConfig_PoolingMode) {
 	m.PoolingMode = v
 }

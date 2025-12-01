@@ -194,6 +194,10 @@ func (m *GreenplumConfig) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
 }
 
+func (m *GreenplumConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 func (m *Access) SetDataLens(v bool) {
 	m.DataLens = v
 }

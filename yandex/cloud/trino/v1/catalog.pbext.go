@@ -68,6 +68,12 @@ func (m *Connector) SetHudi(v *HudiConnector) {
 	}
 }
 
+func (m *Connector) SetMysql(v *MysqlConnector) {
+	m.Type = &Connector_Mysql{
+		Mysql: v,
+	}
+}
+
 func (m *Catalog) SetId(v string) {
 	m.Id = v
 }
@@ -395,5 +401,51 @@ func (m *SQLServerConnector) SetConnection(v *SQLServerConnection) {
 }
 
 func (m *SQLServerConnector) SetAdditionalProperties(v map[string]string) {
+	m.AdditionalProperties = v
+}
+
+type MysqlConnection_Type = isMysqlConnection_Type
+
+func (m *MysqlConnection) SetType(v MysqlConnection_Type) {
+	m.Type = v
+}
+
+func (m *MysqlConnection) SetOnPremise(v *MysqlConnection_OnPremise) {
+	m.Type = &MysqlConnection_OnPremise_{
+		OnPremise: v,
+	}
+}
+
+func (m *MysqlConnection) SetConnectionManager(v *MysqlConnection_ConnectionManager) {
+	m.Type = &MysqlConnection_ConnectionManager_{
+		ConnectionManager: v,
+	}
+}
+
+func (m *MysqlConnection_OnPremise) SetConnectionUrl(v string) {
+	m.ConnectionUrl = v
+}
+
+func (m *MysqlConnection_OnPremise) SetUserName(v string) {
+	m.UserName = v
+}
+
+func (m *MysqlConnection_OnPremise) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *MysqlConnection_ConnectionManager) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
+func (m *MysqlConnection_ConnectionManager) SetConnectionProperties(v map[string]string) {
+	m.ConnectionProperties = v
+}
+
+func (m *MysqlConnector) SetConnection(v *MysqlConnection) {
+	m.Connection = v
+}
+
+func (m *MysqlConnector) SetAdditionalProperties(v map[string]string) {
 	m.AdditionalProperties = v
 }

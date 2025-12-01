@@ -730,8 +730,10 @@ type ClusterConfig struct {
 	EmbeddedKeeper *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=embedded_keeper,json=embeddedKeeper,proto3" json:"embedded_keeper,omitempty"`
 	// Retain period of automatically created backup in days
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Full version
+	FullVersion   string `protobuf:"bytes,11,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfig) Reset() {
@@ -832,6 +834,13 @@ func (x *ClusterConfig) GetBackupRetainPeriodDays() *wrapperspb.Int64Value {
 		return x.BackupRetainPeriodDays
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type Shard struct {
@@ -1788,7 +1797,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xc7\t\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xea\t\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12X\n" +
 	"\n" +
@@ -1802,7 +1811,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x13sql_user_management\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x11sqlUserManagement\x12C\n" +
 	"\x0fembedded_keeper\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x0eembeddedKeeper\x12V\n" +
 	"\x19backup_retain_period_days\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x1a\x92\x02\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12!\n" +
+	"\ffull_version\x18\v \x01(\tR\vfullVersion\x1a\x92\x02\n" +
 	"\n" +
 	"Clickhouse\x12R\n" +
 	"\x06config\x18\x01 \x01(\v2:.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSetR\x06config\x12G\n" +

@@ -181,6 +181,10 @@ func (m *ClusterConfig) SetMongodbConfig(v *Mongodb) {
 	m.MongodbConfig = v
 }
 
+func (m *ClusterConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 func (m *Mongodb3_6) SetMongod(v *Mongodb3_6_Mongod) {
 	m.Mongod = v
 }

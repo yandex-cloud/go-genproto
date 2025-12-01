@@ -112,6 +112,10 @@ func (m *ClusterConfig) SetSnapshotManagement(v *SnapshotManagement) {
 	m.SnapshotManagement = v
 }
 
+func (m *ClusterConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 type OpenSearch_Config = isOpenSearch_Config
 
 func (m *OpenSearch) SetConfig(v OpenSearch_Config) {

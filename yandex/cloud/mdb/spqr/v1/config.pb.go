@@ -133,6 +133,116 @@ func (RouterSettings_DefaultRouteBehavior) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_spqr_v1_config_proto_rawDescGZIP(), []int{7, 0}
 }
 
+type RouterSettings_TargetSessionAttrs int32
+
+const (
+	RouterSettings_TARGET_SESSION_ATTRS_UNSPECIFIED RouterSettings_TargetSessionAttrs = 0
+	RouterSettings_READ_WRITE                       RouterSettings_TargetSessionAttrs = 1
+	RouterSettings_SMART_READ_WRITE                 RouterSettings_TargetSessionAttrs = 2
+	RouterSettings_READ_ONLY                        RouterSettings_TargetSessionAttrs = 3
+	RouterSettings_PREFER_STANDBY                   RouterSettings_TargetSessionAttrs = 4
+	RouterSettings_ANY                              RouterSettings_TargetSessionAttrs = 5
+)
+
+// Enum value maps for RouterSettings_TargetSessionAttrs.
+var (
+	RouterSettings_TargetSessionAttrs_name = map[int32]string{
+		0: "TARGET_SESSION_ATTRS_UNSPECIFIED",
+		1: "READ_WRITE",
+		2: "SMART_READ_WRITE",
+		3: "READ_ONLY",
+		4: "PREFER_STANDBY",
+		5: "ANY",
+	}
+	RouterSettings_TargetSessionAttrs_value = map[string]int32{
+		"TARGET_SESSION_ATTRS_UNSPECIFIED": 0,
+		"READ_WRITE":                       1,
+		"SMART_READ_WRITE":                 2,
+		"READ_ONLY":                        3,
+		"PREFER_STANDBY":                   4,
+		"ANY":                              5,
+	}
+)
+
+func (x RouterSettings_TargetSessionAttrs) Enum() *RouterSettings_TargetSessionAttrs {
+	p := new(RouterSettings_TargetSessionAttrs)
+	*p = x
+	return p
+}
+
+func (x RouterSettings_TargetSessionAttrs) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RouterSettings_TargetSessionAttrs) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_spqr_v1_config_proto_enumTypes[2].Descriptor()
+}
+
+func (RouterSettings_TargetSessionAttrs) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_spqr_v1_config_proto_enumTypes[2]
+}
+
+func (x RouterSettings_TargetSessionAttrs) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RouterSettings_TargetSessionAttrs.Descriptor instead.
+func (RouterSettings_TargetSessionAttrs) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_spqr_v1_config_proto_rawDescGZIP(), []int{7, 1}
+}
+
+type RouterSettings_CommitStrategy int32
+
+const (
+	RouterSettings_COMMIT_STRATEGY_UNSPECIFIED RouterSettings_CommitStrategy = 0
+	RouterSettings_BEST_EFFORT                 RouterSettings_CommitStrategy = 1
+	RouterSettings_ONE_PC                      RouterSettings_CommitStrategy = 2
+	RouterSettings_TWO_PC                      RouterSettings_CommitStrategy = 3
+)
+
+// Enum value maps for RouterSettings_CommitStrategy.
+var (
+	RouterSettings_CommitStrategy_name = map[int32]string{
+		0: "COMMIT_STRATEGY_UNSPECIFIED",
+		1: "BEST_EFFORT",
+		2: "ONE_PC",
+		3: "TWO_PC",
+	}
+	RouterSettings_CommitStrategy_value = map[string]int32{
+		"COMMIT_STRATEGY_UNSPECIFIED": 0,
+		"BEST_EFFORT":                 1,
+		"ONE_PC":                      2,
+		"TWO_PC":                      3,
+	}
+)
+
+func (x RouterSettings_CommitStrategy) Enum() *RouterSettings_CommitStrategy {
+	p := new(RouterSettings_CommitStrategy)
+	*p = x
+	return p
+}
+
+func (x RouterSettings_CommitStrategy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RouterSettings_CommitStrategy) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_spqr_v1_config_proto_enumTypes[3].Descriptor()
+}
+
+func (RouterSettings_CommitStrategy) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_spqr_v1_config_proto_enumTypes[3]
+}
+
+func (x RouterSettings_CommitStrategy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RouterSettings_CommitStrategy.Descriptor instead.
+func (RouterSettings_CommitStrategy) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_spqr_v1_config_proto_rawDescGZIP(), []int{7, 2}
+}
+
 // TODO move to hosts.proto when it's created
 // Configuration for MDB PostgreSQL host
 type MDBPostgreSQL struct {
@@ -571,13 +681,16 @@ func (x *BalancerSettings) GetTimeout() *wrapperspb.Int64Value {
 
 // Configuration of a SPQR router.
 type RouterSettings struct {
-	state                      protoimpl.MessageState              `protogen:"open.v1"`
-	ShowNoticeMessages         *wrapperspb.BoolValue               `protobuf:"bytes,1,opt,name=show_notice_messages,json=showNoticeMessages,proto3" json:"show_notice_messages,omitempty"`
-	TimeQuantiles              []float64                           `protobuf:"fixed64,2,rep,packed,name=time_quantiles,json=timeQuantiles,proto3" json:"time_quantiles,omitempty"`
-	DefaultRouteBehavior       RouterSettings_DefaultRouteBehavior `protobuf:"varint,4,opt,name=default_route_behavior,json=defaultRouteBehavior,proto3,enum=yandex.cloud.mdb.spqr.v1.RouterSettings_DefaultRouteBehavior" json:"default_route_behavior,omitempty"`
-	PreferSameAvailabilityZone *wrapperspb.BoolValue               `protobuf:"bytes,5,opt,name=prefer_same_availability_zone,json=preferSameAvailabilityZone,proto3" json:"prefer_same_availability_zone,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                        protoimpl.MessageState              `protogen:"open.v1"`
+	ShowNoticeMessages           *wrapperspb.BoolValue               `protobuf:"bytes,1,opt,name=show_notice_messages,json=showNoticeMessages,proto3" json:"show_notice_messages,omitempty"`
+	TimeQuantiles                []float64                           `protobuf:"fixed64,2,rep,packed,name=time_quantiles,json=timeQuantiles,proto3" json:"time_quantiles,omitempty"`
+	DefaultRouteBehavior         RouterSettings_DefaultRouteBehavior `protobuf:"varint,4,opt,name=default_route_behavior,json=defaultRouteBehavior,proto3,enum=yandex.cloud.mdb.spqr.v1.RouterSettings_DefaultRouteBehavior" json:"default_route_behavior,omitempty"`
+	PreferSameAvailabilityZone   *wrapperspb.BoolValue               `protobuf:"bytes,5,opt,name=prefer_same_availability_zone,json=preferSameAvailabilityZone,proto3" json:"prefer_same_availability_zone,omitempty"`
+	EnhancedMultishardProcessing *wrapperspb.BoolValue               `protobuf:"bytes,6,opt,name=enhanced_multishard_processing,json=enhancedMultishardProcessing,proto3" json:"enhanced_multishard_processing,omitempty"`
+	DefaultTargetSessionAttrs    RouterSettings_TargetSessionAttrs   `protobuf:"varint,7,opt,name=default_target_session_attrs,json=defaultTargetSessionAttrs,proto3,enum=yandex.cloud.mdb.spqr.v1.RouterSettings_TargetSessionAttrs" json:"default_target_session_attrs,omitempty"`
+	DefaultCommitStrategy        RouterSettings_CommitStrategy       `protobuf:"varint,8,opt,name=default_commit_strategy,json=defaultCommitStrategy,proto3,enum=yandex.cloud.mdb.spqr.v1.RouterSettings_CommitStrategy" json:"default_commit_strategy,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *RouterSettings) Reset() {
@@ -636,6 +749,27 @@ func (x *RouterSettings) GetPreferSameAvailabilityZone() *wrapperspb.BoolValue {
 		return x.PreferSameAvailabilityZone
 	}
 	return nil
+}
+
+func (x *RouterSettings) GetEnhancedMultishardProcessing() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.EnhancedMultishardProcessing
+	}
+	return nil
+}
+
+func (x *RouterSettings) GetDefaultTargetSessionAttrs() RouterSettings_TargetSessionAttrs {
+	if x != nil {
+		return x.DefaultTargetSessionAttrs
+	}
+	return RouterSettings_TARGET_SESSION_ATTRS_UNSPECIFIED
+}
+
+func (x *RouterSettings) GetDefaultCommitStrategy() RouterSettings_CommitStrategy {
+	if x != nil {
+		return x.DefaultCommitStrategy
+	}
+	return RouterSettings_COMMIT_STRATEGY_UNSPECIFIED
 }
 
 // Configuration of a SPQR coordinator.
@@ -817,16 +951,34 @@ const file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc = "" +
 	"\x11stat_interval_sec\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fstatIntervalSec\x12A\n" +
 	"\x0emax_move_count\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\fmaxMoveCount\x12?\n" +
 	"\rkeys_per_move\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\vkeysPerMove\x125\n" +
-	"\atimeout\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\atimeout\"\xb5\x03\n" +
+	"\atimeout\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\atimeout\"\xf1\a\n" +
 	"\x0eRouterSettings\x12L\n" +
 	"\x14show_notice_messages\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x12showNoticeMessages\x12%\n" +
 	"\x0etime_quantiles\x18\x02 \x03(\x01R\rtimeQuantiles\x12s\n" +
 	"\x16default_route_behavior\x18\x04 \x01(\x0e2=.yandex.cloud.mdb.spqr.v1.RouterSettings.DefaultRouteBehaviorR\x14defaultRouteBehavior\x12]\n" +
-	"\x1dprefer_same_availability_zone\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x1apreferSameAvailabilityZone\"T\n" +
+	"\x1dprefer_same_availability_zone\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x1apreferSameAvailabilityZone\x12`\n" +
+	"\x1eenhanced_multishard_processing\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x1cenhancedMultishardProcessing\x12|\n" +
+	"\x1cdefault_target_session_attrs\x18\a \x01(\x0e2;.yandex.cloud.mdb.spqr.v1.RouterSettings.TargetSessionAttrsR\x19defaultTargetSessionAttrs\x12o\n" +
+	"\x17default_commit_strategy\x18\b \x01(\x0e27.yandex.cloud.mdb.spqr.v1.RouterSettings.CommitStrategyR\x15defaultCommitStrategy\"T\n" +
 	"\x14DefaultRouteBehavior\x12&\n" +
 	"\"DEFAULT_ROUTE_BEHAVIOR_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05BLOCK\x10\x01\x12\t\n" +
-	"\x05ALLOW\x10\x02J\x04\b\x03\x10\x04\"\x15\n" +
+	"\x05ALLOW\x10\x02\"\x8c\x01\n" +
+	"\x12TargetSessionAttrs\x12$\n" +
+	" TARGET_SESSION_ATTRS_UNSPECIFIED\x10\x00\x12\x0e\n" +
+	"\n" +
+	"READ_WRITE\x10\x01\x12\x14\n" +
+	"\x10SMART_READ_WRITE\x10\x02\x12\r\n" +
+	"\tREAD_ONLY\x10\x03\x12\x12\n" +
+	"\x0ePREFER_STANDBY\x10\x04\x12\a\n" +
+	"\x03ANY\x10\x05\"Z\n" +
+	"\x0eCommitStrategy\x12\x1f\n" +
+	"\x1bCOMMIT_STRATEGY_UNSPECIFIED\x10\x00\x12\x0f\n" +
+	"\vBEST_EFFORT\x10\x01\x12\n" +
+	"\n" +
+	"\x06ONE_PC\x10\x02\x12\n" +
+	"\n" +
+	"\x06TWO_PC\x10\x03J\x04\b\x03\x10\x04\"\x15\n" +
 	"\x13CoordinatorSettings\"\x14\n" +
 	"\x12PostgreSQLSettings\"x\n" +
 	"\tResources\x12,\n" +
@@ -856,56 +1008,61 @@ func file_yandex_cloud_mdb_spqr_v1_config_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_spqr_v1_config_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_spqr_v1_config_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_mdb_spqr_v1_config_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_yandex_cloud_mdb_spqr_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_mdb_spqr_v1_config_proto_goTypes = []any{
 	(LogLevel)(0),                            // 0: yandex.cloud.mdb.spqr.v1.LogLevel
 	(RouterSettings_DefaultRouteBehavior)(0), // 1: yandex.cloud.mdb.spqr.v1.RouterSettings.DefaultRouteBehavior
-	(*MDBPostgreSQL)(nil),                    // 2: yandex.cloud.mdb.spqr.v1.MDBPostgreSQL
-	(*SPQRConfig)(nil),                       // 3: yandex.cloud.mdb.spqr.v1.SPQRConfig
-	(*RouterConfig)(nil),                     // 4: yandex.cloud.mdb.spqr.v1.RouterConfig
-	(*CoordinatorConfig)(nil),                // 5: yandex.cloud.mdb.spqr.v1.CoordinatorConfig
-	(*PostgreSQLConfig)(nil),                 // 6: yandex.cloud.mdb.spqr.v1.PostgreSQLConfig
-	(*InfraConfig)(nil),                      // 7: yandex.cloud.mdb.spqr.v1.InfraConfig
-	(*BalancerSettings)(nil),                 // 8: yandex.cloud.mdb.spqr.v1.BalancerSettings
-	(*RouterSettings)(nil),                   // 9: yandex.cloud.mdb.spqr.v1.RouterSettings
-	(*CoordinatorSettings)(nil),              // 10: yandex.cloud.mdb.spqr.v1.CoordinatorSettings
-	(*PostgreSQLSettings)(nil),               // 11: yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
-	(*Resources)(nil),                        // 12: yandex.cloud.mdb.spqr.v1.Resources
-	(*wrapperspb.DoubleValue)(nil),           // 13: google.protobuf.DoubleValue
-	(*wrapperspb.Int64Value)(nil),            // 14: google.protobuf.Int64Value
-	(*wrapperspb.BoolValue)(nil),             // 15: google.protobuf.BoolValue
+	(RouterSettings_TargetSessionAttrs)(0),   // 2: yandex.cloud.mdb.spqr.v1.RouterSettings.TargetSessionAttrs
+	(RouterSettings_CommitStrategy)(0),       // 3: yandex.cloud.mdb.spqr.v1.RouterSettings.CommitStrategy
+	(*MDBPostgreSQL)(nil),                    // 4: yandex.cloud.mdb.spqr.v1.MDBPostgreSQL
+	(*SPQRConfig)(nil),                       // 5: yandex.cloud.mdb.spqr.v1.SPQRConfig
+	(*RouterConfig)(nil),                     // 6: yandex.cloud.mdb.spqr.v1.RouterConfig
+	(*CoordinatorConfig)(nil),                // 7: yandex.cloud.mdb.spqr.v1.CoordinatorConfig
+	(*PostgreSQLConfig)(nil),                 // 8: yandex.cloud.mdb.spqr.v1.PostgreSQLConfig
+	(*InfraConfig)(nil),                      // 9: yandex.cloud.mdb.spqr.v1.InfraConfig
+	(*BalancerSettings)(nil),                 // 10: yandex.cloud.mdb.spqr.v1.BalancerSettings
+	(*RouterSettings)(nil),                   // 11: yandex.cloud.mdb.spqr.v1.RouterSettings
+	(*CoordinatorSettings)(nil),              // 12: yandex.cloud.mdb.spqr.v1.CoordinatorSettings
+	(*PostgreSQLSettings)(nil),               // 13: yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
+	(*Resources)(nil),                        // 14: yandex.cloud.mdb.spqr.v1.Resources
+	(*wrapperspb.DoubleValue)(nil),           // 15: google.protobuf.DoubleValue
+	(*wrapperspb.Int64Value)(nil),            // 16: google.protobuf.Int64Value
+	(*wrapperspb.BoolValue)(nil),             // 17: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_spqr_v1_config_proto_depIdxs = []int32{
-	4,  // 0: yandex.cloud.mdb.spqr.v1.SPQRConfig.router:type_name -> yandex.cloud.mdb.spqr.v1.RouterConfig
-	5,  // 1: yandex.cloud.mdb.spqr.v1.SPQRConfig.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorConfig
-	6,  // 2: yandex.cloud.mdb.spqr.v1.SPQRConfig.postgresql:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLConfig
-	7,  // 3: yandex.cloud.mdb.spqr.v1.SPQRConfig.infra:type_name -> yandex.cloud.mdb.spqr.v1.InfraConfig
+	6,  // 0: yandex.cloud.mdb.spqr.v1.SPQRConfig.router:type_name -> yandex.cloud.mdb.spqr.v1.RouterConfig
+	7,  // 1: yandex.cloud.mdb.spqr.v1.SPQRConfig.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorConfig
+	8,  // 2: yandex.cloud.mdb.spqr.v1.SPQRConfig.postgresql:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLConfig
+	9,  // 3: yandex.cloud.mdb.spqr.v1.SPQRConfig.infra:type_name -> yandex.cloud.mdb.spqr.v1.InfraConfig
 	0,  // 4: yandex.cloud.mdb.spqr.v1.SPQRConfig.log_level:type_name -> yandex.cloud.mdb.spqr.v1.LogLevel
-	8,  // 5: yandex.cloud.mdb.spqr.v1.SPQRConfig.balancer:type_name -> yandex.cloud.mdb.spqr.v1.BalancerSettings
-	9,  // 6: yandex.cloud.mdb.spqr.v1.RouterConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
-	12, // 7: yandex.cloud.mdb.spqr.v1.RouterConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	10, // 8: yandex.cloud.mdb.spqr.v1.CoordinatorConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
-	12, // 9: yandex.cloud.mdb.spqr.v1.CoordinatorConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	11, // 10: yandex.cloud.mdb.spqr.v1.PostgreSQLConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
-	12, // 11: yandex.cloud.mdb.spqr.v1.PostgreSQLConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	12, // 12: yandex.cloud.mdb.spqr.v1.InfraConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
-	9,  // 13: yandex.cloud.mdb.spqr.v1.InfraConfig.router:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
-	10, // 14: yandex.cloud.mdb.spqr.v1.InfraConfig.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
-	13, // 15: yandex.cloud.mdb.spqr.v1.BalancerSettings.cpu_threshold:type_name -> google.protobuf.DoubleValue
-	13, // 16: yandex.cloud.mdb.spqr.v1.BalancerSettings.space_threshold:type_name -> google.protobuf.DoubleValue
-	14, // 17: yandex.cloud.mdb.spqr.v1.BalancerSettings.stat_interval_sec:type_name -> google.protobuf.Int64Value
-	14, // 18: yandex.cloud.mdb.spqr.v1.BalancerSettings.max_move_count:type_name -> google.protobuf.Int64Value
-	14, // 19: yandex.cloud.mdb.spqr.v1.BalancerSettings.keys_per_move:type_name -> google.protobuf.Int64Value
-	14, // 20: yandex.cloud.mdb.spqr.v1.BalancerSettings.timeout:type_name -> google.protobuf.Int64Value
-	15, // 21: yandex.cloud.mdb.spqr.v1.RouterSettings.show_notice_messages:type_name -> google.protobuf.BoolValue
+	10, // 5: yandex.cloud.mdb.spqr.v1.SPQRConfig.balancer:type_name -> yandex.cloud.mdb.spqr.v1.BalancerSettings
+	11, // 6: yandex.cloud.mdb.spqr.v1.RouterConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
+	14, // 7: yandex.cloud.mdb.spqr.v1.RouterConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	12, // 8: yandex.cloud.mdb.spqr.v1.CoordinatorConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
+	14, // 9: yandex.cloud.mdb.spqr.v1.CoordinatorConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	13, // 10: yandex.cloud.mdb.spqr.v1.PostgreSQLConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLSettings
+	14, // 11: yandex.cloud.mdb.spqr.v1.PostgreSQLConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	14, // 12: yandex.cloud.mdb.spqr.v1.InfraConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
+	11, // 13: yandex.cloud.mdb.spqr.v1.InfraConfig.router:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
+	12, // 14: yandex.cloud.mdb.spqr.v1.InfraConfig.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings
+	15, // 15: yandex.cloud.mdb.spqr.v1.BalancerSettings.cpu_threshold:type_name -> google.protobuf.DoubleValue
+	15, // 16: yandex.cloud.mdb.spqr.v1.BalancerSettings.space_threshold:type_name -> google.protobuf.DoubleValue
+	16, // 17: yandex.cloud.mdb.spqr.v1.BalancerSettings.stat_interval_sec:type_name -> google.protobuf.Int64Value
+	16, // 18: yandex.cloud.mdb.spqr.v1.BalancerSettings.max_move_count:type_name -> google.protobuf.Int64Value
+	16, // 19: yandex.cloud.mdb.spqr.v1.BalancerSettings.keys_per_move:type_name -> google.protobuf.Int64Value
+	16, // 20: yandex.cloud.mdb.spqr.v1.BalancerSettings.timeout:type_name -> google.protobuf.Int64Value
+	17, // 21: yandex.cloud.mdb.spqr.v1.RouterSettings.show_notice_messages:type_name -> google.protobuf.BoolValue
 	1,  // 22: yandex.cloud.mdb.spqr.v1.RouterSettings.default_route_behavior:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings.DefaultRouteBehavior
-	15, // 23: yandex.cloud.mdb.spqr.v1.RouterSettings.prefer_same_availability_zone:type_name -> google.protobuf.BoolValue
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	17, // 23: yandex.cloud.mdb.spqr.v1.RouterSettings.prefer_same_availability_zone:type_name -> google.protobuf.BoolValue
+	17, // 24: yandex.cloud.mdb.spqr.v1.RouterSettings.enhanced_multishard_processing:type_name -> google.protobuf.BoolValue
+	2,  // 25: yandex.cloud.mdb.spqr.v1.RouterSettings.default_target_session_attrs:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings.TargetSessionAttrs
+	3,  // 26: yandex.cloud.mdb.spqr.v1.RouterSettings.default_commit_strategy:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings.CommitStrategy
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_spqr_v1_config_proto_init() }
@@ -918,7 +1075,7 @@ func file_yandex_cloud_mdb_spqr_v1_config_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc), len(file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      4,
 			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -145,6 +145,10 @@ func (m *ClusterConfig) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
 }
 
+func (m *ClusterConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 func (m *Host) SetName(v string) {
 	m.Name = v
 }

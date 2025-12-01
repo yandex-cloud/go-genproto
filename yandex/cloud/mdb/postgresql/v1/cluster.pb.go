@@ -845,8 +845,10 @@ type ClusterConfig struct {
 	PerformanceDiagnostics *PerformanceDiagnostics `protobuf:"bytes,12,opt,name=performance_diagnostics,json=performanceDiagnostics,proto3" json:"performance_diagnostics,omitempty"`
 	// Disk size autoscaling
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,23,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Full version
+	FullVersion   string `protobuf:"bytes,31,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfig) Reset() {
@@ -1118,6 +1120,13 @@ func (x *ClusterConfig) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
 		return x.DiskSizeAutoscaling
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type isClusterConfig_PostgresqlConfig interface {
@@ -2234,7 +2243,7 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xd1\x17\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xf4\x17\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12t\n" +
 	"\x15postgresql_config_9_6\x18\x02 \x01(\v2=.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet9_6H\x00R\x14postgresqlConfig_9_6\x12z\n" +
@@ -2264,7 +2273,8 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_proto_rawDesc = "" +
 	"\x19backup_retain_period_days\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x047-60R\x16backupRetainPeriodDays\x12>\n" +
 	"\x06access\x18\t \x01(\v2&.yandex.cloud.mdb.postgresql.v1.AccessR\x06access\x12o\n" +
 	"\x17performance_diagnostics\x18\f \x01(\v26.yandex.cloud.mdb.postgresql.v1.PerformanceDiagnosticsR\x16performanceDiagnostics\x12g\n" +
-	"\x15disk_size_autoscaling\x18\x17 \x01(\v23.yandex.cloud.mdb.postgresql.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingB\x13\n" +
+	"\x15disk_size_autoscaling\x18\x17 \x01(\v23.yandex.cloud.mdb.postgresql.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12!\n" +
+	"\ffull_version\x18\x1f \x01(\tR\vfullVersionB\x13\n" +
 	"\x11postgresql_configJ\x04\b\x14\x10\x15J\x04\b\x1a\x10\x1b\"\x98\x02\n" +
 	"\x16ConnectionPoolerConfig\x12e\n" +
 	"\fpooling_mode\x18\x01 \x01(\x0e2B.yandex.cloud.mdb.postgresql.v1.ConnectionPoolerConfig.PoolingModeR\vpoolingMode\x12=\n" +

@@ -91,6 +91,10 @@ func (m *InstanceGroup) SetAutoHealingPolicy(v *AutoHealingPolicy) {
 	m.AutoHealingPolicy = v
 }
 
+func (m *InstanceGroup) SetDisableZoneStatuses(v []*DisableZoneStatus) {
+	m.DisableZoneStatuses = v
+}
+
 func (m *ApplicationLoadBalancerState) SetTargetGroupId(v string) {
 	m.TargetGroupId = v
 }
@@ -771,4 +775,12 @@ func (m *MetadataOptions) SetGceHttpToken(v MetadataOption) {
 
 func (m *MetadataOptions) SetAwsV1HttpToken(v MetadataOption) {
 	m.AwsV1HttpToken = v
+}
+
+func (m *DisableZoneStatus) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
+func (m *DisableZoneStatus) SetDisabledUntil(v *timestamppb.Timestamp) {
+	m.DisabledUntil = v
 }

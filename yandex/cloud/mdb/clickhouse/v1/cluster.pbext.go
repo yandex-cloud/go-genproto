@@ -133,6 +133,10 @@ func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
 }
 
+func (m *ClusterConfig) SetFullVersion(v string) {
+	m.FullVersion = v
+}
+
 func (m *ClusterConfig_Clickhouse) SetConfig(v *config.ClickhouseConfigSet) {
 	m.Config = v
 }

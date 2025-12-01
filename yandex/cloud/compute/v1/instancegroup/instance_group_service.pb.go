@@ -14,6 +14,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
@@ -2137,11 +2138,219 @@ func (x *ListInstanceGroupLogRecordsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type DisableZonesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group to disable zones.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	// Zone IDs to disable.
+	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	// The interval during which the zones will be disabled. Format 1m-72h.
+	// If not set then zone will be disabled until it is removed through a separate call.
+	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableZonesRequest) Reset() {
+	*x = DisableZonesRequest{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableZonesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableZonesRequest) ProtoMessage() {}
+
+func (x *DisableZonesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableZonesRequest.ProtoReflect.Descriptor instead.
+func (*DisableZonesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *DisableZonesRequest) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
+func (x *DisableZonesRequest) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+func (x *DisableZonesRequest) GetDuration() *durationpb.Duration {
+	if x != nil {
+		return x.Duration
+	}
+	return nil
+}
+
+type DisableZonesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group on which the zones were disabled.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DisableZonesMetadata) Reset() {
+	*x = DisableZonesMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableZonesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableZonesMetadata) ProtoMessage() {}
+
+func (x *DisableZonesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*DisableZonesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *DisableZonesMetadata) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
+type EnableZonesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group to enable zones.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	// Zone IDs to enable.
+	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableZonesRequest) Reset() {
+	*x = EnableZonesRequest{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableZonesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableZonesRequest) ProtoMessage() {}
+
+func (x *EnableZonesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableZonesRequest.ProtoReflect.Descriptor instead.
+func (*EnableZonesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *EnableZonesRequest) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
+func (x *EnableZonesRequest) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+type EnableZonesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group on which the zones were enabled.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *EnableZonesMetadata) Reset() {
+	*x = EnableZonesMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableZonesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableZonesMetadata) ProtoMessage() {}
+
+func (x *EnableZonesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*EnableZonesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *EnableZonesMetadata) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
 var File_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDesc = "" +
 	"\n" +
-	"Byandex/cloud/compute/v1/instancegroup/instance_group_service.proto\x12%yandex.cloud.compute.v1.instancegroup\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a:yandex/cloud/compute/v1/instancegroup/instance_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"[\n" +
+	"Byandex/cloud/compute/v1/instancegroup/instance_group_service.proto\x12%yandex.cloud.compute.v1.instancegroup\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a:yandex/cloud/compute/v1/instancegroup/instance_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"[\n" +
 	"#ResumeInstanceGroupProcessesRequest\x124\n" +
 	"\x11instance_group_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x0finstanceGroupId\"P\n" +
 	"\"ResumeInstanceGroupProcessMetadata\x12*\n" +
@@ -2289,10 +2498,22 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_ra
 	"#ListInstanceGroupLogRecordsResponse\x12Q\n" +
 	"\vlog_records\x18\x01 \x03(\v20.yandex.cloud.compute.v1.instancegroup.LogRecordR\n" +
 	"logRecords\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken*(\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb5\x01\n" +
+	"\x13DisableZonesRequest\x128\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12!\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\x12A\n" +
+	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\n" +
+	"\xfa\xc71\x061m-72hR\bduration\"B\n" +
+	"\x14DisableZonesMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"q\n" +
+	"\x12EnableZonesRequest\x128\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12!\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"A\n" +
+	"\x13EnableZonesMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId*(\n" +
 	"\x11InstanceGroupView\x12\t\n" +
 	"\x05BASIC\x10\x00\x12\b\n" +
-	"\x04FULL\x10\x012\x94%\n" +
+	"\x04FULL\x10\x012\xc7'\n" +
 	"\x14InstanceGroupService\x12\xb3\x01\n" +
 	"\x03Get\x12>.yandex.cloud.compute.v1.instancegroup.GetInstanceGroupRequest\x1a4.yandex.cloud.compute.v1.instancegroup.InstanceGroup\"6\x82\xd3\xe4\x93\x020\x12./compute/v1/instanceGroups/{instance_group_id}\x12\xaf\x01\n" +
 	"\x04List\x12@.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest\x1aA.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/compute/v1/instanceGroups\x12\xc5\x01\n" +
@@ -2329,7 +2550,11 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_ra
 	"\x0fResumeProcesses\x12J.yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest\x1a!.yandex.cloud.operation.Operation\"\x80\x01\xb2\xd2*3\n" +
 	"\"ResumeInstanceGroupProcessMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02C:\x01*\">/compute/v1/instanceGroups/{instance_group_id}:resumeProcesses\x12\xfe\x01\n" +
 	"\x0ePauseProcesses\x12I.yandex.cloud.compute.v1.instancegroup.PauseInstanceGroupProcessesRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*2\n" +
-	"!PauseInstanceGroupProcessMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02B:\x01*\"=/compute/v1/instanceGroups/{instance_group_id}:pauseProcessesB\x84\x01\n" +
+	"!PauseInstanceGroupProcessMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02B:\x01*\"=/compute/v1/instanceGroups/{instance_group_id}:pauseProcesses\x12\x98\x01\n" +
+	"\fDisableZones\x12:.yandex.cloud.compute.v1.instancegroup.DisableZonesRequest\x1a!.yandex.cloud.operation.Operation\")\xb2\xd2*%\n" +
+	"\x14DisableZonesMetadata\x12\rInstanceGroup\x12\x95\x01\n" +
+	"\vEnableZones\x129.yandex.cloud.compute.v1.instancegroup.EnableZonesRequest\x1a!.yandex.cloud.operation.Operation\"(\xb2\xd2*$\n" +
+	"\x13EnableZonesMetadata\x12\rInstanceGroupB\x84\x01\n" +
 	")yandex.cloud.api.compute.v1.instancegroupZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1/instancegroup;instancegroupb\x06proto3"
 
 var (
@@ -2345,7 +2570,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_raw
 }
 
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_goTypes = []any{
 	(InstanceGroupView)(0),                      // 0: yandex.cloud.compute.v1.instancegroup.InstanceGroupView
 	(*ResumeInstanceGroupProcessesRequest)(nil), // 1: yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest
@@ -2381,102 +2606,112 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_goTy
 	(*ListInstanceGroupOperationsResponse)(nil), // 31: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
 	(*ListInstanceGroupLogRecordsRequest)(nil),  // 32: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
 	(*ListInstanceGroupLogRecordsResponse)(nil), // 33: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
-	nil,                                        // 34: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntry
-	nil,                                        // 35: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntry
-	(*InstanceTemplate)(nil),                   // 36: yandex.cloud.compute.v1.instancegroup.InstanceTemplate
-	(*ScalePolicy)(nil),                        // 37: yandex.cloud.compute.v1.instancegroup.ScalePolicy
-	(*DeployPolicy)(nil),                       // 38: yandex.cloud.compute.v1.instancegroup.DeployPolicy
-	(*AllocationPolicy)(nil),                   // 39: yandex.cloud.compute.v1.instancegroup.AllocationPolicy
-	(*LoadBalancerSpec)(nil),                   // 40: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
-	(*HealthChecksSpec)(nil),                   // 41: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
-	(*Variable)(nil),                           // 42: yandex.cloud.compute.v1.instancegroup.Variable
-	(*ApplicationLoadBalancerSpec)(nil),        // 43: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
-	(*AutoHealingPolicy)(nil),                  // 44: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
-	(*fieldmaskpb.FieldMask)(nil),              // 45: google.protobuf.FieldMask
-	(*InstanceGroup)(nil),                      // 46: yandex.cloud.compute.v1.instancegroup.InstanceGroup
-	(*ManagedInstance)(nil),                    // 47: yandex.cloud.compute.v1.instancegroup.ManagedInstance
-	(*operation.Operation)(nil),                // 48: yandex.cloud.operation.Operation
-	(*LogRecord)(nil),                          // 49: yandex.cloud.compute.v1.instancegroup.LogRecord
-	(*access.ListAccessBindingsRequest)(nil),   // 50: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 51: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 52: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 53: yandex.cloud.access.ListAccessBindingsResponse
+	(*DisableZonesRequest)(nil),                 // 34: yandex.cloud.compute.v1.instancegroup.DisableZonesRequest
+	(*DisableZonesMetadata)(nil),                // 35: yandex.cloud.compute.v1.instancegroup.DisableZonesMetadata
+	(*EnableZonesRequest)(nil),                  // 36: yandex.cloud.compute.v1.instancegroup.EnableZonesRequest
+	(*EnableZonesMetadata)(nil),                 // 37: yandex.cloud.compute.v1.instancegroup.EnableZonesMetadata
+	nil,                                         // 38: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntry
+	nil,                                         // 39: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntry
+	(*InstanceTemplate)(nil),                    // 40: yandex.cloud.compute.v1.instancegroup.InstanceTemplate
+	(*ScalePolicy)(nil),                         // 41: yandex.cloud.compute.v1.instancegroup.ScalePolicy
+	(*DeployPolicy)(nil),                        // 42: yandex.cloud.compute.v1.instancegroup.DeployPolicy
+	(*AllocationPolicy)(nil),                    // 43: yandex.cloud.compute.v1.instancegroup.AllocationPolicy
+	(*LoadBalancerSpec)(nil),                    // 44: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
+	(*HealthChecksSpec)(nil),                    // 45: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
+	(*Variable)(nil),                            // 46: yandex.cloud.compute.v1.instancegroup.Variable
+	(*ApplicationLoadBalancerSpec)(nil),         // 47: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
+	(*AutoHealingPolicy)(nil),                   // 48: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
+	(*fieldmaskpb.FieldMask)(nil),               // 49: google.protobuf.FieldMask
+	(*InstanceGroup)(nil),                       // 50: yandex.cloud.compute.v1.instancegroup.InstanceGroup
+	(*ManagedInstance)(nil),                     // 51: yandex.cloud.compute.v1.instancegroup.ManagedInstance
+	(*operation.Operation)(nil),                 // 52: yandex.cloud.operation.Operation
+	(*LogRecord)(nil),                           // 53: yandex.cloud.compute.v1.instancegroup.LogRecord
+	(*durationpb.Duration)(nil),                 // 54: google.protobuf.Duration
+	(*access.ListAccessBindingsRequest)(nil),    // 55: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),     // 56: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),  // 57: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),   // 58: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.compute.v1.instancegroup.GetInstanceGroupRequest.view:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroupView
-	34, // 1: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.labels:type_name -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntry
-	36, // 2: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.instance_template:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate
-	37, // 3: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.scale_policy:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy
-	38, // 4: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.deploy_policy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy
-	39, // 5: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.allocation_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy
-	40, // 6: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
-	41, // 7: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.health_checks_spec:type_name -> yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
-	42, // 8: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
-	43, // 9: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
-	44, // 10: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.auto_healing_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
-	45, // 11: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	35, // 12: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.labels:type_name -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntry
-	36, // 13: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.instance_template:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate
-	37, // 14: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.scale_policy:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy
-	38, // 15: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.deploy_policy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy
-	39, // 16: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.allocation_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy
-	41, // 17: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.health_checks_spec:type_name -> yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
-	40, // 18: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
-	42, // 19: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
-	43, // 20: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
-	44, // 21: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.auto_healing_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
+	38, // 1: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.labels:type_name -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntry
+	40, // 2: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.instance_template:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate
+	41, // 3: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.scale_policy:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy
+	42, // 4: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.deploy_policy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy
+	43, // 5: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.allocation_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy
+	44, // 6: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
+	45, // 7: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.health_checks_spec:type_name -> yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
+	46, // 8: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
+	47, // 9: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
+	48, // 10: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.auto_healing_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
+	49, // 11: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	39, // 12: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.labels:type_name -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntry
+	40, // 13: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.instance_template:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceTemplate
+	41, // 14: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.scale_policy:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy
+	42, // 15: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.deploy_policy:type_name -> yandex.cloud.compute.v1.instancegroup.DeployPolicy
+	43, // 16: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.allocation_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy
+	45, // 17: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.health_checks_spec:type_name -> yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
+	44, // 18: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
+	46, // 19: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
+	47, // 20: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
+	48, // 21: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.auto_healing_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
 	0,  // 22: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest.view:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroupView
-	46, // 23: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse.instance_groups:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
-	47, // 24: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse.instances:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance
-	48, // 25: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	49, // 26: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse.log_records:type_name -> yandex.cloud.compute.v1.instancegroup.LogRecord
-	5,  // 27: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:input_type -> yandex.cloud.compute.v1.instancegroup.GetInstanceGroupRequest
-	24, // 28: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest
-	6,  // 29: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:input_type -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest
-	7,  // 30: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:input_type -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupFromYamlRequest
-	9,  // 31: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:input_type -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest
-	10, // 32: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:input_type -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupFromYamlRequest
-	14, // 33: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstanceGroupRequest
-	16, // 34: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRestartRequest
-	18, // 35: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRecreateRequest
-	12, // 36: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:input_type -> yandex.cloud.compute.v1.instancegroup.StartInstanceGroupRequest
-	20, // 37: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest
-	26, // 38: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest
-	28, // 39: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest
-	29, // 40: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstancesRequest
-	30, // 41: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest
-	32, // 42: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
-	50, // 43: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	51, // 44: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	52, // 45: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	1,  // 46: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest
-	3,  // 47: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.PauseInstanceGroupProcessesRequest
-	46, // 48: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:output_type -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
-	25, // 49: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse
-	48, // 50: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:output_type -> yandex.cloud.operation.Operation
-	48, // 51: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:output_type -> yandex.cloud.operation.Operation
-	48, // 52: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:output_type -> yandex.cloud.operation.Operation
-	48, // 53: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:output_type -> yandex.cloud.operation.Operation
-	48, // 54: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:output_type -> yandex.cloud.operation.Operation
-	48, // 55: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:output_type -> yandex.cloud.operation.Operation
-	48, // 56: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:output_type -> yandex.cloud.operation.Operation
-	48, // 57: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:output_type -> yandex.cloud.operation.Operation
-	48, // 58: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:output_type -> yandex.cloud.operation.Operation
-	27, // 59: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse
-	48, // 60: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:output_type -> yandex.cloud.operation.Operation
-	48, // 61: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:output_type -> yandex.cloud.operation.Operation
-	31, // 62: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
-	33, // 63: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
-	53, // 64: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	48, // 65: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	48, // 66: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	48, // 67: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:output_type -> yandex.cloud.operation.Operation
-	48, // 68: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:output_type -> yandex.cloud.operation.Operation
-	48, // [48:69] is the sub-list for method output_type
-	27, // [27:48] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	50, // 23: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse.instance_groups:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
+	51, // 24: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse.instances:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance
+	52, // 25: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	53, // 26: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse.log_records:type_name -> yandex.cloud.compute.v1.instancegroup.LogRecord
+	54, // 27: yandex.cloud.compute.v1.instancegroup.DisableZonesRequest.duration:type_name -> google.protobuf.Duration
+	5,  // 28: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:input_type -> yandex.cloud.compute.v1.instancegroup.GetInstanceGroupRequest
+	24, // 29: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest
+	6,  // 30: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:input_type -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest
+	7,  // 31: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:input_type -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupFromYamlRequest
+	9,  // 32: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:input_type -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest
+	10, // 33: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:input_type -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupFromYamlRequest
+	14, // 34: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstanceGroupRequest
+	16, // 35: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRestartRequest
+	18, // 36: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRecreateRequest
+	12, // 37: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:input_type -> yandex.cloud.compute.v1.instancegroup.StartInstanceGroupRequest
+	20, // 38: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest
+	26, // 39: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest
+	28, // 40: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest
+	29, // 41: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstancesRequest
+	30, // 42: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest
+	32, // 43: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
+	55, // 44: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	56, // 45: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	57, // 46: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	1,  // 47: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest
+	3,  // 48: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.PauseInstanceGroupProcessesRequest
+	34, // 49: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DisableZones:input_type -> yandex.cloud.compute.v1.instancegroup.DisableZonesRequest
+	36, // 50: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.EnableZones:input_type -> yandex.cloud.compute.v1.instancegroup.EnableZonesRequest
+	50, // 51: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:output_type -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
+	25, // 52: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse
+	52, // 53: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:output_type -> yandex.cloud.operation.Operation
+	52, // 54: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:output_type -> yandex.cloud.operation.Operation
+	52, // 55: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:output_type -> yandex.cloud.operation.Operation
+	52, // 56: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:output_type -> yandex.cloud.operation.Operation
+	52, // 57: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:output_type -> yandex.cloud.operation.Operation
+	52, // 58: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:output_type -> yandex.cloud.operation.Operation
+	52, // 59: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:output_type -> yandex.cloud.operation.Operation
+	52, // 60: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:output_type -> yandex.cloud.operation.Operation
+	52, // 61: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	27, // 62: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse
+	52, // 63: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:output_type -> yandex.cloud.operation.Operation
+	52, // 64: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:output_type -> yandex.cloud.operation.Operation
+	31, // 65: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
+	33, // 66: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
+	58, // 67: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	52, // 68: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	52, // 69: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	52, // 70: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:output_type -> yandex.cloud.operation.Operation
+	52, // 71: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:output_type -> yandex.cloud.operation.Operation
+	52, // 72: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DisableZones:output_type -> yandex.cloud.operation.Operation
+	52, // 73: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.EnableZones:output_type -> yandex.cloud.operation.Operation
+	51, // [51:74] is the sub-list for method output_type
+	28, // [28:51] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_init() }
@@ -2491,7 +2726,7 @@ func file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_ini
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDesc), len(file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   35,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

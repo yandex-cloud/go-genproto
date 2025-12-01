@@ -786,6 +786,8 @@ type ClusterConfig struct {
 	Access *Access `protobuf:"bytes,6,opt,name=access,proto3" json:"access,omitempty"`
 	// Configuration and resource allocation for a MongoDB Enterprise cluster.
 	MongodbConfig *Mongodb `protobuf:"bytes,19,opt,name=mongodb_config,json=mongodbConfig,proto3" json:"mongodb_config,omitempty"`
+	// Full version
+	FullVersion   string `protobuf:"bytes,20,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -955,6 +957,13 @@ func (x *ClusterConfig) GetMongodbConfig() *Mongodb {
 		return x.MongodbConfig
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type isClusterConfig_Mongodb interface {
@@ -4949,7 +4958,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xb4\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xd7\n" +
 	"\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12B\n" +
@@ -4968,7 +4977,8 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\x19backup_retain_period_days\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12r\n" +
 	"\x17performance_diagnostics\x18\r \x01(\v29.yandex.cloud.mdb.mongodb.v1.PerformanceDiagnosticsConfigR\x16performanceDiagnostics\x12;\n" +
 	"\x06access\x18\x06 \x01(\v2#.yandex.cloud.mdb.mongodb.v1.AccessR\x06access\x12K\n" +
-	"\x0emongodb_config\x18\x13 \x01(\v2$.yandex.cloud.mdb.mongodb.v1.MongodbR\rmongodbConfigB\t\n" +
+	"\x0emongodb_config\x18\x13 \x01(\v2$.yandex.cloud.mdb.mongodb.v1.MongodbR\rmongodbConfig\x12!\n" +
+	"\ffull_version\x18\x14 \x01(\tR\vfullVersionB\t\n" +
 	"\amongodbJ\x04\b\x10\x10\x13\"\xd2\v\n" +
 	"\n" +
 	"Mongodb3_6\x12F\n" +

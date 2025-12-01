@@ -200,3 +200,55 @@ func (m *DeleteBucketHTTPSConfigRequest) SetName(v string) {
 func (m *DeleteBucketHTTPSConfigMetadata) SetName(v string) {
 	m.Name = v
 }
+
+func (m *CreateBucketInventoryConfigurationRequest) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *CreateBucketInventoryConfigurationRequest) SetId(v string) {
+	m.Id = v
+}
+
+func (m *CreateBucketInventoryConfigurationRequest) SetConfiguration(v *InventoryConfiguration) {
+	m.Configuration = v
+}
+
+func (m *CreateBucketInventoryConfigurationMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *GetBucketInventoryConfigurationRequest) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *GetBucketInventoryConfigurationRequest) SetId(v string) {
+	m.Id = v
+}
+
+func (m *DeleteBucketInventoryConfigurationRequest) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *DeleteBucketInventoryConfigurationRequest) SetId(v string) {
+	m.Id = v
+}
+
+func (m *DeleteBucketInventoryConfigurationMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ListBucketInventoryConfigurationsRequest) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *ListBucketInventoryConfigurationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListBucketInventoryConfigurationsResponse) SetConfigurations(v []*InventoryConfiguration) {
+	m.Configurations = v
+}
+
+func (m *ListBucketInventoryConfigurationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

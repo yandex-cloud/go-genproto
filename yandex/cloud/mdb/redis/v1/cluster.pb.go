@@ -799,7 +799,9 @@ type ClusterConfig struct {
 	// Retain period of automatically created backup in days
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
 	// Valkey modules settings
-	Modules       *ValkeyModules `protobuf:"bytes,14,opt,name=modules,proto3" json:"modules,omitempty"`
+	Modules *ValkeyModules `protobuf:"bytes,14,opt,name=modules,proto3" json:"modules,omitempty"`
+	// Full version
+	FullVersion   string `protobuf:"bytes,15,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -931,6 +933,13 @@ func (x *ClusterConfig) GetModules() *ValkeyModules {
 		return x.Modules
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type isClusterConfig_RedisConfig interface {
@@ -1677,7 +1686,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xdc\a\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xff\a\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12`\n" +
 	"\x10redis_config_5_0\x18\x02 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0H\x00R\x0fredisConfig_5_0\x12`\n" +
@@ -1691,7 +1700,8 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x15disk_size_autoscaling\x18\n" +
 	" \x01(\v2..yandex.cloud.mdb.redis.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12V\n" +
 	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12B\n" +
-	"\amodules\x18\x0e \x01(\v2(.yandex.cloud.mdb.redis.v1.ValkeyModulesR\amodulesB\x0e\n" +
+	"\amodules\x18\x0e \x01(\v2(.yandex.cloud.mdb.redis.v1.ValkeyModulesR\amodules\x12!\n" +
+	"\ffull_version\x18\x0f \x01(\tR\vfullVersionB\x0e\n" +
 	"\fredis_configJ\x04\b\v\x10\fJ\x04\b\f\x10\r\":\n" +
 	"\x05Shard\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +

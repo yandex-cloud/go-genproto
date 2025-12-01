@@ -125,3 +125,23 @@ func (m *GetRegionsDistributionResponse_RegionInfo) SetShare(v float64) {
 func (m *GetRegionsDistributionResponse_RegionInfo) SetAffinityIndex(v float64) {
 	m.AffinityIndex = v
 }
+
+func (m *GetRegionsTreeRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *GetRegionsTreeResponse) SetRegions(v []*GetRegionsTreeResponse_RegionInfo) {
+	m.Regions = v
+}
+
+func (m *GetRegionsTreeResponse_RegionInfo) SetId(v string) {
+	m.Id = v
+}
+
+func (m *GetRegionsTreeResponse_RegionInfo) SetLabel(v string) {
+	m.Label = v
+}
+
+func (m *GetRegionsTreeResponse_RegionInfo) SetChildren(v []*GetRegionsTreeResponse_RegionInfo) {
+	m.Children = v
+}
