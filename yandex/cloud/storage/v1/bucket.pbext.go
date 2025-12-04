@@ -80,8 +80,8 @@ func (m *Bucket) SetResourceId(v string) {
 	m.ResourceId = v
 }
 
-func (m *Bucket) SetDisabledAccesskeyAuth(v bool) {
-	m.DisabledAccesskeyAuth = v
+func (m *Bucket) SetDisabledStatickeyAuth(v bool) {
+	m.DisabledStatickeyAuth = v
 }
 
 func (m *Tag) SetKey(v string) {

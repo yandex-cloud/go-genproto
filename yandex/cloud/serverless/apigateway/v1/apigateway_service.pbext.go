@@ -140,6 +140,10 @@ func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
+func (m *ResumeApiGatewayRequest) SetApiGatewayId(v string) {
+	m.ApiGatewayId = v
+}
+
 func (m *AddDomainRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
@@ -169,6 +173,10 @@ func (m *UpdateApiGatewayMetadata) SetApiGatewayId(v string) {
 }
 
 func (m *DeleteApiGatewayMetadata) SetApiGatewayId(v string) {
+	m.ApiGatewayId = v
+}
+
+func (m *ResumeApiGatewayMetadata) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 

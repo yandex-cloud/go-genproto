@@ -34,6 +34,10 @@ func (m *AccessPolicyBinding) SetAccessPolicyTemplateId(v string) {
 	m.AccessPolicyTemplateId = v
 }
 
+func (m *AccessPolicyBinding) SetParameters(v map[string]string) {
+	m.Parameters = v
+}
+
 func (m *BindAccessPolicyRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }

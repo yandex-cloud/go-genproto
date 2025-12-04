@@ -277,9 +277,9 @@ type CreateBucketRequest struct {
 	// Configuration for bucket's allowed private endpoints.
 	// requires permission s3:PutBucketAllowedPrivateEndpoints
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,11,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
-	// An option to disable access key auth for a bucket.
-	// requires permission s3:PutBucketAccessKeyAuthSettings
-	DisabledAccesskeyAuth bool `protobuf:"varint,12,opt,name=disabled_accesskey_auth,json=disabledAccesskeyAuth,proto3" json:"disabled_accesskey_auth,omitempty"`
+	// An option to disable static key auth for a bucket.
+	// requires permission s3:UpdateBucketStaticKeyAuthSettings
+	DisabledStatickeyAuth bool `protobuf:"varint,12,opt,name=disabled_statickey_auth,json=disabledStatickeyAuth,proto3" json:"disabled_statickey_auth,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -384,9 +384,9 @@ func (x *CreateBucketRequest) GetAllowedPrivateEndpoints() *BucketAllowedPrivate
 	return nil
 }
 
-func (x *CreateBucketRequest) GetDisabledAccesskeyAuth() bool {
+func (x *CreateBucketRequest) GetDisabledStatickeyAuth() bool {
 	if x != nil {
-		return x.DisabledAccesskeyAuth
+		return x.DisabledStatickeyAuth
 	}
 	return false
 }
@@ -486,9 +486,9 @@ type UpdateBucketRequest struct {
 	Encryption *Encryption `protobuf:"bytes,14,opt,name=encryption,proto3" json:"encryption,omitempty"`
 	// requires permission s3:PutBucketAllowedPrivateEndpoints
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,15,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
-	// An option to disable access key auth for a bucket.
-	// requires permission s3:PutBucketAccessKeyAuthSettings
-	DisabledAccesskeyAuth bool `protobuf:"varint,16,opt,name=disabled_accesskey_auth,json=disabledAccesskeyAuth,proto3" json:"disabled_accesskey_auth,omitempty"`
+	// An option to disable static key auth for a bucket.
+	// requires permission s3:UpdateBucketStaticKeyAuthSettings
+	DisabledStatickeyAuth bool `protobuf:"varint,16,opt,name=disabled_statickey_auth,json=disabledStatickeyAuth,proto3" json:"disabled_statickey_auth,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -628,9 +628,9 @@ func (x *UpdateBucketRequest) GetAllowedPrivateEndpoints() *BucketAllowedPrivate
 	return nil
 }
 
-func (x *UpdateBucketRequest) GetDisabledAccesskeyAuth() bool {
+func (x *UpdateBucketRequest) GetDisabledStatickeyAuth() bool {
 	if x != nil {
-		return x.DisabledAccesskeyAuth
+		return x.DisabledStatickeyAuth
 	}
 	return false
 }
@@ -1604,7 +1604,7 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	" \x01(\x0e2#.yandex.cloud.storage.v1.VersioningR\n" +
 	"versioning\x12r\n" +
 	"\x19allowed_private_endpoints\x18\v \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
-	"\x17disabled_accesskey_auth\x18\f \x01(\bR\x15disabledAccesskeyAuthJ\x04\b\x03\x10\x04\"*\n" +
+	"\x17disabled_statickey_auth\x18\f \x01(\bR\x15disabledStatickeyAuthJ\x04\b\x03\x10\x04\"*\n" +
 	"\x14CreateBucketMetadata\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\x92\b\n" +
 	"\x13UpdateBucketRequest\x12\x18\n" +
@@ -1630,7 +1630,7 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"encryption\x18\x0e \x01(\v2#.yandex.cloud.storage.v1.EncryptionR\n" +
 	"encryption\x12r\n" +
 	"\x19allowed_private_endpoints\x18\x0f \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
-	"\x17disabled_accesskey_auth\x18\x10 \x01(\bR\x15disabledAccesskeyAuth\"*\n" +
+	"\x17disabled_statickey_auth\x18\x10 \x01(\bR\x15disabledStatickeyAuth\"*\n" +
 	"\x14UpdateBucketMetadata\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"/\n" +
 	"\x13DeleteBucketRequest\x12\x18\n" +

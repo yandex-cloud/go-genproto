@@ -71,6 +71,10 @@ func (m *Cluster) SetEndpoints(v *Cluster_Endpoints) {
 	m.Endpoints = v
 }
 
+func (m *Cluster) SetCidrBlocksWhitelist(v *CidrBlocks) {
+	m.CidrBlocksWhitelist = v
+}
+
 func (m *Cluster_Endpoints) SetUi(v string) {
 	m.Ui = v
 }
@@ -85,6 +89,10 @@ func (m *Cluster_Endpoints) SetInternalHttpProxyAlias(v string) {
 
 func (m *Cluster_Endpoints) SetInternalRpcProxyAlias(v string) {
 	m.InternalRpcProxyAlias = v
+}
+
+func (m *CidrBlocks) SetV4CidrBlocks(v []string) {
+	m.V4CidrBlocks = v
 }
 
 func (m *StorageSpec) SetHdd(v *StorageSpec_HddSpec) {
@@ -201,6 +209,52 @@ func (m *OdinSpec) SetChecksTtl(v *durationpb.Duration) {
 	m.ChecksTtl = v
 }
 
+func (m *ClearTmpCronSpec) SetInterval(v *durationpb.Duration) {
+	m.Interval = v
+}
+
+func (m *ClearTmpCronSpec) SetAccountUsageRatioSaveTotal(v float64) {
+	m.AccountUsageRatioSaveTotal = v
+}
+
+func (m *ClearTmpCronSpec) SetAccountUsageRatioSavePerOwner(v float64) {
+	m.AccountUsageRatioSavePerOwner = v
+}
+
+func (m *ClearTmpCronSpec) SetMaxDirNodeCount(v int64) {
+	m.MaxDirNodeCount = v
+}
+
+func (m *CronSpec) SetClearTmp(v *ClearTmpCronSpec) {
+	m.ClearTmp = v
+}
+
+type ClientLogging_Destination = isClientLogging_Destination
+
+func (m *ClientLogging) SetDestination(v ClientLogging_Destination) {
+	m.Destination = v
+}
+
+func (m *ClientLogging) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *ClientLogging) SetLogGroupId(v string) {
+	m.Destination = &ClientLogging_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *ClientLogging) SetFolderId(v string) {
+	m.Destination = &ClientLogging_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *ClientLogging) SetAuditLogsEnabled(v bool) {
+	m.AuditLogsEnabled = v
+}
+
 func (m *ClusterSpec) SetStorage(v *StorageSpec) {
 	m.Storage = v
 }
@@ -223,4 +277,12 @@ func (m *ClusterSpec) SetOdin(v *OdinSpec) {
 
 func (m *ClusterSpec) SetFlavor(v ClusterSpec_Flavor) {
 	m.Flavor = v
+}
+
+func (m *ClusterSpec) SetCron(v *CronSpec) {
+	m.Cron = v
+}
+
+func (m *ClusterSpec) SetClientLogging(v *ClientLogging) {
+	m.ClientLogging = v
 }

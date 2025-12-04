@@ -194,6 +194,46 @@ func (m *GreenplumConfig6) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleVal
 	m.GpResourceGroupMemoryLimit = v
 }
 
+func (m *GreenplumConfig6) SetLogConnections(v *wrapperspb.BoolValue) {
+	m.LogConnections = v
+}
+
+func (m *GreenplumConfig6) SetLogDisconnections(v *wrapperspb.BoolValue) {
+	m.LogDisconnections = v
+}
+
+func (m *GreenplumConfig6) SetLogHostname(v *wrapperspb.BoolValue) {
+	m.LogHostname = v
+}
+
+func (m *GreenplumConfig6) SetLogStatementStats(v *wrapperspb.BoolValue) {
+	m.LogStatementStats = v
+}
+
+func (m *GreenplumConfig6) SetLogMinDurationStatement(v *wrapperspb.Int64Value) {
+	m.LogMinDurationStatement = v
+}
+
+func (m *GreenplumConfig6) SetMasterSharedBuffers(v *wrapperspb.Int64Value) {
+	m.MasterSharedBuffers = v
+}
+
+func (m *GreenplumConfig6) SetMaxLocksPerTransaction(v *wrapperspb.Int64Value) {
+	m.MaxLocksPerTransaction = v
+}
+
+func (m *GreenplumConfig6) SetSegmentSharedBuffers(v *wrapperspb.Int64Value) {
+	m.SegmentSharedBuffers = v
+}
+
+func (m *GreenplumConfig6) SetLogErrorVerbosity(v LogErrorVerbosity) {
+	m.LogErrorVerbosity = v
+}
+
+func (m *GreenplumConfig6) SetLogMinMessages(v LogLevelMessage) {
+	m.LogMinMessages = v
+}
+
 func (m *GreenplumConfigCBDB) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
@@ -280,6 +320,46 @@ func (m *GreenplumConfigCBDB) SetGpAutostatsOnChangeThreshold(v *wrapperspb.Int6
 
 func (m *GreenplumConfigCBDB) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleValue) {
 	m.GpResourceGroupMemoryLimit = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogConnections(v *wrapperspb.BoolValue) {
+	m.LogConnections = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogDisconnections(v *wrapperspb.BoolValue) {
+	m.LogDisconnections = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogHostname(v *wrapperspb.BoolValue) {
+	m.LogHostname = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogStatementStats(v *wrapperspb.BoolValue) {
+	m.LogStatementStats = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogMinDurationStatement(v *wrapperspb.Int64Value) {
+	m.LogMinDurationStatement = v
+}
+
+func (m *GreenplumConfigCBDB) SetMasterSharedBuffers(v *wrapperspb.Int64Value) {
+	m.MasterSharedBuffers = v
+}
+
+func (m *GreenplumConfigCBDB) SetMaxLocksPerTransaction(v *wrapperspb.Int64Value) {
+	m.MaxLocksPerTransaction = v
+}
+
+func (m *GreenplumConfigCBDB) SetSegmentSharedBuffers(v *wrapperspb.Int64Value) {
+	m.SegmentSharedBuffers = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogErrorVerbosity(v LogErrorVerbosity) {
+	m.LogErrorVerbosity = v
+}
+
+func (m *GreenplumConfigCBDB) SetLogMinMessages(v LogLevelMessage) {
+	m.LogMinMessages = v
 }
 
 func (m *GreenplumConfig6_22) SetMaxConnections(v *wrapperspb.Int64Value) {

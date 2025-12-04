@@ -26,6 +26,7 @@ const (
 	ApiGatewayService_Create_FullMethodName               = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/Create"
 	ApiGatewayService_Update_FullMethodName               = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/Update"
 	ApiGatewayService_Delete_FullMethodName               = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/Delete"
+	ApiGatewayService_Resume_FullMethodName               = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/Resume"
 	ApiGatewayService_AddDomain_FullMethodName            = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/AddDomain"
 	ApiGatewayService_RemoveDomain_FullMethodName         = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/RemoveDomain"
 	ApiGatewayService_GetOpenapiSpec_FullMethodName       = "/yandex.cloud.serverless.apigateway.v1.ApiGatewayService/GetOpenapiSpec"
@@ -54,6 +55,8 @@ type ApiGatewayServiceClient interface {
 	Update(ctx context.Context, in *UpdateApiGatewayRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified API gateway.
 	Delete(ctx context.Context, in *DeleteApiGatewayRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Resumes the specified API gateway.
+	Resume(ctx context.Context, in *ResumeApiGatewayRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Attaches domain to the specified API gateway.
 	AddDomain(ctx context.Context, in *AddDomainRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Detaches domain from the specified API gateway.
@@ -122,6 +125,16 @@ func (c *apiGatewayServiceClient) Delete(ctx context.Context, in *DeleteApiGatew
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ApiGatewayService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiGatewayServiceClient) Resume(ctx context.Context, in *ResumeApiGatewayRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ApiGatewayService_Resume_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -217,6 +230,8 @@ type ApiGatewayServiceServer interface {
 	Update(context.Context, *UpdateApiGatewayRequest) (*operation.Operation, error)
 	// Deletes the specified API gateway.
 	Delete(context.Context, *DeleteApiGatewayRequest) (*operation.Operation, error)
+	// Resumes the specified API gateway.
+	Resume(context.Context, *ResumeApiGatewayRequest) (*operation.Operation, error)
 	// Attaches domain to the specified API gateway.
 	AddDomain(context.Context, *AddDomainRequest) (*operation.Operation, error)
 	// Detaches domain from the specified API gateway.
@@ -254,6 +269,9 @@ func (UnimplementedApiGatewayServiceServer) Update(context.Context, *UpdateApiGa
 }
 func (UnimplementedApiGatewayServiceServer) Delete(context.Context, *DeleteApiGatewayRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedApiGatewayServiceServer) Resume(context.Context, *ResumeApiGatewayRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Resume not implemented")
 }
 func (UnimplementedApiGatewayServiceServer) AddDomain(context.Context, *AddDomainRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddDomain not implemented")
@@ -382,6 +400,24 @@ func _ApiGatewayService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiGatewayServiceServer).Delete(ctx, req.(*DeleteApiGatewayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiGatewayService_Resume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResumeApiGatewayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiGatewayServiceServer).Resume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApiGatewayService_Resume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiGatewayServiceServer).Resume(ctx, req.(*ResumeApiGatewayRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -538,6 +574,10 @@ var ApiGatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ApiGatewayService_Delete_Handler,
+		},
+		{
+			MethodName: "Resume",
+			Handler:    _ApiGatewayService_Resume_Handler,
 		},
 		{
 			MethodName: "AddDomain",

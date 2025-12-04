@@ -63,8 +63,8 @@ func (m *CreateBucketRequest) SetAllowedPrivateEndpoints(v *BucketAllowedPrivate
 	m.AllowedPrivateEndpoints = v
 }
 
-func (m *CreateBucketRequest) SetDisabledAccesskeyAuth(v bool) {
-	m.DisabledAccesskeyAuth = v
+func (m *CreateBucketRequest) SetDisabledStatickeyAuth(v bool) {
+	m.DisabledStatickeyAuth = v
 }
 
 func (m *CreateBucketMetadata) SetName(v string) {
@@ -131,8 +131,8 @@ func (m *UpdateBucketRequest) SetAllowedPrivateEndpoints(v *BucketAllowedPrivate
 	m.AllowedPrivateEndpoints = v
 }
 
-func (m *UpdateBucketRequest) SetDisabledAccesskeyAuth(v bool) {
-	m.DisabledAccesskeyAuth = v
+func (m *UpdateBucketRequest) SetDisabledStatickeyAuth(v bool) {
+	m.DisabledStatickeyAuth = v
 }
 
 func (m *UpdateBucketMetadata) SetName(v string) {

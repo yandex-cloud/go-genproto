@@ -260,8 +260,20 @@ func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue
 	m.DiskEncryptionKeyId = v
 }
 
+func (m *RestoreClusterRequest) SetPartialRestoreSpec(v *RestoreClusterRequest_PartialRestoreSpec) {
+	m.PartialRestoreSpec = v
+}
+
 func (m *RestoreClusterRequest_RecoveryTargetSpec) SetTimestamp(v int64) {
 	m.Timestamp = v
+}
+
+func (m *RestoreClusterRequest_PartialRestoreSpec) SetWhitelist(v []string) {
+	m.Whitelist = v
+}
+
+func (m *RestoreClusterRequest_PartialRestoreSpec) SetBlacklist(v []string) {
+	m.Blacklist = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

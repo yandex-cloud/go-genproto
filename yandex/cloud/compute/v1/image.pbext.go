@@ -69,3 +69,11 @@ func (m *Image) SetKmsKey(v *KMSKey) {
 func (m *Os) SetType(v Os_Type) {
 	m.Type = v
 }
+
+func (m *Os) SetNvidia(v *Nvidia) {
+	m.Nvidia = v
+}
+
+func (m *Nvidia) SetDriver(v string) {
+	m.Driver = v
+}

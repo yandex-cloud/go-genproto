@@ -25,6 +25,7 @@ const (
 type Image_Status int32
 
 const (
+	// Unknown status.
 	Image_STATUS_UNSPECIFIED Image_Status = 0
 	// Image is being created.
 	Image_CREATING Image_Status = 1
@@ -84,6 +85,7 @@ func (Image_Status) EnumDescriptor() ([]byte, []int) {
 type Os_Type int32
 
 const (
+	// Unknown operating system type.
 	Os_TYPE_UNSPECIFIED Os_Type = 0
 	// Linux operating system.
 	Os_LINUX Os_Type = 1
@@ -138,7 +140,8 @@ type Image struct {
 	// ID of the image.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the image belongs to.
-	FolderId  string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Name of the image. 1-63 characters long.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
@@ -320,7 +323,10 @@ type Os struct {
 	// Operating system type. The default is `LINUX`.
 	//
 	// This field is used to correctly emulate a vCPU and calculate the cost of using an instance.
-	Type          Os_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.compute.v1.Os_Type" json:"type,omitempty"`
+	Type Os_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.compute.v1.Os_Type" json:"type,omitempty"`
+	// Gpu type.
+	// This field is used to correctly select a node with a host gpu that matches the gpu from here, in order to run the VM on it.
+	Nvidia        *Nvidia `protobuf:"bytes,2,opt,name=nvidia,proto3" json:"nvidia,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -362,6 +368,58 @@ func (x *Os) GetType() Os_Type {
 	return Os_TYPE_UNSPECIFIED
 }
 
+func (x *Os) GetNvidia() *Nvidia {
+	if x != nil {
+		return x.Nvidia
+	}
+	return nil
+}
+
+type Nvidia struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Gpu driver version.
+	Driver        string `protobuf:"bytes,1,opt,name=driver,proto3" json:"driver,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Nvidia) Reset() {
+	*x = Nvidia{}
+	mi := &file_yandex_cloud_compute_v1_image_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Nvidia) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Nvidia) ProtoMessage() {}
+
+func (x *Nvidia) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_image_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Nvidia.ProtoReflect.Descriptor instead.
+func (*Nvidia) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_image_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Nvidia) GetDriver() string {
+	if x != nil {
+		return x.Driver
+	}
+	return ""
+}
+
 var File_yandex_cloud_compute_v1_image_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_image_proto_rawDesc = "" +
@@ -394,13 +452,16 @@ const file_yandex_cloud_compute_v1_image_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\t\n" +
 	"\x05READY\x10\x02\x12\t\n" +
 	"\x05ERROR\x10\x03\x12\f\n" +
-	"\bDELETING\x10\x04\"p\n" +
+	"\bDELETING\x10\x04\"\xa9\x01\n" +
 	"\x02Os\x124\n" +
-	"\x04type\x18\x01 \x01(\x0e2 .yandex.cloud.compute.v1.Os.TypeR\x04type\"4\n" +
+	"\x04type\x18\x01 \x01(\x0e2 .yandex.cloud.compute.v1.Os.TypeR\x04type\x127\n" +
+	"\x06nvidia\x18\x02 \x01(\v2\x1f.yandex.cloud.compute.v1.NvidiaR\x06nvidia\"4\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05LINUX\x10\x01\x12\v\n" +
-	"\aWINDOWS\x10\x02Bb\n" +
+	"\aWINDOWS\x10\x02\" \n" +
+	"\x06Nvidia\x12\x16\n" +
+	"\x06driver\x18\x01 \x01(\tR\x06driverBb\n" +
 	"\x1byandex.cloud.api.compute.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1;computeb\x06proto3"
 
 var (
@@ -416,30 +477,32 @@ func file_yandex_cloud_compute_v1_image_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_compute_v1_image_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_compute_v1_image_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_compute_v1_image_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_compute_v1_image_proto_goTypes = []any{
 	(Image_Status)(0),             // 0: yandex.cloud.compute.v1.Image.Status
 	(Os_Type)(0),                  // 1: yandex.cloud.compute.v1.Os.Type
 	(*Image)(nil),                 // 2: yandex.cloud.compute.v1.Image
 	(*Os)(nil),                    // 3: yandex.cloud.compute.v1.Os
-	nil,                           // 4: yandex.cloud.compute.v1.Image.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
-	(*HardwareGeneration)(nil),    // 6: yandex.cloud.compute.v1.HardwareGeneration
-	(*KMSKey)(nil),                // 7: yandex.cloud.compute.v1.KMSKey
+	(*Nvidia)(nil),                // 4: yandex.cloud.compute.v1.Nvidia
+	nil,                           // 5: yandex.cloud.compute.v1.Image.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*HardwareGeneration)(nil),    // 7: yandex.cloud.compute.v1.HardwareGeneration
+	(*KMSKey)(nil),                // 8: yandex.cloud.compute.v1.KMSKey
 }
 var file_yandex_cloud_compute_v1_image_proto_depIdxs = []int32{
-	5, // 0: yandex.cloud.compute.v1.Image.created_at:type_name -> google.protobuf.Timestamp
-	4, // 1: yandex.cloud.compute.v1.Image.labels:type_name -> yandex.cloud.compute.v1.Image.LabelsEntry
+	6, // 0: yandex.cloud.compute.v1.Image.created_at:type_name -> google.protobuf.Timestamp
+	5, // 1: yandex.cloud.compute.v1.Image.labels:type_name -> yandex.cloud.compute.v1.Image.LabelsEntry
 	0, // 2: yandex.cloud.compute.v1.Image.status:type_name -> yandex.cloud.compute.v1.Image.Status
 	3, // 3: yandex.cloud.compute.v1.Image.os:type_name -> yandex.cloud.compute.v1.Os
-	6, // 4: yandex.cloud.compute.v1.Image.hardware_generation:type_name -> yandex.cloud.compute.v1.HardwareGeneration
-	7, // 5: yandex.cloud.compute.v1.Image.kms_key:type_name -> yandex.cloud.compute.v1.KMSKey
+	7, // 4: yandex.cloud.compute.v1.Image.hardware_generation:type_name -> yandex.cloud.compute.v1.HardwareGeneration
+	8, // 5: yandex.cloud.compute.v1.Image.kms_key:type_name -> yandex.cloud.compute.v1.KMSKey
 	1, // 6: yandex.cloud.compute.v1.Os.type:type_name -> yandex.cloud.compute.v1.Os.Type
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	4, // 7: yandex.cloud.compute.v1.Os.nvidia:type_name -> yandex.cloud.compute.v1.Nvidia
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_image_proto_init() }
@@ -455,7 +518,7 @@ func file_yandex_cloud_compute_v1_image_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_compute_v1_image_proto_rawDesc), len(file_yandex_cloud_compute_v1_image_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

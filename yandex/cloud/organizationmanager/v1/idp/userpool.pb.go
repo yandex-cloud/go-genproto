@@ -867,12 +867,12 @@ type isPasswordQualityPolicy_ComplexityPolicy interface {
 }
 
 type PasswordQualityPolicy_Fixed_ struct {
-	// Fixed complexity requirements
+	// Fixed complexity requirements. Exactly one of complexity requirements must be specified.
 	Fixed *PasswordQualityPolicy_Fixed `protobuf:"bytes,7,opt,name=fixed,proto3,oneof"`
 }
 
 type PasswordQualityPolicy_Smart_ struct {
-	// Smart complexity requirements
+	// Smart complexity requirements. Exactly one of complexity requirements must be specified.
 	Smart *PasswordQualityPolicy_Smart `protobuf:"bytes,8,opt,name=smart,proto3,oneof"`
 }
 
@@ -937,6 +937,7 @@ func (x *PasswordLifetimePolicy) GetMaxDaysCount() int64 {
 }
 
 // Policy that defines protection against brute force attacks.
+// Zero or empty values disable bruteforce protection.
 type BruteforceProtectionPolicy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Time window for counting failed authentication attempts.
@@ -1284,6 +1285,7 @@ func (x *PasswordQualityPolicy_Fixed) GetMinLength() int64 {
 }
 
 // Smart complexity policy applies adaptive requirements based on character class diversity.
+// Zero value means passwords with this number of classes are forbidden.
 type PasswordQualityPolicy_Smart struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// For passwords with one class of characters

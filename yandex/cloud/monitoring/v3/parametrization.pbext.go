@@ -66,6 +66,28 @@ func (m *TextValuesParameter) SetDefaultValues(v []string) {
 	m.DefaultValues = v
 }
 
+type WorkspaceParameter_Container = isWorkspaceParameter_Container
+
+func (m *WorkspaceParameter) SetContainer(v WorkspaceParameter_Container) {
+	m.Container = v
+}
+
+func (m *WorkspaceParameter) SetProjectId(v string) {
+	m.Container = &WorkspaceParameter_ProjectId{
+		ProjectId: v,
+	}
+}
+
+func (m *WorkspaceParameter) SetFolderId(v string) {
+	m.Container = &WorkspaceParameter_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *WorkspaceParameter) SetDefaultWorkspaceId(v string) {
+	m.DefaultWorkspaceId = v
+}
+
 type Parameter_Data = isParameter_Data
 
 func (m *Parameter) SetData(v Parameter_Data) {
@@ -113,6 +135,12 @@ func (m *Parameter) SetDoubleParameter(v *DoubleParameter) {
 func (m *Parameter) SetTextValues(v *TextValuesParameter) {
 	m.Data = &Parameter_TextValues{
 		TextValues: v,
+	}
+}
+
+func (m *Parameter) SetWorkspaceParameter(v *WorkspaceParameter) {
+	m.Data = &Parameter_WorkspaceParameter{
+		WorkspaceParameter: v,
 	}
 }
 

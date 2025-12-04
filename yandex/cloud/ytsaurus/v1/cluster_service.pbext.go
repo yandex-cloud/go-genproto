@@ -66,6 +66,10 @@ func (m *CreateClusterRequest) SetSpec(v *ClusterSpec) {
 	m.Spec = v
 }
 
+func (m *CreateClusterRequest) SetCidrBlocksWhitelist(v *CidrBlocks) {
+	m.CidrBlocksWhitelist = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -100,6 +104,10 @@ func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *UpdateClusterRequest) SetSpec(v *ClusterSpec) {
 	m.Spec = v
+}
+
+func (m *UpdateClusterRequest) SetCidrBlocksWhitelist(v *CidrBlocks) {
+	m.CidrBlocksWhitelist = v
 }
 
 func (m *UpdateClusterMetadata) SetClusterId(v string) {

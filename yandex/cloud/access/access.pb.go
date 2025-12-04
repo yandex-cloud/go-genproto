@@ -269,7 +269,8 @@ func (x *AccessPolicy) GetDescription() string {
 type AccessPolicyBinding struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the access policy template being applied.
-	AccessPolicyTemplateId string `protobuf:"bytes,1,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
+	AccessPolicyTemplateId string            `protobuf:"bytes,1,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
+	Parameters             map[string]string `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -309,6 +310,13 @@ func (x *AccessPolicyBinding) GetAccessPolicyTemplateId() string {
 		return x.AccessPolicyTemplateId
 	}
 	return ""
+}
+
+func (x *AccessPolicyBinding) GetParameters() map[string]string {
+	if x != nil {
+		return x.Parameters
+	}
+	return nil
 }
 
 type BindAccessPolicyRequest struct {
@@ -1177,9 +1185,15 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\fAccessPolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\"^\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xf7\x01\n" +
 	"\x13AccessPolicyBinding\x12G\n" +
-	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16accessPolicyTemplateId\"\xac\x01\n" +
+	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16accessPolicyTemplateId\x12X\n" +
+	"\n" +
+	"parameters\x18\x02 \x03(\v28.yandex.cloud.access.AccessPolicyBinding.ParametersEntryR\n" +
+	"parameters\x1a=\n" +
+	"\x0fParametersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xac\x01\n" +
 	"\x17BindAccessPolicyRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12b\n" +
@@ -1259,7 +1273,7 @@ func file_yandex_cloud_access_access_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_access_access_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_access_access_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_yandex_cloud_access_access_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_yandex_cloud_access_access_proto_goTypes = []any{
 	(AccessBindingAction)(0),                 // 0: yandex.cloud.access.AccessBindingAction
 	(*Subject)(nil),                          // 1: yandex.cloud.access.Subject
@@ -1282,23 +1296,25 @@ var file_yandex_cloud_access_access_proto_goTypes = []any{
 	(*UpdateAccessBindingsMetadata)(nil),     // 18: yandex.cloud.access.UpdateAccessBindingsMetadata
 	(*AccessBindingDelta)(nil),               // 19: yandex.cloud.access.AccessBindingDelta
 	(*AccessBindingsOperationResult)(nil),    // 20: yandex.cloud.access.AccessBindingsOperationResult
+	nil,                                      // 21: yandex.cloud.access.AccessPolicyBinding.ParametersEntry
 }
 var file_yandex_cloud_access_access_proto_depIdxs = []int32{
 	1,  // 0: yandex.cloud.access.AccessBinding.subject:type_name -> yandex.cloud.access.Subject
-	4,  // 1: yandex.cloud.access.BindAccessPolicyRequest.access_policy_binding:type_name -> yandex.cloud.access.AccessPolicyBinding
-	4,  // 2: yandex.cloud.access.BindAccessPolicyMetadata.access_policy_binding:type_name -> yandex.cloud.access.AccessPolicyBinding
-	2,  // 3: yandex.cloud.access.ListAccessBindingsResponse.access_bindings:type_name -> yandex.cloud.access.AccessBinding
-	4,  // 4: yandex.cloud.access.ListAccessPolicyBindingsResponse.access_policy_bindings:type_name -> yandex.cloud.access.AccessPolicyBinding
-	2,  // 5: yandex.cloud.access.SetAccessBindingsRequest.access_bindings:type_name -> yandex.cloud.access.AccessBinding
-	19, // 6: yandex.cloud.access.UpdateAccessBindingsRequest.access_binding_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
-	0,  // 7: yandex.cloud.access.AccessBindingDelta.action:type_name -> yandex.cloud.access.AccessBindingAction
-	2,  // 8: yandex.cloud.access.AccessBindingDelta.access_binding:type_name -> yandex.cloud.access.AccessBinding
-	19, // 9: yandex.cloud.access.AccessBindingsOperationResult.effective_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	21, // 1: yandex.cloud.access.AccessPolicyBinding.parameters:type_name -> yandex.cloud.access.AccessPolicyBinding.ParametersEntry
+	4,  // 2: yandex.cloud.access.BindAccessPolicyRequest.access_policy_binding:type_name -> yandex.cloud.access.AccessPolicyBinding
+	4,  // 3: yandex.cloud.access.BindAccessPolicyMetadata.access_policy_binding:type_name -> yandex.cloud.access.AccessPolicyBinding
+	2,  // 4: yandex.cloud.access.ListAccessBindingsResponse.access_bindings:type_name -> yandex.cloud.access.AccessBinding
+	4,  // 5: yandex.cloud.access.ListAccessPolicyBindingsResponse.access_policy_bindings:type_name -> yandex.cloud.access.AccessPolicyBinding
+	2,  // 6: yandex.cloud.access.SetAccessBindingsRequest.access_bindings:type_name -> yandex.cloud.access.AccessBinding
+	19, // 7: yandex.cloud.access.UpdateAccessBindingsRequest.access_binding_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
+	0,  // 8: yandex.cloud.access.AccessBindingDelta.action:type_name -> yandex.cloud.access.AccessBindingAction
+	2,  // 9: yandex.cloud.access.AccessBindingDelta.access_binding:type_name -> yandex.cloud.access.AccessBinding
+	19, // 10: yandex.cloud.access.AccessBindingsOperationResult.effective_deltas:type_name -> yandex.cloud.access.AccessBindingDelta
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_access_access_proto_init() }
@@ -1312,7 +1328,7 @@ func file_yandex_cloud_access_access_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_access_access_proto_rawDesc), len(file_yandex_cloud_access_access_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   20,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

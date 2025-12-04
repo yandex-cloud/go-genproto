@@ -319,6 +319,10 @@ func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue
 	m.DiskEncryptionKeyId = v
 }
 
+func (m *RestoreClusterRequest) SetUserSpecs(v []*UserSpec) {
+	m.UserSpecs = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

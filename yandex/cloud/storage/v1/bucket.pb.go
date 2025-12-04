@@ -830,8 +830,8 @@ type Bucket struct {
 	AllowedPrivateEndpoints *BucketAllowedPrivateEndpoints `protobuf:"bytes,17,opt,name=allowed_private_endpoints,json=allowedPrivateEndpoints,proto3" json:"allowed_private_endpoints,omitempty"`
 	// ID of the Yandex.Cloud entity that owns the bucket.
 	ResourceId string `protobuf:"bytes,18,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	// An option to disable access key auth for a bucket.
-	DisabledAccesskeyAuth bool `protobuf:"varint,19,opt,name=disabled_accesskey_auth,json=disabledAccesskeyAuth,proto3" json:"disabled_accesskey_auth,omitempty"`
+	// An option to disable static key auth for a bucket.
+	DisabledStatickeyAuth bool `protobuf:"varint,19,opt,name=disabled_statickey_auth,json=disabledStatickeyAuth,proto3" json:"disabled_statickey_auth,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -992,9 +992,9 @@ func (x *Bucket) GetResourceId() string {
 	return ""
 }
 
-func (x *Bucket) GetDisabledAccesskeyAuth() bool {
+func (x *Bucket) GetDisabledStatickeyAuth() bool {
 	if x != nil {
-		return x.DisabledAccesskeyAuth
+		return x.DisabledStatickeyAuth
 	}
 	return false
 }
@@ -3472,7 +3472,7 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x19allowed_private_endpoints\x18\x11 \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x12\x1f\n" +
 	"\vresource_id\x18\x12 \x01(\tR\n" +
 	"resourceId\x126\n" +
-	"\x17disabled_accesskey_auth\x18\x13 \x01(\bR\x15disabledAccesskeyAuth\"-\n" +
+	"\x17disabled_statickey_auth\x18\x13 \x01(\bR\x15disabledStatickeyAuth\"-\n" +
 	"\x03Tag\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\"\xc6\x04\n" +

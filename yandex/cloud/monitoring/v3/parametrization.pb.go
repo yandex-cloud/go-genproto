@@ -393,6 +393,102 @@ func (x *TextValuesParameter) GetDefaultValues() []string {
 	return nil
 }
 
+// Workspace parameter.
+type WorkspaceParameter struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Container id
+	//
+	// Types that are valid to be assigned to Container:
+	//
+	//	*WorkspaceParameter_ProjectId
+	//	*WorkspaceParameter_FolderId
+	Container isWorkspaceParameter_Container `protobuf_oneof:"container"`
+	// Default value
+	DefaultWorkspaceId string `protobuf:"bytes,3,opt,name=default_workspace_id,json=defaultWorkspaceId,proto3" json:"default_workspace_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *WorkspaceParameter) Reset() {
+	*x = WorkspaceParameter{}
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkspaceParameter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkspaceParameter) ProtoMessage() {}
+
+func (x *WorkspaceParameter) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkspaceParameter.ProtoReflect.Descriptor instead.
+func (*WorkspaceParameter) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *WorkspaceParameter) GetContainer() isWorkspaceParameter_Container {
+	if x != nil {
+		return x.Container
+	}
+	return nil
+}
+
+func (x *WorkspaceParameter) GetProjectId() string {
+	if x != nil {
+		if x, ok := x.Container.(*WorkspaceParameter_ProjectId); ok {
+			return x.ProjectId
+		}
+	}
+	return ""
+}
+
+func (x *WorkspaceParameter) GetFolderId() string {
+	if x != nil {
+		if x, ok := x.Container.(*WorkspaceParameter_FolderId); ok {
+			return x.FolderId
+		}
+	}
+	return ""
+}
+
+func (x *WorkspaceParameter) GetDefaultWorkspaceId() string {
+	if x != nil {
+		return x.DefaultWorkspaceId
+	}
+	return ""
+}
+
+type isWorkspaceParameter_Container interface {
+	isWorkspaceParameter_Container()
+}
+
+type WorkspaceParameter_ProjectId struct {
+	// Required. Project ID.
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3,oneof"`
+}
+
+type WorkspaceParameter_FolderId struct {
+	// Required. Folder ID.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
+}
+
+func (*WorkspaceParameter_ProjectId) isWorkspaceParameter_Container() {}
+
+func (*WorkspaceParameter_FolderId) isWorkspaceParameter_Container() {}
+
 // Parameter.
 type Parameter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -410,6 +506,7 @@ type Parameter struct {
 	//	*Parameter_IntegerParameter
 	//	*Parameter_DoubleParameter
 	//	*Parameter_TextValues
+	//	*Parameter_WorkspaceParameter
 	Data isParameter_Data `protobuf_oneof:"data"`
 	// UI-visibility.
 	Hidden bool `protobuf:"varint,6,opt,name=hidden,proto3" json:"hidden,omitempty"`
@@ -423,7 +520,7 @@ type Parameter struct {
 
 func (x *Parameter) Reset() {
 	*x = Parameter{}
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[6]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +532,7 @@ func (x *Parameter) String() string {
 func (*Parameter) ProtoMessage() {}
 
 func (x *Parameter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[6]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +545,7 @@ func (x *Parameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Parameter.ProtoReflect.Descriptor instead.
 func (*Parameter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Parameter) GetName() string {
@@ -526,6 +623,15 @@ func (x *Parameter) GetTextValues() *TextValuesParameter {
 	return nil
 }
 
+func (x *Parameter) GetWorkspaceParameter() *WorkspaceParameter {
+	if x != nil {
+		if x, ok := x.Data.(*Parameter_WorkspaceParameter); ok {
+			return x.WorkspaceParameter
+		}
+	}
+	return nil
+}
+
 func (x *Parameter) GetHidden() bool {
 	if x != nil {
 		return x.Hidden
@@ -581,6 +687,11 @@ type Parameter_TextValues struct {
 	TextValues *TextValuesParameter `protobuf:"bytes,9,opt,name=text_values,json=textValues,proto3,oneof"`
 }
 
+type Parameter_WorkspaceParameter struct {
+	// Workspace parameter
+	WorkspaceParameter *WorkspaceParameter `protobuf:"bytes,15,opt,name=workspace_parameter,json=workspaceParameter,proto3,oneof"`
+}
+
 func (*Parameter_LabelValues) isParameter_Data() {}
 
 func (*Parameter_Custom) isParameter_Data() {}
@@ -592,6 +703,8 @@ func (*Parameter_IntegerParameter) isParameter_Data() {}
 func (*Parameter_DoubleParameter) isParameter_Data() {}
 
 func (*Parameter_TextValues) isParameter_Data() {}
+
+func (*Parameter_WorkspaceParameter) isParameter_Data() {}
 
 // Parametrization.
 type Parametrization struct {
@@ -606,7 +719,7 @@ type Parametrization struct {
 
 func (x *Parametrization) Reset() {
 	*x = Parametrization{}
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[7]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -618,7 +731,7 @@ func (x *Parametrization) String() string {
 func (*Parametrization) ProtoMessage() {}
 
 func (x *Parametrization) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[7]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,7 +744,7 @@ func (x *Parametrization) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Parametrization.ProtoReflect.Descriptor instead.
 func (*Parametrization) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Parametrization) GetParameters() []*Parameter {
@@ -675,7 +788,13 @@ const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"\vunit_format\x18\x02 \x01(\x0e2&.yandex.cloud.monitoring.v3.UnitFormatR\n" +
 	"unitFormat\"<\n" +
 	"\x13TextValuesParameter\x12%\n" +
-	"\x0edefault_values\x18\x01 \x03(\tR\rdefaultValues\"\x81\x05\n" +
+	"\x0edefault_values\x18\x01 \x03(\tR\rdefaultValues\"\x93\x01\n" +
+	"\x12WorkspaceParameter\x12\x1f\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tH\x00R\tprojectId\x12\x1d\n" +
+	"\tfolder_id\x18\x02 \x01(\tH\x00R\bfolderId\x120\n" +
+	"\x14default_workspace_id\x18\x03 \x01(\tR\x12defaultWorkspaceIdB\v\n" +
+	"\tcontainer\"\xe4\x05\n" +
 	"\tParameter\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12U\n" +
@@ -685,7 +804,8 @@ const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"\x11integer_parameter\x18\a \x01(\v2,.yandex.cloud.monitoring.v3.IntegerParameterH\x00R\x10integerParameter\x12X\n" +
 	"\x10double_parameter\x18\b \x01(\v2+.yandex.cloud.monitoring.v3.DoubleParameterH\x00R\x0fdoubleParameter\x12R\n" +
 	"\vtext_values\x18\t \x01(\v2/.yandex.cloud.monitoring.v3.TextValuesParameterH\x00R\n" +
-	"textValues\x12\x16\n" +
+	"textValues\x12a\n" +
+	"\x13workspace_parameter\x18\x0f \x01(\v2..yandex.cloud.monitoring.v3.WorkspaceParameterH\x00R\x12workspaceParameter\x12\x16\n" +
 	"\x06hidden\x18\x06 \x01(\bR\x06hidden\x12 \n" +
 	"\vdescription\x18\n" +
 	" \x01(\tR\vdescription\x12\x18\n" +
@@ -710,7 +830,7 @@ func file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP() []byte 
 	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescData
 }
 
-var file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_monitoring_v3_parametrization_proto_goTypes = []any{
 	(*LabelValuesParameter)(nil), // 0: yandex.cloud.monitoring.v3.LabelValuesParameter
 	(*CustomParameter)(nil),      // 1: yandex.cloud.monitoring.v3.CustomParameter
@@ -718,25 +838,27 @@ var file_yandex_cloud_monitoring_v3_parametrization_proto_goTypes = []any{
 	(*DoubleParameter)(nil),      // 3: yandex.cloud.monitoring.v3.DoubleParameter
 	(*IntegerParameter)(nil),     // 4: yandex.cloud.monitoring.v3.IntegerParameter
 	(*TextValuesParameter)(nil),  // 5: yandex.cloud.monitoring.v3.TextValuesParameter
-	(*Parameter)(nil),            // 6: yandex.cloud.monitoring.v3.Parameter
-	(*Parametrization)(nil),      // 7: yandex.cloud.monitoring.v3.Parametrization
-	(UnitFormat)(0),              // 8: yandex.cloud.monitoring.v3.UnitFormat
+	(*WorkspaceParameter)(nil),   // 6: yandex.cloud.monitoring.v3.WorkspaceParameter
+	(*Parameter)(nil),            // 7: yandex.cloud.monitoring.v3.Parameter
+	(*Parametrization)(nil),      // 8: yandex.cloud.monitoring.v3.Parametrization
+	(UnitFormat)(0),              // 9: yandex.cloud.monitoring.v3.UnitFormat
 }
 var file_yandex_cloud_monitoring_v3_parametrization_proto_depIdxs = []int32{
-	8, // 0: yandex.cloud.monitoring.v3.DoubleParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	8, // 1: yandex.cloud.monitoring.v3.IntegerParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	0, // 2: yandex.cloud.monitoring.v3.Parameter.label_values:type_name -> yandex.cloud.monitoring.v3.LabelValuesParameter
-	1, // 3: yandex.cloud.monitoring.v3.Parameter.custom:type_name -> yandex.cloud.monitoring.v3.CustomParameter
-	2, // 4: yandex.cloud.monitoring.v3.Parameter.text:type_name -> yandex.cloud.monitoring.v3.TextParameter
-	4, // 5: yandex.cloud.monitoring.v3.Parameter.integer_parameter:type_name -> yandex.cloud.monitoring.v3.IntegerParameter
-	3, // 6: yandex.cloud.monitoring.v3.Parameter.double_parameter:type_name -> yandex.cloud.monitoring.v3.DoubleParameter
-	5, // 7: yandex.cloud.monitoring.v3.Parameter.text_values:type_name -> yandex.cloud.monitoring.v3.TextValuesParameter
-	6, // 8: yandex.cloud.monitoring.v3.Parametrization.parameters:type_name -> yandex.cloud.monitoring.v3.Parameter
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	9,  // 0: yandex.cloud.monitoring.v3.DoubleParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	9,  // 1: yandex.cloud.monitoring.v3.IntegerParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	0,  // 2: yandex.cloud.monitoring.v3.Parameter.label_values:type_name -> yandex.cloud.monitoring.v3.LabelValuesParameter
+	1,  // 3: yandex.cloud.monitoring.v3.Parameter.custom:type_name -> yandex.cloud.monitoring.v3.CustomParameter
+	2,  // 4: yandex.cloud.monitoring.v3.Parameter.text:type_name -> yandex.cloud.monitoring.v3.TextParameter
+	4,  // 5: yandex.cloud.monitoring.v3.Parameter.integer_parameter:type_name -> yandex.cloud.monitoring.v3.IntegerParameter
+	3,  // 6: yandex.cloud.monitoring.v3.Parameter.double_parameter:type_name -> yandex.cloud.monitoring.v3.DoubleParameter
+	5,  // 7: yandex.cloud.monitoring.v3.Parameter.text_values:type_name -> yandex.cloud.monitoring.v3.TextValuesParameter
+	6,  // 8: yandex.cloud.monitoring.v3.Parameter.workspace_parameter:type_name -> yandex.cloud.monitoring.v3.WorkspaceParameter
+	7,  // 9: yandex.cloud.monitoring.v3.Parametrization.parameters:type_name -> yandex.cloud.monitoring.v3.Parameter
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_parametrization_proto_init() }
@@ -749,12 +871,17 @@ func file_yandex_cloud_monitoring_v3_parametrization_proto_init() {
 		(*LabelValuesParameter_FolderId)(nil),
 	}
 	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[6].OneofWrappers = []any{
+		(*WorkspaceParameter_ProjectId)(nil),
+		(*WorkspaceParameter_FolderId)(nil),
+	}
+	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[7].OneofWrappers = []any{
 		(*Parameter_LabelValues)(nil),
 		(*Parameter_Custom)(nil),
 		(*Parameter_Text)(nil),
 		(*Parameter_IntegerParameter)(nil),
 		(*Parameter_DoubleParameter)(nil),
 		(*Parameter_TextValues)(nil),
+		(*Parameter_WorkspaceParameter)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -762,7 +889,7 @@ func file_yandex_cloud_monitoring_v3_parametrization_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc), len(file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
