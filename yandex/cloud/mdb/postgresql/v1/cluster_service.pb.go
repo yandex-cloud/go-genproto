@@ -3135,6 +3135,8 @@ type ConfigSpec struct {
 	// Resources allocated to PostgreSQL hosts.
 	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Configuration setting which enables/disables autofailover in cluster.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/cluster_service.proto.
 	Autofailover *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=autofailover,proto3" json:"autofailover,omitempty"`
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,8,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
@@ -3379,6 +3381,7 @@ func (x *ConfigSpec) GetResources() *Resources {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/cluster_service.proto.
 func (x *ConfigSpec) GetAutofailover() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.Autofailover
@@ -4214,7 +4217,7 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\x12replication_source\x18\x04 \x01(\tR\x11replicationSource\x127\n" +
 	"\bpriority\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\bpriority\x12O\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2..yandex.cloud.mdb.postgresql.v1.ConfigHostSpecR\n" +
-	"configSpec\"\x95\x17\n" +
+	"configSpec\"\x99\x17\n" +
 	"\n" +
 	"ConfigSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12q\n" +
@@ -4239,8 +4242,8 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\x14postgresql_config_18\x18\x1d \x01(\v29.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18H\x00R\x13postgresqlConfig_18\x12w\n" +
 	"\x17postgresql_config_18_1c\x18\x1e \x01(\v2<.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1CH\x00R\x16postgresqlConfig_18_1c\x12[\n" +
 	"\rpooler_config\x18\x04 \x01(\v26.yandex.cloud.mdb.postgresql.v1.ConnectionPoolerConfigR\fpoolerConfig\x12G\n" +
-	"\tresources\x18\x05 \x01(\v2).yandex.cloud.mdb.postgresql.v1.ResourcesR\tresources\x12>\n" +
-	"\fautofailover\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\fautofailover\x12F\n" +
+	"\tresources\x18\x05 \x01(\v2).yandex.cloud.mdb.postgresql.v1.ResourcesR\tresources\x12B\n" +
+	"\fautofailover\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\fautofailover\x12F\n" +
 	"\x13backup_window_start\x18\b \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x12`\n" +
 	"\x19backup_retain_period_days\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x047-60R\x16backupRetainPeriodDays\x12>\n" +
 	"\x06access\x18\t \x01(\v2&.yandex.cloud.mdb.postgresql.v1.AccessR\x06access\x12o\n" +

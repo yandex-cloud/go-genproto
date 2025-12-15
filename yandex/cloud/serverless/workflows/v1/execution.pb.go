@@ -11,6 +11,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -24,6 +25,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Workflow execution status.
 type Execution_Status int32
 
 const (
@@ -285,6 +287,7 @@ type ExecutionInput struct {
 	// Types that are valid to be assigned to Input:
 	//
 	//	*ExecutionInput_InputJson
+	//	*ExecutionInput_InputValue
 	Input         isExecutionInput_Input `protobuf_oneof:"input"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -336,6 +339,15 @@ func (x *ExecutionInput) GetInputJson() string {
 	return ""
 }
 
+func (x *ExecutionInput) GetInputValue() *structpb.Value {
+	if x != nil {
+		if x, ok := x.Input.(*ExecutionInput_InputValue); ok {
+			return x.InputValue
+		}
+	}
+	return nil
+}
+
 type isExecutionInput_Input interface {
 	isExecutionInput_Input()
 }
@@ -345,7 +357,14 @@ type ExecutionInput_InputJson struct {
 	InputJson string `protobuf:"bytes,1,opt,name=input_json,json=inputJson,proto3,oneof"`
 }
 
+type ExecutionInput_InputValue struct {
+	// Input value for the Workflow execution.
+	InputValue *structpb.Value `protobuf:"bytes,2,opt,name=input_value,json=inputValue,proto3,oneof"`
+}
+
 func (*ExecutionInput_InputJson) isExecutionInput_Input() {}
+
+func (*ExecutionInput_InputValue) isExecutionInput_Input() {}
 
 type ExecutionResult struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -472,7 +491,7 @@ var File_yandex_cloud_serverless_workflows_v1_execution_proto protoreflect.FileD
 
 const file_yandex_cloud_serverless_workflows_v1_execution_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/serverless/workflows/v1/execution.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd9\x04\n" +
+	"4yandex/cloud/serverless/workflows/v1/execution.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1dyandex/cloud/validation.proto\"\xd9\x04\n" +
 	"\tExecution\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vworkflow_id\x18\x02 \x01(\tR\n" +
@@ -502,10 +521,12 @@ const file_yandex_cloud_serverless_workflows_v1_execution_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\x0e26.yandex.cloud.serverless.workflows.v1.Execution.StatusR\x06status\x129\n" +
 	"\n" +
 	"started_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x125\n" +
-	"\bduration\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\bdurationJ\x04\b\x03\x10\x04\"@\n" +
+	"\bduration\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\bdurationJ\x04\b\x03\x10\x04\"{\n" +
 	"\x0eExecutionInput\x12\x1f\n" +
 	"\n" +
-	"input_json\x18\x01 \x01(\tH\x00R\tinputJsonB\r\n" +
+	"input_json\x18\x01 \x01(\tH\x00R\tinputJson\x129\n" +
+	"\vinput_value\x18\x02 \x01(\v2\x16.google.protobuf.ValueH\x00R\n" +
+	"inputValueB\r\n" +
 	"\x05input\x12\x04\xc0\xc11\x01\"D\n" +
 	"\x0fExecutionResult\x12!\n" +
 	"\vresult_json\x18\x01 \x01(\tH\x00R\n" +
@@ -540,22 +561,24 @@ var file_yandex_cloud_serverless_workflows_v1_execution_proto_goTypes = []any{
 	(*ExecutionError)(nil),        // 5: yandex.cloud.serverless.workflows.v1.ExecutionError
 	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
 	(*durationpb.Duration)(nil),   // 7: google.protobuf.Duration
+	(*structpb.Value)(nil),        // 8: google.protobuf.Value
 }
 var file_yandex_cloud_serverless_workflows_v1_execution_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.serverless.workflows.v1.Execution.input:type_name -> yandex.cloud.serverless.workflows.v1.ExecutionInput
-	4, // 1: yandex.cloud.serverless.workflows.v1.Execution.result:type_name -> yandex.cloud.serverless.workflows.v1.ExecutionResult
-	5, // 2: yandex.cloud.serverless.workflows.v1.Execution.error:type_name -> yandex.cloud.serverless.workflows.v1.ExecutionError
-	0, // 3: yandex.cloud.serverless.workflows.v1.Execution.status:type_name -> yandex.cloud.serverless.workflows.v1.Execution.Status
-	6, // 4: yandex.cloud.serverless.workflows.v1.Execution.started_at:type_name -> google.protobuf.Timestamp
-	7, // 5: yandex.cloud.serverless.workflows.v1.Execution.duration:type_name -> google.protobuf.Duration
-	0, // 6: yandex.cloud.serverless.workflows.v1.ExecutionPreview.status:type_name -> yandex.cloud.serverless.workflows.v1.Execution.Status
-	6, // 7: yandex.cloud.serverless.workflows.v1.ExecutionPreview.started_at:type_name -> google.protobuf.Timestamp
-	7, // 8: yandex.cloud.serverless.workflows.v1.ExecutionPreview.duration:type_name -> google.protobuf.Duration
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	3,  // 0: yandex.cloud.serverless.workflows.v1.Execution.input:type_name -> yandex.cloud.serverless.workflows.v1.ExecutionInput
+	4,  // 1: yandex.cloud.serverless.workflows.v1.Execution.result:type_name -> yandex.cloud.serverless.workflows.v1.ExecutionResult
+	5,  // 2: yandex.cloud.serverless.workflows.v1.Execution.error:type_name -> yandex.cloud.serverless.workflows.v1.ExecutionError
+	0,  // 3: yandex.cloud.serverless.workflows.v1.Execution.status:type_name -> yandex.cloud.serverless.workflows.v1.Execution.Status
+	6,  // 4: yandex.cloud.serverless.workflows.v1.Execution.started_at:type_name -> google.protobuf.Timestamp
+	7,  // 5: yandex.cloud.serverless.workflows.v1.Execution.duration:type_name -> google.protobuf.Duration
+	0,  // 6: yandex.cloud.serverless.workflows.v1.ExecutionPreview.status:type_name -> yandex.cloud.serverless.workflows.v1.Execution.Status
+	6,  // 7: yandex.cloud.serverless.workflows.v1.ExecutionPreview.started_at:type_name -> google.protobuf.Timestamp
+	7,  // 8: yandex.cloud.serverless.workflows.v1.ExecutionPreview.duration:type_name -> google.protobuf.Duration
+	8,  // 9: yandex.cloud.serverless.workflows.v1.ExecutionInput.input_value:type_name -> google.protobuf.Value
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_workflows_v1_execution_proto_init() }
@@ -565,6 +588,7 @@ func file_yandex_cloud_serverless_workflows_v1_execution_proto_init() {
 	}
 	file_yandex_cloud_serverless_workflows_v1_execution_proto_msgTypes[2].OneofWrappers = []any{
 		(*ExecutionInput_InputJson)(nil),
+		(*ExecutionInput_InputValue)(nil),
 	}
 	file_yandex_cloud_serverless_workflows_v1_execution_proto_msgTypes[3].OneofWrappers = []any{
 		(*ExecutionResult_ResultJson)(nil),

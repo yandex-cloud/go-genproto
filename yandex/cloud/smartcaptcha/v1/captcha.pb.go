@@ -225,9 +225,12 @@ type Captcha struct {
 	// Determines whether captcha is protected from being deleted.
 	DeletionProtection bool `protobuf:"varint,22,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// List of variants to use in security_rules
-	OverrideVariants []*OverrideVariant `protobuf:"bytes,23,rep,name=override_variants,json=overrideVariants,proto3" json:"override_variants,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	OverrideVariants       []*OverrideVariant `protobuf:"bytes,23,rep,name=override_variants,json=overrideVariants,proto3" json:"override_variants,omitempty"`
+	DisallowDataProcessing bool               `protobuf:"varint,24,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
+	Description            string             `protobuf:"bytes,25,opt,name=description,proto3" json:"description,omitempty"`
+	Labels                 map[string]string  `protobuf:"bytes,26,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Captcha) Reset() {
@@ -368,6 +371,27 @@ func (x *Captcha) GetDeletionProtection() bool {
 func (x *Captcha) GetOverrideVariants() []*OverrideVariant {
 	if x != nil {
 		return x.OverrideVariants
+	}
+	return nil
+}
+
+func (x *Captcha) GetDisallowDataProcessing() bool {
+	if x != nil {
+		return x.DisallowDataProcessing
+	}
+	return false
+}
+
+func (x *Captcha) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Captcha) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
 	}
 	return nil
 }
@@ -673,7 +697,7 @@ type Condition_StringMatcher struct {
 
 func (x *Condition_StringMatcher) Reset() {
 	*x = Condition_StringMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[5]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -685,7 +709,7 @@ func (x *Condition_StringMatcher) String() string {
 func (*Condition_StringMatcher) ProtoMessage() {}
 
 func (x *Condition_StringMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[5]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -813,7 +837,7 @@ type Condition_HostMatcher struct {
 
 func (x *Condition_HostMatcher) Reset() {
 	*x = Condition_HostMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[6]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -825,7 +849,7 @@ func (x *Condition_HostMatcher) String() string {
 func (*Condition_HostMatcher) ProtoMessage() {}
 
 func (x *Condition_HostMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[6]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -861,7 +885,7 @@ type Condition_UriMatcher struct {
 
 func (x *Condition_UriMatcher) Reset() {
 	*x = Condition_UriMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -873,7 +897,7 @@ func (x *Condition_UriMatcher) String() string {
 func (*Condition_UriMatcher) ProtoMessage() {}
 
 func (x *Condition_UriMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -916,7 +940,7 @@ type Condition_QueryMatcher struct {
 
 func (x *Condition_QueryMatcher) Reset() {
 	*x = Condition_QueryMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[8]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -928,7 +952,7 @@ func (x *Condition_QueryMatcher) String() string {
 func (*Condition_QueryMatcher) ProtoMessage() {}
 
 func (x *Condition_QueryMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[8]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -971,7 +995,7 @@ type Condition_HeaderMatcher struct {
 
 func (x *Condition_HeaderMatcher) Reset() {
 	*x = Condition_HeaderMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[9]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -983,7 +1007,7 @@ func (x *Condition_HeaderMatcher) String() string {
 func (*Condition_HeaderMatcher) ProtoMessage() {}
 
 func (x *Condition_HeaderMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[9]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1026,7 +1050,7 @@ type Condition_IpMatcher struct {
 
 func (x *Condition_IpMatcher) Reset() {
 	*x = Condition_IpMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[10]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1038,7 +1062,7 @@ func (x *Condition_IpMatcher) String() string {
 func (*Condition_IpMatcher) ProtoMessage() {}
 
 func (x *Condition_IpMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[10]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1093,7 +1117,7 @@ type Condition_IpRangesMatcher struct {
 
 func (x *Condition_IpRangesMatcher) Reset() {
 	*x = Condition_IpRangesMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[11]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1105,7 +1129,7 @@ func (x *Condition_IpRangesMatcher) String() string {
 func (*Condition_IpRangesMatcher) ProtoMessage() {}
 
 func (x *Condition_IpRangesMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[11]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1139,7 +1163,7 @@ type Condition_GeoIpMatcher struct {
 
 func (x *Condition_GeoIpMatcher) Reset() {
 	*x = Condition_GeoIpMatcher{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[12]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1175,7 @@ func (x *Condition_GeoIpMatcher) String() string {
 func (*Condition_GeoIpMatcher) ProtoMessage() {}
 
 func (x *Condition_GeoIpMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[12]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1178,7 +1202,7 @@ var File_yandex_cloud_smartcaptcha_v1_captcha_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/smartcaptcha/v1/captcha.proto\x12\x1cyandex.cloud.smartcaptcha.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xed\x06\n" +
+	"*yandex/cloud/smartcaptcha/v1/captcha.proto\x12\x1cyandex.cloud.smartcaptcha.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\t\n" +
 	"\aCaptcha\x12\x0e\n" +
 	"\x02id\x18\x15 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x19\n" +
@@ -1201,7 +1225,13 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\x0echallenge_type\x18\x11 \x01(\x0e22.yandex.cloud.smartcaptcha.v1.CaptchaChallengeTypeR\rchallengeType\x12Q\n" +
 	"\x0esecurity_rules\x18\x13 \x03(\v2*.yandex.cloud.smartcaptcha.v1.SecurityRuleR\rsecurityRules\x12/\n" +
 	"\x13deletion_protection\x18\x16 \x01(\bR\x12deletionProtection\x12d\n" +
-	"\x11override_variants\x18\x17 \x03(\v2-.yandex.cloud.smartcaptcha.v1.OverrideVariantB\b\x82\xc81\x04<=32R\x10overrideVariantsJ\x04\b\x01\x10\x02J\x04\b\x04\x10\x05J\x04\b\x06\x10\aJ\x04\b\v\x10\fJ\x04\b\x0f\x10\x10J\x04\b\x12\x10\x13J\x04\b\x14\x10\x15\"\xff\x02\n" +
+	"\x11override_variants\x18\x17 \x03(\v2-.yandex.cloud.smartcaptcha.v1.OverrideVariantB\b\x82\xc81\x04<=32R\x10overrideVariants\x128\n" +
+	"\x18disallow_data_processing\x18\x18 \x01(\bR\x16disallowDataProcessing\x12+\n" +
+	"\vdescription\x18\x19 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12\x86\x01\n" +
+	"\x06labels\x18\x1a \x03(\v21.yandex.cloud.smartcaptcha.v1.Captcha.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x01\x10\x02J\x04\b\x04\x10\x05J\x04\b\x06\x10\aJ\x04\b\v\x10\fJ\x04\b\x0f\x10\x10J\x04\b\x12\x10\x13J\x04\b\x14\x10\x15\"\xff\x02\n" +
 	"\x0fOverrideVariant\x12:\n" +
 	"\x04uuid\x18\x01 \x01(\tB&\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x04<=64R\x04uuid\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12O\n" +
@@ -1289,7 +1319,7 @@ func file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_smartcaptcha_v1_captcha_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_yandex_cloud_smartcaptcha_v1_captcha_proto_goTypes = []any{
 	(CaptchaComplexity)(0),            // 0: yandex.cloud.smartcaptcha.v1.CaptchaComplexity
 	(CaptchaPreCheckType)(0),          // 1: yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
@@ -1299,45 +1329,47 @@ var file_yandex_cloud_smartcaptcha_v1_captcha_proto_goTypes = []any{
 	(*CaptchaSecretKey)(nil),          // 5: yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
 	(*SecurityRule)(nil),              // 6: yandex.cloud.smartcaptcha.v1.SecurityRule
 	(*Condition)(nil),                 // 7: yandex.cloud.smartcaptcha.v1.Condition
-	(*Condition_StringMatcher)(nil),   // 8: yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	(*Condition_HostMatcher)(nil),     // 9: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher
-	(*Condition_UriMatcher)(nil),      // 10: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher
-	(*Condition_QueryMatcher)(nil),    // 11: yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher
-	(*Condition_HeaderMatcher)(nil),   // 12: yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher
-	(*Condition_IpMatcher)(nil),       // 13: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher
-	(*Condition_IpRangesMatcher)(nil), // 14: yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
-	(*Condition_GeoIpMatcher)(nil),    // 15: yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
-	(*timestamppb.Timestamp)(nil),     // 16: google.protobuf.Timestamp
+	nil,                               // 8: yandex.cloud.smartcaptcha.v1.Captcha.LabelsEntry
+	(*Condition_StringMatcher)(nil),   // 9: yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	(*Condition_HostMatcher)(nil),     // 10: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher
+	(*Condition_UriMatcher)(nil),      // 11: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher
+	(*Condition_QueryMatcher)(nil),    // 12: yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher
+	(*Condition_HeaderMatcher)(nil),   // 13: yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher
+	(*Condition_IpMatcher)(nil),       // 14: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher
+	(*Condition_IpRangesMatcher)(nil), // 15: yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
+	(*Condition_GeoIpMatcher)(nil),    // 16: yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
+	(*timestamppb.Timestamp)(nil),     // 17: google.protobuf.Timestamp
 }
 var file_yandex_cloud_smartcaptcha_v1_captcha_proto_depIdxs = []int32{
-	16, // 0: yandex.cloud.smartcaptcha.v1.Captcha.created_at:type_name -> google.protobuf.Timestamp
+	17, // 0: yandex.cloud.smartcaptcha.v1.Captcha.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 1: yandex.cloud.smartcaptcha.v1.Captcha.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
 	1,  // 2: yandex.cloud.smartcaptcha.v1.Captcha.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
 	2,  // 3: yandex.cloud.smartcaptcha.v1.Captcha.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
 	6,  // 4: yandex.cloud.smartcaptcha.v1.Captcha.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
 	4,  // 5: yandex.cloud.smartcaptcha.v1.Captcha.override_variants:type_name -> yandex.cloud.smartcaptcha.v1.OverrideVariant
-	0,  // 6: yandex.cloud.smartcaptcha.v1.OverrideVariant.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
-	1,  // 7: yandex.cloud.smartcaptcha.v1.OverrideVariant.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
-	2,  // 8: yandex.cloud.smartcaptcha.v1.OverrideVariant.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
-	7,  // 9: yandex.cloud.smartcaptcha.v1.SecurityRule.condition:type_name -> yandex.cloud.smartcaptcha.v1.Condition
-	9,  // 10: yandex.cloud.smartcaptcha.v1.Condition.host:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HostMatcher
-	10, // 11: yandex.cloud.smartcaptcha.v1.Condition.uri:type_name -> yandex.cloud.smartcaptcha.v1.Condition.UriMatcher
-	12, // 12: yandex.cloud.smartcaptcha.v1.Condition.headers:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher
-	13, // 13: yandex.cloud.smartcaptcha.v1.Condition.source_ip:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpMatcher
-	8,  // 14: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher.hosts:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	8,  // 15: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.path:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	11, // 16: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.queries:type_name -> yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher
-	8,  // 17: yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	8,  // 18: yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	14, // 19: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
-	14, // 20: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
-	15, // 21: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
-	15, // 22: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
-	23, // [23:23] is the sub-list for method output_type
-	23, // [23:23] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	8,  // 6: yandex.cloud.smartcaptcha.v1.Captcha.labels:type_name -> yandex.cloud.smartcaptcha.v1.Captcha.LabelsEntry
+	0,  // 7: yandex.cloud.smartcaptcha.v1.OverrideVariant.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
+	1,  // 8: yandex.cloud.smartcaptcha.v1.OverrideVariant.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
+	2,  // 9: yandex.cloud.smartcaptcha.v1.OverrideVariant.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
+	7,  // 10: yandex.cloud.smartcaptcha.v1.SecurityRule.condition:type_name -> yandex.cloud.smartcaptcha.v1.Condition
+	10, // 11: yandex.cloud.smartcaptcha.v1.Condition.host:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HostMatcher
+	11, // 12: yandex.cloud.smartcaptcha.v1.Condition.uri:type_name -> yandex.cloud.smartcaptcha.v1.Condition.UriMatcher
+	13, // 13: yandex.cloud.smartcaptcha.v1.Condition.headers:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher
+	14, // 14: yandex.cloud.smartcaptcha.v1.Condition.source_ip:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpMatcher
+	9,  // 15: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher.hosts:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	9,  // 16: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.path:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	12, // 17: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.queries:type_name -> yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher
+	9,  // 18: yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	9,  // 19: yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	15, // 20: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
+	15, // 21: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
+	16, // 22: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
+	16, // 23: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
+	24, // [24:24] is the sub-list for method output_type
+	24, // [24:24] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_smartcaptcha_v1_captcha_proto_init() }
@@ -1345,7 +1377,7 @@ func file_yandex_cloud_smartcaptcha_v1_captcha_proto_init() {
 	if File_yandex_cloud_smartcaptcha_v1_captcha_proto != nil {
 		return
 	}
-	file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[5].OneofWrappers = []any{
+	file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[6].OneofWrappers = []any{
 		(*Condition_StringMatcher_ExactMatch)(nil),
 		(*Condition_StringMatcher_ExactNotMatch)(nil),
 		(*Condition_StringMatcher_PrefixMatch)(nil),
@@ -1359,7 +1391,7 @@ func file_yandex_cloud_smartcaptcha_v1_captcha_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc), len(file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

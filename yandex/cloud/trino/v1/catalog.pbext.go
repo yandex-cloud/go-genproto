@@ -74,6 +74,12 @@ func (m *Connector) SetMysql(v *MysqlConnector) {
 	}
 }
 
+func (m *Connector) SetGreenplum(v *GreenplumConnector) {
+	m.Type = &Connector_Greenplum{
+		Greenplum: v,
+	}
+}
+
 func (m *Catalog) SetId(v string) {
 	m.Id = v
 }
@@ -447,5 +453,55 @@ func (m *MysqlConnector) SetConnection(v *MysqlConnection) {
 }
 
 func (m *MysqlConnector) SetAdditionalProperties(v map[string]string) {
+	m.AdditionalProperties = v
+}
+
+type GreenplumConnection_Type = isGreenplumConnection_Type
+
+func (m *GreenplumConnection) SetType(v GreenplumConnection_Type) {
+	m.Type = v
+}
+
+func (m *GreenplumConnection) SetOnPremise(v *GreenplumConnection_OnPremise) {
+	m.Type = &GreenplumConnection_OnPremise_{
+		OnPremise: v,
+	}
+}
+
+func (m *GreenplumConnection) SetConnectionManager(v *GreenplumConnection_ConnectionManager) {
+	m.Type = &GreenplumConnection_ConnectionManager_{
+		ConnectionManager: v,
+	}
+}
+
+func (m *GreenplumConnection_OnPremise) SetConnectionUrl(v string) {
+	m.ConnectionUrl = v
+}
+
+func (m *GreenplumConnection_OnPremise) SetUserName(v string) {
+	m.UserName = v
+}
+
+func (m *GreenplumConnection_OnPremise) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *GreenplumConnection_ConnectionManager) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
+func (m *GreenplumConnection_ConnectionManager) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *GreenplumConnection_ConnectionManager) SetConnectionProperties(v map[string]string) {
+	m.ConnectionProperties = v
+}
+
+func (m *GreenplumConnector) SetConnection(v *GreenplumConnection) {
+	m.Connection = v
+}
+
+func (m *GreenplumConnector) SetAdditionalProperties(v map[string]string) {
 	m.AdditionalProperties = v
 }

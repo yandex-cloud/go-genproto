@@ -130,12 +130,6 @@ func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig
 	m.GreenplumConfig = v
 }
 
-func (m *ClusterConfigSet) SetGreenplumConfigSet_6_22(v *GreenplumConfigSet6_22) {
-	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6_22{
-		GreenplumConfigSet_6_22: v,
-	}
-}
-
 func (m *ClusterConfigSet) SetGreenplumConfigSet_6(v *GreenplumConfigSet6) {
 	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6{
 		GreenplumConfigSet_6: v,

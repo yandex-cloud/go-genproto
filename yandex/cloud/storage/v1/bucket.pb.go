@@ -2123,8 +2123,11 @@ type BucketAllowedPrivateEndpoints struct {
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// white list of private endpoints bucket accessible from
 	PrivateEndpoints []string `protobuf:"bytes,2,rep,name=private_endpoints,json=privateEndpoints,proto3" json:"private_endpoints,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// if true, cloud console will be able to access a bucket
+	// regardless of private_endpoints list
+	ForceCloudConsoleAccess bool `protobuf:"varint,3,opt,name=force_cloud_console_access,json=forceCloudConsoleAccess,proto3" json:"force_cloud_console_access,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *BucketAllowedPrivateEndpoints) Reset() {
@@ -2169,6 +2172,13 @@ func (x *BucketAllowedPrivateEndpoints) GetPrivateEndpoints() []string {
 		return x.PrivateEndpoints
 	}
 	return nil
+}
+
+func (x *BucketAllowedPrivateEndpoints) GetForceCloudConsoleAccess() bool {
+	if x != nil {
+		return x.ForceCloudConsoleAccess
+	}
+	return false
 }
 
 type InventoryConfiguration struct {
@@ -3659,10 +3669,11 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x05rules\x18\x01 \x03(\v22.yandex.cloud.storage.v1.Encryption.EncryptionRuleR\x05rules\x1a`\n" +
 	"\x0eEncryptionRule\x12)\n" +
 	"\x11kms_master_key_id\x18\x01 \x01(\tR\x0ekmsMasterKeyId\x12#\n" +
-	"\rsse_algorithm\x18\x02 \x01(\tR\fsseAlgorithm\"f\n" +
+	"\rsse_algorithm\x18\x02 \x01(\tR\fsseAlgorithm\"\xa3\x01\n" +
 	"\x1dBucketAllowedPrivateEndpoints\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12+\n" +
-	"\x11private_endpoints\x18\x02 \x03(\tR\x10privateEndpoints\"\xad\r\n" +
+	"\x11private_endpoints\x18\x02 \x03(\tR\x10privateEndpoints\x12;\n" +
+	"\x1aforce_cloud_console_access\x18\x03 \x01(\bR\x17forceCloudConsoleAccess\"\xad\r\n" +
 	"\x16InventoryConfiguration\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12l\n" +
 	"\vdestination\x18\x02 \x01(\v2D.yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestinationB\x04\xe8\xc71\x01R\vdestination\x12\x86\x01\n" +

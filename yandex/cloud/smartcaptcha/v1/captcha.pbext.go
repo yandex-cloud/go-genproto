@@ -70,6 +70,18 @@ func (m *Captcha) SetOverrideVariants(v []*OverrideVariant) {
 	m.OverrideVariants = v
 }
 
+func (m *Captcha) SetDisallowDataProcessing(v bool) {
+	m.DisallowDataProcessing = v
+}
+
+func (m *Captcha) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *Captcha) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *OverrideVariant) SetUuid(v string) {
 	m.Uuid = v
 }

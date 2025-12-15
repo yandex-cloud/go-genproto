@@ -4,6 +4,7 @@ package workflows
 
 import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -68,6 +69,12 @@ func (m *ExecutionInput) SetInput(v ExecutionInput_Input) {
 func (m *ExecutionInput) SetInputJson(v string) {
 	m.Input = &ExecutionInput_InputJson{
 		InputJson: v,
+	}
+}
+
+func (m *ExecutionInput) SetInputValue(v *structpb.Value) {
+	m.Input = &ExecutionInput_InputValue{
+		InputValue: v,
 	}
 }
 

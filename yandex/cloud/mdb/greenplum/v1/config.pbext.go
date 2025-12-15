@@ -362,58 +362,6 @@ func (m *GreenplumConfigCBDB) SetLogMinMessages(v LogLevelMessage) {
 	m.LogMinMessages = v
 }
 
-func (m *GreenplumConfig6_22) SetMaxConnections(v *wrapperspb.Int64Value) {
-	m.MaxConnections = v
-}
-
-func (m *GreenplumConfig6_22) SetMaxSlotWalKeepSize(v *wrapperspb.Int64Value) {
-	m.MaxSlotWalKeepSize = v
-}
-
-func (m *GreenplumConfig6_22) SetGpWorkfileLimitPerSegment(v *wrapperspb.Int64Value) {
-	m.GpWorkfileLimitPerSegment = v
-}
-
-func (m *GreenplumConfig6_22) SetGpWorkfileLimitPerQuery(v *wrapperspb.Int64Value) {
-	m.GpWorkfileLimitPerQuery = v
-}
-
-func (m *GreenplumConfig6_22) SetGpWorkfileLimitFilesPerQuery(v *wrapperspb.Int64Value) {
-	m.GpWorkfileLimitFilesPerQuery = v
-}
-
-func (m *GreenplumConfig6_22) SetMaxPreparedTransactions(v *wrapperspb.Int64Value) {
-	m.MaxPreparedTransactions = v
-}
-
-func (m *GreenplumConfig6_22) SetGpWorkfileCompression(v *wrapperspb.BoolValue) {
-	m.GpWorkfileCompression = v
-}
-
-func (m *GreenplumConfig6_22) SetMaxStatementMem(v *wrapperspb.Int64Value) {
-	m.MaxStatementMem = v
-}
-
-func (m *GreenplumConfig6_22) SetLogStatement(v LogStatement) {
-	m.LogStatement = v
-}
-
-func (m *GreenplumConfig6_22) SetGpAddColumnInheritsTableSetting(v *wrapperspb.BoolValue) {
-	m.GpAddColumnInheritsTableSetting = v
-}
-
-func (m *GreenplumConfigSet6_22) SetEffectiveConfig(v *GreenplumConfig6_22) {
-	m.EffectiveConfig = v
-}
-
-func (m *GreenplumConfigSet6_22) SetUserConfig(v *GreenplumConfig6_22) {
-	m.UserConfig = v
-}
-
-func (m *GreenplumConfigSet6_22) SetDefaultConfig(v *GreenplumConfig6_22) {
-	m.DefaultConfig = v
-}
-
 func (m *GreenplumConfigSet6) SetEffectiveConfig(v *GreenplumConfig6) {
 	m.EffectiveConfig = v
 }

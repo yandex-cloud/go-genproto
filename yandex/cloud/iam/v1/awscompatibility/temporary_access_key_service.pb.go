@@ -35,7 +35,8 @@ type CreateEphemeralAccessKeyRequest struct {
 	SessionName string `protobuf:"bytes,2,opt,name=session_name,json=sessionName,proto3" json:"session_name,omitempty"`
 	// AWS-compatible policy in JSON format that you want to use as an inline session policy.
 	Policy string `protobuf:"bytes,3,opt,name=policy,proto3" json:"policy,omitempty"`
-	// Duration, which specifies the duration of the temporary security credentials.
+	// Duration, which specifies the duration of the ephemeral access key,
+	// but duration won't be longer than the lifetime of the authentication token that made the request
 	Duration      *durationpb.Duration `protobuf:"bytes,4,opt,name=duration,proto3" json:"duration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -179,14 +180,14 @@ var File_yandex_cloud_iam_v1_awscompatibility_temporary_access_key_service_proto
 
 const file_yandex_cloud_iam_v1_awscompatibility_temporary_access_key_service_proto_rawDesc = "" +
 	"\n" +
-	"Gyandex/cloud/iam/v1/awscompatibility/temporary_access_key_service.proto\x12$yandex.cloud.iam.v1.awscompatibility\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe4\x01\n" +
+	"Gyandex/cloud/iam/v1/awscompatibility/temporary_access_key_service.proto\x12$yandex.cloud.iam.v1.awscompatibility\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe1\x01\n" +
 	"\x1fCreateEphemeralAccessKeyRequest\x12'\n" +
 	"\n" +
 	"subject_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tsubjectId\x12/\n" +
 	"\fsession_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x041-64R\vsessionName\x12\"\n" +
 	"\x06policy\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2048R\x06policy\x12C\n" +
-	"\bduration\x18\x04 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b15m-168hR\bduration\"\xbe\x01\n" +
+	"\x8a\xc81\x06<=2048R\x06policy\x12@\n" +
+	"\bduration\x18\x04 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x05>=15mR\bduration\"\xbe\x01\n" +
 	" CreateEphemeralAccessKeyResponse\x12\"\n" +
 	"\raccess_key_id\x18\x01 \x01(\tR\vaccessKeyId\x12\x16\n" +
 	"\x06secret\x18\x02 \x01(\tR\x06secret\x12#\n" +

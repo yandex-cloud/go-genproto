@@ -494,6 +494,10 @@ func (m *BucketAllowedPrivateEndpoints) SetPrivateEndpoints(v []string) {
 	m.PrivateEndpoints = v
 }
 
+func (m *BucketAllowedPrivateEndpoints) SetForceCloudConsoleAccess(v bool) {
+	m.ForceCloudConsoleAccess = v
+}
+
 func (m *InventoryConfiguration) SetId(v string) {
 	m.Id = v
 }

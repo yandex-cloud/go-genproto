@@ -39,6 +39,8 @@ const (
 	ApiGateway_ERROR ApiGateway_Status = 4
 	// API gateway is being updated.
 	ApiGateway_UPDATING ApiGateway_Status = 5
+	// API gateway stopped.
+	ApiGateway_STOPPED ApiGateway_Status = 6
 )
 
 // Enum value maps for ApiGateway_Status.
@@ -50,6 +52,7 @@ var (
 		3: "DELETING",
 		4: "ERROR",
 		5: "UPDATING",
+		6: "STOPPED",
 	}
 	ApiGateway_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
@@ -58,6 +61,7 @@ var (
 		"DELETING":           3,
 		"ERROR":              4,
 		"UPDATING":           5,
+		"STOPPED":            6,
 	}
 )
 
@@ -668,7 +672,7 @@ var File_yandex_cloud_serverless_apigateway_v1_apigateway_proto protoreflect.Fil
 
 const file_yandex_cloud_serverless_apigateway_v1_apigateway_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/serverless/apigateway/v1/apigateway.proto\x12%yandex.cloud.serverless.apigateway.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xaf\t\n" +
+	"6yandex/cloud/serverless/apigateway/v1/apigateway.proto\x12%yandex.cloud.serverless.apigateway.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xbc\t\n" +
 	"\n" +
 	"ApiGateway\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -696,7 +700,7 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1ar\n" +
 	"\x0eVariablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12J\n" +
-	"\x05value\x18\x02 \x01(\v24.yandex.cloud.serverless.apigateway.v1.VariableInputR\x05value:\x028\x01\"a\n" +
+	"\x05value\x18\x02 \x01(\v24.yandex.cloud.serverless.apigateway.v1.VariableInputR\x05value:\x028\x01\"n\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\n" +
@@ -704,7 +708,8 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_proto_rawDesc = "" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
 	"\bDELETING\x10\x03\x12\t\n" +
 	"\x05ERROR\x10\x04\x12\f\n" +
-	"\bUPDATING\x10\x05J\x04\b\x06\x10\a\"\x8c\x01\n" +
+	"\bUPDATING\x10\x05\x12\v\n" +
+	"\aSTOPPED\x10\x06J\x04\b\x06\x10\a\"\x8c\x01\n" +
 	"\x0eAttachedDomain\x12\x1b\n" +
 	"\tdomain_id\x18\x01 \x01(\tR\bdomainId\x12%\n" +
 	"\x0ecertificate_id\x18\x02 \x01(\tR\rcertificateId\x12\x18\n" +

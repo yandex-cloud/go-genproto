@@ -138,12 +138,6 @@ func (m *ConfigSpec) SetGreenplumConfig(v ConfigSpec_GreenplumConfig) {
 	m.GreenplumConfig = v
 }
 
-func (m *ConfigSpec) SetGreenplumConfig_6_22(v *GreenplumConfig6_22) {
-	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6_22{
-		GreenplumConfig_6_22: v,
-	}
-}
-
 func (m *ConfigSpec) SetGreenplumConfig_6(v *GreenplumConfig6) {
 	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6{
 		GreenplumConfig_6: v,

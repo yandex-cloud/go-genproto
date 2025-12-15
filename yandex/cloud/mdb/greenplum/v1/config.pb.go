@@ -1685,216 +1685,6 @@ func (x *GreenplumConfigCBDB) GetLogMinMessages() LogLevelMessage {
 	return LogLevelMessage_LOG_LEVEL_MESSAGE_UNSPECIFIED
 }
 
-type GreenplumConfig6_22 struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Maximum number of inbound connections on master segment
-	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
-	// Specify the maximum size of WAL files that replication slots are allowed to retain in the pg_wal directory at checkpoint time.
-	// https://www.postgresql.org/docs/current/runtime-config-replication.html
-	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
-	// Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
-	// The default value is 0, which means a limit is not enforced.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment
-	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
-	// Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
-	// The default value is 0, which means a limit is not enforced.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query
-	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
-	// Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
-	// Spill files are created when executing a query that requires more memory than it is allocated.
-	// The current query is terminated when the limit is exceeded.
-	// Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query
-	// Default value is 10000
-	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
-	// Sets the maximum number of transactions that can be in the "prepared" state simultaneously
-	// https://www.postgresql.org/docs/9.6/runtime-config-resource.html
-	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
-	// Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression
-	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
-	// Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
-	// Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
-	// (seghost_physical_memory) / (average_number_concurrent_queries)
-	// When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
-	// https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
-	// Default value is 2097152000 (2000MB)
-	MaxStatementMem *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_statement_mem,json=maxStatementMem,proto3" json:"max_statement_mem,omitempty"` // in bytes
-	// Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
-	// MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
-	// PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_statement
-	// Default value is ddl
-	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
-	// https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
-	GpAddColumnInheritsTableSetting *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=gp_add_column_inherits_table_setting,json=gpAddColumnInheritsTableSetting,proto3" json:"gp_add_column_inherits_table_setting,omitempty"`
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
-}
-
-func (x *GreenplumConfig6_22) Reset() {
-	*x = GreenplumConfig6_22{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GreenplumConfig6_22) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GreenplumConfig6_22) ProtoMessage() {}
-
-func (x *GreenplumConfig6_22) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GreenplumConfig6_22.ProtoReflect.Descriptor instead.
-func (*GreenplumConfig6_22) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *GreenplumConfig6_22) GetMaxConnections() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxConnections
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetMaxSlotWalKeepSize() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxSlotWalKeepSize
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetGpWorkfileLimitPerSegment() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.GpWorkfileLimitPerSegment
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetGpWorkfileLimitPerQuery() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.GpWorkfileLimitPerQuery
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetGpWorkfileLimitFilesPerQuery() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.GpWorkfileLimitFilesPerQuery
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetMaxPreparedTransactions() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxPreparedTransactions
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetGpWorkfileCompression() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.GpWorkfileCompression
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetMaxStatementMem() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.MaxStatementMem
-	}
-	return nil
-}
-
-func (x *GreenplumConfig6_22) GetLogStatement() LogStatement {
-	if x != nil {
-		return x.LogStatement
-	}
-	return LogStatement_LOG_STATEMENT_UNSPECIFIED
-}
-
-func (x *GreenplumConfig6_22) GetGpAddColumnInheritsTableSetting() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.GpAddColumnInheritsTableSetting
-	}
-	return nil
-}
-
-type GreenplumConfigSet6_22 struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective settings for a Greenplum®  cluster (a combination of settings defined in [user_config] and [default_config]).
-	EffectiveConfig *GreenplumConfig6_22 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Greenplum® cluster.
-	UserConfig *GreenplumConfig6_22 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Greenplum® cluster.
-	DefaultConfig *GreenplumConfig6_22 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GreenplumConfigSet6_22) Reset() {
-	*x = GreenplumConfigSet6_22{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GreenplumConfigSet6_22) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GreenplumConfigSet6_22) ProtoMessage() {}
-
-func (x *GreenplumConfigSet6_22) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GreenplumConfigSet6_22.ProtoReflect.Descriptor instead.
-func (*GreenplumConfigSet6_22) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *GreenplumConfigSet6_22) GetEffectiveConfig() *GreenplumConfig6_22 {
-	if x != nil {
-		return x.EffectiveConfig
-	}
-	return nil
-}
-
-func (x *GreenplumConfigSet6_22) GetUserConfig() *GreenplumConfig6_22 {
-	if x != nil {
-		return x.UserConfig
-	}
-	return nil
-}
-
-func (x *GreenplumConfigSet6_22) GetDefaultConfig() *GreenplumConfig6_22 {
-	if x != nil {
-		return x.DefaultConfig
-	}
-	return nil
-}
-
 type GreenplumConfigSet6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a Greenplum (a combination of settings defined
@@ -1910,7 +1700,7 @@ type GreenplumConfigSet6 struct {
 
 func (x *GreenplumConfigSet6) Reset() {
 	*x = GreenplumConfigSet6{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1922,7 +1712,7 @@ func (x *GreenplumConfigSet6) String() string {
 func (*GreenplumConfigSet6) ProtoMessage() {}
 
 func (x *GreenplumConfigSet6) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1935,7 +1725,7 @@ func (x *GreenplumConfigSet6) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GreenplumConfigSet6.ProtoReflect.Descriptor instead.
 func (*GreenplumConfigSet6) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GreenplumConfigSet6) GetEffectiveConfig() *GreenplumConfig6 {
@@ -1973,7 +1763,7 @@ type ConnectionPoolerConfigSet struct {
 
 func (x *ConnectionPoolerConfigSet) Reset() {
 	*x = ConnectionPoolerConfigSet{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1985,7 +1775,7 @@ func (x *ConnectionPoolerConfigSet) String() string {
 func (*ConnectionPoolerConfigSet) ProtoMessage() {}
 
 func (x *ConnectionPoolerConfigSet) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1998,7 +1788,7 @@ func (x *ConnectionPoolerConfigSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectionPoolerConfigSet.ProtoReflect.Descriptor instead.
 func (*ConnectionPoolerConfigSet) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ConnectionPoolerConfigSet) GetEffectiveConfig() *ConnectionPoolerConfig {
@@ -2037,7 +1827,7 @@ type GreenplumConfigSetCBDB struct {
 
 func (x *GreenplumConfigSetCBDB) Reset() {
 	*x = GreenplumConfigSetCBDB{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2049,7 +1839,7 @@ func (x *GreenplumConfigSetCBDB) String() string {
 func (*GreenplumConfigSetCBDB) ProtoMessage() {}
 
 func (x *GreenplumConfigSetCBDB) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2062,7 +1852,7 @@ func (x *GreenplumConfigSetCBDB) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GreenplumConfigSetCBDB.ProtoReflect.Descriptor instead.
 func (*GreenplumConfigSetCBDB) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GreenplumConfigSetCBDB) GetEffectiveConfig() *GreenplumConfigCBDB {
@@ -2206,24 +1996,7 @@ const file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDesc = "" +
 	"\x19max_locks_per_transaction\x18\x1d \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b128-2048R\x16maxLocksPerTransaction\x12i\n" +
 	"\x16segment_shared_buffers\x18\x1e \x01(\v2\x1b.google.protobuf.Int64ValueB\x16\xfa\xc71\x121048576-2147483647R\x14segmentSharedBuffers\x12`\n" +
 	"\x13log_error_verbosity\x18\x1f \x01(\x0e20.yandex.cloud.mdb.greenplum.v1.LogErrorVerbosityR\x11logErrorVerbosity\x12X\n" +
-	"\x10log_min_messages\x18  \x01(\x0e2..yandex.cloud.mdb.greenplum.v1.LogLevelMessageR\x0elogMinMessages\"\xff\x06\n" +
-	"\x13GreenplumConfig6_22\x12D\n" +
-	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxConnections\x12O\n" +
-	"\x16max_slot_wal_keep_size\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxSlotWalKeepSize\x12]\n" +
-	"\x1dgp_workfile_limit_per_segment\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x19gpWorkfileLimitPerSegment\x12Y\n" +
-	"\x1bgp_workfile_limit_per_query\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17gpWorkfileLimitPerQuery\x12d\n" +
-	"!gp_workfile_limit_files_per_query\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1cgpWorkfileLimitFilesPerQuery\x12W\n" +
-	"\x19max_prepared_transactions\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17maxPreparedTransactions\x12R\n" +
-	"\x17gp_workfile_compression\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x15gpWorkfileCompression\x12G\n" +
-	"\x11max_statement_mem\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxStatementMem\x12P\n" +
-	"\rlog_statement\x18\t \x01(\x0e2+.yandex.cloud.mdb.greenplum.v1.LogStatementR\flogStatement\x12i\n" +
-	"$gp_add_column_inherits_table_setting\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.BoolValueR\x1fgpAddColumnInheritsTableSetting\"\xad\x02\n" +
-	"\x16GreenplumConfigSet6_22\x12c\n" +
-	"\x10effective_config\x18\x01 \x01(\v22.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12S\n" +
-	"\vuser_config\x18\x02 \x01(\v22.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22R\n" +
-	"userConfig\x12Y\n" +
-	"\x0edefault_config\x18\x03 \x01(\v22.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22R\rdefaultConfig\"\xa1\x02\n" +
+	"\x10log_min_messages\x18  \x01(\x0e2..yandex.cloud.mdb.greenplum.v1.LogLevelMessageR\x0elogMinMessages\"\xa1\x02\n" +
 	"\x13GreenplumConfigSet6\x12`\n" +
 	"\x10effective_config\x18\x01 \x01(\v2/.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12P\n" +
 	"\vuser_config\x18\x02 \x01(\v2/.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6R\n" +
@@ -2290,7 +2063,7 @@ func file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_mdb_greenplum_v1_config_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_yandex_cloud_mdb_greenplum_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_yandex_cloud_mdb_greenplum_v1_config_proto_goTypes = []any{
 	(LogErrorVerbosity)(0),               // 0: yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity
 	(LogLevelMessage)(0),                 // 1: yandex.cloud.mdb.greenplum.v1.LogLevelMessage
@@ -2309,126 +2082,111 @@ var file_yandex_cloud_mdb_greenplum_v1_config_proto_goTypes = []any{
 	(*SegmentSubclusterConfig)(nil),      // 14: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
 	(*GreenplumConfig6)(nil),             // 15: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
 	(*GreenplumConfigCBDB)(nil),          // 16: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
-	(*GreenplumConfig6_22)(nil),          // 17: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22
-	(*GreenplumConfigSet6_22)(nil),       // 18: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_22
-	(*GreenplumConfigSet6)(nil),          // 19: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6
-	(*ConnectionPoolerConfigSet)(nil),    // 20: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
-	(*GreenplumConfigSetCBDB)(nil),       // 21: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB
-	(*wrapperspb.Int64Value)(nil),        // 22: google.protobuf.Int64Value
-	(*wrapperspb.BoolValue)(nil),         // 23: google.protobuf.BoolValue
-	(*wrapperspb.DoubleValue)(nil),       // 24: google.protobuf.DoubleValue
+	(*GreenplumConfigSet6)(nil),          // 17: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6
+	(*ConnectionPoolerConfigSet)(nil),    // 18: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
+	(*GreenplumConfigSetCBDB)(nil),       // 19: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB
+	(*wrapperspb.Int64Value)(nil),        // 20: google.protobuf.Int64Value
+	(*wrapperspb.BoolValue)(nil),         // 21: google.protobuf.BoolValue
+	(*wrapperspb.DoubleValue)(nil),       // 22: google.protobuf.DoubleValue
 }
 var file_yandex_cloud_mdb_greenplum_v1_config_proto_depIdxs = []int32{
-	4,   // 0: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.mode:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.PoolMode
-	22,  // 1: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.size:type_name -> google.protobuf.Int64Value
-	22,  // 2: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.client_idle_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 3: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.idle_in_transaction_timeout:type_name -> google.protobuf.Int64Value
-	7,   // 4: yandex.cloud.mdb.greenplum.v1.TableSizes.starts:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivityStartAt
-	7,   // 5: yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum.start:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivityStartAt
-	22,  // 6: yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum.analyze_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 7: yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum.vacuum_timeout:type_name -> google.protobuf.Int64Value
-	8,   // 8: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig.table_sizes:type_name -> yandex.cloud.mdb.greenplum.v1.TableSizes
-	9,   // 9: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig.analyze_and_vacuum:type_name -> yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum
-	12,  // 10: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig.query_killer_scripts:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKillerScripts
-	23,  // 11: yandex.cloud.mdb.greenplum.v1.QueryKiller.enable:type_name -> google.protobuf.BoolValue
-	22,  // 12: yandex.cloud.mdb.greenplum.v1.QueryKiller.max_age:type_name -> google.protobuf.Int64Value
-	11,  // 13: yandex.cloud.mdb.greenplum.v1.QueryKillerScripts.idle:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKiller
-	11,  // 14: yandex.cloud.mdb.greenplum.v1.QueryKillerScripts.idle_in_transaction:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKiller
-	11,  // 15: yandex.cloud.mdb.greenplum.v1.QueryKillerScripts.long_running:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKiller
-	5,   // 16: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	5,   // 17: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	22,  // 18: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_connections:type_name -> google.protobuf.Int64Value
-	22,  // 19: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
-	22,  // 20: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_limit_per_segment:type_name -> google.protobuf.Int64Value
-	22,  // 21: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_limit_per_query:type_name -> google.protobuf.Int64Value
-	22,  // 22: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_limit_files_per_query:type_name -> google.protobuf.Int64Value
-	22,  // 23: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_prepared_transactions:type_name -> google.protobuf.Int64Value
-	23,  // 24: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_compression:type_name -> google.protobuf.BoolValue
-	22,  // 25: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_statement_mem:type_name -> google.protobuf.Int64Value
-	2,   // 26: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_statement:type_name -> yandex.cloud.mdb.greenplum.v1.LogStatement
-	23,  // 27: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_add_column_inherits_table_setting:type_name -> google.protobuf.BoolValue
-	23,  // 28: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_enable_global_deadlock_detector:type_name -> google.protobuf.BoolValue
-	22,  // 29: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_global_deadlock_detector_period:type_name -> google.protobuf.Int64Value
-	22,  // 30: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_max_slices:type_name -> google.protobuf.Int64Value
-	22,  // 31: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_cached_segworkers_threshold:type_name -> google.protobuf.Int64Value
-	22,  // 32: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.lock_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 33: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 34: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.runaway_detector_activation_percent:type_name -> google.protobuf.Int64Value
-	22,  // 35: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_vmem_protect_segworker_cache_limit:type_name -> google.protobuf.Int64Value
-	23,  // 36: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_enable_zstd_memory_accounting:type_name -> google.protobuf.BoolValue
-	22,  // 37: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_max_plan_size:type_name -> google.protobuf.Int64Value
-	3,   // 38: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_autostats_mode:type_name -> yandex.cloud.mdb.greenplum.v1.GPAutostatsMode
-	22,  // 39: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_autostats_on_change_threshold:type_name -> google.protobuf.Int64Value
-	24,  // 40: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_resource_group_memory_limit:type_name -> google.protobuf.DoubleValue
-	23,  // 41: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_connections:type_name -> google.protobuf.BoolValue
-	23,  // 42: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_disconnections:type_name -> google.protobuf.BoolValue
-	23,  // 43: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_hostname:type_name -> google.protobuf.BoolValue
-	23,  // 44: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_statement_stats:type_name -> google.protobuf.BoolValue
-	22,  // 45: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_min_duration_statement:type_name -> google.protobuf.Int64Value
-	22,  // 46: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.master_shared_buffers:type_name -> google.protobuf.Int64Value
-	22,  // 47: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_locks_per_transaction:type_name -> google.protobuf.Int64Value
-	22,  // 48: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.segment_shared_buffers:type_name -> google.protobuf.Int64Value
-	0,   // 49: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_error_verbosity:type_name -> yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity
-	1,   // 50: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_min_messages:type_name -> yandex.cloud.mdb.greenplum.v1.LogLevelMessage
-	22,  // 51: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_connections:type_name -> google.protobuf.Int64Value
-	22,  // 52: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
-	22,  // 53: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_limit_per_segment:type_name -> google.protobuf.Int64Value
-	22,  // 54: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_limit_per_query:type_name -> google.protobuf.Int64Value
-	22,  // 55: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_limit_files_per_query:type_name -> google.protobuf.Int64Value
-	22,  // 56: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_prepared_transactions:type_name -> google.protobuf.Int64Value
-	23,  // 57: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_compression:type_name -> google.protobuf.BoolValue
-	22,  // 58: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_statement_mem:type_name -> google.protobuf.Int64Value
-	2,   // 59: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_statement:type_name -> yandex.cloud.mdb.greenplum.v1.LogStatement
-	23,  // 60: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_enable_global_deadlock_detector:type_name -> google.protobuf.BoolValue
-	22,  // 61: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_global_deadlock_detector_period:type_name -> google.protobuf.Int64Value
-	22,  // 62: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_max_slices:type_name -> google.protobuf.Int64Value
-	22,  // 63: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_cached_segworkers_threshold:type_name -> google.protobuf.Int64Value
-	22,  // 64: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.lock_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 65: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 66: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.runaway_detector_activation_percent:type_name -> google.protobuf.Int64Value
-	22,  // 67: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_vmem_protect_segworker_cache_limit:type_name -> google.protobuf.Int64Value
-	23,  // 68: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_enable_zstd_memory_accounting:type_name -> google.protobuf.BoolValue
-	22,  // 69: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_max_plan_size:type_name -> google.protobuf.Int64Value
-	3,   // 70: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_autostats_mode:type_name -> yandex.cloud.mdb.greenplum.v1.GPAutostatsMode
-	22,  // 71: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_autostats_on_change_threshold:type_name -> google.protobuf.Int64Value
-	24,  // 72: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_resource_group_memory_limit:type_name -> google.protobuf.DoubleValue
-	23,  // 73: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_connections:type_name -> google.protobuf.BoolValue
-	23,  // 74: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_disconnections:type_name -> google.protobuf.BoolValue
-	23,  // 75: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_hostname:type_name -> google.protobuf.BoolValue
-	23,  // 76: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_statement_stats:type_name -> google.protobuf.BoolValue
-	22,  // 77: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_min_duration_statement:type_name -> google.protobuf.Int64Value
-	22,  // 78: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.master_shared_buffers:type_name -> google.protobuf.Int64Value
-	22,  // 79: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_locks_per_transaction:type_name -> google.protobuf.Int64Value
-	22,  // 80: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.segment_shared_buffers:type_name -> google.protobuf.Int64Value
-	0,   // 81: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_error_verbosity:type_name -> yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity
-	1,   // 82: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_min_messages:type_name -> yandex.cloud.mdb.greenplum.v1.LogLevelMessage
-	22,  // 83: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.max_connections:type_name -> google.protobuf.Int64Value
-	22,  // 84: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
-	22,  // 85: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.gp_workfile_limit_per_segment:type_name -> google.protobuf.Int64Value
-	22,  // 86: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.gp_workfile_limit_per_query:type_name -> google.protobuf.Int64Value
-	22,  // 87: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.gp_workfile_limit_files_per_query:type_name -> google.protobuf.Int64Value
-	22,  // 88: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.max_prepared_transactions:type_name -> google.protobuf.Int64Value
-	23,  // 89: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.gp_workfile_compression:type_name -> google.protobuf.BoolValue
-	22,  // 90: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.max_statement_mem:type_name -> google.protobuf.Int64Value
-	2,   // 91: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.log_statement:type_name -> yandex.cloud.mdb.greenplum.v1.LogStatement
-	23,  // 92: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22.gp_add_column_inherits_table_setting:type_name -> google.protobuf.BoolValue
-	17,  // 93: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_22.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22
-	17,  // 94: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_22.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22
-	17,  // 95: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6_22.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6_22
-	15,  // 96: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	15,  // 97: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	15,  // 98: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	6,   // 99: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	6,   // 100: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	6,   // 101: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	16,  // 102: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
-	16,  // 103: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
-	16,  // 104: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
-	105, // [105:105] is the sub-list for method output_type
-	105, // [105:105] is the sub-list for method input_type
-	105, // [105:105] is the sub-list for extension type_name
-	105, // [105:105] is the sub-list for extension extendee
-	0,   // [0:105] is the sub-list for field type_name
+	4,  // 0: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.mode:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.PoolMode
+	20, // 1: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.size:type_name -> google.protobuf.Int64Value
+	20, // 2: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.client_idle_timeout:type_name -> google.protobuf.Int64Value
+	20, // 3: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig.idle_in_transaction_timeout:type_name -> google.protobuf.Int64Value
+	7,  // 4: yandex.cloud.mdb.greenplum.v1.TableSizes.starts:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivityStartAt
+	7,  // 5: yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum.start:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivityStartAt
+	20, // 6: yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum.analyze_timeout:type_name -> google.protobuf.Int64Value
+	20, // 7: yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum.vacuum_timeout:type_name -> google.protobuf.Int64Value
+	8,  // 8: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig.table_sizes:type_name -> yandex.cloud.mdb.greenplum.v1.TableSizes
+	9,  // 9: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig.analyze_and_vacuum:type_name -> yandex.cloud.mdb.greenplum.v1.AnalyzeAndVacuum
+	12, // 10: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig.query_killer_scripts:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKillerScripts
+	21, // 11: yandex.cloud.mdb.greenplum.v1.QueryKiller.enable:type_name -> google.protobuf.BoolValue
+	20, // 12: yandex.cloud.mdb.greenplum.v1.QueryKiller.max_age:type_name -> google.protobuf.Int64Value
+	11, // 13: yandex.cloud.mdb.greenplum.v1.QueryKillerScripts.idle:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKiller
+	11, // 14: yandex.cloud.mdb.greenplum.v1.QueryKillerScripts.idle_in_transaction:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKiller
+	11, // 15: yandex.cloud.mdb.greenplum.v1.QueryKillerScripts.long_running:type_name -> yandex.cloud.mdb.greenplum.v1.QueryKiller
+	5,  // 16: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	5,  // 17: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	20, // 18: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_connections:type_name -> google.protobuf.Int64Value
+	20, // 19: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
+	20, // 20: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_limit_per_segment:type_name -> google.protobuf.Int64Value
+	20, // 21: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_limit_per_query:type_name -> google.protobuf.Int64Value
+	20, // 22: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_limit_files_per_query:type_name -> google.protobuf.Int64Value
+	20, // 23: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_prepared_transactions:type_name -> google.protobuf.Int64Value
+	21, // 24: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_workfile_compression:type_name -> google.protobuf.BoolValue
+	20, // 25: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_statement_mem:type_name -> google.protobuf.Int64Value
+	2,  // 26: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_statement:type_name -> yandex.cloud.mdb.greenplum.v1.LogStatement
+	21, // 27: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_add_column_inherits_table_setting:type_name -> google.protobuf.BoolValue
+	21, // 28: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_enable_global_deadlock_detector:type_name -> google.protobuf.BoolValue
+	20, // 29: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_global_deadlock_detector_period:type_name -> google.protobuf.Int64Value
+	20, // 30: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_max_slices:type_name -> google.protobuf.Int64Value
+	20, // 31: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_cached_segworkers_threshold:type_name -> google.protobuf.Int64Value
+	20, // 32: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.lock_timeout:type_name -> google.protobuf.Int64Value
+	20, // 33: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
+	20, // 34: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.runaway_detector_activation_percent:type_name -> google.protobuf.Int64Value
+	20, // 35: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_vmem_protect_segworker_cache_limit:type_name -> google.protobuf.Int64Value
+	21, // 36: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_enable_zstd_memory_accounting:type_name -> google.protobuf.BoolValue
+	20, // 37: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_max_plan_size:type_name -> google.protobuf.Int64Value
+	3,  // 38: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_autostats_mode:type_name -> yandex.cloud.mdb.greenplum.v1.GPAutostatsMode
+	20, // 39: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_autostats_on_change_threshold:type_name -> google.protobuf.Int64Value
+	22, // 40: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.gp_resource_group_memory_limit:type_name -> google.protobuf.DoubleValue
+	21, // 41: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_connections:type_name -> google.protobuf.BoolValue
+	21, // 42: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_disconnections:type_name -> google.protobuf.BoolValue
+	21, // 43: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_hostname:type_name -> google.protobuf.BoolValue
+	21, // 44: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_statement_stats:type_name -> google.protobuf.BoolValue
+	20, // 45: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_min_duration_statement:type_name -> google.protobuf.Int64Value
+	20, // 46: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.master_shared_buffers:type_name -> google.protobuf.Int64Value
+	20, // 47: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.max_locks_per_transaction:type_name -> google.protobuf.Int64Value
+	20, // 48: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.segment_shared_buffers:type_name -> google.protobuf.Int64Value
+	0,  // 49: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_error_verbosity:type_name -> yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity
+	1,  // 50: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6.log_min_messages:type_name -> yandex.cloud.mdb.greenplum.v1.LogLevelMessage
+	20, // 51: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_connections:type_name -> google.protobuf.Int64Value
+	20, // 52: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_slot_wal_keep_size:type_name -> google.protobuf.Int64Value
+	20, // 53: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_limit_per_segment:type_name -> google.protobuf.Int64Value
+	20, // 54: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_limit_per_query:type_name -> google.protobuf.Int64Value
+	20, // 55: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_limit_files_per_query:type_name -> google.protobuf.Int64Value
+	20, // 56: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_prepared_transactions:type_name -> google.protobuf.Int64Value
+	21, // 57: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_workfile_compression:type_name -> google.protobuf.BoolValue
+	20, // 58: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_statement_mem:type_name -> google.protobuf.Int64Value
+	2,  // 59: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_statement:type_name -> yandex.cloud.mdb.greenplum.v1.LogStatement
+	21, // 60: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_enable_global_deadlock_detector:type_name -> google.protobuf.BoolValue
+	20, // 61: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_global_deadlock_detector_period:type_name -> google.protobuf.Int64Value
+	20, // 62: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_max_slices:type_name -> google.protobuf.Int64Value
+	20, // 63: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_cached_segworkers_threshold:type_name -> google.protobuf.Int64Value
+	20, // 64: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.lock_timeout:type_name -> google.protobuf.Int64Value
+	20, // 65: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
+	20, // 66: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.runaway_detector_activation_percent:type_name -> google.protobuf.Int64Value
+	20, // 67: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_vmem_protect_segworker_cache_limit:type_name -> google.protobuf.Int64Value
+	21, // 68: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_enable_zstd_memory_accounting:type_name -> google.protobuf.BoolValue
+	20, // 69: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_max_plan_size:type_name -> google.protobuf.Int64Value
+	3,  // 70: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_autostats_mode:type_name -> yandex.cloud.mdb.greenplum.v1.GPAutostatsMode
+	20, // 71: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_autostats_on_change_threshold:type_name -> google.protobuf.Int64Value
+	22, // 72: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.gp_resource_group_memory_limit:type_name -> google.protobuf.DoubleValue
+	21, // 73: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_connections:type_name -> google.protobuf.BoolValue
+	21, // 74: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_disconnections:type_name -> google.protobuf.BoolValue
+	21, // 75: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_hostname:type_name -> google.protobuf.BoolValue
+	21, // 76: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_statement_stats:type_name -> google.protobuf.BoolValue
+	20, // 77: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_min_duration_statement:type_name -> google.protobuf.Int64Value
+	20, // 78: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.master_shared_buffers:type_name -> google.protobuf.Int64Value
+	20, // 79: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.max_locks_per_transaction:type_name -> google.protobuf.Int64Value
+	20, // 80: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.segment_shared_buffers:type_name -> google.protobuf.Int64Value
+	0,  // 81: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_error_verbosity:type_name -> yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity
+	1,  // 82: yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB.log_min_messages:type_name -> yandex.cloud.mdb.greenplum.v1.LogLevelMessage
+	15, // 83: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	15, // 84: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	15, // 85: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	6,  // 86: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	6,  // 87: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	6,  // 88: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	16, // 89: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB.effective_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
+	16, // 90: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB.user_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
+	16, // 91: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSetCBDB.default_config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigCBDB
+	92, // [92:92] is the sub-list for method output_type
+	92, // [92:92] is the sub-list for method input_type
+	92, // [92:92] is the sub-list for extension type_name
+	92, // [92:92] is the sub-list for extension extendee
+	0,  // [0:92] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_config_proto_init() }
@@ -2442,7 +2200,7 @@ func file_yandex_cloud_mdb_greenplum_v1_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDesc), len(file_yandex_cloud_mdb_greenplum_v1_config_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   17,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
