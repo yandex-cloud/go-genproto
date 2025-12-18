@@ -119,22 +119,31 @@ func (YdbDefaultCompression) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_datatransfer_v1_endpoint_ydb_proto_rawDescGZIP(), []int{1}
 }
 
+// Settings specific to the YDB source endpoint
 type YdbSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Path in YDB where to store tables
+	// Database path in YDB where tables are stored.
+	// Example: `/ru/transfer_manager/prod/data-transfer-yt`
 	Database string `protobuf:"bytes,1,opt,name=database,proto3" json:"database,omitempty"`
-	// Instance of YDB. example: ydb-ru-prestable.yandex.net:2135
-	Instance         string   `protobuf:"bytes,2,opt,name=instance,proto3" json:"instance,omitempty"`
-	Paths            []string `protobuf:"bytes,5,rep,name=paths,proto3" json:"paths,omitempty"`
-	ServiceAccountId string   `protobuf:"bytes,6,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
+	// Instance of YDB. example: ydb-ru-prestable.yandex.net:2135.
+	// If not specified, will be determined by database
+	Instance string `protobuf:"bytes,2,opt,name=instance,proto3" json:"instance,omitempty"`
+	// A list of paths which should be uploaded. When not specified, all available
+	// tables are uploaded
+	Paths []string `protobuf:"bytes,5,rep,name=paths,proto3" json:"paths,omitempty"`
+	// Service account ID for interaction with database
+	ServiceAccountId string `protobuf:"bytes,6,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database. If omitted, the server has to be accessible via Internet
 	SubnetId string `protobuf:"bytes,30,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Authorization Key
 	SaKeyContent string `protobuf:"bytes,33,opt,name=sa_key_content,json=saKeyContent,proto3" json:"sa_key_content,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,34,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	// Pre-created change feed
-	ChangefeedCustomName         string `protobuf:"bytes,35,opt,name=changefeed_custom_name,json=changefeedCustomName,proto3" json:"changefeed_custom_name,omitempty"`
+	// Pre-created change feed if any
+	ChangefeedCustomName string `protobuf:"bytes,35,opt,name=changefeed_custom_name,json=changefeedCustomName,proto3" json:"changefeed_custom_name,omitempty"`
+	// Consumer for pre-created change feed if any
 	ChangefeedCustomConsumerName string `protobuf:"bytes,36,opt,name=changefeed_custom_consumer_name,json=changefeedCustomConsumerName,proto3" json:"changefeed_custom_consumer_name,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
@@ -233,29 +242,40 @@ func (x *YdbSource) GetChangefeedCustomConsumerName() string {
 	return ""
 }
 
+// Settings specific to the YDB target endpoint
 type YdbTarget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Path in YDB where to store tables
+	// Database path in YDB where tables are stored.
+	// Example: `/ru/transfer_manager/prod/data-transfer`
 	Database string `protobuf:"bytes,1,opt,name=database,proto3" json:"database,omitempty"`
-	// Instance of YDB. example: ydb-ru-prestable.yandex.net:2135
+	// Instance of YDB. example: ydb-ru-prestable.yandex.net:2135.
+	// If not specified, will be determined by database
 	Instance string `protobuf:"bytes,2,opt,name=instance,proto3" json:"instance,omitempty"`
 	// Path extension for database, each table will be layouted into this path
-	Path             string `protobuf:"bytes,10,opt,name=path,proto3" json:"path,omitempty"`
+	Path string `protobuf:"bytes,10,opt,name=path,proto3" json:"path,omitempty"`
+	// Service account ID for interaction with database
 	ServiceAccountId string `protobuf:"bytes,11,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cleanup policy
+	// Cleanup policy determine how to clean collections when activating the transfer.
+	// One of `YDB_CLEANUP_POLICY_DISABLED` or `YDB_CLEANUP_POLICY_DROP`
 	CleanupPolicy YdbCleanupPolicy `protobuf:"varint,21,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.YdbCleanupPolicy" json:"cleanup_policy,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
 	SubnetId string `protobuf:"bytes,30,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// SA content
+	// Authentication key
 	SaKeyContent string `protobuf:"bytes,32,opt,name=sa_key_content,json=saKeyContent,proto3" json:"sa_key_content,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,33,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	// Should create column-oriented table (OLAP). By default it creates row-oriented
-	// (OLTP)
+	// Whether a column-oriented (i.e. OLAP) tables should be created.
+	// Default is `false` (create row-oriented OLTP tables)
 	IsTableColumnOriented bool `protobuf:"varint,34,opt,name=is_table_column_oriented,json=isTableColumnOriented,proto3" json:"is_table_column_oriented,omitempty"`
-	// Compression that will be used for default columns family on YDB table creation
-	DefaultCompression        YdbDefaultCompression `protobuf:"varint,35,opt,name=default_compression,json=defaultCompression,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.YdbDefaultCompression" json:"default_compression,omitempty"`
-	IsSchemaMigrationDisabled bool                  `protobuf:"varint,36,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
+	// Compression that will be used for default columns family on YDB table creation.
+	// One of `YDB_DEFAULT_COMPRESSION_UNSPECIFIED`,
+	// `YDB_DEFAULT_COMPRESSION_DISABLED`, `YDB_DEFAULT_COMPRESSION_LZ4`
+	DefaultCompression YdbDefaultCompression `protobuf:"varint,35,opt,name=default_compression,json=defaultCompression,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.YdbDefaultCompression" json:"default_compression,omitempty"`
+	// Whether can change table schema if schema changed on source
+	IsSchemaMigrationDisabled bool `protobuf:"varint,36,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }

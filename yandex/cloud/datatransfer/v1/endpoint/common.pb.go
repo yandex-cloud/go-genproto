@@ -339,12 +339,18 @@ type Secret_Raw struct {
 func (*Secret_Raw) isSecret_Value() {}
 
 type ColSchema struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type          ColumnType             `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ColumnType" json:"type,omitempty"`
-	Key           bool                   `protobuf:"varint,3,opt,name=key,proto3" json:"key,omitempty"`
-	Required      bool                   `protobuf:"varint,4,opt,name=required,proto3" json:"required,omitempty"`
-	Path          string                 `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Field name
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Field type, one of: `INT64`, `INT32`, `INT16`, `INT8`, `UINT64`, `UINT32`,
+	// `UINT16`, `UINT8`, `DOUBLE`, `BOOLEAN`, `STRING`, `UTF8`, `ANY`, `DATETIME`.
+	Type ColumnType `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ColumnType" json:"type,omitempty"`
+	// Mark field as Primary Key
+	Key bool `protobuf:"varint,3,opt,name=key,proto3" json:"key,omitempty"`
+	// Mark field as required
+	Required bool `protobuf:"varint,4,opt,name=required,proto3" json:"required,omitempty"`
+	// Path to the field
+	Path          string `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -414,6 +420,7 @@ func (x *ColSchema) GetPath() string {
 	return ""
 }
 
+// TLS configuration
 type TLSMode struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to TlsMode:
@@ -485,10 +492,13 @@ type isTLSMode_TlsMode interface {
 }
 
 type TLSMode_Disabled struct {
+	// Empty block designating that the connection is not secured, i.e. plaintext
+	// connection
 	Disabled *emptypb.Empty `protobuf:"bytes,1,opt,name=disabled,proto3,oneof"`
 }
 
 type TLSMode_Enabled struct {
+	// TLS is used for the server connection
 	Enabled *TLSConfig `protobuf:"bytes,2,opt,name=enabled,proto3,oneof"`
 }
 
@@ -501,8 +511,9 @@ type TLSConfig struct {
 	// CA certificate
 	//
 	// X.509 certificate of the certificate authority which issued the server's
-	// certificate, in PEM format. When CA certificate is specified TLS is used to
-	// connect to the server.
+	// certificate, in PEM format. When CA certificate is specified, TLS is used to
+	// connect to the server. If CA certificate is empty, the server's certificate must
+	// be signed by a well-known CA
 	CaCertificate string `protobuf:"bytes,1,opt,name=ca_certificate,json=caCertificate,proto3" json:"ca_certificate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -617,7 +628,8 @@ type DataTransformationOptions struct {
 	CloudFunction string `protobuf:"bytes,1,opt,name=cloud_function,json=cloudFunction,proto3" json:"cloud_function,omitempty"`
 	// Number of retries
 	NumberOfRetries int64 `protobuf:"varint,2,opt,name=number_of_retries,json=numberOfRetries,proto3" json:"number_of_retries,omitempty"`
-	// Buffer size for function
+	// Buffer size for function. Maximum 4 GB.  Use value with units, i.e. 10 B, 20 kB,
+	// 2.0 MB, 30 MB, 1.0 GB
 	BufferSize string `protobuf:"bytes,3,opt,name=buffer_size,json=bufferSize,proto3" json:"buffer_size,omitempty"`
 	// Flush interval
 	BufferFlushInterval string `protobuf:"bytes,4,opt,name=buffer_flush_interval,json=bufferFlushInterval,proto3" json:"buffer_flush_interval,omitempty"`
@@ -703,7 +715,7 @@ func (x *DataTransformationOptions) GetServiceAccountId() string {
 
 type FieldList struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Column schema
+	// Description of the column schema in the array of `fields` structure
 	Fields        []*ColSchema `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -817,10 +829,12 @@ type isDataSchema_Schema interface {
 }
 
 type DataSchema_JsonFields struct {
+	// Description of the data schema as JSON specification
 	JsonFields string `protobuf:"bytes,1,opt,name=json_fields,json=jsonFields,proto3,oneof"`
 }
 
 type DataSchema_Fields struct {
+	// Description of the data schema in the array of `fields` structure
 	Fields *FieldList `protobuf:"bytes,2,opt,name=fields,proto3,oneof"`
 }
 
@@ -865,9 +879,15 @@ func (*NoAuth) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDescGZIP(), []int{9}
 }
 
+// Use Connection Manager connection
 type ConnectionManagerConnection struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of connection in Connection Manager with installation params and credetials
+	ConnectionId string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId      string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -905,6 +925,13 @@ func (*ConnectionManagerConnection) Descriptor() ([]byte, []int) {
 func (x *ConnectionManagerConnection) GetConnectionId() string {
 	if x != nil {
 		return x.ConnectionId
+	}
+	return ""
+}
+
+func (x *ConnectionManagerConnection) GetSubnetId() string {
+	if x != nil {
+		return x.SubnetId
 	}
 	return ""
 }
@@ -952,9 +979,10 @@ const file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDesc = "" +
 	"jsonFields\x12J\n" +
 	"\x06fields\x18\x02 \x01(\v20.yandex.cloud.datatransfer.v1.endpoint.FieldListH\x00R\x06fieldsB\b\n" +
 	"\x06schema\"\b\n" +
-	"\x06NoAuth\"B\n" +
+	"\x06NoAuth\"_\n" +
 	"\x1bConnectionManagerConnection\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId*h\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\x12\x1b\n" +
+	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId*h\n" +
 	"\x13ObjectTransferStage\x12%\n" +
 	"!OBJECT_TRANSFER_STAGE_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vBEFORE_DATA\x10\x01\x12\x0e\n" +

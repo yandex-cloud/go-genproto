@@ -23,11 +23,14 @@ const (
 
 type OnPremiseMysql struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Database port
+	// Port for the database connection
 	Port int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
-	SubnetId string   `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	Hosts    []string `protobuf:"bytes,5,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// List of host names of the MySQL server. Exactly one host is expected
+	Hosts []string `protobuf:"bytes,5,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// TLS settings for server connection. Disabled by default.
 	TlsMode       *TLSMode `protobuf:"bytes,6,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -183,6 +186,7 @@ type MysqlConnection_OnPremise struct {
 }
 
 type MysqlConnection_ConnectionManagerConnection struct {
+	// Get Mysql installation params and credentials from Connection Manager
 	ConnectionManagerConnection *ConnectionManagerConnection `protobuf:"bytes,3,opt,name=connection_manager_connection,json=connectionManagerConnection,proto3,oneof"`
 }
 
@@ -269,16 +273,17 @@ func (x *MysqlObjectTransferSettings) GetTables() ObjectTransferStage {
 	return ObjectTransferStage_OBJECT_TRANSFER_STAGE_UNSPECIFIED
 }
 
+// Settings specific to the MySQL source endpoint
 type MysqlSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Database connection settings
 	Connection *MysqlConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	// Database name
+	// Name of the database to transfer
 	//
 	// You can leave it empty, then it will be possible to transfer tables from several
 	// databases at the same time from this source.
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access. not required as may be in connection
+	// User for database access. Required unless connection manager connection is used
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
@@ -288,15 +293,22 @@ type MysqlSource struct {
 	// IANA timezone database. Default: local timezone.
 	Timezone string `protobuf:"bytes,8,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	// Schema migration
-	//
-	// Select database objects to be transferred during activation or deactivation.
+	// Defines which database schema objects should be transferred, e.g. views,
+	// routines, etc.
+	// All of the attrubutes in the block are optional and should be either
+	// `BEFORE_DATA`, `AFTER_DATA` or `NEVER`."
 	ObjectTransferSettings *MysqlObjectTransferSettings `protobuf:"bytes,11,opt,name=object_transfer_settings,json=objectTransferSettings,proto3" json:"object_transfer_settings,omitempty"`
-	IncludeTablesRegex     []string                     `protobuf:"bytes,12,rep,name=include_tables_regex,json=includeTablesRegex,proto3" json:"include_tables_regex,omitempty"`
-	ExcludeTablesRegex     []string                     `protobuf:"bytes,13,rep,name=exclude_tables_regex,json=excludeTablesRegex,proto3" json:"exclude_tables_regex,omitempty"`
-	// Security groups
+	// List of regular expressions of table names which should be transferred. A table
+	// name is formatted as schemaname.tablename. For example, a single regular
+	// expression may look like `^mydb.employees$`
+	IncludeTablesRegex []string `protobuf:"bytes,12,rep,name=include_tables_regex,json=includeTablesRegex,proto3" json:"include_tables_regex,omitempty"`
+	// Opposite of `include_table_regex`. The tables matching the specified regular
+	// expressions will not be transferred
+	ExcludeTablesRegex []string `protobuf:"bytes,13,rep,name=exclude_tables_regex,json=excludeTablesRegex,proto3" json:"exclude_tables_regex,omitempty"`
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,14,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	// Database for service tables
-	//
 	// Default: data source database. Here created technical tables (__tm_keeper,
 	// __tm_gtid_keeper).
 	ServiceDatabase string `protobuf:"bytes,15,opt,name=service_database,json=serviceDatabase,proto3" json:"service_database,omitempty"`
@@ -404,6 +416,7 @@ func (x *MysqlSource) GetServiceDatabase() string {
 	return ""
 }
 
+// Settings specific to the MySQL target endpoint
 type MysqlTarget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Database connection settings
@@ -414,35 +427,37 @@ type MysqlTarget struct {
 	// same names as on the source. If this field is empty, then you must fill below db
 	// schema for service table.
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access. not required as may be in connection
+	// User for database access. Required unless connection manager connection is used
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// Default: NO_AUTO_VALUE_ON_ZERO,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION.
+	// [sql_mode](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html) to use when
+	// interacting with the server.
+	// Defaults to `NO_AUTO_VALUE_ON_ZERO,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION`
 	SqlMode string `protobuf:"bytes,5,opt,name=sql_mode,json=sqlMode,proto3" json:"sql_mode,omitempty"`
 	// Disable constraints checks
-	//
-	// Recommend to disable for increase replication speed, but if schema contain
-	// cascading operations we don't recommend to disable. This option set
-	// FOREIGN_KEY_CHECKS=0 and UNIQUE_CHECKS=0.
+	// When `true`, disables foreign key checks and unique checks. `False` by default.
+	// See
+	// [foreign_key_checks](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_foreign_key_checks).
+	// Recommend to disable for increase replication speed unless schema contains
+	// cascading operations
 	SkipConstraintChecks bool `protobuf:"varint,6,opt,name=skip_constraint_checks,json=skipConstraintChecks,proto3" json:"skip_constraint_checks,omitempty"`
 	// Database timezone
 	//
 	// Is used for parsing timestamps for saving source timezones. Accepts values from
 	// IANA timezone database. Default: local timezone.
 	Timezone string `protobuf:"bytes,7,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	// Cleanup policy
-	//
-	// Cleanup policy for activate, reactivate and reupload processes. Default is
-	// DISABLED.
+	// Cleanup policy for activate, reactivate and reupload processes.
+	// One of `DISABLED`, `DROP` or `TRUNCATE` Default is `DISABLED`.
 	CleanupPolicy CleanupPolicy `protobuf:"varint,8,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy" json:"cleanup_policy,omitempty"`
 	// Database schema for service table
-	//
 	// Default: db name. Here created technical tables (__tm_keeper, __tm_gtid_keeper).
 	ServiceDatabase string `protobuf:"bytes,15,opt,name=service_database,json=serviceDatabase,proto3" json:"service_database,omitempty"`
-	// Security groups
-	SecurityGroups            []string `protobuf:"bytes,16,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	IsSchemaMigrationDisabled bool     `protobuf:"varint,17,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
+	// List of security groups that the transfer associated with this endpoint should
+	// use
+	SecurityGroups []string `protobuf:"bytes,16,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
+	// Whether can change table schema if schema changed on source
+	IsSchemaMigrationDisabled bool `protobuf:"varint,17,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }

@@ -127,11 +127,12 @@ func (x *ClickhouseShard) GetHosts() []string {
 }
 
 type OnPremiseClickhouse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Shards        []*ClickhouseShard     `protobuf:"bytes,1,rep,name=shards,proto3" json:"shards,omitempty"`
-	HttpPort      int64                  `protobuf:"varint,3,opt,name=http_port,json=httpPort,proto3" json:"http_port,omitempty"`
-	NativePort    int64                  `protobuf:"varint,4,opt,name=native_port,json=nativePort,proto3" json:"native_port,omitempty"`
-	TlsMode       *TLSMode               `protobuf:"bytes,8,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Shards     []*ClickhouseShard     `protobuf:"bytes,1,rep,name=shards,proto3" json:"shards,omitempty"`
+	HttpPort   int64                  `protobuf:"varint,3,opt,name=http_port,json=httpPort,proto3" json:"http_port,omitempty"`
+	NativePort int64                  `protobuf:"varint,4,opt,name=native_port,json=nativePort,proto3" json:"native_port,omitempty"`
+	// TLS settings for server connection. Disabled by default
+	TlsMode       *TLSMode `protobuf:"bytes,8,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -201,10 +202,12 @@ type ClickhouseConnectionOptions struct {
 	//	*ClickhouseConnectionOptions_OnPremise
 	//	*ClickhouseConnectionOptions_ConnectionManagerConnection
 	//	*ClickhouseConnectionOptions_MdbClusterId
-	Address  isClickhouseConnectionOptions_Address `protobuf_oneof:"address"`
-	User     string                                `protobuf:"bytes,6,opt,name=user,proto3" json:"user,omitempty"`
-	Password *Secret                               `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
-	// Database
+	Address isClickhouseConnectionOptions_Address `protobuf_oneof:"address"`
+	// User for database access. Required unless connection_manager_connection is used
+	User string `protobuf:"bytes,6,opt,name=user,proto3" json:"user,omitempty"`
+	// Password for the database access
+	Password *Secret `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
+	// Database name
 	Database      string `protobuf:"bytes,8,opt,name=database,proto3" json:"database,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -300,14 +303,17 @@ type isClickhouseConnectionOptions_Address interface {
 }
 
 type ClickhouseConnectionOptions_OnPremise struct {
+	// Connection settings of the on-premise ClickHouse server
 	OnPremise *OnPremiseClickhouse `protobuf:"bytes,2,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
 type ClickhouseConnectionOptions_ConnectionManagerConnection struct {
+	// Get ClickHouse installation params and credentials from Connection Manager
 	ConnectionManagerConnection *ConnectionManagerConnection `protobuf:"bytes,3,opt,name=connection_manager_connection,json=connectionManagerConnection,proto3,oneof"`
 }
 
 type ClickhouseConnectionOptions_MdbClusterId struct {
+	// Identifier of the Managed ClickHouse cluster
 	MdbClusterId string `protobuf:"bytes,5,opt,name=mdb_cluster_id,json=mdbClusterId,proto3,oneof"`
 }
 
@@ -475,18 +481,23 @@ type isClickhouseSharding_Sharding interface {
 }
 
 type ClickhouseSharding_ColumnValueHash_ struct {
+	// Shard data by the hash value of the specified column
 	ColumnValueHash *ClickhouseSharding_ColumnValueHash `protobuf:"bytes,1,opt,name=column_value_hash,json=columnValueHash,proto3,oneof"`
 }
 
 type ClickhouseSharding_CustomMapping struct {
+	// A custom shard mapping by the value of the specified column
 	CustomMapping *ClickhouseSharding_ColumnValueMapping `protobuf:"bytes,2,opt,name=custom_mapping,json=customMapping,proto3,oneof"`
 }
 
 type ClickhouseSharding_TransferId struct {
+	// Shard data by ID of the transfer
 	TransferId *emptypb.Empty `protobuf:"bytes,3,opt,name=transfer_id,json=transferId,proto3,oneof"`
 }
 
 type ClickhouseSharding_RoundRobin struct {
+	// Distribute incoming rows between ClickHouse shards in a round-robin manner.
+	// Specify as an empty block to enable
 	RoundRobin *emptypb.Empty `protobuf:"bytes,4,opt,name=round_robin,json=roundRobin,proto3,oneof"`
 }
 
@@ -498,19 +509,26 @@ func (*ClickhouseSharding_TransferId) isClickhouseSharding_Sharding() {}
 
 func (*ClickhouseSharding_RoundRobin) isClickhouseSharding_Sharding() {}
 
+// Settings specific to the ClickHouse source endpoint
 type ClickhouseSource struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Connection *ClickhouseConnection  `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Connection settings
+	Connection *ClickhouseConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// White list of tables for replication. If none or empty list is presented - will
 	// replicate all tables. Can contain * patterns.
 	IncludeTables []string `protobuf:"bytes,7,rep,name=include_tables,json=includeTables,proto3" json:"include_tables,omitempty"`
 	// Exclude list of tables for replication. If none or empty list is presented -
 	// will replicate all tables. Can contain * patterns.
-	ExcludeTables  []string `protobuf:"bytes,8,rep,name=exclude_tables,json=excludeTables,proto3" json:"exclude_tables,omitempty"`
-	SubnetId       string   `protobuf:"bytes,9,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	ExcludeTables []string `protobuf:"bytes,8,rep,name=exclude_tables,json=excludeTables,proto3" json:"exclude_tables,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId string `protobuf:"bytes,9,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,10,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	// Name of the ClickHouse cluster. For Managed ClickHouse that is name of
-	// ShardGroup.
+	// ShardGroup or managed cluster ID by default
 	ClickhouseClusterName string `protobuf:"bytes,11,opt,name=clickhouse_cluster_name,json=clickhouseClusterName,proto3" json:"clickhouse_cluster_name,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -588,21 +606,32 @@ func (x *ClickhouseSource) GetClickhouseClusterName() string {
 	return ""
 }
 
+// Settings specific to the ClickHouse target endpoint
 type ClickhouseTarget struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Connection *ClickhouseConnection  `protobuf:"bytes,2,opt,name=connection,proto3" json:"connection,omitempty"`
-	SubnetId   string                 `protobuf:"bytes,12,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Alternative table names in target
-	AltNames                  []*AltName              `protobuf:"bytes,17,rep,name=alt_names,json=altNames,proto3" json:"alt_names,omitempty"`
-	CleanupPolicy             ClickhouseCleanupPolicy `protobuf:"varint,21,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ClickhouseCleanupPolicy" json:"cleanup_policy,omitempty"`
-	Sharding                  *ClickhouseSharding     `protobuf:"bytes,22,opt,name=sharding,proto3" json:"sharding,omitempty"`
-	IsSchemaMigrationDisabled bool                    `protobuf:"varint,35,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Connection settings
+	Connection *ClickhouseConnection `protobuf:"bytes,2,opt,name=connection,proto3" json:"connection,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId string `protobuf:"bytes,12,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Table renaming rules in target
+	AltNames []*AltName `protobuf:"bytes,17,rep,name=alt_names,json=altNames,proto3" json:"alt_names,omitempty"`
+	// How to clean collections when activating the transfer. One of
+	// `CLICKHOUSE_CLEANUP_POLICY_DISABLED` or `CLICKHOUSE_CLEANUP_POLICY_DROP`
+	CleanupPolicy ClickhouseCleanupPolicy `protobuf:"varint,21,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ClickhouseCleanupPolicy" json:"cleanup_policy,omitempty"`
+	// Shard selection rules for the data being transferred
+	Sharding *ClickhouseSharding `protobuf:"bytes,22,opt,name=sharding,proto3" json:"sharding,omitempty"`
+	// Whether can change table schema if schema changed on source
+	IsSchemaMigrationDisabled bool `protobuf:"varint,35,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
 	// Name of the ClickHouse cluster. For Managed ClickHouse that is name of
-	// ShardGroup.
-	ClickhouseClusterName string   `protobuf:"bytes,50,opt,name=clickhouse_cluster_name,json=clickhouseClusterName,proto3" json:"clickhouse_cluster_name,omitempty"`
-	SecurityGroups        []string `protobuf:"bytes,51,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// ShardGroup or managed cluster ID by default.
+	ClickhouseClusterName string `protobuf:"bytes,50,opt,name=clickhouse_cluster_name,json=clickhouseClusterName,proto3" json:"clickhouse_cluster_name,omitempty"`
+	// List of security groups that the transfer associated with this endpoint should
+	// use
+	SecurityGroups []string `protobuf:"bytes,51,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ClickhouseTarget) Reset() {
@@ -692,8 +721,9 @@ func (x *ClickhouseTarget) GetSecurityGroups() []string {
 }
 
 type ClickhouseSharding_ColumnValueHash struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ColumnName    string                 `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3" json:"column_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the column to calculate hash from
+	ColumnName    string `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3" json:"column_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -736,8 +766,11 @@ func (x *ClickhouseSharding_ColumnValueHash) GetColumnName() string {
 }
 
 type ClickhouseSharding_ColumnValueMapping struct {
-	state         protoimpl.MessageState                                `protogen:"open.v1"`
-	ColumnName    string                                                `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3" json:"column_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the column to inspect when deciding the shard to chose for an
+	// incoming row
+	ColumnName string `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3" json:"column_name,omitempty"`
+	// The mapping of the specified column values to the shard names
 	Mapping       []*ClickhouseSharding_ColumnValueMapping_ValueToShard `protobuf:"bytes,2,rep,name=mapping,proto3" json:"mapping,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -788,9 +821,12 @@ func (x *ClickhouseSharding_ColumnValueMapping) GetMapping() []*ClickhouseShardi
 }
 
 type ClickhouseSharding_ColumnValueMapping_ValueToShard struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ColumnValue   *ColumnValue           `protobuf:"bytes,1,opt,name=column_value,json=columnValue,proto3" json:"column_value,omitempty"`
-	ShardName     string                 `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The value of the column. Currently only the string columns are supported
+	ColumnValue *ColumnValue `protobuf:"bytes,1,opt,name=column_value,json=columnValue,proto3" json:"column_value,omitempty"`
+	// The name of the shard into which all the rows with the specified `column_value`
+	// will be written
+	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

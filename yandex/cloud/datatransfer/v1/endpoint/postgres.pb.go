@@ -254,11 +254,14 @@ func (x *PostgresObjectTransferSettings) GetSequenceSet() ObjectTransferStage {
 
 type OnPremisePostgres struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Will be used if the cluster ID is not specified.
+	// PG port. Will be used if the cluster ID is not specified.
 	Port int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
-	SubnetId string   `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	Hosts    []string `protobuf:"bytes,5,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// PG installation hosts
+	Hosts []string `protobuf:"bytes,5,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// TLS settings for server connection. Disabled by default.
 	TlsMode       *TLSMode `protobuf:"bytes,6,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -414,6 +417,7 @@ type PostgresConnection_OnPremise struct {
 }
 
 type PostgresConnection_ConnectionManagerConnection struct {
+	// Get Postgres installation params and credentials from Connection Manager
 	ConnectionManagerConnection *ConnectionManagerConnection `protobuf:"bytes,3,opt,name=connection_manager_connection,json=connectionManagerConnection,proto3,oneof"`
 }
 
@@ -423,35 +427,42 @@ func (*PostgresConnection_OnPremise) isPostgresConnection_Connection() {}
 
 func (*PostgresConnection_ConnectionManagerConnection) isPostgresConnection_Connection() {}
 
+// Settings specific to the PostgreSQL source endpoint.
 type PostgresSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Database connection settings
 	Connection *PostgresConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	// Database name
+	// Name of the database to transfer
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access. not required as may be in connection
+	// User for database access. Required unless Connection Manager connection is used.
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// Included tables
-	//
-	// If none or empty list is presented, all tables are replicated. Full table name
-	// with schema. Can contain schema_name.* patterns.
+	// List of tables to transfer, formatted as `schemaname.tablename`.
+	// If omitted or an empty list is specified, all tables will be transferred.
+	// Can contain schema_name.* patterns.
 	IncludeTables []string `protobuf:"bytes,5,rep,name=include_tables,json=includeTables,proto3" json:"include_tables,omitempty"`
-	// Excluded tables
-	//
-	// If none or empty list is presented, all tables are replicated. Full table name
-	// with schema. Can contain schema_name.* patterns.
+	// List of tables which will not be transfered, formatted as `schemaname.tablename`
+	// If omitted or empty list is specified, all tables are replicated.
+	// Can contain schema_name.* patterns.
 	ExcludeTables []string `protobuf:"bytes,6,rep,name=exclude_tables,json=excludeTables,proto3" json:"exclude_tables,omitempty"`
-	// Maximum lag of replication slot (in bytes); after exceeding this limit
-	// replication will be aborted.
+	// Maximum WAL size held by the replication slot (API - in bytes, terraform - in
+	// gigabytes);
+	// Exceeding this limit will result in a replication failure and deletion of the
+	// replication slot.
+	// Default is 50 gigabytes
 	SlotByteLagLimit int64 `protobuf:"varint,8,opt,name=slot_byte_lag_limit,json=slotByteLagLimit,proto3" json:"slot_byte_lag_limit,omitempty"`
-	// Database schema for service tables (__consumer_keeper,
-	// __data_transfer_mole_finder). Default is public
+	// Name of the database schema in which auxiliary tables needed for the transfer
+	// will be created (__consumer_keeper, __data_transfer_mole_finder).
+	// Empty `service_schema` implies schema `public`
 	ServiceSchema string `protobuf:"bytes,9,opt,name=service_schema,json=serviceSchema,proto3" json:"service_schema,omitempty"`
-	// Select database objects to be transferred during activation or deactivation.
+	// Defines which database schema objects should be transferred, e.g. views,
+	// functions, etc.
+	// All of the attributes in this block are optional and should be either
+	// `BEFORE_DATA`, `AFTER_DATA` or `NEVER`
 	ObjectTransferSettings *PostgresObjectTransferSettings `protobuf:"bytes,13,opt,name=object_transfer_settings,json=objectTransferSettings,proto3" json:"object_transfer_settings,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,14,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -557,22 +568,25 @@ func (x *PostgresSource) GetSecurityGroups() []string {
 	return nil
 }
 
+// Settings specific to the PostgreSQL target endpoint
 type PostgresTarget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Database connection settings
 	Connection *PostgresConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	// Database name
+	// Target database name
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
-	// User for database access. not required as may be in connection
+	// User for database access. Required unless Connection Manager connection is used
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// Cleanup policy for activate, reactivate and reupload processes. Default is
-	// truncate.
+	// Cleanup policy for activate, reactivate and reupload processes.
+	// One of: DISABLED, DROP, TRUNCATE. Default is TRUNCATE
 	CleanupPolicy CleanupPolicy `protobuf:"varint,5,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy" json:"cleanup_policy,omitempty"`
-	// Security groups
-	SecurityGroups            []string `protobuf:"bytes,7,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	IsSchemaMigrationDisabled bool     `protobuf:"varint,8,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
+	// List of security groups that the transfer associated with this endpoint should
+	// use
+	SecurityGroups []string `protobuf:"bytes,7,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
+	// Whether can change table schema if schema changed on source
+	IsSchemaMigrationDisabled bool `protobuf:"varint,8,opt,name=is_schema_migration_disabled,json=isSchemaMigrationDisabled,proto3" json:"is_schema_migration_disabled,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }

@@ -74,9 +74,12 @@ func (MetrikaStreamType) EnumDescriptor() ([]byte, []int) {
 }
 
 type MetrikaStream struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          MetrikaStreamType      `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.MetrikaStreamType" json:"type,omitempty"`
-	Columns       []string               `protobuf:"bytes,2,rep,name=columns,proto3" json:"columns,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stream type, one of: METRIKA_STREAM_TYPE_HITS, METRIKA_STREAM_TYPE_VISITS,
+	// METRIKA_STREAM_TYPE_HITS_V2
+	Type MetrikaStreamType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.MetrikaStreamType" json:"type,omitempty"`
+	// Column names
+	Columns       []string `protobuf:"bytes,2,rep,name=columns,proto3" json:"columns,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -125,11 +128,15 @@ func (x *MetrikaStream) GetColumns() []string {
 	return nil
 }
 
+// Settings specific to the Yandex Metrika source endpoint
 type MetrikaSource struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CounterIds    []int64                `protobuf:"varint,1,rep,packed,name=counter_ids,json=counterIds,proto3" json:"counter_ids,omitempty"`
-	Token         *Secret                `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
-	Streams       []*MetrikaStream       `protobuf:"bytes,3,rep,name=streams,proto3" json:"streams,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Counter IDs
+	CounterIds []int64 `protobuf:"varint,1,rep,packed,name=counter_ids,json=counterIds,proto3" json:"counter_ids,omitempty"`
+	// Authentication token
+	Token *Secret `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	// Streams
+	Streams       []*MetrikaStream `protobuf:"bytes,3,rep,name=streams,proto3" json:"streams,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

@@ -73,15 +73,19 @@ func (YdsCompressionCodec) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_datatransfer_v1_endpoint_yds_proto_rawDescGZIP(), []int{0}
 }
 
+// Settings specific to the YDS source endpoint
 type YDSSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Database
+	// Database path in YDB for streams
+	// Example: `/ru/transfer_manager/prod/data-transfer`
 	Database string `protobuf:"bytes,1,opt,name=database,proto3" json:"database,omitempty"`
-	// Stream
+	// Stream to read
 	Stream string `protobuf:"bytes,2,opt,name=stream,proto3" json:"stream,omitempty"`
-	// SA which has read access to the stream.
+	// Service account ID which has read access to the stream.
 	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Compression codec
+	// List of supported compression codecs
+	// Options: YDS_COMPRESSION_CODEC_RAW, YDS_COMPRESSION_CODEC_ZSTD,
+	// YDS_COMPRESSION_CODEC_GZIP
 	SupportedCodecs []YdsCompressionCodec `protobuf:"varint,9,rep,packed,name=supported_codecs,json=supportedCodecs,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.YdsCompressionCodec" json:"supported_codecs,omitempty"`
 	// Data parsing rules
 	Parser *Parser `protobuf:"bytes,10,opt,name=parser,proto3" json:"parser,omitempty"`
@@ -89,13 +93,15 @@ type YDSSource struct {
 	// False: stop the transfer in error state, if detected lost data. True: continue
 	// working with losing part of data
 	AllowTtlRewind bool `protobuf:"varint,11,opt,name=allow_ttl_rewind,json=allowTtlRewind,proto3" json:"allow_ttl_rewind,omitempty"`
-	// for dedicated db
+	// YDS Endpoint for dedicated db
 	Endpoint string `protobuf:"bytes,20,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database. If omitted, the server has to be accessible via Internet
 	SubnetId string `protobuf:"bytes,30,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,34,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
-	// for important streams
+	// Custom consumer - for important streams
 	Consumer      string `protobuf:"bytes,35,opt,name=consumer,proto3" json:"consumer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -201,26 +207,34 @@ func (x *YDSSource) GetConsumer() string {
 	return ""
 }
 
+// Settings specific to the YDS target endpoint
 type YDSTarget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Database
+	// Database path in YDB for streams
+	// Example: `/ru/transfer_manager/prod/data-transfer`
 	Database string `protobuf:"bytes,1,opt,name=database,proto3" json:"database,omitempty"`
-	// Stream
+	// Stream to write to
 	Stream string `protobuf:"bytes,2,opt,name=stream,proto3" json:"stream,omitempty"`
-	// SA which has read access to the stream.
+	// Service account ID which has read access to the stream
 	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Save transaction order
 	// Not to split events queue into separate per-table queues.
 	// Incompatible with setting Topic prefix, only with Topic full name.
-	SaveTxOrder      bool                `protobuf:"varint,4,opt,name=save_tx_order,json=saveTxOrder,proto3" json:"save_tx_order,omitempty"`
+	SaveTxOrder bool `protobuf:"varint,4,opt,name=save_tx_order,json=saveTxOrder,proto3" json:"save_tx_order,omitempty"`
+	// Codec to use for output data compression. If not specified, no compression will
+	// be done
+	// Options: YDS_COMPRESSION_CODEC_RAW, YDS_COMPRESSION_CODEC_ZSTD,
+	// YDS_COMPRESSION_CODEC_GZIP
 	CompressionCodec YdsCompressionCodec `protobuf:"varint,5,opt,name=compression_codec,json=compressionCodec,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.YdsCompressionCodec" json:"compression_codec,omitempty"`
 	// Data serialization format
 	Serializer *Serializer `protobuf:"bytes,8,opt,name=serializer,proto3" json:"serializer,omitempty"`
-	// for dedicated db
+	// YDS Endpoint for dedicated db
 	Endpoint string `protobuf:"bytes,20,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database. If omitted, the server has to be accessible via Internet
 	SubnetId string `protobuf:"bytes,30,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,34,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache

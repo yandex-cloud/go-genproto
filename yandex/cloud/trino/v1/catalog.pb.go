@@ -570,6 +570,7 @@ type isMetastore_Type interface {
 }
 
 type Metastore_Hive struct {
+	// Apache Hive Metastore.
 	Hive *Metastore_HiveMetastore `protobuf:"bytes,1,opt,name=hive,proto3,oneof"`
 }
 
@@ -647,10 +648,12 @@ type isFileSystem_Type interface {
 }
 
 type FileSystem_S3 struct {
+	// Yandex Cloud S3 filesystem.
 	S3 *FileSystem_S3FileSystem `protobuf:"bytes,1,opt,name=s3,proto3,oneof"`
 }
 
 type FileSystem_ExternalS3 struct {
+	// External S3 filesystem.
 	ExternalS3 *FileSystem_ExternalS3FileSystem `protobuf:"bytes,2,opt,name=external_s3,json=externalS3,proto3,oneof"`
 }
 
@@ -981,10 +984,12 @@ type isPostgresqlConnection_Type interface {
 }
 
 type PostgresqlConnection_OnPremise_ struct {
+	// Connection configured manually.
 	OnPremise *PostgresqlConnection_OnPremise `protobuf:"bytes,1,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
 type PostgresqlConnection_ConnectionManager_ struct {
+	// Connection configured using Yandex Cloud Connection Manager.
 	ConnectionManager *PostgresqlConnection_ConnectionManager `protobuf:"bytes,2,opt,name=connection_manager,json=connectionManager,proto3,oneof"`
 }
 
@@ -1117,10 +1122,12 @@ type isClickhouseConnection_Type interface {
 }
 
 type ClickhouseConnection_OnPremise_ struct {
+	// Connection configured manually.
 	OnPremise *ClickhouseConnection_OnPremise `protobuf:"bytes,1,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
 type ClickhouseConnection_ConnectionManager_ struct {
+	// Connection configured using Yandex Cloud Connection Manager.
 	ConnectionManager *ClickhouseConnection_ConnectionManager `protobuf:"bytes,2,opt,name=connection_manager,json=connectionManager,proto3,oneof"`
 }
 
@@ -1333,6 +1340,7 @@ type isOracleConnection_Type interface {
 }
 
 type OracleConnection_OnPremise_ struct {
+	// Connection configured manually.
 	OnPremise *OracleConnection_OnPremise `protobuf:"bytes,1,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
@@ -1453,6 +1461,7 @@ type isSQLServerConnection_Type interface {
 }
 
 type SQLServerConnection_OnPremise_ struct {
+	// Connection configured manually.
 	OnPremise *SQLServerConnection_OnPremise `protobuf:"bytes,1,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
@@ -1583,10 +1592,12 @@ type isMysqlConnection_Type interface {
 }
 
 type MysqlConnection_OnPremise_ struct {
+	// Connection configured manually.
 	OnPremise *MysqlConnection_OnPremise `protobuf:"bytes,1,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
 type MysqlConnection_ConnectionManager_ struct {
+	// Connection configured using Yandex Cloud Connection Manager.
 	ConnectionManager *MysqlConnection_ConnectionManager `protobuf:"bytes,2,opt,name=connection_manager,json=connectionManager,proto3,oneof"`
 }
 
@@ -1719,10 +1730,12 @@ type isGreenplumConnection_Type interface {
 }
 
 type GreenplumConnection_OnPremise_ struct {
+	// Connection configured manually.
 	OnPremise *GreenplumConnection_OnPremise `protobuf:"bytes,1,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
 type GreenplumConnection_ConnectionManager_ struct {
+	// Connection configured using Yandex Cloud Connection Manager.
 	ConnectionManager *GreenplumConnection_ConnectionManager `protobuf:"bytes,2,opt,name=connection_manager,json=connectionManager,proto3,oneof"`
 }
 
@@ -1892,11 +1905,15 @@ func (*FileSystem_S3FileSystem) Descriptor() ([]byte, []int) {
 
 // Describes External S3 compatible file system.
 type FileSystem_ExternalS3FileSystem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AwsAccessKey  string                 `protobuf:"bytes,1,opt,name=aws_access_key,json=awsAccessKey,proto3" json:"aws_access_key,omitempty"`
-	AwsSecretKey  string                 `protobuf:"bytes,2,opt,name=aws_secret_key,json=awsSecretKey,proto3" json:"aws_secret_key,omitempty"`
-	AwsEndpoint   string                 `protobuf:"bytes,3,opt,name=aws_endpoint,json=awsEndpoint,proto3" json:"aws_endpoint,omitempty"`
-	AwsRegion     string                 `protobuf:"bytes,4,opt,name=aws_region,json=awsRegion,proto3" json:"aws_region,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// AWS access key.
+	AwsAccessKey string `protobuf:"bytes,1,opt,name=aws_access_key,json=awsAccessKey,proto3" json:"aws_access_key,omitempty"`
+	// AWS secret key.
+	AwsSecretKey string `protobuf:"bytes,2,opt,name=aws_secret_key,json=awsSecretKey,proto3" json:"aws_secret_key,omitempty"`
+	// AWS endpoint.
+	AwsEndpoint string `protobuf:"bytes,3,opt,name=aws_endpoint,json=awsEndpoint,proto3" json:"aws_endpoint,omitempty"`
+	// AWS region.
+	AwsRegion     string `protobuf:"bytes,4,opt,name=aws_region,json=awsRegion,proto3" json:"aws_region,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2685,13 +2702,13 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x15additional_properties\x18\x03 \x03(\v2>.yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd6\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd7\x06\n" +
 	"\x14PostgresqlConnection\x12V\n" +
 	"\n" +
 	"on_premise\x18\x01 \x01(\v25.yandex.cloud.trino.v1.PostgresqlConnection.OnPremiseH\x00R\tonPremise\x12n\n" +
-	"\x12connection_manager\x18\x02 \x01(\v2=.yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc8\x01\n" +
-	"\tOnPremise\x12S\n" +
-	"\x0econnection_url\x18\x01 \x01(\tB,\xe8\xc71\x01\xf2\xc71$^jdbc:[a-z0-9]+://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
+	"\x12connection_manager\x18\x02 \x01(\v2=.yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc9\x01\n" +
+	"\tOnPremise\x12T\n" +
+	"\x0econnection_url\x18\x01 \x01(\tB-\xe8\xc71\x01\xf2\xc71%^jdbc:postgresql://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpassword\x1a\x9c\x03\n" +
 	"\x11ConnectionManager\x121\n" +
@@ -2709,13 +2726,13 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x15additional_properties\x18\x02 \x03(\v2D.yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd7\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd8\x06\n" +
 	"\x14ClickhouseConnection\x12V\n" +
 	"\n" +
 	"on_premise\x18\x01 \x01(\v25.yandex.cloud.trino.v1.ClickhouseConnection.OnPremiseH\x00R\tonPremise\x12n\n" +
-	"\x12connection_manager\x18\x02 \x01(\v2=.yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc8\x01\n" +
-	"\tOnPremise\x12S\n" +
-	"\x0econnection_url\x18\x01 \x01(\tB,\xe8\xc71\x01\xf2\xc71$^jdbc:[a-z0-9]+://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
+	"\x12connection_manager\x18\x02 \x01(\v2=.yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc9\x01\n" +
+	"\tOnPremise\x12T\n" +
+	"\x0econnection_url\x18\x01 \x01(\tB-\xe8\xc71\x01\xf2\xc71%^jdbc:clickhouse://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpassword\x1a\x9d\x03\n" +
 	"\x11ConnectionManager\x121\n" +
@@ -2744,12 +2761,12 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x15additional_properties\x18\x01 \x03(\v2?.yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb3\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb0\x02\n" +
 	"\x10OracleConnection\x12R\n" +
 	"\n" +
-	"on_premise\x18\x01 \x01(\v21.yandex.cloud.trino.v1.OracleConnection.OnPremiseH\x00R\tonPremise\x1a\xbc\x01\n" +
-	"\tOnPremise\x12G\n" +
-	"\x0econnection_url\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x18^jdbc:[a-z0-9]+:(?s:.*)$R\rconnectionUrl\x12;\n" +
+	"on_premise\x18\x01 \x01(\v21.yandex.cloud.trino.v1.OracleConnection.OnPremiseH\x00R\tonPremise\x1a\xb9\x01\n" +
+	"\tOnPremise\x12D\n" +
+	"\x0econnection_url\x18\x01 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\x15^jdbc:oracle:(?s:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpasswordB\f\n" +
 	"\x04type\x12\x04\xc0\xc11\x01\"\xe6\x02\n" +
@@ -2765,7 +2782,7 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\n" +
 	"on_premise\x18\x01 \x01(\v24.yandex.cloud.trino.v1.SQLServerConnection.OnPremiseH\x00R\tonPremise\x1a\xbc\x01\n" +
 	"\tOnPremise\x12G\n" +
-	"\x0econnection_url\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x18^jdbc:[a-z0-9]+:(?s:.*)$R\rconnectionUrl\x12;\n" +
+	"\x0econnection_url\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x18^jdbc:sqlserver:(?s:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpasswordB\f\n" +
 	"\x04type\x12\x04\xc0\xc11\x01\"\xef\x02\n" +
@@ -2776,13 +2793,13 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x15additional_properties\x18\x02 \x03(\v2C.yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x87\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x06\n" +
 	"\x0fMysqlConnection\x12Q\n" +
 	"\n" +
 	"on_premise\x18\x01 \x01(\v20.yandex.cloud.trino.v1.MysqlConnection.OnPremiseH\x00R\tonPremise\x12i\n" +
-	"\x12connection_manager\x18\x02 \x01(\v28.yandex.cloud.trino.v1.MysqlConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc8\x01\n" +
-	"\tOnPremise\x12S\n" +
-	"\x0econnection_url\x18\x01 \x01(\tB,\xe8\xc71\x01\xf2\xc71$^jdbc:[a-z0-9]+://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
+	"\x12connection_manager\x18\x02 \x01(\v28.yandex.cloud.trino.v1.MysqlConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc5\x01\n" +
+	"\tOnPremise\x12P\n" +
+	"\x0econnection_url\x18\x01 \x01(\tB)\xe8\xc71\x01\xf2\xc71!^jdbc:mysql://(?:.+:\\d+)(?:/?.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpassword\x1a\xdc\x02\n" +
 	"\x11ConnectionManager\x121\n" +
@@ -2800,13 +2817,13 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x15additional_properties\x18\x02 \x03(\v2?.yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd2\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x06\n" +
 	"\x13GreenplumConnection\x12U\n" +
 	"\n" +
 	"on_premise\x18\x01 \x01(\v24.yandex.cloud.trino.v1.GreenplumConnection.OnPremiseH\x00R\tonPremise\x12m\n" +
-	"\x12connection_manager\x18\x02 \x01(\v2<.yandex.cloud.trino.v1.GreenplumConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc8\x01\n" +
-	"\tOnPremise\x12S\n" +
-	"\x0econnection_url\x18\x01 \x01(\tB,\xe8\xc71\x01\xf2\xc71$^jdbc:[a-z0-9]+://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
+	"\x12connection_manager\x18\x02 \x01(\v2<.yandex.cloud.trino.v1.GreenplumConnection.ConnectionManagerH\x00R\x11connectionManager\x1a\xc9\x01\n" +
+	"\tOnPremise\x12T\n" +
+	"\x0econnection_url\x18\x01 \x01(\tB-\xe8\xc71\x01\xf2\xc71%^jdbc:postgresql://(?:.+:\\d+)/(?:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpassword\x1a\x9b\x03\n" +
 	"\x11ConnectionManager\x121\n" +

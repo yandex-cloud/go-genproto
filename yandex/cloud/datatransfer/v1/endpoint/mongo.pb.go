@@ -22,11 +22,15 @@ const (
 )
 
 type OnPremiseMongo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Hosts         []string               `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	Port          int64                  `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	ReplicaSet    string                 `protobuf:"bytes,5,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
-	TlsMode       *TLSMode               `protobuf:"bytes,6,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Host names of the replica set
+	Hosts []string `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	// TCP Port number
+	Port int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
+	// Replica set name
+	ReplicaSet string `protobuf:"bytes,5,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
+	// TLS settings for the server connection. Empty implies plaintext connection
+	TlsMode       *TLSMode `protobuf:"bytes,6,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -97,7 +101,7 @@ type MongoConnectionOptions struct {
 	//	*MongoConnectionOptions_OnPremise
 	//	*MongoConnectionOptions_ConnectionManagerConnection
 	Address isMongoConnectionOptions_Address `protobuf_oneof:"address"`
-	// User name
+	// User name, required unless connection_manager_connection is used
 	User string `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	// Password for user
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
@@ -197,14 +201,20 @@ type isMongoConnectionOptions_Address interface {
 }
 
 type MongoConnectionOptions_MdbClusterId struct {
+	// Identifier of the Yandex StoreDoc cluster
+	// Use one of:  mdb_cluster_id/on_premise/connection_manager_connection
 	MdbClusterId string `protobuf:"bytes,1,opt,name=mdb_cluster_id,json=mdbClusterId,proto3,oneof"`
 }
 
 type MongoConnectionOptions_OnPremise struct {
+	// Connection settings of the on-premise MongoDB server
+	// Use one of:  mdb_cluster_id/on_premise/connection_manager_connection
 	OnPremise *OnPremiseMongo `protobuf:"bytes,2,opt,name=on_premise,json=onPremise,proto3,oneof"`
 }
 
 type MongoConnectionOptions_ConnectionManagerConnection struct {
+	// Get StoreDoc/MongoDB installation params and credentials from Connection Manager
+	// Use one of:  mdb_cluster_id/on_premise/connection_manager_connection
 	ConnectionManagerConnection *MongoConnectionManagerConnection `protobuf:"bytes,6,opt,name=connection_manager_connection,json=connectionManagerConnection,proto3,oneof"`
 }
 
@@ -332,19 +342,26 @@ func (x *MongoCollection) GetCollectionName() string {
 	return ""
 }
 
+// Settings specific to the MongoDB source endpoint
 type MongoSource struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Connection *MongoConnection       `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	SubnetId   string                 `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Connection settings
+	Connection *MongoConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// List of collections for replication. Empty list implies replication of all
 	// tables on the deployment. Allowed to use * as collection name.
 	Collections []*MongoCollection `protobuf:"bytes,6,rep,name=collections,proto3" json:"collections,omitempty"`
 	// List of forbidden collections for replication. Allowed to use * as collection
 	// name for forbid all collections of concrete schema.
 	ExcludedCollections []*MongoCollection `protobuf:"bytes,7,rep,name=excluded_collections,json=excludedCollections,proto3" json:"excluded_collections,omitempty"`
-	// Read mode for mongo client
+	// Read mode for mongo client: whether the secondary server should be preferred to
+	// the primary when copying data
 	SecondaryPreferredMode bool `protobuf:"varint,8,opt,name=secondary_preferred_mode,json=secondaryPreferredMode,proto3" json:"secondary_preferred_mode,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,11,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -422,14 +439,24 @@ func (x *MongoSource) GetSecurityGroups() []string {
 	return nil
 }
 
+// Settings specific to the MongoDB target endpoint
 type MongoTarget struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	Connection *MongoConnection       `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	// Database name
-	Database      string        `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Connection settings
+	Connection *MongoConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
+	// Database name. If not empty, then all the data will be written to the database
+	// with the specified name; otherwise the database name is the same as in the
+	// source endpoint
+	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
+	// How to clean collections when activating the transfer. One of `DISABLED`, `DROP`
+	// or `TRUNCATE`
 	CleanupPolicy CleanupPolicy `protobuf:"varint,6,opt,name=cleanup_policy,json=cleanupPolicy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.CleanupPolicy" json:"cleanup_policy,omitempty"`
-	SubnetId      string        `protobuf:"bytes,7,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Security groups
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
+	SubnetId string `protobuf:"bytes,7,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,8,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -501,9 +528,11 @@ func (x *MongoTarget) GetSecurityGroups() []string {
 }
 
 type MongoConnectionManagerConnection struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	// Used only for on-premise connections
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of connectionmanager connection with mongodb/Yandex Storedoc installation
+	// parameters and credentials
+	ConnectionId string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	// Replica set name, used only for on-premise mongodb installations
 	ReplicaSet    string `protobuf:"bytes,2,opt,name=replica_set,json=replicaSet,proto3" json:"replica_set,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

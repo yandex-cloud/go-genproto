@@ -76,6 +76,7 @@ type KafkaConnectionOptions struct {
 	//
 	//	*KafkaConnectionOptions_ClusterId
 	//	*KafkaConnectionOptions_OnPremise
+	//	*KafkaConnectionOptions_ConnectionManagerConnection
 	Connection    isKafkaConnectionOptions_Connection `protobuf_oneof:"connection"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -136,29 +137,51 @@ func (x *KafkaConnectionOptions) GetOnPremise() *OnPremiseKafka {
 	return nil
 }
 
+func (x *KafkaConnectionOptions) GetConnectionManagerConnection() *ConnectionManagerConnection {
+	if x != nil {
+		if x, ok := x.Connection.(*KafkaConnectionOptions_ConnectionManagerConnection); ok {
+			return x.ConnectionManagerConnection
+		}
+	}
+	return nil
+}
+
 type isKafkaConnectionOptions_Connection interface {
 	isKafkaConnectionOptions_Connection()
 }
 
 type KafkaConnectionOptions_ClusterId struct {
-	// Managed Service for Kafka cluster ID
+	// Managed Service for Kafka cluster ID.
+	// Set only one of: cluster_id/on_premise/connection_manager_connection
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3,oneof"`
 }
 
 type KafkaConnectionOptions_OnPremise struct {
 	// Connection options for on-premise Kafka
+	// Set only one of: cluster_id/on_premise/connection_manager_connection
 	OnPremise *OnPremiseKafka `protobuf:"bytes,2,opt,name=on_premise,json=onPremise,proto3,oneof"`
+}
+
+type KafkaConnectionOptions_ConnectionManagerConnection struct {
+	// Get Kafka installation params and credentials from Connection Manager
+	// Set only one of: cluster_id/on_premise/connection_manager_connection
+	ConnectionManagerConnection *ConnectionManagerConnection `protobuf:"bytes,3,opt,name=connection_manager_connection,json=connectionManagerConnection,proto3,oneof"`
 }
 
 func (*KafkaConnectionOptions_ClusterId) isKafkaConnectionOptions_Connection() {}
 
 func (*KafkaConnectionOptions_OnPremise) isKafkaConnectionOptions_Connection() {}
 
+func (*KafkaConnectionOptions_ConnectionManagerConnection) isKafkaConnectionOptions_Connection() {}
+
+// On-premise Kafka installation options
 type OnPremiseKafka struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Kafka broker URLs
 	BrokerUrls []string `protobuf:"bytes,1,rep,name=broker_urls,json=brokerUrls,proto3" json:"broker_urls,omitempty"`
-	// Network interface for endpoint. If none will assume public ipv4
+	// Identifier of the Yandex Cloud VPC subnetwork to user for accessing the
+	// database.
+	// If omitted, the server has to be accessible via Internet
 	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// TLS settings for broker connection. Disabled by default.
 	TlsMode       *TLSMode `protobuf:"bytes,5,opt,name=tls_mode,json=tlsMode,proto3" json:"tls_mode,omitempty"`
@@ -305,7 +328,8 @@ type KafkaSaslSecurity struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// User name
 	User string `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	// SASL mechanism for authentication
+	// SASL mechanism for authentication, use one of: KAFKA_MECHANISM_SHA256,
+	// KAFKA_MECHANISM_SHA512
 	Mechanism KafkaMechanism `protobuf:"varint,3,opt,name=mechanism,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.KafkaMechanism" json:"mechanism,omitempty"`
 	// Password for user
 	Password      *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
@@ -364,24 +388,26 @@ func (x *KafkaSaslSecurity) GetPassword() *Secret {
 	return nil
 }
 
+// Settings specific to the Kafka source endpoint
 type KafkaSource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Connection settings
 	Connection *KafkaConnectionOptions `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// Authentication settings
 	Auth *KafkaAuth `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,3,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
+	// **Deprecated**. Please use `topic_names` instead
 	// Full source topic name
-	// Deprecated in favor of topic names
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/datatransfer/v1/endpoint/kafka.proto.
 	TopicName string `protobuf:"bytes,4,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
-	// Data transformation rules
+	// Transform data with a custom Cloud Function
 	Transformer *DataTransformationOptions `protobuf:"bytes,5,opt,name=transformer,proto3" json:"transformer,omitempty"`
-	// Data parsing rules
+	// Data parsing parameters. If not set, the source messages are read in raw
 	Parser *Parser `protobuf:"bytes,7,opt,name=parser,proto3" json:"parser,omitempty"`
-	// List of topic names to read
+	// List of full source topic names to read
 	TopicNames    []string `protobuf:"bytes,8,rep,name=topic_names,json=topicNames,proto3" json:"topic_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -467,13 +493,15 @@ func (x *KafkaSource) GetTopicNames() []string {
 	return nil
 }
 
+// Settings specific to the Kafka target endpoint
 type KafkaTarget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Connection settings
 	Connection *KafkaConnectionOptions `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// Authentication settings
 	Auth *KafkaAuth `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`
-	// Security groups
+	// List of security groups that the transfer associated with this endpoint should
+	// use
 	SecurityGroups []string `protobuf:"bytes,3,rep,name=security_groups,json=securityGroups,proto3" json:"security_groups,omitempty"`
 	// Target topic settings
 	TopicSettings *KafkaTargetTopicSettings `protobuf:"bytes,7,opt,name=topic_settings,json=topicSettings,proto3" json:"topic_settings,omitempty"`
@@ -619,15 +647,14 @@ type isKafkaTargetTopicSettings_TopicSettings interface {
 }
 
 type KafkaTargetTopicSettings_Topic struct {
-	// Full topic name
+	// All messages will be sent to one topic
 	Topic *KafkaTargetTopic `protobuf:"bytes,1,opt,name=topic,proto3,oneof"`
 }
 
 type KafkaTargetTopicSettings_TopicPrefix struct {
 	// Topic prefix
-	//
-	// Analogue of the Debezium setting database.server.name.
 	// Messages will be sent to topic with name <topic_prefix>.<schema>.<table_name>.
+	// Analogue of the Debezium setting database.server.name.
 	TopicPrefix string `protobuf:"bytes,2,opt,name=topic_prefix,json=topicPrefix,proto3,oneof"`
 }
 
@@ -637,7 +664,7 @@ func (*KafkaTargetTopicSettings_TopicPrefix) isKafkaTargetTopicSettings_TopicSet
 
 type KafkaTargetTopic struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Topic name
+	// Full topic name
 	TopicName string `protobuf:"bytes,1,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
 	// Save transactions order
 	// Not to split events queue into separate per-table queues.
@@ -694,12 +721,13 @@ var File_yandex_cloud_datatransfer_v1_endpoint_kafka_proto protoreflect.FileDesc
 
 const file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/datatransfer/v1/endpoint/kafka.proto\x12%yandex.cloud.datatransfer.v1.endpoint\x1a2yandex/cloud/datatransfer/v1/endpoint/common.proto\x1a3yandex/cloud/datatransfer/v1/endpoint/parsers.proto\x1a7yandex/cloud/datatransfer/v1/endpoint/serializers.proto\"\x9f\x01\n" +
+	"1yandex/cloud/datatransfer/v1/endpoint/kafka.proto\x12%yandex.cloud.datatransfer.v1.endpoint\x1a2yandex/cloud/datatransfer/v1/endpoint/common.proto\x1a3yandex/cloud/datatransfer/v1/endpoint/parsers.proto\x1a7yandex/cloud/datatransfer/v1/endpoint/serializers.proto\"\xaa\x02\n" +
 	"\x16KafkaConnectionOptions\x12\x1f\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tH\x00R\tclusterId\x12V\n" +
 	"\n" +
-	"on_premise\x18\x02 \x01(\v25.yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafkaH\x00R\tonPremiseB\f\n" +
+	"on_premise\x18\x02 \x01(\v25.yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafkaH\x00R\tonPremise\x12\x88\x01\n" +
+	"\x1dconnection_manager_connection\x18\x03 \x01(\v2B.yandex.cloud.datatransfer.v1.endpoint.ConnectionManagerConnectionH\x00R\x1bconnectionManagerConnectionB\f\n" +
 	"\n" +
 	"connection\"\x9f\x01\n" +
 	"\x0eOnPremiseKafka\x12\x1f\n" +
@@ -767,43 +795,45 @@ func file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_rawDescGZIP() []byte
 var file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_goTypes = []any{
-	(KafkaMechanism)(0),               // 0: yandex.cloud.datatransfer.v1.endpoint.KafkaMechanism
-	(*KafkaConnectionOptions)(nil),    // 1: yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions
-	(*OnPremiseKafka)(nil),            // 2: yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafka
-	(*KafkaAuth)(nil),                 // 3: yandex.cloud.datatransfer.v1.endpoint.KafkaAuth
-	(*KafkaSaslSecurity)(nil),         // 4: yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity
-	(*KafkaSource)(nil),               // 5: yandex.cloud.datatransfer.v1.endpoint.KafkaSource
-	(*KafkaTarget)(nil),               // 6: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget
-	(*KafkaTargetTopicSettings)(nil),  // 7: yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopicSettings
-	(*KafkaTargetTopic)(nil),          // 8: yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopic
-	(*TLSMode)(nil),                   // 9: yandex.cloud.datatransfer.v1.endpoint.TLSMode
-	(*NoAuth)(nil),                    // 10: yandex.cloud.datatransfer.v1.endpoint.NoAuth
-	(*Secret)(nil),                    // 11: yandex.cloud.datatransfer.v1.endpoint.Secret
-	(*DataTransformationOptions)(nil), // 12: yandex.cloud.datatransfer.v1.endpoint.DataTransformationOptions
-	(*Parser)(nil),                    // 13: yandex.cloud.datatransfer.v1.endpoint.Parser
-	(*Serializer)(nil),                // 14: yandex.cloud.datatransfer.v1.endpoint.Serializer
+	(KafkaMechanism)(0),                 // 0: yandex.cloud.datatransfer.v1.endpoint.KafkaMechanism
+	(*KafkaConnectionOptions)(nil),      // 1: yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions
+	(*OnPremiseKafka)(nil),              // 2: yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafka
+	(*KafkaAuth)(nil),                   // 3: yandex.cloud.datatransfer.v1.endpoint.KafkaAuth
+	(*KafkaSaslSecurity)(nil),           // 4: yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity
+	(*KafkaSource)(nil),                 // 5: yandex.cloud.datatransfer.v1.endpoint.KafkaSource
+	(*KafkaTarget)(nil),                 // 6: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget
+	(*KafkaTargetTopicSettings)(nil),    // 7: yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopicSettings
+	(*KafkaTargetTopic)(nil),            // 8: yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopic
+	(*ConnectionManagerConnection)(nil), // 9: yandex.cloud.datatransfer.v1.endpoint.ConnectionManagerConnection
+	(*TLSMode)(nil),                     // 10: yandex.cloud.datatransfer.v1.endpoint.TLSMode
+	(*NoAuth)(nil),                      // 11: yandex.cloud.datatransfer.v1.endpoint.NoAuth
+	(*Secret)(nil),                      // 12: yandex.cloud.datatransfer.v1.endpoint.Secret
+	(*DataTransformationOptions)(nil),   // 13: yandex.cloud.datatransfer.v1.endpoint.DataTransformationOptions
+	(*Parser)(nil),                      // 14: yandex.cloud.datatransfer.v1.endpoint.Parser
+	(*Serializer)(nil),                  // 15: yandex.cloud.datatransfer.v1.endpoint.Serializer
 }
 var file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_depIdxs = []int32{
 	2,  // 0: yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions.on_premise:type_name -> yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafka
-	9,  // 1: yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafka.tls_mode:type_name -> yandex.cloud.datatransfer.v1.endpoint.TLSMode
-	4,  // 2: yandex.cloud.datatransfer.v1.endpoint.KafkaAuth.sasl:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity
-	10, // 3: yandex.cloud.datatransfer.v1.endpoint.KafkaAuth.no_auth:type_name -> yandex.cloud.datatransfer.v1.endpoint.NoAuth
-	0,  // 4: yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity.mechanism:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaMechanism
-	11, // 5: yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity.password:type_name -> yandex.cloud.datatransfer.v1.endpoint.Secret
-	1,  // 6: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions
-	3,  // 7: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.auth:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaAuth
-	12, // 8: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.transformer:type_name -> yandex.cloud.datatransfer.v1.endpoint.DataTransformationOptions
-	13, // 9: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.parser:type_name -> yandex.cloud.datatransfer.v1.endpoint.Parser
-	1,  // 10: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions
-	3,  // 11: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.auth:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaAuth
-	7,  // 12: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.topic_settings:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopicSettings
-	14, // 13: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.serializer:type_name -> yandex.cloud.datatransfer.v1.endpoint.Serializer
-	8,  // 14: yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopicSettings.topic:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopic
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	9,  // 1: yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions.connection_manager_connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.ConnectionManagerConnection
+	10, // 2: yandex.cloud.datatransfer.v1.endpoint.OnPremiseKafka.tls_mode:type_name -> yandex.cloud.datatransfer.v1.endpoint.TLSMode
+	4,  // 3: yandex.cloud.datatransfer.v1.endpoint.KafkaAuth.sasl:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity
+	11, // 4: yandex.cloud.datatransfer.v1.endpoint.KafkaAuth.no_auth:type_name -> yandex.cloud.datatransfer.v1.endpoint.NoAuth
+	0,  // 5: yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity.mechanism:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaMechanism
+	12, // 6: yandex.cloud.datatransfer.v1.endpoint.KafkaSaslSecurity.password:type_name -> yandex.cloud.datatransfer.v1.endpoint.Secret
+	1,  // 7: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions
+	3,  // 8: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.auth:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaAuth
+	13, // 9: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.transformer:type_name -> yandex.cloud.datatransfer.v1.endpoint.DataTransformationOptions
+	14, // 10: yandex.cloud.datatransfer.v1.endpoint.KafkaSource.parser:type_name -> yandex.cloud.datatransfer.v1.endpoint.Parser
+	1,  // 11: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.connection:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaConnectionOptions
+	3,  // 12: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.auth:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaAuth
+	7,  // 13: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.topic_settings:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopicSettings
+	15, // 14: yandex.cloud.datatransfer.v1.endpoint.KafkaTarget.serializer:type_name -> yandex.cloud.datatransfer.v1.endpoint.Serializer
+	8,  // 15: yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopicSettings.topic:type_name -> yandex.cloud.datatransfer.v1.endpoint.KafkaTargetTopic
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_init() }
@@ -817,6 +847,7 @@ func file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_init() {
 	file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_msgTypes[0].OneofWrappers = []any{
 		(*KafkaConnectionOptions_ClusterId)(nil),
 		(*KafkaConnectionOptions_OnPremise)(nil),
+		(*KafkaConnectionOptions_ConnectionManagerConnection)(nil),
 	}
 	file_yandex_cloud_datatransfer_v1_endpoint_kafka_proto_msgTypes[2].OneofWrappers = []any{
 		(*KafkaAuth_Sasl)(nil),

@@ -21,6 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Empty block. Select data serialization format automatically
 type SerializerAuto struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -57,6 +58,7 @@ func (*SerializerAuto) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datatransfer_v1_endpoint_serializers_proto_rawDescGZIP(), []int{0}
 }
 
+// Empty block. Serialize data in json format
 type SerializerJSON struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -147,9 +149,11 @@ func (x *DebeziumSerializerParameter) GetValue() string {
 	return ""
 }
 
+// Serialize data in json format
 type SerializerDebezium struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Settings of sterilization parameters as key-value pairs
+	// A list of Debezium parameters set by the structure of the `key` and `value`
+	// string fields
 	SerializerParameters []*DebeziumSerializerParameter `protobuf:"bytes,1,rep,name=serializer_parameters,json=serializerParameters,proto3" json:"serializer_parameters,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -274,17 +278,17 @@ type isSerializer_Serializer interface {
 }
 
 type Serializer_SerializerAuto struct {
-	// Select the serialization format automatically
+	// Empty block. Select the serialization format automatically
 	SerializerAuto *SerializerAuto `protobuf:"bytes,1,opt,name=serializer_auto,json=serializerAuto,proto3,oneof"`
 }
 
 type Serializer_SerializerJson struct {
-	// Serialize data in json format
+	// Empty block. Serialize data in json format
 	SerializerJson *SerializerJSON `protobuf:"bytes,2,opt,name=serializer_json,json=serializerJson,proto3,oneof"`
 }
 
 type Serializer_SerializerDebezium struct {
-	// Serialize data in debezium format
+	// Serialize data in debezium json format
 	SerializerDebezium *SerializerDebezium `protobuf:"bytes,3,opt,name=serializer_debezium,json=serializerDebezium,proto3,oneof"`
 }
 

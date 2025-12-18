@@ -20,6 +20,12 @@ func (m *KafkaConnectionOptions) SetOnPremise(v *OnPremiseKafka) {
 	}
 }
 
+func (m *KafkaConnectionOptions) SetConnectionManagerConnection(v *ConnectionManagerConnection) {
+	m.Connection = &KafkaConnectionOptions_ConnectionManagerConnection{
+		ConnectionManagerConnection: v,
+	}
+}
+
 func (m *OnPremiseKafka) SetBrokerUrls(v []string) {
 	m.BrokerUrls = v
 }

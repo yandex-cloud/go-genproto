@@ -154,6 +154,10 @@ func (m *ResourceOptions) SetIpAddressAcl(v *ResourceOptions_IPAddressACLOption)
 	m.IpAddressAcl = v
 }
 
+func (m *ResourceOptions) SetFollowRedirects(v *ResourceOptions_FollowRedirectsOption) {
+	m.FollowRedirects = v
+}
+
 func (m *ResourceOptions_BoolOption) SetEnabled(v bool) {
 	m.Enabled = v
 }
@@ -368,6 +372,18 @@ func (m *ResourceOptions_IPAddressACLOption) SetPolicyType(v PolicyType) {
 
 func (m *ResourceOptions_IPAddressACLOption) SetExceptedValues(v []string) {
 	m.ExceptedValues = v
+}
+
+func (m *ResourceOptions_FollowRedirectsOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_FollowRedirectsOption) SetCodes(v []int64) {
+	m.Codes = v
+}
+
+func (m *ResourceOptions_FollowRedirectsOption) SetUseCustomHost(v bool) {
+	m.UseCustomHost = v
 }
 
 func (m *SSLTargetCertificate) SetType(v SSLCertificateType) {

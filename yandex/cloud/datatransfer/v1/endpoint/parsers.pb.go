@@ -112,18 +112,22 @@ type isParser_Parser interface {
 }
 
 type Parser_JsonParser struct {
+	// Parse data in json format
 	JsonParser *GenericParserCommon `protobuf:"bytes,1,opt,name=json_parser,json=jsonParser,proto3,oneof"`
 }
 
 type Parser_AuditTrailsV1Parser struct {
+	// Parse Audit Trails data. Empty struct
 	AuditTrailsV1Parser *AuditTrailsV1Parser `protobuf:"bytes,2,opt,name=audit_trails_v1_parser,json=auditTrailsV1Parser,proto3,oneof"`
 }
 
 type Parser_CloudLoggingParser struct {
+	// Parse Cloud Logging data. Empty struct
 	CloudLoggingParser *CloudLoggingParser `protobuf:"bytes,4,opt,name=cloud_logging_parser,json=cloudLoggingParser,proto3,oneof"`
 }
 
 type Parser_TskvParser struct {
+	// Parse data in tskv format
 	TskvParser *GenericParserCommon `protobuf:"bytes,6,opt,name=tskv_parser,json=tskvParser,proto3,oneof"`
 }
 
@@ -136,8 +140,9 @@ func (*Parser_CloudLoggingParser) isParser_Parser() {}
 func (*Parser_TskvParser) isParser_Parser() {}
 
 type GenericParserCommon struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	DataSchema *DataSchema            `protobuf:"bytes,1,opt,name=data_schema,json=dataSchema,proto3" json:"data_schema,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Data parsing scheme
+	DataSchema *DataSchema `protobuf:"bytes,1,opt,name=data_schema,json=dataSchema,proto3" json:"data_schema,omitempty"`
 	// Allow null keys, if no - null keys will be putted to unparsed data
 	NullKeysAllowed bool `protobuf:"varint,2,opt,name=null_keys_allowed,json=nullKeysAllowed,proto3" json:"null_keys_allowed,omitempty"`
 	// Will add _rest column for all unknown fields
