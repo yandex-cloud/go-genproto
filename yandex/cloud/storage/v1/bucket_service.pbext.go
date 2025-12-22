@@ -19,8 +19,20 @@ func (m *ListBucketsRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *ListBucketsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListBucketsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
 func (m *ListBucketsResponse) SetBuckets(v []*Bucket) {
 	m.Buckets = v
+}
+
+func (m *ListBucketsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *CreateBucketRequest) SetName(v string) {

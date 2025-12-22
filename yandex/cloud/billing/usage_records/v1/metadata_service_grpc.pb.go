@@ -139,6 +139,8 @@ type MetadataServiceClient interface {
 	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
+	//
+	// Note: This RPC method is not yet implemented and will return UNIMPLEMENTED.
 	GetResourceIDs(ctx context.Context, in *GetResourceIDsRequest, opts ...grpc.CallOption) (*GetResourceIDsResponse, error)
 }
 
@@ -304,6 +306,8 @@ type MetadataServiceServer interface {
 	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
+	//
+	// Note: This RPC method is not yet implemented and will return UNIMPLEMENTED.
 	GetResourceIDs(context.Context, *GetResourceIDsRequest) (*GetResourceIDsResponse, error)
 }
 

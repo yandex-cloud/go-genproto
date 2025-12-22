@@ -225,8 +225,8 @@ type GetLabelRequest struct {
 	LabelValueFilter []string `protobuf:"bytes,6,rep,name=label_value_filter,json=labelValueFilter,proto3" json:"label_value_filter,omitempty"`
 	// Optional. Page size for paginated results.
 	// Specifies the maximum number of label values to return per page.
-	// Lack of page size value means 0 page size (0 label values in response)
-	// Maximum allowed value: 10000.
+	// If not specified or set to 0, defaults to 10.
+	// If greater than 10000, will be coerced down to 10000.
 	PageSize int64 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional. Page token for paginated results.
 	// Token from a previous GetLabelResponse used to retrieve the next page.
@@ -433,8 +433,8 @@ type GetCloudRequest struct {
 	FolderIds []string `protobuf:"bytes,5,rep,name=folder_ids,json=folderIds,proto3" json:"folder_ids,omitempty"`
 	// Optional. Page size for paginated results.
 	// Specifies the maximum number of Folder objects to return per page.
-	// Lack of page size value means 0 page size (0 label values in response)
-	// Maximum allowed value: 10000.
+	// If not specified or set to 0, defaults to 10.
+	// If greater than 10000, will be coerced down to 10000.
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional. Page token for paginated results.
 	// Token from a previous GetCloudResponse used to retrieve the next page.
@@ -615,8 +615,8 @@ type GetResourceIDsRequest struct {
 	ResourceId string `protobuf:"bytes,4,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// Optional. Page size for paginated results.
 	// Specifies the maximum number of resource IDs to return per page.
-	// Lack of page size value means 0 page size (0 label values in response)
-	// Maximum allowed value: 10000.
+	// If not specified or set to 0, defaults to 10.
+	// If greater than 10000, will be coerced down to 10000.
 	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional. Page token for paginated results.
 	// Token from a previous GetResourceIDsResponse used to retrieve the next page.

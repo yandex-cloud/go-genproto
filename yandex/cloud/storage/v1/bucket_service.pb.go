@@ -154,7 +154,11 @@ type ListBucketsRequest struct {
 	// ID of the folder to list buckets in.
 	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
-	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Indicates that the list is being continued on this bucket with a token.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Maximum number of buckets to be returned in response.
+	PageSize      int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -196,10 +200,26 @@ func (x *ListBucketsRequest) GetFolderId() string {
 	return ""
 }
 
+func (x *ListBucketsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListBucketsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type ListBucketsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of buckets in the specified folder.
-	Buckets       []*Bucket `protobuf:"bytes,1,rep,name=buckets,proto3" json:"buckets,omitempty"`
+	Buckets []*Bucket `protobuf:"bytes,1,rep,name=buckets,proto3" json:"buckets,omitempty"`
+	// Included in the response when there are more buckets that can be listed with pagination.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -239,6 +259,13 @@ func (x *ListBucketsResponse) GetBuckets() []*Bucket {
 		return x.Buckets
 	}
 	return nil
+}
+
+func (x *ListBucketsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
 }
 
 type CreateBucketRequest struct {
@@ -1583,11 +1610,15 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"\n" +
 	"VIEW_BASIC\x10\x01\x12\f\n" +
 	"\bVIEW_ACL\x10\x02\x12\r\n" +
-	"\tVIEW_FULL\x10\x03\"?\n" +
+	"\tVIEW_FULL\x10\x03\"\x81\x01\n" +
 	"\x12ListBucketsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"P\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x03R\bpageSizeJ\x04\b\x02\x10\x03\"x\n" +
 	"\x13ListBucketsResponse\x129\n" +
-	"\abuckets\x18\x01 \x03(\v2\x1f.yandex.cloud.storage.v1.BucketR\abuckets\"\xac\x05\n" +
+	"\abuckets\x18\x01 \x03(\v2\x1f.yandex.cloud.storage.v1.BucketR\abuckets\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xac\x05\n" +
 	"\x13CreateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +

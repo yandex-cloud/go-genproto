@@ -27,6 +27,7 @@ const (
 type Cluster_Status int32
 
 const (
+	// Unknown status.
 	Cluster_STATUS_UNKNOWN Cluster_Status = 0
 	// Cluster is being created.
 	Cluster_CREATING Cluster_Status = 1
@@ -102,6 +103,7 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Cluster_Health int32
 
 const (
+	// Unknown health.
 	Cluster_HEALTH_UNKNOWN Cluster_Health = 0
 	// Cluster is alive.
 	Cluster_ALIVE Cluster_Health = 1
@@ -157,6 +159,7 @@ func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
 type ClusterSpec_Flavor int32
 
 const (
+	// Unspecified flavor.
 	ClusterSpec_FLAVOR_UNSPECIFIED ClusterSpec_Flavor = 0
 	// Demo cluster configuration with minimal system resources. Not fault-tolerant, not for production use.
 	ClusterSpec_DEMO ClusterSpec_Flavor = 1
@@ -437,9 +440,11 @@ func (x *CidrBlocks) GetV4CidrBlocks() []string {
 }
 
 type StorageSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Hdd           *StorageSpec_HddSpec   `protobuf:"bytes,1,opt,name=hdd,proto3" json:"hdd,omitempty"`
-	Ssd           *StorageSpec_SsdSpec   `protobuf:"bytes,2,opt,name=ssd,proto3" json:"ssd,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Configuration of cluster HDD strorage.
+	Hdd *StorageSpec_HddSpec `protobuf:"bytes,1,opt,name=hdd,proto3" json:"hdd,omitempty"`
+	// Configuration of cluster SSD strorage
+	Ssd           *StorageSpec_SsdSpec `protobuf:"bytes,2,opt,name=ssd,proto3" json:"ssd,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -489,9 +494,12 @@ func (x *StorageSpec) GetSsd() *StorageSpec_SsdSpec {
 }
 
 type ComputeSpec struct {
-	state       protoimpl.MessageState   `protogen:"open.v1"`
-	Preset      string                   `protobuf:"bytes,1,opt,name=preset,proto3" json:"preset,omitempty"`
-	Disks       []*ComputeSpec_DiskSpec  `protobuf:"bytes,2,rep,name=disks,proto3" json:"disks,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// VM configuration preset name.
+	Preset string `protobuf:"bytes,1,opt,name=preset,proto3" json:"preset,omitempty"`
+	// Configuration of exec node strorage.
+	Disks []*ComputeSpec_DiskSpec `protobuf:"bytes,2,rep,name=disks,proto3" json:"disks,omitempty"`
+	// Exec nodes scaling policy.
 	ScalePolicy *ComputeSpec_ScalePolicy `protobuf:"bytes,3,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	// Name for exec pool.
 	Name          string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
@@ -558,8 +566,9 @@ func (x *ComputeSpec) GetName() string {
 }
 
 type HttpProxySpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Total amount of HTTP proxies.
+	Count         int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -602,8 +611,9 @@ func (x *HttpProxySpec) GetCount() int64 {
 }
 
 type RpcProxySpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Total amount of RPC proxies.
+	Count         int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -646,9 +656,11 @@ func (x *RpcProxySpec) GetCount() int64 {
 }
 
 type TabletSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Preset        string                 `protobuf:"bytes,1,opt,name=preset,proto3" json:"preset,omitempty"`
-	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// VM configuration preset name.
+	Preset string `protobuf:"bytes,1,opt,name=preset,proto3" json:"preset,omitempty"`
+	// Total amount of tablet nodes.
+	Count         int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -698,9 +710,11 @@ func (x *TabletSpec) GetCount() int64 {
 }
 
 type ProxySpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Http          *HttpProxySpec         `protobuf:"bytes,1,opt,name=http,proto3" json:"http,omitempty"`
-	Rpc           *RpcProxySpec          `protobuf:"bytes,2,opt,name=rpc,proto3" json:"rpc,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Configuration of HTTP proxies.
+	Http *HttpProxySpec `protobuf:"bytes,1,opt,name=http,proto3" json:"http,omitempty"`
+	// Configuration of rpc proxies.
+	Rpc           *RpcProxySpec `protobuf:"bytes,2,opt,name=rpc,proto3" json:"rpc,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -750,8 +764,9 @@ func (x *ProxySpec) GetRpc() *RpcProxySpec {
 }
 
 type OdinSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChecksTtl     *durationpb.Duration   `protobuf:"bytes,1,opt,name=checks_ttl,json=checksTtl,proto3" json:"checks_ttl,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TTL of Odin check samples.
+	ChecksTtl     *durationpb.Duration `protobuf:"bytes,1,opt,name=checks_ttl,json=checksTtl,proto3" json:"checks_ttl,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1015,13 +1030,19 @@ func (*ClientLogging_LogGroupId) isClientLogging_Destination() {}
 func (*ClientLogging_FolderId) isClientLogging_Destination() {}
 
 type ClusterSpec struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Storage *StorageSpec           `protobuf:"bytes,1,opt,name=storage,proto3" json:"storage,omitempty"`
-	Compute []*ComputeSpec         `protobuf:"bytes,2,rep,name=compute,proto3" json:"compute,omitempty"`
-	Tablet  *TabletSpec            `protobuf:"bytes,3,opt,name=tablet,proto3" json:"tablet,omitempty"`
-	Proxy   *ProxySpec             `protobuf:"bytes,4,opt,name=proxy,proto3" json:"proxy,omitempty"`
-	Odin    *OdinSpec              `protobuf:"bytes,5,opt,name=odin,proto3" json:"odin,omitempty"`
-	Flavor  ClusterSpec_Flavor     `protobuf:"varint,6,opt,name=flavor,proto3,enum=yandex.cloud.ytsaurus.v1.ClusterSpec_Flavor" json:"flavor,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cluster storage configuration.
+	Storage *StorageSpec `protobuf:"bytes,1,opt,name=storage,proto3" json:"storage,omitempty"`
+	// Cluster exec nodes configuration.
+	Compute []*ComputeSpec `protobuf:"bytes,2,rep,name=compute,proto3" json:"compute,omitempty"`
+	// Cluster tablet nodes configuration.
+	Tablet *TabletSpec `protobuf:"bytes,3,opt,name=tablet,proto3" json:"tablet,omitempty"`
+	// Cluster proxies configuration.
+	Proxy *ProxySpec `protobuf:"bytes,4,opt,name=proxy,proto3" json:"proxy,omitempty"`
+	// Odin configuration.
+	Odin *OdinSpec `protobuf:"bytes,5,opt,name=odin,proto3" json:"odin,omitempty"`
+	// Cluster flavor (type).
+	Flavor ClusterSpec_Flavor `protobuf:"varint,6,opt,name=flavor,proto3,enum=yandex.cloud.ytsaurus.v1.ClusterSpec_Flavor" json:"flavor,omitempty"`
 	// Cluster regular processing settings.
 	Cron *CronSpec `protobuf:"bytes,7,opt,name=cron,proto3" json:"cron,omitempty"`
 	// Client Cloud logging configuration.
@@ -1118,8 +1139,8 @@ func (x *ClusterSpec) GetClientLogging() *ClientLogging {
 
 type Cluster_Endpoints struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
-	Ui                        string                 `protobuf:"bytes,1,opt,name=ui,proto3" json:"ui,omitempty"`                                                                                    // https://CID.ui.ytsaurus.yandexcloud.net
-	ExternalHttpProxyBalancer string                 `protobuf:"bytes,2,opt,name=external_http_proxy_balancer,json=externalHttpProxyBalancer,proto3" json:"external_http_proxy_balancer,omitempty"` // https://CID.proxy.ytsaurus.yandexcloud.net
+	Ui                        string                 `protobuf:"bytes,1,opt,name=ui,proto3" json:"ui,omitempty"`                                                                                    // https://CID.ytsaurus.yandexcloud.net
+	ExternalHttpProxyBalancer string                 `protobuf:"bytes,2,opt,name=external_http_proxy_balancer,json=externalHttpProxyBalancer,proto3" json:"external_http_proxy_balancer,omitempty"` // https://proxy.CID.ytsaurus.yandexcloud.net
 	InternalHttpProxyAlias    string                 `protobuf:"bytes,3,opt,name=internal_http_proxy_alias,json=internalHttpProxyAlias,proto3" json:"internal_http_proxy_alias,omitempty"`          // https://hp.CID.ytsaurus.mdb.yandexcloud.net:PORT
 	InternalRpcProxyAlias     string                 `protobuf:"bytes,4,opt,name=internal_rpc_proxy_alias,json=internalRpcProxyAlias,proto3" json:"internal_rpc_proxy_alias,omitempty"`             // rp.CID.ytsaurus.mdb.yandexcloud.net:PORT
 	unknownFields             protoimpl.UnknownFields
@@ -1185,9 +1206,11 @@ func (x *Cluster_Endpoints) GetInternalRpcProxyAlias() string {
 }
 
 type StorageSpec_HddSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SizeGb        int64                  `protobuf:"varint,2,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
-	Count         int64                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Size of a single HDD disk in GB.
+	SizeGb int64 `protobuf:"varint,2,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
+	// Total amount of HDD disks.
+	Count         int64 `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1237,10 +1260,15 @@ func (x *StorageSpec_HddSpec) GetCount() int64 {
 }
 
 type StorageSpec_SsdSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SizeGb        int64                  `protobuf:"varint,2,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
-	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Count         int64                  `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Size of a single SSD disk in GB.
+	SizeGb int64 `protobuf:"varint,2,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
+	// Type of a SSD disk.
+	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	// Total amount of SSD disks.
+	Count int64 `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`
+	// Configuration of dynamic table changelogs.
+	Changelogs    *StorageSpec_SsdSpec_Changelogs `protobuf:"bytes,5,opt,name=changelogs,proto3" json:"changelogs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1296,18 +1324,73 @@ func (x *StorageSpec_SsdSpec) GetCount() int64 {
 	return 0
 }
 
+func (x *StorageSpec_SsdSpec) GetChangelogs() *StorageSpec_SsdSpec_Changelogs {
+	if x != nil {
+		return x.Changelogs
+	}
+	return nil
+}
+
+type StorageSpec_SsdSpec_Changelogs struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Size of changelogs disk in GB.
+	SizeGb        int64 `protobuf:"varint,1,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StorageSpec_SsdSpec_Changelogs) Reset() {
+	*x = StorageSpec_SsdSpec_Changelogs{}
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StorageSpec_SsdSpec_Changelogs) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StorageSpec_SsdSpec_Changelogs) ProtoMessage() {}
+
+func (x *StorageSpec_SsdSpec_Changelogs) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StorageSpec_SsdSpec_Changelogs.ProtoReflect.Descriptor instead.
+func (*StorageSpec_SsdSpec_Changelogs) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP(), []int{2, 1, 0}
+}
+
+func (x *StorageSpec_SsdSpec_Changelogs) GetSizeGb() int64 {
+	if x != nil {
+		return x.SizeGb
+	}
+	return 0
+}
+
 type ComputeSpec_DiskSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	SizeGb        int64                  `protobuf:"varint,2,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
-	Locations     []string               `protobuf:"bytes,3,rep,name=locations,proto3" json:"locations,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Type of a disk.
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	// Size of a single disk in GB.
+	SizeGb int64 `protobuf:"varint,2,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
+	// Locations on a disk.
+	Locations     []string `protobuf:"bytes,3,rep,name=locations,proto3" json:"locations,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ComputeSpec_DiskSpec) Reset() {
 	*x = ComputeSpec_DiskSpec{}
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1319,7 +1402,7 @@ func (x *ComputeSpec_DiskSpec) String() string {
 func (*ComputeSpec_DiskSpec) ProtoMessage() {}
 
 func (x *ComputeSpec_DiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1452,7 @@ type ComputeSpec_ScalePolicy struct {
 
 func (x *ComputeSpec_ScalePolicy) Reset() {
 	*x = ComputeSpec_ScalePolicy{}
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1381,7 +1464,7 @@ func (x *ComputeSpec_ScalePolicy) String() string {
 func (*ComputeSpec_ScalePolicy) ProtoMessage() {}
 
 func (x *ComputeSpec_ScalePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1427,10 +1510,12 @@ type isComputeSpec_ScalePolicy_Policy interface {
 }
 
 type ComputeSpec_ScalePolicy_Fixed struct {
+	// Scale policy that doesn't change number of running exec nodes over time.
 	Fixed *ComputeSpec_ScalePolicy_FixedScale `protobuf:"bytes,1,opt,name=fixed,proto3,oneof"`
 }
 
 type ComputeSpec_ScalePolicy_Auto struct {
+	// Scale policy that can adjust number of running exec nodes within specified range based on some criteria.
 	Auto *ComputeSpec_ScalePolicy_AutoScale `protobuf:"bytes,2,opt,name=auto,proto3,oneof"`
 }
 
@@ -1439,15 +1524,16 @@ func (*ComputeSpec_ScalePolicy_Fixed) isComputeSpec_ScalePolicy_Policy() {}
 func (*ComputeSpec_ScalePolicy_Auto) isComputeSpec_ScalePolicy_Policy() {}
 
 type ComputeSpec_ScalePolicy_FixedScale struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Size          int64                  `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Amount of exec nodes.
+	Size          int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ComputeSpec_ScalePolicy_FixedScale) Reset() {
 	*x = ComputeSpec_ScalePolicy_FixedScale{}
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1459,7 +1545,7 @@ func (x *ComputeSpec_ScalePolicy_FixedScale) String() string {
 func (*ComputeSpec_ScalePolicy_FixedScale) ProtoMessage() {}
 
 func (x *ComputeSpec_ScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1483,16 +1569,18 @@ func (x *ComputeSpec_ScalePolicy_FixedScale) GetSize() int64 {
 }
 
 type ComputeSpec_ScalePolicy_AutoScale struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MinSize       int64                  `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
-	MaxSize       int64                  `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Minimal amount of exec nodes.
+	MinSize int64 `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
+	// Maximum amount of exec nodes.
+	MaxSize       int64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ComputeSpec_ScalePolicy_AutoScale) Reset() {
 	*x = ComputeSpec_ScalePolicy_AutoScale{}
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1504,7 +1592,7 @@ func (x *ComputeSpec_ScalePolicy_AutoScale) String() string {
 func (*ComputeSpec_ScalePolicy_AutoScale) ProtoMessage() {}
 
 func (x *ComputeSpec_ScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1588,17 +1676,23 @@ const file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc = "" +
 	"\bDEGRADED\x10\x03\"2\n" +
 	"\n" +
 	"CidrBlocks\x12$\n" +
-	"\x0ev4_cidr_blocks\x18\x01 \x03(\tR\fv4CidrBlocks\"\xa3\x02\n" +
+	"\x0ev4_cidr_blocks\x18\x01 \x03(\tR\fv4CidrBlocks\"\xa5\x03\n" +
 	"\vStorageSpec\x12?\n" +
 	"\x03hdd\x18\x01 \x01(\v2-.yandex.cloud.ytsaurus.v1.StorageSpec.HddSpecR\x03hdd\x12?\n" +
 	"\x03ssd\x18\x02 \x01(\v2-.yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpecR\x03ssd\x1a>\n" +
 	"\aHddSpec\x12\x17\n" +
 	"\asize_gb\x18\x02 \x01(\x03R\x06sizeGb\x12\x14\n" +
-	"\x05count\x18\x03 \x01(\x03R\x05countJ\x04\b\x01\x10\x02\x1aR\n" +
+	"\x05count\x18\x03 \x01(\x03R\x05countJ\x04\b\x01\x10\x02\x1a\xd3\x01\n" +
 	"\aSsdSpec\x12\x17\n" +
 	"\asize_gb\x18\x02 \x01(\x03R\x06sizeGb\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x14\n" +
-	"\x05count\x18\x04 \x01(\x03R\x05countJ\x04\b\x01\x10\x02\"\xda\x04\n" +
+	"\x05count\x18\x04 \x01(\x03R\x05count\x12X\n" +
+	"\n" +
+	"changelogs\x18\x05 \x01(\v28.yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec.ChangelogsR\n" +
+	"changelogs\x1a%\n" +
+	"\n" +
+	"Changelogs\x12\x17\n" +
+	"\asize_gb\x18\x01 \x01(\x03R\x06sizeGbJ\x04\b\x01\x10\x02\"\xda\x04\n" +
 	"\vComputeSpec\x12\x16\n" +
 	"\x06preset\x18\x01 \x01(\tR\x06preset\x12D\n" +
 	"\x05disks\x18\x02 \x03(\v2..yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpecR\x05disks\x12T\n" +
@@ -1673,7 +1767,7 @@ func file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_goTypes = []any{
 	(Cluster_Status)(0),                        // 0: yandex.cloud.ytsaurus.v1.Cluster.Status
 	(Cluster_Health)(0),                        // 1: yandex.cloud.ytsaurus.v1.Cluster.Health
@@ -1695,30 +1789,31 @@ var file_yandex_cloud_ytsaurus_v1_cluster_proto_goTypes = []any{
 	(*Cluster_Endpoints)(nil),                  // 17: yandex.cloud.ytsaurus.v1.Cluster.Endpoints
 	(*StorageSpec_HddSpec)(nil),                // 18: yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
 	(*StorageSpec_SsdSpec)(nil),                // 19: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
-	(*ComputeSpec_DiskSpec)(nil),               // 20: yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
-	(*ComputeSpec_ScalePolicy)(nil),            // 21: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
-	(*ComputeSpec_ScalePolicy_FixedScale)(nil), // 22: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
-	(*ComputeSpec_ScalePolicy_AutoScale)(nil),  // 23: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
-	(*timestamppb.Timestamp)(nil),              // 24: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),                // 25: google.protobuf.Duration
+	(*StorageSpec_SsdSpec_Changelogs)(nil),     // 20: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec.Changelogs
+	(*ComputeSpec_DiskSpec)(nil),               // 21: yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
+	(*ComputeSpec_ScalePolicy)(nil),            // 22: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
+	(*ComputeSpec_ScalePolicy_FixedScale)(nil), // 23: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
+	(*ComputeSpec_ScalePolicy_AutoScale)(nil),  // 24: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
+	(*timestamppb.Timestamp)(nil),              // 25: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                // 26: google.protobuf.Duration
 }
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_depIdxs = []int32{
 	16, // 0: yandex.cloud.ytsaurus.v1.Cluster.labels:type_name -> yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
 	15, // 1: yandex.cloud.ytsaurus.v1.Cluster.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
-	24, // 2: yandex.cloud.ytsaurus.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	24, // 3: yandex.cloud.ytsaurus.v1.Cluster.updated_at:type_name -> google.protobuf.Timestamp
+	25, // 2: yandex.cloud.ytsaurus.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	25, // 3: yandex.cloud.ytsaurus.v1.Cluster.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 4: yandex.cloud.ytsaurus.v1.Cluster.status:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Status
 	1,  // 5: yandex.cloud.ytsaurus.v1.Cluster.health:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Health
 	17, // 6: yandex.cloud.ytsaurus.v1.Cluster.endpoints:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Endpoints
 	4,  // 7: yandex.cloud.ytsaurus.v1.Cluster.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
 	18, // 8: yandex.cloud.ytsaurus.v1.StorageSpec.hdd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
 	19, // 9: yandex.cloud.ytsaurus.v1.StorageSpec.ssd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
-	20, // 10: yandex.cloud.ytsaurus.v1.ComputeSpec.disks:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
-	21, // 11: yandex.cloud.ytsaurus.v1.ComputeSpec.scale_policy:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
+	21, // 10: yandex.cloud.ytsaurus.v1.ComputeSpec.disks:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec
+	22, // 11: yandex.cloud.ytsaurus.v1.ComputeSpec.scale_policy:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy
 	7,  // 12: yandex.cloud.ytsaurus.v1.ProxySpec.http:type_name -> yandex.cloud.ytsaurus.v1.HttpProxySpec
 	8,  // 13: yandex.cloud.ytsaurus.v1.ProxySpec.rpc:type_name -> yandex.cloud.ytsaurus.v1.RpcProxySpec
-	25, // 14: yandex.cloud.ytsaurus.v1.OdinSpec.checks_ttl:type_name -> google.protobuf.Duration
-	25, // 15: yandex.cloud.ytsaurus.v1.ClearTmpCronSpec.interval:type_name -> google.protobuf.Duration
+	26, // 14: yandex.cloud.ytsaurus.v1.OdinSpec.checks_ttl:type_name -> google.protobuf.Duration
+	26, // 15: yandex.cloud.ytsaurus.v1.ClearTmpCronSpec.interval:type_name -> google.protobuf.Duration
 	12, // 16: yandex.cloud.ytsaurus.v1.CronSpec.clear_tmp:type_name -> yandex.cloud.ytsaurus.v1.ClearTmpCronSpec
 	5,  // 17: yandex.cloud.ytsaurus.v1.ClusterSpec.storage:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec
 	6,  // 18: yandex.cloud.ytsaurus.v1.ClusterSpec.compute:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec
@@ -1728,13 +1823,14 @@ var file_yandex_cloud_ytsaurus_v1_cluster_proto_depIdxs = []int32{
 	2,  // 22: yandex.cloud.ytsaurus.v1.ClusterSpec.flavor:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec.Flavor
 	13, // 23: yandex.cloud.ytsaurus.v1.ClusterSpec.cron:type_name -> yandex.cloud.ytsaurus.v1.CronSpec
 	14, // 24: yandex.cloud.ytsaurus.v1.ClusterSpec.client_logging:type_name -> yandex.cloud.ytsaurus.v1.ClientLogging
-	22, // 25: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.fixed:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
-	23, // 26: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.auto:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	20, // 25: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec.changelogs:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec.Changelogs
+	23, // 26: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.fixed:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.FixedScale
+	24, // 27: yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.auto:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.ScalePolicy.AutoScale
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ytsaurus_v1_cluster_proto_init() }
@@ -1746,7 +1842,7 @@ func file_yandex_cloud_ytsaurus_v1_cluster_proto_init() {
 		(*ClientLogging_LogGroupId)(nil),
 		(*ClientLogging_FolderId)(nil),
 	}
-	file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[18].OneofWrappers = []any{
+	file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[19].OneofWrappers = []any{
 		(*ComputeSpec_ScalePolicy_Fixed)(nil),
 		(*ComputeSpec_ScalePolicy_Auto)(nil),
 	}
@@ -1756,7 +1852,7 @@ func file_yandex_cloud_ytsaurus_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc), len(file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   21,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -123,6 +123,14 @@ func (m *StorageSpec_SsdSpec) SetCount(v int64) {
 	m.Count = v
 }
 
+func (m *StorageSpec_SsdSpec) SetChangelogs(v *StorageSpec_SsdSpec_Changelogs) {
+	m.Changelogs = v
+}
+
+func (m *StorageSpec_SsdSpec_Changelogs) SetSizeGb(v int64) {
+	m.SizeGb = v
+}
+
 func (m *ComputeSpec) SetPreset(v string) {
 	m.Preset = v
 }
