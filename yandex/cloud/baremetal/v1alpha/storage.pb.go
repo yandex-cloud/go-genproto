@@ -7,6 +7,7 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -358,19 +359,19 @@ var File_yandex_cloud_baremetal_v1alpha_storage_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_baremetal_v1alpha_storage_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/baremetal/v1alpha/storage.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\"\x98\x01\n" +
+	",yandex/cloud/baremetal/v1alpha/storage.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x01\n" +
 	"\x10StoragePartition\x12H\n" +
 	"\x04type\x18\x01 \x01(\x0e24.yandex.cloud.baremetal.v1alpha.StoragePartitionTypeR\x04type\x12\x19\n" +
 	"\bsize_gib\x18\x02 \x01(\x03R\asizeGib\x12\x1f\n" +
 	"\vmount_point\x18\x03 \x01(\tR\n" +
-	"mountPoint\"\xef\x01\n" +
+	"mountPoint\"\xf5\x01\n" +
 	"\aStorage\x12P\n" +
 	"\n" +
 	"partitions\x18\x03 \x03(\v20.yandex.cloud.baremetal.v1alpha.StoragePartitionR\n" +
 	"partitions\x12:\n" +
 	"\x04disk\x18\x04 \x01(\v2$.yandex.cloud.baremetal.v1alpha.DiskH\x00R\x04disk\x12:\n" +
-	"\x04raid\x18\x05 \x01(\v2$.yandex.cloud.baremetal.v1alpha.RaidH\x00R\x04raidB\x0e\n" +
-	"\fstorage_typeJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\x80\x01\n" +
+	"\x04raid\x18\x05 \x01(\v2$.yandex.cloud.baremetal.v1alpha.RaidH\x00R\x04raidB\x14\n" +
+	"\fstorage_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\x80\x01\n" +
 	"\x04Raid\x12<\n" +
 	"\x04type\x18\x01 \x01(\x0e2(.yandex.cloud.baremetal.v1alpha.RaidTypeR\x04type\x12:\n" +
 	"\x05disks\x18\x02 \x03(\v2$.yandex.cloud.baremetal.v1alpha.DiskR\x05disks*e\n" +

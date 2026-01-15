@@ -8,6 +8,7 @@ package dataproc
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -1653,7 +1654,7 @@ var File_yandex_cloud_dataproc_v1_cluster_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/dataproc/v1/cluster_service.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/dataproc/v1/cluster.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a)yandex/cloud/dataproc/v1/subcluster.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	".yandex/cloud/dataproc/v1/cluster_service.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/dataproc/v1/cluster.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a)yandex/cloud/dataproc/v1/subcluster.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -1794,7 +1795,7 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\"M\n" +
 	"\x13ListUILinksResponse\x126\n" +
-	"\x05links\x18\x01 \x03(\v2 .yandex.cloud.dataproc.v1.UILinkR\x05links2\x91\r\n" +
+	"\x05links\x18\x01 \x03(\v2 .yandex.cloud.dataproc.v1.UILinkR\x05links2\xc3\x12\n" +
 	"\x0eClusterService\x12\x81\x01\n" +
 	"\x03Get\x12+.yandex.cloud.dataproc.v1.GetClusterRequest\x1a!.yandex.cloud.dataproc.v1.Cluster\"*\x82\xd3\xe4\x93\x02$\x12\"/dataproc/v1/clusters/{cluster_id}\x12\x84\x01\n" +
 	"\x04List\x12-.yandex.cloud.dataproc.v1.ListClustersRequest\x1a..yandex.cloud.dataproc.v1.ListClustersResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/dataproc/v1/clusters\x12\xa1\x01\n" +
@@ -1810,7 +1811,12 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02,:\x01*\"'/dataproc/v1/clusters/{cluster_id}:stop\x12\xb8\x01\n" +
 	"\x0eListOperations\x126.yandex.cloud.dataproc.v1.ListClusterOperationsRequest\x1a7.yandex.cloud.dataproc.v1.ListClusterOperationsResponse\"5\x82\xd3\xe4\x93\x02/\x12-/dataproc/v1/clusters/{cluster_id}/operations\x12\xa4\x01\n" +
 	"\tListHosts\x121.yandex.cloud.dataproc.v1.ListClusterHostsRequest\x1a2.yandex.cloud.dataproc.v1.ListClusterHostsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/dataproc/v1/clusters/{cluster_id}/hosts\x12\x9f\x01\n" +
-	"\vListUILinks\x12,.yandex.cloud.dataproc.v1.ListUILinksRequest\x1a-.yandex.cloud.dataproc.v1.ListUILinksResponse\"3\x82\xd3\xe4\x93\x02-\x12+/dataproc/v1/clusters/{cluster_id}/ui_linksBe\n" +
+	"\vListUILinks\x12,.yandex.cloud.dataproc.v1.ListUILinksRequest\x1a-.yandex.cloud.dataproc.v1.ListUILinksResponse\"3\x82\xd3\xe4\x93\x02-\x12+/dataproc/v1/clusters/{cluster_id}/ui_links\x12\xb5\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\">\x82\xd3\xe4\x93\x028\x126/dataproc/v1/clusters/{resource_id}:listAccessBindings\x12\xf4\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*H\n" +
+	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02::\x01*\"5/dataproc/v1/clusters/{resource_id}:setAccessBindings\x12\x80\x02\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x92\x01\xb2\xd2*K\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02=:\x01*28/dataproc/v1/clusters/{resource_id}:updateAccessBindingsBe\n" +
 	"\x1cyandex.cloud.api.dataproc.v1ZEgithub.com/yandex-cloud/go-genproto/yandex/cloud/dataproc/v1;dataprocb\x06proto3"
 
 var (
@@ -1827,41 +1833,45 @@ func file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_yandex_cloud_dataproc_v1_cluster_service_proto_goTypes = []any{
-	(*GetClusterRequest)(nil),             // 0: yandex.cloud.dataproc.v1.GetClusterRequest
-	(*ListClustersRequest)(nil),           // 1: yandex.cloud.dataproc.v1.ListClustersRequest
-	(*ListClustersResponse)(nil),          // 2: yandex.cloud.dataproc.v1.ListClustersResponse
-	(*CreateSubclusterConfigSpec)(nil),    // 3: yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec
-	(*UpdateSubclusterConfigSpec)(nil),    // 4: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec
-	(*CreateClusterConfigSpec)(nil),       // 5: yandex.cloud.dataproc.v1.CreateClusterConfigSpec
-	(*UpdateClusterConfigSpec)(nil),       // 6: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec
-	(*CreateClusterRequest)(nil),          // 7: yandex.cloud.dataproc.v1.CreateClusterRequest
-	(*CreateClusterMetadata)(nil),         // 8: yandex.cloud.dataproc.v1.CreateClusterMetadata
-	(*UpdateClusterRequest)(nil),          // 9: yandex.cloud.dataproc.v1.UpdateClusterRequest
-	(*UpdateClusterMetadata)(nil),         // 10: yandex.cloud.dataproc.v1.UpdateClusterMetadata
-	(*DeleteClusterRequest)(nil),          // 11: yandex.cloud.dataproc.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),         // 12: yandex.cloud.dataproc.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),           // 13: yandex.cloud.dataproc.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),          // 14: yandex.cloud.dataproc.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),            // 15: yandex.cloud.dataproc.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),           // 16: yandex.cloud.dataproc.v1.StopClusterMetadata
-	(*ListClusterOperationsRequest)(nil),  // 17: yandex.cloud.dataproc.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil), // 18: yandex.cloud.dataproc.v1.ListClusterOperationsResponse
-	(*ListClusterHostsRequest)(nil),       // 19: yandex.cloud.dataproc.v1.ListClusterHostsRequest
-	(*ListClusterHostsResponse)(nil),      // 20: yandex.cloud.dataproc.v1.ListClusterHostsResponse
-	(*ListUILinksRequest)(nil),            // 21: yandex.cloud.dataproc.v1.ListUILinksRequest
-	(*UILink)(nil),                        // 22: yandex.cloud.dataproc.v1.UILink
-	(*ListUILinksResponse)(nil),           // 23: yandex.cloud.dataproc.v1.ListUILinksResponse
-	nil,                                   // 24: yandex.cloud.dataproc.v1.CreateClusterRequest.LabelsEntry
-	nil,                                   // 25: yandex.cloud.dataproc.v1.UpdateClusterRequest.LabelsEntry
-	(*Cluster)(nil),                       // 26: yandex.cloud.dataproc.v1.Cluster
-	(Role)(0),                             // 27: yandex.cloud.dataproc.v1.Role
-	(*Resources)(nil),                     // 28: yandex.cloud.dataproc.v1.Resources
-	(*AutoscalingConfig)(nil),             // 29: yandex.cloud.dataproc.v1.AutoscalingConfig
-	(*HadoopConfig)(nil),                  // 30: yandex.cloud.dataproc.v1.HadoopConfig
-	(Cluster_Environment)(0),              // 31: yandex.cloud.dataproc.v1.Cluster.Environment
-	(*fieldmaskpb.FieldMask)(nil),         // 32: google.protobuf.FieldMask
-	(*operation.Operation)(nil),           // 33: yandex.cloud.operation.Operation
-	(*Host)(nil),                          // 34: yandex.cloud.dataproc.v1.Host
+	(*GetClusterRequest)(nil),                  // 0: yandex.cloud.dataproc.v1.GetClusterRequest
+	(*ListClustersRequest)(nil),                // 1: yandex.cloud.dataproc.v1.ListClustersRequest
+	(*ListClustersResponse)(nil),               // 2: yandex.cloud.dataproc.v1.ListClustersResponse
+	(*CreateSubclusterConfigSpec)(nil),         // 3: yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec
+	(*UpdateSubclusterConfigSpec)(nil),         // 4: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec
+	(*CreateClusterConfigSpec)(nil),            // 5: yandex.cloud.dataproc.v1.CreateClusterConfigSpec
+	(*UpdateClusterConfigSpec)(nil),            // 6: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec
+	(*CreateClusterRequest)(nil),               // 7: yandex.cloud.dataproc.v1.CreateClusterRequest
+	(*CreateClusterMetadata)(nil),              // 8: yandex.cloud.dataproc.v1.CreateClusterMetadata
+	(*UpdateClusterRequest)(nil),               // 9: yandex.cloud.dataproc.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),              // 10: yandex.cloud.dataproc.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),               // 11: yandex.cloud.dataproc.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),              // 12: yandex.cloud.dataproc.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),                // 13: yandex.cloud.dataproc.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),               // 14: yandex.cloud.dataproc.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),                 // 15: yandex.cloud.dataproc.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),                // 16: yandex.cloud.dataproc.v1.StopClusterMetadata
+	(*ListClusterOperationsRequest)(nil),       // 17: yandex.cloud.dataproc.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),      // 18: yandex.cloud.dataproc.v1.ListClusterOperationsResponse
+	(*ListClusterHostsRequest)(nil),            // 19: yandex.cloud.dataproc.v1.ListClusterHostsRequest
+	(*ListClusterHostsResponse)(nil),           // 20: yandex.cloud.dataproc.v1.ListClusterHostsResponse
+	(*ListUILinksRequest)(nil),                 // 21: yandex.cloud.dataproc.v1.ListUILinksRequest
+	(*UILink)(nil),                             // 22: yandex.cloud.dataproc.v1.UILink
+	(*ListUILinksResponse)(nil),                // 23: yandex.cloud.dataproc.v1.ListUILinksResponse
+	nil,                                        // 24: yandex.cloud.dataproc.v1.CreateClusterRequest.LabelsEntry
+	nil,                                        // 25: yandex.cloud.dataproc.v1.UpdateClusterRequest.LabelsEntry
+	(*Cluster)(nil),                            // 26: yandex.cloud.dataproc.v1.Cluster
+	(Role)(0),                                  // 27: yandex.cloud.dataproc.v1.Role
+	(*Resources)(nil),                          // 28: yandex.cloud.dataproc.v1.Resources
+	(*AutoscalingConfig)(nil),                  // 29: yandex.cloud.dataproc.v1.AutoscalingConfig
+	(*HadoopConfig)(nil),                       // 30: yandex.cloud.dataproc.v1.HadoopConfig
+	(Cluster_Environment)(0),                   // 31: yandex.cloud.dataproc.v1.Cluster.Environment
+	(*fieldmaskpb.FieldMask)(nil),              // 32: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 33: yandex.cloud.operation.Operation
+	(*Host)(nil),                               // 34: yandex.cloud.dataproc.v1.Host
+	(*access.ListAccessBindingsRequest)(nil),   // 35: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 36: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 37: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 38: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_dataproc_v1_cluster_service_proto_depIdxs = []int32{
 	26, // 0: yandex.cloud.dataproc.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.dataproc.v1.Cluster
@@ -1893,18 +1903,24 @@ var file_yandex_cloud_dataproc_v1_cluster_service_proto_depIdxs = []int32{
 	17, // 26: yandex.cloud.dataproc.v1.ClusterService.ListOperations:input_type -> yandex.cloud.dataproc.v1.ListClusterOperationsRequest
 	19, // 27: yandex.cloud.dataproc.v1.ClusterService.ListHosts:input_type -> yandex.cloud.dataproc.v1.ListClusterHostsRequest
 	21, // 28: yandex.cloud.dataproc.v1.ClusterService.ListUILinks:input_type -> yandex.cloud.dataproc.v1.ListUILinksRequest
-	26, // 29: yandex.cloud.dataproc.v1.ClusterService.Get:output_type -> yandex.cloud.dataproc.v1.Cluster
-	2,  // 30: yandex.cloud.dataproc.v1.ClusterService.List:output_type -> yandex.cloud.dataproc.v1.ListClustersResponse
-	33, // 31: yandex.cloud.dataproc.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	33, // 32: yandex.cloud.dataproc.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	33, // 33: yandex.cloud.dataproc.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	33, // 34: yandex.cloud.dataproc.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	33, // 35: yandex.cloud.dataproc.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	18, // 36: yandex.cloud.dataproc.v1.ClusterService.ListOperations:output_type -> yandex.cloud.dataproc.v1.ListClusterOperationsResponse
-	20, // 37: yandex.cloud.dataproc.v1.ClusterService.ListHosts:output_type -> yandex.cloud.dataproc.v1.ListClusterHostsResponse
-	23, // 38: yandex.cloud.dataproc.v1.ClusterService.ListUILinks:output_type -> yandex.cloud.dataproc.v1.ListUILinksResponse
-	29, // [29:39] is the sub-list for method output_type
-	19, // [19:29] is the sub-list for method input_type
+	35, // 29: yandex.cloud.dataproc.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	36, // 30: yandex.cloud.dataproc.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	37, // 31: yandex.cloud.dataproc.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	26, // 32: yandex.cloud.dataproc.v1.ClusterService.Get:output_type -> yandex.cloud.dataproc.v1.Cluster
+	2,  // 33: yandex.cloud.dataproc.v1.ClusterService.List:output_type -> yandex.cloud.dataproc.v1.ListClustersResponse
+	33, // 34: yandex.cloud.dataproc.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	33, // 35: yandex.cloud.dataproc.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	33, // 36: yandex.cloud.dataproc.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	33, // 37: yandex.cloud.dataproc.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	33, // 38: yandex.cloud.dataproc.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	18, // 39: yandex.cloud.dataproc.v1.ClusterService.ListOperations:output_type -> yandex.cloud.dataproc.v1.ListClusterOperationsResponse
+	20, // 40: yandex.cloud.dataproc.v1.ClusterService.ListHosts:output_type -> yandex.cloud.dataproc.v1.ListClusterHostsResponse
+	23, // 41: yandex.cloud.dataproc.v1.ClusterService.ListUILinks:output_type -> yandex.cloud.dataproc.v1.ListUILinksResponse
+	38, // 42: yandex.cloud.dataproc.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	33, // 43: yandex.cloud.dataproc.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	33, // 44: yandex.cloud.dataproc.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	32, // [32:45] is the sub-list for method output_type
+	19, // [19:32] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
 	19, // [19:19] is the sub-list for extension extendee
 	0,  // [0:19] is the sub-list for field type_name

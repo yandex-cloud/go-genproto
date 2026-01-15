@@ -20,18 +20,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VideoService_Get_FullMethodName                = "/yandex.cloud.video.v1.VideoService/Get"
-	VideoService_List_FullMethodName               = "/yandex.cloud.video.v1.VideoService/List"
-	VideoService_BatchGet_FullMethodName           = "/yandex.cloud.video.v1.VideoService/BatchGet"
-	VideoService_Create_FullMethodName             = "/yandex.cloud.video.v1.VideoService/Create"
-	VideoService_Update_FullMethodName             = "/yandex.cloud.video.v1.VideoService/Update"
-	VideoService_Transcode_FullMethodName          = "/yandex.cloud.video.v1.VideoService/Transcode"
-	VideoService_Delete_FullMethodName             = "/yandex.cloud.video.v1.VideoService/Delete"
-	VideoService_BatchDelete_FullMethodName        = "/yandex.cloud.video.v1.VideoService/BatchDelete"
-	VideoService_PerformAction_FullMethodName      = "/yandex.cloud.video.v1.VideoService/PerformAction"
-	VideoService_GetPlayerURL_FullMethodName       = "/yandex.cloud.video.v1.VideoService/GetPlayerURL"
-	VideoService_BatchGetPlayerURLs_FullMethodName = "/yandex.cloud.video.v1.VideoService/BatchGetPlayerURLs"
-	VideoService_GetManifests_FullMethodName       = "/yandex.cloud.video.v1.VideoService/GetManifests"
+	VideoService_Get_FullMethodName                 = "/yandex.cloud.video.v1.VideoService/Get"
+	VideoService_List_FullMethodName                = "/yandex.cloud.video.v1.VideoService/List"
+	VideoService_BatchGet_FullMethodName            = "/yandex.cloud.video.v1.VideoService/BatchGet"
+	VideoService_Create_FullMethodName              = "/yandex.cloud.video.v1.VideoService/Create"
+	VideoService_Update_FullMethodName              = "/yandex.cloud.video.v1.VideoService/Update"
+	VideoService_Transcode_FullMethodName           = "/yandex.cloud.video.v1.VideoService/Transcode"
+	VideoService_Delete_FullMethodName              = "/yandex.cloud.video.v1.VideoService/Delete"
+	VideoService_BatchDelete_FullMethodName         = "/yandex.cloud.video.v1.VideoService/BatchDelete"
+	VideoService_PerformAction_FullMethodName       = "/yandex.cloud.video.v1.VideoService/PerformAction"
+	VideoService_GetPlayerURL_FullMethodName        = "/yandex.cloud.video.v1.VideoService/GetPlayerURL"
+	VideoService_BatchGetPlayerURLs_FullMethodName  = "/yandex.cloud.video.v1.VideoService/BatchGetPlayerURLs"
+	VideoService_GetManifests_FullMethodName        = "/yandex.cloud.video.v1.VideoService/GetManifests"
+	VideoService_GenerateDownloadURL_FullMethodName = "/yandex.cloud.video.v1.VideoService/GenerateDownloadURL"
 )
 
 // VideoServiceClient is the client API for VideoService service.
@@ -81,6 +82,9 @@ type VideoServiceClient interface {
 	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
 	// Supports different manifest types (HLS, DASH) and configuration parameters.
 	GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error)
+	// Generates a URL for downloading the original video file.
+	// This URL is time-limited and provides direct access to the source video.
+	GenerateDownloadURL(ctx context.Context, in *GenerateVideoDownloadURLRequest, opts ...grpc.CallOption) (*GenerateVideoDownloadURLResponse, error)
 }
 
 type videoServiceClient struct {
@@ -211,6 +215,16 @@ func (c *videoServiceClient) GetManifests(ctx context.Context, in *GetVideoManif
 	return out, nil
 }
 
+func (c *videoServiceClient) GenerateDownloadURL(ctx context.Context, in *GenerateVideoDownloadURLRequest, opts ...grpc.CallOption) (*GenerateVideoDownloadURLResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GenerateVideoDownloadURLResponse)
+	err := c.cc.Invoke(ctx, VideoService_GenerateDownloadURL_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VideoServiceServer is the server API for VideoService service.
 // All implementations should embed UnimplementedVideoServiceServer
 // for forward compatibility.
@@ -258,6 +272,9 @@ type VideoServiceServer interface {
 	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
 	// Supports different manifest types (HLS, DASH) and configuration parameters.
 	GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error)
+	// Generates a URL for downloading the original video file.
+	// This URL is time-limited and provides direct access to the source video.
+	GenerateDownloadURL(context.Context, *GenerateVideoDownloadURLRequest) (*GenerateVideoDownloadURLResponse, error)
 }
 
 // UnimplementedVideoServiceServer should be embedded to have
@@ -302,6 +319,9 @@ func (UnimplementedVideoServiceServer) BatchGetPlayerURLs(context.Context, *Batc
 }
 func (UnimplementedVideoServiceServer) GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetManifests not implemented")
+}
+func (UnimplementedVideoServiceServer) GenerateDownloadURL(context.Context, *GenerateVideoDownloadURLRequest) (*GenerateVideoDownloadURLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateDownloadURL not implemented")
 }
 func (UnimplementedVideoServiceServer) testEmbeddedByValue() {}
 
@@ -539,6 +559,24 @@ func _VideoService_GetManifests_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VideoService_GenerateDownloadURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateVideoDownloadURLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).GenerateDownloadURL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_GenerateDownloadURL_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).GenerateDownloadURL(ctx, req.(*GenerateVideoDownloadURLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VideoService_ServiceDesc is the grpc.ServiceDesc for VideoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -593,6 +631,10 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetManifests",
 			Handler:    _VideoService_GetManifests_Handler,
+		},
+		{
+			MethodName: "GenerateDownloadURL",
+			Handler:    _VideoService_GenerateDownloadURL_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -27,10 +27,14 @@ const (
 type Health int32
 
 const (
-	Health_HEALTH_UNKNOWN Health = 0 // Object is in unknown state (we have no data)
-	Health_ALIVE          Health = 1 // Object is alive and well (all hosts are alive)
-	Health_DEAD           Health = 2 // Object is inoperable (it cannot perform any of its essential functions)
-	Health_DEGRADED       Health = 3 // Object is partially alive (it can perform some of its essential functions)
+	// Object is in unknown state (we have no data)
+	Health_HEALTH_UNKNOWN Health = 0
+	// Object is alive and well (all hosts are alive)
+	Health_ALIVE Health = 1
+	// Object is inoperable (it cannot perform any of its essential functions)
+	Health_DEAD Health = 2
+	// Object is partially alive (it can perform some of its essential functions)
+	Health_DEGRADED Health = 3
 )
 
 // Enum value maps for Health.
@@ -152,8 +156,10 @@ type RetryPolicyConfig_RetryPolicy int32
 
 const (
 	RetryPolicyConfig_RETRY_POLICY_UNSPECIFIED RetryPolicyConfig_RetryPolicy = 0
-	RetryPolicyConfig_QUERY                    RetryPolicyConfig_RetryPolicy = 1
-	RetryPolicyConfig_TASK                     RetryPolicyConfig_RetryPolicy = 2
+	// Retry policy for queries.
+	RetryPolicyConfig_QUERY RetryPolicyConfig_RetryPolicy = 1
+	// Retry policy for tasks.
+	RetryPolicyConfig_TASK RetryPolicyConfig_RetryPolicy = 2
 )
 
 // Enum value maps for RetryPolicyConfig_RetryPolicy.
@@ -194,7 +200,7 @@ func (x RetryPolicyConfig_RetryPolicy) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RetryPolicyConfig_RetryPolicy.Descriptor instead.
 func (RetryPolicyConfig_RetryPolicy) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{7, 0}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{8, 0}
 }
 
 // Trino cluster.
@@ -559,19 +565,66 @@ func (*LoggingConfig_FolderId) isLoggingConfig_Destination() {}
 
 func (*LoggingConfig_LogGroupId) isLoggingConfig_Destination() {}
 
+type PrivateAccessConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enables access to the cluster only via private endpoint.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrivateAccessConfig) Reset() {
+	*x = PrivateAccessConfig{}
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrivateAccessConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrivateAccessConfig) ProtoMessage() {}
+
+func (x *PrivateAccessConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrivateAccessConfig.ProtoReflect.Descriptor instead.
+func (*PrivateAccessConfig) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *PrivateAccessConfig) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 type NetworkConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// IDs of VPC network subnets where instances of the cluster are attached.
 	SubnetIds []string `protobuf:"bytes,1,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
 	// User security groups.
 	SecurityGroupIds []string `protobuf:"bytes,2,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Private link configuration for secure connectivity to the cluster.
+	PrivateAccess *PrivateAccessConfig `protobuf:"bytes,3,opt,name=private_access,json=privateAccess,proto3" json:"private_access,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NetworkConfig) Reset() {
 	*x = NetworkConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -583,7 +636,7 @@ func (x *NetworkConfig) String() string {
 func (*NetworkConfig) ProtoMessage() {}
 
 func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -596,7 +649,7 @@ func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkConfig.ProtoReflect.Descriptor instead.
 func (*NetworkConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *NetworkConfig) GetSubnetIds() []string {
@@ -609,6 +662,13 @@ func (x *NetworkConfig) GetSubnetIds() []string {
 func (x *NetworkConfig) GetSecurityGroupIds() []string {
 	if x != nil {
 		return x.SecurityGroupIds
+	}
+	return nil
+}
+
+func (x *NetworkConfig) GetPrivateAccess() *PrivateAccessConfig {
+	if x != nil {
+		return x.PrivateAccess
 	}
 	return nil
 }
@@ -635,7 +695,7 @@ type TrinoConfig struct {
 
 func (x *TrinoConfig) Reset() {
 	*x = TrinoConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[4]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -647,7 +707,7 @@ func (x *TrinoConfig) String() string {
 func (*TrinoConfig) ProtoMessage() {}
 
 func (x *TrinoConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[4]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -660,7 +720,7 @@ func (x *TrinoConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrinoConfig.ProtoReflect.Descriptor instead.
 func (*TrinoConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TrinoConfig) GetCoordinatorConfig() *CoordinatorConfig {
@@ -722,7 +782,7 @@ type CoordinatorConfig struct {
 
 func (x *CoordinatorConfig) Reset() {
 	*x = CoordinatorConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -734,7 +794,7 @@ func (x *CoordinatorConfig) String() string {
 func (*CoordinatorConfig) ProtoMessage() {}
 
 func (x *CoordinatorConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -747,7 +807,7 @@ func (x *CoordinatorConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CoordinatorConfig.ProtoReflect.Descriptor instead.
 func (*CoordinatorConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CoordinatorConfig) GetResources() *Resources {
@@ -769,7 +829,7 @@ type WorkerConfig struct {
 
 func (x *WorkerConfig) Reset() {
 	*x = WorkerConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -781,7 +841,7 @@ func (x *WorkerConfig) String() string {
 func (*WorkerConfig) ProtoMessage() {}
 
 func (x *WorkerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -794,7 +854,7 @@ func (x *WorkerConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkerConfig.ProtoReflect.Descriptor instead.
 func (*WorkerConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *WorkerConfig) GetResources() *Resources {
@@ -825,7 +885,7 @@ type RetryPolicyConfig struct {
 
 func (x *RetryPolicyConfig) Reset() {
 	*x = RetryPolicyConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[7]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -837,7 +897,7 @@ func (x *RetryPolicyConfig) String() string {
 func (*RetryPolicyConfig) ProtoMessage() {}
 
 func (x *RetryPolicyConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[7]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -850,7 +910,7 @@ func (x *RetryPolicyConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetryPolicyConfig.ProtoReflect.Descriptor instead.
 func (*RetryPolicyConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RetryPolicyConfig) GetPolicy() RetryPolicyConfig_RetryPolicy {
@@ -885,7 +945,7 @@ type TLSConfig struct {
 
 func (x *TLSConfig) Reset() {
 	*x = TLSConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -897,7 +957,7 @@ func (x *TLSConfig) String() string {
 func (*TLSConfig) ProtoMessage() {}
 
 func (x *TLSConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -910,7 +970,7 @@ func (x *TLSConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TLSConfig.ProtoReflect.Descriptor instead.
 func (*TLSConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *TLSConfig) GetTrustedCertificates() []string {
@@ -932,7 +992,7 @@ type ExchangeManagerStorage struct {
 
 func (x *ExchangeManagerStorage) Reset() {
 	*x = ExchangeManagerStorage{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -944,7 +1004,7 @@ func (x *ExchangeManagerStorage) String() string {
 func (*ExchangeManagerStorage) ProtoMessage() {}
 
 func (x *ExchangeManagerStorage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -957,7 +1017,7 @@ func (x *ExchangeManagerStorage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeManagerStorage.ProtoReflect.Descriptor instead.
 func (*ExchangeManagerStorage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ExchangeManagerStorage) GetType() isExchangeManagerStorage_Type {
@@ -990,15 +1050,16 @@ func (*ExchangeManagerStorage_ServiceS3_) isExchangeManagerStorage_Type() {}
 type ExchangeManagerConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Additional properties.
-	AdditionalProperties map[string]string       `protobuf:"bytes,1,rep,name=additional_properties,json=additionalProperties,proto3" json:"additional_properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Storage              *ExchangeManagerStorage `protobuf:"bytes,2,opt,name=storage,proto3" json:"storage,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	AdditionalProperties map[string]string `protobuf:"bytes,1,rep,name=additional_properties,json=additionalProperties,proto3" json:"additional_properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Storage for spooled data by exchange manager.
+	Storage       *ExchangeManagerStorage `protobuf:"bytes,2,opt,name=storage,proto3" json:"storage,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ExchangeManagerConfig) Reset() {
 	*x = ExchangeManagerConfig{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1010,7 +1071,7 @@ func (x *ExchangeManagerConfig) String() string {
 func (*ExchangeManagerConfig) ProtoMessage() {}
 
 func (x *ExchangeManagerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1023,7 +1084,7 @@ func (x *ExchangeManagerConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeManagerConfig.ProtoReflect.Descriptor instead.
 func (*ExchangeManagerConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ExchangeManagerConfig) GetAdditionalProperties() map[string]string {
@@ -1050,7 +1111,7 @@ type Resources struct {
 
 func (x *Resources) Reset() {
 	*x = Resources{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1062,7 +1123,7 @@ func (x *Resources) String() string {
 func (*Resources) ProtoMessage() {}
 
 func (x *Resources) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1075,7 +1136,7 @@ func (x *Resources) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Resources.ProtoReflect.Descriptor instead.
 func (*Resources) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Resources) GetResourcePresetId() string {
@@ -1095,7 +1156,7 @@ type FixedScalePolicy struct {
 
 func (x *FixedScalePolicy) Reset() {
 	*x = FixedScalePolicy{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1107,7 +1168,7 @@ func (x *FixedScalePolicy) String() string {
 func (*FixedScalePolicy) ProtoMessage() {}
 
 func (x *FixedScalePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1120,7 +1181,7 @@ func (x *FixedScalePolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FixedScalePolicy.ProtoReflect.Descriptor instead.
 func (*FixedScalePolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *FixedScalePolicy) GetCount() int64 {
@@ -1131,16 +1192,18 @@ func (x *FixedScalePolicy) GetCount() int64 {
 }
 
 type AutoScalePolicy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MinCount      int64                  `protobuf:"varint,1,opt,name=min_count,json=minCount,proto3" json:"min_count,omitempty"`
-	MaxCount      int64                  `protobuf:"varint,2,opt,name=max_count,json=maxCount,proto3" json:"max_count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Minimum number of worker instances.
+	MinCount int64 `protobuf:"varint,1,opt,name=min_count,json=minCount,proto3" json:"min_count,omitempty"`
+	// Maximum number of worker instances.
+	MaxCount      int64 `protobuf:"varint,2,opt,name=max_count,json=maxCount,proto3" json:"max_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AutoScalePolicy) Reset() {
 	*x = AutoScalePolicy{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1152,7 +1215,7 @@ func (x *AutoScalePolicy) String() string {
 func (*AutoScalePolicy) ProtoMessage() {}
 
 func (x *AutoScalePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1165,7 +1228,7 @@ func (x *AutoScalePolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AutoScalePolicy.ProtoReflect.Descriptor instead.
 func (*AutoScalePolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *AutoScalePolicy) GetMinCount() int64 {
@@ -1198,7 +1261,7 @@ type WorkerConfig_WorkerScalePolicy struct {
 
 func (x *WorkerConfig_WorkerScalePolicy) Reset() {
 	*x = WorkerConfig_WorkerScalePolicy{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[15]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1210,7 +1273,7 @@ func (x *WorkerConfig_WorkerScalePolicy) String() string {
 func (*WorkerConfig_WorkerScalePolicy) ProtoMessage() {}
 
 func (x *WorkerConfig_WorkerScalePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[15]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1223,7 +1286,7 @@ func (x *WorkerConfig_WorkerScalePolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkerConfig_WorkerScalePolicy.ProtoReflect.Descriptor instead.
 func (*WorkerConfig_WorkerScalePolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{6, 0}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{7, 0}
 }
 
 func (x *WorkerConfig_WorkerScalePolicy) GetScaleType() isWorkerConfig_WorkerScalePolicy_ScaleType {
@@ -1279,7 +1342,7 @@ type ExchangeManagerStorage_ServiceS3 struct {
 
 func (x *ExchangeManagerStorage_ServiceS3) Reset() {
 	*x = ExchangeManagerStorage_ServiceS3{}
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[17]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1291,7 +1354,7 @@ func (x *ExchangeManagerStorage_ServiceS3) String() string {
 func (*ExchangeManagerStorage_ServiceS3) ProtoMessage() {}
 
 func (x *ExchangeManagerStorage_ServiceS3) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[17]
+	mi := &file_yandex_cloud_trino_v1_cluster_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1304,7 +1367,7 @@ func (x *ExchangeManagerStorage_ServiceS3) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeManagerStorage_ServiceS3.ProtoReflect.Descriptor instead.
 func (*ExchangeManagerStorage_ServiceS3) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{9, 0}
+	return file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP(), []int{10, 0}
 }
 
 var File_yandex_cloud_trino_v1_cluster_proto protoreflect.FileDescriptor
@@ -1357,11 +1420,14 @@ const file_yandex_cloud_trino_v1_cluster_proto_rawDesc = "" +
 	"\flog_group_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
 	"logGroupId\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestination\"\\\n" +
+	"\vdestination\"/\n" +
+	"\x13PrivateAccessConfig\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"\xaf\x01\n" +
 	"\rNetworkConfig\x12\x1d\n" +
 	"\n" +
 	"subnet_ids\x18\x01 \x03(\tR\tsubnetIds\x12,\n" +
-	"\x12security_group_ids\x18\x02 \x03(\tR\x10securityGroupIds\"\x8c\x04\n" +
+	"\x12security_group_ids\x18\x02 \x03(\tR\x10securityGroupIds\x12Q\n" +
+	"\x0eprivate_access\x18\x03 \x01(\v2*.yandex.cloud.trino.v1.PrivateAccessConfigR\rprivateAccess\"\x8c\x04\n" +
 	"\vTrinoConfig\x12]\n" +
 	"\x12coordinator_config\x18\x01 \x01(\v2(.yandex.cloud.trino.v1.CoordinatorConfigB\x04\xe8\xc71\x01R\x11coordinatorConfig\x12N\n" +
 	"\rworker_config\x18\x02 \x01(\v2#.yandex.cloud.trino.v1.WorkerConfigB\x04\xe8\xc71\x01R\fworkerConfig\x12\x18\n" +
@@ -1433,7 +1499,7 @@ func file_yandex_cloud_trino_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_trino_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_trino_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_yandex_cloud_trino_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_yandex_cloud_trino_v1_cluster_proto_goTypes = []any{
 	(Health)(0),                              // 0: yandex.cloud.trino.v1.Health
 	(Cluster_Status)(0),                      // 1: yandex.cloud.trino.v1.Cluster.Status
@@ -1441,63 +1507,65 @@ var file_yandex_cloud_trino_v1_cluster_proto_goTypes = []any{
 	(*Cluster)(nil),                          // 3: yandex.cloud.trino.v1.Cluster
 	(*Monitoring)(nil),                       // 4: yandex.cloud.trino.v1.Monitoring
 	(*LoggingConfig)(nil),                    // 5: yandex.cloud.trino.v1.LoggingConfig
-	(*NetworkConfig)(nil),                    // 6: yandex.cloud.trino.v1.NetworkConfig
-	(*TrinoConfig)(nil),                      // 7: yandex.cloud.trino.v1.TrinoConfig
-	(*CoordinatorConfig)(nil),                // 8: yandex.cloud.trino.v1.CoordinatorConfig
-	(*WorkerConfig)(nil),                     // 9: yandex.cloud.trino.v1.WorkerConfig
-	(*RetryPolicyConfig)(nil),                // 10: yandex.cloud.trino.v1.RetryPolicyConfig
-	(*TLSConfig)(nil),                        // 11: yandex.cloud.trino.v1.TLSConfig
-	(*ExchangeManagerStorage)(nil),           // 12: yandex.cloud.trino.v1.ExchangeManagerStorage
-	(*ExchangeManagerConfig)(nil),            // 13: yandex.cloud.trino.v1.ExchangeManagerConfig
-	(*Resources)(nil),                        // 14: yandex.cloud.trino.v1.Resources
-	(*FixedScalePolicy)(nil),                 // 15: yandex.cloud.trino.v1.FixedScalePolicy
-	(*AutoScalePolicy)(nil),                  // 16: yandex.cloud.trino.v1.AutoScalePolicy
-	nil,                                      // 17: yandex.cloud.trino.v1.Cluster.LabelsEntry
-	(*WorkerConfig_WorkerScalePolicy)(nil),   // 18: yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy
-	nil,                                      // 19: yandex.cloud.trino.v1.RetryPolicyConfig.AdditionalPropertiesEntry
-	(*ExchangeManagerStorage_ServiceS3)(nil), // 20: yandex.cloud.trino.v1.ExchangeManagerStorage.ServiceS3
-	nil,                                      // 21: yandex.cloud.trino.v1.ExchangeManagerConfig.AdditionalPropertiesEntry
-	(*timestamppb.Timestamp)(nil),            // 22: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),                // 23: yandex.cloud.trino.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),             // 24: yandex.cloud.trino.v1.MaintenanceOperation
-	(v1.LogLevel_Level)(0),                   // 25: yandex.cloud.logging.v1.LogLevel.Level
-	(*AccessControlConfig)(nil),              // 26: yandex.cloud.trino.v1.AccessControlConfig
-	(*ResourceManagementConfig)(nil),         // 27: yandex.cloud.trino.v1.ResourceManagementConfig
+	(*PrivateAccessConfig)(nil),              // 6: yandex.cloud.trino.v1.PrivateAccessConfig
+	(*NetworkConfig)(nil),                    // 7: yandex.cloud.trino.v1.NetworkConfig
+	(*TrinoConfig)(nil),                      // 8: yandex.cloud.trino.v1.TrinoConfig
+	(*CoordinatorConfig)(nil),                // 9: yandex.cloud.trino.v1.CoordinatorConfig
+	(*WorkerConfig)(nil),                     // 10: yandex.cloud.trino.v1.WorkerConfig
+	(*RetryPolicyConfig)(nil),                // 11: yandex.cloud.trino.v1.RetryPolicyConfig
+	(*TLSConfig)(nil),                        // 12: yandex.cloud.trino.v1.TLSConfig
+	(*ExchangeManagerStorage)(nil),           // 13: yandex.cloud.trino.v1.ExchangeManagerStorage
+	(*ExchangeManagerConfig)(nil),            // 14: yandex.cloud.trino.v1.ExchangeManagerConfig
+	(*Resources)(nil),                        // 15: yandex.cloud.trino.v1.Resources
+	(*FixedScalePolicy)(nil),                 // 16: yandex.cloud.trino.v1.FixedScalePolicy
+	(*AutoScalePolicy)(nil),                  // 17: yandex.cloud.trino.v1.AutoScalePolicy
+	nil,                                      // 18: yandex.cloud.trino.v1.Cluster.LabelsEntry
+	(*WorkerConfig_WorkerScalePolicy)(nil),   // 19: yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy
+	nil,                                      // 20: yandex.cloud.trino.v1.RetryPolicyConfig.AdditionalPropertiesEntry
+	(*ExchangeManagerStorage_ServiceS3)(nil), // 21: yandex.cloud.trino.v1.ExchangeManagerStorage.ServiceS3
+	nil,                                      // 22: yandex.cloud.trino.v1.ExchangeManagerConfig.AdditionalPropertiesEntry
+	(*timestamppb.Timestamp)(nil),            // 23: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),                // 24: yandex.cloud.trino.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),             // 25: yandex.cloud.trino.v1.MaintenanceOperation
+	(v1.LogLevel_Level)(0),                   // 26: yandex.cloud.logging.v1.LogLevel.Level
+	(*AccessControlConfig)(nil),              // 27: yandex.cloud.trino.v1.AccessControlConfig
+	(*ResourceManagementConfig)(nil),         // 28: yandex.cloud.trino.v1.ResourceManagementConfig
 }
 var file_yandex_cloud_trino_v1_cluster_proto_depIdxs = []int32{
-	22, // 0: yandex.cloud.trino.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	17, // 1: yandex.cloud.trino.v1.Cluster.labels:type_name -> yandex.cloud.trino.v1.Cluster.LabelsEntry
+	23, // 0: yandex.cloud.trino.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	18, // 1: yandex.cloud.trino.v1.Cluster.labels:type_name -> yandex.cloud.trino.v1.Cluster.LabelsEntry
 	4,  // 2: yandex.cloud.trino.v1.Cluster.monitoring:type_name -> yandex.cloud.trino.v1.Monitoring
-	7,  // 3: yandex.cloud.trino.v1.Cluster.trino:type_name -> yandex.cloud.trino.v1.TrinoConfig
+	8,  // 3: yandex.cloud.trino.v1.Cluster.trino:type_name -> yandex.cloud.trino.v1.TrinoConfig
 	0,  // 4: yandex.cloud.trino.v1.Cluster.health:type_name -> yandex.cloud.trino.v1.Health
 	1,  // 5: yandex.cloud.trino.v1.Cluster.status:type_name -> yandex.cloud.trino.v1.Cluster.Status
-	6,  // 6: yandex.cloud.trino.v1.Cluster.network:type_name -> yandex.cloud.trino.v1.NetworkConfig
+	7,  // 6: yandex.cloud.trino.v1.Cluster.network:type_name -> yandex.cloud.trino.v1.NetworkConfig
 	5,  // 7: yandex.cloud.trino.v1.Cluster.logging:type_name -> yandex.cloud.trino.v1.LoggingConfig
-	23, // 8: yandex.cloud.trino.v1.Cluster.maintenance_window:type_name -> yandex.cloud.trino.v1.MaintenanceWindow
-	24, // 9: yandex.cloud.trino.v1.Cluster.planned_operation:type_name -> yandex.cloud.trino.v1.MaintenanceOperation
-	25, // 10: yandex.cloud.trino.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	8,  // 11: yandex.cloud.trino.v1.TrinoConfig.coordinator_config:type_name -> yandex.cloud.trino.v1.CoordinatorConfig
-	9,  // 12: yandex.cloud.trino.v1.TrinoConfig.worker_config:type_name -> yandex.cloud.trino.v1.WorkerConfig
-	10, // 13: yandex.cloud.trino.v1.TrinoConfig.retry_policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig
-	26, // 14: yandex.cloud.trino.v1.TrinoConfig.access_control:type_name -> yandex.cloud.trino.v1.AccessControlConfig
-	27, // 15: yandex.cloud.trino.v1.TrinoConfig.resource_management:type_name -> yandex.cloud.trino.v1.ResourceManagementConfig
-	11, // 16: yandex.cloud.trino.v1.TrinoConfig.tls:type_name -> yandex.cloud.trino.v1.TLSConfig
-	14, // 17: yandex.cloud.trino.v1.CoordinatorConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
-	14, // 18: yandex.cloud.trino.v1.WorkerConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
-	18, // 19: yandex.cloud.trino.v1.WorkerConfig.scale_policy:type_name -> yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy
-	2,  // 20: yandex.cloud.trino.v1.RetryPolicyConfig.policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig.RetryPolicy
-	13, // 21: yandex.cloud.trino.v1.RetryPolicyConfig.exchange_manager:type_name -> yandex.cloud.trino.v1.ExchangeManagerConfig
-	19, // 22: yandex.cloud.trino.v1.RetryPolicyConfig.additional_properties:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig.AdditionalPropertiesEntry
-	20, // 23: yandex.cloud.trino.v1.ExchangeManagerStorage.service_s3:type_name -> yandex.cloud.trino.v1.ExchangeManagerStorage.ServiceS3
-	21, // 24: yandex.cloud.trino.v1.ExchangeManagerConfig.additional_properties:type_name -> yandex.cloud.trino.v1.ExchangeManagerConfig.AdditionalPropertiesEntry
-	12, // 25: yandex.cloud.trino.v1.ExchangeManagerConfig.storage:type_name -> yandex.cloud.trino.v1.ExchangeManagerStorage
-	15, // 26: yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy.fixed_scale:type_name -> yandex.cloud.trino.v1.FixedScalePolicy
-	16, // 27: yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy.auto_scale:type_name -> yandex.cloud.trino.v1.AutoScalePolicy
-	28, // [28:28] is the sub-list for method output_type
-	28, // [28:28] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	24, // 8: yandex.cloud.trino.v1.Cluster.maintenance_window:type_name -> yandex.cloud.trino.v1.MaintenanceWindow
+	25, // 9: yandex.cloud.trino.v1.Cluster.planned_operation:type_name -> yandex.cloud.trino.v1.MaintenanceOperation
+	26, // 10: yandex.cloud.trino.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	6,  // 11: yandex.cloud.trino.v1.NetworkConfig.private_access:type_name -> yandex.cloud.trino.v1.PrivateAccessConfig
+	9,  // 12: yandex.cloud.trino.v1.TrinoConfig.coordinator_config:type_name -> yandex.cloud.trino.v1.CoordinatorConfig
+	10, // 13: yandex.cloud.trino.v1.TrinoConfig.worker_config:type_name -> yandex.cloud.trino.v1.WorkerConfig
+	11, // 14: yandex.cloud.trino.v1.TrinoConfig.retry_policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig
+	27, // 15: yandex.cloud.trino.v1.TrinoConfig.access_control:type_name -> yandex.cloud.trino.v1.AccessControlConfig
+	28, // 16: yandex.cloud.trino.v1.TrinoConfig.resource_management:type_name -> yandex.cloud.trino.v1.ResourceManagementConfig
+	12, // 17: yandex.cloud.trino.v1.TrinoConfig.tls:type_name -> yandex.cloud.trino.v1.TLSConfig
+	15, // 18: yandex.cloud.trino.v1.CoordinatorConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
+	15, // 19: yandex.cloud.trino.v1.WorkerConfig.resources:type_name -> yandex.cloud.trino.v1.Resources
+	19, // 20: yandex.cloud.trino.v1.WorkerConfig.scale_policy:type_name -> yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy
+	2,  // 21: yandex.cloud.trino.v1.RetryPolicyConfig.policy:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig.RetryPolicy
+	14, // 22: yandex.cloud.trino.v1.RetryPolicyConfig.exchange_manager:type_name -> yandex.cloud.trino.v1.ExchangeManagerConfig
+	20, // 23: yandex.cloud.trino.v1.RetryPolicyConfig.additional_properties:type_name -> yandex.cloud.trino.v1.RetryPolicyConfig.AdditionalPropertiesEntry
+	21, // 24: yandex.cloud.trino.v1.ExchangeManagerStorage.service_s3:type_name -> yandex.cloud.trino.v1.ExchangeManagerStorage.ServiceS3
+	22, // 25: yandex.cloud.trino.v1.ExchangeManagerConfig.additional_properties:type_name -> yandex.cloud.trino.v1.ExchangeManagerConfig.AdditionalPropertiesEntry
+	13, // 26: yandex.cloud.trino.v1.ExchangeManagerConfig.storage:type_name -> yandex.cloud.trino.v1.ExchangeManagerStorage
+	16, // 27: yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy.fixed_scale:type_name -> yandex.cloud.trino.v1.FixedScalePolicy
+	17, // 28: yandex.cloud.trino.v1.WorkerConfig.WorkerScalePolicy.auto_scale:type_name -> yandex.cloud.trino.v1.AutoScalePolicy
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_trino_v1_cluster_proto_init() }
@@ -1512,10 +1580,10 @@ func file_yandex_cloud_trino_v1_cluster_proto_init() {
 		(*LoggingConfig_FolderId)(nil),
 		(*LoggingConfig_LogGroupId)(nil),
 	}
-	file_yandex_cloud_trino_v1_cluster_proto_msgTypes[9].OneofWrappers = []any{
+	file_yandex_cloud_trino_v1_cluster_proto_msgTypes[10].OneofWrappers = []any{
 		(*ExchangeManagerStorage_ServiceS3_)(nil),
 	}
-	file_yandex_cloud_trino_v1_cluster_proto_msgTypes[15].OneofWrappers = []any{
+	file_yandex_cloud_trino_v1_cluster_proto_msgTypes[16].OneofWrappers = []any{
 		(*WorkerConfig_WorkerScalePolicy_FixedScale)(nil),
 		(*WorkerConfig_WorkerScalePolicy_AutoScale)(nil),
 	}
@@ -1525,7 +1593,7 @@ func file_yandex_cloud_trino_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_trino_v1_cluster_proto_rawDesc), len(file_yandex_cloud_trino_v1_cluster_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   19,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -2983,8 +2983,16 @@ type ClickhouseConfig_Kafka struct {
 	//
 	// Default value: **AUTO_OFFSET_RESET_LARGEST**.
 	AutoOffsetReset ClickhouseConfig_Kafka_AutoOffsetReset `protobuf:"varint,9,opt,name=auto_offset_reset,json=autoOffsetReset,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_Kafka_AutoOffsetReset" json:"auto_offset_reset,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Maximum Kafka protocol request message size.
+	//
+	// Default value: **1000000**.
+	MessageMaxBytes *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=message_max_bytes,json=messageMaxBytes,proto3" json:"message_max_bytes,omitempty"`
+	// Maximum size (in bytes) of all messages batched in one MessageSet, including protocol framing overhead.
+	//
+	// Default value: **1000000**.
+	BatchSize     *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=batch_size,json=batchSize,proto3" json:"batch_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClickhouseConfig_Kafka) Reset() {
@@ -3078,6 +3086,20 @@ func (x *ClickhouseConfig_Kafka) GetAutoOffsetReset() ClickhouseConfig_Kafka_Aut
 		return x.AutoOffsetReset
 	}
 	return ClickhouseConfig_Kafka_AUTO_OFFSET_RESET_UNSPECIFIED
+}
+
+func (x *ClickhouseConfig_Kafka) GetMessageMaxBytes() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MessageMaxBytes
+	}
+	return nil
+}
+
+func (x *ClickhouseConfig_Kafka) GetBatchSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BatchSize
+	}
+	return nil
 }
 
 type ClickhouseConfig_KafkaTopic struct {
@@ -4724,7 +4746,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\xab\x01\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"Ĭ\x01\n" +
 	"\x10ClickhouseConfig\x12V\n" +
 	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x12backgroundPoolSize\x12}\n" +
 	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12g\n" +
@@ -5027,7 +5049,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\tretention\x18\x03 \x03(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.RetentionR\tretention\x1a;\n" +
 	"\tRetention\x12\x10\n" +
 	"\x03age\x18\x01 \x01(\x03R\x03age\x12\x1c\n" +
-	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xbc\x0e\n" +
+	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xe8\x0f\n" +
 	"\x05Kafka\x12{\n" +
 	"\x11security_protocol\x18\x01 \x01(\x0e2N.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocolR\x10securityProtocol\x12r\n" +
 	"\x0esasl_mechanism\x18\x02 \x01(\x0e2K.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanismR\rsaslMechanism\x12#\n" +
@@ -5037,7 +5059,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x14max_poll_interval_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x11maxPollIntervalMs\x12R\n" +
 	"\x12session_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x10sessionTimeoutMs\x12Y\n" +
 	"\x05debug\x18\b \x01(\x0e2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.DebugR\x05debug\x12y\n" +
-	"\x11auto_offset_reset\x18\t \x01(\x0e2M.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetResetR\x0fautoOffsetReset\"\xb7\x01\n" +
+	"\x11auto_offset_reset\x18\t \x01(\x0e2M.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetResetR\x0fautoOffsetReset\x12\\\n" +
+	"\x11message_max_bytes\x18\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f1000-1000000000R\x0fmessageMaxBytes\x12L\n" +
+	"\n" +
+	"batch_size\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\tbatchSize\"\xb7\x01\n" +
 	"\x10SecurityProtocol\x12!\n" +
 	"\x1dSECURITY_PROTOCOL_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bSECURITY_PROTOCOL_PLAINTEXT\x10\x01\x12\x19\n" +
@@ -5331,33 +5357,35 @@ var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_depIdxs = []int3
 	39,  // 142: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.session_timeout_ms:type_name -> google.protobuf.Int64Value
 	8,   // 143: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.debug:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
 	9,   // 144: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.auto_offset_reset:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
-	17,  // 145: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
-	39,  // 146: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_size_in_bytes:type_name -> google.protobuf.Int64Value
-	39,  // 147: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entries:type_name -> google.protobuf.Int64Value
-	39,  // 148: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_bytes:type_name -> google.protobuf.Int64Value
-	39,  // 149: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_rows:type_name -> google.protobuf.Int64Value
-	39,  // 150: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge.port:type_name -> google.protobuf.Int64Value
-	32,  // 151: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.id:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
-	33,  // 152: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.key:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
-	34,  // 153: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_min:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	34,  // 154: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_max:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	34,  // 155: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	4,   // 156: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.type:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
-	40,  // 157: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.allow_read_expired_keys:type_name -> google.protobuf.BoolValue
-	40,  // 158: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.access_to_key_from_attributes:type_name -> google.protobuf.BoolValue
-	35,  // 159: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.headers:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
-	36,  // 160: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.replicas:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
-	40,  // 161: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.close_connection:type_name -> google.protobuf.BoolValue
-	40,  // 162: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.share_connection:type_name -> google.protobuf.BoolValue
-	40,  // 163: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource.secure:type_name -> google.protobuf.BoolValue
-	5,   // 164: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.ssl_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
-	34,  // 165: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	38,  // 166: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.retention:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
-	167, // [167:167] is the sub-list for method output_type
-	167, // [167:167] is the sub-list for method input_type
-	167, // [167:167] is the sub-list for extension type_name
-	167, // [167:167] is the sub-list for extension extendee
-	0,   // [0:167] is the sub-list for field type_name
+	39,  // 145: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.message_max_bytes:type_name -> google.protobuf.Int64Value
+	39,  // 146: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.batch_size:type_name -> google.protobuf.Int64Value
+	17,  // 147: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
+	39,  // 148: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_size_in_bytes:type_name -> google.protobuf.Int64Value
+	39,  // 149: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entries:type_name -> google.protobuf.Int64Value
+	39,  // 150: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_bytes:type_name -> google.protobuf.Int64Value
+	39,  // 151: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_rows:type_name -> google.protobuf.Int64Value
+	39,  // 152: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge.port:type_name -> google.protobuf.Int64Value
+	32,  // 153: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.id:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
+	33,  // 154: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.key:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
+	34,  // 155: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_min:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	34,  // 156: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_max:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	34,  // 157: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	4,   // 158: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.type:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
+	40,  // 159: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.allow_read_expired_keys:type_name -> google.protobuf.BoolValue
+	40,  // 160: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.access_to_key_from_attributes:type_name -> google.protobuf.BoolValue
+	35,  // 161: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.headers:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
+	36,  // 162: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.replicas:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
+	40,  // 163: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.close_connection:type_name -> google.protobuf.BoolValue
+	40,  // 164: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.share_connection:type_name -> google.protobuf.BoolValue
+	40,  // 165: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource.secure:type_name -> google.protobuf.BoolValue
+	5,   // 166: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.ssl_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
+	34,  // 167: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	38,  // 168: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.retention:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
+	169, // [169:169] is the sub-list for method output_type
+	169, // [169:169] is the sub-list for method input_type
+	169, // [169:169] is the sub-list for extension type_name
+	169, // [169:169] is the sub-list for extension extendee
+	0,   // [0:169] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_init() }

@@ -14,6 +14,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -332,9 +333,11 @@ type UpdateUserRequest struct {
 	// New settings for this user
 	Settings *UserSettings `protobuf:"bytes,6,opt,name=settings,proto3" json:"settings,omitempty"`
 	// New user grants
-	Grants        []string `protobuf:"bytes,7,rep,name=grants,proto3" json:"grants,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Grants []string `protobuf:"bytes,7,rep,name=grants,proto3" json:"grants,omitempty"`
+	// Deletion Protection inhibits deletion of the user
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UpdateUserRequest) Reset() {
@@ -412,6 +415,13 @@ func (x *UpdateUserRequest) GetSettings() *UserSettings {
 func (x *UpdateUserRequest) GetGrants() []string {
 	if x != nil {
 		return x.Grants
+	}
+	return nil
+}
+
+func (x *UpdateUserRequest) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
 	}
 	return nil
 }
@@ -584,7 +594,7 @@ var File_yandex_cloud_mdb_spqr_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/mdb/spqr/v1/user_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a google/protobuf/field_mask.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\"y\n" +
+	"+yandex/cloud/mdb/spqr/v1/user_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a google/protobuf/field_mask.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\"y\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
@@ -606,7 +616,7 @@ const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xa0\x03\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xed\x03\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
@@ -616,7 +626,8 @@ const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x058-128R\bpassword\x12F\n" +
 	"\vpermissions\x18\x05 \x03(\v2$.yandex.cloud.mdb.spqr.v1.PermissionR\vpermissions\x12B\n" +
 	"\bsettings\x18\x06 \x01(\v2&.yandex.cloud.mdb.spqr.v1.UserSettingsR\bsettings\x122\n" +
-	"\x06grants\x18\a \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\"P\n" +
+	"\x06grants\x18\a \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
+	"\x13deletion_protection\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"P\n" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
@@ -668,7 +679,8 @@ var file_yandex_cloud_mdb_spqr_v1_user_service_proto_goTypes = []any{
 	(*fieldmaskpb.FieldMask)(nil), // 11: google.protobuf.FieldMask
 	(*Permission)(nil),            // 12: yandex.cloud.mdb.spqr.v1.Permission
 	(*UserSettings)(nil),          // 13: yandex.cloud.mdb.spqr.v1.UserSettings
-	(*operation.Operation)(nil),   // 14: yandex.cloud.operation.Operation
+	(*wrapperspb.BoolValue)(nil),  // 14: google.protobuf.BoolValue
+	(*operation.Operation)(nil),   // 15: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_spqr_v1_user_service_proto_depIdxs = []int32{
 	9,  // 0: yandex.cloud.mdb.spqr.v1.ListUsersResponse.users:type_name -> yandex.cloud.mdb.spqr.v1.User
@@ -676,21 +688,22 @@ var file_yandex_cloud_mdb_spqr_v1_user_service_proto_depIdxs = []int32{
 	11, // 2: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
 	12, // 3: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.permissions:type_name -> yandex.cloud.mdb.spqr.v1.Permission
 	13, // 4: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.settings:type_name -> yandex.cloud.mdb.spqr.v1.UserSettings
-	0,  // 5: yandex.cloud.mdb.spqr.v1.UserService.Get:input_type -> yandex.cloud.mdb.spqr.v1.GetUserRequest
-	1,  // 6: yandex.cloud.mdb.spqr.v1.UserService.List:input_type -> yandex.cloud.mdb.spqr.v1.ListUsersRequest
-	3,  // 7: yandex.cloud.mdb.spqr.v1.UserService.Create:input_type -> yandex.cloud.mdb.spqr.v1.CreateUserRequest
-	5,  // 8: yandex.cloud.mdb.spqr.v1.UserService.Update:input_type -> yandex.cloud.mdb.spqr.v1.UpdateUserRequest
-	7,  // 9: yandex.cloud.mdb.spqr.v1.UserService.Delete:input_type -> yandex.cloud.mdb.spqr.v1.DeleteUserRequest
-	9,  // 10: yandex.cloud.mdb.spqr.v1.UserService.Get:output_type -> yandex.cloud.mdb.spqr.v1.User
-	2,  // 11: yandex.cloud.mdb.spqr.v1.UserService.List:output_type -> yandex.cloud.mdb.spqr.v1.ListUsersResponse
-	14, // 12: yandex.cloud.mdb.spqr.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
-	14, // 13: yandex.cloud.mdb.spqr.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
-	14, // 14: yandex.cloud.mdb.spqr.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	14, // 5: yandex.cloud.mdb.spqr.v1.UpdateUserRequest.deletion_protection:type_name -> google.protobuf.BoolValue
+	0,  // 6: yandex.cloud.mdb.spqr.v1.UserService.Get:input_type -> yandex.cloud.mdb.spqr.v1.GetUserRequest
+	1,  // 7: yandex.cloud.mdb.spqr.v1.UserService.List:input_type -> yandex.cloud.mdb.spqr.v1.ListUsersRequest
+	3,  // 8: yandex.cloud.mdb.spqr.v1.UserService.Create:input_type -> yandex.cloud.mdb.spqr.v1.CreateUserRequest
+	5,  // 9: yandex.cloud.mdb.spqr.v1.UserService.Update:input_type -> yandex.cloud.mdb.spqr.v1.UpdateUserRequest
+	7,  // 10: yandex.cloud.mdb.spqr.v1.UserService.Delete:input_type -> yandex.cloud.mdb.spqr.v1.DeleteUserRequest
+	9,  // 11: yandex.cloud.mdb.spqr.v1.UserService.Get:output_type -> yandex.cloud.mdb.spqr.v1.User
+	2,  // 12: yandex.cloud.mdb.spqr.v1.UserService.List:output_type -> yandex.cloud.mdb.spqr.v1.ListUsersResponse
+	15, // 13: yandex.cloud.mdb.spqr.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
+	15, // 14: yandex.cloud.mdb.spqr.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
+	15, // 15: yandex.cloud.mdb.spqr.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // [11:16] is the sub-list for method output_type
+	6,  // [6:11] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_spqr_v1_user_service_proto_init() }

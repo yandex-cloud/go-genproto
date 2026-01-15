@@ -213,6 +213,14 @@ const (
 	UnitFormat_UNIT_MILLICORE_CPU UnitFormat = 93
 	// == 1000 UNIT_MILLICORE_CPU
 	UnitFormat_UNIT_CORE_CPU UnitFormat = 94
+	// Ampere (A).
+	UnitFormat_UNIT_AMPERE UnitFormat = 95
+	// Volt (V).
+	UnitFormat_UNIT_VOLT UnitFormat = 96
+	// Watt (W).
+	UnitFormat_UNIT_WATT UnitFormat = 97
+	// Ohm (Ohm).
+	UnitFormat_UNIT_OHM UnitFormat = 98
 )
 
 // Enum value maps for UnitFormat.
@@ -313,6 +321,10 @@ var (
 		92: "UNIT_MICROCORE_CPU",
 		93: "UNIT_MILLICORE_CPU",
 		94: "UNIT_CORE_CPU",
+		95: "UNIT_AMPERE",
+		96: "UNIT_VOLT",
+		97: "UNIT_WATT",
+		98: "UNIT_OHM",
 	}
 	UnitFormat_value = map[string]int32{
 		"UNIT_FORMAT_UNSPECIFIED":       0,
@@ -410,6 +422,10 @@ var (
 		"UNIT_MICROCORE_CPU":            92,
 		"UNIT_MILLICORE_CPU":            93,
 		"UNIT_CORE_CPU":                 94,
+		"UNIT_AMPERE":                   95,
+		"UNIT_VOLT":                     96,
+		"UNIT_WATT":                     97,
+		"UNIT_OHM":                      98,
 	}
 )
 
@@ -444,7 +460,7 @@ var File_yandex_cloud_monitoring_v3_unit_format_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_monitoring_v3_unit_format_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/monitoring/v3/unit_format.proto\x12\x1ayandex.cloud.monitoring.v3*\xfa\x11\n" +
+	",yandex/cloud/monitoring/v3/unit_format.proto\x12\x1ayandex.cloud.monitoring.v3*\xb7\x12\n" +
 	"\n" +
 	"UnitFormat\x12\x1b\n" +
 	"\x17UNIT_FORMAT_UNSPECIFIED\x10\x00\x12\r\n" +
@@ -546,7 +562,11 @@ const file_yandex_cloud_monitoring_v3_unit_format_proto_rawDesc = "" +
 	"\x11UNIT_NANOCORE_CPU\x10[\x12\x16\n" +
 	"\x12UNIT_MICROCORE_CPU\x10\\\x12\x16\n" +
 	"\x12UNIT_MILLICORE_CPU\x10]\x12\x11\n" +
-	"\rUNIT_CORE_CPU\x10^Bk\n" +
+	"\rUNIT_CORE_CPU\x10^\x12\x0f\n" +
+	"\vUNIT_AMPERE\x10_\x12\r\n" +
+	"\tUNIT_VOLT\x10`\x12\r\n" +
+	"\tUNIT_WATT\x10a\x12\f\n" +
+	"\bUNIT_OHM\x10bBk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
 var (

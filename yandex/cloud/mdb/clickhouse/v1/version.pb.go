@@ -32,7 +32,9 @@ type Version struct {
 	// List of versions that can be updated from current.
 	UpdatableTo []string `protobuf:"bytes,4,rep,name=updatable_to,json=updatableTo,proto3" json:"updatable_to,omitempty"`
 	// Whether version is LTS.
-	Lts           bool `protobuf:"varint,5,opt,name=lts,proto3" json:"lts,omitempty"`
+	Lts bool `protobuf:"varint,5,opt,name=lts,proto3" json:"lts,omitempty"`
+	// Full version.
+	FullVersion   string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -102,11 +104,18 @@ func (x *Version) GetLts() bool {
 	return false
 }
 
+func (x *Version) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
+}
+
 var File_yandex_cloud_mdb_clickhouse_v1_version_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/clickhouse/v1/version.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\"\x82\x01\n" +
+	",yandex/cloud/mdb/clickhouse/v1/version.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\"\xa5\x01\n" +
 	"\aVersion\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1e\n" +
@@ -114,7 +123,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDesc = "" +
 	"deprecated\x18\x03 \x01(\bR\n" +
 	"deprecated\x12!\n" +
 	"\fupdatable_to\x18\x04 \x03(\tR\vupdatableTo\x12\x10\n" +
-	"\x03lts\x18\x05 \x01(\bR\x03ltsBs\n" +
+	"\x03lts\x18\x05 \x01(\bR\x03lts\x12!\n" +
+	"\ffull_version\x18\x06 \x01(\tR\vfullVersionBs\n" +
 	"\"yandex.cloud.api.mdb.clickhouse.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/clickhouse/v1;clickhouseb\x06proto3"
 
 var (

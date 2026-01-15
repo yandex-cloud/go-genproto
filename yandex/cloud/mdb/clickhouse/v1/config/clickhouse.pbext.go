@@ -944,6 +944,14 @@ func (m *ClickhouseConfig_Kafka) SetAutoOffsetReset(v ClickhouseConfig_Kafka_Aut
 	m.AutoOffsetReset = v
 }
 
+func (m *ClickhouseConfig_Kafka) SetMessageMaxBytes(v *wrapperspb.Int64Value) {
+	m.MessageMaxBytes = v
+}
+
+func (m *ClickhouseConfig_Kafka) SetBatchSize(v *wrapperspb.Int64Value) {
+	m.BatchSize = v
+}
+
 func (m *ClickhouseConfig_KafkaTopic) SetName(v string) {
 	m.Name = v
 }

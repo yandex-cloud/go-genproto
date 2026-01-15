@@ -36,9 +36,11 @@ type User struct {
 	// SPQR Settings for this user
 	Settings *UserSettings `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
 	// User grants
-	Grants        []string `protobuf:"bytes,5,rep,name=grants,proto3" json:"grants,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Grants []string `protobuf:"bytes,5,rep,name=grants,proto3" json:"grants,omitempty"`
+	// Deletion Protection inhibits deletion of the user
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -106,6 +108,13 @@ func (x *User) GetGrants() []string {
 	return nil
 }
 
+func (x *User) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return nil
+}
+
 type Permission struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the database that the permission grants access to.
@@ -162,9 +171,11 @@ type UserSpec struct {
 	// SPQR Settings for this user
 	Settings *UserSettings `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
 	// User grants
-	Grants        []string `protobuf:"bytes,5,rep,name=grants,proto3" json:"grants,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Grants []string `protobuf:"bytes,5,rep,name=grants,proto3" json:"grants,omitempty"`
+	// Deletion Protection inhibits deletion of the user
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UserSpec) Reset() {
@@ -232,6 +243,13 @@ func (x *UserSpec) GetGrants() []string {
 	return nil
 }
 
+func (x *UserSpec) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return nil
+}
+
 type UserSettings struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	ConnectionLimit   *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=connection_limit,json=connectionLimit,proto3" json:"connection_limit,omitempty"`
@@ -288,23 +306,25 @@ var File_yandex_cloud_mdb_spqr_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/mdb/spqr/v1/user.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf9\x01\n" +
+	"#yandex/cloud/mdb/spqr/v1/user.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc6\x02\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12F\n" +
 	"\vpermissions\x18\x03 \x03(\v2$.yandex.cloud.mdb.spqr.v1.PermissionR\vpermissions\x12B\n" +
 	"\bsettings\x18\x04 \x01(\v2&.yandex.cloud.mdb.spqr.v1.UserSettingsR\bsettings\x122\n" +
-	"\x06grants\x18\x05 \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\"1\n" +
+	"\x06grants\x18\x05 \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
+	"\x13deletion_protection\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"1\n" +
 	"\n" +
 	"Permission\x12#\n" +
-	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"\xa9\x02\n" +
+	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"\xf6\x02\n" +
 	"\bUserSpec\x122\n" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12)\n" +
 	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12F\n" +
 	"\vpermissions\x18\x03 \x03(\v2$.yandex.cloud.mdb.spqr.v1.PermissionR\vpermissions\x12B\n" +
 	"\bsettings\x18\x04 \x01(\v2&.yandex.cloud.mdb.spqr.v1.UserSettingsR\bsettings\x122\n" +
-	"\x06grants\x18\x05 \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\"\xa2\x01\n" +
+	"\x06grants\x18\x05 \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
+	"\x13deletion_protection\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"\xa2\x01\n" +
 	"\fUserSettings\x12F\n" +
 	"\x10connection_limit\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fconnectionLimit\x12J\n" +
 	"\x12connection_retries\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11connectionRetriesBa\n" +
@@ -328,20 +348,23 @@ var file_yandex_cloud_mdb_spqr_v1_user_proto_goTypes = []any{
 	(*Permission)(nil),            // 1: yandex.cloud.mdb.spqr.v1.Permission
 	(*UserSpec)(nil),              // 2: yandex.cloud.mdb.spqr.v1.UserSpec
 	(*UserSettings)(nil),          // 3: yandex.cloud.mdb.spqr.v1.UserSettings
-	(*wrapperspb.Int64Value)(nil), // 4: google.protobuf.Int64Value
+	(*wrapperspb.BoolValue)(nil),  // 4: google.protobuf.BoolValue
+	(*wrapperspb.Int64Value)(nil), // 5: google.protobuf.Int64Value
 }
 var file_yandex_cloud_mdb_spqr_v1_user_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.mdb.spqr.v1.User.permissions:type_name -> yandex.cloud.mdb.spqr.v1.Permission
 	3, // 1: yandex.cloud.mdb.spqr.v1.User.settings:type_name -> yandex.cloud.mdb.spqr.v1.UserSettings
-	1, // 2: yandex.cloud.mdb.spqr.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.spqr.v1.Permission
-	3, // 3: yandex.cloud.mdb.spqr.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.spqr.v1.UserSettings
-	4, // 4: yandex.cloud.mdb.spqr.v1.UserSettings.connection_limit:type_name -> google.protobuf.Int64Value
-	4, // 5: yandex.cloud.mdb.spqr.v1.UserSettings.connection_retries:type_name -> google.protobuf.Int64Value
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	4, // 2: yandex.cloud.mdb.spqr.v1.User.deletion_protection:type_name -> google.protobuf.BoolValue
+	1, // 3: yandex.cloud.mdb.spqr.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.spqr.v1.Permission
+	3, // 4: yandex.cloud.mdb.spqr.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.spqr.v1.UserSettings
+	4, // 5: yandex.cloud.mdb.spqr.v1.UserSpec.deletion_protection:type_name -> google.protobuf.BoolValue
+	5, // 6: yandex.cloud.mdb.spqr.v1.UserSettings.connection_limit:type_name -> google.protobuf.Int64Value
+	5, // 7: yandex.cloud.mdb.spqr.v1.UserSettings.connection_retries:type_name -> google.protobuf.Int64Value
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_spqr_v1_user_proto_init() }

@@ -1121,7 +1121,7 @@ type PostgresqlConfig18 struct {
 	SessionDurationTimeout              *wrapperspb.Int64Value                      `protobuf:"bytes,163,opt,name=session_duration_timeout,json=sessionDurationTimeout,proto3" json:"session_duration_timeout,omitempty"`   // Terminate any session that exceeds the designated timeout, specified in milliseconds. If a timeout is not specified, the default session timeout is set to 12 hours. To disable it, specify a value of 0.
 	LogReplicationCommands              *wrapperspb.BoolValue                       `protobuf:"bytes,164,opt,name=log_replication_commands,json=logReplicationCommands,proto3" json:"log_replication_commands,omitempty"`
 	LogAutovacuumMinDuration            *wrapperspb.Int64Value                      `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`                                                                         // in milliseconds. The default is 1000 (1 sec).
-	PasswordEncryption                  PostgresqlConfig18_PasswordEncryption       `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
+	PasswordEncryption                  PostgresqlConfig18_PasswordEncryption       `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``.
 	AutoExplainLogFormat                PostgresqlConfig18_AutoExplainLogFormat     `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"` // Selects the `` EXPLAIN `` output format to be used. The allowed values are `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``, `` AUTO_EXPLAIN_LOG_FORMAT_XML ``, `` AUTO_EXPLAIN_LOG_FORMAT_JSON ``, and `` AUTO_EXPLAIN_LOG_FORMAT_YAML ``. The default is `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``.
 	TrackCommitTimestamp                *wrapperspb.BoolValue                       `protobuf:"bytes,169,opt,name=track_commit_timestamp,json=trackCommitTimestamp,proto3" json:"track_commit_timestamp,omitempty"`
 	MaxLogicalReplicationWorkers        *wrapperspb.Int64Value                      `protobuf:"bytes,170,opt,name=max_logical_replication_workers,json=maxLogicalReplicationWorkers,proto3" json:"max_logical_replication_workers,omitempty"`
@@ -2377,9 +2377,9 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc0\x8b\x01\n" +
-	"\x12PostgresqlConfig18\x12D\n" +
-	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxConnections\x12B\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"ʋ\x01\n" +
+	"\x12PostgresqlConfig18\x12N\n" +
+	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
 	"\ftemp_buffers\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\vtempBuffers\x12W\n" +
 	"\x19max_prepared_transactions\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17maxPreparedTransactions\x126\n" +

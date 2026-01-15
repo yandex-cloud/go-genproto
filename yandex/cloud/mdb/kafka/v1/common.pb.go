@@ -24,6 +24,7 @@ const (
 type CompressionType int32
 
 const (
+	// codec is unspecified.
 	CompressionType_COMPRESSION_TYPE_UNSPECIFIED CompressionType = 0
 	// no codec (uncompressed).
 	CompressionType_COMPRESSION_TYPE_UNCOMPRESSED CompressionType = 1
@@ -91,8 +92,11 @@ func (CompressionType) EnumDescriptor() ([]byte, []int) {
 type SaslMechanism int32
 
 const (
-	SaslMechanism_SASL_MECHANISM_UNSPECIFIED   SaslMechanism = 0
+	// SASL mechanism is unspecified.
+	SaslMechanism_SASL_MECHANISM_UNSPECIFIED SaslMechanism = 0
+	// SHA_256.
 	SaslMechanism_SASL_MECHANISM_SCRAM_SHA_256 SaslMechanism = 1
+	// SHA_512.
 	SaslMechanism_SASL_MECHANISM_SCRAM_SHA_512 SaslMechanism = 2
 )
 
@@ -137,6 +141,58 @@ func (SaslMechanism) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_kafka_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
+type MessageTimestampType int32
+
+const (
+	// Message timestamp type is unspecified.
+	MessageTimestampType_MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED MessageTimestampType = 0
+	// Message timestamp type is create time.
+	MessageTimestampType_MESSAGE_TIMESTAMP_TYPE_CREATE_TIME MessageTimestampType = 1
+	// Message timestamp type is log append time.
+	MessageTimestampType_MESSAGE_TIMESTAMP_TYPE_LOG_APPEND_TIME MessageTimestampType = 2
+)
+
+// Enum value maps for MessageTimestampType.
+var (
+	MessageTimestampType_name = map[int32]string{
+		0: "MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED",
+		1: "MESSAGE_TIMESTAMP_TYPE_CREATE_TIME",
+		2: "MESSAGE_TIMESTAMP_TYPE_LOG_APPEND_TIME",
+	}
+	MessageTimestampType_value = map[string]int32{
+		"MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED":     0,
+		"MESSAGE_TIMESTAMP_TYPE_CREATE_TIME":     1,
+		"MESSAGE_TIMESTAMP_TYPE_LOG_APPEND_TIME": 2,
+	}
+)
+
+func (x MessageTimestampType) Enum() *MessageTimestampType {
+	p := new(MessageTimestampType)
+	*p = x
+	return p
+}
+
+func (x MessageTimestampType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MessageTimestampType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_kafka_v1_common_proto_enumTypes[2].Descriptor()
+}
+
+func (MessageTimestampType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_kafka_v1_common_proto_enumTypes[2]
+}
+
+func (x MessageTimestampType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MessageTimestampType.Descriptor instead.
+func (MessageTimestampType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_kafka_v1_common_proto_rawDescGZIP(), []int{2}
+}
+
 var File_yandex_cloud_mdb_kafka_v1_common_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_kafka_v1_common_proto_rawDesc = "" +
@@ -153,7 +209,11 @@ const file_yandex_cloud_mdb_kafka_v1_common_proto_rawDesc = "" +
 	"\rSaslMechanism\x12\x1e\n" +
 	"\x1aSASL_MECHANISM_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSASL_MECHANISM_SCRAM_SHA_256\x10\x01\x12 \n" +
-	"\x1cSASL_MECHANISM_SCRAM_SHA_512\x10\x02Bd\n" +
+	"\x1cSASL_MECHANISM_SCRAM_SHA_512\x10\x02*\x92\x01\n" +
+	"\x14MessageTimestampType\x12&\n" +
+	"\"MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED\x10\x00\x12&\n" +
+	"\"MESSAGE_TIMESTAMP_TYPE_CREATE_TIME\x10\x01\x12*\n" +
+	"&MESSAGE_TIMESTAMP_TYPE_LOG_APPEND_TIME\x10\x02Bd\n" +
 	"\x1dyandex.cloud.api.mdb.kafka.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/kafka/v1;kafkab\x06proto3"
 
 var (
@@ -168,10 +228,11 @@ func file_yandex_cloud_mdb_kafka_v1_common_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_kafka_v1_common_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_kafka_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_mdb_kafka_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_yandex_cloud_mdb_kafka_v1_common_proto_goTypes = []any{
-	(CompressionType)(0), // 0: yandex.cloud.mdb.kafka.v1.CompressionType
-	(SaslMechanism)(0),   // 1: yandex.cloud.mdb.kafka.v1.SaslMechanism
+	(CompressionType)(0),      // 0: yandex.cloud.mdb.kafka.v1.CompressionType
+	(SaslMechanism)(0),        // 1: yandex.cloud.mdb.kafka.v1.SaslMechanism
+	(MessageTimestampType)(0), // 2: yandex.cloud.mdb.kafka.v1.MessageTimestampType
 }
 var file_yandex_cloud_mdb_kafka_v1_common_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -191,7 +252,7 @@ func file_yandex_cloud_mdb_kafka_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_kafka_v1_common_proto_rawDesc), len(file_yandex_cloud_mdb_kafka_v1_common_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

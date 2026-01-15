@@ -113,12 +113,20 @@ func (m *LoggingConfig) SetMinLevel(v v1.LogLevel_Level) {
 	m.MinLevel = v
 }
 
+func (m *PrivateAccessConfig) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
 func (m *NetworkConfig) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
 
 func (m *NetworkConfig) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
+}
+
+func (m *NetworkConfig) SetPrivateAccess(v *PrivateAccessConfig) {
+	m.PrivateAccess = v
 }
 
 func (m *TrinoConfig) SetCoordinatorConfig(v *CoordinatorConfig) {

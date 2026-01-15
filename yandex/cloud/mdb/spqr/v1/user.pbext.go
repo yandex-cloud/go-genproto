@@ -26,6 +26,10 @@ func (m *User) SetGrants(v []string) {
 	m.Grants = v
 }
 
+func (m *User) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -48,6 +52,10 @@ func (m *UserSpec) SetSettings(v *UserSettings) {
 
 func (m *UserSpec) SetGrants(v []string) {
 	m.Grants = v
+}
+
+func (m *UserSpec) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
 }
 
 func (m *UserSettings) SetConnectionLimit(v *wrapperspb.Int64Value) {

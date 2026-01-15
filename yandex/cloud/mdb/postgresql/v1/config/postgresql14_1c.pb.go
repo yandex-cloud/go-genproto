@@ -2347,9 +2347,9 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto protoreflec
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/mdb/postgresql/v1/config/postgresql14_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa6\x89\x01\n" +
-	"\x15PostgresqlConfig14_1C\x12D\n" +
-	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxConnections\x12B\n" +
+	";yandex/cloud/mdb/postgresql/v1/config/postgresql14_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb0\x89\x01\n" +
+	"\x15PostgresqlConfig14_1C\x12N\n" +
+	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
 	"\ftemp_buffers\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\vtempBuffers\x12W\n" +
 	"\x19max_prepared_transactions\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17maxPreparedTransactions\x126\n" +

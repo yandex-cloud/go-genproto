@@ -377,3 +377,11 @@ func (m *GetVideoManifestsRequest) SetVideoId(v string) {
 func (m *GetVideoManifestsResponse) SetManifests(v []*Manifest) {
 	m.Manifests = v
 }
+
+func (m *GenerateVideoDownloadURLRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *GenerateVideoDownloadURLResponse) SetDownloadUrl(v string) {
+	m.DownloadUrl = v
+}

@@ -26,6 +26,7 @@ const (
 type IpVersion int32
 
 const (
+	// IP version is not specified.
 	IpVersion_IP_VERSION_UNSPECIFIED IpVersion = 0
 	// IPv4 address, for example 192.168.0.0.
 	IpVersion_IPV4 IpVersion = 1
@@ -78,6 +79,7 @@ func (IpVersion) EnumDescriptor() ([]byte, []int) {
 type Node_Status int32
 
 const (
+	// Status is not specified.
 	Node_STATUS_UNSPECIFIED Node_Status = 0
 	// Node instance is not yet created (e.g. in progress).
 	Node_PROVISIONING Node_Status = 1
@@ -152,6 +154,7 @@ func (Node_Status) EnumDescriptor() ([]byte, []int) {
 type Taint_Effect int32
 
 const (
+	// Effect is not specified.
 	Taint_EFFECT_UNSPECIFIED Taint_Effect = 0
 	// Do not allow new pods to schedule onto the node unless they tolerate the taint,
 	// but allow all pods submitted to Kubelet without going through the scheduler
@@ -211,8 +214,11 @@ func (Taint_Effect) EnumDescriptor() ([]byte, []int) {
 type NodeTemplate_NetworkSettings_Type int32
 
 const (
-	NodeTemplate_NetworkSettings_TYPE_UNSPECIFIED     NodeTemplate_NetworkSettings_Type = 0
-	NodeTemplate_NetworkSettings_STANDARD             NodeTemplate_NetworkSettings_Type = 1
+	// Network type is not specified.
+	NodeTemplate_NetworkSettings_TYPE_UNSPECIFIED NodeTemplate_NetworkSettings_Type = 0
+	// Standard network.
+	NodeTemplate_NetworkSettings_STANDARD NodeTemplate_NetworkSettings_Type = 1
+	// Software accelerated network.
 	NodeTemplate_NetworkSettings_SOFTWARE_ACCELERATED NodeTemplate_NetworkSettings_Type = 2
 )
 
@@ -260,9 +266,12 @@ func (NodeTemplate_NetworkSettings_Type) EnumDescriptor() ([]byte, []int) {
 type NodeTemplate_ContainerRuntimeSettings_Type int32
 
 const (
+	// Container runtime type is not specified.
 	NodeTemplate_ContainerRuntimeSettings_TYPE_UNSPECIFIED NodeTemplate_ContainerRuntimeSettings_Type = 0
-	NodeTemplate_ContainerRuntimeSettings_DOCKER           NodeTemplate_ContainerRuntimeSettings_Type = 1
-	NodeTemplate_ContainerRuntimeSettings_CONTAINERD       NodeTemplate_ContainerRuntimeSettings_Type = 2
+	// Docker container runtime.
+	NodeTemplate_ContainerRuntimeSettings_DOCKER NodeTemplate_ContainerRuntimeSettings_Type = 1
+	// Containerd container runtime.
+	NodeTemplate_ContainerRuntimeSettings_CONTAINERD NodeTemplate_ContainerRuntimeSettings_Type = 2
 )
 
 // Enum value maps for NodeTemplate_ContainerRuntimeSettings_Type.
@@ -668,10 +677,14 @@ type NodeTemplate struct {
 	// New api, to specify network interfaces for the node group compute instances.
 	// Can not be used together with 'v4_address_spec'
 	NetworkInterfaceSpecs []*NetworkInterfaceSpec `protobuf:"bytes,7,rep,name=network_interface_specs,json=networkInterfaceSpecs,proto3" json:"network_interface_specs,omitempty"`
-	PlacementPolicy       *PlacementPolicy        `protobuf:"bytes,10,opt,name=placement_policy,json=placementPolicy,proto3" json:"placement_policy,omitempty"`
+	// Placement policy configuration that controls physical placement of node group instances
+	// in the cloud infrastructure for optimizing performance and reliability.
+	PlacementPolicy *PlacementPolicy `protobuf:"bytes,10,opt,name=placement_policy,json=placementPolicy,proto3" json:"placement_policy,omitempty"`
 	// this parameter allows to specify type of network acceleration used on nodes (instances)
-	NetworkSettings          *NodeTemplate_NetworkSettings          `protobuf:"bytes,11,opt,name=network_settings,json=networkSettings,proto3" json:"network_settings,omitempty"`
+	NetworkSettings *NodeTemplate_NetworkSettings `protobuf:"bytes,11,opt,name=network_settings,json=networkSettings,proto3" json:"network_settings,omitempty"`
+	// Container runtime settings for the node template.
 	ContainerRuntimeSettings *NodeTemplate_ContainerRuntimeSettings `protobuf:"bytes,12,opt,name=container_runtime_settings,json=containerRuntimeSettings,proto3" json:"container_runtime_settings,omitempty"`
+	// Container network settings for the node template.
 	ContainerNetworkSettings *NodeTemplate_ContainerNetworkSettings `protobuf:"bytes,16,opt,name=container_network_settings,json=containerNetworkSettings,proto3" json:"container_network_settings,omitempty"`
 	// GPU settings
 	GpuSettings   *GpuSettings `protobuf:"bytes,18,opt,name=gpu_settings,json=gpuSettings,proto3" json:"gpu_settings,omitempty"`
@@ -1518,7 +1531,8 @@ func (x *Node_Spec) GetDisk() *DiskSpec {
 }
 
 type NodeTemplate_NetworkSettings struct {
-	state         protoimpl.MessageState            `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Network type that specifies the network configuration for the node group instances.
 	Type          NodeTemplate_NetworkSettings_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.k8s.v1.NodeTemplate_NetworkSettings_Type" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1562,7 +1576,8 @@ func (x *NodeTemplate_NetworkSettings) GetType() NodeTemplate_NetworkSettings_Ty
 }
 
 type NodeTemplate_ContainerRuntimeSettings struct {
-	state         protoimpl.MessageState                     `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Type of container runtime.
 	Type          NodeTemplate_ContainerRuntimeSettings_Type `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.k8s.v1.NodeTemplate_ContainerRuntimeSettings_Type" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1606,8 +1621,9 @@ func (x *NodeTemplate_ContainerRuntimeSettings) GetType() NodeTemplate_Container
 }
 
 type NodeTemplate_ContainerNetworkSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PodMtu        int64                  `protobuf:"varint,1,opt,name=pod_mtu,json=podMtu,proto3" json:"pod_mtu,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// MTU (Maximum Transmission Unit) size for pod network interfaces.
+	PodMtu        int64 `protobuf:"varint,1,opt,name=pod_mtu,json=podMtu,proto3" json:"pod_mtu,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

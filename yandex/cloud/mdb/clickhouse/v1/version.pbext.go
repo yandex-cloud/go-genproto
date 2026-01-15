@@ -21,3 +21,7 @@ func (m *Version) SetUpdatableTo(v []string) {
 func (m *Version) SetLts(v bool) {
 	m.Lts = v
 }
+
+func (m *Version) SetFullVersion(v string) {
+	m.FullVersion = v
+}

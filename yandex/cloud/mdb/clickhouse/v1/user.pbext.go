@@ -694,6 +694,10 @@ func (m *UserSettings) SetFinal(v *wrapperspb.BoolValue) {
 	m.Final = v
 }
 
+func (m *UserSettings) SetUseHivePartitioning(v *wrapperspb.BoolValue) {
+	m.UseHivePartitioning = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

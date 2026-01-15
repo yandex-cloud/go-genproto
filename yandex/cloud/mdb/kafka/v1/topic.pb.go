@@ -26,6 +26,7 @@ const (
 type TopicConfig2_8_CleanupPolicy int32
 
 const (
+	// Cleanup policy is unspecified.
 	TopicConfig2_8_CLEANUP_POLICY_UNSPECIFIED TopicConfig2_8_CleanupPolicy = 0
 	// This policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig2_8.log_retention_ms] and other similar parameters.
 	TopicConfig2_8_CLEANUP_POLICY_DELETE TopicConfig2_8_CleanupPolicy = 1
@@ -81,6 +82,7 @@ func (TopicConfig2_8_CleanupPolicy) EnumDescriptor() ([]byte, []int) {
 type TopicConfig3_CleanupPolicy int32
 
 const (
+	// Cleanup policy is unspecified.
 	TopicConfig3_CLEANUP_POLICY_UNSPECIFIED TopicConfig3_CleanupPolicy = 0
 	// This policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig3.log_retention_ms] and other similar parameters.
 	TopicConfig3_CLEANUP_POLICY_DELETE TopicConfig3_CleanupPolicy = 1
@@ -136,6 +138,7 @@ func (TopicConfig3_CleanupPolicy) EnumDescriptor() ([]byte, []int) {
 type TopicConfig4_CleanupPolicy int32
 
 const (
+	// Cleanup policy is unspecified.
 	TopicConfig4_CLEANUP_POLICY_UNSPECIFIED TopicConfig4_CleanupPolicy = 0
 	// This policy discards log segments when either their retention time or log size limit is reached. See also: [KafkaConfig4.log_retention_ms] and other similar parameters.
 	TopicConfig4_CLEANUP_POLICY_DELETE TopicConfig4_CleanupPolicy = 1
@@ -311,14 +314,17 @@ type isTopic_TopicConfig interface {
 }
 
 type Topic_TopicConfig_2_8 struct {
+	// Configuration of the Apache Kafka® 2.8 topic.
 	TopicConfig_2_8 *TopicConfig2_8 `protobuf:"bytes,7,opt,name=topic_config_2_8,json=topicConfig_2_8,proto3,oneof"`
 }
 
 type Topic_TopicConfig_3 struct {
+	// Configuration of the Apache Kafka® 3.x topic.
 	TopicConfig_3 *TopicConfig3 `protobuf:"bytes,8,opt,name=topic_config_3,json=topicConfig_3,proto3,oneof"`
 }
 
 type Topic_TopicConfig_4 struct {
+	// Configuration of the Apache Kafka® 4.x topic.
 	TopicConfig_4 *TopicConfig4 `protobuf:"bytes,9,opt,name=topic_config_4,json=topicConfig_4,proto3,oneof"`
 }
 
@@ -438,14 +444,17 @@ type isTopicSpec_TopicConfig interface {
 }
 
 type TopicSpec_TopicConfig_2_8 struct {
+	// Configuration of the Apache Kafka® 2.8 topic.
 	TopicConfig_2_8 *TopicConfig2_8 `protobuf:"bytes,6,opt,name=topic_config_2_8,json=topicConfig_2_8,proto3,oneof"`
 }
 
 type TopicSpec_TopicConfig_3 struct {
+	// Configuration of the Apache Kafka® 3.x topic.
 	TopicConfig_3 *TopicConfig3 `protobuf:"bytes,7,opt,name=topic_config_3,json=topicConfig_3,proto3,oneof"`
 }
 
 type TopicSpec_TopicConfig_4 struct {
+	// Configuration of the Apache Kafka® 4.x topic.
 	TopicConfig_4 *TopicConfig4 `protobuf:"bytes,8,opt,name=topic_config_4,json=topicConfig_4,proto3,oneof"`
 }
 
@@ -498,9 +507,11 @@ type TopicConfig2_8 struct {
 	// True if we should preallocate the file on disk when creating a new log segment.
 	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_preallocate] setting on the topic level.
-	Preallocate   *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Preallocate *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
+	// Define whether the timestamp in the message is message create time or log append time.
+	MessageTimestampType MessageTimestampType `protobuf:"varint,14,opt,name=message_timestamp_type,json=messageTimestampType,proto3,enum=yandex.cloud.mdb.kafka.v1.MessageTimestampType" json:"message_timestamp_type,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *TopicConfig2_8) Reset() {
@@ -624,6 +635,13 @@ func (x *TopicConfig2_8) GetPreallocate() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *TopicConfig2_8) GetMessageTimestampType() MessageTimestampType {
+	if x != nil {
+		return x.MessageTimestampType
+	}
+	return MessageTimestampType_MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED
+}
+
 // Topic settings for 3.x
 type TopicConfig3 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -667,9 +685,11 @@ type TopicConfig3 struct {
 	// True if we should preallocate the file on disk when creating a new log segment.
 	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_preallocate] setting on the topic level.
-	Preallocate   *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Preallocate *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
+	// Define whether the timestamp in the message is message create time or log append time.
+	MessageTimestampType MessageTimestampType `protobuf:"varint,14,opt,name=message_timestamp_type,json=messageTimestampType,proto3,enum=yandex.cloud.mdb.kafka.v1.MessageTimestampType" json:"message_timestamp_type,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *TopicConfig3) Reset() {
@@ -793,6 +813,13 @@ func (x *TopicConfig3) GetPreallocate() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *TopicConfig3) GetMessageTimestampType() MessageTimestampType {
+	if x != nil {
+		return x.MessageTimestampType
+	}
+	return MessageTimestampType_MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED
+}
+
 // Topic settings for 4.x
 type TopicConfig4 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -836,9 +863,11 @@ type TopicConfig4 struct {
 	// True if we should preallocate the file on disk when creating a new log segment.
 	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_preallocate] setting on the topic level.
-	Preallocate   *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Preallocate *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
+	// Define whether the timestamp in the message is message create time or log append time.
+	MessageTimestampType MessageTimestampType `protobuf:"varint,14,opt,name=message_timestamp_type,json=messageTimestampType,proto3,enum=yandex.cloud.mdb.kafka.v1.MessageTimestampType" json:"message_timestamp_type,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *TopicConfig4) Reset() {
@@ -962,6 +991,13 @@ func (x *TopicConfig4) GetPreallocate() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *TopicConfig4) GetMessageTimestampType() MessageTimestampType {
+	if x != nil {
+		return x.MessageTimestampType
+	}
+	return MessageTimestampType_MESSAGE_TIMESTAMP_TYPE_UNSPECIFIED
+}
+
 var File_yandex_cloud_mdb_kafka_v1_topic_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
@@ -988,7 +1024,7 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\x10topic_config_2_8\x18\x06 \x01(\v2).yandex.cloud.mdb.kafka.v1.TopicConfig2_8H\x00R\x0ftopicConfig_2_8\x12P\n" +
 	"\x0etopic_config_3\x18\a \x01(\v2'.yandex.cloud.mdb.kafka.v1.TopicConfig3H\x00R\rtopicConfig_3\x12P\n" +
 	"\x0etopic_config_4\x18\b \x01(\v2'.yandex.cloud.mdb.kafka.v1.TopicConfig4H\x00R\rtopicConfig_4B\x0e\n" +
-	"\ftopic_configJ\x04\b\x04\x10\x06\"\xda\b\n" +
+	"\ftopic_configJ\x04\b\x04\x10\x06\"\xc1\t\n" +
 	"\x0eTopicConfig2_8\x12^\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e27.yandex.cloud.mdb.kafka.v1.TopicConfig2_8.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1003,12 +1039,13 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
 	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
 	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12<\n" +
-	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\"\x8d\x01\n" +
+	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\x12e\n" +
+	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CLEANUP_POLICY_DELETE\x10\x01\x12\x1a\n" +
 	"\x16CLEANUP_POLICY_COMPACT\x10\x02\x12%\n" +
-	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xd6\b\n" +
+	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xbd\t\n" +
 	"\fTopicConfig3\x12\\\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e25.yandex.cloud.mdb.kafka.v1.TopicConfig3.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1023,12 +1060,13 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
 	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
 	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12<\n" +
-	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\"\x8d\x01\n" +
+	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\x12e\n" +
+	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CLEANUP_POLICY_DELETE\x10\x01\x12\x1a\n" +
 	"\x16CLEANUP_POLICY_COMPACT\x10\x02\x12%\n" +
-	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xd6\b\n" +
+	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xbd\t\n" +
 	"\fTopicConfig4\x12\\\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e25.yandex.cloud.mdb.kafka.v1.TopicConfig4.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1043,7 +1081,8 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
 	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
 	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12<\n" +
-	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\"\x8d\x01\n" +
+	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\x12e\n" +
+	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CLEANUP_POLICY_DELETE\x10\x01\x12\x1a\n" +
@@ -1077,6 +1116,7 @@ var file_yandex_cloud_mdb_kafka_v1_topic_proto_goTypes = []any{
 	(*wrapperspb.Int64Value)(nil),     // 8: google.protobuf.Int64Value
 	(CompressionType)(0),              // 9: yandex.cloud.mdb.kafka.v1.CompressionType
 	(*wrapperspb.BoolValue)(nil),      // 10: google.protobuf.BoolValue
+	(MessageTimestampType)(0),         // 11: yandex.cloud.mdb.kafka.v1.MessageTimestampType
 }
 var file_yandex_cloud_mdb_kafka_v1_topic_proto_depIdxs = []int32{
 	8,  // 0: yandex.cloud.mdb.kafka.v1.Topic.partitions:type_name -> google.protobuf.Int64Value
@@ -1102,37 +1142,40 @@ var file_yandex_cloud_mdb_kafka_v1_topic_proto_depIdxs = []int32{
 	8,  // 20: yandex.cloud.mdb.kafka.v1.TopicConfig2_8.min_insync_replicas:type_name -> google.protobuf.Int64Value
 	8,  // 21: yandex.cloud.mdb.kafka.v1.TopicConfig2_8.segment_bytes:type_name -> google.protobuf.Int64Value
 	10, // 22: yandex.cloud.mdb.kafka.v1.TopicConfig2_8.preallocate:type_name -> google.protobuf.BoolValue
-	1,  // 23: yandex.cloud.mdb.kafka.v1.TopicConfig3.cleanup_policy:type_name -> yandex.cloud.mdb.kafka.v1.TopicConfig3.CleanupPolicy
-	9,  // 24: yandex.cloud.mdb.kafka.v1.TopicConfig3.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
-	8,  // 25: yandex.cloud.mdb.kafka.v1.TopicConfig3.delete_retention_ms:type_name -> google.protobuf.Int64Value
-	8,  // 26: yandex.cloud.mdb.kafka.v1.TopicConfig3.file_delete_delay_ms:type_name -> google.protobuf.Int64Value
-	8,  // 27: yandex.cloud.mdb.kafka.v1.TopicConfig3.flush_messages:type_name -> google.protobuf.Int64Value
-	8,  // 28: yandex.cloud.mdb.kafka.v1.TopicConfig3.flush_ms:type_name -> google.protobuf.Int64Value
-	8,  // 29: yandex.cloud.mdb.kafka.v1.TopicConfig3.min_compaction_lag_ms:type_name -> google.protobuf.Int64Value
-	8,  // 30: yandex.cloud.mdb.kafka.v1.TopicConfig3.retention_bytes:type_name -> google.protobuf.Int64Value
-	8,  // 31: yandex.cloud.mdb.kafka.v1.TopicConfig3.retention_ms:type_name -> google.protobuf.Int64Value
-	8,  // 32: yandex.cloud.mdb.kafka.v1.TopicConfig3.max_message_bytes:type_name -> google.protobuf.Int64Value
-	8,  // 33: yandex.cloud.mdb.kafka.v1.TopicConfig3.min_insync_replicas:type_name -> google.protobuf.Int64Value
-	8,  // 34: yandex.cloud.mdb.kafka.v1.TopicConfig3.segment_bytes:type_name -> google.protobuf.Int64Value
-	10, // 35: yandex.cloud.mdb.kafka.v1.TopicConfig3.preallocate:type_name -> google.protobuf.BoolValue
-	2,  // 36: yandex.cloud.mdb.kafka.v1.TopicConfig4.cleanup_policy:type_name -> yandex.cloud.mdb.kafka.v1.TopicConfig4.CleanupPolicy
-	9,  // 37: yandex.cloud.mdb.kafka.v1.TopicConfig4.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
-	8,  // 38: yandex.cloud.mdb.kafka.v1.TopicConfig4.delete_retention_ms:type_name -> google.protobuf.Int64Value
-	8,  // 39: yandex.cloud.mdb.kafka.v1.TopicConfig4.file_delete_delay_ms:type_name -> google.protobuf.Int64Value
-	8,  // 40: yandex.cloud.mdb.kafka.v1.TopicConfig4.flush_messages:type_name -> google.protobuf.Int64Value
-	8,  // 41: yandex.cloud.mdb.kafka.v1.TopicConfig4.flush_ms:type_name -> google.protobuf.Int64Value
-	8,  // 42: yandex.cloud.mdb.kafka.v1.TopicConfig4.min_compaction_lag_ms:type_name -> google.protobuf.Int64Value
-	8,  // 43: yandex.cloud.mdb.kafka.v1.TopicConfig4.retention_bytes:type_name -> google.protobuf.Int64Value
-	8,  // 44: yandex.cloud.mdb.kafka.v1.TopicConfig4.retention_ms:type_name -> google.protobuf.Int64Value
-	8,  // 45: yandex.cloud.mdb.kafka.v1.TopicConfig4.max_message_bytes:type_name -> google.protobuf.Int64Value
-	8,  // 46: yandex.cloud.mdb.kafka.v1.TopicConfig4.min_insync_replicas:type_name -> google.protobuf.Int64Value
-	8,  // 47: yandex.cloud.mdb.kafka.v1.TopicConfig4.segment_bytes:type_name -> google.protobuf.Int64Value
-	10, // 48: yandex.cloud.mdb.kafka.v1.TopicConfig4.preallocate:type_name -> google.protobuf.BoolValue
-	49, // [49:49] is the sub-list for method output_type
-	49, // [49:49] is the sub-list for method input_type
-	49, // [49:49] is the sub-list for extension type_name
-	49, // [49:49] is the sub-list for extension extendee
-	0,  // [0:49] is the sub-list for field type_name
+	11, // 23: yandex.cloud.mdb.kafka.v1.TopicConfig2_8.message_timestamp_type:type_name -> yandex.cloud.mdb.kafka.v1.MessageTimestampType
+	1,  // 24: yandex.cloud.mdb.kafka.v1.TopicConfig3.cleanup_policy:type_name -> yandex.cloud.mdb.kafka.v1.TopicConfig3.CleanupPolicy
+	9,  // 25: yandex.cloud.mdb.kafka.v1.TopicConfig3.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
+	8,  // 26: yandex.cloud.mdb.kafka.v1.TopicConfig3.delete_retention_ms:type_name -> google.protobuf.Int64Value
+	8,  // 27: yandex.cloud.mdb.kafka.v1.TopicConfig3.file_delete_delay_ms:type_name -> google.protobuf.Int64Value
+	8,  // 28: yandex.cloud.mdb.kafka.v1.TopicConfig3.flush_messages:type_name -> google.protobuf.Int64Value
+	8,  // 29: yandex.cloud.mdb.kafka.v1.TopicConfig3.flush_ms:type_name -> google.protobuf.Int64Value
+	8,  // 30: yandex.cloud.mdb.kafka.v1.TopicConfig3.min_compaction_lag_ms:type_name -> google.protobuf.Int64Value
+	8,  // 31: yandex.cloud.mdb.kafka.v1.TopicConfig3.retention_bytes:type_name -> google.protobuf.Int64Value
+	8,  // 32: yandex.cloud.mdb.kafka.v1.TopicConfig3.retention_ms:type_name -> google.protobuf.Int64Value
+	8,  // 33: yandex.cloud.mdb.kafka.v1.TopicConfig3.max_message_bytes:type_name -> google.protobuf.Int64Value
+	8,  // 34: yandex.cloud.mdb.kafka.v1.TopicConfig3.min_insync_replicas:type_name -> google.protobuf.Int64Value
+	8,  // 35: yandex.cloud.mdb.kafka.v1.TopicConfig3.segment_bytes:type_name -> google.protobuf.Int64Value
+	10, // 36: yandex.cloud.mdb.kafka.v1.TopicConfig3.preallocate:type_name -> google.protobuf.BoolValue
+	11, // 37: yandex.cloud.mdb.kafka.v1.TopicConfig3.message_timestamp_type:type_name -> yandex.cloud.mdb.kafka.v1.MessageTimestampType
+	2,  // 38: yandex.cloud.mdb.kafka.v1.TopicConfig4.cleanup_policy:type_name -> yandex.cloud.mdb.kafka.v1.TopicConfig4.CleanupPolicy
+	9,  // 39: yandex.cloud.mdb.kafka.v1.TopicConfig4.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
+	8,  // 40: yandex.cloud.mdb.kafka.v1.TopicConfig4.delete_retention_ms:type_name -> google.protobuf.Int64Value
+	8,  // 41: yandex.cloud.mdb.kafka.v1.TopicConfig4.file_delete_delay_ms:type_name -> google.protobuf.Int64Value
+	8,  // 42: yandex.cloud.mdb.kafka.v1.TopicConfig4.flush_messages:type_name -> google.protobuf.Int64Value
+	8,  // 43: yandex.cloud.mdb.kafka.v1.TopicConfig4.flush_ms:type_name -> google.protobuf.Int64Value
+	8,  // 44: yandex.cloud.mdb.kafka.v1.TopicConfig4.min_compaction_lag_ms:type_name -> google.protobuf.Int64Value
+	8,  // 45: yandex.cloud.mdb.kafka.v1.TopicConfig4.retention_bytes:type_name -> google.protobuf.Int64Value
+	8,  // 46: yandex.cloud.mdb.kafka.v1.TopicConfig4.retention_ms:type_name -> google.protobuf.Int64Value
+	8,  // 47: yandex.cloud.mdb.kafka.v1.TopicConfig4.max_message_bytes:type_name -> google.protobuf.Int64Value
+	8,  // 48: yandex.cloud.mdb.kafka.v1.TopicConfig4.min_insync_replicas:type_name -> google.protobuf.Int64Value
+	8,  // 49: yandex.cloud.mdb.kafka.v1.TopicConfig4.segment_bytes:type_name -> google.protobuf.Int64Value
+	10, // 50: yandex.cloud.mdb.kafka.v1.TopicConfig4.preallocate:type_name -> google.protobuf.BoolValue
+	11, // 51: yandex.cloud.mdb.kafka.v1.TopicConfig4.message_timestamp_type:type_name -> yandex.cloud.mdb.kafka.v1.MessageTimestampType
+	52, // [52:52] is the sub-list for method output_type
+	52, // [52:52] is the sub-list for method input_type
+	52, // [52:52] is the sub-list for extension type_name
+	52, // [52:52] is the sub-list for extension extendee
+	0,  // [0:52] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_kafka_v1_topic_proto_init() }

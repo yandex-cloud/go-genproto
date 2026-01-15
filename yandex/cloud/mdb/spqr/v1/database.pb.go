@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -29,9 +30,11 @@ type Database struct {
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the SPQR cluster that the database belongs to.
-	ClusterId     string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Deletion Protection inhibits deletion of the database
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Database) Reset() {
@@ -78,12 +81,21 @@ func (x *Database) GetClusterId() string {
 	return ""
 }
 
+func (x *Database) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return nil
+}
+
 type DatabaseSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the SPQR database. 1-63 characters long.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Deletion Protection inhibits deletion of the database
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DatabaseSpec) Reset() {
@@ -123,17 +135,26 @@ func (x *DatabaseSpec) GetName() string {
 	return ""
 }
 
+func (x *DatabaseSpec) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_spqr_v1_database_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_database_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/mdb/spqr/v1/database.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1dyandex/cloud/validation.proto\"=\n" +
+	"'yandex/cloud/mdb/spqr/v1/database.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8a\x01\n" +
 	"\bDatabase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\"B\n" +
+	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12K\n" +
+	"\x13deletion_protection\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"\x8f\x01\n" +
 	"\fDatabaseSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04nameBa\n" +
+	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12K\n" +
+	"\x13deletion_protection\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtectionBa\n" +
 	"\x1cyandex.cloud.api.mdb.spqr.v1ZAgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/spqr/v1;spqrb\x06proto3"
 
 var (
@@ -150,15 +171,18 @@ func file_yandex_cloud_mdb_spqr_v1_database_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_mdb_spqr_v1_database_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_mdb_spqr_v1_database_proto_goTypes = []any{
-	(*Database)(nil),     // 0: yandex.cloud.mdb.spqr.v1.Database
-	(*DatabaseSpec)(nil), // 1: yandex.cloud.mdb.spqr.v1.DatabaseSpec
+	(*Database)(nil),             // 0: yandex.cloud.mdb.spqr.v1.Database
+	(*DatabaseSpec)(nil),         // 1: yandex.cloud.mdb.spqr.v1.DatabaseSpec
+	(*wrapperspb.BoolValue)(nil), // 2: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_spqr_v1_database_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: yandex.cloud.mdb.spqr.v1.Database.deletion_protection:type_name -> google.protobuf.BoolValue
+	2, // 1: yandex.cloud.mdb.spqr.v1.DatabaseSpec.deletion_protection:type_name -> google.protobuf.BoolValue
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_spqr_v1_database_proto_init() }

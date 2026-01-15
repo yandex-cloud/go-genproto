@@ -1887,13 +1887,13 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\x84\x01\n" +
 	"\x12ListServerResponse\x12@\n" +
 	"\aservers\x18\x01 \x03(\v2&.yandex.cloud.baremetal.v1alpha.ServerR\aservers\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x95\x06\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x99\x06\n" +
 	"\x13CreateServerRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-56R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x122\n" +
-	"\x10hardware_pool_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12C\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x126\n" +
+	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12C\n" +
 	"\x10configuration_id\x18\x05 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x122\n" +
 	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12l\n" +
 	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x03<=2R\x11networkInterfaces\x12X\n" +
@@ -1953,13 +1953,13 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xcb\x06\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xcf\x06\n" +
 	"\x19BatchCreateServersRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-56R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x122\n" +
-	"\x10hardware_pool_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12C\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x126\n" +
+	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12C\n" +
 	"\x10configuration_id\x18\x05 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x122\n" +
 	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12l\n" +
 	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x03<=2R\x11networkInterfaces\x12X\n" +

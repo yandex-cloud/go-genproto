@@ -173,6 +173,10 @@ func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *UpdateNetworkConfigSpec) SetPrivateAccess(v *PrivateAccessConfig) {
+	m.PrivateAccess = v
+}
+
 func (m *UpdateClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

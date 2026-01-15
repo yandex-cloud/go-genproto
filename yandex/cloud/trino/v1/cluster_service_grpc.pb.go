@@ -61,6 +61,7 @@ type ClusterServiceClient interface {
 	// Sets access bindings for the specified Trino cluster.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified Trino cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -209,6 +210,7 @@ type ClusterServiceServer interface {
 	// Sets access bindings for the specified Trino cluster.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified Trino cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 

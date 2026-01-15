@@ -134,6 +134,10 @@ func (m *TopicConfig2_8) SetPreallocate(v *wrapperspb.BoolValue) {
 	m.Preallocate = v
 }
 
+func (m *TopicConfig2_8) SetMessageTimestampType(v MessageTimestampType) {
+	m.MessageTimestampType = v
+}
+
 func (m *TopicConfig3) SetCleanupPolicy(v TopicConfig3_CleanupPolicy) {
 	m.CleanupPolicy = v
 }
@@ -186,6 +190,10 @@ func (m *TopicConfig3) SetPreallocate(v *wrapperspb.BoolValue) {
 	m.Preallocate = v
 }
 
+func (m *TopicConfig3) SetMessageTimestampType(v MessageTimestampType) {
+	m.MessageTimestampType = v
+}
+
 func (m *TopicConfig4) SetCleanupPolicy(v TopicConfig4_CleanupPolicy) {
 	m.CleanupPolicy = v
 }
@@ -236,4 +244,8 @@ func (m *TopicConfig4) SetSegmentBytes(v *wrapperspb.Int64Value) {
 
 func (m *TopicConfig4) SetPreallocate(v *wrapperspb.BoolValue) {
 	m.Preallocate = v
+}
+
+func (m *TopicConfig4) SetMessageTimestampType(v MessageTimestampType) {
+	m.MessageTimestampType = v
 }

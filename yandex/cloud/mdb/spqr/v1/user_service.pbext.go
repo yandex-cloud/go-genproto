@@ -4,6 +4,7 @@ package spqr
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -76,6 +77,10 @@ func (m *UpdateUserRequest) SetSettings(v *UserSettings) {
 
 func (m *UpdateUserRequest) SetGrants(v []string) {
 	m.Grants = v
+}
+
+func (m *UpdateUserRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateUserMetadata) SetClusterId(v string) {
