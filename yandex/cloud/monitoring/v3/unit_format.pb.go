@@ -215,116 +215,152 @@ const (
 	UnitFormat_UNIT_CORE_CPU UnitFormat = 94
 	// Ampere (A).
 	UnitFormat_UNIT_AMPERE UnitFormat = 95
+	// Kiloampere (kA).
+	UnitFormat_UNIT_KILOAMPERE UnitFormat = 96
+	// Megaampere (MA).
+	UnitFormat_UNIT_MEGAAMPERE UnitFormat = 97
+	// Gigaampere (GA).
+	UnitFormat_UNIT_GIGAAMPERE UnitFormat = 98
 	// Volt (V).
-	UnitFormat_UNIT_VOLT UnitFormat = 96
+	UnitFormat_UNIT_VOLT UnitFormat = 99
+	// Kilovolt (kV).
+	UnitFormat_UNIT_KILOVOLT UnitFormat = 100
+	// Megavolt (MV).
+	UnitFormat_UNIT_MEGAVOLT UnitFormat = 101
+	// Gigavolt (GV).
+	UnitFormat_UNIT_GIGAVOLT UnitFormat = 102
 	// Watt (W).
-	UnitFormat_UNIT_WATT UnitFormat = 97
+	UnitFormat_UNIT_WATT UnitFormat = 103
+	// Kilowatt (kW).
+	UnitFormat_UNIT_KILOWATT UnitFormat = 104
+	// Megawatt (MW).
+	UnitFormat_UNIT_MEGAWATT UnitFormat = 105
+	// Gigawatt (GW).
+	UnitFormat_UNIT_GIGAWATT UnitFormat = 106
 	// Ohm (Ohm).
-	UnitFormat_UNIT_OHM UnitFormat = 98
+	UnitFormat_UNIT_OHM UnitFormat = 107
+	// Kiloohm (kOhm).
+	UnitFormat_UNIT_KILOOHM UnitFormat = 108
+	// Megaohm (MOhm).
+	UnitFormat_UNIT_MEGAOHM UnitFormat = 109
+	// Gigaohm (GOhm).
+	UnitFormat_UNIT_GIGAOHM UnitFormat = 110
 )
 
 // Enum value maps for UnitFormat.
 var (
 	UnitFormat_name = map[int32]string{
-		0:  "UNIT_FORMAT_UNSPECIFIED",
-		1:  "UNIT_NONE",
-		2:  "UNIT_COUNT",
-		3:  "UNIT_PERCENT",
-		4:  "UNIT_PERCENT_UNIT",
-		5:  "UNIT_NANOSECONDS",
-		6:  "UNIT_MICROSECONDS",
-		7:  "UNIT_MILLISECONDS",
-		8:  "UNIT_SECONDS",
-		9:  "UNIT_MINUTES",
-		10: "UNIT_HOURS",
-		11: "UNIT_DAYS",
-		12: "UNIT_BITS_SI",
-		13: "UNIT_BYTES_SI",
-		14: "UNIT_KILOBYTES",
-		15: "UNIT_MEGABYTES",
-		16: "UNIT_GIGABYTES",
-		17: "UNIT_TERABYTES",
-		18: "UNIT_PETABYTES",
-		19: "UNIT_EXABYTES",
-		20: "UNIT_BITS_IEC",
-		21: "UNIT_BYTES_IEC",
-		22: "UNIT_KIBIBYTES",
-		23: "UNIT_MEBIBYTES",
-		24: "UNIT_GIBIBYTES",
-		25: "UNIT_TEBIBYTES",
-		26: "UNIT_PEBIBYTES",
-		27: "UNIT_EXBIBYTES",
-		28: "UNIT_REQUESTS_PER_SECOND",
-		29: "UNIT_OPERATIONS_PER_SECOND",
-		30: "UNIT_WRITES_PER_SECOND",
-		31: "UNIT_READS_PER_SECOND",
-		32: "UNIT_PACKETS_PER_SECOND",
-		33: "UNIT_IO_OPERATIONS_PER_SECOND",
-		34: "UNIT_COUNTS_PER_SECOND",
-		35: "UNIT_BITS_SI_PER_SECOND",
-		36: "UNIT_BYTES_SI_PER_SECOND",
-		37: "UNIT_KILOBITS_PER_SECOND",
-		38: "UNIT_KILOBYTES_PER_SECOND",
-		39: "UNIT_MEGABITS_PER_SECOND",
-		40: "UNIT_MEGABYTES_PER_SECOND",
-		41: "UNIT_GIGABITS_PER_SECOND",
-		42: "UNIT_GIGABYTES_PER_SECOND",
-		43: "UNIT_TERABITS_PER_SECOND",
-		44: "UNIT_TERABYTES_PER_SECOND",
-		45: "UNIT_PETABITS_PER_SECOND",
-		46: "UNIT_PETABYTES_PER_SECOND",
-		47: "UNIT_BITS_IEC_PER_SECOND",
-		48: "UNIT_BYTES_IEC_PER_SECOND",
-		49: "UNIT_KIBIBITS_PER_SECOND",
-		50: "UNIT_KIBIBYTES_PER_SECOND",
-		51: "UNIT_MEBIBITS_PER_SECOND",
-		52: "UNIT_MEBIBYTES_PER_SECOND",
-		53: "UNIT_GIBIBITS_PER_SECOND",
-		54: "UNIT_GIBIBYTES_PER_SECOND",
-		55: "UNIT_TEBIBITS_PER_SECOND",
-		56: "UNIT_TEBIBYTES_PER_SECOND",
-		57: "UNIT_PEBIBITS_PER_SECOND",
-		58: "UNIT_PEBIBYTES_PER_SECOND",
-		59: "UNIT_DATETIME_UTC",
-		60: "UNIT_DATETIME_LOCAL",
-		61: "UNIT_HERTZ",
-		62: "UNIT_KILOHERTZ",
-		63: "UNIT_MEGAHERTZ",
-		64: "UNIT_GIGAHERTZ",
-		65: "UNIT_DOLLAR",
-		66: "UNIT_EURO",
-		67: "UNIT_ROUBLE",
-		68: "UNIT_CELSIUS",
-		69: "UNIT_FAHRENHEIT",
-		70: "UNIT_KELVIN",
-		71: "UNIT_FLOP_PER_SECOND",
-		72: "UNIT_KILOFLOP_PER_SECOND",
-		73: "UNIT_MEGAFLOP_PER_SECOND",
-		74: "UNIT_GIGAFLOP_PER_SECOND",
-		75: "UNIT_PETAFLOP_PER_SECOND",
-		76: "UNIT_EXAFLOP_PER_SECOND",
-		77: "UNIT_METERS_PER_SECOND",
-		78: "UNIT_KILOMETERS_PER_HOUR",
-		79: "UNIT_MILES_PER_HOUR",
-		80: "UNIT_MILLIMETER",
-		81: "UNIT_CENTIMETER",
-		82: "UNIT_METER",
-		83: "UNIT_KILOMETER",
-		84: "UNIT_MILE",
-		85: "UNIT_PPM",
-		86: "UNIT_EVENTS_PER_SECOND",
-		87: "UNIT_PACKETS",
-		88: "UNIT_DBM",
-		89: "UNIT_VIRTUAL_CPU",
-		90: "UNIT_MESSAGES_PER_SECOND",
-		91: "UNIT_NANOCORE_CPU",
-		92: "UNIT_MICROCORE_CPU",
-		93: "UNIT_MILLICORE_CPU",
-		94: "UNIT_CORE_CPU",
-		95: "UNIT_AMPERE",
-		96: "UNIT_VOLT",
-		97: "UNIT_WATT",
-		98: "UNIT_OHM",
+		0:   "UNIT_FORMAT_UNSPECIFIED",
+		1:   "UNIT_NONE",
+		2:   "UNIT_COUNT",
+		3:   "UNIT_PERCENT",
+		4:   "UNIT_PERCENT_UNIT",
+		5:   "UNIT_NANOSECONDS",
+		6:   "UNIT_MICROSECONDS",
+		7:   "UNIT_MILLISECONDS",
+		8:   "UNIT_SECONDS",
+		9:   "UNIT_MINUTES",
+		10:  "UNIT_HOURS",
+		11:  "UNIT_DAYS",
+		12:  "UNIT_BITS_SI",
+		13:  "UNIT_BYTES_SI",
+		14:  "UNIT_KILOBYTES",
+		15:  "UNIT_MEGABYTES",
+		16:  "UNIT_GIGABYTES",
+		17:  "UNIT_TERABYTES",
+		18:  "UNIT_PETABYTES",
+		19:  "UNIT_EXABYTES",
+		20:  "UNIT_BITS_IEC",
+		21:  "UNIT_BYTES_IEC",
+		22:  "UNIT_KIBIBYTES",
+		23:  "UNIT_MEBIBYTES",
+		24:  "UNIT_GIBIBYTES",
+		25:  "UNIT_TEBIBYTES",
+		26:  "UNIT_PEBIBYTES",
+		27:  "UNIT_EXBIBYTES",
+		28:  "UNIT_REQUESTS_PER_SECOND",
+		29:  "UNIT_OPERATIONS_PER_SECOND",
+		30:  "UNIT_WRITES_PER_SECOND",
+		31:  "UNIT_READS_PER_SECOND",
+		32:  "UNIT_PACKETS_PER_SECOND",
+		33:  "UNIT_IO_OPERATIONS_PER_SECOND",
+		34:  "UNIT_COUNTS_PER_SECOND",
+		35:  "UNIT_BITS_SI_PER_SECOND",
+		36:  "UNIT_BYTES_SI_PER_SECOND",
+		37:  "UNIT_KILOBITS_PER_SECOND",
+		38:  "UNIT_KILOBYTES_PER_SECOND",
+		39:  "UNIT_MEGABITS_PER_SECOND",
+		40:  "UNIT_MEGABYTES_PER_SECOND",
+		41:  "UNIT_GIGABITS_PER_SECOND",
+		42:  "UNIT_GIGABYTES_PER_SECOND",
+		43:  "UNIT_TERABITS_PER_SECOND",
+		44:  "UNIT_TERABYTES_PER_SECOND",
+		45:  "UNIT_PETABITS_PER_SECOND",
+		46:  "UNIT_PETABYTES_PER_SECOND",
+		47:  "UNIT_BITS_IEC_PER_SECOND",
+		48:  "UNIT_BYTES_IEC_PER_SECOND",
+		49:  "UNIT_KIBIBITS_PER_SECOND",
+		50:  "UNIT_KIBIBYTES_PER_SECOND",
+		51:  "UNIT_MEBIBITS_PER_SECOND",
+		52:  "UNIT_MEBIBYTES_PER_SECOND",
+		53:  "UNIT_GIBIBITS_PER_SECOND",
+		54:  "UNIT_GIBIBYTES_PER_SECOND",
+		55:  "UNIT_TEBIBITS_PER_SECOND",
+		56:  "UNIT_TEBIBYTES_PER_SECOND",
+		57:  "UNIT_PEBIBITS_PER_SECOND",
+		58:  "UNIT_PEBIBYTES_PER_SECOND",
+		59:  "UNIT_DATETIME_UTC",
+		60:  "UNIT_DATETIME_LOCAL",
+		61:  "UNIT_HERTZ",
+		62:  "UNIT_KILOHERTZ",
+		63:  "UNIT_MEGAHERTZ",
+		64:  "UNIT_GIGAHERTZ",
+		65:  "UNIT_DOLLAR",
+		66:  "UNIT_EURO",
+		67:  "UNIT_ROUBLE",
+		68:  "UNIT_CELSIUS",
+		69:  "UNIT_FAHRENHEIT",
+		70:  "UNIT_KELVIN",
+		71:  "UNIT_FLOP_PER_SECOND",
+		72:  "UNIT_KILOFLOP_PER_SECOND",
+		73:  "UNIT_MEGAFLOP_PER_SECOND",
+		74:  "UNIT_GIGAFLOP_PER_SECOND",
+		75:  "UNIT_PETAFLOP_PER_SECOND",
+		76:  "UNIT_EXAFLOP_PER_SECOND",
+		77:  "UNIT_METERS_PER_SECOND",
+		78:  "UNIT_KILOMETERS_PER_HOUR",
+		79:  "UNIT_MILES_PER_HOUR",
+		80:  "UNIT_MILLIMETER",
+		81:  "UNIT_CENTIMETER",
+		82:  "UNIT_METER",
+		83:  "UNIT_KILOMETER",
+		84:  "UNIT_MILE",
+		85:  "UNIT_PPM",
+		86:  "UNIT_EVENTS_PER_SECOND",
+		87:  "UNIT_PACKETS",
+		88:  "UNIT_DBM",
+		89:  "UNIT_VIRTUAL_CPU",
+		90:  "UNIT_MESSAGES_PER_SECOND",
+		91:  "UNIT_NANOCORE_CPU",
+		92:  "UNIT_MICROCORE_CPU",
+		93:  "UNIT_MILLICORE_CPU",
+		94:  "UNIT_CORE_CPU",
+		95:  "UNIT_AMPERE",
+		96:  "UNIT_KILOAMPERE",
+		97:  "UNIT_MEGAAMPERE",
+		98:  "UNIT_GIGAAMPERE",
+		99:  "UNIT_VOLT",
+		100: "UNIT_KILOVOLT",
+		101: "UNIT_MEGAVOLT",
+		102: "UNIT_GIGAVOLT",
+		103: "UNIT_WATT",
+		104: "UNIT_KILOWATT",
+		105: "UNIT_MEGAWATT",
+		106: "UNIT_GIGAWATT",
+		107: "UNIT_OHM",
+		108: "UNIT_KILOOHM",
+		109: "UNIT_MEGAOHM",
+		110: "UNIT_GIGAOHM",
 	}
 	UnitFormat_value = map[string]int32{
 		"UNIT_FORMAT_UNSPECIFIED":       0,
@@ -423,9 +459,21 @@ var (
 		"UNIT_MILLICORE_CPU":            93,
 		"UNIT_CORE_CPU":                 94,
 		"UNIT_AMPERE":                   95,
-		"UNIT_VOLT":                     96,
-		"UNIT_WATT":                     97,
-		"UNIT_OHM":                      98,
+		"UNIT_KILOAMPERE":               96,
+		"UNIT_MEGAAMPERE":               97,
+		"UNIT_GIGAAMPERE":               98,
+		"UNIT_VOLT":                     99,
+		"UNIT_KILOVOLT":                 100,
+		"UNIT_MEGAVOLT":                 101,
+		"UNIT_GIGAVOLT":                 102,
+		"UNIT_WATT":                     103,
+		"UNIT_KILOWATT":                 104,
+		"UNIT_MEGAWATT":                 105,
+		"UNIT_GIGAWATT":                 106,
+		"UNIT_OHM":                      107,
+		"UNIT_KILOOHM":                  108,
+		"UNIT_MEGAOHM":                  109,
+		"UNIT_GIGAOHM":                  110,
 	}
 )
 
@@ -460,7 +508,7 @@ var File_yandex_cloud_monitoring_v3_unit_format_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_monitoring_v3_unit_format_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/monitoring/v3/unit_format.proto\x12\x1ayandex.cloud.monitoring.v3*\xb7\x12\n" +
+	",yandex/cloud/monitoring/v3/unit_format.proto\x12\x1ayandex.cloud.monitoring.v3*\x9e\x14\n" +
 	"\n" +
 	"UnitFormat\x12\x1b\n" +
 	"\x17UNIT_FORMAT_UNSPECIFIED\x10\x00\x12\r\n" +
@@ -563,10 +611,22 @@ const file_yandex_cloud_monitoring_v3_unit_format_proto_rawDesc = "" +
 	"\x12UNIT_MICROCORE_CPU\x10\\\x12\x16\n" +
 	"\x12UNIT_MILLICORE_CPU\x10]\x12\x11\n" +
 	"\rUNIT_CORE_CPU\x10^\x12\x0f\n" +
-	"\vUNIT_AMPERE\x10_\x12\r\n" +
-	"\tUNIT_VOLT\x10`\x12\r\n" +
-	"\tUNIT_WATT\x10a\x12\f\n" +
-	"\bUNIT_OHM\x10bBk\n" +
+	"\vUNIT_AMPERE\x10_\x12\x13\n" +
+	"\x0fUNIT_KILOAMPERE\x10`\x12\x13\n" +
+	"\x0fUNIT_MEGAAMPERE\x10a\x12\x13\n" +
+	"\x0fUNIT_GIGAAMPERE\x10b\x12\r\n" +
+	"\tUNIT_VOLT\x10c\x12\x11\n" +
+	"\rUNIT_KILOVOLT\x10d\x12\x11\n" +
+	"\rUNIT_MEGAVOLT\x10e\x12\x11\n" +
+	"\rUNIT_GIGAVOLT\x10f\x12\r\n" +
+	"\tUNIT_WATT\x10g\x12\x11\n" +
+	"\rUNIT_KILOWATT\x10h\x12\x11\n" +
+	"\rUNIT_MEGAWATT\x10i\x12\x11\n" +
+	"\rUNIT_GIGAWATT\x10j\x12\f\n" +
+	"\bUNIT_OHM\x10k\x12\x10\n" +
+	"\fUNIT_KILOOHM\x10l\x12\x10\n" +
+	"\fUNIT_MEGAOHM\x10m\x12\x10\n" +
+	"\fUNIT_GIGAOHM\x10nBk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
 var (

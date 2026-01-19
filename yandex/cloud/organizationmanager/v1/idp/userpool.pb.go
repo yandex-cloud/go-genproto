@@ -745,14 +745,19 @@ type PasswordQualityPolicy struct {
 	AllowSimilar bool `protobuf:"varint,1,opt,name=allow_similar,json=allowSimilar,proto3" json:"allow_similar,omitempty"`
 	// Maximum password length. Zero means no maximum length is enforced.
 	MaxLength int64 `protobuf:"varint,2,opt,name=max_length,json=maxLength,proto3" json:"max_length,omitempty"`
-	// Minimum password length.
+	// Deprecated. Use Fixed instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/organizationmanager/v1/idp/userpool.proto.
 	MinLength int64 `protobuf:"varint,3,opt,name=min_length,json=minLength,proto3" json:"min_length,omitempty"`
 	// Minimum length of substrings to check for similarity to vulnerable sequences.
 	MatchLength int64 `protobuf:"varint,4,opt,name=match_length,json=matchLength,proto3" json:"match_length,omitempty"`
-	// Character classes required in passwords.
+	// Deprecated. Use Fixed instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/organizationmanager/v1/idp/userpool.proto.
 	RequiredClasses *PasswordQualityPolicy_RequiredClasses `protobuf:"bytes,5,opt,name=required_classes,json=requiredClasses,proto3" json:"required_classes,omitempty"`
-	// Minimum length requirements based on character class diversity.
-	// If not specified, these checks are disabled.
+	// Deprecated. Use Smart instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/organizationmanager/v1/idp/userpool.proto.
 	MinLengthByClassSettings *PasswordQualityPolicy_MinLengthByClassSettings `protobuf:"bytes,6,opt,name=min_length_by_class_settings,json=minLengthByClassSettings,proto3" json:"min_length_by_class_settings,omitempty"`
 	// Defines password complexity policy.
 	//
@@ -809,6 +814,7 @@ func (x *PasswordQualityPolicy) GetMaxLength() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/organizationmanager/v1/idp/userpool.proto.
 func (x *PasswordQualityPolicy) GetMinLength() int64 {
 	if x != nil {
 		return x.MinLength
@@ -823,6 +829,7 @@ func (x *PasswordQualityPolicy) GetMatchLength() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/organizationmanager/v1/idp/userpool.proto.
 func (x *PasswordQualityPolicy) GetRequiredClasses() *PasswordQualityPolicy_RequiredClasses {
 	if x != nil {
 		return x.RequiredClasses
@@ -830,6 +837,7 @@ func (x *PasswordQualityPolicy) GetRequiredClasses() *PasswordQualityPolicy_Requ
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/organizationmanager/v1/idp/userpool.proto.
 func (x *PasswordQualityPolicy) GetMinLengthByClassSettings() *PasswordQualityPolicy_MinLengthByClassSettings {
 	if x != nil {
 		return x.MinLengthByClassSettings
@@ -1065,7 +1073,7 @@ func (x *DomainChallenge_DnsRecord) GetValue() string {
 	return ""
 }
 
-// Character classes that can be required in passwords.
+// Deprecated. Use Fixed instead.
 type PasswordQualityPolicy_RequiredClasses struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Whether lowercase letters are required.
@@ -1138,7 +1146,7 @@ func (x *PasswordQualityPolicy_RequiredClasses) GetSpecials() bool {
 	return false
 }
 
-// Minimum password length requirements based on character class diversity.
+// Deprecated. Use Smart instead.
 type PasswordQualityPolicy_MinLengthByClassSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Minimum length for passwords with one character class.
@@ -1439,17 +1447,17 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"PROCESSING\x10\x02\x12\t\n" +
 	"\x05VALID\x10\x03\x12\v\n" +
 	"\aINVALID\x10\x04B\v\n" +
-	"\tchallengeJ\x04\b\x03\x10\x04\"\x94\n" +
+	"\tchallengeJ\x04\b\x03\x10\x04\"\x97\n" +
 	"\n" +
 	"\x15PasswordQualityPolicy\x12#\n" +
 	"\rallow_similar\x18\x01 \x01(\bR\fallowSimilar\x12&\n" +
 	"\n" +
-	"max_length\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\tmaxLength\x12&\n" +
+	"max_length\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\tmaxLength\x12!\n" +
 	"\n" +
-	"min_length\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\tminLength\x12*\n" +
-	"\fmatch_length\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\vmatchLength\x12y\n" +
-	"\x10required_classes\x18\x05 \x01(\v2N.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClassesR\x0frequiredClasses\x12\x97\x01\n" +
-	"\x1cmin_length_by_class_settings\x18\x06 \x01(\v2W.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettingsR\x18minLengthByClassSettings\x12\\\n" +
+	"min_length\x18\x03 \x01(\x03B\x02\x18\x01R\tminLength\x12*\n" +
+	"\fmatch_length\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\vmatchLength\x12}\n" +
+	"\x10required_classes\x18\x05 \x01(\v2N.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClassesB\x02\x18\x01R\x0frequiredClasses\x12\x9b\x01\n" +
+	"\x1cmin_length_by_class_settings\x18\x06 \x01(\v2W.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettingsB\x02\x18\x01R\x18minLengthByClassSettings\x12\\\n" +
 	"\x05fixed\x18\a \x01(\v2D.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.FixedH\x00R\x05fixed\x12\\\n" +
 	"\x05smart\x18\b \x01(\v2D.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.SmartH\x00R\x05smart\x1au\n" +
 	"\x0fRequiredClasses\x12\x16\n" +
