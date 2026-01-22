@@ -82,6 +82,12 @@ func (m *CreateStreamLineRequest) SetRtmpPull(v *RTMPPullParams) {
 	}
 }
 
+func (m *CreateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
+	m.InputParams = &CreateStreamLineRequest_SrtPull{
+		SrtPull: v,
+	}
+}
+
 func (m *CreateStreamLineRequest) SetManualLine(v *ManualLineParams) {
 	m.LineTypeParams = &CreateStreamLineRequest_ManualLine{
 		ManualLine: v,
@@ -129,6 +135,12 @@ func (m *UpdateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 func (m *UpdateStreamLineRequest) SetRtmpPull(v *RTMPPullParams) {
 	m.InputParams = &UpdateStreamLineRequest_RtmpPull{
 		RtmpPull: v,
+	}
+}
+
+func (m *UpdateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
+	m.InputParams = &UpdateStreamLineRequest_SrtPull{
+		SrtPull: v,
 	}
 }
 
@@ -187,6 +199,10 @@ func (m *PerformLineActionMetadata) SetStreamLineId(v string) {
 }
 
 func (m *RTMPPullParams) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *SRTPullParams) SetUrl(v string) {
 	m.Url = v
 }
 

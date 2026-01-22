@@ -669,6 +669,7 @@ func (MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle) E
 	return file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDescGZIP(), []int{0, 3, 0, 0}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/monitoring/v3/multi_source_chart_widget.proto.
 type MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineHidingType int32
 
 const (
@@ -2733,9 +2734,17 @@ type MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings struct {
 	// Linet style settings.
 	LineStyle MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle `protobuf:"varint,8,opt,name=line_style,json=lineStyle,proto3,enum=yandex.cloud.monitoring.v3.MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineStyle" json:"line_style,omitempty"`
 	// Line hiding settings.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/monitoring/v3/multi_source_chart_widget.proto.
 	LineHidingType MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineHidingType `protobuf:"varint,10,opt,name=line_hiding_type,json=lineHidingType,proto3,enum=yandex.cloud.monitoring.v3.MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineHidingType" json:"line_hiding_type,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Hide line in legend.
+	LineHidingInLegend bool `protobuf:"varint,11,opt,name=line_hiding_in_legend,json=lineHidingInLegend,proto3" json:"line_hiding_in_legend,omitempty"`
+	// Hide line in tooltip.
+	LineHidingInTooltip bool `protobuf:"varint,12,opt,name=line_hiding_in_tooltip,json=lineHidingInTooltip,proto3" json:"line_hiding_in_tooltip,omitempty"`
+	// Hide line in chart.
+	LineHidingInChart bool `protobuf:"varint,13,opt,name=line_hiding_in_chart,json=lineHidingInChart,proto3" json:"line_hiding_in_chart,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) Reset() {
@@ -2824,6 +2833,7 @@ func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineS
 	return MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_STYLE_UNSPECIFIED
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/monitoring/v3/multi_source_chart_widget.proto.
 func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineHidingType() MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineHidingType {
 	if x != nil {
 		return x.LineHidingType
@@ -2831,11 +2841,32 @@ func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineH
 	return MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_HIDING_TYPE_UNSPECIFIED
 }
 
+func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineHidingInLegend() bool {
+	if x != nil {
+		return x.LineHidingInLegend
+	}
+	return false
+}
+
+func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineHidingInTooltip() bool {
+	if x != nil {
+		return x.LineHidingInTooltip
+	}
+	return false
+}
+
+func (x *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineHidingInChart() bool {
+	if x != nil {
+		return x.LineHidingInChart
+	}
+	return false
+}
+
 var File_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\x86F\n" +
+	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\xa7G\n" +
 	"\x16MultiSourceChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12S\n" +
 	"\atargets\x18\x02 \x03(\v29.yandex.cloud.monitoring.v3.MultiSourceChartWidget.TargetR\atargets\x12`\n" +
@@ -2980,13 +3011,13 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\x16SERIES_AGGREGATION_MIN\x10\x02\x12\x1a\n" +
 	"\x16SERIES_AGGREGATION_MAX\x10\x03\x12\x1b\n" +
 	"\x17SERIES_AGGREGATION_LAST\x10\x04\x12\x1a\n" +
-	"\x16SERIES_AGGREGATION_SUM\x10\x05\x1a\xc0\f\n" +
+	"\x16SERIES_AGGREGATION_SUM\x10\x05\x1a\xe1\r\n" +
 	"\x0fSeriesOverrides\x12\x14\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x12#\n" +
 	"\ftarget_index\x18\x02 \x01(\tH\x00R\vtargetIndex\x12u\n" +
 	"\bsettings\x18\x03 \x01(\v2Y.yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettingsR\bsettings\x12#\n" +
 	"\roverride_name\x18\x04 \x01(\tR\foverrideName\x12\\\n" +
-	"\amatcher\x18\x05 \x01(\v2B.yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcherR\amatcher\x1a\xaf\a\n" +
+	"\amatcher\x18\x05 \x01(\v2B.yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcherR\amatcher\x1a\xd0\b\n" +
 	"\x16SeriesOverrideSettings\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05color\x18\x02 \x01(\tR\x05color\x12n\n" +
@@ -2998,19 +3029,22 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\n" +
 	"line_width\x18\a \x01(\x03R\tlineWidth\x12\x82\x01\n" +
 	"\n" +
-	"line_style\x18\b \x01(\x0e2c.yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyleR\tlineStyle\x12\x92\x01\n" +
+	"line_style\x18\b \x01(\x0e2c.yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyleR\tlineStyle\x12\x96\x01\n" +
 	"\x10line_hiding_type\x18\n" +
-	" \x01(\x0e2h.yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineHidingTypeR\x0elineHidingType\"g\n" +
+	" \x01(\x0e2h.yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineHidingTypeB\x02\x18\x01R\x0elineHidingType\x121\n" +
+	"\x15line_hiding_in_legend\x18\v \x01(\bR\x12lineHidingInLegend\x123\n" +
+	"\x16line_hiding_in_tooltip\x18\f \x01(\bR\x13lineHidingInTooltip\x12/\n" +
+	"\x14line_hiding_in_chart\x18\r \x01(\bR\x11lineHidingInChart\"g\n" +
 	"\tLineStyle\x12\x1a\n" +
 	"\x16LINE_STYLE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10LINE_STYLE_SOLID\x10\x01\x12\x13\n" +
 	"\x0fLINE_STYLE_DASH\x10\x02\x12\x13\n" +
-	"\x0fLINE_STYLE_DOTS\x10\x03\"\x9d\x01\n" +
+	"\x0fLINE_STYLE_DOTS\x10\x03\"\xa1\x01\n" +
 	"\x0eLineHidingType\x12 \n" +
 	"\x1cLINE_HIDING_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cLINE_HIDING_TYPE_HIDE_LEGEND\x10\x01\x12!\n" +
 	"\x1dLINE_HIDING_TYPE_HIDE_TOOLTIP\x10\x02\x12$\n" +
-	" LINE_HIDING_TYPE_HIDE_EVERYWHERE\x10\x03J\x04\b\t\x10\n" +
+	" LINE_HIDING_TYPE_HIDE_EVERYWHERE\x10\x03\x1a\x02\x18\x01J\x04\b\t\x10\n" +
 	"\"b\n" +
 	"\rYaxisPosition\x12\x1e\n" +
 	"\x1aYAXIS_POSITION_UNSPECIFIED\x10\x00\x12\x17\n" +

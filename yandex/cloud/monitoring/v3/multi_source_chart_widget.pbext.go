@@ -394,6 +394,18 @@ func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineH
 	m.LineHidingType = v
 }
 
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInLegend(v bool) {
+	m.LineHidingInLegend = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInTooltip(v bool) {
+	m.LineHidingInTooltip = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInChart(v bool) {
+	m.LineHidingInChart = v
+}
+
 type MultiSourceChartWidget_OverrideMatcher_Type = isMultiSourceChartWidget_OverrideMatcher_Type
 
 func (m *MultiSourceChartWidget_OverrideMatcher) SetType(v MultiSourceChartWidget_OverrideMatcher_Type) {

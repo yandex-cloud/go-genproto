@@ -4746,7 +4746,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"Ĭ\x01\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"Ȭ\x01\n" +
 	"\x10ClickhouseConfig\x12V\n" +
 	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x12backgroundPoolSize\x12}\n" +
 	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12g\n" +
@@ -4803,8 +4803,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x18query_metric_log_enabled\x18S \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryMetricLogEnabled\x12j\n" +
 	"\x1fquery_metric_log_retention_size\x18T \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryMetricLogRetentionSize\x12j\n" +
 	"\x1fquery_metric_log_retention_time\x18U \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryMetricLogRetentionTime\x12\x91\x01\n" +
-	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12N\n" +
-	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x0emaxConnections\x12\\\n" +
+	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12R\n" +
+	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b128-8192R\x0emaxConnections\x12\\\n" +
 	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x05>=100R\x14maxConcurrentQueries\x12X\n" +
 	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxTableSizeToDrop\x12`\n" +
 	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16maxPartitionSizeToDrop\x12I\n" +

@@ -892,7 +892,7 @@ const file_yandex_cloud_video_v1_playlist_service_proto_rawDesc = "" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12#\n" +
 	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12D\n" +
+	"\x8a\xc81\x06<=5000R\vdescription\x12D\n" +
 	"\x05items\x18\x04 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemB\t\x82\xc81\x05<=100R\x05items\x120\n" +
 	"\x0fstyle_preset_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\"9\n" +
 	"\x16CreatePlaylistMetadata\x12\x1f\n" +
@@ -905,7 +905,7 @@ const file_yandex_cloud_video_v1_playlist_service_proto_rawDesc = "" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
 	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12D\n" +
+	"\x8a\xc81\x06<=5000R\vdescription\x12D\n" +
 	"\x05items\x18\x05 \x03(\v2#.yandex.cloud.video.v1.PlaylistItemB\t\x82\xc81\x05<=100R\x05items\x120\n" +
 	"\x0fstyle_preset_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\"9\n" +
 	"\x16UpdatePlaylistMetadata\x12\x1f\n" +

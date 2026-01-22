@@ -27,8 +27,10 @@ type AuthMethod int32
 
 const (
 	AuthMethod_AUTH_METHOD_UNSPECIFIED AuthMethod = 0
-	AuthMethod_AUTH_METHOD_PASSWORD    AuthMethod = 1
-	AuthMethod_AUTH_METHOD_IAM         AuthMethod = 2
+	// Standard authentication mode with password
+	AuthMethod_AUTH_METHOD_PASSWORD AuthMethod = 1
+	// Alternative authentication mode with IAM token
+	AuthMethod_AUTH_METHOD_IAM AuthMethod = 2
 )
 
 // Enum value maps for AuthMethod.
@@ -75,8 +77,10 @@ func (AuthMethod) EnumDescriptor() ([]byte, []int) {
 type UserPasswordEncryption int32
 
 const (
-	UserPasswordEncryption_USER_PASSWORD_ENCRYPTION_UNSPECIFIED   UserPasswordEncryption = 0
-	UserPasswordEncryption_USER_PASSWORD_ENCRYPTION_MD5           UserPasswordEncryption = 1
+	UserPasswordEncryption_USER_PASSWORD_ENCRYPTION_UNSPECIFIED UserPasswordEncryption = 0
+	// MD5 password-based authentication method
+	UserPasswordEncryption_USER_PASSWORD_ENCRYPTION_MD5 UserPasswordEncryption = 1
+	// SCRAM-SHA-256 password-based authentication method
 	UserPasswordEncryption_USER_PASSWORD_ENCRYPTION_SCRAM_SHA_256 UserPasswordEncryption = 2
 )
 
@@ -125,13 +129,20 @@ type PGAuditSettings_PGAuditSettingsLog int32
 
 const (
 	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_UNSPECIFIED PGAuditSettings_PGAuditSettingsLog = 0
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_READ        PGAuditSettings_PGAuditSettingsLog = 1
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_WRITE       PGAuditSettings_PGAuditSettingsLog = 2
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_FUNCTION    PGAuditSettings_PGAuditSettingsLog = 3
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_ROLE        PGAuditSettings_PGAuditSettingsLog = 4
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_DDL         PGAuditSettings_PGAuditSettingsLog = 5
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_MISC        PGAuditSettings_PGAuditSettingsLog = 6
-	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_MISC_SET    PGAuditSettings_PGAuditSettingsLog = 7
+	// `SELECT` and `COPY` queries are logged if the data source is a relation or query.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_READ PGAuditSettings_PGAuditSettingsLog = 1
+	// `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` queries are logged if the data target is a relation.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_WRITE PGAuditSettings_PGAuditSettingsLog = 2
+	// Function invocations and `DO` sections are logged.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_FUNCTION PGAuditSettings_PGAuditSettingsLog = 3
+	// Statements related to role and privilege management, such as `GRANT`, `REVOKE`, or `CREATE/ALTER/DROP ROLE`, are logged.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_ROLE PGAuditSettings_PGAuditSettingsLog = 4
+	// Any `DDL` statements that do not belong to the `ROLE` class are logged.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_DDL PGAuditSettings_PGAuditSettingsLog = 5
+	// Miscellaneous commands, such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`, are logged.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_MISC PGAuditSettings_PGAuditSettingsLog = 6
+	// Miscellaneous `SET` commands, e.g., `SET ROLE`, are logged.
+	PGAuditSettings_PG_AUDIT_SETTINGS_LOG_MISC_SET PGAuditSettings_PGAuditSettingsLog = 7
 )
 
 // Enum value maps for PGAuditSettings_PGAuditSettingsLog.
@@ -444,8 +455,9 @@ type User struct {
 	// When used in transaction pooling, this setting limits the number of user's active transactions; therefore, in this mode user can open thousands of connections, but only `N` concurrent connections will be opened, where `N` is the value of the setting.
 	//
 	// Minimum value: `10` (default: `50`), when used in session pooling.
-	ConnLimit int64         `protobuf:"varint,4,opt,name=conn_limit,json=connLimit,proto3" json:"conn_limit,omitempty"`
-	Settings  *UserSettings `protobuf:"bytes,5,opt,name=settings,proto3" json:"settings,omitempty"`
+	ConnLimit int64 `protobuf:"varint,4,opt,name=conn_limit,json=connLimit,proto3" json:"conn_limit,omitempty"`
+	// PostgreSQL and connection pooler user settings.
+	Settings *UserSettings `protobuf:"bytes,5,opt,name=settings,proto3" json:"settings,omitempty"`
 	// This flag defines whether the user can login to a PostgreSQL database.
 	//
 	// Default value: `true` (login is allowed).
@@ -873,7 +885,7 @@ func (x *PGAuditSettings) GetLog() []PGAuditSettings_PGAuditSettingsLog {
 	return nil
 }
 
-// PostgreSQL user settings.
+// PostgreSQL and connection pooler user settings.
 type UserSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// SQL sets an isolation level for each transaction.
@@ -917,9 +929,10 @@ type UserSettings struct {
 	//
 	// For more information, see the [Odyssey documentation](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string).
 	PoolMode UserSettings_PoolingMode `protobuf:"varint,7,opt,name=pool_mode,json=poolMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.UserSettings_PoolingMode" json:"pool_mode,omitempty"`
-	// User can use prepared statements with transaction pooling.
+	// User can use [prepared statements](https://www.postgresql.org/docs/current/sql-prepare.html) with transaction pooling.
+	// This requires `pool_mode` to be set to TRANSACTION.
 	//
-	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-prepare.html).
+	// [Odyssey documentation](https://pg-odyssey.tech/configuration/rules.html#pool_reserve_prepared_statement).
 	PreparedStatementsPooling *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=prepared_statements_pooling,json=preparedStatementsPooling,proto3" json:"prepared_statements_pooling,omitempty"`
 	// The connection pooler setting. It determines the maximum allowed replication lag (in seconds).
 	// Pooler will reject connections to the replica with a lag above this threshold.

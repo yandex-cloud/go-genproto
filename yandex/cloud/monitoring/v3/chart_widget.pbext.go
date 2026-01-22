@@ -314,6 +314,18 @@ func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingType(v
 	m.LineHidingType = v
 }
 
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInLegend(v bool) {
+	m.LineHidingInLegend = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInTooltip(v bool) {
+	m.LineHidingInTooltip = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInChart(v bool) {
+	m.LineHidingInChart = v
+}
+
 type ChartWidget_OverrideMatcher_Type = isChartWidget_OverrideMatcher_Type
 
 func (m *ChartWidget_OverrideMatcher) SetType(v ChartWidget_OverrideMatcher_Type) {

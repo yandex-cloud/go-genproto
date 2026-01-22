@@ -1674,7 +1674,7 @@ const file_yandex_cloud_video_v1_episode_service_proto_rawDesc = "" +
 	"\aline_id\x18e \x01(\tB\b\x8a\xc81\x04<=50H\x00R\x06lineId\x12#\n" +
 	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
+	"\x8a\xc81\x06<=5000R\vdescription\x12+\n" +
 	"\fthumbnail_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x129\n" +
 	"\n" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x12;\n" +
@@ -1699,7 +1699,7 @@ const file_yandex_cloud_video_v1_episode_service_proto_rawDesc = "" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
 	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
+	"\x8a\xc81\x06<=5000R\vdescription\x12+\n" +
 	"\fthumbnail_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x129\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x12;\n" +

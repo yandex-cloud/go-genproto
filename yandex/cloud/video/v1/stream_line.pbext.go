@@ -42,6 +42,12 @@ func (m *StreamLine) SetRtmpPull(v *RTMPPullInput) {
 	}
 }
 
+func (m *StreamLine) SetSrtPull(v *SRTPullInput) {
+	m.InputType = &StreamLine_SrtPull{
+		SrtPull: v,
+	}
+}
+
 func (m *StreamLine) SetManualLine(v *ManualLine) {
 	m.LineType = &StreamLine_ManualLine{
 		ManualLine: v,
@@ -75,6 +81,10 @@ func (m *RTMPPushInput) SetUrl(v string) {
 }
 
 func (m *RTMPPullInput) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *SRTPullInput) SetUrl(v string) {
 	m.Url = v
 }
 
