@@ -226,9 +226,11 @@ type GenSearchRequest struct {
 	// Get partial results
 	GetPartialResults bool `protobuf:"varint,10,opt,name=get_partial_results,json=getPartialResults,proto3" json:"get_partial_results,omitempty"`
 	// Search flags
-	Metadata      *SearchMetadata `protobuf:"bytes,11,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Metadata *SearchMetadata `protobuf:"bytes,11,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// Return rich structured answer
+	EnableRichStructuredAnswer bool `protobuf:"varint,12,opt,name=enable_rich_structured_answer,json=enableRichStructuredAnswer,proto3" json:"enable_rich_structured_answer,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GenSearchRequest) Reset() {
@@ -349,6 +351,13 @@ func (x *GenSearchRequest) GetMetadata() *SearchMetadata {
 		return x.Metadata
 	}
 	return nil
+}
+
+func (x *GenSearchRequest) GetEnableRichStructuredAnswer() bool {
+	if x != nil {
+		return x.EnableRichStructuredAnswer
+	}
+	return false
 }
 
 type isGenSearchRequest_SiteOptions interface {
@@ -841,8 +850,7 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"x\n" +
 	"\x10GenSearchMessage\x12)\n" +
 	"\acontent\x18\x01 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=16384R\acontent\x129\n" +
-	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xdd\n" +
-	"\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xa0\v\n" +
 	"\x10GenSearchRequest\x12R\n" +
 	"\bmessages\x18\x01 \x03(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageB\t\x82\xc81\x051-100R\bmessages\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12L\n" +
@@ -856,7 +864,8 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"searchType\x12.\n" +
 	"\x13get_partial_results\x18\n" +
 	" \x01(\bR\x11getPartialResults\x12E\n" +
-	"\bmetadata\x18\v \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\x1a5\n" +
+	"\bmetadata\x18\v \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\x12A\n" +
+	"\x1denable_rich_structured_answer\x18\f \x01(\bR\x1aenableRichStructuredAnswer\x1a5\n" +
 	"\n" +
 	"SiteOption\x12'\n" +
 	"\x04site\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04site\x1a2\n" +

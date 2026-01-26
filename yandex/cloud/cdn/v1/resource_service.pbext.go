@@ -3,6 +3,7 @@
 package cdn
 
 import (
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -164,4 +165,12 @@ func (m *GetProviderCNameResponse) SetCname(v string) {
 
 func (m *GetProviderCNameResponse) SetFolderId(v string) {
 	m.FolderId = v
+}
+
+func (m *GetResourceAttributesRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *GetResourceAttributesResponse) SetAttributes(v *structpb.Value) {
+	m.Attributes = v
 }

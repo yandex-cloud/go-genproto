@@ -2680,10 +2680,6 @@ type RestoreClusterRequest struct {
 	DeletionProtection bool `protobuf:"varint,12,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Host groups to place VMs of cluster on.
 	HostGroupIds []string `protobuf:"bytes,13,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
-	// The setting is deprecated and has no effect.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster_service.proto.
-	PlacementGroupId string `protobuf:"bytes,14,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
 	// A Greenplum® cluster maintenance window. Should be defined by either one of the two options.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,15,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Number of segment hosts
@@ -2828,14 +2824,6 @@ func (x *RestoreClusterRequest) GetHostGroupIds() []string {
 		return x.HostGroupIds
 	}
 	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster_service.proto.
-func (x *RestoreClusterRequest) GetPlacementGroupId() string {
-	if x != nil {
-		return x.PlacementGroupId
-	}
-	return ""
 }
 
 func (x *RestoreClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
@@ -3171,7 +3159,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xbe\v\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x92\v\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12.\n" +
 	"\x04time\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12)\n" +
@@ -3188,8 +3176,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12,\n" +
 	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12$\n" +
-	"\x0ehost_group_ids\x18\r \x03(\tR\fhostGroupIds\x120\n" +
-	"\x12placement_group_id\x18\x0e \x01(\tB\x02\x18\x01R\x10placementGroupId\x12_\n" +
+	"\x0ehost_group_ids\x18\r \x03(\tR\fhostGroupIds\x12_\n" +
 	"\x12maintenance_window\x18\x0f \x01(\v20.yandex.cloud.mdb.greenplum.v1.MaintenanceWindowR\x11maintenanceWindow\x12,\n" +
 	"\x12segment_host_count\x18\x11 \x01(\x03R\x10segmentHostCount\x12&\n" +
 	"\x0fsegment_in_host\x18\x12 \x01(\x03R\rsegmentInHost\x12_\n" +
@@ -3199,7 +3186,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x12service_account_id\x18\x18 \x01(\tR\x10serviceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x16\x10\x17J\x04\b\x17\x10\x18\"T\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x0e\x10\x0fJ\x04\b\x16\x10\x17J\x04\b\x17\x10\x18\"T\n" +
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +

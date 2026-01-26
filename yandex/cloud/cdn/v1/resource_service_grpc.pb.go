@@ -26,6 +26,7 @@ const (
 	ResourceService_Update_FullMethodName           = "/yandex.cloud.cdn.v1.ResourceService/Update"
 	ResourceService_Delete_FullMethodName           = "/yandex.cloud.cdn.v1.ResourceService/Delete"
 	ResourceService_GetProviderCName_FullMethodName = "/yandex.cloud.cdn.v1.ResourceService/GetProviderCName"
+	ResourceService_GetAttributes_FullMethodName    = "/yandex.cloud.cdn.v1.ResourceService/GetAttributes"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -53,6 +54,8 @@ type ResourceServiceClient interface {
 	Delete(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deprecated: Provider-specific CNAME is now available in the `provider_cname` field of each Resource message.
 	GetProviderCName(ctx context.Context, in *GetProviderCNameRequest, opts ...grpc.CallOption) (*GetProviderCNameResponse, error)
+	// Get resource attributes.
+	GetAttributes(ctx context.Context, in *GetResourceAttributesRequest, opts ...grpc.CallOption) (*GetResourceAttributesResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -123,6 +126,16 @@ func (c *resourceServiceClient) GetProviderCName(ctx context.Context, in *GetPro
 	return out, nil
 }
 
+func (c *resourceServiceClient) GetAttributes(ctx context.Context, in *GetResourceAttributesRequest, opts ...grpc.CallOption) (*GetResourceAttributesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResourceAttributesResponse)
+	err := c.cc.Invoke(ctx, ResourceService_GetAttributes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations should embed UnimplementedResourceServiceServer
 // for forward compatibility.
@@ -148,6 +161,8 @@ type ResourceServiceServer interface {
 	Delete(context.Context, *DeleteResourceRequest) (*operation.Operation, error)
 	// Deprecated: Provider-specific CNAME is now available in the `provider_cname` field of each Resource message.
 	GetProviderCName(context.Context, *GetProviderCNameRequest) (*GetProviderCNameResponse, error)
+	// Get resource attributes.
+	GetAttributes(context.Context, *GetResourceAttributesRequest) (*GetResourceAttributesResponse, error)
 }
 
 // UnimplementedResourceServiceServer should be embedded to have
@@ -174,6 +189,9 @@ func (UnimplementedResourceServiceServer) Delete(context.Context, *DeleteResourc
 }
 func (UnimplementedResourceServiceServer) GetProviderCName(context.Context, *GetProviderCNameRequest) (*GetProviderCNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProviderCName not implemented")
+}
+func (UnimplementedResourceServiceServer) GetAttributes(context.Context, *GetResourceAttributesRequest) (*GetResourceAttributesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAttributes not implemented")
 }
 func (UnimplementedResourceServiceServer) testEmbeddedByValue() {}
 
@@ -303,6 +321,24 @@ func _ResourceService_GetProviderCName_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ResourceService_GetAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResourceAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).GetAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_GetAttributes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).GetAttributes(ctx, req.(*GetResourceAttributesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ResourceService_ServiceDesc is the grpc.ServiceDesc for ResourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -333,6 +369,10 @@ var ResourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProviderCName",
 			Handler:    _ResourceService_GetProviderCName_Handler,
+		},
+		{
+			MethodName: "GetAttributes",
+			Handler:    _ResourceService_GetAttributes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

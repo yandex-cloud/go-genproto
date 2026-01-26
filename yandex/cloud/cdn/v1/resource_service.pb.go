@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
@@ -786,6 +787,96 @@ func (x *GetProviderCNameResponse) GetFolderId() string {
 	return ""
 }
 
+type GetResourceAttributesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource to get attributes for.
+	ResourceId    string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetResourceAttributesRequest) Reset() {
+	*x = GetResourceAttributesRequest{}
+	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetResourceAttributesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetResourceAttributesRequest) ProtoMessage() {}
+
+func (x *GetResourceAttributesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetResourceAttributesRequest.ProtoReflect.Descriptor instead.
+func (*GetResourceAttributesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cdn_v1_resource_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetResourceAttributesRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+type GetResourceAttributesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resource attributes.
+	Attributes    *structpb.Value `protobuf:"bytes,1,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetResourceAttributesResponse) Reset() {
+	*x = GetResourceAttributesResponse{}
+	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetResourceAttributesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetResourceAttributesResponse) ProtoMessage() {}
+
+func (x *GetResourceAttributesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetResourceAttributesResponse.ProtoReflect.Descriptor instead.
+func (*GetResourceAttributesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cdn_v1_resource_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetResourceAttributesResponse) GetAttributes() *structpb.Value {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
 type CreateResourceRequest_Origin struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to OriginVariant:
@@ -800,7 +891,7 @@ type CreateResourceRequest_Origin struct {
 
 func (x *CreateResourceRequest_Origin) Reset() {
 	*x = CreateResourceRequest_Origin{}
-	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -812,7 +903,7 @@ func (x *CreateResourceRequest_Origin) String() string {
 func (*CreateResourceRequest_Origin) ProtoMessage() {}
 
 func (x *CreateResourceRequest_Origin) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -893,7 +984,7 @@ var File_yandex_cloud_cdn_v1_resource_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/cdn/v1/resource_service.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/cdn/v1/origin.proto\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
+	"*yandex/cloud/cdn/v1/resource_service.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/cdn/v1/origin.proto\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetResourceRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\"\x94\x01\n" +
@@ -959,7 +1050,14 @@ const file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"M\n" +
 	"\x18GetProviderCNameResponse\x12\x14\n" +
 	"\x05cname\x18\x01 \x01(\tR\x05cname\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId2\x98\a\n" +
+	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\"M\n" +
+	"\x1cGetResourceAttributesRequest\x12-\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"resourceId\"W\n" +
+	"\x1dGetResourceAttributesResponse\x126\n" +
+	"\n" +
+	"attributes\x18\x01 \x01(\v2\x16.google.protobuf.ValueR\n" +
+	"attributes2\x90\b\n" +
 	"\x0fResourceService\x12v\n" +
 	"\x03Get\x12'.yandex.cloud.cdn.v1.GetResourceRequest\x1a\x1d.yandex.cloud.cdn.v1.Resource\"'\x82\xd3\xe4\x93\x02!\x12\x1f/cdn/v1/resources/{resource_id}\x12x\n" +
 	"\x04List\x12).yandex.cloud.cdn.v1.ListResourcesRequest\x1a*.yandex.cloud.cdn.v1.ListResourcesResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/cdn/v1/resources\x12\x9b\x01\n" +
@@ -969,7 +1067,8 @@ const file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc = "" +
 	"\x16UpdateResourceMetadata\x12\bResource\x82\xd3\xe4\x93\x02$:\x01*2\x1f/cdn/v1/resources/{resource_id}\x12\xb3\x01\n" +
 	"\x06Delete\x12*.yandex.cloud.cdn.v1.DeleteResourceRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*/\n" +
 	"\x16DeleteResourceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02!*\x1f/cdn/v1/resources/{resource_id}\x12\x92\x01\n" +
-	"\x10GetProviderCName\x12,.yandex.cloud.cdn.v1.GetProviderCNameRequest\x1a-.yandex.cloud.cdn.v1.GetProviderCNameResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/cdn/v1/cname/{folder_id}BV\n" +
+	"\x10GetProviderCName\x12,.yandex.cloud.cdn.v1.GetProviderCNameRequest\x1a-.yandex.cloud.cdn.v1.GetProviderCNameResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/cdn/v1/cname/{folder_id}\x12v\n" +
+	"\rGetAttributes\x121.yandex.cloud.cdn.v1.GetResourceAttributesRequest\x1a2.yandex.cloud.cdn.v1.GetResourceAttributesResponseBV\n" +
 	"\x17yandex.cloud.api.cdn.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cdn/v1;cdnb\x06proto3"
 
 var (
@@ -984,68 +1083,74 @@ func file_yandex_cloud_cdn_v1_resource_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_cdn_v1_resource_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_cdn_v1_resource_service_proto_goTypes = []any{
-	(*GetResourceRequest)(nil),           // 0: yandex.cloud.cdn.v1.GetResourceRequest
-	(*ListResourcesRequest)(nil),         // 1: yandex.cloud.cdn.v1.ListResourcesRequest
-	(*ListResourcesResponse)(nil),        // 2: yandex.cloud.cdn.v1.ListResourcesResponse
-	(*CreateResourceRequest)(nil),        // 3: yandex.cloud.cdn.v1.CreateResourceRequest
-	(*ResourceOriginParams)(nil),         // 4: yandex.cloud.cdn.v1.ResourceOriginParams
-	(*CreateResourceMetadata)(nil),       // 5: yandex.cloud.cdn.v1.CreateResourceMetadata
-	(*UpdateResourceRequest)(nil),        // 6: yandex.cloud.cdn.v1.UpdateResourceRequest
-	(*UpdateResourceMetadata)(nil),       // 7: yandex.cloud.cdn.v1.UpdateResourceMetadata
-	(*DeleteResourceRequest)(nil),        // 8: yandex.cloud.cdn.v1.DeleteResourceRequest
-	(*DeleteResourceMetadata)(nil),       // 9: yandex.cloud.cdn.v1.DeleteResourceMetadata
-	(*GetProviderCNameRequest)(nil),      // 10: yandex.cloud.cdn.v1.GetProviderCNameRequest
-	(*GetProviderCNameResponse)(nil),     // 11: yandex.cloud.cdn.v1.GetProviderCNameResponse
-	(*CreateResourceRequest_Origin)(nil), // 12: yandex.cloud.cdn.v1.CreateResourceRequest.Origin
-	nil,                                  // 13: yandex.cloud.cdn.v1.CreateResourceRequest.LabelsEntry
-	nil,                                  // 14: yandex.cloud.cdn.v1.UpdateResourceRequest.LabelsEntry
-	(*Resource)(nil),                     // 15: yandex.cloud.cdn.v1.Resource
-	(*SecondaryHostnames)(nil),           // 16: yandex.cloud.cdn.v1.SecondaryHostnames
-	(OriginProtocol)(0),                  // 17: yandex.cloud.cdn.v1.OriginProtocol
-	(*wrapperspb.BoolValue)(nil),         // 18: google.protobuf.BoolValue
-	(*ResourceOptions)(nil),              // 19: yandex.cloud.cdn.v1.ResourceOptions
-	(*SSLTargetCertificate)(nil),         // 20: yandex.cloud.cdn.v1.SSLTargetCertificate
-	(*OriginMeta)(nil),                   // 21: yandex.cloud.cdn.v1.OriginMeta
-	(*wrapperspb.Int64Value)(nil),        // 22: google.protobuf.Int64Value
-	(*operation.Operation)(nil),          // 23: yandex.cloud.operation.Operation
+	(*GetResourceRequest)(nil),            // 0: yandex.cloud.cdn.v1.GetResourceRequest
+	(*ListResourcesRequest)(nil),          // 1: yandex.cloud.cdn.v1.ListResourcesRequest
+	(*ListResourcesResponse)(nil),         // 2: yandex.cloud.cdn.v1.ListResourcesResponse
+	(*CreateResourceRequest)(nil),         // 3: yandex.cloud.cdn.v1.CreateResourceRequest
+	(*ResourceOriginParams)(nil),          // 4: yandex.cloud.cdn.v1.ResourceOriginParams
+	(*CreateResourceMetadata)(nil),        // 5: yandex.cloud.cdn.v1.CreateResourceMetadata
+	(*UpdateResourceRequest)(nil),         // 6: yandex.cloud.cdn.v1.UpdateResourceRequest
+	(*UpdateResourceMetadata)(nil),        // 7: yandex.cloud.cdn.v1.UpdateResourceMetadata
+	(*DeleteResourceRequest)(nil),         // 8: yandex.cloud.cdn.v1.DeleteResourceRequest
+	(*DeleteResourceMetadata)(nil),        // 9: yandex.cloud.cdn.v1.DeleteResourceMetadata
+	(*GetProviderCNameRequest)(nil),       // 10: yandex.cloud.cdn.v1.GetProviderCNameRequest
+	(*GetProviderCNameResponse)(nil),      // 11: yandex.cloud.cdn.v1.GetProviderCNameResponse
+	(*GetResourceAttributesRequest)(nil),  // 12: yandex.cloud.cdn.v1.GetResourceAttributesRequest
+	(*GetResourceAttributesResponse)(nil), // 13: yandex.cloud.cdn.v1.GetResourceAttributesResponse
+	(*CreateResourceRequest_Origin)(nil),  // 14: yandex.cloud.cdn.v1.CreateResourceRequest.Origin
+	nil,                                   // 15: yandex.cloud.cdn.v1.CreateResourceRequest.LabelsEntry
+	nil,                                   // 16: yandex.cloud.cdn.v1.UpdateResourceRequest.LabelsEntry
+	(*Resource)(nil),                      // 17: yandex.cloud.cdn.v1.Resource
+	(*SecondaryHostnames)(nil),            // 18: yandex.cloud.cdn.v1.SecondaryHostnames
+	(OriginProtocol)(0),                   // 19: yandex.cloud.cdn.v1.OriginProtocol
+	(*wrapperspb.BoolValue)(nil),          // 20: google.protobuf.BoolValue
+	(*ResourceOptions)(nil),               // 21: yandex.cloud.cdn.v1.ResourceOptions
+	(*SSLTargetCertificate)(nil),          // 22: yandex.cloud.cdn.v1.SSLTargetCertificate
+	(*OriginMeta)(nil),                    // 23: yandex.cloud.cdn.v1.OriginMeta
+	(*wrapperspb.Int64Value)(nil),         // 24: google.protobuf.Int64Value
+	(*structpb.Value)(nil),                // 25: google.protobuf.Value
+	(*operation.Operation)(nil),           // 26: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cdn_v1_resource_service_proto_depIdxs = []int32{
-	15, // 0: yandex.cloud.cdn.v1.ListResourcesResponse.resources:type_name -> yandex.cloud.cdn.v1.Resource
-	12, // 1: yandex.cloud.cdn.v1.CreateResourceRequest.origin:type_name -> yandex.cloud.cdn.v1.CreateResourceRequest.Origin
-	16, // 2: yandex.cloud.cdn.v1.CreateResourceRequest.secondary_hostnames:type_name -> yandex.cloud.cdn.v1.SecondaryHostnames
-	17, // 3: yandex.cloud.cdn.v1.CreateResourceRequest.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
-	18, // 4: yandex.cloud.cdn.v1.CreateResourceRequest.active:type_name -> google.protobuf.BoolValue
-	19, // 5: yandex.cloud.cdn.v1.CreateResourceRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
-	20, // 6: yandex.cloud.cdn.v1.CreateResourceRequest.ssl_certificate:type_name -> yandex.cloud.cdn.v1.SSLTargetCertificate
-	13, // 7: yandex.cloud.cdn.v1.CreateResourceRequest.labels:type_name -> yandex.cloud.cdn.v1.CreateResourceRequest.LabelsEntry
-	21, // 8: yandex.cloud.cdn.v1.ResourceOriginParams.meta:type_name -> yandex.cloud.cdn.v1.OriginMeta
-	22, // 9: yandex.cloud.cdn.v1.UpdateResourceRequest.origin_group_id:type_name -> google.protobuf.Int64Value
-	16, // 10: yandex.cloud.cdn.v1.UpdateResourceRequest.secondary_hostnames:type_name -> yandex.cloud.cdn.v1.SecondaryHostnames
-	19, // 11: yandex.cloud.cdn.v1.UpdateResourceRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
-	17, // 12: yandex.cloud.cdn.v1.UpdateResourceRequest.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
-	18, // 13: yandex.cloud.cdn.v1.UpdateResourceRequest.active:type_name -> google.protobuf.BoolValue
-	20, // 14: yandex.cloud.cdn.v1.UpdateResourceRequest.ssl_certificate:type_name -> yandex.cloud.cdn.v1.SSLTargetCertificate
-	14, // 15: yandex.cloud.cdn.v1.UpdateResourceRequest.labels:type_name -> yandex.cloud.cdn.v1.UpdateResourceRequest.LabelsEntry
-	4,  // 16: yandex.cloud.cdn.v1.CreateResourceRequest.Origin.origin_source_params:type_name -> yandex.cloud.cdn.v1.ResourceOriginParams
-	0,  // 17: yandex.cloud.cdn.v1.ResourceService.Get:input_type -> yandex.cloud.cdn.v1.GetResourceRequest
-	1,  // 18: yandex.cloud.cdn.v1.ResourceService.List:input_type -> yandex.cloud.cdn.v1.ListResourcesRequest
-	3,  // 19: yandex.cloud.cdn.v1.ResourceService.Create:input_type -> yandex.cloud.cdn.v1.CreateResourceRequest
-	6,  // 20: yandex.cloud.cdn.v1.ResourceService.Update:input_type -> yandex.cloud.cdn.v1.UpdateResourceRequest
-	8,  // 21: yandex.cloud.cdn.v1.ResourceService.Delete:input_type -> yandex.cloud.cdn.v1.DeleteResourceRequest
-	10, // 22: yandex.cloud.cdn.v1.ResourceService.GetProviderCName:input_type -> yandex.cloud.cdn.v1.GetProviderCNameRequest
-	15, // 23: yandex.cloud.cdn.v1.ResourceService.Get:output_type -> yandex.cloud.cdn.v1.Resource
-	2,  // 24: yandex.cloud.cdn.v1.ResourceService.List:output_type -> yandex.cloud.cdn.v1.ListResourcesResponse
-	23, // 25: yandex.cloud.cdn.v1.ResourceService.Create:output_type -> yandex.cloud.operation.Operation
-	23, // 26: yandex.cloud.cdn.v1.ResourceService.Update:output_type -> yandex.cloud.operation.Operation
-	23, // 27: yandex.cloud.cdn.v1.ResourceService.Delete:output_type -> yandex.cloud.operation.Operation
-	11, // 28: yandex.cloud.cdn.v1.ResourceService.GetProviderCName:output_type -> yandex.cloud.cdn.v1.GetProviderCNameResponse
-	23, // [23:29] is the sub-list for method output_type
-	17, // [17:23] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	17, // 0: yandex.cloud.cdn.v1.ListResourcesResponse.resources:type_name -> yandex.cloud.cdn.v1.Resource
+	14, // 1: yandex.cloud.cdn.v1.CreateResourceRequest.origin:type_name -> yandex.cloud.cdn.v1.CreateResourceRequest.Origin
+	18, // 2: yandex.cloud.cdn.v1.CreateResourceRequest.secondary_hostnames:type_name -> yandex.cloud.cdn.v1.SecondaryHostnames
+	19, // 3: yandex.cloud.cdn.v1.CreateResourceRequest.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
+	20, // 4: yandex.cloud.cdn.v1.CreateResourceRequest.active:type_name -> google.protobuf.BoolValue
+	21, // 5: yandex.cloud.cdn.v1.CreateResourceRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
+	22, // 6: yandex.cloud.cdn.v1.CreateResourceRequest.ssl_certificate:type_name -> yandex.cloud.cdn.v1.SSLTargetCertificate
+	15, // 7: yandex.cloud.cdn.v1.CreateResourceRequest.labels:type_name -> yandex.cloud.cdn.v1.CreateResourceRequest.LabelsEntry
+	23, // 8: yandex.cloud.cdn.v1.ResourceOriginParams.meta:type_name -> yandex.cloud.cdn.v1.OriginMeta
+	24, // 9: yandex.cloud.cdn.v1.UpdateResourceRequest.origin_group_id:type_name -> google.protobuf.Int64Value
+	18, // 10: yandex.cloud.cdn.v1.UpdateResourceRequest.secondary_hostnames:type_name -> yandex.cloud.cdn.v1.SecondaryHostnames
+	21, // 11: yandex.cloud.cdn.v1.UpdateResourceRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
+	19, // 12: yandex.cloud.cdn.v1.UpdateResourceRequest.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
+	20, // 13: yandex.cloud.cdn.v1.UpdateResourceRequest.active:type_name -> google.protobuf.BoolValue
+	22, // 14: yandex.cloud.cdn.v1.UpdateResourceRequest.ssl_certificate:type_name -> yandex.cloud.cdn.v1.SSLTargetCertificate
+	16, // 15: yandex.cloud.cdn.v1.UpdateResourceRequest.labels:type_name -> yandex.cloud.cdn.v1.UpdateResourceRequest.LabelsEntry
+	25, // 16: yandex.cloud.cdn.v1.GetResourceAttributesResponse.attributes:type_name -> google.protobuf.Value
+	4,  // 17: yandex.cloud.cdn.v1.CreateResourceRequest.Origin.origin_source_params:type_name -> yandex.cloud.cdn.v1.ResourceOriginParams
+	0,  // 18: yandex.cloud.cdn.v1.ResourceService.Get:input_type -> yandex.cloud.cdn.v1.GetResourceRequest
+	1,  // 19: yandex.cloud.cdn.v1.ResourceService.List:input_type -> yandex.cloud.cdn.v1.ListResourcesRequest
+	3,  // 20: yandex.cloud.cdn.v1.ResourceService.Create:input_type -> yandex.cloud.cdn.v1.CreateResourceRequest
+	6,  // 21: yandex.cloud.cdn.v1.ResourceService.Update:input_type -> yandex.cloud.cdn.v1.UpdateResourceRequest
+	8,  // 22: yandex.cloud.cdn.v1.ResourceService.Delete:input_type -> yandex.cloud.cdn.v1.DeleteResourceRequest
+	10, // 23: yandex.cloud.cdn.v1.ResourceService.GetProviderCName:input_type -> yandex.cloud.cdn.v1.GetProviderCNameRequest
+	12, // 24: yandex.cloud.cdn.v1.ResourceService.GetAttributes:input_type -> yandex.cloud.cdn.v1.GetResourceAttributesRequest
+	17, // 25: yandex.cloud.cdn.v1.ResourceService.Get:output_type -> yandex.cloud.cdn.v1.Resource
+	2,  // 26: yandex.cloud.cdn.v1.ResourceService.List:output_type -> yandex.cloud.cdn.v1.ListResourcesResponse
+	26, // 27: yandex.cloud.cdn.v1.ResourceService.Create:output_type -> yandex.cloud.operation.Operation
+	26, // 28: yandex.cloud.cdn.v1.ResourceService.Update:output_type -> yandex.cloud.operation.Operation
+	26, // 29: yandex.cloud.cdn.v1.ResourceService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // 30: yandex.cloud.cdn.v1.ResourceService.GetProviderCName:output_type -> yandex.cloud.cdn.v1.GetProviderCNameResponse
+	13, // 31: yandex.cloud.cdn.v1.ResourceService.GetAttributes:output_type -> yandex.cloud.cdn.v1.GetResourceAttributesResponse
+	25, // [25:32] is the sub-list for method output_type
+	18, // [18:25] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cdn_v1_resource_service_proto_init() }
@@ -1055,7 +1160,7 @@ func file_yandex_cloud_cdn_v1_resource_service_proto_init() {
 	}
 	file_yandex_cloud_cdn_v1_origin_proto_init()
 	file_yandex_cloud_cdn_v1_resource_proto_init()
-	file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[12].OneofWrappers = []any{
+	file_yandex_cloud_cdn_v1_resource_service_proto_msgTypes[14].OneofWrappers = []any{
 		(*CreateResourceRequest_Origin_OriginGroupId)(nil),
 		(*CreateResourceRequest_Origin_OriginSource)(nil),
 		(*CreateResourceRequest_Origin_OriginSourceParams)(nil),
@@ -1066,7 +1171,7 @@ func file_yandex_cloud_cdn_v1_resource_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc), len(file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
