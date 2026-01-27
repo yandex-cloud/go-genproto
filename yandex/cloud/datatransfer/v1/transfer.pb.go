@@ -161,22 +161,28 @@ func (TransferStatus) EnumDescriptor() ([]byte, []int) {
 
 // Transfer core entity
 type Transfer struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Id                 string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId           string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name               string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Description        string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels             map[string]string      `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Source             *Endpoint              `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
-	Target             *Endpoint              `protobuf:"bytes,8,opt,name=target,proto3" json:"target,omitempty"`
-	Runtime            *Runtime               `protobuf:"bytes,9,opt,name=runtime,proto3" json:"runtime,omitempty"`
-	Status             TransferStatus         `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.datatransfer.v1.TransferStatus" json:"status,omitempty"`
-	Type               TransferType           `protobuf:"varint,12,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.TransferType" json:"type,omitempty"`
-	Warning            string                 `protobuf:"bytes,15,opt,name=warning,proto3" json:"warning,omitempty"`
-	Transformation     *Transformation        `protobuf:"bytes,17,opt,name=transformation,proto3" json:"transformation,omitempty"`
-	DataObjects        *DataObjects           `protobuf:"bytes,19,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
-	Prestable          bool                   `protobuf:"varint,22,opt,name=prestable,proto3" json:"prestable,omitempty"`
-	ReplicationRuntime *Runtime               `protobuf:"bytes,24,opt,name=replication_runtime,json=replicationRuntime,proto3" json:"replication_runtime,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	FolderId    string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	Name        string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Description string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Labels      map[string]string      `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Source      *Endpoint              `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
+	Target      *Endpoint              `protobuf:"bytes,8,opt,name=target,proto3" json:"target,omitempty"`
+	// Runtime parameters for the transfer
+	Runtime *Runtime       `protobuf:"bytes,9,opt,name=runtime,proto3" json:"runtime,omitempty"`
+	Status  TransferStatus `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.datatransfer.v1.TransferStatus" json:"status,omitempty"`
+	// Type of the transfer. One of SNAPSHOT_ONLY, INCREMENT_ONLY,
+	// SNAPSHOT_AND_INCREMENT
+	Type TransferType `protobuf:"varint,12,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.TransferType" json:"type,omitempty"`
+	// Error description if transfer has any errors.
+	Warning string `protobuf:"bytes,15,opt,name=warning,proto3" json:"warning,omitempty"`
+	// Transformation for the transfer.
+	Transformation *Transformation `protobuf:"bytes,17,opt,name=transformation,proto3" json:"transformation,omitempty"`
+	DataObjects    *DataObjects    `protobuf:"bytes,19,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
+	Prestable      bool            `protobuf:"varint,22,opt,name=prestable,proto3" json:"prestable,omitempty"`
+	// Replication runtime parameters for the transfer
+	ReplicationRuntime *Runtime `protobuf:"bytes,24,opt,name=replication_runtime,json=replicationRuntime,proto3" json:"replication_runtime,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -382,10 +388,13 @@ type Runtime_YcRuntime struct {
 
 func (*Runtime_YcRuntime) isRuntime_Runtime() {}
 
+// Parallel snapshot parameters
 type ShardingUploadParams struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	JobCount      int64                  `protobuf:"varint,1,opt,name=job_count,json=jobCount,proto3" json:"job_count,omitempty"`
-	ProcessCount  int64                  `protobuf:"varint,2,opt,name=process_count,json=processCount,proto3" json:"process_count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Number of workers.
+	JobCount int64 `protobuf:"varint,1,opt,name=job_count,json=jobCount,proto3" json:"job_count,omitempty"`
+	// Number of threads.
+	ProcessCount  int64 `protobuf:"varint,2,opt,name=process_count,json=processCount,proto3" json:"process_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -434,10 +443,13 @@ func (x *ShardingUploadParams) GetProcessCount() int64 {
 	return 0
 }
 
+// YC Runtime parameters for the transfer
 type YcRuntime struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	JobCount          int64                  `protobuf:"varint,1,opt,name=job_count,json=jobCount,proto3" json:"job_count,omitempty"`
-	UploadShardParams *ShardingUploadParams  `protobuf:"bytes,8,opt,name=upload_shard_params,json=uploadShardParams,proto3" json:"upload_shard_params,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Number of workers in parallel replication.
+	JobCount int64 `protobuf:"varint,1,opt,name=job_count,json=jobCount,proto3" json:"job_count,omitempty"`
+	// Parallel snapshot parameters
+	UploadShardParams *ShardingUploadParams `protobuf:"bytes,8,opt,name=upload_shard_params,json=uploadShardParams,proto3" json:"upload_shard_params,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1525,34 +1537,46 @@ type isTransformer_Transformer interface {
 }
 
 type Transformer_MaskField struct {
+	// Mask field transformer allows you to hash data
 	MaskField *MaskFieldTransformer `protobuf:"bytes,1,opt,name=mask_field,json=maskField,proto3,oneof"`
 }
 
 type Transformer_FilterColumns struct {
+	// Set up a list of table columns to transfer
 	FilterColumns *FilterColumnsTransformer `protobuf:"bytes,2,opt,name=filter_columns,json=filterColumns,proto3,oneof"`
 }
 
 type Transformer_RenameTables struct {
+	// Set rules for renaming tables by specifying the current names of the tables in
+	// the source and new names for these tables in the target
 	RenameTables *RenameTablesTransformer `protobuf:"bytes,4,opt,name=rename_tables,json=renameTables,proto3,oneof"`
 }
 
 type Transformer_ReplacePrimaryKey struct {
+	// Override primary keys.
 	ReplacePrimaryKey *ReplacePrimaryKeyTransformer `protobuf:"bytes,6,opt,name=replace_primary_key,json=replacePrimaryKey,proto3,oneof"`
 }
 
 type Transformer_ConvertToString struct {
+	// Convert column values to strings
 	ConvertToString *ToStringTransformer `protobuf:"bytes,7,opt,name=convert_to_string,json=convertToString,proto3,oneof"`
 }
 
 type Transformer_SharderTransformer struct {
+	// Set the number of shards for particular tables and a list of columns whose
+	// values will be used for calculating a hash to determine a shard.
 	SharderTransformer *SharderTransformer `protobuf:"bytes,9,opt,name=sharder_transformer,json=sharderTransformer,proto3,oneof"`
 }
 
 type Transformer_TableSplitterTransformer struct {
+	// Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data.
 	TableSplitterTransformer *TableSplitterTransformer `protobuf:"bytes,13,opt,name=table_splitter_transformer,json=tableSplitterTransformer,proto3,oneof"`
 }
 
 type Transformer_FilterRows struct {
+	// This filter only applies to transfers with queues (Logbroker or Apache Kafka®)
+	// as a data source. When running a transfer, only the strings meeting the
+	// specified criteria remain in a changefeed.
 	FilterRows *FilterRowsTransformer `protobuf:"bytes,14,opt,name=filter_rows,json=filterRows,proto3,oneof"`
 }
 
@@ -1579,7 +1603,8 @@ func (*Transformer_FilterRows) isTransformer_Transformer() {}
 // Data can only be transformed if the source and target are of different types.
 type Transformation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Transformers are set as a list.
+	// A list of transformers. You can specify exactly 1 transformer in each element of
+	// list
 	// When activating a transfer, a transformation plan is made for the tables that
 	// match the specified criteria.
 	// Transformers are applied to the tables in the sequence specified in the list.

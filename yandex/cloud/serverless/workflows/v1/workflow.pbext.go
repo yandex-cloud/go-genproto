@@ -59,6 +59,14 @@ func (m *Workflow) SetSchedule(v *WorkflowSchedule) {
 	m.Schedule = v
 }
 
+func (m *Workflow) SetIsPublic(v bool) {
+	m.IsPublic = v
+}
+
+func (m *Workflow) SetExecutionUrl(v string) {
+	m.ExecutionUrl = v
+}
+
 func (m *WorkflowPreview) SetId(v string) {
 	m.Id = v
 }
@@ -101,6 +109,14 @@ func (m *WorkflowPreview) SetServiceAccountId(v string) {
 
 func (m *WorkflowPreview) SetExpress(v bool) {
 	m.Express = v
+}
+
+func (m *WorkflowPreview) SetIsPublic(v bool) {
+	m.IsPublic = v
+}
+
+func (m *WorkflowPreview) SetExecutionUrl(v string) {
+	m.ExecutionUrl = v
 }
 
 type WorkflowSpecification_Spec = isWorkflowSpecification_Spec

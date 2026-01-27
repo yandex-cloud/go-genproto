@@ -114,7 +114,11 @@ type Workflow struct {
 	// Express execution mode.
 	Express bool `protobuf:"varint,12,opt,name=express,proto3" json:"express,omitempty"`
 	// Workflow schedule settings.
-	Schedule      *WorkflowSchedule `protobuf:"bytes,13,opt,name=schedule,proto3" json:"schedule,omitempty"`
+	Schedule *WorkflowSchedule `protobuf:"bytes,13,opt,name=schedule,proto3" json:"schedule,omitempty"`
+	// Ability of the Workflow to be executed without authentication.
+	IsPublic bool `protobuf:"varint,14,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
+	// Execution URL of the Workflow.
+	ExecutionUrl  string `protobuf:"bytes,15,opt,name=execution_url,json=executionUrl,proto3" json:"execution_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -240,6 +244,20 @@ func (x *Workflow) GetSchedule() *WorkflowSchedule {
 	return nil
 }
 
+func (x *Workflow) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
+	}
+	return false
+}
+
+func (x *Workflow) GetExecutionUrl() string {
+	if x != nil {
+		return x.ExecutionUrl
+	}
+	return ""
+}
+
 type WorkflowPreview struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Workflow. Generated at creation time.
@@ -263,7 +281,11 @@ type WorkflowPreview struct {
 	// ID of the Service Account which will be used for resources access in Workflow execution.
 	ServiceAccountId string `protobuf:"bytes,10,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Express execution mode.
-	Express       bool `protobuf:"varint,11,opt,name=express,proto3" json:"express,omitempty"`
+	Express bool `protobuf:"varint,11,opt,name=express,proto3" json:"express,omitempty"`
+	// Ability of the Workflow to be executed without authentication.
+	IsPublic bool `protobuf:"varint,12,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
+	// Execution URL of the Workflow.
+	ExecutionUrl  string `protobuf:"bytes,13,opt,name=execution_url,json=executionUrl,proto3" json:"execution_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -373,6 +395,20 @@ func (x *WorkflowPreview) GetExpress() bool {
 		return x.Express
 	}
 	return false
+}
+
+func (x *WorkflowPreview) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
+	}
+	return false
+}
+
+func (x *WorkflowPreview) GetExecutionUrl() string {
+	if x != nil {
+		return x.ExecutionUrl
+	}
+	return ""
 }
 
 type WorkflowSpecification struct {
@@ -604,7 +640,7 @@ var File_yandex_cloud_serverless_workflows_v1_workflow_proto protoreflect.FileDe
 
 const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/serverless/workflows/v1/workflow.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xda\x06\n" +
+	"3yandex/cloud/serverless/workflows/v1/workflow.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\x9c\a\n" +
 	"\bWorkflow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12a\n" +
@@ -622,7 +658,9 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	" \x01(\tR\tnetworkId\x12,\n" +
 	"\x12service_account_id\x18\v \x01(\tR\x10serviceAccountId\x12\x18\n" +
 	"\aexpress\x18\f \x01(\bR\aexpress\x12R\n" +
-	"\bschedule\x18\r \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x1a9\n" +
+	"\bschedule\x18\r \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x12\x1b\n" +
+	"\tis_public\x18\x0e \x01(\bR\bisPublic\x12#\n" +
+	"\rexecution_url\x18\x0f \x01(\tR\fexecutionUrl\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"a\n" +
@@ -633,7 +671,7 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
 	"\bUPDATING\x10\x03\x12\f\n" +
 	"\bDELETING\x10\x04\x12\t\n" +
-	"\x05ERROR\x10\x05\"\xce\x04\n" +
+	"\x05ERROR\x10\x05\"\x90\x05\n" +
 	"\x0fWorkflowPreview\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -649,7 +687,9 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	"network_id\x18\t \x01(\tR\tnetworkId\x12,\n" +
 	"\x12service_account_id\x18\n" +
 	" \x01(\tR\x10serviceAccountId\x12\x18\n" +
-	"\aexpress\x18\v \x01(\bR\aexpress\x1a9\n" +
+	"\aexpress\x18\v \x01(\bR\aexpress\x12\x1b\n" +
+	"\tis_public\x18\f \x01(\bR\bisPublic\x12#\n" +
+	"\rexecution_url\x18\r \x01(\tR\fexecutionUrl\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +

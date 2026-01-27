@@ -810,12 +810,11 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_rawDe
 	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x96\x01\n" +
 	"\x16ListMcpGatewayResponse\x12T\n" +
 	"\bgateways\x18\x01 \x03(\v28.yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreviewR\bgateways\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9d\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9e\x05\n" +
 	"\x17CreateMcpGatewayRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12E\n" +
-	"\x04name\x18\x02 \x01(\tB1\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x05<=128R\x04name\x12,\n" +
-	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12\xa7\x01\n" +
+	"\x04name\x18\x02 \x01(\tB1\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x05<=128R\x04name\x12-\n" +
+	"\vdescription\x18\x03 \x01(\tB\v\x8a\xc81\a<=65536R\vdescription\x12\xa7\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2J.yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12L\n" +
 	"\x05tools\x18\x05 \x03(\v2..yandex.cloud.serverless.mcpgateway.v1.McpToolB\x06\x82\xc81\x02>0R\x05tools\x12R\n" +
 	"\vlog_options\x18\x06 \x01(\v21.yandex.cloud.serverless.mcpgateway.v1.LogOptionsR\n" +
@@ -829,12 +828,11 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_rawDe
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"i\n" +
 	"\x18CreateMcpGatewayMetadata\x12*\n" +
 	"\x0emcp_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fmcpGatewayId\x12!\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"\xd7\x05\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"\xd8\x05\n" +
 	"\x17UpdateMcpGatewayRequest\x12*\n" +
 	"\x0emcp_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fmcpGatewayId\x12A\n" +
-	"\x04name\x18\x02 \x01(\tB-\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x05<=128R\x04name\x12,\n" +
-	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12\xa7\x01\n" +
+	"\x04name\x18\x02 \x01(\tB-\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x05<=128R\x04name\x12-\n" +
+	"\vdescription\x18\x03 \x01(\tB\v\x8a\xc81\a<=65536R\vdescription\x12\xa7\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2J.yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12D\n" +
 	"\x05tools\x18\x05 \x03(\v2..yandex.cloud.serverless.mcpgateway.v1.McpToolR\x05tools\x12R\n" +
 	"\vlog_options\x18\x06 \x01(\v21.yandex.cloud.serverless.mcpgateway.v1.LogOptionsR\n" +

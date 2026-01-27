@@ -49,7 +49,9 @@ type CreateWorkflowRequest struct {
 	// Express execution mode.
 	Express bool `protobuf:"varint,9,opt,name=express,proto3" json:"express,omitempty"`
 	// Workflow schedule settings.
-	Schedule      *WorkflowSchedule `protobuf:"bytes,10,opt,name=schedule,proto3" json:"schedule,omitempty"`
+	Schedule *WorkflowSchedule `protobuf:"bytes,10,opt,name=schedule,proto3" json:"schedule,omitempty"`
+	// Ability of the Workflow to be executed without authentication.
+	IsPublic      bool `protobuf:"varint,11,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -154,6 +156,13 @@ func (x *CreateWorkflowRequest) GetSchedule() *WorkflowSchedule {
 	return nil
 }
 
+func (x *CreateWorkflowRequest) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
+	}
+	return false
+}
+
 type CreateWorkflowMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Workflow.
@@ -222,7 +231,9 @@ type UpdateWorkflowRequest struct {
 	// Express execution mode.
 	Express bool `protobuf:"varint,10,opt,name=express,proto3" json:"express,omitempty"`
 	// Workflow schedule settings.
-	Schedule      *WorkflowSchedule `protobuf:"bytes,11,opt,name=schedule,proto3" json:"schedule,omitempty"`
+	Schedule *WorkflowSchedule `protobuf:"bytes,11,opt,name=schedule,proto3" json:"schedule,omitempty"`
+	// Ability of the Workflow to be executed without authentication.
+	IsPublic      bool `protobuf:"varint,12,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -332,6 +343,13 @@ func (x *UpdateWorkflowRequest) GetSchedule() *WorkflowSchedule {
 		return x.Schedule
 	}
 	return nil
+}
+
+func (x *UpdateWorkflowRequest) GetIsPublic() bool {
+	if x != nil {
+		return x.IsPublic
+	}
+	return false
 }
 
 type UpdateWorkflowMetadata struct {
@@ -845,7 +863,7 @@ var File_yandex_cloud_serverless_workflows_v1_workflow_service_proto protoreflec
 
 const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/serverless/workflows/v1/workflow_service.proto\x12$yandex.cloud.serverless.workflows.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/serverless/workflows/v1/workflow.proto\x1a\x1dyandex/cloud/validation.proto\"\xfe\x05\n" +
+	";yandex/cloud/serverless/workflows/v1/workflow_service.proto\x12$yandex.cloud.serverless.workflows.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/serverless/workflows/v1/workflow.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\x06\n" +
 	"\x15CreateWorkflowRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12<\n" +
 	"\x04name\x18\x02 \x01(\tB(\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -859,13 +877,14 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc =
 	"\x12service_account_id\x18\b \x01(\tR\x10serviceAccountId\x12\x18\n" +
 	"\aexpress\x18\t \x01(\bR\aexpress\x12R\n" +
 	"\bschedule\x18\n" +
-	" \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x1a9\n" +
+	" \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x12\x1b\n" +
+	"\tis_public\x18\v \x01(\bR\bisPublic\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
 	"\x16CreateWorkflowMetadata\x12%\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"workflowId\"\xb5\x06\n" +
+	"workflowId\"\xd2\x06\n" +
 	"\x15UpdateWorkflowRequest\x12%\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"workflowId\x128\n" +
@@ -882,7 +901,8 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_service_proto_rawDesc =
 	"updateMask\x12\x18\n" +
 	"\aexpress\x18\n" +
 	" \x01(\bR\aexpress\x12R\n" +
-	"\bschedule\x18\v \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x1a9\n" +
+	"\bschedule\x18\v \x01(\v26.yandex.cloud.serverless.workflows.v1.WorkflowScheduleR\bschedule\x12\x1b\n" +
+	"\tis_public\x18\f \x01(\bR\bisPublic\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +

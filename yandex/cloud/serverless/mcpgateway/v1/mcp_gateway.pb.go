@@ -28,15 +28,24 @@ type HttpMethod int32
 
 const (
 	HttpMethod_HTTP_METHOD_UNSPECIFIED HttpMethod = 0
-	HttpMethod_OPTIONS                 HttpMethod = 1
-	HttpMethod_GET                     HttpMethod = 2
-	HttpMethod_HEAD                    HttpMethod = 3
-	HttpMethod_POST                    HttpMethod = 4
-	HttpMethod_PUT                     HttpMethod = 5
-	HttpMethod_PATCH                   HttpMethod = 6
-	HttpMethod_DELETE                  HttpMethod = 7
-	HttpMethod_TRACE                   HttpMethod = 8
-	HttpMethod_CONNECT                 HttpMethod = 9
+	// OPTIONS HTTP method.
+	HttpMethod_OPTIONS HttpMethod = 1
+	// GET HTTP method.
+	HttpMethod_GET HttpMethod = 2
+	// HEAD HTTP method.
+	HttpMethod_HEAD HttpMethod = 3
+	// POST HTTP method.
+	HttpMethod_POST HttpMethod = 4
+	// PUT HTTP method.
+	HttpMethod_PUT HttpMethod = 5
+	// PATCH HTTP method.
+	HttpMethod_PATCH HttpMethod = 6
+	// DELETE HTTP method.
+	HttpMethod_DELETE HttpMethod = 7
+	// TRACE HTTP method.
+	HttpMethod_TRACE HttpMethod = 8
+	// CONNECT HTTP method.
+	HttpMethod_CONNECT HttpMethod = 9
 )
 
 // Enum value maps for HttpMethod.
@@ -160,9 +169,12 @@ func (McpGateway_Status) EnumDescriptor() ([]byte, []int) {
 type McpCall_Transport int32
 
 const (
-	McpCall_TRANSPORT_UNSPECIFIED McpCall_Transport = 0 // Unspecified transport.
-	McpCall_SSE                   McpCall_Transport = 1 // Server-Sent Events (HTTP SSE).
-	McpCall_STREAMABLE            McpCall_Transport = 2 // Streamable HTTP transport.
+	// Unspecified transport.
+	McpCall_TRANSPORT_UNSPECIFIED McpCall_Transport = 0
+	// Server-Sent Events (HTTP SSE).
+	McpCall_SSE McpCall_Transport = 1
+	// Streamable HTTP transport.
+	McpCall_STREAMABLE McpCall_Transport = 2
 )
 
 // Enum value maps for McpCall_Transport.
@@ -1257,6 +1269,7 @@ type isMcpCall_Action interface {
 }
 
 type McpCall_ToolCall_ struct {
+	// Tool call action to invoke a specific tool on the MCP endpoint.
 	ToolCall *McpCall_ToolCall `protobuf:"bytes,2,opt,name=tool_call,json=toolCall,proto3,oneof"`
 }
 
@@ -1267,14 +1280,17 @@ type isMcpCall_Authorization interface {
 }
 
 type McpCall_Unauthorized struct {
+	// No authorization mode.
 	Unauthorized *McpCall_NoAuthorization `protobuf:"bytes,4,opt,name=unauthorized,proto3,oneof"`
 }
 
 type McpCall_Header struct {
+	// Header-based authorization.
 	Header *McpCall_HeaderAuthorization `protobuf:"bytes,5,opt,name=header,proto3,oneof"`
 }
 
 type McpCall_ServiceAccount struct {
+	// Service account authorization.
 	ServiceAccount *McpCall_SaAuthorization `protobuf:"bytes,6,opt,name=service_account,json=serviceAccount,proto3,oneof"`
 }
 
@@ -1677,11 +1693,10 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" 
 	"logGroupId\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestination\"\xfc\x01\n" +
+	"\vdestination\"\xfd\x01\n" +
 	"\aMcpTool\x12C\n" +
-	"\x04name\x18\x01 \x01(\tB/\xe8\xc71\x01\xf2\xc71\x1e([a-zA-Z][-a-zA-Z0-9_]{0,63})?\x8a\xc81\x05<=128R\x04name\x12,\n" +
-	"\vdescription\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4000R\vdescription\x12*\n" +
+	"\x04name\x18\x01 \x01(\tB/\xe8\xc71\x01\xf2\xc71\x1e([a-zA-Z][-a-zA-Z0-9_]{0,63})?\x8a\xc81\x05<=128R\x04name\x12-\n" +
+	"\vdescription\x18\x02 \x01(\tB\v\x8a\xc81\a<=65536R\vdescription\x12*\n" +
 	"\x11input_json_schema\x18\x03 \x01(\tR\x0finputJsonSchema\x12R\n" +
 	"\x06action\x18\x04 \x01(\v24.yandex.cloud.serverless.mcpgateway.v1.McpToolActionB\x04\xe8\xc71\x01R\x06action\"\xa6\x04\n" +
 	"\rMcpToolAction\x12Z\n" +

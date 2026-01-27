@@ -47,6 +47,10 @@ func (m *CreateWorkflowRequest) SetSchedule(v *WorkflowSchedule) {
 	m.Schedule = v
 }
 
+func (m *CreateWorkflowRequest) SetIsPublic(v bool) {
+	m.IsPublic = v
+}
+
 func (m *CreateWorkflowMetadata) SetWorkflowId(v string) {
 	m.WorkflowId = v
 }
@@ -93,6 +97,10 @@ func (m *UpdateWorkflowRequest) SetExpress(v bool) {
 
 func (m *UpdateWorkflowRequest) SetSchedule(v *WorkflowSchedule) {
 	m.Schedule = v
+}
+
+func (m *UpdateWorkflowRequest) SetIsPublic(v bool) {
+	m.IsPublic = v
 }
 
 func (m *UpdateWorkflowMetadata) SetWorkflowId(v string) {
