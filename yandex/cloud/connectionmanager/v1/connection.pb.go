@@ -23,21 +23,34 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Database or service type enumeration.
 type DBType int32
 
 const (
+	// Unspecified database type.
 	DBType_DB_TYPE_UNSPECIFIED DBType = 0
-	DBType_POSTGRESQL          DBType = 1
-	DBType_MYSQL               DBType = 2
-	DBType_CLICKHOUSE          DBType = 3
-	DBType_MONGODB             DBType = 4
-	DBType_KAFKA               DBType = 5
-	DBType_REDIS               DBType = 6
-	DBType_OPENSEARCH          DBType = 7
-	DBType_TRINO               DBType = 8
-	DBType_VALKEY              DBType = 9
-	DBType_GREENPLUM           DBType = 10
-	DBType_STOREDOC            DBType = 11
+	// PostgreSQL database.
+	DBType_POSTGRESQL DBType = 1
+	// MySQL database.
+	DBType_MYSQL DBType = 2
+	// ClickHouse database.
+	DBType_CLICKHOUSE DBType = 3
+	// MongoDB database.
+	DBType_MONGODB DBType = 4
+	// Apache Kafka message broker.
+	DBType_KAFKA DBType = 5
+	// Redis in-memory data store.
+	DBType_REDIS DBType = 6
+	// OpenSearch search engine.
+	DBType_OPENSEARCH DBType = 7
+	// Trino distributed SQL query engine.
+	DBType_TRINO DBType = 8
+	// Valkey in-memory data store.
+	DBType_VALKEY DBType = 9
+	// Greenplum data warehouse.
+	DBType_GREENPLUM DBType = 10
+	// StoreDoc document store.
+	DBType_STOREDOC DBType = 11
 )
 
 // Enum value maps for DBType.
@@ -99,8 +112,11 @@ func (DBType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_connection_proto_rawDescGZIP(), []int{0}
 }
 
+// Connection parameters for various database and service types.
 type ConnectionParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Database or service connection configuration.
+	//
 	// Types that are valid to be assigned to Type:
 	//
 	//	*ConnectionParams_Postgresql
@@ -260,46 +276,57 @@ type isConnectionParams_Type interface {
 }
 
 type ConnectionParams_Postgresql struct {
+	// PostgreSQL database connection parameters.
 	Postgresql *PostgreSQLConnection `protobuf:"bytes,1,opt,name=postgresql,proto3,oneof"`
 }
 
 type ConnectionParams_Mysql struct {
+	// MySQL database connection parameters.
 	Mysql *MySQLConnection `protobuf:"bytes,2,opt,name=mysql,proto3,oneof"`
 }
 
 type ConnectionParams_Mongodb struct {
+	// MongoDB database connection parameters.
 	Mongodb *MongoDBConnection `protobuf:"bytes,3,opt,name=mongodb,proto3,oneof"`
 }
 
 type ConnectionParams_Clickhouse struct {
+	// ClickHouse database connection parameters.
 	Clickhouse *ClickHouseConnection `protobuf:"bytes,4,opt,name=clickhouse,proto3,oneof"`
 }
 
 type ConnectionParams_Kafka struct {
+	// Apache Kafka message broker connection parameters.
 	Kafka *KafkaConnection `protobuf:"bytes,5,opt,name=kafka,proto3,oneof"`
 }
 
 type ConnectionParams_Redis struct {
+	// Redis in-memory data store connection parameters.
 	Redis *RedisConnection `protobuf:"bytes,6,opt,name=redis,proto3,oneof"`
 }
 
 type ConnectionParams_Opensearch struct {
+	// OpenSearch search engine connection parameters.
 	Opensearch *OpenSearchConnection `protobuf:"bytes,7,opt,name=opensearch,proto3,oneof"`
 }
 
 type ConnectionParams_Trino struct {
+	// Trino distributed SQL query engine connection parameters.
 	Trino *TrinoConnection `protobuf:"bytes,8,opt,name=trino,proto3,oneof"`
 }
 
 type ConnectionParams_Valkey struct {
+	// Valkey in-memory data store connection parameters.
 	Valkey *ValkeyConnection `protobuf:"bytes,9,opt,name=valkey,proto3,oneof"`
 }
 
 type ConnectionParams_Greenplum struct {
+	// Greenplum data warehouse connection parameters.
 	Greenplum *GreenplumConnection `protobuf:"bytes,10,opt,name=greenplum,proto3,oneof"`
 }
 
 type ConnectionParams_Storedoc struct {
+	// StoreDoc document store connection parameters.
 	Storedoc *StoreDocConnection `protobuf:"bytes,11,opt,name=storedoc,proto3,oneof"`
 }
 
@@ -325,11 +352,15 @@ func (*ConnectionParams_Greenplum) isConnectionParams_Type() {}
 
 func (*ConnectionParams_Storedoc) isConnectionParams_Type() {}
 
+// Reference to a Lockbox secret.
 type LockboxSecret struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
-	NewestVersion string                 `protobuf:"bytes,3,opt,name=newest_version,json=newestVersion,proto3" json:"newest_version,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Lockbox secret.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Lockbox secret version.
+	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	// The newest available version of the Lockbox secret.
+	NewestVersion string `protobuf:"bytes,3,opt,name=newest_version,json=newestVersion,proto3" json:"newest_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -385,22 +416,88 @@ func (x *LockboxSecret) GetNewestVersion() string {
 	return ""
 }
 
+// Specification for creating a new Lockbox secret.
+type LockboxSecretSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
+	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LockboxSecretSpec) Reset() {
+	*x = LockboxSecretSpec{}
+	mi := &file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LockboxSecretSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LockboxSecretSpec) ProtoMessage() {}
+
+func (x *LockboxSecretSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LockboxSecretSpec.ProtoReflect.Descriptor instead.
+func (*LockboxSecretSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_connectionmanager_v1_connection_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *LockboxSecretSpec) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+// A Connection resource represents a configured connection to a database or service.
 type Connection struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	Id          string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	FolderId    string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	CreatedAt   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Name        string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Description string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string      `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	CreatedBy   string                 `protobuf:"bytes,8,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Params      *ConnectionParams      `protobuf:"bytes,9,opt,name=params,proto3" json:"params,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection. Generated at creation time.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the folder that the connection belongs to.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Creation timestamp.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Last update timestamp.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Name of the connection.
+	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the connection.
+	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	// Connection labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// ID of the subject which created the connection.
+	CreatedBy string `protobuf:"bytes,8,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	// Connection parameters specific to the database or service type.
+	Params *ConnectionParams `protobuf:"bytes,9,opt,name=params,proto3" json:"params,omitempty"`
+	// Secret configuration for authentication.
+	//
 	// Types that are valid to be assigned to Secret:
 	//
 	//	*Connection_LockboxSecret
-	Secret        isConnection_Secret   `protobuf_oneof:"secret"`
-	IsManaged     bool                  `protobuf:"varint,12,opt,name=is_managed,json=isManaged,proto3" json:"is_managed,omitempty"`
+	Secret isConnection_Secret `protobuf_oneof:"secret"`
+	// Secret specification for creating a new secret.
+	//
+	// Types that are valid to be assigned to SecretSpec:
+	//
+	//	*Connection_LockboxSecretSpec
+	SecretSpec isConnection_SecretSpec `protobuf_oneof:"secret_spec"`
+	// Whether this connection is managed by the system (e.g. an MDB cluster).
+	IsManaged bool `protobuf:"varint,12,opt,name=is_managed,json=isManaged,proto3" json:"is_managed,omitempty"`
+	// Whether the current user can use this connection. Filled only when `with_can_use` has been requested in ListConnectionRequest.
 	CanUse        *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=can_use,json=canUse,proto3" json:"can_use,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -408,7 +505,7 @@ type Connection struct {
 
 func (x *Connection) Reset() {
 	*x = Connection{}
-	mi := &file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[2]
+	mi := &file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -420,7 +517,7 @@ func (x *Connection) String() string {
 func (*Connection) ProtoMessage() {}
 
 func (x *Connection) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[2]
+	mi := &file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -433,7 +530,7 @@ func (x *Connection) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Connection.ProtoReflect.Descriptor instead.
 func (*Connection) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_connectionmanager_v1_connection_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_connectionmanager_v1_connection_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Connection) GetId() string {
@@ -515,6 +612,22 @@ func (x *Connection) GetLockboxSecret() *LockboxSecret {
 	return nil
 }
 
+func (x *Connection) GetSecretSpec() isConnection_SecretSpec {
+	if x != nil {
+		return x.SecretSpec
+	}
+	return nil
+}
+
+func (x *Connection) GetLockboxSecretSpec() *LockboxSecretSpec {
+	if x != nil {
+		if x, ok := x.SecretSpec.(*Connection_LockboxSecretSpec); ok {
+			return x.LockboxSecretSpec
+		}
+	}
+	return nil
+}
+
 func (x *Connection) GetIsManaged() bool {
 	if x != nil {
 		return x.IsManaged
@@ -534,10 +647,22 @@ type isConnection_Secret interface {
 }
 
 type Connection_LockboxSecret struct {
+	// Reference to the Lockbox secret containing connection credentials.
 	LockboxSecret *LockboxSecret `protobuf:"bytes,10,opt,name=lockbox_secret,json=lockboxSecret,proto3,oneof"`
 }
 
 func (*Connection_LockboxSecret) isConnection_Secret() {}
+
+type isConnection_SecretSpec interface {
+	isConnection_SecretSpec()
+}
+
+type Connection_LockboxSecretSpec struct {
+	// Specification for creating a new Lockbox secret.
+	LockboxSecretSpec *LockboxSecretSpec `protobuf:"bytes,14,opt,name=lockbox_secret_spec,json=lockboxSecretSpec,proto3,oneof"`
+}
+
+func (*Connection_LockboxSecretSpec) isConnection_SecretSpec() {}
 
 var File_yandex_cloud_connectionmanager_v1_connection_proto protoreflect.FileDescriptor
 
@@ -567,7 +692,9 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"\rLockboxSecret\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12%\n" +
-	"\x0enewest_version\x18\x03 \x01(\tR\rnewestVersion\"\x9e\x05\n" +
+	"\x0enewest_version\x18\x03 \x01(\tR\rnewestVersion\"0\n" +
+	"\x11LockboxSecretSpec\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\"\x95\x06\n" +
 	"\n" +
 	"Connection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -583,14 +710,16 @@ const file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc = "" +
 	"created_by\x18\b \x01(\tR\tcreatedBy\x12K\n" +
 	"\x06params\x18\t \x01(\v23.yandex.cloud.connectionmanager.v1.ConnectionParamsR\x06params\x12Y\n" +
 	"\x0elockbox_secret\x18\n" +
-	" \x01(\v20.yandex.cloud.connectionmanager.v1.LockboxSecretH\x00R\rlockboxSecret\x12\x1d\n" +
+	" \x01(\v20.yandex.cloud.connectionmanager.v1.LockboxSecretH\x00R\rlockboxSecret\x12f\n" +
+	"\x13lockbox_secret_spec\x18\x0e \x01(\v24.yandex.cloud.connectionmanager.v1.LockboxSecretSpecH\x01R\x11lockboxSecretSpec\x12\x1d\n" +
 	"\n" +
 	"is_managed\x18\f \x01(\bR\tisManaged\x123\n" +
 	"\acan_use\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\x06canUse\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06secretJ\x04\b\v\x10\f*\xb3\x01\n" +
+	"\x06secretB\r\n" +
+	"\vsecret_specJ\x04\b\v\x10\f*\xb3\x01\n" +
 	"\x06DBType\x12\x17\n" +
 	"\x13DB_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -624,50 +753,52 @@ func file_yandex_cloud_connectionmanager_v1_connection_proto_rawDescGZIP() []byt
 }
 
 var file_yandex_cloud_connectionmanager_v1_connection_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_connectionmanager_v1_connection_proto_goTypes = []any{
 	(DBType)(0),                   // 0: yandex.cloud.connectionmanager.v1.DBType
 	(*ConnectionParams)(nil),      // 1: yandex.cloud.connectionmanager.v1.ConnectionParams
 	(*LockboxSecret)(nil),         // 2: yandex.cloud.connectionmanager.v1.LockboxSecret
-	(*Connection)(nil),            // 3: yandex.cloud.connectionmanager.v1.Connection
-	nil,                           // 4: yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
-	(*PostgreSQLConnection)(nil),  // 5: yandex.cloud.connectionmanager.v1.PostgreSQLConnection
-	(*MySQLConnection)(nil),       // 6: yandex.cloud.connectionmanager.v1.MySQLConnection
-	(*MongoDBConnection)(nil),     // 7: yandex.cloud.connectionmanager.v1.MongoDBConnection
-	(*ClickHouseConnection)(nil),  // 8: yandex.cloud.connectionmanager.v1.ClickHouseConnection
-	(*KafkaConnection)(nil),       // 9: yandex.cloud.connectionmanager.v1.KafkaConnection
-	(*RedisConnection)(nil),       // 10: yandex.cloud.connectionmanager.v1.RedisConnection
-	(*OpenSearchConnection)(nil),  // 11: yandex.cloud.connectionmanager.v1.OpenSearchConnection
-	(*TrinoConnection)(nil),       // 12: yandex.cloud.connectionmanager.v1.TrinoConnection
-	(*ValkeyConnection)(nil),      // 13: yandex.cloud.connectionmanager.v1.ValkeyConnection
-	(*GreenplumConnection)(nil),   // 14: yandex.cloud.connectionmanager.v1.GreenplumConnection
-	(*StoreDocConnection)(nil),    // 15: yandex.cloud.connectionmanager.v1.StoreDocConnection
-	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 17: google.protobuf.BoolValue
+	(*LockboxSecretSpec)(nil),     // 3: yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	(*Connection)(nil),            // 4: yandex.cloud.connectionmanager.v1.Connection
+	nil,                           // 5: yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
+	(*PostgreSQLConnection)(nil),  // 6: yandex.cloud.connectionmanager.v1.PostgreSQLConnection
+	(*MySQLConnection)(nil),       // 7: yandex.cloud.connectionmanager.v1.MySQLConnection
+	(*MongoDBConnection)(nil),     // 8: yandex.cloud.connectionmanager.v1.MongoDBConnection
+	(*ClickHouseConnection)(nil),  // 9: yandex.cloud.connectionmanager.v1.ClickHouseConnection
+	(*KafkaConnection)(nil),       // 10: yandex.cloud.connectionmanager.v1.KafkaConnection
+	(*RedisConnection)(nil),       // 11: yandex.cloud.connectionmanager.v1.RedisConnection
+	(*OpenSearchConnection)(nil),  // 12: yandex.cloud.connectionmanager.v1.OpenSearchConnection
+	(*TrinoConnection)(nil),       // 13: yandex.cloud.connectionmanager.v1.TrinoConnection
+	(*ValkeyConnection)(nil),      // 14: yandex.cloud.connectionmanager.v1.ValkeyConnection
+	(*GreenplumConnection)(nil),   // 15: yandex.cloud.connectionmanager.v1.GreenplumConnection
+	(*StoreDocConnection)(nil),    // 16: yandex.cloud.connectionmanager.v1.StoreDocConnection
+	(*timestamppb.Timestamp)(nil), // 17: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 18: google.protobuf.BoolValue
 }
 var file_yandex_cloud_connectionmanager_v1_connection_proto_depIdxs = []int32{
-	5,  // 0: yandex.cloud.connectionmanager.v1.ConnectionParams.postgresql:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLConnection
-	6,  // 1: yandex.cloud.connectionmanager.v1.ConnectionParams.mysql:type_name -> yandex.cloud.connectionmanager.v1.MySQLConnection
-	7,  // 2: yandex.cloud.connectionmanager.v1.ConnectionParams.mongodb:type_name -> yandex.cloud.connectionmanager.v1.MongoDBConnection
-	8,  // 3: yandex.cloud.connectionmanager.v1.ConnectionParams.clickhouse:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseConnection
-	9,  // 4: yandex.cloud.connectionmanager.v1.ConnectionParams.kafka:type_name -> yandex.cloud.connectionmanager.v1.KafkaConnection
-	10, // 5: yandex.cloud.connectionmanager.v1.ConnectionParams.redis:type_name -> yandex.cloud.connectionmanager.v1.RedisConnection
-	11, // 6: yandex.cloud.connectionmanager.v1.ConnectionParams.opensearch:type_name -> yandex.cloud.connectionmanager.v1.OpenSearchConnection
-	12, // 7: yandex.cloud.connectionmanager.v1.ConnectionParams.trino:type_name -> yandex.cloud.connectionmanager.v1.TrinoConnection
-	13, // 8: yandex.cloud.connectionmanager.v1.ConnectionParams.valkey:type_name -> yandex.cloud.connectionmanager.v1.ValkeyConnection
-	14, // 9: yandex.cloud.connectionmanager.v1.ConnectionParams.greenplum:type_name -> yandex.cloud.connectionmanager.v1.GreenplumConnection
-	15, // 10: yandex.cloud.connectionmanager.v1.ConnectionParams.storedoc:type_name -> yandex.cloud.connectionmanager.v1.StoreDocConnection
-	16, // 11: yandex.cloud.connectionmanager.v1.Connection.created_at:type_name -> google.protobuf.Timestamp
-	16, // 12: yandex.cloud.connectionmanager.v1.Connection.updated_at:type_name -> google.protobuf.Timestamp
-	4,  // 13: yandex.cloud.connectionmanager.v1.Connection.labels:type_name -> yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
+	6,  // 0: yandex.cloud.connectionmanager.v1.ConnectionParams.postgresql:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLConnection
+	7,  // 1: yandex.cloud.connectionmanager.v1.ConnectionParams.mysql:type_name -> yandex.cloud.connectionmanager.v1.MySQLConnection
+	8,  // 2: yandex.cloud.connectionmanager.v1.ConnectionParams.mongodb:type_name -> yandex.cloud.connectionmanager.v1.MongoDBConnection
+	9,  // 3: yandex.cloud.connectionmanager.v1.ConnectionParams.clickhouse:type_name -> yandex.cloud.connectionmanager.v1.ClickHouseConnection
+	10, // 4: yandex.cloud.connectionmanager.v1.ConnectionParams.kafka:type_name -> yandex.cloud.connectionmanager.v1.KafkaConnection
+	11, // 5: yandex.cloud.connectionmanager.v1.ConnectionParams.redis:type_name -> yandex.cloud.connectionmanager.v1.RedisConnection
+	12, // 6: yandex.cloud.connectionmanager.v1.ConnectionParams.opensearch:type_name -> yandex.cloud.connectionmanager.v1.OpenSearchConnection
+	13, // 7: yandex.cloud.connectionmanager.v1.ConnectionParams.trino:type_name -> yandex.cloud.connectionmanager.v1.TrinoConnection
+	14, // 8: yandex.cloud.connectionmanager.v1.ConnectionParams.valkey:type_name -> yandex.cloud.connectionmanager.v1.ValkeyConnection
+	15, // 9: yandex.cloud.connectionmanager.v1.ConnectionParams.greenplum:type_name -> yandex.cloud.connectionmanager.v1.GreenplumConnection
+	16, // 10: yandex.cloud.connectionmanager.v1.ConnectionParams.storedoc:type_name -> yandex.cloud.connectionmanager.v1.StoreDocConnection
+	17, // 11: yandex.cloud.connectionmanager.v1.Connection.created_at:type_name -> google.protobuf.Timestamp
+	17, // 12: yandex.cloud.connectionmanager.v1.Connection.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 13: yandex.cloud.connectionmanager.v1.Connection.labels:type_name -> yandex.cloud.connectionmanager.v1.Connection.LabelsEntry
 	1,  // 14: yandex.cloud.connectionmanager.v1.Connection.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
 	2,  // 15: yandex.cloud.connectionmanager.v1.Connection.lockbox_secret:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecret
-	17, // 16: yandex.cloud.connectionmanager.v1.Connection.can_use:type_name -> google.protobuf.BoolValue
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	3,  // 16: yandex.cloud.connectionmanager.v1.Connection.lockbox_secret_spec:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	18, // 17: yandex.cloud.connectionmanager.v1.Connection.can_use:type_name -> google.protobuf.BoolValue
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_connectionmanager_v1_connection_proto_init() }
@@ -699,8 +830,9 @@ func file_yandex_cloud_connectionmanager_v1_connection_proto_init() {
 		(*ConnectionParams_Greenplum)(nil),
 		(*ConnectionParams_Storedoc)(nil),
 	}
-	file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[2].OneofWrappers = []any{
+	file_yandex_cloud_connectionmanager_v1_connection_proto_msgTypes[3].OneofWrappers = []any{
 		(*Connection_LockboxSecret)(nil),
+		(*Connection_LockboxSecretSpec)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -708,7 +840,7 @@ func file_yandex_cloud_connectionmanager_v1_connection_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc), len(file_yandex_cloud_connectionmanager_v1_connection_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

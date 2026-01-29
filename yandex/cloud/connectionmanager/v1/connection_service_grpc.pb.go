@@ -35,7 +35,7 @@ const (
 //
 // A set of methods for managing Connection resources.
 type ConnectionServiceClient interface {
-	// Returns connection.
+	// Returns the specified connection.
 	Get(ctx context.Context, in *GetConnectionRequest, opts ...grpc.CallOption) (*Connection, error)
 	// Returns the connection with the resolved cluster; that is,
 	//   - for connections to the on-premise clusters is identical to the Get RPC;
@@ -44,15 +44,15 @@ type ConnectionServiceClient interface {
 	//
 	// Requires `connection-manager.connections.resolveCluster` permission.
 	ResolveCluster(ctx context.Context, in *ResolveClusterRequest, opts ...grpc.CallOption) (*Connection, error)
-	// List connections in specified folder.
+	// Retrieves the list of connections in the specified folder.
 	List(ctx context.Context, in *ListConnectionRequest, opts ...grpc.CallOption) (*ListConnectionResponse, error)
-	// Creates connection.
+	// Creates a connection.
 	Create(ctx context.Context, in *CreateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates specified connection.
+	// Updates the specified connection.
 	Update(ctx context.Context, in *UpdateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Delete specified connection.
+	// Deletes the specified connection.
 	Delete(ctx context.Context, in *DeleteConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves the list of Operation resources for the specified connection.
+	// Lists operations for the specified connection.
 	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (*ListOperationsResponse, error)
 }
 
@@ -140,7 +140,7 @@ func (c *connectionServiceClient) ListOperations(ctx context.Context, in *ListOp
 //
 // A set of methods for managing Connection resources.
 type ConnectionServiceServer interface {
-	// Returns connection.
+	// Returns the specified connection.
 	Get(context.Context, *GetConnectionRequest) (*Connection, error)
 	// Returns the connection with the resolved cluster; that is,
 	//   - for connections to the on-premise clusters is identical to the Get RPC;
@@ -149,15 +149,15 @@ type ConnectionServiceServer interface {
 	//
 	// Requires `connection-manager.connections.resolveCluster` permission.
 	ResolveCluster(context.Context, *ResolveClusterRequest) (*Connection, error)
-	// List connections in specified folder.
+	// Retrieves the list of connections in the specified folder.
 	List(context.Context, *ListConnectionRequest) (*ListConnectionResponse, error)
-	// Creates connection.
+	// Creates a connection.
 	Create(context.Context, *CreateConnectionRequest) (*operation.Operation, error)
-	// Updates specified connection.
+	// Updates the specified connection.
 	Update(context.Context, *UpdateConnectionRequest) (*operation.Operation, error)
-	// Delete specified connection.
+	// Deletes the specified connection.
 	Delete(context.Context, *DeleteConnectionRequest) (*operation.Operation, error)
-	// Retrieves the list of Operation resources for the specified connection.
+	// Lists operations for the specified connection.
 	ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error)
 }
 

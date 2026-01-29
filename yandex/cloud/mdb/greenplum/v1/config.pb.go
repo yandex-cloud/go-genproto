@@ -954,7 +954,7 @@ type GreenplumConfig6 struct {
 	// https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
 	// Default value is ddl
 	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
-	// https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
 	GpAddColumnInheritsTableSetting *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=gp_add_column_inherits_table_setting,json=gpAddColumnInheritsTableSetting,proto3" json:"gp_add_column_inherits_table_setting,omitempty"`
 	// Controls whether the Greenplum Database Global Deadlock Detector is enabled to manage concurrent UPDATE and DELETE operations on heap tables to improve performance. See Inserting, Updating, and Deleting Datain the Greenplum Database Administrator Guide. The default is off, the Global Deadlock Detector is deactivated.
 	// If the Global Deadlock Detector is deactivated (the default), Greenplum Database runs concurrent update and delete operations on a heap table serially.
@@ -999,43 +999,43 @@ type GreenplumConfig6 struct {
 	// This outputs a line to the server log detailing each successful connection. Some client programs, like psql,
 	// attempt to connect twice while determining if a password is required, so duplicate "connection received" messages
 	// do not always indicate a problem.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_connections
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_connections
 	LogConnections *wrapperspb.BoolValue `protobuf:"bytes,24,opt,name=log_connections,json=logConnections,proto3" json:"log_connections,omitempty"`
 	// This outputs a line in the server log at termination of a client session, and includes the duration of the session.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_disconnections
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_disconnections
 	LogDisconnections *wrapperspb.BoolValue `protobuf:"bytes,25,opt,name=log_disconnections,json=logDisconnections,proto3" json:"log_disconnections,omitempty"`
 	// By default, connection log messages only show the IP address of the connecting host.
 	// Turning on this option causes logging of the host name as well. Note that depending on your host name
 	// resolution setup this might impose a non-negligible performance penalty.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_hostname
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_hostname
 	LogHostname *wrapperspb.BoolValue `protobuf:"bytes,26,opt,name=log_hostname,json=logHostname,proto3" json:"log_hostname,omitempty"`
 	// For each query, write total performance statistics of the query parser, planner, and executor to the server log.
 	// This is a crude profiling instrument.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_statement_stats
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_statement_stats
 	LogStatementStats *wrapperspb.BoolValue `protobuf:"bytes,27,opt,name=log_statement_stats,json=logStatementStats,proto3" json:"log_statement_stats,omitempty"`
 	// Logs the statement and its duration on a single log line if its duration is greater than or equal
 	// to the specified number of milliseconds. Setting this to 0 will print all statements and their durations.
 	// -1 deactivates the feature. For example, if you set it to 250 then all SQL statements that run 250ms or longer will be logged.
 	// Enabling this option can be useful in tracking down unoptimized queries in your applications.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_min_duration_statement
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_min_duration_statement
 	LogMinDurationStatement *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"` // in milliseconds.
 	// Sets the amount of memory a Greenplum Database master instance uses for shared memory buffers.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
 	MasterSharedBuffers *wrapperspb.Int64Value `protobuf:"bytes,29,opt,name=master_shared_buffers,json=masterSharedBuffers,proto3" json:"master_shared_buffers,omitempty"`
 	// The shared lock table is created with room to describe locks on max_locks_per_transaction * (max_connections + max_prepared_transactions) objects,
 	// so no more than this many distinct objects can be locked at any one time.
 	// This is not a hard limit on the number of locks taken by any one transaction, but rather a maximum average value.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#max_locks_per_transaction
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#max_locks_per_transaction
 	MaxLocksPerTransaction *wrapperspb.Int64Value `protobuf:"bytes,30,opt,name=max_locks_per_transaction,json=maxLocksPerTransaction,proto3" json:"max_locks_per_transaction,omitempty"`
 	// Sets the amount of memory a Greenplum Database segment instance uses for shared memory buffers.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
 	SegmentSharedBuffers *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=segment_shared_buffers,json=segmentSharedBuffers,proto3" json:"segment_shared_buffers,omitempty"`
 	// Controls the amount of detail written in the server log for each message that is logged.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_error_verbosity
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_error_verbosity
 	LogErrorVerbosity LogErrorVerbosity `protobuf:"varint,32,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity" json:"log_error_verbosity,omitempty"`
 	// Controls which message levels are written to the server log.
 	// Each level includes all the levels that follow it. The later the level, the fewer messages are sent to the log.
-	// https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_min_messages
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#log_min_messages
 	LogMinMessages LogLevelMessage `protobuf:"varint,33,opt,name=log_min_messages,json=logMinMessages,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogLevelMessage" json:"log_min_messages,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1305,45 +1305,45 @@ func (x *GreenplumConfig6) GetLogMinMessages() LogLevelMessage {
 type GreenplumConfigCBDB struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum number of concurrent connections to the database server.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_connections
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_connections
 	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
 	// Sets the maximum size in megabytes of Write-Ahead Logging (WAL) files on disk per segment instance that can be reserved
 	// when Greenplum streams data to the mirror segment instance or standby coordinator to keep it synchronized
 	// with the corresponding primary segment instance or coordinator.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_slot_wal_keep_size
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_slot_wal_keep_size
 	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
 	// Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
 	// The default value is 0, which means a limit is not enforced.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_segment
 	GpWorkfileLimitPerSegment *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=gp_workfile_limit_per_segment,json=gpWorkfileLimitPerSegment,proto3" json:"gp_workfile_limit_per_segment,omitempty"`
 	// Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
 	// The default value is 0, which means a limit is not enforced.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_per_query
 	GpWorkfileLimitPerQuery *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=gp_workfile_limit_per_query,json=gpWorkfileLimitPerQuery,proto3" json:"gp_workfile_limit_per_query,omitempty"`
 	// Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
 	// Spill files are created when executing a query that requires more memory than it is allocated.
 	// The current query is terminated when the limit is exceeded.
 	// Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_limit_files_per_query
 	// Default value is 10000
 	GpWorkfileLimitFilesPerQuery *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=gp_workfile_limit_files_per_query,json=gpWorkfileLimitFilesPerQuery,proto3" json:"gp_workfile_limit_files_per_query,omitempty"`
 	// Sets the maximum number of transactions that can be in the "prepared" state simultaneously
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_prepared_transactions
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_prepared_transactions
 	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
 	// Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#gp_workfile_compression
 	GpWorkfileCompression *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=gp_workfile_compression,json=gpWorkfileCompression,proto3" json:"gp_workfile_compression,omitempty"`
 	// Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
 	// Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
 	// (seghost_physical_memory) / (average_number_concurrent_queries)
 	// When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_statement_mem
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_statement_mem
 	// Default value is 2097152000 (2000MB)
 	MaxStatementMem *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_statement_mem,json=maxStatementMem,proto3" json:"max_statement_mem,omitempty"` // in bytes
 	// Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
 	// MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
 	// PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_statement
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_statement
 	// Default value is ddl
 	LogStatement LogStatement `protobuf:"varint,9,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogStatement" json:"log_statement,omitempty"`
 	// Controls whether the Greenplum Database Global Deadlock Detector is enabled to manage concurrent UPDATE and DELETE operations on heap tables to improve performance. See Inserting, Updating, and Deleting Datain the Greenplum Database Administrator Guide. The default is off, the Global Deadlock Detector is deactivated.
@@ -1389,43 +1389,43 @@ type GreenplumConfigCBDB struct {
 	// This outputs a line to the server log detailing each successful connection. Some client programs, like psql,
 	// attempt to connect twice while determining if a password is required, so duplicate "connection received" messages
 	// do not always indicate a problem.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_connections
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_connections
 	LogConnections *wrapperspb.BoolValue `protobuf:"bytes,23,opt,name=log_connections,json=logConnections,proto3" json:"log_connections,omitempty"`
 	// This outputs a line in the server log at termination of a client session, and includes the duration of the session.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_disconnections
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_disconnections
 	LogDisconnections *wrapperspb.BoolValue `protobuf:"bytes,24,opt,name=log_disconnections,json=logDisconnections,proto3" json:"log_disconnections,omitempty"`
 	// By default, connection log messages only show the IP address of the connecting host.
 	// Turning on this option causes logging of the host name as well. Note that depending on your host name
 	// resolution setup this might impose a non-negligible performance penalty.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_hostname
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_hostname
 	LogHostname *wrapperspb.BoolValue `protobuf:"bytes,25,opt,name=log_hostname,json=logHostname,proto3" json:"log_hostname,omitempty"`
 	// For each query, write total performance statistics of the query parser, planner, and executor to the server log.
 	// This is a crude profiling instrument.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_statement_stats
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_statement_stats
 	LogStatementStats *wrapperspb.BoolValue `protobuf:"bytes,26,opt,name=log_statement_stats,json=logStatementStats,proto3" json:"log_statement_stats,omitempty"`
 	// Logs the statement and its duration on a single log line if its duration is greater than or equal
 	// to the specified number of milliseconds. Setting this to 0 will print all statements and their durations.
 	// -1 deactivates the feature. For example, if you set it to 250 then all SQL statements that run 250ms or longer will be logged.
 	// Enabling this option can be useful in tracking down unoptimized queries in your applications.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_min_duration_statement
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_statement_stats
 	LogMinDurationStatement *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"` // in milliseconds.
 	// Sets the amount of memory a Greenplum Database master instance uses for shared memory buffers.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
 	MasterSharedBuffers *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=master_shared_buffers,json=masterSharedBuffers,proto3" json:"master_shared_buffers,omitempty"`
 	// The shared lock table is created with room to describe locks on max_locks_per_transaction * (max_connections + max_prepared_transactions) objects,
 	// so no more than this many distinct objects can be locked at any one time.
 	// This is not a hard limit on the number of locks taken by any one transaction, but rather a maximum average value.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_locks_per_transaction
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#max_locks_per_transaction
 	MaxLocksPerTransaction *wrapperspb.Int64Value `protobuf:"bytes,29,opt,name=max_locks_per_transaction,json=maxLocksPerTransaction,proto3" json:"max_locks_per_transaction,omitempty"`
 	// Sets the amount of memory a Greenplum Database segment instance uses for shared memory buffers.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#shared_buffers
 	SegmentSharedBuffers *wrapperspb.Int64Value `protobuf:"bytes,30,opt,name=segment_shared_buffers,json=segmentSharedBuffers,proto3" json:"segment_shared_buffers,omitempty"`
 	// Controls the amount of detail written in the server log for each message that is logged.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_error_verbosity
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_error_verbosity
 	LogErrorVerbosity LogErrorVerbosity `protobuf:"varint,31,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogErrorVerbosity" json:"log_error_verbosity,omitempty"`
 	// Controls which message levels are written to the server log.
 	// Each level includes all the levels that follow it. The later the level, the fewer messages are sent to the log.
-	// https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_min_messages
+	// https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/ref_guide-config_params-guc-list.html#log_min_messages
 	LogMinMessages LogLevelMessage `protobuf:"varint,32,opt,name=log_min_messages,json=logMinMessages,proto3,enum=yandex.cloud.mdb.greenplum.v1.LogLevelMessage" json:"log_min_messages,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache

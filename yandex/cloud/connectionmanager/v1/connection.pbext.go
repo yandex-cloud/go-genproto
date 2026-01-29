@@ -91,10 +91,20 @@ func (m *LockboxSecret) SetNewestVersion(v string) {
 	m.NewestVersion = v
 }
 
+func (m *LockboxSecretSpec) SetFolderId(v string) {
+	m.FolderId = v
+}
+
 type Connection_Secret = isConnection_Secret
 
 func (m *Connection) SetSecret(v Connection_Secret) {
 	m.Secret = v
+}
+
+type Connection_SecretSpec = isConnection_SecretSpec
+
+func (m *Connection) SetSecretSpec(v Connection_SecretSpec) {
+	m.SecretSpec = v
 }
 
 func (m *Connection) SetId(v string) {
@@ -136,6 +146,12 @@ func (m *Connection) SetParams(v *ConnectionParams) {
 func (m *Connection) SetLockboxSecret(v *LockboxSecret) {
 	m.Secret = &Connection_LockboxSecret{
 		LockboxSecret: v,
+	}
+}
+
+func (m *Connection) SetLockboxSecretSpec(v *LockboxSecretSpec) {
+	m.SecretSpec = &Connection_LockboxSecretSpec{
+		LockboxSecretSpec: v,
 	}
 }
 

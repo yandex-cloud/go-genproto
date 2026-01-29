@@ -26,13 +26,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Request message for creating a new connection.
 type CreateConnectionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FolderId      string                 `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Params        *ConnectionParams      `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to create the connection in.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the connection.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the connection.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Connection labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Connection parameters specific to the database or service type.
+	Params *ConnectionParams `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
+	// Secret specification for authentication.
+	//
+	// Types that are valid to be assigned to SecretSpec:
+	//
+	//	*CreateConnectionRequest_LockboxSecretSpec
+	SecretSpec    isCreateConnectionRequest_SecretSpec `protobuf_oneof:"secret_spec"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -102,9 +114,38 @@ func (x *CreateConnectionRequest) GetParams() *ConnectionParams {
 	return nil
 }
 
+func (x *CreateConnectionRequest) GetSecretSpec() isCreateConnectionRequest_SecretSpec {
+	if x != nil {
+		return x.SecretSpec
+	}
+	return nil
+}
+
+func (x *CreateConnectionRequest) GetLockboxSecretSpec() *LockboxSecretSpec {
+	if x != nil {
+		if x, ok := x.SecretSpec.(*CreateConnectionRequest_LockboxSecretSpec); ok {
+			return x.LockboxSecretSpec
+		}
+	}
+	return nil
+}
+
+type isCreateConnectionRequest_SecretSpec interface {
+	isCreateConnectionRequest_SecretSpec()
+}
+
+type CreateConnectionRequest_LockboxSecretSpec struct {
+	// Specification for creating a new Lockbox secret.
+	LockboxSecretSpec *LockboxSecretSpec `protobuf:"bytes,11,opt,name=lockbox_secret_spec,json=lockboxSecretSpec,proto3,oneof"`
+}
+
+func (*CreateConnectionRequest_LockboxSecretSpec) isCreateConnectionRequest_SecretSpec() {}
+
+// Metadata for the connection creation operation.
 type CreateConnectionMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection being created.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -146,14 +187,21 @@ func (x *CreateConnectionMetadata) GetConnectionId() string {
 	return ""
 }
 
+// Request message for updating an existing connection.
 type UpdateConnectionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Params        *ConnectionParams      `protobuf:"bytes,6,opt,name=params,proto3" json:"params,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection to update.
+	ConnectionId string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	// Field mask specifying which fields to update.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New name for the connection.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New description for the connection.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// New connection labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// New connection parameters specific to the database or service type.
+	Params        *ConnectionParams `protobuf:"bytes,6,opt,name=params,proto3" json:"params,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -230,9 +278,11 @@ func (x *UpdateConnectionRequest) GetParams() *ConnectionParams {
 	return nil
 }
 
+// Metadata for the connection update operation.
 type UpdateConnectionMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection being updated.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -274,9 +324,11 @@ func (x *UpdateConnectionMetadata) GetConnectionId() string {
 	return ""
 }
 
+// Request message for deleting a connection.
 type DeleteConnectionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection to delete.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -318,6 +370,7 @@ func (x *DeleteConnectionRequest) GetConnectionId() string {
 	return ""
 }
 
+// Metadata for the connection deletion operation.
 type DeleteConnectionMetadata struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -354,20 +407,32 @@ func (*DeleteConnectionMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDescGZIP(), []int{5}
 }
 
+// Request message for listing connections.
 type ListConnectionRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	FolderId        string                 `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	MdbClusterId    string                 `protobuf:"bytes,2,opt,name=mdb_cluster_id,json=mdbClusterId,proto3" json:"mdb_cluster_id,omitempty"`
-	PageSize        int64                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken       string                 `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	NamePatternOrId string                 `protobuf:"bytes,6,opt,name=name_pattern_or_id,json=namePatternOrId,proto3" json:"name_pattern_or_id,omitempty"`
-	AuthorId        string                 `protobuf:"bytes,7,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	WithCanUse      bool                   `protobuf:"varint,8,opt,name=with_can_use,json=withCanUse,proto3" json:"with_can_use,omitempty"`
-	IsOnpremise     *wrapperspb.BoolValue  `protobuf:"bytes,9,opt,name=is_onpremise,json=isOnpremise,proto3" json:"is_onpremise,omitempty"`
-	IsManual        *wrapperspb.BoolValue  `protobuf:"bytes,10,opt,name=is_manual,json=isManual,proto3" json:"is_manual,omitempty"`
-	DbType          DBType                 `protobuf:"varint,11,opt,name=db_type,json=dbType,proto3,enum=yandex.cloud.connectionmanager.v1.DBType" json:"db_type,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to list connections in.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the managed database cluster to filter connections.
+	MdbClusterId string `protobuf:"bytes,2,opt,name=mdb_cluster_id,json=mdbClusterId,proto3" json:"mdb_cluster_id,omitempty"`
+	// Maximum number of results per page.
+	PageSize int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListConnectionResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Filter by connection name pattern or exact ID.
+	NamePatternOrId string `protobuf:"bytes,6,opt,name=name_pattern_or_id,json=namePatternOrId,proto3" json:"name_pattern_or_id,omitempty"`
+	// ID of the connection author to filter by.
+	AuthorId string `protobuf:"bytes,7,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
+	// Include only connections that the current user can use.
+	WithCanUse bool `protobuf:"varint,8,opt,name=with_can_use,json=withCanUse,proto3" json:"with_can_use,omitempty"`
+	// Filter by whether connections are on-premise.
+	IsOnpremise *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=is_onpremise,json=isOnpremise,proto3" json:"is_onpremise,omitempty"`
+	// Filter by whether connections are manually configured.
+	IsManual *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=is_manual,json=isManual,proto3" json:"is_manual,omitempty"`
+	// Filter connections by database type.
+	DbType        DBType `protobuf:"varint,11,opt,name=db_type,json=dbType,proto3,enum=yandex.cloud.connectionmanager.v1.DBType" json:"db_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListConnectionRequest) Reset() {
@@ -470,10 +535,17 @@ func (x *ListConnectionRequest) GetDbType() DBType {
 	return DBType_DB_TYPE_UNSPECIFIED
 }
 
+// Response message for listing connections.
 type ListConnectionResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Connection    []*Connection          `protobuf:"bytes,1,rep,name=connection,proto3" json:"connection,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of connections in the specified folder.
+	Connection []*Connection `protobuf:"bytes,1,rep,name=connection,proto3" json:"connection,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListConnectionRequest.page_size], use `next_page_token` as the value
+	// for the [ListConnectionRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -522,9 +594,11 @@ func (x *ListConnectionResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Request message for getting a connection.
 type GetConnectionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection to retrieve.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -566,9 +640,11 @@ func (x *GetConnectionRequest) GetConnectionId() string {
 	return ""
 }
 
+// Request message for resolving cluster topology for a connection.
 type ResolveClusterRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection to resolve cluster topology for.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -610,10 +686,13 @@ func (x *ResolveClusterRequest) GetConnectionId() string {
 	return ""
 }
 
+// Metadata for the version deletion operation.
 type DeleteVersionMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	VersionId     string                 `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection.
+	ConnectionId string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	// ID of the version being deleted.
+	VersionId     string `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -662,11 +741,15 @@ func (x *DeleteVersionMetadata) GetVersionId() string {
 	return ""
 }
 
+// Request message for listing operations of a connection.
 type ListOperationsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	PageSize      int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection to list operations for.
+	ConnectionId string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	// Maximum number of results per page.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token for getting the next page of results.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -722,10 +805,13 @@ func (x *ListOperationsRequest) GetPageToken() string {
 	return ""
 }
 
+// Response message for listing operations of a connection.
 type ListOperationsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Operations    []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of operations for the specified connection.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -778,16 +864,18 @@ var File_yandex_cloud_connectionmanager_v1_connection_service_proto protoreflect
 
 const file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/connectionmanager/v1/connection_service.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a2yandex/cloud/connectionmanager/v1/connection.proto\"\xda\x02\n" +
+	":yandex/cloud/connectionmanager/v1/connection_service.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a2yandex/cloud/connectionmanager/v1/connection.proto\"\xd1\x03\n" +
 	"\x17CreateConnectionRequest\x12\x1b\n" +
 	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12^\n" +
 	"\x06labels\x18\x04 \x03(\v2F.yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntryR\x06labels\x12K\n" +
-	"\x06params\x18\x05 \x01(\v23.yandex.cloud.connectionmanager.v1.ConnectionParamsR\x06params\x1a9\n" +
+	"\x06params\x18\x05 \x01(\v23.yandex.cloud.connectionmanager.v1.ConnectionParamsR\x06params\x12f\n" +
+	"\x13lockbox_secret_spec\x18\v \x01(\v24.yandex.cloud.connectionmanager.v1.LockboxSecretSpecH\x00R\x11lockboxSecretSpec\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\v\"?\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
+	"\vsecret_specJ\x04\b\x06\x10\v\"?\n" +
 	"\x18CreateConnectionMetadata\x12#\n" +
 	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\x9f\x03\n" +
 	"\x17UpdateConnectionRequest\x12#\n" +
@@ -843,10 +931,10 @@ const file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDesc = 
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xca\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xc3\t\n" +
 	"\x11ConnectionService\x12\x95\x01\n" +
-	"\x03Get\x127.yandex.cloud.connectionmanager.v1.GetConnectionRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\"&\x82\xd3\xe4\x93\x02 \x12\x1e/v1/connection/{connection_id}\x12\xb0\x01\n" +
-	"\x0eResolveCluster\x128.yandex.cloud.connectionmanager.v1.ResolveClusterRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\"5\x82\xd3\xe4\x93\x02/\x12-/v1/connection/resolveCluster/{connection_id}\x12\x94\x01\n" +
+	"\x03Get\x127.yandex.cloud.connectionmanager.v1.GetConnectionRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\"&\x82\xd3\xe4\x93\x02 \x12\x1e/v1/connection/{connection_id}\x12\xa9\x01\n" +
+	"\x0eResolveCluster\x128.yandex.cloud.connectionmanager.v1.ResolveClusterRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\".\x82\xd3\xe4\x93\x02(\x12&/v1/connection/{connection_id}:resolve\x12\x94\x01\n" +
 	"\x04List\x128.yandex.cloud.connectionmanager.v1.ListConnectionRequest\x1a9.yandex.cloud.connectionmanager.v1.ListConnectionResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/connections\x12\xac\x01\n" +
 	"\x06Create\x12:.yandex.cloud.connectionmanager.v1.CreateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"C\xb2\xd2*&\n" +
 	"\x18CreateConnectionMetadata\x12\n" +
@@ -889,42 +977,44 @@ var file_yandex_cloud_connectionmanager_v1_connection_service_proto_goTypes = []
 	nil,                              // 13: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntry
 	nil,                              // 14: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.LabelsEntry
 	(*ConnectionParams)(nil),         // 15: yandex.cloud.connectionmanager.v1.ConnectionParams
-	(*fieldmaskpb.FieldMask)(nil),    // 16: google.protobuf.FieldMask
-	(*wrapperspb.BoolValue)(nil),     // 17: google.protobuf.BoolValue
-	(DBType)(0),                      // 18: yandex.cloud.connectionmanager.v1.DBType
-	(*Connection)(nil),               // 19: yandex.cloud.connectionmanager.v1.Connection
-	(*operation.Operation)(nil),      // 20: yandex.cloud.operation.Operation
+	(*LockboxSecretSpec)(nil),        // 16: yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	(*fieldmaskpb.FieldMask)(nil),    // 17: google.protobuf.FieldMask
+	(*wrapperspb.BoolValue)(nil),     // 18: google.protobuf.BoolValue
+	(DBType)(0),                      // 19: yandex.cloud.connectionmanager.v1.DBType
+	(*Connection)(nil),               // 20: yandex.cloud.connectionmanager.v1.Connection
+	(*operation.Operation)(nil),      // 21: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_connectionmanager_v1_connection_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.labels:type_name -> yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntry
 	15, // 1: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
-	16, // 2: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	14, // 3: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.labels:type_name -> yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.LabelsEntry
-	15, // 4: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
-	17, // 5: yandex.cloud.connectionmanager.v1.ListConnectionRequest.is_onpremise:type_name -> google.protobuf.BoolValue
-	17, // 6: yandex.cloud.connectionmanager.v1.ListConnectionRequest.is_manual:type_name -> google.protobuf.BoolValue
-	18, // 7: yandex.cloud.connectionmanager.v1.ListConnectionRequest.db_type:type_name -> yandex.cloud.connectionmanager.v1.DBType
-	19, // 8: yandex.cloud.connectionmanager.v1.ListConnectionResponse.connection:type_name -> yandex.cloud.connectionmanager.v1.Connection
-	20, // 9: yandex.cloud.connectionmanager.v1.ListOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	8,  // 10: yandex.cloud.connectionmanager.v1.ConnectionService.Get:input_type -> yandex.cloud.connectionmanager.v1.GetConnectionRequest
-	9,  // 11: yandex.cloud.connectionmanager.v1.ConnectionService.ResolveCluster:input_type -> yandex.cloud.connectionmanager.v1.ResolveClusterRequest
-	6,  // 12: yandex.cloud.connectionmanager.v1.ConnectionService.List:input_type -> yandex.cloud.connectionmanager.v1.ListConnectionRequest
-	0,  // 13: yandex.cloud.connectionmanager.v1.ConnectionService.Create:input_type -> yandex.cloud.connectionmanager.v1.CreateConnectionRequest
-	2,  // 14: yandex.cloud.connectionmanager.v1.ConnectionService.Update:input_type -> yandex.cloud.connectionmanager.v1.UpdateConnectionRequest
-	4,  // 15: yandex.cloud.connectionmanager.v1.ConnectionService.Delete:input_type -> yandex.cloud.connectionmanager.v1.DeleteConnectionRequest
-	11, // 16: yandex.cloud.connectionmanager.v1.ConnectionService.ListOperations:input_type -> yandex.cloud.connectionmanager.v1.ListOperationsRequest
-	19, // 17: yandex.cloud.connectionmanager.v1.ConnectionService.Get:output_type -> yandex.cloud.connectionmanager.v1.Connection
-	19, // 18: yandex.cloud.connectionmanager.v1.ConnectionService.ResolveCluster:output_type -> yandex.cloud.connectionmanager.v1.Connection
-	7,  // 19: yandex.cloud.connectionmanager.v1.ConnectionService.List:output_type -> yandex.cloud.connectionmanager.v1.ListConnectionResponse
-	20, // 20: yandex.cloud.connectionmanager.v1.ConnectionService.Create:output_type -> yandex.cloud.operation.Operation
-	20, // 21: yandex.cloud.connectionmanager.v1.ConnectionService.Update:output_type -> yandex.cloud.operation.Operation
-	20, // 22: yandex.cloud.connectionmanager.v1.ConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
-	12, // 23: yandex.cloud.connectionmanager.v1.ConnectionService.ListOperations:output_type -> yandex.cloud.connectionmanager.v1.ListOperationsResponse
-	17, // [17:24] is the sub-list for method output_type
-	10, // [10:17] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	16, // 2: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.lockbox_secret_spec:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	17, // 3: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	14, // 4: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.labels:type_name -> yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.LabelsEntry
+	15, // 5: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
+	18, // 6: yandex.cloud.connectionmanager.v1.ListConnectionRequest.is_onpremise:type_name -> google.protobuf.BoolValue
+	18, // 7: yandex.cloud.connectionmanager.v1.ListConnectionRequest.is_manual:type_name -> google.protobuf.BoolValue
+	19, // 8: yandex.cloud.connectionmanager.v1.ListConnectionRequest.db_type:type_name -> yandex.cloud.connectionmanager.v1.DBType
+	20, // 9: yandex.cloud.connectionmanager.v1.ListConnectionResponse.connection:type_name -> yandex.cloud.connectionmanager.v1.Connection
+	21, // 10: yandex.cloud.connectionmanager.v1.ListOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	8,  // 11: yandex.cloud.connectionmanager.v1.ConnectionService.Get:input_type -> yandex.cloud.connectionmanager.v1.GetConnectionRequest
+	9,  // 12: yandex.cloud.connectionmanager.v1.ConnectionService.ResolveCluster:input_type -> yandex.cloud.connectionmanager.v1.ResolveClusterRequest
+	6,  // 13: yandex.cloud.connectionmanager.v1.ConnectionService.List:input_type -> yandex.cloud.connectionmanager.v1.ListConnectionRequest
+	0,  // 14: yandex.cloud.connectionmanager.v1.ConnectionService.Create:input_type -> yandex.cloud.connectionmanager.v1.CreateConnectionRequest
+	2,  // 15: yandex.cloud.connectionmanager.v1.ConnectionService.Update:input_type -> yandex.cloud.connectionmanager.v1.UpdateConnectionRequest
+	4,  // 16: yandex.cloud.connectionmanager.v1.ConnectionService.Delete:input_type -> yandex.cloud.connectionmanager.v1.DeleteConnectionRequest
+	11, // 17: yandex.cloud.connectionmanager.v1.ConnectionService.ListOperations:input_type -> yandex.cloud.connectionmanager.v1.ListOperationsRequest
+	20, // 18: yandex.cloud.connectionmanager.v1.ConnectionService.Get:output_type -> yandex.cloud.connectionmanager.v1.Connection
+	20, // 19: yandex.cloud.connectionmanager.v1.ConnectionService.ResolveCluster:output_type -> yandex.cloud.connectionmanager.v1.Connection
+	7,  // 20: yandex.cloud.connectionmanager.v1.ConnectionService.List:output_type -> yandex.cloud.connectionmanager.v1.ListConnectionResponse
+	21, // 21: yandex.cloud.connectionmanager.v1.ConnectionService.Create:output_type -> yandex.cloud.operation.Operation
+	21, // 22: yandex.cloud.connectionmanager.v1.ConnectionService.Update:output_type -> yandex.cloud.operation.Operation
+	21, // 23: yandex.cloud.connectionmanager.v1.ConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
+	12, // 24: yandex.cloud.connectionmanager.v1.ConnectionService.ListOperations:output_type -> yandex.cloud.connectionmanager.v1.ListOperationsResponse
+	18, // [18:25] is the sub-list for method output_type
+	11, // [11:18] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_connectionmanager_v1_connection_service_proto_init() }
@@ -933,6 +1023,9 @@ func file_yandex_cloud_connectionmanager_v1_connection_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_connectionmanager_v1_connection_proto_init()
+	file_yandex_cloud_connectionmanager_v1_connection_service_proto_msgTypes[0].OneofWrappers = []any{
+		(*CreateConnectionRequest_LockboxSecretSpec)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

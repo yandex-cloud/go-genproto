@@ -698,6 +698,10 @@ func (m *UserSettings) SetUseHivePartitioning(v *wrapperspb.BoolValue) {
 	m.UseHivePartitioning = v
 }
 
+func (m *UserSettings) SetShowDataLakeCatalogsInSystemTables(v *wrapperspb.BoolValue) {
+	m.ShowDataLakeCatalogsInSystemTables = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

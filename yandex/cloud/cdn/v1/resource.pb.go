@@ -651,8 +651,13 @@ type ResourceOptions struct {
 	// Manage the state of the Redirection from origin option.
 	// If the source returns a redirect, the option lets CDN pull the requested content from the source that was returned in the redirect.
 	FollowRedirects *ResourceOptions_FollowRedirectsOption `protobuf:"bytes,22,opt,name=follow_redirects,json=followRedirects,proto3" json:"follow_redirects,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Configuration for WebSocket protocol support.
+	Websockets *ResourceOptions_WebsocketsOption `protobuf:"bytes,23,opt,name=websockets,proto3" json:"websockets,omitempty"`
+	// Configuration for HTTP response header filtering.
+	// This feature allows controlling which headers from the origin are passed to end users.
+	HeaderFilter  *ResourceOptions_HeaderFilterOption `protobuf:"bytes,24,opt,name=header_filter,json=headerFilter,proto3" json:"header_filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ResourceOptions) Reset() {
@@ -835,6 +840,20 @@ func (x *ResourceOptions) GetIpAddressAcl() *ResourceOptions_IPAddressACLOption 
 func (x *ResourceOptions) GetFollowRedirects() *ResourceOptions_FollowRedirectsOption {
 	if x != nil {
 		return x.FollowRedirects
+	}
+	return nil
+}
+
+func (x *ResourceOptions) GetWebsockets() *ResourceOptions_WebsocketsOption {
+	if x != nil {
+		return x.Websockets
+	}
+	return nil
+}
+
+func (x *ResourceOptions) GetHeaderFilter() *ResourceOptions_HeaderFilterOption {
+	if x != nil {
+		return x.HeaderFilter
 	}
 	return nil
 }
@@ -2224,6 +2243,105 @@ func (x *ResourceOptions_FollowRedirectsOption) GetUseCustomHost() bool {
 	return false
 }
 
+type ResourceOptions_WebsocketsOption struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enables or disables feature.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceOptions_WebsocketsOption) Reset() {
+	*x = ResourceOptions_WebsocketsOption{}
+	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceOptions_WebsocketsOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceOptions_WebsocketsOption) ProtoMessage() {}
+
+func (x *ResourceOptions_WebsocketsOption) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceOptions_WebsocketsOption.ProtoReflect.Descriptor instead.
+func (*ResourceOptions_WebsocketsOption) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cdn_v1_resource_proto_rawDescGZIP(), []int{2, 16}
+}
+
+func (x *ResourceOptions_WebsocketsOption) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+type ResourceOptions_HeaderFilterOption struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enables or disables feature.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Whitelist of headers.
+	Headers       []string `protobuf:"bytes,2,rep,name=headers,proto3" json:"headers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceOptions_HeaderFilterOption) Reset() {
+	*x = ResourceOptions_HeaderFilterOption{}
+	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceOptions_HeaderFilterOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceOptions_HeaderFilterOption) ProtoMessage() {}
+
+func (x *ResourceOptions_HeaderFilterOption) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceOptions_HeaderFilterOption.ProtoReflect.Descriptor instead.
+func (*ResourceOptions_HeaderFilterOption) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cdn_v1_resource_proto_rawDescGZIP(), []int{2, 17}
+}
+
+func (x *ResourceOptions_HeaderFilterOption) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *ResourceOptions_HeaderFilterOption) GetHeaders() []string {
+	if x != nil {
+		return x.Headers
+	}
+	return nil
+}
+
 type ResourceOptions_StringVariableMapOption_OneofString struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to StringOption:
@@ -2237,7 +2355,7 @@ type ResourceOptions_StringVariableMapOption_OneofString struct {
 
 func (x *ResourceOptions_StringVariableMapOption_OneofString) Reset() {
 	*x = ResourceOptions_StringVariableMapOption_OneofString{}
-	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[26]
+	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2249,7 +2367,7 @@ func (x *ResourceOptions_StringVariableMapOption_OneofString) String() string {
 func (*ResourceOptions_StringVariableMapOption_OneofString) ProtoMessage() {}
 
 func (x *ResourceOptions_StringVariableMapOption_OneofString) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[26]
+	mi := &file_yandex_cloud_cdn_v1_resource_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2338,7 +2456,7 @@ const file_yandex_cloud_cdn_v1_resource_proto_rawDesc = "" +
 	"\x0eprovider_cname\x18\x0f \x01(\tR\rproviderCname\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd5'\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x82*\n" +
 	"\x0fResourceOptions\x12T\n" +
 	"\rdisable_cache\x18\x01 \x01(\v2/.yandex.cloud.cdn.v1.ResourceOptions.BoolOptionR\fdisableCache\x12f\n" +
 	"\x13edge_cache_settings\x18\x02 \x01(\v26.yandex.cloud.cdn.v1.ResourceOptions.EdgeCacheSettingsR\x11edgeCacheSettings\x12f\n" +
@@ -2363,7 +2481,11 @@ const file_yandex_cloud_cdn_v1_resource_proto_rawDesc = "" +
 	"\n" +
 	"secure_key\x18\x14 \x01(\v24.yandex.cloud.cdn.v1.ResourceOptions.SecureKeyOptionR\tsecureKey\x12]\n" +
 	"\x0eip_address_acl\x18\x15 \x01(\v27.yandex.cloud.cdn.v1.ResourceOptions.IPAddressACLOptionR\fipAddressAcl\x12e\n" +
-	"\x10follow_redirects\x18\x16 \x01(\v2:.yandex.cloud.cdn.v1.ResourceOptions.FollowRedirectsOptionR\x0ffollowRedirects\x1a<\n" +
+	"\x10follow_redirects\x18\x16 \x01(\v2:.yandex.cloud.cdn.v1.ResourceOptions.FollowRedirectsOptionR\x0ffollowRedirects\x12U\n" +
+	"\n" +
+	"websockets\x18\x17 \x01(\v25.yandex.cloud.cdn.v1.ResourceOptions.WebsocketsOptionR\n" +
+	"websockets\x12\\\n" +
+	"\rheader_filter\x18\x18 \x01(\v27.yandex.cloud.cdn.v1.ResourceOptions.HeaderFilterOptionR\fheaderFilter\x1a<\n" +
 	"\n" +
 	"BoolOption\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x14\n" +
@@ -2440,7 +2562,12 @@ const file_yandex_cloud_cdn_v1_resource_proto_rawDesc = "" +
 	"\x15FollowRedirectsOption\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x14\n" +
 	"\x05codes\x18\x02 \x03(\x03R\x05codes\x12&\n" +
-	"\x0fuse_custom_host\x18\x03 \x01(\bR\ruseCustomHost\"\x90\x01\n" +
+	"\x0fuse_custom_host\x18\x03 \x01(\bR\ruseCustomHost\x1a,\n" +
+	"\x10WebsocketsOption\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x1aH\n" +
+	"\x12HeaderFilterOption\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x18\n" +
+	"\aheaders\x18\x02 \x03(\tR\aheaders\"\x90\x01\n" +
 	"\x14SSLTargetCertificate\x12;\n" +
 	"\x04type\x18\x01 \x01(\x0e2'.yandex.cloud.cdn.v1.SSLCertificateTypeR\x04type\x12;\n" +
 	"\x04data\x18\x02 \x01(\v2'.yandex.cloud.cdn.v1.SSLCertificateDataR\x04data\"\xcd\x01\n" +
@@ -2497,7 +2624,7 @@ func file_yandex_cloud_cdn_v1_resource_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_cdn_v1_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_yandex_cloud_cdn_v1_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_yandex_cloud_cdn_v1_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_yandex_cloud_cdn_v1_resource_proto_goTypes = []any{
 	(OriginProtocol)(0),                             // 0: yandex.cloud.cdn.v1.OriginProtocol
 	(RewriteFlag)(0),                                // 1: yandex.cloud.cdn.v1.RewriteFlag
@@ -2529,15 +2656,17 @@ var file_yandex_cloud_cdn_v1_resource_proto_goTypes = []any{
 	(*ResourceOptions_SecureKeyOption)(nil),         // 27: yandex.cloud.cdn.v1.ResourceOptions.SecureKeyOption
 	(*ResourceOptions_IPAddressACLOption)(nil),      // 28: yandex.cloud.cdn.v1.ResourceOptions.IPAddressACLOption
 	(*ResourceOptions_FollowRedirectsOption)(nil),   // 29: yandex.cloud.cdn.v1.ResourceOptions.FollowRedirectsOption
-	nil, // 30: yandex.cloud.cdn.v1.ResourceOptions.StringsMapOption.ValueEntry
-	nil, // 31: yandex.cloud.cdn.v1.ResourceOptions.CachingTimes.CustomValuesEntry
-	(*ResourceOptions_StringVariableMapOption_OneofString)(nil), // 32: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString
-	nil,                           // 33: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.ValueEntry
-	(*timestamppb.Timestamp)(nil), // 34: google.protobuf.Timestamp
+	(*ResourceOptions_WebsocketsOption)(nil),        // 30: yandex.cloud.cdn.v1.ResourceOptions.WebsocketsOption
+	(*ResourceOptions_HeaderFilterOption)(nil),      // 31: yandex.cloud.cdn.v1.ResourceOptions.HeaderFilterOption
+	nil, // 32: yandex.cloud.cdn.v1.ResourceOptions.StringsMapOption.ValueEntry
+	nil, // 33: yandex.cloud.cdn.v1.ResourceOptions.CachingTimes.CustomValuesEntry
+	(*ResourceOptions_StringVariableMapOption_OneofString)(nil), // 34: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString
+	nil,                           // 35: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.ValueEntry
+	(*timestamppb.Timestamp)(nil), // 36: google.protobuf.Timestamp
 }
 var file_yandex_cloud_cdn_v1_resource_proto_depIdxs = []int32{
-	34, // 0: yandex.cloud.cdn.v1.Resource.created_at:type_name -> google.protobuf.Timestamp
-	34, // 1: yandex.cloud.cdn.v1.Resource.updated_at:type_name -> google.protobuf.Timestamp
+	36, // 0: yandex.cloud.cdn.v1.Resource.created_at:type_name -> google.protobuf.Timestamp
+	36, // 1: yandex.cloud.cdn.v1.Resource.updated_at:type_name -> google.protobuf.Timestamp
 	8,  // 2: yandex.cloud.cdn.v1.Resource.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
 	0,  // 3: yandex.cloud.cdn.v1.Resource.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
 	10, // 4: yandex.cloud.cdn.v1.Resource.ssl_certificate:type_name -> yandex.cloud.cdn.v1.SSLCertificate
@@ -2564,37 +2693,39 @@ var file_yandex_cloud_cdn_v1_resource_proto_depIdxs = []int32{
 	27, // 25: yandex.cloud.cdn.v1.ResourceOptions.secure_key:type_name -> yandex.cloud.cdn.v1.ResourceOptions.SecureKeyOption
 	28, // 26: yandex.cloud.cdn.v1.ResourceOptions.ip_address_acl:type_name -> yandex.cloud.cdn.v1.ResourceOptions.IPAddressACLOption
 	29, // 27: yandex.cloud.cdn.v1.ResourceOptions.follow_redirects:type_name -> yandex.cloud.cdn.v1.ResourceOptions.FollowRedirectsOption
-	4,  // 28: yandex.cloud.cdn.v1.SSLTargetCertificate.type:type_name -> yandex.cloud.cdn.v1.SSLCertificateType
-	11, // 29: yandex.cloud.cdn.v1.SSLTargetCertificate.data:type_name -> yandex.cloud.cdn.v1.SSLCertificateData
-	4,  // 30: yandex.cloud.cdn.v1.SSLCertificate.type:type_name -> yandex.cloud.cdn.v1.SSLCertificateType
-	5,  // 31: yandex.cloud.cdn.v1.SSLCertificate.status:type_name -> yandex.cloud.cdn.v1.SSLCertificateStatus
-	11, // 32: yandex.cloud.cdn.v1.SSLCertificate.data:type_name -> yandex.cloud.cdn.v1.SSLCertificateData
-	12, // 33: yandex.cloud.cdn.v1.SSLCertificateData.cm:type_name -> yandex.cloud.cdn.v1.SSLCertificateCMData
-	30, // 34: yandex.cloud.cdn.v1.ResourceOptions.StringsMapOption.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsMapOption.ValueEntry
-	31, // 35: yandex.cloud.cdn.v1.ResourceOptions.CachingTimes.custom_values:type_name -> yandex.cloud.cdn.v1.ResourceOptions.CachingTimes.CustomValuesEntry
-	19, // 36: yandex.cloud.cdn.v1.ResourceOptions.EdgeCacheSettings.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.CachingTimes
-	33, // 37: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.ValueEntry
-	14, // 38: yandex.cloud.cdn.v1.ResourceOptions.QueryParamsOptions.ignore_query_string:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
-	17, // 39: yandex.cloud.cdn.v1.ResourceOptions.QueryParamsOptions.query_params_whitelist:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
-	17, // 40: yandex.cloud.cdn.v1.ResourceOptions.QueryParamsOptions.query_params_blacklist:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
-	14, // 41: yandex.cloud.cdn.v1.ResourceOptions.RedirectOptions.redirect_http_to_https:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
-	14, // 42: yandex.cloud.cdn.v1.ResourceOptions.RedirectOptions.redirect_https_to_http:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
-	15, // 43: yandex.cloud.cdn.v1.ResourceOptions.HostOptions.host:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringOption
-	14, // 44: yandex.cloud.cdn.v1.ResourceOptions.HostOptions.forward_host_header:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
-	14, // 45: yandex.cloud.cdn.v1.ResourceOptions.CompressionOptions.fetch_compressed:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
-	14, // 46: yandex.cloud.cdn.v1.ResourceOptions.CompressionOptions.gzip_on:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
-	17, // 47: yandex.cloud.cdn.v1.ResourceOptions.CompressionOptions.brotli_compression:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
-	1,  // 48: yandex.cloud.cdn.v1.ResourceOptions.RewriteOption.flag:type_name -> yandex.cloud.cdn.v1.RewriteFlag
-	2,  // 49: yandex.cloud.cdn.v1.ResourceOptions.SecureKeyOption.type:type_name -> yandex.cloud.cdn.v1.SecureKeyURLType
-	3,  // 50: yandex.cloud.cdn.v1.ResourceOptions.IPAddressACLOption.policy_type:type_name -> yandex.cloud.cdn.v1.PolicyType
-	15, // 51: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringOption
-	17, // 52: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString.values:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
-	32, // 53: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.ValueEntry.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString
-	54, // [54:54] is the sub-list for method output_type
-	54, // [54:54] is the sub-list for method input_type
-	54, // [54:54] is the sub-list for extension type_name
-	54, // [54:54] is the sub-list for extension extendee
-	0,  // [0:54] is the sub-list for field type_name
+	30, // 28: yandex.cloud.cdn.v1.ResourceOptions.websockets:type_name -> yandex.cloud.cdn.v1.ResourceOptions.WebsocketsOption
+	31, // 29: yandex.cloud.cdn.v1.ResourceOptions.header_filter:type_name -> yandex.cloud.cdn.v1.ResourceOptions.HeaderFilterOption
+	4,  // 30: yandex.cloud.cdn.v1.SSLTargetCertificate.type:type_name -> yandex.cloud.cdn.v1.SSLCertificateType
+	11, // 31: yandex.cloud.cdn.v1.SSLTargetCertificate.data:type_name -> yandex.cloud.cdn.v1.SSLCertificateData
+	4,  // 32: yandex.cloud.cdn.v1.SSLCertificate.type:type_name -> yandex.cloud.cdn.v1.SSLCertificateType
+	5,  // 33: yandex.cloud.cdn.v1.SSLCertificate.status:type_name -> yandex.cloud.cdn.v1.SSLCertificateStatus
+	11, // 34: yandex.cloud.cdn.v1.SSLCertificate.data:type_name -> yandex.cloud.cdn.v1.SSLCertificateData
+	12, // 35: yandex.cloud.cdn.v1.SSLCertificateData.cm:type_name -> yandex.cloud.cdn.v1.SSLCertificateCMData
+	32, // 36: yandex.cloud.cdn.v1.ResourceOptions.StringsMapOption.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsMapOption.ValueEntry
+	33, // 37: yandex.cloud.cdn.v1.ResourceOptions.CachingTimes.custom_values:type_name -> yandex.cloud.cdn.v1.ResourceOptions.CachingTimes.CustomValuesEntry
+	19, // 38: yandex.cloud.cdn.v1.ResourceOptions.EdgeCacheSettings.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.CachingTimes
+	35, // 39: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.ValueEntry
+	14, // 40: yandex.cloud.cdn.v1.ResourceOptions.QueryParamsOptions.ignore_query_string:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
+	17, // 41: yandex.cloud.cdn.v1.ResourceOptions.QueryParamsOptions.query_params_whitelist:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
+	17, // 42: yandex.cloud.cdn.v1.ResourceOptions.QueryParamsOptions.query_params_blacklist:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
+	14, // 43: yandex.cloud.cdn.v1.ResourceOptions.RedirectOptions.redirect_http_to_https:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
+	14, // 44: yandex.cloud.cdn.v1.ResourceOptions.RedirectOptions.redirect_https_to_http:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
+	15, // 45: yandex.cloud.cdn.v1.ResourceOptions.HostOptions.host:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringOption
+	14, // 46: yandex.cloud.cdn.v1.ResourceOptions.HostOptions.forward_host_header:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
+	14, // 47: yandex.cloud.cdn.v1.ResourceOptions.CompressionOptions.fetch_compressed:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
+	14, // 48: yandex.cloud.cdn.v1.ResourceOptions.CompressionOptions.gzip_on:type_name -> yandex.cloud.cdn.v1.ResourceOptions.BoolOption
+	17, // 49: yandex.cloud.cdn.v1.ResourceOptions.CompressionOptions.brotli_compression:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
+	1,  // 50: yandex.cloud.cdn.v1.ResourceOptions.RewriteOption.flag:type_name -> yandex.cloud.cdn.v1.RewriteFlag
+	2,  // 51: yandex.cloud.cdn.v1.ResourceOptions.SecureKeyOption.type:type_name -> yandex.cloud.cdn.v1.SecureKeyURLType
+	3,  // 52: yandex.cloud.cdn.v1.ResourceOptions.IPAddressACLOption.policy_type:type_name -> yandex.cloud.cdn.v1.PolicyType
+	15, // 53: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringOption
+	17, // 54: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString.values:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringsListOption
+	34, // 55: yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.ValueEntry.value:type_name -> yandex.cloud.cdn.v1.ResourceOptions.StringVariableMapOption.OneofString
+	56, // [56:56] is the sub-list for method output_type
+	56, // [56:56] is the sub-list for method input_type
+	56, // [56:56] is the sub-list for extension type_name
+	56, // [56:56] is the sub-list for extension extendee
+	0,  // [0:56] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cdn_v1_resource_proto_init() }
@@ -2627,7 +2758,7 @@ func file_yandex_cloud_cdn_v1_resource_proto_init() {
 		(*ResourceOptions_CompressionOptions_GzipOn)(nil),
 		(*ResourceOptions_CompressionOptions_BrotliCompression)(nil),
 	}
-	file_yandex_cloud_cdn_v1_resource_proto_msgTypes[26].OneofWrappers = []any{
+	file_yandex_cloud_cdn_v1_resource_proto_msgTypes[28].OneofWrappers = []any{
 		(*ResourceOptions_StringVariableMapOption_OneofString_Value)(nil),
 		(*ResourceOptions_StringVariableMapOption_OneofString_Values)(nil),
 	}
@@ -2637,7 +2768,7 @@ func file_yandex_cloud_cdn_v1_resource_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cdn_v1_resource_proto_rawDesc), len(file_yandex_cloud_cdn_v1_resource_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   28,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -158,6 +158,14 @@ func (m *ResourceOptions) SetFollowRedirects(v *ResourceOptions_FollowRedirectsO
 	m.FollowRedirects = v
 }
 
+func (m *ResourceOptions) SetWebsockets(v *ResourceOptions_WebsocketsOption) {
+	m.Websockets = v
+}
+
+func (m *ResourceOptions) SetHeaderFilter(v *ResourceOptions_HeaderFilterOption) {
+	m.HeaderFilter = v
+}
+
 func (m *ResourceOptions_BoolOption) SetEnabled(v bool) {
 	m.Enabled = v
 }
@@ -384,6 +392,18 @@ func (m *ResourceOptions_FollowRedirectsOption) SetCodes(v []int64) {
 
 func (m *ResourceOptions_FollowRedirectsOption) SetUseCustomHost(v bool) {
 	m.UseCustomHost = v
+}
+
+func (m *ResourceOptions_WebsocketsOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_HeaderFilterOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_HeaderFilterOption) SetHeaders(v []string) {
+	m.Headers = v
 }
 
 func (m *SSLTargetCertificate) SetType(v SSLCertificateType) {

@@ -57,7 +57,9 @@ type ListImagesRequest struct {
 	// 1. The field name. Currently you can use filtering only on [Image.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be a maximum of 256 characters long and match the regular expression `[a-z0-9]+(?:[._-][a-z0-9]+)*(/([a-z0-9]+(?:[._-][a-z0-9]+)*))`.
-	Filter        string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
+	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
+	// By which field to sort the results.
+	// You can sort by `name`, `digest`, `created_at`, `last_modified`. To sort results by multiple fields, separate the fields with commas.
 	OrderBy       string `protobuf:"bytes,6,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -35,7 +35,7 @@ type PXFConfig struct {
 	UploadTimeout *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=upload_timeout,json=uploadTimeout,proto3" json:"upload_timeout,omitempty"`
 	// Maximum number of the Apache Tomcat® threads.
 	//
-	// To prevent situations when requests get stuck or fail due to running out of memory or malfunctioning of the Java garbage collector, specify the number of the Apache Tomcat® threads. Learn more about adjusting the number of threads in the [VMware Greenplum® Platform Extension Framework](https://docs.vmware.com/en/VMware-Greenplum-Platform-Extension-Framework/6.9/greenplum-platform-extension-framework/cfg_mem.html) documentation.
+	// To prevent situations when requests get stuck or fail due to running out of memory or malfunctioning of the Java garbage collector, specify the number of the Apache Tomcat® threads. Learn more about adjusting the number of threads in the [VMware Greenplum® Platform Extension Framework](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum-platform-extension-framework/6-9/gp-pxf/cfg_mem.html) documentation.
 	MaxThreads *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_threads,json=maxThreads,proto3" json:"max_threads,omitempty"`
 	// Determines whether the timeout for core streaming threads is permitted.
 	PoolAllowCoreThreadTimeout *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=pool_allow_core_thread_timeout,json=poolAllowCoreThreadTimeout,proto3" json:"pool_allow_core_thread_timeout,omitempty"`

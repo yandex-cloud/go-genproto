@@ -227,6 +227,10 @@ func (m *ContainerCall) SetQuery(v map[string]string) {
 	m.Query = v
 }
 
+func (m *ContainerCall) SetForwardHeaders(v *ForwardHeadersPolicy) {
+	m.ForwardHeaders = v
+}
+
 func (m *HttpCall) SetUrl(v string) {
 	m.Url = v
 }
@@ -249,6 +253,18 @@ func (m *HttpCall) SetQuery(v map[string]string) {
 
 func (m *HttpCall) SetUseServiceAccount(v bool) {
 	m.UseServiceAccount = v
+}
+
+func (m *HttpCall) SetForwardHeaders(v *ForwardHeadersPolicy) {
+	m.ForwardHeaders = v
+}
+
+func (m *ForwardHeadersPolicy) SetMode(v ForwardHeadersPolicy_ForwardMode) {
+	m.Mode = v
+}
+
+func (m *ForwardHeadersPolicy) SetHeaders(v []string) {
+	m.Headers = v
 }
 
 type McpCall_Action = isMcpCall_Action
@@ -299,6 +315,10 @@ func (m *McpCall) SetForwardHeaders(v map[string]string) {
 	m.ForwardHeaders = v
 }
 
+func (m *McpCall) SetTransferHeaders(v *ForwardHeadersPolicy) {
+	m.TransferHeaders = v
+}
+
 func (m *McpCall_HeaderAuthorization) SetHeaderName(v string) {
 	m.HeaderName = v
 }
@@ -333,6 +353,10 @@ func (m *GrpcCall) SetBody(v string) {
 
 func (m *GrpcCall) SetHeaders(v map[string]string) {
 	m.Headers = v
+}
+
+func (m *GrpcCall) SetForwardHeaders(v *ForwardHeadersPolicy) {
+	m.ForwardHeaders = v
 }
 
 func (m *StartWorkflow) SetWorkflowId(v string) {
