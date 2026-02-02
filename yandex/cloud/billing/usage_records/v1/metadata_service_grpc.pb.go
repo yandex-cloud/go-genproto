@@ -39,6 +39,9 @@ const (
 // Required permissions:
 // All methods in this service require one of the following permissions on the specified billing account:
 // - `billing.accounts.getReport`
+//
+// Rate limits:
+// This API is limited to 1 request per minute per IP address.
 type MetadataServiceClient interface {
 	// GetUsage returns usage metadata including available clouds, services, SKUs, label keys, and date ranges
 	// for a specific billing account and date range.
@@ -206,6 +209,9 @@ func (c *metadataServiceClient) GetResourceIDs(ctx context.Context, in *GetResou
 // Required permissions:
 // All methods in this service require one of the following permissions on the specified billing account:
 // - `billing.accounts.getReport`
+//
+// Rate limits:
+// This API is limited to 1 request per minute per IP address.
 type MetadataServiceServer interface {
 	// GetUsage returns usage metadata including available clouds, services, SKUs, label keys, and date ranges
 	// for a specific billing account and date range.

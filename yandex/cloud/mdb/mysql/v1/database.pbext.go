@@ -2,6 +2,10 @@
 
 package mysql
 
+import (
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *Database) SetName(v string) {
 	m.Name = v
 }
@@ -10,6 +14,14 @@ func (m *Database) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *Database) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
+}
+
 func (m *DatabaseSpec) SetName(v string) {
 	m.Name = v
+}
+
+func (m *DatabaseSpec) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
 }

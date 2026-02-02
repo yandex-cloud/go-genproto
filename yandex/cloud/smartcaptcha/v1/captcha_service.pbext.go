@@ -62,6 +62,18 @@ func (m *CreateCaptchaRequest) SetOverrideVariants(v []*OverrideVariant) {
 	m.OverrideVariants = v
 }
 
+func (m *CreateCaptchaRequest) SetDisallowDataProcessing(v bool) {
+	m.DisallowDataProcessing = v
+}
+
+func (m *CreateCaptchaRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CreateCaptchaRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateCaptchaMetadata) SetCaptchaId(v string) {
 	m.CaptchaId = v
 }
@@ -120,6 +132,18 @@ func (m *UpdateCaptchaRequest) SetDeletionProtection(v bool) {
 
 func (m *UpdateCaptchaRequest) SetOverrideVariants(v []*OverrideVariant) {
 	m.OverrideVariants = v
+}
+
+func (m *UpdateCaptchaRequest) SetDisallowDataProcessing(v bool) {
+	m.DisallowDataProcessing = v
+}
+
+func (m *UpdateCaptchaRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateCaptchaRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateCaptchaMetadata) SetCaptchaId(v string) {

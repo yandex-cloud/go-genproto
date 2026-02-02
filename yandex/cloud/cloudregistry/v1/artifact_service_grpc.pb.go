@@ -8,6 +8,7 @@ package cloudregistry
 
 import (
 	context "context"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,8 +21,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ArtifactService_Get_FullMethodName    = "/yandex.cloud.cloudregistry.v1.ArtifactService/Get"
-	ArtifactService_Delete_FullMethodName = "/yandex.cloud.cloudregistry.v1.ArtifactService/Delete"
+	ArtifactService_Get_FullMethodName                  = "/yandex.cloud.cloudregistry.v1.ArtifactService/Get"
+	ArtifactService_Delete_FullMethodName               = "/yandex.cloud.cloudregistry.v1.ArtifactService/Delete"
+	ArtifactService_ListAccessBindings_FullMethodName   = "/yandex.cloud.cloudregistry.v1.ArtifactService/ListAccessBindings"
+	ArtifactService_SetAccessBindings_FullMethodName    = "/yandex.cloud.cloudregistry.v1.ArtifactService/SetAccessBindings"
+	ArtifactService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.cloudregistry.v1.ArtifactService/UpdateAccessBindings"
 )
 
 // ArtifactServiceClient is the client API for ArtifactService service.
@@ -36,6 +40,13 @@ type ArtifactServiceClient interface {
 	Get(ctx context.Context, in *GetArtifactRequest, opts ...grpc.CallOption) (*Artifact, error)
 	// Deletes the specified artifact.
 	Delete(ctx context.Context, in *DeleteArtifactRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// access bindings
+	// Lists access bindings for the specified artifact (folder, package, artifact, etc).
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified artifact (folder, package, artifact, etc).
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified artifact (folder, package, artifact, etc).
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type artifactServiceClient struct {
@@ -66,6 +77,36 @@ func (c *artifactServiceClient) Delete(ctx context.Context, in *DeleteArtifactRe
 	return out, nil
 }
 
+func (c *artifactServiceClient) ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(access.ListAccessBindingsResponse)
+	err := c.cc.Invoke(ctx, ArtifactService_ListAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *artifactServiceClient) SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ArtifactService_SetAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *artifactServiceClient) UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ArtifactService_UpdateAccessBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ArtifactServiceServer is the server API for ArtifactService service.
 // All implementations should embed UnimplementedArtifactServiceServer
 // for forward compatibility.
@@ -78,6 +119,13 @@ type ArtifactServiceServer interface {
 	Get(context.Context, *GetArtifactRequest) (*Artifact, error)
 	// Deletes the specified artifact.
 	Delete(context.Context, *DeleteArtifactRequest) (*operation.Operation, error)
+	// access bindings
+	// Lists access bindings for the specified artifact (folder, package, artifact, etc).
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified artifact (folder, package, artifact, etc).
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified artifact (folder, package, artifact, etc).
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedArtifactServiceServer should be embedded to have
@@ -92,6 +140,15 @@ func (UnimplementedArtifactServiceServer) Get(context.Context, *GetArtifactReque
 }
 func (UnimplementedArtifactServiceServer) Delete(context.Context, *DeleteArtifactRequest) (*operation.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedArtifactServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessBindings not implemented")
+}
+func (UnimplementedArtifactServiceServer) SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAccessBindings not implemented")
+}
+func (UnimplementedArtifactServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessBindings not implemented")
 }
 func (UnimplementedArtifactServiceServer) testEmbeddedByValue() {}
 
@@ -149,6 +206,60 @@ func _ArtifactService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ArtifactService_ListAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.ListAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArtifactServiceServer).ListAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ArtifactService_ListAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArtifactServiceServer).ListAccessBindings(ctx, req.(*access.ListAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ArtifactService_SetAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.SetAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArtifactServiceServer).SetAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ArtifactService_SetAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArtifactServiceServer).SetAccessBindings(ctx, req.(*access.SetAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ArtifactService_UpdateAccessBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArtifactServiceServer).UpdateAccessBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ArtifactService_UpdateAccessBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArtifactServiceServer).UpdateAccessBindings(ctx, req.(*access.UpdateAccessBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ArtifactService_ServiceDesc is the grpc.ServiceDesc for ArtifactService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -163,6 +274,18 @@ var ArtifactService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ArtifactService_Delete_Handler,
+		},
+		{
+			MethodName: "ListAccessBindings",
+			Handler:    _ArtifactService_ListAccessBindings_Handler,
+		},
+		{
+			MethodName: "SetAccessBindings",
+			Handler:    _ArtifactService_SetAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpdateAccessBindings",
+			Handler:    _ArtifactService_UpdateAccessBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -54,6 +54,9 @@ const (
 // Required permissions:
 // All methods in this service require one of the following permissions on the specified billing account:
 // - `billing.accounts.getReport`
+//
+// Rate limits:
+// This API is limited to 1 request per minute per IP address.
 type ConsumptionCoreServiceClient interface {
 	// Returns aggregated usage report for a single specified billing account,
 	// optionally filtered by clouds, folders, SKUs, labels, and period granularity.
@@ -314,6 +317,9 @@ func (c *consumptionCoreServiceClient) GetLabelKeyUsageReport(ctx context.Contex
 // Required permissions:
 // All methods in this service require one of the following permissions on the specified billing account:
 // - `billing.accounts.getReport`
+//
+// Rate limits:
+// This API is limited to 1 request per minute per IP address.
 type ConsumptionCoreServiceServer interface {
 	// Returns aggregated usage report for a single specified billing account,
 	// optionally filtered by clouds, folders, SKUs, labels, and period granularity.

@@ -23,13 +23,35 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// OpenSearch server configuration settings.
 type OpenSearchConfig2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// the maximum number of allowed boolean clauses in a query
-	MaxClauseCount *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_clause_count,json=maxClauseCount,proto3" json:"max_clause_count,omitempty"`
-	// the percentage or absolute value (10%, 512mb) of heap space that is allocated to fielddata
-	FielddataCacheSize     string `protobuf:"bytes,4,opt,name=fielddata_cache_size,json=fielddataCacheSize,proto3" json:"fielddata_cache_size,omitempty"`
-	ReindexRemoteWhitelist string `protobuf:"bytes,6,opt,name=reindex_remote_whitelist,json=reindexRemoteWhitelist,proto3" json:"reindex_remote_whitelist,omitempty"`
+	// Defines the maximum product of fields and terms that are queryable simultaneously.
+	// Before OpenSearch 2.16, a cluster restart was required in order to apply this static setting.
+	// Now dynamic, existing search thread pools may use the old static value initially, causing **TooManyClauses** exceptions.
+	// New thread pools use the updated value.
+	//
+	// Default value: **1024**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-cluster-level-index-settings).
+	MaxClauseCount *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_clause_count,proto3" json:"max_clause_count,omitempty"`
+	// The maximum size of the field data cache.
+	// May be specified as an absolute value (for example, 8GB) or a percentage of the node heap (for example, 50%).
+	// This setting is dynamic. If you don't specify this setting, the maximum size is 35%.
+	// This value should be smaller than the **indices.breaker.fielddata.limit**
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-cluster-level-index-settings).
+	FielddataCacheSize string `protobuf:"bytes,4,opt,name=fielddata_cache_size,proto3" json:"fielddata_cache_size,omitempty"`
+	// Allowed remote hosts
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/api-reference/document-apis/reindex/#remote-cluster-allow-list).
+	ReindexRemoteWhitelist string `protobuf:"bytes,6,opt,name=reindex_remote_whitelist,proto3" json:"reindex_remote_whitelist,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -86,12 +108,15 @@ func (x *OpenSearchConfig2) GetReindexRemoteWhitelist() string {
 }
 
 type OpenSearchConfigSet2 struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	EffectiveConfig *OpenSearchConfig2     `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	UserConfig      *OpenSearchConfig2     `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	DefaultConfig   *OpenSearchConfig2     `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Effective configuration (a combination of user-defined configuration and default configuration).
+	EffectiveConfig *OpenSearchConfig2 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
+	// User-defined configuration.
+	UserConfig *OpenSearchConfig2 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
+	// Default configuration.
+	DefaultConfig *OpenSearchConfig2 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OpenSearchConfigSet2) Reset() {
@@ -149,11 +174,11 @@ var File_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xcc\x01\n" +
-	"\x11OpenSearchConfig2\x12E\n" +
-	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxClauseCount\x120\n" +
-	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x12fielddataCacheSize\x128\n" +
-	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x16reindexRemoteWhitelistJ\x04\b\x05\x10\x06\"\xbd\x02\n" +
+	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe4\x01\n" +
+	"\x11OpenSearchConfig2\x12Y\n" +
+	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x10max_clause_count\x122\n" +
+	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x14fielddata_cache_size\x12:\n" +
+	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelistJ\x04\b\x05\x10\x06\"\xbd\x02\n" +
 	"\x14OpenSearchConfigSet2\x12i\n" +
 	"\x10effective_config\x18\x01 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12Y\n" +
 	"\vuser_config\x18\x02 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2R\n" +

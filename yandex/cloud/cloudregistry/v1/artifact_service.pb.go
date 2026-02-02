@@ -8,6 +8,7 @@ package cloudregistry
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -164,7 +165,7 @@ var File_yandex_cloud_cloudregistry_v1_artifact_service_proto protoreflect.FileD
 
 const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/cloudregistry/v1/artifact_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1cgoogle/api/annotations.proto\"C\n" +
+	"4yandex/cloud/cloudregistry/v1/artifact_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a&yandex/cloud/operation/operation.proto\x1a yandex/cloud/access/access.proto\x1a\x1cgoogle/api/annotations.proto\"C\n" +
 	"\x12GetArtifactRequest\x12-\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"artifactId\"F\n" +
@@ -173,11 +174,16 @@ const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
 	"artifactId\"9\n" +
 	"\x16DeleteArtifactMetadata\x12\x1f\n" +
 	"\vartifact_id\x18\x01 \x01(\tR\n" +
-	"artifactId2\xf4\x02\n" +
+	"artifactId2\x9d\b\n" +
 	"\x0fArtifactService\x12\x95\x01\n" +
 	"\x03Get\x121.yandex.cloud.cloudregistry.v1.GetArtifactRequest\x1a'.yandex.cloud.cloudregistry.v1.Artifact\"2\x82\xd3\xe4\x93\x02,\x12*/cloud-registry/v1/artifacts/{artifact_id}\x12\xc8\x01\n" +
 	"\x06Delete\x124.yandex.cloud.cloudregistry.v1.DeleteArtifactRequest\x1a!.yandex.cloud.operation.Operation\"e\xb2\xd2*/\n" +
-	"\x16DeleteArtifactMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02,**/cloud-registry/v1/artifacts/{artifact_id}Bt\n" +
+	"\x16DeleteArtifactMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02,**/cloud-registry/v1/artifacts/{artifact_id}\x12\xbc\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/cloud-registry/v1/artifacts/{resource_id}:listAccessBindings\x12\xec\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*9\n" +
+	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02A:\x01*\"</cloud-registry/v1/artifacts/{resource_id}:setAccessBindings\x12\xf8\x01\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8a\x01\xb2\xd2*<\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*2?/cloud-registry/v1/artifacts/{resource_id}:updateAccessBindingsBt\n" +
 	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
@@ -194,19 +200,29 @@ func file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDescGZIP() []b
 
 var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_goTypes = []any{
-	(*GetArtifactRequest)(nil),     // 0: yandex.cloud.cloudregistry.v1.GetArtifactRequest
-	(*DeleteArtifactRequest)(nil),  // 1: yandex.cloud.cloudregistry.v1.DeleteArtifactRequest
-	(*DeleteArtifactMetadata)(nil), // 2: yandex.cloud.cloudregistry.v1.DeleteArtifactMetadata
-	(*Artifact)(nil),               // 3: yandex.cloud.cloudregistry.v1.Artifact
-	(*operation.Operation)(nil),    // 4: yandex.cloud.operation.Operation
+	(*GetArtifactRequest)(nil),                 // 0: yandex.cloud.cloudregistry.v1.GetArtifactRequest
+	(*DeleteArtifactRequest)(nil),              // 1: yandex.cloud.cloudregistry.v1.DeleteArtifactRequest
+	(*DeleteArtifactMetadata)(nil),             // 2: yandex.cloud.cloudregistry.v1.DeleteArtifactMetadata
+	(*access.ListAccessBindingsRequest)(nil),   // 3: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 4: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 5: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*Artifact)(nil),                           // 6: yandex.cloud.cloudregistry.v1.Artifact
+	(*operation.Operation)(nil),                // 7: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsResponse)(nil),  // 8: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.cloudregistry.v1.ArtifactService.Get:input_type -> yandex.cloud.cloudregistry.v1.GetArtifactRequest
 	1, // 1: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:input_type -> yandex.cloud.cloudregistry.v1.DeleteArtifactRequest
-	3, // 2: yandex.cloud.cloudregistry.v1.ArtifactService.Get:output_type -> yandex.cloud.cloudregistry.v1.Artifact
-	4, // 3: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:output_type -> yandex.cloud.operation.Operation
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	3, // 2: yandex.cloud.cloudregistry.v1.ArtifactService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	4, // 3: yandex.cloud.cloudregistry.v1.ArtifactService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	5, // 4: yandex.cloud.cloudregistry.v1.ArtifactService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	6, // 5: yandex.cloud.cloudregistry.v1.ArtifactService.Get:output_type -> yandex.cloud.cloudregistry.v1.Artifact
+	7, // 6: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:output_type -> yandex.cloud.operation.Operation
+	8, // 7: yandex.cloud.cloudregistry.v1.ArtifactService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	7, // 8: yandex.cloud.cloudregistry.v1.ArtifactService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	7, // 9: yandex.cloud.cloudregistry.v1.ArtifactService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

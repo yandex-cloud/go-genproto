@@ -119,6 +119,10 @@ func (m *UpdateNodeGroupRequest) SetNodeLabels(v map[string]string) {
 	m.NodeLabels = v
 }
 
+func (m *UpdateNodeGroupRequest) SetWorkloadIdentityFederation(v *NodeGroupWorkloadIdentityFederation) {
+	m.WorkloadIdentityFederation = v
+}
+
 func (m *UpdateNodeGroupMetadata) SetNodeGroupId(v string) {
 	m.NodeGroupId = v
 }
@@ -173,6 +177,10 @@ func (m *CreateNodeGroupRequest) SetNodeTaints(v []*Taint) {
 
 func (m *CreateNodeGroupRequest) SetNodeLabels(v map[string]string) {
 	m.NodeLabels = v
+}
+
+func (m *CreateNodeGroupRequest) SetWorkloadIdentityFederation(v *NodeGroupWorkloadIdentityFederation) {
+	m.WorkloadIdentityFederation = v
 }
 
 func (m *CreateNodeGroupMetadata) SetNodeGroupId(v string) {

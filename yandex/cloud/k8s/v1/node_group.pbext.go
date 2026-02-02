@@ -78,6 +78,10 @@ func (m *NodeGroup) SetNodeLabels(v map[string]string) {
 	m.NodeLabels = v
 }
 
+func (m *NodeGroup) SetWorkloadIdentityFederation(v *NodeGroupWorkloadIdentityFederation) {
+	m.WorkloadIdentityFederation = v
+}
+
 type ScalePolicy_ScaleType = isScalePolicy_ScaleType
 
 func (m *ScalePolicy) SetScaleType(v ScalePolicy_ScaleType) {
@@ -142,4 +146,8 @@ func (m *DeployPolicy) SetMaxUnavailable(v int64) {
 
 func (m *DeployPolicy) SetMaxExpansion(v int64) {
 	m.MaxExpansion = v
+}
+
+func (m *NodeGroupWorkloadIdentityFederation) SetEnabled(v bool) {
+	m.Enabled = v
 }
