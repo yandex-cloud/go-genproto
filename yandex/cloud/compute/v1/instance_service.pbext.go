@@ -612,8 +612,24 @@ func (m *AttachedDiskSpec_DiskSpec) SetKmsKeyId(v string) {
 	m.KmsKeyId = v
 }
 
+type AttachedLocalDiskSpec_Type = isAttachedLocalDiskSpec_Type
+
+func (m *AttachedLocalDiskSpec) SetType(v AttachedLocalDiskSpec_Type) {
+	m.Type = v
+}
+
 func (m *AttachedLocalDiskSpec) SetSize(v int64) {
 	m.Size = v
+}
+
+func (m *AttachedLocalDiskSpec) SetPhysicalLocalDisk(v *PhysicalLocalDiskSpec) {
+	m.Type = &AttachedLocalDiskSpec_PhysicalLocalDisk{
+		PhysicalLocalDisk: v,
+	}
+}
+
+func (m *PhysicalLocalDiskSpec) SetKmsKeyId(v string) {
+	m.KmsKeyId = v
 }
 
 func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {

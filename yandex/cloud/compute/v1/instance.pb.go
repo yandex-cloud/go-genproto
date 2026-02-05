@@ -307,7 +307,7 @@ func (x AttachedFilesystem_Mode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AttachedFilesystem_Mode.Descriptor instead.
 func (AttachedFilesystem_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{4, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{5, 0}
 }
 
 type NetworkSettings_Type int32
@@ -362,7 +362,7 @@ func (x NetworkSettings_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use NetworkSettings_Type.Descriptor instead.
 func (NetworkSettings_Type) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{10, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{11, 0}
 }
 
 type PlacementPolicy_HostAffinityRule_Operator int32
@@ -411,7 +411,7 @@ func (x PlacementPolicy_HostAffinityRule_Operator) Number() protoreflect.EnumNum
 
 // Deprecated: Use PlacementPolicy_HostAffinityRule_Operator.Descriptor instead.
 func (PlacementPolicy_HostAffinityRule_Operator) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12, 0, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13, 0, 0}
 }
 
 type SerialPortSettings_SSHAuthorization int32
@@ -462,7 +462,7 @@ func (x SerialPortSettings_SSHAuthorization) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SerialPortSettings_SSHAuthorization.Descriptor instead.
 func (SerialPortSettings_SSHAuthorization) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{14, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{15, 0}
 }
 
 // An Instance resource. For more information, see [Instances](/docs/compute/concepts/vm).
@@ -942,7 +942,11 @@ type AttachedLocalDisk struct {
 	// of a Linux operating system running within the instance.
 	//
 	// This value can be used to reference the device for mounting, resizing, and so on, from within the instance.
-	DeviceName    string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
+	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
+	// Types that are valid to be assigned to Type:
+	//
+	//	*AttachedLocalDisk_PhysicalLocalDisk
+	Type          isAttachedLocalDisk_Type `protobuf_oneof:"type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -991,6 +995,78 @@ func (x *AttachedLocalDisk) GetDeviceName() string {
 	return ""
 }
 
+func (x *AttachedLocalDisk) GetType() isAttachedLocalDisk_Type {
+	if x != nil {
+		return x.Type
+	}
+	return nil
+}
+
+func (x *AttachedLocalDisk) GetPhysicalLocalDisk() *PhysicalLocalDisk {
+	if x != nil {
+		if x, ok := x.Type.(*AttachedLocalDisk_PhysicalLocalDisk); ok {
+			return x.PhysicalLocalDisk
+		}
+	}
+	return nil
+}
+
+type isAttachedLocalDisk_Type interface {
+	isAttachedLocalDisk_Type()
+}
+
+type AttachedLocalDisk_PhysicalLocalDisk struct {
+	// Local disk configuration
+	PhysicalLocalDisk *PhysicalLocalDisk `protobuf:"bytes,3,opt,name=physical_local_disk,json=physicalLocalDisk,proto3,oneof"`
+}
+
+func (*AttachedLocalDisk_PhysicalLocalDisk) isAttachedLocalDisk_Type() {}
+
+type PhysicalLocalDisk struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Key encryption key info.
+	KmsKey        *KMSKey `protobuf:"bytes,1,opt,name=kms_key,json=kmsKey,proto3" json:"kms_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PhysicalLocalDisk) Reset() {
+	*x = PhysicalLocalDisk{}
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PhysicalLocalDisk) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PhysicalLocalDisk) ProtoMessage() {}
+
+func (x *PhysicalLocalDisk) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PhysicalLocalDisk.ProtoReflect.Descriptor instead.
+func (*PhysicalLocalDisk) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PhysicalLocalDisk) GetKmsKey() *KMSKey {
+	if x != nil {
+		return x.KmsKey
+	}
+	return nil
+}
+
 type AttachedFilesystem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Access mode to the filesystem.
@@ -1008,7 +1084,7 @@ type AttachedFilesystem struct {
 
 func (x *AttachedFilesystem) Reset() {
 	*x = AttachedFilesystem{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[4]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1096,7 @@ func (x *AttachedFilesystem) String() string {
 func (*AttachedFilesystem) ProtoMessage() {}
 
 func (x *AttachedFilesystem) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[4]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1109,7 @@ func (x *AttachedFilesystem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachedFilesystem.ProtoReflect.Descriptor instead.
 func (*AttachedFilesystem) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AttachedFilesystem) GetMode() AttachedFilesystem_Mode {
@@ -1077,7 +1153,7 @@ type NetworkInterface struct {
 
 func (x *NetworkInterface) Reset() {
 	*x = NetworkInterface{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[5]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1089,7 +1165,7 @@ func (x *NetworkInterface) String() string {
 func (*NetworkInterface) ProtoMessage() {}
 
 func (x *NetworkInterface) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[5]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1102,7 +1178,7 @@ func (x *NetworkInterface) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkInterface.ProtoReflect.Descriptor instead.
 func (*NetworkInterface) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *NetworkInterface) GetIndex() string {
@@ -1161,7 +1237,7 @@ type PrimaryAddress struct {
 
 func (x *PrimaryAddress) Reset() {
 	*x = PrimaryAddress{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[6]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1173,7 +1249,7 @@ func (x *PrimaryAddress) String() string {
 func (*PrimaryAddress) ProtoMessage() {}
 
 func (x *PrimaryAddress) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[6]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1186,7 +1262,7 @@ func (x *PrimaryAddress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrimaryAddress.ProtoReflect.Descriptor instead.
 func (*PrimaryAddress) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PrimaryAddress) GetAddress() string {
@@ -1224,7 +1300,7 @@ type OneToOneNat struct {
 
 func (x *OneToOneNat) Reset() {
 	*x = OneToOneNat{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[7]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1312,7 @@ func (x *OneToOneNat) String() string {
 func (*OneToOneNat) ProtoMessage() {}
 
 func (x *OneToOneNat) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[7]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1249,7 +1325,7 @@ func (x *OneToOneNat) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OneToOneNat.ProtoReflect.Descriptor instead.
 func (*OneToOneNat) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OneToOneNat) GetAddress() string {
@@ -1290,7 +1366,7 @@ type DnsRecord struct {
 
 func (x *DnsRecord) Reset() {
 	*x = DnsRecord{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[8]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1302,7 +1378,7 @@ func (x *DnsRecord) String() string {
 func (*DnsRecord) ProtoMessage() {}
 
 func (x *DnsRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[8]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1315,7 +1391,7 @@ func (x *DnsRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DnsRecord.ProtoReflect.Descriptor instead.
 func (*DnsRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DnsRecord) GetFqdn() string {
@@ -1356,7 +1432,7 @@ type SchedulingPolicy struct {
 
 func (x *SchedulingPolicy) Reset() {
 	*x = SchedulingPolicy{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[9]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1368,7 +1444,7 @@ func (x *SchedulingPolicy) String() string {
 func (*SchedulingPolicy) ProtoMessage() {}
 
 func (x *SchedulingPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[9]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1381,7 +1457,7 @@ func (x *SchedulingPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SchedulingPolicy.ProtoReflect.Descriptor instead.
 func (*SchedulingPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SchedulingPolicy) GetPreemptible() bool {
@@ -1401,7 +1477,7 @@ type NetworkSettings struct {
 
 func (x *NetworkSettings) Reset() {
 	*x = NetworkSettings{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[10]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1413,7 +1489,7 @@ func (x *NetworkSettings) String() string {
 func (*NetworkSettings) ProtoMessage() {}
 
 func (x *NetworkSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[10]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1426,7 +1502,7 @@ func (x *NetworkSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkSettings.ProtoReflect.Descriptor instead.
 func (*NetworkSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *NetworkSettings) GetType() NetworkSettings_Type {
@@ -1446,7 +1522,7 @@ type GpuSettings struct {
 
 func (x *GpuSettings) Reset() {
 	*x = GpuSettings{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[11]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1458,7 +1534,7 @@ func (x *GpuSettings) String() string {
 func (*GpuSettings) ProtoMessage() {}
 
 func (x *GpuSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[11]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1471,7 +1547,7 @@ func (x *GpuSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GpuSettings.ProtoReflect.Descriptor instead.
 func (*GpuSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GpuSettings) GetGpuClusterId() string {
@@ -1495,7 +1571,7 @@ type PlacementPolicy struct {
 
 func (x *PlacementPolicy) Reset() {
 	*x = PlacementPolicy{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1507,7 +1583,7 @@ func (x *PlacementPolicy) String() string {
 func (*PlacementPolicy) ProtoMessage() {}
 
 func (x *PlacementPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1596,7 @@ func (x *PlacementPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementPolicy.ProtoReflect.Descriptor instead.
 func (*PlacementPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PlacementPolicy) GetPlacementGroupId() string {
@@ -1560,7 +1636,7 @@ type MetadataOptions struct {
 
 func (x *MetadataOptions) Reset() {
 	*x = MetadataOptions{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1572,7 +1648,7 @@ func (x *MetadataOptions) String() string {
 func (*MetadataOptions) ProtoMessage() {}
 
 func (x *MetadataOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1585,7 +1661,7 @@ func (x *MetadataOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetadataOptions.ProtoReflect.Descriptor instead.
 func (*MetadataOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *MetadataOptions) GetGceHttpEndpoint() MetadataOption {
@@ -1626,7 +1702,7 @@ type SerialPortSettings struct {
 
 func (x *SerialPortSettings) Reset() {
 	*x = SerialPortSettings{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[14]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1638,7 +1714,7 @@ func (x *SerialPortSettings) String() string {
 func (*SerialPortSettings) ProtoMessage() {}
 
 func (x *SerialPortSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[14]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1651,7 +1727,7 @@ func (x *SerialPortSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SerialPortSettings.ProtoReflect.Descriptor instead.
 func (*SerialPortSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SerialPortSettings) GetSshAuthorization() SerialPortSettings_SSHAuthorization {
@@ -1676,7 +1752,7 @@ type PlacementPolicy_HostAffinityRule struct {
 
 func (x *PlacementPolicy_HostAffinityRule) Reset() {
 	*x = PlacementPolicy_HostAffinityRule{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[17]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1688,7 +1764,7 @@ func (x *PlacementPolicy_HostAffinityRule) String() string {
 func (*PlacementPolicy_HostAffinityRule) ProtoMessage() {}
 
 func (x *PlacementPolicy_HostAffinityRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[17]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1701,7 +1777,7 @@ func (x *PlacementPolicy_HostAffinityRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementPolicy_HostAffinityRule.ProtoReflect.Descriptor instead.
 func (*PlacementPolicy_HostAffinityRule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13, 0}
 }
 
 func (x *PlacementPolicy_HostAffinityRule) GetKey() string {
@@ -1729,7 +1805,7 @@ var File_yandex_cloud_compute_v1_instance_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/compute/v1/instance.proto\x12\x17yandex.cloud.compute.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\"\xc6\x11\n" +
+	"&yandex/cloud/compute/v1/instance.proto\x12\x17yandex.cloud.compute.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!yandex/cloud/compute/v1/kek.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\"\xc6\x11\n" +
 	"\bInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -1802,11 +1878,15 @@ const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tREAD_ONLY\x10\x01\x12\x0e\n" +
 	"\n" +
-	"READ_WRITE\x10\x02\"H\n" +
+	"READ_WRITE\x10\x02\"\xae\x01\n" +
 	"\x11AttachedLocalDisk\x12\x12\n" +
 	"\x04size\x18\x01 \x01(\x03R\x04size\x12\x1f\n" +
 	"\vdevice_name\x18\x02 \x01(\tR\n" +
-	"deviceName\"\xdd\x01\n" +
+	"deviceName\x12\\\n" +
+	"\x13physical_local_disk\x18\x03 \x01(\v2*.yandex.cloud.compute.v1.PhysicalLocalDiskH\x00R\x11physicalLocalDiskB\x06\n" +
+	"\x04type\"M\n" +
+	"\x11PhysicalLocalDisk\x128\n" +
+	"\akms_key\x18\x01 \x01(\v2\x1f.yandex.cloud.compute.v1.KMSKeyR\x06kmsKey\"\xdd\x01\n" +
 	"\x12AttachedFilesystem\x12D\n" +
 	"\x04mode\x18\x01 \x01(\x0e20.yandex.cloud.compute.v1.AttachedFilesystem.ModeR\x04mode\x12\x1f\n" +
 	"\vdevice_name\x18\x02 \x01(\tR\n" +
@@ -1899,7 +1979,7 @@ func file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_compute_v1_instance_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_yandex_cloud_compute_v1_instance_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_yandex_cloud_compute_v1_instance_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_yandex_cloud_compute_v1_instance_proto_goTypes = []any{
 	(IpVersion)(0),                                 // 0: yandex.cloud.compute.v1.IpVersion
 	(MetadataOption)(0),                            // 1: yandex.cloud.compute.v1.MetadataOption
@@ -1913,68 +1993,72 @@ var file_yandex_cloud_compute_v1_instance_proto_goTypes = []any{
 	(*Resources)(nil),                              // 9: yandex.cloud.compute.v1.Resources
 	(*AttachedDisk)(nil),                           // 10: yandex.cloud.compute.v1.AttachedDisk
 	(*AttachedLocalDisk)(nil),                      // 11: yandex.cloud.compute.v1.AttachedLocalDisk
-	(*AttachedFilesystem)(nil),                     // 12: yandex.cloud.compute.v1.AttachedFilesystem
-	(*NetworkInterface)(nil),                       // 13: yandex.cloud.compute.v1.NetworkInterface
-	(*PrimaryAddress)(nil),                         // 14: yandex.cloud.compute.v1.PrimaryAddress
-	(*OneToOneNat)(nil),                            // 15: yandex.cloud.compute.v1.OneToOneNat
-	(*DnsRecord)(nil),                              // 16: yandex.cloud.compute.v1.DnsRecord
-	(*SchedulingPolicy)(nil),                       // 17: yandex.cloud.compute.v1.SchedulingPolicy
-	(*NetworkSettings)(nil),                        // 18: yandex.cloud.compute.v1.NetworkSettings
-	(*GpuSettings)(nil),                            // 19: yandex.cloud.compute.v1.GpuSettings
-	(*PlacementPolicy)(nil),                        // 20: yandex.cloud.compute.v1.PlacementPolicy
-	(*MetadataOptions)(nil),                        // 21: yandex.cloud.compute.v1.MetadataOptions
-	(*SerialPortSettings)(nil),                     // 22: yandex.cloud.compute.v1.SerialPortSettings
-	nil,                                            // 23: yandex.cloud.compute.v1.Instance.LabelsEntry
-	nil,                                            // 24: yandex.cloud.compute.v1.Instance.MetadataEntry
-	(*PlacementPolicy_HostAffinityRule)(nil),       // 25: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule
-	(*timestamppb.Timestamp)(nil),                  // 26: google.protobuf.Timestamp
-	(MaintenancePolicy)(0),                         // 27: yandex.cloud.compute.v1.MaintenancePolicy
-	(*durationpb.Duration)(nil),                    // 28: google.protobuf.Duration
-	(*HardwareGeneration)(nil),                     // 29: yandex.cloud.compute.v1.HardwareGeneration
-	(*Application)(nil),                            // 30: yandex.cloud.compute.v1.Application
+	(*PhysicalLocalDisk)(nil),                      // 12: yandex.cloud.compute.v1.PhysicalLocalDisk
+	(*AttachedFilesystem)(nil),                     // 13: yandex.cloud.compute.v1.AttachedFilesystem
+	(*NetworkInterface)(nil),                       // 14: yandex.cloud.compute.v1.NetworkInterface
+	(*PrimaryAddress)(nil),                         // 15: yandex.cloud.compute.v1.PrimaryAddress
+	(*OneToOneNat)(nil),                            // 16: yandex.cloud.compute.v1.OneToOneNat
+	(*DnsRecord)(nil),                              // 17: yandex.cloud.compute.v1.DnsRecord
+	(*SchedulingPolicy)(nil),                       // 18: yandex.cloud.compute.v1.SchedulingPolicy
+	(*NetworkSettings)(nil),                        // 19: yandex.cloud.compute.v1.NetworkSettings
+	(*GpuSettings)(nil),                            // 20: yandex.cloud.compute.v1.GpuSettings
+	(*PlacementPolicy)(nil),                        // 21: yandex.cloud.compute.v1.PlacementPolicy
+	(*MetadataOptions)(nil),                        // 22: yandex.cloud.compute.v1.MetadataOptions
+	(*SerialPortSettings)(nil),                     // 23: yandex.cloud.compute.v1.SerialPortSettings
+	nil,                                            // 24: yandex.cloud.compute.v1.Instance.LabelsEntry
+	nil,                                            // 25: yandex.cloud.compute.v1.Instance.MetadataEntry
+	(*PlacementPolicy_HostAffinityRule)(nil),       // 26: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule
+	(*timestamppb.Timestamp)(nil),                  // 27: google.protobuf.Timestamp
+	(MaintenancePolicy)(0),                         // 28: yandex.cloud.compute.v1.MaintenancePolicy
+	(*durationpb.Duration)(nil),                    // 29: google.protobuf.Duration
+	(*HardwareGeneration)(nil),                     // 30: yandex.cloud.compute.v1.HardwareGeneration
+	(*Application)(nil),                            // 31: yandex.cloud.compute.v1.Application
+	(*KMSKey)(nil),                                 // 32: yandex.cloud.compute.v1.KMSKey
 }
 var file_yandex_cloud_compute_v1_instance_proto_depIdxs = []int32{
-	26, // 0: yandex.cloud.compute.v1.Instance.created_at:type_name -> google.protobuf.Timestamp
-	23, // 1: yandex.cloud.compute.v1.Instance.labels:type_name -> yandex.cloud.compute.v1.Instance.LabelsEntry
+	27, // 0: yandex.cloud.compute.v1.Instance.created_at:type_name -> google.protobuf.Timestamp
+	24, // 1: yandex.cloud.compute.v1.Instance.labels:type_name -> yandex.cloud.compute.v1.Instance.LabelsEntry
 	9,  // 2: yandex.cloud.compute.v1.Instance.resources:type_name -> yandex.cloud.compute.v1.Resources
 	2,  // 3: yandex.cloud.compute.v1.Instance.status:type_name -> yandex.cloud.compute.v1.Instance.Status
-	24, // 4: yandex.cloud.compute.v1.Instance.metadata:type_name -> yandex.cloud.compute.v1.Instance.MetadataEntry
-	21, // 5: yandex.cloud.compute.v1.Instance.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
+	25, // 4: yandex.cloud.compute.v1.Instance.metadata:type_name -> yandex.cloud.compute.v1.Instance.MetadataEntry
+	22, // 5: yandex.cloud.compute.v1.Instance.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
 	10, // 6: yandex.cloud.compute.v1.Instance.boot_disk:type_name -> yandex.cloud.compute.v1.AttachedDisk
 	10, // 7: yandex.cloud.compute.v1.Instance.secondary_disks:type_name -> yandex.cloud.compute.v1.AttachedDisk
 	11, // 8: yandex.cloud.compute.v1.Instance.local_disks:type_name -> yandex.cloud.compute.v1.AttachedLocalDisk
-	12, // 9: yandex.cloud.compute.v1.Instance.filesystems:type_name -> yandex.cloud.compute.v1.AttachedFilesystem
-	13, // 10: yandex.cloud.compute.v1.Instance.network_interfaces:type_name -> yandex.cloud.compute.v1.NetworkInterface
-	22, // 11: yandex.cloud.compute.v1.Instance.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
-	19, // 12: yandex.cloud.compute.v1.Instance.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
-	17, // 13: yandex.cloud.compute.v1.Instance.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
-	18, // 14: yandex.cloud.compute.v1.Instance.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	20, // 15: yandex.cloud.compute.v1.Instance.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
-	27, // 16: yandex.cloud.compute.v1.Instance.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
-	28, // 17: yandex.cloud.compute.v1.Instance.maintenance_grace_period:type_name -> google.protobuf.Duration
-	29, // 18: yandex.cloud.compute.v1.Instance.hardware_generation:type_name -> yandex.cloud.compute.v1.HardwareGeneration
-	30, // 19: yandex.cloud.compute.v1.Instance.application:type_name -> yandex.cloud.compute.v1.Application
+	13, // 9: yandex.cloud.compute.v1.Instance.filesystems:type_name -> yandex.cloud.compute.v1.AttachedFilesystem
+	14, // 10: yandex.cloud.compute.v1.Instance.network_interfaces:type_name -> yandex.cloud.compute.v1.NetworkInterface
+	23, // 11: yandex.cloud.compute.v1.Instance.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
+	20, // 12: yandex.cloud.compute.v1.Instance.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
+	18, // 13: yandex.cloud.compute.v1.Instance.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
+	19, // 14: yandex.cloud.compute.v1.Instance.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	21, // 15: yandex.cloud.compute.v1.Instance.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
+	28, // 16: yandex.cloud.compute.v1.Instance.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
+	29, // 17: yandex.cloud.compute.v1.Instance.maintenance_grace_period:type_name -> google.protobuf.Duration
+	30, // 18: yandex.cloud.compute.v1.Instance.hardware_generation:type_name -> yandex.cloud.compute.v1.HardwareGeneration
+	31, // 19: yandex.cloud.compute.v1.Instance.application:type_name -> yandex.cloud.compute.v1.Application
 	3,  // 20: yandex.cloud.compute.v1.AttachedDisk.mode:type_name -> yandex.cloud.compute.v1.AttachedDisk.Mode
-	4,  // 21: yandex.cloud.compute.v1.AttachedFilesystem.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystem.Mode
-	14, // 22: yandex.cloud.compute.v1.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
-	14, // 23: yandex.cloud.compute.v1.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
-	15, // 24: yandex.cloud.compute.v1.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.OneToOneNat
-	16, // 25: yandex.cloud.compute.v1.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
-	0,  // 26: yandex.cloud.compute.v1.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
-	16, // 27: yandex.cloud.compute.v1.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
-	5,  // 28: yandex.cloud.compute.v1.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.NetworkSettings.Type
-	25, // 29: yandex.cloud.compute.v1.PlacementPolicy.host_affinity_rules:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule
-	1,  // 30: yandex.cloud.compute.v1.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
-	1,  // 31: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
-	1,  // 32: yandex.cloud.compute.v1.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
-	1,  // 33: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
-	7,  // 34: yandex.cloud.compute.v1.SerialPortSettings.ssh_authorization:type_name -> yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorization
-	6,  // 35: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.Operator
-	36, // [36:36] is the sub-list for method output_type
-	36, // [36:36] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	12, // 21: yandex.cloud.compute.v1.AttachedLocalDisk.physical_local_disk:type_name -> yandex.cloud.compute.v1.PhysicalLocalDisk
+	32, // 22: yandex.cloud.compute.v1.PhysicalLocalDisk.kms_key:type_name -> yandex.cloud.compute.v1.KMSKey
+	4,  // 23: yandex.cloud.compute.v1.AttachedFilesystem.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystem.Mode
+	15, // 24: yandex.cloud.compute.v1.NetworkInterface.primary_v4_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
+	15, // 25: yandex.cloud.compute.v1.NetworkInterface.primary_v6_address:type_name -> yandex.cloud.compute.v1.PrimaryAddress
+	16, // 26: yandex.cloud.compute.v1.PrimaryAddress.one_to_one_nat:type_name -> yandex.cloud.compute.v1.OneToOneNat
+	17, // 27: yandex.cloud.compute.v1.PrimaryAddress.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
+	0,  // 28: yandex.cloud.compute.v1.OneToOneNat.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
+	17, // 29: yandex.cloud.compute.v1.OneToOneNat.dns_records:type_name -> yandex.cloud.compute.v1.DnsRecord
+	5,  // 30: yandex.cloud.compute.v1.NetworkSettings.type:type_name -> yandex.cloud.compute.v1.NetworkSettings.Type
+	26, // 31: yandex.cloud.compute.v1.PlacementPolicy.host_affinity_rules:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule
+	1,  // 32: yandex.cloud.compute.v1.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 33: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 34: yandex.cloud.compute.v1.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 35: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
+	7,  // 36: yandex.cloud.compute.v1.SerialPortSettings.ssh_authorization:type_name -> yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorization
+	6,  // 37: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.Operator
+	38, // [38:38] is the sub-list for method output_type
+	38, // [38:38] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instance_proto_init() }
@@ -1982,16 +2066,20 @@ func file_yandex_cloud_compute_v1_instance_proto_init() {
 	if File_yandex_cloud_compute_v1_instance_proto != nil {
 		return
 	}
+	file_yandex_cloud_compute_v1_kek_proto_init()
 	file_yandex_cloud_compute_v1_application_proto_init()
 	file_yandex_cloud_compute_v1_hardware_generation_proto_init()
 	file_yandex_cloud_compute_v1_maintenance_proto_init()
+	file_yandex_cloud_compute_v1_instance_proto_msgTypes[3].OneofWrappers = []any{
+		(*AttachedLocalDisk_PhysicalLocalDisk)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_compute_v1_instance_proto_rawDesc), len(file_yandex_cloud_compute_v1_instance_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   18,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

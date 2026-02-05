@@ -109,6 +109,12 @@ func (m *NetworkInterfaceSpec) SetSubnet(v NetworkInterfaceSpec_Subnet) {
 	m.Subnet = v
 }
 
+type NetworkInterfaceSpec_Interface = isNetworkInterfaceSpec_Interface
+
+func (m *NetworkInterfaceSpec) SetInterface(v NetworkInterfaceSpec_Interface) {
+	m.Interface = v
+}
+
 func (m *NetworkInterfaceSpec) SetId(v string) {
 	m.Id = v
 }
@@ -122,6 +128,18 @@ func (m *NetworkInterfaceSpec) SetPrivateSubnet(v *PrivateSubnetNetworkInterface
 func (m *NetworkInterfaceSpec) SetPublicSubnet(v *PublicSubnetNetworkInterface) {
 	m.Subnet = &NetworkInterfaceSpec_PublicSubnet{
 		PublicSubnet: v,
+	}
+}
+
+func (m *NetworkInterfaceSpec) SetPrivateInterface(v *PrivateNetworkInterface) {
+	m.Interface = &NetworkInterfaceSpec_PrivateInterface{
+		PrivateInterface: v,
+	}
+}
+
+func (m *NetworkInterfaceSpec) SetPublicInterface(v *PublicNetworkInterface) {
+	m.Interface = &NetworkInterfaceSpec_PublicInterface{
+		PublicInterface: v,
 	}
 }
 

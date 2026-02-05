@@ -52,12 +52,28 @@ type ServerServiceClient interface {
 	BatchCreate(ctx context.Context, in *BatchCreateServersRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified server.
 	Update(ctx context.Context, in *UpdateServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Powers off the specified server.
 	PowerOff(ctx context.Context, in *PowerOffServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Powers on the specified server.
 	PowerOn(ctx context.Context, in *PowerOnServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Reboots the specified server.
 	Reboot(ctx context.Context, in *RebootServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Reinstalls the specified server.
 	Reinstall(ctx context.Context, in *ReinstallServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts prolongation of the specified server.
@@ -214,12 +230,28 @@ type ServerServiceServer interface {
 	BatchCreate(context.Context, *BatchCreateServersRequest) (*operation.Operation, error)
 	// Updates the specified server.
 	Update(context.Context, *UpdateServerRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Powers off the specified server.
 	PowerOff(context.Context, *PowerOffServerRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Powers on the specified server.
 	PowerOn(context.Context, *PowerOnServerRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Reboots the specified server.
 	Reboot(context.Context, *RebootServerRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	//
+	//	Required for backward compatibility with old clients. --)
+	//
 	// Reinstalls the specified server.
 	Reinstall(context.Context, *ReinstallServerRequest) (*operation.Operation, error)
 	// Starts prolongation of the specified server.

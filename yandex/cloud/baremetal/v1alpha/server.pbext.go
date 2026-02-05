@@ -68,6 +68,12 @@ func (m *NetworkInterface) SetSubnet(v NetworkInterface_Subnet) {
 	m.Subnet = v
 }
 
+type NetworkInterface_Interface = isNetworkInterface_Interface
+
+func (m *NetworkInterface) SetInterface(v NetworkInterface_Interface) {
+	m.Interface = v
+}
+
 func (m *NetworkInterface) SetId(v string) {
 	m.Id = v
 }
@@ -90,6 +96,84 @@ func (m *NetworkInterface) SetPublicSubnet(v *PublicSubnetNetworkInterface) {
 	m.Subnet = &NetworkInterface_PublicSubnet{
 		PublicSubnet: v,
 	}
+}
+
+func (m *NetworkInterface) SetPrivateInterface(v *PrivateNetworkInterface) {
+	m.Interface = &NetworkInterface_PrivateInterface{
+		PrivateInterface: v,
+	}
+}
+
+func (m *NetworkInterface) SetPublicInterface(v *PublicNetworkInterface) {
+	m.Interface = &NetworkInterface_PublicInterface{
+		PublicInterface: v,
+	}
+}
+
+func (m *PrivateNetworkInterface) SetNativeSubnetId(v string) {
+	m.NativeSubnetId = v
+}
+
+func (m *PrivateNetworkInterface) SetIpAddress(v string) {
+	m.IpAddress = v
+}
+
+func (m *PrivateNetworkInterface) SetMacLimit(v int64) {
+	m.MacLimit = v
+}
+
+func (m *PrivateNetworkInterface) SetVlanSubinterfaces(v []*VLANSubinterface) {
+	m.VlanSubinterfaces = v
+}
+
+func (m *VLANSubinterface) SetTaggedSubnetId(v string) {
+	m.TaggedSubnetId = v
+}
+
+func (m *VLANSubinterface) SetIpAddress(v string) {
+	m.IpAddress = v
+}
+
+func (m *VLANSubinterface) SetMacLimit(v int64) {
+	m.MacLimit = v
+}
+
+type PublicNetworkInterface_NativeSubnetConfig = isPublicNetworkInterface_NativeSubnetConfig
+
+func (m *PublicNetworkInterface) SetNativeSubnetConfig(v PublicNetworkInterface_NativeSubnetConfig) {
+	m.NativeSubnetConfig = v
+}
+
+func (m *PublicNetworkInterface) SetIpAddress(v string) {
+	m.IpAddress = v
+}
+
+func (m *PublicNetworkInterface) SetNativeSubnetId(v string) {
+	m.NativeSubnetId = v
+}
+
+func (m *PublicNetworkInterface) SetMacLimit(v int64) {
+	m.MacLimit = v
+}
+
+func (m *PublicNetworkInterface) SetNativeSubnet(v *PublicNetworkInterface_NativeSubnet) {
+	m.NativeSubnetConfig = &PublicNetworkInterface_NativeSubnet_{
+		NativeSubnet: v,
+	}
+}
+
+func (m *PublicNetworkInterface) SetNewNativeSubnet(v *PublicNetworkInterface_NewNativeSubnet) {
+	m.NativeSubnetConfig = &PublicNetworkInterface_NewNativeSubnet_{
+		NewNativeSubnet: v,
+	}
+}
+
+func (m *PublicNetworkInterface_NativeSubnet) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *PublicNetworkInterface_NewNativeSubnet) SetAddressingType(v PublicNetworkInterface_NewNativeSubnet_AddressingType) {
+	m.AddressingType = v
 }
 
 func (m *PrivateSubnetNetworkInterface) SetPrivateSubnetId(v string) {

@@ -382,7 +382,9 @@ type LifecycleRule struct {
 	//
 	//	*LifecycleRule_DockerFilters
 	//	*LifecycleRule_MavenFilters
-	Filter        isLifecycleRule_Filter `protobuf_oneof:"filter"`
+	Filter isLifecycleRule_Filter `protobuf_oneof:"filter"`
+	// Regular expression pattern to match package version or docker tag.
+	VersionRegexp string `protobuf:"bytes,7,opt,name=version_regexp,json=versionRegexp,proto3" json:"version_regexp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -481,6 +483,13 @@ func (x *LifecycleRule) GetMavenFilters() *MavenFilters {
 		}
 	}
 	return nil
+}
+
+func (x *LifecycleRule) GetVersionRegexp() string {
+	if x != nil {
+		return x.VersionRegexp
+	}
+	return ""
 }
 
 type isLifecycleRule_Kind interface {
@@ -899,7 +908,7 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"created_by\x18\t \x01(\tR\tcreatedBy\x12\x1f\n" +
 	"\vmodified_by\x18\n" +
 	" \x01(\tR\n" +
-	"modifiedBy\"\xf9\x03\n" +
+	"modifiedBy\"\xa0\x04\n" +
 	"\rLifecycleRule\x12\x1f\n" +
 	"\vpath_prefix\x18\x01 \x01(\tR\n" +
 	"pathPrefix\x12W\n" +
@@ -907,7 +916,8 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\x0fkeep_by_version\x18\x03 \x01(\v29.yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRuleH\x00R\rkeepByVersion\x12L\n" +
 	"\x06delete\x18\x04 \x01(\v22.yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleH\x00R\x06delete\x12U\n" +
 	"\x0edocker_filters\x18\x05 \x01(\v2,.yandex.cloud.cloudregistry.v1.DockerFiltersH\x01R\rdockerFilters\x12R\n" +
-	"\rmaven_filters\x18\x06 \x01(\v2+.yandex.cloud.cloudregistry.v1.MavenFiltersH\x01R\fmavenFiltersB\x06\n" +
+	"\rmaven_filters\x18\x06 \x01(\v2+.yandex.cloud.cloudregistry.v1.MavenFiltersH\x01R\fmavenFilters\x12%\n" +
+	"\x0eversion_regexp\x18\a \x01(\tR\rversionRegexpB\x06\n" +
 	"\x04kindB\b\n" +
 	"\x06filter\"\xbd\x01\n" +
 	"\rDockerFilters\x12U\n" +
