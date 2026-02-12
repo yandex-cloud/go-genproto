@@ -32,7 +32,6 @@ const (
 	LogLevel_WARNING               LogLevel = 3
 	LogLevel_ERROR                 LogLevel = 4
 	LogLevel_FATAL                 LogLevel = 5
-	LogLevel_PANIC                 LogLevel = 6
 )
 
 // Enum value maps for LogLevel.
@@ -44,7 +43,6 @@ var (
 		3: "WARNING",
 		4: "ERROR",
 		5: "FATAL",
-		6: "PANIC",
 	}
 	LogLevel_value = map[string]int32{
 		"LOG_LEVEL_UNSPECIFIED": 0,
@@ -53,7 +51,6 @@ var (
 		"WARNING":               3,
 		"ERROR":                 4,
 		"FATAL":                 5,
-		"PANIC":                 6,
 	}
 )
 
@@ -985,15 +982,14 @@ const file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc = "" +
 	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
 	"\fdisk_type_id\x18\x03 \x01(\tR\n" +
-	"diskTypeId*h\n" +
+	"diskTypeId*c\n" +
 	"\bLogLevel\x12\x19\n" +
 	"\x15LOG_LEVEL_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05DEBUG\x10\x01\x12\b\n" +
 	"\x04INFO\x10\x02\x12\v\n" +
 	"\aWARNING\x10\x03\x12\t\n" +
 	"\x05ERROR\x10\x04\x12\t\n" +
-	"\x05FATAL\x10\x05\x12\t\n" +
-	"\x05PANIC\x10\x06Ba\n" +
+	"\x05FATAL\x10\x05\"\x04\b\x06\x10\x06Ba\n" +
 	"\x1cyandex.cloud.api.mdb.spqr.v1ZAgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/spqr/v1;spqrb\x06proto3"
 
 var (

@@ -62,6 +62,10 @@ func (m *WebSearchRequest) SetMetadata(v *SearchMetadata) {
 	m.Metadata = v
 }
 
+func (m *WebSearchRequest) SetPeriod(v WebSearchRequest_Period) {
+	m.Period = v
+}
+
 func (m *WebSearchResponse) SetRawData(v []byte) {
 	m.RawData = v
 }

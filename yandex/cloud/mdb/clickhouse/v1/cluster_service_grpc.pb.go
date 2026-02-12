@@ -117,13 +117,17 @@ type ClusterServiceClient interface {
 	GetShard(ctx context.Context, in *GetClusterShardRequest, opts ...grpc.CallOption) (*Shard, error)
 	// Retrieves a list of shards that belong to the specified cluster.
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
+	// Deprecated: Do not use.
 	// Creates a new shard in the specified cluster.
+	// Deprecated. Use **AddShards** instead.
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates one or more shards in the specified cluster.
 	AddShards(ctx context.Context, in *AddClusterShardsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Modifies the specified shard.
 	UpdateShard(ctx context.Context, in *UpdateClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Deletes the specified shard.
+	// Deprecated. Use **DeleteShards** instead.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shards (one or more).
 	DeleteShards(ctx context.Context, in *DeleteClusterShardsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -400,6 +404,7 @@ func (c *clusterServiceClient) ListShards(ctx context.Context, in *ListClusterSh
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *clusterServiceClient) AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -430,6 +435,7 @@ func (c *clusterServiceClient) UpdateShard(ctx context.Context, in *UpdateCluste
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *clusterServiceClient) DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -624,13 +630,17 @@ type ClusterServiceServer interface {
 	GetShard(context.Context, *GetClusterShardRequest) (*Shard, error)
 	// Retrieves a list of shards that belong to the specified cluster.
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
+	// Deprecated: Do not use.
 	// Creates a new shard in the specified cluster.
+	// Deprecated. Use **AddShards** instead.
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Creates one or more shards in the specified cluster.
 	AddShards(context.Context, *AddClusterShardsRequest) (*operation.Operation, error)
 	// Modifies the specified shard.
 	UpdateShard(context.Context, *UpdateClusterShardRequest) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Deletes the specified shard.
+	// Deprecated. Use **DeleteShards** instead.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shards (one or more).
 	DeleteShards(context.Context, *DeleteClusterShardsRequest) (*operation.Operation, error)

@@ -2,11 +2,6 @@
 
 package mysql
 
-import (
-	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-)
-
 func (m *GetDatabaseRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -48,30 +43,6 @@ func (m *CreateDatabaseMetadata) SetClusterId(v string) {
 }
 
 func (m *CreateDatabaseMetadata) SetDatabaseName(v string) {
-	m.DatabaseName = v
-}
-
-func (m *UpdateDatabaseRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *UpdateDatabaseRequest) SetDatabaseName(v string) {
-	m.DatabaseName = v
-}
-
-func (m *UpdateDatabaseRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
-	m.UpdateMask = v
-}
-
-func (m *UpdateDatabaseRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
-	m.DeletionProtection = v
-}
-
-func (m *UpdateDatabaseMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *UpdateDatabaseMetadata) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
 

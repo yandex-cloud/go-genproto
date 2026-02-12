@@ -1562,10 +1562,10 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1cListRoutingInstancesResponse\x12Y\n" +
 	"\x11routing_instances\x18\x01 \x03(\v2,.yandex.cloud.cloudrouter.v1.RoutingInstanceR\x10routingInstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xca\x04\n" +
-	"\x1cCreateRoutingInstanceRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x85\x05\n" +
+	"\x1cCreateRoutingInstanceRequest\x12B\n" +
+	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
+	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
 	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x1b\n" +
 	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12O\n" +
 	"\bvpc_info\x18\x06 \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoR\avpcInfo\x12\x84\x01\n" +
@@ -1575,13 +1575,13 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\b\x10\f\"O\n" +
 	"\x1dCreateRoutingInstanceMetadata\x12.\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xb0\x05\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xeb\x05\n" +
 	"\x1cUpdateRoutingInstanceRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1b\n" +
+	"updateMask\x12B\n" +
+	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
 	"\tregion_id\x18\a \x01(\tR\bregionId\x12S\n" +
 	"\bvpc_info\x18\b \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\x02\x18\x01R\avpcInfo\x12\x88\x01\n" +
 	"\x1bcic_private_connection_info\x18\t \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\x02\x18\x01R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +

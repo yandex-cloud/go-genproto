@@ -296,6 +296,65 @@ func (WebSearchRequest_Format) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_searchapi_v2_search_service_proto_rawDescGZIP(), []int{2, 1}
 }
 
+type WebSearchRequest_Period int32
+
+const (
+	WebSearchRequest_PERIOD_UNSPECIFIED WebSearchRequest_Period = 0
+	// All time
+	WebSearchRequest_PERIOD_ALL_TIME WebSearchRequest_Period = 1
+	// Last 24 hours
+	WebSearchRequest_PERIOD_DAY WebSearchRequest_Period = 2
+	// Last 2 weeks
+	WebSearchRequest_PERIOD_2_WEEKS WebSearchRequest_Period = 3
+	// Last month
+	WebSearchRequest_PERIOD_MONTH WebSearchRequest_Period = 4
+)
+
+// Enum value maps for WebSearchRequest_Period.
+var (
+	WebSearchRequest_Period_name = map[int32]string{
+		0: "PERIOD_UNSPECIFIED",
+		1: "PERIOD_ALL_TIME",
+		2: "PERIOD_DAY",
+		3: "PERIOD_2_WEEKS",
+		4: "PERIOD_MONTH",
+	}
+	WebSearchRequest_Period_value = map[string]int32{
+		"PERIOD_UNSPECIFIED": 0,
+		"PERIOD_ALL_TIME":    1,
+		"PERIOD_DAY":         2,
+		"PERIOD_2_WEEKS":     3,
+		"PERIOD_MONTH":       4,
+	}
+)
+
+func (x WebSearchRequest_Period) Enum() *WebSearchRequest_Period {
+	p := new(WebSearchRequest_Period)
+	*p = x
+	return p
+}
+
+func (x WebSearchRequest_Period) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (WebSearchRequest_Period) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_searchapi_v2_search_service_proto_enumTypes[5].Descriptor()
+}
+
+func (WebSearchRequest_Period) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_searchapi_v2_search_service_proto_enumTypes[5]
+}
+
+func (x WebSearchRequest_Period) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use WebSearchRequest_Period.Descriptor instead.
+func (WebSearchRequest_Period) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_searchapi_v2_search_service_proto_rawDescGZIP(), []int{2, 2}
+}
+
 type SortSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Documents sorting mode.
@@ -434,7 +493,9 @@ type WebSearchRequest struct {
 	// User-Agent request header value.
 	UserAgent string `protobuf:"bytes,9,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	// Search flags
-	Metadata      *SearchMetadata `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Metadata *SearchMetadata `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// Get results for the certain period
+	Period        WebSearchRequest_Period `protobuf:"varint,11,opt,name=period,proto3,enum=yandex.cloud.searchapi.v2.WebSearchRequest_Period" json:"period,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -539,6 +600,13 @@ func (x *WebSearchRequest) GetMetadata() *SearchMetadata {
 	return nil
 }
 
+func (x *WebSearchRequest) GetPeriod() WebSearchRequest_Period {
+	if x != nil {
+		return x.Period
+	}
+	return WebSearchRequest_PERIOD_UNSPECIFIED
+}
+
 type WebSearchResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Search results, either in XML or HTML format depending on the request settings.
@@ -609,7 +677,7 @@ const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\tGroupMode\x12\x1a\n" +
 	"\x16GROUP_MODE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fGROUP_MODE_FLAT\x10\x01\x12\x13\n" +
-	"\x0fGROUP_MODE_DEEP\x10\x02\"\xdf\x06\n" +
+	"\x0fGROUP_MODE_DEEP\x10\x02\"\x98\b\n" +
 	"\x10WebSearchRequest\x12B\n" +
 	"\x05query\x18\x01 \x01(\v2&.yandex.cloud.searchapi.v2.SearchQueryB\x04\xe8\xc71\x01R\x05query\x12@\n" +
 	"\tsort_spec\x18\x02 \x01(\v2#.yandex.cloud.searchapi.v2.SortSpecR\bsortSpec\x12C\n" +
@@ -623,7 +691,8 @@ const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\t \x01(\tB\t\x8a\xc81\x05<=300R\tuserAgent\x12E\n" +
 	"\bmetadata\x18\n" +
-	" \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\"\xaa\x01\n" +
+	" \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\x12J\n" +
+	"\x06period\x18\v \x01(\x0e22.yandex.cloud.searchapi.v2.WebSearchRequest.PeriodR\x06period\"\xaa\x01\n" +
 	"\fLocalization\x12\x1c\n" +
 	"\x18LOCALIZATION_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fLOCALIZATION_RU\x10\x01\x12\x13\n" +
@@ -636,7 +705,14 @@ const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\x12FORMAT_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"FORMAT_XML\x10\x01\x12\x0f\n" +
-	"\vFORMAT_HTML\x10\x02\"4\n" +
+	"\vFORMAT_HTML\x10\x02\"k\n" +
+	"\x06Period\x12\x16\n" +
+	"\x12PERIOD_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fPERIOD_ALL_TIME\x10\x01\x12\x0e\n" +
+	"\n" +
+	"PERIOD_DAY\x10\x02\x12\x12\n" +
+	"\x0ePERIOD_2_WEEKS\x10\x03\x12\x10\n" +
+	"\fPERIOD_MONTH\x10\x04\"4\n" +
 	"\x11WebSearchResponse\x12\x1f\n" +
 	"\braw_data\x18\x01 \x01(\fB\x04\xe8\xc71\x01R\arawData2\xa9\x01\n" +
 	"\x15WebSearchAsyncService\x12\x8f\x01\n" +
@@ -657,7 +733,7 @@ func file_yandex_cloud_searchapi_v2_search_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_searchapi_v2_search_service_proto_rawDescData
 }
 
-var file_yandex_cloud_searchapi_v2_search_service_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_searchapi_v2_search_service_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_yandex_cloud_searchapi_v2_search_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_searchapi_v2_search_service_proto_goTypes = []any{
 	(SortSpec_SortOrder)(0),            // 0: yandex.cloud.searchapi.v2.SortSpec.SortOrder
@@ -665,33 +741,35 @@ var file_yandex_cloud_searchapi_v2_search_service_proto_goTypes = []any{
 	(GroupSpec_GroupMode)(0),           // 2: yandex.cloud.searchapi.v2.GroupSpec.GroupMode
 	(WebSearchRequest_Localization)(0), // 3: yandex.cloud.searchapi.v2.WebSearchRequest.Localization
 	(WebSearchRequest_Format)(0),       // 4: yandex.cloud.searchapi.v2.WebSearchRequest.Format
-	(*SortSpec)(nil),                   // 5: yandex.cloud.searchapi.v2.SortSpec
-	(*GroupSpec)(nil),                  // 6: yandex.cloud.searchapi.v2.GroupSpec
-	(*WebSearchRequest)(nil),           // 7: yandex.cloud.searchapi.v2.WebSearchRequest
-	(*WebSearchResponse)(nil),          // 8: yandex.cloud.searchapi.v2.WebSearchResponse
-	(*SearchQuery)(nil),                // 9: yandex.cloud.searchapi.v2.SearchQuery
-	(*SearchMetadata)(nil),             // 10: yandex.cloud.searchapi.v2.SearchMetadata
-	(*operation.Operation)(nil),        // 11: yandex.cloud.operation.Operation
+	(WebSearchRequest_Period)(0),       // 5: yandex.cloud.searchapi.v2.WebSearchRequest.Period
+	(*SortSpec)(nil),                   // 6: yandex.cloud.searchapi.v2.SortSpec
+	(*GroupSpec)(nil),                  // 7: yandex.cloud.searchapi.v2.GroupSpec
+	(*WebSearchRequest)(nil),           // 8: yandex.cloud.searchapi.v2.WebSearchRequest
+	(*WebSearchResponse)(nil),          // 9: yandex.cloud.searchapi.v2.WebSearchResponse
+	(*SearchQuery)(nil),                // 10: yandex.cloud.searchapi.v2.SearchQuery
+	(*SearchMetadata)(nil),             // 11: yandex.cloud.searchapi.v2.SearchMetadata
+	(*operation.Operation)(nil),        // 12: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_searchapi_v2_search_service_proto_depIdxs = []int32{
 	1,  // 0: yandex.cloud.searchapi.v2.SortSpec.sort_mode:type_name -> yandex.cloud.searchapi.v2.SortSpec.SortMode
 	0,  // 1: yandex.cloud.searchapi.v2.SortSpec.sort_order:type_name -> yandex.cloud.searchapi.v2.SortSpec.SortOrder
 	2,  // 2: yandex.cloud.searchapi.v2.GroupSpec.group_mode:type_name -> yandex.cloud.searchapi.v2.GroupSpec.GroupMode
-	9,  // 3: yandex.cloud.searchapi.v2.WebSearchRequest.query:type_name -> yandex.cloud.searchapi.v2.SearchQuery
-	5,  // 4: yandex.cloud.searchapi.v2.WebSearchRequest.sort_spec:type_name -> yandex.cloud.searchapi.v2.SortSpec
-	6,  // 5: yandex.cloud.searchapi.v2.WebSearchRequest.group_spec:type_name -> yandex.cloud.searchapi.v2.GroupSpec
+	10, // 3: yandex.cloud.searchapi.v2.WebSearchRequest.query:type_name -> yandex.cloud.searchapi.v2.SearchQuery
+	6,  // 4: yandex.cloud.searchapi.v2.WebSearchRequest.sort_spec:type_name -> yandex.cloud.searchapi.v2.SortSpec
+	7,  // 5: yandex.cloud.searchapi.v2.WebSearchRequest.group_spec:type_name -> yandex.cloud.searchapi.v2.GroupSpec
 	3,  // 6: yandex.cloud.searchapi.v2.WebSearchRequest.l10n:type_name -> yandex.cloud.searchapi.v2.WebSearchRequest.Localization
 	4,  // 7: yandex.cloud.searchapi.v2.WebSearchRequest.response_format:type_name -> yandex.cloud.searchapi.v2.WebSearchRequest.Format
-	10, // 8: yandex.cloud.searchapi.v2.WebSearchRequest.metadata:type_name -> yandex.cloud.searchapi.v2.SearchMetadata
-	7,  // 9: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
-	7,  // 10: yandex.cloud.searchapi.v2.WebSearchService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
-	11, // 11: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:output_type -> yandex.cloud.operation.Operation
-	8,  // 12: yandex.cloud.searchapi.v2.WebSearchService.Search:output_type -> yandex.cloud.searchapi.v2.WebSearchResponse
-	11, // [11:13] is the sub-list for method output_type
-	9,  // [9:11] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	11, // 8: yandex.cloud.searchapi.v2.WebSearchRequest.metadata:type_name -> yandex.cloud.searchapi.v2.SearchMetadata
+	5,  // 9: yandex.cloud.searchapi.v2.WebSearchRequest.period:type_name -> yandex.cloud.searchapi.v2.WebSearchRequest.Period
+	8,  // 10: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
+	8,  // 11: yandex.cloud.searchapi.v2.WebSearchService.Search:input_type -> yandex.cloud.searchapi.v2.WebSearchRequest
+	12, // 12: yandex.cloud.searchapi.v2.WebSearchAsyncService.Search:output_type -> yandex.cloud.operation.Operation
+	9,  // 13: yandex.cloud.searchapi.v2.WebSearchService.Search:output_type -> yandex.cloud.searchapi.v2.WebSearchResponse
+	12, // [12:14] is the sub-list for method output_type
+	10, // [10:12] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_searchapi_v2_search_service_proto_init() }
@@ -705,7 +783,7 @@ func file_yandex_cloud_searchapi_v2_search_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc), len(file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   2,

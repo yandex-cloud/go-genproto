@@ -1096,10 +1096,10 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1eListPrivateConnectionsResponse\x12W\n" +
 	"\x13private_connections\x18\x01 \x03(\v2&.yandex.cloud.cic.v1.PrivateConnectionR\x12privateConnections\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x83\x05\n" +
-	"\x1eCreatePrivateConnectionRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbe\x05\n" +
+	"\x1eCreatePrivateConnectionRequest\x12B\n" +
+	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
+	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
 	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x1b\n" +
 	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12.\n" +
 	"\x13trunk_connection_id\x18\x06 \x01(\tR\x11trunkConnectionId\x124\n" +
@@ -1113,13 +1113,13 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\b\x10\n" +
 	"J\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"U\n" +
 	"\x1fCreatePrivateConnectionMetadata\x122\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xdf\x05\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\x9a\x06\n" +
 	"\x1eUpdatePrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1b\n" +
+	"updateMask\x12B\n" +
+	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
 	"\tregion_id\x18\a \x01(\tR\bregionId\x12.\n" +
 	"\x13trunk_connection_id\x18\b \x01(\tR\x11trunkConnectionId\x124\n" +
 	"\avlan_id\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12?\n" +

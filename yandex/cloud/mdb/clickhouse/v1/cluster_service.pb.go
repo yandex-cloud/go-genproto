@@ -5819,7 +5819,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12P\n" +
 	"\vconfig_spec\x18\x02 \x01(\v2/.yandex.cloud.mdb.clickhouse.v1.ShardConfigSpecR\n" +
 	"configSpec\x12*\n" +
-	"\x11shard_group_names\x18\x03 \x03(\tR\x0fshardGroupNames2\xa8D\n" +
+	"\x11shard_group_names\x18\x03 \x03(\tR\x0fshardGroupNames2\xafD\n" +
 	"\x0eClusterService\x12\x97\x01\n" +
 	"\x03Get\x121.yandex.cloud.mdb.clickhouse.v1.GetClusterRequest\x1a'.yandex.cloud.mdb.clickhouse.v1.Cluster\"4\x82\xd3\xe4\x93\x02.\x12,/managed-clickhouse/v1/clusters/{cluster_id}\x12\x9a\x01\n" +
 	"\x04List\x123.yandex.cloud.mdb.clickhouse.v1.ListClustersRequest\x1a4.yandex.cloud.mdb.clickhouse.v1.ListClustersResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/managed-clickhouse/v1/clusters\x12\xb1\x01\n" +
@@ -5859,15 +5859,15 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x1bRestartClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*\"?/managed-clickhouse/v1/clusters/{cluster_id}/hosts:restartHosts\x12\xb3\x01\n" +
 	"\bGetShard\x126.yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest\x1a%.yandex.cloud.mdb.clickhouse.v1.Shard\"H\x82\xd3\xe4\x93\x02B\x12@/managed-clickhouse/v1/clusters/{cluster_id}/shards/{shard_name}\x12\xbe\x01\n" +
 	"\n" +
-	"ListShards\x128.yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest\x1a9.yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse\";\x82\xd3\xe4\x93\x025\x123/managed-clickhouse/v1/clusters/{cluster_id}/shards\x12\xc9\x01\n" +
-	"\bAddShard\x126.yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2* \n" +
-	"\x17AddClusterShardMetadata\x12\x05Shard\x82\xd3\xe4\x93\x028:\x01*\"3/managed-clickhouse/v1/clusters/{cluster_id}/shards\x12\xd9\x01\n" +
+	"ListShards\x128.yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest\x1a9.yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse\";\x82\xd3\xe4\x93\x025\x123/managed-clickhouse/v1/clusters/{cluster_id}/shards\x12\xcc\x01\n" +
+	"\bAddShard\x126.yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"e\xb2\xd2* \n" +
+	"\x17AddClusterShardMetadata\x12\x05Shard\x82\xd3\xe4\x93\x028:\x01*\"3/managed-clickhouse/v1/clusters/{cluster_id}/shards\x88\x02\x01\x12\xd9\x01\n" +
 	"\tAddShards\x127.yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest\x1a!.yandex.cloud.operation.Operation\"p\xb2\xd2*\"\n" +
 	"\x18AddClusterShardsMetadata\x12\x06Shards\x82\xd3\xe4\x93\x02D:\x01*\"?/managed-clickhouse/v1/clusters/{cluster_id}/shards:batchCreate\x12\xdf\x01\n" +
 	"\vUpdateShard\x129.yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*#\n" +
-	"\x1aUpdateClusterShardMetadata\x12\x05Shard\x82\xd3\xe4\x93\x02E:\x01*2@/managed-clickhouse/v1/clusters/{cluster_id}/shards/{shard_name}\x12\xec\x01\n" +
-	"\vDeleteShard\x129.yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"\x7f\xb2\xd2*3\n" +
-	"\x1aDeleteClusterShardMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02B*@/managed-clickhouse/v1/clusters/{cluster_id}/shards/{shard_name}\x12\xf2\x01\n" +
+	"\x1aUpdateClusterShardMetadata\x12\x05Shard\x82\xd3\xe4\x93\x02E:\x01*2@/managed-clickhouse/v1/clusters/{cluster_id}/shards/{shard_name}\x12\xf0\x01\n" +
+	"\vDeleteShard\x129.yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest\x1a!.yandex.cloud.operation.Operation\"\x82\x01\xb2\xd2*3\n" +
+	"\x1aDeleteClusterShardMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02B*@/managed-clickhouse/v1/clusters/{cluster_id}/shards/{shard_name}\x88\x02\x01\x12\xf2\x01\n" +
 	"\fDeleteShards\x12:.yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest\x1a!.yandex.cloud.operation.Operation\"\x82\x01\xb2\xd2*4\n" +
 	"\x1bDeleteClusterShardsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*\"?/managed-clickhouse/v1/clusters/{cluster_id}/shards:batchDelete\x12\xcd\x01\n" +
 	"\rGetShardGroup\x12;.yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest\x1a*.yandex.cloud.mdb.clickhouse.v1.ShardGroup\"S\x82\xd3\xe4\x93\x02M\x12K/managed-clickhouse/v1/clusters/{cluster_id}/shardGroups/{shard_group_name}\x12\xd2\x01\n" +

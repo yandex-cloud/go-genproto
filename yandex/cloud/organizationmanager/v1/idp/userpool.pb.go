@@ -1447,15 +1447,17 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"PROCESSING\x10\x02\x12\t\n" +
 	"\x05VALID\x10\x03\x12\v\n" +
 	"\aINVALID\x10\x04B\v\n" +
-	"\tchallengeJ\x04\b\x03\x10\x04\"\x97\n" +
+	"\tchallengeJ\x04\b\x03\x10\x04\"\x91\n" +
 	"\n" +
 	"\x15PasswordQualityPolicy\x12#\n" +
-	"\rallow_similar\x18\x01 \x01(\bR\fallowSimilar\x12&\n" +
+	"\rallow_similar\x18\x01 \x01(\bR\fallowSimilar\x12)\n" +
 	"\n" +
-	"max_length\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\tmaxLength\x12!\n" +
+	"max_length\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\tmaxLength\x12!\n" +
 	"\n" +
-	"min_length\x18\x03 \x01(\x03B\x02\x18\x01R\tminLength\x12*\n" +
-	"\fmatch_length\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\vmatchLength\x12}\n" +
+	"min_length\x18\x03 \x01(\x03B\x02\x18\x01R\tminLength\x12-\n" +
+	"\fmatch_length\x18\x04 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\vmatchLength\x12}\n" +
 	"\x10required_classes\x18\x05 \x01(\v2N.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClassesB\x02\x18\x01R\x0frequiredClasses\x12\x9b\x01\n" +
 	"\x1cmin_length_by_class_settings\x18\x06 \x01(\v2W.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettingsB\x02\x18\x01R\x18minLengthByClassSettings\x12\\\n" +
 	"\x05fixed\x18\a \x01(\v2D.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.FixedH\x00R\x05fixed\x12\\\n" +
@@ -1464,32 +1466,37 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"\x06lowers\x18\x01 \x01(\bR\x06lowers\x12\x16\n" +
 	"\x06uppers\x18\x02 \x01(\bR\x06uppers\x12\x16\n" +
 	"\x06digits\x18\x03 \x01(\bR\x06digits\x12\x1a\n" +
-	"\bspecials\x18\x04 \x01(\bR\bspecials\x1ao\n" +
-	"\x18MinLengthByClassSettings\x12\x19\n" +
-	"\x03one\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\x03one\x12\x19\n" +
-	"\x03two\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\x03two\x12\x1d\n" +
-	"\x05three\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\x05three\x1a\xd7\x01\n" +
+	"\bspecials\x18\x04 \x01(\bR\bspecials\x1aT\n" +
+	"\x18MinLengthByClassSettings\x12\x10\n" +
+	"\x03one\x18\x01 \x01(\x03R\x03one\x12\x10\n" +
+	"\x03two\x18\x02 \x01(\x03R\x03two\x12\x14\n" +
+	"\x05three\x18\x03 \x01(\x03R\x05three\x1a\xda\x01\n" +
 	"\x05Fixed\x12'\n" +
 	"\x0flowers_required\x18\x01 \x01(\bR\x0elowersRequired\x12'\n" +
 	"\x0fuppers_required\x18\x02 \x01(\bR\x0euppersRequired\x12'\n" +
 	"\x0fdigits_required\x18\x03 \x01(\bR\x0edigitsRequired\x12+\n" +
-	"\x11specials_required\x18\x04 \x01(\bR\x10specialsRequired\x12&\n" +
+	"\x11specials_required\x18\x04 \x01(\bR\x10specialsRequired\x12)\n" +
 	"\n" +
-	"min_length\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\tminLength\x1a\xb1\x01\n" +
-	"\x05Smart\x12$\n" +
-	"\tone_class\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\boneClass\x12(\n" +
-	"\vtwo_classes\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\n" +
-	"twoClasses\x12,\n" +
-	"\rthree_classes\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\fthreeClasses\x12*\n" +
-	"\ffour_classes\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\vfourClassesB\x13\n" +
-	"\x11complexity_policy\"v\n" +
-	"\x16PasswordLifetimePolicy\x12-\n" +
-	"\x0emin_days_count\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\fminDaysCount\x12-\n" +
-	"\x0emax_days_count\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\fmaxDaysCount\"\xa4\x01\n" +
-	"\x1aBruteforceProtectionPolicy\x121\n" +
-	"\x06window\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\x06window\x12/\n" +
-	"\x05block\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x05block\x12\"\n" +
-	"\battempts\x18\x03 \x01(\x03B\x06\xfa\xc71\x02>0R\battemptsB~\n" +
+	"min_length\x18\x05 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\tminLength\x1a\xbd\x01\n" +
+	"\x05Smart\x12'\n" +
+	"\tone_class\x18\x01 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\boneClass\x12+\n" +
+	"\vtwo_classes\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\n" +
+	"twoClasses\x12/\n" +
+	"\rthree_classes\x18\x03 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\fthreeClasses\x12-\n" +
+	"\ffour_classes\x18\x04 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\vfourClassesB\x13\n" +
+	"\x11complexity_policy\"z\n" +
+	"\x16PasswordLifetimePolicy\x12/\n" +
+	"\x0emin_days_count\x18\x01 \x01(\x03B\t\xfa\xc71\x050-730R\fminDaysCount\x12/\n" +
+	"\x0emax_days_count\x18\x02 \x01(\x03B\t\xfa\xc71\x050-730R\fmaxDaysCount\"\xc3\x01\n" +
+	"\x1aBruteforceProtectionPolicy\x12?\n" +
+	"\x06window\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b0h-8760hR\x06window\x12=\n" +
+	"\x05block\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b0h-8760hR\x05block\x12%\n" +
+	"\battempts\x18\x03 \x01(\x03B\t\xfa\xc71\x051-100R\battemptsB~\n" +
 	"+yandex.cloud.api.organizationmanager.v1.idpZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp;idpb\x06proto3"
 
 var (
