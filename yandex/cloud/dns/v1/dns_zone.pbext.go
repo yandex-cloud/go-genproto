@@ -62,6 +62,10 @@ func (m *RecordSet) SetData(v []string) {
 	m.Data = v
 }
 
+func (m *RecordSet) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *PrivateVisibility) SetNetworkIds(v []string) {
 	m.NetworkIds = v
 }

@@ -163,7 +163,9 @@ type RecordSet struct {
 	// Time to live in seconds.
 	Ttl int64 `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
 	// Data of the record set.
-	Data          []string `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`
+	Data []string `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`
+	// Description of the record set.
+	Description   string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -224,6 +226,13 @@ func (x *RecordSet) GetData() []string {
 		return x.Data
 	}
 	return nil
+}
+
+func (x *RecordSet) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 // Configuration for privately visible zones.
@@ -329,12 +338,13 @@ const file_yandex_cloud_dns_v1_dns_zone_proto_rawDesc = "" +
 	" \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xba\x01\n" +
 	"\tRecordSet\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\x8a\xc81\x051-254R\x04name\x12\x1c\n" +
 	"\x04type\x18\x02 \x01(\tB\b\x8a\xc81\x041-20R\x04type\x12\"\n" +
 	"\x03ttl\x18\x03 \x01(\x03B\x10\xfa\xc71\f0-2147483647R\x03ttl\x12*\n" +
-	"\x04data\x18\x04 \x03(\tB\x16\x82\xc81\x051-100\x8a\xc81\x051-255\x90\xc81\x01R\x04data\"I\n" +
+	"\x04data\x18\x04 \x03(\tB\x16\x82\xc81\x051-100\x8a\xc81\x051-255\x90\xc81\x01R\x04data\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\"I\n" +
 	"\x11PrivateVisibility\x124\n" +
 	"\vnetwork_ids\x18\x01 \x03(\tB\x13\x82\xc81\x050-100\x8a\xc81\x0220\x90\xc81\x01R\n" +
 	"networkIds\"\x12\n" +
