@@ -205,12 +205,20 @@ func (m *TabletSpec) SetCount(v int64) {
 	m.Count = v
 }
 
+func (m *TaskProxySpec) SetCount(v int64) {
+	m.Count = v
+}
+
 func (m *ProxySpec) SetHttp(v *HttpProxySpec) {
 	m.Http = v
 }
 
 func (m *ProxySpec) SetRpc(v *RpcProxySpec) {
 	m.Rpc = v
+}
+
+func (m *ProxySpec) SetTask(v *TaskProxySpec) {
+	m.Task = v
 }
 
 func (m *OdinSpec) SetChecksTtl(v *durationpb.Duration) {
@@ -263,6 +271,10 @@ func (m *ClientLogging) SetAuditLogsEnabled(v bool) {
 	m.AuditLogsEnabled = v
 }
 
+func (m *ExcelSpec) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
 func (m *ClusterSpec) SetStorage(v *StorageSpec) {
 	m.Storage = v
 }
@@ -293,4 +305,8 @@ func (m *ClusterSpec) SetCron(v *CronSpec) {
 
 func (m *ClusterSpec) SetClientLogging(v *ClientLogging) {
 	m.ClientLogging = v
+}
+
+func (m *ClusterSpec) SetExcel(v *ExcelSpec) {
+	m.Excel = v
 }
