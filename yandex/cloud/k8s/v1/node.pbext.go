@@ -118,6 +118,10 @@ func (m *NodeTemplate) SetBootDiskSpec(v *DiskSpec) {
 	m.BootDiskSpec = v
 }
 
+func (m *NodeTemplate) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
+}
+
 func (m *NodeTemplate) SetMetadata(v map[string]string) {
 	m.Metadata = v
 }

@@ -663,6 +663,8 @@ type NodeTemplate struct {
 	ResourcesSpec *ResourcesSpec `protobuf:"bytes,2,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
 	// Specification for the boot disk that will be attached to the node.
 	BootDiskSpec *DiskSpec `protobuf:"bytes,3,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
+	// ID of the reserved instance pool.
+	ReservedInstancePoolId string `protobuf:"bytes,19,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	// The metadata as `key:value` pairs assigned to this instance template. Only SSH keys are supported as metadata.
 	//
 	// For more information, see [Connecting to a node over SSH](/docs/managed-kubernetes/operations/node-connect-ssh).
@@ -755,6 +757,13 @@ func (x *NodeTemplate) GetBootDiskSpec() *DiskSpec {
 		return x.BootDiskSpec
 	}
 	return nil
+}
+
+func (x *NodeTemplate) GetReservedInstancePoolId() string {
+	if x != nil {
+		return x.ReservedInstancePoolId
+	}
+	return ""
 }
 
 func (x *NodeTemplate) GetMetadata() map[string]string {
@@ -1717,14 +1726,15 @@ const file_yandex_cloud_k8s_v1_node_proto_rawDesc = "" +
 	"\x0eAttachedVolume\x12\x1f\n" +
 	"\vdriver_name\x18\x01 \x01(\tR\n" +
 	"driverName\x12#\n" +
-	"\rvolume_handle\x18\x02 \x01(\tR\fvolumeHandle\"\xe5\r\n" +
+	"\rvolume_handle\x18\x02 \x01(\tR\fvolumeHandle\"\xa0\x0e\n" +
 	"\fNodeTemplate\x12\x1d\n" +
 	"\x04name\x18\r \x01(\tB\t\x8a\xc81\x05<=128R\x04name\x12x\n" +
 	"\x06labels\x18\x0f \x03(\v2-.yandex.cloud.k8s.v1.NodeTemplate.LabelsEntryB1\x82\xc81\x04<=32\x8a\xc81\x05<=128\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x1f\n" +
 	"\vplatform_id\x18\x01 \x01(\tR\n" +
 	"platformId\x12I\n" +
 	"\x0eresources_spec\x18\x02 \x01(\v2\".yandex.cloud.k8s.v1.ResourcesSpecR\rresourcesSpec\x12C\n" +
-	"\x0eboot_disk_spec\x18\x03 \x01(\v2\x1d.yandex.cloud.k8s.v1.DiskSpecR\fbootDiskSpec\x12}\n" +
+	"\x0eboot_disk_spec\x18\x03 \x01(\v2\x1d.yandex.cloud.k8s.v1.DiskSpecR\fbootDiskSpec\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x13 \x01(\tR\x16reservedInstancePoolId\x12}\n" +
 	"\bmetadata\x18\x04 \x03(\v2/.yandex.cloud.k8s.v1.NodeTemplate.MetadataEntryB0\x82\xc81\x04<=64\x8a\xc81\b<=131072\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\bmetadata\x12P\n" +
 	"\x0fv4_address_spec\x18\x05 \x01(\v2$.yandex.cloud.k8s.v1.NodeAddressSpecB\x02\x18\x01R\rv4AddressSpec\x12R\n" +
 	"\x11scheduling_policy\x18\x06 \x01(\v2%.yandex.cloud.k8s.v1.SchedulingPolicyR\x10schedulingPolicy\x12a\n" +

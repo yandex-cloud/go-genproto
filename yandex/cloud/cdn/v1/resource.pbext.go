@@ -70,6 +70,10 @@ func (m *Resource) SetProviderCname(v string) {
 	m.ProviderCname = v
 }
 
+func (m *Resource) SetTls(v *TLS) {
+	m.Tls = v
+}
+
 func (m *ResourceOptions) SetDisableCache(v *ResourceOptions_BoolOption) {
 	m.DisableCache = v
 }
@@ -164,6 +168,18 @@ func (m *ResourceOptions) SetWebsockets(v *ResourceOptions_WebsocketsOption) {
 
 func (m *ResourceOptions) SetHeaderFilter(v *ResourceOptions_HeaderFilterOption) {
 	m.HeaderFilter = v
+}
+
+func (m *ResourceOptions) SetGeoAcl(v *ResourceOptions_GeoACLOption) {
+	m.GeoAcl = v
+}
+
+func (m *ResourceOptions) SetReferrerAcl(v *ResourceOptions_ReferrerACLOption) {
+	m.ReferrerAcl = v
+}
+
+func (m *ResourceOptions) SetStaticResponse(v *ResourceOptions_StaticResponseOption) {
+	m.StaticResponse = v
 }
 
 func (m *ResourceOptions_BoolOption) SetEnabled(v bool) {
@@ -406,6 +422,42 @@ func (m *ResourceOptions_HeaderFilterOption) SetHeaders(v []string) {
 	m.Headers = v
 }
 
+func (m *ResourceOptions_GeoACLOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_GeoACLOption) SetMode(v ResourceOptions_GeoACLOption_Mode) {
+	m.Mode = v
+}
+
+func (m *ResourceOptions_GeoACLOption) SetCountries(v []string) {
+	m.Countries = v
+}
+
+func (m *ResourceOptions_ReferrerACLOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_ReferrerACLOption) SetMode(v ResourceOptions_ReferrerACLOption_Mode) {
+	m.Mode = v
+}
+
+func (m *ResourceOptions_ReferrerACLOption) SetReferrers(v []string) {
+	m.Referrers = v
+}
+
+func (m *ResourceOptions_StaticResponseOption) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ResourceOptions_StaticResponseOption) SetCode(v int64) {
+	m.Code = v
+}
+
+func (m *ResourceOptions_StaticResponseOption) SetContent(v string) {
+	m.Content = v
+}
+
 func (m *SSLTargetCertificate) SetType(v SSLCertificateType) {
 	m.Type = v
 }
@@ -440,4 +492,8 @@ func (m *SSLCertificateData) SetCm(v *SSLCertificateCMData) {
 
 func (m *SSLCertificateCMData) SetId(v string) {
 	m.Id = v
+}
+
+func (m *TLS) SetProfile(v TLS_Profile) {
+	m.Profile = v
 }

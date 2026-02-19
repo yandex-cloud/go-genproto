@@ -369,8 +369,10 @@ type PlacementPolicy_HostAffinityRule_Operator int32
 
 const (
 	PlacementPolicy_HostAffinityRule_OPERATOR_UNSPECIFIED PlacementPolicy_HostAffinityRule_Operator = 0
-	PlacementPolicy_HostAffinityRule_IN                   PlacementPolicy_HostAffinityRule_Operator = 1
-	PlacementPolicy_HostAffinityRule_NOT_IN               PlacementPolicy_HostAffinityRule_Operator = 2
+	// Include action
+	PlacementPolicy_HostAffinityRule_IN PlacementPolicy_HostAffinityRule_Operator = 1
+	// Exclude action
+	PlacementPolicy_HostAffinityRule_NOT_IN PlacementPolicy_HostAffinityRule_Operator = 2
 )
 
 // Enum value maps for PlacementPolicy_HostAffinityRule_Operator.
@@ -471,7 +473,8 @@ type Instance struct {
 	// ID of the instance.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the instance belongs to.
-	FolderId  string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The date and time when the instance was created.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Name of the instance. 1-63 characters long.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
@@ -491,6 +494,8 @@ type Instance struct {
 	//
 	// For example, you may use the metadata in order to provide your public SSH key to the instance.
 	// For more information, see [Metadata](/docs/compute/concepts/vm-metadata).
+	//
+	// **The `metadata` field is currently omitted from response for the [yandex.cloud.compute.v1.InstanceService.List] request.**
 	Metadata map[string]string `protobuf:"bytes,11,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Options allow user to configure access to instance's metadata
 	MetadataOptions *MetadataOptions `protobuf:"bytes,23,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`

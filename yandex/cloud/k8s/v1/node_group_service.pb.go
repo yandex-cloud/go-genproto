@@ -468,6 +468,8 @@ type UpdateNodeGroupRequest struct {
 	NodeTaints []*Taint `protobuf:"bytes,13,rep,name=node_taints,json=nodeTaints,proto3" json:"node_taints,omitempty"`
 	// Labels that are assigned to the nodes of the node group at creation time.
 	NodeLabels map[string]string `protobuf:"bytes,14,rep,name=node_labels,json=nodeLabels,proto3" json:"node_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Variables for templating.
+	Variables []*Variable `protobuf:"bytes,17,rep,name=variables,proto3" json:"variables,omitempty"`
 	// Workload Identity Federation parameters of the node group.
 	WorkloadIdentityFederation *NodeGroupWorkloadIdentityFederation `protobuf:"bytes,16,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
 	unknownFields              protoimpl.UnknownFields
@@ -602,6 +604,13 @@ func (x *UpdateNodeGroupRequest) GetNodeLabels() map[string]string {
 	return nil
 }
 
+func (x *UpdateNodeGroupRequest) GetVariables() []*Variable {
+	if x != nil {
+		return x.Variables
+	}
+	return nil
+}
+
 func (x *UpdateNodeGroupRequest) GetWorkloadIdentityFederation() *NodeGroupWorkloadIdentityFederation {
 	if x != nil {
 		return x.WorkloadIdentityFederation
@@ -685,6 +694,8 @@ type CreateNodeGroupRequest struct {
 	NodeTaints []*Taint `protobuf:"bytes,11,rep,name=node_taints,json=nodeTaints,proto3" json:"node_taints,omitempty"`
 	// Labels that are assigned to the nodes of the node group at creation time.
 	NodeLabels map[string]string `protobuf:"bytes,12,rep,name=node_labels,json=nodeLabels,proto3" json:"node_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Variables for templating.
+	Variables []*Variable `protobuf:"bytes,15,rep,name=variables,proto3" json:"variables,omitempty"`
 	// Workload Identity Federation parameters of the node group.
 	WorkloadIdentityFederation *NodeGroupWorkloadIdentityFederation `protobuf:"bytes,14,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
 	unknownFields              protoimpl.UnknownFields
@@ -808,6 +819,13 @@ func (x *CreateNodeGroupRequest) GetNodeTaints() []*Taint {
 func (x *CreateNodeGroupRequest) GetNodeLabels() map[string]string {
 	if x != nil {
 		return x.NodeLabels
+	}
+	return nil
+}
+
+func (x *CreateNodeGroupRequest) GetVariables() []*Variable {
+	if x != nil {
+		return x.Variables
 	}
 	return nil
 }
@@ -1074,8 +1092,7 @@ const file_yandex_cloud_k8s_v1_node_group_service_proto_rawDesc = "" +
 	"\x16DeleteNodeGroupRequest\x12(\n" +
 	"\rnode_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vnodeGroupId\"=\n" +
 	"\x17DeleteNodeGroupMetadata\x12\"\n" +
-	"\rnode_group_id\x18\x01 \x01(\tR\vnodeGroupId\"\xf0\n" +
-	"\n" +
+	"\rnode_group_id\x18\x01 \x01(\tR\vnodeGroupId\"\xad\v\n" +
 	"\x16UpdateNodeGroupRequest\x12(\n" +
 	"\rnode_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vnodeGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1094,7 +1111,8 @@ const file_yandex_cloud_k8s_v1_node_group_service_proto_rawDesc = "" +
 	"\vnode_taints\x18\r \x03(\v2\x1a.yandex.cloud.k8s.v1.TaintR\n" +
 	"nodeTaints\x12\\\n" +
 	"\vnode_labels\x18\x0e \x03(\v2;.yandex.cloud.k8s.v1.UpdateNodeGroupRequest.NodeLabelsEntryR\n" +
-	"nodeLabels\x12z\n" +
+	"nodeLabels\x12;\n" +
+	"\tvariables\x18\x11 \x03(\v2\x1d.yandex.cloud.k8s.v1.VariableR\tvariables\x12z\n" +
 	"\x1cworkload_identity_federation\x18\x10 \x01(\v28.yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederationR\x1aworkloadIdentityFederation\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -1103,7 +1121,7 @@ const file_yandex_cloud_k8s_v1_node_group_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\a\x10\b\"C\n" +
 	"\x17UpdateNodeGroupMetadata\x12(\n" +
-	"\rnode_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vnodeGroupId\"\x8c\n" +
+	"\rnode_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vnodeGroupId\"\xc9\n" +
 	"\n" +
 	"\x16CreateNodeGroupRequest\x12#\n" +
 	"\n" +
@@ -1122,7 +1140,8 @@ const file_yandex_cloud_k8s_v1_node_group_service_proto_rawDesc = "" +
 	"\vnode_taints\x18\v \x03(\v2\x1a.yandex.cloud.k8s.v1.TaintR\n" +
 	"nodeTaints\x12\\\n" +
 	"\vnode_labels\x18\f \x03(\v2;.yandex.cloud.k8s.v1.CreateNodeGroupRequest.NodeLabelsEntryR\n" +
-	"nodeLabels\x12z\n" +
+	"nodeLabels\x12;\n" +
+	"\tvariables\x18\x0f \x03(\v2\x1d.yandex.cloud.k8s.v1.VariableR\tvariables\x12z\n" +
 	"\x1cworkload_identity_federation\x18\x0e \x01(\v28.yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederationR\x1aworkloadIdentityFederation\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -1202,8 +1221,9 @@ var file_yandex_cloud_k8s_v1_node_group_service_proto_goTypes = []any{
 	(*UpdateVersionSpec)(nil),                   // 25: yandex.cloud.k8s.v1.UpdateVersionSpec
 	(*NodeGroupMaintenancePolicy)(nil),          // 26: yandex.cloud.k8s.v1.NodeGroupMaintenancePolicy
 	(*Taint)(nil),                               // 27: yandex.cloud.k8s.v1.Taint
-	(*NodeGroupWorkloadIdentityFederation)(nil), // 28: yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
-	(*operation.Operation)(nil),                 // 29: yandex.cloud.operation.Operation
+	(*Variable)(nil),                            // 28: yandex.cloud.k8s.v1.Variable
+	(*NodeGroupWorkloadIdentityFederation)(nil), // 29: yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
+	(*operation.Operation)(nil),                 // 30: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_k8s_v1_node_group_service_proto_depIdxs = []int32{
 	18, // 0: yandex.cloud.k8s.v1.ListNodeGroupsResponse.node_groups:type_name -> yandex.cloud.k8s.v1.NodeGroup
@@ -1218,36 +1238,38 @@ var file_yandex_cloud_k8s_v1_node_group_service_proto_depIdxs = []int32{
 	26, // 9: yandex.cloud.k8s.v1.UpdateNodeGroupRequest.maintenance_policy:type_name -> yandex.cloud.k8s.v1.NodeGroupMaintenancePolicy
 	27, // 10: yandex.cloud.k8s.v1.UpdateNodeGroupRequest.node_taints:type_name -> yandex.cloud.k8s.v1.Taint
 	15, // 11: yandex.cloud.k8s.v1.UpdateNodeGroupRequest.node_labels:type_name -> yandex.cloud.k8s.v1.UpdateNodeGroupRequest.NodeLabelsEntry
-	28, // 12: yandex.cloud.k8s.v1.UpdateNodeGroupRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
-	16, // 13: yandex.cloud.k8s.v1.CreateNodeGroupRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateNodeGroupRequest.LabelsEntry
-	21, // 14: yandex.cloud.k8s.v1.CreateNodeGroupRequest.node_template:type_name -> yandex.cloud.k8s.v1.NodeTemplate
-	22, // 15: yandex.cloud.k8s.v1.CreateNodeGroupRequest.scale_policy:type_name -> yandex.cloud.k8s.v1.ScalePolicy
-	23, // 16: yandex.cloud.k8s.v1.CreateNodeGroupRequest.allocation_policy:type_name -> yandex.cloud.k8s.v1.NodeGroupAllocationPolicy
-	24, // 17: yandex.cloud.k8s.v1.CreateNodeGroupRequest.deploy_policy:type_name -> yandex.cloud.k8s.v1.DeployPolicy
-	26, // 18: yandex.cloud.k8s.v1.CreateNodeGroupRequest.maintenance_policy:type_name -> yandex.cloud.k8s.v1.NodeGroupMaintenancePolicy
-	27, // 19: yandex.cloud.k8s.v1.CreateNodeGroupRequest.node_taints:type_name -> yandex.cloud.k8s.v1.Taint
-	17, // 20: yandex.cloud.k8s.v1.CreateNodeGroupRequest.node_labels:type_name -> yandex.cloud.k8s.v1.CreateNodeGroupRequest.NodeLabelsEntry
-	28, // 21: yandex.cloud.k8s.v1.CreateNodeGroupRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
-	29, // 22: yandex.cloud.k8s.v1.ListNodeGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 23: yandex.cloud.k8s.v1.NodeGroupService.Get:input_type -> yandex.cloud.k8s.v1.GetNodeGroupRequest
-	1,  // 24: yandex.cloud.k8s.v1.NodeGroupService.List:input_type -> yandex.cloud.k8s.v1.ListNodeGroupsRequest
-	9,  // 25: yandex.cloud.k8s.v1.NodeGroupService.Create:input_type -> yandex.cloud.k8s.v1.CreateNodeGroupRequest
-	7,  // 26: yandex.cloud.k8s.v1.NodeGroupService.Update:input_type -> yandex.cloud.k8s.v1.UpdateNodeGroupRequest
-	5,  // 27: yandex.cloud.k8s.v1.NodeGroupService.Delete:input_type -> yandex.cloud.k8s.v1.DeleteNodeGroupRequest
-	12, // 28: yandex.cloud.k8s.v1.NodeGroupService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListNodeGroupOperationsRequest
-	3,  // 29: yandex.cloud.k8s.v1.NodeGroupService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListNodeGroupNodesRequest
-	18, // 30: yandex.cloud.k8s.v1.NodeGroupService.Get:output_type -> yandex.cloud.k8s.v1.NodeGroup
-	2,  // 31: yandex.cloud.k8s.v1.NodeGroupService.List:output_type -> yandex.cloud.k8s.v1.ListNodeGroupsResponse
-	29, // 32: yandex.cloud.k8s.v1.NodeGroupService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 33: yandex.cloud.k8s.v1.NodeGroupService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 34: yandex.cloud.k8s.v1.NodeGroupService.Delete:output_type -> yandex.cloud.operation.Operation
-	13, // 35: yandex.cloud.k8s.v1.NodeGroupService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListNodeGroupOperationsResponse
-	4,  // 36: yandex.cloud.k8s.v1.NodeGroupService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListNodeGroupNodesResponse
-	30, // [30:37] is the sub-list for method output_type
-	23, // [23:30] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	28, // 12: yandex.cloud.k8s.v1.UpdateNodeGroupRequest.variables:type_name -> yandex.cloud.k8s.v1.Variable
+	29, // 13: yandex.cloud.k8s.v1.UpdateNodeGroupRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
+	16, // 14: yandex.cloud.k8s.v1.CreateNodeGroupRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateNodeGroupRequest.LabelsEntry
+	21, // 15: yandex.cloud.k8s.v1.CreateNodeGroupRequest.node_template:type_name -> yandex.cloud.k8s.v1.NodeTemplate
+	22, // 16: yandex.cloud.k8s.v1.CreateNodeGroupRequest.scale_policy:type_name -> yandex.cloud.k8s.v1.ScalePolicy
+	23, // 17: yandex.cloud.k8s.v1.CreateNodeGroupRequest.allocation_policy:type_name -> yandex.cloud.k8s.v1.NodeGroupAllocationPolicy
+	24, // 18: yandex.cloud.k8s.v1.CreateNodeGroupRequest.deploy_policy:type_name -> yandex.cloud.k8s.v1.DeployPolicy
+	26, // 19: yandex.cloud.k8s.v1.CreateNodeGroupRequest.maintenance_policy:type_name -> yandex.cloud.k8s.v1.NodeGroupMaintenancePolicy
+	27, // 20: yandex.cloud.k8s.v1.CreateNodeGroupRequest.node_taints:type_name -> yandex.cloud.k8s.v1.Taint
+	17, // 21: yandex.cloud.k8s.v1.CreateNodeGroupRequest.node_labels:type_name -> yandex.cloud.k8s.v1.CreateNodeGroupRequest.NodeLabelsEntry
+	28, // 22: yandex.cloud.k8s.v1.CreateNodeGroupRequest.variables:type_name -> yandex.cloud.k8s.v1.Variable
+	29, // 23: yandex.cloud.k8s.v1.CreateNodeGroupRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
+	30, // 24: yandex.cloud.k8s.v1.ListNodeGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 25: yandex.cloud.k8s.v1.NodeGroupService.Get:input_type -> yandex.cloud.k8s.v1.GetNodeGroupRequest
+	1,  // 26: yandex.cloud.k8s.v1.NodeGroupService.List:input_type -> yandex.cloud.k8s.v1.ListNodeGroupsRequest
+	9,  // 27: yandex.cloud.k8s.v1.NodeGroupService.Create:input_type -> yandex.cloud.k8s.v1.CreateNodeGroupRequest
+	7,  // 28: yandex.cloud.k8s.v1.NodeGroupService.Update:input_type -> yandex.cloud.k8s.v1.UpdateNodeGroupRequest
+	5,  // 29: yandex.cloud.k8s.v1.NodeGroupService.Delete:input_type -> yandex.cloud.k8s.v1.DeleteNodeGroupRequest
+	12, // 30: yandex.cloud.k8s.v1.NodeGroupService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListNodeGroupOperationsRequest
+	3,  // 31: yandex.cloud.k8s.v1.NodeGroupService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListNodeGroupNodesRequest
+	18, // 32: yandex.cloud.k8s.v1.NodeGroupService.Get:output_type -> yandex.cloud.k8s.v1.NodeGroup
+	2,  // 33: yandex.cloud.k8s.v1.NodeGroupService.List:output_type -> yandex.cloud.k8s.v1.ListNodeGroupsResponse
+	30, // 34: yandex.cloud.k8s.v1.NodeGroupService.Create:output_type -> yandex.cloud.operation.Operation
+	30, // 35: yandex.cloud.k8s.v1.NodeGroupService.Update:output_type -> yandex.cloud.operation.Operation
+	30, // 36: yandex.cloud.k8s.v1.NodeGroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	13, // 37: yandex.cloud.k8s.v1.NodeGroupService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListNodeGroupOperationsResponse
+	4,  // 38: yandex.cloud.k8s.v1.NodeGroupService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListNodeGroupNodesResponse
+	32, // [32:39] is the sub-list for method output_type
+	25, // [25:32] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_k8s_v1_node_group_service_proto_init() }
