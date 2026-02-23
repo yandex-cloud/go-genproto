@@ -110,6 +110,22 @@ func (m *UnbindAccessPolicyMetadata) SetAccessPolicyTemplateId(v string) {
 	m.AccessPolicyTemplateId = v
 }
 
+func (m *UpdateAccessPolicyBindingParametersRequest) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *UpdateAccessPolicyBindingParametersRequest) SetAccessPolicyBinding(v *AccessPolicyBinding) {
+	m.AccessPolicyBinding = v
+}
+
+func (m *UpdateAccessPolicyBindingParametersMetadata) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *UpdateAccessPolicyBindingParametersMetadata) SetAccessPolicyBinding(v *AccessPolicyBinding) {
+	m.AccessPolicyBinding = v
+}
+
 func (m *SetAccessBindingsRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }

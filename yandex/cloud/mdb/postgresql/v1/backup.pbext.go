@@ -45,3 +45,15 @@ func (m *Backup) SetJournalSize(v int64) {
 func (m *Backup) SetStatus(v Backup_BackupStatus) {
 	m.Status = v
 }
+
+func (m *Backup) SetRetentionPolicyId(v string) {
+	m.RetentionPolicyId = v
+}
+
+func (m *Backup) SetRetentionPolicyName(v string) {
+	m.RetentionPolicyName = v
+}
+
+func (m *Backup) SetRetainUntil(v *timestamppb.Timestamp) {
+	m.RetainUntil = v
+}

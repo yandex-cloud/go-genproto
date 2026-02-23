@@ -332,7 +332,15 @@ type CreateUserRequest struct {
 	// Whether the user is active. Default is true.
 	IsActive *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	// External identifier for the user.
-	ExternalId    string `protobuf:"bytes,12,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ExternalId string `protobuf:"bytes,12,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	// User's company name.
+	CompanyName string `protobuf:"bytes,13,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	// User's department.
+	Department string `protobuf:"bytes,14,opt,name=department,proto3" json:"department,omitempty"`
+	// User's job title.
+	JobTitle string `protobuf:"bytes,15,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
+	// User's employee ID
+	EmployeeId    string `protobuf:"bytes,16,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -455,6 +463,34 @@ func (x *CreateUserRequest) GetExternalId() string {
 	return ""
 }
 
+func (x *CreateUserRequest) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetDepartment() string {
+	if x != nil {
+		return x.Department
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetJobTitle() string {
+	if x != nil {
+		return x.JobTitle
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetEmployeeId() string {
+	if x != nil {
+		return x.EmployeeId
+	}
+	return ""
+}
+
 type isCreateUserRequest_Credentials interface {
 	isCreateUserRequest_Credentials()
 }
@@ -537,7 +573,15 @@ type UpdateUserRequest struct {
 	// New email address for the user.
 	Email string `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
 	// New phone number for the user.
-	PhoneNumber   string `protobuf:"bytes,9,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	PhoneNumber string `protobuf:"bytes,9,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	// New company name for the user.
+	CompanyName string `protobuf:"bytes,10,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	// New department for the user.
+	Department string `protobuf:"bytes,11,opt,name=department,proto3" json:"department,omitempty"`
+	// New job title for the user.
+	JobTitle string `protobuf:"bytes,12,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
+	// New employee ID for the user.
+	EmployeeId    string `protobuf:"bytes,13,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -624,6 +668,34 @@ func (x *UpdateUserRequest) GetEmail() string {
 func (x *UpdateUserRequest) GetPhoneNumber() string {
 	if x != nil {
 		return x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetDepartment() string {
+	if x != nil {
+		return x.Department
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetJobTitle() string {
+	if x != nil {
+		return x.JobTitle
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetEmployeeId() string {
+	if x != nil {
+		return x.EmployeeId
 	}
 	return ""
 }
@@ -1960,7 +2032,7 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\x8a\xc81\x06<=1000R\x06filter\"\x80\x01\n" +
 	"\x11ListUsersResponse\x12C\n" +
 	"\x05users\x18\x01 \x03(\v2-.yandex.cloud.organizationmanager.v1.idp.UserR\x05users\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xaa\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd7\x06\n" +
 	"\x11CreateUserRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"userpoolId\x12K\n" +
@@ -1977,10 +2049,17 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\tis_active\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\bisActive\x12*\n" +
 	"\vexternal_id\x18\f \x01(\tB\t\x8a\xc81\x05<=256R\n" +
-	"externalIdB\x13\n" +
+	"externalId\x12,\n" +
+	"\fcompany_name\x18\r \x01(\tB\t\x8a\xc81\x05<=256R\vcompanyName\x12)\n" +
+	"\n" +
+	"department\x18\x0e \x01(\tB\t\x8a\xc81\x05<=256R\n" +
+	"department\x12&\n" +
+	"\tjob_title\x18\x0f \x01(\tB\t\x8a\xc81\x05<=256R\bjobTitle\x12*\n" +
+	"\vemployee_id\x18\x10 \x01(\tB\t\x8a\xc81\x05<=256R\n" +
+	"employeeIdB\x13\n" +
 	"\vcredentials\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04\"-\n" +
 	"\x12CreateUserMetadata\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xa2\x03\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xcf\x04\n" +
 	"\x11UpdateUserRequest\x12%\n" +
 	"\auser_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06userId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1992,7 +2071,15 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\vfamily_name\x18\a \x01(\tB\t\x8a\xc81\x05<=256R\n" +
 	"familyName\x12.\n" +
 	"\x05email\x18\b \x01(\tB\x18\xf2\xc71\v|(.{3,254})\x8a\xc81\x05<=254R\x05email\x12+\n" +
-	"\fphone_number\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\vphoneNumberJ\x04\b\x04\x10\x05\"-\n" +
+	"\fphone_number\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\vphoneNumber\x12,\n" +
+	"\fcompany_name\x18\n" +
+	" \x01(\tB\t\x8a\xc81\x05<=256R\vcompanyName\x12)\n" +
+	"\n" +
+	"department\x18\v \x01(\tB\t\x8a\xc81\x05<=256R\n" +
+	"department\x12&\n" +
+	"\tjob_title\x18\f \x01(\tB\t\x8a\xc81\x05<=256R\bjobTitle\x12*\n" +
+	"\vemployee_id\x18\r \x01(\tB\t\x8a\xc81\x05<=256R\n" +
+	"employeeIdJ\x04\b\x04\x10\x05\"-\n" +
 	"\x12UpdateUserMetadata\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\":\n" +
 	"\x11DeleteUserRequest\x12%\n" +

@@ -650,6 +650,10 @@ func (m *PostgresqlConfig16) SetAutoExplainLogFormat(v PostgresqlConfig16_AutoEx
 	m.AutoExplainLogFormat = v
 }
 
+func (m *PostgresqlConfig16) SetIdleSessionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleSessionTimeout = v
+}
+
 func (m *PostgresqlConfigSet16) SetEffectiveConfig(v *PostgresqlConfig16) {
 	m.EffectiveConfig = v
 }

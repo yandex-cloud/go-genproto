@@ -21,16 +21,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OrganizationService_Get_FullMethodName                      = "/yandex.cloud.organizationmanager.v1.OrganizationService/Get"
-	OrganizationService_List_FullMethodName                     = "/yandex.cloud.organizationmanager.v1.OrganizationService/List"
-	OrganizationService_Update_FullMethodName                   = "/yandex.cloud.organizationmanager.v1.OrganizationService/Update"
-	OrganizationService_ListOperations_FullMethodName           = "/yandex.cloud.organizationmanager.v1.OrganizationService/ListOperations"
-	OrganizationService_ListAccessBindings_FullMethodName       = "/yandex.cloud.organizationmanager.v1.OrganizationService/ListAccessBindings"
-	OrganizationService_SetAccessBindings_FullMethodName        = "/yandex.cloud.organizationmanager.v1.OrganizationService/SetAccessBindings"
-	OrganizationService_UpdateAccessBindings_FullMethodName     = "/yandex.cloud.organizationmanager.v1.OrganizationService/UpdateAccessBindings"
-	OrganizationService_ListAccessPolicyBindings_FullMethodName = "/yandex.cloud.organizationmanager.v1.OrganizationService/ListAccessPolicyBindings"
-	OrganizationService_BindAccessPolicy_FullMethodName         = "/yandex.cloud.organizationmanager.v1.OrganizationService/BindAccessPolicy"
-	OrganizationService_UnbindAccessPolicy_FullMethodName       = "/yandex.cloud.organizationmanager.v1.OrganizationService/UnbindAccessPolicy"
+	OrganizationService_Get_FullMethodName                                 = "/yandex.cloud.organizationmanager.v1.OrganizationService/Get"
+	OrganizationService_List_FullMethodName                                = "/yandex.cloud.organizationmanager.v1.OrganizationService/List"
+	OrganizationService_Update_FullMethodName                              = "/yandex.cloud.organizationmanager.v1.OrganizationService/Update"
+	OrganizationService_ListOperations_FullMethodName                      = "/yandex.cloud.organizationmanager.v1.OrganizationService/ListOperations"
+	OrganizationService_ListAccessBindings_FullMethodName                  = "/yandex.cloud.organizationmanager.v1.OrganizationService/ListAccessBindings"
+	OrganizationService_SetAccessBindings_FullMethodName                   = "/yandex.cloud.organizationmanager.v1.OrganizationService/SetAccessBindings"
+	OrganizationService_UpdateAccessBindings_FullMethodName                = "/yandex.cloud.organizationmanager.v1.OrganizationService/UpdateAccessBindings"
+	OrganizationService_ListAccessPolicyBindings_FullMethodName            = "/yandex.cloud.organizationmanager.v1.OrganizationService/ListAccessPolicyBindings"
+	OrganizationService_BindAccessPolicy_FullMethodName                    = "/yandex.cloud.organizationmanager.v1.OrganizationService/BindAccessPolicy"
+	OrganizationService_UnbindAccessPolicy_FullMethodName                  = "/yandex.cloud.organizationmanager.v1.OrganizationService/UnbindAccessPolicy"
+	OrganizationService_UpdateAccessPolicyBindingParameters_FullMethodName = "/yandex.cloud.organizationmanager.v1.OrganizationService/UpdateAccessPolicyBindingParameters"
 )
 
 // OrganizationServiceClient is the client API for OrganizationService service.
@@ -61,6 +62,8 @@ type OrganizationServiceClient interface {
 	BindAccessPolicy(ctx context.Context, in *access.BindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Unbinds the access policy template from the organization.
 	UnbindAccessPolicy(ctx context.Context, in *access.UnbindAccessPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the access policy binding parameters for the organization.
+	UpdateAccessPolicyBindingParameters(ctx context.Context, in *access.UpdateAccessPolicyBindingParametersRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type organizationServiceClient struct {
@@ -171,6 +174,16 @@ func (c *organizationServiceClient) UnbindAccessPolicy(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *organizationServiceClient) UpdateAccessPolicyBindingParameters(ctx context.Context, in *access.UpdateAccessPolicyBindingParametersRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, OrganizationService_UpdateAccessPolicyBindingParameters_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrganizationServiceServer is the server API for OrganizationService service.
 // All implementations should embed UnimplementedOrganizationServiceServer
 // for forward compatibility.
@@ -199,6 +212,8 @@ type OrganizationServiceServer interface {
 	BindAccessPolicy(context.Context, *access.BindAccessPolicyRequest) (*operation.Operation, error)
 	// Unbinds the access policy template from the organization.
 	UnbindAccessPolicy(context.Context, *access.UnbindAccessPolicyRequest) (*operation.Operation, error)
+	// Updates the access policy binding parameters for the organization.
+	UpdateAccessPolicyBindingParameters(context.Context, *access.UpdateAccessPolicyBindingParametersRequest) (*operation.Operation, error)
 }
 
 // UnimplementedOrganizationServiceServer should be embedded to have
@@ -237,6 +252,9 @@ func (UnimplementedOrganizationServiceServer) BindAccessPolicy(context.Context, 
 }
 func (UnimplementedOrganizationServiceServer) UnbindAccessPolicy(context.Context, *access.UnbindAccessPolicyRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnbindAccessPolicy not implemented")
+}
+func (UnimplementedOrganizationServiceServer) UpdateAccessPolicyBindingParameters(context.Context, *access.UpdateAccessPolicyBindingParametersRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAccessPolicyBindingParameters not implemented")
 }
 func (UnimplementedOrganizationServiceServer) testEmbeddedByValue() {}
 
@@ -438,6 +456,24 @@ func _OrganizationService_UnbindAccessPolicy_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrganizationService_UpdateAccessPolicyBindingParameters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(access.UpdateAccessPolicyBindingParametersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrganizationServiceServer).UpdateAccessPolicyBindingParameters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrganizationService_UpdateAccessPolicyBindingParameters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrganizationServiceServer).UpdateAccessPolicyBindingParameters(ctx, req.(*access.UpdateAccessPolicyBindingParametersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrganizationService_ServiceDesc is the grpc.ServiceDesc for OrganizationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -484,6 +520,10 @@ var OrganizationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnbindAccessPolicy",
 			Handler:    _OrganizationService_UnbindAccessPolicy_Handler,
+		},
+		{
+			MethodName: "UpdateAccessPolicyBindingParameters",
+			Handler:    _OrganizationService_UpdateAccessPolicyBindingParameters_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -269,3 +269,7 @@ func (m *PostgresqlHostConfig16) SetEffectiveIoConcurrency(v *wrapperspb.Int64Va
 func (m *PostgresqlHostConfig16) SetEffectiveCacheSize(v *wrapperspb.Int64Value) {
 	m.EffectiveCacheSize = v
 }
+
+func (m *PostgresqlHostConfig16) SetIdleSessionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleSessionTimeout = v
+}

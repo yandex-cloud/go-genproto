@@ -104,7 +104,7 @@ type ListPublicSubnetRequest struct {
 	// Example: "key1='value' AND key2='value'"
 	// Supported operators: ["AND"].
 	// Supported fields: ["id", "name", "zoneId", "hardwarePoolIds"].
-	// Deprecated fields: ["hardwarePoolId"].
+	// Fields to be unsupported: ["hardwarePoolId"].
 	// Both snake_case and camelCase are supported for fields.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -249,8 +249,18 @@ type CreatePublicSubnetRequest struct {
 	//
 	// To get a list of available hardware pools, use the [HardwarePoolService.List] request.
 	HardwarePoolIds []string `protobuf:"bytes,4,rep,name=hardware_pool_ids,json=hardwarePoolIds,proto3" json:"hardware_pool_ids,omitempty"`
+	// @deprecated
 	// Prefix length of the public subnet CIDR block.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/public_subnet_service.proto.
 	PrefixLength int64 `protobuf:"varint,5,opt,name=prefix_length,json=prefixLength,proto3" json:"prefix_length,omitempty"`
+	// Method for allocating CIDR block to the public subnet.
+	//
+	// Types that are valid to be assigned to CidrAllocationMethod:
+	//
+	//	*CreatePublicSubnetRequest_AutoAllocation_
+	//	*CreatePublicSubnetRequest_ManualAllocation_
+	CidrAllocationMethod isCreatePublicSubnetRequest_CidrAllocationMethod `protobuf_oneof:"cidr_allocation_method"`
 	// Resource labels as `key:value` pairs.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -315,6 +325,7 @@ func (x *CreatePublicSubnetRequest) GetHardwarePoolIds() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/public_subnet_service.proto.
 func (x *CreatePublicSubnetRequest) GetPrefixLength() int64 {
 	if x != nil {
 		return x.PrefixLength
@@ -322,11 +333,56 @@ func (x *CreatePublicSubnetRequest) GetPrefixLength() int64 {
 	return 0
 }
 
+func (x *CreatePublicSubnetRequest) GetCidrAllocationMethod() isCreatePublicSubnetRequest_CidrAllocationMethod {
+	if x != nil {
+		return x.CidrAllocationMethod
+	}
+	return nil
+}
+
+func (x *CreatePublicSubnetRequest) GetAutoAllocation() *CreatePublicSubnetRequest_AutoAllocation {
+	if x != nil {
+		if x, ok := x.CidrAllocationMethod.(*CreatePublicSubnetRequest_AutoAllocation_); ok {
+			return x.AutoAllocation
+		}
+	}
+	return nil
+}
+
+func (x *CreatePublicSubnetRequest) GetManualAllocation() *CreatePublicSubnetRequest_ManualAllocation {
+	if x != nil {
+		if x, ok := x.CidrAllocationMethod.(*CreatePublicSubnetRequest_ManualAllocation_); ok {
+			return x.ManualAllocation
+		}
+	}
+	return nil
+}
+
 func (x *CreatePublicSubnetRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
 	}
 	return nil
+}
+
+type isCreatePublicSubnetRequest_CidrAllocationMethod interface {
+	isCreatePublicSubnetRequest_CidrAllocationMethod()
+}
+
+type CreatePublicSubnetRequest_AutoAllocation_ struct {
+	// Automatic CIDR allocation from the system public prefix pool.
+	AutoAllocation *CreatePublicSubnetRequest_AutoAllocation `protobuf:"bytes,6,opt,name=auto_allocation,json=autoAllocation,proto3,oneof"`
+}
+
+type CreatePublicSubnetRequest_ManualAllocation_ struct {
+	// Manual CIDR allocation with explicit CIDR from user's own public prefix pool (BYOIP).
+	ManualAllocation *CreatePublicSubnetRequest_ManualAllocation `protobuf:"bytes,7,opt,name=manual_allocation,json=manualAllocation,proto3,oneof"`
+}
+
+func (*CreatePublicSubnetRequest_AutoAllocation_) isCreatePublicSubnetRequest_CidrAllocationMethod() {
+}
+
+func (*CreatePublicSubnetRequest_ManualAllocation_) isCreatePublicSubnetRequest_CidrAllocationMethod() {
 }
 
 type CreatePublicSubnetMetadata struct {
@@ -390,8 +446,9 @@ type UpdatePublicSubnetRequest struct {
 	// IDs of the hardware pool that the public subnet belongs to.
 	//
 	// To get a list of available hardware pools, use the [HardwarePoolService.List] request.
-	HardwarePoolIds []string         `protobuf:"bytes,5,rep,name=hardware_pool_ids,json=hardwarePoolIds,proto3" json:"hardware_pool_ids,omitempty"`
-	Type            PublicSubnetType `protobuf:"varint,6,opt,name=type,proto3,enum=yandex.cloud.baremetal.v1alpha.PublicSubnetType" json:"type,omitempty"`
+	HardwarePoolIds []string `protobuf:"bytes,5,rep,name=hardware_pool_ids,json=hardwarePoolIds,proto3" json:"hardware_pool_ids,omitempty"`
+	// Type of the public subnet.
+	Type PublicSubnetType `protobuf:"varint,6,opt,name=type,proto3,enum=yandex.cloud.baremetal.v1alpha.PublicSubnetType" json:"type,omitempty"`
 	// Resource labels as `key:value` pairs.
 	//
 	// Existing set of `labels` is completely replaced by the provided set.
@@ -742,34 +799,147 @@ func (x *ListPublicSubnetOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Automatic CIDR allocation configuration.
+type CreatePublicSubnetRequest_AutoAllocation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Prefix length of the public subnet CIDR block.
+	PrefixLength  int64 `protobuf:"varint,1,opt,name=prefix_length,json=prefixLength,proto3" json:"prefix_length,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreatePublicSubnetRequest_AutoAllocation) Reset() {
+	*x = CreatePublicSubnetRequest_AutoAllocation{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePublicSubnetRequest_AutoAllocation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePublicSubnetRequest_AutoAllocation) ProtoMessage() {}
+
+func (x *CreatePublicSubnetRequest_AutoAllocation) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePublicSubnetRequest_AutoAllocation.ProtoReflect.Descriptor instead.
+func (*CreatePublicSubnetRequest_AutoAllocation) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDescGZIP(), []int{3, 1}
+}
+
+func (x *CreatePublicSubnetRequest_AutoAllocation) GetPrefixLength() int64 {
+	if x != nil {
+		return x.PrefixLength
+	}
+	return 0
+}
+
+// Manual CIDR allocation configuration.
+type CreatePublicSubnetRequest_ManualAllocation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// CIDR block of the public subnet. Must be within the public prefix pool CIDR block.
+	Cidr string `protobuf:"bytes,1,opt,name=cidr,proto3" json:"cidr,omitempty"`
+	// ID of the public prefix pool that the CIDR block belongs to.
+	//
+	// To get a list of available public prefix pools, use the [PublicPrefixPoolService.List] request.
+	PublicPrefixPoolId string `protobuf:"bytes,2,opt,name=public_prefix_pool_id,json=publicPrefixPoolId,proto3" json:"public_prefix_pool_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *CreatePublicSubnetRequest_ManualAllocation) Reset() {
+	*x = CreatePublicSubnetRequest_ManualAllocation{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePublicSubnetRequest_ManualAllocation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePublicSubnetRequest_ManualAllocation) ProtoMessage() {}
+
+func (x *CreatePublicSubnetRequest_ManualAllocation) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePublicSubnetRequest_ManualAllocation.ProtoReflect.Descriptor instead.
+func (*CreatePublicSubnetRequest_ManualAllocation) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDescGZIP(), []int{3, 2}
+}
+
+func (x *CreatePublicSubnetRequest_ManualAllocation) GetCidr() string {
+	if x != nil {
+		return x.Cidr
+	}
+	return ""
+}
+
+func (x *CreatePublicSubnetRequest_ManualAllocation) GetPublicPrefixPoolId() string {
+	if x != nil {
+		return x.PublicPrefixPoolId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc = "" +
 	"\n" +
 	":yandex/cloud/baremetal/v1alpha/public_subnet_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/baremetal/v1alpha/public_subnet.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
 	"\x16GetPublicSubnetRequest\x12.\n" +
-	"\x10public_subnet_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0epublicSubnetId\"\xd4\x01\n" +
-	"\x17ListPublicSubnetRequest\x129\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\x10public_subnet_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0epublicSubnetId\"\xb7\x01\n" +
+	"\x17ListPublicSubnetRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\x9d\x01\n" +
 	"\x18ListPublicSubnetResponse\x12S\n" +
 	"\x0epublic_subnets\x18\x01 \x03(\v2,.yandex.cloud.baremetal.v1alpha.PublicSubnetR\rpublicSubnets\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xfb\x03\n" +
-	"\x19CreatePublicSubnetRequest\x129\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x85\a\n" +
+	"\x19CreatePublicSubnetRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-63R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\vdescription\x12*\n" +
-	"\x11hardware_pool_ids\x18\x04 \x03(\tR\x0fhardwarePoolIds\x12-\n" +
-	"\rprefix_length\x18\x05 \x01(\x03B\b\xfa\xc71\x041-31R\fprefixLength\x12\x9b\x01\n" +
+	"\x11hardware_pool_ids\x18\x04 \x03(\tR\x0fhardwarePoolIds\x12/\n" +
+	"\rprefix_length\x18\x05 \x01(\x03B\n" +
+	"\xfa\xc71\x041-31\x18\x01R\fprefixLength\x12s\n" +
+	"\x0fauto_allocation\x18\x06 \x01(\v2H.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.AutoAllocationH\x00R\x0eautoAllocation\x12y\n" +
+	"\x11manual_allocation\x18\a \x01(\v2J.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.ManualAllocationH\x00R\x10manualAllocation\x12\x9b\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2E.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x06\x10\xc8\x01\"F\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a?\n" +
+	"\x0eAutoAllocation\x12-\n" +
+	"\rprefix_length\x18\x01 \x01(\x03B\b\xfa\xc71\x041-31R\fprefixLength\x1aY\n" +
+	"\x10ManualAllocation\x12\x12\n" +
+	"\x04cidr\x18\x01 \x01(\tR\x04cidr\x121\n" +
+	"\x15public_prefix_pool_id\x18\x02 \x01(\tR\x12publicPrefixPoolIdB\x18\n" +
+	"\x16cidr_allocation_methodJ\x05\b\b\x10\xc8\x01\"F\n" +
 	"\x1aCreatePublicSubnetMetadata\x12(\n" +
 	"\x10public_subnet_id\x18\x01 \x01(\tR\x0epublicSubnetId\"\xc4\x04\n" +
 	"\x19UpdatePublicSubnetRequest\x12.\n" +
@@ -790,10 +960,11 @@ const file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc = 
 	"\x19DeletePublicSubnetRequest\x12.\n" +
 	"\x10public_subnet_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0epublicSubnetId\"F\n" +
 	"\x1aDeletePublicSubnetMetadata\x12(\n" +
-	"\x10public_subnet_id\x18\x01 \x01(\tR\x0epublicSubnetId\"\x9a\x01\n" +
+	"\x10public_subnet_id\x18\x01 \x01(\tR\x0epublicSubnetId\"\x9b\x01\n" +
 	"!ListPublicSubnetOperationsRequest\x12(\n" +
-	"\x10public_subnet_id\x18\x01 \x01(\tR\x0epublicSubnetId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\x10public_subnet_id\x18\x01 \x01(\tR\x0epublicSubnetId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x02\x10d\"\x95\x01\n" +
 	"\"ListPublicSubnetOperationsResponse\x12A\n" +
@@ -825,7 +996,7 @@ func file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDescGZIP
 	return file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_goTypes = []any{
 	(*GetPublicSubnetRequest)(nil),             // 0: yandex.cloud.baremetal.v1alpha.GetPublicSubnetRequest
 	(*ListPublicSubnetRequest)(nil),            // 1: yandex.cloud.baremetal.v1alpha.ListPublicSubnetRequest
@@ -838,37 +1009,41 @@ var file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_goTypes = []
 	(*DeletePublicSubnetMetadata)(nil),         // 8: yandex.cloud.baremetal.v1alpha.DeletePublicSubnetMetadata
 	(*ListPublicSubnetOperationsRequest)(nil),  // 9: yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsRequest
 	(*ListPublicSubnetOperationsResponse)(nil), // 10: yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse
-	nil,                           // 11: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.LabelsEntry
-	nil,                           // 12: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.LabelsEntry
-	(*PublicSubnet)(nil),          // 13: yandex.cloud.baremetal.v1alpha.PublicSubnet
-	(*fieldmaskpb.FieldMask)(nil), // 14: google.protobuf.FieldMask
-	(PublicSubnetType)(0),         // 15: yandex.cloud.baremetal.v1alpha.PublicSubnetType
-	(*operation.Operation)(nil),   // 16: yandex.cloud.operation.Operation
+	nil, // 11: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.LabelsEntry
+	(*CreatePublicSubnetRequest_AutoAllocation)(nil),   // 12: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.AutoAllocation
+	(*CreatePublicSubnetRequest_ManualAllocation)(nil), // 13: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.ManualAllocation
+	nil,                           // 14: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.LabelsEntry
+	(*PublicSubnet)(nil),          // 15: yandex.cloud.baremetal.v1alpha.PublicSubnet
+	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
+	(PublicSubnetType)(0),         // 17: yandex.cloud.baremetal.v1alpha.PublicSubnetType
+	(*operation.Operation)(nil),   // 18: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_depIdxs = []int32{
-	13, // 0: yandex.cloud.baremetal.v1alpha.ListPublicSubnetResponse.public_subnets:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnet
-	11, // 1: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.LabelsEntry
-	14, // 2: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.update_mask:type_name -> google.protobuf.FieldMask
-	15, // 3: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.type:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetType
-	12, // 4: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.LabelsEntry
-	16, // 5: yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 6: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetPublicSubnetRequest
-	1,  // 7: yandex.cloud.baremetal.v1alpha.PublicSubnetService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetRequest
-	3,  // 8: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest
-	5,  // 9: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest
-	7,  // 10: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeletePublicSubnetRequest
-	9,  // 11: yandex.cloud.baremetal.v1alpha.PublicSubnetService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsRequest
-	13, // 12: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Get:output_type -> yandex.cloud.baremetal.v1alpha.PublicSubnet
-	2,  // 13: yandex.cloud.baremetal.v1alpha.PublicSubnetService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetResponse
-	16, // 14: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Create:output_type -> yandex.cloud.operation.Operation
-	16, // 15: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 16: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // 17: yandex.cloud.baremetal.v1alpha.PublicSubnetService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse
-	12, // [12:18] is the sub-list for method output_type
-	6,  // [6:12] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	15, // 0: yandex.cloud.baremetal.v1alpha.ListPublicSubnetResponse.public_subnets:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnet
+	12, // 1: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.auto_allocation:type_name -> yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.AutoAllocation
+	13, // 2: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.manual_allocation:type_name -> yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.ManualAllocation
+	11, // 3: yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.LabelsEntry
+	16, // 4: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.update_mask:type_name -> google.protobuf.FieldMask
+	17, // 5: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.type:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetType
+	14, // 6: yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest.LabelsEntry
+	18, // 7: yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 8: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetPublicSubnetRequest
+	1,  // 9: yandex.cloud.baremetal.v1alpha.PublicSubnetService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetRequest
+	3,  // 10: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest
+	5,  // 11: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdatePublicSubnetRequest
+	7,  // 12: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeletePublicSubnetRequest
+	9,  // 13: yandex.cloud.baremetal.v1alpha.PublicSubnetService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsRequest
+	15, // 14: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Get:output_type -> yandex.cloud.baremetal.v1alpha.PublicSubnet
+	2,  // 15: yandex.cloud.baremetal.v1alpha.PublicSubnetService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetResponse
+	18, // 16: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 17: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 18: yandex.cloud.baremetal.v1alpha.PublicSubnetService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // 19: yandex.cloud.baremetal.v1alpha.PublicSubnetService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListPublicSubnetOperationsResponse
+	14, // [14:20] is the sub-list for method output_type
+	8,  // [8:14] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_init() }
@@ -877,13 +1052,17 @@ func file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_init()
+	file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_msgTypes[3].OneofWrappers = []any{
+		(*CreatePublicSubnetRequest_AutoAllocation_)(nil),
+		(*CreatePublicSubnetRequest_ManualAllocation_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -123,7 +123,15 @@ type User struct {
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// External identifier for federation with external identity systems.
 	// This ID can be used to link this user with an account in an external system.
-	ExternalId    string `protobuf:"bytes,13,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ExternalId string `protobuf:"bytes,13,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	// User's company name.
+	CompanyName string `protobuf:"bytes,14,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	// User's department.
+	Department string `protobuf:"bytes,15,opt,name=department,proto3" json:"department,omitempty"`
+	// User's job title.
+	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
+	// User's employee ID
+	EmployeeId    string `protobuf:"bytes,17,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -242,11 +250,39 @@ func (x *User) GetExternalId() string {
 	return ""
 }
 
+func (x *User) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *User) GetDepartment() string {
+	if x != nil {
+		return x.Department
+	}
+	return ""
+}
+
+func (x *User) GetJobTitle() string {
+	if x != nil {
+		return x.JobTitle
+	}
+	return ""
+}
+
+func (x *User) GetEmployeeId() string {
+	if x != nil {
+		return x.EmployeeId
+	}
+	return ""
+}
+
 var File_yandex_cloud_organizationmanager_v1_idp_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/organizationmanager/v1/idp/user.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1fgoogle/protobuf/timestamp.proto\"\xad\x04\n" +
+	"2yandex/cloud/organizationmanager/v1/idp/user.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1fgoogle/protobuf/timestamp.proto\"\xae\x05\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vuserpool_id\x18\x02 \x01(\tR\n" +
@@ -266,7 +302,14 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1f\n" +
 	"\vexternal_id\x18\r \x01(\tR\n" +
-	"externalId\"W\n" +
+	"externalId\x12!\n" +
+	"\fcompany_name\x18\x0e \x01(\tR\vcompanyName\x12\x1e\n" +
+	"\n" +
+	"department\x18\x0f \x01(\tR\n" +
+	"department\x12\x1b\n" +
+	"\tjob_title\x18\x10 \x01(\tR\bjobTitle\x12\x1f\n" +
+	"\vemployee_id\x18\x11 \x01(\tR\n" +
+	"employeeId\"W\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x04\x12\n" +

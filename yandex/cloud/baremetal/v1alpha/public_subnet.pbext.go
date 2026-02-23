@@ -4,6 +4,7 @@ package baremetal
 
 import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *PublicSubnet) SetId(v string) {
@@ -54,10 +55,18 @@ func (m *PublicSubnet) SetGatewayIp(v string) {
 	m.GatewayIp = v
 }
 
+func (m *PublicSubnet) SetPublicPrefixPoolId(v *wrapperspb.StringValue) {
+	m.PublicPrefixPoolId = v
+}
+
 func (m *PublicSubnet) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
 func (m *PublicSubnet) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *PublicSubnet) SetDeletionUnlockedAt(v *timestamppb.Timestamp) {
+	m.DeletionUnlockedAt = v
 }

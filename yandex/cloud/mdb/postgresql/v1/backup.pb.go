@@ -199,7 +199,13 @@ type Backup struct {
 	// Size of the journal associated with backup, in bytes
 	JournalSize int64 `protobuf:"varint,9,opt,name=journal_size,json=journalSize,proto3" json:"journal_size,omitempty"`
 	// Status of backup
-	Status        Backup_BackupStatus `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.mdb.postgresql.v1.Backup_BackupStatus" json:"status,omitempty"`
+	Status Backup_BackupStatus `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.mdb.postgresql.v1.Backup_BackupStatus" json:"status,omitempty"`
+	// ID of assigned BackupRetentionPolicy.
+	RetentionPolicyId string `protobuf:"bytes,11,opt,name=retention_policy_id,json=retentionPolicyId,proto3" json:"retention_policy_id,omitempty"`
+	// Name of assigned BackupRetentionPolicy.
+	RetentionPolicyName string `protobuf:"bytes,12,opt,name=retention_policy_name,json=retentionPolicyName,proto3" json:"retention_policy_name,omitempty"`
+	// Expiration timestamp of the backup set by the BackupRetentionPolicy.
+	RetainUntil   *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=retain_until,json=retainUntil,proto3" json:"retain_until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -304,11 +310,32 @@ func (x *Backup) GetStatus() Backup_BackupStatus {
 	return Backup_BACKUP_STATUS_UNSPECIFIED
 }
 
+func (x *Backup) GetRetentionPolicyId() string {
+	if x != nil {
+		return x.RetentionPolicyId
+	}
+	return ""
+}
+
+func (x *Backup) GetRetentionPolicyName() string {
+	if x != nil {
+		return x.RetentionPolicyName
+	}
+	return ""
+}
+
+func (x *Backup) GetRetainUntil() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RetainUntil
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_postgresql_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_postgresql_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/mdb/postgresql/v1/backup.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdf\x05\n" +
+	"+yandex/cloud/mdb/postgresql/v1/backup.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\a\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -322,7 +349,10 @@ const file_yandex_cloud_mdb_postgresql_v1_backup_proto_rawDesc = "" +
 	"\x06method\x18\b \x01(\x0e23.yandex.cloud.mdb.postgresql.v1.Backup.BackupMethodR\x06method\x12!\n" +
 	"\fjournal_size\x18\t \x01(\x03R\vjournalSize\x12K\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e23.yandex.cloud.mdb.postgresql.v1.Backup.BackupStatusR\x06status\"H\n" +
+	" \x01(\x0e23.yandex.cloud.mdb.postgresql.v1.Backup.BackupStatusR\x06status\x12.\n" +
+	"\x13retention_policy_id\x18\v \x01(\tR\x11retentionPolicyId\x122\n" +
+	"\x15retention_policy_name\x18\f \x01(\tR\x13retentionPolicyName\x12=\n" +
+	"\fretain_until\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\vretainUntil\"H\n" +
 	"\fBackupMethod\x12\x1d\n" +
 	"\x19BACKUP_METHOD_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04BASE\x10\x01\x12\x0f\n" +
@@ -365,11 +395,12 @@ var file_yandex_cloud_mdb_postgresql_v1_backup_proto_depIdxs = []int32{
 	1, // 2: yandex.cloud.mdb.postgresql.v1.Backup.type:type_name -> yandex.cloud.mdb.postgresql.v1.Backup.BackupCreationType
 	0, // 3: yandex.cloud.mdb.postgresql.v1.Backup.method:type_name -> yandex.cloud.mdb.postgresql.v1.Backup.BackupMethod
 	2, // 4: yandex.cloud.mdb.postgresql.v1.Backup.status:type_name -> yandex.cloud.mdb.postgresql.v1.Backup.BackupStatus
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	4, // 5: yandex.cloud.mdb.postgresql.v1.Backup.retain_until:type_name -> google.protobuf.Timestamp
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_backup_proto_init() }

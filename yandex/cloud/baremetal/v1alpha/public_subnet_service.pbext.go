@@ -39,6 +39,12 @@ func (m *ListPublicSubnetResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+type CreatePublicSubnetRequest_CidrAllocationMethod = isCreatePublicSubnetRequest_CidrAllocationMethod
+
+func (m *CreatePublicSubnetRequest) SetCidrAllocationMethod(v CreatePublicSubnetRequest_CidrAllocationMethod) {
+	m.CidrAllocationMethod = v
+}
+
 func (m *CreatePublicSubnetRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -59,8 +65,32 @@ func (m *CreatePublicSubnetRequest) SetPrefixLength(v int64) {
 	m.PrefixLength = v
 }
 
+func (m *CreatePublicSubnetRequest) SetAutoAllocation(v *CreatePublicSubnetRequest_AutoAllocation) {
+	m.CidrAllocationMethod = &CreatePublicSubnetRequest_AutoAllocation_{
+		AutoAllocation: v,
+	}
+}
+
+func (m *CreatePublicSubnetRequest) SetManualAllocation(v *CreatePublicSubnetRequest_ManualAllocation) {
+	m.CidrAllocationMethod = &CreatePublicSubnetRequest_ManualAllocation_{
+		ManualAllocation: v,
+	}
+}
+
 func (m *CreatePublicSubnetRequest) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *CreatePublicSubnetRequest_AutoAllocation) SetPrefixLength(v int64) {
+	m.PrefixLength = v
+}
+
+func (m *CreatePublicSubnetRequest_ManualAllocation) SetCidr(v string) {
+	m.Cidr = v
+}
+
+func (m *CreatePublicSubnetRequest_ManualAllocation) SetPublicPrefixPoolId(v string) {
+	m.PublicPrefixPoolId = v
 }
 
 func (m *CreatePublicSubnetMetadata) SetPublicSubnetId(v string) {

@@ -71,6 +71,10 @@ func (m *CreateResourceRequest) SetProviderType(v string) {
 	m.ProviderType = v
 }
 
+func (m *CreateResourceRequest) SetTls(v *TLS) {
+	m.Tls = v
+}
+
 type CreateResourceRequest_Origin_OriginVariant = isCreateResourceRequest_Origin_OriginVariant
 
 func (m *CreateResourceRequest_Origin) SetOriginVariant(v CreateResourceRequest_Origin_OriginVariant) {
@@ -143,6 +147,10 @@ func (m *UpdateResourceRequest) SetRemoveLabels(v bool) {
 	m.RemoveLabels = v
 }
 
+func (m *UpdateResourceRequest) SetTls(v *TLS) {
+	m.Tls = v
+}
+
 func (m *UpdateResourceMetadata) SetResourceId(v string) {
 	m.ResourceId = v
 }
@@ -172,5 +180,13 @@ func (m *GetResourceAttributesRequest) SetResourceId(v string) {
 }
 
 func (m *GetResourceAttributesResponse) SetAttributes(v *structpb.Value) {
+	m.Attributes = v
+}
+
+func (m *ListResourceAttributesRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListResourceAttributesResponse) SetAttributes(v map[string]*structpb.Value) {
 	m.Attributes = v
 }

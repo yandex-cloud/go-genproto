@@ -95,18 +95,30 @@ const (
 	UserTargetAttribute_PHONE_NUMBER UserTargetAttribute = 5
 	// Username attribute.
 	UserTargetAttribute_USERNAME UserTargetAttribute = 6
+	// Company name attribute.
+	UserTargetAttribute_COMPANY_NAME UserTargetAttribute = 7
+	// Job title attribute.
+	UserTargetAttribute_JOB_TITLE UserTargetAttribute = 8
+	// Department attribute.
+	UserTargetAttribute_DEPARTMENT UserTargetAttribute = 9
+	// Employee ID attribute.
+	UserTargetAttribute_EMPLOYEE_ID UserTargetAttribute = 10
 )
 
 // Enum value maps for UserTargetAttribute.
 var (
 	UserTargetAttribute_name = map[int32]string{
-		0: "USER_TARGET_ATTRIBUTE_UNSPECIFIED",
-		1: "FULL_NAME",
-		2: "GIVEN_NAME",
-		3: "FAMILY_NAME",
-		4: "EMAIL",
-		5: "PHONE_NUMBER",
-		6: "USERNAME",
+		0:  "USER_TARGET_ATTRIBUTE_UNSPECIFIED",
+		1:  "FULL_NAME",
+		2:  "GIVEN_NAME",
+		3:  "FAMILY_NAME",
+		4:  "EMAIL",
+		5:  "PHONE_NUMBER",
+		6:  "USERNAME",
+		7:  "COMPANY_NAME",
+		8:  "JOB_TITLE",
+		9:  "DEPARTMENT",
+		10: "EMPLOYEE_ID",
 	}
 	UserTargetAttribute_value = map[string]int32{
 		"USER_TARGET_ATTRIBUTE_UNSPECIFIED": 0,
@@ -116,6 +128,10 @@ var (
 		"EMAIL":                             4,
 		"PHONE_NUMBER":                      5,
 		"USERNAME":                          6,
+		"COMPANY_NAME":                      7,
+		"JOB_TITLE":                         8,
+		"DEPARTMENT":                        9,
+		"EMPLOYEE_ID":                       10,
 	}
 )
 
@@ -662,7 +678,7 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_prot
 	"\x18MAPPING_TYPE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06DIRECT\x10\x01\x12\t\n" +
-	"\x05EMPTY\x10\x02*\x97\x01\n" +
+	"\x05EMPTY\x10\x02*\xd9\x01\n" +
 	"\x13UserTargetAttribute\x12%\n" +
 	"!USER_TARGET_ATTRIBUTE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tFULL_NAME\x10\x01\x12\x0e\n" +
@@ -671,7 +687,13 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_prot
 	"\vFAMILY_NAME\x10\x03\x12\t\n" +
 	"\x05EMAIL\x10\x04\x12\x10\n" +
 	"\fPHONE_NUMBER\x10\x05\x12\f\n" +
-	"\bUSERNAME\x10\x06*Y\n" +
+	"\bUSERNAME\x10\x06\x12\x10\n" +
+	"\fCOMPANY_NAME\x10\a\x12\r\n" +
+	"\tJOB_TITLE\x10\b\x12\x0e\n" +
+	"\n" +
+	"DEPARTMENT\x10\t\x12\x0f\n" +
+	"\vEMPLOYEE_ID\x10\n" +
+	"*Y\n" +
 	"\x14GroupTargetAttribute\x12&\n" +
 	"\"GROUP_TARGET_ATTRIBUTE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04NAME\x10\x01\x12\x0f\n" +

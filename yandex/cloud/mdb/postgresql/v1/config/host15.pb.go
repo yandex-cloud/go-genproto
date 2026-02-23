@@ -638,6 +638,7 @@ type PostgresqlHostConfig15 struct {
 	Timezone                        string                                      `protobuf:"bytes,67,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	EffectiveIoConcurrency          *wrapperspb.Int64Value                      `protobuf:"bytes,68,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
 	EffectiveCacheSize              *wrapperspb.Int64Value                      `protobuf:"bytes,69,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
+	IdleSessionTimeout              *wrapperspb.Int64Value                      `protobuf:"bytes,73,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"` // in milliseconds.
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
@@ -1134,11 +1135,18 @@ func (x *PostgresqlHostConfig15) GetEffectiveCacheSize() *wrapperspb.Int64Value 
 	return nil
 }
 
+func (x *PostgresqlHostConfig15) GetIdleSessionTimeout() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.IdleSessionTimeout
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_postgresql_v1_config_host15_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_postgresql_v1_config_host15_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/mdb/postgresql/v1/config/host15.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf57\n" +
+	"2yandex/cloud/mdb/postgresql/v1/config/host15.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xdc8\n" +
 	"\x16PostgresqlHostConfig15\x12T\n" +
 	"\x18recovery_min_apply_delay\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15recoveryMinApplyDelay\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -1213,7 +1221,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_host15_proto_rawDesc = "" +
 	"\btimezone\x18C \x01(\tR\btimezone\x12a\n" +
 	"\x18effective_io_concurrency\x18D \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
 	"\xfa\xc71\x060-1000R\x16effectiveIoConcurrency\x12g\n" +
-	"\x14effective_cache_size\x18E \x01(\v2\x1b.google.protobuf.Int64ValueB\x18\xfa\xc71\x141048576-549755813888R\x12effectiveCacheSize\"\x9a\x01\n" +
+	"\x14effective_cache_size\x18E \x01(\v2\x1b.google.protobuf.Int64ValueB\x18\xfa\xc71\x141048576-549755813888R\x12effectiveCacheSize\x12_\n" +
+	"\x14idle_session_timeout\x18I \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\x9a\x01\n" +
 	"\x0eBackslashQuote\x12\x1f\n" +
 	"\x1bBACKSLASH_QUOTE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fBACKSLASH_QUOTE\x10\x01\x12\x16\n" +
@@ -1272,7 +1281,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_host15_proto_rawDesc = "" +
 	"\tXmlOption\x12\x1a\n" +
 	"\x16XML_OPTION_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13XML_OPTION_DOCUMENT\x10\x01\x12\x16\n" +
-	"\x12XML_OPTION_CONTENT\x10\x02J\x04\b4\x106J\x04\b,\x10-B\x81\x01\n" +
+	"\x12XML_OPTION_CONTENT\x10\x02J\x04\b4\x106J\x04\b,\x10-J\x04\bF\x10IB\x81\x01\n" +
 	")yandex.cloud.api.mdb.postgresql.v1.configZTgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/postgresql/v1/config;postgresqlb\x06proto3"
 
 var (
@@ -1370,11 +1379,12 @@ var file_yandex_cloud_mdb_postgresql_v1_config_host15_proto_depIdxs = []int32{
 	11, // 61: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15.max_parallel_workers_per_gather:type_name -> google.protobuf.Int64Value
 	11, // 62: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15.effective_io_concurrency:type_name -> google.protobuf.Int64Value
 	11, // 63: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15.effective_cache_size:type_name -> google.protobuf.Int64Value
-	64, // [64:64] is the sub-list for method output_type
-	64, // [64:64] is the sub-list for method input_type
-	64, // [64:64] is the sub-list for extension type_name
-	64, // [64:64] is the sub-list for extension extendee
-	0,  // [0:64] is the sub-list for field type_name
+	11, // 64: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15.idle_session_timeout:type_name -> google.protobuf.Int64Value
+	65, // [65:65] is the sub-list for method output_type
+	65, // [65:65] is the sub-list for method input_type
+	65, // [65:65] is the sub-list for extension type_name
+	65, // [65:65] is the sub-list for extension extendee
+	0,  // [0:65] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_host15_proto_init() }

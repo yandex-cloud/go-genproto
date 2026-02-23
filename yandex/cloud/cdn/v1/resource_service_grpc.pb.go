@@ -27,6 +27,7 @@ const (
 	ResourceService_Delete_FullMethodName           = "/yandex.cloud.cdn.v1.ResourceService/Delete"
 	ResourceService_GetProviderCName_FullMethodName = "/yandex.cloud.cdn.v1.ResourceService/GetProviderCName"
 	ResourceService_GetAttributes_FullMethodName    = "/yandex.cloud.cdn.v1.ResourceService/GetAttributes"
+	ResourceService_ListAttributes_FullMethodName   = "/yandex.cloud.cdn.v1.ResourceService/ListAttributes"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -56,6 +57,8 @@ type ResourceServiceClient interface {
 	GetProviderCName(ctx context.Context, in *GetProviderCNameRequest, opts ...grpc.CallOption) (*GetProviderCNameResponse, error)
 	// Get resource attributes.
 	GetAttributes(ctx context.Context, in *GetResourceAttributesRequest, opts ...grpc.CallOption) (*GetResourceAttributesResponse, error)
+	// List resource attributes.
+	ListAttributes(ctx context.Context, in *ListResourceAttributesRequest, opts ...grpc.CallOption) (*ListResourceAttributesResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -136,6 +139,16 @@ func (c *resourceServiceClient) GetAttributes(ctx context.Context, in *GetResour
 	return out, nil
 }
 
+func (c *resourceServiceClient) ListAttributes(ctx context.Context, in *ListResourceAttributesRequest, opts ...grpc.CallOption) (*ListResourceAttributesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListResourceAttributesResponse)
+	err := c.cc.Invoke(ctx, ResourceService_ListAttributes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations should embed UnimplementedResourceServiceServer
 // for forward compatibility.
@@ -163,6 +176,8 @@ type ResourceServiceServer interface {
 	GetProviderCName(context.Context, *GetProviderCNameRequest) (*GetProviderCNameResponse, error)
 	// Get resource attributes.
 	GetAttributes(context.Context, *GetResourceAttributesRequest) (*GetResourceAttributesResponse, error)
+	// List resource attributes.
+	ListAttributes(context.Context, *ListResourceAttributesRequest) (*ListResourceAttributesResponse, error)
 }
 
 // UnimplementedResourceServiceServer should be embedded to have
@@ -192,6 +207,9 @@ func (UnimplementedResourceServiceServer) GetProviderCName(context.Context, *Get
 }
 func (UnimplementedResourceServiceServer) GetAttributes(context.Context, *GetResourceAttributesRequest) (*GetResourceAttributesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAttributes not implemented")
+}
+func (UnimplementedResourceServiceServer) ListAttributes(context.Context, *ListResourceAttributesRequest) (*ListResourceAttributesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAttributes not implemented")
 }
 func (UnimplementedResourceServiceServer) testEmbeddedByValue() {}
 
@@ -339,6 +357,24 @@ func _ResourceService_GetAttributes_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ResourceService_ListAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResourceAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResourceServiceServer).ListAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ResourceService_ListAttributes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResourceServiceServer).ListAttributes(ctx, req.(*ListResourceAttributesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ResourceService_ServiceDesc is the grpc.ServiceDesc for ResourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -373,6 +409,10 @@ var ResourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAttributes",
 			Handler:    _ResourceService_GetAttributes_Handler,
+		},
+		{
+			MethodName: "ListAttributes",
+			Handler:    _ResourceService_ListAttributes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

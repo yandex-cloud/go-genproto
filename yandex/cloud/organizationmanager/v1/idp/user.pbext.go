@@ -53,3 +53,19 @@ func (m *User) SetUpdatedAt(v *timestamppb.Timestamp) {
 func (m *User) SetExternalId(v string) {
 	m.ExternalId = v
 }
+
+func (m *User) SetCompanyName(v string) {
+	m.CompanyName = v
+}
+
+func (m *User) SetDepartment(v string) {
+	m.Department = v
+}
+
+func (m *User) SetJobTitle(v string) {
+	m.JobTitle = v
+}
+
+func (m *User) SetEmployeeId(v string) {
+	m.EmployeeId = v
+}

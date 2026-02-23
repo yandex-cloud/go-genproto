@@ -1118,6 +1118,7 @@ type PostgresqlConfig14_1C struct {
 	LogAutovacuumMinDuration            *wrapperspb.Int64Value                         `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`                                                                            // in milliseconds. The default is 1000 (1 sec).
 	PasswordEncryption                  PostgresqlConfig14_1C_PasswordEncryption       `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
 	AutoExplainLogFormat                PostgresqlConfig14_1C_AutoExplainLogFormat     `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"` // Selects the `` EXPLAIN `` output format to be used. The allowed values are `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``, `` AUTO_EXPLAIN_LOG_FORMAT_XML ``, `` AUTO_EXPLAIN_LOG_FORMAT_JSON ``, and `` AUTO_EXPLAIN_LOG_FORMAT_YAML ``. The default is `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``.
+	IdleSessionTimeout                  *wrapperspb.Int64Value                         `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`                                                                                                // in milliseconds.
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -2279,6 +2280,13 @@ func (x *PostgresqlConfig14_1C) GetAutoExplainLogFormat() PostgresqlConfig14_1C_
 	return PostgresqlConfig14_1C_AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED
 }
 
+func (x *PostgresqlConfig14_1C) GetIdleSessionTimeout() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.IdleSessionTimeout
+	}
+	return nil
+}
+
 type PostgresqlConfigSet14_1C struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a PostgreSQL 14 1C cluster (a combination of settings defined
@@ -2347,7 +2355,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto protoreflec
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/mdb/postgresql/v1/config/postgresql14_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb0\x89\x01\n" +
+	";yandex/cloud/mdb/postgresql/v1/config/postgresql14_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x9a\x8a\x01\n" +
 	"\x15PostgresqlConfig14_1C\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2524,7 +2532,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto_rawDesc =
 	"\x18log_replication_commands\x18\xa4\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x16logReplicationCommands\x12n\n" +
 	"\x1blog_autovacuum_min_duration\x18\xa5\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x11\xfa\xc71\r-1-2147483647R\x18logAutovacuumMinDuration\x12\x81\x01\n" +
 	"\x13password_encryption\x18\xa7\x01 \x01(\x0e2O.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.PasswordEncryptionR\x12passwordEncryption\x12\x89\x01\n" +
-	"\x17auto_explain_log_format\x18\xa8\x01 \x01(\x0e2Q.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.AutoExplainLogFormatR\x14autoExplainLogFormat\"\xc6\x01\n" +
+	"\x17auto_explain_log_format\x18\xa8\x01 \x01(\x0e2Q.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.AutoExplainLogFormatR\x14autoExplainLogFormat\x12`\n" +
+	"\x14idle_session_timeout\x18\xad\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\xc6\x01\n" +
 	"\x14AutoExplainLogFormat\x12'\n" +
 	"#AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_TEXT\x10\x01\x12\x1f\n" +
@@ -2625,7 +2634,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto_rawDesc =
 	"\tXmlOption\x12\x1a\n" +
 	"\x16XML_OPTION_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13XML_OPTION_DOCUMENT\x10\x01\x12\x16\n" +
-	"\x12XML_OPTION_CONTENT\x10\x02J\x04\bN\x10OJ\x04\bj\x10kJ\x04\b}\x10~J\x06\b\x96\x01\x10\x98\x01J\x06\b\xa6\x01\x10\xa7\x01J\x04\b@\x10A\"\xc7\x02\n" +
+	"\x12XML_OPTION_CONTENT\x10\x02J\x04\bN\x10OJ\x04\bj\x10kJ\x04\b}\x10~J\x06\b\x96\x01\x10\x98\x01J\x06\b\xa6\x01\x10\xa7\x01J\x04\b@\x10AJ\x06\b\xa9\x01\x10\xad\x01\"\xc7\x02\n" +
 	"\x18PostgresqlConfigSet14_1C\x12g\n" +
 	"\x10effective_config\x18\x01 \x01(\v2<.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1CR\x0feffectiveConfig\x12]\n" +
 	"\vuser_config\x18\x02 \x01(\v2<.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1CR\n" +
@@ -2831,14 +2840,15 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto_depIdxs = [
 	19,  // 156: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.log_autovacuum_min_duration:type_name -> google.protobuf.Int64Value
 	8,   // 157: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.password_encryption:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.PasswordEncryption
 	0,   // 158: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.auto_explain_log_format:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.AutoExplainLogFormat
-	17,  // 159: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet14_1C.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
-	17,  // 160: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet14_1C.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
-	17,  // 161: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet14_1C.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
-	162, // [162:162] is the sub-list for method output_type
-	162, // [162:162] is the sub-list for method input_type
-	162, // [162:162] is the sub-list for extension type_name
-	162, // [162:162] is the sub-list for extension extendee
-	0,   // [0:162] is the sub-list for field type_name
+	19,  // 159: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C.idle_session_timeout:type_name -> google.protobuf.Int64Value
+	17,  // 160: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet14_1C.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
+	17,  // 161: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet14_1C.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
+	17,  // 162: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet14_1C.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
+	163, // [163:163] is the sub-list for method output_type
+	163, // [163:163] is the sub-list for method input_type
+	163, // [163:163] is the sub-list for extension type_name
+	163, // [163:163] is the sub-list for extension extendee
+	0,   // [0:163] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_1c_proto_init() }

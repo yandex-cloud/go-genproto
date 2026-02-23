@@ -1129,6 +1129,7 @@ type PostgresqlConfig18_1C struct {
 	MaxLogicalReplicationWorkers        *wrapperspb.Int64Value                         `protobuf:"bytes,170,opt,name=max_logical_replication_workers,json=maxLogicalReplicationWorkers,proto3" json:"max_logical_replication_workers,omitempty"`
 	MaxWalSenders                       *wrapperspb.Int64Value                         `protobuf:"bytes,171,opt,name=max_wal_senders,json=maxWalSenders,proto3" json:"max_wal_senders,omitempty"`
 	MaxReplicationSlots                 *wrapperspb.Int64Value                         `protobuf:"bytes,172,opt,name=max_replication_slots,json=maxReplicationSlots,proto3" json:"max_replication_slots,omitempty"`
+	IdleSessionTimeout                  *wrapperspb.Int64Value                         `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"` // in milliseconds.
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -2325,6 +2326,13 @@ func (x *PostgresqlConfig18_1C) GetMaxReplicationSlots() *wrapperspb.Int64Value 
 	return nil
 }
 
+func (x *PostgresqlConfig18_1C) GetIdleSessionTimeout() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.IdleSessionTimeout
+	}
+	return nil
+}
+
 type PostgresqlConfigSet18_1C struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a PostgreSQL 18 1C cluster (a combination of settings defined
@@ -2393,7 +2401,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto protoreflec
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/mdb/postgresql/v1/config/postgresql18_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xac\x8d\x01\n" +
+	";yandex/cloud/mdb/postgresql/v1/config/postgresql18_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\x8e\x01\n" +
 	"\x15PostgresqlConfig18_1C\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2577,7 +2585,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_rawDesc =
 	"\x0fmax_wal_senders\x18\xab\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
 	"\xfa\xc71\x0620-100R\rmaxWalSenders\x12\\\n" +
 	"\x15max_replication_slots\x18\xac\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
-	"\xfa\xc71\x0620-100R\x13maxReplicationSlots\"\xc6\x01\n" +
+	"\xfa\xc71\x0620-100R\x13maxReplicationSlots\x12`\n" +
+	"\x14idle_session_timeout\x18\xad\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\xc6\x01\n" +
 	"\x14AutoExplainLogFormat\x12'\n" +
 	"#AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_TEXT\x10\x01\x12\x1f\n" +
@@ -2891,14 +2900,15 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_depIdxs = [
 	19,  // 161: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.max_logical_replication_workers:type_name -> google.protobuf.Int64Value
 	19,  // 162: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.max_wal_senders:type_name -> google.protobuf.Int64Value
 	19,  // 163: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.max_replication_slots:type_name -> google.protobuf.Int64Value
-	17,  // 164: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	17,  // 165: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	17,  // 166: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	167, // [167:167] is the sub-list for method output_type
-	167, // [167:167] is the sub-list for method input_type
-	167, // [167:167] is the sub-list for extension type_name
-	167, // [167:167] is the sub-list for extension extendee
-	0,   // [0:167] is the sub-list for field type_name
+	19,  // 164: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.idle_session_timeout:type_name -> google.protobuf.Int64Value
+	17,  // 165: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	17,  // 166: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	17,  // 167: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	168, // [168:168] is the sub-list for method output_type
+	168, // [168:168] is the sub-list for method input_type
+	168, // [168:168] is the sub-list for extension type_name
+	168, // [168:168] is the sub-list for extension extendee
+	0,   // [0:168] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_init() }

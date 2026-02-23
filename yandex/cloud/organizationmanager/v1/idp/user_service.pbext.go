@@ -90,6 +90,22 @@ func (m *CreateUserRequest) SetExternalId(v string) {
 	m.ExternalId = v
 }
 
+func (m *CreateUserRequest) SetCompanyName(v string) {
+	m.CompanyName = v
+}
+
+func (m *CreateUserRequest) SetDepartment(v string) {
+	m.Department = v
+}
+
+func (m *CreateUserRequest) SetJobTitle(v string) {
+	m.JobTitle = v
+}
+
+func (m *CreateUserRequest) SetEmployeeId(v string) {
+	m.EmployeeId = v
+}
+
 func (m *CreateUserMetadata) SetUserId(v string) {
 	m.UserId = v
 }
@@ -124,6 +140,22 @@ func (m *UpdateUserRequest) SetEmail(v string) {
 
 func (m *UpdateUserRequest) SetPhoneNumber(v string) {
 	m.PhoneNumber = v
+}
+
+func (m *UpdateUserRequest) SetCompanyName(v string) {
+	m.CompanyName = v
+}
+
+func (m *UpdateUserRequest) SetDepartment(v string) {
+	m.Department = v
+}
+
+func (m *UpdateUserRequest) SetJobTitle(v string) {
+	m.JobTitle = v
+}
+
+func (m *UpdateUserRequest) SetEmployeeId(v string) {
+	m.EmployeeId = v
 }
 
 func (m *UpdateUserMetadata) SetUserId(v string) {

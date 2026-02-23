@@ -662,6 +662,10 @@ func (m *PostgresqlConfig17) SetMaxReplicationSlots(v *wrapperspb.Int64Value) {
 	m.MaxReplicationSlots = v
 }
 
+func (m *PostgresqlConfig17) SetIdleSessionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleSessionTimeout = v
+}
+
 func (m *PostgresqlConfigSet17) SetEffectiveConfig(v *PostgresqlConfig17) {
 	m.EffectiveConfig = v
 }

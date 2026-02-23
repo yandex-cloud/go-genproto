@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -103,12 +104,16 @@ type PublicSubnet struct {
 	DhcpOptions *DhcpOptions `protobuf:"bytes,12,opt,name=dhcp_options,json=dhcpOptions,proto3" json:"dhcp_options,omitempty"`
 	// Gateway IP address for the public subnet.
 	GatewayIp string `protobuf:"bytes,13,opt,name=gateway_ip,json=gatewayIp,proto3" json:"gateway_ip,omitempty"`
+	// ID of the public prefix pool that the public subnet belongs to.
+	PublicPrefixPoolId *wrapperspb.StringValue `protobuf:"bytes,14,opt,name=public_prefix_pool_id,json=publicPrefixPoolId,proto3" json:"public_prefix_pool_id,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Resource labels as `key:value` pairs.
-	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Timestamp when deletion of the public subnet is allowed.
+	DeletionUnlockedAt *timestamppb.Timestamp `protobuf:"bytes,201,opt,name=deletion_unlocked_at,json=deletionUnlockedAt,proto3" json:"deletion_unlocked_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *PublicSubnet) Reset() {
@@ -225,6 +230,13 @@ func (x *PublicSubnet) GetGatewayIp() string {
 	return ""
 }
 
+func (x *PublicSubnet) GetPublicPrefixPoolId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.PublicPrefixPoolId
+	}
+	return nil
+}
+
 func (x *PublicSubnet) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -239,11 +251,18 @@ func (x *PublicSubnet) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *PublicSubnet) GetDeletionUnlockedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletionUnlockedAt
+	}
+	return nil
+}
+
 var File_yandex_cloud_baremetal_v1alpha_public_subnet_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v1alpha/public_subnet.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/dhcp.proto\"\x9b\x05\n" +
+	"2yandex/cloud/baremetal/v1alpha/public_subnet.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a)yandex/cloud/baremetal/v1alpha/dhcp.proto\"\xbb\x06\n" +
 	"\fPublicSubnet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
@@ -258,13 +277,15 @@ const file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_rawDesc = "" +
 	"\x04cidr\x18\v \x01(\tR\x04cidr\x12N\n" +
 	"\fdhcp_options\x18\f \x01(\v2+.yandex.cloud.baremetal.v1alpha.DhcpOptionsR\vdhcpOptions\x12\x1d\n" +
 	"\n" +
-	"gateway_ip\x18\r \x01(\tR\tgatewayIp\x129\n" +
+	"gateway_ip\x18\r \x01(\tR\tgatewayIp\x12O\n" +
+	"\x15public_prefix_pool_id\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueR\x12publicPrefixPoolId\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12Q\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v28.yandex.cloud.baremetal.v1alpha.PublicSubnet.LabelsEntryR\x06labels\x1a9\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v28.yandex.cloud.baremetal.v1alpha.PublicSubnet.LabelsEntryR\x06labels\x12M\n" +
+	"\x14deletion_unlocked_at\x18\xc9\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x12deletionUnlockedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\aJ\x04\b\x0e\x10dJ\x05\be\x10\xc8\x01*T\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\aJ\x04\b\x0f\x10dJ\x05\be\x10\xc8\x01*T\n" +
 	"\x10PublicSubnetType\x12\"\n" +
 	"\x1ePUBLIC_SUBNET_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tDEDICATED\x10\x01\x12\r\n" +
@@ -286,22 +307,25 @@ func file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_rawDescGZIP() []byt
 var file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_goTypes = []any{
-	(PublicSubnetType)(0),         // 0: yandex.cloud.baremetal.v1alpha.PublicSubnetType
-	(*PublicSubnet)(nil),          // 1: yandex.cloud.baremetal.v1alpha.PublicSubnet
-	nil,                           // 2: yandex.cloud.baremetal.v1alpha.PublicSubnet.LabelsEntry
-	(*DhcpOptions)(nil),           // 3: yandex.cloud.baremetal.v1alpha.DhcpOptions
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(PublicSubnetType)(0),          // 0: yandex.cloud.baremetal.v1alpha.PublicSubnetType
+	(*PublicSubnet)(nil),           // 1: yandex.cloud.baremetal.v1alpha.PublicSubnet
+	nil,                            // 2: yandex.cloud.baremetal.v1alpha.PublicSubnet.LabelsEntry
+	(*DhcpOptions)(nil),            // 3: yandex.cloud.baremetal.v1alpha.DhcpOptions
+	(*wrapperspb.StringValue)(nil), // 4: google.protobuf.StringValue
+	(*timestamppb.Timestamp)(nil),  // 5: google.protobuf.Timestamp
 }
 var file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.baremetal.v1alpha.PublicSubnet.type:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetType
 	3, // 1: yandex.cloud.baremetal.v1alpha.PublicSubnet.dhcp_options:type_name -> yandex.cloud.baremetal.v1alpha.DhcpOptions
-	4, // 2: yandex.cloud.baremetal.v1alpha.PublicSubnet.created_at:type_name -> google.protobuf.Timestamp
-	2, // 3: yandex.cloud.baremetal.v1alpha.PublicSubnet.labels:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnet.LabelsEntry
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	4, // 2: yandex.cloud.baremetal.v1alpha.PublicSubnet.public_prefix_pool_id:type_name -> google.protobuf.StringValue
+	5, // 3: yandex.cloud.baremetal.v1alpha.PublicSubnet.created_at:type_name -> google.protobuf.Timestamp
+	2, // 4: yandex.cloud.baremetal.v1alpha.PublicSubnet.labels:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnet.LabelsEntry
+	5, // 5: yandex.cloud.baremetal.v1alpha.PublicSubnet.deletion_unlocked_at:type_name -> google.protobuf.Timestamp
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_public_subnet_proto_init() }
