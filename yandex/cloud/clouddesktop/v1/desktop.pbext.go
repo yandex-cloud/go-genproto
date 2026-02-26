@@ -46,6 +46,10 @@ func (m *Desktop) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *Desktop) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *Resources) SetMemory(v int64) {
 	m.Memory = v
 }

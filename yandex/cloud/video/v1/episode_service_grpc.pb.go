@@ -71,6 +71,9 @@ type EpisodeServiceClient interface {
 	// Retrieves the manifest URLs for the episode's media content.
 	// Manifests provide players with necessary information
 	// for streaming the content with different quality levels and formats.
+	//
+	// Manifests and its url MUST not be cached.
+	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(ctx context.Context, in *GetEpisodeManifestsRequest, opts ...grpc.CallOption) (*GetEpisodeManifestsResponse, error)
 }
 
@@ -221,6 +224,9 @@ type EpisodeServiceServer interface {
 	// Retrieves the manifest URLs for the episode's media content.
 	// Manifests provide players with necessary information
 	// for streaming the content with different quality levels and formats.
+	//
+	// Manifests and its url MUST not be cached.
+	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error)
 }
 

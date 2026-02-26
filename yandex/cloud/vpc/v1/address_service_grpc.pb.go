@@ -23,6 +23,7 @@ const (
 	AddressService_Get_FullMethodName            = "/yandex.cloud.vpc.v1.AddressService/Get"
 	AddressService_GetByValue_FullMethodName     = "/yandex.cloud.vpc.v1.AddressService/GetByValue"
 	AddressService_List_FullMethodName           = "/yandex.cloud.vpc.v1.AddressService/List"
+	AddressService_ListBySubnet_FullMethodName   = "/yandex.cloud.vpc.v1.AddressService/ListBySubnet"
 	AddressService_Create_FullMethodName         = "/yandex.cloud.vpc.v1.AddressService/Create"
 	AddressService_Update_FullMethodName         = "/yandex.cloud.vpc.v1.AddressService/Update"
 	AddressService_Delete_FullMethodName         = "/yandex.cloud.vpc.v1.AddressService/Delete"
@@ -46,6 +47,8 @@ type AddressServiceClient interface {
 	GetByValue(ctx context.Context, in *GetAddressByValueRequest, opts ...grpc.CallOption) (*Address, error)
 	// Retrieves the list of Address resources in the specified folder.
 	List(ctx context.Context, in *ListAddressesRequest, opts ...grpc.CallOption) (*ListAddressesResponse, error)
+	// Retrieves the list of Address resources in the specified subnet.
+	ListBySubnet(ctx context.Context, in *ListAddressesBySubnetRequest, opts ...grpc.CallOption) (*ListAddressesBySubnetResponse, error)
 	// Creates an address in the specified folder and network.
 	Create(ctx context.Context, in *CreateAddressRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified address.
@@ -90,6 +93,16 @@ func (c *addressServiceClient) List(ctx context.Context, in *ListAddressesReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAddressesResponse)
 	err := c.cc.Invoke(ctx, AddressService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addressServiceClient) ListBySubnet(ctx context.Context, in *ListAddressesBySubnetRequest, opts ...grpc.CallOption) (*ListAddressesBySubnetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAddressesBySubnetResponse)
+	err := c.cc.Invoke(ctx, AddressService_ListBySubnet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,6 +175,8 @@ type AddressServiceServer interface {
 	GetByValue(context.Context, *GetAddressByValueRequest) (*Address, error)
 	// Retrieves the list of Address resources in the specified folder.
 	List(context.Context, *ListAddressesRequest) (*ListAddressesResponse, error)
+	// Retrieves the list of Address resources in the specified subnet.
+	ListBySubnet(context.Context, *ListAddressesBySubnetRequest) (*ListAddressesBySubnetResponse, error)
 	// Creates an address in the specified folder and network.
 	Create(context.Context, *CreateAddressRequest) (*operation.Operation, error)
 	// Updates the specified address.
@@ -189,6 +204,9 @@ func (UnimplementedAddressServiceServer) GetByValue(context.Context, *GetAddress
 }
 func (UnimplementedAddressServiceServer) List(context.Context, *ListAddressesRequest) (*ListAddressesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAddressServiceServer) ListBySubnet(context.Context, *ListAddressesBySubnetRequest) (*ListAddressesBySubnetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListBySubnet not implemented")
 }
 func (UnimplementedAddressServiceServer) Create(context.Context, *CreateAddressRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
@@ -275,6 +293,24 @@ func _AddressService_List_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AddressServiceServer).List(ctx, req.(*ListAddressesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddressService_ListBySubnet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAddressesBySubnetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddressServiceServer).ListBySubnet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddressService_ListBySubnet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddressServiceServer).ListBySubnet(ctx, req.(*ListAddressesBySubnetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -387,6 +423,10 @@ var AddressService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _AddressService_List_Handler,
+		},
+		{
+			MethodName: "ListBySubnet",
+			Handler:    _AddressService_ListBySubnet_Handler,
 		},
 		{
 			MethodName: "Create",

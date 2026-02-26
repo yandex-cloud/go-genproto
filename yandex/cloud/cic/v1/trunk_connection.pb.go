@@ -202,8 +202,6 @@ type TrunkConnection struct {
 	//	*TrunkConnection_PartnerJointInfo_
 	Joint isTrunkConnection_Joint `protobuf_oneof:"joint"`
 	// ID of pointOfPresence that the trunkConnection is deployed on.
-	// Optional.
-	// If is not set scheduler selects it by himself.
 	PointOfPresenceId *wrapperspb.StringValue `protobuf:"bytes,12,opt,name=point_of_presence_id,json=pointOfPresenceId,proto3" json:"point_of_presence_id,omitempty"`
 	// Capacity of the trunkConnection
 	Capacity TrunkConnection_Capacity `protobuf:"varint,22,opt,name=capacity,proto3,enum=yandex.cloud.cic.v1.TrunkConnection_Capacity" json:"capacity,omitempty"`
@@ -216,8 +214,7 @@ type TrunkConnection struct {
 	Labels map[string]string `protobuf:"bytes,23,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Status of the trunkConnection.
 	Status TrunkConnection_Status `protobuf:"varint,24,opt,name=status,proto3,enum=yandex.cloud.cic.v1.TrunkConnection_Status" json:"status,omitempty"`
-	// Optional deletion protection flag.
-	// If set prohibits deletion of the trunkConnection.
+	// Deletion protection flag.
 	DeletionProtection bool `protobuf:"varint,25,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -392,8 +389,6 @@ type TrunkConnection_PartnerJointInfo struct {
 	// Reserved for future using;
 	ServiceKey string `protobuf:"bytes,3,opt,name=service_key,json=serviceKey,proto3" json:"service_key,omitempty"`
 	// ID of partner that the trunkConnection is deployed on.
-	// Optional.
-	// If is not set scheduler selects it by himself.
 	PartnerId     *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

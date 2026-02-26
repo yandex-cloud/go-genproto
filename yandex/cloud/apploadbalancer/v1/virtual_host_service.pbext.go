@@ -200,6 +200,10 @@ func (m *UpdateRouteRequest) SetDisableSecurityProfile(v bool) {
 	m.DisableSecurityProfile = v
 }
 
+func (m *UpdateRouteRequest) SetClientCertificateForward(v *ClientCertificateForward) {
+	m.ClientCertificateForward = v
+}
+
 func (m *UpdateRouteMetadata) SetHttpRouterId(v string) {
 	m.HttpRouterId = v
 }

@@ -30,9 +30,13 @@ type Database struct {
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the cluster that the database belongs to.
-	ClusterId     string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Deletion Protection inhibits deletion of the database
+	//
+	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
+	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,3,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Database) Reset() {
@@ -79,12 +83,23 @@ func (x *Database) GetClusterId() string {
 	return ""
 }
 
+func (x *Database) GetDeletionProtectionMode() DeletionProtectionMode {
+	if x != nil {
+		return x.DeletionProtectionMode
+	}
+	return DeletionProtectionMode_DELETION_PROTECTION_MODE_UNSPECIFIED
+}
+
 type DatabaseSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the database.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Deletion Protection inhibits deletion of the database
+	//
+	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
+	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,2,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *DatabaseSpec) Reset() {
@@ -124,17 +139,26 @@ func (x *DatabaseSpec) GetName() string {
 	return ""
 }
 
+func (x *DatabaseSpec) GetDeletionProtectionMode() DeletionProtectionMode {
+	if x != nil {
+		return x.DeletionProtectionMode
+	}
+	return DeletionProtectionMode_DELETION_PROTECTION_MODE_UNSPECIFIED
+}
+
 var File_yandex_cloud_mdb_mysql_v1_database_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_database_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/mdb/mysql/v1/database.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1dyandex/cloud/validation.proto\"=\n" +
+	"(yandex/cloud/mdb/mysql/v1/database.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1dyandex/cloud/validation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"\xaa\x01\n" +
 	"\bDatabase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\"B\n" +
+	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12k\n" +
+	"\x18deletion_protection_mode\x18\x03 \x01(\x0e21.yandex.cloud.mdb.mysql.v1.DeletionProtectionModeR\x16deletionProtectionMode\"\xaf\x01\n" +
 	"\fDatabaseSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04nameBd\n" +
+	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12k\n" +
+	"\x18deletion_protection_mode\x18\x02 \x01(\x0e21.yandex.cloud.mdb.mysql.v1.DeletionProtectionModeR\x16deletionProtectionModeBd\n" +
 	"\x1dyandex.cloud.api.mdb.mysql.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1;mysqlb\x06proto3"
 
 var (
@@ -151,15 +175,18 @@ func file_yandex_cloud_mdb_mysql_v1_database_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_mdb_mysql_v1_database_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_mdb_mysql_v1_database_proto_goTypes = []any{
-	(*Database)(nil),     // 0: yandex.cloud.mdb.mysql.v1.Database
-	(*DatabaseSpec)(nil), // 1: yandex.cloud.mdb.mysql.v1.DatabaseSpec
+	(*Database)(nil),            // 0: yandex.cloud.mdb.mysql.v1.Database
+	(*DatabaseSpec)(nil),        // 1: yandex.cloud.mdb.mysql.v1.DatabaseSpec
+	(DeletionProtectionMode)(0), // 2: yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
 }
 var file_yandex_cloud_mdb_mysql_v1_database_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: yandex.cloud.mdb.mysql.v1.Database.deletion_protection_mode:type_name -> yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	2, // 1: yandex.cloud.mdb.mysql.v1.DatabaseSpec.deletion_protection_mode:type_name -> yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_database_proto_init() }
@@ -167,6 +194,7 @@ func file_yandex_cloud_mdb_mysql_v1_database_proto_init() {
 	if File_yandex_cloud_mdb_mysql_v1_database_proto != nil {
 		return
 	}
+	file_yandex_cloud_mdb_mysql_v1_deletion_protection_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

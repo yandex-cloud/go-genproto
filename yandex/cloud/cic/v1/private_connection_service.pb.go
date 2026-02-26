@@ -224,6 +224,8 @@ type CreatePrivateConnectionRequest struct {
 	// ID of the folder that the privateConnection belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// ID of the region that the privateConnection belongs to.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/private_connection_service.proto.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// ID of the trunk_connection that the privateConnection belongs to.
 	TrunkConnectionId string `protobuf:"bytes,6,opt,name=trunk_connection_id,json=trunkConnectionId,proto3" json:"trunk_connection_id,omitempty"`
@@ -297,6 +299,7 @@ func (x *CreatePrivateConnectionRequest) GetFolderId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/private_connection_service.proto.
 func (x *CreatePrivateConnectionRequest) GetRegionId() string {
 	if x != nil {
 		return x.RegionId
@@ -397,6 +400,8 @@ type UpdatePrivateConnectionRequest struct {
 	// Optional description of the privateConnection. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the region that the privateConnection belongs to.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/private_connection_service.proto.
 	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// ID of the trunk_connection that the privateConnection belongs to.
 	TrunkConnectionId string `protobuf:"bytes,8,opt,name=trunk_connection_id,json=trunkConnectionId,proto3" json:"trunk_connection_id,omitempty"`
@@ -477,6 +482,7 @@ func (x *UpdatePrivateConnectionRequest) GetDescription() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/private_connection_service.proto.
 func (x *UpdatePrivateConnectionRequest) GetRegionId() string {
 	if x != nil {
 		return x.RegionId
@@ -1096,14 +1102,16 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1eListPrivateConnectionsResponse\x12W\n" +
 	"\x13private_connections\x18\x01 \x03(\v2&.yandex.cloud.cic.v1.PrivateConnectionR\x12privateConnections\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbe\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf2\x05\n" +
 	"\x1eCreatePrivateConnectionRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
-	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x1b\n" +
-	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12.\n" +
-	"\x13trunk_connection_id\x18\x06 \x01(\tR\x11trunkConnectionId\x124\n" +
-	"\avlan_id\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12?\n" +
+	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12)\n" +
+	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tregion_id\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12<\n" +
+	"\x13trunk_connection_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12@\n" +
+	"\avlan_id\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x061-4095R\x06vlanId\x12?\n" +
 	"\fipv4_peering\x18\n" +
 	" \x01(\v2\x1c.yandex.cloud.cic.v1.PeeringR\vipv4Peering\x12`\n" +
 	"\x12ipv4_static_routes\x18\x13 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutes\x12\x94\x01\n" +
@@ -1113,16 +1121,18 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\b\x10\n" +
 	"J\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"U\n" +
 	"\x1fCreatePrivateConnectionMetadata\x122\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\x9a\x06\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xc0\x06\n" +
 	"\x1eUpdatePrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12B\n" +
 	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
-	"\tregion_id\x18\a \x01(\tR\bregionId\x12.\n" +
-	"\x13trunk_connection_id\x18\b \x01(\tR\x11trunkConnectionId\x124\n" +
-	"\avlan_id\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12?\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12'\n" +
+	"\tregion_id\x18\a \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12<\n" +
+	"\x13trunk_connection_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12@\n" +
+	"\avlan_id\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x061-4095R\x06vlanId\x12?\n" +
 	"\fipv4_peering\x18\n" +
 	" \x01(\v2\x1c.yandex.cloud.cic.v1.PeeringR\vipv4Peering\x12`\n" +
 	"\x12ipv4_static_routes\x18\x13 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutes\x12\x94\x01\n" +

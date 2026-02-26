@@ -42,6 +42,12 @@ func (m *Address) SetExternalIpv4Address(v *ExternalIpv4Address) {
 	}
 }
 
+func (m *Address) SetInternalIpv4Address(v *InternalIpv4Address) {
+	m.Address = &Address_InternalIpv4Address{
+		InternalIpv4Address: v,
+	}
+}
+
 func (m *Address) SetReserved(v bool) {
 	m.Reserved = v
 }
@@ -76,6 +82,22 @@ func (m *ExternalIpv4Address) SetZoneId(v string) {
 
 func (m *ExternalIpv4Address) SetRequirements(v *AddressRequirements) {
 	m.Requirements = v
+}
+
+type InternalIpv4Address_Scope = isInternalIpv4Address_Scope
+
+func (m *InternalIpv4Address) SetScope(v InternalIpv4Address_Scope) {
+	m.Scope = v
+}
+
+func (m *InternalIpv4Address) SetAddress(v string) {
+	m.Address = v
+}
+
+func (m *InternalIpv4Address) SetSubnetId(v string) {
+	m.Scope = &InternalIpv4Address_SubnetId{
+		SubnetId: v,
+	}
 }
 
 func (m *AddressRequirements) SetDdosProtectionProvider(v string) {

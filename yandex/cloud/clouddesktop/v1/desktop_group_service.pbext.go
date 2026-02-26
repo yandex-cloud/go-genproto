@@ -185,6 +185,10 @@ func (m *CreateDesktopGroupRequest) SetGroupConfig(v *DesktopGroupConfiguration)
 	m.GroupConfig = v
 }
 
+func (m *CreateDesktopGroupRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateDesktopGroupMetadata) SetDesktopGroupId(v string) {
 	m.DesktopGroupId = v
 }

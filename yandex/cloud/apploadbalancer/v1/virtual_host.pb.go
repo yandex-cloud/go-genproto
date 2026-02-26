@@ -132,7 +132,7 @@ func (x RedirectAction_RedirectResponseCode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RedirectAction_RedirectResponseCode.Descriptor instead.
 func (RedirectAction_RedirectResponseCode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{14, 0}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{15, 0}
 }
 
 // gRPC status code supported for use in responses.
@@ -205,7 +205,7 @@ func (x GrpcStatusResponseAction_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use GrpcStatusResponseAction_Status.Descriptor instead.
 func (GrpcStatusResponseAction_Status) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{16, 0}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{17, 0}
 }
 
 // A virtual host resource.
@@ -756,8 +756,10 @@ type Route struct {
 	RouteOptions *RouteOptions `protobuf:"bytes,4,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
 	// Whether set to 'true' disables security profile for the route.
 	DisableSecurityProfile bool `protobuf:"varint,5,opt,name=disable_security_profile,json=disableSecurityProfile,proto3" json:"disable_security_profile,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Client certificates forwarding settings.
+	ClientCertificateForward *ClientCertificateForward `protobuf:"bytes,6,opt,name=client_certificate_forward,json=clientCertificateForward,proto3" json:"client_certificate_forward,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Route) Reset() {
@@ -836,6 +838,13 @@ func (x *Route) GetDisableSecurityProfile() bool {
 	return false
 }
 
+func (x *Route) GetClientCertificateForward() *ClientCertificateForward {
+	if x != nil {
+		return x.ClientCertificateForward
+	}
+	return nil
+}
+
 type isRoute_Route interface {
 	isRoute_Route()
 }
@@ -853,6 +862,69 @@ type Route_Grpc struct {
 func (*Route_Http) isRoute_Route() {}
 
 func (*Route_Grpc) isRoute_Route() {}
+
+type ClientCertificateForward struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// If specified, ALB will set specified header with the provided client certificate (if it is validated by trusted CA).
+	HttpHeader string `protobuf:"bytes,1,opt,name=http_header,json=httpHeader,proto3" json:"http_header,omitempty"`
+	// If specified, ALB will set specified header with the provided client certificate's Issuer (if it is validated by trusted CA).
+	IssuerHeaderName string `protobuf:"bytes,2,opt,name=issuer_header_name,json=issuerHeaderName,proto3" json:"issuer_header_name,omitempty"`
+	// If specified, ALB will set specified header with the provided client certificate's Subject (if it is validated by trusted CA).
+	SubjectHeaderName string `protobuf:"bytes,3,opt,name=subject_header_name,json=subjectHeaderName,proto3" json:"subject_header_name,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ClientCertificateForward) Reset() {
+	*x = ClientCertificateForward{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClientCertificateForward) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClientCertificateForward) ProtoMessage() {}
+
+func (x *ClientCertificateForward) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClientCertificateForward.ProtoReflect.Descriptor instead.
+func (*ClientCertificateForward) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ClientCertificateForward) GetHttpHeader() string {
+	if x != nil {
+		return x.HttpHeader
+	}
+	return ""
+}
+
+func (x *ClientCertificateForward) GetIssuerHeaderName() string {
+	if x != nil {
+		return x.IssuerHeaderName
+	}
+	return ""
+}
+
+func (x *ClientCertificateForward) GetSubjectHeaderName() string {
+	if x != nil {
+		return x.SubjectHeaderName
+	}
+	return ""
+}
 
 // An HTTP route configuration resource.
 type HttpRoute struct {
@@ -873,7 +945,7 @@ type HttpRoute struct {
 
 func (x *HttpRoute) Reset() {
 	*x = HttpRoute{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[7]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -885,7 +957,7 @@ func (x *HttpRoute) String() string {
 func (*HttpRoute) ProtoMessage() {}
 
 func (x *HttpRoute) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[7]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -898,7 +970,7 @@ func (x *HttpRoute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpRoute.ProtoReflect.Descriptor instead.
 func (*HttpRoute) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *HttpRoute) GetMatch() *HttpRouteMatch {
@@ -985,7 +1057,7 @@ type GrpcRoute struct {
 
 func (x *GrpcRoute) Reset() {
 	*x = GrpcRoute{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[8]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -997,7 +1069,7 @@ func (x *GrpcRoute) String() string {
 func (*GrpcRoute) ProtoMessage() {}
 
 func (x *GrpcRoute) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[8]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1010,7 +1082,7 @@ func (x *GrpcRoute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrpcRoute.ProtoReflect.Descriptor instead.
 func (*GrpcRoute) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GrpcRoute) GetMatch() *GrpcRouteMatch {
@@ -1075,7 +1147,7 @@ type HttpRouteHeaderMatch struct {
 
 func (x *HttpRouteHeaderMatch) Reset() {
 	*x = HttpRouteHeaderMatch{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[9]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1087,7 +1159,7 @@ func (x *HttpRouteHeaderMatch) String() string {
 func (*HttpRouteHeaderMatch) ProtoMessage() {}
 
 func (x *HttpRouteHeaderMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[9]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1100,7 +1172,7 @@ func (x *HttpRouteHeaderMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpRouteHeaderMatch.ProtoReflect.Descriptor instead.
 func (*HttpRouteHeaderMatch) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *HttpRouteHeaderMatch) GetName() string {
@@ -1129,7 +1201,7 @@ type HttpRouteQueryParamMatch struct {
 
 func (x *HttpRouteQueryParamMatch) Reset() {
 	*x = HttpRouteQueryParamMatch{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[10]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1141,7 +1213,7 @@ func (x *HttpRouteQueryParamMatch) String() string {
 func (*HttpRouteQueryParamMatch) ProtoMessage() {}
 
 func (x *HttpRouteQueryParamMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[10]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1154,7 +1226,7 @@ func (x *HttpRouteQueryParamMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpRouteQueryParamMatch.ProtoReflect.Descriptor instead.
 func (*HttpRouteQueryParamMatch) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *HttpRouteQueryParamMatch) GetName() string {
@@ -1194,7 +1266,7 @@ type HttpRouteMatch struct {
 
 func (x *HttpRouteMatch) Reset() {
 	*x = HttpRouteMatch{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[11]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1206,7 +1278,7 @@ func (x *HttpRouteMatch) String() string {
 func (*HttpRouteMatch) ProtoMessage() {}
 
 func (x *HttpRouteMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[11]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1219,7 +1291,7 @@ func (x *HttpRouteMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpRouteMatch.ProtoReflect.Descriptor instead.
 func (*HttpRouteMatch) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *HttpRouteMatch) GetHttpMethod() []string {
@@ -1265,7 +1337,7 @@ type GrpcRouteMatch struct {
 
 func (x *GrpcRouteMatch) Reset() {
 	*x = GrpcRouteMatch{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[12]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1277,7 +1349,7 @@ func (x *GrpcRouteMatch) String() string {
 func (*GrpcRouteMatch) ProtoMessage() {}
 
 func (x *GrpcRouteMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[12]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1290,7 +1362,7 @@ func (x *GrpcRouteMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrpcRouteMatch.ProtoReflect.Descriptor instead.
 func (*GrpcRouteMatch) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GrpcRouteMatch) GetFqmn() *StringMatch {
@@ -1317,7 +1389,7 @@ type StringMatch struct {
 
 func (x *StringMatch) Reset() {
 	*x = StringMatch{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[13]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1329,7 +1401,7 @@ func (x *StringMatch) String() string {
 func (*StringMatch) ProtoMessage() {}
 
 func (x *StringMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[13]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1342,7 +1414,7 @@ func (x *StringMatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringMatch.ProtoReflect.Descriptor instead.
 func (*StringMatch) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *StringMatch) GetMatch() isStringMatch_Match {
@@ -1441,7 +1513,7 @@ type RedirectAction struct {
 
 func (x *RedirectAction) Reset() {
 	*x = RedirectAction{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[14]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1453,7 +1525,7 @@ func (x *RedirectAction) String() string {
 func (*RedirectAction) ProtoMessage() {}
 
 func (x *RedirectAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[14]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1466,7 +1538,7 @@ func (x *RedirectAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RedirectAction.ProtoReflect.Descriptor instead.
 func (*RedirectAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *RedirectAction) GetReplaceScheme() string {
@@ -1564,7 +1636,7 @@ type DirectResponseAction struct {
 
 func (x *DirectResponseAction) Reset() {
 	*x = DirectResponseAction{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[15]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1576,7 +1648,7 @@ func (x *DirectResponseAction) String() string {
 func (*DirectResponseAction) ProtoMessage() {}
 
 func (x *DirectResponseAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[15]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1589,7 +1661,7 @@ func (x *DirectResponseAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DirectResponseAction.ProtoReflect.Descriptor instead.
 func (*DirectResponseAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DirectResponseAction) GetStatus() int64 {
@@ -1617,7 +1689,7 @@ type GrpcStatusResponseAction struct {
 
 func (x *GrpcStatusResponseAction) Reset() {
 	*x = GrpcStatusResponseAction{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[16]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1629,7 +1701,7 @@ func (x *GrpcStatusResponseAction) String() string {
 func (*GrpcStatusResponseAction) ProtoMessage() {}
 
 func (x *GrpcStatusResponseAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[16]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1642,7 +1714,7 @@ func (x *GrpcStatusResponseAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrpcStatusResponseAction.ProtoReflect.Descriptor instead.
 func (*GrpcStatusResponseAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GrpcStatusResponseAction) GetStatus() GrpcStatusResponseAction_Status {
@@ -1721,7 +1793,7 @@ type HttpRouteAction struct {
 
 func (x *HttpRouteAction) Reset() {
 	*x = HttpRouteAction{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[17]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1733,7 +1805,7 @@ func (x *HttpRouteAction) String() string {
 func (*HttpRouteAction) ProtoMessage() {}
 
 func (x *HttpRouteAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[17]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1746,7 +1818,7 @@ func (x *HttpRouteAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpRouteAction.ProtoReflect.Descriptor instead.
 func (*HttpRouteAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *HttpRouteAction) GetBackendGroupId() string {
@@ -1854,7 +1926,7 @@ type RegexMatchAndSubstitute struct {
 
 func (x *RegexMatchAndSubstitute) Reset() {
 	*x = RegexMatchAndSubstitute{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[18]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1866,7 +1938,7 @@ func (x *RegexMatchAndSubstitute) String() string {
 func (*RegexMatchAndSubstitute) ProtoMessage() {}
 
 func (x *RegexMatchAndSubstitute) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[18]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1879,7 +1951,7 @@ func (x *RegexMatchAndSubstitute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegexMatchAndSubstitute.ProtoReflect.Descriptor instead.
 func (*RegexMatchAndSubstitute) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RegexMatchAndSubstitute) GetRegex() string {
@@ -1938,7 +2010,7 @@ type GrpcRouteAction struct {
 
 func (x *GrpcRouteAction) Reset() {
 	*x = GrpcRouteAction{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[19]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1950,7 +2022,7 @@ func (x *GrpcRouteAction) String() string {
 func (*GrpcRouteAction) ProtoMessage() {}
 
 func (x *GrpcRouteAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[19]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1963,7 +2035,7 @@ func (x *GrpcRouteAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrpcRouteAction.ProtoReflect.Descriptor instead.
 func (*GrpcRouteAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GrpcRouteAction) GetBackendGroupId() string {
@@ -2051,7 +2123,7 @@ type Principal_HeaderMatcher struct {
 
 func (x *Principal_HeaderMatcher) Reset() {
 	*x = Principal_HeaderMatcher{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[20]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2063,7 +2135,7 @@ func (x *Principal_HeaderMatcher) String() string {
 func (*Principal_HeaderMatcher) ProtoMessage() {}
 
 func (x *Principal_HeaderMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[20]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2139,14 +2211,20 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc = "" +
 	"\areplace\x18\x03 \x01(\tH\x00R\areplace\x12\x18\n" +
 	"\x06remove\x18\x04 \x01(\bH\x00R\x06remove\x12\x18\n" +
 	"\x06rename\x18\x05 \x01(\tH\x00R\x06renameB\v\n" +
-	"\toperation\"\xc2\x02\n" +
+	"\toperation\"\xbb\x03\n" +
 	"\x05Route\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12@\n" +
 	"\x04http\x18\x02 \x01(\v2*.yandex.cloud.apploadbalancer.v1.HttpRouteH\x00R\x04http\x12@\n" +
 	"\x04grpc\x18\x03 \x01(\v2*.yandex.cloud.apploadbalancer.v1.GrpcRouteH\x00R\x04grpc\x12R\n" +
 	"\rroute_options\x18\x04 \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x128\n" +
-	"\x18disable_security_profile\x18\x05 \x01(\bR\x16disableSecurityProfileB\r\n" +
-	"\x05route\x12\x04\xc0\xc11\x01\"\xdd\x02\n" +
+	"\x18disable_security_profile\x18\x05 \x01(\bR\x16disableSecurityProfile\x12w\n" +
+	"\x1aclient_certificate_forward\x18\x06 \x01(\v29.yandex.cloud.apploadbalancer.v1.ClientCertificateForwardR\x18clientCertificateForwardB\r\n" +
+	"\x05route\x12\x04\xc0\xc11\x01\"\xe6\x02\n" +
+	"\x18ClientCertificateForward\x12W\n" +
+	"\vhttp_header\x18\x01 \x01(\tB6\xf2\xc712(?i:ssl-client-cert|client-cert|x-ssl-client-cert)R\n" +
+	"httpHeader\x12u\n" +
+	"\x12issuer_header_name\x18\x02 \x01(\tBG\xf2\xc71C(?i:ssl-client-issuer-dn|client-cert-issuer|x-ssl-client-issuer-dn)R\x10issuerHeaderName\x12z\n" +
+	"\x13subject_header_name\x18\x03 \x01(\tBJ\xf2\xc71F(?i:ssl-client-subject-dn|client-cert-subject|x-ssl-client-subject-dn)R\x11subjectHeaderName\"\xdd\x02\n" +
 	"\tHttpRoute\x12E\n" +
 	"\x05match\x18\x01 \x01(\v2/.yandex.cloud.apploadbalancer.v1.HttpRouteMatchR\x05match\x12H\n" +
 	"\x05route\x18\x02 \x01(\v20.yandex.cloud.apploadbalancer.v1.HttpRouteActionH\x00R\x05route\x12M\n" +
@@ -2250,7 +2328,7 @@ func file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP() []byt
 }
 
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_goTypes = []any{
 	(RBAC_Action)(0),                         // 0: yandex.cloud.apploadbalancer.v1.RBAC.Action
 	(RedirectAction_RedirectResponseCode)(0), // 1: yandex.cloud.apploadbalancer.v1.RedirectAction.RedirectResponseCode
@@ -2262,69 +2340,71 @@ var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_goTypes = []any{
 	(*Principal)(nil),                        // 7: yandex.cloud.apploadbalancer.v1.Principal
 	(*HeaderModification)(nil),               // 8: yandex.cloud.apploadbalancer.v1.HeaderModification
 	(*Route)(nil),                            // 9: yandex.cloud.apploadbalancer.v1.Route
-	(*HttpRoute)(nil),                        // 10: yandex.cloud.apploadbalancer.v1.HttpRoute
-	(*GrpcRoute)(nil),                        // 11: yandex.cloud.apploadbalancer.v1.GrpcRoute
-	(*HttpRouteHeaderMatch)(nil),             // 12: yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch
-	(*HttpRouteQueryParamMatch)(nil),         // 13: yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch
-	(*HttpRouteMatch)(nil),                   // 14: yandex.cloud.apploadbalancer.v1.HttpRouteMatch
-	(*GrpcRouteMatch)(nil),                   // 15: yandex.cloud.apploadbalancer.v1.GrpcRouteMatch
-	(*StringMatch)(nil),                      // 16: yandex.cloud.apploadbalancer.v1.StringMatch
-	(*RedirectAction)(nil),                   // 17: yandex.cloud.apploadbalancer.v1.RedirectAction
-	(*DirectResponseAction)(nil),             // 18: yandex.cloud.apploadbalancer.v1.DirectResponseAction
-	(*GrpcStatusResponseAction)(nil),         // 19: yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction
-	(*HttpRouteAction)(nil),                  // 20: yandex.cloud.apploadbalancer.v1.HttpRouteAction
-	(*RegexMatchAndSubstitute)(nil),          // 21: yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
-	(*GrpcRouteAction)(nil),                  // 22: yandex.cloud.apploadbalancer.v1.GrpcRouteAction
-	(*Principal_HeaderMatcher)(nil),          // 23: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
-	(*RateLimit)(nil),                        // 24: yandex.cloud.apploadbalancer.v1.RateLimit
-	(*Payload)(nil),                          // 25: yandex.cloud.apploadbalancer.v1.Payload
-	(*durationpb.Duration)(nil),              // 26: google.protobuf.Duration
+	(*ClientCertificateForward)(nil),         // 10: yandex.cloud.apploadbalancer.v1.ClientCertificateForward
+	(*HttpRoute)(nil),                        // 11: yandex.cloud.apploadbalancer.v1.HttpRoute
+	(*GrpcRoute)(nil),                        // 12: yandex.cloud.apploadbalancer.v1.GrpcRoute
+	(*HttpRouteHeaderMatch)(nil),             // 13: yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch
+	(*HttpRouteQueryParamMatch)(nil),         // 14: yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch
+	(*HttpRouteMatch)(nil),                   // 15: yandex.cloud.apploadbalancer.v1.HttpRouteMatch
+	(*GrpcRouteMatch)(nil),                   // 16: yandex.cloud.apploadbalancer.v1.GrpcRouteMatch
+	(*StringMatch)(nil),                      // 17: yandex.cloud.apploadbalancer.v1.StringMatch
+	(*RedirectAction)(nil),                   // 18: yandex.cloud.apploadbalancer.v1.RedirectAction
+	(*DirectResponseAction)(nil),             // 19: yandex.cloud.apploadbalancer.v1.DirectResponseAction
+	(*GrpcStatusResponseAction)(nil),         // 20: yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction
+	(*HttpRouteAction)(nil),                  // 21: yandex.cloud.apploadbalancer.v1.HttpRouteAction
+	(*RegexMatchAndSubstitute)(nil),          // 22: yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
+	(*GrpcRouteAction)(nil),                  // 23: yandex.cloud.apploadbalancer.v1.GrpcRouteAction
+	(*Principal_HeaderMatcher)(nil),          // 24: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
+	(*RateLimit)(nil),                        // 25: yandex.cloud.apploadbalancer.v1.RateLimit
+	(*Payload)(nil),                          // 26: yandex.cloud.apploadbalancer.v1.Payload
+	(*durationpb.Duration)(nil),              // 27: google.protobuf.Duration
 }
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_depIdxs = []int32{
 	9,  // 0: yandex.cloud.apploadbalancer.v1.VirtualHost.routes:type_name -> yandex.cloud.apploadbalancer.v1.Route
 	8,  // 1: yandex.cloud.apploadbalancer.v1.VirtualHost.modify_request_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
 	8,  // 2: yandex.cloud.apploadbalancer.v1.VirtualHost.modify_response_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
 	4,  // 3: yandex.cloud.apploadbalancer.v1.VirtualHost.route_options:type_name -> yandex.cloud.apploadbalancer.v1.RouteOptions
-	24, // 4: yandex.cloud.apploadbalancer.v1.VirtualHost.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
+	25, // 4: yandex.cloud.apploadbalancer.v1.VirtualHost.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
 	8,  // 5: yandex.cloud.apploadbalancer.v1.RouteOptions.modify_request_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
 	8,  // 6: yandex.cloud.apploadbalancer.v1.RouteOptions.modify_response_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
 	5,  // 7: yandex.cloud.apploadbalancer.v1.RouteOptions.rbac:type_name -> yandex.cloud.apploadbalancer.v1.RBAC
 	0,  // 8: yandex.cloud.apploadbalancer.v1.RBAC.action:type_name -> yandex.cloud.apploadbalancer.v1.RBAC.Action
 	6,  // 9: yandex.cloud.apploadbalancer.v1.RBAC.principals:type_name -> yandex.cloud.apploadbalancer.v1.Principals
 	7,  // 10: yandex.cloud.apploadbalancer.v1.Principals.and_principals:type_name -> yandex.cloud.apploadbalancer.v1.Principal
-	23, // 11: yandex.cloud.apploadbalancer.v1.Principal.header:type_name -> yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
-	10, // 12: yandex.cloud.apploadbalancer.v1.Route.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpRoute
-	11, // 13: yandex.cloud.apploadbalancer.v1.Route.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRoute
+	24, // 11: yandex.cloud.apploadbalancer.v1.Principal.header:type_name -> yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
+	11, // 12: yandex.cloud.apploadbalancer.v1.Route.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpRoute
+	12, // 13: yandex.cloud.apploadbalancer.v1.Route.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRoute
 	4,  // 14: yandex.cloud.apploadbalancer.v1.Route.route_options:type_name -> yandex.cloud.apploadbalancer.v1.RouteOptions
-	14, // 15: yandex.cloud.apploadbalancer.v1.HttpRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteMatch
-	20, // 16: yandex.cloud.apploadbalancer.v1.HttpRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteAction
-	17, // 17: yandex.cloud.apploadbalancer.v1.HttpRoute.redirect:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction
-	18, // 18: yandex.cloud.apploadbalancer.v1.HttpRoute.direct_response:type_name -> yandex.cloud.apploadbalancer.v1.DirectResponseAction
-	15, // 19: yandex.cloud.apploadbalancer.v1.GrpcRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteMatch
-	22, // 20: yandex.cloud.apploadbalancer.v1.GrpcRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteAction
-	19, // 21: yandex.cloud.apploadbalancer.v1.GrpcRoute.status_response:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction
-	16, // 22: yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	16, // 23: yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	16, // 24: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.path:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	12, // 25: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.headers:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch
-	13, // 26: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.query_parameters:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch
-	16, // 27: yandex.cloud.apploadbalancer.v1.GrpcRouteMatch.fqmn:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	1,  // 28: yandex.cloud.apploadbalancer.v1.RedirectAction.response_code:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction.RedirectResponseCode
-	25, // 29: yandex.cloud.apploadbalancer.v1.DirectResponseAction.body:type_name -> yandex.cloud.apploadbalancer.v1.Payload
-	2,  // 30: yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.status:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.Status
-	26, // 31: yandex.cloud.apploadbalancer.v1.HttpRouteAction.timeout:type_name -> google.protobuf.Duration
-	26, // 32: yandex.cloud.apploadbalancer.v1.HttpRouteAction.idle_timeout:type_name -> google.protobuf.Duration
-	24, // 33: yandex.cloud.apploadbalancer.v1.HttpRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
-	21, // 34: yandex.cloud.apploadbalancer.v1.HttpRouteAction.regex_rewrite:type_name -> yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
-	26, // 35: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.max_timeout:type_name -> google.protobuf.Duration
-	26, // 36: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.idle_timeout:type_name -> google.protobuf.Duration
-	24, // 37: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
-	16, // 38: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	39, // [39:39] is the sub-list for method output_type
-	39, // [39:39] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	10, // 15: yandex.cloud.apploadbalancer.v1.Route.client_certificate_forward:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificateForward
+	15, // 16: yandex.cloud.apploadbalancer.v1.HttpRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteMatch
+	21, // 17: yandex.cloud.apploadbalancer.v1.HttpRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteAction
+	18, // 18: yandex.cloud.apploadbalancer.v1.HttpRoute.redirect:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction
+	19, // 19: yandex.cloud.apploadbalancer.v1.HttpRoute.direct_response:type_name -> yandex.cloud.apploadbalancer.v1.DirectResponseAction
+	16, // 20: yandex.cloud.apploadbalancer.v1.GrpcRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteMatch
+	23, // 21: yandex.cloud.apploadbalancer.v1.GrpcRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteAction
+	20, // 22: yandex.cloud.apploadbalancer.v1.GrpcRoute.status_response:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction
+	17, // 23: yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	17, // 24: yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	17, // 25: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.path:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	13, // 26: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.headers:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch
+	14, // 27: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.query_parameters:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch
+	17, // 28: yandex.cloud.apploadbalancer.v1.GrpcRouteMatch.fqmn:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	1,  // 29: yandex.cloud.apploadbalancer.v1.RedirectAction.response_code:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction.RedirectResponseCode
+	26, // 30: yandex.cloud.apploadbalancer.v1.DirectResponseAction.body:type_name -> yandex.cloud.apploadbalancer.v1.Payload
+	2,  // 31: yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.status:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.Status
+	27, // 32: yandex.cloud.apploadbalancer.v1.HttpRouteAction.timeout:type_name -> google.protobuf.Duration
+	27, // 33: yandex.cloud.apploadbalancer.v1.HttpRouteAction.idle_timeout:type_name -> google.protobuf.Duration
+	25, // 34: yandex.cloud.apploadbalancer.v1.HttpRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
+	22, // 35: yandex.cloud.apploadbalancer.v1.HttpRouteAction.regex_rewrite:type_name -> yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
+	27, // 36: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.max_timeout:type_name -> google.protobuf.Duration
+	27, // 37: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.idle_timeout:type_name -> google.protobuf.Duration
+	25, // 38: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
+	17, // 39: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	40, // [40:40] is the sub-list for method output_type
+	40, // [40:40] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_init() }
@@ -2349,29 +2429,29 @@ func file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_init() {
 		(*Route_Http)(nil),
 		(*Route_Grpc)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[7].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[8].OneofWrappers = []any{
 		(*HttpRoute_Route)(nil),
 		(*HttpRoute_Redirect)(nil),
 		(*HttpRoute_DirectResponse)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[8].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[9].OneofWrappers = []any{
 		(*GrpcRoute_Route)(nil),
 		(*GrpcRoute_StatusResponse)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[13].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[14].OneofWrappers = []any{
 		(*StringMatch_ExactMatch)(nil),
 		(*StringMatch_PrefixMatch)(nil),
 		(*StringMatch_RegexMatch)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[14].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[15].OneofWrappers = []any{
 		(*RedirectAction_ReplacePath)(nil),
 		(*RedirectAction_ReplacePrefix)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[17].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[18].OneofWrappers = []any{
 		(*HttpRouteAction_HostRewrite)(nil),
 		(*HttpRouteAction_AutoHostRewrite)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[19].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[20].OneofWrappers = []any{
 		(*GrpcRouteAction_HostRewrite)(nil),
 		(*GrpcRouteAction_AutoHostRewrite)(nil),
 	}
@@ -2381,7 +2461,7 @@ func file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc), len(file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   21,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

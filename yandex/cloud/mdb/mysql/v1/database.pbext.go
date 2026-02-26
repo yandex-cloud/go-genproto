@@ -10,6 +10,14 @@ func (m *Database) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *Database) SetDeletionProtectionMode(v DeletionProtectionMode) {
+	m.DeletionProtectionMode = v
+}
+
 func (m *DatabaseSpec) SetName(v string) {
 	m.Name = v
+}
+
+func (m *DatabaseSpec) SetDeletionProtectionMode(v DeletionProtectionMode) {
+	m.DeletionProtectionMode = v
 }

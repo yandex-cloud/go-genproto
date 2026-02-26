@@ -7,6 +7,7 @@
 package cic
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -140,9 +141,9 @@ var File_yandex_cloud_cic_v1_common_lag_allocation_settings_proto protoreflect.F
 
 const file_yandex_cloud_cic_v1_common_lag_allocation_settings_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x12\x1ayandex.cloud.cic.v1.common\x1a)yandex/cloud/cic/v1/common/lag_info.proto\"H\n" +
-	"\x1cLagAllocationSettingsRequest\x12\x1b\n" +
-	"\blag_size\x18\r \x01(\x03H\x00R\alagSizeB\x05\n" +
+	"8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x12\x1ayandex.cloud.cic.v1.common\x1a)yandex/cloud/cic/v1/common/lag_info.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
+	"\x1cLagAllocationSettingsRequest\x12)\n" +
+	"\blag_size\x18\r \x01(\x03B\f\xe8\xc71\x01\xfa\xc71\x041-10H\x00R\alagSizeB\x05\n" +
 	"\x03lagJ\x04\b\x0e\x10\x0f\"W\n" +
 	"\x15LagAllocationSettings\x12>\n" +
 	"\blag_info\x18\x0e \x01(\v2#.yandex.cloud.cic.v1.common.LagInfoR\alagInfoBd\n" +

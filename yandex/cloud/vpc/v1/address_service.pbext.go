@@ -17,9 +17,27 @@ func (m *GetAddressByValueRequest) SetAddress(v GetAddressByValueRequest_Address
 	m.Address = v
 }
 
+type GetAddressByValueRequest_Scope = isGetAddressByValueRequest_Scope
+
+func (m *GetAddressByValueRequest) SetScope(v GetAddressByValueRequest_Scope) {
+	m.Scope = v
+}
+
 func (m *GetAddressByValueRequest) SetExternalIpv4Address(v string) {
 	m.Address = &GetAddressByValueRequest_ExternalIpv4Address{
 		ExternalIpv4Address: v,
+	}
+}
+
+func (m *GetAddressByValueRequest) SetInternalIpv4Address(v string) {
+	m.Address = &GetAddressByValueRequest_InternalIpv4Address{
+		InternalIpv4Address: v,
+	}
+}
+
+func (m *GetAddressByValueRequest) SetSubnetId(v string) {
+	m.Scope = &GetAddressByValueRequest_SubnetId{
+		SubnetId: v,
 	}
 }
 
@@ -44,6 +62,26 @@ func (m *ListAddressesResponse) SetAddresses(v []*Address) {
 }
 
 func (m *ListAddressesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *ListAddressesBySubnetRequest) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *ListAddressesBySubnetRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListAddressesBySubnetRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListAddressesBySubnetResponse) SetAddresses(v []*Address) {
+	m.Addresses = v
+}
+
+func (m *ListAddressesBySubnetResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
@@ -75,6 +113,12 @@ func (m *CreateAddressRequest) SetExternalIpv4AddressSpec(v *ExternalIpv4Address
 	}
 }
 
+func (m *CreateAddressRequest) SetInternalIpv4AddressSpec(v *InternalIpv4AddressSpec) {
+	m.AddressSpec = &CreateAddressRequest_InternalIpv4AddressSpec{
+		InternalIpv4AddressSpec: v,
+	}
+}
+
 func (m *CreateAddressRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
@@ -93,6 +137,22 @@ func (m *ExternalIpv4AddressSpec) SetZoneId(v string) {
 
 func (m *ExternalIpv4AddressSpec) SetRequirements(v *AddressRequirements) {
 	m.Requirements = v
+}
+
+type InternalIpv4AddressSpec_Scope = isInternalIpv4AddressSpec_Scope
+
+func (m *InternalIpv4AddressSpec) SetScope(v InternalIpv4AddressSpec_Scope) {
+	m.Scope = v
+}
+
+func (m *InternalIpv4AddressSpec) SetAddress(v string) {
+	m.Address = v
+}
+
+func (m *InternalIpv4AddressSpec) SetSubnetId(v string) {
+	m.Scope = &InternalIpv4AddressSpec_SubnetId{
+		SubnetId: v,
+	}
 }
 
 func (m *DnsRecordSpec) SetFqdn(v string) {

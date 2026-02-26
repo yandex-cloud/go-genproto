@@ -37,3 +37,7 @@ func (m *DesktopImage) SetStorageSize(v int64) {
 func (m *DesktopImage) SetMinDiskSize(v int64) {
 	m.MinDiskSize = v
 }
+
+func (m *DesktopImage) SetDescription(v string) {
+	m.Description = v
+}

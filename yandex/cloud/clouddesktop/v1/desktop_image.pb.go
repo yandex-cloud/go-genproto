@@ -95,7 +95,9 @@ type DesktopImage struct {
 	// Size of the image, specified in bytes.
 	StorageSize int64 `protobuf:"varint,14,opt,name=storage_size,json=storageSize,proto3" json:"storage_size,omitempty"`
 	// Minimum disk size in bytes required to use the image.
-	MinDiskSize   int64 `protobuf:"varint,15,opt,name=min_disk_size,json=minDiskSize,proto3" json:"min_disk_size,omitempty"`
+	MinDiskSize int64 `protobuf:"varint,15,opt,name=min_disk_size,json=minDiskSize,proto3" json:"min_disk_size,omitempty"`
+	// Description of the image.
+	Description   string `protobuf:"bytes,16,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -186,11 +188,18 @@ func (x *DesktopImage) GetMinDiskSize() int64 {
 	return 0
 }
 
+func (x *DesktopImage) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 var File_yandex_cloud_clouddesktop_v1_desktop_image_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_image_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/clouddesktop/v1/desktop_image.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8b\x04\n" +
+	"0yandex/cloud/clouddesktop/v1/desktop_image.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\"\xad\x04\n" +
 	"\fDesktopImage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -200,7 +209,8 @@ const file_yandex_cloud_clouddesktop_v1_desktop_image_proto_rawDesc = "" +
 	"\x04name\x18\v \x01(\tR\x04name\x12R\n" +
 	"\x06labels\x18\r \x03(\v2:.yandex.cloud.clouddesktop.v1.api.DesktopImage.LabelsEntryR\x06labels\x12!\n" +
 	"\fstorage_size\x18\x0e \x01(\x03R\vstorageSize\x12\"\n" +
-	"\rmin_disk_size\x18\x0f \x01(\x03R\vminDiskSize\x1a9\n" +
+	"\rmin_disk_size\x18\x0f \x01(\x03R\vminDiskSize\x12 \n" +
+	"\vdescription\x18\x10 \x01(\tR\vdescription\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"H\n" +

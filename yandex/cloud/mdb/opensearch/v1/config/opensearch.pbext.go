@@ -14,6 +14,10 @@ func (m *OpenSearchConfig2) SetFielddataCacheSize(v string) {
 	m.FielddataCacheSize = v
 }
 
+func (m *OpenSearchConfig2) SetSearchMaxBuckets(v *wrapperspb.Int64Value) {
+	m.SearchMaxBuckets = v
+}
+
 func (m *OpenSearchConfig2) SetReindexRemoteWhitelist(v string) {
 	m.ReindexRemoteWhitelist = v
 }

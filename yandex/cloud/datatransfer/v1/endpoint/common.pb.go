@@ -509,7 +509,6 @@ func (*TLSMode_Enabled) isTLSMode_TlsMode() {}
 type TLSConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// CA certificate
-	//
 	// X.509 certificate of the certificate authority which issued the server's
 	// certificate, in PEM format. When CA certificate is specified, TLS is used to
 	// connect to the server. If CA certificate is empty, the server's certificate must
@@ -806,6 +805,7 @@ func (x *DataSchema) GetSchema() isDataSchema_Schema {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/datatransfer/v1/endpoint/common.proto.
 func (x *DataSchema) GetJsonFields() string {
 	if x != nil {
 		if x, ok := x.Schema.(*DataSchema_JsonFields); ok {
@@ -830,6 +830,9 @@ type isDataSchema_Schema interface {
 
 type DataSchema_JsonFields struct {
 	// Description of the data schema as JSON specification
+	// Deprecated: please use fields instead
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/datatransfer/v1/endpoint/common.proto.
 	JsonFields string `protobuf:"bytes,1,opt,name=json_fields,json=jsonFields,proto3,oneof"`
 }
 
@@ -972,10 +975,10 @@ const file_yandex_cloud_datatransfer_v1_endpoint_common_proto_rawDesc = "" +
 	"\x12invocation_timeout\x18\x05 \x01(\tR\x11invocationTimeout\x12,\n" +
 	"\x12service_account_id\x18\b \x01(\tR\x10serviceAccountIdJ\x04\b\x06\x10\b\"[\n" +
 	"\tFieldList\x12H\n" +
-	"\x06fields\x18\x02 \x03(\v20.yandex.cloud.datatransfer.v1.endpoint.ColSchemaR\x06fieldsJ\x04\b\x01\x10\x02\"\x85\x01\n" +
+	"\x06fields\x18\x02 \x03(\v20.yandex.cloud.datatransfer.v1.endpoint.ColSchemaR\x06fieldsJ\x04\b\x01\x10\x02\"\x89\x01\n" +
 	"\n" +
-	"DataSchema\x12!\n" +
-	"\vjson_fields\x18\x01 \x01(\tH\x00R\n" +
+	"DataSchema\x12%\n" +
+	"\vjson_fields\x18\x01 \x01(\tB\x02\x18\x01H\x00R\n" +
 	"jsonFields\x12J\n" +
 	"\x06fields\x18\x02 \x01(\v20.yandex.cloud.datatransfer.v1.endpoint.FieldListH\x00R\x06fieldsB\b\n" +
 	"\x06schema\"\b\n" +

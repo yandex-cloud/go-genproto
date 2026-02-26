@@ -19,3 +19,19 @@ func (m *ValidationContext) SetTrustedCaBytes(v string) {
 		TrustedCaBytes: v,
 	}
 }
+
+type ClientCertificatesVerification_TrustedCa = isClientCertificatesVerification_TrustedCa
+
+func (m *ClientCertificatesVerification) SetTrustedCa(v ClientCertificatesVerification_TrustedCa) {
+	m.TrustedCa = v
+}
+
+func (m *ClientCertificatesVerification) SetRequireClientCertificate(v bool) {
+	m.RequireClientCertificate = v
+}
+
+func (m *ClientCertificatesVerification) SetBytes(v string) {
+	m.TrustedCa = &ClientCertificatesVerification_Bytes{
+		Bytes: v,
+	}
+}

@@ -183,7 +183,11 @@ type CopyDesktopImageRequest struct {
 	// Name of the image.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the compute image to copy the image from.
-	ImageId       string `protobuf:"bytes,8,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	ImageId string `protobuf:"bytes,8,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	// Desktop image labels.
+	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Desktop image description.
+	Description   string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -239,6 +243,20 @@ func (x *CopyDesktopImageRequest) GetImageId() string {
 	return ""
 }
 
+func (x *CopyDesktopImageRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *CopyDesktopImageRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 type UpdateDesktopImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Id of image to update.
@@ -248,7 +266,9 @@ type UpdateDesktopImageRequest struct {
 	// New desktop image name.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New desktop image labels.
-	Labels        map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// New desktop image description.
+	Description   string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -311,6 +331,13 @@ func (x *UpdateDesktopImageRequest) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *UpdateDesktopImageRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 type CopyFromDesktopRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to copy the image to.
@@ -318,7 +345,11 @@ type CopyFromDesktopRequest struct {
 	// Name of the image.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the desktop to copy the image from.
-	DesktopId     string `protobuf:"bytes,8,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	DesktopId string `protobuf:"bytes,8,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	// Desktop image labels.
+	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Desktop image description.
+	Description   string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -370,6 +401,20 @@ func (x *CopyFromDesktopRequest) GetName() string {
 func (x *CopyFromDesktopRequest) GetDesktopId() string {
 	if x != nil {
 		return x.DesktopId
+	}
+	return ""
+}
+
+func (x *CopyFromDesktopRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *CopyFromDesktopRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -600,8 +645,9 @@ func (x *GetDesktopImageRequest) GetImageId() string {
 }
 
 type UpdateDesktopImageMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ImageId       string                 `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the image to update.
+	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -659,25 +705,41 @@ const file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDesc = ""
 	"\border_by\x18\x18 \x01(\tB\t\x8a\xc81\x05<=100R\aorderByJ\x04\b\x02\x10\x15\"\xa0\x01\n" +
 	"\x19ListDesktopImagesResponse\x12U\n" +
 	"\x0edesktop_images\x18\x01 \x03(\v2..yandex.cloud.clouddesktop.v1.api.DesktopImageR\rdesktopImages\x12&\n" +
-	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\x95\x01\n" +
+	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\x9b\x03\n" +
 	"\x17CopyDesktopImageRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12 \n" +
 	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x12'\n" +
-	"\bimage_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageIdJ\x04\b\x03\x10\b\"\xf1\x02\n" +
+	"\bimage_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\x12\x9a\x01\n" +
+	"\x06labels\x18\t \x03(\v2E.yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
+	"\vdescription\x18\n" +
+	" \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\b\"\x9f\x03\n" +
 	"\x19UpdateDesktopImageRequest\x12\x1f\n" +
 	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x1c\n" +
 	"\x04name\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12\x9c\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2G.yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x06labels\x18\x04 \x03(\v2G.yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
+	"\vdescription\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x90\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x95\x03\n" +
 	"\x16CopyFromDesktopRequest\x12%\n" +
 	"\tfolder_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12\x1c\n" +
 	"\x04name\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12+\n" +
 	"\n" +
-	"desktop_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tdesktopIdJ\x04\b\x05\x10\b\"5\n" +
+	"desktop_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tdesktopId\x12\x99\x01\n" +
+	"\x06labels\x18\t \x03(\v2D.yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
+	"\vdescription\x18\n" +
+	" \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\b\"5\n" +
 	"\x18CopyDesktopImageMetadata\x12\x19\n" +
 	"\bimage_id\x18\x01 \x01(\tR\aimageId\"4\n" +
 	"\x17CopyFromDesktopMetadata\x12\x19\n" +
@@ -715,7 +777,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP()
 	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescData
 }
 
-var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_goTypes = []any{
 	(*ListDesktopImagesRequest)(nil),   // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesRequest
 	(*ListDesktopImagesResponse)(nil),  // 1: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse
@@ -728,32 +790,36 @@ var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_goTypes = []an
 	(*DeleteDesktopImageMetadata)(nil), // 8: yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageMetadata
 	(*GetDesktopImageRequest)(nil),     // 9: yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
 	(*UpdateDesktopImageMetadata)(nil), // 10: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageMetadata
-	nil,                                // 11: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
-	(*DesktopImage)(nil),               // 12: yandex.cloud.clouddesktop.v1.api.DesktopImage
-	(*fieldmaskpb.FieldMask)(nil),      // 13: google.protobuf.FieldMask
-	(*operation.Operation)(nil),        // 14: yandex.cloud.operation.Operation
+	nil,                                // 11: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.LabelsEntry
+	nil,                                // 12: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
+	nil,                                // 13: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntry
+	(*DesktopImage)(nil),               // 14: yandex.cloud.clouddesktop.v1.api.DesktopImage
+	(*fieldmaskpb.FieldMask)(nil),      // 15: google.protobuf.FieldMask
+	(*operation.Operation)(nil),        // 16: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_depIdxs = []int32{
-	12, // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse.desktop_images:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopImage
-	13, // 1: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.update_mask:type_name -> google.protobuf.FieldMask
-	11, // 2: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
-	0,  // 3: yandex.cloud.clouddesktop.v1.api.DesktopImageService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopImagesRequest
-	9,  // 4: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
-	2,  // 5: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Copy:input_type -> yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest
-	3,  // 6: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest
-	4,  // 7: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:input_type -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest
-	7,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest
-	1,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopImageService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse
-	12, // 10: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.DesktopImage
-	14, // 11: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Copy:output_type -> yandex.cloud.operation.Operation
-	14, // 12: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:output_type -> yandex.cloud.operation.Operation
-	14, // 13: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:output_type -> yandex.cloud.operation.Operation
-	14, // 14: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:output_type -> yandex.cloud.operation.Operation
-	9,  // [9:15] is the sub-list for method output_type
-	3,  // [3:9] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	14, // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse.desktop_images:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopImage
+	11, // 1: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.LabelsEntry
+	15, // 2: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.update_mask:type_name -> google.protobuf.FieldMask
+	12, // 3: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
+	13, // 4: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntry
+	0,  // 5: yandex.cloud.clouddesktop.v1.api.DesktopImageService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopImagesRequest
+	9,  // 6: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
+	2,  // 7: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Copy:input_type -> yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest
+	3,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest
+	4,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:input_type -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest
+	7,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest
+	1,  // 11: yandex.cloud.clouddesktop.v1.api.DesktopImageService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse
+	14, // 12: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.DesktopImage
+	16, // 13: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Copy:output_type -> yandex.cloud.operation.Operation
+	16, // 14: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:output_type -> yandex.cloud.operation.Operation
+	16, // 15: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:output_type -> yandex.cloud.operation.Operation
+	16, // 16: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_init() }
@@ -768,7 +834,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDesc), len(file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

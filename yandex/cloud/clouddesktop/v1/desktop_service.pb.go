@@ -29,10 +29,15 @@ const (
 type UpdatePropertiesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// To get the desktop ID use a [DesktopService.List] request.
-	DesktopId     string                 `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	DesktopId string `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	// Mask of fields that need to be update.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// New desktop name.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// New desktop labels.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// New desktop description.
+	Description   string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -93,6 +98,13 @@ func (x *UpdatePropertiesRequest) GetLabels() map[string]string {
 		return x.Labels
 	}
 	return nil
+}
+
+func (x *UpdatePropertiesRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 type StartRequest struct {
@@ -686,7 +698,13 @@ type CreateDesktopRequest struct {
 	// ID of the subnet for desktop.
 	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// List of users.
-	Users         []*User `protobuf:"bytes,23,rep,name=users,proto3" json:"users,omitempty"`
+	Users []*User `protobuf:"bytes,23,rep,name=users,proto3" json:"users,omitempty"`
+	// Name of the desktop.
+	Name string `protobuf:"bytes,24,opt,name=name,proto3" json:"name,omitempty"`
+	// Desktop labels.
+	Labels map[string]string `protobuf:"bytes,25,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Desktop description.
+	Description   string `protobuf:"bytes,26,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -740,6 +758,27 @@ func (x *CreateDesktopRequest) GetUsers() []*User {
 		return x.Users
 	}
 	return nil
+}
+
+func (x *CreateDesktopRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateDesktopRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *CreateDesktopRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 type CreateDesktopMetadata struct {
@@ -1067,8 +1106,9 @@ func (x *RestartDesktopMetadata) GetDesktopId() string {
 }
 
 type UpdateDesktopPropertiesMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DesktopId     string                 `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop.
+	DesktopId     string `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1111,8 +1151,9 @@ func (x *UpdateDesktopPropertiesMetadata) GetDesktopId() string {
 }
 
 type StartDesktopMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DesktopId     string                 `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop.
+	DesktopId     string `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1155,8 +1196,9 @@ func (x *StartDesktopMetadata) GetDesktopId() string {
 }
 
 type StopDesktopMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DesktopId     string                 `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop.
+	DesktopId     string `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1199,8 +1241,9 @@ func (x *StopDesktopMetadata) GetDesktopId() string {
 }
 
 type UpdateDesktopMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DesktopId     string                 `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop.
+	DesktopId     string `protobuf:"bytes,1,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1246,14 +1289,16 @@ var File_yandex_cloud_clouddesktop_v1_desktop_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/clouddesktop/v1/desktop_service.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/clouddesktop/v1/desktop.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\"\x94\x03\n" +
+	"2yandex/cloud/clouddesktop/v1/desktop_service.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/clouddesktop/v1/desktop.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\"\xc2\x03\n" +
 	"\x17UpdatePropertiesRequest\x12+\n" +
 	"\n" +
 	"desktop_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tdesktopId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x127\n" +
 	"\x04name\x18\x03 \x01(\tB#\xf2\xc71\x1f|[a-z]([-a-z0-9]{0,61}[a-z0-9])R\x04name\x12\x9a\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2E.yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x06labels\x18\x04 \x03(\v2E.yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
+	"\vdescription\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\";\n" +
@@ -1304,11 +1349,18 @@ const file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\xc5\x01\n" +
+	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\x81\x04\n" +
 	"\x14CreateDesktopRequest\x126\n" +
 	"\x10desktop_group_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0edesktopGroupId\x12)\n" +
 	"\tsubnet_id\x18\x04 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\bsubnetId\x12D\n" +
-	"\x05users\x18\x17 \x03(\v2&.yandex.cloud.clouddesktop.v1.api.UserB\x06\x82\xc81\x02>0R\x05usersJ\x04\b\x05\x10\x17\"6\n" +
+	"\x05users\x18\x17 \x03(\v2&.yandex.cloud.clouddesktop.v1.api.UserB\x06\x82\xc81\x02>0R\x05users\x127\n" +
+	"\x04name\x18\x18 \x01(\tB#\xf2\xc71\x1f|[a-z]([-a-z0-9]{0,61}[a-z0-9])R\x04name\x12\x97\x01\n" +
+	"\x06labels\x18\x19 \x03(\v2B.yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
+	"\vdescription\x18\x1a \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x17\"6\n" +
 	"\x15CreateDesktopMetadata\x12\x1d\n" +
 	"\n" +
 	"desktop_id\x18\x01 \x01(\tR\tdesktopId\"C\n" +
@@ -1341,7 +1393,7 @@ const file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDesc = "" +
 	"desktop_id\x18\x01 \x01(\tR\tdesktopId\"6\n" +
 	"\x15UpdateDesktopMetadata\x12\x1d\n" +
 	"\n" +
-	"desktop_id\x18\x01 \x01(\tR\tdesktopId2\xc9\x11\n" +
+	"desktop_id\x18\x01 \x01(\tR\tdesktopId2\xcc\x11\n" +
 	"\x0eDesktopService\x12\x96\x01\n" +
 	"\x03Get\x123.yandex.cloud.clouddesktop.v1.api.GetDesktopRequest\x1a).yandex.cloud.clouddesktop.v1.api.Desktop\"/\x82\xd3\xe4\x93\x02)\x12'/cloud-desktop/v1/desktops/{desktop_id}\x12\xb0\x01\n" +
 	"\n" +
@@ -1356,9 +1408,9 @@ const file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDesc = "" +
 	"\x15DeleteDesktopMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02)*'/cloud-desktop/v1/desktops/{desktop_id}\x12\xc2\x01\n" +
 	"\rResetPassword\x126.yandex.cloud.clouddesktop.v1.api.ResetPasswordRequest\x1a7.yandex.cloud.clouddesktop.v1.api.ResetPasswordResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/cloud-desktop/v1/desktops/{desktop_id}:resetPassword\x12\xbf\x01\n" +
 	"\aRestart\x120.yandex.cloud.clouddesktop.v1.api.RestartRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*!\n" +
-	"\x16RestartDesktopMetadata\x12\aDesktop\x82\xd3\xe4\x93\x024:\x01*\"//cloud-desktop/v1/desktops/{desktop_id}:restart\x12\xb8\x01\n" +
-	"\x06Update\x12/.yandex.cloud.clouddesktop.v1.api.UpdateRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2* \n" +
-	"\x15UpdateDesktopMetadata\x12\aDesktop\x82\xd3\xe4\x93\x0202./cloud-desktop/v1/desktops/{desktop_id}:update\x12\xb7\x01\n" +
+	"\x16RestartDesktopMetadata\x12\aDesktop\x82\xd3\xe4\x93\x024:\x01*\"//cloud-desktop/v1/desktops/{desktop_id}:restart\x12\xbb\x01\n" +
+	"\x06Update\x12/.yandex.cloud.clouddesktop.v1.api.UpdateRequest\x1a!.yandex.cloud.operation.Operation\"]\xb2\xd2* \n" +
+	"\x15UpdateDesktopMetadata\x12\aDesktop\x82\xd3\xe4\x93\x023:\x01*2./cloud-desktop/v1/desktops/{desktop_id}:update\x12\xb7\x01\n" +
 	"\x05Start\x12..yandex.cloud.clouddesktop.v1.api.StartRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2*\x1f\n" +
 	"\x14StartDesktopMetadata\x12\aDesktop\x82\xd3\xe4\x93\x022:\x01*\"-/cloud-desktop/v1/desktops/{desktop_id}:start\x12\xb3\x01\n" +
 	"\x04Stop\x12-.yandex.cloud.clouddesktop.v1.api.StopRequest\x1a!.yandex.cloud.operation.Operation\"Y\xb2\xd2*\x1e\n" +
@@ -1377,7 +1429,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDescGZIP() []byt
 	return file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDescData
 }
 
-var file_yandex_cloud_clouddesktop_v1_desktop_service_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_yandex_cloud_clouddesktop_v1_desktop_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_yandex_cloud_clouddesktop_v1_desktop_service_proto_goTypes = []any{
 	(*UpdatePropertiesRequest)(nil),         // 0: yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest
 	(*StartRequest)(nil),                    // 1: yandex.cloud.clouddesktop.v1.api.StartRequest
@@ -1404,49 +1456,51 @@ var file_yandex_cloud_clouddesktop_v1_desktop_service_proto_goTypes = []any{
 	(*UpdateDesktopMetadata)(nil),           // 22: yandex.cloud.clouddesktop.v1.api.UpdateDesktopMetadata
 	nil,                                     // 23: yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.LabelsEntry
 	nil,                                     // 24: yandex.cloud.clouddesktop.v1.api.RdpFileResponse.HeadersEntry
-	(*fieldmaskpb.FieldMask)(nil),           // 25: google.protobuf.FieldMask
-	(*User)(nil),                            // 26: yandex.cloud.clouddesktop.v1.api.User
-	(*Desktop)(nil),                         // 27: yandex.cloud.clouddesktop.v1.api.Desktop
-	(*operation.Operation)(nil),             // 28: yandex.cloud.operation.Operation
+	nil,                                     // 25: yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest.LabelsEntry
+	(*fieldmaskpb.FieldMask)(nil),           // 26: google.protobuf.FieldMask
+	(*User)(nil),                            // 27: yandex.cloud.clouddesktop.v1.api.User
+	(*Desktop)(nil),                         // 28: yandex.cloud.clouddesktop.v1.api.Desktop
+	(*operation.Operation)(nil),             // 29: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_clouddesktop_v1_desktop_service_proto_depIdxs = []int32{
-	25, // 0: yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.update_mask:type_name -> google.protobuf.FieldMask
+	26, // 0: yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.update_mask:type_name -> google.protobuf.FieldMask
 	23, // 1: yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest.LabelsEntry
-	26, // 2: yandex.cloud.clouddesktop.v1.api.GetRdpFileRequest.user:type_name -> yandex.cloud.clouddesktop.v1.api.User
+	27, // 2: yandex.cloud.clouddesktop.v1.api.GetRdpFileRequest.user:type_name -> yandex.cloud.clouddesktop.v1.api.User
 	24, // 3: yandex.cloud.clouddesktop.v1.api.RdpFileResponse.headers:type_name -> yandex.cloud.clouddesktop.v1.api.RdpFileResponse.HeadersEntry
-	27, // 4: yandex.cloud.clouddesktop.v1.api.ListDesktopsResponse.desktops:type_name -> yandex.cloud.clouddesktop.v1.api.Desktop
-	28, // 5: yandex.cloud.clouddesktop.v1.api.ListDesktopOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	26, // 6: yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest.users:type_name -> yandex.cloud.clouddesktop.v1.api.User
-	26, // 7: yandex.cloud.clouddesktop.v1.api.ResetPasswordRequest.user:type_name -> yandex.cloud.clouddesktop.v1.api.User
-	4,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopRequest
-	5,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopService.GetRdpFile:input_type -> yandex.cloud.clouddesktop.v1.api.GetRdpFileRequest
-	7,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopsRequest
-	9,  // 11: yandex.cloud.clouddesktop.v1.api.DesktopService.ListOperations:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopOperationsRequest
-	11, // 12: yandex.cloud.clouddesktop.v1.api.DesktopService.Create:input_type -> yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest
-	0,  // 13: yandex.cloud.clouddesktop.v1.api.DesktopService.UpdateProperties:input_type -> yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest
-	13, // 14: yandex.cloud.clouddesktop.v1.api.DesktopService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopRequest
-	15, // 15: yandex.cloud.clouddesktop.v1.api.DesktopService.ResetPassword:input_type -> yandex.cloud.clouddesktop.v1.api.ResetPasswordRequest
-	17, // 16: yandex.cloud.clouddesktop.v1.api.DesktopService.Restart:input_type -> yandex.cloud.clouddesktop.v1.api.RestartRequest
-	3,  // 17: yandex.cloud.clouddesktop.v1.api.DesktopService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateRequest
-	1,  // 18: yandex.cloud.clouddesktop.v1.api.DesktopService.Start:input_type -> yandex.cloud.clouddesktop.v1.api.StartRequest
-	2,  // 19: yandex.cloud.clouddesktop.v1.api.DesktopService.Stop:input_type -> yandex.cloud.clouddesktop.v1.api.StopRequest
-	27, // 20: yandex.cloud.clouddesktop.v1.api.DesktopService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.Desktop
-	6,  // 21: yandex.cloud.clouddesktop.v1.api.DesktopService.GetRdpFile:output_type -> yandex.cloud.clouddesktop.v1.api.RdpFileResponse
-	8,  // 22: yandex.cloud.clouddesktop.v1.api.DesktopService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopsResponse
-	10, // 23: yandex.cloud.clouddesktop.v1.api.DesktopService.ListOperations:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopOperationsResponse
-	28, // 24: yandex.cloud.clouddesktop.v1.api.DesktopService.Create:output_type -> yandex.cloud.operation.Operation
-	28, // 25: yandex.cloud.clouddesktop.v1.api.DesktopService.UpdateProperties:output_type -> yandex.cloud.operation.Operation
-	28, // 26: yandex.cloud.clouddesktop.v1.api.DesktopService.Delete:output_type -> yandex.cloud.operation.Operation
-	16, // 27: yandex.cloud.clouddesktop.v1.api.DesktopService.ResetPassword:output_type -> yandex.cloud.clouddesktop.v1.api.ResetPasswordResponse
-	28, // 28: yandex.cloud.clouddesktop.v1.api.DesktopService.Restart:output_type -> yandex.cloud.operation.Operation
-	28, // 29: yandex.cloud.clouddesktop.v1.api.DesktopService.Update:output_type -> yandex.cloud.operation.Operation
-	28, // 30: yandex.cloud.clouddesktop.v1.api.DesktopService.Start:output_type -> yandex.cloud.operation.Operation
-	28, // 31: yandex.cloud.clouddesktop.v1.api.DesktopService.Stop:output_type -> yandex.cloud.operation.Operation
-	20, // [20:32] is the sub-list for method output_type
-	8,  // [8:20] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	28, // 4: yandex.cloud.clouddesktop.v1.api.ListDesktopsResponse.desktops:type_name -> yandex.cloud.clouddesktop.v1.api.Desktop
+	29, // 5: yandex.cloud.clouddesktop.v1.api.ListDesktopOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	27, // 6: yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest.users:type_name -> yandex.cloud.clouddesktop.v1.api.User
+	25, // 7: yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest.LabelsEntry
+	27, // 8: yandex.cloud.clouddesktop.v1.api.ResetPasswordRequest.user:type_name -> yandex.cloud.clouddesktop.v1.api.User
+	4,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopRequest
+	5,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopService.GetRdpFile:input_type -> yandex.cloud.clouddesktop.v1.api.GetRdpFileRequest
+	7,  // 11: yandex.cloud.clouddesktop.v1.api.DesktopService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopsRequest
+	9,  // 12: yandex.cloud.clouddesktop.v1.api.DesktopService.ListOperations:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopOperationsRequest
+	11, // 13: yandex.cloud.clouddesktop.v1.api.DesktopService.Create:input_type -> yandex.cloud.clouddesktop.v1.api.CreateDesktopRequest
+	0,  // 14: yandex.cloud.clouddesktop.v1.api.DesktopService.UpdateProperties:input_type -> yandex.cloud.clouddesktop.v1.api.UpdatePropertiesRequest
+	13, // 15: yandex.cloud.clouddesktop.v1.api.DesktopService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopRequest
+	15, // 16: yandex.cloud.clouddesktop.v1.api.DesktopService.ResetPassword:input_type -> yandex.cloud.clouddesktop.v1.api.ResetPasswordRequest
+	17, // 17: yandex.cloud.clouddesktop.v1.api.DesktopService.Restart:input_type -> yandex.cloud.clouddesktop.v1.api.RestartRequest
+	3,  // 18: yandex.cloud.clouddesktop.v1.api.DesktopService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateRequest
+	1,  // 19: yandex.cloud.clouddesktop.v1.api.DesktopService.Start:input_type -> yandex.cloud.clouddesktop.v1.api.StartRequest
+	2,  // 20: yandex.cloud.clouddesktop.v1.api.DesktopService.Stop:input_type -> yandex.cloud.clouddesktop.v1.api.StopRequest
+	28, // 21: yandex.cloud.clouddesktop.v1.api.DesktopService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.Desktop
+	6,  // 22: yandex.cloud.clouddesktop.v1.api.DesktopService.GetRdpFile:output_type -> yandex.cloud.clouddesktop.v1.api.RdpFileResponse
+	8,  // 23: yandex.cloud.clouddesktop.v1.api.DesktopService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopsResponse
+	10, // 24: yandex.cloud.clouddesktop.v1.api.DesktopService.ListOperations:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopOperationsResponse
+	29, // 25: yandex.cloud.clouddesktop.v1.api.DesktopService.Create:output_type -> yandex.cloud.operation.Operation
+	29, // 26: yandex.cloud.clouddesktop.v1.api.DesktopService.UpdateProperties:output_type -> yandex.cloud.operation.Operation
+	29, // 27: yandex.cloud.clouddesktop.v1.api.DesktopService.Delete:output_type -> yandex.cloud.operation.Operation
+	16, // 28: yandex.cloud.clouddesktop.v1.api.DesktopService.ResetPassword:output_type -> yandex.cloud.clouddesktop.v1.api.ResetPasswordResponse
+	29, // 29: yandex.cloud.clouddesktop.v1.api.DesktopService.Restart:output_type -> yandex.cloud.operation.Operation
+	29, // 30: yandex.cloud.clouddesktop.v1.api.DesktopService.Update:output_type -> yandex.cloud.operation.Operation
+	29, // 31: yandex.cloud.clouddesktop.v1.api.DesktopService.Start:output_type -> yandex.cloud.operation.Operation
+	29, // 32: yandex.cloud.clouddesktop.v1.api.DesktopService.Stop:output_type -> yandex.cloud.operation.Operation
+	21, // [21:33] is the sub-list for method output_type
+	9,  // [9:21] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_clouddesktop_v1_desktop_service_proto_init() }
@@ -1461,7 +1515,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDesc), len(file_yandex_cloud_clouddesktop_v1_desktop_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

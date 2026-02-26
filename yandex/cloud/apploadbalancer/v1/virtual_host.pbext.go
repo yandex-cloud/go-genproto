@@ -158,6 +158,22 @@ func (m *Route) SetDisableSecurityProfile(v bool) {
 	m.DisableSecurityProfile = v
 }
 
+func (m *Route) SetClientCertificateForward(v *ClientCertificateForward) {
+	m.ClientCertificateForward = v
+}
+
+func (m *ClientCertificateForward) SetHttpHeader(v string) {
+	m.HttpHeader = v
+}
+
+func (m *ClientCertificateForward) SetIssuerHeaderName(v string) {
+	m.IssuerHeaderName = v
+}
+
+func (m *ClientCertificateForward) SetSubjectHeaderName(v string) {
+	m.SubjectHeaderName = v
+}
+
 type HttpRoute_Action = isHttpRoute_Action
 
 func (m *HttpRoute) SetAction(v HttpRoute_Action) {

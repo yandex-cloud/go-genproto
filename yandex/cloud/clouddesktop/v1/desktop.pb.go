@@ -126,11 +126,15 @@ type Desktop struct {
 	// Name of the desktop.
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
 	// Resources of the desktop.
-	Resources         *Resources          `protobuf:"bytes,21,opt,name=resources,proto3" json:"resources,omitempty"`
+	Resources *Resources `protobuf:"bytes,21,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Network interfaces of the desktop.
 	NetworkInterfaces []*NetworkInterface `protobuf:"bytes,22,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
-	Users             []*User             `protobuf:"bytes,23,rep,name=users,proto3" json:"users,omitempty"`
+	// Users of the desktop.
+	Users []*User `protobuf:"bytes,23,rep,name=users,proto3" json:"users,omitempty"`
 	// Labels of the desktop.
-	Labels        map[string]string `protobuf:"bytes,24,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,24,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Description of the desktop.
+	Description   string `protobuf:"bytes,25,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -235,11 +239,24 @@ func (x *Desktop) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *Desktop) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 type Resources struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Memory        int64                  `protobuf:"varint,1,opt,name=memory,proto3" json:"memory,omitempty"`
-	Cores         int64                  `protobuf:"varint,2,opt,name=cores,proto3" json:"cores,omitempty"`
-	CoreFraction  int64                  `protobuf:"varint,3,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The amount of memory available to the desktop, specified in bytes.
+	Memory int64 `protobuf:"varint,1,opt,name=memory,proto3" json:"memory,omitempty"`
+	// The number of cores available to the desktop.
+	Cores int64 `protobuf:"varint,2,opt,name=cores,proto3" json:"cores,omitempty"`
+	// Baseline level of CPU performance with the ability to burst performance above that baseline level.
+	// This field sets baseline performance for each core.
+	//
+	// For example, if you need only 5% of the CPU performance, you can set core_fraction=5.
+	CoreFraction  int64 `protobuf:"varint,3,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -350,9 +367,11 @@ func (x *User) GetSubjectType() string {
 }
 
 type NetworkInterface struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	NetworkId     string                 `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	SubnetId      string                 `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the network.
+	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	// ID of the subnet.
+	SubnetId      string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -405,7 +424,7 @@ var File_yandex_cloud_clouddesktop_v1_desktop_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/clouddesktop/v1/desktop.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xbf\x06\n" +
+	"*yandex/cloud/clouddesktop/v1/desktop.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe1\x06\n" +
 	"\aDesktop\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12(\n" +
@@ -417,7 +436,8 @@ const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\tresources\x18\x15 \x01(\v2+.yandex.cloud.clouddesktop.v1.api.ResourcesR\tresources\x12a\n" +
 	"\x12network_interfaces\x18\x16 \x03(\v22.yandex.cloud.clouddesktop.v1.api.NetworkInterfaceR\x11networkInterfaces\x12<\n" +
 	"\x05users\x18\x17 \x03(\v2&.yandex.cloud.clouddesktop.v1.api.UserR\x05users\x12M\n" +
-	"\x06labels\x18\x18 \x03(\v25.yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntryR\x06labels\x1a9\n" +
+	"\x06labels\x18\x18 \x03(\v25.yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntryR\x06labels\x12 \n" +
+	"\vdescription\x18\x19 \x01(\tR\vdescription\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc1\x01\n" +

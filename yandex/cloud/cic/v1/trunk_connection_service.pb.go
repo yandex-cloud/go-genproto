@@ -225,6 +225,8 @@ type CreateTrunkConnectionRequest struct {
 	// ID of the folder that the trunkConnection belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// ID of the region that the trunkConnection belongs to.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// Special trunkConnection config
 	//
@@ -235,8 +237,6 @@ type CreateTrunkConnectionRequest struct {
 	//	*CreateTrunkConnectionRequest_PartnerJointInfo
 	Joint isCreateTrunkConnectionRequest_Joint `protobuf_oneof:"joint"`
 	// ID of pointOfPresence that the trunkConnection is deployed on.
-	// Optional.
-	// If is not set scheduler selects it by himself.
 	PointOfPresenceId *wrapperspb.StringValue `protobuf:"bytes,13,opt,name=point_of_presence_id,json=pointOfPresenceId,proto3" json:"point_of_presence_id,omitempty"`
 	// Capacity of the trunkConnection
 	Capacity TrunkConnection_Capacity `protobuf:"varint,17,opt,name=capacity,proto3,enum=yandex.cloud.cic.v1.TrunkConnection_Capacity" json:"capacity,omitempty"`
@@ -306,6 +306,7 @@ func (x *CreateTrunkConnectionRequest) GetFolderId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
 func (x *CreateTrunkConnectionRequest) GetRegionId() string {
 	if x != nil {
 		return x.RegionId
@@ -458,10 +459,12 @@ type UpdateTrunkConnectionRequest struct {
 	// Optional description of the trunkConnection. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the region that the trunkConnection belongs to.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
 	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// ID of pointOfPresence that the trunkConnection is deployed on.
-	// Optional.
-	// If is not set scheduler selects it by himself.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
 	PointOfPresenceId *wrapperspb.StringValue `protobuf:"bytes,13,opt,name=point_of_presence_id,json=pointOfPresenceId,proto3" json:"point_of_presence_id,omitempty"`
 	// Capacity of the trunkConnection
 	Capacity TrunkConnection_Capacity `protobuf:"varint,17,opt,name=capacity,proto3,enum=yandex.cloud.cic.v1.TrunkConnection_Capacity" json:"capacity,omitempty"`
@@ -538,6 +541,7 @@ func (x *UpdateTrunkConnectionRequest) GetDescription() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
 func (x *UpdateTrunkConnectionRequest) GetRegionId() string {
 	if x != nil {
 		return x.RegionId
@@ -545,6 +549,7 @@ func (x *UpdateTrunkConnectionRequest) GetRegionId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
 func (x *UpdateTrunkConnectionRequest) GetPointOfPresenceId() *wrapperspb.StringValue {
 	if x != nil {
 		return x.PointOfPresenceId
@@ -1040,8 +1045,6 @@ func (x *CreateTrunkConnectionRequest_LagDirectJoint) GetLagAllocationSettings()
 type CreateTrunkConnectionRequest_PartnerJoint struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of partner that the trunkConnection is deployed on.
-	// Optional.
-	// If is not set scheduler selects it by himself.
 	PartnerId     *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1101,44 +1104,46 @@ const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x99\x01\n" +
 	"\x1cListTrunkConnectionsResponse\x12Q\n" +
 	"\x11trunk_connections\x18\x01 \x03(\v2$.yandex.cloud.cic.v1.TrunkConnectionR\x10trunkConnections\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x95\v\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd3\v\n" +
 	"\x1cCreateTrunkConnectionRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
-	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x1b\n" +
-	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12\x82\x01\n" +
+	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12)\n" +
+	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tregion_id\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12\x82\x01\n" +
 	"\x18single_port_direct_joint\x18\n" +
 	" \x01(\v2G.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.SinglePortDirectJointH\x00R\x15singlePortDirectJoint\x12l\n" +
 	"\x10lag_direct_joint\x18\v \x01(\v2@.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LagDirectJointH\x00R\x0elagDirectJoint\x12n\n" +
-	"\x12partner_joint_info\x18\f \x01(\v2>.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.PartnerJointH\x00R\x10partnerJointInfo\x12M\n" +
-	"\x14point_of_presence_id\x18\r \x01(\v2\x1c.google.protobuf.StringValueR\x11pointOfPresenceId\x12I\n" +
-	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityR\bcapacity\x12\x92\x01\n" +
+	"\x12partner_joint_info\x18\f \x01(\v2>.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.PartnerJointH\x00R\x10partnerJointInfo\x12S\n" +
+	"\x14point_of_presence_id\x18\r \x01(\v2\x1c.google.protobuf.StringValueB\x04\xe8\xc71\x01R\x11pointOfPresenceId\x12O\n" +
+	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityB\x04\xe8\xc71\x01R\bcapacity\x12\x92\x01\n" +
 	"\x06labels\x18\x12 \x03(\v2=.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
 	"\x13deletion_protection\x18\x14 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1au\n" +
-	"\x15SinglePortDirectJoint\x12V\n" +
-	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeR\x0ftransceiverTypeJ\x04\b\x02\x10\x05\x1a\xe0\x01\n" +
-	"\x0eLagDirectJoint\x12V\n" +
-	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeR\x0ftransceiverType\x12p\n" +
-	"\x17lag_allocation_settings\x18\x03 \x01(\v28.yandex.cloud.cic.v1.common.LagAllocationSettingsRequestR\x15lagAllocationSettingsJ\x04\b\x02\x10\x03\x1aQ\n" +
-	"\fPartnerJoint\x12;\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a{\n" +
+	"\x15SinglePortDirectJoint\x12\\\n" +
+	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeB\x04\xe8\xc71\x01R\x0ftransceiverTypeJ\x04\b\x02\x10\x05\x1a\xec\x01\n" +
+	"\x0eLagDirectJoint\x12\\\n" +
+	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeB\x04\xe8\xc71\x01R\x0ftransceiverType\x12v\n" +
+	"\x17lag_allocation_settings\x18\x03 \x01(\v28.yandex.cloud.cic.v1.common.LagAllocationSettingsRequestB\x04\xe8\xc71\x01R\x15lagAllocationSettingsJ\x04\b\x02\x10\x03\x1aW\n" +
+	"\fPartnerJoint\x12A\n" +
 	"\n" +
-	"partner_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\tpartnerIdJ\x04\b\x01\x10\x04B\a\n" +
+	"partner_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x04\xe8\xc71\x01R\tpartnerIdJ\x04\b\x01\x10\x04B\a\n" +
 	"\x05jointJ\x04\b\x03\x10\x04J\x04\b\x06\x10\n" +
 	"J\x04\b\x0e\x10\x11J\x04\b\x13\x10\x14\"O\n" +
 	"\x1dCreateTrunkConnectionMetadata\x12.\n" +
-	"\x13trunk_connection_id\x18\x01 \x01(\tR\x11trunkConnectionId\"\xda\x05\n" +
+	"\x13trunk_connection_id\x18\x01 \x01(\tR\x11trunkConnectionId\"\xf0\x05\n" +
 	"\x1cUpdateTrunkConnectionRequest\x12<\n" +
 	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12B\n" +
 	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
-	"\tregion_id\x18\a \x01(\tR\bregionId\x12M\n" +
-	"\x14point_of_presence_id\x18\r \x01(\v2\x1c.google.protobuf.StringValueR\x11pointOfPresenceId\x12I\n" +
-	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityR\bcapacity\x12\x92\x01\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12'\n" +
+	"\tregion_id\x18\a \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12Q\n" +
+	"\x14point_of_presence_id\x18\r \x01(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\x11pointOfPresenceId\x12O\n" +
+	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityB\x04\xe8\xc71\x01R\bcapacity\x12\x92\x01\n" +
 	"\x06labels\x18\x12 \x03(\v2=.yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
 	"\x13deletion_protection\x18\x14 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -1154,12 +1159,13 @@ const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12@\n" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"M\n" +
 	"\x1bMoveTrunkConnectionMetadata\x12.\n" +
-	"\x13trunk_connection_id\x18\x01 \x01(\tR\x11trunkConnectionId\"\xa0\x01\n" +
+	"\x13trunk_connection_id\x18\x01 \x01(\tR\x11trunkConnectionId\"\xb7\x01\n" +
 	"$ListTrunkConnectionOperationsRequest\x12<\n" +
-	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
+	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"\x92\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x92\x01\n" +
 	"%ListTrunkConnectionOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +

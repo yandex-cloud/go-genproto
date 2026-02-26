@@ -46,6 +46,14 @@ type OpenSearchConfig2 struct {
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-cluster-level-index-settings).
 	FielddataCacheSize string `protobuf:"bytes,4,opt,name=fielddata_cache_size,proto3" json:"fielddata_cache_size,omitempty"`
+	// The maximum number of aggregation buckets allowed in a single response. Default is 65535
+	//
+	// Default value: **65535**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/search-settings).
+	SearchMaxBuckets *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=search_max_buckets,proto3" json:"search_max_buckets,omitempty"`
 	// Allowed remote hosts
 	//
 	// Change of the setting is applied with restart.
@@ -98,6 +106,13 @@ func (x *OpenSearchConfig2) GetFielddataCacheSize() string {
 		return x.FielddataCacheSize
 	}
 	return ""
+}
+
+func (x *OpenSearchConfig2) GetSearchMaxBuckets() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.SearchMaxBuckets
+	}
+	return nil
 }
 
 func (x *OpenSearchConfig2) GetReindexRemoteWhitelist() string {
@@ -174,11 +189,12 @@ var File_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe4\x01\n" +
+	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xbd\x02\n" +
 	"\x11OpenSearchConfig2\x12Y\n" +
 	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x10max_clause_count\x122\n" +
-	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x14fielddata_cache_size\x12:\n" +
-	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelistJ\x04\b\x05\x10\x06\"\xbd\x02\n" +
+	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x14fielddata_cache_size\x12]\n" +
+	"\x12search_max_buckets\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12search_max_buckets\x12:\n" +
+	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelist\"\xbd\x02\n" +
 	"\x14OpenSearchConfigSet2\x12i\n" +
 	"\x10effective_config\x18\x01 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12Y\n" +
 	"\vuser_config\x18\x02 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2R\n" +
@@ -206,14 +222,15 @@ var file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_goTypes = []any{
 }
 var file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_depIdxs = []int32{
 	2, // 0: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2.max_clause_count:type_name -> google.protobuf.Int64Value
-	0, // 1: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.effective_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	0, // 2: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.user_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	0, // 3: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.default_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 1: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2.search_max_buckets:type_name -> google.protobuf.Int64Value
+	0, // 2: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.effective_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	0, // 3: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.user_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	0, // 4: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.default_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_init() }

@@ -75,12 +75,15 @@ func (x *GetAddressRequest) GetAddressId() string {
 
 type GetAddressByValueRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// External ipv4 address specification.
-	//
 	// Types that are valid to be assigned to Address:
 	//
 	//	*GetAddressByValueRequest_ExternalIpv4Address
-	Address       isGetAddressByValueRequest_Address `protobuf_oneof:"address"`
+	//	*GetAddressByValueRequest_InternalIpv4Address
+	Address isGetAddressByValueRequest_Address `protobuf_oneof:"address"`
+	// Types that are valid to be assigned to Scope:
+	//
+	//	*GetAddressByValueRequest_SubnetId
+	Scope         isGetAddressByValueRequest_Scope `protobuf_oneof:"scope"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -131,15 +134,59 @@ func (x *GetAddressByValueRequest) GetExternalIpv4Address() string {
 	return ""
 }
 
+func (x *GetAddressByValueRequest) GetInternalIpv4Address() string {
+	if x != nil {
+		if x, ok := x.Address.(*GetAddressByValueRequest_InternalIpv4Address); ok {
+			return x.InternalIpv4Address
+		}
+	}
+	return ""
+}
+
+func (x *GetAddressByValueRequest) GetScope() isGetAddressByValueRequest_Scope {
+	if x != nil {
+		return x.Scope
+	}
+	return nil
+}
+
+func (x *GetAddressByValueRequest) GetSubnetId() string {
+	if x != nil {
+		if x, ok := x.Scope.(*GetAddressByValueRequest_SubnetId); ok {
+			return x.SubnetId
+		}
+	}
+	return ""
+}
+
 type isGetAddressByValueRequest_Address interface {
 	isGetAddressByValueRequest_Address()
 }
 
 type GetAddressByValueRequest_ExternalIpv4Address struct {
+	// External ipv4 address specification.
 	ExternalIpv4Address string `protobuf:"bytes,1,opt,name=external_ipv4_address,json=externalIpv4Address,proto3,oneof"`
 }
 
+type GetAddressByValueRequest_InternalIpv4Address struct {
+	// Internal ipv4 address specification.
+	InternalIpv4Address string `protobuf:"bytes,2,opt,name=internal_ipv4_address,json=internalIpv4Address,proto3,oneof"`
+}
+
 func (*GetAddressByValueRequest_ExternalIpv4Address) isGetAddressByValueRequest_Address() {}
+
+func (*GetAddressByValueRequest_InternalIpv4Address) isGetAddressByValueRequest_Address() {}
+
+type isGetAddressByValueRequest_Scope interface {
+	isGetAddressByValueRequest_Scope()
+}
+
+type GetAddressByValueRequest_SubnetId struct {
+	// subnet where address was allocated
+	SubnetId string `protobuf:"bytes,5,opt,name=subnet_id,json=subnetId,proto3,oneof"`
+}
+
+func (*GetAddressByValueRequest_SubnetId) isGetAddressByValueRequest_Scope() {}
 
 type ListAddressesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -283,6 +330,131 @@ func (x *ListAddressesResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ListAddressesBySubnetRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the subnet to list addresses in.
+	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than `page_size`, the service returns a [ListAddressesBySubnetResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListAddressesBySubnetResponse.next_page_token] returned by a previous list request.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAddressesBySubnetRequest) Reset() {
+	*x = ListAddressesBySubnetRequest{}
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAddressesBySubnetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAddressesBySubnetRequest) ProtoMessage() {}
+
+func (x *ListAddressesBySubnetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAddressesBySubnetRequest.ProtoReflect.Descriptor instead.
+func (*ListAddressesBySubnetRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListAddressesBySubnetRequest) GetSubnetId() string {
+	if x != nil {
+		return x.SubnetId
+	}
+	return ""
+}
+
+func (x *ListAddressesBySubnetRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAddressesBySubnetRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListAddressesBySubnetResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of addresses.
+	Addresses []*Address `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListAddressesBySubnetRequest.page_size], use `next_page_token` as the value
+	// for the [ListAddressesBySubnetRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAddressesBySubnetResponse) Reset() {
+	*x = ListAddressesBySubnetResponse{}
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAddressesBySubnetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAddressesBySubnetResponse) ProtoMessage() {}
+
+func (x *ListAddressesBySubnetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAddressesBySubnetResponse.ProtoReflect.Descriptor instead.
+func (*ListAddressesBySubnetResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListAddressesBySubnetResponse) GetAddresses() []*Address {
+	if x != nil {
+		return x.Addresses
+	}
+	return nil
+}
+
+func (x *ListAddressesBySubnetResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 type CreateAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a address in.
@@ -296,11 +468,10 @@ type CreateAddressRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Address labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// External ipv4 address specification.
-	//
 	// Types that are valid to be assigned to AddressSpec:
 	//
 	//	*CreateAddressRequest_ExternalIpv4AddressSpec
+	//	*CreateAddressRequest_InternalIpv4AddressSpec
 	AddressSpec isCreateAddressRequest_AddressSpec `protobuf_oneof:"address_spec"`
 	// Specifies if address protected from deletion.
 	DeletionProtection bool `protobuf:"varint,10,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
@@ -312,7 +483,7 @@ type CreateAddressRequest struct {
 
 func (x *CreateAddressRequest) Reset() {
 	*x = CreateAddressRequest{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +495,7 @@ func (x *CreateAddressRequest) String() string {
 func (*CreateAddressRequest) ProtoMessage() {}
 
 func (x *CreateAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +508,7 @@ func (x *CreateAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAddressRequest.ProtoReflect.Descriptor instead.
 func (*CreateAddressRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateAddressRequest) GetFolderId() string {
@@ -384,6 +555,15 @@ func (x *CreateAddressRequest) GetExternalIpv4AddressSpec() *ExternalIpv4Address
 	return nil
 }
 
+func (x *CreateAddressRequest) GetInternalIpv4AddressSpec() *InternalIpv4AddressSpec {
+	if x != nil {
+		if x, ok := x.AddressSpec.(*CreateAddressRequest_InternalIpv4AddressSpec); ok {
+			return x.InternalIpv4AddressSpec
+		}
+	}
+	return nil
+}
+
 func (x *CreateAddressRequest) GetDeletionProtection() bool {
 	if x != nil {
 		return x.DeletionProtection
@@ -403,10 +583,18 @@ type isCreateAddressRequest_AddressSpec interface {
 }
 
 type CreateAddressRequest_ExternalIpv4AddressSpec struct {
+	// External ipv4 address specification.
 	ExternalIpv4AddressSpec *ExternalIpv4AddressSpec `protobuf:"bytes,5,opt,name=external_ipv4_address_spec,json=externalIpv4AddressSpec,proto3,oneof"`
 }
 
+type CreateAddressRequest_InternalIpv4AddressSpec struct {
+	// Internal ipv4 address specification.
+	InternalIpv4AddressSpec *InternalIpv4AddressSpec `protobuf:"bytes,6,opt,name=internal_ipv4_address_spec,json=internalIpv4AddressSpec,proto3,oneof"`
+}
+
 func (*CreateAddressRequest_ExternalIpv4AddressSpec) isCreateAddressRequest_AddressSpec() {}
+
+func (*CreateAddressRequest_InternalIpv4AddressSpec) isCreateAddressRequest_AddressSpec() {}
 
 type ExternalIpv4AddressSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -422,7 +610,7 @@ type ExternalIpv4AddressSpec struct {
 
 func (x *ExternalIpv4AddressSpec) Reset() {
 	*x = ExternalIpv4AddressSpec{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -434,7 +622,7 @@ func (x *ExternalIpv4AddressSpec) String() string {
 func (*ExternalIpv4AddressSpec) ProtoMessage() {}
 
 func (x *ExternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -447,7 +635,7 @@ func (x *ExternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExternalIpv4AddressSpec.ProtoReflect.Descriptor instead.
 func (*ExternalIpv4AddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ExternalIpv4AddressSpec) GetAddress() string {
@@ -471,6 +659,82 @@ func (x *ExternalIpv4AddressSpec) GetRequirements() *AddressRequirements {
 	return nil
 }
 
+type InternalIpv4AddressSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Value of address.
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"` // if unspecified, one will be automatically allocated from the subnet
+	// Types that are valid to be assigned to Scope:
+	//
+	//	*InternalIpv4AddressSpec_SubnetId
+	Scope         isInternalIpv4AddressSpec_Scope `protobuf_oneof:"scope"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InternalIpv4AddressSpec) Reset() {
+	*x = InternalIpv4AddressSpec{}
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InternalIpv4AddressSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InternalIpv4AddressSpec) ProtoMessage() {}
+
+func (x *InternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InternalIpv4AddressSpec.ProtoReflect.Descriptor instead.
+func (*InternalIpv4AddressSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *InternalIpv4AddressSpec) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *InternalIpv4AddressSpec) GetScope() isInternalIpv4AddressSpec_Scope {
+	if x != nil {
+		return x.Scope
+	}
+	return nil
+}
+
+func (x *InternalIpv4AddressSpec) GetSubnetId() string {
+	if x != nil {
+		if x, ok := x.Scope.(*InternalIpv4AddressSpec_SubnetId); ok {
+			return x.SubnetId
+		}
+	}
+	return ""
+}
+
+type isInternalIpv4AddressSpec_Scope interface {
+	isInternalIpv4AddressSpec_Scope()
+}
+
+type InternalIpv4AddressSpec_SubnetId struct {
+	// Subnet from which the address will be allocated.
+	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3,oneof"`
+}
+
+func (*InternalIpv4AddressSpec_SubnetId) isInternalIpv4AddressSpec_Scope() {}
+
 type DnsRecordSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. DNS record name (absolute or relative to the DNS zone in use).
@@ -487,7 +751,7 @@ type DnsRecordSpec struct {
 
 func (x *DnsRecordSpec) Reset() {
 	*x = DnsRecordSpec{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -499,7 +763,7 @@ func (x *DnsRecordSpec) String() string {
 func (*DnsRecordSpec) ProtoMessage() {}
 
 func (x *DnsRecordSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -512,7 +776,7 @@ func (x *DnsRecordSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DnsRecordSpec.ProtoReflect.Descriptor instead.
 func (*DnsRecordSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DnsRecordSpec) GetFqdn() string {
@@ -553,7 +817,7 @@ type CreateAddressMetadata struct {
 
 func (x *CreateAddressMetadata) Reset() {
 	*x = CreateAddressMetadata{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -565,7 +829,7 @@ func (x *CreateAddressMetadata) String() string {
 func (*CreateAddressMetadata) ProtoMessage() {}
 
 func (x *CreateAddressMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -578,7 +842,7 @@ func (x *CreateAddressMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAddressMetadata.ProtoReflect.Descriptor instead.
 func (*CreateAddressMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateAddressMetadata) GetAddressId() string {
@@ -621,7 +885,7 @@ type UpdateAddressRequest struct {
 
 func (x *UpdateAddressRequest) Reset() {
 	*x = UpdateAddressRequest{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -633,7 +897,7 @@ func (x *UpdateAddressRequest) String() string {
 func (*UpdateAddressRequest) ProtoMessage() {}
 
 func (x *UpdateAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,7 +910,7 @@ func (x *UpdateAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAddressRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAddressRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateAddressRequest) GetAddressId() string {
@@ -715,7 +979,7 @@ type UpdateAddressMetadata struct {
 
 func (x *UpdateAddressMetadata) Reset() {
 	*x = UpdateAddressMetadata{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +991,7 @@ func (x *UpdateAddressMetadata) String() string {
 func (*UpdateAddressMetadata) ProtoMessage() {}
 
 func (x *UpdateAddressMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +1004,7 @@ func (x *UpdateAddressMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAddressMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateAddressMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateAddressMetadata) GetAddressId() string {
@@ -762,7 +1026,7 @@ type DeleteAddressRequest struct {
 
 func (x *DeleteAddressRequest) Reset() {
 	*x = DeleteAddressRequest{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -774,7 +1038,7 @@ func (x *DeleteAddressRequest) String() string {
 func (*DeleteAddressRequest) ProtoMessage() {}
 
 func (x *DeleteAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -787,7 +1051,7 @@ func (x *DeleteAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAddressRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAddressRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DeleteAddressRequest) GetAddressId() string {
@@ -807,7 +1071,7 @@ type DeleteAddressMetadata struct {
 
 func (x *DeleteAddressMetadata) Reset() {
 	*x = DeleteAddressMetadata{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -819,7 +1083,7 @@ func (x *DeleteAddressMetadata) String() string {
 func (*DeleteAddressMetadata) ProtoMessage() {}
 
 func (x *DeleteAddressMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -832,7 +1096,7 @@ func (x *DeleteAddressMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAddressMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteAddressMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DeleteAddressMetadata) GetAddressId() string {
@@ -862,7 +1126,7 @@ type ListAddressOperationsRequest struct {
 
 func (x *ListAddressOperationsRequest) Reset() {
 	*x = ListAddressOperationsRequest{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -874,7 +1138,7 @@ func (x *ListAddressOperationsRequest) String() string {
 func (*ListAddressOperationsRequest) ProtoMessage() {}
 
 func (x *ListAddressOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -887,7 +1151,7 @@ func (x *ListAddressOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAddressOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListAddressOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListAddressOperationsRequest) GetAddressId() string {
@@ -927,7 +1191,7 @@ type ListAddressOperationsResponse struct {
 
 func (x *ListAddressOperationsResponse) Reset() {
 	*x = ListAddressOperationsResponse{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -939,7 +1203,7 @@ func (x *ListAddressOperationsResponse) String() string {
 func (*ListAddressOperationsResponse) ProtoMessage() {}
 
 func (x *ListAddressOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -952,7 +1216,7 @@ func (x *ListAddressOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAddressOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListAddressOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListAddressOperationsResponse) GetOperations() []*operation.Operation {
@@ -981,7 +1245,7 @@ type MoveAddressRequest struct {
 
 func (x *MoveAddressRequest) Reset() {
 	*x = MoveAddressRequest{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -993,7 +1257,7 @@ func (x *MoveAddressRequest) String() string {
 func (*MoveAddressRequest) ProtoMessage() {}
 
 func (x *MoveAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1006,7 +1270,7 @@ func (x *MoveAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveAddressRequest.ProtoReflect.Descriptor instead.
 func (*MoveAddressRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *MoveAddressRequest) GetAddressId() string {
@@ -1033,7 +1297,7 @@ type MoveAddressMetadata struct {
 
 func (x *MoveAddressMetadata) Reset() {
 	*x = MoveAddressMetadata{}
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +1309,7 @@ func (x *MoveAddressMetadata) String() string {
 func (*MoveAddressMetadata) ProtoMessage() {}
 
 func (x *MoveAddressMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1058,7 +1322,7 @@ func (x *MoveAddressMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveAddressMetadata.ProtoReflect.Descriptor instead.
 func (*MoveAddressMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *MoveAddressMetadata) GetAddressId() string {
@@ -1075,10 +1339,13 @@ const file_yandex_cloud_vpc_v1_address_service_proto_rawDesc = "" +
 	")yandex/cloud/vpc/v1/address_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a!yandex/cloud/vpc/v1/address.proto\"@\n" +
 	"\x11GetAddressRequest\x12+\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\"[\n" +
+	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\"\xc9\x01\n" +
 	"\x18GetAddressByValueRequest\x124\n" +
-	"\x15external_ipv4_address\x18\x01 \x01(\tH\x00R\x13externalIpv4AddressB\t\n" +
-	"\aaddress\"\xac\x01\n" +
+	"\x15external_ipv4_address\x18\x01 \x01(\tH\x00R\x13externalIpv4Address\x124\n" +
+	"\x15internal_ipv4_address\x18\x02 \x01(\tH\x00R\x13internalIpv4Address\x12'\n" +
+	"\tsubnet_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50H\x01R\bsubnetIdB\t\n" +
+	"\aaddressB\a\n" +
+	"\x05scopeJ\x04\b\x03\x10\x05\"\xac\x01\n" +
 	"\x14ListAddressesRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -1088,25 +1355,39 @@ const file_yandex_cloud_vpc_v1_address_service_proto_rawDesc = "" +
 	"\x06filter\x18\x04 \x01(\tR\x06filter\"{\n" +
 	"\x15ListAddressesResponse\x12:\n" +
 	"\taddresses\x18\x01 \x03(\v2\x1c.yandex.cloud.vpc.v1.AddressR\taddresses\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfc\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\x01\n" +
+	"\x1cListAddressesBySubnetRequest\x12)\n" +
+	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x83\x01\n" +
+	"\x1dListAddressesBySubnetResponse\x12:\n" +
+	"\taddresses\x18\x01 \x03(\v2\x1c.yandex.cloud.vpc.v1.AddressR\taddresses\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe9\x05\n" +
 	"\x14CreateAddressRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12B\n" +
 	"\x04name\x18\x02 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
 	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12k\n" +
-	"\x1aexternal_ipv4_address_spec\x18\x05 \x01(\v2,.yandex.cloud.vpc.v1.ExternalIpv4AddressSpecH\x00R\x17externalIpv4AddressSpec\x12/\n" +
+	"\x1aexternal_ipv4_address_spec\x18\x05 \x01(\v2,.yandex.cloud.vpc.v1.ExternalIpv4AddressSpecH\x00R\x17externalIpv4AddressSpec\x12k\n" +
+	"\x1ainternal_ipv4_address_spec\x18\x06 \x01(\v2,.yandex.cloud.vpc.v1.InternalIpv4AddressSpecH\x00R\x17internalIpv4AddressSpec\x12/\n" +
 	"\x13deletion_protection\x18\n" +
 	" \x01(\bR\x12deletionProtection\x12L\n" +
 	"\x10dns_record_specs\x18\v \x03(\v2\".yandex.cloud.vpc.v1.DnsRecordSpecR\x0ednsRecordSpecs\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\faddress_specJ\x04\b\x06\x10\n" +
+	"\faddress_specJ\x04\b\a\x10\n" +
 	"\"\x9a\x01\n" +
 	"\x17ExternalIpv4AddressSpec\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x17\n" +
 	"\azone_id\x18\x02 \x01(\tR\x06zoneId\x12L\n" +
-	"\frequirements\x18\x03 \x01(\v2(.yandex.cloud.vpc.v1.AddressRequirementsR\frequirements\"\x86\x01\n" +
+	"\frequirements\x18\x03 \x01(\v2(.yandex.cloud.vpc.v1.AddressRequirementsR\frequirements\"u\n" +
+	"\x17InternalIpv4AddressSpec\x12\"\n" +
+	"\aaddress\x18\x01 \x01(\tB\b\x8a\xc81\x04<=16R\aaddress\x12'\n" +
+	"\tsubnet_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\bsubnetIdB\r\n" +
+	"\x05scope\x12\x04\xc0\xc11\x01\"\x86\x01\n" +
 	"\rDnsRecordSpec\x12\x18\n" +
 	"\x04fqdn\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04fqdn\x12*\n" +
 	"\vdns_zone_id\x18\x02 \x01(\tB\n" +
@@ -1157,12 +1438,14 @@ const file_yandex_cloud_vpc_v1_address_service_proto_rawDesc = "" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"4\n" +
 	"\x13MoveAddressMetadata\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId2\xc7\t\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId2\xe3\n" +
+	"\n" +
 	"\x0eAddressService\x12s\n" +
 	"\x03Get\x12&.yandex.cloud.vpc.v1.GetAddressRequest\x1a\x1c.yandex.cloud.vpc.v1.Address\"&\x82\xd3\xe4\x93\x02 \x12\x1e/vpc/v1/addresses/{address_id}\x12|\n" +
 	"\n" +
 	"GetByValue\x12-.yandex.cloud.vpc.v1.GetAddressByValueRequest\x1a\x1c.yandex.cloud.vpc.v1.Address\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/vpc/v1/addresses:byValue\x12x\n" +
-	"\x04List\x12).yandex.cloud.vpc.v1.ListAddressesRequest\x1a*.yandex.cloud.vpc.v1.ListAddressesResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/vpc/v1/addresses\x12\x98\x01\n" +
+	"\x04List\x12).yandex.cloud.vpc.v1.ListAddressesRequest\x1a*.yandex.cloud.vpc.v1.ListAddressesResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/vpc/v1/addresses\x12\x99\x01\n" +
+	"\fListBySubnet\x121.yandex.cloud.vpc.v1.ListAddressesBySubnetRequest\x1a2.yandex.cloud.vpc.v1.ListAddressesBySubnetResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/vpc/v1/addresses:bySubnet\x12\x98\x01\n" +
 	"\x06Create\x12).yandex.cloud.vpc.v1.CreateAddressRequest\x1a!.yandex.cloud.operation.Operation\"@\xb2\xd2* \n" +
 	"\x15CreateAddressMetadata\x12\aAddress\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/vpc/v1/addresses\x12\xa5\x01\n" +
 	"\x06Update\x12).yandex.cloud.vpc.v1.UpdateAddressRequest\x1a!.yandex.cloud.operation.Operation\"M\xb2\xd2* \n" +
@@ -1186,62 +1469,69 @@ func file_yandex_cloud_vpc_v1_address_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_vpc_v1_address_service_proto_rawDescData
 }
 
-var file_yandex_cloud_vpc_v1_address_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_yandex_cloud_vpc_v1_address_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_yandex_cloud_vpc_v1_address_service_proto_goTypes = []any{
 	(*GetAddressRequest)(nil),             // 0: yandex.cloud.vpc.v1.GetAddressRequest
 	(*GetAddressByValueRequest)(nil),      // 1: yandex.cloud.vpc.v1.GetAddressByValueRequest
 	(*ListAddressesRequest)(nil),          // 2: yandex.cloud.vpc.v1.ListAddressesRequest
 	(*ListAddressesResponse)(nil),         // 3: yandex.cloud.vpc.v1.ListAddressesResponse
-	(*CreateAddressRequest)(nil),          // 4: yandex.cloud.vpc.v1.CreateAddressRequest
-	(*ExternalIpv4AddressSpec)(nil),       // 5: yandex.cloud.vpc.v1.ExternalIpv4AddressSpec
-	(*DnsRecordSpec)(nil),                 // 6: yandex.cloud.vpc.v1.DnsRecordSpec
-	(*CreateAddressMetadata)(nil),         // 7: yandex.cloud.vpc.v1.CreateAddressMetadata
-	(*UpdateAddressRequest)(nil),          // 8: yandex.cloud.vpc.v1.UpdateAddressRequest
-	(*UpdateAddressMetadata)(nil),         // 9: yandex.cloud.vpc.v1.UpdateAddressMetadata
-	(*DeleteAddressRequest)(nil),          // 10: yandex.cloud.vpc.v1.DeleteAddressRequest
-	(*DeleteAddressMetadata)(nil),         // 11: yandex.cloud.vpc.v1.DeleteAddressMetadata
-	(*ListAddressOperationsRequest)(nil),  // 12: yandex.cloud.vpc.v1.ListAddressOperationsRequest
-	(*ListAddressOperationsResponse)(nil), // 13: yandex.cloud.vpc.v1.ListAddressOperationsResponse
-	(*MoveAddressRequest)(nil),            // 14: yandex.cloud.vpc.v1.MoveAddressRequest
-	(*MoveAddressMetadata)(nil),           // 15: yandex.cloud.vpc.v1.MoveAddressMetadata
-	nil,                                   // 16: yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntry
-	nil,                                   // 17: yandex.cloud.vpc.v1.UpdateAddressRequest.LabelsEntry
-	(*Address)(nil),                       // 18: yandex.cloud.vpc.v1.Address
-	(*AddressRequirements)(nil),           // 19: yandex.cloud.vpc.v1.AddressRequirements
-	(*fieldmaskpb.FieldMask)(nil),         // 20: google.protobuf.FieldMask
-	(*operation.Operation)(nil),           // 21: yandex.cloud.operation.Operation
+	(*ListAddressesBySubnetRequest)(nil),  // 4: yandex.cloud.vpc.v1.ListAddressesBySubnetRequest
+	(*ListAddressesBySubnetResponse)(nil), // 5: yandex.cloud.vpc.v1.ListAddressesBySubnetResponse
+	(*CreateAddressRequest)(nil),          // 6: yandex.cloud.vpc.v1.CreateAddressRequest
+	(*ExternalIpv4AddressSpec)(nil),       // 7: yandex.cloud.vpc.v1.ExternalIpv4AddressSpec
+	(*InternalIpv4AddressSpec)(nil),       // 8: yandex.cloud.vpc.v1.InternalIpv4AddressSpec
+	(*DnsRecordSpec)(nil),                 // 9: yandex.cloud.vpc.v1.DnsRecordSpec
+	(*CreateAddressMetadata)(nil),         // 10: yandex.cloud.vpc.v1.CreateAddressMetadata
+	(*UpdateAddressRequest)(nil),          // 11: yandex.cloud.vpc.v1.UpdateAddressRequest
+	(*UpdateAddressMetadata)(nil),         // 12: yandex.cloud.vpc.v1.UpdateAddressMetadata
+	(*DeleteAddressRequest)(nil),          // 13: yandex.cloud.vpc.v1.DeleteAddressRequest
+	(*DeleteAddressMetadata)(nil),         // 14: yandex.cloud.vpc.v1.DeleteAddressMetadata
+	(*ListAddressOperationsRequest)(nil),  // 15: yandex.cloud.vpc.v1.ListAddressOperationsRequest
+	(*ListAddressOperationsResponse)(nil), // 16: yandex.cloud.vpc.v1.ListAddressOperationsResponse
+	(*MoveAddressRequest)(nil),            // 17: yandex.cloud.vpc.v1.MoveAddressRequest
+	(*MoveAddressMetadata)(nil),           // 18: yandex.cloud.vpc.v1.MoveAddressMetadata
+	nil,                                   // 19: yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntry
+	nil,                                   // 20: yandex.cloud.vpc.v1.UpdateAddressRequest.LabelsEntry
+	(*Address)(nil),                       // 21: yandex.cloud.vpc.v1.Address
+	(*AddressRequirements)(nil),           // 22: yandex.cloud.vpc.v1.AddressRequirements
+	(*fieldmaskpb.FieldMask)(nil),         // 23: google.protobuf.FieldMask
+	(*operation.Operation)(nil),           // 24: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_vpc_v1_address_service_proto_depIdxs = []int32{
-	18, // 0: yandex.cloud.vpc.v1.ListAddressesResponse.addresses:type_name -> yandex.cloud.vpc.v1.Address
-	16, // 1: yandex.cloud.vpc.v1.CreateAddressRequest.labels:type_name -> yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntry
-	5,  // 2: yandex.cloud.vpc.v1.CreateAddressRequest.external_ipv4_address_spec:type_name -> yandex.cloud.vpc.v1.ExternalIpv4AddressSpec
-	6,  // 3: yandex.cloud.vpc.v1.CreateAddressRequest.dns_record_specs:type_name -> yandex.cloud.vpc.v1.DnsRecordSpec
-	19, // 4: yandex.cloud.vpc.v1.ExternalIpv4AddressSpec.requirements:type_name -> yandex.cloud.vpc.v1.AddressRequirements
-	20, // 5: yandex.cloud.vpc.v1.UpdateAddressRequest.update_mask:type_name -> google.protobuf.FieldMask
-	17, // 6: yandex.cloud.vpc.v1.UpdateAddressRequest.labels:type_name -> yandex.cloud.vpc.v1.UpdateAddressRequest.LabelsEntry
-	6,  // 7: yandex.cloud.vpc.v1.UpdateAddressRequest.dns_record_specs:type_name -> yandex.cloud.vpc.v1.DnsRecordSpec
-	21, // 8: yandex.cloud.vpc.v1.ListAddressOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 9: yandex.cloud.vpc.v1.AddressService.Get:input_type -> yandex.cloud.vpc.v1.GetAddressRequest
-	1,  // 10: yandex.cloud.vpc.v1.AddressService.GetByValue:input_type -> yandex.cloud.vpc.v1.GetAddressByValueRequest
-	2,  // 11: yandex.cloud.vpc.v1.AddressService.List:input_type -> yandex.cloud.vpc.v1.ListAddressesRequest
-	4,  // 12: yandex.cloud.vpc.v1.AddressService.Create:input_type -> yandex.cloud.vpc.v1.CreateAddressRequest
-	8,  // 13: yandex.cloud.vpc.v1.AddressService.Update:input_type -> yandex.cloud.vpc.v1.UpdateAddressRequest
-	10, // 14: yandex.cloud.vpc.v1.AddressService.Delete:input_type -> yandex.cloud.vpc.v1.DeleteAddressRequest
-	12, // 15: yandex.cloud.vpc.v1.AddressService.ListOperations:input_type -> yandex.cloud.vpc.v1.ListAddressOperationsRequest
-	14, // 16: yandex.cloud.vpc.v1.AddressService.Move:input_type -> yandex.cloud.vpc.v1.MoveAddressRequest
-	18, // 17: yandex.cloud.vpc.v1.AddressService.Get:output_type -> yandex.cloud.vpc.v1.Address
-	18, // 18: yandex.cloud.vpc.v1.AddressService.GetByValue:output_type -> yandex.cloud.vpc.v1.Address
-	3,  // 19: yandex.cloud.vpc.v1.AddressService.List:output_type -> yandex.cloud.vpc.v1.ListAddressesResponse
-	21, // 20: yandex.cloud.vpc.v1.AddressService.Create:output_type -> yandex.cloud.operation.Operation
-	21, // 21: yandex.cloud.vpc.v1.AddressService.Update:output_type -> yandex.cloud.operation.Operation
-	21, // 22: yandex.cloud.vpc.v1.AddressService.Delete:output_type -> yandex.cloud.operation.Operation
-	13, // 23: yandex.cloud.vpc.v1.AddressService.ListOperations:output_type -> yandex.cloud.vpc.v1.ListAddressOperationsResponse
-	21, // 24: yandex.cloud.vpc.v1.AddressService.Move:output_type -> yandex.cloud.operation.Operation
-	17, // [17:25] is the sub-list for method output_type
-	9,  // [9:17] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	21, // 0: yandex.cloud.vpc.v1.ListAddressesResponse.addresses:type_name -> yandex.cloud.vpc.v1.Address
+	21, // 1: yandex.cloud.vpc.v1.ListAddressesBySubnetResponse.addresses:type_name -> yandex.cloud.vpc.v1.Address
+	19, // 2: yandex.cloud.vpc.v1.CreateAddressRequest.labels:type_name -> yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntry
+	7,  // 3: yandex.cloud.vpc.v1.CreateAddressRequest.external_ipv4_address_spec:type_name -> yandex.cloud.vpc.v1.ExternalIpv4AddressSpec
+	8,  // 4: yandex.cloud.vpc.v1.CreateAddressRequest.internal_ipv4_address_spec:type_name -> yandex.cloud.vpc.v1.InternalIpv4AddressSpec
+	9,  // 5: yandex.cloud.vpc.v1.CreateAddressRequest.dns_record_specs:type_name -> yandex.cloud.vpc.v1.DnsRecordSpec
+	22, // 6: yandex.cloud.vpc.v1.ExternalIpv4AddressSpec.requirements:type_name -> yandex.cloud.vpc.v1.AddressRequirements
+	23, // 7: yandex.cloud.vpc.v1.UpdateAddressRequest.update_mask:type_name -> google.protobuf.FieldMask
+	20, // 8: yandex.cloud.vpc.v1.UpdateAddressRequest.labels:type_name -> yandex.cloud.vpc.v1.UpdateAddressRequest.LabelsEntry
+	9,  // 9: yandex.cloud.vpc.v1.UpdateAddressRequest.dns_record_specs:type_name -> yandex.cloud.vpc.v1.DnsRecordSpec
+	24, // 10: yandex.cloud.vpc.v1.ListAddressOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 11: yandex.cloud.vpc.v1.AddressService.Get:input_type -> yandex.cloud.vpc.v1.GetAddressRequest
+	1,  // 12: yandex.cloud.vpc.v1.AddressService.GetByValue:input_type -> yandex.cloud.vpc.v1.GetAddressByValueRequest
+	2,  // 13: yandex.cloud.vpc.v1.AddressService.List:input_type -> yandex.cloud.vpc.v1.ListAddressesRequest
+	4,  // 14: yandex.cloud.vpc.v1.AddressService.ListBySubnet:input_type -> yandex.cloud.vpc.v1.ListAddressesBySubnetRequest
+	6,  // 15: yandex.cloud.vpc.v1.AddressService.Create:input_type -> yandex.cloud.vpc.v1.CreateAddressRequest
+	11, // 16: yandex.cloud.vpc.v1.AddressService.Update:input_type -> yandex.cloud.vpc.v1.UpdateAddressRequest
+	13, // 17: yandex.cloud.vpc.v1.AddressService.Delete:input_type -> yandex.cloud.vpc.v1.DeleteAddressRequest
+	15, // 18: yandex.cloud.vpc.v1.AddressService.ListOperations:input_type -> yandex.cloud.vpc.v1.ListAddressOperationsRequest
+	17, // 19: yandex.cloud.vpc.v1.AddressService.Move:input_type -> yandex.cloud.vpc.v1.MoveAddressRequest
+	21, // 20: yandex.cloud.vpc.v1.AddressService.Get:output_type -> yandex.cloud.vpc.v1.Address
+	21, // 21: yandex.cloud.vpc.v1.AddressService.GetByValue:output_type -> yandex.cloud.vpc.v1.Address
+	3,  // 22: yandex.cloud.vpc.v1.AddressService.List:output_type -> yandex.cloud.vpc.v1.ListAddressesResponse
+	5,  // 23: yandex.cloud.vpc.v1.AddressService.ListBySubnet:output_type -> yandex.cloud.vpc.v1.ListAddressesBySubnetResponse
+	24, // 24: yandex.cloud.vpc.v1.AddressService.Create:output_type -> yandex.cloud.operation.Operation
+	24, // 25: yandex.cloud.vpc.v1.AddressService.Update:output_type -> yandex.cloud.operation.Operation
+	24, // 26: yandex.cloud.vpc.v1.AddressService.Delete:output_type -> yandex.cloud.operation.Operation
+	16, // 27: yandex.cloud.vpc.v1.AddressService.ListOperations:output_type -> yandex.cloud.vpc.v1.ListAddressOperationsResponse
+	24, // 28: yandex.cloud.vpc.v1.AddressService.Move:output_type -> yandex.cloud.operation.Operation
+	20, // [20:29] is the sub-list for method output_type
+	11, // [11:20] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_vpc_v1_address_service_proto_init() }
@@ -1252,9 +1542,15 @@ func file_yandex_cloud_vpc_v1_address_service_proto_init() {
 	file_yandex_cloud_vpc_v1_address_proto_init()
 	file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[1].OneofWrappers = []any{
 		(*GetAddressByValueRequest_ExternalIpv4Address)(nil),
+		(*GetAddressByValueRequest_InternalIpv4Address)(nil),
+		(*GetAddressByValueRequest_SubnetId)(nil),
 	}
-	file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[4].OneofWrappers = []any{
+	file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[6].OneofWrappers = []any{
 		(*CreateAddressRequest_ExternalIpv4AddressSpec)(nil),
+		(*CreateAddressRequest_InternalIpv4AddressSpec)(nil),
+	}
+	file_yandex_cloud_vpc_v1_address_service_proto_msgTypes[8].OneofWrappers = []any{
+		(*InternalIpv4AddressSpec_SubnetId)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1262,7 +1558,7 @@ func file_yandex_cloud_vpc_v1_address_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_vpc_v1_address_service_proto_rawDesc), len(file_yandex_cloud_vpc_v1_address_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

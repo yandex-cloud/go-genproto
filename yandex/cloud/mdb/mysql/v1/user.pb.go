@@ -304,8 +304,12 @@ type User struct {
 	AuthenticationPlugin AuthPlugin `protobuf:"varint,6,opt,name=authentication_plugin,json=authenticationPlugin,proto3,enum=yandex.cloud.mdb.mysql.v1.AuthPlugin" json:"authentication_plugin,omitempty"`
 	// Connection Manager Connection and settings associated with user. Read only field.
 	ConnectionManager *ConnectionManager `protobuf:"bytes,7,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Deletion Protection inhibits deletion of the user
+	//
+	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
+	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,8,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -385,6 +389,13 @@ func (x *User) GetConnectionManager() *ConnectionManager {
 		return x.ConnectionManager
 	}
 	return nil
+}
+
+func (x *User) GetDeletionProtectionMode() DeletionProtectionMode {
+	if x != nil {
+		return x.DeletionProtectionMode
+	}
+	return DeletionProtectionMode_DELETION_PROTECTION_MODE_UNSPECIFIED
 }
 
 type Permission struct {
@@ -579,8 +590,12 @@ type UserSpec struct {
 	AuthenticationPlugin AuthPlugin `protobuf:"varint,6,opt,name=authentication_plugin,json=authenticationPlugin,proto3,enum=yandex.cloud.mdb.mysql.v1.AuthPlugin" json:"authentication_plugin,omitempty"`
 	// Generate password using Connection Manager.
 	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Deletion Protection inhibits deletion of the user
+	//
+	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
+	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,8,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UserSpec) Reset() {
@@ -662,11 +677,18 @@ func (x *UserSpec) GetGeneratePassword() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *UserSpec) GetDeletionProtectionMode() DeletionProtectionMode {
+	if x != nil {
+		return x.DeletionProtectionMode
+	}
+	return DeletionProtectionMode_DELETION_PROTECTION_MODE_UNSPECIFIED
+}
+
 var File_yandex_cloud_mdb_mysql_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/mdb/mysql/v1/user.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf1\x03\n" +
+	"$yandex/cloud/mdb/mysql/v1/user.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"\xde\x04\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -675,7 +697,8 @@ const file_yandex_cloud_mdb_mysql_v1_user_proto_rawDesc = "" +
 	"\x12global_permissions\x18\x04 \x03(\x0e2+.yandex.cloud.mdb.mysql.v1.GlobalPermissionR\x11globalPermissions\x12X\n" +
 	"\x11connection_limits\x18\x05 \x01(\v2+.yandex.cloud.mdb.mysql.v1.ConnectionLimitsR\x10connectionLimits\x12Z\n" +
 	"\x15authentication_plugin\x18\x06 \x01(\x0e2%.yandex.cloud.mdb.mysql.v1.AuthPluginR\x14authenticationPlugin\x12[\n" +
-	"\x12connection_manager\x18\a \x01(\v2,.yandex.cloud.mdb.mysql.v1.ConnectionManagerR\x11connectionManager\"\xc4\x03\n" +
+	"\x12connection_manager\x18\a \x01(\v2,.yandex.cloud.mdb.mysql.v1.ConnectionManagerR\x11connectionManager\x12k\n" +
+	"\x18deletion_protection_mode\x18\b \x01(\x0e21.yandex.cloud.mdb.mysql.v1.DeletionProtectionModeR\x16deletionProtectionMode\"\xc4\x03\n" +
 	"\n" +
 	"Permission\x12#\n" +
 	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\x12N\n" +
@@ -714,7 +737,7 @@ const file_yandex_cloud_mdb_mysql_v1_user_proto_rawDesc = "" +
 	"\x18max_connections_per_hour\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15maxConnectionsPerHour\x12V\n" +
 	"\x14max_user_connections\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxUserConnections\"8\n" +
 	"\x11ConnectionManager\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\x8d\x04\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\xfa\x04\n" +
 	"\bUserSpec\x122\n" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=32R\x04name\x12)\n" +
 	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12G\n" +
@@ -722,7 +745,8 @@ const file_yandex_cloud_mdb_mysql_v1_user_proto_rawDesc = "" +
 	"\x12global_permissions\x18\x04 \x03(\x0e2+.yandex.cloud.mdb.mysql.v1.GlobalPermissionR\x11globalPermissions\x12X\n" +
 	"\x11connection_limits\x18\x05 \x01(\v2+.yandex.cloud.mdb.mysql.v1.ConnectionLimitsR\x10connectionLimits\x12Z\n" +
 	"\x15authentication_plugin\x18\x06 \x01(\x0e2%.yandex.cloud.mdb.mysql.v1.AuthPluginR\x14authenticationPlugin\x12G\n" +
-	"\x11generate_password\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword*\xad\x01\n" +
+	"\x11generate_password\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\x12k\n" +
+	"\x18deletion_protection_mode\x18\b \x01(\x0e21.yandex.cloud.mdb.mysql.v1.DeletionProtectionModeR\x16deletionProtectionMode*\xad\x01\n" +
 	"\x10GlobalPermission\x12!\n" +
 	"\x1dGLOBAL_PERMISSION_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12REPLICATION_CLIENT\x10\x01\x12\x15\n" +
@@ -764,8 +788,9 @@ var file_yandex_cloud_mdb_mysql_v1_user_proto_goTypes = []any{
 	(*ConnectionLimits)(nil),      // 5: yandex.cloud.mdb.mysql.v1.ConnectionLimits
 	(*ConnectionManager)(nil),     // 6: yandex.cloud.mdb.mysql.v1.ConnectionManager
 	(*UserSpec)(nil),              // 7: yandex.cloud.mdb.mysql.v1.UserSpec
-	(*wrapperspb.Int64Value)(nil), // 8: google.protobuf.Int64Value
-	(*wrapperspb.BoolValue)(nil),  // 9: google.protobuf.BoolValue
+	(DeletionProtectionMode)(0),   // 8: yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	(*wrapperspb.Int64Value)(nil), // 9: google.protobuf.Int64Value
+	(*wrapperspb.BoolValue)(nil),  // 10: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_mysql_v1_user_proto_depIdxs = []int32{
 	4,  // 0: yandex.cloud.mdb.mysql.v1.User.permissions:type_name -> yandex.cloud.mdb.mysql.v1.Permission
@@ -773,21 +798,23 @@ var file_yandex_cloud_mdb_mysql_v1_user_proto_depIdxs = []int32{
 	5,  // 2: yandex.cloud.mdb.mysql.v1.User.connection_limits:type_name -> yandex.cloud.mdb.mysql.v1.ConnectionLimits
 	1,  // 3: yandex.cloud.mdb.mysql.v1.User.authentication_plugin:type_name -> yandex.cloud.mdb.mysql.v1.AuthPlugin
 	6,  // 4: yandex.cloud.mdb.mysql.v1.User.connection_manager:type_name -> yandex.cloud.mdb.mysql.v1.ConnectionManager
-	2,  // 5: yandex.cloud.mdb.mysql.v1.Permission.roles:type_name -> yandex.cloud.mdb.mysql.v1.Permission.Privilege
-	8,  // 6: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_questions_per_hour:type_name -> google.protobuf.Int64Value
-	8,  // 7: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_updates_per_hour:type_name -> google.protobuf.Int64Value
-	8,  // 8: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_connections_per_hour:type_name -> google.protobuf.Int64Value
-	8,  // 9: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_user_connections:type_name -> google.protobuf.Int64Value
-	4,  // 10: yandex.cloud.mdb.mysql.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.mysql.v1.Permission
-	0,  // 11: yandex.cloud.mdb.mysql.v1.UserSpec.global_permissions:type_name -> yandex.cloud.mdb.mysql.v1.GlobalPermission
-	5,  // 12: yandex.cloud.mdb.mysql.v1.UserSpec.connection_limits:type_name -> yandex.cloud.mdb.mysql.v1.ConnectionLimits
-	1,  // 13: yandex.cloud.mdb.mysql.v1.UserSpec.authentication_plugin:type_name -> yandex.cloud.mdb.mysql.v1.AuthPlugin
-	9,  // 14: yandex.cloud.mdb.mysql.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	8,  // 5: yandex.cloud.mdb.mysql.v1.User.deletion_protection_mode:type_name -> yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	2,  // 6: yandex.cloud.mdb.mysql.v1.Permission.roles:type_name -> yandex.cloud.mdb.mysql.v1.Permission.Privilege
+	9,  // 7: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_questions_per_hour:type_name -> google.protobuf.Int64Value
+	9,  // 8: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_updates_per_hour:type_name -> google.protobuf.Int64Value
+	9,  // 9: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_connections_per_hour:type_name -> google.protobuf.Int64Value
+	9,  // 10: yandex.cloud.mdb.mysql.v1.ConnectionLimits.max_user_connections:type_name -> google.protobuf.Int64Value
+	4,  // 11: yandex.cloud.mdb.mysql.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.mysql.v1.Permission
+	0,  // 12: yandex.cloud.mdb.mysql.v1.UserSpec.global_permissions:type_name -> yandex.cloud.mdb.mysql.v1.GlobalPermission
+	5,  // 13: yandex.cloud.mdb.mysql.v1.UserSpec.connection_limits:type_name -> yandex.cloud.mdb.mysql.v1.ConnectionLimits
+	1,  // 14: yandex.cloud.mdb.mysql.v1.UserSpec.authentication_plugin:type_name -> yandex.cloud.mdb.mysql.v1.AuthPlugin
+	10, // 15: yandex.cloud.mdb.mysql.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
+	8,  // 16: yandex.cloud.mdb.mysql.v1.UserSpec.deletion_protection_mode:type_name -> yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_user_proto_init() }
@@ -795,6 +822,7 @@ func file_yandex_cloud_mdb_mysql_v1_user_proto_init() {
 	if File_yandex_cloud_mdb_mysql_v1_user_proto != nil {
 		return
 	}
+	file_yandex_cloud_mdb_mysql_v1_deletion_protection_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

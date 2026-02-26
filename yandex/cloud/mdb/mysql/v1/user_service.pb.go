@@ -346,8 +346,12 @@ type UpdateUserRequest struct {
 	AuthenticationPlugin AuthPlugin `protobuf:"varint,8,opt,name=authentication_plugin,json=authenticationPlugin,proto3,enum=yandex.cloud.mdb.mysql.v1.AuthPlugin" json:"authentication_plugin,omitempty"`
 	// Generate password using Connection Manager.
 	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Deletion Protection inhibits deletion of the user
+	//
+	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
+	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,10,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UpdateUserRequest) Reset() {
@@ -441,6 +445,13 @@ func (x *UpdateUserRequest) GetGeneratePassword() *wrapperspb.BoolValue {
 		return x.GeneratePassword
 	}
 	return nil
+}
+
+func (x *UpdateUserRequest) GetDeletionProtectionMode() DeletionProtectionMode {
+	if x != nil {
+		return x.DeletionProtectionMode
+	}
+	return DeletionProtectionMode_DELETION_PROTECTION_MODE_UNSPECIFIED
 }
 
 type UpdateUserMetadata struct {
@@ -855,7 +866,7 @@ var File_yandex_cloud_mdb_mysql_v1_user_service_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/mysql/v1/user_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\"z\n" +
+	",yandex/cloud/mdb/mysql/v1/user_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"z\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -877,7 +888,7 @@ const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\x85\x05\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xf2\x05\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -889,7 +900,9 @@ const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\x12global_permissions\x18\x06 \x03(\x0e2+.yandex.cloud.mdb.mysql.v1.GlobalPermissionR\x11globalPermissions\x12X\n" +
 	"\x11connection_limits\x18\a \x01(\v2+.yandex.cloud.mdb.mysql.v1.ConnectionLimitsR\x10connectionLimits\x12Z\n" +
 	"\x15authentication_plugin\x18\b \x01(\x0e2%.yandex.cloud.mdb.mysql.v1.AuthPluginR\x14authenticationPlugin\x12G\n" +
-	"\x11generate_password\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\"P\n" +
+	"\x11generate_password\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\x12k\n" +
+	"\x18deletion_protection_mode\x18\n" +
+	" \x01(\x0e21.yandex.cloud.mdb.mysql.v1.DeletionProtectionModeR\x16deletionProtectionMode\"P\n" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
@@ -975,7 +988,8 @@ var file_yandex_cloud_mdb_mysql_v1_user_service_proto_goTypes = []any{
 	(*ConnectionLimits)(nil),             // 18: yandex.cloud.mdb.mysql.v1.ConnectionLimits
 	(AuthPlugin)(0),                      // 19: yandex.cloud.mdb.mysql.v1.AuthPlugin
 	(*wrapperspb.BoolValue)(nil),         // 20: google.protobuf.BoolValue
-	(*operation.Operation)(nil),          // 21: yandex.cloud.operation.Operation
+	(DeletionProtectionMode)(0),          // 21: yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	(*operation.Operation)(nil),          // 22: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_mysql_v1_user_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.mdb.mysql.v1.ListUsersResponse.users:type_name -> yandex.cloud.mdb.mysql.v1.User
@@ -986,27 +1000,28 @@ var file_yandex_cloud_mdb_mysql_v1_user_service_proto_depIdxs = []int32{
 	18, // 5: yandex.cloud.mdb.mysql.v1.UpdateUserRequest.connection_limits:type_name -> yandex.cloud.mdb.mysql.v1.ConnectionLimits
 	19, // 6: yandex.cloud.mdb.mysql.v1.UpdateUserRequest.authentication_plugin:type_name -> yandex.cloud.mdb.mysql.v1.AuthPlugin
 	20, // 7: yandex.cloud.mdb.mysql.v1.UpdateUserRequest.generate_password:type_name -> google.protobuf.BoolValue
-	16, // 8: yandex.cloud.mdb.mysql.v1.GrantUserPermissionRequest.permission:type_name -> yandex.cloud.mdb.mysql.v1.Permission
-	16, // 9: yandex.cloud.mdb.mysql.v1.RevokeUserPermissionRequest.permission:type_name -> yandex.cloud.mdb.mysql.v1.Permission
-	0,  // 10: yandex.cloud.mdb.mysql.v1.UserService.Get:input_type -> yandex.cloud.mdb.mysql.v1.GetUserRequest
-	1,  // 11: yandex.cloud.mdb.mysql.v1.UserService.List:input_type -> yandex.cloud.mdb.mysql.v1.ListUsersRequest
-	3,  // 12: yandex.cloud.mdb.mysql.v1.UserService.Create:input_type -> yandex.cloud.mdb.mysql.v1.CreateUserRequest
-	5,  // 13: yandex.cloud.mdb.mysql.v1.UserService.Update:input_type -> yandex.cloud.mdb.mysql.v1.UpdateUserRequest
-	7,  // 14: yandex.cloud.mdb.mysql.v1.UserService.Delete:input_type -> yandex.cloud.mdb.mysql.v1.DeleteUserRequest
-	9,  // 15: yandex.cloud.mdb.mysql.v1.UserService.GrantPermission:input_type -> yandex.cloud.mdb.mysql.v1.GrantUserPermissionRequest
-	11, // 16: yandex.cloud.mdb.mysql.v1.UserService.RevokePermission:input_type -> yandex.cloud.mdb.mysql.v1.RevokeUserPermissionRequest
-	13, // 17: yandex.cloud.mdb.mysql.v1.UserService.Get:output_type -> yandex.cloud.mdb.mysql.v1.User
-	2,  // 18: yandex.cloud.mdb.mysql.v1.UserService.List:output_type -> yandex.cloud.mdb.mysql.v1.ListUsersResponse
-	21, // 19: yandex.cloud.mdb.mysql.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
-	21, // 20: yandex.cloud.mdb.mysql.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
-	21, // 21: yandex.cloud.mdb.mysql.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
-	21, // 22: yandex.cloud.mdb.mysql.v1.UserService.GrantPermission:output_type -> yandex.cloud.operation.Operation
-	21, // 23: yandex.cloud.mdb.mysql.v1.UserService.RevokePermission:output_type -> yandex.cloud.operation.Operation
-	17, // [17:24] is the sub-list for method output_type
-	10, // [10:17] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	21, // 8: yandex.cloud.mdb.mysql.v1.UpdateUserRequest.deletion_protection_mode:type_name -> yandex.cloud.mdb.mysql.v1.DeletionProtectionMode
+	16, // 9: yandex.cloud.mdb.mysql.v1.GrantUserPermissionRequest.permission:type_name -> yandex.cloud.mdb.mysql.v1.Permission
+	16, // 10: yandex.cloud.mdb.mysql.v1.RevokeUserPermissionRequest.permission:type_name -> yandex.cloud.mdb.mysql.v1.Permission
+	0,  // 11: yandex.cloud.mdb.mysql.v1.UserService.Get:input_type -> yandex.cloud.mdb.mysql.v1.GetUserRequest
+	1,  // 12: yandex.cloud.mdb.mysql.v1.UserService.List:input_type -> yandex.cloud.mdb.mysql.v1.ListUsersRequest
+	3,  // 13: yandex.cloud.mdb.mysql.v1.UserService.Create:input_type -> yandex.cloud.mdb.mysql.v1.CreateUserRequest
+	5,  // 14: yandex.cloud.mdb.mysql.v1.UserService.Update:input_type -> yandex.cloud.mdb.mysql.v1.UpdateUserRequest
+	7,  // 15: yandex.cloud.mdb.mysql.v1.UserService.Delete:input_type -> yandex.cloud.mdb.mysql.v1.DeleteUserRequest
+	9,  // 16: yandex.cloud.mdb.mysql.v1.UserService.GrantPermission:input_type -> yandex.cloud.mdb.mysql.v1.GrantUserPermissionRequest
+	11, // 17: yandex.cloud.mdb.mysql.v1.UserService.RevokePermission:input_type -> yandex.cloud.mdb.mysql.v1.RevokeUserPermissionRequest
+	13, // 18: yandex.cloud.mdb.mysql.v1.UserService.Get:output_type -> yandex.cloud.mdb.mysql.v1.User
+	2,  // 19: yandex.cloud.mdb.mysql.v1.UserService.List:output_type -> yandex.cloud.mdb.mysql.v1.ListUsersResponse
+	22, // 20: yandex.cloud.mdb.mysql.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
+	22, // 21: yandex.cloud.mdb.mysql.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
+	22, // 22: yandex.cloud.mdb.mysql.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
+	22, // 23: yandex.cloud.mdb.mysql.v1.UserService.GrantPermission:output_type -> yandex.cloud.operation.Operation
+	22, // 24: yandex.cloud.mdb.mysql.v1.UserService.RevokePermission:output_type -> yandex.cloud.operation.Operation
+	18, // [18:25] is the sub-list for method output_type
+	11, // [11:18] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_user_service_proto_init() }
@@ -1015,6 +1030,7 @@ func file_yandex_cloud_mdb_mysql_v1_user_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_mdb_mysql_v1_user_proto_init()
+	file_yandex_cloud_mdb_mysql_v1_deletion_protection_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

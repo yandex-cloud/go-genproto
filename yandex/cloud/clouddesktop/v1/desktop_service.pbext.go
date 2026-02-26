@@ -23,6 +23,10 @@ func (m *UpdatePropertiesRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *UpdatePropertiesRequest) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *StartRequest) SetDesktopId(v string) {
 	m.DesktopId = v
 }
@@ -117,6 +121,18 @@ func (m *CreateDesktopRequest) SetSubnetId(v string) {
 
 func (m *CreateDesktopRequest) SetUsers(v []*User) {
 	m.Users = v
+}
+
+func (m *CreateDesktopRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CreateDesktopRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *CreateDesktopRequest) SetDescription(v string) {
+	m.Description = v
 }
 
 func (m *CreateDesktopMetadata) SetDesktopId(v string) {

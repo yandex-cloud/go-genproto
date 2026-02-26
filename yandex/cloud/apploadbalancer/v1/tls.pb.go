@@ -108,6 +108,83 @@ func (*ValidationContext_TrustedCaId) isValidationContext_TrustedCa() {}
 
 func (*ValidationContext_TrustedCaBytes) isValidationContext_TrustedCa() {}
 
+// Client certificates verification settings.
+type ClientCertificatesVerification struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// If true, ALB will reject connections without a valid client certificate.
+	RequireClientCertificate bool `protobuf:"varint,1,opt,name=require_client_certificate,json=requireClientCertificate,proto3" json:"require_client_certificate,omitempty"`
+	// Types that are valid to be assigned to TrustedCa:
+	//
+	//	*ClientCertificatesVerification_Bytes
+	TrustedCa     isClientCertificatesVerification_TrustedCa `protobuf_oneof:"trusted_ca"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClientCertificatesVerification) Reset() {
+	*x = ClientCertificatesVerification{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClientCertificatesVerification) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClientCertificatesVerification) ProtoMessage() {}
+
+func (x *ClientCertificatesVerification) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClientCertificatesVerification.ProtoReflect.Descriptor instead.
+func (*ClientCertificatesVerification) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ClientCertificatesVerification) GetRequireClientCertificate() bool {
+	if x != nil {
+		return x.RequireClientCertificate
+	}
+	return false
+}
+
+func (x *ClientCertificatesVerification) GetTrustedCa() isClientCertificatesVerification_TrustedCa {
+	if x != nil {
+		return x.TrustedCa
+	}
+	return nil
+}
+
+func (x *ClientCertificatesVerification) GetBytes() string {
+	if x != nil {
+		if x, ok := x.TrustedCa.(*ClientCertificatesVerification_Bytes); ok {
+			return x.Bytes
+		}
+	}
+	return ""
+}
+
+type isClientCertificatesVerification_TrustedCa interface {
+	isClientCertificatesVerification_TrustedCa()
+}
+
+type ClientCertificatesVerification_Bytes struct {
+	// Trusted certificate authority certificates bundle (PEM text).
+	Bytes string `protobuf:"bytes,2,opt,name=bytes,proto3,oneof"`
+}
+
+func (*ClientCertificatesVerification_Bytes) isClientCertificatesVerification_TrustedCa() {}
+
 var File_yandex_cloud_apploadbalancer_v1_tls_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc = "" +
@@ -117,7 +194,12 @@ const file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc = "" +
 	"\rtrusted_ca_id\x18\x01 \x01(\tH\x00R\vtrustedCaId\x12*\n" +
 	"\x10trusted_ca_bytes\x18\x02 \x01(\tH\x00R\x0etrustedCaBytesB\x12\n" +
 	"\n" +
-	"trusted_ca\x12\x04\xc0\xc11\x01Bz\n" +
+	"trusted_ca\x12\x04\xc0\xc11\x01\"\x84\x01\n" +
+	"\x1eClientCertificatesVerification\x12<\n" +
+	"\x1arequire_client_certificate\x18\x01 \x01(\bR\x18requireClientCertificate\x12\x16\n" +
+	"\x05bytes\x18\x02 \x01(\tH\x00R\x05bytesB\f\n" +
+	"\n" +
+	"trusted_caBz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 
 var (
@@ -132,9 +214,10 @@ func file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDescData
 }
 
-var file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_apploadbalancer_v1_tls_proto_goTypes = []any{
-	(*ValidationContext)(nil), // 0: yandex.cloud.apploadbalancer.v1.ValidationContext
+	(*ValidationContext)(nil),              // 0: yandex.cloud.apploadbalancer.v1.ValidationContext
+	(*ClientCertificatesVerification)(nil), // 1: yandex.cloud.apploadbalancer.v1.ClientCertificatesVerification
 }
 var file_yandex_cloud_apploadbalancer_v1_tls_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -153,13 +236,16 @@ func file_yandex_cloud_apploadbalancer_v1_tls_proto_init() {
 		(*ValidationContext_TrustedCaId)(nil),
 		(*ValidationContext_TrustedCaBytes)(nil),
 	}
+	file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes[1].OneofWrappers = []any{
+		(*ClientCertificatesVerification_Bytes)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc), len(file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

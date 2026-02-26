@@ -871,8 +871,10 @@ type UpdateRouteRequest struct {
 	RouteOptions *RouteOptions `protobuf:"bytes,7,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
 	// Whether set to 'true' disable security profile for the route.
 	DisableSecurityProfile bool `protobuf:"varint,8,opt,name=disable_security_profile,json=disableSecurityProfile,proto3" json:"disable_security_profile,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// New settings of the client certificate forwarding.
+	ClientCertificateForward *ClientCertificateForward `protobuf:"bytes,9,opt,name=client_certificate_forward,json=clientCertificateForward,proto3" json:"client_certificate_forward,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *UpdateRouteRequest) Reset() {
@@ -970,6 +972,13 @@ func (x *UpdateRouteRequest) GetDisableSecurityProfile() bool {
 		return x.DisableSecurityProfile
 	}
 	return false
+}
+
+func (x *UpdateRouteRequest) GetClientCertificateForward() *ClientCertificateForward {
+	if x != nil {
+		return x.ClientCertificateForward
+	}
+	return nil
 }
 
 type isUpdateRouteRequest_Route interface {
@@ -1114,7 +1123,7 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12*\n" +
 	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\x12\x1d\n" +
 	"\n" +
-	"route_name\x18\x03 \x01(\tR\trouteName\"\xf5\x03\n" +
+	"route_name\x18\x03 \x01(\tR\trouteName\"\xee\x04\n" +
 	"\x12UpdateRouteRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x120\n" +
 	"\x11virtual_host_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x0fvirtualHostName\x12#\n" +
@@ -1125,7 +1134,8 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"\x04http\x18\x05 \x01(\v2*.yandex.cloud.apploadbalancer.v1.HttpRouteH\x00R\x04http\x12@\n" +
 	"\x04grpc\x18\x06 \x01(\v2*.yandex.cloud.apploadbalancer.v1.GrpcRouteH\x00R\x04grpc\x12R\n" +
 	"\rroute_options\x18\a \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x128\n" +
-	"\x18disable_security_profile\x18\b \x01(\bR\x16disableSecurityProfileB\r\n" +
+	"\x18disable_security_profile\x18\b \x01(\bR\x16disableSecurityProfile\x12w\n" +
+	"\x1aclient_certificate_forward\x18\t \x01(\v29.yandex.cloud.apploadbalancer.v1.ClientCertificateForwardR\x18clientCertificateForwardB\r\n" +
 	"\x05route\x12\x04\xc0\xc11\x01\"\x86\x01\n" +
 	"\x13UpdateRouteMetadata\x12$\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12*\n" +
@@ -1182,7 +1192,8 @@ var file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_goTypes = []
 	(*fieldmaskpb.FieldMask)(nil),     // 18: google.protobuf.FieldMask
 	(*HttpRoute)(nil),                 // 19: yandex.cloud.apploadbalancer.v1.HttpRoute
 	(*GrpcRoute)(nil),                 // 20: yandex.cloud.apploadbalancer.v1.GrpcRoute
-	(*operation.Operation)(nil),       // 21: yandex.cloud.operation.Operation
+	(*ClientCertificateForward)(nil),  // 21: yandex.cloud.apploadbalancer.v1.ClientCertificateForward
+	(*operation.Operation)(nil),       // 22: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.apploadbalancer.v1.ListVirtualHostsResponse.virtual_hosts:type_name -> yandex.cloud.apploadbalancer.v1.VirtualHost
@@ -1201,25 +1212,26 @@ var file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_depIdxs = []
 	19, // 13: yandex.cloud.apploadbalancer.v1.UpdateRouteRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpRoute
 	20, // 14: yandex.cloud.apploadbalancer.v1.UpdateRouteRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRoute
 	16, // 15: yandex.cloud.apploadbalancer.v1.UpdateRouteRequest.route_options:type_name -> yandex.cloud.apploadbalancer.v1.RouteOptions
-	0,  // 16: yandex.cloud.apploadbalancer.v1.VirtualHostService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetVirtualHostRequest
-	1,  // 17: yandex.cloud.apploadbalancer.v1.VirtualHostService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListVirtualHostsRequest
-	3,  // 18: yandex.cloud.apploadbalancer.v1.VirtualHostService.Create:input_type -> yandex.cloud.apploadbalancer.v1.CreateVirtualHostRequest
-	5,  // 19: yandex.cloud.apploadbalancer.v1.VirtualHostService.Update:input_type -> yandex.cloud.apploadbalancer.v1.UpdateVirtualHostRequest
-	7,  // 20: yandex.cloud.apploadbalancer.v1.VirtualHostService.Delete:input_type -> yandex.cloud.apploadbalancer.v1.DeleteVirtualHostRequest
-	9,  // 21: yandex.cloud.apploadbalancer.v1.VirtualHostService.RemoveRoute:input_type -> yandex.cloud.apploadbalancer.v1.RemoveRouteRequest
-	11, // 22: yandex.cloud.apploadbalancer.v1.VirtualHostService.UpdateRoute:input_type -> yandex.cloud.apploadbalancer.v1.UpdateRouteRequest
-	13, // 23: yandex.cloud.apploadbalancer.v1.VirtualHostService.Get:output_type -> yandex.cloud.apploadbalancer.v1.VirtualHost
-	2,  // 24: yandex.cloud.apploadbalancer.v1.VirtualHostService.List:output_type -> yandex.cloud.apploadbalancer.v1.ListVirtualHostsResponse
-	21, // 25: yandex.cloud.apploadbalancer.v1.VirtualHostService.Create:output_type -> yandex.cloud.operation.Operation
-	21, // 26: yandex.cloud.apploadbalancer.v1.VirtualHostService.Update:output_type -> yandex.cloud.operation.Operation
-	21, // 27: yandex.cloud.apploadbalancer.v1.VirtualHostService.Delete:output_type -> yandex.cloud.operation.Operation
-	21, // 28: yandex.cloud.apploadbalancer.v1.VirtualHostService.RemoveRoute:output_type -> yandex.cloud.operation.Operation
-	21, // 29: yandex.cloud.apploadbalancer.v1.VirtualHostService.UpdateRoute:output_type -> yandex.cloud.operation.Operation
-	23, // [23:30] is the sub-list for method output_type
-	16, // [16:23] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	21, // 16: yandex.cloud.apploadbalancer.v1.UpdateRouteRequest.client_certificate_forward:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificateForward
+	0,  // 17: yandex.cloud.apploadbalancer.v1.VirtualHostService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetVirtualHostRequest
+	1,  // 18: yandex.cloud.apploadbalancer.v1.VirtualHostService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListVirtualHostsRequest
+	3,  // 19: yandex.cloud.apploadbalancer.v1.VirtualHostService.Create:input_type -> yandex.cloud.apploadbalancer.v1.CreateVirtualHostRequest
+	5,  // 20: yandex.cloud.apploadbalancer.v1.VirtualHostService.Update:input_type -> yandex.cloud.apploadbalancer.v1.UpdateVirtualHostRequest
+	7,  // 21: yandex.cloud.apploadbalancer.v1.VirtualHostService.Delete:input_type -> yandex.cloud.apploadbalancer.v1.DeleteVirtualHostRequest
+	9,  // 22: yandex.cloud.apploadbalancer.v1.VirtualHostService.RemoveRoute:input_type -> yandex.cloud.apploadbalancer.v1.RemoveRouteRequest
+	11, // 23: yandex.cloud.apploadbalancer.v1.VirtualHostService.UpdateRoute:input_type -> yandex.cloud.apploadbalancer.v1.UpdateRouteRequest
+	13, // 24: yandex.cloud.apploadbalancer.v1.VirtualHostService.Get:output_type -> yandex.cloud.apploadbalancer.v1.VirtualHost
+	2,  // 25: yandex.cloud.apploadbalancer.v1.VirtualHostService.List:output_type -> yandex.cloud.apploadbalancer.v1.ListVirtualHostsResponse
+	22, // 26: yandex.cloud.apploadbalancer.v1.VirtualHostService.Create:output_type -> yandex.cloud.operation.Operation
+	22, // 27: yandex.cloud.apploadbalancer.v1.VirtualHostService.Update:output_type -> yandex.cloud.operation.Operation
+	22, // 28: yandex.cloud.apploadbalancer.v1.VirtualHostService.Delete:output_type -> yandex.cloud.operation.Operation
+	22, // 29: yandex.cloud.apploadbalancer.v1.VirtualHostService.RemoveRoute:output_type -> yandex.cloud.operation.Operation
+	22, // 30: yandex.cloud.apploadbalancer.v1.VirtualHostService.UpdateRoute:output_type -> yandex.cloud.operation.Operation
+	24, // [24:31] is the sub-list for method output_type
+	17, // [17:24] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_init() }

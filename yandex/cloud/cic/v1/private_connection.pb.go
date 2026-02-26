@@ -87,7 +87,7 @@ type PrivateConnection struct {
 	// The name must be unique within the folder.
 	// Value must match the regular expression “\|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?“.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Optional description of the privateConnection. 0-256 characters long.
+	// Description of the privateConnection. 0-256 characters long.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the privateConnection belongs to.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`

@@ -271,6 +271,10 @@ func (m *TlsHandler) SetCertificateIds(v []string) {
 	m.CertificateIds = v
 }
 
+func (m *TlsHandler) SetClientCertificatesVerification(v *ClientCertificatesVerification) {
+	m.ClientCertificatesVerification = v
+}
+
 func (m *TargetState) SetStatus(v *TargetState_HealthcheckStatus) {
 	m.Status = v
 }

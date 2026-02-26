@@ -34,6 +34,10 @@ func (m *User) SetConnectionManager(v *ConnectionManager) {
 	m.ConnectionManager = v
 }
 
+func (m *User) SetDeletionProtectionMode(v DeletionProtectionMode) {
+	m.DeletionProtectionMode = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -88,4 +92,8 @@ func (m *UserSpec) SetAuthenticationPlugin(v AuthPlugin) {
 
 func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
 	m.GeneratePassword = v
+}
+
+func (m *UserSpec) SetDeletionProtectionMode(v DeletionProtectionMode) {
+	m.DeletionProtectionMode = v
 }

@@ -1447,8 +1447,10 @@ type TlsHandler struct {
 	//
 	// RSA and ECDSA certificates are supported, and only the first certificate of each type is used.
 	CertificateIds []string `protobuf:"bytes,3,rep,name=certificate_ids,json=certificateIds,proto3" json:"certificate_ids,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Client certificates verification settings.
+	ClientCertificatesVerification *ClientCertificatesVerification `protobuf:"bytes,5,opt,name=client_certificates_verification,json=clientCertificatesVerification,proto3" json:"client_certificates_verification,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *TlsHandler) Reset() {
@@ -1509,6 +1511,13 @@ func (x *TlsHandler) GetStreamHandler() *StreamHandler {
 func (x *TlsHandler) GetCertificateIds() []string {
 	if x != nil {
 		return x.CertificateIds
+	}
+	return nil
+}
+
+func (x *TlsHandler) GetClientCertificatesVerification() *ClientCertificatesVerification {
+	if x != nil {
+		return x.ClientCertificatesVerification
 	}
 	return nil
 }
@@ -1770,7 +1779,7 @@ var File_yandex_cloud_apploadbalancer_v1_load_balancer_proto protoreflect.FileDe
 
 const file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/apploadbalancer/v1/load_balancer.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a-yandex/cloud/apploadbalancer/v1/logging.proto\x1a2yandex/cloud/apploadbalancer/v1/target_group.proto\"\x88\b\n" +
+	"3yandex/cloud/apploadbalancer/v1/load_balancer.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a-yandex/cloud/apploadbalancer/v1/logging.proto\x1a2yandex/cloud/apploadbalancer/v1/target_group.proto\x1a)yandex/cloud/apploadbalancer/v1/tls.proto\"\x88\b\n" +
 	"\fLoadBalancer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1859,12 +1868,13 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_rawDesc = "" +
 	"\bSniMatch\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12)\n" +
 	"\fserver_names\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\vserverNames\x12K\n" +
-	"\ahandler\x18\x03 \x01(\v2+.yandex.cloud.apploadbalancer.v1.TlsHandlerB\x04\xe8\xc71\x01R\ahandler\"\xfa\x01\n" +
+	"\ahandler\x18\x03 \x01(\v2+.yandex.cloud.apploadbalancer.v1.TlsHandlerB\x04\xe8\xc71\x01R\ahandler\"\x86\x03\n" +
 	"\n" +
 	"TlsHandler\x12Q\n" +
 	"\fhttp_handler\x18\x02 \x01(\v2,.yandex.cloud.apploadbalancer.v1.HttpHandlerH\x00R\vhttpHandler\x12W\n" +
 	"\x0estream_handler\x18\x04 \x01(\v2..yandex.cloud.apploadbalancer.v1.StreamHandlerH\x00R\rstreamHandler\x12/\n" +
-	"\x0fcertificate_ids\x18\x03 \x03(\tB\x06\x82\xc81\x02>0R\x0ecertificateIdsB\x0f\n" +
+	"\x0fcertificate_ids\x18\x03 \x03(\tB\x06\x82\xc81\x02>0R\x0ecertificateIds\x12\x89\x01\n" +
+	" client_certificates_verification\x18\x05 \x01(\v2?.yandex.cloud.apploadbalancer.v1.ClientCertificatesVerificationR\x1eclientCertificatesVerificationB\x0f\n" +
 	"\ahandler\x12\x04\xc0\xc11\x01\"\xca\x04\n" +
 	"\vTargetState\x12V\n" +
 	"\x06status\x18\x01 \x01(\v2>.yandex.cloud.apploadbalancer.v1.TargetState.HealthcheckStatusR\x06status\x12E\n" +
@@ -1932,7 +1942,8 @@ var file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),             // 25: google.protobuf.Timestamp
 	(*LogOptions)(nil),                        // 26: yandex.cloud.apploadbalancer.v1.LogOptions
 	(*durationpb.Duration)(nil),               // 27: google.protobuf.Duration
-	(*Target)(nil),                            // 28: yandex.cloud.apploadbalancer.v1.Target
+	(*ClientCertificatesVerification)(nil),    // 28: yandex.cloud.apploadbalancer.v1.ClientCertificatesVerification
+	(*Target)(nil),                            // 29: yandex.cloud.apploadbalancer.v1.Target
 }
 var file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_depIdxs = []int32{
 	22, // 0: yandex.cloud.apploadbalancer.v1.LoadBalancer.labels:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancer.LabelsEntry
@@ -1961,15 +1972,16 @@ var file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_depIdxs = []int32{
 	19, // 23: yandex.cloud.apploadbalancer.v1.SniMatch.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
 	16, // 24: yandex.cloud.apploadbalancer.v1.TlsHandler.http_handler:type_name -> yandex.cloud.apploadbalancer.v1.HttpHandler
 	15, // 25: yandex.cloud.apploadbalancer.v1.TlsHandler.stream_handler:type_name -> yandex.cloud.apploadbalancer.v1.StreamHandler
-	23, // 26: yandex.cloud.apploadbalancer.v1.TargetState.status:type_name -> yandex.cloud.apploadbalancer.v1.TargetState.HealthcheckStatus
-	28, // 27: yandex.cloud.apploadbalancer.v1.TargetState.target:type_name -> yandex.cloud.apploadbalancer.v1.Target
-	24, // 28: yandex.cloud.apploadbalancer.v1.TargetState.HealthcheckStatus.zone_statuses:type_name -> yandex.cloud.apploadbalancer.v1.TargetState.ZoneHealthcheckStatus
-	1,  // 29: yandex.cloud.apploadbalancer.v1.TargetState.ZoneHealthcheckStatus.status:type_name -> yandex.cloud.apploadbalancer.v1.TargetState.Status
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	28, // 26: yandex.cloud.apploadbalancer.v1.TlsHandler.client_certificates_verification:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificatesVerification
+	23, // 27: yandex.cloud.apploadbalancer.v1.TargetState.status:type_name -> yandex.cloud.apploadbalancer.v1.TargetState.HealthcheckStatus
+	29, // 28: yandex.cloud.apploadbalancer.v1.TargetState.target:type_name -> yandex.cloud.apploadbalancer.v1.Target
+	24, // 29: yandex.cloud.apploadbalancer.v1.TargetState.HealthcheckStatus.zone_statuses:type_name -> yandex.cloud.apploadbalancer.v1.TargetState.ZoneHealthcheckStatus
+	1,  // 30: yandex.cloud.apploadbalancer.v1.TargetState.ZoneHealthcheckStatus.status:type_name -> yandex.cloud.apploadbalancer.v1.TargetState.Status
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_init() }
@@ -1979,6 +1991,7 @@ func file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_init() {
 	}
 	file_yandex_cloud_apploadbalancer_v1_logging_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_target_group_proto_init()
+	file_yandex_cloud_apploadbalancer_v1_tls_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_msgTypes[1].OneofWrappers = []any{
 		(*Address_ExternalIpv4Address)(nil),
 		(*Address_InternalIpv4Address)(nil),
