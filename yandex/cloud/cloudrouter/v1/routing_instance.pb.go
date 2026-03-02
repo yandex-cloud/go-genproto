@@ -7,6 +7,7 @@
 package cloudrouter
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -85,7 +86,7 @@ type RoutingInstance struct {
 	// The name must be unique within the folder.
 	// Value must match the regular expression “\|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?“.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Optional description of the routingInstance. 0-256 characters long.
+	// Description of the routingInstance. 0-256 characters long.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the routingInstance belongs to.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -412,7 +413,7 @@ var File_yandex_cloud_cloudrouter_v1_routing_instance_proto protoreflect.FileDes
 
 const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/cloudrouter/v1/routing_instance.proto\x12\x1byandex.cloud.cloudrouter.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfc\b\n" +
+	"2yandex/cloud/cloudrouter/v1/routing_instance.proto\x12\x1byandex.cloud.cloudrouter.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\t\n" +
 	"\x0fRoutingInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -427,18 +428,18 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\x06labels\x18\x18 \x03(\v28.yandex.cloud.cloudrouter.v1.RoutingInstance.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aU\n" +
-	"\x18CicPrivateConnectionInfo\x129\n" +
-	"\x19cic_private_connection_id\x18\x01 \x01(\tR\x16cicPrivateConnectionId\x1a\x82\x01\n" +
-	"\aVpcInfo\x12$\n" +
-	"\x0evpc_network_id\x18\x01 \x01(\tR\fvpcNetworkId\x12Q\n" +
-	"\baz_infos\x18\x02 \x03(\v26.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcAzInfoR\aazInfos\x1an\n" +
-	"\tVpcAzInfo\x12[\n" +
-	"\vmanual_info\x18\x02 \x01(\v2:.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcManualInfoR\n" +
-	"manualInfoJ\x04\b\x01\x10\x02\x1aF\n" +
-	"\rVpcManualInfo\x12\x13\n" +
-	"\x05az_id\x18\x01 \x01(\tR\x04azId\x12\x1a\n" +
-	"\bprefixes\x18\x05 \x03(\tR\bprefixesJ\x04\b\x02\x10\x05\"V\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1ac\n" +
+	"\x18CicPrivateConnectionInfo\x12G\n" +
+	"\x19cic_private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16cicPrivateConnectionId\x1a\x9e\x01\n" +
+	"\aVpcInfo\x122\n" +
+	"\x0evpc_network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12_\n" +
+	"\baz_infos\x18\x02 \x03(\v26.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcAzInfoB\f\xe8\xc71\x01\x82\xc81\x041-50R\aazInfos\x1at\n" +
+	"\tVpcAzInfo\x12a\n" +
+	"\vmanual_info\x18\x02 \x01(\v2:.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcManualInfoB\x04\xe8\xc71\x01R\n" +
+	"manualInfoJ\x04\b\x01\x10\x02\x1ae\n" +
+	"\rVpcManualInfo\x12!\n" +
+	"\x05az_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04azId\x12+\n" +
+	"\bprefixes\x18\x05 \x03(\tB\x0f\xe8\xc71\x01\x82\xc81\a1-10000R\bprefixesJ\x04\b\x02\x10\x05\"V\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\f\n" +

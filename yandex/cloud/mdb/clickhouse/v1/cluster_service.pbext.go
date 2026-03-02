@@ -155,6 +155,10 @@ func (m *UpdateClusterRequest) SetNetworkId(v string) {
 	m.NetworkId = v
 }
 
+func (m *UpdateClusterRequest) SetAllowHostRecreation(v *wrapperspb.BoolValue) {
+	m.AllowHostRecreation = v
+}
+
 func (m *UpdateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -637,6 +641,10 @@ func (m *UpdateClusterShardRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateClusterShardRequest) SetConfigSpec(v *ShardConfigSpec) {
 	m.ConfigSpec = v
+}
+
+func (m *UpdateClusterShardRequest) SetAllowHostRecreation(v *wrapperspb.BoolValue) {
+	m.AllowHostRecreation = v
 }
 
 func (m *UpdateClusterShardMetadata) SetClusterId(v string) {

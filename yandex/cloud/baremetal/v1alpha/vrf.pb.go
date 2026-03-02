@@ -22,6 +22,110 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Vrf_Status int32
+
+const (
+	// Unspecified VRF status.
+	Vrf_STATUS_UNSPECIFIED Vrf_Status = 0
+	// VRF is ready to use.
+	Vrf_ACTIVE Vrf_Status = 1
+	// VRF is being updated.
+	Vrf_UPDATING Vrf_Status = 2
+)
+
+// Enum value maps for Vrf_Status.
+var (
+	Vrf_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "ACTIVE",
+		2: "UPDATING",
+	}
+	Vrf_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"ACTIVE":             1,
+		"UPDATING":           2,
+	}
+)
+
+func (x Vrf_Status) Enum() *Vrf_Status {
+	p := new(Vrf_Status)
+	*p = x
+	return p
+}
+
+func (x Vrf_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Vrf_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_proto_enumTypes[0].Descriptor()
+}
+
+func (Vrf_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v1alpha_vrf_proto_enumTypes[0]
+}
+
+func (x Vrf_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Vrf_Status.Descriptor instead.
+func (Vrf_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDescGZIP(), []int{0, 0}
+}
+
+type StaticRoute_RedistributionType int32
+
+const (
+	// Unspecified redistribution type.
+	StaticRoute_REDISTRIBUTION_TYPE_UNSPECIFIED StaticRoute_RedistributionType = 0
+	// Static route announcements outside BareMetal VRF disabled.
+	StaticRoute_DISABLED StaticRoute_RedistributionType = 1
+	// Static route announcements outside BareMetal VRF enabled.
+	StaticRoute_ENABLED StaticRoute_RedistributionType = 2
+)
+
+// Enum value maps for StaticRoute_RedistributionType.
+var (
+	StaticRoute_RedistributionType_name = map[int32]string{
+		0: "REDISTRIBUTION_TYPE_UNSPECIFIED",
+		1: "DISABLED",
+		2: "ENABLED",
+	}
+	StaticRoute_RedistributionType_value = map[string]int32{
+		"REDISTRIBUTION_TYPE_UNSPECIFIED": 0,
+		"DISABLED":                        1,
+		"ENABLED":                         2,
+	}
+)
+
+func (x StaticRoute_RedistributionType) Enum() *StaticRoute_RedistributionType {
+	p := new(StaticRoute_RedistributionType)
+	*p = x
+	return p
+}
+
+func (x StaticRoute_RedistributionType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (StaticRoute_RedistributionType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_proto_enumTypes[1].Descriptor()
+}
+
+func (StaticRoute_RedistributionType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v1alpha_vrf_proto_enumTypes[1]
+}
+
+func (x StaticRoute_RedistributionType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use StaticRoute_RedistributionType.Descriptor instead.
+func (StaticRoute_RedistributionType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDescGZIP(), []int{1, 0}
+}
+
 type Vrf struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the VRF.
@@ -35,6 +139,10 @@ type Vrf struct {
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the VRF.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// Status of the VRF.
+	Status Vrf_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.baremetal.v1alpha.Vrf_Status" json:"status,omitempty"`
+	// Static routes.
+	StaticRoutes []*StaticRoute `protobuf:"bytes,7,rep,name=static_routes,json=staticRoutes,proto3" json:"static_routes,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Resource labels as `key:value` pairs.
@@ -108,6 +216,20 @@ func (x *Vrf) GetDescription() string {
 	return ""
 }
 
+func (x *Vrf) GetStatus() Vrf_Status {
+	if x != nil {
+		return x.Status
+	}
+	return Vrf_STATUS_UNSPECIFIED
+}
+
+func (x *Vrf) GetStaticRoutes() []*StaticRoute {
+	if x != nil {
+		return x.StaticRoutes
+	}
+	return nil
+}
+
 func (x *Vrf) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -122,23 +244,101 @@ func (x *Vrf) GetLabels() map[string]string {
 	return nil
 }
 
+type StaticRoute struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Destination network CIDR block.
+	DestinationCidr string `protobuf:"bytes,1,opt,name=destination_cidr,json=destinationCidr,proto3" json:"destination_cidr,omitempty"`
+	// Next hop host IP address.
+	NextHopIpAddress string `protobuf:"bytes,2,opt,name=next_hop_ip_address,json=nextHopIpAddress,proto3" json:"next_hop_ip_address,omitempty"`
+	// Redistribution type.
+	RedistributionType StaticRoute_RedistributionType `protobuf:"varint,3,opt,name=redistribution_type,json=redistributionType,proto3,enum=yandex.cloud.baremetal.v1alpha.StaticRoute_RedistributionType" json:"redistribution_type,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *StaticRoute) Reset() {
+	*x = StaticRoute{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_vrf_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StaticRoute) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StaticRoute) ProtoMessage() {}
+
+func (x *StaticRoute) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_vrf_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StaticRoute.ProtoReflect.Descriptor instead.
+func (*StaticRoute) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StaticRoute) GetDestinationCidr() string {
+	if x != nil {
+		return x.DestinationCidr
+	}
+	return ""
+}
+
+func (x *StaticRoute) GetNextHopIpAddress() string {
+	if x != nil {
+		return x.NextHopIpAddress
+	}
+	return ""
+}
+
+func (x *StaticRoute) GetRedistributionType() StaticRoute_RedistributionType {
+	if x != nil {
+		return x.RedistributionType
+	}
+	return StaticRoute_REDISTRIBUTION_TYPE_UNSPECIFIED
+}
+
 var File_yandex_cloud_baremetal_v1alpha_vrf_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/baremetal/v1alpha/vrf.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd0\x02\n" +
+	"(yandex/cloud/baremetal/v1alpha/vrf.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa2\x04\n" +
 	"\x03Vrf\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
 	"\tfolder_id\x18\x03 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x129\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12B\n" +
+	"\x06status\x18\x06 \x01(\x0e2*.yandex.cloud.baremetal.v1alpha.Vrf.StatusR\x06status\x12P\n" +
+	"\rstatic_routes\x18\a \x03(\v2+.yandex.cloud.baremetal.v1alpha.StaticRouteR\fstaticRoutes\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12H\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2/.yandex.cloud.baremetal.v1alpha.Vrf.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10dJ\x05\be\x10\xc8\x01Br\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\":\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
+	"\n" +
+	"\x06ACTIVE\x10\x01\x12\f\n" +
+	"\bUPDATING\x10\x02J\x04\b\b\x10dJ\x05\be\x10\xc8\x01\"\xae\x02\n" +
+	"\vStaticRoute\x12)\n" +
+	"\x10destination_cidr\x18\x01 \x01(\tR\x0fdestinationCidr\x12-\n" +
+	"\x13next_hop_ip_address\x18\x02 \x01(\tR\x10nextHopIpAddress\x12o\n" +
+	"\x13redistribution_type\x18\x03 \x01(\x0e2>.yandex.cloud.baremetal.v1alpha.StaticRoute.RedistributionTypeR\x12redistributionType\"T\n" +
+	"\x12RedistributionType\x12#\n" +
+	"\x1fREDISTRIBUTION_TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
+	"\bDISABLED\x10\x01\x12\v\n" +
+	"\aENABLED\x10\x02Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (
@@ -153,20 +353,27 @@ func file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v1alpha_vrf_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_baremetal_v1alpha_vrf_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_baremetal_v1alpha_vrf_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_baremetal_v1alpha_vrf_proto_goTypes = []any{
-	(*Vrf)(nil),                   // 0: yandex.cloud.baremetal.v1alpha.Vrf
-	nil,                           // 1: yandex.cloud.baremetal.v1alpha.Vrf.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
+	(Vrf_Status)(0),                     // 0: yandex.cloud.baremetal.v1alpha.Vrf.Status
+	(StaticRoute_RedistributionType)(0), // 1: yandex.cloud.baremetal.v1alpha.StaticRoute.RedistributionType
+	(*Vrf)(nil),                         // 2: yandex.cloud.baremetal.v1alpha.Vrf
+	(*StaticRoute)(nil),                 // 3: yandex.cloud.baremetal.v1alpha.StaticRoute
+	nil,                                 // 4: yandex.cloud.baremetal.v1alpha.Vrf.LabelsEntry
+	(*timestamppb.Timestamp)(nil),       // 5: google.protobuf.Timestamp
 }
 var file_yandex_cloud_baremetal_v1alpha_vrf_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.baremetal.v1alpha.Vrf.created_at:type_name -> google.protobuf.Timestamp
-	1, // 1: yandex.cloud.baremetal.v1alpha.Vrf.labels:type_name -> yandex.cloud.baremetal.v1alpha.Vrf.LabelsEntry
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: yandex.cloud.baremetal.v1alpha.Vrf.status:type_name -> yandex.cloud.baremetal.v1alpha.Vrf.Status
+	3, // 1: yandex.cloud.baremetal.v1alpha.Vrf.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
+	5, // 2: yandex.cloud.baremetal.v1alpha.Vrf.created_at:type_name -> google.protobuf.Timestamp
+	4, // 3: yandex.cloud.baremetal.v1alpha.Vrf.labels:type_name -> yandex.cloud.baremetal.v1alpha.Vrf.LabelsEntry
+	1, // 4: yandex.cloud.baremetal.v1alpha.StaticRoute.redistribution_type:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute.RedistributionType
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_vrf_proto_init() }
@@ -179,13 +386,14 @@ func file_yandex_cloud_baremetal_v1alpha_vrf_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_vrf_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   2,
+			NumEnums:      2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v1alpha_vrf_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v1alpha_vrf_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_baremetal_v1alpha_vrf_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_baremetal_v1alpha_vrf_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_baremetal_v1alpha_vrf_proto = out.File

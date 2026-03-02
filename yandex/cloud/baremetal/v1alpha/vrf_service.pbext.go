@@ -51,6 +51,10 @@ func (m *CreateVrfRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *CreateVrfRequest) SetStaticRoutes(v []*StaticRoute) {
+	m.StaticRoutes = v
+}
+
 func (m *CreateVrfRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -73,6 +77,10 @@ func (m *UpdateVrfRequest) SetName(v string) {
 
 func (m *UpdateVrfRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *UpdateVrfRequest) SetStaticRoutes(v []*StaticRoute) {
+	m.StaticRoutes = v
 }
 
 func (m *UpdateVrfRequest) SetLabels(v map[string]string) {

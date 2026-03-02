@@ -244,6 +244,8 @@ type CreateVrfRequest struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the VRF.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// VRF static routes.
+	StaticRoutes []*StaticRoute `protobuf:"bytes,4,rep,name=static_routes,json=staticRoutes,proto3" json:"static_routes,omitempty"`
 	// Resource labels as `key:value` pairs.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -299,6 +301,13 @@ func (x *CreateVrfRequest) GetDescription() string {
 		return x.Description
 	}
 	return ""
+}
+
+func (x *CreateVrfRequest) GetStaticRoutes() []*StaticRoute {
+	if x != nil {
+		return x.StaticRoutes
+	}
+	return nil
 }
 
 func (x *CreateVrfRequest) GetLabels() map[string]string {
@@ -366,6 +375,8 @@ type UpdateVrfRequest struct {
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the VRF.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// VRF static routes.
+	StaticRoutes []*StaticRoute `protobuf:"bytes,5,rep,name=static_routes,json=staticRoutes,proto3" json:"static_routes,omitempty"`
 	// Resource labels as `key:value` pairs.
 	//
 	// Existing set of labels is completely replaced by the provided set.
@@ -430,6 +441,13 @@ func (x *UpdateVrfRequest) GetDescription() string {
 		return x.Description
 	}
 	return ""
+}
+
+func (x *UpdateVrfRequest) GetStaticRoutes() []*StaticRoute {
+	if x != nil {
+		return x.StaticRoutes
+	}
+	return nil
 }
 
 func (x *UpdateVrfRequest) GetLabels() map[string]string {
@@ -718,29 +736,31 @@ const file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc = "" +
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"x\n" +
 	"\x0fListVrfResponse\x127\n" +
 	"\x04vrfs\x18\x01 \x03(\v2#.yandex.cloud.baremetal.v1alpha.VrfR\x04vrfs\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x8e\x03\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xe0\x03\n" +
 	"\x10CreateVrfRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-63R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\x92\x01\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12P\n" +
+	"\rstatic_routes\x18\x04 \x03(\v2+.yandex.cloud.baremetal.v1alpha.StaticRouteR\fstaticRoutes\x12\x92\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2<.yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x04\x10\xc8\x01\"*\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x05\x10\xc8\x01\"*\n" +
 	"\x11CreateVrfMetadata\x12\x15\n" +
-	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"\xc1\x03\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"\x93\x04\n" +
 	"\x10UpdateVrfRequest\x12/\n" +
 	"\x06vrf_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x05vrfId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12:\n" +
 	"\x04name\x18\x03 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-63R\x04name\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\x92\x01\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12P\n" +
+	"\rstatic_routes\x18\x05 \x03(\v2+.yandex.cloud.baremetal.v1alpha.StaticRouteR\fstaticRoutes\x12\x92\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2<.yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x05\x10\xc8\x01\"*\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x06\x10\xc8\x01\"*\n" +
 	"\x11UpdateVrfMetadata\x12\x15\n" +
 	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"C\n" +
 	"\x10DeleteVrfRequest\x12/\n" +
@@ -798,32 +818,35 @@ var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_goTypes = []any{
 	nil,                               // 11: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
 	nil,                               // 12: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
 	(*Vrf)(nil),                       // 13: yandex.cloud.baremetal.v1alpha.Vrf
-	(*fieldmaskpb.FieldMask)(nil),     // 14: google.protobuf.FieldMask
-	(*operation.Operation)(nil),       // 15: yandex.cloud.operation.Operation
+	(*StaticRoute)(nil),               // 14: yandex.cloud.baremetal.v1alpha.StaticRoute
+	(*fieldmaskpb.FieldMask)(nil),     // 15: google.protobuf.FieldMask
+	(*operation.Operation)(nil),       // 16: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.baremetal.v1alpha.ListVrfResponse.vrfs:type_name -> yandex.cloud.baremetal.v1alpha.Vrf
-	11, // 1: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
-	14, // 2: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
-	12, // 3: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
-	15, // 4: yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 5: yandex.cloud.baremetal.v1alpha.VrfService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetVrfRequest
-	1,  // 6: yandex.cloud.baremetal.v1alpha.VrfService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListVrfRequest
-	3,  // 7: yandex.cloud.baremetal.v1alpha.VrfService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest
-	5,  // 8: yandex.cloud.baremetal.v1alpha.VrfService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest
-	7,  // 9: yandex.cloud.baremetal.v1alpha.VrfService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeleteVrfRequest
-	9,  // 10: yandex.cloud.baremetal.v1alpha.VrfService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListVrfOperationsRequest
-	13, // 11: yandex.cloud.baremetal.v1alpha.VrfService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Vrf
-	2,  // 12: yandex.cloud.baremetal.v1alpha.VrfService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListVrfResponse
-	15, // 13: yandex.cloud.baremetal.v1alpha.VrfService.Create:output_type -> yandex.cloud.operation.Operation
-	15, // 14: yandex.cloud.baremetal.v1alpha.VrfService.Update:output_type -> yandex.cloud.operation.Operation
-	15, // 15: yandex.cloud.baremetal.v1alpha.VrfService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // 16: yandex.cloud.baremetal.v1alpha.VrfService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	14, // 1: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
+	11, // 2: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
+	15, // 3: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
+	14, // 4: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
+	12, // 5: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
+	16, // 6: yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 7: yandex.cloud.baremetal.v1alpha.VrfService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetVrfRequest
+	1,  // 8: yandex.cloud.baremetal.v1alpha.VrfService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListVrfRequest
+	3,  // 9: yandex.cloud.baremetal.v1alpha.VrfService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest
+	5,  // 10: yandex.cloud.baremetal.v1alpha.VrfService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest
+	7,  // 11: yandex.cloud.baremetal.v1alpha.VrfService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeleteVrfRequest
+	9,  // 12: yandex.cloud.baremetal.v1alpha.VrfService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListVrfOperationsRequest
+	13, // 13: yandex.cloud.baremetal.v1alpha.VrfService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Vrf
+	2,  // 14: yandex.cloud.baremetal.v1alpha.VrfService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListVrfResponse
+	16, // 15: yandex.cloud.baremetal.v1alpha.VrfService.Create:output_type -> yandex.cloud.operation.Operation
+	16, // 16: yandex.cloud.baremetal.v1alpha.VrfService.Update:output_type -> yandex.cloud.operation.Operation
+	16, // 17: yandex.cloud.baremetal.v1alpha.VrfService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // 18: yandex.cloud.baremetal.v1alpha.VrfService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_init() }

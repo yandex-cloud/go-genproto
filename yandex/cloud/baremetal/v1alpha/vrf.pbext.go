@@ -26,10 +26,30 @@ func (m *Vrf) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *Vrf) SetStatus(v Vrf_Status) {
+	m.Status = v
+}
+
+func (m *Vrf) SetStaticRoutes(v []*StaticRoute) {
+	m.StaticRoutes = v
+}
+
 func (m *Vrf) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
 func (m *Vrf) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *StaticRoute) SetDestinationCidr(v string) {
+	m.DestinationCidr = v
+}
+
+func (m *StaticRoute) SetNextHopIpAddress(v string) {
+	m.NextHopIpAddress = v
+}
+
+func (m *StaticRoute) SetRedistributionType(v StaticRoute_RedistributionType) {
+	m.RedistributionType = v
 }

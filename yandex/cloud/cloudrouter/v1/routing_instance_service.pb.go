@@ -315,6 +315,8 @@ type CreateRoutingInstanceRequest struct {
 	// ID of the folder that the RoutingInstance belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// ID of the region that the routingInstance belongs to.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// List of the info about vpcNetworks which are attached to the RoutingInstance.
 	VpcInfo []*RoutingInstance_VpcInfo `protobuf:"bytes,6,rep,name=vpc_info,json=vpcInfo,proto3" json:"vpc_info,omitempty"`
@@ -382,6 +384,7 @@ func (x *CreateRoutingInstanceRequest) GetFolderId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
 func (x *CreateRoutingInstanceRequest) GetRegionId() string {
 	if x != nil {
 		return x.RegionId
@@ -468,6 +471,8 @@ type UpdateRoutingInstanceRequest struct {
 	// Optional description of the RoutingInstance. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the region that the routingInstance belongs to.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
 	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// List of the info about vpcNetworks which are attached to the RoutingInstance.
 	//
@@ -546,6 +551,7 @@ func (x *UpdateRoutingInstanceRequest) GetDescription() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
 func (x *UpdateRoutingInstanceRequest) GetRegionId() string {
 	if x != nil {
 		return x.RegionId
@@ -1562,27 +1568,29 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1cListRoutingInstancesResponse\x12Y\n" +
 	"\x11routing_instances\x18\x01 \x03(\v2,.yandex.cloud.cloudrouter.v1.RoutingInstanceR\x10routingInstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x85\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb6\x05\n" +
 	"\x1cCreateRoutingInstanceRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
-	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x1b\n" +
-	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12O\n" +
-	"\bvpc_info\x18\x06 \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoR\avpcInfo\x12\x84\x01\n" +
-	"\x1bcic_private_connection_info\x18\a \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoR\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
+	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12)\n" +
+	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tregion_id\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12\\\n" +
+	"\bvpc_info\x18\x06 \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\v\x82\xc81\a<=10000R\avpcInfo\x12\x8e\x01\n" +
+	"\x1bcic_private_connection_info\x18\a \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\b\x82\xc81\x04<=50R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
 	"\x06labels\x18\f \x03(\v2E.yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\b\x10\f\"O\n" +
 	"\x1dCreateRoutingInstanceMetadata\x12.\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xeb\x05\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xf7\x05\n" +
 	"\x1cUpdateRoutingInstanceRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12B\n" +
 	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1b\n" +
-	"\tregion_id\x18\a \x01(\tR\bregionId\x12S\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12'\n" +
+	"\tregion_id\x18\a \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12S\n" +
 	"\bvpc_info\x18\b \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\x02\x18\x01R\avpcInfo\x12\x88\x01\n" +
 	"\x1bcic_private_connection_info\x18\t \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\x02\x18\x01R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
 	"\x06labels\x18\x0e \x03(\v2E.yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
@@ -1591,47 +1599,47 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\aJ\x04\b\n" +
 	"\x10\x0e\"O\n" +
 	"\x1dUpdateRoutingInstanceMetadata\x12.\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xe2\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xfa\x01\n" +
 	"\x15UpsertPrefixesRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12$\n" +
-	"\x0evpc_network_id\x18\x02 \x01(\tR\fvpcNetworkId\x12_\n" +
-	"\x14vpc_az_info_prefixes\x18\x03 \x03(\v2..yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixesR\x11vpcAzInfoPrefixesJ\x04\b\x04\x10\a\"\xdc\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x122\n" +
+	"\x0evpc_network_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12i\n" +
+	"\x14vpc_az_info_prefixes\x18\x03 \x03(\v2..yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixesB\b\x82\xc81\x04<=50R\x11vpcAzInfoPrefixesJ\x04\b\x04\x10\a\"\xf4\x01\n" +
 	"\x15RemovePrefixesRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12$\n" +
-	"\x0evpc_network_id\x18\x02 \x01(\tR\fvpcNetworkId\x12_\n" +
-	"\x14vpc_az_info_prefixes\x18\x03 \x03(\v2..yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixesR\x11vpcAzInfoPrefixes\"\xdd\x02\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x122\n" +
+	"\x0evpc_network_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12i\n" +
+	"\x14vpc_az_info_prefixes\x18\x03 \x03(\v2..yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixesB\b\x82\xc81\x04<=50R\x11vpcAzInfoPrefixes\"\x84\x03\n" +
 	"\x15UpdateNetworksRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12R\n" +
-	"\x12added_vpc_networks\x18\x02 \x03(\v2$.yandex.cloud.cloudrouter.v1.VpcInfoR\x10addedVpcNetworks\x12V\n" +
-	"\x14updated_vpc_networks\x18\x03 \x03(\v2$.yandex.cloud.cloudrouter.v1.VpcInfoR\x12updatedVpcNetworks\x125\n" +
-	"\x17deleted_vpc_network_ids\x18\x04 \x03(\tR\x14deletedVpcNetworkIds\x12#\n" +
-	"\rstrict_remove\x18\x05 \x01(\bR\fstrictRemove\"\x90\x01\n" +
-	"\aVpcInfo\x12$\n" +
-	"\x0evpc_network_id\x18\x01 \x01(\tR\fvpcNetworkId\x12_\n" +
-	"\x14vpc_az_info_prefixes\x18\x02 \x03(\v2..yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixesR\x11vpcAzInfoPrefixes\"J\n" +
-	"\x11VpcAzInfoPrefixes\x12\x13\n" +
-	"\x05az_id\x18\x01 \x01(\tR\x04azId\x12\x1a\n" +
-	"\bprefixes\x18\x02 \x03(\tR\bprefixesJ\x04\b\x03\x10\x04\"\xfb\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12_\n" +
+	"\x12added_vpc_networks\x18\x02 \x03(\v2$.yandex.cloud.cloudrouter.v1.VpcInfoB\v\x82\xc81\a<=10000R\x10addedVpcNetworks\x12c\n" +
+	"\x14updated_vpc_networks\x18\x03 \x03(\v2$.yandex.cloud.cloudrouter.v1.VpcInfoB\v\x82\xc81\a<=10000R\x12updatedVpcNetworks\x12B\n" +
+	"\x17deleted_vpc_network_ids\x18\x04 \x03(\tB\v\x82\xc81\a<=10000R\x14deletedVpcNetworkIds\x12#\n" +
+	"\rstrict_remove\x18\x05 \x01(\bR\fstrictRemove\"\xa8\x01\n" +
+	"\aVpcInfo\x122\n" +
+	"\x0evpc_network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12i\n" +
+	"\x14vpc_az_info_prefixes\x18\x02 \x03(\v2..yandex.cloud.cloudrouter.v1.VpcAzInfoPrefixesB\b\x82\xc81\x04<=50R\x11vpcAzInfoPrefixes\"i\n" +
+	"\x11VpcAzInfoPrefixes\x12!\n" +
+	"\x05az_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04azId\x12+\n" +
+	"\bprefixes\x18\x02 \x03(\tB\x0f\xe8\xc71\x01\x82\xc81\a1-10000R\bprefixesJ\x04\b\x03\x10\x04\"\xc1\x02\n" +
 	"\x11MovePrefixRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12+\n" +
-	"\x12src_vpc_network_id\x18\x02 \x01(\tR\x0fsrcVpcNetworkId\x12\x1a\n" +
-	"\tsrc_az_id\x18\x03 \x01(\tR\asrcAzId\x12+\n" +
-	"\x12dst_vpc_network_id\x18\x04 \x01(\tR\x0fdstVpcNetworkId\x12\x1a\n" +
-	"\tdst_az_id\x18\x05 \x01(\tR\adstAzId\x12\x16\n" +
-	"\x06prefix\x18\x06 \x01(\tR\x06prefix\"\xf5\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x129\n" +
+	"\x12src_vpc_network_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0fsrcVpcNetworkId\x12(\n" +
+	"\tsrc_az_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\asrcAzId\x129\n" +
+	"\x12dst_vpc_network_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0fdstVpcNetworkId\x12(\n" +
+	"\tdst_az_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\adstAzId\x12$\n" +
+	"\x06prefix\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06prefix\"\xa9\x02\n" +
 	"\x17UpdatePrefixMaskRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12$\n" +
-	"\x0evpc_network_id\x18\x02 \x01(\tR\fvpcNetworkId\x12\x13\n" +
-	"\x05az_id\x18\x03 \x01(\tR\x04azId\x12\x16\n" +
-	"\x06prefix\x18\x04 \x01(\tR\x06prefix\x12\x19\n" +
-	"\bnew_mask\x18\x05 \x01(\x03R\anewMask\x12.\n" +
-	"\x13remove_sub_prefixes\x18\x06 \x01(\bR\x11removeSubPrefixes\"\x9c\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x122\n" +
+	"\x0evpc_network_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12!\n" +
+	"\x05az_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04azId\x12$\n" +
+	"\x06prefix\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06prefix\x12#\n" +
+	"\bnew_mask\x18\x05 \x01(\x03B\b\xfa\xc71\x040-31R\anewMask\x12.\n" +
+	"\x13remove_sub_prefixes\x18\x06 \x01(\bR\x11removeSubPrefixes\"\xaa\x01\n" +
 	"\x1bAddPrivateConnectionRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x129\n" +
-	"\x19cic_private_connection_id\x18\x02 \x01(\tR\x16cicPrivateConnectionIdJ\x04\b\x03\x10\t\"\x99\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12G\n" +
+	"\x19cic_private_connection_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16cicPrivateConnectionIdJ\x04\b\x03\x10\t\"\xa7\x01\n" +
 	"\x1eRemovePrivateConnectionRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x129\n" +
-	"\x19cic_private_connection_id\x18\x02 \x01(\tR\x16cicPrivateConnectionId\"\\\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12G\n" +
+	"\x19cic_private_connection_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16cicPrivateConnectionId\"\\\n" +
 	"\x1cDeleteRoutingInstanceRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\"O\n" +
 	"\x1dDeleteRoutingInstanceMetadata\x12.\n" +
@@ -1640,12 +1648,13 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12@\n" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"M\n" +
 	"\x1bMoveRoutingInstanceMetadata\x12.\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xa0\x01\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tR\x11routingInstanceId\"\xb7\x01\n" +
 	"$ListRoutingInstanceOperationsRequest\x12<\n" +
-	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
+	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"\x92\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x92\x01\n" +
 	"%ListRoutingInstanceOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
