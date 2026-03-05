@@ -46,6 +46,10 @@ func (m *Transfer) SetWarning(v string) {
 	m.Warning = v
 }
 
+func (m *Transfer) SetRegularSnapshot(v *RegularSnapshot) {
+	m.RegularSnapshot = v
+}
+
 func (m *Transfer) SetTransformation(v *Transformation) {
 	m.Transformation = v
 }
@@ -82,8 +86,70 @@ func (m *ShardingUploadParams) SetProcessCount(v int64) {
 	m.ProcessCount = v
 }
 
+type RegularSnapshot_Mode = isRegularSnapshot_Mode
+
+func (m *RegularSnapshot) SetMode(v RegularSnapshot_Mode) {
+	m.Mode = v
+}
+
+func (m *RegularSnapshot) SetSettings(v *RegularSnapshotSettings) {
+	m.Mode = &RegularSnapshot_Settings{
+		Settings: v,
+	}
+}
+
+func (m *RegularSnapshot) SetDisabled(v *RegularSnapshotDisabled) {
+	m.Mode = &RegularSnapshot_Disabled{
+		Disabled: v,
+	}
+}
+
+func (m *RegularSnapshotSettings) SetSchedule(v RegularSnapshotScheduleInterval) {
+	m.Schedule = v
+}
+
+func (m *RegularSnapshotSettings) SetTables(v []*IncrementalTable) {
+	m.Tables = v
+}
+
+func (m *RegularSnapshotSettings) SetCronExpression(v string) {
+	m.CronExpression = v
+}
+
+func (m *RegularSnapshotSettings) SetIncrementDelaySeconds(v int64) {
+	m.IncrementDelaySeconds = v
+}
+
+func (m *RegularSnapshotSettings) SetRetryConfig(v *RegularSnapshotSettings_RetryConfig) {
+	m.RetryConfig = v
+}
+
+func (m *RegularSnapshotSettings_RetryConfig) SetMaxAttempts(v int64) {
+	m.MaxAttempts = v
+}
+
+func (m *IncrementalTable) SetTableNamespace(v string) {
+	m.TableNamespace = v
+}
+
+func (m *IncrementalTable) SetTableName(v string) {
+	m.TableName = v
+}
+
+func (m *IncrementalTable) SetCursorColumn(v string) {
+	m.CursorColumn = v
+}
+
+func (m *IncrementalTable) SetInitialState(v string) {
+	m.InitialState = v
+}
+
 func (m *YcRuntime) SetJobCount(v int64) {
 	m.JobCount = v
+}
+
+func (m *YcRuntime) SetFlavor(v Flavor) {
+	m.Flavor = v
 }
 
 func (m *YcRuntime) SetUploadShardParams(v *ShardingUploadParams) {

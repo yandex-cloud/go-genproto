@@ -1026,7 +1026,7 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\n" +
 	"registries\x18\x01 \x03(\v2'.yandex.cloud.cloudregistry.v1.RegistryR\n" +
 	"registries\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfc\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfd\x05\n" +
 	"\x15CreateRegistryRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12\x95\x01\n" +
@@ -1034,9 +1034,9 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\x04kind\x18\x04 \x01(\x0e2,.yandex.cloud.cloudregistry.v1.Registry.KindB\x04\xe8\xc71\x01R\x04kind\x12F\n" +
 	"\x04type\x18\x05 \x01(\x0e2,.yandex.cloud.cloudregistry.v1.Registry.TypeB\x04\xe8\xc71\x01R\x04type\x12,\n" +
 	"\vdescription\x18\x06 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\xb0\x01\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12\xb1\x01\n" +
 	"\n" +
-	"properties\x18\a \x03(\v2D.yandex.cloud.cloudregistry.v1.CreateRegistryRequest.PropertiesEntryBJ\xf2\xc71![-_.~!*'();/?:@&=+$,%#0-9a-zA-Z]+\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x11\x12\t[a-zA-Z]+\x1a\x041-63R\n" +
+	"properties\x18\a \x03(\v2D.yandex.cloud.cloudregistry.v1.CreateRegistryRequest.PropertiesEntryBK\xf2\xc71![-_.~!*'();/?:@&=+$,%#0-9a-zA-Z]+\x82\xc81\x04<=64\x8a\xc81\x05<=255\xb2\xc81\x11\x12\t[a-zA-Z]+\x1a\x041-63R\n" +
 	"properties\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -1046,7 +1046,7 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
 	"\x16CreateRegistryMetadata\x12\x1f\n" +
 	"\vregistry_id\x18\x01 \x01(\tR\n" +
-	"registryId\"\xad\x05\n" +
+	"registryId\"\xae\x05\n" +
 	"\x15UpdateRegistryRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x12;\n" +
@@ -1055,9 +1055,9 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12\x95\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2@.yandex.cloud.cloudregistry.v1.UpdateRegistryRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\xb0\x01\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12\xb1\x01\n" +
 	"\n" +
-	"properties\x18\x06 \x03(\v2D.yandex.cloud.cloudregistry.v1.UpdateRegistryRequest.PropertiesEntryBJ\xf2\xc71![-_.~!*'();/?:@&=+$,%#0-9a-zA-Z]+\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x11\x12\t[a-zA-Z]+\x1a\x041-63R\n" +
+	"properties\x18\x06 \x03(\v2D.yandex.cloud.cloudregistry.v1.UpdateRegistryRequest.PropertiesEntryBK\xf2\xc71![-_.~!*'();/?:@&=+$,%#0-9a-zA-Z]+\x82\xc81\x04<=64\x8a\xc81\x05<=255\xb2\xc81\x11\x12\t[a-zA-Z]+\x1a\x041-63R\n" +
 	"properties\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +

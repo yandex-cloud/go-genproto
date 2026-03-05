@@ -1652,7 +1652,7 @@ var File_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xdaM\n" +
+	"/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xd8M\n" +
 	"\x0eMysqlConfig8_4\x12c\n" +
 	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x0f\xfa\xc71\v>=134217728R\x14innodbBufferPoolSize\x12S\n" +
 	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t10-100000R\x0emaxConnections\x12P\n" +
@@ -1716,10 +1716,9 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\x11regexp_time_limit\x181 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t0-1048576R\x0fregexpTimeLimit\x12t\n" +
 	"\x19mdb_preserve_binlog_bytes\x182 \x01(\v2\x1b.google.protobuf.Int64ValueB\x1c\xfa\xc71\x181073741824-1099511627776R\x16mdbPreserveBinlogBytes\x12[\n" +
 	"\x13interactive_timeout\x183 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t600-86400R\x12interactiveTimeout\x12M\n" +
-	"\fwait_timeout\x184 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t600-86400R\vwaitTimeout\x12i\n" +
-	"\x1bmdb_offline_mode_enable_lag\x185 \x01(\v2\x1b.google.protobuf.Int64ValueB\x0e\xfa\xc71\n" +
-	"600-432000R\x17mdbOfflineModeEnableLag\x12i\n" +
-	"\x1cmdb_offline_mode_disable_lag\x186 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b60-86400R\x18mdbOfflineModeDisableLag\x12m\n" +
+	"\fwait_timeout\x184 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t600-86400R\vwaitTimeout\x12g\n" +
+	"\x1bmdb_offline_mode_enable_lag\x185 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b30-86400R\x17mdbOfflineModeEnableLag\x12i\n" +
+	"\x1cmdb_offline_mode_disable_lag\x186 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-86400R\x18mdbOfflineModeDisableLag\x12m\n" +
 	"\x1crange_optimizer_max_mem_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f60-268435456R\x18rangeOptimizerMaxMemSize\x12w\n" +
 	" innodb_online_alter_log_max_size\x188 \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f60-107374182400R\x1binnodbOnlineAlterLogMaxSize\x12]\n" +
 	"\x18innodb_ft_min_token_size\x189 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x040-16R\x14innodbFtMinTokenSize\x12^\n" +
