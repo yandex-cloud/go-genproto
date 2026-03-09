@@ -47,6 +47,7 @@ type CreateTransferRequest struct {
 	// For details about the concept, see [documentation]({{ api-url-prefix
 	// }}/resource-manager/concepts/labels).
 	Labels             map[string]string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	RegularSnapshot    *RegularSnapshot  `protobuf:"bytes,9,opt,name=regular_snapshot,json=regularSnapshot,proto3" json:"regular_snapshot,omitempty"`
 	Transformation     *Transformation   `protobuf:"bytes,10,opt,name=transformation,proto3" json:"transformation,omitempty"`
 	DataObjects        *DataObjects      `protobuf:"bytes,12,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
 	ReplicationRuntime *Runtime          `protobuf:"bytes,16,opt,name=replication_runtime,json=replicationRuntime,proto3" json:"replication_runtime,omitempty"`
@@ -140,6 +141,13 @@ func (x *CreateTransferRequest) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *CreateTransferRequest) GetRegularSnapshot() *RegularSnapshot {
+	if x != nil {
+		return x.RegularSnapshot
+	}
+	return nil
+}
+
 func (x *CreateTransferRequest) GetTransformation() *Transformation {
 	if x != nil {
 		return x.Transformation
@@ -225,6 +233,7 @@ type UpdateTransferRequest struct {
 	// For details about the concept, see [documentation]({{ api-url-prefix
 	// }}/resource-manager/concepts/labels).
 	Labels             map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	RegularSnapshot    *RegularSnapshot  `protobuf:"bytes,7,opt,name=regular_snapshot,json=regularSnapshot,proto3" json:"regular_snapshot,omitempty"`
 	Transformation     *Transformation   `protobuf:"bytes,8,opt,name=transformation,proto3" json:"transformation,omitempty"`
 	DataObjects        *DataObjects      `protobuf:"bytes,10,opt,name=data_objects,json=dataObjects,proto3" json:"data_objects,omitempty"`
 	ReplicationRuntime *Runtime          `protobuf:"bytes,12,opt,name=replication_runtime,json=replicationRuntime,proto3" json:"replication_runtime,omitempty"`
@@ -300,6 +309,13 @@ func (x *UpdateTransferRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 func (x *UpdateTransferRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
+	}
+	return nil
+}
+
+func (x *UpdateTransferRequest) GetRegularSnapshot() *RegularSnapshot {
+	if x != nil {
+		return x.RegularSnapshot
 	}
 	return nil
 }
@@ -826,7 +842,7 @@ var File_yandex_cloud_datatransfer_v1_transfer_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_datatransfer_v1_transfer_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/datatransfer/v1/transfer_service.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a+yandex/cloud/datatransfer/v1/transfer.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\xc7\x05\n" +
+	"3yandex/cloud/datatransfer/v1/transfer_service.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a+yandex/cloud/datatransfer/v1/transfer.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\x9b\x06\n" +
 	"\x15CreateTransferRequest\x12\x1b\n" +
 	"\tsource_id\x18\x01 \x01(\tR\bsourceId\x12\x1b\n" +
 	"\ttarget_id\x18\x02 \x01(\tR\btargetId\x12 \n" +
@@ -835,18 +851,18 @@ const file_yandex_cloud_datatransfer_v1_transfer_service_proto_rawDesc = "" +
 	"\aruntime\x18\x05 \x01(\v2%.yandex.cloud.datatransfer.v1.RuntimeR\aruntime\x12>\n" +
 	"\x04type\x18\x06 \x01(\x0e2*.yandex.cloud.datatransfer.v1.TransferTypeR\x04type\x12\x12\n" +
 	"\x04name\x18\a \x01(\tR\x04name\x12W\n" +
-	"\x06labels\x18\b \x03(\v2?.yandex.cloud.datatransfer.v1.CreateTransferRequest.LabelsEntryR\x06labels\x12T\n" +
+	"\x06labels\x18\b \x03(\v2?.yandex.cloud.datatransfer.v1.CreateTransferRequest.LabelsEntryR\x06labels\x12X\n" +
+	"\x10regular_snapshot\x18\t \x01(\v2-.yandex.cloud.datatransfer.v1.RegularSnapshotR\x0fregularSnapshot\x12T\n" +
 	"\x0etransformation\x18\n" +
 	" \x01(\v2,.yandex.cloud.datatransfer.v1.TransformationR\x0etransformation\x12L\n" +
 	"\fdata_objects\x18\f \x01(\v2).yandex.cloud.datatransfer.v1.DataObjectsR\vdataObjects\x12V\n" +
 	"\x13replication_runtime\x18\x10 \x01(\v2%.yandex.cloud.datatransfer.v1.RuntimeR\x12replicationRuntime\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\n" +
-	"J\x04\b\v\x10\fJ\x04\b\r\x10\x10\"9\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\v\x10\fJ\x04\b\r\x10\x10\"9\n" +
 	"\x16CreateTransferMetadata\x12\x1f\n" +
 	"\vtransfer_id\x18\x01 \x01(\tR\n" +
-	"transferId\"\x8e\x05\n" +
+	"transferId\"\xe2\x05\n" +
 	"\x15UpdateTransferRequest\x12\x1f\n" +
 	"\vtransfer_id\x18\x01 \x01(\tR\n" +
 	"transferId\x12 \n" +
@@ -855,14 +871,15 @@ const file_yandex_cloud_datatransfer_v1_transfer_service_proto_rawDesc = "" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12;\n" +
 	"\vupdate_mask\x18\x05 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12W\n" +
-	"\x06labels\x18\x06 \x03(\v2?.yandex.cloud.datatransfer.v1.UpdateTransferRequest.LabelsEntryR\x06labels\x12T\n" +
+	"\x06labels\x18\x06 \x03(\v2?.yandex.cloud.datatransfer.v1.UpdateTransferRequest.LabelsEntryR\x06labels\x12X\n" +
+	"\x10regular_snapshot\x18\a \x01(\v2-.yandex.cloud.datatransfer.v1.RegularSnapshotR\x0fregularSnapshot\x12T\n" +
 	"\x0etransformation\x18\b \x01(\v2,.yandex.cloud.datatransfer.v1.TransformationR\x0etransformation\x12L\n" +
 	"\fdata_objects\x18\n" +
 	" \x01(\v2).yandex.cloud.datatransfer.v1.DataObjectsR\vdataObjects\x12V\n" +
 	"\x13replication_runtime\x18\f \x01(\v2%.yandex.cloud.datatransfer.v1.RuntimeR\x12replicationRuntime\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\a\x10\bJ\x04\b\t\x10\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\n" +
 	"J\x04\b\v\x10\f\"9\n" +
 	"\x16UpdateTransferMetadata\x12\x1f\n" +
 	"\vtransfer_id\x18\x01 \x01(\tR\n" +
@@ -943,45 +960,48 @@ var file_yandex_cloud_datatransfer_v1_transfer_service_proto_goTypes = []any{
 	nil,                                // 14: yandex.cloud.datatransfer.v1.UpdateTransferRequest.LabelsEntry
 	(*Runtime)(nil),                    // 15: yandex.cloud.datatransfer.v1.Runtime
 	(TransferType)(0),                  // 16: yandex.cloud.datatransfer.v1.TransferType
-	(*Transformation)(nil),             // 17: yandex.cloud.datatransfer.v1.Transformation
-	(*DataObjects)(nil),                // 18: yandex.cloud.datatransfer.v1.DataObjects
-	(*fieldmaskpb.FieldMask)(nil),      // 19: google.protobuf.FieldMask
-	(*Transfer)(nil),                   // 20: yandex.cloud.datatransfer.v1.Transfer
-	(*operation.Operation)(nil),        // 21: yandex.cloud.operation.Operation
+	(*RegularSnapshot)(nil),            // 17: yandex.cloud.datatransfer.v1.RegularSnapshot
+	(*Transformation)(nil),             // 18: yandex.cloud.datatransfer.v1.Transformation
+	(*DataObjects)(nil),                // 19: yandex.cloud.datatransfer.v1.DataObjects
+	(*fieldmaskpb.FieldMask)(nil),      // 20: google.protobuf.FieldMask
+	(*Transfer)(nil),                   // 21: yandex.cloud.datatransfer.v1.Transfer
+	(*operation.Operation)(nil),        // 22: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_datatransfer_v1_transfer_service_proto_depIdxs = []int32{
 	15, // 0: yandex.cloud.datatransfer.v1.CreateTransferRequest.runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
 	16, // 1: yandex.cloud.datatransfer.v1.CreateTransferRequest.type:type_name -> yandex.cloud.datatransfer.v1.TransferType
 	13, // 2: yandex.cloud.datatransfer.v1.CreateTransferRequest.labels:type_name -> yandex.cloud.datatransfer.v1.CreateTransferRequest.LabelsEntry
-	17, // 3: yandex.cloud.datatransfer.v1.CreateTransferRequest.transformation:type_name -> yandex.cloud.datatransfer.v1.Transformation
-	18, // 4: yandex.cloud.datatransfer.v1.CreateTransferRequest.data_objects:type_name -> yandex.cloud.datatransfer.v1.DataObjects
-	15, // 5: yandex.cloud.datatransfer.v1.CreateTransferRequest.replication_runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
-	15, // 6: yandex.cloud.datatransfer.v1.UpdateTransferRequest.runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
-	19, // 7: yandex.cloud.datatransfer.v1.UpdateTransferRequest.update_mask:type_name -> google.protobuf.FieldMask
-	14, // 8: yandex.cloud.datatransfer.v1.UpdateTransferRequest.labels:type_name -> yandex.cloud.datatransfer.v1.UpdateTransferRequest.LabelsEntry
-	17, // 9: yandex.cloud.datatransfer.v1.UpdateTransferRequest.transformation:type_name -> yandex.cloud.datatransfer.v1.Transformation
-	18, // 10: yandex.cloud.datatransfer.v1.UpdateTransferRequest.data_objects:type_name -> yandex.cloud.datatransfer.v1.DataObjects
-	15, // 11: yandex.cloud.datatransfer.v1.UpdateTransferRequest.replication_runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
-	20, // 12: yandex.cloud.datatransfer.v1.ListTransfersResponse.transfers:type_name -> yandex.cloud.datatransfer.v1.Transfer
-	0,  // 13: yandex.cloud.datatransfer.v1.TransferService.Create:input_type -> yandex.cloud.datatransfer.v1.CreateTransferRequest
-	2,  // 14: yandex.cloud.datatransfer.v1.TransferService.Update:input_type -> yandex.cloud.datatransfer.v1.UpdateTransferRequest
-	4,  // 15: yandex.cloud.datatransfer.v1.TransferService.Delete:input_type -> yandex.cloud.datatransfer.v1.DeleteTransferRequest
-	6,  // 16: yandex.cloud.datatransfer.v1.TransferService.List:input_type -> yandex.cloud.datatransfer.v1.ListTransfersRequest
-	8,  // 17: yandex.cloud.datatransfer.v1.TransferService.Get:input_type -> yandex.cloud.datatransfer.v1.GetTransferRequest
-	9,  // 18: yandex.cloud.datatransfer.v1.TransferService.Deactivate:input_type -> yandex.cloud.datatransfer.v1.DeactivateTransferRequest
-	11, // 19: yandex.cloud.datatransfer.v1.TransferService.Activate:input_type -> yandex.cloud.datatransfer.v1.ActivateTransferRequest
-	21, // 20: yandex.cloud.datatransfer.v1.TransferService.Create:output_type -> yandex.cloud.operation.Operation
-	21, // 21: yandex.cloud.datatransfer.v1.TransferService.Update:output_type -> yandex.cloud.operation.Operation
-	21, // 22: yandex.cloud.datatransfer.v1.TransferService.Delete:output_type -> yandex.cloud.operation.Operation
-	7,  // 23: yandex.cloud.datatransfer.v1.TransferService.List:output_type -> yandex.cloud.datatransfer.v1.ListTransfersResponse
-	20, // 24: yandex.cloud.datatransfer.v1.TransferService.Get:output_type -> yandex.cloud.datatransfer.v1.Transfer
-	21, // 25: yandex.cloud.datatransfer.v1.TransferService.Deactivate:output_type -> yandex.cloud.operation.Operation
-	21, // 26: yandex.cloud.datatransfer.v1.TransferService.Activate:output_type -> yandex.cloud.operation.Operation
-	20, // [20:27] is the sub-list for method output_type
-	13, // [13:20] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	17, // 3: yandex.cloud.datatransfer.v1.CreateTransferRequest.regular_snapshot:type_name -> yandex.cloud.datatransfer.v1.RegularSnapshot
+	18, // 4: yandex.cloud.datatransfer.v1.CreateTransferRequest.transformation:type_name -> yandex.cloud.datatransfer.v1.Transformation
+	19, // 5: yandex.cloud.datatransfer.v1.CreateTransferRequest.data_objects:type_name -> yandex.cloud.datatransfer.v1.DataObjects
+	15, // 6: yandex.cloud.datatransfer.v1.CreateTransferRequest.replication_runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
+	15, // 7: yandex.cloud.datatransfer.v1.UpdateTransferRequest.runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
+	20, // 8: yandex.cloud.datatransfer.v1.UpdateTransferRequest.update_mask:type_name -> google.protobuf.FieldMask
+	14, // 9: yandex.cloud.datatransfer.v1.UpdateTransferRequest.labels:type_name -> yandex.cloud.datatransfer.v1.UpdateTransferRequest.LabelsEntry
+	17, // 10: yandex.cloud.datatransfer.v1.UpdateTransferRequest.regular_snapshot:type_name -> yandex.cloud.datatransfer.v1.RegularSnapshot
+	18, // 11: yandex.cloud.datatransfer.v1.UpdateTransferRequest.transformation:type_name -> yandex.cloud.datatransfer.v1.Transformation
+	19, // 12: yandex.cloud.datatransfer.v1.UpdateTransferRequest.data_objects:type_name -> yandex.cloud.datatransfer.v1.DataObjects
+	15, // 13: yandex.cloud.datatransfer.v1.UpdateTransferRequest.replication_runtime:type_name -> yandex.cloud.datatransfer.v1.Runtime
+	21, // 14: yandex.cloud.datatransfer.v1.ListTransfersResponse.transfers:type_name -> yandex.cloud.datatransfer.v1.Transfer
+	0,  // 15: yandex.cloud.datatransfer.v1.TransferService.Create:input_type -> yandex.cloud.datatransfer.v1.CreateTransferRequest
+	2,  // 16: yandex.cloud.datatransfer.v1.TransferService.Update:input_type -> yandex.cloud.datatransfer.v1.UpdateTransferRequest
+	4,  // 17: yandex.cloud.datatransfer.v1.TransferService.Delete:input_type -> yandex.cloud.datatransfer.v1.DeleteTransferRequest
+	6,  // 18: yandex.cloud.datatransfer.v1.TransferService.List:input_type -> yandex.cloud.datatransfer.v1.ListTransfersRequest
+	8,  // 19: yandex.cloud.datatransfer.v1.TransferService.Get:input_type -> yandex.cloud.datatransfer.v1.GetTransferRequest
+	9,  // 20: yandex.cloud.datatransfer.v1.TransferService.Deactivate:input_type -> yandex.cloud.datatransfer.v1.DeactivateTransferRequest
+	11, // 21: yandex.cloud.datatransfer.v1.TransferService.Activate:input_type -> yandex.cloud.datatransfer.v1.ActivateTransferRequest
+	22, // 22: yandex.cloud.datatransfer.v1.TransferService.Create:output_type -> yandex.cloud.operation.Operation
+	22, // 23: yandex.cloud.datatransfer.v1.TransferService.Update:output_type -> yandex.cloud.operation.Operation
+	22, // 24: yandex.cloud.datatransfer.v1.TransferService.Delete:output_type -> yandex.cloud.operation.Operation
+	7,  // 25: yandex.cloud.datatransfer.v1.TransferService.List:output_type -> yandex.cloud.datatransfer.v1.ListTransfersResponse
+	21, // 26: yandex.cloud.datatransfer.v1.TransferService.Get:output_type -> yandex.cloud.datatransfer.v1.Transfer
+	22, // 27: yandex.cloud.datatransfer.v1.TransferService.Deactivate:output_type -> yandex.cloud.operation.Operation
+	22, // 28: yandex.cloud.datatransfer.v1.TransferService.Activate:output_type -> yandex.cloud.operation.Operation
+	22, // [22:29] is the sub-list for method output_type
+	15, // [15:22] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_datatransfer_v1_transfer_service_proto_init() }

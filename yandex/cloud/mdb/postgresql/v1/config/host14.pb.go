@@ -26,10 +26,14 @@ const (
 type PostgresqlHostConfig14_BackslashQuote int32
 
 const (
-	PostgresqlHostConfig14_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlHostConfig14_BackslashQuote = 0
-	PostgresqlHostConfig14_BACKSLASH_QUOTE               PostgresqlHostConfig14_BackslashQuote = 1
-	PostgresqlHostConfig14_BACKSLASH_QUOTE_ON            PostgresqlHostConfig14_BackslashQuote = 2
-	PostgresqlHostConfig14_BACKSLASH_QUOTE_OFF           PostgresqlHostConfig14_BackslashQuote = 3
+	PostgresqlHostConfig14_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlHostConfig14_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlHostConfig14_BACKSLASH_QUOTE PostgresqlHostConfig14_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlHostConfig14_BACKSLASH_QUOTE_ON PostgresqlHostConfig14_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlHostConfig14_BACKSLASH_QUOTE_OFF PostgresqlHostConfig14_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlHostConfig14_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlHostConfig14_BackslashQuote = 4
 )
 
@@ -82,8 +86,10 @@ type PostgresqlHostConfig14_ByteaOutput int32
 
 const (
 	PostgresqlHostConfig14_BYTEA_OUTPUT_UNSPECIFIED PostgresqlHostConfig14_ByteaOutput = 0
-	PostgresqlHostConfig14_BYTEA_OUTPUT_HEX         PostgresqlHostConfig14_ByteaOutput = 1
-	PostgresqlHostConfig14_BYTEA_OUTPUT_ESCAPED     PostgresqlHostConfig14_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlHostConfig14_BYTEA_OUTPUT_HEX PostgresqlHostConfig14_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlHostConfig14_BYTEA_OUTPUT_ESCAPED PostgresqlHostConfig14_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlHostConfig14_ByteaOutput.
@@ -131,9 +137,12 @@ type PostgresqlHostConfig14_ConstraintExclusion int32
 
 const (
 	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlHostConfig14_ConstraintExclusion = 0
-	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_ON          PostgresqlHostConfig14_ConstraintExclusion = 1
-	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_OFF         PostgresqlHostConfig14_ConstraintExclusion = 2
-	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlHostConfig14_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_ON PostgresqlHostConfig14_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_OFF PostgresqlHostConfig14_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlHostConfig14_CONSTRAINT_EXCLUSION_PARTITION PostgresqlHostConfig14_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlHostConfig14_ConstraintExclusion.
@@ -183,9 +192,12 @@ type PostgresqlHostConfig14_ForceParallelMode int32
 
 const (
 	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlHostConfig14_ForceParallelMode = 0
-	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_ON          PostgresqlHostConfig14_ForceParallelMode = 1
-	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_OFF         PostgresqlHostConfig14_ForceParallelMode = 2
-	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_REGRESS     PostgresqlHostConfig14_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_ON PostgresqlHostConfig14_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_OFF PostgresqlHostConfig14_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlHostConfig14_FORCE_PARALLEL_MODE_REGRESS PostgresqlHostConfig14_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlHostConfig14_ForceParallelMode.
@@ -235,9 +247,12 @@ type PostgresqlHostConfig14_LogErrorVerbosity int32
 
 const (
 	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlHostConfig14_LogErrorVerbosity = 0
-	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_TERSE       PostgresqlHostConfig14_LogErrorVerbosity = 1
-	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlHostConfig14_LogErrorVerbosity = 2
-	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlHostConfig14_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_TERSE PostgresqlHostConfig14_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlHostConfig14_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlHostConfig14_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlHostConfig14_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlHostConfig14_LogErrorVerbosity.
@@ -287,17 +302,28 @@ type PostgresqlHostConfig14_LogLevel int32
 
 const (
 	PostgresqlHostConfig14_LOG_LEVEL_UNSPECIFIED PostgresqlHostConfig14_LogLevel = 0
-	PostgresqlHostConfig14_LOG_LEVEL_DEBUG5      PostgresqlHostConfig14_LogLevel = 1
-	PostgresqlHostConfig14_LOG_LEVEL_DEBUG4      PostgresqlHostConfig14_LogLevel = 2
-	PostgresqlHostConfig14_LOG_LEVEL_DEBUG3      PostgresqlHostConfig14_LogLevel = 3
-	PostgresqlHostConfig14_LOG_LEVEL_DEBUG2      PostgresqlHostConfig14_LogLevel = 4
-	PostgresqlHostConfig14_LOG_LEVEL_DEBUG1      PostgresqlHostConfig14_LogLevel = 5
-	PostgresqlHostConfig14_LOG_LEVEL_LOG         PostgresqlHostConfig14_LogLevel = 6
-	PostgresqlHostConfig14_LOG_LEVEL_NOTICE      PostgresqlHostConfig14_LogLevel = 7
-	PostgresqlHostConfig14_LOG_LEVEL_WARNING     PostgresqlHostConfig14_LogLevel = 8
-	PostgresqlHostConfig14_LOG_LEVEL_ERROR       PostgresqlHostConfig14_LogLevel = 9
-	PostgresqlHostConfig14_LOG_LEVEL_FATAL       PostgresqlHostConfig14_LogLevel = 10
-	PostgresqlHostConfig14_LOG_LEVEL_PANIC       PostgresqlHostConfig14_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig14_LOG_LEVEL_DEBUG5 PostgresqlHostConfig14_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig14_LOG_LEVEL_DEBUG4 PostgresqlHostConfig14_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig14_LOG_LEVEL_DEBUG3 PostgresqlHostConfig14_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig14_LOG_LEVEL_DEBUG2 PostgresqlHostConfig14_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig14_LOG_LEVEL_DEBUG1 PostgresqlHostConfig14_LogLevel = 5
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlHostConfig14_LOG_LEVEL_LOG PostgresqlHostConfig14_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlHostConfig14_LOG_LEVEL_NOTICE PostgresqlHostConfig14_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlHostConfig14_LOG_LEVEL_WARNING PostgresqlHostConfig14_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlHostConfig14_LOG_LEVEL_ERROR PostgresqlHostConfig14_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlHostConfig14_LOG_LEVEL_FATAL PostgresqlHostConfig14_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlHostConfig14_LOG_LEVEL_PANIC PostgresqlHostConfig14_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlHostConfig14_LogLevel.
@@ -363,10 +389,14 @@ type PostgresqlHostConfig14_LogStatement int32
 
 const (
 	PostgresqlHostConfig14_LOG_STATEMENT_UNSPECIFIED PostgresqlHostConfig14_LogStatement = 0
-	PostgresqlHostConfig14_LOG_STATEMENT_NONE        PostgresqlHostConfig14_LogStatement = 1
-	PostgresqlHostConfig14_LOG_STATEMENT_DDL         PostgresqlHostConfig14_LogStatement = 2
-	PostgresqlHostConfig14_LOG_STATEMENT_MOD         PostgresqlHostConfig14_LogStatement = 3
-	PostgresqlHostConfig14_LOG_STATEMENT_ALL         PostgresqlHostConfig14_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlHostConfig14_LOG_STATEMENT_NONE PostgresqlHostConfig14_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlHostConfig14_LOG_STATEMENT_DDL PostgresqlHostConfig14_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlHostConfig14_LOG_STATEMENT_MOD PostgresqlHostConfig14_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlHostConfig14_LOG_STATEMENT_ALL PostgresqlHostConfig14_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlHostConfig14_LogStatement.
@@ -417,11 +447,17 @@ func (PostgresqlHostConfig14_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig14_TransactionIsolation int32
 
 const (
-	PostgresqlHostConfig14_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlHostConfig14_TransactionIsolation = 0
+	PostgresqlHostConfig14_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlHostConfig14_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlHostConfig14_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlHostConfig14_TransactionIsolation = 1
-	PostgresqlHostConfig14_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlHostConfig14_TransactionIsolation = 2
-	PostgresqlHostConfig14_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlHostConfig14_TransactionIsolation = 3
-	PostgresqlHostConfig14_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlHostConfig14_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlHostConfig14_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlHostConfig14_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlHostConfig14_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlHostConfig14_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlHostConfig14_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlHostConfig14_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlHostConfig14_TransactionIsolation.
@@ -473,8 +509,10 @@ type PostgresqlHostConfig14_XmlBinary int32
 
 const (
 	PostgresqlHostConfig14_XML_BINARY_UNSPECIFIED PostgresqlHostConfig14_XmlBinary = 0
-	PostgresqlHostConfig14_XML_BINARY_BASE64      PostgresqlHostConfig14_XmlBinary = 1
-	PostgresqlHostConfig14_XML_BINARY_HEX         PostgresqlHostConfig14_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlHostConfig14_XML_BINARY_BASE64 PostgresqlHostConfig14_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlHostConfig14_XML_BINARY_HEX PostgresqlHostConfig14_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlHostConfig14_XmlBinary.
@@ -522,8 +560,10 @@ type PostgresqlHostConfig14_XmlOption int32
 
 const (
 	PostgresqlHostConfig14_XML_OPTION_UNSPECIFIED PostgresqlHostConfig14_XmlOption = 0
-	PostgresqlHostConfig14_XML_OPTION_DOCUMENT    PostgresqlHostConfig14_XmlOption = 1
-	PostgresqlHostConfig14_XML_OPTION_CONTENT     PostgresqlHostConfig14_XmlOption = 2
+	// XML document.
+	PostgresqlHostConfig14_XML_OPTION_DOCUMENT PostgresqlHostConfig14_XmlOption = 1
+	// XML fragment.
+	PostgresqlHostConfig14_XML_OPTION_CONTENT PostgresqlHostConfig14_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlHostConfig14_XmlOption.

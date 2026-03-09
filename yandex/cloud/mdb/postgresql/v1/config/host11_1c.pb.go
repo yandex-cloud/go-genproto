@@ -26,10 +26,14 @@ const (
 type PostgresqlHostConfig11_1C_BackslashQuote int32
 
 const (
-	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlHostConfig11_1C_BackslashQuote = 0
-	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE               PostgresqlHostConfig11_1C_BackslashQuote = 1
-	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_ON            PostgresqlHostConfig11_1C_BackslashQuote = 2
-	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_OFF           PostgresqlHostConfig11_1C_BackslashQuote = 3
+	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlHostConfig11_1C_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE PostgresqlHostConfig11_1C_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_ON PostgresqlHostConfig11_1C_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_OFF PostgresqlHostConfig11_1C_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlHostConfig11_1C_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlHostConfig11_1C_BackslashQuote = 4
 )
 
@@ -82,8 +86,10 @@ type PostgresqlHostConfig11_1C_ByteaOutput int32
 
 const (
 	PostgresqlHostConfig11_1C_BYTEA_OUTPUT_UNSPECIFIED PostgresqlHostConfig11_1C_ByteaOutput = 0
-	PostgresqlHostConfig11_1C_BYTEA_OUTPUT_HEX         PostgresqlHostConfig11_1C_ByteaOutput = 1
-	PostgresqlHostConfig11_1C_BYTEA_OUTPUT_ESCAPED     PostgresqlHostConfig11_1C_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlHostConfig11_1C_BYTEA_OUTPUT_HEX PostgresqlHostConfig11_1C_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlHostConfig11_1C_BYTEA_OUTPUT_ESCAPED PostgresqlHostConfig11_1C_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_ByteaOutput.
@@ -131,9 +137,12 @@ type PostgresqlHostConfig11_1C_ConstraintExclusion int32
 
 const (
 	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlHostConfig11_1C_ConstraintExclusion = 0
-	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_ON          PostgresqlHostConfig11_1C_ConstraintExclusion = 1
-	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_OFF         PostgresqlHostConfig11_1C_ConstraintExclusion = 2
-	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlHostConfig11_1C_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_ON PostgresqlHostConfig11_1C_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_OFF PostgresqlHostConfig11_1C_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlHostConfig11_1C_CONSTRAINT_EXCLUSION_PARTITION PostgresqlHostConfig11_1C_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_ConstraintExclusion.
@@ -183,9 +192,12 @@ type PostgresqlHostConfig11_1C_ForceParallelMode int32
 
 const (
 	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlHostConfig11_1C_ForceParallelMode = 0
-	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_ON          PostgresqlHostConfig11_1C_ForceParallelMode = 1
-	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_OFF         PostgresqlHostConfig11_1C_ForceParallelMode = 2
-	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_REGRESS     PostgresqlHostConfig11_1C_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_ON PostgresqlHostConfig11_1C_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_OFF PostgresqlHostConfig11_1C_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlHostConfig11_1C_FORCE_PARALLEL_MODE_REGRESS PostgresqlHostConfig11_1C_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_ForceParallelMode.
@@ -235,9 +247,12 @@ type PostgresqlHostConfig11_1C_LogErrorVerbosity int32
 
 const (
 	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlHostConfig11_1C_LogErrorVerbosity = 0
-	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_TERSE       PostgresqlHostConfig11_1C_LogErrorVerbosity = 1
-	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlHostConfig11_1C_LogErrorVerbosity = 2
-	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlHostConfig11_1C_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_TERSE PostgresqlHostConfig11_1C_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlHostConfig11_1C_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlHostConfig11_1C_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlHostConfig11_1C_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_LogErrorVerbosity.
@@ -287,17 +302,28 @@ type PostgresqlHostConfig11_1C_LogLevel int32
 
 const (
 	PostgresqlHostConfig11_1C_LOG_LEVEL_UNSPECIFIED PostgresqlHostConfig11_1C_LogLevel = 0
-	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG5      PostgresqlHostConfig11_1C_LogLevel = 1
-	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG4      PostgresqlHostConfig11_1C_LogLevel = 2
-	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG3      PostgresqlHostConfig11_1C_LogLevel = 3
-	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG2      PostgresqlHostConfig11_1C_LogLevel = 4
-	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG1      PostgresqlHostConfig11_1C_LogLevel = 5
-	PostgresqlHostConfig11_1C_LOG_LEVEL_LOG         PostgresqlHostConfig11_1C_LogLevel = 6
-	PostgresqlHostConfig11_1C_LOG_LEVEL_NOTICE      PostgresqlHostConfig11_1C_LogLevel = 7
-	PostgresqlHostConfig11_1C_LOG_LEVEL_WARNING     PostgresqlHostConfig11_1C_LogLevel = 8
-	PostgresqlHostConfig11_1C_LOG_LEVEL_ERROR       PostgresqlHostConfig11_1C_LogLevel = 9
-	PostgresqlHostConfig11_1C_LOG_LEVEL_FATAL       PostgresqlHostConfig11_1C_LogLevel = 10
-	PostgresqlHostConfig11_1C_LOG_LEVEL_PANIC       PostgresqlHostConfig11_1C_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG5 PostgresqlHostConfig11_1C_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG4 PostgresqlHostConfig11_1C_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG3 PostgresqlHostConfig11_1C_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG2 PostgresqlHostConfig11_1C_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_DEBUG1 PostgresqlHostConfig11_1C_LogLevel = 5
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_LOG PostgresqlHostConfig11_1C_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_NOTICE PostgresqlHostConfig11_1C_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_WARNING PostgresqlHostConfig11_1C_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_ERROR PostgresqlHostConfig11_1C_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_FATAL PostgresqlHostConfig11_1C_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlHostConfig11_1C_LOG_LEVEL_PANIC PostgresqlHostConfig11_1C_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_LogLevel.
@@ -363,10 +389,14 @@ type PostgresqlHostConfig11_1C_LogStatement int32
 
 const (
 	PostgresqlHostConfig11_1C_LOG_STATEMENT_UNSPECIFIED PostgresqlHostConfig11_1C_LogStatement = 0
-	PostgresqlHostConfig11_1C_LOG_STATEMENT_NONE        PostgresqlHostConfig11_1C_LogStatement = 1
-	PostgresqlHostConfig11_1C_LOG_STATEMENT_DDL         PostgresqlHostConfig11_1C_LogStatement = 2
-	PostgresqlHostConfig11_1C_LOG_STATEMENT_MOD         PostgresqlHostConfig11_1C_LogStatement = 3
-	PostgresqlHostConfig11_1C_LOG_STATEMENT_ALL         PostgresqlHostConfig11_1C_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlHostConfig11_1C_LOG_STATEMENT_NONE PostgresqlHostConfig11_1C_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlHostConfig11_1C_LOG_STATEMENT_DDL PostgresqlHostConfig11_1C_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlHostConfig11_1C_LOG_STATEMENT_MOD PostgresqlHostConfig11_1C_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlHostConfig11_1C_LOG_STATEMENT_ALL PostgresqlHostConfig11_1C_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_LogStatement.
@@ -417,11 +447,17 @@ func (PostgresqlHostConfig11_1C_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig11_1C_TransactionIsolation int32
 
 const (
-	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlHostConfig11_1C_TransactionIsolation = 0
+	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlHostConfig11_1C_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlHostConfig11_1C_TransactionIsolation = 1
-	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlHostConfig11_1C_TransactionIsolation = 2
-	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlHostConfig11_1C_TransactionIsolation = 3
-	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlHostConfig11_1C_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlHostConfig11_1C_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlHostConfig11_1C_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlHostConfig11_1C_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlHostConfig11_1C_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_TransactionIsolation.
@@ -473,8 +509,10 @@ type PostgresqlHostConfig11_1C_XmlBinary int32
 
 const (
 	PostgresqlHostConfig11_1C_XML_BINARY_UNSPECIFIED PostgresqlHostConfig11_1C_XmlBinary = 0
-	PostgresqlHostConfig11_1C_XML_BINARY_BASE64      PostgresqlHostConfig11_1C_XmlBinary = 1
-	PostgresqlHostConfig11_1C_XML_BINARY_HEX         PostgresqlHostConfig11_1C_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlHostConfig11_1C_XML_BINARY_BASE64 PostgresqlHostConfig11_1C_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlHostConfig11_1C_XML_BINARY_HEX PostgresqlHostConfig11_1C_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_XmlBinary.
@@ -522,8 +560,10 @@ type PostgresqlHostConfig11_1C_XmlOption int32
 
 const (
 	PostgresqlHostConfig11_1C_XML_OPTION_UNSPECIFIED PostgresqlHostConfig11_1C_XmlOption = 0
-	PostgresqlHostConfig11_1C_XML_OPTION_DOCUMENT    PostgresqlHostConfig11_1C_XmlOption = 1
-	PostgresqlHostConfig11_1C_XML_OPTION_CONTENT     PostgresqlHostConfig11_1C_XmlOption = 2
+	// XML document.
+	PostgresqlHostConfig11_1C_XML_OPTION_DOCUMENT PostgresqlHostConfig11_1C_XmlOption = 1
+	// XML fragment.
+	PostgresqlHostConfig11_1C_XML_OPTION_CONTENT PostgresqlHostConfig11_1C_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlHostConfig11_1C_XmlOption.

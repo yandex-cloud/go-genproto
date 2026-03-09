@@ -38,6 +38,10 @@ func (m *CreateTransferRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateTransferRequest) SetRegularSnapshot(v *RegularSnapshot) {
+	m.RegularSnapshot = v
+}
+
 func (m *CreateTransferRequest) SetTransformation(v *Transformation) {
 	m.Transformation = v
 }
@@ -76,6 +80,10 @@ func (m *UpdateTransferRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateTransferRequest) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *UpdateTransferRequest) SetRegularSnapshot(v *RegularSnapshot) {
+	m.RegularSnapshot = v
 }
 
 func (m *UpdateTransferRequest) SetTransformation(v *Transformation) {

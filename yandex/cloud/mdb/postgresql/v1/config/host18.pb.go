@@ -26,10 +26,14 @@ const (
 type PostgresqlHostConfig18_BackslashQuote int32
 
 const (
-	PostgresqlHostConfig18_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlHostConfig18_BackslashQuote = 0
-	PostgresqlHostConfig18_BACKSLASH_QUOTE               PostgresqlHostConfig18_BackslashQuote = 1
-	PostgresqlHostConfig18_BACKSLASH_QUOTE_ON            PostgresqlHostConfig18_BackslashQuote = 2
-	PostgresqlHostConfig18_BACKSLASH_QUOTE_OFF           PostgresqlHostConfig18_BackslashQuote = 3
+	PostgresqlHostConfig18_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlHostConfig18_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlHostConfig18_BACKSLASH_QUOTE PostgresqlHostConfig18_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlHostConfig18_BACKSLASH_QUOTE_ON PostgresqlHostConfig18_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlHostConfig18_BACKSLASH_QUOTE_OFF PostgresqlHostConfig18_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlHostConfig18_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlHostConfig18_BackslashQuote = 4
 )
 
@@ -82,8 +86,10 @@ type PostgresqlHostConfig18_ByteaOutput int32
 
 const (
 	PostgresqlHostConfig18_BYTEA_OUTPUT_UNSPECIFIED PostgresqlHostConfig18_ByteaOutput = 0
-	PostgresqlHostConfig18_BYTEA_OUTPUT_HEX         PostgresqlHostConfig18_ByteaOutput = 1
-	PostgresqlHostConfig18_BYTEA_OUTPUT_ESCAPED     PostgresqlHostConfig18_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlHostConfig18_BYTEA_OUTPUT_HEX PostgresqlHostConfig18_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlHostConfig18_BYTEA_OUTPUT_ESCAPED PostgresqlHostConfig18_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlHostConfig18_ByteaOutput.
@@ -131,9 +137,12 @@ type PostgresqlHostConfig18_ConstraintExclusion int32
 
 const (
 	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlHostConfig18_ConstraintExclusion = 0
-	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_ON          PostgresqlHostConfig18_ConstraintExclusion = 1
-	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_OFF         PostgresqlHostConfig18_ConstraintExclusion = 2
-	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlHostConfig18_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_ON PostgresqlHostConfig18_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_OFF PostgresqlHostConfig18_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlHostConfig18_CONSTRAINT_EXCLUSION_PARTITION PostgresqlHostConfig18_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlHostConfig18_ConstraintExclusion.
@@ -183,9 +192,12 @@ type PostgresqlHostConfig18_DebugParallelQuery int32
 
 const (
 	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_UNSPECIFIED PostgresqlHostConfig18_DebugParallelQuery = 0
-	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_ON          PostgresqlHostConfig18_DebugParallelQuery = 1
-	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_OFF         PostgresqlHostConfig18_DebugParallelQuery = 2
-	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_REGRESS     PostgresqlHostConfig18_DebugParallelQuery = 3
+	// Force parallel query for all queries for which it is thought to be safe
+	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_ON PostgresqlHostConfig18_DebugParallelQuery = 1
+	// Use parallel mode only when it is expected to improve performance
+	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_OFF PostgresqlHostConfig18_DebugParallelQuery = 2
+	// Like ON, but with additional changes for regression testing (suppresses context lines, hides Gather nodes in EXPLAIN)
+	PostgresqlHostConfig18_DEBUG_PARALLEL_QUERY_REGRESS PostgresqlHostConfig18_DebugParallelQuery = 3
 )
 
 // Enum value maps for PostgresqlHostConfig18_DebugParallelQuery.
@@ -235,9 +247,12 @@ type PostgresqlHostConfig18_ForceParallelMode int32
 
 const (
 	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlHostConfig18_ForceParallelMode = 0
-	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_ON          PostgresqlHostConfig18_ForceParallelMode = 1
-	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_OFF         PostgresqlHostConfig18_ForceParallelMode = 2
-	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_REGRESS     PostgresqlHostConfig18_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_ON PostgresqlHostConfig18_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_OFF PostgresqlHostConfig18_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlHostConfig18_FORCE_PARALLEL_MODE_REGRESS PostgresqlHostConfig18_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlHostConfig18_ForceParallelMode.
@@ -287,9 +302,12 @@ type PostgresqlHostConfig18_LogErrorVerbosity int32
 
 const (
 	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlHostConfig18_LogErrorVerbosity = 0
-	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_TERSE       PostgresqlHostConfig18_LogErrorVerbosity = 1
-	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlHostConfig18_LogErrorVerbosity = 2
-	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlHostConfig18_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_TERSE PostgresqlHostConfig18_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlHostConfig18_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlHostConfig18_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlHostConfig18_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlHostConfig18_LogErrorVerbosity.
@@ -339,18 +357,30 @@ type PostgresqlHostConfig18_LogLevel int32
 
 const (
 	PostgresqlHostConfig18_LOG_LEVEL_UNSPECIFIED PostgresqlHostConfig18_LogLevel = 0
-	PostgresqlHostConfig18_LOG_LEVEL_DEBUG5      PostgresqlHostConfig18_LogLevel = 1
-	PostgresqlHostConfig18_LOG_LEVEL_DEBUG4      PostgresqlHostConfig18_LogLevel = 2
-	PostgresqlHostConfig18_LOG_LEVEL_DEBUG3      PostgresqlHostConfig18_LogLevel = 3
-	PostgresqlHostConfig18_LOG_LEVEL_DEBUG2      PostgresqlHostConfig18_LogLevel = 4
-	PostgresqlHostConfig18_LOG_LEVEL_DEBUG1      PostgresqlHostConfig18_LogLevel = 5
-	PostgresqlHostConfig18_LOG_LEVEL_INFO        PostgresqlHostConfig18_LogLevel = 12
-	PostgresqlHostConfig18_LOG_LEVEL_LOG         PostgresqlHostConfig18_LogLevel = 6
-	PostgresqlHostConfig18_LOG_LEVEL_NOTICE      PostgresqlHostConfig18_LogLevel = 7
-	PostgresqlHostConfig18_LOG_LEVEL_WARNING     PostgresqlHostConfig18_LogLevel = 8
-	PostgresqlHostConfig18_LOG_LEVEL_ERROR       PostgresqlHostConfig18_LogLevel = 9
-	PostgresqlHostConfig18_LOG_LEVEL_FATAL       PostgresqlHostConfig18_LogLevel = 10
-	PostgresqlHostConfig18_LOG_LEVEL_PANIC       PostgresqlHostConfig18_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig18_LOG_LEVEL_DEBUG5 PostgresqlHostConfig18_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig18_LOG_LEVEL_DEBUG4 PostgresqlHostConfig18_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig18_LOG_LEVEL_DEBUG3 PostgresqlHostConfig18_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig18_LOG_LEVEL_DEBUG2 PostgresqlHostConfig18_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig18_LOG_LEVEL_DEBUG1 PostgresqlHostConfig18_LogLevel = 5
+	// Provides information implicitly requested by the user, e.g., output from VACUUM VERBOSE.
+	PostgresqlHostConfig18_LOG_LEVEL_INFO PostgresqlHostConfig18_LogLevel = 12
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlHostConfig18_LOG_LEVEL_LOG PostgresqlHostConfig18_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlHostConfig18_LOG_LEVEL_NOTICE PostgresqlHostConfig18_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlHostConfig18_LOG_LEVEL_WARNING PostgresqlHostConfig18_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlHostConfig18_LOG_LEVEL_ERROR PostgresqlHostConfig18_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlHostConfig18_LOG_LEVEL_FATAL PostgresqlHostConfig18_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlHostConfig18_LOG_LEVEL_PANIC PostgresqlHostConfig18_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlHostConfig18_LogLevel.
@@ -418,10 +448,14 @@ type PostgresqlHostConfig18_LogStatement int32
 
 const (
 	PostgresqlHostConfig18_LOG_STATEMENT_UNSPECIFIED PostgresqlHostConfig18_LogStatement = 0
-	PostgresqlHostConfig18_LOG_STATEMENT_NONE        PostgresqlHostConfig18_LogStatement = 1
-	PostgresqlHostConfig18_LOG_STATEMENT_DDL         PostgresqlHostConfig18_LogStatement = 2
-	PostgresqlHostConfig18_LOG_STATEMENT_MOD         PostgresqlHostConfig18_LogStatement = 3
-	PostgresqlHostConfig18_LOG_STATEMENT_ALL         PostgresqlHostConfig18_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlHostConfig18_LOG_STATEMENT_NONE PostgresqlHostConfig18_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlHostConfig18_LOG_STATEMENT_DDL PostgresqlHostConfig18_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlHostConfig18_LOG_STATEMENT_MOD PostgresqlHostConfig18_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlHostConfig18_LOG_STATEMENT_ALL PostgresqlHostConfig18_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlHostConfig18_LogStatement.
@@ -472,11 +506,17 @@ func (PostgresqlHostConfig18_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig18_TransactionIsolation int32
 
 const (
-	PostgresqlHostConfig18_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlHostConfig18_TransactionIsolation = 0
+	PostgresqlHostConfig18_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlHostConfig18_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlHostConfig18_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlHostConfig18_TransactionIsolation = 1
-	PostgresqlHostConfig18_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlHostConfig18_TransactionIsolation = 2
-	PostgresqlHostConfig18_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlHostConfig18_TransactionIsolation = 3
-	PostgresqlHostConfig18_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlHostConfig18_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlHostConfig18_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlHostConfig18_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlHostConfig18_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlHostConfig18_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlHostConfig18_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlHostConfig18_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlHostConfig18_TransactionIsolation.
@@ -528,8 +568,10 @@ type PostgresqlHostConfig18_XmlBinary int32
 
 const (
 	PostgresqlHostConfig18_XML_BINARY_UNSPECIFIED PostgresqlHostConfig18_XmlBinary = 0
-	PostgresqlHostConfig18_XML_BINARY_BASE64      PostgresqlHostConfig18_XmlBinary = 1
-	PostgresqlHostConfig18_XML_BINARY_HEX         PostgresqlHostConfig18_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlHostConfig18_XML_BINARY_BASE64 PostgresqlHostConfig18_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlHostConfig18_XML_BINARY_HEX PostgresqlHostConfig18_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlHostConfig18_XmlBinary.
@@ -577,8 +619,10 @@ type PostgresqlHostConfig18_XmlOption int32
 
 const (
 	PostgresqlHostConfig18_XML_OPTION_UNSPECIFIED PostgresqlHostConfig18_XmlOption = 0
-	PostgresqlHostConfig18_XML_OPTION_DOCUMENT    PostgresqlHostConfig18_XmlOption = 1
-	PostgresqlHostConfig18_XML_OPTION_CONTENT     PostgresqlHostConfig18_XmlOption = 2
+	// XML document.
+	PostgresqlHostConfig18_XML_OPTION_DOCUMENT PostgresqlHostConfig18_XmlOption = 1
+	// XML fragment.
+	PostgresqlHostConfig18_XML_OPTION_CONTENT PostgresqlHostConfig18_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlHostConfig18_XmlOption.

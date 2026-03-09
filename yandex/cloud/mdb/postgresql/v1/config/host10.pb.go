@@ -27,9 +27,12 @@ type PostgresqlHostConfig10_ConstraintExclusion int32
 
 const (
 	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlHostConfig10_ConstraintExclusion = 0
-	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_ON          PostgresqlHostConfig10_ConstraintExclusion = 1
-	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_OFF         PostgresqlHostConfig10_ConstraintExclusion = 2
-	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlHostConfig10_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_ON PostgresqlHostConfig10_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_OFF PostgresqlHostConfig10_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlHostConfig10_CONSTRAINT_EXCLUSION_PARTITION PostgresqlHostConfig10_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlHostConfig10_ConstraintExclusion.
@@ -79,9 +82,12 @@ type PostgresqlHostConfig10_ForceParallelMode int32
 
 const (
 	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlHostConfig10_ForceParallelMode = 0
-	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_ON          PostgresqlHostConfig10_ForceParallelMode = 1
-	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_OFF         PostgresqlHostConfig10_ForceParallelMode = 2
-	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_REGRESS     PostgresqlHostConfig10_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_ON PostgresqlHostConfig10_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_OFF PostgresqlHostConfig10_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlHostConfig10_FORCE_PARALLEL_MODE_REGRESS PostgresqlHostConfig10_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlHostConfig10_ForceParallelMode.
@@ -131,17 +137,28 @@ type PostgresqlHostConfig10_LogLevel int32
 
 const (
 	PostgresqlHostConfig10_LOG_LEVEL_UNSPECIFIED PostgresqlHostConfig10_LogLevel = 0
-	PostgresqlHostConfig10_LOG_LEVEL_DEBUG5      PostgresqlHostConfig10_LogLevel = 1
-	PostgresqlHostConfig10_LOG_LEVEL_DEBUG4      PostgresqlHostConfig10_LogLevel = 2
-	PostgresqlHostConfig10_LOG_LEVEL_DEBUG3      PostgresqlHostConfig10_LogLevel = 3
-	PostgresqlHostConfig10_LOG_LEVEL_DEBUG2      PostgresqlHostConfig10_LogLevel = 4
-	PostgresqlHostConfig10_LOG_LEVEL_DEBUG1      PostgresqlHostConfig10_LogLevel = 5
-	PostgresqlHostConfig10_LOG_LEVEL_LOG         PostgresqlHostConfig10_LogLevel = 6
-	PostgresqlHostConfig10_LOG_LEVEL_NOTICE      PostgresqlHostConfig10_LogLevel = 7
-	PostgresqlHostConfig10_LOG_LEVEL_WARNING     PostgresqlHostConfig10_LogLevel = 8
-	PostgresqlHostConfig10_LOG_LEVEL_ERROR       PostgresqlHostConfig10_LogLevel = 9
-	PostgresqlHostConfig10_LOG_LEVEL_FATAL       PostgresqlHostConfig10_LogLevel = 10
-	PostgresqlHostConfig10_LOG_LEVEL_PANIC       PostgresqlHostConfig10_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig10_LOG_LEVEL_DEBUG5 PostgresqlHostConfig10_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig10_LOG_LEVEL_DEBUG4 PostgresqlHostConfig10_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig10_LOG_LEVEL_DEBUG3 PostgresqlHostConfig10_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig10_LOG_LEVEL_DEBUG2 PostgresqlHostConfig10_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig10_LOG_LEVEL_DEBUG1 PostgresqlHostConfig10_LogLevel = 5
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlHostConfig10_LOG_LEVEL_LOG PostgresqlHostConfig10_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlHostConfig10_LOG_LEVEL_NOTICE PostgresqlHostConfig10_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlHostConfig10_LOG_LEVEL_WARNING PostgresqlHostConfig10_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlHostConfig10_LOG_LEVEL_ERROR PostgresqlHostConfig10_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlHostConfig10_LOG_LEVEL_FATAL PostgresqlHostConfig10_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlHostConfig10_LOG_LEVEL_PANIC PostgresqlHostConfig10_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlHostConfig10_LogLevel.
@@ -207,9 +224,12 @@ type PostgresqlHostConfig10_LogErrorVerbosity int32
 
 const (
 	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlHostConfig10_LogErrorVerbosity = 0
-	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_TERSE       PostgresqlHostConfig10_LogErrorVerbosity = 1
-	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlHostConfig10_LogErrorVerbosity = 2
-	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlHostConfig10_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_TERSE PostgresqlHostConfig10_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlHostConfig10_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlHostConfig10_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlHostConfig10_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlHostConfig10_LogErrorVerbosity.
@@ -259,10 +279,14 @@ type PostgresqlHostConfig10_LogStatement int32
 
 const (
 	PostgresqlHostConfig10_LOG_STATEMENT_UNSPECIFIED PostgresqlHostConfig10_LogStatement = 0
-	PostgresqlHostConfig10_LOG_STATEMENT_NONE        PostgresqlHostConfig10_LogStatement = 1
-	PostgresqlHostConfig10_LOG_STATEMENT_DDL         PostgresqlHostConfig10_LogStatement = 2
-	PostgresqlHostConfig10_LOG_STATEMENT_MOD         PostgresqlHostConfig10_LogStatement = 3
-	PostgresqlHostConfig10_LOG_STATEMENT_ALL         PostgresqlHostConfig10_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlHostConfig10_LOG_STATEMENT_NONE PostgresqlHostConfig10_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlHostConfig10_LOG_STATEMENT_DDL PostgresqlHostConfig10_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlHostConfig10_LOG_STATEMENT_MOD PostgresqlHostConfig10_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlHostConfig10_LOG_STATEMENT_ALL PostgresqlHostConfig10_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlHostConfig10_LogStatement.
@@ -313,11 +337,17 @@ func (PostgresqlHostConfig10_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig10_TransactionIsolation int32
 
 const (
-	PostgresqlHostConfig10_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlHostConfig10_TransactionIsolation = 0
+	PostgresqlHostConfig10_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlHostConfig10_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlHostConfig10_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlHostConfig10_TransactionIsolation = 1
-	PostgresqlHostConfig10_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlHostConfig10_TransactionIsolation = 2
-	PostgresqlHostConfig10_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlHostConfig10_TransactionIsolation = 3
-	PostgresqlHostConfig10_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlHostConfig10_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlHostConfig10_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlHostConfig10_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlHostConfig10_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlHostConfig10_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlHostConfig10_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlHostConfig10_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlHostConfig10_TransactionIsolation.
@@ -369,8 +399,10 @@ type PostgresqlHostConfig10_ByteaOutput int32
 
 const (
 	PostgresqlHostConfig10_BYTEA_OUTPUT_UNSPECIFIED PostgresqlHostConfig10_ByteaOutput = 0
-	PostgresqlHostConfig10_BYTEA_OUTPUT_HEX         PostgresqlHostConfig10_ByteaOutput = 1
-	PostgresqlHostConfig10_BYTEA_OUTPUT_ESCAPED     PostgresqlHostConfig10_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlHostConfig10_BYTEA_OUTPUT_HEX PostgresqlHostConfig10_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlHostConfig10_BYTEA_OUTPUT_ESCAPED PostgresqlHostConfig10_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlHostConfig10_ByteaOutput.
@@ -418,8 +450,10 @@ type PostgresqlHostConfig10_XmlBinary int32
 
 const (
 	PostgresqlHostConfig10_XML_BINARY_UNSPECIFIED PostgresqlHostConfig10_XmlBinary = 0
-	PostgresqlHostConfig10_XML_BINARY_BASE64      PostgresqlHostConfig10_XmlBinary = 1
-	PostgresqlHostConfig10_XML_BINARY_HEX         PostgresqlHostConfig10_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlHostConfig10_XML_BINARY_BASE64 PostgresqlHostConfig10_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlHostConfig10_XML_BINARY_HEX PostgresqlHostConfig10_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlHostConfig10_XmlBinary.
@@ -467,8 +501,10 @@ type PostgresqlHostConfig10_XmlOption int32
 
 const (
 	PostgresqlHostConfig10_XML_OPTION_UNSPECIFIED PostgresqlHostConfig10_XmlOption = 0
-	PostgresqlHostConfig10_XML_OPTION_DOCUMENT    PostgresqlHostConfig10_XmlOption = 1
-	PostgresqlHostConfig10_XML_OPTION_CONTENT     PostgresqlHostConfig10_XmlOption = 2
+	// XML document.
+	PostgresqlHostConfig10_XML_OPTION_DOCUMENT PostgresqlHostConfig10_XmlOption = 1
+	// XML fragment.
+	PostgresqlHostConfig10_XML_OPTION_CONTENT PostgresqlHostConfig10_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlHostConfig10_XmlOption.
@@ -515,10 +551,14 @@ func (PostgresqlHostConfig10_XmlOption) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig10_BackslashQuote int32
 
 const (
-	PostgresqlHostConfig10_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlHostConfig10_BackslashQuote = 0
-	PostgresqlHostConfig10_BACKSLASH_QUOTE               PostgresqlHostConfig10_BackslashQuote = 1
-	PostgresqlHostConfig10_BACKSLASH_QUOTE_ON            PostgresqlHostConfig10_BackslashQuote = 2
-	PostgresqlHostConfig10_BACKSLASH_QUOTE_OFF           PostgresqlHostConfig10_BackslashQuote = 3
+	PostgresqlHostConfig10_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlHostConfig10_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlHostConfig10_BACKSLASH_QUOTE PostgresqlHostConfig10_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlHostConfig10_BACKSLASH_QUOTE_ON PostgresqlHostConfig10_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlHostConfig10_BACKSLASH_QUOTE_OFF PostgresqlHostConfig10_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlHostConfig10_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlHostConfig10_BackslashQuote = 4
 )
 

@@ -22,6 +22,10 @@ func (m *OpenSearchConfig2) SetReindexRemoteWhitelist(v string) {
 	m.ReindexRemoteWhitelist = v
 }
 
+func (m *OpenSearchConfig2) SetHttpMaxInitialLineLength(v *wrapperspb.StringValue) {
+	m.HttpMaxInitialLineLength = v
+}
+
 func (m *OpenSearchConfigSet2) SetEffectiveConfig(v *OpenSearchConfig2) {
 	m.EffectiveConfig = v
 }

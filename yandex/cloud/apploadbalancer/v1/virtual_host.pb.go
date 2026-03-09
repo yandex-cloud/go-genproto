@@ -2219,12 +2219,12 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc = "" +
 	"\rroute_options\x18\x04 \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x128\n" +
 	"\x18disable_security_profile\x18\x05 \x01(\bR\x16disableSecurityProfile\x12w\n" +
 	"\x1aclient_certificate_forward\x18\x06 \x01(\v29.yandex.cloud.apploadbalancer.v1.ClientCertificateForwardR\x18clientCertificateForwardB\r\n" +
-	"\x05route\x12\x04\xc0\xc11\x01\"\xe6\x02\n" +
-	"\x18ClientCertificateForward\x12W\n" +
-	"\vhttp_header\x18\x01 \x01(\tB6\xf2\xc712(?i:ssl-client-cert|client-cert|x-ssl-client-cert)R\n" +
-	"httpHeader\x12u\n" +
-	"\x12issuer_header_name\x18\x02 \x01(\tBG\xf2\xc71C(?i:ssl-client-issuer-dn|client-cert-issuer|x-ssl-client-issuer-dn)R\x10issuerHeaderName\x12z\n" +
-	"\x13subject_header_name\x18\x03 \x01(\tBJ\xf2\xc71F(?i:ssl-client-subject-dn|client-cert-subject|x-ssl-client-subject-dn)R\x11subjectHeaderName\"\xdd\x02\n" +
+	"\x05route\x12\x04\xc0\xc11\x01\"\xe9\x02\n" +
+	"\x18ClientCertificateForward\x12X\n" +
+	"\vhttp_header\x18\x01 \x01(\tB7\xf2\xc713(?i:ssl-client-cert|client-cert|x-ssl-client-cert|)R\n" +
+	"httpHeader\x12v\n" +
+	"\x12issuer_header_name\x18\x02 \x01(\tBH\xf2\xc71D(?i:ssl-client-issuer-dn|client-cert-issuer|x-ssl-client-issuer-dn|)R\x10issuerHeaderName\x12{\n" +
+	"\x13subject_header_name\x18\x03 \x01(\tBK\xf2\xc71G(?i:ssl-client-subject-dn|client-cert-subject|x-ssl-client-subject-dn|)R\x11subjectHeaderName\"\xdd\x02\n" +
 	"\tHttpRoute\x12E\n" +
 	"\x05match\x18\x01 \x01(\v2/.yandex.cloud.apploadbalancer.v1.HttpRouteMatchR\x05match\x12H\n" +
 	"\x05route\x18\x02 \x01(\v20.yandex.cloud.apploadbalancer.v1.HttpRouteActionH\x00R\x05route\x12M\n" +

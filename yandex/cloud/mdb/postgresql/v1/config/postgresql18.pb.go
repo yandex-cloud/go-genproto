@@ -27,10 +27,14 @@ type PostgresqlConfig18_AutoExplainLogFormat int32
 
 const (
 	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED PostgresqlConfig18_AutoExplainLogFormat = 0
-	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_TEXT        PostgresqlConfig18_AutoExplainLogFormat = 1
-	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_XML         PostgresqlConfig18_AutoExplainLogFormat = 2
-	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_JSON        PostgresqlConfig18_AutoExplainLogFormat = 3
-	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_YAML        PostgresqlConfig18_AutoExplainLogFormat = 4
+	// 'text' value for the EXPLAIN output format in auto_explain extension
+	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_TEXT PostgresqlConfig18_AutoExplainLogFormat = 1
+	// 'xml' value for the EXPLAIN output format in auto_explain extension
+	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_XML PostgresqlConfig18_AutoExplainLogFormat = 2
+	// 'json' value for the EXPLAIN output format in auto_explain extension
+	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_JSON PostgresqlConfig18_AutoExplainLogFormat = 3
+	// 'yaml' value for the EXPLAIN output format in auto_explain extension
+	PostgresqlConfig18_AUTO_EXPLAIN_LOG_FORMAT_YAML PostgresqlConfig18_AutoExplainLogFormat = 4
 )
 
 // Enum value maps for PostgresqlConfig18_AutoExplainLogFormat.
@@ -81,10 +85,14 @@ func (PostgresqlConfig18_AutoExplainLogFormat) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig18_BackslashQuote int32
 
 const (
-	PostgresqlConfig18_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlConfig18_BackslashQuote = 0
-	PostgresqlConfig18_BACKSLASH_QUOTE               PostgresqlConfig18_BackslashQuote = 1
-	PostgresqlConfig18_BACKSLASH_QUOTE_ON            PostgresqlConfig18_BackslashQuote = 2
-	PostgresqlConfig18_BACKSLASH_QUOTE_OFF           PostgresqlConfig18_BackslashQuote = 3
+	PostgresqlConfig18_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlConfig18_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlConfig18_BACKSLASH_QUOTE PostgresqlConfig18_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlConfig18_BACKSLASH_QUOTE_ON PostgresqlConfig18_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlConfig18_BACKSLASH_QUOTE_OFF PostgresqlConfig18_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlConfig18_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlConfig18_BackslashQuote = 4
 )
 
@@ -137,8 +145,10 @@ type PostgresqlConfig18_ByteaOutput int32
 
 const (
 	PostgresqlConfig18_BYTEA_OUTPUT_UNSPECIFIED PostgresqlConfig18_ByteaOutput = 0
-	PostgresqlConfig18_BYTEA_OUTPUT_HEX         PostgresqlConfig18_ByteaOutput = 1
-	PostgresqlConfig18_BYTEA_OUTPUT_ESCAPED     PostgresqlConfig18_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlConfig18_BYTEA_OUTPUT_HEX PostgresqlConfig18_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlConfig18_BYTEA_OUTPUT_ESCAPED PostgresqlConfig18_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlConfig18_ByteaOutput.
@@ -186,9 +196,12 @@ type PostgresqlConfig18_ConstraintExclusion int32
 
 const (
 	PostgresqlConfig18_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlConfig18_ConstraintExclusion = 0
-	PostgresqlConfig18_CONSTRAINT_EXCLUSION_ON          PostgresqlConfig18_ConstraintExclusion = 1
-	PostgresqlConfig18_CONSTRAINT_EXCLUSION_OFF         PostgresqlConfig18_ConstraintExclusion = 2
-	PostgresqlConfig18_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlConfig18_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlConfig18_CONSTRAINT_EXCLUSION_ON PostgresqlConfig18_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlConfig18_CONSTRAINT_EXCLUSION_OFF PostgresqlConfig18_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlConfig18_CONSTRAINT_EXCLUSION_PARTITION PostgresqlConfig18_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlConfig18_ConstraintExclusion.
@@ -238,9 +251,12 @@ type PostgresqlConfig18_DebugParallelQuery int32
 
 const (
 	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_UNSPECIFIED PostgresqlConfig18_DebugParallelQuery = 0
-	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_ON          PostgresqlConfig18_DebugParallelQuery = 1
-	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_OFF         PostgresqlConfig18_DebugParallelQuery = 2
-	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_REGRESS     PostgresqlConfig18_DebugParallelQuery = 3
+	// Force parallel query for all queries for which it is thought to be safe
+	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_ON PostgresqlConfig18_DebugParallelQuery = 1
+	// Use parallel mode only when it is expected to improve performance
+	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_OFF PostgresqlConfig18_DebugParallelQuery = 2
+	// Like ON, but with additional changes for regression testing (suppresses context lines, hides Gather nodes in EXPLAIN)
+	PostgresqlConfig18_DEBUG_PARALLEL_QUERY_REGRESS PostgresqlConfig18_DebugParallelQuery = 3
 )
 
 // Enum value maps for PostgresqlConfig18_DebugParallelQuery.
@@ -290,9 +306,12 @@ type PostgresqlConfig18_LogErrorVerbosity int32
 
 const (
 	PostgresqlConfig18_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlConfig18_LogErrorVerbosity = 0
-	PostgresqlConfig18_LOG_ERROR_VERBOSITY_TERSE       PostgresqlConfig18_LogErrorVerbosity = 1
-	PostgresqlConfig18_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlConfig18_LogErrorVerbosity = 2
-	PostgresqlConfig18_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlConfig18_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlConfig18_LOG_ERROR_VERBOSITY_TERSE PostgresqlConfig18_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlConfig18_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlConfig18_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlConfig18_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlConfig18_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlConfig18_LogErrorVerbosity.
@@ -342,18 +361,30 @@ type PostgresqlConfig18_LogLevel int32
 
 const (
 	PostgresqlConfig18_LOG_LEVEL_UNSPECIFIED PostgresqlConfig18_LogLevel = 0
-	PostgresqlConfig18_LOG_LEVEL_DEBUG5      PostgresqlConfig18_LogLevel = 1
-	PostgresqlConfig18_LOG_LEVEL_DEBUG4      PostgresqlConfig18_LogLevel = 2
-	PostgresqlConfig18_LOG_LEVEL_DEBUG3      PostgresqlConfig18_LogLevel = 3
-	PostgresqlConfig18_LOG_LEVEL_DEBUG2      PostgresqlConfig18_LogLevel = 4
-	PostgresqlConfig18_LOG_LEVEL_DEBUG1      PostgresqlConfig18_LogLevel = 5
-	PostgresqlConfig18_LOG_LEVEL_INFO        PostgresqlConfig18_LogLevel = 12
-	PostgresqlConfig18_LOG_LEVEL_LOG         PostgresqlConfig18_LogLevel = 6
-	PostgresqlConfig18_LOG_LEVEL_NOTICE      PostgresqlConfig18_LogLevel = 7
-	PostgresqlConfig18_LOG_LEVEL_WARNING     PostgresqlConfig18_LogLevel = 8
-	PostgresqlConfig18_LOG_LEVEL_ERROR       PostgresqlConfig18_LogLevel = 9
-	PostgresqlConfig18_LOG_LEVEL_FATAL       PostgresqlConfig18_LogLevel = 10
-	PostgresqlConfig18_LOG_LEVEL_PANIC       PostgresqlConfig18_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig18_LOG_LEVEL_DEBUG5 PostgresqlConfig18_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig18_LOG_LEVEL_DEBUG4 PostgresqlConfig18_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig18_LOG_LEVEL_DEBUG3 PostgresqlConfig18_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig18_LOG_LEVEL_DEBUG2 PostgresqlConfig18_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig18_LOG_LEVEL_DEBUG1 PostgresqlConfig18_LogLevel = 5
+	// Provides information implicitly requested by the user, e.g., output from VACUUM VERBOSE.
+	PostgresqlConfig18_LOG_LEVEL_INFO PostgresqlConfig18_LogLevel = 12
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlConfig18_LOG_LEVEL_LOG PostgresqlConfig18_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlConfig18_LOG_LEVEL_NOTICE PostgresqlConfig18_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlConfig18_LOG_LEVEL_WARNING PostgresqlConfig18_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlConfig18_LOG_LEVEL_ERROR PostgresqlConfig18_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlConfig18_LOG_LEVEL_FATAL PostgresqlConfig18_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlConfig18_LOG_LEVEL_PANIC PostgresqlConfig18_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlConfig18_LogLevel.
@@ -421,10 +452,14 @@ type PostgresqlConfig18_LogStatement int32
 
 const (
 	PostgresqlConfig18_LOG_STATEMENT_UNSPECIFIED PostgresqlConfig18_LogStatement = 0
-	PostgresqlConfig18_LOG_STATEMENT_NONE        PostgresqlConfig18_LogStatement = 1
-	PostgresqlConfig18_LOG_STATEMENT_DDL         PostgresqlConfig18_LogStatement = 2
-	PostgresqlConfig18_LOG_STATEMENT_MOD         PostgresqlConfig18_LogStatement = 3
-	PostgresqlConfig18_LOG_STATEMENT_ALL         PostgresqlConfig18_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlConfig18_LOG_STATEMENT_NONE PostgresqlConfig18_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlConfig18_LOG_STATEMENT_DDL PostgresqlConfig18_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlConfig18_LOG_STATEMENT_MOD PostgresqlConfig18_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlConfig18_LOG_STATEMENT_ALL PostgresqlConfig18_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlConfig18_LogStatement.
@@ -475,8 +510,11 @@ func (PostgresqlConfig18_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig18_PasswordEncryption int32
 
 const (
-	PostgresqlConfig18_PASSWORD_ENCRYPTION_UNSPECIFIED   PostgresqlConfig18_PasswordEncryption = 0
-	PostgresqlConfig18_PASSWORD_ENCRYPTION_MD5           PostgresqlConfig18_PasswordEncryption = 1
+	PostgresqlConfig18_PASSWORD_ENCRYPTION_UNSPECIFIED PostgresqlConfig18_PasswordEncryption = 0
+	// The method md5 uses a custom less secure challenge-response mechanism. It prevents password sniffing and avoids storing passwords on the server in plain text but provides no protection if an attacker manages to steal the password hash from the server. Also, the MD5 hash algorithm is nowadays no longer considered secure against determined attacks.
+	PostgresqlConfig18_PASSWORD_ENCRYPTION_MD5 PostgresqlConfig18_PasswordEncryption = 1
+	// The method scram-sha-256 performs SCRAM-SHA-256 authentication, as described in RFC 7677. It is a challenge-response scheme that prevents password sniffing on untrusted connections and supports storing passwords on the server in a cryptographically hashed form that is thought to be secure.
+	// This is the most secure of the currently provided methods, but it is not supported by older client libraries.
 	PostgresqlConfig18_PASSWORD_ENCRYPTION_SCRAM_SHA_256 PostgresqlConfig18_PasswordEncryption = 2
 )
 
@@ -525,10 +563,14 @@ type PostgresqlConfig18_PgHintPlanDebugPrint int32
 
 const (
 	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_UNSPECIFIED PostgresqlConfig18_PgHintPlanDebugPrint = 0
-	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_OFF         PostgresqlConfig18_PgHintPlanDebugPrint = 1
-	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_ON          PostgresqlConfig18_PgHintPlanDebugPrint = 2
-	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_DETAILED    PostgresqlConfig18_PgHintPlanDebugPrint = 3
-	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE     PostgresqlConfig18_PgHintPlanDebugPrint = 4
+	// Disable debug output
+	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_OFF PostgresqlConfig18_PgHintPlanDebugPrint = 1
+	// Print debug messages about hint parsing
+	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_ON PostgresqlConfig18_PgHintPlanDebugPrint = 2
+	// Print detailed debug information including query planning process
+	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_DETAILED PostgresqlConfig18_PgHintPlanDebugPrint = 3
+	// Print verbose debug output with all internal operations
+	PostgresqlConfig18_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE PostgresqlConfig18_PgHintPlanDebugPrint = 4
 )
 
 // Enum value maps for PostgresqlConfig18_PgHintPlanDebugPrint.
@@ -579,9 +621,12 @@ func (PostgresqlConfig18_PgHintPlanDebugPrint) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig18_PlanCacheMode int32
 
 const (
-	PostgresqlConfig18_PLAN_CACHE_MODE_UNSPECIFIED        PostgresqlConfig18_PlanCacheMode = 0
-	PostgresqlConfig18_PLAN_CACHE_MODE_AUTO               PostgresqlConfig18_PlanCacheMode = 1
-	PostgresqlConfig18_PLAN_CACHE_MODE_FORCE_CUSTOM_PLAN  PostgresqlConfig18_PlanCacheMode = 2
+	PostgresqlConfig18_PLAN_CACHE_MODE_UNSPECIFIED PostgresqlConfig18_PlanCacheMode = 0
+	// Automatic selection.
+	PostgresqlConfig18_PLAN_CACHE_MODE_AUTO PostgresqlConfig18_PlanCacheMode = 1
+	// Forces the use of custom plans.
+	PostgresqlConfig18_PLAN_CACHE_MODE_FORCE_CUSTOM_PLAN PostgresqlConfig18_PlanCacheMode = 2
+	// Forces the use of generic plans.
 	PostgresqlConfig18_PLAN_CACHE_MODE_FORCE_GENERIC_PLAN PostgresqlConfig18_PlanCacheMode = 3
 )
 
@@ -631,31 +676,43 @@ func (PostgresqlConfig18_PlanCacheMode) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig18_SharedPreloadLibraries int32
 
 const (
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED  PostgresqlConfig18_SharedPreloadLibraries = 0
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED PostgresqlConfig18_SharedPreloadLibraries = 0
+	// Required for the [auto_explain](https://www.postgresql.org/docs/current/auto-explain.html) extension.
 	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN PostgresqlConfig18_SharedPreloadLibraries = 1
+	// Required for the [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan) extension.
 	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PG_HINT_PLAN PostgresqlConfig18_SharedPreloadLibraries = 2
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_TIMESCALEDB  PostgresqlConfig18_SharedPreloadLibraries = 3
+	// Required for [TimescaleDB](https://github.com/timescale/timescaledb) to function.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_TIMESCALEDB PostgresqlConfig18_SharedPreloadLibraries = 3
+	// Required for the [pg_qualstats](https://github.com/powa-team/pg_qualstats) extension.
 	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PG_QUALSTATS PostgresqlConfig18_SharedPreloadLibraries = 4
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PG_CRON      PostgresqlConfig18_SharedPreloadLibraries = 5
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PGLOGICAL    PostgresqlConfig18_SharedPreloadLibraries = 6
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PG_PREWARM   PostgresqlConfig18_SharedPreloadLibraries = 7
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PGAUDIT      PostgresqlConfig18_SharedPreloadLibraries = 8
-	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_ANON         PostgresqlConfig18_SharedPreloadLibraries = 9
+	// Required for the [pg_cron](https://github.com/citusdata/pg_cron) extension.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PG_CRON PostgresqlConfig18_SharedPreloadLibraries = 5
+	// Required for the [pglogical](https://github.com/2ndQuadrant/pglogical) extension.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PGLOGICAL PostgresqlConfig18_SharedPreloadLibraries = 6
+	// Shared library of extension [pg_prewarm](https://www.postgresql.org/docs/current/pgprewarm.html#PGPREWARM), which ensures loading of extension on server start
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PG_PREWARM PostgresqlConfig18_SharedPreloadLibraries = 7
+	// Required for the [pgaudit](https://www.pgaudit.org/) extension.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_PGAUDIT PostgresqlConfig18_SharedPreloadLibraries = 8
+	// Required for the [postgresql_anonymizer](https://postgresql-anonymizer.readthedocs.io/en/stable/) extension.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_ANON PostgresqlConfig18_SharedPreloadLibraries = 9
+	// Required for the [age](https://age.apache.org/) extension.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_AGE PostgresqlConfig18_SharedPreloadLibraries = 10
 )
 
 // Enum value maps for PostgresqlConfig18_SharedPreloadLibraries.
 var (
 	PostgresqlConfig18_SharedPreloadLibraries_name = map[int32]string{
-		0: "SHARED_PRELOAD_LIBRARIES_UNSPECIFIED",
-		1: "SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN",
-		2: "SHARED_PRELOAD_LIBRARIES_PG_HINT_PLAN",
-		3: "SHARED_PRELOAD_LIBRARIES_TIMESCALEDB",
-		4: "SHARED_PRELOAD_LIBRARIES_PG_QUALSTATS",
-		5: "SHARED_PRELOAD_LIBRARIES_PG_CRON",
-		6: "SHARED_PRELOAD_LIBRARIES_PGLOGICAL",
-		7: "SHARED_PRELOAD_LIBRARIES_PG_PREWARM",
-		8: "SHARED_PRELOAD_LIBRARIES_PGAUDIT",
-		9: "SHARED_PRELOAD_LIBRARIES_ANON",
+		0:  "SHARED_PRELOAD_LIBRARIES_UNSPECIFIED",
+		1:  "SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN",
+		2:  "SHARED_PRELOAD_LIBRARIES_PG_HINT_PLAN",
+		3:  "SHARED_PRELOAD_LIBRARIES_TIMESCALEDB",
+		4:  "SHARED_PRELOAD_LIBRARIES_PG_QUALSTATS",
+		5:  "SHARED_PRELOAD_LIBRARIES_PG_CRON",
+		6:  "SHARED_PRELOAD_LIBRARIES_PGLOGICAL",
+		7:  "SHARED_PRELOAD_LIBRARIES_PG_PREWARM",
+		8:  "SHARED_PRELOAD_LIBRARIES_PGAUDIT",
+		9:  "SHARED_PRELOAD_LIBRARIES_ANON",
+		10: "SHARED_PRELOAD_LIBRARIES_AGE",
 	}
 	PostgresqlConfig18_SharedPreloadLibraries_value = map[string]int32{
 		"SHARED_PRELOAD_LIBRARIES_UNSPECIFIED":  0,
@@ -668,6 +725,7 @@ var (
 		"SHARED_PRELOAD_LIBRARIES_PG_PREWARM":   7,
 		"SHARED_PRELOAD_LIBRARIES_PGAUDIT":      8,
 		"SHARED_PRELOAD_LIBRARIES_ANON":         9,
+		"SHARED_PRELOAD_LIBRARIES_AGE":          10,
 	}
 )
 
@@ -701,11 +759,20 @@ func (PostgresqlConfig18_SharedPreloadLibraries) EnumDescriptor() ([]byte, []int
 type PostgresqlConfig18_SynchronousCommit int32
 
 const (
-	PostgresqlConfig18_SYNCHRONOUS_COMMIT_UNSPECIFIED  PostgresqlConfig18_SynchronousCommit = 0
-	PostgresqlConfig18_SYNCHRONOUS_COMMIT_ON           PostgresqlConfig18_SynchronousCommit = 1
-	PostgresqlConfig18_SYNCHRONOUS_COMMIT_OFF          PostgresqlConfig18_SynchronousCommit = 2
-	PostgresqlConfig18_SYNCHRONOUS_COMMIT_LOCAL        PostgresqlConfig18_SynchronousCommit = 3
+	PostgresqlConfig18_SYNCHRONOUS_COMMIT_UNSPECIFIED PostgresqlConfig18_SynchronousCommit = 0
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server. Default value.
+	PostgresqlConfig18_SYNCHRONOUS_COMMIT_ON PostgresqlConfig18_SynchronousCommit = 1
+	// Success is reported to the client even if the data is not in WAL.
+	// There is no synchronous write operation, data may be loss in case of storage subsystem failure.
+	PostgresqlConfig18_SYNCHRONOUS_COMMIT_OFF PostgresqlConfig18_SynchronousCommit = 2
+	// Success is reported to the client if the data is in WAL, and WAL is written to the storage of the master server.
+	// The transaction may be lost due to storage subsystem failure on the master server.
+	PostgresqlConfig18_SYNCHRONOUS_COMMIT_LOCAL PostgresqlConfig18_SynchronousCommit = 3
+	// Success is reported to the client if the data is in WAL, WAL is written to the storage of the master server, and the server's synchronous standby indicates that it has received WAL and written it out to its operating system.
+	// The transaction may be lost due to simultaneous storage subsystem failure on the master and operating system's failure on the synchronous standby.
 	PostgresqlConfig18_SYNCHRONOUS_COMMIT_REMOTE_WRITE PostgresqlConfig18_SynchronousCommit = 4
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), WAL is written to the storage of the master server, and its synchronous standby indicates that it has received WAL and applied it.
+	// The transaction may be lost due to irrecoverably failure of both the master and its synchronous standby.
 	PostgresqlConfig18_SYNCHRONOUS_COMMIT_REMOTE_APPLY PostgresqlConfig18_SynchronousCommit = 5
 )
 
@@ -759,11 +826,17 @@ func (PostgresqlConfig18_SynchronousCommit) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig18_TransactionIsolation int32
 
 const (
-	PostgresqlConfig18_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlConfig18_TransactionIsolation = 0
+	PostgresqlConfig18_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlConfig18_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlConfig18_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlConfig18_TransactionIsolation = 1
-	PostgresqlConfig18_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlConfig18_TransactionIsolation = 2
-	PostgresqlConfig18_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlConfig18_TransactionIsolation = 3
-	PostgresqlConfig18_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlConfig18_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlConfig18_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlConfig18_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlConfig18_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlConfig18_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlConfig18_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlConfig18_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlConfig18_TransactionIsolation.
@@ -815,8 +888,10 @@ type PostgresqlConfig18_WalLevel int32
 
 const (
 	PostgresqlConfig18_WAL_LEVEL_UNSPECIFIED PostgresqlConfig18_WalLevel = 0
-	PostgresqlConfig18_WAL_LEVEL_REPLICA     PostgresqlConfig18_WalLevel = 1
-	PostgresqlConfig18_WAL_LEVEL_LOGICAL     PostgresqlConfig18_WalLevel = 2
+	// Supports WAL archiving and physical replication.
+	PostgresqlConfig18_WAL_LEVEL_REPLICA PostgresqlConfig18_WalLevel = 1
+	// Supports WAL archiving, physical replication, and logical decoding.
+	PostgresqlConfig18_WAL_LEVEL_LOGICAL PostgresqlConfig18_WalLevel = 2
 )
 
 // Enum value maps for PostgresqlConfig18_WalLevel.
@@ -864,8 +939,10 @@ type PostgresqlConfig18_XmlBinary int32
 
 const (
 	PostgresqlConfig18_XML_BINARY_UNSPECIFIED PostgresqlConfig18_XmlBinary = 0
-	PostgresqlConfig18_XML_BINARY_BASE64      PostgresqlConfig18_XmlBinary = 1
-	PostgresqlConfig18_XML_BINARY_HEX         PostgresqlConfig18_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlConfig18_XML_BINARY_BASE64 PostgresqlConfig18_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlConfig18_XML_BINARY_HEX PostgresqlConfig18_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlConfig18_XmlBinary.
@@ -913,8 +990,10 @@ type PostgresqlConfig18_XmlOption int32
 
 const (
 	PostgresqlConfig18_XML_OPTION_UNSPECIFIED PostgresqlConfig18_XmlOption = 0
-	PostgresqlConfig18_XML_OPTION_DOCUMENT    PostgresqlConfig18_XmlOption = 1
-	PostgresqlConfig18_XML_OPTION_CONTENT     PostgresqlConfig18_XmlOption = 2
+	// XML document.
+	PostgresqlConfig18_XML_OPTION_DOCUMENT PostgresqlConfig18_XmlOption = 1
+	// XML fragment.
+	PostgresqlConfig18_XML_OPTION_CONTENT PostgresqlConfig18_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlConfig18_XmlOption.
@@ -2385,7 +2464,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xac\x8c\x01\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"Ό\x01\n" +
 	"\x12PostgresqlConfig18\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2635,7 +2714,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = ""
 	"\x1bPLAN_CACHE_MODE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14PLAN_CACHE_MODE_AUTO\x10\x01\x12%\n" +
 	"!PLAN_CACHE_MODE_FORCE_CUSTOM_PLAN\x10\x02\x12&\n" +
-	"\"PLAN_CACHE_MODE_FORCE_GENERIC_PLAN\x10\x03\"\xad\x03\n" +
+	"\"PLAN_CACHE_MODE_FORCE_GENERIC_PLAN\x10\x03\"\xcf\x03\n" +
 	"\x16SharedPreloadLibraries\x12(\n" +
 	"$SHARED_PRELOAD_LIBRARIES_UNSPECIFIED\x10\x00\x12)\n" +
 	"%SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN\x10\x01\x12)\n" +
@@ -2646,7 +2725,9 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = ""
 	"\"SHARED_PRELOAD_LIBRARIES_PGLOGICAL\x10\x06\x12'\n" +
 	"#SHARED_PRELOAD_LIBRARIES_PG_PREWARM\x10\a\x12$\n" +
 	" SHARED_PRELOAD_LIBRARIES_PGAUDIT\x10\b\x12!\n" +
-	"\x1dSHARED_PRELOAD_LIBRARIES_ANON\x10\t\"\xd6\x01\n" +
+	"\x1dSHARED_PRELOAD_LIBRARIES_ANON\x10\t\x12 \n" +
+	"\x1cSHARED_PRELOAD_LIBRARIES_AGE\x10\n" +
+	"\"\xd6\x01\n" +
 	"\x11SynchronousCommit\x12\"\n" +
 	"\x1eSYNCHRONOUS_COMMIT_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15SYNCHRONOUS_COMMIT_ON\x10\x01\x12\x1a\n" +

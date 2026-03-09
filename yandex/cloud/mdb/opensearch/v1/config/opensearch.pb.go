@@ -60,8 +60,16 @@ type OpenSearchConfig2 struct {
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/api-reference/document-apis/reindex/#remote-cluster-allow-list).
 	ReindexRemoteWhitelist string `protobuf:"bytes,6,opt,name=reindex_remote_whitelist,proto3" json:"reindex_remote_whitelist,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Sets the maximum length allowed for HTTP URLs in the initial request line. URLs exceeding this limit will be rejected. Default is **4kb**.
+	//
+	// Default value: **4kb**.
+	//
+	// Change of the setting is applied with restart.
+	//
+	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/network-settings/#advanced-http-settings).
+	HttpMaxInitialLineLength *wrapperspb.StringValue `protobuf:"bytes,8,opt,name=http_max_initial_line_length,proto3" json:"http_max_initial_line_length,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *OpenSearchConfig2) Reset() {
@@ -120,6 +128,13 @@ func (x *OpenSearchConfig2) GetReindexRemoteWhitelist() string {
 		return x.ReindexRemoteWhitelist
 	}
 	return ""
+}
+
+func (x *OpenSearchConfig2) GetHttpMaxInitialLineLength() *wrapperspb.StringValue {
+	if x != nil {
+		return x.HttpMaxInitialLineLength
+	}
+	return nil
 }
 
 type OpenSearchConfigSet2 struct {
@@ -189,12 +204,13 @@ var File_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xbd\x02\n" +
+	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa5\x03\n" +
 	"\x11OpenSearchConfig2\x12Y\n" +
 	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x10max_clause_count\x122\n" +
 	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x14fielddata_cache_size\x12]\n" +
 	"\x12search_max_buckets\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12search_max_buckets\x12:\n" +
-	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelist\"\xbd\x02\n" +
+	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelist\x12`\n" +
+	"\x1chttp_max_initial_line_length\x18\b \x01(\v2\x1c.google.protobuf.StringValueR\x1chttp_max_initial_line_lengthJ\x04\b\a\x10\b\"\xbd\x02\n" +
 	"\x14OpenSearchConfigSet2\x12i\n" +
 	"\x10effective_config\x18\x01 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12Y\n" +
 	"\vuser_config\x18\x02 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2R\n" +
@@ -216,21 +232,23 @@ func file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDescGZIP() [
 
 var file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_goTypes = []any{
-	(*OpenSearchConfig2)(nil),     // 0: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	(*OpenSearchConfigSet2)(nil),  // 1: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2
-	(*wrapperspb.Int64Value)(nil), // 2: google.protobuf.Int64Value
+	(*OpenSearchConfig2)(nil),      // 0: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	(*OpenSearchConfigSet2)(nil),   // 1: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2
+	(*wrapperspb.Int64Value)(nil),  // 2: google.protobuf.Int64Value
+	(*wrapperspb.StringValue)(nil), // 3: google.protobuf.StringValue
 }
 var file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_depIdxs = []int32{
 	2, // 0: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2.max_clause_count:type_name -> google.protobuf.Int64Value
 	2, // 1: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2.search_max_buckets:type_name -> google.protobuf.Int64Value
-	0, // 2: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.effective_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	0, // 3: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.user_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	0, // 4: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.default_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	3, // 2: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2.http_max_initial_line_length:type_name -> google.protobuf.StringValue
+	0, // 3: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.effective_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	0, // 4: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.user_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	0, // 5: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2.default_config:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_init() }

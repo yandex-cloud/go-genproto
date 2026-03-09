@@ -26,10 +26,14 @@ const (
 type PostgresqlHostConfig16_1C_BackslashQuote int32
 
 const (
-	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlHostConfig16_1C_BackslashQuote = 0
-	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE               PostgresqlHostConfig16_1C_BackslashQuote = 1
-	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_ON            PostgresqlHostConfig16_1C_BackslashQuote = 2
-	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_OFF           PostgresqlHostConfig16_1C_BackslashQuote = 3
+	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlHostConfig16_1C_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE PostgresqlHostConfig16_1C_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_ON PostgresqlHostConfig16_1C_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_OFF PostgresqlHostConfig16_1C_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlHostConfig16_1C_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlHostConfig16_1C_BackslashQuote = 4
 )
 
@@ -82,8 +86,10 @@ type PostgresqlHostConfig16_1C_ByteaOutput int32
 
 const (
 	PostgresqlHostConfig16_1C_BYTEA_OUTPUT_UNSPECIFIED PostgresqlHostConfig16_1C_ByteaOutput = 0
-	PostgresqlHostConfig16_1C_BYTEA_OUTPUT_HEX         PostgresqlHostConfig16_1C_ByteaOutput = 1
-	PostgresqlHostConfig16_1C_BYTEA_OUTPUT_ESCAPED     PostgresqlHostConfig16_1C_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlHostConfig16_1C_BYTEA_OUTPUT_HEX PostgresqlHostConfig16_1C_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlHostConfig16_1C_BYTEA_OUTPUT_ESCAPED PostgresqlHostConfig16_1C_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_ByteaOutput.
@@ -131,9 +137,12 @@ type PostgresqlHostConfig16_1C_ConstraintExclusion int32
 
 const (
 	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlHostConfig16_1C_ConstraintExclusion = 0
-	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_ON          PostgresqlHostConfig16_1C_ConstraintExclusion = 1
-	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_OFF         PostgresqlHostConfig16_1C_ConstraintExclusion = 2
-	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlHostConfig16_1C_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_ON PostgresqlHostConfig16_1C_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_OFF PostgresqlHostConfig16_1C_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlHostConfig16_1C_CONSTRAINT_EXCLUSION_PARTITION PostgresqlHostConfig16_1C_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_ConstraintExclusion.
@@ -183,9 +192,12 @@ type PostgresqlHostConfig16_1C_DebugParallelQuery int32
 
 const (
 	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_UNSPECIFIED PostgresqlHostConfig16_1C_DebugParallelQuery = 0
-	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_ON          PostgresqlHostConfig16_1C_DebugParallelQuery = 1
-	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_OFF         PostgresqlHostConfig16_1C_DebugParallelQuery = 2
-	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_REGRESS     PostgresqlHostConfig16_1C_DebugParallelQuery = 3
+	// Force parallel query for all queries for which it is thought to be safe
+	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_ON PostgresqlHostConfig16_1C_DebugParallelQuery = 1
+	// Use parallel mode only when it is expected to improve performance
+	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_OFF PostgresqlHostConfig16_1C_DebugParallelQuery = 2
+	// Like ON, but with additional changes for regression testing (suppresses context lines, hides Gather nodes in EXPLAIN)
+	PostgresqlHostConfig16_1C_DEBUG_PARALLEL_QUERY_REGRESS PostgresqlHostConfig16_1C_DebugParallelQuery = 3
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_DebugParallelQuery.
@@ -235,9 +247,12 @@ type PostgresqlHostConfig16_1C_ForceParallelMode int32
 
 const (
 	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlHostConfig16_1C_ForceParallelMode = 0
-	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_ON          PostgresqlHostConfig16_1C_ForceParallelMode = 1
-	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_OFF         PostgresqlHostConfig16_1C_ForceParallelMode = 2
-	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_REGRESS     PostgresqlHostConfig16_1C_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_ON PostgresqlHostConfig16_1C_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_OFF PostgresqlHostConfig16_1C_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlHostConfig16_1C_FORCE_PARALLEL_MODE_REGRESS PostgresqlHostConfig16_1C_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_ForceParallelMode.
@@ -287,9 +302,12 @@ type PostgresqlHostConfig16_1C_LogErrorVerbosity int32
 
 const (
 	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlHostConfig16_1C_LogErrorVerbosity = 0
-	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_TERSE       PostgresqlHostConfig16_1C_LogErrorVerbosity = 1
-	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlHostConfig16_1C_LogErrorVerbosity = 2
-	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlHostConfig16_1C_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_TERSE PostgresqlHostConfig16_1C_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlHostConfig16_1C_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlHostConfig16_1C_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlHostConfig16_1C_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_LogErrorVerbosity.
@@ -339,18 +357,30 @@ type PostgresqlHostConfig16_1C_LogLevel int32
 
 const (
 	PostgresqlHostConfig16_1C_LOG_LEVEL_UNSPECIFIED PostgresqlHostConfig16_1C_LogLevel = 0
-	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG5      PostgresqlHostConfig16_1C_LogLevel = 1
-	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG4      PostgresqlHostConfig16_1C_LogLevel = 2
-	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG3      PostgresqlHostConfig16_1C_LogLevel = 3
-	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG2      PostgresqlHostConfig16_1C_LogLevel = 4
-	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG1      PostgresqlHostConfig16_1C_LogLevel = 5
-	PostgresqlHostConfig16_1C_LOG_LEVEL_INFO        PostgresqlHostConfig16_1C_LogLevel = 12
-	PostgresqlHostConfig16_1C_LOG_LEVEL_LOG         PostgresqlHostConfig16_1C_LogLevel = 6
-	PostgresqlHostConfig16_1C_LOG_LEVEL_NOTICE      PostgresqlHostConfig16_1C_LogLevel = 7
-	PostgresqlHostConfig16_1C_LOG_LEVEL_WARNING     PostgresqlHostConfig16_1C_LogLevel = 8
-	PostgresqlHostConfig16_1C_LOG_LEVEL_ERROR       PostgresqlHostConfig16_1C_LogLevel = 9
-	PostgresqlHostConfig16_1C_LOG_LEVEL_FATAL       PostgresqlHostConfig16_1C_LogLevel = 10
-	PostgresqlHostConfig16_1C_LOG_LEVEL_PANIC       PostgresqlHostConfig16_1C_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG5 PostgresqlHostConfig16_1C_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG4 PostgresqlHostConfig16_1C_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG3 PostgresqlHostConfig16_1C_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG2 PostgresqlHostConfig16_1C_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_DEBUG1 PostgresqlHostConfig16_1C_LogLevel = 5
+	// Provides information implicitly requested by the user, e.g., output from VACUUM VERBOSE.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_INFO PostgresqlHostConfig16_1C_LogLevel = 12
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_LOG PostgresqlHostConfig16_1C_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_NOTICE PostgresqlHostConfig16_1C_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_WARNING PostgresqlHostConfig16_1C_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_ERROR PostgresqlHostConfig16_1C_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_FATAL PostgresqlHostConfig16_1C_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlHostConfig16_1C_LOG_LEVEL_PANIC PostgresqlHostConfig16_1C_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_LogLevel.
@@ -418,10 +448,14 @@ type PostgresqlHostConfig16_1C_LogStatement int32
 
 const (
 	PostgresqlHostConfig16_1C_LOG_STATEMENT_UNSPECIFIED PostgresqlHostConfig16_1C_LogStatement = 0
-	PostgresqlHostConfig16_1C_LOG_STATEMENT_NONE        PostgresqlHostConfig16_1C_LogStatement = 1
-	PostgresqlHostConfig16_1C_LOG_STATEMENT_DDL         PostgresqlHostConfig16_1C_LogStatement = 2
-	PostgresqlHostConfig16_1C_LOG_STATEMENT_MOD         PostgresqlHostConfig16_1C_LogStatement = 3
-	PostgresqlHostConfig16_1C_LOG_STATEMENT_ALL         PostgresqlHostConfig16_1C_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlHostConfig16_1C_LOG_STATEMENT_NONE PostgresqlHostConfig16_1C_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlHostConfig16_1C_LOG_STATEMENT_DDL PostgresqlHostConfig16_1C_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlHostConfig16_1C_LOG_STATEMENT_MOD PostgresqlHostConfig16_1C_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlHostConfig16_1C_LOG_STATEMENT_ALL PostgresqlHostConfig16_1C_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_LogStatement.
@@ -472,11 +506,17 @@ func (PostgresqlHostConfig16_1C_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig16_1C_TransactionIsolation int32
 
 const (
-	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlHostConfig16_1C_TransactionIsolation = 0
+	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlHostConfig16_1C_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlHostConfig16_1C_TransactionIsolation = 1
-	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlHostConfig16_1C_TransactionIsolation = 2
-	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlHostConfig16_1C_TransactionIsolation = 3
-	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlHostConfig16_1C_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlHostConfig16_1C_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlHostConfig16_1C_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlHostConfig16_1C_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlHostConfig16_1C_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_TransactionIsolation.
@@ -528,8 +568,10 @@ type PostgresqlHostConfig16_1C_XmlBinary int32
 
 const (
 	PostgresqlHostConfig16_1C_XML_BINARY_UNSPECIFIED PostgresqlHostConfig16_1C_XmlBinary = 0
-	PostgresqlHostConfig16_1C_XML_BINARY_BASE64      PostgresqlHostConfig16_1C_XmlBinary = 1
-	PostgresqlHostConfig16_1C_XML_BINARY_HEX         PostgresqlHostConfig16_1C_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlHostConfig16_1C_XML_BINARY_BASE64 PostgresqlHostConfig16_1C_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlHostConfig16_1C_XML_BINARY_HEX PostgresqlHostConfig16_1C_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_XmlBinary.
@@ -577,8 +619,10 @@ type PostgresqlHostConfig16_1C_XmlOption int32
 
 const (
 	PostgresqlHostConfig16_1C_XML_OPTION_UNSPECIFIED PostgresqlHostConfig16_1C_XmlOption = 0
-	PostgresqlHostConfig16_1C_XML_OPTION_DOCUMENT    PostgresqlHostConfig16_1C_XmlOption = 1
-	PostgresqlHostConfig16_1C_XML_OPTION_CONTENT     PostgresqlHostConfig16_1C_XmlOption = 2
+	// XML document.
+	PostgresqlHostConfig16_1C_XML_OPTION_DOCUMENT PostgresqlHostConfig16_1C_XmlOption = 1
+	// XML fragment.
+	PostgresqlHostConfig16_1C_XML_OPTION_CONTENT PostgresqlHostConfig16_1C_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlHostConfig16_1C_XmlOption.

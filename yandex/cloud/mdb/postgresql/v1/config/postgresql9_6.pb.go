@@ -27,8 +27,10 @@ type PostgresqlConfig9_6_WalLevel int32
 
 const (
 	PostgresqlConfig9_6_WAL_LEVEL_UNSPECIFIED PostgresqlConfig9_6_WalLevel = 0
-	PostgresqlConfig9_6_WAL_LEVEL_REPLICA     PostgresqlConfig9_6_WalLevel = 1
-	PostgresqlConfig9_6_WAL_LEVEL_LOGICAL     PostgresqlConfig9_6_WalLevel = 2
+	// Supports WAL archiving and physical replication.
+	PostgresqlConfig9_6_WAL_LEVEL_REPLICA PostgresqlConfig9_6_WalLevel = 1
+	// Supports WAL archiving, physical replication, and logical decoding.
+	PostgresqlConfig9_6_WAL_LEVEL_LOGICAL PostgresqlConfig9_6_WalLevel = 2
 )
 
 // Enum value maps for PostgresqlConfig9_6_WalLevel.
@@ -75,11 +77,20 @@ func (PostgresqlConfig9_6_WalLevel) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig9_6_SynchronousCommit int32
 
 const (
-	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_UNSPECIFIED  PostgresqlConfig9_6_SynchronousCommit = 0
-	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_ON           PostgresqlConfig9_6_SynchronousCommit = 1
-	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_OFF          PostgresqlConfig9_6_SynchronousCommit = 2
-	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_LOCAL        PostgresqlConfig9_6_SynchronousCommit = 3
+	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_UNSPECIFIED PostgresqlConfig9_6_SynchronousCommit = 0
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server. Default value.
+	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_ON PostgresqlConfig9_6_SynchronousCommit = 1
+	// Success is reported to the client even if the data is not in WAL.
+	// There is no synchronous write operation, data may be loss in case of storage subsystem failure.
+	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_OFF PostgresqlConfig9_6_SynchronousCommit = 2
+	// Success is reported to the client if the data is in WAL, and WAL is written to the storage of the master server.
+	// The transaction may be lost due to storage subsystem failure on the master server.
+	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_LOCAL PostgresqlConfig9_6_SynchronousCommit = 3
+	// Success is reported to the client if the data is in WAL, WAL is written to the storage of the master server, and the server's synchronous standby indicates that it has received WAL and written it out to its operating system.
+	// The transaction may be lost due to simultaneous storage subsystem failure on the master and operating system's failure on the synchronous standby.
 	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_REMOTE_WRITE PostgresqlConfig9_6_SynchronousCommit = 4
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), WAL is written to the storage of the master server, and its synchronous standby indicates that it has received WAL and applied it.
+	// The transaction may be lost due to irrecoverably failure of both the master and its synchronous standby.
 	PostgresqlConfig9_6_SYNCHRONOUS_COMMIT_REMOTE_APPLY PostgresqlConfig9_6_SynchronousCommit = 5
 )
 
@@ -134,9 +145,12 @@ type PostgresqlConfig9_6_ConstraintExclusion int32
 
 const (
 	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlConfig9_6_ConstraintExclusion = 0
-	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_ON          PostgresqlConfig9_6_ConstraintExclusion = 1
-	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_OFF         PostgresqlConfig9_6_ConstraintExclusion = 2
-	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlConfig9_6_ConstraintExclusion = 3
+	// Enable planner's use of constraints for all tables.
+	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_ON PostgresqlConfig9_6_ConstraintExclusion = 1
+	// Disable planner's use of constraints for all tables
+	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_OFF PostgresqlConfig9_6_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlConfig9_6_CONSTRAINT_EXCLUSION_PARTITION PostgresqlConfig9_6_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlConfig9_6_ConstraintExclusion.
@@ -186,9 +200,12 @@ type PostgresqlConfig9_6_ForceParallelMode int32
 
 const (
 	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlConfig9_6_ForceParallelMode = 0
-	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_ON          PostgresqlConfig9_6_ForceParallelMode = 1
-	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_OFF         PostgresqlConfig9_6_ForceParallelMode = 2
-	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_REGRESS     PostgresqlConfig9_6_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_ON PostgresqlConfig9_6_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_OFF PostgresqlConfig9_6_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlConfig9_6_FORCE_PARALLEL_MODE_REGRESS PostgresqlConfig9_6_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlConfig9_6_ForceParallelMode.
@@ -238,17 +255,28 @@ type PostgresqlConfig9_6_LogLevel int32
 
 const (
 	PostgresqlConfig9_6_LOG_LEVEL_UNSPECIFIED PostgresqlConfig9_6_LogLevel = 0
-	PostgresqlConfig9_6_LOG_LEVEL_DEBUG5      PostgresqlConfig9_6_LogLevel = 1
-	PostgresqlConfig9_6_LOG_LEVEL_DEBUG4      PostgresqlConfig9_6_LogLevel = 2
-	PostgresqlConfig9_6_LOG_LEVEL_DEBUG3      PostgresqlConfig9_6_LogLevel = 3
-	PostgresqlConfig9_6_LOG_LEVEL_DEBUG2      PostgresqlConfig9_6_LogLevel = 4
-	PostgresqlConfig9_6_LOG_LEVEL_DEBUG1      PostgresqlConfig9_6_LogLevel = 5
-	PostgresqlConfig9_6_LOG_LEVEL_LOG         PostgresqlConfig9_6_LogLevel = 6
-	PostgresqlConfig9_6_LOG_LEVEL_NOTICE      PostgresqlConfig9_6_LogLevel = 7
-	PostgresqlConfig9_6_LOG_LEVEL_WARNING     PostgresqlConfig9_6_LogLevel = 8
-	PostgresqlConfig9_6_LOG_LEVEL_ERROR       PostgresqlConfig9_6_LogLevel = 9
-	PostgresqlConfig9_6_LOG_LEVEL_FATAL       PostgresqlConfig9_6_LogLevel = 10
-	PostgresqlConfig9_6_LOG_LEVEL_PANIC       PostgresqlConfig9_6_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig9_6_LOG_LEVEL_DEBUG5 PostgresqlConfig9_6_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig9_6_LOG_LEVEL_DEBUG4 PostgresqlConfig9_6_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig9_6_LOG_LEVEL_DEBUG3 PostgresqlConfig9_6_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig9_6_LOG_LEVEL_DEBUG2 PostgresqlConfig9_6_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig9_6_LOG_LEVEL_DEBUG1 PostgresqlConfig9_6_LogLevel = 5
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlConfig9_6_LOG_LEVEL_LOG PostgresqlConfig9_6_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlConfig9_6_LOG_LEVEL_NOTICE PostgresqlConfig9_6_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlConfig9_6_LOG_LEVEL_WARNING PostgresqlConfig9_6_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlConfig9_6_LOG_LEVEL_ERROR PostgresqlConfig9_6_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlConfig9_6_LOG_LEVEL_FATAL PostgresqlConfig9_6_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlConfig9_6_LOG_LEVEL_PANIC PostgresqlConfig9_6_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlConfig9_6_LogLevel.
@@ -314,9 +342,12 @@ type PostgresqlConfig9_6_LogErrorVerbosity int32
 
 const (
 	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlConfig9_6_LogErrorVerbosity = 0
-	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_TERSE       PostgresqlConfig9_6_LogErrorVerbosity = 1
-	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlConfig9_6_LogErrorVerbosity = 2
-	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlConfig9_6_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_TERSE PostgresqlConfig9_6_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlConfig9_6_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlConfig9_6_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlConfig9_6_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlConfig9_6_LogErrorVerbosity.
@@ -366,10 +397,14 @@ type PostgresqlConfig9_6_LogStatement int32
 
 const (
 	PostgresqlConfig9_6_LOG_STATEMENT_UNSPECIFIED PostgresqlConfig9_6_LogStatement = 0
-	PostgresqlConfig9_6_LOG_STATEMENT_NONE        PostgresqlConfig9_6_LogStatement = 1
-	PostgresqlConfig9_6_LOG_STATEMENT_DDL         PostgresqlConfig9_6_LogStatement = 2
-	PostgresqlConfig9_6_LOG_STATEMENT_MOD         PostgresqlConfig9_6_LogStatement = 3
-	PostgresqlConfig9_6_LOG_STATEMENT_ALL         PostgresqlConfig9_6_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlConfig9_6_LOG_STATEMENT_NONE PostgresqlConfig9_6_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlConfig9_6_LOG_STATEMENT_DDL PostgresqlConfig9_6_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlConfig9_6_LOG_STATEMENT_MOD PostgresqlConfig9_6_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlConfig9_6_LOG_STATEMENT_ALL PostgresqlConfig9_6_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlConfig9_6_LogStatement.
@@ -420,11 +455,17 @@ func (PostgresqlConfig9_6_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig9_6_TransactionIsolation int32
 
 const (
-	PostgresqlConfig9_6_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlConfig9_6_TransactionIsolation = 0
+	PostgresqlConfig9_6_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlConfig9_6_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlConfig9_6_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlConfig9_6_TransactionIsolation = 1
-	PostgresqlConfig9_6_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlConfig9_6_TransactionIsolation = 2
-	PostgresqlConfig9_6_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlConfig9_6_TransactionIsolation = 3
-	PostgresqlConfig9_6_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlConfig9_6_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began.
+	PostgresqlConfig9_6_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlConfig9_6_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlConfig9_6_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlConfig9_6_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlConfig9_6_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlConfig9_6_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlConfig9_6_TransactionIsolation.
@@ -476,8 +517,10 @@ type PostgresqlConfig9_6_ByteaOutput int32
 
 const (
 	PostgresqlConfig9_6_BYTEA_OUTPUT_UNSPECIFIED PostgresqlConfig9_6_ByteaOutput = 0
-	PostgresqlConfig9_6_BYTEA_OUTPUT_HEX         PostgresqlConfig9_6_ByteaOutput = 1
-	PostgresqlConfig9_6_BYTEA_OUTPUT_ESCAPED     PostgresqlConfig9_6_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlConfig9_6_BYTEA_OUTPUT_HEX PostgresqlConfig9_6_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlConfig9_6_BYTEA_OUTPUT_ESCAPED PostgresqlConfig9_6_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlConfig9_6_ByteaOutput.
@@ -525,8 +568,10 @@ type PostgresqlConfig9_6_XmlBinary int32
 
 const (
 	PostgresqlConfig9_6_XML_BINARY_UNSPECIFIED PostgresqlConfig9_6_XmlBinary = 0
-	PostgresqlConfig9_6_XML_BINARY_BASE64      PostgresqlConfig9_6_XmlBinary = 1
-	PostgresqlConfig9_6_XML_BINARY_HEX         PostgresqlConfig9_6_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlConfig9_6_XML_BINARY_BASE64 PostgresqlConfig9_6_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlConfig9_6_XML_BINARY_HEX PostgresqlConfig9_6_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlConfig9_6_XmlBinary.
@@ -574,8 +619,10 @@ type PostgresqlConfig9_6_XmlOption int32
 
 const (
 	PostgresqlConfig9_6_XML_OPTION_UNSPECIFIED PostgresqlConfig9_6_XmlOption = 0
-	PostgresqlConfig9_6_XML_OPTION_DOCUMENT    PostgresqlConfig9_6_XmlOption = 1
-	PostgresqlConfig9_6_XML_OPTION_CONTENT     PostgresqlConfig9_6_XmlOption = 2
+	// XML document.
+	PostgresqlConfig9_6_XML_OPTION_DOCUMENT PostgresqlConfig9_6_XmlOption = 1
+	// XML fragment.
+	PostgresqlConfig9_6_XML_OPTION_CONTENT PostgresqlConfig9_6_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlConfig9_6_XmlOption.
@@ -622,10 +669,14 @@ func (PostgresqlConfig9_6_XmlOption) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig9_6_BackslashQuote int32
 
 const (
-	PostgresqlConfig9_6_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlConfig9_6_BackslashQuote = 0
-	PostgresqlConfig9_6_BACKSLASH_QUOTE               PostgresqlConfig9_6_BackslashQuote = 1
-	PostgresqlConfig9_6_BACKSLASH_QUOTE_ON            PostgresqlConfig9_6_BackslashQuote = 2
-	PostgresqlConfig9_6_BACKSLASH_QUOTE_OFF           PostgresqlConfig9_6_BackslashQuote = 3
+	PostgresqlConfig9_6_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlConfig9_6_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlConfig9_6_BACKSLASH_QUOTE PostgresqlConfig9_6_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlConfig9_6_BACKSLASH_QUOTE_ON PostgresqlConfig9_6_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlConfig9_6_BACKSLASH_QUOTE_OFF PostgresqlConfig9_6_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlConfig9_6_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlConfig9_6_BackslashQuote = 4
 )
 

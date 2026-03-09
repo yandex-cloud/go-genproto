@@ -26,10 +26,14 @@ const (
 type PostgresqlConfig11_1C_BackslashQuote int32
 
 const (
-	PostgresqlConfig11_1C_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlConfig11_1C_BackslashQuote = 0
-	PostgresqlConfig11_1C_BACKSLASH_QUOTE               PostgresqlConfig11_1C_BackslashQuote = 1
-	PostgresqlConfig11_1C_BACKSLASH_QUOTE_ON            PostgresqlConfig11_1C_BackslashQuote = 2
-	PostgresqlConfig11_1C_BACKSLASH_QUOTE_OFF           PostgresqlConfig11_1C_BackslashQuote = 3
+	PostgresqlConfig11_1C_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlConfig11_1C_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlConfig11_1C_BACKSLASH_QUOTE PostgresqlConfig11_1C_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlConfig11_1C_BACKSLASH_QUOTE_ON PostgresqlConfig11_1C_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlConfig11_1C_BACKSLASH_QUOTE_OFF PostgresqlConfig11_1C_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlConfig11_1C_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlConfig11_1C_BackslashQuote = 4
 )
 
@@ -82,8 +86,10 @@ type PostgresqlConfig11_1C_ByteaOutput int32
 
 const (
 	PostgresqlConfig11_1C_BYTEA_OUTPUT_UNSPECIFIED PostgresqlConfig11_1C_ByteaOutput = 0
-	PostgresqlConfig11_1C_BYTEA_OUTPUT_HEX         PostgresqlConfig11_1C_ByteaOutput = 1
-	PostgresqlConfig11_1C_BYTEA_OUTPUT_ESCAPED     PostgresqlConfig11_1C_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlConfig11_1C_BYTEA_OUTPUT_HEX PostgresqlConfig11_1C_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlConfig11_1C_BYTEA_OUTPUT_ESCAPED PostgresqlConfig11_1C_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlConfig11_1C_ByteaOutput.
@@ -131,9 +137,12 @@ type PostgresqlConfig11_1C_ConstraintExclusion int32
 
 const (
 	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlConfig11_1C_ConstraintExclusion = 0
-	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_ON          PostgresqlConfig11_1C_ConstraintExclusion = 1
-	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_OFF         PostgresqlConfig11_1C_ConstraintExclusion = 2
-	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlConfig11_1C_ConstraintExclusion = 3
+	// Use constraints for all tables.
+	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_ON PostgresqlConfig11_1C_ConstraintExclusion = 1
+	// Do not use constraints.
+	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_OFF PostgresqlConfig11_1C_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlConfig11_1C_CONSTRAINT_EXCLUSION_PARTITION PostgresqlConfig11_1C_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlConfig11_1C_ConstraintExclusion.
@@ -183,9 +192,12 @@ type PostgresqlConfig11_1C_ForceParallelMode int32
 
 const (
 	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlConfig11_1C_ForceParallelMode = 0
-	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_ON          PostgresqlConfig11_1C_ForceParallelMode = 1
-	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_OFF         PostgresqlConfig11_1C_ForceParallelMode = 2
-	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_REGRESS     PostgresqlConfig11_1C_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_ON PostgresqlConfig11_1C_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_OFF PostgresqlConfig11_1C_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlConfig11_1C_FORCE_PARALLEL_MODE_REGRESS PostgresqlConfig11_1C_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlConfig11_1C_ForceParallelMode.
@@ -235,9 +247,12 @@ type PostgresqlConfig11_1C_LogErrorVerbosity int32
 
 const (
 	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlConfig11_1C_LogErrorVerbosity = 0
-	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_TERSE       PostgresqlConfig11_1C_LogErrorVerbosity = 1
-	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlConfig11_1C_LogErrorVerbosity = 2
-	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlConfig11_1C_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_TERSE PostgresqlConfig11_1C_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlConfig11_1C_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlConfig11_1C_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlConfig11_1C_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlConfig11_1C_LogErrorVerbosity.
@@ -287,17 +302,28 @@ type PostgresqlConfig11_1C_LogLevel int32
 
 const (
 	PostgresqlConfig11_1C_LOG_LEVEL_UNSPECIFIED PostgresqlConfig11_1C_LogLevel = 0
-	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG5      PostgresqlConfig11_1C_LogLevel = 1
-	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG4      PostgresqlConfig11_1C_LogLevel = 2
-	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG3      PostgresqlConfig11_1C_LogLevel = 3
-	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG2      PostgresqlConfig11_1C_LogLevel = 4
-	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG1      PostgresqlConfig11_1C_LogLevel = 5
-	PostgresqlConfig11_1C_LOG_LEVEL_LOG         PostgresqlConfig11_1C_LogLevel = 6
-	PostgresqlConfig11_1C_LOG_LEVEL_NOTICE      PostgresqlConfig11_1C_LogLevel = 7
-	PostgresqlConfig11_1C_LOG_LEVEL_WARNING     PostgresqlConfig11_1C_LogLevel = 8
-	PostgresqlConfig11_1C_LOG_LEVEL_ERROR       PostgresqlConfig11_1C_LogLevel = 9
-	PostgresqlConfig11_1C_LOG_LEVEL_FATAL       PostgresqlConfig11_1C_LogLevel = 10
-	PostgresqlConfig11_1C_LOG_LEVEL_PANIC       PostgresqlConfig11_1C_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG5 PostgresqlConfig11_1C_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG4 PostgresqlConfig11_1C_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG3 PostgresqlConfig11_1C_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG2 PostgresqlConfig11_1C_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig11_1C_LOG_LEVEL_DEBUG1 PostgresqlConfig11_1C_LogLevel = 5
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlConfig11_1C_LOG_LEVEL_LOG PostgresqlConfig11_1C_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlConfig11_1C_LOG_LEVEL_NOTICE PostgresqlConfig11_1C_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlConfig11_1C_LOG_LEVEL_WARNING PostgresqlConfig11_1C_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlConfig11_1C_LOG_LEVEL_ERROR PostgresqlConfig11_1C_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlConfig11_1C_LOG_LEVEL_FATAL PostgresqlConfig11_1C_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlConfig11_1C_LOG_LEVEL_PANIC PostgresqlConfig11_1C_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlConfig11_1C_LogLevel.
@@ -363,10 +389,14 @@ type PostgresqlConfig11_1C_LogStatement int32
 
 const (
 	PostgresqlConfig11_1C_LOG_STATEMENT_UNSPECIFIED PostgresqlConfig11_1C_LogStatement = 0
-	PostgresqlConfig11_1C_LOG_STATEMENT_NONE        PostgresqlConfig11_1C_LogStatement = 1
-	PostgresqlConfig11_1C_LOG_STATEMENT_DDL         PostgresqlConfig11_1C_LogStatement = 2
-	PostgresqlConfig11_1C_LOG_STATEMENT_MOD         PostgresqlConfig11_1C_LogStatement = 3
-	PostgresqlConfig11_1C_LOG_STATEMENT_ALL         PostgresqlConfig11_1C_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlConfig11_1C_LOG_STATEMENT_NONE PostgresqlConfig11_1C_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlConfig11_1C_LOG_STATEMENT_DDL PostgresqlConfig11_1C_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlConfig11_1C_LOG_STATEMENT_MOD PostgresqlConfig11_1C_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlConfig11_1C_LOG_STATEMENT_ALL PostgresqlConfig11_1C_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlConfig11_1C_LogStatement.
@@ -417,8 +447,11 @@ func (PostgresqlConfig11_1C_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig11_1C_PasswordEncryption int32
 
 const (
-	PostgresqlConfig11_1C_PASSWORD_ENCRYPTION_UNSPECIFIED   PostgresqlConfig11_1C_PasswordEncryption = 0
-	PostgresqlConfig11_1C_PASSWORD_ENCRYPTION_MD5           PostgresqlConfig11_1C_PasswordEncryption = 1
+	PostgresqlConfig11_1C_PASSWORD_ENCRYPTION_UNSPECIFIED PostgresqlConfig11_1C_PasswordEncryption = 0
+	// The method md5 uses a custom less secure challenge-response mechanism. It prevents password sniffing and avoids storing passwords on the server in plain text but provides no protection if an attacker manages to steal the password hash from the server. Also, the MD5 hash algorithm is nowadays no longer considered secure against determined attacks.
+	PostgresqlConfig11_1C_PASSWORD_ENCRYPTION_MD5 PostgresqlConfig11_1C_PasswordEncryption = 1
+	// The method scram-sha-256 performs SCRAM-SHA-256 authentication, as described in RFC 7677. It is a challenge-response scheme that prevents password sniffing on untrusted connections and supports storing passwords on the server in a cryptographically hashed form that is thought to be secure.
+	// This is the most secure of the currently provided methods, but it is not supported by older client libraries.
 	PostgresqlConfig11_1C_PASSWORD_ENCRYPTION_SCRAM_SHA_256 PostgresqlConfig11_1C_PasswordEncryption = 2
 )
 
@@ -467,10 +500,14 @@ type PostgresqlConfig11_1C_PgHintPlanDebugPrint int32
 
 const (
 	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_UNSPECIFIED PostgresqlConfig11_1C_PgHintPlanDebugPrint = 0
-	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_OFF         PostgresqlConfig11_1C_PgHintPlanDebugPrint = 1
-	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_ON          PostgresqlConfig11_1C_PgHintPlanDebugPrint = 2
-	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_DETAILED    PostgresqlConfig11_1C_PgHintPlanDebugPrint = 3
-	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE     PostgresqlConfig11_1C_PgHintPlanDebugPrint = 4
+	// Disable debug output
+	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_OFF PostgresqlConfig11_1C_PgHintPlanDebugPrint = 1
+	// Print debug messages about hint parsing
+	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_ON PostgresqlConfig11_1C_PgHintPlanDebugPrint = 2
+	// Print detailed debug information including query planning process
+	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_DETAILED PostgresqlConfig11_1C_PgHintPlanDebugPrint = 3
+	// Print verbose debug output with all internal operations
+	PostgresqlConfig11_1C_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE PostgresqlConfig11_1C_PgHintPlanDebugPrint = 4
 )
 
 // Enum value maps for PostgresqlConfig11_1C_PgHintPlanDebugPrint.
@@ -521,15 +558,23 @@ func (PostgresqlConfig11_1C_PgHintPlanDebugPrint) EnumDescriptor() ([]byte, []in
 type PostgresqlConfig11_1C_SharedPreloadLibraries int32
 
 const (
-	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED  PostgresqlConfig11_1C_SharedPreloadLibraries = 0
+	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED PostgresqlConfig11_1C_SharedPreloadLibraries = 0
+	// Required for the [auto_explain](https://www.postgresql.org/docs/current/auto-explain.html) extension.
 	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN PostgresqlConfig11_1C_SharedPreloadLibraries = 1
+	// Required for the [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan) extension.
 	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PG_HINT_PLAN PostgresqlConfig11_1C_SharedPreloadLibraries = 2
-	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_TIMESCALEDB  PostgresqlConfig11_1C_SharedPreloadLibraries = 3
+	// Required for [TimescaleDB](https://github.com/timescale/timescaledb) to function.
+	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_TIMESCALEDB PostgresqlConfig11_1C_SharedPreloadLibraries = 3
+	// Required for the [pg_qualstats](https://github.com/powa-team/pg_qualstats) extension.
 	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PG_QUALSTATS PostgresqlConfig11_1C_SharedPreloadLibraries = 4
-	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PG_CRON      PostgresqlConfig11_1C_SharedPreloadLibraries = 5
-	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PGLOGICAL    PostgresqlConfig11_1C_SharedPreloadLibraries = 6
-	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PG_PREWARM   PostgresqlConfig11_1C_SharedPreloadLibraries = 7
-	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PGAUDIT      PostgresqlConfig11_1C_SharedPreloadLibraries = 8
+	// Required for the [pg_cron](https://github.com/citusdata/pg_cron) extension.
+	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PG_CRON PostgresqlConfig11_1C_SharedPreloadLibraries = 5
+	// Required for the [pglogical](https://github.com/2ndQuadrant/pglogical) extension.
+	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PGLOGICAL PostgresqlConfig11_1C_SharedPreloadLibraries = 6
+	// Required for the [pg_prewarm](https://www.postgresql.org/docs/current/pgprewarm.html#PGPREWARM) extension.
+	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PG_PREWARM PostgresqlConfig11_1C_SharedPreloadLibraries = 7
+	// Required for the [pgaudit](https://www.pgaudit.org/) extension.
+	PostgresqlConfig11_1C_SHARED_PRELOAD_LIBRARIES_PGAUDIT PostgresqlConfig11_1C_SharedPreloadLibraries = 8
 )
 
 // Enum value maps for PostgresqlConfig11_1C_SharedPreloadLibraries.
@@ -588,11 +633,20 @@ func (PostgresqlConfig11_1C_SharedPreloadLibraries) EnumDescriptor() ([]byte, []
 type PostgresqlConfig11_1C_SynchronousCommit int32
 
 const (
-	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_UNSPECIFIED  PostgresqlConfig11_1C_SynchronousCommit = 0
-	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_ON           PostgresqlConfig11_1C_SynchronousCommit = 1
-	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_OFF          PostgresqlConfig11_1C_SynchronousCommit = 2
-	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_LOCAL        PostgresqlConfig11_1C_SynchronousCommit = 3
+	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_UNSPECIFIED PostgresqlConfig11_1C_SynchronousCommit = 0
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server. Default value.
+	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_ON PostgresqlConfig11_1C_SynchronousCommit = 1
+	// Success is reported to the client even if the data is not in WAL.
+	// There is no synchronous write operation, data may be loss in case of storage subsystem failure.
+	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_OFF PostgresqlConfig11_1C_SynchronousCommit = 2
+	// Success is reported to the client if the data is in WAL, and WAL is written to the storage of the master server.
+	// The transaction may be lost due to storage subsystem failure on the master server.
+	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_LOCAL PostgresqlConfig11_1C_SynchronousCommit = 3
+	// Success is reported to the client if the data is in WAL, WAL is written to the storage of the master server, and the server's synchronous standby indicates that it has received WAL and written it out to its operating system.
+	// The transaction may be lost due to simultaneous storage subsystem failure on the master and operating system's failure on the synchronous standby.
 	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_REMOTE_WRITE PostgresqlConfig11_1C_SynchronousCommit = 4
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), WAL is written to the storage of the master server, and its synchronous standby indicates that it has received WAL and applied it.
+	// The transaction may be lost due to irrecoverably failure of both the master and its synchronous standby.
 	PostgresqlConfig11_1C_SYNCHRONOUS_COMMIT_REMOTE_APPLY PostgresqlConfig11_1C_SynchronousCommit = 5
 )
 
@@ -646,11 +700,17 @@ func (PostgresqlConfig11_1C_SynchronousCommit) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig11_1C_TransactionIsolation int32
 
 const (
-	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlConfig11_1C_TransactionIsolation = 0
+	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlConfig11_1C_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlConfig11_1C_TransactionIsolation = 1
-	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlConfig11_1C_TransactionIsolation = 2
-	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlConfig11_1C_TransactionIsolation = 3
-	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlConfig11_1C_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began. Default value.
+	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlConfig11_1C_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlConfig11_1C_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlConfig11_1C_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlConfig11_1C_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlConfig11_1C_TransactionIsolation.
@@ -702,8 +762,10 @@ type PostgresqlConfig11_1C_WalLevel int32
 
 const (
 	PostgresqlConfig11_1C_WAL_LEVEL_UNSPECIFIED PostgresqlConfig11_1C_WalLevel = 0
-	PostgresqlConfig11_1C_WAL_LEVEL_REPLICA     PostgresqlConfig11_1C_WalLevel = 1
-	PostgresqlConfig11_1C_WAL_LEVEL_LOGICAL     PostgresqlConfig11_1C_WalLevel = 2
+	// Supports WAL archiving and physical replication.
+	PostgresqlConfig11_1C_WAL_LEVEL_REPLICA PostgresqlConfig11_1C_WalLevel = 1
+	// Supports WAL archiving, physical replication, and logical decoding.
+	PostgresqlConfig11_1C_WAL_LEVEL_LOGICAL PostgresqlConfig11_1C_WalLevel = 2
 )
 
 // Enum value maps for PostgresqlConfig11_1C_WalLevel.
@@ -751,8 +813,10 @@ type PostgresqlConfig11_1C_XmlBinary int32
 
 const (
 	PostgresqlConfig11_1C_XML_BINARY_UNSPECIFIED PostgresqlConfig11_1C_XmlBinary = 0
-	PostgresqlConfig11_1C_XML_BINARY_BASE64      PostgresqlConfig11_1C_XmlBinary = 1
-	PostgresqlConfig11_1C_XML_BINARY_HEX         PostgresqlConfig11_1C_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlConfig11_1C_XML_BINARY_BASE64 PostgresqlConfig11_1C_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlConfig11_1C_XML_BINARY_HEX PostgresqlConfig11_1C_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlConfig11_1C_XmlBinary.
@@ -800,8 +864,10 @@ type PostgresqlConfig11_1C_XmlOption int32
 
 const (
 	PostgresqlConfig11_1C_XML_OPTION_UNSPECIFIED PostgresqlConfig11_1C_XmlOption = 0
-	PostgresqlConfig11_1C_XML_OPTION_DOCUMENT    PostgresqlConfig11_1C_XmlOption = 1
-	PostgresqlConfig11_1C_XML_OPTION_CONTENT     PostgresqlConfig11_1C_XmlOption = 2
+	// XML document.
+	PostgresqlConfig11_1C_XML_OPTION_DOCUMENT PostgresqlConfig11_1C_XmlOption = 1
+	// XML fragment.
+	PostgresqlConfig11_1C_XML_OPTION_CONTENT PostgresqlConfig11_1C_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlConfig11_1C_XmlOption.

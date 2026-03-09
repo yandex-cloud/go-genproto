@@ -27,8 +27,10 @@ type PostgresqlConfig10_WalLevel int32
 
 const (
 	PostgresqlConfig10_WAL_LEVEL_UNSPECIFIED PostgresqlConfig10_WalLevel = 0
-	PostgresqlConfig10_WAL_LEVEL_REPLICA     PostgresqlConfig10_WalLevel = 1
-	PostgresqlConfig10_WAL_LEVEL_LOGICAL     PostgresqlConfig10_WalLevel = 2
+	// Supports WAL archiving and physical replication.
+	PostgresqlConfig10_WAL_LEVEL_REPLICA PostgresqlConfig10_WalLevel = 1
+	// Supports WAL archiving, physical replication, and logical decoding.
+	PostgresqlConfig10_WAL_LEVEL_LOGICAL PostgresqlConfig10_WalLevel = 2
 )
 
 // Enum value maps for PostgresqlConfig10_WalLevel.
@@ -75,11 +77,20 @@ func (PostgresqlConfig10_WalLevel) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig10_SynchronousCommit int32
 
 const (
-	PostgresqlConfig10_SYNCHRONOUS_COMMIT_UNSPECIFIED  PostgresqlConfig10_SynchronousCommit = 0
-	PostgresqlConfig10_SYNCHRONOUS_COMMIT_ON           PostgresqlConfig10_SynchronousCommit = 1
-	PostgresqlConfig10_SYNCHRONOUS_COMMIT_OFF          PostgresqlConfig10_SynchronousCommit = 2
-	PostgresqlConfig10_SYNCHRONOUS_COMMIT_LOCAL        PostgresqlConfig10_SynchronousCommit = 3
+	PostgresqlConfig10_SYNCHRONOUS_COMMIT_UNSPECIFIED PostgresqlConfig10_SynchronousCommit = 0
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server. Default value.
+	PostgresqlConfig10_SYNCHRONOUS_COMMIT_ON PostgresqlConfig10_SynchronousCommit = 1
+	// Success is reported to the client even if the data is not in WAL.
+	// There is no synchronous write operation, data may be loss in case of storage subsystem failure.
+	PostgresqlConfig10_SYNCHRONOUS_COMMIT_OFF PostgresqlConfig10_SynchronousCommit = 2
+	// Success is reported to the client if the data is in WAL, and WAL is written to the storage of the master server.
+	// The transaction may be lost due to storage subsystem failure on the master server.
+	PostgresqlConfig10_SYNCHRONOUS_COMMIT_LOCAL PostgresqlConfig10_SynchronousCommit = 3
+	// Success is reported to the client if the data is in WAL, WAL is written to the storage of the master server, and the server's synchronous standby indicates that it has received WAL and written it out to its operating system.
+	// The transaction may be lost due to simultaneous storage subsystem failure on the master and operating system's failure on the synchronous standby.
 	PostgresqlConfig10_SYNCHRONOUS_COMMIT_REMOTE_WRITE PostgresqlConfig10_SynchronousCommit = 4
+	// Success is reported to the client if the data is in WAL (Write-Ahead Log), WAL is written to the storage of the master server, and its synchronous standby indicates that it has received WAL and applied it.
+	// The transaction may be lost due to irrecoverably failure of both the master and its synchronous standby.
 	PostgresqlConfig10_SYNCHRONOUS_COMMIT_REMOTE_APPLY PostgresqlConfig10_SynchronousCommit = 5
 )
 
@@ -134,9 +145,12 @@ type PostgresqlConfig10_ConstraintExclusion int32
 
 const (
 	PostgresqlConfig10_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlConfig10_ConstraintExclusion = 0
-	PostgresqlConfig10_CONSTRAINT_EXCLUSION_ON          PostgresqlConfig10_ConstraintExclusion = 1
-	PostgresqlConfig10_CONSTRAINT_EXCLUSION_OFF         PostgresqlConfig10_ConstraintExclusion = 2
-	PostgresqlConfig10_CONSTRAINT_EXCLUSION_PARTITION   PostgresqlConfig10_ConstraintExclusion = 3
+	// Use constraints for all tables.
+	PostgresqlConfig10_CONSTRAINT_EXCLUSION_ON PostgresqlConfig10_ConstraintExclusion = 1
+	// Do not use constraints.
+	PostgresqlConfig10_CONSTRAINT_EXCLUSION_OFF PostgresqlConfig10_ConstraintExclusion = 2
+	// Only use constraints for child tables and UNION ALL clauses.
+	PostgresqlConfig10_CONSTRAINT_EXCLUSION_PARTITION PostgresqlConfig10_ConstraintExclusion = 3
 )
 
 // Enum value maps for PostgresqlConfig10_ConstraintExclusion.
@@ -186,9 +200,12 @@ type PostgresqlConfig10_ForceParallelMode int32
 
 const (
 	PostgresqlConfig10_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlConfig10_ForceParallelMode = 0
-	PostgresqlConfig10_FORCE_PARALLEL_MODE_ON          PostgresqlConfig10_ForceParallelMode = 1
-	PostgresqlConfig10_FORCE_PARALLEL_MODE_OFF         PostgresqlConfig10_ForceParallelMode = 2
-	PostgresqlConfig10_FORCE_PARALLEL_MODE_REGRESS     PostgresqlConfig10_ForceParallelMode = 3
+	// Force parallel mode for all queries that can be executed safely in parallel.
+	PostgresqlConfig10_FORCE_PARALLEL_MODE_ON PostgresqlConfig10_ForceParallelMode = 1
+	// Enable parallel mode only if it is expected to increase performance.
+	PostgresqlConfig10_FORCE_PARALLEL_MODE_OFF PostgresqlConfig10_ForceParallelMode = 2
+	// Equivalent to on, but generates output identical to the off state.
+	PostgresqlConfig10_FORCE_PARALLEL_MODE_REGRESS PostgresqlConfig10_ForceParallelMode = 3
 )
 
 // Enum value maps for PostgresqlConfig10_ForceParallelMode.
@@ -238,9 +255,12 @@ type PostgresqlConfig10_LogErrorVerbosity int32
 
 const (
 	PostgresqlConfig10_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlConfig10_LogErrorVerbosity = 0
-	PostgresqlConfig10_LOG_ERROR_VERBOSITY_TERSE       PostgresqlConfig10_LogErrorVerbosity = 1
-	PostgresqlConfig10_LOG_ERROR_VERBOSITY_DEFAULT     PostgresqlConfig10_LogErrorVerbosity = 2
-	PostgresqlConfig10_LOG_ERROR_VERBOSITY_VERBOSE     PostgresqlConfig10_LogErrorVerbosity = 3
+	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
+	PostgresqlConfig10_LOG_ERROR_VERBOSITY_TERSE PostgresqlConfig10_LogErrorVerbosity = 1
+	// Default.
+	PostgresqlConfig10_LOG_ERROR_VERBOSITY_DEFAULT PostgresqlConfig10_LogErrorVerbosity = 2
+	// Error message includes the SQLSTATE error code, source filename, function name, and the line number where the error occurred.
+	PostgresqlConfig10_LOG_ERROR_VERBOSITY_VERBOSE PostgresqlConfig10_LogErrorVerbosity = 3
 )
 
 // Enum value maps for PostgresqlConfig10_LogErrorVerbosity.
@@ -290,17 +310,28 @@ type PostgresqlConfig10_LogLevel int32
 
 const (
 	PostgresqlConfig10_LOG_LEVEL_UNSPECIFIED PostgresqlConfig10_LogLevel = 0
-	PostgresqlConfig10_LOG_LEVEL_DEBUG5      PostgresqlConfig10_LogLevel = 1
-	PostgresqlConfig10_LOG_LEVEL_DEBUG4      PostgresqlConfig10_LogLevel = 2
-	PostgresqlConfig10_LOG_LEVEL_DEBUG3      PostgresqlConfig10_LogLevel = 3
-	PostgresqlConfig10_LOG_LEVEL_DEBUG2      PostgresqlConfig10_LogLevel = 4
-	PostgresqlConfig10_LOG_LEVEL_DEBUG1      PostgresqlConfig10_LogLevel = 5
-	PostgresqlConfig10_LOG_LEVEL_LOG         PostgresqlConfig10_LogLevel = 6
-	PostgresqlConfig10_LOG_LEVEL_NOTICE      PostgresqlConfig10_LogLevel = 7
-	PostgresqlConfig10_LOG_LEVEL_WARNING     PostgresqlConfig10_LogLevel = 8
-	PostgresqlConfig10_LOG_LEVEL_ERROR       PostgresqlConfig10_LogLevel = 9
-	PostgresqlConfig10_LOG_LEVEL_FATAL       PostgresqlConfig10_LogLevel = 10
-	PostgresqlConfig10_LOG_LEVEL_PANIC       PostgresqlConfig10_LogLevel = 11
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig10_LOG_LEVEL_DEBUG5 PostgresqlConfig10_LogLevel = 1
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig10_LOG_LEVEL_DEBUG4 PostgresqlConfig10_LogLevel = 2
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig10_LOG_LEVEL_DEBUG3 PostgresqlConfig10_LogLevel = 3
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig10_LOG_LEVEL_DEBUG2 PostgresqlConfig10_LogLevel = 4
+	// Provides successively-more-detailed information for use by developers.
+	PostgresqlConfig10_LOG_LEVEL_DEBUG1 PostgresqlConfig10_LogLevel = 5
+	// Reports information of interest to administrators, e.g., checkpoint activity.
+	PostgresqlConfig10_LOG_LEVEL_LOG PostgresqlConfig10_LogLevel = 6
+	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	PostgresqlConfig10_LOG_LEVEL_NOTICE PostgresqlConfig10_LogLevel = 7
+	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	PostgresqlConfig10_LOG_LEVEL_WARNING PostgresqlConfig10_LogLevel = 8
+	// Reports an error that caused the current command to abort.
+	PostgresqlConfig10_LOG_LEVEL_ERROR PostgresqlConfig10_LogLevel = 9
+	// Reports an error that caused the current session to abort.
+	PostgresqlConfig10_LOG_LEVEL_FATAL PostgresqlConfig10_LogLevel = 10
+	// Reports an error that caused all database sessions to abort.
+	PostgresqlConfig10_LOG_LEVEL_PANIC PostgresqlConfig10_LogLevel = 11
 )
 
 // Enum value maps for PostgresqlConfig10_LogLevel.
@@ -366,10 +397,14 @@ type PostgresqlConfig10_LogStatement int32
 
 const (
 	PostgresqlConfig10_LOG_STATEMENT_UNSPECIFIED PostgresqlConfig10_LogStatement = 0
-	PostgresqlConfig10_LOG_STATEMENT_NONE        PostgresqlConfig10_LogStatement = 1
-	PostgresqlConfig10_LOG_STATEMENT_DDL         PostgresqlConfig10_LogStatement = 2
-	PostgresqlConfig10_LOG_STATEMENT_MOD         PostgresqlConfig10_LogStatement = 3
-	PostgresqlConfig10_LOG_STATEMENT_ALL         PostgresqlConfig10_LogStatement = 4
+	// The filter is disabled, no SQL statements are logged.
+	PostgresqlConfig10_LOG_STATEMENT_NONE PostgresqlConfig10_LogStatement = 1
+	// System logs DDL statements, e.g., CREATE, ALTER, DROP etc.
+	PostgresqlConfig10_LOG_STATEMENT_DDL PostgresqlConfig10_LogStatement = 2
+	// System logs ddl-statements along with data modification commands, e.g., INSERT, UPDATE, etc.
+	PostgresqlConfig10_LOG_STATEMENT_MOD PostgresqlConfig10_LogStatement = 3
+	// System logs all SQL statements.
+	PostgresqlConfig10_LOG_STATEMENT_ALL PostgresqlConfig10_LogStatement = 4
 )
 
 // Enum value maps for PostgresqlConfig10_LogStatement.
@@ -420,8 +455,11 @@ func (PostgresqlConfig10_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig10_PasswordEncryption int32
 
 const (
-	PostgresqlConfig10_PASSWORD_ENCRYPTION_UNSPECIFIED   PostgresqlConfig10_PasswordEncryption = 0
-	PostgresqlConfig10_PASSWORD_ENCRYPTION_MD5           PostgresqlConfig10_PasswordEncryption = 1
+	PostgresqlConfig10_PASSWORD_ENCRYPTION_UNSPECIFIED PostgresqlConfig10_PasswordEncryption = 0
+	// The method md5 uses a custom less secure challenge-response mechanism. It prevents password sniffing and avoids storing passwords on the server in plain text but provides no protection if an attacker manages to steal the password hash from the server. Also, the MD5 hash algorithm is nowadays no longer considered secure against determined attacks.
+	PostgresqlConfig10_PASSWORD_ENCRYPTION_MD5 PostgresqlConfig10_PasswordEncryption = 1
+	// The method scram-sha-256 performs SCRAM-SHA-256 authentication, as described in RFC 7677. It is a challenge-response scheme that prevents password sniffing on untrusted connections and supports storing passwords on the server in a cryptographically hashed form that is thought to be secure.
+	// This is the most secure of the currently provided methods, but it is not supported by older client libraries.
 	PostgresqlConfig10_PASSWORD_ENCRYPTION_SCRAM_SHA_256 PostgresqlConfig10_PasswordEncryption = 2
 )
 
@@ -469,11 +507,17 @@ func (PostgresqlConfig10_PasswordEncryption) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig10_TransactionIsolation int32
 
 const (
-	PostgresqlConfig10_TRANSACTION_ISOLATION_UNSPECIFIED      PostgresqlConfig10_TransactionIsolation = 0
+	PostgresqlConfig10_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlConfig10_TransactionIsolation = 0
+	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlConfig10_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlConfig10_TransactionIsolation = 1
-	PostgresqlConfig10_TRANSACTION_ISOLATION_READ_COMMITTED   PostgresqlConfig10_TransactionIsolation = 2
-	PostgresqlConfig10_TRANSACTION_ISOLATION_REPEATABLE_READ  PostgresqlConfig10_TransactionIsolation = 3
-	PostgresqlConfig10_TRANSACTION_ISOLATION_SERIALIZABLE     PostgresqlConfig10_TransactionIsolation = 4
+	// On this level query sees only data committed before the query began. Default value.
+	PostgresqlConfig10_TRANSACTION_ISOLATION_READ_COMMITTED PostgresqlConfig10_TransactionIsolation = 2
+	// On this level all subsequent queries in a transaction will see the same rows, that were read by the first `SELECT` or `INSERT` query in this transaction, unchanged (these rows are locked during the first query).
+	PostgresqlConfig10_TRANSACTION_ISOLATION_REPEATABLE_READ PostgresqlConfig10_TransactionIsolation = 3
+	// This level provides the strictest transaction isolation.
+	// All queries in the current transaction see only the rows that were fixed prior to execution of the first `SELECT` or `INSERT` query in this transaction.
+	// If read and write operations in a concurrent set of serializable transactions overlap and this may cause an inconsistency that is not possible during the serial transaction execution, then one of the transaction will be rolled back, triggering a serialization failure.
+	PostgresqlConfig10_TRANSACTION_ISOLATION_SERIALIZABLE PostgresqlConfig10_TransactionIsolation = 4
 )
 
 // Enum value maps for PostgresqlConfig10_TransactionIsolation.
@@ -525,8 +569,10 @@ type PostgresqlConfig10_ByteaOutput int32
 
 const (
 	PostgresqlConfig10_BYTEA_OUTPUT_UNSPECIFIED PostgresqlConfig10_ByteaOutput = 0
-	PostgresqlConfig10_BYTEA_OUTPUT_HEX         PostgresqlConfig10_ByteaOutput = 1
-	PostgresqlConfig10_BYTEA_OUTPUT_ESCAPED     PostgresqlConfig10_ByteaOutput = 2
+	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
+	PostgresqlConfig10_BYTEA_OUTPUT_HEX PostgresqlConfig10_ByteaOutput = 1
+	// Standard PostgreSQL format with ASCII characters only.
+	PostgresqlConfig10_BYTEA_OUTPUT_ESCAPED PostgresqlConfig10_ByteaOutput = 2
 )
 
 // Enum value maps for PostgresqlConfig10_ByteaOutput.
@@ -574,8 +620,10 @@ type PostgresqlConfig10_XmlBinary int32
 
 const (
 	PostgresqlConfig10_XML_BINARY_UNSPECIFIED PostgresqlConfig10_XmlBinary = 0
-	PostgresqlConfig10_XML_BINARY_BASE64      PostgresqlConfig10_XmlBinary = 1
-	PostgresqlConfig10_XML_BINARY_HEX         PostgresqlConfig10_XmlBinary = 2
+	// Base64 encoding.
+	PostgresqlConfig10_XML_BINARY_BASE64 PostgresqlConfig10_XmlBinary = 1
+	// Hexadecimal encoding.
+	PostgresqlConfig10_XML_BINARY_HEX PostgresqlConfig10_XmlBinary = 2
 )
 
 // Enum value maps for PostgresqlConfig10_XmlBinary.
@@ -623,8 +671,10 @@ type PostgresqlConfig10_XmlOption int32
 
 const (
 	PostgresqlConfig10_XML_OPTION_UNSPECIFIED PostgresqlConfig10_XmlOption = 0
-	PostgresqlConfig10_XML_OPTION_DOCUMENT    PostgresqlConfig10_XmlOption = 1
-	PostgresqlConfig10_XML_OPTION_CONTENT     PostgresqlConfig10_XmlOption = 2
+	// XML document.
+	PostgresqlConfig10_XML_OPTION_DOCUMENT PostgresqlConfig10_XmlOption = 1
+	// XML fragment.
+	PostgresqlConfig10_XML_OPTION_CONTENT PostgresqlConfig10_XmlOption = 2
 )
 
 // Enum value maps for PostgresqlConfig10_XmlOption.
@@ -671,10 +721,14 @@ func (PostgresqlConfig10_XmlOption) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig10_BackslashQuote int32
 
 const (
-	PostgresqlConfig10_BACKSLASH_QUOTE_UNSPECIFIED   PostgresqlConfig10_BackslashQuote = 0
-	PostgresqlConfig10_BACKSLASH_QUOTE               PostgresqlConfig10_BackslashQuote = 1
-	PostgresqlConfig10_BACKSLASH_QUOTE_ON            PostgresqlConfig10_BackslashQuote = 2
-	PostgresqlConfig10_BACKSLASH_QUOTE_OFF           PostgresqlConfig10_BackslashQuote = 3
+	PostgresqlConfig10_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlConfig10_BackslashQuote = 0
+	// Quotation mark can be represented as \' (same as on).
+	PostgresqlConfig10_BACKSLASH_QUOTE PostgresqlConfig10_BackslashQuote = 1
+	// Quotation mark can be represented as \'.
+	PostgresqlConfig10_BACKSLASH_QUOTE_ON PostgresqlConfig10_BackslashQuote = 2
+	// Quotation mark can only be represented using the standard SQL syntax ”.
+	PostgresqlConfig10_BACKSLASH_QUOTE_OFF PostgresqlConfig10_BackslashQuote = 3
+	// Representing a quotation mark as \' is only permitted for client encodings where \ is not used for multibyte characters.
 	PostgresqlConfig10_BACKSLASH_QUOTE_SAFE_ENCODING PostgresqlConfig10_BackslashQuote = 4
 )
 
@@ -727,10 +781,14 @@ type PostgresqlConfig10_PgHintPlanDebugPrint int32
 
 const (
 	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_UNSPECIFIED PostgresqlConfig10_PgHintPlanDebugPrint = 0
-	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_OFF         PostgresqlConfig10_PgHintPlanDebugPrint = 1
-	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_ON          PostgresqlConfig10_PgHintPlanDebugPrint = 2
-	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_DETAILED    PostgresqlConfig10_PgHintPlanDebugPrint = 3
-	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE     PostgresqlConfig10_PgHintPlanDebugPrint = 4
+	// Disable debug output
+	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_OFF PostgresqlConfig10_PgHintPlanDebugPrint = 1
+	// Print debug messages about hint parsing
+	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_ON PostgresqlConfig10_PgHintPlanDebugPrint = 2
+	// Print detailed debug information including query planning process
+	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_DETAILED PostgresqlConfig10_PgHintPlanDebugPrint = 3
+	// Print verbose debug output with all internal operations
+	PostgresqlConfig10_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE PostgresqlConfig10_PgHintPlanDebugPrint = 4
 )
 
 // Enum value maps for PostgresqlConfig10_PgHintPlanDebugPrint.
@@ -781,15 +839,23 @@ func (PostgresqlConfig10_PgHintPlanDebugPrint) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig10_SharedPreloadLibraries int32
 
 const (
-	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED  PostgresqlConfig10_SharedPreloadLibraries = 0
+	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED PostgresqlConfig10_SharedPreloadLibraries = 0
+	// Required for the [auto_explain](https://www.postgresql.org/docs/current/auto-explain.html) extension.
 	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN PostgresqlConfig10_SharedPreloadLibraries = 1
+	// Required for the [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan) extension.
 	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PG_HINT_PLAN PostgresqlConfig10_SharedPreloadLibraries = 2
-	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_TIMESCALEDB  PostgresqlConfig10_SharedPreloadLibraries = 3
+	// Required for [TimescaleDB](https://github.com/timescale/timescaledb) to function.
+	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_TIMESCALEDB PostgresqlConfig10_SharedPreloadLibraries = 3
+	// Required for the [pg_qualstats](https://github.com/powa-team/pg_qualstats) extension.
 	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PG_QUALSTATS PostgresqlConfig10_SharedPreloadLibraries = 4
-	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PG_CRON      PostgresqlConfig10_SharedPreloadLibraries = 5
-	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PGLOGICAL    PostgresqlConfig10_SharedPreloadLibraries = 6
-	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PG_PREWARM   PostgresqlConfig10_SharedPreloadLibraries = 7
-	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PGAUDIT      PostgresqlConfig10_SharedPreloadLibraries = 8
+	// Required for the [pg_cron](https://github.com/citusdata/pg_cron) extension.
+	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PG_CRON PostgresqlConfig10_SharedPreloadLibraries = 5
+	// Required for the [pglogical](https://github.com/2ndQuadrant/pglogical) extension.
+	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PGLOGICAL PostgresqlConfig10_SharedPreloadLibraries = 6
+	// Required for the [pg_prewarm](https://www.postgresql.org/docs/current/pgprewarm.html#PGPREWARM) extension.
+	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PG_PREWARM PostgresqlConfig10_SharedPreloadLibraries = 7
+	// Required for the [pgaudit](https://www.pgaudit.org/) extension.
+	PostgresqlConfig10_SHARED_PRELOAD_LIBRARIES_PGAUDIT PostgresqlConfig10_SharedPreloadLibraries = 8
 )
 
 // Enum value maps for PostgresqlConfig10_SharedPreloadLibraries.
