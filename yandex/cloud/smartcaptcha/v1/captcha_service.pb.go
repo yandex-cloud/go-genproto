@@ -71,98 +71,6 @@ func (x *GetCaptchaRequest) GetCaptchaId() string {
 	return ""
 }
 
-type ListCaptchasRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder that the captcha belongs to.
-	// Currently page_size, page_token, filter and order_by are not supported and List method will return all captchas in the folder.
-	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCaptchasRequest) Reset() {
-	*x = ListCaptchasRequest{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCaptchasRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCaptchasRequest) ProtoMessage() {}
-
-func (x *ListCaptchasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCaptchasRequest.ProtoReflect.Descriptor instead.
-func (*ListCaptchasRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListCaptchasRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-type ListCaptchasResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Captcha resources.
-	// Currently next_page_token is not supported and List method will return all captchas in the folder.
-	Resources     []*Captcha `protobuf:"bytes,3,rep,name=resources,proto3" json:"resources,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCaptchasResponse) Reset() {
-	*x = ListCaptchasResponse{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCaptchasResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCaptchasResponse) ProtoMessage() {}
-
-func (x *ListCaptchasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCaptchasResponse.ProtoReflect.Descriptor instead.
-func (*ListCaptchasResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ListCaptchasResponse) GetResources() []*Captcha {
-	if x != nil {
-		return x.Resources
-	}
-	return nil
-}
-
 type CreateCaptchaRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a captcha in.
@@ -200,7 +108,7 @@ type CreateCaptchaRequest struct {
 
 func (x *CreateCaptchaRequest) Reset() {
 	*x = CreateCaptchaRequest{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -212,7 +120,7 @@ func (x *CreateCaptchaRequest) String() string {
 func (*CreateCaptchaRequest) ProtoMessage() {}
 
 func (x *CreateCaptchaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -225,7 +133,7 @@ func (x *CreateCaptchaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCaptchaRequest.ProtoReflect.Descriptor instead.
 func (*CreateCaptchaRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateCaptchaRequest) GetFolderId() string {
@@ -336,7 +244,7 @@ type CreateCaptchaMetadata struct {
 
 func (x *CreateCaptchaMetadata) Reset() {
 	*x = CreateCaptchaMetadata{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -348,7 +256,7 @@ func (x *CreateCaptchaMetadata) String() string {
 func (*CreateCaptchaMetadata) ProtoMessage() {}
 
 func (x *CreateCaptchaMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -361,7 +269,7 @@ func (x *CreateCaptchaMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCaptchaMetadata.ProtoReflect.Descriptor instead.
 func (*CreateCaptchaMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreateCaptchaMetadata) GetCaptchaId() string {
@@ -381,7 +289,7 @@ type DeleteCaptchaRequest struct {
 
 func (x *DeleteCaptchaRequest) Reset() {
 	*x = DeleteCaptchaRequest{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -393,7 +301,7 @@ func (x *DeleteCaptchaRequest) String() string {
 func (*DeleteCaptchaRequest) ProtoMessage() {}
 
 func (x *DeleteCaptchaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -406,7 +314,7 @@ func (x *DeleteCaptchaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCaptchaRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCaptchaRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeleteCaptchaRequest) GetCaptchaId() string {
@@ -426,7 +334,7 @@ type DeleteCaptchaMetadata struct {
 
 func (x *DeleteCaptchaMetadata) Reset() {
 	*x = DeleteCaptchaMetadata{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -438,7 +346,7 @@ func (x *DeleteCaptchaMetadata) String() string {
 func (*DeleteCaptchaMetadata) ProtoMessage() {}
 
 func (x *DeleteCaptchaMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -451,7 +359,7 @@ func (x *DeleteCaptchaMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCaptchaMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteCaptchaMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteCaptchaMetadata) GetCaptchaId() string {
@@ -500,7 +408,7 @@ type UpdateCaptchaRequest struct {
 
 func (x *UpdateCaptchaRequest) Reset() {
 	*x = UpdateCaptchaRequest{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -512,7 +420,7 @@ func (x *UpdateCaptchaRequest) String() string {
 func (*UpdateCaptchaRequest) ProtoMessage() {}
 
 func (x *UpdateCaptchaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -525,7 +433,7 @@ func (x *UpdateCaptchaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCaptchaRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCaptchaRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateCaptchaRequest) GetCaptchaId() string {
@@ -643,7 +551,7 @@ type UpdateCaptchaMetadata struct {
 
 func (x *UpdateCaptchaMetadata) Reset() {
 	*x = UpdateCaptchaMetadata{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -655,7 +563,7 @@ func (x *UpdateCaptchaMetadata) String() string {
 func (*UpdateCaptchaMetadata) ProtoMessage() {}
 
 func (x *UpdateCaptchaMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -668,7 +576,7 @@ func (x *UpdateCaptchaMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCaptchaMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateCaptchaMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateCaptchaMetadata) GetCaptchaId() string {
@@ -678,18 +586,106 @@ func (x *UpdateCaptchaMetadata) GetCaptchaId() string {
 	return ""
 }
 
+type ListCaptchasRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder that the captcha belongs to.
+	// Currently page_size, page_token, filter and order_by are not supported and List method will return all captchas in the folder.
+	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCaptchasRequest) Reset() {
+	*x = ListCaptchasRequest{}
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCaptchasRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCaptchasRequest) ProtoMessage() {}
+
+func (x *ListCaptchasRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCaptchasRequest.ProtoReflect.Descriptor instead.
+func (*ListCaptchasRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListCaptchasRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+type ListCaptchasResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of Captcha resources.
+	// Currently next_page_token is not supported and List method will return all captchas in the folder.
+	Resources     []*Captcha `protobuf:"bytes,3,rep,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCaptchasResponse) Reset() {
+	*x = ListCaptchasResponse{}
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCaptchasResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCaptchasResponse) ProtoMessage() {}
+
+func (x *ListCaptchasResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCaptchasResponse.ProtoReflect.Descriptor instead.
+func (*ListCaptchasResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListCaptchasResponse) GetResources() []*Captcha {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
 var File_yandex_cloud_smartcaptcha_v1_captcha_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/smartcaptcha/v1/captcha_service.proto\x12\x1cyandex.cloud.smartcaptcha.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a*yandex/cloud/smartcaptcha/v1/captcha.proto\"@\n" +
+	"2yandex/cloud/smartcaptcha/v1/captcha_service.proto\x12\x1cyandex.cloud.smartcaptcha.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a*yandex/cloud/smartcaptcha/v1/captcha.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetCaptchaRequest\x12+\n" +
 	"\n" +
-	"captcha_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tcaptchaId\"@\n" +
-	"\x13ListCaptchasRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"g\n" +
-	"\x14ListCaptchasResponse\x12C\n" +
-	"\tresources\x18\x03 \x03(\v2%.yandex.cloud.smartcaptcha.v1.CaptchaR\tresourcesJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\x9f\b\n" +
+	"captcha_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tcaptchaId\"\x9f\b\n" +
 	"\x14CreateCaptchaRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
 	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12#\n" +
@@ -748,17 +744,21 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\tJ\x04\b\v\x10\f\"6\n" +
 	"\x15UpdateCaptchaMetadata\x12\x1d\n" +
 	"\n" +
-	"captcha_id\x18\x01 \x01(\tR\tcaptchaId2\x8b\b\n" +
+	"captcha_id\x18\x01 \x01(\tR\tcaptchaId\"@\n" +
+	"\x13ListCaptchasRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"a\n" +
+	"\x14ListCaptchasResponse\x12C\n" +
+	"\tresources\x18\x03 \x03(\v2%.yandex.cloud.smartcaptcha.v1.CaptchaR\tresourcesJ\x04\b\x01\x10\x032\xfd\a\n" +
 	"\x0eCaptchaService\x12\x8d\x01\n" +
 	"\x03Get\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a%.yandex.cloud.smartcaptcha.v1.Captcha\".\x82\xd3\xe4\x93\x02(\x12&/smartcaptcha/v1/captchas/{captcha_id}\x12\xac\x01\n" +
-	"\fGetSecretKey\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a..yandex.cloud.smartcaptcha.v1.CaptchaSecretKey\";\x82\xd3\xe4\x93\x025\x123/smartcaptcha/v1/captchas/{captcha_id}:getSecretKey\x12\x90\x01\n" +
-	"\x04List\x121.yandex.cloud.smartcaptcha.v1.ListCaptchasRequest\x1a2.yandex.cloud.smartcaptcha.v1.ListCaptchasResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/smartcaptcha/v1/captchas\x12\xa9\x01\n" +
+	"\fGetSecretKey\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a..yandex.cloud.smartcaptcha.v1.CaptchaSecretKey\";\x82\xd3\xe4\x93\x025\x123/smartcaptcha/v1/captchas/{captcha_id}:getSecretKey\x12\xa9\x01\n" +
 	"\x06Create\x122.yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"H\xb2\xd2* \n" +
-	"\x15CreateCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/smartcaptcha/v1/captchas\x12\xb6\x01\n" +
+	"\x15CreateCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/smartcaptcha/v1/captchas\x12\xb3\x01\n" +
+	"\x06Delete\x122.yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"R\xb2\xd2* \n" +
+	"\x15DeleteCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02(*&/smartcaptcha/v1/captchas/{captcha_id}\x12\xb6\x01\n" +
 	"\x06Update\x122.yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2* \n" +
-	"\x15UpdateCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02+:\x01*2&/smartcaptcha/v1/captchas/{captcha_id}\x12\xc1\x01\n" +
-	"\x06Delete\x122.yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"`\xb2\xd2*.\n" +
-	"\x15DeleteCaptchaMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02(*&/smartcaptcha/v1/captchas/{captcha_id}Bq\n" +
+	"\x15UpdateCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02+:\x01*2&/smartcaptcha/v1/captchas/{captcha_id}\x12\x90\x01\n" +
+	"\x04List\x121.yandex.cloud.smartcaptcha.v1.ListCaptchasRequest\x1a2.yandex.cloud.smartcaptcha.v1.ListCaptchasResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/smartcaptcha/v1/captchasBq\n" +
 	" yandex.cloud.api.smartcaptcha.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartcaptcha/v1;smartcaptchab\x06proto3"
 
 var (
@@ -776,53 +776,53 @@ func file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescGZIP() []byt
 var file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_goTypes = []any{
 	(*GetCaptchaRequest)(nil),     // 0: yandex.cloud.smartcaptcha.v1.GetCaptchaRequest
-	(*ListCaptchasRequest)(nil),   // 1: yandex.cloud.smartcaptcha.v1.ListCaptchasRequest
-	(*ListCaptchasResponse)(nil),  // 2: yandex.cloud.smartcaptcha.v1.ListCaptchasResponse
-	(*CreateCaptchaRequest)(nil),  // 3: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest
-	(*CreateCaptchaMetadata)(nil), // 4: yandex.cloud.smartcaptcha.v1.CreateCaptchaMetadata
-	(*DeleteCaptchaRequest)(nil),  // 5: yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest
-	(*DeleteCaptchaMetadata)(nil), // 6: yandex.cloud.smartcaptcha.v1.DeleteCaptchaMetadata
-	(*UpdateCaptchaRequest)(nil),  // 7: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest
-	(*UpdateCaptchaMetadata)(nil), // 8: yandex.cloud.smartcaptcha.v1.UpdateCaptchaMetadata
+	(*CreateCaptchaRequest)(nil),  // 1: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest
+	(*CreateCaptchaMetadata)(nil), // 2: yandex.cloud.smartcaptcha.v1.CreateCaptchaMetadata
+	(*DeleteCaptchaRequest)(nil),  // 3: yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest
+	(*DeleteCaptchaMetadata)(nil), // 4: yandex.cloud.smartcaptcha.v1.DeleteCaptchaMetadata
+	(*UpdateCaptchaRequest)(nil),  // 5: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest
+	(*UpdateCaptchaMetadata)(nil), // 6: yandex.cloud.smartcaptcha.v1.UpdateCaptchaMetadata
+	(*ListCaptchasRequest)(nil),   // 7: yandex.cloud.smartcaptcha.v1.ListCaptchasRequest
+	(*ListCaptchasResponse)(nil),  // 8: yandex.cloud.smartcaptcha.v1.ListCaptchasResponse
 	nil,                           // 9: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.LabelsEntry
 	nil,                           // 10: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.LabelsEntry
-	(*Captcha)(nil),               // 11: yandex.cloud.smartcaptcha.v1.Captcha
-	(CaptchaComplexity)(0),        // 12: yandex.cloud.smartcaptcha.v1.CaptchaComplexity
-	(CaptchaPreCheckType)(0),      // 13: yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
-	(CaptchaChallengeType)(0),     // 14: yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
-	(*SecurityRule)(nil),          // 15: yandex.cloud.smartcaptcha.v1.SecurityRule
-	(*OverrideVariant)(nil),       // 16: yandex.cloud.smartcaptcha.v1.OverrideVariant
-	(*fieldmaskpb.FieldMask)(nil), // 17: google.protobuf.FieldMask
+	(CaptchaComplexity)(0),        // 11: yandex.cloud.smartcaptcha.v1.CaptchaComplexity
+	(CaptchaPreCheckType)(0),      // 12: yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
+	(CaptchaChallengeType)(0),     // 13: yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
+	(*SecurityRule)(nil),          // 14: yandex.cloud.smartcaptcha.v1.SecurityRule
+	(*OverrideVariant)(nil),       // 15: yandex.cloud.smartcaptcha.v1.OverrideVariant
+	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
+	(*Captcha)(nil),               // 17: yandex.cloud.smartcaptcha.v1.Captcha
 	(*CaptchaSecretKey)(nil),      // 18: yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
 	(*operation.Operation)(nil),   // 19: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_depIdxs = []int32{
-	11, // 0: yandex.cloud.smartcaptcha.v1.ListCaptchasResponse.resources:type_name -> yandex.cloud.smartcaptcha.v1.Captcha
-	12, // 1: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
-	13, // 2: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
-	14, // 3: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
-	15, // 4: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
-	16, // 5: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.override_variants:type_name -> yandex.cloud.smartcaptcha.v1.OverrideVariant
-	9,  // 6: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.labels:type_name -> yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.LabelsEntry
-	17, // 7: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.update_mask:type_name -> google.protobuf.FieldMask
-	12, // 8: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
-	13, // 9: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
-	14, // 10: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
-	15, // 11: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
-	16, // 12: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.override_variants:type_name -> yandex.cloud.smartcaptcha.v1.OverrideVariant
-	10, // 13: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.labels:type_name -> yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.LabelsEntry
+	11, // 0: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
+	12, // 1: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
+	13, // 2: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
+	14, // 3: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
+	15, // 4: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.override_variants:type_name -> yandex.cloud.smartcaptcha.v1.OverrideVariant
+	9,  // 5: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.labels:type_name -> yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.LabelsEntry
+	16, // 6: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.update_mask:type_name -> google.protobuf.FieldMask
+	11, // 7: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
+	12, // 8: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
+	13, // 9: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
+	14, // 10: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
+	15, // 11: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.override_variants:type_name -> yandex.cloud.smartcaptcha.v1.OverrideVariant
+	10, // 12: yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.labels:type_name -> yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest.LabelsEntry
+	17, // 13: yandex.cloud.smartcaptcha.v1.ListCaptchasResponse.resources:type_name -> yandex.cloud.smartcaptcha.v1.Captcha
 	0,  // 14: yandex.cloud.smartcaptcha.v1.CaptchaService.Get:input_type -> yandex.cloud.smartcaptcha.v1.GetCaptchaRequest
 	0,  // 15: yandex.cloud.smartcaptcha.v1.CaptchaService.GetSecretKey:input_type -> yandex.cloud.smartcaptcha.v1.GetCaptchaRequest
-	1,  // 16: yandex.cloud.smartcaptcha.v1.CaptchaService.List:input_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasRequest
-	3,  // 17: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:input_type -> yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest
-	7,  // 18: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:input_type -> yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest
-	5,  // 19: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:input_type -> yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest
-	11, // 20: yandex.cloud.smartcaptcha.v1.CaptchaService.Get:output_type -> yandex.cloud.smartcaptcha.v1.Captcha
+	1,  // 16: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:input_type -> yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest
+	3,  // 17: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:input_type -> yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest
+	5,  // 18: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:input_type -> yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest
+	7,  // 19: yandex.cloud.smartcaptcha.v1.CaptchaService.List:input_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasRequest
+	17, // 20: yandex.cloud.smartcaptcha.v1.CaptchaService.Get:output_type -> yandex.cloud.smartcaptcha.v1.Captcha
 	18, // 21: yandex.cloud.smartcaptcha.v1.CaptchaService.GetSecretKey:output_type -> yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
-	2,  // 22: yandex.cloud.smartcaptcha.v1.CaptchaService.List:output_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasResponse
-	19, // 23: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:output_type -> yandex.cloud.operation.Operation
+	19, // 22: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:output_type -> yandex.cloud.operation.Operation
+	19, // 23: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:output_type -> yandex.cloud.operation.Operation
 	19, // 24: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:output_type -> yandex.cloud.operation.Operation
-	19, // 25: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:output_type -> yandex.cloud.operation.Operation
+	8,  // 25: yandex.cloud.smartcaptcha.v1.CaptchaService.List:output_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasResponse
 	20, // [20:26] is the sub-list for method output_type
 	14, // [14:20] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name

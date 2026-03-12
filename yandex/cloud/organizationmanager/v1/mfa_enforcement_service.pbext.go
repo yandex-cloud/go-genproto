@@ -191,3 +191,51 @@ func (m *ListAudienceResponse_Subject) SetId(v string) {
 func (m *ListAudienceResponse_Subject) SetType(v string) {
 	m.Type = v
 }
+
+func (m *UpdateExcludedAudienceRequest) SetMfaEnforcementId(v string) {
+	m.MfaEnforcementId = v
+}
+
+func (m *UpdateExcludedAudienceRequest) SetAudienceDeltas(v []*AudienceDelta) {
+	m.AudienceDeltas = v
+}
+
+func (m *UpdateExcludedAudienceResponse) SetMfaEnforcementId(v string) {
+	m.MfaEnforcementId = v
+}
+
+func (m *UpdateExcludedAudienceResponse) SetEffectiveDeltas(v []*AudienceDelta) {
+	m.EffectiveDeltas = v
+}
+
+func (m *UpdateExcludedAudienceMetadata) SetMfaEnforcementId(v string) {
+	m.MfaEnforcementId = v
+}
+
+func (m *ListExcludedAudienceRequest) SetMfaEnforcementId(v string) {
+	m.MfaEnforcementId = v
+}
+
+func (m *ListExcludedAudienceRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListExcludedAudienceRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListExcludedAudienceResponse) SetSubjects(v []*ListExcludedAudienceResponse_Subject) {
+	m.Subjects = v
+}
+
+func (m *ListExcludedAudienceResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *ListExcludedAudienceResponse_Subject) SetId(v string) {
+	m.Id = v
+}
+
+func (m *ListExcludedAudienceResponse_Subject) SetType(v string) {
+	m.Type = v
+}

@@ -194,12 +194,8 @@ func (CaptchaChallengeType) EnumDescriptor() ([]byte, []int) {
 // A Captcha resource.
 type Captcha struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the captcha.
-	Id string `protobuf:"bytes,21,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the captcha belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the cloud that the captcha belongs to.
-	CloudId string `protobuf:"bytes,12,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
 	// Client key of the captcha, see [CAPTCHA keys](/docs/smartcaptcha/concepts/keys).
 	ClientKey string `protobuf:"bytes,3,opt,name=client_key,json=clientKey,proto3" json:"client_key,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
@@ -212,6 +208,8 @@ type Captcha struct {
 	Complexity CaptchaComplexity `protobuf:"varint,9,opt,name=complexity,proto3,enum=yandex.cloud.smartcaptcha.v1.CaptchaComplexity" json:"complexity,omitempty"`
 	// JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
 	StyleJson string `protobuf:"bytes,10,opt,name=style_json,json=styleJson,proto3" json:"style_json,omitempty"`
+	// ID of the cloud that the captcha belongs to.
+	CloudId string `protobuf:"bytes,12,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
 	// Determines that the captcha is currently in restricted mode, see [SmartCaptcha restricted mode](/docs/smartcaptcha/concepts/restricted-mode).
 	Suspend bool `protobuf:"varint,13,opt,name=suspend,proto3" json:"suspend,omitempty"`
 	// Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
@@ -222,6 +220,8 @@ type Captcha struct {
 	ChallengeType CaptchaChallengeType `protobuf:"varint,17,opt,name=challenge_type,json=challengeType,proto3,enum=yandex.cloud.smartcaptcha.v1.CaptchaChallengeType" json:"challenge_type,omitempty"`
 	// List of security rules.
 	SecurityRules []*SecurityRule `protobuf:"bytes,19,rep,name=security_rules,json=securityRules,proto3" json:"security_rules,omitempty"`
+	// ID of the captcha.
+	Id string `protobuf:"bytes,21,opt,name=id,proto3" json:"id,omitempty"` // need to replace captcha_id in future
 	// Determines whether captcha is protected from being deleted.
 	DeletionProtection bool `protobuf:"varint,22,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// List of variants to use in security_rules
@@ -263,23 +263,9 @@ func (*Captcha) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Captcha) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
 func (x *Captcha) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
-	}
-	return ""
-}
-
-func (x *Captcha) GetCloudId() string {
-	if x != nil {
-		return x.CloudId
 	}
 	return ""
 }
@@ -326,6 +312,13 @@ func (x *Captcha) GetStyleJson() string {
 	return ""
 }
 
+func (x *Captcha) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
 func (x *Captcha) GetSuspend() bool {
 	if x != nil {
 		return x.Suspend
@@ -359,6 +352,13 @@ func (x *Captcha) GetSecurityRules() []*SecurityRule {
 		return x.SecurityRules
 	}
 	return nil
+}
+
+func (x *Captcha) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *Captcha) GetDeletionProtection() bool {
@@ -478,52 +478,6 @@ func (x *OverrideVariant) GetChallengeType() CaptchaChallengeType {
 	return CaptchaChallengeType_CAPTCHA_CHALLENGE_TYPE_UNSPECIFIED
 }
 
-// CaptchaSecretKey object. Contains captcha data that need to keep in secret.
-type CaptchaSecretKey struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Server key of the captcha, see [CAPTCHA keys](/docs/smartcaptcha/concepts/keys).
-	ServerKey     string `protobuf:"bytes,1,opt,name=server_key,json=serverKey,proto3" json:"server_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CaptchaSecretKey) Reset() {
-	*x = CaptchaSecretKey{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CaptchaSecretKey) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CaptchaSecretKey) ProtoMessage() {}
-
-func (x *CaptchaSecretKey) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CaptchaSecretKey.ProtoReflect.Descriptor instead.
-func (*CaptchaSecretKey) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *CaptchaSecretKey) GetServerKey() string {
-	if x != nil {
-		return x.ServerKey
-	}
-	return ""
-}
-
 // SecurityRule object. Defines the condition and action: when and which variant to show.
 type SecurityRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -536,14 +490,14 @@ type SecurityRule struct {
 	// The condition for matching the rule.
 	Condition *Condition `protobuf:"bytes,4,opt,name=condition,proto3" json:"condition,omitempty"`
 	// Variant UUID to show in case of match the rule. Keep empty to use defaults.
-	OverrideVariantUuid string `protobuf:"bytes,6,opt,name=override_variant_uuid,json=overrideVariantUuid,proto3" json:"override_variant_uuid,omitempty"`
+	OverrideVariantUuid string `protobuf:"bytes,6,opt,name=override_variant_uuid,json=overrideVariantUuid,proto3" json:"override_variant_uuid,omitempty"` // Keep empty to use defaults
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *SecurityRule) Reset() {
 	*x = SecurityRule{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[3]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -555,7 +509,7 @@ func (x *SecurityRule) String() string {
 func (*SecurityRule) ProtoMessage() {}
 
 func (x *SecurityRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[3]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -568,7 +522,7 @@ func (x *SecurityRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SecurityRule.ProtoReflect.Descriptor instead.
 func (*SecurityRule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SecurityRule) GetName() string {
@@ -609,12 +563,12 @@ func (x *SecurityRule) GetOverrideVariantUuid() string {
 // Condition object. AND semantics implied.
 type Condition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Host where captcha placed.
-	Host *Condition_HostMatcher `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	// *AND* semantics implied.
+	Host *Condition_HostMatcher `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"` // host where captcha placed
 	// URI where captcha placed.
-	Uri *Condition_UriMatcher `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"`
+	Uri *Condition_UriMatcher `protobuf:"bytes,2,opt,name=uri,proto3" json:"uri,omitempty"` // URL where captcha placed
 	// Captcha request headers.
-	Headers []*Condition_HeaderMatcher `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty"`
+	Headers []*Condition_HeaderMatcher `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty"` // captcha request headers
 	// The IP address of the requester.
 	SourceIp      *Condition_IpMatcher `protobuf:"bytes,4,opt,name=source_ip,json=sourceIp,proto3" json:"source_ip,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -623,7 +577,7 @@ type Condition struct {
 
 func (x *Condition) Reset() {
 	*x = Condition{}
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[4]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -635,7 +589,7 @@ func (x *Condition) String() string {
 func (*Condition) ProtoMessage() {}
 
 func (x *Condition) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[4]
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -648,7 +602,7 @@ func (x *Condition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition.ProtoReflect.Descriptor instead.
 func (*Condition) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Condition) GetHost() *Condition_HostMatcher {
@@ -677,6 +631,52 @@ func (x *Condition) GetSourceIp() *Condition_IpMatcher {
 		return x.SourceIp
 	}
 	return nil
+}
+
+// CaptchaSecretKey object. Contains captcha data that need to keep in secret.
+type CaptchaSecretKey struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Server key of the captcha, see [CAPTCHA keys](/docs/smartcaptcha/concepts/keys).
+	ServerKey     string `protobuf:"bytes,1,opt,name=server_key,json=serverKey,proto3" json:"server_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CaptchaSecretKey) Reset() {
+	*x = CaptchaSecretKey{}
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CaptchaSecretKey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CaptchaSecretKey) ProtoMessage() {}
+
+func (x *CaptchaSecretKey) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartcaptcha_v1_captcha_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CaptchaSecretKey.ProtoReflect.Descriptor instead.
+func (*CaptchaSecretKey) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CaptchaSecretKey) GetServerKey() string {
+	if x != nil {
+		return x.ServerKey
+	}
+	return ""
 }
 
 // StringMatcher object.
@@ -722,7 +722,7 @@ func (x *Condition_StringMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_StringMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_StringMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 0}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 0}
 }
 
 func (x *Condition_StringMatcher) GetMatch() isCondition_StringMatcher_Match {
@@ -829,7 +829,7 @@ func (*Condition_StringMatcher_PireRegexNotMatch) isCondition_StringMatcher_Matc
 // HostMatcher object.
 type Condition_HostMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of hosts. OR semantics implied.
+	// *OR* semantics implied.
 	Hosts         []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -862,7 +862,7 @@ func (x *Condition_HostMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_HostMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_HostMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 1}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 1}
 }
 
 func (x *Condition_HostMatcher) GetHosts() []*Condition_StringMatcher {
@@ -877,7 +877,7 @@ type Condition_UriMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Path of the URI [RFC3986](https://datatracker.ietf.org/doc/html/rfc3986#section-3.3).
 	Path *Condition_StringMatcher `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// List of query matchers. AND semantics implied.
+	// *AND* semantics implied
 	Queries       []*Condition_QueryMatcher `protobuf:"bytes,2,rep,name=queries,proto3" json:"queries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -910,7 +910,7 @@ func (x *Condition_UriMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_UriMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_UriMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 2}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 2}
 }
 
 func (x *Condition_UriMatcher) GetPath() *Condition_StringMatcher {
@@ -965,7 +965,7 @@ func (x *Condition_QueryMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_QueryMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_QueryMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 3}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 3}
 }
 
 func (x *Condition_QueryMatcher) GetKey() string {
@@ -1020,7 +1020,7 @@ func (x *Condition_HeaderMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_HeaderMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_HeaderMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 4}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 4}
 }
 
 func (x *Condition_HeaderMatcher) GetName() string {
@@ -1039,7 +1039,8 @@ func (x *Condition_HeaderMatcher) GetValue() *Condition_StringMatcher {
 
 // IpMatcher object. AND semantics implied.
 type Condition_IpMatcher struct {
-	state            protoimpl.MessageState     `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// *AND* semantics implied.
 	IpRangesMatch    *Condition_IpRangesMatcher `protobuf:"bytes,1,opt,name=ip_ranges_match,json=ipRangesMatch,proto3" json:"ip_ranges_match,omitempty"`
 	IpRangesNotMatch *Condition_IpRangesMatcher `protobuf:"bytes,2,opt,name=ip_ranges_not_match,json=ipRangesNotMatch,proto3" json:"ip_ranges_not_match,omitempty"`
 	GeoIpMatch       *Condition_GeoIpMatcher    `protobuf:"bytes,3,opt,name=geo_ip_match,json=geoIpMatch,proto3" json:"geo_ip_match,omitempty"`
@@ -1075,7 +1076,7 @@ func (x *Condition_IpMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_IpMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_IpMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 5}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 5}
 }
 
 func (x *Condition_IpMatcher) GetIpRangesMatch() *Condition_IpRangesMatcher {
@@ -1109,8 +1110,8 @@ func (x *Condition_IpMatcher) GetGeoIpNotMatch() *Condition_GeoIpMatcher {
 // IpRangesMatcher object.
 type Condition_IpRangesMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of IP ranges. OR semantics implied.
-	IpRanges      []string `protobuf:"bytes,1,rep,name=ip_ranges,json=ipRanges,proto3" json:"ip_ranges,omitempty"`
+	// *OR* semantics implied.
+	IpRanges      []string `protobuf:"bytes,1,rep,name=ip_ranges,json=ipRanges,proto3" json:"ip_ranges,omitempty"` // v4/v6 - allow, exact IP == /32 or /128 range
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1142,7 +1143,7 @@ func (x *Condition_IpRangesMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_IpRangesMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_IpRangesMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 6}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 6}
 }
 
 func (x *Condition_IpRangesMatcher) GetIpRanges() []string {
@@ -1155,7 +1156,7 @@ func (x *Condition_IpRangesMatcher) GetIpRanges() []string {
 // GeoIpMatcher object.
 type Condition_GeoIpMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ISO 3166-1 alpha 2. OR semantics implied.
+	// *OR semantics implied. ISO 3166-1 alpha 2
 	Locations     []string `protobuf:"bytes,1,rep,name=locations,proto3" json:"locations,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1188,7 +1189,7 @@ func (x *Condition_GeoIpMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_GeoIpMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_GeoIpMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{4, 7}
+	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 7}
 }
 
 func (x *Condition_GeoIpMatcher) GetLocations() []string {
@@ -1203,10 +1204,8 @@ var File_yandex_cloud_smartcaptcha_v1_captcha_proto protoreflect.FileDescriptor
 const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\n" +
 	"*yandex/cloud/smartcaptcha/v1/captcha.proto\x12\x1cyandex.cloud.smartcaptcha.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\t\n" +
-	"\aCaptcha\x12\x0e\n" +
-	"\x02id\x18\x15 \x01(\tR\x02id\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x19\n" +
-	"\bcloud_id\x18\f \x01(\tR\acloudId\x12\x1d\n" +
+	"\aCaptcha\x12\x1b\n" +
+	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x1d\n" +
 	"\n" +
 	"client_key\x18\x03 \x01(\tR\tclientKey\x129\n" +
 	"\n" +
@@ -1218,12 +1217,14 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"complexity\x12\x1d\n" +
 	"\n" +
 	"style_json\x18\n" +
-	" \x01(\tR\tstyleJson\x12\x18\n" +
+	" \x01(\tR\tstyleJson\x12\x19\n" +
+	"\bcloud_id\x18\f \x01(\tR\acloudId\x12\x18\n" +
 	"\asuspend\x18\r \x01(\bR\asuspend\x125\n" +
 	"\x17turn_off_hostname_check\x18\x0e \x01(\bR\x14turnOffHostnameCheck\x12W\n" +
 	"\x0epre_check_type\x18\x10 \x01(\x0e21.yandex.cloud.smartcaptcha.v1.CaptchaPreCheckTypeR\fpreCheckType\x12Y\n" +
 	"\x0echallenge_type\x18\x11 \x01(\x0e22.yandex.cloud.smartcaptcha.v1.CaptchaChallengeTypeR\rchallengeType\x12Q\n" +
-	"\x0esecurity_rules\x18\x13 \x03(\v2*.yandex.cloud.smartcaptcha.v1.SecurityRuleR\rsecurityRules\x12/\n" +
+	"\x0esecurity_rules\x18\x13 \x03(\v2*.yandex.cloud.smartcaptcha.v1.SecurityRuleR\rsecurityRules\x12\x0e\n" +
+	"\x02id\x18\x15 \x01(\tR\x02id\x12/\n" +
 	"\x13deletion_protection\x18\x16 \x01(\bR\x12deletionProtection\x12d\n" +
 	"\x11override_variants\x18\x17 \x03(\v2-.yandex.cloud.smartcaptcha.v1.OverrideVariantB\b\x82\xc81\x04<=32R\x10overrideVariants\x128\n" +
 	"\x18disallow_data_processing\x18\x18 \x01(\bR\x16disallowDataProcessing\x12+\n" +
@@ -1239,16 +1240,13 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"complexity\x18\x03 \x01(\x0e2/.yandex.cloud.smartcaptcha.v1.CaptchaComplexityR\n" +
 	"complexity\x12W\n" +
 	"\x0epre_check_type\x18\x04 \x01(\x0e21.yandex.cloud.smartcaptcha.v1.CaptchaPreCheckTypeR\fpreCheckType\x12Y\n" +
-	"\x0echallenge_type\x18\x05 \x01(\x0e22.yandex.cloud.smartcaptcha.v1.CaptchaChallengeTypeR\rchallengeType\"1\n" +
-	"\x10CaptchaSecretKey\x12\x1d\n" +
-	"\n" +
-	"server_key\x18\x01 \x01(\tR\tserverKey\"\xa6\x02\n" +
+	"\x0echallenge_type\x18\x05 \x01(\x0e22.yandex.cloud.smartcaptcha.v1.CaptchaChallengeTypeR\rchallengeType\"\xa6\x02\n" +
 	"\fSecurityRule\x12>\n" +
 	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12(\n" +
 	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12E\n" +
 	"\tcondition\x18\x04 \x01(\v2'.yandex.cloud.smartcaptcha.v1.ConditionR\tcondition\x122\n" +
-	"\x15override_variant_uuid\x18\x06 \x01(\tR\x13overrideVariantUuidJ\x04\b\x05\x10\x06\"\xd1\r\n" +
+	"\x15override_variant_uuid\x18\x06 \x01(\tR\x13overrideVariantUuidJ\x04\b\x05\x10\x06\"\xd7\r\n" +
 	"\tCondition\x12G\n" +
 	"\x04host\x18\x01 \x01(\v23.yandex.cloud.smartcaptcha.v1.Condition.HostMatcherR\x04host\x12D\n" +
 	"\x03uri\x18\x02 \x01(\v22.yandex.cloud.smartcaptcha.v1.Condition.UriMatcherR\x03uri\x12Y\n" +
@@ -1280,11 +1278,14 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\x13ip_ranges_not_match\x18\x02 \x01(\v27.yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcherR\x10ipRangesNotMatch\x12V\n" +
 	"\fgeo_ip_match\x18\x03 \x01(\v24.yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcherR\n" +
 	"geoIpMatch\x12]\n" +
-	"\x10geo_ip_not_match\x18\x04 \x01(\v24.yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcherR\rgeoIpNotMatch\x1a;\n" +
-	"\x0fIpRangesMatcher\x12(\n" +
-	"\tip_ranges\x18\x01 \x03(\tB\v\x82\xc81\a<=10000R\bipRanges\x1a>\n" +
+	"\x10geo_ip_not_match\x18\x04 \x01(\v24.yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcherR\rgeoIpNotMatch\x1aA\n" +
+	"\x0fIpRangesMatcher\x12.\n" +
+	"\tip_ranges\x18\x01 \x03(\tB\x11\x82\xc81\a<=10000\x8a\xc81\x02>0R\bipRanges\x1a>\n" +
 	"\fGeoIpMatcher\x12.\n" +
-	"\tlocations\x18\x01 \x03(\tB\x10\x82\xc81\x03>=1\x8a\xc81\x012\x90\xc81\x01R\tlocations*g\n" +
+	"\tlocations\x18\x01 \x03(\tB\x10\x82\xc81\x03>=1\x8a\xc81\x012\x90\xc81\x01R\tlocations\"1\n" +
+	"\x10CaptchaSecretKey\x12\x1d\n" +
+	"\n" +
+	"server_key\x18\x01 \x01(\tR\tserverKey*g\n" +
 	"\x11CaptchaComplexity\x12\"\n" +
 	"\x1eCAPTCHA_COMPLEXITY_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04EASY\x10\x01\x12\n" +
@@ -1326,9 +1327,9 @@ var file_yandex_cloud_smartcaptcha_v1_captcha_proto_goTypes = []any{
 	(CaptchaChallengeType)(0),         // 2: yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
 	(*Captcha)(nil),                   // 3: yandex.cloud.smartcaptcha.v1.Captcha
 	(*OverrideVariant)(nil),           // 4: yandex.cloud.smartcaptcha.v1.OverrideVariant
-	(*CaptchaSecretKey)(nil),          // 5: yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
-	(*SecurityRule)(nil),              // 6: yandex.cloud.smartcaptcha.v1.SecurityRule
-	(*Condition)(nil),                 // 7: yandex.cloud.smartcaptcha.v1.Condition
+	(*SecurityRule)(nil),              // 5: yandex.cloud.smartcaptcha.v1.SecurityRule
+	(*Condition)(nil),                 // 6: yandex.cloud.smartcaptcha.v1.Condition
+	(*CaptchaSecretKey)(nil),          // 7: yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
 	nil,                               // 8: yandex.cloud.smartcaptcha.v1.Captcha.LabelsEntry
 	(*Condition_StringMatcher)(nil),   // 9: yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
 	(*Condition_HostMatcher)(nil),     // 10: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher
@@ -1345,13 +1346,13 @@ var file_yandex_cloud_smartcaptcha_v1_captcha_proto_depIdxs = []int32{
 	0,  // 1: yandex.cloud.smartcaptcha.v1.Captcha.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
 	1,  // 2: yandex.cloud.smartcaptcha.v1.Captcha.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
 	2,  // 3: yandex.cloud.smartcaptcha.v1.Captcha.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
-	6,  // 4: yandex.cloud.smartcaptcha.v1.Captcha.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
+	5,  // 4: yandex.cloud.smartcaptcha.v1.Captcha.security_rules:type_name -> yandex.cloud.smartcaptcha.v1.SecurityRule
 	4,  // 5: yandex.cloud.smartcaptcha.v1.Captcha.override_variants:type_name -> yandex.cloud.smartcaptcha.v1.OverrideVariant
 	8,  // 6: yandex.cloud.smartcaptcha.v1.Captcha.labels:type_name -> yandex.cloud.smartcaptcha.v1.Captcha.LabelsEntry
 	0,  // 7: yandex.cloud.smartcaptcha.v1.OverrideVariant.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
 	1,  // 8: yandex.cloud.smartcaptcha.v1.OverrideVariant.pre_check_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaPreCheckType
 	2,  // 9: yandex.cloud.smartcaptcha.v1.OverrideVariant.challenge_type:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaChallengeType
-	7,  // 10: yandex.cloud.smartcaptcha.v1.SecurityRule.condition:type_name -> yandex.cloud.smartcaptcha.v1.Condition
+	6,  // 10: yandex.cloud.smartcaptcha.v1.SecurityRule.condition:type_name -> yandex.cloud.smartcaptcha.v1.Condition
 	10, // 11: yandex.cloud.smartcaptcha.v1.Condition.host:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HostMatcher
 	11, // 12: yandex.cloud.smartcaptcha.v1.Condition.uri:type_name -> yandex.cloud.smartcaptcha.v1.Condition.UriMatcher
 	13, // 13: yandex.cloud.smartcaptcha.v1.Condition.headers:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher

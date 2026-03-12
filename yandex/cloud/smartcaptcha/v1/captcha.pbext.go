@@ -6,16 +6,8 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (m *Captcha) SetId(v string) {
-	m.Id = v
-}
-
 func (m *Captcha) SetFolderId(v string) {
 	m.FolderId = v
-}
-
-func (m *Captcha) SetCloudId(v string) {
-	m.CloudId = v
 }
 
 func (m *Captcha) SetClientKey(v string) {
@@ -42,6 +34,10 @@ func (m *Captcha) SetStyleJson(v string) {
 	m.StyleJson = v
 }
 
+func (m *Captcha) SetCloudId(v string) {
+	m.CloudId = v
+}
+
 func (m *Captcha) SetSuspend(v bool) {
 	m.Suspend = v
 }
@@ -60,6 +56,10 @@ func (m *Captcha) SetChallengeType(v CaptchaChallengeType) {
 
 func (m *Captcha) SetSecurityRules(v []*SecurityRule) {
 	m.SecurityRules = v
+}
+
+func (m *Captcha) SetId(v string) {
+	m.Id = v
 }
 
 func (m *Captcha) SetDeletionProtection(v bool) {
@@ -100,10 +100,6 @@ func (m *OverrideVariant) SetPreCheckType(v CaptchaPreCheckType) {
 
 func (m *OverrideVariant) SetChallengeType(v CaptchaChallengeType) {
 	m.ChallengeType = v
-}
-
-func (m *CaptchaSecretKey) SetServerKey(v string) {
-	m.ServerKey = v
 }
 
 func (m *SecurityRule) SetName(v string) {
@@ -234,4 +230,8 @@ func (m *Condition_IpRangesMatcher) SetIpRanges(v []string) {
 
 func (m *Condition_GeoIpMatcher) SetLocations(v []string) {
 	m.Locations = v
+}
+
+func (m *CaptchaSecretKey) SetServerKey(v string) {
+	m.ServerKey = v
 }

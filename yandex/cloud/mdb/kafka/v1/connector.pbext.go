@@ -36,6 +36,12 @@ func (m *ConnectorSpec) SetConnectorConfigS3Sink(v *ConnectorConfigS3SinkSpec) {
 	}
 }
 
+func (m *ConnectorSpec) SetConnectorConfigIcebergSink(v *ConnectorConfigIcebergSinkSpec) {
+	m.ConnectorConfig = &ConnectorSpec_ConnectorConfigIcebergSink{
+		ConnectorConfigIcebergSink: v,
+	}
+}
+
 type UpdateConnectorSpec_ConnectorConfig = isUpdateConnectorSpec_ConnectorConfig
 
 func (m *UpdateConnectorSpec) SetConnectorConfig(v UpdateConnectorSpec_ConnectorConfig) {
@@ -59,6 +65,12 @@ func (m *UpdateConnectorSpec) SetConnectorConfigMirrormaker(v *ConnectorConfigMi
 func (m *UpdateConnectorSpec) SetConnectorConfigS3Sink(v *UpdateConnectorConfigS3SinkSpec) {
 	m.ConnectorConfig = &UpdateConnectorSpec_ConnectorConfigS3Sink{
 		ConnectorConfigS3Sink: v,
+	}
+}
+
+func (m *UpdateConnectorSpec) SetConnectorConfigIcebergSink(v *UpdateConnectorConfigIcebergSinkSpec) {
+	m.ConnectorConfig = &UpdateConnectorSpec_ConnectorConfigIcebergSink{
+		ConnectorConfigIcebergSink: v,
 	}
 }
 
@@ -184,6 +196,180 @@ func (m *ExternalS3StorageSpec) SetRegion(v string) {
 	m.Region = v
 }
 
+type ConnectorConfigIcebergSinkSpec_TopicsSource = isConnectorConfigIcebergSinkSpec_TopicsSource
+
+func (m *ConnectorConfigIcebergSinkSpec) SetTopicsSource(v ConnectorConfigIcebergSinkSpec_TopicsSource) {
+	m.TopicsSource = v
+}
+
+type ConnectorConfigIcebergSinkSpec_TableRouting = isConnectorConfigIcebergSinkSpec_TableRouting
+
+func (m *ConnectorConfigIcebergSinkSpec) SetTableRouting(v ConnectorConfigIcebergSinkSpec_TableRouting) {
+	m.TableRouting = v
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetTopics(v string) {
+	m.TopicsSource = &ConnectorConfigIcebergSinkSpec_Topics{
+		Topics: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetTopicsRegex(v string) {
+	m.TopicsSource = &ConnectorConfigIcebergSinkSpec_TopicsRegex{
+		TopicsRegex: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetMetastoreConnection(v *MetastoreConnectionSpec) {
+	m.MetastoreConnection = v
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetS3Connection(v *IcebergS3ConnectionSpec) {
+	m.S3Connection = v
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetStaticTables(v *StaticTablesSpec) {
+	m.TableRouting = &ConnectorConfigIcebergSinkSpec_StaticTables{
+		StaticTables: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetDynamicTables(v *DynamicTablesSpec) {
+	m.TableRouting = &ConnectorConfigIcebergSinkSpec_DynamicTables{
+		DynamicTables: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetTablesConfig(v *IcebergTablesConfigSpec) {
+	m.TablesConfig = v
+}
+
+func (m *ConnectorConfigIcebergSinkSpec) SetControlConfig(v *IcebergControlSpec) {
+	m.ControlConfig = v
+}
+
+type UpdateConnectorConfigIcebergSinkSpec_TopicsSource = isUpdateConnectorConfigIcebergSinkSpec_TopicsSource
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetTopicsSource(v UpdateConnectorConfigIcebergSinkSpec_TopicsSource) {
+	m.TopicsSource = v
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetTopics(v string) {
+	m.TopicsSource = &UpdateConnectorConfigIcebergSinkSpec_Topics{
+		Topics: v,
+	}
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetTopicsRegex(v string) {
+	m.TopicsSource = &UpdateConnectorConfigIcebergSinkSpec_TopicsRegex{
+		TopicsRegex: v,
+	}
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetMetastoreConnection(v *MetastoreConnectionSpec) {
+	m.MetastoreConnection = v
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetS3Connection(v *IcebergS3ConnectionSpec) {
+	m.S3Connection = v
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetTablesConfig(v *IcebergTablesConfigSpec) {
+	m.TablesConfig = v
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetControlConfig(v *IcebergControlSpec) {
+	m.ControlConfig = v
+}
+
+func (m *StaticTablesSpec) SetTables(v []string) {
+	m.Tables = v
+}
+
+func (m *DynamicTablesSpec) SetRouteField(v string) {
+	m.RouteField = v
+}
+
+func (m *MetastoreConnectionSpec) SetCatalogUri(v string) {
+	m.CatalogUri = v
+}
+
+func (m *MetastoreConnectionSpec) SetWarehouse(v string) {
+	m.Warehouse = v
+}
+
+type IcebergS3ConnectionSpec_Storage = isIcebergS3ConnectionSpec_Storage
+
+func (m *IcebergS3ConnectionSpec) SetStorage(v IcebergS3ConnectionSpec_Storage) {
+	m.Storage = v
+}
+
+func (m *IcebergS3ConnectionSpec) SetExternalS3(v *ExternalIcebergS3StorageSpec) {
+	m.Storage = &IcebergS3ConnectionSpec_ExternalS3{
+		ExternalS3: v,
+	}
+}
+
+func (m *ExternalIcebergS3StorageSpec) SetAccessKeyId(v string) {
+	m.AccessKeyId = v
+}
+
+func (m *ExternalIcebergS3StorageSpec) SetSecretAccessKey(v string) {
+	m.SecretAccessKey = v
+}
+
+func (m *ExternalIcebergS3StorageSpec) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *ExternalIcebergS3StorageSpec) SetRegion(v string) {
+	m.Region = v
+}
+
+func (m *IcebergTablesConfigSpec) SetDefaultCommitBranch(v string) {
+	m.DefaultCommitBranch = v
+}
+
+func (m *IcebergTablesConfigSpec) SetDefaultIdColumns(v string) {
+	m.DefaultIdColumns = v
+}
+
+func (m *IcebergTablesConfigSpec) SetDefaultPartitionBy(v string) {
+	m.DefaultPartitionBy = v
+}
+
+func (m *IcebergTablesConfigSpec) SetEvolveSchemaEnabled(v bool) {
+	m.EvolveSchemaEnabled = v
+}
+
+func (m *IcebergTablesConfigSpec) SetSchemaForceOptional(v bool) {
+	m.SchemaForceOptional = v
+}
+
+func (m *IcebergTablesConfigSpec) SetSchemaCaseInsensitive(v bool) {
+	m.SchemaCaseInsensitive = v
+}
+
+func (m *IcebergControlSpec) SetGroupIdPrefix(v string) {
+	m.GroupIdPrefix = v
+}
+
+func (m *IcebergControlSpec) SetCommitIntervalMs(v *wrapperspb.Int64Value) {
+	m.CommitIntervalMs = v
+}
+
+func (m *IcebergControlSpec) SetCommitTimeoutMs(v *wrapperspb.Int64Value) {
+	m.CommitTimeoutMs = v
+}
+
+func (m *IcebergControlSpec) SetCommitThreads(v *wrapperspb.Int64Value) {
+	m.CommitThreads = v
+}
+
+func (m *IcebergControlSpec) SetTransactionalPrefix(v string) {
+	m.TransactionalPrefix = v
+}
+
 type Connector_ConnectorConfig = isConnector_ConnectorConfig
 
 func (m *Connector) SetConnectorConfig(v Connector_ConnectorConfig) {
@@ -223,6 +409,12 @@ func (m *Connector) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMaker)
 func (m *Connector) SetConnectorConfigS3Sink(v *ConnectorConfigS3Sink) {
 	m.ConnectorConfig = &Connector_ConnectorConfigS3Sink{
 		ConnectorConfigS3Sink: v,
+	}
+}
+
+func (m *Connector) SetConnectorConfigIcebergSink(v *ConnectorConfigIcebergSink) {
+	m.ConnectorConfig = &Connector_ConnectorConfigIcebergSink{
+		ConnectorConfigIcebergSink: v,
 	}
 }
 
@@ -322,4 +514,140 @@ func (m *ExternalS3Storage) SetEndpoint(v string) {
 
 func (m *ExternalS3Storage) SetRegion(v string) {
 	m.Region = v
+}
+
+type ConnectorConfigIcebergSink_TopicsSource = isConnectorConfigIcebergSink_TopicsSource
+
+func (m *ConnectorConfigIcebergSink) SetTopicsSource(v ConnectorConfigIcebergSink_TopicsSource) {
+	m.TopicsSource = v
+}
+
+type ConnectorConfigIcebergSink_TableRouting = isConnectorConfigIcebergSink_TableRouting
+
+func (m *ConnectorConfigIcebergSink) SetTableRouting(v ConnectorConfigIcebergSink_TableRouting) {
+	m.TableRouting = v
+}
+
+func (m *ConnectorConfigIcebergSink) SetTopics(v string) {
+	m.TopicsSource = &ConnectorConfigIcebergSink_Topics{
+		Topics: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSink) SetTopicsRegex(v string) {
+	m.TopicsSource = &ConnectorConfigIcebergSink_TopicsRegex{
+		TopicsRegex: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSink) SetMetastoreConnection(v *MetastoreConnection) {
+	m.MetastoreConnection = v
+}
+
+func (m *ConnectorConfigIcebergSink) SetS3Connection(v *IcebergS3Connection) {
+	m.S3Connection = v
+}
+
+func (m *ConnectorConfigIcebergSink) SetStaticTables(v *StaticTables) {
+	m.TableRouting = &ConnectorConfigIcebergSink_StaticTables{
+		StaticTables: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSink) SetDynamicTables(v *DynamicTables) {
+	m.TableRouting = &ConnectorConfigIcebergSink_DynamicTables{
+		DynamicTables: v,
+	}
+}
+
+func (m *ConnectorConfigIcebergSink) SetTablesConfig(v *IcebergTablesConfig) {
+	m.TablesConfig = v
+}
+
+func (m *ConnectorConfigIcebergSink) SetControlConfig(v *IcebergControl) {
+	m.ControlConfig = v
+}
+
+func (m *StaticTables) SetTables(v string) {
+	m.Tables = v
+}
+
+func (m *DynamicTables) SetRouteField(v string) {
+	m.RouteField = v
+}
+
+func (m *MetastoreConnection) SetCatalogUri(v string) {
+	m.CatalogUri = v
+}
+
+func (m *MetastoreConnection) SetWarehouse(v string) {
+	m.Warehouse = v
+}
+
+type IcebergS3Connection_Storage = isIcebergS3Connection_Storage
+
+func (m *IcebergS3Connection) SetStorage(v IcebergS3Connection_Storage) {
+	m.Storage = v
+}
+
+func (m *IcebergS3Connection) SetExternalS3(v *ExternalIcebergS3Storage) {
+	m.Storage = &IcebergS3Connection_ExternalS3{
+		ExternalS3: v,
+	}
+}
+
+func (m *ExternalIcebergS3Storage) SetAccessKeyId(v string) {
+	m.AccessKeyId = v
+}
+
+func (m *ExternalIcebergS3Storage) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *ExternalIcebergS3Storage) SetRegion(v string) {
+	m.Region = v
+}
+
+func (m *IcebergTablesConfig) SetDefaultCommitBranch(v string) {
+	m.DefaultCommitBranch = v
+}
+
+func (m *IcebergTablesConfig) SetDefaultIdColumns(v string) {
+	m.DefaultIdColumns = v
+}
+
+func (m *IcebergTablesConfig) SetDefaultPartitionBy(v string) {
+	m.DefaultPartitionBy = v
+}
+
+func (m *IcebergTablesConfig) SetEvolveSchemaEnabled(v bool) {
+	m.EvolveSchemaEnabled = v
+}
+
+func (m *IcebergTablesConfig) SetSchemaForceOptional(v bool) {
+	m.SchemaForceOptional = v
+}
+
+func (m *IcebergTablesConfig) SetSchemaCaseInsensitive(v bool) {
+	m.SchemaCaseInsensitive = v
+}
+
+func (m *IcebergControl) SetGroupIdPrefix(v string) {
+	m.GroupIdPrefix = v
+}
+
+func (m *IcebergControl) SetCommitIntervalMs(v *wrapperspb.Int64Value) {
+	m.CommitIntervalMs = v
+}
+
+func (m *IcebergControl) SetCommitTimeoutMs(v *wrapperspb.Int64Value) {
+	m.CommitTimeoutMs = v
+}
+
+func (m *IcebergControl) SetCommitThreads(v *wrapperspb.Int64Value) {
+	m.CommitThreads = v
+}
+
+func (m *IcebergControl) SetTransactionalPrefix(v string) {
+	m.TransactionalPrefix = v
 }

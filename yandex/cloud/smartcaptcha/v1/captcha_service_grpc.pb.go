@@ -22,10 +22,10 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	CaptchaService_Get_FullMethodName          = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Get"
 	CaptchaService_GetSecretKey_FullMethodName = "/yandex.cloud.smartcaptcha.v1.CaptchaService/GetSecretKey"
-	CaptchaService_List_FullMethodName         = "/yandex.cloud.smartcaptcha.v1.CaptchaService/List"
 	CaptchaService_Create_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Create"
-	CaptchaService_Update_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Update"
 	CaptchaService_Delete_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Delete"
+	CaptchaService_Update_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Update"
+	CaptchaService_List_FullMethodName         = "/yandex.cloud.smartcaptcha.v1.CaptchaService/List"
 )
 
 // CaptchaServiceClient is the client API for CaptchaService service.
@@ -38,14 +38,14 @@ type CaptchaServiceClient interface {
 	Get(ctx context.Context, in *GetCaptchaRequest, opts ...grpc.CallOption) (*Captcha, error)
 	// Returns the secret data of specified Captcha resource.
 	GetSecretKey(ctx context.Context, in *GetCaptchaRequest, opts ...grpc.CallOption) (*CaptchaSecretKey, error)
-	// Retrieves the list of Captcha resources in the specified folder.
-	List(ctx context.Context, in *ListCaptchasRequest, opts ...grpc.CallOption) (*ListCaptchasResponse, error)
 	// Creates a captcha in the specified folder using the data specified in the request.
 	Create(ctx context.Context, in *CreateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified captcha.
-	Update(ctx context.Context, in *UpdateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified captcha.
 	Delete(ctx context.Context, in *DeleteCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates the specified captcha.
+	Update(ctx context.Context, in *UpdateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves the list of Captcha resources in the specified folder.
+	List(ctx context.Context, in *ListCaptchasRequest, opts ...grpc.CallOption) (*ListCaptchasResponse, error)
 }
 
 type captchaServiceClient struct {
@@ -76,30 +76,10 @@ func (c *captchaServiceClient) GetSecretKey(ctx context.Context, in *GetCaptchaR
 	return out, nil
 }
 
-func (c *captchaServiceClient) List(ctx context.Context, in *ListCaptchasRequest, opts ...grpc.CallOption) (*ListCaptchasResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCaptchasResponse)
-	err := c.cc.Invoke(ctx, CaptchaService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *captchaServiceClient) Create(ctx context.Context, in *CreateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, CaptchaService_Create_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *captchaServiceClient) Update(ctx context.Context, in *UpdateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, CaptchaService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -116,6 +96,26 @@ func (c *captchaServiceClient) Delete(ctx context.Context, in *DeleteCaptchaRequ
 	return out, nil
 }
 
+func (c *captchaServiceClient) Update(ctx context.Context, in *UpdateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, CaptchaService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *captchaServiceClient) List(ctx context.Context, in *ListCaptchasRequest, opts ...grpc.CallOption) (*ListCaptchasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCaptchasResponse)
+	err := c.cc.Invoke(ctx, CaptchaService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CaptchaServiceServer is the server API for CaptchaService service.
 // All implementations should embed UnimplementedCaptchaServiceServer
 // for forward compatibility.
@@ -126,14 +126,14 @@ type CaptchaServiceServer interface {
 	Get(context.Context, *GetCaptchaRequest) (*Captcha, error)
 	// Returns the secret data of specified Captcha resource.
 	GetSecretKey(context.Context, *GetCaptchaRequest) (*CaptchaSecretKey, error)
-	// Retrieves the list of Captcha resources in the specified folder.
-	List(context.Context, *ListCaptchasRequest) (*ListCaptchasResponse, error)
 	// Creates a captcha in the specified folder using the data specified in the request.
 	Create(context.Context, *CreateCaptchaRequest) (*operation.Operation, error)
-	// Updates the specified captcha.
-	Update(context.Context, *UpdateCaptchaRequest) (*operation.Operation, error)
 	// Deletes the specified captcha.
 	Delete(context.Context, *DeleteCaptchaRequest) (*operation.Operation, error)
+	// Updates the specified captcha.
+	Update(context.Context, *UpdateCaptchaRequest) (*operation.Operation, error)
+	// Retrieves the list of Captcha resources in the specified folder.
+	List(context.Context, *ListCaptchasRequest) (*ListCaptchasResponse, error)
 }
 
 // UnimplementedCaptchaServiceServer should be embedded to have
@@ -149,17 +149,17 @@ func (UnimplementedCaptchaServiceServer) Get(context.Context, *GetCaptchaRequest
 func (UnimplementedCaptchaServiceServer) GetSecretKey(context.Context, *GetCaptchaRequest) (*CaptchaSecretKey, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSecretKey not implemented")
 }
-func (UnimplementedCaptchaServiceServer) List(context.Context, *ListCaptchasRequest) (*ListCaptchasResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method List not implemented")
-}
 func (UnimplementedCaptchaServiceServer) Create(context.Context, *CreateCaptchaRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedCaptchaServiceServer) Delete(context.Context, *DeleteCaptchaRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedCaptchaServiceServer) Update(context.Context, *UpdateCaptchaRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedCaptchaServiceServer) Delete(context.Context, *DeleteCaptchaRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+func (UnimplementedCaptchaServiceServer) List(context.Context, *ListCaptchasRequest) (*ListCaptchasResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedCaptchaServiceServer) testEmbeddedByValue() {}
 
@@ -217,24 +217,6 @@ func _CaptchaService_GetSecretKey_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CaptchaService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCaptchasRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CaptchaServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CaptchaService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CaptchaServiceServer).List(ctx, req.(*ListCaptchasRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _CaptchaService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCaptchaRequest)
 	if err := dec(in); err != nil {
@@ -249,24 +231,6 @@ func _CaptchaService_Create_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CaptchaServiceServer).Create(ctx, req.(*CreateCaptchaRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CaptchaService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCaptchaRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CaptchaServiceServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CaptchaService_Update_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CaptchaServiceServer).Update(ctx, req.(*UpdateCaptchaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -289,6 +253,42 @@ func _CaptchaService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CaptchaService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCaptchaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CaptchaServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CaptchaService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CaptchaServiceServer).Update(ctx, req.(*UpdateCaptchaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CaptchaService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCaptchasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CaptchaServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CaptchaService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CaptchaServiceServer).List(ctx, req.(*ListCaptchasRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CaptchaService_ServiceDesc is the grpc.ServiceDesc for CaptchaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -305,20 +305,20 @@ var CaptchaService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CaptchaService_GetSecretKey_Handler,
 		},
 		{
-			MethodName: "List",
-			Handler:    _CaptchaService_List_Handler,
-		},
-		{
 			MethodName: "Create",
 			Handler:    _CaptchaService_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _CaptchaService_Delete_Handler,
 		},
 		{
 			MethodName: "Update",
 			Handler:    _CaptchaService_Update_Handler,
 		},
 		{
-			MethodName: "Delete",
-			Handler:    _CaptchaService_Delete_Handler,
+			MethodName: "List",
+			Handler:    _CaptchaService_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

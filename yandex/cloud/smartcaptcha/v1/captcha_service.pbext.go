@@ -10,14 +10,6 @@ func (m *GetCaptchaRequest) SetCaptchaId(v string) {
 	m.CaptchaId = v
 }
 
-func (m *ListCaptchasRequest) SetFolderId(v string) {
-	m.FolderId = v
-}
-
-func (m *ListCaptchasResponse) SetResources(v []*Captcha) {
-	m.Resources = v
-}
-
 func (m *CreateCaptchaRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -148,4 +140,12 @@ func (m *UpdateCaptchaRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateCaptchaMetadata) SetCaptchaId(v string) {
 	m.CaptchaId = v
+}
+
+func (m *ListCaptchasRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListCaptchasResponse) SetResources(v []*Captcha) {
+	m.Resources = v
 }

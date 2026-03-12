@@ -20,15 +20,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MfaEnforcementService_Create_FullMethodName         = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Create"
-	MfaEnforcementService_Update_FullMethodName         = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Update"
-	MfaEnforcementService_Activate_FullMethodName       = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Activate"
-	MfaEnforcementService_Deactivate_FullMethodName     = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Deactivate"
-	MfaEnforcementService_Delete_FullMethodName         = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Delete"
-	MfaEnforcementService_Get_FullMethodName            = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Get"
-	MfaEnforcementService_List_FullMethodName           = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/List"
-	MfaEnforcementService_UpdateAudience_FullMethodName = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/UpdateAudience"
-	MfaEnforcementService_ListAudience_FullMethodName   = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/ListAudience"
+	MfaEnforcementService_Create_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Create"
+	MfaEnforcementService_Update_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Update"
+	MfaEnforcementService_Activate_FullMethodName               = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Activate"
+	MfaEnforcementService_Deactivate_FullMethodName             = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Deactivate"
+	MfaEnforcementService_Delete_FullMethodName                 = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Delete"
+	MfaEnforcementService_Get_FullMethodName                    = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/Get"
+	MfaEnforcementService_List_FullMethodName                   = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/List"
+	MfaEnforcementService_UpdateAudience_FullMethodName         = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/UpdateAudience"
+	MfaEnforcementService_ListAudience_FullMethodName           = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/ListAudience"
+	MfaEnforcementService_UpdateExcludedAudience_FullMethodName = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/UpdateExcludedAudience"
+	MfaEnforcementService_ListExcludedAudience_FullMethodName   = "/yandex.cloud.organizationmanager.v1.MfaEnforcementService/ListExcludedAudience"
 )
 
 // MfaEnforcementServiceClient is the client API for MfaEnforcementService service.
@@ -55,6 +57,10 @@ type MfaEnforcementServiceClient interface {
 	UpdateAudience(ctx context.Context, in *UpdateAudienceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// returns specified MFA enforcement's audience
 	ListAudience(ctx context.Context, in *ListAudienceRequest, opts ...grpc.CallOption) (*ListAudienceResponse, error)
+	// updates specified MFA enforcement's excluded audience
+	UpdateExcludedAudience(ctx context.Context, in *UpdateExcludedAudienceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// returns specified MFA enforcement's excluded audience
+	ListExcludedAudience(ctx context.Context, in *ListExcludedAudienceRequest, opts ...grpc.CallOption) (*ListExcludedAudienceResponse, error)
 }
 
 type mfaEnforcementServiceClient struct {
@@ -155,6 +161,26 @@ func (c *mfaEnforcementServiceClient) ListAudience(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *mfaEnforcementServiceClient) UpdateExcludedAudience(ctx context.Context, in *UpdateExcludedAudienceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, MfaEnforcementService_UpdateExcludedAudience_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mfaEnforcementServiceClient) ListExcludedAudience(ctx context.Context, in *ListExcludedAudienceRequest, opts ...grpc.CallOption) (*ListExcludedAudienceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListExcludedAudienceResponse)
+	err := c.cc.Invoke(ctx, MfaEnforcementService_ListExcludedAudience_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MfaEnforcementServiceServer is the server API for MfaEnforcementService service.
 // All implementations should embed UnimplementedMfaEnforcementServiceServer
 // for forward compatibility.
@@ -179,6 +205,10 @@ type MfaEnforcementServiceServer interface {
 	UpdateAudience(context.Context, *UpdateAudienceRequest) (*operation.Operation, error)
 	// returns specified MFA enforcement's audience
 	ListAudience(context.Context, *ListAudienceRequest) (*ListAudienceResponse, error)
+	// updates specified MFA enforcement's excluded audience
+	UpdateExcludedAudience(context.Context, *UpdateExcludedAudienceRequest) (*operation.Operation, error)
+	// returns specified MFA enforcement's excluded audience
+	ListExcludedAudience(context.Context, *ListExcludedAudienceRequest) (*ListExcludedAudienceResponse, error)
 }
 
 // UnimplementedMfaEnforcementServiceServer should be embedded to have
@@ -214,6 +244,12 @@ func (UnimplementedMfaEnforcementServiceServer) UpdateAudience(context.Context, 
 }
 func (UnimplementedMfaEnforcementServiceServer) ListAudience(context.Context, *ListAudienceRequest) (*ListAudienceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAudience not implemented")
+}
+func (UnimplementedMfaEnforcementServiceServer) UpdateExcludedAudience(context.Context, *UpdateExcludedAudienceRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateExcludedAudience not implemented")
+}
+func (UnimplementedMfaEnforcementServiceServer) ListExcludedAudience(context.Context, *ListExcludedAudienceRequest) (*ListExcludedAudienceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListExcludedAudience not implemented")
 }
 func (UnimplementedMfaEnforcementServiceServer) testEmbeddedByValue() {}
 
@@ -397,6 +433,42 @@ func _MfaEnforcementService_ListAudience_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MfaEnforcementService_UpdateExcludedAudience_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateExcludedAudienceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MfaEnforcementServiceServer).UpdateExcludedAudience(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MfaEnforcementService_UpdateExcludedAudience_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MfaEnforcementServiceServer).UpdateExcludedAudience(ctx, req.(*UpdateExcludedAudienceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MfaEnforcementService_ListExcludedAudience_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExcludedAudienceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MfaEnforcementServiceServer).ListExcludedAudience(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MfaEnforcementService_ListExcludedAudience_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MfaEnforcementServiceServer).ListExcludedAudience(ctx, req.(*ListExcludedAudienceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MfaEnforcementService_ServiceDesc is the grpc.ServiceDesc for MfaEnforcementService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -439,6 +511,14 @@ var MfaEnforcementService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAudience",
 			Handler:    _MfaEnforcementService_ListAudience_Handler,
+		},
+		{
+			MethodName: "UpdateExcludedAudience",
+			Handler:    _MfaEnforcementService_UpdateExcludedAudience_Handler,
+		},
+		{
+			MethodName: "ListExcludedAudience",
+			Handler:    _MfaEnforcementService_ListExcludedAudience_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

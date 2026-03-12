@@ -1268,6 +1268,276 @@ func (x *ListAudienceResponse) GetNextPageToken() string {
 	return ""
 }
 
+type UpdateExcludedAudienceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// updated MFA enforcement's excluded audience
+	AudienceDeltas []*AudienceDelta `protobuf:"bytes,2,rep,name=audience_deltas,json=audienceDeltas,proto3" json:"audience_deltas,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateExcludedAudienceRequest) Reset() {
+	*x = UpdateExcludedAudienceRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateExcludedAudienceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateExcludedAudienceRequest) ProtoMessage() {}
+
+func (x *UpdateExcludedAudienceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateExcludedAudienceRequest.ProtoReflect.Descriptor instead.
+func (*UpdateExcludedAudienceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *UpdateExcludedAudienceRequest) GetMfaEnforcementId() string {
+	if x != nil {
+		return x.MfaEnforcementId
+	}
+	return ""
+}
+
+func (x *UpdateExcludedAudienceRequest) GetAudienceDeltas() []*AudienceDelta {
+	if x != nil {
+		return x.AudienceDeltas
+	}
+	return nil
+}
+
+type UpdateExcludedAudienceResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// updated MFA enforcement's excluded audience
+	EffectiveDeltas []*AudienceDelta `protobuf:"bytes,2,rep,name=effective_deltas,json=effectiveDeltas,proto3" json:"effective_deltas,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UpdateExcludedAudienceResponse) Reset() {
+	*x = UpdateExcludedAudienceResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateExcludedAudienceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateExcludedAudienceResponse) ProtoMessage() {}
+
+func (x *UpdateExcludedAudienceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateExcludedAudienceResponse.ProtoReflect.Descriptor instead.
+func (*UpdateExcludedAudienceResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *UpdateExcludedAudienceResponse) GetMfaEnforcementId() string {
+	if x != nil {
+		return x.MfaEnforcementId
+	}
+	return ""
+}
+
+func (x *UpdateExcludedAudienceResponse) GetEffectiveDeltas() []*AudienceDelta {
+	if x != nil {
+		return x.EffectiveDeltas
+	}
+	return nil
+}
+
+type UpdateExcludedAudienceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,2,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UpdateExcludedAudienceMetadata) Reset() {
+	*x = UpdateExcludedAudienceMetadata{}
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateExcludedAudienceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateExcludedAudienceMetadata) ProtoMessage() {}
+
+func (x *UpdateExcludedAudienceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateExcludedAudienceMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateExcludedAudienceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *UpdateExcludedAudienceMetadata) GetMfaEnforcementId() string {
+	if x != nil {
+		return x.MfaEnforcementId
+	}
+	return ""
+}
+
+type ListExcludedAudienceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id of the MFA enforcement
+	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
+	// the maximum number of results per page to return
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// page token
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListExcludedAudienceRequest) Reset() {
+	*x = ListExcludedAudienceRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListExcludedAudienceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListExcludedAudienceRequest) ProtoMessage() {}
+
+func (x *ListExcludedAudienceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListExcludedAudienceRequest.ProtoReflect.Descriptor instead.
+func (*ListExcludedAudienceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ListExcludedAudienceRequest) GetMfaEnforcementId() string {
+	if x != nil {
+		return x.MfaEnforcementId
+	}
+	return ""
+}
+
+func (x *ListExcludedAudienceRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListExcludedAudienceRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListExcludedAudienceResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// MFA enforcement's audience
+	Subjects []*ListExcludedAudienceResponse_Subject `protobuf:"bytes,1,rep,name=subjects,proto3" json:"subjects,omitempty"`
+	// token to get the next page of results
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListExcludedAudienceResponse) Reset() {
+	*x = ListExcludedAudienceResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListExcludedAudienceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListExcludedAudienceResponse) ProtoMessage() {}
+
+func (x *ListExcludedAudienceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListExcludedAudienceResponse.ProtoReflect.Descriptor instead.
+func (*ListExcludedAudienceResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListExcludedAudienceResponse) GetSubjects() []*ListExcludedAudienceResponse_Subject {
+	if x != nil {
+		return x.Subjects
+	}
+	return nil
+}
+
+func (x *ListExcludedAudienceResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 type ListAudienceResponse_Subject struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// subject id
@@ -1280,7 +1550,7 @@ type ListAudienceResponse_Subject struct {
 
 func (x *ListAudienceResponse_Subject) Reset() {
 	*x = ListAudienceResponse_Subject{}
-	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1292,7 +1562,7 @@ func (x *ListAudienceResponse_Subject) String() string {
 func (*ListAudienceResponse_Subject) ProtoMessage() {}
 
 func (x *ListAudienceResponse_Subject) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1316,6 +1586,60 @@ func (x *ListAudienceResponse_Subject) GetId() string {
 }
 
 func (x *ListAudienceResponse_Subject) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+type ListExcludedAudienceResponse_Subject struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// subject id
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// subject type
+	Type          string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListExcludedAudienceResponse_Subject) Reset() {
+	*x = ListExcludedAudienceResponse_Subject{}
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListExcludedAudienceResponse_Subject) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListExcludedAudienceResponse_Subject) ProtoMessage() {}
+
+func (x *ListExcludedAudienceResponse_Subject) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListExcludedAudienceResponse_Subject.ProtoReflect.Descriptor instead.
+func (*ListExcludedAudienceResponse_Subject) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDescGZIP(), []int{23, 0}
+}
+
+func (x *ListExcludedAudienceResponse_Subject) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ListExcludedAudienceResponse_Subject) GetType() string {
 	if x != nil {
 		return x.Type
 	}
@@ -1414,7 +1738,29 @@ const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_raw
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a-\n" +
 	"\aSubject\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type2\x9f\x10\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\"\xc4\x01\n" +
+	"\x1dUpdateExcludedAudienceRequest\x12:\n" +
+	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12g\n" +
+	"\x0faudience_deltas\x18\x02 \x03(\v22.yandex.cloud.organizationmanager.v1.AudienceDeltaB\n" +
+	"\x82\xc81\x061-1000R\x0eaudienceDeltas\"\xbb\x01\n" +
+	"\x1eUpdateExcludedAudienceResponse\x12:\n" +
+	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12]\n" +
+	"\x10effective_deltas\x18\x02 \x03(\v22.yandex.cloud.organizationmanager.v1.AudienceDeltaR\x0feffectiveDeltas\"N\n" +
+	"\x1eUpdateExcludedAudienceMetadata\x12,\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"\xad\x01\n" +
+	"\x1bListExcludedAudienceRequest\x12:\n" +
+	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\"\xdc\x01\n" +
+	"\x1cListExcludedAudienceResponse\x12e\n" +
+	"\bsubjects\x18\x01 \x03(\v2I.yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse.SubjectR\bsubjects\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a-\n" +
+	"\aSubject\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type2\xc1\x14\n" +
 	"\x15MfaEnforcementService\x12\xd4\x01\n" +
 	"\x06Create\x12@.yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest\x1a!.yandex.cloud.operation.Operation\"e\xb2\xd2*.\n" +
 	"\x1cCreateMfaEnforcementMetadata\x12\x0eMfaEnforcement\x82\xd3\xe4\x93\x02-:\x01*\"(/organization-manager/v1/mfaEnforcements\x12\xe9\x01\n" +
@@ -1431,7 +1777,10 @@ const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_raw
 	"\x04List\x12?.yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest\x1a@.yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/organization-manager/v1/mfaEnforcements\x12\xfd\x01\n" +
 	"\x0eUpdateAudience\x12:.yandex.cloud.organizationmanager.v1.UpdateAudienceRequest\x1a!.yandex.cloud.operation.Operation\"\x8b\x01\xb2\xd2*0\n" +
 	"\x16UpdateAudienceMetadata\x12\x16UpdateAudienceResponse\x82\xd3\xe4\x93\x02Q:\x01*2L/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:updateAudience\x12\xd7\x01\n" +
-	"\fListAudience\x128.yandex.cloud.organizationmanager.v1.ListAudienceRequest\x1a9.yandex.cloud.organizationmanager.v1.ListAudienceResponse\"R\x82\xd3\xe4\x93\x02L\x12J/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:listAudienceB\x86\x01\n" +
+	"\fListAudience\x128.yandex.cloud.organizationmanager.v1.ListAudienceRequest\x1a9.yandex.cloud.organizationmanager.v1.ListAudienceResponse\"R\x82\xd3\xe4\x93\x02L\x12J/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:listAudience\x12\xa5\x02\n" +
+	"\x16UpdateExcludedAudience\x12B.yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceRequest\x1a!.yandex.cloud.operation.Operation\"\xa3\x01\xb2\xd2*@\n" +
+	"\x1eUpdateExcludedAudienceMetadata\x12\x1eUpdateExcludedAudienceResponse\x82\xd3\xe4\x93\x02Y:\x01*2T/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:updateExcludedAudience\x12\xf7\x01\n" +
+	"\x14ListExcludedAudience\x12@.yandex.cloud.organizationmanager.v1.ListExcludedAudienceRequest\x1aA.yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse\"Z\x82\xd3\xe4\x93\x02T\x12R/organization-manager/v1/mfaEnforcements/{mfa_enforcement_id}:listExcludedAudienceB\x86\x01\n" +
 	"'yandex.cloud.api.organizationmanager.v1Z[github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1;organizationmanagerb\x06proto3"
 
 var (
@@ -1447,75 +1796,88 @@ func file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawD
 }
 
 var file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_goTypes = []any{
-	(CreateMfaEnforcementRequest_Status)(0),  // 0: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.Status
-	(UpdateMfaEnforcementRequest_Status)(0),  // 1: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.Status
-	(AudienceDelta_Action)(0),                // 2: yandex.cloud.organizationmanager.v1.AudienceDelta.Action
-	(*CreateMfaEnforcementRequest)(nil),      // 3: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest
-	(*CreateMfaEnforcementMetadata)(nil),     // 4: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementMetadata
-	(*UpdateMfaEnforcementRequest)(nil),      // 5: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest
-	(*UpdateMfaEnforcementMetadata)(nil),     // 6: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementMetadata
-	(*ActivateMfaEnforcementRequest)(nil),    // 7: yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementRequest
-	(*ActivateMfaEnforcementMetadata)(nil),   // 8: yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementMetadata
-	(*DeactivateMfaEnforcementRequest)(nil),  // 9: yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementRequest
-	(*DeactivateMfaEnforcementMetadata)(nil), // 10: yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementMetadata
-	(*DeleteMfaEnforcementRequest)(nil),      // 11: yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementRequest
-	(*DeleteMfaEnforcementMetadata)(nil),     // 12: yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementMetadata
-	(*GetMfaEnforcementRequest)(nil),         // 13: yandex.cloud.organizationmanager.v1.GetMfaEnforcementRequest
-	(*ListMfaEnforcementsRequest)(nil),       // 14: yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest
-	(*ListMfaEnforcementsResponse)(nil),      // 15: yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse
-	(*UpdateAudienceRequest)(nil),            // 16: yandex.cloud.organizationmanager.v1.UpdateAudienceRequest
-	(*UpdateAudienceResponse)(nil),           // 17: yandex.cloud.organizationmanager.v1.UpdateAudienceResponse
-	(*AudienceDelta)(nil),                    // 18: yandex.cloud.organizationmanager.v1.AudienceDelta
-	(*UpdateAudienceMetadata)(nil),           // 19: yandex.cloud.organizationmanager.v1.UpdateAudienceMetadata
-	(*ListAudienceRequest)(nil),              // 20: yandex.cloud.organizationmanager.v1.ListAudienceRequest
-	(*ListAudienceResponse)(nil),             // 21: yandex.cloud.organizationmanager.v1.ListAudienceResponse
-	(*ListAudienceResponse_Subject)(nil),     // 22: yandex.cloud.organizationmanager.v1.ListAudienceResponse.Subject
-	(*durationpb.Duration)(nil),              // 23: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),            // 24: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),            // 25: google.protobuf.FieldMask
-	(*MfaEnforcement)(nil),                   // 26: yandex.cloud.organizationmanager.v1.MfaEnforcement
-	(*operation.Operation)(nil),              // 27: yandex.cloud.operation.Operation
+	(CreateMfaEnforcementRequest_Status)(0),      // 0: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.Status
+	(UpdateMfaEnforcementRequest_Status)(0),      // 1: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.Status
+	(AudienceDelta_Action)(0),                    // 2: yandex.cloud.organizationmanager.v1.AudienceDelta.Action
+	(*CreateMfaEnforcementRequest)(nil),          // 3: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest
+	(*CreateMfaEnforcementMetadata)(nil),         // 4: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementMetadata
+	(*UpdateMfaEnforcementRequest)(nil),          // 5: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest
+	(*UpdateMfaEnforcementMetadata)(nil),         // 6: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementMetadata
+	(*ActivateMfaEnforcementRequest)(nil),        // 7: yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementRequest
+	(*ActivateMfaEnforcementMetadata)(nil),       // 8: yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementMetadata
+	(*DeactivateMfaEnforcementRequest)(nil),      // 9: yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementRequest
+	(*DeactivateMfaEnforcementMetadata)(nil),     // 10: yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementMetadata
+	(*DeleteMfaEnforcementRequest)(nil),          // 11: yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementRequest
+	(*DeleteMfaEnforcementMetadata)(nil),         // 12: yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementMetadata
+	(*GetMfaEnforcementRequest)(nil),             // 13: yandex.cloud.organizationmanager.v1.GetMfaEnforcementRequest
+	(*ListMfaEnforcementsRequest)(nil),           // 14: yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest
+	(*ListMfaEnforcementsResponse)(nil),          // 15: yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse
+	(*UpdateAudienceRequest)(nil),                // 16: yandex.cloud.organizationmanager.v1.UpdateAudienceRequest
+	(*UpdateAudienceResponse)(nil),               // 17: yandex.cloud.organizationmanager.v1.UpdateAudienceResponse
+	(*AudienceDelta)(nil),                        // 18: yandex.cloud.organizationmanager.v1.AudienceDelta
+	(*UpdateAudienceMetadata)(nil),               // 19: yandex.cloud.organizationmanager.v1.UpdateAudienceMetadata
+	(*ListAudienceRequest)(nil),                  // 20: yandex.cloud.organizationmanager.v1.ListAudienceRequest
+	(*ListAudienceResponse)(nil),                 // 21: yandex.cloud.organizationmanager.v1.ListAudienceResponse
+	(*UpdateExcludedAudienceRequest)(nil),        // 22: yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceRequest
+	(*UpdateExcludedAudienceResponse)(nil),       // 23: yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceResponse
+	(*UpdateExcludedAudienceMetadata)(nil),       // 24: yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceMetadata
+	(*ListExcludedAudienceRequest)(nil),          // 25: yandex.cloud.organizationmanager.v1.ListExcludedAudienceRequest
+	(*ListExcludedAudienceResponse)(nil),         // 26: yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse
+	(*ListAudienceResponse_Subject)(nil),         // 27: yandex.cloud.organizationmanager.v1.ListAudienceResponse.Subject
+	(*ListExcludedAudienceResponse_Subject)(nil), // 28: yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse.Subject
+	(*durationpb.Duration)(nil),                  // 29: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),                // 30: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),                // 31: google.protobuf.FieldMask
+	(*MfaEnforcement)(nil),                       // 32: yandex.cloud.organizationmanager.v1.MfaEnforcement
+	(*operation.Operation)(nil),                  // 33: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_depIdxs = []int32{
-	23, // 0: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.ttl:type_name -> google.protobuf.Duration
+	29, // 0: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.ttl:type_name -> google.protobuf.Duration
 	0,  // 1: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.status:type_name -> yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.Status
-	24, // 2: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.apply_at:type_name -> google.protobuf.Timestamp
-	23, // 3: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.enroll_window:type_name -> google.protobuf.Duration
-	23, // 4: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.ttl:type_name -> google.protobuf.Duration
+	30, // 2: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.apply_at:type_name -> google.protobuf.Timestamp
+	29, // 3: yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.enroll_window:type_name -> google.protobuf.Duration
+	29, // 4: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.ttl:type_name -> google.protobuf.Duration
 	1,  // 5: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.status:type_name -> yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.Status
-	24, // 6: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.apply_at:type_name -> google.protobuf.Timestamp
-	23, // 7: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.enroll_window:type_name -> google.protobuf.Duration
-	25, // 8: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.update_mask:type_name -> google.protobuf.FieldMask
-	26, // 9: yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse.mfa_enforcements:type_name -> yandex.cloud.organizationmanager.v1.MfaEnforcement
+	30, // 6: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.apply_at:type_name -> google.protobuf.Timestamp
+	29, // 7: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.enroll_window:type_name -> google.protobuf.Duration
+	31, // 8: yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.update_mask:type_name -> google.protobuf.FieldMask
+	32, // 9: yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse.mfa_enforcements:type_name -> yandex.cloud.organizationmanager.v1.MfaEnforcement
 	18, // 10: yandex.cloud.organizationmanager.v1.UpdateAudienceRequest.audience_deltas:type_name -> yandex.cloud.organizationmanager.v1.AudienceDelta
 	18, // 11: yandex.cloud.organizationmanager.v1.UpdateAudienceResponse.effective_deltas:type_name -> yandex.cloud.organizationmanager.v1.AudienceDelta
 	2,  // 12: yandex.cloud.organizationmanager.v1.AudienceDelta.action:type_name -> yandex.cloud.organizationmanager.v1.AudienceDelta.Action
-	22, // 13: yandex.cloud.organizationmanager.v1.ListAudienceResponse.subjects:type_name -> yandex.cloud.organizationmanager.v1.ListAudienceResponse.Subject
-	3,  // 14: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Create:input_type -> yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest
-	5,  // 15: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Update:input_type -> yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest
-	7,  // 16: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Activate:input_type -> yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementRequest
-	9,  // 17: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Deactivate:input_type -> yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementRequest
-	11, // 18: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Delete:input_type -> yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementRequest
-	13, // 19: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Get:input_type -> yandex.cloud.organizationmanager.v1.GetMfaEnforcementRequest
-	14, // 20: yandex.cloud.organizationmanager.v1.MfaEnforcementService.List:input_type -> yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest
-	16, // 21: yandex.cloud.organizationmanager.v1.MfaEnforcementService.UpdateAudience:input_type -> yandex.cloud.organizationmanager.v1.UpdateAudienceRequest
-	20, // 22: yandex.cloud.organizationmanager.v1.MfaEnforcementService.ListAudience:input_type -> yandex.cloud.organizationmanager.v1.ListAudienceRequest
-	27, // 23: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Create:output_type -> yandex.cloud.operation.Operation
-	27, // 24: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Update:output_type -> yandex.cloud.operation.Operation
-	27, // 25: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Activate:output_type -> yandex.cloud.operation.Operation
-	27, // 26: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Deactivate:output_type -> yandex.cloud.operation.Operation
-	27, // 27: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Delete:output_type -> yandex.cloud.operation.Operation
-	26, // 28: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Get:output_type -> yandex.cloud.organizationmanager.v1.MfaEnforcement
-	15, // 29: yandex.cloud.organizationmanager.v1.MfaEnforcementService.List:output_type -> yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse
-	27, // 30: yandex.cloud.organizationmanager.v1.MfaEnforcementService.UpdateAudience:output_type -> yandex.cloud.operation.Operation
-	21, // 31: yandex.cloud.organizationmanager.v1.MfaEnforcementService.ListAudience:output_type -> yandex.cloud.organizationmanager.v1.ListAudienceResponse
-	23, // [23:32] is the sub-list for method output_type
-	14, // [14:23] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	27, // 13: yandex.cloud.organizationmanager.v1.ListAudienceResponse.subjects:type_name -> yandex.cloud.organizationmanager.v1.ListAudienceResponse.Subject
+	18, // 14: yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceRequest.audience_deltas:type_name -> yandex.cloud.organizationmanager.v1.AudienceDelta
+	18, // 15: yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceResponse.effective_deltas:type_name -> yandex.cloud.organizationmanager.v1.AudienceDelta
+	28, // 16: yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse.subjects:type_name -> yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse.Subject
+	3,  // 17: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Create:input_type -> yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest
+	5,  // 18: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Update:input_type -> yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest
+	7,  // 19: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Activate:input_type -> yandex.cloud.organizationmanager.v1.ActivateMfaEnforcementRequest
+	9,  // 20: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Deactivate:input_type -> yandex.cloud.organizationmanager.v1.DeactivateMfaEnforcementRequest
+	11, // 21: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Delete:input_type -> yandex.cloud.organizationmanager.v1.DeleteMfaEnforcementRequest
+	13, // 22: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Get:input_type -> yandex.cloud.organizationmanager.v1.GetMfaEnforcementRequest
+	14, // 23: yandex.cloud.organizationmanager.v1.MfaEnforcementService.List:input_type -> yandex.cloud.organizationmanager.v1.ListMfaEnforcementsRequest
+	16, // 24: yandex.cloud.organizationmanager.v1.MfaEnforcementService.UpdateAudience:input_type -> yandex.cloud.organizationmanager.v1.UpdateAudienceRequest
+	20, // 25: yandex.cloud.organizationmanager.v1.MfaEnforcementService.ListAudience:input_type -> yandex.cloud.organizationmanager.v1.ListAudienceRequest
+	22, // 26: yandex.cloud.organizationmanager.v1.MfaEnforcementService.UpdateExcludedAudience:input_type -> yandex.cloud.organizationmanager.v1.UpdateExcludedAudienceRequest
+	25, // 27: yandex.cloud.organizationmanager.v1.MfaEnforcementService.ListExcludedAudience:input_type -> yandex.cloud.organizationmanager.v1.ListExcludedAudienceRequest
+	33, // 28: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Create:output_type -> yandex.cloud.operation.Operation
+	33, // 29: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Update:output_type -> yandex.cloud.operation.Operation
+	33, // 30: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Activate:output_type -> yandex.cloud.operation.Operation
+	33, // 31: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Deactivate:output_type -> yandex.cloud.operation.Operation
+	33, // 32: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Delete:output_type -> yandex.cloud.operation.Operation
+	32, // 33: yandex.cloud.organizationmanager.v1.MfaEnforcementService.Get:output_type -> yandex.cloud.organizationmanager.v1.MfaEnforcement
+	15, // 34: yandex.cloud.organizationmanager.v1.MfaEnforcementService.List:output_type -> yandex.cloud.organizationmanager.v1.ListMfaEnforcementsResponse
+	33, // 35: yandex.cloud.organizationmanager.v1.MfaEnforcementService.UpdateAudience:output_type -> yandex.cloud.operation.Operation
+	21, // 36: yandex.cloud.organizationmanager.v1.MfaEnforcementService.ListAudience:output_type -> yandex.cloud.organizationmanager.v1.ListAudienceResponse
+	33, // 37: yandex.cloud.organizationmanager.v1.MfaEnforcementService.UpdateExcludedAudience:output_type -> yandex.cloud.operation.Operation
+	26, // 38: yandex.cloud.organizationmanager.v1.MfaEnforcementService.ListExcludedAudience:output_type -> yandex.cloud.organizationmanager.v1.ListExcludedAudienceResponse
+	28, // [28:39] is the sub-list for method output_type
+	17, // [17:28] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_init() }
@@ -1530,7 +1892,7 @@ func file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_init
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   20,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
