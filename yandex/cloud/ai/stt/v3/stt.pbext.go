@@ -60,6 +60,18 @@ func (m *RecognitionClassifierOptions) SetClassifiers(v []*RecognitionClassifier
 	m.Classifiers = v
 }
 
+func (m *SpeakerAnalysisOptions) SetSilenceThresholdMs(v int64) {
+	m.SilenceThresholdMs = v
+}
+
+func (m *ConversationAnalysisOptions) SetSimultaneousSilenceThresholdMs(v int64) {
+	m.SimultaneousSilenceThresholdMs = v
+}
+
+func (m *ConversationAnalysisOptions) SetSimultaneousSpeechThresholdMs(v int64) {
+	m.SimultaneousSpeechThresholdMs = v
+}
+
 func (m *SpeechAnalysisOptions) SetEnableSpeakerAnalysis(v bool) {
 	m.EnableSpeakerAnalysis = v
 }
@@ -70,6 +82,14 @@ func (m *SpeechAnalysisOptions) SetEnableConversationAnalysis(v bool) {
 
 func (m *SpeechAnalysisOptions) SetDescriptiveStatisticsQuantiles(v []float64) {
 	m.DescriptiveStatisticsQuantiles = v
+}
+
+func (m *SpeechAnalysisOptions) SetSpeakerOptions(v *SpeakerAnalysisOptions) {
+	m.SpeakerOptions = v
+}
+
+func (m *SpeechAnalysisOptions) SetConverstationOptions(v *ConversationAnalysisOptions) {
+	m.ConverstationOptions = v
 }
 
 func (m *RawAudio) SetAudioEncoding(v RawAudio_AudioEncoding) {

@@ -1447,11 +1447,11 @@ const file_yandex_cloud_trino_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"auto_scale\x18\x02 \x01(\v2&.yandex.cloud.trino.v1.AutoScalePolicyH\x00R\tautoScaleB\x12\n" +
 	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01\"\x8a\x04\n" +
+	"scale_type\x12\x04\xc0\xc11\x01\"\x8b\x04\n" +
 	"\x11RetryPolicyConfig\x12L\n" +
 	"\x06policy\x18\x01 \x01(\x0e24.yandex.cloud.trino.v1.RetryPolicyConfig.RetryPolicyR\x06policy\x12W\n" +
-	"\x10exchange_manager\x18\x02 \x01(\v2,.yandex.cloud.trino.v1.ExchangeManagerConfigR\x0fexchangeManager\x12\xc2\x01\n" +
-	"\x15additional_properties\x18\x03 \x03(\v2B.yandex.cloud.trino.v1.RetryPolicyConfig.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"\x10exchange_manager\x18\x02 \x01(\v2,.yandex.cloud.trino.v1.ExchangeManagerConfigR\x0fexchangeManager\x12\xc3\x01\n" +
+	"\x15additional_properties\x18\x03 \x03(\v2B.yandex.cloud.trino.v1.RetryPolicyConfig.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"@\n" +
@@ -1465,9 +1465,9 @@ const file_yandex_cloud_trino_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"service_s3\x18\x01 \x01(\v27.yandex.cloud.trino.v1.ExchangeManagerStorage.ServiceS3H\x00R\tserviceS3\x1a\v\n" +
 	"\tServiceS3B\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xf2\x02\n" +
-	"\x15ExchangeManagerConfig\x12\xc6\x01\n" +
-	"\x15additional_properties\x18\x01 \x03(\v2F.yandex.cloud.trino.v1.ExchangeManagerConfig.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x12G\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xf3\x02\n" +
+	"\x15ExchangeManagerConfig\x12\xc7\x01\n" +
+	"\x15additional_properties\x18\x01 \x03(\v2F.yandex.cloud.trino.v1.ExchangeManagerConfig.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x12G\n" +
 	"\astorage\x18\x02 \x01(\v2-.yandex.cloud.trino.v1.ExchangeManagerStorageR\astorage\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +

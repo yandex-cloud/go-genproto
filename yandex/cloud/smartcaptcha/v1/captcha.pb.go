@@ -829,7 +829,7 @@ func (*Condition_StringMatcher_PireRegexNotMatch) isCondition_StringMatcher_Matc
 // HostMatcher object.
 type Condition_HostMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// *OR* semantics implied.
+	// List of hosts. OR semantics implied.
 	Hosts         []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

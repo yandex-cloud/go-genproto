@@ -329,7 +329,7 @@ func (x RawAudio_AudioEncoding) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RawAudio_AudioEncoding.Descriptor instead.
 func (RawAudio_AudioEncoding) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{7, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{9, 0}
 }
 
 type ContainerAudio_ContainerAudioType int32
@@ -384,7 +384,7 @@ func (x ContainerAudio_ContainerAudioType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ContainerAudio_ContainerAudioType.Descriptor instead.
 func (ContainerAudio_ContainerAudioType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{8, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{10, 0}
 }
 
 type LanguageRestrictionOptions_LanguageRestrictionType int32
@@ -435,7 +435,7 @@ func (x LanguageRestrictionOptions_LanguageRestrictionType) Number() protoreflec
 
 // Deprecated: Use LanguageRestrictionOptions_LanguageRestrictionType.Descriptor instead.
 func (LanguageRestrictionOptions_LanguageRestrictionType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{10, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{12, 0}
 }
 
 type RecognitionModelOptions_AudioProcessingType int32
@@ -486,7 +486,7 @@ func (x RecognitionModelOptions_AudioProcessingType) Number() protoreflect.EnumN
 
 // Deprecated: Use RecognitionModelOptions_AudioProcessingType.Descriptor instead.
 func (RecognitionModelOptions_AudioProcessingType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{15, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type SpeakerLabelingOptions_SpeakerLabeling int32
@@ -537,7 +537,7 @@ func (x SpeakerLabelingOptions_SpeakerLabeling) Number() protoreflect.EnumNumber
 
 // Deprecated: Use SpeakerLabelingOptions_SpeakerLabeling.Descriptor instead.
 func (SpeakerLabelingOptions_SpeakerLabeling) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{16, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{18, 0}
 }
 
 type RecognitionClassifierUpdate_WindowType int32
@@ -593,7 +593,7 @@ func (x RecognitionClassifierUpdate_WindowType) Number() protoreflect.EnumNumber
 
 // Deprecated: Use RecognitionClassifierUpdate_WindowType.Descriptor instead.
 func (RecognitionClassifierUpdate_WindowType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{35, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{37, 0}
 }
 
 type SpeakerAnalysis_WindowType int32
@@ -645,13 +645,14 @@ func (x SpeakerAnalysis_WindowType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SpeakerAnalysis_WindowType.Descriptor instead.
 func (SpeakerAnalysis_WindowType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{38, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{40, 0}
 }
 
 // Options for post-processing text results. The normalization levels depend on the settings and the language.
 // For detailed information, see [documentation](/docs/speechkit/stt/normalization).
 type TextNormalizationOptions struct {
-	state             protoimpl.MessageState                     `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Text normalization mode.
 	TextNormalization TextNormalizationOptions_TextNormalization `protobuf:"varint,1,opt,name=text_normalization,json=textNormalization,proto3,enum=speechkit.stt.v3.TextNormalizationOptions_TextNormalization" json:"text_normalization,omitempty"`
 	// Profanity filter (default: false).
 	ProfanityFilter bool `protobuf:"varint,2,opt,name=profanity_filter,json=profanityFilter,proto3" json:"profanity_filter,omitempty"`
@@ -997,6 +998,105 @@ func (x *RecognitionClassifierOptions) GetClassifiers() []*RecognitionClassifier
 	return nil
 }
 
+type SpeakerAnalysisOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// threshold of the silence segment duration to acknowledge the segment to be silence
+	SilenceThresholdMs int64 `protobuf:"varint,1,opt,name=silence_threshold_ms,json=silenceThresholdMs,proto3" json:"silence_threshold_ms,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *SpeakerAnalysisOptions) Reset() {
+	*x = SpeakerAnalysisOptions{}
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpeakerAnalysisOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpeakerAnalysisOptions) ProtoMessage() {}
+
+func (x *SpeakerAnalysisOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpeakerAnalysisOptions.ProtoReflect.Descriptor instead.
+func (*SpeakerAnalysisOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SpeakerAnalysisOptions) GetSilenceThresholdMs() int64 {
+	if x != nil {
+		return x.SilenceThresholdMs
+	}
+	return 0
+}
+
+type ConversationAnalysisOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// threshold of the overlapping silence duration to acknowledge the segment to be simultaneous silence
+	SimultaneousSilenceThresholdMs int64 `protobuf:"varint,1,opt,name=simultaneous_silence_threshold_ms,json=simultaneousSilenceThresholdMs,proto3" json:"simultaneous_silence_threshold_ms,omitempty"`
+	// threshold of the overlapping speech duration to acknowledge the segment to be simultaneous speech
+	SimultaneousSpeechThresholdMs int64 `protobuf:"varint,2,opt,name=simultaneous_speech_threshold_ms,json=simultaneousSpeechThresholdMs,proto3" json:"simultaneous_speech_threshold_ms,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
+}
+
+func (x *ConversationAnalysisOptions) Reset() {
+	*x = ConversationAnalysisOptions{}
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConversationAnalysisOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConversationAnalysisOptions) ProtoMessage() {}
+
+func (x *ConversationAnalysisOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConversationAnalysisOptions.ProtoReflect.Descriptor instead.
+func (*ConversationAnalysisOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ConversationAnalysisOptions) GetSimultaneousSilenceThresholdMs() int64 {
+	if x != nil {
+		return x.SimultaneousSilenceThresholdMs
+	}
+	return 0
+}
+
+func (x *ConversationAnalysisOptions) GetSimultaneousSpeechThresholdMs() int64 {
+	if x != nil {
+		return x.SimultaneousSpeechThresholdMs
+	}
+	return 0
+}
+
 type SpeechAnalysisOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Analyse speech for every speaker
@@ -1005,13 +1105,17 @@ type SpeechAnalysisOptions struct {
 	EnableConversationAnalysis bool `protobuf:"varint,2,opt,name=enable_conversation_analysis,json=enableConversationAnalysis,proto3" json:"enable_conversation_analysis,omitempty"`
 	// Quantile levels in range (0, 1) for descriptive statistics
 	DescriptiveStatisticsQuantiles []float64 `protobuf:"fixed64,3,rep,packed,name=descriptive_statistics_quantiles,json=descriptiveStatisticsQuantiles,proto3" json:"descriptive_statistics_quantiles,omitempty"`
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	// option spectific to the conver
+	SpeakerOptions *SpeakerAnalysisOptions `protobuf:"bytes,4,opt,name=speaker_options,json=speakerOptions,proto3" json:"speaker_options,omitempty"`
+	// options specific to the conversation analysis
+	ConverstationOptions *ConversationAnalysisOptions `protobuf:"bytes,5,opt,name=converstation_options,json=converstationOptions,proto3" json:"converstation_options,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *SpeechAnalysisOptions) Reset() {
 	*x = SpeechAnalysisOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[6]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1023,7 +1127,7 @@ func (x *SpeechAnalysisOptions) String() string {
 func (*SpeechAnalysisOptions) ProtoMessage() {}
 
 func (x *SpeechAnalysisOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[6]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1036,7 +1140,7 @@ func (x *SpeechAnalysisOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpeechAnalysisOptions.ProtoReflect.Descriptor instead.
 func (*SpeechAnalysisOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SpeechAnalysisOptions) GetEnableSpeakerAnalysis() bool {
@@ -1060,6 +1164,20 @@ func (x *SpeechAnalysisOptions) GetDescriptiveStatisticsQuantiles() []float64 {
 	return nil
 }
 
+func (x *SpeechAnalysisOptions) GetSpeakerOptions() *SpeakerAnalysisOptions {
+	if x != nil {
+		return x.SpeakerOptions
+	}
+	return nil
+}
+
+func (x *SpeechAnalysisOptions) GetConverstationOptions() *ConversationAnalysisOptions {
+	if x != nil {
+		return x.ConverstationOptions
+	}
+	return nil
+}
+
 // RAW Audio format spec (no container to infer type). Used in AudioFormat options.
 type RawAudio struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1075,7 +1193,7 @@ type RawAudio struct {
 
 func (x *RawAudio) Reset() {
 	*x = RawAudio{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[7]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1087,7 +1205,7 @@ func (x *RawAudio) String() string {
 func (*RawAudio) ProtoMessage() {}
 
 func (x *RawAudio) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[7]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1100,7 +1218,7 @@ func (x *RawAudio) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RawAudio.ProtoReflect.Descriptor instead.
 func (*RawAudio) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RawAudio) GetAudioEncoding() RawAudio_AudioEncoding {
@@ -1135,7 +1253,7 @@ type ContainerAudio struct {
 
 func (x *ContainerAudio) Reset() {
 	*x = ContainerAudio{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1147,7 +1265,7 @@ func (x *ContainerAudio) String() string {
 func (*ContainerAudio) ProtoMessage() {}
 
 func (x *ContainerAudio) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1160,7 +1278,7 @@ func (x *ContainerAudio) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContainerAudio.ProtoReflect.Descriptor instead.
 func (*ContainerAudio) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ContainerAudio) GetContainerAudioType() ContainerAudio_ContainerAudioType {
@@ -1184,7 +1302,7 @@ type AudioFormatOptions struct {
 
 func (x *AudioFormatOptions) Reset() {
 	*x = AudioFormatOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[9]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1196,7 +1314,7 @@ func (x *AudioFormatOptions) String() string {
 func (*AudioFormatOptions) ProtoMessage() {}
 
 func (x *AudioFormatOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[9]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1209,7 +1327,7 @@ func (x *AudioFormatOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AudioFormatOptions.ProtoReflect.Descriptor instead.
 func (*AudioFormatOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *AudioFormatOptions) GetAudioFormat() isAudioFormatOptions_AudioFormat {
@@ -1270,7 +1388,7 @@ type LanguageRestrictionOptions struct {
 
 func (x *LanguageRestrictionOptions) Reset() {
 	*x = LanguageRestrictionOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[10]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1282,7 +1400,7 @@ func (x *LanguageRestrictionOptions) String() string {
 func (*LanguageRestrictionOptions) ProtoMessage() {}
 
 func (x *LanguageRestrictionOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[10]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1295,7 +1413,7 @@ func (x *LanguageRestrictionOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LanguageRestrictionOptions.ProtoReflect.Descriptor instead.
 func (*LanguageRestrictionOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LanguageRestrictionOptions) GetRestrictionType() LanguageRestrictionOptions_LanguageRestrictionType {
@@ -1323,7 +1441,7 @@ type JsonSchema struct {
 
 func (x *JsonSchema) Reset() {
 	*x = JsonSchema{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[11]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1335,7 +1453,7 @@ func (x *JsonSchema) String() string {
 func (*JsonSchema) ProtoMessage() {}
 
 func (x *JsonSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[11]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1348,7 +1466,7 @@ func (x *JsonSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JsonSchema.ProtoReflect.Descriptor instead.
 func (*JsonSchema) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *JsonSchema) GetSchema() *structpb.Struct {
@@ -1376,7 +1494,7 @@ type SummarizationProperty struct {
 
 func (x *SummarizationProperty) Reset() {
 	*x = SummarizationProperty{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1388,7 +1506,7 @@ func (x *SummarizationProperty) String() string {
 func (*SummarizationProperty) ProtoMessage() {}
 
 func (x *SummarizationProperty) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1401,7 +1519,7 @@ func (x *SummarizationProperty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SummarizationProperty.ProtoReflect.Descriptor instead.
 func (*SummarizationProperty) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SummarizationProperty) GetInstruction() string {
@@ -1469,7 +1587,7 @@ type SummarizationOptions struct {
 
 func (x *SummarizationOptions) Reset() {
 	*x = SummarizationOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1481,7 +1599,7 @@ func (x *SummarizationOptions) String() string {
 func (*SummarizationOptions) ProtoMessage() {}
 
 func (x *SummarizationOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1494,7 +1612,7 @@ func (x *SummarizationOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SummarizationOptions.ProtoReflect.Descriptor instead.
 func (*SummarizationOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SummarizationOptions) GetModelUri() string {
@@ -1522,7 +1640,7 @@ type SummarizationPropertyResult struct {
 
 func (x *SummarizationPropertyResult) Reset() {
 	*x = SummarizationPropertyResult{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1534,7 +1652,7 @@ func (x *SummarizationPropertyResult) String() string {
 func (*SummarizationPropertyResult) ProtoMessage() {}
 
 func (x *SummarizationPropertyResult) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1547,7 +1665,7 @@ func (x *SummarizationPropertyResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SummarizationPropertyResult.ProtoReflect.Descriptor instead.
 func (*SummarizationPropertyResult) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SummarizationPropertyResult) GetResponse() string {
@@ -1579,7 +1697,7 @@ type RecognitionModelOptions struct {
 
 func (x *RecognitionModelOptions) Reset() {
 	*x = RecognitionModelOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1591,7 +1709,7 @@ func (x *RecognitionModelOptions) String() string {
 func (*RecognitionModelOptions) ProtoMessage() {}
 
 func (x *RecognitionModelOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1604,7 +1722,7 @@ func (x *RecognitionModelOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecognitionModelOptions.ProtoReflect.Descriptor instead.
 func (*RecognitionModelOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RecognitionModelOptions) GetModel() string {
@@ -1652,7 +1770,7 @@ type SpeakerLabelingOptions struct {
 
 func (x *SpeakerLabelingOptions) Reset() {
 	*x = SpeakerLabelingOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[16]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1664,7 +1782,7 @@ func (x *SpeakerLabelingOptions) String() string {
 func (*SpeakerLabelingOptions) ProtoMessage() {}
 
 func (x *SpeakerLabelingOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[16]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1677,7 +1795,7 @@ func (x *SpeakerLabelingOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpeakerLabelingOptions.ProtoReflect.Descriptor instead.
 func (*SpeakerLabelingOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SpeakerLabelingOptions) GetSpeakerLabeling() SpeakerLabelingOptions_SpeakerLabeling {
@@ -1707,7 +1825,7 @@ type StreamingOptions struct {
 
 func (x *StreamingOptions) Reset() {
 	*x = StreamingOptions{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1719,7 +1837,7 @@ func (x *StreamingOptions) String() string {
 func (*StreamingOptions) ProtoMessage() {}
 
 func (x *StreamingOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1732,7 +1850,7 @@ func (x *StreamingOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingOptions.ProtoReflect.Descriptor instead.
 func (*StreamingOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *StreamingOptions) GetRecognitionModel() *RecognitionModelOptions {
@@ -1788,7 +1906,7 @@ type AudioChunk struct {
 
 func (x *AudioChunk) Reset() {
 	*x = AudioChunk{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1800,7 +1918,7 @@ func (x *AudioChunk) String() string {
 func (*AudioChunk) ProtoMessage() {}
 
 func (x *AudioChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1813,7 +1931,7 @@ func (x *AudioChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AudioChunk.ProtoReflect.Descriptor instead.
 func (*AudioChunk) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *AudioChunk) GetData() []byte {
@@ -1834,7 +1952,7 @@ type SilenceChunk struct {
 
 func (x *SilenceChunk) Reset() {
 	*x = SilenceChunk{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1846,7 +1964,7 @@ func (x *SilenceChunk) String() string {
 func (*SilenceChunk) ProtoMessage() {}
 
 func (x *SilenceChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1859,7 +1977,7 @@ func (x *SilenceChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SilenceChunk.ProtoReflect.Descriptor instead.
 func (*SilenceChunk) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *SilenceChunk) GetDurationMs() int64 {
@@ -1878,7 +1996,7 @@ type Eou struct {
 
 func (x *Eou) Reset() {
 	*x = Eou{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1890,7 +2008,7 @@ func (x *Eou) String() string {
 func (*Eou) ProtoMessage() {}
 
 func (x *Eou) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1903,7 +2021,7 @@ func (x *Eou) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Eou.ProtoReflect.Descriptor instead.
 func (*Eou) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{22}
 }
 
 // Streaming audio request.
@@ -1923,7 +2041,7 @@ type StreamingRequest struct {
 
 func (x *StreamingRequest) Reset() {
 	*x = StreamingRequest{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[21]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1935,7 +2053,7 @@ func (x *StreamingRequest) String() string {
 func (*StreamingRequest) ProtoMessage() {}
 
 func (x *StreamingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[21]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1948,7 +2066,7 @@ func (x *StreamingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingRequest.ProtoReflect.Descriptor instead.
 func (*StreamingRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *StreamingRequest) GetEvent() isStreamingRequest_Event {
@@ -2049,7 +2167,7 @@ type RecognizeFileRequest struct {
 
 func (x *RecognizeFileRequest) Reset() {
 	*x = RecognizeFileRequest{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[22]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2061,7 +2179,7 @@ func (x *RecognizeFileRequest) String() string {
 func (*RecognizeFileRequest) ProtoMessage() {}
 
 func (x *RecognizeFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[22]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2074,7 +2192,7 @@ func (x *RecognizeFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecognizeFileRequest.ProtoReflect.Descriptor instead.
 func (*RecognizeFileRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *RecognizeFileRequest) GetAudioSource() isRecognizeFileRequest_AudioSource {
@@ -2170,7 +2288,7 @@ type Word struct {
 
 func (x *Word) Reset() {
 	*x = Word{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[23]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2182,7 +2300,7 @@ func (x *Word) String() string {
 func (*Word) ProtoMessage() {}
 
 func (x *Word) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[23]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2195,7 +2313,7 @@ func (x *Word) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Word.ProtoReflect.Descriptor instead.
 func (*Word) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *Word) GetText() string {
@@ -2232,7 +2350,7 @@ type LanguageEstimation struct {
 
 func (x *LanguageEstimation) Reset() {
 	*x = LanguageEstimation{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[24]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2244,7 +2362,7 @@ func (x *LanguageEstimation) String() string {
 func (*LanguageEstimation) ProtoMessage() {}
 
 func (x *LanguageEstimation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[24]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2257,7 +2375,7 @@ func (x *LanguageEstimation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LanguageEstimation.ProtoReflect.Descriptor instead.
 func (*LanguageEstimation) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *LanguageEstimation) GetLanguageCode() string {
@@ -2295,7 +2413,7 @@ type Alternative struct {
 
 func (x *Alternative) Reset() {
 	*x = Alternative{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[25]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2307,7 +2425,7 @@ func (x *Alternative) String() string {
 func (*Alternative) ProtoMessage() {}
 
 func (x *Alternative) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[25]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2320,7 +2438,7 @@ func (x *Alternative) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Alternative.ProtoReflect.Descriptor instead.
 func (*Alternative) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *Alternative) GetWords() []*Word {
@@ -2376,7 +2494,7 @@ type EouUpdate struct {
 
 func (x *EouUpdate) Reset() {
 	*x = EouUpdate{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[26]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2388,7 +2506,7 @@ func (x *EouUpdate) String() string {
 func (*EouUpdate) ProtoMessage() {}
 
 func (x *EouUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[26]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2401,7 +2519,7 @@ func (x *EouUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EouUpdate.ProtoReflect.Descriptor instead.
 func (*EouUpdate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *EouUpdate) GetTimeMs() int64 {
@@ -2424,7 +2542,7 @@ type AlternativeUpdate struct {
 
 func (x *AlternativeUpdate) Reset() {
 	*x = AlternativeUpdate{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[27]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2436,7 +2554,7 @@ func (x *AlternativeUpdate) String() string {
 func (*AlternativeUpdate) ProtoMessage() {}
 
 func (x *AlternativeUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[27]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2449,7 +2567,7 @@ func (x *AlternativeUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AlternativeUpdate.ProtoReflect.Descriptor instead.
 func (*AlternativeUpdate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *AlternativeUpdate) GetAlternatives() []*Alternative {
@@ -2492,7 +2610,7 @@ type AudioCursors struct {
 
 func (x *AudioCursors) Reset() {
 	*x = AudioCursors{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[28]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2504,7 +2622,7 @@ func (x *AudioCursors) String() string {
 func (*AudioCursors) ProtoMessage() {}
 
 func (x *AudioCursors) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[28]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2517,7 +2635,7 @@ func (x *AudioCursors) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AudioCursors.ProtoReflect.Descriptor instead.
 func (*AudioCursors) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *AudioCursors) GetReceivedDataMs() int64 {
@@ -2579,7 +2697,7 @@ type FinalRefinement struct {
 
 func (x *FinalRefinement) Reset() {
 	*x = FinalRefinement{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[29]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2591,7 +2709,7 @@ func (x *FinalRefinement) String() string {
 func (*FinalRefinement) ProtoMessage() {}
 
 func (x *FinalRefinement) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[29]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2604,7 +2722,7 @@ func (x *FinalRefinement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FinalRefinement.ProtoReflect.Descriptor instead.
 func (*FinalRefinement) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *FinalRefinement) GetFinalIndex() int64 {
@@ -2654,7 +2772,7 @@ type StatusCode struct {
 
 func (x *StatusCode) Reset() {
 	*x = StatusCode{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[30]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2666,7 +2784,7 @@ func (x *StatusCode) String() string {
 func (*StatusCode) ProtoMessage() {}
 
 func (x *StatusCode) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[30]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2679,7 +2797,7 @@ func (x *StatusCode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusCode.ProtoReflect.Descriptor instead.
 func (*StatusCode) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *StatusCode) GetCodeType() CodeType {
@@ -2709,7 +2827,7 @@ type SessionUuid struct {
 
 func (x *SessionUuid) Reset() {
 	*x = SessionUuid{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[31]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2721,7 +2839,7 @@ func (x *SessionUuid) String() string {
 func (*SessionUuid) ProtoMessage() {}
 
 func (x *SessionUuid) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[31]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2734,7 +2852,7 @@ func (x *SessionUuid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SessionUuid.ProtoReflect.Descriptor instead.
 func (*SessionUuid) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *SessionUuid) GetUuid() string {
@@ -2765,7 +2883,7 @@ type PhraseHighlight struct {
 
 func (x *PhraseHighlight) Reset() {
 	*x = PhraseHighlight{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[32]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2777,7 +2895,7 @@ func (x *PhraseHighlight) String() string {
 func (*PhraseHighlight) ProtoMessage() {}
 
 func (x *PhraseHighlight) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[32]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2790,7 +2908,7 @@ func (x *PhraseHighlight) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PhraseHighlight.ProtoReflect.Descriptor instead.
 func (*PhraseHighlight) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *PhraseHighlight) GetText() string {
@@ -2826,7 +2944,7 @@ type RecognitionClassifierLabel struct {
 
 func (x *RecognitionClassifierLabel) Reset() {
 	*x = RecognitionClassifierLabel{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[33]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2838,7 +2956,7 @@ func (x *RecognitionClassifierLabel) String() string {
 func (*RecognitionClassifierLabel) ProtoMessage() {}
 
 func (x *RecognitionClassifierLabel) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[33]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2851,7 +2969,7 @@ func (x *RecognitionClassifierLabel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecognitionClassifierLabel.ProtoReflect.Descriptor instead.
 func (*RecognitionClassifierLabel) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{33}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *RecognitionClassifierLabel) GetLabel() string {
@@ -2882,7 +3000,7 @@ type RecognitionClassifierResult struct {
 
 func (x *RecognitionClassifierResult) Reset() {
 	*x = RecognitionClassifierResult{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[34]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2894,7 +3012,7 @@ func (x *RecognitionClassifierResult) String() string {
 func (*RecognitionClassifierResult) ProtoMessage() {}
 
 func (x *RecognitionClassifierResult) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[34]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2907,7 +3025,7 @@ func (x *RecognitionClassifierResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecognitionClassifierResult.ProtoReflect.Descriptor instead.
 func (*RecognitionClassifierResult) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{34}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *RecognitionClassifierResult) GetClassifier() string {
@@ -2947,7 +3065,7 @@ type RecognitionClassifierUpdate struct {
 
 func (x *RecognitionClassifierUpdate) Reset() {
 	*x = RecognitionClassifierUpdate{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[35]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2959,7 +3077,7 @@ func (x *RecognitionClassifierUpdate) String() string {
 func (*RecognitionClassifierUpdate) ProtoMessage() {}
 
 func (x *RecognitionClassifierUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[35]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2972,7 +3090,7 @@ func (x *RecognitionClassifierUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecognitionClassifierUpdate.ProtoReflect.Descriptor instead.
 func (*RecognitionClassifierUpdate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{35}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *RecognitionClassifierUpdate) GetWindowType() RecognitionClassifierUpdate_WindowType {
@@ -3021,7 +3139,7 @@ type DescriptiveStatistics struct {
 
 func (x *DescriptiveStatistics) Reset() {
 	*x = DescriptiveStatistics{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[36]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3033,7 +3151,7 @@ func (x *DescriptiveStatistics) String() string {
 func (*DescriptiveStatistics) ProtoMessage() {}
 
 func (x *DescriptiveStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[36]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3046,7 +3164,7 @@ func (x *DescriptiveStatistics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescriptiveStatistics.ProtoReflect.Descriptor instead.
 func (*DescriptiveStatistics) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{36}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *DescriptiveStatistics) GetMin() float64 {
@@ -3096,7 +3214,7 @@ type AudioSegmentBoundaries struct {
 
 func (x *AudioSegmentBoundaries) Reset() {
 	*x = AudioSegmentBoundaries{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3108,7 +3226,7 @@ func (x *AudioSegmentBoundaries) String() string {
 func (*AudioSegmentBoundaries) ProtoMessage() {}
 
 func (x *AudioSegmentBoundaries) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[37]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3121,7 +3239,7 @@ func (x *AudioSegmentBoundaries) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AudioSegmentBoundaries.ProtoReflect.Descriptor instead.
 func (*AudioSegmentBoundaries) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{37}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *AudioSegmentBoundaries) GetStartTimeMs() int64 {
@@ -3176,7 +3294,7 @@ type SpeakerAnalysis struct {
 
 func (x *SpeakerAnalysis) Reset() {
 	*x = SpeakerAnalysis{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3188,7 +3306,7 @@ func (x *SpeakerAnalysis) String() string {
 func (*SpeakerAnalysis) ProtoMessage() {}
 
 func (x *SpeakerAnalysis) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[38]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3201,7 +3319,7 @@ func (x *SpeakerAnalysis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SpeakerAnalysis.ProtoReflect.Descriptor instead.
 func (*SpeakerAnalysis) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{38}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *SpeakerAnalysis) GetSpeakerTag() string {
@@ -3337,7 +3455,7 @@ type ConversationAnalysis struct {
 
 func (x *ConversationAnalysis) Reset() {
 	*x = ConversationAnalysis{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3349,7 +3467,7 @@ func (x *ConversationAnalysis) String() string {
 func (*ConversationAnalysis) ProtoMessage() {}
 
 func (x *ConversationAnalysis) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[39]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3362,7 +3480,7 @@ func (x *ConversationAnalysis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationAnalysis.ProtoReflect.Descriptor instead.
 func (*ConversationAnalysis) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{39}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *ConversationAnalysis) GetConversationBoundaries() *AudioSegmentBoundaries {
@@ -3450,7 +3568,7 @@ type ContentUsage struct {
 
 func (x *ContentUsage) Reset() {
 	*x = ContentUsage{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[40]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3462,7 +3580,7 @@ func (x *ContentUsage) String() string {
 func (*ContentUsage) ProtoMessage() {}
 
 func (x *ContentUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[40]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3475,7 +3593,7 @@ func (x *ContentUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContentUsage.ProtoReflect.Descriptor instead.
 func (*ContentUsage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{40}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ContentUsage) GetInputTextTokens() int64 {
@@ -3511,7 +3629,7 @@ type Summarization struct {
 
 func (x *Summarization) Reset() {
 	*x = Summarization{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[41]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3523,7 +3641,7 @@ func (x *Summarization) String() string {
 func (*Summarization) ProtoMessage() {}
 
 func (x *Summarization) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[41]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3536,7 +3654,7 @@ func (x *Summarization) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Summarization.ProtoReflect.Descriptor instead.
 func (*Summarization) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{41}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *Summarization) GetResults() []*SummarizationPropertyResult {
@@ -3583,7 +3701,7 @@ type StreamingResponse struct {
 
 func (x *StreamingResponse) Reset() {
 	*x = StreamingResponse{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[42]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3595,7 +3713,7 @@ func (x *StreamingResponse) String() string {
 func (*StreamingResponse) ProtoMessage() {}
 
 func (x *StreamingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[42]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3608,7 +3726,7 @@ func (x *StreamingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingResponse.ProtoReflect.Descriptor instead.
 func (*StreamingResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{42}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *StreamingResponse) GetSessionUuid() *SessionUuid {
@@ -3797,16 +3915,18 @@ func (*StreamingResponse_ConversationAnalysis) isStreamingResponse_Event() {}
 
 func (*StreamingResponse_Summarization) isStreamingResponse_Event() {}
 
+// Delete async recognition result request.
 type DeleteRecognitionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperationId   string                 `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Async recognition operation id to delete.
+	OperationId   string `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteRecognitionRequest) Reset() {
 	*x = DeleteRecognitionRequest{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[43]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3818,7 +3938,7 @@ func (x *DeleteRecognitionRequest) String() string {
 func (*DeleteRecognitionRequest) ProtoMessage() {}
 
 func (x *DeleteRecognitionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[43]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3831,7 +3951,7 @@ func (x *DeleteRecognitionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRecognitionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRecognitionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{43}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *DeleteRecognitionRequest) GetOperationId() string {
@@ -3841,16 +3961,18 @@ func (x *DeleteRecognitionRequest) GetOperationId() string {
 	return ""
 }
 
+// Response from async recognition.
 type StreamingResponseList struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	StreamingResponses []*StreamingResponse   `protobuf:"bytes,1,rep,name=streaming_responses,json=streamingResponses,proto3" json:"streaming_responses,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of responses from async recognition.
+	StreamingResponses []*StreamingResponse `protobuf:"bytes,1,rep,name=streaming_responses,json=streamingResponses,proto3" json:"streaming_responses,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StreamingResponseList) Reset() {
 	*x = StreamingResponseList{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[44]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3862,7 +3984,7 @@ func (x *StreamingResponseList) String() string {
 func (*StreamingResponseList) ProtoMessage() {}
 
 func (x *StreamingResponseList) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[44]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3875,7 +3997,7 @@ func (x *StreamingResponseList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamingResponseList.ProtoReflect.Descriptor instead.
 func (*StreamingResponseList) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{44}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *StreamingResponseList) GetStreamingResponses() []*StreamingResponse {
@@ -3897,7 +4019,7 @@ type DescriptiveStatistics_Quantile struct {
 
 func (x *DescriptiveStatistics_Quantile) Reset() {
 	*x = DescriptiveStatistics_Quantile{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[45]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3909,7 +4031,7 @@ func (x *DescriptiveStatistics_Quantile) String() string {
 func (*DescriptiveStatistics_Quantile) ProtoMessage() {}
 
 func (x *DescriptiveStatistics_Quantile) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[45]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3922,7 +4044,7 @@ func (x *DescriptiveStatistics_Quantile) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescriptiveStatistics_Quantile.ProtoReflect.Descriptor instead.
 func (*DescriptiveStatistics_Quantile) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{36, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{38, 0}
 }
 
 func (x *DescriptiveStatistics_Quantile) GetLevel() float64 {
@@ -3955,7 +4077,7 @@ type ConversationAnalysis_InterruptsEvaluation struct {
 
 func (x *ConversationAnalysis_InterruptsEvaluation) Reset() {
 	*x = ConversationAnalysis_InterruptsEvaluation{}
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[46]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3967,7 +4089,7 @@ func (x *ConversationAnalysis_InterruptsEvaluation) String() string {
 func (*ConversationAnalysis_InterruptsEvaluation) ProtoMessage() {}
 
 func (x *ConversationAnalysis_InterruptsEvaluation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[46]
+	mi := &file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3980,7 +4102,7 @@ func (x *ConversationAnalysis_InterruptsEvaluation) ProtoReflect() protoreflect.
 
 // Deprecated: Use ConversationAnalysis_InterruptsEvaluation.ProtoReflect.Descriptor instead.
 func (*ConversationAnalysis_InterruptsEvaluation) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{39, 0}
+	return file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP(), []int{41, 0}
 }
 
 func (x *ConversationAnalysis_InterruptsEvaluation) GetSpeakerTag() string {
@@ -4053,11 +4175,18 @@ const file_yandex_cloud_ai_stt_v3_stt_proto_rawDesc = "" +
 	"\n" +
 	"ON_PARTIAL\x10\x03\"i\n" +
 	"\x1cRecognitionClassifierOptions\x12I\n" +
-	"\vclassifiers\x18\x01 \x03(\v2'.speechkit.stt.v3.RecognitionClassifierR\vclassifiers\"\xdb\x01\n" +
+	"\vclassifiers\x18\x01 \x03(\v2'.speechkit.stt.v3.RecognitionClassifierR\vclassifiers\"J\n" +
+	"\x16SpeakerAnalysisOptions\x120\n" +
+	"\x14silence_threshold_ms\x18\x01 \x01(\x03R\x12silenceThresholdMs\"\xb1\x01\n" +
+	"\x1bConversationAnalysisOptions\x12I\n" +
+	"!simultaneous_silence_threshold_ms\x18\x01 \x01(\x03R\x1esimultaneousSilenceThresholdMs\x12G\n" +
+	" simultaneous_speech_threshold_ms\x18\x02 \x01(\x03R\x1dsimultaneousSpeechThresholdMs\"\x92\x03\n" +
 	"\x15SpeechAnalysisOptions\x126\n" +
 	"\x17enable_speaker_analysis\x18\x01 \x01(\bR\x15enableSpeakerAnalysis\x12@\n" +
 	"\x1cenable_conversation_analysis\x18\x02 \x01(\bR\x1aenableConversationAnalysis\x12H\n" +
-	" descriptive_statistics_quantiles\x18\x03 \x03(\x01R\x1edescriptiveStatisticsQuantiles\"\xfa\x01\n" +
+	" descriptive_statistics_quantiles\x18\x03 \x03(\x01R\x1edescriptiveStatisticsQuantiles\x12Q\n" +
+	"\x0fspeaker_options\x18\x04 \x01(\v2(.speechkit.stt.v3.SpeakerAnalysisOptionsR\x0espeakerOptions\x12b\n" +
+	"\x15converstation_options\x18\x05 \x01(\v2-.speechkit.stt.v3.ConversationAnalysisOptionsR\x14converstationOptions\"\xfa\x01\n" +
 	"\bRawAudio\x12O\n" +
 	"\x0eaudio_encoding\x18\x01 \x01(\x0e2(.speechkit.stt.v3.RawAudio.AudioEncodingR\raudioEncoding\x12*\n" +
 	"\x11sample_rate_hertz\x18\x02 \x01(\x03R\x0fsampleRateHertz\x12.\n" +
@@ -4325,7 +4454,7 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_ai_stt_v3_stt_proto_enumTypes = make([]protoimpl.EnumInfo, 12)
-var file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
+var file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
 var file_yandex_cloud_ai_stt_v3_stt_proto_goTypes = []any{
 	(CodeType)(0), // 0: speechkit.stt.v3.CodeType
 	(TextNormalizationOptions_TextNormalization)(0),         // 1: speechkit.stt.v3.TextNormalizationOptions.TextNormalization
@@ -4345,48 +4474,50 @@ var file_yandex_cloud_ai_stt_v3_stt_proto_goTypes = []any{
 	(*EouClassifierOptions)(nil),                            // 15: speechkit.stt.v3.EouClassifierOptions
 	(*RecognitionClassifier)(nil),                           // 16: speechkit.stt.v3.RecognitionClassifier
 	(*RecognitionClassifierOptions)(nil),                    // 17: speechkit.stt.v3.RecognitionClassifierOptions
-	(*SpeechAnalysisOptions)(nil),                           // 18: speechkit.stt.v3.SpeechAnalysisOptions
-	(*RawAudio)(nil),                                        // 19: speechkit.stt.v3.RawAudio
-	(*ContainerAudio)(nil),                                  // 20: speechkit.stt.v3.ContainerAudio
-	(*AudioFormatOptions)(nil),                              // 21: speechkit.stt.v3.AudioFormatOptions
-	(*LanguageRestrictionOptions)(nil),                      // 22: speechkit.stt.v3.LanguageRestrictionOptions
-	(*JsonSchema)(nil),                                      // 23: speechkit.stt.v3.JsonSchema
-	(*SummarizationProperty)(nil),                           // 24: speechkit.stt.v3.SummarizationProperty
-	(*SummarizationOptions)(nil),                            // 25: speechkit.stt.v3.SummarizationOptions
-	(*SummarizationPropertyResult)(nil),                     // 26: speechkit.stt.v3.SummarizationPropertyResult
-	(*RecognitionModelOptions)(nil),                         // 27: speechkit.stt.v3.RecognitionModelOptions
-	(*SpeakerLabelingOptions)(nil),                          // 28: speechkit.stt.v3.SpeakerLabelingOptions
-	(*StreamingOptions)(nil),                                // 29: speechkit.stt.v3.StreamingOptions
-	(*AudioChunk)(nil),                                      // 30: speechkit.stt.v3.AudioChunk
-	(*SilenceChunk)(nil),                                    // 31: speechkit.stt.v3.SilenceChunk
-	(*Eou)(nil),                                             // 32: speechkit.stt.v3.Eou
-	(*StreamingRequest)(nil),                                // 33: speechkit.stt.v3.StreamingRequest
-	(*RecognizeFileRequest)(nil),                            // 34: speechkit.stt.v3.RecognizeFileRequest
-	(*Word)(nil),                                            // 35: speechkit.stt.v3.Word
-	(*LanguageEstimation)(nil),                              // 36: speechkit.stt.v3.LanguageEstimation
-	(*Alternative)(nil),                                     // 37: speechkit.stt.v3.Alternative
-	(*EouUpdate)(nil),                                       // 38: speechkit.stt.v3.EouUpdate
-	(*AlternativeUpdate)(nil),                               // 39: speechkit.stt.v3.AlternativeUpdate
-	(*AudioCursors)(nil),                                    // 40: speechkit.stt.v3.AudioCursors
-	(*FinalRefinement)(nil),                                 // 41: speechkit.stt.v3.FinalRefinement
-	(*StatusCode)(nil),                                      // 42: speechkit.stt.v3.StatusCode
-	(*SessionUuid)(nil),                                     // 43: speechkit.stt.v3.SessionUuid
-	(*PhraseHighlight)(nil),                                 // 44: speechkit.stt.v3.PhraseHighlight
-	(*RecognitionClassifierLabel)(nil),                      // 45: speechkit.stt.v3.RecognitionClassifierLabel
-	(*RecognitionClassifierResult)(nil),                     // 46: speechkit.stt.v3.RecognitionClassifierResult
-	(*RecognitionClassifierUpdate)(nil),                     // 47: speechkit.stt.v3.RecognitionClassifierUpdate
-	(*DescriptiveStatistics)(nil),                           // 48: speechkit.stt.v3.DescriptiveStatistics
-	(*AudioSegmentBoundaries)(nil),                          // 49: speechkit.stt.v3.AudioSegmentBoundaries
-	(*SpeakerAnalysis)(nil),                                 // 50: speechkit.stt.v3.SpeakerAnalysis
-	(*ConversationAnalysis)(nil),                            // 51: speechkit.stt.v3.ConversationAnalysis
-	(*ContentUsage)(nil),                                    // 52: speechkit.stt.v3.ContentUsage
-	(*Summarization)(nil),                                   // 53: speechkit.stt.v3.Summarization
-	(*StreamingResponse)(nil),                               // 54: speechkit.stt.v3.StreamingResponse
-	(*DeleteRecognitionRequest)(nil),                        // 55: speechkit.stt.v3.DeleteRecognitionRequest
-	(*StreamingResponseList)(nil),                           // 56: speechkit.stt.v3.StreamingResponseList
-	(*DescriptiveStatistics_Quantile)(nil),                  // 57: speechkit.stt.v3.DescriptiveStatistics.Quantile
-	(*ConversationAnalysis_InterruptsEvaluation)(nil),       // 58: speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
-	(*structpb.Struct)(nil),                                 // 59: google.protobuf.Struct
+	(*SpeakerAnalysisOptions)(nil),                          // 18: speechkit.stt.v3.SpeakerAnalysisOptions
+	(*ConversationAnalysisOptions)(nil),                     // 19: speechkit.stt.v3.ConversationAnalysisOptions
+	(*SpeechAnalysisOptions)(nil),                           // 20: speechkit.stt.v3.SpeechAnalysisOptions
+	(*RawAudio)(nil),                                        // 21: speechkit.stt.v3.RawAudio
+	(*ContainerAudio)(nil),                                  // 22: speechkit.stt.v3.ContainerAudio
+	(*AudioFormatOptions)(nil),                              // 23: speechkit.stt.v3.AudioFormatOptions
+	(*LanguageRestrictionOptions)(nil),                      // 24: speechkit.stt.v3.LanguageRestrictionOptions
+	(*JsonSchema)(nil),                                      // 25: speechkit.stt.v3.JsonSchema
+	(*SummarizationProperty)(nil),                           // 26: speechkit.stt.v3.SummarizationProperty
+	(*SummarizationOptions)(nil),                            // 27: speechkit.stt.v3.SummarizationOptions
+	(*SummarizationPropertyResult)(nil),                     // 28: speechkit.stt.v3.SummarizationPropertyResult
+	(*RecognitionModelOptions)(nil),                         // 29: speechkit.stt.v3.RecognitionModelOptions
+	(*SpeakerLabelingOptions)(nil),                          // 30: speechkit.stt.v3.SpeakerLabelingOptions
+	(*StreamingOptions)(nil),                                // 31: speechkit.stt.v3.StreamingOptions
+	(*AudioChunk)(nil),                                      // 32: speechkit.stt.v3.AudioChunk
+	(*SilenceChunk)(nil),                                    // 33: speechkit.stt.v3.SilenceChunk
+	(*Eou)(nil),                                             // 34: speechkit.stt.v3.Eou
+	(*StreamingRequest)(nil),                                // 35: speechkit.stt.v3.StreamingRequest
+	(*RecognizeFileRequest)(nil),                            // 36: speechkit.stt.v3.RecognizeFileRequest
+	(*Word)(nil),                                            // 37: speechkit.stt.v3.Word
+	(*LanguageEstimation)(nil),                              // 38: speechkit.stt.v3.LanguageEstimation
+	(*Alternative)(nil),                                     // 39: speechkit.stt.v3.Alternative
+	(*EouUpdate)(nil),                                       // 40: speechkit.stt.v3.EouUpdate
+	(*AlternativeUpdate)(nil),                               // 41: speechkit.stt.v3.AlternativeUpdate
+	(*AudioCursors)(nil),                                    // 42: speechkit.stt.v3.AudioCursors
+	(*FinalRefinement)(nil),                                 // 43: speechkit.stt.v3.FinalRefinement
+	(*StatusCode)(nil),                                      // 44: speechkit.stt.v3.StatusCode
+	(*SessionUuid)(nil),                                     // 45: speechkit.stt.v3.SessionUuid
+	(*PhraseHighlight)(nil),                                 // 46: speechkit.stt.v3.PhraseHighlight
+	(*RecognitionClassifierLabel)(nil),                      // 47: speechkit.stt.v3.RecognitionClassifierLabel
+	(*RecognitionClassifierResult)(nil),                     // 48: speechkit.stt.v3.RecognitionClassifierResult
+	(*RecognitionClassifierUpdate)(nil),                     // 49: speechkit.stt.v3.RecognitionClassifierUpdate
+	(*DescriptiveStatistics)(nil),                           // 50: speechkit.stt.v3.DescriptiveStatistics
+	(*AudioSegmentBoundaries)(nil),                          // 51: speechkit.stt.v3.AudioSegmentBoundaries
+	(*SpeakerAnalysis)(nil),                                 // 52: speechkit.stt.v3.SpeakerAnalysis
+	(*ConversationAnalysis)(nil),                            // 53: speechkit.stt.v3.ConversationAnalysis
+	(*ContentUsage)(nil),                                    // 54: speechkit.stt.v3.ContentUsage
+	(*Summarization)(nil),                                   // 55: speechkit.stt.v3.Summarization
+	(*StreamingResponse)(nil),                               // 56: speechkit.stt.v3.StreamingResponse
+	(*DeleteRecognitionRequest)(nil),                        // 57: speechkit.stt.v3.DeleteRecognitionRequest
+	(*StreamingResponseList)(nil),                           // 58: speechkit.stt.v3.StreamingResponseList
+	(*DescriptiveStatistics_Quantile)(nil),                  // 59: speechkit.stt.v3.DescriptiveStatistics.Quantile
+	(*ConversationAnalysis_InterruptsEvaluation)(nil),       // 60: speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
+	(*structpb.Struct)(nil),                                 // 61: google.protobuf.Struct
 }
 var file_yandex_cloud_ai_stt_v3_stt_proto_depIdxs = []int32{
 	1,  // 0: speechkit.stt.v3.TextNormalizationOptions.text_normalization:type_name -> speechkit.stt.v3.TextNormalizationOptions.TextNormalization
@@ -4396,75 +4527,77 @@ var file_yandex_cloud_ai_stt_v3_stt_proto_depIdxs = []int32{
 	14, // 4: speechkit.stt.v3.EouClassifierOptions.external_classifier:type_name -> speechkit.stt.v3.ExternalEouClassifier
 	4,  // 5: speechkit.stt.v3.RecognitionClassifier.triggers:type_name -> speechkit.stt.v3.RecognitionClassifier.TriggerType
 	16, // 6: speechkit.stt.v3.RecognitionClassifierOptions.classifiers:type_name -> speechkit.stt.v3.RecognitionClassifier
-	5,  // 7: speechkit.stt.v3.RawAudio.audio_encoding:type_name -> speechkit.stt.v3.RawAudio.AudioEncoding
-	6,  // 8: speechkit.stt.v3.ContainerAudio.container_audio_type:type_name -> speechkit.stt.v3.ContainerAudio.ContainerAudioType
-	19, // 9: speechkit.stt.v3.AudioFormatOptions.raw_audio:type_name -> speechkit.stt.v3.RawAudio
-	20, // 10: speechkit.stt.v3.AudioFormatOptions.container_audio:type_name -> speechkit.stt.v3.ContainerAudio
-	7,  // 11: speechkit.stt.v3.LanguageRestrictionOptions.restriction_type:type_name -> speechkit.stt.v3.LanguageRestrictionOptions.LanguageRestrictionType
-	59, // 12: speechkit.stt.v3.JsonSchema.schema:type_name -> google.protobuf.Struct
-	23, // 13: speechkit.stt.v3.SummarizationProperty.json_schema:type_name -> speechkit.stt.v3.JsonSchema
-	24, // 14: speechkit.stt.v3.SummarizationOptions.properties:type_name -> speechkit.stt.v3.SummarizationProperty
-	21, // 15: speechkit.stt.v3.RecognitionModelOptions.audio_format:type_name -> speechkit.stt.v3.AudioFormatOptions
-	12, // 16: speechkit.stt.v3.RecognitionModelOptions.text_normalization:type_name -> speechkit.stt.v3.TextNormalizationOptions
-	22, // 17: speechkit.stt.v3.RecognitionModelOptions.language_restriction:type_name -> speechkit.stt.v3.LanguageRestrictionOptions
-	8,  // 18: speechkit.stt.v3.RecognitionModelOptions.audio_processing_type:type_name -> speechkit.stt.v3.RecognitionModelOptions.AudioProcessingType
-	9,  // 19: speechkit.stt.v3.SpeakerLabelingOptions.speaker_labeling:type_name -> speechkit.stt.v3.SpeakerLabelingOptions.SpeakerLabeling
-	27, // 20: speechkit.stt.v3.StreamingOptions.recognition_model:type_name -> speechkit.stt.v3.RecognitionModelOptions
-	15, // 21: speechkit.stt.v3.StreamingOptions.eou_classifier:type_name -> speechkit.stt.v3.EouClassifierOptions
-	17, // 22: speechkit.stt.v3.StreamingOptions.recognition_classifier:type_name -> speechkit.stt.v3.RecognitionClassifierOptions
-	18, // 23: speechkit.stt.v3.StreamingOptions.speech_analysis:type_name -> speechkit.stt.v3.SpeechAnalysisOptions
-	28, // 24: speechkit.stt.v3.StreamingOptions.speaker_labeling:type_name -> speechkit.stt.v3.SpeakerLabelingOptions
-	25, // 25: speechkit.stt.v3.StreamingOptions.summarization:type_name -> speechkit.stt.v3.SummarizationOptions
-	29, // 26: speechkit.stt.v3.StreamingRequest.session_options:type_name -> speechkit.stt.v3.StreamingOptions
-	30, // 27: speechkit.stt.v3.StreamingRequest.chunk:type_name -> speechkit.stt.v3.AudioChunk
-	31, // 28: speechkit.stt.v3.StreamingRequest.silence_chunk:type_name -> speechkit.stt.v3.SilenceChunk
-	32, // 29: speechkit.stt.v3.StreamingRequest.eou:type_name -> speechkit.stt.v3.Eou
-	27, // 30: speechkit.stt.v3.RecognizeFileRequest.recognition_model:type_name -> speechkit.stt.v3.RecognitionModelOptions
-	17, // 31: speechkit.stt.v3.RecognizeFileRequest.recognition_classifier:type_name -> speechkit.stt.v3.RecognitionClassifierOptions
-	18, // 32: speechkit.stt.v3.RecognizeFileRequest.speech_analysis:type_name -> speechkit.stt.v3.SpeechAnalysisOptions
-	28, // 33: speechkit.stt.v3.RecognizeFileRequest.speaker_labeling:type_name -> speechkit.stt.v3.SpeakerLabelingOptions
-	25, // 34: speechkit.stt.v3.RecognizeFileRequest.summarization:type_name -> speechkit.stt.v3.SummarizationOptions
-	35, // 35: speechkit.stt.v3.Alternative.words:type_name -> speechkit.stt.v3.Word
-	36, // 36: speechkit.stt.v3.Alternative.languages:type_name -> speechkit.stt.v3.LanguageEstimation
-	37, // 37: speechkit.stt.v3.AlternativeUpdate.alternatives:type_name -> speechkit.stt.v3.Alternative
-	39, // 38: speechkit.stt.v3.FinalRefinement.normalized_text:type_name -> speechkit.stt.v3.AlternativeUpdate
-	0,  // 39: speechkit.stt.v3.StatusCode.code_type:type_name -> speechkit.stt.v3.CodeType
-	44, // 40: speechkit.stt.v3.RecognitionClassifierResult.highlights:type_name -> speechkit.stt.v3.PhraseHighlight
-	45, // 41: speechkit.stt.v3.RecognitionClassifierResult.labels:type_name -> speechkit.stt.v3.RecognitionClassifierLabel
-	10, // 42: speechkit.stt.v3.RecognitionClassifierUpdate.window_type:type_name -> speechkit.stt.v3.RecognitionClassifierUpdate.WindowType
-	46, // 43: speechkit.stt.v3.RecognitionClassifierUpdate.classifier_result:type_name -> speechkit.stt.v3.RecognitionClassifierResult
-	57, // 44: speechkit.stt.v3.DescriptiveStatistics.quantiles:type_name -> speechkit.stt.v3.DescriptiveStatistics.Quantile
-	11, // 45: speechkit.stt.v3.SpeakerAnalysis.window_type:type_name -> speechkit.stt.v3.SpeakerAnalysis.WindowType
-	49, // 46: speechkit.stt.v3.SpeakerAnalysis.speech_boundaries:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
-	48, // 47: speechkit.stt.v3.SpeakerAnalysis.words_per_second:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	48, // 48: speechkit.stt.v3.SpeakerAnalysis.letters_per_second:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	48, // 49: speechkit.stt.v3.SpeakerAnalysis.words_per_utterance:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	48, // 50: speechkit.stt.v3.SpeakerAnalysis.letters_per_utterance:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	48, // 51: speechkit.stt.v3.SpeakerAnalysis.utterance_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	49, // 52: speechkit.stt.v3.ConversationAnalysis.conversation_boundaries:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
-	48, // 53: speechkit.stt.v3.ConversationAnalysis.simultaneous_silence_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	48, // 54: speechkit.stt.v3.ConversationAnalysis.simultaneous_speech_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
-	58, // 55: speechkit.stt.v3.ConversationAnalysis.speaker_interrupts:type_name -> speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
-	26, // 56: speechkit.stt.v3.Summarization.results:type_name -> speechkit.stt.v3.SummarizationPropertyResult
-	52, // 57: speechkit.stt.v3.Summarization.content_usage:type_name -> speechkit.stt.v3.ContentUsage
-	43, // 58: speechkit.stt.v3.StreamingResponse.session_uuid:type_name -> speechkit.stt.v3.SessionUuid
-	40, // 59: speechkit.stt.v3.StreamingResponse.audio_cursors:type_name -> speechkit.stt.v3.AudioCursors
-	39, // 60: speechkit.stt.v3.StreamingResponse.partial:type_name -> speechkit.stt.v3.AlternativeUpdate
-	39, // 61: speechkit.stt.v3.StreamingResponse.final:type_name -> speechkit.stt.v3.AlternativeUpdate
-	38, // 62: speechkit.stt.v3.StreamingResponse.eou_update:type_name -> speechkit.stt.v3.EouUpdate
-	41, // 63: speechkit.stt.v3.StreamingResponse.final_refinement:type_name -> speechkit.stt.v3.FinalRefinement
-	42, // 64: speechkit.stt.v3.StreamingResponse.status_code:type_name -> speechkit.stt.v3.StatusCode
-	47, // 65: speechkit.stt.v3.StreamingResponse.classifier_update:type_name -> speechkit.stt.v3.RecognitionClassifierUpdate
-	50, // 66: speechkit.stt.v3.StreamingResponse.speaker_analysis:type_name -> speechkit.stt.v3.SpeakerAnalysis
-	51, // 67: speechkit.stt.v3.StreamingResponse.conversation_analysis:type_name -> speechkit.stt.v3.ConversationAnalysis
-	53, // 68: speechkit.stt.v3.StreamingResponse.summarization:type_name -> speechkit.stt.v3.Summarization
-	54, // 69: speechkit.stt.v3.StreamingResponseList.streaming_responses:type_name -> speechkit.stt.v3.StreamingResponse
-	49, // 70: speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation.interrupts:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
-	71, // [71:71] is the sub-list for method output_type
-	71, // [71:71] is the sub-list for method input_type
-	71, // [71:71] is the sub-list for extension type_name
-	71, // [71:71] is the sub-list for extension extendee
-	0,  // [0:71] is the sub-list for field type_name
+	18, // 7: speechkit.stt.v3.SpeechAnalysisOptions.speaker_options:type_name -> speechkit.stt.v3.SpeakerAnalysisOptions
+	19, // 8: speechkit.stt.v3.SpeechAnalysisOptions.converstation_options:type_name -> speechkit.stt.v3.ConversationAnalysisOptions
+	5,  // 9: speechkit.stt.v3.RawAudio.audio_encoding:type_name -> speechkit.stt.v3.RawAudio.AudioEncoding
+	6,  // 10: speechkit.stt.v3.ContainerAudio.container_audio_type:type_name -> speechkit.stt.v3.ContainerAudio.ContainerAudioType
+	21, // 11: speechkit.stt.v3.AudioFormatOptions.raw_audio:type_name -> speechkit.stt.v3.RawAudio
+	22, // 12: speechkit.stt.v3.AudioFormatOptions.container_audio:type_name -> speechkit.stt.v3.ContainerAudio
+	7,  // 13: speechkit.stt.v3.LanguageRestrictionOptions.restriction_type:type_name -> speechkit.stt.v3.LanguageRestrictionOptions.LanguageRestrictionType
+	61, // 14: speechkit.stt.v3.JsonSchema.schema:type_name -> google.protobuf.Struct
+	25, // 15: speechkit.stt.v3.SummarizationProperty.json_schema:type_name -> speechkit.stt.v3.JsonSchema
+	26, // 16: speechkit.stt.v3.SummarizationOptions.properties:type_name -> speechkit.stt.v3.SummarizationProperty
+	23, // 17: speechkit.stt.v3.RecognitionModelOptions.audio_format:type_name -> speechkit.stt.v3.AudioFormatOptions
+	12, // 18: speechkit.stt.v3.RecognitionModelOptions.text_normalization:type_name -> speechkit.stt.v3.TextNormalizationOptions
+	24, // 19: speechkit.stt.v3.RecognitionModelOptions.language_restriction:type_name -> speechkit.stt.v3.LanguageRestrictionOptions
+	8,  // 20: speechkit.stt.v3.RecognitionModelOptions.audio_processing_type:type_name -> speechkit.stt.v3.RecognitionModelOptions.AudioProcessingType
+	9,  // 21: speechkit.stt.v3.SpeakerLabelingOptions.speaker_labeling:type_name -> speechkit.stt.v3.SpeakerLabelingOptions.SpeakerLabeling
+	29, // 22: speechkit.stt.v3.StreamingOptions.recognition_model:type_name -> speechkit.stt.v3.RecognitionModelOptions
+	15, // 23: speechkit.stt.v3.StreamingOptions.eou_classifier:type_name -> speechkit.stt.v3.EouClassifierOptions
+	17, // 24: speechkit.stt.v3.StreamingOptions.recognition_classifier:type_name -> speechkit.stt.v3.RecognitionClassifierOptions
+	20, // 25: speechkit.stt.v3.StreamingOptions.speech_analysis:type_name -> speechkit.stt.v3.SpeechAnalysisOptions
+	30, // 26: speechkit.stt.v3.StreamingOptions.speaker_labeling:type_name -> speechkit.stt.v3.SpeakerLabelingOptions
+	27, // 27: speechkit.stt.v3.StreamingOptions.summarization:type_name -> speechkit.stt.v3.SummarizationOptions
+	31, // 28: speechkit.stt.v3.StreamingRequest.session_options:type_name -> speechkit.stt.v3.StreamingOptions
+	32, // 29: speechkit.stt.v3.StreamingRequest.chunk:type_name -> speechkit.stt.v3.AudioChunk
+	33, // 30: speechkit.stt.v3.StreamingRequest.silence_chunk:type_name -> speechkit.stt.v3.SilenceChunk
+	34, // 31: speechkit.stt.v3.StreamingRequest.eou:type_name -> speechkit.stt.v3.Eou
+	29, // 32: speechkit.stt.v3.RecognizeFileRequest.recognition_model:type_name -> speechkit.stt.v3.RecognitionModelOptions
+	17, // 33: speechkit.stt.v3.RecognizeFileRequest.recognition_classifier:type_name -> speechkit.stt.v3.RecognitionClassifierOptions
+	20, // 34: speechkit.stt.v3.RecognizeFileRequest.speech_analysis:type_name -> speechkit.stt.v3.SpeechAnalysisOptions
+	30, // 35: speechkit.stt.v3.RecognizeFileRequest.speaker_labeling:type_name -> speechkit.stt.v3.SpeakerLabelingOptions
+	27, // 36: speechkit.stt.v3.RecognizeFileRequest.summarization:type_name -> speechkit.stt.v3.SummarizationOptions
+	37, // 37: speechkit.stt.v3.Alternative.words:type_name -> speechkit.stt.v3.Word
+	38, // 38: speechkit.stt.v3.Alternative.languages:type_name -> speechkit.stt.v3.LanguageEstimation
+	39, // 39: speechkit.stt.v3.AlternativeUpdate.alternatives:type_name -> speechkit.stt.v3.Alternative
+	41, // 40: speechkit.stt.v3.FinalRefinement.normalized_text:type_name -> speechkit.stt.v3.AlternativeUpdate
+	0,  // 41: speechkit.stt.v3.StatusCode.code_type:type_name -> speechkit.stt.v3.CodeType
+	46, // 42: speechkit.stt.v3.RecognitionClassifierResult.highlights:type_name -> speechkit.stt.v3.PhraseHighlight
+	47, // 43: speechkit.stt.v3.RecognitionClassifierResult.labels:type_name -> speechkit.stt.v3.RecognitionClassifierLabel
+	10, // 44: speechkit.stt.v3.RecognitionClassifierUpdate.window_type:type_name -> speechkit.stt.v3.RecognitionClassifierUpdate.WindowType
+	48, // 45: speechkit.stt.v3.RecognitionClassifierUpdate.classifier_result:type_name -> speechkit.stt.v3.RecognitionClassifierResult
+	59, // 46: speechkit.stt.v3.DescriptiveStatistics.quantiles:type_name -> speechkit.stt.v3.DescriptiveStatistics.Quantile
+	11, // 47: speechkit.stt.v3.SpeakerAnalysis.window_type:type_name -> speechkit.stt.v3.SpeakerAnalysis.WindowType
+	51, // 48: speechkit.stt.v3.SpeakerAnalysis.speech_boundaries:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
+	50, // 49: speechkit.stt.v3.SpeakerAnalysis.words_per_second:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	50, // 50: speechkit.stt.v3.SpeakerAnalysis.letters_per_second:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	50, // 51: speechkit.stt.v3.SpeakerAnalysis.words_per_utterance:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	50, // 52: speechkit.stt.v3.SpeakerAnalysis.letters_per_utterance:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	50, // 53: speechkit.stt.v3.SpeakerAnalysis.utterance_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	51, // 54: speechkit.stt.v3.ConversationAnalysis.conversation_boundaries:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
+	50, // 55: speechkit.stt.v3.ConversationAnalysis.simultaneous_silence_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	50, // 56: speechkit.stt.v3.ConversationAnalysis.simultaneous_speech_duration_estimation:type_name -> speechkit.stt.v3.DescriptiveStatistics
+	60, // 57: speechkit.stt.v3.ConversationAnalysis.speaker_interrupts:type_name -> speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation
+	28, // 58: speechkit.stt.v3.Summarization.results:type_name -> speechkit.stt.v3.SummarizationPropertyResult
+	54, // 59: speechkit.stt.v3.Summarization.content_usage:type_name -> speechkit.stt.v3.ContentUsage
+	45, // 60: speechkit.stt.v3.StreamingResponse.session_uuid:type_name -> speechkit.stt.v3.SessionUuid
+	42, // 61: speechkit.stt.v3.StreamingResponse.audio_cursors:type_name -> speechkit.stt.v3.AudioCursors
+	41, // 62: speechkit.stt.v3.StreamingResponse.partial:type_name -> speechkit.stt.v3.AlternativeUpdate
+	41, // 63: speechkit.stt.v3.StreamingResponse.final:type_name -> speechkit.stt.v3.AlternativeUpdate
+	40, // 64: speechkit.stt.v3.StreamingResponse.eou_update:type_name -> speechkit.stt.v3.EouUpdate
+	43, // 65: speechkit.stt.v3.StreamingResponse.final_refinement:type_name -> speechkit.stt.v3.FinalRefinement
+	44, // 66: speechkit.stt.v3.StreamingResponse.status_code:type_name -> speechkit.stt.v3.StatusCode
+	49, // 67: speechkit.stt.v3.StreamingResponse.classifier_update:type_name -> speechkit.stt.v3.RecognitionClassifierUpdate
+	52, // 68: speechkit.stt.v3.StreamingResponse.speaker_analysis:type_name -> speechkit.stt.v3.SpeakerAnalysis
+	53, // 69: speechkit.stt.v3.StreamingResponse.conversation_analysis:type_name -> speechkit.stt.v3.ConversationAnalysis
+	55, // 70: speechkit.stt.v3.StreamingResponse.summarization:type_name -> speechkit.stt.v3.Summarization
+	56, // 71: speechkit.stt.v3.StreamingResponseList.streaming_responses:type_name -> speechkit.stt.v3.StreamingResponse
+	51, // 72: speechkit.stt.v3.ConversationAnalysis.InterruptsEvaluation.interrupts:type_name -> speechkit.stt.v3.AudioSegmentBoundaries
+	73, // [73:73] is the sub-list for method output_type
+	73, // [73:73] is the sub-list for method input_type
+	73, // [73:73] is the sub-list for extension type_name
+	73, // [73:73] is the sub-list for extension extendee
+	0,  // [0:73] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_stt_v3_stt_proto_init() }
@@ -4476,28 +4609,28 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_init() {
 		(*EouClassifierOptions_DefaultClassifier)(nil),
 		(*EouClassifierOptions_ExternalClassifier)(nil),
 	}
-	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[9].OneofWrappers = []any{
+	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[11].OneofWrappers = []any{
 		(*AudioFormatOptions_RawAudio)(nil),
 		(*AudioFormatOptions_ContainerAudio)(nil),
 	}
-	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[12].OneofWrappers = []any{
+	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[14].OneofWrappers = []any{
 		(*SummarizationProperty_JsonObject)(nil),
 		(*SummarizationProperty_JsonSchema)(nil),
 	}
-	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[21].OneofWrappers = []any{
+	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[23].OneofWrappers = []any{
 		(*StreamingRequest_SessionOptions)(nil),
 		(*StreamingRequest_Chunk)(nil),
 		(*StreamingRequest_SilenceChunk)(nil),
 		(*StreamingRequest_Eou)(nil),
 	}
-	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[22].OneofWrappers = []any{
+	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[24].OneofWrappers = []any{
 		(*RecognizeFileRequest_Content)(nil),
 		(*RecognizeFileRequest_Uri)(nil),
 	}
-	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[29].OneofWrappers = []any{
+	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[31].OneofWrappers = []any{
 		(*FinalRefinement_NormalizedText)(nil),
 	}
-	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[42].OneofWrappers = []any{
+	file_yandex_cloud_ai_stt_v3_stt_proto_msgTypes[44].OneofWrappers = []any{
 		(*StreamingResponse_Partial)(nil),
 		(*StreamingResponse_Final)(nil),
 		(*StreamingResponse_EouUpdate)(nil),
@@ -4514,7 +4647,7 @@ func file_yandex_cloud_ai_stt_v3_stt_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ai_stt_v3_stt_proto_rawDesc), len(file_yandex_cloud_ai_stt_v3_stt_proto_rawDesc)),
 			NumEnums:      12,
-			NumMessages:   47,
+			NumMessages:   49,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

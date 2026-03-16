@@ -2666,40 +2666,40 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\faws_endpoint\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\vawsEndpoint\x12#\n" +
 	"\n" +
 	"aws_region\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\tawsRegionB\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xa8\x03\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xa9\x03\n" +
 	"\rHiveConnector\x12D\n" +
 	"\tmetastore\x18\x01 \x01(\v2 .yandex.cloud.trino.v1.MetastoreB\x04\xe8\xc71\x01R\tmetastore\x12G\n" +
 	"\n" +
 	"filesystem\x18\x02 \x01(\v2!.yandex.cloud.trino.v1.FileSystemB\x04\xe8\xc71\x01R\n" +
-	"filesystem\x12\xbe\x01\n" +
-	"\x15additional_properties\x18\x03 \x03(\v2>.yandex.cloud.trino.v1.HiveConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"filesystem\x12\xbf\x01\n" +
+	"\x15additional_properties\x18\x03 \x03(\v2>.yandex.cloud.trino.v1.HiveConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xae\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xaf\x03\n" +
 	"\x10IcebergConnector\x12D\n" +
 	"\tmetastore\x18\x01 \x01(\v2 .yandex.cloud.trino.v1.MetastoreB\x04\xe8\xc71\x01R\tmetastore\x12G\n" +
 	"\n" +
 	"filesystem\x18\x02 \x01(\v2!.yandex.cloud.trino.v1.FileSystemB\x04\xe8\xc71\x01R\n" +
-	"filesystem\x12\xc1\x01\n" +
-	"\x15additional_properties\x18\x03 \x03(\v2A.yandex.cloud.trino.v1.IcebergConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"filesystem\x12\xc2\x01\n" +
+	"\x15additional_properties\x18\x03 \x03(\v2A.yandex.cloud.trino.v1.IcebergConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb2\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb3\x03\n" +
 	"\x12DeltaLakeConnector\x12D\n" +
 	"\tmetastore\x18\x01 \x01(\v2 .yandex.cloud.trino.v1.MetastoreB\x04\xe8\xc71\x01R\tmetastore\x12G\n" +
 	"\n" +
 	"filesystem\x18\x02 \x01(\v2!.yandex.cloud.trino.v1.FileSystemB\x04\xe8\xc71\x01R\n" +
-	"filesystem\x12\xc3\x01\n" +
-	"\x15additional_properties\x18\x03 \x03(\v2C.yandex.cloud.trino.v1.DeltaLakeConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"filesystem\x12\xc4\x01\n" +
+	"\x15additional_properties\x18\x03 \x03(\v2C.yandex.cloud.trino.v1.DeltaLakeConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa8\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa9\x03\n" +
 	"\rHudiConnector\x12D\n" +
 	"\tmetastore\x18\x01 \x01(\v2 .yandex.cloud.trino.v1.MetastoreB\x04\xe8\xc71\x01R\tmetastore\x12G\n" +
 	"\n" +
 	"filesystem\x18\x02 \x01(\v2!.yandex.cloud.trino.v1.FileSystemB\x04\xe8\xc71\x01R\n" +
-	"filesystem\x12\xbe\x01\n" +
-	"\x15additional_properties\x18\x03 \x03(\v2>.yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"filesystem\x12\xbf\x01\n" +
+	"\x15additional_properties\x18\x03 \x03(\v2>.yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd7\x06\n" +
@@ -2718,12 +2718,12 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x19ConnectionPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xf2\x02\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xf3\x02\n" +
 	"\x13PostgresqlConnector\x12K\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v2+.yandex.cloud.trino.v1.PostgresqlConnectionR\n" +
-	"connection\x12\xc4\x01\n" +
-	"\x15additional_properties\x18\x02 \x03(\v2D.yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"connection\x12\xc5\x01\n" +
+	"\x15additional_properties\x18\x02 \x03(\v2D.yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd8\x06\n" +
@@ -2743,22 +2743,22 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x19ConnectionPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xf2\x02\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xf3\x02\n" +
 	"\x13ClickhouseConnector\x12K\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v2+.yandex.cloud.trino.v1.ClickhouseConnectionR\n" +
-	"connection\x12\xc4\x01\n" +
-	"\x15additional_properties\x18\x02 \x03(\v2D.yandex.cloud.trino.v1.ClickhouseConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"connection\x12\xc5\x01\n" +
+	"\x15additional_properties\x18\x02 \x03(\v2D.yandex.cloud.trino.v1.ClickhouseConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x99\x02\n" +
-	"\rTPCHConnector\x12\xbe\x01\n" +
-	"\x15additional_properties\x18\x01 \x03(\v2>.yandex.cloud.trino.v1.TPCHConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9a\x02\n" +
+	"\rTPCHConnector\x12\xbf\x01\n" +
+	"\x15additional_properties\x18\x01 \x03(\v2>.yandex.cloud.trino.v1.TPCHConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9b\x02\n" +
-	"\x0eTPCDSConnector\x12\xbf\x01\n" +
-	"\x15additional_properties\x18\x01 \x03(\v2?.yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9c\x02\n" +
+	"\x0eTPCDSConnector\x12\xc0\x01\n" +
+	"\x15additional_properties\x18\x01 \x03(\v2?.yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb0\x02\n" +
@@ -2769,12 +2769,12 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x0econnection_url\x18\x01 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\x15^jdbc:oracle:(?s:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpasswordB\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xe6\x02\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xe7\x02\n" +
 	"\x0fOracleConnector\x12G\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v2'.yandex.cloud.trino.v1.OracleConnectionR\n" +
-	"connection\x12\xc0\x01\n" +
-	"\x15additional_properties\x18\x02 \x03(\v2@.yandex.cloud.trino.v1.OracleConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"connection\x12\xc1\x01\n" +
+	"\x15additional_properties\x18\x02 \x03(\v2@.yandex.cloud.trino.v1.OracleConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb9\x02\n" +
@@ -2785,12 +2785,12 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x0econnection_url\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x18^jdbc:sqlserver:(?s:.*)$R\rconnectionUrl\x12;\n" +
 	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12)\n" +
 	"\bpassword\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x050-128R\bpasswordB\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xef\x02\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xf0\x02\n" +
 	"\x12SQLServerConnector\x12J\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v2*.yandex.cloud.trino.v1.SQLServerConnectionR\n" +
-	"connection\x12\xc3\x01\n" +
-	"\x15additional_properties\x18\x02 \x03(\v2C.yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"connection\x12\xc4\x01\n" +
+	"\x15additional_properties\x18\x02 \x03(\v2C.yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x06\n" +
@@ -2809,12 +2809,12 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x19ConnectionPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xe3\x02\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xe4\x02\n" +
 	"\x0eMysqlConnector\x12F\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v2&.yandex.cloud.trino.v1.MysqlConnectionR\n" +
-	"connection\x12\xbf\x01\n" +
-	"\x15additional_properties\x18\x02 \x03(\v2?.yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"connection\x12\xc0\x01\n" +
+	"\x15additional_properties\x18\x02 \x03(\v2?.yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x06\n" +
@@ -2833,12 +2833,12 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x19ConnectionPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xef\x02\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xf0\x02\n" +
 	"\x12GreenplumConnector\x12J\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v2*.yandex.cloud.trino.v1.GreenplumConnectionR\n" +
-	"connection\x12\xc3\x01\n" +
-	"\x15additional_properties\x18\x02 \x03(\v2C.yandex.cloud.trino.v1.GreenplumConnector.AdditionalPropertiesEntryBI\xf2\xc71\x15[-_0-9a-zA-Z.,:\\/_ ]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
+	"connection\x12\xc4\x01\n" +
+	"\x15additional_properties\x18\x02 \x03(\v2C.yandex.cloud.trino.v1.GreenplumConnector.AdditionalPropertiesEntryBJ\xf2\xc71\x16[-_0-9a-zA-Z.,:\\/_ *]*\x82\xc81\x05<=256\x8a\xc81\x05<=128\xb2\xc81\x1a\x12\x11[a-z][-_0-9a-z.]*\x1a\x051-128R\x14additionalProperties\x1aG\n" +
 	"\x19AdditionalPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\\\n" +
