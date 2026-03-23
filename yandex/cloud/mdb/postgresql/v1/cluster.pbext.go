@@ -103,45 +103,15 @@ func (m *ClusterConfig) SetVersion(v string) {
 	m.Version = v
 }
 
-func (m *ClusterConfig) SetPostgresqlConfig_9_6(v *config.PostgresqlConfigSet9_6) {
-	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_9_6{
-		PostgresqlConfig_9_6: v,
-	}
-}
-
-func (m *ClusterConfig) SetPostgresqlConfig_10_1C(v *config.PostgresqlConfigSet10_1C) {
-	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_10_1C{
-		PostgresqlConfig_10_1C: v,
-	}
-}
-
-func (m *ClusterConfig) SetPostgresqlConfig_10(v *config.PostgresqlConfigSet10) {
-	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_10{
-		PostgresqlConfig_10: v,
-	}
-}
-
 func (m *ClusterConfig) SetPostgresqlConfig_11(v *config.PostgresqlConfigSet11) {
 	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_11{
 		PostgresqlConfig_11: v,
 	}
 }
 
-func (m *ClusterConfig) SetPostgresqlConfig_11_1C(v *config.PostgresqlConfigSet11_1C) {
-	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_11_1C{
-		PostgresqlConfig_11_1C: v,
-	}
-}
-
 func (m *ClusterConfig) SetPostgresqlConfig_12(v *config.PostgresqlConfigSet12) {
 	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_12{
 		PostgresqlConfig_12: v,
-	}
-}
-
-func (m *ClusterConfig) SetPostgresqlConfig_12_1C(v *config.PostgresqlConfigSet12_1C) {
-	m.PostgresqlConfig = &ClusterConfig_PostgresqlConfig_12_1C{
-		PostgresqlConfig_12_1C: v,
 	}
 }
 
@@ -319,45 +289,15 @@ func (m *HostConfig) SetPostgresqlConfig(v HostConfig_PostgresqlConfig) {
 	m.PostgresqlConfig = v
 }
 
-func (m *HostConfig) SetPostgresqlConfig_9_6(v *config.PostgresqlHostConfig9_6) {
-	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_9_6{
-		PostgresqlConfig_9_6: v,
-	}
-}
-
-func (m *HostConfig) SetPostgresqlConfig_10_1C(v *config.PostgresqlHostConfig10_1C) {
-	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_10_1C{
-		PostgresqlConfig_10_1C: v,
-	}
-}
-
-func (m *HostConfig) SetPostgresqlConfig_10(v *config.PostgresqlHostConfig10) {
-	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_10{
-		PostgresqlConfig_10: v,
-	}
-}
-
 func (m *HostConfig) SetPostgresqlConfig_11(v *config.PostgresqlHostConfig11) {
 	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_11{
 		PostgresqlConfig_11: v,
 	}
 }
 
-func (m *HostConfig) SetPostgresqlConfig_11_1C(v *config.PostgresqlHostConfig11_1C) {
-	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_11_1C{
-		PostgresqlConfig_11_1C: v,
-	}
-}
-
 func (m *HostConfig) SetPostgresqlConfig_12(v *config.PostgresqlHostConfig12) {
 	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_12{
 		PostgresqlConfig_12: v,
-	}
-}
-
-func (m *HostConfig) SetPostgresqlConfig_12_1C(v *config.PostgresqlHostConfig12_1C) {
-	m.PostgresqlConfig = &HostConfig_PostgresqlConfig_12_1C{
-		PostgresqlConfig_12_1C: v,
 	}
 }
 

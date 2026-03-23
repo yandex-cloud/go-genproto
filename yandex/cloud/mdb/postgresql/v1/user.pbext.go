@@ -157,3 +157,7 @@ func (m *UserSettings) SetStatementTimeout(v *wrapperspb.Int64Value) {
 func (m *UserSettings) SetPgaudit(v *PGAuditSettings) {
 	m.Pgaudit = v
 }
+
+func (m *UserSettings) SetIdleSessionTimeout(v *wrapperspb.Int64Value) {
+	m.IdleSessionTimeout = v
+}

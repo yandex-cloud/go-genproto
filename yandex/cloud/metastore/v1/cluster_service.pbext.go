@@ -215,8 +215,16 @@ func (m *ConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *ConfigSpec) SetWarehouse(v *WarehouseConfig) {
+	m.Warehouse = v
+}
+
 func (m *UpdateClusterConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
+}
+
+func (m *UpdateClusterConfigSpec) SetWarehouse(v *WarehouseConfig) {
+	m.Warehouse = v
 }
 
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {

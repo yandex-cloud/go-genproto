@@ -406,6 +406,18 @@ func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineH
 	m.LineHidingInChart = v
 }
 
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInLegend(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
+	m.LineVisibilityInLegend = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInTooltip(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
+	m.LineVisibilityInTooltip = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInChart(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
+	m.LineVisibilityInChart = v
+}
+
 type MultiSourceChartWidget_OverrideMatcher_Type = isMultiSourceChartWidget_OverrideMatcher_Type
 
 func (m *MultiSourceChartWidget_OverrideMatcher) SetType(v MultiSourceChartWidget_OverrideMatcher_Type) {

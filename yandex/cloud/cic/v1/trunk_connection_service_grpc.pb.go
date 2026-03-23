@@ -20,13 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TrunkConnectionService_Get_FullMethodName            = "/yandex.cloud.cic.v1.TrunkConnectionService/Get"
-	TrunkConnectionService_List_FullMethodName           = "/yandex.cloud.cic.v1.TrunkConnectionService/List"
-	TrunkConnectionService_Create_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/Create"
-	TrunkConnectionService_Update_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/Update"
-	TrunkConnectionService_Delete_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/Delete"
-	TrunkConnectionService_Move_FullMethodName           = "/yandex.cloud.cic.v1.TrunkConnectionService/Move"
-	TrunkConnectionService_ListOperations_FullMethodName = "/yandex.cloud.cic.v1.TrunkConnectionService/ListOperations"
+	TrunkConnectionService_Get_FullMethodName                    = "/yandex.cloud.cic.v1.TrunkConnectionService/Get"
+	TrunkConnectionService_List_FullMethodName                   = "/yandex.cloud.cic.v1.TrunkConnectionService/List"
+	TrunkConnectionService_Create_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Create"
+	TrunkConnectionService_Update_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Update"
+	TrunkConnectionService_Delete_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Delete"
+	TrunkConnectionService_Move_FullMethodName                   = "/yandex.cloud.cic.v1.TrunkConnectionService/Move"
+	TrunkConnectionService_ListPrivateConnections_FullMethodName = "/yandex.cloud.cic.v1.TrunkConnectionService/ListPrivateConnections"
+	TrunkConnectionService_ListPublicConnections_FullMethodName  = "/yandex.cloud.cic.v1.TrunkConnectionService/ListPublicConnections"
+	TrunkConnectionService_ListOperations_FullMethodName         = "/yandex.cloud.cic.v1.TrunkConnectionService/ListOperations"
 )
 
 // TrunkConnectionServiceClient is the client API for TrunkConnectionService service.
@@ -52,6 +54,10 @@ type TrunkConnectionServiceClient interface {
 	Delete(ctx context.Context, in *DeleteTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves the specified TrunkConnection to another folder.
 	Move(ctx context.Context, in *MoveTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves the list of PrivateConnection resources associated with the specified TrunkConnection.
+	ListPrivateConnections(ctx context.Context, in *ListTrunkConnectionPrivateConnectionsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionPrivateConnectionsResponse, error)
+	// Retrieves the list of PublicConnection resources associated with the specified TrunkConnection.
+	ListPublicConnections(ctx context.Context, in *ListTrunkConnectionPublicConnectionsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionPublicConnectionsResponse, error)
 	// Lists operations for the specified TrunkConnection.
 	ListOperations(ctx context.Context, in *ListTrunkConnectionOperationsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionOperationsResponse, error)
 }
@@ -124,6 +130,26 @@ func (c *trunkConnectionServiceClient) Move(ctx context.Context, in *MoveTrunkCo
 	return out, nil
 }
 
+func (c *trunkConnectionServiceClient) ListPrivateConnections(ctx context.Context, in *ListTrunkConnectionPrivateConnectionsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionPrivateConnectionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTrunkConnectionPrivateConnectionsResponse)
+	err := c.cc.Invoke(ctx, TrunkConnectionService_ListPrivateConnections_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *trunkConnectionServiceClient) ListPublicConnections(ctx context.Context, in *ListTrunkConnectionPublicConnectionsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionPublicConnectionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTrunkConnectionPublicConnectionsResponse)
+	err := c.cc.Invoke(ctx, TrunkConnectionService_ListPublicConnections_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *trunkConnectionServiceClient) ListOperations(ctx context.Context, in *ListTrunkConnectionOperationsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTrunkConnectionOperationsResponse)
@@ -157,6 +183,10 @@ type TrunkConnectionServiceServer interface {
 	Delete(context.Context, *DeleteTrunkConnectionRequest) (*operation.Operation, error)
 	// Moves the specified TrunkConnection to another folder.
 	Move(context.Context, *MoveTrunkConnectionRequest) (*operation.Operation, error)
+	// Retrieves the list of PrivateConnection resources associated with the specified TrunkConnection.
+	ListPrivateConnections(context.Context, *ListTrunkConnectionPrivateConnectionsRequest) (*ListTrunkConnectionPrivateConnectionsResponse, error)
+	// Retrieves the list of PublicConnection resources associated with the specified TrunkConnection.
+	ListPublicConnections(context.Context, *ListTrunkConnectionPublicConnectionsRequest) (*ListTrunkConnectionPublicConnectionsResponse, error)
 	// Lists operations for the specified TrunkConnection.
 	ListOperations(context.Context, *ListTrunkConnectionOperationsRequest) (*ListTrunkConnectionOperationsResponse, error)
 }
@@ -185,6 +215,12 @@ func (UnimplementedTrunkConnectionServiceServer) Delete(context.Context, *Delete
 }
 func (UnimplementedTrunkConnectionServiceServer) Move(context.Context, *MoveTrunkConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedTrunkConnectionServiceServer) ListPrivateConnections(context.Context, *ListTrunkConnectionPrivateConnectionsRequest) (*ListTrunkConnectionPrivateConnectionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPrivateConnections not implemented")
+}
+func (UnimplementedTrunkConnectionServiceServer) ListPublicConnections(context.Context, *ListTrunkConnectionPublicConnectionsRequest) (*ListTrunkConnectionPublicConnectionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPublicConnections not implemented")
 }
 func (UnimplementedTrunkConnectionServiceServer) ListOperations(context.Context, *ListTrunkConnectionOperationsRequest) (*ListTrunkConnectionOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
@@ -317,6 +353,42 @@ func _TrunkConnectionService_Move_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TrunkConnectionService_ListPrivateConnections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTrunkConnectionPrivateConnectionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TrunkConnectionServiceServer).ListPrivateConnections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TrunkConnectionService_ListPrivateConnections_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TrunkConnectionServiceServer).ListPrivateConnections(ctx, req.(*ListTrunkConnectionPrivateConnectionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TrunkConnectionService_ListPublicConnections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTrunkConnectionPublicConnectionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TrunkConnectionServiceServer).ListPublicConnections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TrunkConnectionService_ListPublicConnections_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TrunkConnectionServiceServer).ListPublicConnections(ctx, req.(*ListTrunkConnectionPublicConnectionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TrunkConnectionService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTrunkConnectionOperationsRequest)
 	if err := dec(in); err != nil {
@@ -365,6 +437,14 @@ var TrunkConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _TrunkConnectionService_Move_Handler,
+		},
+		{
+			MethodName: "ListPrivateConnections",
+			Handler:    _TrunkConnectionService_ListPrivateConnections_Handler,
+		},
+		{
+			MethodName: "ListPublicConnections",
+			Handler:    _TrunkConnectionService_ListPublicConnections_Handler,
 		},
 		{
 			MethodName: "ListOperations",

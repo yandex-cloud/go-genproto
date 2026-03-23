@@ -25,10 +25,16 @@ const (
 
 // Message to describe a crontab schedule.
 type CronTab struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DayOfMonth    string                 `protobuf:"bytes,3,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"`
-	Month         string                 `protobuf:"bytes,4,opt,name=month,proto3" json:"month,omitempty"`
-	DayOfWeek     string                 `protobuf:"bytes,5,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Day of month in cron format. Valid values: 1-31, *, ranges (1-15), steps (*/2, 1-15/3), lists (1,15,28).
+	// Defaults to "*".
+	DayOfMonth string `protobuf:"bytes,3,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"`
+	// Month in cron format. Valid values: 1-12, *, ranges (1-6), steps (*/3), lists (1,6,12).
+	// Defaults to "*".
+	Month string `protobuf:"bytes,4,opt,name=month,proto3" json:"month,omitempty"`
+	// Day of week in cron format. Valid values: 0-7 (0 and 7 both mean Sunday), *, ranges (1-5), steps (0-6/2), lists (1,3,5).
+	// Defaults to "*".
+	DayOfWeek     string `protobuf:"bytes,5,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

@@ -173,6 +173,54 @@ func (m *MoveTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
 
+func (m *ListTrunkConnectionPrivateConnectionsRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *ListTrunkConnectionPrivateConnectionsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListTrunkConnectionPrivateConnectionsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListTrunkConnectionPrivateConnectionsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListTrunkConnectionPrivateConnectionsResponse) SetPrivateConnections(v []*PrivateConnection) {
+	m.PrivateConnections = v
+}
+
+func (m *ListTrunkConnectionPrivateConnectionsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *ListTrunkConnectionPublicConnectionsRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *ListTrunkConnectionPublicConnectionsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListTrunkConnectionPublicConnectionsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListTrunkConnectionPublicConnectionsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListTrunkConnectionPublicConnectionsResponse) SetPublicConnections(v []*PublicConnection) {
+	m.PublicConnections = v
+}
+
+func (m *ListTrunkConnectionPublicConnectionsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
 func (m *ListTrunkConnectionOperationsRequest) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }

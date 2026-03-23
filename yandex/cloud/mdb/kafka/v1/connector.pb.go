@@ -1270,7 +1270,7 @@ func (*UpdateConnectorConfigIcebergSinkSpec_TopicsRegex) isUpdateConnectorConfig
 type StaticTablesSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of tables, separated by ','.
-	Tables        []string `protobuf:"bytes,1,rep,name=tables,proto3" json:"tables,omitempty"`
+	Tables        string `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1305,11 +1305,11 @@ func (*StaticTablesSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *StaticTablesSpec) GetTables() []string {
+func (x *StaticTablesSpec) GetTables() string {
 	if x != nil {
 		return x.Tables
 	}
-	return nil
+	return ""
 }
 
 type DynamicTablesSpec struct {
@@ -3131,7 +3131,7 @@ const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\x0econtrol_config\x18\x06 \x01(\v2-.yandex.cloud.mdb.kafka.v1.IcebergControlSpecR\rcontrolConfigB\x0f\n" +
 	"\rtopics_source\"*\n" +
 	"\x10StaticTablesSpec\x12\x16\n" +
-	"\x06tables\x18\x01 \x03(\tR\x06tables\"4\n" +
+	"\x06tables\x18\x01 \x01(\tR\x06tables\"4\n" +
 	"\x11DynamicTablesSpec\x12\x1f\n" +
 	"\vroute_field\x18\x01 \x01(\tR\n" +
 	"routeField\"X\n" +

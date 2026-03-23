@@ -967,9 +967,11 @@ type UserSettings struct {
 	// For more information, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-client.html).
 	StatementTimeout *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=statement_timeout,json=statementTimeout,proto3" json:"statement_timeout,omitempty"`
 	// Settings of the [PostgreSQL Audit Extension](https://www.pgaudit.org/) (pgaudit).
-	Pgaudit       *PGAuditSettings `protobuf:"bytes,13,opt,name=pgaudit,proto3" json:"pgaudit,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Pgaudit *PGAuditSettings `protobuf:"bytes,13,opt,name=pgaudit,proto3" json:"pgaudit,omitempty"`
+	// in milliseconds; can be set only for PostgreSQL 14+
+	IdleSessionTimeout *wrapperspb.Int64Value `protobuf:"bytes,14,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UserSettings) Reset() {
@@ -1093,6 +1095,13 @@ func (x *UserSettings) GetPgaudit() *PGAuditSettings {
 	return nil
 }
 
+func (x *UserSettings) GetIdleSessionTimeout() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.IdleSessionTimeout
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_postgresql_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
@@ -1144,7 +1153,7 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\x1aPG_AUDIT_SETTINGS_LOG_ROLE\x10\x04\x12\x1d\n" +
 	"\x19PG_AUDIT_SETTINGS_LOG_DDL\x10\x05\x12\x1e\n" +
 	"\x1aPG_AUDIT_SETTINGS_LOG_MISC\x10\x06\x12\"\n" +
-	"\x1ePG_AUDIT_SETTINGS_LOG_MISC_SET\x10\a\"\xc3\x0e\n" +
+	"\x1ePG_AUDIT_SETTINGS_LOG_MISC_SET\x10\a\"\xa4\x0f\n" +
 	"\fUserSettings\x12\x85\x01\n" +
 	"\x1ddefault_transaction_isolation\x18\x01 \x01(\x0e2A.yandex.cloud.mdb.postgresql.v1.UserSettings.TransactionIsolationR\x1bdefaultTransactionIsolation\x12>\n" +
 	"\flock_timeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\vlockTimeout\x12X\n" +
@@ -1159,7 +1168,8 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x10walSenderTimeout\x12{\n" +
 	"#idle_in_transaction_session_timeout\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x1fidleInTransactionSessionTimeout\x12H\n" +
 	"\x11statement_timeout\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\x10statementTimeout\x12I\n" +
-	"\apgaudit\x18\r \x01(\v2/.yandex.cloud.mdb.postgresql.v1.PGAuditSettingsR\apgaudit\"\xd6\x01\n" +
+	"\apgaudit\x18\r \x01(\v2/.yandex.cloud.mdb.postgresql.v1.PGAuditSettingsR\apgaudit\x12_\n" +
+	"\x14idle_session_timeout\x18\x0e \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\xd6\x01\n" +
 	"\x11SynchronousCommit\x12\"\n" +
 	"\x1eSYNCHRONOUS_COMMIT_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15SYNCHRONOUS_COMMIT_ON\x10\x01\x12\x1a\n" +
@@ -1256,11 +1266,12 @@ var file_yandex_cloud_mdb_postgresql_v1_user_proto_depIdxs = []int32{
 	14, // 26: yandex.cloud.mdb.postgresql.v1.UserSettings.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
 	14, // 27: yandex.cloud.mdb.postgresql.v1.UserSettings.statement_timeout:type_name -> google.protobuf.Int64Value
 	11, // 28: yandex.cloud.mdb.postgresql.v1.UserSettings.pgaudit:type_name -> yandex.cloud.mdb.postgresql.v1.PGAuditSettings
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	14, // 29: yandex.cloud.mdb.postgresql.v1.UserSettings.idle_session_timeout:type_name -> google.protobuf.Int64Value
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_user_proto_init() }

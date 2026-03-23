@@ -36,9 +36,12 @@ const (
 	// Only Message Queue is currently supported.
 	TriggerType_MESSAGE_QUEUE TriggerType = 3
 	// The trigger is activated by messages from IoT Core.
-	TriggerType_IOT_MESSAGE        TriggerType = 4
+	TriggerType_IOT_MESSAGE TriggerType = 4
+	// The trigger is activated by messages from IoT Core broker.
 	TriggerType_IOT_BROKER_MESSAGE TriggerType = 12
-	TriggerType_OBJECT_STORAGE     TriggerType = 5
+	// The trigger is activated by Object Storage events.
+	TriggerType_OBJECT_STORAGE TriggerType = 5
+	// The trigger is activated by Container Registry events.
 	TriggerType_CONTAINER_REGISTRY TriggerType = 6
 	// The trigger is activated by cloud log group events
 	TriggerType_CLOUD_LOGS TriggerType = 7
@@ -114,9 +117,12 @@ func (TriggerType) EnumDescriptor() ([]byte, []int) {
 type Trigger_ObjectStorageEventType int32
 
 const (
-	Trigger_OBJECT_STORAGE_EVENT_TYPE_UNSPECIFIED   Trigger_ObjectStorageEventType = 0
+	Trigger_OBJECT_STORAGE_EVENT_TYPE_UNSPECIFIED Trigger_ObjectStorageEventType = 0
+	// An object was created.
 	Trigger_OBJECT_STORAGE_EVENT_TYPE_CREATE_OBJECT Trigger_ObjectStorageEventType = 1
+	// An object was updated.
 	Trigger_OBJECT_STORAGE_EVENT_TYPE_UPDATE_OBJECT Trigger_ObjectStorageEventType = 2
+	// An object was deleted.
 	Trigger_OBJECT_STORAGE_EVENT_TYPE_DELETE_OBJECT Trigger_ObjectStorageEventType = 3
 )
 
@@ -166,10 +172,14 @@ func (Trigger_ObjectStorageEventType) EnumDescriptor() ([]byte, []int) {
 type Trigger_ContainerRegistryEventType int32
 
 const (
-	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_UNSPECIFIED      Trigger_ContainerRegistryEventType = 0
-	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_CREATE_IMAGE     Trigger_ContainerRegistryEventType = 1
-	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_DELETE_IMAGE     Trigger_ContainerRegistryEventType = 2
+	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_UNSPECIFIED Trigger_ContainerRegistryEventType = 0
+	// An image was created.
+	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_CREATE_IMAGE Trigger_ContainerRegistryEventType = 1
+	// An image was deleted.
+	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_DELETE_IMAGE Trigger_ContainerRegistryEventType = 2
+	// An image tag was created.
 	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_CREATE_IMAGE_TAG Trigger_ContainerRegistryEventType = 3
+	// An image tag was deleted.
 	Trigger_CONTAINER_REGISTRY_EVENT_TYPE_DELETE_IMAGE_TAG Trigger_ContainerRegistryEventType = 4
 )
 
@@ -222,8 +232,10 @@ type Trigger_Status int32
 
 const (
 	Trigger_STATUS_UNSPECIFIED Trigger_Status = 0
-	Trigger_ACTIVE             Trigger_Status = 1
-	Trigger_PAUSED             Trigger_Status = 2
+	// The trigger is active and will fire when the triggering event occurs.
+	Trigger_ACTIVE Trigger_Status = 1
+	// The trigger is paused and will not fire when the triggering event occurs.
+	Trigger_PAUSED Trigger_Status = 2
 )
 
 // Enum value maps for Trigger_Status.
@@ -668,11 +680,141 @@ func (x *InvokeContainerWithRetry) GetDeadLetterQueue() *PutQueueMessage {
 	return nil
 }
 
+// A single workflow invocation.
+type StartWorkflowOnce struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the workflow to start.
+	WorkflowId string `protobuf:"bytes,1,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
+	// ID of the service account which has permission to start the workflow.
+	ServiceAccountId string `protobuf:"bytes,2,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *StartWorkflowOnce) Reset() {
+	*x = StartWorkflowOnce{}
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartWorkflowOnce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartWorkflowOnce) ProtoMessage() {}
+
+func (x *StartWorkflowOnce) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartWorkflowOnce.ProtoReflect.Descriptor instead.
+func (*StartWorkflowOnce) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *StartWorkflowOnce) GetWorkflowId() string {
+	if x != nil {
+		return x.WorkflowId
+	}
+	return ""
+}
+
+func (x *StartWorkflowOnce) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+// A workflow invocation with retries.
+type StartWorkflowWithRetry struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the workflow to start.
+	WorkflowId string `protobuf:"bytes,1,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
+	// ID of the service account which has permission to start the workflow.
+	ServiceAccountId string `protobuf:"bytes,2,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Retry policy. If the field is not specified, or the value is empty, no retries will be attempted.
+	RetrySettings *RetrySettings `protobuf:"bytes,3,opt,name=retry_settings,json=retrySettings,proto3" json:"retry_settings,omitempty"`
+	// DLQ policy (no value means discarding a message).
+	DeadLetterQueue *PutQueueMessage `protobuf:"bytes,4,opt,name=dead_letter_queue,json=deadLetterQueue,proto3" json:"dead_letter_queue,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *StartWorkflowWithRetry) Reset() {
+	*x = StartWorkflowWithRetry{}
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartWorkflowWithRetry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartWorkflowWithRetry) ProtoMessage() {}
+
+func (x *StartWorkflowWithRetry) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartWorkflowWithRetry.ProtoReflect.Descriptor instead.
+func (*StartWorkflowWithRetry) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *StartWorkflowWithRetry) GetWorkflowId() string {
+	if x != nil {
+		return x.WorkflowId
+	}
+	return ""
+}
+
+func (x *StartWorkflowWithRetry) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+func (x *StartWorkflowWithRetry) GetRetrySettings() *RetrySettings {
+	if x != nil {
+		return x.RetrySettings
+	}
+	return nil
+}
+
+func (x *StartWorkflowWithRetry) GetDeadLetterQueue() *PutQueueMessage {
+	if x != nil {
+		return x.DeadLetterQueue
+	}
+	return nil
+}
+
 type GatewayWebsocketBroadcast struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	GatewayId string                 `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
-	Path      string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// sa which has permission for writing to websockets
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the API gateway.
+	GatewayId string `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
+	// Path in the OpenAPI specification. Messages will be sent through WebSocket connections established using this path.
+	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	// ID of the service account which has permission for broadcasting to WebSocket connections.
 	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -680,7 +822,7 @@ type GatewayWebsocketBroadcast struct {
 
 func (x *GatewayWebsocketBroadcast) Reset() {
 	*x = GatewayWebsocketBroadcast{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[5]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -692,7 +834,7 @@ func (x *GatewayWebsocketBroadcast) String() string {
 func (*GatewayWebsocketBroadcast) ProtoMessage() {}
 
 func (x *GatewayWebsocketBroadcast) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[5]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -705,7 +847,7 @@ func (x *GatewayWebsocketBroadcast) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GatewayWebsocketBroadcast.ProtoReflect.Descriptor instead.
 func (*GatewayWebsocketBroadcast) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GatewayWebsocketBroadcast) GetGatewayId() string {
@@ -741,7 +883,7 @@ type PutQueueMessage struct {
 
 func (x *PutQueueMessage) Reset() {
 	*x = PutQueueMessage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[6]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -753,7 +895,7 @@ func (x *PutQueueMessage) String() string {
 func (*PutQueueMessage) ProtoMessage() {}
 
 func (x *PutQueueMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[6]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -766,7 +908,7 @@ func (x *PutQueueMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PutQueueMessage.ProtoReflect.Descriptor instead.
 func (*PutQueueMessage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PutQueueMessage) GetQueueId() string {
@@ -798,7 +940,7 @@ type BatchSettings struct {
 
 func (x *BatchSettings) Reset() {
 	*x = BatchSettings{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[7]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -810,7 +952,7 @@ func (x *BatchSettings) String() string {
 func (*BatchSettings) ProtoMessage() {}
 
 func (x *BatchSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[7]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -823,7 +965,7 @@ func (x *BatchSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchSettings.ProtoReflect.Descriptor instead.
 func (*BatchSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BatchSettings) GetSize() int64 {
@@ -854,7 +996,7 @@ type CloudLogsBatchSettings struct {
 
 func (x *CloudLogsBatchSettings) Reset() {
 	*x = CloudLogsBatchSettings{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[8]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -866,7 +1008,7 @@ func (x *CloudLogsBatchSettings) String() string {
 func (*CloudLogsBatchSettings) ProtoMessage() {}
 
 func (x *CloudLogsBatchSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[8]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -879,7 +1021,7 @@ func (x *CloudLogsBatchSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloudLogsBatchSettings.ProtoReflect.Descriptor instead.
 func (*CloudLogsBatchSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CloudLogsBatchSettings) GetSize() int64 {
@@ -910,7 +1052,7 @@ type LoggingBatchSettings struct {
 
 func (x *LoggingBatchSettings) Reset() {
 	*x = LoggingBatchSettings{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[9]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +1064,7 @@ func (x *LoggingBatchSettings) String() string {
 func (*LoggingBatchSettings) ProtoMessage() {}
 
 func (x *LoggingBatchSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[9]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,7 +1077,7 @@ func (x *LoggingBatchSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoggingBatchSettings.ProtoReflect.Descriptor instead.
 func (*LoggingBatchSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *LoggingBatchSettings) GetSize() int64 {
@@ -965,7 +1107,7 @@ type RetrySettings struct {
 
 func (x *RetrySettings) Reset() {
 	*x = RetrySettings{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[10]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -977,7 +1119,7 @@ func (x *RetrySettings) String() string {
 func (*RetrySettings) ProtoMessage() {}
 
 func (x *RetrySettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[10]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -990,7 +1132,7 @@ func (x *RetrySettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetrySettings.ProtoReflect.Descriptor instead.
 func (*RetrySettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RetrySettings) GetRetryAttempts() int64 {
@@ -1008,14 +1150,17 @@ func (x *RetrySettings) GetInterval() *durationpb.Duration {
 }
 
 type BillingBudget struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	BillingAccountId string                 `protobuf:"bytes,1,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
-	BudgetId         string                 `protobuf:"bytes,2,opt,name=budget_id,json=budgetId,proto3" json:"budget_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the billing account.
+	BillingAccountId string `protobuf:"bytes,1,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
+	// ID of the budget.
+	BudgetId string `protobuf:"bytes,2,opt,name=budget_id,json=budgetId,proto3" json:"budget_id,omitempty"`
 	// Types that are valid to be assigned to Action:
 	//
 	//	*BillingBudget_InvokeFunction
 	//	*BillingBudget_InvokeContainer
 	//	*BillingBudget_GatewayWebsocketBroadcast
+	//	*BillingBudget_StartWorkflow
 	Action        isBillingBudget_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1023,7 +1168,7 @@ type BillingBudget struct {
 
 func (x *BillingBudget) Reset() {
 	*x = BillingBudget{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[11]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1035,7 +1180,7 @@ func (x *BillingBudget) String() string {
 func (*BillingBudget) ProtoMessage() {}
 
 func (x *BillingBudget) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[11]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1048,7 +1193,7 @@ func (x *BillingBudget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BillingBudget.ProtoReflect.Descriptor instead.
 func (*BillingBudget) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BillingBudget) GetBillingAccountId() string {
@@ -1099,20 +1244,37 @@ func (x *BillingBudget) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcas
 	return nil
 }
 
+func (x *BillingBudget) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*BillingBudget_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isBillingBudget_Action interface {
 	isBillingBudget_Action()
 }
 
 type BillingBudget_InvokeFunction struct {
+	// Instructions for invoking a function with retries as needed.
 	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
 }
 
 type BillingBudget_InvokeContainer struct {
+	// Instructions for invoking a container with retries as needed.
 	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,103,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
 }
 
 type BillingBudget_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,104,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+type BillingBudget_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,105,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
 }
 
 func (*BillingBudget_InvokeFunction) isBillingBudget_Action() {}
@@ -1120,6 +1282,8 @@ func (*BillingBudget_InvokeFunction) isBillingBudget_Action() {}
 func (*BillingBudget_InvokeContainer) isBillingBudget_Action() {}
 
 func (*BillingBudget_GatewayWebsocketBroadcast) isBillingBudget_Action() {}
+
+func (*BillingBudget_StartWorkflow) isBillingBudget_Action() {}
 
 type DataStreamBatchSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1135,7 +1299,7 @@ type DataStreamBatchSettings struct {
 
 func (x *DataStreamBatchSettings) Reset() {
 	*x = DataStreamBatchSettings{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[12]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1147,7 +1311,7 @@ func (x *DataStreamBatchSettings) String() string {
 func (*DataStreamBatchSettings) ProtoMessage() {}
 
 func (x *DataStreamBatchSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[12]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1160,7 +1324,7 @@ func (x *DataStreamBatchSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataStreamBatchSettings.ProtoReflect.Descriptor instead.
 func (*DataStreamBatchSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DataStreamBatchSettings) GetSize() int64 {
@@ -1194,6 +1358,7 @@ type DataStream struct {
 	//	*DataStream_InvokeFunction
 	//	*DataStream_InvokeContainer
 	//	*DataStream_GatewayWebsocketBroadcast
+	//	*DataStream_StartWorkflow
 	Action        isDataStream_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1201,7 +1366,7 @@ type DataStream struct {
 
 func (x *DataStream) Reset() {
 	*x = DataStream{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1213,7 +1378,7 @@ func (x *DataStream) String() string {
 func (*DataStream) ProtoMessage() {}
 
 func (x *DataStream) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1226,7 +1391,7 @@ func (x *DataStream) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataStream.ProtoReflect.Descriptor instead.
 func (*DataStream) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DataStream) GetEndpoint() string {
@@ -1298,20 +1463,37 @@ func (x *DataStream) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
 	return nil
 }
 
+func (x *DataStream) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*DataStream_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isDataStream_Action interface {
 	isDataStream_Action()
 }
 
 type DataStream_InvokeFunction struct {
+	// Instructions for invoking a function with retries as needed.
 	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,13,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
 }
 
 type DataStream_InvokeContainer struct {
+	// Instructions for invoking a container with retries as needed.
 	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,15,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
 }
 
 type DataStream_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,16,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+type DataStream_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,17,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
 }
 
 func (*DataStream_InvokeFunction) isDataStream_Action() {}
@@ -1319,6 +1501,8 @@ func (*DataStream_InvokeFunction) isDataStream_Action() {}
 func (*DataStream_InvokeContainer) isDataStream_Action() {}
 
 func (*DataStream_GatewayWebsocketBroadcast) isDataStream_Action() {}
+
+func (*DataStream_StartWorkflow) isDataStream_Action() {}
 
 type ObjectStorageBucketSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1332,7 +1516,7 @@ type ObjectStorageBucketSettings struct {
 
 func (x *ObjectStorageBucketSettings) Reset() {
 	*x = ObjectStorageBucketSettings{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1344,7 +1528,7 @@ func (x *ObjectStorageBucketSettings) String() string {
 func (*ObjectStorageBucketSettings) ProtoMessage() {}
 
 func (x *ObjectStorageBucketSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[14]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1357,7 +1541,7 @@ func (x *ObjectStorageBucketSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObjectStorageBucketSettings.ProtoReflect.Descriptor instead.
 func (*ObjectStorageBucketSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ObjectStorageBucketSettings) GetBucketId() string {
@@ -1388,6 +1572,7 @@ type Mail struct {
 	//	*Mail_InvokeFunction
 	//	*Mail_InvokeContainer
 	//	*Mail_GatewayWebsocketBroadcast
+	//	*Mail_StartWorkflow
 	Action        isMail_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1395,7 +1580,7 @@ type Mail struct {
 
 func (x *Mail) Reset() {
 	*x = Mail{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1407,7 +1592,7 @@ func (x *Mail) String() string {
 func (*Mail) ProtoMessage() {}
 
 func (x *Mail) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1420,7 +1605,7 @@ func (x *Mail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Mail.ProtoReflect.Descriptor instead.
 func (*Mail) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *Mail) GetEmail() string {
@@ -1478,20 +1663,37 @@ func (x *Mail) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
 	return nil
 }
 
+func (x *Mail) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Mail_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isMail_Action interface {
 	isMail_Action()
 }
 
 type Mail_InvokeFunction struct {
+	// Instructions for invoking a function with retries as needed.
 	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
 }
 
 type Mail_InvokeContainer struct {
+	// Instructions for invoking a container with retries as needed.
 	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,103,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
 }
 
 type Mail_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,104,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+type Mail_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,105,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
 }
 
 func (*Mail_InvokeFunction) isMail_Action() {}
@@ -1499,6 +1701,8 @@ func (*Mail_InvokeFunction) isMail_Action() {}
 func (*Mail_InvokeContainer) isMail_Action() {}
 
 func (*Mail_GatewayWebsocketBroadcast) isMail_Action() {}
+
+func (*Mail_StartWorkflow) isMail_Action() {}
 
 // Description of a rule for trigger activation.
 type Trigger_Rule struct {
@@ -1523,7 +1727,7 @@ type Trigger_Rule struct {
 
 func (x *Trigger_Rule) Reset() {
 	*x = Trigger_Rule{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1535,7 +1739,7 @@ func (x *Trigger_Rule) String() string {
 func (*Trigger_Rule) ProtoMessage() {}
 
 func (x *Trigger_Rule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1677,34 +1881,42 @@ type Trigger_Rule_IotMessage struct {
 }
 
 type Trigger_Rule_IotBrokerMessage struct {
+	// Rule for a IoT Core Broker trigger.
 	IotBrokerMessage *Trigger_IoTBrokerMessage `protobuf:"bytes,14,opt,name=iot_broker_message,json=iotBrokerMessage,proto3,oneof"`
 }
 
 type Trigger_Rule_ObjectStorage struct {
+	// Rule for an Object Storage trigger.
 	ObjectStorage *Trigger_ObjectStorage `protobuf:"bytes,5,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
 type Trigger_Rule_ContainerRegistry struct {
+	// Rule for a Container Registry trigger.
 	ContainerRegistry *Trigger_ContainerRegistry `protobuf:"bytes,6,opt,name=container_registry,json=containerRegistry,proto3,oneof"`
 }
 
 type Trigger_Rule_CloudLogs struct {
+	// Rule for a Cloud Logs trigger.
 	CloudLogs *Trigger_CloudLogs `protobuf:"bytes,9,opt,name=cloud_logs,json=cloudLogs,proto3,oneof"`
 }
 
 type Trigger_Rule_Logging struct {
+	// Rule for a Logging trigger.
 	Logging *Trigger_Logging `protobuf:"bytes,10,opt,name=logging,proto3,oneof"`
 }
 
 type Trigger_Rule_BillingBudget struct {
+	// Rule for a Billing Budget trigger.
 	BillingBudget *BillingBudget `protobuf:"bytes,11,opt,name=billing_budget,json=billingBudget,proto3,oneof"`
 }
 
 type Trigger_Rule_DataStream struct {
+	// Rule for a Data Stream trigger.
 	DataStream *DataStream `protobuf:"bytes,12,opt,name=data_stream,json=dataStream,proto3,oneof"`
 }
 
 type Trigger_Rule_Mail struct {
+	// Rule for a Mail trigger.
 	Mail *Mail `protobuf:"bytes,13,opt,name=mail,proto3,oneof"`
 }
 
@@ -1745,6 +1957,7 @@ type Trigger_Timer struct {
 	//	*Trigger_Timer_InvokeFunctionWithRetry
 	//	*Trigger_Timer_InvokeContainerWithRetry
 	//	*Trigger_Timer_GatewayWebsocketBroadcast
+	//	*Trigger_Timer_StartWorkflow
 	Action        isTrigger_Timer_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1752,7 +1965,7 @@ type Trigger_Timer struct {
 
 func (x *Trigger_Timer) Reset() {
 	*x = Trigger_Timer{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1764,7 +1977,7 @@ func (x *Trigger_Timer) String() string {
 func (*Trigger_Timer) ProtoMessage() {}
 
 func (x *Trigger_Timer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1801,6 +2014,7 @@ func (x *Trigger_Timer) GetAction() isTrigger_Timer_Action {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/serverless/triggers/v1/trigger.proto.
 func (x *Trigger_Timer) GetInvokeFunction() *InvokeFunctionOnce {
 	if x != nil {
 		if x, ok := x.Action.(*Trigger_Timer_InvokeFunction); ok {
@@ -1837,12 +2051,23 @@ func (x *Trigger_Timer) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcas
 	return nil
 }
 
+func (x *Trigger_Timer) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Timer_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isTrigger_Timer_Action interface {
 	isTrigger_Timer_Action()
 }
 
 type Trigger_Timer_InvokeFunction struct {
 	// Instructions for invoking a function once.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/serverless/triggers/v1/trigger.proto.
 	InvokeFunction *InvokeFunctionOnce `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
 }
 
@@ -1861,6 +2086,11 @@ type Trigger_Timer_GatewayWebsocketBroadcast struct {
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,105,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
 }
 
+type Trigger_Timer_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,106,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
 func (*Trigger_Timer_InvokeFunction) isTrigger_Timer_Action() {}
 
 func (*Trigger_Timer_InvokeFunctionWithRetry) isTrigger_Timer_Action() {}
@@ -1868,6 +2098,8 @@ func (*Trigger_Timer_InvokeFunctionWithRetry) isTrigger_Timer_Action() {}
 func (*Trigger_Timer_InvokeContainerWithRetry) isTrigger_Timer_Action() {}
 
 func (*Trigger_Timer_GatewayWebsocketBroadcast) isTrigger_Timer_Action() {}
+
+func (*Trigger_Timer_StartWorkflow) isTrigger_Timer_Action() {}
 
 // Rule for activating a message queue trigger.
 type Trigger_MessageQueue struct {
@@ -1887,6 +2119,7 @@ type Trigger_MessageQueue struct {
 	//	*Trigger_MessageQueue_InvokeFunction
 	//	*Trigger_MessageQueue_InvokeContainer
 	//	*Trigger_MessageQueue_GatewayWebsocketBroadcast
+	//	*Trigger_MessageQueue_StartWorkflow
 	Action        isTrigger_MessageQueue_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1894,7 +2127,7 @@ type Trigger_MessageQueue struct {
 
 func (x *Trigger_MessageQueue) Reset() {
 	*x = Trigger_MessageQueue{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1906,7 +2139,7 @@ func (x *Trigger_MessageQueue) String() string {
 func (*Trigger_MessageQueue) ProtoMessage() {}
 
 func (x *Trigger_MessageQueue) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1984,6 +2217,15 @@ func (x *Trigger_MessageQueue) GetGatewayWebsocketBroadcast() *GatewayWebsocketB
 	return nil
 }
 
+func (x *Trigger_MessageQueue) GetStartWorkflow() *StartWorkflowOnce {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_MessageQueue_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isTrigger_MessageQueue_Action interface {
 	isTrigger_MessageQueue_Action()
 }
@@ -2003,11 +2245,18 @@ type Trigger_MessageQueue_GatewayWebsocketBroadcast struct {
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
 }
 
+type Trigger_MessageQueue_StartWorkflow struct {
+	// Instructions for starting a workflow once.
+	StartWorkflow *StartWorkflowOnce `protobuf:"bytes,104,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
 func (*Trigger_MessageQueue_InvokeFunction) isTrigger_MessageQueue_Action() {}
 
 func (*Trigger_MessageQueue_InvokeContainer) isTrigger_MessageQueue_Action() {}
 
 func (*Trigger_MessageQueue_GatewayWebsocketBroadcast) isTrigger_MessageQueue_Action() {}
+
+func (*Trigger_MessageQueue_StartWorkflow) isTrigger_MessageQueue_Action() {}
 
 // Rule for activating a IoT Core trigger.
 type Trigger_IoTMessage struct {
@@ -2034,7 +2283,7 @@ type Trigger_IoTMessage struct {
 
 func (x *Trigger_IoTMessage) Reset() {
 	*x = Trigger_IoTMessage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2046,7 +2295,7 @@ func (x *Trigger_IoTMessage) String() string {
 func (*Trigger_IoTMessage) ProtoMessage() {}
 
 func (x *Trigger_IoTMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2172,7 +2421,7 @@ type Trigger_IoTBrokerMessage struct {
 
 func (x *Trigger_IoTBrokerMessage) Reset() {
 	*x = Trigger_IoTBrokerMessage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2184,7 +2433,7 @@ func (x *Trigger_IoTBrokerMessage) String() string {
 func (*Trigger_IoTBrokerMessage) ProtoMessage() {}
 
 func (x *Trigger_IoTBrokerMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2297,6 +2546,7 @@ type Trigger_ObjectStorage struct {
 	//	*Trigger_ObjectStorage_InvokeFunction
 	//	*Trigger_ObjectStorage_InvokeContainer
 	//	*Trigger_ObjectStorage_GatewayWebsocketBroadcast
+	//	*Trigger_ObjectStorage_StartWorkflow
 	Action        isTrigger_ObjectStorage_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2304,7 +2554,7 @@ type Trigger_ObjectStorage struct {
 
 func (x *Trigger_ObjectStorage) Reset() {
 	*x = Trigger_ObjectStorage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2316,7 +2566,7 @@ func (x *Trigger_ObjectStorage) String() string {
 func (*Trigger_ObjectStorage) ProtoMessage() {}
 
 func (x *Trigger_ObjectStorage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2401,6 +2651,15 @@ func (x *Trigger_ObjectStorage) GetGatewayWebsocketBroadcast() *GatewayWebsocket
 	return nil
 }
 
+func (x *Trigger_ObjectStorage) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_ObjectStorage_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isTrigger_ObjectStorage_Action interface {
 	isTrigger_ObjectStorage_Action()
 }
@@ -2420,11 +2679,18 @@ type Trigger_ObjectStorage_GatewayWebsocketBroadcast struct {
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
 }
 
+type Trigger_ObjectStorage_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,104,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
 func (*Trigger_ObjectStorage_InvokeFunction) isTrigger_ObjectStorage_Action() {}
 
 func (*Trigger_ObjectStorage_InvokeContainer) isTrigger_ObjectStorage_Action() {}
 
 func (*Trigger_ObjectStorage_GatewayWebsocketBroadcast) isTrigger_ObjectStorage_Action() {}
+
+func (*Trigger_ObjectStorage_StartWorkflow) isTrigger_ObjectStorage_Action() {}
 
 type Trigger_ContainerRegistry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2443,6 +2709,7 @@ type Trigger_ContainerRegistry struct {
 	//	*Trigger_ContainerRegistry_InvokeFunction
 	//	*Trigger_ContainerRegistry_InvokeContainer
 	//	*Trigger_ContainerRegistry_GatewayWebsocketBroadcast
+	//	*Trigger_ContainerRegistry_StartWorkflow
 	Action        isTrigger_ContainerRegistry_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2450,7 +2717,7 @@ type Trigger_ContainerRegistry struct {
 
 func (x *Trigger_ContainerRegistry) Reset() {
 	*x = Trigger_ContainerRegistry{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2462,7 +2729,7 @@ func (x *Trigger_ContainerRegistry) String() string {
 func (*Trigger_ContainerRegistry) ProtoMessage() {}
 
 func (x *Trigger_ContainerRegistry) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2547,6 +2814,15 @@ func (x *Trigger_ContainerRegistry) GetGatewayWebsocketBroadcast() *GatewayWebso
 	return nil
 }
 
+func (x *Trigger_ContainerRegistry) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_ContainerRegistry_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isTrigger_ContainerRegistry_Action interface {
 	isTrigger_ContainerRegistry_Action()
 }
@@ -2566,12 +2842,20 @@ type Trigger_ContainerRegistry_GatewayWebsocketBroadcast struct {
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
 }
 
+type Trigger_ContainerRegistry_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,104,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
 func (*Trigger_ContainerRegistry_InvokeFunction) isTrigger_ContainerRegistry_Action() {}
 
 func (*Trigger_ContainerRegistry_InvokeContainer) isTrigger_ContainerRegistry_Action() {}
 
 func (*Trigger_ContainerRegistry_GatewayWebsocketBroadcast) isTrigger_ContainerRegistry_Action() {}
 
+func (*Trigger_ContainerRegistry_StartWorkflow) isTrigger_ContainerRegistry_Action() {}
+
+// Deprecated. Use Logging instead.
 type Trigger_CloudLogs struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Log group identifiers, at least one value is required.
@@ -2589,7 +2873,7 @@ type Trigger_CloudLogs struct {
 
 func (x *Trigger_CloudLogs) Reset() {
 	*x = Trigger_CloudLogs{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2601,7 +2885,7 @@ func (x *Trigger_CloudLogs) String() string {
 func (*Trigger_CloudLogs) ProtoMessage() {}
 
 func (x *Trigger_CloudLogs) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2677,11 +2961,15 @@ func (*Trigger_CloudLogs_InvokeContainer) isTrigger_CloudLogs_Action() {}
 type Trigger_Logging struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Log events filter settings.
-	LogGroupId   string              `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	ResourceType []string            `protobuf:"bytes,3,rep,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
-	ResourceId   []string            `protobuf:"bytes,4,rep,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	StreamName   []string            `protobuf:"bytes,7,rep,name=stream_name,json=streamName,proto3" json:"stream_name,omitempty"`
-	Levels       []v1.LogLevel_Level `protobuf:"varint,5,rep,packed,name=levels,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"levels,omitempty"`
+	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// Resource types to filter log events.
+	ResourceType []string `protobuf:"bytes,3,rep,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	// Resource IDs to filter log events.
+	ResourceId []string `protobuf:"bytes,4,rep,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Stream names to filter log events.
+	StreamName []string `protobuf:"bytes,7,rep,name=stream_name,json=streamName,proto3" json:"stream_name,omitempty"`
+	// Logging levels to filter log events.
+	Levels []v1.LogLevel_Level `protobuf:"varint,5,rep,packed,name=levels,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"levels,omitempty"`
 	// Batch settings for processing log events.
 	BatchSettings *LoggingBatchSettings `protobuf:"bytes,6,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
 	// Types that are valid to be assigned to Action:
@@ -2689,6 +2977,7 @@ type Trigger_Logging struct {
 	//	*Trigger_Logging_InvokeFunction
 	//	*Trigger_Logging_InvokeContainer
 	//	*Trigger_Logging_GatewayWebsocketBroadcast
+	//	*Trigger_Logging_StartWorkflow
 	Action        isTrigger_Logging_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2696,7 +2985,7 @@ type Trigger_Logging struct {
 
 func (x *Trigger_Logging) Reset() {
 	*x = Trigger_Logging{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2708,7 +2997,7 @@ func (x *Trigger_Logging) String() string {
 func (*Trigger_Logging) ProtoMessage() {}
 
 func (x *Trigger_Logging) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2800,6 +3089,15 @@ func (x *Trigger_Logging) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadc
 	return nil
 }
 
+func (x *Trigger_Logging) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Logging_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
 type isTrigger_Logging_Action interface {
 	isTrigger_Logging_Action()
 }
@@ -2819,17 +3117,24 @@ type Trigger_Logging_GatewayWebsocketBroadcast struct {
 	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,104,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
 }
 
+type Trigger_Logging_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,105,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
 func (*Trigger_Logging_InvokeFunction) isTrigger_Logging_Action() {}
 
 func (*Trigger_Logging_InvokeContainer) isTrigger_Logging_Action() {}
 
 func (*Trigger_Logging_GatewayWebsocketBroadcast) isTrigger_Logging_Action() {}
 
+func (*Trigger_Logging_StartWorkflow) isTrigger_Logging_Action() {}
+
 var File_yandex_cloud_serverless_triggers_v1_trigger_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/serverless/triggers/v1/trigger.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xfc6\n" +
+	"1yandex/cloud/serverless/triggers/v1/trigger.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xf9:\n" +
 	"\aTrigger\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
@@ -2859,16 +3164,17 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\vdata_stream\x18\f \x01(\v2/.yandex.cloud.serverless.triggers.v1.DataStreamH\x00R\n" +
 	"dataStream\x12?\n" +
 	"\x04mail\x18\r \x01(\v2).yandex.cloud.serverless.triggers.v1.MailH\x00R\x04mailB\f\n" +
-	"\x04rule\x12\x04\xc0\xc11\x01J\x04\b\a\x10\t\x1a\xe5\x04\n" +
+	"\x04rule\x12\x04\xc0\xc11\x01J\x04\b\a\x10\t\x1a\xcf\x05\n" +
 	"\x05Timer\x126\n" +
 	"\x0fcron_expression\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0ecronExpression\x12$\n" +
 	"\apayload\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4096R\apayload\x12b\n" +
-	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceH\x00R\x0einvokeFunction\x12{\n" +
+	"\x8a\xc81\x06<=4096R\apayload\x12f\n" +
+	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceB\x02\x18\x01H\x00R\x0einvokeFunction\x12{\n" +
 	"\x1ainvoke_function_with_retry\x18g \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x17invokeFunctionWithRetry\x12~\n" +
 	"\x1binvoke_container_with_retry\x18h \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x18invokeContainerWithRetry\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18i \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x03\x10e\x1a\x8b\x05\n" +
+	"\x1bgateway_websocket_broadcast\x18i \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18j \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x03\x10e\x1a\xec\x05\n" +
 	"\fMessageQueue\x12\x1f\n" +
 	"\bqueue_id\x18\v \x01(\tB\x04\xe8\xc71\x01R\aqueueId\x12:\n" +
 	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12_\n" +
@@ -2876,7 +3182,8 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x12visibility_timeout\x18\x05 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x05<=12hR\x11visibilityTimeout\x12b\n" +
 	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceH\x00R\x0einvokeFunction\x12e\n" +
 	"\x10invoke_container\x18f \x01(\v28.yandex.cloud.serverless.triggers.v1.InvokeContainerOnceH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12_\n" +
+	"\x0estart_workflow\x18h \x01(\v26.yandex.cloud.serverless.triggers.v1.StartWorkflowOnceH\x00R\rstartWorkflowB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\f\x10eJ\x04\b\x06\x10\v\x1a\xb8\x04\n" +
 	"\n" +
 	"IoTMessage\x12%\n" +
@@ -2898,7 +3205,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x04\x10e\x1a\x97\x05\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x04\x10e\x1a\xfd\x05\n" +
 	"\rObjectStorage\x12j\n" +
 	"\n" +
 	"event_type\x18\x03 \x03(\x0e2C.yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventTypeB\x06\x82\xc81\x02>0R\teventType\x12\x1b\n" +
@@ -2908,8 +3215,9 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x0ebatch_settings\x18\b \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12g\n" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\t\x10eJ\x04\b\x05\x10\x06\x1a\x9e\x05\n" +
+	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18h \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\t\x10eJ\x04\b\x05\x10\x06\x1a\x84\x06\n" +
 	"\x11ContainerRegistry\x12n\n" +
 	"\n" +
 	"event_type\x18\x03 \x03(\x0e2G.yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventTypeB\x06\x82\xc81\x02>0R\teventType\x12\x1f\n" +
@@ -2921,7 +3229,8 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x0ebatch_settings\x18\a \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12g\n" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18h \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\b\x10e\x1a\x82\x03\n" +
 	"\tCloudLogs\x12 \n" +
 	"\flog_group_id\x18\x01 \x03(\tR\n" +
@@ -2929,7 +3238,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x0ebatch_settings\x18\x02 \x01(\v2;.yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettingsB\x04\xe8\xc71\x01R\rbatchSettings\x12g\n" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainerB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x03\x10e\x1a\xcb\x06\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x03\x10e\x1a\xb1\a\n" +
 	"\aLogging\x12*\n" +
 	"\flog_group_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
 	"logGroupId\x12N\n" +
@@ -2942,7 +3251,8 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x0ebatch_settings\x18\x06 \x01(\v29.yandex.cloud.serverless.triggers.v1.LoggingBatchSettingsB\x04\xe8\xc71\x01R\rbatchSettings\x12g\n" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18g \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18i \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\b\x10eJ\x04\bf\x10gJ\x04\b\x02\x10\x03\"\xca\x01\n" +
 	"\x16ObjectStorageEventType\x12)\n" +
 	"%OBJECT_STORAGE_EVENT_TYPE_UNSPECIFIED\x10\x00\x12+\n" +
@@ -2982,7 +3292,17 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x04path\x18\x03 \x01(\tR\x04path\x12,\n" +
 	"\x12service_account_id\x18\x04 \x01(\tR\x10serviceAccountId\x12Y\n" +
 	"\x0eretry_settings\x18\x05 \x01(\v22.yandex.cloud.serverless.triggers.v1.RetrySettingsR\rretrySettings\x12`\n" +
-	"\x11dead_letter_queue\x18\x06 \x01(\v24.yandex.cloud.serverless.triggers.v1.PutQueueMessageR\x0fdeadLetterQueueJ\x04\b\x02\x10\x03\"\x9e\x01\n" +
+	"\x11dead_letter_queue\x18\x06 \x01(\v24.yandex.cloud.serverless.triggers.v1.PutQueueMessageR\x0fdeadLetterQueueJ\x04\b\x02\x10\x03\"p\n" +
+	"\x11StartWorkflowOnce\x12-\n" +
+	"\vworkflow_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"workflowId\x12,\n" +
+	"\x12service_account_id\x18\x02 \x01(\tR\x10serviceAccountId\"\xb2\x02\n" +
+	"\x16StartWorkflowWithRetry\x12-\n" +
+	"\vworkflow_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"workflowId\x12,\n" +
+	"\x12service_account_id\x18\x02 \x01(\tR\x10serviceAccountId\x12Y\n" +
+	"\x0eretry_settings\x18\x03 \x01(\v22.yandex.cloud.serverless.triggers.v1.RetrySettingsR\rretrySettings\x12`\n" +
+	"\x11dead_letter_queue\x18\x04 \x01(\v24.yandex.cloud.serverless.triggers.v1.PutQueueMessageR\x0fdeadLetterQueue\"\x9e\x01\n" +
 	"\x19GatewayWebsocketBroadcast\x12+\n" +
 	"\n" +
 	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\x12\x18\n" +
@@ -3004,17 +3324,18 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x06cutoff\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x051s-1mR\x06cutoff\"\x86\x01\n" +
 	"\rRetrySettings\x12.\n" +
 	"\x0eretry_attempts\x18\x01 \x01(\x03B\a\xfa\xc71\x031-5R\rretryAttempts\x12E\n" +
-	"\binterval\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\x0e\xe8\xc71\x01\xfa\xc71\x0610s-1mR\binterval\"\xe6\x03\n" +
+	"\binterval\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\x0e\xe8\xc71\x01\xfa\xc71\x0610s-1mR\binterval\"\xcc\x04\n" +
 	"\rBillingBudget\x12:\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10billingAccountId\x12%\n" +
 	"\tbudget_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bbudgetId\x12g\n" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18g \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18i \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x03\x10e\"x\n" +
 	"\x17DataStreamBatchSettings\x12\x1f\n" +
 	"\x04size\x18\x01 \x01(\x03B\v\xfa\xc71\a1-65536R\x04size\x12<\n" +
-	"\x06cutoff\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x051s-1mR\x06cutoff\"\xe3\x04\n" +
+	"\x06cutoff\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x051s-1mR\x06cutoff\"\xc9\x05\n" +
 	"\n" +
 	"DataStream\x12\x1a\n" +
 	"\bendpoint\x18\x01 \x01(\tR\bendpoint\x12\x1a\n" +
@@ -3024,18 +3345,20 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x0ebatch_settings\x18\x05 \x01(\v2<.yandex.cloud.serverless.triggers.v1.DataStreamBatchSettingsR\rbatchSettings\x12g\n" +
 	"\x0finvoke_function\x18\r \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18\x0f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18\x10 \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x1bgateway_websocket_broadcast\x18\x10 \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18\x11 \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x0e\x10\x0fJ\x04\b\x06\x10\r\"\x92\x01\n" +
 	"\x1bObjectStorageBucketSettings\x127\n" +
 	"\tbucket_id\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[-.0-9a-zA-Z]*\x8a\xc81\x043-63R\bbucketId\x12:\n" +
-	"\x12service_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xdc\x04\n" +
+	"\x12service_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xc2\x05\n" +
 	"\x04Mail\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12Y\n" +
 	"\x0ebatch_settings\x18\x03 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12o\n" +
 	"\x12attachments_bucket\x18\x04 \x01(\v2@.yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettingsR\x11attachmentsBucket\x12g\n" +
 	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
 	"\x10invoke_container\x18g \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18i \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x05\x10e*\xe2\x01\n" +
 	"\vTriggerType\x12\x1c\n" +
 	"\x18TRIGGER_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
@@ -3067,7 +3390,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP() []byte
 }
 
 var file_yandex_cloud_serverless_triggers_v1_trigger_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_yandex_cloud_serverless_triggers_v1_trigger_proto_goTypes = []any{
 	(TriggerType)(0),                        // 0: yandex.cloud.serverless.triggers.v1.TriggerType
 	(Trigger_ObjectStorageEventType)(0),     // 1: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
@@ -3078,108 +3401,120 @@ var file_yandex_cloud_serverless_triggers_v1_trigger_proto_goTypes = []any{
 	(*InvokeFunctionWithRetry)(nil),         // 6: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
 	(*InvokeContainerOnce)(nil),             // 7: yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
 	(*InvokeContainerWithRetry)(nil),        // 8: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	(*GatewayWebsocketBroadcast)(nil),       // 9: yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	(*PutQueueMessage)(nil),                 // 10: yandex.cloud.serverless.triggers.v1.PutQueueMessage
-	(*BatchSettings)(nil),                   // 11: yandex.cloud.serverless.triggers.v1.BatchSettings
-	(*CloudLogsBatchSettings)(nil),          // 12: yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
-	(*LoggingBatchSettings)(nil),            // 13: yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
-	(*RetrySettings)(nil),                   // 14: yandex.cloud.serverless.triggers.v1.RetrySettings
-	(*BillingBudget)(nil),                   // 15: yandex.cloud.serverless.triggers.v1.BillingBudget
-	(*DataStreamBatchSettings)(nil),         // 16: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings
-	(*DataStream)(nil),                      // 17: yandex.cloud.serverless.triggers.v1.DataStream
-	(*ObjectStorageBucketSettings)(nil),     // 18: yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettings
-	(*Mail)(nil),                            // 19: yandex.cloud.serverless.triggers.v1.Mail
-	nil,                                     // 20: yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
-	(*Trigger_Rule)(nil),                    // 21: yandex.cloud.serverless.triggers.v1.Trigger.Rule
-	(*Trigger_Timer)(nil),                   // 22: yandex.cloud.serverless.triggers.v1.Trigger.Timer
-	(*Trigger_MessageQueue)(nil),            // 23: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
-	(*Trigger_IoTMessage)(nil),              // 24: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
-	(*Trigger_IoTBrokerMessage)(nil),        // 25: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
-	(*Trigger_ObjectStorage)(nil),           // 26: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
-	(*Trigger_ContainerRegistry)(nil),       // 27: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
-	(*Trigger_CloudLogs)(nil),               // 28: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
-	(*Trigger_Logging)(nil),                 // 29: yandex.cloud.serverless.triggers.v1.Trigger.Logging
-	(*timestamppb.Timestamp)(nil),           // 30: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),             // 31: google.protobuf.Duration
-	(v1.LogLevel_Level)(0),                  // 32: yandex.cloud.logging.v1.LogLevel.Level
+	(*StartWorkflowOnce)(nil),               // 9: yandex.cloud.serverless.triggers.v1.StartWorkflowOnce
+	(*StartWorkflowWithRetry)(nil),          // 10: yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	(*GatewayWebsocketBroadcast)(nil),       // 11: yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	(*PutQueueMessage)(nil),                 // 12: yandex.cloud.serverless.triggers.v1.PutQueueMessage
+	(*BatchSettings)(nil),                   // 13: yandex.cloud.serverless.triggers.v1.BatchSettings
+	(*CloudLogsBatchSettings)(nil),          // 14: yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
+	(*LoggingBatchSettings)(nil),            // 15: yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
+	(*RetrySettings)(nil),                   // 16: yandex.cloud.serverless.triggers.v1.RetrySettings
+	(*BillingBudget)(nil),                   // 17: yandex.cloud.serverless.triggers.v1.BillingBudget
+	(*DataStreamBatchSettings)(nil),         // 18: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings
+	(*DataStream)(nil),                      // 19: yandex.cloud.serverless.triggers.v1.DataStream
+	(*ObjectStorageBucketSettings)(nil),     // 20: yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettings
+	(*Mail)(nil),                            // 21: yandex.cloud.serverless.triggers.v1.Mail
+	nil,                                     // 22: yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
+	(*Trigger_Rule)(nil),                    // 23: yandex.cloud.serverless.triggers.v1.Trigger.Rule
+	(*Trigger_Timer)(nil),                   // 24: yandex.cloud.serverless.triggers.v1.Trigger.Timer
+	(*Trigger_MessageQueue)(nil),            // 25: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
+	(*Trigger_IoTMessage)(nil),              // 26: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
+	(*Trigger_IoTBrokerMessage)(nil),        // 27: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
+	(*Trigger_ObjectStorage)(nil),           // 28: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
+	(*Trigger_ContainerRegistry)(nil),       // 29: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
+	(*Trigger_CloudLogs)(nil),               // 30: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
+	(*Trigger_Logging)(nil),                 // 31: yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	(*timestamppb.Timestamp)(nil),           // 32: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),             // 33: google.protobuf.Duration
+	(v1.LogLevel_Level)(0),                  // 34: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_serverless_triggers_v1_trigger_proto_depIdxs = []int32{
-	30, // 0: yandex.cloud.serverless.triggers.v1.Trigger.created_at:type_name -> google.protobuf.Timestamp
-	20, // 1: yandex.cloud.serverless.triggers.v1.Trigger.labels:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
-	21, // 2: yandex.cloud.serverless.triggers.v1.Trigger.rule:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Rule
+	32, // 0: yandex.cloud.serverless.triggers.v1.Trigger.created_at:type_name -> google.protobuf.Timestamp
+	22, // 1: yandex.cloud.serverless.triggers.v1.Trigger.labels:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
+	23, // 2: yandex.cloud.serverless.triggers.v1.Trigger.rule:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Rule
 	3,  // 3: yandex.cloud.serverless.triggers.v1.Trigger.status:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Status
-	14, // 4: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
-	10, // 5: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
-	14, // 6: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
-	10, // 7: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
-	31, // 8: yandex.cloud.serverless.triggers.v1.BatchSettings.cutoff:type_name -> google.protobuf.Duration
-	31, // 9: yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings.cutoff:type_name -> google.protobuf.Duration
-	31, // 10: yandex.cloud.serverless.triggers.v1.LoggingBatchSettings.cutoff:type_name -> google.protobuf.Duration
-	31, // 11: yandex.cloud.serverless.triggers.v1.RetrySettings.interval:type_name -> google.protobuf.Duration
-	6,  // 12: yandex.cloud.serverless.triggers.v1.BillingBudget.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 13: yandex.cloud.serverless.triggers.v1.BillingBudget.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 14: yandex.cloud.serverless.triggers.v1.BillingBudget.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	31, // 15: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings.cutoff:type_name -> google.protobuf.Duration
-	16, // 16: yandex.cloud.serverless.triggers.v1.DataStream.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings
-	6,  // 17: yandex.cloud.serverless.triggers.v1.DataStream.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 18: yandex.cloud.serverless.triggers.v1.DataStream.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 19: yandex.cloud.serverless.triggers.v1.DataStream.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	11, // 20: yandex.cloud.serverless.triggers.v1.Mail.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	18, // 21: yandex.cloud.serverless.triggers.v1.Mail.attachments_bucket:type_name -> yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettings
-	6,  // 22: yandex.cloud.serverless.triggers.v1.Mail.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 23: yandex.cloud.serverless.triggers.v1.Mail.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 24: yandex.cloud.serverless.triggers.v1.Mail.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	22, // 25: yandex.cloud.serverless.triggers.v1.Trigger.Rule.timer:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Timer
-	23, // 26: yandex.cloud.serverless.triggers.v1.Trigger.Rule.message_queue:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
-	24, // 27: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
-	25, // 28: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_broker_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
-	26, // 29: yandex.cloud.serverless.triggers.v1.Trigger.Rule.object_storage:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
-	27, // 30: yandex.cloud.serverless.triggers.v1.Trigger.Rule.container_registry:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
-	28, // 31: yandex.cloud.serverless.triggers.v1.Trigger.Rule.cloud_logs:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
-	29, // 32: yandex.cloud.serverless.triggers.v1.Trigger.Rule.logging:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Logging
-	15, // 33: yandex.cloud.serverless.triggers.v1.Trigger.Rule.billing_budget:type_name -> yandex.cloud.serverless.triggers.v1.BillingBudget
-	17, // 34: yandex.cloud.serverless.triggers.v1.Trigger.Rule.data_stream:type_name -> yandex.cloud.serverless.triggers.v1.DataStream
-	19, // 35: yandex.cloud.serverless.triggers.v1.Trigger.Rule.mail:type_name -> yandex.cloud.serverless.triggers.v1.Mail
-	5,  // 36: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
-	6,  // 37: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 38: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_container_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 39: yandex.cloud.serverless.triggers.v1.Trigger.Timer.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	11, // 40: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	31, // 41: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
-	5,  // 42: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
-	7,  // 43: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
-	9,  // 44: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	11, // 45: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 46: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 47: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 48: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	11, // 49: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 50: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 51: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 52: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	1,  // 53: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
-	11, // 54: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 55: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 56: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 57: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	2,  // 58: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventType
-	11, // 59: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 60: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 61: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 62: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	12, // 63: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
-	6,  // 64: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 65: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	32, // 66: yandex.cloud.serverless.triggers.v1.Trigger.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	13, // 67: yandex.cloud.serverless.triggers.v1.Trigger.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
-	6,  // 68: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 69: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	9,  // 70: yandex.cloud.serverless.triggers.v1.Trigger.Logging.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	71, // [71:71] is the sub-list for method output_type
-	71, // [71:71] is the sub-list for method input_type
-	71, // [71:71] is the sub-list for extension type_name
-	71, // [71:71] is the sub-list for extension extendee
-	0,  // [0:71] is the sub-list for field type_name
+	16, // 4: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
+	12, // 5: yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
+	16, // 6: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
+	12, // 7: yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
+	16, // 8: yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry.retry_settings:type_name -> yandex.cloud.serverless.triggers.v1.RetrySettings
+	12, // 9: yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v1.PutQueueMessage
+	33, // 10: yandex.cloud.serverless.triggers.v1.BatchSettings.cutoff:type_name -> google.protobuf.Duration
+	33, // 11: yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings.cutoff:type_name -> google.protobuf.Duration
+	33, // 12: yandex.cloud.serverless.triggers.v1.LoggingBatchSettings.cutoff:type_name -> google.protobuf.Duration
+	33, // 13: yandex.cloud.serverless.triggers.v1.RetrySettings.interval:type_name -> google.protobuf.Duration
+	6,  // 14: yandex.cloud.serverless.triggers.v1.BillingBudget.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 15: yandex.cloud.serverless.triggers.v1.BillingBudget.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 16: yandex.cloud.serverless.triggers.v1.BillingBudget.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 17: yandex.cloud.serverless.triggers.v1.BillingBudget.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	33, // 18: yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings.cutoff:type_name -> google.protobuf.Duration
+	18, // 19: yandex.cloud.serverless.triggers.v1.DataStream.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.DataStreamBatchSettings
+	6,  // 20: yandex.cloud.serverless.triggers.v1.DataStream.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 21: yandex.cloud.serverless.triggers.v1.DataStream.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 22: yandex.cloud.serverless.triggers.v1.DataStream.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 23: yandex.cloud.serverless.triggers.v1.DataStream.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	13, // 24: yandex.cloud.serverless.triggers.v1.Mail.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	20, // 25: yandex.cloud.serverless.triggers.v1.Mail.attachments_bucket:type_name -> yandex.cloud.serverless.triggers.v1.ObjectStorageBucketSettings
+	6,  // 26: yandex.cloud.serverless.triggers.v1.Mail.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 27: yandex.cloud.serverless.triggers.v1.Mail.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 28: yandex.cloud.serverless.triggers.v1.Mail.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 29: yandex.cloud.serverless.triggers.v1.Mail.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	24, // 30: yandex.cloud.serverless.triggers.v1.Trigger.Rule.timer:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Timer
+	25, // 31: yandex.cloud.serverless.triggers.v1.Trigger.Rule.message_queue:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
+	26, // 32: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
+	27, // 33: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_broker_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
+	28, // 34: yandex.cloud.serverless.triggers.v1.Trigger.Rule.object_storage:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
+	29, // 35: yandex.cloud.serverless.triggers.v1.Trigger.Rule.container_registry:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
+	30, // 36: yandex.cloud.serverless.triggers.v1.Trigger.Rule.cloud_logs:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
+	31, // 37: yandex.cloud.serverless.triggers.v1.Trigger.Rule.logging:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	17, // 38: yandex.cloud.serverless.triggers.v1.Trigger.Rule.billing_budget:type_name -> yandex.cloud.serverless.triggers.v1.BillingBudget
+	19, // 39: yandex.cloud.serverless.triggers.v1.Trigger.Rule.data_stream:type_name -> yandex.cloud.serverless.triggers.v1.DataStream
+	21, // 40: yandex.cloud.serverless.triggers.v1.Trigger.Rule.mail:type_name -> yandex.cloud.serverless.triggers.v1.Mail
+	5,  // 41: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
+	6,  // 42: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 43: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_container_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 44: yandex.cloud.serverless.triggers.v1.Trigger.Timer.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 45: yandex.cloud.serverless.triggers.v1.Trigger.Timer.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	13, // 46: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	33, // 47: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
+	5,  // 48: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
+	7,  // 49: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
+	11, // 50: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	9,  // 51: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowOnce
+	13, // 52: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 53: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 54: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 55: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	13, // 56: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 57: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 58: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 59: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	1,  // 60: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
+	13, // 61: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 62: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 63: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 64: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 65: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	2,  // 66: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventType
+	13, // 67: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 68: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 69: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 70: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 71: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	14, // 72: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
+	6,  // 73: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 74: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	34, // 75: yandex.cloud.serverless.triggers.v1.Trigger.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	15, // 76: yandex.cloud.serverless.triggers.v1.Trigger.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
+	6,  // 77: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 78: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 79: yandex.cloud.serverless.triggers.v1.Trigger.Logging.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 80: yandex.cloud.serverless.triggers.v1.Trigger.Logging.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	81, // [81:81] is the sub-list for method output_type
+	81, // [81:81] is the sub-list for method input_type
+	81, // [81:81] is the sub-list for extension type_name
+	81, // [81:81] is the sub-list for extension extendee
+	0,  // [0:81] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() }
@@ -3187,22 +3522,25 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 	if File_yandex_cloud_serverless_triggers_v1_trigger_proto != nil {
 		return
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[11].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13].OneofWrappers = []any{
 		(*BillingBudget_InvokeFunction)(nil),
 		(*BillingBudget_InvokeContainer)(nil),
 		(*BillingBudget_GatewayWebsocketBroadcast)(nil),
+		(*BillingBudget_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[13].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15].OneofWrappers = []any{
 		(*DataStream_InvokeFunction)(nil),
 		(*DataStream_InvokeContainer)(nil),
 		(*DataStream_GatewayWebsocketBroadcast)(nil),
+		(*DataStream_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[15].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17].OneofWrappers = []any{
 		(*Mail_InvokeFunction)(nil),
 		(*Mail_InvokeContainer)(nil),
 		(*Mail_GatewayWebsocketBroadcast)(nil),
+		(*Mail_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[17].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19].OneofWrappers = []any{
 		(*Trigger_Rule_Timer)(nil),
 		(*Trigger_Rule_MessageQueue)(nil),
 		(*Trigger_Rule_IotMessage)(nil),
@@ -3215,45 +3553,50 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 		(*Trigger_Rule_DataStream)(nil),
 		(*Trigger_Rule_Mail)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[18].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].OneofWrappers = []any{
 		(*Trigger_Timer_InvokeFunction)(nil),
 		(*Trigger_Timer_InvokeFunctionWithRetry)(nil),
 		(*Trigger_Timer_InvokeContainerWithRetry)(nil),
 		(*Trigger_Timer_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_Timer_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[19].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].OneofWrappers = []any{
 		(*Trigger_MessageQueue_InvokeFunction)(nil),
 		(*Trigger_MessageQueue_InvokeContainer)(nil),
 		(*Trigger_MessageQueue_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_MessageQueue_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].OneofWrappers = []any{
 		(*Trigger_IoTMessage_InvokeFunction)(nil),
 		(*Trigger_IoTMessage_InvokeContainer)(nil),
 		(*Trigger_IoTMessage_GatewayWebsocketBroadcast)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].OneofWrappers = []any{
 		(*Trigger_IoTBrokerMessage_InvokeFunction)(nil),
 		(*Trigger_IoTBrokerMessage_InvokeContainer)(nil),
 		(*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24].OneofWrappers = []any{
 		(*Trigger_ObjectStorage_InvokeFunction)(nil),
 		(*Trigger_ObjectStorage_InvokeContainer)(nil),
 		(*Trigger_ObjectStorage_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_ObjectStorage_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25].OneofWrappers = []any{
 		(*Trigger_ContainerRegistry_InvokeFunction)(nil),
 		(*Trigger_ContainerRegistry_InvokeContainer)(nil),
 		(*Trigger_ContainerRegistry_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_ContainerRegistry_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26].OneofWrappers = []any{
 		(*Trigger_CloudLogs_InvokeFunction)(nil),
 		(*Trigger_CloudLogs_InvokeContainer)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27].OneofWrappers = []any{
 		(*Trigger_Logging_InvokeFunction)(nil),
 		(*Trigger_Logging_InvokeContainer)(nil),
 		(*Trigger_Logging_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_Logging_StartWorkflow)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3261,7 +3604,7 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc), len(file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   26,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

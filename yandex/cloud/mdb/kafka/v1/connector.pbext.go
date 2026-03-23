@@ -282,7 +282,7 @@ func (m *UpdateConnectorConfigIcebergSinkSpec) SetControlConfig(v *IcebergContro
 	m.ControlConfig = v
 }
 
-func (m *StaticTablesSpec) SetTables(v []string) {
+func (m *StaticTablesSpec) SetTables(v string) {
 	m.Tables = v
 }
 

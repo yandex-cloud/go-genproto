@@ -99,6 +99,10 @@ func (m *ClusterConfig) SetResources(v *Resources) {
 	m.Resources = v
 }
 
+func (m *ClusterConfig) SetWarehouse(v *WarehouseConfig) {
+	m.Warehouse = v
+}
+
 func (m *NetworkConfig) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
@@ -135,4 +139,24 @@ func (m *LoggingConfig) SetLogGroupId(v string) {
 
 func (m *LoggingConfig) SetMinLevel(v v1.LogLevel_Level) {
 	m.MinLevel = v
+}
+
+type WarehouseConfig_Warehouse = isWarehouseConfig_Warehouse
+
+func (m *WarehouseConfig) SetWarehouse(v WarehouseConfig_Warehouse) {
+	m.Warehouse = v
+}
+
+func (m *WarehouseConfig) SetS3(v *WarehouseConfig_S3Warehouse) {
+	m.Warehouse = &WarehouseConfig_S3{
+		S3: v,
+	}
+}
+
+func (m *WarehouseConfig_S3Warehouse) SetBucket(v string) {
+	m.Bucket = v
+}
+
+func (m *WarehouseConfig_S3Warehouse) SetPath(v string) {
+	m.Path = v
 }

@@ -150,6 +150,12 @@ func (m *Trigger_Timer) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcas
 	}
 }
 
+func (m *Trigger_Timer) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &Trigger_Timer_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
 type Trigger_MessageQueue_Action = isTrigger_MessageQueue_Action
 
 func (m *Trigger_MessageQueue) SetAction(v Trigger_MessageQueue_Action) {
@@ -187,6 +193,12 @@ func (m *Trigger_MessageQueue) SetInvokeContainer(v *InvokeContainerOnce) {
 func (m *Trigger_MessageQueue) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
 	m.Action = &Trigger_MessageQueue_GatewayWebsocketBroadcast{
 		GatewayWebsocketBroadcast: v,
+	}
+}
+
+func (m *Trigger_MessageQueue) SetStartWorkflow(v *StartWorkflowOnce) {
+	m.Action = &Trigger_MessageQueue_StartWorkflow{
+		StartWorkflow: v,
 	}
 }
 
@@ -310,6 +322,12 @@ func (m *Trigger_ObjectStorage) SetGatewayWebsocketBroadcast(v *GatewayWebsocket
 	}
 }
 
+func (m *Trigger_ObjectStorage) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &Trigger_ObjectStorage_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
 type Trigger_ContainerRegistry_Action = isTrigger_ContainerRegistry_Action
 
 func (m *Trigger_ContainerRegistry) SetAction(v Trigger_ContainerRegistry_Action) {
@@ -351,6 +369,12 @@ func (m *Trigger_ContainerRegistry) SetInvokeContainer(v *InvokeContainerWithRet
 func (m *Trigger_ContainerRegistry) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
 	m.Action = &Trigger_ContainerRegistry_GatewayWebsocketBroadcast{
 		GatewayWebsocketBroadcast: v,
+	}
+}
+
+func (m *Trigger_ContainerRegistry) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &Trigger_ContainerRegistry_StartWorkflow{
+		StartWorkflow: v,
 	}
 }
 
@@ -428,6 +452,12 @@ func (m *Trigger_Logging) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadc
 	}
 }
 
+func (m *Trigger_Logging) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &Trigger_Logging_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
 func (m *InvokeFunctionOnce) SetFunctionId(v string) {
 	m.FunctionId = v
 }
@@ -489,6 +519,30 @@ func (m *InvokeContainerWithRetry) SetRetrySettings(v *RetrySettings) {
 }
 
 func (m *InvokeContainerWithRetry) SetDeadLetterQueue(v *PutQueueMessage) {
+	m.DeadLetterQueue = v
+}
+
+func (m *StartWorkflowOnce) SetWorkflowId(v string) {
+	m.WorkflowId = v
+}
+
+func (m *StartWorkflowOnce) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *StartWorkflowWithRetry) SetWorkflowId(v string) {
+	m.WorkflowId = v
+}
+
+func (m *StartWorkflowWithRetry) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *StartWorkflowWithRetry) SetRetrySettings(v *RetrySettings) {
+	m.RetrySettings = v
+}
+
+func (m *StartWorkflowWithRetry) SetDeadLetterQueue(v *PutQueueMessage) {
 	m.DeadLetterQueue = v
 }
 
@@ -576,6 +630,12 @@ func (m *BillingBudget) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcas
 	}
 }
 
+func (m *BillingBudget) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &BillingBudget_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
 func (m *DataStreamBatchSettings) SetSize(v int64) {
 	m.Size = v
 }
@@ -628,6 +688,12 @@ func (m *DataStream) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) 
 	}
 }
 
+func (m *DataStream) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &DataStream_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
 func (m *ObjectStorageBucketSettings) SetBucketId(v string) {
 	m.BucketId = v
 }
@@ -669,5 +735,11 @@ func (m *Mail) SetInvokeContainer(v *InvokeContainerWithRetry) {
 func (m *Mail) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
 	m.Action = &Mail_GatewayWebsocketBroadcast{
 		GatewayWebsocketBroadcast: v,
+	}
+}
+
+func (m *Mail) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &Mail_StartWorkflow{
+		StartWorkflow: v,
 	}
 }

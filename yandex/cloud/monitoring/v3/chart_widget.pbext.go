@@ -326,6 +326,18 @@ func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineHidingInChar
 	m.LineHidingInChart = v
 }
 
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInLegend(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
+	m.LineVisibilityInLegend = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInTooltip(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
+	m.LineVisibilityInTooltip = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInChart(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
+	m.LineVisibilityInChart = v
+}
+
 type ChartWidget_OverrideMatcher_Type = isChartWidget_OverrideMatcher_Type
 
 func (m *ChartWidget_OverrideMatcher) SetType(v ChartWidget_OverrideMatcher_Type) {

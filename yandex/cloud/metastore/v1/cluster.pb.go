@@ -156,7 +156,7 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique ID of the Metastore Cluster.
-	// This ID is assigned by Cloud in the process of creating a Trino cluster.
+	// This ID is assigned by Cloud in the process of creating a Metastore cluster.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the Metastore Cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -428,7 +428,9 @@ func (x *Monitoring) GetLink() string {
 type ClusterConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration for computational resources for Metastore server instances.
-	Resources     *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
+	Resources *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
+	// Configuration of warehouse.
+	Warehouse     *WarehouseConfig `protobuf:"bytes,3,opt,name=warehouse,proto3" json:"warehouse,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -466,6 +468,13 @@ func (*ClusterConfig) Descriptor() ([]byte, []int) {
 func (x *ClusterConfig) GetResources() *Resources {
 	if x != nil {
 		return x.Resources
+	}
+	return nil
+}
+
+func (x *ClusterConfig) GetWarehouse() *WarehouseConfig {
+	if x != nil {
+		return x.Warehouse
 	}
 	return nil
 }
@@ -675,6 +684,127 @@ func (*LoggingConfig_FolderId) isLoggingConfig_Destination() {}
 
 func (*LoggingConfig_LogGroupId) isLoggingConfig_Destination() {}
 
+type WarehouseConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Warehouse:
+	//
+	//	*WarehouseConfig_S3
+	Warehouse     isWarehouseConfig_Warehouse `protobuf_oneof:"warehouse"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseConfig) Reset() {
+	*x = WarehouseConfig{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseConfig) ProtoMessage() {}
+
+func (x *WarehouseConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseConfig.ProtoReflect.Descriptor instead.
+func (*WarehouseConfig) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *WarehouseConfig) GetWarehouse() isWarehouseConfig_Warehouse {
+	if x != nil {
+		return x.Warehouse
+	}
+	return nil
+}
+
+func (x *WarehouseConfig) GetS3() *WarehouseConfig_S3Warehouse {
+	if x != nil {
+		if x, ok := x.Warehouse.(*WarehouseConfig_S3); ok {
+			return x.S3
+		}
+	}
+	return nil
+}
+
+type isWarehouseConfig_Warehouse interface {
+	isWarehouseConfig_Warehouse()
+}
+
+type WarehouseConfig_S3 struct {
+	// Yandex Cloud Object Storage.
+	S3 *WarehouseConfig_S3Warehouse `protobuf:"bytes,1,opt,name=s3,proto3,oneof"`
+}
+
+func (*WarehouseConfig_S3) isWarehouseConfig_Warehouse() {}
+
+type WarehouseConfig_S3Warehouse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Bucket name to use.
+	Bucket string `protobuf:"bytes,1,opt,name=bucket,proto3" json:"bucket,omitempty"`
+	// Path within the bucket to use.
+	Path          string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseConfig_S3Warehouse) Reset() {
+	*x = WarehouseConfig_S3Warehouse{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseConfig_S3Warehouse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseConfig_S3Warehouse) ProtoMessage() {}
+
+func (x *WarehouseConfig_S3Warehouse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseConfig_S3Warehouse.ProtoReflect.Descriptor instead.
+func (*WarehouseConfig_S3Warehouse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{6, 0}
+}
+
+func (x *WarehouseConfig_S3Warehouse) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
+}
+
+func (x *WarehouseConfig_S3Warehouse) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
 var File_yandex_cloud_metastore_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
@@ -728,9 +858,10 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"Y\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xa3\x01\n" +
 	"\rClusterConfig\x12B\n" +
-	"\tresources\x18\x02 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresourcesJ\x04\b\x01\x10\x02\"\\\n" +
+	"\tresources\x18\x02 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresources\x12H\n" +
+	"\twarehouse\x18\x03 \x01(\v2*.yandex.cloud.metastore.v1.WarehouseConfigR\twarehouseJ\x04\b\x01\x10\x02\"\\\n" +
 	"\rNetworkConfig\x12\x1d\n" +
 	"\n" +
 	"subnet_ids\x18\x01 \x03(\tR\tsubnetIds\x12,\n" +
@@ -743,7 +874,13 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\flog_group_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
 	"logGroupId\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestinationBh\n" +
+	"\vdestination\"\xda\x01\n" +
+	"\x0fWarehouseConfig\x12H\n" +
+	"\x02s3\x18\x01 \x01(\v26.yandex.cloud.metastore.v1.WarehouseConfig.S3WarehouseH\x00R\x02s3\x1aj\n" +
+	"\vS3Warehouse\x12\x1c\n" +
+	"\x06bucket\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06bucket\x12=\n" +
+	"\x04path\x18\x02 \x01(\tB)\xf2\xc71%([a-zA-Z0-9/][-a-zA-Z0-9_./]{0,512})?R\x04pathB\x11\n" +
+	"\twarehouse\x12\x04\xc0\xc11\x01Bh\n" +
 	"\x1dyandex.cloud.api.metastore.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/metastore/v1;metastoreb\x06proto3"
 
 var (
@@ -759,40 +896,44 @@ func file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_metastore_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_metastore_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_yandex_cloud_metastore_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_metastore_v1_cluster_proto_goTypes = []any{
-	(Cluster_Health)(0),           // 0: yandex.cloud.metastore.v1.Cluster.Health
-	(Cluster_Status)(0),           // 1: yandex.cloud.metastore.v1.Cluster.Status
-	(*Cluster)(nil),               // 2: yandex.cloud.metastore.v1.Cluster
-	(*Monitoring)(nil),            // 3: yandex.cloud.metastore.v1.Monitoring
-	(*ClusterConfig)(nil),         // 4: yandex.cloud.metastore.v1.ClusterConfig
-	(*NetworkConfig)(nil),         // 5: yandex.cloud.metastore.v1.NetworkConfig
-	(*Resources)(nil),             // 6: yandex.cloud.metastore.v1.Resources
-	(*LoggingConfig)(nil),         // 7: yandex.cloud.metastore.v1.LoggingConfig
-	nil,                           // 8: yandex.cloud.metastore.v1.Cluster.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),     // 10: yandex.cloud.metastore.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),  // 11: yandex.cloud.metastore.v1.MaintenanceOperation
-	(v1.LogLevel_Level)(0),        // 12: yandex.cloud.logging.v1.LogLevel.Level
+	(Cluster_Health)(0),                 // 0: yandex.cloud.metastore.v1.Cluster.Health
+	(Cluster_Status)(0),                 // 1: yandex.cloud.metastore.v1.Cluster.Status
+	(*Cluster)(nil),                     // 2: yandex.cloud.metastore.v1.Cluster
+	(*Monitoring)(nil),                  // 3: yandex.cloud.metastore.v1.Monitoring
+	(*ClusterConfig)(nil),               // 4: yandex.cloud.metastore.v1.ClusterConfig
+	(*NetworkConfig)(nil),               // 5: yandex.cloud.metastore.v1.NetworkConfig
+	(*Resources)(nil),                   // 6: yandex.cloud.metastore.v1.Resources
+	(*LoggingConfig)(nil),               // 7: yandex.cloud.metastore.v1.LoggingConfig
+	(*WarehouseConfig)(nil),             // 8: yandex.cloud.metastore.v1.WarehouseConfig
+	nil,                                 // 9: yandex.cloud.metastore.v1.Cluster.LabelsEntry
+	(*WarehouseConfig_S3Warehouse)(nil), // 10: yandex.cloud.metastore.v1.WarehouseConfig.S3Warehouse
+	(*timestamppb.Timestamp)(nil),       // 11: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),           // 12: yandex.cloud.metastore.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),        // 13: yandex.cloud.metastore.v1.MaintenanceOperation
+	(v1.LogLevel_Level)(0),              // 14: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_metastore_v1_cluster_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.metastore.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	8,  // 1: yandex.cloud.metastore.v1.Cluster.labels:type_name -> yandex.cloud.metastore.v1.Cluster.LabelsEntry
+	11, // 0: yandex.cloud.metastore.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	9,  // 1: yandex.cloud.metastore.v1.Cluster.labels:type_name -> yandex.cloud.metastore.v1.Cluster.LabelsEntry
 	3,  // 2: yandex.cloud.metastore.v1.Cluster.monitoring:type_name -> yandex.cloud.metastore.v1.Monitoring
 	0,  // 3: yandex.cloud.metastore.v1.Cluster.health:type_name -> yandex.cloud.metastore.v1.Cluster.Health
 	1,  // 4: yandex.cloud.metastore.v1.Cluster.status:type_name -> yandex.cloud.metastore.v1.Cluster.Status
 	4,  // 5: yandex.cloud.metastore.v1.Cluster.cluster_config:type_name -> yandex.cloud.metastore.v1.ClusterConfig
 	7,  // 6: yandex.cloud.metastore.v1.Cluster.logging:type_name -> yandex.cloud.metastore.v1.LoggingConfig
 	5,  // 7: yandex.cloud.metastore.v1.Cluster.network:type_name -> yandex.cloud.metastore.v1.NetworkConfig
-	10, // 8: yandex.cloud.metastore.v1.Cluster.maintenance_window:type_name -> yandex.cloud.metastore.v1.MaintenanceWindow
-	11, // 9: yandex.cloud.metastore.v1.Cluster.planned_operation:type_name -> yandex.cloud.metastore.v1.MaintenanceOperation
+	12, // 8: yandex.cloud.metastore.v1.Cluster.maintenance_window:type_name -> yandex.cloud.metastore.v1.MaintenanceWindow
+	13, // 9: yandex.cloud.metastore.v1.Cluster.planned_operation:type_name -> yandex.cloud.metastore.v1.MaintenanceOperation
 	6,  // 10: yandex.cloud.metastore.v1.ClusterConfig.resources:type_name -> yandex.cloud.metastore.v1.Resources
-	12, // 11: yandex.cloud.metastore.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	8,  // 11: yandex.cloud.metastore.v1.ClusterConfig.warehouse:type_name -> yandex.cloud.metastore.v1.WarehouseConfig
+	14, // 12: yandex.cloud.metastore.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	10, // 13: yandex.cloud.metastore.v1.WarehouseConfig.s3:type_name -> yandex.cloud.metastore.v1.WarehouseConfig.S3Warehouse
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_metastore_v1_cluster_proto_init() }
@@ -805,13 +946,16 @@ func file_yandex_cloud_metastore_v1_cluster_proto_init() {
 		(*LoggingConfig_FolderId)(nil),
 		(*LoggingConfig_LogGroupId)(nil),
 	}
+	file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6].OneofWrappers = []any{
+		(*WarehouseConfig_S3)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_metastore_v1_cluster_proto_rawDesc), len(file_yandex_cloud_metastore_v1_cluster_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
