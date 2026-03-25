@@ -777,6 +777,14 @@ func (m *MetadataOptions) SetAwsV1HttpToken(v MetadataOption) {
 	m.AwsV1HttpToken = v
 }
 
+func (m *MetadataOptions) SetAwsV2HttpEndpoint(v MetadataOption) {
+	m.AwsV2HttpEndpoint = v
+}
+
+func (m *MetadataOptions) SetAwsV2HttpToken(v MetadataOption) {
+	m.AwsV2HttpToken = v
+}
+
 func (m *DisableZoneStatus) SetZoneId(v string) {
 	m.ZoneId = v
 }

@@ -30,7 +30,6 @@ type ActivateProviderRequest struct {
 	// Activate provider for Folder iD.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Activate specific provider by name.
-	//
 	// For more information, please see [activate-provider](/docs/backup/quickstart#activate-provider)
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Don't create default policies while activating the provider.
@@ -266,9 +265,9 @@ const file_yandex_cloud_backup_v1_provider_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"\x84\x01\n" +
 	"\x1dListActivatedProvidersRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
-	"\x18instance_registration_id\x18\x02 \x01(\tR\x16instanceRegistrationId\"Y\n" +
-	"\x1eListActivatedProvidersResponse\x12\x1b\n" +
-	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x14\n" +
+	"\x18instance_registration_id\x18\x02 \x01(\tR\x16instanceRegistrationId\"g\n" +
+	"\x1eListActivatedProvidersResponse\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x14\n" +
 	"\x05names\x18\x03 \x03(\tR\x05namesJ\x04\b\x02\x10\x032\xf7\x02\n" +
 	"\x0fProviderService\x12\xc4\x01\n" +
 	"\bActivate\x12/.yandex.cloud.backup.v1.ActivateProviderRequest\x1a!.yandex.cloud.operation.Operation\"d\xb2\xd2*1\n" +

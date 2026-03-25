@@ -180,10 +180,6 @@ func (m *PolicySettings_Retention_RetentionRule) SetCondition(v PolicySettings_R
 	m.Condition = v
 }
 
-func (m *PolicySettings_Retention_RetentionRule) SetBackupSet(v []PolicySettings_RepeatePeriod) {
-	m.BackupSet = v
-}
-
 func (m *PolicySettings_Retention_RetentionRule) SetMaxAge(v *PolicySettings_Interval) {
 	m.Condition = &PolicySettings_Retention_RetentionRule_MaxAge{
 		MaxAge: v,
@@ -194,6 +190,10 @@ func (m *PolicySettings_Retention_RetentionRule) SetMaxCount(v int64) {
 	m.Condition = &PolicySettings_Retention_RetentionRule_MaxCount{
 		MaxCount: v,
 	}
+}
+
+func (m *PolicySettings_Retention_RetentionRule) SetBackupSet(v []PolicySettings_RepeatePeriod) {
+	m.BackupSet = v
 }
 
 func (m *PolicySettings_Scheduling) SetBackupSets(v []*PolicySettings_Scheduling_BackupSet) {

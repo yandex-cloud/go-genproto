@@ -537,8 +537,10 @@ type PlacementPolicy_HostAffinityRule_Operator int32
 
 const (
 	PlacementPolicy_HostAffinityRule_OPERATOR_UNSPECIFIED PlacementPolicy_HostAffinityRule_Operator = 0
-	PlacementPolicy_HostAffinityRule_IN                   PlacementPolicy_HostAffinityRule_Operator = 1
-	PlacementPolicy_HostAffinityRule_NOT_IN               PlacementPolicy_HostAffinityRule_Operator = 2
+	// Include action
+	PlacementPolicy_HostAffinityRule_IN PlacementPolicy_HostAffinityRule_Operator = 1
+	// Exclude action
+	PlacementPolicy_HostAffinityRule_NOT_IN PlacementPolicy_HostAffinityRule_Operator = 2
 )
 
 // Enum value maps for PlacementPolicy_HostAffinityRule_Operator.
@@ -636,9 +638,12 @@ func (AttachedDiskSpec_Mode) EnumDescriptor() ([]byte, []int) {
 type NetworkSettings_Type int32
 
 const (
-	NetworkSettings_TYPE_UNSPECIFIED     NetworkSettings_Type = 0
-	NetworkSettings_STANDARD             NetworkSettings_Type = 1
+	NetworkSettings_TYPE_UNSPECIFIED NetworkSettings_Type = 0
+	// Standard network.
+	NetworkSettings_STANDARD NetworkSettings_Type = 1
+	// Software accelerated network.
 	NetworkSettings_SOFTWARE_ACCELERATED NetworkSettings_Type = 2
+	// Hardware accelerated network.
 	NetworkSettings_HARDWARE_ACCELERATED NetworkSettings_Type = 3
 )
 
@@ -882,8 +887,9 @@ type InstanceGroup struct {
 	// To get the service account ID, use a [yandex.cloud.iam.v1.ServiceAccountService.List] request.
 	ServiceAccountId string `protobuf:"bytes,16,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Status of the instance group.
-	Status    InstanceGroup_Status `protobuf:"varint,17,opt,name=status,proto3,enum=yandex.cloud.compute.v1.instancegroup.InstanceGroup_Status" json:"status,omitempty"`
-	Variables []*Variable          `protobuf:"bytes,18,rep,name=variables,proto3" json:"variables,omitempty"`
+	Status InstanceGroup_Status `protobuf:"varint,17,opt,name=status,proto3,enum=yandex.cloud.compute.v1.instancegroup.InstanceGroup_Status" json:"status,omitempty"`
+	// User-defined [variables](docs/compute/concepts/instance-groups/variables-in-the-template) for instance template rendering.
+	Variables []*Variable `protobuf:"bytes,18,rep,name=variables,proto3" json:"variables,omitempty"`
 	// Flag prohibiting deletion of the instance group.
 	//
 	// Allowed values:</br>- `false`: The instance group can be deleted.</br>- `true`: The instance group cannot be deleted.
@@ -1144,9 +1150,11 @@ func (x *ApplicationLoadBalancerState) GetStatusMessage() string {
 }
 
 type Variable struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the variable.
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Value of the variable.
+	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3411,6 +3419,10 @@ type MetadataOptions struct {
 	GceHttpToken MetadataOption `protobuf:"varint,3,opt,name=gce_http_token,json=gceHttpToken,proto3,enum=yandex.cloud.compute.v1.instancegroup.MetadataOption" json:"gce_http_token,omitempty"`
 	// Enabled access to IAM credentials with AWS flavored metadata (IMDSv1)
 	AwsV1HttpToken MetadataOption `protobuf:"varint,4,opt,name=aws_v1_http_token,json=awsV1HttpToken,proto3,enum=yandex.cloud.compute.v1.instancegroup.MetadataOption" json:"aws_v1_http_token,omitempty"`
+	// Enabled access to AWS flavored metadata with session token (IMDSv2)
+	AwsV2HttpEndpoint MetadataOption `protobuf:"varint,5,opt,name=aws_v2_http_endpoint,json=awsV2HttpEndpoint,proto3,enum=yandex.cloud.compute.v1.instancegroup.MetadataOption" json:"aws_v2_http_endpoint,omitempty"`
+	// Enabled access to STS credentials with AWS flavored metadata with session token (IMDSv2)
+	AwsV2HttpToken MetadataOption `protobuf:"varint,6,opt,name=aws_v2_http_token,json=awsV2HttpToken,proto3,enum=yandex.cloud.compute.v1.instancegroup.MetadataOption" json:"aws_v2_http_token,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -3469,6 +3481,20 @@ func (x *MetadataOptions) GetGceHttpToken() MetadataOption {
 func (x *MetadataOptions) GetAwsV1HttpToken() MetadataOption {
 	if x != nil {
 		return x.AwsV1HttpToken
+	}
+	return MetadataOption_METADATA_OPTION_UNSPECIFIED
+}
+
+func (x *MetadataOptions) GetAwsV2HttpEndpoint() MetadataOption {
+	if x != nil {
+		return x.AwsV2HttpEndpoint
+	}
+	return MetadataOption_METADATA_OPTION_UNSPECIFIED
+}
+
+func (x *MetadataOptions) GetAwsV2HttpToken() MetadataOption {
+	if x != nil {
+		return x.AwsV2HttpToken
 	}
 	return MetadataOption_METADATA_OPTION_UNSPECIFIED
 }
@@ -4668,12 +4694,14 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_rawDesc = 
 	"\x1fAUTO_HEALING_ACTION_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aRESTART\x10\x01\x12\f\n" +
 	"\bRECREATE\x10\x02\x12\b\n" +
-	"\x04NONE\x10\x03\"\x9b\x03\n" +
+	"\x04NONE\x10\x03\"\xe5\x04\n" +
 	"\x0fMetadataOptions\x12a\n" +
 	"\x11gce_http_endpoint\x18\x01 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0fgceHttpEndpoint\x12f\n" +
 	"\x14aws_v1_http_endpoint\x18\x02 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x11awsV1HttpEndpoint\x12[\n" +
 	"\x0egce_http_token\x18\x03 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\fgceHttpToken\x12`\n" +
-	"\x11aws_v1_http_token\x18\x04 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0eawsV1HttpToken\"o\n" +
+	"\x11aws_v1_http_token\x18\x04 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0eawsV1HttpToken\x12f\n" +
+	"\x14aws_v2_http_endpoint\x18\x05 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x11awsV2HttpEndpoint\x12`\n" +
+	"\x11aws_v2_http_token\x18\x06 \x01(\x0e25.yandex.cloud.compute.v1.instancegroup.MetadataOptionR\x0eawsV2HttpToken\"o\n" +
 	"\x11DisableZoneStatus\x12\x17\n" +
 	"\azone_id\x18\x01 \x01(\tR\x06zoneId\x12A\n" +
 	"\x0edisabled_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rdisabledUntil*;\n" +
@@ -4842,22 +4870,24 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_depIdxs = []
 	1,  // 69: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
 	1,  // 70: yandex.cloud.compute.v1.instancegroup.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
 	1,  // 71: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
-	64, // 72: yandex.cloud.compute.v1.instancegroup.DisableZoneStatus.disabled_until:type_name -> google.protobuf.Timestamp
-	65, // 73: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.measurement_duration:type_name -> google.protobuf.Duration
-	65, // 74: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.warmup_duration:type_name -> google.protobuf.Duration
-	65, // 75: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.stabilization_duration:type_name -> google.protobuf.Duration
-	51, // 76: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.cpu_utilization_rule:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
-	52, // 77: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.custom_rules:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
-	3,  // 78: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.auto_scale_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.AutoScaleType
-	4,  // 79: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.rule_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.RuleType
-	5,  // 80: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.metric_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.MetricType
-	54, // 81: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
-	9,  // 82: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.Operator
-	83, // [83:83] is the sub-list for method output_type
-	83, // [83:83] is the sub-list for method input_type
-	83, // [83:83] is the sub-list for extension type_name
-	83, // [83:83] is the sub-list for extension extendee
-	0,  // [0:83] is the sub-list for field type_name
+	1,  // 72: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v2_http_endpoint:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
+	1,  // 73: yandex.cloud.compute.v1.instancegroup.MetadataOptions.aws_v2_http_token:type_name -> yandex.cloud.compute.v1.instancegroup.MetadataOption
+	64, // 74: yandex.cloud.compute.v1.instancegroup.DisableZoneStatus.disabled_until:type_name -> google.protobuf.Timestamp
+	65, // 75: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.measurement_duration:type_name -> google.protobuf.Duration
+	65, // 76: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.warmup_duration:type_name -> google.protobuf.Duration
+	65, // 77: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.stabilization_duration:type_name -> google.protobuf.Duration
+	51, // 78: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.cpu_utilization_rule:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CpuUtilizationRule
+	52, // 79: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.custom_rules:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule
+	3,  // 80: yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.auto_scale_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.AutoScale.AutoScaleType
+	4,  // 81: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.rule_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.RuleType
+	5,  // 82: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.metric_type:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.MetricType
+	54, // 83: yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.labels:type_name -> yandex.cloud.compute.v1.instancegroup.ScalePolicy.CustomRule.LabelsEntry
+	9,  // 84: yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.instancegroup.PlacementPolicy.HostAffinityRule.Operator
+	85, // [85:85] is the sub-list for method output_type
+	85, // [85:85] is the sub-list for method input_type
+	85, // [85:85] is the sub-list for extension type_name
+	85, // [85:85] is the sub-list for extension extendee
+	0,  // [0:85] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instancegroup_instance_group_proto_init() }

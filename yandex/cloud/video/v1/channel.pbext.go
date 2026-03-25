@@ -50,6 +50,10 @@ func (m *ChannelSettings) SetRefererVerification(v *RefererVerificationSettings)
 	m.RefererVerification = v
 }
 
+func (m *ChannelSettings) SetVideo(v *ChannelVideoSettings) {
+	m.Video = v
+}
+
 type AdvertisementSettings_Provider = isAdvertisementSettings_Provider
 
 func (m *AdvertisementSettings) SetProvider(v AdvertisementSettings_Provider) {
@@ -80,4 +84,8 @@ func (m *RefererVerificationSettings) SetEnable(v bool) {
 
 func (m *RefererVerificationSettings) SetAllowedDomains(v []string) {
 	m.AllowedDomains = v
+}
+
+func (m *ChannelVideoSettings) SetShowSourceFileBeforeTranscoding(v bool) {
+	m.ShowSourceFileBeforeTranscoding = v
 }

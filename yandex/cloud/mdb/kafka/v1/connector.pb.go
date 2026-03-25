@@ -980,6 +980,8 @@ type ConnectorConfigIcebergSinkSpec struct {
 	//	*ConnectorConfigIcebergSinkSpec_Topics
 	//	*ConnectorConfigIcebergSinkSpec_TopicsRegex
 	TopicsSource isConnectorConfigIcebergSinkSpec_TopicsSource `protobuf_oneof:"topics_source"`
+	// Control topic name for Iceberg connector.
+	ControlTopic string `protobuf:"bytes,11,opt,name=control_topic,json=controlTopic,proto3" json:"control_topic,omitempty"`
 	// Credentials for connecting to Managed Hive Metastore.
 	MetastoreConnection *MetastoreConnectionSpec `protobuf:"bytes,3,opt,name=metastore_connection,json=metastoreConnection,proto3" json:"metastore_connection,omitempty"`
 	// Credentials for connecting to S3 storage.
@@ -1050,6 +1052,13 @@ func (x *ConnectorConfigIcebergSinkSpec) GetTopicsRegex() string {
 		if x, ok := x.TopicsSource.(*ConnectorConfigIcebergSinkSpec_TopicsRegex); ok {
 			return x.TopicsRegex
 		}
+	}
+	return ""
+}
+
+func (x *ConnectorConfigIcebergSinkSpec) GetControlTopic() string {
+	if x != nil {
+		return x.ControlTopic
 	}
 	return ""
 }
@@ -1152,6 +1161,8 @@ type UpdateConnectorConfigIcebergSinkSpec struct {
 	//	*UpdateConnectorConfigIcebergSinkSpec_Topics
 	//	*UpdateConnectorConfigIcebergSinkSpec_TopicsRegex
 	TopicsSource isUpdateConnectorConfigIcebergSinkSpec_TopicsSource `protobuf_oneof:"topics_source"`
+	// Control topic name for Iceberg connector.
+	ControlTopic string `protobuf:"bytes,7,opt,name=control_topic,json=controlTopic,proto3" json:"control_topic,omitempty"`
 	// Credentials for connecting to Managed Hive Metastore.
 	MetastoreConnection *MetastoreConnectionSpec `protobuf:"bytes,3,opt,name=metastore_connection,json=metastoreConnection,proto3" json:"metastore_connection,omitempty"`
 	// Credentials for connecting to S3 storage.
@@ -1215,6 +1226,13 @@ func (x *UpdateConnectorConfigIcebergSinkSpec) GetTopicsRegex() string {
 		if x, ok := x.TopicsSource.(*UpdateConnectorConfigIcebergSinkSpec_TopicsRegex); ok {
 			return x.TopicsRegex
 		}
+	}
+	return ""
+}
+
+func (x *UpdateConnectorConfigIcebergSinkSpec) GetControlTopic() string {
+	if x != nil {
+		return x.ControlTopic
 	}
 	return ""
 }
@@ -2406,6 +2424,8 @@ type ConnectorConfigIcebergSink struct {
 	//	*ConnectorConfigIcebergSink_Topics
 	//	*ConnectorConfigIcebergSink_TopicsRegex
 	TopicsSource isConnectorConfigIcebergSink_TopicsSource `protobuf_oneof:"topics_source"`
+	// Control topic name for Iceberg connector.
+	ControlTopic string `protobuf:"bytes,9,opt,name=control_topic,json=controlTopic,proto3" json:"control_topic,omitempty"`
 	// Credentials for connecting to Managed Hive Metastore.
 	MetastoreConnection *MetastoreConnection `protobuf:"bytes,3,opt,name=metastore_connection,json=metastoreConnection,proto3" json:"metastore_connection,omitempty"`
 	// Credentials for connecting to S3 storage.
@@ -2476,6 +2496,13 @@ func (x *ConnectorConfigIcebergSink) GetTopicsRegex() string {
 		if x, ok := x.TopicsSource.(*ConnectorConfigIcebergSink_TopicsRegex); ok {
 			return x.TopicsRegex
 		}
+	}
+	return ""
+}
+
+func (x *ConnectorConfigIcebergSink) GetControlTopic() string {
+	if x != nil {
+		return x.ControlTopic
 	}
 	return ""
 }
@@ -3109,10 +3136,11 @@ const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\raccess_key_id\x18\x01 \x01(\tR\vaccessKeyId\x12*\n" +
 	"\x11secret_access_key\x18\x02 \x01(\tR\x0fsecretAccessKey\x12\x1a\n" +
 	"\bendpoint\x18\x03 \x01(\tR\bendpoint\x12\x16\n" +
-	"\x06region\x18\x04 \x01(\tR\x06region\"\xa1\x05\n" +
+	"\x06region\x18\x04 \x01(\tR\x06region\"\xc6\x05\n" +
 	"\x1eConnectorConfigIcebergSinkSpec\x12\x18\n" +
 	"\x06topics\x18\x01 \x01(\tH\x00R\x06topics\x12#\n" +
-	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12e\n" +
+	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12#\n" +
+	"\rcontrol_topic\x18\v \x01(\tR\fcontrolTopic\x12e\n" +
 	"\x14metastore_connection\x18\x03 \x01(\v22.yandex.cloud.mdb.kafka.v1.MetastoreConnectionSpecR\x13metastoreConnection\x12W\n" +
 	"\rs3_connection\x18\x04 \x01(\v22.yandex.cloud.mdb.kafka.v1.IcebergS3ConnectionSpecR\fs3Connection\x12R\n" +
 	"\rstatic_tables\x18\a \x01(\v2+.yandex.cloud.mdb.kafka.v1.StaticTablesSpecH\x01R\fstaticTables\x12U\n" +
@@ -3121,10 +3149,11 @@ const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\x0econtrol_config\x18\n" +
 	" \x01(\v2-.yandex.cloud.mdb.kafka.v1.IcebergControlSpecR\rcontrolConfigB\x0f\n" +
 	"\rtopics_sourceB\x0f\n" +
-	"\rtable_routingJ\x04\b\x05\x10\a\"\xe5\x03\n" +
+	"\rtable_routingJ\x04\b\x05\x10\a\"\x8a\x04\n" +
 	"$UpdateConnectorConfigIcebergSinkSpec\x12\x18\n" +
 	"\x06topics\x18\x01 \x01(\tH\x00R\x06topics\x12#\n" +
-	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12e\n" +
+	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12#\n" +
+	"\rcontrol_topic\x18\a \x01(\tR\fcontrolTopic\x12e\n" +
 	"\x14metastore_connection\x18\x03 \x01(\v22.yandex.cloud.mdb.kafka.v1.MetastoreConnectionSpecR\x13metastoreConnection\x12W\n" +
 	"\rs3_connection\x18\x04 \x01(\v22.yandex.cloud.mdb.kafka.v1.IcebergS3ConnectionSpecR\fs3Connection\x12W\n" +
 	"\rtables_config\x18\x05 \x01(\v22.yandex.cloud.mdb.kafka.v1.IcebergTablesConfigSpecR\ftablesConfig\x12T\n" +
@@ -3220,10 +3249,11 @@ const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\x11ExternalS3Storage\x12\"\n" +
 	"\raccess_key_id\x18\x01 \x01(\tR\vaccessKeyId\x12\x1a\n" +
 	"\bendpoint\x18\x02 \x01(\tR\bendpoint\x12\x16\n" +
-	"\x06region\x18\x03 \x01(\tR\x06region\"\xff\x04\n" +
+	"\x06region\x18\x03 \x01(\tR\x06region\"\xa4\x05\n" +
 	"\x1aConnectorConfigIcebergSink\x12\x18\n" +
 	"\x06topics\x18\x01 \x01(\tH\x00R\x06topics\x12#\n" +
-	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12a\n" +
+	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12#\n" +
+	"\rcontrol_topic\x18\t \x01(\tR\fcontrolTopic\x12a\n" +
 	"\x14metastore_connection\x18\x03 \x01(\v2..yandex.cloud.mdb.kafka.v1.MetastoreConnectionR\x13metastoreConnection\x12S\n" +
 	"\rs3_connection\x18\x04 \x01(\v2..yandex.cloud.mdb.kafka.v1.IcebergS3ConnectionR\fs3Connection\x12N\n" +
 	"\rstatic_tables\x18\x05 \x01(\v2'.yandex.cloud.mdb.kafka.v1.StaticTablesH\x01R\fstaticTables\x12Q\n" +

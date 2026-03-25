@@ -1918,7 +1918,7 @@ type UserSettings struct {
 	QuotaMode UserSettings_QuotaMode `protobuf:"varint,80,opt,name=quota_mode,json=quotaMode,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_QuotaMode" json:"quota_mode,omitempty"`
 	// If enabled, data from **INSERT** query is stored in queue and later flushed to table in background.
 	//
-	// Default value: **false**.
+	// Default value: **true** for versions 26.3 and higher, **false** for versions 26.2 and lower.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#async_insert).
 	AsyncInsert *wrapperspb.BoolValue `protobuf:"bytes,117,opt,name=async_insert,json=asyncInsert,proto3" json:"async_insert,omitempty"`

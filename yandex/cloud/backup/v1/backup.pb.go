@@ -1102,7 +1102,7 @@ var File_yandex_cloud_backup_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_backup_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/backup/v1/backup.proto\x12\x16yandex.cloud.backup.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a#yandex/cloud/backup/v1/policy.proto\"\x8c\v\n" +
+	"#yandex/cloud/backup/v1/backup.proto\x12\x16yandex.cloud.backup.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a#yandex/cloud/backup/v1/policy.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\v\n" +
 	"\aArchive\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
@@ -1153,7 +1153,7 @@ const file_yandex_cloud_backup_v1_backup_proto_rawDesc = "" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aREFRESH\x10\x01\x12\x13\n" +
-	"\x0fDELETE_BY_AGENT\x10\x02J\x04\b\x11\x10\x14J\x04\b\x15\x10\x16J\x04\b\x1c\x10\x1dJ\x04\b\x1d\x10\x1e\"\xae\x01\n" +
+	"\x0fDELETE_BY_AGENT\x10\x02J\x04\b\x11\x10\x14J\x04\b\x15\x10\x16J\x04\b\x1c\x10\x1e\"\xae\x01\n" +
 	"\x06Volume\x12\x1d\n" +
 	"\n" +
 	"free_space\x18\x01 \x01(\x03R\tfreeSpace\x12\x1f\n" +
@@ -1168,7 +1168,7 @@ const file_yandex_cloud_backup_v1_backup_proto_rawDesc = "" +
 	"\fdevice_model\x18\x01 \x01(\tR\vdeviceModel\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04size\x18\x03 \x01(\x03R\x04size\x128\n" +
-	"\avolumes\x18\x04 \x03(\v2\x1e.yandex.cloud.backup.v1.VolumeR\avolumes\"\xc1\x06\n" +
+	"\avolumes\x18\x04 \x03(\v2\x1e.yandex.cloud.backup.v1.VolumeR\avolumes\"\xbb\x06\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bvault_id\x18\x02 \x01(\tR\avaultId\x12\x1d\n" +
@@ -1200,7 +1200,7 @@ const file_yandex_cloud_backup_v1_backup_proto_rawDesc = "" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04FULL\x10\x01\x12\x0f\n" +
-	"\vINCREMENTAL\x10\x02J\x04\b\f\x10\rJ\x04\b\r\x10\x0eJ\x04\b\x10\x10\x15\"\xa0\x04\n" +
+	"\vINCREMENTAL\x10\x02J\x04\b\f\x10\x0eJ\x04\b\x10\x10\x15\"\x9a\x04\n" +
 	"\n" +
 	"BackupFile\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12?\n" +
@@ -1211,10 +1211,10 @@ const file_yandex_cloud_backup_v1_backup_proto_rawDesc = "" +
 	"\x04size\x18\x06 \x01(\x03R\x04size\x12J\n" +
 	"\aactions\x18\a \x01(\v2*.yandex.cloud.backup.v1.BackupFile.ActionsB\x04\xe8\xc71\x01R\aactions\x12A\n" +
 	"\vmodified_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\n" +
-	"modifiedAt\x1a]\n" +
+	"modifiedAt\x1aW\n" +
 	"\aActions\x12&\n" +
 	"\x0frestore_to_disk\x18\x01 \x01(\bR\rrestoreToDisk\x12$\n" +
-	"\x0ego_to_location\x18\x02 \x01(\bR\fgoToLocationJ\x04\b\x03\x10\x04\"9\n" +
+	"\x0ego_to_location\x18\x02 \x01(\bR\fgoToLocation\"9\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bTYPE_DIR\x10\x01\x12\r\n" +

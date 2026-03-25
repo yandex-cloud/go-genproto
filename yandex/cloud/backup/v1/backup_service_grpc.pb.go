@@ -20,8 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackupService_List_FullMethodName               = "/yandex.cloud.backup.v1.BackupService/List"
 	BackupService_ListArchives_FullMethodName       = "/yandex.cloud.backup.v1.BackupService/ListArchives"
+	BackupService_List_FullMethodName               = "/yandex.cloud.backup.v1.BackupService/List"
 	BackupService_ListFiles_FullMethodName          = "/yandex.cloud.backup.v1.BackupService/ListFiles"
 	BackupService_Get_FullMethodName                = "/yandex.cloud.backup.v1.BackupService/Get"
 	BackupService_StartRecovery_FullMethodName      = "/yandex.cloud.backup.v1.BackupService/StartRecovery"
@@ -36,17 +36,16 @@ const (
 //
 // A set of methods for managing [backups](/docs/backup/concepts/backup).
 type BackupServiceClient interface {
-	// List backups using filters.
-	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
 	// List archives that holds backups for specified folder or
 	// specified [Compute Cloud instance](/docs/backup/concepts/vm-connection#os).
 	ListArchives(ctx context.Context, in *ListArchivesRequest, opts ...grpc.CallOption) (*ListArchivesResponse, error)
+	// List backups using filters.
+	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
 	// ListFiles of the backup.
 	ListFiles(ctx context.Context, in *ListFilesRequest, opts ...grpc.CallOption) (*ListFilesResponse, error)
 	// Get backup by its id.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Start recovery process of specified backup to specific Compute Cloud instance.
-	//
 	// For details, see [Restoring a VM from a backup](/docs/backup/operations/backup-vm/recover).
 	StartRecovery(ctx context.Context, in *StartRecoveryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// StartFilesRecovery runs recovery process of selected files to specific Compute Cloud instance.
@@ -65,20 +64,20 @@ func NewBackupServiceClient(cc grpc.ClientConnInterface) BackupServiceClient {
 	return &backupServiceClient{cc}
 }
 
-func (c *backupServiceClient) List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error) {
+func (c *backupServiceClient) ListArchives(ctx context.Context, in *ListArchivesRequest, opts ...grpc.CallOption) (*ListArchivesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListBackupsResponse)
-	err := c.cc.Invoke(ctx, BackupService_List_FullMethodName, in, out, cOpts...)
+	out := new(ListArchivesResponse)
+	err := c.cc.Invoke(ctx, BackupService_ListArchives_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backupServiceClient) ListArchives(ctx context.Context, in *ListArchivesRequest, opts ...grpc.CallOption) (*ListArchivesResponse, error) {
+func (c *backupServiceClient) List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListArchivesResponse)
-	err := c.cc.Invoke(ctx, BackupService_ListArchives_FullMethodName, in, out, cOpts...)
+	out := new(ListBackupsResponse)
+	err := c.cc.Invoke(ctx, BackupService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -151,17 +150,16 @@ func (c *backupServiceClient) DeleteArchive(ctx context.Context, in *DeleteArchi
 //
 // A set of methods for managing [backups](/docs/backup/concepts/backup).
 type BackupServiceServer interface {
-	// List backups using filters.
-	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
 	// List archives that holds backups for specified folder or
 	// specified [Compute Cloud instance](/docs/backup/concepts/vm-connection#os).
 	ListArchives(context.Context, *ListArchivesRequest) (*ListArchivesResponse, error)
+	// List backups using filters.
+	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
 	// ListFiles of the backup.
 	ListFiles(context.Context, *ListFilesRequest) (*ListFilesResponse, error)
 	// Get backup by its id.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Start recovery process of specified backup to specific Compute Cloud instance.
-	//
 	// For details, see [Restoring a VM from a backup](/docs/backup/operations/backup-vm/recover).
 	StartRecovery(context.Context, *StartRecoveryRequest) (*operation.Operation, error)
 	// StartFilesRecovery runs recovery process of selected files to specific Compute Cloud instance.
@@ -179,11 +177,11 @@ type BackupServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackupServiceServer struct{}
 
-func (UnimplementedBackupServiceServer) List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method List not implemented")
-}
 func (UnimplementedBackupServiceServer) ListArchives(context.Context, *ListArchivesRequest) (*ListArchivesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListArchives not implemented")
+}
+func (UnimplementedBackupServiceServer) List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedBackupServiceServer) ListFiles(context.Context, *ListFilesRequest) (*ListFilesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListFiles not implemented")
@@ -223,24 +221,6 @@ func RegisterBackupServiceServer(s grpc.ServiceRegistrar, srv BackupServiceServe
 	s.RegisterService(&BackupService_ServiceDesc, srv)
 }
 
-func _BackupService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListBackupsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackupServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackupService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackupServiceServer).List(ctx, req.(*ListBackupsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackupService_ListArchives_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListArchivesRequest)
 	if err := dec(in); err != nil {
@@ -255,6 +235,24 @@ func _BackupService_ListArchives_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackupServiceServer).ListArchives(ctx, req.(*ListArchivesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBackupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).List(ctx, req.(*ListBackupsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -375,12 +373,12 @@ var BackupService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackupServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "List",
-			Handler:    _BackupService_List_Handler,
-		},
-		{
 			MethodName: "ListArchives",
 			Handler:    _BackupService_ListArchives_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _BackupService_List_Handler,
 		},
 		{
 			MethodName: "ListFiles",

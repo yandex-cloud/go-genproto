@@ -1635,6 +1635,10 @@ type MetadataOptions struct {
 	GceHttpToken MetadataOption `protobuf:"varint,3,opt,name=gce_http_token,json=gceHttpToken,proto3,enum=yandex.cloud.compute.v1.MetadataOption" json:"gce_http_token,omitempty"`
 	// Enabled access to IAM credentials with AWS flavored metadata (IMDSv1)
 	AwsV1HttpToken MetadataOption `protobuf:"varint,4,opt,name=aws_v1_http_token,json=awsV1HttpToken,proto3,enum=yandex.cloud.compute.v1.MetadataOption" json:"aws_v1_http_token,omitempty"`
+	// Enabled access to AWS flavored metadata with session token (IMDSv2)
+	AwsV2HttpEndpoint MetadataOption `protobuf:"varint,5,opt,name=aws_v2_http_endpoint,json=awsV2HttpEndpoint,proto3,enum=yandex.cloud.compute.v1.MetadataOption" json:"aws_v2_http_endpoint,omitempty"`
+	// Enabled access to STS credentials with AWS flavored metadata with session token (IMDSv2)
+	AwsV2HttpToken MetadataOption `protobuf:"varint,6,opt,name=aws_v2_http_token,json=awsV2HttpToken,proto3,enum=yandex.cloud.compute.v1.MetadataOption" json:"aws_v2_http_token,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1693,6 +1697,20 @@ func (x *MetadataOptions) GetGceHttpToken() MetadataOption {
 func (x *MetadataOptions) GetAwsV1HttpToken() MetadataOption {
 	if x != nil {
 		return x.AwsV1HttpToken
+	}
+	return MetadataOption_METADATA_OPTION_UNSPECIFIED
+}
+
+func (x *MetadataOptions) GetAwsV2HttpEndpoint() MetadataOption {
+	if x != nil {
+		return x.AwsV2HttpEndpoint
+	}
+	return MetadataOption_METADATA_OPTION_UNSPECIFIED
+}
+
+func (x *MetadataOptions) GetAwsV2HttpToken() MetadataOption {
+	if x != nil {
+		return x.AwsV2HttpToken
 	}
 	return MetadataOption_METADATA_OPTION_UNSPECIFIED
 }
@@ -1949,12 +1967,14 @@ const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\x14OPERATOR_UNSPECIFIED\x10\x00\x12\x06\n" +
 	"\x02IN\x10\x01\x12\n" +
 	"\n" +
-	"\x06NOT_IN\x10\x02\"\xe3\x02\n" +
+	"\x06NOT_IN\x10\x02\"\x91\x04\n" +
 	"\x0fMetadataOptions\x12S\n" +
 	"\x11gce_http_endpoint\x18\x01 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x0fgceHttpEndpoint\x12X\n" +
 	"\x14aws_v1_http_endpoint\x18\x02 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x11awsV1HttpEndpoint\x12M\n" +
 	"\x0egce_http_token\x18\x03 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\fgceHttpToken\x12R\n" +
-	"\x11aws_v1_http_token\x18\x04 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x0eawsV1HttpToken\"\xdb\x01\n" +
+	"\x11aws_v1_http_token\x18\x04 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x0eawsV1HttpToken\x12X\n" +
+	"\x14aws_v2_http_endpoint\x18\x05 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x11awsV2HttpEndpoint\x12R\n" +
+	"\x11aws_v2_http_token\x18\x06 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x0eawsV2HttpToken\"\xdb\x01\n" +
 	"\x12SerialPortSettings\x12i\n" +
 	"\x11ssh_authorization\x18\x01 \x01(\x0e2<.yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorizationR\x10sshAuthorization\"Z\n" +
 	"\x10SSHAuthorization\x12!\n" +
@@ -2057,13 +2077,15 @@ var file_yandex_cloud_compute_v1_instance_proto_depIdxs = []int32{
 	1,  // 33: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
 	1,  // 34: yandex.cloud.compute.v1.MetadataOptions.gce_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
 	1,  // 35: yandex.cloud.compute.v1.MetadataOptions.aws_v1_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
-	7,  // 36: yandex.cloud.compute.v1.SerialPortSettings.ssh_authorization:type_name -> yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorization
-	6,  // 37: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.Operator
-	38, // [38:38] is the sub-list for method output_type
-	38, // [38:38] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	1,  // 36: yandex.cloud.compute.v1.MetadataOptions.aws_v2_http_endpoint:type_name -> yandex.cloud.compute.v1.MetadataOption
+	1,  // 37: yandex.cloud.compute.v1.MetadataOptions.aws_v2_http_token:type_name -> yandex.cloud.compute.v1.MetadataOption
+	7,  // 38: yandex.cloud.compute.v1.SerialPortSettings.ssh_authorization:type_name -> yandex.cloud.compute.v1.SerialPortSettings.SSHAuthorization
+	6,  // 39: yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.op:type_name -> yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.Operator
+	40, // [40:40] is the sub-list for method output_type
+	40, // [40:40] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_compute_v1_instance_proto_init() }

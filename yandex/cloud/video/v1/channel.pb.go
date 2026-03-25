@@ -170,8 +170,10 @@ type ChannelSettings struct {
 	// Restricts which domains can embed content from this channel.
 	// If not specified or disabled, content can be embedded on any domain.
 	RefererVerification *RefererVerificationSettings `protobuf:"bytes,3,opt,name=referer_verification,json=refererVerification,proto3" json:"referer_verification,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Settings for displaying video
+	Video         *ChannelVideoSettings `protobuf:"bytes,4,opt,name=video,proto3" json:"video,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ChannelSettings) Reset() {
@@ -214,6 +216,13 @@ func (x *ChannelSettings) GetAdvertisement() *AdvertisementSettings {
 func (x *ChannelSettings) GetRefererVerification() *RefererVerificationSettings {
 	if x != nil {
 		return x.RefererVerification
+	}
+	return nil
+}
+
+func (x *ChannelSettings) GetVideo() *ChannelVideoSettings {
+	if x != nil {
+		return x.Video
 	}
 	return nil
 }
@@ -353,6 +362,54 @@ func (x *RefererVerificationSettings) GetAllowedDomains() []string {
 	return nil
 }
 
+// Settings for displaying video
+type ChannelVideoSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Instruct the player to allow playback of the raw source file while
+	// transcoding is in progress. Once a transcoded version is available,
+	// the source file will no longer be used.
+	ShowSourceFileBeforeTranscoding bool `protobuf:"varint,1,opt,name=show_source_file_before_transcoding,json=showSourceFileBeforeTranscoding,proto3" json:"show_source_file_before_transcoding,omitempty"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
+}
+
+func (x *ChannelVideoSettings) Reset() {
+	*x = ChannelVideoSettings{}
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChannelVideoSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChannelVideoSettings) ProtoMessage() {}
+
+func (x *ChannelVideoSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChannelVideoSettings.ProtoReflect.Descriptor instead.
+func (*ChannelVideoSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ChannelVideoSettings) GetShowSourceFileBeforeTranscoding() bool {
+	if x != nil {
+		return x.ShowSourceFileBeforeTranscoding
+	}
+	return false
+}
+
 // Configuration for the Yandex.Direct advertisement provider.
 // These settings are specific to the Yandex.Direct advertising platform.
 type AdvertisementSettings_YandexDirect struct {
@@ -375,7 +432,7 @@ type AdvertisementSettings_YandexDirect struct {
 
 func (x *AdvertisementSettings_YandexDirect) Reset() {
 	*x = AdvertisementSettings_YandexDirect{}
-	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[5]
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -387,7 +444,7 @@ func (x *AdvertisementSettings_YandexDirect) String() string {
 func (*AdvertisementSettings_YandexDirect) ProtoMessage() {}
 
 func (x *AdvertisementSettings_YandexDirect) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[5]
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -443,10 +500,11 @@ const file_yandex_cloud_video_v1_channel_proto_rawDesc = "" +
 	"\bsettings\x18\xc9\x01 \x01(\v2&.yandex.cloud.video.v1.ChannelSettingsR\bsettings\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10dJ\x05\bf\x10\xc8\x01\"\xd2\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10dJ\x05\bf\x10\xc8\x01\"\x95\x02\n" +
 	"\x0fChannelSettings\x12R\n" +
 	"\radvertisement\x18\x01 \x01(\v2,.yandex.cloud.video.v1.AdvertisementSettingsR\radvertisement\x12e\n" +
-	"\x14referer_verification\x18\x03 \x01(\v22.yandex.cloud.video.v1.RefererVerificationSettingsR\x13refererVerificationJ\x04\b\x02\x10\x03\"\xe8\x01\n" +
+	"\x14referer_verification\x18\x03 \x01(\v22.yandex.cloud.video.v1.RefererVerificationSettingsR\x13refererVerification\x12A\n" +
+	"\x05video\x18\x04 \x01(\v2+.yandex.cloud.video.v1.ChannelVideoSettingsR\x05videoJ\x04\b\x02\x10\x03\"\xe8\x01\n" +
 	"\x15AdvertisementSettings\x12`\n" +
 	"\ryandex_direct\x18d \x01(\v29.yandex.cloud.video.v1.AdvertisementSettings.YandexDirectH\x00R\fyandexDirect\x1a[\n" +
 	"\fYandexDirect\x12\x16\n" +
@@ -457,7 +515,9 @@ const file_yandex_cloud_video_v1_channel_proto_rawDesc = "" +
 	"\bproviderJ\x04\b\x01\x10d\"\xb4\x01\n" +
 	"\x1bRefererVerificationSettings\x12\x16\n" +
 	"\x06enable\x18\x01 \x01(\bR\x06enable\x12}\n" +
-	"\x0fallowed_domains\x18\x02 \x03(\tBT\xf2\xc71>^(?:\\*\\.)?(?:[a-zA-Z0-9-]*\\.)+[a-zA-Z]{2,}$|^\\*\\.[a-zA-Z]{2,}$\x82\xc81\x05<=100\x8a\xc81\x054-255R\x0eallowedDomainsB\\\n" +
+	"\x0fallowed_domains\x18\x02 \x03(\tBT\xf2\xc71>^(?:\\*\\.)?(?:[a-zA-Z0-9-]*\\.)+[a-zA-Z]{2,}$|^\\*\\.[a-zA-Z]{2,}$\x82\xc81\x05<=100\x8a\xc81\x054-255R\x0eallowedDomains\"d\n" +
+	"\x14ChannelVideoSettings\x12L\n" +
+	"#show_source_file_before_transcoding\x18\x01 \x01(\bR\x1fshowSourceFileBeforeTranscodingB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (
@@ -472,29 +532,31 @@ func file_yandex_cloud_video_v1_channel_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_video_v1_channel_proto_rawDescData
 }
 
-var file_yandex_cloud_video_v1_channel_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_yandex_cloud_video_v1_channel_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_video_v1_channel_proto_goTypes = []any{
-	(*Channel)(nil),                     // 0: yandex.cloud.video.v1.Channel
-	(*ChannelSettings)(nil),             // 1: yandex.cloud.video.v1.ChannelSettings
-	(*AdvertisementSettings)(nil),       // 2: yandex.cloud.video.v1.AdvertisementSettings
-	(*RefererVerificationSettings)(nil), // 3: yandex.cloud.video.v1.RefererVerificationSettings
-	nil,                                 // 4: yandex.cloud.video.v1.Channel.LabelsEntry
-	(*AdvertisementSettings_YandexDirect)(nil), // 5: yandex.cloud.video.v1.AdvertisementSettings.YandexDirect
-	(*timestamppb.Timestamp)(nil),              // 6: google.protobuf.Timestamp
+	(*Channel)(nil),                            // 0: yandex.cloud.video.v1.Channel
+	(*ChannelSettings)(nil),                    // 1: yandex.cloud.video.v1.ChannelSettings
+	(*AdvertisementSettings)(nil),              // 2: yandex.cloud.video.v1.AdvertisementSettings
+	(*RefererVerificationSettings)(nil),        // 3: yandex.cloud.video.v1.RefererVerificationSettings
+	(*ChannelVideoSettings)(nil),               // 4: yandex.cloud.video.v1.ChannelVideoSettings
+	nil,                                        // 5: yandex.cloud.video.v1.Channel.LabelsEntry
+	(*AdvertisementSettings_YandexDirect)(nil), // 6: yandex.cloud.video.v1.AdvertisementSettings.YandexDirect
+	(*timestamppb.Timestamp)(nil),              // 7: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_channel_proto_depIdxs = []int32{
-	6, // 0: yandex.cloud.video.v1.Channel.created_at:type_name -> google.protobuf.Timestamp
-	6, // 1: yandex.cloud.video.v1.Channel.updated_at:type_name -> google.protobuf.Timestamp
-	4, // 2: yandex.cloud.video.v1.Channel.labels:type_name -> yandex.cloud.video.v1.Channel.LabelsEntry
+	7, // 0: yandex.cloud.video.v1.Channel.created_at:type_name -> google.protobuf.Timestamp
+	7, // 1: yandex.cloud.video.v1.Channel.updated_at:type_name -> google.protobuf.Timestamp
+	5, // 2: yandex.cloud.video.v1.Channel.labels:type_name -> yandex.cloud.video.v1.Channel.LabelsEntry
 	1, // 3: yandex.cloud.video.v1.Channel.settings:type_name -> yandex.cloud.video.v1.ChannelSettings
 	2, // 4: yandex.cloud.video.v1.ChannelSettings.advertisement:type_name -> yandex.cloud.video.v1.AdvertisementSettings
 	3, // 5: yandex.cloud.video.v1.ChannelSettings.referer_verification:type_name -> yandex.cloud.video.v1.RefererVerificationSettings
-	5, // 6: yandex.cloud.video.v1.AdvertisementSettings.yandex_direct:type_name -> yandex.cloud.video.v1.AdvertisementSettings.YandexDirect
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	4, // 6: yandex.cloud.video.v1.ChannelSettings.video:type_name -> yandex.cloud.video.v1.ChannelVideoSettings
+	6, // 7: yandex.cloud.video.v1.AdvertisementSettings.yandex_direct:type_name -> yandex.cloud.video.v1.AdvertisementSettings.YandexDirect
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_channel_proto_init() }
@@ -511,7 +573,7 @@ func file_yandex_cloud_video_v1_channel_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_channel_proto_rawDesc), len(file_yandex_cloud_video_v1_channel_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

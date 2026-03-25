@@ -40,7 +40,6 @@ type PolicyServiceClient interface {
 	// List [policies](/docs/backup/concepts/policy) of specified folder.
 	List(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListPoliciesResponse, error)
 	// Create a new policy.
-	//
 	// For detailed information, please see [Creating a backup policy](/docs/backup/operations/policy-vm/create).
 	Create(ctx context.Context, in *CreatePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Get specific policy.
@@ -168,7 +167,6 @@ type PolicyServiceServer interface {
 	// List [policies](/docs/backup/concepts/policy) of specified folder.
 	List(context.Context, *ListPoliciesRequest) (*ListPoliciesResponse, error)
 	// Create a new policy.
-	//
 	// For detailed information, please see [Creating a backup policy](/docs/backup/operations/policy-vm/create).
 	Create(context.Context, *CreatePolicyRequest) (*operation.Operation, error)
 	// Get specific policy.

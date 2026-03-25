@@ -78,7 +78,7 @@ func (x FilesRecoveryOptions_Overwrite) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use FilesRecoveryOptions_Overwrite.Descriptor instead.
 func (FilesRecoveryOptions_Overwrite) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{11, 0}
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{15, 0}
 }
 
 type ListArchivesRequest struct {
@@ -227,7 +227,6 @@ type ListBackupsRequest struct {
 	// Filter list by various parameters.
 	// Supported parameters are:
 	// * created_at
-	//
 	// Supported logic operators:
 	// * AND
 	Filter string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
@@ -760,6 +759,240 @@ func (x *StartRecoveryMetadata) GetDstComputeInstanceId() string {
 	return ""
 }
 
+type DeleteBackupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Compute Cloud instance ID of the Backup.
+	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	// Backup ID that should be deleted.
+	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBackupRequest) Reset() {
+	*x = DeleteBackupRequest{}
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBackupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBackupRequest) ProtoMessage() {}
+
+func (x *DeleteBackupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBackupRequest.ProtoReflect.Descriptor instead.
+func (*DeleteBackupRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DeleteBackupRequest) GetComputeInstanceId() string {
+	if x != nil {
+		return x.ComputeInstanceId
+	}
+	return ""
+}
+
+func (x *DeleteBackupRequest) GetBackupId() string {
+	if x != nil {
+		return x.BackupId
+	}
+	return ""
+}
+
+type DeleteBackupMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Compute Cloud instance ID of the Backup.
+	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
+	// Backup ID that should be deleted.
+	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBackupMetadata) Reset() {
+	*x = DeleteBackupMetadata{}
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBackupMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBackupMetadata) ProtoMessage() {}
+
+func (x *DeleteBackupMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBackupMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteBackupMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteBackupMetadata) GetComputeInstanceId() string {
+	if x != nil {
+		return x.ComputeInstanceId
+	}
+	return ""
+}
+
+func (x *DeleteBackupMetadata) GetBackupId() string {
+	if x != nil {
+		return x.BackupId
+	}
+	return ""
+}
+
+type DeleteArchiveRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Archive ID that should be deleted.
+	ArchiveId string `protobuf:"bytes,1,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
+	// Folder ID of the archive to delete.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Instance ID of the Archive.
+	InstanceId string `protobuf:"bytes,3,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// Policy ID of the Archive.
+	PolicyId      string `protobuf:"bytes,4,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteArchiveRequest) Reset() {
+	*x = DeleteArchiveRequest{}
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteArchiveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteArchiveRequest) ProtoMessage() {}
+
+func (x *DeleteArchiveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteArchiveRequest.ProtoReflect.Descriptor instead.
+func (*DeleteArchiveRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DeleteArchiveRequest) GetArchiveId() string {
+	if x != nil {
+		return x.ArchiveId
+	}
+	return ""
+}
+
+func (x *DeleteArchiveRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *DeleteArchiveRequest) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *DeleteArchiveRequest) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
+type DeleteArchiveMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Archive ID that should be deleted.
+	ArchiveId string `protobuf:"bytes,1,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
+	// Folder ID of the archive.
+	FolderId      string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteArchiveMetadata) Reset() {
+	*x = DeleteArchiveMetadata{}
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteArchiveMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteArchiveMetadata) ProtoMessage() {}
+
+func (x *DeleteArchiveMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteArchiveMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteArchiveMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DeleteArchiveMetadata) GetArchiveId() string {
+	if x != nil {
+		return x.ArchiveId
+	}
+	return ""
+}
+
+func (x *DeleteArchiveMetadata) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
 type TargetPathOriginal struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -768,7 +1001,7 @@ type TargetPathOriginal struct {
 
 func (x *TargetPathOriginal) Reset() {
 	*x = TargetPathOriginal{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -780,7 +1013,7 @@ func (x *TargetPathOriginal) String() string {
 func (*TargetPathOriginal) ProtoMessage() {}
 
 func (x *TargetPathOriginal) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -793,7 +1026,7 @@ func (x *TargetPathOriginal) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TargetPathOriginal.ProtoReflect.Descriptor instead.
 func (*TargetPathOriginal) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{13}
 }
 
 type TargetPathCustom struct {
@@ -806,7 +1039,7 @@ type TargetPathCustom struct {
 
 func (x *TargetPathCustom) Reset() {
 	*x = TargetPathCustom{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -818,7 +1051,7 @@ func (x *TargetPathCustom) String() string {
 func (*TargetPathCustom) ProtoMessage() {}
 
 func (x *TargetPathCustom) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -831,7 +1064,7 @@ func (x *TargetPathCustom) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TargetPathCustom.ProtoReflect.Descriptor instead.
 func (*TargetPathCustom) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TargetPathCustom) GetPath() string {
@@ -843,24 +1076,24 @@ func (x *TargetPathCustom) GetPath() string {
 
 type FilesRecoveryOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Overwrite options declares the behavior for files that already exists on the file system.
-	Overwrite FilesRecoveryOptions_Overwrite `protobuf:"varint,1,opt,name=overwrite,proto3,enum=yandex.cloud.backup.v1.FilesRecoveryOptions_Overwrite" json:"overwrite,omitempty"`
-	// specifies whether the recovery plan is able to reboot host if needed.
-	RebootIfNeeded bool `protobuf:"varint,2,opt,name=reboot_if_needed,json=rebootIfNeeded,proto3" json:"reboot_if_needed,omitempty"`
 	// Path strategy for selected files.
 	//
 	// Types that are valid to be assigned to Type:
 	//
 	//	*FilesRecoveryOptions_Original
 	//	*FilesRecoveryOptions_Custom
-	Type          isFilesRecoveryOptions_Type `protobuf_oneof:"type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Type isFilesRecoveryOptions_Type `protobuf_oneof:"type"`
+	// Overwrite options declares the behavior for files that already exists on the file system.
+	Overwrite FilesRecoveryOptions_Overwrite `protobuf:"varint,1,opt,name=overwrite,proto3,enum=yandex.cloud.backup.v1.FilesRecoveryOptions_Overwrite" json:"overwrite,omitempty"`
+	// specifies whether the recovery plan is able to reboot host if needed.
+	RebootIfNeeded bool `protobuf:"varint,2,opt,name=reboot_if_needed,json=rebootIfNeeded,proto3" json:"reboot_if_needed,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *FilesRecoveryOptions) Reset() {
 	*x = FilesRecoveryOptions{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -872,7 +1105,7 @@ func (x *FilesRecoveryOptions) String() string {
 func (*FilesRecoveryOptions) ProtoMessage() {}
 
 func (x *FilesRecoveryOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -885,21 +1118,7 @@ func (x *FilesRecoveryOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilesRecoveryOptions.ProtoReflect.Descriptor instead.
 func (*FilesRecoveryOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *FilesRecoveryOptions) GetOverwrite() FilesRecoveryOptions_Overwrite {
-	if x != nil {
-		return x.Overwrite
-	}
-	return FilesRecoveryOptions_OVERWRITE_UNSPECIFIED
-}
-
-func (x *FilesRecoveryOptions) GetRebootIfNeeded() bool {
-	if x != nil {
-		return x.RebootIfNeeded
-	}
-	return false
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *FilesRecoveryOptions) GetType() isFilesRecoveryOptions_Type {
@@ -925,6 +1144,20 @@ func (x *FilesRecoveryOptions) GetCustom() *TargetPathCustom {
 		}
 	}
 	return nil
+}
+
+func (x *FilesRecoveryOptions) GetOverwrite() FilesRecoveryOptions_Overwrite {
+	if x != nil {
+		return x.Overwrite
+	}
+	return FilesRecoveryOptions_OVERWRITE_UNSPECIFIED
+}
+
+func (x *FilesRecoveryOptions) GetRebootIfNeeded() bool {
+	if x != nil {
+		return x.RebootIfNeeded
+	}
+	return false
 }
 
 type isFilesRecoveryOptions_Type interface {
@@ -959,7 +1192,7 @@ type StartFilesRecoveryRequest struct {
 
 func (x *StartFilesRecoveryRequest) Reset() {
 	*x = StartFilesRecoveryRequest{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -971,7 +1204,7 @@ func (x *StartFilesRecoveryRequest) String() string {
 func (*StartFilesRecoveryRequest) ProtoMessage() {}
 
 func (x *StartFilesRecoveryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -984,7 +1217,7 @@ func (x *StartFilesRecoveryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartFilesRecoveryRequest.ProtoReflect.Descriptor instead.
 func (*StartFilesRecoveryRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *StartFilesRecoveryRequest) GetComputeInstanceId() string {
@@ -1029,7 +1262,7 @@ type StartFilesRecoveryMetadata struct {
 
 func (x *StartFilesRecoveryMetadata) Reset() {
 	*x = StartFilesRecoveryMetadata{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1041,7 +1274,7 @@ func (x *StartFilesRecoveryMetadata) String() string {
 func (*StartFilesRecoveryMetadata) ProtoMessage() {}
 
 func (x *StartFilesRecoveryMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1054,7 +1287,7 @@ func (x *StartFilesRecoveryMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartFilesRecoveryMetadata.ProtoReflect.Descriptor instead.
 func (*StartFilesRecoveryMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *StartFilesRecoveryMetadata) GetProgressPercentage() float64 {
@@ -1083,240 +1316,6 @@ func (x *StartFilesRecoveryMetadata) GetSourceIds() []string {
 		return x.SourceIds
 	}
 	return nil
-}
-
-type DeleteBackupRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Compute Cloud instance ID of the Backup.
-	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	// Backup ID that should be deleted.
-	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteBackupRequest) Reset() {
-	*x = DeleteBackupRequest{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteBackupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteBackupRequest) ProtoMessage() {}
-
-func (x *DeleteBackupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteBackupRequest.ProtoReflect.Descriptor instead.
-func (*DeleteBackupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *DeleteBackupRequest) GetComputeInstanceId() string {
-	if x != nil {
-		return x.ComputeInstanceId
-	}
-	return ""
-}
-
-func (x *DeleteBackupRequest) GetBackupId() string {
-	if x != nil {
-		return x.BackupId
-	}
-	return ""
-}
-
-type DeleteBackupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Compute Cloud instance ID of the Backup.
-	ComputeInstanceId string `protobuf:"bytes,1,opt,name=compute_instance_id,json=computeInstanceId,proto3" json:"compute_instance_id,omitempty"`
-	// Backup ID that should be deleted.
-	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteBackupMetadata) Reset() {
-	*x = DeleteBackupMetadata{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteBackupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteBackupMetadata) ProtoMessage() {}
-
-func (x *DeleteBackupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteBackupMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteBackupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *DeleteBackupMetadata) GetComputeInstanceId() string {
-	if x != nil {
-		return x.ComputeInstanceId
-	}
-	return ""
-}
-
-func (x *DeleteBackupMetadata) GetBackupId() string {
-	if x != nil {
-		return x.BackupId
-	}
-	return ""
-}
-
-type DeleteArchiveRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Archive ID that should be deleted.
-	ArchiveId string `protobuf:"bytes,1,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
-	// Folder ID of the archive to delete.
-	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Instance ID of the Archive.
-	InstanceId string `protobuf:"bytes,3,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// Policy ID of the Archive.
-	PolicyId      string `protobuf:"bytes,4,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteArchiveRequest) Reset() {
-	*x = DeleteArchiveRequest{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteArchiveRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteArchiveRequest) ProtoMessage() {}
-
-func (x *DeleteArchiveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteArchiveRequest.ProtoReflect.Descriptor instead.
-func (*DeleteArchiveRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *DeleteArchiveRequest) GetArchiveId() string {
-	if x != nil {
-		return x.ArchiveId
-	}
-	return ""
-}
-
-func (x *DeleteArchiveRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *DeleteArchiveRequest) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *DeleteArchiveRequest) GetPolicyId() string {
-	if x != nil {
-		return x.PolicyId
-	}
-	return ""
-}
-
-type DeleteArchiveMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Archive ID that should be deleted.
-	ArchiveId string `protobuf:"bytes,1,opt,name=archive_id,json=archiveId,proto3" json:"archive_id,omitempty"`
-	// Folder ID of the archive.
-	FolderId      string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteArchiveMetadata) Reset() {
-	*x = DeleteArchiveMetadata{}
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteArchiveMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteArchiveMetadata) ProtoMessage() {}
-
-func (x *DeleteArchiveMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteArchiveMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteArchiveMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_backup_v1_backup_service_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *DeleteArchiveMetadata) GetArchiveId() string {
-	if x != nil {
-		return x.ArchiveId
-	}
-	return ""
-}
-
-func (x *DeleteArchiveMetadata) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
 }
 
 type ListBackupsRequest_ArchiveParameters struct {
@@ -1483,7 +1482,7 @@ var File_yandex_cloud_backup_v1_backup_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/backup/v1/backup_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a#yandex/cloud/backup/v1/backup.proto\x1a&yandex/cloud/operation/operation.proto\x1a%yandex/cloud/backup/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"r\n" +
+	"+yandex/cloud/backup/v1/backup_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a#yandex/cloud/backup/v1/backup.proto\x1a%yandex/cloud/backup/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"r\n" +
 	"\x13ListArchivesRequest\x12\x1d\n" +
 	"\tfolder_id\x18\x01 \x01(\tH\x00R\bfolderId\x120\n" +
 	"\x13compute_instance_id\x18\x02 \x01(\tH\x00R\x11computeInstanceIdB\n" +
@@ -1538,15 +1537,32 @@ const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
 	"\x15StartRecoveryMetadata\x12/\n" +
 	"\x13progress_percentage\x18\x01 \x01(\x01R\x12progressPercentage\x12\"\n" +
 	"\rsrc_backup_id\x18\x02 \x01(\tR\vsrcBackupId\x125\n" +
-	"\x17dst_compute_instance_id\x18\x03 \x01(\tR\x14dstComputeInstanceId\"\x14\n" +
+	"\x17dst_compute_instance_id\x18\x03 \x01(\tR\x14dstComputeInstanceId\"v\n" +
+	"\x13DeleteBackupRequest\x12<\n" +
+	"\x13compute_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11computeInstanceId\x12!\n" +
+	"\tbackup_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"c\n" +
+	"\x14DeleteBackupMetadata\x12.\n" +
+	"\x13compute_instance_id\x18\x01 \x01(\tR\x11computeInstanceId\x12\x1b\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xc0\x01\n" +
+	"\x14DeleteArchiveRequest\x12#\n" +
+	"\n" +
+	"archive_id\x18\x01 \x01(\tB\x04\xe8\xc71\x00R\tarchiveId\x12)\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\bfolderId\x12-\n" +
+	"\vinstance_id\x18\x03 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\n" +
+	"instanceId\x12)\n" +
+	"\tpolicy_id\x18\x04 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\bpolicyId\"S\n" +
+	"\x15DeleteArchiveMetadata\x12\x1d\n" +
+	"\n" +
+	"archive_id\x18\x01 \x01(\tR\tarchiveId\x12\x1b\n" +
+	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\"\x14\n" +
 	"\x12TargetPathOriginal\"&\n" +
 	"\x10TargetPathCustom\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\"\xa8\x03\n" +
-	"\x14FilesRecoveryOptions\x12Z\n" +
-	"\toverwrite\x18\x01 \x01(\x0e26.yandex.cloud.backup.v1.FilesRecoveryOptions.OverwriteB\x04\xe8\xc71\x00R\toverwrite\x12.\n" +
-	"\x10reboot_if_needed\x18\x02 \x01(\bB\x04\xe8\xc71\x00R\x0erebootIfNeeded\x12H\n" +
+	"\x14FilesRecoveryOptions\x12H\n" +
 	"\boriginal\x18d \x01(\v2*.yandex.cloud.backup.v1.TargetPathOriginalH\x00R\boriginal\x12B\n" +
-	"\x06custom\x18e \x01(\v2(.yandex.cloud.backup.v1.TargetPathCustomH\x00R\x06custom\"b\n" +
+	"\x06custom\x18e \x01(\v2(.yandex.cloud.backup.v1.TargetPathCustomH\x00R\x06custom\x12Z\n" +
+	"\toverwrite\x18\x01 \x01(\x0e26.yandex.cloud.backup.v1.FilesRecoveryOptions.OverwriteB\x04\xe8\xc71\x00R\toverwrite\x12.\n" +
+	"\x10reboot_if_needed\x18\x02 \x01(\bB\x04\xe8\xc71\x00R\x0erebootIfNeeded\"b\n" +
 	"\tOverwrite\x12\x19\n" +
 	"\x15OVERWRITE_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rOVERWRITE_ALL\x10\x01\x12\x13\n" +
@@ -1564,28 +1580,11 @@ const file_yandex_cloud_backup_v1_backup_service_proto_rawDesc = "" +
 	"\x13compute_instance_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x11computeInstanceId\x12!\n" +
 	"\tbackup_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12%\n" +
 	"\n" +
-	"source_ids\x18\x04 \x03(\tB\x06\x82\xc81\x02>0R\tsourceIds\"v\n" +
-	"\x13DeleteBackupRequest\x12<\n" +
-	"\x13compute_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11computeInstanceId\x12!\n" +
-	"\tbackup_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"c\n" +
-	"\x14DeleteBackupMetadata\x12.\n" +
-	"\x13compute_instance_id\x18\x01 \x01(\tR\x11computeInstanceId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xc0\x01\n" +
-	"\x14DeleteArchiveRequest\x12#\n" +
+	"source_ids\x18\x04 \x03(\tB\x06\x82\xc81\x02>0R\tsourceIds2\x92\n" +
 	"\n" +
-	"archive_id\x18\x01 \x01(\tB\x04\xe8\xc71\x00R\tarchiveId\x12)\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\bfolderId\x12-\n" +
-	"\vinstance_id\x18\x03 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12)\n" +
-	"\tpolicy_id\x18\x04 \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=50R\bpolicyId\"S\n" +
-	"\x15DeleteArchiveMetadata\x12\x1d\n" +
-	"\n" +
-	"archive_id\x18\x01 \x01(\tR\tarchiveId\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId2\x92\n" +
-	"\n" +
-	"\rBackupService\x12{\n" +
-	"\x04List\x12*.yandex.cloud.backup.v1.ListBackupsRequest\x1a+.yandex.cloud.backup.v1.ListBackupsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/backup/v1/backups\x12\xa4\x01\n" +
-	"\fListArchives\x12+.yandex.cloud.backup.v1.ListArchivesRequest\x1a,.yandex.cloud.backup.v1.ListArchivesResponse\"9\x82\xd3\xe4\x93\x023\x121/backup/v1/backups/{compute_instance_id}/archives\x12\x8e\x01\n" +
+	"\rBackupService\x12\xa4\x01\n" +
+	"\fListArchives\x12+.yandex.cloud.backup.v1.ListArchivesRequest\x1a,.yandex.cloud.backup.v1.ListArchivesResponse\"9\x82\xd3\xe4\x93\x023\x121/backup/v1/backups/{compute_instance_id}/archives\x12{\n" +
+	"\x04List\x12*.yandex.cloud.backup.v1.ListBackupsRequest\x1a+.yandex.cloud.backup.v1.ListBackupsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/backup/v1/backups\x12\x8e\x01\n" +
 	"\tListFiles\x12(.yandex.cloud.backup.v1.ListFilesRequest\x1a).yandex.cloud.backup.v1.ListFilesResponse\",\x82\xd3\xe4\x93\x02&\x12$/backup/v1/backups/{backup_id}/files\x12w\n" +
 	"\x03Get\x12(.yandex.cloud.backup.v1.GetBackupRequest\x1a\x1e.yandex.cloud.backup.v1.Backup\"&\x82\xd3\xe4\x93\x02 \x12\x1e/backup/v1/backups/{backup_id}\x12\xcb\x01\n" +
 	"\rStartRecovery\x12,.yandex.cloud.backup.v1.StartRecoveryRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*.\n" +
@@ -1623,15 +1622,15 @@ var file_yandex_cloud_backup_v1_backup_service_proto_goTypes = []any{
 	(*GetBackupRequest)(nil),                     // 7: yandex.cloud.backup.v1.GetBackupRequest
 	(*StartRecoveryRequest)(nil),                 // 8: yandex.cloud.backup.v1.StartRecoveryRequest
 	(*StartRecoveryMetadata)(nil),                // 9: yandex.cloud.backup.v1.StartRecoveryMetadata
-	(*TargetPathOriginal)(nil),                   // 10: yandex.cloud.backup.v1.TargetPathOriginal
-	(*TargetPathCustom)(nil),                     // 11: yandex.cloud.backup.v1.TargetPathCustom
-	(*FilesRecoveryOptions)(nil),                 // 12: yandex.cloud.backup.v1.FilesRecoveryOptions
-	(*StartFilesRecoveryRequest)(nil),            // 13: yandex.cloud.backup.v1.StartFilesRecoveryRequest
-	(*StartFilesRecoveryMetadata)(nil),           // 14: yandex.cloud.backup.v1.StartFilesRecoveryMetadata
-	(*DeleteBackupRequest)(nil),                  // 15: yandex.cloud.backup.v1.DeleteBackupRequest
-	(*DeleteBackupMetadata)(nil),                 // 16: yandex.cloud.backup.v1.DeleteBackupMetadata
-	(*DeleteArchiveRequest)(nil),                 // 17: yandex.cloud.backup.v1.DeleteArchiveRequest
-	(*DeleteArchiveMetadata)(nil),                // 18: yandex.cloud.backup.v1.DeleteArchiveMetadata
+	(*DeleteBackupRequest)(nil),                  // 10: yandex.cloud.backup.v1.DeleteBackupRequest
+	(*DeleteBackupMetadata)(nil),                 // 11: yandex.cloud.backup.v1.DeleteBackupMetadata
+	(*DeleteArchiveRequest)(nil),                 // 12: yandex.cloud.backup.v1.DeleteArchiveRequest
+	(*DeleteArchiveMetadata)(nil),                // 13: yandex.cloud.backup.v1.DeleteArchiveMetadata
+	(*TargetPathOriginal)(nil),                   // 14: yandex.cloud.backup.v1.TargetPathOriginal
+	(*TargetPathCustom)(nil),                     // 15: yandex.cloud.backup.v1.TargetPathCustom
+	(*FilesRecoveryOptions)(nil),                 // 16: yandex.cloud.backup.v1.FilesRecoveryOptions
+	(*StartFilesRecoveryRequest)(nil),            // 17: yandex.cloud.backup.v1.StartFilesRecoveryRequest
+	(*StartFilesRecoveryMetadata)(nil),           // 18: yandex.cloud.backup.v1.StartFilesRecoveryMetadata
 	(*ListBackupsRequest_ArchiveParameters)(nil), // 19: yandex.cloud.backup.v1.ListBackupsRequest.ArchiveParameters
 	(*ListBackupsRequest_InstancePolicy)(nil),    // 20: yandex.cloud.backup.v1.ListBackupsRequest.InstancePolicy
 	(*ListBackupsRequest_BackupParameters)(nil),  // 21: yandex.cloud.backup.v1.ListBackupsRequest.BackupParameters
@@ -1649,20 +1648,20 @@ var file_yandex_cloud_backup_v1_backup_service_proto_depIdxs = []int32{
 	23, // 4: yandex.cloud.backup.v1.ListBackupsRequest.type:type_name -> yandex.cloud.backup.v1.ResourceType
 	24, // 5: yandex.cloud.backup.v1.ListBackupsResponse.backups:type_name -> yandex.cloud.backup.v1.Backup
 	25, // 6: yandex.cloud.backup.v1.ListFilesResponse.files:type_name -> yandex.cloud.backup.v1.BackupFile
-	0,  // 7: yandex.cloud.backup.v1.FilesRecoveryOptions.overwrite:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions.Overwrite
-	10, // 8: yandex.cloud.backup.v1.FilesRecoveryOptions.original:type_name -> yandex.cloud.backup.v1.TargetPathOriginal
-	11, // 9: yandex.cloud.backup.v1.FilesRecoveryOptions.custom:type_name -> yandex.cloud.backup.v1.TargetPathCustom
-	12, // 10: yandex.cloud.backup.v1.StartFilesRecoveryRequest.opts:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions
-	3,  // 11: yandex.cloud.backup.v1.BackupService.List:input_type -> yandex.cloud.backup.v1.ListBackupsRequest
-	1,  // 12: yandex.cloud.backup.v1.BackupService.ListArchives:input_type -> yandex.cloud.backup.v1.ListArchivesRequest
+	14, // 7: yandex.cloud.backup.v1.FilesRecoveryOptions.original:type_name -> yandex.cloud.backup.v1.TargetPathOriginal
+	15, // 8: yandex.cloud.backup.v1.FilesRecoveryOptions.custom:type_name -> yandex.cloud.backup.v1.TargetPathCustom
+	0,  // 9: yandex.cloud.backup.v1.FilesRecoveryOptions.overwrite:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions.Overwrite
+	16, // 10: yandex.cloud.backup.v1.StartFilesRecoveryRequest.opts:type_name -> yandex.cloud.backup.v1.FilesRecoveryOptions
+	1,  // 11: yandex.cloud.backup.v1.BackupService.ListArchives:input_type -> yandex.cloud.backup.v1.ListArchivesRequest
+	3,  // 12: yandex.cloud.backup.v1.BackupService.List:input_type -> yandex.cloud.backup.v1.ListBackupsRequest
 	5,  // 13: yandex.cloud.backup.v1.BackupService.ListFiles:input_type -> yandex.cloud.backup.v1.ListFilesRequest
 	7,  // 14: yandex.cloud.backup.v1.BackupService.Get:input_type -> yandex.cloud.backup.v1.GetBackupRequest
 	8,  // 15: yandex.cloud.backup.v1.BackupService.StartRecovery:input_type -> yandex.cloud.backup.v1.StartRecoveryRequest
-	13, // 16: yandex.cloud.backup.v1.BackupService.StartFilesRecovery:input_type -> yandex.cloud.backup.v1.StartFilesRecoveryRequest
-	15, // 17: yandex.cloud.backup.v1.BackupService.Delete:input_type -> yandex.cloud.backup.v1.DeleteBackupRequest
-	17, // 18: yandex.cloud.backup.v1.BackupService.DeleteArchive:input_type -> yandex.cloud.backup.v1.DeleteArchiveRequest
-	4,  // 19: yandex.cloud.backup.v1.BackupService.List:output_type -> yandex.cloud.backup.v1.ListBackupsResponse
-	2,  // 20: yandex.cloud.backup.v1.BackupService.ListArchives:output_type -> yandex.cloud.backup.v1.ListArchivesResponse
+	17, // 16: yandex.cloud.backup.v1.BackupService.StartFilesRecovery:input_type -> yandex.cloud.backup.v1.StartFilesRecoveryRequest
+	10, // 17: yandex.cloud.backup.v1.BackupService.Delete:input_type -> yandex.cloud.backup.v1.DeleteBackupRequest
+	12, // 18: yandex.cloud.backup.v1.BackupService.DeleteArchive:input_type -> yandex.cloud.backup.v1.DeleteArchiveRequest
+	2,  // 19: yandex.cloud.backup.v1.BackupService.ListArchives:output_type -> yandex.cloud.backup.v1.ListArchivesResponse
+	4,  // 20: yandex.cloud.backup.v1.BackupService.List:output_type -> yandex.cloud.backup.v1.ListBackupsResponse
 	6,  // 21: yandex.cloud.backup.v1.BackupService.ListFiles:output_type -> yandex.cloud.backup.v1.ListFilesResponse
 	24, // 22: yandex.cloud.backup.v1.BackupService.Get:output_type -> yandex.cloud.backup.v1.Backup
 	26, // 23: yandex.cloud.backup.v1.BackupService.StartRecovery:output_type -> yandex.cloud.operation.Operation
@@ -1696,7 +1695,7 @@ func file_yandex_cloud_backup_v1_backup_service_proto_init() {
 		(*ListBackupsRequest_PolicyId)(nil),
 		(*ListBackupsRequest_Backup)(nil),
 	}
-	file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[11].OneofWrappers = []any{
+	file_yandex_cloud_backup_v1_backup_service_proto_msgTypes[15].OneofWrappers = []any{
 		(*FilesRecoveryOptions_Original)(nil),
 		(*FilesRecoveryOptions_Custom)(nil),
 	}

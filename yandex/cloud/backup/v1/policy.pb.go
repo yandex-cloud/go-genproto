@@ -1755,13 +1755,13 @@ func (x *PolicySettings_PrePostCommand) GetWorkdir() string {
 
 type PolicySettings_Retention_RetentionRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// A list of backup sets where rules are effective.
-	BackupSet []PolicySettings_RepeatePeriod `protobuf:"varint,1,rep,packed,name=backup_set,json=backupSet,proto3,enum=yandex.cloud.backup.v1.PolicySettings_RepeatePeriod" json:"backup_set,omitempty"`
 	// Types that are valid to be assigned to Condition:
 	//
 	//	*PolicySettings_Retention_RetentionRule_MaxAge
 	//	*PolicySettings_Retention_RetentionRule_MaxCount
-	Condition     isPolicySettings_Retention_RetentionRule_Condition `protobuf_oneof:"condition"`
+	Condition isPolicySettings_Retention_RetentionRule_Condition `protobuf_oneof:"condition"`
+	// A list of backup sets where rules are effective.
+	BackupSet     []PolicySettings_RepeatePeriod `protobuf:"varint,1,rep,packed,name=backup_set,json=backupSet,proto3,enum=yandex.cloud.backup.v1.PolicySettings_RepeatePeriod" json:"backup_set,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1796,13 +1796,6 @@ func (*PolicySettings_Retention_RetentionRule) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_backup_v1_policy_proto_rawDescGZIP(), []int{1, 7, 0}
 }
 
-func (x *PolicySettings_Retention_RetentionRule) GetBackupSet() []PolicySettings_RepeatePeriod {
-	if x != nil {
-		return x.BackupSet
-	}
-	return nil
-}
-
 func (x *PolicySettings_Retention_RetentionRule) GetCondition() isPolicySettings_Retention_RetentionRule_Condition {
 	if x != nil {
 		return x.Condition
@@ -1826,6 +1819,13 @@ func (x *PolicySettings_Retention_RetentionRule) GetMaxCount() int64 {
 		}
 	}
 	return 0
+}
+
+func (x *PolicySettings_Retention_RetentionRule) GetBackupSet() []PolicySettings_RepeatePeriod {
+	if x != nil {
+		return x.BackupSet
+	}
+	return nil
 }
 
 type isPolicySettings_Retention_RetentionRule_Condition interface {
@@ -2126,7 +2126,7 @@ const file_yandex_cloud_backup_v1_policy_proto_rawDesc = "" +
 	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x18\n" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\x12B\n" +
 	"\bsettings\x18\x06 \x01(\v2&.yandex.cloud.backup.v1.PolicySettingsR\bsettings\x12\x1b\n" +
-	"\tfolder_id\x18\a \x01(\tR\bfolderId\"\xba,\n" +
+	"\tfolder_id\x18\a \x01(\tR\bfolderId\"\xb4,\n" +
 	"\x0ePolicySettings\x12Z\n" +
 	"\vcompression\x18\x01 \x01(\x0e22.yandex.cloud.backup.v1.PolicySettings.CompressionB\x04\xe8\xc71\x01R\vcompression\x12<\n" +
 	"\x06format\x18\x02 \x01(\x0e2\x1e.yandex.cloud.backup.v1.FormatB\x04\xe8\xc71\x01R\x06format\x12I\n" +
@@ -2190,11 +2190,11 @@ const file_yandex_cloud_backup_v1_policy_proto_rawDesc = "" +
 	"\tRetention\x12T\n" +
 	"\x05rules\x18\x01 \x03(\v2>.yandex.cloud.backup.v1.PolicySettings.Retention.RetentionRuleR\x05rules\x12#\n" +
 	"\rbefore_backup\x18\x03 \x01(\bR\fbeforeBackup\x1a\xe2\x01\n" +
-	"\rRetentionRule\x12S\n" +
-	"\n" +
-	"backup_set\x18\x01 \x03(\x0e24.yandex.cloud.backup.v1.PolicySettings.RepeatePeriodR\tbackupSet\x12J\n" +
+	"\rRetentionRule\x12J\n" +
 	"\amax_age\x18\x02 \x01(\v2/.yandex.cloud.backup.v1.PolicySettings.IntervalH\x00R\x06maxAge\x12\x1d\n" +
-	"\tmax_count\x18\x03 \x01(\x03H\x00R\bmaxCountB\x11\n" +
+	"\tmax_count\x18\x03 \x01(\x03H\x00R\bmaxCount\x12S\n" +
+	"\n" +
+	"backup_set\x18\x01 \x03(\x0e24.yandex.cloud.backup.v1.PolicySettings.RepeatePeriodR\tbackupSetB\x11\n" +
 	"\tcondition\x12\x04\xc0\xc11\x01J\x04\b\x02\x10\x03\x1a\xf1\x0e\n" +
 	"\n" +
 	"Scheduling\x12d\n" +
@@ -2291,7 +2291,7 @@ const file_yandex_cloud_backup_v1_policy_proto_rawDesc = "" +
 	"\vPRE_COMMAND\x10\x01\x12\x10\n" +
 	"\fPOST_COMMAND\x10\x02\x12\x14\n" +
 	"\x10PRE_DATA_COMMAND\x10\x03\x12\x15\n" +
-	"\x11POST_DATA_COMMAND\x10\x04J\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0f\"\xe9\x02\n" +
+	"\x11POST_DATA_COMMAND\x10\x04J\x04\b\r\x10\x0f\"\xe9\x02\n" +
 	"\x11PolicyApplication\x12\x1b\n" +
 	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12.\n" +
 	"\x13compute_instance_id\x18\x02 \x01(\tR\x11computeInstanceId\x12\x18\n" +
@@ -2389,8 +2389,8 @@ var file_yandex_cloud_backup_v1_policy_proto_depIdxs = []int32{
 	3,  // 25: yandex.cloud.backup.v1.PolicySettings.Scheduling.weekly_backup_day:type_name -> yandex.cloud.backup.v1.PolicySettings.Day
 	15, // 26: yandex.cloud.backup.v1.PolicySettings.Scheduling.task_failure:type_name -> yandex.cloud.backup.v1.PolicySettings.RetriesConfiguration
 	5,  // 27: yandex.cloud.backup.v1.PolicySettings.PrePostCommand.type:type_name -> yandex.cloud.backup.v1.PolicySettings.CommandType
-	2,  // 28: yandex.cloud.backup.v1.PolicySettings.Retention.RetentionRule.backup_set:type_name -> yandex.cloud.backup.v1.PolicySettings.RepeatePeriod
-	14, // 29: yandex.cloud.backup.v1.PolicySettings.Retention.RetentionRule.max_age:type_name -> yandex.cloud.backup.v1.PolicySettings.Interval
+	14, // 28: yandex.cloud.backup.v1.PolicySettings.Retention.RetentionRule.max_age:type_name -> yandex.cloud.backup.v1.PolicySettings.Interval
+	2,  // 29: yandex.cloud.backup.v1.PolicySettings.Retention.RetentionRule.backup_set:type_name -> yandex.cloud.backup.v1.PolicySettings.RepeatePeriod
 	27, // 30: yandex.cloud.backup.v1.PolicySettings.Scheduling.BackupSet.time:type_name -> yandex.cloud.backup.v1.PolicySettings.Scheduling.BackupSet.Time
 	28, // 31: yandex.cloud.backup.v1.PolicySettings.Scheduling.BackupSet.since_last_exec_time:type_name -> yandex.cloud.backup.v1.PolicySettings.Scheduling.BackupSet.SinceLastExecTime
 	9,  // 32: yandex.cloud.backup.v1.PolicySettings.Scheduling.BackupSet.type:type_name -> yandex.cloud.backup.v1.PolicySettings.Scheduling.BackupSet.Type

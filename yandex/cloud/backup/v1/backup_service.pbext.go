@@ -168,68 +168,6 @@ func (m *StartRecoveryMetadata) SetDstComputeInstanceId(v string) {
 	m.DstComputeInstanceId = v
 }
 
-func (m *TargetPathCustom) SetPath(v string) {
-	m.Path = v
-}
-
-type FilesRecoveryOptions_Type = isFilesRecoveryOptions_Type
-
-func (m *FilesRecoveryOptions) SetType(v FilesRecoveryOptions_Type) {
-	m.Type = v
-}
-
-func (m *FilesRecoveryOptions) SetOverwrite(v FilesRecoveryOptions_Overwrite) {
-	m.Overwrite = v
-}
-
-func (m *FilesRecoveryOptions) SetRebootIfNeeded(v bool) {
-	m.RebootIfNeeded = v
-}
-
-func (m *FilesRecoveryOptions) SetOriginal(v *TargetPathOriginal) {
-	m.Type = &FilesRecoveryOptions_Original{
-		Original: v,
-	}
-}
-
-func (m *FilesRecoveryOptions) SetCustom(v *TargetPathCustom) {
-	m.Type = &FilesRecoveryOptions_Custom{
-		Custom: v,
-	}
-}
-
-func (m *StartFilesRecoveryRequest) SetComputeInstanceId(v string) {
-	m.ComputeInstanceId = v
-}
-
-func (m *StartFilesRecoveryRequest) SetBackupId(v string) {
-	m.BackupId = v
-}
-
-func (m *StartFilesRecoveryRequest) SetOpts(v *FilesRecoveryOptions) {
-	m.Opts = v
-}
-
-func (m *StartFilesRecoveryRequest) SetSourceIds(v []string) {
-	m.SourceIds = v
-}
-
-func (m *StartFilesRecoveryMetadata) SetProgressPercentage(v float64) {
-	m.ProgressPercentage = v
-}
-
-func (m *StartFilesRecoveryMetadata) SetComputeInstanceId(v string) {
-	m.ComputeInstanceId = v
-}
-
-func (m *StartFilesRecoveryMetadata) SetBackupId(v string) {
-	m.BackupId = v
-}
-
-func (m *StartFilesRecoveryMetadata) SetSourceIds(v []string) {
-	m.SourceIds = v
-}
-
 func (m *DeleteBackupRequest) SetComputeInstanceId(v string) {
 	m.ComputeInstanceId = v
 }
@@ -268,4 +206,66 @@ func (m *DeleteArchiveMetadata) SetArchiveId(v string) {
 
 func (m *DeleteArchiveMetadata) SetFolderId(v string) {
 	m.FolderId = v
+}
+
+func (m *TargetPathCustom) SetPath(v string) {
+	m.Path = v
+}
+
+type FilesRecoveryOptions_Type = isFilesRecoveryOptions_Type
+
+func (m *FilesRecoveryOptions) SetType(v FilesRecoveryOptions_Type) {
+	m.Type = v
+}
+
+func (m *FilesRecoveryOptions) SetOriginal(v *TargetPathOriginal) {
+	m.Type = &FilesRecoveryOptions_Original{
+		Original: v,
+	}
+}
+
+func (m *FilesRecoveryOptions) SetCustom(v *TargetPathCustom) {
+	m.Type = &FilesRecoveryOptions_Custom{
+		Custom: v,
+	}
+}
+
+func (m *FilesRecoveryOptions) SetOverwrite(v FilesRecoveryOptions_Overwrite) {
+	m.Overwrite = v
+}
+
+func (m *FilesRecoveryOptions) SetRebootIfNeeded(v bool) {
+	m.RebootIfNeeded = v
+}
+
+func (m *StartFilesRecoveryRequest) SetComputeInstanceId(v string) {
+	m.ComputeInstanceId = v
+}
+
+func (m *StartFilesRecoveryRequest) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *StartFilesRecoveryRequest) SetOpts(v *FilesRecoveryOptions) {
+	m.Opts = v
+}
+
+func (m *StartFilesRecoveryRequest) SetSourceIds(v []string) {
+	m.SourceIds = v
+}
+
+func (m *StartFilesRecoveryMetadata) SetProgressPercentage(v float64) {
+	m.ProgressPercentage = v
+}
+
+func (m *StartFilesRecoveryMetadata) SetComputeInstanceId(v string) {
+	m.ComputeInstanceId = v
+}
+
+func (m *StartFilesRecoveryMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *StartFilesRecoveryMetadata) SetSourceIds(v []string) {
+	m.SourceIds = v
 }

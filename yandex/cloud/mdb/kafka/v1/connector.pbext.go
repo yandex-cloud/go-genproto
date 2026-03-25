@@ -220,6 +220,10 @@ func (m *ConnectorConfigIcebergSinkSpec) SetTopicsRegex(v string) {
 	}
 }
 
+func (m *ConnectorConfigIcebergSinkSpec) SetControlTopic(v string) {
+	m.ControlTopic = v
+}
+
 func (m *ConnectorConfigIcebergSinkSpec) SetMetastoreConnection(v *MetastoreConnectionSpec) {
 	m.MetastoreConnection = v
 }
@@ -264,6 +268,10 @@ func (m *UpdateConnectorConfigIcebergSinkSpec) SetTopicsRegex(v string) {
 	m.TopicsSource = &UpdateConnectorConfigIcebergSinkSpec_TopicsRegex{
 		TopicsRegex: v,
 	}
+}
+
+func (m *UpdateConnectorConfigIcebergSinkSpec) SetControlTopic(v string) {
+	m.ControlTopic = v
 }
 
 func (m *UpdateConnectorConfigIcebergSinkSpec) SetMetastoreConnection(v *MetastoreConnectionSpec) {
@@ -538,6 +546,10 @@ func (m *ConnectorConfigIcebergSink) SetTopicsRegex(v string) {
 	m.TopicsSource = &ConnectorConfigIcebergSink_TopicsRegex{
 		TopicsRegex: v,
 	}
+}
+
+func (m *ConnectorConfigIcebergSink) SetControlTopic(v string) {
+	m.ControlTopic = v
 }
 
 func (m *ConnectorConfigIcebergSink) SetMetastoreConnection(v *MetastoreConnection) {
