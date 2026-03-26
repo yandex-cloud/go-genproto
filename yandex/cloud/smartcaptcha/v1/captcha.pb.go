@@ -1304,8 +1304,8 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\n" +
 	"IMAGE_TEXT\x10\x01\x12\x0f\n" +
 	"\vSILHOUETTES\x10\x02\x12\x10\n" +
-	"\fKALEIDOSCOPE\x10\x03Bq\n" +
-	" yandex.cloud.api.smartcaptcha.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartcaptcha/v1;smartcaptchab\x06proto3"
+	"\fKALEIDOSCOPE\x10\x03Bv\n" +
+	" yandex.cloud.api.smartcaptcha.v1B\x03PSCZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartcaptcha/v1;smartcaptchab\x06proto3"
 
 var (
 	file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescOnce sync.Once
