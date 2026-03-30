@@ -830,7 +830,10 @@ func (*Condition_StringMatcher_PireRegexNotMatch) isCondition_StringMatcher_Matc
 type Condition_HostMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of hosts. OR semantics implied.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartcaptcha/v1/captcha.proto.
 	Hosts         []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	HostMatcher   *Condition_StringMatcher   `protobuf:"bytes,2,opt,name=host_matcher,json=hostMatcher,proto3" json:"host_matcher,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -865,9 +868,17 @@ func (*Condition_HostMatcher) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDescGZIP(), []int{3, 1}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/smartcaptcha/v1/captcha.proto.
 func (x *Condition_HostMatcher) GetHosts() []*Condition_StringMatcher {
 	if x != nil {
 		return x.Hosts
+	}
+	return nil
+}
+
+func (x *Condition_HostMatcher) GetHostMatcher() *Condition_StringMatcher {
+	if x != nil {
+		return x.HostMatcher
 	}
 	return nil
 }
@@ -1246,7 +1257,7 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12E\n" +
 	"\tcondition\x18\x04 \x01(\v2'.yandex.cloud.smartcaptcha.v1.ConditionR\tcondition\x122\n" +
-	"\x15override_variant_uuid\x18\x06 \x01(\tR\x13overrideVariantUuidJ\x04\b\x05\x10\x06\"\xd7\r\n" +
+	"\x15override_variant_uuid\x18\x06 \x01(\tR\x13overrideVariantUuidJ\x04\b\x05\x10\x06\"\xb4\x0e\n" +
 	"\tCondition\x12G\n" +
 	"\x04host\x18\x01 \x01(\v23.yandex.cloud.smartcaptcha.v1.Condition.HostMatcherR\x04host\x12D\n" +
 	"\x03uri\x18\x02 \x01(\v22.yandex.cloud.smartcaptcha.v1.Condition.UriMatcherR\x03uri\x12Y\n" +
@@ -1260,9 +1271,11 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_proto_rawDesc = "" +
 	"\x10prefix_not_match\x18\x04 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x0eprefixNotMatch\x125\n" +
 	"\x10pire_regex_match\x18\x05 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x0epireRegexMatch\x12<\n" +
 	"\x14pire_regex_not_match\x18\x06 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x11pireRegexNotMatchB\a\n" +
-	"\x05match\x1ad\n" +
-	"\vHostMatcher\x12U\n" +
-	"\x05hosts\x18\x01 \x03(\v25.yandex.cloud.smartcaptcha.v1.Condition.StringMatcherB\b\x82\xc81\x04<=20R\x05hosts\x1a\xb1\x01\n" +
+	"\x05match\x1a\xc0\x01\n" +
+	"\vHostMatcher\x12W\n" +
+	"\x05hosts\x18\x01 \x03(\v25.yandex.cloud.smartcaptcha.v1.Condition.StringMatcherB\n" +
+	"\x82\xc81\x04<=20\x18\x01R\x05hosts\x12X\n" +
+	"\fhost_matcher\x18\x02 \x01(\v25.yandex.cloud.smartcaptcha.v1.Condition.StringMatcherR\vhostMatcher\x1a\xb1\x01\n" +
 	"\n" +
 	"UriMatcher\x12I\n" +
 	"\x04path\x18\x01 \x01(\v25.yandex.cloud.smartcaptcha.v1.Condition.StringMatcherR\x04path\x12X\n" +
@@ -1358,19 +1371,20 @@ var file_yandex_cloud_smartcaptcha_v1_captcha_proto_depIdxs = []int32{
 	13, // 13: yandex.cloud.smartcaptcha.v1.Condition.headers:type_name -> yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher
 	14, // 14: yandex.cloud.smartcaptcha.v1.Condition.source_ip:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpMatcher
 	9,  // 15: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher.hosts:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	9,  // 16: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.path:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	12, // 17: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.queries:type_name -> yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher
-	9,  // 18: yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	9,  // 19: yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
-	15, // 20: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
-	15, // 21: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
-	16, // 22: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
-	16, // 23: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	9,  // 16: yandex.cloud.smartcaptcha.v1.Condition.HostMatcher.host_matcher:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	9,  // 17: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.path:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	12, // 18: yandex.cloud.smartcaptcha.v1.Condition.UriMatcher.queries:type_name -> yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher
+	9,  // 19: yandex.cloud.smartcaptcha.v1.Condition.QueryMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	9,  // 20: yandex.cloud.smartcaptcha.v1.Condition.HeaderMatcher.value:type_name -> yandex.cloud.smartcaptcha.v1.Condition.StringMatcher
+	15, // 21: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
+	15, // 22: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.ip_ranges_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.IpRangesMatcher
+	16, // 23: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
+	16, // 24: yandex.cloud.smartcaptcha.v1.Condition.IpMatcher.geo_ip_not_match:type_name -> yandex.cloud.smartcaptcha.v1.Condition.GeoIpMatcher
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_smartcaptcha_v1_captcha_proto_init() }

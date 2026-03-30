@@ -184,6 +184,10 @@ func (m *Condition_HostMatcher) SetHosts(v []*Condition_StringMatcher) {
 	m.Hosts = v
 }
 
+func (m *Condition_HostMatcher) SetHostMatcher(v *Condition_StringMatcher) {
+	m.HostMatcher = v
+}
+
 func (m *Condition_UriMatcher) SetPath(v *Condition_StringMatcher) {
 	m.Path = v
 }
