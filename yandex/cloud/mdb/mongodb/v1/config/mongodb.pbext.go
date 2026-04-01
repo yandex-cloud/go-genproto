@@ -186,6 +186,10 @@ func (m *MongodConfig_SetParameter) SetMirrorReads(v *MongodConfig_SetParameter_
 	m.MirrorReads = v
 }
 
+func (m *MongodConfig_SetParameter) SetRedactClientLogData(v *wrapperspb.BoolValue) {
+	m.RedactClientLogData = v
+}
+
 func (m *MongodConfig_SetParameter_MirrorReads) SetSamplingRate(v *wrapperspb.DoubleValue) {
 	m.SamplingRate = v
 }
@@ -264,6 +268,10 @@ func (m *MongoCfgConfig_SetParameter) SetEnableFlowControl(v *wrapperspb.BoolVal
 
 func (m *MongoCfgConfig_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {
 	m.AuditAuthorizationSuccess = v
+}
+
+func (m *MongoCfgConfig_SetParameter) SetRedactClientLogData(v *wrapperspb.BoolValue) {
+	m.RedactClientLogData = v
 }
 
 func (m *MongoCfgConfig_AuditLog) SetFilter(v string) {
@@ -356,6 +364,10 @@ func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMaxSizeForConfigS
 
 func (m *MongosConfig_SetParameter) SetShardingTaskExecutorPoolMinSizeForConfigServers(v *wrapperspb.Int64Value) {
 	m.ShardingTaskExecutorPoolMinSizeForConfigServers = v
+}
+
+func (m *MongosConfig_SetParameter) SetRedactClientLogData(v *wrapperspb.BoolValue) {
+	m.RedactClientLogData = v
 }
 
 func (m *MongosConfig_AuditLog) SetFilter(v string) {

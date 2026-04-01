@@ -127,6 +127,174 @@ func (SecurityProfile_AnalyzeRequestBody_Action) EnumDescriptor() ([]byte, []int
 	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{0, 0, 0}
 }
 
+// SWS module that processed the request.
+type SecurityProfile_LogOptions_Module int32
+
+const (
+	SecurityProfile_LogOptions_MODULE_UNSPECIFIED SecurityProfile_LogOptions_Module = 0
+	// Base rules condition check.
+	SecurityProfile_LogOptions_RULE_CONDITION SecurityProfile_LogOptions_Module = 1
+	// Smart Protection module.
+	SecurityProfile_LogOptions_SMART_PROTECTION SecurityProfile_LogOptions_Module = 2
+	// Web Application Firewall module.
+	SecurityProfile_LogOptions_WAF SecurityProfile_LogOptions_Module = 3
+	// Advanced Rate Limiter module.
+	SecurityProfile_LogOptions_ARL SecurityProfile_LogOptions_Module = 4
+)
+
+// Enum value maps for SecurityProfile_LogOptions_Module.
+var (
+	SecurityProfile_LogOptions_Module_name = map[int32]string{
+		0: "MODULE_UNSPECIFIED",
+		1: "RULE_CONDITION",
+		2: "SMART_PROTECTION",
+		3: "WAF",
+		4: "ARL",
+	}
+	SecurityProfile_LogOptions_Module_value = map[string]int32{
+		"MODULE_UNSPECIFIED": 0,
+		"RULE_CONDITION":     1,
+		"SMART_PROTECTION":   2,
+		"WAF":                3,
+		"ARL":                4,
+	}
+)
+
+func (x SecurityProfile_LogOptions_Module) Enum() *SecurityProfile_LogOptions_Module {
+	p := new(SecurityProfile_LogOptions_Module)
+	*p = x
+	return p
+}
+
+func (x SecurityProfile_LogOptions_Module) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SecurityProfile_LogOptions_Module) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[2].Descriptor()
+}
+
+func (SecurityProfile_LogOptions_Module) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[2]
+}
+
+func (x SecurityProfile_LogOptions_Module) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SecurityProfile_LogOptions_Module.Descriptor instead.
+func (SecurityProfile_LogOptions_Module) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{0, 1, 0}
+}
+
+// Verdict assigned to the request by SWS.
+type SecurityProfile_LogOptions_Action int32
+
+const (
+	SecurityProfile_LogOptions_ACTION_UNSPECIFIED SecurityProfile_LogOptions_Action = 0
+	// Request was allowed.
+	SecurityProfile_LogOptions_ALLOW SecurityProfile_LogOptions_Action = 1
+	// Request was denied.
+	SecurityProfile_LogOptions_DENY SecurityProfile_LogOptions_Action = 2
+	// Request was redirected to CAPTCHA.
+	SecurityProfile_LogOptions_CAPTCHA SecurityProfile_LogOptions_Action = 3
+)
+
+// Enum value maps for SecurityProfile_LogOptions_Action.
+var (
+	SecurityProfile_LogOptions_Action_name = map[int32]string{
+		0: "ACTION_UNSPECIFIED",
+		1: "ALLOW",
+		2: "DENY",
+		3: "CAPTCHA",
+	}
+	SecurityProfile_LogOptions_Action_value = map[string]int32{
+		"ACTION_UNSPECIFIED": 0,
+		"ALLOW":              1,
+		"DENY":               2,
+		"CAPTCHA":            3,
+	}
+)
+
+func (x SecurityProfile_LogOptions_Action) Enum() *SecurityProfile_LogOptions_Action {
+	p := new(SecurityProfile_LogOptions_Action)
+	*p = x
+	return p
+}
+
+func (x SecurityProfile_LogOptions_Action) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SecurityProfile_LogOptions_Action) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[3].Descriptor()
+}
+
+func (SecurityProfile_LogOptions_Action) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[3]
+}
+
+func (x SecurityProfile_LogOptions_Action) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SecurityProfile_LogOptions_Action.Descriptor instead.
+func (SecurityProfile_LogOptions_Action) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{0, 1, 1}
+}
+
+// Log destination.
+type SecurityProfile_LogOptions_Output int32
+
+const (
+	SecurityProfile_LogOptions_OUTPUT_UNSPECIFIED SecurityProfile_LogOptions_Output = 0
+	// Write logs to Cloud Logging.
+	SecurityProfile_LogOptions_CLOUD_LOGGING SecurityProfile_LogOptions_Output = 1
+	// Write logs to Audit Trails.
+	SecurityProfile_LogOptions_AUDIT_TRAILS SecurityProfile_LogOptions_Output = 2
+)
+
+// Enum value maps for SecurityProfile_LogOptions_Output.
+var (
+	SecurityProfile_LogOptions_Output_name = map[int32]string{
+		0: "OUTPUT_UNSPECIFIED",
+		1: "CLOUD_LOGGING",
+		2: "AUDIT_TRAILS",
+	}
+	SecurityProfile_LogOptions_Output_value = map[string]int32{
+		"OUTPUT_UNSPECIFIED": 0,
+		"CLOUD_LOGGING":      1,
+		"AUDIT_TRAILS":       2,
+	}
+)
+
+func (x SecurityProfile_LogOptions_Output) Enum() *SecurityProfile_LogOptions_Output {
+	p := new(SecurityProfile_LogOptions_Output)
+	*p = x
+	return p
+}
+
+func (x SecurityProfile_LogOptions_Output) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SecurityProfile_LogOptions_Output) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[4].Descriptor()
+}
+
+func (SecurityProfile_LogOptions_Output) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[4]
+}
+
+func (x SecurityProfile_LogOptions_Output) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SecurityProfile_LogOptions_Output.Descriptor instead.
+func (SecurityProfile_LogOptions_Output) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{0, 1, 2}
+}
+
 // Type of action to perform if this rule matched.
 type SecurityRule_RuleCondition_Action int32
 
@@ -163,11 +331,11 @@ func (x SecurityRule_RuleCondition_Action) String() string {
 }
 
 func (SecurityRule_RuleCondition_Action) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[5].Descriptor()
 }
 
 func (SecurityRule_RuleCondition_Action) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[2]
+	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[5]
 }
 
 func (x SecurityRule_RuleCondition_Action) Number() protoreflect.EnumNumber {
@@ -217,11 +385,11 @@ func (x SecurityRule_SmartProtection_Mode) String() string {
 }
 
 func (SecurityRule_SmartProtection_Mode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[6].Descriptor()
 }
 
 func (SecurityRule_SmartProtection_Mode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[3]
+	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[6]
 }
 
 func (x SecurityRule_SmartProtection_Mode) Number() protoreflect.EnumNumber {
@@ -271,11 +439,11 @@ func (x SecurityRule_Waf_Mode) String() string {
 }
 
 func (SecurityRule_Waf_Mode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[7].Descriptor()
 }
 
 func (SecurityRule_Waf_Mode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[4]
+	return &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes[7]
 }
 
 func (x SecurityRule_Waf_Mode) Number() protoreflect.EnumNumber {
@@ -314,8 +482,16 @@ type SecurityProfile struct {
 	AdvancedRateLimiterProfileId string `protobuf:"bytes,12,opt,name=advanced_rate_limiter_profile_id,json=advancedRateLimiterProfileId,proto3" json:"advanced_rate_limiter_profile_id,omitempty"`
 	// Parameters for request body analyzer.
 	AnalyzeRequestBody *SecurityProfile_AnalyzeRequestBody `protobuf:"bytes,13,opt,name=analyze_request_body,json=analyzeRequestBody,proto3" json:"analyze_request_body,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Disables the use of HTTP request data for training and improving the service's ML models.
+	DisallowDataProcessing bool `protobuf:"varint,14,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
+	// Configures logging of requests processed by SWS to Audit Trails and Cloud Logging.
+	LogOptions *SecurityProfile_LogOptions `protobuf:"bytes,15,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
+	// ID of the Cloud Logging log group to write SWS logs to.
+	LogGroupId string `protobuf:"bytes,16,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// ID of the default custom page shown to the user when a request is denied.
+	CustomPageId  string `protobuf:"bytes,19,opt,name=custom_page_id,json=customPageId,proto3" json:"custom_page_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SecurityProfile) Reset() {
@@ -432,6 +608,34 @@ func (x *SecurityProfile) GetAnalyzeRequestBody() *SecurityProfile_AnalyzeReques
 	return nil
 }
 
+func (x *SecurityProfile) GetDisallowDataProcessing() bool {
+	if x != nil {
+		return x.DisallowDataProcessing
+	}
+	return false
+}
+
+func (x *SecurityProfile) GetLogOptions() *SecurityProfile_LogOptions {
+	if x != nil {
+		return x.LogOptions
+	}
+	return nil
+}
+
+func (x *SecurityProfile) GetLogGroupId() string {
+	if x != nil {
+		return x.LogGroupId
+	}
+	return ""
+}
+
+func (x *SecurityProfile) GetCustomPageId() string {
+	if x != nil {
+		return x.CustomPageId
+	}
+	return ""
+}
+
 // A SecurityRule object, see [Rules](/docs/smartwebsecurity/concepts/rules).
 type SecurityRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -454,7 +658,9 @@ type SecurityRule struct {
 	//	*SecurityRule_Waf_
 	RuleSpecifier isSecurityRule_RuleSpecifier `protobuf_oneof:"rule_specifier"`
 	// Optional description of the rule. 0-512 characters long.
-	Description   string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the custom page shown to the user when the rule denies a request.
+	CustomPageId  string `protobuf:"bytes,9,opt,name=custom_page_id,json=customPageId,proto3" json:"custom_page_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -551,6 +757,13 @@ func (x *SecurityRule) GetDescription() string {
 	return ""
 }
 
+func (x *SecurityRule) GetCustomPageId() string {
+	if x != nil {
+		return x.CustomPageId
+	}
+	return ""
+}
+
 type isSecurityRule_RuleSpecifier interface {
 	isSecurityRule_RuleSpecifier()
 }
@@ -589,7 +802,19 @@ type Condition struct {
 	// Match HTTP headers.
 	Headers []*Condition_HeaderMatcher `protobuf:"bytes,4,rep,name=headers,proto3" json:"headers,omitempty"`
 	// Match IP.
-	SourceIp      *Condition_IpMatcher `protobuf:"bytes,5,opt,name=source_ip,json=sourceIp,proto3" json:"source_ip,omitempty"`
+	SourceIp *Condition_IpMatcher `protobuf:"bytes,5,opt,name=source_ip,json=sourceIp,proto3" json:"source_ip,omitempty"`
+	// Match cookies.
+	Cookies []*Condition_CookieMatcher `protobuf:"bytes,7,rep,name=cookies,proto3" json:"cookies,omitempty"`
+	// Match bot category.
+	BotCategory *Condition_BotCategoryMatcher `protobuf:"bytes,8,opt,name=bot_category,json=botCategory,proto3" json:"bot_category,omitempty"`
+	// Match bot name.
+	BotName *Condition_BotNameMatcher `protobuf:"bytes,9,opt,name=bot_name,json=botName,proto3" json:"bot_name,omitempty"`
+	// Match bot score.
+	BotScore *Condition_BotScoreMatcher `protobuf:"bytes,10,opt,name=bot_score,json=botScore,proto3" json:"bot_score,omitempty"`
+	// Match verified bot.
+	VerifiedBot *Condition_VerifiedBotMatcher `protobuf:"bytes,11,opt,name=verified_bot,json=verifiedBot,proto3" json:"verified_bot,omitempty"`
+	// Match fingerprint.
+	FingerPrint   *Condition_FingerPrintMatcher `protobuf:"bytes,12,opt,name=finger_print,json=fingerPrint,proto3" json:"finger_print,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -659,6 +884,48 @@ func (x *Condition) GetSourceIp() *Condition_IpMatcher {
 	return nil
 }
 
+func (x *Condition) GetCookies() []*Condition_CookieMatcher {
+	if x != nil {
+		return x.Cookies
+	}
+	return nil
+}
+
+func (x *Condition) GetBotCategory() *Condition_BotCategoryMatcher {
+	if x != nil {
+		return x.BotCategory
+	}
+	return nil
+}
+
+func (x *Condition) GetBotName() *Condition_BotNameMatcher {
+	if x != nil {
+		return x.BotName
+	}
+	return nil
+}
+
+func (x *Condition) GetBotScore() *Condition_BotScoreMatcher {
+	if x != nil {
+		return x.BotScore
+	}
+	return nil
+}
+
+func (x *Condition) GetVerifiedBot() *Condition_VerifiedBotMatcher {
+	if x != nil {
+		return x.VerifiedBot
+	}
+	return nil
+}
+
+func (x *Condition) GetFingerPrint() *Condition_FingerPrintMatcher {
+	if x != nil {
+		return x.FingerPrint
+	}
+	return nil
+}
+
 type SecurityProfile_AnalyzeRequestBody struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Maximum size of body to pass to analyzer. In kilobytes.
@@ -713,6 +980,96 @@ func (x *SecurityProfile_AnalyzeRequestBody) GetSizeLimitAction() SecurityProfil
 	return SecurityProfile_AnalyzeRequestBody_ACTION_UNSPECIFIED
 }
 
+type SecurityProfile_LogOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Cloud Logging log group to write SWS logs to.
+	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	// Enables logging of requests processed by SWS.
+	Enable bool `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
+	// List of modules whose requests will be logged.
+	EnabledModules []SecurityProfile_LogOptions_Module `protobuf:"varint,3,rep,packed,name=enabled_modules,json=enabledModules,proto3,enum=yandex.cloud.smartwebsecurity.v1.SecurityProfile_LogOptions_Module" json:"enabled_modules,omitempty"`
+	// List of verdicts for which requests will be logged.
+	EnabledActions []SecurityProfile_LogOptions_Action `protobuf:"varint,4,rep,packed,name=enabled_actions,json=enabledActions,proto3,enum=yandex.cloud.smartwebsecurity.v1.SecurityProfile_LogOptions_Action" json:"enabled_actions,omitempty"`
+	// Percentage of ALLOW verdicts to discard from logging (0-100).
+	DiscardAllowPercentage int64 `protobuf:"varint,5,opt,name=discard_allow_percentage,json=discardAllowPercentage,proto3" json:"discard_allow_percentage,omitempty"`
+	// List of log destinations: Cloud Logging and/or Audit Trails.
+	Outputs       []SecurityProfile_LogOptions_Output `protobuf:"varint,6,rep,packed,name=outputs,proto3,enum=yandex.cloud.smartwebsecurity.v1.SecurityProfile_LogOptions_Output" json:"outputs,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SecurityProfile_LogOptions) Reset() {
+	*x = SecurityProfile_LogOptions{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SecurityProfile_LogOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SecurityProfile_LogOptions) ProtoMessage() {}
+
+func (x *SecurityProfile_LogOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SecurityProfile_LogOptions.ProtoReflect.Descriptor instead.
+func (*SecurityProfile_LogOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{0, 1}
+}
+
+func (x *SecurityProfile_LogOptions) GetLogGroupId() string {
+	if x != nil {
+		return x.LogGroupId
+	}
+	return ""
+}
+
+func (x *SecurityProfile_LogOptions) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+func (x *SecurityProfile_LogOptions) GetEnabledModules() []SecurityProfile_LogOptions_Module {
+	if x != nil {
+		return x.EnabledModules
+	}
+	return nil
+}
+
+func (x *SecurityProfile_LogOptions) GetEnabledActions() []SecurityProfile_LogOptions_Action {
+	if x != nil {
+		return x.EnabledActions
+	}
+	return nil
+}
+
+func (x *SecurityProfile_LogOptions) GetDiscardAllowPercentage() int64 {
+	if x != nil {
+		return x.DiscardAllowPercentage
+	}
+	return 0
+}
+
+func (x *SecurityProfile_LogOptions) GetOutputs() []SecurityProfile_LogOptions_Output {
+	if x != nil {
+		return x.Outputs
+	}
+	return nil
+}
+
 // RuleCondition object.
 type SecurityRule_RuleCondition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -726,7 +1083,7 @@ type SecurityRule_RuleCondition struct {
 
 func (x *SecurityRule_RuleCondition) Reset() {
 	*x = SecurityRule_RuleCondition{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[5]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -738,7 +1095,7 @@ func (x *SecurityRule_RuleCondition) String() string {
 func (*SecurityRule_RuleCondition) ProtoMessage() {}
 
 func (x *SecurityRule_RuleCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[5]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -781,7 +1138,7 @@ type SecurityRule_SmartProtection struct {
 
 func (x *SecurityRule_SmartProtection) Reset() {
 	*x = SecurityRule_SmartProtection{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[6]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -793,7 +1150,7 @@ func (x *SecurityRule_SmartProtection) String() string {
 func (*SecurityRule_SmartProtection) ProtoMessage() {}
 
 func (x *SecurityRule_SmartProtection) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[6]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -838,7 +1195,7 @@ type SecurityRule_Waf struct {
 
 func (x *SecurityRule_Waf) Reset() {
 	*x = SecurityRule_Waf{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -850,7 +1207,7 @@ func (x *SecurityRule_Waf) String() string {
 func (*SecurityRule_Waf) ProtoMessage() {}
 
 func (x *SecurityRule_Waf) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[7]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -898,6 +1255,8 @@ type Condition_StringMatcher struct {
 	//	*Condition_StringMatcher_PrefixNotMatch
 	//	*Condition_StringMatcher_PireRegexMatch
 	//	*Condition_StringMatcher_PireRegexNotMatch
+	//	*Condition_StringMatcher_Defined
+	//	*Condition_StringMatcher_ListsMatchers
 	Match         isCondition_StringMatcher_Match `protobuf_oneof:"match"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -905,7 +1264,7 @@ type Condition_StringMatcher struct {
 
 func (x *Condition_StringMatcher) Reset() {
 	*x = Condition_StringMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[8]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -917,7 +1276,7 @@ func (x *Condition_StringMatcher) String() string {
 func (*Condition_StringMatcher) ProtoMessage() {}
 
 func (x *Condition_StringMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[8]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -994,32 +1353,66 @@ func (x *Condition_StringMatcher) GetPireRegexNotMatch() string {
 	return ""
 }
 
+func (x *Condition_StringMatcher) GetDefined() bool {
+	if x != nil {
+		if x, ok := x.Match.(*Condition_StringMatcher_Defined); ok {
+			return x.Defined
+		}
+	}
+	return false
+}
+
+func (x *Condition_StringMatcher) GetListsMatchers() *Condition_ListsMatchers {
+	if x != nil {
+		if x, ok := x.Match.(*Condition_StringMatcher_ListsMatchers); ok {
+			return x.ListsMatchers
+		}
+	}
+	return nil
+}
+
 type isCondition_StringMatcher_Match interface {
 	isCondition_StringMatcher_Match()
 }
 
 type Condition_StringMatcher_ExactMatch struct {
+	// Exact match condition.
 	ExactMatch string `protobuf:"bytes,1,opt,name=exact_match,json=exactMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_ExactNotMatch struct {
+	// Exact not match condition.
 	ExactNotMatch string `protobuf:"bytes,2,opt,name=exact_not_match,json=exactNotMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PrefixMatch struct {
+	// Prefix match condition.
 	PrefixMatch string `protobuf:"bytes,3,opt,name=prefix_match,json=prefixMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PrefixNotMatch struct {
+	// Prefix not match condition.
 	PrefixNotMatch string `protobuf:"bytes,4,opt,name=prefix_not_match,json=prefixNotMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PireRegexMatch struct {
+	// PIRE regex match condition.
 	PireRegexMatch string `protobuf:"bytes,5,opt,name=pire_regex_match,json=pireRegexMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PireRegexNotMatch struct {
+	// PIRE regex not match condition.
 	PireRegexNotMatch string `protobuf:"bytes,6,opt,name=pire_regex_not_match,json=pireRegexNotMatch,proto3,oneof"`
+}
+
+type Condition_StringMatcher_Defined struct {
+	// Matches if the field is defined.
+	Defined bool `protobuf:"varint,7,opt,name=defined,proto3,oneof"`
+}
+
+type Condition_StringMatcher_ListsMatchers struct {
+	// Matches against string and regular expression lists.
+	ListsMatchers *Condition_ListsMatchers `protobuf:"bytes,8,opt,name=lists_matchers,json=listsMatchers,proto3,oneof"`
 }
 
 func (*Condition_StringMatcher_ExactMatch) isCondition_StringMatcher_Match() {}
@@ -1034,18 +1427,145 @@ func (*Condition_StringMatcher_PireRegexMatch) isCondition_StringMatcher_Match()
 
 func (*Condition_StringMatcher_PireRegexNotMatch) isCondition_StringMatcher_Match() {}
 
-// HttpMethodMatcher object.
-type Condition_HttpMethodMatcher struct {
+func (*Condition_StringMatcher_Defined) isCondition_StringMatcher_Match() {}
+
+func (*Condition_StringMatcher_ListsMatchers) isCondition_StringMatcher_Match() {}
+
+// ListsMatcher object.
+type Condition_ListsMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of HTTP methods. OR semantics implied.
-	HttpMethods   []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=http_methods,json=httpMethods,proto3" json:"http_methods,omitempty"`
+	// List of list IDs to match against. OR semantics implied.
+	ListIds       []string `protobuf:"bytes,1,rep,name=list_ids,json=listIds,proto3" json:"list_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *Condition_ListsMatcher) Reset() {
+	*x = Condition_ListsMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_ListsMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_ListsMatcher) ProtoMessage() {}
+
+func (x *Condition_ListsMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_ListsMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_ListsMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 1}
+}
+
+func (x *Condition_ListsMatcher) GetListIds() []string {
+	if x != nil {
+		return x.ListIds
+	}
+	return nil
+}
+
+// ListsMatchers object.
+type Condition_ListsMatchers struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// String lists to match with.
+	StrListsMatch *Condition_ListsMatcher `protobuf:"bytes,1,opt,name=str_lists_match,json=strListsMatch,proto3" json:"str_lists_match,omitempty"`
+	// String lists to not match with.
+	StrListsNotMatch *Condition_ListsMatcher `protobuf:"bytes,2,opt,name=str_lists_not_match,json=strListsNotMatch,proto3" json:"str_lists_not_match,omitempty"`
+	// Regular expression lists to match with.
+	RegExpListsMatch *Condition_ListsMatcher `protobuf:"bytes,3,opt,name=reg_exp_lists_match,json=regExpListsMatch,proto3" json:"reg_exp_lists_match,omitempty"`
+	// Regular expression lists to not match with.
+	RegExpListsNotMatch *Condition_ListsMatcher `protobuf:"bytes,4,opt,name=reg_exp_lists_not_match,json=regExpListsNotMatch,proto3" json:"reg_exp_lists_not_match,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *Condition_ListsMatchers) Reset() {
+	*x = Condition_ListsMatchers{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_ListsMatchers) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_ListsMatchers) ProtoMessage() {}
+
+func (x *Condition_ListsMatchers) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_ListsMatchers.ProtoReflect.Descriptor instead.
+func (*Condition_ListsMatchers) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 2}
+}
+
+func (x *Condition_ListsMatchers) GetStrListsMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.StrListsMatch
+	}
+	return nil
+}
+
+func (x *Condition_ListsMatchers) GetStrListsNotMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.StrListsNotMatch
+	}
+	return nil
+}
+
+func (x *Condition_ListsMatchers) GetRegExpListsMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.RegExpListsMatch
+	}
+	return nil
+}
+
+func (x *Condition_ListsMatchers) GetRegExpListsNotMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.RegExpListsNotMatch
+	}
+	return nil
+}
+
+// HttpMethodMatcher object.
+type Condition_HttpMethodMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of HTTP methods. OR semantics implied.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
+	HttpMethods []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=http_methods,json=httpMethods,proto3" json:"http_methods,omitempty"`
+	// HTTP method matcher.
+	HttpMethodMatcher *Condition_StringMatcher `protobuf:"bytes,2,opt,name=http_method_matcher,json=httpMethodMatcher,proto3" json:"http_method_matcher,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
 func (x *Condition_HttpMethodMatcher) Reset() {
 	*x = Condition_HttpMethodMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[9]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1057,7 +1577,7 @@ func (x *Condition_HttpMethodMatcher) String() string {
 func (*Condition_HttpMethodMatcher) ProtoMessage() {}
 
 func (x *Condition_HttpMethodMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[9]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1070,12 +1590,20 @@ func (x *Condition_HttpMethodMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_HttpMethodMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_HttpMethodMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 1}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 3}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
 func (x *Condition_HttpMethodMatcher) GetHttpMethods() []*Condition_StringMatcher {
 	if x != nil {
 		return x.HttpMethods
+	}
+	return nil
+}
+
+func (x *Condition_HttpMethodMatcher) GetHttpMethodMatcher() *Condition_StringMatcher {
+	if x != nil {
+		return x.HttpMethodMatcher
 	}
 	return nil
 }
@@ -1084,14 +1612,18 @@ func (x *Condition_HttpMethodMatcher) GetHttpMethods() []*Condition_StringMatche
 type Condition_AuthorityMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of authorities. OR semantics implied.
-	Authorities   []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=authorities,proto3" json:"authorities,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
+	Authorities []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=authorities,proto3" json:"authorities,omitempty"`
+	// Authority matcher.
+	AuthorityMatcher *Condition_StringMatcher `protobuf:"bytes,2,opt,name=authority_matcher,json=authorityMatcher,proto3" json:"authority_matcher,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Condition_AuthorityMatcher) Reset() {
 	*x = Condition_AuthorityMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[10]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1103,7 +1635,7 @@ func (x *Condition_AuthorityMatcher) String() string {
 func (*Condition_AuthorityMatcher) ProtoMessage() {}
 
 func (x *Condition_AuthorityMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[10]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1116,12 +1648,20 @@ func (x *Condition_AuthorityMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_AuthorityMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_AuthorityMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 2}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 4}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
 func (x *Condition_AuthorityMatcher) GetAuthorities() []*Condition_StringMatcher {
 	if x != nil {
 		return x.Authorities
+	}
+	return nil
+}
+
+func (x *Condition_AuthorityMatcher) GetAuthorityMatcher() *Condition_StringMatcher {
+	if x != nil {
+		return x.AuthorityMatcher
 	}
 	return nil
 }
@@ -1139,7 +1679,7 @@ type Condition_RequestUriMatcher struct {
 
 func (x *Condition_RequestUriMatcher) Reset() {
 	*x = Condition_RequestUriMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[11]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1691,7 @@ func (x *Condition_RequestUriMatcher) String() string {
 func (*Condition_RequestUriMatcher) ProtoMessage() {}
 
 func (x *Condition_RequestUriMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[11]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1164,7 +1704,7 @@ func (x *Condition_RequestUriMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_RequestUriMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_RequestUriMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 3}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 5}
 }
 
 func (x *Condition_RequestUriMatcher) GetPath() *Condition_StringMatcher {
@@ -1194,7 +1734,7 @@ type Condition_QueryMatcher struct {
 
 func (x *Condition_QueryMatcher) Reset() {
 	*x = Condition_QueryMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[12]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1206,7 +1746,7 @@ func (x *Condition_QueryMatcher) String() string {
 func (*Condition_QueryMatcher) ProtoMessage() {}
 
 func (x *Condition_QueryMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[12]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1219,7 +1759,7 @@ func (x *Condition_QueryMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_QueryMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_QueryMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 4}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 6}
 }
 
 func (x *Condition_QueryMatcher) GetKey() string {
@@ -1249,7 +1789,7 @@ type Condition_HeaderMatcher struct {
 
 func (x *Condition_HeaderMatcher) Reset() {
 	*x = Condition_HeaderMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[13]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1261,7 +1801,7 @@ func (x *Condition_HeaderMatcher) String() string {
 func (*Condition_HeaderMatcher) ProtoMessage() {}
 
 func (x *Condition_HeaderMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[13]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1274,7 +1814,7 @@ func (x *Condition_HeaderMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_HeaderMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_HeaderMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 5}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 7}
 }
 
 func (x *Condition_HeaderMatcher) GetName() string {
@@ -1293,18 +1833,34 @@ func (x *Condition_HeaderMatcher) GetValue() *Condition_StringMatcher {
 
 // IpMatcher object. AND semantics implied.
 type Condition_IpMatcher struct {
-	state            protoimpl.MessageState     `protogen:"open.v1"`
-	IpRangesMatch    *Condition_IpRangesMatcher `protobuf:"bytes,1,opt,name=ip_ranges_match,json=ipRangesMatch,proto3" json:"ip_ranges_match,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// IP ranges to match with.
+	IpRangesMatch *Condition_IpRangesMatcher `protobuf:"bytes,1,opt,name=ip_ranges_match,json=ipRangesMatch,proto3" json:"ip_ranges_match,omitempty"`
+	// IP ranges to not match with.
 	IpRangesNotMatch *Condition_IpRangesMatcher `protobuf:"bytes,2,opt,name=ip_ranges_not_match,json=ipRangesNotMatch,proto3" json:"ip_ranges_not_match,omitempty"`
-	GeoIpMatch       *Condition_GeoIpMatcher    `protobuf:"bytes,3,opt,name=geo_ip_match,json=geoIpMatch,proto3" json:"geo_ip_match,omitempty"`
-	GeoIpNotMatch    *Condition_GeoIpMatcher    `protobuf:"bytes,4,opt,name=geo_ip_not_match,json=geoIpNotMatch,proto3" json:"geo_ip_not_match,omitempty"`
+	// Geo locations to match with.
+	GeoIpMatch *Condition_GeoIpMatcher `protobuf:"bytes,3,opt,name=geo_ip_match,json=geoIpMatch,proto3" json:"geo_ip_match,omitempty"`
+	// Geo locations to not match with.
+	GeoIpNotMatch *Condition_GeoIpMatcher `protobuf:"bytes,4,opt,name=geo_ip_not_match,json=geoIpNotMatch,proto3" json:"geo_ip_not_match,omitempty"`
+	// IP lists to match with.
+	IpListsMatch *Condition_ListsMatcher `protobuf:"bytes,5,opt,name=ip_lists_match,json=ipListsMatch,proto3" json:"ip_lists_match,omitempty"`
+	// IP lists to not match with.
+	IpListsNotMatch *Condition_ListsMatcher `protobuf:"bytes,6,opt,name=ip_lists_not_match,json=ipListsNotMatch,proto3" json:"ip_lists_not_match,omitempty"`
+	// ASN ranges to match with.
+	AsnRangesMatch *Condition_AsnRangesMatcher `protobuf:"bytes,7,opt,name=asn_ranges_match,json=asnRangesMatch,proto3" json:"asn_ranges_match,omitempty"`
+	// ASN ranges to not match with.
+	AsnRangesNotMatch *Condition_AsnRangesMatcher `protobuf:"bytes,8,opt,name=asn_ranges_not_match,json=asnRangesNotMatch,proto3" json:"asn_ranges_not_match,omitempty"`
+	// ASN lists to match with.
+	AsnListsMatch *Condition_ListsMatcher `protobuf:"bytes,9,opt,name=asn_lists_match,json=asnListsMatch,proto3" json:"asn_lists_match,omitempty"`
+	// ASN lists to not match with.
+	AsnListsNotMatch *Condition_ListsMatcher `protobuf:"bytes,10,opt,name=asn_lists_not_match,json=asnListsNotMatch,proto3" json:"asn_lists_not_match,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Condition_IpMatcher) Reset() {
 	*x = Condition_IpMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[14]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1316,7 +1872,7 @@ func (x *Condition_IpMatcher) String() string {
 func (*Condition_IpMatcher) ProtoMessage() {}
 
 func (x *Condition_IpMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[14]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1329,7 +1885,7 @@ func (x *Condition_IpMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_IpMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_IpMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 6}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 8}
 }
 
 func (x *Condition_IpMatcher) GetIpRangesMatch() *Condition_IpRangesMatcher {
@@ -1360,6 +1916,678 @@ func (x *Condition_IpMatcher) GetGeoIpNotMatch() *Condition_GeoIpMatcher {
 	return nil
 }
 
+func (x *Condition_IpMatcher) GetIpListsMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.IpListsMatch
+	}
+	return nil
+}
+
+func (x *Condition_IpMatcher) GetIpListsNotMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.IpListsNotMatch
+	}
+	return nil
+}
+
+func (x *Condition_IpMatcher) GetAsnRangesMatch() *Condition_AsnRangesMatcher {
+	if x != nil {
+		return x.AsnRangesMatch
+	}
+	return nil
+}
+
+func (x *Condition_IpMatcher) GetAsnRangesNotMatch() *Condition_AsnRangesMatcher {
+	if x != nil {
+		return x.AsnRangesNotMatch
+	}
+	return nil
+}
+
+func (x *Condition_IpMatcher) GetAsnListsMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.AsnListsMatch
+	}
+	return nil
+}
+
+func (x *Condition_IpMatcher) GetAsnListsNotMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.AsnListsNotMatch
+	}
+	return nil
+}
+
+// BotCategoryMatcher object. AND semantics implied.
+type Condition_BotCategoryMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Bot category lists to match with.
+	BotCategoryListsMatch *Condition_ListsMatcher `protobuf:"bytes,5,opt,name=bot_category_lists_match,json=botCategoryListsMatch,proto3" json:"bot_category_lists_match,omitempty"`
+	// Bot category lists to not match with.
+	BotCategoryListsNotMatch *Condition_ListsMatcher `protobuf:"bytes,6,opt,name=bot_category_lists_not_match,json=botCategoryListsNotMatch,proto3" json:"bot_category_lists_not_match,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *Condition_BotCategoryMatcher) Reset() {
+	*x = Condition_BotCategoryMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_BotCategoryMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_BotCategoryMatcher) ProtoMessage() {}
+
+func (x *Condition_BotCategoryMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_BotCategoryMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_BotCategoryMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 9}
+}
+
+func (x *Condition_BotCategoryMatcher) GetBotCategoryListsMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.BotCategoryListsMatch
+	}
+	return nil
+}
+
+func (x *Condition_BotCategoryMatcher) GetBotCategoryListsNotMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.BotCategoryListsNotMatch
+	}
+	return nil
+}
+
+// BotNameMatcher object. AND semantics implied.
+type Condition_BotNameMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Bot name lists to match with.
+	BotNameListsMatch *Condition_ListsMatcher `protobuf:"bytes,5,opt,name=bot_name_lists_match,json=botNameListsMatch,proto3" json:"bot_name_lists_match,omitempty"`
+	// Bot name lists to not match with.
+	BotNameListsNotMatch *Condition_ListsMatcher `protobuf:"bytes,6,opt,name=bot_name_lists_not_match,json=botNameListsNotMatch,proto3" json:"bot_name_lists_not_match,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *Condition_BotNameMatcher) Reset() {
+	*x = Condition_BotNameMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_BotNameMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_BotNameMatcher) ProtoMessage() {}
+
+func (x *Condition_BotNameMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_BotNameMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_BotNameMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 10}
+}
+
+func (x *Condition_BotNameMatcher) GetBotNameListsMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.BotNameListsMatch
+	}
+	return nil
+}
+
+func (x *Condition_BotNameMatcher) GetBotNameListsNotMatch() *Condition_ListsMatcher {
+	if x != nil {
+		return x.BotNameListsNotMatch
+	}
+	return nil
+}
+
+// BoolMatcher object.
+type Condition_BoolMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Boolean value to match against.
+	Match         bool `protobuf:"varint,1,opt,name=match,proto3" json:"match,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_BoolMatcher) Reset() {
+	*x = Condition_BoolMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_BoolMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_BoolMatcher) ProtoMessage() {}
+
+func (x *Condition_BoolMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_BoolMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_BoolMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 11}
+}
+
+func (x *Condition_BoolMatcher) GetMatch() bool {
+	if x != nil {
+		return x.Match
+	}
+	return false
+}
+
+// IntLEMatcher object.
+type Condition_IntLEMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Upper bound value (inclusive).
+	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_IntLEMatcher) Reset() {
+	*x = Condition_IntLEMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_IntLEMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_IntLEMatcher) ProtoMessage() {}
+
+func (x *Condition_IntLEMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_IntLEMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_IntLEMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 12}
+}
+
+func (x *Condition_IntLEMatcher) GetValue() int64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+// IntGEMatcher object.
+type Condition_IntGEMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Lower bound value (inclusive).
+	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_IntGEMatcher) Reset() {
+	*x = Condition_IntGEMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_IntGEMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_IntGEMatcher) ProtoMessage() {}
+
+func (x *Condition_IntGEMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_IntGEMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_IntGEMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 13}
+}
+
+func (x *Condition_IntGEMatcher) GetValue() int64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+// IntEQMatcher object.
+type Condition_IntEQMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Value to match against.
+	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_IntEQMatcher) Reset() {
+	*x = Condition_IntEQMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_IntEQMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_IntEQMatcher) ProtoMessage() {}
+
+func (x *Condition_IntEQMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_IntEQMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_IntEQMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 14}
+}
+
+func (x *Condition_IntEQMatcher) GetValue() int64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+// IntNEMatcher object.
+type Condition_IntNEMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Value to not match against.
+	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_IntNEMatcher) Reset() {
+	*x = Condition_IntNEMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_IntNEMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_IntNEMatcher) ProtoMessage() {}
+
+func (x *Condition_IntNEMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_IntNEMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_IntNEMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 15}
+}
+
+func (x *Condition_IntNEMatcher) GetValue() int64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+// IntMatcher object.
+type Condition_IntMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Match:
+	//
+	//	*Condition_IntMatcher_LeMatch
+	//	*Condition_IntMatcher_GeMatch
+	//	*Condition_IntMatcher_EqMatch
+	//	*Condition_IntMatcher_NeMatch
+	Match         isCondition_IntMatcher_Match `protobuf_oneof:"match"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_IntMatcher) Reset() {
+	*x = Condition_IntMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_IntMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_IntMatcher) ProtoMessage() {}
+
+func (x *Condition_IntMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_IntMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_IntMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 16}
+}
+
+func (x *Condition_IntMatcher) GetMatch() isCondition_IntMatcher_Match {
+	if x != nil {
+		return x.Match
+	}
+	return nil
+}
+
+func (x *Condition_IntMatcher) GetLeMatch() *Condition_IntLEMatcher {
+	if x != nil {
+		if x, ok := x.Match.(*Condition_IntMatcher_LeMatch); ok {
+			return x.LeMatch
+		}
+	}
+	return nil
+}
+
+func (x *Condition_IntMatcher) GetGeMatch() *Condition_IntGEMatcher {
+	if x != nil {
+		if x, ok := x.Match.(*Condition_IntMatcher_GeMatch); ok {
+			return x.GeMatch
+		}
+	}
+	return nil
+}
+
+func (x *Condition_IntMatcher) GetEqMatch() *Condition_IntEQMatcher {
+	if x != nil {
+		if x, ok := x.Match.(*Condition_IntMatcher_EqMatch); ok {
+			return x.EqMatch
+		}
+	}
+	return nil
+}
+
+func (x *Condition_IntMatcher) GetNeMatch() *Condition_IntNEMatcher {
+	if x != nil {
+		if x, ok := x.Match.(*Condition_IntMatcher_NeMatch); ok {
+			return x.NeMatch
+		}
+	}
+	return nil
+}
+
+type isCondition_IntMatcher_Match interface {
+	isCondition_IntMatcher_Match()
+}
+
+type Condition_IntMatcher_LeMatch struct {
+	// Less than or equal condition.
+	LeMatch *Condition_IntLEMatcher `protobuf:"bytes,1,opt,name=le_match,json=leMatch,proto3,oneof"`
+}
+
+type Condition_IntMatcher_GeMatch struct {
+	// Greater than or equal condition.
+	GeMatch *Condition_IntGEMatcher `protobuf:"bytes,2,opt,name=ge_match,json=geMatch,proto3,oneof"`
+}
+
+type Condition_IntMatcher_EqMatch struct {
+	// Equal condition.
+	EqMatch *Condition_IntEQMatcher `protobuf:"bytes,3,opt,name=eq_match,json=eqMatch,proto3,oneof"`
+}
+
+type Condition_IntMatcher_NeMatch struct {
+	// Not equal condition.
+	NeMatch *Condition_IntNEMatcher `protobuf:"bytes,4,opt,name=ne_match,json=neMatch,proto3,oneof"`
+}
+
+func (*Condition_IntMatcher_LeMatch) isCondition_IntMatcher_Match() {}
+
+func (*Condition_IntMatcher_GeMatch) isCondition_IntMatcher_Match() {}
+
+func (*Condition_IntMatcher_EqMatch) isCondition_IntMatcher_Match() {}
+
+func (*Condition_IntMatcher_NeMatch) isCondition_IntMatcher_Match() {}
+
+// BotScoreMatcher object.
+type Condition_BotScoreMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of integer matchers for bot score. OR semantics implied.
+	Value         []*Condition_IntMatcher `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_BotScoreMatcher) Reset() {
+	*x = Condition_BotScoreMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_BotScoreMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_BotScoreMatcher) ProtoMessage() {}
+
+func (x *Condition_BotScoreMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_BotScoreMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_BotScoreMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 17}
+}
+
+func (x *Condition_BotScoreMatcher) GetValue() []*Condition_IntMatcher {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+// VerifiedBotMatcher object.
+type Condition_VerifiedBotMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Matches if the bot is verified or not.
+	Verified      *Condition_BoolMatcher `protobuf:"bytes,1,opt,name=verified,proto3" json:"verified,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_VerifiedBotMatcher) Reset() {
+	*x = Condition_VerifiedBotMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_VerifiedBotMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_VerifiedBotMatcher) ProtoMessage() {}
+
+func (x *Condition_VerifiedBotMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_VerifiedBotMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_VerifiedBotMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 18}
+}
+
+func (x *Condition_VerifiedBotMatcher) GetVerified() *Condition_BoolMatcher {
+	if x != nil {
+		return x.Verified
+	}
+	return nil
+}
+
+// FingerPrintMatcher object.
+type Condition_FingerPrintMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of JA3 fingerprint matchers. OR semantics implied.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
+	Ja3Ranges []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=ja3_ranges,json=ja3Ranges,proto3" json:"ja3_ranges,omitempty"`
+	// List of JA4 fingerprint matchers. OR semantics implied.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
+	Ja4Ranges []*Condition_StringMatcher `protobuf:"bytes,2,rep,name=ja4_ranges,json=ja4Ranges,proto3" json:"ja4_ranges,omitempty"`
+	// JA3 fingerprint matcher.
+	Ja3Matcher *Condition_StringMatcher `protobuf:"bytes,3,opt,name=ja3_matcher,json=ja3Matcher,proto3" json:"ja3_matcher,omitempty"`
+	// JA4 fingerprint matcher.
+	Ja4Matcher    *Condition_StringMatcher `protobuf:"bytes,4,opt,name=ja4_matcher,json=ja4Matcher,proto3" json:"ja4_matcher,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_FingerPrintMatcher) Reset() {
+	*x = Condition_FingerPrintMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_FingerPrintMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_FingerPrintMatcher) ProtoMessage() {}
+
+func (x *Condition_FingerPrintMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_FingerPrintMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_FingerPrintMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 19}
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
+func (x *Condition_FingerPrintMatcher) GetJa3Ranges() []*Condition_StringMatcher {
+	if x != nil {
+		return x.Ja3Ranges
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
+func (x *Condition_FingerPrintMatcher) GetJa4Ranges() []*Condition_StringMatcher {
+	if x != nil {
+		return x.Ja4Ranges
+	}
+	return nil
+}
+
+func (x *Condition_FingerPrintMatcher) GetJa3Matcher() *Condition_StringMatcher {
+	if x != nil {
+		return x.Ja3Matcher
+	}
+	return nil
+}
+
+func (x *Condition_FingerPrintMatcher) GetJa4Matcher() *Condition_StringMatcher {
+	if x != nil {
+		return x.Ja4Matcher
+	}
+	return nil
+}
+
 // IpRangesMatcher object.
 type Condition_IpRangesMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1371,7 +2599,7 @@ type Condition_IpRangesMatcher struct {
 
 func (x *Condition_IpRangesMatcher) Reset() {
 	*x = Condition_IpRangesMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[15]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1383,7 +2611,7 @@ func (x *Condition_IpRangesMatcher) String() string {
 func (*Condition_IpRangesMatcher) ProtoMessage() {}
 
 func (x *Condition_IpRangesMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[15]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1396,7 +2624,7 @@ func (x *Condition_IpRangesMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_IpRangesMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_IpRangesMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 7}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 20}
 }
 
 func (x *Condition_IpRangesMatcher) GetIpRanges() []string {
@@ -1417,7 +2645,7 @@ type Condition_GeoIpMatcher struct {
 
 func (x *Condition_GeoIpMatcher) Reset() {
 	*x = Condition_GeoIpMatcher{}
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[16]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1429,7 +2657,7 @@ func (x *Condition_GeoIpMatcher) String() string {
 func (*Condition_GeoIpMatcher) ProtoMessage() {}
 
 func (x *Condition_GeoIpMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[16]
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1442,7 +2670,7 @@ func (x *Condition_GeoIpMatcher) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition_GeoIpMatcher.ProtoReflect.Descriptor instead.
 func (*Condition_GeoIpMatcher) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 8}
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 21}
 }
 
 func (x *Condition_GeoIpMatcher) GetLocations() []string {
@@ -1452,11 +2680,112 @@ func (x *Condition_GeoIpMatcher) GetLocations() []string {
 	return nil
 }
 
+// AsnRangesMatcher object.
+type Condition_AsnRangesMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of ASN values to match against. OR semantics implied.
+	AsnRanges     []int64 `protobuf:"varint,1,rep,packed,name=asn_ranges,json=asnRanges,proto3" json:"asn_ranges,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_AsnRangesMatcher) Reset() {
+	*x = Condition_AsnRangesMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_AsnRangesMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_AsnRangesMatcher) ProtoMessage() {}
+
+func (x *Condition_AsnRangesMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_AsnRangesMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_AsnRangesMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 22}
+}
+
+func (x *Condition_AsnRangesMatcher) GetAsnRanges() []int64 {
+	if x != nil {
+		return x.AsnRanges
+	}
+	return nil
+}
+
+// CookieMatcher object.
+type Condition_CookieMatcher struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the cookie parametr.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Value of the cookie parametr.
+	Value         *Condition_StringMatcher `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Condition_CookieMatcher) Reset() {
+	*x = Condition_CookieMatcher{}
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Condition_CookieMatcher) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Condition_CookieMatcher) ProtoMessage() {}
+
+func (x *Condition_CookieMatcher) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Condition_CookieMatcher.ProtoReflect.Descriptor instead.
+func (*Condition_CookieMatcher) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{2, 23}
+}
+
+func (x *Condition_CookieMatcher) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Condition_CookieMatcher) GetValue() *Condition_StringMatcher {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
 var File_yandex_cloud_smartwebsecurity_v1_security_profile_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc6\t\n" +
+	"7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe5\x10\n" +
 	"\x0fSecurityProfile\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x92\x01\n" +
@@ -1472,7 +2801,13 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\n" +
 	"captcha_id\x18\v \x01(\tR\tcaptchaId\x12F\n" +
 	" advanced_rate_limiter_profile_id\x18\f \x01(\tR\x1cadvancedRateLimiterProfileId\x12v\n" +
-	"\x14analyze_request_body\x18\r \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x1a\x82\x02\n" +
+	"\x14analyze_request_body\x18\r \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x128\n" +
+	"\x18disallow_data_processing\x18\x0e \x01(\bR\x16disallowDataProcessing\x12]\n" +
+	"\vlog_options\x18\x0f \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptionsR\n" +
+	"logOptions\x12 \n" +
+	"\flog_group_id\x18\x10 \x01(\tR\n" +
+	"logGroupId\x12$\n" +
+	"\x0ecustom_page_id\x18\x13 \x01(\tR\fcustomPageId\x1a\x82\x02\n" +
 	"\x12AnalyzeRequestBody\x12;\n" +
 	"\n" +
 	"size_limit\x18\x01 \x01(\x03B\x1c\xfa\xc71\x180,8,16,32,64,128,256,512R\tsizeLimit\x12w\n" +
@@ -1481,7 +2816,31 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06IGNORE\x10\x01\x12\b\n" +
-	"\x04DENY\x10\x02\x1a9\n" +
+	"\x04DENY\x10\x02\x1a\xaf\x05\n" +
+	"\n" +
+	"LogOptions\x12 \n" +
+	"\flog_group_id\x18\x01 \x01(\tR\n" +
+	"logGroupId\x12\x16\n" +
+	"\x06enable\x18\x02 \x01(\bR\x06enable\x12l\n" +
+	"\x0fenabled_modules\x18\x03 \x03(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.ModuleR\x0eenabledModules\x12l\n" +
+	"\x0fenabled_actions\x18\x04 \x03(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.ActionR\x0eenabledActions\x12C\n" +
+	"\x18discard_allow_percentage\x18\x05 \x01(\x03B\t\xfa\xc71\x050-100R\x16discardAllowPercentage\x12]\n" +
+	"\aoutputs\x18\x06 \x03(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.OutputR\aoutputs\"\\\n" +
+	"\x06Module\x12\x16\n" +
+	"\x12MODULE_UNSPECIFIED\x10\x00\x12\x12\n" +
+	"\x0eRULE_CONDITION\x10\x01\x12\x14\n" +
+	"\x10SMART_PROTECTION\x10\x02\x12\a\n" +
+	"\x03WAF\x10\x03\x12\a\n" +
+	"\x03ARL\x10\x04\"B\n" +
+	"\x06Action\x12\x16\n" +
+	"\x12ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05ALLOW\x10\x01\x12\b\n" +
+	"\x04DENY\x10\x02\x12\v\n" +
+	"\aCAPTCHA\x10\x03\"E\n" +
+	"\x06Output\x12\x16\n" +
+	"\x12OUTPUT_UNSPECIFIED\x10\x00\x12\x11\n" +
+	"\rCLOUD_LOGGING\x10\x01\x12\x10\n" +
+	"\fAUDIT_TRAILS\x10\x02\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
@@ -1489,7 +2848,7 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x1aDEFAULT_ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALLOW\x10\x01\x12\b\n" +
 	"\x04DENY\x10\x02J\x04\b\t\x10\n" +
-	"\"\xc3\t\n" +
+	"J\x04\b\x11\x10\x12J\x04\b\x12\x10\x13\"\xef\t\n" +
 	"\fSecurityRule\x12>\n" +
 	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12(\n" +
 	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12\x17\n" +
@@ -1497,7 +2856,8 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x0erule_condition\x18\x04 \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleConditionH\x00R\rruleCondition\x12k\n" +
 	"\x10smart_protection\x18\x05 \x01(\v2>.yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtectionH\x00R\x0fsmartProtection\x12F\n" +
 	"\x03waf\x18\x06 \x01(\v22.yandex.cloud.smartwebsecurity.v1.SecurityRule.WafH\x00R\x03waf\x12+\n" +
-	"\vdescription\x18\a \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x1a\xee\x01\n" +
+	"\vdescription\x18\a \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12$\n" +
+	"\x0ecustom_page_id\x18\t \x01(\tR\fcustomPageId\x1a\xee\x01\n" +
 	"\rRuleCondition\x12[\n" +
 	"\x06action\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.ActionR\x06action\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\"5\n" +
@@ -1520,7 +2880,7 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04FULL\x10\x01\x12\a\n" +
 	"\x03API\x10\x02B\x10\n" +
-	"\x0erule_specifier\"\x9f\x10\n" +
+	"\x0erule_specifierJ\x04\b\b\x10\t\"\xf2.\n" +
 	"\tCondition\x12Z\n" +
 	"\tauthority\x18\x01 \x01(\v2<.yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcherR\tauthority\x12^\n" +
 	"\vhttp_method\x18\x02 \x01(\v2=.yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcherR\n" +
@@ -1528,7 +2888,14 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\vrequest_uri\x18\x03 \x01(\v2=.yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcherR\n" +
 	"requestUri\x12]\n" +
 	"\aheaders\x18\x04 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcherB\b\x82\xc81\x04<=20R\aheaders\x12R\n" +
-	"\tsource_ip\x18\x05 \x01(\v25.yandex.cloud.smartwebsecurity.v1.Condition.IpMatcherR\bsourceIp\x1a\xd7\x02\n" +
+	"\tsource_ip\x18\x05 \x01(\v25.yandex.cloud.smartwebsecurity.v1.Condition.IpMatcherR\bsourceIp\x12]\n" +
+	"\acookies\x18\a \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.CookieMatcherB\b\x82\xc81\x04<=20R\acookies\x12a\n" +
+	"\fbot_category\x18\b \x01(\v2>.yandex.cloud.smartwebsecurity.v1.Condition.BotCategoryMatcherR\vbotCategory\x12U\n" +
+	"\bbot_name\x18\t \x01(\v2:.yandex.cloud.smartwebsecurity.v1.Condition.BotNameMatcherR\abotName\x12X\n" +
+	"\tbot_score\x18\n" +
+	" \x01(\v2;.yandex.cloud.smartwebsecurity.v1.Condition.BotScoreMatcherR\bbotScore\x12a\n" +
+	"\fverified_bot\x18\v \x01(\v2>.yandex.cloud.smartwebsecurity.v1.Condition.VerifiedBotMatcherR\vverifiedBot\x12a\n" +
+	"\ffinger_print\x18\f \x01(\v2>.yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcherR\vfingerPrint\x1a\xd7\x03\n" +
 	"\rStringMatcher\x12,\n" +
 	"\vexact_match\x18\x01 \x01(\tB\t\x8a\xc81\x050-255H\x00R\n" +
 	"exactMatch\x123\n" +
@@ -1536,12 +2903,25 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\fprefix_match\x18\x03 \x01(\tB\t\x8a\xc81\x050-255H\x00R\vprefixMatch\x125\n" +
 	"\x10prefix_not_match\x18\x04 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x0eprefixNotMatch\x125\n" +
 	"\x10pire_regex_match\x18\x05 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x0epireRegexMatch\x12<\n" +
-	"\x14pire_regex_not_match\x18\x06 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x11pireRegexNotMatchB\a\n" +
-	"\x05match\x1a{\n" +
-	"\x11HttpMethodMatcher\x12f\n" +
-	"\fhttp_methods\x18\x01 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\b\x82\xc81\x04<=20R\vhttpMethods\x1ay\n" +
-	"\x10AuthorityMatcher\x12e\n" +
-	"\vauthorities\x18\x01 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\b\x82\xc81\x04<=20R\vauthorities\x1a\xc0\x01\n" +
+	"\x14pire_regex_not_match\x18\x06 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x11pireRegexNotMatch\x12\x1a\n" +
+	"\adefined\x18\a \x01(\bH\x00R\adefined\x12b\n" +
+	"\x0elists_matchers\x18\b \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchersH\x00R\rlistsMatchersB\a\n" +
+	"\x05match\x1a)\n" +
+	"\fListsMatcher\x12\x19\n" +
+	"\blist_ids\x18\x01 \x03(\tR\alistIds\x1a\xb3\x03\n" +
+	"\rListsMatchers\x12`\n" +
+	"\x0fstr_lists_match\x18\x01 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\rstrListsMatch\x12g\n" +
+	"\x13str_lists_not_match\x18\x02 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x10strListsNotMatch\x12g\n" +
+	"\x13reg_exp_lists_match\x18\x03 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x10regExpListsMatch\x12n\n" +
+	"\x17reg_exp_lists_not_match\x18\x04 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x13regExpListsNotMatch\x1a\xe8\x01\n" +
+	"\x11HttpMethodMatcher\x12h\n" +
+	"\fhttp_methods\x18\x01 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\n" +
+	"\x82\xc81\x04<=20\x18\x01R\vhttpMethods\x12i\n" +
+	"\x13http_method_matcher\x18\x02 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\x11httpMethodMatcher\x1a\xe3\x01\n" +
+	"\x10AuthorityMatcher\x12g\n" +
+	"\vauthorities\x18\x01 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\n" +
+	"\x82\xc81\x04<=20\x18\x01R\vauthorities\x12f\n" +
+	"\x11authority_matcher\x18\x02 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\x10authorityMatcher\x1a\xc0\x01\n" +
 	"\x11RequestUriMatcher\x12M\n" +
 	"\x04path\x18\x01 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\x04path\x12\\\n" +
 	"\aqueries\x18\x02 \x03(\v28.yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcherB\b\x82\xc81\x04<=20R\aqueries\x1a\x86\x01\n" +
@@ -1550,17 +2930,68 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x05value\x18\x02 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\x04\xe8\xc71\x01R\x05value\x1a\x89\x01\n" +
 	"\rHeaderMatcher\x12!\n" +
 	"\x04name\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-255R\x04name\x12U\n" +
-	"\x05value\x18\x02 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\x04\xe8\xc71\x01R\x05value\x1a\x9b\x03\n" +
+	"\x05value\x18\x02 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\x04\xe8\xc71\x01R\x05value\x1a\x84\b\n" +
 	"\tIpMatcher\x12c\n" +
 	"\x0fip_ranges_match\x18\x01 \x01(\v2;.yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcherR\ripRangesMatch\x12j\n" +
 	"\x13ip_ranges_not_match\x18\x02 \x01(\v2;.yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcherR\x10ipRangesNotMatch\x12Z\n" +
 	"\fgeo_ip_match\x18\x03 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcherR\n" +
 	"geoIpMatch\x12a\n" +
-	"\x10geo_ip_not_match\x18\x04 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcherR\rgeoIpNotMatch\x1a;\n" +
+	"\x10geo_ip_not_match\x18\x04 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcherR\rgeoIpNotMatch\x12^\n" +
+	"\x0eip_lists_match\x18\x05 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\fipListsMatch\x12e\n" +
+	"\x12ip_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x0fipListsNotMatch\x12f\n" +
+	"\x10asn_ranges_match\x18\a \x01(\v2<.yandex.cloud.smartwebsecurity.v1.Condition.AsnRangesMatcherR\x0easnRangesMatch\x12m\n" +
+	"\x14asn_ranges_not_match\x18\b \x01(\v2<.yandex.cloud.smartwebsecurity.v1.Condition.AsnRangesMatcherR\x11asnRangesNotMatch\x12`\n" +
+	"\x0fasn_lists_match\x18\t \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\rasnListsMatch\x12g\n" +
+	"\x13asn_lists_not_match\x18\n" +
+	" \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x10asnListsNotMatch\x1a\x81\x02\n" +
+	"\x12BotCategoryMatcher\x12q\n" +
+	"\x18bot_category_lists_match\x18\x05 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x15botCategoryListsMatch\x12x\n" +
+	"\x1cbot_category_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x18botCategoryListsNotMatch\x1a\xed\x01\n" +
+	"\x0eBotNameMatcher\x12i\n" +
+	"\x14bot_name_lists_match\x18\x05 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x11botNameListsMatch\x12p\n" +
+	"\x18bot_name_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x14botNameListsNotMatch\x1a#\n" +
+	"\vBoolMatcher\x12\x14\n" +
+	"\x05match\x18\x01 \x01(\bR\x05match\x1a$\n" +
+	"\fIntLEMatcher\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\x03R\x05value\x1a$\n" +
+	"\fIntGEMatcher\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\x03R\x05value\x1a$\n" +
+	"\fIntEQMatcher\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\x03R\x05value\x1a$\n" +
+	"\fIntNEMatcher\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\x03R\x05value\x1a\xf1\x02\n" +
+	"\n" +
+	"IntMatcher\x12U\n" +
+	"\ble_match\x18\x01 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.IntLEMatcherH\x00R\aleMatch\x12U\n" +
+	"\bge_match\x18\x02 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.IntGEMatcherH\x00R\ageMatch\x12U\n" +
+	"\beq_match\x18\x03 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.IntEQMatcherH\x00R\aeqMatch\x12U\n" +
+	"\bne_match\x18\x04 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.IntNEMatcherH\x00R\aneMatchB\a\n" +
+	"\x05match\x1ah\n" +
+	"\x0fBotScoreMatcher\x12U\n" +
+	"\x05value\x18\x01 \x03(\v26.yandex.cloud.smartwebsecurity.v1.Condition.IntMatcherB\a\x82\xc81\x03<=4R\x05value\x1ai\n" +
+	"\x12VerifiedBotMatcher\x12S\n" +
+	"\bverified\x18\x01 \x01(\v27.yandex.cloud.smartwebsecurity.v1.Condition.BoolMatcherR\bverified\x1a\x98\x03\n" +
+	"\x12FingerPrintMatcher\x12d\n" +
+	"\n" +
+	"ja3_ranges\x18\x01 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\n" +
+	"\x82\xc81\x04<=20\x18\x01R\tja3Ranges\x12d\n" +
+	"\n" +
+	"ja4_ranges\x18\x02 \x03(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\n" +
+	"\x82\xc81\x04<=20\x18\x01R\tja4Ranges\x12Z\n" +
+	"\vja3_matcher\x18\x03 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\n" +
+	"ja3Matcher\x12Z\n" +
+	"\vja4_matcher\x18\x04 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\n" +
+	"ja4Matcher\x1a;\n" +
 	"\x0fIpRangesMatcher\x12(\n" +
 	"\tip_ranges\x18\x01 \x03(\tB\v\x82\xc81\a<=10000R\bipRanges\x1a>\n" +
 	"\fGeoIpMatcher\x12.\n" +
-	"\tlocations\x18\x01 \x03(\tB\x10\x82\xc81\x03>=1\x8a\xc81\x012\x90\xc81\x01R\tlocationsB}\n" +
+	"\tlocations\x18\x01 \x03(\tB\x10\x82\xc81\x03>=1\x8a\xc81\x012\x90\xc81\x01R\tlocations\x1aN\n" +
+	"\x10AsnRangesMatcher\x12:\n" +
+	"\n" +
+	"asn_ranges\x18\x01 \x03(\x03B\x1b\xfa\xc71\f0-4294967295\x82\xc81\a<=10000R\tasnRanges\x1a\x89\x01\n" +
+	"\rCookieMatcher\x12!\n" +
+	"\x04name\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-255R\x04name\x12U\n" +
+	"\x05value\x18\x02 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherB\x04\xe8\xc71\x01R\x05valueJ\x04\b\x06\x10\aB}\n" +
 	"$yandex.cloud.api.smartwebsecurity.v1ZUgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartwebsecurity/v1;smartwebsecurityb\x06proto3"
 
 var (
@@ -1575,69 +3006,126 @@ func file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP() 
 	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescData
 }
 
-var file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
+var file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_goTypes = []any{
 	(SecurityProfile_DefaultAction)(0),             // 0: yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultAction
 	(SecurityProfile_AnalyzeRequestBody_Action)(0), // 1: yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.Action
-	(SecurityRule_RuleCondition_Action)(0),         // 2: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.Action
-	(SecurityRule_SmartProtection_Mode)(0),         // 3: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.Mode
-	(SecurityRule_Waf_Mode)(0),                     // 4: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.Mode
-	(*SecurityProfile)(nil),                        // 5: yandex.cloud.smartwebsecurity.v1.SecurityProfile
-	(*SecurityRule)(nil),                           // 6: yandex.cloud.smartwebsecurity.v1.SecurityRule
-	(*Condition)(nil),                              // 7: yandex.cloud.smartwebsecurity.v1.Condition
-	(*SecurityProfile_AnalyzeRequestBody)(nil),     // 8: yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
-	nil,                                  // 9: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LabelsEntry
-	(*SecurityRule_RuleCondition)(nil),   // 10: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition
-	(*SecurityRule_SmartProtection)(nil), // 11: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection
-	(*SecurityRule_Waf)(nil),             // 12: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf
-	(*Condition_StringMatcher)(nil),      // 13: yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
-	(*Condition_HttpMethodMatcher)(nil),  // 14: yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher
-	(*Condition_AuthorityMatcher)(nil),   // 15: yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher
-	(*Condition_RequestUriMatcher)(nil),  // 16: yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher
-	(*Condition_QueryMatcher)(nil),       // 17: yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcher
-	(*Condition_HeaderMatcher)(nil),      // 18: yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcher
-	(*Condition_IpMatcher)(nil),          // 19: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher
-	(*Condition_IpRangesMatcher)(nil),    // 20: yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcher
-	(*Condition_GeoIpMatcher)(nil),       // 21: yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcher
-	(*timestamppb.Timestamp)(nil),        // 22: google.protobuf.Timestamp
+	(SecurityProfile_LogOptions_Module)(0),         // 2: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.Module
+	(SecurityProfile_LogOptions_Action)(0),         // 3: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.Action
+	(SecurityProfile_LogOptions_Output)(0),         // 4: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.Output
+	(SecurityRule_RuleCondition_Action)(0),         // 5: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.Action
+	(SecurityRule_SmartProtection_Mode)(0),         // 6: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.Mode
+	(SecurityRule_Waf_Mode)(0),                     // 7: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.Mode
+	(*SecurityProfile)(nil),                        // 8: yandex.cloud.smartwebsecurity.v1.SecurityProfile
+	(*SecurityRule)(nil),                           // 9: yandex.cloud.smartwebsecurity.v1.SecurityRule
+	(*Condition)(nil),                              // 10: yandex.cloud.smartwebsecurity.v1.Condition
+	(*SecurityProfile_AnalyzeRequestBody)(nil),     // 11: yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
+	(*SecurityProfile_LogOptions)(nil),             // 12: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions
+	nil,                                            // 13: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LabelsEntry
+	(*SecurityRule_RuleCondition)(nil),             // 14: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition
+	(*SecurityRule_SmartProtection)(nil),           // 15: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection
+	(*SecurityRule_Waf)(nil),                       // 16: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf
+	(*Condition_StringMatcher)(nil),                // 17: yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	(*Condition_ListsMatcher)(nil),                 // 18: yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	(*Condition_ListsMatchers)(nil),                // 19: yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchers
+	(*Condition_HttpMethodMatcher)(nil),            // 20: yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher
+	(*Condition_AuthorityMatcher)(nil),             // 21: yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher
+	(*Condition_RequestUriMatcher)(nil),            // 22: yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher
+	(*Condition_QueryMatcher)(nil),                 // 23: yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcher
+	(*Condition_HeaderMatcher)(nil),                // 24: yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcher
+	(*Condition_IpMatcher)(nil),                    // 25: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher
+	(*Condition_BotCategoryMatcher)(nil),           // 26: yandex.cloud.smartwebsecurity.v1.Condition.BotCategoryMatcher
+	(*Condition_BotNameMatcher)(nil),               // 27: yandex.cloud.smartwebsecurity.v1.Condition.BotNameMatcher
+	(*Condition_BoolMatcher)(nil),                  // 28: yandex.cloud.smartwebsecurity.v1.Condition.BoolMatcher
+	(*Condition_IntLEMatcher)(nil),                 // 29: yandex.cloud.smartwebsecurity.v1.Condition.IntLEMatcher
+	(*Condition_IntGEMatcher)(nil),                 // 30: yandex.cloud.smartwebsecurity.v1.Condition.IntGEMatcher
+	(*Condition_IntEQMatcher)(nil),                 // 31: yandex.cloud.smartwebsecurity.v1.Condition.IntEQMatcher
+	(*Condition_IntNEMatcher)(nil),                 // 32: yandex.cloud.smartwebsecurity.v1.Condition.IntNEMatcher
+	(*Condition_IntMatcher)(nil),                   // 33: yandex.cloud.smartwebsecurity.v1.Condition.IntMatcher
+	(*Condition_BotScoreMatcher)(nil),              // 34: yandex.cloud.smartwebsecurity.v1.Condition.BotScoreMatcher
+	(*Condition_VerifiedBotMatcher)(nil),           // 35: yandex.cloud.smartwebsecurity.v1.Condition.VerifiedBotMatcher
+	(*Condition_FingerPrintMatcher)(nil),           // 36: yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcher
+	(*Condition_IpRangesMatcher)(nil),              // 37: yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcher
+	(*Condition_GeoIpMatcher)(nil),                 // 38: yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcher
+	(*Condition_AsnRangesMatcher)(nil),             // 39: yandex.cloud.smartwebsecurity.v1.Condition.AsnRangesMatcher
+	(*Condition_CookieMatcher)(nil),                // 40: yandex.cloud.smartwebsecurity.v1.Condition.CookieMatcher
+	(*timestamppb.Timestamp)(nil),                  // 41: google.protobuf.Timestamp
 }
 var file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.smartwebsecurity.v1.SecurityProfile.labels:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LabelsEntry
+	13, // 0: yandex.cloud.smartwebsecurity.v1.SecurityProfile.labels:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LabelsEntry
 	0,  // 1: yandex.cloud.smartwebsecurity.v1.SecurityProfile.default_action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultAction
-	6,  // 2: yandex.cloud.smartwebsecurity.v1.SecurityProfile.security_rules:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule
-	22, // 3: yandex.cloud.smartwebsecurity.v1.SecurityProfile.created_at:type_name -> google.protobuf.Timestamp
-	8,  // 4: yandex.cloud.smartwebsecurity.v1.SecurityProfile.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
-	10, // 5: yandex.cloud.smartwebsecurity.v1.SecurityRule.rule_condition:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition
-	11, // 6: yandex.cloud.smartwebsecurity.v1.SecurityRule.smart_protection:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection
-	12, // 7: yandex.cloud.smartwebsecurity.v1.SecurityRule.waf:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf
-	15, // 8: yandex.cloud.smartwebsecurity.v1.Condition.authority:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher
-	14, // 9: yandex.cloud.smartwebsecurity.v1.Condition.http_method:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher
-	16, // 10: yandex.cloud.smartwebsecurity.v1.Condition.request_uri:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher
-	18, // 11: yandex.cloud.smartwebsecurity.v1.Condition.headers:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcher
-	19, // 12: yandex.cloud.smartwebsecurity.v1.Condition.source_ip:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher
-	1,  // 13: yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.size_limit_action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.Action
-	2,  // 14: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.Action
-	7,  // 15: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	3,  // 16: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.mode:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.Mode
-	7,  // 17: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	4,  // 18: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.mode:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.Mode
-	7,  // 19: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	13, // 20: yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher.http_methods:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
-	13, // 21: yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher.authorities:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
-	13, // 22: yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher.path:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
-	17, // 23: yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher.queries:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcher
-	13, // 24: yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcher.value:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
-	13, // 25: yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcher.value:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
-	20, // 26: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.ip_ranges_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcher
-	20, // 27: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.ip_ranges_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcher
-	21, // 28: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.geo_ip_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcher
-	21, // 29: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.geo_ip_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcher
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	9,  // 2: yandex.cloud.smartwebsecurity.v1.SecurityProfile.security_rules:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule
+	41, // 3: yandex.cloud.smartwebsecurity.v1.SecurityProfile.created_at:type_name -> google.protobuf.Timestamp
+	11, // 4: yandex.cloud.smartwebsecurity.v1.SecurityProfile.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
+	12, // 5: yandex.cloud.smartwebsecurity.v1.SecurityProfile.log_options:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions
+	14, // 6: yandex.cloud.smartwebsecurity.v1.SecurityRule.rule_condition:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition
+	15, // 7: yandex.cloud.smartwebsecurity.v1.SecurityRule.smart_protection:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection
+	16, // 8: yandex.cloud.smartwebsecurity.v1.SecurityRule.waf:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf
+	21, // 9: yandex.cloud.smartwebsecurity.v1.Condition.authority:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher
+	20, // 10: yandex.cloud.smartwebsecurity.v1.Condition.http_method:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher
+	22, // 11: yandex.cloud.smartwebsecurity.v1.Condition.request_uri:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher
+	24, // 12: yandex.cloud.smartwebsecurity.v1.Condition.headers:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcher
+	25, // 13: yandex.cloud.smartwebsecurity.v1.Condition.source_ip:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher
+	40, // 14: yandex.cloud.smartwebsecurity.v1.Condition.cookies:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.CookieMatcher
+	26, // 15: yandex.cloud.smartwebsecurity.v1.Condition.bot_category:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.BotCategoryMatcher
+	27, // 16: yandex.cloud.smartwebsecurity.v1.Condition.bot_name:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.BotNameMatcher
+	34, // 17: yandex.cloud.smartwebsecurity.v1.Condition.bot_score:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.BotScoreMatcher
+	35, // 18: yandex.cloud.smartwebsecurity.v1.Condition.verified_bot:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.VerifiedBotMatcher
+	36, // 19: yandex.cloud.smartwebsecurity.v1.Condition.finger_print:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcher
+	1,  // 20: yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.size_limit_action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.Action
+	2,  // 21: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.enabled_modules:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.Module
+	3,  // 22: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.enabled_actions:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.Action
+	4,  // 23: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.outputs:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions.Output
+	5,  // 24: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.Action
+	10, // 25: yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	6,  // 26: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.mode:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.Mode
+	10, // 27: yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	7,  // 28: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.mode:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.Mode
+	10, // 29: yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	19, // 30: yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher.lists_matchers:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchers
+	18, // 31: yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchers.str_lists_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 32: yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchers.str_lists_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 33: yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchers.reg_exp_lists_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 34: yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchers.reg_exp_lists_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	17, // 35: yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher.http_methods:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 36: yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcher.http_method_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 37: yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher.authorities:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 38: yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcher.authority_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 39: yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher.path:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	23, // 40: yandex.cloud.smartwebsecurity.v1.Condition.RequestUriMatcher.queries:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcher
+	17, // 41: yandex.cloud.smartwebsecurity.v1.Condition.QueryMatcher.value:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 42: yandex.cloud.smartwebsecurity.v1.Condition.HeaderMatcher.value:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	37, // 43: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.ip_ranges_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcher
+	37, // 44: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.ip_ranges_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IpRangesMatcher
+	38, // 45: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.geo_ip_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcher
+	38, // 46: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.geo_ip_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.GeoIpMatcher
+	18, // 47: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.ip_lists_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 48: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.ip_lists_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	39, // 49: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.asn_ranges_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.AsnRangesMatcher
+	39, // 50: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.asn_ranges_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.AsnRangesMatcher
+	18, // 51: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.asn_lists_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 52: yandex.cloud.smartwebsecurity.v1.Condition.IpMatcher.asn_lists_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 53: yandex.cloud.smartwebsecurity.v1.Condition.BotCategoryMatcher.bot_category_lists_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 54: yandex.cloud.smartwebsecurity.v1.Condition.BotCategoryMatcher.bot_category_lists_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 55: yandex.cloud.smartwebsecurity.v1.Condition.BotNameMatcher.bot_name_lists_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	18, // 56: yandex.cloud.smartwebsecurity.v1.Condition.BotNameMatcher.bot_name_lists_not_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcher
+	29, // 57: yandex.cloud.smartwebsecurity.v1.Condition.IntMatcher.le_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IntLEMatcher
+	30, // 58: yandex.cloud.smartwebsecurity.v1.Condition.IntMatcher.ge_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IntGEMatcher
+	31, // 59: yandex.cloud.smartwebsecurity.v1.Condition.IntMatcher.eq_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IntEQMatcher
+	32, // 60: yandex.cloud.smartwebsecurity.v1.Condition.IntMatcher.ne_match:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IntNEMatcher
+	33, // 61: yandex.cloud.smartwebsecurity.v1.Condition.BotScoreMatcher.value:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.IntMatcher
+	28, // 62: yandex.cloud.smartwebsecurity.v1.Condition.VerifiedBotMatcher.verified:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.BoolMatcher
+	17, // 63: yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcher.ja3_ranges:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 64: yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcher.ja4_ranges:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 65: yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcher.ja3_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 66: yandex.cloud.smartwebsecurity.v1.Condition.FingerPrintMatcher.ja4_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	17, // 67: yandex.cloud.smartwebsecurity.v1.Condition.CookieMatcher.value:type_name -> yandex.cloud.smartwebsecurity.v1.Condition.StringMatcher
+	68, // [68:68] is the sub-list for method output_type
+	68, // [68:68] is the sub-list for method input_type
+	68, // [68:68] is the sub-list for extension type_name
+	68, // [68:68] is the sub-list for extension extendee
+	0,  // [0:68] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_init() }
@@ -1650,21 +3138,29 @@ func file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_init() {
 		(*SecurityRule_SmartProtection_)(nil),
 		(*SecurityRule_Waf_)(nil),
 	}
-	file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[8].OneofWrappers = []any{
+	file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[9].OneofWrappers = []any{
 		(*Condition_StringMatcher_ExactMatch)(nil),
 		(*Condition_StringMatcher_ExactNotMatch)(nil),
 		(*Condition_StringMatcher_PrefixMatch)(nil),
 		(*Condition_StringMatcher_PrefixNotMatch)(nil),
 		(*Condition_StringMatcher_PireRegexMatch)(nil),
 		(*Condition_StringMatcher_PireRegexNotMatch)(nil),
+		(*Condition_StringMatcher_Defined)(nil),
+		(*Condition_StringMatcher_ListsMatchers)(nil),
+	}
+	file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_msgTypes[25].OneofWrappers = []any{
+		(*Condition_IntMatcher_LeMatch)(nil),
+		(*Condition_IntMatcher_GeMatch)(nil),
+		(*Condition_IntMatcher_EqMatch)(nil),
+		(*Condition_IntMatcher_NeMatch)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc), len(file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc)),
-			NumEnums:      5,
-			NumMessages:   17,
+			NumEnums:      8,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

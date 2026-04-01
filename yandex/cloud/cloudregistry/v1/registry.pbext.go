@@ -18,6 +18,10 @@ func (m *Registry) SetName(v string) {
 	m.Name = v
 }
 
+func (m *Registry) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *Registry) SetKind(v Registry_Kind) {
 	m.Kind = v
 }
@@ -28,10 +32,6 @@ func (m *Registry) SetType(v Registry_Type) {
 
 func (m *Registry) SetStatus(v Registry_Status) {
 	m.Status = v
-}
-
-func (m *Registry) SetDescription(v string) {
-	m.Description = v
 }
 
 func (m *Registry) SetLabels(v map[string]string) {

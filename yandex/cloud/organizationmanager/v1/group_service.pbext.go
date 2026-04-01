@@ -79,6 +79,10 @@ func (m *CreateGroupRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *CreateGroupRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *CreateGroupMetadata) SetGroupId(v string) {
 	m.GroupId = v
 }
@@ -105,6 +109,10 @@ func (m *CreateExternalGroupRequest) SetExternalId(v string) {
 
 func (m *CreateExternalGroupRequest) SetMakeEditor(v bool) {
 	m.MakeEditor = v
+}
+
+func (m *CreateExternalGroupRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *CreateExternalGroupMetadata) SetGroupId(v string) {
@@ -145,6 +153,10 @@ func (m *UpdateGroupRequest) SetName(v string) {
 
 func (m *UpdateGroupRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *UpdateGroupRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *UpdateGroupMetadata) SetGroupId(v string) {

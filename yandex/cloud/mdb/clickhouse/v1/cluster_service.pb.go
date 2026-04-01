@@ -83,7 +83,7 @@ func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumN
 
 // Deprecated: Use RescheduleMaintenanceRequest_RescheduleType.Descriptor instead.
 func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{21, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{22, 0}
 }
 
 type ListClusterLogsRequest_ServiceType int32
@@ -134,7 +134,7 @@ func (x ListClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ListClusterLogsRequest_ServiceType.Descriptor instead.
 func (ListClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{24, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{25, 0}
 }
 
 type StreamClusterLogsRequest_ServiceType int32
@@ -185,7 +185,7 @@ func (x StreamClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StreamClusterLogsRequest_ServiceType.Descriptor instead.
 func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{27, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{28, 0}
 }
 
 type GetClusterRequest struct {
@@ -1438,8 +1438,10 @@ type RestoreClusterRequest struct {
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,17,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,18,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Specification of what databases and table to restore
+	PartialRestore *PartialRestoreSpec `protobuf:"bytes,19,opt,name=partial_restore,json=partialRestore,proto3" json:"partial_restore,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *RestoreClusterRequest) Reset() {
@@ -1584,6 +1586,69 @@ func (x *RestoreClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	return nil
 }
 
+func (x *RestoreClusterRequest) GetPartialRestore() *PartialRestoreSpec {
+	if x != nil {
+		return x.PartialRestore
+	}
+	return nil
+}
+
+type PartialRestoreSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tables and databases that will be included in restored cluster.
+	// Possible formats: db1.table1, db1.* or db1.table*
+	IncludePatterns []string `protobuf:"bytes,1,rep,name=include_patterns,json=includePatterns,proto3" json:"include_patterns,omitempty"`
+	// Tables and databases that will be excluded in restored cluster.
+	// Possible formats: db1.table1, db1.* or db1.table*
+	ExcludePatterns []string `protobuf:"bytes,2,rep,name=exclude_patterns,json=excludePatterns,proto3" json:"exclude_patterns,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *PartialRestoreSpec) Reset() {
+	*x = PartialRestoreSpec{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PartialRestoreSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PartialRestoreSpec) ProtoMessage() {}
+
+func (x *PartialRestoreSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PartialRestoreSpec.ProtoReflect.Descriptor instead.
+func (*PartialRestoreSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *PartialRestoreSpec) GetIncludePatterns() []string {
+	if x != nil {
+		return x.IncludePatterns
+	}
+	return nil
+}
+
+func (x *PartialRestoreSpec) GetExcludePatterns() []string {
+	if x != nil {
+		return x.ExcludePatterns
+	}
+	return nil
+}
+
 type RestoreClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the new ClickHouse cluster that is being created from a backup.
@@ -1596,7 +1661,7 @@ type RestoreClusterMetadata struct {
 
 func (x *RestoreClusterMetadata) Reset() {
 	*x = RestoreClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1608,7 +1673,7 @@ func (x *RestoreClusterMetadata) String() string {
 func (*RestoreClusterMetadata) ProtoMessage() {}
 
 func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1621,7 +1686,7 @@ func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreClusterMetadata.ProtoReflect.Descriptor instead.
 func (*RestoreClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *RestoreClusterMetadata) GetClusterId() string {
@@ -1652,7 +1717,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1664,7 +1729,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1677,7 +1742,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -1714,7 +1779,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1726,7 +1791,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1739,7 +1804,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -1768,7 +1833,7 @@ type LogRecord struct {
 
 func (x *LogRecord) Reset() {
 	*x = LogRecord{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1780,7 +1845,7 @@ func (x *LogRecord) String() string {
 func (*LogRecord) ProtoMessage() {}
 
 func (x *LogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1793,7 +1858,7 @@ func (x *LogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogRecord.ProtoReflect.Descriptor instead.
 func (*LogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *LogRecord) GetTimestamp() *timestamppb.Timestamp {
@@ -1837,7 +1902,7 @@ type ListClusterLogsRequest struct {
 
 func (x *ListClusterLogsRequest) Reset() {
 	*x = ListClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1849,7 +1914,7 @@ func (x *ListClusterLogsRequest) String() string {
 func (*ListClusterLogsRequest) ProtoMessage() {}
 
 func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1862,7 +1927,7 @@ func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListClusterLogsRequest) GetClusterId() string {
@@ -1930,7 +1995,7 @@ type ListClusterLogsResponse struct {
 
 func (x *ListClusterLogsResponse) Reset() {
 	*x = ListClusterLogsResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1942,7 +2007,7 @@ func (x *ListClusterLogsResponse) String() string {
 func (*ListClusterLogsResponse) ProtoMessage() {}
 
 func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1955,7 +2020,7 @@ func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListClusterLogsResponse) GetLogs() []*LogRecord {
@@ -1987,7 +2052,7 @@ type StreamLogRecord struct {
 
 func (x *StreamLogRecord) Reset() {
 	*x = StreamLogRecord{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1999,7 +2064,7 @@ func (x *StreamLogRecord) String() string {
 func (*StreamLogRecord) ProtoMessage() {}
 
 func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2012,7 +2077,7 @@ func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLogRecord.ProtoReflect.Descriptor instead.
 func (*StreamLogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *StreamLogRecord) GetRecord() *LogRecord {
@@ -2060,7 +2125,7 @@ type StreamClusterLogsRequest struct {
 
 func (x *StreamClusterLogsRequest) Reset() {
 	*x = StreamClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2072,7 +2137,7 @@ func (x *StreamClusterLogsRequest) String() string {
 func (*StreamClusterLogsRequest) ProtoMessage() {}
 
 func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2085,7 +2150,7 @@ func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*StreamClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *StreamClusterLogsRequest) GetClusterId() string {
@@ -2154,7 +2219,7 @@ type ListClusterOperationsRequest struct {
 
 func (x *ListClusterOperationsRequest) Reset() {
 	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2166,7 +2231,7 @@ func (x *ListClusterOperationsRequest) String() string {
 func (*ListClusterOperationsRequest) ProtoMessage() {}
 
 func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2179,7 +2244,7 @@ func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListClusterOperationsRequest) GetClusterId() string {
@@ -2218,7 +2283,7 @@ type ListClusterOperationsResponse struct {
 
 func (x *ListClusterOperationsResponse) Reset() {
 	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2230,7 +2295,7 @@ func (x *ListClusterOperationsResponse) String() string {
 func (*ListClusterOperationsResponse) ProtoMessage() {}
 
 func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2243,7 +2308,7 @@ func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
@@ -2278,7 +2343,7 @@ type ListClusterBackupsRequest struct {
 
 func (x *ListClusterBackupsRequest) Reset() {
 	*x = ListClusterBackupsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2290,7 +2355,7 @@ func (x *ListClusterBackupsRequest) String() string {
 func (*ListClusterBackupsRequest) ProtoMessage() {}
 
 func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2303,7 +2368,7 @@ func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterBackupsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterBackupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListClusterBackupsRequest) GetClusterId() string {
@@ -2342,7 +2407,7 @@ type ListClusterBackupsResponse struct {
 
 func (x *ListClusterBackupsResponse) Reset() {
 	*x = ListClusterBackupsResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2354,7 +2419,7 @@ func (x *ListClusterBackupsResponse) String() string {
 func (*ListClusterBackupsResponse) ProtoMessage() {}
 
 func (x *ListClusterBackupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2367,7 +2432,7 @@ func (x *ListClusterBackupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterBackupsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterBackupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListClusterBackupsResponse) GetBackups() []*Backup {
@@ -2402,7 +2467,7 @@ type ListClusterHostsRequest struct {
 
 func (x *ListClusterHostsRequest) Reset() {
 	*x = ListClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2414,7 +2479,7 @@ func (x *ListClusterHostsRequest) String() string {
 func (*ListClusterHostsRequest) ProtoMessage() {}
 
 func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2427,7 +2492,7 @@ func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListClusterHostsRequest) GetClusterId() string {
@@ -2466,7 +2531,7 @@ type ListClusterHostsResponse struct {
 
 func (x *ListClusterHostsResponse) Reset() {
 	*x = ListClusterHostsResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2478,7 +2543,7 @@ func (x *ListClusterHostsResponse) String() string {
 func (*ListClusterHostsResponse) ProtoMessage() {}
 
 func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2491,7 +2556,7 @@ func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterHostsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterHostsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{33}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListClusterHostsResponse) GetHosts() []*Host {
@@ -2515,7 +2580,9 @@ type AddClusterHostsRequest struct {
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configurations for ClickHouse hosts that should be added to the cluster.
 	HostSpecs []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	// Whether to copy schema to new ClickHouse hosts from replicas.
+	// Deprecated. The schema is always copied to new ClickHouse replicas in order to avoid potential data loss.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/cluster_service.proto.
 	CopySchema    *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=copy_schema,json=copySchema,proto3" json:"copy_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2523,7 +2590,7 @@ type AddClusterHostsRequest struct {
 
 func (x *AddClusterHostsRequest) Reset() {
 	*x = AddClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2535,7 +2602,7 @@ func (x *AddClusterHostsRequest) String() string {
 func (*AddClusterHostsRequest) ProtoMessage() {}
 
 func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2548,7 +2615,7 @@ func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{34}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *AddClusterHostsRequest) GetClusterId() string {
@@ -2565,6 +2632,7 @@ func (x *AddClusterHostsRequest) GetHostSpecs() []*HostSpec {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/cluster_service.proto.
 func (x *AddClusterHostsRequest) GetCopySchema() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.CopySchema
@@ -2584,7 +2652,7 @@ type AddClusterHostsMetadata struct {
 
 func (x *AddClusterHostsMetadata) Reset() {
 	*x = AddClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2596,7 +2664,7 @@ func (x *AddClusterHostsMetadata) String() string {
 func (*AddClusterHostsMetadata) ProtoMessage() {}
 
 func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2609,7 +2677,7 @@ func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{35}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *AddClusterHostsMetadata) GetClusterId() string {
@@ -2641,7 +2709,7 @@ type UpdateHostSpec struct {
 
 func (x *UpdateHostSpec) Reset() {
 	*x = UpdateHostSpec{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2653,7 +2721,7 @@ func (x *UpdateHostSpec) String() string {
 func (*UpdateHostSpec) ProtoMessage() {}
 
 func (x *UpdateHostSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2666,7 +2734,7 @@ func (x *UpdateHostSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateHostSpec.ProtoReflect.Descriptor instead.
 func (*UpdateHostSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{36}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *UpdateHostSpec) GetHostName() string {
@@ -2703,7 +2771,7 @@ type UpdateClusterHostsRequest struct {
 
 func (x *UpdateClusterHostsRequest) Reset() {
 	*x = UpdateClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2715,7 +2783,7 @@ func (x *UpdateClusterHostsRequest) String() string {
 func (*UpdateClusterHostsRequest) ProtoMessage() {}
 
 func (x *UpdateClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2728,7 +2796,7 @@ func (x *UpdateClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{37}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *UpdateClusterHostsRequest) GetClusterId() string {
@@ -2757,7 +2825,7 @@ type UpdateClusterHostsMetadata struct {
 
 func (x *UpdateClusterHostsMetadata) Reset() {
 	*x = UpdateClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2769,7 +2837,7 @@ func (x *UpdateClusterHostsMetadata) String() string {
 func (*UpdateClusterHostsMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2782,7 +2850,7 @@ func (x *UpdateClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{38}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UpdateClusterHostsMetadata) GetClusterId() string {
@@ -2812,7 +2880,7 @@ type DeleteClusterHostsRequest struct {
 
 func (x *DeleteClusterHostsRequest) Reset() {
 	*x = DeleteClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2824,7 +2892,7 @@ func (x *DeleteClusterHostsRequest) String() string {
 func (*DeleteClusterHostsRequest) ProtoMessage() {}
 
 func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2837,7 +2905,7 @@ func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{39}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *DeleteClusterHostsRequest) GetClusterId() string {
@@ -2866,7 +2934,7 @@ type DeleteClusterHostsMetadata struct {
 
 func (x *DeleteClusterHostsMetadata) Reset() {
 	*x = DeleteClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2878,7 +2946,7 @@ func (x *DeleteClusterHostsMetadata) String() string {
 func (*DeleteClusterHostsMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2891,7 +2959,7 @@ func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{40}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *DeleteClusterHostsMetadata) GetClusterId() string {
@@ -2920,7 +2988,7 @@ type RestartClusterHostsRequest struct {
 
 func (x *RestartClusterHostsRequest) Reset() {
 	*x = RestartClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2932,7 +3000,7 @@ func (x *RestartClusterHostsRequest) String() string {
 func (*RestartClusterHostsRequest) ProtoMessage() {}
 
 func (x *RestartClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2945,7 +3013,7 @@ func (x *RestartClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestartClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*RestartClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{41}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *RestartClusterHostsRequest) GetClusterId() string {
@@ -2974,7 +3042,7 @@ type RestartClusterHostsMetadata struct {
 
 func (x *RestartClusterHostsMetadata) Reset() {
 	*x = RestartClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2986,7 +3054,7 @@ func (x *RestartClusterHostsMetadata) String() string {
 func (*RestartClusterHostsMetadata) ProtoMessage() {}
 
 func (x *RestartClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2999,7 +3067,7 @@ func (x *RestartClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestartClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*RestartClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{42}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *RestartClusterHostsMetadata) GetClusterId() string {
@@ -3031,7 +3099,7 @@ type GetClusterShardRequest struct {
 
 func (x *GetClusterShardRequest) Reset() {
 	*x = GetClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3043,7 +3111,7 @@ func (x *GetClusterShardRequest) String() string {
 func (*GetClusterShardRequest) ProtoMessage() {}
 
 func (x *GetClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3056,7 +3124,7 @@ func (x *GetClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*GetClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{43}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *GetClusterShardRequest) GetClusterId() string {
@@ -3091,7 +3159,7 @@ type ListClusterShardsRequest struct {
 
 func (x *ListClusterShardsRequest) Reset() {
 	*x = ListClusterShardsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3103,7 +3171,7 @@ func (x *ListClusterShardsRequest) String() string {
 func (*ListClusterShardsRequest) ProtoMessage() {}
 
 func (x *ListClusterShardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3116,7 +3184,7 @@ func (x *ListClusterShardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterShardsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterShardsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{44}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ListClusterShardsRequest) GetClusterId() string {
@@ -3155,7 +3223,7 @@ type ListClusterShardsResponse struct {
 
 func (x *ListClusterShardsResponse) Reset() {
 	*x = ListClusterShardsResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[45]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3167,7 +3235,7 @@ func (x *ListClusterShardsResponse) String() string {
 func (*ListClusterShardsResponse) ProtoMessage() {}
 
 func (x *ListClusterShardsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[45]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3180,7 +3248,7 @@ func (x *ListClusterShardsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterShardsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterShardsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{45}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListClusterShardsResponse) GetShards() []*Shard {
@@ -3216,7 +3284,7 @@ type AddClusterShardRequest struct {
 
 func (x *AddClusterShardRequest) Reset() {
 	*x = AddClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[46]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3228,7 +3296,7 @@ func (x *AddClusterShardRequest) String() string {
 func (*AddClusterShardRequest) ProtoMessage() {}
 
 func (x *AddClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[46]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3241,7 +3309,7 @@ func (x *AddClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*AddClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{46}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *AddClusterShardRequest) GetClusterId() string {
@@ -3291,7 +3359,7 @@ type AddClusterShardMetadata struct {
 
 func (x *AddClusterShardMetadata) Reset() {
 	*x = AddClusterShardMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[47]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3303,7 +3371,7 @@ func (x *AddClusterShardMetadata) String() string {
 func (*AddClusterShardMetadata) ProtoMessage() {}
 
 func (x *AddClusterShardMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[47]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3316,7 +3384,7 @@ func (x *AddClusterShardMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterShardMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterShardMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{47}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *AddClusterShardMetadata) GetClusterId() string {
@@ -3356,7 +3424,7 @@ type AddClusterShardsRequest struct {
 
 func (x *AddClusterShardsRequest) Reset() {
 	*x = AddClusterShardsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[48]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3368,7 +3436,7 @@ func (x *AddClusterShardsRequest) String() string {
 func (*AddClusterShardsRequest) ProtoMessage() {}
 
 func (x *AddClusterShardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[48]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3381,7 +3449,7 @@ func (x *AddClusterShardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterShardsRequest.ProtoReflect.Descriptor instead.
 func (*AddClusterShardsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{48}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *AddClusterShardsRequest) GetClusterId() string {
@@ -3424,7 +3492,7 @@ type AddClusterShardsMetadata struct {
 
 func (x *AddClusterShardsMetadata) Reset() {
 	*x = AddClusterShardsMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[49]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3436,7 +3504,7 @@ func (x *AddClusterShardsMetadata) String() string {
 func (*AddClusterShardsMetadata) ProtoMessage() {}
 
 func (x *AddClusterShardsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[49]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3449,7 +3517,7 @@ func (x *AddClusterShardsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterShardsMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterShardsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{49}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *AddClusterShardsMetadata) GetClusterId() string {
@@ -3488,7 +3556,7 @@ type UpdateClusterShardRequest struct {
 
 func (x *UpdateClusterShardRequest) Reset() {
 	*x = UpdateClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[50]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3500,7 +3568,7 @@ func (x *UpdateClusterShardRequest) String() string {
 func (*UpdateClusterShardRequest) ProtoMessage() {}
 
 func (x *UpdateClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[50]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3513,7 +3581,7 @@ func (x *UpdateClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{50}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *UpdateClusterShardRequest) GetClusterId() string {
@@ -3563,7 +3631,7 @@ type UpdateClusterShardMetadata struct {
 
 func (x *UpdateClusterShardMetadata) Reset() {
 	*x = UpdateClusterShardMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[51]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3575,7 +3643,7 @@ func (x *UpdateClusterShardMetadata) String() string {
 func (*UpdateClusterShardMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterShardMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[51]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3588,7 +3656,7 @@ func (x *UpdateClusterShardMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterShardMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterShardMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{51}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *UpdateClusterShardMetadata) GetClusterId() string {
@@ -3619,7 +3687,7 @@ type DeleteClusterShardRequest struct {
 
 func (x *DeleteClusterShardRequest) Reset() {
 	*x = DeleteClusterShardRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[52]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3631,7 +3699,7 @@ func (x *DeleteClusterShardRequest) String() string {
 func (*DeleteClusterShardRequest) ProtoMessage() {}
 
 func (x *DeleteClusterShardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[52]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3644,7 +3712,7 @@ func (x *DeleteClusterShardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{52}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *DeleteClusterShardRequest) GetClusterId() string {
@@ -3673,7 +3741,7 @@ type DeleteClusterShardMetadata struct {
 
 func (x *DeleteClusterShardMetadata) Reset() {
 	*x = DeleteClusterShardMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[53]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3685,7 +3753,7 @@ func (x *DeleteClusterShardMetadata) String() string {
 func (*DeleteClusterShardMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterShardMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[53]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3698,7 +3766,7 @@ func (x *DeleteClusterShardMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{53}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *DeleteClusterShardMetadata) GetClusterId() string {
@@ -3729,7 +3797,7 @@ type DeleteClusterShardsRequest struct {
 
 func (x *DeleteClusterShardsRequest) Reset() {
 	*x = DeleteClusterShardsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[54]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3741,7 +3809,7 @@ func (x *DeleteClusterShardsRequest) String() string {
 func (*DeleteClusterShardsRequest) ProtoMessage() {}
 
 func (x *DeleteClusterShardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[54]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3754,7 +3822,7 @@ func (x *DeleteClusterShardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardsRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{54}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *DeleteClusterShardsRequest) GetClusterId() string {
@@ -3783,7 +3851,7 @@ type DeleteClusterShardsMetadata struct {
 
 func (x *DeleteClusterShardsMetadata) Reset() {
 	*x = DeleteClusterShardsMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[55]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3795,7 +3863,7 @@ func (x *DeleteClusterShardsMetadata) String() string {
 func (*DeleteClusterShardsMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterShardsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[55]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3808,7 +3876,7 @@ func (x *DeleteClusterShardsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardsMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{55}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *DeleteClusterShardsMetadata) GetClusterId() string {
@@ -3841,7 +3909,7 @@ type GetClusterShardGroupRequest struct {
 
 func (x *GetClusterShardGroupRequest) Reset() {
 	*x = GetClusterShardGroupRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[56]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3853,7 +3921,7 @@ func (x *GetClusterShardGroupRequest) String() string {
 func (*GetClusterShardGroupRequest) ProtoMessage() {}
 
 func (x *GetClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[56]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3866,7 +3934,7 @@ func (x *GetClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClusterShardGroupRequest.ProtoReflect.Descriptor instead.
 func (*GetClusterShardGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{56}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *GetClusterShardGroupRequest) GetClusterId() string {
@@ -3903,7 +3971,7 @@ type ListClusterShardGroupsRequest struct {
 
 func (x *ListClusterShardGroupsRequest) Reset() {
 	*x = ListClusterShardGroupsRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[57]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3915,7 +3983,7 @@ func (x *ListClusterShardGroupsRequest) String() string {
 func (*ListClusterShardGroupsRequest) ProtoMessage() {}
 
 func (x *ListClusterShardGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[57]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3928,7 +3996,7 @@ func (x *ListClusterShardGroupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterShardGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterShardGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{57}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *ListClusterShardGroupsRequest) GetClusterId() string {
@@ -3967,7 +4035,7 @@ type ListClusterShardGroupsResponse struct {
 
 func (x *ListClusterShardGroupsResponse) Reset() {
 	*x = ListClusterShardGroupsResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[58]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3979,7 +4047,7 @@ func (x *ListClusterShardGroupsResponse) String() string {
 func (*ListClusterShardGroupsResponse) ProtoMessage() {}
 
 func (x *ListClusterShardGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[58]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3992,7 +4060,7 @@ func (x *ListClusterShardGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterShardGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterShardGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{58}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *ListClusterShardGroupsResponse) GetShardGroups() []*ShardGroup {
@@ -4029,7 +4097,7 @@ type CreateClusterShardGroupRequest struct {
 
 func (x *CreateClusterShardGroupRequest) Reset() {
 	*x = CreateClusterShardGroupRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[59]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4041,7 +4109,7 @@ func (x *CreateClusterShardGroupRequest) String() string {
 func (*CreateClusterShardGroupRequest) ProtoMessage() {}
 
 func (x *CreateClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[59]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4054,7 +4122,7 @@ func (x *CreateClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterShardGroupRequest.ProtoReflect.Descriptor instead.
 func (*CreateClusterShardGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{59}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *CreateClusterShardGroupRequest) GetClusterId() string {
@@ -4097,7 +4165,7 @@ type CreateClusterShardGroupMetadata struct {
 
 func (x *CreateClusterShardGroupMetadata) Reset() {
 	*x = CreateClusterShardGroupMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[60]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4109,7 +4177,7 @@ func (x *CreateClusterShardGroupMetadata) String() string {
 func (*CreateClusterShardGroupMetadata) ProtoMessage() {}
 
 func (x *CreateClusterShardGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[60]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4122,7 +4190,7 @@ func (x *CreateClusterShardGroupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterShardGroupMetadata.ProtoReflect.Descriptor instead.
 func (*CreateClusterShardGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{60}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *CreateClusterShardGroupMetadata) GetClusterId() string {
@@ -4160,7 +4228,7 @@ type UpdateClusterShardGroupRequest struct {
 
 func (x *UpdateClusterShardGroupRequest) Reset() {
 	*x = UpdateClusterShardGroupRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[61]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4172,7 +4240,7 @@ func (x *UpdateClusterShardGroupRequest) String() string {
 func (*UpdateClusterShardGroupRequest) ProtoMessage() {}
 
 func (x *UpdateClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[61]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4185,7 +4253,7 @@ func (x *UpdateClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterShardGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterShardGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{61}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *UpdateClusterShardGroupRequest) GetClusterId() string {
@@ -4235,7 +4303,7 @@ type UpdateClusterShardGroupMetadata struct {
 
 func (x *UpdateClusterShardGroupMetadata) Reset() {
 	*x = UpdateClusterShardGroupMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[62]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4247,7 +4315,7 @@ func (x *UpdateClusterShardGroupMetadata) String() string {
 func (*UpdateClusterShardGroupMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterShardGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[62]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4260,7 +4328,7 @@ func (x *UpdateClusterShardGroupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterShardGroupMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterShardGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{62}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *UpdateClusterShardGroupMetadata) GetClusterId() string {
@@ -4293,7 +4361,7 @@ type DeleteClusterShardGroupRequest struct {
 
 func (x *DeleteClusterShardGroupRequest) Reset() {
 	*x = DeleteClusterShardGroupRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[63]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4305,7 +4373,7 @@ func (x *DeleteClusterShardGroupRequest) String() string {
 func (*DeleteClusterShardGroupRequest) ProtoMessage() {}
 
 func (x *DeleteClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[63]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4318,7 +4386,7 @@ func (x *DeleteClusterShardGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardGroupRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{63}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *DeleteClusterShardGroupRequest) GetClusterId() string {
@@ -4347,7 +4415,7 @@ type DeleteClusterShardGroupMetadata struct {
 
 func (x *DeleteClusterShardGroupMetadata) Reset() {
 	*x = DeleteClusterShardGroupMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[64]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4359,7 +4427,7 @@ func (x *DeleteClusterShardGroupMetadata) String() string {
 func (*DeleteClusterShardGroupMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterShardGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[64]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4372,7 +4440,7 @@ func (x *DeleteClusterShardGroupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterShardGroupMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterShardGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{64}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *DeleteClusterShardGroupMetadata) GetClusterId() string {
@@ -4406,7 +4474,7 @@ type ListClusterExternalDictionariesRequest struct {
 
 func (x *ListClusterExternalDictionariesRequest) Reset() {
 	*x = ListClusterExternalDictionariesRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[65]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4418,7 +4486,7 @@ func (x *ListClusterExternalDictionariesRequest) String() string {
 func (*ListClusterExternalDictionariesRequest) ProtoMessage() {}
 
 func (x *ListClusterExternalDictionariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[65]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4431,7 +4499,7 @@ func (x *ListClusterExternalDictionariesRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListClusterExternalDictionariesRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterExternalDictionariesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{65}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *ListClusterExternalDictionariesRequest) GetClusterId() string {
@@ -4470,7 +4538,7 @@ type ListClusterExternalDictionariesResponse struct {
 
 func (x *ListClusterExternalDictionariesResponse) Reset() {
 	*x = ListClusterExternalDictionariesResponse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[66]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4482,7 +4550,7 @@ func (x *ListClusterExternalDictionariesResponse) String() string {
 func (*ListClusterExternalDictionariesResponse) ProtoMessage() {}
 
 func (x *ListClusterExternalDictionariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[66]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4495,7 +4563,7 @@ func (x *ListClusterExternalDictionariesResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListClusterExternalDictionariesResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterExternalDictionariesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{66}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *ListClusterExternalDictionariesResponse) GetExternalDictionaries() []*config.ClickhouseConfig_ExternalDictionary {
@@ -4525,7 +4593,7 @@ type CreateClusterExternalDictionaryRequest struct {
 
 func (x *CreateClusterExternalDictionaryRequest) Reset() {
 	*x = CreateClusterExternalDictionaryRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[67]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4537,7 +4605,7 @@ func (x *CreateClusterExternalDictionaryRequest) String() string {
 func (*CreateClusterExternalDictionaryRequest) ProtoMessage() {}
 
 func (x *CreateClusterExternalDictionaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[67]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4550,7 +4618,7 @@ func (x *CreateClusterExternalDictionaryRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use CreateClusterExternalDictionaryRequest.ProtoReflect.Descriptor instead.
 func (*CreateClusterExternalDictionaryRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{67}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *CreateClusterExternalDictionaryRequest) GetClusterId() string {
@@ -4577,7 +4645,7 @@ type CreateClusterExternalDictionaryMetadata struct {
 
 func (x *CreateClusterExternalDictionaryMetadata) Reset() {
 	*x = CreateClusterExternalDictionaryMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[68]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4589,7 +4657,7 @@ func (x *CreateClusterExternalDictionaryMetadata) String() string {
 func (*CreateClusterExternalDictionaryMetadata) ProtoMessage() {}
 
 func (x *CreateClusterExternalDictionaryMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[68]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4602,7 +4670,7 @@ func (x *CreateClusterExternalDictionaryMetadata) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use CreateClusterExternalDictionaryMetadata.ProtoReflect.Descriptor instead.
 func (*CreateClusterExternalDictionaryMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{68}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *CreateClusterExternalDictionaryMetadata) GetClusterId() string {
@@ -4627,7 +4695,7 @@ type UpdateClusterExternalDictionaryRequest struct {
 
 func (x *UpdateClusterExternalDictionaryRequest) Reset() {
 	*x = UpdateClusterExternalDictionaryRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[69]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4639,7 +4707,7 @@ func (x *UpdateClusterExternalDictionaryRequest) String() string {
 func (*UpdateClusterExternalDictionaryRequest) ProtoMessage() {}
 
 func (x *UpdateClusterExternalDictionaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[69]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4652,7 +4720,7 @@ func (x *UpdateClusterExternalDictionaryRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use UpdateClusterExternalDictionaryRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterExternalDictionaryRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{69}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *UpdateClusterExternalDictionaryRequest) GetClusterId() string {
@@ -4688,7 +4756,7 @@ type UpdateClusterExternalDictionaryMetadata struct {
 
 func (x *UpdateClusterExternalDictionaryMetadata) Reset() {
 	*x = UpdateClusterExternalDictionaryMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[70]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4700,7 +4768,7 @@ func (x *UpdateClusterExternalDictionaryMetadata) String() string {
 func (*UpdateClusterExternalDictionaryMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterExternalDictionaryMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[70]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4713,7 +4781,7 @@ func (x *UpdateClusterExternalDictionaryMetadata) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use UpdateClusterExternalDictionaryMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterExternalDictionaryMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{70}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *UpdateClusterExternalDictionaryMetadata) GetClusterId() string {
@@ -4743,7 +4811,7 @@ type DeleteClusterExternalDictionaryRequest struct {
 
 func (x *DeleteClusterExternalDictionaryRequest) Reset() {
 	*x = DeleteClusterExternalDictionaryRequest{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[71]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4755,7 +4823,7 @@ func (x *DeleteClusterExternalDictionaryRequest) String() string {
 func (*DeleteClusterExternalDictionaryRequest) ProtoMessage() {}
 
 func (x *DeleteClusterExternalDictionaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[71]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4768,7 +4836,7 @@ func (x *DeleteClusterExternalDictionaryRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use DeleteClusterExternalDictionaryRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterExternalDictionaryRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{71}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *DeleteClusterExternalDictionaryRequest) GetClusterId() string {
@@ -4795,7 +4863,7 @@ type DeleteClusterExternalDictionaryMetadata struct {
 
 func (x *DeleteClusterExternalDictionaryMetadata) Reset() {
 	*x = DeleteClusterExternalDictionaryMetadata{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[72]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4807,7 +4875,7 @@ func (x *DeleteClusterExternalDictionaryMetadata) String() string {
 func (*DeleteClusterExternalDictionaryMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterExternalDictionaryMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[72]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4820,7 +4888,7 @@ func (x *DeleteClusterExternalDictionaryMetadata) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use DeleteClusterExternalDictionaryMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterExternalDictionaryMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{72}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *DeleteClusterExternalDictionaryMetadata) GetClusterId() string {
@@ -4858,7 +4926,7 @@ type HostSpec struct {
 
 func (x *HostSpec) Reset() {
 	*x = HostSpec{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[73]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4870,7 +4938,7 @@ func (x *HostSpec) String() string {
 func (*HostSpec) ProtoMessage() {}
 
 func (x *HostSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[73]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4883,7 +4951,7 @@ func (x *HostSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HostSpec.ProtoReflect.Descriptor instead.
 func (*HostSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{73}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *HostSpec) GetZoneId() string {
@@ -4952,7 +5020,7 @@ type ConfigSpec struct {
 
 func (x *ConfigSpec) Reset() {
 	*x = ConfigSpec{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[74]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4964,7 +5032,7 @@ func (x *ConfigSpec) String() string {
 func (*ConfigSpec) ProtoMessage() {}
 
 func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[74]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4977,7 +5045,7 @@ func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigSpec.ProtoReflect.Descriptor instead.
 func (*ConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{74}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ConfigSpec) GetVersion() string {
@@ -5067,7 +5135,7 @@ type ShardConfigSpec struct {
 
 func (x *ShardConfigSpec) Reset() {
 	*x = ShardConfigSpec{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[75]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5079,7 +5147,7 @@ func (x *ShardConfigSpec) String() string {
 func (*ShardConfigSpec) ProtoMessage() {}
 
 func (x *ShardConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[75]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5092,7 +5160,7 @@ func (x *ShardConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShardConfigSpec.ProtoReflect.Descriptor instead.
 func (*ShardConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{75}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *ShardConfigSpec) GetClickhouse() *ShardConfigSpec_Clickhouse {
@@ -5116,7 +5184,7 @@ type ShardSpec struct {
 
 func (x *ShardSpec) Reset() {
 	*x = ShardSpec{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[76]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5128,7 +5196,7 @@ func (x *ShardSpec) String() string {
 func (*ShardSpec) ProtoMessage() {}
 
 func (x *ShardSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[76]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5141,7 +5209,7 @@ func (x *ShardSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShardSpec.ProtoReflect.Descriptor instead.
 func (*ShardSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{76}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *ShardSpec) GetName() string {
@@ -5179,7 +5247,7 @@ type ConfigSpec_Clickhouse struct {
 
 func (x *ConfigSpec_Clickhouse) Reset() {
 	*x = ConfigSpec_Clickhouse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[81]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5191,7 +5259,7 @@ func (x *ConfigSpec_Clickhouse) String() string {
 func (*ConfigSpec_Clickhouse) ProtoMessage() {}
 
 func (x *ConfigSpec_Clickhouse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[81]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5204,7 +5272,7 @@ func (x *ConfigSpec_Clickhouse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigSpec_Clickhouse.ProtoReflect.Descriptor instead.
 func (*ConfigSpec_Clickhouse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{74, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{75, 0}
 }
 
 func (x *ConfigSpec_Clickhouse) GetConfig() *config.ClickhouseConfig {
@@ -5241,7 +5309,7 @@ type ConfigSpec_Zookeeper struct {
 
 func (x *ConfigSpec_Zookeeper) Reset() {
 	*x = ConfigSpec_Zookeeper{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[82]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5253,7 +5321,7 @@ func (x *ConfigSpec_Zookeeper) String() string {
 func (*ConfigSpec_Zookeeper) ProtoMessage() {}
 
 func (x *ConfigSpec_Zookeeper) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[82]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5266,7 +5334,7 @@ func (x *ConfigSpec_Zookeeper) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigSpec_Zookeeper.ProtoReflect.Descriptor instead.
 func (*ConfigSpec_Zookeeper) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{74, 1}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{75, 1}
 }
 
 func (x *ConfigSpec_Zookeeper) GetResources() *Resources {
@@ -5300,7 +5368,7 @@ type ShardConfigSpec_Clickhouse struct {
 
 func (x *ShardConfigSpec_Clickhouse) Reset() {
 	*x = ShardConfigSpec_Clickhouse{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[83]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5312,7 +5380,7 @@ func (x *ShardConfigSpec_Clickhouse) String() string {
 func (*ShardConfigSpec_Clickhouse) ProtoMessage() {}
 
 func (x *ShardConfigSpec_Clickhouse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[83]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5325,7 +5393,7 @@ func (x *ShardConfigSpec_Clickhouse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShardConfigSpec_Clickhouse.ProtoReflect.Descriptor instead.
 func (*ShardConfigSpec_Clickhouse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{75, 0}
+	return file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP(), []int{76, 0}
 }
 
 func (x *ShardConfigSpec_Clickhouse) GetConfig() *config.ClickhouseConfig {
@@ -5473,7 +5541,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x92\t\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xef\t\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
 	"\x15additional_backup_ids\x18\r \x03(\tR\x13additionalBackupIds\x122\n" +
@@ -5495,10 +5563,14 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\vshard_specs\x18\x0f \x03(\v2).yandex.cloud.mdb.clickhouse.v1.ShardSpecR\n" +
 	"shardSpecs\x12Q\n" +
 	"\x16disk_encryption_key_id\x18\x11 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x12`\n" +
-	"\x12maintenance_window\x18\x12 \x01(\v21.yandex.cloud.mdb.clickhouse.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
+	"\x12maintenance_window\x18\x12 \x01(\v21.yandex.cloud.mdb.clickhouse.v1.MaintenanceWindowR\x11maintenanceWindow\x12[\n" +
+	"\x0fpartial_restore\x18\x13 \x01(\v22.yandex.cloud.mdb.clickhouse.v1.PartialRestoreSpecR\x0epartialRestore\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\f\x10\rJ\x04\b\x10\x10\x11\"T\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\f\x10\rJ\x04\b\x10\x10\x11\"j\n" +
+	"\x12PartialRestoreSpec\x12)\n" +
+	"\x10include_patterns\x18\x01 \x03(\tR\x0fincludePatterns\x12)\n" +
+	"\x10exclude_patterns\x18\x02 \x03(\tR\x0fexcludePatterns\"T\n" +
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
@@ -5591,13 +5663,13 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"~\n" +
 	"\x18ListClusterHostsResponse\x12:\n" +
 	"\x05hosts\x18\x01 \x03(\v2$.yandex.cloud.mdb.clickhouse.v1.HostR\x05hosts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd3\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd7\x01\n" +
 	"\x16AddClusterHostsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12O\n" +
 	"\n" +
-	"host_specs\x18\x02 \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12;\n" +
-	"\vcopy_schema\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
+	"host_specs\x18\x02 \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12?\n" +
+	"\vcopy_schema\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\n" +
 	"copySchema\"W\n" +
 	"\x17AddClusterHostsMetadata\x12\x1d\n" +
 	"\n" +
@@ -5931,7 +6003,7 @@ func file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDescGZIP() []b
 }
 
 var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 84)
+var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 85)
 var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_goTypes = []any{
 	(RescheduleMaintenanceRequest_RescheduleType)(0),   // 0: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.RescheduleType
 	(ListClusterLogsRequest_ServiceType)(0),            // 1: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.ServiceType
@@ -5956,267 +6028,269 @@ var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_goTypes = []any{
 	(*BackupClusterRequest)(nil),                       // 20: yandex.cloud.mdb.clickhouse.v1.BackupClusterRequest
 	(*BackupClusterMetadata)(nil),                      // 21: yandex.cloud.mdb.clickhouse.v1.BackupClusterMetadata
 	(*RestoreClusterRequest)(nil),                      // 22: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest
-	(*RestoreClusterMetadata)(nil),                     // 23: yandex.cloud.mdb.clickhouse.v1.RestoreClusterMetadata
-	(*RescheduleMaintenanceRequest)(nil),               // 24: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),              // 25: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceMetadata
-	(*LogRecord)(nil),                                  // 26: yandex.cloud.mdb.clickhouse.v1.LogRecord
-	(*ListClusterLogsRequest)(nil),                     // 27: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest
-	(*ListClusterLogsResponse)(nil),                    // 28: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse
-	(*StreamLogRecord)(nil),                            // 29: yandex.cloud.mdb.clickhouse.v1.StreamLogRecord
-	(*StreamClusterLogsRequest)(nil),                   // 30: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest
-	(*ListClusterOperationsRequest)(nil),               // 31: yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil),              // 32: yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse
-	(*ListClusterBackupsRequest)(nil),                  // 33: yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsRequest
-	(*ListClusterBackupsResponse)(nil),                 // 34: yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse
-	(*ListClusterHostsRequest)(nil),                    // 35: yandex.cloud.mdb.clickhouse.v1.ListClusterHostsRequest
-	(*ListClusterHostsResponse)(nil),                   // 36: yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse
-	(*AddClusterHostsRequest)(nil),                     // 37: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest
-	(*AddClusterHostsMetadata)(nil),                    // 38: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsMetadata
-	(*UpdateHostSpec)(nil),                             // 39: yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec
-	(*UpdateClusterHostsRequest)(nil),                  // 40: yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest
-	(*UpdateClusterHostsMetadata)(nil),                 // 41: yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsMetadata
-	(*DeleteClusterHostsRequest)(nil),                  // 42: yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsRequest
-	(*DeleteClusterHostsMetadata)(nil),                 // 43: yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsMetadata
-	(*RestartClusterHostsRequest)(nil),                 // 44: yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsRequest
-	(*RestartClusterHostsMetadata)(nil),                // 45: yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsMetadata
-	(*GetClusterShardRequest)(nil),                     // 46: yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest
-	(*ListClusterShardsRequest)(nil),                   // 47: yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest
-	(*ListClusterShardsResponse)(nil),                  // 48: yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse
-	(*AddClusterShardRequest)(nil),                     // 49: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest
-	(*AddClusterShardMetadata)(nil),                    // 50: yandex.cloud.mdb.clickhouse.v1.AddClusterShardMetadata
-	(*AddClusterShardsRequest)(nil),                    // 51: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest
-	(*AddClusterShardsMetadata)(nil),                   // 52: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsMetadata
-	(*UpdateClusterShardRequest)(nil),                  // 53: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest
-	(*UpdateClusterShardMetadata)(nil),                 // 54: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardMetadata
-	(*DeleteClusterShardRequest)(nil),                  // 55: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest
-	(*DeleteClusterShardMetadata)(nil),                 // 56: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardMetadata
-	(*DeleteClusterShardsRequest)(nil),                 // 57: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest
-	(*DeleteClusterShardsMetadata)(nil),                // 58: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsMetadata
-	(*GetClusterShardGroupRequest)(nil),                // 59: yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest
-	(*ListClusterShardGroupsRequest)(nil),              // 60: yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsRequest
-	(*ListClusterShardGroupsResponse)(nil),             // 61: yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse
-	(*CreateClusterShardGroupRequest)(nil),             // 62: yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupRequest
-	(*CreateClusterShardGroupMetadata)(nil),            // 63: yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupMetadata
-	(*UpdateClusterShardGroupRequest)(nil),             // 64: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest
-	(*UpdateClusterShardGroupMetadata)(nil),            // 65: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupMetadata
-	(*DeleteClusterShardGroupRequest)(nil),             // 66: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupRequest
-	(*DeleteClusterShardGroupMetadata)(nil),            // 67: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupMetadata
-	(*ListClusterExternalDictionariesRequest)(nil),     // 68: yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesRequest
-	(*ListClusterExternalDictionariesResponse)(nil),    // 69: yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse
-	(*CreateClusterExternalDictionaryRequest)(nil),     // 70: yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest
-	(*CreateClusterExternalDictionaryMetadata)(nil),    // 71: yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryMetadata
-	(*UpdateClusterExternalDictionaryRequest)(nil),     // 72: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest
-	(*UpdateClusterExternalDictionaryMetadata)(nil),    // 73: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryMetadata
-	(*DeleteClusterExternalDictionaryRequest)(nil),     // 74: yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryRequest
-	(*DeleteClusterExternalDictionaryMetadata)(nil),    // 75: yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryMetadata
-	(*HostSpec)(nil),                                   // 76: yandex.cloud.mdb.clickhouse.v1.HostSpec
-	(*ConfigSpec)(nil),                                 // 77: yandex.cloud.mdb.clickhouse.v1.ConfigSpec
-	(*ShardConfigSpec)(nil),                            // 78: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
-	(*ShardSpec)(nil),                                  // 79: yandex.cloud.mdb.clickhouse.v1.ShardSpec
-	nil,                                                // 80: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.LabelsEntry
-	nil,                                                // 81: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.LabelsEntry
-	nil,                                                // 82: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.LabelsEntry
-	nil,                                                // 83: yandex.cloud.mdb.clickhouse.v1.LogRecord.MessageEntry
-	(*ConfigSpec_Clickhouse)(nil),                      // 84: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse
-	(*ConfigSpec_Zookeeper)(nil),                       // 85: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper
-	(*ShardConfigSpec_Clickhouse)(nil),                 // 86: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse
-	(*Cluster)(nil),                                    // 87: yandex.cloud.mdb.clickhouse.v1.Cluster
-	(Cluster_Environment)(0),                           // 88: yandex.cloud.mdb.clickhouse.v1.Cluster.Environment
-	(*DatabaseSpec)(nil),                               // 89: yandex.cloud.mdb.clickhouse.v1.DatabaseSpec
-	(*UserSpec)(nil),                                   // 90: yandex.cloud.mdb.clickhouse.v1.UserSpec
-	(*MaintenanceWindow)(nil),                          // 91: yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
-	(*wrapperspb.StringValue)(nil),                     // 92: google.protobuf.StringValue
-	(*fieldmaskpb.FieldMask)(nil),                      // 93: google.protobuf.FieldMask
-	(*wrapperspb.BoolValue)(nil),                       // 94: google.protobuf.BoolValue
-	(*Resources)(nil),                                  // 95: yandex.cloud.mdb.clickhouse.v1.Resources
-	(*timestamppb.Timestamp)(nil),                      // 96: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                        // 97: yandex.cloud.operation.Operation
-	(*Backup)(nil),                                     // 98: yandex.cloud.mdb.clickhouse.v1.Backup
-	(*Host)(nil),                                       // 99: yandex.cloud.mdb.clickhouse.v1.Host
-	(*Shard)(nil),                                      // 100: yandex.cloud.mdb.clickhouse.v1.Shard
-	(*ShardGroup)(nil),                                 // 101: yandex.cloud.mdb.clickhouse.v1.ShardGroup
-	(*config.ClickhouseConfig_ExternalDictionary)(nil), // 102: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
-	(Host_Type)(0),                                     // 103: yandex.cloud.mdb.clickhouse.v1.Host.Type
-	(*timeofday.TimeOfDay)(nil),                        // 104: google.type.TimeOfDay
-	(*Access)(nil),                                     // 105: yandex.cloud.mdb.clickhouse.v1.Access
-	(*CloudStorage)(nil),                               // 106: yandex.cloud.mdb.clickhouse.v1.CloudStorage
-	(*wrapperspb.Int64Value)(nil),                      // 107: google.protobuf.Int64Value
-	(*config.ClickhouseConfig)(nil),                    // 108: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	(*DiskSizeAutoscaling)(nil),                        // 109: yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
-	(*access.ListAccessBindingsRequest)(nil),           // 110: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),            // 111: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),         // 112: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),          // 113: yandex.cloud.access.ListAccessBindingsResponse
+	(*PartialRestoreSpec)(nil),                         // 23: yandex.cloud.mdb.clickhouse.v1.PartialRestoreSpec
+	(*RestoreClusterMetadata)(nil),                     // 24: yandex.cloud.mdb.clickhouse.v1.RestoreClusterMetadata
+	(*RescheduleMaintenanceRequest)(nil),               // 25: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),              // 26: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceMetadata
+	(*LogRecord)(nil),                                  // 27: yandex.cloud.mdb.clickhouse.v1.LogRecord
+	(*ListClusterLogsRequest)(nil),                     // 28: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest
+	(*ListClusterLogsResponse)(nil),                    // 29: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse
+	(*StreamLogRecord)(nil),                            // 30: yandex.cloud.mdb.clickhouse.v1.StreamLogRecord
+	(*StreamClusterLogsRequest)(nil),                   // 31: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest
+	(*ListClusterOperationsRequest)(nil),               // 32: yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),              // 33: yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse
+	(*ListClusterBackupsRequest)(nil),                  // 34: yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsRequest
+	(*ListClusterBackupsResponse)(nil),                 // 35: yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse
+	(*ListClusterHostsRequest)(nil),                    // 36: yandex.cloud.mdb.clickhouse.v1.ListClusterHostsRequest
+	(*ListClusterHostsResponse)(nil),                   // 37: yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse
+	(*AddClusterHostsRequest)(nil),                     // 38: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest
+	(*AddClusterHostsMetadata)(nil),                    // 39: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsMetadata
+	(*UpdateHostSpec)(nil),                             // 40: yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec
+	(*UpdateClusterHostsRequest)(nil),                  // 41: yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest
+	(*UpdateClusterHostsMetadata)(nil),                 // 42: yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsMetadata
+	(*DeleteClusterHostsRequest)(nil),                  // 43: yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsRequest
+	(*DeleteClusterHostsMetadata)(nil),                 // 44: yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsMetadata
+	(*RestartClusterHostsRequest)(nil),                 // 45: yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsRequest
+	(*RestartClusterHostsMetadata)(nil),                // 46: yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsMetadata
+	(*GetClusterShardRequest)(nil),                     // 47: yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest
+	(*ListClusterShardsRequest)(nil),                   // 48: yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest
+	(*ListClusterShardsResponse)(nil),                  // 49: yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse
+	(*AddClusterShardRequest)(nil),                     // 50: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest
+	(*AddClusterShardMetadata)(nil),                    // 51: yandex.cloud.mdb.clickhouse.v1.AddClusterShardMetadata
+	(*AddClusterShardsRequest)(nil),                    // 52: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest
+	(*AddClusterShardsMetadata)(nil),                   // 53: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsMetadata
+	(*UpdateClusterShardRequest)(nil),                  // 54: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest
+	(*UpdateClusterShardMetadata)(nil),                 // 55: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardMetadata
+	(*DeleteClusterShardRequest)(nil),                  // 56: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest
+	(*DeleteClusterShardMetadata)(nil),                 // 57: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardMetadata
+	(*DeleteClusterShardsRequest)(nil),                 // 58: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest
+	(*DeleteClusterShardsMetadata)(nil),                // 59: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsMetadata
+	(*GetClusterShardGroupRequest)(nil),                // 60: yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest
+	(*ListClusterShardGroupsRequest)(nil),              // 61: yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsRequest
+	(*ListClusterShardGroupsResponse)(nil),             // 62: yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse
+	(*CreateClusterShardGroupRequest)(nil),             // 63: yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupRequest
+	(*CreateClusterShardGroupMetadata)(nil),            // 64: yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupMetadata
+	(*UpdateClusterShardGroupRequest)(nil),             // 65: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest
+	(*UpdateClusterShardGroupMetadata)(nil),            // 66: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupMetadata
+	(*DeleteClusterShardGroupRequest)(nil),             // 67: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupRequest
+	(*DeleteClusterShardGroupMetadata)(nil),            // 68: yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupMetadata
+	(*ListClusterExternalDictionariesRequest)(nil),     // 69: yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesRequest
+	(*ListClusterExternalDictionariesResponse)(nil),    // 70: yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse
+	(*CreateClusterExternalDictionaryRequest)(nil),     // 71: yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest
+	(*CreateClusterExternalDictionaryMetadata)(nil),    // 72: yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryMetadata
+	(*UpdateClusterExternalDictionaryRequest)(nil),     // 73: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest
+	(*UpdateClusterExternalDictionaryMetadata)(nil),    // 74: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryMetadata
+	(*DeleteClusterExternalDictionaryRequest)(nil),     // 75: yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryRequest
+	(*DeleteClusterExternalDictionaryMetadata)(nil),    // 76: yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryMetadata
+	(*HostSpec)(nil),                                   // 77: yandex.cloud.mdb.clickhouse.v1.HostSpec
+	(*ConfigSpec)(nil),                                 // 78: yandex.cloud.mdb.clickhouse.v1.ConfigSpec
+	(*ShardConfigSpec)(nil),                            // 79: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
+	(*ShardSpec)(nil),                                  // 80: yandex.cloud.mdb.clickhouse.v1.ShardSpec
+	nil,                                                // 81: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.LabelsEntry
+	nil,                                                // 82: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.LabelsEntry
+	nil,                                                // 83: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.LabelsEntry
+	nil,                                                // 84: yandex.cloud.mdb.clickhouse.v1.LogRecord.MessageEntry
+	(*ConfigSpec_Clickhouse)(nil),                      // 85: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse
+	(*ConfigSpec_Zookeeper)(nil),                       // 86: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper
+	(*ShardConfigSpec_Clickhouse)(nil),                 // 87: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse
+	(*Cluster)(nil),                                    // 88: yandex.cloud.mdb.clickhouse.v1.Cluster
+	(Cluster_Environment)(0),                           // 89: yandex.cloud.mdb.clickhouse.v1.Cluster.Environment
+	(*DatabaseSpec)(nil),                               // 90: yandex.cloud.mdb.clickhouse.v1.DatabaseSpec
+	(*UserSpec)(nil),                                   // 91: yandex.cloud.mdb.clickhouse.v1.UserSpec
+	(*MaintenanceWindow)(nil),                          // 92: yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
+	(*wrapperspb.StringValue)(nil),                     // 93: google.protobuf.StringValue
+	(*fieldmaskpb.FieldMask)(nil),                      // 94: google.protobuf.FieldMask
+	(*wrapperspb.BoolValue)(nil),                       // 95: google.protobuf.BoolValue
+	(*Resources)(nil),                                  // 96: yandex.cloud.mdb.clickhouse.v1.Resources
+	(*timestamppb.Timestamp)(nil),                      // 97: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                        // 98: yandex.cloud.operation.Operation
+	(*Backup)(nil),                                     // 99: yandex.cloud.mdb.clickhouse.v1.Backup
+	(*Host)(nil),                                       // 100: yandex.cloud.mdb.clickhouse.v1.Host
+	(*Shard)(nil),                                      // 101: yandex.cloud.mdb.clickhouse.v1.Shard
+	(*ShardGroup)(nil),                                 // 102: yandex.cloud.mdb.clickhouse.v1.ShardGroup
+	(*config.ClickhouseConfig_ExternalDictionary)(nil), // 103: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
+	(Host_Type)(0),                                     // 104: yandex.cloud.mdb.clickhouse.v1.Host.Type
+	(*timeofday.TimeOfDay)(nil),                        // 105: google.type.TimeOfDay
+	(*Access)(nil),                                     // 106: yandex.cloud.mdb.clickhouse.v1.Access
+	(*CloudStorage)(nil),                               // 107: yandex.cloud.mdb.clickhouse.v1.CloudStorage
+	(*wrapperspb.Int64Value)(nil),                      // 108: google.protobuf.Int64Value
+	(*config.ClickhouseConfig)(nil),                    // 109: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	(*DiskSizeAutoscaling)(nil),                        // 110: yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	(*access.ListAccessBindingsRequest)(nil),           // 111: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),            // 112: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),         // 113: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),          // 114: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_depIdxs = []int32{
-	87,  // 0: yandex.cloud.mdb.clickhouse.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster
-	80,  // 1: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.LabelsEntry
-	88,  // 2: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster.Environment
-	77,  // 3: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec
-	89,  // 4: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.database_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.DatabaseSpec
-	90,  // 5: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.user_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSpec
-	76,  // 6: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
-	91,  // 7: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
-	79,  // 8: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.shard_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardSpec
-	92,  // 9: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	93,  // 10: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	81,  // 11: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.LabelsEntry
-	77,  // 12: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec
-	91,  // 13: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
-	94,  // 14: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.allow_host_recreation:type_name -> google.protobuf.BoolValue
-	95,  // 15: yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	76,  // 16: yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
-	94,  // 17: yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest.convert_tables_to_replicated:type_name -> google.protobuf.BoolValue
-	82,  // 18: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.LabelsEntry
-	88,  // 19: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster.Environment
-	77,  // 20: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec
-	76,  // 21: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
-	79,  // 22: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.shard_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardSpec
-	92,  // 23: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	91,  // 24: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
-	0,   // 25: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.RescheduleType
-	96,  // 26: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	96,  // 27: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	96,  // 28: yandex.cloud.mdb.clickhouse.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	83,  // 29: yandex.cloud.mdb.clickhouse.v1.LogRecord.message:type_name -> yandex.cloud.mdb.clickhouse.v1.LogRecord.MessageEntry
-	1,   // 30: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.ServiceType
-	96,  // 31: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	96,  // 32: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	26,  // 33: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.clickhouse.v1.LogRecord
-	26,  // 34: yandex.cloud.mdb.clickhouse.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.clickhouse.v1.LogRecord
-	2,   // 35: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.ServiceType
-	96,  // 36: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	96,  // 37: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	97,  // 38: yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	98,  // 39: yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.clickhouse.v1.Backup
-	99,  // 40: yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.clickhouse.v1.Host
-	76,  // 41: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
-	94,  // 42: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest.copy_schema:type_name -> google.protobuf.BoolValue
-	93,  // 43: yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
-	94,  // 44: yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec.assign_public_ip:type_name -> google.protobuf.BoolValue
-	39,  // 45: yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec
-	100, // 46: yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse.shards:type_name -> yandex.cloud.mdb.clickhouse.v1.Shard
-	78,  // 47: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
-	76,  // 48: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
-	94,  // 49: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest.copy_schema:type_name -> google.protobuf.BoolValue
-	79,  // 50: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest.shard_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardSpec
-	76,  // 51: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
-	94,  // 52: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest.copy_schema:type_name -> google.protobuf.BoolValue
-	93,  // 53: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest.update_mask:type_name -> google.protobuf.FieldMask
-	78,  // 54: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
-	94,  // 55: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest.allow_host_recreation:type_name -> google.protobuf.BoolValue
-	101, // 56: yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse.shard_groups:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardGroup
-	93,  // 57: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	102, // 58: yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse.external_dictionaries:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
-	102, // 59: yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest.external_dictionary:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
-	102, // 60: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest.external_dictionary:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
-	93,  // 61: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest.update_mask:type_name -> google.protobuf.FieldMask
-	103, // 62: yandex.cloud.mdb.clickhouse.v1.HostSpec.type:type_name -> yandex.cloud.mdb.clickhouse.v1.Host.Type
-	84,  // 63: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.clickhouse:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse
-	85,  // 64: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.zookeeper:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper
-	104, // 65: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
-	105, // 66: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.clickhouse.v1.Access
-	106, // 67: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.cloud_storage:type_name -> yandex.cloud.mdb.clickhouse.v1.CloudStorage
-	94,  // 68: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.sql_database_management:type_name -> google.protobuf.BoolValue
-	94,  // 69: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.sql_user_management:type_name -> google.protobuf.BoolValue
-	94,  // 70: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.embedded_keeper:type_name -> google.protobuf.BoolValue
-	107, // 71: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
-	86,  // 72: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.clickhouse:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse
-	78,  // 73: yandex.cloud.mdb.clickhouse.v1.ShardSpec.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
-	108, // 74: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	95,  // 75: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	109, // 76: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
-	95,  // 77: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	109, // 78: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
-	108, // 79: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	95,  // 80: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
-	107, // 81: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.weight:type_name -> google.protobuf.Int64Value
-	109, // 82: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
-	3,   // 83: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterRequest
-	4,   // 84: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersRequest
-	6,   // 85: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest
-	8,   // 86: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest
-	10,  // 87: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterRequest
-	12,  // 88: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.clickhouse.v1.StartClusterRequest
-	14,  // 89: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.clickhouse.v1.StopClusterRequest
-	16,  // 90: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.clickhouse.v1.MoveClusterRequest
-	18,  // 91: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest
-	20,  // 92: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.clickhouse.v1.BackupClusterRequest
-	22,  // 93: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest
-	24,  // 94: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest
-	27,  // 95: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest
-	30,  // 96: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest
-	31,  // 97: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsRequest
-	33,  // 98: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsRequest
-	35,  // 99: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsRequest
-	37,  // 100: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest
-	40,  // 101: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest
-	42,  // 102: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsRequest
-	44,  // 103: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsRequest
-	46,  // 104: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest
-	47,  // 105: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest
-	49,  // 106: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest
-	51,  // 107: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest
-	53,  // 108: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest
-	55,  // 109: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest
-	57,  // 110: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest
-	59,  // 111: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest
-	60,  // 112: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsRequest
-	62,  // 113: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupRequest
-	64,  // 114: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest
-	66,  // 115: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupRequest
-	68,  // 116: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesRequest
-	70,  // 117: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest
-	72,  // 118: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest
-	74,  // 119: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryRequest
-	110, // 120: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	111, // 121: yandex.cloud.mdb.clickhouse.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	112, // 122: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	87,  // 123: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.clickhouse.v1.Cluster
-	5,   // 124: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersResponse
-	97,  // 125: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	97,  // 126: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	97,  // 127: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	97,  // 128: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	97,  // 129: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	97,  // 130: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	97,  // 131: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:output_type -> yandex.cloud.operation.Operation
-	97,  // 132: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	97,  // 133: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	97,  // 134: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	28,  // 135: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse
-	29,  // 136: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.StreamLogRecord
-	32,  // 137: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse
-	34,  // 138: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse
-	36,  // 139: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse
-	97,  // 140: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	97,  // 141: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
-	97,  // 142: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	97,  // 143: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:output_type -> yandex.cloud.operation.Operation
-	100, // 144: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.clickhouse.v1.Shard
-	48,  // 145: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse
-	97,  // 146: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
-	97,  // 147: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:output_type -> yandex.cloud.operation.Operation
-	97,  // 148: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:output_type -> yandex.cloud.operation.Operation
-	97,  // 149: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
-	97,  // 150: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:output_type -> yandex.cloud.operation.Operation
-	101, // 151: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:output_type -> yandex.cloud.mdb.clickhouse.v1.ShardGroup
-	61,  // 152: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse
-	97,  // 153: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:output_type -> yandex.cloud.operation.Operation
-	97,  // 154: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:output_type -> yandex.cloud.operation.Operation
-	97,  // 155: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:output_type -> yandex.cloud.operation.Operation
-	69,  // 156: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse
-	97,  // 157: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:output_type -> yandex.cloud.operation.Operation
-	97,  // 158: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:output_type -> yandex.cloud.operation.Operation
-	97,  // 159: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:output_type -> yandex.cloud.operation.Operation
-	113, // 160: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	97,  // 161: yandex.cloud.mdb.clickhouse.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	97,  // 162: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	123, // [123:163] is the sub-list for method output_type
-	83,  // [83:123] is the sub-list for method input_type
-	83,  // [83:83] is the sub-list for extension type_name
-	83,  // [83:83] is the sub-list for extension extendee
-	0,   // [0:83] is the sub-list for field type_name
+	88,  // 0: yandex.cloud.mdb.clickhouse.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster
+	81,  // 1: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.LabelsEntry
+	89,  // 2: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster.Environment
+	78,  // 3: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec
+	90,  // 4: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.database_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.DatabaseSpec
+	91,  // 5: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.user_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSpec
+	77,  // 6: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
+	92,  // 7: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
+	80,  // 8: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.shard_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardSpec
+	93,  // 9: yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	94,  // 10: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	82,  // 11: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.LabelsEntry
+	78,  // 12: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec
+	92,  // 13: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
+	95,  // 14: yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.allow_host_recreation:type_name -> google.protobuf.BoolValue
+	96,  // 15: yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
+	77,  // 16: yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
+	95,  // 17: yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest.convert_tables_to_replicated:type_name -> google.protobuf.BoolValue
+	83,  // 18: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.LabelsEntry
+	89,  // 19: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.clickhouse.v1.Cluster.Environment
+	78,  // 20: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec
+	77,  // 21: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
+	80,  // 22: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.shard_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardSpec
+	93,  // 23: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	92,  // 24: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.clickhouse.v1.MaintenanceWindow
+	23,  // 25: yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.partial_restore:type_name -> yandex.cloud.mdb.clickhouse.v1.PartialRestoreSpec
+	0,   // 26: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.RescheduleType
+	97,  // 27: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	97,  // 28: yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	97,  // 29: yandex.cloud.mdb.clickhouse.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	84,  // 30: yandex.cloud.mdb.clickhouse.v1.LogRecord.message:type_name -> yandex.cloud.mdb.clickhouse.v1.LogRecord.MessageEntry
+	1,   // 31: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.ServiceType
+	97,  // 32: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	97,  // 33: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	27,  // 34: yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.clickhouse.v1.LogRecord
+	27,  // 35: yandex.cloud.mdb.clickhouse.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.clickhouse.v1.LogRecord
+	2,   // 36: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.ServiceType
+	97,  // 37: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	97,  // 38: yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	98,  // 39: yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	99,  // 40: yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.clickhouse.v1.Backup
+	100, // 41: yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.clickhouse.v1.Host
+	77,  // 42: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
+	95,  // 43: yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest.copy_schema:type_name -> google.protobuf.BoolValue
+	94,  // 44: yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
+	95,  // 45: yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec.assign_public_ip:type_name -> google.protobuf.BoolValue
+	40,  // 46: yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.UpdateHostSpec
+	101, // 47: yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse.shards:type_name -> yandex.cloud.mdb.clickhouse.v1.Shard
+	79,  // 48: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
+	77,  // 49: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
+	95,  // 50: yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest.copy_schema:type_name -> google.protobuf.BoolValue
+	80,  // 51: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest.shard_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardSpec
+	77,  // 52: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest.host_specs:type_name -> yandex.cloud.mdb.clickhouse.v1.HostSpec
+	95,  // 53: yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest.copy_schema:type_name -> google.protobuf.BoolValue
+	94,  // 54: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest.update_mask:type_name -> google.protobuf.FieldMask
+	79,  // 55: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
+	95,  // 56: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest.allow_host_recreation:type_name -> google.protobuf.BoolValue
+	102, // 57: yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse.shard_groups:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardGroup
+	94,  // 58: yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	103, // 59: yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse.external_dictionaries:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
+	103, // 60: yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest.external_dictionary:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
+	103, // 61: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest.external_dictionary:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
+	94,  // 62: yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest.update_mask:type_name -> google.protobuf.FieldMask
+	104, // 63: yandex.cloud.mdb.clickhouse.v1.HostSpec.type:type_name -> yandex.cloud.mdb.clickhouse.v1.Host.Type
+	85,  // 64: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.clickhouse:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse
+	86,  // 65: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.zookeeper:type_name -> yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper
+	105, // 66: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
+	106, // 67: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.clickhouse.v1.Access
+	107, // 68: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.cloud_storage:type_name -> yandex.cloud.mdb.clickhouse.v1.CloudStorage
+	95,  // 69: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.sql_database_management:type_name -> google.protobuf.BoolValue
+	95,  // 70: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.sql_user_management:type_name -> google.protobuf.BoolValue
+	95,  // 71: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.embedded_keeper:type_name -> google.protobuf.BoolValue
+	108, // 72: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	87,  // 73: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.clickhouse:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse
+	79,  // 74: yandex.cloud.mdb.clickhouse.v1.ShardSpec.config_spec:type_name -> yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec
+	109, // 75: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	96,  // 76: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
+	110, // 77: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Clickhouse.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	96,  // 78: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
+	110, // 79: yandex.cloud.mdb.clickhouse.v1.ConfigSpec.Zookeeper.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	109, // 80: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	96,  // 81: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.resources:type_name -> yandex.cloud.mdb.clickhouse.v1.Resources
+	108, // 82: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.weight:type_name -> google.protobuf.Int64Value
+	110, // 83: yandex.cloud.mdb.clickhouse.v1.ShardConfigSpec.Clickhouse.disk_size_autoscaling:type_name -> yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscaling
+	3,   // 84: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterRequest
+	4,   // 85: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersRequest
+	6,   // 86: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest
+	8,   // 87: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest
+	10,  // 88: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterRequest
+	12,  // 89: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.clickhouse.v1.StartClusterRequest
+	14,  // 90: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.clickhouse.v1.StopClusterRequest
+	16,  // 91: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.clickhouse.v1.MoveClusterRequest
+	18,  // 92: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterZookeeperRequest
+	20,  // 93: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.clickhouse.v1.BackupClusterRequest
+	22,  // 94: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest
+	25,  // 95: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.clickhouse.v1.RescheduleMaintenanceRequest
+	28,  // 96: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsRequest
+	31,  // 97: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.clickhouse.v1.StreamClusterLogsRequest
+	32,  // 98: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsRequest
+	34,  // 99: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsRequest
+	36,  // 100: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsRequest
+	38,  // 101: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterHostsRequest
+	41,  // 102: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterHostsRequest
+	43,  // 103: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterHostsRequest
+	45,  // 104: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:input_type -> yandex.cloud.mdb.clickhouse.v1.RestartClusterHostsRequest
+	47,  // 105: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardRequest
+	48,  // 106: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsRequest
+	50,  // 107: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardRequest
+	52,  // 108: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:input_type -> yandex.cloud.mdb.clickhouse.v1.AddClusterShardsRequest
+	54,  // 109: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardRequest
+	56,  // 110: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardRequest
+	58,  // 111: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardsRequest
+	60,  // 112: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.GetClusterShardGroupRequest
+	61,  // 113: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsRequest
+	63,  // 114: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterShardGroupRequest
+	65,  // 115: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterShardGroupRequest
+	67,  // 116: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterShardGroupRequest
+	69,  // 117: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:input_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesRequest
+	71,  // 118: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.CreateClusterExternalDictionaryRequest
+	73,  // 119: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.UpdateClusterExternalDictionaryRequest
+	75,  // 120: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:input_type -> yandex.cloud.mdb.clickhouse.v1.DeleteClusterExternalDictionaryRequest
+	111, // 121: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	112, // 122: yandex.cloud.mdb.clickhouse.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	113, // 123: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	88,  // 124: yandex.cloud.mdb.clickhouse.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.clickhouse.v1.Cluster
+	5,   // 125: yandex.cloud.mdb.clickhouse.v1.ClusterService.List:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClustersResponse
+	98,  // 126: yandex.cloud.mdb.clickhouse.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	98,  // 127: yandex.cloud.mdb.clickhouse.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	98,  // 128: yandex.cloud.mdb.clickhouse.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	98,  // 129: yandex.cloud.mdb.clickhouse.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	98,  // 130: yandex.cloud.mdb.clickhouse.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	98,  // 131: yandex.cloud.mdb.clickhouse.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	98,  // 132: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddZookeeper:output_type -> yandex.cloud.operation.Operation
+	98,  // 133: yandex.cloud.mdb.clickhouse.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	98,  // 134: yandex.cloud.mdb.clickhouse.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	98,  // 135: yandex.cloud.mdb.clickhouse.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	29,  // 136: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterLogsResponse
+	30,  // 137: yandex.cloud.mdb.clickhouse.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.clickhouse.v1.StreamLogRecord
+	33,  // 138: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterOperationsResponse
+	35,  // 139: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterBackupsResponse
+	37,  // 140: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterHostsResponse
+	98,  // 141: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	98,  // 142: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
+	98,  // 143: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
+	98,  // 144: yandex.cloud.mdb.clickhouse.v1.ClusterService.RestartHosts:output_type -> yandex.cloud.operation.Operation
+	101, // 145: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShard:output_type -> yandex.cloud.mdb.clickhouse.v1.Shard
+	49,  // 146: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShards:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardsResponse
+	98,  // 147: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShard:output_type -> yandex.cloud.operation.Operation
+	98,  // 148: yandex.cloud.mdb.clickhouse.v1.ClusterService.AddShards:output_type -> yandex.cloud.operation.Operation
+	98,  // 149: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShard:output_type -> yandex.cloud.operation.Operation
+	98,  // 150: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShard:output_type -> yandex.cloud.operation.Operation
+	98,  // 151: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShards:output_type -> yandex.cloud.operation.Operation
+	102, // 152: yandex.cloud.mdb.clickhouse.v1.ClusterService.GetShardGroup:output_type -> yandex.cloud.mdb.clickhouse.v1.ShardGroup
+	62,  // 153: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListShardGroups:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterShardGroupsResponse
+	98,  // 154: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateShardGroup:output_type -> yandex.cloud.operation.Operation
+	98,  // 155: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateShardGroup:output_type -> yandex.cloud.operation.Operation
+	98,  // 156: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteShardGroup:output_type -> yandex.cloud.operation.Operation
+	70,  // 157: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListExternalDictionaries:output_type -> yandex.cloud.mdb.clickhouse.v1.ListClusterExternalDictionariesResponse
+	98,  // 158: yandex.cloud.mdb.clickhouse.v1.ClusterService.CreateExternalDictionary:output_type -> yandex.cloud.operation.Operation
+	98,  // 159: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateExternalDictionary:output_type -> yandex.cloud.operation.Operation
+	98,  // 160: yandex.cloud.mdb.clickhouse.v1.ClusterService.DeleteExternalDictionary:output_type -> yandex.cloud.operation.Operation
+	114, // 161: yandex.cloud.mdb.clickhouse.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	98,  // 162: yandex.cloud.mdb.clickhouse.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	98,  // 163: yandex.cloud.mdb.clickhouse.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	124, // [124:164] is the sub-list for method output_type
+	84,  // [84:124] is the sub-list for method input_type
+	84,  // [84:84] is the sub-list for extension type_name
+	84,  // [84:84] is the sub-list for extension extendee
+	0,   // [0:84] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_init() }
@@ -6235,7 +6309,7 @@ func file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc), len(file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   84,
+			NumMessages:   85,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

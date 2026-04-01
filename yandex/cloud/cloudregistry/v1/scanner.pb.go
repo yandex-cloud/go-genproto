@@ -504,8 +504,8 @@ const file_yandex_cloud_cloudregistry_v1_scanner_proto_rawDesc = "" +
 	"\x03LOW\x10\x04\x12\x0e\n" +
 	"\n" +
 	"NEGLIGIBLE\x10\x05\x12\r\n" +
-	"\tUNDEFINED\x10\x06Bt\n" +
-	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\tUNDEFINED\x10\x06Bx\n" +
+	"!yandex.cloud.api.cloudregistry.v1B\x02PSZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_scanner_proto_rawDescOnce sync.Once

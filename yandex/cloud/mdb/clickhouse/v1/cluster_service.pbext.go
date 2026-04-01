@@ -299,6 +299,18 @@ func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
+func (m *RestoreClusterRequest) SetPartialRestore(v *PartialRestoreSpec) {
+	m.PartialRestore = v
+}
+
+func (m *PartialRestoreSpec) SetIncludePatterns(v []string) {
+	m.IncludePatterns = v
+}
+
+func (m *PartialRestoreSpec) SetExcludePatterns(v []string) {
+	m.ExcludePatterns = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

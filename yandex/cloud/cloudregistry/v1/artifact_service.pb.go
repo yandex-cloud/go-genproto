@@ -165,7 +165,7 @@ var File_yandex_cloud_cloudregistry_v1_artifact_service_proto protoreflect.FileD
 
 const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/cloudregistry/v1/artifact_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a&yandex/cloud/operation/operation.proto\x1a yandex/cloud/access/access.proto\x1a\x1cgoogle/api/annotations.proto\"C\n" +
+	"4yandex/cloud/cloudregistry/v1/artifact_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetArtifactRequest\x12-\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"artifactId\"F\n" +

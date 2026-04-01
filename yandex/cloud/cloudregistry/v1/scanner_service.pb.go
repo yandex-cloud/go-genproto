@@ -603,7 +603,7 @@ var File_yandex_cloud_cloudregistry_v1_scanner_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_cloudregistry_v1_scanner_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/cloudregistry/v1/scanner_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a+yandex/cloud/cloudregistry/v1/scanner.proto\"<\n" +
+	"3yandex/cloud/cloudregistry/v1/scanner_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/cloudregistry/v1/scanner.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"<\n" +
 	"\vScanRequest\x12-\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"artifactId\"/\n" +

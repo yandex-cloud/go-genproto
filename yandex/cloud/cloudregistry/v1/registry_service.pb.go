@@ -30,7 +30,6 @@ const (
 type GetRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Registry resource to return.
-	//
 	// To get the registry ID use a [RegistryService.List] request.
 	RegistryId    string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -77,7 +76,6 @@ func (x *GetRegistryRequest) GetRegistryId() string {
 type ListRegistriesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list registries in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -206,11 +204,9 @@ func (x *ListRegistriesResponse) GetNextPageToken() string {
 type CreateRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a registry in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the registry.
-	//
 	// There may be only one registry per folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource labels as `key:value` pairs.
@@ -354,17 +350,14 @@ func (x *CreateRegistryMetadata) GetRegistryId() string {
 type UpdateRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Registry resource to update.
-	//
 	// To get the registry ID use a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Field mask that specifies which fields of the Registry resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the registry.
-	//
 	// There may be only one registry per folder.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Description of the registry. 0-1024 characters long.
@@ -873,7 +866,6 @@ func (x *UpdateIpPermissionsMetadata) GetRegistryId() string {
 type ListArtifactsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry artifact to list repositories in.
-	//
 	// To get the registry ID use a [ArtifactService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// The path to a specific node where the registry artifact is located.
@@ -1012,7 +1004,7 @@ var File_yandex_cloud_cloudregistry_v1_registry_service_proto protoreflect.FileD
 
 const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/cloudregistry/v1/registry_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a,yandex/cloud/cloudregistry/v1/registry.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\x1a1yandex/cloud/cloudregistry/v1/ip_permission.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a\x1cgoogle/api/annotations.proto\"C\n" +
+	"4yandex/cloud/cloudregistry/v1/registry_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a1yandex/cloud/cloudregistry/v1/ip_permission.proto\x1a,yandex/cloud/cloudregistry/v1/registry.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetRegistryRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\"\x95\x01\n" +
@@ -1077,11 +1069,11 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"\x17SetIpPermissionsRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x12R\n" +
-	"\x0eip_permissions\x18\x02 \x03(\v2+.yandex.cloud.cloudregistry.v1.IpPermissionR\ripPermissions\"\xaf\x01\n" +
+	"\x0eip_permissions\x18\x02 \x03(\v2+.yandex.cloud.cloudregistry.v1.IpPermissionR\ripPermissions\"\xb7\x01\n" +
 	"\x1aUpdateIpPermissionsRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"registryId\x12b\n" +
-	"\x14ip_permission_deltas\x18\x02 \x03(\v20.yandex.cloud.cloudregistry.v1.IpPermissionDeltaR\x12ipPermissionDeltas\"I\n" +
+	"registryId\x12j\n" +
+	"\x14ip_permission_deltas\x18\x02 \x03(\v20.yandex.cloud.cloudregistry.v1.IpPermissionDeltaB\x06\x82\xc81\x02>0R\x12ipPermissionDeltas\"I\n" +
 	"\x18ListIpPermissionsRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\"j\n" +
@@ -1227,9 +1219,9 @@ func file_yandex_cloud_cloudregistry_v1_registry_service_proto_init() {
 	if File_yandex_cloud_cloudregistry_v1_registry_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_cloudregistry_v1_registry_proto_init()
-	file_yandex_cloud_cloudregistry_v1_ip_permission_proto_init()
 	file_yandex_cloud_cloudregistry_v1_artifact_proto_init()
+	file_yandex_cloud_cloudregistry_v1_ip_permission_proto_init()
+	file_yandex_cloud_cloudregistry_v1_registry_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

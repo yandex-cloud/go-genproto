@@ -33,3 +33,7 @@ func (m *Group) SetSubjectContainerId(v string) {
 func (m *Group) SetExternalId(v string) {
 	m.ExternalId = v
 }
+
+func (m *Group) SetLabels(v map[string]string) {
+	m.Labels = v
+}

@@ -87,10 +87,10 @@ const (
 	Registry_NPM Registry_Kind = 2
 	// Registry kind is docker.
 	Registry_DOCKER Registry_Kind = 3
-	// Registry kind is nuget.
-	Registry_NUGET Registry_Kind = 4
 	// Registry kind is debian.
 	Registry_DEBIAN Registry_Kind = 5
+	// Registry kind is nuget.
+	Registry_NUGET Registry_Kind = 4
 	// Registry kind is pypi.
 	Registry_PYPI Registry_Kind = 6
 	// Regisrty kind is binary.
@@ -104,8 +104,8 @@ var (
 		1: "MAVEN",
 		2: "NPM",
 		3: "DOCKER",
-		4: "NUGET",
 		5: "DEBIAN",
+		4: "NUGET",
 		6: "PYPI",
 		7: "BINARY",
 	}
@@ -114,8 +114,8 @@ var (
 		"MAVEN":            1,
 		"NPM":              2,
 		"DOCKER":           3,
-		"NUGET":            4,
 		"DEBIAN":           5,
+		"NUGET":            4,
 		"PYPI":             6,
 		"BINARY":           7,
 	}
@@ -210,14 +210,14 @@ type Registry struct {
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the registry.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the registry.
+	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	// Kind of the registry.
 	Kind Registry_Kind `protobuf:"varint,4,opt,name=kind,proto3,enum=yandex.cloud.cloudregistry.v1.Registry_Kind" json:"kind,omitempty"`
 	// Type of the registry.
 	Type Registry_Type `protobuf:"varint,5,opt,name=type,proto3,enum=yandex.cloud.cloudregistry.v1.Registry_Type" json:"type,omitempty"`
 	// Output only. Status of the registry.
 	Status Registry_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.cloudregistry.v1.Registry_Status" json:"status,omitempty"`
-	// Description of the registry.
-	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
 	Labels map[string]string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Resource properties as `key:value` pairs. Maximum of 64 per resource.
@@ -281,6 +281,13 @@ func (x *Registry) GetName() string {
 	return ""
 }
 
+func (x *Registry) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *Registry) GetKind() Registry_Kind {
 	if x != nil {
 		return x.Kind
@@ -300,13 +307,6 @@ func (x *Registry) GetStatus() Registry_Status {
 		return x.Status
 	}
 	return Registry_STATUS_UNSPECIFIED
-}
-
-func (x *Registry) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
 }
 
 func (x *Registry) GetLabels() map[string]string {
@@ -345,11 +345,11 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\bRegistry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12@\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12@\n" +
 	"\x04kind\x18\x04 \x01(\x0e2,.yandex.cloud.cloudregistry.v1.Registry.KindR\x04kind\x12@\n" +
 	"\x04type\x18\x05 \x01(\x0e2,.yandex.cloud.cloudregistry.v1.Registry.TypeR\x04type\x12F\n" +
-	"\x06status\x18\x06 \x01(\x0e2..yandex.cloud.cloudregistry.v1.Registry.StatusR\x06status\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\x12K\n" +
+	"\x06status\x18\x06 \x01(\x0e2..yandex.cloud.cloudregistry.v1.Registry.StatusR\x06status\x12K\n" +
 	"\x06labels\x18\b \x03(\v23.yandex.cloud.cloudregistry.v1.Registry.LabelsEntryR\x06labels\x12W\n" +
 	"\n" +
 	"properties\x18\t \x03(\v27.yandex.cloud.cloudregistry.v1.Registry.PropertiesEntryR\n" +
@@ -376,10 +376,10 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\x05MAVEN\x10\x01\x12\a\n" +
 	"\x03NPM\x10\x02\x12\n" +
 	"\n" +
-	"\x06DOCKER\x10\x03\x12\t\n" +
-	"\x05NUGET\x10\x04\x12\n" +
+	"\x06DOCKER\x10\x03\x12\n" +
 	"\n" +
-	"\x06DEBIAN\x10\x05\x12\b\n" +
+	"\x06DEBIAN\x10\x05\x12\t\n" +
+	"\x05NUGET\x10\x04\x12\b\n" +
 	"\x04PYPI\x10\x06\x12\n" +
 	"\n" +
 	"\x06BINARY\x10\a\"@\n" +
@@ -388,8 +388,8 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\x05LOCAL\x10\x01\x12\n" +
 	"\n" +
 	"\x06REMOTE\x10\x02\x12\v\n" +
-	"\aVIRTUAL\x10\x03Bt\n" +
-	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\aVIRTUAL\x10\x03Bx\n" +
+	"!yandex.cloud.api.cloudregistry.v1B\x02PRZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_registry_proto_rawDescOnce sync.Once

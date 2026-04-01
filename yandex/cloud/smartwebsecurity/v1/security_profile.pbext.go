@@ -54,12 +54,52 @@ func (m *SecurityProfile) SetAnalyzeRequestBody(v *SecurityProfile_AnalyzeReques
 	m.AnalyzeRequestBody = v
 }
 
+func (m *SecurityProfile) SetDisallowDataProcessing(v bool) {
+	m.DisallowDataProcessing = v
+}
+
+func (m *SecurityProfile) SetLogOptions(v *SecurityProfile_LogOptions) {
+	m.LogOptions = v
+}
+
+func (m *SecurityProfile) SetLogGroupId(v string) {
+	m.LogGroupId = v
+}
+
+func (m *SecurityProfile) SetCustomPageId(v string) {
+	m.CustomPageId = v
+}
+
 func (m *SecurityProfile_AnalyzeRequestBody) SetSizeLimit(v int64) {
 	m.SizeLimit = v
 }
 
 func (m *SecurityProfile_AnalyzeRequestBody) SetSizeLimitAction(v SecurityProfile_AnalyzeRequestBody_Action) {
 	m.SizeLimitAction = v
+}
+
+func (m *SecurityProfile_LogOptions) SetLogGroupId(v string) {
+	m.LogGroupId = v
+}
+
+func (m *SecurityProfile_LogOptions) SetEnable(v bool) {
+	m.Enable = v
+}
+
+func (m *SecurityProfile_LogOptions) SetEnabledModules(v []SecurityProfile_LogOptions_Module) {
+	m.EnabledModules = v
+}
+
+func (m *SecurityProfile_LogOptions) SetEnabledActions(v []SecurityProfile_LogOptions_Action) {
+	m.EnabledActions = v
+}
+
+func (m *SecurityProfile_LogOptions) SetDiscardAllowPercentage(v int64) {
+	m.DiscardAllowPercentage = v
+}
+
+func (m *SecurityProfile_LogOptions) SetOutputs(v []SecurityProfile_LogOptions_Output) {
+	m.Outputs = v
 }
 
 type SecurityRule_RuleSpecifier = isSecurityRule_RuleSpecifier
@@ -100,6 +140,10 @@ func (m *SecurityRule) SetWaf(v *SecurityRule_Waf) {
 
 func (m *SecurityRule) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *SecurityRule) SetCustomPageId(v string) {
+	m.CustomPageId = v
 }
 
 func (m *SecurityRule_RuleCondition) SetAction(v SecurityRule_RuleCondition_Action) {
@@ -150,6 +194,30 @@ func (m *Condition) SetSourceIp(v *Condition_IpMatcher) {
 	m.SourceIp = v
 }
 
+func (m *Condition) SetCookies(v []*Condition_CookieMatcher) {
+	m.Cookies = v
+}
+
+func (m *Condition) SetBotCategory(v *Condition_BotCategoryMatcher) {
+	m.BotCategory = v
+}
+
+func (m *Condition) SetBotName(v *Condition_BotNameMatcher) {
+	m.BotName = v
+}
+
+func (m *Condition) SetBotScore(v *Condition_BotScoreMatcher) {
+	m.BotScore = v
+}
+
+func (m *Condition) SetVerifiedBot(v *Condition_VerifiedBotMatcher) {
+	m.VerifiedBot = v
+}
+
+func (m *Condition) SetFingerPrint(v *Condition_FingerPrintMatcher) {
+	m.FingerPrint = v
+}
+
 type Condition_StringMatcher_Match = isCondition_StringMatcher_Match
 
 func (m *Condition_StringMatcher) SetMatch(v Condition_StringMatcher_Match) {
@@ -192,12 +260,52 @@ func (m *Condition_StringMatcher) SetPireRegexNotMatch(v string) {
 	}
 }
 
+func (m *Condition_StringMatcher) SetDefined(v bool) {
+	m.Match = &Condition_StringMatcher_Defined{
+		Defined: v,
+	}
+}
+
+func (m *Condition_StringMatcher) SetListsMatchers(v *Condition_ListsMatchers) {
+	m.Match = &Condition_StringMatcher_ListsMatchers{
+		ListsMatchers: v,
+	}
+}
+
+func (m *Condition_ListsMatcher) SetListIds(v []string) {
+	m.ListIds = v
+}
+
+func (m *Condition_ListsMatchers) SetStrListsMatch(v *Condition_ListsMatcher) {
+	m.StrListsMatch = v
+}
+
+func (m *Condition_ListsMatchers) SetStrListsNotMatch(v *Condition_ListsMatcher) {
+	m.StrListsNotMatch = v
+}
+
+func (m *Condition_ListsMatchers) SetRegExpListsMatch(v *Condition_ListsMatcher) {
+	m.RegExpListsMatch = v
+}
+
+func (m *Condition_ListsMatchers) SetRegExpListsNotMatch(v *Condition_ListsMatcher) {
+	m.RegExpListsNotMatch = v
+}
+
 func (m *Condition_HttpMethodMatcher) SetHttpMethods(v []*Condition_StringMatcher) {
 	m.HttpMethods = v
 }
 
+func (m *Condition_HttpMethodMatcher) SetHttpMethodMatcher(v *Condition_StringMatcher) {
+	m.HttpMethodMatcher = v
+}
+
 func (m *Condition_AuthorityMatcher) SetAuthorities(v []*Condition_StringMatcher) {
 	m.Authorities = v
+}
+
+func (m *Condition_AuthorityMatcher) SetAuthorityMatcher(v *Condition_StringMatcher) {
+	m.AuthorityMatcher = v
 }
 
 func (m *Condition_RequestUriMatcher) SetPath(v *Condition_StringMatcher) {
@@ -240,10 +348,136 @@ func (m *Condition_IpMatcher) SetGeoIpNotMatch(v *Condition_GeoIpMatcher) {
 	m.GeoIpNotMatch = v
 }
 
+func (m *Condition_IpMatcher) SetIpListsMatch(v *Condition_ListsMatcher) {
+	m.IpListsMatch = v
+}
+
+func (m *Condition_IpMatcher) SetIpListsNotMatch(v *Condition_ListsMatcher) {
+	m.IpListsNotMatch = v
+}
+
+func (m *Condition_IpMatcher) SetAsnRangesMatch(v *Condition_AsnRangesMatcher) {
+	m.AsnRangesMatch = v
+}
+
+func (m *Condition_IpMatcher) SetAsnRangesNotMatch(v *Condition_AsnRangesMatcher) {
+	m.AsnRangesNotMatch = v
+}
+
+func (m *Condition_IpMatcher) SetAsnListsMatch(v *Condition_ListsMatcher) {
+	m.AsnListsMatch = v
+}
+
+func (m *Condition_IpMatcher) SetAsnListsNotMatch(v *Condition_ListsMatcher) {
+	m.AsnListsNotMatch = v
+}
+
+func (m *Condition_BotCategoryMatcher) SetBotCategoryListsMatch(v *Condition_ListsMatcher) {
+	m.BotCategoryListsMatch = v
+}
+
+func (m *Condition_BotCategoryMatcher) SetBotCategoryListsNotMatch(v *Condition_ListsMatcher) {
+	m.BotCategoryListsNotMatch = v
+}
+
+func (m *Condition_BotNameMatcher) SetBotNameListsMatch(v *Condition_ListsMatcher) {
+	m.BotNameListsMatch = v
+}
+
+func (m *Condition_BotNameMatcher) SetBotNameListsNotMatch(v *Condition_ListsMatcher) {
+	m.BotNameListsNotMatch = v
+}
+
+func (m *Condition_BoolMatcher) SetMatch(v bool) {
+	m.Match = v
+}
+
+func (m *Condition_IntLEMatcher) SetValue(v int64) {
+	m.Value = v
+}
+
+func (m *Condition_IntGEMatcher) SetValue(v int64) {
+	m.Value = v
+}
+
+func (m *Condition_IntEQMatcher) SetValue(v int64) {
+	m.Value = v
+}
+
+func (m *Condition_IntNEMatcher) SetValue(v int64) {
+	m.Value = v
+}
+
+type Condition_IntMatcher_Match = isCondition_IntMatcher_Match
+
+func (m *Condition_IntMatcher) SetMatch(v Condition_IntMatcher_Match) {
+	m.Match = v
+}
+
+func (m *Condition_IntMatcher) SetLeMatch(v *Condition_IntLEMatcher) {
+	m.Match = &Condition_IntMatcher_LeMatch{
+		LeMatch: v,
+	}
+}
+
+func (m *Condition_IntMatcher) SetGeMatch(v *Condition_IntGEMatcher) {
+	m.Match = &Condition_IntMatcher_GeMatch{
+		GeMatch: v,
+	}
+}
+
+func (m *Condition_IntMatcher) SetEqMatch(v *Condition_IntEQMatcher) {
+	m.Match = &Condition_IntMatcher_EqMatch{
+		EqMatch: v,
+	}
+}
+
+func (m *Condition_IntMatcher) SetNeMatch(v *Condition_IntNEMatcher) {
+	m.Match = &Condition_IntMatcher_NeMatch{
+		NeMatch: v,
+	}
+}
+
+func (m *Condition_BotScoreMatcher) SetValue(v []*Condition_IntMatcher) {
+	m.Value = v
+}
+
+func (m *Condition_VerifiedBotMatcher) SetVerified(v *Condition_BoolMatcher) {
+	m.Verified = v
+}
+
+func (m *Condition_FingerPrintMatcher) SetJa3Ranges(v []*Condition_StringMatcher) {
+	m.Ja3Ranges = v
+}
+
+func (m *Condition_FingerPrintMatcher) SetJa4Ranges(v []*Condition_StringMatcher) {
+	m.Ja4Ranges = v
+}
+
+func (m *Condition_FingerPrintMatcher) SetJa3Matcher(v *Condition_StringMatcher) {
+	m.Ja3Matcher = v
+}
+
+func (m *Condition_FingerPrintMatcher) SetJa4Matcher(v *Condition_StringMatcher) {
+	m.Ja4Matcher = v
+}
+
 func (m *Condition_IpRangesMatcher) SetIpRanges(v []string) {
 	m.IpRanges = v
 }
 
 func (m *Condition_GeoIpMatcher) SetLocations(v []string) {
 	m.Locations = v
+}
+
+func (m *Condition_AsnRangesMatcher) SetAsnRanges(v []int64) {
+	m.AsnRanges = v
+}
+
+func (m *Condition_CookieMatcher) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Condition_CookieMatcher) SetValue(v *Condition_StringMatcher) {
+	m.Value = v
 }

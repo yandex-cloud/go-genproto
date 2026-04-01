@@ -366,8 +366,6 @@ func (x *LifecyclePolicy) GetModifiedBy() string {
 // A rule that defines lifecycle policy behavior.
 type LifecycleRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Path prefix to which the rule applies.
-	PathPrefix string `protobuf:"bytes,1,opt,name=path_prefix,json=pathPrefix,proto3" json:"path_prefix,omitempty"`
 	// Type of lifecycle rule.
 	//
 	// Types that are valid to be assigned to Kind:
@@ -383,6 +381,8 @@ type LifecycleRule struct {
 	//	*LifecycleRule_DockerFilters
 	//	*LifecycleRule_MavenFilters
 	Filter isLifecycleRule_Filter `protobuf_oneof:"filter"`
+	// Path prefix to which the rule applies.
+	PathPrefix string `protobuf:"bytes,1,opt,name=path_prefix,json=pathPrefix,proto3" json:"path_prefix,omitempty"`
 	// Regular expression pattern to match package version or docker tag.
 	VersionRegexp string `protobuf:"bytes,7,opt,name=version_regexp,json=versionRegexp,proto3" json:"version_regexp,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -417,13 +417,6 @@ func (x *LifecycleRule) ProtoReflect() protoreflect.Message {
 // Deprecated: Use LifecycleRule.ProtoReflect.Descriptor instead.
 func (*LifecycleRule) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *LifecycleRule) GetPathPrefix() string {
-	if x != nil {
-		return x.PathPrefix
-	}
-	return ""
 }
 
 func (x *LifecycleRule) GetKind() isLifecycleRule_Kind {
@@ -483,6 +476,13 @@ func (x *LifecycleRule) GetMavenFilters() *MavenFilters {
 		}
 	}
 	return nil
+}
+
+func (x *LifecycleRule) GetPathPrefix() string {
+	if x != nil {
+		return x.PathPrefix
+	}
+	return ""
 }
 
 func (x *LifecycleRule) GetVersionRegexp() string {
@@ -722,10 +722,6 @@ func (x *KeepByAgeLifecycleRule) GetYoungerThanDays() int64 {
 // Rule that deletes artifacts based on specified conditions.
 type DeleteLifecycleRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Type of deletion.
-	Type DeleteLifecycleRuleKind `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKind" json:"type,omitempty"`
-	// Cooldown period in days before deletion.
-	CooldownPeriodDays int64 `protobuf:"varint,2,opt,name=cooldown_period_days,json=cooldownPeriodDays,proto3" json:"cooldown_period_days,omitempty"`
 	// Condition that triggers deletion.
 	//
 	// Types that are valid to be assigned to Condition:
@@ -733,9 +729,13 @@ type DeleteLifecycleRule struct {
 	//	*DeleteLifecycleRule_OlderThanDays
 	//	*DeleteLifecycleRule_VersionCondition
 	//	*DeleteLifecycleRule_Always
-	Condition     isDeleteLifecycleRule_Condition `protobuf_oneof:"condition"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Condition isDeleteLifecycleRule_Condition `protobuf_oneof:"condition"`
+	// Type of deletion.
+	Type DeleteLifecycleRuleKind `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKind" json:"type,omitempty"`
+	// Cooldown period in days before deletion.
+	CooldownPeriodDays int64 `protobuf:"varint,2,opt,name=cooldown_period_days,json=cooldownPeriodDays,proto3" json:"cooldown_period_days,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DeleteLifecycleRule) Reset() {
@@ -766,20 +766,6 @@ func (x *DeleteLifecycleRule) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DeleteLifecycleRule.ProtoReflect.Descriptor instead.
 func (*DeleteLifecycleRule) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *DeleteLifecycleRule) GetType() DeleteLifecycleRuleKind {
-	if x != nil {
-		return x.Type
-	}
-	return DeleteLifecycleRuleKind_DELETE_LIFECYCLE_RULE_KIND_UNSPECIFIED
-}
-
-func (x *DeleteLifecycleRule) GetCooldownPeriodDays() int64 {
-	if x != nil {
-		return x.CooldownPeriodDays
-	}
-	return 0
 }
 
 func (x *DeleteLifecycleRule) GetCondition() isDeleteLifecycleRule_Condition {
@@ -814,6 +800,20 @@ func (x *DeleteLifecycleRule) GetAlways() bool {
 		}
 	}
 	return false
+}
+
+func (x *DeleteLifecycleRule) GetType() DeleteLifecycleRuleKind {
+	if x != nil {
+		return x.Type
+	}
+	return DeleteLifecycleRuleKind_DELETE_LIFECYCLE_RULE_KIND_UNSPECIFIED
+}
+
+func (x *DeleteLifecycleRule) GetCooldownPeriodDays() int64 {
+	if x != nil {
+		return x.CooldownPeriodDays
+	}
+	return 0
 }
 
 type isDeleteLifecycleRule_Condition interface {
@@ -909,14 +909,14 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\vmodified_by\x18\n" +
 	" \x01(\tR\n" +
 	"modifiedBy\"\xa0\x04\n" +
-	"\rLifecycleRule\x12\x1f\n" +
-	"\vpath_prefix\x18\x01 \x01(\tR\n" +
-	"pathPrefix\x12W\n" +
+	"\rLifecycleRule\x12W\n" +
 	"\vkeep_by_age\x18\x02 \x01(\v25.yandex.cloud.cloudregistry.v1.KeepByAgeLifecycleRuleH\x00R\tkeepByAge\x12c\n" +
 	"\x0fkeep_by_version\x18\x03 \x01(\v29.yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRuleH\x00R\rkeepByVersion\x12L\n" +
 	"\x06delete\x18\x04 \x01(\v22.yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleH\x00R\x06delete\x12U\n" +
 	"\x0edocker_filters\x18\x05 \x01(\v2,.yandex.cloud.cloudregistry.v1.DockerFiltersH\x01R\rdockerFilters\x12R\n" +
-	"\rmaven_filters\x18\x06 \x01(\v2+.yandex.cloud.cloudregistry.v1.MavenFiltersH\x01R\fmavenFilters\x12%\n" +
+	"\rmaven_filters\x18\x06 \x01(\v2+.yandex.cloud.cloudregistry.v1.MavenFiltersH\x01R\fmavenFilters\x12\x1f\n" +
+	"\vpath_prefix\x18\x01 \x01(\tR\n" +
+	"pathPrefix\x12%\n" +
 	"\x0eversion_regexp\x18\a \x01(\tR\rversionRegexpB\x06\n" +
 	"\x04kindB\b\n" +
 	"\x06filter\"\xbd\x01\n" +
@@ -940,12 +940,12 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\x13keep_versions_count\x18\x01 \x01(\x03R\x11keepVersionsCount\"D\n" +
 	"\x16KeepByAgeLifecycleRule\x12*\n" +
 	"\x11younger_than_days\x18\x01 \x01(\x03R\x0fyoungerThanDays\"\xcc\x02\n" +
-	"\x13DeleteLifecycleRule\x12J\n" +
-	"\x04type\x18\x01 \x01(\x0e26.yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKindR\x04type\x120\n" +
-	"\x14cooldown_period_days\x18\x02 \x01(\x03R\x12cooldownPeriodDays\x12(\n" +
+	"\x13DeleteLifecycleRule\x12(\n" +
 	"\x0folder_than_days\x18\x03 \x01(\x03H\x00R\rolderThanDays\x12f\n" +
 	"\x11version_condition\x18\x04 \x01(\v27.yandex.cloud.cloudregistry.v1.DeleteByVersionConditionH\x00R\x10versionCondition\x12\x18\n" +
-	"\x06always\x18\x05 \x01(\bH\x00R\x06alwaysB\v\n" +
+	"\x06always\x18\x05 \x01(\bH\x00R\x06always\x12J\n" +
+	"\x04type\x18\x01 \x01(\x0e26.yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKindR\x04type\x120\n" +
+	"\x14cooldown_period_days\x18\x02 \x01(\x03R\x12cooldownPeriodDaysB\v\n" +
 	"\tcondition\"Y\n" +
 	"\x18DeleteByVersionCondition\x12=\n" +
 	"\x1bversions_count_greater_than\x18\x01 \x01(\x03R\x18versionsCountGreaterThan*g\n" +
@@ -956,8 +956,8 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\x14LifecyclePolicyState\x12&\n" +
 	"\"LIFECYCLE_POLICY_STATE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bDISABLED\x10\x01\x12\v\n" +
-	"\aENABLED\x10\x02Bt\n" +
-	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\aENABLED\x10\x02By\n" +
+	"!yandex.cloud.api.cloudregistry.v1B\x03PLPZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescOnce sync.Once
@@ -1000,8 +1000,8 @@ var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_depIdxs = []int32{
 	7,  // 8: yandex.cloud.cloudregistry.v1.LifecycleRule.maven_filters:type_name -> yandex.cloud.cloudregistry.v1.MavenFilters
 	2,  // 9: yandex.cloud.cloudregistry.v1.DockerFilters.tag_status:type_name -> yandex.cloud.cloudregistry.v1.DockerFilters.TagStatus
 	3,  // 10: yandex.cloud.cloudregistry.v1.MavenFilters.version_type:type_name -> yandex.cloud.cloudregistry.v1.MavenFilters.VersionType
-	0,  // 11: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.type:type_name -> yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKind
-	11, // 12: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.version_condition:type_name -> yandex.cloud.cloudregistry.v1.DeleteByVersionCondition
+	11, // 11: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.version_condition:type_name -> yandex.cloud.cloudregistry.v1.DeleteByVersionCondition
+	0,  // 12: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.type:type_name -> yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKind
 	13, // [13:13] is the sub-list for method output_type
 	13, // [13:13] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name

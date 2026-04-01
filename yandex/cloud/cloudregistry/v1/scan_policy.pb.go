@@ -409,7 +409,7 @@ var File_yandex_cloud_cloudregistry_v1_scan_policy_proto protoreflect.FileDescri
 
 const file_yandex_cloud_cloudregistry_v1_scan_policy_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/cloudregistry/v1/scan_policy.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xec\x02\n" +
+	"/yandex/cloud/cloudregistry/v1/scan_policy.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xec\x02\n" +
 	"\n" +
 	"ScanPolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
@@ -437,8 +437,8 @@ const file_yandex_cloud_cloudregistry_v1_scan_policy_proto_rawDesc = "" +
 	"\bdisabled\x18\x04 \x01(\bR\bdisabled\"7\n" +
 	"\fIntervalUnit\x12\x1d\n" +
 	"\x19INTERVAL_UNIT_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04DAYS\x10\x01Bt\n" +
-	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\x04DAYS\x10\x01By\n" +
+	"!yandex.cloud.api.cloudregistry.v1B\x03PSPZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_scan_policy_proto_rawDescOnce sync.Once

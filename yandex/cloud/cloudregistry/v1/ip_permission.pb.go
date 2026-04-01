@@ -232,10 +232,10 @@ var File_yandex_cloud_cloudregistry_v1_ip_permission_proto protoreflect.FileDesc
 
 const file_yandex_cloud_cloudregistry_v1_ip_permission_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/cloudregistry/v1/ip_permission.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1dyandex/cloud/validation.proto\"\xa0\x01\n" +
-	"\fIpPermission\x12J\n" +
-	"\x06action\x18\x01 \x01(\x0e22.yandex.cloud.cloudregistry.v1.IpPermission.ActionR\x06action\x12\x0e\n" +
-	"\x02ip\x18\x02 \x01(\tR\x02ip\"4\n" +
+	"1yandex/cloud/cloudregistry/v1/ip_permission.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1dyandex/cloud/validation.proto\"\xac\x01\n" +
+	"\fIpPermission\x12P\n" +
+	"\x06action\x18\x01 \x01(\x0e22.yandex.cloud.cloudregistry.v1.IpPermission.ActionB\x04\xe8\xc71\x01R\x06action\x12\x14\n" +
+	"\x02ip\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x02ip\"4\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04PULL\x10\x01\x12\b\n" +
@@ -247,8 +247,8 @@ const file_yandex_cloud_cloudregistry_v1_ip_permission_proto_rawDesc = "" +
 	"&IP_PERMISSION_DELTA_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
 	"\n" +
-	"\x06REMOVE\x10\x02Bt\n" +
-	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\x06REMOVE\x10\x02By\n" +
+	"!yandex.cloud.api.cloudregistry.v1B\x03PIPZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_ip_permission_proto_rawDescOnce sync.Once

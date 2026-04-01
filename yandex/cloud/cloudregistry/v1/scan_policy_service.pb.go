@@ -588,7 +588,7 @@ var File_yandex_cloud_cloudregistry_v1_scan_policy_service_proto protoreflect.Fi
 
 const file_yandex_cloud_cloudregistry_v1_scan_policy_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/cloudregistry/v1/scan_policy_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a/yandex/cloud/cloudregistry/v1/scan_policy.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\"J\n" +
+	"7yandex/cloud/cloudregistry/v1/scan_policy_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/cloudregistry/v1/scan_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"J\n" +
 	"\x14GetScanPolicyRequest\x122\n" +
 	"\x0escan_policy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fscanPolicyId\"O\n" +
 	"\x1eGetScanPolicyByRegistryRequest\x12-\n" +

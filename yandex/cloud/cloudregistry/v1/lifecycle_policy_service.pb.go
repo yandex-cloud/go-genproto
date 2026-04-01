@@ -599,7 +599,7 @@ var File_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto protorefle
 
 const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc = "" +
 	"\n" +
-	"<yandex/cloud/cloudregistry/v1/lifecycle_policy_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a4yandex/cloud/cloudregistry/v1/lifecycle_policy.proto\x1a google/protobuf/field_mask.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\"\xc1\x02\n" +
+	"<yandex/cloud/cloudregistry/v1/lifecycle_policy_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/cloudregistry/v1/lifecycle_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xc1\x02\n" +
 	"\x1cCreateLifecyclePolicyRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x125\n" +

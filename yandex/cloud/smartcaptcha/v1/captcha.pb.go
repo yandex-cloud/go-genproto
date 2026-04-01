@@ -225,12 +225,15 @@ type Captcha struct {
 	// Determines whether captcha is protected from being deleted.
 	DeletionProtection bool `protobuf:"varint,22,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// List of variants to use in security_rules
-	OverrideVariants       []*OverrideVariant `protobuf:"bytes,23,rep,name=override_variants,json=overrideVariants,proto3" json:"override_variants,omitempty"`
-	DisallowDataProcessing bool               `protobuf:"varint,24,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
-	Description            string             `protobuf:"bytes,25,opt,name=description,proto3" json:"description,omitempty"`
-	Labels                 map[string]string  `protobuf:"bytes,26,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	OverrideVariants []*OverrideVariant `protobuf:"bytes,23,rep,name=override_variants,json=overrideVariants,proto3" json:"override_variants,omitempty"`
+	// Disables the use of HTTP request data for training and improving the service's ML models.
+	DisallowDataProcessing bool `protobuf:"varint,24,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
+	// Optional description of the captcha.
+	Description string `protobuf:"bytes,25,opt,name=description,proto3" json:"description,omitempty"`
+	// Labels as “ key:value “ pairs. Maximum of 64 per resource.
+	Labels        map[string]string `protobuf:"bytes,26,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Captcha) Reset() {
@@ -791,26 +794,32 @@ type isCondition_StringMatcher_Match interface {
 }
 
 type Condition_StringMatcher_ExactMatch struct {
+	// Exact match condition.
 	ExactMatch string `protobuf:"bytes,1,opt,name=exact_match,json=exactMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_ExactNotMatch struct {
+	// Exact not match condition.
 	ExactNotMatch string `protobuf:"bytes,2,opt,name=exact_not_match,json=exactNotMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PrefixMatch struct {
+	// Prefix match condition.
 	PrefixMatch string `protobuf:"bytes,3,opt,name=prefix_match,json=prefixMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PrefixNotMatch struct {
+	// Prefix not match condition.
 	PrefixNotMatch string `protobuf:"bytes,4,opt,name=prefix_not_match,json=prefixNotMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PireRegexMatch struct {
+	// PIRE regex match condition.
 	PireRegexMatch string `protobuf:"bytes,5,opt,name=pire_regex_match,json=pireRegexMatch,proto3,oneof"`
 }
 
 type Condition_StringMatcher_PireRegexNotMatch struct {
+	// PIRE regex not match condition.
 	PireRegexNotMatch string `protobuf:"bytes,6,opt,name=pire_regex_not_match,json=pireRegexNotMatch,proto3,oneof"`
 }
 
@@ -832,8 +841,9 @@ type Condition_HostMatcher struct {
 	// List of hosts. OR semantics implied.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/smartcaptcha/v1/captcha.proto.
-	Hosts         []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	HostMatcher   *Condition_StringMatcher   `protobuf:"bytes,2,opt,name=host_matcher,json=hostMatcher,proto3" json:"host_matcher,omitempty"`
+	Hosts []*Condition_StringMatcher `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	// Host matcher.
+	HostMatcher   *Condition_StringMatcher `protobuf:"bytes,2,opt,name=host_matcher,json=hostMatcher,proto3" json:"host_matcher,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1051,13 +1061,16 @@ func (x *Condition_HeaderMatcher) GetValue() *Condition_StringMatcher {
 // IpMatcher object. AND semantics implied.
 type Condition_IpMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// *AND* semantics implied.
-	IpRangesMatch    *Condition_IpRangesMatcher `protobuf:"bytes,1,opt,name=ip_ranges_match,json=ipRangesMatch,proto3" json:"ip_ranges_match,omitempty"`
+	// IP ranges to match with.
+	IpRangesMatch *Condition_IpRangesMatcher `protobuf:"bytes,1,opt,name=ip_ranges_match,json=ipRangesMatch,proto3" json:"ip_ranges_match,omitempty"`
+	// IP ranges to not match with.
 	IpRangesNotMatch *Condition_IpRangesMatcher `protobuf:"bytes,2,opt,name=ip_ranges_not_match,json=ipRangesNotMatch,proto3" json:"ip_ranges_not_match,omitempty"`
-	GeoIpMatch       *Condition_GeoIpMatcher    `protobuf:"bytes,3,opt,name=geo_ip_match,json=geoIpMatch,proto3" json:"geo_ip_match,omitempty"`
-	GeoIpNotMatch    *Condition_GeoIpMatcher    `protobuf:"bytes,4,opt,name=geo_ip_not_match,json=geoIpNotMatch,proto3" json:"geo_ip_not_match,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Geo locations to match with.
+	GeoIpMatch *Condition_GeoIpMatcher `protobuf:"bytes,3,opt,name=geo_ip_match,json=geoIpMatch,proto3" json:"geo_ip_match,omitempty"`
+	// Geo locations to not match with.
+	GeoIpNotMatch *Condition_GeoIpMatcher `protobuf:"bytes,4,opt,name=geo_ip_not_match,json=geoIpNotMatch,proto3" json:"geo_ip_not_match,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Condition_IpMatcher) Reset() {

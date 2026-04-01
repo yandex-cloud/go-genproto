@@ -39,7 +39,9 @@ type Group struct {
 	// Id of the subject container that external group belongs to. It is set if group is external.
 	SubjectContainerId string `protobuf:"bytes,6,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
 	// Id of the group from external system. It is set if group is external.
-	ExternalId    string `protobuf:"bytes,7,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ExternalId string `protobuf:"bytes,7,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	// Resource labels as `key:value` pairs.
+	Labels        map[string]string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -123,11 +125,18 @@ func (x *Group) GetExternalId() string {
 	return ""
 }
 
+func (x *Group) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
 var File_yandex_cloud_organizationmanager_v1_group_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_group_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/organizationmanager/v1/group.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x84\x02\n" +
+	"/yandex/cloud/organizationmanager/v1/group.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8f\x03\n" +
 	"\x05Group\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x129\n" +
@@ -137,7 +146,11 @@ const file_yandex_cloud_organizationmanager_v1_group_proto_rawDesc = "" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x120\n" +
 	"\x14subject_container_id\x18\x06 \x01(\tR\x12subjectContainerId\x12\x1f\n" +
 	"\vexternal_id\x18\a \x01(\tR\n" +
-	"externalIdB\x86\x01\n" +
+	"externalId\x12N\n" +
+	"\x06labels\x18\b \x03(\v26.yandex.cloud.organizationmanager.v1.Group.LabelsEntryR\x06labels\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x86\x01\n" +
 	"'yandex.cloud.api.organizationmanager.v1Z[github.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1;organizationmanagerb\x06proto3"
 
 var (
@@ -152,18 +165,20 @@ func file_yandex_cloud_organizationmanager_v1_group_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_organizationmanager_v1_group_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_group_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_organizationmanager_v1_group_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_organizationmanager_v1_group_proto_goTypes = []any{
 	(*Group)(nil),                 // 0: yandex.cloud.organizationmanager.v1.Group
-	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
+	nil,                           // 1: yandex.cloud.organizationmanager.v1.Group.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_yandex_cloud_organizationmanager_v1_group_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.organizationmanager.v1.Group.created_at:type_name -> google.protobuf.Timestamp
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: yandex.cloud.organizationmanager.v1.Group.created_at:type_name -> google.protobuf.Timestamp
+	1, // 1: yandex.cloud.organizationmanager.v1.Group.labels:type_name -> yandex.cloud.organizationmanager.v1.Group.LabelsEntry
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_group_proto_init() }
@@ -177,7 +192,7 @@ func file_yandex_cloud_organizationmanager_v1_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_group_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_group_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

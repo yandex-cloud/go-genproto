@@ -58,10 +58,6 @@ func (m *LifecycleRule) SetFilter(v LifecycleRule_Filter) {
 	m.Filter = v
 }
 
-func (m *LifecycleRule) SetPathPrefix(v string) {
-	m.PathPrefix = v
-}
-
 func (m *LifecycleRule) SetKeepByAge(v *KeepByAgeLifecycleRule) {
 	m.Kind = &LifecycleRule_KeepByAge{
 		KeepByAge: v,
@@ -92,6 +88,10 @@ func (m *LifecycleRule) SetMavenFilters(v *MavenFilters) {
 	}
 }
 
+func (m *LifecycleRule) SetPathPrefix(v string) {
+	m.PathPrefix = v
+}
+
 func (m *LifecycleRule) SetVersionRegexp(v string) {
 	m.VersionRegexp = v
 }
@@ -118,14 +118,6 @@ func (m *DeleteLifecycleRule) SetCondition(v DeleteLifecycleRule_Condition) {
 	m.Condition = v
 }
 
-func (m *DeleteLifecycleRule) SetType(v DeleteLifecycleRuleKind) {
-	m.Type = v
-}
-
-func (m *DeleteLifecycleRule) SetCooldownPeriodDays(v int64) {
-	m.CooldownPeriodDays = v
-}
-
 func (m *DeleteLifecycleRule) SetOlderThanDays(v int64) {
 	m.Condition = &DeleteLifecycleRule_OlderThanDays{
 		OlderThanDays: v,
@@ -142,6 +134,14 @@ func (m *DeleteLifecycleRule) SetAlways(v bool) {
 	m.Condition = &DeleteLifecycleRule_Always{
 		Always: v,
 	}
+}
+
+func (m *DeleteLifecycleRule) SetType(v DeleteLifecycleRuleKind) {
+	m.Type = v
+}
+
+func (m *DeleteLifecycleRule) SetCooldownPeriodDays(v int64) {
+	m.CooldownPeriodDays = v
 }
 
 func (m *DeleteByVersionCondition) SetVersionsCountGreaterThan(v int64) {
