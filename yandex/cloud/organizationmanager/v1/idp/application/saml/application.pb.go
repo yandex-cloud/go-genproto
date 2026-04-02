@@ -1058,10 +1058,10 @@ const file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_
 	"\aname_id\x18\x01 \x01(\v2@.yandex.cloud.organizationmanager.v1.idp.application.saml.NameIdB\x04\xe8\xc71\x01R\x06nameId\x12m\n" +
 	"\n" +
 	"attributes\x18\x02 \x03(\v2C.yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeB\b\x82\xc81\x04<=50R\n" +
-	"attributes\"\xc8\x01\n" +
+	"attributes\"\xc2\x01\n" +
 	"\x06NameId\x12e\n" +
-	"\x06format\x18\x01 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.FormatB\x04\xe8\xc71\x01R\x06format\x12\x1a\n" +
-	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\";\n" +
+	"\x06format\x18\x01 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.FormatB\x04\xe8\xc71\x01R\x06format\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\";\n" +
 	"\x06Format\x12\x16\n" +
 	"\x12FORMAT_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +

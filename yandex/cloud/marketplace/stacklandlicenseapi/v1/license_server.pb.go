@@ -143,9 +143,11 @@ type LicenseServer struct {
 	// Private key for the license server
 	LsPrivateKey string `protobuf:"bytes,3,opt,name=ls_private_key,json=lsPrivateKey,proto3" json:"ls_private_key,omitempty"`
 	// Timestamp when the credentials expire
-	ValidUntil    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ValidUntil *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
+	// PEM-encoded PKIX public key for verifying license signatures
+	LsSigningPublicKey string `protobuf:"bytes,5,opt,name=ls_signing_public_key,json=lsSigningPublicKey,proto3" json:"ls_signing_public_key,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *LicenseServer) Reset() {
@@ -204,6 +206,13 @@ func (x *LicenseServer) GetValidUntil() *timestamppb.Timestamp {
 		return x.ValidUntil
 	}
 	return nil
+}
+
+func (x *LicenseServer) GetLsSigningPublicKey() string {
+	if x != nil {
+		return x.LsSigningPublicKey
+	}
+	return ""
 }
 
 // Metadata for register license server operation
@@ -274,13 +283,14 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto_
 	"\x0fRegisterRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12:\n" +
 	"\x12billing_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10billingAccountId\x12b\n" +
-	"\bmetadata\x18\x03 \x01(\v2F.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadataR\bmetadata\"\xbb\x01\n" +
+	"\bmetadata\x18\x03 \x01(\v2F.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadataR\bmetadata\"\xee\x01\n" +
 	"\rLicenseServer\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12*\n" +
 	"\x11ls_ca_certificate\x18\x02 \x01(\tR\x0flsCaCertificate\x12$\n" +
 	"\x0els_private_key\x18\x03 \x01(\tR\flsPrivateKey\x12;\n" +
 	"\vvalid_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"validUntil\"v\n" +
+	"validUntil\x121\n" +
+	"\x15ls_signing_public_key\x18\x05 \x01(\tR\x12lsSigningPublicKey\"v\n" +
 	"\x1dRegisterLicenseServerMetadata\x12'\n" +
 	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12,\n" +
 	"\x12billing_account_id\x18\x02 \x01(\tR\x10billingAccountIdB\x9e\x01\n" +

@@ -75,6 +75,10 @@ func (m *NameIdSpec) SetFormat(v NameId_Format) {
 	m.Format = v
 }
 
+func (m *NameIdSpec) SetValue(v string) {
+	m.Value = v
+}
+
 func (m *AttributeMappingSpec) SetNameId(v *NameIdSpec) {
 	m.NameId = v
 }

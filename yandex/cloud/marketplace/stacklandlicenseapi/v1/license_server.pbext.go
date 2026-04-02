@@ -38,6 +38,10 @@ func (m *LicenseServer) SetValidUntil(v *timestamppb.Timestamp) {
 	m.ValidUntil = v
 }
 
+func (m *LicenseServer) SetLsSigningPublicKey(v string) {
+	m.LsSigningPublicKey = v
+}
+
 func (m *RegisterLicenseServerMetadata) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
