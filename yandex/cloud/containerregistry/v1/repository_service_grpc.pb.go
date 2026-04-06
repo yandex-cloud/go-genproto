@@ -38,11 +38,9 @@ const (
 // A set of methods for managing Repository resources.
 type RepositoryServiceClient interface {
 	// Returns the specified Repository resource.
-	//
 	// To get the list of available Repository resources, make a [List] request.
 	Get(ctx context.Context, in *GetRepositoryRequest, opts ...grpc.CallOption) (*Repository, error)
 	// Returns the specified Repository resource.
-	//
 	// To get the list of available Repository resources, make a [List] request.
 	GetByName(ctx context.Context, in *GetRepositoryByNameRequest, opts ...grpc.CallOption) (*Repository, error)
 	// Retrieves the list of Repository resources in the specified registry.
@@ -154,11 +152,9 @@ func (c *repositoryServiceClient) UpdateAccessBindings(ctx context.Context, in *
 // A set of methods for managing Repository resources.
 type RepositoryServiceServer interface {
 	// Returns the specified Repository resource.
-	//
 	// To get the list of available Repository resources, make a [List] request.
 	Get(context.Context, *GetRepositoryRequest) (*Repository, error)
 	// Returns the specified Repository resource.
-	//
 	// To get the list of available Repository resources, make a [List] request.
 	GetByName(context.Context, *GetRepositoryByNameRequest) (*Repository, error)
 	// Retrieves the list of Repository resources in the specified registry.

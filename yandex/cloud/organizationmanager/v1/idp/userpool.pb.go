@@ -12,6 +12,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -334,8 +335,10 @@ type Userpool struct {
 	PasswordLifetimePolicy *PasswordLifetimePolicy `protobuf:"bytes,12,opt,name=password_lifetime_policy,json=passwordLifetimePolicy,proto3" json:"password_lifetime_policy,omitempty"`
 	// Bruteforce protection policy for this userpool.
 	BruteforceProtectionPolicy *BruteforceProtectionPolicy `protobuf:"bytes,13,opt,name=bruteforce_protection_policy,json=bruteforceProtectionPolicy,proto3" json:"bruteforce_protection_policy,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// Password blacklist policy for this userpool.
+	PasswordBlacklistPolicy *PasswordBlacklistPolicy `protobuf:"bytes,14,opt,name=password_blacklist_policy,json=passwordBlacklistPolicy,proto3" json:"password_blacklist_policy,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Userpool) Reset() {
@@ -455,6 +458,13 @@ func (x *Userpool) GetPasswordLifetimePolicy() *PasswordLifetimePolicy {
 func (x *Userpool) GetBruteforceProtectionPolicy() *BruteforceProtectionPolicy {
 	if x != nil {
 		return x.BruteforceProtectionPolicy
+	}
+	return nil
+}
+
+func (x *Userpool) GetPasswordBlacklistPolicy() *PasswordBlacklistPolicy {
+	if x != nil {
+		return x.PasswordBlacklistPolicy
 	}
 	return nil
 }
@@ -1009,6 +1019,52 @@ func (x *BruteforceProtectionPolicy) GetAttempts() int64 {
 	return 0
 }
 
+// Policy that defines password blacklist requirements.
+type PasswordBlacklistPolicy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether check in common password database is enabled.
+	CheckCommon   *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=check_common,json=checkCommon,proto3" json:"check_common,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasswordBlacklistPolicy) Reset() {
+	*x = PasswordBlacklistPolicy{}
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasswordBlacklistPolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordBlacklistPolicy) ProtoMessage() {}
+
+func (x *PasswordBlacklistPolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordBlacklistPolicy.ProtoReflect.Descriptor instead.
+func (*PasswordBlacklistPolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PasswordBlacklistPolicy) GetCheckCommon() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.CheckCommon
+	}
+	return nil
+}
+
 // DNS record information for domain validation.
 type DomainChallenge_DnsRecord struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1024,7 +1080,7 @@ type DomainChallenge_DnsRecord struct {
 
 func (x *DomainChallenge_DnsRecord) Reset() {
 	*x = DomainChallenge_DnsRecord{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[8]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1036,7 +1092,7 @@ func (x *DomainChallenge_DnsRecord) String() string {
 func (*DomainChallenge_DnsRecord) ProtoMessage() {}
 
 func (x *DomainChallenge_DnsRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[8]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +1146,7 @@ type PasswordQualityPolicy_RequiredClasses struct {
 
 func (x *PasswordQualityPolicy_RequiredClasses) Reset() {
 	*x = PasswordQualityPolicy_RequiredClasses{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[9]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1102,7 +1158,7 @@ func (x *PasswordQualityPolicy_RequiredClasses) String() string {
 func (*PasswordQualityPolicy_RequiredClasses) ProtoMessage() {}
 
 func (x *PasswordQualityPolicy_RequiredClasses) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[9]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1161,7 +1217,7 @@ type PasswordQualityPolicy_MinLengthByClassSettings struct {
 
 func (x *PasswordQualityPolicy_MinLengthByClassSettings) Reset() {
 	*x = PasswordQualityPolicy_MinLengthByClassSettings{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[10]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1173,7 +1229,7 @@ func (x *PasswordQualityPolicy_MinLengthByClassSettings) String() string {
 func (*PasswordQualityPolicy_MinLengthByClassSettings) ProtoMessage() {}
 
 func (x *PasswordQualityPolicy_MinLengthByClassSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[10]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +1285,7 @@ type PasswordQualityPolicy_Fixed struct {
 
 func (x *PasswordQualityPolicy_Fixed) Reset() {
 	*x = PasswordQualityPolicy_Fixed{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[11]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1241,7 +1297,7 @@ func (x *PasswordQualityPolicy_Fixed) String() string {
 func (*PasswordQualityPolicy_Fixed) ProtoMessage() {}
 
 func (x *PasswordQualityPolicy_Fixed) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[11]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1310,7 +1366,7 @@ type PasswordQualityPolicy_Smart struct {
 
 func (x *PasswordQualityPolicy_Smart) Reset() {
 	*x = PasswordQualityPolicy_Smart{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[12]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1322,7 +1378,7 @@ func (x *PasswordQualityPolicy_Smart) String() string {
 func (*PasswordQualityPolicy_Smart) ProtoMessage() {}
 
 func (x *PasswordQualityPolicy_Smart) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[12]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1370,7 +1426,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_userpool_proto protoreflect.Fil
 
 const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/organizationmanager/v1/idp/userpool.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\b\n" +
+	"6yandex/cloud/organizationmanager/v1/idp/userpool.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8c\t\n" +
 	"\bUserpool\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x12\x12\n" +
@@ -1387,7 +1443,8 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	" \x01(\v25.yandex.cloud.organizationmanager.v1.idp.UserSettingsR\fuserSettings\x12v\n" +
 	"\x17password_quality_policy\x18\v \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicyR\x15passwordQualityPolicy\x12y\n" +
 	"\x18password_lifetime_policy\x18\f \x01(\v2?.yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicyR\x16passwordLifetimePolicy\x12\x85\x01\n" +
-	"\x1cbruteforce_protection_policy\x18\r \x01(\v2C.yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicyR\x1abruteforceProtectionPolicy\x1a9\n" +
+	"\x1cbruteforce_protection_policy\x18\r \x01(\v2C.yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicyR\x1abruteforceProtectionPolicy\x12|\n" +
+	"\x19password_blacklist_policy\x18\x0e \x01(\v2@.yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicyR\x17passwordBlacklistPolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"H\n" +
@@ -1496,7 +1553,9 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc = "" +
 	"\x1aBruteforceProtectionPolicy\x12?\n" +
 	"\x06window\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b0h-8760hR\x06window\x12=\n" +
 	"\x05block\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b0h-8760hR\x05block\x12%\n" +
-	"\battempts\x18\x03 \x01(\x03B\t\xfa\xc71\x051-100R\battemptsB~\n" +
+	"\battempts\x18\x03 \x01(\x03B\t\xfa\xc71\x051-100R\battempts\"X\n" +
+	"\x17PasswordBlacklistPolicy\x12=\n" +
+	"\fcheck_common\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\vcheckCommonB~\n" +
 	"+yandex.cloud.api.organizationmanager.v1.idpZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp;idpb\x06proto3"
 
 var (
@@ -1512,7 +1571,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_goTypes = []any{
 	(Userpool_Status)(0),                                   // 0: yandex.cloud.organizationmanager.v1.idp.Userpool.Status
 	(Domain_Status)(0),                                     // 1: yandex.cloud.organizationmanager.v1.idp.Domain.Status
@@ -1526,45 +1585,49 @@ var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_goTypes = []any{
 	(*PasswordQualityPolicy)(nil),                          // 9: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
 	(*PasswordLifetimePolicy)(nil),                         // 10: yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
 	(*BruteforceProtectionPolicy)(nil),                     // 11: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
-	nil,                                                    // 12: yandex.cloud.organizationmanager.v1.idp.Userpool.LabelsEntry
-	(*DomainChallenge_DnsRecord)(nil),                      // 13: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord
-	(*PasswordQualityPolicy_RequiredClasses)(nil),          // 14: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClasses
-	(*PasswordQualityPolicy_MinLengthByClassSettings)(nil), // 15: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettings
-	(*PasswordQualityPolicy_Fixed)(nil),                    // 16: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Fixed
-	(*PasswordQualityPolicy_Smart)(nil),                    // 17: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Smart
-	(*timestamppb.Timestamp)(nil),                          // 18: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),                            // 19: google.protobuf.Duration
+	(*PasswordBlacklistPolicy)(nil),                        // 12: yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicy
+	nil,                                                    // 13: yandex.cloud.organizationmanager.v1.idp.Userpool.LabelsEntry
+	(*DomainChallenge_DnsRecord)(nil),                      // 14: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord
+	(*PasswordQualityPolicy_RequiredClasses)(nil),          // 15: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClasses
+	(*PasswordQualityPolicy_MinLengthByClassSettings)(nil), // 16: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettings
+	(*PasswordQualityPolicy_Fixed)(nil),                    // 17: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Fixed
+	(*PasswordQualityPolicy_Smart)(nil),                    // 18: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Smart
+	(*timestamppb.Timestamp)(nil),                          // 19: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                            // 20: google.protobuf.Duration
+	(*wrapperspb.BoolValue)(nil),                           // 21: google.protobuf.BoolValue
 }
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_depIdxs = []int32{
-	12, // 0: yandex.cloud.organizationmanager.v1.idp.Userpool.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.Userpool.LabelsEntry
-	18, // 1: yandex.cloud.organizationmanager.v1.idp.Userpool.created_at:type_name -> google.protobuf.Timestamp
-	18, // 2: yandex.cloud.organizationmanager.v1.idp.Userpool.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 0: yandex.cloud.organizationmanager.v1.idp.Userpool.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.Userpool.LabelsEntry
+	19, // 1: yandex.cloud.organizationmanager.v1.idp.Userpool.created_at:type_name -> google.protobuf.Timestamp
+	19, // 2: yandex.cloud.organizationmanager.v1.idp.Userpool.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: yandex.cloud.organizationmanager.v1.idp.Userpool.status:type_name -> yandex.cloud.organizationmanager.v1.idp.Userpool.Status
 	6,  // 4: yandex.cloud.organizationmanager.v1.idp.Userpool.user_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserSettings
 	9,  // 5: yandex.cloud.organizationmanager.v1.idp.Userpool.password_quality_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
 	10, // 6: yandex.cloud.organizationmanager.v1.idp.Userpool.password_lifetime_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
 	11, // 7: yandex.cloud.organizationmanager.v1.idp.Userpool.bruteforce_protection_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
-	1,  // 8: yandex.cloud.organizationmanager.v1.idp.Domain.status:type_name -> yandex.cloud.organizationmanager.v1.idp.Domain.Status
-	18, // 9: yandex.cloud.organizationmanager.v1.idp.Domain.created_at:type_name -> google.protobuf.Timestamp
-	18, // 10: yandex.cloud.organizationmanager.v1.idp.Domain.validated_at:type_name -> google.protobuf.Timestamp
-	8,  // 11: yandex.cloud.organizationmanager.v1.idp.Domain.challenges:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge
-	18, // 12: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.created_at:type_name -> google.protobuf.Timestamp
-	18, // 13: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.updated_at:type_name -> google.protobuf.Timestamp
-	2,  // 14: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.Type
-	3,  // 15: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.status:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.Status
-	13, // 16: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.dns_challenge:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord
-	14, // 17: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.required_classes:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClasses
-	15, // 18: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.min_length_by_class_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettings
-	16, // 19: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.fixed:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Fixed
-	17, // 20: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.smart:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Smart
-	19, // 21: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.window:type_name -> google.protobuf.Duration
-	19, // 22: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.block:type_name -> google.protobuf.Duration
-	4,  // 23: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.Type
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	12, // 8: yandex.cloud.organizationmanager.v1.idp.Userpool.password_blacklist_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicy
+	1,  // 9: yandex.cloud.organizationmanager.v1.idp.Domain.status:type_name -> yandex.cloud.organizationmanager.v1.idp.Domain.Status
+	19, // 10: yandex.cloud.organizationmanager.v1.idp.Domain.created_at:type_name -> google.protobuf.Timestamp
+	19, // 11: yandex.cloud.organizationmanager.v1.idp.Domain.validated_at:type_name -> google.protobuf.Timestamp
+	8,  // 12: yandex.cloud.organizationmanager.v1.idp.Domain.challenges:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge
+	19, // 13: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.created_at:type_name -> google.protobuf.Timestamp
+	19, // 14: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.updated_at:type_name -> google.protobuf.Timestamp
+	2,  // 15: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.Type
+	3,  // 16: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.status:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.Status
+	14, // 17: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.dns_challenge:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord
+	15, // 18: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.required_classes:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.RequiredClasses
+	16, // 19: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.min_length_by_class_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.MinLengthByClassSettings
+	17, // 20: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.fixed:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Fixed
+	18, // 21: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.smart:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy.Smart
+	20, // 22: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.window:type_name -> google.protobuf.Duration
+	20, // 23: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy.block:type_name -> google.protobuf.Duration
+	21, // 24: yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicy.check_common:type_name -> google.protobuf.BoolValue
+	4,  // 25: yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.type:type_name -> yandex.cloud.organizationmanager.v1.idp.DomainChallenge.DnsRecord.Type
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_init() }
@@ -1585,7 +1648,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_idp_userpool_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

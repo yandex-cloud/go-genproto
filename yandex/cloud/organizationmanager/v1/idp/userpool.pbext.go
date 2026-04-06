@@ -5,6 +5,7 @@ package idp
 import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *Userpool) SetId(v string) {
@@ -57,6 +58,10 @@ func (m *Userpool) SetPasswordLifetimePolicy(v *PasswordLifetimePolicy) {
 
 func (m *Userpool) SetBruteforceProtectionPolicy(v *BruteforceProtectionPolicy) {
 	m.BruteforceProtectionPolicy = v
+}
+
+func (m *Userpool) SetPasswordBlacklistPolicy(v *PasswordBlacklistPolicy) {
+	m.PasswordBlacklistPolicy = v
 }
 
 func (m *UserSettings) SetAllowEditSelfPassword(v bool) {
@@ -267,4 +272,8 @@ func (m *BruteforceProtectionPolicy) SetBlock(v *durationpb.Duration) {
 
 func (m *BruteforceProtectionPolicy) SetAttempts(v int64) {
 	m.Attempts = v
+}
+
+func (m *PasswordBlacklistPolicy) SetCheckCommon(v *wrapperspb.BoolValue) {
+	m.CheckCommon = v
 }

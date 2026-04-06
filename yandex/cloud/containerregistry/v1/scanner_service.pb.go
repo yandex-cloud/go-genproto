@@ -208,7 +208,6 @@ func (x *GetLastScanResultRequest) GetImageId() string {
 type ListScanResultsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Image or Repository to list ScanResults for.
-	//
 	// To get the image ID use a [yandex.cloud.containerregistry.v1.ImageService.List] request.
 	// To get the repository ID use a [yandex.cloud.containerregistry.v1.RepositoryService.List] request.
 	//
@@ -555,7 +554,7 @@ var File_yandex_cloud_containerregistry_v1_scanner_service_proto protoreflect.Fi
 
 const file_yandex_cloud_containerregistry_v1_scanner_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/containerregistry/v1/scanner_service.proto\x12!yandex.cloud.containerregistry.v1\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/containerregistry/v1/scanner.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"6\n" +
+	"7yandex/cloud/containerregistry/v1/scanner_service.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/containerregistry/v1/scanner.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"6\n" +
 	"\vScanRequest\x12'\n" +
 	"\bimage_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\"4\n" +
 	"\fScanMetadata\x12$\n" +
@@ -598,8 +597,8 @@ const file_yandex_cloud_containerregistry_v1_scanner_service_proto_rawDesc = "" 
 	"\x03Get\x127.yandex.cloud.containerregistry.v1.GetScanResultRequest\x1a-.yandex.cloud.containerregistry.v1.ScanResult\"5\x82\xd3\xe4\x93\x02/\x12-/container-registry/v1/scans/{scan_result_id}\x12\xb6\x01\n" +
 	"\aGetLast\x12;.yandex.cloud.containerregistry.v1.GetLastScanResultRequest\x1a-.yandex.cloud.containerregistry.v1.ScanResult\"?\x82\xd3\xe4\x93\x029\x127/container-registry/v1/images/{image_id}:lastScanResult\x12\xa3\x01\n" +
 	"\x04List\x129.yandex.cloud.containerregistry.v1.ListScanResultsRequest\x1a:.yandex.cloud.containerregistry.v1.ListScanResultsResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/container-registry/v1/scans\x12\xdf\x01\n" +
-	"\x13ListVulnerabilities\x12=.yandex.cloud.containerregistry.v1.ListVulnerabilitiesRequest\x1a>.yandex.cloud.containerregistry.v1.ListVulnerabilitiesResponse\"I\x82\xd3\xe4\x93\x02C\x12A/container-registry/v1/scans/{scan_result_id}:listVulnerabilitiesB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x13ListVulnerabilities\x12=.yandex.cloud.containerregistry.v1.ListVulnerabilitiesRequest\x1a>.yandex.cloud.containerregistry.v1.ListVulnerabilitiesResponse\"I\x82\xd3\xe4\x93\x02C\x12A/container-registry/v1/scans/{scan_result_id}:listVulnerabilitiesB\x86\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x04PISSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_scanner_service_proto_rawDescOnce sync.Once

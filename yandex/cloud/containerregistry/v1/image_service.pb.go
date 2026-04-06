@@ -28,19 +28,14 @@ const (
 type ListImagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to list Docker images in.
-	//
 	// [registry_id] is ignored if a [ListImagesRequest.repository_name] is specified in the request.
-	//
 	// To get the registry ID use a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Name of the repository to list Docker images in.
-	//
 	// To get the repository name use a [RepositoryService.List] request.
 	RepositoryName string `protobuf:"bytes,2,opt,name=repository_name,json=repositoryName,proto3" json:"repository_name,omitempty"`
 	// ID of the folder to list Docker images in.
-	//
 	// [folder_id] is ignored if a [ListImagesRequest.repository_name] or a [ListImagesRequest.registry_id] are specified in the request.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,7,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -206,7 +201,6 @@ func (x *ListImagesResponse) GetNextPageToken() string {
 type GetImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Docker image resource to return.
-	//
 	// To get the Docker image ID use a [ImageService.List] request.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -253,7 +247,6 @@ func (x *GetImageRequest) GetImageId() string {
 type DeleteImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Docker image to delete.
-	//
 	// To get Docker image ID use a [ImageService.List] request.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -346,7 +339,7 @@ var File_yandex_cloud_containerregistry_v1_image_service_proto protoreflect.File
 
 const file_yandex_cloud_containerregistry_v1_image_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/containerregistry/v1/image_service.proto\x12!yandex.cloud.containerregistry.v1\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/containerregistry/v1/image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"\xf0\x02\n" +
+	"5yandex/cloud/containerregistry/v1/image_service.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/containerregistry/v1/image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xf0\x02\n" +
 	"\x11ListImagesRequest\x12)\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
 	"registryId\x12l\n" +
@@ -372,8 +365,8 @@ const file_yandex_cloud_containerregistry_v1_image_service_proto_rawDesc = "" +
 	"\x04List\x124.yandex.cloud.containerregistry.v1.ListImagesRequest\x1a5.yandex.cloud.containerregistry.v1.ListImagesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/container-registry/v1/images\x12\x95\x01\n" +
 	"\x03Get\x122.yandex.cloud.containerregistry.v1.GetImageRequest\x1a(.yandex.cloud.containerregistry.v1.Image\"0\x82\xd3\xe4\x93\x02*\x12(/container-registry/v1/images/{image_id}\x12\xc4\x01\n" +
 	"\x06Delete\x125.yandex.cloud.containerregistry.v1.DeleteImageRequest\x1a!.yandex.cloud.operation.Operation\"`\xb2\xd2*,\n" +
-	"\x13DeleteImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02**(/container-registry/v1/images/{image_id}B\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x13DeleteImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02**(/container-registry/v1/images/{image_id}B\x85\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x03PISZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_image_service_proto_rawDescOnce sync.Once

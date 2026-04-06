@@ -85,8 +85,8 @@ const file_yandex_cloud_containerregistry_v1_repository_proto_rawDesc = "" +
 	"\n" +
 	"Repository\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\tR\x02idB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x02id\x18\x02 \x01(\tR\x02idB\x85\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x03PIRZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_repository_proto_rawDescOnce sync.Once

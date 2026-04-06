@@ -56,14 +56,14 @@ func (m *Vulnerability) SetVulnerability(v Vulnerability_Vulnerability) {
 	m.Vulnerability = v
 }
 
-func (m *Vulnerability) SetSeverity(v Vulnerability_Severity) {
-	m.Severity = v
-}
-
 func (m *Vulnerability) SetPackage(v *PackageVulnerability) {
 	m.Vulnerability = &Vulnerability_Package{
 		Package: v,
 	}
+}
+
+func (m *Vulnerability) SetSeverity(v Vulnerability_Severity) {
+	m.Severity = v
 }
 
 func (m *PackageVulnerability) SetName(v string) {

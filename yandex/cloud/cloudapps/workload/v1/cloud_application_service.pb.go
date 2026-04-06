@@ -174,7 +174,7 @@ var File_yandex_cloud_cloudapps_workload_v1_cloud_application_service_proto prot
 
 const file_yandex_cloud_cloudapps_workload_v1_cloud_application_service_proto_rawDesc = "" +
 	"\n" +
-	"Byandex/cloud/cloudapps/workload/v1/cloud_application_service.proto\x12\"yandex.cloud.cloudapps.workload.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dyandex/cloud/validation.proto\x1a:yandex/cloud/cloudapps/workload/v1/cloud_application.proto\"\x84\x02\n" +
+	"Byandex/cloud/cloudapps/workload/v1/cloud_application_service.proto\x12\"yandex.cloud.cloudapps.workload.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a:yandex/cloud/cloudapps/workload/v1/cloud_application.proto\x1a\x1dyandex/cloud/validation.proto\"\x84\x02\n" +
 	"\x18ResolveByWorkloadRequest\x12t\n" +
 	"\rworkload_type\x18\x01 \x01(\x0e2I.yandex.cloud.cloudapps.workload.v1.ResolveByWorkloadRequest.WorkloadTypeB\x04\xe8\xc71\x01R\fworkloadType\x12-\n" +
 	"\vworkload_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
@@ -186,8 +186,8 @@ const file_yandex_cloud_cloudapps_workload_v1_cloud_application_service_proto_ra
 	"\x11cloud_application\x18\x01 \x01(\v24.yandex.cloud.cloudapps.workload.v1.CloudApplicationR\x10cloudApplication2\xff\x02\n" +
 	"\x17CloudApplicationService\x12\x86\x01\n" +
 	"\x03Get\x12\x16.google.protobuf.Empty\x1a4.yandex.cloud.cloudapps.workload.v1.CloudApplication\"1\x82\xd3\xe4\x93\x02+\x12)/cloudapps/workload/v1/cloud-applications\x12\xda\x01\n" +
-	"\x11ResolveByWorkload\x12<.yandex.cloud.cloudapps.workload.v1.ResolveByWorkloadRequest\x1a=.yandex.cloud.cloudapps.workload.v1.ResolveByWorkloadResponse\"H\x82\xd3\xe4\x93\x02B:\x01*\"=/cloudapps/workload/v1/cloud-applications:resolve-by-workloadBy\n" +
-	"&yandex.cloud.api.cloudapps.workload.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudapps/workload/v1;workloadb\x06proto3"
+	"\x11ResolveByWorkload\x12<.yandex.cloud.cloudapps.workload.v1.ResolveByWorkloadRequest\x1a=.yandex.cloud.cloudapps.workload.v1.ResolveByWorkloadResponse\"H\x82\xd3\xe4\x93\x02B:\x01*\"=/cloudapps/workload/v1/cloud-applications:resolve-by-workloadB\x82\x01\n" +
+	"&yandex.cloud.api.cloudapps.workload.v1B\aPCAWCASZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudapps/workload/v1;workloadb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudapps_workload_v1_cloud_application_service_proto_rawDescOnce sync.Once

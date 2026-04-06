@@ -88,7 +88,6 @@ type ListLifecyclePoliciesRequest struct {
 	// [ListLifecyclePoliciesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters lifecycle policy resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [LifecyclePolicy.name] field.
 	// 2. An `=` operator.
@@ -209,7 +208,6 @@ type ListLifecyclePoliciesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListLifecyclePoliciesRequest.page_size], use `next_page_token` as the value
 	// for the [ListLifecyclePoliciesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -840,7 +838,6 @@ type ListDryRunLifecyclePolicyResultsRequest struct {
 	// [ListDryRunLifecyclePolicyResultsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters dry run results listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [LifecyclePolicy.name] field.
 	// 2. An `=` operator.
@@ -925,7 +922,6 @@ type ListDryRunLifecyclePolicyResultsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDryRunLifecyclePolicyResultsRequest.page_size] use `next_page_token` as the value
 	// for the [ListDryRunLifecyclePolicyResultsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -988,7 +984,6 @@ type ListDryRunLifecyclePolicyResultAffectedImagesRequest struct {
 	// [ListDryRunLifecyclePolicyResultAffectedImagesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters affected images listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [LifecyclePolicy.name] field.
 	// 2. An `=` operator.
@@ -1073,7 +1068,6 @@ type ListDryRunLifecyclePolicyResultAffectedImagesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDryRunLifecyclePolicyResultAffectedImagesRequest.page_size], use `next_page_token` as the value
 	// for the [ListDryRunLifecyclePolicyResultAffectedImagesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1128,7 +1122,7 @@ var File_yandex_cloud_containerregistry_v1_lifecycle_policy_service_proto protor
 
 const file_yandex_cloud_containerregistry_v1_lifecycle_policy_service_proto_rawDesc = "" +
 	"\n" +
-	"@yandex/cloud/containerregistry/v1/lifecycle_policy_service.proto\x12!yandex.cloud.containerregistry.v1\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/containerregistry/v1/image.proto\x1a8yandex/cloud/containerregistry/v1/lifecycle_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"Y\n" +
+	"@yandex/cloud/containerregistry/v1/lifecycle_policy_service.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/containerregistry/v1/image.proto\x1a8yandex/cloud/containerregistry/v1/lifecycle_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"Y\n" +
 	"\x19GetLifecyclePolicyRequest\x12<\n" +
 	"\x13lifecycle_policy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11lifecyclePolicyId\"\xa5\x02\n" +
 	"\x1cListLifecyclePoliciesRequest\x12+\n" +
@@ -1218,8 +1212,8 @@ const file_yandex_cloud_containerregistry_v1_lifecycle_policy_service_proto_rawD
 	"\x1dDryRunLifecyclePolicyMetadata\x12\x1bDryRunLifecyclePolicyResult\x82\xd3\xe4\x93\x02G:\x01*\"B/container-registry/v1/dryRunLifecyclePolicy/{lifecycle_policy_id}\x12\xfd\x01\n" +
 	"\x0fGetDryRunResult\x12H.yandex.cloud.containerregistry.v1.GetDryRunLifecyclePolicyResultRequest\x1a>.yandex.cloud.containerregistry.v1.DryRunLifecyclePolicyResult\"`\x82\xd3\xe4\x93\x02Z\x12X/container-registry/v1/dryRunLifecyclePolicyResults/{dry_run_lifecycle_policy_result_id}\x12\xe9\x01\n" +
 	"\x11ListDryRunResults\x12J.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultsRequest\x1aK.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultsResponse\";\x82\xd3\xe4\x93\x025\x123/container-registry/v1/dryRunLifecyclePolicyResults\x12\xc4\x02\n" +
-	"\x1eListDryRunResultAffectedImages\x12W.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesRequest\x1aX.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesResponse\"o\x82\xd3\xe4\x93\x02i\x12g/container-registry/v1/dryRunLifecyclePolicyResults/{dry_run_lifecycle_policy_result_id}:affectedImagesB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x1eListDryRunResultAffectedImages\x12W.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesRequest\x1aX.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesResponse\"o\x82\xd3\xe4\x93\x02i\x12g/container-registry/v1/dryRunLifecyclePolicyResults/{dry_run_lifecycle_policy_result_id}:affectedImagesB\x86\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x04PLPSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_lifecycle_policy_service_proto_rawDescOnce sync.Once

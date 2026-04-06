@@ -41,7 +41,6 @@ const (
 // A set of methods for managing Registry resources.
 type RegistryServiceClient interface {
 	// Returns the specified Registry resource.
-	//
 	// To get the list of available Registry resources, make a [List] request.
 	Get(ctx context.Context, in *GetRegistryRequest, opts ...grpc.CallOption) (*Registry, error)
 	// Retrieves the list of Registry resources in the specified folder.
@@ -191,7 +190,6 @@ func (c *registryServiceClient) UpdateIpPermission(ctx context.Context, in *Upda
 // A set of methods for managing Registry resources.
 type RegistryServiceServer interface {
 	// Returns the specified Registry resource.
-	//
 	// To get the list of available Registry resources, make a [List] request.
 	Get(context.Context, *GetRegistryRequest) (*Registry, error)
 	// Retrieves the list of Registry resources in the specified folder.

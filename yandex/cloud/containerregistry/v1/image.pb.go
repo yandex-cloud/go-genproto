@@ -39,7 +39,6 @@ type Image struct {
 	// Layers of the Docker image.
 	Layers []*Blob `protobuf:"bytes,6,rep,name=layers,proto3" json:"layers,omitempty"`
 	// Tags of the Docker image.
-	//
 	// Each tag is unique within the repository.
 	Tags []string `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
 	// Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
@@ -138,7 +137,7 @@ var File_yandex_cloud_containerregistry_v1_image_proto protoreflect.FileDescript
 
 const file_yandex_cloud_containerregistry_v1_image_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/containerregistry/v1/image.proto\x12!yandex.cloud.containerregistry.v1\x1a,yandex/cloud/containerregistry/v1/blob.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbd\x02\n" +
+	"-yandex/cloud/containerregistry/v1/image.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a,yandex/cloud/containerregistry/v1/blob.proto\"\xbd\x02\n" +
 	"\x05Image\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
@@ -148,8 +147,8 @@ const file_yandex_cloud_containerregistry_v1_image_proto_rawDesc = "" +
 	"\x06layers\x18\x06 \x03(\v2'.yandex.cloud.containerregistry.v1.BlobR\x06layers\x12\x12\n" +
 	"\x04tags\x18\a \x03(\tR\x04tags\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\x84\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x02PIZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_image_proto_rawDescOnce sync.Once

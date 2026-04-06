@@ -29,7 +29,6 @@ const (
 type GetRepositoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Repository resource to return.
-	//
 	// To get the repository ID use a [RepositoryService.List] request.
 	RepositoryId  string `protobuf:"bytes,1,opt,name=repository_id,json=repositoryId,proto3" json:"repository_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetRepositoryRequest) GetRepositoryId() string {
 type GetRepositoryByNameRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the Repository resource to return.
-	//
 	// To get the repository name use a [RepositoryService.List] request.
 	RepositoryName string `protobuf:"bytes,1,opt,name=repository_name,json=repositoryName,proto3" json:"repository_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -123,13 +121,10 @@ func (x *GetRepositoryByNameRequest) GetRepositoryName() string {
 type ListRepositoriesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to list repositories in.
-	//
 	// To get the registry ID use a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// ID of the folder to list registries in.
-	//
 	// [folder_id] is ignored if a [ListImagesRequest.registry_id] is specified in the request.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,6,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -286,7 +281,6 @@ func (x *ListRepositoriesResponse) GetNextPageToken() string {
 type UpsertRepositoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the repository.
-	//
 	// The name of the repository should match the name of the images that will be pushed in the repository.
 	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -469,7 +463,7 @@ var File_yandex_cloud_containerregistry_v1_repository_service_proto protoreflect
 
 const file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/containerregistry/v1/repository_service.proto\x12!yandex.cloud.containerregistry.v1\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a2yandex/cloud/containerregistry/v1/repository.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"I\n" +
+	":yandex/cloud/containerregistry/v1/repository_service.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/containerregistry/v1/repository.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
 	"\x14GetRepositoryRequest\x121\n" +
 	"\rrepository_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\frepositoryId\"\x8d\x01\n" +
 	"\x1aGetRepositoryByNameRequest\x12o\n" +
@@ -509,8 +503,8 @@ const file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDesc = 
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8b\x01\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H:\x01*\"C/container-registry/v1/repositories/{resource_id}:setAccessBindings\x12\xff\x01\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02K:\x01*\"F/container-registry/v1/repositories/{resource_id}:updateAccessBindingsB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02K:\x01*\"F/container-registry/v1/repositories/{resource_id}:updateAccessBindingsB\x86\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x04PIRSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDescOnce sync.Once

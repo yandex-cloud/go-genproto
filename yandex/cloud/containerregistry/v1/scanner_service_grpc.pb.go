@@ -36,7 +36,6 @@ type ScannerServiceClient interface {
 	// Executes scanning of specified image.
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified ScanResult resource.
-	//
 	// To get the list of ScanResults for specified Image, make a [List] request.
 	Get(ctx context.Context, in *GetScanResultRequest, opts ...grpc.CallOption) (*ScanResult, error)
 	// Returns the last finished ScanResult for the specified Image.
@@ -114,7 +113,6 @@ type ScannerServiceServer interface {
 	// Executes scanning of specified image.
 	Scan(context.Context, *ScanRequest) (*operation.Operation, error)
 	// Returns the specified ScanResult resource.
-	//
 	// To get the list of ScanResults for specified Image, make a [List] request.
 	Get(context.Context, *GetScanResultRequest) (*ScanResult, error)
 	// Returns the last finished ScanResult for the specified Image.

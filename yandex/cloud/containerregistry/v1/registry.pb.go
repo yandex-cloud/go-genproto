@@ -189,8 +189,8 @@ const file_yandex_cloud_containerregistry_v1_registry_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03B\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\bDELETING\x10\x03B\x84\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x02PRZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_registry_proto_rawDescOnce sync.Once

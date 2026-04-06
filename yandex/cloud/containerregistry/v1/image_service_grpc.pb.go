@@ -34,7 +34,6 @@ type ImageServiceClient interface {
 	// Retrieves the list of Image resources in the specified registry or repository.
 	List(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
 	// Returns the specified Image resource.
-	//
 	// To get the list of available Image resources, make a [List] request.
 	Get(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
 	// Deletes the specified Docker image.
@@ -88,7 +87,6 @@ type ImageServiceServer interface {
 	// Retrieves the list of Image resources in the specified registry or repository.
 	List(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
 	// Returns the specified Image resource.
-	//
 	// To get the list of available Image resources, make a [List] request.
 	Get(context.Context, *GetImageRequest) (*Image, error)
 	// Deletes the specified Docker image.

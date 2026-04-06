@@ -330,14 +330,14 @@ func (x *VulnerabilityStats) GetUndefined() int64 {
 // A Vulnerability resource.
 type Vulnerability struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Output only. Severity of the Vulnerability.
-	Severity Vulnerability_Severity `protobuf:"varint,1,opt,name=severity,proto3,enum=yandex.cloud.containerregistry.v1.Vulnerability_Severity" json:"severity,omitempty"`
 	// Details of vulnerability depending on type. Only `package` vulnerability is supported at the moment.
 	//
 	// Types that are valid to be assigned to Vulnerability:
 	//
 	//	*Vulnerability_Package
 	Vulnerability isVulnerability_Vulnerability `protobuf_oneof:"vulnerability"`
+	// Output only. Severity of the Vulnerability.
+	Severity      Vulnerability_Severity `protobuf:"varint,1,opt,name=severity,proto3,enum=yandex.cloud.containerregistry.v1.Vulnerability_Severity" json:"severity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -372,13 +372,6 @@ func (*Vulnerability) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_containerregistry_v1_scanner_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Vulnerability) GetSeverity() Vulnerability_Severity {
-	if x != nil {
-		return x.Severity
-	}
-	return Vulnerability_SEVERITY_UNSPECIFIED
-}
-
 func (x *Vulnerability) GetVulnerability() isVulnerability_Vulnerability {
 	if x != nil {
 		return x.Vulnerability
@@ -393,6 +386,13 @@ func (x *Vulnerability) GetPackage() *PackageVulnerability {
 		}
 	}
 	return nil
+}
+
+func (x *Vulnerability) GetSeverity() Vulnerability_Severity {
+	if x != nil {
+		return x.Severity
+	}
+	return Vulnerability_SEVERITY_UNSPECIFIED
 }
 
 type isVulnerability_Vulnerability interface {
@@ -518,7 +518,7 @@ var File_yandex_cloud_containerregistry_v1_scanner_proto protoreflect.FileDescri
 
 const file_yandex_cloud_containerregistry_v1_scanner_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/containerregistry/v1/scanner.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe6\x02\n" +
+	"/yandex/cloud/containerregistry/v1/scanner.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe6\x02\n" +
 	"\n" +
 	"ScanResult\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
@@ -541,9 +541,9 @@ const file_yandex_cloud_containerregistry_v1_scanner_proto_rawDesc = "" +
 	"negligible\x18\x05 \x01(\x03R\n" +
 	"negligible\x12\x1c\n" +
 	"\tundefined\x18\x06 \x01(\x03R\tundefined\"\xc4\x02\n" +
-	"\rVulnerability\x12U\n" +
-	"\bseverity\x18\x01 \x01(\x0e29.yandex.cloud.containerregistry.v1.Vulnerability.SeverityR\bseverity\x12S\n" +
-	"\apackage\x18\x02 \x01(\v27.yandex.cloud.containerregistry.v1.PackageVulnerabilityH\x00R\apackage\"p\n" +
+	"\rVulnerability\x12S\n" +
+	"\apackage\x18\x02 \x01(\v27.yandex.cloud.containerregistry.v1.PackageVulnerabilityH\x00R\apackage\x12U\n" +
+	"\bseverity\x18\x01 \x01(\x0e29.yandex.cloud.containerregistry.v1.Vulnerability.SeverityR\bseverity\"p\n" +
 	"\bSeverity\x12\x18\n" +
 	"\x14SEVERITY_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCRITICAL\x10\x01\x12\b\n" +
@@ -563,8 +563,8 @@ const file_yandex_cloud_containerregistry_v1_scanner_proto_rawDesc = "" +
 	"\aversion\x18\x05 \x01(\tR\aversion\x12\x19\n" +
 	"\bfixed_by\x18\x06 \x01(\tR\afixedBy\x12\x16\n" +
 	"\x06origin\x18\a \x01(\tR\x06origin\x12\x12\n" +
-	"\x04type\x18\b \x01(\tR\x04typeB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x04type\x18\b \x01(\tR\x04typeB\x86\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x04PISRZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_scanner_proto_rawDescOnce sync.Once
@@ -593,8 +593,8 @@ var file_yandex_cloud_containerregistry_v1_scanner_proto_depIdxs = []int32{
 	6, // 0: yandex.cloud.containerregistry.v1.ScanResult.scanned_at:type_name -> google.protobuf.Timestamp
 	0, // 1: yandex.cloud.containerregistry.v1.ScanResult.status:type_name -> yandex.cloud.containerregistry.v1.ScanResult.Status
 	3, // 2: yandex.cloud.containerregistry.v1.ScanResult.vulnerabilities:type_name -> yandex.cloud.containerregistry.v1.VulnerabilityStats
-	1, // 3: yandex.cloud.containerregistry.v1.Vulnerability.severity:type_name -> yandex.cloud.containerregistry.v1.Vulnerability.Severity
-	5, // 4: yandex.cloud.containerregistry.v1.Vulnerability.package:type_name -> yandex.cloud.containerregistry.v1.PackageVulnerability
+	5, // 3: yandex.cloud.containerregistry.v1.Vulnerability.package:type_name -> yandex.cloud.containerregistry.v1.PackageVulnerability
+	1, // 4: yandex.cloud.containerregistry.v1.Vulnerability.severity:type_name -> yandex.cloud.containerregistry.v1.Vulnerability.Severity
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name

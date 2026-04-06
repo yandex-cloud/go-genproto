@@ -300,7 +300,7 @@ var File_yandex_cloud_containerregistry_v1_scan_policy_proto protoreflect.FileDe
 
 const file_yandex_cloud_containerregistry_v1_scan_policy_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/containerregistry/v1/scan_policy.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8e\x02\n" +
+	"3yandex/cloud/containerregistry/v1/scan_policy.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\x02\n" +
 	"\n" +
 	"ScanPolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
@@ -321,8 +321,8 @@ const file_yandex_cloud_containerregistry_v1_scan_policy_proto_rawDesc = "" +
 	"\rScheduledRule\x12|\n" +
 	"\x13repository_prefixes\x18\x01 \x03(\tBK\xf2\xc71A\\*|[a-z0-9]+(?:[._-][a-z0-9]+)*(/([a-z0-9]+(?:[._-][a-z0-9]+)*))*\x82\xc81\x02>0R\x12repositoryPrefixes\x12D\n" +
 	"\rrescan_period\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\x04\xe8\xc71\x01R\frescanPeriod\x12\x1a\n" +
-	"\bdisabled\x18\x03 \x01(\bR\bdisabledB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\bdisabled\x18\x03 \x01(\bR\bdisabledB\x85\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x03PSPZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_scan_policy_proto_rawDescOnce sync.Once

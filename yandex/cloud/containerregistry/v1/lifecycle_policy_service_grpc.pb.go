@@ -38,7 +38,6 @@ const (
 // A set of methods for managing Lifecycle policy resources.
 type LifecyclePolicyServiceClient interface {
 	// Returns the specified lifecycle policy.
-	//
 	// To get the list of all available lifecycle policies, make a [List] request.
 	Get(ctx context.Context, in *GetLifecyclePolicyRequest, opts ...grpc.CallOption) (*LifecyclePolicy, error)
 	// Retrieves the list of lifecycle policies in the specified repository.
@@ -164,7 +163,6 @@ func (c *lifecyclePolicyServiceClient) ListDryRunResultAffectedImages(ctx contex
 // A set of methods for managing Lifecycle policy resources.
 type LifecyclePolicyServiceServer interface {
 	// Returns the specified lifecycle policy.
-	//
 	// To get the list of all available lifecycle policies, make a [List] request.
 	Get(context.Context, *GetLifecyclePolicyRequest) (*LifecyclePolicy, error)
 	// Retrieves the list of lifecycle policies in the specified repository.

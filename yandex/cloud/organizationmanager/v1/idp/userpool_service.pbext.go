@@ -71,6 +71,10 @@ func (m *CreateUserpoolRequest) SetBruteforceProtectionPolicy(v *BruteforceProte
 	m.BruteforceProtectionPolicy = v
 }
 
+func (m *CreateUserpoolRequest) SetPasswordBlacklistPolicy(v *PasswordBlacklistPolicy) {
+	m.PasswordBlacklistPolicy = v
+}
+
 func (m *CreateUserpoolMetadata) SetUserpoolId(v string) {
 	m.UserpoolId = v
 }
@@ -109,6 +113,10 @@ func (m *UpdateUserpoolRequest) SetPasswordLifetimePolicy(v *PasswordLifetimePol
 
 func (m *UpdateUserpoolRequest) SetBruteforceProtectionPolicy(v *BruteforceProtectionPolicy) {
 	m.BruteforceProtectionPolicy = v
+}
+
+func (m *UpdateUserpoolRequest) SetPasswordBlacklistPolicy(v *PasswordBlacklistPolicy) {
+	m.PasswordBlacklistPolicy = v
 }
 
 func (m *UpdateUserpoolMetadata) SetUserpoolId(v string) {

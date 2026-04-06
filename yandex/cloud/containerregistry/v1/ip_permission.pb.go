@@ -232,10 +232,10 @@ var File_yandex_cloud_containerregistry_v1_ip_permission_proto protoreflect.File
 
 const file_yandex_cloud_containerregistry_v1_ip_permission_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/containerregistry/v1/ip_permission.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1dyandex/cloud/validation.proto\"\xa4\x01\n" +
-	"\fIpPermission\x12N\n" +
-	"\x06action\x18\x01 \x01(\x0e26.yandex.cloud.containerregistry.v1.IpPermission.ActionR\x06action\x12\x0e\n" +
-	"\x02ip\x18\x02 \x01(\tR\x02ip\"4\n" +
+	"5yandex/cloud/containerregistry/v1/ip_permission.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1dyandex/cloud/validation.proto\"\xfe\x01\n" +
+	"\fIpPermission\x12T\n" +
+	"\x06action\x18\x01 \x01(\x0e26.yandex.cloud.containerregistry.v1.IpPermission.ActionB\x04\xe8\xc71\x01R\x06action\x12b\n" +
+	"\x02ip\x18\x02 \x01(\tBR\xf2\xc71N^((([0-9]{1,3}.){3}[0-9]{1,3})|([a-fA-F0-9]+:[a-fA-F0-9:]*))(\\/[1-9]+[0-9]*)?$R\x02ip\"4\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04PULL\x10\x01\x12\b\n" +
@@ -247,8 +247,8 @@ const file_yandex_cloud_containerregistry_v1_ip_permission_proto_rawDesc = "" +
 	" IP_PERMISSION_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
 	"\n" +
-	"\x06REMOVE\x10\x02B\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x06REMOVE\x10\x02B\x85\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x03PIPZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_ip_permission_proto_rawDescOnce sync.Once

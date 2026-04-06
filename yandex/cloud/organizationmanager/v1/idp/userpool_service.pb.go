@@ -233,8 +233,10 @@ type CreateUserpoolRequest struct {
 	PasswordLifetimePolicy *PasswordLifetimePolicy `protobuf:"bytes,8,opt,name=password_lifetime_policy,json=passwordLifetimePolicy,proto3" json:"password_lifetime_policy,omitempty"`
 	// Bruteforce protection policy for the userpool.
 	BruteforceProtectionPolicy *BruteforceProtectionPolicy `protobuf:"bytes,9,opt,name=bruteforce_protection_policy,json=bruteforceProtectionPolicy,proto3" json:"bruteforce_protection_policy,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// Password blacklist policy for the userpool.
+	PasswordBlacklistPolicy *PasswordBlacklistPolicy `protobuf:"bytes,10,opt,name=password_blacklist_policy,json=passwordBlacklistPolicy,proto3" json:"password_blacklist_policy,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *CreateUserpoolRequest) Reset() {
@@ -330,6 +332,13 @@ func (x *CreateUserpoolRequest) GetBruteforceProtectionPolicy() *BruteforceProte
 	return nil
 }
 
+func (x *CreateUserpoolRequest) GetPasswordBlacklistPolicy() *PasswordBlacklistPolicy {
+	if x != nil {
+		return x.PasswordBlacklistPolicy
+	}
+	return nil
+}
+
 // Metadata for the [UserpoolService.Create] operation.
 type CreateUserpoolMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -399,8 +408,10 @@ type UpdateUserpoolRequest struct {
 	PasswordLifetimePolicy *PasswordLifetimePolicy `protobuf:"bytes,8,opt,name=password_lifetime_policy,json=passwordLifetimePolicy,proto3" json:"password_lifetime_policy,omitempty"`
 	// Bruteforce protection policy for the userpool.
 	BruteforceProtectionPolicy *BruteforceProtectionPolicy `protobuf:"bytes,9,opt,name=bruteforce_protection_policy,json=bruteforceProtectionPolicy,proto3" json:"bruteforce_protection_policy,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// Password blacklist policy for the userpool.
+	PasswordBlacklistPolicy *PasswordBlacklistPolicy `protobuf:"bytes,10,opt,name=password_blacklist_policy,json=passwordBlacklistPolicy,proto3" json:"password_blacklist_policy,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *UpdateUserpoolRequest) Reset() {
@@ -492,6 +503,13 @@ func (x *UpdateUserpoolRequest) GetPasswordLifetimePolicy() *PasswordLifetimePol
 func (x *UpdateUserpoolRequest) GetBruteforceProtectionPolicy() *BruteforceProtectionPolicy {
 	if x != nil {
 		return x.BruteforceProtectionPolicy
+	}
+	return nil
+}
+
+func (x *UpdateUserpoolRequest) GetPasswordBlacklistPolicy() *PasswordBlacklistPolicy {
+	if x != nil {
+		return x.PasswordBlacklistPolicy
 	}
 	return nil
 }
@@ -1286,7 +1304,7 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_rawDes
 	"\x8a\xc81\x06<=1000R\x06filter\"\x90\x01\n" +
 	"\x15ListUserpoolsResponse\x12O\n" +
 	"\tuserpools\x18\x01 \x03(\v21.yandex.cloud.organizationmanager.v1.idp.UserpoolR\tuserpools\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa7\a\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa5\b\n" +
 	"\x15CreateUserpoolRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12;\n" +
 	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -1296,13 +1314,15 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_rawDes
 	"\ruser_settings\x18\x06 \x01(\v25.yandex.cloud.organizationmanager.v1.idp.UserSettingsR\fuserSettings\x12v\n" +
 	"\x17password_quality_policy\x18\a \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicyR\x15passwordQualityPolicy\x12y\n" +
 	"\x18password_lifetime_policy\x18\b \x01(\v2?.yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicyR\x16passwordLifetimePolicy\x12\x85\x01\n" +
-	"\x1cbruteforce_protection_policy\x18\t \x01(\v2C.yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicyR\x1abruteforceProtectionPolicy\x1a9\n" +
+	"\x1cbruteforce_protection_policy\x18\t \x01(\v2C.yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicyR\x1abruteforceProtectionPolicy\x12|\n" +
+	"\x19password_blacklist_policy\x18\n" +
+	" \x01(\v2@.yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicyR\x17passwordBlacklistPolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
 	"\x16CreateUserpoolMetadata\x12\x1f\n" +
 	"\vuserpool_id\x18\x01 \x01(\tR\n" +
-	"userpoolId\"\x9e\a\n" +
+	"userpoolId\"\x9c\b\n" +
 	"\x15UpdateUserpoolRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"userpoolId\x12;\n" +
@@ -1314,7 +1334,9 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_rawDes
 	"\ruser_settings\x18\x06 \x01(\v25.yandex.cloud.organizationmanager.v1.idp.UserSettingsR\fuserSettings\x12v\n" +
 	"\x17password_quality_policy\x18\a \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicyR\x15passwordQualityPolicy\x12y\n" +
 	"\x18password_lifetime_policy\x18\b \x01(\v2?.yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicyR\x16passwordLifetimePolicy\x12\x85\x01\n" +
-	"\x1cbruteforce_protection_policy\x18\t \x01(\v2C.yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicyR\x1abruteforceProtectionPolicy\x1a9\n" +
+	"\x1cbruteforce_protection_policy\x18\t \x01(\v2C.yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicyR\x1abruteforceProtectionPolicy\x12|\n" +
+	"\x19password_blacklist_policy\x18\n" +
+	" \x01(\v2@.yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicyR\x17passwordBlacklistPolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
@@ -1447,13 +1469,14 @@ var file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_goTypes 
 	(*PasswordQualityPolicy)(nil),              // 24: yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
 	(*PasswordLifetimePolicy)(nil),             // 25: yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
 	(*BruteforceProtectionPolicy)(nil),         // 26: yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
-	(*fieldmaskpb.FieldMask)(nil),              // 27: google.protobuf.FieldMask
-	(*Domain)(nil),                             // 28: yandex.cloud.organizationmanager.v1.idp.Domain
-	(*operation.Operation)(nil),                // 29: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 30: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 31: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 32: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 33: yandex.cloud.access.ListAccessBindingsResponse
+	(*PasswordBlacklistPolicy)(nil),            // 27: yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicy
+	(*fieldmaskpb.FieldMask)(nil),              // 28: google.protobuf.FieldMask
+	(*Domain)(nil),                             // 29: yandex.cloud.organizationmanager.v1.idp.Domain
+	(*operation.Operation)(nil),                // 30: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 31: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 32: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 33: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 34: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_depIdxs = []int32{
 	22, // 0: yandex.cloud.organizationmanager.v1.idp.ListUserpoolsResponse.userpools:type_name -> yandex.cloud.organizationmanager.v1.idp.Userpool
@@ -1462,47 +1485,49 @@ var file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_depIdxs 
 	24, // 3: yandex.cloud.organizationmanager.v1.idp.CreateUserpoolRequest.password_quality_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
 	25, // 4: yandex.cloud.organizationmanager.v1.idp.CreateUserpoolRequest.password_lifetime_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
 	26, // 5: yandex.cloud.organizationmanager.v1.idp.CreateUserpoolRequest.bruteforce_protection_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
-	27, // 6: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.update_mask:type_name -> google.protobuf.FieldMask
-	21, // 7: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.LabelsEntry
-	23, // 8: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.user_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserSettings
-	24, // 9: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.password_quality_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
-	25, // 10: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.password_lifetime_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
-	26, // 11: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.bruteforce_protection_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
-	28, // 12: yandex.cloud.organizationmanager.v1.idp.ListUserpoolDomainsResponse.domains:type_name -> yandex.cloud.organizationmanager.v1.idp.Domain
-	29, // 13: yandex.cloud.organizationmanager.v1.idp.ListUserpoolOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 14: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Get:input_type -> yandex.cloud.organizationmanager.v1.idp.GetUserpoolRequest
-	1,  // 15: yandex.cloud.organizationmanager.v1.idp.UserpoolService.List:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolsRequest
-	3,  // 16: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Create:input_type -> yandex.cloud.organizationmanager.v1.idp.CreateUserpoolRequest
-	5,  // 17: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Update:input_type -> yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest
-	7,  // 18: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Delete:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteUserpoolRequest
-	9,  // 19: yandex.cloud.organizationmanager.v1.idp.UserpoolService.GetDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.GetUserpoolDomainRequest
-	10, // 20: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListDomains:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolDomainsRequest
-	12, // 21: yandex.cloud.organizationmanager.v1.idp.UserpoolService.AddDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.AddUserpoolDomainRequest
-	14, // 22: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ValidateDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.ValidateUserpoolDomainRequest
-	16, // 23: yandex.cloud.organizationmanager.v1.idp.UserpoolService.DeleteDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteUserpoolDomainRequest
-	18, // 24: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolOperationsRequest
-	30, // 25: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	31, // 26: yandex.cloud.organizationmanager.v1.idp.UserpoolService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	32, // 27: yandex.cloud.organizationmanager.v1.idp.UserpoolService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	22, // 28: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Get:output_type -> yandex.cloud.organizationmanager.v1.idp.Userpool
-	2,  // 29: yandex.cloud.organizationmanager.v1.idp.UserpoolService.List:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolsResponse
-	29, // 30: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 31: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 32: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Delete:output_type -> yandex.cloud.operation.Operation
-	28, // 33: yandex.cloud.organizationmanager.v1.idp.UserpoolService.GetDomain:output_type -> yandex.cloud.organizationmanager.v1.idp.Domain
-	11, // 34: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListDomains:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolDomainsResponse
-	29, // 35: yandex.cloud.organizationmanager.v1.idp.UserpoolService.AddDomain:output_type -> yandex.cloud.operation.Operation
-	29, // 36: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ValidateDomain:output_type -> yandex.cloud.operation.Operation
-	29, // 37: yandex.cloud.organizationmanager.v1.idp.UserpoolService.DeleteDomain:output_type -> yandex.cloud.operation.Operation
-	19, // 38: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolOperationsResponse
-	33, // 39: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	29, // 40: yandex.cloud.organizationmanager.v1.idp.UserpoolService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	29, // 41: yandex.cloud.organizationmanager.v1.idp.UserpoolService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	28, // [28:42] is the sub-list for method output_type
-	14, // [14:28] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	27, // 6: yandex.cloud.organizationmanager.v1.idp.CreateUserpoolRequest.password_blacklist_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicy
+	28, // 7: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.update_mask:type_name -> google.protobuf.FieldMask
+	21, // 8: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.LabelsEntry
+	23, // 9: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.user_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserSettings
+	24, // 10: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.password_quality_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordQualityPolicy
+	25, // 11: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.password_lifetime_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordLifetimePolicy
+	26, // 12: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.bruteforce_protection_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.BruteforceProtectionPolicy
+	27, // 13: yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest.password_blacklist_policy:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordBlacklistPolicy
+	29, // 14: yandex.cloud.organizationmanager.v1.idp.ListUserpoolDomainsResponse.domains:type_name -> yandex.cloud.organizationmanager.v1.idp.Domain
+	30, // 15: yandex.cloud.organizationmanager.v1.idp.ListUserpoolOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 16: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Get:input_type -> yandex.cloud.organizationmanager.v1.idp.GetUserpoolRequest
+	1,  // 17: yandex.cloud.organizationmanager.v1.idp.UserpoolService.List:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolsRequest
+	3,  // 18: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Create:input_type -> yandex.cloud.organizationmanager.v1.idp.CreateUserpoolRequest
+	5,  // 19: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Update:input_type -> yandex.cloud.organizationmanager.v1.idp.UpdateUserpoolRequest
+	7,  // 20: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Delete:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteUserpoolRequest
+	9,  // 21: yandex.cloud.organizationmanager.v1.idp.UserpoolService.GetDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.GetUserpoolDomainRequest
+	10, // 22: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListDomains:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolDomainsRequest
+	12, // 23: yandex.cloud.organizationmanager.v1.idp.UserpoolService.AddDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.AddUserpoolDomainRequest
+	14, // 24: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ValidateDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.ValidateUserpoolDomainRequest
+	16, // 25: yandex.cloud.organizationmanager.v1.idp.UserpoolService.DeleteDomain:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteUserpoolDomainRequest
+	18, // 26: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListOperations:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolOperationsRequest
+	31, // 27: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	32, // 28: yandex.cloud.organizationmanager.v1.idp.UserpoolService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	33, // 29: yandex.cloud.organizationmanager.v1.idp.UserpoolService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	22, // 30: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Get:output_type -> yandex.cloud.organizationmanager.v1.idp.Userpool
+	2,  // 31: yandex.cloud.organizationmanager.v1.idp.UserpoolService.List:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolsResponse
+	30, // 32: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Create:output_type -> yandex.cloud.operation.Operation
+	30, // 33: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Update:output_type -> yandex.cloud.operation.Operation
+	30, // 34: yandex.cloud.organizationmanager.v1.idp.UserpoolService.Delete:output_type -> yandex.cloud.operation.Operation
+	29, // 35: yandex.cloud.organizationmanager.v1.idp.UserpoolService.GetDomain:output_type -> yandex.cloud.organizationmanager.v1.idp.Domain
+	11, // 36: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListDomains:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolDomainsResponse
+	30, // 37: yandex.cloud.organizationmanager.v1.idp.UserpoolService.AddDomain:output_type -> yandex.cloud.operation.Operation
+	30, // 38: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ValidateDomain:output_type -> yandex.cloud.operation.Operation
+	30, // 39: yandex.cloud.organizationmanager.v1.idp.UserpoolService.DeleteDomain:output_type -> yandex.cloud.operation.Operation
+	19, // 40: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListOperations:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUserpoolOperationsResponse
+	34, // 41: yandex.cloud.organizationmanager.v1.idp.UserpoolService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	30, // 42: yandex.cloud.organizationmanager.v1.idp.UserpoolService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	30, // 43: yandex.cloud.organizationmanager.v1.idp.UserpoolService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	30, // [30:44] is the sub-list for method output_type
+	16, // [16:30] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_init() }

@@ -326,8 +326,8 @@ const file_yandex_cloud_cloudapps_workload_v1_cloud_application_proto_rawDesc = 
 	"PROCESSING\x10\x01\x12\f\n" +
 	"\bDEPLOYED\x10\x02\x12\n" +
 	"\n" +
-	"\x06FAILED\x10\x03By\n" +
-	"&yandex.cloud.api.cloudapps.workload.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudapps/workload/v1;workloadb\x06proto3"
+	"\x06FAILED\x10\x03B\x81\x01\n" +
+	"&yandex.cloud.api.cloudapps.workload.v1B\x06PCAWCAZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudapps/workload/v1;workloadb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudapps_workload_v1_cloud_application_proto_rawDescOnce sync.Once

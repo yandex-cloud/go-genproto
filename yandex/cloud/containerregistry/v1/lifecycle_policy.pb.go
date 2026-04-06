@@ -263,7 +263,7 @@ var File_yandex_cloud_containerregistry_v1_lifecycle_policy_proto protoreflect.F
 
 const file_yandex_cloud_containerregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/containerregistry/v1/lifecycle_policy.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8e\x03\n" +
+	"8yandex/cloud/containerregistry/v1/lifecycle_policy.proto\x12!yandex.cloud.containerregistry.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\x03\n" +
 	"\x0fLifecyclePolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12#\n" +
@@ -284,8 +284,8 @@ const file_yandex_cloud_containerregistry_v1_lifecycle_policy_proto_rawDesc = ""
 	"\n" +
 	"tag_regexp\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\ttagRegexp\x12\x1a\n" +
 	"\buntagged\x18\x04 \x01(\bR\buntagged\x12*\n" +
-	"\fretained_top\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\vretainedTopB\x80\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\fretained_top\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\vretainedTopB\x85\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1B\x03PLPZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_lifecycle_policy_proto_rawDescOnce sync.Once
