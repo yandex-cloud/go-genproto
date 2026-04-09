@@ -147,8 +147,16 @@ type Artifact struct {
 	Status Artifact_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.cloudregistry.v1.Artifact_Status" json:"status,omitempty"`
 	// Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Output only. ID of the user or service account who created the artifact.
+	CreatedBy string `protobuf:"bytes,8,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	// Output only. Modification timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-	ModifiedAt    *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
+	ModifiedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
+	// Output only. ID of the user or service account who last modified the artifact.
+	ModifiedBy string `protobuf:"bytes,9,opt,name=modified_by,json=modifiedBy,proto3" json:"modified_by,omitempty"`
+	// Key-value properties associated with the artifact.
+	Properties map[string]string `protobuf:"bytes,10,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Content of the artifact.
+	Content       *Content `protobuf:"bytes,11,opt,name=content,proto3" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -225,6 +233,13 @@ func (x *Artifact) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Artifact) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
 func (x *Artifact) GetModifiedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ModifiedAt
@@ -232,11 +247,100 @@ func (x *Artifact) GetModifiedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Artifact) GetModifiedBy() string {
+	if x != nil {
+		return x.ModifiedBy
+	}
+	return ""
+}
+
+func (x *Artifact) GetProperties() map[string]string {
+	if x != nil {
+		return x.Properties
+	}
+	return nil
+}
+
+func (x *Artifact) GetContent() *Content {
+	if x != nil {
+		return x.Content
+	}
+	return nil
+}
+
+// Content of the artifact, specific to its type.
+type Content struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Spec:
+	//
+	//	*Content_Docker
+	Spec          isContent_Spec `protobuf_oneof:"spec"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Content) Reset() {
+	*x = Content{}
+	mi := &file_yandex_cloud_cloudregistry_v1_artifact_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Content) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Content) ProtoMessage() {}
+
+func (x *Content) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_artifact_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Content.ProtoReflect.Descriptor instead.
+func (*Content) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Content) GetSpec() isContent_Spec {
+	if x != nil {
+		return x.Spec
+	}
+	return nil
+}
+
+func (x *Content) GetDocker() *DockerContent {
+	if x != nil {
+		if x, ok := x.Spec.(*Content_Docker); ok {
+			return x.Docker
+		}
+	}
+	return nil
+}
+
+type isContent_Spec interface {
+	isContent_Spec()
+}
+
+type Content_Docker struct {
+	// Docker-specific content.
+	Docker *DockerContent `protobuf:"bytes,1,opt,name=docker,proto3,oneof"`
+}
+
+func (*Content_Docker) isContent_Spec() {}
+
 var File_yandex_cloud_cloudregistry_v1_artifact_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cloudregistry/v1/artifact.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd3\x03\n" +
+	",yandex/cloud/cloudregistry/v1/artifact.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/cloudregistry/v1/docker_content.proto\"\xed\x05\n" +
 	"\bArtifact\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12\x12\n" +
@@ -244,9 +348,21 @@ const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\x04kind\x18\x04 \x01(\x0e2,.yandex.cloud.cloudregistry.v1.Artifact.KindR\x04kind\x12F\n" +
 	"\x06status\x18\x05 \x01(\x0e2..yandex.cloud.cloudregistry.v1.Artifact.StatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12;\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\b \x01(\tR\tcreatedBy\x12;\n" +
 	"\vmodified_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"modifiedAt\"C\n" +
+	"modifiedAt\x12\x1f\n" +
+	"\vmodified_by\x18\t \x01(\tR\n" +
+	"modifiedBy\x12W\n" +
+	"\n" +
+	"properties\x18\n" +
+	" \x03(\v27.yandex.cloud.cloudregistry.v1.Artifact.PropertiesEntryR\n" +
+	"properties\x12@\n" +
+	"\acontent\x18\v \x01(\v2&.yandex.cloud.cloudregistry.v1.ContentR\acontent\x1a=\n" +
+	"\x0fPropertiesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x04Kind\x12\x14\n" +
 	"\x10KIND_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -258,8 +374,11 @@ const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03Bx\n" +
-	"!yandex.cloud.api.cloudregistry.v1B\x02PAZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\bDELETING\x10\x03\"Y\n" +
+	"\aContent\x12F\n" +
+	"\x06docker\x18\x01 \x01(\v2,.yandex.cloud.cloudregistry.v1.DockerContentH\x00R\x06dockerB\x06\n" +
+	"\x04specBt\n" +
+	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDescOnce sync.Once
@@ -274,23 +393,29 @@ func file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_cloudregistry_v1_artifact_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_cloudregistry_v1_artifact_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_cloudregistry_v1_artifact_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_cloudregistry_v1_artifact_proto_goTypes = []any{
 	(Artifact_Kind)(0),            // 0: yandex.cloud.cloudregistry.v1.Artifact.Kind
 	(Artifact_Status)(0),          // 1: yandex.cloud.cloudregistry.v1.Artifact.Status
 	(*Artifact)(nil),              // 2: yandex.cloud.cloudregistry.v1.Artifact
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*Content)(nil),               // 3: yandex.cloud.cloudregistry.v1.Content
+	nil,                           // 4: yandex.cloud.cloudregistry.v1.Artifact.PropertiesEntry
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*DockerContent)(nil),         // 6: yandex.cloud.cloudregistry.v1.DockerContent
 }
 var file_yandex_cloud_cloudregistry_v1_artifact_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.cloudregistry.v1.Artifact.kind:type_name -> yandex.cloud.cloudregistry.v1.Artifact.Kind
 	1, // 1: yandex.cloud.cloudregistry.v1.Artifact.status:type_name -> yandex.cloud.cloudregistry.v1.Artifact.Status
-	3, // 2: yandex.cloud.cloudregistry.v1.Artifact.created_at:type_name -> google.protobuf.Timestamp
-	3, // 3: yandex.cloud.cloudregistry.v1.Artifact.modified_at:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 2: yandex.cloud.cloudregistry.v1.Artifact.created_at:type_name -> google.protobuf.Timestamp
+	5, // 3: yandex.cloud.cloudregistry.v1.Artifact.modified_at:type_name -> google.protobuf.Timestamp
+	4, // 4: yandex.cloud.cloudregistry.v1.Artifact.properties:type_name -> yandex.cloud.cloudregistry.v1.Artifact.PropertiesEntry
+	3, // 5: yandex.cloud.cloudregistry.v1.Artifact.content:type_name -> yandex.cloud.cloudregistry.v1.Content
+	6, // 6: yandex.cloud.cloudregistry.v1.Content.docker:type_name -> yandex.cloud.cloudregistry.v1.DockerContent
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cloudregistry_v1_artifact_proto_init() }
@@ -298,13 +423,17 @@ func file_yandex_cloud_cloudregistry_v1_artifact_proto_init() {
 	if File_yandex_cloud_cloudregistry_v1_artifact_proto != nil {
 		return
 	}
+	file_yandex_cloud_cloudregistry_v1_docker_content_proto_init()
+	file_yandex_cloud_cloudregistry_v1_artifact_proto_msgTypes[1].OneofWrappers = []any{
+		(*Content_Docker)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc), len(file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

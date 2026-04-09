@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ArtifactService_Get_FullMethodName                  = "/yandex.cloud.cloudregistry.v1.ArtifactService/Get"
+	ArtifactService_GetByPath_FullMethodName            = "/yandex.cloud.cloudregistry.v1.ArtifactService/GetByPath"
 	ArtifactService_Delete_FullMethodName               = "/yandex.cloud.cloudregistry.v1.ArtifactService/Delete"
 	ArtifactService_ListAccessBindings_FullMethodName   = "/yandex.cloud.cloudregistry.v1.ArtifactService/ListAccessBindings"
 	ArtifactService_SetAccessBindings_FullMethodName    = "/yandex.cloud.cloudregistry.v1.ArtifactService/SetAccessBindings"
@@ -37,6 +38,8 @@ type ArtifactServiceClient interface {
 	// Returns the specified artifact resource.
 	// To get the list of available artifact resources, make [RegistryService.ListArtifacts] method call.
 	Get(ctx context.Context, in *GetArtifactRequest, opts ...grpc.CallOption) (*Artifact, error)
+	// Returns the specified artifact resource by path within the registry.
+	GetByPath(ctx context.Context, in *GetArtifactByPathRequest, opts ...grpc.CallOption) (*Artifact, error)
 	// Deletes the specified artifact.
 	Delete(ctx context.Context, in *DeleteArtifactRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// access bindings
@@ -60,6 +63,16 @@ func (c *artifactServiceClient) Get(ctx context.Context, in *GetArtifactRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Artifact)
 	err := c.cc.Invoke(ctx, ArtifactService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *artifactServiceClient) GetByPath(ctx context.Context, in *GetArtifactByPathRequest, opts ...grpc.CallOption) (*Artifact, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Artifact)
+	err := c.cc.Invoke(ctx, ArtifactService_GetByPath_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -115,6 +128,8 @@ type ArtifactServiceServer interface {
 	// Returns the specified artifact resource.
 	// To get the list of available artifact resources, make [RegistryService.ListArtifacts] method call.
 	Get(context.Context, *GetArtifactRequest) (*Artifact, error)
+	// Returns the specified artifact resource by path within the registry.
+	GetByPath(context.Context, *GetArtifactByPathRequest) (*Artifact, error)
 	// Deletes the specified artifact.
 	Delete(context.Context, *DeleteArtifactRequest) (*operation.Operation, error)
 	// access bindings
@@ -135,6 +150,9 @@ type UnimplementedArtifactServiceServer struct{}
 
 func (UnimplementedArtifactServiceServer) Get(context.Context, *GetArtifactRequest) (*Artifact, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedArtifactServiceServer) GetByPath(context.Context, *GetArtifactByPathRequest) (*Artifact, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetByPath not implemented")
 }
 func (UnimplementedArtifactServiceServer) Delete(context.Context, *DeleteArtifactRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
@@ -182,6 +200,24 @@ func _ArtifactService_Get_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ArtifactServiceServer).Get(ctx, req.(*GetArtifactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ArtifactService_GetByPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetArtifactByPathRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArtifactServiceServer).GetByPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ArtifactService_GetByPath_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArtifactServiceServer).GetByPath(ctx, req.(*GetArtifactByPathRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -268,6 +304,10 @@ var ArtifactService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _ArtifactService_Get_Handler,
+		},
+		{
+			MethodName: "GetByPath",
+			Handler:    _ArtifactService_GetByPath_Handler,
 		},
 		{
 			MethodName: "Delete",

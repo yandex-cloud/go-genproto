@@ -563,8 +563,8 @@ const file_yandex_cloud_containerregistry_v1_scanner_proto_rawDesc = "" +
 	"\aversion\x18\x05 \x01(\tR\aversion\x12\x19\n" +
 	"\bfixed_by\x18\x06 \x01(\tR\afixedBy\x12\x16\n" +
 	"\x06origin\x18\a \x01(\tR\x06origin\x12\x12\n" +
-	"\x04type\x18\b \x01(\tR\x04typeB\x86\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x04PISRZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x04type\x18\b \x01(\tR\x04typeB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_scanner_proto_rawDescOnce sync.Once

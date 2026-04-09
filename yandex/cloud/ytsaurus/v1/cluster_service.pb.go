@@ -378,7 +378,6 @@ type UpdateClusterRequest struct {
 	// New description for the cluster.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Cluster labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [ClusterService.Get] request.

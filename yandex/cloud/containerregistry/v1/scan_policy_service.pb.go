@@ -490,8 +490,8 @@ const file_yandex_cloud_containerregistry_v1_scan_policy_service_proto_rawDesc =
 	"\x18UpdateScanPolicyMetadata\x12\n" +
 	"ScanPolicy\x82\xd3\xe4\x93\x029:\x01*24/container-registry/v1/scanPolicies/{scan_policy_id}\x12\xda\x01\n" +
 	"\x06Delete\x12:.yandex.cloud.containerregistry.v1.DeleteScanPolicyRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*1\n" +
-	"\x18DeleteScanPolicyMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x026*4/container-registry/v1/scanPolicies/{scan_policy_id}B\x86\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x04PSPSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x18DeleteScanPolicyMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x026*4/container-registry/v1/scanPolicies/{scan_policy_id}B\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_scan_policy_service_proto_rawDescOnce sync.Once

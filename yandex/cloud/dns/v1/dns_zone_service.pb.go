@@ -138,7 +138,6 @@ func (x *UpdateDnsZonePrivateNetworksMetadata) GetDnsZoneId() string {
 type GetDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to return.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId     string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -185,7 +184,6 @@ func (x *GetDnsZoneRequest) GetDnsZoneId() string {
 type ListDnsZonesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list DNS zones in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -196,7 +194,6 @@ type ListDnsZonesRequest struct {
 	// [ListDnsZonesResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters DNS zones listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [DnsZone.name] field.
 	// 2. An `=` operator.
@@ -272,7 +269,6 @@ type ListDnsZonesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDnsZonesRequest.page_size], use `next_page_token` as the value
 	// for the [ListDnsZonesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -326,7 +322,6 @@ func (x *ListDnsZonesResponse) GetNextPageToken() string {
 type CreateDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create DNS zones in.
-	//
 	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the DNS zone.
@@ -338,8 +333,7 @@ type CreateDnsZoneRequest struct {
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// DNS zone suffix.
 	Zone string `protobuf:"bytes,5,opt,name=zone,proto3" json:"zone,omitempty"`
-	// Privately visible zone settings.
-	// At least one of two visibility fields must be set.
+	// at least one of
 	PrivateVisibility *PrivateVisibility `protobuf:"bytes,6,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
 	// Publicly visible zone settings.
 	// At least one of two visibility fields must be set.
@@ -484,7 +478,6 @@ func (x *CreateDnsZoneMetadata) GetDnsZoneId() string {
 type UpdateDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to update.
-	//
 	// To get the DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// Field mask specifying which fields of the DNS zone resource are going to be updated.
@@ -495,14 +488,13 @@ type UpdateDnsZoneRequest struct {
 	// New description of the DNS zone.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// DNS zone labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [DnsZoneService.Get] request.
 	// 2. Add or remove a label in this set.
 	// 3. Send the new set in this field.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Change network IDs for private visibility.
+	// subfields can be changed only
 	PrivateVisibility *PrivateVisibility `protobuf:"bytes,6,opt,name=private_visibility,json=privateVisibility,proto3" json:"private_visibility,omitempty"`
 	// Public visibility configuration.
 	PublicVisibility *PublicVisibility `protobuf:"bytes,7,opt,name=public_visibility,json=publicVisibility,proto3" json:"public_visibility,omitempty"`
@@ -646,11 +638,9 @@ func (x *UpdateDnsZoneMetadata) GetDnsZoneId() string {
 type MoveDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to move.
-	//
 	// To get the DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// ID of the folder to move the zone to.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -749,7 +739,6 @@ func (x *MoveDnsZoneMetadata) GetDnsZoneId() string {
 type DeleteDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to delete.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId     string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -841,7 +830,6 @@ func (x *DeleteDnsZoneMetadata) GetDnsZoneId() string {
 type GetDnsZoneRecordSetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to get record set from.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// Name of the record set.
@@ -906,7 +894,6 @@ func (x *GetDnsZoneRecordSetRequest) GetType() string {
 type ListDnsZoneRecordSetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to list record sets in.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -917,14 +904,12 @@ type ListDnsZoneRecordSetsRequest struct {
 	// [ListDnsZoneRecordSetsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters record sets listed in the response. The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the [RecordSet.name] and [RecordSet.type] fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// 3.1. In case of single value condition (`=` or `!=`), the value is a string in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
 	// 3.2. In case of a list of values condition (`IN` or `NOT IN`), the value is `(<string1>, <string2>, .., <stringN>)`, where `<string>` is a string in double (`"`) or single (`'`) quotes.
-	//
 	// Examples of a filter: `name="my-record-set"`, `type IN ("MX","A") AND name="works.on.my.machine."`.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -996,7 +981,6 @@ type ListDnsZoneRecordSetsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDnsZoneRecordSetsRequest.page_size], use `next_page_token` as the value
 	// for the [ListDnsZoneRecordSetsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1050,7 +1034,6 @@ func (x *ListDnsZoneRecordSetsResponse) GetNextPageToken() string {
 type UpdateRecordSetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to update record sets in.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// List of record sets to delete.
@@ -1151,7 +1134,6 @@ func (*UpdateRecordSetsMetadata) Descriptor() ([]byte, []int) {
 type UpsertRecordSetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to upsert record sets to.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// Delete only specified records from corresponding record sets.
@@ -1315,7 +1297,6 @@ func (x *RecordSetDiff) GetDeletions() []*RecordSet {
 type ListDnsZoneOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to list operations for.
-	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -1326,7 +1307,6 @@ type ListDnsZoneOperationsRequest struct {
 	// [ListDnsZoneOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters DNS zones listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [DnsZone.name] field.
 	// 2. An `=` operator.
@@ -1402,7 +1382,6 @@ type ListDnsZoneOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDnsZoneOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListDnsZoneOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1491,9 +1470,9 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +
 	"\x15CreateDnsZoneMetadata\x12\x1e\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x8e\x05\n" +
-	"\x14UpdateDnsZoneRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\x12;\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x91\x05\n" +
+	"\x14UpdateDnsZoneRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
 	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -1506,23 +1485,22 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +
 	"\x15UpdateDnsZoneMetadata\x12\x1e\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x82\x01\n" +
-	"\x12MoveDnsZoneRequest\x12*\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\n" +
-	"\xe8\xc71\x01\x8a\xc81\x0220R\tdnsZoneId\x12@\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x85\x01\n" +
+	"\x12MoveDnsZoneRequest\x12-\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=255R\tdnsZoneId\x12@\n" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"5\n" +
 	"\x13MoveDnsZoneMetadata\x12\x1e\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\">\n" +
-	"\x14DeleteDnsZoneRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\"7\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"A\n" +
+	"\x14DeleteDnsZoneRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\"7\n" +
 	"\x15DeleteDnsZoneMetadata\x12\x1e\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x89\x01\n" +
-	"\x1aGetDnsZoneRecordSetRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\x12!\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"\x8c\x01\n" +
+	"\x1aGetDnsZoneRecordSetRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\x12!\n" +
 	"\x04name\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=255R\x04name\x12 \n" +
-	"\x04type\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=10R\x04type\"\xbe\x01\n" +
-	"\x1cListDnsZoneRecordSetsRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\x12'\n" +
+	"\x04type\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=10R\x04type\"\xc1\x01\n" +
+	"\x1cListDnsZoneRecordSetsRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
 	"\n" +
@@ -1533,16 +1511,16 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"\x1dListDnsZoneRecordSetsResponse\x12?\n" +
 	"\vrecord_sets\x18\x01 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetR\n" +
 	"recordSets\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd5\x01\n" +
-	"\x17UpdateRecordSetsRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\x12H\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd8\x01\n" +
+	"\x17UpdateRecordSetsRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\x12H\n" +
 	"\tdeletions\x18\x02 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetB\n" +
 	"\x82\xc81\x06<=1000R\tdeletions\x12H\n" +
 	"\tadditions\x18\x03 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetB\n" +
 	"\x82\xc81\x06<=1000R\tadditions\"\x1a\n" +
-	"\x18UpdateRecordSetsMetadata\"\x9f\x02\n" +
-	"\x17UpsertRecordSetsRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\x12H\n" +
+	"\x18UpdateRecordSetsMetadata\"\xa2\x02\n" +
+	"\x17UpsertRecordSetsRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\x12H\n" +
 	"\tdeletions\x18\x02 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetB\n" +
 	"\x82\xc81\x06<=1000R\tdeletions\x12N\n" +
 	"\freplacements\x18\x03 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetB\n" +
@@ -1552,9 +1530,9 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"\x18UpsertRecordSetsMetadata\"\x8b\x01\n" +
 	"\rRecordSetDiff\x12<\n" +
 	"\tadditions\x18\x01 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetR\tadditions\x12<\n" +
-	"\tdeletions\x18\x02 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetR\tdeletions\"\xbe\x01\n" +
-	"\x1cListDnsZoneOperationsRequest\x12&\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\tdnsZoneId\x12'\n" +
+	"\tdeletions\x18\x02 \x03(\v2\x1e.yandex.cloud.dns.v1.RecordSetR\tdeletions\"\xc1\x01\n" +
+	"\x1cListDnsZoneOperationsRequest\x12)\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\tdnsZoneId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +

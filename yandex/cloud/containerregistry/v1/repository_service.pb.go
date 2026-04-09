@@ -503,8 +503,8 @@ const file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDesc = 
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8b\x01\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H:\x01*\"C/container-registry/v1/repositories/{resource_id}:setAccessBindings\x12\xff\x01\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02K:\x01*\"F/container-registry/v1/repositories/{resource_id}:updateAccessBindingsB\x86\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x04PIRSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02K:\x01*\"F/container-registry/v1/repositories/{resource_id}:updateAccessBindingsB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_repository_service_proto_rawDescOnce sync.Once

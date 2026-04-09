@@ -76,7 +76,7 @@ func (x DnsFirewall_ResourceConfig_ResourceType) Number() protoreflect.EnumNumbe
 
 // Deprecated: Use DnsFirewall_ResourceConfig_ResourceType.Descriptor instead.
 func (DnsFirewall_ResourceConfig_ResourceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_firewall_proto_rawDescGZIP(), []int{0, 1, 0}
+	return file_yandex_cloud_dns_v1_dns_firewall_proto_rawDescGZIP(), []int{0, 0, 0}
 }
 
 // A DNS firewall. For details about the concept, see [DNS firewalls](/docs/dns/concepts/dns-firewall).
@@ -231,7 +231,7 @@ type DnsFirewall_ResourceConfig struct {
 
 func (x *DnsFirewall_ResourceConfig) Reset() {
 	*x = DnsFirewall_ResourceConfig{}
-	mi := &file_yandex_cloud_dns_v1_dns_firewall_proto_msgTypes[2]
+	mi := &file_yandex_cloud_dns_v1_dns_firewall_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -243,7 +243,7 @@ func (x *DnsFirewall_ResourceConfig) String() string {
 func (*DnsFirewall_ResourceConfig) ProtoMessage() {}
 
 func (x *DnsFirewall_ResourceConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dns_v1_dns_firewall_proto_msgTypes[2]
+	mi := &file_yandex_cloud_dns_v1_dns_firewall_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -256,7 +256,7 @@ func (x *DnsFirewall_ResourceConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DnsFirewall_ResourceConfig.ProtoReflect.Descriptor instead.
 func (*DnsFirewall_ResourceConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dns_v1_dns_firewall_proto_rawDescGZIP(), []int{0, 1}
+	return file_yandex_cloud_dns_v1_dns_firewall_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *DnsFirewall_ResourceConfig) GetType() DnsFirewall_ResourceConfig_ResourceType {
@@ -284,7 +284,7 @@ var File_yandex_cloud_dns_v1_dns_firewall_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_dns_v1_dns_firewall_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/dns/v1/dns_firewall.proto\x12\x13yandex.cloud.dns.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfb\x06\n" +
+	"&yandex/cloud/dns/v1/dns_firewall.proto\x12\x13yandex.cloud.dns.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\x06\n" +
 	"\vDnsFirewall\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -298,10 +298,7 @@ const file_yandex_cloud_dns_v1_dns_firewall_proto_rawDesc = "" +
 	"\x0fresource_config\x18\t \x01(\v2/.yandex.cloud.dns.v1.DnsFirewall.ResourceConfigR\x0eresourceConfig\x12?\n" +
 	"\x0fwhitelist_fqdns\x18\n" +
 	" \x03(\tB\x16\x82\xc81\x05<=255\x8a\xc81\x05<=255\x90\xc81\x01R\x0ewhitelistFqdns\x12?\n" +
-	"\x0fblacklist_fqdns\x18\v \x03(\tB\x16\x82\xc81\x05<=255\x8a\xc81\x05<=255\x90\xc81\x01R\x0eblacklistFqdns\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xa5\x02\n" +
+	"\x0fblacklist_fqdns\x18\v \x03(\tB\x16\x82\xc81\x05<=255\x8a\xc81\x05<=255\x90\xc81\x01R\x0eblacklistFqdns\x1a\xa5\x02\n" +
 	"\x0eResourceConfig\x12P\n" +
 	"\x04type\x18\x01 \x01(\x0e2<.yandex.cloud.dns.v1.DnsFirewall.ResourceConfig.ResourceTypeR\x04type\x128\n" +
 	"\fresource_ids\x18\x02 \x03(\tB\x15\x82\xc81\x050-100\x8a\xc81\x04<=64\x90\xc81\x01R\vresourceIds\x124\n" +
@@ -311,7 +308,10 @@ const file_yandex_cloud_dns_v1_dns_firewall_proto_rawDesc = "" +
 	"\aNETWORK\x10\x01\x12\n" +
 	"\n" +
 	"\x06FOLDER\x10\x02\x12\t\n" +
-	"\x05CLOUD\x10\x03BV\n" +
+	"\x05CLOUD\x10\x03\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01BV\n" +
 	"\x17yandex.cloud.api.dns.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/dns/v1;dnsb\x06proto3"
 
 var (
@@ -331,14 +331,14 @@ var file_yandex_cloud_dns_v1_dns_firewall_proto_msgTypes = make([]protoimpl.Mess
 var file_yandex_cloud_dns_v1_dns_firewall_proto_goTypes = []any{
 	(DnsFirewall_ResourceConfig_ResourceType)(0), // 0: yandex.cloud.dns.v1.DnsFirewall.ResourceConfig.ResourceType
 	(*DnsFirewall)(nil),                          // 1: yandex.cloud.dns.v1.DnsFirewall
-	nil,                                          // 2: yandex.cloud.dns.v1.DnsFirewall.LabelsEntry
-	(*DnsFirewall_ResourceConfig)(nil),           // 3: yandex.cloud.dns.v1.DnsFirewall.ResourceConfig
+	(*DnsFirewall_ResourceConfig)(nil),           // 2: yandex.cloud.dns.v1.DnsFirewall.ResourceConfig
+	nil,                                          // 3: yandex.cloud.dns.v1.DnsFirewall.LabelsEntry
 	(*timestamppb.Timestamp)(nil),                // 4: google.protobuf.Timestamp
 }
 var file_yandex_cloud_dns_v1_dns_firewall_proto_depIdxs = []int32{
 	4, // 0: yandex.cloud.dns.v1.DnsFirewall.created_at:type_name -> google.protobuf.Timestamp
-	2, // 1: yandex.cloud.dns.v1.DnsFirewall.labels:type_name -> yandex.cloud.dns.v1.DnsFirewall.LabelsEntry
-	3, // 2: yandex.cloud.dns.v1.DnsFirewall.resource_config:type_name -> yandex.cloud.dns.v1.DnsFirewall.ResourceConfig
+	3, // 1: yandex.cloud.dns.v1.DnsFirewall.labels:type_name -> yandex.cloud.dns.v1.DnsFirewall.LabelsEntry
+	2, // 2: yandex.cloud.dns.v1.DnsFirewall.resource_config:type_name -> yandex.cloud.dns.v1.DnsFirewall.ResourceConfig
 	0, // 3: yandex.cloud.dns.v1.DnsFirewall.ResourceConfig.type:type_name -> yandex.cloud.dns.v1.DnsFirewall.ResourceConfig.ResourceType
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type

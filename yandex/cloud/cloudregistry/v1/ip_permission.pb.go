@@ -247,8 +247,8 @@ const file_yandex_cloud_cloudregistry_v1_ip_permission_proto_rawDesc = "" +
 	"&IP_PERMISSION_DELTA_ACTION_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ADD\x10\x01\x12\n" +
 	"\n" +
-	"\x06REMOVE\x10\x02By\n" +
-	"!yandex.cloud.api.cloudregistry.v1B\x03PIPZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\x06REMOVE\x10\x02Bt\n" +
+	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_ip_permission_proto_rawDescOnce sync.Once

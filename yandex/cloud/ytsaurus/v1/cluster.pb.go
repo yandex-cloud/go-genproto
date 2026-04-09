@@ -233,16 +233,16 @@ type Cluster struct {
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// User who last updated the cluster.
 	UpdatedBy string `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	// CIDRs whitelist.
+	CidrBlocksWhitelist *CidrBlocks `protobuf:"bytes,17,opt,name=cidr_blocks_whitelist,json=cidrBlocksWhitelist,proto3" json:"cidr_blocks_whitelist,omitempty"`
 	// Status of the cluster.
 	Status Cluster_Status `protobuf:"varint,14,opt,name=status,proto3,enum=yandex.cloud.ytsaurus.v1.Cluster_Status" json:"status,omitempty"`
 	// Health of the cluster.
 	Health Cluster_Health `protobuf:"varint,15,opt,name=health,proto3,enum=yandex.cloud.ytsaurus.v1.Cluster_Health" json:"health,omitempty"`
 	// Endpoints of the cluster.
-	Endpoints *Cluster_Endpoints `protobuf:"bytes,16,opt,name=endpoints,proto3" json:"endpoints,omitempty"`
-	// CIDRs whitelist.
-	CidrBlocksWhitelist *CidrBlocks `protobuf:"bytes,17,opt,name=cidr_blocks_whitelist,json=cidrBlocksWhitelist,proto3" json:"cidr_blocks_whitelist,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	Endpoints     *Cluster_Endpoints `protobuf:"bytes,16,opt,name=endpoints,proto3" json:"endpoints,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Cluster) Reset() {
@@ -366,6 +366,13 @@ func (x *Cluster) GetUpdatedBy() string {
 	return ""
 }
 
+func (x *Cluster) GetCidrBlocksWhitelist() *CidrBlocks {
+	if x != nil {
+		return x.CidrBlocksWhitelist
+	}
+	return nil
+}
+
 func (x *Cluster) GetStatus() Cluster_Status {
 	if x != nil {
 		return x.Status
@@ -383,13 +390,6 @@ func (x *Cluster) GetHealth() Cluster_Health {
 func (x *Cluster) GetEndpoints() *Cluster_Endpoints {
 	if x != nil {
 		return x.Endpoints
-	}
-	return nil
-}
-
-func (x *Cluster) GetCidrBlocksWhitelist() *CidrBlocks {
-	if x != nil {
-		return x.CidrBlocksWhitelist
 	}
 	return nil
 }
@@ -981,8 +981,6 @@ func (x *CronSpec) GetClearTmp() *ClearTmpCronSpec {
 
 type ClientLogging struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of Service account used for write logs.
-	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Destination of cloud logging group.
 	//
 	// Types that are valid to be assigned to Destination:
@@ -990,6 +988,8 @@ type ClientLogging struct {
 	//	*ClientLogging_LogGroupId
 	//	*ClientLogging_FolderId
 	Destination isClientLogging_Destination `protobuf_oneof:"destination"`
+	// ID of Service account used for write logs.
+	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Enable audit logs.
 	AuditLogsEnabled bool `protobuf:"varint,4,opt,name=audit_logs_enabled,json=auditLogsEnabled,proto3" json:"audit_logs_enabled,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -1026,13 +1026,6 @@ func (*ClientLogging) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *ClientLogging) GetServiceAccountId() string {
-	if x != nil {
-		return x.ServiceAccountId
-	}
-	return ""
-}
-
 func (x *ClientLogging) GetDestination() isClientLogging_Destination {
 	if x != nil {
 		return x.Destination
@@ -1054,6 +1047,13 @@ func (x *ClientLogging) GetFolderId() string {
 		if x, ok := x.Destination.(*ClientLogging_FolderId); ok {
 			return x.FolderId
 		}
+	}
+	return ""
+}
+
+func (x *ClientLogging) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
 	}
 	return ""
 }
@@ -1247,9 +1247,9 @@ func (x *ClusterSpec) GetExcel() *ExcelSpec {
 
 type Cluster_Endpoints struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
-	Ui                        string                 `protobuf:"bytes,1,opt,name=ui,proto3" json:"ui,omitempty"`                                                                                    // https://CID.ytsaurus.yandexcloud.net
-	ExternalHttpProxyBalancer string                 `protobuf:"bytes,2,opt,name=external_http_proxy_balancer,json=externalHttpProxyBalancer,proto3" json:"external_http_proxy_balancer,omitempty"` // https://proxy.CID.ytsaurus.yandexcloud.net
-	InternalHttpProxyAlias    string                 `protobuf:"bytes,3,opt,name=internal_http_proxy_alias,json=internalHttpProxyAlias,proto3" json:"internal_http_proxy_alias,omitempty"`          // https://hp.CID.ytsaurus.mdb.yandexcloud.net:PORT
+	Ui                        string                 `protobuf:"bytes,1,opt,name=ui,proto3" json:"ui,omitempty"`                                                                                    // https://CID.ytsaurus.yandexcloud.net.
+	ExternalHttpProxyBalancer string                 `protobuf:"bytes,2,opt,name=external_http_proxy_balancer,json=externalHttpProxyBalancer,proto3" json:"external_http_proxy_balancer,omitempty"` // https://proxy.CID.ytsaurus.yandexcloud.net.
+	InternalHttpProxyAlias    string                 `protobuf:"bytes,3,opt,name=internal_http_proxy_alias,json=internalHttpProxyAlias,proto3" json:"internal_http_proxy_alias,omitempty"`          // https://hp.CID.ytsaurus.mdb.yandexcloud.net:PORT.
 	InternalRpcProxyAlias     string                 `protobuf:"bytes,4,opt,name=internal_rpc_proxy_alias,json=internalRpcProxyAlias,proto3" json:"internal_rpc_proxy_alias,omitempty"`             // rp.CID.ytsaurus.mdb.yandexcloud.net:PORT
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
@@ -1257,7 +1257,7 @@ type Cluster_Endpoints struct {
 
 func (x *Cluster_Endpoints) Reset() {
 	*x = Cluster_Endpoints{}
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[16]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1269,7 +1269,7 @@ func (x *Cluster_Endpoints) String() string {
 func (*Cluster_Endpoints) ProtoMessage() {}
 
 func (x *Cluster_Endpoints) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[16]
+	mi := &file_yandex_cloud_ytsaurus_v1_cluster_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1282,7 +1282,7 @@ func (x *Cluster_Endpoints) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cluster_Endpoints.ProtoReflect.Descriptor instead.
 func (*Cluster_Endpoints) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP(), []int{0, 1}
+	return file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *Cluster_Endpoints) GetUi() string {
@@ -1734,7 +1734,7 @@ var File_yandex_cloud_ytsaurus_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/ytsaurus/v1/cluster.proto\x12\x18yandex.cloud.ytsaurus.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1dyandex/cloud/validation.proto\"\x94\n" +
+	"&yandex/cloud/ytsaurus/v1/cluster.proto\x12\x18yandex.cloud.ytsaurus.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x88\n" +
 	"\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -1754,19 +1754,19 @@ const file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\r \x01(\tR\tupdatedBy\x12@\n" +
+	"updated_by\x18\r \x01(\tR\tupdatedBy\x12X\n" +
+	"\x15cidr_blocks_whitelist\x18\x11 \x01(\v2$.yandex.cloud.ytsaurus.v1.CidrBlocksR\x13cidrBlocksWhitelist\x12@\n" +
 	"\x06status\x18\x0e \x01(\x0e2(.yandex.cloud.ytsaurus.v1.Cluster.StatusR\x06status\x12@\n" +
 	"\x06health\x18\x0f \x01(\x0e2(.yandex.cloud.ytsaurus.v1.Cluster.HealthR\x06health\x12I\n" +
-	"\tendpoints\x18\x10 \x01(\v2+.yandex.cloud.ytsaurus.v1.Cluster.EndpointsR\tendpoints\x12X\n" +
-	"\x15cidr_blocks_whitelist\x18\x11 \x01(\v2$.yandex.cloud.ytsaurus.v1.CidrBlocksR\x13cidrBlocksWhitelist\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xdc\x01\n" +
+	"\tendpoints\x18\x10 \x01(\v2+.yandex.cloud.ytsaurus.v1.Cluster.EndpointsR\tendpoints\x1a\xd0\x01\n" +
 	"\tEndpoints\x12\x0e\n" +
 	"\x02ui\x18\x01 \x01(\tR\x02ui\x12?\n" +
 	"\x1cexternal_http_proxy_balancer\x18\x02 \x01(\tR\x19externalHttpProxyBalancer\x129\n" +
 	"\x19internal_http_proxy_alias\x18\x03 \x01(\tR\x16internalHttpProxyAlias\x127\n" +
-	"\x18internal_rpc_proxy_alias\x18\x04 \x01(\tR\x15internalRpcProxyAliasJ\x04\b\x05\x10\x06J\x04\b\x06\x10\a\"\x87\x01\n" +
+	"\x18internal_rpc_proxy_alias\x18\x04 \x01(\tR\x15internalRpcProxyAlias\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x87\x01\n" +
 	"\x06Status\x12\x12\n" +
 	"\x0eSTATUS_UNKNOWN\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\v\n" +
@@ -1844,11 +1844,11 @@ const file_yandex_cloud_ytsaurus_v1_cluster_proto_rawDesc = "" +
 	"\x12max_dir_node_count\x18\x04 \x01(\x03R\x0fmaxDirNodeCount\"S\n" +
 	"\bCronSpec\x12G\n" +
 	"\tclear_tmp\x18\x01 \x01(\v2*.yandex.cloud.ytsaurus.v1.ClearTmpCronSpecR\bclearTmp\"\xbd\x01\n" +
-	"\rClientLogging\x12,\n" +
-	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\x12\"\n" +
+	"\rClientLogging\x12\"\n" +
 	"\flog_group_id\x18\x02 \x01(\tH\x00R\n" +
 	"logGroupId\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x12,\n" +
+	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\x12,\n" +
 	"\x12audit_logs_enabled\x18\x04 \x01(\bR\x10auditLogsEnabledB\r\n" +
 	"\vdestination\"%\n" +
 	"\tExcelSpec\x12\x18\n" +
@@ -1901,8 +1901,8 @@ var file_yandex_cloud_ytsaurus_v1_cluster_proto_goTypes = []any{
 	(*ClientLogging)(nil),                      // 15: yandex.cloud.ytsaurus.v1.ClientLogging
 	(*ExcelSpec)(nil),                          // 16: yandex.cloud.ytsaurus.v1.ExcelSpec
 	(*ClusterSpec)(nil),                        // 17: yandex.cloud.ytsaurus.v1.ClusterSpec
-	nil,                                        // 18: yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
-	(*Cluster_Endpoints)(nil),                  // 19: yandex.cloud.ytsaurus.v1.Cluster.Endpoints
+	(*Cluster_Endpoints)(nil),                  // 18: yandex.cloud.ytsaurus.v1.Cluster.Endpoints
+	nil,                                        // 19: yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
 	(*StorageSpec_HddSpec)(nil),                // 20: yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
 	(*StorageSpec_SsdSpec)(nil),                // 21: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
 	(*StorageSpec_SsdSpec_Changelogs)(nil),     // 22: yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec.Changelogs
@@ -1914,14 +1914,14 @@ var file_yandex_cloud_ytsaurus_v1_cluster_proto_goTypes = []any{
 	(*durationpb.Duration)(nil),                // 28: google.protobuf.Duration
 }
 var file_yandex_cloud_ytsaurus_v1_cluster_proto_depIdxs = []int32{
-	18, // 0: yandex.cloud.ytsaurus.v1.Cluster.labels:type_name -> yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
+	19, // 0: yandex.cloud.ytsaurus.v1.Cluster.labels:type_name -> yandex.cloud.ytsaurus.v1.Cluster.LabelsEntry
 	17, // 1: yandex.cloud.ytsaurus.v1.Cluster.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
 	27, // 2: yandex.cloud.ytsaurus.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
 	27, // 3: yandex.cloud.ytsaurus.v1.Cluster.updated_at:type_name -> google.protobuf.Timestamp
-	0,  // 4: yandex.cloud.ytsaurus.v1.Cluster.status:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Status
-	1,  // 5: yandex.cloud.ytsaurus.v1.Cluster.health:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Health
-	19, // 6: yandex.cloud.ytsaurus.v1.Cluster.endpoints:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Endpoints
-	4,  // 7: yandex.cloud.ytsaurus.v1.Cluster.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
+	4,  // 4: yandex.cloud.ytsaurus.v1.Cluster.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
+	0,  // 5: yandex.cloud.ytsaurus.v1.Cluster.status:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Status
+	1,  // 6: yandex.cloud.ytsaurus.v1.Cluster.health:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Health
+	18, // 7: yandex.cloud.ytsaurus.v1.Cluster.endpoints:type_name -> yandex.cloud.ytsaurus.v1.Cluster.Endpoints
 	20, // 8: yandex.cloud.ytsaurus.v1.StorageSpec.hdd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.HddSpec
 	21, // 9: yandex.cloud.ytsaurus.v1.StorageSpec.ssd:type_name -> yandex.cloud.ytsaurus.v1.StorageSpec.SsdSpec
 	23, // 10: yandex.cloud.ytsaurus.v1.ComputeSpec.disks:type_name -> yandex.cloud.ytsaurus.v1.ComputeSpec.DiskSpec

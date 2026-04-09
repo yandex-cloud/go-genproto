@@ -40,7 +40,6 @@ const (
 // A set of methods for managing DNS firewalls.
 type DnsFirewallServiceClient interface {
 	// Returns the specified DNS firewall.
-	//
 	// To get the list of all available DNS firewalls, make a [List] request.
 	Get(ctx context.Context, in *GetDnsFirewallRequest, opts ...grpc.CallOption) (*DnsFirewall, error)
 	// Retrieves the list of DNS firewalls in the specified folder.
@@ -178,7 +177,6 @@ func (c *dnsFirewallServiceClient) UpdateAccessBindings(ctx context.Context, in 
 // A set of methods for managing DNS firewalls.
 type DnsFirewallServiceServer interface {
 	// Returns the specified DNS firewall.
-	//
 	// To get the list of all available DNS firewalls, make a [List] request.
 	Get(context.Context, *GetDnsFirewallRequest) (*DnsFirewall, error)
 	// Retrieves the list of DNS firewalls in the specified folder.

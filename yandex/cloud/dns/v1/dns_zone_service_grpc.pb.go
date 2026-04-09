@@ -45,7 +45,6 @@ const (
 // A set of methods for managing DNS zones.
 type DnsZoneServiceClient interface {
 	// Returns the specified DNS zone.
-	//
 	// To get the list of all available DNS zones, make a [List] request.
 	Get(ctx context.Context, in *GetDnsZoneRequest, opts ...grpc.CallOption) (*DnsZone, error)
 	// Retrieves the list of DNS zones in the specified folder.
@@ -249,7 +248,6 @@ func (c *dnsZoneServiceClient) UpdatePrivateNetworks(ctx context.Context, in *Up
 // A set of methods for managing DNS zones.
 type DnsZoneServiceServer interface {
 	// Returns the specified DNS zone.
-	//
 	// To get the list of all available DNS zones, make a [List] request.
 	Get(context.Context, *GetDnsZoneRequest) (*DnsZone, error)
 	// Retrieves the list of DNS zones in the specified folder.

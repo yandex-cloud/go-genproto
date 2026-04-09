@@ -437,8 +437,8 @@ const file_yandex_cloud_cloudregistry_v1_scan_policy_proto_rawDesc = "" +
 	"\bdisabled\x18\x04 \x01(\bR\bdisabled\"7\n" +
 	"\fIntervalUnit\x12\x1d\n" +
 	"\x19INTERVAL_UNIT_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04DAYS\x10\x01By\n" +
-	"!yandex.cloud.api.cloudregistry.v1B\x03PSPZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\x04DAYS\x10\x01Bt\n" +
+	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_scan_policy_proto_rawDescOnce sync.Once

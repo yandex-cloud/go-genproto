@@ -30,6 +30,34 @@ func (m *Artifact) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *Artifact) SetCreatedBy(v string) {
+	m.CreatedBy = v
+}
+
 func (m *Artifact) SetModifiedAt(v *timestamppb.Timestamp) {
 	m.ModifiedAt = v
+}
+
+func (m *Artifact) SetModifiedBy(v string) {
+	m.ModifiedBy = v
+}
+
+func (m *Artifact) SetProperties(v map[string]string) {
+	m.Properties = v
+}
+
+func (m *Artifact) SetContent(v *Content) {
+	m.Content = v
+}
+
+type Content_Spec = isContent_Spec
+
+func (m *Content) SetSpec(v Content_Spec) {
+	m.Spec = v
+}
+
+func (m *Content) SetDocker(v *DockerContent) {
+	m.Spec = &Content_Docker{
+		Docker: v,
+	}
 }

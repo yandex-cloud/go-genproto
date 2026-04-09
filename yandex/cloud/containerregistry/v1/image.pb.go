@@ -147,8 +147,8 @@ const file_yandex_cloud_containerregistry_v1_image_proto_rawDesc = "" +
 	"\x06layers\x18\x06 \x03(\v2'.yandex.cloud.containerregistry.v1.BlobR\x06layers\x12\x12\n" +
 	"\x04tags\x18\a \x03(\tR\x04tags\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\x84\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x02PIZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_image_proto_rawDescOnce sync.Once

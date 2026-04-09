@@ -27,6 +27,7 @@ const (
 type UserSettings_DistributedProductMode int32
 
 const (
+	// Not specified.
 	UserSettings_DISTRIBUTED_PRODUCT_MODE_UNSPECIFIED UserSettings_DistributedProductMode = 0
 	// Prohibits using these types of subqueries (returns the "Double-distributed in/JOIN subqueries is denied" exception).
 	UserSettings_DISTRIBUTED_PRODUCT_MODE_DENY UserSettings_DistributedProductMode = 1
@@ -88,6 +89,7 @@ func (UserSettings_DistributedProductMode) EnumDescriptor() ([]byte, []int) {
 type UserSettings_DistributedDdlOutputMode int32
 
 const (
+	// Not specified.
 	UserSettings_DISTRIBUTED_DDL_OUTPUT_MODE_UNSPECIFIED UserSettings_DistributedDdlOutputMode = 0
 	// Returns result set with query execution status for all hosts where query is finished. If query has failed on some hosts, then it will rethrow the first exception.
 	// If query is not finished yet on some hosts and **distributed_ddl_task_timeout** exceeded, then it throws **TIMEOUT_EXCEEDED** exception.
@@ -158,15 +160,22 @@ func (UserSettings_DistributedDdlOutputMode) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 1}
 }
 
+// Load balancing algorithm for selecting a replica for distributed queries.
 type UserSettings_LoadBalancing int32
 
 const (
-	UserSettings_LOAD_BALANCING_UNSPECIFIED      UserSettings_LoadBalancing = 0
-	UserSettings_LOAD_BALANCING_RANDOM           UserSettings_LoadBalancing = 1
+	// Not specified.
+	UserSettings_LOAD_BALANCING_UNSPECIFIED UserSettings_LoadBalancing = 0
+	// Select a replica at random for each query.
+	UserSettings_LOAD_BALANCING_RANDOM UserSettings_LoadBalancing = 1
+	// Prefer replicas whose hostname is lexicographically closest to the current server's hostname.
 	UserSettings_LOAD_BALANCING_NEAREST_HOSTNAME UserSettings_LoadBalancing = 2
-	UserSettings_LOAD_BALANCING_IN_ORDER         UserSettings_LoadBalancing = 3
-	UserSettings_LOAD_BALANCING_FIRST_OR_RANDOM  UserSettings_LoadBalancing = 4
-	UserSettings_LOAD_BALANCING_ROUND_ROBIN      UserSettings_LoadBalancing = 5
+	// Select replicas in the order defined in the configuration, failing over to the next on error.
+	UserSettings_LOAD_BALANCING_IN_ORDER UserSettings_LoadBalancing = 3
+	// Always try the first replica; fall back to a random replica if it is unavailable or has errors.
+	UserSettings_LOAD_BALANCING_FIRST_OR_RANDOM UserSettings_LoadBalancing = 4
+	// Cycle through replicas sequentially in a round-robin fashion.
+	UserSettings_LOAD_BALANCING_ROUND_ROBIN UserSettings_LoadBalancing = 5
 )
 
 // Enum value maps for UserSettings_LoadBalancing.
@@ -216,15 +225,22 @@ func (UserSettings_LoadBalancing) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 2}
 }
 
+// Method used for reading data from the local filesystem.
 type UserSettings_LocalFilesystemReadMethod int32
 
 const (
-	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_UNSPECIFIED      UserSettings_LocalFilesystemReadMethod = 0
-	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_READ             UserSettings_LocalFilesystemReadMethod = 1
+	// Not specified.
+	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_UNSPECIFIED UserSettings_LocalFilesystemReadMethod = 0
+	// Use the read() system call.
+	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_READ UserSettings_LocalFilesystemReadMethod = 1
+	// Use pread() system calls dispatched via a thread pool.
 	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_PREAD_THREADPOOL UserSettings_LocalFilesystemReadMethod = 2
-	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_PREAD            UserSettings_LocalFilesystemReadMethod = 3
-	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_NMAP             UserSettings_LocalFilesystemReadMethod = 4
-	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_IO_URING         UserSettings_LocalFilesystemReadMethod = 5
+	// Use the pread() system call.
+	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_PREAD UserSettings_LocalFilesystemReadMethod = 3
+	// Use memory-mapped I/O (mmap).
+	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_NMAP UserSettings_LocalFilesystemReadMethod = 4
+	// Use Linux io_uring for asynchronous I/O.
+	UserSettings_LOCAL_FILESYSTEM_READ_METHOD_IO_URING UserSettings_LocalFilesystemReadMethod = 5
 )
 
 // Enum value maps for UserSettings_LocalFilesystemReadMethod.
@@ -274,12 +290,16 @@ func (UserSettings_LocalFilesystemReadMethod) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 3}
 }
 
+// Method used for reading data from remote filesystems.
 type UserSettings_RemoteFilesystemReadMethod int32
 
 const (
+	// Not specified.
 	UserSettings_REMOTE_FILESYSTEM_READ_METHOD_UNSPECIFIED UserSettings_RemoteFilesystemReadMethod = 0
-	UserSettings_REMOTE_FILESYSTEM_READ_METHOD_READ        UserSettings_RemoteFilesystemReadMethod = 1
-	UserSettings_REMOTE_FILESYSTEM_READ_METHOD_THREADPOOL  UserSettings_RemoteFilesystemReadMethod = 2
+	// Read data synchronously.
+	UserSettings_REMOTE_FILESYSTEM_READ_METHOD_READ UserSettings_RemoteFilesystemReadMethod = 1
+	// Read data using a thread pool for parallelism.
+	UserSettings_REMOTE_FILESYSTEM_READ_METHOD_THREADPOOL UserSettings_RemoteFilesystemReadMethod = 2
 )
 
 // Enum value maps for UserSettings_RemoteFilesystemReadMethod.
@@ -327,6 +347,7 @@ func (UserSettings_RemoteFilesystemReadMethod) EnumDescriptor() ([]byte, []int) 
 type UserSettings_OverflowMode int32
 
 const (
+	// Not specified.
 	UserSettings_OVERFLOW_MODE_UNSPECIFIED UserSettings_OverflowMode = 0
 	// Abort query execution and return an error.
 	UserSettings_OVERFLOW_MODE_THROW UserSettings_OverflowMode = 1
@@ -379,6 +400,7 @@ func (UserSettings_OverflowMode) EnumDescriptor() ([]byte, []int) {
 type UserSettings_GroupByOverflowMode int32
 
 const (
+	// Not specified.
 	UserSettings_GROUP_BY_OVERFLOW_MODE_UNSPECIFIED UserSettings_GroupByOverflowMode = 0
 	// Abort query execution and return an error.
 	UserSettings_GROUP_BY_OVERFLOW_MODE_THROW UserSettings_GroupByOverflowMode = 1
@@ -431,12 +453,17 @@ func (UserSettings_GroupByOverflowMode) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 6}
 }
 
+// Format for parsing date and time values in text input.
 type UserSettings_DateTimeInputFormat int32
 
 const (
-	UserSettings_DATE_TIME_INPUT_FORMAT_UNSPECIFIED    UserSettings_DateTimeInputFormat = 0
-	UserSettings_DATE_TIME_INPUT_FORMAT_BEST_EFFORT    UserSettings_DateTimeInputFormat = 1
-	UserSettings_DATE_TIME_INPUT_FORMAT_BASIC          UserSettings_DateTimeInputFormat = 2
+	// Not specified.
+	UserSettings_DATE_TIME_INPUT_FORMAT_UNSPECIFIED UserSettings_DateTimeInputFormat = 0
+	// Parse the basic YYYY-MM-DD HH:MM:SS format and all ISO 8601 date and time formats.
+	UserSettings_DATE_TIME_INPUT_FORMAT_BEST_EFFORT UserSettings_DateTimeInputFormat = 1
+	// Parse date/time in YYYY-MM-DD or YYYY-MM-DD HH:MM:SS format only.
+	UserSettings_DATE_TIME_INPUT_FORMAT_BASIC UserSettings_DateTimeInputFormat = 2
+	// Like best_effort but interprets ambiguous dates (e.g., MM/DD/YYYY) using US conventions (month-first).
 	UserSettings_DATE_TIME_INPUT_FORMAT_BEST_EFFORT_US UserSettings_DateTimeInputFormat = 3
 )
 
@@ -483,12 +510,17 @@ func (UserSettings_DateTimeInputFormat) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 7}
 }
 
+// Format for outputting date and time values in text output.
 type UserSettings_DateTimeOutputFormat int32
 
 const (
-	UserSettings_DATE_TIME_OUTPUT_FORMAT_UNSPECIFIED    UserSettings_DateTimeOutputFormat = 0
-	UserSettings_DATE_TIME_OUTPUT_FORMAT_SIMPLE         UserSettings_DateTimeOutputFormat = 1
-	UserSettings_DATE_TIME_OUTPUT_FORMAT_ISO            UserSettings_DateTimeOutputFormat = 2
+	// Not specified.
+	UserSettings_DATE_TIME_OUTPUT_FORMAT_UNSPECIFIED UserSettings_DateTimeOutputFormat = 0
+	// Output date/time in a simple human-readable format (e.g. 2024-01-01 12:00:00).
+	UserSettings_DATE_TIME_OUTPUT_FORMAT_SIMPLE UserSettings_DateTimeOutputFormat = 1
+	// Output date/time in ISO 8601 format (e.g. 2024-01-01T12:00:00Z).
+	UserSettings_DATE_TIME_OUTPUT_FORMAT_ISO UserSettings_DateTimeOutputFormat = 2
+	// Output date/time as a Unix timestamp (seconds since epoch).
 	UserSettings_DATE_TIME_OUTPUT_FORMAT_UNIX_TIMESTAMP UserSettings_DateTimeOutputFormat = 3
 )
 
@@ -535,16 +567,24 @@ func (UserSettings_DateTimeOutputFormat) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 8}
 }
 
+// Escaping rule applied to fields when using the Regexp format.
 type UserSettings_FormatRegexpEscapingRule int32
 
 const (
+	// Not specified.
 	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_UNSPECIFIED UserSettings_FormatRegexpEscapingRule = 0
-	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_ESCAPED     UserSettings_FormatRegexpEscapingRule = 1
-	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_QUOTED      UserSettings_FormatRegexpEscapingRule = 2
-	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_CSV         UserSettings_FormatRegexpEscapingRule = 3
-	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_JSON        UserSettings_FormatRegexpEscapingRule = 4
-	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_XML         UserSettings_FormatRegexpEscapingRule = 5
-	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_RAW         UserSettings_FormatRegexpEscapingRule = 6
+	// Apply backslash escaping (as in TSV format).
+	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_ESCAPED UserSettings_FormatRegexpEscapingRule = 1
+	// Apply quoting escaping (as in Values format).
+	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_QUOTED UserSettings_FormatRegexpEscapingRule = 2
+	// Apply CSV escaping rules.
+	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_CSV UserSettings_FormatRegexpEscapingRule = 3
+	// Apply JSON escaping rules.
+	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_JSON UserSettings_FormatRegexpEscapingRule = 4
+	// Apply XML escaping rules.
+	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_XML UserSettings_FormatRegexpEscapingRule = 5
+	// No escaping; use raw field values (as in TSVRaw format).
+	UserSettings_FORMAT_REGEXP_ESCAPING_RULE_RAW UserSettings_FormatRegexpEscapingRule = 6
 )
 
 // Enum value maps for UserSettings_FormatRegexpEscapingRule.
@@ -596,12 +636,17 @@ func (UserSettings_FormatRegexpEscapingRule) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 9}
 }
 
+// Determines how queries are associated with quota limits.
 type UserSettings_QuotaMode int32
 
 const (
+	// Not specified.
 	UserSettings_QUOTA_MODE_UNSPECIFIED UserSettings_QuotaMode = 0
-	UserSettings_QUOTA_MODE_DEFAULT     UserSettings_QuotaMode = 1
-	UserSettings_QUOTA_MODE_KEYED       UserSettings_QuotaMode = 2
+	// Track resource usage as a single shared quota across all users without per-user separation.
+	UserSettings_QUOTA_MODE_DEFAULT UserSettings_QuotaMode = 1
+	// Track quota separately per unique quota key value passed in the query parameter.
+	UserSettings_QUOTA_MODE_KEYED UserSettings_QuotaMode = 2
+	// Track quota separately per client IP address.
 	UserSettings_QUOTA_MODE_KEYED_BY_IP UserSettings_QuotaMode = 3
 )
 
@@ -652,6 +697,7 @@ func (UserSettings_QuotaMode) EnumDescriptor() ([]byte, []int) {
 type UserSettings_QueryCacheNondeterministicFunctionHandling int32
 
 const (
+	// Not specified.
 	UserSettings_QUERY_CACHE_NONDETERMINISTIC_FUNCTION_HANDLING_UNSPECIFIED UserSettings_QueryCacheNondeterministicFunctionHandling = 0
 	// Throw an exception and don't cache the query result.
 	UserSettings_QUERY_CACHE_NONDETERMINISTIC_FUNCTION_HANDLING_THROW UserSettings_QueryCacheNondeterministicFunctionHandling = 1
@@ -708,6 +754,7 @@ func (UserSettings_QueryCacheNondeterministicFunctionHandling) EnumDescriptor() 
 type UserSettings_QueryCacheSystemTableHandling int32
 
 const (
+	// Not specified.
 	UserSettings_QUERY_CACHE_SYSTEM_TABLE_HANDLING_UNSPECIFIED UserSettings_QueryCacheSystemTableHandling = 0
 	// Throw an exception and don't cache the query result.
 	UserSettings_QUERY_CACHE_SYSTEM_TABLE_HANDLING_THROW UserSettings_QueryCacheSystemTableHandling = 1
@@ -760,15 +807,22 @@ func (UserSettings_QueryCacheSystemTableHandling) EnumDescriptor() ([]byte, []in
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 12}
 }
 
+// Implementation used for the COUNT(DISTINCT ...) function.
 type UserSettings_CountDistinctImplementation int32
 
 const (
-	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNSPECIFIED      UserSettings_CountDistinctImplementation = 0
-	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ             UserSettings_CountDistinctImplementation = 1
-	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_COMBINED    UserSettings_CountDistinctImplementation = 2
+	// Not specified.
+	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNSPECIFIED UserSettings_CountDistinctImplementation = 0
+	// Approximate count using an adaptive sampling algorithm. Fast with low memory usage; recommended for most scenarios.
+	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ UserSettings_CountDistinctImplementation = 1
+	// Adaptive approximate count combining multiple algorithms for better accuracy than uniq.
+	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_COMBINED UserSettings_CountDistinctImplementation = 2
+	// Like uniqCombined but uses 64-bit hashing for better accuracy with large cardinalities.
 	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_COMBINED_64 UserSettings_CountDistinctImplementation = 3
-	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_HLL_12      UserSettings_CountDistinctImplementation = 4
-	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_EXACT       UserSettings_CountDistinctImplementation = 5
+	// Approximate count using HyperLogLog with 2^12 cells.
+	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_HLL_12 UserSettings_CountDistinctImplementation = 4
+	// Exact count using a hash set. Higher memory usage but fully accurate.
+	UserSettings_COUNT_DISTINCT_IMPLEMENTATION_UNIQ_EXACT UserSettings_CountDistinctImplementation = 5
 )
 
 // Enum value maps for UserSettings_CountDistinctImplementation.
@@ -818,16 +872,25 @@ func (UserSettings_CountDistinctImplementation) EnumDescriptor() ([]byte, []int)
 	return file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDescGZIP(), []int{2, 13}
 }
 
+// Algorithm used for JOIN operations.
 type UserSettings_JoinAlgorithm int32
 
 const (
-	UserSettings_JOIN_ALGORITHM_UNSPECIFIED          UserSettings_JoinAlgorithm = 0
-	UserSettings_JOIN_ALGORITHM_HASH                 UserSettings_JoinAlgorithm = 1
-	UserSettings_JOIN_ALGORITHM_PARALLEL_HASH        UserSettings_JoinAlgorithm = 2
-	UserSettings_JOIN_ALGORITHM_PARTIAL_MERGE        UserSettings_JoinAlgorithm = 3
-	UserSettings_JOIN_ALGORITHM_DIRECT               UserSettings_JoinAlgorithm = 4
-	UserSettings_JOIN_ALGORITHM_AUTO                 UserSettings_JoinAlgorithm = 5
-	UserSettings_JOIN_ALGORITHM_FULL_SORTING_MERGE   UserSettings_JoinAlgorithm = 6
+	// Not specified.
+	UserSettings_JOIN_ALGORITHM_UNSPECIFIED UserSettings_JoinAlgorithm = 0
+	// Use a hash join algorithm.
+	UserSettings_JOIN_ALGORITHM_HASH UserSettings_JoinAlgorithm = 1
+	// Build several hash tables concurrently to speed up the build phase, at the cost of higher memory usage.
+	UserSettings_JOIN_ALGORITHM_PARALLEL_HASH UserSettings_JoinAlgorithm = 2
+	// Sort-based join that minimizes memory usage by processing sorted chunks of the right table; slower than hash join.
+	UserSettings_JOIN_ALGORITHM_PARTIAL_MERGE UserSettings_JoinAlgorithm = 3
+	// Directly look up join keys in a dictionary-backed table (Dictionary, Join, or EmbeddedRocksDB engine). Supports LEFT ANY join only.
+	UserSettings_JOIN_ALGORITHM_DIRECT UserSettings_JoinAlgorithm = 4
+	// Automatically choose the best join algorithm at runtime based on available memory and data size.
+	UserSettings_JOIN_ALGORITHM_AUTO UserSettings_JoinAlgorithm = 5
+	// Non-memory-bound sort-merge join; can skip the sort phase when both tables are pre-sorted on the join key.
+	UserSettings_JOIN_ALGORITHM_FULL_SORTING_MERGE UserSettings_JoinAlgorithm = 6
+	// Prefer partial_merge join when applicable, falling back to hash join otherwise.
 	UserSettings_JOIN_ALGORITHM_PREFER_PARTIAL_MERGE UserSettings_JoinAlgorithm = 7
 )
 

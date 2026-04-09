@@ -1212,8 +1212,8 @@ const file_yandex_cloud_containerregistry_v1_lifecycle_policy_service_proto_rawD
 	"\x1dDryRunLifecyclePolicyMetadata\x12\x1bDryRunLifecyclePolicyResult\x82\xd3\xe4\x93\x02G:\x01*\"B/container-registry/v1/dryRunLifecyclePolicy/{lifecycle_policy_id}\x12\xfd\x01\n" +
 	"\x0fGetDryRunResult\x12H.yandex.cloud.containerregistry.v1.GetDryRunLifecyclePolicyResultRequest\x1a>.yandex.cloud.containerregistry.v1.DryRunLifecyclePolicyResult\"`\x82\xd3\xe4\x93\x02Z\x12X/container-registry/v1/dryRunLifecyclePolicyResults/{dry_run_lifecycle_policy_result_id}\x12\xe9\x01\n" +
 	"\x11ListDryRunResults\x12J.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultsRequest\x1aK.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultsResponse\";\x82\xd3\xe4\x93\x025\x123/container-registry/v1/dryRunLifecyclePolicyResults\x12\xc4\x02\n" +
-	"\x1eListDryRunResultAffectedImages\x12W.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesRequest\x1aX.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesResponse\"o\x82\xd3\xe4\x93\x02i\x12g/container-registry/v1/dryRunLifecyclePolicyResults/{dry_run_lifecycle_policy_result_id}:affectedImagesB\x86\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x04PLPSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x1eListDryRunResultAffectedImages\x12W.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesRequest\x1aX.yandex.cloud.containerregistry.v1.ListDryRunLifecyclePolicyResultAffectedImagesResponse\"o\x82\xd3\xe4\x93\x02i\x12g/container-registry/v1/dryRunLifecyclePolicyResults/{dry_run_lifecycle_policy_result_id}:affectedImagesB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_lifecycle_policy_service_proto_rawDescOnce sync.Once

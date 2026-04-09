@@ -758,8 +758,8 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDesc = "" +
 	"\x15DeleteCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02(*&/smartcaptcha/v1/captchas/{captcha_id}\x12\xb6\x01\n" +
 	"\x06Update\x122.yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2* \n" +
 	"\x15UpdateCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02+:\x01*2&/smartcaptcha/v1/captchas/{captcha_id}\x12\x90\x01\n" +
-	"\x04List\x121.yandex.cloud.smartcaptcha.v1.ListCaptchasRequest\x1a2.yandex.cloud.smartcaptcha.v1.ListCaptchasResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/smartcaptcha/v1/captchasBw\n" +
-	" yandex.cloud.api.smartcaptcha.v1B\x04PSCSZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartcaptcha/v1;smartcaptchab\x06proto3"
+	"\x04List\x121.yandex.cloud.smartcaptcha.v1.ListCaptchasRequest\x1a2.yandex.cloud.smartcaptcha.v1.ListCaptchasResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/smartcaptcha/v1/captchasBq\n" +
+	" yandex.cloud.api.smartcaptcha.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartcaptcha/v1;smartcaptchab\x06proto3"
 
 var (
 	file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDescOnce sync.Once

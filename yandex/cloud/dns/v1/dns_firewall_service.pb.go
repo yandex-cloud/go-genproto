@@ -30,7 +30,6 @@ const (
 type GetDnsFirewallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS firewall to return.
-	//
 	// To get a DNS firewall ID, make a [DnsFirewallService.List] request.
 	DnsFirewallId string `protobuf:"bytes,1,opt,name=dns_firewall_id,json=dnsFirewallId,proto3" json:"dns_firewall_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -77,7 +76,6 @@ func (x *GetDnsFirewallRequest) GetDnsFirewallId() string {
 type ListDnsFirewallsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list DNS firewalls in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -88,7 +86,6 @@ type ListDnsFirewallsRequest struct {
 	// [ListDnsFirewallsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters DNS firewalls listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [DnsFirewall.name] field.
 	// 2. An `=` operator.
@@ -164,7 +161,6 @@ type ListDnsFirewallsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDnsFirewallsRequest.page_size], use `next_page_token` as the value
 	// for the [ListDnsFirewallsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -218,7 +214,6 @@ func (x *ListDnsFirewallsResponse) GetNextPageToken() string {
 type CreateDnsFirewallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create DNS firewalls in.
-	//
 	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the DNS firewall.
@@ -384,7 +379,6 @@ func (x *CreateDnsFirewallMetadata) GetDnsFirewallId() string {
 type UpdateDnsFirewallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS firewall to update.
-	//
 	// To get the DNS firewall ID, make a [DnsFirewallService.List] request.
 	DnsFirewallId string `protobuf:"bytes,1,opt,name=dns_firewall_id,json=dnsFirewallId,proto3" json:"dns_firewall_id,omitempty"`
 	// Field mask specifying which fields of the DNS firewall resource are going to be updated.
@@ -395,7 +389,6 @@ type UpdateDnsFirewallRequest struct {
 	// New description of the DNS firewall.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// DNS firewall labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [DnsFirewallService.Get] request.
@@ -565,11 +558,9 @@ func (x *UpdateDnsFirewallMetadata) GetDnsFirewallId() string {
 type MoveDnsFirewallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS firewall to move.
-	//
 	// To get the DNS firewall ID, make a [DnsFirewallService.List] request.
 	DnsFirewallId string `protobuf:"bytes,1,opt,name=dns_firewall_id,json=dnsFirewallId,proto3" json:"dns_firewall_id,omitempty"`
 	// ID of the folder to move the firewall to.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -668,7 +659,6 @@ func (x *MoveDnsFirewallMetadata) GetDnsFirewallId() string {
 type DeleteDnsFirewallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS firewall to delete.
-	//
 	// To get a DNS firewall ID, make a [DnsFirewallService.List] request.
 	DnsFirewallId string `protobuf:"bytes,1,opt,name=dns_firewall_id,json=dnsFirewallId,proto3" json:"dns_firewall_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -760,7 +750,6 @@ func (x *DeleteDnsFirewallMetadata) GetDnsFirewallId() string {
 type ListDnsFirewallOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS firewall to list operations for.
-	//
 	// To get a DNS firewall ID, make a [DnsFirewallService.List] request.
 	DnsFirewallId string `protobuf:"bytes,1,opt,name=dns_firewall_id,json=dnsFirewallId,proto3" json:"dns_firewall_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -771,7 +760,6 @@ type ListDnsFirewallOperationsRequest struct {
 	// [ListDnsFirewallOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters DNS firewalls listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [DnsFirewall.name] field.
 	// 2. An `=` operator.
@@ -847,7 +835,6 @@ type ListDnsFirewallOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDnsFirewallOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListDnsFirewallOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -931,9 +918,9 @@ const file_yandex_cloud_dns_v1_dns_firewall_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x19CreateDnsFirewallMetadata\x12&\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"\xe9\x05\n" +
-	"\x18UpdateDnsFirewallRequest\x12.\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\rdnsFirewallId\x12;\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"\xe7\x05\n" +
+	"\x18UpdateDnsFirewallRequest\x12,\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\rdnsFirewallId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
 	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -949,19 +936,18 @@ const file_yandex_cloud_dns_v1_dns_firewall_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x19UpdateDnsFirewallMetadata\x12&\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"\x8e\x01\n" +
-	"\x16MoveDnsFirewallRequest\x122\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tB\n" +
-	"\xe8\xc71\x01\x8a\xc81\x0220R\rdnsFirewallId\x12@\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"\x91\x01\n" +
+	"\x16MoveDnsFirewallRequest\x125\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=255R\rdnsFirewallId\x12@\n" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"A\n" +
 	"\x17MoveDnsFirewallMetadata\x12&\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"J\n" +
-	"\x18DeleteDnsFirewallRequest\x12.\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\rdnsFirewallId\"C\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"Q\n" +
+	"\x18DeleteDnsFirewallRequest\x125\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=255R\rdnsFirewallId\"C\n" +
 	"\x19DeleteDnsFirewallMetadata\x12&\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"\xca\x01\n" +
-	" ListDnsFirewallOperationsRequest\x12.\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tB\x06\x8a\xc81\x0220R\rdnsFirewallId\x12'\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tR\rdnsFirewallId\"\xcd\x01\n" +
+	" ListDnsFirewallOperationsRequest\x121\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tB\t\x8a\xc81\x05<=255R\rdnsFirewallId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +

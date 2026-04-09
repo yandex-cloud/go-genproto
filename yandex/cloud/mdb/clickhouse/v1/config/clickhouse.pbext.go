@@ -402,6 +402,10 @@ func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToExecuteMutati
 	m.NumberOfFreeEntriesInPoolToExecuteMutation = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetNumberOfFreeEntriesInPoolToExecuteOptimizeEntirePartition(v *wrapperspb.Int64Value) {
+	m.NumberOfFreeEntriesInPoolToExecuteOptimizeEntirePartition = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetMaxBytesToMergeAtMinSpaceInPool(v *wrapperspb.Int64Value) {
 	m.MaxBytesToMergeAtMinSpaceInPool = v
 }

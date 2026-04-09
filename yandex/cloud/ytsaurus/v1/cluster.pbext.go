@@ -59,6 +59,10 @@ func (m *Cluster) SetUpdatedBy(v string) {
 	m.UpdatedBy = v
 }
 
+func (m *Cluster) SetCidrBlocksWhitelist(v *CidrBlocks) {
+	m.CidrBlocksWhitelist = v
+}
+
 func (m *Cluster) SetStatus(v Cluster_Status) {
 	m.Status = v
 }
@@ -69,10 +73,6 @@ func (m *Cluster) SetHealth(v Cluster_Health) {
 
 func (m *Cluster) SetEndpoints(v *Cluster_Endpoints) {
 	m.Endpoints = v
-}
-
-func (m *Cluster) SetCidrBlocksWhitelist(v *CidrBlocks) {
-	m.CidrBlocksWhitelist = v
 }
 
 func (m *Cluster_Endpoints) SetUi(v string) {
@@ -251,10 +251,6 @@ func (m *ClientLogging) SetDestination(v ClientLogging_Destination) {
 	m.Destination = v
 }
 
-func (m *ClientLogging) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
-}
-
 func (m *ClientLogging) SetLogGroupId(v string) {
 	m.Destination = &ClientLogging_LogGroupId{
 		LogGroupId: v,
@@ -265,6 +261,10 @@ func (m *ClientLogging) SetFolderId(v string) {
 	m.Destination = &ClientLogging_FolderId{
 		FolderId: v,
 	}
+}
+
+func (m *ClientLogging) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }
 
 func (m *ClientLogging) SetAuditLogsEnabled(v bool) {

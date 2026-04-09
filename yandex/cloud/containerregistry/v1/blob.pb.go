@@ -103,8 +103,8 @@ const file_yandex_cloud_containerregistry_v1_blob_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06digest\x18\x02 \x01(\tR\x06digest\x12\x12\n" +
 	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x12\n" +
-	"\x04urls\x18\x04 \x03(\tR\x04urlsB\x84\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x02PBZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x04urls\x18\x04 \x03(\tR\x04urlsB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_blob_proto_rawDescOnce sync.Once

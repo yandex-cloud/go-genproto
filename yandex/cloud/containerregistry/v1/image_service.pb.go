@@ -365,8 +365,8 @@ const file_yandex_cloud_containerregistry_v1_image_service_proto_rawDesc = "" +
 	"\x04List\x124.yandex.cloud.containerregistry.v1.ListImagesRequest\x1a5.yandex.cloud.containerregistry.v1.ListImagesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/container-registry/v1/images\x12\x95\x01\n" +
 	"\x03Get\x122.yandex.cloud.containerregistry.v1.GetImageRequest\x1a(.yandex.cloud.containerregistry.v1.Image\"0\x82\xd3\xe4\x93\x02*\x12(/container-registry/v1/images/{image_id}\x12\xc4\x01\n" +
 	"\x06Delete\x125.yandex.cloud.containerregistry.v1.DeleteImageRequest\x1a!.yandex.cloud.operation.Operation\"`\xb2\xd2*,\n" +
-	"\x13DeleteImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02**(/container-registry/v1/images/{image_id}B\x85\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x03PISZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x13DeleteImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02**(/container-registry/v1/images/{image_id}B\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_image_service_proto_rawDescOnce sync.Once

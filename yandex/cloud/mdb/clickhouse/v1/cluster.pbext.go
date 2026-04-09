@@ -5,6 +5,7 @@ package clickhouse
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/clickhouse/v1/config"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
@@ -135,6 +136,10 @@ func (m *ClusterConfig) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 
 func (m *ClusterConfig) SetFullVersion(v string) {
 	m.FullVersion = v
+}
+
+func (m *ClusterConfig) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
+	m.PerformanceDiagnostics = v
 }
 
 func (m *ClusterConfig_Clickhouse) SetConfig(v *config.ClickhouseConfigSet) {
@@ -323,4 +328,12 @@ func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v *wrapperspb.Int64Valu
 
 func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v *wrapperspb.Int64Value) {
 	m.DiskSizeLimit = v
+}
+
+func (m *PerformanceDiagnostics) SetEnabled(v *wrapperspb.BoolValue) {
+	m.Enabled = v
+}
+
+func (m *PerformanceDiagnostics) SetProcessesRefreshInterval(v *durationpb.Duration) {
+	m.ProcessesRefreshInterval = v
 }

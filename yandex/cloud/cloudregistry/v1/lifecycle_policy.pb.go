@@ -956,8 +956,8 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\x14LifecyclePolicyState\x12&\n" +
 	"\"LIFECYCLE_POLICY_STATE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bDISABLED\x10\x01\x12\v\n" +
-	"\aENABLED\x10\x02By\n" +
-	"!yandex.cloud.api.cloudregistry.v1B\x03PLPZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
+	"\aENABLED\x10\x02Bt\n" +
+	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescOnce sync.Once

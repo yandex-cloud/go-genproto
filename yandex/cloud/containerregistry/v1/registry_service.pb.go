@@ -919,8 +919,8 @@ const file_yandex_cloud_containerregistry_v1_registry_service_proto_rawDesc = ""
 	"\x0fSetIpPermission\x129.yandex.cloud.containerregistry.v1.SetIpPermissionRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*0\n" +
 	"\x17SetIpPermissionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*\"?/container-registry/v1/registries/{registry_id}:setIpPermission\x12\xfc\x01\n" +
 	"\x12UpdateIpPermission\x12<.yandex.cloud.containerregistry.v1.UpdateIpPermissionRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*3\n" +
-	"\x1aUpdateIpPermissionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02G:\x01*\"B/container-registry/v1/registries/{registry_id}:updateIpPermissionB\x85\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x03PRSZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\x1aUpdateIpPermissionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02G:\x01*\"B/container-registry/v1/registries/{registry_id}:updateIpPermissionB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_registry_service_proto_rawDescOnce sync.Once

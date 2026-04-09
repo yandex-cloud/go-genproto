@@ -284,8 +284,8 @@ const file_yandex_cloud_containerregistry_v1_lifecycle_policy_proto_rawDesc = ""
 	"\n" +
 	"tag_regexp\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\ttagRegexp\x12\x1a\n" +
 	"\buntagged\x18\x04 \x01(\bR\buntagged\x12*\n" +
-	"\fretained_top\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\vretainedTopB\x85\x01\n" +
-	"%yandex.cloud.api.containerregistry.v1B\x03PLPZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
+	"\fretained_top\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=0R\vretainedTopB\x80\x01\n" +
+	"%yandex.cloud.api.containerregistry.v1ZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/containerregistry/v1;containerregistryb\x06proto3"
 
 var (
 	file_yandex_cloud_containerregistry_v1_lifecycle_policy_proto_rawDescOnce sync.Once

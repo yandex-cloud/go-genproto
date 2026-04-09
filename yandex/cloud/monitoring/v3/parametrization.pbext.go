@@ -88,6 +88,80 @@ func (m *WorkspaceParameter) SetDefaultWorkspaceId(v string) {
 	m.DefaultWorkspaceId = v
 }
 
+func (m *QueryParameterCustomItem) SetValue(v string) {
+	m.Value = v
+}
+
+func (m *QueryParameterCustomItem) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *RelabelItem) SetFind(v string) {
+	m.Find = v
+}
+
+func (m *RelabelItem) SetReplace(v string) {
+	m.Replace = v
+}
+
+func (m *MonitoringQuerySource) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *MonitoringQuerySource) SetSelectors(v string) {
+	m.Selectors = v
+}
+
+func (m *MonitoringQuerySource) SetLabelKey(v string) {
+	m.LabelKey = v
+}
+
+func (m *PrometheusQuerySource) SetMatch(v []string) {
+	m.Match = v
+}
+
+func (m *PrometheusQuerySource) SetLabelKey(v string) {
+	m.LabelKey = v
+}
+
+func (m *PrometheusQuerySource) SetWorkspaceId(v string) {
+	m.WorkspaceId = v
+}
+
+type QueryParameter_DataSource = isQueryParameter_DataSource
+
+func (m *QueryParameter) SetDataSource(v QueryParameter_DataSource) {
+	m.DataSource = v
+}
+
+func (m *QueryParameter) SetMultiselectable(v bool) {
+	m.Multiselectable = v
+}
+
+func (m *QueryParameter) SetDefaultValues(v []string) {
+	m.DefaultValues = v
+}
+
+func (m *QueryParameter) SetCustomItems(v []*QueryParameterCustomItem) {
+	m.CustomItems = v
+}
+
+func (m *QueryParameter) SetRelabelItems(v []*RelabelItem) {
+	m.RelabelItems = v
+}
+
+func (m *QueryParameter) SetMonitoring(v *MonitoringQuerySource) {
+	m.DataSource = &QueryParameter_Monitoring{
+		Monitoring: v,
+	}
+}
+
+func (m *QueryParameter) SetPrometheus(v *PrometheusQuerySource) {
+	m.DataSource = &QueryParameter_Prometheus{
+		Prometheus: v,
+	}
+}
+
 type Parameter_Data = isParameter_Data
 
 func (m *Parameter) SetData(v Parameter_Data) {
@@ -141,6 +215,12 @@ func (m *Parameter) SetTextValues(v *TextValuesParameter) {
 func (m *Parameter) SetWorkspaceParameter(v *WorkspaceParameter) {
 	m.Data = &Parameter_WorkspaceParameter{
 		WorkspaceParameter: v,
+	}
+}
+
+func (m *Parameter) SetQuery(v *QueryParameter) {
+	m.Data = &Parameter_Query{
+		Query: v,
 	}
 }
 

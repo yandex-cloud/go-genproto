@@ -635,8 +635,6 @@ type UpdateStreamRequest struct {
 	// all other fields will retain their current values.
 	// This allows for partial updates.
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	// DEPRECATED.
-	LineId string `protobuf:"bytes,3,opt,name=line_id,json=lineId,proto3" json:"line_id,omitempty"`
 	// Stream title.
 	Title string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
 	// Stream description.
@@ -703,13 +701,6 @@ func (x *UpdateStreamRequest) GetFieldMask() *fieldmaskpb.FieldMask {
 		return x.FieldMask
 	}
 	return nil
-}
-
-func (x *UpdateStreamRequest) GetLineId() string {
-	if x != nil {
-		return x.LineId
-	}
-	return ""
 }
 
 func (x *UpdateStreamRequest) GetTitle() string {
@@ -1299,12 +1290,11 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\vfinish_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\n" +
 	"finishTime\"3\n" +
 	"\x14CreateStreamMetadata\x12\x1b\n" +
-	"\tstream_id\x18\x01 \x01(\tR\bstreamId\"\xdb\x05\n" +
+	"\tstream_id\x18\x01 \x01(\tR\bstreamId\"\xbe\x05\n" +
 	"\x13UpdateStreamRequest\x12)\n" +
 	"\tstream_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bstreamId\x12?\n" +
 	"\n" +
-	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12!\n" +
-	"\aline_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x06lineId\x12\x1f\n" +
+	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
 	"\x05title\x18\x04 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
@@ -1316,7 +1306,7 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
-	"\vstream_typeJ\x05\b\b\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\a\"3\n" +
+	"\vstream_typeJ\x04\b\x03\x10\x04J\x05\b\b\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\a\"3\n" +
 	"\x14UpdateStreamMetadata\x12\x1b\n" +
 	"\tstream_id\x18\x01 \x01(\tR\bstreamId\"@\n" +
 	"\x13DeleteStreamRequest\x12)\n" +

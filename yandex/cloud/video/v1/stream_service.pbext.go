@@ -124,10 +124,6 @@ func (m *UpdateStreamRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
 	m.FieldMask = v
 }
 
-func (m *UpdateStreamRequest) SetLineId(v string) {
-	m.LineId = v
-}
-
 func (m *UpdateStreamRequest) SetTitle(v string) {
 	m.Title = v
 }

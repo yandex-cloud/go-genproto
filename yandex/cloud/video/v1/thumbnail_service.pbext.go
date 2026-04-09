@@ -50,10 +50,6 @@ func (m *CreateThumbnailRequest) SetParentId(v CreateThumbnailRequest_ParentId) 
 	m.ParentId = v
 }
 
-func (m *CreateThumbnailRequest) SetChannelId(v string) {
-	m.ChannelId = v
-}
-
 func (m *CreateThumbnailRequest) SetEpisodeId(v string) {
 	m.ParentId = &CreateThumbnailRequest_EpisodeId{
 		EpisodeId: v,

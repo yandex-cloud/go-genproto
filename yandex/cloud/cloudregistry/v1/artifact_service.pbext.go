@@ -13,3 +13,11 @@ func (m *DeleteArtifactRequest) SetArtifactId(v string) {
 func (m *DeleteArtifactMetadata) SetArtifactId(v string) {
 	m.ArtifactId = v
 }
+
+func (m *GetArtifactByPathRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *GetArtifactByPathRequest) SetPath(v string) {
+	m.Path = v
+}
